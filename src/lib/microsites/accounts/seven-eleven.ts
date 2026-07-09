@@ -1,9 +1,9 @@
 /**
- * 7-Eleven — ABM Microsite Data (registry entry)
+ * 7-Eleven, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/seven-eleven.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/seven-eleven resolves its
  * accountName FK and /for/seven-eleven renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const sevenEleven: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for 7-Eleven — Yard Network Audit',
+  pageTitle: 'YardFlow for 7-Eleven, Yard Network Audit',
   metaDescription:
     '11 7-Eleven facilities mapped from public satellite imagery: 460 dock doors and room for about 836 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const sevenEleven: AccountMicrositeData = {
       hypothesis:
         '7-Eleven sells fresh food and grocery out of stores it does not stock itself. The distribution runs through partners: E.A. Sween fresh-food commissaries and McLane grocery DCs that pick, stage, and truck to the stores. We mapped 11 of those facilities across the country, holding 460 dock doors and room for about 836 trailers, with no rail at any of them. Every case moves by truck through a dock, and most of these yards sit open to the road. YardFlow gives the operator running them one gate-to-dock view across the whole network.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '11 7-Eleven facilities, mapped from public satellite imagery',
       accountSlug: 'seven-eleven',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: '7-Eleven\'s ~13,000 US stores are supplied through partner-operated distribution: E.A. Sween fresh-food combined distribution centers plus McLane grocery DCs. We audited 11 representative US facilities.',
     },
     {
@@ -86,14 +86,14 @@ export const sevenEleven: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at 7-Eleven, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -104,7 +104,7 @@ export const sevenEleven: AccountMicrositeData = {
     facilityCount: '11 audited partner facilities of ~40 fresh-food CDCs and commissaries plus McLane grocery DCs',
     facilityTypes: ['Combined Distribution Center', 'Fresh Food Commissary', 'Grocery DC'],
     geographicSpread: 'United States. Partner-operated distribution: E.A. Sween fresh-food commissaries and McLane grocery DCs feeding ~13,000 US stores.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 460 dock doors and room for ~836 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 460 dock doors and room for ~836 trailers.',
   },
 
   freight: {

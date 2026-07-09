@@ -1,9 +1,9 @@
 /**
- * Amazon — ABM Microsite Data (registry entry)
+ * Amazon, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/amazon.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/amazon resolves its
  * accountName FK and /for/amazon renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const amazon: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Amazon — Yard Network Audit',
+  pageTitle: 'YardFlow for Amazon, Yard Network Audit',
   metaDescription:
     '16 Amazon facilities mapped from public satellite imagery: 1,890 dock doors and room for about 3,825 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const amazon: AccountMicrositeData = {
       hypothesis:
         'Amazon runs the most heavily gated freight network we have mapped. We audited 16 of its largest US sites, a mix of robotics fulfillment centers, an inbound cross-dock, a sortation center, and the Amazon Air hub at CVG, holding 1,890 dock doors and room for about 3,825 trailers. Fifteen of the sixteen gate the yard and twelve run a staffed guard booth, and none touch rail, so every trailer enters through a controlled checkpoint and leaves by truck. YardFlow turns those checkpoints into one orchestrated gate-to-dock flow across every node.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '16 Amazon facilities, mapped from public satellite imagery',
       accountSlug: 'amazon',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Amazon runs 116 large US fulfillment centers (MWPVL, 2025 Q1) plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites.',
     },
     {
@@ -86,14 +86,14 @@ export const amazon: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Amazon, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -104,7 +104,7 @@ export const amazon: AccountMicrositeData = {
     facilityCount: '16 audited sites of 116 large US fulfillment centers (MWPVL, 2025 Q1)',
     facilityTypes: ['Fulfillment Center', 'Inbound Cross-Dock (IXD)', 'Sortation Center', 'Air Hub'],
     geographicSpread: 'United States. Audited set spans robotics fulfillment centers, an inbound cross-dock, a sortation center, and the Amazon Air hub at CVG.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 1,890 dock doors and room for ~3,825 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 1,890 dock doors and room for ~3,825 trailers.',
   },
 
   freight: {

@@ -337,7 +337,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The supplied approximate coords (40.282434, -83.022306) landed directly on a\nlarge industrial distribution complex. Wide z15/z16 satellite shows an isolated\ntwo-building DC campus surrounded by farmland on the SE edge of Delaware, OH,\nwith extensive dock banks and trailer drop yards — fully consistent with a\ngrocery DC. Web search confirmed the Kroger Company Great Lakes Distribution\nCenter at 2000 Nutter Farm Ln, Delaware OH 43015 (740-657-2100), a 24/7 Midwest\ngrocery distribution center (krogerdc.com; Delaware Area Chamber; Waze/Yelp\nlistings). The Street View entrance pano shows a masonry monument reading\n\"GREAT LAKES DISTRIBUTION,\" positively identifying the site. Locked center at\n40.28280, -83.02200.",
+        "dossierExcerpt": "The supplied approximate coords (40.282434, -83.022306) landed directly on a\nlarge industrial distribution complex. Wide z15/z16 satellite shows an isolated\ntwo-building DC campus surrounded by farmland on the SE edge of Delaware, OH,\nwith extensive dock banks and trailer drop yards, fully consistent with a\ngrocery DC. Web search confirmed the Kroger Company Great Lakes Distribution\nCenter at 2000 Nutter Farm Ln, Delaware OH 43015 (740-657-2100), a 24/7 Midwest\ngrocery distribution center (krogerdc.com; Delaware Area Chamber; Waze/Yelp\nlistings). The Street View entrance pano shows a masonry monument reading\n\"GREAT LAKES DISTRIBUTION,\" positively identifying the site. Locked center at\n40.28280, -83.02200.",
         "mapsUrl": "https://www.google.com/maps/@40.28280,-83.02200,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -669,7 +669,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (39.759594, -86.045345) landed directly on\na large industrial distribution building, so they were essentially correct (only\nslightly east of true building center). Web search confirmed 7025 English Ave as\nthe Kroger distribution center operated by Zenith Logistics (24+ years), facility\nphone 317-352-5100, in the Irvington neighborhood. Satellite at z16-z18 shows a\nsingle large warehouse with an extensive trailer drop yard, multiple dock faces,\nand a mainline rail running just outside the SE boundary — fully consistent with\na grocery DC. Locked center at 39.75935, -86.04555.",
+        "dossierExcerpt": "The supplied approximate coordinates (39.759594, -86.045345) landed directly on\na large industrial distribution building, so they were essentially correct (only\nslightly east of true building center). Web search confirmed 7025 English Ave as\nthe Kroger distribution center operated by Zenith Logistics (24+ years), facility\nphone 317-352-5100, in the Irvington neighborhood. Satellite at z16-z18 shows a\nsingle large warehouse with an extensive trailer drop yard, multiple dock faces,\nand a mainline rail running just outside the SE boundary, fully consistent with\na grocery DC. Locked center at 39.75935, -86.04555.",
         "mapsUrl": "https://www.google.com/maps/@39.75935,-86.04555,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -979,7 +979,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (39.591457, -85.806213) landed on a farm\nfield between the facility and the Shelbyville Municipal Airport runway\n(visible to the east in every wide frame). Probing satellite to the southwest\nimmediately revealed a very large distribution building with extensive trailer\nparking. Web search confirmed the address **4301 County Rd 125 W, Shelbyville,\nIN 46176** — a Kroger refrigerated grocery DC (built 1998, ~600,000 sq ft,\ncited as a ~100-acre campus, now operated by Penske Logistics). The Street View\nmonument sign at the entrance reads \"Kroger,\" positively confirming the\nbuilding. Resolved operating center locked at 39.5888, -85.8092.\n\nSources: truckmap.com place listing; shelbyville-indiana.uscompanies.net;\nindianachamber.com (Kroger Central Division Shelbyville supply-chain facility);",
+        "dossierExcerpt": "The supplied approximate coordinates (39.591457, -85.806213) landed on a farm\nfield between the facility and the Shelbyville Municipal Airport runway\n(visible to the east in every wide frame). Probing satellite to the southwest\nimmediately revealed a very large distribution building with extensive trailer\nparking. Web search confirmed the address **4301 County Rd 125 W, Shelbyville,\nIN 46176**, a Kroger refrigerated grocery DC (built 1998, ~600,000 sq ft,\ncited as a ~100-acre campus, now operated by Penske Logistics). The Street View\nmonument sign at the entrance reads \"Kroger,\" positively confirming the\nbuilding. Resolved operating center locked at 39.5888, -85.8092.\n\nSources: truckmap.com place listing; shelbyville-indiana.uscompanies.net;\nindianachamber.com (Kroger Central Division Shelbyville supply-chain facility);",
         "mapsUrl": "https://www.google.com/maps/@39.5888,-85.8092,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2174,7 +2174,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates (47.208991, -122.299558) landed on a road junction at\nthe south edge of a large industrial district. Probing satellite z16-z18 around\nthat point and cross-checking the street address and a Waze \"Distribution\nCenter Truck Entrance - Fred Meyer, Valley Ave NW\" result confirmed the\nfacility is the large white-roofed distribution campus immediately north of\nValley Ave NW.\n\nThe campus is two large connected DC buildings sharing one fenced truck court:\n1. Main DC — a long building running roughly E-W with a continuous loading\n   dock face along its entire south wall.\n2. Second DC building — a large building running NW-SE just south/east of the\n   main building, with a dock bank on its west face.\n\nTo the south across Valley Ave NW is a Korum Nissan dealership and other retail",
+        "dossierExcerpt": "The supplied coordinates (47.208991, -122.299558) landed on a road junction at\nthe south edge of a large industrial district. Probing satellite z16-z18 around\nthat point and cross-checking the street address and a Waze \"Distribution\nCenter Truck Entrance - Fred Meyer, Valley Ave NW\" result confirmed the\nfacility is the large white-roofed distribution campus immediately north of\nValley Ave NW.\n\nThe campus is two large connected DC buildings sharing one fenced truck court:\n1. Main DC, a long building running roughly E-W with a continuous loading\n   dock face along its entire south wall.\n2. Second DC building, a large building running NW-SE just south/east of the\n   main building, with a dock bank on its west face.\n\nTo the south across Valley Ave NW is a Korum Nissan dealership and other retail",
         "mapsUrl": "https://www.google.com/maps/@47.20985,-122.29855,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2516,7 +2516,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The supplied coordinates (39.744719, -104.77703) landed squarely inside a large\nmulti-building industrial campus on the west side of Tower Rd. Satellite probes\nat z15–z18 showed a contiguous fenced distribution complex with four large\nwarehouse buildings, banks of dock doors, and extensive trailer drop yards —\nexactly consistent with a grocery DC, not an office or unrelated property.\n\nWeb research corroborates: this is the **King Soopers / Kroger Aurora\nDistribution Center** at 1933 Tower Rd, a ~650,000 sq ft (originally) automated\nDC opened in 2006 supplying dry grocery and general merchandise to King Soopers,\nCity Market, Dillons and Kroger stores across multiple states. This is the\nTower Rd grocery DC, distinct from the Kroger/Ocado CFC on Jackson Gap Way\nelsewhere in Aurora (roster idx 15). Location locked.",
+        "dossierExcerpt": "The supplied coordinates (39.744719, -104.77703) landed squarely inside a large\nmulti-building industrial campus on the west side of Tower Rd. Satellite probes\nat z15–z18 showed a contiguous fenced distribution complex with four large\nwarehouse buildings, banks of dock doors, and extensive trailer drop yards ,\nexactly consistent with a grocery DC, not an office or unrelated property.\n\nWeb research corroborates: this is the **King Soopers / Kroger Aurora\nDistribution Center** at 1933 Tower Rd, a ~650,000 sq ft (originally) automated\nDC opened in 2006 supplying dry grocery and general merchandise to King Soopers,\nCity Market, Dillons and Kroger stores across multiple states. This is the\nTower Rd grocery DC, distinct from the Kroger/Ocado CFC on Jackson Gap Way\nelsewhere in Aurora (roster idx 15). Location locked.",
         "mapsUrl": "https://www.google.com/maps/@39.74440,-104.77750,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2870,7 +2870,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (33.439553, -112.277894) landed directly on\nthe correct building. Satellite at z16-z17 shows a very large grocery\ndistribution campus: a long white-roofed main building with a continuous dock\nface, a second large building to the east, an SE office/utility (fuel + tank)\ncluster, and a yard packed with several hundred trailers — consistent with a\nmajor regional grocery DC, not an office or unrelated property.\n\nWeb search confirms the address and ownership: this is the Fry's Food Stores of\nArizona distribution center / headquarters at 500 S 99th Ave, Tolleson, AZ\n85353 (phone 623-936-2100). Fry's is a banner of The Kroger Co.; the site also\nreturns under \"Kroger Distribution Center, 500 S 99th Ave, Tolleson\" on Waze and\nFoursquare. Identity is unambiguous.",
+        "dossierExcerpt": "The supplied approximate coordinates (33.439553, -112.277894) landed directly on\nthe correct building. Satellite at z16-z17 shows a very large grocery\ndistribution campus: a long white-roofed main building with a continuous dock\nface, a second large building to the east, an SE office/utility (fuel + tank)\ncluster, and a yard packed with several hundred trailers, consistent with a\nmajor regional grocery DC, not an office or unrelated property.\n\nWeb search confirms the address and ownership: this is the Fry's Food Stores of\nArizona distribution center / headquarters at 500 S 99th Ave, Tolleson, AZ\n85353 (phone 623-936-2100). Fry's is a banner of The Kroger Co.; the site also\nreturns under \"Kroger Distribution Center, 500 S 99th Ave, Tolleson\" on Waze and\nFoursquare. Identity is unambiguous.",
         "mapsUrl": "https://www.google.com/maps/@33.4404,-112.2775,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3183,7 +3183,7 @@
           "dropArea": "50+. Hundreds of trailers parked in marked rows across the central drop yard and a second south drop yard; estimate ~220 trailers visible, ~350 capacity.",
           "shipRcvSeparate": "Distinct dock banks on multiple separate buildings/faces (north grocery warehouse vs south refrigerated building) indicate physically separated ship/receive operations.",
           "multipleFacilities": "Campus of ~6 distinct large buildings (north solar-roof warehouses, south refrigerated DC, central/SW shop and office structures).",
-          "urbanRural": "Urban — within the Layton / Salt Lake City metro industrial fabric, immediately bordered by a residential subdivision to the south and dense industrial parks to the west.",
+          "urbanRural": "Urban, within the Layton / Salt Lake City metro industrial fabric, immediately bordered by a residential subdivision to the south and dense industrial parks to the west.",
           "railServed": "Mainline rail (BNSF/UTA corridor) runs diagonally along the NE/E edge of the property, but no clear spur enters the yard in the imagery; marked FALSE / uncertain.",
           "scale": "No truck scale / weigh pad resolved in the imagery; flagged uncertain.",
           "truckGateCount": "Two open vehicle entrances off N Sugar St (main yard drive ~41.0651 and a southern office/shop drive ~41.0635); neither is a controlled gate.",
@@ -3401,7 +3401,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (39.447326, -84.406393) landed on the\ntarget building. Web research confirms 6266 Hamilton Lebanon Rd is Kroger's\nfirst U.S. Ocado-powered Customer Fulfillment Center, a ~335-375k sq ft\nautomated \"shed\" (~$55M, opened spring 2021, ~400 jobs, \"The Hive\" robotic\ngrid). The address geocodes to 39.445723, -84.406538 — the south parking edge\nof the centered building. The neighboring large buildings (a bigger DC to the\nNE, another to the E) are separate properties; the audited building is the\nmid-frame one whose south frontage matches the address pin. Locked center at\n39.44755, -84.40615.",
+        "dossierExcerpt": "The supplied approximate coordinates (39.447326, -84.406393) landed on the\ntarget building. Web research confirms 6266 Hamilton Lebanon Rd is Kroger's\nfirst U.S. Ocado-powered Customer Fulfillment Center, a ~335-375k sq ft\nautomated \"shed\" (~$55M, opened spring 2021, ~400 jobs, \"The Hive\" robotic\ngrid). The address geocodes to 39.445723, -84.406538, the south parking edge\nof the centered building. The neighboring large buildings (a bigger DC to the\nNE, another to the E) are separate properties; the audited building is the\nmid-frame one whose south frontage matches the address pin. Locked center at\n39.44755, -84.40615.",
         "mapsUrl": "https://www.google.com/maps/@39.44755,-84.40615,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3730,7 +3730,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates (33.615033, -84.334513) landed directly on a large\ncross/T-shaped industrial building with extensive trailer parking. Web research\nconfirms 2000 Anvil Block Rd hosts Kroger's Ocado-powered Customer Fulfillment\nCenter (~375k–419k sq ft, opened 2021) co-located with Kroger's legacy ~1.3M\nsq ft distribution center, both inside the Gillem Logistics Center.\n\nTwo large Kroger buildings sit on the complex:\n- The big white rectangular building to the NE = the legacy 1.3M sq ft DC\n  (separate, adjacent facility — not audited here).\n- The cross/T-shaped building at the given coords = the audited Kroger\n  fulfillment building, with its own fenced trailer yards and parking.\n\nPositive ID via Street View: a \"Kroger — FRESH FOR EVERYONE\" trailer is parked\nagainst the perimeter fence facing Anvil Block Rd (pano @ 33.61509, -84.33566,",
+        "dossierExcerpt": "The supplied coordinates (33.615033, -84.334513) landed directly on a large\ncross/T-shaped industrial building with extensive trailer parking. Web research\nconfirms 2000 Anvil Block Rd hosts Kroger's Ocado-powered Customer Fulfillment\nCenter (~375k–419k sq ft, opened 2021) co-located with Kroger's legacy ~1.3M\nsq ft distribution center, both inside the Gillem Logistics Center.\n\nTwo large Kroger buildings sit on the complex:\n- The big white rectangular building to the NE = the legacy 1.3M sq ft DC\n  (separate, adjacent facility, not audited here).\n- The cross/T-shaped building at the given coords = the audited Kroger\n  fulfillment building, with its own fenced trailer yards and parking.\n\nPositive ID via Street View: a \"Kroger, FRESH FOR EVERYONE\" trailer is parked\nagainst the perimeter fence facing Anvil Block Rd (pano @ 33.61509, -84.33566,",
         "mapsUrl": "https://www.google.com/maps/@33.615400,-84.334000,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -4027,7 +4027,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster supplied 39.807077, -104.691758 (ROOFTOP geocode of the street address).\nSatellite at z17 around that point immediately showed a single large white-roofed\nindustrial building on open prairie at the far-NE edge of Aurora, consistent with a\nmodern fulfillment center. Web research corroborated: Kroger/Ocado opened this\nDenver-metro CFC at 6125 N Jackson Gap Way in March 2023 — a 300,000 sq ft\nautomated facility (1,000+ bots on a 3D grid), 200+ associates growing to 400+,\nserving King Soopers/City Market delivery up to 90 minutes out. This is the Ocado\nCFC on Jackson Gap Way, distinct from the King Soopers grocery DC on Tower Rd\n(idx 9). The supplied coordinates land on the building; I re-centered the audit on\nthe developed-pad centroid (39.80755, -104.69228).\n\nSources: Supermarket News, Kroger IR / PR Newswire, The Shelby Report,",
+        "dossierExcerpt": "Roster supplied 39.807077, -104.691758 (ROOFTOP geocode of the street address).\nSatellite at z17 around that point immediately showed a single large white-roofed\nindustrial building on open prairie at the far-NE edge of Aurora, consistent with a\nmodern fulfillment center. Web research corroborated: Kroger/Ocado opened this\nDenver-metro CFC at 6125 N Jackson Gap Way in March 2023, a 300,000 sq ft\nautomated facility (1,000+ bots on a 3D grid), 200+ associates growing to 400+,\nserving King Soopers/City Market delivery up to 90 minutes out. This is the Ocado\nCFC on Jackson Gap Way, distinct from the King Soopers grocery DC on Tower Rd\n(idx 9). The supplied coordinates land on the building; I re-centered the audit on\nthe developed-pad centroid (39.80755, -104.69228).\n\nSources: Supermarket News, Kroger IR / PR Newswire, The Shelby Report,",
         "mapsUrl": "https://www.google.com/maps/@39.80755,-104.69228,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -4062,7 +4062,7 @@
           "urbanRural": "Far-NE edge of Aurora on open prairie/former farmland near the DEN airport corridor; broader setting is edge-of-town open country, so Rural per rubric.",
           "buildingCount": "Main 300,000 sq ft CFC plus one ancillary maintenance/utility building in the SW operations yard.",
           "dropYard": "Dedicated trailer/van storage lot on the west side, separate from active dock staging.",
-          "streetViewMeta": "Nearest Street View panos on N Jackson Gap Way are dated 2016-11 (gate area, ~170m E) and 2020-11 (perimeter, ~140m E) — both PREDATE the 2023 CFC construction and show empty prairie, not the facility. hasCoverage set false because no pano depicts the built yard; never invented a pano. Gate/perimeter determinations rely on Maxar satellite (z18-z21).",
+          "streetViewMeta": "Nearest Street View panos on N Jackson Gap Way are dated 2016-11 (gate area, ~170m E) and 2020-11 (perimeter, ~140m E), both PREDATE the 2023 CFC construction and show empty prairie, not the facility. hasCoverage set false because no pano depicts the built yard; never invented a pano. Gate/perimeter determinations rely on Maxar satellite (z18-z21).",
           "railServed": "No rail spur enters the property; nearest rail is unrelated."
         },
         "verification": {
@@ -4315,7 +4315,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates (42.188051, -83.381811) land between two large\nindustrial buildings on the Wahrman Rd corridor. Web research disambiguated\nthem:\n\n- 15675 Wahrman = the Kroger/Ocado CFC — reported at 135,000 sq ft,\n  Kroger's \"smallest and faster\" Ocado spoke facility, ~$95M, ~250 jobs,\n  housing the automated \"Hive\" of 1,000+ bots (PR Newswire / Kroger IR /\n  Supermarket News / Progressive Grocer, Sept 2020).\n- **~16005 Wahrman = a separate, much larger Kroger fresh distribution\n  building** (formerly Penske, later KLS Logistics) immediately to the east.\n\nThe huge white building with dock doors and trailer rows wrapping every face\nis the DC, not the CFC — far too big to be 135k sq ft. The CFC is the\ncompact west building with a tall automated-hive roofline (long shadows",
+        "dossierExcerpt": "The supplied coordinates (42.188051, -83.381811) land between two large\nindustrial buildings on the Wahrman Rd corridor. Web research disambiguated\nthem:\n\n- 15675 Wahrman = the Kroger/Ocado CFC, reported at 135,000 sq ft,\n  Kroger's \"smallest and faster\" Ocado spoke facility, ~$95M, ~250 jobs,\n  housing the automated \"Hive\" of 1,000+ bots (PR Newswire / Kroger IR /\n  Supermarket News / Progressive Grocer, Sept 2020).\n- **~16005 Wahrman = a separate, much larger Kroger fresh distribution\n  building** (formerly Penske, later KLS Logistics) immediately to the east.\n\nThe huge white building with dock doors and trailer rows wrapping every face\nis the DC, not the CFC, far too big to be 135k sq ft. The CFC is the\ncompact west building with a tall automated-hive roofline (long shadows",
         "mapsUrl": "https://www.google.com/maps/@42.18820,-83.38120,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -4595,7 +4595,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster's approximate point (32.641617, -96.75385) is the rooftop geocode of\n\"4200 Cleveland Rd,\" which lands on open/wooded land and the public road just\nnorth of the actual building. Web research (PRNewswire/Kroger IR press release,\nReuters Events, Supermarket News) places the CFC on a 55-acre tract **south of\nI-20** at the corner of 4200 Cleveland Rd and 4241 Telephone Rd: a 350,000 sq ft\nhighly-automated Ocado \"shed\" (1,000+ bots over a 3D grid), opened summer 2022,\nserving Dallas-Fort Worth e-grocery delivery.\n\nGeocoding \"Kroger Fulfillment Center Dallas TX\" with the project key returned\n4221 Telephone Rd, 32.6379, -96.7537 — directly on the large white building seen\n~350 m southwest of the roster point. Satellite probes (z15 → z21) confirmed a\nsingle large rectangular building with a distinctive tall bright-white central",
+        "dossierExcerpt": "The roster's approximate point (32.641617, -96.75385) is the rooftop geocode of\n\"4200 Cleveland Rd,\" which lands on open/wooded land and the public road just\nnorth of the actual building. Web research (PRNewswire/Kroger IR press release,\nReuters Events, Supermarket News) places the CFC on a 55-acre tract **south of\nI-20** at the corner of 4200 Cleveland Rd and 4241 Telephone Rd: a 350,000 sq ft\nhighly-automated Ocado \"shed\" (1,000+ bots over a 3D grid), opened summer 2022,\nserving Dallas-Fort Worth e-grocery delivery.\n\nGeocoding \"Kroger Fulfillment Center Dallas TX\" with the project key returned\n4221 Telephone Rd, 32.6379, -96.7537, directly on the large white building seen\n~350 m southwest of the roster point. Satellite probes (z15 → z21) confirmed a\nsingle large rectangular building with a distinctive tall bright-white central",
         "mapsUrl": "https://www.google.com/maps/@32.63794,-96.75375,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -4887,7 +4887,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied approximate coords (33.8186, -84.3324) landed ~2.7 km NE of the\nplant, in a wooded residential subdivision (verified by z17 satellite — no\nindustrial structure). Web search confirmed the business at **2121 Faulkner Rd\nNE, Atlanta GA 30324** (Lindridge/Martin Manor industrial corridor, off\nCheshire Bridge Rd between Piedmont Rd and the CSX line). Google geocode of the\naddress returned 33.813853, -84.358477 with a parcel-sized bounds. Satellite\nat that point shows a large white-roofed food-manufacturing building with **3+\ntall stainless milk/processing silos** and an extensive trailer yard — exactly a\ndairy plant, not an office. Street View from the adjacent internal road\n(Faulkner Rd cul-de-sac) directly shows the brick plant building, the milk\nsilos, yellow pipe bollards, and a chain-link perimeter fence — positive ID.",
+        "dossierExcerpt": "The supplied approximate coords (33.8186, -84.3324) landed ~2.7 km NE of the\nplant, in a wooded residential subdivision (verified by z17 satellite, no\nindustrial structure). Web search confirmed the business at **2121 Faulkner Rd\nNE, Atlanta GA 30324** (Lindridge/Martin Manor industrial corridor, off\nCheshire Bridge Rd between Piedmont Rd and the CSX line). Google geocode of the\naddress returned 33.813853, -84.358477 with a parcel-sized bounds. Satellite\nat that point shows a large white-roofed food-manufacturing building with **3+\ntall stainless milk/processing silos** and an extensive trailer yard, exactly a\ndairy plant, not an office. Street View from the adjacent internal road\n(Faulkner Rd cul-de-sac) directly shows the brick plant building, the milk\nsilos, yellow pipe bollards, and a chain-link perimeter fence, positive ID.",
         "mapsUrl": "https://www.google.com/maps/@33.813853,-84.358477,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -5171,7 +5171,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The supplied coords (35.833358, -86.413086) landed directly on a large\nwhite-roofed industrial building ringed by trailers, with cylindrical milk\nsilos on its east face and wastewater treatment ponds at the SW corner —\nunmistakably a dairy plant, not an office. Web search confirmed Heritage Farms\nDairy is Kroger's 24/7 dairy manufacturing plant at 1100 New Salem Rd,\nMurfreesboro TN (sole national producer of Kroger Greek yogurt; supplies dairy +\nOJ to TN/MS/AL/GA/AR). Street View at the frontage shows the \"HERITAGE FARMS\nDAIRY\" monument sign and Kroger's \"Fresh for Everyone\" branding on the building,\nplus Heritage Farms Dairy logo trailers. Location locked.",
+        "dossierExcerpt": "The supplied coords (35.833358, -86.413086) landed directly on a large\nwhite-roofed industrial building ringed by trailers, with cylindrical milk\nsilos on its east face and wastewater treatment ponds at the SW corner ,\nunmistakably a dairy plant, not an office. Web search confirmed Heritage Farms\nDairy is Kroger's 24/7 dairy manufacturing plant at 1100 New Salem Rd,\nMurfreesboro TN (sole national producer of Kroger Greek yogurt; supplies dairy +\nOJ to TN/MS/AL/GA/AR). Street View at the frontage shows the \"HERITAGE FARMS\nDAIRY\" monument sign and Kroger's \"Fresh for Everyone\" branding on the building,\nplus Heritage Farms Dairy logo trailers. Location locked.",
         "mapsUrl": "https://www.google.com/maps/@35.83340,-86.41310,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -5736,7 +5736,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2790000
         },
-        "dossierExcerpt": "Given coords (40.040189, -82.460103) landed at the north edge of the property,\nover the employee lot. Probing satellite z17–z20 and walking Street View around\nthe point positively identified the building: a large blue-clad dairy plant with\na bank of milk silos. Street View signage reads **\"Kroger Manufacturing — NOW\nHIRING, jobs.kroger.com\"** on the perimeter fence, confirming the Kroger plant.\nWeb search corroborates: Tamarack Farms Dairy, 1701 Tamarack Rd, Newark OH — the\nlargest fluid-dairy producer in Ohio, ~20-acre plant footprint, recently expanded\n($77M aseptic milk line, 2025). True plant-building center sits ~150 m S of the\nsupplied point at 40.03905, -82.46075.",
+        "dossierExcerpt": "Given coords (40.040189, -82.460103) landed at the north edge of the property,\nover the employee lot. Probing satellite z17–z20 and walking Street View around\nthe point positively identified the building: a large blue-clad dairy plant with\na bank of milk silos. Street View signage reads **\"Kroger Manufacturing, NOW\nHIRING, jobs.kroger.com\"** on the perimeter fence, confirming the Kroger plant.\nWeb search corroborates: Tamarack Farms Dairy, 1701 Tamarack Rd, Newark OH, the\nlargest fluid-dairy producer in Ohio, ~20-acre plant footprint, recently expanded\n($77M aseptic milk line, 2025). True plant-building center sits ~150 m S of the\nsupplied point at 40.03905, -82.46075.",
         "mapsUrl": "https://www.google.com/maps/@40.03905,-82.46075,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -6025,7 +6025,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coords (39.765108, -86.041373) land directly on a large white-roofed\nindustrial plant. Web search confirms this is Crossroad Farms Dairy, a ~230,000 sq ft\nKroger milk/beverage/ice-cream plant opened 1972 (dairyfoods.com, foodengineeringmag.com,\nbuzzfile \"Kroger Limited Partnership II\"). Street View at the front shows a Crossroad Farms\nmonument sign + cow statue + windsock on silos — positively the dairy, distinct from the\nKroger DC buildings visible to the N and S in the z16 frame. The plant is bounded by I-465\nramps to the W, a rail line + S Shortridge Rd to the E, woods to the N, and a loop road to\nthe S. Coords are accurate; nudged center slightly N to building centroid.",
+        "dossierExcerpt": "The supplied coords (39.765108, -86.041373) land directly on a large white-roofed\nindustrial plant. Web search confirms this is Crossroad Farms Dairy, a ~230,000 sq ft\nKroger milk/beverage/ice-cream plant opened 1972 (dairyfoods.com, foodengineeringmag.com,\nbuzzfile \"Kroger Limited Partnership II\"). Street View at the front shows a Crossroad Farms\nmonument sign + cow statue + windsock on silos, positively the dairy, distinct from the\nKroger DC buildings visible to the N and S in the z16 frame. The plant is bounded by I-465\nramps to the W, a rail line + S Shortridge Rd to the E, woods to the N, and a loop road to\nthe S. Coords are accurate; nudged center slightly N to building centroid.",
         "mapsUrl": "https://www.google.com/maps/@39.76560,-86.04180,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -6273,7 +6273,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Google geocoder resolves \"29601 Industrial Rd, Livonia, MI 48150\" exactly to the\nsupplied coords (42.37992, -83.33834) — the central building in the satellite\nframe. Web search confirms this is Kroger Michigan Dairy, a fluid-milk\nmanufacturing plant (Livonia/Westland chamber listing; Quickway-branded\ntrailers and stainless milk tankers on site corroborate a Kroger dairy). Visual\nconfirmation: a cluster of large round bulk-milk silos on the NE roof/yard\n(z19/z20 sat), definitive for a dairy plant. This is the right building, not an\noffice or neighbor (the large white building directly south across Industrial Rd\nis a separate QuikTrip facility).",
+        "dossierExcerpt": "Google geocoder resolves \"29601 Industrial Rd, Livonia, MI 48150\" exactly to the\nsupplied coords (42.37992, -83.33834), the central building in the satellite\nframe. Web search confirms this is Kroger Michigan Dairy, a fluid-milk\nmanufacturing plant (Livonia/Westland chamber listing; Quickway-branded\ntrailers and stainless milk tankers on site corroborate a Kroger dairy). Visual\nconfirmation: a cluster of large round bulk-milk silos on the NE roof/yard\n(z19/z20 sat), definitive for a dairy plant. This is the right building, not an\noffice or neighbor (the large white building directly south across Industrial Rd\nis a separate QuikTrip facility).",
         "mapsUrl": "https://www.google.com/maps/@42.379921,-83.338345,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -6541,7 +6541,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied point (38.058791, -97.883467) landed on the west edge of a large\nindustrial complex. Web search confirmed the site as **Kroger DBA Jackson\nDairy**, a Kroger Manufacturing dairy plant at 2600 E 4th Ave, Hutchinson KS\n(milk processing / bottling, juices, waters; ~90+ employees). Satellite at\nz16-z20 and Street View (2025) positively identify the building: the central\nmass carries roof-mounted process tanks and a row of vertical **milk storage\nsilos** (visible in Street View heading 315 from E 4th Ave) — the classic dairy\nplant signature — alongside Kroger/Jackson/Ralphs-branded reefer trailers.\nReal center locked at 38.0593, -97.8818.",
+        "dossierExcerpt": "The supplied point (38.058791, -97.883467) landed on the west edge of a large\nindustrial complex. Web search confirmed the site as **Kroger DBA Jackson\nDairy**, a Kroger Manufacturing dairy plant at 2600 E 4th Ave, Hutchinson KS\n(milk processing / bottling, juices, waters; ~90+ employees). Satellite at\nz16-z20 and Street View (2025) positively identify the building: the central\nmass carries roof-mounted process tanks and a row of vertical **milk storage\nsilos** (visible in Street View heading 315 from E 4th Ave), the classic dairy\nplant signature, alongside Kroger/Jackson/Ralphs-branded reefer trailers.\nReal center locked at 38.0593, -97.8818.",
         "mapsUrl": "https://www.google.com/maps/@38.0593,-97.8818,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -6795,7 +6795,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied point (37.398017, -79.165391) landed just N of the true plant\ncenter. Satellite at z17/z18 showed a large industrial complex — a process\nbuilding with rooftop tanks/silos plus a trailer-packed yard — directly SW of\nthe point. Web search confirmed Westover Dairy is a **Kroger-owned dairy\nmanufacturing plant** (one of Kroger's 15 dairies; milk, water, cottage cheese,\nyogurt, sour cream, juices) at 2801 Fort Ave. Locked center at\n37.39740, -79.16560. Correct building positively identified.",
+        "dossierExcerpt": "The supplied point (37.398017, -79.165391) landed just N of the true plant\ncenter. Satellite at z17/z18 showed a large industrial complex, a process\nbuilding with rooftop tanks/silos plus a trailer-packed yard, directly SW of\nthe point. Web search confirmed Westover Dairy is a **Kroger-owned dairy\nmanufacturing plant** (one of Kroger's 15 dairies; milk, water, cottage cheese,\nyogurt, sour cream, juices) at 2801 Fort Ave. Locked center at\n37.39740, -79.16560. Correct building positively identified.",
         "mapsUrl": "https://www.google.com/maps/@37.39740,-79.16560,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -7089,7 +7089,7 @@
           }
         },
         "fieldNotes": {
-          "location": "Confirmed Kroger Springdale Ice Cream & Beverage Plant, 11801 Chesterdale Rd, Cincinnati (Springdale) OH 45246. Large single ice-cream/beverage manufacturing building fronted by I-275 to the north and Chesterdale Rd (NE-SW) to the east. Web sources (LinkedIn, IndustryNet, company pages) confirm a Kroger-owned fluid-milk/ice-cream/soda plant opened 1965, 'minutes from I-275 East' — matches the imagery exactly. Supplied coords were essentially correct.",
+          "location": "Confirmed Kroger Springdale Ice Cream & Beverage Plant, 11801 Chesterdale Rd, Cincinnati (Springdale) OH 45246. Large single ice-cream/beverage manufacturing building fronted by I-275 to the north and Chesterdale Rd (NE-SW) to the east. Web sources (LinkedIn, IndustryNet, company pages) confirm a Kroger-owned fluid-milk/ice-cream/soda plant opened 1965, 'minutes from I-275 East', matches the imagery exactly. Supplied coords were essentially correct.",
           "truckGate": "Whole property is wrapped in continuous chain-link perimeter fence behind the Chesterdale Rd guardrail (verified in Street View 2023-09 panos at 39.2905,-84.4479 and 39.2906,-84.4479). Truck access is a single controlled drive off Chesterdale Rd at the SE; the road frontage shows no open curb cut, so vehicles enter through one fenced gate/checkpoint at the parking/yard boundary.",
           "guardShack": "No clearly resolvable staffed guard booth at the entrance in available imagery; a long low gatehouse/canopy structure sits at the parking-to-yard boundary (NE) but could not be positively confirmed as a manned shack. Left guardShack false / remoteGs true (gate present, no confirmed booth) and flagged uncertain.",
           "postGateStaging": "Large paved maneuvering/staging yard between the building's north face and I-275 (the NE apron) holds trailers and trucks inside the fence before the docks.",
@@ -7098,11 +7098,11 @@
           "dropArea": "Trailers parked without tractors in the NE staging yard and along the canopy rows; ~10-25 drop positions.",
           "dropYard": "Dedicated trailer storage/staging in the NE paved yard separate from the active dock canopies.",
           "entryExitTogether": "Single access drive off Chesterdale Rd serves both in and out (one gated point).",
-          "entryLanes": "Single inbound lane estimated at the gate drive; could not isolate exact lane count — flagged uncertain.",
+          "entryLanes": "Single inbound lane estimated at the gate drive; could not isolate exact lane count, flagged uncertain.",
           "exitLanes": "Single outbound lane estimated; flagged uncertain.",
-          "urbanRural": "Inside the dense Cincinnati metro/Springdale industrial fabric, immediately on I-275 with surrounding office/industrial parks and apartments — Urban.",
+          "urbanRural": "Inside the dense Cincinnati metro/Springdale industrial fabric, immediately on I-275 with surrounding office/industrial parks and apartments, Urban.",
           "railServed": "No rail spur enters the property; nearest infrastructure is the highway, not rail.",
-          "buildingCount": "One large contiguous manufacturing building (dark-roof main plant + attached white-roof cold-storage/freezer addition on the south/SE) — treated as a single building, not a campus.",
+          "buildingCount": "One large contiguous manufacturing building (dark-roof main plant + attached white-roof cold-storage/freezer addition on the south/SE), treated as a single building, not a campus.",
           "siteAreaAcres": "~22 acres from the fenced operational perimeter polygon; honest overhead estimate.",
           "scale": "No truck scale/weigh pad identified; left false and flagged uncertain."
         }
@@ -7332,7 +7332,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (32.734858, -97.326529) landed on the right\ncity block but ~the pin sat on the S Main retail frontage. Web research confirmed\nthis is the genuine operating Kroger/Vandervoort's dairy plant — it appears\nverbatim (\"Vandervoort Dairy, 900 S. Main Street, Fort Worth, TX 76104\") on\nKroger's own Manufacturing Division plant address list, corroborated by current\nbusiness listings. Satellite (z17→z20) shows a dense dairy processing complex:\nlarge building with extensive rooftop refrigeration/cooling equipment and a\ncluster of milk silos — consistent with the facility type. Recentered the audit\nto the plant core at 32.734748, -97.32669.",
+        "dossierExcerpt": "The supplied approximate coordinates (32.734858, -97.326529) landed on the right\ncity block but ~the pin sat on the S Main retail frontage. Web research confirmed\nthis is the genuine operating Kroger/Vandervoort's dairy plant, it appears\nverbatim (\"Vandervoort Dairy, 900 S. Main Street, Fort Worth, TX 76104\") on\nKroger's own Manufacturing Division plant address list, corroborated by current\nbusiness listings. Satellite (z17→z20) shows a dense dairy processing complex:\nlarge building with extensive rooftop refrigeration/cooling equipment and a\ncluster of milk silos, consistent with the facility type. Recentered the audit\nto the plant core at 32.734748, -97.32669.",
         "mapsUrl": "https://www.google.com/maps/@32.734748,-97.32669,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -7556,7 +7556,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Supplied coords (45.558785, -122.699028) landed in the employee parking lot\ndirectly west of the plant, so they were essentially correct. Confirmed the\nbuilding three ways:\n1. Web search — Kroger Swan Island Dairy, organic milk producer, 4950 N Basin\n   Ave, (503) 240-5150.\n2. Street View on the west wall shows a mounted **\"SWAN ISLAND DAIRY\" Kroger\n   logo sign** with flagpole and a blue-awning employee entrance.\n3. Overhead imagery shows the dairy signature: a row of large **vertical milk\n   silos / process tanks on the north roofline, plus \"Food 4 Less\"\n   (Kroger banner) trailers** backed into the docks.\n\nThe plant sits on the Swan Island industrial peninsula between N Basin Ave\n(west) and a Union Pacific mainline (east). The large red-cornered\nwarehouse to the north and the rail-served distribution building to the SE are",
+        "dossierExcerpt": "Supplied coords (45.558785, -122.699028) landed in the employee parking lot\ndirectly west of the plant, so they were essentially correct. Confirmed the\nbuilding three ways:\n1. Web search, Kroger Swan Island Dairy, organic milk producer, 4950 N Basin\n   Ave, (503) 240-5150.\n2. Street View on the west wall shows a mounted **\"SWAN ISLAND DAIRY\" Kroger\n   logo sign** with flagpole and a blue-awning employee entrance.\n3. Overhead imagery shows the dairy signature: a row of large **vertical milk\n   silos / process tanks on the north roofline, plus \"Food 4 Less\"\n   (Kroger banner) trailers** backed into the docks.\n\nThe plant sits on the Swan Island industrial peninsula between N Basin Ave\n(west) and a Union Pacific mainline (east). The large red-cornered\nwarehouse to the north and the rail-served distribution building to the SE are",
         "mapsUrl": "https://www.google.com/maps/@45.55855,-122.69815,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -8013,7 +8013,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The 500 N Sugar Street site is a single fenced multi-building Kroger campus holding three\ndistinct operations:\n- Smith's Layton Distribution Center — the huge solar-roofed building to the north (~41.066);\n- Kroger Layton Dairy — the central/west processing block (this audit); and\n- Layton Bakery / cold-storage — the grey-roofed warehouse to the SW (~41.0628).\n\nThe dairy was positively identified, not the DC or bakery, by:\n- A bulk milk/cream silo cluster and process-tank farm (round vertical white tanks + pressure\n  vessels) visible at z20 on the dairy block roof and junction (~41.0642, -111.9831);\n- Heavy process piping running across the roofs between buildings (CIP / refrigerated process\n  lines), and dense rooftop refrigeration/HVAC;\n- The \"Smith's\" red-logo office front on N Sugar Street (Street View pano `M7U59CyNhNNICpz2su66pA`,",
+        "dossierExcerpt": "The 500 N Sugar Street site is a single fenced multi-building Kroger campus holding three\ndistinct operations:\n- Smith's Layton Distribution Center, the huge solar-roofed building to the north (~41.066);\n- Kroger Layton Dairy, the central/west processing block (this audit); and\n- Layton Bakery / cold-storage, the grey-roofed warehouse to the SW (~41.0628).\n\nThe dairy was positively identified, not the DC or bakery, by:\n- A bulk milk/cream silo cluster and process-tank farm (round vertical white tanks + pressure\n  vessels) visible at z20 on the dairy block roof and junction (~41.0642, -111.9831);\n- Heavy process piping running across the roofs between buildings (CIP / refrigerated process\n  lines), and dense rooftop refrigeration/HVAC;\n- The \"Smith's\" red-logo office front on N Sugar Street (Street View pano `M7U59CyNhNNICpz2su66pA`,",
         "mapsUrl": "https://www.google.com/maps/@41.06410,-111.98350,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -8294,7 +8294,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Supplied coords (33.929003, -117.305168) landed inside a multi-tenant industrial\npark. Web search resolved 1500 Eastridge Ave as **Kroger Manufacturing Division –\nRiverside Creamery Operations** (also branded Ralphs/Kroger; FCC licenses, Indeed\njob posts, Waze/Yelp all confirm). The creamery is the western parcel: a large\ndiagonal (NW–SE oriented) building plus a separate refrigeration/process building\nwith a tank farm, backed against open scrub hillside to the W/S. Street View\npositively confirmed it — a 2017 interior pano shows reefer dock doors numbered\n42–45 with refrigerated trailers backed in, and a 2011 pano shows a \"Ralphs\" /\n\"DAIRY\" monument at the entrance frontage. The big buildings to the N/E are\nseparate tenants, excluded from the geofence.",
+        "dossierExcerpt": "Supplied coords (33.929003, -117.305168) landed inside a multi-tenant industrial\npark. Web search resolved 1500 Eastridge Ave as **Kroger Manufacturing Division –\nRiverside Creamery Operations** (also branded Ralphs/Kroger; FCC licenses, Indeed\njob posts, Waze/Yelp all confirm). The creamery is the western parcel: a large\ndiagonal (NW–SE oriented) building plus a separate refrigeration/process building\nwith a tank farm, backed against open scrub hillside to the W/S. Street View\npositively confirmed it, a 2017 interior pano shows reefer dock doors numbered\n42–45 with refrigerated trailers backed in, and a 2011 pano shows a \"Ralphs\" /\n\"DAIRY\" monument at the entrance frontage. The big buildings to the N/E are\nseparate tenants, excluded from the geofence.",
         "mapsUrl": "https://www.google.com/maps/@33.929553,-117.30595,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -8572,7 +8572,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Supplied coords (33.871152, -118.239871) landed directly on a large industrial\nplant complex in Compton's industrial district, just south of CA-91. Web search\nconfirmed 2201 S Wilmington Ave = Kroger Manufacturing — Compton Creamery\n(a dairy/creamery plant under the Ralph's banner), APN 7319-034-026. This is the\nmanufacturing creamery, distinct from the nearby Ralphs grocery DC. The\nidentifying tell on satellite: a circular dairy silo / tank farm on the\nplant's west-center (z18), characteristic of a fluid-milk processing plant —\nnot a plain grocery DC. Building cluster, trailer drop yard, and silos all\nconsistent with a dairy plant. Center locked to the plant centroid.",
+        "dossierExcerpt": "Supplied coords (33.871152, -118.239871) landed directly on a large industrial\nplant complex in Compton's industrial district, just south of CA-91. Web search\nconfirmed 2201 S Wilmington Ave = Kroger Manufacturing, Compton Creamery\n(a dairy/creamery plant under the Ralph's banner), APN 7319-034-026. This is the\nmanufacturing creamery, distinct from the nearby Ralphs grocery DC. The\nidentifying tell on satellite: a circular dairy silo / tank farm on the\nplant's west-center (z18), characteristic of a fluid-milk processing plant ,\nnot a plain grocery DC. Building cluster, trailer drop yard, and silos all\nconsistent with a dairy plant. Center locked to the plant centroid.",
         "mapsUrl": "https://www.google.com/maps/@33.87098,-118.23868,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -8599,7 +8599,7 @@
         "fieldNotes": {
           "guardShack": "Small white booth (~1-2 vehicle footprint) on a paved island mid-yard with a shade canopy over the inbound lane; flanked by multiple painted STOP bars on both inbound and outbound sides (z21).",
           "truckGate": "Controlled checkpoint set back from Wilmington Ave: chain-link perimeter, sliding gates at the driveway mouth, and lane islands/bollards at the booth. Entrance off Wilmington (E side).",
-          "fastLaneOpportunity": "Wide multi-lane gate apron with island-separated STOP lanes — room exists for an express bypass.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with island-separated STOP lanes, room exists for an express bypass.",
           "shipRcvSeparate": "Dock banks on multiple distinct building faces (south wall dock-doors plus separate trailer-backed banks on the north/interior buildings).",
           "multipleFacilities": "Campus of 4+ distinct buildings (main plant, secondary processing/warehouse blocks, office near freeway frontage, plus the dairy silo tank farm).",
           "dropYard": "Large dedicated trailer-storage lot east of the plant, dense rows of parked trailers without tractors.",
@@ -8792,7 +8792,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied point (33.439553, -112.277894) lands in the trailer drop yard of a\nlarge shared industrial campus. The campus holds two distinct operations: the\nhuge white Fry's / Kroger Distribution Center (the building filling the top\nof the wide frame) and, to its south-east, the dairy/bottling plant (Bldg 3).\n\nThe dairy building was positively identified by its processing signature: a\ncluster of vertical milk storage silos on the north side of the roof and\ndense rooftop ammonia refrigeration / process equipment (condensers, tanks)\n— hallmarks of a fluid-milk bottling plant, not a flat DC roof. Web research\nconfirms the Tolleson Dairy Division of Kroger at this address, a fluid-milk\nand by-products bottling facility (Shambaugh design-build \"Kroger Bottling\nFacility\"; EPA FRS / D&B / Bloomberg listings). Building center locked at",
+        "dossierExcerpt": "The supplied point (33.439553, -112.277894) lands in the trailer drop yard of a\nlarge shared industrial campus. The campus holds two distinct operations: the\nhuge white Fry's / Kroger Distribution Center (the building filling the top\nof the wide frame) and, to its south-east, the dairy/bottling plant (Bldg 3).\n\nThe dairy building was positively identified by its processing signature: a\ncluster of vertical milk storage silos on the north side of the roof and\ndense rooftop ammonia refrigeration / process equipment (condensers, tanks)\n, hallmarks of a fluid-milk bottling plant, not a flat DC roof. Web research\nconfirms the Tolleson Dairy Division of Kroger at this address, a fluid-milk\nand by-products bottling facility (Shambaugh design-build \"Kroger Bottling\nFacility\"; EPA FRS / D&B / Bloomberg listings). Building center locked at",
         "mapsUrl": "https://www.google.com/maps/@33.438630,-112.276560,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -9043,7 +9043,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coords (32.840131, -96.927737) landed on a large industrial complex\nfronting E Airport Freeway (TX-183). Web search confirms 1331 E Airport Fwy is\nKroger's \"America's Beverage Company\" / Inter-American Products beverage\nmanufacturing plant (Kroger-brand soft drinks and bottled water). Satellite\n(z16-18) shows a large beverage manufacturing + distribution complex: a big\nwhite-roofed production/warehouse building, a south office building, and a\nseparate NE warehouse, surrounded by very large trailer drop yards — consistent\nwith a beverage plant. Silos/tanks (syrup/water) sit at the SW of the main\nbuilding. Locked center at 32.83960, -96.92740.",
+        "dossierExcerpt": "The supplied coords (32.840131, -96.927737) landed on a large industrial complex\nfronting E Airport Freeway (TX-183). Web search confirms 1331 E Airport Fwy is\nKroger's \"America's Beverage Company\" / Inter-American Products beverage\nmanufacturing plant (Kroger-brand soft drinks and bottled water). Satellite\n(z16-18) shows a large beverage manufacturing + distribution complex: a big\nwhite-roofed production/warehouse building, a south office building, and a\nseparate NE warehouse, surrounded by very large trailer drop yards, consistent\nwith a beverage plant. Silos/tanks (syrup/water) sit at the SW of the main\nbuilding. Locked center at 32.83960, -96.92740.",
         "mapsUrl": "https://www.google.com/maps/@32.83960,-96.92740,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -9598,7 +9598,7 @@
           "postGateStaging": "Long internal loop driveway from the guard gate up to the west dock apron provides interior queue/holding room before docks.",
           "dropArea": "West truck yard holds a row of ~11 visible drop trailers backed to the dock wall plus marked yard space; capacity ~18.",
           "dockDoorCount": "~14 doors estimated along the west building face from z20 imagery (trailers obscure exact count).",
-          "urbanRural": "Within Rochester MN city limits in a developed NW industrial park (warehouses, apartments, retail nearby) fronting US-52 — Urban.",
+          "urbanRural": "Within Rochester MN city limits in a developed NW industrial park (warehouses, apartments, retail nearby) fronting US-52, Urban.",
           "railServed": "No rail spur enters the property."
         }
       },
@@ -10032,7 +10032,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coords (39.759778, -86.048928) landed squarely on a large dark-roofed\nindustrial building. Web search confirmed 6801 English Ave = Kroger Bakery Indianapolis,\na food manufacturer (bread, cake, tortilla). The dark-roofed building on English Ave is\nthe bakery plant (audit target). A separate large white-roofed building to the SE\nshares yard pavement but is a distinct Kroger DC — explicitly excluded from this audit, as\nflagged in the prompt. The bakery is the western building cluster, with its dock face on\nthe NE wall and a large trailer drop yard immediately NE/E.",
+        "dossierExcerpt": "The supplied coords (39.759778, -86.048928) landed squarely on a large dark-roofed\nindustrial building. Web search confirmed 6801 English Ave = Kroger Bakery Indianapolis,\na food manufacturer (bread, cake, tortilla). The dark-roofed building on English Ave is\nthe bakery plant (audit target). A separate large white-roofed building to the SE\nshares yard pavement but is a distinct Kroger DC, explicitly excluded from this audit, as\nflagged in the prompt. The bakery is the western building cluster, with its dock face on\nthe NE wall and a large trailer drop yard immediately NE/E.",
         "mapsUrl": "https://www.google.com/maps/@39.759711,-86.048578,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -10551,7 +10551,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Given coords (33.922073, -117.939159) landed directly on the correct building. Web search confirms 850 S Cypress St is The Kroger Co. La Habra Bakery (wholesale bread/cake production; also surfaces as \"Ralphs Grocery\" bakery, an FCC industrial radio license \"KROGER LA HABRA BAKERY\", and a Kroger supplier listing). Satellite shows a single very large industrial building, ~750 ft E-W, with a fully solar-paneled roof and dense rooftop oven/HVAC exhaust equipment plus flour silos at the SE corner — unambiguously a large bakery plant, not an office. Coordinates accurate; no relocation needed.",
+        "dossierExcerpt": "Given coords (33.922073, -117.939159) landed directly on the correct building. Web search confirms 850 S Cypress St is The Kroger Co. La Habra Bakery (wholesale bread/cake production; also surfaces as \"Ralphs Grocery\" bakery, an FCC industrial radio license \"KROGER LA HABRA BAKERY\", and a Kroger supplier listing). Satellite shows a single very large industrial building, ~750 ft E-W, with a fully solar-paneled roof and dense rooftop oven/HVAC exhaust equipment plus flour silos at the SE corner, unambiguously a large bakery plant, not an office. Coordinates accurate; no relocation needed.",
         "mapsUrl": "https://www.google.com/maps/@33.92210,-117.93905,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -10801,7 +10801,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Supplied coords (45.405493, -122.539643) landed inside the large Fred Meyer\nindustrial superblock in Clackamas. That superblock holds two distinct\nstructures: a giant flat-roofed distribution center to the west, and the\nbakery plant in the center. I confirmed the bakery is the center building by\nits rooftop signature at z19 — dense process equipment (exhaust stacks, vents,\nHVAC units, roof penetrations) consistent with a baking plant, versus the DC's\nclean flat roof. Web search corroborated the address as Fred Meyer Bakery,\n16253 SE 122nd Ave (bread/bakery manufacturing), distinct from the Fred Meyer\nDistribution Center at 11500 SE Hwy 212. Locked center at 45.40547, -122.53965.",
+        "dossierExcerpt": "Supplied coords (45.405493, -122.539643) landed inside the large Fred Meyer\nindustrial superblock in Clackamas. That superblock holds two distinct\nstructures: a giant flat-roofed distribution center to the west, and the\nbakery plant in the center. I confirmed the bakery is the center building by\nits rooftop signature at z19, dense process equipment (exhaust stacks, vents,\nHVAC units, roof penetrations) consistent with a baking plant, versus the DC's\nclean flat roof. Web search corroborated the address as Fred Meyer Bakery,\n16253 SE 122nd Ave (bread/bakery manufacturing), distinct from the Fred Meyer\nDistribution Center at 11500 SE Hwy 212. Locked center at 45.40547, -122.53965.",
         "mapsUrl": "https://www.google.com/maps/@45.405470,-122.539650,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -11057,7 +11057,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coordinates (36.9722, -86.3870) were wrong — they landed in a rural\nresidential/farmland pocket ~12 km NE with no industrial building. Web search\nconfirmed Country Oven Bakery is a Kroger-owned bakery plant at 2840 Pioneer Dr,\n~450 employees, currently undergoing a $224M expansion. Geocoding pointed to the\nPioneer Drive / Kentucky Transpark industrial corridor (~36.948, -86.492). A\nsatellite sweep there located the true plant at 36.9485, -86.4905: a large\nmulti-section manufacturing building with rooftop process equipment, a cluster of\nwhite flour silos on the E face, an employee parking lot on the W, a rail spur,\nloading-dock banks on multiple faces, and a dedicated trailer drop yard on the S/SE.\nA Street View pano on Pioneer Drive (cKQtFg_0PL5uO-G5NL8fng, captured 2026-02)",
+        "dossierExcerpt": "The supplied coordinates (36.9722, -86.3870) were wrong, they landed in a rural\nresidential/farmland pocket ~12 km NE with no industrial building. Web search\nconfirmed Country Oven Bakery is a Kroger-owned bakery plant at 2840 Pioneer Dr,\n~450 employees, currently undergoing a $224M expansion. Geocoding pointed to the\nPioneer Drive / Kentucky Transpark industrial corridor (~36.948, -86.492). A\nsatellite sweep there located the true plant at 36.9485, -86.4905: a large\nmulti-section manufacturing building with rooftop process equipment, a cluster of\nwhite flour silos on the E face, an employee parking lot on the W, a rail spur,\nloading-dock banks on multiple faces, and a dedicated trailer drop yard on the S/SE.\nA Street View pano on Pioneer Drive (cKQtFg_0PL5uO-G5NL8fng, captured 2026-02)",
         "mapsUrl": "https://www.google.com/maps/@36.9485,-86.4905,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -11089,11 +11089,11 @@
           "shipRcvSeparate": "Distinct dock clusters on physically separate building faces (NW bank vs SE bank) suggest separated ship/receive flows; medium confidence.",
           "postGateStaging": "Large paved SE maneuvering/holding apron inside the property ahead of the SE dock bank acts as an internal staging area.",
           "fastLaneOpportunity": "Wide internal drives and the deep open SE apron give ample paved width to add a bypass/express lane.",
-          "railServed": "A rail spur enters the property from the E past the silos (parallel tracks confirmed in z19/z20 NE imagery) — classic bakery flour-rail service.",
+          "railServed": "A rail spur enters the property from the E past the silos (parallel tracks confirmed in z19/z20 NE imagery), classic bakery flour-rail service.",
           "dropYard": "Dedicated trailer-storage rows on the S/SE hold ~25-40 trailers, separate from active dock staging.",
-          "urbanRural": "Edge-of-town industrial park (Kentucky Transpark corridor) on the outskirts of Bowling Green, fronted by farmland and a divided highway — scored Rural per the small-town tiebreak.",
+          "urbanRural": "Edge-of-town industrial park (Kentucky Transpark corridor) on the outskirts of Bowling Green, fronted by farmland and a divided highway, scored Rural per the small-town tiebreak.",
           "siteAreaAcres": "~38 acres for the fenced operational footprint derived from the perimeter ring; the adjacent wooded NE buffer and the active $224M expansion parcel are excluded.",
-          "location": "Confirmed via web search (Kroger-owned Country Oven Bakery, 2840 Pioneer Dr, ~450 employees, $224M expansion) and satellite: the supplied coords (36.9722,-86.3870) landed in rural residential ~12km NE and were wrong; the real plant is at 36.9485,-86.4905 — a large multi-section manufacturing building with flour silos, a rail spur, employee parking, and a trailer drop yard."
+          "location": "Confirmed via web search (Kroger-owned Country Oven Bakery, 2840 Pioneer Dr, ~450 employees, $224M expansion) and satellite: the supplied coords (36.9722,-86.3870) landed in rural residential ~12km NE and were wrong; the real plant is at 36.9485,-86.4905, a large multi-section manufacturing building with flour silos, a rail spur, employee parking, and a trailer drop yard."
         }
       },
       {
@@ -11299,7 +11299,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Supplied coords (39.349828, -85.485327) landed on the correct property. Web\nsearch confirms KB Specialty Foods is a Kroger Manufacturing deli-salad and\ncake-icing plant operating in Greensburg since 1973 (~250-499 employees,\nappointment-based deliveries). Satellite shows a single large white-roof food\nplant with extensive rooftop refrigeration, an employee parking lot on the\nwest, and a fenced truck yard on the south/east. The \"K.B. Specialty Foods Co\"\nbuilding sign is visible in Street View at the NE entrance — positively the\nright building, not an office or unrelated parcel.",
+        "dossierExcerpt": "Supplied coords (39.349828, -85.485327) landed on the correct property. Web\nsearch confirms KB Specialty Foods is a Kroger Manufacturing deli-salad and\ncake-icing plant operating in Greensburg since 1973 (~250-499 employees,\nappointment-based deliveries). Satellite shows a single large white-roof food\nplant with extensive rooftop refrigeration, an employee parking lot on the\nwest, and a fenced truck yard on the south/east. The \"K.B. Specialty Foods Co\"\nbuilding sign is visible in Street View at the NE entrance, positively the\nright building, not an office or unrelated parcel.",
         "mapsUrl": "https://www.google.com/maps/@39.34955,-85.48590,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -11563,7 +11563,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coordinates (41.065045, -111.984294) and address point to the large\nKroger/Smith's industrial campus on the 500 N Sugar Street block in Layton, UT.\nThe campus holds three distinct facilities, which had to be separated:\n\n1. Smith's Distribution Center — the large solar-paneled building on the north\n   of the campus, with long dock bands; carries the \"Smith's\" wordmark (confirmed\n   via Street View on Sugar St, 2022-11).\n2. Layton Bakery (Bldg 5) — the target. The southern production building mass.\n   Positively identified by flour silos / process tanks on its roof (visible at\n   z20) and its dedicated north and south angled dock bands. This is the\n   building directly south of the shared truck yard, at 41.06435, -111.98370.\n3. Dairy / process plant — the building immediately east of the bakery, grey",
+        "dossierExcerpt": "The supplied coordinates (41.065045, -111.984294) and address point to the large\nKroger/Smith's industrial campus on the 500 N Sugar Street block in Layton, UT.\nThe campus holds three distinct facilities, which had to be separated:\n\n1. Smith's Distribution Center, the large solar-paneled building on the north\n   of the campus, with long dock bands; carries the \"Smith's\" wordmark (confirmed\n   via Street View on Sugar St, 2022-11).\n2. Layton Bakery (Bldg 5), the target. The southern production building mass.\n   Positively identified by flour silos / process tanks on its roof (visible at\n   z20) and its dedicated north and south angled dock bands. This is the\n   building directly south of the shared truck yard, at 41.06435, -111.98370.\n3. Dairy / process plant, the building immediately east of the bakery, grey",
         "mapsUrl": "https://www.google.com/maps/@41.06435,-111.98370,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -11588,7 +11588,7 @@
           }
         },
         "fieldNotes": {
-          "step0": "Confirmed Layton Bakery (Bldg 5) — the southern production building of the Kroger/Smith's Layton campus at 500 N Sugar St. Identified by the flour silos on its roof (z20 imagery) and its dedicated north + south angled dock bands, distinct from the solar-roofed Smith's DC to the north and the heavy-process dairy plant to the east. Supplied coords (41.065045,-111.984294) landed in the truck-circulation yard just off the bakery's north dock face; locked building center at 41.06435,-111.98370.",
+          "step0": "Confirmed Layton Bakery (Bldg 5), the southern production building of the Kroger/Smith's Layton campus at 500 N Sugar St. Identified by the flour silos on its roof (z20 imagery) and its dedicated north + south angled dock bands, distinct from the solar-roofed Smith's DC to the north and the heavy-process dairy plant to the east. Supplied coords (41.065045,-111.984294) landed in the truck-circulation yard just off the bakery's north dock face; locked building center at 41.06435,-111.98370.",
           "truckGate": "No barrier arm, swing/sliding gate, or guard booth across the campus access road where it meets Sugar Street. Street View (2022-11, pano CgSbthrtbapZsvp6GChSMA) down the west entrance drive shows an open, uncontrolled paved entrance into the parking/yard with only chain-link perimeter fencing flanking it. Open-access campus.",
           "guardShack": "No staffed booth at the property line. The only small freestanding structure inside the yard (~41.0653,-111.9846) is a yard-truck dispatch/maintenance office surrounded by yard tractors and employee cars, not an entrance checkpoint.",
           "remoteGs": "No truck gate exists, so no remote check-in either; false by rule.",
@@ -11598,12 +11598,12 @@
           "entryLanes": "Open entrance apron ~2 lanes wide; estimated from imagery, flagged uncertain.",
           "exitLanes": "Estimated equal to entry on the shared open drive; flagged uncertain.",
           "fastLaneOpportunity": "Wide open entrance apron and expansive internal paved yard leave ample unused width to channelize an express/bypass lane.",
-          "dockDoors": "Bakery has two angled dock bands (north + south faces) with many trailers backed in; counted ~45 doors total across both faces (25-50 band). Door count partly obscured by backed-in trailers — flagged uncertain.",
+          "dockDoors": "Bakery has two angled dock bands (north + south faces) with many trailers backed in; counted ~45 doors total across both faces (25-50 band). Door count partly obscured by backed-in trailers, flagged uncertain.",
           "dropArea": "Extensive trailer drop activity: a large angled trailer drop lot south/southeast of the bakery and a fan-shaped trailer yard north of it (shared campus), holding well over 50 parked trailers without tractors.",
           "shipRcvSeparate": "Bakery runs ship/receive from two physically separate dock banks on opposite (north and south) building faces.",
-          "urbanRural": "Inside the developed Layton/Salt Lake metro fabric — industrial corridor bordered immediately by residential subdivisions to the south and east; Urban.",
+          "urbanRural": "Inside the developed Layton/Salt Lake metro fabric, industrial corridor bordered immediately by residential subdivisions to the south and east; Urban.",
           "connectivityIssue": "Dense suburban metro setting; cellular coverage is good. False.",
-          "multipleFacilities": "Bakery sits on a multi-building campus (Smith's DC, bakery Bldg 5, and dairy/process plant), so the broader property is a campus — flagged true.",
+          "multipleFacilities": "Bakery sits on a multi-building campus (Smith's DC, bakery Bldg 5, and dairy/process plant), so the broader property is a campus, flagged true.",
           "scale": "No clear truck scale/weigh pad identified at the bakery's docks or the campus entrance; left false but flagged uncertain.",
           "railServed": "No rail spur runs into the bakery or the campus; false.",
           "siteAreaAcres": "~24 acres for the bakery building footprint plus its immediate dock aprons and adjacent drop lots; the full Kroger/Smith's campus is much larger. Approximate.",
@@ -11805,7 +11805,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Satellite probes z17→z20 at the supplied point landed directly on a large,\ncomplex-roof industrial building with multiple distinct roof sections, heavy\nrooftop refrigeration/condenser banks, and food-grade silos at the NW corner —\nthe signature of a multi-mini-plant commissary, not a clean DC box. Web search\nconfirmed: the Roundy's Commissary at 5500 52nd St, Kenosha is a ~117,000 sq ft\nfacility on ~17 acres, comprised of multiple mini-manufacturing rooms (baked\ngoods, deli processing, soups), running 24/7, supplying ~150 Pick 'n Save /\nMetro Market / Copps / Mariano's stores. Acquired by Kroger in 2015, now \"RCK\nFoods,\" one of Kroger's manufacturing plants. Building footprint, silos, and\nrooftop refrigeration all corroborate. Right building locked.",
+        "dossierExcerpt": "Satellite probes z17→z20 at the supplied point landed directly on a large,\ncomplex-roof industrial building with multiple distinct roof sections, heavy\nrooftop refrigeration/condenser banks, and food-grade silos at the NW corner ,\nthe signature of a multi-mini-plant commissary, not a clean DC box. Web search\nconfirmed: the Roundy's Commissary at 5500 52nd St, Kenosha is a ~117,000 sq ft\nfacility on ~17 acres, comprised of multiple mini-manufacturing rooms (baked\ngoods, deli processing, soups), running 24/7, supplying ~150 Pick 'n Save /\nMetro Market / Copps / Mariano's stores. Acquired by Kroger in 2015, now \"RCK\nFoods,\" one of Kroger's manufacturing plants. Building footprint, silos, and\nrooftop refrigeration all corroborate. Right building locked.",
         "mapsUrl": "https://www.google.com/maps/@42.590687,-87.874072,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -11832,7 +11832,7 @@
         "fieldNotes": {
           "truckGate": "Decorative black ornamental steel perimeter fence runs the full north/NE public-facing edge (verified in 2023-06 Street View), but the working truck entrances off the internal industrial-park drives (west drive and SW front loop) are open paved aprons with no barrier arm or sliding gate. Controlled-perimeter feel without an actual checkpoint at the truck lanes; classed truckGate=false.",
           "guardShack": "No guard booth at any truck entrance in 2012/2023/2024 Street View or satellite. Listed uncertain only because fence implies some access control.",
-          "dockDoorCount": "Estimate from z20 overhead — north face shows a continuous dock bank with ~11 trailers backed in plus open positions; banded 10-25.",
+          "dockDoorCount": "Estimate from z20 overhead, north face shows a continuous dock bank with ~11 trailers backed in plus open positions; banded 10-25.",
           "dropYard": "Large open paved maneuvering/drop yard north of the dock face, fenced, holds parked trailers separate from active dock apron.",
           "fastLaneOpportunity": "Very wide open paved entrances and yard apron; ample room to add a marked express lane.",
           "urbanRural": "Inside Kenosha city industrial park, dense residential immediately south across 52nd St; classed Urban."
@@ -12043,7 +12043,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Supplied coords (36.498607, -86.87002) landed inside a large industrial complex.\nWeb search confirms Delight Products is a Kroger manufacturing division (grocery /\nsnack-food production) at 1200 Industrial Dr, Springfield TN. The address resolves to\nthe Kroger Springfield manufacturing campus — a multi-building site combining an\nolder manufacturing cluster (NW/W) and a large modern secured plant/DC building (SE).\nI audited the dominant secured building: the fully perimeter-fenced SE structure\nwith the south dock band, SE drop yard, and Kroger branding on the office face. This is\nthe clear freight-operations facility consistent with the \"Grocery Plant\" type.",
+        "dossierExcerpt": "Supplied coords (36.498607, -86.87002) landed inside a large industrial complex.\nWeb search confirms Delight Products is a Kroger manufacturing division (grocery /\nsnack-food production) at 1200 Industrial Dr, Springfield TN. The address resolves to\nthe Kroger Springfield manufacturing campus, a multi-building site combining an\nolder manufacturing cluster (NW/W) and a large modern secured plant/DC building (SE).\nI audited the dominant secured building: the fully perimeter-fenced SE structure\nwith the south dock band, SE drop yard, and Kroger branding on the office face. This is\nthe clear freight-operations facility consistent with the \"Grocery Plant\" type.",
         "mapsUrl": "https://www.google.com/maps/@36.49850,-86.86720,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -12268,7 +12268,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Given address: 300 N L.P. Miller St, Murray, KY 42071. Supplied approx coords\n  (36.611222, -88.328239) landed ~2.5 km WEST in a residential block next to\n  Murray State University — wrong building.\n- Web research (Macrae's / Kentucky Cabinet for Economic Development / foodproduction.us)\n  confirms Kenlake Foods is a wholly-owned Kroger manufacturing subsidiary\n  (dry mixes, drink mixes, oatmeal, salted nuts; $24M expansion announced 2023)\n  and gave coords ~36.6146, -88.2994.\n- Satellite probing locked the real plant at 36.6122, -88.2988 — a large,\n  contiguous multi-building industrial manufacturing complex (sawtooth-roof\n  production hall + north flat-roof warehouse) on the east edge of downtown\n  Murray, bounded by Olive St (N) and the N L.P. Miller / Maple St grid.\n  Positively the right facility (large beverage/food manufacturing plant).",
+        "dossierExcerpt": "- Given address: 300 N L.P. Miller St, Murray, KY 42071. Supplied approx coords\n  (36.611222, -88.328239) landed ~2.5 km WEST in a residential block next to\n  Murray State University, wrong building.\n- Web research (Macrae's / Kentucky Cabinet for Economic Development / foodproduction.us)\n  confirms Kenlake Foods is a wholly-owned Kroger manufacturing subsidiary\n  (dry mixes, drink mixes, oatmeal, salted nuts; $24M expansion announced 2023)\n  and gave coords ~36.6146, -88.2994.\n- Satellite probing locked the real plant at 36.6122, -88.2988, a large,\n  contiguous multi-building industrial manufacturing complex (sawtooth-roof\n  production hall + north flat-roof warehouse) on the east edge of downtown\n  Murray, bounded by Olive St (N) and the N L.P. Miller / Maple St grid.\n  Positively the right facility (large beverage/food manufacturing plant).",
         "mapsUrl": "https://www.google.com/maps/@36.6122,-88.2988,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -12489,7 +12489,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coords (34.132161, -80.860521) land on the east edge of a large\nwhite-roofed manufacturing building. Web research confirms Pontiac Foods at 813\nBookman Rd is a Kroger Manufacturing division that produces coffee, spice,\nrice & beans, and convenience pouch products (gravy/dressing/soup mixes) — a true\nfood-manufacturing plant, consistent with the building footprint. The\nwhite-roofed building on the WEST is Pontiac Foods. A separate, newer, longer\nwarehouse sits immediately to the EAST across a shared access drive (a distinct\noperation, not part of this parcel) — it was excluded from the geofence.",
+        "dossierExcerpt": "The supplied coords (34.132161, -80.860521) land on the east edge of a large\nwhite-roofed manufacturing building. Web research confirms Pontiac Foods at 813\nBookman Rd is a Kroger Manufacturing division that produces coffee, spice,\nrice & beans, and convenience pouch products (gravy/dressing/soup mixes), a true\nfood-manufacturing plant, consistent with the building footprint. The\nwhite-roofed building on the WEST is Pontiac Foods. A separate, newer, longer\nwarehouse sits immediately to the EAST across a shared access drive (a distinct\noperation, not part of this parcel), it was excluded from the geofence.",
         "mapsUrl": "https://www.google.com/maps/@34.13200,-80.86060,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -12720,7 +12720,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coords (39.109302, -84.550867) landed directly on a dense, contiguous\nindustrial complex of large connected manufacturing/warehouse buildings running NW-SE,\nwith trailers backed into docks and a central row of parked drop trailers — consistent\nwith a grocery manufacturing plant. Web search confirms **1034 Depot St = \"Kroger\nManufacturing\"** (the State Avenue Plant), open 24/7, a receiving/distribution +\nmanufacturing facility (Waze/Loc8NearMe/Chamber listings, Kroger Manufacturing Division\nplant address list). Street View of the main entrance shows the historic white-brick\nKroger plant office flying multiple national flags — positively the right building.\nThe large tank/clarifier facility immediately east is the Mill Creek water-treatment\nplant, NOT Kroger, and is excluded from the geofence.",
+        "dossierExcerpt": "The supplied coords (39.109302, -84.550867) landed directly on a dense, contiguous\nindustrial complex of large connected manufacturing/warehouse buildings running NW-SE,\nwith trailers backed into docks and a central row of parked drop trailers, consistent\nwith a grocery manufacturing plant. Web search confirms **1034 Depot St = \"Kroger\nManufacturing\"** (the State Avenue Plant), open 24/7, a receiving/distribution +\nmanufacturing facility (Waze/Loc8NearMe/Chamber listings, Kroger Manufacturing Division\nplant address list). Street View of the main entrance shows the historic white-brick\nKroger plant office flying multiple national flags, positively the right building.\nThe large tank/clarifier facility immediately east is the Mill Creek water-treatment\nplant, NOT Kroger, and is excluded from the geofence.",
         "mapsUrl": "https://www.google.com/maps/@39.10900,-84.55050,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -13019,7 +13019,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Supplied coordinates (31.599739, -84.103252) landed directly on the plant. Confirmed the building three ways:\n1. Web search: Tara Foods is Kroger's Albany, GA plant at 1900 Cowles Lane (produces all of Kroger's store-label peanut butter, oils, juices, sauces — >8M lbs/month). Address matches Panjiva / Albany Chamber listings.\n2. Street View pano O6oEgEnBB6Bx7UNIGH3Szg (2026-03, Cowles Lane) shows the \"TARA FOODS\" name on the building face.\n3. Satellite z18-z20 shows a large multi-section manufacturing plant with silos at the SW corner, dock banks, and large trailer drop yards east — consistent with a food-manufacturing plant, not an office.",
+        "dossierExcerpt": "Supplied coordinates (31.599739, -84.103252) landed directly on the plant. Confirmed the building three ways:\n1. Web search: Tara Foods is Kroger's Albany, GA plant at 1900 Cowles Lane (produces all of Kroger's store-label peanut butter, oils, juices, sauces, >8M lbs/month). Address matches Panjiva / Albany Chamber listings.\n2. Street View pano O6oEgEnBB6Bx7UNIGH3Szg (2026-03, Cowles Lane) shows the \"TARA FOODS\" name on the building face.\n3. Satellite z18-z20 shows a large multi-section manufacturing plant with silos at the SW corner, dock banks, and large trailer drop yards east, consistent with a food-manufacturing plant, not an office.",
         "mapsUrl": "https://www.google.com/maps/@31.59955,-84.10295,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -13051,7 +13051,7 @@
           "fastLaneOpportunity": "Wide unpaved/gravel gate apron and large internal yard with ample paved width to add a bypass lane.",
           "urbanRural": "Edge-of-town Albany GA; surrounded by light residential to the west and open fields/woods, small-town industrial. Rural per rubric.",
           "buildingCount": "Main plant building plus a north annex/covered structure and adjacent older warehouses on the same fenced parcel.",
-          "shipRcvSeparate": "Docks on east face and south/SW face; could be ship/rcv split but not clearly distinct clusters from imagery — left false, flagged uncertain."
+          "shipRcvSeparate": "Docks on east face and south/SW face; could be ship/rcv split but not clearly distinct clusters from imagery, left false, flagged uncertain."
         }
       },
       {
@@ -13875,7 +13875,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Kroger Mid-Atlantic Distribution Center — 3800 Garman Rd, Salem, VA 24153\nType: Distribution Center (grocery; reefer + dry)\nResolved center: 37.27620, -80.12000 | mapsUrl in JSON",
+        "dossierExcerpt": "Kroger Mid-Atlantic Distribution Center, 3800 Garman Rd, Salem, VA 24153\nType: Distribution Center (grocery; reefer + dry)\nResolved center: 37.27620, -80.12000 | mapsUrl in JSON",
         "mapsUrl": "https://www.google.com/maps/@37.27620,-80.12000,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -14175,7 +14175,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "- Facility: Kroger Distribution Center (\"Gellhorn Warehouse\"), 701 Gellhorn Dr, Houston, TX 77029 — Kroger's primary grocery DC for the Houston region.\n- Resolved center: 29.78420, -95.27050 (main DC complex). The supplied point (29.783452, -95.269533) landed in the active east truck/trailer yard, SE of the main building; the building cluster is NW of it.\n- How confirmed: Web search confirmed 701 Gellhorn Dr = Kroger DC / Gellhorn Warehouse (Yelp, Kroger logistics page, Manta, Chamber of Commerce). Satellite z16–z18 around the point showed a very large multi-wing white-roofed grocery DC with dock canopies, an enormous trailer drop yard, and a private tractor fleet — consistent with a primary grocery DC.",
+        "dossierExcerpt": "- Facility: Kroger Distribution Center (\"Gellhorn Warehouse\"), 701 Gellhorn Dr, Houston, TX 77029, Kroger's primary grocery DC for the Houston region.\n- Resolved center: 29.78420, -95.27050 (main DC complex). The supplied point (29.783452, -95.269533) landed in the active east truck/trailer yard, SE of the main building; the building cluster is NW of it.\n- How confirmed: Web search confirmed 701 Gellhorn Dr = Kroger DC / Gellhorn Warehouse (Yelp, Kroger logistics page, Manta, Chamber of Commerce). Satellite z16–z18 around the point showed a very large multi-wing white-roofed grocery DC with dock canopies, an enormous trailer drop yard, and a private tractor fleet, consistent with a primary grocery DC.",
         "mapsUrl": "https://www.google.com/maps/@29.78420,-95.27050,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -14441,7 +14441,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coords (42.188526, -83.377667) land directly on a single very large\nwhite-roofed industrial building. Web research (Penske Logistics / Crain's / DC\nVelocity, June 2019) confirms this is the build-to-suit **606,000 sq ft fresh\n(freezer/cooler) distribution center, ~47-acre parcel, 105 loading docks**,\noperated for The Kroger Co. of Michigan (Penske until 2022, then KLS Logistics).\nThis is distinct from the nearby Ocado CFC on Wahrman Rd — that is a different,\nseparate building. The smaller building to the WEST of the Kroger DC (with its\nown parking, seen in the wide z16 frames) is a separate parcel/tenant, not part\nof this audit. The Kroger FRESH DC is the large center building; locked.",
+        "dossierExcerpt": "The supplied coords (42.188526, -83.377667) land directly on a single very large\nwhite-roofed industrial building. Web research (Penske Logistics / Crain's / DC\nVelocity, June 2019) confirms this is the build-to-suit **606,000 sq ft fresh\n(freezer/cooler) distribution center, ~47-acre parcel, 105 loading docks**,\noperated for The Kroger Co. of Michigan (Penske until 2022, then KLS Logistics).\nThis is distinct from the nearby Ocado CFC on Wahrman Rd, that is a different,\nseparate building. The smaller building to the WEST of the Kroger DC (with its\nown parking, seen in the wide z16 frames) is a separate parcel/tenant, not part\nof this audit. The Kroger FRESH DC is the large center building; locked.",
         "mapsUrl": "https://www.google.com/maps/@42.18845,-83.37720,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -14727,7 +14727,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The supplied approximate point (35.012787, -89.86689) landed on the NE edge of a large\nwhite-roofed industrial complex in the Holmes/Bledsoe Rd industrial corridor of\nsoutheast Memphis. Satellite probes (z15–z19) revealed a major L-shaped distribution\nbuilding with an enormous trailer drop yard — consistent with a grocery DC, not an\noffice. Web search corroborated 5079 Bledsoe Rd as the **Kroger Delta Memphis\nDistribution Center** (24/7 operation, ~250–499 staff, gated, appointment-only, guard\nshack, outside overnight parking/staging, 3–5 hr driver wait times). Locked center at\n35.0112, -89.8688.",
+        "dossierExcerpt": "The supplied approximate point (35.012787, -89.86689) landed on the NE edge of a large\nwhite-roofed industrial complex in the Holmes/Bledsoe Rd industrial corridor of\nsoutheast Memphis. Satellite probes (z15–z19) revealed a major L-shaped distribution\nbuilding with an enormous trailer drop yard, consistent with a grocery DC, not an\noffice. Web search corroborated 5079 Bledsoe Rd as the **Kroger Delta Memphis\nDistribution Center** (24/7 operation, ~250–499 staff, gated, appointment-only, guard\nshack, outside overnight parking/staging, 3–5 hr driver wait times). Locked center at\n35.0112, -89.8688.",
         "mapsUrl": "https://www.google.com/maps/@35.0112,-89.8688,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -15248,7 +15248,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coords (43.060074, -88.477019) landed directly on a very large\nmulti-section industrial building with a massive south-facing dock apron and\nrows of parked trailers — unambiguously a grocery DC. Web research confirms\nRoundy's 1,120 Distribution Ct, a 1.1M sq ft DC built 2005, ~800 employees,\nserving Pick 'n Save / Mariano's / Metro Market for the Kroger Co. (Roundy's is\na wholly-owned Kroger subsidiary; the building was sold to Scout Cold Logistics\nfor $120M). This is the correct building; no relocation needed.",
+        "dossierExcerpt": "The supplied coords (43.060074, -88.477019) landed directly on a very large\nmulti-section industrial building with a massive south-facing dock apron and\nrows of parked trailers, unambiguously a grocery DC. Web research confirms\nRoundy's 1,120 Distribution Ct, a 1.1M sq ft DC built 2005, ~800 employees,\nserving Pick 'n Save / Mariano's / Metro Market for the Kroger Co. (Roundy's is\na wholly-owned Kroger subsidiary; the building was sold to Scout Cold Logistics\nfor $120M). This is the correct building; no relocation needed.",
         "mapsUrl": "https://www.google.com/maps/@43.0598,-88.4762,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -15515,7 +15515,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied coords (46.624995, -122.916588) landed on the west half of a very\nlarge white/cream-roofed distribution building. Web search confirmed \"Fred\nMeyer Inc Distribution Center, 222 Maurin Rd, Chehalis WA\" (Kroger retail\ndistribution, 24/7, phone 360-740-6600). Satellite z16-18 shows a single ~700m\nE-W building with continuous dock banks on the north and south faces and\ntrailer yards wrapping it — consistent with a regional retail DC. The supplied\nlng was ~250m west of true building center; recentered to -122.9138.\n\nTwo adjacent parcels are NOT part of the DC and were excluded: a gray-roof\nJR Furniture warehouse to the west (its own sign + drive at the far west of\nMaurin Rd), and a tank/clarifier wastewater/processing plant to the south.\nAn electrical substation sits SW of the lot.",
+        "dossierExcerpt": "The supplied coords (46.624995, -122.916588) landed on the west half of a very\nlarge white/cream-roofed distribution building. Web search confirmed \"Fred\nMeyer Inc Distribution Center, 222 Maurin Rd, Chehalis WA\" (Kroger retail\ndistribution, 24/7, phone 360-740-6600). Satellite z16-18 shows a single ~700m\nE-W building with continuous dock banks on the north and south faces and\ntrailer yards wrapping it, consistent with a regional retail DC. The supplied\nlng was ~250m west of true building center; recentered to -122.9138.\n\nTwo adjacent parcels are NOT part of the DC and were excluded: a gray-roof\nJR Furniture warehouse to the west (its own sign + drive at the far west of\nMaurin Rd), and a tank/clarifier wastewater/processing plant to the south.\nAn electrical substation sits SW of the lot.",
         "mapsUrl": "https://www.google.com/maps/@46.62475,-122.9138,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -15844,7 +15844,7 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "The supplied coords (41.770994, -87.817353) were ~2 km west, landing on a refinery/tank-farm and a residential strip — not a food production building. Web search resolved the exact address to 6901 W 65th St, Bedford Park IL (Home Chef opened this ~103,000 sq ft production center in Feb 2018; the parcel is registered to Relish Labs LLC in the Village of Bedford Park business directory, and Waze/Apple Maps pin the same address). Note 6901 W 65th is also associated with a Lineage cold-storage facility — the address corridor hosts multiple food/cold buildings.\n\nSatellite around the geocoded address showed an industrial corridor S of the W 65th St arterial. The audited building is the tan/white modern spec warehouse on the east side of the N-S service road, S of 65th St: a 2018-era white panel building with blue accent stripes, matching the Home Chef facade. A \"For Lease\" sign on the perimeter fence suggests part of the building may be marketed, but address + facade + build year align with the Home Chef production center.",
+        "dossierExcerpt": "The supplied coords (41.770994, -87.817353) were ~2 km west, landing on a refinery/tank-farm and a residential strip, not a food production building. Web search resolved the exact address to 6901 W 65th St, Bedford Park IL (Home Chef opened this ~103,000 sq ft production center in Feb 2018; the parcel is registered to Relish Labs LLC in the Village of Bedford Park business directory, and Waze/Apple Maps pin the same address). Note 6901 W 65th is also associated with a Lineage cold-storage facility, the address corridor hosts multiple food/cold buildings.\n\nSatellite around the geocoded address showed an industrial corridor S of the W 65th St arterial. The audited building is the tan/white modern spec warehouse on the east side of the N-S service road, S of 65th St: a 2018-era white panel building with blue accent stripes, matching the Home Chef facade. A \"For Lease\" sign on the perimeter fence suggests part of the building may be marketed, but address + facade + build year align with the Home Chef production center.",
         "mapsUrl": "https://www.google.com/maps/@41.77270,-87.79190,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -15871,11 +15871,11 @@
         "fieldNotes": {
           "location": "Confirmed 6901 W 65th St, Bedford Park IL 60638 (Relish Labs LLC dba Home Chef) via web search + village business registry; given coords were ~2km W on a refinery. Audited building is the tan/white spec warehouse on the E side of the N-S service road, S of W 65th St.",
           "truckGate": "West face fronts a fenced truck court; chain-link sliding gate across the truck drive visible in Street View (pano jedZ3iuqhaTS5D_zsovA_A).",
-          "guardShack": "No staffed booth visible at the gate in Street View or satellite; gate reads as unmanned, hence remoteGs true. Low confidence — pano coverage is from the public road, not inside the court.",
-          "dockDoors": "Full dock bank along the W building wall with trailers backed in; ~28 doors estimated from z18/z19 satellite — band 25-50.",
+          "guardShack": "No staffed booth visible at the gate in Street View or satellite; gate reads as unmanned, hence remoteGs true. Low confidence, pano coverage is from the public road, not inside the court.",
+          "dockDoors": "Full dock bank along the W building wall with trailers backed in; ~28 doors estimated from z18/z19 satellite, band 25-50.",
           "dropArea": "10-25 trailers parked along the W truck court; some appear dropped (no tractor) but resolution makes the dropped/live split uncertain.",
           "postGateStaging": "Paved truck court between the gate and the dock wall provides interior holding room.",
-          "urbanRural": "Dense Chicago metro fabric — residential blocks directly N/W, contiguous industrial corridor; clearly Urban.",
+          "urbanRural": "Dense Chicago metro fabric, residential blocks directly N/W, contiguous industrial corridor; clearly Urban.",
           "buildExterior": "Modern 2018-era white panel building with blue accent stripes; a leasing/'For Lease' sign on the perimeter fence suggests part of the building may be marketed, but the address and facade match the Home Chef production center."
         }
       },
@@ -16212,7 +16212,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Resolved: 2120 Skyview Dr, Lithia Springs / Douglasville, GA 30122. Center ~33.7828, -84.61625.\n- The supplied coords (33.785256, -84.644728) landed ~2.5 km west in a residential subdivision (confirmed wrong via z17 satellite). Web search (PRNewswire, Progressive Grocer) confirmed the address as 2120 Skyview Dr, a 181,000 sq ft single-tenant meal-kit production center (Home Chef, a Kroger subsidiary; ~700 jobs; full-service kitchen for cooking/batch ingredients).\n- Geocoded 2120 Skyview Dr → 33.7828, -84.6163. Satellite there shows a large light-roof industrial building. Street View shows the painted \"2120\" address on the front facade — positive ID.",
+        "dossierExcerpt": "- Resolved: 2120 Skyview Dr, Lithia Springs / Douglasville, GA 30122. Center ~33.7828, -84.61625.\n- The supplied coords (33.785256, -84.644728) landed ~2.5 km west in a residential subdivision (confirmed wrong via z17 satellite). Web search (PRNewswire, Progressive Grocer) confirmed the address as 2120 Skyview Dr, a 181,000 sq ft single-tenant meal-kit production center (Home Chef, a Kroger subsidiary; ~700 jobs; full-service kitchen for cooking/batch ingredients).\n- Geocoded 2120 Skyview Dr → 33.7828, -84.6163. Satellite there shows a large light-roof industrial building. Street View shows the painted \"2120\" address on the front facade, positive ID.",
         "mapsUrl": "https://www.google.com/maps/@33.7828,-84.61625,400m/data=!3m1!1e3",
         "tiles": {
           "17": {

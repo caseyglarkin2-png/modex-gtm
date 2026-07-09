@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Sprint G7 — IndustryFlickBar.
+ * Sprint G7, IndustryFlickBar.
  *
  * Floating bottom-right bar on /demo/[slug] that lets a rep flick
  * between the 11 industry templates without backing out to the
@@ -18,7 +18,7 @@
  *     does not warm 2 deep routes per load (G7.T2b)
  *   - aria-live="polite" region announces the slug change to AT
  *   - Visual hide on scroll-down past 200px, re-show on scroll-up
- *     of ≥ 8px. `aria-hidden` is NOT toggled — the bar stays
+ *     of ≥ 8px. `aria-hidden` is NOT toggled, the bar stays
  *     keyboard-focusable + the [ ] shortcuts stay live (G7.T9)
  *   - Respects safe-area-inset-bottom, sits ABOVE any existing
  *     sticky CTA via z-index ordering
@@ -51,7 +51,7 @@ function isDemoActive(): boolean {
 }
 
 function trackFlick(direction: 'prev' | 'next', toSlug: string): void {
-  // G.T2 — haptic pulse on supported devices (mobile). iframe-safe and
+  // G.T2, haptic pulse on supported devices (mobile). iframe-safe and
   // no-throw in restricted contexts. Fires regardless of demo mode so a
   // rep gets the same tactile feedback in a meeting; no-op on desktop.
   try {
@@ -59,9 +59,9 @@ function trackFlick(direction: 'prev' | 'next', toSlug: string): void {
       navigator.vibrate(10);
     }
   } catch {
-    // vibrate unavailable / blocked — ignore.
+    // vibrate unavailable / blocked, ignore.
   }
-  if (isDemoActive()) return; // analytics events spec — suppressed under demo
+  if (isDemoActive()) return; // analytics events spec, suppressed under demo
   try {
     window.dispatchEvent(
       new CustomEvent('yf:event', {
@@ -100,7 +100,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
     setDemoSuffix(readDemoSuffix());
   }, []);
 
-  // E.T1 — first-visit discovery hint. Shows a chip above the bar for
+  // E.T1, first-visit discovery hint. Shows a chip above the bar for
   // 5 seconds on the first microsite view in this browser profile, then
   // sets a localStorage flag so it never reappears. Dismisses early on
   // any key press or click.
@@ -109,7 +109,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
     try {
       if (window.localStorage.getItem('yf-flickbar-hint-seen')) return undefined;
     } catch {
-      return undefined; // storage blocked — skip the hint entirely.
+      return undefined; // storage blocked, skip the hint entirely.
     }
     setShowHint(true);
     let done = false;
@@ -202,7 +202,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
 
   return (
     <>
-      {/* aria-live region — announces slug changes to AT. */}
+      {/* aria-live region, announces slug changes to AT. */}
       <div
         ref={announceRef}
         role="status"
@@ -211,7 +211,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
         className="sr-only"
       />
 
-      {/* E.T1 — first-visit discovery hint, sits just above the bar. */}
+      {/* E.T1, first-visit discovery hint, sits just above the bar. */}
       {showHint && !collapsed ? (
         <div
           data-flick-hint=""

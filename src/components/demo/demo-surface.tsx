@@ -31,14 +31,14 @@ type View = 'atlas' | 'sim' | 'replay';
 interface Props {
   pack: DemoPack;
   mode: 'standalone' | 'embed';
-  /** Initial selected site — populated from `?site=` search param. */
+  /** Initial selected site, populated from `?site=` search param. */
   initialSiteId?: string | null;
   /** When true, auto-open the selected site in replay mode (D3.4 `?play=1`). */
   autoPlay?: boolean;
-  /** Initial view — populated from `?view=` search param. */
+  /** Initial view, populated from `?view=` search param. */
   initialView?: View;
   /**
-   * Sprint 2.5 — set when the prospect arrived via the /demo industry
+   * Sprint 2.5, set when the prospect arrived via the /demo industry
    * gallery (?from=gallery). Renders a template-framing strip and
    * softens the account-specific brand chrome, so a casual gallery
    * visitor sees "this is a sample for [Industry] operators" instead
@@ -50,7 +50,7 @@ interface Props {
    * `/gallery-thumbs/coca-cola.png`). When present, renders a hero
    * section between the header and the atlas/sim view. The parent
    * page resolves this server-side so non-anchor packs (no thumb yet)
-   * fall through without a hero — no client-side flash, no 404 image.
+   * fall through without a hero, no client-side flash, no 404 image.
    */
   featuredSiteThumbSrc?: string;
 }
@@ -67,13 +67,13 @@ export function DemoSurface({
   // Simulator is a stress-test expander now (not a top-level mode), default closed.
   const [simOpen, setSimOpen] = useState(false);
   // Once a user manually closes the auto-play, we should not re-open it on
-  // the next click — track whether the autoPlay flag has been consumed.
+  // the next click, track whether the autoPlay flag has been consumed.
   const [autoPlayConsumed, setAutoPlayConsumed] = useState(false);
   const shouldAutoPlay = autoPlay && !autoPlayConsumed && selectedSiteId === initialSiteId;
 
   const toggleArchetype = (archetype: ArchetypeId) => {
     setArchetypeFilter((prev) => {
-      // Treat "no filter" as "all selected" — clicking one inverts to single-select
+      // Treat "no filter" as "all selected", clicking one inverts to single-select
       const current = prev ?? new Set(Object.keys(pack.network.archetypeMix) as ArchetypeId[]);
       const next = new Set(current);
       if (next.has(archetype)) {
@@ -81,7 +81,7 @@ export function DemoSurface({
       } else {
         next.add(archetype);
       }
-      // Empty set means "show none" — reset to null (= all) on second toggle of last selected
+      // Empty set means "show none", reset to null (= all) on second toggle of last selected
       if (next.size === 0) return null;
       // If all archetypes are now selected, drop the filter entirely to keep state clean
       const total = Object.keys(pack.network.archetypeMix).length;
@@ -100,7 +100,7 @@ export function DemoSurface({
   const containerGroundSlots = pack.network.totals.containerGroundSlots;
   const trailerSpotsLabel = containerGroundSlots != null ? 'trailer/chassis spots' : 'trailer spots';
 
-  // Sprint 2.5 — resolve the industry label for the template strip
+  // Sprint 2.5, resolve the industry label for the template strip
   // when the prospect arrived from the gallery. Fall back to the
   // pack's archetype if the slug isn't in the anchor list (shouldn't
   // happen for the 11 anchors, but handles edge cases like an email
@@ -109,14 +109,14 @@ export function DemoSurface({
   const galleryIndustryLabel = galleryIndustry?.label ?? pack.account.archetype;
   const galleryHeadline = `Sample ${galleryIndustryLabel} Template`;
 
-  // E.T4 — persistent breadcrumb. Resolve the anchor (for the 11 gallery
+  // E.T4, persistent breadcrumb. Resolve the anchor (for the 11 gallery
   // industries) so the middle crumb links to that archetype's filtered
   // gallery. Non-anchor packs show "All industries · {brand}" only.
   const anchor = getIndustryFromSlug(pack.account.slug);
   const anchorArchetype = anchor?.archetype ?? null;
   const archetypeTopLabel = anchorArchetype ? ARCHETYPE_LABELS_TOP[anchorArchetype] : null;
 
-  // F.T3 — audit-confidence stamp. Plurality vote across site confidence
+  // F.T3, audit-confidence stamp. Plurality vote across site confidence
   // (ties favor the higher rating) so the stamp reflects the network's
   // dominant audit quality. (Note: the plan's literal "any low -> Low"
   // would render almost every multi-site pack Low and defeat the trust
@@ -145,7 +145,7 @@ export function DemoSurface({
     return { level, avgResolved };
   })();
 
-  // H.T5 — per-anchor booking link. When a HubSpot Scheduling slug is
+  // H.T5, per-anchor booking link. When a HubSpot Scheduling slug is
   // configured, the CTA opens the meetings embed with the anchor name as
   // a prefilled prospect_site field (the rep sees it on the booking
   // notification). Falls back to the contact form until Casey sets the
@@ -159,7 +159,7 @@ export function DemoSurface({
     ? `https://meetings.hubspot.com/${meetingsSlug}?prospect_site=${encodeURIComponent(displayName)}`
     : `https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`;
 
-  // Scope blurb for the header — be honest when our audit covers a
+  // Scope blurb for the header, be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
   // sites; the global footprint is ~160. Saying just "22 facilities"
   // reads to a Mondelez exec as "you mapped 14% of our network and are
@@ -181,7 +181,7 @@ export function DemoSurface({
         ? `${siteCount} of ~${scopeFootprint} facilities${scopeSuffix}`
         : `${siteCount} facilities audited`;
 
-  // Layer 3 — core-sample framing. When the pack carries a sourced network
+  // Layer 3, core-sample framing. When the pack carries a sourced network
   // denominator, the audited sites are framed as a deliberate CORE SAMPLE of
   // the real network ("we core-sampled N of ~M sites"), with the rationale and
   // a cited footnote. When `networkCount` is absent (most packs, pre-Phase 3),
@@ -211,7 +211,7 @@ export function DemoSurface({
   const coreSample =
     typeof networkCount === 'number' && networkCount > 0
       ? {
-          line: `We core-sampled ${siteCount.toLocaleString()} of ~${networkCount.toLocaleString()} ${facilityNoun}${sampleRationale ? ` — ${sampleRationale}` : ''}`,
+          line: `We core-sampled ${siteCount.toLocaleString()} of ~${networkCount.toLocaleString()} ${facilityNoun}${sampleRationale ? `, ${sampleRationale}` : ''}`,
           footnote: networkCountSource
             ? `Network size: ${networkCountSource}${networkCountAsOf ? ` (${networkCountAsOf})` : ''}`
             : null,
@@ -224,7 +224,7 @@ export function DemoSurface({
       style={mode === 'embed' ? { background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' } : undefined}
     >
       {/*
-       * Sprint 2.5 — template framing strip. Only shows when the prospect
+       * Sprint 2.5, template framing strip. Only shows when the prospect
        * arrived from the /demo industry gallery. Sets the expectation that
        * this view is a sample rendered from another company's data, not
        * the visitor's own demo.
@@ -245,7 +245,7 @@ export function DemoSurface({
           </Link>
         </div>
       )}
-      {/* Header — only in standalone mode */}
+      {/* Header, only in standalone mode */}
       {mode === 'standalone' && (
         <header className="shrink-0 border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]">
           {/* flex-wrap + min-w-0: at phone widths the title block otherwise
@@ -253,7 +253,7 @@ export function DemoSurface({
               pushed off-canvas (390px viewport scrolled 598px wide). */}
           <div className="mx-auto flex max-w-5xl flex-wrap items-end justify-between gap-x-6 gap-y-3 px-5 py-4">
             <div className="min-w-0">
-              {/* E.T4 — persistent breadcrumb. Keeps every microsite one
+              {/* E.T4, persistent breadcrumb. Keeps every microsite one
                   click from the gallery and its archetype, so no microsite
                   is a dead-end. */}
               <nav
@@ -283,7 +283,7 @@ export function DemoSurface({
                 <span className="text-white/25" aria-hidden>·</span>
                 <span className="text-white/70" aria-current="page">{displayName}</span>
               </nav>
-              {/* F.T3 — audit-confidence stamp. */}
+              {/* F.T3, audit-confidence stamp. */}
               {confidenceStamp ? (
                 <div
                   data-confidence-stamp
@@ -326,7 +326,7 @@ export function DemoSurface({
                   </>
                 ) : null}
               </p>
-              {/* Layer 3 — core-sample line. Only renders when the pack carries
+              {/* Layer 3, core-sample line. Only renders when the pack carries
                   a sourced network denominator; frames the audit as a deliberate
                   representative sample of the real network, with a cited
                   footnote. Degrades to nothing without `networkCount`. */}
@@ -342,7 +342,7 @@ export function DemoSurface({
                   )}
                 </div>
               )}
-              {/* A.T5 — brand attribution strip. Sits below the scope/metrics
+              {/* A.T5, brand attribution strip. Sits below the scope/metrics
                   subhead, above any gallery-framing line. Clarifies that we
                   are not the prospect's vendor + names where the data came
                   from. Quiets the rare "wait, are you Coke's vendor?" beat
@@ -362,7 +362,7 @@ export function DemoSurface({
                 </p>
               )}
             </div>
-            {/* Next-action cluster — two canonical CTAs only: primary is the
+            {/* Next-action cluster, two canonical CTAs only: primary is the
                 low-friction reply ("Are these your yards?"), secondary is Run your
                 ROI. Memo + Share demote to quiet text links. (Redesign §0/CTA) */}
             <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
@@ -400,7 +400,7 @@ export function DemoSurface({
         </header>
       )}
 
-      {/* L.T5 — mobile sticky next-action bar. The header CTAs scroll away
+      {/* L.T5, mobile sticky next-action bar. The header CTAs scroll away
           on a long microsite; this keeps the primary action one tap away.
           Mobile only (md:hidden); the flick bar floats above its right
           edge. Page has pb-24 to clear it. */}
@@ -431,7 +431,7 @@ export function DemoSurface({
         </div>
       )}
 
-      {/* §1 Recognition — the network atlas as the opening hero ("we mapped
+      {/* §1 Recognition, the network atlas as the opening hero ("we mapped
           YOUR yards"). Click a pin → the detail panel fills the side. This is
           a contained section in the single scroll, not a separate tab. */}
       {mode === 'standalone' && (
@@ -479,11 +479,11 @@ export function DemoSurface({
         </section>
       )}
 
-      {/* §2 The reframe — names the siloed-yard problem before showing its cost.
+      {/* §2 The reframe, names the siloed-yard problem before showing its cost.
           The cold-email payload: tells the visitor what they're looking at. */}
       {mode === 'standalone' && <DemoReframe displayName={displayName} />}
 
-      {/* Auto-playing truck-sim hero — the opening moment. The animated run
+      {/* Auto-playing truck-sim hero, the opening moment. The animated run
           (truck through the oriented geofences + capability narration + Primo
           proof) auto-loads the featured site and plays on mount, so the most
           engaging surface is impossible to miss. The network atlas stays the
@@ -508,15 +508,15 @@ export function DemoSurface({
         </section>
       )}
 
-      {/* §4 Scale — the single "what's my opportunity + what's it worth" beat. */}
+      {/* §4 Scale, the single "what's my opportunity + what's it worth" beat. */}
       {mode === 'standalone' && <NetworkInsight pack={pack} />}
 
-      {/* §4b The turn — "What surprised us." Placed AFTER the atlas + build
+      {/* §4b The turn, "What surprised us." Placed AFTER the atlas + build
           sections: the forward-worthy moment once the prospect has seen their
           real network. Self-suppresses on packs without 3 findings. */}
       {mode === 'standalone' && <SurprisingFindings pack={pack} />}
 
-      {/* §5 Stress-test — the simulator, demoted from a top-level tab to an
+      {/* §5 Stress-test, the simulator, demoted from a top-level tab to an
           opt-in expander (power feature, not a parallel mode). */}
       {mode === 'standalone' && (
         <section data-ms-section-id="simulator" className="shrink-0 border-b border-[#00B4FF]/[0.10] bg-[#070809]">
@@ -549,12 +549,12 @@ export function DemoSurface({
         </section>
       )}
 
-      {/* The /roi handoff close — proof -> price. Turns the evidence into the
+      {/* The /roi handoff close, proof -> price. Turns the evidence into the
           number, seeded with this pack. Renders NO network dollar figure (the
           model is produced on /roi). Sits just above the booking close. */}
       {mode === 'standalone' && <RoiHandoffClose pack={pack} bookHref={bookAuditHref} />}
 
-      {/* The reply — low-friction conversion close. The whole page funnels to
+      {/* The reply, low-friction conversion close. The whole page funnels to
           a response, not a hard booking. */}
       {mode === 'standalone' && (
         <section
@@ -592,7 +592,7 @@ export function DemoSurface({
         </section>
       )}
 
-      {/* Footer — only in standalone mode */}
+      {/* Footer, only in standalone mode */}
       {mode === 'standalone' && (
         <footer
           className="shrink-0 border-t border-[#00B4FF]/[0.10] px-5 py-4"

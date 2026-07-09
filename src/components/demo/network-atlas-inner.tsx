@@ -8,7 +8,7 @@ import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
 import { ARCHETYPE_COLORS } from './archetype-palette';
 import { networkIntensities } from '@/lib/demo/yard-complexity';
 
-/** Brand cyan used for the complexity glow — signal, not alarm. */
+/** Brand cyan used for the complexity glow, signal, not alarm. */
 const GLOW = '#00B4FF';
 
 /**
@@ -124,11 +124,11 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
     return pack.network.sites.filter((s) => archetypeFilter.has(s.archetype));
   }, [pack.network.sites, archetypeFilter]);
 
-  // #2 — audit-complexity intensity per site, normalized across the network.
+  // #2, audit-complexity intensity per site, normalized across the network.
   const intensities = useMemo(() => networkIntensities(pack.network.sites), [pack.network.sites]);
 
   // Only surface the legend when the audit actually found a spread of
-  // complexity to show — otherwise the glow legend would over-claim.
+  // complexity to show, otherwise the glow legend would over-claim.
   const hasGlow = useMemo(
     () => [...intensities.values()].some((v) => v.intensity > 0.05 && v.raw > 0),
     [intensities],
@@ -158,7 +158,7 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
               key={site.id}
               position={[site.center.lat, site.center.lng]}
               icon={makeIcon(ARCHETYPE_COLORS[site.archetype], site.id === selectedSiteId, intensity, site.id)}
-              // K.T4 — accessible name for the role=button marker (axe
+              // K.T4, accessible name for the role=button marker (axe
               // aria-command-name). Title + alt resolve to the site name.
               title={site.name}
               alt={`${site.name} site marker`}
@@ -183,7 +183,7 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
         })}
       </MapContainer>
 
-      {/* #2 legend — states plainly what the glow encodes, and that it's
+      {/* #2 legend, states plainly what the glow encodes, and that it's
           relative to this network. Tactful and factual, not a pitch.
           pointer-events-none so it never intercepts map drags. */}
       {hasGlow && (

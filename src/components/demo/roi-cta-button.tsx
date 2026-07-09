@@ -5,7 +5,7 @@ import { deriveNetworkCounts } from '@/lib/demo/roi-model';
 import { trackEvent } from '@/lib/analytics';
 
 /**
- * D8.1 — ROI Calculator CTA that pre-fills the V2 calculator with the
+ * D8.1, ROI Calculator CTA that pre-fills the V2 calculator with the
  * prospect's actual audited data via shared localStorage.
  *
  * The trick: `/demo/<slug>` is rewritten through yardflow.ai (so the
@@ -55,7 +55,7 @@ interface ArchetypeAssumptions {
 /**
  * Map a DemoPack to the V2 calculator's input shape. Keeps the
  * `assumptions` block at its industry-prior defaults (matching what the
- * calculator ships with) and only overrides `asks` — the inputs we can
+ * calculator ships with) and only overrides `asks`, the inputs we can
  * derive honestly from the audit. The network counts come from the shared
  * `deriveNetworkCounts` so this hand-off and the inline ROI panel (#4) read
  * the prospect's network identically.
@@ -109,10 +109,10 @@ interface Props {
   ctaId: string;
   /** Surface label that goes into utm_medium. */
   utmMedium: string;
-  /** Button class — varies by surface (primary on sim, secondary in header). */
+  /** Button class, varies by surface (primary on sim, secondary in header). */
   className: string;
   children: React.ReactNode;
-  /** L.T5 — optional `source` param appended to the ROI URL (e.g.
+  /** L.T5, optional `source` param appended to the ROI URL (e.g.
    *  "microsite") so the calculator + funnel can attribute the hand-off. */
   source?: string;
 }
@@ -128,15 +128,15 @@ export function RoiCtaButton({ pack, ctaId, utmMedium, className, children, sour
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     // Same-origin localStorage hand-off only works when the prospect
     // is on yardflow.ai (rewrite). If they're on modex-gtm.vercel.app
-    // directly, the write goes to that origin's storage instead — the
+    // directly, the write goes to that origin's storage instead, the
     // calculator on yardflow.ai won't see it. We canonicalize email
     // links to yardflow.ai/demo so this is the common path. Worst case:
-    // the calculator boots with its own defaults — no broken state.
+    // the calculator boots with its own defaults, no broken state.
     try {
       const state = buildRoiV2State(pack);
       window.localStorage.setItem(ROI_STATE_KEY, JSON.stringify(state));
     } catch {
-      // localStorage unavailable (private mode, disabled, etc.) — silently
+      // localStorage unavailable (private mode, disabled, etc.), silently
       // fall through to a normal link navigation. Calculator uses defaults.
     }
     // Funnel middle-step: record the CTA click in PostHog (rides the for_slug +

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * D3.5 — Microsite CTA pointing to the standalone simulator.
+ * D3.5, Microsite CTA pointing to the standalone simulator.
  *
  * Drops into the existing memo-soft-action area. Fetches the account's
  * demo pack at runtime to discover the featured site name, then renders
@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
  */
 
 interface Props {
-  /** micrositeSlug — same one used by /for/<slug>. */
+  /** micrositeSlug, same one used by /for/<slug>. */
   accountSlug: string;
 }
 
@@ -45,7 +45,7 @@ export function DemoCTAButton({ accountSlug }: Props) {
         setInfo({ slug: accountSlug, siteId, siteName: site.name });
       })
       .catch(() => {
-        // No pack — render nothing. This is the common case for accounts
+        // No pack, render nothing. This is the common case for accounts
         // that haven't been audited yet.
       });
     return () => {

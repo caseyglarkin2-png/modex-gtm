@@ -1,19 +1,19 @@
 /**
- * Sprint M4 — single soft action at the bottom of every memo.
+ * Sprint M4, single soft action at the bottom of every memo.
  *
  * The memo is anti-selling: no calendar link, no "book a call" button. The
- * one explicit next-step pointer goes to yardflow.ai/roi/ — the v2
+ * one explicit next-step pointer goes to yardflow.ai/roi/, the v2
  * calculator. The link carries account context in the query string (see
  * buildROIDeepLink), so prospects land on a calculator that already knows
  * roughly what their network looks like.
  *
- * Sprint M8 redesign — visual treatment is now italic centered serif with
+ * Sprint M8 redesign, visual treatment is now italic centered serif with
  * hairline rules above and below. Reads as the editorial "epigraph"
  * gesture you see at the close of essays in the New York Review or
  * Harper's. The action is part of the document, not pasted on top of it.
  *
  * Tracking: the anchor carries data-ms-cta-id="roi-deep-link" which the
- * existing useMicrositeTracker picks up — clicks land in the memo's
+ * existing useMicrositeTracker picks up, clicks land in the memo's
  * session snapshot like any other tracked event.
  */
 
@@ -24,7 +24,7 @@ const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 interface MemoSoftActionProps {
   accountName: string;
   href: string;
-  /** Account slug — used to fetch the demo pack for the optional D3.5 CTA. */
+  /** Account slug, used to fetch the demo pack for the optional D3.5 CTA. */
   accountSlug?: string;
   /** Optional one-liner override. Defaults to a network-shape framing. */
   description?: string;

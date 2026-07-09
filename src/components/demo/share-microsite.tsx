@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react';
 
 /**
- * L.T3 — "Share this audit" outbound link. Copies a canonical,
+ * L.T3, "Share this audit" outbound link. Copies a canonical,
  * attribution-tagged URL for this microsite to the clipboard (or opens
  * the native share sheet where available) and shows a brief toast. The
  * rep's one-click outbound asset; UTMs land in HubSpot session

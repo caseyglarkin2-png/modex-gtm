@@ -838,14 +838,14 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (35.006546, -89.951836) sat on E Holmes Rd\nitself, just south of the facility. A z16/z17 satellite sweep showed a single\nvery large white-roofed industrial building to the NE, with dock-door lines and\nhundreds of trailers — consistent with a fulfillment center. Web search\nconfirmed the address: Amazon MEM1, 3292 E Holmes Rd, Memphis TN 38118 (24/7\noperation; multiple Amazon FC address directories and Waze list this exact\nbuilding). Street View along the frontage shows an Amazon monument sign at the\nSE driveway, positively identifying the parcel. Locked center: 35.00820,\n-89.95000. The building's long axis runs NW->SE, rotated ~35deg off north, so\nevery geofence below is traced as a rotated quad rather than a north-aligned box.",
+        "dossierExcerpt": "The supplied approximate coordinates (35.006546, -89.951836) sat on E Holmes Rd\nitself, just south of the facility. A z16/z17 satellite sweep showed a single\nvery large white-roofed industrial building to the NE, with dock-door lines and\nhundreds of trailers, consistent with a fulfillment center. Web search\nconfirmed the address: Amazon MEM1, 3292 E Holmes Rd, Memphis TN 38118 (24/7\noperation; multiple Amazon FC address directories and Waze list this exact\nbuilding). Street View along the frontage shows an Amazon monument sign at the\nSE driveway, positively identifying the parcel. Locked center: 35.00820,\n-89.95000. The building's long axis runs NW->SE, rotated ~35deg off north, so\nevery geofence below is traced as a rotated quad rather than a north-aligned box.",
         "mapsUrl": "https://www.google.com/maps/@35.00820,-89.95000,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Single dedicated truck entrance off E Holmes Rd at the SE corner (~35.0063,-89.9456), marked by an Amazon monument sign; Street View pano coverage stops at the public road because the gated private drive blocks the camera car. Whole property is fenced (black metal perimeter fence visible in multiple SV frames).",
           "guardShack": "No standalone guard booth is resolvable at the truck gate throat in z20 imagery; a small booth WAS seen at the separate associate-parking entrance (~35.0066,-89.9515) but that controls car parking, not the truck yard. Truck gate is treated as kiosk/remote check-in (remoteGs=true). Medium confidence on shack absence.",
-          "remoteGs": "Set true because there is a controlled truck gate but no resolvable manned booth at the truck throat — implies kiosk/app/call-box check-in typical of modern Amazon FC truck gates.",
-          "dropYard": "Massive dedicated trailer-storage yard on the NE side (hundreds of Amazon orange/blue trailers in angled rows) plus a SE overflow trailer lot fronting E Holmes — clearly separate from active dock staging.",
-          "shipRcvSeparate": "Dock banks on two distinct building faces — a long dock line on the NE/north face (inbound, served by the NE drop yard) and a long dock line on the SW/south face (outbound), classic Amazon FC inbound/outbound split.",
+          "remoteGs": "Set true because there is a controlled truck gate but no resolvable manned booth at the truck throat, implies kiosk/app/call-box check-in typical of modern Amazon FC truck gates.",
+          "dropYard": "Massive dedicated trailer-storage yard on the NE side (hundreds of Amazon orange/blue trailers in angled rows) plus a SE overflow trailer lot fronting E Holmes, clearly separate from active dock staging.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces, a long dock line on the NE/north face (inbound, served by the NE drop yard) and a long dock line on the SW/south face (outbound), classic Amazon FC inbound/outbound split.",
           "dockDoors": "50+ band easily exceeded; doors run nearly the full length of both long faces. ~180 is an order-of-magnitude estimate from z18 imagery, not an exact count.",
           "dropArea": "50+ band; NE drop yard alone holds several hundred trailers in marked angled rows.",
           "trailersVisible": "~360 estimate combining the NE drop yard rows, SE overflow lot, and trailers backed into both dock faces in the captured imagery; approximate.",
@@ -868,7 +868,7 @@
               "url": "https://hiring.amazon.com/jobDetail/en-US/Fulfillment-Center-Warehouse-Associate/Memphis/a0R4U00000EV4UkUAL",
               "date": "2026-06",
               "type": "careers",
-              "claim": "Active Amazon careers requisition for FC Warehouse Associate at 3292 E Holmes Rd, Memphis TN — maps MEM1 address to current Amazon hiring"
+              "claim": "Active Amazon careers requisition for FC Warehouse Associate at 3292 E Holmes Rd, Memphis TN, maps MEM1 address to current Amazon hiring"
             },
             {
               "tier": 1,
@@ -1091,7 +1091,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates (39.084682, -84.713515) landed on the correct\nbuilding. A z16/z17 satellite sweep around the point shows one large\nsingle-building distribution center in Prologis Park West, immediately NW of\nthe I-275 / I-71-75 interchange. Web search (FLEX Fulfillment, fbanearme,\nWaze) corroborates 1155 Worldwide Blvd = Prologis Park West Building F, a\n1M+ sq ft Amazon FC ~5 miles from the CVG air hub. This is a distinct site\nfrom roster idx 5 (KCVG Air Hub, ~5 km SE on Wendell H Ford Blvd) — the\nbuilding audited here is the Worldwide Blvd fulfillment center, not the air\ncargo sort.\n\nTrue building center locked at 39.0846, -84.7129. The structure is a long\nrectangle whose long axis runs roughly NNW–SSE, tilted ~15–20° east of north,\n~520 m long.",
+        "dossierExcerpt": "The supplied coordinates (39.084682, -84.713515) landed on the correct\nbuilding. A z16/z17 satellite sweep around the point shows one large\nsingle-building distribution center in Prologis Park West, immediately NW of\nthe I-275 / I-71-75 interchange. Web search (FLEX Fulfillment, fbanearme,\nWaze) corroborates 1155 Worldwide Blvd = Prologis Park West Building F, a\n1M+ sq ft Amazon FC ~5 miles from the CVG air hub. This is a distinct site\nfrom roster idx 5 (KCVG Air Hub, ~5 km SE on Wendell H Ford Blvd), the\nbuilding audited here is the Worldwide Blvd fulfillment center, not the air\ncargo sort.\n\nTrue building center locked at 39.0846, -84.7129. The structure is a long\nrectangle whose long axis runs roughly NNW–SSE, tilted ~15–20° east of north,\n~520 m long.",
         "mapsUrl": "https://www.google.com/maps/@39.0846,-84.7129,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "2024-09 Street View shows a continuous black chain-link security fence (Amazon-added; absent in 2016/2021 panos) wrapping the trailer yard and dock apron, breached by a single controlled entry drive off Worldwide Blvd at the north end. Fence + single gated opening into the secured yard = controlled truck gate.",
@@ -1120,7 +1120,7 @@
               "url": "https://hiring.amazon.com/jobDetail/en-US/Fulfillment-Center-Warehouse-Associate/Hebron/a0R4U00000EV4XbUAL",
               "date": "2026-06",
               "type": "careers",
-              "claim": "Active Amazon careers req for FC Warehouse Associate at 1155 Worldwide Blvd, Hebron KY — maps CVG1 address to current Amazon hiring"
+              "claim": "Active Amazon careers req for FC Warehouse Associate at 1155 Worldwide Blvd, Hebron KY, maps CVG1 address to current Amazon hiring"
             },
             {
               "tier": 1,
@@ -1401,12 +1401,12 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The supplied coordinates (39.033118, -84.658603) land on the large Amazon sort\nbuilding on the south/landside of Cincinnati/Northern Kentucky International\nAirport (CVG). Web research confirms this is **Amazon Air's KCVG primary US\nsort hub**: an 800,000 sq ft sortation building on a 600+ acre, $1.5B campus\nwith seven buildings, an aircraft ramp, and a multi-story employee parking\ngarage, opened August 2021 and operating 24/7.\n\nCVG is a multi-tenant cargo airport. Street View at the campus access road\n(39.0300, -84.65806, heading ~70°) clearly shows a building marked DHL\nbehind a barbed-wire chain-link fence to the southeast — that is the DHL US\nhub, not Amazon. I re-anchored the audit on the genuine Amazon sort\nbuilding to the northwest (the long N-S white high-bay building visible at",
+        "dossierExcerpt": "The supplied coordinates (39.033118, -84.658603) land on the large Amazon sort\nbuilding on the south/landside of Cincinnati/Northern Kentucky International\nAirport (CVG). Web research confirms this is **Amazon Air's KCVG primary US\nsort hub**: an 800,000 sq ft sortation building on a 600+ acre, $1.5B campus\nwith seven buildings, an aircraft ramp, and a multi-story employee parking\ngarage, opened August 2021 and operating 24/7.\n\nCVG is a multi-tenant cargo airport. Street View at the campus access road\n(39.0300, -84.65806, heading ~70°) clearly shows a building marked DHL\nbehind a barbed-wire chain-link fence to the southeast, that is the DHL US\nhub, not Amazon. I re-anchored the audit on the genuine Amazon sort\nbuilding to the northwest (the long N-S white high-bay building visible at",
         "mapsUrl": "https://www.google.com/maps/@39.03135,-84.65965,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Amazon KCVG air cargo sort hub on the landside of Cincinnati/Northern Kentucky International Airport (CVG). Audited the Amazon sort building and its landside truck/ground-ops footprint, NOT the airside ramp or the adjacent DHL hub (DHL building confirmed by signage in Street View to the southeast).",
           "truckGate": "Whole campus sits inside CVG's secured airfield perimeter; ground-ops/cargo footprint is enclosed by chain-link fencing with barbed-wire top (clearly visible in 2022 Street View along the access road). Vehicle access is airport-controlled (SIDA/AOA). Treated as a controlled truck gate.",
-          "guardShack": "Inferred from facility class — a $1.5B 24/7 secured air cargo hub uses manned vehicle checkpoints — but no individual guard booth was resolvable in overhead imagery at this scale; flagged uncertain.",
+          "guardShack": "Inferred from facility class, a $1.5B 24/7 secured air cargo hub uses manned vehicle checkpoints, but no individual guard booth was resolvable in overhead imagery at this scale; flagged uncertain.",
           "multiStep": "Airport security gate plus a separate ramp-access (airside) control point implies a multi-stage check; inferred, flagged uncertain.",
           "dockDoors": "Sort building east face and cargo-building faces show 50+ truck dock positions with trailers backed in; band 50+. Exact count approximate.",
           "dropArea": "Extensive trailer/container and ground-service-equipment staging lots across the landside; 50+.",
@@ -1733,7 +1733,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The supplied approximate coordinates (32.661003, -96.736098) landed directly on\na large industrial building. Web search confirmed Amazon Fulfillment Center FTW1\nat 33333 LBJ Freeway, Dallas TX 75241 (~500,000 sq ft, on the Lyndon B. Johnson\nFreeway / I-635 / US-175 corridor in southern Dallas). Satellite at z16-z18\n(06-step0-z16, 06-full-z17, 06-overview-z18) showed a single large rectangular\ndistribution building with multi-face dock walls, a trailer drop yard on the\nnorth, a retention pond on the SW, and employee parking on the south/east —\nfully consistent with an Amazon FC.\n\nStreet View along the access boulevard and north road positively identified the\nsite: the building behind a black palisade security fence with blue/yellow\nAmazon trailers in the yard (06-sv-nwentry, 06-sv-gate-sw). A neighboring",
+        "dossierExcerpt": "The supplied approximate coordinates (32.661003, -96.736098) landed directly on\na large industrial building. Web search confirmed Amazon Fulfillment Center FTW1\nat 33333 LBJ Freeway, Dallas TX 75241 (~500,000 sq ft, on the Lyndon B. Johnson\nFreeway / I-635 / US-175 corridor in southern Dallas). Satellite at z16-z18\n(06-step0-z16, 06-full-z17, 06-overview-z18) showed a single large rectangular\ndistribution building with multi-face dock walls, a trailer drop yard on the\nnorth, a retention pond on the SW, and employee parking on the south/east ,\nfully consistent with an Amazon FC.\n\nStreet View along the access boulevard and north road positively identified the\nsite: the building behind a black palisade security fence with blue/yellow\nAmazon trailers in the yard (06-sv-nwentry, 06-sv-gate-sw). A neighboring",
         "mapsUrl": "https://www.google.com/maps/@32.66185,-96.7363,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Fully fenced perimeter (black palisade fence) around the entire trailer yard, confirmed in Street View (06-sv-nwentry, 06-sv-gate-s, 06-sv-gate-sw). The main truck entrance is a controlled driveway off the north public road at the NW corner, channelized with orange traffic barrels/cones funneling trucks through a checkpoint (06-sv-mainentry, 06-sv-mainentry2).",
@@ -2016,18 +2016,18 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied pin (32.971437, -97.335757) landed on the building. Web search\nconfirmed DFW7 at 700 Westport Pkwy in the AllianceTexas logistics hub near\nI-35W / SH-170 / Perot Field Alliance Airport — a ~1.1M sq ft robotics sortable\nFC on ~68 acres developed by Hillwood. Satellite probing (z16-z21) positively\nidentified a single large white-roofed warehouse whose long axis runs roughly\nN-S, tilted ~10° east of north, spanning ~32.9730 (north) to ~32.9676 (south),\n~600 m long. Building footprint traces to ~880k sq ft, consistent with a\nmulti-floor 1.1M sq ft FC. Neighboring blue/grey/brown warehouses to the NW, NE,\nand SE are separate parcels (different roofs, own trailer yards), so this is a\nsingle-building site, not a campus. Center locked at 32.9701, -97.3358.",
+        "dossierExcerpt": "The supplied pin (32.971437, -97.335757) landed on the building. Web search\nconfirmed DFW7 at 700 Westport Pkwy in the AllianceTexas logistics hub near\nI-35W / SH-170 / Perot Field Alliance Airport, a ~1.1M sq ft robotics sortable\nFC on ~68 acres developed by Hillwood. Satellite probing (z16-z21) positively\nidentified a single large white-roofed warehouse whose long axis runs roughly\nN-S, tilted ~10° east of north, spanning ~32.9730 (north) to ~32.9676 (south),\n~600 m long. Building footprint traces to ~880k sq ft, consistent with a\nmulti-floor 1.1M sq ft FC. Neighboring blue/grey/brown warehouses to the NW, NE,\nand SE are separate parcels (different roofs, own trailer yards), so this is a\nsingle-building site, not a campus. Center locked at 32.9701, -97.3358.",
         "mapsUrl": "https://www.google.com/maps/@32.9701,-97.3358,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Controlled truck entrance on the west drive off Westport Pkwy: guard booth straddling the lanes with yellow barrier arms and bollards, confirmed in Street View (2023-02). Yellow-striped lane dividers and red-curbed median.",
           "guardShack": "Small staffed gatehouse structure sitting between the inbound/outbound lanes at the west gate, ~1-2 vehicle footprint, distinct from the main building.",
           "drivewayLong": "Entry drive runs ~120m+ from the Westport Pkwy stop bar south to the gate, easily holding 3+ trucks before the booth.",
           "entryLanes": "Estimated 2 inbound from the multi-lane gate apron in Street View; exact split between in/out lanes not fully resolvable overhead.",
-          "fastLaneOpportunity": "Wide multi-lane gate apron with red-curbed median and unused paved width — room to add an express/bypass lane.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with red-curbed median and unused paved width, room to add an express/bypass lane.",
           "dockDoors": "West wall is lined with a near-continuous row of dock doors for the building's full ~600m length; 50+ band is firm, point estimate ~140 is approximate.",
           "dropArea": "West apron holds dozens of drop trailers (no tractor) plus a south van/trailer lot; well into the 50+ band.",
-          "urbanRural": "AllianceTexas logistics park on the edge of Fort Worth/Haslet — large industrial setting surrounded by warehouses and open land rather than dense metro fabric; judged Rural per rubric tie-break.",
-          "connectivityIssue": "Large modern Amazon FC in an active industrial park near Alliance Airport; cellular coverage almost certainly fine — false.",
+          "urbanRural": "AllianceTexas logistics park on the edge of Fort Worth/Haslet, large industrial setting surrounded by warehouses and open land rather than dense metro fabric; judged Rural per rubric tie-break.",
+          "connectivityIssue": "Large modern Amazon FC in an active industrial park near Alliance Airport; cellular coverage almost certainly fine, false.",
           "dropYard": "Dedicated trailer staging along the west apron and south lot, separate from active dock backing.",
           "railServed": "No rail spur enters the property; site is truck/air-served (adjacent Perot Field Alliance Airport).",
           "siteAreaAcres": "78.8 ac from the traced perimeter incl. yard and parking; published figure ~68 ac for the building parcel."
@@ -2042,7 +2042,7 @@
               "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2025007088",
               "date": "2025-02",
               "type": "press",
-              "claim": "TDLR-registered active renovation project 'EOL Building Refresh 2024 - DFW7', 700 Westport Pkwy, interior refresh of existing operating FC, 2/1/2025-8/31/2025 — proves active operation in 2025, not a canceled shell"
+              "claim": "TDLR-registered active renovation project 'EOL Building Refresh 2024 - DFW7', 700 Westport Pkwy, interior refresh of existing operating FC, 2/1/2025-8/31/2025, proves active operation in 2025, not a canceled shell"
             },
             {
               "tier": 1,
@@ -2273,7 +2273,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Supplied coordinates (33.434708, -112.167239) geocoded as GEOMETRIC_CENTER and\nlanded on the street grid near 47th Ave / W Mohave St in southwest Phoenix's\ndense industrial belt by I-10. Wide z15/z16 satellite showed several large\nboxes. Web research (warehouserating, FLEX Fulfillment, Waze, Tripadvisor tour\nlisting) confirms PHX6 is a ~1.2M sq ft fulfillment center at 4750/5050 W\nMohave St (a sibling sort facility TFC1 shares the 5050 address). The colossal\nsingle building immediately south of the supplied point — single ~370 m long\nbox, dock bank with trailers along its south face, employee parking to the\nnorth off Mohave St — matches the PHX6 description. Dec-2025 Street View of the\nwest truck gate shows the building number placard and Amazon equipment-entrance\nsignage, positively identifying it. Locked center 33.43215, -112.16655.",
+        "dossierExcerpt": "Supplied coordinates (33.434708, -112.167239) geocoded as GEOMETRIC_CENTER and\nlanded on the street grid near 47th Ave / W Mohave St in southwest Phoenix's\ndense industrial belt by I-10. Wide z15/z16 satellite showed several large\nboxes. Web research (warehouserating, FLEX Fulfillment, Waze, Tripadvisor tour\nlisting) confirms PHX6 is a ~1.2M sq ft fulfillment center at 4750/5050 W\nMohave St (a sibling sort facility TFC1 shares the 5050 address). The colossal\nsingle building immediately south of the supplied point, single ~370 m long\nbox, dock bank with trailers along its south face, employee parking to the\nnorth off Mohave St, matches the PHX6 description. Dec-2025 Street View of the\nwest truck gate shows the building number placard and Amazon equipment-entrance\nsignage, positively identifying it. Locked center 33.43215, -112.16655.",
         "mapsUrl": "https://www.google.com/maps/@33.43215,-112.16655,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Confirmed in Dec-2025 Street View (pano QYC0WAXQoSn6fA1-CtfvnA): a long white cantilever/sliding gate spans the truck (equipment) entrance off the west drive, set in a masonry perimeter screen wall, with red NO TRESPASSING / EQUIPMENT ENTRANCE signage and an Amazon site placard. Controlled truck gate = true.",
@@ -2300,14 +2300,14 @@
               "url": "https://www.indeed.com/q-amazon-phx6-l-phoenix,-az-jobs.html",
               "date": "2026-06",
               "type": "careers",
-              "claim": "44 active 'Amazon PHX6' job listings in Phoenix AZ — facility hiring under its code today"
+              "claim": "44 active 'Amazon PHX6' job listings in Phoenix AZ, facility hiring under its code today"
             },
             {
               "tier": 3,
               "url": "https://moovitapp.com/index/en/public_transit-Amazon_Fulfillment_Center_Phx6-Phoenix_AZ-site_181846862-746",
               "date": "2025-01",
               "type": "locator",
-              "claim": "Amazon Fulfillment Center PHX6, W Mohave St, Phoenix — established FC with transit service"
+              "claim": "Amazon Fulfillment Center PHX6, W Mohave St, Phoenix, established FC with transit service"
             }
           ],
           "checkedDivestiture": true,
@@ -2570,7 +2570,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The supplied coordinates (41.483289, -88.071143) landed squarely on the correct\nbuilding. Confirmed three ways:\n\n1. Address / web. 250 Emerald Dr, Joliet IL 60433 is MDW2, inside the\n   CenterPoint Intermodal Center (North America's largest inland port), minutes\n   from I-55/I-80. Multiple directories (youramazonguy, fbanearme, Apple Maps,\n   Waze \"MDW2 entrance for trucks\") agree on the address.\n2. Satellite. A single very large rectangular distribution building, long\n   axis roughly N–S with a slight east-leaning tilt, dock doors and backed-in\n   trailers along both long faces — consistent with a ~1M sq ft fulfillment\n   center, not an office.\n3. Street View branding (decisive). Ground panos on the north access road\n   show the building wall with the Amazon \"fulfillment\" / Prime smile logo",
+        "dossierExcerpt": "The supplied coordinates (41.483289, -88.071143) landed squarely on the correct\nbuilding. Confirmed three ways:\n\n1. Address / web. 250 Emerald Dr, Joliet IL 60433 is MDW2, inside the\n   CenterPoint Intermodal Center (North America's largest inland port), minutes\n   from I-55/I-80. Multiple directories (youramazonguy, fbanearme, Apple Maps,\n   Waze \"MDW2 entrance for trucks\") agree on the address.\n2. Satellite. A single very large rectangular distribution building, long\n   axis roughly N–S with a slight east-leaning tilt, dock doors and backed-in\n   trailers along both long faces, consistent with a ~1M sq ft fulfillment\n   center, not an office.\n3. Street View branding (decisive). Ground panos on the north access road\n   show the building wall with the Amazon \"fulfillment\" / Prime smile logo",
         "mapsUrl": "https://www.google.com/maps/@41.48334,-88.07153,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Confirmed in z21 satellite (41.4858,-88.0716) and Street View (pano hf5GHdqeCiB5yrOdWqgVCQ, 2025-05): striped barrier line across multiple gate lanes with gate-arm posts, chain-link perimeter fence along Emerald Dr frontage, hatched approach pavement.",
@@ -2599,7 +2599,7 @@
               "url": "https://www.indeed.com/q-mdw2-amazon-l-joliet,-il-jobs.html",
               "date": "2026-06",
               "type": "careers",
-              "claim": "61 open MDW2 Amazon roles in Joliet IL as of June 2026, incl. Ops Managers — facility staffing actively"
+              "claim": "61 open MDW2 Amazon roles in Joliet IL as of June 2026, incl. Ops Managers, facility staffing actively"
             },
             {
               "tier": 3,
@@ -2831,8 +2831,8 @@
         "dossierExcerpt": "The supplied coordinates (40.195353, -74.566306) landed on the SW corner / employee-parking\nedge of the correct building. Satellite probes (z16–z20) around the point show one dominant\nlarge white-roofed warehouse with its long axis running NW→SE, surrounded by Matrix Business\nPark. Web search confirmed EWR4 = 50 New Canton Way, ~1.2M sq ft robotics sortable FC in\nMatrix Business Park near NJTP exit 7A, serving the NY–NJ–Philadelphia corridor. Street View\nat the SW face (40.1928, -74.5632) shows the \"amazon · fulfillment\" building logo,\npositively identifying the building.\n\nThe long axis runs NW(40.1976, -74.5667) → SE(40.1937, -74.5632), ~526 m long, rotated\n≈34° clockwise from north. Building width ≈210 m (consistent with 1.2M sq ft).\n\n---",
         "mapsUrl": "https://www.google.com/maps/@40.19565,-74.56495,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "Secured, fenced truck yard on the NE dock side. Driver reviews and a Command Security 'Amazon - Robbinsville - EWR4' guard post confirm a manned checkpoint; drivers present BOL/appointment on arrival and report 30+ min checkpoint waits. Street View does not enter the truck yard (private/gated) — only the SW employee perimeter and Sharon Rd are publicly driveable.",
-          "guardShack": "Inferred manned booth at the truck gate (Command Security staffs the post; standard for a 1.2M sqft Amazon FC). The booth structure could not be individually resolved in satellite because the gate sits deep inside the yard behind a tree buffer — hence medium confidence on the physical shack vs. remote kiosk.",
+          "truckGate": "Secured, fenced truck yard on the NE dock side. Driver reviews and a Command Security 'Amazon - Robbinsville - EWR4' guard post confirm a manned checkpoint; drivers present BOL/appointment on arrival and report 30+ min checkpoint waits. Street View does not enter the truck yard (private/gated), only the SW employee perimeter and Sharon Rd are publicly driveable.",
+          "guardShack": "Inferred manned booth at the truck gate (Command Security staffs the post; standard for a 1.2M sqft Amazon FC). The booth structure could not be individually resolved in satellite because the gate sits deep inside the yard behind a tree buffer, hence medium confidence on the physical shack vs. remote kiosk.",
           "backupSensitive": "Driver reviews report 30+ minute checkpoint queues; tight single-gate intake.",
           "dockDoors": "Continuous row of trailers backed into dock doors along the full ~500m NE wall; 50+ band is conservative for a 1.2M sqft robotics FC.",
           "dropArea": "Wide truck court / drop yard on the NE side holding many parked trailers; 25-50 band estimated from overhead trailer count.",
@@ -3089,7 +3089,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied approximate coords (39.9534, -82.7133) landed on the north edge of\na large white-roof distribution building. Web search confirmed the address\n\"11999 National Rd SW, Etna, OH 43062\" maps to Amazon Fulfillment Center CMH1\n(Waze/Pataskala Chamber/Warehouse Worker Network listings). Satellite at z16/z17\nshowed one very large multi-story FC bounded by National Rd SW on the north and\nI-70 on the south — consistent with a large Amazon sortable FC. Locked center at\n39.9525, -82.7122 (the supplied point was ~120m too far north).",
+        "dossierExcerpt": "The supplied approximate coords (39.9534, -82.7133) landed on the north edge of\na large white-roof distribution building. Web search confirmed the address\n\"11999 National Rd SW, Etna, OH 43062\" maps to Amazon Fulfillment Center CMH1\n(Waze/Pataskala Chamber/Warehouse Worker Network listings). Satellite at z16/z17\nshowed one very large multi-story FC bounded by National Rd SW on the north and\nI-70 on the south, consistent with a large Amazon sortable FC. Locked center at\n39.9525, -82.7122 (the supplied point was ~120m too far north).",
         "mapsUrl": "https://www.google.com/maps/@39.9525,-82.7122,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Both public-road entrances (signalized NE drive off National Rd SW and the NW dock drive) are open: 2024-2025 Street View and z19 satellite show no barrier arm, sliding gate, or checkpoint pinch-point at either road. Open Amazon FC campus.",
@@ -3348,7 +3348,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The supplied coordinates (33.996348, -117.554022) landed inside the Goodman\nLogistics Center cluster in Eastvale, at the SW corner of a very large\nsolar-roofed industrial building. Web research (Amazon Tours, Waze, Yelp,\nbusinessyab) confirms LGB3 is at 4950 Goodman Way. Street View on Goodman Way\nshows the building's office face carrying the \"amazon\" logo and a monument\nsign reading \"4950 Goodman Way,\" and an elevated pedestrian bridge over\nGoodman Way linking the FC to a west office annex — positively identifying the\nsolar-roofed building as LGB3. The large gray-roof building immediately south is\na separate tenant (no solar, distinct trailer yard) and is excluded.\n\nThe FC building runs roughly N–S, rotated ~10° clockwise from north, so all\ngeofences are traced as rotated quads, not north-aligned boxes.",
+        "dossierExcerpt": "The supplied coordinates (33.996348, -117.554022) landed inside the Goodman\nLogistics Center cluster in Eastvale, at the SW corner of a very large\nsolar-roofed industrial building. Web research (Amazon Tours, Waze, Yelp,\nbusinessyab) confirms LGB3 is at 4950 Goodman Way. Street View on Goodman Way\nshows the building's office face carrying the \"amazon\" logo and a monument\nsign reading \"4950 Goodman Way,\" and an elevated pedestrian bridge over\nGoodman Way linking the FC to a west office annex, positively identifying the\nsolar-roofed building as LGB3. The large gray-roof building immediately south is\na separate tenant (no solar, distinct trailer yard) and is excluded.\n\nThe FC building runs roughly N–S, rotated ~10° clockwise from north, so all\ngeofences are traced as rotated quads, not north-aligned boxes.",
         "mapsUrl": "https://www.google.com/maps/@33.9972,-117.5528,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Controlled entry. Amazon Tours guidance states drivers/visitors enter at the main guard post at the intersection of Goodman Way and The Station; the signalized main driveway (NW corner, monument sign '4950 Goodman Way') is the single controlled checkpoint into a fully fenced campus.",
@@ -3357,12 +3357,12 @@
           "postGateStaging": "Wide internal truck court between the FC south face and the east drop yard provides ample inside-the-gate queue/staging room before docks.",
           "drivewayLong": "Long internal approach from the Goodman Way entrance around to the east-side dock apron and drop yard easily holds 3+ trucks.",
           "entryExitTogether": "Single controlled entrance off Goodman Way serves both in and out; no separate out-gate observed.",
-          "entryLanes": "Estimated 2 in / 2 out at the main signalized driveway; exact lane split partly obscured by landscaping — flagged uncertain.",
+          "entryLanes": "Estimated 2 in / 2 out at the main signalized driveway; exact lane split partly obscured by landscaping, flagged uncertain.",
           "fastLaneOpportunity": "Wide entrance apron and large internal truck court leave clear paved width to add an express/bypass lane.",
           "dockDoors": "Continuous dock-door banks run the full east wall and the full south wall with trailers backed in; total well into the 50+ band (est. ~120 doors across both faces).",
-          "dropArea": "Dense trailer drop yard runs the entire east side between the building and I-15, dozens of trailers parked nose-out in rows plus yard hostlers staging — clearly 50+.",
+          "dropArea": "Dense trailer drop yard runs the entire east side between the building and I-15, dozens of trailers parked nose-out in rows plus yard hostlers staging, clearly 50+.",
           "shipRcvSeparate": "Two distinct dock clusters on different building faces (east wall + south wall) operate as physically separate dock banks.",
-          "urbanRural": "Eastvale is dense Inland Empire metro logistics fabric (Goodman Logistics Center, adjacent Costco and multiple big-box DCs) bordering I-15 — Urban.",
+          "urbanRural": "Eastvale is dense Inland Empire metro logistics fabric (Goodman Logistics Center, adjacent Costco and multiple big-box DCs) bordering I-15, Urban.",
           "scale": "No truck scale/weigh pad observed in the truck path.",
           "multipleFacilities": "LGB3 is one FC building (connected to a west office annex by a pedestrian bridge over Goodman Way); the large gray-roof building to the south is a separate tenant, not counted here.",
           "railServed": "No rail spur enters the property; I-15 freeway bounds the east edge.",
@@ -3660,7 +3660,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The roster supplied approximate coordinates 34.07233, -117.28174 (GEOMETRIC_CENTER\nprecision). Satellite probes at z15–z18 around that point landed directly on a very\nlarge warehouse with a partial solar-panel roof, dock banks, and trailer drop yards,\nbounded by the Santa Ana River wash to the south/west, S Waterman Ave (multi-lane\narterial) to the east, and the I-215 corridor beyond. A web search for \"Amazon SBD2\n1494 S Waterman Ave San Bernardino\" corroborated this exact address (Waze, FLEX\nFulfillment, Chamber of Commerce, youramazonguy all list 1494 S Waterman Ave,\n92408; reviews note long driver check-in wait times). The address pin sits on the\nsouthern solar-roof building — that is SBD2. An adjacent large warehouse to the\nnorth shares the drop yard between the two buildings, making this a two-building",
+        "dossierExcerpt": "The roster supplied approximate coordinates 34.07233, -117.28174 (GEOMETRIC_CENTER\nprecision). Satellite probes at z15–z18 around that point landed directly on a very\nlarge warehouse with a partial solar-panel roof, dock banks, and trailer drop yards,\nbounded by the Santa Ana River wash to the south/west, S Waterman Ave (multi-lane\narterial) to the east, and the I-215 corridor beyond. A web search for \"Amazon SBD2\n1494 S Waterman Ave San Bernardino\" corroborated this exact address (Waze, FLEX\nFulfillment, Chamber of Commerce, youramazonguy all list 1494 S Waterman Ave,\n92408; reviews note long driver check-in wait times). The address pin sits on the\nsouthern solar-roof building, that is SBD2. An adjacent large warehouse to the\nnorth shares the drop yard between the two buildings, making this a two-building",
         "mapsUrl": "https://www.google.com/maps/@34.07280,-117.28350,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Black metal sliding/swing gate across the controlled entrance drive off S Waterman Ave (east side); continuous metal perimeter fence confirmed in Street View along the full Waterman frontage.",
@@ -3946,7 +3946,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates (27.727553, -82.388056) landed on the NW corner of a\nvery large white distribution building. Probing satellite z16–z18 around that\npoint and cross-checking the street address confirmed the right building: a\nsingle ~1M+ sq ft fulfillment center oriented NNW–SSE, set on the rural fringe\nSE of Tampa with I-75 running along its east side, employee parking wrapping the\nnorth/west, and a truck dock/drop yard along the east face. Web research\n(Tampa Bay Chamber, FLEX Fulfillment, youramazonguy, nmfclist) all place Amazon\nTPA1 at 3350 Laurel Ridge Ave, Ruskin FL 33570 — consistent with this building.\nThe supplied coords sit on the building's NW roof corner; I locked the true site\ncenter at 27.7268, -82.3872.\n\n---",
+        "dossierExcerpt": "The supplied coordinates (27.727553, -82.388056) landed on the NW corner of a\nvery large white distribution building. Probing satellite z16–z18 around that\npoint and cross-checking the street address confirmed the right building: a\nsingle ~1M+ sq ft fulfillment center oriented NNW–SSE, set on the rural fringe\nSE of Tampa with I-75 running along its east side, employee parking wrapping the\nnorth/west, and a truck dock/drop yard along the east face. Web research\n(Tampa Bay Chamber, FLEX Fulfillment, youramazonguy, nmfclist) all place Amazon\nTPA1 at 3350 Laurel Ridge Ave, Ruskin FL 33570, consistent with this building.\nThe supplied coords sit on the building's NW roof corner; I locked the true site\ncenter at 27.7268, -82.3872.\n\n---",
         "mapsUrl": "https://www.google.com/maps/@27.726800,-82.387200,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Controlled truck entrance on the south access road off Laurel Ridge Ave: the truck drive pinches at a checkpoint with lane striping/crosswalk markings before entering the secured east drop yard (visible at z19, ~27.7252,-82.3858).",
@@ -4609,7 +4609,7 @@
               "url": "https://www.linkedin.com/jobs/view/senior-automation-engineer-sck6-at-amazon-4227715462",
               "date": "2026",
               "type": "careers",
-              "claim": "Amazon hiring Senior Automation Engineer, SCK6, Tracy CA — code+site active"
+              "claim": "Amazon hiring Senior Automation Engineer, SCK6, Tracy CA, code+site active"
             }
           ],
           "checkedDivestiture": true,

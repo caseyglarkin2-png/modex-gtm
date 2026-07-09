@@ -19,7 +19,7 @@
       "note": "Barnes & Noble's stores are fed by two distribution centers, Monroe Township NJ and Reno NV (FY2019 10-K); we mapped both, the only sites where trailer ops matter."
     },
     "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc",
-    "dossierIntro": "Book retail runs slow-moving SKUs through high-throughput RDCs. Barnes & Noble runs 2 distribution centers, Monroe Township NJ and Reno NV, and we audited both. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
+    "dossierIntro": "Book retail runs slow-moving SKUs through high-production capacity RDCs. Barnes & Noble runs 2 distribution centers, Monroe Township NJ and Reno NV, and we audited both. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
     "surprisingFindings": [
       "110 dock doors at Monroe NJ. Most Barnes & Noble inbound moves in a tight 4-month holiday window.",
       "148 total dock doors across 2 audited sites. Density per facility is higher than most retailers.",
@@ -174,7 +174,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster pin (40.358049, -74.464912, geocoded ROOFTOP) landed directly on the\nroof of a very large single-building distribution center in the Docks Corner /\nCranbury-Monroe industrial submarket, alongside the NJ Turnpike and Route 33.\nWeb search confirmed \"Barnes & Noble Distribution, 1 Barnes & Noble Way, Monroe\nTownship NJ 08831\" at this location (Yellowpages, Chamber of Commerce, Waze,\nLoc8NearMe). The building footprint derived from the perimeter geofence works\nout to ~73.5 acres, matching the dossier's stated 73-acre footprint and ~1.15M\nsq ft building — a strong independent corroboration. Location locked at the\nbuilding centroid 40.35820, -74.46510.",
+        "dossierExcerpt": "The roster pin (40.358049, -74.464912, geocoded ROOFTOP) landed directly on the\nroof of a very large single-building distribution center in the Docks Corner /\nCranbury-Monroe industrial submarket, alongside the NJ Turnpike and Route 33.\nWeb search confirmed \"Barnes & Noble Distribution, 1 Barnes & Noble Way, Monroe\nTownship NJ 08831\" at this location (Yellowpages, Chamber of Commerce, Waze,\nLoc8NearMe). The building footprint derived from the perimeter geofence works\nout to ~73.5 acres, matching the dossier's stated 73-acre footprint and ~1.15M\nsq ft building, a strong independent corroboration. Location locked at the\nbuilding centroid 40.35820, -74.46510.",
         "mapsUrl": "https://www.google.com/maps/@40.35820,-74.46510,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Confirmed 1 Barnes & Noble Way, Monroe Township NJ. Single ~1.15M sq ft DC building; derived site area 73.5 acres matches dossier's stated 73 acres, strongly corroborating the building identification.",
@@ -419,7 +419,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The roster pin (39.418826, -119.750481, geocoded ROOFTOP) landed directly on a\nlarge white-roofed distribution warehouse in the Damonte Ranch industrial park\nin south Reno, alongside Interstate 580 / US-395. Web search confirmed \"Barnes\n& Noble Distribution Center, 12660 Old Virginia Rd, Reno NV 89521\" at this\nlocation — the West Coast replenishment / e-commerce hub (Panjiva buyer report,\nReno-Sparks Chamber of Commerce, Barnes & Noble Reno Distribution Center\nFacebook page; lease renewed Nov 2025 per the roster source). Single ~601K sq\nft building. Location locked at the building centroid 39.41870, -119.75050.",
+        "dossierExcerpt": "The roster pin (39.418826, -119.750481, geocoded ROOFTOP) landed directly on a\nlarge white-roofed distribution warehouse in the Damonte Ranch industrial park\nin south Reno, alongside Interstate 580 / US-395. Web search confirmed \"Barnes\n& Noble Distribution Center, 12660 Old Virginia Rd, Reno NV 89521\" at this\nlocation, the West Coast replenishment / e-commerce hub (Panjiva buyer report,\nReno-Sparks Chamber of Commerce, Barnes & Noble Reno Distribution Center\nFacebook page; lease renewed Nov 2025 per the roster source). Single ~601K sq\nft building. Location locked at the building centroid 39.41870, -119.75050.",
         "mapsUrl": "https://www.google.com/maps/@39.41870,-119.75050,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Confirmed 12660 Old Virginia Rd, Reno NV 89521 in the Damonte Ranch industrial park, alongside I-580/US-395. Single ~601K sq ft DC building. Address verified via Panjiva, Chamber of Commerce, and Facebook (Barnes & Noble Reno Distribution Center).",

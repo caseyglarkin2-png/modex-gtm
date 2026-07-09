@@ -1,14 +1,14 @@
 /**
- * Dannon (Danone North America) — ABM Microsite Data
- * Quality Tier: A (Phase 6A A+ overhaul — May 2026)
- * WARM INTRO ONLY — via Mark Shaughnessy
+ * Dannon (Danone North America), ABM Microsite Data
+ * Quality Tier: A (Phase 6A A+ overhaul, May 2026)
+ * WARM INTRO ONLY, via Mark Shaughnessy
  * NEVER cold email or cold outreach
  *
  * Pitch shape: coexistence wedge (network-level operating layer *above*
  * plant-level yard routines), not displacement.
  * Angle: YARD MANAGEMENT (multi-temp dock arbitration, trailer dwell,
  * shelf-clock burn, network OEE) tied to fresh-dairy quality and
- * the Renew Danone productivity ledger — NOT driver experience.
+ * the Renew Danone productivity ledger, NOT driver experience.
  *
  * Decision-maker: Heiko Gerling, COO Danone Americas (named June 2025).
  *  - 25+ years FMCG ops; Kraft Heinz MD 2014-2019 (the 3G-era
@@ -18,7 +18,7 @@
  *  - Public Sept 2025 Supply Chain Magazine interview framed
  *    resilience as "structure, plans, agility, and foresight."
  *  - Scope: manufacturing, logistics, customer service, procurement,
- *    S&OP, quality and food safety — broader than a typical CSCO.
+ *    S&OP, quality and food safety, broader than a typical CSCO.
  *
  * Sources (this file's hand-authored prose):
  *   - docs/research/heiko-gerling-dannon-dossier.md
@@ -35,7 +35,7 @@ import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../researc
 const DANNON_FACILITY_COUNT_LABEL = getFacilityCountLabel('Dannon', '13');
 const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
 
-// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+// LEGACY SECTIONS (preserved for reference, M3.2-M3.6 may lift prose into memo sections)
 /*
  * [
  *     {
@@ -66,7 +66,7 @@ const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
  *         },
  *         {
  *           headline: 'Plant-level yard protocols fragment cross-facility visibility',
- *           description: `Each Danone production facility runs its own gate, dock, and spotter coordination. When the White Plains supply chain team wants a network view of trailer utilization or dock throughput, they are stitching together spreadsheets from ${DANNON_FACILITY_COUNT_LABEL} different local teams.`,
+ *           description: `Each Danone production facility runs its own gate, dock, and spotter coordination. When the White Plains supply chain team wants a network view of trailer utilization or dock production capacity, they are stitching together spreadsheets from ${DANNON_FACILITY_COUNT_LABEL} different local teams.`,
  *           kpiImpact: 'Zero real-time network visibility across the yard layer',
  *           relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
  *         },
@@ -103,7 +103,7 @@ const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
  *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Visibility into dwell time for perishable loads. Freshness clock starts in the yard.' },
  *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view with alerting and cross-site performance intelligence.', relevanceToAccount: 'One view across all Danone North America yard operations.' },
  *       ],
- *       accountFit: 'Primo proof should land hardest here because both are high-volume food / beverage-style networks with plant throughput pressure.',
+ *       accountFit: 'Primo proof should land hardest here because both are high-volume food / beverage-style networks with plant production capacity pressure.',
  *     },
  *     {
  *       type: 'proof',
@@ -188,27 +188,27 @@ export const dannon: AccountMicrositeData = {
   band: 'A',
   priorityScore: 95,
 
-  pageTitle: 'YardFlow for Danone North America — the Yard Network System for 13 plants',
+  pageTitle: 'YardFlow for Danone North America, the Yard Network System for 13 plants',
   metaDescription:
-    'Danone has standardized planning, plant intelligence, and S&OP — but the yard still runs site by site on radios and clipboards. How one Yard Network System across all 13 U.S. plants turns that blind spot into $15M–$25M a year and makes Danone the shipper of choice in a tightening freight market.',
+    'Danone has standardized planning, plant intelligence, and S&OP, but the yard still runs site by site on radios and clipboards. How one Yard Network System across all 13 U.S. plants turns that blind spot into $15M–$25M a year and makes Danone the shipper of choice in a tightening freight market.',
 
   sections: [
     {
       type: 'executive-brief',
       headline: 'The yard is the last system Danone hasn’t standardized.',
       problem: [
-        'Danone has spent three years digitizing the parts of the network you can run from a desk — planning and productivity through Renew Danone, plant intelligence through the Microsoft AI Academy, supply and demand through S&OP. The one place that work stops is the yard. From the gate to the dock, the trailer still moves on radios, clipboards, and whatever each plant worked out for itself. That blind spot caps the return on everything upstream of it: a perfect plan still waits on a trailer nobody can see.',
-        'It is the last un-standardized operating system in the network — and the only one that decides whether the case actually ships on time.',
+        'Danone has spent three years digitizing the parts of the network you can run from a desk, planning and productivity through Renew Danone, plant intelligence through the Microsoft AI Academy, supply and demand through S&OP. The one place that work stops is the yard. From the gate to the dock, the trailer still moves on radios, clipboards, and whatever each plant worked out for itself. That blind spot caps the return on everything upstream of it: a perfect plan still waits on a trailer nobody can see.',
+        'It is the last un-standardized operating system in the network, and the only one that decides whether the case actually ships on time.',
       ],
       marketRisk: {
         label: 'Why now',
         headline: 'A tightening freight market punishes a slow yard.',
-        body: 'Truckload rates are climbing again and capacity is getting selective. Carriers send their trucks to the shippers who turn them fast and waste none of their time. A plant where drivers wait becomes a plant carriers avoid — and that shows up as detention invoices, tender rejections, and spot-market premiums on the lanes you can least afford to lose. A fast, predictable yard does the reverse: it makes Danone the shipper of choice, so you hold capacity and rate without spending a dollar of capex. In this market the yard is a freight-cost and capacity-risk lever, not just an ops metric.',
+        body: 'Truckload rates are climbing again and capacity is getting selective. Carriers send their trucks to the shippers who turn them fast and waste none of their time. A plant where drivers wait becomes a plant carriers avoid, and that shows up as detention invoices, tender rejections, and spot-market premiums on the lanes you can least afford to lose. A fast, predictable yard does the reverse: it makes Danone the shipper of choice, so you hold capacity and rate without spending a dollar of capex. In this market the yard is a freight-cost and capacity-risk lever, not just an ops metric.',
       },
       identity: {
         label: 'What YardFlow is',
-        headline: 'The Yard Network System — one operating layer for every yard in the network.',
-        body: 'YardFlow is not another single-site yard tool. It is the Yard Network System: a complete, modern YMS that replaces the 40-year-old legacy systems, plus the standardized driver experience, gate-and-carrier accountability, a passive digital twin of every yard, and a live network command view — priced to run across all 13 plants, not just the flagship. It is the layer that finally connects your TMS, WMS, and planning stack to the physical trailer. And you can watch it work: a live network map turns sites green, amber, and red; it stress-tests a hurricane or a demand spike before it lands; it reads every truck and chassis at the gate; and it updates the yard from satellite and spotter cameras while drivers just do their jobs.',
+        headline: 'The Yard Network System, one operating layer for every yard in the network.',
+        body: 'YardFlow is not another single-site yard tool. It is the Yard Network System: a complete, modern YMS that replaces the 40-year-old legacy systems, plus the standardized driver experience, gate-and-carrier accountability, a passive digital twin of every yard, and a live network command view, priced to run across all 13 plants, not just the flagship. It is the layer that finally connects your TMS, WMS, and planning stack to the physical trailer. And you can watch it work: a live network map turns sites green, amber, and red; it stress-tests a hurricane or a demand spike before it lands; it reads every truck and chassis at the gate; and it updates the yard from satellite and spotter cameras while drivers just do their jobs.',
         proofLinks: [
           { label: 'Live network console', href: 'https://www.yardflow.ai/YNS/ui_kits/operator-app/', note: 'map · flowSIM · flowTWIN · flowGATE' },
           { label: 'Driver experience', href: 'https://www.yardflow.ai/YNS/ui_kits/flowdriver/' },
@@ -225,14 +225,14 @@ export const dannon: AccountMicrositeData = {
           { value: '< 6 mo', label: 'Payback', context: 'before rollout completes' },
         ],
         sizing:
-          'The per-site numbers are measured at Primo Brands — a multi-temp, multi-site beverage network running the hardest freight in CPG. Applied to Danone’s 13 U.S. plants at a conservative 50% turn-time improvement, the network prize lands between $15M and $25M a year in recovered production capacity, avoided detention, and freed dock-office capacity.',
+          'The per-site numbers are measured at Primo Brands, a multi-temp, multi-site beverage network running the hardest freight in CPG. Applied to Danone’s 13 U.S. plants at a conservative 50% turn-time improvement, the network prize lands between $15M and $25M a year in recovered production capacity, avoided detention, and freed dock-office capacity.',
         note:
-          'Every supply-chain project competes for the same capital. Against a SaaS cost, deployments like this model in roughly a 20–40% IRR — the range that wins that competition with robotics, TMS, and automation projects. We’ll build Danone’s exact number against your volumes and margins with your team.',
+          'Every supply-chain project competes for the same capital. Against a SaaS cost, deployments like this model in roughly a 20–40% IRR, the range that wins that competition with robotics, TMS, and automation projects. We’ll build Danone’s exact number against your volumes and margins with your team.',
       },
       ease: {
         label: 'Why this is a no-brainer',
         headline: 'Start at one plant. Prove it in 60 days. Standardize from there.',
-        body: 'You don’t rip anything out to begin. The cleanest place to start is the new Jacksonville Southeast hub — net-new yard operations where the standard can be set before local habits lock in, with zero displacement risk. First measurable impact lands in 30 to 60 days. From that proof the same system rolls to Minster, Mount Crawford, and the rest of the network on economics that made network-wide deployment impossible with legacy YMS.',
+        body: 'You don’t rip anything out to begin. The cleanest place to start is the new Jacksonville Southeast hub, net-new yard operations where the standard can be set before local habits lock in, with zero displacement risk. First measurable impact lands in 30 to 60 days. From that proof the same system rolls to Minster, Mount Crawford, and the rest of the network on economics that made network-wide deployment impossible with legacy YMS.',
         closingLine:
           'A problem you already own, a system that already runs, a prize worth eight figures, and a first step that risks nothing. That’s the brief.',
       },
@@ -242,20 +242,20 @@ export const dannon: AccountMicrositeData = {
       type: 'observation',
       headline: 'What we observed about the Danone North America network',
       composition: [
-        { label: 'U.S. production footprint', value: `${DANNON_FACILITY_COUNT_LABEL} owned plants plus ~9 contract manufacturers across CA, CO, FL, ID, IN, NY, NC, OH, PA, TX, UT, VA — the operating-system surface Renew Danone and the Microsoft AI Academy already touch, and the yard layer above the sites does not` },
-        { label: 'Greenfield deployment site', value: 'Jacksonville FL Southeast distribution hub — new node going live alongside the $65M International Delight / STōK line; the cleanest single yard standard to design from go-live' },
-        { label: 'Active expansion', value: 'Minster OH +48,000 sq ft and 60% more milk volume over the next two years (Oikos +40% YoY in 2024) — more throughput-out-the-door through largely the same dock surface' },
-        { label: 'Operating-system anchors', value: 'Renew Danone (LFL +3-5%, COGS productivity as an explicit pillar) and the Microsoft AI Academy (20,000 staff trained by 2026, extending to 100,000 globally, with predictive maintenance, performance analytics, real-time logistics adjustments already in scope) — yard-network operations is the one system neither of them currently runs' },
+        { label: 'U.S. production footprint', value: `${DANNON_FACILITY_COUNT_LABEL} owned plants plus ~9 contract manufacturers across CA, CO, FL, ID, IN, NY, NC, OH, PA, TX, UT, VA, the operating-system surface Renew Danone and the Microsoft AI Academy already touch, and the yard layer above the sites does not` },
+        { label: 'Greenfield deployment site', value: 'Jacksonville FL Southeast distribution hub, new node going live alongside the $65M International Delight / STōK line; the cleanest single yard standard to design from go-live' },
+        { label: 'Active expansion', value: 'Minster OH +48,000 sq ft and 60% more milk volume over the next two years (Oikos +40% YoY in 2024), more production capacity-out-the-door through largely the same dock surface' },
+        { label: 'Operating-system anchors', value: 'Renew Danone (LFL +3-5%, COGS productivity as an explicit pillar) and the Microsoft AI Academy (20,000 staff trained by 2026, extending to 100,000 globally, with predictive maintenance, performance analytics, real-time logistics adjustments already in scope), yard-network operations is the one system neither of them currently runs' },
         { label: 'Existing yard-tech layer', value: 'No public reference to a network-level YMS. Plant-level routines vary site by site; the White Plains supply chain team stitches a network view from 13 local protocols and ~9 co-manufacturer protocols on top' },
-        { label: 'Temperature-profile mix', value: 'Four zones competing for the same dock surface at multi-category sites — refrigerated fresh dairy (Activia, Oikos, Dannon), refrigerated plant-based (Silk, So Delicious), refrigerated coffee/creamer (International Delight, STōK), and ambient premium water (evian, Volvic, imported)' },
-        { label: 'Freshness clock', value: 'Fresh dairy ~14-day shelf life from production; every minute of yard dwell comes out of at-shelf life. Quality and food safety report up through the COO — yard dwell is a quality problem before it is a logistics-cost problem' },
-        { label: 'Scope 3 logistics commitment', value: 'Logistics = 8% of Danone group GHG · -42% Scope 3 non-FLAG by 2030 vs. 2020 baseline · -90% by 2050 — truck idle in the yard is a directly attributable, measurable line item against an existing public commitment' },
+        { label: 'Temperature-profile mix', value: 'Four zones competing for the same dock surface at multi-category sites, refrigerated fresh dairy (Activia, Oikos, Dannon), refrigerated plant-based (Silk, So Delicious), refrigerated coffee/creamer (International Delight, STōK), and ambient premium water (evian, Volvic, imported)' },
+        { label: 'Freshness clock', value: 'Fresh dairy ~14-day shelf life from production; every minute of yard dwell comes out of at-shelf life. Quality and food safety report up through the COO, yard dwell is a quality problem before it is a logistics-cost problem' },
+        { label: 'Scope 3 logistics commitment', value: 'Logistics = 8% of Danone group GHG · -42% Scope 3 non-FLAG by 2030 vs. 2020 baseline · -90% by 2050, truck idle in the yard is a directly attributable, measurable line item against an existing public commitment' },
       ],
       hypothesis:
-        'Each plant in the Danone North America network runs its own gate, dock, and spotter routine today. Each routine works. The site-level case for keeping the trailer flow moving was paid back years ago, plant by plant, the way fresh-network plants have always paid back their own dock investments. What it has not become, after thirteen owned plants and nine contract manufacturers, is a network operating model. Each site optimizes its own door priority, its own multi-temp arbitration, its own driver experience. The network does not agree with itself on what good looks like — and that is the part Renew Danone cannot fix from the productivity ledger and the Microsoft AI Academy cannot fix from the plant floor.\n\nThat gap got more expensive over the last two years for three reasons. First, Oikos sales rose 40% in 2024, which is why Minster needs 60% more milk through largely the same dock surface over the next two years; the building got more capable, the yard around it did not. Second, fresh dairy carries a 14-day shelf clock that starts before the case is picked, so a 45-minute reefer delay in July becomes shrink, service recovery, and a retailer chargeback in the same week. Third, Danone group has publicly committed to -42% Scope 3 non-FLAG by 2030 and named logistics as 8% of total emissions; truck idle in the yard is the most directly attributable, measurable line item against that commitment, and right now nobody is counting it as such.\n\nThe third thing is the pilot question itself. The new Jacksonville Southeast distribution hub is going live alongside the $65M International Delight / STōK production line. New distribution facilities typically run 15-25% below optimal dock utilization in their first 12-18 months as standard operating procedures get worked out. That makes Jacksonville the cleanest single place to embed a yard standard before the local routine gets locked in — not the marquee Mount Crawford plant, not the Minster expansion, not the 13-site rip-and-replace pitch. The proof at Jacksonville is what earns the right to operate the layer above Mount Crawford, Minster, and the co-manufacturer network in the second wave.',
+        'Each plant in the Danone North America network runs its own gate, dock, and spotter routine today. Each routine works. The site-level case for keeping the trailer flow moving was paid back years ago, plant by plant, the way fresh-network plants have always paid back their own dock investments. What it has not become, after thirteen owned plants and nine contract manufacturers, is a network operating model. Each site optimizes its own door priority, its own multi-temp arbitration, its own driver experience. The network does not agree with itself on what good looks like, and that is the part Renew Danone cannot fix from the productivity ledger and the Microsoft AI Academy cannot fix from the plant floor.\n\nThat gap got more expensive over the last two years for three reasons. First, Oikos sales rose 40% in 2024, which is why Minster needs 60% more milk through largely the same dock surface over the next two years; the building got more capable, the yard around it did not. Second, fresh dairy carries a 14-day shelf clock that starts before the case is picked, so a 45-minute reefer delay in July becomes shrink, service recovery, and a retailer chargeback in the same week. Third, Danone group has publicly committed to -42% Scope 3 non-FLAG by 2030 and named logistics as 8% of total emissions; truck idle in the yard is the most directly attributable, measurable line item against that commitment, and right now nobody is counting it as such.\n\nThe third thing is the pilot question itself. The new Jacksonville Southeast distribution hub is going live alongside the $65M International Delight / STōK production line. New distribution facilities typically run 15-25% below optimal dock utilization in their first 12-18 months as standard operating procedures get worked out. That makes Jacksonville the cleanest single place to embed a yard standard before the local routine gets locked in, not the marquee Mount Crawford plant, not the Minster expansion, not the 13-site rip-and-replace pitch. The proof at Jacksonville is what earns the right to operate the layer above Mount Crawford, Minster, and the co-manufacturer network in the second wave.',
       pullQuote: 'The network does not agree with itself on what good looks like.',
       caveat:
-        'This is built from public Danone disclosures, the Sept 2025 Supply Chain Magazine interview, the Microsoft partnership announcements, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do is push back on whether the yard layer is already more standardized than we think, whether the Jacksonville hub project has already locked in a yard design, and how Minster and Mount Crawford are absorbing throughput growth at the dock today.',
+        'This is built from public Danone disclosures, the Sept 2025 Supply Chain Magazine interview, the Microsoft partnership announcements, and reasonable network inference. We may be wrong about parts of it, the most useful thing you can do is push back on whether the yard layer is already more standardized than we think, whether the Jacksonville hub project has already locked in a yard design, and how Minster and Mount Crawford are absorbing production capacity growth at the dock today.',
     },
     {
       type: 'artifact',
@@ -272,7 +272,7 @@ export const dannon: AccountMicrositeData = {
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp (premium spring and alkaline SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they replaced the site-by-site yard tooling each plant used to run with one Yard Network System across the whole network. The Danone North America operating profile is similar in shape — multi-site, multi-temp, 3PL-dependent, premium-import water inside the mix — but with significantly more forgiving freight economics per trailer and a 14-day fresh-dairy clock that makes shrink the leading indicator instead of margin per case. Primo runs the system on the hardest freight in CPG — same network shape as Danone, harder loads.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp (premium spring and alkaline SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization, they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they replaced the site-by-site yard tooling each plant used to run with one Yard Network System across the whole network. The Danone North America operating profile is similar in shape, multi-site, multi-temp, 3PL-dependent, premium-import water inside the mix, but with significantly more forgiving freight economics per trailer and a 14-day fresh-dairy clock that makes shrink the leading indicator instead of margin per case. Primo runs the system on the hardest freight in CPG, same network shape as Danone, harder loads.',
       metrics: [
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
@@ -280,7 +280,7 @@ export const dannon: AccountMicrositeData = {
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
       timeline:
-        '30-60 days from kickoff to first measurable impact at the pilot site. The cleanest place this lands first is not the marquee Mount Crawford plant or the Minster expansion — it is the new Jacksonville Southeast distribution hub, where the yard standard can be embedded before local routines lock in and the displacement risk is closest to zero. Mount Crawford, Minster, and the co-manufacturer network are the second wave once the operating model has its first 60-day proof. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
+        '30-60 days from kickoff to first measurable impact at the pilot site. The cleanest place this lands first is not the marquee Mount Crawford plant or the Minster expansion, it is the new Jacksonville Southeast distribution hub, where the yard standard can be embedded before local routines lock in and the displacement risk is closest to zero. Mount Crawford, Minster, and the co-manufacturer network are the second wave once the operating model has its first 60-day proof. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
       referenceAvailable: true,
     },
     {
@@ -296,7 +296,7 @@ export const dannon: AccountMicrositeData = {
         },
         {
           id: 'gerling-interview-2025',
-          source: 'Supply Chain Magazine — "The Supply Chain Interview: Heiko Gerling" (Sept 2025)',
+          source: 'Supply Chain Magazine, "The Supply Chain Interview: Heiko Gerling" (Sept 2025)',
           confidence: 'public',
           detail: 'Heiko\'s first major external interview after the June 2025 COO appointment. Themes: supply-chain resilience as "structure, plans, agility, and foresight," in-country manufacturing (90% of Danone US products made in-country), digital tools and automation as resilience levers. The resilience framing is the COO\'s own language.',
         },
@@ -316,13 +316,13 @@ export const dannon: AccountMicrositeData = {
           id: 'minster-expansion',
           source: 'Minster OH plant expansion (Aug 2025)',
           confidence: 'public',
-          detail: '~48,000 sq ft addition · 30 new full-time jobs · 60% more milk required over the next two years · driven by Oikos sales +40% YoY in 2024. More throughput-out-the-door, same dock surface — the textbook yard-as-constraint pattern.',
+          detail: '~48,000 sq ft addition · 30 new full-time jobs · 60% more milk required over the next two years · driven by Oikos sales +40% YoY in 2024. More production capacity-out-the-door, same dock surface, the textbook yard-as-constraint pattern.',
         },
         {
           id: 'jacksonville-expansion',
           source: 'Jacksonville FL $65M production line + new Southeast DC (June 2025)',
           confidence: 'public',
-          detail: 'Ribbon-cut June 17, 2025. 30% reduction in bottle loss via new molding process. 200 jobs locally. New Southeast distribution hub under construction in the Jacksonville area — net-new yard operations to design from go-live, the closest Danone NA gets to a greenfield embed.',
+          detail: 'Ribbon-cut June 17, 2025. 30% reduction in bottle loss via new molding process. 200 jobs locally. New Southeast distribution hub under construction in the Jacksonville area, net-new yard operations to design from go-live, the closest Danone NA gets to a greenfield embed.',
         },
         {
           id: 'climate-transition-plan',
@@ -344,29 +344,29 @@ export const dannon: AccountMicrositeData = {
         },
         {
           id: 'gerling-tenure',
-          source: 'Heiko Gerling — public tenure record',
+          source: 'Heiko Gerling, public tenure record',
           confidence: 'public',
-          detail: '25+ years FMCG operations leadership across Germany, France, and the United States. First Danone stint 2005-2013. Managing Director, Central & North & East Europe at Kraft Heinz (Nov 2014 - Apr 2019) — the 3G-era operating-discipline-first culture. Managing Director Germany / Austria / Poland at Aryzta (May 2019 - May 2021). Return to Danone 2021. SVP Global Operations Excellence 2024 - June 2025. Named Chief Operations Officer, Danone Americas June 2025. MBA, University of Cooperative Education, Mannheim.',
+          detail: '25+ years FMCG operations leadership across Germany, France, and the United States. First Danone stint 2005-2013. Managing Director, Central & North & East Europe at Kraft Heinz (Nov 2014 - Apr 2019), the 3G-era operating-discipline-first culture. Managing Director Germany / Austria / Poland at Aryzta (May 2019 - May 2021). Return to Danone 2021. SVP Global Operations Excellence 2024 - June 2025. Named Chief Operations Officer, Danone Americas June 2025. MBA, University of Cooperative Education, Mannheim.',
           url: 'https://www.linkedin.com/in/heiko-gerling-a5066911/',
         },
       ],
       unknowns: [
-        'Whether the Jacksonville Southeast DC project has already specified a yard design — and who owns it before the hub goes live',
+        'Whether the Jacksonville Southeast DC project has already specified a yard design, and who owns it before the hub goes live',
         'Whether any of the 13 owned plants run a site-level YMS today (PINC, Kaleris, 4Site) that the network-level layer would sit above rather than replace',
-        'How multi-temperature dock-door arbitration is decided today at Mount Crawford and Bridgeton — site policy, system logic, or operator judgment',
+        'How multi-temperature dock-door arbitration is decided today at Mount Crawford and Bridgeton, site policy, system logic, or operator judgment',
         'Whether the ~9 contract-manufacturing partners are inside or outside the standardization scope from day one',
         'Whether Renew Danone\'s COGS-productivity ledger already has a line item for yard-driven shrink and detention, or whether yard variance is currently absorbed into forecast error and quality recovery',
-        'Where the Microsoft AI Academy\'s real-time logistics adjustments use case starts and stops — and whether yard-gate-to-dock data is in or out of that scope today',
+        'Where the Microsoft AI Academy\'s real-time logistics adjustments use case starts and stops, and whether yard-gate-to-dock data is in or out of that scope today',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The Mark Shaughnessy intro path is the only outreach lane we are using here; nothing on this page is meant to bypass that. Danone is distinctive in this round because the operating-system thinking is already on the floor — Renew Danone for productivity, the Microsoft AI Academy for plant intelligence, the Climate Transition Plan for Scope 3 logistics, S&OP for plan-to-execute alignment. The yard is the one system that has not yet caught the same operating discipline. This brief sizes that gap, not the site-level wins under it.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement. The Mark Shaughnessy intro path is the only outreach lane we are using here; nothing on this page is meant to bypass that. Danone is distinctive in this round because the operating-system thinking is already on the floor, Renew Danone for productivity, the Microsoft AI Academy for plant intelligence, the Climate Transition Plan for Scope 3 logistics, S&OP for plan-to-execute alignment. The yard is the one system that has not yet caught the same operating discipline. This brief sizes that gap, not the site-level wins under it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'Heiko — the part most worth pushing back on is whether the operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years has reached the yard at Danone yet, or whether it has reached planning, productivity, and the AI Academy and stopped at the gate. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Heiko, the part most worth pushing back on is whether the operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years has reached the yard at Danone yet, or whether it has reached planning, productivity, and the AI Academy and stopped at the gate. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -469,21 +469,21 @@ export const dannon: AccountMicrositeData = {
       variantSlug: 'heiko-gerling',
 
       framingNarrative:
-        'Heiko, the operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years — uniform standards across every plant, every shift, every market — is the same instinct you brought back to Danone for productivity through Renew Danone and for plant intelligence through the Microsoft AI Academy. The yard is the one system that has not yet caught that discipline. Site-level routines work, plant by plant, but no two agree. One Yard Network System across all 13 plants is what Renew Danone\'s productivity ledger now needs, what the Climate Transition Plan\'s -42% Scope 3 commitment can attribute to, and what the AI Academy\'s real-time logistics adjustments use case is shaped to feed.',
+        'Heiko, the operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years, uniform standards across every plant, every shift, every market, is the same instinct you brought back to Danone for productivity through Renew Danone and for plant intelligence through the Microsoft AI Academy. The yard is the one system that has not yet caught that discipline. Site-level routines work, plant by plant, but no two agree. One Yard Network System across all 13 plants is what Renew Danone\'s productivity ledger now needs, what the Climate Transition Plan\'s -42% Scope 3 commitment can attribute to, and what the AI Academy\'s real-time logistics adjustments use case is shaped to feed.',
       openingHook:
-        'Resilience as structure, plans, agility, and foresight — your phrase. At Danone NA it has reached planning, productivity, and the AI Academy. It has not yet reached the yard.',
+        'Resilience as structure, plans, agility, and foresight, your phrase. At Danone NA it has reached planning, productivity, and the AI Academy. It has not yet reached the yard.',
       stakeStatement:
-        'Minster needs 60% more milk over the next two years through largely the same dock surface. Oikos is up 40%. The Jacksonville Southeast hub is going live. Renew Danone has made COGS productivity an explicit pillar and the Climate Transition Plan has put a -42% number on logistics emissions. The gap between all of that and the trailer-into-the-yard reality is the yard — the only operating system at Danone NA not yet running to a single standard.',
+        'Minster needs 60% more milk over the next two years through largely the same dock surface. Oikos is up 40%. The Jacksonville Southeast hub is going live. Renew Danone has made COGS productivity an explicit pillar and the Climate Transition Plan has put a -42% number on logistics emissions. The gap between all of that and the trailer-into-the-yard reality is the yard, the only operating system at Danone NA not yet running to a single standard.',
 
       heroOverride: {
         headline: 'The yard is the last operating system Danone hasn’t standardized.',
         subheadline:
-          'Plant-level yard routines work at Danone NA, but no two agree. One Yard Network System across all 13 plants — the modern YMS, the driver experience, and the live network view in one — is what Renew Danone\'s productivity ledger now needs and what the Climate Transition Plan\'s -42% Scope 3 commitment can attribute to. The new Jacksonville Southeast hub is the cleanest place to start before local routines lock in; Mount Crawford and Minster are where it scales.',
+          'Plant-level yard routines work at Danone NA, but no two agree. One Yard Network System across all 13 plants, the modern YMS, the driver experience, and the live network view in one, is what Renew Danone\'s productivity ledger now needs and what the Climate Transition Plan\'s -42% Scope 3 commitment can attribute to. The new Jacksonville Southeast hub is the cleanest place to start before local routines lock in; Mount Crawford and Minster are where it scales.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
       toneShift:
-        'Peer-to-peer network-operator framing. Heiko ran general-management P&Ls at Kraft Heinz and Aryzta before returning to Danone; he is wired to revenue and customer service, not just OEE. German dual-study background means American sales maximalism reads as low-credibility — be precise, be quantified, be willing to be wrong on specifics. Quote his own resilience language back at him only where it earns the quote. Acknowledge plant-level yard work as work — it is. Position YardFlow as the one Yard Network System that standardizes all of it and replaces the legacy site-level YMS where one exists — start at the Jacksonville greenfield, no rip-and-replace to begin.',
+        'Peer-to-peer network-operator framing. Heiko ran general-management P&Ls at Kraft Heinz and Aryzta before returning to Danone; he is wired to revenue and customer service, not just OEE. German dual-study background means American sales maximalism reads as low-credibility, be precise, be quantified, be willing to be wrong on specifics. Quote his own resilience language back at him only where it earns the quote. Acknowledge plant-level yard work as work, it is. Position YardFlow as the one Yard Network System that standardizes all of it and replaces the legacy site-level YMS where one exists, start at the Jacksonville greenfield, no rip-and-replace to begin.',
       kpiLanguage: [
         'network OEE',
         'dock-door utilization',
@@ -495,7 +495,7 @@ export const dannon: AccountMicrositeData = {
         'carrier scorecard',
       ],
       proofEmphasis:
-        'Primo is the *public* comparable to cite — same network shape, harder freight (water), already running one Yard Network System in place of site-by-site tooling. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic. Lead with the Jacksonville greenfield start; the Minster expansion math is the urgency line.',
+        'Primo is the *public* comparable to cite, same network shape, harder freight (water), already running one Yard Network System in place of site-by-site tooling. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic. Lead with the Jacksonville greenfield start; the Minster expansion math is the urgency line.',
     },
     {
       person: {
@@ -525,7 +525,7 @@ export const dannon: AccountMicrositeData = {
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
       toneShift: 'Network-oriented supply chain language. She is a routing and triangulation contact, so make it easy to see where the real operating owner should lean in.',
-      kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
+      kpiLanguage: ['truck turn time', 'dock utilization', 'production capacity per shift', 'detention cost', 'carrier satisfaction'],
       proofEmphasis: `Emphasize one protocol across ${DANNON_FACILITY_COUNT_LABEL} facilities and visibility into the yard layer, not just site savings.`,
     },
     {
@@ -587,7 +587,7 @@ export const dannon: AccountMicrositeData = {
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
       toneShift: 'Planning and customer-service language. Tie yard performance directly to schedule adherence and freshness-protected service.',
-      kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
+      kpiLanguage: ['truck turn time', 'dock utilization', 'production capacity per shift', 'detention cost', 'carrier satisfaction'],
       proofEmphasis: 'Lead with schedule adherence, dock readiness, and the way YardFlow reduces execution noise that planning teams currently absorb downstream.',
     },
     {
@@ -618,7 +618,7 @@ export const dannon: AccountMicrositeData = {
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
       toneShift: 'Field-operations language. He cares about appointment precision, warehouse flow, and what the site team has to do when the yard falls behind.',
-      kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
+      kpiLanguage: ['truck turn time', 'dock utilization', 'production capacity per shift', 'detention cost', 'carrier satisfaction'],
       proofEmphasis: 'Lead with queue control, dock sequencing, and the ability to absorb more volume without adding dock-office headcount.',
     },
   ],
@@ -669,7 +669,7 @@ export const dannon: AccountMicrositeData = {
         label: 'Modeled daily trailer moves',
         value: 849,
         unit: 'moves/day',
-        sourceNoteId: 'dannon-throughput-profile',
+        sourceNoteId: 'dannon-production capacity-profile',
       },
       {
         label: 'Average margin per shipment',
@@ -692,8 +692,8 @@ export const dannon: AccountMicrositeData = {
         citation: 'https://www.danonenorthamerica.com/about-us/',
       },
       {
-        id: 'dannon-throughput-profile',
-        label: 'Danone throughput profile',
+        id: 'dannon-production capacity-profile',
+        label: 'Danone production capacity profile',
         detail: 'Shipment-per-day assumptions are conservative for a fresh dairy and plant-based network where dock visibility matters more than headline site count alone.',
         confidence: 'estimated',
         citation: 'src/lib/data/facility-facts.json',
@@ -732,28 +732,28 @@ export const dannon: AccountMicrositeData = {
   signals: {
     eventAttendance: 'Recurring industry-conference attendance signal',
     recentNews: [
-      'Heiko Gerling named Chief Operations Officer, Danone Americas (June 2025) — first major external interview in Supply Chain Magazine September 2025 framed resilience as "structure, plans, agility, and foresight."',
-      'Minster OH plant expansion (Aug 2025) — ~48,000 sq ft added, 30 new jobs, 60% more milk volume needed over the next two years driven by Oikos +40% YoY in 2024.',
-      'Jacksonville FL $65M International Delight / STōK production line opened June 17 2025; new Southeast distribution hub under construction nearby — the cleanest greenfield yard-design window in the NA network.',
+      'Heiko Gerling named Chief Operations Officer, Danone Americas (June 2025), first major external interview in Supply Chain Magazine September 2025 framed resilience as "structure, plans, agility, and foresight."',
+      'Minster OH plant expansion (Aug 2025), ~48,000 sq ft added, 30 new jobs, 60% more milk volume needed over the next two years driven by Oikos +40% YoY in 2024.',
+      'Jacksonville FL $65M International Delight / STōK production line opened June 17 2025; new Southeast distribution hub under construction nearby, the cleanest greenfield yard-design window in the NA network.',
       'Renew Danone strategy (2025-2028 chapter) names COGS productivity as an explicit pillar; FY2024 earnings cited "record productivity" as a margin lever.',
-      'Microsoft AI Academy scaling toward 100,000 staff trained globally — predictive maintenance, performance analytics, real-time logistics adjustments are named manufacturing use cases.',
+      'Microsoft AI Academy scaling toward 100,000 staff trained globally, predictive maintenance, performance analytics, real-time logistics adjustments are named manufacturing use cases.',
       'Climate Transition Plan commits Scope 3 non-FLAG to -42% by 2030; logistics named as 8% of total Danone GHG.',
     ],
     supplyChainInitiatives: [
       'Renew Danone productivity ledger',
       'Microsoft AI Academy (manufacturing + real-time logistics use cases)',
-      'Climate Transition Plan — -42% Scope 3 non-FLAG by 2030',
+      'Climate Transition Plan, -42% Scope 3 non-FLAG by 2030',
       'Jacksonville Southeast DC build-out',
       'Minster +60% milk capacity expansion',
     ],
     urgencyDriver:
-      'The operating-system discipline Heiko applied at Kraft Heinz — uniform standards across every plant, every shift — has been delivered at Danone NA for productivity (Renew Danone) and plant intelligence (Microsoft AI Academy) but not for the yard layer above the sites. The Jacksonville Southeast hub is the highest-leverage single deployment window in the NA portfolio; the Minster +60% throughput is the timing driver for the rest.',
+      'The operating-system discipline Heiko applied at Kraft Heinz, uniform standards across every plant, every shift, has been delivered at Danone NA for productivity (Renew Danone) and plant intelligence (Microsoft AI Academy) but not for the yard layer above the sites. The Jacksonville Southeast hub is the highest-leverage single deployment window in the NA portfolio; the Minster +60% production capacity is the timing driver for the rest.',
   },
 
   marginaliaItems: [
     { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
     { mark: 'Greenfield window', body: 'Jacksonville Southeast hub · ribbon-cut alongside $65M International Delight / STōK line · the cleanest yard-standard embed before local routines lock in.' },
-    { mark: 'Throughput pressure', body: 'Minster · +48,000 sq ft · 60% more milk over two years · Oikos +40% YoY 2024. More throughput-out-the-door, same dock surface.' },
+    { mark: 'Production capacity pressure', body: 'Minster · +48,000 sq ft · 60% more milk over two years · Oikos +40% YoY 2024. More production capacity-out-the-door, same dock surface.' },
     { mark: 'Strategy anchor', body: 'Renew Danone names COGS productivity as an explicit pillar. Yard standardization is the productivity lever that does not require new dock capex.' },
     { mark: 'Gerling in his own words', body: 'Resilience is "structure, plans, agility, and foresight." Yard standardization is the resilience layer most fresh networks do not have yet.' },
     { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted. The public network-operating-layer comparable for fresh-shape CPG.' },
@@ -762,7 +762,7 @@ export const dannon: AccountMicrositeData = {
   audioBrief: {
     src: '/audio/dannon.m4a',
     intro:
-      'Prefer to listen? The same brief, read aloud and chaptered so you can skip to what matters — about twenty minutes end to end. Or watch the short version below. Whichever is easier than reading.',
+      'Prefer to listen? The same brief, read aloud and chaptered so you can skip to what matters, about twenty minutes end to end. Or watch the short version below. Whichever is easier than reading.',
     chapters: [
       { id: 'thesis', label: 'The plant-level case is closed', start: 0 },
       { id: 'what-renew-made', label: 'What Renew Danone made expensive', start: 280 },
@@ -773,7 +773,7 @@ export const dannon: AccountMicrositeData = {
     videoFollowUp: {
       src: '/audio/dannon-video.mp4',
       intro:
-        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+        'Or watch. The same brief, compressed into a few minutes, for the times forwarding a video is easier than describing the memo.',
     },
     generatedAt: '2026-05-14T21:16:00Z',
   },

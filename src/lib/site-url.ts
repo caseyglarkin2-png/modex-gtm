@@ -74,5 +74,9 @@ export function buildAbsoluteUrl(pathname: string): string {
  * Internal admin routes should still use buildAbsoluteUrl().
  */
 export function buildMicrositeAbsoluteUrl(pathname: string): string {
-  return new URL(pathname, getMicrositeBaseUrl()).toString();
+  const url = new URL(pathname, getMicrositeBaseUrl()).toString();
+  // yardflow.ai is trailingSlash:true — the slashless form 308s, and a
+  // canonical must never point at a redirect (2026-07-09 audit).
+  if (url.includes('?') || url.includes('#') || /\.[a-z0-9]+$/i.test(url)) return url;
+  return url.endsWith('/') ? url : `${url}/`;
 }

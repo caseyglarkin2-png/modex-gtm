@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
     default: "YardFlow by FreightRoll",
-    template: "%s — YardFlow by FreightRoll",
+    template: "%s | YardFlow by FreightRoll",
   },
   description: "YardFlow by FreightRoll — the Yard Network System",
   openGraph: {

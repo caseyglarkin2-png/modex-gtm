@@ -9,7 +9,7 @@
  * This intel powers the cold-email displacement framing (see
  * docs/research/tamera-fenske-kimberly-clark-dossier.md and the cold-email
  * kit at docs/outreach/2026-q2-pinc-displacement-15-cold-emails.md). It
- * must not appear in any prospect-facing surface — including proofBlocks
+ * must not appear in any prospect-facing surface, including proofBlocks
  * which feed memo-compat's fallback comparable section. The memo speaks
  * about "the gate-and-locate layer you already operate" without naming
  * Kaleris/PINC.
@@ -28,7 +28,7 @@
  *
  * Powering Care timing intel (validated May 2026):
  *   - Productivity savings: 5.9% in 2024 (record high), targeting ~5% in
- *     2025, ~6% in 2026 — the productivity number is the live KPI Fenske
+ *     2025, ~6% in 2026, the productivity number is the live KPI Fenske
  *     reports against; not a one-time program total.
  *   - International restructuring is a Suzano JV (announced June 5, 2025;
  *     closing targeted mid-2026; K-C retains 49% of a $3.4B enterprise-
@@ -41,16 +41,16 @@
  */
 
 /**
- * Kimberly-Clark — ABM Microsite Data
- * Quality Tier: A+ (confirmed Kaleris customer — hunt list acct_008)
+ * Kimberly-Clark, ABM Microsite Data
+ * Quality Tier: A+ (confirmed Kaleris customer, hunt list acct_008)
  * Pitch shape: coexistence wedge (in-yard execution + dock-orchestration
  * layer above the existing gate-and-locate system), not displacement
  * Angle: YARD MANAGEMENT (dock-door utilization, dock-cycle measurement,
- * in-yard execution, mill-to-converter dock arbitration) — NOT driver
+ * in-yard execution, mill-to-converter dock arbitration), NOT driver
  * experience
  * Stakeholder vocabulary: industrial-ops (Fenske's 22-year 3M pedigree,
- * ending as SVP US & Canada Manufacturing and Supply Chain) —
- * OEE-equivalent, cycle-time-per-asset, throughput-per-dock,
+ * ending as SVP US & Canada Manufacturing and Supply Chain) ,
+ * OEE-equivalent, cycle-time-per-asset, production capacity-per-dock,
  * capital-avoidance-per-productivity-unit
  */
 
@@ -70,7 +70,7 @@ export const kimberlyClark: AccountMicrositeData = {
 
   pageTitle: 'YardFlow for Kimberly-Clark - The Yard Layer Powering Care Needs Next',
   metaDescription:
-    'How an in-yard execution and dock-orchestration layer lands on top of Kimberly-Clark\'s existing gate-and-locate system — converting cube-heavy trailer pressure into Powering Care productivity attribution, without capex.',
+    'How an in-yard execution and dock-orchestration layer lands on top of Kimberly-Clark\'s existing gate-and-locate system, converting cube-heavy trailer pressure into Powering Care productivity attribution, without capex.',
 
   sections: [
     { type: 'yns-thesis' },
@@ -78,20 +78,20 @@ export const kimberlyClark: AccountMicrositeData = {
       type: 'observation',
       headline: 'What we observed about the Kimberly-Clark NA network',
       composition: [
-        { label: 'NA manufacturing footprint', value: '~15–20 plants — Personal Care (Huggies, Pull-Ups, Depend, Kotex) + Consumer Tissue (Kleenex, Scott, Cottonelle) + K-C Professional (B2B away-from-home). The footprint Powering Care is sized against, and the surface the yard layer sits on top of' },
+        { label: 'NA manufacturing footprint', value: '~15–20 plants, Personal Care (Huggies, Pull-Ups, Depend, Kotex) + Consumer Tissue (Kleenex, Scott, Cottonelle) + K-C Professional (B2B away-from-home). The footprint Powering Care is sized against, and the surface the yard layer sits on top of' },
         { label: 'Powering Care productivity engine', value: '5.9% productivity savings in 2024 (record high) · ~5% target 2025 · ~6% expected 2026. This is the running KPI Tamera Fenske reports against, not a one-time program total' },
-        { label: 'Structural yard math', value: 'Cube-out, not weight-out — a trailer of diapers cubes at ~25–30% of weight limit; tissue is volume-heavy on most lanes. K-C runs more physical trailers per ton of finished goods than any food-CPG peer at the same revenue scale' },
+        { label: 'Structural yard math', value: 'Cube-out, not weight-out, a trailer of diapers cubes at ~25–30% of weight limit; tissue is volume-heavy on most lanes. K-C runs more physical trailers per ton of finished goods than any food-CPG peer at the same revenue scale' },
         { label: 'Suzano JV consolidation', value: 'International family-care + professional business contributed to a $3.4B JV with Suzano (announced June 2025, closing mid-2026); K-C retains 49% and licenses Scott / Kleenex / Viva / WypAll / K-C Professional brands. NA-retained entity becomes the published-margin surface' },
         { label: 'Inbound profile', value: 'Heavy rail-and-truck pulp and recycled-fiber inbound into integrated mills; giant paper rolls move by truck and rail from mill to converter, often inside the same operating entity' },
         { label: 'Outbound profile', value: 'Mixed retail (Walmart, Target, Costco, Sam\'s, Kroger, Amazon) + K-C Professional (B2B away-from-home) running on different cadence and trailer profiles from the same yard at most plants' },
-        { label: 'Existing yard-tech layer', value: 'Gate-and-locate yard tracking is in production at NA facilities; the in-yard execution and dock-orchestration layer above it — the layer that turns trailer location into dock-cycle outcomes — is unsolved' },
-        { label: 'CSCO operating posture', value: 'Tamera Fenske recruited September 2022 from 3M (22 years, ending as SVP US & Canada Manufacturing and Supply Chain). Industrial-ops vocabulary, not CPG-native. Owns procurement, manufacturing, logistics, safety, sustainability, and Global Nonwovens — sits across both Personal Care and Consumer Tissue' },
+        { label: 'Existing yard-tech layer', value: 'Gate-and-locate yard tracking is in production at NA facilities; the in-yard execution and dock-orchestration layer above it, the layer that turns trailer location into dock-cycle outcomes, is unsolved' },
+        { label: 'CSCO operating posture', value: 'Tamera Fenske recruited September 2022 from 3M (22 years, ending as SVP US & Canada Manufacturing and Supply Chain). Industrial-ops vocabulary, not CPG-native. Owns procurement, manufacturing, logistics, safety, sustainability, and Global Nonwovens, sits across both Personal Care and Consumer Tissue' },
       ],
       hypothesis:
-        'Powering Care is, mechanically, a productivity-savings engine. 5.9% landed in 2024; ~5% is the bar in 2025; ~6% is the expected 2026 number. That is not a one-time program total — it is the operating cadence Tamera Fenske reports against on every quarterly call, and the surface that absorbs every operating improvement that lands and every one that does not. Anything that converts directly to that running number is on her agenda. Anything that does not, is not.\n\nThe structural feature that matters for the yard is cube. K-C is cube-heavy across both halves of the network — diaper trailers cube out at ~25–30% of weight limit, tissue trailers are weight-limited only on rare lanes — which means the same dollar of finished goods moves in more physical trailers than at a comparably sized food-CPG peer. Every trailer is a gate-in event, a dock-in event, a hostler move, an exit event. Yard scale at K-C is multiplied versus peers operating at the same revenue, and yard turn-time savings therefore compound harder. The cube-out / weight-out asymmetry is a structural amplifier, not a category note.\n\nThe gate-and-locate layer you already operate gives you the system of record for where trailers are; what it does not give you is the in-yard execution and dock-orchestration logic that turns trailer location into dock-cycle outcomes the productivity number can attribute to. That gap is the unsolved seam between the existing yard system, the SAP S/4HANA backbone, and the Powering Care attribution model. The Suzano JV closing mid-2026 will move the international family-care and professional business off the parent\'s P&L; the NA-retained entity\'s yard KPIs become more visible to the published margin number after that close, not less — which is the reason this conversation has a timing driver rather than being a forever-deferred operating-cost line.',
+        'Powering Care is, mechanically, a productivity-savings engine. 5.9% landed in 2024; ~5% is the bar in 2025; ~6% is the expected 2026 number. That is not a one-time program total, it is the operating cadence Tamera Fenske reports against on every quarterly call, and the surface that absorbs every operating improvement that lands and every one that does not. Anything that converts directly to that running number is on her agenda. Anything that does not, is not.\n\nThe structural feature that matters for the yard is cube. K-C is cube-heavy across both halves of the network, diaper trailers cube out at ~25–30% of weight limit, tissue trailers are weight-limited only on rare lanes, which means the same dollar of finished goods moves in more physical trailers than at a comparably sized food-CPG peer. Every trailer is a gate-in event, a dock-in event, a hostler move, an exit event. Yard scale at K-C is multiplied versus peers operating at the same revenue, and yard turn-time savings therefore compound harder. The cube-out / weight-out asymmetry is a structural amplifier, not a category note.\n\nThe gate-and-locate layer you already operate gives you the system of record for where trailers are; what it does not give you is the in-yard execution and dock-orchestration logic that turns trailer location into dock-cycle outcomes the productivity number can attribute to. That gap is the unsolved seam between the existing yard system, the SAP S/4HANA backbone, and the Powering Care attribution model. The Suzano JV closing mid-2026 will move the international family-care and professional business off the parent\'s P&L; the NA-retained entity\'s yard KPIs become more visible to the published margin number after that close, not less, which is the reason this conversation has a timing driver rather than being a forever-deferred operating-cost line.',
       pullQuote: 'The cube-out / weight-out asymmetry is a structural amplifier, not a category note.',
       caveat:
-        'This is built from K-C public disclosures, Powering Care earnings-call commentary, the Suzano JV announcement and SEC filing, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the gate-and-locate layer\'s data is currently surfacing into a usable dock-orchestration view at the network level, how the Suzano JV close is reshaping the NA-retained operating standards, and where the cube-heavy trailer-count math is biting hardest at the surviving plants right now.',
+        'This is built from K-C public disclosures, Powering Care earnings-call commentary, the Suzano JV announcement and SEC filing, and reasonable network inference. We may be wrong about parts of it, the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the gate-and-locate layer\'s data is currently surfacing into a usable dock-orchestration view at the network level, how the Suzano JV close is reshaping the NA-retained operating standards, and where the cube-heavy trailer-count math is biting hardest at the surviving plants right now.',
     },
     {
       type: 'artifact',
@@ -108,7 +108,7 @@ export const kimberlyClark: AccountMicrositeData = {
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube — the inverse problem of a K-C diaper trailer, which cubes out at ~25–30% of weight limit), low-margin (so every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp at the premium SKU layer. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level operating model on top of their existing site-level yard systems. The K-C operating profile is shape-similar — multi-site, multi-channel, 3PL-dependent, mature gate-and-locate yard tech already in place — but with cube-heavy economics that make turn-time savings compound harder than they did at Primo, not the other way around. Primo runs the operating layer Powering Care attribution is shaped to host — same coordinates, harder freight.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube, the inverse problem of a K-C diaper trailer, which cubes out at ~25–30% of weight limit), low-margin (so every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp at the premium SKU layer. Primo is years ahead of every other CPG category on yard automation and digitization, they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level operating model on top of their existing site-level yard systems. The K-C operating profile is shape-similar, multi-site, multi-channel, 3PL-dependent, mature gate-and-locate yard tech already in place, but with cube-heavy economics that make turn-time savings compound harder than they did at Primo, not the other way around. Primo runs the operating layer Powering Care attribution is shaped to host, same coordinates, harder freight.',
       metrics: [
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
@@ -116,7 +116,7 @@ export const kimberlyClark: AccountMicrositeData = {
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
       timeline:
-        '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot target at K-C is the single NA plant running the worst dock-cycle variance against the cube-heavy trailer-count baseline — same dock-door count, materially more in-yard execution friction, the binding-constraint problem that yard standardization specifically addresses. The cube-heavy math means a 24-minute turn-time reduction clears more trailers per shift here than the same reduction at an equivalent food-CPG plant — and the trailers it clears land inside the Powering Care productivity number the same week they clear.',
+        '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot target at K-C is the single NA plant running the worst dock-cycle variance against the cube-heavy trailer-count baseline, same dock-door count, materially more in-yard execution friction, the binding-constraint problem that yard standardization specifically addresses. The cube-heavy math means a 24-minute turn-time reduction clears more trailers per shift here than the same reduction at an equivalent food-CPG plant, and the trailers it clears land inside the Powering Care productivity number the same week they clear.',
       referenceAvailable: true,
     },
     {
@@ -146,7 +146,7 @@ export const kimberlyClark: AccountMicrositeData = {
         },
         {
           id: 'kc-fenske-tenure',
-          source: 'Tamera Fenske — public tenure record',
+          source: 'Tamera Fenske, public tenure record',
           confidence: 'public',
           detail: '22 years at 3M, ending as SVP US & Canada Manufacturing and Supply Chain (responsibility across all business groups, preceded by plant management and global-business operations roles). Earlier career: Marathon Ashland Petroleum, Dow Chemical. Named K-C CSCO effective September 19, 2022. Industrial-ops pedigree, not CPG-native.',
           url: 'https://www.linkedin.com/in/tamera-fenske-08121a7/',
@@ -173,7 +173,7 @@ export const kimberlyClark: AccountMicrositeData = {
       unknowns: [
         'Whether the existing gate-and-locate layer\'s data is currently surfacing into a dock-orchestration view at the network level today, or only as site-by-site records the productivity engine cannot attribute to',
         'Whether SAP Yard Logistics (the S/4HANA-native yard module) is in scope for the S/4 transformation, which would change the discovery shape',
-        'How the Suzano JV close in mid-2026 reshapes the NA-retained entity\'s operating standards — and whether yard standardization decisions get re-opened during that close',
+        'How the Suzano JV close in mid-2026 reshapes the NA-retained entity\'s operating standards, and whether yard standardization decisions get re-opened during that close',
         'Which NA plants are running closest to dock-cycle capacity against the cube-heavy trailer-count baseline right now',
         'How K-C Professional (B2B away-from-home) outbound interleaves with retail-channel outbound at the plants running both, and whether mixed-channel dock contention is currently visible in the yard data',
         'Whether the 3M operating-standards muscle Tamera carried into K-C has reached the yard layer yet, or whether it stopped at the planning, manufacturing, and procurement tiers',
@@ -184,10 +184,10 @@ export const kimberlyClark: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Kimberly-Clark is distinctive in this round because the operating-system thinking Tamera carried out of twenty-two years at 3M — uniform manufacturing and supply-chain standards across every business group and every site — is already on the floor for planning, procurement, manufacturing, and customer logistics. The yard is the one layer that has not yet caught the same operating discipline. This brief sizes that gap, not the site-level wins under it.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement. Kimberly-Clark is distinctive in this round because the operating-system thinking Tamera carried out of twenty-two years at 3M, uniform manufacturing and supply-chain standards across every business group and every site, is already on the floor for planning, procurement, manufacturing, and customer logistics. The yard is the one layer that has not yet caught the same operating discipline. This brief sizes that gap, not the site-level wins under it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'Tamera — the part most worth pushing back on is whether the operating-standards muscle you carried out of twenty-two years at 3M has reached the yard layer yet, or whether it stopped at the planning, manufacturing, and procurement tiers. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Tamera, the part most worth pushing back on is whether the operating-standards muscle you carried out of twenty-two years at 3M has reached the yard layer yet, or whether it stopped at the planning, manufacturing, and procurement tiers. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -207,7 +207,7 @@ export const kimberlyClark: AccountMicrositeData = {
       seniority: 'SVP/EVP',
       function: 'Supply Chain',
       currentMandate:
-        'Owns global supply chain at K-C since September 2022 — procurement, manufacturing, logistics, transportation, safety, sustainability, and Global Nonwovens. Recruited from 3M (22 years, ending as SVP US & Canada Manufacturing and Supply Chain across all business groups) to deliver Powering Care productivity. Industrial-ops pedigree; not a CPG-native CSCO. Sits across both Personal Care and Consumer Tissue segments.',
+        'Owns global supply chain at K-C since September 2022, procurement, manufacturing, logistics, transportation, safety, sustainability, and Global Nonwovens. Recruited from 3M (22 years, ending as SVP US & Canada Manufacturing and Supply Chain across all business groups) to deliver Powering Care productivity. Industrial-ops pedigree; not a CPG-native CSCO. Sits across both Personal Care and Consumer Tissue segments.',
       bestIntroPath:
         'Direct outreach to CSCO office. If delegated, target VP Logistics & Customer Logistics or VP Manufacturing & Engineering as alternates; reach via mutual connection preferred over cold inbound.',
     },
@@ -232,24 +232,24 @@ export const kimberlyClark: AccountMicrositeData = {
       variantSlug: 'tamera-fenske',
 
       framingNarrative:
-        'Tamera, the operating-standards muscle you carried out of twenty-two years at 3M — uniform manufacturing and supply-chain practice across every business group, every site, every shift — is the same muscle K-C has applied to planning, procurement, and manufacturing under Powering Care. The yard is the tile that has not been laid into that operating system yet. The gate-and-locate layer K-C already operates is the system of record for where trailers are; the in-yard execution and dock-orchestration layer above it is what Powering Care\'s productivity number now requires, and what the cube-heavy trailer-count math at K-C compounds harder than at any food-CPG peer.',
+        'Tamera, the operating-standards muscle you carried out of twenty-two years at 3M, uniform manufacturing and supply-chain practice across every business group, every site, every shift, is the same muscle K-C has applied to planning, procurement, and manufacturing under Powering Care. The yard is the tile that has not been laid into that operating system yet. The gate-and-locate layer K-C already operates is the system of record for where trailers are; the in-yard execution and dock-orchestration layer above it is what Powering Care\'s productivity number now requires, and what the cube-heavy trailer-count math at K-C compounds harder than at any food-CPG peer.',
       openingHook:
-        'Powering Care landed 5.9% productivity in 2024 against a running operating cadence, not a one-time program total. The yard layer K-C operates today gives you the system of record for where trailers are; what it does not give you — and what the productivity number now requires — is the in-yard execution and dock-orchestration logic that turns trailer location into dock-cycle outcomes the engine can attribute to.',
+        'Powering Care landed 5.9% productivity in 2024 against a running operating cadence, not a one-time program total. The yard layer K-C operates today gives you the system of record for where trailers are; what it does not give you, and what the productivity number now requires, is the in-yard execution and dock-orchestration logic that turns trailer location into dock-cycle outcomes the engine can attribute to.',
       stakeStatement:
         'Cube-heavy yards compound turn-time savings harder than tonnage-heavy yards. The same 24-minute turn-time reduction clears more trailers per shift at K-C than at an equivalent food-CPG plant. Powering Care productivity attribution to specific operating changes is the lever; the in-yard execution layer above gate-and-locate is the data that lets you attribute it. The Suzano JV close in mid-2026 makes the NA-retained entity\'s yard KPIs more visible to the published margin number, not less.',
 
       heroOverride: {
         headline: 'Powering Care needs the in-yard execution layer above gate-and-locate.',
         subheadline:
-          'The productivity engine is running at ~6% for 2026. The cube-heavy structural math means turn-time savings compound harder at K-C than at any food-CPG peer — and the productivity number lives or dies on the in-yard execution layer the existing yard system was never built to be.',
+          'The productivity engine is running at ~6% for 2026. The cube-heavy structural math means turn-time savings compound harder at K-C than at any food-CPG peer, and the productivity number lives or dies on the in-yard execution layer the existing yard system was never built to be.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
-        'Industrial-ops vocabulary, not CPG-OTIF vocabulary. Tamera came out of twenty-two years at 3M; she reads operating math faster than category narrative. Acknowledge the existing yard layer respectfully — the original selection was correct; the operating problem has moved. Position the wedge as the layer above (in-yard execution + dock-orchestration), not as replacement of the gate-and-locate system. Number-dense, low-adjective.',
+        'Industrial-ops vocabulary, not CPG-OTIF vocabulary. Tamera came out of twenty-two years at 3M; she reads operating math faster than category narrative. Acknowledge the existing yard layer respectfully, the original selection was correct; the operating problem has moved. Position the wedge as the layer above (in-yard execution + dock-orchestration), not as replacement of the gate-and-locate system. Number-dense, low-adjective.',
       kpiLanguage: [
         'cycle-time-per-yard-asset',
-        'throughput-per-dock-door',
+        'production capacity-per-dock-door',
         'dock-cycle envelope',
         'capital-avoidance-per-productivity-unit',
         'gate-in to dock-in measurement',
@@ -258,7 +258,7 @@ export const kimberlyClark: AccountMicrositeData = {
         'Powering Care productivity attribution',
       ],
       proofEmphasis:
-        'Primo is the *public* comparable to cite — same network shape, harder freight (water), already running the network-level layer above existing site-level yard systems. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
+        'Primo is the *public* comparable to cite, same network shape, harder freight (water), already running the network-level layer above existing site-level yard systems. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
     },
   ],
 
@@ -271,25 +271,25 @@ export const kimberlyClark: AccountMicrositeData = {
     geographicSpread:
       'North America (HQ: Irving, TX since 2023–2024, relocated from Neenah WI; key plants include Beech Island SC, Mobile AL, Loudon TN, New Milford CT, Owensboro KY, Maumelle AR, Paris TX, plus surviving Wisconsin operations)',
     dailyTrailerMoves:
-      'High-volume — cube-heavy outbound means K-C runs more physical trailers per ton of finished goods than any food-CPG peer at the same revenue scale',
+      'High-volume, cube-heavy outbound means K-C runs more physical trailers per ton of finished goods than any food-CPG peer at the same revenue scale',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL', 'Rail (inbound pulp/recycled fiber)'],
     avgLoadsPerDay:
-      'High-volume — cube-heavy outbound (diapers cube out at ~25–30% of weight limit); heavy inbound pulp and recycled-fiber rail and truck into integrated mills; mill-to-converter giant-paper-roll movements inside the operating entity',
+      'High-volume, cube-heavy outbound (diapers cube out at ~25–30% of weight limit); heavy inbound pulp and recycled-fiber rail and truck into integrated mills; mill-to-converter giant-paper-roll movements inside the operating entity',
   },
 
   signals: {
     recentNews: [
-      'Powering Care productivity engine running at 5.9% savings in 2024 (record high), ~5% target 2025, ~6% expected 2026 — the live KPI Tamera Fenske reports against on every quarterly call.',
-      'Suzano JV announced June 5, 2025 — K-C contributing International Family Care + Professional business to a $3.4B JV (49% K-C / 51% Suzano), closing targeted mid-2026; ~$3.3B 2024 sales and ~22 international facilities transfer.',
-      'HQ relocated Neenah WI → Irving TX in 2023–2024 — repositioning culturally and geographically closer to CPG peers and DFW retailer HQs.',
-      'Tamera Fenske recruited September 2022 from 3M (22 years, ending as SVP US & Canada Manufacturing and Supply Chain across all business groups) — industrial-ops pedigree, not CPG-native; comfortable with footprint rationalization and capital discipline.',
+      'Powering Care productivity engine running at 5.9% savings in 2024 (record high), ~5% target 2025, ~6% expected 2026, the live KPI Tamera Fenske reports against on every quarterly call.',
+      'Suzano JV announced June 5, 2025, K-C contributing International Family Care + Professional business to a $3.4B JV (49% K-C / 51% Suzano), closing targeted mid-2026; ~$3.3B 2024 sales and ~22 international facilities transfer.',
+      'HQ relocated Neenah WI → Irving TX in 2023–2024, repositioning culturally and geographically closer to CPG peers and DFW retailer HQs.',
+      'Tamera Fenske recruited September 2022 from 3M (22 years, ending as SVP US & Canada Manufacturing and Supply Chain across all business groups), industrial-ops pedigree, not CPG-native; comfortable with footprint rationalization and capital discipline.',
       'SAP S/4HANA transformation in flight as the operating-system backbone Powering Care productivity attribution is built on top of.',
     ],
     urgencyDriver:
-      'Powering Care productivity is the running KPI Fenske personally owns; the in-yard execution layer above the existing gate-and-locate system is the no-capex throughput lever that converts directly to productivity attribution. Cube-heavy structural math means yard turn-time savings compound harder at K-C than at food-CPG peers at the same revenue scale. The Suzano JV close in mid-2026 moves the international family-care and professional business off the parent\'s P&L — making the NA-retained entity\'s yard KPIs more visible to the published margin number, not less.',
+      'Powering Care productivity is the running KPI Fenske personally owns; the in-yard execution layer above the existing gate-and-locate system is the no-capex production capacity lever that converts directly to productivity attribution. Cube-heavy structural math means yard turn-time savings compound harder at K-C than at food-CPG peers at the same revenue scale. The Suzano JV close in mid-2026 moves the international family-care and professional business off the parent\'s P&L, making the NA-retained entity\'s yard KPIs more visible to the published margin number, not less.',
   },
 
   marginaliaItems: [
@@ -315,7 +315,7 @@ export const kimberlyClark: AccountMicrositeData = {
     videoFollowUp: {
       src: '/audio/kimberly-clark-video.mp4',
       intro:
-        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+        'Or watch. The same brief, compressed into a few minutes, for the times forwarding a video is easier than describing the memo.',
     },
     generatedAt: '2026-05-14T22:00:00Z',
   },

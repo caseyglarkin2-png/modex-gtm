@@ -474,7 +474,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Roster coordinates (40.329087, -83.549523) landed near the plant center\n(geocode moved only ~1.4 km). Satellite probes (z15-z20) confirm a large auto\nassembly campus: main assembly building, separate logistics buildings,\nfinished-vehicle staging lots, retention ponds, and a vehicle test track on\nthe SW corner — all consistent with Honda ELP at 11000 SR-347.",
+        "dossierExcerpt": "Roster coordinates (40.329087, -83.549523) landed near the plant center\n(geocode moved only ~1.4 km). Satellite probes (z15-z20) confirm a large auto\nassembly campus: main assembly building, separate logistics buildings,\nfinished-vehicle staging lots, retention ponds, and a vehicle test track on\nthe SW corner, all consistent with Honda ELP at 11000 SR-347.",
         "mapsUrl": "https://www.google.com/maps/@40.3285,-83.5475,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "East Liberty Auto Plant confirmed via satellite + roster address 11000 SR-347. Roster point landed near plant center; assembly campus centered ~40.3285,-83.5475 with test track to the SW.",
@@ -669,7 +669,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster geocode (40.27761, -83.525972) was effectively rooftop-accurate (moved\n26 m). Satellite probes confirm a single dark-roof main building with an\nattached white-roof east annex. A user-contributed Street View interior photo\nat the site shows the Acura NSX assembly floor — positively identifying this as\nthe Performance Manufacturing Center. Web research (hondanews, Gardner Web)\nconfirms PMC is a ~184,000 sq ft low-volume plant with ~100 associates, housed\nin Honda's former North American Logistics facility, which built the NSX\n2016-2022 and later the Acura Integra Type S.",
+        "dossierExcerpt": "Roster geocode (40.27761, -83.525972) was effectively rooftop-accurate (moved\n26 m). Satellite probes confirm a single dark-roof main building with an\nattached white-roof east annex. A user-contributed Street View interior photo\nat the site shows the Acura NSX assembly floor, positively identifying this as\nthe Performance Manufacturing Center. Web research (hondanews, Gardner Web)\nconfirms PMC is a ~184,000 sq ft low-volume plant with ~100 associates, housed\nin Honda's former North American Logistics facility, which built the NSX\n2016-2022 and later the Acura Integra Type S.",
         "mapsUrl": "https://www.google.com/maps/@40.2793,-83.5253,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "PMC confirmed - roster geocode moved only 26 m. Satellite shows a single dark-roof main building with a white-roof east annex; a user-contributed Street View interior photo shows the NSX assembly floor, positively identifying the Performance Manufacturing Center.",
@@ -899,7 +899,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Roster coordinates (40.37761, -84.191785) landed near the plant center\n(geocode moved 3.9 km from a city-level point but resolved to the plant).\nSatellite probes (z15-z19) confirm a massive multi-building industrial complex\namid farmland N of Anna OH — consistent with Honda AEP at 12500 Meranda Road.\nWeb research (manufacturing.honda.com, PR Newswire, AMS) confirms AEP is a\n~2.8 million sq ft facility, Honda's largest auto engine plant in the world,\nnow also building EV battery packs (IPU units).",
+        "dossierExcerpt": "Roster coordinates (40.37761, -84.191785) landed near the plant center\n(geocode moved 3.9 km from a city-level point but resolved to the plant).\nSatellite probes (z15-z19) confirm a massive multi-building industrial complex\namid farmland N of Anna OH, consistent with Honda AEP at 12500 Meranda Road.\nWeb research (manufacturing.honda.com, PR Newswire, AMS) confirms AEP is a\n~2.8 million sq ft facility, Honda's largest auto engine plant in the world,\nnow also building EV battery packs (IPU units).",
         "mapsUrl": "https://www.google.com/maps/@40.376,-84.1925,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Anna Engine Plant confirmed via satellite + roster address 12500 Meranda Road. Roster point landed near plant center; the engine-plant campus is the massive multi-building complex centered ~40.3760,-84.1925, amid farmland N of Anna OH.",
@@ -924,7 +924,7 @@
               "url": "https://www.prnewswire.com/news-releases/honda-celebrates-40-years-of-production-at-anna-engine-plant-in-ohio-302509150.html",
               "date": "2025",
               "type": "press",
-              "claim": "Honda celebrates 40 years of production at Anna Engine Plant (2025) — active operation."
+              "claim": "Honda celebrates 40 years of production at Anna Engine Plant (2025), active operation."
             }
           ],
           "checkedDivestiture": true,
@@ -1137,7 +1137,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Roster coordinates (33.616074, -86.145538) landed near the plant center\n(geocode moved 5.9 km from a city-level point but resolved to the plant).\nSatellite probes (z14-z20) confirm a massive multi-building auto+engine plant\ncampus with an on-site vehicle test track, SW of Lincoln AL in Talladega\nCounty. Web research (Encyclopedia of Alabama, Wikipedia, Automotive World)\nconfirms HMA is a ~4.9 million sq ft facility on a 1,350-acre property — the\nfirst Honda facility with engine and vehicle assembly in the same complex,\nbuilding the Odyssey, Pilot, Passport and Ridgeline plus V6 engines.",
+        "dossierExcerpt": "Roster coordinates (33.616074, -86.145538) landed near the plant center\n(geocode moved 5.9 km from a city-level point but resolved to the plant).\nSatellite probes (z14-z20) confirm a massive multi-building auto+engine plant\ncampus with an on-site vehicle test track, SW of Lincoln AL in Talladega\nCounty. Web research (Encyclopedia of Alabama, Wikipedia, Automotive World)\nconfirms HMA is a ~4.9 million sq ft facility on a 1,350-acre property, the\nfirst Honda facility with engine and vehicle assembly in the same complex,\nbuilding the Odyssey, Pilot, Passport and Ridgeline plus V6 engines.",
         "mapsUrl": "https://www.google.com/maps/@33.6155,-86.144,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "HMA confirmed via satellite + roster address 1800 Honda Drive. Roster point landed near plant center; the auto+engine campus is the massive multi-building complex centered ~33.6155,-86.1440, with an on-site vehicle test track to the north, SW of Lincoln AL.",
@@ -1366,7 +1366,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The roster pin (39.370161, -85.543533) landed inside the plant's northern trailer\nlots. Satellite probes z14-z19 confirmed the building: a vast auto assembly\ncampus in rural Decatur County, bounded by Interstate 74 to the north and\nfarmland on all other sides. A vehicle proving/test-track oval occupies the\nsouthern half of the property — characteristic of an OEM auto assembly plant.\nWeb research (Greensburg Chamber, Wikipedia, Honda manufacturing.honda.com)\nconfirms HMIN / Indiana Auto Plant builds the Civic hatchback and CR-V at\n~250,000 vehicles/yr, operating 24/7. The building center was relocated south to\n39.3680, -85.5410.",
+        "dossierExcerpt": "The roster pin (39.370161, -85.543533) landed inside the plant's northern trailer\nlots. Satellite probes z14-z19 confirmed the building: a vast auto assembly\ncampus in rural Decatur County, bounded by Interstate 74 to the north and\nfarmland on all other sides. A vehicle proving/test-track oval occupies the\nsouthern half of the property, characteristic of an OEM auto assembly plant.\nWeb research (Greensburg Chamber, Wikipedia, Honda manufacturing.honda.com)\nconfirms HMIN / Indiana Auto Plant builds the Civic hatchback and CR-V at\n~250,000 vehicles/yr, operating 24/7. The building center was relocated south to\n39.3680, -85.5410.",
         "mapsUrl": "https://www.google.com/maps/@39.368,-85.541,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Waze records a distinct 'Truck entrance' at 2755 N Michigan Ave separate from the visitor 'Main entrance'. Entire campus is fenced and set ~400m back from public roads with a single managed industrial access corridor. truckGate=true is high confidence; the specific gate structure could not be directly imaged.",
@@ -1845,7 +1845,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Tier-1 self-attested current operation; Honda-operated former HPPG. NOTE: a separate Astemo supplier on the same Honda Parkway address is closing (WARN 2026-03) — do not conflate with the Honda transmission plant, which remains open.",
+          "rationale": "Tier-1 self-attested current operation; Honda-operated former HPPG. NOTE: a separate Astemo supplier on the same Honda Parkway address is closing (WARN 2026-03), do not conflate with the Honda transmission plant, which remains open.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -2078,7 +2078,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Active Honda powersports plant (Tier-1 Apr 2026). NOTE: ATV production moved to Honda NC in 2024 — Timmonsville is now UTV/side-by-side only; drop \"ATV\" from the label.",
+          "rationale": "Active Honda powersports plant (Tier-1 Apr 2026). NOTE: ATV production moved to Honda NC in 2024, Timmonsville is now UTV/side-by-side only; drop \"ATV\" from the label.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -2238,7 +2238,7 @@
         "dossierExcerpt": "- Name: Honda Power Equipment Mfg., Inc.\n- Type: Power Equipment / General-Purpose Engine Plant (manufacturing + R&D)\n- Address: 3721 S NC Highway 119, Swepsonville/Haw River, NC 27359\n- Resolved coordinates: 36.033436, -79.344443 (center of the main plant campus)",
         "mapsUrl": "https://www.google.com/maps/@36.033436,-79.344443,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "No controlled truck gate at any public road. The campus is set well back from NC-119 (west) behind dense woods; the main access is an open driveway off the east-side road into the parking lot — no barrier arm, no guard booth, no checkpoint pinch-point. Truck docks and drop yards are reached via private internal roads inside the wooded campus. Classified false.",
+          "truckGate": "No controlled truck gate at any public road. The campus is set well back from NC-119 (west) behind dense woods; the main access is an open driveway off the east-side road into the parking lot, no barrier arm, no guard booth, no checkpoint pinch-point. Truck docks and drop yards are reached via private internal roads inside the wooded campus. Classified false.",
           "guardShack": "No guard booth observed at the entrance driveway or anywhere along the property perimeter in Street View (2023) or satellite.",
           "postGateStaging": "Large paved internal aprons in front of the central and NW dock banks provide ample inside-property holding/queue room.",
           "drivewayLong": "Long private access road from the public road through the campus to the docks easily holds 3+ trucks.",
@@ -2249,7 +2249,7 @@
           "multipleFacilities": "Campus has 4 distinct large buildings: main plant, NW production building, central buildings, and a separate older west building, plus north test/proving fields.",
           "fastLaneOpportunity": "Wide open private access roads and broad aprons leave room to add bypass/express lanes.",
           "entryLanes": "Driveway is a wide open 2-lane apron; exact lane count for trucks not separately marked. Low confidence.",
-          "siteAreaAcres": "Web sources state an 87-acre site; perimeter box captures the developed core plus north test field — ~95 acres estimate.",
+          "siteAreaAcres": "Web sources state an 87-acre site; perimeter box captures the developed core plus north test field, ~95 acres estimate.",
           "railServed": "No rail spur runs into the property."
         },
         "verification": {
@@ -2274,7 +2274,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Honda still operates this exact plant with a real freight yard, but the scoped product (power equipment) ENDED Sept 2023 — it now builds ATVs. RELABEL to a Honda NC ATV/powersports plant; capped pending the label fix.",
+          "rationale": "Honda still operates this exact plant with a real freight yard, but the scoped product (power equipment) ENDED Sept 2023, it now builds ATVs. RELABEL to a Honda NC ATV/powersports plant; capped pending the label fix.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -2464,24 +2464,24 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "- Name: American Honda - Troy Parts Distribution Center (PDC)\n- Type: Parts Distribution Center\n- Address: Commerce Center Boulevard area off I-75, Troy, OH 45373\n- Resolved coordinates: 40.048500, -84.237200 (center of the PDC warehouse —\n  the northern of two adjacent Honda warehouses)",
+        "dossierExcerpt": "- Name: American Honda - Troy Parts Distribution Center (PDC)\n- Type: Parts Distribution Center\n- Address: Commerce Center Boulevard area off I-75, Troy, OH 45373\n- Resolved coordinates: 40.048500, -84.237200 (center of the PDC warehouse ,\n  the northern of two adjacent Honda warehouses)",
         "mapsUrl": "https://www.google.com/maps/@40.048500,-84.237200,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "siteIdentity": "American Honda's Troy Parts Distribution Center (PDC) — a 534,000 sq ft parts DC operating in Troy since 1986. It is the northern of two adjacent large Honda warehouses off Commerce Center Blvd; the southern building is the 2007 Midwest Consolidation Center (MCC, roster idx 16, at 151 Commerce Center Blvd). The roster idx-15 geocode landed in a residential area; the facility was re-located via satellite and web research. Building center locked at ~40.0485, -84.2372. The PDC/MCC assignment (PDC = north building) follows from the MCC roster coordinates pointing to the southern building and the MCC being described as built adjacent to the older PDC.",
-          "truckGate": "The PDC campus is fenced with a controlled entrance — a Honda monument sign and flag at the entry road off the public road, and a small guard-booth-footprint structure beside the internal access road. Classified true (medium confidence — no Street View inside the gate to confirm a barrier arm).",
+          "siteIdentity": "American Honda's Troy Parts Distribution Center (PDC), a 534,000 sq ft parts DC operating in Troy since 1986. It is the northern of two adjacent large Honda warehouses off Commerce Center Blvd; the southern building is the 2007 Midwest Consolidation Center (MCC, roster idx 16, at 151 Commerce Center Blvd). The roster idx-15 geocode landed in a residential area; the facility was re-located via satellite and web research. Building center locked at ~40.0485, -84.2372. The PDC/MCC assignment (PDC = north building) follows from the MCC roster coordinates pointing to the southern building and the MCC being described as built adjacent to the older PDC.",
+          "truckGate": "The PDC campus is fenced with a controlled entrance, a Honda monument sign and flag at the entry road off the public road, and a small guard-booth-footprint structure beside the internal access road. Classified true (medium confidence, no Street View inside the gate to confirm a barrier arm).",
           "guardShack": "A small building consistent with a staffed guard booth sits beside the entrance access road. Medium confidence.",
-          "remoteGs": "False — a guard-booth structure appears present.",
+          "remoteGs": "False, a guard-booth structure appears present.",
           "preGateStaging": "A large paved staging/parking lot sits between the public road and the building, usable for truck holding.",
           "postGateStaging": "Ample paved internal aprons and lanes between the gate and the dock banks.",
-          "drivewayLong": "A long internal access road runs from the entrance through the campus to the docks — easily holds 3+ trucks.",
+          "drivewayLong": "A long internal access road runs from the entrance through the campus to the docks, easily holds 3+ trucks.",
           "dockDoors": "50+ dock doors estimated across the north and east building faces, with many trailers backed in. Honest overhead estimate.",
           "dropArea": "Extensive trailer drop yards on the west and east sides holding well over 50 Honda trailers (visible in dense colored rows) without tractors.",
           "dropYard": "Multiple dedicated trailer-storage lots, clearly separate from active dock staging.",
           "multipleFacilities": "The PDC sits in a two-building Honda campus with the adjacent MCC; counted as a multi-facility campus, though the PDC itself is a single building.",
           "fastLaneOpportunity": "Large empty paved staging lots and wide aprons leave clear room to add a bypass/express lane.",
-          "shipRcvSeparate": "Dock activity appears consolidated on the north/east faces; not clearly split into separate ship vs receive clusters — left false.",
+          "shipRcvSeparate": "Dock activity appears consolidated on the north/east faces; not clearly split into separate ship vs receive clusters, left false.",
           "railServed": "No rail spur into the property.",
-          "urbanRural": "Rural — edge-of-town setting along the I-75 corridor with farmland to the west and a water tower nearby; small-town industrial, so classified Rural.",
+          "urbanRural": "Rural, edge-of-town setting along the I-75 corridor with farmland to the west and a water tower nearby; small-town industrial, so classified Rural.",
           "buildingCount": "1 building for the PDC itself."
         },
         "verification": {
@@ -2748,7 +2748,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Honda-built consolidation hub still operating with current reqs; a separate adjacent building from the Troy PDC (site 15) — keep both.",
+          "rationale": "Honda-built consolidation hub still operating with current reqs; a separate adjacent building from the Troy PDC (site 15), keep both.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -2990,7 +2990,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Address matches the Honda-built DC; no Tier-2 negative; but the cleanest Tier-1 self-attestation (2017 opening) predates the 24-month window and current operation rests on Tier-3 hiring — capped to probable.",
+          "rationale": "Address matches the Honda-built DC; no Tier-2 negative; but the cleanest Tier-1 self-attestation (2017 opening) predates the 24-month window and current operation rests on Tier-3 hiring, capped to probable.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }

@@ -29,7 +29,7 @@ function renderTitle(title: string, emphasis?: string): ReactNode {
 }
 
 interface MemoShellProps {
-  /** "Dannon" — used in the running-header subtitle and colophon. */
+  /** "Dannon", used in the running-header subtitle and colophon. */
   accountName: string;
   /** Account's accent hex. Resolved to a single accent line via getMemoAccent. */
   accentColor?: string;
@@ -42,7 +42,7 @@ interface MemoShellProps {
   titleEmphasis?: string;
   /** Reader-aware eyebrow ("Heiko Gerling · Chief Operations Officer"). */
   readerEyebrow?: string;
-  /** "13-plant footprint" — context line shown under the cover prepared-for block. */
+  /** "13-plant footprint", context line shown under the cover prepared-for block. */
   contextDetail?: string;
   /** "Casey Larkin · YardFlow" author byline shown on the cover. */
   authorByline: string;
@@ -255,7 +255,7 @@ export function MemoShell({
               </span>
             </div>
 
-            {/* aside column placeholder kept empty in this M8 pass — desktop
+            {/* aside column placeholder kept empty in this M8 pass, desktop
                 marginalia is mirrored inline via section-level <aside> blocks
                 until per-section anchoring is wired up properly */}
           </article>
@@ -272,7 +272,7 @@ export function MemoShell({
 /**
  * Inline keyframes + drop-cap ::first-letter rule. Server-rendered as a
  * raw <style> tag so the rules are available before hydration. Scoped via
- * class names (memo-cover-*, memo-prose, memo-lead) — there is no risk of
+ * class names (memo-cover-*, memo-prose, memo-lead), there is no risk of
  * collision with the rest of the app, which uses Tailwind for everything.
  */
 function MemoChromeStyles() {

@@ -232,7 +232,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- z17/z18 satellite on the roster point shows a single large (~190 m x ~345 m) manufacturing building square to the Phoenix street grid, with a water tank at the NW corner, a vertical tank/silo farm mid-east wall (beverage-plant signature), rooftop solar arrays, and a continuous dock face on the east wall.\n- Street View from S 104th Ave (pano 2023-02, 33.44512,-112.28398, looking east) shows chain-link fenced frontage, employee parking and a large solar carport canopy inside the fence, industrial plant wall behind — consistent with the SVC Manufacturing / Stokely-Van Camp (Gatorade) plant in the Tolleson directory listing.",
+        "dossierExcerpt": "- z17/z18 satellite on the roster point shows a single large (~190 m x ~345 m) manufacturing building square to the Phoenix street grid, with a water tank at the NW corner, a vertical tank/silo farm mid-east wall (beverage-plant signature), rooftop solar arrays, and a continuous dock face on the east wall.\n- Street View from S 104th Ave (pano 2023-02, 33.44512,-112.28398, looking east) shows chain-link fenced frontage, employee parking and a large solar carport canopy inside the fence, industrial plant wall behind, consistent with the SVC Manufacturing / Stokely-Van Camp (Gatorade) plant in the Tolleson directory listing.",
         "mapsUrl": "https://www.google.com/maps/@33.4451,-112.2827,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Truck entry is a curve drive off a private E-W industrial road at the NE corner; perimeter is chain-link fenced (confirmed from 104th Ave Street View) but no barrier arm or booth resolvable at z20, and the private road has zero Street View coverage so the call could not be ground-truthed.",
@@ -510,7 +510,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "- z16/z17 satellite shows a ~700 m long production building (long axis WSW-ENE, rotated ~17 degrees off E-W) plus a second large finished-goods warehouse to the SE, connected by an elevated conveyor bridge — exactly the Gatorade greenfield campus the Wythe County JIDA announced. Isolated greenfield site surrounded by pasture; the only access is the Gator Ln drive. The separate 200 Pepsi Way bottling site is NOT in this perimeter.",
+        "dossierExcerpt": "- z16/z17 satellite shows a ~700 m long production building (long axis WSW-ENE, rotated ~17 degrees off E-W) plus a second large finished-goods warehouse to the SE, connected by an elevated conveyor bridge, exactly the Gatorade greenfield campus the Wythe County JIDA announced. Isolated greenfield site surrounded by pasture; the only access is the Gator Ln drive. The separate 200 Pepsi Way bottling site is NOT in this perimeter.",
         "mapsUrl": "https://www.google.com/maps/@36.9663,-81.0145,400m/data=!3m1!1e3",
         "fieldNotes": {
           "guardShack": "Square guard house (~8x8 m) beside the inbound lane ~160 m inside the Gator Ln entrance; z20 shows a tractor-trailer stopped at the booth with chevron-striped median; 2019 Street View down the drive shows a truck held at the orange/red checkpoint structure.",
@@ -795,7 +795,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "- z16/z17 satellite shows a very large connected complex rotated ~30 degrees off north: a production section (light roof, dense rooftop process units, tank/utility area + water tower on the west side) and an attached dark-roof distribution warehouse, with an office + visitor lot at the SE front on Decatur Blvd. Matches the DOE Better Plants / EnergyStar \"PepsiCo Indianapolis Hotfill\" Gatorade/Propel plant. The tan-roof building SE across the pond and the warehouse SW across the west drive are separate AmeriPlex tenants — excluded.",
+        "dossierExcerpt": "- z16/z17 satellite shows a very large connected complex rotated ~30 degrees off north: a production section (light roof, dense rooftop process units, tank/utility area + water tower on the west side) and an attached dark-roof distribution warehouse, with an office + visitor lot at the SE front on Decatur Blvd. Matches the DOE Better Plants / EnergyStar \"PepsiCo Indianapolis Hotfill\" Gatorade/Propel plant. The tan-roof building SE across the pond and the warehouse SW across the west drive are separate AmeriPlex tenants, excluded.",
         "mapsUrl": "https://www.google.com/maps/@39.6817,-86.2990,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "SW truck entrance off S Decatur Blvd: a divided pair of parallel approach lanes with a grass median and a small blue-roofed booth-sized structure at the junction (z20); the only ground-level pano nearby is an interior service-drive frame that does not show the checkpoint, so the gate call is satellite-only.",
@@ -1080,7 +1080,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "- z17 satellite shows a single very large dark-roof plant (~300 m x ~250 m) rotated ~30 degrees off north in the Fulton Industrial corridor, with dock banks on opposite NW and SE faces, trailer rows on three sides, and a gated teardrop entrance off Westgate Pkwy. Matches the Fulton Industrial CID's PepsiCo Gatorade plant spotlight (400+ employees, 45M+ cases/yr). Street number ambiguity in the roster (1635 vs 1650) is immaterial — there is only one Gatorade-scale plant on this parkway segment.",
+        "dossierExcerpt": "- z17 satellite shows a single very large dark-roof plant (~300 m x ~250 m) rotated ~30 degrees off north in the Fulton Industrial corridor, with dock banks on opposite NW and SE faces, trailer rows on three sides, and a gated teardrop entrance off Westgate Pkwy. Matches the Fulton Industrial CID's PepsiCo Gatorade plant spotlight (400+ employees, 45M+ cases/yr). Street number ambiguity in the roster (1635 vs 1650) is immaterial, there is only one Gatorade-scale plant on this parkway segment.",
         "mapsUrl": "https://www.google.com/maps/@33.7113,-84.5961,400m/data=!3m1!1e3",
         "fieldNotes": {
           "guardShack": "Booth with a teal canopy beside the inbound lane at the Westgate Pkwy teardrop entrance (z20); a gate/fence line runs from the booth across to the island; 2025-03 ground photosphere confirms full chain-link perimeter and the gated entrance.",
@@ -1334,7 +1334,7 @@
         "dossierExcerpt": "- Street View from S Poinciana Blvd (2025-05) shows the GATORADE sign on the facade and Gatorade-bottle sculptures at the landscaped front entrance behind an ornamental steel fence. Done.",
         "mapsUrl": "https://www.google.com/maps/@28.2578,-81.4888,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "Main S Poinciana Blvd entrance is an ornamental-fenced, landscaped office/visitor drive with no barrier or booth at z20; a second service access comes off the north frontage road at the NW. Neither shows a control structure, but small swing gates would be below resolution — flagged.",
+          "truckGate": "Main S Poinciana Blvd entrance is an ornamental-fenced, landscaped office/visitor drive with no barrier or booth at z20; a second service access comes off the north frontage road at the NW. Neither shows a control structure, but small swing gates would be below resolution, flagged.",
           "railServed": "Confirmed: an active-looking rail siding runs directly along the plant's north wall (visible in 2024-11 Street View from the frontage road), branching from the adjacent CSX corridor; grade-level freight doors face the siding.",
           "dockDoors": "Dock bays split across the south face (~15, recessed clusters with staged pallets) and the west face (~10) plus tanker positions at the east production end; 28 estimated.",
           "dropArea": "Almost no parked trailers on site (~10 near the south docks); the big empty concrete yard at the west end is unmarked open pavement (counted as staging, not drop).",
@@ -1588,14 +1588,14 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- 2025-02 Street View on Glenfield Ave shows a PEPSICO banner and \"G\" logo on the brick frontage plus a Shipping/Receiving directional sign — identity certain. Older urban-industrial brick plant (~210 m x ~110 m), consistent with the DOE Better Plants \"Dallas Gatorade Plant\" and the City of Dallas pretreatment listing at 3030 Glenfield.",
+        "dossierExcerpt": "- 2025-02 Street View on Glenfield Ave shows a PEPSICO banner and \"G\" logo on the brick frontage plus a Shipping/Receiving directional sign, identity certain. Older urban-industrial brick plant (~210 m x ~110 m), consistent with the DOE Better Plants \"Dallas Gatorade Plant\" and the City of Dallas pretreatment listing at 3030 Glenfield.",
         "mapsUrl": "https://www.google.com/maps/@32.7172,-96.8706,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "2025-02 Street View shows the north dock court opening directly onto Glenfield Ave with no barrier, booth, or checkpoint — Google's camera shoots straight into the court (trailers at doors, tractor parked). Chain-link frontage has open driveway gaps; parked-open slide gates may exist for after-hours closure but there is no active control.",
+          "truckGate": "2025-02 Street View shows the north dock court opening directly onto Glenfield Ave with no barrier, booth, or checkpoint, Google's camera shoots straight into the court (trailers at doors, tractor parked). Chain-link frontage has open driveway gaps; parked-open slide gates may exist for after-hours closure but there is no active control.",
           "backupSensitive": "North-face docks are one truck-length off the public street; trucks set up for backing from Glenfield Ave itself, and any queue sits on the street.",
           "dockDoors": "~12 doors on the north face (NE court), ~15-18 on the east face, a few on the south drive; 30 estimated.",
           "dropArea": "West yard holds scattered trailer rows (~30) plus NW-corner rows along the frontage; band 25-50.",
-          "railServed": "An overgrown tree-lined rail spur corridor forms the SW boundary and dead-ends near the west yard — historic spur, no active track into the property visible.",
+          "railServed": "An overgrown tree-lined rail spur corridor forms the SW boundary and dead-ends near the west yard, historic spur, no active track into the property visible.",
           "shipRcvSeparate": "A single 'Shipping/Receiving' directional sign at the west drive suggests one combined check-in flow despite two dock faces.",
           "entryExitSeparate": "Three independent open accesses: west-yard drive, north dock court, east apron street access."
         },
@@ -1614,7 +1614,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Operating PepsiCo Dallas Gatorade plant; NOTE supplied coords (32.7172,-96.8706) are downtown Dallas, a mis-geocode — actual plant is East Dallas (Forney Rd); re-pin before yard modeling.",
+          "rationale": "Operating PepsiCo Dallas Gatorade plant; NOTE supplied coords (32.7172,-96.8706) are downtown Dallas, a mis-geocode, actual plant is East Dallas (Forney Rd); re-pin before yard modeling.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -1880,7 +1880,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster rooftop geocode (41.129431, -75.886141) landed dead-center on a ~24-acre\nsingle-tenant plant: one large connected manufacturing/warehouse complex with\ntrailer rows on three sides, in a wooded industrial park with a rail corridor on\nthe south. Street View frames show Pepsi-branded trailers (plus Swift, Western\nExpress, XTRA, Schneider, Bowman) parked along the west lot — consistent with\nthe PepsiCo/Gatorade plant in Crestwood Industrial Park. Confirmed.",
+        "dossierExcerpt": "Roster rooftop geocode (41.129431, -75.886141) landed dead-center on a ~24-acre\nsingle-tenant plant: one large connected manufacturing/warehouse complex with\ntrailer rows on three sides, in a wooded industrial park with a rail corridor on\nthe south. Street View frames show Pepsi-branded trailers (plus Swift, Western\nExpress, XTRA, Schneider, Bowman) parked along the west lot, consistent with\nthe PepsiCo/Gatorade plant in Crestwood Industrial Park. Confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.129431,-75.886141,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Open site. Street View (2019-08) drives straight up the NW driveway from Oak Hill Rd into the trailer yard and along the internal north road; no barrier arm, gate, or checkpoint structure at any entrance in SV or 2026 satellite.",
@@ -2086,7 +2086,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Rooftop geocode landed on a white-roofed plant block fronting 57th Ave in East\nOakland. Street View (2025-05) confirms: a 1929-vintage brick industrial front\n(matches the \"built 1929, former pork-and-bean cannery\" history; PepsiCo\nacquired it in the 2001 Quaker merger, ~157k sq ft) with a Gatorade-liveried\ntrailer backed into a street-side dock, plus Cheema Freight Lines and tanker\ntrailers on the curb. Confirmed — this is the Gatorade bottling plant.",
+        "dossierExcerpt": "Rooftop geocode landed on a white-roofed plant block fronting 57th Ave in East\nOakland. Street View (2025-05) confirms: a 1929-vintage brick industrial front\n(matches the \"built 1929, former pork-and-bean cannery\" history; PepsiCo\nacquired it in the 2001 Quaker merger, ~157k sq ft) with a Gatorade-liveried\ntrailer backed into a street-side dock, plus Cheema Freight Lines and tanker\ntrailers on the curb. Confirmed, this is the Gatorade bottling plant.",
         "mapsUrl": "https://www.google.com/maps/@37.76445,-122.20475,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier or gate across the SW drive off 57th Ave in 2025-05 Street View; trailers back into street-side docks directly from 57th Ave. A check-in window office with CCTV sits at the building's SW corner facing the drive, but there is no controlled vehicle gate.",
@@ -2229,7 +2229,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Rooftop geocode lands on the eastern half of a ~140-acre graded parcel south of\nthe E 72nd Ave corridor near DIA, holding one enormous (~1.2M sq ft) blue/white\nroof building — unambiguously the new PBNA High Point mega-plant (152-acre land\nbuy per PR Newswire; largest PBNA US plant; active per Denverite, Mar 2025).",
+        "dossierExcerpt": "Rooftop geocode lands on the eastern half of a ~140-acre graded parcel south of\nthe E 72nd Ave corridor near DIA, holding one enormous (~1.2M sq ft) blue/white\nroof building, unambiguously the new PBNA High Point mega-plant (152-acre land\nbuy per PR Newswire; largest PBNA US plant; active per Denverite, Mar 2025).",
         "mapsUrl": "https://www.google.com/maps/@39.8256,-104.7615,400m/data=!3m1!1e3",
         "fieldNotes": {
           "imagery": "All available Maxar satellite is MID-CONSTRUCTION (steel framing exposed, laydown yards); nearest Street View is 2021-08 pre-construction (barricaded road stub). The plant opened ~2025 per Denverite, so the finished gate/dock/yard layout is NOT verifiable from current imagery. Gate and yard flags are inferred from scale and typical new-build PBNA design, not observed.",
@@ -2491,7 +2491,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Rooftop geocode lands on a large plant campus fronting Rock Mountain Blvd.\n2026-01 Street View shows the new building with a large Pepsi globe on the\nfacade — unambiguous. This is the company-owned DeKalb County plant PepsiCo\nexpanded 5x with $260M (GA Governor's office, 2022); satellite still shows the\nexpansion in progress (graded dirt north, new concrete pads south, laydown).",
+        "dossierExcerpt": "Rooftop geocode lands on a large plant campus fronting Rock Mountain Blvd.\n2026-01 Street View shows the new building with a large Pepsi globe on the\nfacade, unambiguous. This is the company-owned DeKalb County plant PepsiCo\nexpanded 5x with $260M (GA Governor's office, 2022); satellite still shows the\nexpansion in progress (graded dirt north, new concrete pads south, laydown).",
         "mapsUrl": "https://www.google.com/maps/@33.825483,-84.185547,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Entire Rock Mountain Blvd frontage is secured with continuous black ornamental security fence (2026-01 SV); single truck entrance is the south drive off the blvd, a fenced pinch-point with traffic cones. No barrier arm clearly visible from the public-road pano; classified gated based on the full fence + single controlled pinch-point.",
@@ -2766,7 +2766,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Geometric-center geocode landed on a brown/tan-roof plant complex on the south\nside of I-30 at the loop interchange. 2025-04 Street View from the frontage\nroad shows a Pepsi globe pylon sign at the north entrance — confirmed PBNA\nMesquite (Gray Construction bottling-line expansion site). Route-truck fleet\nrows and a fuel/wash canopy in the SW quadrant fit a combined bottling +\ndistribution operation.",
+        "dossierExcerpt": "Geometric-center geocode landed on a brown/tan-roof plant complex on the south\nside of I-30 at the loop interchange. 2025-04 Street View from the frontage\nroad shows a Pepsi globe pylon sign at the north entrance, confirmed PBNA\nMesquite (Gray Construction bottling-line expansion site). Route-truck fleet\nrows and a fuel/wash canopy in the SW quadrant fit a combined bottling +\ndistribution operation.",
         "mapsUrl": "https://www.google.com/maps/@32.802466,-96.665808,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Chain-link fence rings the whole site (2025-04/05 SV on three sides); slide-gate frames visible at the SW street entrance. The N truck entrance off the I-30 frontage road (marked by the Pepsi pylon sign) shows a wide open apron in daytime SV with no barrier arm resolvable - gated-fence site, likely open during operating hours; flagged.",
@@ -3015,7 +3015,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Geometric-center geocode put the pin on N 30th St; the plant is the complex\nimmediately east of the street. A 2022-09 photosphere at the south drive shows\nthe Pepsi globe and wordmark on the white facade behind an ornamental gate —\nconfirmed PepsiCo Tampa (bottling here since 1936 per directory listings).",
+        "dossierExcerpt": "Geometric-center geocode put the pin on N 30th St; the plant is the complex\nimmediately east of the street. A 2022-09 photosphere at the south drive shows\nthe Pepsi globe and wordmark on the white facade behind an ornamental gate ,\nconfirmed PepsiCo Tampa (bottling here since 1936 per directory listings).",
         "mapsUrl": "https://www.google.com/maps/@28.05135,-82.42505,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Confirmed gated: the signed S entrance off N 30th St (Pepsi globe + wordmark on the facade) has a closed ornamental swing/slide gate across the drive (2022-09 photosphere); the N drive has a closed chain-link slide gate. Black ornamental fence runs along the 30th St frontage.",
@@ -3251,7 +3251,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster geocode (ROOFTOP, 44.791272, -93.256578) lands on a large white-roof industrial\nbuilding fronting Cliff Rd E. Web search confirms 1300 Cliff Rd E = Pepsi-Cola\nMetropolitan Bottling Company (D&B, Yelp, BBB). Street View from the 12th Ave S\ndriveway (2022-02 pano) shows Pepsi-globe trailers parked just inside the lot —\npositive ID. Locked center: 44.79126, -93.25670.\n\nSources: D&B profile, Yelp, BBB",
+        "dossierExcerpt": "Roster geocode (ROOFTOP, 44.791272, -93.256578) lands on a large white-roof industrial\nbuilding fronting Cliff Rd E. Web search confirms 1300 Cliff Rd E = Pepsi-Cola\nMetropolitan Bottling Company (D&B, Yelp, BBB). Street View from the 12th Ave S\ndriveway (2022-02 pano) shows Pepsi-globe trailers parked just inside the lot ,\npositive ID. Locked center: 44.79126, -93.25670.\n\nSources: D&B profile, Yelp, BBB",
         "mapsUrl": "https://www.google.com/maps/@44.79126,-93.25670,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "All three driveways (2 off 12th Ave S, 1 off Cliff Rd E between the plant and the flex building to its east) are open curb cuts - Street View 2022/2023 shows no barrier arm, gate, or checkpoint at any of them.",
@@ -4126,7 +4126,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Roster geocode (ROOFTOP, 38.483235, -121.398536) lands on a large white-roof\nbeverage facility with a solar-paneled west section, a huge route-truck fleet yard\non the west side, and blue-trimmed (Pepsi blue) office frontage on Reese Rd —\nmatching the D&B Pepsi-Cola Metropolitan Bottling listing for 7550 Reese Rd.\nStreet View 2025-03 on Reese Rd shows the gated entrances and the blue building.\nLocked center: 38.48324, -121.39854.",
+        "dossierExcerpt": "Roster geocode (ROOFTOP, 38.483235, -121.398536) lands on a large white-roof\nbeverage facility with a solar-paneled west section, a huge route-truck fleet yard\non the west side, and blue-trimmed (Pepsi blue) office frontage on Reese Rd ,\nmatching the D&B Pepsi-Cola Metropolitan Bottling listing for 7550 Reese Rd.\nStreet View 2025-03 on Reese Rd shows the gated entrances and the blue building.\nLocked center: 38.48324, -121.39854.",
         "mapsUrl": "https://www.google.com/maps/@38.48324,-121.39854,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Both Reese Rd entrances are fenced with sliding vehicle gates (Street View 2025-03): the NE drive into the north truck court and the south front drive (chain-link gate rolled open, safety/check-in placards on the fence, yellow bollard).",
@@ -4154,7 +4154,7 @@
               "url": "https://www.bevnet.com/news/2025/report-manna-beverages-shutters-all-california-operations-terminates-employees/",
               "date": "2025-10",
               "type": "trade-press",
-              "claim": "The West Sacramento bottling closure was Manna Beverages (a non-PepsiCo copacker), NOT PepsiCo — ruled out as a distractor"
+              "claim": "The West Sacramento bottling closure was Manna Beverages (a non-PepsiCo copacker), NOT PepsiCo, ruled out as a distractor"
             }
           ],
           "checkedDivestiture": true,
@@ -4400,7 +4400,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Roster geocode (GEOMETRIC_CENTER, 36.071804, -115.234118) lands on the large\nbottling + distribution campus at Sunset Rd between Rainbow and Lindell — matching\nthe Packaging Gateway profile (387,400 sq ft, built 2008). Street View 2025-02 from\nSunset Rd shows the Pepsi globe on the facade, a Gatorade trailer in the front lot,\nand the blue entrance canopy. Positive ID. Locked center: 36.07220, -115.23410.",
+        "dossierExcerpt": "Roster geocode (GEOMETRIC_CENTER, 36.071804, -115.234118) lands on the large\nbottling + distribution campus at Sunset Rd between Rainbow and Lindell, matching\nthe Packaging Gateway profile (387,400 sq ft, built 2008). Street View 2025-02 from\nSunset Rd shows the Pepsi globe on the facade, a Gatorade trailer in the front lot,\nand the blue entrance canopy. Positive ID. Locked center: 36.07220, -115.23410.",
         "mapsUrl": "https://www.google.com/maps/@36.07220,-115.23410,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "The entire operational yard is enclosed by a tall tan block wall (confirmed on the Sunset Rd, north, and east sides in Street View). The only truck access is the NE-corner curb cut off the east street into the perimeter drive - a walled single-throat yard implies a controlled gate, but the gate hardware itself was not resolvable in z20 overhead or reachable Street View; flagged.",
@@ -4941,7 +4941,7 @@
               "url": "https://dam.assets.ohio.gov/image/upload/jfs.ohio.gov/warn/WARN%202025/GieseckeDevrientePaymentsAmericaInc.pdf",
               "date": "2025-11-03",
               "type": "WARN",
-              "claim": "The only recent Twinsburg WARN at Enterprise Pkwy is Giesecke+Devrient (different company), NOT Pepsi — confirms no Pepsi closure"
+              "claim": "The only recent Twinsburg WARN at Enterprise Pkwy is Giesecke+Devrient (different company), NOT Pepsi, confirms no Pepsi closure"
             }
           ],
           "checkedDivestiture": true,
@@ -5506,7 +5506,7 @@
               "url": "https://www.foodmanufacturing.com/facility/news/22925074/pepsico-closing-4-bottling-plants",
               "date": "2024-10",
               "type": "press",
-              "claim": "PepsiCo 2024 bottling closures were Cincinnati, Chicago, Harrisburg PA, Atlanta — Piscataway NOT among them"
+              "claim": "PepsiCo 2024 bottling closures were Cincinnati, Chicago, Harrisburg PA, Atlanta, Piscataway NOT among them"
             },
             {
               "tier": 2,
@@ -5518,7 +5518,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Only negative is a temporary 2022 fire (reopened); not on the 2024 closure list — active PepsiCo bottling plant.",
+          "rationale": "Only negative is a temporary 2022 fire (reopened); not on the 2024 closure list, active PepsiCo bottling plant.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -6072,7 +6072,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "The recall/shutdown was Danville IL, not Cedar Rapids — Cedar Rapids absorbed Danville’s production; large long-running plant still operating.",
+          "rationale": "The recall/shutdown was Danville IL, not Cedar Rapids, Cedar Rapids absorbed Danville’s production; large long-running plant still operating.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -6331,7 +6331,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Closed IL Quaker plant was Danville, not Bridgeview; Bridgeview was expanded with a new line — active PepsiCo/Quaker plant.",
+          "rationale": "Closed IL Quaker plant was Danville, not Bridgeview; Bridgeview was expanded with a new line, active PepsiCo/Quaker plant.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -6736,11 +6736,11 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Rooftop geocode lands on the SE-most of three large white-roofed buildings in a new\nlogistics park on the I-24 frontage in Smyrna. Web confirmation: PBNA opened a nearly\n400,000 sq ft warehouse/DC at 2020 Midway Ln on Aug 6, 2024 — its largest in the\nSoutheast and 2nd largest nationally, replacing the downtown Nashville warehouse\n(PR Newswire / REBusinessOnline / WGNS). The pinned building's footprint and \"new\nconstruction\" state match. Identity: confirmed.",
+        "dossierExcerpt": "Rooftop geocode lands on the SE-most of three large white-roofed buildings in a new\nlogistics park on the I-24 frontage in Smyrna. Web confirmation: PBNA opened a nearly\n400,000 sq ft warehouse/DC at 2020 Midway Ln on Aug 6, 2024, its largest in the\nSoutheast and 2nd largest nationally, replacing the downtown Nashville warehouse\n(PR Newswire / REBusinessOnline / WGNS). The pinned building's footprint and \"new\nconstruction\" state match. Identity: confirmed.",
         "mapsUrl": "https://www.google.com/maps/@35.93745,-86.53895,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "imagery": "ALL available satellite imagery and Street View (latest pano 2023-10) predate completion — the site is mid-construction in every source. The DC opened Aug 2024 (PBNA press release). Yard-control features (gate, guard booth, trailer rows, striping) are NOT yet visible and the gate fields below are honest defaults, not observations.",
-          "truckGate": "not visible in construction-stage imagery; PBNA standard design and the single-access geometry make a controlled gate at the SE truck-court entrance likely once operational — flagged, not asserted",
+          "imagery": "ALL available satellite imagery and Street View (latest pano 2023-10) predate completion, the site is mid-construction in every source. The DC opened Aug 2024 (PBNA press release). Yard-control features (gate, guard booth, trailer rows, striping) are NOT yet visible and the gate fields below are honest defaults, not observations.",
+          "truckGate": "not visible in construction-stage imagery; PBNA standard design and the single-access geometry make a controlled gate at the SE truck-court entrance likely once operational, flagged, not asserted",
           "dockDoors": "dock pockets visible along the SE face during construction; ~30 estimated for a ~400k sq ft beverage DC, band 25-50",
           "dropArea": "depressed truck court with retaining wall built along the I-24 side; trailer stalls not yet striped in imagery, so banded NONE with low confidence",
           "postGateStaging": "the E/SE truck court between the dock wall and the I-24 retaining wall provides clear post-entry holding space by design",
@@ -6955,10 +6955,10 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The rooftop geocode landed on Kingsland Blvd between two giant warehouses. Disambiguated\nby measurement + web research: PepsiCo signed Houston's largest 2025 industrial lease\n(1.05M sq ft) at Hunt Southwest's spec I-10 West Trade Center, move-in Oct 1 2025\n(CommercialSearch, Houston Chronicle/HBJ, Traded.co). The building NORTH of Kingsland\nmeasures ~650m x 150m = ~97k m2 = ~1.05M sq ft — an exact match; the complex south of\nKingsland is the Ross import DC (massive container field, different operation). Locked\nto the north building, center 29.7663,-95.9152.",
+        "dossierExcerpt": "The rooftop geocode landed on Kingsland Blvd between two giant warehouses. Disambiguated\nby measurement + web research: PepsiCo signed Houston's largest 2025 industrial lease\n(1.05M sq ft) at Hunt Southwest's spec I-10 West Trade Center, move-in Oct 1 2025\n(CommercialSearch, Houston Chronicle/HBJ, Traded.co). The building NORTH of Kingsland\nmeasures ~650m x 150m = ~97k m2 = ~1.05M sq ft, an exact match; the complex south of\nKingsland is the Ross import DC (massive container field, different operation). Locked\nto the north building, center 29.7663,-95.9152.",
         "mapsUrl": "https://www.google.com/maps/@29.7663,-95.9152,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "as of the latest imagery (sat + Street View 2025-04, pre-PepsiCo move-in Oct 2025) the site is a completely open spec build: no perimeter fence along Kingsland Blvd, no gate, no booth at either access. PepsiCo may have added gating during fit-out — flagged",
+          "truckGate": "as of the latest imagery (sat + Street View 2025-04, pre-PepsiCo move-in Oct 2025) the site is a completely open spec build: no perimeter fence along Kingsland Blvd, no gate, no booth at either access. PepsiCo may have added gating during fit-out, flagged",
           "entryExitSeparate": "multiple uncontrolled access points: E end onto the NE-SW park road and W end onto the western park road; S dock court reached around either building end",
           "dockDoors": "true cross-dock ~1.05M sq ft (Hunt Southwest I-10 West Trade Center): the S face alone shows 60+ dock doors in a continuous run in Street View; N face has additional doors at the NE section. dockDoorCount=120 is a design estimate, 50+ band is certain",
           "dropArea": "~40 tractorless trailers visible (E-end column + N-end rows); long striped trailer rows in the S court were empty at capture. Capacity is far higher (est 200+)",
@@ -7218,7 +7218,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Geocode landed in CenterState Logistics Park East (I-4 / SR-33, NE Lakeland) between two\nbig buildings. Disambiguated by shape + history: the 605,412 sq ft Quaker/Gatorade\nbuilding is CenterState Building 1 (built 2017 by Brennan, sold to Griffin Capital with\nthe Quaker Sales & Distribution lease) and is a cross-dock — that matches the N-S\noriented building with dock banks on BOTH long faces and trailers on both sides\n(measured ~340m x 150m ≈ 600k sq ft). The much larger E-W building SE of it is the\nlater e-commerce build (Brennan \"super sized\" 2020 coverage), not Quaker. Locked to the\nN-S cross-dock, center 28.1527,-81.8908.",
+        "dossierExcerpt": "Geocode landed in CenterState Logistics Park East (I-4 / SR-33, NE Lakeland) between two\nbig buildings. Disambiguated by shape + history: the 605,412 sq ft Quaker/Gatorade\nbuilding is CenterState Building 1 (built 2017 by Brennan, sold to Griffin Capital with\nthe Quaker Sales & Distribution lease) and is a cross-dock, that matches the N-S\noriented building with dock banks on BOTH long faces and trailers on both sides\n(measured ~340m x 150m ≈ 600k sq ft). The much larger E-W building SE of it is the\nlater e-commerce build (Brennan \"super sized\" 2020 coverage), not Quaker. Locked to the\nN-S cross-dock, center 28.1527,-81.8908.",
         "mapsUrl": "https://www.google.com/maps/@28.1527,-81.8908,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "site is fully fenced (chain-link visible in 2024-01 Street View on the east road); 2021-02 SV down the NE drive shows a swing/slide gate across the lane with jersey barriers; z20 shows the fence line + gate at the NE throat with a small call-box-size object, no booth",
@@ -7674,7 +7674,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Rooftop geocode lands on the large gray-roofed plant on the north side of Mack Ave at\nthe NE-running boulevard, Detroit east side — the former PBNA Detroit bottling plant\n(production ended Sept 2025 per CBS Detroit/Food Dive; warehouse/distribution\ncontinues). Rooftop process tanks on the E wing match the bottling heritage; the campus\nis alive with trailers in 2025-09 Street View. Confirmed.",
+        "dossierExcerpt": "Rooftop geocode lands on the large gray-roofed plant on the north side of Mack Ave at\nthe NE-running boulevard, Detroit east side, the former PBNA Detroit bottling plant\n(production ended Sept 2025 per CBS Detroit/Food Dive; warehouse/distribution\ncontinues). Rooftop process tanks on the E wing match the bottling heritage; the campus\nis alive with trailers in 2025-09 Street View. Confirmed.",
         "mapsUrl": "https://www.google.com/maps/@42.3553,-83.0442,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "fully fenced campus (chain-link visible along all road frontages in 2023-2025 SV); main SE entrance off Mack Ave has a sliding vehicle gate + stop-sign checkpoint (2025-09 SV) with a small white booth-size structure beside the lane at z20",
@@ -7703,7 +7703,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "This is the plant in PepsiCo’s Detroit closure, but only MANUFACTURING stopped — warehouse/distribution/fleet/delivery operations explicitly continue, so the DC/yard survives. Flagged probable: verify the pin against the surviving DC footprint before yard modeling.",
+          "rationale": "This is the plant in PepsiCo’s Detroit closure, but only MANUFACTURING stopped, warehouse/distribution/fleet/delivery operations explicitly continue, so the DC/yard survives. Flagged probable: verify the pin against the surviving DC footprint before yard modeling.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }

@@ -15,19 +15,19 @@ interface MemoSocialImageStat {
 }
 
 interface MicrositeMemoSocialImageProps {
-  /** Account accent — drives the left rule + accent dot color. */
+  /** Account accent, drives the left rule + accent dot color. */
   accentColor?: string;
-  /** "PRIVATE ANALYSIS · 2026-05-08" — top eyebrow line. */
+  /** "PRIVATE ANALYSIS · 2026-05-08", top eyebrow line. */
   eyebrow: string;
   /** Headline ("Yard execution as a network constraint for General Mills"). */
   title: string;
-  /** Account name — used in the initial badge. */
+  /** Account name, used in the initial badge. */
   accountName?: string;
   /** Author byline ("Casey Larkin · YardFlow"). */
   byline: string;
   /** Optional reader name ("prepared for Dan Poland") for personalized previews. */
   preparedFor?: string;
-  /** Optional 1-line context — e.g. "47-plant footprint · CPG / Beverage". */
+  /** Optional 1-line context, e.g. "47-plant footprint · CPG / Beverage". */
   contextLine?: string;
   /** Up to 3-4 short stats shown as a footer strip. */
   stats?: MemoSocialImageStat[];
@@ -83,7 +83,7 @@ export function MicrositeMemoSocialImage({
           paddingLeft: 72,
         }}
       >
-        {/* Top — eyebrow + headline */}
+        {/* Top, eyebrow + headline */}
         <div
           style={{
             display: 'flex',
@@ -159,7 +159,7 @@ export function MicrositeMemoSocialImage({
           ) : null}
         </div>
 
-        {/* Bottom — byline + stats */}
+        {/* Bottom, byline + stats */}
         <div
           style={{
             display: 'flex',

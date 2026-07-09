@@ -9,7 +9,7 @@ import { ZoneStreetView } from './zone-street-view';
 import { scoreSite } from '@/lib/demo/yard-complexity';
 
 /**
- * #3 — "what this means". Each audit factor maps to one plain, analytical
+ * #3, "what this means". Each audit factor maps to one plain, analytical
  * implication for how the yard runs. Observational, not a pitch: we say what
  * the layout implies and let the operator connect it to their day. No em
  * dashes, no hard sell (see voice rules).
@@ -48,7 +48,7 @@ function metric(label: string, value: string | number | null | undefined): React
   return (
     <div>
       <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">{label}</dt>
-      <dd className="mt-0.5 text-sm tabular-nums text-white">{value ?? '—'}</dd>
+      <dd className="mt-0.5 text-sm tabular-nums text-white">{value ?? ','}</dd>
     </div>
   );
 }
@@ -75,7 +75,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
   const c = site.classification;
   const ym = site.yardMetrics;
 
-  // Layer 2 — observed vs. modeled provenance. yardMetrics + classification are
+  // Layer 2, observed vs. modeled provenance. yardMetrics + classification are
   // OBSERVED facts read off imagery; the imagery date is the audit's evidence
   // stamp. Tiles carry no capture date, so the verification block's imageryDate
   // is the single source. When absent we still label values "observed" but omit
@@ -83,7 +83,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
   const imageryDate = site.verification?.imageryDate ?? null;
   const observedLabel = imageryDate ? `observed · imagery ${imageryDate}` : 'observed';
 
-  // #3 — per-site read. The factor scoring is shared with the atlas glow (#2)
+  // #3, per-site read. The factor scoring is shared with the atlas glow (#2)
   // so the map and the panel always tell the same story about a site.
   const { raw: complexityRaw, factors: complexityFactors } = scoreSite(site);
   const complexityLevel =
@@ -117,7 +117,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
         </button>
       </div>
 
-      {/* The map — the visual moment */}
+      {/* The map, the visual moment */}
       <div className="relative h-72 w-full shrink-0 overflow-hidden border-b border-[#00B4FF]/[0.16]">
         <SiteDetailMap site={site} />
         {/* Legend overlay */}
@@ -135,7 +135,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             ))}
           </ul>
         </div>
-        {/* Watch-replay CTA — only when we have a scenario for this site */}
+        {/* Watch-replay CTA, only when we have a scenario for this site */}
         {site.scenario && (
           <button
             type="button"
@@ -151,11 +151,11 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
 
       {/* Scrollable detail */}
       <div className="flex-1 overflow-y-auto px-5 py-4">
-        {/* Driver's-eye Street View — ground-level frames anchored to the zones,
+        {/* Driver's-eye Street View, ground-level frames anchored to the zones,
             rendered only where the audit found usable pano coverage. */}
         <ZoneStreetView geofences={site.geofences} />
 
-        {/* #3 — "What this means": the analytical read that turns the metric
+        {/* #3, "What this means": the analytical read that turns the metric
             grids below into something an operator can act on. Self-suppresses
             on a site with no notable factors (compact offices, small docks). */}
         {insightLines.length > 0 && (
@@ -164,7 +164,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
               <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#00B4FF]/85">
                 What this means
               </span>
-              {/* Layer 2 — this is an inference from the observed counts, not an
+              {/* Layer 2, this is an inference from the observed counts, not an
                   observed fact. Label it modeled so the line stays honest. */}
               <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#00B4FF]/70">modeled</span>
             </div>
@@ -189,7 +189,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
           </section>
         )}
 
-        {/* Full audit detail — the dense metric + classification grids and the
+        {/* Full audit detail, the dense metric + classification grids and the
             raw field notes, collapsed by default so the panel leads with the
             plain-language read above. (Progressive disclosure, redesign §detail.) */}
         <details className="group mb-4 rounded-md border border-[#00B4FF]/[0.12] bg-white/[0.02]">
@@ -198,7 +198,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             Show full audit detail
           </summary>
           <div className="border-t border-[#00B4FF]/[0.12] px-4 py-4">
-            {/* Yard metrics — OBSERVED counts read off the imagery (Layer 2). */}
+            {/* Yard metrics, OBSERVED counts read off the imagery (Layer 2). */}
             <div className="mb-4">
               <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</span>
@@ -211,12 +211,12 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
                 {metric('Truck gates', ym.truckGateCount?.toLocaleString())}
                 {metric('Buildings', ym.buildingCount?.toLocaleString())}
                 {metric('Site (acres)', ym.siteAreaAcres?.toLocaleString())}
-                {metric('Rail served', ym.railServed === null ? '—' : ym.railServed ? 'Yes' : 'No')}
+                {metric('Rail served', ym.railServed === null ? ',' : ym.railServed ? 'Yes' : 'No')}
                 {metric('Confidence', site.confidence)}
               </dl>
             </div>
 
-            {/* Classification — bands and key booleans, not all 22 fields.
+            {/* Classification, bands and key booleans, not all 22 fields.
                 OBSERVED off the same imagery (Layer 2). */}
             <div className={site.dossierExcerpt ? 'mb-4' : ''}>
               <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
@@ -236,7 +236,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
               </dl>
             </div>
 
-            {/* Raw auditor notes (lat/lng, field codes) — provenance value. */}
+            {/* Raw auditor notes (lat/lng, field codes), provenance value. */}
             {site.dossierExcerpt && (
               <div className="rounded-md border border-white/10 bg-black/20 px-3 py-3">
                 <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Audit field notes</div>
@@ -248,13 +248,13 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
           </div>
         </details>
 
-        {/* B.T9 — Low-confidence fields with sales@freightroll.com mailto.
+        {/* B.T9, Low-confidence fields with sales@freightroll.com mailto.
             "Happy to be corrected" wrapped in a mailto link so prospects
             can fire a templated email with the brand + uncertain fields
             already filled in. (Casey 2026-05-29: use sales@freightroll
             for now; swap to audits@yardflow.ai when the sending domain
             is rebuilt.) */}
-        {/* Layer 2 — confessed uncertainty. What orbit can't resolve, named
+        {/* Layer 2, confessed uncertainty. What orbit can't resolve, named
             plainly, with the on-site audit as the confirming step. Confidence
             is surfaced alongside so a low-confidence read is never silent. */}
         {(site.uncertainFields.length > 0 || site.confidence !== 'high') && (

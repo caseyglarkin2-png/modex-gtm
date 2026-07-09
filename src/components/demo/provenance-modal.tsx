@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * F.T1 / F.T6 — "How we built these" provenance modal + reusable trigger.
+ * F.T1 / F.T6, "How we built these" provenance modal + reusable trigger.
  *
  * <ProvenanceLink> renders a text button that opens an accessible modal
  * (role=dialog, aria-modal, focus trap, Escape + click-outside close,

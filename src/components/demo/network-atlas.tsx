@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
 
 /**
- * Dynamic wrapper around the Leaflet network atlas — `ssr: false` because
+ * Dynamic wrapper around the Leaflet network atlas, `ssr: false` because
  * Leaflet touches `window` on import. Public surface API stays clean
  * (no Leaflet types leak into callers).
  */
@@ -12,7 +12,7 @@ import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
 const NetworkAtlasInner = dynamic(() => import('./network-atlas-inner'), {
   ssr: false,
   loading: () => (
-    // G.T4 — CLS-free skeleton. Fills the parent's reserved height
+    // G.T4, CLS-free skeleton. Fills the parent's reserved height
     // (h-[400px]/flex-1) so there is zero layout shift on hydrate.
     <div
       className="motion-safe:animate-pulse flex h-full w-full items-center justify-center"

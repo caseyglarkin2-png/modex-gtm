@@ -251,7 +251,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: Danone - Mount Crawford VA\n- Type: Multi-category beverage plant (refrigerated) — Silk, International Delight, SToK, So Delicious, Horizon, Dunkin'\n- Address: 6364 South Valley Pike, Mount Crawford, VA 22841\n- Resolved center: 38.36880, -78.93980",
+        "dossierExcerpt": "- Name: Danone - Mount Crawford VA\n- Type: Multi-category beverage plant (refrigerated), Silk, International Delight, SToK, So Delicious, Horizon, Dunkin'\n- Address: 6364 South Valley Pike, Mount Crawford, VA 22841\n- Resolved center: 38.36880, -78.93980",
         "mapsUrl": "https://www.google.com/maps/@38.36880,-78.93980,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -489,7 +489,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Name: Danone - Minster OH\n- Type: Fresh yogurt plant — Activia, Oikos, Dannon Fruit on the Bottom, Danimals, Light + Fit, Triple Zero\n- Address: 216 Southgate Drive, Minster, OH 45865\n- Resolved center: 40.38440, -84.37300",
+        "dossierExcerpt": "- Name: Danone - Minster OH\n- Type: Fresh yogurt plant, Activia, Oikos, Dannon Fruit on the Bottom, Danimals, Light + Fit, Triple Zero\n- Address: 216 Southgate Drive, Minster, OH 45865\n- Resolved center: 40.38440, -84.37300",
         "mapsUrl": "https://www.google.com/maps/@40.38440,-84.37300,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -720,7 +720,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "- Name: Danone - Jacksonville FL (plant)\n- Type: Coffee & creamer plant (refrigerated) — International Delight, SToK Cold Brew\n- Address: 2198 West Beaver Street, Jacksonville, FL 32209\n- Resolved center: 30.33240, -81.69790",
+        "dossierExcerpt": "- Name: Danone - Jacksonville FL (plant)\n- Type: Coffee & creamer plant (refrigerated), International Delight, SToK Cold Brew\n- Address: 2198 West Beaver Street, Jacksonville, FL 32209\n- Resolved center: 30.33240, -81.69790",
         "mapsUrl": "https://www.google.com/maps/@30.33240,-81.69790,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -882,7 +882,7 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Danone - City of Industry CA\n- Type: Plant-based & coffee beverage plant (refrigerated) — Silk Beverage,\n  SToK Coffee, International Delight Creamer\n- Address: 18275 Arenth Avenue, City of Industry, CA 91748\n- Resolved center: 34.00460, -117.90590",
+        "dossierExcerpt": "- Name: Danone - City of Industry CA\n- Type: Plant-based & coffee beverage plant (refrigerated), Silk Beverage,\n  SToK Coffee, International Delight Creamer\n- Address: 18275 Arenth Avenue, City of Industry, CA 91748\n- Resolved center: 34.00460, -117.90590",
         "mapsUrl": "https://www.google.com/maps/@34.00460,-117.90590,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -1324,7 +1324,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster flagged a 3,159 m geocode move, so location was verified carefully.\nSatellite at z17 around the roster point (41.105801, -78.731049) showed a large\nindustrial building set in forested countryside — consistent with the only Danone\nNA plant-based yogurt plant. Street View (Jun 2025) along Oklahoma-Salem Road\nconfirmed a Danone-branded plant with the company sign and US/PA flags at the\ngreen-fronted office. The 24-acre / 189,158 sq ft figures from web research match\nthe compact two-building complex. Coordinates confirmed correct.",
+        "dossierExcerpt": "The roster flagged a 3,159 m geocode move, so location was verified carefully.\nSatellite at z17 around the roster point (41.105801, -78.731049) showed a large\nindustrial building set in forested countryside, consistent with the only Danone\nNA plant-based yogurt plant. Street View (Jun 2025) along Oklahoma-Salem Road\nconfirmed a Danone-branded plant with the company sign and US/PA flags at the\ngreen-fronted office. The 24-acre / 189,158 sq ft figures from web research match\nthe compact two-building complex. Coordinates confirmed correct.",
         "mapsUrl": "https://www.google.com/maps/@41.105800,-78.731100,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -1891,7 +1891,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (39.446174, -75.213811, ROOFTOP, 330 m move) landed on a large\nindustrial building fronting Rosenhayn Avenue. Web research confirms the Danone\nBridgeton plant: 185,000 sq ft, operating since 2001, ~120 employees, producing\nSilk plant-based beverages. Street View (Dec 2025) shows a \"DANONE\" monument sign\nand US flags at the front of the building. (Note: a separate large distribution\nwarehouse with many trailers sits to the NW — that is a different facility, not\nDanone.) Coordinates confirmed correct.",
+        "dossierExcerpt": "Roster coordinates (39.446174, -75.213811, ROOFTOP, 330 m move) landed on a large\nindustrial building fronting Rosenhayn Avenue. Web research confirms the Danone\nBridgeton plant: 185,000 sq ft, operating since 2001, ~120 employees, producing\nSilk plant-based beverages. Street View (Dec 2025) shows a \"DANONE\" monument sign\nand US flags at the front of the building. (Note: a separate large distribution\nwarehouse with many trailers sits to the NW, that is a different facility, not\nDanone.) Coordinates confirmed correct.",
         "mapsUrl": "https://www.google.com/maps/@39.445900,-75.213800,400m/data=!3m1!1e3",
         "tiles": {
           "17": {

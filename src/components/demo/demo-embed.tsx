@@ -5,7 +5,7 @@ import { DemoSurface } from './demo-surface';
 import type { DemoPack } from '@/lib/demo/pack-schema';
 
 /**
- * D2.8 — Embeddable variant of the demo for the existing /for/[account]
+ * D2.8, Embeddable variant of the demo for the existing /for/[account]
  * microsites. The host page passes an account slug; this component
  * fetches the matching pack from /demo-packs/<slug>.json and renders the
  * atlas in `embed` mode. Falls back to a "preparing your network" stub
@@ -19,7 +19,7 @@ import type { DemoPack } from '@/lib/demo/pack-schema';
  */
 
 interface Props {
-  /** micrositeSlug — same value used in /for/[account] and /demo/[account]. */
+  /** micrositeSlug, same value used in /for/[account] and /demo/[account]. */
   accountSlug: string;
 }
 

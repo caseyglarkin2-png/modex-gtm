@@ -1,9 +1,9 @@
 /**
- * Costco Wholesale — ABM Microsite Data (registry entry)
+ * Costco Wholesale, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/costco.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/costco resolves its
  * accountName FK and /for/costco renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const costco: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Costco Wholesale — Yard Network Audit',
+  pageTitle: 'YardFlow for Costco Wholesale, Yard Network Audit',
   metaDescription:
     '11 Costco Wholesale facilities mapped from public satellite imagery: 1,685 dock doors and room for about 5,302 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const costco: AccountMicrositeData = {
       hypothesis:
         'Costco runs the leanest cross-dock model in retail. Freight lands at a depot, gets sorted, and ships to the warehouse within hours, so every minute a trailer waits at the gate stalls the whole flow. We mapped 11 of Costco\'s roughly 24 US depots: 1,685 dock doors and more than 5,300 trailer positions across dry and refrigerated cross-docks. YardFlow turns that gate-to-dock handoff into one orchestrated move.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '11 Costco Wholesale facilities, mapped from public satellite imagery',
       accountSlug: 'costco',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Costco runs ~24 US cross-dock depots (dry, refrigerated, and e-commerce) feeding ~600 US warehouses, plus a handful internationally. We audited 11 representative US depots spanning dry and wet cross-docks.',
     },
     {
@@ -85,14 +85,14 @@ export const costco: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Costco Wholesale, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -103,7 +103,7 @@ export const costco: AccountMicrositeData = {
     facilityCount: '11 audited depots of ~24 US cross-dock depots',
     facilityTypes: ['Dry Depot', 'Refrigerated Depot', 'Refrigerated + Dry Depot'],
     geographicSpread: 'United States. Dry and refrigerated cross-dock depots feeding roughly 600 US warehouses.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 1,685 dock doors and room for ~5,302 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 1,685 dock doors and room for ~5,302 trailers.',
   },
 
   freight: {

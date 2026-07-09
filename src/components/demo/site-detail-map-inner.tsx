@@ -8,7 +8,7 @@ import { shapeBounds, shapePositions } from '@/lib/demo/geofence-geometry';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
 /**
- * The visual moment — a zoomed-in interactive satellite view of one
+ * The visual moment, a zoomed-in interactive satellite view of one
  * facility with the 5 geofence layers overlaid as colored rectangles.
  *
  * Each layer gets its own color and stroke; the perimeter is rendered

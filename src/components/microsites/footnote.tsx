@@ -4,7 +4,7 @@ const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
 
 /**
- * Inline numbered marker for a footnote — small bracketed monospace
+ * Inline numbered marker for a footnote, small bracketed monospace
  * superscript-ish. Keys to a fixed accent color (--memo-accent) so the
  * inline markers, the bottom-of-page list numbers, and the contents-rail
  * accent all align.
@@ -41,7 +41,7 @@ const CONFIDENCE_COLOR: Record<ROISourceConfidence, string> = {
  * uppercase mono label (no brackets). Pip color matches text color.
  *
  * Shipping these inline with every claim is one of the trust mechanics of
- * the memo template — readers see at a glance whether the underlying data
+ * the memo template, readers see at a glance whether the underlying data
  * is measured, public-data inference, or a soft estimate.
  */
 export function ConfidenceBadge({ confidence }: { confidence: ROISourceConfidence }) {
@@ -64,7 +64,7 @@ export function ConfidenceBadge({ confidence }: { confidence: ROISourceConfidenc
 export type NumberedFootnote = FootnoteData & { n: number };
 
 /**
- * Bottom-of-page footnote list — appendix material. Warm hairline rules
+ * Bottom-of-page footnote list, appendix material. Warm hairline rules
  * (dotted between entries), accent-colored footnote numbers, and the
  * uppercase mono "Sources" label that mirrors the contents-rail label.
  */

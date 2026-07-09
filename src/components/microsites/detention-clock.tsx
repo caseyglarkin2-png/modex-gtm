@@ -14,7 +14,7 @@ interface DetentionClockProps {
 
 /**
  * Documentary "while you read" chip that shows modeled detention dollars
- * accruing across the account's network. Atmosphere, not pressure — the
+ * accruing across the account's network. Atmosphere, not pressure, the
  * chip carries `aria-hidden="true"` so screen-reader users skip it (the
  * memo's prose, comparable section, and footnotes already convey the
  * cost story accessibly).

@@ -257,7 +257,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates (32.17856, -81.177928, addressed \"110\") landed on a\nmid-sized warehouse (~600 ft, NE–SW axis) inside the Savannah River\nInternational Trade Park — too small to be Target's import warehouse, which web\nsources describe as 2+ million sq ft, one of the largest in the nation\n(opened 2007).\n\nRe-probing the trade-park cluster at z15–z16, the single largest footprint by\nfar is the long rectangular building immediately south of the geocoded point.\nChatham County / city-data assessor records list Little Hearst Pkwy occupants:\n211 = CORPORATION TARGET (building 2,048,125 sq ft on 6,534,000 sq ft land),\n202 = IKEA (750,480 sq ft), 111 = Cartage Co. The big building matches Target's\n2.0 M sq ft; the adjacent elongated complex to its SE matches the smaller IKEA DC.",
+        "dossierExcerpt": "The supplied coordinates (32.17856, -81.177928, addressed \"110\") landed on a\nmid-sized warehouse (~600 ft, NE–SW axis) inside the Savannah River\nInternational Trade Park, too small to be Target's import warehouse, which web\nsources describe as 2+ million sq ft, one of the largest in the nation\n(opened 2007).\n\nRe-probing the trade-park cluster at z15–z16, the single largest footprint by\nfar is the long rectangular building immediately south of the geocoded point.\nChatham County / city-data assessor records list Little Hearst Pkwy occupants:\n211 = CORPORATION TARGET (building 2,048,125 sq ft on 6,534,000 sq ft land),\n202 = IKEA (750,480 sq ft), 111 = Cartage Co. The big building matches Target's\n2.0 M sq ft; the adjacent elongated complex to its SE matches the smaller IKEA DC.",
         "mapsUrl": "https://www.google.com/maps/@32.17420,-81.17620,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Single controlled truck entrance on the NE side off Little Hearst Pkwy. Street View (pano cnLRlAnQsxxOWFsZNErvBA, 2025-12, heading ~135) shows the entrance apron with concrete jersey barriers, signage panels and a check-in kiosk/call-box pole. Whole 154-acre property is fenced with a continuous treeline buffer; trucks cannot reach docks without passing this pinch point.",
@@ -268,12 +268,12 @@
           "postGateStaging": "Deep paved truck court between the gate/apron and the dock face provides ample internal holding before docks.",
           "drivewayLong": "Long NE approach drive from the public road wrapping to the truck court holds well more than 3 trucks of stacking depth.",
           "fastLaneOpportunity": "Wide gate apron and ample paved width at the entrance leave physical room to add a bypass/express lane.",
-          "entryLanes": "Gate apron width supports ~2 inbound lanes; exact lane striping not resolvable in Street View — estimate.",
+          "entryLanes": "Gate apron width supports ~2 inbound lanes; exact lane striping not resolvable in Street View, estimate.",
           "exitLanes": "Estimated single outbound lane; not directly resolvable.",
           "urbanRural": "Edge-of-town industrial park (Savannah River International Trade Park, Port Wentworth) surrounded by woods, marsh and a tidal creek; per rubric, small-town/edge-of-town industrial = Rural.",
           "railServed": "No rail spur enters the property; access is road-only off Little Hearst Pkwy (port-drayage import DC).",
           "siteAreaAcres": "Perimeter polygon yields 154.3 acres, matching the Chatham County assessor land size of 6,534,000 sq ft (~150 acres) for 211 Little Hearst Pkwy (Target), confirming correct building identification.",
-          "buildingId": "Confirmed as Target's 2,048,125 sq ft import distribution warehouse (built 2006, opened 2007) at 211 Little Hearst Pkwy, Savannah/Port Wentworth GA 31407 — distinct from the adjacent smaller IKEA DC at 202 Little Hearst Pkwy (750,480 sq ft). Provided address '110' and geocoded point were off; corrected via assessor land-area match."
+          "buildingId": "Confirmed as Target's 2,048,125 sq ft import distribution warehouse (built 2006, opened 2007) at 211 Little Hearst Pkwy, Savannah/Port Wentworth GA 31407, distinct from the adjacent smaller IKEA DC at 202 Little Hearst Pkwy (750,480 sq ft). Provided address '110' and geocoded point were off; corrected via assessor land-area match."
         },
         "verification": {
           "verdict": "confirmed",
@@ -495,7 +495,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode landed on the roof of the correct building (a single very large\nwarehouse in the Hawks Prairie / Lacey Gateway industrial park), but the point was\neast-of-center because the building is enormous. Web research confirms the identity:\n\n- CLUI and multiple sources describe the Lacey facility as Target's **west-coast import\n  warehouse, 1,700,000 sq ft — \"by far the biggest\" of Target's import warehouses.**\n- Target careers postings list import-DC operations roles at 3500 Marvin Rd NE, Lacey WA 98516.\n\nWide z15 imagery shows a multi-warehouse business park; the Target building is the\ncentral one whose roof spans nearly 600 m E-W, with a continuous dock face and a deep\ntrailer drop yard on its south side. Footprint/scale (~600 m x ~110 m roof plus a\n~600 m drop yard) is consistent with the 1.7M sq ft figure. I re-centered the audit on",
+        "dossierExcerpt": "The supplied geocode landed on the roof of the correct building (a single very large\nwarehouse in the Hawks Prairie / Lacey Gateway industrial park), but the point was\neast-of-center because the building is enormous. Web research confirms the identity:\n\n- CLUI and multiple sources describe the Lacey facility as Target's **west-coast import\n  warehouse, 1,700,000 sq ft, \"by far the biggest\" of Target's import warehouses.**\n- Target careers postings list import-DC operations roles at 3500 Marvin Rd NE, Lacey WA 98516.\n\nWide z15 imagery shows a multi-warehouse business park; the Target building is the\ncentral one whose roof spans nearly 600 m E-W, with a continuous dock face and a deep\ntrailer drop yard on its south side. Footprint/scale (~600 m x ~110 m roof plus a\n~600 m drop yard) is consistent with the 1.7M sq ft figure. I re-centered the audit on",
         "mapsUrl": "https://www.google.com/maps/@47.08185,-122.77385,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Fully enclosed private import-DC campus. The south drop yard is reached by a single wrap-around pinch point at the building's west end (north campus drive -> around west wall -> south yard); the rest of the property is bounded by the building (N) and wooded/landscaped buffers (S, E). No public through-access. A barrier-arm/booth could not be positively resolved in satellite, but a bonded import DC of this class operates controlled truck entry - marked true at medium confidence.",
@@ -761,15 +761,15 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Geocoded point (34.153258, -117.430557) landed on the west warehouse of a\ntwo-building Target campus — correct facility, just one building over from\ncenter. Web research confirms this is Target's Rialto import warehouse + regional\ndistribution center: a 3.1M-sq-ft campus on ~240 acres (opened with then-Gov.\nSchwarzenegger; \"Welcomes New 3.1 Million-Square-Foot Campus to the Inland\nEmpire\"). Job postings reference store code T3806 at this Rialto site. The\noverhead footprint (two ~1.5M-sqft buildings flanking a central trailer yard)\nmatches a 3M+ sqft import DC. Resolved center moved slightly east to the true\ncampus midpoint.",
+        "dossierExcerpt": "Geocoded point (34.153258, -117.430557) landed on the west warehouse of a\ntwo-building Target campus, correct facility, just one building over from\ncenter. Web research confirms this is Target's Rialto import warehouse + regional\ndistribution center: a 3.1M-sq-ft campus on ~240 acres (opened with then-Gov.\nSchwarzenegger; \"Welcomes New 3.1 Million-Square-Foot Campus to the Inland\nEmpire\"). Job postings reference store code T3806 at this Rialto site. The\noverhead footprint (two ~1.5M-sqft buildings flanking a central trailer yard)\nmatches a 3M+ sqft import DC. Resolved center moved slightly east to the true\ncampus midpoint.",
         "mapsUrl": "https://www.google.com/maps/@34.15315,-117.42600,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Channelized lane group with painted islands and a queue of tractor-trailers funneling through a single checkpoint mid-campus at ~34.1531,-117.4244; classic controlled truck entrance.",
-          "guardShack": "Gatehouse building with a canopy extending over the inbound truck lanes (z20/z21), windows on multiple sides, set beside the lanes — a staffed guard booth, not the main warehouse.",
+          "guardShack": "Gatehouse building with a canopy extending over the inbound truck lanes (z20/z21), windows on multiple sides, set beside the lanes, a staffed guard booth, not the main warehouse.",
           "remoteGs": "False because a physical guard booth is present.",
           "multipleFacilities": "Two ~1.5M-sqft warehouses (west + east) on one fenced 3.1M-sqft / 240-acre campus.",
           "dropYard": "Massive central drop yard between the two buildings holding many hundreds of parked trailers in herringbone rows.",
-          "shipRcvSeparate": "Two distinct dock banks face the central yard (west building east wall, east building west wall) plus perimeter dock faces — physically separate clusters.",
+          "shipRcvSeparate": "Two distinct dock banks face the central yard (west building east wall, east building west wall) plus perimeter dock faces, physically separate clusters.",
           "scale": "No truck scale positively identified in imagery; flagged uncertain.",
           "railServed": "No rail spur enters the property.",
           "drivewayLong": "Long approach road runs north from the public road into the campus before reaching the gate, with deep stacking room.",
@@ -1253,7 +1253,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The geocoded point (39.781271, -75.344213) landed directly on the correct\nbuilding. Web search confirms 300 Creekview Ave is Target's ~1.1 million sq ft\nLogan Township flow/distribution center (re-nj.com $265M sale; Target corporate\njob posting T3857; warehouse.ninja listing; Waze/TruckMap entries). Satellite\nimagery shows a single very large rectangular DC whose footprint fills the z17\nframe — fully consistent with a 1.1M sq ft RDC. No risk of auditing a neighbor:\nthe building is unmistakable and matches the parcel/news description.\n\nThe building long axis runs NNW–SSE, rotated roughly 20° clockwise from north.\nThe property sits between wetlands/open water to the west and a Rt 322 / I-295\ninterchange ramp to the southeast; Creekview Ave bounds the north side.",
+        "dossierExcerpt": "The geocoded point (39.781271, -75.344213) landed directly on the correct\nbuilding. Web search confirms 300 Creekview Ave is Target's ~1.1 million sq ft\nLogan Township flow/distribution center (re-nj.com $265M sale; Target corporate\njob posting T3857; warehouse.ninja listing; Waze/TruckMap entries). Satellite\nimagery shows a single very large rectangular DC whose footprint fills the z17\nframe, fully consistent with a 1.1M sq ft RDC. No risk of auditing a neighbor:\nthe building is unmistakable and matches the parcel/news description.\n\nThe building long axis runs NNW–SSE, rotated roughly 20° clockwise from north.\nThe property sits between wetlands/open water to the west and a Rt 322 / I-295\ninterchange ramp to the southeast; Creekview Ave bounds the north side.",
         "mapsUrl": "https://www.google.com/maps/@39.78155,-75.34450,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Multi-lane canopied gatehouse at the south truck entrance (z20/z21 sat): a wide overhead canopy spans the lanes with a booth island beneath and lane striping running through it where the access drive meets the property.",
@@ -1535,7 +1535,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The geocoded point landed on the landscaped office courtyard at the NW corner of\na very large warehouse. A Street View probe at the office driveway\n(pano `JTybK9rQjFr8tuiUcXS9mA`, 2025-03) shows a posted monument sign reading\n**\"TARGET — 14750 MILLER AVE — REGIONAL OFFICES — DISTRIBUTION CENTER — NO TRUCKS —\nTRUCKS USE ENTRANCE ON MEYER CANYON RD.\"** Satellite at z18 shows the Target\nbullseye logo painted in the circular courtyard. The building footprint (~720 m\nNW–SE × ~230 m, rooftop solar) is consistent with a 1M+ sqft Target RDC. Web\nsearch confirms T553 Target Distribution Center, 14750 Miller Ave, open 24/7,\nphone 909-355-6000. Positively the correct facility.",
+        "dossierExcerpt": "The geocoded point landed on the landscaped office courtyard at the NW corner of\na very large warehouse. A Street View probe at the office driveway\n(pano `JTybK9rQjFr8tuiUcXS9mA`, 2025-03) shows a posted monument sign reading\n**\"TARGET, 14750 MILLER AVE, REGIONAL OFFICES, DISTRIBUTION CENTER, NO TRUCKS ,\nTRUCKS USE ENTRANCE ON MEYER CANYON RD.\"** Satellite at z18 shows the Target\nbullseye logo painted in the circular courtyard. The building footprint (~720 m\nNW–SE × ~230 m, rooftop solar) is consistent with a 1M+ sqft Target RDC. Web\nsearch confirms T553 Target Distribution Center, 14750 Miller Ave, open 24/7,\nphone 909-355-6000. Positively the correct facility.",
         "mapsUrl": "https://www.google.com/maps/@34.111500,-117.480700,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Posted sign at the Miller Ave office entrance reads 'NO TRUCKS - TRUCKS USE ENTRANCE ON MEYER CANYON RD'; the truck yard is fully enclosed by chain-link/decorative wall perimeter fence, and trucks enter through a controlled pinch-point on the SW (Meyer Canyon Rd) side with median islands.",
@@ -1757,7 +1757,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The geocoded point sat on the south edge of a very large warehouse. Web search\nconfirms 3880 Zachary Ave, Shafter is the Target Distribution Center (phone\n661-396-6000); T0593 is Target's internal site code used in its warehouse job\npostings. The Walsh Group build record describes this as a **1,000,000 sq ft\nautomated distribution center on a 99-acre site** (22 acres under roof), the\nprototype for Target's national/regional DC series, anchoring the Rita Tech\nPark. Satellite shows a single ~600 m x ~725 m walled property with a giant\nroof-mounted solar array, a continuous dock-door bank, and a massive\ntrailer drop yard — unambiguously the Target RDC. My traced perimeter measures\n99.7 acres, matching the documented 99-acre figure.",
+        "dossierExcerpt": "The geocoded point sat on the south edge of a very large warehouse. Web search\nconfirms 3880 Zachary Ave, Shafter is the Target Distribution Center (phone\n661-396-6000); T0593 is Target's internal site code used in its warehouse job\npostings. The Walsh Group build record describes this as a **1,000,000 sq ft\nautomated distribution center on a 99-acre site** (22 acres under roof), the\nprototype for Target's national/regional DC series, anchoring the Rita Tech\nPark. Satellite shows a single ~600 m x ~725 m walled property with a giant\nroof-mounted solar array, a continuous dock-door bank, and a massive\ntrailer drop yard, unambiguously the Target RDC. My traced perimeter measures\n99.7 acres, matching the documented 99-acre figure.",
         "mapsUrl": "https://www.google.com/maps/@35.44514,-119.18478,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Closed double-leaf chain-link rolling/swing gate across the truck driveway on Zachary Ave (west frontage), lined with yellow bollards, clearly visible in Street View (captured 2026-02). Fenced perimeter throughout.",
@@ -1785,7 +1785,7 @@
               "url": "https://corporate.target.com/jobs/w48/98/full-time-hourly-warehouse-operations-seasonal-openings-t0593",
               "date": "2026-02",
               "type": "careers",
-              "claim": "Active Target warehouse-operations req coded T0593 for 3880 Zachary Ave, Shafter CA 93263 — the exact RDC site."
+              "claim": "Active Target warehouse-operations req coded T0593 for 3880 Zachary Ave, Shafter CA 93263, the exact RDC site."
             }
           ],
           "imageryDate": "2026-02",
@@ -2011,18 +2011,18 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The geocoded point sat on the roof of a single very large white-roof distribution\nbuilding. Web search confirmed this is Target RDC T-580 (Huntsville/Madison\nCounty Chamber listing, Manta, Waze, Apple Maps all resolve to 6175 Greenbrier\nPkwy NW / 6305 Greenbrier Rd, Madison AL 35756). Ground-truth: the 2026-04 Street\nView pano at the entrance loop road shows the **red Target bullseye logo and a\nTarget monument sign** at the drive (`tmp/site-8/sv-int-n.png`) — unambiguous.\nFootprint and trailer fleet (green Target trailers) are consistent with a ~1.5M sq\nft Target RDC.",
+        "dossierExcerpt": "The geocoded point sat on the roof of a single very large white-roof distribution\nbuilding. Web search confirmed this is Target RDC T-580 (Huntsville/Madison\nCounty Chamber listing, Manta, Waze, Apple Maps all resolve to 6175 Greenbrier\nPkwy NW / 6305 Greenbrier Rd, Madison AL 35756). Ground-truth: the 2026-04 Street\nView pano at the entrance loop road shows the **red Target bullseye logo and a\nTarget monument sign** at the drive (`tmp/site-8/sv-int-n.png`), unambiguous.\nFootprint and trailer fleet (green Target trailers) are consistent with a ~1.5M sq\nft Target RDC.",
         "mapsUrl": "https://www.google.com/maps/@34.6455,-86.8485,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Fully fenced property (black ornamental metal perimeter fence confirmed in 2016 & 2026 Street View). Single controlled truck entrance off the Greenbrier Pkwy loop road at the SE; Target monument/bullseye sign at the entrance throat (2026-04 SV). Drive is set back well beyond public-road SV coverage so the gate arm itself is not directly imaged, but the secured single-throat layout is unambiguous.",
           "guardShack": "Inferred true. Could not positively image a small dedicated booth at the road pinch (SV does not reach the private drive), but a yard-operations building with an adjacent truck-scale pad sits at the SE throat (34.6446,-86.8446); modern Target RDCs of this class are built with an exterior guard house (corroborated by Walsh Group's Target DC build spec). Flagged uncertain.",
           "scale": "A long rectangular gridded concrete pad adjacent to the SE yard-operations building (34.6446,-86.8446) reads as a truck scale / weigh pad. Medium confidence.",
-          "dropArea": "Large NW drop yard packed with 100+ marked trailer stalls, many green Target trailers, no tractors — 50+ band.",
+          "dropArea": "Large NW drop yard packed with 100+ marked trailer stalls, many green Target trailers, no tractors, 50+ band.",
           "dockDoors": "Continuous dock banks on the building's north face (facing the drop yard) and east face (trailers backed in along the east wall), well over 50 doors total.",
           "shipRcvSeparate": "Two physically distinct dock clusters on different building faces (north face into drop yard, east face apron) suggest separate ship/receive flows.",
           "postGateStaging": "Wide paved aprons inside the fence between the gate and the dock banks provide ample interior queuing.",
           "fastLaneOpportunity": "Wide multi-lane entrance apron at the loop-road throat with unused paved width.",
-          "urbanRural": "Edge-of-town industrial on the Madison/Huntsville fringe, bordered by active farm fields to the west and a tree line to the south — Rural per rubric.",
+          "urbanRural": "Edge-of-town industrial on the Madison/Huntsville fringe, bordered by active farm fields to the west and a tree line to the south, Rural per rubric.",
           "railServed": "No rail spur enters the property.",
           "yardMetrics": "Door/trailer counts are honest overhead estimates from zoom-19/20 imagery, not exact. buildingCount=3 (main DC, SE yard-ops/transportation office, SW pump house)."
         },
@@ -2257,7 +2257,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied point sat on the small standalone structure at the building's\neast end (office annex / employee-parking edge). The actual RDC is the massive\ndiagonal building to the WEST. Positively confirmed as Target T0556 by:\n\n1. Street View, north dock face (heading 180° from Old Union Rd):\n   white trailers backed into the dock doors carry the red Target bullseye\n   logo — unmistakable Target branding across the entire dock wall.\n2. Address match: 4502 Union Rd / Old Union Rd, Tifton GA 31794 — matches\n   the Tift County Chamber listing and Target's own Workday job postings for\n   \"Regional Distribution Center, Tifton, GA (T0556).\"\n3. Footprint: a single ~0.5 M sq-ft+ rectangular DC with a vast trailer\n   drop yard — consistent with a Target RDC, not an office or unrelated plant.",
+        "dossierExcerpt": "The supplied point sat on the small standalone structure at the building's\neast end (office annex / employee-parking edge). The actual RDC is the massive\ndiagonal building to the WEST. Positively confirmed as Target T0556 by:\n\n1. Street View, north dock face (heading 180° from Old Union Rd):\n   white trailers backed into the dock doors carry the red Target bullseye\n   logo, unmistakable Target branding across the entire dock wall.\n2. Address match: 4502 Union Rd / Old Union Rd, Tifton GA 31794, matches\n   the Tift County Chamber listing and Target's own Workday job postings for\n   \"Regional Distribution Center, Tifton, GA (T0556).\"\n3. Footprint: a single ~0.5 M sq-ft+ rectangular DC with a vast trailer\n   drop yard, consistent with a Target RDC, not an office or unrelated plant.",
         "mapsUrl": "https://www.google.com/maps/@31.42050,-83.52080,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Fenced perimeter with defined truck-lane driveways into the yard; NE dock-road driveway and W office boulevard both serve as controlled property entrances. Classed TRUE for a fenced retail RDC of this scale.",
@@ -2281,7 +2281,7 @@
               "url": "https://target.wd5.myworkdayjobs.com/en-US/targetcareers/job/4502-Union-Rd-TiftonGA-31794-8543/Full-Time-Hourly-Warehouse-Operations--T0556-_R0000400243",
               "date": "2026-06",
               "type": "careers",
-              "claim": "Active Target Workday req coded T0556 posted at 4502 Union Rd, Tifton GA 31794 — the exact RDC address."
+              "claim": "Active Target Workday req coded T0556 posted at 4502 Union Rd, Tifton GA 31794, the exact RDC address."
             }
           ],
           "checkedDivestiture": true,
@@ -2521,7 +2521,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode (39.745747, -86.296794) landed directly on the correct\nbuilding — no relocation needed. Positive ID via:\n- Web: IBJ reporting describes a ~1.4M sq ft Target RDC at 7551 W Morris St,\n  west of Girls School Rd, north of Indianapolis International Airport, ~600\n  employees, being partially converted (~254k sq ft) for e-commerce fulfillment.\n- Imagery: A single dominant ~1.4M sq ft white-roofed building with\n  continuous dock banks and surrounding multi-row trailer yards.\n- Branding: Street View shows the Target bullseye on the building wall\n  (sv-yardentry, sv-west-morris) and rows of \"TARGET\" bullseye-marked trailers\n  in the west yard (sv-westperim-90). Red Target property/security signage at\n  the Morris St office frontage.",
+        "dossierExcerpt": "The supplied geocode (39.745747, -86.296794) landed directly on the correct\nbuilding, no relocation needed. Positive ID via:\n- Web: IBJ reporting describes a ~1.4M sq ft Target RDC at 7551 W Morris St,\n  west of Girls School Rd, north of Indianapolis International Airport, ~600\n  employees, being partially converted (~254k sq ft) for e-commerce fulfillment.\n- Imagery: A single dominant ~1.4M sq ft white-roofed building with\n  continuous dock banks and surrounding multi-row trailer yards.\n- Branding: Street View shows the Target bullseye on the building wall\n  (sv-yardentry, sv-west-morris) and rows of \"TARGET\" bullseye-marked trailers\n  in the west yard (sv-westperim-90). Red Target property/security signage at\n  the Morris St office frontage.",
         "mapsUrl": "https://www.google.com/maps/@39.7465,-86.296,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Property is fully fenced (tall chain-link + jersey barriers, confirmed in multiple Street View frames). Sliding/swing gates cross the truck drives at the west face (pano 39.74897,-86.29739) and west yard entrance. Gated controlled access = true.",
@@ -2544,7 +2544,7 @@
               "url": "https://target.wd5.myworkdayjobs.com/targetcareers/job/7551-W-Morris-St-IndianapolisIN-46231-1358/Full-Time-Hourly-Warehouse-Operations-Openings--T0559-_R0000400249/apply",
               "date": "2026-06",
               "type": "careers",
-              "claim": "Active Target Workday req coded T0559 posted at 7551 W Morris St, Indianapolis IN 46231 — the exact RDC address."
+              "claim": "Active Target Workday req coded T0559 posted at 7551 W Morris St, Indianapolis IN 46231, the exact RDC address."
             },
             {
               "tier": 1,
@@ -2754,13 +2754,13 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied coordinates landed directly on a very large tilt-up distribution\nbuilding surrounded by farmland — consistent with a Target RDC. Confirmed via:\n- Satellite (z16–z20): a single ~1.65M-sq-ft building running roughly E-W, with\n  employee parking on the north, a continuous dock face + huge trailer drop yard\n  on the south. Building dwarfs everything around it.\n- Street View at the entrance off Mount Vernon Rd shows a **Target bullseye\n  monument sign** and a Target directional sign — positive ID.\n- Web research: S.B. Ballard / Site Selection / Virginia Business sources describe\n  the Target \"Mid-Atlantic Distribution Center\" in Stuarts Draft as a 1,650,000-sq-ft\n  building on a ~110-acre site with a ~38–39-acre building pad, completed 1996.",
+        "dossierExcerpt": "The supplied coordinates landed directly on a very large tilt-up distribution\nbuilding surrounded by farmland, consistent with a Target RDC. Confirmed via:\n- Satellite (z16–z20): a single ~1.65M-sq-ft building running roughly E-W, with\n  employee parking on the north, a continuous dock face + huge trailer drop yard\n  on the south. Building dwarfs everything around it.\n- Street View at the entrance off Mount Vernon Rd shows a **Target bullseye\n  monument sign** and a Target directional sign, positive ID.\n- Web research: S.B. Ballard / Site Selection / Virginia Business sources describe\n  the Target \"Mid-Atlantic Distribution Center\" in Stuarts Draft as a 1,650,000-sq-ft\n  building on a ~110-acre site with a ~38–39-acre building pad, completed 1996.",
         "mapsUrl": "https://www.google.com/maps/@38.03055,-78.99880,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Fully fenced perimeter (chain-link confirmed in multiple Street-View frames along Mount Vernon Rd). Single controlled vehicular entrance drive off Mount Vernon Rd with Target bullseye monument sign; truck route enters the secured south yard. Not an open site.",
           "guardShack": "No staffed guard booth visible at the road entrance in satellite or Street View; entrance is a wide controlled drive without a roadside 1-3-space booth structure. Marked false at medium confidence.",
           "remoteGs": "Gate control without a visible staffed booth at the road implies kiosk/remote/app check-in at this large RDC; set true. Medium confidence.",
-          "shipRcvSeparate": "Primary dock bank on the long south face; a second dock bank with trailers is visible on the west end face — likely separate ship/receive clusters.",
+          "shipRcvSeparate": "Primary dock bank on the long south face; a second dock bank with trailers is visible on the west end face, likely separate ship/receive clusters.",
           "fastLaneOpportunity": "Very wide entrance apron and deep drive with ample paved width to add a bypass/express lane.",
           "postGateStaging": "Large paved yard between the fence/gate and the dock doors provides internal queuing room.",
           "dockDoorCount": "Estimated from 1.65M sq ft footprint with dock doors on south and west faces; ~140 is an overhead estimate.",
@@ -3061,20 +3061,20 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The geocoded point landed directly on the building roof — correct, not a neighbor.\nWeb search confirmed an active Target RDC at 13786 County Rd 433, Tyler TX 75706,\noperating 24/7 (Waze/Foursquare/Manta listings; Target corporate job postings for\n\"Regional Distribution Center – Tyler, TX\"). Satellite shows a single ~600 m-long\nwhite-roof distribution building with rooftop solar arrays, a large trailer yard on\nthe north face, and rural farmland/forest surroundings — consistent with a Target RDC\n(~1.5 M sq ft class). No competing large building nearby. Site sits on the south side\nof US-69. Locked center at 32.46437, -95.41160.",
+        "dossierExcerpt": "The geocoded point landed directly on the building roof, correct, not a neighbor.\nWeb search confirmed an active Target RDC at 13786 County Rd 433, Tyler TX 75706,\noperating 24/7 (Waze/Foursquare/Manta listings; Target corporate job postings for\n\"Regional Distribution Center – Tyler, TX\"). Satellite shows a single ~600 m-long\nwhite-roof distribution building with rooftop solar arrays, a large trailer yard on\nthe north face, and rural farmland/forest surroundings, consistent with a Target RDC\n(~1.5 M sq ft class). No competing large building nearby. Site sits on the south side\nof US-69. Locked center at 32.46437, -95.41160.",
         "mapsUrl": "https://www.google.com/maps/@32.46437,-95.41160,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Single controlled truck entrance at the NW corner: the access road off US-69 pinches through a checkpoint with painted lane markings and a canopied gatehouse straddling the lanes (sat z19 entryseq/toproad).",
-          "guardShack": "Small white-roofed booth with a lane canopy set between inbound/outbound lanes at the gate, ~1-2 vehicle footprint, flanked by employee parking — classic staffed guard booth, not the main building.",
+          "guardShack": "Small white-roofed booth with a lane canopy set between inbound/outbound lanes at the gate, ~1-2 vehicle footprint, flanked by employee parking, classic staffed guard booth, not the main building.",
           "remoteGs": "False because a physical staffed guard booth is present at the gate.",
           "entryLanes": "~2 inbound lanes estimated from gate apron width; lane stripes visible but exact split not fully resolved.",
           "exitLanes": "~2 outbound lanes estimated; mirror of inbound at the single gate.",
           "fastLaneOpportunity": "Wide multi-lane gate apron with ample unused paved width to add an express/bypass lane.",
-          "dockDoors": "Continuous dock line along the full ~600m north face with trailers backed in, plus a dock bank on the east face — well into the 50+ band; door count ~120 is an overhead estimate.",
+          "dockDoors": "Continuous dock line along the full ~600m north face with trailers backed in, plus a dock bank on the east face, well into the 50+ band; door count ~120 is an overhead estimate.",
           "dropYard": "Large dedicated trailer-storage yard north of the building and a second trailer lot off the east end, both full of parked trailers without tractors.",
           "shipRcvSeparate": "Docks read as one continuous operation on the north face with an east-face extension; no clearly distinct ship vs rcv bank, so false (low confidence).",
-          "buildingCount": "Main DC plus a small separate annex building inside the north trailer yard (sat z18 NE) — counted as 2; not a true multi-large-building campus so multipleFacilities=false.",
-          "urbanRural": "Edge of Tyler metro on US-69 surrounded by farmland and forest — Rural.",
+          "buildingCount": "Main DC plus a small separate annex building inside the north trailer yard (sat z18 NE), counted as 2; not a true multi-large-building campus so multipleFacilities=false.",
+          "urbanRural": "Edge of Tyler metro on US-69 surrounded by farmland and forest, Rural.",
           "connectivityIssue": "Directly on US-69 highway frontage near Tyler; cellular coverage expected adequate, so false.",
           "scale": "No truck scale/weigh pad identified in the truck path."
         },
@@ -3293,17 +3293,17 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode (39.891039, -77.671691) landed on an **employee parking lot\nbetween two large buildings**. Wider satellite (z15) showed two candidate\nfacilities:\n- A blue-roofed building to the north — smaller; this is a SEPARATE neighbor.\n- A massive light/white-roofed building to the south/southwest — by far the\n  largest footprint on the parcel.\n\nWeb research corroborates the Target RDC as a **~1.3M sq ft warehouse on a\n~99–130-acre site anchoring Rita Tech Park** in Guilford Township along\nI-81 (Walsh Group / Langan project pages; CVB Alliance member listing for\n\"Target Distribution Center T0589\"). The very large white-roofed building matches\nthis description (enormous plain roof, single huge building, extensive trailer\ndrop yards). The blue-roofed neighbor is much too small to be a 1.3M sq ft RDC.",
+        "dossierExcerpt": "The supplied geocode (39.891039, -77.671691) landed on an **employee parking lot\nbetween two large buildings**. Wider satellite (z15) showed two candidate\nfacilities:\n- A blue-roofed building to the north, smaller; this is a SEPARATE neighbor.\n- A massive light/white-roofed building to the south/southwest, by far the\n  largest footprint on the parcel.\n\nWeb research corroborates the Target RDC as a **~1.3M sq ft warehouse on a\n~99–130-acre site anchoring Rita Tech Park** in Guilford Township along\nI-81 (Walsh Group / Langan project pages; CVB Alliance member listing for\n\"Target Distribution Center T0589\"). The very large white-roofed building matches\nthis description (enormous plain roof, single huge building, extensive trailer\ndrop yards). The blue-roofed neighbor is much too small to be a 1.3M sq ft RDC.",
         "mapsUrl": "https://www.google.com/maps/@39.8878,-77.6735,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Guarded truck entrance at the SW/south property line: Street View (pano mlac-CAWOgXfcDblQC8HTQ, 2012-09) and z19 satellite both show a gatehouse canopy straddling the inbound lane with a tractor-trailer queued at it, yellow lane markings, and perimeter chain-link fence.",
           "guardShack": "A staffed booth with a flat canopy roof spanning the entry lane is clearly visible in Street View beside the gate and as a small structure on the road at z19 satellite (~39.8843,-77.6777). Distinct from the larger office/amenity building just north of it.",
           "remoteGs": "False because a manned guard booth is present at the gate.",
-          "dockDoors": "50+ — the long west building face shows continuous dock doors with dozens of trailers backed in; an RDC of ~1.3M sq ft. ~120 is an honest estimate, low precision.",
-          "dropArea": "50+ — extensive west/north-side trailer drop yards with hundreds of parked trailers in marked rows.",
+          "dockDoors": "50+, the long west building face shows continuous dock doors with dozens of trailers backed in; an RDC of ~1.3M sq ft. ~120 is an honest estimate, low precision.",
+          "dropArea": "50+, extensive west/north-side trailer drop yards with hundreds of parked trailers in marked rows.",
           "shipRcvSeparate": "Docks appear concentrated on the single west building face; east face (toward I-81) has no docks. Marked uncertain.",
           "fastLaneOpportunity": "Wide entry apron and multiple lanes at the gate with room for a bypass lane.",
-          "urbanRural": "Edge-of-town industrial park (Rita Tech Park) along I-81 outside Chambersburg, surrounded by farmland — Rural per rubric.",
+          "urbanRural": "Edge-of-town industrial park (Rita Tech Park) along I-81 outside Chambersburg, surrounded by farmland, Rural per rubric.",
           "postGateStaging": "Large paved apron and internal yard immediately inside the gate before the docks.",
           "railServed": "A rail line runs along the west property edge (Archer Dr corridor) but no spur appears to enter the property; railServed=false."
         },
@@ -3525,7 +3525,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The geocoded point (33.44619, -112.217864) landed directly on the correct\nbuilding. The z16 overview shows the unmistakable **Target bullseye logo\npainted on the white roof** of a very large single-story distribution box —\ndefinitive identification. Web search corroborates an active Target RDC /\nwarehouse operation at 25 N 75th Ave, Phoenix AZ 85043 hiring hourly warehouse\noperations under store/site code T0588. Building footprint (~1.5-1.7M sqft\nclass), long north dock wall, and a multi-row trailer drop yard are all\nconsistent with a regional distribution center, not an office or neighbor.\n\nSetting: dense Phoenix industrial corridor (75th Ave / Lower Buckeye Rd area),\nwarehouses on all sides → Urban.",
+        "dossierExcerpt": "The geocoded point (33.44619, -112.217864) landed directly on the correct\nbuilding. The z16 overview shows the unmistakable **Target bullseye logo\npainted on the white roof** of a very large single-story distribution box ,\ndefinitive identification. Web search corroborates an active Target RDC /\nwarehouse operation at 25 N 75th Ave, Phoenix AZ 85043 hiring hourly warehouse\noperations under store/site code T0588. Building footprint (~1.5-1.7M sqft\nclass), long north dock wall, and a multi-row trailer drop yard are all\nconsistent with a regional distribution center, not an office or neighbor.\n\nSetting: dense Phoenix industrial corridor (75th Ave / Lower Buckeye Rd area),\nwarehouses on all sides → Urban.",
         "mapsUrl": "https://www.google.com/maps/@33.44760,-112.21810,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Controlled entrance at NE corner off the access road: a guard building with multiple inbound/outbound lanes (z19) plus tall steel perimeter fencing around the whole property (Street View). truckGate=true.",
@@ -4038,7 +4038,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "WebSearch on \"Target Distribution T0557 / 1100 E Valley Rd Oconomowoc\" returns the Target\nRDC (Waze, Target careers T0557, Oconomowoc Chamber, gmtoday 30th-anniversary article).\nThe facility opened May 31, 1994, was the 7th Target DC in the country, grew from 1.1M to\n1.5M sq ft, employs ~1,100 FT, and services 84 stores across WI/IL/MI. Street View on\nthe south frontage shows a red Target bullseye sign on the lawn and the red Target dock\nwall behind the trees — positive on-the-ground confirmation. The geocoded point was on the\nNW employee lot of this same building, so the address is correct; I re-centered on the\nbuilding/yard mass.",
+        "dossierExcerpt": "WebSearch on \"Target Distribution T0557 / 1100 E Valley Rd Oconomowoc\" returns the Target\nRDC (Waze, Target careers T0557, Oconomowoc Chamber, gmtoday 30th-anniversary article).\nThe facility opened May 31, 1994, was the 7th Target DC in the country, grew from 1.1M to\n1.5M sq ft, employs ~1,100 FT, and services 84 stores across WI/IL/MI. Street View on\nthe south frontage shows a red Target bullseye sign on the lawn and the red Target dock\nwall behind the trees, positive on-the-ground confirmation. The geocoded point was on the\nNW employee lot of this same building, so the address is correct; I re-centered on the\nbuilding/yard mass.",
         "mapsUrl": "https://www.google.com/maps/@43.0793,-88.4773,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or guard booth could be positively identified at any vehicular entrance in z18-z21 satellite or in multiple Street View passes along the entire E Valley Rd south frontage. The frontage is a continuous landscaped lawn/tree buffer with paved driveway breaks (office/visitor entry on the SE) and the truck yard accessed via open internal drives. Per the rubric (open driveway with no visible control = false) classified false, but flagged uncertain: a 1.5M sqft secured Target RDC plausibly has an internal/manned truck checkpoint not resolvable from this imagery.",
@@ -4292,7 +4292,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode (44.579319, -123.115058) landed directly on a massive\nwhite-roofed distribution building. Zoom-16/17 satellite shows a single very\nlarge L-shaped warehouse with extensive multi-row trailer drop yards to the\nnorth, employee parking to the south, and a mainline railroad running along the\neast boundary — a textbook large-format Target RDC. Zoom-20 imagery of the dock\nface shows Target-branded trailers (\"TARGET\" legible on trailer roofs)\nbacked into the dock doors and red yard tractors, confirming ownership.\nWeb search (Albany Chamber of Commerce, Target careers T0558, Waze/Apple Maps)\nconfirms \"Target Distribution Center, 875 Beta Dr SW, Albany OR\" operating\n24/7. Resolved center nudged slightly NE of the geocode to the true building\ncentroid. Correct facility — high confidence.",
+        "dossierExcerpt": "The supplied geocode (44.579319, -123.115058) landed directly on a massive\nwhite-roofed distribution building. Zoom-16/17 satellite shows a single very\nlarge L-shaped warehouse with extensive multi-row trailer drop yards to the\nnorth, employee parking to the south, and a mainline railroad running along the\neast boundary, a textbook large-format Target RDC. Zoom-20 imagery of the dock\nface shows Target-branded trailers (\"TARGET\" legible on trailer roofs)\nbacked into the dock doors and red yard tractors, confirming ownership.\nWeb search (Albany Chamber of Commerce, Target careers T0558, Waze/Apple Maps)\nconfirms \"Target Distribution Center, 875 Beta Dr SW, Albany OR\" operating\n24/7. Resolved center nudged slightly NE of the geocode to the true building\ncentroid. Correct facility, high confidence.",
         "mapsUrl": "https://www.google.com/maps/@44.580200,-123.114000,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Truck yard fully fenced (perimeter chain-link visible throughout); controlled entry funnels through a divided multi-lane private drive then a fenced checkpoint with STOP pavement markings between the public-accessible apron and the secured yard.",
@@ -4548,7 +4548,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Web search confirmed the facility unambiguously: 129 North Rd, Wilton NY 12831 is\nthe Target Distribution Center, and the T0579 code matches Target's own job\npostings for this site (Warehouse Associate, Operations Manager, and **Target\nSecurity Specialist — Regional Distribution Center, Wilton NY** all list 129\nNorth Rd). The given coordinates land squarely on the building, so they were\ncorrect — only nudged ~30 m west to the building centroid. The satellite imagery\nshows a single very large distribution building (>1,000 ft long) with a partial\nsolar-panel roof, an extensive west-facing dock line, and multiple trailer yards\n— fully consistent with a Target RDC, not a neighboring property.",
+        "dossierExcerpt": "Web search confirmed the facility unambiguously: 129 North Rd, Wilton NY 12831 is\nthe Target Distribution Center, and the T0579 code matches Target's own job\npostings for this site (Warehouse Associate, Operations Manager, and **Target\nSecurity Specialist, Regional Distribution Center, Wilton NY** all list 129\nNorth Rd). The given coordinates land squarely on the building, so they were\ncorrect, only nudged ~30 m west to the building centroid. The satellite imagery\nshows a single very large distribution building (>1,000 ft long) with a partial\nsolar-panel roof, an extensive west-facing dock line, and multiple trailer yards\n, fully consistent with a Target RDC, not a neighboring property.",
         "mapsUrl": "https://www.google.com/maps/@43.17760,-73.71680,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Truck driveway from the SW dock yard crosses a continuous east-west perimeter fence at a single defined pinch-point gate (43.1749,-73.7174); fence rails visible running across the grass strips on both sides of the drive in gate-cross-z20.png.",
@@ -4831,7 +4831,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The geocoded point (42.275643, -85.381154) landed on the south employee\nparking lot / building roof of the correct facility. Web search confirmed\n12735 E L Ave as the Target Distribution Center T0587 (Target jobs pages,\nOSHA inspection record, chamber-of-commerce listing). Satellite at z15–z16\nshows a single very large white-roofed distribution building with a Target\nbullseye on the south wall (visible in Street View), an L-shaped trailer yard\nto the NW/N, an employee lot to the south, and a separate office building on\nthe SE parcel frontage. Setting is rural — farmland and woods, just south of\nthe I-94 corridor. True building center used: 42.2762, -85.3823.",
+        "dossierExcerpt": "The geocoded point (42.275643, -85.381154) landed on the south employee\nparking lot / building roof of the correct facility. Web search confirmed\n12735 E L Ave as the Target Distribution Center T0587 (Target jobs pages,\nOSHA inspection record, chamber-of-commerce listing). Satellite at z15–z16\nshows a single very large white-roofed distribution building with a Target\nbullseye on the south wall (visible in Street View), an L-shaped trailer yard\nto the NW/N, an employee lot to the south, and a separate office building on\nthe SE parcel frontage. Setting is rural, farmland and woods, just south of\nthe I-94 corridor. True building center used: 42.2762, -85.3823.",
         "mapsUrl": "https://www.google.com/maps/@42.27620,-85.38230,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Single controlled truck route into the yard: the wide divided entrance drive off E L Ave leads ~250 ft north to a guard booth in the median where the perimeter road pinches into the trailer/dock yard. Confirmed via z18-z20 satellite + Street View of the entrance.",
@@ -5136,16 +5136,16 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The geocoded coordinates landed directly on a very large white-roofed\ndistribution building. Web search confirms this is **Target's Pueblo\ndistribution center, 34800 (E) United Ave, Pueblo CO 81001** — a 24/7 operation\nwith ~600 staff and ~$61.8M reported volume (Pueblo Latino Chamber / CMac /\nBBB listings). Building footprint (>1,000 ft long), extensive dock banks, and a\nmassive trailer drop yard are all consistent with a Target regional/flow\ncenter. No neighboring-building ambiguity: the smaller buildings to the NW and\nSW are separate, far smaller structures across United Ave / setbacks. The point\nwas used as-is for the audit center.",
+        "dossierExcerpt": "The geocoded coordinates landed directly on a very large white-roofed\ndistribution building. Web search confirms this is **Target's Pueblo\ndistribution center, 34800 (E) United Ave, Pueblo CO 81001**, a 24/7 operation\nwith ~600 staff and ~$61.8M reported volume (Pueblo Latino Chamber / CMac /\nBBB listings). Building footprint (>1,000 ft long), extensive dock banks, and a\nmassive trailer drop yard are all consistent with a Target regional/flow\ncenter. No neighboring-building ambiguity: the smaller buildings to the NW and\nSW are separate, far smaller structures across United Ave / setbacks. The point\nwas used as-is for the audit center.",
         "mapsUrl": "https://www.google.com/maps/@38.279662,-104.467883,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Fully fenced facility (continuous chain-link perimeter confirmed in 6+ Street-View frames). Wide lane-marked truck entrance apron off United Ave at the NE (pano C-dKnSGksGFHPLIOjkSgIw, 38.2827,-104.4650) with bobtail/tractor staging visible. Only public road touching the property; US-50 to the south is limited-access with no driveway.",
           "guardShack": "Inferred true at medium confidence: major 24/7 Target regional DC (~600 staff, $61.8M volume per chamber data), fully fenced, with a small checkpoint structure at the south yard edge (~38.2768,-104.4666). The north entrance apron in 2022 imagery is open to the road with the security gate/booth set back inside; top-down resolution did not crisply isolate the booth, hence medium confidence.",
-          "dockDoors": "50+ — dock banks on the building's east face (trailers backed in along the full east wall) and a long south-face dock bank; estimated ~120 doors total across both faces.",
-          "dropArea": "50+ — extensive trailer drop/storage yard on the east and SE with many double rows of parked trailers; 200+ trailers visible in z18-z20 imagery.",
+          "dockDoors": "50+, dock banks on the building's east face (trailers backed in along the full east wall) and a long south-face dock bank; estimated ~120 doors total across both faces.",
+          "dropArea": "50+, extensive trailer drop/storage yard on the east and SE with many double rows of parked trailers; 200+ trailers visible in z18-z20 imagery.",
           "shipRcvSeparate": "Two physically distinct dock clusters (east-face bank and south-face bank) suggest separate ship/receive operations; medium confidence.",
           "entryLanes": "Entry/exit share one wide apron; estimated ~2 in / 2 out from apron width. Low confidence.",
-          "fastLaneOpportunity": "Very wide entrance apron and large paved staging area inside the gate — ample room for an express/bypass lane.",
+          "fastLaneOpportunity": "Very wide entrance apron and large paved staging area inside the gate, ample room for an express/bypass lane.",
           "railServed": "No rail spur enters the property; nearest rail is the BNSF/UP main line along US-50 corridor but it does not serve the site.",
           "urbanRural": "Edge-of-Pueblo industrial site surrounded by open scrub/farmland; classified Rural."
         },
@@ -5406,7 +5406,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The supplied coordinates (42.5077, -92.41034 / \"3400 Cedar Heights Dr\") were incorrect — a z17 satellite probe there showed a residential street and small retail/strip development roughly 6 km NE of any distribution facility, with no industrial building present.\n\nWeb research corrected this:\n- Target careers / Yelp / Waze / TruckMap all place Target Distribution Center T-0590 at 6601 Hudson Rd, Cedar Falls (and the food DC at 2115 Technology Pkwy on the same campus).\n- Iowa DNR Facility Explorer (facID 311387103, \"Target Food Distribution Center\") lists coordinates 42.47508, -92.46961, which land precisely on the SE office wing of the compact center building.\n\nSatellite confirmed a two-building Target campus at Hudson & Viking roads (~1.4M sq ft total under roof): a very large general-merchandise DC to the north with an enormous trailer yard, and a separate, compact, roughly-square cold-storage building to the south with rooftop refrigeration units (clearly visible at z19/z20) — the ~420,000 sq ft Food DC. That center building is the audited facility.",
+        "dossierExcerpt": "The supplied coordinates (42.5077, -92.41034 / \"3400 Cedar Heights Dr\") were incorrect, a z17 satellite probe there showed a residential street and small retail/strip development roughly 6 km NE of any distribution facility, with no industrial building present.\n\nWeb research corrected this:\n- Target careers / Yelp / Waze / TruckMap all place Target Distribution Center T-0590 at 6601 Hudson Rd, Cedar Falls (and the food DC at 2115 Technology Pkwy on the same campus).\n- Iowa DNR Facility Explorer (facID 311387103, \"Target Food Distribution Center\") lists coordinates 42.47508, -92.46961, which land precisely on the SE office wing of the compact center building.\n\nSatellite confirmed a two-building Target campus at Hudson & Viking roads (~1.4M sq ft total under roof): a very large general-merchandise DC to the north with an enormous trailer yard, and a separate, compact, roughly-square cold-storage building to the south with rooftop refrigeration units (clearly visible at z19/z20), the ~420,000 sq ft Food DC. That center building is the audited facility.",
         "mapsUrl": "https://www.google.com/maps/@42.4766,-92.4703,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Geocoded point (42.5077,-92.41034 / 3400 Cedar Heights Dr) was wrong - landed in a residential/retail area ~6km NE. Correct facility is the Target Food Distribution Center at 2115 Technology Pkwy / 6601 Hudson Rd, Cedar Falls, confirmed by Iowa DNR Facility Explorer (facID 311387103, coords 42.47508,-92.46961) sitting on this building's SE office wing.",
@@ -5657,7 +5657,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode (39.946572, -83.351404) landed on the correct building — the\nlarge white-roof warehouse with an attached east office and an employee lot. I\nconfirmed this is the Target FOOD distribution center (438,000 sf, opened 2014,\nrefrigerated/frozen/produce) and NOT a neighbor:\n\n- Web research: Target's food DC is at 42 Commerce Pkwy, 438,000 sf on a 47-acre\n  parcel, adjacent to Target's regional/general-merchandise DC. Target's internal id\n  for the food DC is T3880; T3804 (in the task title) is the adjacent\n  regional DC. Both are on the same logistics park.\n- Street View disambiguation: the long building immediately south carries a\n  JLL / Stonemont marketing banner reading **\"Available — 44 Commerce Parkway,\n  1,090,000 s.f.\"** — a vacant spec warehouse. That fixes 42 Commerce Pkwy as the",
+        "dossierExcerpt": "The supplied geocode (39.946572, -83.351404) landed on the correct building, the\nlarge white-roof warehouse with an attached east office and an employee lot. I\nconfirmed this is the Target FOOD distribution center (438,000 sf, opened 2014,\nrefrigerated/frozen/produce) and NOT a neighbor:\n\n- Web research: Target's food DC is at 42 Commerce Pkwy, 438,000 sf on a 47-acre\n  parcel, adjacent to Target's regional/general-merchandise DC. Target's internal id\n  for the food DC is T3880; T3804 (in the task title) is the adjacent\n  regional DC. Both are on the same logistics park.\n- Street View disambiguation: the long building immediately south carries a\n  JLL / Stonemont marketing banner reading **\"Available, 44 Commerce Parkway,\n  1,090,000 s.f.\"**, a vacant spec warehouse. That fixes 42 Commerce Pkwy as the",
         "mapsUrl": "https://www.google.com/maps/@39.94645,-83.35120,400m/data=!3m1!1e3",
         "fieldNotes": {
           "siteId": "Building correctly identified as the Target FOOD DC at 42 Commerce Pkwy (Target's internal id for the food DC is T3880; the task title carries T3804, which is the adjacent regional/GM DC). Confirmed via Street View: the long building immediately south carries a JLL/Stonemont 'Available - 44 Commerce Parkway, 1,090,000 s.f.' banner, fixing 42 Commerce as the audited center building.",
@@ -5934,20 +5934,20 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocoded point (30.44245, -82.646011) landed ~28 km north of\nthe facility in open pine forest along US-441 — confirmed by satellite at z14\nand z17 (nothing but trees and the divided highway; `overview-z17.png`,\n`wide-z14.png`). No 460k sq ft warehouse anywhere near it.\n\nResolution path:\n- WebSearch confirmed T3892 is a **460,000 sq ft refrigerated warehouse, 80 ft\n  ceilings**, opened 2008 (FleetOwner, Circuit Electric, USA.com).\n- A second registered address surfaced — 309 NE Tammy Ln (Waze) — placing\n  it in NE Lake City near I-75, not 28 km north.\n- Wikimedia Commons \"Target Distribution Center, Lake City.JPG\" carried camera\n  geocoords 30°13'52.28\"N, 82°38'18.1\"W → 30.2312, -82.6383.\n- Probing there (`wiki-z15.png`) immediately revealed the large warehouse with",
+        "dossierExcerpt": "The supplied geocoded point (30.44245, -82.646011) landed ~28 km north of\nthe facility in open pine forest along US-441, confirmed by satellite at z14\nand z17 (nothing but trees and the divided highway; `overview-z17.png`,\n`wide-z14.png`). No 460k sq ft warehouse anywhere near it.\n\nResolution path:\n- WebSearch confirmed T3892 is a **460,000 sq ft refrigerated warehouse, 80 ft\n  ceilings**, opened 2008 (FleetOwner, Circuit Electric, USA.com).\n- A second registered address surfaced, 309 NE Tammy Ln (Waze), placing\n  it in NE Lake City near I-75, not 28 km north.\n- Wikimedia Commons \"Target Distribution Center, Lake City.JPG\" carried camera\n  geocoords 30°13'52.28\"N, 82°38'18.1\"W → 30.2312, -82.6383.\n- Probing there (`wiki-z15.png`) immediately revealed the large warehouse with",
         "mapsUrl": "https://www.google.com/maps/@30.2318,-82.6360,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Geocoded point (30.44245,-82.646011) was ~28 km too far north in open forest. Real facility resolved via Wikimedia geocoords (30.2312N, 82.6383W) + Target bullseye sign confirmed in 2026 Street View at the entrance. Center 30.2318,-82.6360, NE Lake City just SW of I-75/US-441.",
           "truckGate": "Controlled truck entrance: divided entry/exit drive with chevron-striped median, painted stop bar, and a small canopy/checkpoint structure at the yard-entry pinch point (~30.2312,-82.6345). Whole parcel is chain-link fenced (confirmed in Street View).",
-          "guardShack": "No clearly-resolved staffed booth. The interior checkpoint shows only a small canopy/structure at z21 — could be an unmanned kiosk canopy; imagery is borderline, hence remoteGs assumed.",
+          "guardShack": "No clearly-resolved staffed booth. The interior checkpoint shows only a small canopy/structure at z21, could be an unmanned kiosk canopy; imagery is borderline, hence remoteGs assumed.",
           "remoteGs": "Assumed because there is a controlled gate/checkpoint but no definitively manned guard shack; flagged uncertain.",
           "postGateStaging": "Wide paved truck court between the interior checkpoint and the dock aprons holds queuing trucks.",
-          "dockDoors": "460,000 sq ft refrigerated DC; long west dock wall plus east and south dock banks with dozens of trailers backed in across multiple faces — clearly 50+.",
+          "dockDoors": "460,000 sq ft refrigerated DC; long west dock wall plus east and south dock banks with dozens of trailers backed in across multiple faces, clearly 50+.",
           "dropArea": "Large arrays of trailers parked in marked rows along the west apron and east side; 50+ band.",
           "shipRcvSeparate": "Distinct dock banks on the west wall and the east/south faces suggest separate ship/receive clusters; inferred, flagged uncertain.",
           "fastLaneOpportunity": "Wide divided entry apron with ample paved width to add a bypass/express lane.",
           "scale": "No truck scale pad clearly identified; flagged uncertain.",
-          "urbanRural": "Edge-of-town / rural setting — surrounded by woods, retention pond, and scattered rural residential along US-441.",
+          "urbanRural": "Edge-of-town / rural setting, surrounded by woods, retention pond, and scattered rural residential along US-441.",
           "counts": "dockDoorCount/trailers are honest overhead estimates from z16-z21 imagery, not exact."
         },
         "verification": {
@@ -5960,7 +5960,7 @@
               "url": "https://target.wd5.myworkdayjobs.com/targetcareers/job/3049-North-US-441-Lake-CityFL-32055-4939/Operations-Manager---Food-Distribution-Center--Lake-City--FL-_R0000384323-1",
               "date": "2026-06",
               "type": "careers",
-              "claim": "Active Target Operations Manager req at the Food Distribution Center, 3049 North US-441, Lake City FL 32055 — exact audited address."
+              "claim": "Active Target Operations Manager req at the Food Distribution Center, 3049 North US-441, Lake City FL 32055, exact audited address."
             },
             {
               "tier": 1,
@@ -6173,7 +6173,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Geocoded input was 33.201667, -97.178575 — this lands on the Airport Rd / access-drive\njunction, NOT on a building. Web research (CBS Texas, NBC DFW, chamber listings)\nconfirms the Target Food Distribution Center at 3255 Airport Rd — a ~360,000 sq ft,\nfully refrigerated/automated food DC near Denton Enterprise Airport serving 235 stores\nin 8 states, ~140 employees.\n\nThe correct building is the large tan refrigerated warehouse south of Airport Rd,\ncentered ~33.1999, -97.1802. Positive confirmation came from Street View, which shows\nthe Target bullseye logo on the building façade (sv-gate-260, sv-checkpoint) and a\nTarget monument sign at the road (sv-road-at-entry, 2026-03). The map-provider pin\n(33.2008, -97.1794) drops onto this same property's east apron, consistent with the\nidentification. The blue-roofed building to the SW and the white building NW are",
+        "dossierExcerpt": "Geocoded input was 33.201667, -97.178575, this lands on the Airport Rd / access-drive\njunction, NOT on a building. Web research (CBS Texas, NBC DFW, chamber listings)\nconfirms the Target Food Distribution Center at 3255 Airport Rd, a ~360,000 sq ft,\nfully refrigerated/automated food DC near Denton Enterprise Airport serving 235 stores\nin 8 states, ~140 employees.\n\nThe correct building is the large tan refrigerated warehouse south of Airport Rd,\ncentered ~33.1999, -97.1802. Positive confirmation came from Street View, which shows\nthe Target bullseye logo on the building façade (sv-gate-260, sv-checkpoint) and a\nTarget monument sign at the road (sv-road-at-entry, 2026-03). The map-provider pin\n(33.2008, -97.1794) drops onto this same property's east apron, consistent with the\nidentification. The blue-roofed building to the SW and the white building NW are",
         "mapsUrl": "https://www.google.com/maps/@33.1999,-97.1802,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Perimeter fence with a cantilever/swing vehicle gate across the single entrance drive, confirmed in Street View (pano kxxnsKTYgGxLwYeEvcPzhQ, 2022-12) looking W/SW at ~260-270 deg.",

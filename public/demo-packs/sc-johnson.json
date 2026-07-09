@@ -242,7 +242,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "The roster's supplied coordinate (42.712313, -87.885932) lands in open green\nspace at the north edge of the property — it is the geocode of the street\naddress, not the plant. Probing satellite outward (z14-z21) and corroborating\nwith the SC Johnson Waxdale Fact Sheet (the world's largest/fastest aerosol\nplant, 2.2M sq ft, opened 1955) confirmed the facility: the very large\nmulti-building industrial campus immediately south of the supplied point,\nbounded by a private entry boulevard on the north, 16th St on the south, a\nwooded/wetland buffer on the west, and open land on the east. SC Johnson\nsignage (\"SC Johnson — A Family Center\") and SC Johnson's known on-site wind\nturbines are both visible in Street View, confirming ownership. Locked center\nat 42.70750, -87.88500 (centroid of the developed footprint).",
+        "dossierExcerpt": "The roster's supplied coordinate (42.712313, -87.885932) lands in open green\nspace at the north edge of the property, it is the geocode of the street\naddress, not the plant. Probing satellite outward (z14-z21) and corroborating\nwith the SC Johnson Waxdale Fact Sheet (the world's largest/fastest aerosol\nplant, 2.2M sq ft, opened 1955) confirmed the facility: the very large\nmulti-building industrial campus immediately south of the supplied point,\nbounded by a private entry boulevard on the north, 16th St on the south, a\nwooded/wetland buffer on the west, and open land on the east. SC Johnson\nsignage (\"SC Johnson, A Family Center\") and SC Johnson's known on-site wind\nturbines are both visible in Street View, confirming ownership. Locked center\nat 42.70750, -87.88500 (centroid of the developed footprint).",
         "mapsUrl": "https://www.google.com/maps/@42.7075,-87.885,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Engineered multi-lane controlled entry at the head of the private north boulevard (~42.7121, -87.8860); white directional lane arrows split inbound/outbound around a central guard building.",
@@ -254,7 +254,7 @@
           "shipRcvSeparate": "Distinct dock banks on different building faces (north-west building face vs south/south-east face) consistent with separated shipping and receiving.",
           "multipleFacilities": "Campus of ~9 distinct large buildings (manufacturing halls, warehouse, components plant, tank farm/dome) on one fenced property.",
           "railServed": "Active rail spur curves into the property from the south-west with multiple sidings holding boxcars / covered hoppers.",
-          "scale": "No truck scale positively identified in the gate path; left false but listed uncertain — a scale could exist within the unmapped interior.",
+          "scale": "No truck scale positively identified in the gate path; left false but listed uncertain, a scale could exist within the unmapped interior.",
           "urbanRural": "Edge-of-town industrial setting in Mt. Pleasant; large natural buffer (woods/wetland) on the west and open land around; broader setting judged Rural per rubric.",
           "siteAreaAcres": "Perimeter box ~1.22 km N-S x 0.78 km E-W of fenced developed property; ~218 acres is an estimate of the active fenced footprint (SC Johnson land holding here is larger)."
         },
@@ -707,16 +707,16 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster coordinate (41.696681, -87.601644) landed directly on the\ndistinctive method factory. Satellite probing and web research (Chicago\nNeighborhood Development Awards, William McDonough + Partners, City of\nChicago) positively confirmed it: the \"South Side Soapbox\", method's first\nU.S. manufacturing plant — a 150,000 sq ft LEED Platinum (first in the\ncleaners industry, 85 points) soap factory in the historic Pullman district.\nTwo unmistakable signatures clinch the ID: a 230-ft on-site wind turbine\n(visible in z20 imagery north of the building) and the Gotham Greens\n75,000 sq ft rooftop greenhouse (the glass sawtooth roof section). Locked\ncenter at 41.69700, -87.60160.",
+        "dossierExcerpt": "The roster coordinate (41.696681, -87.601644) landed directly on the\ndistinctive method factory. Satellite probing and web research (Chicago\nNeighborhood Development Awards, William McDonough + Partners, City of\nChicago) positively confirmed it: the \"South Side Soapbox\", method's first\nU.S. manufacturing plant, a 150,000 sq ft LEED Platinum (first in the\ncleaners industry, 85 points) soap factory in the historic Pullman district.\nTwo unmistakable signatures clinch the ID: a 230-ft on-site wind turbine\n(visible in z20 imagery north of the building) and the Gotham Greens\n75,000 sq ft rooftop greenhouse (the glass sawtooth roof section). Locked\ncenter at 41.69700, -87.60160.",
         "mapsUrl": "https://www.google.com/maps/@41.697,-87.6016,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point observed. The truck driveway runs open from the public road into the dock yard; the building fronts open paved drives with no controlled entry. truckGate false.",
           "guardShack": "No guard booth anywhere on the site. False.",
-          "remoteGs": "False — there is no gate, so no remote check-in implied.",
+          "remoteGs": "False, there is no gate, so no remote check-in implied.",
           "postGateStaging": "Large paved truck yard north-east of the building provides interior holding space before the docks.",
-          "drivewayLong": "Open NE truck yard is deep — easily holds 3+ trucks staged.",
+          "drivewayLong": "Open NE truck yard is deep, easily holds 3+ trucks staged.",
           "fastLaneOpportunity": "Abundant unused paved width in the NE truck yard; ample room for any lane configuration.",
-          "dockDoors": "Truck docks on the NE building face — a modest recessed dock bank with trailers backed in. ~16 doors estimated, banded 10-25.",
+          "dockDoors": "Truck docks on the NE building face, a modest recessed dock bank with trailers backed in. ~16 doors estimated, banded 10-25.",
           "dropArea": "Rows of parked trailers in the NE truck yard (some shared with adjacent Pullman-development buildings); banded 10-25 for the method-attributable portion.",
           "shipRcvSeparate": "Single dock bank on one building face; shipping and receiving not physically separated.",
           "multipleFacilities": "One building (the 150,000 sq ft soap factory, which incorporates the Gotham Greens rooftop greenhouse). buildingCount 1.",
@@ -911,21 +911,21 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster's street address (\"100 Technology Center Dr\") could not be\nconfirmed and the roster coordinate (35.353526, -81.090317) was an\nAPPROXIMATE city-centroid landing in downtown Stanley — not the plant.\nWeb research resolved the correct facility: SC Johnson Professional USA's\nStanley plant is the former Deb USA plant at 1100 S Highway 27 (NC-27),\nconfirmed by the Waze business listing, the LoopNet property record (1100 S\nHighway 27, APN/Parcel 176716, a 73,956 sq ft industrial building built\n1986) and FDA / Panjiva records for \"Deb USA Inc., 1100 S. Highway 27,\nStanley NC\". SC Johnson Professional acquired Deb Group in 2015. The building\nwas located by probing the SE Stanley industrial corridor along NC-27 and\npositively identified in Street View — a long industrial building with a",
+        "dossierExcerpt": "The roster's street address (\"100 Technology Center Dr\") could not be\nconfirmed and the roster coordinate (35.353526, -81.090317) was an\nAPPROXIMATE city-centroid landing in downtown Stanley, not the plant.\nWeb research resolved the correct facility: SC Johnson Professional USA's\nStanley plant is the former Deb USA plant at 1100 S Highway 27 (NC-27),\nconfirmed by the Waze business listing, the LoopNet property record (1100 S\nHighway 27, APN/Parcel 176716, a 73,956 sq ft industrial building built\n1986) and FDA / Panjiva records for \"Deb USA Inc., 1100 S. Highway 27,\nStanley NC\". SC Johnson Professional acquired Deb Group in 2015. The building\nwas located by probing the SE Stanley industrial corridor along NC-27 and\npositively identified in Street View, a long industrial building with a",
         "mapsUrl": "https://www.google.com/maps/@35.3403,-81.078,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "addressCorrection": "Roster address '100 Technology Center Dr' is incorrect. Verified address is 1100 S Highway 27 (NC-27), Stanley, NC 28164 — the former Deb USA plant, now SC Johnson Professional USA (Waze, LoopNet APN 176716, FDA/Panjiva records). Roster coordinate (35.353526, -81.090317) was a city-centroid in downtown Stanley; corrected to the plant at ~35.3403, -81.0780.",
+          "addressCorrection": "Roster address '100 Technology Center Dr' is incorrect. Verified address is 1100 S Highway 27 (NC-27), Stanley, NC 28164, the former Deb USA plant, now SC Johnson Professional USA (Waze, LoopNet APN 176716, FDA/Panjiva records). Roster coordinate (35.353526, -81.090317) was a city-centroid in downtown Stanley; corrected to the plant at ~35.3403, -81.0780.",
           "truckGate": "No barrier arm, gate or checkpoint. The dock face fronts NC-27 directly with an open paved truck apron; trucks pull in straight off the highway. truckGate false.",
           "guardShack": "No guard booth on the property. False.",
-          "remoteGs": "False — no gate, so no remote check-in implied.",
-          "drivewayShort": "The apron between NC-27 and the dock doors is shallow — room for only 1-2 trucks staged before the docks.",
+          "remoteGs": "False, no gate, so no remote check-in implied.",
+          "drivewayShort": "The apron between NC-27 and the dock doors is shallow, room for only 1-2 trucks staged before the docks.",
           "postGateStaging": "The paved apron in front of the docks doubles as a small post-entry staging strip.",
           "dockDoors": "A continuous bank of ~10-12 dock doors along the NE building face fronting NC-27, confirmed in Street View (red-trimmed dock wall with dock doors and trailers). Banded 10-25.",
           "dropArea": "Only a handful of trailers parked on the apron / east side; no dedicated trailer-storage lot. Banded 0-10; dropYard false.",
           "shipRcvSeparate": "Single dock bank on one face. Raw materials likely received at the SW tank/silo area but no separate truck dock bank there; shipRcvSeparate false.",
           "multipleFacilities": "One building (~73,956 sq ft, built 1986). buildingCount 1.",
           "scale": "No truck scale observed.",
-          "railServed": "A rail line runs immediately along the west edge of the property; trailers/rail cars seen alongside the building's west face. Rail access likely but an in-property spur not definitively confirmed — flagged uncertain.",
+          "railServed": "A rail line runs immediately along the west edge of the property; trailers/rail cars seen alongside the building's west face. Rail access likely but an in-property spur not definitively confirmed, flagged uncertain.",
           "urbanRural": "Small-town Stanley, NC (Gaston County), surrounded by fields and woods; Rural per rubric.",
           "siteAreaAcres": "Building ~73,956 sq ft; the fenced/paved operational parcel is small (~14 acres estimated from the perimeter box). Flagged uncertain."
         },
@@ -946,7 +946,7 @@
               "url": "https://www.loopnet.com/property/1100-s-highway-27-stanley-nc-28164/37071-176716/",
               "date": "2025-09",
               "type": "locator",
-              "claim": "Property record for 1100 S Highway 27, Stanley NC 28164 (73,956 sq ft industrial) — the audited address, occupied by SC Johnson Professional."
+              "claim": "Property record for 1100 S Highway 27, Stanley NC 28164 (73,956 sq ft industrial), the audited address, occupied by SC Johnson Professional."
             }
           ],
           "checkedDivestiture": true,
@@ -1160,12 +1160,12 @@
               "url": "https://www.haslet.org/BusinessDirectoryii.aspx",
               "date": "2026-06",
               "type": "econ-dev",
-              "claim": "City of Haslet business directory lists 'S C Johnson (Exel)' at 850 Transport Drive, Haslet TX 76052 — SCJ occupier, Exel/DHL 3PL operator."
+              "claim": "City of Haslet business directory lists 'S C Johnson (Exel)' at 850 Transport Drive, Haslet TX 76052, SCJ occupier, Exel/DHL 3PL operator."
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Active Exel/DHL site for SCJ on the I-35W/Transport Dr corridor; no closure/WARN signal found, but the SCJ-client tie rests on an undated municipal directory (and a prior Shippers Warehouse tenant once shared the address) — PROBABLE, flagged, treat as moderate confidence.",
+          "rationale": "Active Exel/DHL site for SCJ on the I-35W/Transport Dr corridor; no closure/WARN signal found, but the SCJ-client tie rests on an undated municipal directory (and a prior Shippers Warehouse tenant once shared the address), PROBABLE, flagged, treat as moderate confidence.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }
@@ -1340,7 +1340,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster geocode was flagged as having moved 8,791 m — the supplied\ncoordinates needed verification. Satellite probing around 40.175046, -77.24279\nlanded on the correct building: a very large cross-dock warehouse in the\nCarlisle/Harrisburg logistics corridor.\n\nIdentity confirmed via the EPA Risk Management Plan record for the\n\"Carlisle Regional Distribution Center\" at 5 True Temper Dr, the **Margulies\nHoelzli Architecture project page, an FCC ULS license (\"EXEL SC JOHNSON\")**,\nand LoopNet/FCC listings. The architect describes a **500,000 sq ft northeast\nregional logistics facility, 450 ft × 1,100 ft cross-dock**, fast-track\ntilt-wall construction by First Industrial Realty Trust, with local operations\nsupport offices. It is operated with DHL/Exel and stores LPG-propellant\naerosol finished goods (basis for the RMP). It is the Northeast RDC succeeding",
+        "dossierExcerpt": "The roster geocode was flagged as having moved 8,791 m, the supplied\ncoordinates needed verification. Satellite probing around 40.175046, -77.24279\nlanded on the correct building: a very large cross-dock warehouse in the\nCarlisle/Harrisburg logistics corridor.\n\nIdentity confirmed via the EPA Risk Management Plan record for the\n\"Carlisle Regional Distribution Center\" at 5 True Temper Dr, the **Margulies\nHoelzli Architecture project page, an FCC ULS license (\"EXEL SC JOHNSON\")**,\nand LoopNet/FCC listings. The architect describes a **500,000 sq ft northeast\nregional logistics facility, 450 ft × 1,100 ft cross-dock**, fast-track\ntilt-wall construction by First Industrial Realty Trust, with local operations\nsupport offices. It is operated with DHL/Exel and stores LPG-propellant\naerosol finished goods (basis for the RMP). It is the Northeast RDC succeeding",
         "mapsUrl": "https://www.google.com/maps/@40.17510,-77.24280,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Confirmed via EPA RMP record (Carlisle Regional Distribution Center, 5 True Temper Dr) + Margulies Hoelzli Architecture project page + FCC ULS license 'EXEL SC JOHNSON' + LoopNet/FCC listings. 500,000 sq ft, 450 ft x 1,100 ft cross-dock built by First Industrial Realty Trust, tilt-wall, with local operations offices; operated with DHL/Exel. Roster geocode moved 8,791 m -> the supplied coords were far off; correct building locked from satellite at the True Temper Dr cross-dock.",
@@ -1379,7 +1379,7 @@
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "5 True Temper Dr is an unambiguously active DHL/Exel cross-dock (DHL hiring Oct-2025 to Jun-2026, no WARN/closure), but the SCJ-as-current-client tie rests on an architecture project page + a legacy FCC license rather than a fresh dated source — PROBABLE, flagged, moderate confidence.",
+          "rationale": "5 True Temper Dr is an unambiguously active DHL/Exel cross-dock (DHL hiring Oct-2025 to Jun-2026, no WARN/closure), but the SCJ-as-current-client tie rests on an architecture project page + a legacy FCC license rather than a fresh dated source, PROBABLE, flagged, moderate confidence.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-18"
         }

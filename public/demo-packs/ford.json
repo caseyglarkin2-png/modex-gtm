@@ -24,7 +24,7 @@
     "surprisingFindings": [
       "BlueOval City is 950 acres of greenfield. Ford's EV bet is the size of 720 NFL fields.",
       "18 of 21 audited sites are rail-served. Auto inbound runs on railcars, not trucks.",
-      "797 dock doors across 21 plants. The auto OEM dock count is parts pacing, not throughput."
+      "797 dock doors across 21 plants. The auto OEM dock count is parts pacing, not production capacity."
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 2200
@@ -917,7 +917,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Roster coordinates (geocode ROOFTOP, moved 26 m) landed directly on the main\nplant building. Wide satellite (z15-16) shows a large industrial complex with a\ndistinctive multi-bay sawtooth assembly building along the Calumet River, with\nTorrence Ave running NE-SW along the east side and dense residential\nneighbourhoods east of the road. Street View on the west side of Torrence Ave\n(2024) shows the building wall lettered \"CHICAGO ASSEMBLY PLANT\" with the Ford\noval — positively the right facility. The Hegewisch-neighbourhood / Calumet\nRiver / Torrence Ave context matches all web sources.",
+        "dossierExcerpt": "Roster coordinates (geocode ROOFTOP, moved 26 m) landed directly on the main\nplant building. Wide satellite (z15-16) shows a large industrial complex with a\ndistinctive multi-bay sawtooth assembly building along the Calumet River, with\nTorrence Ave running NE-SW along the east side and dense residential\nneighbourhoods east of the road. Street View on the west side of Torrence Ave\n(2024) shows the building wall lettered \"CHICAGO ASSEMBLY PLANT\" with the Ford\noval, positively the right facility. The Hegewisch-neighbourhood / Calumet\nRiver / Torrence Ave context matches all web sources.",
         "mapsUrl": "https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Guarded truck gate confirmed mid-property on Torrence Ave (~41.6615, -87.5593). 2024 Street View shows a tan single-story guard house with multi-side windows at the perimeter fence line, bollards/lane-control structures, directional signage ('ALL INBOUND TRAFFIC', 'VISITOR PARKING'), and trucks staged in the apron.",
@@ -1380,7 +1380,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "- Name: Ford - Flat Rock Assembly Plant, Flat Rock MI\n- Type: Vehicle Assembly Plant (Ford Mustang — exclusive NA production)\n- Address: 1 International Dr, Flat Rock, MI 48134\n- Resolved center: 42.10560, -83.24820",
+        "dossierExcerpt": "- Name: Ford - Flat Rock Assembly Plant, Flat Rock MI\n- Type: Vehicle Assembly Plant (Ford Mustang, exclusive NA production)\n- Address: 1 International Dr, Flat Rock, MI 48134\n- Resolved center: 42.10560, -83.24820",
         "mapsUrl": "https://www.google.com/maps/@42.10560,-83.24820,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Flat Rock Assembly Plant (Ford Mustang - exclusive NA production site), 1 International Dr, Flat Rock MI. Roster geocode (moved 3258m) nonetheless landed centrally on the plant; confirmed as the large assembly complex - ~2.9M sq ft of building on a 400-acre site (web-confirmed).",
@@ -1517,7 +1517,7 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "Type: Stamping Plant\nResolved center: 42.30680, -83.16050\nConfidence: medium\n\n### Location resolution\nThe roster supplied 42.313554, -83.164654 — identical to idx 1 (Dearborn Truck\nPlant) and the generic Rouge Complex address (3001 Miller Rd). Web research\nestablished the Dearborn Stamping Plant (DSP) as a distinct 2.7M-sq-ft, ~35-acre\nfacility that stamps F-150 doors and hoods, in operation since 1939. A common\ngeocode for it (42.3083377, -83.1563218) was probed and found to land on the\nRouge Center central road/parking spine — not a building.\n\nSatellite probing of the Rouge interior (z16-z19) identified the actual stamping\nplant: the large single flat-roofed press building with characteristic rows of\nroof skylights/monitors and flanking rail spurs, centered near 42.3068,-83.1605.",
+        "dossierExcerpt": "Type: Stamping Plant\nResolved center: 42.30680, -83.16050\nConfidence: medium\n\n### Location resolution\nThe roster supplied 42.313554, -83.164654, identical to idx 1 (Dearborn Truck\nPlant) and the generic Rouge Complex address (3001 Miller Rd). Web research\nestablished the Dearborn Stamping Plant (DSP) as a distinct 2.7M-sq-ft, ~35-acre\nfacility that stamps F-150 doors and hoods, in operation since 1939. A common\ngeocode for it (42.3083377, -83.1563218) was probed and found to land on the\nRouge Center central road/parking spine, not a building.\n\nSatellite probing of the Rouge interior (z16-z19) identified the actual stamping\nplant: the large single flat-roofed press building with characteristic rows of\nroof skylights/monitors and flanking rail spurs, centered near 42.3068,-83.1605.",
         "mapsUrl": "https://www.google.com/maps/@42.3068,-83.1605,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Dearborn Stamping Plant (DSP) is an interior building of Ford's 93-building Rouge Center campus. 2.7M sq ft on a ~35-acre footprint; stamps F-150 doors and hoods. Generic geocode (42.3083,-83.1563) lands on the Rouge central road/parking spine, not the building; building center relocated to ~42.3068,-83.1605 via satellite identification of the large single flat-roofed press structure with skylight rows and flanking rail spurs.",
@@ -1748,7 +1748,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Type: Engine Plant\nResolved center: 41.41645, -81.82190\nConfidence: medium\n\n### Location resolution\nThe roster supplied 41.416738, -81.821992 (ROOFTOP, 17601 Brookpark Rd). The\nz16 probe placed that point directly on the large multi-roof Ford Cleveland\nEngine Plant building — confirmed correct, no relocation needed. Web research\nconfirmed the active Cleveland Engine Plant No. 1: 1.6M sq ft, ~2,055 employees,\nproducing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines. The former\nCleveland Engine Plant No. 2 immediately SW has been demolished — cleared land\nis visible in imagery (that parcel sold for ~$31.5M).\n\n### Key views\n- z16 overview: Large multi-roof plant building, employee parking lots W and\n  SW, rail spurs along the NW edge, freeway interchanges (I-71/I-480) to the NE,",
+        "dossierExcerpt": "Type: Engine Plant\nResolved center: 41.41645, -81.82190\nConfidence: medium\n\n### Location resolution\nThe roster supplied 41.416738, -81.821992 (ROOFTOP, 17601 Brookpark Rd). The\nz16 probe placed that point directly on the large multi-roof Ford Cleveland\nEngine Plant building, confirmed correct, no relocation needed. Web research\nconfirmed the active Cleveland Engine Plant No. 1: 1.6M sq ft, ~2,055 employees,\nproducing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines. The former\nCleveland Engine Plant No. 2 immediately SW has been demolished, cleared land\nis visible in imagery (that parcel sold for ~$31.5M).\n\n### Key views\n- z16 overview: Large multi-roof plant building, employee parking lots W and\n  SW, rail spurs along the NW edge, freeway interchanges (I-71/I-480) to the NE,",
         "mapsUrl": "https://www.google.com/maps/@41.41645,-81.8219,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Ford Cleveland Engine Plant (No. 1), Brook Park OH - active engine plant producing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines, ~2,055 employees, 1.6M sq ft. Roster geocode (41.4167,-81.8220) lands directly on the large multi-roof plant building - confirmed correct. Former Cleveland Engine Plant No. 2 immediately to the SW has been demolished (cleared land visible; the former plant parcel sold for $31.5M).",
@@ -1858,7 +1858,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster geocode (40.777522, -84.086641) lands directly on a large\nmulti-roof industrial plant building. Satellite confirmed this is the Ford\nLima Engine Plant at 1155 Bible Rd, Lima (Allen County) OH — an active Ford\npowertrain plant producing V6/V8 engines with ~1,500+ employees. The plant\nsits on the semi-rural northeast edge of Lima, surrounded by farmland and\nwoods, with rail lines along the west and east sides and Bible Rd along the\nsouth. No coordinate correction needed.",
+        "dossierExcerpt": "The roster geocode (40.777522, -84.086641) lands directly on a large\nmulti-roof industrial plant building. Satellite confirmed this is the Ford\nLima Engine Plant at 1155 Bible Rd, Lima (Allen County) OH, an active Ford\npowertrain plant producing V6/V8 engines with ~1,500+ employees. The plant\nsits on the semi-rural northeast edge of Lima, surrounded by farmland and\nwoods, with rail lines along the west and east sides and Bible Rd along the\nsouth. No coordinate correction needed.",
         "mapsUrl": "https://www.google.com/maps/@40.7775,-84.086,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Ford Lima Engine Plant, 1155 Bible Rd, Lima (Allen County) OH - active Ford powertrain plant (produces V6/V8 engines, ~1,500+ employees). Roster geocode (40.7775,-84.0866) lands directly on the large multi-roof plant building - confirmed correct. The plant sits on the semi-rural edge of Lima, surrounded by farmland and woods, with rail lines on the west and east sides and Bible Rd along the south.",
@@ -1975,7 +1975,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster geocode (42.372187, -83.398969) is flagged GEOMETRIC_CENTER, moved\n1204 m — but it lands inside the correct plant complex. Satellite confirmed\nthis is the Ford Livonia Transmission Plant at 36200 Plymouth Rd, Livonia\n(Wayne County) MI. Web research (Wikipedia, Ford Authority) confirms it is the\nlargest transmission plant in North America: ~3.3M sq ft of enclosed floor\nspace on ~182 acres, established 1952, producing the 6R/10R transmission\nfamilies used in the F-150, Mustang, Expedition, Navigator and Transit. I\nrefined the center slightly to ~42.3715,-83.3980 on the main plant building\ncluster.",
+        "dossierExcerpt": "The roster geocode (42.372187, -83.398969) is flagged GEOMETRIC_CENTER, moved\n1204 m, but it lands inside the correct plant complex. Satellite confirmed\nthis is the Ford Livonia Transmission Plant at 36200 Plymouth Rd, Livonia\n(Wayne County) MI. Web research (Wikipedia, Ford Authority) confirms it is the\nlargest transmission plant in North America: ~3.3M sq ft of enclosed floor\nspace on ~182 acres, established 1952, producing the 6R/10R transmission\nfamilies used in the F-150, Mustang, Expedition, Navigator and Transit. I\nrefined the center slightly to ~42.3715,-83.3980 on the main plant building\ncluster.",
         "mapsUrl": "https://www.google.com/maps/@42.3715,-83.398,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Ford Livonia Transmission Plant, 36200 Plymouth Rd, Livonia (Wayne County) MI - the largest transmission plant in North America (~3.3M sq ft, ~182 acres, est. 1952; produces the 6R/10R transmission families). Roster geocode (42.3722,-83.3990, GEOMETRIC_CENTER, moved 1204m) lands within the plant complex; refined center to ~42.3715,-83.3980 on the main plant building cluster. Web research (Wikipedia, Ford Authority) confirms identity and the 182-acre / 3.3M sq ft figures.",
@@ -2123,12 +2123,12 @@
           "guardShack": "No distinct guard booth resolved at the NW truck gate in z21 satellite or Street View; treated as remote/kiosk check-in (remoteGs true). Low confidence on absence.",
           "remoteGs": "Set true because there is a controlled truck gate but no visible staffed booth.",
           "dropYard": "Large dedicated trailer-storage yard on NW side: dozens of trailers parked under and around canopy structures, plus a second drop area on the SW side.",
-          "dockDoors": "Dock banks on the SW and N building faces; ~30 doors estimated across faces, regular bay rhythm partially obscured by canopies — band 25-50.",
+          "dockDoors": "Dock banks on the SW and N building faces; ~30 doors estimated across faces, regular bay rhythm partially obscured by canopies, band 25-50.",
           "shipRcvSeparate": "Distinct dock clusters on different building faces (SW truck yard vs N rail-served face) indicate separate shipping/receiving.",
           "railServed": "Rail line runs along the north edge with a spur reaching the building's north face; classic mid-century assembly-area rail service.",
           "fastLaneOpportunity": "Wide paved gate apron at the NW entrance with ample unused width to add an express/bypass lane.",
           "entryLanes": "Estimated 2 in / 2 out from gate-apron width; not precisely countable from imagery.",
-          "urbanRural": "Sharonville is inside the Cincinnati metro industrial fabric — Urban."
+          "urbanRural": "Sharonville is inside the Cincinnati metro industrial fabric, Urban."
         },
         "verification": {
           "verdict": "confirmed",
@@ -2244,7 +2244,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster address (8000 Van Dyke Ave) and geocode (42.389201, -83.022218,\nRANGE_INTERPOLATED) are wrong — they land in a residential Detroit\nneighborhood roughly 23 km south of the actual plant. The wide z14 view at the\nroster point showed only houses, with a large industrial building visible far\nto the NW.\n\nWeb research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirmed\nthe correct address: 41111 Van Dyke Ave, Sterling Heights, MI 48314, just\nnorth of 18 Mile Road. I corrected the center to ~42.5978, -83.0355 and\nverified by satellite that it is the large multi-roof Ford plant building. The\nVan Dyke Electric Powertrain Center is a ~2M sq ft plant operating since 1968;\nit was renamed in 2021 from the Van Dyke Transmission Plant as it shifted to\nproducing electric motors and transaxles for hybrid/EV vehicles (including the",
+        "dossierExcerpt": "The roster address (8000 Van Dyke Ave) and geocode (42.389201, -83.022218,\nRANGE_INTERPOLATED) are wrong, they land in a residential Detroit\nneighborhood roughly 23 km south of the actual plant. The wide z14 view at the\nroster point showed only houses, with a large industrial building visible far\nto the NW.\n\nWeb research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirmed\nthe correct address: 41111 Van Dyke Ave, Sterling Heights, MI 48314, just\nnorth of 18 Mile Road. I corrected the center to ~42.5978, -83.0355 and\nverified by satellite that it is the large multi-roof Ford plant building. The\nVan Dyke Electric Powertrain Center is a ~2M sq ft plant operating since 1968;\nit was renamed in 2021 from the Van Dyke Transmission Plant as it shifted to\nproducing electric motors and transaxles for hybrid/EV vehicles (including the",
         "mapsUrl": "https://www.google.com/maps/@42.5978,-83.0355,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Ford Van Dyke Electric Powertrain Center, 41111 Van Dyke Ave, Sterling Heights (Macomb County) MI - a ~2M sq ft Ford powertrain plant operating since 1968, renamed in 2021 from the Van Dyke Transmission Plant as it shifted to producing electric motors and transaxles for hybrid/EV vehicles (incl. the F-150 Lightning). LOCATION CORRECTION: the roster address (8000 Van Dyke Ave) and geocode (42.3892,-83.0222, RANGE_INTERPOLATED) are WRONG - they point at a residential Detroit neighborhood ~23 km south. Web research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirms the correct address 41111 Van Dyke Ave, Sterling Heights MI 48314, just north of 18 Mile Rd. Corrected center to ~42.5978,-83.0355 - confirmed by satellite as the large multi-roof Ford plant building.",
@@ -2374,7 +2374,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster address (29900 Mound Rd) and geocode (42.514132, -83.046583,\nRANGE_INTERPOLATED) are wrong — they land on an office/tech campus roughly\n3.5 km south of the actual plant. Web research (Ford Authority, Waze,\nCommercialCafe) established the correct address as **39000 Mound Rd, Sterling\nHeights, MI 48310**. The exact coordinates 42.583580, -83.044966 were obtained\nfrom the US EPA Superfund site profile for the Ford Motor Company Sterling\nAxle Plant, and verified by satellite as the large multi-roof Ford plant\nbuilding bounded by Mound Rd on the west.\n\nThe Sterling Axle Plant has operated under Ford since 1956, employs ~2,295,\nand produces rear axles for the F-150, Super Duty, Expedition, Navigator,\nMustang and Transit.",
+        "dossierExcerpt": "The roster address (29900 Mound Rd) and geocode (42.514132, -83.046583,\nRANGE_INTERPOLATED) are wrong, they land on an office/tech campus roughly\n3.5 km south of the actual plant. Web research (Ford Authority, Waze,\nCommercialCafe) established the correct address as **39000 Mound Rd, Sterling\nHeights, MI 48310**. The exact coordinates 42.583580, -83.044966 were obtained\nfrom the US EPA Superfund site profile for the Ford Motor Company Sterling\nAxle Plant, and verified by satellite as the large multi-roof Ford plant\nbuilding bounded by Mound Rd on the west.\n\nThe Sterling Axle Plant has operated under Ford since 1956, employs ~2,295,\nand produces rear axles for the F-150, Super Duty, Expedition, Navigator,\nMustang and Transit.",
         "mapsUrl": "https://www.google.com/maps/@42.58358,-83.04497,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Ford Sterling Axle Plant, 39000 Mound Rd, Sterling Heights (Macomb County) MI - an active Ford components plant operating since 1956, ~2,295 employees, producing rear axles for the F-150, Super Duty, Expedition, Navigator, Mustang and Transit. LOCATION CORRECTION: the roster address (29900 Mound Rd) and geocode (42.5141,-83.0466, RANGE_INTERPOLATED) are WRONG - they point at an office/tech campus ~3.5 km south. Correct address is 39000 Mound Rd, Sterling Heights MI 48310 (confirmed via Ford Authority, Waze, CommercialCafe). Exact coordinates 42.583580,-83.044966 obtained from the US EPA Superfund site profile for the Ford Motor Company Sterling Axle Plant - confirmed by satellite as the large multi-roof Ford plant building bounded by Mound Rd on the west.",
@@ -2500,7 +2500,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Roster coords (42.20279, -83.581749) were wrong — they landed in a residential\n  neighborhood on Textile Rd ~2 km west of the plant. Roster address (9000 Textile Rd)\n  is also off; the correct address is 10300 Textile Rd, Ypsilanti Twp, MI 48197.\n- Probed east along Textile Rd and found the large industrial complex on the south\n  side of Textile Rd between the road and Ford Lake.\n- Locked center: 42.19920, -83.55700 — the ~1.7M sq ft Rawsonville plant building.\n- Confirmed via web research: Ford Rawsonville Components Plant, ~650 employees,\n  produces transmission oil pumps, hybrid/PHEV battery packs, air induction systems,\n  ignition coils, fuel pumps. Operating since 1956.",
+        "dossierExcerpt": "- Roster coords (42.20279, -83.581749) were wrong, they landed in a residential\n  neighborhood on Textile Rd ~2 km west of the plant. Roster address (9000 Textile Rd)\n  is also off; the correct address is 10300 Textile Rd, Ypsilanti Twp, MI 48197.\n- Probed east along Textile Rd and found the large industrial complex on the south\n  side of Textile Rd between the road and Ford Lake.\n- Locked center: 42.19920, -83.55700, the ~1.7M sq ft Rawsonville plant building.\n- Confirmed via web research: Ford Rawsonville Components Plant, ~650 employees,\n  produces transmission oil pumps, hybrid/PHEV battery packs, air induction systems,\n  ignition coils, fuel pumps. Operating since 1956.",
         "mapsUrl": "https://www.google.com/maps/@42.19920,-83.55700,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Chain-link perimeter fence rings the property; closed double-swing vehicle gate on the SW (truck-yard) side and a rolling chain-link gate on the NE both confirmed in 2024-25 Street View.",
@@ -2625,7 +2625,7 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "- Roster coords (42.74703, -78.902483) were wrong — they landed in a residential\n  lakeshore neighborhood in Hamburg town, ~5 km SSW of the plant. Roster address\n  (5000 Lakeshore Rd) is also off.\n- Web research gave the correct address — **3663 Lake Shore Rd, Hamburg/Blasdell,\n  NY 14219** — and Wikipedia coordinates 42°47′13″N 78°50′35″W.\n- Probed there and found the Buffalo Stamping Plant: a ~2.45M sq ft building on an\n  88-acre site at the east end of Lake Erie, beside Route 5 (Lake Shore Rd / NY-5).\n- Locked center: 42.78650, -78.84280. Ford branding on the building wall and a\n  \"Buffalo Stamping Plant\" sign confirmed in Street View.",
+        "dossierExcerpt": "- Roster coords (42.74703, -78.902483) were wrong, they landed in a residential\n  lakeshore neighborhood in Hamburg town, ~5 km SSW of the plant. Roster address\n  (5000 Lakeshore Rd) is also off.\n- Web research gave the correct address, **3663 Lake Shore Rd, Hamburg/Blasdell,\n  NY 14219**, and Wikipedia coordinates 42°47′13″N 78°50′35″W.\n- Probed there and found the Buffalo Stamping Plant: a ~2.45M sq ft building on an\n  88-acre site at the east end of Lake Erie, beside Route 5 (Lake Shore Rd / NY-5).\n- Locked center: 42.78650, -78.84280. Ford branding on the building wall and a\n  \"Buffalo Stamping Plant\" sign confirmed in Street View.",
         "mapsUrl": "https://www.google.com/maps/@42.78650,-78.84280,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in Street View along the Route 5 service road). Main controlled entrance off the NW service road into the front parking/staging lot.",
@@ -3003,7 +3003,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Roster coords (42.3728, -83.33552) land on the east edge of a very large warehouse\n  on Middlebelt Rd — they are essentially correct (the geocode \"movedMeters 3497\" was\n  measured against an earlier wrong point, not a current error).\n- Probed the building and confirmed: a ~1M sq ft distribution warehouse running\n  north-south along Middlebelt Rd, dock doors on the east face, trailers backed in.\n- Web research confirms address 11871 Middlebelt Rd, Livonia, MI 48150 — Ford\n  Customer Service Division National Parts Distribution Center, opened 1951 (once the\n  world's largest parts warehouse under one roof, ~1M sq ft).\n- Locked center: 42.37280, -83.33600.",
+        "dossierExcerpt": "- Roster coords (42.3728, -83.33552) land on the east edge of a very large warehouse\n  on Middlebelt Rd, they are essentially correct (the geocode \"movedMeters 3497\" was\n  measured against an earlier wrong point, not a current error).\n- Probed the building and confirmed: a ~1M sq ft distribution warehouse running\n  north-south along Middlebelt Rd, dock doors on the east face, trailers backed in.\n- Web research confirms address 11871 Middlebelt Rd, Livonia, MI 48150, Ford\n  Customer Service Division National Parts Distribution Center, opened 1951 (once the\n  world's largest parts warehouse under one roof, ~1M sq ft).\n- Locked center: 42.37280, -83.33600.",
         "mapsUrl": "https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence rings the property along Middlebelt Rd (confirmed in 2025 Street View). Controlled driveway entrances through the fence into the dock yard.",
@@ -3232,7 +3232,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Roster coords (42.176414, -83.281372) land squarely on a massive distribution\n  warehouse — they are correct (the geocode \"movedMeters 5444\" was measured against an\n  earlier wrong point, not a current error).\n- Web research confirms the facility: **Ford Parts Redistribution Center, 25555\n  Pennsylvania Rd, Brownstown Charter Twp / Romulus, MI 48174** — a Ford Customer\n  Service Division redistribution center.\n- Locked center: 42.17640, -83.28120.",
+        "dossierExcerpt": "- Roster coords (42.176414, -83.281372) land squarely on a massive distribution\n  warehouse, they are correct (the geocode \"movedMeters 5444\" was measured against an\n  earlier wrong point, not a current error).\n- Web research confirms the facility: **Ford Parts Redistribution Center, 25555\n  Pennsylvania Rd, Brownstown Charter Twp / Romulus, MI 48174**, a Ford Customer\n  Service Division redistribution center.\n- Locked center: 42.17640, -83.28120.",
         "mapsUrl": "https://www.google.com/maps/@42.17640,-83.28120,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in 2024 Street View along Inkster Rd). Single controlled entry via a long ~600m private access road from Pennsylvania Rd to the north.",
@@ -3469,7 +3469,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Roster coords (34.099865, -117.551907) are ROOFTOP-accurate and land on the correct\n  building — a large solar-roofed cross-dock warehouse on Milliken Ave.\n- Web research confirms 8449 Milliken Ave, Rancho Cucamonga, CA 91730 — a ~449,370\n  sq ft warehouse/distribution building (completed 2000, \"Prologis Rancho Cucamonga\n  Distribution Center\"), leased by Ford as its West Coast Parts Distribution Center.\n- Locked center: 34.09990, -117.55250.",
+        "dossierExcerpt": "- Roster coords (34.099865, -117.551907) are ROOFTOP-accurate and land on the correct\n  building, a large solar-roofed cross-dock warehouse on Milliken Ave.\n- Web research confirms 8449 Milliken Ave, Rancho Cucamonga, CA 91730, a ~449,370\n  sq ft warehouse/distribution building (completed 2000, \"Prologis Rancho Cucamonga\n  Distribution Center\"), leased by Ford as its West Coast Parts Distribution Center.\n- Locked center: 34.09990, -117.55250.",
         "mapsUrl": "https://www.google.com/maps/@34.09990,-117.55250,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Modern (built 2000) ~449k sq ft cross-dock warehouse. Office driveway has a visible sliding gate (2025 Street View); the two truck yards (north and south faces) are fenced/walled with controlled driveway entrances.",

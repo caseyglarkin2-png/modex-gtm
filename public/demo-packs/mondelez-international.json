@@ -250,7 +250,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Roster coordinates (37.495999, -77.352959) landed on/near S Laburnum Ave just\neast of the building. Satellite probes (z16-z18) around that point revealed a\nlarge industrial complex on the west side of S Laburnum Ave. Street View at\n37.49334,-77.35344 (capture 2019-05) shows the entrance driveway with a\n\"Mondelez International\" monument sign and the distinctive dark-clad bakery\nbuilding — positively confirming the facility. Web research corroborates: this\nis Mondelez's Richmond biscuit bakery, ~1 million sq ft, ~650 employees, making\nOreo, Ritz, Nilla, Wheat Thins, Chips Ahoy. Locked center moved ~120m WNW of\nthe roster point to the true building-complex centroid.",
+        "dossierExcerpt": "Roster coordinates (37.495999, -77.352959) landed on/near S Laburnum Ave just\neast of the building. Satellite probes (z16-z18) around that point revealed a\nlarge industrial complex on the west side of S Laburnum Ave. Street View at\n37.49334,-77.35344 (capture 2019-05) shows the entrance driveway with a\n\"Mondelez International\" monument sign and the distinctive dark-clad bakery\nbuilding, positively confirming the facility. Web research corroborates: this\nis Mondelez's Richmond biscuit bakery, ~1 million sq ft, ~650 employees, making\nOreo, Ritz, Nilla, Wheat Thins, Chips Ahoy. Locked center moved ~120m WNW of\nthe roster point to the true building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@37.49600,-77.35400,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -512,7 +512,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "Roster coordinate (41.760327, -87.703165) landed at the residential edge just\nNE of the plant. Satellite probes (z16-17) revealed a very large multi-building\nindustrial complex bordered by dense residential housing on the N/W and a major\nrail corridor on the S. Street View along S Kedzie Ave (panos 2024-2025) shows\nthe multi-story bakery with a red NABISCO sign and a Mondelez monument\nsign at the main entrance — positively confirming the facility. Locked center\nmoved ~330m SW to the building-complex centroid.",
+        "dossierExcerpt": "Roster coordinate (41.760327, -87.703165) landed at the residential edge just\nNE of the plant. Satellite probes (z16-17) revealed a very large multi-building\nindustrial complex bordered by dense residential housing on the N/W and a major\nrail corridor on the S. Street View along S Kedzie Ave (panos 2024-2025) shows\nthe multi-story bakery with a red NABISCO sign and a Mondelez monument\nsign at the main entrance, positively confirming the facility. Locked center\nmoved ~330m SW to the building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@41.75880,-87.70650,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -1023,7 +1023,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "Roster coordinate (41.771784, -88.187766) landed on the bakery property.\nSatellite probes (z16-18) revealed a large multi-building industrial bakery\ncampus with a U-shaped trailer drop yard on the west and flour silos. Web\nresearch (Yelp, Waze, Baking Business) confirms 1555 W Ogden Ave as the\nMondelez/Nabisco Naperville bakery — the sole North America Triscuit plant.\nStreet View confirms a fenced industrial facility with flour silos. Locked\ncenter on the building-complex centroid.",
+        "dossierExcerpt": "Roster coordinate (41.771784, -88.187766) landed on the bakery property.\nSatellite probes (z16-18) revealed a large multi-building industrial bakery\ncampus with a U-shaped trailer drop yard on the west and flour silos. Web\nresearch (Yelp, Waze, Baking Business) confirms 1555 W Ogden Ave as the\nMondelez/Nabisco Naperville bakery, the sole North America Triscuit plant.\nStreet View confirms a fenced industrial facility with flour silos. Locked\ncenter on the building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@41.77140,-88.18800,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -1272,7 +1272,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinate (39.888649, -86.241363) landed directly on the bakery\nbuilding complex. Satellite probes (z16-20) confirmed a single large industrial\nbakery building with an associated trailer drop yard and employee parking, in a\nNW-Indianapolis industrial park. Web research (IBJ, Pepper Construction, Baking\nBusiness) confirms 7575 Georgetown Rd as the Clif Bar Baking Co. of\nIndianapolis — a 185,000 sq ft plant (plus a 24,000 sq ft expansion), ~430\nemployees, opened 2012, fully owned by Clif Bar since 2016. Locked center on the\nbuilding centroid.",
+        "dossierExcerpt": "Roster coordinate (39.888649, -86.241363) landed directly on the bakery\nbuilding complex. Satellite probes (z16-20) confirmed a single large industrial\nbakery building with an associated trailer drop yard and employee parking, in a\nNW-Indianapolis industrial park. Web research (IBJ, Pepper Construction, Baking\nBusiness) confirms 7575 Georgetown Rd as the Clif Bar Baking Co. of\nIndianapolis, a 185,000 sq ft plant (plus a 24,000 sq ft expansion), ~430\nemployees, opened 2012, fully owned by Clif Bar since 2016. Locked center on the\nbuilding centroid.",
         "mapsUrl": "https://www.google.com/maps/@39.88865,-86.24100,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2653,7 +2653,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied city-centroid coordinates (42.5826, -114.4286) which fell in\na residential / farm area roughly 5 km northwest of the actual plant. Web\nresearch (Idaho Commerce ground-breaking release, BoiseDev, Magic Valley /\nTimes-News, Twin Falls Chamber) places the Clif Bar bakery on a ~90-acre parcel\nin the Jayco Industrial Park, in the area of **Champlin Road and Eldridge\nAvenue in southeast Twin Falls — street address commonly listed as 3438\nEldridge Ave** (ZIP 83341). The Chobani plant (3450 Kimberly Rd) is the large\n1M+ sq ft white facility immediately to the northwest, consistent with the\nroster note \"near the Chobani plant.\"\n\nSatellite confirmation: the building is the distinctive ~275,000 sq ft Clif Bar\nbakery — an L-shaped plant with a covered dock on its west face, an extensive",
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (42.5826, -114.4286) which fell in\na residential / farm area roughly 5 km northwest of the actual plant. Web\nresearch (Idaho Commerce ground-breaking release, BoiseDev, Magic Valley /\nTimes-News, Twin Falls Chamber) places the Clif Bar bakery on a ~90-acre parcel\nin the Jayco Industrial Park, in the area of **Champlin Road and Eldridge\nAvenue in southeast Twin Falls, street address commonly listed as 3438\nEldridge Ave** (ZIP 83341). The Chobani plant (3450 Kimberly Rd) is the large\n1M+ sq ft white facility immediately to the northwest, consistent with the\nroster note \"near the Chobani plant.\"\n\nSatellite confirmation: the building is the distinctive ~275,000 sq ft Clif Bar\nbakery, an L-shaped plant with a covered dock on its west face, an extensive",
         "mapsUrl": "https://www.google.com/maps/@42.53985,-114.40805,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2681,10 +2681,10 @@
           "location": "Resolved to the Clif Bar bakery in the Jayco Industrial Park, area of Champlin Rd & Eldridge Ave, southeast Twin Falls (street address 3438 Eldridge Ave, ZIP 83341 per Waze listing). Roster city-centroid coords (42.5826,-114.4286) were ~5km NW in a residential/farm area; corrected via web research (Idaho Commerce, BoiseDev, Magic Valley) plus satellite confirmation of the distinctive ~275,000 sq ft biophilic-design plant with on-site solar arrays.",
           "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point visible at any driveway. The site sits on a ~90-acre standalone parcel with wide-open undeveloped buffer land; access roads are part of the industrial-park network and run open into the property. Classified false.",
           "guardShack": "No staffed booth structure visible anywhere along the access roads or at the building. False.",
-          "remoteGs": "False — no gate present, so no remote check-in implied.",
-          "dockDoors": "Covered dock canopy on the west building face; ~9 trailers backed in / parked at the dock line. Total dock-door count ~8-12, banded 0-10 (low confidence — partly shadowed). Bulk-bar bakery, modest dock count.",
+          "remoteGs": "False, no gate present, so no remote check-in implied.",
+          "dockDoors": "Covered dock canopy on the west building face; ~9 trailers backed in / parked at the dock line. Total dock-door count ~8-12, banded 0-10 (low confidence, partly shadowed). Bulk-bar bakery, modest dock count.",
           "dropArea": "Drop trailers staged along the north/east internal access road plus the open yard west of the dock; estimated 10-25 trailer capacity.",
-          "fastLaneOpportunity": "Very wide paved aprons and abundant unused paved width around the building loop — ample room to add express/bypass lanes.",
+          "fastLaneOpportunity": "Very wide paved aprons and abundant unused paved width around the building loop, ample room to add express/bypass lanes.",
           "drivewayLong": "Internal loop road from the park network to the dock can hold a 3+ truck queue.",
           "urbanRural": "Edge-of-town isolated industrial site surrounded by farmland and open scrub; Rural.",
           "imagery": "Street View at the property dates to 2012 (pre-construction empty land) so gate determination relies on current satellite (Maxar 2026), which is clear."
@@ -2892,7 +2892,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied city-centroid coordinates (40.8015, -72.8743) with no\nstreet address. Web research established that in December 2023 Mondelez moved\nTate's into a newly-constructed warehouse and distribution development in\nShirley; the Precision Innovation Park — a two-building, ~400,000 sq ft\nClass-A logistics park delivered 2023 directly off the Long Island Expressway\n(I-495) in the Brookhaven research/technology park — is the matching\ndevelopment.\n\nPositive confirmation came from Street View (June 2024): a monument sign at the\npark entrance reads **\"TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive —\nENTRANCE.\"** The corrected coordinates point to the large Class-A warehouse on\nthe south side of the LIE service road. (Notably, the roster's supplied\nlongitude, -72.8743, already matched Precision Drive almost exactly — only the",
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (40.8015, -72.8743) with no\nstreet address. Web research established that in December 2023 Mondelez moved\nTate's into a newly-constructed warehouse and distribution development in\nShirley; the Precision Innovation Park, a two-building, ~400,000 sq ft\nClass-A logistics park delivered 2023 directly off the Long Island Expressway\n(I-495) in the Brookhaven research/technology park, is the matching\ndevelopment.\n\nPositive confirmation came from Street View (June 2024): a monument sign at the\npark entrance reads **\"TATE'S, PICK UP AND DELIVERIES, 111 Precision Drive ,\nENTRANCE.\"** The corrected coordinates point to the large Class-A warehouse on\nthe south side of the LIE service road. (Notably, the roster's supplied\nlongitude, -72.8743, already matched Precision Drive almost exactly, only the",
         "mapsUrl": "https://www.google.com/maps/@40.84720,-72.87170,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2917,14 +2917,14 @@
           }
         },
         "fieldNotes": {
-          "location": "Positively resolved to 111 Precision Drive, Shirley NY 11967 — a monument sign at the entrance reads 'TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive — ENTRANCE' (Street View, Jun 2024). This is a building in the Precision Innovation Park, a Class-A logistics development directly off the Long Island Expressway delivered 2023; Mondelez moved Tate's into this newly-built warehouse/distribution facility in December 2023. Roster city-centroid coords (40.8015,-72.8743) were ~5km south; corrected — note the roster longitude already matched Precision Drive.",
+          "location": "Positively resolved to 111 Precision Drive, Shirley NY 11967, a monument sign at the entrance reads 'TATE'S, PICK UP AND DELIVERIES, 111 Precision Drive, ENTRANCE' (Street View, Jun 2024). This is a building in the Precision Innovation Park, a Class-A logistics development directly off the Long Island Expressway delivered 2023; Mondelez moved Tate's into this newly-built warehouse/distribution facility in December 2023. Roster city-centroid coords (40.8015,-72.8743) were ~5km south; corrected, note the roster longitude already matched Precision Drive.",
           "truckGate": "The truck court runs the full east face of the warehouse and connects to the Precision Innovation Park internal loop road at the NE corner. No barrier arm, sliding gate or checkpoint pinch-point is visible at the truck-court entry or at the 111 Precision Drive driveway. Classified false.",
           "guardShack": "No staffed booth structure visible at the entrance, the truck court, or beside the building. False.",
-          "remoteGs": "False — no gate present.",
+          "remoteGs": "False, no gate present.",
           "dockDoors": "Dock doors line the full east face; ~25-30 doors estimated with ~12 trailers backed in / parked. Banded 25-50.",
           "dropArea": "Trailers parked in the east truck court drop lanes outside the active dock positions; ~10-25.",
-          "shipRcvSeparate": "All dock doors are on a single (east) building face — shipping and receiving are not on physically separate banks.",
-          "fastLaneOpportunity": "Generous truck-court width and unused paved apron — room to add a bypass lane.",
+          "shipRcvSeparate": "All dock doors are on a single (east) building face, shipping and receiving are not on physically separate banks.",
+          "fastLaneOpportunity": "Generous truck-court width and unused paved apron, room to add a bypass lane.",
           "urbanRural": "Edge-of-town logistics park off the LIE, bordered by woods with single-family residential beyond; judged Rural per the small-town-industrial tie-break rule.",
           "drivewayLong": "Loop road plus deep truck court can hold a 3+ truck queue.",
           "buildingCount": "One large warehouse on this parcel; the cleared land to the NE is the (un-built) second building of the Precision Innovation Park master plan, not part of the Tate's parcel."
@@ -3140,7 +3140,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The roster supplied city-centroid coordinates (40.7401, -75.2557) with no street\naddress — ~1 km northeast of the actual facility. Web research resolved the\naddress: Becknell Industrial built a ~100,300 sq ft build-to-suit Nabisco /\nMondelez food-and-beverage distribution warehouse in Tatamy, and the Becknell\nproperty listing, a Foursquare DC listing, and the Mondelez hourly-jobs portal\nall give the branch address as 120 Commerce Lane, Tatamy PA 18085\n(Northampton County, Lehigh Valley; the Becknell page also shows the\nPalmer-Township ZIP 18045).\n\nA Nominatim geocode (40.7362, -75.2619) put the search in the Becknell\nindustrial park; satellite then identified the modern grey warehouse with purple\naccent striping — a build-to-suit DC with a fenced truck/drop yard on its south\nface, matching the documented ~100,300 sq ft Nabisco facility.",
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (40.7401, -75.2557) with no street\naddress, ~1 km northeast of the actual facility. Web research resolved the\naddress: Becknell Industrial built a ~100,300 sq ft build-to-suit Nabisco /\nMondelez food-and-beverage distribution warehouse in Tatamy, and the Becknell\nproperty listing, a Foursquare DC listing, and the Mondelez hourly-jobs portal\nall give the branch address as 120 Commerce Lane, Tatamy PA 18085\n(Northampton County, Lehigh Valley; the Becknell page also shows the\nPalmer-Township ZIP 18045).\n\nA Nominatim geocode (40.7362, -75.2619) put the search in the Becknell\nindustrial park; satellite then identified the modern grey warehouse with purple\naccent striping, a build-to-suit DC with a fenced truck/drop yard on its south\nface, matching the documented ~100,300 sq ft Nabisco facility.",
         "mapsUrl": "https://www.google.com/maps/@40.73510,-75.26120,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3165,14 +3165,14 @@
           }
         },
         "fieldNotes": {
-          "location": "Resolved to 120 Commerce Lane, Tatamy PA 18085 (Northampton County, Lehigh Valley) — a Becknell Industrial build-to-suit warehouse in the Tatamy/Palmer Township industrial park. Roster city-centroid (40.7401,-75.2557) was ~1km NE; corrected via web research (Becknell property page, Foursquare, Mondelez hourly-jobs portal all list 120 Commerce Lane) plus Nominatim geocode and satellite. The modern grey warehouse with purple accent striping and a fenced truck/drop yard matches the ~100,300 sq ft build-to-suit Nabisco DC.",
-          "truckGate": "TRUE — Street View (Jul 2024) of the Commerce Lane frontage shows chain-link perimeter fencing enclosing the truck/drop yard with branded trailers parked inside; the yard is accessed through a fenced gate off the loop road. A controlled, fenced industrial entrance.",
-          "guardShack": "FALSE — no staffed guard-booth structure visible at the yard entrance or building in Street View or satellite.",
-          "remoteGs": "TRUE — fenced/controlled truck gate present but no guard shack, implying kiosk / app / dock-office check-in.",
-          "dockDoors": "10-25 — dock doors line the south building face; ~20-24 estimated with many trailers backed in. Banded 10-25.",
-          "dropArea": "25-50 — a long row of drop trailers parked in the yard alongside the docked trailers; counts in the 30-40 range.",
-          "shipRcvSeparate": "FALSE — all dock doors are on a single (south) building face.",
-          "fastLaneOpportunity": "TRUE — wide paved truck yard with substantial unused apron width.",
+          "location": "Resolved to 120 Commerce Lane, Tatamy PA 18085 (Northampton County, Lehigh Valley), a Becknell Industrial build-to-suit warehouse in the Tatamy/Palmer Township industrial park. Roster city-centroid (40.7401,-75.2557) was ~1km NE; corrected via web research (Becknell property page, Foursquare, Mondelez hourly-jobs portal all list 120 Commerce Lane) plus Nominatim geocode and satellite. The modern grey warehouse with purple accent striping and a fenced truck/drop yard matches the ~100,300 sq ft build-to-suit Nabisco DC.",
+          "truckGate": "TRUE, Street View (Jul 2024) of the Commerce Lane frontage shows chain-link perimeter fencing enclosing the truck/drop yard with branded trailers parked inside; the yard is accessed through a fenced gate off the loop road. A controlled, fenced industrial entrance.",
+          "guardShack": "FALSE, no staffed guard-booth structure visible at the yard entrance or building in Street View or satellite.",
+          "remoteGs": "TRUE, fenced/controlled truck gate present but no guard shack, implying kiosk / app / dock-office check-in.",
+          "dockDoors": "10-25, dock doors line the south building face; ~20-24 estimated with many trailers backed in. Banded 10-25.",
+          "dropArea": "25-50, a long row of drop trailers parked in the yard alongside the docked trailers; counts in the 30-40 range.",
+          "shipRcvSeparate": "FALSE, all dock doors are on a single (south) building face.",
+          "fastLaneOpportunity": "TRUE, wide paved truck yard with substantial unused apron width.",
           "drivewayLong": "Deep truck yard / loop road can hold a 3+ truck queue.",
           "urbanRural": "Edge-of-town build-to-suit industrial park bordered by other warehouses and single-family residential; judged Rural per the small-town-industrial tie-break.",
           "buildingCount": "One warehouse on the Mondelez parcel; neighboring buildings in the Becknell park are separate tenants."
@@ -3409,7 +3409,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "### Resolved location\n- Roster supplied: 40.8126, -74.3676 — a city-level centroid that landed\n  in cemetery / open green space roughly 600 m east of the real campus.\n- Resolved: ~40.8120, -74.3738 (100 DeForest Avenue, East Hanover, NJ\n  07936). Confirmed via web research (Mondelez US site, East Hanover\n  Partnership directory, Morris Chamber) plus satellite — the only\n  large-scale industrial complex matching the address corridor.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is both. The East Hanover address is officially Mondelez's North\nAmerica headquarters, but the campus is a large multi-building **industrial\ncomplex** — it houses the Nabisco East Hanover bakery and a major\ndistribution operation. This is a genuine, high-relevance freight facility,",
+        "dossierExcerpt": "### Resolved location\n- Roster supplied: 40.8126, -74.3676, a city-level centroid that landed\n  in cemetery / open green space roughly 600 m east of the real campus.\n- Resolved: ~40.8120, -74.3738 (100 DeForest Avenue, East Hanover, NJ\n  07936). Confirmed via web research (Mondelez US site, East Hanover\n  Partnership directory, Morris Chamber) plus satellite, the only\n  large-scale industrial complex matching the address corridor.\n- Confidence in location: high.\n\n### Facility type, office vs freight\nThis is both. The East Hanover address is officially Mondelez's North\nAmerica headquarters, but the campus is a large multi-building **industrial\ncomplex**, it houses the Nabisco East Hanover bakery and a major\ndistribution operation. This is a genuine, high-relevance freight facility,",
         "mapsUrl": "https://www.google.com/maps/@40.812,-74.3738,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3436,7 +3436,7 @@
         "fieldNotes": {
           "location": "Roster coords (40.8126,-74.3676) were a city centroid landing in Restland/Whippany-area cemetery green space ~600m east of the real site. Resolved to the Mondelez East Hanover industrial campus at 100 DeForest Ave via web research + satellite. Locked center 40.8120,-74.3738.",
           "facilityType": "This is NOT a pure office. The East Hanover address is Mondelez's North America HQ, but the campus is a large multi-building industrial complex housing the Nabisco East Hanover bakery and a major distribution operation. Satellite shows extensive truck activity: long warehouse rows, dock aprons on multiple building faces, and 100+ trailers parked across two large drop areas. Freight relevance is HIGH.",
-          "truckGate": "Campus is a private internal-road industrial complex set well back from public roads (DeForest Ave). Public Street View only reaches the adjacent retail plaza and brick building exteriors, not the truck entrance. A controlled/fenced perimeter with internal access roads is visible in satellite; a guarded gate is the strong norm for a corporate-HQ-grade industrial campus of this size — classified true with guardShack true, but flagged uncertain because the booth itself was not directly imaged.",
+          "truckGate": "Campus is a private internal-road industrial complex set well back from public roads (DeForest Ave). Public Street View only reaches the adjacent retail plaza and brick building exteriors, not the truck entrance. A controlled/fenced perimeter with internal access roads is visible in satellite; a guarded gate is the strong norm for a corporate-HQ-grade industrial campus of this size, classified true with guardShack true, but flagged uncertain because the booth itself was not directly imaged.",
           "railServed": "Street View on the NW frontage shows a rail spur running along the base of a brick Mondelez building - confirms rail service into the property.",
           "multipleFacilities": "Confirmed campus: 8+ distinct large buildings, mix of warehouse rows and an office-profile structure at the NW end.",
           "fastLaneOpportunity": "Wide internal aprons and abundant paved width seen in satellite.",
@@ -3573,7 +3573,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "### Resolved location\n- Roster supplied: 35.1175, -89.9711 — a downtown-Memphis centroid\n  roughly 16 km NW of the real site.\n- Resolved: ~35.0184, -89.8695 — **5812 Distribution Drive, Memphis, TN\n  38141**, in the SE Memphis (Lamar / Getwell) industrial corridor.\n- How confirmed: Superpages/Yellowpages list \"Nabisco, 5812 Distribution\n  Dr, Memphis TN 38141\"; Shelby County tax-assessor records (via city-data)\n  list the 5812 Distribution Drive parcel owner as MONDELEZ GLOBAL LLC —\n  a strong, independent confirmation. Satellite then matched a fenced\n  distribution warehouse at that point.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is a genuine freight facility — a single-story Nabisco/Mondelez\nsales-distribution warehouse with an office front. Freight relevance is HIGH.",
+        "dossierExcerpt": "### Resolved location\n- Roster supplied: 35.1175, -89.9711, a downtown-Memphis centroid\n  roughly 16 km NW of the real site.\n- Resolved: ~35.0184, -89.8695, **5812 Distribution Drive, Memphis, TN\n  38141**, in the SE Memphis (Lamar / Getwell) industrial corridor.\n- How confirmed: Superpages/Yellowpages list \"Nabisco, 5812 Distribution\n  Dr, Memphis TN 38141\"; Shelby County tax-assessor records (via city-data)\n  list the 5812 Distribution Drive parcel owner as MONDELEZ GLOBAL LLC ,\n  a strong, independent confirmation. Satellite then matched a fenced\n  distribution warehouse at that point.\n- Confidence in location: high.\n\n### Facility type, office vs freight\nThis is a genuine freight facility, a single-story Nabisco/Mondelez\nsales-distribution warehouse with an office front. Freight relevance is HIGH.",
         "mapsUrl": "https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3818,7 +3818,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 16200 Three Wide Dr, Ste 172, Fort Worth TX 76177 — the\nIDI / Speedway Distribution Center Building C (a ~316,128 SF Class-A\ndistribution building delivered 2018) in the AllianceTexas logistics corridor\nadjacent to Texas Motor Speedway. Google geocode returned a ROOFTOP match at\n`33.0315793, -97.3007312`; satellite confirmed a large completed cross-dock\ndistribution building consistent with the listing. Locked center:\n`33.03158, -97.30073`.\n\n> The earlier stub mislabeled this site \"Garland, TX\" and could not resolve it.\n> It is in Fort Worth — corrected here.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A long single cross-dock warehouse running roughly\neast-west. Dock banks on both the north and south faces — the north face",
+        "dossierExcerpt": "Status: RESOLVED, confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0, Location\nConfirmed address: 16200 Three Wide Dr, Ste 172, Fort Worth TX 76177, the\nIDI / Speedway Distribution Center Building C (a ~316,128 SF Class-A\ndistribution building delivered 2018) in the AllianceTexas logistics corridor\nadjacent to Texas Motor Speedway. Google geocode returned a ROOFTOP match at\n`33.0315793, -97.3007312`; satellite confirmed a large completed cross-dock\ndistribution building consistent with the listing. Locked center:\n`33.03158, -97.30073`.\n\n> The earlier stub mislabeled this site \"Garland, TX\" and could not resolve it.\n> It is in Fort Worth, corrected here.\n\n### Steps 1-5, Audit\n\nBuilding & layout. A long single cross-dock warehouse running roughly\neast-west. Dock banks on both the north and south faces, the north face",
         "mapsUrl": "https://www.google.com/maps/@33.03158,-97.30073,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3843,14 +3843,14 @@
           }
         },
         "fieldNotes": {
-          "locate": "Resolved to 16200 Three Wide Dr, Fort Worth TX 76177 (IDI/Speedway Distribution Center Building C), in the AllianceTexas industrial corridor near Texas Motor Speedway. Google geocode returned a ROOFTOP hit at 33.0315793,-97.3007312 (returned with the 76247 Northlake ZIP, but the building is the one a confirmed-address probe pinned). Satellite confirms a large completed Class-A cross-dock distribution building consistent with the listed 316,128 SF Building C. The old stub mislabeled this site 'Garland TX' — corrected to Fort Worth.",
+          "locate": "Resolved to 16200 Three Wide Dr, Fort Worth TX 76177 (IDI/Speedway Distribution Center Building C), in the AllianceTexas industrial corridor near Texas Motor Speedway. Google geocode returned a ROOFTOP hit at 33.0315793,-97.3007312 (returned with the 76247 Northlake ZIP, but the building is the one a confirmed-address probe pinned). Satellite confirms a large completed Class-A cross-dock distribution building consistent with the listed 316,128 SF Building C. The old stub mislabeled this site 'Garland TX', corrected to Fort Worth.",
           "shipRcvSeparate": "Cross-dock building: dock banks on BOTH the north and the south building faces. The north face carries the bulk of the trailer activity plus the drop yard; the south face has a second dock bank fronting the office/car-parking side. Counted as separate ship/receive clusters.",
           "truckGate": "The truck court is fully enclosed by chain-link fencing. Street View (Dec 2024) at the SE truck-court entrance shows a sliding chain-link gate across the truck driveway where it enters the fenced truck court between Building C and the adjacent building. truckGate = true.",
-          "guardShack": "No staffed guard booth observed beside the truck-court gate in Street View — a sliding chain-link gate only. remoteGs (kiosk / app / call-box check-in) inferred. Flagged uncertain: a small booth could be obscured by trailers in the available panos.",
-          "fastLaneOpportunity": "The truck court and gate apron are very wide with substantial unused paved width and deep stacking depth — physical room to add an express/bypass lane.",
-          "dockDoorCount": "Estimated ~115 doors total across the long north dock bank and the south dock bank of this ~316k SF cross-dock building. Honest overhead estimate — flagged uncertain.",
+          "guardShack": "No staffed guard booth observed beside the truck-court gate in Street View, a sliding chain-link gate only. remoteGs (kiosk / app / call-box check-in) inferred. Flagged uncertain: a small booth could be obscured by trailers in the available panos.",
+          "fastLaneOpportunity": "The truck court and gate apron are very wide with substantial unused paved width and deep stacking depth, physical room to add an express/bypass lane.",
+          "dockDoorCount": "Estimated ~115 doors total across the long north dock bank and the south dock bank of this ~316k SF cross-dock building. Honest overhead estimate, flagged uncertain.",
           "drop": "Large drop yard along the north side with rows of parked trailers (no tractors); dropArea 50+.",
-          "urbanRural": "AllianceTexas is an edge-of-metro master-planned logistics park surrounded by open land, the speedway, and FM-156 — graded Rural per the rubric tie-breaker (large speculative-industrial park, not dense metro fabric).",
+          "urbanRural": "AllianceTexas is an edge-of-metro master-planned logistics park surrounded by open land, the speedway, and FM-156, graded Rural per the rubric tie-breaker (large speculative-industrial park, not dense metro fabric).",
           "geofences": "Perimeter captures the building plus the north truck/drop yard and south car-parking apron: ~367 m N-S x ~588 m E-W = ~53 acres. truckGate box is the SE fenced-court entrance."
         },
         "verification": {
@@ -4071,7 +4071,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 5815 Clark St, Ontario CA 91761 — a single-tenant\ndistribution warehouse in the dense Inland Empire industrial fabric of\nOntario, San Bernardino County. Google geocode returned a ROOFTOP match at\n`34.0451114, -117.524735`. Locked center: `34.04500, -117.52555`.\n\n> The earlier stub mislabeled this site \"Los Angeles, CA\" and could not\n> resolve it. It is in Ontario, CA (the Inland Empire) — corrected here.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A single rectangular warehouse with dock banks on\ntwo faces: a dock bank along the south face inside a screened truck\ncourt, and a second dock bank along the building's west-facing court.\nEmployee car-parking wraps the east (Clark St) and south frontages; the",
+        "dossierExcerpt": "Status: RESOLVED, confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0, Location\nConfirmed address: 5815 Clark St, Ontario CA 91761, a single-tenant\ndistribution warehouse in the dense Inland Empire industrial fabric of\nOntario, San Bernardino County. Google geocode returned a ROOFTOP match at\n`34.0451114, -117.524735`. Locked center: `34.04500, -117.52555`.\n\n> The earlier stub mislabeled this site \"Los Angeles, CA\" and could not\n> resolve it. It is in Ontario, CA (the Inland Empire), corrected here.\n\n### Steps 1-5, Audit\n\nBuilding & layout. A single rectangular warehouse with dock banks on\ntwo faces: a dock bank along the south face inside a screened truck\ncourt, and a second dock bank along the building's west-facing court.\nEmployee car-parking wraps the east (Clark St) and south frontages; the",
         "mapsUrl": "https://www.google.com/maps/@34.04500,-117.52555,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -4096,14 +4096,14 @@
           }
         },
         "fieldNotes": {
-          "locate": "Resolved to 5815 Clark St, Ontario CA 91761 — a single-tenant distribution warehouse in the dense Inland Empire industrial fabric of Ontario, San Bernardino County. Google geocode returned a ROOFTOP hit at 34.0451114,-117.524735. The old stub mislabeled this site 'Los Angeles CA' — corrected to Ontario, CA (Inland Empire).",
+          "locate": "Resolved to 5815 Clark St, Ontario CA 91761, a single-tenant distribution warehouse in the dense Inland Empire industrial fabric of Ontario, San Bernardino County. Google geocode returned a ROOFTOP hit at 34.0451114,-117.524735. The old stub mislabeled this site 'Los Angeles CA', corrected to Ontario, CA (Inland Empire).",
           "truckGate": "The truck court is screened by a tilt-up concrete screen wall along the public street. Street View (Jan 2025) at the truck-court driveway shows a wheeled SLIDING CHAIN-LINK GATE across the entrance, set between the screen-wall sections. truckGate = true.",
-          "guardShack": "No staffed guard booth observed at the truck-court gate — a sliding chain-link gate with what appears to be a small kiosk/call-box and signage post beside it; no standalone guard building. remoteGs (kiosk/call-box/app) inferred. Flagged uncertain.",
-          "shipRcvSeparate": "The building has dock banks on TWO faces — a dock bank along the south face (in the screened truck court) and a second dock bank along the building's west-facing court. Two distinct dock clusters — shipRcvSeparate = true.",
-          "dockDoorCount": "Estimated ~38 doors total across the south and west dock banks. Overhead estimate — flagged uncertain.",
-          "drop": "Trailers backed into docks and a modest band of parked trailers within the truck court — drop area in the 10-25 band. No separate dedicated trailer-storage lot, so dropYard = false.",
-          "rail": "A rail line runs E-W along the building's NORTH property line, but it serves the building to the north and does NOT spur into the 5815 Clark St property — railServed = false.",
-          "urbanRural": "Ontario / Inland Empire is one of the densest warehouse-industrial submarkets in the US — clearly Urban.",
+          "guardShack": "No staffed guard booth observed at the truck-court gate, a sliding chain-link gate with what appears to be a small kiosk/call-box and signage post beside it; no standalone guard building. remoteGs (kiosk/call-box/app) inferred. Flagged uncertain.",
+          "shipRcvSeparate": "The building has dock banks on TWO faces, a dock bank along the south face (in the screened truck court) and a second dock bank along the building's west-facing court. Two distinct dock clusters, shipRcvSeparate = true.",
+          "dockDoorCount": "Estimated ~38 doors total across the south and west dock banks. Overhead estimate, flagged uncertain.",
+          "drop": "Trailers backed into docks and a modest band of parked trailers within the truck court, drop area in the 10-25 band. No separate dedicated trailer-storage lot, so dropYard = false.",
+          "rail": "A rail line runs E-W along the building's NORTH property line, but it serves the building to the north and does NOT spur into the 5815 Clark St property, railServed = false.",
+          "urbanRural": "Ontario / Inland Empire is one of the densest warehouse-industrial submarkets in the US, clearly Urban.",
           "geofences": "Perimeter captures the building plus the screened south truck court and the west dock court: ~173 m N-S x ~217 m E-W ≈ 9.3 acres. truckGate box is the south-side screened-court entrance off the public street."
         },
         "verification": {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 /**
- * DemoChrome — the YardFlow site shell for the proxied /demo subtree.
+ * DemoChrome, the YardFlow site shell for the proxied /demo subtree.
  *
  * The /demo gallery, /demo/<account> microsites, and /demo/compare are served
  * by this app but shown under yardflow.ai via the Flow-State- rewrite. That app
@@ -16,12 +16,15 @@ import Link from 'next/link';
  * Sticky (not fixed) so it takes layout space and never overlaps page content.
  */
 
+// Mirrors the canonical top bar (Flow-State- config/navigation.ts):
+// Product, Solutions, Demo, ROI, Research. Research is the /resources
+// library (2026-07-09 IA); under yardflow.ai these resolve natively.
 const NAV = [
   { href: '/product', label: 'Product' },
   { href: '/solutions', label: 'Solutions' },
+  { href: '/demo/', label: 'Demo' },
   { href: '/roi', label: 'ROI' },
-  { href: '/demo/yard-explorer', label: 'Live sim' },
-  { href: '/order-of-operations', label: 'Research' },
+  { href: '/resources', label: 'Research' },
 ];
 
 const NEON = '#00B4FF';
@@ -63,10 +66,10 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
             ))}
           </nav>
           <Link
-            href="/contact"
-            className="ml-auto rounded-lg bg-[#00B4FF] px-4 py-2 text-[13px] font-bold text-[#05070a] no-underline transition-colors hover:bg-white md:ml-0"
+            href="/contact?intent=audit"
+            className="ml-auto whitespace-nowrap rounded-lg bg-[#00B4FF] px-4 py-2 text-[13px] font-bold text-[#05070a] no-underline transition-colors hover:bg-white md:ml-0"
           >
-            Book a call
+            Book a Yard Network Audit
           </Link>
         </div>
         {/* Mobile nav row: the desktop links are hidden < md, so give phones a
@@ -92,9 +95,9 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
           <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.12em] text-white/55">
             <Link href="/product" className="no-underline hover:text-[#00B4FF]">Product</Link>
             <Link href="/solutions" className="no-underline hover:text-[#00B4FF]">Solutions</Link>
+            <Link href="/demo/" className="no-underline hover:text-[#00B4FF]">Demo</Link>
             <Link href="/roi" className="no-underline hover:text-[#00B4FF]">ROI</Link>
-            <Link href="/demo/yard-explorer" className="no-underline hover:text-[#00B4FF]">Live sim</Link>
-            <Link href="/order-of-operations" className="no-underline hover:text-[#00B4FF]">Research</Link>
+            <Link href="/resources" className="no-underline hover:text-[#00B4FF]">Research</Link>
             <Link href="/security" className="no-underline hover:text-[#00B4FF]">Security</Link>
             <Link href="/contact" className="no-underline hover:text-[#00B4FF]">Contact</Link>
           </nav>

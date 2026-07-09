@@ -5,7 +5,7 @@ import type { SiteGeofences, ZoneStreetView as ZoneSV } from '@/lib/demo/pack-sc
 import { GEOFENCE_COLORS } from './archetype-palette';
 
 /**
- * Driver's-eye walkthrough — a narrated ride-along through the audited zones.
+ * Driver's-eye walkthrough, a narrated ride-along through the audited zones.
  *
  * Steps the ground-level Street View frame through the real load flow
  * (arrival -> gate -> dock -> drop -> staging), one zone at a time, with a
@@ -24,11 +24,11 @@ interface ViewItem {
 }
 
 function noteFor(key: string): string {
-  if (key === 'perimeter') return 'The approach — what a driver sees pulling up to the property.';
-  if (key === 'truckGate') return 'The gate — check-in happens here; flowGATE reads the truck and opens the lane.';
-  if (key.startsWith('dockApron')) return 'The dock apron — backing into the door to load or unload.';
-  if (key.startsWith('dropYard')) return 'The drop yard — where trailers stage for drop-and-hook.';
-  if (key === 'staging') return 'Staging — the pre / post-gate hold before the next move.';
+  if (key === 'perimeter') return 'The approach, what a driver sees pulling up to the property.';
+  if (key === 'truckGate') return 'The gate, check-in happens here; flowGATE reads the truck and opens the lane.';
+  if (key.startsWith('dockApron')) return 'The dock apron, backing into the door to load or unload.';
+  if (key.startsWith('dropYard')) return 'The drop yard, where trailers stage for drop-and-hook.';
+  if (key === 'staging') return 'Staging, the pre / post-gate hold before the next move.';
   return 'Ground-level view of this zone.';
 }
 

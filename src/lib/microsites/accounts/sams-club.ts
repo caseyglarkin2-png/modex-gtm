@@ -1,9 +1,9 @@
 /**
- * Sam's Club — ABM Microsite Data (registry entry)
+ * Sam's Club, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/sams-club.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/sams-club resolves its
  * accountName FK and /for/sams-club renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const samsClub: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Sam\'s Club — Yard Network Audit',
+  pageTitle: 'YardFlow for Sam\'s Club, Yard Network Audit',
   metaDescription:
     '10 Sam\'s Club facilities mapped from public satellite imagery: 1,083 dock doors and room for about 2,530 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const samsClub: AccountMicrositeData = {
       hypothesis:
         'Sam\'s Club runs a lean distribution network separate from its Walmart parent, a mix of owned cross-docks and dedicated 3PL DCs (Saddle Creek, Prologis) feeding roughly 600 warehouse clubs. We mapped 10 of them across the South and Midwest, holding 1,083 dock doors and room for about 2,530 trailers. Eight of the ten sit behind a controlled truck gate and five run a staffed guard booth, but the control is uneven and two DCs sit open to the road. YardFlow gives Sam\'s Club one gate-to-dock view across owned and 3PL yards alike.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '10 Sam\'s Club facilities, mapped from public satellite imagery',
       accountSlug: 'sams-club',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Sam\'s Club U.S. operates 45 dedicated freight facilities (31 distribution centers + 14 eCommerce fulfillment centers per Walmart\'s FY2025 10-K), several 3PL-operated by Saddle Creek / Prologis, feeding ~600 clubs. We audited 10 representative facilities.',
     },
     {
@@ -85,14 +85,14 @@ export const samsClub: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Sam\'s Club, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -103,7 +103,7 @@ export const samsClub: AccountMicrositeData = {
     facilityCount: '10 audited sites of 45 dedicated US freight facilities (Walmart FY2025 10-K)',
     facilityTypes: ['Distribution Center', 'Fulfillment Center'],
     geographicSpread: 'South and Midwest US. Mix of owned cross-docks and dedicated 3PL DCs (Saddle Creek, Prologis) feeding roughly 600 clubs.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 1,083 dock doors and room for ~2,530 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 1,083 dock doors and room for ~2,530 trailers.',
   },
 
   freight: {

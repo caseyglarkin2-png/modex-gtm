@@ -1,9 +1,9 @@
 /**
- * Target — ABM Microsite Data (registry entry)
+ * Target, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/target.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/target resolves its
  * accountName FK and /for/target renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const target: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Target — Yard Network Audit',
+  pageTitle: 'YardFlow for Target, Yard Network Audit',
   metaDescription:
     '24 Target facilities mapped from public satellite imagery: 2,961 dock doors and room for about 8,640 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const target: AccountMicrositeData = {
       hypothesis:
         'Target moves almost all of its inbound through a coastal import network that feeds regional distribution centers, then pushes to stores on a tight replenishment clock, so a trailer stuck at the gate ripples straight to the shelf. We mapped all 24 of Target\'s identifiable US facilities: 4 import warehouses, 15 regional DCs, 4 food DCs, and a flow center, totaling 2,961 dock doors and roughly 8,640 trailer positions across 1,907 acres. Only one of those 24 sites touches rail, so nearly every load in or out moves by truck through 26 gates. YardFlow turns that gate-to-dock handoff into one orchestrated move across the whole network.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '24 Target facilities, mapped from public satellite imagery',
       accountSlug: 'target',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Audited all 24 identifiable facilities.',
     },
     {
@@ -85,14 +85,14 @@ export const target: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Target, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -103,7 +103,7 @@ export const target: AccountMicrositeData = {
     facilityCount: '24 audited sites, all identifiable US facilities (FY2024 10-K lists 66 supply-chain facilities incl. sortation)',
     facilityTypes: ['Regional Distribution Center', 'Food Distribution Center', 'Import Warehouse', 'Flow Center'],
     geographicSpread: 'United States. Coastal import warehouses feeding 15 regional DCs, 4 food DCs, and a flow center on a tight replenishment clock.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 2,961 dock doors and room for ~8,640 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 2,961 dock doors and room for ~8,640 trailers.',
   },
 
   freight: {

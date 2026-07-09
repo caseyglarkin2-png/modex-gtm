@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 /**
- * J.T1 — emit `industry_template_viewed` once per microsite pageview,
+ * J.T1, emit `industry_template_viewed` once per microsite pageview,
  * with { anchor_slug, anchor_archetype, source }. Source is read from
  * ?source= (falling back to ?from=gallery -> "gallery", else "direct").
  * Suppressed under ?demo=1 per the analytics events spec. Fires on the
@@ -31,7 +31,7 @@ export function MicrositeViewEvent({
           },
         }),
       );
-      // L.T4 — high-signal target-account view when a rep's share link
+      // L.T4, high-signal target-account view when a rep's share link
       // carries ?to=<hubspot-company-token>. The server tracker forwards
       // the token; stamping the company timeline awaits the token->company
       // mapping scheme (out-of-band).
@@ -47,7 +47,7 @@ export function MicrositeViewEvent({
         );
       }
     } catch {
-      // analytics bridge unavailable — ignore.
+      // analytics bridge unavailable, ignore.
     }
   }, [anchorSlug, archetype]);
   return null;

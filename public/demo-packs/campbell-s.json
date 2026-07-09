@@ -175,7 +175,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coordinates (34.771797, -79.325047) landed inside the plant footprint.\nSatellite probes z16-18 around that point revealed a very large industrial\nmanufacturing campus surrounded by pine forest, consistent with a thermal/\naseptic soup plant. Street View on NC-71 N confirmed a Campbell's-branded\nproperty sign and chain-link perimeter fence facing the highway. This is the\nCampbell's Maxton soup plant — site of the named $150M aseptic soup expansion.",
+        "dossierExcerpt": "Roster coordinates (34.771797, -79.325047) landed inside the plant footprint.\nSatellite probes z16-18 around that point revealed a very large industrial\nmanufacturing campus surrounded by pine forest, consistent with a thermal/\naseptic soup plant. Street View on NC-71 N confirmed a Campbell's-branded\nproperty sign and chain-link perimeter fence facing the highway. This is the\nCampbell's Maxton soup plant, site of the named $150M aseptic soup expansion.",
         "mapsUrl": "https://www.google.com/maps/@34.770800,-79.325200,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -364,7 +364,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coordinates landed inside the plant. Satellite probes z16-18 revealed a\nvery large industrial manufacturing campus on the south bank of the Maumee\nRiver, with a big distribution warehouse on the NE, production halls along\nSR-110 on the west, and a wastewater-treatment plant (multiple digester domes)\non the SW. This is the well-known Campbell's Napoleon soup/broth/V8 plant — one\nof the company's largest. SR-110 (Scott Street / State Route 110) runs along\nthe west; an industrial connector road runs along the south.",
+        "dossierExcerpt": "Roster coordinates landed inside the plant. Satellite probes z16-18 revealed a\nvery large industrial manufacturing campus on the south bank of the Maumee\nRiver, with a big distribution warehouse on the NE, production halls along\nSR-110 on the west, and a wastewater-treatment plant (multiple digester domes)\non the SW. This is the well-known Campbell's Napoleon soup/broth/V8 plant, one\nof the company's largest. SR-110 (Scott Street / State Route 110) runs along\nthe west; an industrial connector road runs along the south.",
         "mapsUrl": "https://www.google.com/maps/@41.397500,-84.103500,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -974,7 +974,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coordinates (APPROXIMATE, moved only 6 m) landed in a residential\nneighborhood of Willard — clearly wrong. Web search established the plant\naddress as 3320 State Route 103 E. Satellite probes east of Willard along\nSR-103 located a large industrial bakery complex with silos, extensive trailer\ndrop yards, and dock banks. Street View at the access drive confirmed a\nPepperidge Farm sign. This is the primary Goldfish cracker bakery.",
+        "dossierExcerpt": "Roster coordinates (APPROXIMATE, moved only 6 m) landed in a residential\nneighborhood of Willard, clearly wrong. Web search established the plant\naddress as 3320 State Route 103 E. Satellite probes east of Willard along\nSR-103 located a large industrial bakery complex with silos, extensive trailer\ndrop yards, and dock banks. Street View at the access drive confirmed a\nPepperidge Farm sign. This is the primary Goldfish cracker bakery.",
         "mapsUrl": "https://www.google.com/maps/@41.054400,-82.708500,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -1169,7 +1169,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coordinates (RANGE_INTERPOLATED) landed in the central/south part of the\nsmall town of Richmond, in residential/farmland — no plant there. Web search\nestablished the plant address as 901 N 200 W. Satellite probes north of the\nroster point located a large industrial bakery on the west side of 200 West:\na long N-S building with silos, dock banks, a rail spur, and yard areas. This\nis Pepperidge Farm's Richmond plant — its only manufacturing facility west of\nthe Rocky Mountains, a Goldfish/Milano bakery (+50% Goldfish capacity 2024).",
+        "dossierExcerpt": "Roster coordinates (RANGE_INTERPOLATED) landed in the central/south part of the\nsmall town of Richmond, in residential/farmland, no plant there. Web search\nestablished the plant address as 901 N 200 W. Satellite probes north of the\nroster point located a large industrial bakery on the west side of 200 West:\na long N-S building with silos, dock banks, a rail spur, and yard areas. This\nis Pepperidge Farm's Richmond plant, its only manufacturing facility west of\nthe Rocky Mountains, a Goldfish/Milano bakery (+50% Goldfish capacity 2024).",
         "mapsUrl": "https://www.google.com/maps/@41.939600,-111.816300,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -2800,7 +2800,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: Campbell's - Franklin WI (Late July tortilla chips; capacity expanded 2024)\n- Type: Manufacturing - tortilla chips / baked snacks\n- Operating entity: Baptista's Bakery, Inc. (a Campbell Snacks / Campbell's Company division)\n- Roster address: 9999 South 60th Street, Franklin, WI 53132 — incorrect\n- Resolved address: 4625 W Oakwood Park Drive, Franklin, WI 53132 (Franklin Business Park)\n- Locked coordinates: 42.8594, -87.9863",
+        "dossierExcerpt": "- Name: Campbell's - Franklin WI (Late July tortilla chips; capacity expanded 2024)\n- Type: Manufacturing - tortilla chips / baked snacks\n- Operating entity: Baptista's Bakery, Inc. (a Campbell Snacks / Campbell's Company division)\n- Roster address: 9999 South 60th Street, Franklin, WI 53132, incorrect\n- Resolved address: 4625 W Oakwood Park Drive, Franklin, WI 53132 (Franklin Business Park)\n- Locked coordinates: 42.8594, -87.9863",
         "mapsUrl": "https://www.google.com/maps/@42.8594,-87.9863,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3006,7 +3006,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: Campbell's - Milwaukee WI\n- Type: Manufacturing - spice production (Campbell Soup Supply Co., LLC)\n- Roster address: 445 South 32nd Street, Milwaukee, WI 53215 — incorrect\n- Resolved address: 500 W Edgerton Avenue, Milwaukee, WI 53207\n- Locked coordinates: 42.9525, -87.9182",
+        "dossierExcerpt": "- Name: Campbell's - Milwaukee WI\n- Type: Manufacturing - spice production (Campbell Soup Supply Co., LLC)\n- Roster address: 445 South 32nd Street, Milwaukee, WI 53215, incorrect\n- Resolved address: 500 W Edgerton Avenue, Milwaukee, WI 53207\n- Locked coordinates: 42.9525, -87.9182",
         "mapsUrl": "https://www.google.com/maps/@42.9525,-87.9182,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3194,7 +3194,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Pace / Prego - Dixon CA\n- Type: Manufacturing - tomato processing for Prego/Pace sauces (Campbell Soup Supply Co.)\n- Roster address: 1606 Pedrick Road, Dixon, CA 95620 — incorrect\n- Resolved address: 8380 Pedrick Road, Dixon, CA 95620\n- Locked coordinates: 38.4745, -121.8025",
+        "dossierExcerpt": "- Name: Pace / Prego - Dixon CA\n- Type: Manufacturing - tomato processing for Prego/Pace sauces (Campbell Soup Supply Co.)\n- Roster address: 1606 Pedrick Road, Dixon, CA 95620, incorrect\n- Resolved address: 8380 Pedrick Road, Dixon, CA 95620\n- Locked coordinates: 38.4745, -121.8025",
         "mapsUrl": "https://www.google.com/maps/@38.4745,-121.8025,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3395,7 +3395,7 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Campbell's - Stockton CA\n- Type: Manufacturing - tomato processing (Campbell Soup Supply Co., LLC)\n- Roster address: 1330 W Fremont Street, Stockton, CA 95203 — incorrect\n- Resolved address: 750 / 760 Industrial Drive, Stockton, CA 95206\n- Locked coordinates: 37.9087, -121.2654",
+        "dossierExcerpt": "- Name: Campbell's - Stockton CA\n- Type: Manufacturing - tomato processing (Campbell Soup Supply Co., LLC)\n- Roster address: 1330 W Fremont Street, Stockton, CA 95203, incorrect\n- Resolved address: 750 / 760 Industrial Drive, Stockton, CA 95206\n- Locked coordinates: 37.9087, -121.2654",
         "mapsUrl": "https://www.google.com/maps/@37.9087,-121.2654,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3617,7 +3617,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: Campbell's - Goodyear AZ (Campbell Snacks / Snyder's of Hanover pretzel plant)\n- Type: Manufacturing — snacks/food production (pretzels; Snack Factory Pretzel Crisps)\n- Confirmed address: 1200 N Bullard Ave, Goodyear, AZ 85338\n- Locked coordinates: 33.4595, -112.3795",
+        "dossierExcerpt": "- Name: Campbell's - Goodyear AZ (Campbell Snacks / Snyder's of Hanover pretzel plant)\n- Type: Manufacturing, snacks/food production (pretzels; Snack Factory Pretzel Crisps)\n- Confirmed address: 1200 N Bullard Ave, Goodyear, AZ 85338\n- Locked coordinates: 33.4595, -112.3795",
         "mapsUrl": "https://www.google.com/maps/@33.4595,-112.3795,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3812,7 +3812,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Sovos / Rao's - Austin TX (Michael Angelo's Gourmet Foods plant)\n- Type: Manufacturing — premium pasta sauces / frozen Italian foods\n  (Michael Angelo's; Rao's Made for Home)\n- Confirmed address: 200 Michael Angelo Way, Austin, TX 78728 (Wells Branch)\n- Locked coordinates: 30.47105, -97.67700",
+        "dossierExcerpt": "- Name: Sovos / Rao's - Austin TX (Michael Angelo's Gourmet Foods plant)\n- Type: Manufacturing, premium pasta sauces / frozen Italian foods\n  (Michael Angelo's; Rao's Made for Home)\n- Confirmed address: 200 Michael Angelo Way, Austin, TX 78728 (Wells Branch)\n- Locked coordinates: 30.47105, -97.67700",
         "mapsUrl": "https://www.google.com/maps/@30.47105,-97.677,400m/data=!3m1!1e3",
         "tiles": {
           "17": {
@@ -3977,7 +3977,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Campbell's Distribution Center - Findlay OH\n- Type: Distribution center — 740,000 sq ft, $44M, operated by DHL Supply Chain\n- Confirmed address: 1000 E Bigelow Ave, Findlay, OH 45840\n  (Tall Timbers West Industrial Park, I-75 corridor)\n- Locked coordinates: 41.07900, -83.63550",
+        "dossierExcerpt": "- Name: Campbell's Distribution Center - Findlay OH\n- Type: Distribution center, 740,000 sq ft, $44M, operated by DHL Supply Chain\n- Confirmed address: 1000 E Bigelow Ave, Findlay, OH 45840\n  (Tall Timbers West Industrial Park, I-75 corridor)\n- Locked coordinates: 41.07900, -83.63550",
         "mapsUrl": "https://www.google.com/maps/@41.079,-83.6355,400m/data=!3m1!1e3",
         "tiles": {
           "17": {

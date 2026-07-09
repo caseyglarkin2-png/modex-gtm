@@ -243,7 +243,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "- Name: K-C Beech Island Mill — Beech Island, SC\n- Type: Integrated tissue & personal care manufacturing complex (Kimberly-Clark's largest plant globally — Scott, Cottonelle, Kleenex, Kotex, Huggies; ~2,000 employees)\n- Roster address: 246 Old Jackson Hwy, Beech Island, SC 29842\n- Resolved center: 33.41700, -81.89550",
+        "dossierExcerpt": "- Name: K-C Beech Island Mill, Beech Island, SC\n- Type: Integrated tissue & personal care manufacturing complex (Kimberly-Clark's largest plant globally, Scott, Cottonelle, Kleenex, Kotex, Huggies; ~2,000 employees)\n- Roster address: 246 Old Jackson Hwy, Beech Island, SC 29842\n- Resolved center: 33.41700, -81.89550",
         "mapsUrl": "https://www.google.com/maps/@33.41700,-81.89550,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Main entrance off Old Jackson Hwy confirmed in Street View (2026-03): barrier arm across divided lanes, digital 'Beech Island' sign.",
@@ -365,7 +365,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: K-C Mobile Mill — Mobile, AL\n- Type: Tissue / paper manufacturing mill (Scott, Cottonelle, K-C Professional\n  bath tissue & paper towels; ~680 employees; acquired from Scott Paper 1995)\n- Roster address: 2200 Paper Mill Rd, Mobile, AL 36610\n- Resolved center: 30.73530, -88.05080",
+        "dossierExcerpt": "- Name: K-C Mobile Mill, Mobile, AL\n- Type: Tissue / paper manufacturing mill (Scott, Cottonelle, K-C Professional\n  bath tissue & paper towels; ~680 employees; acquired from Scott Paper 1995)\n- Roster address: 2200 Paper Mill Rd, Mobile, AL 36610\n- Resolved center: 30.73530, -88.05080",
         "mapsUrl": "https://www.google.com/maps/@30.73530,-88.05080,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Chain-link perimeter fencing with sliding/rolling gates across the truck access road into the fenced mill yard - confirmed in Street View (2023). Controlled but no staffed booth seen.",
@@ -592,7 +592,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: K-C Loudon Mill — Loudon, TN\n- Type: Tissue manufacturing mill (K-C Professional away-from-home tissue;\n  Kleenex and Scott towel products)\n- Roster address: 5600 Kimberly Way, Loudon, TN 37774\n- Resolved center: 35.76764, -84.32992",
+        "dossierExcerpt": "- Name: K-C Loudon Mill, Loudon, TN\n- Type: Tissue manufacturing mill (K-C Professional away-from-home tissue;\n  Kleenex and Scott towel products)\n- Roster address: 5600 Kimberly Way, Loudon, TN 37774\n- Resolved center: 35.76764, -84.32992",
         "mapsUrl": "https://www.google.com/maps/@35.76764,-84.32992,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or staffed checkpoint found at the property entrance in satellite or 2024 Street View. The entry road passes a landscaped monument-sign roundabout but is otherwise an open industrial driveway. Set false; flagged uncertain - a gate further inside the yard cannot be ruled out due to limited Street View coverage of the internal road.",
@@ -826,7 +826,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: K-C New Milford Mill — New Milford, CT\n- Type: Diaper & tissue manufacturing plant (Kleenex facial tissue; ~350\n  employees; operating since the late 1970s)\n- Roster address: Pickett District Rd, New Milford, CT 06776\n  (street number 58 Pickett District Rd per web research)\n- Resolved center: 41.55833, -73.41361",
+        "dossierExcerpt": "- Name: K-C New Milford Mill, New Milford, CT\n- Type: Diaper & tissue manufacturing plant (Kleenex facial tissue; ~350\n  employees; operating since the late 1970s)\n- Roster address: Pickett District Rd, New Milford, CT 06776\n  (street number 58 Pickett District Rd per web research)\n- Resolved center: 41.55833, -73.41361",
         "mapsUrl": "https://www.google.com/maps/@41.55833,-73.41361,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier arm or staffed checkpoint clearly visible from satellite. The complex shares a dense industrial park and the only Street View coverage (2019-2022) is of the office/commercial frontage on Pickett District Rd, where there is no gate. A controlled truck gate on the internal yard road cannot be confirmed or ruled out - set false, flagged uncertain.",
@@ -1058,15 +1058,15 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Confirmed: 601 Innovative Way, Owensboro, KY 42301\n- Locked center: 37.819400, -87.303200\n- The roster geocode flagged `movedMeters: 21762`, which looked alarming, but\n  this only reflects the geocoder starting from the Owensboro city centroid.\n  The supplied roster coordinates (37.819139, -87.302856) land squarely on a\n  large industrial complex, and an independent public-records coordinate\n  (37.8188, -87.3031) is essentially identical — so the roster point is\n  correct.\n- Web search confirms K-C operates a diaper / personal-care manufacturing\n  plant at 601 Innovative Way (also building a steam-production facility there\n  per local press). Satellite shows a large multi-building manufacturing +\n  distribution complex on a peninsula bounded by the Green River, with\n  extensive trailer parking — consistent with the facility type.",
+        "dossierExcerpt": "- Confirmed: 601 Innovative Way, Owensboro, KY 42301\n- Locked center: 37.819400, -87.303200\n- The roster geocode flagged `movedMeters: 21762`, which looked alarming, but\n  this only reflects the geocoder starting from the Owensboro city centroid.\n  The supplied roster coordinates (37.819139, -87.302856) land squarely on a\n  large industrial complex, and an independent public-records coordinate\n  (37.8188, -87.3031) is essentially identical, so the roster point is\n  correct.\n- Web search confirms K-C operates a diaper / personal-care manufacturing\n  plant at 601 Innovative Way (also building a steam-production facility there\n  per local press). Satellite shows a large multi-building manufacturing +\n  distribution complex on a peninsula bounded by the Green River, with\n  extensive trailer parking, consistent with the facility type.",
         "mapsUrl": "https://www.google.com/maps/@37.819400,-87.303200,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY — large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
-          "truckGate": "Open campus-style entrance off Innovative Way at the public road — Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
+          "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY, large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
+          "truckGate": "Open campus-style entrance off Innovative Way at the public road, Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
           "guardShack": "No clearly resolvable guard booth at the public-road entrance or the internal checkpoint. A small structure plus parked vehicles sits beside the internal truck route but cannot be confirmed as a staffed booth at z20-21. Classed false / remoteGs true as best estimate.",
-          "dropArea": "Extensive trailer drop yard NW of the main building — 100+ trailers parked in long rows visible at z19-20. Honest estimate of 220 capacity is approximate.",
+          "dropArea": "Extensive trailer drop yard NW of the main building, 100+ trailers parked in long rows visible at z19-20. Honest estimate of 220 capacity is approximate.",
           "dockDoors": "Long dock face on the NW edge of the main warehouse/DC building with ~50+ trailers backed in; 55 is an approximate count from z20 imagery.",
-          "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front — multiple distinct building clusters.",
+          "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front, multiple distinct building clusters.",
           "railServed": "No rail spur visible entering the property.",
           "fastLaneOpportunity": "Wide internal paved truck routes and large open apron offer room for an express/bypass lane."
         },
@@ -1316,18 +1316,18 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2790000
         },
-        "dossierExcerpt": "- Confirmed: 500 Murphy Dr, Maumelle, AR 72113\n- Locked center: 34.864832, -92.393775\n- Roster supplied only a city-level address (\"Maumelle, AR 72113\") and a\n  coordinate (34.870005, -92.397751) that sat ~700 m NW of the plant amid a\n  cluster of industrial buildings.\n- Web research (Maumelle Chamber, Metro Little Rock Alliance, Waze) confirmed\n  the address as 500 Murphy Dr and yielded an address-level coordinate\n  (34.864832, -92.393775) that lands squarely on a large white-roofed\n  manufacturing building with extensive trailer parking — consistent with the\n  ~400,000+ sq ft Huggies baby-wipes plant (~300 employees, $68M 2015\n  expansion).",
+        "dossierExcerpt": "- Confirmed: 500 Murphy Dr, Maumelle, AR 72113\n- Locked center: 34.864832, -92.393775\n- Roster supplied only a city-level address (\"Maumelle, AR 72113\") and a\n  coordinate (34.870005, -92.397751) that sat ~700 m NW of the plant amid a\n  cluster of industrial buildings.\n- Web research (Maumelle Chamber, Metro Little Rock Alliance, Waze) confirmed\n  the address as 500 Murphy Dr and yielded an address-level coordinate\n  (34.864832, -92.393775) that lands squarely on a large white-roofed\n  manufacturing building with extensive trailer parking, consistent with the\n  ~400,000+ sq ft Huggies baby-wipes plant (~300 employees, $68M 2015\n  expansion).",
         "mapsUrl": "https://www.google.com/maps/@34.864832,-92.393775,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 — K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
+          "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113, K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
           "truckGate": "Confirmed guarded truck gate at the NE corner where the access road from Murphy Dr enters. z21 imagery shows a small white guard booth astride the driveway with barrier arms across the inbound and outbound lanes.",
-          "guardShack": "Small white booth (~1-vehicle footprint) sitting in the pinch-point between the in/out lanes — staffed guard shack.",
-          "dockDoors": "Long dock bank on the NE building face with ~30-40 trailers backed in; 36 is an approximate count from z20 imagery — listed uncertain.",
-          "dropArea": "Trailers parked in rows along the north perimeter, separate from the active dock apron — a drop yard, ~30-40 trailers.",
-          "railServed": "A rail line curves along the SE edge of the property but no spur is visible entering the plant — classed not rail-served, listed uncertain.",
+          "guardShack": "Small white booth (~1-vehicle footprint) sitting in the pinch-point between the in/out lanes, staffed guard shack.",
+          "dockDoors": "Long dock bank on the NE building face with ~30-40 trailers backed in; 36 is an approximate count from z20 imagery, listed uncertain.",
+          "dropArea": "Trailers parked in rows along the north perimeter, separate from the active dock apron, a drop yard, ~30-40 trailers.",
+          "railServed": "A rail line curves along the SE edge of the property but no spur is visible entering the plant, classed not rail-served, listed uncertain.",
           "postGateStaging": "Paved area just inside the gate before the dock apron provides truck holding/queue space.",
-          "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot — classed Rural per the tie-break rule.",
-          "multipleFacilities": "One main manufacturing building with an integral eastern addition — a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
+          "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot, classed Rural per the tie-break rule.",
+          "multipleFacilities": "One main manufacturing building with an integral eastern addition, a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
         },
         "verification": {
           "verdict": "confirmed",
@@ -1548,19 +1548,19 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Confirmed: 2466 Farm Road 137 (FM 137), Paris, TX 75460\n- Locked center: 33.638900, -95.591200\n- The roster supplied only a city-level address (\"Paris, TX 75460\") and a\n  coordinate (33.660939, -95.555513) that landed in downtown Paris — about\n  5 km from the plant.\n- Web research confirmed the plant: the Paris TX Chamber business directory,\n  a Texas TDLR construction-project record (\"KIMBERLY-CLARK CORP - PARIS,\n  2466 FARM ROAD 137\"), and Yelp all give the address as 2466 FM 137.\n  Trade press confirms a 238-acre Huggies diaper plant operating since 1983\n  off SW Loop 286 in SW Paris (also makes Pull-Ups, Little Swimmers,\n  Goodnites).\n- Identification required scanning SW-Paris industrial sites. Two decoys were\n  ruled out: a lumber/scrap-processing yard with open-sided sheds",
+        "dossierExcerpt": "- Confirmed: 2466 Farm Road 137 (FM 137), Paris, TX 75460\n- Locked center: 33.638900, -95.591200\n- The roster supplied only a city-level address (\"Paris, TX 75460\") and a\n  coordinate (33.660939, -95.555513) that landed in downtown Paris, about\n  5 km from the plant.\n- Web research confirmed the plant: the Paris TX Chamber business directory,\n  a Texas TDLR construction-project record (\"KIMBERLY-CLARK CORP - PARIS,\n  2466 FARM ROAD 137\"), and Yelp all give the address as 2466 FM 137.\n  Trade press confirms a 238-acre Huggies diaper plant operating since 1983\n  off SW Loop 286 in SW Paris (also makes Pull-Ups, Little Swimmers,\n  Goodnites).\n- Identification required scanning SW-Paris industrial sites. Two decoys were\n  ruled out: a lumber/scrap-processing yard with open-sided sheds",
         "mapsUrl": "https://www.google.com/maps/@33.638900,-95.591200,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460 — K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
-          "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point — classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",
+          "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460, K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
+          "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point, classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",
           "guardShack": "A small structure with a canopy sits beside the entry road at the pinch-point but cannot be positively confirmed as a staffed guard booth at z20-21. Classed guardShack false / remoteGs true as best estimate.",
-          "entryExitSeparate": "The entry road clearly forks into two separate paved lanes approaching the plant — classed entry/exit separate; listed uncertain as it could be a single divided drive.",
-          "dropArea": "Large trailer drop yard SW of the building with multiple long rows of parked trailers — 50+.",
-          "dockDoors": "Dock bank on the building's south/SW face with trailers backed in; ~40 doors estimated from z18-20 imagery — listed uncertain.",
+          "entryExitSeparate": "The entry road clearly forks into two separate paved lanes approaching the plant, classed entry/exit separate; listed uncertain as it could be a single divided drive.",
+          "dropArea": "Large trailer drop yard SW of the building with multiple long rows of parked trailers, 50+.",
+          "dockDoors": "Dock bank on the building's south/SW face with trailers backed in; ~40 doors estimated from z18-20 imagery, listed uncertain.",
           "railServed": "No rail spur visible entering the property.",
-          "urbanRural": "Plant sits on a large wooded/field parcel off SW Loop 286 on the edge of Paris — rural per the tie-break rule.",
+          "urbanRural": "Plant sits on a large wooded/field parcel off SW Loop 286 on the edge of Paris, rural per the tie-break rule.",
           "fastLaneOpportunity": "Wide entry apron and the forked entry lanes leave room for an express/bypass lane.",
-          "multipleFacilities": "One main manufacturing building with attached/adjacent structures (utility/support buildings) — treated as a single facility, not a multi-cluster campus."
+          "multipleFacilities": "One main manufacturing building with attached/adjacent structures (utility/support buildings), treated as a single facility, not a multi-cluster campus."
         },
         "verification": {
           "verdict": "confirmed",
@@ -1691,19 +1691,19 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "- Confirmed: K-C Chester Mill, 800 W 2nd St, Chester, PA 19013\n- Locked center: 39.844200, -75.357500\n- The roster coordinate (39.841551, -75.369390) sat ~1 km W of the actual\n  mill, in downtown Chester.\n- Resolved via a documented site detail: EPA records state the mill is\n  \"bordered to the East by Harrah's Casino and Race Track.\" Harrah's\n  Philadelphia (777 Harrah's Blvd) has a distinctive harness-racing oval on\n  the Chester waterfront. The K-C mill is the large, dense paper-mill complex\n  immediately WEST of that oval, on the Delaware River — process buildings,\n  cogeneration plant, wastewater clarifiers, and paper rolls stored on the\n  riverfront pier. ~74-acre site.",
+        "dossierExcerpt": "- Confirmed: K-C Chester Mill, 800 W 2nd St, Chester, PA 19013\n- Locked center: 39.844200, -75.357500\n- The roster coordinate (39.841551, -75.369390) sat ~1 km W of the actual\n  mill, in downtown Chester.\n- Resolved via a documented site detail: EPA records state the mill is\n  \"bordered to the East by Harrah's Casino and Race Track.\" Harrah's\n  Philadelphia (777 Harrah's Blvd) has a distinctive harness-racing oval on\n  the Chester waterfront. The K-C mill is the large, dense paper-mill complex\n  immediately WEST of that oval, on the Delaware River, process buildings,\n  cogeneration plant, wastewater clarifiers, and paper rolls stored on the\n  riverfront pier. ~74-acre site.",
         "mapsUrl": "https://www.google.com/maps/@39.844200,-75.357500,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track' — the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
+          "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track', the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
           "truckGate": "The mill is fully perimeter chain-link fenced (visible all along W 2nd St in Street View). Trucks enter through fence gates; the main entrance off W 2nd St (~39.846,-75.357) opens into the mill yard. Classed truckGate true; a hard barrier arm was not clearly resolved.",
-          "guardShack": "No staffed booth positively confirmed at the W 2nd St entrance — the entry reads as an open fence gate into a parking/yard area. A small white-roofed structure in the freight yard near the rail siding (~39.8446,-75.3576) may be a scale house or gatehouse. Classed guardShack false / remoteGs true; listed uncertain.",
-          "scale": "A small structure beside the rail siding in the freight yard is consistent with a truck scale / scale house, but cannot be confirmed — listed uncertain.",
-          "railServed": "Rail tracks run into and through the mill property (siding visible by the freight yard and along the complex) — classed rail-served.",
-          "dropArea": "No dedicated trailer drop yard — dense urban mill with no room for a trailer storage lot. Only a few trailers parked near the dock building.",
-          "dockDoors": "Compact shipping dock on the warehouse building; ~18 doors estimated — listed uncertain (mill is dense and partly obscured by overhead conveyors).",
-          "backupSensitive": "Tight urban site hemmed in by the river, Harrah's casino, and city streets — little truck stacking room; a queue would spill onto W 2nd St.",
-          "multipleFacilities": "Campus of multiple connected buildings — mill, converting/warehouse, cogeneration plant, wastewater treatment — linked by overhead pipe/conveyor bridges.",
-          "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro — Urban.",
+          "guardShack": "No staffed booth positively confirmed at the W 2nd St entrance, the entry reads as an open fence gate into a parking/yard area. A small white-roofed structure in the freight yard near the rail siding (~39.8446,-75.3576) may be a scale house or gatehouse. Classed guardShack false / remoteGs true; listed uncertain.",
+          "scale": "A small structure beside the rail siding in the freight yard is consistent with a truck scale / scale house, but cannot be confirmed, listed uncertain.",
+          "railServed": "Rail tracks run into and through the mill property (siding visible by the freight yard and along the complex), classed rail-served.",
+          "dropArea": "No dedicated trailer drop yard, dense urban mill with no room for a trailer storage lot. Only a few trailers parked near the dock building.",
+          "dockDoors": "Compact shipping dock on the warehouse building; ~18 doors estimated, listed uncertain (mill is dense and partly obscured by overhead conveyors).",
+          "backupSensitive": "Tight urban site hemmed in by the river, Harrah's casino, and city streets, little truck stacking room; a queue would spill onto W 2nd St.",
+          "multipleFacilities": "Campus of multiple connected buildings, mill, converting/warehouse, cogeneration plant, wastewater treatment, linked by overhead pipe/conveyor bridges.",
+          "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro, Urban.",
           "truckGateCount": "At least two fence-gate entries observed (W 2nd St main entrance and a freight-yard access); listed uncertain."
         },
         "verification": {
@@ -1927,22 +1927,22 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "- Confirmed: K-C Jenks Mill (tissue mill + regional distribution center)\n- Locked center: 35.971500, -95.927200\n- The roster coordinate (35.995258, -95.972683) landed in a Jenks residential\n  subdivision ~10 km from the actual mill. Directory addresses (13252 S Yale\n  Pl / 13219 S Kimberly-Clark Pl, Jenks OK 74037) geocode poorly to south\n  Tulsa.\n- Resolved via a documented detail (Tulsa World): the mill \"sits on the\n  Arkansas River between Jenks and Bixby\" — a 1.8-million-sq-ft factory on 342\n  acres overlooking the river, opened 1990. Probing the Arkansas River bank SE\n  of Jenks located the matching large riverside industrial complex at\n  ~35.9715,-95.9272: a multi-building tissue mill plus a regional distribution\n  center, employee parking, and a large trailer drop yard — consistent with",
+        "dossierExcerpt": "- Confirmed: K-C Jenks Mill (tissue mill + regional distribution center)\n- Locked center: 35.971500, -95.927200\n- The roster coordinate (35.995258, -95.972683) landed in a Jenks residential\n  subdivision ~10 km from the actual mill. Directory addresses (13252 S Yale\n  Pl / 13219 S Kimberly-Clark Pl, Jenks OK 74037) geocode poorly to south\n  Tulsa.\n- Resolved via a documented detail (Tulsa World): the mill \"sits on the\n  Arkansas River between Jenks and Bixby\", a 1.8-million-sq-ft factory on 342\n  acres overlooking the river, opened 1990. Probing the Arkansas River bank SE\n  of Jenks located the matching large riverside industrial complex at\n  ~35.9715,-95.9272: a multi-building tissue mill plus a regional distribution\n  center, employee parking, and a large trailer drop yard, consistent with",
         "mapsUrl": "https://www.google.com/maps/@35.971500,-95.927200,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' — a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
+          "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby', a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
           "truckGate": "Controlled truck entrance at the SW corner where the long access road from the public road reaches the mill. z19 imagery shows a pinch-point with a gatehouse structure, marked lanes, and a parked truck in a staging position; Street View confirms a small gate building with a truck at the access road. Classed truckGate true.",
-          "guardShack": "A gatehouse / canopied structure sits beside the checkpoint pinch-point at the truck entrance — classed as a guard shack. Resolution is limited at z20-21 so listed uncertain; remoteGs false.",
-          "scale": "The structure cluster at the entrance checkpoint is consistent with a truck scale / scale house alongside the gatehouse — classed scale true but listed uncertain.",
+          "guardShack": "A gatehouse / canopied structure sits beside the checkpoint pinch-point at the truck entrance, classed as a guard shack. Resolution is limited at z20-21 so listed uncertain; remoteGs false.",
+          "scale": "The structure cluster at the entrance checkpoint is consistent with a truck scale / scale house alongside the gatehouse, classed scale true but listed uncertain.",
           "preGateStaging": "A truck is visible staged on the access road before the gate; the long approach provides pre-gate waiting room.",
-          "drivewayLong": "Long access road from the public road to the gate and on to the docks — easily holds a 3+ truck queue.",
-          "dropArea": "Large trailer drop yard E of the main building with many long rows of parked trailers — 50+.",
-          "dockDoors": "Long dock bank on the south face of the white warehouse/DC building with many trailers backed in; ~45 doors estimated — listed uncertain.",
+          "drivewayLong": "Long access road from the public road to the gate and on to the docks, easily holds a 3+ truck queue.",
+          "dropArea": "Large trailer drop yard E of the main building with many long rows of parked trailers, 50+.",
+          "dockDoors": "Long dock bank on the south face of the white warehouse/DC building with many trailers backed in; ~45 doors estimated, listed uncertain.",
           "railServed": "No clear rail spur confirmed entering the property; some linear features near the SE could be rail or road. Listed uncertain; classed false.",
-          "multipleFacilities": "Campus: integrated tissue mill, a large separate warehouse / regional distribution center, wastewater treatment plant, tank farm, and process buildings — multiple distinct building clusters.",
-          "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods — Rural.",
+          "multipleFacilities": "Campus: integrated tissue mill, a large separate warehouse / regional distribution center, wastewater treatment plant, tank farm, and process buildings, multiple distinct building clusters.",
+          "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods, Rural.",
           "fastLaneOpportunity": "Wide entry apron and long approach road give ample room for an express/bypass lane.",
-          "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point — listed uncertain."
+          "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point, listed uncertain."
         },
         "verification": {
           "verdict": "confirmed",
@@ -2158,7 +2158,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Roster coordinates were wrong. The supplied lat/lng (45.099985, -87.630662, geocode precision APPROXIMATE, moved 3554 m) landed in downtown Marinette near the Menominee River bridge — a town-center commercial block, not a paper mill.\n- Web research (Wisconsin DNR Green Tier participant page, Waze, Yelp) gave the real address: 3120 Riverside Ave, Marinette, WI 54143.\n- Satellite probe at the address coordinates confirmed a large industrial tissue / wipers manufacturing mill on the south bank of the Menominee River — multiple connected manufacturing buildings, a large warehouse, water-treatment ponds, and a trailer drop yard. Consistent with the K-C Marinette Mill (Scott Shop Towels, Wypall, Viva; ~230 employees).\n- Locked center: 45.10375, -87.65205.",
+        "dossierExcerpt": "- Roster coordinates were wrong. The supplied lat/lng (45.099985, -87.630662, geocode precision APPROXIMATE, moved 3554 m) landed in downtown Marinette near the Menominee River bridge, a town-center commercial block, not a paper mill.\n- Web research (Wisconsin DNR Green Tier participant page, Waze, Yelp) gave the real address: 3120 Riverside Ave, Marinette, WI 54143.\n- Satellite probe at the address coordinates confirmed a large industrial tissue / wipers manufacturing mill on the south bank of the Menominee River, multiple connected manufacturing buildings, a large warehouse, water-treatment ponds, and a trailer drop yard. Consistent with the K-C Marinette Mill (Scott Shop Towels, Wypall, Viva; ~230 employees).\n- Locked center: 45.10375, -87.65205.",
         "mapsUrl": "https://www.google.com/maps/@45.10375,-87.65205,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster lat/lng (45.099985,-87.630662, APPROXIMATE, moved 3554m) landed in downtown Marinette - wrong. Web research (Wisconsin DNR Green Tier, Waze, Yelp) gave 3120 Riverside Ave; satellite confirmed the K-C tissue/wipers mill complex on the south bank of the Menominee River. Locked center 45.10375,-87.65205.",
@@ -2393,7 +2393,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Roster coordinates (35.318728, -82.460953, geocode precision APPROXIMATE, moved 361 m) landed in downtown Hendersonville — a commercial block, not a plant.\n- Web research (PR Newswire, Henderson County Partnership for Economic Development, Yelp) gave the address: 32 Smyth Ave, Hendersonville, NC 28792 — the historic Balfour Mills site (founded 1924 by Capt. Ellison Adger Smyth, hence \"Smyth Ave\"), purchased by a K-C subsidiary in 1946 and renamed Berkeley Mills.\n- Satellite probe found a large nonwovens manufacturing plant roughly 3 km NW of downtown Hendersonville in the Balfour area, with extensive trailer yards and a rail spur — consistent with the K-C Berkeley Mill.\n- Locked center: 35.34630, -82.46880.",
+        "dossierExcerpt": "- Roster coordinates (35.318728, -82.460953, geocode precision APPROXIMATE, moved 361 m) landed in downtown Hendersonville, a commercial block, not a plant.\n- Web research (PR Newswire, Henderson County Partnership for Economic Development, Yelp) gave the address: 32 Smyth Ave, Hendersonville, NC 28792, the historic Balfour Mills site (founded 1924 by Capt. Ellison Adger Smyth, hence \"Smyth Ave\"), purchased by a K-C subsidiary in 1946 and renamed Berkeley Mills.\n- Satellite probe found a large nonwovens manufacturing plant roughly 3 km NW of downtown Hendersonville in the Balfour area, with extensive trailer yards and a rail spur, consistent with the K-C Berkeley Mill.\n- Locked center: 35.34630, -82.46880.",
         "mapsUrl": "https://www.google.com/maps/@35.34630,-82.46880,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster lat/lng (35.318728,-82.460953, APPROXIMATE) landed in downtown Hendersonville - wrong. Web research (PR Newswire, Henderson County EDP, Yelp) gave 32 Smyth Ave (the historic Balfour Mills / Berkeley Mill site). Satellite confirmed a large nonwovens manufacturing plant ~3 km NW of downtown. Locked center 35.34630,-82.46880.",
@@ -2631,7 +2631,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Roster coordinates (34.935342, -88.490748, geocode precision ROOFTOP, moved 54 m) landed directly on the K-C Corinth industrial campus — correct.\n- Web research (Area Development, Mississippi Development Authority) confirms the Kimberly-Clark nonwovens plant at 610 Pinecrest St, Corinth, MS 38834 — a nonwovens manufacturing facility producing components for Huggies, Pull-Ups, Poise, Depend and WypAll, with $140M+ in expansion investment announced 2020-2021.\n- Locked center: 34.93560, -88.49080.",
+        "dossierExcerpt": "- Roster coordinates (34.935342, -88.490748, geocode precision ROOFTOP, moved 54 m) landed directly on the K-C Corinth industrial campus, correct.\n- Web research (Area Development, Mississippi Development Authority) confirms the Kimberly-Clark nonwovens plant at 610 Pinecrest St, Corinth, MS 38834, a nonwovens manufacturing facility producing components for Huggies, Pull-Ups, Poise, Depend and WypAll, with $140M+ in expansion investment announced 2020-2021.\n- Locked center: 34.93560, -88.49080.",
         "mapsUrl": "https://www.google.com/maps/@34.93560,-88.49080,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster lat/lng (34.935342,-88.490748, ROOFTOP, moved 54m) landed directly on the K-C Corinth industrial campus - correct. Web research (Area Development, Mississippi Development Authority) confirms the nonwovens plant at 610 Pinecrest St (K-C invested $140M+ in expansions). Locked center 34.93560,-88.49080.",
@@ -2855,7 +2855,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coords: 39.747335, -75.310914 (APPROXIMATE — WRONG, see below)\nLocked center: 39.7385, -75.4135\nType: Distribution center (~600,000 sq ft, LEED-certified)\nGate verdict: No truck gate / no guard shack visible — open driveways\nArchetype: No-Gate DC with large drop yard and split ship/receive\nConfidence: MEDIUM\n\n---",
+        "dossierExcerpt": "Roster coords: 39.747335, -75.310914 (APPROXIMATE, WRONG, see below)\nLocked center: 39.7385, -75.4135\nType: Distribution center (~600,000 sq ft, LEED-certified)\nGate verdict: No truck gate / no guard shack visible, open driveways\nArchetype: No-Gate DC with large drop yard and split ship/receive\nConfidence: MEDIUM\n\n---",
         "mapsUrl": "https://www.google.com/maps/@39.7385,-75.4135,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster coordinates (39.747335, -75.310914) were wrong - they fell in the Bridgeport residential village ~9 km NE of the site. The K-C Logan Township DC is documented by its general contractor (Blue Rock Construction) as 'Building GHI at LogistiCenter at Logan', 2651 Oldmans Creek Rd, Logan Township NJ - a 599,500 sq ft, LEED-certified 2007 Dermody Properties build. Locked the large single-tenant white-roofed warehouse at ~39.7385,-75.4135 inside the LogistiCenter at Logan / Logan North logistics park, off I-295.",
@@ -3021,7 +3021,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coords: 33.623638, -81.847485 (ROOFTOP, moved 157 m)\nLocked center: 33.62405, -81.84755\nType: Distribution center\nGate verdict: Truck gate YES — sliding gate + chain-link perimeter fence\nGuard-shack verdict: YES — peaked-roof guard booth beside the truck lane\nArchetype: Gate + Guard Shack DC (cross-dock, split ship/receive)\nConfidence: HIGH\n\n---",
+        "dossierExcerpt": "Roster coords: 33.623638, -81.847485 (ROOFTOP, moved 157 m)\nLocked center: 33.62405, -81.84755\nType: Distribution center\nGate verdict: Truck gate YES, sliding gate + chain-link perimeter fence\nGuard-shack verdict: YES, peaked-roof guard booth beside the truck lane\nArchetype: Gate + Guard Shack DC (cross-dock, split ship/receive)\nConfidence: HIGH\n\n---",
         "mapsUrl": "https://www.google.com/maps/@33.62405,-81.84755,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Confirmed at 1043 Global Ave, Graniteville SC, in Sage Mill Industrial Park. The DC is the 'Global Avenue Logistics Center' - a 450,033 sq ft Class-A cross-dock building on 30.1 acres, leased in full by Kimberly-Clark (CoStar reports K-C renewed its 450,000 sq ft lease). Roster ROOFTOP coords landed within the building footprint; locked center ~33.62405,-81.84755.",
@@ -3215,7 +3215,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coords: 47.114289, -122.631979 (ROOFTOP, moved 1879 m)\nLocked center: 47.11280, -122.63800\nType: Distribution center\nGate verdict: Truck gate YES — guard booth mid-lane with split entry/exit\nGuard-shack verdict: YES — booth standing in the truck driveway\nArchetype: Gate + Guard Shack DC with fast-lane room (cross-dock)\nConfidence: HIGH\n\n---",
+        "dossierExcerpt": "Roster coords: 47.114289, -122.631979 (ROOFTOP, moved 1879 m)\nLocked center: 47.11280, -122.63800\nType: Distribution center\nGate verdict: Truck gate YES, guard booth mid-lane with split entry/exit\nGuard-shack verdict: YES, booth standing in the truck driveway\nArchetype: Gate + Guard Shack DC with fast-lane room (cross-dock)\nConfidence: HIGH\n\n---",
         "mapsUrl": "https://www.google.com/maps/@47.11280,-122.63800,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Confirmed: 1205 Wharf Rd, DuPont WA - 'Building 1' of The Cubes at DuPont, a 747,488 sq ft Class-A distribution facility 100% leased to Kimberly-Clark (CRG / The Registry). The Cubes is a 1.6M sq ft, 3-building park on the former Intel campus / DuPont Corporate Center in the Northwest Landing community. Building 1 is the largest of the three buildings - the big N-S cross-dock structure at ~47.1128,-122.6380. Roster ROOFTOP coords moved 1879 m and landed near the cluster center; corrected to Building 1.",

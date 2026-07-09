@@ -9,7 +9,7 @@ import { shapeBounds, shapeCentroid, shapePositions } from '@/lib/demo/geofence-
 import { GEOFENCE_COLORS } from './archetype-palette';
 
 /**
- * D3.2 + D3.3 — Driver journey replay.
+ * D3.2 + D3.3, Driver journey replay.
  *
  * Walks an animated truck dot through the site's real geofences along
  * the archetype's canonical scenario, with per-step narration and a
@@ -19,7 +19,7 @@ import { GEOFENCE_COLORS } from './archetype-palette';
  * Implementation notes:
  *   - `mode` switches which wait-time field drives the per-step delay.
  *     The replay re-times automatically on toggle without resetting
- *     the truck position (good UX — you can see the *same* sequence
+ *     the truck position (good UX, you can see the *same* sequence
  *     compress under YNS without losing your place).
  *   - The truck is a Leaflet DivIcon (no Leaflet image-path config
  *     issues). Position updates via Marker.setLatLng() in a rAF loop.
@@ -31,7 +31,7 @@ interface Props {
   site: Site;
   scenario: SiteScenario;
   mode: 'baseline' | 'yns';
-  /** Replay restart key — change to force a clean restart (Reset button). */
+  /** Replay restart key, change to force a clean restart (Reset button). */
   restartKey: number;
   /** Fires when the truck reaches the exit waypoint. */
   onComplete?: () => void;
@@ -218,7 +218,7 @@ export default function DriverJourneyReplayInner({
   const gf = site.geofences;
   const cur = scenario.steps[currentStep]!;
 
-  /** Returns the styling for one geofence layer — bolder when the truck is currently in/heading toward it. */
+  /** Returns the styling for one geofence layer, bolder when the truck is currently in/heading toward it. */
   function layerStyle(target: ScenarioStep['geofenceTarget'], idx: number = 0) {
     const isActive = cur.geofenceTarget === target && (cur.targetIndex ?? 0) === idx;
     const colorMap = {

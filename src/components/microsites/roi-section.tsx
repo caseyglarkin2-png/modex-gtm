@@ -2,7 +2,7 @@
  * Engine-backed ROI section renderer.
  *
  * The ROI engine is the only structural section type that survives the
- * M7 cleanup of legacy sections — it's still useful as a self-contained
+ * M7 cleanup of legacy sections, it's still useful as a self-contained
  * "ROI panel" the proposal pipeline drops into the brief. Memo content
  * (yns-thesis, observation, comparable, methodology, about) is rendered
  * by `MemoSectionList` over in `memo-section.tsx`.
@@ -150,7 +150,7 @@ export function ROISectionComponent({ section, accent }: { section: ROISection; 
 
                 {breakdown.throughputLines && breakdown.throughputLines.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2">Throughput Value</p>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2">Capacity value</p>
                     <div className="space-y-2">
                       {breakdown.throughputLines.map((line) => (
                         <div key={`${breakdown.archetype}-${line.label}`} className="flex items-center justify-between gap-3 text-xs">

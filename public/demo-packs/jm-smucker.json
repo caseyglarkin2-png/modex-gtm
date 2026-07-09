@@ -173,16 +173,16 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster pin (30.034172, -89.911159, ROOFTOP) landed on the north edge of a\nlarge industrial complex. Satellite probes (z16–z19) revealed a massive\nsingle-roof industrial building with attached processing equipment, silos and a\nrail spur along the north edge — consistent with a bulk coffee roasting plant,\nnot an office. Street View (captured Nov 2025) from the south frontage road\nconfirmed the Folgers/Smucker coffee roasting building, with its tall processing\ntower and a continuous chain-link perimeter fence backed by a hedge.\n\nWeb research confirms this is the Old Gentilly Rd plant — opened 1960, acquired\nby J.M. Smucker with Folgers in 2008, described as the largest bulk coffee\nfacility of its kind in the world; it shares the New Orleans operation (>700\nemployees, 300+ products) with the separate Coffee Silo Operations site.",
+        "dossierExcerpt": "The roster pin (30.034172, -89.911159, ROOFTOP) landed on the north edge of a\nlarge industrial complex. Satellite probes (z16–z19) revealed a massive\nsingle-roof industrial building with attached processing equipment, silos and a\nrail spur along the north edge, consistent with a bulk coffee roasting plant,\nnot an office. Street View (captured Nov 2025) from the south frontage road\nconfirmed the Folgers/Smucker coffee roasting building, with its tall processing\ntower and a continuous chain-link perimeter fence backed by a hedge.\n\nWeb research confirms this is the Old Gentilly Rd plant, opened 1960, acquired\nby J.M. Smucker with Folgers in 2008, described as the largest bulk coffee\nfacility of its kind in the world; it shares the New Orleans operation (>700\nemployees, 300+ products) with the separate Coffee Silo Operations site.",
         "mapsUrl": "https://www.google.com/maps/@30.0335,-89.9112,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Folgers/J.M. Smucker Old Gentilly Rd coffee roasting plant, New Orleans East. Confirmed via Street View (Nov 2025) showing the large industrial roasting building with processing tower and continuous perimeter fence/hedge, plus web research (largest bulk coffee facility of its kind in the world; opened 1960).",
           "truckGate": "Wide gated truck entrance on the SW frontage road (~30.0316,-89.9135): a fence opening with sliding/swing gate panels set back from the road and an overhead gantry sign structure spanning the driveway. Clear controlled checkpoint.",
-          "guardShack": "No distinct staffed guard booth resolved at the gate in Street View or satellite; a small structure sits near the gate apron but its function is ambiguous. Low confidence — treated as remote check-in (kiosk/call-box).",
-          "remoteGs": "Set true because a controlled truck gate is present but no clear guard shack — implies kiosk / call-box check-in. Flagged uncertain.",
+          "guardShack": "No distinct staffed guard booth resolved at the gate in Street View or satellite; a small structure sits near the gate apron but its function is ambiguous. Low confidence, treated as remote check-in (kiosk/call-box).",
+          "remoteGs": "Set true because a controlled truck gate is present but no clear guard shack, implies kiosk / call-box check-in. Flagged uncertain.",
           "shipRcvSeparate": "Dock activity is split across more than one building face (south face dock apron near 30.0328,-89.9116 and a separate SE dock band near 30.0331,-89.9109); green coffee receiving and finished-goods shipping are physically distinct per site operations.",
           "railServed": "Rail spur runs along the north edge of the property; web research confirms finished coffee ships by rail, truck and water.",
-          "multipleFacilities": "Large multi-building campus: main roasting/packaging building, separate processing/silo structures to the NE, and ancillary buildings — more than one large cluster behind the fence.",
+          "multipleFacilities": "Large multi-building campus: main roasting/packaging building, separate processing/silo structures to the NE, and ancillary buildings, more than one large cluster behind the fence.",
           "fastLaneOpportunity": "Gate driveway is wide with substantial unused paved apron width; room exists to add a bypass/express lane.",
           "dockDoorCount": "~30 estimate from overhead imagery; many bays partially obscured by building shadow and tree cover along faces. Flagged low confidence.",
           "siteAreaAcres": "73.8 acres for the full fenced manufacturing complex (building cluster plus rail-served processing yard and dock aprons). Historical 1960 footprint was ~20 acres; the operation has expanded substantially."
@@ -315,20 +315,20 @@
           "dropYard": false,
           "multiStep": true
         },
-        "dossierExcerpt": "The roster pin (29.914282, -90.114356, ROOFTOP) landed inside container stacks\nof the Port of New Orleans Napoleon Avenue Container Terminal — not on the\nSilocaf building itself. Web research established that Silocaf (\"the world's\nlargest automated silo plant for green-coffee processing\") was built in the\nearly 1990s on the cleared site of the former Public Grain Elevator, at 5240\nCoffee Dr inside the port terminal.\n\nSearching the satellite imagery for the distinctive silo cluster located the\nfacility ~190 m SE of the pin: a compact vertical industrial building with a\nvisible row of cylindrical bulk-storage silos along its south edge,\nprocessing conveyors, and a blue-roofed annex. This matches a green-coffee silo\nplant and is the correct building. Locked center: 29.9139, -90.1122.",
+        "dossierExcerpt": "The roster pin (29.914282, -90.114356, ROOFTOP) landed inside container stacks\nof the Port of New Orleans Napoleon Avenue Container Terminal, not on the\nSilocaf building itself. Web research established that Silocaf (\"the world's\nlargest automated silo plant for green-coffee processing\") was built in the\nearly 1990s on the cleared site of the former Public Grain Elevator, at 5240\nCoffee Dr inside the port terminal.\n\nSearching the satellite imagery for the distinctive silo cluster located the\nfacility ~190 m SE of the pin: a compact vertical industrial building with a\nvisible row of cylindrical bulk-storage silos along its south edge,\nprocessing conveyors, and a blue-roofed annex. This matches a green-coffee silo\nplant and is the correct building. Locked center: 29.9139, -90.1122.",
         "mapsUrl": "https://www.google.com/maps/@29.9139,-90.1122,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Silocaf / Smucker Coffee Silo Operations, the world's largest automated green-coffee silo plant, 5240-5242 Coffee Dr. Built ~1992 on the cleared site of the former Public Grain Elevator. Confirmed via satellite: a compact vertical processing building with a row of cylindrical bulk-storage silos along its south edge, conveyors and a blue-roofed annex, sitting inside the Port of New Orleans Napoleon Avenue Container Terminal.",
-          "truckGate": "TRUE but indirect — the Silocaf building has no separate fenced perimeter or its own gate. It sits deep inside the secured Port of New Orleans Napoleon Avenue Container Terminal; all truck access is controlled at the port terminal's manned gate. Classified as a controlled (gated) truck entrance at the terminal level. Flagged uncertain because the gate is the port's, not the facility's own.",
-          "guardShack": "Marked true — Port of New Orleans container terminals operate manned gatehouses with TWIC/credential checks. Not directly visible in usable imagery (no public Street View inside the secured terminal); inferred from standard port-terminal security practice. Flagged uncertain.",
-          "multiStep": "Set true — a port-terminal context typically involves a first checkpoint at the terminal gate, then a separate check-in/transfer point at the Silocaf building itself for bulk-coffee loading/unloading. Two-stage check-in is characteristic; flagged uncertain.",
-          "dockDoors": "0-10 — this is a vertical silo plant, not a flat distribution center. Bulk green coffee moves via hopper trailers, conveyors and pneumatic transfer rather than a long rhythm of dock doors. ~6 transfer/dock points estimated. Flagged low confidence.",
-          "dropArea": "0-10 — a handful of trailers (~8 visible, bulk hopper + box) parked on the west apron; no large marked drop-yard. Capacity ~14.",
-          "railServed": "TRUE — extensive Public Belt / port rail yards run immediately along the north edge; green coffee is moved by rail as well as truck and ship.",
+          "truckGate": "TRUE but indirect, the Silocaf building has no separate fenced perimeter or its own gate. It sits deep inside the secured Port of New Orleans Napoleon Avenue Container Terminal; all truck access is controlled at the port terminal's manned gate. Classified as a controlled (gated) truck entrance at the terminal level. Flagged uncertain because the gate is the port's, not the facility's own.",
+          "guardShack": "Marked true, Port of New Orleans container terminals operate manned gatehouses with TWIC/credential checks. Not directly visible in usable imagery (no public Street View inside the secured terminal); inferred from standard port-terminal security practice. Flagged uncertain.",
+          "multiStep": "Set true, a port-terminal context typically involves a first checkpoint at the terminal gate, then a separate check-in/transfer point at the Silocaf building itself for bulk-coffee loading/unloading. Two-stage check-in is characteristic; flagged uncertain.",
+          "dockDoors": "0-10, this is a vertical silo plant, not a flat distribution center. Bulk green coffee moves via hopper trailers, conveyors and pneumatic transfer rather than a long rhythm of dock doors. ~6 transfer/dock points estimated. Flagged low confidence.",
+          "dropArea": "0-10, a handful of trailers (~8 visible, bulk hopper + box) parked on the west apron; no large marked drop-yard. Capacity ~14.",
+          "railServed": "TRUE, extensive Public Belt / port rail yards run immediately along the north edge; green coffee is moved by rail as well as truck and ship.",
           "fastLaneOpportunity": "Large open paved terminal aprons surround the facility; ample room exists to organize bypass/express lanes for bulk-coffee trucks.",
           "siteAreaAcres": "6.1 acres for the Silocaf building footprint plus its immediate truck apron and silo row. The broader Napoleon Avenue Container Terminal it sits within is far larger but is a separate port property.",
-          "buildingCount": "2 — the main processing/silo building and an adjacent office/ancillary building to the NE.",
-          "confidence": "Medium overall — the facility was positively identified and the silo plant is unambiguous, but it is enclosed within a secured port terminal with no public Street View, so gate/guard-shack/lane details are inferred from port-operations context rather than directly observed."
+          "buildingCount": "2, the main processing/silo building and an adjacent office/ancillary building to the NE.",
+          "confidence": "Medium overall, the facility was positively identified and the silo plant is unambiguous, but it is enclosed within a secured port terminal with no public Street View, so gate/guard-shack/lane details are inferred from port-operations context rather than directly observed."
         },
         "verification": {
           "verdict": "confirmed",
@@ -499,22 +499,22 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster pin (33.29206, -87.082404) was geocoded APPROXIMATE and 5963 m off —\nit landed in rural woods near I-20, not on the plant. Web research established\nthe plant address as 7351 Old Tuscaloosa Highway inside the JeffMet McCalla\n(Jefferson Metropolitan Park) industrial park — a 739-acre park on the south\nside of US-11, bordered by Old Tuscaloosa Hwy/US-11 to the NW and Norfolk\nSouthern Railroad to the SE, connected to I-20/59 via McAshan Drive. Smucker\nbought ~225 acres there; the $1.1B, ~900,000 sq ft plant opened Nov 2024 as the\nlargest single-line bakery in the US.\n\nSatellite probing of the JeffMet park located a single very large modern\nfood-plant building (~33.2992, -87.0595): a complex roofline, banks of rooftop\nrefrigeration units (consistent with a frozen-product plant), extensive dock",
+        "dossierExcerpt": "The roster pin (33.29206, -87.082404) was geocoded APPROXIMATE and 5963 m off ,\nit landed in rural woods near I-20, not on the plant. Web research established\nthe plant address as 7351 Old Tuscaloosa Highway inside the JeffMet McCalla\n(Jefferson Metropolitan Park) industrial park, a 739-acre park on the south\nside of US-11, bordered by Old Tuscaloosa Hwy/US-11 to the NW and Norfolk\nSouthern Railroad to the SE, connected to I-20/59 via McAshan Drive. Smucker\nbought ~225 acres there; the $1.1B, ~900,000 sq ft plant opened Nov 2024 as the\nlargest single-line bakery in the US.\n\nSatellite probing of the JeffMet park located a single very large modern\nfood-plant building (~33.2992, -87.0595): a complex roofline, banks of rooftop\nrefrigeration units (consistent with a frozen-product plant), extensive dock",
         "mapsUrl": "https://www.google.com/maps/@33.2992,-87.0595,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "J.M. Smucker Uncrustables plant, 7351 Old Tuscaloosa Highway, JeffMet McCalla industrial park, Jefferson County AL. $1.1B, ~900,000 sq ft, opened Nov 2024 — the largest single-line bakery in the US, third Uncrustables plant. The roster pin was 5963m off (geocode flagged APPROXIMATE); resolved by web research (JeffMet McCalla park bordered by Old Tuscaloosa Hwy/US-11 NW, Norfolk Southern rail SE) and satellite — a single very large modern food-plant building with a complex roof, rooftop refrigeration banks (frozen-product plant), dock banks and a controlled gated entrance.",
-          "truckGate": "TRUE — satellite (z20-z22) shows a divided entrance road at the building's SE corner with separate marked IN and OUT lanes (directional arrows), lane striping, and a barrier-arm gate structure spanning the lanes. Clear controlled truck checkpoint.",
-          "guardShack": "TRUE (inferred) — a small structure sits beside the gate lanes; a brand-new $1.1B food plant of this scale standardly runs a manned guard booth at the truck entrance. Not perfectly resolved in imagery — flagged uncertain.",
-          "dockDoors": "50+ — extensive dock banks along the SW/west building face with ~22 trailers visible backed in or parked; a building of ~1,000,000 sq ft footprint of this type carries well over 50 doors. ~55 estimate; flagged low confidence.",
-          "dropArea": "25-50 — a dedicated trailer-parking/drop lot adjacent to the SW dock apron; ~22 trailers visible, capacity ~70 across the apron + drop lot.",
-          "drivewayLong": "Long, deep gate-to-dock approach with ample stacking room — 3+ truck queue capacity.",
+          "location": "J.M. Smucker Uncrustables plant, 7351 Old Tuscaloosa Highway, JeffMet McCalla industrial park, Jefferson County AL. $1.1B, ~900,000 sq ft, opened Nov 2024, the largest single-line bakery in the US, third Uncrustables plant. The roster pin was 5963m off (geocode flagged APPROXIMATE); resolved by web research (JeffMet McCalla park bordered by Old Tuscaloosa Hwy/US-11 NW, Norfolk Southern rail SE) and satellite, a single very large modern food-plant building with a complex roof, rooftop refrigeration banks (frozen-product plant), dock banks and a controlled gated entrance.",
+          "truckGate": "TRUE, satellite (z20-z22) shows a divided entrance road at the building's SE corner with separate marked IN and OUT lanes (directional arrows), lane striping, and a barrier-arm gate structure spanning the lanes. Clear controlled truck checkpoint.",
+          "guardShack": "TRUE (inferred), a small structure sits beside the gate lanes; a brand-new $1.1B food plant of this scale standardly runs a manned guard booth at the truck entrance. Not perfectly resolved in imagery, flagged uncertain.",
+          "dockDoors": "50+, extensive dock banks along the SW/west building face with ~22 trailers visible backed in or parked; a building of ~1,000,000 sq ft footprint of this type carries well over 50 doors. ~55 estimate; flagged low confidence.",
+          "dropArea": "25-50, a dedicated trailer-parking/drop lot adjacent to the SW dock apron; ~22 trailers visible, capacity ~70 across the apron + drop lot.",
+          "drivewayLong": "Long, deep gate-to-dock approach with ample stacking room, 3+ truck queue capacity.",
           "fastLaneOpportunity": "Wide divided entrance apron with separated in/out lanes and substantial unused paved width; clear room to add a bypass/express lane.",
           "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
-          "railServed": "FALSE — Norfolk Southern rail borders the JeffMet park to the SE, but no rail spur runs into the Smucker plant property itself; the plant ships by truck.",
-          "urbanRural": "Rural — McCalla is an edge-of-metro small community; the plant sits in an industrial park surrounded by woodland and farmland off US-11, ~24 miles from Birmingham.",
-          "buildingCount": "1 — a single very large integrated manufacturing/distribution building.",
+          "railServed": "FALSE, Norfolk Southern rail borders the JeffMet park to the SE, but no rail spur runs into the Smucker plant property itself; the plant ships by truck.",
+          "urbanRural": "Rural, McCalla is an edge-of-metro small community; the plant sits in an industrial park surrounded by woodland and farmland off US-11, ~24 miles from Birmingham.",
+          "buildingCount": "1, a single very large integrated manufacturing/distribution building.",
           "siteAreaAcres": "90.1 acres for the developed/fenced operational footprint (building + truck yards + drop lot + employee parking + retention). The full Smucker parcel is ~225 acres.",
-          "confidence": "Medium — facility identified by location, scale and frozen-plant roof signature with high confidence, but the available satellite imagery appears to be from the construction/just-opened period and the gate/guard-booth details are partly inferred; no Street View reaches the gate itself."
+          "confidence": "Medium, facility identified by location, scale and frozen-plant roof signature with high confidence, but the available satellite imagery appears to be from the construction/just-opened period and the gate/guard-booth details are partly inferred; no Street View reaches the gate itself."
         },
         "verification": {
           "verdict": "confirmed",
@@ -674,22 +674,22 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster pin (40.184331, -105.178241) was geocoded RANGE_INTERPOLATED off the\naddress 11555 N 75th St — but that address resolves to rural lake/farmland in NW\nLongmont, with no industrial plant present. Web research established the actual\nSmucker Uncrustables plant location: Smucker bought land in the **Concepts\nIndustrial Park near the NW corner of Colorado Highway 119 and Fairview\nStreet**, on the east end of Longmont in Weld County (~$4.65M land purchase).\nThe plant opened July 2019 ($340-350M, originally ~430,000 sq ft; a ~240,000 sq\nft expansion has since brought it to ~674,000 sq ft).\n\nSatellite probing of the Hwy 119 / Fairview St area located a large white\nfood-plant building (~40.164, -105.0525) with rooftop solar, extensive dock\nbanks, and a large trailer drop yard. Street View (2024) confirmed the building",
+        "dossierExcerpt": "The roster pin (40.184331, -105.178241) was geocoded RANGE_INTERPOLATED off the\naddress 11555 N 75th St, but that address resolves to rural lake/farmland in NW\nLongmont, with no industrial plant present. Web research established the actual\nSmucker Uncrustables plant location: Smucker bought land in the **Concepts\nIndustrial Park near the NW corner of Colorado Highway 119 and Fairview\nStreet**, on the east end of Longmont in Weld County (~$4.65M land purchase).\nThe plant opened July 2019 ($340-350M, originally ~430,000 sq ft; a ~240,000 sq\nft expansion has since brought it to ~674,000 sq ft).\n\nSatellite probing of the Hwy 119 / Fairview St area located a large white\nfood-plant building (~40.164, -105.0525) with rooftop solar, extensive dock\nbanks, and a large trailer drop yard. Street View (2024) confirmed the building",
         "mapsUrl": "https://www.google.com/maps/@40.164,-105.0525,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "J.M. Smucker Uncrustables plant, Concepts Industrial Park, NW corner of Colorado Highway 119 (the Diagonal) and Fairview Street, east Longmont CO (Weld County). Opened July 2019 ($340-350M, originally 430,000 sq ft; ~240,000 sq ft expansion since brings total to ~674,000 sq ft). The roster address (11555 N 75th St) geocoded to rural land NW of the actual plant; resolved via web research (Concepts Industrial Park, Hwy 119 & Fairview) and satellite — a large white food-plant building with rooftop solar, extensive dock banks and a large trailer drop yard. Confirmed by Street View 2024 showing the building and the Smucker entrance sign on Fairview St.",
-          "truckGate": "FALSE — the main entrance off Fairview St is a wide OPEN paved driveway with no barrier arm, sliding gate or checkpoint pinch-point at the road (confirmed in Street View 2024). The truck route runs in from this open driveway and loops around the south side of the building to the dock yard. No controlled gate observed at the property line.",
-          "guardShack": "FALSE — no guard booth at the entrance driveway or anywhere along the property frontage in Street View or satellite.",
-          "remoteGs": "FALSE — no truck gate, so remote check-in flag does not apply.",
-          "dockDoors": "25-50 — extensive dock banks on the east face of the building with many trailers backed in; ~45 doors estimated, flagged low confidence (some dock faces partly in shadow).",
-          "dropArea": "50+ — a large dedicated trailer drop yard on the NE of the property holds dozens of parked trailers in marked rows; ~60 trailers visible, capacity ~90.",
-          "drivewayLong": "Long, deep approach — the open driveway and internal truck route provide ample stacking room for 3+ trucks.",
+          "location": "J.M. Smucker Uncrustables plant, Concepts Industrial Park, NW corner of Colorado Highway 119 (the Diagonal) and Fairview Street, east Longmont CO (Weld County). Opened July 2019 ($340-350M, originally 430,000 sq ft; ~240,000 sq ft expansion since brings total to ~674,000 sq ft). The roster address (11555 N 75th St) geocoded to rural land NW of the actual plant; resolved via web research (Concepts Industrial Park, Hwy 119 & Fairview) and satellite, a large white food-plant building with rooftop solar, extensive dock banks and a large trailer drop yard. Confirmed by Street View 2024 showing the building and the Smucker entrance sign on Fairview St.",
+          "truckGate": "FALSE, the main entrance off Fairview St is a wide OPEN paved driveway with no barrier arm, sliding gate or checkpoint pinch-point at the road (confirmed in Street View 2024). The truck route runs in from this open driveway and loops around the south side of the building to the dock yard. No controlled gate observed at the property line.",
+          "guardShack": "FALSE, no guard booth at the entrance driveway or anywhere along the property frontage in Street View or satellite.",
+          "remoteGs": "FALSE, no truck gate, so remote check-in flag does not apply.",
+          "dockDoors": "25-50, extensive dock banks on the east face of the building with many trailers backed in; ~45 doors estimated, flagged low confidence (some dock faces partly in shadow).",
+          "dropArea": "50+, a large dedicated trailer drop yard on the NE of the property holds dozens of parked trailers in marked rows; ~60 trailers visible, capacity ~90.",
+          "drivewayLong": "Long, deep approach, the open driveway and internal truck route provide ample stacking room for 3+ trucks.",
           "fastLaneOpportunity": "Wide open entrance apron and substantial unused paved/graded width; clear room to add lanes if a controlled gate were installed.",
           "postGateStaging": "Large paved truck yard inside the property before the dock doors serves as staging.",
-          "railServed": "FALSE — no rail spur into the property; ships by truck.",
-          "urbanRural": "Rural — edge-of-Longmont location in an industrial park, bordered by farmland to the N and E, with Hwy 119 to the S. Treated as Rural per the small-town/edge-of-town rule.",
-          "buildingCount": "2 — the main manufacturing building plus an attached/adjacent warehouse-distribution section on the east side.",
-          "dropYard": "TRUE — large dedicated trailer-storage lot on the NE, distinct from the active dock apron.",
+          "railServed": "FALSE, no rail spur into the property; ships by truck.",
+          "urbanRural": "Rural, edge-of-Longmont location in an industrial park, bordered by farmland to the N and E, with Hwy 119 to the S. Treated as Rural per the small-town/edge-of-town rule.",
+          "buildingCount": "2, the main manufacturing building plus an attached/adjacent warehouse-distribution section on the east side.",
+          "dropYard": "TRUE, large dedicated trailer-storage lot on the NE, distinct from the active dock apron.",
           "siteAreaAcres": "91.3 acres for the plant parcel including the dock yard, drop lot, employee parking and undeveloped expansion land within the property."
         },
         "verification": {
@@ -854,23 +854,23 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster pin (36.764341, -86.183123, ROOFTOP) landed ~1400 m off the building\ncentroid, on the NW edge of the plant property. Satellite probing immediately\nrevealed the plant: a large irregular white food-manufacturing building with\nprocessing silos, two large trailer drop yards (NE and SW) and extensive dock\nbanks — consistent with the J.M. Smucker Uncrustables Scottsville plant. Web\nresearch confirms this as the original Uncrustables plant (opened 2004, ~180,000\nsq ft, since expanded by 80,000+ sq ft; also makes the Snack-N-Waffle line).\n\nStreet View (March 2026) confirmed the plant building and a \"Receiving /\nEmployee Entrance\" sign at the access driveway off Smucker Way. Locked center:\n36.76280, -86.18150.",
+        "dossierExcerpt": "The roster pin (36.764341, -86.183123, ROOFTOP) landed ~1400 m off the building\ncentroid, on the NW edge of the plant property. Satellite probing immediately\nrevealed the plant: a large irregular white food-manufacturing building with\nprocessing silos, two large trailer drop yards (NE and SW) and extensive dock\nbanks, consistent with the J.M. Smucker Uncrustables Scottsville plant. Web\nresearch confirms this as the original Uncrustables plant (opened 2004, ~180,000\nsq ft, since expanded by 80,000+ sq ft; also makes the Snack-N-Waffle line).\n\nStreet View (March 2026) confirmed the plant building and a \"Receiving /\nEmployee Entrance\" sign at the access driveway off Smucker Way. Locked center:\n36.76280, -86.18150.",
         "mapsUrl": "https://www.google.com/maps/@36.7628,-86.1815,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "J.M. Smucker Uncrustables plant, 299 Smucker Way, Scottsville KY (Allen County). The original (first) Uncrustables plant — opened 2004, ~180,000 sq ft, since expanded by 80,000+ sq ft; also makes Snack-N-Waffle; ~288-500 employees. Roster pin (ROOFTOP) was ~1400m off the building centroid; resolved by satellite — a large irregular white food-plant building with processing silos, two large trailer drop yards (NE and SW) and extensive dock banks. Confirmed by Street View (Mar 2026) showing the plant and a 'Receiving / Employee Entrance' sign at the access driveway.",
-          "truckGate": "FALSE — the plant access driveway off Smucker Way is signed 'Receiving / Employee Entrance' and is a wide OPEN driveway with no barrier arm, sliding gate or checkpoint pinch-point at the public road (confirmed in Street View Mar 2026). The truck route runs in openly and loops around the building to the dock yards. No controlled gate at the property line.",
-          "guardShack": "FALSE — no guard booth at the entrance driveway, the public-road intersection, or anywhere along the frontage in Street View or satellite.",
-          "remoteGs": "FALSE — no truck gate, so remote check-in does not apply.",
-          "dockDoors": "25-50 — dock banks with trailers backed in on the NE building face and a separate dock cluster on the SW face; ~38 doors estimated. Flagged low confidence (some faces shadowed).",
-          "dropArea": "50+ — two large dedicated trailer drop yards, one on the NE and one on the SW, holding dozens of trailers in marked stalls; ~65 trailers visible, capacity ~100 combined.",
-          "shipRcvSeparate": "TRUE — two physically separate dock clusters on different building faces (NE and SW), consistent with separated receiving and shipping operations.",
-          "drivewayLong": "Long, deep approach — the open access driveway plus internal truck route give ample 3+ truck stacking room.",
+          "location": "J.M. Smucker Uncrustables plant, 299 Smucker Way, Scottsville KY (Allen County). The original (first) Uncrustables plant, opened 2004, ~180,000 sq ft, since expanded by 80,000+ sq ft; also makes Snack-N-Waffle; ~288-500 employees. Roster pin (ROOFTOP) was ~1400m off the building centroid; resolved by satellite, a large irregular white food-plant building with processing silos, two large trailer drop yards (NE and SW) and extensive dock banks. Confirmed by Street View (Mar 2026) showing the plant and a 'Receiving / Employee Entrance' sign at the access driveway.",
+          "truckGate": "FALSE, the plant access driveway off Smucker Way is signed 'Receiving / Employee Entrance' and is a wide OPEN driveway with no barrier arm, sliding gate or checkpoint pinch-point at the public road (confirmed in Street View Mar 2026). The truck route runs in openly and loops around the building to the dock yards. No controlled gate at the property line.",
+          "guardShack": "FALSE, no guard booth at the entrance driveway, the public-road intersection, or anywhere along the frontage in Street View or satellite.",
+          "remoteGs": "FALSE, no truck gate, so remote check-in does not apply.",
+          "dockDoors": "25-50, dock banks with trailers backed in on the NE building face and a separate dock cluster on the SW face; ~38 doors estimated. Flagged low confidence (some faces shadowed).",
+          "dropArea": "50+, two large dedicated trailer drop yards, one on the NE and one on the SW, holding dozens of trailers in marked stalls; ~65 trailers visible, capacity ~100 combined.",
+          "shipRcvSeparate": "TRUE, two physically separate dock clusters on different building faces (NE and SW), consistent with separated receiving and shipping operations.",
+          "drivewayLong": "Long, deep approach, the open access driveway plus internal truck route give ample 3+ truck stacking room.",
           "fastLaneOpportunity": "Wide open entrance apron and substantial unused paved width; room to add lanes if a controlled gate were installed.",
           "postGateStaging": "Large open paved truck yards inside the property serve as staging before the docks.",
-          "railServed": "FALSE — no rail spur into the property; ships by truck.",
-          "urbanRural": "Rural — Scottsville is a small town; the plant sits on the edge of town surrounded by open farmland and light industry.",
-          "buildingCount": "1 — a single large integrated manufacturing building (irregular footprint from successive expansions).",
-          "dropYard": "TRUE — two dedicated trailer-storage lots distinct from the active dock aprons.",
+          "railServed": "FALSE, no rail spur into the property; ships by truck.",
+          "urbanRural": "Rural, Scottsville is a small town; the plant sits on the edge of town surrounded by open farmland and light industry.",
+          "buildingCount": "1, a single large integrated manufacturing building (irregular footprint from successive expansions).",
+          "dropYard": "TRUE, two dedicated trailer-storage lots distinct from the active dock aprons.",
           "siteAreaAcres": "70.7 acres for the plant property (building, dock aprons, two drop yards, employee parking and grounds)."
         },
         "verification": {
@@ -1047,14 +1047,14 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — fruit spreads, syrups, ice cream toppings (plus corporate HQ)\n- Address: 1 Strawberry Lane, Orrville, OH 44667\n- Resolved center: 40.84780, -81.76050 (manufacturing/distribution complex)",
+        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing, fruit spreads, syrups, ice cream toppings (plus corporate HQ)\n- Address: 1 Strawberry Lane, Orrville, OH 44667\n- Resolved center: 40.84780, -81.76050 (manufacturing/distribution complex)",
         "mapsUrl": "https://www.google.com/maps/@40.84780,-81.76050,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "South truck driveway opens directly onto the public road with no barrier arm, sliding gate, or checkpoint pinch-point (Street View Apr-2023, Jan-2025). Open uncontrolled entrance into the drop yard / dock area.",
           "guardShack": "No staffed booth at the south entrance; only a small free-standing yard sign. No booth structure visible at any campus truck access.",
           "remoteGs": "False because there is no controlled truck gate at all.",
           "drivewayLong": "Large internal yard between the open entrance and the dock bank can hold a deep queue of 3+ trucks.",
-          "fastLaneOpportunity": "Wide unmarked paved entrance apron and ample yard width — physical room to add an express lane.",
+          "fastLaneOpportunity": "Wide unmarked paved entrance apron and ample yard width, physical room to add an express lane.",
           "dockDoors": "Main dock bank on the east face shows ~14 trailers backed in; additional dock faces on other building sides bring the site total into the 25-50 band. Count is an overhead estimate.",
           "dropArea": "Multiple dedicated trailer-storage rows south and southeast of the dock bank, 70+ trailers visible, capacity well above 50.",
           "multipleFacilities": "Campus of 8+ large buildings: corporate HQ, the main manufacturing/distribution complex, original Orrville plant buildings to the north, and SE warehouse/storage structures.",
@@ -1193,7 +1193,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — peanut butter (Jif); the world's largest peanut butter factory\n- Address: 767 Winchester Rd / 767 E Third St, Lexington, KY 40505\n- Resolved center: 38.04280, -84.47780 (manufacturing complex)",
+        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing, peanut butter (Jif); the world's largest peanut butter factory\n- Address: 767 Winchester Rd / 767 E Third St, Lexington, KY 40505\n- Resolved center: 38.04280, -84.47780 (manufacturing complex)",
         "mapsUrl": "https://www.google.com/maps/@38.04280,-84.47780,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "The Jif plant is a fully fenced urban complex. Street View along the internal access road off Winchester Rd shows chain-link / ornamental perimeter fencing and rolling gates at the access points (rail-crossing gate visible open). Trucks enter through a controlled gated point.",
@@ -1206,7 +1206,7 @@
           "truckGateCount": "At least one main internal truck driveway off Winchester Rd plus a rail-side gate; counted 2, low confidence.",
           "multipleFacilities": "Confirmed campus of 9+ interconnected buildings (process plant, warehouses, office) across ~28 acres per web sources.",
           "railServed": "Active rail spur runs into the plant; Jif-branded silo and rail tracks visible in Street View.",
-          "urbanRural": "Site is within dense Lexington urban fabric — residential, commercial and arterial roads on all sides."
+          "urbanRural": "Site is within dense Lexington urban fabric, residential, commercial and arterial roads on all sides."
         },
         "verification": {
           "verdict": "confirmed",
@@ -1316,20 +1316,20 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — peanut butter / spreads\n- Address: 300 Keck Ave, New Bethlehem, PA 16242\n- Resolved center: 41.00290, -79.32600",
+        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing, peanut butter / spreads\n- Address: 300 Keck Ave, New Bethlehem, PA 16242\n- Resolved center: 41.00290, -79.32600",
         "mapsUrl": "https://www.google.com/maps/@41.00290,-79.32600,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Small old plant integrated into a residential neighborhood. Truck/dock yard reached by an open driveway off the residential street with no barrier arm, gate, or checkpoint. Orange fencing seen in Street View is temporary construction fencing, not a controlled perimeter.",
           "guardShack": "No guard booth at any plant access point; only a small free-standing Smucker monument sign at the driveway.",
-          "remoteGs": "False — no controlled truck gate exists.",
+          "remoteGs": "False, no controlled truck gate exists.",
           "drivewayShort": "Truck yard is tiny; the approach from the street to the dock holds only 1-2 trucks.",
           "backupSensitive": "Dock yard opens directly onto a narrow residential street; a truck queue would block the neighborhood street.",
-          "dockDoors": "Small operation — 3-4 trailers and a few dock positions visible; estimated 0-10 doors. Older facility, some dock faces obscured by adjacent buildings.",
+          "dockDoors": "Small operation, 3-4 trailers and a few dock positions visible; estimated 0-10 doors. Older facility, some dock faces obscured by adjacent buildings.",
           "dropArea": "Only a handful of trailers parked in the small east-side lot; no dedicated drop yard, 0-10 band.",
           "dropYard": "No dedicated trailer-storage lot; the few trailers sit in the active truck/dock yard.",
           "multipleFacilities": "Plant is a single connected cluster of 3 adjacent older industrial buildings, not a multi-cluster campus; flagged uncertain due to the merged building footprints.",
           "railServed": "No active rail spur into the plant visible (a former rail corridor runs nearby but no spur reaches the site).",
-          "urbanRural": "New Bethlehem is a small Clarion County borough (~900 residents); the plant sits within a small-town residential block — Rural."
+          "urbanRural": "New Bethlehem is a small Clarion County borough (~900 residents); the plant sits within a small-town residential block, Rural."
         },
         "verification": {
           "verdict": "confirmed",
@@ -1432,7 +1432,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Roster input: \"243 Urban St, Buffalo, NY 14211\" — geocoded 42.909089, -78.829817 (ROOFTOP, moved only 99 m).\n- Confirmed building: Satellite probes land directly on a large multi-section, multi-story historic brick manufacturing complex on Buffalo's East Side. A pink-painted grain-silo tower stands at the SW corner — a well-known landmark of this plant. A rail line runs N-S immediately along the east property edge.\n- Web confirmation: This is the J.M. Smucker Co. Milk-Bone plant at 243 Urban St — 550,000 sq ft, dog-treat operations on this site since 1925, a $53M renovation underway (new production line, oven, freezer expansion; completion ~April 2027), ~280 jobs. Locked center: 42.909089, -78.829817.",
+        "dossierExcerpt": "- Roster input: \"243 Urban St, Buffalo, NY 14211\", geocoded 42.909089, -78.829817 (ROOFTOP, moved only 99 m).\n- Confirmed building: Satellite probes land directly on a large multi-section, multi-story historic brick manufacturing complex on Buffalo's East Side. A pink-painted grain-silo tower stands at the SW corner, a well-known landmark of this plant. A rail line runs N-S immediately along the east property edge.\n- Web confirmation: This is the J.M. Smucker Co. Milk-Bone plant at 243 Urban St, 550,000 sq ft, dog-treat operations on this site since 1925, a $53M renovation underway (new production line, oven, freezer expansion; completion ~April 2027), ~280 jobs. Locked center: 42.909089, -78.829817.",
         "mapsUrl": "https://www.google.com/maps/@42.909089,-78.829817,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "243 Urban St, Buffalo NY. ROOFTOP geocode confirmed (moved 99m). Building positively identified: large multi-section/multi-story historic brick manufacturing complex on Buffalo's East Side, pink grain-silo tower landmark, rail line on the east side. Web-confirmed as the J.M. Smucker Milk-Bone plant (550,000 sq ft, dog-treat ops since 1925, $53M renovation underway, completion April 2027).",
@@ -1600,7 +1600,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Roster input: \"1200 Market St NE, Decatur, AL 35601\" — geocoded 34.607163, -86.968268 (ROOFTOP, moved 190 m).\n- Confirmed building: Satellite probes land on a large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront in Decatur, with an adjacent dock building, a chain-link-fenced trailer yard, a processing/tank cluster, and rail tracks along the south/east edge.\n- Web confirmation: This is the J.M. Smucker Meow Mix plant (operating entity Meow Mix Decatur Production LLC) at 1200 Market St NE — produces ~40% of Smucker's cat food, ~600 tons/day, ~200,000 sq ft, with a recent $21.4M expansion (admin building + new manufacturing equipment). Locked center: 34.6068, -86.9685.",
+        "dossierExcerpt": "- Roster input: \"1200 Market St NE, Decatur, AL 35601\", geocoded 34.607163, -86.968268 (ROOFTOP, moved 190 m).\n- Confirmed building: Satellite probes land on a large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront in Decatur, with an adjacent dock building, a chain-link-fenced trailer yard, a processing/tank cluster, and rail tracks along the south/east edge.\n- Web confirmation: This is the J.M. Smucker Meow Mix plant (operating entity Meow Mix Decatur Production LLC) at 1200 Market St NE, produces ~40% of Smucker's cat food, ~600 tons/day, ~200,000 sq ft, with a recent $21.4M expansion (admin building + new manufacturing equipment). Locked center: 34.6068, -86.9685.",
         "mapsUrl": "https://www.google.com/maps/@34.606800,-86.968500,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "1200 Market St NE, Decatur AL. ROOFTOP geocode confirmed (moved 190m). Building positively identified: large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront, with an adjacent dock building, a chain-link-fenced trailer yard, and ingredient/process tanks. Web-confirmed as the J.M. Smucker Meow Mix plant (Meow Mix Decatur Production LLC) - ~40% of Smucker's cat food, ~600 tons/day, recent $21.4M expansion.",
@@ -1785,7 +1785,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Roster input: address only \"Topeka, KS 66619\", APPROXIMATE geocode 38.948122, -95.693136 (moved 2,646 m) — landed in south-central Topeka, the WRONG area.\n- Resolution: Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 — the Big Heart Pet Brands / J.M. Smucker pet food plant and distribution center (formerly Del Monte Foods, in Topeka 55+ years; produces Meow Mix, Milk-Bone and other dry pet food/snacks; ~1.2M sq ft; ~350 employees; a $20.5M expansion announced). Confirmed coordinates 39.087119, -95.722563 (a directory listing for 2200 NW Brickyard Rd).\n- Disambiguation: Topeka also has a very large Goodyear tire plant at 2000 NW US-24, ~2 km ENE — an even bigger multi-section plant. Care was taken NOT to audit the Goodyear building. The audited site is the Big Heart/Smucker pet-food campus on NW Brickyard Rd.",
+        "dossierExcerpt": "- Roster input: address only \"Topeka, KS 66619\", APPROXIMATE geocode 38.948122, -95.693136 (moved 2,646 m), landed in south-central Topeka, the WRONG area.\n- Resolution: Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618, the Big Heart Pet Brands / J.M. Smucker pet food plant and distribution center (formerly Del Monte Foods, in Topeka 55+ years; produces Meow Mix, Milk-Bone and other dry pet food/snacks; ~1.2M sq ft; ~350 employees; a $20.5M expansion announced). Confirmed coordinates 39.087119, -95.722563 (a directory listing for 2200 NW Brickyard Rd).\n- Disambiguation: Topeka also has a very large Goodyear tire plant at 2000 NW US-24, ~2 km ENE, an even bigger multi-section plant. Care was taken NOT to audit the Goodyear building. The audited site is the Big Heart/Smucker pet-food campus on NW Brickyard Rd.",
         "mapsUrl": "https://www.google.com/maps/@39.087119,-95.722563,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster address was only 'Topeka, KS 66619' with an APPROXIMATE geocode (moved 2646m) landing on south-central Topeka - WRONG location. Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 (Big Heart Pet Brands / J.M. Smucker pet food plant + distribution center, formerly Del Monte). Confirmed coords 39.087119, -95.722563. NOTE: distinct from the nearby Goodyear tire plant at 2000 NW US-24 (the very large multi-section plant ~2km ENE). Building positively identified: large multi-section manufacturing plant joined to a large distribution center, extensive trailer drop yards, ingredient silos along the rail.",

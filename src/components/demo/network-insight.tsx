@@ -2,7 +2,7 @@ import type { DemoPack } from '@/lib/demo/pack-schema';
 import { RoiCtaButton } from './roi-cta-button';
 
 /**
- * Network band — the "what's MY opportunity?" beat between the hero run and the
+ * Network band, the "what's MY opportunity?" beat between the hero run and the
  * interactive atlas. Surfaces THIS network's audited friction profile tied to
  * the real YNS levers.
  *
@@ -30,7 +30,7 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
   const dropReady = count((c) => c.dropYard === true);
   const fastLane = count((c) => c.fastLaneOpportunity === true);
 
-  // The friction signals to surface — each tied to a real YNS lever. Pick the
+  // The friction signals to surface, each tied to a real YNS lever. Pick the
   // ones that actually fire for this network (>0), ranked by prevalence.
   const signals = [
     {
@@ -54,7 +54,7 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
     {
       key: 'dropReady',
       n: dropReady,
-      label: `already run drop yards — drop-and-hook ready`,
+      label: `already run drop yards, drop-and-hook ready`,
       lever: 'where the 48→24 min drop-and-hook win lands',
     },
     {
@@ -78,7 +78,7 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
           The silo tax
         </div>
         <h2 className="mt-1.5 text-xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-lg">
-          What the handoffs cost across your network — and what removing them is worth
+          What the handoffs cost across your network, and what removing them is worth
         </h2>
 
         {/* Friction signals → YNS levers */}
@@ -99,7 +99,7 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
           ))}
         </div>
 
-        {/* Layer 4 — the dollar value is NOT stated on /demo. We hand the
+        {/* Layer 4, the dollar value is NOT stated on /demo. We hand the
             "what is it worth" question to the editable model at /roi, seeded
             with this pack, rather than asserting a network figure here. */}
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5">

@@ -68,7 +68,7 @@ interface MemoContentsRailProps {
 
 /**
  * Sticky left-rail table of contents (desktop ≥1024px only). Scrollspy via
- * IntersectionObserver — section is "active" when its top crosses 30% of
+ * IntersectionObserver, section is "active" when its top crosses 30% of
  * the viewport. Active link gets the brand accent + a 2px hairline marker.
  */
 export function MemoContentsRail({ entries }: MemoContentsRailProps) {

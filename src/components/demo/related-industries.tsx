@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { DemoPackSchema } from '@/lib/demo/pack-schema';
 
 /**
- * L.T2 — Related-industries rail. Server component (does fs reads), so it
+ * L.T2, Related-industries rail. Server component (does fs reads), so it
  * renders from the microsite page, not inside the client DemoSurface.
  *
  * Picks 3 related audited networks: same pack archetype first, ordered by

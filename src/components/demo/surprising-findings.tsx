@@ -1,7 +1,7 @@
 import type { DemoPack } from '@/lib/demo/pack-schema';
 
 /**
- * Layer 6 — "What surprised us." The turn. The forward-worthy moment of the
+ * Layer 6, "What surprised us." The turn. The forward-worthy moment of the
  * demo: three true, non-obvious network-shape findings drawn from the actual
  * audit, asserted as patterns that hold across the sample. This is the thing a
  * champion pastes into Slack with "see what they found about our yards."
@@ -11,7 +11,7 @@ import type { DemoPack } from '@/lib/demo/pack-schema';
  * not-yet-authored pack degrades to nothing rather than a thin, unconvincing
  * section. Placed AFTER the atlas/build sections in the page flow.
  *
- * No dollar figures, no modeled outputs — these are observed-pattern reads.
+ * No dollar figures, no modeled outputs, these are observed-pattern reads.
  */
 export function SurprisingFindings({ pack }: { pack: DemoPack }) {
   const findings = pack.account.surprisingFindings ?? [];

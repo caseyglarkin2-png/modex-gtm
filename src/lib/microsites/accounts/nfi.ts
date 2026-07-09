@@ -1,9 +1,9 @@
 /**
- * NFI Industries — ABM Microsite Data (registry entry)
+ * NFI Industries, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/nfi.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/nfi resolves its
  * accountName FK and /for/nfi renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const nfi: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for NFI Industries — Yard Network Audit',
+  pageTitle: 'YardFlow for NFI Industries, Yard Network Audit',
   metaDescription:
     '14 NFI Industries facilities mapped from public satellite imagery: 1,673 dock doors and room for about 3,709 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const nfi: AccountMicrositeData = {
       hypothesis:
         'NFI runs freight yards on behalf of the retailers and manufacturers it serves, across more than 300 North American facilities. We core-sampled 14 of its largest and most yard-intensive sites, from Lehigh Valley cross-docks to Inland Empire import DCs and Port of Savannah logistics terminals, holding 1,673 dock doors and room for about 3,709 trailers. Control across the network is uneven. Ten of the 14 sit behind a truck gate, but only 4 run a staffed booth, and several sit open to the road. YardFlow puts one gate-to-dock standard across every yard NFI operates, no matter whose freight is moving through it.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '14 NFI Industries facilities, mapped from public satellite imagery',
       accountSlug: 'nfi',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'NFI operates 300+ North American facilities; we audited 14 of the largest and most yard-intensive (dedicated DCs, port logistics, Port of Savannah import warehouses, a fulfillment center). The rest follow the same gate/dock archetypes.',
     },
     {
@@ -86,14 +86,14 @@ export const nfi: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at NFI Industries, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -104,7 +104,7 @@ export const nfi: AccountMicrositeData = {
     facilityCount: '14 audited sites of 300+ North American facilities',
     facilityTypes: ['Distribution Center', 'Cross-Dock', 'Import Warehouse', 'Port Logistics'],
     geographicSpread: 'North America. Audited set spans Lehigh Valley cross-docks, Inland Empire import DCs, and Port of Savannah logistics terminals.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 1,673 dock doors and room for ~3,709 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 1,673 dock doors and room for ~3,709 trailers.',
   },
 
   freight: {

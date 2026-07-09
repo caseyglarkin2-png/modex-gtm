@@ -27,13 +27,13 @@ export interface VideoFollowUp {
 interface MemoAudioBriefProps {
   /** Public path to the audio (e.g. "/audio/yard-network-brief.mp3"). */
   src: string;
-  /** Chapter table — rendered as the click-to-seek list. */
+  /** Chapter table, rendered as the click-to-seek list. */
   chapters: AudioChapter[];
   /** Eyebrow label. Default: "Audio register". */
   eyebrow?: string;
   /** Heading shown in Fraunces. */
   heading?: string;
-  /** One- or two-sentence intro. Default supplied — can be overridden per account. */
+  /** One- or two-sentence intro. Default supplied, can be overridden per account. */
   intro?: ReactNode;
   /** Accent color override; falls back to inheriting `--memo-accent` from MemoShell. */
   accentColor?: string;
@@ -47,7 +47,7 @@ interface MemoAudioBriefProps {
 }
 
 /**
- * "Audio register" — the spoken version of the memo.
+ * "Audio register", the spoken version of the memo.
  *
  * The player is the browser's own native `<audio controls>`. We used to wrap
  * it in a bespoke accent-colored play disk, tape-strip scrubber, and speed
@@ -57,11 +57,11 @@ interface MemoAudioBriefProps {
  * `<video controls>` too.
  *
  * Tracking surfaces:
- *   data-ms-section-id="audio"     — counted as a viewed section by the
+ *   data-ms-section-id="audio"    , counted as a viewed section by the
  *                                    intersection-observer in use-microsite-tracker.
- *   data-ms-cta-id="audio-chapter" — chapter seek counted as a CTA (the
+ *   data-ms-cta-id="audio-chapter", chapter seek counted as a CTA (the
  *                                    chapter id rides on data-chapter-id).
- *   audioProgressPct               — captured by the tracker directly off the
+ *   audioProgressPct              , captured by the tracker directly off the
  *                                    <audio> element (querySelector + timeupdate),
  *                                    so playback engagement is still measured.
  *
@@ -161,7 +161,7 @@ export function MemoAudioBrief({
         </audio>
       </div>
 
-      {/* Chapter list — each row seeks the same native element. */}
+      {/* Chapter list, each row seeks the same native element. */}
       <ol className={`mt-2 ${FONT_SANS} text-[15px] text-[#4a4641]`}>
         {chapters.map((ch, i) => {
           const active = i === activeChapterIdx;

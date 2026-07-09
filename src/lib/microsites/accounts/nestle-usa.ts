@@ -2,14 +2,14 @@
  * Internal competitive intelligence (NOT for prospect-facing surfaces):
  * Nestle is named in the Kaleris/PINC Daimler case study customer list
  * (2025 PDF). This is a Nestlé Group-level customer-list signal, not a
- * site-confirmed Nestlé USA deployment — but it is enough that Nestlé USA
+ * site-confirmed Nestlé USA deployment, but it is enough that Nestlé USA
  * operators are familiar with the PINC/Kaleris yard category.
  *
- * Persona context: Jeff Kurtenbach (VP Supply Chain, Nestlé USA) — 40+
+ * Persona context: Jeff Kurtenbach (VP Supply Chain, Nestlé USA), 40+
  * years experience; Frito-Lay finance roots (1983–1990 Plant Controller);
  * pre-2021 tenure plausibly included Nestlé Waters North America.
  *
- * CRITICAL ANCHOR CONNECTION (internal only — never surface to memo):
+ * CRITICAL ANCHOR CONNECTION (internal only, never surface to memo):
  * Nestlé Waters North America was divested in 2021 to One Rock + Metropoulos
  * → BlueTriton → Primo Brands (2024 merger). The unnamed 237-facility CPG
  * anchor customer YardFlow serves is the direct descendant of this divested
@@ -20,12 +20,12 @@
  * lineage, or any anchor-specific facility names in renderable content.
  *
  * Operational backdrop: Glendale AZ ($675M beverage factory + DC, opened
- * mid-2024, Nestlé USA's 20th factory — net-new greenfield); Gaffney SC
+ * mid-2024, Nestlé USA's 20th factory, net-new greenfield); Gaffney SC
  * ($150M expansion announced Nov 2024); Solon OH restructuring (216 layoffs
  * Jan 2024 shifted production to Gaffney and Jonesboro); Nestlé Group SAP
  * S/4HANA Cloud digital core upgrade scaling to ~90% of 335 global factories.
  *
- * Pitch shape: COEXISTENCE WEDGE — network-tier operating model above the
+ * Pitch shape: COEXISTENCE WEDGE, network-tier operating model above the
  * site-level yard tools that exist at parts of the Nestlé USA network.
  * Glendale greenfield is the cleanest pilot embed; the $3B... wait, the
  * Nestle US capex doesn't have a single "3B" number. Use Glendale + the
@@ -34,24 +34,24 @@
  * This intel powers the cold-email coexistence framing (see
  * docs/research/jeff-kurtenbach-nestle-usa-dossier.md). It must not appear
  * in any prospect-facing surface. The memo references "the site-level yard
- * tools you operate at parts of the network" — never PINC/Kaleris.
+ * tools you operate at parts of the network", never PINC/Kaleris.
  */
 
 /**
- * Nestlé USA — ABM Microsite Data
- * Quality Tier: B (probable Kaleris customer — Nestlé Group named in Daimler
+ * Nestlé USA, ABM Microsite Data
+ * Quality Tier: B (probable Kaleris customer, Nestlé Group named in Daimler
  *                  case study customer list; site-level Nestlé USA deployment
  *                  not specifically confirmed in public materials)
- * Pitch shape: coexistence wedge — network-tier operating model above
+ * Pitch shape: coexistence wedge, network-tier operating model above
  *              site-level yard tools, with the Glendale AZ greenfield as
  *              the cleanest first embed
  * Angle: YARD MANAGEMENT (multi-temp frozen / refrigerated / ambient dock
  *        arbitration; foodservice + retail lane mixing; the SAP S/4HANA
- *        digital core yard-data gap; Glendale greenfield SOP) — NOT driver
+ *        digital core yard-data gap; Glendale greenfield SOP), NOT driver
  *        experience
  * Stakeholder vocabulary: Frito-Lay-finance operator register
  *        (Kurtenbach's 1983–1990 Frito-Lay Plant Controller roots; long
- *        Nestlé tenure) — cycle time, dock-door turnover, route productivity,
+ *        Nestlé tenure), cycle time, dock-door turnover, route productivity,
  *        labor-hour-per-case
  */
 
@@ -72,7 +72,7 @@ export const nestleUsa: AccountMicrositeData = {
 
   pageTitle: 'YardFlow for Nestlé USA - The Network-Tier Yard Layer Above the Sites',
   metaDescription:
-    'How a network-tier yard operating model lands on top of the site-level yard tools that exist at parts of Nestlé USA\'s 20-factory U.S. network — closing the data gap the SAP S/4HANA Cloud digital core does not address, and embedding cleanly into the Glendale AZ greenfield factory-plus-DC that opened mid-2024.',
+    'How a network-tier yard operating model lands on top of the site-level yard tools that exist at parts of Nestlé USA\'s 20-factory U.S. network, closing the data gap the SAP S/4HANA Cloud digital core does not address, and embedding cleanly into the Glendale AZ greenfield factory-plus-DC that opened mid-2024.',
 
   sections: [
     { type: 'yns-thesis' },
@@ -81,19 +81,19 @@ export const nestleUsa: AccountMicrositeData = {
       headline: 'What we observed about the Nestlé USA network',
       composition: [
         { label: 'U.S. manufacturing footprint', value: '~20 factories across 28 states post-portfolio-pruning (Waters divested 2021; US confectionery to Ferrero 2018; US ice cream to Froneri 2019; global ice-cream tail to Froneri announced Feb 2026). What remains: frozen meals + pizza (Solon OH, Jonesboro AR, Gaffney SC, Trenton MO, Springville UT), coffee + creamers + beverages (Anderson IN, Glendale AZ, Suffolk VA), confections (Toll House, Nesquik, Carnation), nutritional (Boost, Carnation Breakfast Essentials)' },
-        { label: 'Glendale AZ greenfield', value: '$675M new beverage factory + distribution center under a single roof — Nestlé USA\'s 20th food & beverage factory, opened mid-2024. Coffee mate, Natural Bliss, Starbucks At Home creamers. Net-new yard built greenfield; SOP being defined right now' },
-        { label: 'Solon OH consolidation', value: '216 layoffs announced January 2024; production shifted to Gaffney SC and Jonesboro AR. Solon plant remains active with dedicated lines for the Out-of-Home / Nestlé Professional foodservice business — and the campus continues to house U.S. Supply Chain HQ' },
-        { label: 'Gaffney SC expansion', value: '$150M expansion announced November 2024 for Stouffer\'s, Hot Pockets, Lean Cuisine, Tombstone, California Pizza Kitchen, Jack\'s Pizza, DiGiorno. Net-new production capacity routed through the existing Gaffney yard surface — same site, more trucks' },
-        { label: 'Nestlé Group SAP S/4HANA Cloud digital core', value: 'Manufacturing system scaled to ~90% of 335 global factories. AI at scale across the supply chain. Yard data between gate and dock is the systems gap the digital core does not address — TMS/WMS/ERP backbone is unified; yard sits outside' },
-        { label: 'S/4HANA coverage shape', value: 'The unified core runs Planning, Forecast, and Manufacturing inside the plant, and Logistics from the dock outward — a single global standard already touching ~90% of 335 factories. What it does not host directly is the yard between the gate and the dock, where trailer arrival, multi-temp dock arbitration, and foodservice-versus-retail-DC lane mixing decide whether the in-plant throughput the core has earned actually leaves the building on cycle' },
-        { label: 'Network of the Future', value: 'The Group framing for the post-S/4HANA operating model — single global standards, AI at scale, network-tier decision-making above site-level execution. The network-tier yard operating layer is the missing tile in that frame: site-level yard tools at parts of the network do what they were bought to do; the layer above them that arbitrates across plants and feeds the core is the unfilled adjacency' },
-        { label: 'Existing yard-tech layer', value: 'Site-level yard tools exist at parts of the Nestlé USA network (Nestlé is named at the Group level in the published yard-tech customer record). The network-tier operating model above the site-level tools is unsolved — and the Glendale greenfield is uncommitted yard technology with the SOP being written this quarter' },
+        { label: 'Glendale AZ greenfield', value: '$675M new beverage factory + distribution center under a single roof, Nestlé USA\'s 20th food & beverage factory, opened mid-2024. Coffee mate, Natural Bliss, Starbucks At Home creamers. Net-new yard built greenfield; SOP being defined right now' },
+        { label: 'Solon OH consolidation', value: '216 layoffs announced January 2024; production shifted to Gaffney SC and Jonesboro AR. Solon plant remains active with dedicated lines for the Out-of-Home / Nestlé Professional foodservice business, and the campus continues to house U.S. Supply Chain HQ' },
+        { label: 'Gaffney SC expansion', value: '$150M expansion announced November 2024 for Stouffer\'s, Hot Pockets, Lean Cuisine, Tombstone, California Pizza Kitchen, Jack\'s Pizza, DiGiorno. Net-new production capacity routed through the existing Gaffney yard surface, same site, more trucks' },
+        { label: 'Nestlé Group SAP S/4HANA Cloud digital core', value: 'Manufacturing system scaled to ~90% of 335 global factories. AI at scale across the supply chain. Yard data between gate and dock is the systems gap the digital core does not address, TMS/WMS/ERP backbone is unified; yard sits outside' },
+        { label: 'S/4HANA coverage shape', value: 'The unified core runs Planning, Forecast, and Manufacturing inside the plant, and Logistics from the dock outward, a single global standard already touching ~90% of 335 factories. What it does not host directly is the yard between the gate and the dock, where trailer arrival, multi-temp dock arbitration, and foodservice-versus-retail-DC lane mixing decide whether the in-plant production capacity the core has earned actually leaves the building on cycle' },
+        { label: 'Network of the Future', value: 'The Group framing for the post-S/4HANA operating model, single global standards, AI at scale, network-tier decision-making above site-level execution. The network-tier yard operating layer is the missing tile in that frame: site-level yard tools at parts of the network do what they were bought to do; the layer above them that arbitrates across plants and feeds the core is the unfilled adjacency' },
+        { label: 'Existing yard-tech layer', value: 'Site-level yard tools exist at parts of the Nestlé USA network (Nestlé is named at the Group level in the published yard-tech customer record). The network-tier operating model above the site-level tools is unsolved, and the Glendale greenfield is uncommitted yard technology with the SOP being written this quarter' },
       ],
       hypothesis:
-        'The interesting thing about the Nestlé USA yard math is not whether the site-level yard tools at parts of the network work — they do, and Nestlé is named at the Group level in the published yard-tech customer record, which means the site-level case has been answered in some form. The interesting thing is that the SAP S/4HANA Cloud digital core has scaled across ~90% of 335 global factories and now runs Planning, Forecast, and Manufacturing inside the plant alongside Logistics from the dock outward. The portfolio churn that consumed supply-chain attention for the better part of a decade has receded — Waters divested 2021, US confectionery to Ferrero 2018, US ice cream to Froneri 2019, the global ice-cream tail announced for exit February 2026 — and what remains is the operationally cleanest portfolio Nestlé USA has run in years. The systems backbone is unified. The portfolio is settled. The yard between the gate and the dock is the layer that has not yet caught the same operating discipline.\n\nThat gap got more expensive in the last twenty-four months. The 216-headcount Solon restructuring in January 2024 shifted production into Gaffney SC and Jonesboro AR — the same dock counts now absorbing more trailers at the surviving facilities. The $150M Gaffney expansion announced November 2024 lands more net-new throughput through that same yard surface. The Glendale AZ greenfield ($675M, 630K sq ft, mid-2024 opening — Nestlé USA\'s 20th US factory and a factory-plus-DC under a single roof) is a brand-new yard with no legacy workflow. The S/4HANA digital core is feeding decisions inside the plant on the cleanest data Nestlé has ever had, and the yard outside it is the one place that data does not directly land. Site-level yard tools do what they were bought to do at the four walls; the network-tier operating model above them — the one that arbitrates dock priority across plants when Solon volume re-routes to Gaffney and Jonesboro, and that feeds the S/4HANA core a clean yard signal — is the unfilled adjacency.\n\nTwo timing windows are open simultaneously, and they are not always open together. Glendale opened mid-2024 with SOPs still being written — the cheapest moment to embed a network-tier operating layer is now, before eighteen months of operating habit settles around the as-built yard. The Solon-to-Gaffney/Jonesboro consolidation is the canonical pressure-test for the layer above the site tools, and the throughput-per-dock math is most visible at the absorbing sites this year. A third pattern compounds at the Solon plant itself, which remains active for the Out-of-Home / Nestlé Professional foodservice lines: Sysco, US Foods, and Performance Food Group run on different appointment cadences than retail-DC outbound, and when both compete for the same yard surface the legacy site tools do not natively distinguish them. The conversation is about the layer above the sites and the data the S/4HANA core does not currently receive — not about replacing what works at the four walls.',
+        'The interesting thing about the Nestlé USA yard math is not whether the site-level yard tools at parts of the network work, they do, and Nestlé is named at the Group level in the published yard-tech customer record, which means the site-level case has been answered in some form. The interesting thing is that the SAP S/4HANA Cloud digital core has scaled across ~90% of 335 global factories and now runs Planning, Forecast, and Manufacturing inside the plant alongside Logistics from the dock outward. The portfolio churn that consumed supply-chain attention for the better part of a decade has receded, Waters divested 2021, US confectionery to Ferrero 2018, US ice cream to Froneri 2019, the global ice-cream tail announced for exit February 2026, and what remains is the operationally cleanest portfolio Nestlé USA has run in years. The systems backbone is unified. The portfolio is settled. The yard between the gate and the dock is the layer that has not yet caught the same operating discipline.\n\nThat gap got more expensive in the last twenty-four months. The 216-headcount Solon restructuring in January 2024 shifted production into Gaffney SC and Jonesboro AR, the same dock counts now absorbing more trailers at the surviving facilities. The $150M Gaffney expansion announced November 2024 lands more net-new production capacity through that same yard surface. The Glendale AZ greenfield ($675M, 630K sq ft, mid-2024 opening, Nestlé USA\'s 20th US factory and a factory-plus-DC under a single roof) is a brand-new yard with no legacy workflow. The S/4HANA digital core is feeding decisions inside the plant on the cleanest data Nestlé has ever had, and the yard outside it is the one place that data does not directly land. Site-level yard tools do what they were bought to do at the four walls; the network-tier operating model above them, the one that arbitrates dock priority across plants when Solon volume re-routes to Gaffney and Jonesboro, and that feeds the S/4HANA core a clean yard signal, is the unfilled adjacency.\n\nTwo timing windows are open simultaneously, and they are not always open together. Glendale opened mid-2024 with SOPs still being written, the cheapest moment to embed a network-tier operating layer is now, before eighteen months of operating habit settles around the as-built yard. The Solon-to-Gaffney/Jonesboro consolidation is the canonical pressure-test for the layer above the site tools, and the production capacity-per-dock math is most visible at the absorbing sites this year. A third pattern compounds at the Solon plant itself, which remains active for the Out-of-Home / Nestlé Professional foodservice lines: Sysco, US Foods, and Performance Food Group run on different appointment cadences than retail-DC outbound, and when both compete for the same yard surface the legacy site tools do not natively distinguish them. The conversation is about the layer above the sites and the data the S/4HANA core does not currently receive, not about replacing what works at the four walls.',
       pullQuote: 'The systems backbone is unified. The portfolio is settled. The yard is the layer that has not yet caught the same operating discipline.',
       caveat:
-        'This is built from Nestlé USA / Nestlé Group public disclosures, the Solon restructuring + Gaffney expansion + Glendale opening press materials, the Nestlé Group SAP S/4HANA Cloud digital-core announcement, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which sites currently run site-level yard tools and at what depth, where the Solon-to-Gaffney/Jonesboro volume re-allocation is putting the most yard pressure, and how the Glendale greenfield SOP is being scoped today.',
+        'This is built from Nestlé USA / Nestlé Group public disclosures, the Solon restructuring + Gaffney expansion + Glendale opening press materials, the Nestlé Group SAP S/4HANA Cloud digital-core announcement, and reasonable network inference. We may be wrong about parts of it, the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which sites currently run site-level yard tools and at what depth, where the Solon-to-Gaffney/Jonesboro volume re-allocation is putting the most yard pressure, and how the Glendale greenfield SOP is being scoped today.',
     },
     {
       type: 'artifact',
@@ -110,7 +110,7 @@ export const nestleUsa: AccountMicrositeData = {
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you cannot recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return-flow logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-tier yard operating model on top of their existing site-level systems. The Nestlé USA operating profile is shape-similar — multi-site, multi-temp (frozen + refrigerated + ambient + foodservice), 3PL-DC-dependent, mature site-level yard tools where they exist — but with significantly more forgiving freight economics per trailer. If a network operating model can run on water — the hardest CPG freight in the country — the read-across to a 20-factory multi-temp Nestlé USA network running on operating-model thinking is the easier lift. The closing read-across is the systems shape: Primo has already produced the yard data the digital core has to act on, and that is exactly the signal the Nestlé Group SAP S/4HANA Cloud core — running Planning, Forecast, Manufacturing, and Logistics across ~90% of 335 factories — does not currently receive from the gate-to-dock layer; closing that loop is the wedge.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you cannot recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return-flow logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization, they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-tier yard operating model on top of their existing site-level systems. The Nestlé USA operating profile is shape-similar, multi-site, multi-temp (frozen + refrigerated + ambient + foodservice), 3PL-DC-dependent, mature site-level yard tools where they exist, but with significantly more forgiving freight economics per trailer. If a network operating model can run on water, the hardest CPG freight in the country, the read-across to a 20-factory multi-temp Nestlé USA network running on operating-model thinking is the easier lift. The closing read-across is the systems shape: Primo has already produced the yard data the digital core has to act on, and that is exactly the signal the Nestlé Group SAP S/4HANA Cloud core, running Planning, Forecast, Manufacturing, and Logistics across ~90% of 335 factories, does not currently receive from the gate-to-dock layer; closing that loop is the wedge.',
       metrics: [
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
@@ -118,7 +118,7 @@ export const nestleUsa: AccountMicrositeData = {
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
       timeline:
-        '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Nestlé USA are different in kind: (1) Glendale AZ as the greenfield embed — opened mid-2024, SOP still being written, no legacy yard workflow to displace; (2) Gaffney SC or Jonesboro AR as the consolidation-pressure embed — these are the sites absorbing Solon volume against the same dock surface, and the throughput-per-dock math is most visible there. We would expect the network to make sense of itself within two to four quarters of the pilot, with the operating model feeding cleanly into the Nestlé Group SAP S/4HANA digital core via the yard-data layer the core does not directly host.',
+        '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Nestlé USA are different in kind: (1) Glendale AZ as the greenfield embed, opened mid-2024, SOP still being written, no legacy yard workflow to displace; (2) Gaffney SC or Jonesboro AR as the consolidation-pressure embed, these are the sites absorbing Solon volume against the same dock surface, and the production capacity-per-dock math is most visible there. We would expect the network to make sense of itself within two to four quarters of the pilot, with the operating model feeding cleanly into the Nestlé Group SAP S/4HANA digital core via the yard-data layer the core does not directly host.',
       referenceAvailable: true,
     },
     {
@@ -154,13 +154,13 @@ export const nestleUsa: AccountMicrositeData = {
           id: 'nestle-sap-s4hana',
           source: 'Nestlé Group SAP S/4HANA Cloud digital-core upgrade (2025)',
           confidence: 'public',
-          detail: 'Major upgrade of global digital core based on SAP S/4HANA Cloud; enables AI at scale across supply chain; manufacturing system already scaled to ~90% of 335 global factories. Unified TMS/WMS/ERP backbone — yard data between gate and dock is the systems gap the digital core does not address directly.',
+          detail: 'Major upgrade of global digital core based on SAP S/4HANA Cloud; enables AI at scale across supply chain; manufacturing system already scaled to ~90% of 335 global factories. Unified TMS/WMS/ERP backbone, yard data between gate and dock is the systems gap the digital core does not address directly.',
         },
         {
           id: 'industry-yard-tech-roster',
           source: 'Published yard-tech customer-list signals (Nestlé Group-level)',
           confidence: 'public',
-          detail: 'Nestlé Group is named in the published yard-tech customer-list aggregations. This is a probable-customer signal at the Nestlé Group level, not a site-confirmed Nestlé USA deployment — but enough that Nestlé operators are familiar with the category. The pitch is not "introduce yard management."',
+          detail: 'Nestlé Group is named in the published yard-tech customer-list aggregations. This is a probable-customer signal at the Nestlé Group level, not a site-confirmed Nestlé USA deployment, but enough that Nestlé operators are familiar with the category. The pitch is not "introduce yard management."',
         },
         {
           id: 'industry-benchmarks',
@@ -176,30 +176,30 @@ export const nestleUsa: AccountMicrositeData = {
         },
         {
           id: 'kurtenbach-tenure-record',
-          source: 'Jeff Kurtenbach tenure record — Frito-Lay → Nestlé Waters → Nestlé USA (LinkedIn + Nestle USA executive disclosures + University of Iowa alumni records)',
+          source: 'Jeff Kurtenbach tenure record, Frito-Lay → Nestlé Waters → Nestlé USA (LinkedIn + Nestle USA executive disclosures + University of Iowa alumni records)',
           confidence: 'public',
-          detail: '40+ years of supply chain, finance, and operations experience. Frito-Lay Plant Controller 1983–1990 (operating-finance roots — cycle time, dock-door turnover, route productivity, labor-hour-per-case). Pre-2021 tenure at Nestlé Waters North America before the 2021 One Rock / Metropoulos divestiture. Long-arc Nestlé USA Supply Chain tenure into the current VP Supply Chain seat covering manufacturing operations & planning, logistics & customer service, demand planning & S&OP, and distribution network strategy. University of Iowa BA Business Administration. The Frito-Lay-finance-into-water-into-USA arc matters because it explains the unit-economics-first vocabulary the brief is written in.',
+          detail: '40+ years of supply chain, finance, and operations experience. Frito-Lay Plant Controller 1983–1990 (operating-finance roots, cycle time, dock-door turnover, route productivity, labor-hour-per-case). Pre-2021 tenure at Nestlé Waters North America before the 2021 One Rock / Metropoulos divestiture. Long-arc Nestlé USA Supply Chain tenure into the current VP Supply Chain seat covering manufacturing operations & planning, logistics & customer service, demand planning & S&OP, and distribution network strategy. University of Iowa BA Business Administration. The Frito-Lay-finance-into-water-into-USA arc matters because it explains the unit-economics-first vocabulary the brief is written in.',
         },
       ],
       unknowns: [
-        'Which Nestlé USA sites currently run site-level yard tools and at what depth — the Group-level customer signal is in the public record, the site-by-site footprint inside Nestlé USA is not',
+        'Which Nestlé USA sites currently run site-level yard tools and at what depth, the Group-level customer signal is in the public record, the site-by-site footprint inside Nestlé USA is not',
         'Whether the Glendale AZ greenfield yard-ops SOP has been scoped yet and who owns the design conversation',
         'Where the Solon-to-Gaffney/Jonesboro volume re-allocation is putting the most yard pressure, and which sites are running closest to dock-cycle saturation',
-        'How multi-temp dock arbitration is decided today at the frozen-and-pizza plants — site policy, system logic, or operator judgment',
-        'How Out-of-Home (foodservice — Sysco, US Foods, Performance Food Group) lines mix with retail-DC outbound at the plants running both, and whether mixed-channel dock contention is currently visible in the yard data',
+        'How multi-temp dock arbitration is decided today at the frozen-and-pizza plants, site policy, system logic, or operator judgment',
+        'How Out-of-Home (foodservice, Sysco, US Foods, Performance Food Group) lines mix with retail-DC outbound at the plants running both, and whether mixed-channel dock contention is currently visible in the yard data',
         'How the yard data layer feeds (or fails to feed) the Nestlé Group SAP S/4HANA digital core today, and where the network-tier ladder-up could attach',
-        'Which integration shape between a network-tier yard operating layer and the S/4HANA Cloud digital core is preferred at the Group level — direct API into the unified core, attachment via the Logistics module the core already runs, or a separate Network-of-the-Future data layer above both',
-        'Whether the Glendale AZ greenfield SOP design conversation is being run by Nestlé USA Supply Chain at Solon, by the Glendale plant leadership team, or jointly with the Nestlé Group S/4HANA digital-core program team — and at what cadence',
+        'Which integration shape between a network-tier yard operating layer and the S/4HANA Cloud digital core is preferred at the Group level, direct API into the unified core, attachment via the Logistics module the core already runs, or a separate Network-of-the-Future data layer above both',
+        'Whether the Glendale AZ greenfield SOP design conversation is being run by Nestlé USA Supply Chain at Solon, by the Glendale plant leadership team, or jointly with the Nestlé Group S/4HANA digital-core program team, and at what cadence',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Nestlé USA is distinctive in this round because the portfolio is finally settled, the Group-level SAP S/4HANA digital core has unified the inside-plant operating layer, and the yard between gate and dock is the data gap the core does not directly address — exactly when the Glendale AZ greenfield is uncommitted yard technology and the Solon-to-Gaffney/Jonesboro consolidation is loading more trucks through the same dock count. Jeff, the brief is shaped to the operating-finance vocabulary you carried out of the Frito-Lay Plant Controller years (1983–1990) through Nestlé Waters North America and into the VP Supply Chain seat at Nestlé USA — cycle time, dock-door turnover, labor-hour-per-case, throughput-per-dock. The 40-year arc is the reason this memo is written in unit economics first and technology stack second. The water comparable is intentional: Primo Brands runs the operationally hardest CPG freight in the country, and the read-across to multi-temp frozen + refrigerated + ambient + foodservice Nestlé USA freight is the easier lift, not the harder one — and the systems read-across is the cleaner one, because Primo has already produced the yard signal the S/4HANA digital core does not currently receive.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement. Nestlé USA is distinctive in this round because the portfolio is finally settled, the Group-level SAP S/4HANA digital core has unified the inside-plant operating layer, and the yard between gate and dock is the data gap the core does not directly address, exactly when the Glendale AZ greenfield is uncommitted yard technology and the Solon-to-Gaffney/Jonesboro consolidation is loading more trucks through the same dock count. Jeff, the brief is shaped to the operating-finance vocabulary you carried out of the Frito-Lay Plant Controller years (1983–1990) through Nestlé Waters North America and into the VP Supply Chain seat at Nestlé USA, cycle time, dock-door turnover, labor-hour-per-case, production capacity-per-dock. The 40-year arc is the reason this memo is written in unit economics first and technology stack second. The water comparable is intentional: Primo Brands runs the operationally hardest CPG freight in the country, and the read-across to multi-temp frozen + refrigerated + ambient + foodservice Nestlé USA freight is the easier lift, not the harder one, and the systems read-across is the cleaner one, because Primo has already produced the yard signal the S/4HANA digital core does not currently receive.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'Jeff — the part most worth pushing back on is whether the operating-finance discipline you carried out of Frito-Lay through Nestlé Waters into Nestlé USA has reached the yard layer above the sites yet, or whether it stopped at the site-level tools the Group is named in the customer record for. That answer reshapes the rest of this. If parts of the analysis read wrong against what you see internally — particularly which sites run site-level yard tools at what depth, where the Solon-to-Gaffney/Jonesboro volume re-allocation has put the most yard pressure today, or how the Glendale greenfield SOP is being scoped against the Nestlé Group S/4HANA Cloud digital-core integration shape — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Jeff, the part most worth pushing back on is whether the operating-finance discipline you carried out of Frito-Lay through Nestlé Waters into Nestlé USA has reached the yard layer above the sites yet, or whether it stopped at the site-level tools the Group is named in the customer record for. That answer reshapes the rest of this. If parts of the analysis read wrong against what you see internally, particularly which sites run site-level yard tools at what depth, where the Solon-to-Gaffney/Jonesboro volume re-allocation has put the most yard pressure today, or how the Glendale greenfield SOP is being scoped against the Nestlé Group S/4HANA Cloud digital-core integration shape, that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -218,9 +218,9 @@ export const nestleUsa: AccountMicrositeData = {
       seniority: 'VP',
       function: 'Supply Chain',
       currentMandate:
-        '40+ years of supply chain, finance, and operations experience. VP Supply Chain at Nestlé USA covering manufacturing operations & planning, logistics & customer service, demand planning & S&OP, and distribution network strategy. Frito-Lay finance roots (1983–1990 Plant Controller) — wired to think in cycle time, dock-door turnover, route productivity, and labor-hour-per-case. Long Nestlé tenure (~20+ years inside the Nestlé US ecosystem, spanning legacy Nestlé Waters North America pre-2021 divestiture and the broader Nestlé USA supply organization). University of Iowa BA Business Administration.',
+        '40+ years of supply chain, finance, and operations experience. VP Supply Chain at Nestlé USA covering manufacturing operations & planning, logistics & customer service, demand planning & S&OP, and distribution network strategy. Frito-Lay finance roots (1983–1990 Plant Controller), wired to think in cycle time, dock-door turnover, route productivity, and labor-hour-per-case. Long Nestlé tenure (~20+ years inside the Nestlé US ecosystem, spanning legacy Nestlé Waters North America pre-2021 divestiture and the broader Nestlé USA supply organization). University of Iowa BA Business Administration.',
       bestIntroPath:
-        'Direct email to the VP Supply Chain seat at the standard Nestlé NA convention. Backup: LinkedIn InMail (sparse public profile → low-noise inbox). Geographic note: his listed location is Glendale CA (pre-2018 Nestlé USA hub), but Nestlé USA Supply Chain HQ is now Solon OH — verify which campus before any in-person ask. Frito-Lay finance alumni network is the cleanest warm path given his 1983–1990 origin there.',
+        'Direct email to the VP Supply Chain seat at the standard Nestlé NA convention. Backup: LinkedIn InMail (sparse public profile → low-noise inbox). Geographic note: his listed location is Glendale CA (pre-2018 Nestlé USA hub), but Nestlé USA Supply Chain HQ is now Solon OH, verify which campus before any in-person ask. Frito-Lay finance alumni network is the cleanest warm path given his 1983–1990 origin there.',
     },
   ],
 
@@ -243,21 +243,21 @@ export const nestleUsa: AccountMicrositeData = {
       variantSlug: 'jeff-kurtenbach',
 
       framingNarrative:
-        'Jeff, the operating-finance discipline you carried out of the Frito-Lay Plant Controller years (1983–1990) — cycle time, dock-door turnover, labor-hour-per-case, throughput-per-dock — is the same discipline you carried through Nestlé Waters North America pre-divestiture and into the VP Supply Chain seat at Nestlé USA. That 40-year arc is the reason the brief is written in unit economics first. The SAP S/4HANA Cloud digital core has scaled across ~90% of 335 factories and runs Planning, Forecast, Manufacturing, and Logistics from the dock outward. The yard between the gate and the dock is the layer the core does not directly host — and the site-level yard tools at parts of the network were the right answer to the 2010s problem, not to the operating model the unified core is now ready to receive from above. The network-tier yard operating layer is the missing tile in the Network of the Future frame.',
+        'Jeff, the operating-finance discipline you carried out of the Frito-Lay Plant Controller years (1983–1990), cycle time, dock-door turnover, labor-hour-per-case, production capacity-per-dock, is the same discipline you carried through Nestlé Waters North America pre-divestiture and into the VP Supply Chain seat at Nestlé USA. That 40-year arc is the reason the brief is written in unit economics first. The SAP S/4HANA Cloud digital core has scaled across ~90% of 335 factories and runs Planning, Forecast, Manufacturing, and Logistics from the dock outward. The yard between the gate and the dock is the layer the core does not directly host, and the site-level yard tools at parts of the network were the right answer to the 2010s problem, not to the operating model the unified core is now ready to receive from above. The network-tier yard operating layer is the missing tile in the Network of the Future frame.',
       openingHook:
-        'The S/4HANA Cloud digital core has unified Planning, Forecast, Manufacturing, and Logistics across ~90% of 335 factories. The yard between the gate and the dock is the one layer it does not directly host. Glendale AZ is uncommitted greenfield. Solon-to-Gaffney/Jonesboro is loading more trailers through the same dock count. The network-tier operating layer above the site-level tools is the unfilled tile — and it is the tile shaped to feed the core, not to displace what works at the four walls.',
+        'The S/4HANA Cloud digital core has unified Planning, Forecast, Manufacturing, and Logistics across ~90% of 335 factories. The yard between the gate and the dock is the one layer it does not directly host. Glendale AZ is uncommitted greenfield. Solon-to-Gaffney/Jonesboro is loading more trailers through the same dock count. The network-tier operating layer above the site-level tools is the unfilled tile, and it is the tile shaped to feed the core, not to displace what works at the four walls.',
       stakeStatement:
-        'Three windows are open simultaneously, and they are not always open together. Glendale AZ opened mid-2024 at $675M / 630K sq ft as Nestlé USA\'s 20th factory with SOPs still being written — the cheapest moment to embed the network-tier operating layer is now, not after eighteen months of operating habit settles around the as-built yard. The Solon-to-Gaffney/Jonesboro volume re-allocation from the January 2024 restructuring is loading more trailers through the same dock count at the absorbing sites this year — the canonical consolidation pressure-test for the layer above the site tools. And the Out-of-Home / Nestlé Professional foodservice lines running at Solon (Sysco, US Foods, Performance Food Group cadence) compete with retail-DC outbound for the same yard surface, which the site-level tools were never built to natively distinguish.',
+        'Three windows are open simultaneously, and they are not always open together. Glendale AZ opened mid-2024 at $675M / 630K sq ft as Nestlé USA\'s 20th factory with SOPs still being written, the cheapest moment to embed the network-tier operating layer is now, not after eighteen months of operating habit settles around the as-built yard. The Solon-to-Gaffney/Jonesboro volume re-allocation from the January 2024 restructuring is loading more trailers through the same dock count at the absorbing sites this year, the canonical consolidation pressure-test for the layer above the site tools. And the Out-of-Home / Nestlé Professional foodservice lines running at Solon (Sysco, US Foods, Performance Food Group cadence) compete with retail-DC outbound for the same yard surface, which the site-level tools were never built to natively distinguish.',
 
       heroOverride: {
         headline: 'The yard layer above the S/4HANA Cloud digital core.',
         subheadline:
-          'The unified Nestlé Group manufacturing system runs Planning, Forecast, Manufacturing, and Logistics across ~90% of 335 factories. The yard between gate and dock is the layer the core does not host directly — and the layer the Network of the Future frame leaves unfilled. Glendale is uncommitted greenfield. The Solon-to-Gaffney/Jonesboro consolidation is loading more trailers through the same dock count. The network-tier operating model is the missing tile.',
+          'The unified Nestlé Group manufacturing system runs Planning, Forecast, Manufacturing, and Logistics across ~90% of 335 factories. The yard between gate and dock is the layer the core does not host directly, and the layer the Network of the Future frame leaves unfilled. Glendale is uncommitted greenfield. The Solon-to-Gaffney/Jonesboro consolidation is loading more trailers through the same dock count. The network-tier operating model is the missing tile.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
-        'Frito-Lay-finance-rooted operator register. Kurtenbach has seen every yard vendor pitch in 40 years; he is unlikely to be flattered by "thought leader" framing and is wired to think in unit economics and capital efficiency before technology stack — the Plant Controller training is doing the work, not the technology vocabulary. Acknowledge the Frito-Lay → Nestlé Waters → Nestlé USA arc as the reason the brief is written in cycle time / dock-door turnover / labor-hour-per-case / throughput-per-dock first. Acknowledge the site-level yard tools where they exist as the right answer to the 2010s question. Position the wedge as the layer above (network-tier operating model + S/4HANA Cloud yard-data attachment + Glendale greenfield embed), not as replacement. Specific by site name (Solon, Glendale, Gaffney, Jonesboro), specific by date (Glendale mid-2024, Solon Jan 2024, Gaffney Nov 2024), specific by systems shape (Planning, Forecast, Manufacturing, Logistics — covered; Yard Network Ops — unfilled).',
+        'Frito-Lay-finance-rooted operator register. Kurtenbach has seen every yard vendor pitch in 40 years; he is unlikely to be flattered by "thought leader" framing and is wired to think in unit economics and capital efficiency before technology stack, the Plant Controller training is doing the work, not the technology vocabulary. Acknowledge the Frito-Lay → Nestlé Waters → Nestlé USA arc as the reason the brief is written in cycle time / dock-door turnover / labor-hour-per-case / production capacity-per-dock first. Acknowledge the site-level yard tools where they exist as the right answer to the 2010s question. Position the wedge as the layer above (network-tier operating model + S/4HANA Cloud yard-data attachment + Glendale greenfield embed), not as replacement. Specific by site name (Solon, Glendale, Gaffney, Jonesboro), specific by date (Glendale mid-2024, Solon Jan 2024, Gaffney Nov 2024), specific by systems shape (Planning, Forecast, Manufacturing, Logistics, covered; Yard Network Ops, unfilled).',
       kpiLanguage: [
         'network-tier yard operating model',
         'dock-door turnover per shift',
@@ -267,10 +267,10 @@ export const nestleUsa: AccountMicrositeData = {
         'foodservice + retail lane mixing',
         'SAP S/4HANA Cloud yard-data attachment',
         'Glendale greenfield SOP embed',
-        'Solon-to-Gaffney/Jonesboro consolidation throughput',
+        'Solon-to-Gaffney/Jonesboro consolidation production capacity',
       ],
       proofEmphasis:
-        'Primo is the *public* comparable to cite — same multi-site, multi-temp shape, harder freight (water), already running the network-tier layer above existing site-level yard systems. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic — multi-site, multi-temp, 3PL-DC-dependent network where the operating model laddered up from existing site-level tools.',
+        'Primo is the *public* comparable to cite, same multi-site, multi-temp shape, harder freight (water), already running the network-tier layer above existing site-level yard systems. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic, multi-site, multi-temp, 3PL-DC-dependent network where the operating model laddered up from existing site-level tools.',
     },
   ],
 
@@ -280,12 +280,12 @@ export const nestleUsa: AccountMicrositeData = {
     facilityCount: '~20 U.S. factories across 28 states (frozen meals + pizza, coffee + creamers, beverages, confections, nutritional); Glendale AZ ($675M factory + DC) opened mid-2024 as the 20th factory',
     facilityTypes: ['Manufacturing Plants', 'Distribution Centers (Glendale AZ combined factory+DC)', 'Foodservice / Nestlé Professional Lines (Solon)'],
     geographicSpread: 'North America (corporate HQ: Arlington VA; supply-chain HQ: Solon OH; key plants in Solon OH, Jonesboro AR, Gaffney SC, Anderson IN, Glendale AZ, Suffolk VA, plus historical sites in Trenton MO and Springville UT)',
-    dailyTrailerMoves: 'High-volume — modeled at the network level across 20 U.S. factories; multi-temperature mix (frozen Stouffer\'s + DiGiorno + Hot Pockets + Sweet Earth; ambient Coffee mate + Toll House + Nesquik + Nescafé; refrigerated Coffee mate fresh + creamer SKUs); foodservice (Out-of-Home / Nestlé Professional) on different cadence than retail-DC outbound',
+    dailyTrailerMoves: 'High-volume, modeled at the network level across 20 U.S. factories; multi-temperature mix (frozen Stouffer\'s + DiGiorno + Hot Pockets + Sweet Earth; ambient Coffee mate + Toll House + Nesquik + Nescafé; refrigerated Coffee mate fresh + creamer SKUs); foodservice (Out-of-Home / Nestlé Professional) on different cadence than retail-DC outbound',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL'],
-    avgLoadsPerDay: 'High-volume — multi-temperature complexity: frozen (Stouffer\'s, DiGiorno, Hot Pockets, Lean Cuisine, Tombstone, Jack\'s, Sweet Earth, California Pizza Kitchen), ambient (Coffee mate, Toll House, Nesquik, Nescafé), refrigerated (Coffee mate fresh + creamer SKUs), foodservice (Out-of-Home / Nestlé Professional — Sysco, US Foods, Performance Food Group cadence)',
+    avgLoadsPerDay: 'High-volume, multi-temperature complexity: frozen (Stouffer\'s, DiGiorno, Hot Pockets, Lean Cuisine, Tombstone, Jack\'s, Sweet Earth, California Pizza Kitchen), ambient (Coffee mate, Toll House, Nesquik, Nescafé), refrigerated (Coffee mate fresh + creamer SKUs), foodservice (Out-of-Home / Nestlé Professional, Sysco, US Foods, Performance Food Group cadence)',
     specialRequirements: [
       'Multi-temperature dock surface (frozen + refrigerated + ambient)',
       'Foodservice vs. retail-DC lane mixing at sites running both',
@@ -296,14 +296,14 @@ export const nestleUsa: AccountMicrositeData = {
 
   signals: {
     recentNews: [
-      'Glendale AZ new $675M beverage factory + DC opened mid-2024 — Nestlé USA\'s 20th food & beverage factory; net-new yard with SOP being defined now.',
+      'Glendale AZ new $675M beverage factory + DC opened mid-2024, Nestlé USA\'s 20th food & beverage factory; net-new yard with SOP being defined now.',
       'Gaffney SC $150M expansion announced November 2024 for Stouffer\'s, Hot Pockets, Lean Cuisine, Tombstone, California Pizza Kitchen, Jack\'s Pizza, DiGiorno.',
-      'Solon OH restructuring (216 layoffs January 2024; 77 layoffs December 2023) shifted production to Gaffney and Jonesboro — same dock surface, more trailers at surviving facilities.',
-      'Nestlé Group SAP S/4HANA Cloud digital-core upgrade (2025) — manufacturing system scaled to ~90% of 335 global factories; enables AI at scale across the supply chain. Yard data between gate and dock is the systems gap the core does not address directly.',
-      'Nestlé phased exit of remaining global ice-cream business to Froneri announced February 2026 — the portfolio is finally settled; supply-chain attention freed for operating-model investments.',
+      'Solon OH restructuring (216 layoffs January 2024; 77 layoffs December 2023) shifted production to Gaffney and Jonesboro, same dock surface, more trailers at surviving facilities.',
+      'Nestlé Group SAP S/4HANA Cloud digital-core upgrade (2025), manufacturing system scaled to ~90% of 335 global factories; enables AI at scale across the supply chain. Yard data between gate and dock is the systems gap the core does not address directly.',
+      'Nestlé phased exit of remaining global ice-cream business to Froneri announced February 2026, the portfolio is finally settled; supply-chain attention freed for operating-model investments.',
     ],
     urgencyDriver:
-      'The portfolio churn that consumed Nestlé USA supply-chain attention for a decade is settled. The Group-level SAP S/4HANA Cloud digital core has scaled the unified manufacturing system to ~90% of 335 factories. The yard between gate and dock is the data gap the core does not directly address — exactly when Glendale AZ is uncommitted greenfield yard technology (SOPs being written this quarter), and Gaffney and Jonesboro are absorbing the Solon volume re-allocation against the same dock count. A network-tier yard operating model that feeds the digital core is the modernization-aligned investment that lands inside the strategic narrative Nestlé Group is already telling about its supply chain.',
+      'The portfolio churn that consumed Nestlé USA supply-chain attention for a decade is settled. The Group-level SAP S/4HANA Cloud digital core has scaled the unified manufacturing system to ~90% of 335 factories. The yard between gate and dock is the data gap the core does not directly address, exactly when Glendale AZ is uncommitted greenfield yard technology (SOPs being written this quarter), and Gaffney and Jonesboro are absorbing the Solon volume re-allocation against the same dock count. A network-tier yard operating model that feeds the digital core is the modernization-aligned investment that lands inside the strategic narrative Nestlé Group is already telling about its supply chain.',
   },
 
   marginaliaItems: [
@@ -318,7 +318,7 @@ export const nestleUsa: AccountMicrositeData = {
   audioBrief: {
     src: '/audio/yard-network-brief.mp3',
     intro:
-      'This brief is for Jeff Kurtenbach. The Frito-Lay-finance discipline you carried out of the 1983–1990 Plant Controller years through Nestlé Waters into Nestlé USA — cycle time, dock-door turnover, labor-hour-per-case — is the discipline the next five minutes builds on. What follows is the layer between the gate and the dock the S/4HANA digital core does not directly host.',
+      'This brief is for Jeff Kurtenbach. The Frito-Lay-finance discipline you carried out of the 1983–1990 Plant Controller years through Nestlé Waters into Nestlé USA, cycle time, dock-door turnover, labor-hour-per-case, is the discipline the next five minutes builds on. What follows is the layer between the gate and the dock the S/4HANA digital core does not directly host.',
     chapters: AUDIO_BRIEF_CHAPTERS,
     generatedAt: '2026-05-12T00:00:00Z',
   },

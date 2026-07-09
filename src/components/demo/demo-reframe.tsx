@@ -1,5 +1,5 @@
 /**
- * The reframe — names the invisible problem (the "siloed yard" mindset) that
+ * The reframe, names the invisible problem (the "siloed yard" mindset) that
  * most prospects haven't articulated. This is the demo's cold-email payload:
  * before the cost (replay) and the scale (network band), it tells the visitor
  * what they're actually looking at. Presentational only.

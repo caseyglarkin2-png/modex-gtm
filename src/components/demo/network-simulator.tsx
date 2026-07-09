@@ -19,7 +19,7 @@ import {
  * Diagnostic error boundary so any throw inside the dynamic-loaded
  * Leaflet `Inner` (chunk-load failure, react-leaflet incompat, runtime
  * type error) surfaces as visible text instead of an invisible
- * unmount — which is what we just spent hours debugging.
+ * unmount, which is what we just spent hours debugging.
  */
 class MapBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
   state = { error: null as Error | null };
@@ -44,7 +44,7 @@ class MapBoundary extends Component<{ children: ReactNode }, { error: Error | nu
 }
 
 /**
- * D4 — Network Simulator surface.
+ * D4, Network Simulator surface.
  *
  * Modeled after the yns-network demand-shock prototype: KPI strip across
  * the top, full-width map underneath, scenario chips at the bottom. The
@@ -55,7 +55,7 @@ class MapBoundary extends Component<{ children: ReactNode }, { error: Error | nu
 const Inner = dynamic(() => import('./network-simulator-inner'), {
   ssr: false,
   loading: () => (
-    // G.T4 — CLS-free skeleton. Fills the parent's reserved height
+    // G.T4, CLS-free skeleton. Fills the parent's reserved height
     // (h-[420px]/md:h-[520px]) so there is zero layout shift on hydrate.
     <div
       className="motion-safe:animate-pulse flex h-full w-full items-center justify-center"
@@ -153,7 +153,7 @@ export function NetworkSimulator({ pack }: Props) {
 
   const setDemandFactor = (n: number) => {
     setConfig((c) => ({ ...c, demandFactor: n }));
-    setActivePresetId(null); // freeform — no preset active
+    setActivePresetId(null); // freeform, no preset active
   };
 
   const toggleYns = () => setConfig((c) => ({ ...c, ynsMode: !c.ynsMode }));
@@ -162,7 +162,7 @@ export function NetworkSimulator({ pack }: Props) {
   const { countsByRisk } = state;
 
   // Audit-derived facts (real, not modeled). These are the only numbers
-  // we surface on the demo's KPI strip — operational dollar/time values
+  // we surface on the demo's KPI strip, operational dollar/time values
   // live exclusively at yardflow.ai/roi (the only approved model).
   const dropYardSites = pack.network.sites.filter((s) => s.classification.dropYard).length;
   const archetypeCounts: Record<string, number> = {};
@@ -171,7 +171,7 @@ export function NetworkSimulator({ pack }: Props) {
   });
   const topArchetype = Object.entries(archetypeCounts).sort((a, b) => b[1] - a[1])[0];
 
-  // Scope blurb — mirror the header in demo-surface.tsx so the sim's
+  // Scope blurb, mirror the header in demo-surface.tsx so the sim's
   // "Network state" line doesn't read as a claim about the entire
   // network when we only audited a subset.
   const cov = pack.account.coverageNote;
@@ -191,7 +191,7 @@ export function NetworkSimulator({ pack }: Props) {
 
   return (
     <div className="flex h-full w-full flex-col bg-[#0a0c10]">
-      {/* Status header — "Operational / Warning / Critical" pill bar */}
+      {/* Status header, "Operational / Warning / Critical" pill bar */}
       <div className="shrink-0 border-b border-[#00B4FF]/[0.16] bg-transparent px-4 py-3 sm:px-6">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <div>
@@ -220,7 +220,7 @@ export function NetworkSimulator({ pack }: Props) {
         </div>
       </div>
 
-      {/* Audit-derived facts. NO modeled operational metrics here — the
+      {/* Audit-derived facts. NO modeled operational metrics here, the
           ONLY approved value model is at yardflow.ai/roi, which the CTA
           below routes to. Every number on this strip is a count or sum
           straight off the audit JSON. */}
@@ -234,13 +234,13 @@ export function NetworkSimulator({ pack }: Props) {
         <Kpi icon="🚛" label="Trailer spots" value={pack.network.totals.trailerCapacity.toLocaleString()} />
         <Kpi icon="🚉" label="Rail-served" value={pack.network.totals.railServed} />
         <Kpi icon="📦" label="Drop-yard sites" value={`${dropYardSites} / ${pack.account.siteCount}`} />
-        <Kpi icon="🏷" label="Top archetype" value={topArchetype ? `${topArchetype[0]} · ${topArchetype[1]}×` : '—'} />
+        <Kpi icon="🏷" label="Top archetype" value={topArchetype ? `${topArchetype[0]} · ${topArchetype[1]}×` : ','} />
       </div>
 
-      {/* ROI / Sales-deck CTA strip — the ONLY place dollar values live.
+      {/* ROI / Sales-deck CTA strip, the ONLY place dollar values live.
           Routes prospects to yardflow.ai/roi (the approved value model)
           and yardflow.ai/YNS (the sales deck hub). The demo itself never
-          surfaces modeled dollar/time metrics — every operational number
+          surfaces modeled dollar/time metrics, every operational number
           a prospect should care about lives at /roi. */}
       <div className="shrink-0 border-b border-[#00B4FF]/[0.16] bg-[#101218] px-4 py-3 text-white sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -285,17 +285,17 @@ export function NetworkSimulator({ pack }: Props) {
 
       {/* Map wrapper.
           CRITICAL: use CONCRETE pixel heights (`h-[420px]` mobile,
-          `md:h-[520px]` desktop) — NOT flex-1 / md:h-auto / min-h.
+          `md:h-[520px]` desktop), NOT flex-1 / md:h-auto / min-h.
           MapContainer inside has `style={height: '100%'}`. CSS spec:
           percentage heights only resolve against an explicit `height`,
           NOT against `min-height` or flex-allocated `auto`. Because the
           MapContainer is the wrapper's only non-absolute child, an
           `auto` wrapper height creates a circular dependency that CSS
-          resolves to 0 — the symptom: getSize() returns 1280x0 and the
+          resolves to 0, the symptom: getSize() returns 1280x0 and the
           map renders as an 8px outline-only bar. NetworkAtlas avoids
           this because its parent is flex-row on desktop, so the wrapper
           gets cross-axis stretched (a definite height). Sim's parent is
-          flex-col — no stretch — so we hardcode height. */}
+          flex-col, no stretch, so we hardcode height. */}
       <div className="relative h-[420px] md:h-[520px]">
         <MapBoundary>
           <Inner
@@ -378,7 +378,7 @@ export function NetworkSimulator({ pack }: Props) {
         </div>
       )}
 
-      {/* Simulations row — preset chips + slider */}
+      {/* Simulations row, preset chips + slider */}
       <div className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-transparent px-4 py-3 sm:px-6">
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3 text-[11px]">
           <span className="font-mono font-semibold uppercase tracking-[0.18em] text-white/55">Simulations</span>
@@ -405,7 +405,7 @@ export function NetworkSimulator({ pack }: Props) {
         </div>
 
         {/* Fine-grained demand slider, collapsed by default.
-            Clamped to ±10% — anything larger is theatrical for a daily-ops
+            Clamped to ±10%, anything larger is theatrical for a daily-ops
             sim. Use the preset chips for named events; this slider is for
             poking the model in the realistic range. */}
         <details className="mt-3 text-[11px] text-white/70">
@@ -434,12 +434,12 @@ export function NetworkSimulator({ pack }: Props) {
 
       {/* Disclaimer */}
       <div className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-[#0a0c10] px-4 py-2.5 text-[11px] leading-relaxed text-white/55 sm:px-6">
-        Per-site capacity is modeled from public yard geometry — dock doors × shifts × per-archetype turns/door, with
+        Per-site capacity is modeled from public yard geometry, dock doors × shifts × per-archetype turns/door, with
         archetype-specific YardFlow uplift when toggled on. Weather events are geographic capacity reductions on affected
         regions. <strong className="font-semibold text-white/85">All dollar and operational metrics live at{' '}
         <a href="https://yardflow.ai/roi/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
           yardflow.ai/roi
-        </a>{' '}— the approved YardFlow ROI model.</strong>
+        </a>{' '}, the approved YardFlow ROI model.</strong>
       </div>
     </div>
   );

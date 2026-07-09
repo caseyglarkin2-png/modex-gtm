@@ -252,7 +252,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied geocode (39.680221, -83.911228, GEOMETRIC_CENTER) landed directly\non the plant complex. Satellite probes at z16-z20 show a multi-section\nindustrial / food-processing building with rooftop process equipment, an\nemployee parking lot to the north, and a paved truck yard to the east.\nStreet View (captured 2022-06) along Birch Rd shows the building branded\n\"Bob Evans\" in the company's signature red script on both the west office wing\n(with red awning and US flag) and the main plant wall — positive ID. Web\nresearch corroborates: 640 Birch Rd is the historic Xenia sausage plant, in\noperation since 1953, ~30,000 sq ft core, >100 employees, ~30M lb/yr fresh\nproduct; subject of a $6.15M expansion announced April 2014. This is the\nplant, not a restaurant. Note: a Yelp listing tags this address as \"CLOSED\" —",
+        "dossierExcerpt": "The supplied geocode (39.680221, -83.911228, GEOMETRIC_CENTER) landed directly\non the plant complex. Satellite probes at z16-z20 show a multi-section\nindustrial / food-processing building with rooftop process equipment, an\nemployee parking lot to the north, and a paved truck yard to the east.\nStreet View (captured 2022-06) along Birch Rd shows the building branded\n\"Bob Evans\" in the company's signature red script on both the west office wing\n(with red awning and US flag) and the main plant wall, positive ID. Web\nresearch corroborates: 640 Birch Rd is the historic Xenia sausage plant, in\noperation since 1953, ~30,000 sq ft core, >100 employees, ~30M lb/yr fresh\nproduct; subject of a $6.15M expansion announced April 2014. This is the\nplant, not a restaurant. Note: a Yelp listing tags this address as \"CLOSED\" ,",
         "mapsUrl": "https://www.google.com/maps/@39.680050,-83.911100,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "East-side truck yard opens directly onto Birch Rd with no barrier arm, gate, or checkpoint. Street View (2022-06) confirms a wide-open paved apron meeting the public road. The west office/parking driveway is also an open curb cut. No truck gate.",
@@ -511,7 +511,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode (40.696965, -84.095537, ROOFTOP) landed on the large plant\nbuilding. Satellite at z16-z20 shows a single very large connected\nfood-processing building with extensive trailer parking. Street View along\nCommerce Pkwy (captured 2024-10) shows the building branded \"Bob Evans\" in red\nscript on the west elevation — positive ID. Note: the smaller white building\nimmediately to the west is a separate company, \"Logoplaste\" (plastics\npackaging), clearly labeled in Street View — it was excluded from the audit.\nWeb research confirms 651 Commerce Pkwy is the former Kettle Creations plant,\nacquired by Bob Evans in August 2012 for $50M; ~150,000 sq ft after expansions,\n~300 employees, 5 production lines, ~130M lb/yr of mashed potatoes and mac &\ncheese.",
+        "dossierExcerpt": "The supplied geocode (40.696965, -84.095537, ROOFTOP) landed on the large plant\nbuilding. Satellite at z16-z20 shows a single very large connected\nfood-processing building with extensive trailer parking. Street View along\nCommerce Pkwy (captured 2024-10) shows the building branded \"Bob Evans\" in red\nscript on the west elevation, positive ID. Note: the smaller white building\nimmediately to the west is a separate company, \"Logoplaste\" (plastics\npackaging), clearly labeled in Street View, it was excluded from the audit.\nWeb research confirms 651 Commerce Pkwy is the former Kettle Creations plant,\nacquired by Bob Evans in August 2012 for $50M; ~150,000 sq ft after expansions,\n~300 employees, 5 production lines, ~130M lb/yr of mashed potatoes and mac &\ncheese.",
         "mapsUrl": "https://www.google.com/maps/@40.696800,-84.095300,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Single truck driveway off Commerce Pkwy crosses a chain-link perimeter fence; a gate opening is visible in the fence line at satellite z21 (~40.6953, -84.0952). The whole trailer yard is fenced. Truck gate confirmed.",
@@ -791,7 +791,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied geocode (41.921573, -84.615533, GEOMETRIC_CENTER) landed on the\nplant complex. Satellite at z16-z20 shows a multi-building food-processing\ncampus set well back from public roads, surrounded by residential streets,\nfarm fields, and woodland on the edge of Hillsdale. Street View (captured\n2024-09) from the SW access road shows a \"Bob Evans Farms\" entrance sign and\nthe plant building branded with Bob Evans red script — positive ID. Note: the\naddress \"200 N Wolcott St\" is the postal address, but Wolcott St itself is\nresidential and the plant is set back behind houses; the actual truck/vehicle\naccess is a long private drive that connects to a side street SW of the site.\nWeb research confirms this is the company's third plant, producing fresh pork\nsausage since 1964, 50+ SKUs, 25M+ lb/yr; BEF Foods operates it as a sow",
+        "dossierExcerpt": "The supplied geocode (41.921573, -84.615533, GEOMETRIC_CENTER) landed on the\nplant complex. Satellite at z16-z20 shows a multi-building food-processing\ncampus set well back from public roads, surrounded by residential streets,\nfarm fields, and woodland on the edge of Hillsdale. Street View (captured\n2024-09) from the SW access road shows a \"Bob Evans Farms\" entrance sign and\nthe plant building branded with Bob Evans red script, positive ID. Note: the\naddress \"200 N Wolcott St\" is the postal address, but Wolcott St itself is\nresidential and the plant is set back behind houses; the actual truck/vehicle\naccess is a long private drive that connects to a side street SW of the site.\nWeb research confirms this is the company's third plant, producing fresh pork\nsausage since 1964, 50+ SKUs, 25M+ lb/yr; BEF Foods operates it as a sow",
         "mapsUrl": "https://www.google.com/maps/@41.921600,-84.615300,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Plant set well back from public roads on a long private access drive that connects to a residential side street SW of the site. The entrance has a Bob Evans Farms sign and decorative split-rail fence along the road, but the driveway is an open curb cut with no barrier arm, gate, or pinch-point. Confirmed in Street View (2024-09).",
@@ -1052,10 +1052,10 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied geocode (33.129289, -95.580222, ROOFTOP) landed on the plant\nbuilding. Satellite at z16-z20 shows a large connected industrial building\nbeside Interstate 30, with a distinctive red-roofed section, open paved truck\nyard, and employee parking. Street View along Industrial Dr E (captured\n2025-06) shows the building branded \"Bob Evans\" in red script — positive ID.\nWeb research confirms 1109 Industrial Dr E is the Bob Evans Sulphur Springs\nready-to-eat plant, acquired in 2003, ~70 employees, producing refrigerated\nsides (mac & cheese, mashed potatoes).",
+        "dossierExcerpt": "The supplied geocode (33.129289, -95.580222, ROOFTOP) landed on the plant\nbuilding. Satellite at z16-z20 shows a large connected industrial building\nbeside Interstate 30, with a distinctive red-roofed section, open paved truck\nyard, and employee parking. Street View along Industrial Dr E (captured\n2025-06) shows the building branded \"Bob Evans\" in red script, positive ID.\nWeb research confirms 1109 Industrial Dr E is the Bob Evans Sulphur Springs\nready-to-eat plant, acquired in 2003, ~70 employees, producing refrigerated\nsides (mac & cheese, mashed potatoes).",
         "mapsUrl": "https://www.google.com/maps/@33.129500,-95.580600,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "Two open driveways off Industrial Dr E (front employee/visitor drive and a west truck drive). Both are open curb cuts with no barrier arm, gate, or pinch-point. Confirmed in Street View (2025-06) — no perimeter fence around the property.",
+          "truckGate": "Two open driveways off Industrial Dr E (front employee/visitor drive and a west truck drive). Both are open curb cuts with no barrier arm, gate, or pinch-point. Confirmed in Street View (2025-06), no perimeter fence around the property.",
           "guardShack": "No booth at either driveway. A covered shelter near the parking lot is a carport/break shelter, not a guard booth.",
           "remoteGs": "No gate, so no remote check-in implied.",
           "drivewayLong": "Large open paved yard between Industrial Dr E and the south dock face gives deep approach room (3+ trucks).",
@@ -1064,7 +1064,7 @@
           "dropArea": "A few trailers parked near the dock apron without tractors; no dedicated striped drop lot. 0-10 band.",
           "urbanRural": "Edge-of-town industrial area along I-30 near Sulphur Springs, TX, bordered by farm fields and scattered industrial buildings; classified Rural.",
           "trailerParkingCapacity": "Open paved yard could hold ~15 trailers informally; estimate.",
-          "buildingCount": "One large connected plant building plus an attached/adjacent processing wing — counted as ~2 structures."
+          "buildingCount": "One large connected plant building plus an attached/adjacent processing wing, counted as ~2 structures."
         },
         "verification": {
           "verdict": "confirmed",
@@ -1324,7 +1324,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The supplied geocode (43.684086, -111.900523, ROOFTOP) landed on the plant\ncomplex. Satellite at z16-z20 shows a large multi-building potato-processing\nplant along N Yellowstone Hwy, surrounded by farm fields with a highway\ninterchange nearby. Web research confirms 398 N Yellowstone Hwy is the Potato\nProducts of Idaho (PPI) plant — a frozen/dehydrated potato-products\nmanufacturer established 1998, acquired by Post Holdings (parent of the Bob\nEvans Refrigerated Retail business). The roster note matches: Post folded PPI\ninto the Refrigerated Retail network. Street View from the frontage road\nshowed an adjacent \"BV's PRODUCE\" sign (Rigby Produce, a neighboring business)\n— the PPI plant itself is the large building cluster, positively located.",
+        "dossierExcerpt": "The supplied geocode (43.684086, -111.900523, ROOFTOP) landed on the plant\ncomplex. Satellite at z16-z20 shows a large multi-building potato-processing\nplant along N Yellowstone Hwy, surrounded by farm fields with a highway\ninterchange nearby. Web research confirms 398 N Yellowstone Hwy is the Potato\nProducts of Idaho (PPI) plant, a frozen/dehydrated potato-products\nmanufacturer established 1998, acquired by Post Holdings (parent of the Bob\nEvans Refrigerated Retail business). The roster note matches: Post folded PPI\ninto the Refrigerated Retail network. Street View from the frontage road\nshowed an adjacent \"BV's PRODUCE\" sign (Rigby Produce, a neighboring business)\n, the PPI plant itself is the large building cluster, positively located.",
         "mapsUrl": "https://www.google.com/maps/@43.683900,-111.900400,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Plant accessed via open gravel/paved yards off N Yellowstone Hwy frontage; multiple open driveways with no barrier arm, gate, or checkpoint pinch-point. No perimeter fence around the property. Confirmed in satellite z19-z20.",
@@ -1332,7 +1332,7 @@
           "remoteGs": "No gate, so no remote check-in implied.",
           "drivewayLong": "Large open gravel/paved truck yards give deep approach room (3+ trucks).",
           "postGateStaging": "Extensive open paved/gravel yard between the highway and the plant buildings provides ample internal staging.",
-          "dockDoors": "Dock activity concentrated at the building's west end where trucks load; few discrete dock doors visible (~10). Potato processors often load via fewer high-throughput doors and bulk infeed; exact count uncertain.",
+          "dockDoors": "Dock activity concentrated at the building's west end where trucks load; few discrete dock doors visible (~10). Potato processors often load via fewer high-production capacity doors and bulk infeed; exact count uncertain.",
           "dropArea": "A small number of trailers in the west-end yard without tractors; no large striped drop lot. 0-10 band.",
           "dropYard": "An informal trailer-staging area exists at the building's west end, treated as a small drop yard.",
           "multipleFacilities": "Campus of ~4 distinct structures: main processing plant, attached/adjacent buildings, and separate potato-storage cellar buildings to the south.",
@@ -1648,7 +1648,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The supplied geocode (39.837963, -83.857367, ROOFTOP) landed on a fleet\nterminal — a central dispatch/maintenance building flanked by extensive rows\nof parked trailers. Web research confirms 6088 Green-Field Dr is the Bob Evans\nTransportation Company LLC terminal (USDOT 911163): ~150 employees including\n~100 drivers, ~126 tractors, 100+ tractor-trailers, ~20,000 deliveries/yr,\n~10M miles/yr. The satellite layout — a terminal building with trailer-storage\nrows on both sides — is exactly consistent with a private fleet hub. Positive\nID.",
+        "dossierExcerpt": "The supplied geocode (39.837963, -83.857367, ROOFTOP) landed on a fleet\nterminal, a central dispatch/maintenance building flanked by extensive rows\nof parked trailers. Web research confirms 6088 Green-Field Dr is the Bob Evans\nTransportation Company LLC terminal (USDOT 911163): ~150 employees including\n~100 drivers, ~126 tractors, 100+ tractor-trailers, ~20,000 deliveries/yr,\n~10M miles/yr. The satellite layout, a terminal building with trailer-storage\nrows on both sides, is exactly consistent with a private fleet hub. Positive\nID.",
         "mapsUrl": "https://www.google.com/maps/@39.838000,-83.857200,400m/data=!3m1!1e3",
         "fieldNotes": {
           "imagery": "Only available satellite coverage of this site is heavy snow-cover imagery, which obscures fine ground detail (gate hardware, booths, lane markings). No Street View coverage reaches the property. Overall confidence set to medium.",

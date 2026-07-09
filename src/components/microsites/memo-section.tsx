@@ -26,7 +26,7 @@ import type { MemoMarginaliaItem } from './memo-marginalia';
 
 /**
  * Extracts one marginalia item per section that carries composition data.
- * Currently only ObservationSection has a composition field — other section
+ * Currently only ObservationSection has a composition field, other section
  * types contribute no marginalia item (the gutter doesn't try to fill empty
  * space).
  *
@@ -224,18 +224,18 @@ function MemoSectionFrame({
  * keeps multiple asides from overlapping each other in the gutter.
  *
  * Visually flips from "boxed callout" (mobile) to "true marginalia note"
- * (desktop) — same source order, same anchor relationship to the body
+ * (desktop), same source order, same anchor relationship to the body
  * paragraph above it.
  */
 function MemoAside({ mark, children }: { mark: string; children: ReactNode }) {
   return (
     <aside
       className={[
-        // Mobile (default) — boxed callout inline in the doc column.
+        // Mobile (default), boxed callout inline in the doc column.
         'my-5 border-l-2 border-[#a89e8b] bg-[rgba(255,253,247,0.5)] px-4 py-3.5',
         'text-[14.5px] leading-[1.55] text-[#8a847b]',
         FONT_SANS,
-        // Desktop — float right into the gutter, lose the box, keep the rule.
+        // Desktop, float right into the gutter, lose the box, keep the rule.
         'lg:float-right lg:clear-right lg:w-48 lg:-mr-[15rem] lg:my-1 lg:ml-0 xl:w-56 xl:-mr-[17rem] 2xl:w-64 2xl:-mr-[19rem]',
         'lg:border-l lg:border-l-[#d8d2c2] lg:bg-transparent lg:px-4 lg:py-0',
         'lg:text-[12.5px] lg:leading-[1.5] lg:text-[#8a847b] xl:text-[13px]',
@@ -265,7 +265,7 @@ const BRIEF_SUBHEAD_STYLE = {
 } as const;
 
 /**
- * "The brief" — the bottom-line-up-front executive summary. Renders the five
+ * "The brief", the bottom-line-up-front executive summary. Renders the five
  * beats (problem → why-now → what-we-are → sized-prize → why-it's-easy) as a
  * single scannable opening section. Punchy register; the deep sections below
  * carry the citations and depth.
@@ -296,7 +296,7 @@ function MemoExecutiveBrief({
         </p>
       ))}
 
-      {/* 2 · Why now — market timing / carrier-capacity-risk */}
+      {/* 2 · Why now, market timing / carrier-capacity-risk */}
       {section.marketRisk ? (
         <div className="my-8 border-l-2 border-[color:var(--memo-accent)] bg-[rgba(255,253,247,0.6)] py-5 pl-6 pr-5">
           <p className={`mb-2 text-[10.5px] uppercase tracking-[0.22em] text-[#6c9384] ${FONT_MONO}`}>
@@ -314,7 +314,7 @@ function MemoExecutiveBrief({
         </div>
       ) : null}
 
-      {/* 3 · What YardFlow is — identity / category claim */}
+      {/* 3 · What YardFlow is, identity / category claim */}
       <div className="mt-10">
         <p className={BRIEF_KICKER(accent.numeralClass)}>{section.identity.label}</p>
         <h3 className={`m-0 mb-3 max-w-[28ch] text-[#1a1a1a] ${FONT_SERIF}`} style={BRIEF_SUBHEAD_STYLE}>
@@ -381,7 +381,7 @@ function MemoExecutiveBrief({
         ) : null}
       </div>
 
-      {/* 5 · Why it's easy — the close */}
+      {/* 5 · Why it's easy, the close */}
       <div className="mt-12">
         <p className={BRIEF_KICKER(accent.numeralClass)}>{section.ease.label}</p>
         <h3 className={`m-0 mb-3 max-w-[28ch] text-[#1a1a1a] ${FONT_SERIF}`} style={BRIEF_SUBHEAD_STYLE}>
@@ -520,7 +520,7 @@ function MemoComparable({
       heading={section.headline}
     >
       <p className="memo-lead">
-        <strong>{section.comparableName}</strong> — {section.comparableProfile}
+        <strong>{section.comparableName}</strong>, {section.comparableProfile}
       </p>
       {section.metrics.length > 0 ? (
         <ul
@@ -747,13 +747,13 @@ interface MemoSectionListProps {
   accentColor?: string;
   /** Optional node rendered immediately after the first section. Used to slot
    *  the audio/video brief below §01 (the BLUF) so the punchy text leads and
-   *  the listen/watch option follows — per Mark Shaughnessy's "spend the time
+   *  the listen/watch option follows, per Mark Shaughnessy's "spend the time
    *  only if hooked" note. */
   afterFirst?: ReactNode;
 }
 
 /**
- * Renders the prose body — sections only. The footnote list is no longer
+ * Renders the prose body, sections only. The footnote list is no longer
  * coupled here; the page composes it after the soft action via
  * <MemoFootnotes sections={...} /> so the order in the document column is
  * sections → soft action → footnotes → colophon.
@@ -844,7 +844,7 @@ export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }
 
 /**
  * Build the contents-rail entries from the section list. Same order, same
- * IDs as the rendered sections — the rail anchors and scrollspy line up.
+ * IDs as the rendered sections, the rail anchors and scrollspy line up.
  *
  * Pass `withPreambleFor` to prepend a non-numbered "For {firstName}" entry
  * marked with the reference mark `※`. Use this when a personalized reader
@@ -853,7 +853,7 @@ export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }
  * Pass `withAudio` to insert a non-numbered "Audio brief" entry marked with
  * the play indicator `▷`. The audio register renders just below the
  * personalized preamble (or just below the cover when no preamble), above
- * the §-numbered sections — so the TOC entry slots in the same position
+ * the §-numbered sections, so the TOC entry slots in the same position
  * (after preamble, before §01) and the scrollspy anchors line up.
  */
 export function buildTocEntries(
@@ -899,7 +899,7 @@ interface MemoPreambleProps {
 
 /**
  * Personalized preamble rendered above §01 when ?p=<variant-slug> matches
- * a known PersonVariant. Reads as a "publisher's note" — italic pull
+ * a known PersonVariant. Reads as a "publisher's note", italic pull
  * quote of the openingHook, then the framingNarrative as a body
  * paragraph, then the stakeStatement set off as a small "what's at stake"
  * line. Distinct visual character from §01 (no numeric eyebrow, no drop

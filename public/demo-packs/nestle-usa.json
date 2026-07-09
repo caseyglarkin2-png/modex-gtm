@@ -237,7 +237,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Address: 5750 Harper Rd, Solon, OH 44139\n- Locked center: 41.404568, -81.469555 (roster geocode was ROOFTOP; satellite confirmed)\n- Confirmation: Satellite probes z16-z20 show a large, dense connected\n  frozen-food manufacturing complex set back from Harper Rd behind a treed\n  buffer. Street View panos along Harper Rd show the Nestlé sign, flag, and\n  branded trucks/trailers at the building front — positively the right site.",
+        "dossierExcerpt": "- Address: 5750 Harper Rd, Solon, OH 44139\n- Locked center: 41.404568, -81.469555 (roster geocode was ROOFTOP; satellite confirmed)\n- Confirmation: Satellite probes z16-z20 show a large, dense connected\n  frozen-food manufacturing complex set back from Harper Rd behind a treed\n  buffer. Street View panos along Harper Rd show the Nestlé sign, flag, and\n  branded trucks/trailers at the building front, positively the right site.",
         "mapsUrl": "https://www.google.com/maps/@41.404568,-81.469555,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence runs the full Harper Rd frontage (confirmed in multiple Street View panos). A single controlled main drive leaves Harper Rd into the property. A driver review explicitly states 'when coming in through the gate ... go to Dock A and check in.' Gate is positively present.",
@@ -716,7 +716,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Address: 2132 Old Georgia Hwy, Gaffney, SC 29340\n- Locked center: 35.05400, -81.68720\n- Confirmation: Roster geocode (GEOMETRIC_CENTER, 35.054719, -81.68705)\n  landed on the plant. Satellite probes z16-z21 confirm a large frozen-food\n  manufacturing plant. Street View (2024-05) shows the Nestlé logo on the\n  building face and a \"TRUCK ENTRANCE\" sign at the gate — positively the right\n  site. The plant opened 1980; a $150M expansion was announced Nov 2024\n  (active construction visible in current imagery).",
+        "dossierExcerpt": "- Address: 2132 Old Georgia Hwy, Gaffney, SC 29340\n- Locked center: 35.05400, -81.68720\n- Confirmation: Roster geocode (GEOMETRIC_CENTER, 35.054719, -81.68705)\n  landed on the plant. Satellite probes z16-z21 confirm a large frozen-food\n  manufacturing plant. Street View (2024-05) shows the Nestlé logo on the\n  building face and a \"TRUCK ENTRANCE\" sign at the gate, positively the right\n  site. The plant opened 1980; a $150M expansion was announced Nov 2024\n  (active construction visible in current imagery).",
         "mapsUrl": "https://www.google.com/maps/@35.054,-81.6872,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Definitive - Street View (2024-05) shows a 'TRUCK ENTRANCE' sign, a stop sign, a 'SPEED LIMIT 10' sign and a controlled driveway leaving Old Georgia Hwy into the fenced plant property.",
@@ -958,7 +958,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Address: 401 W North Ave, Little Chute, WI 54140\n- Locked center: 44.28530, -88.32420\n- Confirmation: Roster geocode (ROOFTOP, 44.285169, -88.325575) landed on\n  the plant. Satellite probes z16-z21 confirm a large frozen-pizza\n  manufacturing plant fronting W North Ave, with extensive trailer yards on\n  the north. Street View (2024-10) shows the plant, the fenced truck yard, and\n  the gate off W North Ave — positively the right site.",
+        "dossierExcerpt": "- Address: 401 W North Ave, Little Chute, WI 54140\n- Locked center: 44.28530, -88.32420\n- Confirmation: Roster geocode (ROOFTOP, 44.285169, -88.325575) landed on\n  the plant. Satellite probes z16-z21 confirm a large frozen-pizza\n  manufacturing plant fronting W North Ave, with extensive trailer yards on\n  the north. Street View (2024-10) shows the plant, the fenced truck yard, and\n  the gate off W North Ave, positively the right site.",
         "mapsUrl": "https://www.google.com/maps/@44.2853,-88.3242,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "The north truck yard is fully enclosed by chain-link perimeter fencing. Street View (2024-10) shows a sliding/swing gate across the truck driveway off W North Ave. Two driveway openings serve the fenced yard.",
@@ -1188,7 +1188,7 @@
           "totalBaselineMs": 5460000,
           "totalYnsMs": 2910000
         },
-        "dossierExcerpt": "- Address: 150 Oak Grove Dr, Mount Sterling, KY 40353 (Hot Pockets plant)\n- Locked center: 38.09700, -83.90650\n- Confirmation: Roster geocode (ROOFTOP, 38.096188, -83.90611) landed on\n  the campus. Satellite probes z15-z21 confirm a large food-manufacturing\n  campus. Street View (2025-06) shows the \"Nestlé\" monument sign at the\n  entrance — positively the right site. Web research confirms 150 Oak Grove Dr\n  as the Hot Pockets factory (opened 1993, doubled in size 1996, Nestlé is the\n  largest employer in Mt. Sterling).",
+        "dossierExcerpt": "- Address: 150 Oak Grove Dr, Mount Sterling, KY 40353 (Hot Pockets plant)\n- Locked center: 38.09700, -83.90650\n- Confirmation: Roster geocode (ROOFTOP, 38.096188, -83.90611) landed on\n  the campus. Satellite probes z15-z21 confirm a large food-manufacturing\n  campus. Street View (2025-06) shows the \"Nestlé\" monument sign at the\n  entrance, positively the right site. Web research confirms 150 Oak Grove Dr\n  as the Hot Pockets factory (opened 1993, doubled in size 1996, Nestlé is the\n  largest employer in Mt. Sterling).",
         "mapsUrl": "https://www.google.com/maps/@38.097,-83.9065,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Definitive - a single guarded entry off Oak Grove Dr on the SE. The campus is fully ringed by chain-link perimeter fence (confirmed in Street View 2025-06).",

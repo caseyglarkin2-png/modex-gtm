@@ -13,8 +13,8 @@ import type { BboxTuple } from '@/lib/demo/pack-schema';
  * `network-simulator.tsx` dynamically imports this with `ssr: false`.
  *
  * This file is intentionally structured the same way as
- * `network-atlas-inner.tsx` — top-level MapContainer (no Fragment, no
- * inline <style>) — because the atlas hydrates correctly and the
+ * `network-atlas-inner.tsx`, top-level MapContainer (no Fragment, no
+ * inline <style>), because the atlas hydrates correctly and the
  * simulator was hitting a Turbopack/React 19 edge case where a Fragment
  * with a sibling <style> tag was dropping the dynamic-chunk CSS bundle.
  * The simPulse keyframes for critical-site halos live in globals.css.
@@ -33,7 +33,7 @@ function FitBounds({ bbox }: { bbox: BboxTuple }) {
     const [w, s, e, n] = bbox;
     // Leaflet caches container size at MapContainer init. The simulator
     // is a lazy-mounted tab, so we cannot assume the container had its
-    // final size when Leaflet first measured it — call invalidateSize()
+    // final size when Leaflet first measured it, call invalidateSize()
     // before fitBounds() and skip fitting if the container is somehow
     // still 0x0 (avoids NaN center/zoom on a malformed layout).
     const fit = () => {

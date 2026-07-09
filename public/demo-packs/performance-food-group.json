@@ -180,13 +180,13 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster supplied 34.275934, -79.688271 (GEOMETRIC_CENTER, flagged movedMeters 13,139 —\nvery imprecise). Web research confirmed the legacy Performance Foodservice broadline DC at\n2801 Alex Lee Blvd in the Florence County industrial park. Satellite probing of the park\nidentified a single long white rectangular distribution building (~620 m x ~110 m) with a\ncontinuous loading-dock bank along its south face — consistent with a high-throughput\nbroadline DC. This is distinct from idx 1 (Cheney Brothers new cold DC, 2491 Florence\nHarllee Blvd, ~34.271,-79.6947), which satellite imagery shows as a still-graded pad / under\nconstruction immediately to the NE. The legacy operating building is the one audited here.",
+        "dossierExcerpt": "The roster supplied 34.275934, -79.688271 (GEOMETRIC_CENTER, flagged movedMeters 13,139 ,\nvery imprecise). Web research confirmed the legacy Performance Foodservice broadline DC at\n2801 Alex Lee Blvd in the Florence County industrial park. Satellite probing of the park\nidentified a single long white rectangular distribution building (~620 m x ~110 m) with a\ncontinuous loading-dock bank along its south face, consistent with a high-production capacity\nbroadline DC. This is distinct from idx 1 (Cheney Brothers new cold DC, 2491 Florence\nHarllee Blvd, ~34.271,-79.6947), which satellite imagery shows as a still-graded pad / under\nconstruction immediately to the NE. The legacy operating building is the one audited here.",
         "mapsUrl": "https://www.google.com/maps/@34.26505,-79.69285,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster coord (34.275934,-79.688271, GEOMETRIC_CENTER, moved 13.1km flag) was imprecise. Resolved the legacy Performance Foodservice DC to ~34.26505,-79.69285 in the Florence industrial park off Alex Lee Blvd — a single long white rectangular DC, ~620m x ~110m, with a continuous dock bank along its south face. Distinct from idx 1 (Cheney Brothers new cold DC, ~34.271,-79.6947, still a graded pad/under construction immediately NE).",
-          "truckGate": "No barrier arm or sliding gate observed across the truck lane in available imagery; the dock yard sits behind only a low wood-rail fence along the perimeter loop road. Marked true at medium confidence because the property is fenced and the truck approach pinches at a single SW driveway off the loop road — but the control structure is not visually confirmed.",
+          "location": "Roster coord (34.275934,-79.688271, GEOMETRIC_CENTER, moved 13.1km flag) was imprecise. Resolved the legacy Performance Foodservice DC to ~34.26505,-79.69285 in the Florence industrial park off Alex Lee Blvd, a single long white rectangular DC, ~620m x ~110m, with a continuous dock bank along its south face. Distinct from idx 1 (Cheney Brothers new cold DC, ~34.271,-79.6947, still a graded pad/under construction immediately NE).",
+          "truckGate": "No barrier arm or sliding gate observed across the truck lane in available imagery; the dock yard sits behind only a low wood-rail fence along the perimeter loop road. Marked true at medium confidence because the property is fenced and the truck approach pinches at a single SW driveway off the loop road, but the control structure is not visually confirmed.",
           "guardShack": "No guard booth visible at the entrance in satellite or Street View.",
-          "remoteGs": "Inferred — gate present, no guard shack, so any access control would be kiosk/call-box. Low confidence.",
+          "remoteGs": "Inferred, gate present, no guard shack, so any access control would be kiosk/call-box. Low confidence.",
           "dockDoors": "Long single dock bank on the south face; ~50-65 doors estimated from the regular bay rhythm and backed-in trailers.",
           "dropArea": "Trailer drop stalls along the south dock apron and a secondary lot; ~25-50 trailers parked without tractors.",
           "fastLaneOpportunity": "Wide unused paved apron along the dock yard and loop road provides room to add lanes.",
@@ -357,17 +357,17 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coord (36.980753, -121.556024, ROOFTOP, moved 107 m) was essentially correct.\nSatellite imagery shows an unmistakable building: a ~189,000 sq ft distribution center with\na near-fully solar-paneled roof — the only solar-roof warehouse on this stretch of Monterey\nRd between Hwy 101 and the rail line. This matches PFG / BusinessWire coverage of the Gilroy\n\"Sustainable Distribution Center of the Future\" (rooftop solar array, on-site battery\nstorage, FreeWire Boost Chargers, Volvo VNR electric trucks, solar reefer trailers).\nLocked center ~36.98045,-121.5543.",
+        "dossierExcerpt": "Roster coord (36.980753, -121.556024, ROOFTOP, moved 107 m) was essentially correct.\nSatellite imagery shows an unmistakable building: a ~189,000 sq ft distribution center with\na near-fully solar-paneled roof, the only solar-roof warehouse on this stretch of Monterey\nRd between Hwy 101 and the rail line. This matches PFG / BusinessWire coverage of the Gilroy\n\"Sustainable Distribution Center of the Future\" (rooftop solar array, on-site battery\nstorage, FreeWire Boost Chargers, Volvo VNR electric trucks, solar reefer trailers).\nLocked center ~36.98045,-121.5543.",
         "mapsUrl": "https://www.google.com/maps/@36.98045,-121.5543,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Confirmed via roster address 5480 Monterey Rd and PFG/BusinessWire 'Sustainable DC of the Future' coverage. The building is unmistakable: a ~189,000 sq ft DC with a near-fully solar-paneled roof, ZEV charging, the only solar-roof warehouse on this stretch of Monterey Rd between Hwy 101 and the rail line. Center ~36.98045,-121.5543.",
-          "truckGate": "Building fronts Monterey Rd (office/landscaped courtyard) with the truck driveway and yard wrapping the NE/E side. No barrier or sliding gate positively confirmed in available imagery (no internal Street View; Hwy-101-side panos only). Marked true at medium confidence — the yard is fenced/walled and the truck approach funnels to a single NE driveway, consistent with a controlled entrance.",
+          "truckGate": "Building fronts Monterey Rd (office/landscaped courtyard) with the truck driveway and yard wrapping the NE/E side. No barrier or sliding gate positively confirmed in available imagery (no internal Street View; Hwy-101-side panos only). Marked true at medium confidence, the yard is fenced/walled and the truck approach funnels to a single NE driveway, consistent with a controlled entrance.",
           "guardShack": "No guard booth visible.",
           "remoteGs": "Inferred kiosk/app check-in given gate-but-no-shack pattern; low confidence.",
           "dockDoors": "Dock bank on the south building face with trailers backed in; ~40-50 doors estimated.",
           "dropArea": "Large gravel/paved yard south and east of the building holds many parked trailers and reefer/ZEV trailers plus staged equipment.",
           "fastLaneOpportunity": "Generous yard width and a wide apron on the east side leave room for an express lane.",
-          "urbanRural": "Edge-of-town Gilroy, farmland immediately south and east, adjacent to Hwy 101 — classified Rural.",
+          "urbanRural": "Edge-of-town Gilroy, farmland immediately south and east, adjacent to Hwy 101, classified Rural.",
           "railServed": "A rail line runs along the north edge of the property but no spur appears to enter the site; railServed false."
         },
         "verification": {
@@ -584,18 +584,18 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Roster coord (40.670695, -74.170648, ROOFTOP, moved 343 m) was close. Street View positively\nconfirmed the building — the office front facing Ikea Drive carries the red 'PERFORMANCE\nfoodservice' logo. The DC sits at 1 Ikea Drive in the Elizabeth port-industrial district,\nimmediately adjacent to the Elizabeth IKEA, a Floor & Decor, and the Maher container\nterminals. Locked center ~40.67085,-74.17055.",
+        "dossierExcerpt": "Roster coord (40.670695, -74.170648, ROOFTOP, moved 343 m) was close. Street View positively\nconfirmed the building, the office front facing Ikea Drive carries the red 'PERFORMANCE\nfoodservice' logo. The DC sits at 1 Ikea Drive in the Elizabeth port-industrial district,\nimmediately adjacent to the Elizabeth IKEA, a Floor & Decor, and the Maher container\nterminals. Locked center ~40.67085,-74.17055.",
         "mapsUrl": "https://www.google.com/maps/@40.67085,-74.17055,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Confirmed via Street View — the building carries the red 'PERFORMANCE foodservice' logo on its office front facing Ikea Drive. Located at 1 Ikea Drive, Elizabeth NJ, in the Elizabeth port-industrial district adjacent to IKEA, Floor & Decor and the Maher container terminals. Center ~40.67085,-74.17055.",
+          "location": "Confirmed via Street View, the building carries the red 'PERFORMANCE foodservice' logo on its office front facing Ikea Drive. Located at 1 Ikea Drive, Elizabeth NJ, in the Elizabeth port-industrial district adjacent to IKEA, Floor & Decor and the Maher container terminals. Center ~40.67085,-74.17055.",
           "truckGate": "Property is fully chain-link fenced along Ikea Drive (clearly visible in Street View). The truck yard and dock face are on the NE side; truck traffic enters through a fenced driveway. Gate hardware not individually resolved but the fenced single-driveway funnel supports a controlled entrance.",
           "guardShack": "No standalone guard booth identified at the entrance.",
           "remoteGs": "Inferred kiosk/call-box check-in (fenced gate, no shack); medium-low confidence.",
           "dropArea": "Very large trailer drop yard on the NE/N side, packed with 50+ trailers; the yard adjoins the next industrial building's yard. dropArea 50+.",
           "dockDoors": "Dock bank on the NE building face with many trailers backed in; ~40-50 doors estimated.",
-          "backupSensitive": "Dense urban port-industrial block — Ikea Drive is a busy two-lane artery; a queue at the gate has limited stacking space and could spill toward the IKEA/Floor & Decor intersection.",
+          "backupSensitive": "Dense urban port-industrial block, Ikea Drive is a busy two-lane artery; a queue at the gate has limited stacking space and could spill toward the IKEA/Floor & Decor intersection.",
           "fastLaneOpportunity": "Tight urban site with limited unused paved width at the entrance; no clear room for an express lane.",
-          "urbanRural": "Dense Elizabeth NJ port-industrial fabric — Urban."
+          "urbanRural": "Dense Elizabeth NJ port-industrial fabric, Urban."
         },
         "verification": {
           "verdict": "confirmed",
@@ -809,17 +809,17 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Roster coord (34.005031, -117.941805, ROOFTOP) was flagged movedMeters 1352, but that is a\nstale-geocode artifact — the rooftop coordinate is accurate. Cross-checked against\nLoopNet / LA County assessor parcels 8242-011-065 and -067 for 16639 Gale Ave\n(~34.00485,-117.94161). Street View positively confirmed the building: the west face along\nGale Ave carries the red 'PERFORMANCE foodservice' logo band. Locked center\n~34.00485,-117.9416.",
+        "dossierExcerpt": "Roster coord (34.005031, -117.941805, ROOFTOP) was flagged movedMeters 1352, but that is a\nstale-geocode artifact, the rooftop coordinate is accurate. Cross-checked against\nLoopNet / LA County assessor parcels 8242-011-065 and -067 for 16639 Gale Ave\n(~34.00485,-117.94161). Street View positively confirmed the building: the west face along\nGale Ave carries the red 'PERFORMANCE foodservice' logo band. Locked center\n~34.00485,-117.9416.",
         "mapsUrl": "https://www.google.com/maps/@34.00485,-117.9416,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Confirmed via Street View — building carries the red 'PERFORMANCE foodservice' logo on the west face along Gale Ave. Address 16639 Gale Ave, City of Industry CA; coord cross-checked against LoopNet/assessor parcel 8242-011-065/067 (~34.00485,-117.94161). Roster 'movedMeters 1352' is a stale-geocode artifact — rooftop coord is accurate.",
+          "location": "Confirmed via Street View, building carries the red 'PERFORMANCE foodservice' logo on the west face along Gale Ave. Address 16639 Gale Ave, City of Industry CA; coord cross-checked against LoopNet/assessor parcel 8242-011-065/067 (~34.00485,-117.94161). Roster 'movedMeters 1352' is a stale-geocode artifact, rooftop coord is accurate.",
           "truckGate": "Street View clearly shows a blue sliding gate spanning the truck driveway off Gale Ave, with chain-link perimeter fencing and a 'VISITOR' parking sign by the office. Controlled truck entrance confirmed.",
-          "guardShack": "No guard booth structure visible at the gate; entrance area is partly tree-shaded in satellite but Street View shows no booth — access is gate-only.",
-          "remoteGs": "Gate present, no shack — kiosk/call-box/app check-in implied. true.",
+          "guardShack": "No guard booth structure visible at the gate; entrance area is partly tree-shaded in satellite but Street View shows no booth, access is gate-only.",
+          "remoteGs": "Gate present, no shack, kiosk/call-box/app check-in implied. true.",
           "dockDoors": "Long dock bank on the east face of the DC with trailers backed in; ~50+ doors.",
           "dropArea": "Trailer drop stalls in the yard east of the building; ~25-50 trailers.",
           "fastLaneOpportunity": "Tight, fully built-out urban industrial parcel; the gate apron has little spare width for an express lane.",
-          "urbanRural": "Dense City of Industry industrial corridor — Urban."
+          "urbanRural": "Dense City of Industry industrial corridor, Urban."
         },
         "verification": {
           "verdict": "confirmed",
@@ -1019,12 +1019,12 @@
         "dossierExcerpt": "The roster supplied 41.721277, -88.358237 (ROOFTOP geocode, 1,068 m moved). Satellite\nprobing at z17-z20 around that point landed squarely on a long NE-SW industrial\nbuilding fronting Baseline Rd. Web research confirms 5030 Baseline Rd is the\nPerformance Foodservice - Chicago broadline DC, the former Fox River Foods\nheadquarters (Fox River Foods was acquired by PFG; the LinkedIn page now reads\n\"Performance Foodservice - Fox River\"). Reported as a ~325,000 sq ft warehouse with\n23 refrigerated + 11 dry dock doors, ~100 outbound trucks/day serving 7 states.\nStreet View signage (\"SHIPPING / RECEIVING\") on the building wall along Baseline Rd\ncorroborates the freight identity. Lock is high-confidence.",
         "mapsUrl": "https://www.google.com/maps/@41.7214,-88.3585,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "No controlled truck gate. The truck driveway leaves Baseline Rd on the NE corner of the property as a wide open paved drive and curves south into the truck court between the PFG building (west) and a neighboring industrial building (east). Street View (Apr 2024) of the entrance shows no barrier arm, no sliding/swing gate, and no checkpoint pinch-point — only a red 'SHIPPING / RECEIVING' sign at the driveway mouth. No perimeter security fence along Baseline Rd.",
+          "truckGate": "No controlled truck gate. The truck driveway leaves Baseline Rd on the NE corner of the property as a wide open paved drive and curves south into the truck court between the PFG building (west) and a neighboring industrial building (east). Street View (Apr 2024) of the entrance shows no barrier arm, no sliding/swing gate, and no checkpoint pinch-point, only a red 'SHIPPING / RECEIVING' sign at the driveway mouth. No perimeter security fence along Baseline Rd.",
           "guardShack": "No guard booth at the entrance or anywhere on the property. The entrance Street View shows an open landscaped driveway with no gatehouse structure.",
-          "remoteGs": "False — there is no truck gate at all, so remote check-in does not apply.",
+          "remoteGs": "False, there is no truck gate at all, so remote check-in does not apply.",
           "dockDoors": "Dock doors run along the east (truck-court) face of the long PFG building; tight z20 imagery shows trailers backed into a gravel/dirt dock apron. Corroborating web research (Fox River Foods / PFG-Chicago) reports 23 refrigerated + 11 dry = 34 dock doors total; band 25-50.",
-          "dropArea": "Modest trailer parking — roughly a dozen trailers staged in the truck court near the entrance and along the dock apron. The very large dense trailer field immediately EAST of the PFG property belongs to a separate neighboring operation (building-products / general industrial) and is excluded. Band 10-25 for PFG's own staging; capacity estimate low-confidence.",
-          "dropYard": "False — no dedicated standalone trailer-storage lot on the PFG parcel; trailers stage in the active truck court only.",
+          "dropArea": "Modest trailer parking, roughly a dozen trailers staged in the truck court near the entrance and along the dock apron. The very large dense trailer field immediately EAST of the PFG property belongs to a separate neighboring operation (building-products / general industrial) and is excluded. Band 10-25 for PFG's own staging; capacity estimate low-confidence.",
+          "dropYard": "False, no dedicated standalone trailer-storage lot on the PFG parcel; trailers stage in the active truck court only.",
           "postGateStaging": "The wide paved truck court at the NE end of the building between the entrance and the dock apron provides interior holding/queue room.",
           "drivewayLong": "The entrance drive plus the long truck court running the length of the dock face can hold a queue of 3+ trucks.",
           "urbanRural": "Montgomery IL is a far-southwest Chicago-metro exurb; the site sits in a continuous industrial corridor along Baseline Rd with abutting warehouses and lumber/building-products yards. Classified Urban as part of the greater Chicago metro fabric.",
@@ -1217,15 +1217,15 @@
         "dossierExcerpt": "The roster supplied 41.944117, -71.136682 (GEOMETRIC_CENTER geocode, 157 m moved).\nSatellite probing at z17-z21 around that point landed on a large dark+white-roofed\ndistribution complex inside a Taunton industrial park, with a long dock face and a\nbig trailer drop yard. Web research confirms 225 John Hancock Rd is the Performance\nFoodservice - Boston broadline DC, the former Reinhart Foodservice location (now\nPFG; NLRB case file lists \"Performance Foodservice Boston (formerly Reinhart\nFoodservice)\"). Street View along John Hancock Rd shows the office front and\nemployee parking of a large DC. Lock is high-confidence.",
         "mapsUrl": "https://www.google.com/maps/@41.9433,-71.137,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "No controlled truck gate. The property fronts John Hancock Rd with fully open access — Street View (Aug 2025) shows the employee parking lot running directly off the public road with no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point. Trucks enter the same open driveway and proceed into the truck court / drop yard. Google's Street View car was able to drive onto the interior truck-yard pavement, confirming the entrance is uncontrolled.",
+          "truckGate": "No controlled truck gate. The property fronts John Hancock Rd with fully open access, Street View (Aug 2025) shows the employee parking lot running directly off the public road with no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point. Trucks enter the same open driveway and proceed into the truck court / drop yard. Google's Street View car was able to drive onto the interior truck-yard pavement, confirming the entrance is uncontrolled.",
           "guardShack": "No guard booth at the entrance or on the property. A small dark flat-roofed structure sits deep inside the trailer drop yard (z21 imagery) but it is a fuel-island/maintenance shed in the yard interior, not an entrance guard booth.",
-          "remoteGs": "False — there is no truck gate at all.",
-          "dockDoors": "Long dock face along the south side of the main building with many trailers backed in (z18-z19). Counted ~50; band 50+. Exact count uncertain — trailers obscure doors.",
-          "dropArea": "Large dedicated trailer drop yard south of the dock face — dense rows of drop trailers (75+ visible in imagery); a true standalone trailer-storage lot, band 50+.",
-          "dropYard": "True — a dedicated trailer-storage lot occupies the area south of the dock apron, separate from active dock staging.",
+          "remoteGs": "False, there is no truck gate at all.",
+          "dockDoors": "Long dock face along the south side of the main building with many trailers backed in (z18-z19). Counted ~50; band 50+. Exact count uncertain, trailers obscure doors.",
+          "dropArea": "Large dedicated trailer drop yard south of the dock face, dense rows of drop trailers (75+ visible in imagery); a true standalone trailer-storage lot, band 50+.",
+          "dropYard": "True, a dedicated trailer-storage lot occupies the area south of the dock apron, separate from active dock staging.",
           "postGateStaging": "Wide paved truck court between the dock face and the drop yard provides ample interior queue/staging room.",
           "drivewayLong": "The entrance drive plus the deep interior truck court easily holds a queue of 3+ trucks.",
-          "urbanRural": "Located in an industrial park on the edge of Taunton MA, a small-to-mid-size city; surrounded by other warehouses with wooded buffers. Edge-of-town small-industrial setting — classified Rural per the rubric tie-break.",
+          "urbanRural": "Located in an industrial park on the edge of Taunton MA, a small-to-mid-size city; surrounded by other warehouses with wooded buffers. Edge-of-town small-industrial setting, classified Rural per the rubric tie-break.",
           "scale": "No truck scale visible in overhead imagery.",
           "multipleFacilities": "Single PFG building. Other large buildings nearby (NW and SE) are separate occupants of the same industrial park.",
           "railServed": "No rail spur runs into the property."
@@ -1357,20 +1357,20 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster supplied 34.238210, -83.872814 (GEOMETRIC_CENTER geocode, 157 m moved).\nThis required real resolution effort. A warehouserating.com listing places 3501 Old\nOakwood Rd at 34.238252, -83.875948 — but Street View there shows a small retail\nstrip (\"Nutrition\" sign), not a distribution center, so that geocode is wrong. The\nroster's own GEOMETRIC_CENTER point, by contrast, lands on a genuine multi-building\nDC complex. Street View at 34.2383, -83.8739 (Apr 2022) — taken from the interior\ntruck-yard pavement — shows a long dock canopy with multiple tractors and trailers\nbacked in: an active multi-temperature broadline food DC. That positively identifies\nthe PFG Milton's campus. Lock confidence: medium (the campus is a sprawl of\nbuildings and the precise center is judgment).",
+        "dossierExcerpt": "The roster supplied 34.238210, -83.872814 (GEOMETRIC_CENTER geocode, 157 m moved).\nThis required real resolution effort. A warehouserating.com listing places 3501 Old\nOakwood Rd at 34.238252, -83.875948, but Street View there shows a small retail\nstrip (\"Nutrition\" sign), not a distribution center, so that geocode is wrong. The\nroster's own GEOMETRIC_CENTER point, by contrast, lands on a genuine multi-building\nDC complex. Street View at 34.2383, -83.8739 (Apr 2022), taken from the interior\ntruck-yard pavement, shows a long dock canopy with multiple tractors and trailers\nbacked in: an active multi-temperature broadline food DC. That positively identifies\nthe PFG Milton's campus. Lock confidence: medium (the campus is a sprawl of\nbuildings and the precise center is judgment).",
         "mapsUrl": "https://www.google.com/maps/@34.2384,-83.873,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No controlled truck gate identified. PFG Milton's is a multi-building campus set back behind a treeline buffer from the public road (Mundy Mill Rd / Old Oakwood Rd). Internal access roads connect the buildings; Street View (Apr 2022) shows Google's car drove onto the interior truck-yard pavement and dock face, indicating an open/uncontrolled entrance. A chain-link fence separates an employee parking lot from the truck yard but there is no barrier arm or checkpoint at the property entrance.",
           "guardShack": "No guard booth visible at any entrance to the campus.",
-          "remoteGs": "False — no controlled truck gate.",
-          "dockDoors": "Multiple dock faces across the campus buildings — trailers backed in onto dock aprons at the main DC (z18/z19 imagery), plus additional doors on the meat-cutting / freezer / fleet buildings. Aggregate ~60 across the campus; band 50+. Low-confidence count given multiple building faces.",
+          "remoteGs": "False, no controlled truck gate.",
+          "dockDoors": "Multiple dock faces across the campus buildings, trailers backed in onto dock aprons at the main DC (z18/z19 imagery), plus additional doors on the meat-cutting / freezer / fleet buildings. Aggregate ~60 across the campus; band 50+. Low-confidence count given multiple building faces.",
           "dropArea": "Dedicated trailer drop yard on the NE side of the campus with dense rows of drop trailers (55+ visible). Band 50+.",
-          "dropYard": "True — a dedicated trailer-storage lot occupies the NE portion of the campus.",
-          "multipleFacilities": "True — PFG Milton's is a campus of multiple large buildings. Per web research the campus includes the original broadline DC plus a 174,000 sq ft expansion building (on 43 adjacent acres) housing freezer, meat-cutting operation, and fleet operations.",
-          "shipRcvSeparate": "Likely — the multi-building campus (broadline DC + separate freezer/meat-cutting building) implies physically separate dock clusters on different buildings. Medium-confidence; flagged.",
-          "truckGateCount": "Estimated 2 — the campus has more than one access driveway off the surrounding roads. Low-confidence.",
+          "dropYard": "True, a dedicated trailer-storage lot occupies the NE portion of the campus.",
+          "multipleFacilities": "True, PFG Milton's is a campus of multiple large buildings. Per web research the campus includes the original broadline DC plus a 174,000 sq ft expansion building (on 43 adjacent acres) housing freezer, meat-cutting operation, and fleet operations.",
+          "shipRcvSeparate": "Likely, the multi-building campus (broadline DC + separate freezer/meat-cutting building) implies physically separate dock clusters on different buildings. Medium-confidence; flagged.",
+          "truckGateCount": "Estimated 2, the campus has more than one access driveway off the surrounding roads. Low-confidence.",
           "postGateStaging": "Wide internal paved truck courts between the campus buildings provide interior holding/queue room.",
-          "urbanRural": "Oakwood GA is a small town in Hall County on the exurban fringe of metro Atlanta along I-985 — small-town industrial setting, not dense metro fabric. Classified Rural per the rubric tie-break.",
+          "urbanRural": "Oakwood GA is a small town in Hall County on the exurban fringe of metro Atlanta along I-985, small-town industrial setting, not dense metro fabric. Classified Rural per the rubric tie-break.",
           "scale": "No truck scale visible in overhead imagery.",
           "railServed": "No rail spur runs into the campus.",
           "_locationNote": "A warehouserating.com listing places 3501 Old Oakwood Rd at 34.238252,-83.875948, but Street View at that point shows a small retail strip, not a DC. The actual PFG Milton's campus is ~290 m ESE at the locked coordinate, confirmed by Street View dock-face imagery of trailers backed into a multi-temp food DC."
@@ -1511,20 +1511,20 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster supplied 32.767167, -97.265073 (ROOFTOP geocode, 58 m moved). Google's\noverhead satellite imagery of that exact point still shows a graded but empty\ngreenfield site — the imagery predates the building. Resolution therefore relied on\nStreet View and project records:\n\n- Street View (Jan 2025) at the roster point, looking south across E 1st St,\n  shows a large white industrial building under final construction directly behind a\n  stone-faced retaining wall — an office/admin front elevation with a dock-area wing\n  visible to the west. This is the new PFG DC.\n- Project records: TDLR project \"Scannell - PFG Dallas\" (TABS2024004778) — a new\n  cold-storage food distribution facility with office space, 343,000 sq ft, owner\n  SP White Ft. Worth JV LLC, start Nov 2023, completion June 2025, status \"Inspection",
+        "dossierExcerpt": "The roster supplied 32.767167, -97.265073 (ROOFTOP geocode, 58 m moved). Google's\noverhead satellite imagery of that exact point still shows a graded but empty\ngreenfield site, the imagery predates the building. Resolution therefore relied on\nStreet View and project records:\n\n- Street View (Jan 2025) at the roster point, looking south across E 1st St,\n  shows a large white industrial building under final construction directly behind a\n  stone-faced retaining wall, an office/admin front elevation with a dock-area wing\n  visible to the west. This is the new PFG DC.\n- Project records: TDLR project \"Scannell - PFG Dallas\" (TABS2024004778), a new\n  cold-storage food distribution facility with office space, 343,000 sq ft, owner\n  SP White Ft. Worth JV LLC, start Nov 2023, completion June 2025, status \"Inspection",
         "mapsUrl": "https://www.google.com/maps/@32.767167,-97.265073,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "_locationNote": "Roster coords (32.767167,-97.265073, ROOFTOP, 58 m moved) are correct, but Google's overhead satellite imagery of this exact spot still shows graded greenfield — it predates the building. Street View from John Hancock-equivalent road at this point, captured Jan 2025, shows a large white industrial building under final construction directly behind a stone-faced retaining wall, with an office/admin front elevation and a dock-area wing. This is the new PFG / Scannell cold-storage DC. Overhead yard-detail imagery is unavailable.",
+          "_locationNote": "Roster coords (32.767167,-97.265073, ROOFTOP, 58 m moved) are correct, but Google's overhead satellite imagery of this exact spot still shows graded greenfield, it predates the building. Street View from John Hancock-equivalent road at this point, captured Jan 2025, shows a large white industrial building under final construction directly behind a stone-faced retaining wall, with an office/admin front elevation and a dock-area wing. This is the new PFG / Scannell cold-storage DC. Overhead yard-detail imagery is unavailable.",
           "truckGate": "Medium-confidence true. This is a brand-new, build-to-suit cold-storage food DC (developer Scannell Properties / GC ARCO National; TDLR project 'Scannell - PFG Dallas', completion June 2025). New build-to-suit food DCs of this class are essentially always built with a controlled, fenced truck entrance. The Jan-2025 Street View shows a partly-built perimeter wall and a defined site entry, but the gate hardware itself is not yet resolvable. Flagged uncertain.",
           "guardShack": "No guard booth confirmed. Modern new-build food DCs typically use a kiosk / camera / app check-in rather than a staffed booth; no booth structure was visible in the construction-phase Street View. Flagged uncertain.",
-          "remoteGs": "Medium-confidence true — assumes a controlled gate with kiosk/app check-in and no staffed guard shack, the standard pattern for a 2025-vintage cold-storage DC. Flagged uncertain; depends on truckGate being true.",
+          "remoteGs": "Medium-confidence true, assumes a controlled gate with kiosk/app check-in and no staffed guard shack, the standard pattern for a 2025-vintage cold-storage DC. Flagged uncertain; depends on truckGate being true.",
           "dockDoors": "50+ band. The facility is a 343,000-355,000 sq ft cold-storage DC (per TDLR / ARCO / Scannell). A DC of this size and class typically carries 50+ dock doors. Exact count not verifiable from available imagery; flagged uncertain.",
           "dropArea": "NONE recorded because no trailers were visible (building was still under construction in the imagery). The completed facility will have a truck court / trailer parking, but it could not be measured. Flagged uncertain.",
-          "dropYard": "Not confirmed — yard not yet built out in available imagery. Flagged uncertain.",
+          "dropYard": "Not confirmed, yard not yet built out in available imagery. Flagged uncertain.",
           "postGateStaging": "A facility of this size will have a deep interior truck court; recorded true on that basis but flagged uncertain.",
           "urbanRural": "Far east Fort Worth on a greenfield industrial site surrounded by graded land, oilfield-services pads, and an emerging industrial corridor; sparse surrounding development. Classified Rural.",
           "buildingCount": "Single large cold-storage distribution building (343,000-355,000 sq ft).",
-          "railServed": "No rail spur — none visible in imagery and not mentioned in project documentation.",
+          "railServed": "No rail spur, none visible in imagery and not mentioned in project documentation.",
           "scale": "No truck scale confirmed; not verifiable from available imagery."
         },
         "verification": {
@@ -1665,7 +1665,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster coordinate (29.978631, -95.386916) landed directly on a large\ndistribution building under construction on Farrell Rd. The roster geocode note\nflagged a 3776 m move, so the location was independently verified: web search\nconfirmed 1616 Farrell Rd sits at the Farrell Rd / Aldine Westfield Rd area in\n77073, immediately adjacent to Lochinvar Golf Club (2000 Farrell Rd) — and that\ngolf course is plainly visible on the east side of the wide satellite frame.\nThe building is therefore positively confirmed as the PFG Houston DC.\n\nImportant caveat: all available imagery shows the facility mid-construction.\nSatellite (2026 vintage tiles) shows the building shell substantially complete\nbut the surrounding site still bare graded dirt with no completed paving, dock\naprons, or striped trailer parking. Street View (Dec 2024) shows the building up",
+        "dossierExcerpt": "The roster coordinate (29.978631, -95.386916) landed directly on a large\ndistribution building under construction on Farrell Rd. The roster geocode note\nflagged a 3776 m move, so the location was independently verified: web search\nconfirmed 1616 Farrell Rd sits at the Farrell Rd / Aldine Westfield Rd area in\n77073, immediately adjacent to Lochinvar Golf Club (2000 Farrell Rd), and that\ngolf course is plainly visible on the east side of the wide satellite frame.\nThe building is therefore positively confirmed as the PFG Houston DC.\n\nImportant caveat: all available imagery shows the facility mid-construction.\nSatellite (2026 vintage tiles) shows the building shell substantially complete\nbut the surrounding site still bare graded dirt with no completed paving, dock\naprons, or striped trailer parking. Street View (Dec 2024) shows the building up",
         "mapsUrl": "https://www.google.com/maps/@29.97850,-95.38680,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "Imagery captured mid-construction (Dec 2024 Street View; satellite shows building substantially complete with most of the site still bare graded dirt). Counts are honest projections for the completed facility, not finished-state observations.",
@@ -1673,7 +1673,7 @@
           "guardShack": "A modular/booth structure sits just inside the truck gate (visible in Street View). Likely doubles as construction office during build-out but is positioned as a gatehouse. Medium confidence given construction-era imagery.",
           "dockDoors": "Refrigerated/freezer DC class building (rooftop refrigeration units visible). Dock doors line the long east face; band 50+ is a projection for a facility of this footprint and type.",
           "dropArea": "Large graded yard south and west of the building being built out as trailer parking; capacity 50+ projected.",
-          "fastLaneOpportunity": "Very wide entrance aprons and ample undeveloped paved width — clear room to add an express/bypass lane.",
+          "fastLaneOpportunity": "Very wide entrance aprons and ample undeveloped paved width, clear room to add an express/bypass lane.",
           "urbanRural": "Edge-of-metro setting on a rural-feeling road (Farrell Rd) bordered by woods, a golf course (Lochinvar GC), and scattered rural homes. Classified Rural per rubric tie-break guidance.",
           "scale": "No truck scale visible in construction-era imagery; cannot rule out installation as the yard is completed."
         },
@@ -1884,9 +1884,9 @@
         "mapsUrl": "https://www.google.com/maps/@45.197902,-93.54305,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No controlled truck gate. The main access driveway runs straight from Commerce Blvd into the property with no barrier arm, sliding gate, or checkpoint pinch-point. The trailer yard along the west side is open to the property road; perimeter is a grassy berm and trees, no security fence.",
-          "guardShack": "No guard booth anywhere on the property. Entrance from Street View shows an open driveway directly to the building forecourt with employee parking — no gatehouse structure.",
+          "guardShack": "No guard booth anywhere on the property. Entrance from Street View shows an open driveway directly to the building forecourt with employee parking, no gatehouse structure.",
           "dockDoors": "Long dock face along the east side of the building with trailers backed into doors visible in tight imagery. Counted ~50+; band 50+. Exact count uncertain due to trailers obscuring some doors.",
-          "dropArea": "Extensive trailer drop yard along the west side of the building — dense rows of angled drop trailers (90+ trailers visible in imagery), clearly a dedicated trailer-storage lot.",
+          "dropArea": "Extensive trailer drop yard along the west side of the building, dense rows of angled drop trailers (90+ trailers visible in imagery), clearly a dedicated trailer-storage lot.",
           "postGateStaging": "Wide internal paved apron between the dock face and the drop yard provides ample post-entry queue/staging room.",
           "urbanRural": "Located in the Rogers MN industrial park on the NW edge of the Twin Cities metro, adjacent to undeveloped wooded/wetland land and a retention pond. Edge-of-metro small-industrial setting; classified Rural per rubric tie-break.",
           "scale": "No truck scale visible in overhead imagery.",
@@ -2112,12 +2112,12 @@
         "mapsUrl": "https://www.google.com/maps/@39.877035,-104.864645,400m/data=!3m1!1e3",
         "fieldNotes": {
           "site": "New ~265,000 sq ft Performance Foodservice Denver DC (groundbreaking Sept 2022, completed late 2023). All imagery is construction-era: Street View Sept 2023 shows the building shell up and the perimeter fence installed but the site otherwise bare dirt; satellite tiles likewise show graded dirt around a completed building. Counts are projections for the finished facility.",
-          "truckGate": "A full-length black metal security/perimeter fence is installed along the Havana St frontage (clearly visible in Sept 2023 Street View). The property is fenced with a controlled entry off Havana St — classified as a controlled truck gate.",
-          "guardShack": "No freestanding guard booth visible. Construction-era imagery shows the fence and entry but no completed gatehouse; a structure at the building SW corner resolves on max-zoom satellite as a projecting building bay, not a booth. guardShack set false with remoteGs true (fenced gated entry, no visible booth implies kiosk/app/remote check-in). Both flagged uncertain — construction-era imagery cannot confirm the finished check-in setup.",
+          "truckGate": "A full-length black metal security/perimeter fence is installed along the Havana St frontage (clearly visible in Sept 2023 Street View). The property is fenced with a controlled entry off Havana St, classified as a controlled truck gate.",
+          "guardShack": "No freestanding guard booth visible. Construction-era imagery shows the fence and entry but no completed gatehouse; a structure at the building SW corner resolves on max-zoom satellite as a projecting building bay, not a booth. guardShack set false with remoteGs true (fenced gated entry, no visible booth implies kiosk/app/remote check-in). Both flagged uncertain, construction-era imagery cannot confirm the finished check-in setup.",
           "dockDoors": "Refrigerated/distribution building of ~265,000 sq ft; dock face along the SE side. Band 25-50 projected; exact count not observable due to construction.",
           "dropArea": "Large graded area south and southeast of the building being built out as trailer parking; capacity 50+ projected.",
-          "fastLaneOpportunity": "Very wide entry apron and large undeveloped paved expanse — room to add an express/bypass lane.",
-          "urbanRural": "Commerce City industrial fringe NE of Denver — flanked by a drainage canal, open agricultural land to the east, and scattered industrial yards. Edge-of-metro industrial setting; classified Rural per rubric tie-break.",
+          "fastLaneOpportunity": "Very wide entry apron and large undeveloped paved expanse, room to add an express/bypass lane.",
+          "urbanRural": "Commerce City industrial fringe NE of Denver, flanked by a drainage canal, open agricultural land to the east, and scattered industrial yards. Edge-of-metro industrial setting; classified Rural per rubric tie-break.",
           "scale": "No truck scale visible in construction-era imagery; cannot rule out.",
           "railServed": "A rail line runs along the east side of the broader corridor but no spur visibly enters the property."
         },
@@ -2280,12 +2280,12 @@
         "mapsUrl": "https://www.google.com/maps/@42.474855,-83.063823,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "The truck yard (dock aprons + drop/fleet parking on the north and east of the buildings) is enclosed by a chain-link perimeter fence, visible in 2022 Street View along the north property line and in tight satellite. The truck yard is entered through a controlled gate off the north-side service drive. The separate front office entrance on Ryan Rd is an open visitor driveway.",
-          "guardShack": "No guard booth visible at the truck gate in any imagery (2018/2019/2022/2025 Street View, current satellite). Classified guardShack false / remoteGs true (fenced gated yard with no booth implies kiosk / intercom check-in). Both flagged uncertain — this is an older urban Reinhart-era DC and a small booth could be obscured by trees.",
+          "guardShack": "No guard booth visible at the truck gate in any imagery (2018/2019/2022/2025 Street View, current satellite). Classified guardShack false / remoteGs true (fenced gated yard with no booth implies kiosk / intercom check-in). Both flagged uncertain, this is an older urban Reinhart-era DC and a small booth could be obscured by trees.",
           "dockDoors": "Two connected buildings with dock faces along the north building face and the east side; ~25-50 doors with trailers backed in across multiple faces. Band 25-50.",
           "dropArea": "Moderate trailer drop area in the NW of the yard (rows of parked drop trailers) plus a tractor/fleet parking strip. Band 10-25 for true drop (no-tractor) trailers; full fleet count higher.",
-          "drivewayShort": "Tight urban site — the gate-to-dock approach is short (1-2 trucks of stacking room); no deep internal queue lane.",
+          "drivewayShort": "Tight urban site, the gate-to-dock approach is short (1-2 trucks of stacking room); no deep internal queue lane.",
           "backupSensitive": "Constrained urban parcel hemmed by Ryan Rd, a strip mall to the north, and residential housing on the east and south. A truck queue at the gate has little stacking room and would quickly spill onto the local street.",
-          "urbanRural": "Dense suburban Detroit (Warren MI) — single-family residential housing directly abuts the property on the east and south, strip retail to the north. Clearly Urban.",
+          "urbanRural": "Dense suburban Detroit (Warren MI), single-family residential housing directly abuts the property on the east and south, strip retail to the north. Clearly Urban.",
           "multipleFacilities": "Two physically connected building sections counted as one facility (one campus); multipleFacilities false.",
           "scale": "No truck scale visible in overhead imagery.",
           "railServed": "No rail spur enters the property."
@@ -2436,7 +2436,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 1624 Army Ct, Stockton, CA 95206\nResolved coordinates: 37.93255, -121.32450\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster supplied ROOFTOP-grade coordinates (37.932725, -121.323148) that\nmoved only 24 m at geocode — these land squarely on the east-side truck court\nof the facility. Web research confirms 1624 Army Court is the **Stockton\nCommerce Center**, a Dermody Properties spec building; LoopNet listings for the\naddress describe **64 dock doors with levelers, 5 rail-served receiving doors,\nup to 205 ft truck-court depth, 30 ft clear height**. Performance Foodservice's\nown location page and Waze list this as the \"Northern California\" broadline DC\nserving the Sacramento / Bay Area market. Street View from January 2022 shows",
+        "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 1624 Army Ct, Stockton, CA 95206\nResolved coordinates: 37.93255, -121.32450\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster supplied ROOFTOP-grade coordinates (37.932725, -121.323148) that\nmoved only 24 m at geocode, these land squarely on the east-side truck court\nof the facility. Web research confirms 1624 Army Court is the **Stockton\nCommerce Center**, a Dermody Properties spec building; LoopNet listings for the\naddress describe **64 dock doors with levelers, 5 rail-served receiving doors,\nup to 205 ft truck-court depth, 30 ft clear height**. Performance Foodservice's\nown location page and Waze list this as the \"Northern California\" broadline DC\nserving the Sacramento / Bay Area market. Street View from January 2022 shows",
         "mapsUrl": "https://www.google.com/maps/@37.93255,-121.3245,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Street View (2022-01) shows a chain-link sliding gate across the truck driveway off the cul-de-sac on the building's east side.",
@@ -2818,13 +2818,13 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 455 S 75th Avenue, Phoenix, AZ 85043\nResolved coordinates: 33.44260, -112.21950\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster geocode (33.442346, -112.219523, ROOFTOP, moved 678 m) lands on the\nPFG-occupied DC building. Street View along S 75th Ave (2023-02 and 2025-12)\nshows the building's west wall carrying a blue \"FOODSERVICE / SUPPLY\" sign,\nand a pole sign at the curb — positively identifying the Performance\nFoodservice — Arizona branch. Performance Foodservice's location page lists 455\nS 75th Avenue as the Arizona broadline DC; phone (480) 705-3000.\n\nThe facility sits in the Phoenix west-side industrial district along S 75th\nAvenue, surrounded by large distribution warehouses (Target import center and",
+        "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 455 S 75th Avenue, Phoenix, AZ 85043\nResolved coordinates: 33.44260, -112.21950\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster geocode (33.442346, -112.219523, ROOFTOP, moved 678 m) lands on the\nPFG-occupied DC building. Street View along S 75th Ave (2023-02 and 2025-12)\nshows the building's west wall carrying a blue \"FOODSERVICE / SUPPLY\" sign,\nand a pole sign at the curb, positively identifying the Performance\nFoodservice, Arizona branch. Performance Foodservice's location page lists 455\nS 75th Avenue as the Arizona broadline DC; phone (480) 705-3000.\n\nThe facility sits in the Phoenix west-side industrial district along S 75th\nAvenue, surrounded by large distribution warehouses (Target import center and",
         "mapsUrl": "https://www.google.com/maps/@33.4426,-112.2195,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "The truck/dock yard is enclosed by a block wall plus chain-link fence; a curving paved entrance driveway leads through a gated opening at the SW. Controlled entry confirmed in satellite + Street View.",
-          "guardShack": "No staffed guard booth observed beside the gate; entry appears gate-only (kiosk/call-box style) — set remoteGs true. Flagged as uncertain since the curving driveway corner is partly tree-shaded.",
+          "guardShack": "No staffed guard booth observed beside the gate; entry appears gate-only (kiosk/call-box style), set remoteGs true. Flagged as uncertain since the curving driveway corner is partly tree-shaded.",
           "dockDoors": "Dock bank along the building's south face with trailers backed in; ~24 doors estimated overhead.",
-          "dropArea": "Large unpaved/graded trailer drop lot directly south of the building holds many dozens of trailers in rows — clearly 50+.",
+          "dropArea": "Large unpaved/graded trailer drop lot directly south of the building holds many dozens of trailers in rows, clearly 50+.",
           "buildingCount": "Main DC plus a smaller secondary structure to the west/north on the same parcel.",
           "fastLaneOpportunity": "Wide curving gate apron and ample paved width at the entrance leave room for an express/bypass lane."
         },
@@ -3038,8 +3038,8 @@
           "guardShack": "No guard booth observed at any entrance.",
           "dockDoors": "Dock bank with a red canopy along the south face; ~30 doors estimated overhead, partly obscured by trailers backed in.",
           "dropArea": "Large drop yard south of the dock court holds 50+ trailers and PFG box trucks in rows.",
-          "urbanRural": "Semi-rural / edge-of-town setting — SE Thompson Dr is a narrow road with adjacent farmland, woods and scattered rural housing; classified Rural per the small-town-vs-urban tiebreak.",
-          "vistar": "A trailer at the dock carries Vistar branding — PFG's Vistar segment operates from this Kansas City DC alongside broadline."
+          "urbanRural": "Semi-rural / edge-of-town setting, SE Thompson Dr is a narrow road with adjacent farmland, woods and scattered rural housing; classified Rural per the small-town-vs-urban tiebreak.",
+          "vistar": "A trailer at the dock carries Vistar branding, PFG's Vistar segment operates from this Kansas City DC alongside broadline."
         },
         "verification": {
           "verdict": "confirmed",
@@ -3183,7 +3183,7 @@
           "multipleFacilities": "L-shaped two-building white-roof DC plus a separate maintenance/canopy shop building in the yard; counted as a multi-building campus.",
           "dropYard": "Large dedicated trailer-storage lot on the west side (full of parked trailers) plus a second separate trailer lot to the southeast across the loop road.",
           "postGateStaging": "Large internal paved yard between the buildings provides ample queuing/holding space before the dock doors.",
-          "entryLanes": "Single-lane open driveways; no formal multi-lane gate to count — estimate 1 in / 1 out.",
+          "entryLanes": "Single-lane open driveways; no formal multi-lane gate to count, estimate 1 in / 1 out.",
           "railServed": "No rail spur enters the property; nearest rail is not adjacent."
         },
         "verification": {
@@ -3336,13 +3336,13 @@
         "mapsUrl": "https://www.google.com/maps/@36.17760,-83.37150,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Confirmed via Street View (April 2025): a barrier-arm gate spans the truck lane at the property entrance off the airport-business-park road, with painted lane markings and a paved gate island. Perimeter chain-link fencing visible on both sides.",
-          "guardShack": "A small peaked-roof guard booth with windows on multiple sides sits on a paved island between the entry and exit lanes at the gate — classic staffed guard-shack footprint.",
-          "remoteGs": "False — a physical guard booth is present, so this is a manned gate, not a remote/kiosk check-in.",
-          "entryExitTogether": "Entry and exit lanes split around the single guard-booth island at one point of the property line — one gate group, so entry/exit together.",
+          "guardShack": "A small peaked-roof guard booth with windows on multiple sides sits on a paved island between the entry and exit lanes at the gate, classic staffed guard-shack footprint.",
+          "remoteGs": "False, a physical guard booth is present, so this is a manned gate, not a remote/kiosk check-in.",
+          "entryExitTogether": "Entry and exit lanes split around the single guard-booth island at one point of the property line, one gate group, so entry/exit together.",
           "postGateStaging": "Large paved interior yard between the gate and the dock faces provides ample truck holding/queue space.",
-          "dockDoors": "Multi-section white-roof DC with dock banks on the south/west building faces; satellite imagery is hazy — estimate ~45 doors, flagged.",
-          "dropArea": "Trailer parking rows on the east side of the building hold parked trailers — estimated 25-50 band.",
-          "urbanRural": "Facility sits in the airport-adjacent East Tennessee Progress Center / Air Park business area on the edge of Morristown, surrounded by airport land, open fields, and woods — Rural per rubric.",
+          "dockDoors": "Multi-section white-roof DC with dock banks on the south/west building faces; satellite imagery is hazy, estimate ~45 doors, flagged.",
+          "dropArea": "Trailer parking rows on the east side of the building hold parked trailers, estimated 25-50 band.",
+          "urbanRural": "Facility sits in the airport-adjacent East Tennessee Progress Center / Air Park business area on the edge of Morristown, surrounded by airport land, open fields, and woods, Rural per rubric.",
           "railServed": "A rail line runs along the northwest near the airport but does not appear to enter the PFG property with a spur."
         },
         "verification": {
@@ -3528,12 +3528,12 @@
         "mapsUrl": "https://www.google.com/maps/@38.21080,-85.54900,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint. The dock-side truck apron is reached by open driveways within the Bluegrass Industrial Park; no perimeter fence around the building. Open multi-tenant industrial-park layout.",
-          "guardShack": "No guard booth anywhere along the building approach. The street-facing side seen in Nov-2024 Street View is a flush office/flex frontage with employee parking — no booth.",
+          "guardShack": "No guard booth anywhere along the building approach. The street-facing side seen in Nov-2024 Street View is a flush office/flex frontage with employee parking, no booth.",
           "buildingCount": "PFG occupies a unit in a single long multi-tenant industrial building; the parcel/perimeter box is scoped to the PFG portion and its south apron.",
-          "dockDoors": "A continuous bank of dock doors lines the south face at z19; ~28 estimated for the PFG-occupied section, but the building is multi-tenant so some doors may belong to neighbors — flagged.",
+          "dockDoors": "A continuous bank of dock doors lines the south face at z19; ~28 estimated for the PFG-occupied section, but the building is multi-tenant so some doors may belong to neighbors, flagged.",
           "dropArea": "Modest truck apron on the south side holds roughly a dozen trailers; no dedicated large trailer-storage lot, so dropYard=false and dropArea kept at 10-25.",
-          "drivewayShort": "Compact apron between the dock face and the bordering tree line / road — holds only 1-2 trucks deep on approach.",
-          "urbanRural": "Site is in the Bluegrass Industrial Park (Jeffersontown / Louisville metro), inside the Louisville urban fabric — Urban.",
+          "drivewayShort": "Compact apron between the dock face and the bordering tree line / road, holds only 1-2 trucks deep on approach.",
+          "urbanRural": "Site is in the Bluegrass Industrial Park (Jeffersontown / Louisville metro), inside the Louisville urban fabric, Urban.",
           "railServed": "No rail spur enters the property."
         },
         "verification": {
@@ -3721,14 +3721,14 @@
         "dossierExcerpt": "Address: 535 Shepherd Avenue, Cincinnati, OH 45215 (Lockland)\nType: Broadline Foodservice Distribution Center\nResolved coords: 39.23030, -84.44910\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@39.23030,-84.44910,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "The truck yard is enclosed by an ornamental black metal perimeter fence along the Shepherd Ave frontage (clearly visible in June-2025 Street View, with PFG-branded tractors lined up behind it). However the fence has wide OPEN driveway gaps with no barrier arm, sliding gate, or staffed checkpoint — no controlled gate in any view. Fenced yard with open driveway entrances = truckGate false.",
-          "guardShack": "No guard booth at any driveway opening — none seen along the full Shepherd Ave frontage in Street View or in z19-z20 satellite.",
-          "remoteGs": "False — no gate, so no remote check-in implied.",
-          "entryExitSeparate": "Two separate driveway openings in the perimeter fence — one serving the south drop yard, one serving the north dock-yard area — give distinct in/out points; truckGateCount=2.",
+          "truckGate": "The truck yard is enclosed by an ornamental black metal perimeter fence along the Shepherd Ave frontage (clearly visible in June-2025 Street View, with PFG-branded tractors lined up behind it). However the fence has wide OPEN driveway gaps with no barrier arm, sliding gate, or staffed checkpoint, no controlled gate in any view. Fenced yard with open driveway entrances = truckGate false.",
+          "guardShack": "No guard booth at any driveway opening, none seen along the full Shepherd Ave frontage in Street View or in z19-z20 satellite.",
+          "remoteGs": "False, no gate, so no remote check-in implied.",
+          "entryExitSeparate": "Two separate driveway openings in the perimeter fence, one serving the south drop yard, one serving the north dock-yard area, give distinct in/out points; truckGateCount=2.",
           "postGateStaging": "Large paved holding area north of the main building and broad internal yard provide ample truck queuing room inside the fence before the docks.",
-          "dropArea": "50+ — extensive trailer storage: angled trailer rows in the south drop yard plus a long line of tractors/trailers along the Shepherd Ave fence. PFG-branded trailers confirmed in Street View.",
-          "dockDoors": "Long dock bank on the east face of the main building with many trailers backed in; ~35 doors estimated — flagged.",
-          "urbanRural": "Dense Lockland / Reading industrial corridor north of Cincinnati, wedged between I-75 and an active rail line, with residential immediately east — clearly Urban.",
+          "dropArea": "50+, extensive trailer storage: angled trailer rows in the south drop yard plus a long line of tractors/trailers along the Shepherd Ave fence. PFG-branded trailers confirmed in Street View.",
+          "dockDoors": "Long dock bank on the east face of the main building with many trailers backed in; ~35 doors estimated, flagged.",
+          "urbanRural": "Dense Lockland / Reading industrial corridor north of Cincinnati, wedged between I-75 and an active rail line, with residential immediately east, clearly Urban.",
           "railServed": "An active rail line runs immediately east of the property but no spur enters the PFG site itself.",
           "buildingCount": "Main DC building plus a separate long narrow building at the south end of the property."
         },
@@ -3925,18 +3925,18 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied 40.788377, -76.490986 with a flagged geocode `movedMeters` of\n5761 m. Probing satellite at the supplied point landed on an empty grassy field\ninside the Coal Township industrial park — the actual DC building sits roughly\n300 m southwest. Web research confirmed 100 Industrial Park Road, Coal Township,\nPA 17866 (phone 570-644-1111) as the Performance Foodservice Eastern PA branch.\nThe building was positively identified at z16–z21: a large distribution warehouse\nwith a south-facing dock line, trailers backed in, and a large on-site trailer\nyard — consistent with a broadline foodservice DC. Locked center: 40.78785,\n-76.49245.",
+        "dossierExcerpt": "The roster supplied 40.788377, -76.490986 with a flagged geocode `movedMeters` of\n5761 m. Probing satellite at the supplied point landed on an empty grassy field\ninside the Coal Township industrial park, the actual DC building sits roughly\n300 m southwest. Web research confirmed 100 Industrial Park Road, Coal Township,\nPA 17866 (phone 570-644-1111) as the Performance Foodservice Eastern PA branch.\nThe building was positively identified at z16–z21: a large distribution warehouse\nwith a south-facing dock line, trailers backed in, and a large on-site trailer\nyard, consistent with a broadline foodservice DC. Locked center: 40.78785,\n-76.49245.",
         "mapsUrl": "https://www.google.com/maps/@40.78785,-76.49245,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Supplied coords were ~5.7 km off (geocode movedMeters 5761 was understated; actual building is SW of the pin). Resolved to the large DC building inside the Coal Township industrial park, 100 Industrial Park Road, on a raised pad above Industrial Park Road.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the single driveway connecting Industrial Park Road to the site. The driveway runs uphill, open, to a loop road serving both buildings. Two teardrop islands seen in the car-park area are landscaped parking medians, not a guarded checkpoint.",
-          "guardShack": "No small staffed booth structure beside the driveway or loop road in any satellite view. Street View has no pano on the facility driveway (public road is screened by an overgrown embankment), so a small booth cannot be 100% excluded — flagged.",
+          "guardShack": "No small staffed booth structure beside the driveway or loop road in any satellite view. Street View has no pano on the facility driveway (public road is screened by an overgrown embankment), so a small booth cannot be 100% excluded, flagged.",
           "preGateStaging": "A small paved cul-de-sac/loop at the foot of the driveway off Industrial Park Road can hold a truck or two; a trailer was parked there in imagery.",
           "postGateStaging": "Large paved central drop yard and wide loop road give ample inside-the-property staging before docks.",
-          "dockDoors": "Estimated ~42 total across both buildings (large DC ~28-32 on its SW face, secondary building ~10-12). Roof glare and trailer occlusion make this a band estimate — flagged.",
+          "dockDoors": "Estimated ~42 total across both buildings (large DC ~28-32 on its SW face, secondary building ~10-12). Roof glare and trailer occlusion make this a band estimate, flagged.",
           "multipleFacilities": "Two distinct large buildings on one pad: the main DC (right/east) and a secondary building (left/west), sharing the loop road and drop yard.",
           "multiStep": "No second checkpoint stage observed; default false.",
-          "connectivityIssue": "Site is in an industrial park with a town (Coal Township / Shamokin) nearby; not truly isolated, so cellular coverage likely adequate — connectivityIssue false but listed as inferred."
+          "connectivityIssue": "Site is in an industrial park with a town (Coal Township / Shamokin) nearby; not truly isolated, so cellular coverage likely adequate, connectivityIssue false but listed as inferred."
         },
         "verification": {
           "verdict": "confirmed",
@@ -4134,12 +4134,12 @@
         "fieldNotes": {
           "location": "Supplied coords were ROOFTOP-precision (movedMeters 125) and landed on the correct building. Confirmed via web research (226 East View Drive, Mt. Pleasant PA 15666, Performance Foodservice Pittsburgh Division, 724-696-2200) and Street View, which shows a 'PERFORMANCE FOODSERVICE' branded building and a Performance Foodservice monument sign at the East View Drive entrance.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from East View Drive up to the building. Perimeter chain-link fencing surrounds the property, but the entrance driveway itself is uncontrolled in both 2023 and 2024 Street View captures.",
-          "guardShack": "No small staffed booth structure beside the driveway. The dark peaked-roof structure at the building's south side is the office entry portico of the main building, not a guard shack. A booth is not visible in Street View either — confidence high that there is none.",
+          "guardShack": "No small staffed booth structure beside the driveway. The dark peaked-roof structure at the building's south side is the office entry portico of the main building, not a guard shack. A booth is not visible in Street View either, confidence high that there is none.",
           "shipRcvSeparate": "Dock banks on two physically separate building faces: a long dock line on the east face (with a dedicated trailer drop yard) and a second dock line on the southwest/west face. Consistent with separate inbound-receiving and outbound-shipping clusters.",
-          "dockDoors": "Estimated ~58 total — a long east dock line (~30-35 doors, ~15-20 trailers backed in) plus a west/southwest dock line (~20-25 doors). Banded 50+; roof glare makes the exact count an estimate.",
+          "dockDoors": "Estimated ~58 total, a long east dock line (~30-35 doors, ~15-20 trailers backed in) plus a west/southwest dock line (~20-25 doors). Banded 50+; roof glare makes the exact count an estimate.",
           "dropArea": "Trailer drop yard along the east side of the building holds ~25-40 trailers in marked rows.",
-          "urbanRural": "Edge-of-town industrial park outside Mt. Pleasant PA, ringed by forest, reclaimed land and farm fields — small-town / rural setting.",
-          "railServed": "A rail line runs through the wooded corridor north of the property, but no spur enters the PFG site — railServed false.",
+          "urbanRural": "Edge-of-town industrial park outside Mt. Pleasant PA, ringed by forest, reclaimed land and farm fields, small-town / rural setting.",
+          "railServed": "A rail line runs through the wooded corridor north of the property, but no spur enters the PFG site, railServed false.",
           "entryExitTogether": "Single driveway off East View Drive serves as both entry and exit."
         },
         "verification": {
@@ -4324,16 +4324,16 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (38.792075, -77.542339) were flagged ROOFTOP precision with a\n`movedMeters` of only 84 m and landed on the correct building. Web research\nconfirmed 11777 Balls Ford Road, Manassas, VA 20109 as Performance Foodservice's\nManassas branch (formerly Reinhart Foodservice; 703-368-8777) — a ~105,000 sq ft\nmulti-temp facility with freezer, refrigerated and dry storage. Street View\nalong Balls Ford Road shows the warehouse set back behind a stormwater pond, off\nthe Balls Ford Road / Doane Drive intersection, with a branded sign at the\nentrance. Locked center: 38.79250, -77.54270.",
+        "dossierExcerpt": "Roster coordinates (38.792075, -77.542339) were flagged ROOFTOP precision with a\n`movedMeters` of only 84 m and landed on the correct building. Web research\nconfirmed 11777 Balls Ford Road, Manassas, VA 20109 as Performance Foodservice's\nManassas branch (formerly Reinhart Foodservice; 703-368-8777), a ~105,000 sq ft\nmulti-temp facility with freezer, refrigerated and dry storage. Street View\nalong Balls Ford Road shows the warehouse set back behind a stormwater pond, off\nthe Balls Ford Road / Doane Drive intersection, with a branded sign at the\nentrance. Locked center: 38.79250, -77.54270.",
         "mapsUrl": "https://www.google.com/maps/@38.79250,-77.54270,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Supplied coords were ROOFTOP precision (movedMeters 84) and landed on the correct building. Confirmed via web research (11777 Balls Ford Road, Manassas VA 20109, Performance Foodservice Manassas, former Reinhart, 703-368-8777, 105,000 sq ft multi-temp) and Street View, which shows the warehouse set behind a stormwater pond off the Balls Ford Road / Doane Drive intersection with a branded sign at the entrance.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from Doane Drive into the south/west truck yard. Only low chain-link fencing along the road frontage; the entrance itself is uncontrolled.",
-          "guardShack": "No small staffed-booth structure visible beside the driveway in satellite or Street View. The structure at the building's NW corner is the office entry. Street View panos sit on the main roads and cannot fully resolve the Doane Drive driveway, so a small booth cannot be 100% excluded — flagged.",
-          "dockDoors": "Estimated ~32 — a dock line along the west/southwest face of the building with ~12-15 trailers backed in, plus additional doors. Banded 25-50; roof glare makes the exact count an estimate.",
+          "guardShack": "No small staffed-booth structure visible beside the driveway in satellite or Street View. The structure at the building's NW corner is the office entry. Street View panos sit on the main roads and cannot fully resolve the Doane Drive driveway, so a small booth cannot be 100% excluded, flagged.",
+          "dockDoors": "Estimated ~32, a dock line along the west/southwest face of the building with ~12-15 trailers backed in, plus additional doors. Banded 25-50; roof glare makes the exact count an estimate.",
           "dropArea": "A trailer drop area on the south side holds ~15-20 trailers in rows.",
-          "urbanRural": "Dense suburban industrial park in Manassas / Prince William County, within the Washington DC metro fabric — Urban.",
-          "railServed": "A rail line runs along the east edge of the industrial park but it is a through line; no spur enters the PFG property — railServed false.",
+          "urbanRural": "Dense suburban industrial park in Manassas / Prince William County, within the Washington DC metro fabric, Urban.",
+          "railServed": "A rail line runs along the east edge of the industrial park but it is a through line; no spur enters the PFG property, railServed false.",
           "multipleFacilities": "One PFG building. Adjacent warehouses west and southwest are separate properties, not part of this site.",
           "siteArea": "Relatively compact ~11.5-acre parcel; the building fills much of the lot with truck yard wrapping the south and west."
         },
@@ -4537,18 +4537,18 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (37.69583, -77.469168) were flagged with a `movedMeters` of\n2662 and landed in the Cardinal Commerce Center area but not exactly on the\nbuilding. Web research resolved the facility precisely: Performance Food Group\noccupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF\nbuilding (PFG leases 332,000 SF), at 10399 Washington Highway in Hanover County.\nThe DC was built by Scannell Properties / ARCO and opened in 2023 as PFG's\nnew Virginia regional sales and distribution center. The building was positively\nidentified in March 2026 Street View — a red \"Performance Foodservice\" wall logo\nfaces the fenced front employee parking lot. Cardinal Commerce Center has three\nbuildings: Building A (260,000 SF, 2022), Building B (420,000 SF — PFG), and\nBuilding C (186,900 SF speculative). Locked center: 37.69430, -77.46680.",
+        "dossierExcerpt": "Roster coordinates (37.69583, -77.469168) were flagged with a `movedMeters` of\n2662 and landed in the Cardinal Commerce Center area but not exactly on the\nbuilding. Web research resolved the facility precisely: Performance Food Group\noccupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF\nbuilding (PFG leases 332,000 SF), at 10399 Washington Highway in Hanover County.\nThe DC was built by Scannell Properties / ARCO and opened in 2023 as PFG's\nnew Virginia regional sales and distribution center. The building was positively\nidentified in March 2026 Street View, a red \"Performance Foodservice\" wall logo\nfaces the fenced front employee parking lot. Cardinal Commerce Center has three\nbuildings: Building A (260,000 SF, 2022), Building B (420,000 SF, PFG), and\nBuilding C (186,900 SF speculative). Locked center: 37.69430, -77.46680.",
         "mapsUrl": "https://www.google.com/maps/@37.69430,-77.46680,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Supplied coords (movedMeters 2662) landed in the Cardinal Commerce Center area but not exactly on the building. Resolved via web research: PFG occupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF building (PFG leases 332,000 SF) at 10399 Washington Highway, Hanover County. The building was positively ID'd in March 2026 Street View — a red 'Performance Foodservice' wall logo faces the fenced front employee lot. Locked center: 37.69430, -77.46680.",
-          "truckGate": "No barrier arm, sliding gate across a lane, or guard booth visible at the truck court entrance or at the two front employee-lot driveway openings. The front employee parking lot is enclosed by a black ornamental security fence, but the driveway openings are uncontrolled curb cuts. The truck court is open paved area on a loop road. Because no gate is confirmed across any lane, truckGate is false — flagged given the perimeter fencing could imply a gate not resolvable in imagery.",
-          "guardShack": "No small staffed-booth structure visible at any entrance in satellite or Street View. As a brand-new (2023) build the site may have a kiosk, but no booth — false.",
+          "location": "Supplied coords (movedMeters 2662) landed in the Cardinal Commerce Center area but not exactly on the building. Resolved via web research: PFG occupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF building (PFG leases 332,000 SF) at 10399 Washington Highway, Hanover County. The building was positively ID'd in March 2026 Street View, a red 'Performance Foodservice' wall logo faces the fenced front employee lot. Locked center: 37.69430, -77.46680.",
+          "truckGate": "No barrier arm, sliding gate across a lane, or guard booth visible at the truck court entrance or at the two front employee-lot driveway openings. The front employee parking lot is enclosed by a black ornamental security fence, but the driveway openings are uncontrolled curb cuts. The truck court is open paved area on a loop road. Because no gate is confirmed across any lane, truckGate is false, flagged given the perimeter fencing could imply a gate not resolvable in imagery.",
+          "guardShack": "No small staffed-booth structure visible at any entrance in satellite or Street View. As a brand-new (2023) build the site may have a kiosk, but no booth, false.",
           "remoteGs": "False because no truck gate is confirmed; if a gate exists, the absence of a booth would make this true. Flagged.",
           "dockDoors": "A very large 420,000 SF DC. The southwest face carries a long dock line; estimated ~70 doors total. Banded 50+; construction materials in the truck court and roof glare make this an estimate.",
-          "entryExitSeparate": "The building has a loop road around it with the truck court on the southwest and separate north/east access — distinct in and out routing is likely. Medium confidence.",
-          "fastLaneOpportunity": "Brand-new build with a wide truck court and generous paved aprons — physical room for an express/bypass lane. Inferred — flagged.",
-          "urbanRural": "Cardinal Commerce Center, southern Hanover County near Virginia Center Commons / Glen Allen — within the Richmond metro's developing northern fabric, with residential subdivisions immediately adjacent. Urban.",
-          "railServed": "No rail spur enters the property — railServed false.",
+          "entryExitSeparate": "The building has a loop road around it with the truck court on the southwest and separate north/east access, distinct in and out routing is likely. Medium confidence.",
+          "fastLaneOpportunity": "Brand-new build with a wide truck court and generous paved aprons, physical room for an express/bypass lane. Inferred, flagged.",
+          "urbanRural": "Cardinal Commerce Center, southern Hanover County near Virginia Center Commons / Glen Allen, within the Richmond metro's developing northern fabric, with residential subdivisions immediately adjacent. Urban.",
+          "railServed": "No rail spur enters the property, railServed false.",
           "multiStep": "No second checkpoint stage observed; false.",
           "general": "Imagery shows the site mid-finish-out (2024-2026 captures): construction barriers/materials still staged in the truck yard. Counts are honest estimates."
         },
@@ -4744,18 +4744,18 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 1201 Progress Road, Suffolk, VA 23434\nResolved coordinates: 36.76720, -76.54480\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (36.769855, -76.542823) carried `movedMeters: 5887` — a\nstale/imprecise geocode. It lands in a wooded strip NE of the real facility.\n\nThe facility was resolved to a single very large rectangular distribution\nbuilding at ~36.7672, -76.5448, in the Progress Road industrial area of\nSuffolk. It is bounded by a divided highway (Holland Road / Rt 58 corridor) on\nthe south, Progress Road and a rail spur on the north, and a creek/pond to the\nwest, with a residential subdivision across the highway.\n\nConfirmation it is PFG: multiple Street View passes — on the divided\nhighway directly in front of the building and along Progress Road — show",
+        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 1201 Progress Road, Suffolk, VA 23434\nResolved coordinates: 36.76720, -76.54480\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (36.769855, -76.542823) carried `movedMeters: 5887`, a\nstale/imprecise geocode. It lands in a wooded strip NE of the real facility.\n\nThe facility was resolved to a single very large rectangular distribution\nbuilding at ~36.7672, -76.5448, in the Progress Road industrial area of\nSuffolk. It is bounded by a divided highway (Holland Road / Rt 58 corridor) on\nthe south, Progress Road and a rail spur on the north, and a creek/pond to the\nwest, with a residential subdivision across the highway.\n\nConfirmation it is PFG: multiple Street View passes, on the divided\nhighway directly in front of the building and along Progress Road, show",
         "mapsUrl": "https://www.google.com/maps/@36.7672,-76.5448,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster coord (36.769855,-76.542823, movedMeters 5887) is a stale geocode and lands in trees NE of the actual building. Resolved to the very large single rectangular DC at ~36.7672,-76.5448 — bounded by a divided highway (Holland Rd / Rt 58 corridor) on the south, Progress Road and a rail spur on the north, and a creek/pond on the west. Confirmed PFG: Street View on the south frontage and along Progress Road repeatedly shows Performance Foodservice-branded delivery trucks (red/white 'Performance' logo, 800-849-7110) parked at and driving past this building. Address 1201 Progress Rd, Suffolk VA (operating entity Reinhart Foodservice LLC).",
-          "buildingSize": "Building is unusually large for a single broadline DC (~600k+ sq ft footprint). It may be a large multi-use warehouse with PFG as the dominant/primary tenant — flagged as a size uncertainty; trailer rows and PFG trucks confirm active foodservice DC operations.",
-          "truckGate": "No barrier arm or sliding gate seen in any Street View pass along Progress Road or the divided highway. North-side access driveways off Progress Road are open; a perimeter screening fence runs along the south but the truck entrances themselves appear uncontrolled. Classed false (open-access broadline pattern), but listed uncertain — trees obscure the exact NE entrance.",
+          "location": "Roster coord (36.769855,-76.542823, movedMeters 5887) is a stale geocode and lands in trees NE of the actual building. Resolved to the very large single rectangular DC at ~36.7672,-76.5448, bounded by a divided highway (Holland Rd / Rt 58 corridor) on the south, Progress Road and a rail spur on the north, and a creek/pond on the west. Confirmed PFG: Street View on the south frontage and along Progress Road repeatedly shows Performance Foodservice-branded delivery trucks (red/white 'Performance' logo, 800-849-7110) parked at and driving past this building. Address 1201 Progress Rd, Suffolk VA (operating entity Reinhart Foodservice LLC).",
+          "buildingSize": "Building is unusually large for a single broadline DC (~600k+ sq ft footprint). It may be a large multi-use warehouse with PFG as the dominant/primary tenant, flagged as a size uncertainty; trailer rows and PFG trucks confirm active foodservice DC operations.",
+          "truckGate": "No barrier arm or sliding gate seen in any Street View pass along Progress Road or the divided highway. North-side access driveways off Progress Road are open; a perimeter screening fence runs along the south but the truck entrances themselves appear uncontrolled. Classed false (open-access broadline pattern), but listed uncertain, trees obscure the exact NE entrance.",
           "guardShack": "No guard booth structure visible at any entrance. A round white structure at the SW is a water tank, not a booth.",
           "dockDoors": "Long dock bank along the north face with ~50+ trailers backed in; banded 50+.",
-          "dropArea": "Extensive trailer parking — rows along the west/SW edge plus a north-side lot; 50+ trailers, banded 50+.",
-          "railServed": "A rail spur runs along the north property line into the site — railServed true.",
+          "dropArea": "Extensive trailer parking, rows along the west/SW edge plus a north-side lot; 50+ trailers, banded 50+.",
+          "railServed": "A rail spur runs along the north property line into the site, railServed true.",
           "entryExitSeparate": "Two separate driveways off Progress Road (NE and N) plus circulation; classed entry/exit separate, low confidence.",
-          "urbanRural": "Edge-of-town Suffolk industrial park beside a residential subdivision and marshland — judged Rural per the rubric tie-break."
+          "urbanRural": "Edge-of-town Suffolk industrial park beside a residential subdivision and marshland, judged Rural per the rubric tie-break."
         },
         "verification": {
           "verdict": "confirmed",
@@ -4978,12 +4978,12 @@
           "location": "Roster coord (35.73953,-81.363125, movedMeters 1440) lands inside the industrial cluster; resolved the PFG DC to the large building immediately SW at ~35.7387,-81.3630. Address 543 12th Street Drive NW, Hickory NC (PFG Hickory; phone 828-725-4500). The site sits in a dense Hickory industrial district with several neighboring warehouses under separate ownership.",
           "truckGate": "Street View along 12th St Dr NW and the yard side shows a green-fabric-screened chain-link perimeter fence around the PFG property with a gate across the truck drive. Classed truckGate true; partially obscured by the screening, so listed uncertain.",
           "guardShack": "No staffed booth structure visible at the entrance.",
-          "remoteGs": "Gate present, no shack — kiosk / call-box check-in implied. true.",
+          "remoteGs": "Gate present, no shack, kiosk / call-box check-in implied. true.",
           "dockDoors": "Dock bank with trailers backed in along the building face plus dark asphalt aprons; ~25-50 doors, banded 25-50.",
           "dropArea": "Trailer rows in the yard north/NE of the building; ~25-50 trailers, banded 25-50.",
-          "buildingCount": "The PFG DC reads as one main building, possibly with an attached secondary section — counted 2; neighboring warehouses in the frame are separate tenants and excluded.",
-          "railServed": "A rail line / spur runs in the wooded strip along the east edge of the property — likely rail-served; true (medium confidence).",
-          "urbanRural": "Small-city Hickory industrial district — Rural per the rubric tie-break."
+          "buildingCount": "The PFG DC reads as one main building, possibly with an attached secondary section, counted 2; neighboring warehouses in the frame are separate tenants and excluded.",
+          "railServed": "A rail line / spur runs in the wooded strip along the east edge of the property, likely rail-served; true (medium confidence).",
+          "urbanRural": "Small-city Hickory industrial district, Rural per the rubric tie-break."
         },
         "verification": {
           "verdict": "confirmed",
@@ -5136,17 +5136,17 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 918 Edwards Avenue, Harahan, LA 70123\nResolved coordinates: 29.95390, -90.19510\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (29.95459, -90.193853, `movedMeters: 1000`) lands on a\nsmall tan metal warehouse on a side street — not the PFG DC. Street View there\nshowed an unrelated mid-size building with construction work in front.\n\nPFG's own New Orleans location page geocodes the facility to roughly 29.95°N,\n-90.19°W in the Elmwood/Harahan industrial district. The DC was resolved to the\nsubstantial distribution building ~150 m SW of the roster point, at\n~29.9539, -90.1951 — the only nearby structure with the dock count, the\ndistinctive blue-painted dock wall, and an adjacent trailer drop yard",
+        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 918 Edwards Avenue, Harahan, LA 70123\nResolved coordinates: 29.95390, -90.19510\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (29.95459, -90.193853, `movedMeters: 1000`) lands on a\nsmall tan metal warehouse on a side street, not the PFG DC. Street View there\nshowed an unrelated mid-size building with construction work in front.\n\nPFG's own New Orleans location page geocodes the facility to roughly 29.95°N,\n-90.19°W in the Elmwood/Harahan industrial district. The DC was resolved to the\nsubstantial distribution building ~150 m SW of the roster point, at\n~29.9539, -90.1951, the only nearby structure with the dock count, the\ndistinctive blue-painted dock wall, and an adjacent trailer drop yard",
         "mapsUrl": "https://www.google.com/maps/@29.9539,-90.1951,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster coord (29.95459,-90.193853, movedMeters 1000) lands on a small tan metal warehouse on a side street — not the PFG DC. PFG's own location page geocodes the New Orleans facility to ~29.95N,-90.19W in the Elmwood/Harahan industrial district. Resolved to the substantial distribution building ~150m SW at ~29.9539,-90.1951 — the only nearby structure with the dock count, blue-banded dock face and trailer drop yard consistent with a broadline foodservice DC. Address 918 Edwards Ave, Harahan LA 70123 (operating entity Reinhart Foodservice Louisiana LLC). Specific PFG signage could not be confirmed in Street View, so confidence is medium.",
+          "location": "Roster coord (29.95459,-90.193853, movedMeters 1000) lands on a small tan metal warehouse on a side street, not the PFG DC. PFG's own location page geocodes the New Orleans facility to ~29.95N,-90.19W in the Elmwood/Harahan industrial district. Resolved to the substantial distribution building ~150m SW at ~29.9539,-90.1951, the only nearby structure with the dock count, blue-banded dock face and trailer drop yard consistent with a broadline foodservice DC. Address 918 Edwards Ave, Harahan LA 70123 (operating entity Reinhart Foodservice Louisiana LLC). Specific PFG signage could not be confirmed in Street View, so confidence is medium.",
           "truckGate": "Street View of the building's south/SW frontage shows chain-link fencing and a fenced truck-yard entrance with tractors and trailers inside. A gate spans the truck drive. Classed truckGate true; obscured angles leave it uncertain.",
           "guardShack": "No staffed booth structure visible at the entrance.",
-          "remoteGs": "Gate present, no shack — kiosk / call-box check-in implied. true.",
+          "remoteGs": "Gate present, no shack, kiosk / call-box check-in implied. true.",
           "dockDoors": "Long dock bank along the south face of the building (painted blue dock wall) with trailers backed in; ~25-50 doors, banded 25-50.",
           "dropArea": "Trailer drop rows in the lot SE of the building; ~25-50 trailers, banded 25-50.",
-          "backupSensitive": "Tightly built-out Elmwood industrial parcel — narrow internal streets and little stacking room; a truck queue at the gate would choke the internal street. true.",
-          "urbanRural": "Dense Elmwood/Harahan metro New Orleans industrial fabric — Urban.",
+          "backupSensitive": "Tightly built-out Elmwood industrial parcel, narrow internal streets and little stacking room; a truck queue at the gate would choke the internal street. true.",
+          "urbanRural": "Dense Elmwood/Harahan metro New Orleans industrial fabric, Urban.",
           "buildingCount": "Reads as one large DC building; the dense multi-tenant context makes a precise count low-confidence."
         },
         "verification": {
@@ -5362,18 +5362,18 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 4901 Asher Avenue, Little Rock, AR 72204\nResolved coordinates: 34.71940, -92.32700\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster coordinate (34.719308, -92.326965) carried `precision: ROOFTOP` and\n`movedMeters: 137` — accurate. It lands directly on the PFG Little Rock DC at\n4901 Asher Avenue. The facility is a long distribution building running\nNW-SE, with its dock bank on the SW face and trailer parking lots to the west\nand north.\n\n### Key views\n\n- Satellite z16/z18/z19: one long DC building (plus a small attached\n  section); dock bank with ~40 trailers backed in along the SW face; trailer\n  drop rows in the lots to the west and north; the entrance reached via a\n  cul-de-sac / turnaround off the access road; single-family houses",
+        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 4901 Asher Avenue, Little Rock, AR 72204\nResolved coordinates: 34.71940, -92.32700\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster coordinate (34.719308, -92.326965) carried `precision: ROOFTOP` and\n`movedMeters: 137`, accurate. It lands directly on the PFG Little Rock DC at\n4901 Asher Avenue. The facility is a long distribution building running\nNW-SE, with its dock bank on the SW face and trailer parking lots to the west\nand north.\n\n### Key views\n\n- Satellite z16/z18/z19: one long DC building (plus a small attached\n  section); dock bank with ~40 trailers backed in along the SW face; trailer\n  drop rows in the lots to the west and north; the entrance reached via a\n  cul-de-sac / turnaround off the access road; single-family houses",
         "mapsUrl": "https://www.google.com/maps/@34.7194,-92.327,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster coord (34.719308,-92.326965, ROOFTOP, movedMeters 137) is accurate — lands on the PFG DC at 4901 Asher Avenue, Little Rock AR 72204. A long distribution building running NW-SE with docks on its SW face and trailer parking lots to the west and north.",
-          "truckGate": "Street View of the entrance off the access cul-de-sac clearly shows a chain-link sliding/swing gate spanning the full truck driveway, with trailers backed into docks just inside. Controlled truck entrance confirmed — truckGate true.",
+          "location": "Roster coord (34.719308,-92.326965, ROOFTOP, movedMeters 137) is accurate, lands on the PFG DC at 4901 Asher Avenue, Little Rock AR 72204. A long distribution building running NW-SE with docks on its SW face and trailer parking lots to the west and north.",
+          "truckGate": "Street View of the entrance off the access cul-de-sac clearly shows a chain-link sliding/swing gate spanning the full truck driveway, with trailers backed into docks just inside. Controlled truck entrance confirmed, truckGate true.",
           "guardShack": "No staffed guard booth visible at the gate; a small structure near the gate is utility/equipment, not a multi-window booth.",
-          "remoteGs": "Gate present, no shack — kiosk / call-box / app check-in implied. true.",
+          "remoteGs": "Gate present, no shack, kiosk / call-box / app check-in implied. true.",
           "dockDoors": "Dock bank along the SW face of the long building with ~40 trailers backed in; banded 25-50.",
           "dropArea": "Trailer drop rows in the lots west and north of the building; ~25-50 trailers, banded 25-50.",
           "drivewayLong": "The gate opens onto a deep paved apron / drive in front of the dock face that can hold a 3+ truck queue. drivewayLong true.",
-          "buildingCount": "One long main DC building plus a small attached/secondary section — counted 2.",
-          "urbanRural": "Inside Little Rock's developed fabric on Asher Avenue with single-family houses immediately adjacent to the west — Urban."
+          "buildingCount": "One long main DC building plus a small attached/secondary section, counted 2.",
+          "urbanRural": "Inside Little Rock's developed fabric on Asher Avenue with single-family houses immediately adjacent to the west, Urban."
         },
         "verification": {
           "verdict": "confirmed",
@@ -5590,19 +5590,19 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 4141 Lucius McCelvey Dr, Temple, TX 76504\nResolved coordinates: 31.14380, -97.34700\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster coordinate (31.14397, -97.34693, `precision: GEOMETRIC_CENTER`,\n`movedMeters: 107`) is accurate. It resolves to the modern PFG Temple DC campus\nat 4141 Lucius McCelvey Dr, in a Temple business park.\n\nStreet View confirms the facility: the corporate office front carries a stucco\nfacade with a Texas-star emblem, US flagpoles, and a landscaped circular drive\n— a clean, modern PFG campus. The site recently received a ~$10M expansion.\n\n### Key views\n\n- Satellite z16/z18: main DC building on the NW; a very large trailer drop\n  yard filling the NE/E of the parcel with many parked-trailer rows; a dock",
+        "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 4141 Lucius McCelvey Dr, Temple, TX 76504\nResolved coordinates: 31.14380, -97.34700\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster coordinate (31.14397, -97.34693, `precision: GEOMETRIC_CENTER`,\n`movedMeters: 107`) is accurate. It resolves to the modern PFG Temple DC campus\nat 4141 Lucius McCelvey Dr, in a Temple business park.\n\nStreet View confirms the facility: the corporate office front carries a stucco\nfacade with a Texas-star emblem, US flagpoles, and a landscaped circular drive\n, a clean, modern PFG campus. The site recently received a ~$10M expansion.\n\n### Key views\n\n- Satellite z16/z18: main DC building on the NW; a very large trailer drop\n  yard filling the NE/E of the parcel with many parked-trailer rows; a dock",
         "mapsUrl": "https://www.google.com/maps/@31.1438,-97.347,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster coord (31.14397,-97.34693, GEOMETRIC_CENTER, movedMeters 107) is accurate. Resolved to the modern PFG Temple DC campus at 4141 Lucius McCelvey Dr, Temple TX 76504, in a Temple business park. Street View confirms the corporate office front (stucco facade, Texas-star emblem, US flagpoles, circular drive).",
           "truckGate": "Modern fenced campus with separate office-side and truck-yard driveways off Lucius McCelvey Dr. The truck yard is fenced; entrance drives are gated. No barrier arm clearly resolved in the 2022/2026 Street View passes (open at capture time), so truckGate is true but listed uncertain.",
-          "guardShack": "No staffed guard booth at the entrances. A small white building sits within the trailer yard — reads as a maintenance / fuel / yard-ops building, not a gate booth.",
-          "remoteGs": "Gate present, no booth — kiosk / call-box / app check-in implied. true.",
+          "guardShack": "No staffed guard booth at the entrances. A small white building sits within the trailer yard, reads as a maintenance / fuel / yard-ops building, not a gate booth.",
+          "remoteGs": "Gate present, no booth, kiosk / call-box / app check-in implied. true.",
           "dockDoors": "Dock apron with trailers backed in between the DC building and the trailer yard; ~45 doors, banded 25-50.",
           "dropArea": "Very large trailer drop yard NE/E of the building, full of parked-trailer rows; 50+ trailers, banded 50+.",
-          "fastLaneOpportunity": "Expansive paved yard and wide entrance aprons (recent ~$10M expansion) — clear unused width to add an express/bypass lane. true.",
+          "fastLaneOpportunity": "Expansive paved yard and wide entrance aprons (recent ~$10M expansion), clear unused width to add an express/bypass lane. true.",
           "entryExitSeparate": "Distinct office-side entrance (SW, circular drive) and truck-yard entrance (S) at different points of the property line.",
-          "buildingCount": "Main DC building plus a separate front office structure — counted 2; one campus, so multipleFacilities false.",
-          "urbanRural": "Edge-of-town Temple business park surrounded by open land and scattered industrial — Rural per the rubric tie-break.",
+          "buildingCount": "Main DC building plus a separate front office structure, counted 2; one campus, so multipleFacilities false.",
+          "urbanRural": "Edge-of-town Temple business park surrounded by open land and scattered industrial, Rural per the rubric tie-break.",
           "railServed": "No rail spur into the property."
         },
         "verification": {

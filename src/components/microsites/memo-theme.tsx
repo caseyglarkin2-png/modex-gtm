@@ -1,5 +1,5 @@
 /**
- * Memo template accent — reduces the per-account theme.accentColor (which the
+ * Memo template accent, reduces the per-account theme.accentColor (which the
  * dark MicrositeShell turned into a full theme override with backgrounds,
  * panels, glows, shadows) into the few low-budget moments where color earns
  * its place on the page:
@@ -8,12 +8,12 @@
  *   2. The superscript footnote markers
  *   3. Inline links inside body copy (via the --memo-accent CSS variable)
  *
- * Everything else is greyscale on cream. That's deliberate — the trust
+ * Everything else is greyscale on cream. That's deliberate, the trust
  * signal is the writing + sourcing, not visual flair.
  *
  * The earlier version of this module also exposed a `ruleClass` for a
  * 4px-saturated vertical accent rule per section. That was too loud and
- * read as Bootstrap blockquote. We dropped it — the section frame now
+ * read as Bootstrap blockquote. We dropped it, the section frame now
  * uses a 1px slate hairline and the brand color shows up only in the
  * numeral.
  */
@@ -28,7 +28,7 @@ export interface MemoAccent {
 }
 
 interface MemoPaletteEntry {
-  numeral: string;    // text-cyan-700 — section numeral + footnote markers
+  numeral: string;    // text-cyan-700, section numeral + footnote markers
   hex: string;        // raw color piped to --memo-accent for inline links
 }
 
@@ -44,8 +44,8 @@ const PALETTE: Record<string, MemoPaletteEntry> = {
   // Pairs with the per-account accentColor changes in T5.
   '#C2410C': { numeral: 'text-orange-700', hex: '#C2410C' }, // the-home-depot
   '#1E3A8A': { numeral: 'text-blue-900', hex: '#1E3A8A' },   // nestle-usa
-  '#B91C1C': { numeral: 'text-red-800', hex: '#B91C1C' },    // cj-logistics-america — text-red-800 keeps it distinct from #DC2626 cohort
-  '#B45309': { numeral: 'text-amber-800', hex: '#B45309' },  // georgia-pacific — text-amber-800 keeps it distinct from #D97706 cohort
+  '#B91C1C': { numeral: 'text-red-800', hex: '#B91C1C' },    // cj-logistics-america, text-red-800 keeps it distinct from #DC2626 cohort
+  '#B45309': { numeral: 'text-amber-800', hex: '#B45309' },  // georgia-pacific, text-amber-800 keeps it distinct from #D97706 cohort
 };
 
 const DEFAULT_PALETTE: MemoPaletteEntry = PALETTE['#06B6D4'];

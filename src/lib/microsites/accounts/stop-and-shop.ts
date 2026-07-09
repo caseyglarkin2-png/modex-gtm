@@ -1,9 +1,9 @@
 /**
- * Stop & Shop — ABM Microsite Data (registry entry)
+ * Stop & Shop, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/stop-and-shop.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/stop-and-shop resolves its
  * accountName FK and /for/stop-and-shop renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const stopAndShop: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Stop & Shop — Yard Network Audit',
+  pageTitle: 'YardFlow for Stop & Shop, Yard Network Audit',
   metaDescription:
     '7 Stop & Shop facilities mapped from public satellite imagery: 742 dock doors and room for about 1,760 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const stopAndShop: AccountMicrositeData = {
       hypothesis:
         'Stop & Shop\'s shelves are filled by ADUSA Supply Chain, Ahold Delhaize\'s in-house logistics arm, out of a cluster of Northeast distribution centers. We mapped seven of them across MA, CT, NY, and PA, holding 742 dock doors and room for about 1,760 trailers. The network splits cleanly by temperature into dry grocery, fresh, and frozen DCs, several of them former C&S buildings ADUSA pulled in-house. Five of the seven gate the yard, but two large grocery DCs sit open to the road. YardFlow gives ADUSA one gate-to-dock view across the whole Stop & Shop network.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '7 Stop & Shop facilities, mapped from public satellite imagery',
       accountSlug: 'stop-and-shop',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Stop & Shop is supplied by ADUSA Supply Chain (Ahold Delhaize) out of ~8 Northeast DCs. We audited 7 ADUSA DCs serving Stop & Shop across MA, CT, NY, and PA.',
     },
     {
@@ -86,14 +86,14 @@ export const stopAndShop: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Stop & Shop, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -104,7 +104,7 @@ export const stopAndShop: AccountMicrositeData = {
     facilityCount: '7 audited ADUSA DCs of ~8 Northeast DCs supplying the banner',
     facilityTypes: ['Grocery Distribution Center', 'Fresh DC', 'Frozen DC', 'Cross-Dock'],
     geographicSpread: 'Northeast US: MA, CT, NY, and PA, operated by ADUSA Supply Chain (Ahold Delhaize).',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 742 dock doors and room for ~1,760 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 742 dock doors and room for ~1,760 trailers.',
   },
 
   freight: {

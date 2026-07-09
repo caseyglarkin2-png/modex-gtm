@@ -1,9 +1,9 @@
 /**
- * PepsiCo — ABM Microsite Data (registry entry)
+ * PepsiCo, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/pepsico.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/pepsico resolves its
  * accountName FK and /for/pepsico renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const pepsico: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for PepsiCo — Yard Network Audit',
+  pageTitle: 'YardFlow for PepsiCo, Yard Network Audit',
   metaDescription:
     '30 PepsiCo facilities mapped from public satellite imagery: 1,145 dock doors and room for about 2,998 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const pepsico: AccountMicrositeData = {
       hypothesis:
         'We mapped 30 PepsiCo flagship plants and distribution centers from public satellite imagery: 1,145 dock doors, almost 3,000 trailer positions, 990 acres of yard. 24 of these 30 sites run drop yards, and 26 sit behind long entry drives. PepsiCo is scaling driverless freight with Gatik, yet every one of these yards still checks trucks in on guard shacks, radios, and clipboards. That is where one network standard would land first.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '30 PepsiCo facilities, mapped from public satellite imagery',
       accountSlug: 'pepsico',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'PepsiCo\'s company-owned beverage and foods network (PBNA, Gatorade, Quaker) last disclosed ~65 plants and ~440 distribution facilities for the beverage division alone (FY2017 10-K; current counts undisclosed). We audited 30 flagship company-owned plants and DCs. Frito-Lay is audited separately.',
     },
     {
@@ -85,14 +85,14 @@ export const pepsico: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at PepsiCo, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -103,7 +103,7 @@ export const pepsico: AccountMicrositeData = {
     facilityCount: '30 audited flagship plants and DCs (PBNA last disclosed ~105 NA plants, FY2017 10-K)',
     facilityTypes: ['Bottling Plant', 'Manufacturing Plant', 'Distribution Center'],
     geographicSpread: 'United States. Company-owned PBNA, Gatorade, and Quaker plants and DCs; Frito-Lay is audited separately.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 1,145 dock doors and room for ~2,998 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 1,145 dock doors and room for ~2,998 trailers.',
   },
 
   freight: {

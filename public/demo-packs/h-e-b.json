@@ -264,16 +264,16 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Roster coordinates (29.486887, -98.392212, ROOFTOP) land at the NW corner of a\nlarge solar-roofed warehouse — the H-E-B Retail Support Center. Satellite\nprobes at z15-z21 confirmed a large corporate distribution campus in NE San\nAntonio, bounded by Fratt Rd / O'Connor Rd to the south, a public road to the\nwest, and residential subdivisions to the north and east. Web search (Waze,\nchamber listings) corroborates \"H-E-B Distribution Center, 6520 Fratt Rd,\n78218\", open 24/7, one of the region's largest employers. Locked working\ncenter at the RSC warehouse: 29.486200, -98.389900.",
+        "dossierExcerpt": "Roster coordinates (29.486887, -98.392212, ROOFTOP) land at the NW corner of a\nlarge solar-roofed warehouse, the H-E-B Retail Support Center. Satellite\nprobes at z15-z21 confirmed a large corporate distribution campus in NE San\nAntonio, bounded by Fratt Rd / O'Connor Rd to the south, a public road to the\nwest, and residential subdivisions to the north and east. Web search (Waze,\nchamber listings) corroborates \"H-E-B Distribution Center, 6520 Fratt Rd,\n78218\", open 24/7, one of the region's largest employers. Locked working\ncenter at the RSC warehouse: 29.486200, -98.389900.",
         "mapsUrl": "https://www.google.com/maps/@29.486200,-98.389900,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Large H-E-B corporate distribution campus on Fratt Rd / O'Connor Rd, NE San Antonio. Solar-roofed RSC warehouse plus a print plant and multiple secondary buildings. Roster source notes the campus also includes milk plant / bakery functions; classified here as the integrated RSC campus.",
           "truckGate": "Chain-link perimeter fence around the campus confirmed in Street View (2024-12). Truck entrance on the west road is a wide paved driveway with sliding fence-panel gates and yellow bollards; a tractor was captured mid-driveway. Counted as controlled gate.",
-          "guardShack": "No staffed guard booth visible at the west truck entrance. Large RSC campuses of this type often have a kiosk/remote check-in; classified remoteGs true. Low confidence — a guarded main entrance elsewhere on the campus cannot be ruled out from imagery.",
+          "guardShack": "No staffed guard booth visible at the west truck entrance. Large RSC campuses of this type often have a kiosk/remote check-in; classified remoteGs true. Low confidence, a guarded main entrance elsewhere on the campus cannot be ruled out from imagery.",
           "dockDoors": "RSC warehouse south face shows a long continuous bank of dock doors with trailers backed in; total across campus buildings well into 50+ band. Count is an estimate.",
           "dropArea": "Extensive paved drop yard south of the warehouse packed with parked H-E-B trailers (red-star livery confirmed in Street View). Well over 50 trailer stalls.",
-          "multipleFacilities": "Campus has the main solar-roofed RSC warehouse plus a print/mail-services plant and several other large buildings — a true multi-building campus.",
-          "fastLaneOpportunity": "Truck entrance driveway is very wide with unused paved width — room for a dedicated bypass/express lane.",
+          "multipleFacilities": "Campus has the main solar-roofed RSC warehouse plus a print/mail-services plant and several other large buildings, a true multi-building campus.",
+          "fastLaneOpportunity": "Truck entrance driveway is very wide with unused paved width, room for a dedicated bypass/express lane.",
           "railServed": "No rail spur runs into the property; campus bounded by residential to the north and roads on other sides.",
           "siteAreaAcres": "Derived from perimeter box (~620 m E-W x ~630 m N-S); estimate."
         },
@@ -495,18 +495,18 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "Roster coordinates (29.365943, -98.360808, GEOMETRIC_CENTER) landed ~5.5 km\nSE of the facility, over open farmland — a city-polygon centroid, not the\nbuilding. Web search (H-E-B Newsroom, Supermarket News, Waze \"HEB SASR\nProcessing Center\") resolved the 1.6M sq ft warehouse to **2045 S Foster Rd,\nSan Antonio TX 78222**, ~29.4063, -98.3670. Satellite probes confirmed a\nmassive L/T-shaped distribution warehouse — H-E-B's largest single-build\nwarehouse, opened 2020 on the 871-acre East Side campus along I-10 and Foster\nRoad. Locked working center: 29.406300, -98.367000.",
+        "dossierExcerpt": "Roster coordinates (29.365943, -98.360808, GEOMETRIC_CENTER) landed ~5.5 km\nSE of the facility, over open farmland, a city-polygon centroid, not the\nbuilding. Web search (H-E-B Newsroom, Supermarket News, Waze \"HEB SASR\nProcessing Center\") resolved the 1.6M sq ft warehouse to **2045 S Foster Rd,\nSan Antonio TX 78222**, ~29.4063, -98.3670. Satellite probes confirmed a\nmassive L/T-shaped distribution warehouse, H-E-B's largest single-build\nwarehouse, opened 2020 on the 871-acre East Side campus along I-10 and Foster\nRoad. Locked working center: 29.406300, -98.367000.",
         "mapsUrl": "https://www.google.com/maps/@29.406300,-98.367000,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster coordinates (29.365943, -98.360808) were ~5.5 km off (GEOMETRIC_CENTER of a city polygon over farmland). Web search resolved the facility to 2045 S Foster Rd, San Antonio TX 78222; the 1.6M sq ft warehouse sits at ~29.4063, -98.3670 along I-10 / Foster Rd on H-E-B's 871-acre East Side campus.",
           "truckGate": "Dedicated truck entrance off Foster Rd, separate from the 'Partner/Visitor Entrance (No Trucks)' roundabout at the NE. A gatehouse building (red roof) with an attached smaller white-roofed structure sits beside the truck lanes; sliding perimeter gate visible on the fence line at z21. Clear controlled, fenced entrance.",
-          "guardShack": "The gatehouse complex at the truck entrance includes a small booth-footprint structure beside the lanes — a staffed gatehouse. guardShack true.",
+          "guardShack": "The gatehouse complex at the truck entrance includes a small booth-footprint structure beside the lanes, a staffed gatehouse. guardShack true.",
           "drivewayLong": "Long landscaped truck approach road (~600 m) runs from the Foster Rd gatehouse to the warehouse; ample stacking depth for many trucks.",
           "postGateStaging": "Large paved truck staging lot with parked trailers immediately inside the gate, before the docks.",
           "dockDoors": "Purpose-built cross-dock; roster/news cite ~200 dock doors. Dock banks with trailers backed in visible on the north and south building faces.",
-          "shipRcvSeparate": "Dock banks on two distinct building faces (north and south of the L-shaped structure) — consistent with separate shipping/receiving operations.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces (north and south of the L-shaped structure), consistent with separate shipping/receiving operations.",
           "dropArea": "Extensive drop yards with parked trailers along the warehouse faces and in the gate staging lot; well over 50.",
-          "fastLaneOpportunity": "Wide truck gate apron and long multi-lane approach road — clear room for a dedicated express/bypass lane.",
+          "fastLaneOpportunity": "Wide truck gate apron and long multi-lane approach road, clear room for a dedicated express/bypass lane.",
           "urbanRural": "Site is on undeveloped land at the far East Side edge of San Antonio, surrounded by open fields and woods; functionally rural/edge-of-metro despite the city address.",
           "railServed": "No rail spur into the property visible in current imagery.",
           "siteAreaAcres": "Operational fenced footprint (warehouse + yards + gate); the full H-E-B campus parcel is 871 acres but most is undeveloped. Estimate from perimeter box."
@@ -727,14 +727,14 @@
         "mapsUrl": "https://www.google.com/maps/@29.837000,-95.539000,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Large H-E-B distribution + production campus on the Windfern Rd corridor, NW Houston. Multiple solar-roofed warehouse buildings (the RSC) plus production buildings with silos (bakery/dairy). Roster idx 8 and 9 (snack plant, milk/bread plant) are separate buildings in this same corridor.",
-          "truckGate": "Campus is fully enclosed by a decorative metal perimeter fence with masonry columns (confirmed in Street View, 2026-01). Web source (hub.biz / chamber listing) explicitly states the facility 'accepts vendor deliveries through a security check-in process' — a controlled truck gate. truckGate true.",
-          "guardShack": "Security check-in process implies a staffed gate. A modern office building anchors the SE corner near the main entrance. guardShack classified true on the strength of the documented security check-in; the booth itself was not isolated in imagery due to tree cover — medium confidence.",
+          "truckGate": "Campus is fully enclosed by a decorative metal perimeter fence with masonry columns (confirmed in Street View, 2026-01). Web source (hub.biz / chamber listing) explicitly states the facility 'accepts vendor deliveries through a security check-in process', a controlled truck gate. truckGate true.",
+          "guardShack": "Security check-in process implies a staffed gate. A modern office building anchors the SE corner near the main entrance. guardShack classified true on the strength of the documented security check-in; the booth itself was not isolated in imagery due to tree cover, medium confidence.",
           "dockDoors": "Multiple warehouse buildings with long dock-door banks and trailers backed in on several faces; total well into the 50+ band (estimated ~160).",
-          "dropArea": "Very extensive trailer drop yards — large arrays of parked trailers (no tractors) on the north, central and south parts of the campus; estimated 280 visible, capacity ~400.",
-          "shipRcvSeparate": "Dock banks on distinct building faces across multiple buildings — separate shipping and receiving operations.",
+          "dropArea": "Very extensive trailer drop yards, large arrays of parked trailers (no tractors) on the north, central and south parts of the campus; estimated 280 visible, capacity ~400.",
+          "shipRcvSeparate": "Dock banks on distinct building faces across multiple buildings, separate shipping and receiving operations.",
           "multipleFacilities": "True multi-building campus: RSC distribution warehouses plus production buildings (silos visible) and an office building.",
           "drivewayLong": "Long internal access roads run the length of the campus; deep stacking room between the gate and the docks.",
-          "fastLaneOpportunity": "Wide internal roads and gate aprons — room for a dedicated express/bypass lane.",
+          "fastLaneOpportunity": "Wide internal roads and gate aprons, room for a dedicated express/bypass lane.",
           "railServed": "No rail spur into the property; campus bounded by a drainage channel and residential.",
           "siteAreaAcres": "Estimate from perimeter box covering the fenced campus."
         },
@@ -894,20 +894,20 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coordinates (31.153951, -97.357905, ROOFTOP) land correctly inside the\nH-E-B Temple Retail Support Center campus. Satellite probes at z15-z21\nconfirmed a large multi-building distribution warehouse complex in an\nindustrial park on the outskirts of Temple, with a major active construction\nzone on the east half — the $200M expansion adding an automated frozen\ndistribution line (tdtnews coverage, TruckMap, Temple Chamber). Locked\nworking center: 31.152500, -97.361700.",
+        "dossierExcerpt": "Roster coordinates (31.153951, -97.357905, ROOFTOP) land correctly inside the\nH-E-B Temple Retail Support Center campus. Satellite probes at z15-z21\nconfirmed a large multi-building distribution warehouse complex in an\nindustrial park on the outskirts of Temple, with a major active construction\nzone on the east half, the $200M expansion adding an automated frozen\ndistribution line (tdtnews coverage, TruckMap, Temple Chamber). Locked\nworking center: 31.152500, -97.361700.",
         "mapsUrl": "https://www.google.com/maps/@31.152500,-97.361700,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "facility": "H-E-B Temple Retail Support Center, 4750 Wendland Rd — Central Texas distribution hub. Roster coordinates landed correctly inside the campus. A major $200M expansion adding an automated frozen-distribution line was under construction at the time of imagery (large active construction zone on the east half of the campus).",
+          "facility": "H-E-B Temple Retail Support Center, 4750 Wendland Rd, Central Texas distribution hub. Roster coordinates landed correctly inside the campus. A major $200M expansion adding an automated frozen-distribution line was under construction at the time of imagery (large active construction zone on the east half of the campus).",
           "truckGate": "Controlled truck entrance off the campus access road; Street View (2026-04) shows a red overhead gantry sign spanning the entrance driveway (check-in / routing instructions) and green perimeter fencing. truckGate true.",
-          "guardShack": "No staffed guard booth resolved at the truck entrance. The overhead gantry sign with instructions is consistent with an automated / remote driver check-in; classified remoteGs true. Medium confidence — a booth was not isolated and the entrance area is partly disturbed by construction.",
-          "preGateStaging": "Trailers were observed staged along the public access road outside the gate (Street View 2026-04) — usable pre-gate staging.",
+          "guardShack": "No staffed guard booth resolved at the truck entrance. The overhead gantry sign with instructions is consistent with an automated / remote driver check-in; classified remoteGs true. Medium confidence, a booth was not isolated and the entrance area is partly disturbed by construction.",
+          "preGateStaging": "Trailers were observed staged along the public access road outside the gate (Street View 2026-04), usable pre-gate staging.",
           "postGateStaging": "Wide paved truck yard inside the gate before the docks.",
           "dockDoors": "Long dock-door banks on multiple warehouse buildings with trailers backed in; well into 50+ band (estimated ~110). The new expansion building will add more.",
           "dropArea": "Multiple large drop yards with extensive parked-trailer arrays on the west and south of the campus; over 50.",
           "shipRcvSeparate": "Dock banks on distinct building faces / separate buildings.",
-          "multipleFacilities": "Multi-building campus — the existing RSC warehouses plus the new frozen-distribution expansion building.",
+          "multipleFacilities": "Multi-building campus, the existing RSC warehouses plus the new frozen-distribution expansion building.",
           "urbanRural": "Edge-of-town industrial park on the outskirts of Temple, with adjacent farmland and undeveloped tracts; classified Rural per the small-city tie-breaker.",
-          "fastLaneOpportunity": "Wide gate apron and access road with unused paved width — room for a dedicated express lane.",
+          "fastLaneOpportunity": "Wide gate apron and access road with unused paved width, room for a dedicated express lane.",
           "railServed": "No rail spur into the property.",
           "connectivityIssue": "Edge-of-town location; cellular coverage likely adequate given the surrounding industrial park, but flagged as inferred."
         },
@@ -1138,20 +1138,20 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "Roster coordinates (26.163308, -98.003269) carried a 3912 m geocode-shift\nflag, but Step 0 probes confirmed they actually land correctly on the H-E-B\ncampus. Web search (Waze, Loc8NearMe, OpenGovUS) confirmed the **H-E-B\nWeslaco Retail Distribution Support Center, 1100 Panther Dr, Weslaco TX\n78596** — H-E-B's Rio Grande Valley distribution + transportation/dispatch\nhub, ~26.1638, -98.0014. Locked working center at the RSC warehouse:\n26.162800, -98.002200.",
+        "dossierExcerpt": "Roster coordinates (26.163308, -98.003269) carried a 3912 m geocode-shift\nflag, but Step 0 probes confirmed they actually land correctly on the H-E-B\ncampus. Web search (Waze, Loc8NearMe, OpenGovUS) confirmed the **H-E-B\nWeslaco Retail Distribution Support Center, 1100 Panther Dr, Weslaco TX\n78596**, H-E-B's Rio Grande Valley distribution + transportation/dispatch\nhub, ~26.1638, -98.0014. Locked working center at the RSC warehouse:\n26.162800, -98.002200.",
         "mapsUrl": "https://www.google.com/maps/@26.162800,-98.002200,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "location": "Roster coordinates (26.163308, -98.003269) had a 3912 m geocode shift flag but actually land correctly on the campus. Web search confirmed H-E-B Weslaco Retail Distribution Support Center, 1100 Panther Dr, Weslaco TX 78596 — the RGV distribution + transportation/dispatch hub at ~26.1638, -98.0014.",
+          "location": "Roster coordinates (26.163308, -98.003269) had a 3912 m geocode shift flag but actually land correctly on the campus. Web search confirmed H-E-B Weslaco Retail Distribution Support Center, 1100 Panther Dr, Weslaco TX 78596, the RGV distribution + transportation/dispatch hub at ~26.1638, -98.0014.",
           "truckGate": "Campus is enclosed by a chain-link perimeter fence (confirmed in Street View, 2026-04). Main truck entrance off Panther Dr (north) with an H-E-B sign and a defined driveway with bollards. truckGate true.",
-          "guardShack": "No staffed guard booth clearly resolved at the entrance; a small structure sits near the gate but could not be confirmed as a booth. Classified remoteGs true (kiosk / app check-in implied). Medium confidence — entrance area also has active construction.",
+          "guardShack": "No staffed guard booth clearly resolved at the entrance; a small structure sits near the gate but could not be confirmed as a booth. Classified remoteGs true (kiosk / app check-in implied). Medium confidence, entrance area also has active construction.",
           "dockDoors": "Long dock-door banks on the warehouse south and west faces with trailers backed in; estimated ~70, into the 50+ band.",
           "dropArea": "Multiple trailer drop yards with parked-trailer arrays on the NW and SW of the warehouse; over 50.",
           "postGateStaging": "Large paved truck yard inside the gate before the docks.",
           "multipleFacilities": "Campus includes the RSC distribution warehouse plus a separate transportation / dispatch / facility-maintenance building (Yelp lists 'HEB Weslaco Dispatch' and 'HEB Weslaco Facility Maint' at the same address).",
           "drivewayLong": "Deep paved truck yard between the gate and the dock doors; ample stacking room.",
-          "fastLaneOpportunity": "Wide gate apron and truck yard with unused paved width — room for a dedicated express lane.",
-          "urbanRural": "Inside the city of Weslaco — residential to the south, a school to the NE, retail nearby, expressway frontage. Classified Urban.",
-          "railServed": "A rail line runs E-W along the south of the campus but no spur enters the property — separated by a land strip and the trailer yard.",
+          "fastLaneOpportunity": "Wide gate apron and truck yard with unused paved width, room for a dedicated express lane.",
+          "urbanRural": "Inside the city of Weslaco, residential to the south, a school to the NE, retail nearby, expressway frontage. Classified Urban.",
+          "railServed": "A rail line runs E-W along the south of the campus but no spur enters the property, separated by a land strip and the trailer yard.",
           "siteAreaAcres": "Estimate from perimeter box covering the fenced campus."
         },
         "verification": {
@@ -1367,7 +1367,7 @@
           "totalBaselineMs": 5340000,
           "totalYnsMs": 2850000
         },
-        "dossierExcerpt": "The roster point (GEOMETRIC_CENTER, moved 1397 m) landed on the large industrial\ncomplex NE of the rail corridor. Satellite probes at z16-z18 show a single large\nmulti-section distribution building with extensive rooftop solar, dock banks with\ntrailers backed in, a large trailer drop yard, and an employee parking lot — fully\nconsistent with an H-E-B Retail Support Center. Web search corroborates: H-E-B\nDistribution Center, 2301 Hunter Rd, San Marcos, operating 24/7; reviews confirm a\ntext-message dock-assignment check-in process and note the delivery entrance is off\nthe Wonder World Drive frontage / access road, not Hunter Rd proper. The building is\npositively the correct facility.",
+        "dossierExcerpt": "The roster point (GEOMETRIC_CENTER, moved 1397 m) landed on the large industrial\ncomplex NE of the rail corridor. Satellite probes at z16-z18 show a single large\nmulti-section distribution building with extensive rooftop solar, dock banks with\ntrailers backed in, a large trailer drop yard, and an employee parking lot, fully\nconsistent with an H-E-B Retail Support Center. Web search corroborates: H-E-B\nDistribution Center, 2301 Hunter Rd, San Marcos, operating 24/7; reviews confirm a\ntext-message dock-assignment check-in process and note the delivery entrance is off\nthe Wonder World Drive frontage / access road, not Hunter Rd proper. The building is\npositively the correct facility.",
         "mapsUrl": "https://www.google.com/maps/@29.857237,-97.963000,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Truck gate at the north entrance off the Hunter Rd / private access road; wide paved checkpoint apron with painted lane markings splitting around the booth.",
@@ -1576,7 +1576,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied only \"San Antonio, TX\" and an APPROXIMATE coordinate that had\nmoved 6794 m — it was unusable. Web research positively located the plant:\n- Multiple sources (San Antonio Express-News / Yahoo, TDLR TABS, Zabalist, Waze,\n  city-data) place the H-E-B Snack Plant at **5311 Rittiman Rd, San Antonio, TX\n  78218**, on the city's far Northeast Side, \"near the company's refrigerated\n  distribution center and fleet site.\"\n- A 2025 TDLR renovation project (\"H.E.B. SAS Bakery Chips,\" 8,000 sq ft, $13.0M)\n  describes alterations inside the existing food-manufacturing plant to accept a\n  new production line.\n- Satellite and Street View confirm the H-E-B Rittiman/Fratt Rd manufacturing &\n  distribution campus: a large RSC warehouse with rooftop solar, fleet operations,\n  and many H-E-B red-branded trailers in campus drop yards.",
+        "dossierExcerpt": "The roster supplied only \"San Antonio, TX\" and an APPROXIMATE coordinate that had\nmoved 6794 m, it was unusable. Web research positively located the plant:\n- Multiple sources (San Antonio Express-News / Yahoo, TDLR TABS, Zabalist, Waze,\n  city-data) place the H-E-B Snack Plant at **5311 Rittiman Rd, San Antonio, TX\n  78218**, on the city's far Northeast Side, \"near the company's refrigerated\n  distribution center and fleet site.\"\n- A 2025 TDLR renovation project (\"H.E.B. SAS Bakery Chips,\" 8,000 sq ft, $13.0M)\n  describes alterations inside the existing food-manufacturing plant to accept a\n  new production line.\n- Satellite and Street View confirm the H-E-B Rittiman/Fratt Rd manufacturing &\n  distribution campus: a large RSC warehouse with rooftop solar, fleet operations,\n  and many H-E-B red-branded trailers in campus drop yards.",
         "mapsUrl": "https://www.google.com/maps/@29.485000,-98.389300,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Address 5311 Rittiman Rd, San Antonio TX 78218 confirmed by web research (TDLR/Zabalist 'H.E.B. SAS Bakery Chips' renovation project, Waze, city-data). The plant sits within the larger H-E-B Rittiman/Fratt Rd manufacturing & distribution campus on NE San Antonio. The roster's APPROXIMATE coordinate (moved 6794 m) was wrong; relocated to the Rittiman Rd campus.",
@@ -1804,7 +1804,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster's ROOFTOP geocode (moved only 4 m) landed correctly. Satellite imagery\nat z18-z20 shows a manufacturing building with heavy rooftop process equipment and\nwhite circular corn/grain silos — exactly consistent with a tortilla-chip plant.\nWeb research confirms: H-E-B opened a ~46,000 sq ft (some sources 64,000 sq ft)\nsnack manufacturing plant at 10000 ½ Genard Rd in mid-2019, producing plain and\nflavored tortilla chips, \"in the same complex as the retailer's milk plant, bread\nfacility and distribution center\" — i.e. the H-E-B NW Houston campus. Building\nidentity is positively confirmed.",
+        "dossierExcerpt": "The roster's ROOFTOP geocode (moved only 4 m) landed correctly. Satellite imagery\nat z18-z20 shows a manufacturing building with heavy rooftop process equipment and\nwhite circular corn/grain silos, exactly consistent with a tortilla-chip plant.\nWeb research confirms: H-E-B opened a ~46,000 sq ft (some sources 64,000 sq ft)\nsnack manufacturing plant at 10000 ½ Genard Rd in mid-2019, producing plain and\nflavored tortilla chips, \"in the same complex as the retailer's milk plant, bread\nfacility and distribution center\", i.e. the H-E-B NW Houston campus. Building\nidentity is positively confirmed.",
         "mapsUrl": "https://www.google.com/maps/@29.843800,-95.541300,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "10000 Genard Rd, Houston TX 77041 confirmed - roster ROOFTOP geocode (moved 4 m) landed correctly on the snack-plant building. Verified by satellite (manufacturing building with heavy rooftop process equipment and corn/grain silos consistent with a tortilla-chip plant) and web research.",
@@ -2034,7 +2034,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied a GEOMETRIC_CENTER coordinate (29.843857, -95.537401) that is\nroughly the centroid of the H-E-B Windfern campus parcel; it landed near campus\ninternal roads. Web research confirms H-E-B operates a milk plant and a bakery/\nbread plant at 4625 Windfern Rd — the same address as the Windfern RSC; all\nH-E-B Windfern facilities share that campus and address.\n\nThe milk & bread plant complex was identified as the two large manufacturing\nbuildings immediately east of the snack plant on the campus. The eastern building\nis positively confirmed as the bakery — \"BAKE...\" (Bakery) branded H-E-B trailers\nare backed into its west dock face. The western building, with a process annex,\nis the milk plant. Exact milk-vs-bread building assignment is medium confidence.",
+        "dossierExcerpt": "The roster supplied a GEOMETRIC_CENTER coordinate (29.843857, -95.537401) that is\nroughly the centroid of the H-E-B Windfern campus parcel; it landed near campus\ninternal roads. Web research confirms H-E-B operates a milk plant and a bakery/\nbread plant at 4625 Windfern Rd, the same address as the Windfern RSC; all\nH-E-B Windfern facilities share that campus and address.\n\nThe milk & bread plant complex was identified as the two large manufacturing\nbuildings immediately east of the snack plant on the campus. The eastern building\nis positively confirmed as the bakery, \"BAKE...\" (Bakery) branded H-E-B trailers\nare backed into its west dock face. The western building, with a process annex,\nis the milk plant. Exact milk-vs-bread building assignment is medium confidence.",
         "mapsUrl": "https://www.google.com/maps/@29.843200,-95.538400,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster GEOMETRIC_CENTER coordinate (29.843857, -95.537401) is roughly the campus center. The milk & bread plant complex was identified as the two large manufacturing buildings immediately E of the snack plant on the H-E-B Windfern campus. The bakery building is confirmed by 'BAKE...' branded trailers backed into its W dock face. All H-E-B Windfern facilities (RSC, milk plant, bread plant) share address 4625 Windfern Rd, Houston TX 77041.",
@@ -2270,7 +2270,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "The roster's ROOFTOP geocode (moved 940 m) resolved onto the correct building.\nWeb research confirms H-E-B opened a 100,000 sq ft stand-alone e-commerce\nfulfillment center at 4520 Holmes Rd in February 2025 — its 3rd Houston eFC and\n9th in Texas, featuring Swisslog AutoStore and SynQ automation, ~$16M build.\nSatellite imagery shows a single recently-built fulfillment building on a\nwedge-shaped parcel bounded by Holmes Rd (W), a rail line (NW) and a freeway (S).\nThe H-E-B red logo is visible on the building corner in April 2026 Street View —\npositively the correct facility.",
+        "dossierExcerpt": "The roster's ROOFTOP geocode (moved 940 m) resolved onto the correct building.\nWeb research confirms H-E-B opened a 100,000 sq ft stand-alone e-commerce\nfulfillment center at 4520 Holmes Rd in February 2025, its 3rd Houston eFC and\n9th in Texas, featuring Swisslog AutoStore and SynQ automation, ~$16M build.\nSatellite imagery shows a single recently-built fulfillment building on a\nwedge-shaped parcel bounded by Holmes Rd (W), a rail line (NW) and a freeway (S).\nThe H-E-B red logo is visible on the building corner in April 2026 Street View ,\npositively the correct facility.",
         "mapsUrl": "https://www.google.com/maps/@29.682200,-95.354800,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "4520 Holmes Rd, Houston TX 77033 - confirmed by web research and imagery. The roster ROOFTOP geocode (moved 940 m) resolved onto the correct building - a single recently-built fulfillment center wedged between Holmes Rd (W), a rail line (NW) and a freeway (S). The H-E-B red logo is visible on the building in 2026 Street View.",

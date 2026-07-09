@@ -1,9 +1,9 @@
 /**
- * Niagara Bottling — ABM Microsite Data (registry entry)
+ * Niagara Bottling, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/niagara-bottling.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/niagara-bottling resolves its
  * accountName FK and /for/niagara-bottling renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const niagaraBottling: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Niagara Bottling — Yard Network Audit',
+  pageTitle: 'YardFlow for Niagara Bottling, Yard Network Audit',
   metaDescription:
     '30 Niagara Bottling facilities mapped from public satellite imagery: 1,703 dock doors and room for about 2,518 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -42,13 +42,13 @@ export const niagaraBottling: AccountMicrositeData = {
       hypothesis:
         'Niagara Bottling runs the largest private-label water network. More than 50 US plants; we audited 30. Jeffersonville IN has 100 dock doors. Hazle Township PA is 110 acres. 1,703 total dock doors and 2,518 trailer spots. YardFlow runs bottled water at scale: a single SKU at high velocity through a high-density yard.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '30 Niagara Bottling facilities, mapped from public satellite imagery',
       accountSlug: 'niagara-bottling',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Niagara Bottling operates more than 50 US bottling plants (private-label water), with several more announced or under construction. We audited 30.',
     },
     {
@@ -85,14 +85,14 @@ export const niagaraBottling: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Niagara Bottling, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -103,7 +103,7 @@ export const niagaraBottling: AccountMicrositeData = {
     facilityCount: '30 audited plants of 50+ US bottling plants',
     facilityTypes: ['Bottling / Manufacturing Plant'],
     geographicSpread: 'United States. Audited set includes Jeffersonville IN (100 dock doors) and Hazle Township PA (110 acres).',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 1,703 dock doors and room for ~2,518 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 1,703 dock doors and room for ~2,518 trailers.',
   },
 
   freight: {

@@ -5,7 +5,7 @@ import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
 import { ARCHETYPE_COLORS, ARCHETYPE_LABELS } from './archetype-palette';
 
 /**
- * Donut chart of archetype distribution + filter chips. Pure SVG — no
+ * Donut chart of archetype distribution + filter chips. Pure SVG, no
  * charting library needed for 10 segments. Clicking a segment or chip
  * toggles inclusion in `archetypeFilter`; the network atlas listens.
  *

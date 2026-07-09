@@ -135,7 +135,7 @@ export function useMicrositeTracker({
       sectionObserver.observe(element);
     });
 
-    // Audio/video depth — listen for timeupdate and keep the furthest
+    // Audio/video depth, listen for timeupdate and keep the furthest
     // point reached (monotonic max), so every flush reports the deepest
     // the visitor got, not where the playhead currently sits.
     const trackMediaProgress = (

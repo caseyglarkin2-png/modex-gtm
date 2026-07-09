@@ -315,7 +315,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Address: 1401 N Alder Ave, Rialto, CA 92376\n- Locked center: 34.12940, -117.41630\n- Confirmation: Roster coordinates landed at the Alder Ave intersection\n  north of the building. Probing the surrounding warehouses, the Niagara plant\n  was positively identified by its distinctive rooftop solar array — Niagara\n  Bottling Rialto runs a documented on-site solar farm (Global Energy Monitor /\n  gridinfo records). The 598,750 sq ft building sits with its west face on\n  N Alder Ave. Street View of the SW corner shows the \"1401\" office address and\n  the company's blue-glass office entrance.",
+        "dossierExcerpt": "- Address: 1401 N Alder Ave, Rialto, CA 92376\n- Locked center: 34.12940, -117.41630\n- Confirmation: Roster coordinates landed at the Alder Ave intersection\n  north of the building. Probing the surrounding warehouses, the Niagara plant\n  was positively identified by its distinctive rooftop solar array, Niagara\n  Bottling Rialto runs a documented on-site solar farm (Global Energy Monitor /\n  gridinfo records). The 598,750 sq ft building sits with its west face on\n  N Alder Ave. Street View of the SW corner shows the \"1401\" office address and\n  the company's blue-glass office entrance.",
         "mapsUrl": "https://www.google.com/maps/@34.12940,-117.41630,400m/data=!3m1!1e3",
         "fieldNotes": {
           "buildingId": "Confirmed Niagara via the distinctive rooftop solar array - Niagara Rialto operates an on-site solar farm (independently documented). 598,750 sq ft single building, 1401 N Alder Ave.",
@@ -461,7 +461,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Address: 5959 Arch Rd, Stockton, CA 95215\n- Locked center: 37.90620, -121.19720\n- Confirmation: Roster coordinates landed directly on a large white-roofed\n  building. Street View (captured 2026-03) of the east face shows the \"niagara\"\n  wordmark on the building and a Niagara monument sign at the entrance —\n  positively confirmed. This is Niagara's newest Stockton plant (~600,000 sq ft,\n  concrete tilt-up, operational 2023).",
+        "dossierExcerpt": "- Address: 5959 Arch Rd, Stockton, CA 95215\n- Locked center: 37.90620, -121.19720\n- Confirmation: Roster coordinates landed directly on a large white-roofed\n  building. Street View (captured 2026-03) of the east face shows the \"niagara\"\n  wordmark on the building and a Niagara monument sign at the entrance ,\n  positively confirmed. This is Niagara's newest Stockton plant (~600,000 sq ft,\n  concrete tilt-up, operational 2023).",
         "mapsUrl": "https://www.google.com/maps/@37.90620,-121.19720,400m/data=!3m1!1e3",
         "fieldNotes": {
           "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the east building face and a Niagara monument sign at the east entrance (Street View, captured 2026-03). ~600,000 sq ft single-story concrete tilt-up plant, operational 2023, 5959 Arch Rd.",
@@ -697,7 +697,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Address: 3453 S 96th St, Mesa, AZ 85212\n- Locked center: 33.35260, -111.62580\n- Confirmation: Roster coordinates landed on a large white-roofed building.\n  Street View (captured 2024-12) of the building's west/NW face shows the\n  \"niagara\" wordmark — positively confirmed. Niagara established this Mesa plant\n  in 2018; ~450,183 sq ft of water-manufacturing space.",
+        "dossierExcerpt": "- Address: 3453 S 96th St, Mesa, AZ 85212\n- Locked center: 33.35260, -111.62580\n- Confirmation: Roster coordinates landed on a large white-roofed building.\n  Street View (captured 2024-12) of the building's west/NW face shows the\n  \"niagara\" wordmark, positively confirmed. Niagara established this Mesa plant\n  in 2018; ~450,183 sq ft of water-manufacturing space.",
         "mapsUrl": "https://www.google.com/maps/@33.35260,-111.62580,400m/data=!3m1!1e3",
         "fieldNotes": {
           "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the building's west/NW face (Street View, captured 2024-12). 450,183 sq ft single-story water-manufacturing plant, established 2018, 3453 S 96th St.",
@@ -892,7 +892,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Address: 275 S 67th Ave, Phoenix, AZ 85043\n- Locked center: 33.44700, -112.20170\n- How resolved: The roster supplied no address and no coordinates for this\n  facility. Web research returned a consistent address — \"275 S 67th Ave,\n  Phoenix, AZ 85043\" — across TruckMap, Yahoo Local, Yellowpages, Dun &\n  Bradstreet, and chamber-of-commerce listings, all for Niagara Bottling\n  Phoenix. Geocoding that address lands on a two-building warehouse/distribution\n  complex on the east side of S 67th Ave, just south of Washington St.",
+        "dossierExcerpt": "- Address: 275 S 67th Ave, Phoenix, AZ 85043\n- Locked center: 33.44700, -112.20170\n- How resolved: The roster supplied no address and no coordinates for this\n  facility. Web research returned a consistent address, \"275 S 67th Ave,\n  Phoenix, AZ 85043\", across TruckMap, Yahoo Local, Yellowpages, Dun &\n  Bradstreet, and chamber-of-commerce listings, all for Niagara Bottling\n  Phoenix. Geocoding that address lands on a two-building warehouse/distribution\n  complex on the east side of S 67th Ave, just south of Washington St.",
         "mapsUrl": "https://www.google.com/maps/@33.44700,-112.20170,400m/data=!3m1!1e3",
         "fieldNotes": {
           "locating": "Roster had no address/coords. Resolved via web research: Niagara Bottling Phoenix is consistently listed at 275 S 67th Ave, Phoenix, AZ 85043 (TruckMap, Yahoo Local, Yellowpages, D&B, chamber listings). Geocoded that address to a two-building warehouse/distribution complex on the east side of S 67th Ave just south of Washington St.",
@@ -1120,7 +1120,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Address: 1300 Desert Willow Rd NW, Los Lunas, NM 87031\n- Locked center: 34.827861, -106.760900\n- Confirmation: Roster coordinates landed on the correct building. Street View\n  (2026-03) at the NW corner shows a \"niagara bottling LLC\" monument sign at the\n  entrance drive. Web research confirms a ~160,000 sq ft Niagara bottled-water\n  plant opened in 2016 in the Los Morros Business Park, NW of NM-6 / I-25, next\n  to the Meta (Facebook) data center and a Walmart distribution center. The\n  \"Walmart\" lettering visible on the building face is product/customer branding —\n  Niagara is the largest private-label bottled-water supplier (Walmart, Costco).",
+        "dossierExcerpt": "- Address: 1300 Desert Willow Rd NW, Los Lunas, NM 87031\n- Locked center: 34.827861, -106.760900\n- Confirmation: Roster coordinates landed on the correct building. Street View\n  (2026-03) at the NW corner shows a \"niagara bottling LLC\" monument sign at the\n  entrance drive. Web research confirms a ~160,000 sq ft Niagara bottled-water\n  plant opened in 2016 in the Los Morros Business Park, NW of NM-6 / I-25, next\n  to the Meta (Facebook) data center and a Walmart distribution center. The\n  \"Walmart\" lettering visible on the building face is product/customer branding ,\n  Niagara is the largest private-label bottled-water supplier (Walmart, Costco).",
         "mapsUrl": "https://www.google.com/maps/@34.827861,-106.760900,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Los Lunas, ~160,000 sq ft bottled-water plant opened 2016 in Los Morros Business Park, NW of NM-6 / I-25. Confirmed by 'niagara bottling LLC' monument sign at the truck gate in Street View (2026-03).",
@@ -1428,7 +1428,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Address: 1933 N Gun Club Rd, Aurora, CO 80019\n- Locked center: 39.745400, -104.708550\n- Confirmation: Roster coordinates landed on the correct building. The\n  facility is the central E-W-oriented warehouse in a cluster of large\n  build-to-suit warehouses along the Gun Club Rd / I-70 industrial corridor.\n  Street View (2026-04) shows water-treatment silos at the building's east end\n  and a Niagara monument/logo at the SE — the silo cluster is the unambiguous\n  signature of a Niagara bottled-water plant. Web research confirms Niagara\n  Bottling LLC at 1933 N Gun Club Rd, operating 24/7.",
+        "dossierExcerpt": "- Address: 1933 N Gun Club Rd, Aurora, CO 80019\n- Locked center: 39.745400, -104.708550\n- Confirmation: Roster coordinates landed on the correct building. The\n  facility is the central E-W-oriented warehouse in a cluster of large\n  build-to-suit warehouses along the Gun Club Rd / I-70 industrial corridor.\n  Street View (2026-04) shows water-treatment silos at the building's east end\n  and a Niagara monument/logo at the SE, the silo cluster is the unambiguous\n  signature of a Niagara bottled-water plant. Web research confirms Niagara\n  Bottling LLC at 1933 N Gun Club Rd, operating 24/7.",
         "mapsUrl": "https://www.google.com/maps/@39.745400,-104.708550,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Aurora, 1933 N Gun Club Rd. Confirmed by water-treatment silos at the building's east end and a Niagara monument/logo visible in Street View (2026-04). Modern build-to-suit bottling plant in the Aurora/I-70 industrial corridor.",
@@ -1662,7 +1662,7 @@
           "totalBaselineMs": 4560000,
           "totalYnsMs": 2730000
         },
-        "dossierExcerpt": "- Address: 77 N Industrial Way, Brigham City, UT 84302\n- Locked center: 41.511870, -112.042220\n- Confirmation: Roster coordinates landed accurately on the building. Street\n  View (2023-08) along the east and SW faces shows the red \"niagara\" logo on the\n  office and water-treatment silos along the building's east side — the\n  unambiguous signature of a Niagara bottled-water plant. Web research confirms a\n  ~257,000 sq ft Niagara Bottling plant at 77 N Industrial Way, opened 2017.",
+        "dossierExcerpt": "- Address: 77 N Industrial Way, Brigham City, UT 84302\n- Locked center: 41.511870, -112.042220\n- Confirmation: Roster coordinates landed accurately on the building. Street\n  View (2023-08) along the east and SW faces shows the red \"niagara\" logo on the\n  office and water-treatment silos along the building's east side, the\n  unambiguous signature of a Niagara bottled-water plant. Web research confirms a\n  ~257,000 sq ft Niagara Bottling plant at 77 N Industrial Way, opened 2017.",
         "mapsUrl": "https://www.google.com/maps/@41.511870,-112.042220,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Brigham City, 77 N Industrial Way, ~257,000 sq ft plant opened 2017. Confirmed by the red 'niagara' logo on the east office face and water-treatment silos along the building's east side in Street View (2023-08).",
@@ -1831,7 +1831,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Address: 19820 57th Ave E, Puyallup, WA 98375 (Frederickson)\n- Locked center: 47.076030, -122.355800\n- Confirmation: Roster coordinates landed accurately on the building. Street\n  View (2024-05) of the east face shows three large cylindrical water-treatment\n  silos — the unambiguous signature of a Niagara bottled-water plant — plus the\n  office and employee parking. Web research confirms a ~311,000 sq ft Niagara\n  Bottling plant at 19820 57th Ave E, opened February 2014, expanded multiple\n  times (most recent a $35M line addition).",
+        "dossierExcerpt": "- Address: 19820 57th Ave E, Puyallup, WA 98375 (Frederickson)\n- Locked center: 47.076030, -122.355800\n- Confirmation: Roster coordinates landed accurately on the building. Street\n  View (2024-05) of the east face shows three large cylindrical water-treatment\n  silos, the unambiguous signature of a Niagara bottled-water plant, plus the\n  office and employee parking. Web research confirms a ~311,000 sq ft Niagara\n  Bottling plant at 19820 57th Ave E, opened February 2014, expanded multiple\n  times (most recent a $35M line addition).",
         "mapsUrl": "https://www.google.com/maps/@47.076030,-122.355800,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Frederickson plant, 19820 57th Ave E, Puyallup WA. ~311,000 sq ft plant opened 2014, expanded multiple times. Confirmed by three large water-treatment silos on the building's east face in Street View (2024-05).",
@@ -3997,7 +3997,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Niagara Bottling - Middleburg FL\n- Type: Bottling / Manufacturing Plant\n- Address: 565 Atlantis Dr, Middleburg, FL 32068\n- Resolved coords: 30.13565, -81.82680 (building/yard center)\n- Archetype: #7 — Gate + GS + Fast Lane Opportunity\n- Confidence: high",
+        "dossierExcerpt": "- Name: Niagara Bottling - Middleburg FL\n- Type: Bottling / Manufacturing Plant\n- Address: 565 Atlantis Dr, Middleburg, FL 32068\n- Resolved coords: 30.13565, -81.82680 (building/yard center)\n- Archetype: #7, Gate + GS + Fast Lane Opportunity\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@30.13565,-81.82680,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Middleburg plant, ~$70M facility opened 2022 near Jacksonville. Confirmed via Street View showing blue 'Niagara' branded building facade at 565 Atlantis Dr.",
@@ -4228,7 +4228,7 @@
           "totalBaselineMs": 4440000,
           "totalYnsMs": 2790000
         },
-        "dossierExcerpt": "- Name: Niagara Bottling - Groveland FL\n- Type: Bottling / Manufacturing Plant\n- Address: 7633 American Way, Groveland, FL 34736\n- Resolved coords: 28.63920, -81.82750 (Niagara building/yard center)\n- Archetype: #1 — Gate + GS (no other distinguishing flag)\n- Confidence: high",
+        "dossierExcerpt": "- Name: Niagara Bottling - Groveland FL\n- Type: Bottling / Manufacturing Plant\n- Address: 7633 American Way, Groveland, FL 34736\n- Resolved coords: 28.63920, -81.82750 (Niagara building/yard center)\n- Archetype: #1, Gate + GS (no other distinguishing flag)\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@28.63920,-81.82750,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Groveland plant, 7633 American Way, operating since 2007. Confirmed via Street View: building with bulk silos/storage tanks (bottling water tanks), gated entry. Located in a multi-tenant industrial park; the Niagara building is the standalone large building, distinct from neighboring warehouses.",
@@ -4386,7 +4386,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Niagara Bottling - Jupiter FL\n- Type: Bottling / Manufacturing Plant\n- Address: 15832 Corporate Rd N, Jupiter, FL 33478\n- Resolved coords: 26.90430, -80.28400 (building/yard center)\n- Archetype: #1 — Gate + GS (no other distinguishing flag)\n- Confidence: high",
+        "dossierExcerpt": "- Name: Niagara Bottling - Jupiter FL\n- Type: Bottling / Manufacturing Plant\n- Address: 15832 Corporate Rd N, Jupiter, FL 33478\n- Resolved coords: 26.90430, -80.28400 (building/yard center)\n- Archetype: #1, Gate + GS (no other distinguishing flag)\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@26.90430,-80.28400,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Jupiter, 15832 Corporate Rd N, in the Palm Beach Park of Commerce. ~409,486 sq ft, operates 24/7, produces private-label bottled water. Confirmed via web search and satellite/Street View.",
@@ -4527,7 +4527,7 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "- Name: Niagara Bottling - Hazle Township PA\n- Type: Bottling / Manufacturing Plant\n- Address: 100 Timberline Dr, Hazle Township, PA 18202\n- Resolved coords: 40.93250, -76.06350 (building/yard center)\n- Archetype: #10 — Ship/Rcv Separate (Gate + GS) — see caveat below\n- Confidence: medium",
+        "dossierExcerpt": "- Name: Niagara Bottling - Hazle Township PA\n- Type: Bottling / Manufacturing Plant\n- Address: 100 Timberline Dr, Hazle Township, PA 18202\n- Resolved coords: 40.93250, -76.06350 (building/yard center)\n- Archetype: #10, Ship/Rcv Separate (Gate + GS), see caveat below\n- Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@40.93250,-76.06350,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Hazle Township, 100 Timberline Dr, Humboldt Industrial Park. ~1.19M sq ft, $440M investment, opened March 2022 - one of Niagara's largest plants (purified water + aseptic beverages). Confirmed via web search and satellite imagery.",
@@ -4718,7 +4718,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Name: Niagara Bottling - Imperial PA (Findlay Township)\n- Type: Bottling / Manufacturing Plant\n- Address: 201 Solar Dr, Imperial, PA 15126\n- Resolved coords: 40.44190, -80.29597 (building/yard center)\n- Archetype: #3 — No Gate / No GS\n- Confidence: high",
+        "dossierExcerpt": "- Name: Niagara Bottling - Imperial PA (Findlay Township)\n- Type: Bottling / Manufacturing Plant\n- Address: 201 Solar Dr, Imperial, PA 15126\n- Resolved coords: 40.44190, -80.29597 (building/yard center)\n- Archetype: #3, No Gate / No GS\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@40.44190,-80.29597,400m/data=!3m1!1e3",
         "fieldNotes": {
           "facility": "Niagara Bottling Imperial PA, 201 Solar Dr, Findlay Industrial Park near Pittsburgh International Airport. ~$64M plant. Confirmed via web search and Street View: building with blue Niagara branding and bulk water silos.",
@@ -4926,17 +4926,17 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (40.570886, -75.614395, ROOFTOP) land on a large white-roofed\nindustrial building. Web search confirmed Niagara Bottling's Allentown plant at\n7561 Industrial Blvd, Allentown/Upper Macungie PA 18106 (Waze, TruckMap,\nBandana, Yellowpages listings). Satellite imagery shows a single large\nmanufacturing/distribution building with two dock banks, a fenced trailer drop\nyard, and a silo/tanker process area — fully consistent with a bottling plant.\nLocked the center at the building centroid (~40.5711, -75.6149).",
+        "dossierExcerpt": "Roster coordinates (40.570886, -75.614395, ROOFTOP) land on a large white-roofed\nindustrial building. Web search confirmed Niagara Bottling's Allentown plant at\n7561 Industrial Blvd, Allentown/Upper Macungie PA 18106 (Waze, TruckMap,\nBandana, Yellowpages listings). Satellite imagery shows a single large\nmanufacturing/distribution building with two dock banks, a fenced trailer drop\nyard, and a silo/tanker process area, fully consistent with a bottling plant.\nLocked the center at the building centroid (~40.5711, -75.6149).",
         "mapsUrl": "https://www.google.com/maps/@40.571100,-75.614900,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "Property is fenced (chain-link around the dock and trailer yards, visible in Street View 2023-08), but the truck access road off Industrial Blvd shows no barrier arm and no guard booth across the lane in any Street View heading walked along the road. Classified as open driveway / no controlled gate, medium confidence — a sliding yard gate could exist closer to the building, out of Street View reach.",
+          "truckGate": "Property is fenced (chain-link around the dock and trailer yards, visible in Street View 2023-08), but the truck access road off Industrial Blvd shows no barrier arm and no guard booth across the lane in any Street View heading walked along the road. Classified as open driveway / no controlled gate, medium confidence, a sliding yard gate could exist closer to the building, out of Street View reach.",
           "guardShack": "No staffed booth structure visible at the entrance in satellite or Street View.",
-          "dockDoors": "Two dock banks: a long row on the SW face along Industrial Blvd and a long row on the SE face with trailers backed in; combined ~55 doors estimated from z18/z19 imagery — band 50+ is confident even if exact count is approximate.",
+          "dockDoors": "Two dock banks: a long row on the SW face along Industrial Blvd and a long row on the SE face with trailers backed in; combined ~55 doors estimated from z18/z19 imagery, band 50+ is confident even if exact count is approximate.",
           "dropArea": "Large fenced trailer drop yard on the NW side with 40+ tractor-trailers/trailers parked in rows, plus a marked trailer-stall row on the SE dock apron; 50+ band.",
           "shipRcvSeparate": "Distinct dock banks on two different building faces (SW and SE) implying separate ship/receive clusters.",
           "fastLaneOpportunity": "Wide paved access road and large apron with unused width near the entrance leaves room for a bypass lane.",
           "postGateStaging": "Wide internal paved yard between the access road and the dock doors provides post-gate holding room.",
-          "urbanRural": "Located in the dense Lehigh Valley logistics corridor surrounded by large distribution buildings — Urban setting.",
+          "urbanRural": "Located in the dense Lehigh Valley logistics corridor surrounded by large distribution buildings, Urban setting.",
           "siteAreaAcres": "~38 acres derived from the perimeter box spanning the plant building, both dock aprons, the NW drop yard, and the NE process/silo area."
         },
         "verification": {
@@ -5154,17 +5154,17 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (34.265035, -79.695251, ROOFTOP) land on a large\nwhite-roofed manufacturing/distribution building. Web search confirmed Niagara\nBottling's Florence plant — a 502,320 sq ft, $70M facility in the Pee Dee\nTouchstone Energy Commerce Park at 2222 Florence Harllee Blvd, operational\nsince Q1 2021 (SC Dept of Commerce, Florence Chamber, TruckMap). Street View\n(2024-02) shows the Niagara logo on the building's west end and Niagara-branded\ntrailers backed into the docks — positive identification. Locked center at the\nbuilding centroid (~34.2652, -79.6940).",
+        "dossierExcerpt": "Roster coordinates (34.265035, -79.695251, ROOFTOP) land on a large\nwhite-roofed manufacturing/distribution building. Web search confirmed Niagara\nBottling's Florence plant, a 502,320 sq ft, $70M facility in the Pee Dee\nTouchstone Energy Commerce Park at 2222 Florence Harllee Blvd, operational\nsince Q1 2021 (SC Dept of Commerce, Florence Chamber, TruckMap). Street View\n(2024-02) shows the Niagara logo on the building's west end and Niagara-branded\ntrailers backed into the docks, positive identification. Locked center at the\nbuilding centroid (~34.2652, -79.6940).",
         "mapsUrl": "https://www.google.com/maps/@34.265200,-79.694000,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "No controlled checkpoint found. The property has only a low post-and-cable boundary marker along the road (clear in Street View 2024-02) — no security fence, no barrier arm and no guard booth across the truck driveway. The access road off Florence Harllee Blvd reads as an uncontrolled industrial driveway. Classified false; medium confidence.",
+          "truckGate": "No controlled checkpoint found. The property has only a low post-and-cable boundary marker along the road (clear in Street View 2024-02), no security fence, no barrier arm and no guard booth across the truck driveway. The access road off Florence Harllee Blvd reads as an uncontrolled industrial driveway. Classified false; medium confidence.",
           "guardShack": "No staffed-booth structure anywhere at the entrance in satellite or Street View.",
-          "dockDoors": "A single very long dock bank runs the full ~500ft south face of the 502,320 sq ft building, with trailers backed in along its whole length. Estimate ~70 doors from z18 imagery — 50+ band confident.",
+          "dockDoors": "A single very long dock bank runs the full ~500ft south face of the 502,320 sq ft building, with trailers backed in along its whole length. Estimate ~70 doors from z18 imagery, 50+ band confident.",
           "dropArea": "A long row of marked trailer-parking stalls south of the dock apron holds many trailers without tractors; combined with the dock-backed trailers, the yard reads 50+. Dedicated drop area present.",
-          "shipRcvSeparate": "All dock doors are on one continuous face; ship and receive appear to share the same dock bank — not separate.",
+          "shipRcvSeparate": "All dock doors are on one continuous face; ship and receive appear to share the same dock bank, not separate.",
           "fastLaneOpportunity": "Wide access road and broad apron with substantial unused paved width leave clear room for a bypass/express lane.",
           "postGateStaging": "Deep paved yard between the access road and the dock doors provides internal post-gate staging room.",
-          "urbanRural": "Located in the Pee Dee Touchstone Energy Commerce Park on the edge of Florence, surrounded by woods, fields and retention ponds — Rural setting.",
+          "urbanRural": "Located in the Pee Dee Touchstone Energy Commerce Park on the edge of Florence, surrounded by woods, fields and retention ponds, Rural setting.",
           "siteAreaAcres": "~42 acres derived from the perimeter box covering the full building footprint, dock apron and trailer-stall rows.",
           "railServed": "No rail spur enters the property in any imagery."
         },
@@ -5363,19 +5363,19 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (31.156095, -97.354586, ROOFTOP) land on a large\nwhite-roofed manufacturing building. Web search confirmed Niagara Bottling's\nTemple plant — a $90M, ~728,000 sq ft purified-water facility at 5419 Wendland\nRd in the Temple Industrial Park, opened 2019, with a subsequent $48M expansion\nadding a logistics/distribution center (Temple Chamber, niagarawater.com,\nKDH/TDT News). Street View (2026-04) shows the Niagara monument sign at the\nWendland Rd driveway and the branded plant — positive identification. Imagery\nshows two large buildings: the original plant (north) and the logistics-center\nexpansion (south).",
+        "dossierExcerpt": "Roster coordinates (31.156095, -97.354586, ROOFTOP) land on a large\nwhite-roofed manufacturing building. Web search confirmed Niagara Bottling's\nTemple plant, a $90M, ~728,000 sq ft purified-water facility at 5419 Wendland\nRd in the Temple Industrial Park, opened 2019, with a subsequent $48M expansion\nadding a logistics/distribution center (Temple Chamber, niagarawater.com,\nKDH/TDT News). Street View (2026-04) shows the Niagara monument sign at the\nWendland Rd driveway and the branded plant, positive identification. Imagery\nshows two large buildings: the original plant (north) and the logistics-center\nexpansion (south).",
         "mapsUrl": "https://www.google.com/maps/@31.156095,-97.354586,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "No controlled checkpoint found. The campus has only a landscaped grass buffer along Wendland Rd with a Niagara monument sign at the entrance driveway (Street View 2026-04) — no perimeter security fence, no barrier arm and no guard booth across any driveway. Classified false, medium confidence.",
+          "truckGate": "No controlled checkpoint found. The campus has only a landscaped grass buffer along Wendland Rd with a Niagara monument sign at the entrance driveway (Street View 2026-04), no perimeter security fence, no barrier arm and no guard booth across any driveway. Classified false, medium confidence.",
           "guardShack": "No staffed-booth structure visible at any entrance. A small white structure near the main plant NE corner appears to be a process/utility building, not a gatehouse.",
           "multipleFacilities": "Campus of two large Niagara buildings: the original ~728,000 sq ft manufacturing plant (north) and the $48M logistics-center expansion (south), connected by an internal road.",
-          "dockDoors": "Main plant has a long dock bank on its east face with trailers backed in; the logistics center has dock banks on its south/north faces. Combined estimate ~90 doors across both buildings — 50+ band confident.",
+          "dockDoors": "Main plant has a long dock bank on its east face with trailers backed in; the logistics center has dock banks on its south/north faces. Combined estimate ~90 doors across both buildings, 50+ band confident.",
           "dropArea": "Large trailer yards at both buildings hold 80+ tractor-trailers and drop trailers in marked rows; 50+ band, dedicated drop yard present.",
           "shipRcvSeparate": "Separate dock clusters on the two distinct buildings (manufacturing plant vs. logistics center) imply physically separate ship/receive operations.",
           "fastLaneOpportunity": "Very wide internal roads and broad aprons with substantial unused paved width leave clear room for bypass/express lanes.",
           "postGateStaging": "Deep paved yards between the internal roads and the dock doors at both buildings provide ample post-gate staging.",
-          "railServed": "A rail line runs immediately south of the logistics center with rail cars on it, but it is a separate mainline/siding — no spur enters the Niagara property; classified not rail-served.",
-          "urbanRural": "Located in the Temple Industrial Park on the edge of Temple, surrounded by farm fields — Rural setting.",
+          "railServed": "A rail line runs immediately south of the logistics center with rail cars on it, but it is a separate mainline/siding, no spur enters the Niagara property; classified not rail-served.",
+          "urbanRural": "Located in the Temple Industrial Park on the edge of Temple, surrounded by farm fields, Rural setting.",
           "truckGateCount": "Two driveway connections to Wendland Rd serve the campus; counted as 2 truck gates (both uncontrolled).",
           "scale": "No truck scale clearly identified; flagged as uncertain.",
           "siteAreaAcres": "~78 acres derived from the perimeter box covering both buildings, their dock aprons and trailer yards."
@@ -5544,18 +5544,18 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates (29.588439, -97.979524, ROOFTOP) land on a large building\nwith a fully solar-panelled roof. Web search confirmed Niagara Bottling's\nSeguin plant — a 557,533 sq ft facility built 2016 on ~30 acres at the\nintersection of Rio Nogales Dr and 8th St, running multiple production lines\nwith a $21M fourth-line expansion (Seguin EDC, Waze, GridInfo solar-farm\nlisting, The Keith Corp). The distinctive rooftop solar array matches the\nGridInfo \"Niagara Bottling - Seguin\" solar-farm record — positive\nidentification. Locked center at the building centroid.",
+        "dossierExcerpt": "Roster coordinates (29.588439, -97.979524, ROOFTOP) land on a large building\nwith a fully solar-panelled roof. Web search confirmed Niagara Bottling's\nSeguin plant, a 557,533 sq ft facility built 2016 on ~30 acres at the\nintersection of Rio Nogales Dr and 8th St, running multiple production lines\nwith a $21M fourth-line expansion (Seguin EDC, Waze, GridInfo solar-farm\nlisting, The Keith Corp). The distinctive rooftop solar array matches the\nGridInfo \"Niagara Bottling - Seguin\" solar-farm record, positive\nidentification. Locked center at the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@29.588439,-97.979524,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No controlled checkpoint found. The site sits in open farm fields with no perimeter security fence; the access road off the E-side public road shows no barrier arm and no guard booth. Classified false, medium confidence. Note: Street View coverage of the immediate plant driveway is sparse (ZERO_RESULTS at several nearby points); call relies mainly on satellite.",
           "guardShack": "No staffed-booth structure visible at the entrance in satellite imagery.",
-          "dockDoors": "A single long dock bank runs the south face of the 557,533 sq ft building with trailers backed in along its length; estimate ~65 doors from z18 imagery — 50+ band confident.",
+          "dockDoors": "A single long dock bank runs the south face of the 557,533 sq ft building with trailers backed in along its length; estimate ~65 doors from z18 imagery, 50+ band confident.",
           "dropArea": "A long row of marked trailer-parking stalls on the south apron holds many trailers without tractors; 50+ band, dedicated drop yard present.",
-          "shipRcvSeparate": "All dock doors are on one continuous south face; ship and receive share the same dock bank — not separate.",
+          "shipRcvSeparate": "All dock doors are on one continuous south face; ship and receive share the same dock bank, not separate.",
           "fastLaneOpportunity": "Very wide access road and broad apron with abundant unused paved width leave clear room for a bypass/express lane.",
           "postGateStaging": "Deep paved yard between the access road and the dock doors provides internal post-gate staging.",
           "railServed": "A rail line runs near the highway interchange NW of the plant, but no spur enters the Niagara property; classified not rail-served.",
-          "urbanRural": "Plant sits in an isolated edge-of-Seguin industrial area surrounded by open farm fields — Rural.",
+          "urbanRural": "Plant sits in an isolated edge-of-Seguin industrial area surrounded by open farm fields, Rural.",
           "connectivityIssue": "Site is somewhat isolated but lies in an active industrial park beside a highway interchange, so cellular coverage is likely adequate; left false but flagged as uncertain.",
           "siteAreaAcres": "~32 acres derived from the perimeter box, consistent with the ~30-acre figure in the Seguin EDC listing.",
           "buildingCount": "Single Niagara building; other large buildings nearby (NE/E) belong to separate companies and are excluded."
@@ -5759,15 +5759,15 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster coordinates (46.732498, -92.201007, GEOMETRIC_CENTER) were **badly\nwrong** — they land on a forested highway interchange near Duluth, roughly\n250 km north of Elko New Market. Elko New Market is in Scott County, ~35 miles\nsouth of Minneapolis (~44.57 N, -93.29 W).\n\nCorrected via web research: Niagara Bottling is building a 425,000 sq ft,\n$125M beverage-manufacturing facility in the **southeast quadrant of the\nInterstate 35 / Scott County Road 2 interchange**, in the City of Elko New\nMarket's Park I-35 Industrial Park (City of Elko New Market FAQ, Minnesota\nReformer, Star Tribune, KARE 11, niagarawater.com). Probing satellite imagery\nalong I-35 located the matching interchange and a large new building shell in\nthe SE quadrant — positively identified as the Niagara plant. Locked center at",
+        "dossierExcerpt": "The roster coordinates (46.732498, -92.201007, GEOMETRIC_CENTER) were **badly\nwrong**, they land on a forested highway interchange near Duluth, roughly\n250 km north of Elko New Market. Elko New Market is in Scott County, ~35 miles\nsouth of Minneapolis (~44.57 N, -93.29 W).\n\nCorrected via web research: Niagara Bottling is building a 425,000 sq ft,\n$125M beverage-manufacturing facility in the **southeast quadrant of the\nInterstate 35 / Scott County Road 2 interchange**, in the City of Elko New\nMarket's Park I-35 Industrial Park (City of Elko New Market FAQ, Minnesota\nReformer, Star Tribune, KARE 11, niagarawater.com). Probing satellite imagery\nalong I-35 located the matching interchange and a large new building shell in\nthe SE quadrant, positively identified as the Niagara plant. Locked center at",
         "mapsUrl": "https://www.google.com/maps/@44.567600,-93.290000,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "_location": "Roster coordinates (46.732498, -92.201007) were badly wrong — they pointed to a forested highway interchange near Duluth, ~250 km north of Elko New Market. Corrected via web research: the plant is the 425,000 sq ft, $125M Niagara facility in the SE quadrant of the I-35 / Scott County Road 2 interchange in Elko New Market's Park I-35 Industrial Park. Building shell positively identified in satellite imagery at ~44.5676, -93.2900.",
-          "_constructionState": "Facility is UNDER CONSTRUCTION in all available imagery (Phase 1 targeted operational 2025). The building shell/roof is complete, but the truck yard — dock face, aprons, trailer parking, perimeter road, and any gate/guard booth — is still graded dirt and not yet built or captured. Operational classification fields cannot be observed; all are listed in uncertainFields and the classification values are placeholder defaults, not observed evidence.",
-          "dockDoors": "Dock doors not yet constructed/visible — set NONE as a placeholder, not an observation.",
-          "dropArea": "Trailer drop yard not yet constructed/visible — set NONE as a placeholder.",
+          "_location": "Roster coordinates (46.732498, -92.201007) were badly wrong, they pointed to a forested highway interchange near Duluth, ~250 km north of Elko New Market. Corrected via web research: the plant is the 425,000 sq ft, $125M Niagara facility in the SE quadrant of the I-35 / Scott County Road 2 interchange in Elko New Market's Park I-35 Industrial Park. Building shell positively identified in satellite imagery at ~44.5676, -93.2900.",
+          "_constructionState": "Facility is UNDER CONSTRUCTION in all available imagery (Phase 1 targeted operational 2025). The building shell/roof is complete, but the truck yard, dock face, aprons, trailer parking, perimeter road, and any gate/guard booth, is still graded dirt and not yet built or captured. Operational classification fields cannot be observed; all are listed in uncertainFields and the classification values are placeholder defaults, not observed evidence.",
+          "dockDoors": "Dock doors not yet constructed/visible, set NONE as a placeholder, not an observation.",
+          "dropArea": "Trailer drop yard not yet constructed/visible, set NONE as a placeholder.",
           "truckGate": "Entrance infrastructure not yet built/imaged; classified false only as a placeholder default.",
-          "urbanRural": "Site is in a new industrial park on the edge of Elko New Market (~35 mi south of Minneapolis), surrounded by farm fields and woods — Rural.",
+          "urbanRural": "Site is in a new industrial park on the edge of Elko New Market (~35 mi south of Minneapolis), surrounded by farm fields and woods, Rural.",
           "railServed": "No rail spur visible; the BNSF/UP corridor in the area does not appear to enter this parcel, but cannot be confirmed at this construction stage.",
           "siteAreaAcres": "~36 acres estimated from the graded property boundary in satellite imagery; approximate, the final fenced perimeter may differ.",
           "_recommendation": "Flag for re-audit once post-completion satellite/Street View imagery (expected 2026+) becomes available; the yard layout, gate, and dock counts cannot be determined from current construction-stage imagery."

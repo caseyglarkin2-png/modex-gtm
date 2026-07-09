@@ -171,11 +171,11 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL\nDedicated Customer Distribution Center (spirits) — 1701 Remington Blvd, Bolingbrook, IL 60490",
+        "dossierExcerpt": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL\nDedicated Customer Distribution Center (spirits), 1701 Remington Blvd, Bolingbrook, IL 60490",
         "mapsUrl": "https://www.google.com/maps/@41.649974,-88.143696,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Chain-link cantilever sliding gate across the truck driveway at the NW corner of the property (confirmed in Street View 2019-07). Property fully fenced with chain-link.",
-          "guardShack": "No guard booth visible at the gate. A driver-instruction sign reads 'Form single line on right side of driveway / Wait in truck until you reach front of line / Pull up to fence to check in' — indicating remote/kiosk check-in, not a manned booth.",
+          "guardShack": "No guard booth visible at the gate. A driver-instruction sign reads 'Form single line on right side of driveway / Wait in truck until you reach front of line / Pull up to fence to check in', indicating remote/kiosk check-in, not a manned booth.",
           "remoteGs": "Truck gate present, no guard shack; driver sign directs trucks to 'pull up to fence to check in' = remote check-in.",
           "dockDoorCount": "Cross-dock building with dock doors on BOTH long faces; many trailers backed in on each side. Estimated ~90 doors total from z18-z20 imagery; band 50+ is confident, exact count approximate.",
           "dropArea": "Long rows of unhitched trailers parked on the west truck lane between this building and the adjacent property; clearly 50+.",
@@ -362,7 +362,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN\nMulti-Customer E-Commerce Fulfillment Center — 9431 Allpoints Parkway,\nPlainfield, IN 46168",
+        "dossierExcerpt": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN\nMulti-Customer E-Commerce Fulfillment Center, 9431 Allpoints Parkway,\nPlainfield, IN 46168",
         "mapsUrl": "https://www.google.com/maps/@39.739272,-86.353432,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No controlled truck entrance. Open-campus DC in the AllPoints Midwest logistics park. Street View (2019-06) of the Allpoints Parkway entrance shows an unobstructed driveway, no barrier arm, no sliding gate, no perimeter fence. Truck yards on the east and west faces are unfenced.",
@@ -552,10 +552,10 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT\nMulti-Customer E-Commerce Fulfillment Center — 1711 S 4650 West,\nSalt Lake City, UT 84104",
+        "dossierExcerpt": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT\nMulti-Customer E-Commerce Fulfillment Center, 1711 S 4650 West,\nSalt Lake City, UT 84104",
         "mapsUrl": "https://www.google.com/maps/@40.734188,-112.001148,400m/data=!3m1!1e3",
         "fieldNotes": {
-          "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West) — trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
+          "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West), trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
           "guardShack": "No guard booth at any entrance.",
           "remoteGs": "No gate, so no remote check-in.",
           "dockDoors": "Dock doors run along the building's west face directly on the street; ~32 doors estimated from Street View, band 25-50.",
@@ -686,15 +686,15 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN\nLife Sciences & Healthcare Distribution Center — 6200 Global Drive,\nMemphis, TN 38141",
+        "dossierExcerpt": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN\nLife Sciences & Healthcare Distribution Center, 6200 Global Drive,\nMemphis, TN 38141",
         "mapsUrl": "https://www.google.com/maps/@34.997800,-89.859500,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "Controlled truck entrance on the west side off Global Drive: a black metal cantilever sliding gate set in the property's ornamental perimeter fence (confirmed in Street View 2025-04). The entire ~24-acre parcel is fenced.",
-          "guardShack": "No guard booth at the gate. Street View shows only the sliding gate plus a control pedestal / card-reader on a yellow bollard — no staffed booth structure.",
+          "guardShack": "No guard booth at the gate. Street View shows only the sliding gate plus a control pedestal / card-reader on a yellow bollard, no staffed booth structure.",
           "remoteGs": "Truck gate present + no guard shack + a control pedestal at the gate = remote/kiosk/card-reader check-in.",
           "dockDoors": "Dock doors on the building's west face; ~14 doors visible with box trucks and a trailer backed in. Band 10-25.",
           "dropArea": "Only a few trailers/box trucks in the truck yard; no dedicated trailer-storage lot. Band 0-10.",
-          "shipRcvSeparate": "Single dock bank on the west face — a 'RECEIVING' sign marks it; ship and receive run from the same dock cluster.",
+          "shipRcvSeparate": "Single dock bank on the west face, a 'RECEIVING' sign marks it; ship and receive run from the same dock cluster.",
           "postGateStaging": "Paved truck yard inside the gate ahead of the docks gives room to hold trucks.",
           "drivewayLong": "Internal west-side truck yard can stack 3+ trucks between the gate and docks.",
           "urbanRural": "Memphis southeast industrial submarket, dense logistics fabric = Urban.",
@@ -1148,7 +1148,7 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "Type: Distribution Center\nResolved address: 8695 Basil Western Road NW, Violet Township, NW Fairfield County, OH\nResolved coordinates: 39.846447, -82.704257 (address-level, ROOFTOP geocode)\nConfidence: LOW — facility not visible in any available imagery",
+        "dossierExcerpt": "Type: Distribution Center\nResolved address: 8695 Basil Western Road NW, Violet Township, NW Fairfield County, OH\nResolved coordinates: 39.846447, -82.704257 (address-level, ROOFTOP geocode)\nConfidence: LOW, facility not visible in any available imagery",
         "mapsUrl": "https://www.google.com/maps/@39.846447,-82.704257,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Address resolved (8695 Basil Western Road NW, Violet Township / NW Fairfield County, OH; geocode ROOFTOP, moved 20m) but the BUILDING IS NOT VISIBLE in any available imagery. Google satellite for the whole area is pre-development USDA/FPAC farmland tiles, and the latest Street View (Aug 2024) along Basil Western Road shows only cornfields - no construction.",
@@ -1505,7 +1505,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Type: Distribution Center\nAudited coordinates: 39.96780, -86.37660 (geocoded \"5000 Anson Blvd\")\nConfidence: Medium — facility identification uncertain",
+        "dossierExcerpt": "Type: Distribution Center\nAudited coordinates: 39.96780, -86.37660 (geocoded \"5000 Anson Blvd\")\nConfidence: Medium, facility identification uncertain",
         "mapsUrl": "https://www.google.com/maps/@39.96780,-86.37660,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "IDENTIFICATION UNCERTAIN. Roster lat/lng was geocoded from '5000 Anson Blvd, Whitestown IN' but moved 2755m - a large displacement indicating low geocoding precision. The Anson logistics park (Whitestown, off I-65) contains dozens of near-identical speculative warehouses, several vacant in current imagery; no DHL signage could be confirmed in available Street View (most park-interior panos are June-2019 pre-construction). Audited the building AT the geocoded coordinate (39.9678,-86.3766) as the best-available candidate - it is a front-load warehouse with operational dock activity (trailers backed in), consistent with DHL having occupied 5000 Anson Blvd since Q1 2020.",
@@ -1675,7 +1675,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Address: 6390 Commerce Ct, Groveport, OH 43125\n- Resolved center: 39.845500, -82.900800\n- Confirmation: Roster ROOFTOP coords (39.845371, -82.899859) landed on the building. Web search confirms DHL Supply Chain operates at 6390 Commerce Ct, Groveport (Yellow Pages, Waze, Chamber of Commerce, BusinessYab; phone 614-836-1263). Satellite at z17-z21 shows a single large rhomboid-oriented distribution building consistent with a DC — matches the facility type.",
+        "dossierExcerpt": "- Address: 6390 Commerce Ct, Groveport, OH 43125\n- Resolved center: 39.845500, -82.900800\n- Confirmation: Roster ROOFTOP coords (39.845371, -82.899859) landed on the building. Web search confirms DHL Supply Chain operates at 6390 Commerce Ct, Groveport (Yellow Pages, Waze, Chamber of Commerce, BusinessYab; phone 614-836-1263). Satellite at z17-z21 shows a single large rhomboid-oriented distribution building consistent with a DC, matches the facility type.",
         "mapsUrl": "https://www.google.com/maps/@39.845500,-82.900800,400m/data=!3m1!1e3",
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint anywhere on the property. Trucks enter from Commerce Ct (a private dead-end court shared with adjacent buildings), loop around the SW corner of the building, into the open NW dock yard. The dock apron is open to the access drive with no pinch-point.",
@@ -2007,7 +2007,7 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Park: DHL Commerce Park, Winding Woods Road off US-78, St. George, SC 29477\n- Audited building: DHL Commerce Park Building A, 4826 Hwy 78, Saint George, SC 29477\n- Resolved center: 33.177800, -80.535000\n- Confirmation: DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft $100M campus near St. George serving the Port of Charleston (DHL Group press release 2019; Post and Courier; SC Governor's office). The roster's GEOMETRIC_CENTER coord (33.183087, -80.52853) landed ~700 m NE on an unrelated industrial / aggregate yard — not the DHL facility. Web search surfaced \"DHL Commerce Park Building A\" at 4826 Hwy 78 (CommercialCafe; LoopNet — ~978,805 sq ft, ~74.91-acre lot, Class A, 420 parking spaces). Satellite at that address shows a large finished cross-dock distribution building consistent with the listing. Center corrected to Building A.",
+        "dossierExcerpt": "- Park: DHL Commerce Park, Winding Woods Road off US-78, St. George, SC 29477\n- Audited building: DHL Commerce Park Building A, 4826 Hwy 78, Saint George, SC 29477\n- Resolved center: 33.177800, -80.535000\n- Confirmation: DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft $100M campus near St. George serving the Port of Charleston (DHL Group press release 2019; Post and Courier; SC Governor's office). The roster's GEOMETRIC_CENTER coord (33.183087, -80.52853) landed ~700 m NE on an unrelated industrial / aggregate yard, not the DHL facility. Web search surfaced \"DHL Commerce Park Building A\" at 4826 Hwy 78 (CommercialCafe; LoopNet, ~978,805 sq ft, ~74.91-acre lot, Class A, 420 parking spaces). Satellite at that address shows a large finished cross-dock distribution building consistent with the listing. Center corrected to Building A.",
         "mapsUrl": "https://www.google.com/maps/@33.177800,-80.535000,400m/data=!3m1!1e3",
         "fieldNotes": {
           "siteIdentity": "DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft campus near St. George SC serving the Port of Charleston. As of current (2026) imagery only ONE building is built - DHL Commerce Park Building A, 4826 Hwy 78 (~978,805 sq ft, ~74.91-acre parcel per LoopNet/CommercialCafe). The roster's GEOMETRIC_CENTER coord (33.183087,-80.52853) landed ~700 m NE on an unrelated industrial/aggregate yard; corrected to Building A at 33.177800,-80.535000.",
@@ -2203,13 +2203,13 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Address: 2065 George Street, Melrose Park, IL 60160\n- Resolved center: 41.913400, -87.847700\n- Confirmation: Web search confirms DHL eCommerce opened a 352,000 sq ft, LEED Silver distribution / sortation center at 2065 George Street, Melrose Park IL (DHL press release 2023; Connect CRE; Supply Chain Dive — houses a Honeywell IntelliSort cross-belt loop sorter rated 40,000 parcels/hr; opened June 2023). Street View (2024-09) shows the DHL logo on the building face, positively identifying the center building among the industrial-park cluster. Roster ROOFTOP coord landed on the correct building.",
+        "dossierExcerpt": "- Address: 2065 George Street, Melrose Park, IL 60160\n- Resolved center: 41.913400, -87.847700\n- Confirmation: Web search confirms DHL eCommerce opened a 352,000 sq ft, LEED Silver distribution / sortation center at 2065 George Street, Melrose Park IL (DHL press release 2023; Connect CRE; Supply Chain Dive, houses a Honeywell IntelliSort cross-belt loop sorter rated 40,000 parcels/hr; opened June 2023). Street View (2024-09) shows the DHL logo on the building face, positively identifying the center building among the industrial-park cluster. Roster ROOFTOP coord landed on the correct building.",
         "mapsUrl": "https://www.google.com/maps/@41.913400,-87.847700,400m/data=!3m1!1e3",
         "fieldNotes": {
           "siteIdentity": "DHL eCommerce sortation center at 2065 George Street, Melrose Park IL - 352,000 sq ft, LEED Silver, opened June 2023, houses a Honeywell IntelliSort cross-belt loop sorter (40,000 parcels/hr). Confirmed via Street View showing the DHL logo on the building face (2024-09 capture). One building in a dense suburban-Chicago industrial park.",
           "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint at the truck-apron entrance. A black ornamental/perimeter fence runs along the George Street frontage (green setback strip), but the truck apron itself opens directly to the access road with no controlled pinch-point. Flagged uncertain - the frontage fence indicates some security intent and a low-profile gate cannot be fully ruled out from imagery.",
           "guardShack": "No guard booth structure visible at the entrance or anywhere on the property in satellite or Street View.",
-          "dockDoors": "Single continuous dock-door bank along the SW face of the building; estimated ~35 doors, banded 25-50. Sortation centers typically have a heavy dock count for parcel throughput.",
+          "dockDoors": "Single continuous dock-door bank along the SW face of the building; estimated ~35 doors, banded 25-50. Sortation centers typically have a heavy dock count for parcel production capacity.",
           "dropArea": "Rows of marked trailer stalls on the SW side of the apron (across from the dock face) hold ~20+ trailers - 10-25 band for trailers parked without tractors.",
           "dropYard": "A dedicated trailer-storage area with marked rows runs along the SW edge of the shared apron.",
           "postGateStaging": "Wide paved apron in front of the dock face provides internal holding/queue room.",
@@ -2409,17 +2409,17 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Type: Distribution Center (intermodal logistics park)\nResolved location: 32190 W 191st St, Edgerton, KS 66021 — building center ~38.78275, -94.95810\nConfidence: high",
+        "dossierExcerpt": "Type: Distribution Center (intermodal logistics park)\nResolved location: 32190 W 191st St, Edgerton, KS 66021, building center ~38.78275, -94.95810\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@38.78275,-94.9581,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "DHL Supply Chain operates this single-tenant DC at 32190 W 191st St, Edgerton KS 66021 within Logistics Park Kansas City (LPKC). Roster lng was ~1.1km too far west (landed on the BNSF intermodal yard); corrected via web search + Street View pano confirming the building.",
-          "customer": "Building bears prominent 'HERSHEY' signage on the office front (confirmed in two Street View captures, Aug 2024). This is a DHL-operated dedicated-customer DC for The Hershey Company — consistent with DHL Supply Chain's contract-logistics model and with directory listings ('DHL Supply Chain - Edgerton, KS', ph 913-856-2414).",
+          "customer": "Building bears prominent 'HERSHEY' signage on the office front (confirmed in two Street View captures, Aug 2024). This is a DHL-operated dedicated-customer DC for The Hershey Company, consistent with DHL Supply Chain's contract-logistics model and with directory listings ('DHL Supply Chain - Edgerton, KS', ph 913-856-2414).",
           "truckGate": "No barrier arm, sliding gate, or checkpoint at either driveway entrance on W 191st St. Both the east and west driveways are open paved drives with only a small address monument sign. Open spec-building access typical of LPKC.",
-          "guardShack": "No guard booth at either entrance — Street View confirms open driveways with no staffed structure.",
+          "guardShack": "No guard booth at either entrance, Street View confirms open driveways with no staffed structure.",
           "remoteGs": "false because there is no truck gate at all (open access).",
           "entryExitSeparate": "Two separate driveways off W 191st St (east end and west end of the building) both lead to the north truck court; trucks can enter one and exit the other. truckGateCount=2.",
           "dockDoors": "All loading docks on the north face. Counted ~38-45 dock positions with trailers backed in at z19; banded 25-50.",
-          "dropArea": "A marked trailer-parking lot sits at the NW corner / north court holding drop trailers; estimated 10-25 stalls. Low confidence on exact count — adjacent large trailer lot to the NW belongs to a separate parcel and was excluded.",
+          "dropArea": "A marked trailer-parking lot sits at the NW corner / north court holding drop trailers; estimated 10-25 stalls. Low confidence on exact count, adjacent large trailer lot to the NW belongs to a separate parcel and was excluded.",
           "fastLaneOpportunity": "Wide open driveway aprons and broad north truck court provide ample paved width to add an express/bypass lane.",
           "urbanRural": "LPKC sits in rural Johnson County farmland on the SW edge of the KC metro; the building is bordered by open cropland to the south. Rural.",
           "backupSensitive": "W 191st St is a low-traffic industrial-park road with deep open driveways; a truck queue would not spill onto a public artery.",
@@ -2558,19 +2558,19 @@
           "dropYard": false,
           "multiStep": false
         },
-        "dossierExcerpt": "Type: Multi-Customer E-Commerce Fulfillment Center\nResolved location: 495 Coweta Industrial Parkway, Newnan, GA 30265\n(Coweta Industrial Park) — building center ~33.41010, -84.72560\nConfidence: medium",
+        "dossierExcerpt": "Type: Multi-Customer E-Commerce Fulfillment Center\nResolved location: 495 Coweta Industrial Parkway, Newnan, GA 30265\n(Coweta Industrial Park), building center ~33.41010, -84.72560\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@33.4101,-84.7256,400m/data=!3m1!1e3",
         "fieldNotes": {
           "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Atlanta-metro DC is at 495 Coweta Industrial Parkway, Newnan GA 30265 ('Scout 85 Logistics' / 'Scout Cold Logistics Center Atlanta-II'), a 215,822 sq ft Class A rear-load building completed 2022, full-building lease to IDS Fulfillment (now DHL Supply Chain). Building is in Coweta Industrial Park, ~3 mi east of I-85 Exit 47.",
-          "buildingIdNote": "Audited the large single-tenant white tilt-up rear-load building at ~33.4101,-84.7256 on the south side of Coweta Industrial Parkway. Street View read a building plate as '355' on the NW end, which conflicts with the marketed address '495'; the 355 plate may be a suite/door designation. This is the only building in the park matching the Scout description (single-tenant, ~215k sq ft, rear-load, fully secured/fenced, 2022 construction). Building identity is high-probability but the street-number discrepancy is unresolved — confidence set to medium.",
+          "buildingIdNote": "Audited the large single-tenant white tilt-up rear-load building at ~33.4101,-84.7256 on the south side of Coweta Industrial Parkway. Street View read a building plate as '355' on the NW end, which conflicts with the marketed address '495'; the 355 plate may be a suite/door designation. This is the only building in the park matching the Scout description (single-tenant, ~215k sq ft, rear-load, fully secured/fenced, 2022 construction). Building identity is high-probability but the street-number discrepancy is unresolved, confidence set to medium.",
           "truckGate": "Street View (May 2025) shows the SW dock yard enclosed by chain-link fencing with a sliding gate across the truck driveway at the SW end. Controlled truck entry confirmed; flagged uncertain due to tree cover partially obscuring the gate.",
           "guardShack": "No guard booth at this building's gate. (A separate guarded gate with a booth exists at the much larger DC further NE in the park, but that is a different building.)",
-          "remoteGs": "true — there is a truck gate (sliding gate) but no guard shack, implying kiosk/app/call-box check-in.",
+          "remoteGs": "true, there is a truck gate (sliding gate) but no guard shack, implying kiosk/app/call-box check-in.",
           "dockDoors": "Rear-load building: all docks on the SW long face. ~35-45 dock positions counted at z19 with ~32 trailers backed in. Banded 25-50.",
-          "dropArea": "No dedicated drop-trailer lot — trailers are all backed at docks; the narrow dock apron has little marked drop parking. 0-10.",
-          "drivewayShort": "Tight dock-yard apron — single drive aisle width along the dock face; queue room is short (1-2 trucks).",
+          "dropArea": "No dedicated drop-trailer lot, trailers are all backed at docks; the narrow dock apron has little marked drop parking. 0-10.",
+          "drivewayShort": "Tight dock-yard apron, single drive aisle width along the dock face; queue room is short (1-2 trucks).",
           "urbanRural": "Coweta Industrial Park sits in a wooded edge-of-Newnan setting, a small exurban city SW of Atlanta; bordered by tree cover. Rural per rubric (small-town industrial defaults to Rural).",
-          "trailerParkingCapacity": "Low — the fenced dock court is narrow with limited room for drop trailers beyond the dock face itself; estimate ~12.",
+          "trailerParkingCapacity": "Low, the fenced dock court is narrow with limited room for drop trailers beyond the dock face itself; estimate ~12.",
           "method": "deep-audit"
         },
         "verification": {

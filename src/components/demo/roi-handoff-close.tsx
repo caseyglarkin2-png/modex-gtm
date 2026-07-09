@@ -5,7 +5,7 @@ import type { DemoPack } from '@/lib/demo/pack-schema';
 import { trackEvent } from '@/lib/analytics';
 
 /**
- * Layer 4 — the /demo -> /roi handoff close. "Sample proves. Model sizes."
+ * Layer 4, the /demo -> /roi handoff close. "Sample proves. Model sizes."
  *
  * /demo is the EVIDENCE surface: it shows the prospect's real asphalt and the
  * patterns we read from it. It states NO network dollar figure. The dollar
@@ -28,7 +28,7 @@ export function RoiHandoffClose({ pack, bookHref }: Props) {
   const { slug, displayName } = pack.account;
   // /roi lives natively on yardflow.ai; pack + utm let the model seed itself
   // and the visit attribute back to the demo. No dollar figure is rendered
-  // here — the number is produced on /roi, not asserted on /demo.
+  // here, the number is produced on /roi, not asserted on /demo.
   const roiHref = `https://yardflow.ai/roi/?pack=${encodeURIComponent(slug)}&utm_source=demo`;
 
   return (

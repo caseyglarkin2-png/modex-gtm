@@ -7,7 +7,7 @@ import { NARRATIONS } from '@/lib/demo/scenarios';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
 /**
- * D3.2 — Driver journey replay with the YNS toggle (D3.3) baked in.
+ * D3.2, Driver journey replay with the YNS toggle (D3.3) baked in.
  *
  * Outer wrapper handles UI chrome (controls, narration card, totals,
  * mode toggle, reset). The Leaflet map is dynamic-imported to keep
@@ -38,12 +38,12 @@ function formatMs(ms: number): string {
 }
 
 /**
- * #1 (fusion) — the map run and the ground-level ride-along, locked together.
+ * #1 (fusion), the map run and the ground-level ride-along, locked together.
  *
  * As the truck dot crosses each geofence in the Leaflet replay, the synced
  * Street View pane swaps in that zone's driver's-eye frame, so map position
  * and what-the-driver-sees stay in step. The opening "waiting" beat of step 0
- * holds on the perimeter pano — the approach, what a driver sees pulling up —
+ * holds on the perimeter pano, the approach, what a driver sees pulling up ,
  * then the run carries the eye gate -> dock -> drop.
  */
 
@@ -74,7 +74,7 @@ function hasAnyStreetView(site: Site): boolean {
 
 /**
  * Resolve the driver's-eye frame for the truck's current position. Never
- * returns blank mid-run while any pano exists — the switch picks the exact
+ * returns blank mid-run while any pano exists, the switch picks the exact
  * zone, then a fallback chain covers steps whose own pano has no coverage.
  */
 function resolveFrame(
@@ -156,7 +156,7 @@ function SyncedStreetView({ frame }: { frame: SyncedFrame }) {
   const imgRef = useRef<HTMLImageElement>(null);
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
   // Re-arm on src change. CRITICAL: these panos are small and often already
-  // cached, so the load event can fire before React attaches onLoad — in which
+  // cached, so the load event can fire before React attaches onLoad, in which
   // case onLoad never runs and the pane stays at opacity-0 (a black box). Check
   // .complete here as well. (Found in live browser QA, 2026-06-01.)
   useEffect(() => {
@@ -206,7 +206,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
   const narrationLine = narration ? (mode === 'baseline' ? narration.baseline : narration.yns) : '';
   const savedMs = scenario.totalBaselineMs - scenario.totalYnsMs;
 
-  // #1 fusion — does this site carry ground-level panos? Decided once so the
+  // #1 fusion, does this site carry ground-level panos? Decided once so the
   // layout doesn't reflow between steps; the per-step frame is resolved live.
   const svAvailable = useMemo(() => hasAnyStreetView(site), [site]);
   const svFrame = svAvailable ? resolveFrame(site, scenario, stepIdx, phase) : null;
@@ -302,7 +302,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
         )}
 
         {/* Totals */}
-        {/* Fixed comparison frame — always Today / With YardFlow / You save,
+        {/* Fixed comparison frame, always Today / With YardFlow / You save,
             independent of the toggle, so the reference point never shifts. */}
         <div className="mb-3 grid grid-cols-3 gap-3 rounded-lg bg-[#101218] px-4 py-3 text-center">
           <div>
@@ -319,7 +319,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           </div>
         </div>
 
-        {/* Capability strip — names the real YNS modules behind the run so the
+        {/* Capability strip, names the real YNS modules behind the run so the
             demo doesn't reduce the platform to a single gate->dock->exit move.
             Module names mirror the live operator console (flowGATE / flowTWIN /
             Yard Spot Mgt / Dock Mgt / Appointments). */}
@@ -347,7 +347,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           </div>
         </div>
 
-        {/* Conversion CTA — fires right after the prospect sees the YardFlow-saves
+        {/* Conversion CTA, fires right after the prospect sees the YardFlow-saves
             delta on their own yard. The 30-min audit is the canonical next
             step on yardflow.ai; this just makes it one click away. */}
         <a
@@ -358,7 +358,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           className="mb-3 inline-flex min-h-[36px] w-full items-center justify-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-4 py-2.5 text-sm font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
           style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
         >
-          See your real numbers — start a conversation →
+          See your real numbers, start a conversation →
         </a>
 
         {/* Caveat */}
@@ -366,7 +366,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           Movement durations are honest floors set by yard geometry; the uplift lands on the wait fields
           (queue + dispatch + secondary checkpoints). &ldquo;Today&rdquo; timings reflect the
           radios-and-clipboards world; &ldquo;With YardFlow&rdquo; reflects the protocol acting
-          end-to-end. We may be wrong about parts of this — your actual numbers will tell us where.
+          end-to-end. We may be wrong about parts of this, your actual numbers will tell us where.
         </p>
       </div>
     </div>

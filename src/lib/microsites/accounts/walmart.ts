@@ -1,9 +1,9 @@
 /**
- * Walmart — ABM Microsite Data (registry entry)
+ * Walmart, ABM Microsite Data (registry entry)
  *
  * Generated from the audited demo pack (public/demo-packs/walmart.json,
  * built June 2026). Every number and claim here is sourced from that
- * satellite audit or the public filings it cites — no additional facts
+ * satellite audit or the public filings it cites, no additional facts
  * were invented. This entry exists so /demo/walmart resolves its
  * accountName FK and /for/walmart renders a real memo instead of the
  * noindex capture page. Hand-author (and flip needsHandTuning to false)
@@ -21,7 +21,7 @@ export const walmart: AccountMicrositeData = {
   band: 'B',
   priorityScore: 60,
 
-  pageTitle: 'YardFlow for Walmart — Yard Network Audit',
+  pageTitle: 'YardFlow for Walmart, Yard Network Audit',
   metaDescription:
     '12 Walmart facilities mapped from public satellite imagery: 2,114 dock doors and room for about 5,250 trailers. What one gate-to-dock standard would change across the network.',
 
@@ -40,15 +40,15 @@ export const walmart: AccountMicrositeData = {
         { label: 'Geographic spread', value: 'United States. Roughly 150 DCs feeding about 4,700 US stores; the audited set spans general merchandise, grocery, e-commerce, and import types.' },
       ],
       hypothesis:
-        'Walmart moves more freight through its yards than any retailer on earth. Roughly 150 distribution centers feed about 4,700 US stores, and a trailer that idles at the gate is throughput the whole network never gets back. We mapped 12 of those DCs across general merchandise, grocery, e-commerce, and import: 2,114 dock doors and more than 5,200 trailer positions. YardFlow runs the gate-to-dock handoff as one orchestrated flow.',
+        'Walmart moves more freight through its yards than any retailer on earth. Roughly 150 distribution centers feed about 4,700 US stores, and a trailer that idles at the gate is production capacity the whole network never gets back. We mapped 12 of those DCs across general merchandise, grocery, e-commerce, and import: 2,114 dock doors and more than 5,200 trailer positions. YardFlow runs the gate-to-dock handoff as one orchestrated flow.',
       caveat:
-        'This entry is generated from our satellite network audit — the same dataset behind the live demo below — not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
+        'This entry is generated from our satellite network audit, the same dataset behind the live demo below, not from a hand-authored account study. The numbers are measured from public imagery; the most useful thing you can do is push back on anything that doesn\'t match what you see internally.',
     },
     {
       type: 'demo-embed',
       headline: '12 Walmart facilities, mapped from public satellite imagery',
       accountSlug: 'walmart',
-      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed — overlaid on the live satellite tile.',
+      caption: 'Click any facility to see the gates, dock aprons, drop yards, and staging areas we observed, overlaid on the live satellite tile.',
       source: 'Walmart runs ~150 US distribution centers (general merchandise, grocery/perishable, e-commerce fulfillment, and import) feeding ~4,700 US stores, plus international DCs. We audited 12 representative US facilities spanning every type.',
     },
     {
@@ -85,14 +85,14 @@ export const walmart: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis built from our satellite audit of the network, not a sales asset, it is the same shape of memo we would circulate internally before sizing a network engagement.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         'If parts of this read wrong against what you see internally at Walmart, that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
-  // Pack-derived working entry — flip to false only after hand-authoring.
+  // Pack-derived working entry, flip to false only after hand-authoring.
   needsHandTuning: true,
 
   people: [],
@@ -103,7 +103,7 @@ export const walmart: AccountMicrositeData = {
     facilityCount: '12 audited DCs of ~150 US distribution centers (164 US distribution facilities per FY2025 10-K)',
     facilityTypes: ['General Merchandise DC', 'Grocery/Perishable DC', 'E-commerce Fulfillment Center', 'Import DC'],
     geographicSpread: 'United States. Roughly 150 DCs feeding about 4,700 US stores; the audited set spans general merchandise, grocery, e-commerce, and import types.',
-    dailyTrailerMoves: 'Not modeled from public data — the audited footprint holds 2,114 dock doors and room for ~5,250 trailers.',
+    dailyTrailerMoves: 'Not modeled from public data, the audited footprint holds 2,114 dock doors and room for ~5,250 trailers.',
   },
 
   freight: {
