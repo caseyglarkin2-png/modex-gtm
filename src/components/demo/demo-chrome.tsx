@@ -29,10 +29,13 @@ const NAV = [
 
 const NEON = '#00B4FF';
 
+/* Pixel-mirror of Flow-State- components/Header.tsx's lockup (Page Protocol
+   2026-07-09): icon + YardFlow wordmark + the "by FreightRoll" subtitle line.
+   If the canonical lockup changes, mirror it here. */
 function Wordmark() {
   return (
-    <Link href="/" className="flex items-center gap-2.5 no-underline" aria-label="YardFlow home">
-      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke={NEON} strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+    <Link href="/" className="flex items-center gap-2 no-underline" aria-label="YardFlow home">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke={NEON} strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
         <path d="M4 24 C8 24, 10 21, 14 17" />
         <path d="M14 30 C14 24, 14 21, 14 17" />
         <path d="M14 17 C18 13, 22 13, 28 18" />
@@ -40,9 +43,13 @@ function Wordmark() {
         <circle cx="14" cy="30" r="2.5" fill={NEON} />
         <circle cx="28" cy="18" r="2.5" fill={NEON} />
         <circle cx="14" cy="17" r="3" fill={NEON} />
+        <circle cx="16" cy="16" r="14.5" stroke={NEON} strokeWidth="1" opacity="0.28" fill="none" />
       </svg>
-      <span className="text-[17px] font-extrabold tracking-tight">
-        <span className="text-white">Yard</span><span style={{ color: NEON }}>Flow</span>
+      <span className="flex flex-col">
+        <span className="text-lg font-bold leading-none tracking-tight">
+          <span className="text-white">Yard</span><span style={{ color: NEON }}>Flow</span>
+        </span>
+        <span className="mt-0.5 text-[10px] leading-none tracking-wider text-[#8A93A0]">by FreightRoll</span>
       </span>
     </Link>
   );
@@ -54,12 +61,13 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 border-b border-[#00B4FF]/12 bg-[#05070a]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
           <Wordmark />
-          <nav aria-label="Primary" className="ml-auto hidden items-center gap-6 md:flex">
+          {/* Sentence-case text-sm nav — mirrors the canonical Header exactly. */}
+          <nav aria-label="Primary" className="ml-auto hidden items-center gap-8 md:flex">
             {NAV.map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
-                className="font-mono text-[12px] uppercase tracking-[0.14em] text-white/70 no-underline transition-colors hover:text-[#00B4FF]"
+                className={`text-sm no-underline transition-colors hover:text-[#00B4FF] ${n.label === 'Demo' ? 'font-semibold text-[#00B4FF]' : 'text-[#8A93A0]'}`}
               >
                 {n.label}
               </Link>
@@ -67,8 +75,9 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
           </nav>
           <Link
             href="/contact?intent=audit"
-            className="ml-auto whitespace-nowrap rounded-lg bg-[#00B4FF] px-4 py-2 text-[13px] font-bold text-[#05070a] no-underline transition-colors hover:bg-white md:ml-0"
+            className="ml-auto inline-flex items-center gap-1 whitespace-nowrap rounded-xl bg-[#00B4FF] px-4 py-2 text-sm font-semibold text-[#050505] no-underline transition-all hover:shadow-[0_0_24px_rgba(0,180,255,0.5)] md:ml-0"
           >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z" /></svg>
             Book a Yard Network Audit
           </Link>
         </div>
@@ -79,7 +88,7 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
             <Link
               key={n.href}
               href={n.href}
-              className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-white/70 no-underline"
+              className="whitespace-nowrap text-sm text-[#8A93A0] no-underline"
             >
               {n.label}
             </Link>
@@ -92,7 +101,7 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-white/10 bg-[#05070a] px-5 py-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <Wordmark />
-          <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.12em] text-white/55">
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#8A93A0]">
             <Link href="/product" className="no-underline hover:text-[#00B4FF]">Product</Link>
             <Link href="/solutions" className="no-underline hover:text-[#00B4FF]">Solutions</Link>
             <Link href="/demo/" className="no-underline hover:text-[#00B4FF]">Demo</Link>

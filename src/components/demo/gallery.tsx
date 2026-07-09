@@ -459,25 +459,6 @@ function Hero({
           <span>One Network · {count} Industry Archetypes · Live</span>
         </div>
 
-        {/* C.T1, live audit subhead. Filter-independent numbers, server
-            rendered so there is no hydration shift. Reads as the receipt
-            behind the "See your numbers" promise in the H1 below. */}
-        <p className="mt-3 text-[14px] font-medium tracking-[0.01em] text-white/70 max-[480px]:text-[13px]">
-          <span className="font-bold text-white">{count}</span> industries
-          {' · '}
-          <span className="font-bold text-white">{facilitiesAudited.toLocaleString()}</span> facilities audited
-          {' · '}
-          <span className="text-[#00B4FF]">ROI in 30 seconds</span>
-        </p>
-
-        {/* F.T5, network-wide audit subtotal. Reinforces the scale of the
-            modeled data behind the templates. */}
-        <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">
-          <span className="tabular-nums text-white/70">{totalDockDoors.toLocaleString()}</span> dock doors modeled
-          {' · '}
-          <span className="tabular-nums text-white/70">{Math.round(totalAcres).toLocaleString()}</span> acres surveyed
-        </p>
-
         {/* H1, wins the page. Black weight, tight tracking, neon span. */}
         <h1 className="mt-5 max-w-[920px] font-black leading-[1.04] tracking-[-0.04em] text-[clamp(40px,6vw,72px)] [text-wrap:balance] max-[480px]:mt-4 max-[480px]:text-[clamp(36px,9vw,52px)]">
           Pick your industry.
@@ -488,35 +469,72 @@ function Hero({
           </span>
         </h1>
 
-        {/* G9, Audit-grade credibility badge. Lives above the fold so
-            the prospect knows the data is real before they parse any
-            tile. Swapped for a rep-facing tag when ?demo=1. */}
-        {isDemo ? (
-          <div
-            className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#FF2A00]/[0.40] bg-[#FF2A00]/[0.08] px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.20em] text-[#FF2A00]"
-            data-credibility-signal=""
-          >
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF2A00]" />
-            Presenting to prospect
-          </div>
-        ) : (
-          <div
-            className="mt-5 inline-flex max-w-[640px] items-start gap-2 rounded-[10px] border border-[#00B4FF]/[0.20] bg-[#00B4FF]/[0.04] px-3 py-2 text-[12.5px] leading-[1.45] text-white/75"
-            data-credibility-signal=""
-          >
-            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" aria-hidden className="mt-[2px] shrink-0 text-[#00B4FF]">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-              <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <circle cx="12" cy="7.5" r="1.2" fill="currentColor" />
-            </svg>
-            <span>
-              <span className="text-white/90">{AUDIT_GRADE_DISCLOSURE}</span>
-            </span>
-          </div>
-        )}
+        {/* Proof row (Page Protocol beat 4): the audit receipts as bordered
+            chips, mirroring Flow-State-'s ReceiptStrip idiom. Replaces the
+            two loose stat lines that used to sit above the H1. */}
+        <div className="mt-7 flex max-w-[720px] flex-wrap gap-2.5">
+          {[
+            { k: 'Audited', v: `${facilitiesAudited.toLocaleString()} facilities`, n: `across ${count} industries` },
+            { k: 'Modeled', v: `${totalDockDoors.toLocaleString()} dock doors`, n: `${Math.round(totalAcres).toLocaleString()} acres surveyed` },
+            { k: 'Live', v: 'ROI in 30 seconds', n: 'auto-filled per archetype' },
+          ].map((c) => (
+            <div key={c.k} className="border border-[#00B4FF]/25 bg-[#0a0f14]/70 px-4 py-2.5">
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#00B4FF]/70">{c.k}</div>
+              <div className="font-mono text-[15px] font-bold tabular-nums text-white">{c.v}</div>
+              <div className="text-[11px] text-white/45">{c.n}</div>
+            </div>
+          ))}
+        </div>
 
-        {/* F.T7, category line + F.T1 provenance trigger + F.T8 counter. */}
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        {/* Lede (beat 3), single paragraph, steel, no fluff. */}
+        <p className="mt-6 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
+          Each template runs the YardFlow protocol against an audited prospect&apos;s
+          facility data. The numbers below are real, public satellite imagery,
+          modeled geofences, classification rubric.
+        </p>
+
+        {/* CTA row (beat 5): ONE solid neon primary + one outline secondary,
+            the site-wide .btn recipes mirrored from Flow-State- globals. */}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+          <a
+            href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ms-cta-id="gallery-hero-open-calculator"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[#00B4FF] px-6 py-3.5 text-[15px] font-bold text-[#050505] outline-none transition-all hover:shadow-[0_0_30px_rgba(0,180,255,0.4)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
+          >
+            Open the calculator
+            <ArrowRight className="transition-transform group-hover:translate-x-[3px]" />
+          </a>
+          <a
+            href="#gallery-grid"
+            onClick={scrollToGrid}
+            data-ms-cta-id="gallery-hero-browse-industries"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl border border-[#00B4FF]/35 bg-[#050505]/50 px-6 py-3.5 text-[15px] font-semibold text-white outline-none transition-all hover:border-[#00B4FF]/60 hover:bg-[#00B4FF]/[0.06] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
+          >
+            Browse industries below
+            <span className="transition-transform group-hover:translate-y-[2px]" aria-hidden>↓</span>
+          </a>
+        </div>
+
+        {/* The quiet line (below the ask, not above the headline): audit-grade
+            disclosure + provenance + the built-for-the-yard tag. */}
+        <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+          {isDemo ? (
+            <span
+              className="inline-flex items-center gap-2 rounded-full border border-[#FF2A00]/[0.40] bg-[#FF2A00]/[0.08] px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.20em] text-[#FF2A00]"
+              data-credibility-signal=""
+            >
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF2A00]" />
+              Presenting to prospect
+            </span>
+          ) : (
+            <span className="max-w-[640px] text-[12.5px] leading-[1.45] text-white/55" data-credibility-signal="">
+              {AUDIT_GRADE_DISCLOSURE}
+            </span>
+          )}
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/55">
             Built for the yard. Not a module of your TMS.
           </span>
@@ -527,42 +545,6 @@ function Hero({
               <span className="tabular-nums text-white/80">{auditsThisQuarter}</span> new audits this quarter
             </span>
           ) : null}
-        </div>
-
-        {/* Body, single line, steel, no fluff. */}
-        <p className="mt-5 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
-          Each template runs the YardFlow protocol against an audited prospect&apos;s
-          facility data. The numbers below are real, public satellite imagery,
-          modeled geofences, classification rubric.
-        </p>
-
-        {/* C.T2, two distinct CTAs. Primary (neon-filled) opens the
-            calculator; secondary (neon-outlined) scrolls to the tile grid.
-            Stack vertically on mobile. */}
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
-          <a
-            href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-ms-cta-id="gallery-hero-open-calculator"
-            className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[12px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-5 text-[14px] font-bold tracking-[0.01em] text-white outline-none transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_28px_rgba(0,180,255,0.35)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
-            style={{
-              boxShadow:
-                '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 10px 28px rgba(0, 0, 0, 0.40), 0 0 22px rgba(0, 180, 255, 0.18)',
-            }}
-          >
-            Open the calculator
-            <ArrowRight className="transition-transform group-hover:translate-x-[3px]" />
-          </a>
-          <a
-            href="#gallery-grid"
-            onClick={scrollToGrid}
-            data-ms-cta-id="gallery-hero-browse-industries"
-            className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[12px] border border-white/20 bg-transparent px-5 text-[14px] font-semibold tracking-[0.01em] text-white/85 outline-none transition-all hover:border-[#00B4FF]/55 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
-          >
-            Browse industries below
-            <span className="transition-transform group-hover:translate-y-[2px]" aria-hidden>↓</span>
-          </a>
         </div>
       </div>
     </header>

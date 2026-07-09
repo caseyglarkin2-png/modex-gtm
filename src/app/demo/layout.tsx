@@ -1,6 +1,13 @@
 import type { ReactNode } from 'react';
 import Script from 'next/script';
+import { Inter } from 'next/font/google';
 import { DemoChrome } from '@/components/demo/demo-chrome';
+
+// Page Protocol (2026-07-09): the /demo subtree is served under yardflow.ai,
+// whose native pages render Inter. This app's root layout loads Mona Sans,
+// which made the proxied pages read as a different site. Load Inter here and
+// apply it to the chrome wrapper so the whole subtree matches the canon.
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 /**
  * Demo subtree layout — loads HubSpot native tracking (portal 3819073) across
@@ -25,7 +32,9 @@ export default function DemoSubtreeLayout({ children }: { children: ReactNode })
         strategy="afterInteractive"
         src="//js.hs-scripts.com/3819073.js"
       />
-      <DemoChrome>{children}</DemoChrome>
+      <div className={inter.className}>
+        <DemoChrome>{children}</DemoChrome>
+      </div>
     </>
   );
 }
