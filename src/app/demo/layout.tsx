@@ -8,7 +8,7 @@ import { DemoChrome } from '@/components/demo/demo-chrome';
 // Flow-State- DESIGN-SYSTEM §3). This app's root layout loads Mona Sans,
 // which made the proxied pages read as a different site. Load the canon
 // pair here and scope them to the subtree wrapper.
-const inter = Inter({ subsets: ['latin'], display: 'swap' });
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter-demo' });
 const archivo = Archivo({
   subsets: ['latin'],
   display: 'swap',
@@ -39,13 +39,16 @@ export default function DemoSubtreeLayout({ children }: { children: ReactNode })
         strategy="afterInteractive"
         src="//js.hs-scripts.com/3819073.js"
       />
-      <div className={`${inter.className} ${archivo.variable} yf-demo-type`}>
+      <div className={`${inter.className} ${inter.variable} ${archivo.variable} yf-demo-type`}>
         {/* Headings speak the display face, mirroring the Flow-State- base
-            rule (globals.css). Same -0.02em floor: Archivo 900 welds tighter. */}
-        {/* NOTE: 'inherit' is invalid inside a font-family LIST — the whole
-            declaration gets dropped (that bug shipped once; the assertion
-            crawl caught /demo headings still rendering Mona Sans). */}
-        <style>{`.yf-demo-type h1,.yf-demo-type h2,.yf-demo-type h3{font-family:var(--font-display),'Inter',system-ui,sans-serif;letter-spacing:-0.02em}`}</style>
+            rule (globals.css). Same -0.02em floor: Archivo 900 welds tighter.
+            NOTE: 'inherit' is invalid inside a font-family LIST — the whole
+            declaration gets dropped (shipped once; the assertion crawl caught
+            it). The --font-sans token override catches elements using the
+            Tailwind font-sans utility, which otherwise resolves to modex's
+            Mona Sans. */}
+        <style>{`.yf-demo-type{--font-sans:var(--font-inter-demo),system-ui,sans-serif}
+.yf-demo-type h1,.yf-demo-type h2,.yf-demo-type h3{font-family:var(--font-display),var(--font-inter-demo),system-ui,sans-serif;letter-spacing:-0.02em}`}</style>
         <DemoChrome>{children}</DemoChrome>
       </div>
     </>
