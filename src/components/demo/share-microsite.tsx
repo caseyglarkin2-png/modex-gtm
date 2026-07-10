@@ -45,8 +45,11 @@ export function ShareMicrosite({ slug, brand, className }: { slug: string; brand
       data-ms-cta-id="microsite-share"
       aria-label={`Share the ${brand} audit`}
       className={
+        // Quiet utility link, not a third button: the CTA row carries one
+        // solid primary + one outline secondary max (hero grammar; the R8
+        // panel flagged the old bordered pill as a second outline).
         className ??
-        'inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white'
+        'inline-flex min-h-[36px] items-center gap-1.5 px-1 text-xs font-semibold text-white/55 transition-colors hover:text-[#00B4FF]'
       }
     >
       <svg width={12} height={12} viewBox="0 0 24 24" fill="none" aria-hidden>

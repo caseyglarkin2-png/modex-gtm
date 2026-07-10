@@ -102,7 +102,10 @@ function CityLabelZoom() {
   const map = useMap();
   useEffect(() => {
     const el = map.getContainer();
-    const update = () => el.classList.toggle('show-city-labels', map.getZoom() >= 5);
+    // Zoom >= 6: at 5 a large national network's fit-bounds already qualifies
+    // and 30 permanent labels collide over the eastern seaboard (R8 panel).
+    // 6 = genuinely exploring a region, where labels have room.
+    const update = () => el.classList.toggle('show-city-labels', map.getZoom() >= 6);
     update();
     map.on('zoomend', update);
     return () => {

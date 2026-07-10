@@ -63,7 +63,7 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-[#05070a] text-white">
       <header className="sticky top-0 z-50 border-b border-[#00B4FF]/12 bg-[#05070a]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
           <Wordmark />
           {/* Sentence-case text-sm nav — mirrors the canonical Header exactly
               (same lg breakpoint, same hamburger idiom on phones). */}
