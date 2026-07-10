@@ -291,12 +291,12 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
     <div
       className="relative flex min-h-screen flex-col overflow-x-clip bg-[#050505] text-white"
       style={{
-        // Apply Mona Sans (loaded by the root layout as --font-memo-sans)
-        // so prose inherits a proper operator sans. The Tailwind
-        // `font-mono` utility resolves to system mono, SF Mono on macOS,
-        // Consolas on Windows, which reads operator-grade on every OS.
+        // Font canon (2026-07-09): the demo subtree renders Inter, loaded by
+        // src/app/demo/layout.tsx as --font-inter-demo. This inline style
+        // used to pin Mona Sans, which beat the layout wrapper and made
+        // /demo read as a different site under yardflow.ai.
         fontFamily:
-          'var(--font-memo-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          'var(--font-inter-demo), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
       }}
     >
       {/* Fixed atmospheric backdrop, matches /hub aesthetic exactly. */}
