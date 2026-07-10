@@ -154,12 +154,14 @@ body {
   font: 600 10px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: 0.04em;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.95), 0 1px 2px rgba(0, 0, 0, 0.95);
-  opacity: 0;
+  /* !important: Leaflet always writes its default tooltip opacity (0.9) as an
+     INLINE style, so the zoom gate can never win without it. */
+  opacity: 0 !important;
   transition: opacity 0.2s ease;
 }
 .demo-city-label.leaflet-tooltip::before {
   display: none; /* no callout arrow */
 }
 .leaflet-container.show-city-labels .demo-city-label.leaflet-tooltip {
-  opacity: 1;
+  opacity: 1 !important;
 }
