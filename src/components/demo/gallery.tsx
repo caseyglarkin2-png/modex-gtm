@@ -460,7 +460,7 @@ function Hero({
         </div>
 
         {/* H1, wins the page. Black weight, tight tracking, neon span. */}
-        <h1 className="mt-5 max-w-[920px] font-black leading-[1.04] tracking-[-0.04em] text-[clamp(40px,6vw,72px)] [text-wrap:balance] max-[480px]:mt-4 max-[480px]:text-[clamp(36px,9vw,52px)]">
+        <h1 className="mt-5 max-w-[920px] font-black leading-[1.04] tracking-[-0.02em] text-[clamp(40px,6vw,72px)] [text-wrap:balance] max-[480px]:mt-4 max-[480px]:text-[clamp(36px,9vw,52px)]">
           Pick your industry.
           <br />
           See{' '}

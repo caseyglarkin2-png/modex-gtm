@@ -1,13 +1,20 @@
 import type { ReactNode } from 'react';
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
+import { Archivo, Inter } from 'next/font/google';
 import { DemoChrome } from '@/components/demo/demo-chrome';
 
 // Page Protocol (2026-07-09): the /demo subtree is served under yardflow.ai,
-// whose native pages render Inter. This app's root layout loads Mona Sans,
-// which made the proxied pages read as a different site. Load Inter here and
-// apply it to the chrome wrapper so the whole subtree matches the canon.
+// whose native pages render Inter body + Archivo display (font verdict, see
+// Flow-State- DESIGN-SYSTEM §3). This app's root layout loads Mona Sans,
+// which made the proxied pages read as a different site. Load the canon
+// pair here and scope them to the subtree wrapper.
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
+const archivo = Archivo({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['700', '800', '900'],
+  variable: '--font-display',
+});
 
 /**
  * Demo subtree layout — loads HubSpot native tracking (portal 3819073) across
@@ -32,7 +39,10 @@ export default function DemoSubtreeLayout({ children }: { children: ReactNode })
         strategy="afterInteractive"
         src="//js.hs-scripts.com/3819073.js"
       />
-      <div className={inter.className}>
+      <div className={`${inter.className} ${archivo.variable} yf-demo-type`}>
+        {/* Headings speak the display face, mirroring the Flow-State- base
+            rule (globals.css). Same -0.02em floor: Archivo 900 welds tighter. */}
+        <style>{`.yf-demo-type h1,.yf-demo-type h2,.yf-demo-type h3{font-family:var(--font-display),inherit;letter-spacing:-0.02em}`}</style>
         <DemoChrome>{children}</DemoChrome>
       </div>
     </>
