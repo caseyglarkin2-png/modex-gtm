@@ -42,7 +42,10 @@ export default function DemoSubtreeLayout({ children }: { children: ReactNode })
       <div className={`${inter.className} ${archivo.variable} yf-demo-type`}>
         {/* Headings speak the display face, mirroring the Flow-State- base
             rule (globals.css). Same -0.02em floor: Archivo 900 welds tighter. */}
-        <style>{`.yf-demo-type h1,.yf-demo-type h2,.yf-demo-type h3{font-family:var(--font-display),inherit;letter-spacing:-0.02em}`}</style>
+        {/* NOTE: 'inherit' is invalid inside a font-family LIST — the whole
+            declaration gets dropped (that bug shipped once; the assertion
+            crawl caught /demo headings still rendering Mona Sans). */}
+        <style>{`.yf-demo-type h1,.yf-demo-type h2,.yf-demo-type h3{font-family:var(--font-display),'Inter',system-ui,sans-serif;letter-spacing:-0.02em}`}</style>
         <DemoChrome>{children}</DemoChrome>
       </div>
     </>
