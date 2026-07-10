@@ -169,7 +169,11 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
                 click: () => onSelectSite(site.id === selectedSiteId ? null : site.id),
               }}
             >
-              <Tooltip permanent direction="right" offset={[7, 0]} opacity={1} className="demo-city-label">
+              {/* No `opacity` prop: Leaflet writes it as an INLINE style that
+                  beats the CSS zoom gate (labels showed at national zoom and
+                  welded over the eastern seaboard — R8 panel). The
+                  .show-city-labels CSS owns visibility. */}
+              <Tooltip permanent direction="right" offset={[7, 0]} className="demo-city-label">
                 {cityLabel(site.name)}
               </Tooltip>
               <Popup>
