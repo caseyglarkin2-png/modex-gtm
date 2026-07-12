@@ -30,11 +30,26 @@ vi.mock('@/lib/hubspot/deals', () => ({
   createBookingDeal: mockedCreateBookingDeal,
   DEAL_STAGE_DISCOVERY: 'appointmentscheduled',
 }));
+// Prisma is exercised by the booking-suppression OperatorOutcome write
+// (lib/concierge/booking-outcome.ts). Mock it so no live DB is touched.
+const mockedAccountFindFirst = vi.fn();
+const mockedAccountFindUnique = vi.fn();
+const mockedOutcomeFindUnique = vi.fn();
+const mockedOutcomeCreate = vi.fn();
+vi.mock('@/lib/prisma', () => ({
+  prisma: {
+    account: { findFirst: mockedAccountFindFirst, findUnique: mockedAccountFindUnique },
+    operatorOutcome: { findUnique: mockedOutcomeFindUnique, create: mockedOutcomeCreate },
+  },
+}));
 // rate-limit + contact-standard are real; use a unique IP per test so it never trips.
 // booking-idempotency is real (that is what we exercise below); reset it per test.
 const { __resetBookingIdempotency } = await import('@/lib/concierge/booking-idempotency');
 
 const { POST } = await import('@/app/api/concierge/booked/route');
+const { recordBookingConfirmedOutcome, BOOKING_OUTCOME_DB_TIMEOUT_MS } = await import(
+  '@/lib/concierge/booking-outcome'
+);
 
 function buildRequest(body: unknown, headers: Record<string, string> = {}) {
   return new NextRequest('http://localhost/api/concierge/booked', {
@@ -71,6 +86,13 @@ describe('POST /api/concierge/booked (dedup-safe)', () => {
     mockedCreateBookingDeal.mockResolvedValue('deal-new');
     mockedCreateNote.mockResolvedValue('note-1');
     mockedCreateCompanyNote.mockResolvedValue('cnote-1');
+    // Default: no local modex account resolves -> the booking-suppression
+    // outcome write is skipped, so the existing HubSpot-focused cases are
+    // untouched. The dedicated suppression cases below opt an account in.
+    mockedAccountFindFirst.mockResolvedValue(null);
+    mockedAccountFindUnique.mockResolvedValue(null);
+    mockedOutcomeFindUnique.mockResolvedValue(null);
+    mockedOutcomeCreate.mockResolvedValue({ id: 'outcome-1' });
   });
 
   it('existing open deal on the CONTACT -> associates, never creates', async () => {
@@ -263,5 +285,134 @@ describe('POST /api/concierge/booked (dedup-safe)', () => {
     expect(ok.status).toBe(200);
     expect(mockedCreateBookingDeal).toHaveBeenCalledTimes(1);
     expect(mockedUpsertContact).toHaveBeenCalledTimes(2);
+  });
+
+  // ── booking-suppression: booking_confirmed OperatorOutcome ──────────────
+  describe('booking_confirmed OperatorOutcome (clawd suppression signal)', () => {
+    it('a booked call writes exactly one booking_confirmed outcome, keyed by email+slot', async () => {
+      // The booking resolves a HubSpot company; the modex Account is found by
+      // that company id (the FK anchor).
+      mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+      mockedAccountFindFirst.mockResolvedValue({ name: 'PepsiCo' });
+
+      const res = await POST(buildRequest(validBody));
+      expect(res.status).toBe(200);
+
+      // Resolved the modex account by the HubSpot company id we already have.
+      expect(mockedAccountFindFirst).toHaveBeenCalledWith({
+        where: { hubspot_company_id: 'co-1' },
+        select: { name: true },
+      });
+      // Exactly one outcome, with the exact contract fields. source_id encodes
+      // the email + slot so it is idempotent and clawd can recover the email.
+      expect(mockedOutcomeCreate).toHaveBeenCalledTimes(1);
+      expect(mockedOutcomeCreate).toHaveBeenCalledWith({
+        data: {
+          account_name: 'PepsiCo',
+          outcome_label: 'booking_confirmed',
+          source_kind: 'concierge_booking',
+          source_id: 'trevor@pepsico.com|2026-07-14T18:00:00Z',
+          created_by: 'concierge',
+        },
+        select: { id: true },
+      });
+    });
+
+    it('falls back to an exact-name Account match when no company id resolved', async () => {
+      // Free/blank company path: no HubSpot company, so resolve the Account by
+      // the exact account name instead.
+      mockedAccountFindUnique.mockResolvedValue({ name: 'PepsiCo' });
+
+      const res = await POST(buildRequest(validBody));
+      expect(res.status).toBe(200);
+      expect(mockedAccountFindUnique).toHaveBeenCalledWith({
+        where: { name: 'PepsiCo' },
+        select: { name: true },
+      });
+      expect(mockedOutcomeCreate).toHaveBeenCalledTimes(1);
+    });
+
+    it('a duplicate booking (same email+slot) does not write a second outcome', async () => {
+      mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+      mockedAccountFindFirst.mockResolvedValue({ name: 'PepsiCo' });
+
+      // First booking writes the outcome.
+      await (await POST(buildRequest(validBody))).json();
+      expect(mockedOutcomeCreate).toHaveBeenCalledTimes(1);
+
+      // A re-book of the same identity+slot after the in-process guard TTL: the
+      // @@unique triple already exists, so the write is a clean no-op.
+      __resetBookingIdempotency();
+      mockedOutcomeFindUnique.mockResolvedValue({ id: 'outcome-1' });
+      const second = await POST(buildRequest(validBody));
+      expect(second.status).toBe(200);
+      expect(mockedOutcomeCreate).toHaveBeenCalledTimes(1); // still one
+    });
+
+    it('no resolvable modex account -> no outcome write, booking still succeeds', async () => {
+      // Defaults leave both account lookups null (free-inbox booker, unknown
+      // account). The booking must still succeed; just no suppression signal.
+      const res = await POST(
+        buildRequest({ email: 'someone@gmail.com', startTime: '2026-07-14T18:00:00Z' }),
+      );
+      expect(res.status).toBe(200);
+      expect(mockedOutcomeCreate).not.toHaveBeenCalled();
+    });
+
+    it('an outcome write failure never breaks the booking response (fail-soft)', async () => {
+      mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+      mockedAccountFindFirst.mockResolvedValue({ name: 'PepsiCo' });
+      mockedOutcomeCreate.mockRejectedValueOnce(new Error('db down'));
+
+      const res = await POST(buildRequest(validBody));
+      const payload = await res.json();
+      // The booking itself succeeded despite the outcome write blowing up.
+      expect(res.status).toBe(200);
+      expect(payload).toMatchObject({ ok: true, created: true, dealId: 'deal-new' });
+    });
+
+    it('caps latency: a hanging Postgres query resolves fail-soft at the timeout, not the pool timeout', async () => {
+      vi.useFakeTimers();
+      try {
+        // The very first DB query never resolves (unreachable DB / pool exhausted).
+        mockedAccountFindFirst.mockReturnValue(new Promise(() => {}));
+
+        const p = recordBookingConfirmedOutcome({
+          email: 'trevor@pepsico.com',
+          startTime: '2026-07-14T18:00:00Z',
+          accountName: 'PepsiCo',
+          companyId: 'co-1',
+        });
+
+        // Advance JUST past the DB timeout (2.5s), nowhere near the ~10s pool timeout.
+        await vi.advanceTimersByTimeAsync(BOOKING_OUTCOME_DB_TIMEOUT_MS + 50);
+
+        // Resolves at the timeout with the fail-soft value; never wrote.
+        await expect(p).resolves.toBeNull();
+        expect(mockedOutcomeCreate).not.toHaveBeenCalled();
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('a hanging outcome write still lets the booking route return its normal 200', async () => {
+      vi.useFakeTimers();
+      try {
+        mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+        // The account lookup hangs forever; the timeout must unblock the route.
+        mockedAccountFindFirst.mockReturnValue(new Promise(() => {}));
+
+        const resP = POST(buildRequest(validBody));
+        // Flush the resolved HubSpot mocks, then trip the DB timeout.
+        await vi.advanceTimersByTimeAsync(BOOKING_OUTCOME_DB_TIMEOUT_MS + 50);
+        const res = await resP;
+        const payload = await res.json();
+
+        expect(res.status).toBe(200);
+        expect(payload).toMatchObject({ ok: true, created: true, dealId: 'deal-new' });
+      } finally {
+        vi.useRealTimers();
+      }
+    });
   });
 });
