@@ -15,6 +15,7 @@ import {
   type OpenDealRef,
 } from '@/lib/hubspot/deals';
 import { runBookingOnce, bookingIdempotencyKey } from '@/lib/concierge/booking-idempotency';
+import { recordBookingConfirmedOutcome } from '@/lib/concierge/booking-outcome';
 
 /**
  * Paper Booking Concierge -> pipeline. Flow-State-'s Order of Operations paper
@@ -179,6 +180,18 @@ export async function POST(req: NextRequest) {
       } else if (companyId) {
         await createCompanyNote({ companyId, body: noteBody });
       }
+
+      // Booking-suppression signal: record a `booking_confirmed` OperatorOutcome
+      // so clawd advances this contact's pipeline entry to a terminal stage and
+      // never auto-nudges someone who just booked. Fail-soft (never throws),
+      // idempotent per email+slot, and flows to clawd via the outcomes export
+      // stream (no new endpoint). See lib/concierge/booking-outcome.ts.
+      await recordBookingConfirmedOutcome({
+        email: body.email,
+        startTime: body.startTime,
+        accountName,
+        companyId,
+      });
 
       return { created, contactId, companyId, dealId };
     });
