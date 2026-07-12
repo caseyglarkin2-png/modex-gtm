@@ -47,6 +47,9 @@ vi.mock('@/lib/prisma', () => ({
 const { __resetBookingIdempotency } = await import('@/lib/concierge/booking-idempotency');
 
 const { POST } = await import('@/app/api/concierge/booked/route');
+const { recordBookingConfirmedOutcome, BOOKING_OUTCOME_DB_TIMEOUT_MS } = await import(
+  '@/lib/concierge/booking-outcome'
+);
 
 function buildRequest(body: unknown, headers: Record<string, string> = {}) {
   return new NextRequest('http://localhost/api/concierge/booked', {
@@ -366,6 +369,50 @@ describe('POST /api/concierge/booked (dedup-safe)', () => {
       // The booking itself succeeded despite the outcome write blowing up.
       expect(res.status).toBe(200);
       expect(payload).toMatchObject({ ok: true, created: true, dealId: 'deal-new' });
+    });
+
+    it('caps latency: a hanging Postgres query resolves fail-soft at the timeout, not the pool timeout', async () => {
+      vi.useFakeTimers();
+      try {
+        // The very first DB query never resolves (unreachable DB / pool exhausted).
+        mockedAccountFindFirst.mockReturnValue(new Promise(() => {}));
+
+        const p = recordBookingConfirmedOutcome({
+          email: 'trevor@pepsico.com',
+          startTime: '2026-07-14T18:00:00Z',
+          accountName: 'PepsiCo',
+          companyId: 'co-1',
+        });
+
+        // Advance JUST past the DB timeout (2.5s), nowhere near the ~10s pool timeout.
+        await vi.advanceTimersByTimeAsync(BOOKING_OUTCOME_DB_TIMEOUT_MS + 50);
+
+        // Resolves at the timeout with the fail-soft value; never wrote.
+        await expect(p).resolves.toBeNull();
+        expect(mockedOutcomeCreate).not.toHaveBeenCalled();
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('a hanging outcome write still lets the booking route return its normal 200', async () => {
+      vi.useFakeTimers();
+      try {
+        mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+        // The account lookup hangs forever; the timeout must unblock the route.
+        mockedAccountFindFirst.mockReturnValue(new Promise(() => {}));
+
+        const resP = POST(buildRequest(validBody));
+        // Flush the resolved HubSpot mocks, then trip the DB timeout.
+        await vi.advanceTimersByTimeAsync(BOOKING_OUTCOME_DB_TIMEOUT_MS + 50);
+        const res = await resP;
+        const payload = await res.json();
+
+        expect(res.status).toBe(200);
+        expect(payload).toMatchObject({ ok: true, created: true, dealId: 'deal-new' });
+      } finally {
+        vi.useRealTimers();
+      }
     });
   });
 });
