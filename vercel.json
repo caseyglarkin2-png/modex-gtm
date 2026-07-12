@@ -4,10 +4,6 @@
   "framework": "nextjs",
   "crons": [
     {
-      "path": "/api/email/monday-bump",
-      "schedule": "5 11 * * 1"
-    },
-    {
       "path": "/api/cron/check-inbox",
       "schedule": "*/5 * * * *"
     },
