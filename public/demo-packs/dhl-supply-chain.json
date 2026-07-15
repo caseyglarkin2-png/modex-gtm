@@ -13,13 +13,13 @@
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "DHL Supply Chain operates ~1,500 sites in 50+ countries; we audited 24 US sites in the audit window. International scope on request."
+      "note": "DHL Supply Chain operates ~1,500 sites in 50+ countries and ~520 warehouses across North America; we audited 15 US sites in the audit window. International scope on request."
     },
     "featuredSiteId": "14-dhl-commerce-park-dc",
     "networkCount": 520,
     "networkCountSource": "DHL Supply Chain operates 520 warehouses across North America (161M+ sq ft), per DHL Supply Chain About boilerplate (Jan 2025). https://www.supplychaindive.com/news/dhl-supply-chain-acquires-inmar-supply-chain-solutions/737413/",
     "networkCountAsOf": "2025-01-15",
-    "sampleRationale": "We core-sampled the biggest, busiest, and most varied US DCs; the same yard patterns repeated across the contract-logistics network.",
+    "sampleRationale": "the biggest, busiest, and most varied US DCs; the same yard patterns repeated across the contract-logistics network.",
     "dossierIntro": "DHL Supply Chain runs ~520 warehouses across North America. We audited 15 of them. The Keurig DC in Union City GA has 120 dock doors on 54 acres. The Mann+Hummel auto-parts DC in Cowpens SC covers 90 acres. 942 dock doors total. DHL routes Fortune 100 shippers through site-specific contract logistics. YardFlow gives every shipper their own audit trail inside the same yard protocol.",
     "surprisingFindings": [
       "942 dock doors across 15 audited sites. DHL routes more contract-logistics dock minutes than any audited 3PL.",

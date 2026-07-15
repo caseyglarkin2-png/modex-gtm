@@ -165,12 +165,18 @@ export function DemoSurface({
   // reads to a Mondelez exec as "you mapped 14% of our network and are
   // pretending it's the whole thing." The audit IS NA-scoped and the
   // banner explains why; this header now matches the banner's framing.
+  // Prefer the cited network denominator (networkCount, e.g. DHL's ~520 NA
+  // warehouses) over the global footprint, so a scoped header ("(US scope)")
+  // never pairs a global number with a regional label. This keeps the header
+  // consistent with the core-sample line below. Falls back to global/estimated.
   const scopeFootprint =
-    coverageNote?.totalGlobalFootprint && coverageNote.totalGlobalFootprint > siteCount
-      ? coverageNote.totalGlobalFootprint
-      : coverageNote?.estimatedFootprint && coverageNote.estimatedFootprint > siteCount
-        ? coverageNote.estimatedFootprint
-        : null;
+    typeof pack.account.networkCount === 'number' && pack.account.networkCount > siteCount
+      ? pack.account.networkCount
+      : coverageNote?.totalGlobalFootprint && coverageNote.totalGlobalFootprint > siteCount
+        ? coverageNote.totalGlobalFootprint
+        : coverageNote?.estimatedFootprint && coverageNote.estimatedFootprint > siteCount
+          ? coverageNote.estimatedFootprint
+          : null;
   const scopeSuffix = coverageNote?.auditedScope ? ` (${coverageNote.auditedScope} scope)` : '';
   const scopeBlurb =
     // When more sites were audited than carry a yard (e.g. crowley: 26 audited,
@@ -444,7 +450,7 @@ export function DemoSurface({
               Your network, mapped
             </div>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
-              We audited every yard in {displayName}&rsquo;s network, from satellite.
+              We audited {displayName}&rsquo;s yards from satellite.
             </h2>
             <p className="mt-1.5 text-sm text-white/60">
               Click any site for its gate, docks, and drop yards. No badge, no NDA, just what a driver sees.
