@@ -148,7 +148,10 @@ async function readCompanies(ids: string[]): Promise<Map<string, QualCompany>> {
       () =>
         client.crm.companies.batchApi.read({
           inputs: chunk.map((id) => ({ id })),
-          properties: ['name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY],
+          properties: [
+            'name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY,
+            'intent_score', 'trigger_score', 'last_intent_at', 'last_intent_source',
+          ],
           propertiesWithHistory: [],
         }),
       `readCompanies(${chunk.length})`,
@@ -161,6 +164,10 @@ async function readCompanies(ids: string[]): Promise<Map<string, QualCompany>> {
         icpScore: parseFloat(p[YARDFLOW_ICP_SCORE_PROPERTY] || '0') || 0,
         tam: p[YARDFLOW_TAM_PROPERTY] || '',
         tier: p[TAM_TIER_PROPERTY] || '',
+        intentScore: parseFloat(p.intent_score || '0') || 0,
+        triggerScore: parseFloat(p.trigger_score || '0') || 0,
+        lastIntentAt: p.last_intent_at || '',
+        lastIntentSource: p.last_intent_source || '',
       });
     }
   }
@@ -193,7 +200,13 @@ async function fetchTamCompaniesModifiedSince(
               ],
             },
           ],
-          properties: ['name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY],
+          properties: [
+            'name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY,
+            // Carries account heat AND closes the cascade blind spot: a modex
+            // intent stamp bumps hs_lastmodifieddate, so a newly-hot account is
+            // re-evaluated here and its committee re-promoted next cron.
+            'intent_score', 'trigger_score', 'last_intent_at', 'last_intent_source',
+          ],
           limit: 100,
           after: after ?? '0',
           sorts: [],
@@ -208,6 +221,10 @@ async function fetchTamCompaniesModifiedSince(
         icpScore: parseFloat(p[YARDFLOW_ICP_SCORE_PROPERTY] || '0') || 0,
         tam: p[YARDFLOW_TAM_PROPERTY] || '',
         tier: p[TAM_TIER_PROPERTY] || '',
+        intentScore: parseFloat(p.intent_score || '0') || 0,
+        triggerScore: parseFloat(p.trigger_score || '0') || 0,
+        lastIntentAt: p.last_intent_at || '',
+        lastIntentSource: p.last_intent_source || '',
       });
     }
     if (out.length >= MAX_INCREMENTAL_COMPANIES) {

@@ -13,7 +13,10 @@ import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/companie
 
 const YARDFLOW_TAM_PROPERTY = 'yardflow_tam';
 const TAM_TIER_PROPERTY = 'tam_tier';
-import { classifyContact } from './model';
+import {
+  classifyContact, hasIntent, hasRoleGate, hasAccountIntent, seniorityRank,
+  ACCOUNT_INTENT_SQL_CAP_PER_ACCOUNT,
+} from './model';
 import type { QualCompany, QualContact, VerdictDiff, EvaluateResult, Verdict } from './types';
 
 // ---------------------------------------------------------------------------
@@ -68,7 +71,13 @@ export async function fetchTamCompanies(): Promise<QualCompany[]> {
               ],
             },
           ],
-          properties: ['name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY],
+          properties: [
+            'name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY,
+            // Account-grade heat — the keystone join. Without these the company's
+            // own intent never reaches classifyContact and hot accounts never
+            // promote their committee (see model.ts hasAccountIntent).
+            'intent_score', 'trigger_score', 'last_intent_at', 'last_intent_source',
+          ],
           limit: 100,
           after: after ?? '0',
           sorts: [],
@@ -84,6 +93,10 @@ export async function fetchTamCompanies(): Promise<QualCompany[]> {
         icpScore: parseFloat(props[YARDFLOW_ICP_SCORE_PROPERTY] || '0') || 0,
         tam: props[YARDFLOW_TAM_PROPERTY] || '',
         tier: props[TAM_TIER_PROPERTY] || '',
+        intentScore: parseFloat(props.intent_score || '0') || 0,
+        triggerScore: parseFloat(props.trigger_score || '0') || 0,
+        lastIntentAt: props.last_intent_at || '',
+        lastIntentSource: props.last_intent_source || '',
       });
     }
 
@@ -212,10 +225,70 @@ const pulseNum = (s: string): number => {
   return Number.isNaN(n) ? 0 : n;
 };
 
-export function buildDiff(pairs: { company: QualCompany; contact: QualContact }[]): VerdictDiff[] {
+/**
+ * Per-account cap on ACCOUNT-INTENT-driven SQL promotions (blast-radius guard,
+ * added after the adversarial critic). A single hot signal must not flip an
+ * entire 500-person committee to SQL: at each hot account, only the top-N
+ * seniors promote on account heat alone; the rest stay MQL. Person-intent SQLs
+ * (individually earned via hasIntent) are NEVER capped. Returns the set of
+ * `${companyId}:${contactId}` that the cap demotes back to MQL. Deterministic
+ * ordering (seniority, then icp, then id) so which N survive is stable run to
+ * run — no flapping. Pure.
+ */
+export function accountIntentSqlCap(
+  pairs: { company: QualCompany; contact: QualContact }[],
+  nowMs: number,
+  cap: number = ACCOUNT_INTENT_SQL_CAP_PER_ACCOUNT,
+): Set<string> {
+  const demoted = new Set<string>();
+  const byCompany = new Map<string, { company: QualCompany; contact: QualContact }[]>();
+  for (const p of pairs) {
+    const arr = byCompany.get(p.company.id);
+    if (arr) arr.push(p);
+    else byCompany.set(p.company.id, [p]);
+  }
+  for (const group of byCompany.values()) {
+    const company = group[0].company;
+    if (!hasAccountIntent(company, nowMs)) continue; // no account heat -> nothing to cap
+    // account-ONLY NEW promotions = role-gated, would be SQL by account heat, NOT
+    // personally engaged, and NOT already SQL. Already-SQL contacts are being
+    // worked (a human is on them), so they never count against the cap or get
+    // demoted — the cap only bounds how many NEW contacts promote in one run.
+    const acctOnly = group.filter(
+      ({ contact }) => hasRoleGate(contact) && !hasIntent(contact) && contact.yardflow_qual_verdict !== 'sql',
+    );
+    if (acctOnly.length <= cap) continue;
+    const ranked = [...acctOnly].sort(
+      (a, b) =>
+        seniorityRank(b.contact) - seniorityRank(a.contact) ||
+        b.company.icpScore - a.company.icpScore ||
+        a.contact.id.localeCompare(b.contact.id),
+    );
+    for (const { company: c, contact } of ranked.slice(cap)) demoted.add(`${c.id}:${contact.id}`);
+  }
+  return demoted;
+}
+
+export function buildDiff(
+  pairs: { company: QualCompany; contact: QualContact }[],
+  nowMs: number = Date.now(),
+): VerdictDiff[] {
+  const demoted = accountIntentSqlCap(pairs, nowMs);
   return pairs.map(({ company, contact }) => {
-    const newVerdict = classifyContact(company, contact);
+    let newVerdict = classifyContact(company, contact, nowMs);
+    // Cap demotes an account-only SQL back to MQL (it is still a qualified
+    // committee member, just below the per-account SQL cut this run).
+    const capped = newVerdict === 'sql' && demoted.has(`${company.id}:${contact.id}`);
+    if (capped) newVerdict = 'mql';
     const currentVerdict = (contact.yardflow_qual_verdict || 'none') as Verdict;
+    // Anti-flap (2026-07-20 critic): never un-qualify a contact that is ALREADY
+    // SQL while it is still a role-gated TAM contact. intent_score is
+    // last-write-wins with no decay, so a later lower-scoring session would
+    // otherwise demote a worked lead SQL->MQL and flap it back next session. A
+    // human handoff is one-way; account heat cooling does not revoke it.
+    if (currentVerdict === 'sql' && newVerdict === 'mql' && company.tam === 'in' && hasRoleGate(contact)) {
+      newVerdict = 'sql';
+    }
     const hasPulse =
       pulseNum(contact.hs_email_open) >= 1 || pulseNum(contact.hs_email_replied) >= 1;
     return {
@@ -234,7 +307,7 @@ export function buildDiff(pairs: { company: QualCompany; contact: QualContact }[
       currentVerdict,
       newVerdict,
       changed: newVerdict !== currentVerdict,
-      reason: `tam=${company.tam} tier=${company.tier || '-'} icp=${company.icpScore} seniority=${contact.hs_seniority || '-'} role=${contact.hs_role || '-'} -> ${newVerdict}`,
+      reason: `tam=${company.tam} tier=${company.tier || '-'} icp=${company.icpScore} acctIntent=${company.intentScore ?? 0} acctTrigger=${company.triggerScore ?? 0} seniority=${contact.hs_seniority || '-'} role=${contact.hs_role || '-'}${capped ? ' [capped: account-SQL over per-account limit]' : ''} -> ${newVerdict}`,
     };
   });
 }

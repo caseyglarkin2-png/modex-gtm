@@ -27,6 +27,16 @@ export interface QualCompany {
   icpScore: number;
   tam: string;
   tier: string;
+  /**
+   * Account-grade heat, read from the COMPANY (the modex intent engine stamps
+   * these). The keystone join (2026-07-20): a hot account promotes its
+   * role-gated committee to SQL even when no single contact has personal
+   * engagement — which is what finally makes /demo + /for traffic produce SQLs.
+   */
+  intentScore?: number; // 0-100 web/demo/for reading behavior (company intent_score)
+  triggerScore?: number; // 0-100 external news/capex heat (company trigger_score)
+  lastIntentAt?: string;
+  lastIntentSource?: string;
 }
 
 export interface VerdictDiff {

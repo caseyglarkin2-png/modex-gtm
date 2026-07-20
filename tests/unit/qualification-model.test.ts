@@ -1,6 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { hasRoleGate, hasIntent, classifyContact } from '../../src/lib/revops/qualification/model';
+import {
+  hasRoleGate, hasIntent, hasAccountIntent, classifyContact, seniorityRank,
+  ACCOUNT_INTENT_SQL_THRESHOLD, ACCOUNT_TRIGGER_SQL_THRESHOLD, ACCOUNT_INTENT_MAX_AGE_DAYS,
+} from '../../src/lib/revops/qualification/model';
 import type { QualContact, QualCompany } from '../../src/lib/revops/qualification/types';
+
+const NOW = Date.parse('2026-07-20T12:00:00Z');
+const recent = new Date(NOW - 3 * 86_400_000).toISOString();   // 3 days ago (fresh)
+const stale = new Date(NOW - 120 * 86_400_000).toISOString();  // 120 days ago (cold)
 
 const base = { hs_seniority: '', hs_role: '', jobtitle: '' };
 
@@ -44,6 +51,46 @@ describe('hasIntent', () => {
   it('false on opens without reply', () => { expect(hasIntent({ ...noIntent, hs_email_open: '5' })).toBe(false); });
 });
 
+describe('hasAccountIntent (the keystone join, guardrailed)', () => {
+  it('false when the company has no account heat', () => {
+    expect(hasAccountIntent(tam, NOW)).toBe(false);
+  });
+  it('true when RECENT web/demo intent clears the SQL threshold', () => {
+    expect(hasAccountIntent({ ...tam, intentScore: ACCOUNT_INTENT_SQL_THRESHOLD, lastIntentAt: recent }, NOW)).toBe(true);
+    expect(hasAccountIntent({ ...tam, intentScore: 100, lastIntentAt: recent }, NOW)).toBe(true);
+  });
+  it('false on a weak single-view score below the threshold', () => {
+    expect(hasAccountIntent({ ...tam, intentScore: 40, lastIntentAt: recent }, NOW)).toBe(false);
+  });
+  it('STALE: a high score with an old lastIntentAt is not hot (no decay guard)', () => {
+    expect(hasAccountIntent({ ...tam, intentScore: 100, lastIntentAt: stale }, NOW)).toBe(false);
+  });
+  it('a high score with NO lastIntentAt is not hot (unknown recency = not fresh)', () => {
+    expect(hasAccountIntent({ ...tam, intentScore: 100 }, NOW)).toBe(false);
+  });
+  it('true when external trigger heat clears its threshold (its own decay upstream)', () => {
+    expect(hasAccountIntent({ ...tam, triggerScore: ACCOUNT_TRIGGER_SQL_THRESHOLD }, NOW)).toBe(true);
+  });
+  it('null company is never hot', () => {
+    expect(hasAccountIntent(null, NOW)).toBe(false);
+  });
+  it('max-age boundary is inclusive', () => {
+    const at = new Date(NOW - ACCOUNT_INTENT_MAX_AGE_DAYS * 86_400_000).toISOString();
+    expect(hasAccountIntent({ ...tam, intentScore: 80, lastIntentAt: at }, NOW)).toBe(true);
+  });
+});
+
+describe('seniorityRank (per-account cap ordering)', () => {
+  it('ranks executives above VPs above directors above ops-role above title-only', () => {
+    expect(seniorityRank({ hs_seniority: 'executive', hs_role: '', jobtitle: '' })).toBeGreaterThan(
+      seniorityRank({ hs_seniority: 'vp', hs_role: '', jobtitle: '' }));
+    expect(seniorityRank({ hs_seniority: 'director', hs_role: '', jobtitle: '' })).toBeGreaterThan(
+      seniorityRank({ hs_seniority: '', hs_role: 'operations', jobtitle: '' }));
+    expect(seniorityRank({ hs_seniority: '', hs_role: 'operations', jobtitle: '' })).toBeGreaterThan(
+      seniorityRank({ hs_seniority: '', hs_role: '', jobtitle: 'Logistics Coordinator' }));
+  });
+});
+
 describe('classifyContact', () => {
   it('none when account is not in TAM', () => {
     expect(classifyContact(offTam, opsDir)).toBe('none');
@@ -57,7 +104,24 @@ describe('classifyContact', () => {
   it('mql for ops director at TAM, no intent', () => {
     expect(classifyContact(tam, opsDir)).toBe('mql');
   });
-  it('sql for ops director at TAM with intent', () => {
-    expect(classifyContact(tam, { ...opsDir, intent_score: '2' })).toBe('sql');
+  it('sql for ops director at TAM with personal intent', () => {
+    expect(classifyContact(tam, { ...opsDir, intent_score: '2' }, NOW)).toBe('sql');
+  });
+  it('KEYSTONE: sql for a role-gated committee member at a RECENTLY hot account, zero personal engagement', () => {
+    const hotAccount: QualCompany = { ...tam, intentScore: 100, lastIntentAt: recent };
+    expect(classifyContact(hotAccount, opsDir, NOW)).toBe('sql');
+  });
+  it('KEYSTONE: a hot account does NOT promote an off-role contact past the role gate', () => {
+    const hotAccount: QualCompany = { ...tam, intentScore: 100, lastIntentAt: recent };
+    const junior = { ...noIntent, hs_seniority: 'entry', hs_role: 'finance', jobtitle: 'Accountant' } as QualContact;
+    expect(classifyContact(hotAccount, junior, NOW)).toBe('none');
+  });
+  it('a STALE-hot account leaves its committee at mql (no promote on old heat)', () => {
+    const staleHot: QualCompany = { ...tam, intentScore: 100, lastIntentAt: stale };
+    expect(classifyContact(staleHot, opsDir, NOW)).toBe('mql');
+  });
+  it('a lukewarm account (below threshold) leaves its committee at mql', () => {
+    const warm: QualCompany = { ...tam, intentScore: 40, lastIntentAt: recent };
+    expect(classifyContact(warm, opsDir, NOW)).toBe('mql');
   });
 });
