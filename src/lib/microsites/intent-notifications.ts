@@ -180,6 +180,12 @@ export function buildIntentNotificationData(
 
 /** Posts a message to the Slack incoming webhook. No-op if unconfigured. */
 export async function sendSlackNotification(text: string): Promise<boolean> {
+  // Global pause (Casey, 2026-07-20): silence the Slack channels while the
+  // evolved notification layer is built. Set NOTIFICATIONS_PAUSED truthy in
+  // Vercel to drop every proactive alert (pounce pings, new-SQL, qual stats,
+  // demo-tour fires). Read live; the single modex Slack chokepoint.
+  const paused = /^(1|true|yes|on)$/i.test((process.env.NOTIFICATIONS_PAUSED ?? '').trim());
+  if (paused) return false;
   const url = process.env.SLACK_WEBHOOK_URL;
   if (!url) {
     console.warn('[intent-notify] SLACK_WEBHOOK_URL not set — notification skipped');
