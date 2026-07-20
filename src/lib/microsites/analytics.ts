@@ -147,6 +147,20 @@ export function buildMicrositeSessionSignals(session: MicrositeSessionSignalInpu
   };
 }
 
+/**
+ * THE SESSION ENGAGEMENT SCORE. A 0-100 score for a single microsite session,
+ * used INTERNALLY: it ranks the analytics dashboard's recent sessions and,
+ * through `isHighIntentMicrositeSession`'s `>= 50` fallback, helps DECIDE
+ * whether a session is hot enough to notify on.
+ *
+ * This is NOT the CRM `intent_score`. That number is `computeIntentScore` in
+ * hubspot-intent.ts, which is a continuous, post-threshold curve tuned for
+ * sorting hot accounts in HubSpot. This one uses coarse bucket thresholds and
+ * starts from 0 (it participates in the threshold decision itself), so the two
+ * are intentionally different scales. See intent-score.test.ts for the pinned
+ * contract that documents the split. Do not "reconcile" them into one number
+ * without moving the notification gate off this function first.
+ */
 export function scoreMicrositeSession(session: MicrositeEngagementAnalyticsInput): number {
   let score = 0;
   const signals = buildMicrositeSessionSignals(session);

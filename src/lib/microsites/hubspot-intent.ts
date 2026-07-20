@@ -76,13 +76,27 @@ async function resolveHubSpotContactId(
 }
 
 /**
- * Map a qualifying engagement session to a 0-100 intent score. This only runs
- * once a session has already crossed the intent threshold, so it starts from a
- * floor and adds weight for depth (time, scroll, sections), rich-media
- * consumption (audio/video past halfway), and explicit CTA clicks (the
- * strongest signal). Latest qualifying session wins (recency-weighted).
+ * THE CRM INTENT SCORE. This is the 0-100 number written to HubSpot as the
+ * contact + company `intent_score` (the value sales sorts hot accounts on and
+ * the qualification engine reads). It is DELIBERATELY distinct from
+ * `scoreMicrositeSession` in analytics.ts, which is the internal SESSION
+ * ENGAGEMENT score (dashboard ranking + the high-intent notification gate).
+ *
+ * The split is intentional, not an accident:
+ *  - This function only runs AFTER a session has crossed the intent threshold,
+ *    so it starts from a +10 floor (crossing the bar is itself worth points)
+ *    and adds a smooth, continuous weighting of depth (time, scroll, sections),
+ *    rich-media consumption (audio/video past halfway), and CTA clicks. A
+ *    continuous curve makes the CRM sort meaningful across many contacts.
+ *  - `scoreMicrositeSession` starts from 0 (it also HELPS DECIDE the threshold,
+ *    via its own `>= 50` fallback), and uses coarse bucket thresholds tuned for
+ *    "is this session hot enough to alert", not for fine CRM ranking.
+ *
+ * Keep them separate. If you change the weighting here, update the pinned
+ * expectations in tests/unit/microsites/intent-score.test.ts (the contract that
+ * documents this split). Latest qualifying session wins (recency-weighted).
  */
-function computeIntentScore(
+export function computeIntentScore(
   merged: MicrositeEngagementAnalyticsInput,
   audioPct: number,
   videoPct: number,
