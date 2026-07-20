@@ -17,8 +17,14 @@ import { prisma } from '@/lib/prisma';
 import { slugify } from '@/lib/data';
 import { createNote } from '@/lib/hubspot/notes';
 import { searchContactByEmail, updateContactIntent } from '@/lib/hubspot/contacts';
-import { searchCompanyByName, updateCompanyIntent } from '@/lib/hubspot/companies';
+import {
+  searchCompanyByDomain,
+  searchCompanyByName,
+  updateCompanyIntent,
+  type HubSpotCompany,
+} from '@/lib/hubspot/companies';
 import { getAccountMicrositeData } from './accounts';
+import { domainForAccountSlug } from './account-domains';
 import type { MicrositeTrackingSnapshot } from './tracking';
 import type { MicrositeEngagementAnalyticsInput } from './analytics';
 
@@ -31,8 +37,39 @@ import type { MicrositeEngagementAnalyticsInput } from './analytics';
  * write intent with it), so prefer it by slug and fall back to whatever name the
  * caller sent for slugs not yet in the registry.
  */
-function resolveCompanyNameForSearch(snapshot: MicrositeTrackingSnapshot): string {
+function resolveCompanyNameForSearch(snapshot: Pick<MicrositeTrackingSnapshot, 'accountSlug' | 'accountName'>): string {
   return getAccountMicrositeData(snapshot.accountSlug)?.accountName ?? snapshot.accountName;
+}
+
+/**
+ * The S1 amplifier: resolve the HubSpot company for an intent stamp.
+ *
+ * Chain: registry DOMAIN first (account-domains.ts, built from HubSpot's own
+ * domain values, so the match is by construction) -> exact-name fallback (the
+ * old behavior, kept for unmapped slugs and stale domains) -> an OBSERVABLE
+ * miss. The old silent no-op left only ~7 companies ever stamped while months
+ * of /demo + /for engagement evaporated; a logged miss is a fixable miss.
+ * Deps are injectable for tests.
+ */
+export async function resolveCompanyForIntent(
+  snapshot: Pick<MicrositeTrackingSnapshot, 'accountSlug' | 'accountName'>,
+  deps: {
+    byDomain: (domain: string) => Promise<HubSpotCompany | null>;
+    byName: (name: string) => Promise<HubSpotCompany | null>;
+  } = { byDomain: searchCompanyByDomain, byName: searchCompanyByName },
+): Promise<HubSpotCompany | null> {
+  const domain = domainForAccountSlug(snapshot.accountSlug);
+  if (domain) {
+    const hit = await deps.byDomain(domain);
+    if (hit) return hit;
+  }
+  const name = resolveCompanyNameForSearch(snapshot);
+  const hit = await deps.byName(name);
+  if (hit) return hit;
+  console.warn(
+    `[intent] company resolution MISS slug=${snapshot.accountSlug} name="${name}" domain=${domain ?? '(unmapped)'} — intent stamp dropped`,
+  );
+  return null;
 }
 
 function formatSecs(s: number): string {
@@ -126,7 +163,7 @@ export async function logIntentToHubSpot(
   // Best-effort; never blocks. Requires the account to exist as a HubSpot
   // company (true for our demo targets); silently no-ops if not found.
   try {
-    const company = await searchCompanyByName(resolveCompanyNameForSearch(snapshot));
+    const company = await resolveCompanyForIntent(snapshot);
     if (company) {
       await updateCompanyIntent(company.id, {
         score: intentScore,

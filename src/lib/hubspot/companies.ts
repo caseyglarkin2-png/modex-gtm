@@ -51,7 +51,10 @@ function mapCompany(raw: { id: string; properties: Record<string, string | null>
   };
 }
 
-/** Search HubSpot companies by domain (exact match). */
+/** Search HubSpot companies by domain (exact match). Several records can share
+ * one domain (PepsiCo has facility-level rows beside the parent), so the sort
+ * makes the CONTACT-BEARING canonical record win — that is the record the
+ * qualification engine reads and the one an intent stamp must land on. */
 export async function searchCompanyByDomain(domain: string): Promise<HubSpotCompany | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
 
@@ -69,7 +72,11 @@ export async function searchCompanyByDomain(domain: string): Promise<HubSpotComp
         properties: [...COMPANY_PROPERTIES],
         limit: 1,
         after: '0',
-        sorts: [],
+        // The SDK types sorts as string[]; the wire format HubSpot documents is
+        // the object form, which the API accepts and the SDK passes through.
+        sorts: [
+          { propertyName: 'num_associated_contacts', direction: 'DESCENDING' },
+        ] as unknown as string[],
       }),
     `searchCompanyByDomain(${domain})`,
   );
