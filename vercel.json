@@ -8,35 +8,35 @@
       "schedule": "*/5 * * * *"
     },
     {
-      "path": "/api/cron/daily-digest",
+      "path": "/api/cron/daily-digest/",
       "schedule": "0 12 * * *"
     },
     {
-      "path": "/api/cron/sync-hubspot",
+      "path": "/api/cron/sync-hubspot/",
       "schedule": "0 */6 * * *"
     },
     {
-      "path": "/api/cron/drip-sequence",
+      "path": "/api/cron/drip-sequence/",
       "schedule": "0 13 * * *"
     },
     {
-      "path": "/api/cron/reenrich-contacts",
+      "path": "/api/cron/reenrich-contacts/",
       "schedule": "0 */8 * * *"
     },
     {
-      "path": "/api/cron/dispatch-daily",
+      "path": "/api/cron/dispatch-daily/",
       "schedule": "0 11 * * 1-5"
     },
     {
-      "path": "/api/cron/qualification",
+      "path": "/api/cron/qualification/",
       "schedule": "30 11 * * *"
     },
     {
-      "path": "/api/cron/pounce-scan",
+      "path": "/api/cron/pounce-scan/",
       "schedule": "5 13 * * *"
     },
     {
-      "path": "/api/cron/refresh-intel",
+      "path": "/api/cron/refresh-intel/",
       "schedule": "0 13 * * 1"
     }
   ]
