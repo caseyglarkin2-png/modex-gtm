@@ -83,6 +83,22 @@ export interface ReplyMetadata {
   bodyHtml: string;
   bodyText: string;
   receivedAt: Date;
+  /**
+   * Raw RFC-822 headers, keyed by the header name as Gmail returned it. Consumed by
+   * `classifyInboundReply` (src/lib/email/reply-precision.ts) to detect autoresponders
+   * via Auto-Submitted / X-Autoreply / Precedence / List-Unsubscribe. Lookups there are
+   * case-insensitive, so no normalization is needed here.
+   */
+  headers: Record<string, string>;
+}
+
+/** Flattens Gmail's header array into a plain object (last value wins on duplicates). */
+function collectHeaders(msg: GmailMessageDetail): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const h of msg.payload?.headers ?? []) {
+    if (h?.name) out[h.name] = h.value ?? '';
+  }
+  return out;
 }
 
 function getHeader(msg: GmailMessageDetail, name: string): string {
@@ -209,6 +225,7 @@ export async function getRecentReplies(sinceTimestamp?: string | number): Promis
         receivedAt: detail.internalDate
           ? new Date(parseInt(detail.internalDate, 10))
           : new Date(),
+        headers: collectHeaders(detail),
       });
     } catch (err) {
       Sentry.captureException(err, { extra: { messageId: msg.id } });

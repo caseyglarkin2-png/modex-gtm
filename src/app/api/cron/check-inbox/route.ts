@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { prisma } from '@/lib/prisma';
 import { getRecentReplies, markAsProcessed } from '@/lib/email/gmail-inbox';
+import { classifyInboundReply } from '@/lib/email/reply-precision';
 import { logReplyToHubSpot } from '@/lib/hubspot/emails';
 import { searchContactByEmail, stampContactReplyIntent } from '@/lib/hubspot/contacts';
 import { searchCompanyByDomain } from '@/lib/hubspot/companies';
@@ -17,6 +18,13 @@ export const dynamic = 'force-dynamic';
 const CRON_NAME = 'check-inbox';
 const CRON_PATH = '/api/cron/check-inbox';
 const CRON_SCHEDULE = '*/5 * * * *';
+const FAIL_KEY = 'inbox_poll_consecutive_failures';
+
+/**
+ * Notification type for inbound mail the precision gate rejected. Chosen so it does
+ * NOT contain the substring "reply": /engagement counts `type contains 'reply'`.
+ */
+const FILTERED_TYPE = 'filtered_inbound';
 
 export async function GET(request: Request) {
   // Auth: Vercel cron Bearer header or ?secret= query, vs CRON_SECRET
@@ -64,11 +72,15 @@ export async function GET(request: Request) {
 
     let created = 0;
     let skipped = 0;
+    let filtered = 0;
+    let lowConfidence = 0;
+    const filterReasons: Record<string, number> = {};
 
     for (const reply of replies) {
-      // Check if we already processed this message
+      // Check if we already processed this message. Covers BOTH notification types
+      // so a filtered message is not re-created on every 5-minute poll.
       const existing = await prisma.notification.findFirst({
-        where: { source_id: reply.messageId, type: 'reply' },
+        where: { source_id: reply.messageId, type: { in: ['reply', FILTERED_TYPE] } },
       });
       if (existing) {
         skipped++;
@@ -81,18 +93,69 @@ export async function GET(request: Request) {
         include: { account: true },
       });
 
+      // ---------------------------------------------------------------------
+      // PRECISION GATE (2026-07-21). Everything below this point mutates the
+      // pipeline and the CRM, and `stampContactReplyIntent` feeds hasIntent(),
+      // which is the SQL gate. Before this gate an out-of-office autoresponder,
+      // a statuspage.io alert or a HubSpot marketing blast could manufacture an
+      // SQL. Measured base rate on the real mailbox: ~2 of 33 inbound "replies"
+      // to a campaign were typed by a human.
+      // ---------------------------------------------------------------------
+      const verdict = classifyInboundReply({
+        fromEmail: reply.fromEmail,
+        headers: reply.headers,
+        subject: reply.subject,
+        bodyText: reply.bodyText,
+        // Local Persona match is the cheap proxy for "known sender" — a HubSpot
+        // lookup here would cost an API call per message. An unknown sender is
+        // still processed (a new logo knocking is the hottest signal there is),
+        // just reported at low confidence.
+        knownContact: !!persona,
+      });
+
+      if (!verdict.isHumanReply) {
+        filterReasons[verdict.reason] = (filterReasons[verdict.reason] ?? 0) + 1;
+        filtered++;
+        console.warn(
+          `[check-inbox] filtered non-human inbound from ${reply.fromEmail} ` +
+          `(reason=${verdict.reason}, subject="${reply.subject.slice(0, 80)}")`,
+        );
+
+        // Record it, clearly labeled, so the next operator can audit what the
+        // filter caught. `filtered_inbound` deliberately does NOT contain the
+        // substring "reply" — /engagement counts notifications with
+        // `type contains 'reply'`, and a filtered message must never inflate a
+        // reply metric, a digest count, or the unread-reply badge.
+        await prisma.notification.create({
+          data: {
+            type: FILTERED_TYPE,
+            account_name: persona?.account_name ?? null,
+            persona_email: reply.fromEmail,
+            subject: `[filtered: ${verdict.reason}] ${reply.subject}`.slice(0, 500),
+            preview: reply.snippet.slice(0, 200),
+            source_id: reply.messageId,
+            read: true, // not actionable; do not sit unread in the bell
+          },
+        }).catch(() => undefined);
+
+        // Label it in Gmail so it is not re-fetched once it is read.
+        await markAsProcessed(reply.messageId).catch(() => undefined);
+        continue;
+      }
+
+      if (verdict.confidence === 'low') lowConfidence++;
+
       // 4.7 (audit 2026-06-12): UNSOLICITED inbound - an unknown sender is
       // potentially a new logo knocking, the hottest signal there is, but
       // it previously landed only in the in-app bell. Precision gate: only
       // page when the sender's domain is a TAM-in company (keeps vendor
-      // spam and newsletters out of #yardflow-intent).
+      // spam and newsletters out of #yardflow-intent). The robotic/own-domain
+      // checks that used to live here are now covered by classifyInboundReply
+      // above, which runs before this block.
       if (!persona) {
         try {
-          const fromLocal = (reply.fromEmail.split('@')[0] || '').toLowerCase();
           const fromDomain = (reply.fromEmail.split('@')[1] || '').toLowerCase();
-          const robotic = /^(no-?reply|mailer-daemon|notifications?|newsletter|marketing|donotreply|bounce|postmaster)/.test(fromLocal);
-          const own = ['freightroll.com', 'yardflow.ai', 'dwtb.dev'].includes(fromDomain);
-          if (fromDomain && !robotic && !own) {
+          if (fromDomain) {
             const company = await searchCompanyByDomain(fromDomain);
             if (company?.yardflow_tam === 'in') {
               await sendSlackNotification(
@@ -243,35 +306,56 @@ export async function GET(request: Request) {
       create: { key: 'last_inbox_poll', value: nowEpoch },
     });
 
+    // Reset the consecutive-failure counter. Without this it only ever ratcheted
+    // up (it was stuck at 19), so past the threshold of 3 every future failure
+    // fired a Sentry error regardless of actual health.
+    await prisma.systemConfig.upsert({
+      where: { key: FAIL_KEY },
+      update: { value: '0' },
+      create: { key: FAIL_KEY, value: '0' },
+    }).catch(() => undefined);
+
     await markCronSuccess(CRON_NAME, {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `Processed ${replies.length} replies. Created ${created} notifications.`,
+      message:
+        `Processed ${replies.length} inbound. Created ${created} reply notifications, ` +
+        `filtered ${filtered} non-human.`,
       stats: {
         repliesFound: replies.length,
         notificationsCreated: created,
         skipped,
+        filtered,
+        lowConfidence,
+        filterReasons,
       },
     }).catch(() => undefined);
 
     return NextResponse.json({
       success: true,
-      replies_found: replies.length,
+      inbound_found: replies.length,
+      replies_found: replies.length, // retained for existing consumers
       notifications_created: created,
       skipped,
+      // Precision gate (2026-07-21): how many inbound messages were rejected as
+      // non-human, and why. `filtered_reasons` keys are ReplyRejectionReason values.
+      filtered,
+      filtered_reasons: filterReasons,
+      low_confidence_accepted: lowConfidence,
     });
   } catch (error) {
     Sentry.captureException(error);
 
-    // Track consecutive failures
-    const failKey = 'inbox_poll_consecutive_failures';
-    const failConfig = await prisma.systemConfig.findUnique({ where: { key: failKey } });
-    const failCount = parseInt(failConfig?.value || '0', 10) + 1;
+    // Track consecutive failures. Reset to 0 on success (see the success path) so
+    // this measures a real outage streak rather than a lifetime total.
+    const failConfig = await prisma.systemConfig.findUnique({ where: { key: FAIL_KEY } });
+    const parsedFails = parseInt(failConfig?.value || '0', 10);
+    const failCount = (Number.isNaN(parsedFails) ? 0 : parsedFails) + 1;
     await prisma.systemConfig.upsert({
-      where: { key: failKey },
+      where: { key: FAIL_KEY },
       update: { value: failCount.toString() },
-      create: { key: failKey, value: failCount.toString() },
+      create: { key: FAIL_KEY, value: failCount.toString() },
     });
 
     if (failCount >= 3) {
