@@ -4,7 +4,7 @@
   "framework": "nextjs",
   "crons": [
     {
-      "path": "/api/cron/check-inbox",
+      "path": "/api/cron/check-inbox/",
       "schedule": "*/5 * * * *"
     },
     {

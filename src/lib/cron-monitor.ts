@@ -17,14 +17,35 @@ export interface CronStateValue {
   runCount?: number;
 }
 
+/**
+ * Every job the /ops monitor knows how to display.
+ *
+ * The first nine entries mirror `vercel.json` `crons` exactly and are the
+ * source of truth for "is the scheduled fleet alive". Four of them
+ * (qualification, dispatch-daily, pounce-scan, refresh-intel) were missing
+ * here for months, so /ops rendered a confident green fleet while saying
+ * nothing at all about the jobs that gate SQL promotion and outbound
+ * dispatch. A monitor that omits a job cannot report that job as dead.
+ *
+ * The trailing entries are routes that exist but are NOT Vercel-scheduled
+ * (they are driven by the queue or were de-scheduled). They are kept so a
+ * manual trigger still records state, but they will never self-report a run.
+ */
 export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; schedule: string }> = [
-  { name: 'process-generation-jobs', label: 'Generation Job Worker', path: '/api/cron/process-generation-jobs', schedule: '*/5 * * * *' },
-  { name: 'process-send-jobs', label: 'Send Job Worker', path: '/api/cron/process-send-jobs', schedule: '*/2 * * * *' },
+  // --- Vercel-scheduled (vercel.json) ---
   { name: 'check-inbox', label: 'Inbox Polling', path: '/api/cron/check-inbox', schedule: '*/5 * * * *' },
+  { name: 'dispatch-daily', label: 'Daily Dispatch', path: '/api/cron/dispatch-daily', schedule: '0 11 * * 1-5' },
+  { name: 'qualification', label: 'MQL/SQL Qualification', path: '/api/cron/qualification', schedule: '30 11 * * *' },
   { name: 'daily-digest', label: 'Daily Digest', path: '/api/cron/daily-digest', schedule: '0 12 * * *' },
+  { name: 'drip-sequence', label: 'Campaign Drip', path: '/api/cron/drip-sequence', schedule: '0 13 * * *' },
+  { name: 'pounce-scan', label: 'Pounce Scan', path: '/api/cron/pounce-scan', schedule: '5 13 * * *' },
+  { name: 'refresh-intel', label: 'Intel Refresh', path: '/api/cron/refresh-intel', schedule: '0 13 * * 1' },
   { name: 'sync-hubspot', label: 'HubSpot Sync', path: '/api/cron/sync-hubspot', schedule: '0 */6 * * *' },
   { name: 'reenrich-contacts', label: 'Contact Re-enrichment', path: '/api/cron/reenrich-contacts', schedule: '0 */8 * * *' },
-  { name: 'drip-sequence', label: 'Campaign Drip', path: '/api/cron/drip-sequence', schedule: '0 13 * * *' },
+
+  // --- Routes that exist but are not Vercel-scheduled ---
+  { name: 'process-generation-jobs', label: 'Generation Job Worker', path: '/api/cron/process-generation-jobs', schedule: '*/5 * * * *' },
+  { name: 'process-send-jobs', label: 'Send Job Worker', path: '/api/cron/process-send-jobs', schedule: '*/2 * * * *' },
   { name: 'monday-bump', label: 'Monday Bump', path: '/api/email/monday-bump', schedule: '5 11 * * 1' },
 ];
 
