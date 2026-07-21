@@ -52,7 +52,11 @@ export async function moveAccountToStage(accountName: string, stage: PipelineSta
     },
   }).catch(() => undefined);
 
-  const hubspotDealId = await ensureLocalMeetingDealLink(accountName, stage).catch(() => null);
+  // Deliberate human action: a rep dragged this account into a pipeline stage.
+  // That IS an instruction to have a deal, so this call site may open one.
+  const hubspotDealId = await ensureLocalMeetingDealLink(accountName, stage, {
+    allowCreate: true,
+  }).catch(() => null);
 
   revalidatePath('/pipeline');
   revalidatePath('/meetings');
@@ -68,6 +72,7 @@ export async function syncAccountDeal(accountName: string) {
   const account = await prisma.account.findUnique({ where: { name: accountName } });
   if (!account) return { success: false, error: 'Account not found' };
 
+  // "Sync deal" is an explicit human request for this account to have a deal.
   const dealId = await ensureLocalMeetingDealLink(
     accountName,
     derivePipelineStage({
@@ -75,6 +80,7 @@ export async function syncAccountDeal(accountName: string) {
       outreach_status: account.outreach_status,
       meeting_status: account.meeting_status,
     }),
+    { allowCreate: true },
   ).catch(() => null);
 
   revalidatePath('/pipeline');

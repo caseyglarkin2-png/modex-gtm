@@ -5,6 +5,11 @@ import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from './clien
 import { pipelineStageToHubSpotDealStage, stageToStatus, type PipelineStage } from '@/lib/pipeline';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 import { AssociationSpecAssociationCategoryEnum } from '@hubspot/api-client/lib/codegen/crm/contacts/models/AssociationSpec';
+import {
+  decideDealForAccount,
+  resolveCompanyIdForAccountName,
+  type DealDedupDeps,
+} from './deal-dedup';
 
 const DEAL_PROPERTIES = ['dealname', 'dealstage', 'amount', 'pipeline', 'closedate'] as const;
 
@@ -58,27 +63,37 @@ export interface EnsureDealInput {
   accountName: string;
   stage: PipelineStage;
   amount?: number;
+  /**
+   * Known HubSpot company id (e.g. `Account.hubspot_company_id`). Skips the
+   * domain/name resolution round-trip and makes dedup exact.
+   */
+  companyId?: string | null;
+  /**
+   * Whether this caller may OPEN a deal that does not exist. Defaults to FALSE
+   * (link-only). See deal-dedup.ts for why.
+   */
+  allowCreate?: boolean;
 }
 
 function buildDealName(accountName: string) {
   return `YardFlow - ${accountName}`;
 }
 
-export async function upsertDealForAccount(input: EnsureDealInput): Promise<string | null> {
-  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
-  assertExternalWriteAllowed('hubspot', 'upsertDealForAccount');
-
+/** Exact "YardFlow - {Account}" match, ANY stage — the legacy dedup fallback. */
+async function findDealByEngineName(accountName: string): Promise<{ id: string } | null> {
   const client = getHubSpotClient();
-  const dealName = buildDealName(input.accountName);
-  const dealStage = pipelineStageToHubSpotDealStage(input.stage);
-  const amount = String(input.amount ?? 25000);
-
-  const existing = await withHubSpotRetry(
+  const result = await withHubSpotRetry(
     () =>
       client.crm.deals.searchApi.doSearch({
         filterGroups: [
           {
-            filters: [{ propertyName: 'dealname', operator: FilterOperatorEnum.Eq, value: dealName }],
+            filters: [
+              {
+                propertyName: 'dealname',
+                operator: FilterOperatorEnum.Eq,
+                value: buildDealName(accountName),
+              },
+            ],
           },
         ],
         properties: [...DEAL_PROPERTIES],
@@ -86,24 +101,63 @@ export async function upsertDealForAccount(input: EnsureDealInput): Promise<stri
         after: '0',
         sorts: [],
       }),
-    `searchDeal:${input.accountName}`,
-  ).catch(() => null);
+    `searchDeal:${accountName}`,
+  );
+  const hit = result?.results?.[0];
+  return hit ? { id: hit.id } : null;
+}
 
-  if (existing?.results?.[0]) {
-    const id = existing.results[0].id;
+/**
+ * Wire the real HubSpot lookups into the pure dedup decision. Company
+ * association first (the truth), engine-name match second (the fallback).
+ */
+function dedupDepsFor(input: Pick<EnsureDealInput, 'accountName' | 'companyId'>): DealDedupDeps {
+  return {
+    resolveCompanyId: async () =>
+      input.companyId ?? (await resolveCompanyIdForAccountName(input.accountName)),
+    findOpenDealAtCompany: async (companyId) => {
+      const ref = await findOpenDealForObject('companies', companyId);
+      return ref ? { id: ref.id } : null;
+    },
+    findDealByName: () => findDealByEngineName(input.accountName),
+  };
+}
+
+/**
+ * Ensure the account has a deal, WITHOUT ever duplicating a human one.
+ *
+ * Dedup is by company association (see deal-dedup.ts). When an open deal
+ * already exists on the company — any name, any owner, any open stage — this
+ * returns its id and touches NOTHING: no rename, no re-stage, no re-own, no
+ * re-amount. Only an engine-named "YardFlow - {Account}" stub is ever updated,
+ * and a new deal is only opened when the caller passes `allowCreate: true`.
+ */
+export async function upsertDealForAccount(input: EnsureDealInput): Promise<string | null> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
+  assertExternalWriteAllowed('hubspot', 'upsertDealForAccount');
+
+  const decision = await decideDealForAccount(dedupDepsFor(input), {
+    allowCreate: input.allowCreate === true,
+  });
+
+  // Somebody else's deal is already open on this company. Hands off.
+  if (decision.action === 'link') return decision.dealId;
+  if (decision.action === 'skip') return null;
+
+  const client = getHubSpotClient();
+  const dealName = buildDealName(input.accountName);
+  const dealStage = pipelineStageToHubSpotDealStage(input.stage);
+  const amount = String(input.amount ?? 25000);
+
+  if (decision.action === 'update') {
     await withHubSpotRetry(
       () =>
-        client.crm.deals.basicApi.update(id, {
-          properties: {
-            dealname: dealName,
-            dealstage: dealStage,
-            amount,
-            pipeline: 'default',
-          },
+        client.crm.deals.basicApi.update(decision.dealId, {
+          properties: { dealname: dealName, dealstage: dealStage, amount, pipeline: 'default' },
         }),
-      `updateDeal:${id}`,
+      `updateDeal:${decision.dealId}`,
     ).catch(() => null);
-    return id;
+    return decision.dealId;
   }
 
   const created = await withHubSpotRetry(
@@ -121,14 +175,26 @@ export async function upsertDealForAccount(input: EnsureDealInput): Promise<stri
     `createDeal:${input.accountName}`,
   ).catch(() => null);
 
-  return created?.id ?? null;
+  if (!created?.id) return null;
+
+  // Associate to the company we deduped against. Without this the new deal is
+  // orphaned and the NEXT run's company lookup misses it — which is how the
+  // engine kept minting stubs (all five phantom deals have zero associations).
+  if (decision.companyId) await associateDealToObject(created.id, 'companies', decision.companyId);
+
+  return created.id;
 }
 
 /**
- * Create a deal ONLY if the account has none yet (dedup by dealname), and
- * associate it to the contact. Unlike upsertDealForAccount this never touches an
- * existing deal's stage/amount — so an inbound signal (e.g. a self-served ROI
- * lead) can open a fresh opportunity without regressing a deal already in flight.
+ * Create a deal ONLY if the account has none yet, and associate it to the
+ * contact. Unlike upsertDealForAccount this never touches an existing deal at
+ * all — so an inbound signal (e.g. a self-served ROI lead) can open a fresh
+ * opportunity without regressing a deal already in flight.
+ *
+ * Dedup is the same company-association-first check (deal-dedup.ts): this
+ * carried the identical name-only bug and could have duplicated a human deal
+ * from the public ROI form.
+ *
  * Returns { id, created } or null when HubSpot is unconfigured/write fails.
  */
 export async function createDealIfMissing(input: {
@@ -136,26 +202,22 @@ export async function createDealIfMissing(input: {
   stage: PipelineStage;
   amount?: number;
   contactId?: string | null;
+  companyId?: string | null;
 }): Promise<{ id: string; created: boolean } | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
   assertExternalWriteAllowed('hubspot', 'createDealIfMissing');
 
+  const decision = await decideDealForAccount(dedupDepsFor(input), { allowCreate: true });
+
+  // Any existing deal — theirs by association, or ours by name — is returned
+  // untouched. This function's whole contract is "never disturb what exists".
+  if (decision.action === 'link' || decision.action === 'update') {
+    return { id: decision.dealId, created: false };
+  }
+  if (decision.action === 'skip') return null;
+
   const client = getHubSpotClient();
   const dealName = buildDealName(input.accountName);
-
-  const existing = await withHubSpotRetry(
-    () =>
-      client.crm.deals.searchApi.doSearch({
-        filterGroups: [{ filters: [{ propertyName: 'dealname', operator: FilterOperatorEnum.Eq, value: dealName }] }],
-        properties: [...DEAL_PROPERTIES],
-        limit: 1,
-        after: '0',
-        sorts: [],
-      }),
-    `searchDeal:${input.accountName}`,
-  ).catch(() => null);
-
-  if (existing?.results?.[0]) return { id: existing.results[0].id, created: false };
 
   const created = await withHubSpotRetry(
     () =>
@@ -184,10 +246,31 @@ export async function createDealIfMissing(input: {
     ).catch(() => null);
   }
 
+  // Company association — so the next dedup pass can SEE this deal.
+  if (decision.companyId) await associateDealToObject(created.id, 'companies', decision.companyId);
+
   return { id: created.id, created: true };
 }
 
-export async function ensureLocalMeetingDealLink(accountName: string, stage: PipelineStage) {
+export interface EnsureLocalMeetingDealLinkOptions {
+  /**
+   * Whether this caller may OPEN a HubSpot deal when the account has none.
+   *
+   * Defaults to FALSE. This function's job is in its NAME: LINK the local
+   * Meeting row to a HubSpot deal. Creating one was a side effect, and it is
+   * the side effect that put $250k of phantom pipeline in the portal. Only
+   * deliberate human deal-making actions (moving an account into a deal stage,
+   * logging a booked meeting, clicking "sync deal") pass true. Automation —
+   * above all the inbound-reply cron — never does: a reply is not a deal.
+   */
+  allowCreate?: boolean;
+}
+
+export async function ensureLocalMeetingDealLink(
+  accountName: string,
+  stage: PipelineStage,
+  options: EnsureLocalMeetingDealLinkOptions = {},
+) {
   const account = await prisma.account.findUnique({ where: { name: accountName } });
   if (!account) return null;
 
@@ -195,6 +278,8 @@ export async function ensureLocalMeetingDealLink(accountName: string, stage: Pip
     accountName,
     stage,
     amount: Math.max(10000, (account.priority_score ?? 0) * 1000),
+    companyId: account.hubspot_company_id,
+    allowCreate: options.allowCreate === true,
   });
 
   if (!dealId) return null;

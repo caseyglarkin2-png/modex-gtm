@@ -257,7 +257,14 @@ export async function GET(request: Request) {
           },
         }).catch(() => undefined);
 
-        await ensureLocalMeetingDealLink(persona.account_name, nextStage).catch(() => undefined);
+        // LINK ONLY — a reply is not a deal. This call site (with the old
+        // name-based dedup) minted "YardFlow - Wesco International" beside
+        // Jake's real "Wesco - Pilot and POC" the day reply detection came back
+        // online. It now attaches the local Meeting row to whatever deal already
+        // exists on that company and opens nothing when there is none.
+        await ensureLocalMeetingDealLink(persona.account_name, nextStage, {
+          allowCreate: false,
+        }).catch(() => undefined);
 
         // Increment reply_count on matching EmailLog by thread
         if (reply.subject) {

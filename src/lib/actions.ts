@@ -107,7 +107,11 @@ export async function createMeeting(data: MeetingInput) {
       },
     }).catch(() => undefined);
 
-    await ensureLocalMeetingDealLink(parsed.data.account, 'meeting').catch(() => undefined);
+    // A human logged a booked meeting. That is a real deal-worthy event, so
+    // this call site may open a deal — company dedup still prevents a duplicate.
+    await ensureLocalMeetingDealLink(parsed.data.account, 'meeting', {
+      allowCreate: true,
+    }).catch(() => undefined);
     // Auto-create follow-up activity
     try {
       await prisma.activity.create({
@@ -153,7 +157,11 @@ export async function updateAccountStatus(account: string, field: 'research_stat
       where: { name: account },
       data: { [field]: value, pipeline_stage: pipelineStage, current_motion: `Pipeline stage: ${pipelineStage}` },
     });
-    await ensureLocalMeetingDealLink(account, pipelineStage).catch(() => undefined);
+    // LINK ONLY — flipping a research/outreach/meeting status dropdown is not
+    // an instruction to open an opportunity.
+    await ensureLocalMeetingDealLink(account, pipelineStage, { allowCreate: false }).catch(
+      () => undefined,
+    );
     revalidatePath('/accounts');
     revalidatePath('/pipeline');
     revalidatePath('/analytics');
