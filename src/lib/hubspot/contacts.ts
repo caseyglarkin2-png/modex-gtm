@@ -7,6 +7,7 @@ import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured } from './clien
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/contacts/models/Filter';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
+import { VERIFIED_REPLY_INTENT_SOURCE } from '@/lib/revops/qualification/model';
 
 /** HubSpot contact properties we read/write */
 const CONTACT_PROPERTIES = [
@@ -231,10 +232,23 @@ export async function updateContactIntent(
 }
 
 /**
- * Stamp reply-intent on a contact WITHOUT touching intent_score (web/demo intent owns the
- * score; overwriting it here could downgrade a hot session). Sets last_intent_at +
+ * Stamp VERIFIED reply-intent on a contact WITHOUT touching intent_score (web/demo intent
+ * owns the score; overwriting it here could downgrade a hot session). Sets last_intent_at +
  * last_intent_source so the qualification engine's SQL gate sees email replies — the drip
- * runs through Gmail, so HubSpot's native hs_sales_email_last_replied never fires for it.
+ * runs through Gmail, so HubSpot's native reply fields never fire for it.
+ *
+ * CALLER CONTRACT (2026-07-21) — this is the ONLY reply signal hasIntent() trusts, so the
+ * two preconditions below are what stands between us and a fabricated SQL:
+ *   1. classifyInboundReply() (src/lib/email/reply-precision.ts) must have returned
+ *      isHumanReply for the message. HubSpot's own hs_sales_email_last_replied is no longer
+ *      a promotion basis precisely because it cannot make this distinction — 188 of the 192
+ *      SQLs demoted on 2026-07-21 were out-of-office autoresponders.
+ *   2. `contactId` must be the contact resolved from the message's From address — the person
+ *      who TYPED it. Never a thread participant. HubSpot's connected-inbox auto-logger
+ *      associates an inbound email with every contact on the thread, which is how one Boston
+ *      Beer reply promoted three people. We read the envelope instead, so attribution here is
+ *      structural: one message, one sender, one stamp.
+ * The written value is asserted against hasIntent() in tests/unit/reply-intent-stamp.test.ts.
  */
 export async function stampContactReplyIntent(contactId: string): Promise<void> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return;
@@ -246,7 +260,7 @@ export async function stampContactReplyIntent(contactId: string): Promise<void> 
       client.crm.contacts.basicApi.update(contactId, {
         properties: {
           last_intent_at: String(Date.now()),
-          last_intent_source: 'email_reply',
+          last_intent_source: VERIFIED_REPLY_INTENT_SOURCE,
         },
       }),
     `stampContactReplyIntent(${contactId})`,

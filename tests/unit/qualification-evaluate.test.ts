@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { buildDiff, dedupeByContact } from '@/lib/revops/qualification/evaluate';
-import { ACCOUNT_INTENT_SQL_CAP_PER_ACCOUNT } from '@/lib/revops/qualification/model';
+import { ACCOUNT_INTENT_SQL_CAP_PER_ACCOUNT, VERIFIED_REPLY_INTENT_SOURCE } from '@/lib/revops/qualification/model';
 import type { QualCompany, QualContact } from '@/lib/revops/qualification/types';
 
 const NOW = Date.parse('2026-07-20T12:00:00Z');
@@ -61,8 +61,11 @@ describe('per-account account-intent SQL cap (blast-radius guard)', () => {
       ...Array.from({ length: CAP }, (_, i) => ({
         company: hotCo, contact: mk({ id: `a${i}`, email: `a${i}@hot.com`, hs_seniority: 'director', hs_role: 'operations' }),
       })),
-      // one more contact who personally replied — must stay SQL despite the cap
-      { company: hotCo, contact: mk({ id: 'earned', email: 'earned@hot.com', hs_seniority: 'director', hs_sales_email_last_replied: '2026-07-19' }) },
+      // one more contact who personally replied — must stay SQL despite the cap.
+      // "Personally replied" means a VERIFIED reply (a message we read the sender of and
+      // passed through the precision gate). The raw HubSpot hs_sales_email_last_replied
+      // stamp is NOT personal intent — it lands on every participant of a thread.
+      { company: hotCo, contact: mk({ id: 'earned', email: 'earned@hot.com', hs_seniority: 'director', last_intent_source: VERIFIED_REPLY_INTENT_SOURCE, last_intent_at: '2026-07-19' }) },
     ];
     const rows = buildDiff(pairs, NOW);
     const earned = rows.find((r) => r.email === 'earned@hot.com')!;

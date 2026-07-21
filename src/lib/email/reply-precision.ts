@@ -4,10 +4,16 @@
  * WHY THIS EXISTS (2026-07-21)
  * ----------------------------
  * /api/cron/check-inbox queried Gmail with `is:unread in:inbox after:<watermark>` and
- * treated EVERY unread inbox message as a prospect reply. Each one stamped
- * `last_intent_source='email_reply'` on the HubSpot contact, and `hasIntent()` in
- * src/lib/revops/qualification/model.ts treats a reply signal as the SQL gate. So a
- * newsletter, a status-page alert, or an out-of-office bounce could manufacture an SQL.
+ * treated EVERY unread inbox message as a prospect reply. Each one stamped a reply source
+ * on the HubSpot contact, and `hasIntent()` in src/lib/revops/qualification/model.ts treats
+ * a reply signal as the SQL gate. So a newsletter, a status-page alert, or an out-of-office
+ * bounce could manufacture an SQL.
+ *
+ * Passing this gate is now what MAKES a reply a promotion basis: check-inbox stamps
+ * `last_intent_source = VERIFIED_REPLY_INTENT_SOURCE` only on the contact behind the From
+ * address, and that is the only reply value hasIntent() accepts. HubSpot's own
+ * hs_sales_email_last_replied was dropped from the gate on 2026-07-21 — it is stamped on
+ * every participant of a logged thread, so it cannot name a writer.
  *
  * Measured against the real casey@freightroll.com mailbox on 2026-07-21: of 33 inbound
  * "replies" to the "48-minute turns" campaign, only 2 were typed by a human. The rest

@@ -293,8 +293,12 @@ export async function GET(request: Request) {
         // Non-fatal: HubSpot failure shouldn't block processing
       }
 
-      // Stamp reply-intent so the qualification engine's SQL gate sees it (drip replies
-      // arrive via Gmail and never set HubSpot's native reply fields).
+      // Stamp VERIFIED reply-intent so the qualification engine's SQL gate sees it. This is
+      // now the ONLY reply signal that can promote to SQL — HubSpot's own
+      // hs_sales_email_last_replied was dropped from hasIntent() on 2026-07-21 because it is
+      // stamped on every participant of a logged thread and on autoresponders alike. The
+      // lookup is BY THE SENDER'S ADDRESS, so exactly one contact — the person who typed the
+      // message — is stamped, and only after the precision gate above passed it.
       try {
         const hsContact = await searchContactByEmail(reply.fromEmail);
         if (hsContact) await stampContactReplyIntent(hsContact.id);

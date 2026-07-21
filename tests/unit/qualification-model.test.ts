@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   hasRoleGate, hasIntent, hasAccountIntent, classifyContact, seniorityRank,
   ACCOUNT_INTENT_SQL_THRESHOLD, ACCOUNT_TRIGGER_SQL_THRESHOLD, ACCOUNT_INTENT_MAX_AGE_DAYS,
+  VERIFIED_REPLY_INTENT_SOURCE, LEGACY_REPLY_INTENT_SOURCE,
 } from '../../src/lib/revops/qualification/model';
 import type { QualContact, QualCompany } from '../../src/lib/revops/qualification/types';
 
@@ -44,11 +45,90 @@ describe('hasRoleGate', () => {
 describe('hasIntent', () => {
   it('false with no signals', () => { expect(hasIntent(noIntent)).toBe(false); });
   it('true on intent_score >= 1', () => { expect(hasIntent({ ...noIntent, intent_score: '1' })).toBe(true); });
-  it('true on a reply', () => { expect(hasIntent({ ...noIntent, hs_sales_email_last_replied: '2026-06-01' })).toBe(true); });
   it('true on a booked meeting', () => { expect(hasIntent({ ...noIntent, engagements_last_meeting_booked: '2026-06-01' })).toBe(true); });
   it('true on demo visit source', () => { expect(hasIntent({ ...noIntent, last_intent_source: '/demo/acme' })).toBe(true); });
   it('true on 2 opens + 1 click', () => { expect(hasIntent({ ...noIntent, hs_email_open: '2', hs_email_replied: '1' })).toBe(true); });
   it('false on opens without reply', () => { expect(hasIntent({ ...noIntent, hs_email_open: '5' })).toBe(false); });
+  it('true on a timestamped signal with no recorded surface', () => {
+    expect(hasIntent({ ...noIntent, last_intent_at: '2026-06-01' })).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The thread-broadcast defect (2026-07-21). hs_sales_email_last_replied is
+// HubSpot-managed and stamped on EVERY PARTICIPANT of a logged thread, not just
+// the person who typed. Proven: three Boston Beer contacts carry the identical
+// stamp 2026-07-08T18:57:22Z because ONE of them replied at 18:57:18. It is also
+// stamped by out-of-office autoresponders (188 of 192 demoted SQLs carried an
+// RFC 3834 Auto-Submitted header). It cannot distinguish sender from bystander,
+// so it is no longer a promotion basis at all.
+// ---------------------------------------------------------------------------
+describe('hasIntent — reply signals must be attributable to a writer', () => {
+  it('a HubSpot thread stamp alone does NOT promote (every participant carries it)', () => {
+    expect(hasIntent({ ...noIntent, hs_sales_email_last_replied: '2026-07-08T18:57:22Z' })).toBe(false);
+  });
+
+  it('THREAD BYSTANDER: two contacts sharing one stamp both stay unpromoted', () => {
+    const stamp = '2026-07-08T18:57:22Z';
+    const writer = { ...noIntent, hs_sales_email_last_replied: stamp };
+    const bystander = { ...noIntent, hs_sales_email_last_replied: stamp };
+    expect(hasIntent(writer)).toBe(false);
+    expect(hasIntent(bystander)).toBe(false);
+  });
+
+  it('AUTORESPONDER: an out-of-office that HubSpot logged as a reply does NOT promote', () => {
+    expect(hasIntent({
+      ...noIntent,
+      hs_sales_email_last_replied: '2026-07-15T09:00:00Z',
+      hs_email_open: '0',
+    })).toBe(false);
+  });
+
+  it('a VERIFIED human reply (our own gated stamp) DOES promote', () => {
+    expect(hasIntent({
+      ...noIntent,
+      last_intent_source: VERIFIED_REPLY_INTENT_SOURCE,
+      last_intent_at: '2026-07-21T18:00:00Z',
+    })).toBe(true);
+  });
+
+  it('verified source match is case-insensitive and whitespace tolerant', () => {
+    expect(hasIntent({ ...noIntent, last_intent_source: ` ${VERIFIED_REPLY_INTENT_SOURCE.toUpperCase()} ` })).toBe(true);
+  });
+
+  it('the LEGACY pre-gate email_reply stamp does NOT promote (it is unfiltered)', () => {
+    expect(hasIntent({
+      ...noIntent,
+      last_intent_source: LEGACY_REPLY_INTENT_SOURCE,
+      last_intent_at: '2026-07-21T16:50:18Z',
+    })).toBe(false);
+  });
+
+  it('a legacy reply stamp does not suppress an INDEPENDENT basis', () => {
+    expect(hasIntent({
+      ...noIntent,
+      last_intent_source: LEGACY_REPLY_INTENT_SOURCE,
+      last_intent_at: '2026-07-21T16:50:18Z',
+      intent_score: '55',
+    })).toBe(true);
+    expect(hasIntent({
+      ...noIntent,
+      last_intent_source: LEGACY_REPLY_INTENT_SOURCE,
+      last_intent_at: '2026-07-21T16:50:18Z',
+      engagements_last_meeting_booked: '2026-07-22',
+    })).toBe(true);
+    expect(hasIntent({
+      ...noIntent,
+      last_intent_source: LEGACY_REPLY_INTENT_SOURCE,
+      last_intent_at: '2026-07-21T16:50:18Z',
+      hs_email_open: '2',
+      hs_email_replied: '1',
+    })).toBe(true);
+  });
+
+  it('web/demo surfaces are unaffected by the reply rules', () => {
+    expect(hasIntent({ ...noIntent, last_intent_source: '/for/dannon', last_intent_at: '2026-07-20' })).toBe(true);
+  });
 });
 
 describe('hasAccountIntent (the keystone join, guardrailed)', () => {
@@ -123,5 +203,42 @@ describe('classifyContact', () => {
   it('a lukewarm account (below threshold) leaves its committee at mql', () => {
     const warm: QualCompany = { ...tam, intentScore: 40, lastIntentAt: recent };
     expect(classifyContact(warm, opsDir, NOW)).toBe('mql');
+  });
+});
+
+describe('classifyContact — the thread-broadcast gate', () => {
+  const stamp = '2026-07-08T18:57:22Z';
+
+  it('a VERIFIED human reply promotes the writer to sql', () => {
+    const writer = { ...opsDir, last_intent_source: VERIFIED_REPLY_INTENT_SOURCE, last_intent_at: stamp } as QualContact;
+    expect(classifyContact(tam, writer, NOW)).toBe('sql');
+  });
+
+  it('a thread participant who did not write stays mql', () => {
+    const bystander = { ...opsDir, hs_sales_email_last_replied: stamp } as QualContact;
+    expect(classifyContact(tam, bystander, NOW)).toBe('mql');
+  });
+
+  it('BOSTON BEER: one reply does not promote three people', () => {
+    const [a, b, c] = ['1', '2', '3'].map((id) =>
+      ({ ...opsDir, id, hs_sales_email_last_replied: stamp }) as QualContact);
+    expect([a, b, c].map((k) => classifyContact(tam, k, NOW))).toEqual(['mql', 'mql', 'mql']);
+  });
+
+  it('an autoresponder stays mql', () => {
+    const ooo = { ...opsDir, hs_sales_email_last_replied: '2026-07-15T09:00:00Z' } as QualContact;
+    expect(classifyContact(tam, ooo, NOW)).toBe('mql');
+  });
+
+  it('UNCHANGED: the account-intent path still promotes, reply property or not', () => {
+    const hot: QualCompany = { ...tam, intentScore: 100, lastIntentAt: recent };
+    expect(classifyContact(hot, opsDir, NOW)).toBe('sql');
+    const bystanderAtHotAccount = { ...opsDir, hs_sales_email_last_replied: stamp } as QualContact;
+    expect(classifyContact(hot, bystanderAtHotAccount, NOW)).toBe('sql');
+  });
+
+  it('UNCHANGED: the account-trigger path still promotes', () => {
+    const triggered: QualCompany = { ...tam, triggerScore: ACCOUNT_TRIGGER_SQL_THRESHOLD };
+    expect(classifyContact(triggered, opsDir, NOW)).toBe('sql');
   });
 });
