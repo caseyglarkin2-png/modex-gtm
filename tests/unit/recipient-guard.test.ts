@@ -43,6 +43,17 @@ describe('recipient guard', () => {
     }
   });
 
+  it('allows real people whose mailbox leads with a two-letter role initialism', async () => {
+    // ap.moller / hr.mcmaster / ar.rahman / it.jones / pr.smith are people, not
+    // role inboxes; these only block on an exact match (ap@, hr@).
+    for (const addr of ['ap.moller@maersk.com', 'hr.mcmaster@example.com', 'ar.rahman@example.com', 'pr.smith@example.com']) {
+      const r = await evaluateRecipientEligibility(mockPrisma(), addr);
+      expect(r.ok, addr).toBe(true);
+    }
+    // but the bare role alias is still blocked
+    expect((await evaluateRecipientEligibility(mockPrisma(), 'hr@acme.com')).ok).toBe(false);
+  });
+
   it('blocks a previously hard-bounced address', async () => {
     const r = await evaluateRecipientEligibility(mockPrisma({ bounce: 1 }), 'alice@example.com');
     expect(r.ok).toBe(false);

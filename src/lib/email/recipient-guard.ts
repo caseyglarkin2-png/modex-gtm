@@ -39,15 +39,21 @@ const ROLE_LOCAL_PARTS = new Set([
   'legal', 'privacy', 'compliance', 'abuse', 'webmaster', 'it', 'sysadmin',
 ]);
 
+// Two-letter role initialisms double as people's real initials
+// (ap.moller@maersk.com, hr.mcmaster@, ar.rahman@), so they must only block on an
+// EXACT match, never as a leading name segment.
+const AMBIGUOUS_LEAD = new Set(['ap', 'ar', 'hr', 'it', 'pr']);
+
 // A local part is a role mailbox when it matches exactly, or its leading segment
 // (before a +, ., -, or _ tag) does: `sales.us`, `info+lead`, `support-team` are
 // shared aliases; a person's `john.sales` (name first) is not caught because the
-// leading segment `john` is not a role word.
+// leading segment `john` is not a role word, and a two-initial `ap.moller` is
+// exempted from the lead check.
 export function isRoleMailbox(localPart: string): boolean {
   const lp = localPart.toLowerCase();
   if (ROLE_LOCAL_PARTS.has(lp)) return true;
   const lead = lp.split(/[+.\-_]/)[0];
-  return ROLE_LOCAL_PARTS.has(lead);
+  return ROLE_LOCAL_PARTS.has(lead) && !AMBIGUOUS_LEAD.has(lead);
 }
 
 // Window + ceiling for the per-person frequency cap. Generous by default: it is a
