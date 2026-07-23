@@ -107,7 +107,7 @@ export async function GET(request: NextRequest) {
               account_name: recipient.account_name,
               campaign_id: recipient.campaign_id ?? undefined,
               persona_name: recipient.persona_name ?? null,
-              to_email: recipient.to_email,
+              to_email: recipient.to_email.toLowerCase(),
               subject: recipient.subject,
               body_html: recipient.body_html,
               status: 'sent',

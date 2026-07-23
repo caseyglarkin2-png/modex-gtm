@@ -222,7 +222,7 @@ async function handle(req: NextRequest) {
             data: {
               account_name: bump.accountName,
               persona_name: bump.personaName || null,
-              to_email: bump.to,
+              to_email: bump.to.toLowerCase(),
               subject: bump.subject,
               body_html: html,
               status: 'sent',

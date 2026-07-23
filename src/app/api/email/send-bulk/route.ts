@@ -297,7 +297,7 @@ export async function POST(req: NextRequest) {
         data: {
           account_name: resolvedAccountName,
           persona_name: recipient.personaName ?? null,
-          to_email: recipient.to,
+          to_email: recipient.to.toLowerCase(),
           subject,
           body_html: html,
           status: r.status === 'fulfilled' ? 'sent' : 'failed',
