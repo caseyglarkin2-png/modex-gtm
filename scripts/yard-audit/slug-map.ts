@@ -34,6 +34,7 @@ interface SlugEntry {
 
 const ENTRIES: SlugEntry[] = [
   { auditSlug: 'ab-inbev', micrositeSlug: 'ab-inbev', displayName: 'AB InBev', archetype: 'beverage' },
+  { auditSlug: 'ball', micrositeSlug: 'ball', displayName: 'Ball Corporation', archetype: 'manufacturer', coverageNote: 'We audited the 18 active US aluminum beverage-can and can-end plants Ball operates. Ball\'s wider footprint (international plants, the Boulder aerospace business, and the divested aluminum-cup JV) sits outside the beverage-can yard network and is excluded by design.' },
   { auditSlug: 'tractor-supply', micrositeSlug: 'tractor-supply', displayName: 'Tractor Supply Company', archetype: 'retailer' },
   { auditSlug: 'nfi', micrositeSlug: 'nfi', displayName: 'NFI Industries', archetype: '3pl', estimatedFootprint: 300, coverageNote: 'NFI operates 300+ North American facilities; we audited 10 of the largest and most yard-intensive (dedicated DCs, port logistics, a fulfillment center). The rest follow the same gate/dock archetypes.' },
   { auditSlug: 'barnes-noble', micrositeSlug: 'barnes-noble', displayName: 'Barnes & Noble', archetype: 'retailer' },

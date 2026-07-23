@@ -1,0 +1,104 @@
+{
+  "name": "Ball - Findlay OH",
+  "type": "Beverage Can Plant (bodies+ends)",
+  "coords": { "lat": 41.089800, "lng": -83.643800 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.095800, "lng": -83.649200 },
+      { "lat": 41.095200, "lng": -83.635800 },
+      { "lat": 41.086800, "lng": -83.635800 },
+      { "lat": 41.087200, "lng": -83.642000 },
+      { "lat": 41.085800, "lng": -83.642300 },
+      { "lat": 41.087300, "lng": -83.649200 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.089600, "lng": -83.643550 },
+      { "lat": 41.089600, "lng": -83.643050 },
+      { "lat": 41.088650, "lng": -83.643050 },
+      { "lat": 41.088650, "lng": -83.643550 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.090800, "lng": -83.637200 },
+        { "lat": 41.090800, "lng": -83.633700 },
+        { "lat": 41.086500, "lng": -83.633700 },
+        { "lat": 41.086500, "lng": -83.637200 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.092000, "lng": -83.645600 },
+        { "lat": 41.092000, "lng": -83.645200 },
+        { "lat": 41.089200, "lng": -83.645200 },
+        { "lat": 41.089200, "lng": -83.645600 }
+      ] },
+      { "ring": [
+        { "lat": 41.090800, "lng": -83.642300 },
+        { "lat": 41.090800, "lng": -83.641900 },
+        { "lat": 41.087000, "lng": -83.641900 },
+        { "lat": 41.087000, "lng": -83.642300 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 41.088900, "lng": -83.643900 },
+      { "lat": 41.088900, "lng": -83.643550 },
+      { "lat": 41.088500, "lng": -83.643550 },
+      { "lat": 41.088500, "lng": -83.643900 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "SGrxHolhBQ-DfOauuZfjGw", "hasCoverage": true },
+      "truckGate": { "heading": 337, "pano": "SGrxHolhBQ-DfOauuZfjGw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 90, "trailerParkingCapacity": 150,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.089800,-83.643800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Guarded gate up the private entrance drive: a peaked-roof guard booth sits in the drive median (z20), with split inbound/outbound lanes, barrier-arm gate hardware, and two vehicles queued at capture. Well set back from the public road behind a field/retention-pond buffer.",
+    "guardShack": "Peaked/diamond-roof booth in the entrance median - classic staffed truck-gate booth.",
+    "preGateStaging": "Paved turnaround/staging bulb at the gate approach where trucks can wait before the guard.",
+    "postGateStaging": "Wide paved yard inside the gate serving the plant, warehouses and trailer rows.",
+    "drivewayLong": "Long approach drive from gate to the docks/warehouses (~300m+), holds a deep queue.",
+    "entryLanes": "~2 inbound lanes at the booth (estimate).",
+    "exitLanes": "~2 outbound lanes (estimate).",
+    "dockDoorCount": "Estimate - multiple dock banks across the plant plus 2-3 long distribution warehouses; heavy outbound can shipping. 50+ band.",
+    "dropArea": "Large outbound trailer drop yards east of the warehouses, rows of trailers - 50+.",
+    "shipRcvSeparate": "Distinct dock clusters: plant docks (west face) vs the distribution-warehouse docks (facing the east trailer yards).",
+    "multipleFacilities": "Campus: manufacturing plant + multiple long distribution warehouses + trailer yards on the same Ball property.",
+    "railServed": "No rail spur observed running into the property (the long buildings are cross-dock warehouses, truck-served).",
+    "urbanRural": "Eastern edge of Findlay in an industrial park; farmland immediately adjacent (Rural per rubric).",
+    "identity": "Confirmed Ball via the iconic red-white-blue Ball water tower on site (2025-03 Street View)."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "http://www.cask.com/wp-content/uploads/Ball-Metal-Beverage-Dunnage-Return-Location-Contacts.pdf", "date": "2023", "type": "Ball logistics/dunnage-return location list", "claim": "Ball Metal Beverage lists the Findlay OH plant as an active return/operating location" },
+      { "tier": 3, "url": "https://www.facebook.com/boblatta/posts/1517230113107163", "date": "2023", "type": "US Rep site visit post", "claim": "Congressman visited Ball Corporation beverage can plant in Findlay" }
+    ],
+    "imageryDate": "2025-03 (Street View); satellite 2026 Airbus/Maxar/USDA vintage",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Ball beverage can plant on Distribution Dr, Findlay; on-site Ball-branded water tower visible in current Street View; multiple current listings; not on Ball's 2022-2024 North American closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

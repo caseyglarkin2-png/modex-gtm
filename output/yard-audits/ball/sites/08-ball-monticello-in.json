@@ -1,0 +1,196 @@
+{
+  "name": "Ball - Monticello IN",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": {
+    "lat": 40.750222,
+    "lng": -86.773529
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.7513,
+          "lng": -86.7748
+        },
+        {
+          "lat": 40.7513,
+          "lng": -86.77235
+        },
+        {
+          "lat": 40.74928,
+          "lng": -86.77235
+        },
+        {
+          "lat": 40.74928,
+          "lng": -86.7748
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.75125,
+          "lng": -86.7747
+        },
+        {
+          "lat": 40.75125,
+          "lng": -86.7742
+        },
+        {
+          "lat": 40.7509,
+          "lng": -86.7742
+        },
+        {
+          "lat": 40.7509,
+          "lng": -86.7747
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.74952,
+            "lng": -86.7742
+          },
+          {
+            "lat": 40.74952,
+            "lng": -86.77255
+          },
+          {
+            "lat": 40.74936,
+            "lng": -86.77255
+          },
+          {
+            "lat": 40.74936,
+            "lng": -86.7742
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.75082,
+            "lng": -86.7743
+          },
+          {
+            "lat": 40.75082,
+            "lng": -86.7733
+          },
+          {
+            "lat": 40.7506,
+            "lng": -86.7733
+          },
+          {
+            "lat": 40.7506,
+            "lng": -86.7743
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.7496,
+            "lng": -86.7742
+          },
+          {
+            "lat": 40.7496,
+            "lng": -86.7725
+          },
+          {
+            "lat": 40.74952,
+            "lng": -86.7725
+          },
+          {
+            "lat": 40.74952,
+            "lng": -86.7742
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 128,
+        "pano": "2N9XDJYZmO6uk8ytxOt_GQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 106,
+        "pano": "2N9XDJYZmO6uk8ytxOt_GQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 13,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 11.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.750222,-86.773529,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors"
+  ],
+  "fieldNotes": {
+    "truckGate": "Both the west office drive and the north lot/truck-court drive off N 6th St are open, unbarriered approaches (2026-04 pano). No barrier arm or gatehouse seen.",
+    "guardShack": "Small tan structure near the north entrance is an electrical/utility building set back in the lot, not a gate booth.",
+    "dropArea": "Row of ~6 drop trailers along the south wall plus trailers in the north truck court.",
+    "multipleFacilities": "Pale can-plant building plus attached darker finished-goods warehouse on the east = one connected plant.",
+    "railServed": "N-S rail line runs along the far side of N 6th St; no spur enters the property in view.",
+    "geofence": "Building sits near square-to-north; perimeter is a good-faith rectangle from z18 imagery."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.ball.com/corp_packaging/job/Monticello-Production-Technician-IN-47960/1271532500/",
+        "date": "2025-03",
+        "type": "active careers requisition on Ball domain",
+        "claim": "Ball posts Production Technician reqs at Monticello IN 47960, 24/7 plant"
+      }
+    ],
+    "imageryDate": "2024",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Ball-domain job reqs at the Monticello plant address confirm current staffing/operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

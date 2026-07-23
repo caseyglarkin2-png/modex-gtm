@@ -1,0 +1,179 @@
+{
+  "name": "Ball - Fort Worth TX",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": {
+    "lat": 32.64925,
+    "lng": -97.3153
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.65015,
+          "lng": -97.3164
+        },
+        {
+          "lat": 32.6499,
+          "lng": -97.3138
+        },
+        {
+          "lat": 32.6476,
+          "lng": -97.3138
+        },
+        {
+          "lat": 32.6478,
+          "lng": -97.3164
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.6484,
+          "lng": -97.3143
+        },
+        {
+          "lat": 32.6484,
+          "lng": -97.31385
+        },
+        {
+          "lat": 32.64795,
+          "lng": -97.31385
+        },
+        {
+          "lat": 32.64795,
+          "lng": -97.3143
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.64875,
+            "lng": -97.3146
+          },
+          {
+            "lat": 32.64875,
+            "lng": -97.31405
+          },
+          {
+            "lat": 32.6479,
+            "lng": -97.31405
+          },
+          {
+            "lat": 32.6479,
+            "lng": -97.3146
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.64925,
+            "lng": -97.31495
+          },
+          {
+            "lat": 32.6483,
+            "lng": -97.31495
+          },
+          {
+            "lat": 32.6483,
+            "lng": -97.31475
+          },
+          {
+            "lat": 32.64925,
+            "lng": -97.31475
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 295,
+        "pano": "LwffyaD6eWDufm-NqqRZ8Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 279,
+        "pano": "LwffyaD6eWDufm-NqqRZ8Q",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 15.6,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.64925,-97.3153,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "truckGate": "Truck yard on the east/south is enclosed by black chain-link perimeter fence (seen in 2025-04 Street View) with a gated drive off Will Rogers Blvd; no barrier arm/booth directly imaged so remote/kiosk check-in inferred.",
+    "guardShack": "No guard booth seen; office with US flag fronts Will Rogers Blvd.",
+    "railServed": "Active rail spur curves along the north/west edge with a grade crossing (railcars present in imagery) - rail served TRUE.",
+    "multipleFacilities": "Two large connected buildings - older can plant (north, heavy roof process equipment) plus a large warehouse/expansion (south).",
+    "shipRcvSeparate": "Dock banks on the east face plus loading between the two buildings suggest separate ship/receive.",
+    "resolvedLocation": "Address was unpinned in roster; resolved to 6600 Will Rogers Blvd, Fort Worth TX 76140 (Ball plant; the Rehrig pooling warehouse at 6601 Will Rogers Blvd sits across the street).",
+    "geofence": "Oriented polygons estimated from z17-19 imagery."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-ball-l-fort-worth,-tx-jobs.html",
+        "date": "2025-06",
+        "type": "active Ball careers at Fort Worth",
+        "claim": "Ball hiring Chemical Technician/Machinist/Operator for aluminum can manufacturing, Fort Worth TX, 12-hr rotating shifts"
+      }
+    ],
+    "imageryDate": "2025-04",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Ball-domain/aggregated aluminum-can-manufacturing job reqs at Fort Worth confirm the plant still operates; the 2011 realignment trimmed 12oz lines but did not close the site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

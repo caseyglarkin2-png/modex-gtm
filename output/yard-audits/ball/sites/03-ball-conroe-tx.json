@@ -1,0 +1,81 @@
+{
+  "name": "Ball - Conroe TX",
+  "type": "Beverage Can Plant (bodies+Alumi-Tek)",
+  "coords": { "lat": 30.349500, "lng": -95.436800 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 30.351800, "lng": -95.440300 },
+      { "lat": 30.351600, "lng": -95.433100 },
+      { "lat": 30.347000, "lng": -95.433100 },
+      { "lat": 30.346900, "lng": -95.436300 },
+      { "lat": 30.346950, "lng": -95.437400 },
+      { "lat": 30.347200, "lng": -95.440300 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 30.347650, "lng": -95.437050 },
+      { "lat": 30.347650, "lng": -95.436600 },
+      { "lat": 30.346950, "lng": -95.436600 },
+      { "lat": 30.346950, "lng": -95.437050 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 30.349250, "lng": -95.437600 },
+        { "lat": 30.349200, "lng": -95.436100 },
+        { "lat": 30.348950, "lng": -95.436150 },
+        { "lat": 30.349000, "lng": -95.437650 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 9, "pano": "vZx6KXjYVQU1jFPiD_9jhA", "hasCoverage": true },
+      "truckGate": { "heading": 9, "pano": "vZx6KXjYVQU1jFPiD_9jhA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 15, "trailersVisible": 8, "trailerParkingCapacity": 20,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.349500,-95.436800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Plant is fully chain-link perimeter-fenced (confirmed in 2026-01 Street View and satellite) with a single controlled vehicle entrance from FM 3083; the yard is gated. truckGate = true on the fenced/controlled access.",
+    "guardShack": "No manned guard booth confirmed. The FM 3083 entrance is an open landscaped drive (monument-sign median, no barrier arm at the road); the actual yard gate sits deeper in. No booth verified, so guardShack = false.",
+    "remoteGs": "Gate present, no confirmed guard shack => remoteGs true (badge/kiosk-style entry inferred). Flagged uncertain.",
+    "postGateStaging": "Large paved apron in front of the south dock bank holds queued trucks inside the fence.",
+    "dockDoors": "South-face dock bank with 2-3 trailers backed in at capture; ~10-25 band (estimate).",
+    "dropArea": "No dedicated drop yard; a few trailers stage on the west perimeter road and at the docks (0-10).",
+    "urbanRural": "Heavily wooded, isolated plant clearing on the eastern edge of Conroe; a residential subdivision borders to the south but the plant setting is rural-industrial (Rural per rubric).",
+    "railServed": "No rail spur into the property.",
+    "siteAreaAcres": "Ball states a 'more than 30-acre facility' (est. 1987); polygon ~38 acres."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.webpackaging.com/en/portals/ballcorporation/assets/11584275/usa-conroe/", "date": "2024", "type": "Ball corporate location page (Conroe)", "claim": "Ball's own site profiles the Conroe TX beverage-packaging plant, >30 acres, est. 1987, 2,250+ cans/min" },
+      { "tier": 1, "url": "https://enviro.epa.gov/triexplorer/release_fac_profile?TRI=77303BLLPC1000N", "date": "2024", "type": "EPA TRI facility report (FY2024)", "claim": "Ball Metal Packaging, 1000 N FM 3083, Conroe - active TRI reporter for FY2024 (self-attested federal operating report)" }
+    ],
+    "imageryDate": "2026-01/2026-02 (Street View); satellite 2026 Airbus/Maxar/Vexcel vintage",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball's own corporate location page profiles the Conroe plant; active FY2024 EPA TRI federal operating report at 1000 N FM 3083; not on Ball's 2022-2024 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,169 @@
+{
+  "name": "Ball - Millersburg OR",
+  "type": "Beverage Can Plant (bodies) / Warehouse",
+  "coords": {
+    "lat": 44.6784,
+    "lng": -123.06245
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.677119,
+          "lng": -123.061104
+        },
+        {
+          "lat": 44.679363,
+          "lng": -123.061214
+        },
+        {
+          "lat": 44.679281,
+          "lng": -123.064496
+        },
+        {
+          "lat": 44.677037,
+          "lng": -123.064386
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.677696,
+          "lng": -123.062876
+        },
+        {
+          "lat": 44.678019,
+          "lng": -123.062892
+        },
+        {
+          "lat": 44.678004,
+          "lng": -123.063524
+        },
+        {
+          "lat": 44.677681,
+          "lng": -123.063508
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 44.678889,
+            "lng": -123.062636
+          },
+          {
+            "lat": 44.678898,
+            "lng": -123.063015
+          },
+          {
+            "lat": 44.677911,
+            "lng": -123.063064
+          },
+          {
+            "lat": 44.677902,
+            "lng": -123.062685
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 94,
+        "pano": "jBfjTYkBIYA8wwGqyjWahA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 259,
+        "pano": "kwNPK9BwF8pcaM96PVI3xQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 1,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.6784,-123.06245,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "dropYard",
+    "shipRcvSeparate",
+    "postGateStaging",
+    "drivewayLong"
+  ],
+  "fieldNotes": {
+    "status": "NEW PLANT under construction / early ramp. Ball's Millersburg beverage-can plant is slated to start up in 2026 (sources say H2 2026). Only a Phase-1 building (blue/gray roof), a loop access road, employee parking, and a west-face truck apron are built; the bulk of the parcel to the south and west is bare graded farmland (future/ongoing buildout). Audited what is visible; confidence LOW.",
+    "truckGate": "Chain-link perimeter fencing along Conifer Blvd and a single gated loop entrance (Street View 2025-04); no manned guard booth visible, so scored gate=true / remoteGs=true, but access control is likely still temporary construction fencing. Flagged uncertain.",
+    "dockDoorCount": "~6 estimated on the west face of the Phase-1 building; one trailer seen at the apron. Will grow substantially at full buildout.",
+    "siteAreaAcres": "~16 ac reflects only the currently developed pad; the full Ball parcel (with graded expansion land) is materially larger.",
+    "note2": "The large multi-trailer yard EAST across Conifer Blvd is a SEPARATE trucking terminal, not Ball's."
+  },
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.aluminummarketupdate.crugroup.com/growth-markets/ball-corp-earnings-oregon-beverage-cans-tariffs/",
+        "date": "2025",
+        "type": "Ball earnings coverage / company plans",
+        "claim": "Ball is building a new beverage can plant in Millersburg OR, startup 2026"
+      },
+      {
+        "tier": 3,
+        "url": "https://maps.googleapis.com/maps/api/streetview?pano=kwNPK9BwF8pcaM96PVI3xQ",
+        "date": "2025-04",
+        "type": "Street View + satellite",
+        "claim": "Site graded/under construction at 3130 NE Transition Pkwy"
+      }
+    ],
+    "imageryDate": "satellite ~2024-2025; Street View 2025-04",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball-attested NEW plant (rooftop-geocoded to 3130 NE Transition Pkwy); startup 2026, so still construction/ramp in imagery. Per instructions, audited-visible and confidence set LOW rather than rejected for being new.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

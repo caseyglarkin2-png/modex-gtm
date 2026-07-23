@@ -1,0 +1,85 @@
+{
+  "name": "Ball - Fort Atkinson WI",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 42.9438, "lng": -88.8340 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.94505, "lng": -88.83545 },
+      { "lat": 42.94495, "lng": -88.83250 },
+      { "lat": 42.94265, "lng": -88.83270 },
+      { "lat": 42.94275, "lng": -88.83565 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.94300, "lng": -88.83370 },
+      { "lat": 42.94300, "lng": -88.83320 },
+      { "lat": 42.94270, "lng": -88.83325 },
+      { "lat": 42.94270, "lng": -88.83375 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.94430, "lng": -88.83310 },
+        { "lat": 42.94430, "lng": -88.83270 },
+        { "lat": 42.94320, "lng": -88.83280 },
+        { "lat": 42.94320, "lng": -88.83320 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 42.94440, "lng": -88.83300 },
+      { "lat": 42.94440, "lng": -88.83250 },
+      { "lat": 42.94290, "lng": -88.83260 },
+      { "lat": 42.94290, "lng": -88.83310 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 350, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 350, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 15,
+    "trailersVisible": 5,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.9438,-88.8340,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "dockDoorCount", "dropArea", "siteAreaAcres"],
+  "fieldNotes": {
+    "site": "Ball Metal Beverage Container can plant at 105 E Blackhawk Dr, Fort Atkinson WI (SE edge of town). Complex = a grey pitched-roof production hall (N) joined to a white flat-roof process hall (S, heavy rooftop equipment). Employee parking to the W; a paved truck apron runs along the E face. 201 E Cramer St (dunnage node) is a separate nearby address, not the plant.",
+    "railServed": "TRUE — a rail spur leaves the N-S mainline and runs into the plant along the east face (rail cars can be spotted for coil-in / can-out). This is the one rail-served site of the five.",
+    "truckGate": "Single entrance drive off Blackhawk Dr (at a rail grade crossing) running up the east apron; no guard booth or barrier arm visible. The two small fenced structures on the east apron are UTILITY/electrical compounds (transformers/switchgear), not a gatehouse or truck scale. Classed no-gate/no-guard, flagged medium.",
+    "docks": "~15 dock doors estimated on the east face facing the truck apron (modest external dock bank; some volume moves by the rail spur). Band 10-25.",
+    "dropArea": "No dedicated trailer-storage lot; trailers stage on the east working apron -> dropArea 0-10, dropYard false.",
+    "urbanRural": "Fort Atkinson is a small town (~12k) in Jefferson County; plant on the SE edge with farmland to the N/E -> Rural. Cell coverage fine (not isolated).",
+    "backupNote": "The entrance sits at a rail grade crossing on Blackhawk Dr; a long inbound queue could interact with the crossing, but the east apron gives internal stacking room, so not classed backup-sensitive."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf", "date": "2025-02", "type": "company locations map", "claim": "Ball's own Feb-2025 locations map lists Fort Atkinson, WI as an operating site." }
+    ],
+    "imageryDate": "2024-07 (Street View) / satellite ~2024-2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-running Ball Metal Beverage can plant, confirmed current on Ball's own 2025 locations map; not among Ball's closures.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

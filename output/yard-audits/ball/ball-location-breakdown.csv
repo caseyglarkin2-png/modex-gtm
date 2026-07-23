@@ -1,0 +1,49 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Ball - Golden CO,"Beverage Can Plant (bodies, ends, Alumi-Tek)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@39.777300,-105.167200,400m/data=!3m1!1e3"
+Ball - Findlay OH,Beverage Can Plant (bodies+ends),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.089800,-83.643800,400m/data=!3m1!1e3"
+Ball - Conroe TX,Beverage Can Plant (bodies+Alumi-Tek),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@30.349500,-95.436800,400m/data=!3m1!1e3"
+Ball - Tampa FL,Beverage Can Plant (bodies),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@28.048700,-82.405800,400m/data=!3m1!1e3"
+Ball - Williamsburg VA,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@37.206200,-76.611400,400m/data=!3m1!1e3"
+Ball - Fairfield CA,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,,,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@38.278746,-121.975622,400m/data=!3m1!1e3"
+Ball - Kapolei HI,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,,,,,YES,,,YES,,,,,Urban,,,,YES,"https://www.google.com/maps/@21.306703,-158.094845,400m/data=!3m1!1e3"
+Ball - Monticello IN,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.750222,-86.773529,400m/data=!3m1!1e3"
+Ball - Goodyear AZ,Beverage Can Plant (bodies),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@33.4995,-112.4238,400m/data=!3m1!1e3"
+Ball - Fort Worth TX,Beverage Can Plant (bodies),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.64925,-97.3153,400m/data=!3m1!1e3"
+Ball - Glendale AZ,Beverage Can Plant (bodies),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@33.5781,-112.3845,400m/data=!3m1!1e3"
+Ball - Fort Atkinson WI,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@42.9438,-88.8340,400m/data=!3m1!1e3"
+Ball - Pittston PA (Jenkins Township),Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,,,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@41.2860,-75.7725,400m/data=!3m1!1e3"
+Ball - Saratoga Springs NY,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,YES,,,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@43.0616,-73.8255,400m/data=!3m1!1e3"
+Ball - Rome GA (Cans),Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,YES,,,,YES,,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@34.3302,-85.0930,400m/data=!3m1!1e3"
+Ball - Winter Haven FL,Beverage Can Plant (bodies),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@27.94405,-81.71235,400m/data=!3m1!1e3"
+Ball - Bowling Green KY,Can End Plant (beverage can ends),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,,,YES,,,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@37.03905,-86.2979,400m/data=!3m1!1e3"
+Ball - Millersburg OR,Beverage Can Plant (bodies) / Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@44.6784,-123.06245,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,11,61%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,28%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,3,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,11,61%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,2,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,16,89%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,192 @@
+{
+  "name": "Ball - Fairfield CA",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": {
+    "lat": 38.278746,
+    "lng": -121.975622
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.2801,
+          "lng": -121.9754
+        },
+        {
+          "lat": 38.2796,
+          "lng": -121.9743
+        },
+        {
+          "lat": 38.277,
+          "lng": -121.9747
+        },
+        {
+          "lat": 38.2766,
+          "lng": -121.9756
+        },
+        {
+          "lat": 38.2772,
+          "lng": -121.9774
+        },
+        {
+          "lat": 38.2788,
+          "lng": -121.9772
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.2769,
+          "lng": -121.97585
+        },
+        {
+          "lat": 38.2769,
+          "lng": -121.975
+        },
+        {
+          "lat": 38.27638,
+          "lng": -121.9749
+        },
+        {
+          "lat": 38.27638,
+          "lng": -121.97575
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 38.2776,
+            "lng": -121.977
+          },
+          {
+            "lat": 38.27805,
+            "lng": -121.97625
+          },
+          {
+            "lat": 38.27745,
+            "lng": -121.9758
+          },
+          {
+            "lat": 38.277,
+            "lng": -121.97655
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 38.2773,
+            "lng": -121.977
+          },
+          {
+            "lat": 38.2786,
+            "lng": -121.97645
+          },
+          {
+            "lat": 38.27852,
+            "lng": -121.97622
+          },
+          {
+            "lat": 38.27722,
+            "lng": -121.97677
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 336,
+        "pano": "8gQ7cnix-2Q66U2OizoVRw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 283,
+        "pano": "8gQ7cnix-2Q66U2OizoVRw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 18.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.278746,-121.975622,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea"
+  ],
+  "fieldNotes": {
+    "truckGate": "No controlled gate or barrier arm observed; Street View car drove into the paved trailer yard beside the warehouse and trucks stage on the Huntington Dr shoulder - site reads open (2025-05 pano). A slide gate may exist but none seen.",
+    "guardShack": "No booth seen at any entrance.",
+    "backupSensitive": "Warehouse fronts Huntington Dr with minimal setback; trucks already park on the road shoulder.",
+    "multipleFacilities": "Process plant and long finished-goods warehouse are joined by an elevated conveyor bridge = one connected campus, so marked false.",
+    "railServed": "UP rail line runs along the NE edge but no spur enters the property in view.",
+    "geofence": "Oriented polygons are good-faith estimates from z17-19 overhead imagery, not surveyed."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.webpackaging.com/en/portals/ballcorporation/assets/11014942/usa-fairfield/",
+        "date": "2024-01",
+        "type": "company facility page",
+        "claim": "Ball's own portal lists the Fairfield CA beverage can plant"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.dailyrepublic.com/business/solano-business/ball-metal-36-years-of-making-cans-in-fairfield/article_17f126cf-6562-5eb6-91cf-0de8fd5b5f75.html",
+        "date": "2024-01",
+        "type": "dated trade/local press",
+        "claim": "'Ball Metal, 36 years of making cans in Fairfield' - 169 employees, 8M cans/day, operating"
+      }
+    ],
+    "imageryDate": "2025-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball's own site plus 2024 local business article confirm current operation at 2400 Huntington Dr.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

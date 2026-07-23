@@ -1,0 +1,88 @@
+{
+  "name": "Ball - Glendale AZ",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 33.5781, "lng": -112.3845 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.57955, "lng": -112.38700 },
+      { "lat": 33.57955, "lng": -112.38320 },
+      { "lat": 33.57620, "lng": -112.38320 },
+      { "lat": 33.57620, "lng": -112.38700 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.57975, "lng": -112.38380 },
+      { "lat": 33.57975, "lng": -112.38320 },
+      { "lat": 33.57930, "lng": -112.38320 },
+      { "lat": 33.57930, "lng": -112.38380 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.57900, "lng": -112.38430 },
+        { "lat": 33.57900, "lng": -112.38350 },
+        { "lat": 33.57720, "lng": -112.38350 },
+        { "lat": 33.57720, "lng": -112.38430 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.57720, "lng": -112.38470 },
+        { "lat": 33.57720, "lng": -112.38360 },
+        { "lat": 33.57690, "lng": -112.38360 },
+        { "lat": 33.57690, "lng": -112.38470 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 175, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.5781,-112.3845,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "dockDoorCount", "buildingCount"],
+  "fieldNotes": {
+    "site": "Ball operates a ~712,000 sq ft aluminum can-body plant on the integrated Red Bull / Rauch / Ball campus at the SE corner of Reems Rd & Peoria Ave (Woolf Logistics Campus), Glendale AZ. Started up Q1 2021. Cans move by a 280-ft conveyor bridge to the adjacent Red Bull/Rauch FILLING hall, then a 418-ft bridge to the 'Project Lagerhaus' distribution warehouse. The three buildings form a connected chain.",
+    "buildingAttribution": "Audited building = the center manufacturing hall (the chain's process building): heavy rooftop process equipment + a large on-site electrical switchyard (can body-making is very power-intensive) + its own trailer staging and dock bank. This is the building the 'Ball Metal Beverage Container Glendale' address geocodes to (15102 W Peoria Ave). Building-level attribution on a shared, bridge-connected campus is medium confidence: the west warehouse box and the south solar-roof distribution building are the fill/Lagerhaus partners.",
+    "guardShack": "Campus is gated (screen walls + controlled entry drive off Peoria Ave visible in Street View); a small booth-like structure sits at the entrance. Guard vs kiosk not fully resolvable from imagery/road view — flagged.",
+    "multipleFacilities": "Campus of 3+ connected large buildings (Ball can plant, Red Bull/Rauch fill, Lagerhaus distribution) plus neighboring tenants.",
+    "railServed": "No rail spur; desert edge-of-metro site, all-truck plus the internal conveyor bridges.",
+    "urbanRural": "Far NW edge of the Phoenix metro (Glendale/Waddell) inside an active master-planned industrial park with adjacent residential subdivisions; classed Urban (metro fabric), though farmland abuts to the south/east.",
+    "dockDoorCount": "Estimated ~16 external dock doors (south hall NE face + east yard); most can output leaves by internal conveyor bridge, so external docks are modest for the building size."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf", "date": "2025-02", "type": "company locations map", "claim": "Ball's own Feb-2025 global locations map lists Glendale (AZ) as an operating site; Phoenix and St. Paul (closed plants) are absent." },
+      { "tier": 1, "url": "https://www.gpec.org/news/red-bull-ball-corporation-and-rauch-select-glendale-for-new-multimillion-dollar-facility/", "date": "2019-03", "type": "development PR", "claim": "Ball Corporation named as building the can plant on the Glendale Reems/Peoria campus; plant started Q1 2021." }
+    ],
+    "imageryDate": "2024-11 (Street View) / satellite ~2024-2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball's 2021-startup Glendale can-body plant is current per Ball's own 2025 locations map; the Ball AZ plant that closed was the older Phoenix site, not Glendale (which Ball was ramping up).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

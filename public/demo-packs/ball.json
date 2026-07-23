@@ -1,0 +1,4155 @@
+{
+  "schemaVersion": "2",
+  "builtAt": "2026-07-23T17:39:40.674Z",
+  "account": {
+    "slug": "ball",
+    "displayName": "Ball Corporation",
+    "archetype": "manufacturer",
+    "siteCount": 18,
+    "coverageNote": {
+      "auditedCount": 18,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "We audited the 18 active US aluminum beverage-can and can-end plants Ball operates. Ball's wider footprint (international plants, the Boulder aerospace business, and the divested aluminum-cup JV) sits outside the beverage-can yard network and is excluded by design."
+    },
+    "featuredSiteId": "13-ball-pittston-pa",
+    "dossierIntro": "Ball runs its aluminum can plants around the clock, and empty cans leave by the trailer-load, so every plant is outbound-dominated. The yard is the throttle on how fast finished cans reach the filling lines. We audited the 18 active US beverage-can and can-end plants Ball operates: 476 dock doors and 857 trailer positions across 677 acres, almost all of it moving by truck, with only 3 sites touching rail. The tell is at the gate. Eleven of the eighteen plants run as open truck yards with no gate control and no guard booth at all, including Pittston PA, the single largest yard we mapped at roughly 60 docks and room for 150 trailers. YardFlow puts one orchestrated gate-to-dock move over every one of them.",
+    "surprisingFindings": [
+      "Eleven of the eighteen plants run as open truck yards with no gate and no guard booth, so nothing controls when trailers arrive or leave.",
+      "Pittston PA is the biggest yard we mapped: 88 acres, about 60 dock doors, room for 150 trailers, and no gate control at all.",
+      "Findlay OH is the outbound hub, a guarded 95-acre campus with about 70 docks and 150 trailer spots, and the only site with a staffed guard booth."
+    ]
+  },
+  "research": null,
+  "network": {
+    "bbox": [
+      -158.0956,
+      21.3056,
+      -73.82355,
+      44.679363
+    ],
+    "archetypeMix": {
+      "#3": 11,
+      "#6": 2,
+      "#9": 5
+    },
+    "totals": {
+      "dockDoors": 476,
+      "trailerCapacity": 857,
+      "gates": 22,
+      "railServed": 3,
+      "acres": 676.8
+    },
+    "sites": [
+      {
+        "id": "01-ball-golden-co",
+        "name": "Ball - Golden CO",
+        "type": "Beverage Can Plant (bodies, ends, Alumi-Tek)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "dropArea",
+          "dropYard"
+        ],
+        "center": {
+          "lat": 39.7773,
+          "lng": -105.1672
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 39.77855,
+                "lng": -105.16545
+              },
+              {
+                "lat": 39.77835,
+                "lng": -105.1714
+              },
+              {
+                "lat": 39.7772,
+                "lng": -105.1711
+              },
+              {
+                "lat": 39.7769,
+                "lng": -105.1686
+              },
+              {
+                "lat": 39.7766,
+                "lng": -105.1666
+              },
+              {
+                "lat": 39.7764,
+                "lng": -105.16545
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.77694,
+                "lng": -105.16935
+              },
+              {
+                "lat": 39.77694,
+                "lng": -105.16895
+              },
+              {
+                "lat": 39.77662,
+                "lng": -105.16895
+              },
+              {
+                "lat": 39.77662,
+                "lng": -105.16935
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 39.78,
+                  "lng": -105.1724
+                },
+                {
+                  "lat": 39.77995,
+                  "lng": -105.1699
+                },
+                {
+                  "lat": 39.7787,
+                  "lng": -105.17005
+                },
+                {
+                  "lat": 39.77875,
+                  "lng": -105.1725
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 39.77686,
+                  "lng": -105.16852
+                },
+                {
+                  "lat": 39.7768,
+                  "lng": -105.16632
+                },
+                {
+                  "lat": 39.77662,
+                  "lng": -105.16634
+                },
+                {
+                  "lat": 39.77668,
+                  "lng": -105.16854
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 53,
+              "pano": "aLOScVJ9QrjqThCOrtvTOQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 22,
+              "pano": "bFPhTabkt9GtCQhN86Smfw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball's oldest beverage can plant, operating on this site since 1962 (originally Jeffco\nManufacturing). Four can-manufacturing lines; produces 8/12/16/24-oz bodies plus ends\nand a CapCan line; ~95M cans/day; ~360 employees. Corroborated by the Golden Chamber\nmember listing at 4525 Indiana St and a 2024 Ball-hosted Women in Manufacturing factory\ntour of the plant. Ran the closure gauntlet: this site is NOT among Ball's 2022-2024\nNorth American plant closures (Phoenix, St. Paul MN, Wallkill NY, Kent WA, Verona VA\nslug plant). Company-operated, owned. `verdict = confirmed`.",
+        "mapsUrl": "https://www.google.com/maps/@39.777300,-105.167200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck gate at the operational interface. The south dock apron ('EAST DOCKS' signage, 2025-08 Street View) is open to the public road with tractors and trailers backed directly into dock doors, no barrier arm, no guard booth, no manned checkpoint. Perimeter is partial chain-link with sliding yard gates (west drive, 2022 SV) but the primary truck/dock access is uncontrolled.",
+          "guardShack": "None observed walking the frontage road east, west, SE and SW panos (2019-2025).",
+          "dockDoors": "Estimate. Long dock line along the south face of the main block ('EAST DOCKS'); ~5-6 trailers visible backed in at capture, banks extend across the south wall. 25-50 band is a modeled estimate for a plant of this output (4 can lines, ~95M cans/day).",
+          "dropArea": "Freight-trailer rows staged NW of the plant between the building and the rail corridor (~25-40 trailers). Note: a separate RV/boat storage lot sits further NW at the reservoir edge and is excluded.",
+          "railServed": "Rail spur runs along the north edge of the property into the plant (visible track, NW-SE corridor).",
+          "urbanRural": "Golden/Arvada industrial corridor within the Denver metro fabric."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://business.goldenchamber.org/list/member/ball-corporation-1049",
+              "date": "2026-06",
+              "type": "company/chamber facility listing",
+              "claim": "Ball Corporation manufacturing at 4525 Indiana St, Golden CO - current member listing"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.womeninmanufacturing.org/events/wim-colorado-ball-metal-packaging-tour",
+              "date": "2024",
+              "type": "company facility tour (Ball-hosted)",
+              "claim": "Ball Metal Beverage Packaging factory tour at the Golden plant"
+            }
+          ],
+          "imageryDate": "2025-08 (Street View); satellite 2026 Airbus/Maxar vintage",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball's oldest beverage can plant (operating since 1962); active company/chamber listings and a 2024 Ball-hosted factory tour; not on Ball's 2022-2024 North American closure list (Phoenix, St. Paul, Wallkill, Kent, Verona VA slug).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "02-ball-findlay-oh",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "railServed"
+        ],
+        "center": {
+          "lat": 41.0898,
+          "lng": -83.6438
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 41.0958,
+                "lng": -83.6492
+              },
+              {
+                "lat": 41.0952,
+                "lng": -83.6358
+              },
+              {
+                "lat": 41.0868,
+                "lng": -83.6358
+              },
+              {
+                "lat": 41.0872,
+                "lng": -83.642
+              },
+              {
+                "lat": 41.0858,
+                "lng": -83.6423
+              },
+              {
+                "lat": 41.0873,
+                "lng": -83.6492
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.0896,
+                "lng": -83.64355
+              },
+              {
+                "lat": 41.0896,
+                "lng": -83.64305
+              },
+              {
+                "lat": 41.08865,
+                "lng": -83.64305
+              },
+              {
+                "lat": 41.08865,
+                "lng": -83.64355
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 41.0908,
+                  "lng": -83.6372
+                },
+                {
+                  "lat": 41.0908,
+                  "lng": -83.6337
+                },
+                {
+                  "lat": 41.0865,
+                  "lng": -83.6337
+                },
+                {
+                  "lat": 41.0865,
+                  "lng": -83.6372
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 41.092,
+                  "lng": -83.6456
+                },
+                {
+                  "lat": 41.092,
+                  "lng": -83.6452
+                },
+                {
+                  "lat": 41.0892,
+                  "lng": -83.6452
+                },
+                {
+                  "lat": 41.0892,
+                  "lng": -83.6456
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.0908,
+                  "lng": -83.6423
+                },
+                {
+                  "lat": 41.0908,
+                  "lng": -83.6419
+                },
+                {
+                  "lat": 41.087,
+                  "lng": -83.6419
+                },
+                {
+                  "lat": 41.087,
+                  "lng": -83.6423
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 41.0889,
+                "lng": -83.6439
+              },
+              {
+                "lat": 41.0889,
+                "lng": -83.64355
+              },
+              {
+                "lat": 41.0885,
+                "lng": -83.64355
+              },
+              {
+                "lat": 41.0885,
+                "lng": -83.6439
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 0,
+              "pano": "SGrxHolhBQ-DfOauuZfjGw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 337,
+              "pano": "SGrxHolhBQ-DfOauuZfjGw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
+        "dossierExcerpt": "Active Ball beverage can plant on the east edge of Findlay. Identity confirmed directly in\nimagery by the iconic red-white-blue Ball water tower on site (2025-03 Street View). Ball's\nown logistics dunnage-return location list carries the Findlay plant; a US Representative's\n2023 site-visit post names \"Ball Corporation, a beverage can plant in Findlay.\" Not on Ball's\n2022-2024 North American closure list (Phoenix, St. Paul, Wallkill, Kent, Verona VA slug).\nCompany-operated. Note: also listed at 12340 Township Rd 99 (a different frontage of the same\nsite). `verdict = confirmed`.",
+        "mapsUrl": "https://www.google.com/maps/@41.089800,-83.643800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Guarded gate up the private entrance drive: a peaked-roof guard booth sits in the drive median (z20), with split inbound/outbound lanes, barrier-arm gate hardware, and two vehicles queued at capture. Well set back from the public road behind a field/retention-pond buffer.",
+          "guardShack": "Peaked/diamond-roof booth in the entrance median - classic staffed truck-gate booth.",
+          "preGateStaging": "Paved turnaround/staging bulb at the gate approach where trucks can wait before the guard.",
+          "postGateStaging": "Wide paved yard inside the gate serving the plant, warehouses and trailer rows.",
+          "drivewayLong": "Long approach drive from gate to the docks/warehouses (~300m+), holds a deep queue.",
+          "entryLanes": "~2 inbound lanes at the booth (estimate).",
+          "exitLanes": "~2 outbound lanes (estimate).",
+          "dockDoorCount": "Estimate - multiple dock banks across the plant plus 2-3 long distribution warehouses; heavy outbound can shipping. 50+ band.",
+          "dropArea": "Large outbound trailer drop yards east of the warehouses, rows of trailers - 50+.",
+          "shipRcvSeparate": "Distinct dock clusters: plant docks (west face) vs the distribution-warehouse docks (facing the east trailer yards).",
+          "multipleFacilities": "Campus: manufacturing plant + multiple long distribution warehouses + trailer yards on the same Ball property.",
+          "railServed": "No rail spur observed running into the property (the long buildings are cross-dock warehouses, truck-served).",
+          "urbanRural": "Eastern edge of Findlay in an industrial park; farmland immediately adjacent (Rural per rubric).",
+          "identity": "Confirmed Ball via the iconic red-white-blue Ball water tower on site (2025-03 Street View)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "http://www.cask.com/wp-content/uploads/Ball-Metal-Beverage-Dunnage-Return-Location-Contacts.pdf",
+              "date": "2023",
+              "type": "Ball logistics/dunnage-return location list",
+              "claim": "Ball Metal Beverage lists the Findlay OH plant as an active return/operating location"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.facebook.com/boblatta/posts/1517230113107163",
+              "date": "2023",
+              "type": "US Rep site visit post",
+              "claim": "Congressman visited Ball Corporation beverage can plant in Findlay"
+            }
+          ],
+          "imageryDate": "2025-03 (Street View); satellite 2026 Airbus/Maxar/USDA vintage",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Ball beverage can plant on Distribution Dr, Findlay; on-site Ball-branded water tower visible in current Street View; multiple current listings; not on Ball's 2022-2024 North American closure list.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "03-ball-conroe-tx",
+        "name": "Ball - Conroe TX",
+        "type": "Beverage Can Plant (bodies+Alumi-Tek)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 30.3495,
+          "lng": -95.4368
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 30.3518,
+                "lng": -95.4403
+              },
+              {
+                "lat": 30.3516,
+                "lng": -95.4331
+              },
+              {
+                "lat": 30.347,
+                "lng": -95.4331
+              },
+              {
+                "lat": 30.3469,
+                "lng": -95.4363
+              },
+              {
+                "lat": 30.34695,
+                "lng": -95.4374
+              },
+              {
+                "lat": 30.3472,
+                "lng": -95.4403
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 30.34765,
+                "lng": -95.43705
+              },
+              {
+                "lat": 30.34765,
+                "lng": -95.4366
+              },
+              {
+                "lat": 30.34695,
+                "lng": -95.4366
+              },
+              {
+                "lat": 30.34695,
+                "lng": -95.43705
+              }
+            ]
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 30.34925,
+                  "lng": -95.4376
+                },
+                {
+                  "lat": 30.3492,
+                  "lng": -95.4361
+                },
+                {
+                  "lat": 30.34895,
+                  "lng": -95.43615
+                },
+                {
+                  "lat": 30.349,
+                  "lng": -95.43765
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 9,
+              "pano": "vZx6KXjYVQU1jFPiD_9jhA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 9,
+              "pano": "vZx6KXjYVQU1jFPiD_9jhA",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 15,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Ball's own corporate location page profiles the Conroe beverage-packaging plant: a\n\"more than 30-acre facility,\" established 1987, high-speed lines running 2,250+ cans/min.\nAn active FY2024 EPA TRI facility report at 1000 N FM 3083 (a self-attested federal\noperating report) confirms current operation. Not on Ball's 2022-2024 North American\nclosure list. Company-operated. `verdict = confirmed`.",
+        "mapsUrl": "https://www.google.com/maps/@30.349500,-95.436800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Plant is fully chain-link perimeter-fenced (confirmed in 2026-01 Street View and satellite) with a single controlled vehicle entrance from FM 3083; the yard is gated. truckGate = true on the fenced/controlled access.",
+          "guardShack": "No manned guard booth confirmed. The FM 3083 entrance is an open landscaped drive (monument-sign median, no barrier arm at the road); the actual yard gate sits deeper in. No booth verified, so guardShack = false.",
+          "remoteGs": "Gate present, no confirmed guard shack => remoteGs true (badge/kiosk-style entry inferred). Flagged uncertain.",
+          "postGateStaging": "Large paved apron in front of the south dock bank holds queued trucks inside the fence.",
+          "dockDoors": "South-face dock bank with 2-3 trailers backed in at capture; ~10-25 band (estimate).",
+          "dropArea": "No dedicated drop yard; a few trailers stage on the west perimeter road and at the docks (0-10).",
+          "urbanRural": "Heavily wooded, isolated plant clearing on the eastern edge of Conroe; a residential subdivision borders to the south but the plant setting is rural-industrial (Rural per rubric).",
+          "railServed": "No rail spur into the property.",
+          "siteAreaAcres": "Ball states a 'more than 30-acre facility' (est. 1987); polygon ~38 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.webpackaging.com/en/portals/ballcorporation/assets/11584275/usa-conroe/",
+              "date": "2024",
+              "type": "Ball corporate location page (Conroe)",
+              "claim": "Ball's own site profiles the Conroe TX beverage-packaging plant, >30 acres, est. 1987, 2,250+ cans/min"
+            },
+            {
+              "tier": 1,
+              "url": "https://enviro.epa.gov/triexplorer/release_fac_profile?TRI=77303BLLPC1000N",
+              "date": "2024",
+              "type": "EPA TRI facility report (FY2024)",
+              "claim": "Ball Metal Packaging, 1000 N FM 3083, Conroe - active TRI reporter for FY2024 (self-attested federal operating report)"
+            }
+          ],
+          "imageryDate": "2026-01/2026-02 (Street View); satellite 2026 Airbus/Maxar/Vexcel vintage",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball's own corporate location page profiles the Conroe plant; active FY2024 EPA TRI federal operating report at 1000 N FM 3083; not on Ball's 2022-2024 closure list.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "04-ball-tampa-fl",
+        "name": "Ball - Tampa FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 28.0487,
+          "lng": -82.4058
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 28.0508,
+                "lng": -82.4079
+              },
+              {
+                "lat": 28.0506,
+                "lng": -82.4048
+              },
+              {
+                "lat": 28.0473,
+                "lng": -82.4048
+              },
+              {
+                "lat": 28.0473,
+                "lng": -82.4085
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 28.0476,
+                "lng": -82.4052
+              },
+              {
+                "lat": 28.0476,
+                "lng": -82.4048
+              },
+              {
+                "lat": 28.0471,
+                "lng": -82.4048
+              },
+              {
+                "lat": 28.0471,
+                "lng": -82.4052
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 28.05,
+                  "lng": -82.4051
+                },
+                {
+                  "lat": 28.05,
+                  "lng": -82.4047
+                },
+                {
+                  "lat": 28.0478,
+                  "lng": -82.4047
+                },
+                {
+                  "lat": 28.0478,
+                  "lng": -82.4051
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 28.0496,
+                  "lng": -82.4066
+                },
+                {
+                  "lat": 28.04955,
+                  "lng": -82.4054
+                },
+                {
+                  "lat": 28.04935,
+                  "lng": -82.40545
+                },
+                {
+                  "lat": 28.0494,
+                  "lng": -82.40665
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 2,
+              "pano": "ztRH9cIQfz9plQjPoTKwGg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 2,
+              "pano": "ztRH9cIQfz9plQjPoTKwGg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 22,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "Hillsborough County parcel record lists Ball Metal Beverage Container as the owner of\n4700 E Whiteway Dr (owner = operator here - a Ball-owned/operated plant). Current chamber\nmembership (Tampa Bay Chamber) and business listings (Yelp updated 2026) corroborate.\nNot on Ball's 2022-2024 North American closure list. `verdict = confirmed`.",
+        "mapsUrl": "https://www.google.com/maps/@28.048700,-82.405800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Chain-link perimeter fence around the plant yard (visible in 2025-11 Street View along the Whiteway frontage). Truck access via the east private drive/staging lane and a south drive off Whiteway. Gated/controlled perimeter but the access lanes appear open during operations. Flagged uncertain.",
+          "guardShack": "No staffed guard booth observed. guardShack false; with a gate and no booth, remoteGs true (badge/kiosk inferred).",
+          "drivewayShort": "Compact urban site; short approach from road to docks.",
+          "dockDoors": "Docks on the north building's south face and the plant's SE; ~10-25 band (estimate).",
+          "dropArea": "Outbound trailers stage along the east private drive (~10-15).",
+          "multipleFacilities": "Four buildings on the Ball property (main plant + north building + east ancillary + west ancillary), consistent with public records.",
+          "urbanRural": "Dense Tampa residential neighborhood (Temple Terrace/East Tampa); Urban.",
+          "railServed": "No rail spur into the property.",
+          "backupSensitive": "Compact site with staging along a narrow drive near residential and a public park; borderline but left false (drive has room)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://floridaparcels.com/property/39/19281642Z000000000360A",
+              "date": "2025",
+              "type": "county property-appraiser parcel record",
+              "claim": "4700 E Whiteway Dr owned by Ball Metal Beverage Container (owner = operator; Ball-owned plant)"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.tampabaychamber.com/membership/fit-two/ball-corporation/",
+              "date": "2026",
+              "type": "chamber member listing",
+              "claim": "Ball Corporation active member; aluminum packaging plant in Tampa"
+            }
+          ],
+          "imageryDate": "2025-11 (Street View); satellite 2026 Airbus/Maxar vintage",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hillsborough County parcel record lists Ball Metal Beverage Container as owner of 4700 E Whiteway Dr (Ball-owned/operated plant); current chamber + business listings (Yelp updated 2026); not on Ball's 2022-2024 closure list.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "05-ball-williamsburg-va",
+        "name": "Ball - Williamsburg VA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "multipleFacilities",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 37.2062,
+          "lng": -76.6114
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 37.20905,
+                "lng": -76.616
+              },
+              {
+                "lat": 37.208,
+                "lng": -76.6085
+              },
+              {
+                "lat": 37.2043,
+                "lng": -76.6092
+              },
+              {
+                "lat": 37.2044,
+                "lng": -76.6157
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 37.2081,
+                "lng": -76.6099
+              },
+              {
+                "lat": 37.2081,
+                "lng": -76.6095
+              },
+              {
+                "lat": 37.2076,
+                "lng": -76.6095
+              },
+              {
+                "lat": 37.2076,
+                "lng": -76.6099
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 37.2056,
+                  "lng": -76.612
+                },
+                {
+                  "lat": 37.2056,
+                  "lng": -76.6112
+                },
+                {
+                  "lat": 37.2051,
+                  "lng": -76.6112
+                },
+                {
+                  "lat": 37.2051,
+                  "lng": -76.612
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 37.20605,
+                  "lng": -76.6127
+                },
+                {
+                  "lat": 37.206,
+                  "lng": -76.612
+                },
+                {
+                  "lat": 37.2058,
+                  "lng": -76.61205
+                },
+                {
+                  "lat": 37.20585,
+                  "lng": -76.61275
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 192,
+              "pano": "TfRN43U5fcrH1_OHyESymw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 192,
+              "pano": "TfRN43U5fcrH1_OHyESymw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 40,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball Metal Beverage Container operates at 8935 Pocahontas Trail: EPA TRI facility record\n(23185BLLPC8935P) plus a current Greater Williamsburg Chamber directory listing. Distinct\nfrom Ball's closed Verona VA aluminum-slug plant (a different site) - this can plant is not\non Ball's 2022-2024 closure list. Company-operated. `verdict = confirmed`.",
+        "mapsUrl": "https://www.google.com/maps/@37.206200,-76.611400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck gate confirmed. The entrance from Pocahontas Trail (NE) is an open perimeter drive; perimeter is vegetation-buffered rather than hard-fenced. A small standalone structure sits at the plant's NE corner (utility or possible gatehouse - unconfirmed). Street View is vegetation-screened, so gate/booth control could not be verified. truckGate = false on the evidence, flagged uncertain.",
+          "guardShack": "No staffed booth confirmed (SV screened). guardShack false; no confirmed gate so remoteGs also false.",
+          "drivewayLong": "Long perimeter/approach drive from Pocahontas Trail around to the SW docks.",
+          "dockDoors": "SW dock apron of the main plant plus a west warehouse dock face; ~25-50 band (estimate).",
+          "dropArea": "Modest trailer staging near the SW docks (~10-25).",
+          "railServed": "The east corridor is electric transmission lines, not rail - no rail spur into the property.",
+          "multipleFacilities": "Main plant (with attached process building) plus a separate long west warehouse of uncertain tenancy; treated as a single Ball facility (false), flagged uncertain.",
+          "urbanRural": "James River Commerce Center on the edge of Williamsburg/Grove; wooded with low-density residential around (Rural per rubric, flagged)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://enviro.epa.gov/triexplorer/release_fac_profile?TRI=23185BLLPC8935P",
+              "date": "2020",
+              "type": "EPA TRI facility report",
+              "claim": "Ball Metal Beverage Container, 8935 Pocahontas Trail, Williamsburg - TRI reporting facility (self-attested federal operating report)"
+            },
+            {
+              "tier": 1,
+              "url": "https://connect.businesswilliamsburg.com/directory/Details/ball-metal-beverage-container-group-2458962",
+              "date": "2026",
+              "type": "Greater Williamsburg Chamber directory listing",
+              "claim": "Ball Metal Beverage Container Group active at 8935 Pocahontas Trail, Williamsburg"
+            }
+          ],
+          "imageryDate": "2024-09 (Street View); satellite 2026 Airbus/Maxar vintage",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "EPA TRI facility record + current Greater Williamsburg Chamber directory listing at 8935 Pocahontas Trail; distinct from Ball's closed Verona VA slug plant; not on Ball's 2022-2024 can-plant closure list.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "06-ball-fairfield-ca",
+        "name": "Ball - Fairfield CA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 38.278746,
+          "lng": -121.975622
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 38.2801,
+                "lng": -121.9754
+              },
+              {
+                "lat": 38.2796,
+                "lng": -121.9743
+              },
+              {
+                "lat": 38.277,
+                "lng": -121.9747
+              },
+              {
+                "lat": 38.2766,
+                "lng": -121.9756
+              },
+              {
+                "lat": 38.2772,
+                "lng": -121.9774
+              },
+              {
+                "lat": 38.2788,
+                "lng": -121.9772
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 38.2769,
+                "lng": -121.97585
+              },
+              {
+                "lat": 38.2769,
+                "lng": -121.975
+              },
+              {
+                "lat": 38.27638,
+                "lng": -121.9749
+              },
+              {
+                "lat": 38.27638,
+                "lng": -121.97575
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 38.2776,
+                  "lng": -121.977
+                },
+                {
+                  "lat": 38.27805,
+                  "lng": -121.97625
+                },
+                {
+                  "lat": 38.27745,
+                  "lng": -121.9758
+                },
+                {
+                  "lat": 38.277,
+                  "lng": -121.97655
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 38.2773,
+                  "lng": -121.977
+                },
+                {
+                  "lat": 38.2786,
+                  "lng": -121.97645
+                },
+                {
+                  "lat": 38.27852,
+                  "lng": -121.97622
+                },
+                {
+                  "lat": 38.27722,
+                  "lng": -121.97677
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 336,
+              "pano": "8gQ7cnix-2Q66U2OizoVRw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 283,
+              "pano": "8gQ7cnix-2Q66U2OizoVRw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 18.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "- Tier 1: Ball's own facility portal lists the USA-Fairfield beverage can plant (webpackaging Ball Corporation portal).\n- Tier 1: Daily Republic, \"Ball Metal, 36 years of making cans in Fairfield\" (2024) — 169 employees, ~8M cans/day, current operation.\n- Divestiture gauntlet run: no closure/sale hit for Fairfield. The 2023 California-area Ball closure was Kent WA, not Fairfield. Roster address 2345 Huntington Dr; Ball's own frontage is 2400 Huntington Dr (same parcel). Imagery 2025-05.",
+        "mapsUrl": "https://www.google.com/maps/@38.278746,-121.975622,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled gate or barrier arm observed; Street View car drove into the paved trailer yard beside the warehouse and trucks stage on the Huntington Dr shoulder - site reads open (2025-05 pano). A slide gate may exist but none seen.",
+          "guardShack": "No booth seen at any entrance.",
+          "backupSensitive": "Warehouse fronts Huntington Dr with minimal setback; trucks already park on the road shoulder.",
+          "multipleFacilities": "Process plant and long finished-goods warehouse are joined by an elevated conveyor bridge = one connected campus, so marked false.",
+          "railServed": "UP rail line runs along the NE edge but no spur enters the property in view.",
+          "geofence": "Oriented polygons are good-faith estimates from z17-19 overhead imagery, not surveyed."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.webpackaging.com/en/portals/ballcorporation/assets/11014942/usa-fairfield/",
+              "date": "2024-01",
+              "type": "company facility page",
+              "claim": "Ball's own portal lists the Fairfield CA beverage can plant"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.dailyrepublic.com/business/solano-business/ball-metal-36-years-of-making-cans-in-fairfield/article_17f126cf-6562-5eb6-91cf-0de8fd5b5f75.html",
+              "date": "2024-01",
+              "type": "dated trade/local press",
+              "claim": "'Ball Metal, 36 years of making cans in Fairfield' - 169 employees, 8M cans/day, operating"
+            }
+          ],
+          "imageryDate": "2025-05",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball's own site plus 2024 local business article confirm current operation at 2400 Huntington Dr.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "07-ball-kapolei-hi",
+        "name": "Ball - Kapolei HI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dropArea",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 21.306703,
+          "lng": -158.094845
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 21.30765,
+                "lng": -158.0956
+              },
+              {
+                "lat": 21.30745,
+                "lng": -158.0938
+              },
+              {
+                "lat": 21.3064,
+                "lng": -158.0938
+              },
+              {
+                "lat": 21.3056,
+                "lng": -158.0945
+              },
+              {
+                "lat": 21.306,
+                "lng": -158.0956
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 21.3074,
+                "lng": -158.09565
+              },
+              {
+                "lat": 21.3074,
+                "lng": -158.0952
+              },
+              {
+                "lat": 21.3069,
+                "lng": -158.0952
+              },
+              {
+                "lat": 21.3069,
+                "lng": -158.09565
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 21.3072,
+                  "lng": -158.09525
+                },
+                {
+                  "lat": 21.3064,
+                  "lng": -158.09525
+                },
+                {
+                  "lat": 21.30632,
+                  "lng": -158.09492
+                },
+                {
+                  "lat": 21.30712,
+                  "lng": -158.09492
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 21.3072,
+                  "lng": -158.095
+                },
+                {
+                  "lat": 21.30632,
+                  "lng": -158.095
+                },
+                {
+                  "lat": 21.30632,
+                  "lng": -158.0949
+                },
+                {
+                  "lat": 21.3072,
+                  "lng": -158.0949
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 357,
+              "pano": "7GPBpCVLYAAhdi6cl33p8Q",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 333,
+              "pano": "7GPBpCVLYAAhdi6cl33p8Q",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "- Tier 1: \"Ball Corporation Hawaii Can Plant,\" 91-320 Komohana St — current business listing.\n- Tier 1: current Yelp/Yahoo/directory listings place Ball (metal cans) at the exact address; D&B branch listing active.\n- Divestiture gauntlet run: no closure/sale signal for the Hawaii plant. Imagery 2024 (Street View 2019-07 is the newest pano).",
+        "mapsUrl": "https://www.google.com/maps/@21.306703,-158.094845,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Older compact plant in Campbell Industrial Park; docks and trailer staging are on the west face opening onto a shared paved yard between neighboring industrial lots. No barrier arm or booth visible (2019-07 pano is newest available). Reads as a fenced-but-open urban site.",
+          "guardShack": "No guard booth seen; office/flag frontage on Komohana St.",
+          "backupSensitive": "Tight urban industrial parcel; limited stacking depth on the west yard.",
+          "dropArea": "West-face yard held ~6-8 trailers backed to docks; little dedicated drop room.",
+          "railServed": "No rail on this part of Oahu.",
+          "geofence": "Oriented polygons estimated from z17-19 imagery; Street View is 2019 vintage."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://ball-corporation-hawaii-can-plant.hub.biz/",
+              "date": "2025-01",
+              "type": "business listing (Ball Corporation Hawaii Can Plant)",
+              "claim": "Ball Corporation Hawaii Can Plant at 91-320 Komohana St, current"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.yelp.com/biz/ball-corporation-kapolei",
+              "date": "2025-01",
+              "type": "current directory listing",
+              "claim": "Ball Corporation, 91-320 Komohana St, Kapolei - metal cans, operating"
+            }
+          ],
+          "imageryDate": "2024",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple current listings place Ball's Hawaii can plant at this exact address; no closure signal found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "08-ball-monticello-in",
+        "name": "Ball - Monticello IN",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 40.750222,
+          "lng": -86.773529
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.7513,
+                "lng": -86.7748
+              },
+              {
+                "lat": 40.7513,
+                "lng": -86.77235
+              },
+              {
+                "lat": 40.74928,
+                "lng": -86.77235
+              },
+              {
+                "lat": 40.74928,
+                "lng": -86.7748
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.75125,
+                "lng": -86.7747
+              },
+              {
+                "lat": 40.75125,
+                "lng": -86.7742
+              },
+              {
+                "lat": 40.7509,
+                "lng": -86.7742
+              },
+              {
+                "lat": 40.7509,
+                "lng": -86.7747
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.74952,
+                  "lng": -86.7742
+                },
+                {
+                  "lat": 40.74952,
+                  "lng": -86.77255
+                },
+                {
+                  "lat": 40.74936,
+                  "lng": -86.77255
+                },
+                {
+                  "lat": 40.74936,
+                  "lng": -86.7742
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.75082,
+                  "lng": -86.7743
+                },
+                {
+                  "lat": 40.75082,
+                  "lng": -86.7733
+                },
+                {
+                  "lat": 40.7506,
+                  "lng": -86.7733
+                },
+                {
+                  "lat": 40.7506,
+                  "lng": -86.7743
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.7496,
+                  "lng": -86.7742
+                },
+                {
+                  "lat": 40.7496,
+                  "lng": -86.7725
+                },
+                {
+                  "lat": 40.74952,
+                  "lng": -86.7725
+                },
+                {
+                  "lat": 40.74952,
+                  "lng": -86.7742
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 128,
+              "pano": "2N9XDJYZmO6uk8ytxOt_GQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 106,
+              "pano": "2N9XDJYZmO6uk8ytxOt_GQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 13,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "- Tier 1: Active Ball-domain careers reqs (jobs.ball.com) — Production Technician, Monticello IN 47960, \"24/7-365\" plant, dated 2025-03.\n- Ball 10-K lists a Monticello IN bodies plant; operating since 1988. Divestiture gauntlet run: no closure/sale hit. Imagery 2024 satellite; Street View 2026-04.",
+        "mapsUrl": "https://www.google.com/maps/@40.750222,-86.773529,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Both the west office drive and the north lot/truck-court drive off N 6th St are open, unbarriered approaches (2026-04 pano). No barrier arm or gatehouse seen.",
+          "guardShack": "Small tan structure near the north entrance is an electrical/utility building set back in the lot, not a gate booth.",
+          "dropArea": "Row of ~6 drop trailers along the south wall plus trailers in the north truck court.",
+          "multipleFacilities": "Pale can-plant building plus attached darker finished-goods warehouse on the east = one connected plant.",
+          "railServed": "N-S rail line runs along the far side of N 6th St; no spur enters the property in view.",
+          "geofence": "Building sits near square-to-north; perimeter is a good-faith rectangle from z18 imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.ball.com/corp_packaging/job/Monticello-Production-Technician-IN-47960/1271532500/",
+              "date": "2025-03",
+              "type": "active careers requisition on Ball domain",
+              "claim": "Ball posts Production Technician reqs at Monticello IN 47960, 24/7 plant"
+            }
+          ],
+          "imageryDate": "2024",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Ball-domain job reqs at the Monticello plant address confirm current staffing/operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "09-ball-goodyear-az",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryExitSeparate",
+          "shipRcvSeparate",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 33.4995,
+          "lng": -112.4238
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.5011,
+                "lng": -112.4256
+              },
+              {
+                "lat": 33.5011,
+                "lng": -112.4218
+              },
+              {
+                "lat": 33.4985,
+                "lng": -112.4218
+              },
+              {
+                "lat": 33.4985,
+                "lng": -112.4256
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.50065,
+                "lng": -112.425
+              },
+              {
+                "lat": 33.50065,
+                "lng": -112.4245
+              },
+              {
+                "lat": 33.50035,
+                "lng": -112.4245
+              },
+              {
+                "lat": 33.50035,
+                "lng": -112.425
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.50092,
+                  "lng": -112.4245
+                },
+                {
+                  "lat": 33.50092,
+                  "lng": -112.4225
+                },
+                {
+                  "lat": 33.5006,
+                  "lng": -112.4225
+                },
+                {
+                  "lat": 33.5006,
+                  "lng": -112.4245
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.49872,
+                  "lng": -112.4248
+                },
+                {
+                  "lat": 33.49872,
+                  "lng": -112.4225
+                },
+                {
+                  "lat": 33.49845,
+                  "lng": -112.4225
+                },
+                {
+                  "lat": 33.49845,
+                  "lng": -112.4248
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.50058,
+                  "lng": -112.4245
+                },
+                {
+                  "lat": 33.50058,
+                  "lng": -112.4223
+                },
+                {
+                  "lat": 33.50048,
+                  "lng": -112.4223
+                },
+                {
+                  "lat": 33.50048,
+                  "lng": -112.4245
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.4988,
+                  "lng": -112.4245
+                },
+                {
+                  "lat": 33.4988,
+                  "lng": -112.4223
+                },
+                {
+                  "lat": 33.49872,
+                  "lng": -112.4223
+                },
+                {
+                  "lat": 33.49872,
+                  "lng": -112.4245
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 38,
+              "pano": "XC33g_R4oAAl4h4RlA03zg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 10,
+              "pano": "XC33g_R4oAAl4h4RlA03zg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "- Tier 1: AZ Big Media / Develop Goodyear — Ball built a ~500,000 sq ft, $240M state-of-the-art plant at the NE corner of W. Montecito Ave & N. Cotton Ln, operational 2018, ~130 jobs.\n- Tier 1: Ball currently hiring at the Goodyear plant (Indeed Ball-Goodyear listings, 2025).\n- Critical disambiguation: the plant Ball closed in 2023 was its separate Phoenix facility (softening demand) — NOT Goodyear. Goodyear and Waddell were explicitly not on the closure list. Bankruptcy-era check N/A (Ball has no such restructuring). Imagery 2024-09.",
+        "mapsUrl": "https://www.google.com/maps/@33.4995,-112.4238,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Modern (2018) ~500k+ sq ft secured plant with fully landscaped setbacks and controlled truck courts on the north and south faces; controlled entry inferred from the campus type, but no barrier arm was directly imaged.",
+          "guardShack": "No guard booth seen; office/employee entry with solar-canopy parking fronts Cotton Ln (SW). Remote kiosk/app check-in inferred (remoteGs).",
+          "shipRcvSeparate": "Separate dock-door banks with backed trailers on the north AND south building faces suggest split ship/receive.",
+          "dockDoorCount": "Very large building with long dock banks on two faces; 50+ band, ~60 estimate is approximate.",
+          "urbanRural": "Phoenix-metro industrial corridor (Cotton Ln / PV303) with agricultural land immediately west; called Urban for the major-metro context.",
+          "railServed": "No rail spur; desert site.",
+          "geofence": "Oriented rectangle estimated from z17-19 imagery; building near axis-aligned."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://azbigmedia.com/business/economic-development/ball-corporation-build-stateoftheart-facility-goodyear/",
+              "date": "2017",
+              "type": "dated company/econ-dev announcement",
+              "claim": "Ball built ~500,000 sq ft plant, $240M, NE corner of Montecito Ave & Cotton Ln, Goodyear"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/q-Ball-l-Goodyear,-AZ-jobs.html",
+              "date": "2025-01",
+              "type": "active Ball careers at Goodyear",
+              "claim": "Ball currently hiring at the Goodyear plant"
+            }
+          ],
+          "imageryDate": "2024-09",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball's own $240M Goodyear plant (NE corner Montecito/Cotton) built 2018 and still hiring; the 2023 closure was the separate Phoenix plant, not Goodyear.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "10-ball-fort-worth-tx",
+        "name": "Ball - Fort Worth TX",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 32.64925,
+          "lng": -97.3153
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.65015,
+                "lng": -97.3164
+              },
+              {
+                "lat": 32.6499,
+                "lng": -97.3138
+              },
+              {
+                "lat": 32.6476,
+                "lng": -97.3138
+              },
+              {
+                "lat": 32.6478,
+                "lng": -97.3164
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.6484,
+                "lng": -97.3143
+              },
+              {
+                "lat": 32.6484,
+                "lng": -97.31385
+              },
+              {
+                "lat": 32.64795,
+                "lng": -97.31385
+              },
+              {
+                "lat": 32.64795,
+                "lng": -97.3143
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.64875,
+                  "lng": -97.3146
+                },
+                {
+                  "lat": 32.64875,
+                  "lng": -97.31405
+                },
+                {
+                  "lat": 32.6479,
+                  "lng": -97.31405
+                },
+                {
+                  "lat": 32.6479,
+                  "lng": -97.3146
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.64925,
+                  "lng": -97.31495
+                },
+                {
+                  "lat": 32.6483,
+                  "lng": -97.31495
+                },
+                {
+                  "lat": 32.6483,
+                  "lng": -97.31475
+                },
+                {
+                  "lat": 32.64925,
+                  "lng": -97.31475
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 295,
+              "pano": "LwffyaD6eWDufm-NqqRZ8Q",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 279,
+              "pano": "LwffyaD6eWDufm-NqqRZ8Q",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 15.6,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "Roster listed only that the dunnage PDF shows a Rehrig pooling warehouse at 6601 Will Rogers Blvd with the plant adjacent. Web search resolved the Ball plant to 6600 Will Rogers Blvd, Fort Worth, TX 76140 (Yelp/Yellowpages/Foursquare all list Ball Corporation there; Yelp updated June 2026). 6600 is the Ball plant on the west side of Will Rogers Blvd; the Rehrig warehouse (6601) sits across the street. Geocode of 6600 Will Rogers Blvd = ROOFTOP 32.6490, -97.3145, on the plant complex.",
+        "mapsUrl": "https://www.google.com/maps/@32.64925,-97.3153,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck yard on the east/south is enclosed by black chain-link perimeter fence (seen in 2025-04 Street View) with a gated drive off Will Rogers Blvd; no barrier arm/booth directly imaged so remote/kiosk check-in inferred.",
+          "guardShack": "No guard booth seen; office with US flag fronts Will Rogers Blvd.",
+          "railServed": "Active rail spur curves along the north/west edge with a grade crossing (railcars present in imagery) - rail served TRUE.",
+          "multipleFacilities": "Two large connected buildings - older can plant (north, heavy roof process equipment) plus a large warehouse/expansion (south).",
+          "shipRcvSeparate": "Dock banks on the east face plus loading between the two buildings suggest separate ship/receive.",
+          "resolvedLocation": "Address was unpinned in roster; resolved to 6600 Will Rogers Blvd, Fort Worth TX 76140 (Ball plant; the Rehrig pooling warehouse at 6601 Will Rogers Blvd sits across the street).",
+          "geofence": "Oriented polygons estimated from z17-19 imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/q-ball-l-fort-worth,-tx-jobs.html",
+              "date": "2025-06",
+              "type": "active Ball careers at Fort Worth",
+              "claim": "Ball hiring Chemical Technician/Machinist/Operator for aluminum can manufacturing, Fort Worth TX, 12-hr rotating shifts"
+            }
+          ],
+          "imageryDate": "2025-04",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Ball-domain/aggregated aluminum-can-manufacturing job reqs at Fort Worth confirm the plant still operates; the 2011 realignment trimmed 12oz lines but did not close the site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "11-ball-glendale-az",
+        "name": "Ball - Glendale AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "dockDoorCount",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 33.5781,
+          "lng": -112.3845
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.57955,
+                "lng": -112.387
+              },
+              {
+                "lat": 33.57955,
+                "lng": -112.3832
+              },
+              {
+                "lat": 33.5762,
+                "lng": -112.3832
+              },
+              {
+                "lat": 33.5762,
+                "lng": -112.387
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.57975,
+                "lng": -112.3838
+              },
+              {
+                "lat": 33.57975,
+                "lng": -112.3832
+              },
+              {
+                "lat": 33.5793,
+                "lng": -112.3832
+              },
+              {
+                "lat": 33.5793,
+                "lng": -112.3838
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.579,
+                  "lng": -112.3843
+                },
+                {
+                  "lat": 33.579,
+                  "lng": -112.3835
+                },
+                {
+                  "lat": 33.5772,
+                  "lng": -112.3835
+                },
+                {
+                  "lat": 33.5772,
+                  "lng": -112.3843
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.5772,
+                  "lng": -112.3847
+                },
+                {
+                  "lat": 33.5772,
+                  "lng": -112.3836
+                },
+                {
+                  "lat": 33.5769,
+                  "lng": -112.3836
+                },
+                {
+                  "lat": 33.5769,
+                  "lng": -112.3847
+                }
+              ]
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
+        "dossierExcerpt": "Ball's own Feb-2025 global locations map lists Glendale AZ as an operating site (Phoenix and St. Paul, the two AZ/MN plants Ball closed in 2022-23, are correctly absent). The 2019 GPEC/Arizona development PR names Ball Corporation as builder of the can plant on this Reems/Peoria campus; production started Q1 2021. The AZ \"Ball plant closure\" in the news was the older Phoenix site, not Glendale — Ball was ramping Glendale up at the same time. Owner-operated, self.",
+        "mapsUrl": "https://www.google.com/maps/@33.5781,-112.3845,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ball operates a ~712,000 sq ft aluminum can-body plant on the integrated Red Bull / Rauch / Ball campus at the SE corner of Reems Rd & Peoria Ave (Woolf Logistics Campus), Glendale AZ. Started up Q1 2021. Cans move by a 280-ft conveyor bridge to the adjacent Red Bull/Rauch FILLING hall, then a 418-ft bridge to the 'Project Lagerhaus' distribution warehouse. The three buildings form a connected chain.",
+          "buildingAttribution": "Audited building = the center manufacturing hall (the chain's process building): heavy rooftop process equipment + a large on-site electrical switchyard (can body-making is very power-intensive) + its own trailer staging and dock bank. This is the building the 'Ball Metal Beverage Container Glendale' address geocodes to (15102 W Peoria Ave). Building-level attribution on a shared, bridge-connected campus is medium confidence: the west warehouse box and the south solar-roof distribution building are the fill/Lagerhaus partners.",
+          "guardShack": "Campus is gated (screen walls + controlled entry drive off Peoria Ave visible in Street View); a small booth-like structure sits at the entrance. Guard vs kiosk not fully resolvable from imagery/road view — flagged.",
+          "multipleFacilities": "Campus of 3+ connected large buildings (Ball can plant, Red Bull/Rauch fill, Lagerhaus distribution) plus neighboring tenants.",
+          "railServed": "No rail spur; desert edge-of-metro site, all-truck plus the internal conveyor bridges.",
+          "urbanRural": "Far NW edge of the Phoenix metro (Glendale/Waddell) inside an active master-planned industrial park with adjacent residential subdivisions; classed Urban (metro fabric), though farmland abuts to the south/east.",
+          "dockDoorCount": "Estimated ~16 external dock doors (south hall NE face + east yard); most can output leaves by internal conveyor bridge, so external docks are modest for the building size."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf",
+              "date": "2025-02",
+              "type": "company locations map",
+              "claim": "Ball's own Feb-2025 global locations map lists Glendale (AZ) as an operating site; Phoenix and St. Paul (closed plants) are absent."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.gpec.org/news/red-bull-ball-corporation-and-rauch-select-glendale-for-new-multimillion-dollar-facility/",
+              "date": "2019-03",
+              "type": "development PR",
+              "claim": "Ball Corporation named as building the can plant on the Glendale Reems/Peoria campus; plant started Q1 2021."
+            }
+          ],
+          "imageryDate": "2024-11 (Street View) / satellite ~2024-2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball's 2021-startup Glendale can-body plant is current per Ball's own 2025 locations map; the Ball AZ plant that closed was the older Phoenix site, not Glendale (which Ball was ramping up).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "12-ball-fort-atkinson-wi",
+        "name": "Ball - Fort Atkinson WI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoorCount",
+          "dropArea",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 42.9438,
+          "lng": -88.834
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 42.94505,
+                "lng": -88.83545
+              },
+              {
+                "lat": 42.94495,
+                "lng": -88.8325
+              },
+              {
+                "lat": 42.94265,
+                "lng": -88.8327
+              },
+              {
+                "lat": 42.94275,
+                "lng": -88.83565
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 42.943,
+                "lng": -88.8337
+              },
+              {
+                "lat": 42.943,
+                "lng": -88.8332
+              },
+              {
+                "lat": 42.9427,
+                "lng": -88.83325
+              },
+              {
+                "lat": 42.9427,
+                "lng": -88.83375
+              }
+            ]
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 42.9443,
+                  "lng": -88.8331
+                },
+                {
+                  "lat": 42.9443,
+                  "lng": -88.8327
+                },
+                {
+                  "lat": 42.9432,
+                  "lng": -88.8328
+                },
+                {
+                  "lat": 42.9432,
+                  "lng": -88.8332
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 42.9444,
+                "lng": -88.833
+              },
+              {
+                "lat": 42.9444,
+                "lng": -88.8325
+              },
+              {
+                "lat": 42.9429,
+                "lng": -88.8326
+              },
+              {
+                "lat": 42.9429,
+                "lng": -88.8331
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 15,
+          "trailersVisible": 5,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball's own Feb-2025 locations map lists Fort Atkinson WI. Corroborated by \"Ball Metal Beverage Container / Ball Corporation\" listings and active production-technician job posts at Fort Atkinson. Long-running plant, not among Ball's closures. Owner-operated.",
+        "mapsUrl": "https://www.google.com/maps/@42.9438,-88.8340,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ball Metal Beverage Container can plant at 105 E Blackhawk Dr, Fort Atkinson WI (SE edge of town). Complex = a grey pitched-roof production hall (N) joined to a white flat-roof process hall (S, heavy rooftop equipment). Employee parking to the W; a paved truck apron runs along the E face. 201 E Cramer St (dunnage node) is a separate nearby address, not the plant.",
+          "railServed": "TRUE — a rail spur leaves the N-S mainline and runs into the plant along the east face (rail cars can be spotted for coil-in / can-out). This is the one rail-served site of the five.",
+          "truckGate": "Single entrance drive off Blackhawk Dr (at a rail grade crossing) running up the east apron; no guard booth or barrier arm visible. The two small fenced structures on the east apron are UTILITY/electrical compounds (transformers/switchgear), not a gatehouse or truck scale. Classed no-gate/no-guard, flagged medium.",
+          "docks": "~15 dock doors estimated on the east face facing the truck apron (modest external dock bank; some volume moves by the rail spur). Band 10-25.",
+          "dropArea": "No dedicated trailer-storage lot; trailers stage on the east working apron -> dropArea 0-10, dropYard false.",
+          "urbanRural": "Fort Atkinson is a small town (~12k) in Jefferson County; plant on the SE edge with farmland to the N/E -> Rural. Cell coverage fine (not isolated).",
+          "backupNote": "The entrance sits at a rail grade crossing on Blackhawk Dr; a long inbound queue could interact with the crossing, but the east apron gives internal stacking room, so not classed backup-sensitive."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf",
+              "date": "2025-02",
+              "type": "company locations map",
+              "claim": "Ball's own Feb-2025 locations map lists Fort Atkinson, WI as an operating site."
+            }
+          ],
+          "imageryDate": "2024-07 (Street View) / satellite ~2024-2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Long-running Ball Metal Beverage can plant, confirmed current on Ball's own 2025 locations map; not among Ball's closures.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "13-ball-pittston-pa",
+        "name": "Ball - Pittston PA (Jenkins Township)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryExitSeparate",
+          "shipRcvSeparate",
+          "dockDoorCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 41.286,
+          "lng": -75.7725
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 41.28905,
+                "lng": -75.7785
+              },
+              {
+                "lat": 41.2885,
+                "lng": -75.7652
+              },
+              {
+                "lat": 41.28345,
+                "lng": -75.7656
+              },
+              {
+                "lat": 41.28395,
+                "lng": -75.779
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.2872,
+                "lng": -75.7776
+              },
+              {
+                "lat": 41.287,
+                "lng": -75.7768
+              },
+              {
+                "lat": 41.2865,
+                "lng": -75.7772
+              },
+              {
+                "lat": 41.2867,
+                "lng": -75.778
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 41.2843,
+                  "lng": -75.7742
+                },
+                {
+                  "lat": 41.2839,
+                  "lng": -75.7662
+                },
+                {
+                  "lat": 41.2833,
+                  "lng": -75.7664
+                },
+                {
+                  "lat": 41.2837,
+                  "lng": -75.7744
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.2896,
+                  "lng": -75.7788
+                },
+                {
+                  "lat": 41.28905,
+                  "lng": -75.775
+                },
+                {
+                  "lat": 41.2878,
+                  "lng": -75.7754
+                },
+                {
+                  "lat": 41.2884,
+                  "lng": -75.7792
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 41.2847,
+                  "lng": -75.774
+                },
+                {
+                  "lat": 41.2843,
+                  "lng": -75.7658
+                },
+                {
+                  "lat": 41.2841,
+                  "lng": -75.76585
+                },
+                {
+                  "lat": 41.2845,
+                  "lng": -75.77405
+                }
+              ]
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 88,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball's own Feb-2025 locations map lists Pittston PA. Area Development / regional press (Dec 2020) documents Ball retrofitting the 1,078,799 sq ft Jenkins Township building (former Techneglas TV-glass plant) into an aluminum beverage can plant, ~$300M, ~230 jobs, production starting 2021. Not among Ball's 2022-24 closures. Owner-operated.",
+        "mapsUrl": "https://www.google.com/maps/@41.2860,-75.7725,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ball retrofitted a ~1,078,799 sq ft former Techneglas building at 140 Industrial Dr, Jenkins Township (CenterPoint Commerce & Trade Park East); can production began mid-2021. One very large single building, long axis ~E-W (slight tilt).",
+          "truckGate": "No per-building gate or guard booth visible; the building's north truck court and lots open directly onto CenterPoint park spine roads (Street View shows open, un-barriered access). Classed as no-gate/no-guard, flagged medium — security may exist at building doors rather than a road barrier.",
+          "docks": "Continuous dock bank along the south face (rail-side) plus docks on the north/west faces of the building; 50+ total across faces (estimate ~60). Ship/receive plausibly split across separate faces -> shipRcvSeparate true (flagged).",
+          "dropYards": "South drop yard holds a long trailer row; a large paved OVERFLOW/staging lot sits at the NW. Combined capacity ~150 trailers, ~45 visible.",
+          "railServed": "A double-track freight rail line runs immediately along the SW/west property edge, but no spur enters the building -> railServed false (spur-add is physically feasible given the adjacency).",
+          "urbanRural": "Jenkins Township industrial park at the wooded edge of the Scranton-Wilkes-Barre metro, adjacent residential subdivision + I-81; classed Rural (edge-of-town industrial-park setting). Cell coverage fine (I-81 corridor).",
+          "siteAreaAcres": "~88 acres estimated for building + north court + south drop yard + NW overflow lot; perimeter is an approximate oriented trace."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf",
+              "date": "2025-02",
+              "type": "company locations map",
+              "claim": "Ball's own Feb-2025 locations map lists Pittston, PA as an operating site."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.areadevelopment.com/newsItems/12-23-2020/ball-corporation-pittston-pennsylvania.shtml",
+              "date": "2020-12",
+              "type": "development PR",
+              "claim": "Ball retrofitting the 1,078,799 sq ft Jenkins Township building into an aluminum beverage can plant; ~$300M, ~230 jobs; production 2021."
+            }
+          ],
+          "imageryDate": "2023-11 (Street View) / satellite ~2024-2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "New (2021) Ball can plant, confirmed current on Ball's own 2025 locations map; not among Ball's 2022-24 closures (Phoenix/St. Paul/Kent/Verona).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "14-ball-saratoga-springs-ny",
+        "name": "Ball - Saratoga Springs NY",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "shipRcvSeparate",
+          "dockDoorCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 43.0616,
+          "lng": -73.8255
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 43.06275,
+                "lng": -73.82715
+              },
+              {
+                "lat": 43.06258,
+                "lng": -73.82395
+              },
+              {
+                "lat": 43.06175,
+                "lng": -73.82355
+              },
+              {
+                "lat": 43.06052,
+                "lng": -73.8243
+              },
+              {
+                "lat": 43.06055,
+                "lng": -73.82605
+              },
+              {
+                "lat": 43.06135,
+                "lng": -73.8272
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 43.0612,
+                "lng": -73.82545
+              },
+              {
+                "lat": 43.0611,
+                "lng": -73.825
+              },
+              {
+                "lat": 43.0607,
+                "lng": -73.8252
+              },
+              {
+                "lat": 43.0608,
+                "lng": -73.82565
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 43.0615,
+                  "lng": -73.8268
+                },
+                {
+                  "lat": 43.0611,
+                  "lng": -73.826
+                },
+                {
+                  "lat": 43.06075,
+                  "lng": -73.8264
+                },
+                {
+                  "lat": 43.06115,
+                  "lng": -73.8272
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 43.0617,
+                  "lng": -73.8248
+                },
+                {
+                  "lat": 43.0613,
+                  "lng": -73.8246
+                },
+                {
+                  "lat": 43.06115,
+                  "lng": -73.825
+                },
+                {
+                  "lat": 43.06155,
+                  "lng": -73.8252
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 43.0612,
+                  "lng": -73.8264
+                },
+                {
+                  "lat": 43.0609,
+                  "lng": -73.8259
+                },
+                {
+                  "lat": 43.0607,
+                  "lng": -73.82615
+                },
+                {
+                  "lat": 43.061,
+                  "lng": -73.82665
+                }
+              ]
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 38,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 35,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball's own Feb-2025 locations map lists Saratoga Springs NY. Corroborated by multiple \"Ball Metal Container\" business listings at the Cady Hill Industrial Park / 11 Adams Rd. Long-running plant, not among Ball's closures. Owner-operated.",
+        "mapsUrl": "https://www.google.com/maps/@43.0616,-73.8255,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ball Metal Container beverage-can plant at 11 Adams Rd, Cady Hill Industrial Park, Saratoga Springs NY (accessed off Weibel Ave). Complex = a large dark-roof main hall (long axis ~N-S, slightly rotated) joined to a grey/white process+office building on the E; docks face an interior SE court and the SW perimeter drive.",
+          "truckGate": "Perimeter chain-link fencing is present (visible in Street View), but the single entrance drive off Weibel Ave opens without a visible guard booth or barrier arm and splits to the truck court (left) and employee lot (right). Classed no-gate/no-guard, flagged medium.",
+          "docks": "~20 doors split across two faces: the interior SE court (between the two buildings) and the SW face of the main hall, each with trailers backed in -> shipRcvSeparate true (flagged).",
+          "dropYards": "Trailer staging along the SW perimeter drive; ~14 visible, capacity ~38.",
+          "railServed": "The Cady Hill park has a rail line to the E, but no spur reaches the Ball building -> false.",
+          "nearbyDunnage": "A separate Ball dunnage/warehouse node is at 33 Cady Hill Blvd nearby (a distinct building N of the plant, not part of this audited site).",
+          "urbanRural": "SW edge of Saratoga Springs (small city, ~28k) in a wooded industrial park abutting a rec park -> Rural (edge-of-town). Cell coverage fine."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf",
+              "date": "2025-02",
+              "type": "company locations map",
+              "claim": "Ball's own Feb-2025 locations map lists Saratoga Springs, NY as an operating site."
+            }
+          ],
+          "imageryDate": "2022-03 (Street View) / satellite ~2024-2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Long-running Ball Metal Container can plant, confirmed current on Ball's own 2025 locations map; not among Ball's closures.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "15-ball-rome-ga-cans",
+        "name": "Ball - Rome GA (Cans)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "shipRcvSeparate",
+          "dockDoorCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 34.3302,
+          "lng": -85.093
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 34.33165,
+                "lng": -85.09375
+              },
+              {
+                "lat": 34.33095,
+                "lng": -85.09175
+              },
+              {
+                "lat": 34.3294,
+                "lng": -85.0925
+              },
+              {
+                "lat": 34.32895,
+                "lng": -85.0937
+              },
+              {
+                "lat": 34.32985,
+                "lng": -85.09475
+              },
+              {
+                "lat": 34.33095,
+                "lng": -85.0947
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 34.3313,
+                "lng": -85.09405
+              },
+              {
+                "lat": 34.3311,
+                "lng": -85.09355
+              },
+              {
+                "lat": 34.33075,
+                "lng": -85.0938
+              },
+              {
+                "lat": 34.33095,
+                "lng": -85.0943
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 34.33055,
+                  "lng": -85.09205
+                },
+                {
+                  "lat": 34.3301,
+                  "lng": -85.09195
+                },
+                {
+                  "lat": 34.32985,
+                  "lng": -85.09255
+                },
+                {
+                  "lat": 34.3303,
+                  "lng": -85.09265
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 34.3305,
+                  "lng": -85.09215
+                },
+                {
+                  "lat": 34.33005,
+                  "lng": -85.09205
+                },
+                {
+                  "lat": 34.32995,
+                  "lng": -85.09235
+                },
+                {
+                  "lat": 34.3304,
+                  "lng": -85.09245
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 34.33,
+                  "lng": -85.09445
+                },
+                {
+                  "lat": 34.32965,
+                  "lng": -85.094
+                },
+                {
+                  "lat": 34.32945,
+                  "lng": -85.0942
+                },
+                {
+                  "lat": 34.3298,
+                  "lng": -85.09465
+                }
+              ]
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 40,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball's own Feb-2025 locations map lists Rome GA. The Oct-2019 Georgia state PR announcing Ball's new aluminum-cups plant explicitly describes it as being built adjacent to Ball's existing aluminum beverage-can manufacturing plant in Floyd County — confirming the can plant (this site) as an established, operating Ball facility. Not among Ball's closures. Owner-operated.",
+        "mapsUrl": "https://www.google.com/maps/@34.3302,-85.0930,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ball's existing aluminum beverage-can plant at ~395 West Hermitage Rd NE, Rome (Floyd County), off GA-53 in the Northwest Regional Industrial Park. Complex = a grey-roof warehouse/finished-goods hall (rotated NW-SE) connected to a white-roof process/manufacturing hall on the SW (heavy rooftop equipment). Ball's newer aluminum CUPS plant sits adjacent to the SW (separate Ball facility) -> multipleFacilities true.",
+          "canVsCups": "Roster idx 15 = the CANS plant (the older, existing beverage-can plant). The adjacent aluminum-cups plant (2020, ~180 jobs) is a distinct building and NOT this audited site.",
+          "truckGate": "Single entrance drive off West Hermitage Rd opening onto a large internal apron; no guard booth or barrier arm visible at the throat -> classed no-gate/no-guard, flagged medium (a gatehouse could exist but is not visible in imagery).",
+          "docks": "Docks split across two faces: the grey warehouse's SE (rail-side) apron (finished-can outbound) and the white process hall's SW face (coil/inbound). ~18 doors total; shipRcvSeparate true (flagged).",
+          "railServed": "A freight mainline runs immediately along the east property edge but no spur enters the site -> false (spur-add feasible).",
+          "urbanRural": "NW Rome/Floyd County industrial park, fields/woods and Berry College nearby -> Rural (small-city edge). Cell coverage fine (GA-53 corridor).",
+          "buildingCount": "2 connected masses (warehouse + process hall) counted for this can-plant site; the adjacent cups plant is excluded from this site's count."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf",
+              "date": "2025-02",
+              "type": "company locations map",
+              "claim": "Ball's own Feb-2025 locations map lists Rome, GA as an operating site."
+            },
+            {
+              "tier": 1,
+              "url": "https://gov.georgia.gov/press-releases/2019-10-16/ball-corporation-build-new-manufacturing-facility-floyd-county-create",
+              "date": "2019-10",
+              "type": "state PR",
+              "claim": "Ball's new aluminum-cups plant to be built adjacent to Ball's EXISTING aluminum beverage-can manufacturing plant in Rome/Floyd County."
+            }
+          ],
+          "imageryDate": "2024-05 (Street View) / satellite ~2024-2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball's existing Rome can plant is current per Ball's own 2025 locations map and is explicitly referenced as the 'existing' plant in the 2019 cups-plant announcement; not among Ball's closures.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "17-ball-winter-haven-fl",
+        "name": "Ball - Winter Haven FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 27.94405,
+          "lng": -81.71235
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 27.941723,
+                "lng": -81.709357
+              },
+              {
+                "lat": 27.94684,
+                "lng": -81.709559
+              },
+              {
+                "lat": 27.946677,
+                "lng": -81.714843
+              },
+              {
+                "lat": 27.94156,
+                "lng": -81.714641
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 27.941975,
+                "lng": -81.71244
+              },
+              {
+                "lat": 27.941984,
+                "lng": -81.712745
+              },
+              {
+                "lat": 27.941625,
+                "lng": -81.71276
+              },
+              {
+                "lat": 27.941616,
+                "lng": -81.712455
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 27.945294,
+                  "lng": -81.709491
+                },
+                {
+                  "lat": 27.94535,
+                  "lng": -81.71132
+                },
+                {
+                  "lat": 27.943106,
+                  "lng": -81.711409
+                },
+                {
+                  "lat": 27.94305,
+                  "lng": -81.70958
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 27.945281,
+                  "lng": -81.710972
+                },
+                {
+                  "lat": 27.945604,
+                  "lng": -81.710984
+                },
+                {
+                  "lat": 27.945519,
+                  "lng": -81.713728
+                },
+                {
+                  "lat": 27.945196,
+                  "lng": -81.713716
+                }
+              ]
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 73.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball Corporation closed the $160M acquisition of Florida Can Manufacturing's Winter Haven aluminum can plant on 2025-02-04 and folded it into its North American beverage-packaging network; the plant is currently operating. No divestiture/closure signal.\n- Tier 1: Ball company PR, \"Ball Corporation Further Optimizes North American Network with Florida Can Manufacturing Acquisition,\" 2025-02-04 (ball.com/newswire/article/124245).\n- Corroboration: Packaging Dive / Food Dive coverage of the acquisition; reported ~70-acre, 800,000+ sqft complex, ~4,000 cans/min.",
+        "mapsUrl": "https://www.google.com/maps/@27.94405,-81.71235,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No Street View coverage (rural site, ZERO_RESULTS on all nearby panos). Satellite shows a single open loop driveway with no visible barrier or guard booth, so scored as no controlled gate; flagged uncertain.",
+          "dockDoorCount": "~18 estimated: dock line + covered loading canopy along the NORTH face, with a bank of ~10-12 trailers backed in at the NE. South side is office + employee parking (no docks).",
+          "dropArea": "Large paved/graded lot on the EAST side plus the NE trailer bank; currently only partly used but could hold 50+ trailers at buildout.",
+          "siteAreaAcres": "~72 ac matches the reported ~70-acre Florida Can complex.",
+          "layout": "Outbound-heavy can plant: shipping docks + trailer staging concentrated on the north/NE; big empty east lot is the drop-yard / expansion pad."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ball.com/newswire/article/124245/ball-corporation-further-optimizes-north-american-network-with-florida-can-manufacturing",
+              "date": "2025-02-04",
+              "type": "company PR (acquisition close)",
+              "claim": "Ball acquired and operates the Florida Can Manufacturing aluminum can plant in Winter Haven FL"
+            }
+          ],
+          "imageryDate": "satellite ~2024-2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball closed the $160M acquisition of the Winter Haven can plant on 2025-02-04 and operates it within its North American network; no divestiture signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "18-ball-bowling-green-ky",
+        "name": "Ball - Bowling Green KY",
+        "type": "Can End Plant (beverage can ends)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes",
+          "railServed"
+        ],
+        "center": {
+          "lat": 37.03905,
+          "lng": -86.2979
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 37.036018,
+                "lng": -86.296362
+              },
+              {
+                "lat": 37.039905,
+                "lng": -86.293773
+              },
+              {
+                "lat": 37.042182,
+                "lng": -86.299138
+              },
+              {
+                "lat": 37.038295,
+                "lng": -86.301727
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 37.037636,
+                "lng": -86.298207
+              },
+              {
+                "lat": 37.037953,
+                "lng": -86.297996
+              },
+              {
+                "lat": 37.038164,
+                "lng": -86.298493
+              },
+              {
+                "lat": 37.037847,
+                "lng": -86.298704
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 37.03743,
+                  "lng": -86.297247
+                },
+                {
+                  "lat": 37.0377,
+                  "lng": -86.297067
+                },
+                {
+                  "lat": 37.03867,
+                  "lng": -86.299353
+                },
+                {
+                  "lat": 37.0384,
+                  "lng": -86.299533
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 37.03743,
+                  "lng": -86.297247
+                },
+                {
+                  "lat": 37.0377,
+                  "lng": -86.297067
+                },
+                {
+                  "lat": 37.03867,
+                  "lng": -86.299353
+                },
+                {
+                  "lat": 37.0384,
+                  "lng": -86.299533
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 37.040063,
+                  "lng": -86.297954
+                },
+                {
+                  "lat": 37.040189,
+                  "lng": -86.298252
+                },
+                {
+                  "lat": 37.039237,
+                  "lng": -86.298886
+                },
+                {
+                  "lat": 37.039111,
+                  "lng": -86.298588
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 21,
+              "pano": "ik6C6ciN5SkaeXb88oFeAA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 34,
+              "pano": "ik6C6ciN5SkaeXb88oFeAA",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 65.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "Ball built its ~500,000 sqft aluminum end plant as the first tenant of the Kentucky Transpark 300-acre expansion ($305M, announced Jan 2021, production early 2022). Current 2026-03 Street View shows the plant operating with Ball's blue on-building branding. No divestiture/closure signal.\n- Tier 1: Ball company PR, \"Ball Announces New Aluminum End Manufacturing Facility in Bowling Green, Kentucky,\" 2021-01-07 (prnewswire 301202652).\n- Tier 3 corroboration: Street View pano `ik6C6ciN5SkaeXb88oFeAA`, captured 2026-03 — active branded plant.",
+        "mapsUrl": "https://www.google.com/maps/@37.03905,-86.2979,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Entrance off Production Ave is an open industrial driveway with a monument sign; no barrier arm or booth visible in 2026-03 Street View, so scored as no controlled gate.",
+          "dockDoorCount": "~18 estimated: a dock bank along the south wall (Street View shows a row of doors) plus a smaller loading area at the NW corner where 2 trailers sit. Overhead white roof obscures exact count.",
+          "shipRcvSeparate": "Two separate dock zones (south face + NW corner) suggest split ship/receive; medium confidence.",
+          "railServed": "Kentucky Transpark has CSX service at its south end, but no rail spur is visible entering the Ball parcel.",
+          "siteAreaAcres": "Fenced-property estimate from oriented perimeter; building itself ~500k+ sqft."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/ball-announces-new-aluminum-end-manufacturing-facility-in-bowling-green-kentucky-production-scheduled-to-begin-in-early-2022-301202652.html",
+              "date": "2021-01-07",
+              "type": "company PR (aluminum end plant announcement, Bowling Green)",
+              "claim": "Ball announced and built its aluminum end plant at Kentucky Transpark, Bowling Green"
+            },
+            {
+              "tier": 3,
+              "url": "https://maps.googleapis.com/maps/api/streetview?pano=ik6C6ciN5SkaeXb88oFeAA",
+              "date": "2026-03",
+              "type": "Street View imagery + on-building blue Ball branding",
+              "claim": "Active branded plant operating as of March 2026"
+            }
+          ],
+          "imageryDate": "satellite ~2024 summer; Street View 2026-03",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball-built aluminum end plant, first tenant of the Transpark 300-acre expansion; operating and branded in current imagery, no divestiture signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      },
+      {
+        "id": "20-ball-millersburg-or",
+        "name": "Ball - Millersburg OR",
+        "type": "Beverage Can Plant (bodies) / Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "dropYard",
+          "shipRcvSeparate",
+          "postGateStaging",
+          "drivewayLong"
+        ],
+        "center": {
+          "lat": 44.6784,
+          "lng": -123.06245
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 44.677119,
+                "lng": -123.061104
+              },
+              {
+                "lat": 44.679363,
+                "lng": -123.061214
+              },
+              {
+                "lat": 44.679281,
+                "lng": -123.064496
+              },
+              {
+                "lat": 44.677037,
+                "lng": -123.064386
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 44.677696,
+                "lng": -123.062876
+              },
+              {
+                "lat": 44.678019,
+                "lng": -123.062892
+              },
+              {
+                "lat": 44.678004,
+                "lng": -123.063524
+              },
+              {
+                "lat": 44.677681,
+                "lng": -123.063508
+              }
+            ]
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 44.678889,
+                  "lng": -123.062636
+                },
+                {
+                  "lat": 44.678898,
+                  "lng": -123.063015
+                },
+                {
+                  "lat": 44.677911,
+                  "lng": -123.063064
+                },
+                {
+                  "lat": 44.677902,
+                  "lng": -123.062685
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 94,
+              "pano": "jBfjTYkBIYA8wwGqyjWahA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 259,
+              "pano": "kwNPK9BwF8pcaM96PVI3xQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Ball is building a new mid-Willamette-Valley beverage can plant at 3130 NE Transition Pkwy; company plans / earnings coverage put startup in 2026 (sources say H2 2026). Because it is a current-ops-only pipeline, a brand-new plant would normally be excluded — but per the run instructions this NEW site is audited-as-visible with confidence set accordingly, not rejected for being new.\n- Tier 1: Ball earnings coverage / company plans, Aluminum Market Update (CRU), 2025 — \"Ball ... Oregon facility to start up in 2026.\"\n- Tier 3: Street View pano `kwNPK9BwF8pcaM96PVI3xQ` (2025-04) + satellite — site graded/under construction at the address.",
+        "mapsUrl": "https://www.google.com/maps/@44.6784,-123.06245,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "status": "NEW PLANT under construction / early ramp. Ball's Millersburg beverage-can plant is slated to start up in 2026 (sources say H2 2026). Only a Phase-1 building (blue/gray roof), a loop access road, employee parking, and a west-face truck apron are built; the bulk of the parcel to the south and west is bare graded farmland (future/ongoing buildout). Audited what is visible; confidence LOW.",
+          "truckGate": "Chain-link perimeter fencing along Conifer Blvd and a single gated loop entrance (Street View 2025-04); no manned guard booth visible, so scored gate=true / remoteGs=true, but access control is likely still temporary construction fencing. Flagged uncertain.",
+          "dockDoorCount": "~6 estimated on the west face of the Phase-1 building; one trailer seen at the apron. Will grow substantially at full buildout.",
+          "siteAreaAcres": "~16 ac reflects only the currently developed pad; the full Ball parcel (with graded expansion land) is materially larger.",
+          "note2": "The large multi-trailer yard EAST across Conifer Blvd is a SEPARATE trucking terminal, not Ball's."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.aluminummarketupdate.crugroup.com/growth-markets/ball-corp-earnings-oregon-beverage-cans-tariffs/",
+              "date": "2025",
+              "type": "Ball earnings coverage / company plans",
+              "claim": "Ball is building a new beverage can plant in Millersburg OR, startup 2026"
+            },
+            {
+              "tier": 3,
+              "url": "https://maps.googleapis.com/maps/api/streetview?pano=kwNPK9BwF8pcaM96PVI3xQ",
+              "date": "2025-04",
+              "type": "Street View + satellite",
+              "claim": "Site graded/under construction at 3130 NE Transition Pkwy"
+            }
+          ],
+          "imageryDate": "satellite ~2024-2025; Street View 2025-04",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ball-attested NEW plant (rooftop-geocoded to 3130 NE Transition Pkwy); startup 2026, so still construction/ramp in imagery. Per instructions, audited-visible and confidence set LOW rather than rejected for being new.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-07-23"
+        }
+      }
+    ]
+  }
+}

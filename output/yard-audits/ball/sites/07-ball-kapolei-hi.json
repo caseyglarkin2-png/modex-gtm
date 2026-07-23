@@ -1,0 +1,188 @@
+{
+  "name": "Ball - Kapolei HI",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": {
+    "lat": 21.306703,
+    "lng": -158.094845
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 21.30765,
+          "lng": -158.0956
+        },
+        {
+          "lat": 21.30745,
+          "lng": -158.0938
+        },
+        {
+          "lat": 21.3064,
+          "lng": -158.0938
+        },
+        {
+          "lat": 21.3056,
+          "lng": -158.0945
+        },
+        {
+          "lat": 21.306,
+          "lng": -158.0956
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 21.3074,
+          "lng": -158.09565
+        },
+        {
+          "lat": 21.3074,
+          "lng": -158.0952
+        },
+        {
+          "lat": 21.3069,
+          "lng": -158.0952
+        },
+        {
+          "lat": 21.3069,
+          "lng": -158.09565
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 21.3072,
+            "lng": -158.09525
+          },
+          {
+            "lat": 21.3064,
+            "lng": -158.09525
+          },
+          {
+            "lat": 21.30632,
+            "lng": -158.09492
+          },
+          {
+            "lat": 21.30712,
+            "lng": -158.09492
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 21.3072,
+            "lng": -158.095
+          },
+          {
+            "lat": 21.30632,
+            "lng": -158.095
+          },
+          {
+            "lat": 21.30632,
+            "lng": -158.0949
+          },
+          {
+            "lat": 21.3072,
+            "lng": -158.0949
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 357,
+        "pano": "7GPBpCVLYAAhdi6cl33p8Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 333,
+        "pano": "7GPBpCVLYAAhdi6cl33p8Q",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@21.306703,-158.094845,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dropArea",
+    "dockDoors"
+  ],
+  "fieldNotes": {
+    "truckGate": "Older compact plant in Campbell Industrial Park; docks and trailer staging are on the west face opening onto a shared paved yard between neighboring industrial lots. No barrier arm or booth visible (2019-07 pano is newest available). Reads as a fenced-but-open urban site.",
+    "guardShack": "No guard booth seen; office/flag frontage on Komohana St.",
+    "backupSensitive": "Tight urban industrial parcel; limited stacking depth on the west yard.",
+    "dropArea": "West-face yard held ~6-8 trailers backed to docks; little dedicated drop room.",
+    "railServed": "No rail on this part of Oahu.",
+    "geofence": "Oriented polygons estimated from z17-19 imagery; Street View is 2019 vintage."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://ball-corporation-hawaii-can-plant.hub.biz/",
+        "date": "2025-01",
+        "type": "business listing (Ball Corporation Hawaii Can Plant)",
+        "claim": "Ball Corporation Hawaii Can Plant at 91-320 Komohana St, current"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.yelp.com/biz/ball-corporation-kapolei",
+        "date": "2025-01",
+        "type": "current directory listing",
+        "claim": "Ball Corporation, 91-320 Komohana St, Kapolei - metal cans, operating"
+      }
+    ],
+    "imageryDate": "2024",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple current listings place Ball's Hawaii can plant at this exact address; no closure signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

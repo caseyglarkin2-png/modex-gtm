@@ -1,0 +1,95 @@
+{
+  "name": "Ball - Saratoga Springs NY",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 43.0616, "lng": -73.8255 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.06275, "lng": -73.82715 },
+      { "lat": 43.06258, "lng": -73.82395 },
+      { "lat": 43.06175, "lng": -73.82355 },
+      { "lat": 43.06052, "lng": -73.82430 },
+      { "lat": 43.06055, "lng": -73.82605 },
+      { "lat": 43.06135, "lng": -73.82720 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.06120, "lng": -73.82545 },
+      { "lat": 43.06110, "lng": -73.82500 },
+      { "lat": 43.06070, "lng": -73.82520 },
+      { "lat": 43.06080, "lng": -73.82565 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.06150, "lng": -73.82680 },
+        { "lat": 43.06110, "lng": -73.82600 },
+        { "lat": 43.06075, "lng": -73.82640 },
+        { "lat": 43.06115, "lng": -73.82720 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.06170, "lng": -73.82480 },
+        { "lat": 43.06130, "lng": -73.82460 },
+        { "lat": 43.06115, "lng": -73.82500 },
+        { "lat": 43.06155, "lng": -73.82520 }
+      ] },
+      { "ring": [
+        { "lat": 43.06120, "lng": -73.82640 },
+        { "lat": 43.06090, "lng": -73.82590 },
+        { "lat": 43.06070, "lng": -73.82615 },
+        { "lat": 43.06100, "lng": -73.82665 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 340, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 340, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 38,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 35.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.0616,-73.8255,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "shipRcvSeparate", "dockDoorCount", "siteAreaAcres"],
+  "fieldNotes": {
+    "site": "Ball Metal Container beverage-can plant at 11 Adams Rd, Cady Hill Industrial Park, Saratoga Springs NY (accessed off Weibel Ave). Complex = a large dark-roof main hall (long axis ~N-S, slightly rotated) joined to a grey/white process+office building on the E; docks face an interior SE court and the SW perimeter drive.",
+    "truckGate": "Perimeter chain-link fencing is present (visible in Street View), but the single entrance drive off Weibel Ave opens without a visible guard booth or barrier arm and splits to the truck court (left) and employee lot (right). Classed no-gate/no-guard, flagged medium.",
+    "docks": "~20 doors split across two faces: the interior SE court (between the two buildings) and the SW face of the main hall, each with trailers backed in -> shipRcvSeparate true (flagged).",
+    "dropYards": "Trailer staging along the SW perimeter drive; ~14 visible, capacity ~38.",
+    "railServed": "The Cady Hill park has a rail line to the E, but no spur reaches the Ball building -> false.",
+    "nearbyDunnage": "A separate Ball dunnage/warehouse node is at 33 Cady Hill Blvd nearby (a distinct building N of the plant, not part of this audited site).",
+    "urbanRural": "SW edge of Saratoga Springs (small city, ~28k) in a wooded industrial park abutting a rec park -> Rural (edge-of-town). Cell coverage fine."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf", "date": "2025-02", "type": "company locations map", "claim": "Ball's own Feb-2025 locations map lists Saratoga Springs, NY as an operating site." }
+    ],
+    "imageryDate": "2022-03 (Street View) / satellite ~2024-2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-running Ball Metal Container can plant, confirmed current on Ball's own 2025 locations map; not among Ball's closures.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

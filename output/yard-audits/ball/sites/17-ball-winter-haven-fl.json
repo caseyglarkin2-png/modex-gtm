@@ -1,0 +1,179 @@
+{
+  "name": "Ball - Winter Haven FL",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": {
+    "lat": 27.94405,
+    "lng": -81.71235
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 27.941723,
+          "lng": -81.709357
+        },
+        {
+          "lat": 27.94684,
+          "lng": -81.709559
+        },
+        {
+          "lat": 27.946677,
+          "lng": -81.714843
+        },
+        {
+          "lat": 27.94156,
+          "lng": -81.714641
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 27.941975,
+          "lng": -81.71244
+        },
+        {
+          "lat": 27.941984,
+          "lng": -81.712745
+        },
+        {
+          "lat": 27.941625,
+          "lng": -81.71276
+        },
+        {
+          "lat": 27.941616,
+          "lng": -81.712455
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 27.945294,
+            "lng": -81.709491
+          },
+          {
+            "lat": 27.94535,
+            "lng": -81.71132
+          },
+          {
+            "lat": 27.943106,
+            "lng": -81.711409
+          },
+          {
+            "lat": 27.94305,
+            "lng": -81.70958
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 27.945281,
+            "lng": -81.710972
+          },
+          {
+            "lat": 27.945604,
+            "lng": -81.710984
+          },
+          {
+            "lat": 27.945519,
+            "lng": -81.713728
+          },
+          {
+            "lat": 27.945196,
+            "lng": -81.713716
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 73.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@27.94405,-81.71235,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dropArea"
+  ],
+  "fieldNotes": {
+    "truckGate": "No Street View coverage (rural site, ZERO_RESULTS on all nearby panos). Satellite shows a single open loop driveway with no visible barrier or guard booth, so scored as no controlled gate; flagged uncertain.",
+    "dockDoorCount": "~18 estimated: dock line + covered loading canopy along the NORTH face, with a bank of ~10-12 trailers backed in at the NE. South side is office + employee parking (no docks).",
+    "dropArea": "Large paved/graded lot on the EAST side plus the NE trailer bank; currently only partly used but could hold 50+ trailers at buildout.",
+    "siteAreaAcres": "~72 ac matches the reported ~70-acre Florida Can complex.",
+    "layout": "Outbound-heavy can plant: shipping docks + trailer staging concentrated on the north/NE; big empty east lot is the drop-yard / expansion pad."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ball.com/newswire/article/124245/ball-corporation-further-optimizes-north-american-network-with-florida-can-manufacturing",
+        "date": "2025-02-04",
+        "type": "company PR (acquisition close)",
+        "claim": "Ball acquired and operates the Florida Can Manufacturing aluminum can plant in Winter Haven FL"
+      }
+    ],
+    "imageryDate": "satellite ~2024-2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball closed the $160M acquisition of the Winter Haven can plant on 2025-02-04 and operates it within its North American network; no divestiture signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

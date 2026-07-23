@@ -1,0 +1,318 @@
+{
+  "account": "Ball Corporation",
+  "generatedAt": "2026-07-23",
+  "facilityCount": 20,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Ball - Golden CO",
+      "city": "Golden",
+      "state": "CO",
+      "type": "Beverage Can Plant (bodies, ends, Alumi-Tek bottles)",
+      "address": "4525 Indiana St, Golden, CO 80403",
+      "lat": 39.777092,
+      "lng": -105.166467,
+      "source": "Ball 10-K (bodies+ends+Alumi-Tek) + Ball Metal Beverage dunnage-location PDF (cask.com) + Golden Chamber/Yelp - flagship beverage plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Ball - Findlay OH",
+      "city": "Findlay",
+      "state": "OH",
+      "type": "Beverage Can Plant (bodies and ends)",
+      "address": "5155 Distribution Dr, Findlay, OH 45840",
+      "lat": 41.091946,
+      "lng": -83.639778,
+      "source": "Ball 10-K (bodies+ends) + Ball Metal Beverage dunnage-location PDF (cask.com)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Ball - Conroe TX",
+      "city": "Conroe",
+      "state": "TX",
+      "type": "Beverage Can Plant (bodies and Alumi-Tek bottles)",
+      "address": "1001 North FM 3083 East, Conroe, TX 77303",
+      "lat": 30.348228,
+      "lng": -95.439626,
+      "source": "Ball 10-K (bodies+Alumi-Tek) + Ball Metal Beverage dunnage-location PDF (cask.com) - listed as active BMBCC Conroe",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Ball - Tampa FL",
+      "city": "Tampa",
+      "state": "FL",
+      "type": "Beverage Can Plant (bodies)",
+      "address": "4700 Whiteway Dr, Tampa, FL 33617",
+      "lat": 28.04873,
+      "lng": -82.406302,
+      "source": "Ball 10-K (bodies) + Ball Metal Beverage dunnage-location PDF (cask.com)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Ball - Williamsburg VA",
+      "city": "Williamsburg",
+      "state": "VA",
+      "type": "Beverage Can Plant (bodies)",
+      "address": "8935 Pocahontas Trail, Williamsburg, VA 23185",
+      "lat": 37.20663,
+      "lng": -76.611714,
+      "source": "Ball 10-K (bodies) + Ball Metal Beverage dunnage-location PDF (cask.com)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Ball - Fairfield CA",
+      "city": "Fairfield",
+      "state": "CA",
+      "type": "Beverage Can Plant (bodies)",
+      "address": "2345 Huntington Dr, Fairfield, CA 94533",
+      "lat": 38.276165,
+      "lng": -121.976289,
+      "source": "Ball 10-K (bodies) + Ball Metal Beverage dunnage-location PDF (cask.com)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Ball - Kapolei HI",
+      "city": "Kapolei",
+      "state": "HI",
+      "type": "Beverage Can Plant (bodies)",
+      "address": "91-320 Komohana St, Kapolei, HI 96707",
+      "lat": 21.306703,
+      "lng": -158.094845,
+      "source": "Ball 10-K (bodies) + Ball Metal Beverage dunnage-location PDF (cask.com) + D&B - BMBCC Hawaii",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Ball - Monticello IN",
+      "city": "Monticello",
+      "state": "IN",
+      "type": "Beverage Can Plant (bodies)",
+      "address": "501 N 6th St, Monticello, IN 47960",
+      "lat": 40.750222,
+      "lng": -86.773529,
+      "source": "Ball 10-K (bodies) + Yellowpages (Ball Metal Beverage Container Corp, Monticello) - operating since 1988",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Ball - Goodyear AZ",
+      "city": "Goodyear",
+      "state": "AZ",
+      "type": "Beverage Can Plant (bodies)",
+      "address": "4455 N Cotton Ln, Goodyear, AZ 85395",
+      "lat": 33.498522,
+      "lng": -112.42568,
+      "source": "Ball 10-K (bodies) + Yellowpages/Cylex listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Ball - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies); dunnage PDF shows Rehrig pooling warehouse at 6601 Will Rogers Blvd, Fort Worth TX 76140 (plant is adjacent) - exact plant street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Ball - Glendale AZ",
+      "city": "Glendale",
+      "state": "AZ",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies); Ball press - plant started up Q1 2021 - exact street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Ball - Fort Atkinson WI",
+      "city": "Fort Atkinson",
+      "state": "WI",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies); dunnage PDF shows STC Warehouse dunnage node at 201 E Cramer St, Fort Atkinson WI 53538 (plant nearby) - exact plant street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Ball - Pittston PA",
+      "city": "Pittston (Jenkins Township)",
+      "state": "PA",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies) + Ball/Area Development press - retrofitted ~1.08M sq ft building in Jenkins Township, CenterPoint Commerce Park; production began mid-2021 - exact street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Ball - Saratoga Springs NY",
+      "city": "Saratoga Springs",
+      "state": "NY",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies); dunnage PDF shows Saratoga Warehouse Associates node at 33 Cady Hill Blvd, Saratoga Springs NY 12866 (dunnage, not the plant) - exact plant street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Ball - Rome GA (Cans)",
+      "city": "Rome",
+      "state": "GA",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies); dunnage PDF routes Rome dunnage via Northern Georgia Logistics, 212 Burlington Dr, Shannon GA 30172; can plant off West Hermitage Rd, Rome GA - exact plant street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Ball - Rome GA (Cups)",
+      "city": "Rome",
+      "state": "GA",
+      "type": "Aluminum Cups Plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball press releases (2019) + Rome/Floyd Chamber - aluminum cups plant adjacent to Rome can plant, near GA-53 and West Hermitage Rd, Floyd County - exact street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Ball - Winter Haven FL",
+      "city": "Winter Haven",
+      "state": "FL",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (bodies) + Packaging Dive/Food Dive (2025) - acquired via Florida Can Manufacturing acquisition - exact street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Ball - Bowling Green KY",
+      "city": "Bowling Green",
+      "state": "KY",
+      "type": "Can End Plant (beverage can ends)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball 10-K (ends) + Ball/BG Chamber press (2021) - aluminum end manufacturing at Kentucky Transpark - exact street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Ball - North Las Vegas NV",
+      "city": "North Las Vegas",
+      "state": "NV",
+      "type": "Beverage Can Plant (bodies)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ball press (2021) + Nasdaq/StockTitan - multi-line beverage can plant, production started late 2022, ~180 jobs - exact street not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Ball - Millersburg OR",
+      "city": "Millersburg",
+      "state": "OR",
+      "type": "Beverage Can Plant (bodies) / Warehouse",
+      "address": "3130 NE Transition Pkwy, Millersburg, OR 97321",
+      "lat": 44.679328,
+      "lng": -123.065006,
+      "source": "City of Millersburg + Oregon Business + Ball earnings - new mid-Willamette Valley can plant, startup H1 2026",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-07-23"
+}

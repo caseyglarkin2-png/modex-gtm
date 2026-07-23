@@ -1,0 +1,86 @@
+{
+  "name": "Ball - Tampa FL",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 28.048700, "lng": -82.405800 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 28.050800, "lng": -82.407900 },
+      { "lat": 28.050600, "lng": -82.404800 },
+      { "lat": 28.047300, "lng": -82.404800 },
+      { "lat": 28.047300, "lng": -82.408500 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 28.047600, "lng": -82.405200 },
+      { "lat": 28.047600, "lng": -82.404800 },
+      { "lat": 28.047100, "lng": -82.404800 },
+      { "lat": 28.047100, "lng": -82.405200 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 28.050000, "lng": -82.405100 },
+        { "lat": 28.050000, "lng": -82.404700 },
+        { "lat": 28.047800, "lng": -82.404700 },
+        { "lat": 28.047800, "lng": -82.405100 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 28.049600, "lng": -82.406600 },
+        { "lat": 28.049550, "lng": -82.405400 },
+        { "lat": 28.049350, "lng": -82.405450 },
+        { "lat": 28.049400, "lng": -82.406650 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 2, "pano": "ztRH9cIQfz9plQjPoTKwGg", "hasCoverage": true },
+      "truckGate": { "heading": 2, "pano": "ztRH9cIQfz9plQjPoTKwGg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18, "trailersVisible": 15, "trailerParkingCapacity": 25,
+    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.048700,-82.405800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Chain-link perimeter fence around the plant yard (visible in 2025-11 Street View along the Whiteway frontage). Truck access via the east private drive/staging lane and a south drive off Whiteway. Gated/controlled perimeter but the access lanes appear open during operations. Flagged uncertain.",
+    "guardShack": "No staffed guard booth observed. guardShack false; with a gate and no booth, remoteGs true (badge/kiosk inferred).",
+    "drivewayShort": "Compact urban site; short approach from road to docks.",
+    "dockDoors": "Docks on the north building's south face and the plant's SE; ~10-25 band (estimate).",
+    "dropArea": "Outbound trailers stage along the east private drive (~10-15).",
+    "multipleFacilities": "Four buildings on the Ball property (main plant + north building + east ancillary + west ancillary), consistent with public records.",
+    "urbanRural": "Dense Tampa residential neighborhood (Temple Terrace/East Tampa); Urban.",
+    "railServed": "No rail spur into the property.",
+    "backupSensitive": "Compact site with staging along a narrow drive near residential and a public park; borderline but left false (drive has room)."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 3, "url": "https://floridaparcels.com/property/39/19281642Z000000000360A", "date": "2025", "type": "county property-appraiser parcel record", "claim": "4700 E Whiteway Dr owned by Ball Metal Beverage Container (owner = operator; Ball-owned plant)" },
+      { "tier": 3, "url": "https://www.tampabaychamber.com/membership/fit-two/ball-corporation/", "date": "2026", "type": "chamber member listing", "claim": "Ball Corporation active member; aluminum packaging plant in Tampa" }
+    ],
+    "imageryDate": "2025-11 (Street View); satellite 2026 Airbus/Maxar vintage",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hillsborough County parcel record lists Ball Metal Beverage Container as owner of 4700 E Whiteway Dr (Ball-owned/operated plant); current chamber + business listings (Yelp updated 2026); not on Ball's 2022-2024 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

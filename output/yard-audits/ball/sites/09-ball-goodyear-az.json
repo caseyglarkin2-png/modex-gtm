@@ -1,0 +1,227 @@
+{
+  "name": "Ball - Goodyear AZ",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": {
+    "lat": 33.4995,
+    "lng": -112.4238
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.5011,
+          "lng": -112.4256
+        },
+        {
+          "lat": 33.5011,
+          "lng": -112.4218
+        },
+        {
+          "lat": 33.4985,
+          "lng": -112.4218
+        },
+        {
+          "lat": 33.4985,
+          "lng": -112.4256
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.50065,
+          "lng": -112.425
+        },
+        {
+          "lat": 33.50065,
+          "lng": -112.4245
+        },
+        {
+          "lat": 33.50035,
+          "lng": -112.4245
+        },
+        {
+          "lat": 33.50035,
+          "lng": -112.425
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.50092,
+            "lng": -112.4245
+          },
+          {
+            "lat": 33.50092,
+            "lng": -112.4225
+          },
+          {
+            "lat": 33.5006,
+            "lng": -112.4225
+          },
+          {
+            "lat": 33.5006,
+            "lng": -112.4245
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.49872,
+            "lng": -112.4248
+          },
+          {
+            "lat": 33.49872,
+            "lng": -112.4225
+          },
+          {
+            "lat": 33.49845,
+            "lng": -112.4225
+          },
+          {
+            "lat": 33.49845,
+            "lng": -112.4248
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.50058,
+            "lng": -112.4245
+          },
+          {
+            "lat": 33.50058,
+            "lng": -112.4223
+          },
+          {
+            "lat": 33.50048,
+            "lng": -112.4223
+          },
+          {
+            "lat": 33.50048,
+            "lng": -112.4245
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.4988,
+            "lng": -112.4245
+          },
+          {
+            "lat": 33.4988,
+            "lng": -112.4223
+          },
+          {
+            "lat": 33.49872,
+            "lng": -112.4223
+          },
+          {
+            "lat": 33.49872,
+            "lng": -112.4245
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 38,
+        "pano": "XC33g_R4oAAl4h4RlA03zg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 10,
+        "pano": "XC33g_R4oAAl4h4RlA03zg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 25.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.4995,-112.4238,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryExitSeparate",
+    "shipRcvSeparate",
+    "dockDoorCount"
+  ],
+  "fieldNotes": {
+    "truckGate": "Modern (2018) ~500k+ sq ft secured plant with fully landscaped setbacks and controlled truck courts on the north and south faces; controlled entry inferred from the campus type, but no barrier arm was directly imaged.",
+    "guardShack": "No guard booth seen; office/employee entry with solar-canopy parking fronts Cotton Ln (SW). Remote kiosk/app check-in inferred (remoteGs).",
+    "shipRcvSeparate": "Separate dock-door banks with backed trailers on the north AND south building faces suggest split ship/receive.",
+    "dockDoorCount": "Very large building with long dock banks on two faces; 50+ band, ~60 estimate is approximate.",
+    "urbanRural": "Phoenix-metro industrial corridor (Cotton Ln / PV303) with agricultural land immediately west; called Urban for the major-metro context.",
+    "railServed": "No rail spur; desert site.",
+    "geofence": "Oriented rectangle estimated from z17-19 imagery; building near axis-aligned."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://azbigmedia.com/business/economic-development/ball-corporation-build-stateoftheart-facility-goodyear/",
+        "date": "2017",
+        "type": "dated company/econ-dev announcement",
+        "claim": "Ball built ~500,000 sq ft plant, $240M, NE corner of Montecito Ave & Cotton Ln, Goodyear"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-Ball-l-Goodyear,-AZ-jobs.html",
+        "date": "2025-01",
+        "type": "active Ball careers at Goodyear",
+        "claim": "Ball currently hiring at the Goodyear plant"
+      }
+    ],
+    "imageryDate": "2024-09",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball's own $240M Goodyear plant (NE corner Montecito/Cotton) built 2018 and still hiring; the 2023 closure was the separate Phoenix plant, not Goodyear.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

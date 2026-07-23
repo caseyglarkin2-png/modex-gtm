@@ -22,6 +22,7 @@
 export const ACCOUNT_DOMAINS: Record<string, string> = {
   'ab-inbev': 'ab-inbev.com',
   'amazon': 'amazon.com',
+  'ball': 'ball.com',
   'barnes-noble': 'bn.com',
   'bob-evans-farms': 'bobevans.com',
   'boston-beer-company': 'bostonbeer.com',

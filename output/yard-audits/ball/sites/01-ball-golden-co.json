@@ -1,0 +1,85 @@
+{
+  "name": "Ball - Golden CO",
+  "type": "Beverage Can Plant (bodies, ends, Alumi-Tek)",
+  "coords": { "lat": 39.777300, "lng": -105.167200 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.778550, "lng": -105.165450 },
+      { "lat": 39.778350, "lng": -105.171400 },
+      { "lat": 39.777200, "lng": -105.171100 },
+      { "lat": 39.776900, "lng": -105.168600 },
+      { "lat": 39.776600, "lng": -105.166600 },
+      { "lat": 39.776400, "lng": -105.165450 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.776940, "lng": -105.169350 },
+      { "lat": 39.776940, "lng": -105.168950 },
+      { "lat": 39.776620, "lng": -105.168950 },
+      { "lat": 39.776620, "lng": -105.169350 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.780000, "lng": -105.172400 },
+        { "lat": 39.779950, "lng": -105.169900 },
+        { "lat": 39.778700, "lng": -105.170050 },
+        { "lat": 39.778750, "lng": -105.172500 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.776860, "lng": -105.168520 },
+        { "lat": 39.776800, "lng": -105.166320 },
+        { "lat": 39.776620, "lng": -105.166340 },
+        { "lat": 39.776680, "lng": -105.168540 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 53, "pano": "aLOScVJ9QrjqThCOrtvTOQ", "hasCoverage": true },
+      "truckGate": { "heading": 22, "pano": "bFPhTabkt9GtCQhN86Smfw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 35, "trailerParkingCapacity": 55,
+    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 30.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.777300,-105.167200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "dropArea", "dropYard"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate at the operational interface. The south dock apron ('EAST DOCKS' signage, 2025-08 Street View) is open to the public road with tractors and trailers backed directly into dock doors, no barrier arm, no guard booth, no manned checkpoint. Perimeter is partial chain-link with sliding yard gates (west drive, 2022 SV) but the primary truck/dock access is uncontrolled.",
+    "guardShack": "None observed walking the frontage road east, west, SE and SW panos (2019-2025).",
+    "dockDoors": "Estimate. Long dock line along the south face of the main block ('EAST DOCKS'); ~5-6 trailers visible backed in at capture, banks extend across the south wall. 25-50 band is a modeled estimate for a plant of this output (4 can lines, ~95M cans/day).",
+    "dropArea": "Freight-trailer rows staged NW of the plant between the building and the rail corridor (~25-40 trailers). Note: a separate RV/boat storage lot sits further NW at the reservoir edge and is excluded.",
+    "railServed": "Rail spur runs along the north edge of the property into the plant (visible track, NW-SE corridor).",
+    "urbanRural": "Golden/Arvada industrial corridor within the Denver metro fabric."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://business.goldenchamber.org/list/member/ball-corporation-1049", "date": "2026-06", "type": "company/chamber facility listing", "claim": "Ball Corporation manufacturing at 4525 Indiana St, Golden CO - current member listing" },
+      { "tier": 1, "url": "https://www.womeninmanufacturing.org/events/wim-colorado-ball-metal-packaging-tour", "date": "2024", "type": "company facility tour (Ball-hosted)", "claim": "Ball Metal Beverage Packaging factory tour at the Golden plant" }
+    ],
+    "imageryDate": "2025-08 (Street View); satellite 2026 Airbus/Maxar vintage",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball's oldest beverage can plant (operating since 1962); active company/chamber listings and a 2024 Ball-hosted factory tour; not on Ball's 2022-2024 North American closure list (Phoenix, St. Paul, Wallkill, Kent, Verona VA slug).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

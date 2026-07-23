@@ -1,0 +1,94 @@
+{
+  "name": "Ball - Pittston PA (Jenkins Township)",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 41.2860, "lng": -75.7725 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.28905, "lng": -75.77850 },
+      { "lat": 41.28850, "lng": -75.76520 },
+      { "lat": 41.28345, "lng": -75.76560 },
+      { "lat": 41.28395, "lng": -75.77900 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.28720, "lng": -75.77760 },
+      { "lat": 41.28700, "lng": -75.77680 },
+      { "lat": 41.28650, "lng": -75.77720 },
+      { "lat": 41.28670, "lng": -75.77800 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.28430, "lng": -75.77420 },
+        { "lat": 41.28390, "lng": -75.76620 },
+        { "lat": 41.28330, "lng": -75.76640 },
+        { "lat": 41.28370, "lng": -75.77440 }
+      ] },
+      { "ring": [
+        { "lat": 41.28960, "lng": -75.77880 },
+        { "lat": 41.28905, "lng": -75.77500 },
+        { "lat": 41.28780, "lng": -75.77540 },
+        { "lat": 41.28840, "lng": -75.77920 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.28470, "lng": -75.77400 },
+        { "lat": 41.28430, "lng": -75.76580 },
+        { "lat": 41.28410, "lng": -75.76585 },
+        { "lat": 41.28450, "lng": -75.77405 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 135, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 135, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 88.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.2860,-75.7725,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "entryExitSeparate", "shipRcvSeparate", "dockDoorCount", "siteAreaAcres"],
+  "fieldNotes": {
+    "site": "Ball retrofitted a ~1,078,799 sq ft former Techneglas building at 140 Industrial Dr, Jenkins Township (CenterPoint Commerce & Trade Park East); can production began mid-2021. One very large single building, long axis ~E-W (slight tilt).",
+    "truckGate": "No per-building gate or guard booth visible; the building's north truck court and lots open directly onto CenterPoint park spine roads (Street View shows open, un-barriered access). Classed as no-gate/no-guard, flagged medium — security may exist at building doors rather than a road barrier.",
+    "docks": "Continuous dock bank along the south face (rail-side) plus docks on the north/west faces of the building; 50+ total across faces (estimate ~60). Ship/receive plausibly split across separate faces -> shipRcvSeparate true (flagged).",
+    "dropYards": "South drop yard holds a long trailer row; a large paved OVERFLOW/staging lot sits at the NW. Combined capacity ~150 trailers, ~45 visible.",
+    "railServed": "A double-track freight rail line runs immediately along the SW/west property edge, but no spur enters the building -> railServed false (spur-add is physically feasible given the adjacency).",
+    "urbanRural": "Jenkins Township industrial park at the wooded edge of the Scranton-Wilkes-Barre metro, adjacent residential subdivision + I-81; classed Rural (edge-of-town industrial-park setting). Cell coverage fine (I-81 corridor).",
+    "siteAreaAcres": "~88 acres estimated for building + north court + south drop yard + NW overflow lot; perimeter is an approximate oriented trace."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf", "date": "2025-02", "type": "company locations map", "claim": "Ball's own Feb-2025 locations map lists Pittston, PA as an operating site." },
+      { "tier": 1, "url": "https://www.areadevelopment.com/newsItems/12-23-2020/ball-corporation-pittston-pennsylvania.shtml", "date": "2020-12", "type": "development PR", "claim": "Ball retrofitting the 1,078,799 sq ft Jenkins Township building into an aluminum beverage can plant; ~$300M, ~230 jobs; production 2021." }
+    ],
+    "imageryDate": "2023-11 (Street View) / satellite ~2024-2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "New (2021) Ball can plant, confirmed current on Ball's own 2025 locations map; not among Ball's 2022-24 closures (Phoenix/St. Paul/Kent/Verona).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

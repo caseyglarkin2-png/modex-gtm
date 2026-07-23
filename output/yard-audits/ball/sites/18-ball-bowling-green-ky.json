@@ -1,0 +1,206 @@
+{
+  "name": "Ball - Bowling Green KY",
+  "type": "Can End Plant (beverage can ends)",
+  "coords": {
+    "lat": 37.03905,
+    "lng": -86.2979
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.036018,
+          "lng": -86.296362
+        },
+        {
+          "lat": 37.039905,
+          "lng": -86.293773
+        },
+        {
+          "lat": 37.042182,
+          "lng": -86.299138
+        },
+        {
+          "lat": 37.038295,
+          "lng": -86.301727
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.037636,
+          "lng": -86.298207
+        },
+        {
+          "lat": 37.037953,
+          "lng": -86.297996
+        },
+        {
+          "lat": 37.038164,
+          "lng": -86.298493
+        },
+        {
+          "lat": 37.037847,
+          "lng": -86.298704
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.03743,
+            "lng": -86.297247
+          },
+          {
+            "lat": 37.0377,
+            "lng": -86.297067
+          },
+          {
+            "lat": 37.03867,
+            "lng": -86.299353
+          },
+          {
+            "lat": 37.0384,
+            "lng": -86.299533
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.03743,
+            "lng": -86.297247
+          },
+          {
+            "lat": 37.0377,
+            "lng": -86.297067
+          },
+          {
+            "lat": 37.03867,
+            "lng": -86.299353
+          },
+          {
+            "lat": 37.0384,
+            "lng": -86.299533
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.040063,
+            "lng": -86.297954
+          },
+          {
+            "lat": 37.040189,
+            "lng": -86.298252
+          },
+          {
+            "lat": 37.039237,
+            "lng": -86.298886
+          },
+          {
+            "lat": 37.039111,
+            "lng": -86.298588
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 21,
+        "pano": "ik6C6ciN5SkaeXb88oFeAA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 34,
+        "pano": "ik6C6ciN5SkaeXb88oFeAA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 65.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.03905,-86.2979,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes",
+    "railServed"
+  ],
+  "fieldNotes": {
+    "truckGate": "Entrance off Production Ave is an open industrial driveway with a monument sign; no barrier arm or booth visible in 2026-03 Street View, so scored as no controlled gate.",
+    "dockDoorCount": "~18 estimated: a dock bank along the south wall (Street View shows a row of doors) plus a smaller loading area at the NW corner where 2 trailers sit. Overhead white roof obscures exact count.",
+    "shipRcvSeparate": "Two separate dock zones (south face + NW corner) suggest split ship/receive; medium confidence.",
+    "railServed": "Kentucky Transpark has CSX service at its south end, but no rail spur is visible entering the Ball parcel.",
+    "siteAreaAcres": "Fenced-property estimate from oriented perimeter; building itself ~500k+ sqft."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/ball-announces-new-aluminum-end-manufacturing-facility-in-bowling-green-kentucky-production-scheduled-to-begin-in-early-2022-301202652.html",
+        "date": "2021-01-07",
+        "type": "company PR (aluminum end plant announcement, Bowling Green)",
+        "claim": "Ball announced and built its aluminum end plant at Kentucky Transpark, Bowling Green"
+      },
+      {
+        "tier": 3,
+        "url": "https://maps.googleapis.com/maps/api/streetview?pano=ik6C6ciN5SkaeXb88oFeAA",
+        "date": "2026-03",
+        "type": "Street View imagery + on-building blue Ball branding",
+        "claim": "Active branded plant operating as of March 2026"
+      }
+    ],
+    "imageryDate": "satellite ~2024 summer; Street View 2026-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball-built aluminum end plant, first tenant of the Transpark 300-acre expansion; operating and branded in current imagery, no divestiture signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

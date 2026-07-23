@@ -1,0 +1,96 @@
+{
+  "name": "Ball - Rome GA (Cans)",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 34.3302, "lng": -85.0930 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.33165, "lng": -85.09375 },
+      { "lat": 34.33095, "lng": -85.09175 },
+      { "lat": 34.32940, "lng": -85.09250 },
+      { "lat": 34.32895, "lng": -85.09370 },
+      { "lat": 34.32985, "lng": -85.09475 },
+      { "lat": 34.33095, "lng": -85.09470 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.33130, "lng": -85.09405 },
+      { "lat": 34.33110, "lng": -85.09355 },
+      { "lat": 34.33075, "lng": -85.09380 },
+      { "lat": 34.33095, "lng": -85.09430 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.33055, "lng": -85.09205 },
+        { "lat": 34.33010, "lng": -85.09195 },
+        { "lat": 34.32985, "lng": -85.09255 },
+        { "lat": 34.33030, "lng": -85.09265 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.33050, "lng": -85.09215 },
+        { "lat": 34.33005, "lng": -85.09205 },
+        { "lat": 34.32995, "lng": -85.09235 },
+        { "lat": 34.33040, "lng": -85.09245 }
+      ] },
+      { "ring": [
+        { "lat": 34.33000, "lng": -85.09445 },
+        { "lat": 34.32965, "lng": -85.09400 },
+        { "lat": 34.32945, "lng": -85.09420 },
+        { "lat": 34.32980, "lng": -85.09465 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 135, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 135, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 40.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.3302,-85.0930,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "shipRcvSeparate", "dockDoorCount", "siteAreaAcres"],
+  "fieldNotes": {
+    "site": "Ball's existing aluminum beverage-can plant at ~395 West Hermitage Rd NE, Rome (Floyd County), off GA-53 in the Northwest Regional Industrial Park. Complex = a grey-roof warehouse/finished-goods hall (rotated NW-SE) connected to a white-roof process/manufacturing hall on the SW (heavy rooftop equipment). Ball's newer aluminum CUPS plant sits adjacent to the SW (separate Ball facility) -> multipleFacilities true.",
+    "canVsCups": "Roster idx 15 = the CANS plant (the older, existing beverage-can plant). The adjacent aluminum-cups plant (2020, ~180 jobs) is a distinct building and NOT this audited site.",
+    "truckGate": "Single entrance drive off West Hermitage Rd opening onto a large internal apron; no guard booth or barrier arm visible at the throat -> classed no-gate/no-guard, flagged medium (a gatehouse could exist but is not visible in imagery).",
+    "docks": "Docks split across two faces: the grey warehouse's SE (rail-side) apron (finished-can outbound) and the white process hall's SW face (coil/inbound). ~18 doors total; shipRcvSeparate true (flagged).",
+    "railServed": "A freight mainline runs immediately along the east property edge but no spur enters the site -> false (spur-add feasible).",
+    "urbanRural": "NW Rome/Floyd County industrial park, fields/woods and Berry College nearby -> Rural (small-city edge). Cell coverage fine (GA-53 corridor).",
+    "buildingCount": "2 connected masses (warehouse + process hall) counted for this can-plant site; the adjacent cups plant is excluded from this site's count."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://d1io3yog0oux5.cloudfront.net/_c90dc559e761ccdb9de6fea68380e756/ball/files/pages/ball/db/930/content/Ball-Locations-Map-022025-v2.pdf", "date": "2025-02", "type": "company locations map", "claim": "Ball's own Feb-2025 locations map lists Rome, GA as an operating site." },
+      { "tier": 1, "url": "https://gov.georgia.gov/press-releases/2019-10-16/ball-corporation-build-new-manufacturing-facility-floyd-county-create", "date": "2019-10", "type": "state PR", "claim": "Ball's new aluminum-cups plant to be built adjacent to Ball's EXISTING aluminum beverage-can manufacturing plant in Rome/Floyd County." }
+    ],
+    "imageryDate": "2024-05 (Street View) / satellite ~2024-2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ball's existing Rome can plant is current per Ball's own 2025 locations map and is explicitly referenced as the 'existing' plant in the 2019 cups-plant announcement; not among Ball's closures.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}

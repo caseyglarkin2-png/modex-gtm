@@ -1,0 +1,85 @@
+{
+  "name": "Ball - Williamsburg VA",
+  "type": "Beverage Can Plant (bodies)",
+  "coords": { "lat": 37.206200, "lng": -76.611400 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.209050, "lng": -76.616000 },
+      { "lat": 37.208000, "lng": -76.608500 },
+      { "lat": 37.204300, "lng": -76.609200 },
+      { "lat": 37.204400, "lng": -76.615700 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.208100, "lng": -76.609900 },
+      { "lat": 37.208100, "lng": -76.609500 },
+      { "lat": 37.207600, "lng": -76.609500 },
+      { "lat": 37.207600, "lng": -76.609900 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 37.205600, "lng": -76.612000 },
+        { "lat": 37.205600, "lng": -76.611200 },
+        { "lat": 37.205100, "lng": -76.611200 },
+        { "lat": 37.205100, "lng": -76.612000 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.206050, "lng": -76.612700 },
+        { "lat": 37.206000, "lng": -76.612000 },
+        { "lat": 37.205800, "lng": -76.612050 },
+        { "lat": 37.205850, "lng": -76.612750 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 192, "pano": "TfRN43U5fcrH1_OHyESymw", "hasCoverage": true },
+      "truckGate": { "heading": 192, "pano": "TfRN43U5fcrH1_OHyESymw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 12, "trailerParkingCapacity": 30,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 40.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.206200,-76.611400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "multipleFacilities", "urbanRural"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate confirmed. The entrance from Pocahontas Trail (NE) is an open perimeter drive; perimeter is vegetation-buffered rather than hard-fenced. A small standalone structure sits at the plant's NE corner (utility or possible gatehouse - unconfirmed). Street View is vegetation-screened, so gate/booth control could not be verified. truckGate = false on the evidence, flagged uncertain.",
+    "guardShack": "No staffed booth confirmed (SV screened). guardShack false; no confirmed gate so remoteGs also false.",
+    "drivewayLong": "Long perimeter/approach drive from Pocahontas Trail around to the SW docks.",
+    "dockDoors": "SW dock apron of the main plant plus a west warehouse dock face; ~25-50 band (estimate).",
+    "dropArea": "Modest trailer staging near the SW docks (~10-25).",
+    "railServed": "The east corridor is electric transmission lines, not rail - no rail spur into the property.",
+    "multipleFacilities": "Main plant (with attached process building) plus a separate long west warehouse of uncertain tenancy; treated as a single Ball facility (false), flagged uncertain.",
+    "urbanRural": "James River Commerce Center on the edge of Williamsburg/Grove; wooded with low-density residential around (Rural per rubric, flagged)."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://enviro.epa.gov/triexplorer/release_fac_profile?TRI=23185BLLPC8935P", "date": "2020", "type": "EPA TRI facility report", "claim": "Ball Metal Beverage Container, 8935 Pocahontas Trail, Williamsburg - TRI reporting facility (self-attested federal operating report)" },
+      { "tier": 1, "url": "https://connect.businesswilliamsburg.com/directory/Details/ball-metal-beverage-container-group-2458962", "date": "2026", "type": "Greater Williamsburg Chamber directory listing", "claim": "Ball Metal Beverage Container Group active at 8935 Pocahontas Trail, Williamsburg" }
+    ],
+    "imageryDate": "2024-09 (Street View); satellite 2026 Airbus/Maxar vintage",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "EPA TRI facility record + current Greater Williamsburg Chamber directory listing at 8935 Pocahontas Trail; distinct from Ball's closed Verona VA slug plant; not on Ball's 2022-2024 can-plant closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-23"
+  },
+  "method": "deep-audit"
+}
