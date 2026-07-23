@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { selectDue } from '@/lib/queue/schedule';
 import { STATUS } from '@/lib/queue/types';
+import { isOutreachPaused } from '@/lib/feature-flags';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -16,6 +17,12 @@ export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
   if (!isAuthorizedQueueAgent(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // Kill-switch: hand out nothing while the automated motion is paused, so no
+  // item is claimed. Items stay 'approved' and resume cleanly when unpaused.
+  if (isOutreachPaused()) {
+    return NextResponse.json({ items: [], paused: true });
   }
 
   const rows = await prisma.draftQueueItem.findMany({

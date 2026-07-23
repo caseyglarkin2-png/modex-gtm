@@ -29,3 +29,16 @@ export const SOURCE_APPROVAL_GATE_ENABLED = envBool('SOURCE_APPROVAL_GATE_ENABLE
 
 /** Gates CC parsing/validation in bulk send contracts. Default: false (progressive rollout). */
 export const SOURCE_CC_BULK_ENABLED = envBool('SOURCE_CC_BULK_ENABLED', false);
+
+/**
+ * Master kill-switch for the automated outbound queue (the 1:1 Draft-Queue
+ * drain). Read at CALL TIME (not module load) so flipping the env var + a
+ * redeploy halts sending immediately, and so it is unit-testable. Parallels
+ * NOTIFICATIONS_PAUSED (intent-notifications.ts). When paused, the due-cron
+ * hands out no items and the send-cron refuses, leaving every item 'approved'
+ * for a clean resume — nothing is burned as skipped. Does NOT affect the manual
+ * /discovery send route (a deliberate operator action), only the automation.
+ */
+export function isOutreachPaused(): boolean {
+  return /^(1|true|yes|on)$/i.test((process.env.OUTREACH_PAUSED ?? '').trim());
+}

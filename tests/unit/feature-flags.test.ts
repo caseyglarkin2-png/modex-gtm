@@ -11,6 +11,7 @@ describe('feature-flags', () => {
     delete process.env.SOURCE_EVIDENCE_INGEST_ENABLED;
     delete process.env.SOURCE_APPROVAL_GATE_ENABLED;
     delete process.env.SOURCE_CC_BULK_ENABLED;
+    delete process.env.OUTREACH_PAUSED;
   });
 
   it('returns defaults when env vars are not set', async () => {
@@ -62,5 +63,37 @@ describe('feature-flags', () => {
     expect(flags.SOURCE_EVIDENCE_INGEST_ENABLED).toBe(true);
     expect(flags.SOURCE_APPROVAL_GATE_ENABLED).toBe(true);
     expect(flags.SOURCE_CC_BULK_ENABLED).toBe(false);
+  });
+
+  describe('isOutreachPaused (automated-queue kill-switch, read at call time)', () => {
+    it('defaults to NOT paused when unset', async () => {
+      const { isOutreachPaused } = await import('@/lib/feature-flags');
+      expect(isOutreachPaused()).toBe(false);
+    });
+
+    it('is paused for on/true/1/yes (case-insensitive, trimmed)', async () => {
+      const { isOutreachPaused } = await import('@/lib/feature-flags');
+      for (const v of ['1', 'true', 'TRUE', 'yes', 'on', ' on ']) {
+        process.env.OUTREACH_PAUSED = v;
+        expect(isOutreachPaused(), v).toBe(true);
+      }
+    });
+
+    it('is NOT paused for false/0/empty/garbage', async () => {
+      const { isOutreachPaused } = await import('@/lib/feature-flags');
+      for (const v of ['false', '0', '', 'off', 'nope']) {
+        process.env.OUTREACH_PAUSED = v;
+        expect(isOutreachPaused(), v).toBe(false);
+      }
+    });
+
+    it('reflects env changes at call time (not frozen at import)', async () => {
+      const { isOutreachPaused } = await import('@/lib/feature-flags');
+      expect(isOutreachPaused()).toBe(false);
+      process.env.OUTREACH_PAUSED = 'true';
+      expect(isOutreachPaused()).toBe(true);
+      process.env.OUTREACH_PAUSED = 'false';
+      expect(isOutreachPaused()).toBe(false);
+    });
   });
 });

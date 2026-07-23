@@ -4,6 +4,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { sendQueueItem } from '@/lib/queue/send';
 import { prodSendDeps } from '@/lib/queue/send-deps';
 import { onSendOutcome } from '@/lib/queue/sequence-runtime';
+import { isOutreachPaused } from '@/lib/feature-flags';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -18,6 +19,13 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!isAuthorizedQueueAgent(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // Kill-switch: refuse to send while the automated motion is paused. The item
+  // is left untouched ('approved'), not marked skipped/failed, so it sends on
+  // resume. Manual /discovery sends are unaffected (this gates only the cron).
+  if (isOutreachPaused()) {
+    return NextResponse.json({ skipped: true, paused: true }, { status: 200 });
   }
 
   const { ok } = rateLimit('queue-agent-send');
