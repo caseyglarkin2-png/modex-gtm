@@ -28,9 +28,18 @@ export interface DraftBatchTarget {
   hook: string;
 }
 
-export interface DraftBatchPayload {
+/** Common envelope every draft-batch dispatch shares. `dispatchDraftBatch`
+ * accepts this base so both the cold discovery-worklist payload and the warm
+ * warm-committee payload (src/lib/discovery/warm-committee.ts) POST through the
+ * one client. The `source` tells Clawd which drafting path to run. */
+export interface DraftBatchEnvelope {
   owner: string;
   requestedBy: string;
+  source: string;
+  targets: unknown[];
+}
+
+export interface DraftBatchPayload extends DraftBatchEnvelope {
   source: 'discovery-worklist';
   targets: DraftBatchTarget[];
 }
@@ -112,7 +121,7 @@ export type DispatchResult =
  * and short-circuits WITHOUT calling fetch.
  */
 export async function dispatchDraftBatch(
-  payload: DraftBatchPayload,
+  payload: DraftBatchEnvelope,
   opts: DispatchOptions = {},
 ): Promise<DispatchResult> {
   const baseUrl = opts.baseUrl ?? resolveClawdBaseUrl();
