@@ -5,6 +5,7 @@ import { fetchTamCompanies, fetchAssociatedContactIds, readContacts } from '@/li
 import { hasAccountIntent } from '@/lib/revops/qualification/model';
 import { selectWarmCommitteeTargets, buildWarmDraftBatchPayload } from '@/lib/discovery/warm-committee';
 import { dispatchDraftBatch } from '@/lib/discovery/clawd-dispatch';
+import { claimDailyRun, releaseDailyRun } from '@/lib/cron-idempotency';
 import { isOutreachPaused } from '@/lib/feature-flags';
 import { STATUS } from '@/lib/queue/types';
 import type { QualContact } from '@/lib/revops/qualification/types';
@@ -88,7 +89,23 @@ export async function GET(request: Request) {
   }
 
   const payload = buildWarmDraftBatchPayload(targets, OWNER);
-  const result = await dispatchDraftBatch(payload);
+
+  // Idempotency: claim today's run right before handing the committee to Clawd,
+  // so a nudged or retried invocation the same day no-ops instead of re-sending.
+  // Released below if the dispatch itself fails, so a genuine retry can proceed.
+  const claim = await claimDailyRun('warm-dispatch');
+  if (!claim.claimed) {
+    return NextResponse.json({ dispatched: 0, reason: claim.reason, warmAccounts: warm.length });
+  }
+
+  let result;
+  try {
+    result = await dispatchDraftBatch(payload);
+  } catch (err) {
+    await releaseDailyRun('warm-dispatch');
+    throw err;
+  }
+  if (!result.ok) await releaseDailyRun('warm-dispatch');
 
   return NextResponse.json({
     warmAccounts: warm.length,

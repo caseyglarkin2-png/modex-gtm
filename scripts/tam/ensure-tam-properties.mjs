@@ -25,6 +25,12 @@ const props = [
   { name: 'tam_facility_count', label: 'TAM Facility Count (est)', type: 'number', fieldType: 'number' },
   { name: 'tam_reason', label: 'TAM Reason', type: 'string', fieldType: 'textarea' },
   { name: 'tam_source', label: 'TAM Source', type: 'string', fieldType: 'text' },
+  // Structured confidence derived from tam_source so a downstream gate can prefer
+  // verified TAM. Most of the 'in' set is rule/proxy or WebSearch, NOT freight
+  // ground truth; this field makes that distinction machine-queryable without
+  // re-tagging anyone. Populated by scripts/tam/mark-tam-confidence.mjs.
+  { name: 'tam_confidence', label: 'TAM Confidence', type: 'enumeration', fieldType: 'select',
+    options: [opt('Ground truth (verified freight footprint)', 'ground_truth', 0), opt('Web research', 'web_research', 1), opt('Rule / proxy', 'rule_proxy', 2), opt('Unverified', 'unverified', 3)] },
   { name: 'tam_evaluated_at', label: 'TAM Evaluated At', type: 'datetime', fieldType: 'date' },
   { name: 'na_operating', label: 'NA Operating', type: 'enumeration', fieldType: 'booleancheckbox',
     options: [opt('Yes', 'true', 0), opt('No', 'false', 1)] },

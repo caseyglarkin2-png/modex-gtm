@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
+import { claimDailyRun, releaseDailyRun } from '@/lib/cron-idempotency';
 import { prisma } from '@/lib/prisma';
 import { loadLatestScored, buildCuratedRows } from '@/lib/discovery/data';
 import { enrichRowsWithPipeline } from '@/lib/discovery/enrich';
@@ -51,7 +52,21 @@ export async function GET(request: Request) {
 
   const prepared = prepareClawdDispatch(OWNER, fresh);
   if (!prepared.ok) return NextResponse.json({ dispatched: 0, reason: prepared.reason });
-  const result = await dispatchDraftBatch(prepared.payload);
+
+  // Idempotency: claim today's run right before we hand a batch to Clawd, so a
+  // nudged or retried invocation on the same day no-ops instead of re-sending.
+  // Released below if the dispatch itself fails, so a genuine retry can proceed.
+  const claim = await claimDailyRun('dispatch-daily');
+  if (!claim.claimed) return NextResponse.json({ dispatched: 0, reason: claim.reason });
+
+  let result;
+  try {
+    result = await dispatchDraftBatch(prepared.payload);
+  } catch (err) {
+    await releaseDailyRun('dispatch-daily');
+    throw err;
+  }
+  if (!result.ok) await releaseDailyRun('dispatch-daily');
 
   return NextResponse.json({
     dispatched: fresh.length,

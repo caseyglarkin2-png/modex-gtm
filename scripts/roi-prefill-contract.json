@@ -1,0 +1,24 @@
+{
+  "_comment": "Contract snapshot of the demo -> /roi localStorage prefill shape. The demo (src/components/demo/roi-cta-button.tsx buildRoiV2State) and the /for pages write localStorage['roi-v2-state']; the live yardflow.ai/roi calculator (Flow-State- components/roi/RoiCalculatorV2.tsx, STORAGE_KEY='roi-v2-state') reads it back as PersistedState = { asks: RoiAsks, assumptions: Record<CsvRoiArchetypeId, ArchetypeAssumptions> }. This file mirrors that reader's expected keys (Flow-State- src/lib/roi/roiCalcTypes.ts). validate-roi-prefill.mjs fails validate:packs if the modex writer drifts from this shape, so a silent prefill break cannot ship. If the Flow-State- csvModel / roiCalcTypes reader changes, re-sync this file AND the writer together; scripts/inspect-roi-state.mjs is the monthly live-side drift detector.",
+  "storageKey": "roi-v2-state",
+  "asks": [
+    "totalFacilities",
+    "facilitiesWithYms",
+    "facilitiesWithDropTrailers",
+    "averageMarginPerShipment"
+  ],
+  "archetypeIds": [
+    "withYms",
+    "dropsNoYms",
+    "withoutDrops"
+  ],
+  "assumptionKeys": [
+    "dcFtesPerShift",
+    "dcShifts",
+    "spotterFtesPerShift",
+    "spotterShifts",
+    "shipmentsPerDay",
+    "avgCycleTimeMinutes",
+    "annualFteCost"
+  ]
+}
