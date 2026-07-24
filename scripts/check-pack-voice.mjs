@@ -8,8 +8,16 @@
  *   - account.surprisingFindings[]
  *   - account.coverageNote.note
  *
+ * ALSO scans the exported narrative/body strings in the per-account
+ * microsite source (src/lib/microsites/accounts/*.ts) for the retired
+ * "throughput" doctrine, so the pack gate matches src/lib/ai/voice-guardrails.ts
+ * (POST_PIVOT_BANNED). The account files carry the /for memo prose (hypothesis,
+ * caveat, framingNarrative, heroOverride, etc.) that never becomes a JSON pack,
+ * so a banned word there would ship unguarded otherwise.
+ *
  * Violations (fail-the-build):
  *   - em dash (—) or en dash (–) — Casey's voice rule
+ *   - the word "throughput" (retired pre-pivot metric; say "production capacity" or "volume")
  *   - banned filler ("just", "simply", "in order to",
  *     "best in class", "leading", "industry-standard",
  *     "world-class")
@@ -25,6 +33,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PACK_DIR = path.join(process.cwd(), 'public', 'demo-packs');
+const ACCOUNT_DIR = path.join(process.cwd(), 'src', 'lib', 'microsites', 'accounts');
+
+// The hard metric ban, mirrored from src/lib/ai/voice-guardrails.ts POST_PIVOT_BANNED.
+// Applied to BOTH the JSON packs and the account narrative source.
+const THROUGHPUT = /\bthroughput/i;
 
 const BANNED_FILLERS = [
   /\bjust\b/i,
@@ -35,6 +48,7 @@ const BANNED_FILLERS = [
   /\bindustry[\s-]standard\b/i,
   /\bworld[\s-]class\b/i,
   /\bcutting[\s-]edge\b/i,
+  THROUGHPUT,
 ];
 
 const CAPS = {
@@ -85,13 +99,33 @@ for (const file of fs.readdirSync(PACK_DIR).filter((f) => f.endsWith('.json'))) 
     if (coverageNote.length > CAPS.coverageNote) {
       violations.push(`${slug}: coverageNote.note too long (${coverageNote.length} > ${CAPS.coverageNote})`);
     }
-    // Only check em-dash on coverageNote (not filler — coverageNote
-    // sometimes legitimately uses "leading" in industry context).
+    // Only check em-dash + throughput on coverageNote (not the softer filler —
+    // coverageNote sometimes legitimately uses "leading" in industry context).
     if (/[—–]/.test(coverageNote)) violations.push(`${slug}.coverageNote: contains em or en dash`);
+    if (THROUGHPUT.test(coverageNote)) violations.push(`${slug}.coverageNote: contains banned word "throughput"`);
   }
 }
 
-console.log(`Scanned ${total} packs.`);
+// Account narrative source scan. These .ts modules hold the /for memo prose that
+// never becomes a JSON pack. We only enforce the hard "throughput" ban here (not
+// the dash/filler rules, which false-positive on code, date ranges, and comments)
+// so the gate matches voice-guardrails.ts without churning unrelated prose.
+let accountFiles = 0;
+if (fs.existsSync(ACCOUNT_DIR)) {
+  for (const file of fs.readdirSync(ACCOUNT_DIR).filter((f) => f.endsWith('.ts') && f !== 'index.ts' && f !== 'schema.ts')) {
+    accountFiles++;
+    const src = fs.readFileSync(path.join(ACCOUNT_DIR, file), 'utf8');
+    if (!THROUGHPUT.test(src)) continue;
+    const lines = src.split(/\r?\n/);
+    lines.forEach((line, i) => {
+      if (THROUGHPUT.test(line)) {
+        violations.push(`accounts/${file}:${i + 1}: contains banned word "throughput" (say "production capacity" or "volume")`);
+      }
+    });
+  }
+}
+
+console.log(`Scanned ${total} packs + ${accountFiles} account narrative files.`);
 if (violations.length === 0) {
   console.log('VOICE CI PASSED.');
   process.exit(0);

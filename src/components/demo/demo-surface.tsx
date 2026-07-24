@@ -16,6 +16,8 @@ import { NetworkInsight } from './network-insight';
 import { DemoReframe } from './demo-reframe';
 import { SurprisingFindings } from './surprising-findings';
 import { RoiHandoffClose } from './roi-handoff-close';
+import { ForBookingPanel } from './for-booking-panel';
+import { trackEvent } from '@/lib/analytics';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -157,7 +159,11 @@ export function DemoSurface({
   const meetingsSlug = process.env.NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG;
   const bookAuditHref = meetingsSlug
     ? `https://meetings.hubspot.com/${meetingsSlug}?prospect_site=${encodeURIComponent(displayName)}`
-    : `https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`;
+    : '#book';
+
+  // `#book` scrolls to the on-page ForBookingPanel close; an external
+  // meetings-slug override still opens in a new tab, so gate target/rel on it.
+  const bookIsExternal = /^https?:/.test(bookAuditHref);
 
   // Scope blurb for the header, be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
@@ -396,9 +402,16 @@ export function DemoSurface({
               </RoiCtaButton>
               <a
                 href={bookAuditHref}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={bookIsExternal ? '_blank' : undefined}
+                rel={bookIsExternal ? 'noopener noreferrer' : undefined}
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
+                onClick={() =>
+                  trackEvent('booking_link_click', {
+                    slug: pack.account.slug,
+                    surface: 'demo',
+                    location: fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit',
+                  })
+                }
                 className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] bg-[#00B4FF] px-3 py-1.5 text-xs font-bold text-[#050505] transition-all hover:shadow-[0_0_22px_rgba(0,180,255,0.45)] md:inline-flex"
               >
                 Start a conversation →
@@ -430,9 +443,16 @@ export function DemoSurface({
           </RoiCtaButton>
           <a
             href={bookAuditHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={bookIsExternal ? '_blank' : undefined}
+            rel={bookIsExternal ? 'noopener noreferrer' : undefined}
             data-ms-cta-id="microsite-sticky-book-audit"
+            onClick={() =>
+              trackEvent('booking_link_click', {
+                slug: pack.account.slug,
+                surface: 'demo',
+                location: 'microsite-sticky-book-audit',
+              })
+            }
             className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] bg-[#00B4FF] px-3 text-[13px] font-bold text-[#050505]"
           >
             Start a conversation →
@@ -589,9 +609,16 @@ export function DemoSurface({
               </Link>
               <a
                 href={bookAuditHref}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={bookIsExternal ? '_blank' : undefined}
+                rel={bookIsExternal ? 'noopener noreferrer' : undefined}
                 data-ms-cta-id="demo-reply-start-conversation"
+                onClick={() =>
+                  trackEvent('booking_link_click', {
+                    slug: pack.account.slug,
+                    surface: 'demo',
+                    location: 'demo-reply-start-conversation',
+                  })
+                }
                 className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[10px] bg-[#00B4FF] px-5 py-2.5 text-sm font-bold text-[#050505] transition-all hover:shadow-[0_0_22px_rgba(0,180,255,0.45)]"
               >
                 Start a conversation →
@@ -599,6 +626,15 @@ export function DemoSurface({
             </div>
           </div>
         </section>
+      )}
+
+      {/* On-page booking close (mirrors the Flow-State- /for #book close). The
+          Book CTAs above scroll here instead of dead-ending at /contact. */}
+      {mode === 'standalone' && (
+        <ForBookingPanel
+          slug={pack.account.slug}
+          schedulerHref={bookIsExternal ? bookAuditHref : undefined}
+        />
       )}
 
       {/* Footer, only in standalone mode */}

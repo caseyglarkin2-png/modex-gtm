@@ -4,6 +4,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
+import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
+import MicrositePostHogBeacon from '@/components/microsites/microsite-posthog-beacon';
+import { ForBookingPanel } from '@/components/demo/for-booking-panel';
 
 /**
  * I.T7 — Side-by-side anchor compare view at /demo/compare?a=<slug>&b=<slug>.
@@ -80,7 +83,13 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
           <CompareColumn pack={packA} slug={slugA} />
           <CompareColumn pack={packB} slug={slugB} />
         </div>
+
+        <div className="mt-14">
+          <ForBookingPanel slug="compare" />
+        </div>
       </div>
+      <MicrositeTracker accountName="Compare" accountSlug="compare" path="/demo/compare" />
+      <MicrositePostHogBeacon slug="compare" surface="compare" />
     </main>
   );
 }

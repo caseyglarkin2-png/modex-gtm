@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit } from '@/lib/rate-limit';
 
 /**
  * #2 — Street View image proxy for the demo microsites' driver's-eye view.
@@ -22,6 +23,15 @@ export async function GET(req: NextRequest) {
   const key = process.env.GOOGLE_MAPS_STATIC_API_KEY;
   if (!key) {
     return NextResponse.json({ error: 'streetview_not_configured' }, { status: 503 });
+  }
+
+  // Rate-limit per client IP so heading enumeration cannot run up unbounded
+  // Google Maps Street View billing. Same limiter the /api/microsites/track
+  // route uses (10 req/min/key). Valid panos still serve within the window.
+  const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+  const rl = rateLimit(`streetview:${ip}`);
+  if (!rl.ok) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   }
 
   const pano = req.nextUrl.searchParams.get('pano') ?? '';
