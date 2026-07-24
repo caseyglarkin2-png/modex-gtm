@@ -45,6 +45,15 @@ const BOT_UA_PATTERNS: readonly string[] = [
   'linkedinbot', 'whatsapp', 'telegrambot', 'discordbot',
   'skypeuripreview', 'bingpreview', 'google-safety', 'googleimageproxy',
   'embedly', 'quora link preview', 'redditbot', 'applebot',
+  // Internal traffic. The browser rig / agents drive a Chrome launched with
+  // a 'YardFlowAgent' User-Agent precisely so its visits are excluded. Without
+  // this, a rig/agent review of a /demo or /for page that dwells + trips a CTA
+  // classifies as 'human', stamps company intent_score in HubSpot, and the
+  // qualification engine reads that false heat to auto-promote committees to
+  // SQL. Not a scanner, but excluded from headline numbers + intent the same
+  // way. Mirrors Flow-State- isInternalTraffic() (the YardFlowAgent UA marker
+  // survives a chrome-profile wipe, so it is the reliable server-side signal).
+  'yardflowagent',
 ];
 
 export interface TrafficClassificationInput {

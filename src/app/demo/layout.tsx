@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Script from 'next/script';
+import { headers } from 'next/headers';
 import { Archivo, Inter } from 'next/font/google';
 import { DemoChrome } from '@/components/demo/demo-chrome';
 
@@ -31,14 +32,25 @@ const archivo = Archivo({
  * navigational islands under yardflow.ai. Per-page content keeps full control
  * of its own body; the chrome only frames it.
  */
-export default function DemoSubtreeLayout({ children }: { children: ReactNode }) {
+export default async function DemoSubtreeLayout({ children }: { children: ReactNode }) {
+  // Internal-traffic guard for HubSpot's OWN page-view analytics. The custom
+  // intent pipeline is guarded server-side (bot-detection) and the custom
+  // PostHog beacon client-side (analytics.ts), but this native loader powers
+  // HubSpot page-view sessions + known-contact de-anon + "visited page"
+  // workflow triggers, and /demo is the primary rig QA surface. The rig drives
+  // Chrome with a YardFlowAgent UA, so skip the loader for it. Real prospects
+  // are unaffected; nothing is removed.
+  const ua = (await headers()).get('user-agent') ?? '';
+  const isInternal = ua.includes('YardFlowAgent');
   return (
     <>
-      <Script
-        id="hs-script-loader"
-        strategy="afterInteractive"
-        src="//js.hs-scripts.com/3819073.js"
-      />
+      {!isInternal && (
+        <Script
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src="//js.hs-scripts.com/3819073.js"
+        />
+      )}
       <div className={`${inter.className} ${inter.variable} ${archivo.variable} yf-demo-type`}>
         {/* Headings speak the display face, mirroring the Flow-State- base
             rule (globals.css). Same -0.02em floor: Archivo 900 welds tighter.

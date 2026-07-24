@@ -12,8 +12,34 @@
 
 let initialized = false;
 
+const INTERNAL_FLAG_KEY = 'yf_internal';
+
 function enabled(): boolean {
   return typeof window !== 'undefined' && !!process.env.NEXT_PUBLIC_POSTHOG_KEY;
+}
+
+/**
+ * Rig / agent traffic detector, mirrored from Flow-State- lib/analytics.ts.
+ * The /demo (and proxied /for) surfaces had NO internal guard, so rig/agent
+ * visits stamped this app's PostHog like real prospects and polluted the
+ * cross-surface funnel. Flag them `is_internal:true` (test-account-filtered)
+ * exactly as the shell does. The YardFlowAgent UA marker survives a
+ * chrome-profile wipe, so it is the reliable signal; ?internal=1 latches it.
+ */
+function isInternalTraffic(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    if (window.navigator?.userAgent?.includes('YardFlowAgent')) return true;
+    if (window.navigator?.webdriver) return true;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('internal') === '1') {
+      window.localStorage.setItem(INTERNAL_FLAG_KEY, '1');
+      return true;
+    }
+    return window.localStorage.getItem(INTERNAL_FLAG_KEY) === '1';
+  } catch {
+    return false;
+  }
 }
 
 function init(): void {
@@ -24,6 +50,11 @@ function init(): void {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
       loaded: (ph) => {
         if (process.env.NODE_ENV === 'development') ph.opt_out_capturing();
+        // Exclude rig/agent traffic from the funnel the same way the shell does.
+        if (isInternalTraffic()) {
+          ph.register({ is_internal: true });
+          ph.stopSessionRecording();
+        }
       },
     });
   });
@@ -40,5 +71,10 @@ export function registerSuperProps(properties: Record<string, unknown>): void {
 export function trackEvent(event: string, properties?: Record<string, unknown>): void {
   if (!enabled()) return;
   init();
-  void import('posthog-js').then(({ default: posthog }) => posthog.capture(event, properties));
+  // Stamp is_internal at CAPTURE time, not only via the init loaded() callback.
+  // init() and this capture() run in separate async import() chains, so the
+  // first for_page_view can resolve before loaded() registers the super
+  // property. Stamping here guarantees even the first rig event is filtered.
+  const props = isInternalTraffic() ? { ...properties, is_internal: true } : properties;
+  void import('posthog-js').then(({ default: posthog }) => posthog.capture(event, props));
 }
