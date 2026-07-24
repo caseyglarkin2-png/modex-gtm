@@ -1,5 +1,5 @@
 {
-  "buildCommand": "prisma generate && next build",
+  "buildCommand": "npm run validate:packs && node scripts/check-force-dynamic.js && prisma generate && next build",
   "installCommand": "npm install",
   "framework": "nextjs",
   "crons": [

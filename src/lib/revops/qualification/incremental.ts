@@ -24,6 +24,7 @@ import {
   buildDiff,
   dedupeByContact,
 } from './evaluate';
+import { hasAccountIntent, hasRoleGate, hasIntent } from './model';
 import type { QualCompany, QualContact, VerdictDiff, EvaluateResult, Verdict } from './types';
 
 const YARDFLOW_TAM_PROPERTY = 'yardflow_tam';
@@ -297,7 +298,47 @@ export async function evaluateIncremental(sinceHours: number): Promise<EvaluateR
     }
   }
 
-  const diff = dedupeByContact(buildDiff(pairs));
+  // (c) Committee-cap integrity. The per-account SQL cap (accountIntentSqlCap in
+  // evaluate.ts) can only demote when it SEES the whole committee in one batch.
+  // Path (a) loads only individually-modified contacts, so a still-hot account
+  // whose company row was NOT re-modified inside the window (intent persists 30d,
+  // company untouched) arrives here as a sub-cap slice: the cap demotes nobody and
+  // classifyContact promotes every role-gated contact to SQL on account heat
+  // alone, leaking the full committee to SQL over successive days. For any company
+  // carrying account heat whose slice holds an account-heat-only promotion
+  // (role-gated, not personally engaged), expand to its full roster (same fetch as
+  // path b) so the cap counts the true committee size. Additive: adds committee
+  // context only; changes no thresholds, and the anti-flap rule still protects
+  // already-worked SQLs. Companies already fully loaded via path (b) are skipped.
+  const nowMs = Date.now();
+  const fullyExpanded = new Set(touchedCompanies.map((c) => c.id));
+  const pairKeys = new Set(pairs.map((p) => `${p.company.id}:${p.contact.id}`));
+  const needsExpansion = new Map<string, QualCompany>();
+  for (const { company, contact } of pairs) {
+    if (fullyExpanded.has(company.id) || needsExpansion.has(company.id)) continue;
+    if (hasAccountIntent(company, nowMs) && hasRoleGate(contact) && !hasIntent(contact)) {
+      needsExpansion.set(company.id, company);
+    }
+  }
+  for (const company of needsExpansion.values()) {
+    try {
+      const ids = await fetchAssociatedContactIds(company.id);
+      const contacts = await readContacts(ids);
+      for (const contact of contacts) {
+        const key = `${company.id}:${contact.id}`;
+        if (!pairKeys.has(key)) {
+          pairs.push({ company, contact });
+          pairKeys.add(key);
+        }
+      }
+    } catch (err) {
+      warnings.push(
+        `roster expand ${company.id} (${company.name}): ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
+  }
+
+  const diff = dedupeByContact(buildDiff(pairs, nowMs));
   const counts: Record<Verdict, number> = { none: 0, mql: 0, sql: 0 };
   for (const d of diff) counts[d.newVerdict] += 1;
 
