@@ -191,7 +191,7 @@ Proof from Live Deployment:
 - 24 facilities live; the full 260-site network committed (100% under contract)
 - Headcount neutral. Captured additional volume without adding a single person
 - Drop & hook time cut from 48 to 24 minutes. Trucks turn faster, freeing dock capacity
-- $1M+ per-site incremental profit (CEO-verified from operational data)
+- $1M+ per-site incremental profit (modeled, conservative floor)
 - 30-minute remote deployment per facility
 
 CRITICAL CLAIM ACCURACY RULES (never violate these):

@@ -789,7 +789,7 @@ export function buildROISectionFromModel(
         unit: 'annual',
       },
       {
-        label: 'Throughput value',
+        label: 'Capacity value',
         before: formatCurrencyCompact(dashboard.comparison.existingYms.throughput),
         after: formatCurrencyCompact(dashboard.comparison.yardFlow.throughput),
         delta: formatDelta(dashboard.comparison.yardFlow.throughput - dashboard.comparison.existingYms.throughput),
