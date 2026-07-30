@@ -5,7 +5,7 @@ import { ensureQualificationProperties } from '@/lib/hubspot/properties';
 import { evaluateQualification } from '@/lib/revops/qualification/evaluate';
 import { evaluateIncremental, resolveSinceHours } from '@/lib/revops/qualification/incremental';
 import { applyVerdicts } from '@/lib/revops/qualification/apply';
-import { notifyNewSqls, notifyDailyStats } from '@/lib/revops/qualification/notify';
+import { notifyDailyStats } from '@/lib/revops/qualification/notify';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -52,7 +52,9 @@ export async function GET(request: Request) {
       (d) => d.newVerdict === 'sql' && d.currentVerdict !== 'sql',
     ).length;
     if (mode === 'apply') {
-      await notifyNewSqls(changedRows).catch(() => undefined);
+      // notifyNewSqls (the per-SQL identity roster) was removed 2026-07-30. The
+      // aggregate count still rides along in notifyDailyStats below; the names and
+      // the nurture history go to the war-room morning brief instead.
       await notifyDailyStats({
         scope,
         sinceHours: scope === 'incremental' ? sinceHours : undefined,

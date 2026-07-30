@@ -43,7 +43,10 @@ describe('buildDailyStats', () => {
     expect(msg).toContain('last 26h');
     expect(msg).toContain('120 contacts');
     expect(msg).toContain('7 verdict change(s), 7 written, 3 lifecycle promotion(s)');
-    expect(msg).toContain('2 NEW SQL(s)');
+    // Wording changed 2026-07-30: the line used to shout "2 NEW SQL(s) — details
+    // above" and point at the per-SQL identity roster, which no longer exists.
+    expect(msg).toContain('2 new SQL(s)');
+    expect(msg).toContain('morning brief');
   });
   it('says so on quiet days and surfaces warnings', () => {
     const msg = buildDailyStats({ ...base, newSqls: 0, warnings: ['contacts truncated at 3000'] });

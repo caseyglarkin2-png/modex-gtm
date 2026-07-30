@@ -108,15 +108,31 @@ for (const co of companies) {
 }
 if (APPLY && updates.length) await writeBatch(updates);
 
-// One Slack summary to #yardflow-intent for the SQL batch (keep the channel in the loop, no spam)
+// One Slack summary for the SQL batch, to the OPS channel.
+//
+// Rewritten 2026-07-30. This block used to be a rogue second sender: it scraped
+// SLACK_WEBHOOK_URL out of the .env text with a regex and POSTed directly, which
+// meant it bypassed BOTH the sendSlackNotification chokepoint and the
+// NOTIFICATIONS_PAUSED kill switch. Pausing notifications did not pause this.
+//
+// It also posted a roster of contact names, the exact thing the per-SQL identity
+// ping was deleted for. Deleting buildSqlAlert in src/ would have left this
+// behind still doing it, from a script nobody would think to check.
+//
+// Now: counts only, ops channel, and it honours the pause switch. This is a
+// manual historical batch job reporting on itself, so ops is the right home even
+// though the subject matter is prospects.
 if (APPLY && counts.sqlPromote > 0) {
-  const hook = (env.match(/SLACK_WEBHOOK_URL\s*=\s*"?([^"\n\r]+)"?/) || [])[1];
-  if (hook) {
-    const lines = sqlNames.map((n) => `• ${n}`).join('\n');
-    const more = counts.sqlPromote > sqlNames.length ? `\n…and ${counts.sqlPromote - sqlNames.length} more` : '';
-    const text = `🔥 Qualification backfill: ${counts.sqlPromote} contacts promoted to SQL (TAM fit + role + intent)\n${lines}${more}\nFull list: HubSpot > contacts where YardFlow Qualification Verdict = SQL`;
+  const paused = /^(1|true|yes|on)$/i.test((process.env.NOTIFICATIONS_PAUSED ?? '').trim());
+  const hook =
+    (env.match(/SLACK_OPS_WEBHOOK_URL\s*=\s*"?([^"\n\r]+)"?/) || [])[1] ||
+    (env.match(/SLACK_WEBHOOK_URL\s*=\s*"?([^"\n\r]+)"?/) || [])[1];
+  if (paused) {
+    console.error('slack summary skipped: NOTIFICATIONS_PAUSED');
+  } else if (hook) {
+    const text = `Qualification backfill: ${counts.sqlPromote} contacts promoted to SQL (TAM fit + role + intent)\nWho: HubSpot > contacts where YardFlow Qualification Verdict = SQL`;
     await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) }).catch(() => {});
-    console.error('slack summary sent');
+    console.error('slack summary sent (ops)');
   }
 }
 console.log(JSON.stringify({ mode: APPLY ? 'APPLY' : 'DRYRUN', companiesWithContacts: companies.length, ...counts }, null, 2));

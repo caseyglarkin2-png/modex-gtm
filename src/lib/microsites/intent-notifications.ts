@@ -178,17 +178,47 @@ export function buildIntentNotificationData(
   };
 }
 
-/** Posts a message to the Slack incoming webhook. No-op if unconfigured. */
-export async function sendSlackNotification(text: string): Promise<boolean> {
+/**
+ * Which Slack channel a message belongs in.
+ *
+ * 'intent' = a buying signal a human should act on today (pounce trigger,
+ * unsolicited inbound from a TAM account, a self-modeled ROI lead).
+ * 'ops'    = the system reporting on itself (staleness nags, run summaries).
+ *
+ * These were one channel until 2026-07-30, which inverted the signal-to-noise
+ * ratio: OPS traffic is near-deterministic (a weekly staleness nag, a daily run
+ * summary) while INTENT is bursty, so on a quiet week #yardflow-intent was
+ * majority self-reporting. A channel a human learns to ignore delivers nothing.
+ */
+export type SlackChannel = 'intent' | 'ops';
+
+/**
+ * Posts a message to a Slack incoming webhook. No-op if unconfigured.
+ *
+ * Channel routing is a deployment-time property of the webhook URL, not
+ * something Slack lets an incoming webhook choose per message, so each channel
+ * needs its own URL. 'ops' falls back to the intent webhook when
+ * SLACK_OPS_WEBHOOK_URL is unset: a misrouted message is recoverable, a silently
+ * dropped one is not.
+ */
+export async function sendSlackNotification(
+  text: string,
+  channel: SlackChannel = 'intent',
+): Promise<boolean> {
   // Global pause (Casey, 2026-07-20): silence the Slack channels while the
   // evolved notification layer is built. Set NOTIFICATIONS_PAUSED truthy in
   // Vercel to drop every proactive alert (pounce pings, new-SQL, qual stats,
   // demo-tour fires). Read live; the single modex Slack chokepoint.
   const paused = /^(1|true|yes|on)$/i.test((process.env.NOTIFICATIONS_PAUSED ?? '').trim());
   if (paused) return false;
-  const url = process.env.SLACK_WEBHOOK_URL;
+  const url =
+    channel === 'ops'
+      ? process.env.SLACK_OPS_WEBHOOK_URL || process.env.SLACK_WEBHOOK_URL
+      : process.env.SLACK_WEBHOOK_URL;
   if (!url) {
-    console.warn('[intent-notify] SLACK_WEBHOOK_URL not set — notification skipped');
+    console.warn(
+      `[intent-notify] no webhook configured for channel "${channel}" — notification skipped`,
+    );
     return false;
   }
   try {

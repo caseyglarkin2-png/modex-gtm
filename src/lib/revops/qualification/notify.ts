@@ -1,51 +1,29 @@
 /**
- * SQL promotion notifications — fires a single Slack alert to #yardflow-intent
- * whenever the qualification engine promotes contacts to SQL for the first time.
+ * Qualification run reporting.
  *
- * buildSqlAlert is a pure function (no network calls) so it can be tested in
- * isolation. notifyNewSqls wraps it with the actual Slack send.
+ * The per-SQL identity ping was REMOVED on 2026-07-30 (Casey's call). It posted
+ * one line per promoted contact — name or raw email, company, tier, and the
+ * engine's reason string — to #yardflow-intent. Two problems:
+ *
+ *   1. It is not actionable. Knowing that a person crossed an internal scoring
+ *      threshold does not tell you what to do next. Casey's words: "dont really
+ *      want to see reporting on who the sql's are but want to see what we sent
+ *      them, how we are nurturing them".
+ *   2. It was the loudest recurring source in the channel, so it trained the
+ *      reader to skim past everything, including the pounce triggers that ARE
+ *      actionable.
+ *
+ * The replacement is NOT a different Slack message. It is the nurture ledger in
+ * the war-room morning brief — sent yesterday, who replied, what is queued next,
+ * what is going cold at 14 days — because that is where send history actually
+ * lives. VerdictDiff (see ./types) carries no send or touch fields at all, so no
+ * message built from it could ever answer "what did we send them".
+ *
+ * The aggregate count survives in buildDailyStats, which now goes to the ops
+ * channel. A count is a health metric; a roster of names is a to-do list nobody
+ * agreed to.
  */
 import { sendSlackNotification } from '@/lib/microsites/intent-notifications';
-import type { VerdictDiff } from './types';
-
-const MAX_LINES = 15;
-
-/**
- * Build a single Slack message summarising all genuine SQL promotions in a run.
- * "Genuine" means newVerdict === 'sql' AND currentVerdict !== 'sql'.
- * Returns null if there are no such promotions (caller should skip the send).
- */
-export function buildSqlAlert(rows: VerdictDiff[]): string | null {
-  const promoted = rows.filter(
-    (r) => r.newVerdict === 'sql' && r.currentVerdict !== 'sql',
-  );
-  if (promoted.length === 0) return null;
-
-  const header = `🔥 ${promoted.length} new SQL(s) at TAM accounts`;
-  const visible = promoted.slice(0, MAX_LINES);
-  const overflow = promoted.length - visible.length;
-
-  const lines = visible.map(
-    (r) =>
-      `• ${r.name || r.email} @ ${r.companyName} (Tier ${r.tamTier || '?'}) — ${r.reason}`,
-  );
-
-  if (overflow > 0) {
-    lines.push(`…and ${overflow} more`);
-  }
-
-  return [header, ...lines].join('\n');
-}
-
-/**
- * Send a Slack alert for any genuine SQL promotions in the diff.
- * Returns false (no-op) when there are no promotions or SLACK_WEBHOOK_URL is unset.
- */
-export async function notifyNewSqls(rows: VerdictDiff[]): Promise<boolean> {
-  const msg = buildSqlAlert(rows);
-  if (!msg) return false;
-  return sendSlackNotification(msg);
-}
 
 export interface DailyStatsInput {
   scope: string;
@@ -60,7 +38,7 @@ export interface DailyStatsInput {
 }
 
 /**
- * Build the daily qualification health post for #yardflow-intent. Pure.
+ * Build the daily qualification health post. Pure.
  * Sent only on days with news (changes, new SQLs, or warnings) — see
  * notifyDailyStats.
  */
@@ -70,21 +48,31 @@ export function buildDailyStats(s: DailyStatsInput): string {
     `📊 Daily qualification run${window}`,
     `• Evaluated ${s.contacts} contacts at TAM accounts: ${s.counts.sql} sql / ${s.counts.mql} mql / ${s.counts.none} none`,
     `• ${s.changes} verdict change(s), ${s.applied} written, ${s.promoted} lifecycle promotion(s)`,
-    s.newSqls > 0 ? `• 🔥 ${s.newSqls} NEW SQL(s) — details above` : '• No new SQLs today',
+    // Count only, no roster. Said "details above" until 2026-07-30, when the
+    // per-SQL identity ping it referred to was deleted; the names now live in
+    // the war-room morning brief alongside what was actually sent to them.
+    s.newSqls > 0
+      ? `• ${s.newSqls} new SQL(s) — see the morning brief for who and what we sent them`
+      : '• No new SQLs today',
   ];
   for (const w of s.warnings.slice(0, 3)) lines.push(`• ⚠️ ${w}`);
   return lines.join('\n');
 }
 
 /**
- * Post the daily stats summary. Returns false when SLACK_WEBHOOK_URL is unset.
+ * Post the daily stats summary to the OPS channel. Returns false when no ops
+ * webhook is configured.
  *
  * Delta-gated as of 2026-07-09 (the A+ Slack pass): a zero-change day posts
- * nothing. The channel's contract is "only messages Casey would act on"; cron
- * health is visible in Vercel, so a quiet-day heartbeat is noise, not signal.
+ * nothing.
+ *
+ * Routed to 'ops' on 2026-07-30. This is the engine reporting on its own run:
+ * counts evaluated, verdicts written, warnings. Useful, but it is not a thing to
+ * act on, and it fired near-daily, which is exactly the traffic that taught the
+ * reader to skim #yardflow-intent.
  */
 export async function notifyDailyStats(s: DailyStatsInput): Promise<boolean> {
   const hasNews = s.changes > 0 || s.newSqls > 0 || s.warnings.length > 0;
   if (!hasNews) return false;
-  return sendSlackNotification(buildDailyStats(s));
+  return sendSlackNotification(buildDailyStats(s), 'ops');
 }
