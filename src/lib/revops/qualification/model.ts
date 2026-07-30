@@ -1,4 +1,6 @@
 import type { Verdict, QualContact, QualCompany } from './types';
+import { PING_THRESHOLD } from '@/lib/pounce/score';
+import { normalizeScore } from '@/lib/pounce/fit';
 
 export const ICP_THRESHOLD = 70;
 export const SENIOR_SENIORITY = new Set(['executive', 'vp', 'director', 'owner', 'partner']);
@@ -109,7 +111,34 @@ const envNum = (name: string, fallback: number): number => {
   return Number.isFinite(v) ? v : fallback;
 };
 export const ACCOUNT_INTENT_SQL_THRESHOLD = envNum('QUAL_ACCOUNT_INTENT_SQL_THRESHOLD', 60);
-export const ACCOUNT_TRIGGER_SQL_THRESHOLD = envNum('QUAL_ACCOUNT_TRIGGER_SQL_THRESHOLD', 60);
+
+/**
+ * Trigger heat needed to promote an account's committee.
+ *
+ * DERIVED, not a literal, since 2026-07-30. The 60 above is reasoned about
+ * computeIntentScore, where a casual page view already scores 40-70. Trigger
+ * heat is a completely different scale and the 60 was copied across without
+ * redoing the arithmetic.
+ *
+ * Pounce pings Slack at a RAW score of PING_THRESHOLD (8), and news triggers
+ * normalize at x5.5, so a ping-worthy trigger lands on HubSpot as trigger_score
+ * 44 while this gate demanded 60. A raw 11 was needed to promote anyone.
+ *
+ * The effect: every pounce alert scoring 8, 9 or 10 interrupted a human and
+ * promoted nobody. Coca-Cola and Amazon both fired at raw 8 on 2026-07-30 and
+ * nothing downstream ever saw them.
+ *
+ * The invariant worth keeping is the plain-English one: IF A TRIGGER IS WORTH
+ * INTERRUPTING A HUMAN FOR, IT IS WORTH PROMOTING THE COMMITTEE. Deriving the
+ * number from PING_THRESHOLD encodes that, so the two cannot drift apart again
+ * when either is tuned. Locked by tests/unit/qualification-account-heat.test.ts.
+ *
+ * The env override still wins if we ever want them deliberately different.
+ */
+export const ACCOUNT_TRIGGER_SQL_THRESHOLD = envNum(
+  'QUAL_ACCOUNT_TRIGGER_SQL_THRESHOLD',
+  normalizeScore(PING_THRESHOLD, 'news'),
+);
 export const ACCOUNT_INTENT_MAX_AGE_DAYS = envNum('QUAL_ACCOUNT_INTENT_MAX_AGE_DAYS', 30);
 export const ACCOUNT_INTENT_SQL_CAP_PER_ACCOUNT = envNum('QUAL_ACCOUNT_INTENT_SQL_CAP', 10);
 
