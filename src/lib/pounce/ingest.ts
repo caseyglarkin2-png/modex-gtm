@@ -16,6 +16,7 @@ import { prisma } from '@/lib/prisma';
 import { sendSlackNotification } from '@/lib/microsites/intent-notifications';
 import { searchCompanyByName, updateCompanyTrigger } from '@/lib/hubspot/companies';
 import { createCompanyNote } from '@/lib/hubspot/notes';
+import { slugForTicker } from './ticker';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { PING_THRESHOLD } from './score';
 import { normalizeScore } from './fit';
@@ -54,6 +55,32 @@ function companyName(t: RawTrigger): string {
   return getAccountMicrositeData(t.accountSlug)?.accountName ?? t.accountName;
 }
 
+/**
+ * Repair ticker-shaped triggers before anything downstream reads them.
+ *
+ * The EDGAR producer derives identity from an SEC filing, so triggers arrive as
+ * `{ accountSlug: 'ko', accountName: 'KO' }`. A ticker resolves nothing: not the
+ * microsite registry (so no spear link), not searchCompanyByName (an exact
+ * `name EQ` match, so no company id, no Note, no trigger_score), and therefore
+ * no account heat and no committee promotion. 27 of the 32 rows in the live
+ * table were in this state.
+ *
+ * Normalising the slug is enough to fix all of it, because companyName() and
+ * every other consumer already prefer the registry once the slug resolves.
+ *
+ * A ticker with no registry account is left exactly as it arrived, so the
+ * existing HubSpot-search fallback still applies. This only ever adds identity;
+ * it never replaces a slug that already resolves.
+ */
+function withResolvedAccount(t: RawTrigger): RawTrigger {
+  if (getAccountMicrositeData(t.accountSlug)) return t;
+  const slug = slugForTicker(t.accountSlug) ?? slugForTicker(t.accountName);
+  if (!slug) return t;
+  const account = getAccountMicrositeData(slug);
+  if (!account) return t; // map points at a slug the registry lost; leave it alone
+  return { ...t, accountSlug: slug, accountName: account.accountName };
+}
+
 export async function ingestTriggers(
   raw: RawTrigger[],
   opts: { ping?: boolean; pingCap?: number } = {},
@@ -65,7 +92,10 @@ export async function ingestTriggers(
   // Highest score first so the ping cap spends on the hottest triggers.
   const sorted = [...raw].sort((a, b) => b.score - a.score);
 
-  for (const t of sorted) {
+  for (const rawTrigger of sorted) {
+    // Repair ticker-shaped identity BEFORE the row is written, so the stored
+    // trigger, the Slack spear link and the HubSpot resolution all agree.
+    const t = withResolvedAccount(rawTrigger);
     const url_hash = hashUrl(t.url);
     const existing = await prisma.pounceTrigger.findUnique({ where: { url_hash } });
     if (existing) { res.duplicate += 1; continue; }
