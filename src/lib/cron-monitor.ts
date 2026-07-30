@@ -36,6 +36,10 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   { name: 'check-inbox', label: 'Inbox Polling', path: '/api/cron/check-inbox', schedule: '*/5 * * * *' },
   { name: 'dispatch-daily', label: 'Daily Dispatch', path: '/api/cron/dispatch-daily', schedule: '0 11 * * 1-5' },
   { name: 'qualification', label: 'MQL/SQL Qualification', path: '/api/cron/qualification', schedule: '30 11 * * *' },
+  // Scheduled 2026-07-30. It runs but stays inert until WARM_DISPATCH_ENABLED is
+  // true, which is deliberate: scheduling it now means arming it later is one env
+  // var rather than a deploy, and /ops shows it skipping rather than hiding it.
+  { name: 'warm-dispatch', label: 'Warm Committee Dispatch', path: '/api/cron/warm-dispatch', schedule: '15 12 * * 1-5' },
   { name: 'daily-digest', label: 'Daily Digest', path: '/api/cron/daily-digest', schedule: '0 12 * * *' },
   { name: 'drip-sequence', label: 'Campaign Drip', path: '/api/cron/drip-sequence', schedule: '0 13 * * *' },
   { name: 'pounce-scan', label: 'Pounce Scan', path: '/api/cron/pounce-scan', schedule: '5 13 * * *' },

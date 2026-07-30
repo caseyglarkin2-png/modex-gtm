@@ -32,6 +32,10 @@
       "schedule": "30 11 * * *"
     },
     {
+      "path": "/api/cron/warm-dispatch/",
+      "schedule": "15 12 * * 1-5"
+    },
+    {
       "path": "/api/cron/pounce-scan/",
       "schedule": "5 13 * * *"
     },
