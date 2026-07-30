@@ -1232,9 +1232,26 @@ model PounceTrigger {
   hubspot_note_at DateTime? // set when stamped on the HubSpot company (once)
   dismissed      Boolean   @default(false)
 
+  /// The HubSpot company this trigger resolved to, persisted at ingest.
+  ///
+  /// Added 2026-07-30. Ingest already resolved this id in order to write the
+  /// timeline Note and the trigger-heat properties, then threw it away. Any
+  /// downstream consumer (a drafting stage, the ranked read side) therefore had
+  /// to re-derive it by re-running searchCompanyByName, which is an EXACT
+  /// `name EQ` match with limit 1 against a free-text company name. That is
+  /// fragile in both directions: it silently misses on any punctuation or
+  /// suffix drift, and it costs a HubSpot call per trigger per consumer.
+  ///
+  /// Nullable on purpose. A trigger can legitimately fail to resolve (unknown
+  /// account, name drift), and that is data worth keeping rather than a reason
+  /// to reject the trigger. A null here means "we could not resolve it", not
+  /// "we never tried" - hubspot_note_at distinguishes those.
+  hubspot_company_id String?
+
   @@index([account_slug])
   @@index([score])
   @@index([first_seen_at])
+  @@index([hubspot_company_id])
   @@map("pounce_triggers")
 }
 

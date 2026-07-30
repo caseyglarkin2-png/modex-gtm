@@ -108,6 +108,17 @@ export async function ingestTriggers(
     try {
       const company = await searchCompanyByName(companyName(t));
       if (company) {
+        // Persist the resolved id FIRST, before the Note and property writes.
+        // Ingest used to resolve this, use it, and discard it, so every
+        // downstream consumer had to re-run searchCompanyByName - an exact
+        // `name EQ` match against a free-text name, one HubSpot call per
+        // trigger per consumer. Written before the writes below so a Note or
+        // property failure still leaves the join behind: resolution succeeded,
+        // and that fact is worth keeping even when the stamping did not.
+        await prisma.pounceTrigger.update({
+          where: { id: row.id },
+          data: { hubspot_company_id: company.id },
+        });
         const body = [
           `<b>POUNCE TRIGGER — ${t.accountName}</b> <i>(${t.source}, score ${t.score})</i>`,
           t.title,
