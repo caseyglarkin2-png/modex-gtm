@@ -192,14 +192,61 @@ export function buildIntentNotificationData(
  */
 export type SlackChannel = 'intent' | 'ops';
 
+/** Resolve the target channel id for a logical channel. */
+function channelIdFor(channel: SlackChannel): string | undefined {
+  if (channel === 'ops') {
+    // Falls back to the intent channel rather than dropping: a misrouted message
+    // is recoverable, a silently dropped one is not.
+    return process.env.SLACK_OPS_CHANNEL_ID || process.env.SLACK_CHANNEL_ID;
+  }
+  return process.env.SLACK_CHANNEL_ID;
+}
+
+/** chat.postMessage. One bot token reaches any channel it has been invited to. */
+async function postViaBot(token: string, channelId: string, text: string): Promise<boolean> {
+  const res = await fetch('https://slack.com/api/chat.postMessage', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({ channel: channelId, text }),
+  });
+  // Slack answers 200 with ok:false for real failures, so the status code alone
+  // proves nothing. not_in_channel is the common one: the bot must be invited.
+  const body = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+  if (!body.ok) {
+    console.error(`[intent-notify] chat.postMessage failed: ${body.error ?? res.status}`);
+    return false;
+  }
+  return true;
+}
+
+/** Legacy incoming webhook. Bound to one channel at Slack's side. */
+async function postViaWebhook(url: string, text: string): Promise<boolean> {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  });
+  if (!res.ok) {
+    console.error(`[intent-notify] Slack webhook returned ${res.status}`);
+    return false;
+  }
+  return true;
+}
+
 /**
- * Posts a message to a Slack incoming webhook. No-op if unconfigured.
+ * Posts a message to Slack. No-op if unconfigured.
  *
- * Channel routing is a deployment-time property of the webhook URL, not
- * something Slack lets an incoming webhook choose per message, so each channel
- * needs its own URL. 'ops' falls back to the intent webhook when
- * SLACK_OPS_WEBHOOK_URL is unset: a misrouted message is recoverable, a silently
- * dropped one is not.
+ * Prefers a bot token (chat.postMessage) over an incoming webhook, because an
+ * incoming webhook is bound to exactly one channel at Slack's side. Adding a
+ * channel with webhooks means provisioning a new URL by hand in the Slack app UI
+ * every time; with a bot token it is one env var holding a channel id. The
+ * webhook path stays as a fallback so an unset bot token cannot silence anything.
+ *
+ * The bot must be a member of the target channel or chat.postMessage returns
+ * not_in_channel. Invite it with /invite in the channel.
  */
 export async function sendSlackNotification(
   text: string,
@@ -211,27 +258,23 @@ export async function sendSlackNotification(
   // demo-tour fires). Read live; the single modex Slack chokepoint.
   const paused = /^(1|true|yes|on)$/i.test((process.env.NOTIFICATIONS_PAUSED ?? '').trim());
   if (paused) return false;
-  const url =
-    channel === 'ops'
-      ? process.env.SLACK_OPS_WEBHOOK_URL || process.env.SLACK_WEBHOOK_URL
-      : process.env.SLACK_WEBHOOK_URL;
-  if (!url) {
-    console.warn(
-      `[intent-notify] no webhook configured for channel "${channel}" — notification skipped`,
-    );
-    return false;
-  }
+
   try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
-    });
-    if (!res.ok) {
-      console.error(`[intent-notify] Slack webhook returned ${res.status}`);
+    const token = process.env.SLACK_BOT_TOKEN;
+    const channelId = channelIdFor(channel);
+    if (token && channelId) return await postViaBot(token, channelId, text);
+
+    const url =
+      channel === 'ops'
+        ? process.env.SLACK_OPS_WEBHOOK_URL || process.env.SLACK_WEBHOOK_URL
+        : process.env.SLACK_WEBHOOK_URL;
+    if (!url) {
+      console.warn(
+        `[intent-notify] no bot token or webhook configured for channel "${channel}" — notification skipped`,
+      );
       return false;
     }
-    return true;
+    return await postViaWebhook(url, text);
   } catch (error) {
     console.error('[intent-notify] Slack send failed', error);
     return false;
