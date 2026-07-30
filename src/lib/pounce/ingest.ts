@@ -50,9 +50,18 @@ function hashUrl(url: string): string {
   return createHash('sha256').update(normalizeUrl(url)).digest('hex');
 }
 
-/** Resolve the canonical HubSpot company name (registry slug wins over caller). */
+/**
+ * Resolve the name to search HubSpot with (registry wins over caller).
+ *
+ * Prefers `hubspotName` when the registry carries one, because searchCompanyByName
+ * is an exact `name EQ` match and our display name is not always the CRM's. The
+ * Coca-Cola trigger missed for exactly this reason: HubSpot has "The Coca-Cola
+ * Company", the registry says "Coca-Cola". Fuzzy matching is not a safe fallback
+ * here, since the portal also holds nine Coca-Cola bottlers.
+ */
 function companyName(t: RawTrigger): string {
-  return getAccountMicrositeData(t.accountSlug)?.accountName ?? t.accountName;
+  const account = getAccountMicrositeData(t.accountSlug);
+  return account?.hubspotName ?? account?.accountName ?? t.accountName;
 }
 
 /**

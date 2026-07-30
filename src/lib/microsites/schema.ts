@@ -577,6 +577,29 @@ export interface AccountMicrositeData {
   // Identity
   slug: string;
   accountName: string;
+
+  /**
+   * The company's name AS IT IS SPELLED IN HUBSPOT, when that differs from
+   * accountName. Optional; omit when they agree, which is the usual case.
+   *
+   * Added 2026-07-30. accountName does double duty as a display string AND as
+   * an identity key (see api/ai/generate, which matches on it), so it cannot
+   * simply be retyped to whatever HubSpot happens to use. But HubSpot lookups
+   * are an exact `name EQ` match, so any drift makes them miss silently.
+   *
+   * Coca-Cola is the live example: HubSpot has "The Coca-Cola Company", the
+   * demo pack says the same, and this registry says "Coca-Cola". The pounce
+   * lookup therefore found nothing and the trigger never got a company id, a
+   * timeline Note, or a trigger score. Fuzzy matching is not an option here:
+   * the portal holds nine other Coca-Cola bottlers, so a CONTAINS match would
+   * cheerfully file a Tier A trigger against Reyes Coca-Cola Bottling.
+   *
+   * Keeping the two names in separate fields is the honest fix, because they
+   * are answering two different questions: what we call them, and what the CRM
+   * calls them.
+   */
+  hubspotName?: string;
+
   parentBrand?: string;
   vertical: Vertical;
   tier: string;

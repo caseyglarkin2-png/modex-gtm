@@ -38,6 +38,9 @@ const COCA_COLA_FACILITY_COUNT = getFacilityCountLowerBound('Coca-Cola', 70) ?? 
 export const cocaCola: AccountMicrositeData = {
   slug: 'coca-cola',
   accountName: 'Coca-Cola',
+  // HubSpot spells it in full. Exact-match lookups miss without this, and the
+  // portal holds nine other Coca-Cola bottlers so fuzzy matching is unsafe.
+  hubspotName: 'The Coca-Cola Company',
   coverHeadline: 'The yard layer above the orchestrated supply chain',
   titleEmphasis: 'above the orchestrated supply chain',
   coverFootprint: '~60 franchisees · KORE-governed',
