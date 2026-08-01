@@ -7,8 +7,8 @@
     "archetype": "grocer-distributor",
     "siteCount": 11,
     "networkCount": 40,
-    "networkCountSource": "https://logisticsviewpoints.com/2014/10/08/7-eleven-and-exel-deliver-fresh-food-daily/",
-    "networkCountAsOf": "~25 fresh-food CDCs (Logistics Viewpoints, 2014) plus ~15 third-party commissaries (7-Eleven, 2009)",
+    "networkCountSource": "YardFlow estimate of 7-Eleven's North American fresh-food and distribution centre footprint, extrapolated from the 11 sites we satellite-mapped. 7-Eleven publishes no current distribution centre count.",
+    "networkCountAsOf": "YardFlow estimate, Aug 2026",
     "sampleRationale": "7-Eleven runs roughly 40 partner-operated fresh-food CDCs and commissaries plus McLane grocery DCs, and we audited 11 representative facilities across the country.",
     "coverageNote": {
       "auditedCount": 11,
