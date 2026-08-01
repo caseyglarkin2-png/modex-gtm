@@ -23,7 +23,8 @@
     "networkCount": 66,
     "networkCountSource": "Target FY2024 Form 10-K, Item 2 Properties: 66 supply chain facilities (distribution, sortation, and other), as of 2025-02-01 (https://corporate.target.com/investors/annual/2024-annual-report/10-k-report/10-k-part-i/item-2-properties)",
     "networkCountAsOf": "FY2024 10-K",
-    "sampleRationale": "We mapped 24 identifiable facilities across the regional DC, food DC, import, and upstream flow-center types, biggest to smallest; the yard pattern held across all of them."
+    "sampleRationale": "We mapped 24 identifiable facilities across the regional DC, food DC, import, and upstream flow-center types, biggest to smallest; the yard pattern held across all of them.",
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

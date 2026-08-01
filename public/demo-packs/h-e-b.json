@@ -24,7 +24,8 @@
       "The East Side Super Regional Grocery Warehouse in San Antonio runs 200 dock doors on 130 acres. H-E-B builds grocery DCs at industrial scale.",
       "Houston Milk & Bread is 22 acres of fresh dairy and bakery. H-E-B owns the supply chain to the SKU.",
       "832 dock doors across 13 audited sites. H-E-B routes more dock minutes per facility than any audited grocer."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

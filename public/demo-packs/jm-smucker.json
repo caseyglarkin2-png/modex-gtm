@@ -25,7 +25,8 @@
       "Uncrustables Longmont CO is 91.3 acres. The plant exists for a single product: frozen PB&J sandwiches.",
       "Topeka KS is 140 acres of pet food production. Milk-Bone and Meow Mix ship from here.",
       "447 dock doors across the 14 audited sites. Smucker runs efficient dock density per SKU."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

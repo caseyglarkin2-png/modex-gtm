@@ -25,7 +25,8 @@
       "942 dock doors across 15 audited sites. DHL routes more contract-logistics dock minutes than any audited 3PL.",
       "0 of 15 audited sites are rail-served. DHL is truckload-only cross-dock.",
       "Cowpens SC runs the Mann+Hummel auto-parts DC across 90 acres. Contract logistics built around one shipper."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

@@ -24,7 +24,8 @@
       "4,790 trailer spots across 18 audited sites. Universal parks more trailers per facility than any pure-contract 3PL.",
       "Polaris Madison AL is 194 acres of Polaris-dedicated contract logistics. Single-shipper at scale.",
       "GM Arlington runs 130 docks. Universal handles GM's Arlington Logistics inside the plant footprint."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

@@ -25,7 +25,8 @@
       "Allentown PA runs 130 dock doors. KDP's largest manufacturing-and-distribution combo facility.",
       "Irving TX is 117.4 acres of beverage distribution. Dr Pepper's headquarters market.",
       "3 of 17 audited sites are rail-served. Inbound coffee and sugar move on rail."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

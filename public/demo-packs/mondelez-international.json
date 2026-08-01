@@ -29,7 +29,8 @@
       "Fort Worth DC runs 115 dock doors. That's 14 trucks staged per minute at peak.",
       "4 of 17 audited sites are rail-served. Outbound truckload still dominates inbound rail.",
       "Nabisco Chicago Bakery is 100 acres of vertical CPG manufacturing. Different yard problem than a DC."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

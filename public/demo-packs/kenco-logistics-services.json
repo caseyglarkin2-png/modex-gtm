@@ -24,7 +24,8 @@
       "Hutchins TX runs 130 dock doors. One of Kenco's flagship Texas cross-docks.",
       "1,676 dock doors across the 24 audited sites. Kenco routes more contract-logistics dock minutes than most 3PLs.",
       "4 of the 24 audited sites are rail-served. Contract logistics runs majority-truckload."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

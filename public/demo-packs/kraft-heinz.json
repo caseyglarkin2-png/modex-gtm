@@ -26,7 +26,8 @@
       "The 9 deep-audited plants span 6 distinct yard archetypes. Kraft is the calibration rubric for the entire dataset.",
       "Across the audited plants, only the Garland TX Oscar Mayer site runs a staffed guard shack. Same brand, different yard.",
       "4 of the 9 audited plants are rail-served. CPG inbound increasingly moves on truckload, not rail."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

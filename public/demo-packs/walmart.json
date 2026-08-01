@@ -25,7 +25,8 @@
     "networkCount": 164,
     "networkCountSource": "Walmart FY2025 Form 10-K, Item 2 Properties: 164 Walmart U.S. distribution facilities (https://www.sec.gov/Archives/edgar/data/104169/000010416925000021/wmt-20250131.htm)",
     "networkCountAsOf": "FY2025 10-K",
-    "sampleRationale": "We mapped 12 US facilities spanning every type, regional, grocery and perishable, fashion, import, and e-commerce; the yard pattern held across all of them."
+    "sampleRationale": "We mapped 12 US facilities spanning every type, regional, grocery and perishable, fashion, import, and e-commerce; the yard pattern held across all of them.",
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

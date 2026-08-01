@@ -25,7 +25,8 @@
       "Cleveland NC truck manufacturing is 200 acres. Daimler builds Freightliners here.",
       "6 of 16 audited sites are rail-served. Heavy truck inbound runs on railcars.",
       "1,944 trailer spots across 16 audited sites. Finished trucks stage drive-away, not van-load."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

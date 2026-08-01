@@ -23,7 +23,8 @@
     "networkCount": 105,
     "networkCountSource": "YardFlow estimate of PepsiCo's North American production and distribution footprint, extrapolated from the 30 sites we satellite-mapped. PepsiCo's FY2025 Form 10-K, Item 2 Properties lists significant properties by segment and publishes no total facility count (https://www.sec.gov/Archives/edgar/data/77476/000007747626000007/pep-20251227.htm).",
     "networkCountAsOf": "YardFlow estimate, Aug 2026",
-    "sampleRationale": "We mapped flagship company-owned plants and DCs spanning PBNA, Gatorade, and Quaker, biggest to smallest and most to least automated; the yard pattern held across all 30."
+    "sampleRationale": "We mapped flagship company-owned plants and DCs spanning PBNA, Gatorade, and Quaker, biggest to smallest and most to least automated; the yard pattern held across all 30.",
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

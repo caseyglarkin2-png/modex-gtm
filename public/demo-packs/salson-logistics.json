@@ -24,7 +24,8 @@
       "2,160 trailer spots across 10 sites. SalSon parks more trailers per facility than most 3PLs at this scale.",
       "Compton CA is 8.5 acres of cross-dock. Premium West Coast real estate, tight yard.",
       "Smithton PA is 95 acres of dedicated Dick's Sporting Goods DC. Single-shipper contract."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

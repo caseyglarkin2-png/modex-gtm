@@ -24,7 +24,8 @@
       "Fifteen of the 16 Amazon sites gate the yard and twelve staff a guard booth. No network we have mapped controls its gates this tightly.",
       "The 16 sites span four node types: robotics fulfillment, an inbound cross-dock, a sortation center, and the CVG air hub, each with its own yard rhythm.",
       "Across 16 sites we counted 1,890 dock doors and 3,825 trailer spots on 1,053 acres, with no rail. Every trailer moves by truck."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

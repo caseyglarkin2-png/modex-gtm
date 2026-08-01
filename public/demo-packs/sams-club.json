@@ -24,7 +24,8 @@
       "Eight of the 10 Sam's Club DCs gate the yard and five staff a booth, but Hattiesburg and Edwardsville sit wide open to the road with no checkpoint.",
       "Several Sam's Club DCs are run by third parties: Saddle Creek in Lakeland, Hattiesburg, and Villa Rica, and a Prologis lease in Lithia Springs.",
       "Only Searcy touches rail, with an intermodal container in the yard. The other nine DCs move everything in and out by truck."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

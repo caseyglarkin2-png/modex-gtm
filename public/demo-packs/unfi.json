@@ -24,7 +24,8 @@
       "2,362 dock doors across 30 audited sites. UNFI routes the most natural-grocery dock minutes in NA.",
       "Hopkins MN is 150 acres of grocery distribution. UNFI's largest single DC.",
       "2 of 30 audited sites are rail-served. Natural grocery runs almost entirely on truckload."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

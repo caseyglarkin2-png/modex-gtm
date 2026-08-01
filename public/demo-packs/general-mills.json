@@ -25,7 +25,8 @@
       "Wellston OH is 328 acres of cereal manufacturing. Cheerios get made here at scale.",
       "7 of 15 audited sites are rail-served. Inbound oats, corn, and sugar move on rail.",
       "1,473 trailer spots across 15 audited sites. General Mills runs heavy trailer density for a CPG."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

@@ -24,7 +24,8 @@
       "Of the 11 sites, only North Las Vegas runs a staffed gate booth. The rest sit open to the road, so most 7-Eleven freight rolls in with no check-in.",
       "Two McLane grocery DCs, Fort Worth and Fredericksburg, hold 180 of the 460 dock doors. The fresh-food commissaries are a fraction of their size.",
       "None of the 11 sites touch rail, so every case bound for a store leaves the dock on a truck."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

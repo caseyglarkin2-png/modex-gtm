@@ -25,7 +25,8 @@
       "The beer DCs are pure import-distribution. Mexican beer flows into Texas and California, then fans out.",
       "Jurupa Valley CA is 71 acres of beverage cross-dock. Largest single-site beer DC on the West Coast.",
       "Wilmer TX runs 64 docks. Dallas I-45 is the Mexican beer pipeline."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

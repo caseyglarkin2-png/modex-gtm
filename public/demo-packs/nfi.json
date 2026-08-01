@@ -24,7 +24,8 @@
       "Only 10 of NFI's 14 audited yards sit behind a truck gate, and 4 run a staffed booth. The rest sit open to the road, so trailers roll in unchecked.",
       "The 14 yards hold 1,673 dock doors and room for about 3,709 trailers, and not one is rail-served. Every load moves by truck.",
       "The 14 sites span five yard types, from Savannah port logistics to Inland Empire DCs and Lehigh Valley cross-docks, each with its own gate routine."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

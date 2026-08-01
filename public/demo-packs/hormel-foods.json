@@ -25,7 +25,8 @@
       "Austin MN is 120 acres of Spam. Hormel has been making the same SKU on the same site since 1937.",
       "5 of the 25 audited sites are rail-served. Inbound pork moves on rail; outbound canned meat ships on trucks.",
       "1,566 trailer spots across the 25 audited sites. Hormel runs heavy trailer density for shelf-stable CPG."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

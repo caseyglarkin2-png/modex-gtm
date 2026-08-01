@@ -25,7 +25,8 @@
       "Champaign IL and Fairburn GA both run 110+ dock doors. CJ runs density at scale.",
       "2,099 dock doors across 26 audited sites. CJ routes more dock minutes than most 3PLs at this site count.",
       "4 of 26 audited sites are rail-served. CJ runs truckload-dominated cross-dock."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

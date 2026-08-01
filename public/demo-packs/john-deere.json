@@ -25,7 +25,8 @@
       "Waterloo IA is 620 acres of tractor manufacturing. Deere has been building Iowa-made tractors here since 1918.",
       "Milan IL PDC is 215 acres with 90 dock doors. The largest aftermarket parts DC in agriculture.",
       "3 of 21 audited sites are rail-served. Whole goods leave on flatbed; parts move on truckload."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

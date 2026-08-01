@@ -25,7 +25,8 @@
       "Napoleon OH is 175 acres of soup manufacturing. Largest single soup plant in North America.",
       "2 of 20 audited sites are rail-served. Campbell's has shifted away from rail in the last decade.",
       "Snyder's Hanover PA runs 45 docks for snack production. Different unit economics than soup."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

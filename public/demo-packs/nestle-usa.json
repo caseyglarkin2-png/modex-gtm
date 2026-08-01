@@ -25,7 +25,8 @@
       "7 of 12 audited sites are rail-served. Nestlé moves coffee and pet food on rail.",
       "Anderson IN is 80 acres of beverage manufacturing. Nestlé Waters runs heavy here.",
       "1,180 trailer spots across 12 audited sites. Nestlé parks more trailers per site than other multi-platform CPGs."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

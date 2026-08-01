@@ -28,7 +28,8 @@
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 480
-    }
+    },
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

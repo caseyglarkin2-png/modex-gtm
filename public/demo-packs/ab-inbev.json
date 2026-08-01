@@ -25,7 +25,8 @@
       "12 of 18 audited sites are rail-served. AB inbound corn syrup and bottle-grade aluminum move by rail.",
       "Fort Collins Brewery is 267 acres of beer manufacturing. Larger than most full-line CPG plants.",
       "Metal Container Corp Arnold MO is a captive can supplier. AB owns the cans before the beer hits them."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

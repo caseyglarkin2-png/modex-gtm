@@ -25,7 +25,8 @@
       "HMIN Greensburg IN is 1,480 acres. Honda built a city to make Civics here.",
       "HMA Lincoln AL is 900 acres with 120 dock doors. Largest single Honda plant in the audited sample by dock count.",
       "3 of the 14 audited sites are rail-served. Auto parts move on rail; finished vehicles drive away."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

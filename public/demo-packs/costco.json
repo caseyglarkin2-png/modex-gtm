@@ -25,7 +25,8 @@
     "networkCount": 24,
     "networkCountSource": "YardFlow estimate of Costco's North American depot footprint, extrapolated from the 11 sites we satellite-mapped. Costco's FY2025 Form 10-K reports 914 retail warehouses worldwide and does not publish a separate depot count (https://www.sec.gov/Archives/edgar/data/909832/000090983225000101/cost-20250831.htm).",
     "networkCountAsOf": "YardFlow estimate, Aug 2026",
-    "sampleRationale": "We mapped 11 US cross-dock depots spanning dry and refrigerated wet docks, biggest to smallest; the yard pattern held across all of them."
+    "sampleRationale": "We mapped 11 US cross-dock depots spanning dry and refrigerated wet docks, biggest to smallest; the yard pattern held across all of them.",
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

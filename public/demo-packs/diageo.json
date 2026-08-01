@@ -25,7 +25,8 @@
       "Plainfield IL runs 130 dock doors. Diageo's flagship US distribution warehouse.",
       "Lebanon KY is 142 acres of distillery. Bourbon ages here for 4 to 8 years before truckload outbound.",
       "1 of 9 audited sites is rail-served. Spirits move on truckload almost exclusively."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

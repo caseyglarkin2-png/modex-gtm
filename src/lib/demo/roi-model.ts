@@ -69,7 +69,62 @@ export interface NetworkRoiCounts {
  * capped here, so the inline ROI panel + the full-calculator prefill agree.
  */
 const FOOTPRINT_OVERRIDE: Record<string, number> = {
+  // THE NORTH AMERICAN CAP, and it MUST match gen-for-prize.ts in Flow-State-.
+  // This map held only `dannon`, so every other account fell through to the
+  // pack's coverageNote, which is the GLOBAL footprint. /for sized on the NA
+  // cap and /demo sized on the global number, which is exactly why the two
+  // surfaces reported different site counts for the same account: Coca-Cola
+  // 55 on /for against 198 on /demo, DHL 369 against 1055.
+  //
+  // Refresh both maps together, the same rule MARGIN_OVERRIDE below already
+  // states.
+  'ab-inbev': 34,
+  amazon: 116,
+  'bob-evans-farms': 7,
+  'campbell-s': 24,
+  caterpillar: 45,
+  'cj-logistics-america': 80,
+  'coca-cola': 66,
+  'constellation-brands': 19,
+  costco: 24,
+  crowley: 21,
+  'daimler-truck-north-america': 19,
   dannon: 13,
+  'dhl-supply-chain': 521,
+  diageo: 12,
+  fedex: 1250,
+  ford: 28,
+  'frito-lay': 39,
+  'general-mills': 28,
+  'general-motors': 62,
+  'georgia-pacific': 150,
+  gxo: 326,
+  'h-e-b': 14,
+  honda: 21,
+  'hormel-foods': 31,
+  'jm-smucker': 20,
+  'john-deere': 30,
+  'kenco-logistics-services': 141,
+  'keurig-dr-pepper': 123,
+  'kimberly-clark': 56,
+  'kraft-heinz': 35,
+  'mondelez-international': 81,
+  'nestle-usa': 21,
+  nfi: 300,
+  'niagara-bottling': 50,
+  'pactiv-evergreen': 50,
+  pepsico: 230,
+  'performance-food-group': 150,
+  'salson-logistics': 13,
+  'sams-club': 46,
+  'sc-johnson': 10,
+  'seven-eleven': 40,
+  target: 65,
+  'the-home-depot': 500,
+  toyota: 23,
+  unfi: 51,
+  'universal-logistics-holdings': 79,
+  walmart: 163,
 };
 
 /**

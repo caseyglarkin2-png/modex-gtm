@@ -24,7 +24,8 @@
       "Springfield OH Transportation Hub is the network's outbound spine. All other sites pass through it.",
       "76 dock doors total across 6 sites. Compact footprint, premium SKU mix.",
       "0 of 6 audited sites are rail-served. Bob Evans is a pure truckload network."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

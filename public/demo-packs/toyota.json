@@ -25,7 +25,8 @@
       "Liberty NC Battery is 1,116 acres of EV battery manufacturing. Toyota's bet on solid-state.",
       "4,577 trailer spots across 17 audited sites. Auto OEMs park heavy trailer density.",
       "7 of 17 audited sites are rail-served. Toyota inbound runs heavy on rail."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

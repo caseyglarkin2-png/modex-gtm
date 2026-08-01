@@ -28,7 +28,8 @@
     "networkCount": 65,
     "networkCountSource": "Coca-Cola US bottler system production facilities (~65 across 68 independent US bottlers), anchored on Coca-Cola Consolidated FY2024 Form 10-K (10 plants), SEC (https://www.sec.gov/Archives/edgar/data/0000317540/000031754025000025/coke-20241231.htm)",
     "networkCountAsOf": "FY2024 (bottler 10-Ks)",
-    "sampleRationale": "We mapped 30 US bottling and production sites across the major bottlers, biggest and newest to oldest and least automated; the yard pattern held across all of them."
+    "sampleRationale": "We mapped 30 US bottling and production sites across the major bottlers, biggest and newest to oldest and least automated; the yard pattern held across all of them.",
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {

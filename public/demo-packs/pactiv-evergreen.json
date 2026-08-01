@@ -25,7 +25,8 @@
       "12 of 30 audited sites are rail-served. Paper and fiber inputs move on rail; finished cups ship on truckload.",
       "Canandaigua NY is 145 acres of packaging manufacturing. Pactiv runs Chinet here.",
       "2,408 trailer spots across 30 audited sites. Foodservice packaging is volume-heavy, weight-light."
-    ]
+    ],
+    "extrapolationConfidenceShare": 0.7
   },
   "research": null,
   "network": {
