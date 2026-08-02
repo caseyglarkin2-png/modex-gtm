@@ -186,7 +186,14 @@ export const BulkSendEmailSchema = z.object({
     readinessScore: z.number().int().min(0).max(100).optional(),
     readinessTier: z.enum(['high', 'medium', 'low']).optional(),
     stale: z.boolean().optional(),
-  })).min(1),
+    // .max() matters as much as .min(). This array was unbounded, and
+    // sendBulk (src/lib/email/client.ts) fires Promise.allSettled over ALL of
+    // it concurrently while send-bulk writes its EmailLog rows only after the
+    // whole batch resolves. One 1,000-recipient request therefore had every
+    // daily-cap check read the same pre-batch total and pass. The in-process
+    // tally in daily-cap.ts closes that within an invocation; this bounds the
+    // request itself so no single call can outrun the ceiling by design.
+  })).min(1).max(200),
   subject: z.string().min(1),
   bodyHtml: z.string().min(1),
   cc: NormalizedCcSchema.optional().default([]),

@@ -678,6 +678,12 @@ model EmailLog {
   @@index([provider_message_id])
   @@index([thread_id])
   @@index([to_email])
+  // The daily send ceiling counts rows by sent_at on every send
+  // (src/lib/email/daily-cap.ts). Without this the guard runs a sequential
+  // scan of email_logs per message, against a pool configured
+  // connection_limit=1 - so its own query pressure could produce the timeout
+  // it then fails closed on.
+  @@index([sent_at])
   @@map("email_logs")
 }
 

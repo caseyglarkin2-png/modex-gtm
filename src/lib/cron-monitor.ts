@@ -48,9 +48,15 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   { name: 'reenrich-contacts', label: 'Contact Re-enrichment', path: '/api/cron/reenrich-contacts', schedule: '0 */8 * * *' },
 
   // --- Routes that exist but are not Vercel-scheduled ---
-  { name: 'process-generation-jobs', label: 'Generation Job Worker', path: '/api/cron/process-generation-jobs', schedule: '*/5 * * * *' },
-  { name: 'process-send-jobs', label: 'Send Job Worker', path: '/api/cron/process-send-jobs', schedule: '*/2 * * * *' },
-  { name: 'monday-bump', label: 'Monday Bump', path: '/api/email/monday-bump', schedule: '5 11 * * 1' },
+  // These declare no schedule because nothing schedules them. They are absent
+  // from vercel.json, so they are manual-trigger-only for any holder of
+  // CRON_SECRET. They previously carried '*/5 * * * *', '*/2 * * * *' and
+  // '5 11 * * 1', and THIS file is what the ops UI renders for a cron that has
+  // never run (src/components/ops/cron-health-rich.tsx) - so the fiction lived
+  // on the operator's screen even after the route-local constants were fixed.
+  { name: 'process-generation-jobs', label: 'Generation Job Worker', path: '/api/cron/process-generation-jobs', schedule: 'unregistered (manual only)' },
+  { name: 'process-send-jobs', label: 'Send Job Worker', path: '/api/cron/process-send-jobs', schedule: 'unregistered (manual only)' },
+  { name: 'monday-bump', label: 'Monday Bump', path: '/api/email/monday-bump', schedule: 'unregistered (manual only)' },
 ];
 
 function cronKey(name: string) {

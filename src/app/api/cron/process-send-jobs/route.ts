@@ -3,6 +3,7 @@ import { z } from 'zod';
 import * as Sentry from '@sentry/nextjs';
 import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/email/client';
+import { DailyCapExceededError } from '@/lib/email/daily-cap';
 import { markCronFailure, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
 import { requiresApprovalForSend } from '@/lib/revops/generated-content-approval';
@@ -191,6 +192,18 @@ export async function GET(request: NextRequest) {
 
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error);
+          // The daily ceiling is backpressure, not a bad recipient. Marking
+          // these 'failed' burned them permanently - nothing re-queues a
+          // failed recipient - so a job larger than the day's remaining
+          // allowance lost its tail rather than finishing tomorrow. Leave them
+          // pending and stop the run; the next invocation picks them up.
+          if (error instanceof DailyCapExceededError) {
+            await prisma.sendJobRecipient.update({
+              where: { id: recipient.id },
+              data: { status: 'pending', error_message: message.slice(0, 1000) },
+            });
+            break;
+          }
           await prisma.sendJobRecipient.update({
             where: { id: recipient.id },
             data: {

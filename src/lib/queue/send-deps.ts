@@ -7,6 +7,7 @@ import {
 } from '@/lib/email/perform-send';
 import type { SendDeps } from './send';
 import { RateLimitedError } from './errors';
+import { DailyCapExceededError } from '@/lib/email/daily-cap';
 import { replyPauseDecision } from './sequence';
 import { newestInboundFrom } from '@/lib/email/gmail-inbox';
 import { applyVariant } from './variant';
@@ -122,6 +123,16 @@ export function prodSendDeps(prisma: any): SendDeps {
         r = await wrapAndSend(toInput(item, applied, sender), ctx?.sanitizedCc ?? []);
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
+        // A daily-ceiling refusal is BACKPRESSURE, not a bad draft. send.ts
+        // finalizes anything that is not a RateLimitedError as permanently
+        // failed, and nothing re-queues failed items - so 250 approved drafts
+        // against a cap of 200 used to mark items 201-250 dead forever with
+        // "Daily send ceiling reached", and they would not go out the next day
+        // either. The same applied to a single transient Prisma timeout, via
+        // the fail-closed conversion in daily-cap.
+        if (err instanceof DailyCapExceededError) {
+          throw new RateLimitedError(msg);
+        }
         if (/\b429\b|rate.?limit|userRateLimitExceeded|quotaExceeded/i.test(msg)) {
           throw new RateLimitedError(msg);
         }
