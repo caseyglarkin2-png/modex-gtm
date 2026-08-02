@@ -2,7 +2,13 @@
  * Gmail API Send — the only email send path.
  * Sends email via Gmail API (messages.send), which also files the message
  * in the Sent folder automatically and assigns a real Gmail threadId.
+ *
+ * Being the only send path is what makes it the right place for the mailbox
+ * daily ceiling. Two CLI scripts, scripts/batch-send-gmail.ts and
+ * scripts/wave1-resend-gmail.ts, define their OWN local sendViaGmail and call
+ * the Gmail API directly, so they are NOT covered by this and remain uncapped.
  */
+import { assertUnderDailyCap } from './daily-cap';
 
 // Read at call time, not module load time, so dynamically-set values work
 function getGmailConfig() {
@@ -208,6 +214,21 @@ async function getAccessToken(overrideRefreshToken?: string): Promise<string> {
 export async function sendViaGmail(
   payload: GmailSendPayload,
 ): Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }> {
+  // THE MAILBOX CEILING, enforced at the wire rather than at any route.
+  //
+  // Seven application paths reach this function and none of them counted a
+  // send: perform-send (manual /discovery + the clawd-driven draft queue),
+  // send-bulk (whose recipients array has .min(1) and no .max()),
+  // process-send-jobs, monday-bump, the engagement thread reply, the daily
+  // digest, and the admin gmail-token probe - which imports this function
+  // directly and so bypasses client.sendEmail entirely. Gating any subset of
+  // those routes would have left the others open, and more routes will be
+  // added. This is the one place every app send must pass.
+  //
+  // Throws DailyCapExceededError, which fails CLOSED on an unreadable ledger.
+  // See src/lib/email/daily-cap.ts for why this guard alone does that.
+  await assertUnderDailyCap();
+
   // Per-identity send: when payload.sender is set, mint the access token from
   // the sender's refresh token and address the mailbox URL to the sender.
   // Otherwise send via the env/Casey identity exactly as before.

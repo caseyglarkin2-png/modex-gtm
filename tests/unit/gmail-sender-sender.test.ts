@@ -1,4 +1,19 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+// sendViaGmail now enforces the mailbox daily ceiling before it reaches the
+// wire (src/lib/email/daily-cap.ts), and that ceiling reads Prisma and FAILS
+// CLOSED. Without this mock these tests exercise the guard rather than the
+// transport: the ledger is unreadable under vitest, so the send is correctly
+// refused and the assertions about tokens and mailbox URLs never run.
+//
+// Mocked at the counter, not at assertUnderDailyCap, so the wiring itself
+// stays under test - if the guard were removed from sendViaGmail these tests
+// would still pass, which is why test_the_gate_is_wired_at_the_wire_call in
+// email-daily-cap.test.ts asserts the call site separately.
+vi.mock('@/lib/prisma', () => ({
+  prisma: { emailLog: { count: vi.fn(async () => 0) } },
+}));
+
 import { buildMimeMessage, sendViaGmail } from '@/lib/email/gmail-sender';
 
 /**

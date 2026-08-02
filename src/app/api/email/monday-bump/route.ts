@@ -21,7 +21,15 @@ const BATCH_SIZE = 25;
 const RATE_LIMIT_MS = 6000;
 const CRON_NAME = 'monday-bump';
 const CRON_PATH = '/api/email/monday-bump';
-const CRON_SCHEDULE = '5 11 * * 1';
+// NOT REGISTERED IN vercel.json. This declared '5 11 * * 1' and nothing
+// schedules it. Manual trigger only, and the loop at :204 runs EVERY batch
+// unless ?batch=N is supplied - RATE_LIMIT_MS paces sends 6s apart but never
+// bounds the total.
+//
+// Volume is now bounded by the mailbox daily ceiling enforced in
+// sendViaGmail (src/lib/email/daily-cap.ts). Whether this should be a real
+// cron is an operator decision.
+const CRON_SCHEDULE = 'unregistered (manual trigger only)';
 
 const BUMP_BODIES = [
   (firstName: string) =>

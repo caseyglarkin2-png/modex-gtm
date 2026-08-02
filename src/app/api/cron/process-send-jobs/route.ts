@@ -17,7 +17,17 @@ const querySchema = z.object({
 
 const CRON_NAME = 'process-send-jobs';
 const CRON_PATH = '/api/cron/process-send-jobs';
-const CRON_SCHEDULE = '*/2 * * * *';
+// NOT REGISTERED IN vercel.json. This constant declared '*/2 * * * *' and
+// nothing schedules it, so the route is manual-trigger-only: any holder of
+// CRON_SECRET can GET it, and each hit drains up to 2 jobs x 100 recipients.
+// A schedule string that no scheduler reads is worse than none, because it is
+// what someone checks when asking "what runs on its own here".
+//
+// Volume is now bounded regardless: every send funnels through
+// sendViaGmail, which enforces the mailbox daily ceiling
+// (src/lib/email/daily-cap.ts). Registering this properly, or retiring it, is
+// an operator decision and not one to make from a comment.
+const CRON_SCHEDULE = 'unregistered (manual trigger only)';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
