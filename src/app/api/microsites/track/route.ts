@@ -79,6 +79,31 @@ export async function POST(req: NextRequest) {
   };
 
   try {
+    /**
+     * MicrositeEngagement.account_name is a foreign key to Account.name, so a
+     * page that is not an account microsite cannot be persisted here. The
+     * research paper sends entity="Order of Operations", which is not a
+     * company, and every intent event from /order-of-operations was failing:
+     *
+     *   Foreign key constraint violated on the constraint:
+     *   `microsite_engagements_account_name_fkey`
+     *
+     * The client calls this fail-safe and ignores the response, so the failure
+     * was invisible from the page while the server returned 500 on every beat.
+     * Worth knowing when reading intent coverage: this silently dropped the
+     * paper's engagement, which is the most-read surface we have.
+     *
+     * Checked BEFORE the merge work rather than caught after, because a caught
+     * FK error cannot tell an unknown account apart from a real integrity bug.
+     */
+    const account = await prisma.account.findUnique({
+      where: { name: snapshot.accountName },
+      select: { name: true },
+    });
+    if (!account) {
+      return NextResponse.json({ ok: true, skipped: 'unknown-account', account: snapshot.accountName });
+    }
+
     const existing = await prisma.micrositeEngagement.findUnique({
       where: {
         session_id_path: {
