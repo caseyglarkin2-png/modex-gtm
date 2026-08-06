@@ -1,2 +1,8 @@
 User-agent: *
+# /_next/ MUST stay fetchable: production assetPrefix pins all CSS/JS to
+# https://modex-gtm.vercel.app (next.config.ts), so the INDEXABLE
+# yardflow.ai/demo/ gallery loads its render-critical assets from this
+# origin. With a blanket Disallow, Googlebot rendered that page unstyled.
+# Assets carry no indexable content; everything else stays disallowed.
+Allow: /_next/
 Disallow: /
