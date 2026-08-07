@@ -1,5 +1,7 @@
 # 🚨 Critical Missing Pieces - What You Need to Do
 
+> **STATUS: HISTORICAL.** Every gap below shipped. Retained for context. The Resend webhook item is obsolete — Resend was removed (commit f71d06c2); the only webhook is `src/app/api/webhooks/hubspot`. Email workflow now routes through Gmail API. Last verified 2026-08-06.
+
 ## Priority 1: BLOCKING (Do This First)
 
 ### 1. Configure Resend Webhook in Vercel ⏳ BLOCKING

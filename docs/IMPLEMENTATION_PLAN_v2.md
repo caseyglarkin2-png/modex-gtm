@@ -1,6 +1,8 @@
 # Modex GTM - Implementation Plan v2.0 (A+ Grade Target)
 ## Phase-by-Phase Execution: Email Loop → Smart Queue → UX Polish
 
+> **STATUS: HISTORICAL.** Phase 1 (email loop + analytics) and Phase 2-3 (quick actions, branding) shipped. Plan describes full 6-phase roadmap (email, queue, UX, features). MVP released; post-MVP features (smart queue, notifications) deferred. Last verified 2026-08-06.
+
 **Version:** 2.0 (Post-Review)
 **Date Created:** 2026-03-29
 **Last Updated:** 2026-03-29

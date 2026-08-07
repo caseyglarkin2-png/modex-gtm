@@ -1,5 +1,7 @@
 # Discovery Hub — Build Sprint Plan
 
+> **STATUS: DELIVERED.** All six sprints shipped; `/discovery` is live (route: `src/app/discovery/page.tsx`). The hub surfaces net-new prospects from corridor-scan + ICP-scoring, with tier filtering, satellite map clustering, and HubSpot push. Retained as reference for build patterns. Last verified 2026-08-06.
+
 > **For the agent:** This is an atomic, sequential build plan. Work one task at a
 > time, top to bottom. Each task has a **Goal**, the **Files** it touches, the
 > **Pattern** to mirror (a real file already in this repo — read it before

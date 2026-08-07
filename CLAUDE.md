@@ -14,9 +14,11 @@ truck yards of the **top-42 prospect accounts for YardFlow by FreightRoll**.
 Each facility gets a geofence, `yardMetrics` (docks, trailers, gates, acreage,
 rail), and a 22-field gate/dock/yard classification, plus a written dossier.
 
-**Status as of 2026-05-18:** 33 of 43 account folders complete (sites +
-dossiers + CSV), 4 partial, 6 not started. The run is being resumed in waves —
-RUN-STATUS.md has the current breakdown.
+**Updated 2026-07-30:** run COMPLETE. 44 accounts (43 original + Tyson Foods added
+2026-07-30) · 867+ facilities · all accounts have `sites/`, `dossiers/`,
+per-account CSVs, and Phase 4 packaging (Master workbook, GeoJSON, geofence
+links, sales summaries). See `output/yard-audits/RUN-STATUS.md` for full
+summary and per-account rollups.
 
 ### Pipeline (`scripts/yard-audit/`)
 - `deep-audit-prompt.md` — per-facility audit-agent instructions + JSON schema

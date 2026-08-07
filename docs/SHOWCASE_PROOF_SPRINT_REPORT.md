@@ -1,5 +1,7 @@
 # Showcase Proof + Enrichment Pipeline Sprint Report
 
+> **STATUS: HISTORICAL.** Showcase pages shipped and live at `/for/<account-slug>`. Six accounts proved demo-grade: Dannon, Home Depot, Hormel, Smucker, John Deere, Diageo (per this report). Routes live; enrichment workflow and account data in `src/lib/data/accounts.json`. Retained for build patterns and enrichment reference. Last verified 2026-08-06.
+
 **Date:** May 30, 2025
 **Sprint:** Showcase Proof + Enrichment Pipeline
 **Objective:** Prove showcase pages are demo-grade, define the DWTB demo reel, build the enrichment loop, close remaining gaps.

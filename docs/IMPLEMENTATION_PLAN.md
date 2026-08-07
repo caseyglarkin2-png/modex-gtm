@@ -1,6 +1,8 @@
 # Modex GTM - Implementation Plan
 ## Make It More Powerful, Less Clicky, More Actionable
 
+> **STATUS: HISTORICAL.** Email loop, dashboard analytics, and core features shipped. Plan describes Phase 1-6 roadmap (email loop, quick actions, branding, smart queue, notifications). Email workflow now live via Gmail API and HubSpot sync. Last verified 2026-08-06.
+
 **Date:** 2026-03-29
 **Goal:** Transform from content generator → full GTM operating system with closed-loop workflows
 
