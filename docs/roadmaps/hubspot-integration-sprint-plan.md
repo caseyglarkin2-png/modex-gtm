@@ -1,5 +1,8 @@
 # HubSpot Integration Sprint Plan — YardFlow RevOps OS
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **Created:** 2026-04-11T10:00:00Z
 > **Revised:** 2026-04-11T11:00:00Z (incorporated A+ review: 7/10 → 9/10)
 > **Re-reviewed:** 2026-04-11 (second review: 7.7/10 B+ → incorporated all critical + high-priority fixes)

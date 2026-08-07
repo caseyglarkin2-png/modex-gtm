@@ -1,4 +1,7 @@
 # One-Pager Generation & Batch Send Sprint Plan
+
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
 ## Q2 2026 Platform Enhancement — Shipped Software Focus
 
 **Status:** Ready for review (May 1, 2026)  

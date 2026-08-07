@@ -1,5 +1,8 @@
 # Track C — Sequences made usable (#4)
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Goal:** The sequence machinery (already wired in the runtime) becomes usable in the UI: set per-step copy, see which step an enrolled draft is on, unenroll, and delete a sequence. No guards.
 
 The runtime (`sequence-runtime.ts`) already uses each step's `subjectTemplate`/`bodyTemplate` (falling back to the base draft) and tracks `step_index`/`sequence_run_id`. Track C exposes that.

@@ -1,5 +1,8 @@
 # Microsite Fix — Phase 1 Implementation Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Ship the 7 highest-leverage P0 systemic fixes from the 2026-05-11 master punch list (3 ship-stoppers + 4 schema/structural pieces), plus 4 accessibility-failing accent color corrections, so the design system is ready to absorb Phase-2 (T2 voice rewrites) and Phase-3 (16-account section migration).

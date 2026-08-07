@@ -1,5 +1,8 @@
 # RevOps OS Current IA Inventory
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Status:** Sprint 0 baseline  
 **Source:** current screenshot, `src/components/sidebar.tsx`, `src/components/command-search.tsx`, `src/app` route tree, and `src/lib/revops-ia/current-state.ts`.
 

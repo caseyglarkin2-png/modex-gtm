@@ -1,5 +1,8 @@
 # Track A — Editable staged path + real preview (#6, #7, #5-signature)
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Goal:** The Outbox shows each draft exactly as the recipient will receive it (real `wrapHtml` output, owner-correct signature, inline image in place); the rich composer can save a draft to the queue instead of only sending live.
 
 **Approach:** Parametrize the one source of truth (`wrapHtml`) by sender identity (Casey default = byte-identical), thread it through the send path, render it (server-side, since the unsubscribe token needs crypto) into the row as a sandboxed preview, and add a "Queue draft" button to the composer. No send guards.

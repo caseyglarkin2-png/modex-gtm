@@ -1,5 +1,8 @@
 # Microsite Fix Phase 3 — Section Migration (14 Empty-Body Accounts)
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` to execute this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Migrate the 14 empty-section accounts (P0-9 in the master punch list) from `sections: []` to fully-authored memo bodies matching the Tier 1 quality bar (`kraft-heinz.ts`). Remove the "Working analysis · v0" colophon flag on each. The Tier 1 anchor question — empty body + Draft badge on highest-priority prospect surfaces — closes with this phase.

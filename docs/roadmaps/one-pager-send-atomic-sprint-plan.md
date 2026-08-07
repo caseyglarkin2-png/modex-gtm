@@ -1,5 +1,8 @@
 # One-Pager Send A+ Atomic Sprint Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Status:** Closeout gates passed  
 **Scope:** One-pager generation, generated-content operations, version-aware send, queue reliability, durable bulk send, metrics, and release readiness.  
 **Source docs:** `one-pager-send-sprint-plan.md`, `one-pager-send-sprint-todos.md`, `queue-implementation-decision.md`.

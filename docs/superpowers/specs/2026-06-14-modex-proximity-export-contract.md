@@ -1,5 +1,8 @@
 # Modex Proximity + Yard-Audit Export Contract (2026-06-14)
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 The sixth export stream, the seam that fuses modex's legit corridor
 intelligence into the brain's homescreen rank. Companion to the engagement
 export contract (`2026-06-13-modex-intel-export-contract.md`); same auth,

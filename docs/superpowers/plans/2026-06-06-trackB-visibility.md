@@ -1,5 +1,8 @@
 # Track B — Operational visibility (#9)
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Goal:** The Outbox shows what's actually happening, so Casey moves fast without flying blind. No guards, no extra clicks to send.
 
 **Scope:** render fields already on `DraftQueueItem` (no schema change); accurate badge past the 200 cap; live batch-send progress + cancel.

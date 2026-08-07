@@ -1,5 +1,8 @@
 # Autonomous Outbound Loop v1 — Implementation Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make Hand-to-Clawd run itself — each morning a cron hands the top-50 fresh accounts to Clawd, which sources verified contacts, leads each draft with the account's top mined signal (proximity fallback), and stages them into the Outbox; hot replies and bounces push to Casey's phone.

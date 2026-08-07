@@ -1,5 +1,8 @@
 # TAM → Qualification → #yardflow-intent Wiring Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: use superpowers:subagent-driven-development to implement. Steps use checkbox (`- [ ]`).
 
 **Goal:** Light up the intent→qualify→alert funnel on the real 6,881-account TAM. Re-point the (already built+tested) MQL/SQL engine from the dead corridor score to `yardflow_tam='in'`, and make **#yardflow-intent** the live feed of every new SQL — not just anonymous web hits.

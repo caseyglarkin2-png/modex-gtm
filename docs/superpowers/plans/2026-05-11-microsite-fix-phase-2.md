@@ -1,5 +1,8 @@
 # Microsite Fix — Phase 2 (T2 Voice) Implementation Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Eliminate the boilerplate/sales-tell metadata across the 14 Tier-2 accounts and clean up template artifacts that leaked into renderable copy across 9 accounts. Rewrites the most prominent renderable surface — pageTitle (browser tab + share preview) and metaDescription (SEO + share card) — for every T2 account in one PR.

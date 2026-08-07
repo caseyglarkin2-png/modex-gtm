@@ -1,5 +1,8 @@
 # One-Pager Send Sprint Todo List
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 ## Overview
 This document captures the recommended execution path for the one-pager generation + send workflow. It is intentionally atomic, exhaustive, and aligned to the sprint plan in `one-pager-send-sprint-plan.md`.
 

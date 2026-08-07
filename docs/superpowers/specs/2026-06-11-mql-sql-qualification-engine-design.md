@@ -1,5 +1,8 @@
 # MQL/SQL Qualification Engine — Design Spec
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 Date: 2026-06-11
 Owner: Casey Larkin (founding AE, YardFlow by FreightRoll)
 Status: Approved (hybrid architecture), pre-implementation

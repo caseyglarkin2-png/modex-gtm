@@ -1,5 +1,8 @@
 # Account Intelligence Feed Implementation Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make EVERY piece of modex's account intelligence callable by clawd-prod over HTTP — the yard-audit dossier text, the geofence geometry, the microsite/ABM research, and the full scored universe — completing "systems not silos." Today clawd can pull scores, the structured account record, and the deduped list; the dossier/geometry/microsite *bodies* and the full 7,912-site scored set are still local silos.

@@ -1,5 +1,8 @@
 # RevOps OS Proof Ledger
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 <!-- markdownlint-disable MD013 MD024 MD060 -->
 
 **Purpose:** Ground-source truth for RevOps OS delivery. A roadmap task is not done because it is planned or implemented; it is done when this ledger records command proof, UI click proof, and artifacts.

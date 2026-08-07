@@ -1,5 +1,8 @@
 # Microsite Fix Phase 6 — A+ Top 5 + Tier-1 Baseline Sweep
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development`. Steps use checkbox (`- [ ]`) syntax.
 
 **Goal:** Extend the Kraft-Heinz A+ treatment across the rest of the Tier-1 portfolio in two tracks. Track A applies the full 12-task overhaul to the 5 highest-priority accounts that don't have it yet. Track B applies a 4-task baseline upgrade pack to the remaining 14 Tier-1 accounts so they read consistently dense without the per-account artifact authoring lift.

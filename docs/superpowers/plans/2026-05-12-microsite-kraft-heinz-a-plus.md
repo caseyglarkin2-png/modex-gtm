@@ -1,5 +1,8 @@
 # Kraft-Heinz Microsite — A+ Pass
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` or `superpowers:executing-plans`. Steps use checkbox (`- [ ]`) syntax.
 
 **Goal:** Upgrade the Kraft-Heinz microsite from "quality bar reference" to A+ — the most immersive, high-value version of the memo template. Drive Flavio Torres scan-stopping density, add the missing receipts (artifact section + dense marginalia), and override the cover hook + audio intro to land Torres-specific from the first glance.

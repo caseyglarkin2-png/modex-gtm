@@ -1,5 +1,8 @@
 # YNS Microsite Redesign — Sprint Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Status:** Approved 2026-05-08
 **Purpose:** Rebuild the per-account microsite as a YNS-thesis-first, anti-selling thinking artifact that hands prospects off to the existing `yardflow.ai/roi/` calculator instead of asking for a meeting. Two artifacts, zero forced conversations.
 

@@ -1,5 +1,8 @@
 # MQL/SQL Qualification Engine Implementation Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a tested engine that computes a per-contact qualification verdict (`none`/`mql`/`sql`) from TAM fit × role × intent, writes it to HubSpot as `yardflow_qual_verdict`, and lets native HubSpot Lists + Workflows actuate lifecycle promotion and alerts.

@@ -1,5 +1,8 @@
 # Hand-to-Clawd (Worklist → Clawd draft batch) Implementation Plan
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: superpowers:subagent-driven-development. Steps use checkbox syntax.
 
 **Goal:** One click on the /discovery worklist hands a curated slice of target accounts to Clawd's control plane, which sources contacts, drafts copy, and stages drafts back into the Outbox (`source:'clawd'`) for Casey to review and send.

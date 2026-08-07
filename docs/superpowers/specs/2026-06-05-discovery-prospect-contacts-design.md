@@ -1,5 +1,8 @@
 # Discovery — prospect contacts, inferred email, email-from-drawer
 
+> **STATUS: HISTORICAL.** A dated plan/spec record, retained for context and rationale. It describes intent at the time of writing; the code has moved since, so it is NOT current guidance. For present state read `git log --since=7d`, the live system, and `plans/README.md`. Last verified 2026-08-06.
+
+
 **Goal.** From the `/discovery` worklist drawer, turn a top prospect account into
 an emailable lead: surface the right decision-maker contacts, get an email
 address for each (real when we have it, inferred when we don't — never a blind
