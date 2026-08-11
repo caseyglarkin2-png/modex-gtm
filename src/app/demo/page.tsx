@@ -301,6 +301,33 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+const DEMO_COLLECTION_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': 'https://yardflow.ai/demo/#collection',
+  name: 'YardFlow industry templates',
+  description:
+    'Sample YardFlow ROI runs and demo templates for major shippers, 3PLs, retailers, and manufacturers.',
+  url: 'https://yardflow.ai/demo/',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': 'https://yardflow.ai/#website',
+    name: 'YardFlow',
+    url: 'https://yardflow.ai/',
+  },
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://yardflow.ai/#organization',
+    name: 'YardFlow by FreightRoll',
+    url: 'https://yardflow.ai/',
+  },
+  about: [
+    { '@type': 'Thing', name: 'Yard management system' },
+    { '@type': 'Thing', name: 'Yard automation' },
+    { '@type': 'Thing', name: 'Yard network operations' },
+  ],
+};
+
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 const VALID_ARCHETYPES: ReadonlyArray<Archetype> = ['cpg', 'logistics', 'manufacturing', 'retail', '3pl'];
@@ -369,6 +396,10 @@ export default async function DemoGalleryPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(DEMO_COLLECTION_JSONLD) }}
+      />
       {/*
        * Tracker uses a pseudo-account ("gallery") because the snapshot
        * schema requires `accountSlug` + `accountName`. The /demo gallery
