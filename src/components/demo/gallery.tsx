@@ -6,6 +6,7 @@ import { getSavedTemplates, toggleSavedTemplate, clearSavedTemplates } from '@/l
 import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
 import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags';
 import { ProvenanceLink } from './provenance-modal';
+import { getMicrositeBaseUrl } from '@/lib/site-url';
 
 /**
  * Sprint 2.5, Industry-template gallery surface.
@@ -24,7 +25,7 @@ import { ProvenanceLink } from './provenance-modal';
  */
 
 const ROI_STATE_KEY = 'roi-v2-state';
-const MICROSITE_BASE = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
+const MICROSITE_BASE = getMicrositeBaseUrl();
 const AUDIT_REQUEST_ENDPOINT = '/api/microsites/audit-request';
 
 /** H.T3, module-level dedup so each tile fires its dwell event at most
@@ -497,7 +498,7 @@ function Hero({
             the site-wide .btn recipes mirrored from Flow-State- globals. */}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
           <a
-            href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
+            href={`${MICROSITE_BASE}/roi/?source=demo-gallery${demoSuffix}`}
             target="_blank"
             rel="noopener noreferrer"
             data-ms-cta-id="gallery-hero-open-calculator"
@@ -613,8 +614,8 @@ function Tile({
   const firstFinding = surprisingFindings?.[0];
   const auditedMonth = formatAuditMonth(builtAt);
 
-  const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
-  const templateHref = `/demo/${anchor.slug}?from=gallery${demoSuffix}`;
+  const roiHref = `${MICROSITE_BASE}/roi/?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
+  const templateHref = `/demo/${anchor.slug}/?from=gallery${demoSuffix}`;
   const counter = `${String(index).padStart(2, '0')}/${String(total).padStart(2, '0')}`;
   const isFirstTile = index === 1;
 
@@ -1198,7 +1199,7 @@ function EmptyFilterState({
       )}
       {/* C.T6, capture latent demand for un-modeled archetypes. */}
       <a
-        href={`${MICROSITE_BASE}/contact?intent=custom-audit&source=gallery-empty-filter`}
+        href={`${MICROSITE_BASE}/contact/?intent=custom-audit&source=gallery-empty-filter`}
         target="_blank"
         rel="noopener noreferrer"
         data-ms-cta-id="gallery-empty-filter-audit-request"
@@ -1357,7 +1358,7 @@ function SavedTemplatesBanner({
       {saved.map((slug, i) => (
         <span key={slug}>
           <Link
-            href={`/demo/${slug}?from=gallery${demoSuffix}`}
+            href={`/demo/${slug}/?from=gallery${demoSuffix}`}
             prefetch={false}
             className="text-white transition-colors hover:text-[#00B4FF]"
           >

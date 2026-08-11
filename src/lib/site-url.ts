@@ -1,9 +1,10 @@
 function normalizeUrl(value: string): string {
-  if (/^https?:\/\//i.test(value)) {
-    return value;
+  const compact = value.replace(/\s+/g, '');
+  if (/^https?:\/\//i.test(compact)) {
+    return compact;
   }
 
-  return `https://${value}`;
+  return `https://${compact}`;
 }
 
 export function getSiteUrl(): string {
@@ -29,7 +30,9 @@ export function getSiteUrl(): string {
  * domain; NEXT_PUBLIC_MICROSITE_BASE_URL still overrides for previews/local.
  */
 export function getMicrositeBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
+  const configured = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL?.replace(/\s+/g, '');
+  const base = configured ? normalizeUrl(configured) : 'https://yardflow.ai';
+  return base.replace(/\/+$/, '');
 }
 
 /** Build a full microsite URL for an account slug. */
