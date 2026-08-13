@@ -171,8 +171,32 @@ Four jobs, in descending value:
 3. **Backfill the four pack-direct accounts** (99 records). The verdicts already
    exist in `public/demo-packs/*.json`; copy them back onto the source records so
    the source stops lying about its own evidence state.
-4. **Salvage the 51 files in `modex-gtm-demo-aplus`** before that worktree is
-   ever committed — it holds 2,438 lines of the same overwrite damage.
+4. ~~Salvage the 51 files in `modex-gtm-demo-aplus`~~ — **DONE 2026-08-13, and it
+   recovered nothing, which is the useful answer.**
+
+   The worktree was inventoried read-only, file by file, comparing three
+   versions of each: the branch's committed copy, current `main`, and the
+   damaged working-tree stub.
+
+   | Classification | Files |
+   |---|---|
+   | DUPLICATE — byte-identical to `main` | 49 |
+   | UNIQUE vs `main` | 1 (kroger) |
+   | Working-tree stubs (the damage) | 2 |
+   | **Unique evidence lines actually recoverable** | **0** |
+
+   The one unique file, kroger, holds 21 lines that are a strict SUBSET of the
+   38-line version already restored here from `313132cd` — zero lines in it are
+   missing from ours. Verified by line-wise diff, not by eyeballing.
+
+   This also corrects a number that was previously quoted as if it were value:
+   **2,438 lines was the DAMAGE** (deletions in the working tree), not salvageable
+   evidence. The committed research on that branch is 99% identical to what we
+   already ship.
+
+   `modex-gtm-demo-aplus` therefore holds nothing we need. It remains DO NOT
+   MERGE, and it can be discarded whenever its owner is done with it. Nothing was
+   copied from it and its worktree was not modified.
 
 Each backfilled record needs a verdict, at least one dated identity citation, and
 a completed divestiture check — the same bar every other account already meets.
