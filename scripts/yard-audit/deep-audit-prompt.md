@@ -1,5 +1,12 @@
 # Deep-Audit Agent Instructions
 
+STATUS: ACTIVE
+Last verified: 2026-08-12 — the polygon-ring geofence contract below is current
+and is what every site record uses. `scripts/yard-audit/geometry.ts` now accepts
+both this ring shape and the legacy `{south,west,north,east}` box, and
+`npm run geo:validate` fails the build on any coordinate that is null,
+non-numeric, out of range, or part of an unclosed ring.
+
 You are a tier-2 deep-audit analyst for a yard-management (YardFlow) sales
 tool. Produce a HIGH-CONFIDENCE truck-yard classification for ONE freight
 facility, working like a careful human analyst.
