@@ -194,12 +194,11 @@ export interface ValidationIssue {
  * counterclockwise and each interior ring (hole) clockwise, so a blanket check
  * would reject legal holes.
  *
- * Known limit, stated rather than papered over: this cannot detect a
- * lat/lng transposition. Every US yard in this corpus has a latitude and a
- * longitude that are both inside the other's legal range, so a swap produces
- * coordinates that are individually valid and merely in the wrong ocean. Guard
- * that at the source-reading layer (there is exactly one, `normalizeZone`) and
- * with the tests that pin lng/lat order, not here.
+ * This function cannot detect a lat/lng transposition and structurally never
+ * will: a swapped US coordinate is individually in-range and merely in the wrong
+ * ocean, so every rule here still passes. That is `validateRingAgainstAnchor`'s
+ * job — it cross-checks the traced ring against the record's independently
+ * geocoded `coords`, which is the only signal in the data that can see it.
  */
 export function validateRing(
   ring: unknown,
