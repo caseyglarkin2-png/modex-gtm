@@ -8,24 +8,24 @@
         "coordinates": [
           [
             [
-              -83.1866,
-              42.37265
+              -83.186797,
+              42.378846
             ],
             [
-              -83.1819,
-              42.37265
+              -83.186523,
+              42.373368
             ],
             [
-              -83.1819,
-              42.3794
+              -83.184737,
+              42.373267
             ],
             [
-              -83.1866,
-              42.3794
+              -83.183364,
+              42.378846
             ],
             [
-              -83.1866,
-              42.37265
+              -83.186797,
+              42.378846
             ]
           ]
         ]
@@ -68,24 +68,24 @@
         "coordinates": [
           [
             [
-              -83.1851,
-              42.37275
+              -83.185699,
+              42.373469
             ],
             [
-              -83.1844,
-              42.37275
+              -83.185767,
+              42.372962
             ],
             [
-              -83.1844,
-              42.3733
+              -83.184806,
+              42.372962
             ],
             [
-              -83.1851,
-              42.3733
+              -83.184737,
+              42.373469
             ],
             [
-              -83.1851,
-              42.37275
+              -83.185699,
+              42.373469
             ]
           ]
         ]
@@ -107,24 +107,24 @@
         "coordinates": [
           [
             [
-              -83.1863,
-              42.3734
+              -83.186729,
+              42.376412
             ],
             [
-              -83.1855,
-              42.3734
+              -83.186935,
+              42.374991
             ],
             [
-              -83.1855,
-              42.3771
+              -83.186179,
+              42.374991
             ],
             [
-              -83.1863,
-              42.3771
+              -83.185973,
+              42.376412
             ],
             [
-              -83.1863,
-              42.3734
+              -83.186729,
+              42.376412
             ]
           ]
         ]
@@ -147,24 +147,24 @@
         "coordinates": [
           [
             [
-              -83.1856,
-              42.3733
+              -83.186591,
+              42.378441
             ],
             [
-              -83.1849,
-              42.3733
+              -83.187347,
+              42.373571
             ],
             [
-              -83.1849,
-              42.3776
+              -83.186797,
+              42.373571
             ],
             [
-              -83.1856,
-              42.3776
+              -83.185973,
+              42.378441
             ],
             [
-              -83.1856,
-              42.3733
+              -83.186591,
+              42.378441
             ]
           ]
         ]
@@ -187,103 +187,24 @@
         "coordinates": [
           [
             [
-              -83.1853,
-              42.3787
+              -83.034771,
+              42.393128
             ],
             [
-              -83.1836,
-              42.3787
+              -83.034496,
+              42.39039
             ],
             [
-              -83.1836,
-              42.3792
+              -83.02708,
+              42.39039
             ],
             [
-              -83.1853,
-              42.3792
+              -83.027355,
+              42.393128
             ],
             [
-              -83.1853,
-              42.3787
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
-        "type": "Value-Added Logistics Center / Sequencing Warehouse",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.1849,
-              42.3733
-            ],
-            [
-              -83.1842,
-              42.3733
-            ],
-            [
-              -83.1842,
-              42.374
-            ],
-            [
-              -83.1849,
-              42.374
-            ],
-            [
-              -83.1849,
-              42.3733
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
-        "type": "Value-Added Logistics Center / Sequencing Warehouse",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.035,
-              42.3897
-            ],
-            [
-              -83.0282,
-              42.3897
-            ],
-            [
-              -83.0282,
-              42.3935
-            ],
-            [
-              -83.035,
-              42.3935
-            ],
-            [
-              -83.035,
-              42.3897
+              -83.034771,
+              42.393128
             ]
           ]
         ]
@@ -326,24 +247,24 @@
         "coordinates": [
           [
             [
-              -83.0344,
-              42.39015
+              -83.034908,
+              42.3911
             ],
             [
-              -83.0337,
-              42.39015
+              -83.034908,
+              42.390491
             ],
             [
-              -83.0337,
-              42.39065
+              -83.034221,
+              42.390491
             ],
             [
-              -83.0344,
-              42.39065
+              -83.034221,
+              42.3911
             ],
             [
-              -83.0344,
-              42.39015
+              -83.034908,
+              42.3911
             ]
           ]
         ]
@@ -365,104 +286,24 @@
         "coordinates": [
           [
             [
-              -83.035,
-              42.3921
+              -83.034496,
+              42.390593
             ],
             [
-              -83.0326,
-              42.3921
+              -83.034496,
+              42.390289
             ],
             [
-              -83.0326,
-              42.3935
+              -83.027355,
+              42.390238
             ],
             [
-              -83.035,
-              42.3935
+              -83.027355,
+              42.390542
             ],
             [
-              -83.035,
-              42.3921
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
-        "type": "Parts Sequencing / Sub-Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.0294,
-              42.3898
-            ],
-            [
-              -83.0282,
-              42.3898
-            ],
-            [
-              -83.0282,
-              42.3907
-            ],
-            [
-              -83.0294,
-              42.3907
-            ],
-            [
-              -83.0294,
-              42.3898
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
-        "type": "Parts Sequencing / Sub-Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.0344,
-              42.39025
-            ],
-            [
-              -83.0287,
-              42.39025
-            ],
-            [
-              -83.0287,
-              42.39075
-            ],
-            [
-              -83.0344,
-              42.39075
-            ],
-            [
-              -83.0344,
-              42.39025
+              -83.034496,
+              42.390593
             ]
           ]
         ]
@@ -485,103 +326,28 @@
         "coordinates": [
           [
             [
-              -83.0342,
-              42.3919
+              -83.326821,
+              42.252951
             ],
             [
-              -83.0288,
-              42.3919
+              -83.326959,
+              42.2498
             ],
             [
-              -83.0288,
-              42.3924
+              -83.321053,
+              42.249698
             ],
             [
-              -83.0342,
-              42.3924
+              -83.318719,
+              42.25041
             ],
             [
-              -83.0342,
-              42.3919
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
-        "type": "Parts Sequencing / Sub-Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.0344,
-              42.3907
+              -83.318856,
+              42.253053
             ],
             [
-              -83.029,
-              42.3907
-            ],
-            [
-              -83.029,
-              42.3919
-            ],
-            [
-              -83.0344,
-              42.3919
-            ],
-            [
-              -83.0344,
-              42.3907
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
-        "type": "Parts Sequencing / Sub-Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.3265,
-              42.247
-            ],
-            [
-              -83.3205,
-              42.247
-            ],
-            [
-              -83.3205,
-              42.254
-            ],
-            [
-              -83.3265,
-              42.254
-            ],
-            [
-              -83.3265,
-              42.247
+              -83.326821,
+              42.252951
             ]
           ]
         ]
@@ -624,24 +390,24 @@
         "coordinates": [
           [
             [
-              -83.3249,
-              42.2525
+              -83.325173,
+              42.253053
             ],
             [
-              -83.324,
-              42.2525
+              -83.325173,
+              42.252545
             ],
             [
-              -83.324,
-              42.2534
+              -83.324212,
+              42.252545
             ],
             [
-              -83.3249,
-              42.2534
+              -83.324212,
+              42.253053
             ],
             [
-              -83.3249,
-              42.2525
+              -83.325173,
+              42.253053
             ]
           ]
         ]
@@ -663,24 +429,24 @@
         "coordinates": [
           [
             [
-              -83.3263,
-              42.2505
+              -83.326547,
+              42.252545
             ],
             [
-              -83.3246,
-              42.2505
+              -83.326821,
+              42.250105
             ],
             [
-              -83.3246,
-              42.2529
+              -83.323525,
+              42.249902
             ],
             [
-              -83.3263,
-              42.2529
+              -83.323113,
+              42.252443
             ],
             [
-              -83.3263,
-              42.2505
+              -83.326547,
+              42.252545
             ]
           ]
         ]
@@ -703,24 +469,24 @@
         "coordinates": [
           [
             [
-              -83.3238,
-              42.2472
+              -83.322976,
+              42.249088
             ],
             [
-              -83.3214,
-              42.2472
+              -83.323251,
+              42.248173
             ],
             [
-              -83.3214,
-              42.2494
+              -83.320779,
+              42.247868
             ],
             [
-              -83.3238,
-              42.2494
+              -83.320504,
+              42.248885
             ],
             [
-              -83.3238,
-              42.2472
+              -83.322976,
+              42.249088
             ]
           ]
         ]
@@ -743,143 +509,24 @@
         "coordinates": [
           [
             [
-              -83.322,
-              42.25
+              -83.157547,
+              42.325661
             ],
             [
-              -83.3206,
-              42.25
+              -83.160293,
+              42.319163
             ],
             [
-              -83.3206,
-              42.2532
+              -83.156173,
+              42.317945
             ],
             [
-              -83.322,
-              42.2532
+              -83.153152,
+              42.324849
             ],
             [
-              -83.322,
-              42.25
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
-        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.3246,
-              42.2503
-            ],
-            [
-              -83.3218,
-              42.2503
-            ],
-            [
-              -83.3218,
-              42.253
-            ],
-            [
-              -83.3246,
-              42.253
-            ],
-            [
-              -83.3246,
-              42.2503
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
-        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.3246,
-              42.2527
-            ],
-            [
-              -83.323,
-              42.2527
-            ],
-            [
-              -83.323,
-              42.2534
-            ],
-            [
-              -83.3246,
-              42.2534
-            ],
-            [
-              -83.3246,
-              42.2527
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
-        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.157,
-              42.3195
-            ],
-            [
-              -83.1525,
-              42.3195
-            ],
-            [
-              -83.1525,
-              42.3235
-            ],
-            [
-              -83.157,
-              42.3235
-            ],
-            [
-              -83.157,
-              42.3195
+              -83.157547,
+              42.325661
             ]
           ]
         ]
@@ -922,24 +569,24 @@
         "coordinates": [
           [
             [
-              -83.1571,
-              42.3213
+              -83.159469,
+              42.319163
             ],
             [
-              -83.1565,
-              42.3213
+              -83.159744,
+              42.318452
             ],
             [
-              -83.1565,
-              42.3219
+              -83.158645,
+              42.318249
             ],
             [
-              -83.1571,
-              42.3219
+              -83.158371,
+              42.31896
             ],
             [
-              -83.1571,
-              42.3213
+              -83.159469,
+              42.319163
             ]
           ]
         ]
@@ -961,24 +608,24 @@
         "coordinates": [
           [
             [
-              -83.1554,
-              42.3218
+              -83.157547,
+              42.323834
             ],
             [
-              -83.1526,
-              42.3218
+              -83.158645,
+              42.320889
             ],
             [
-              -83.1526,
-              42.3234
+              -83.155899,
+              42.320382
             ],
             [
-              -83.1554,
-              42.3234
+              -83.1548,
+              42.323326
             ],
             [
-              -83.1554,
-              42.3218
+              -83.157547,
+              42.323834
             ]
           ]
         ]
@@ -1001,64 +648,24 @@
         "coordinates": [
           [
             [
-              -83.1562,
-              42.3196
+              -83.157272,
+              42.325052
             ],
             [
-              -83.153,
-              42.3196
+              -83.157684,
+              42.324138
             ],
             [
-              -83.153,
-              42.3214
+              -83.154937,
+              42.323631
             ],
             [
-              -83.1562,
-              42.3214
+              -83.154525,
+              42.324545
             ],
             [
-              -83.1562,
-              42.3196
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
-        "type": "Intermodal / Drayage Terminal (owned)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.1566,
-              42.3212
-            ],
-            [
-              -83.1556,
-              42.3212
-            ],
-            [
-              -83.1556,
-              42.322
-            ],
-            [
-              -83.1566,
-              42.322
-            ],
-            [
-              -83.1566,
-              42.3212
+              -83.157272,
+              42.325052
             ]
           ]
         ]
@@ -1080,24 +687,24 @@
         "coordinates": [
           [
             [
-              -97.0393,
-              32.7163
+              -97.03926,
+              32.72054
             ],
             [
-              -97.0356,
-              32.7163
+              -97.039809,
+              32.716265
             ],
             [
-              -97.0356,
-              32.7228
+              -97.0372,
+              32.716149
             ],
             [
-              -97.0393,
-              32.7228
+              -97.036513,
+              32.720424
             ],
             [
-              -97.0393,
-              32.7163
+              -97.03926,
+              32.72054
             ]
           ]
         ]
@@ -1140,24 +747,24 @@
         "coordinates": [
           [
             [
-              -97.039,
-              32.7174
+              -97.039535,
+              32.716727
             ],
             [
-              -97.0382,
-              32.7174
+              -97.039603,
+              32.716149
             ],
             [
-              -97.0382,
-              32.7206
+              -97.038779,
+              32.716149
             ],
             [
-              -97.039,
-              32.7206
+              -97.038711,
+              32.716727
             ],
             [
-              -97.039,
-              32.7174
+              -97.039535,
+              32.716727
             ]
           ]
         ]
@@ -1169,8 +776,7 @@
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
         "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
+        "zone": "truckGate"
       }
     },
     {
@@ -1180,64 +786,24 @@
         "coordinates": [
           [
             [
-              -97.0389,
-              32.7167
+              -97.039329,
+              32.720309
             ],
             [
-              -97.0381,
-              32.7167
+              -97.040015,
+              32.71638
             ],
             [
-              -97.0381,
-              32.7223
+              -97.039535,
+              32.71638
             ],
             [
-              -97.0389,
-              32.7223
+              -97.038848,
+              32.720309
             ],
             [
-              -97.0389,
-              32.7167
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
-        "type": "Value-Added Logistics / Sub-Assembly Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0369,
-              32.7167
-            ],
-            [
-              -97.036,
-              32.7167
-            ],
-            [
-              -97.036,
-              32.7223
-            ],
-            [
-              -97.0369,
-              32.7223
-            ],
-            [
-              -97.0369,
-              32.7167
+              -97.039329,
+              32.720309
             ]
           ]
         ]
@@ -1250,7 +816,7 @@
         "archetypeName": "No Gate / No GS",
         "confidence": "high",
         "zone": "dockApron",
-        "index": 2
+        "index": 1
       }
     },
     {
@@ -1260,24 +826,24 @@
         "coordinates": [
           [
             [
-              -86.4878,
-              35.9485
+              -86.487547,
+              35.955613
             ],
             [
-              -86.4828,
-              35.9485
+              -86.489195,
+              35.948275
             ],
             [
-              -86.4828,
-              35.9568
+              -86.484251,
+              35.947608
             ],
             [
-              -86.4878,
-              35.9568
+              -86.482603,
+              35.955168
             ],
             [
-              -86.4878,
-              35.9485
+              -86.487547,
+              35.955613
             ]
           ]
         ]
@@ -1320,24 +886,24 @@
         "coordinates": [
           [
             [
-              -86.4847,
-              35.949
+              -86.489469,
+              35.948943
             ],
             [
-              -86.4838,
-              35.949
+              -86.489744,
+              35.947831
             ],
             [
-              -86.4838,
-              35.9496
+              -86.487821,
+              35.947608
             ],
             [
-              -86.4847,
-              35.9496
+              -86.487547,
+              35.94872
             ],
             [
-              -86.4847,
-              35.949
+              -86.489469,
+              35.948943
             ]
           ]
         ]
@@ -1359,104 +925,24 @@
         "coordinates": [
           [
             [
-              -86.4874,
-              35.9508
+              -86.486997,
+              35.954946
             ],
             [
-              -86.486,
-              35.9508
+              -86.487272,
+              35.953834
             ],
             [
-              -86.486,
-              35.9556
+              -86.483427,
+              35.953612
             ],
             [
-              -86.4874,
-              35.9556
+              -86.483152,
+              35.954723
             ],
             [
-              -86.4874,
-              35.9508
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
-        "type": "Integrated Logistics Center / Sequencing Warehouse",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.4856,
-              35.9548
-            ],
-            [
-              -86.4842,
-              35.9548
-            ],
-            [
-              -86.4842,
-              35.9562
-            ],
-            [
-              -86.4856,
-              35.9562
-            ],
-            [
-              -86.4856,
-              35.9548
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
-        "type": "Integrated Logistics Center / Sequencing Warehouse",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.4868,
-              35.9502
-            ],
-            [
-              -86.4856,
-              35.9502
-            ],
-            [
-              -86.4856,
-              35.9556
-            ],
-            [
-              -86.4868,
-              35.9556
-            ],
-            [
-              -86.4868,
-              35.9502
+              -86.486997,
+              35.954946
             ]
           ]
         ]
@@ -1479,63 +965,28 @@
         "coordinates": [
           [
             [
-              -86.4856,
-              35.9494
+              -79.904911,
+              37.37475
             ],
             [
-              -86.484,
-              35.9494
+              -79.904773,
+              37.373113
             ],
             [
-              -86.484,
-              35.9506
+              -79.902713,
+              37.371039
             ],
             [
-              -86.4856,
-              35.9506
+              -79.898456,
+              37.372458
             ],
             [
-              -86.4856,
-              35.9494
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
-        "type": "Integrated Logistics Center / Sequencing Warehouse",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.9064,
-              37.3698
+              -79.898456,
+              37.375405
             ],
             [
-              -79.9022,
-              37.3698
-            ],
-            [
-              -79.9022,
-              37.3743
-            ],
-            [
-              -79.9064,
-              37.3743
-            ],
-            [
-              -79.9064,
-              37.3698
+              -79.904911,
+              37.37475
             ]
           ]
         ]
@@ -1578,24 +1029,63 @@
         "coordinates": [
           [
             [
-              -79.906,
-              37.3705
+              -79.905185,
+              37.374314
             ],
             [
-              -79.9048,
-              37.3705
+              -79.905048,
+              37.373659
             ],
             [
-              -79.9048,
-              37.372
+              -79.904224,
+              37.373768
             ],
             [
-              -79.906,
-              37.372
+              -79.904361,
+              37.374423
             ],
             [
-              -79.906,
-              37.3705
+              -79.905185,
+              37.374314
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+        "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.902713,
+              37.375296
+            ],
+            [
+              -79.902576,
+              37.372786
+            ],
+            [
+              -79.898731,
+              37.373331
+            ],
+            [
+              -79.898731,
+              37.375514
+            ],
+            [
+              -79.902713,
+              37.375296
             ]
           ]
         ]
@@ -1618,24 +1108,24 @@
         "coordinates": [
           [
             [
-              -79.9054,
-              37.3715
+              -79.904499,
+              37.373113
             ],
             [
-              -79.9046,
-              37.3715
+              -79.903949,
+              37.372677
             ],
             [
-              -79.9046,
-              37.3734
+              -79.902164,
+              37.373986
             ],
             [
-              -79.9054,
-              37.3734
+              -79.902713,
+              37.374423
             ],
             [
-              -79.9054,
-              37.3715
+              -79.904499,
+              37.373113
             ]
           ]
         ]
@@ -1658,63 +1148,24 @@
         "coordinates": [
           [
             [
-              -79.906,
-              37.3705
+              -84.013064,
+              35.756907
             ],
             [
-              -79.9049,
-              37.3705
+              -84.013133,
+              35.754511
             ],
             [
-              -79.9049,
-              37.3717
+              -84.010729,
+              35.754511
             ],
             [
-              -79.906,
-              37.3717
+              -84.010592,
+              35.756796
             ],
             [
-              -79.906,
-              37.3705
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
-        "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.0134,
-              35.7538
-            ],
-            [
-              -84.0108,
-              35.7538
-            ],
-            [
-              -84.0108,
-              35.7564
-            ],
-            [
-              -84.0134,
-              35.7564
-            ],
-            [
-              -84.0134,
-              35.7538
+              -84.013064,
+              35.756907
             ]
           ]
         ]
@@ -1757,24 +1208,63 @@
         "coordinates": [
           [
             [
-              -84.013,
-              35.7549
+              -84.013133,
+              35.754901
             ],
             [
-              -84.0118,
-              35.7549
+              -84.013133,
+              35.754567
             ],
             [
-              -84.0118,
-              35.7557
+              -84.012789,
+              35.754567
             ],
             [
-              -84.013,
-              35.7557
+              -84.012789,
+              35.754901
             ],
             [
-              -84.013,
-              35.7549
+              -84.013133,
+              35.754901
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
+        "type": "Trucking / Logistics Terminal",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.012515,
+              35.75674
+            ],
+            [
+              -84.012583,
+              35.756127
+            ],
+            [
+              -84.01121,
+              35.756072
+            ],
+            [
+              -84.011141,
+              35.756685
+            ],
+            [
+              -84.012515,
+              35.75674
             ]
           ]
         ]
@@ -1797,24 +1287,24 @@
         "coordinates": [
           [
             [
-              -84.013,
-              35.7549
+              -84.012927,
+              35.755236
             ],
             [
-              -84.0117,
-              35.7549
+              -84.012789,
+              35.754957
             ],
             [
-              -84.0117,
-              35.7554
+              -84.011279,
+              35.755292
             ],
             [
-              -84.013,
-              35.7554
+              -84.011416,
+              35.75557
             ],
             [
-              -84.013,
-              35.7549
+              -84.012927,
+              35.755236
             ]
           ]
         ]
@@ -1837,64 +1327,28 @@
         "coordinates": [
           [
             [
-              -84.0129,
-              35.7557
+              -81.700071,
+              30.347633
             ],
             [
-              -84.0115,
-              35.7557
+              -81.700071,
+              30.345263
             ],
             [
-              -84.0115,
-              35.7564
+              -81.697873,
+              30.344078
             ],
             [
-              -84.0129,
-              35.7564
+              -81.694852,
+              30.344078
             ],
             [
-              -84.0129,
-              35.7557
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
-        "type": "Trucking / Logistics Terminal",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.699,
-              30.343
+              -81.694303,
+              30.347633
             ],
             [
-              -81.6952,
-              30.343
-            ],
-            [
-              -81.6952,
-              30.3478
-            ],
-            [
-              -81.699,
-              30.3478
-            ],
-            [
-              -81.699,
-              30.343
+              -81.700071,
+              30.347633
             ]
           ]
         ]
@@ -1937,24 +1391,24 @@
         "coordinates": [
           [
             [
-              -81.6972,
-              30.347
+              -81.695813,
+              30.34787
             ],
             [
-              -81.6964,
-              30.347
+              -81.695813,
+              30.347278
             ],
             [
-              -81.6964,
-              30.3474
+              -81.694852,
+              30.347278
             ],
             [
-              -81.6972,
-              30.3474
+              -81.694852,
+              30.34787
             ],
             [
-              -81.6972,
-              30.347
+              -81.695813,
+              30.34787
             ]
           ]
         ]
@@ -1976,24 +1430,24 @@
         "coordinates": [
           [
             [
-              -81.6977,
-              30.343
+              -81.699659,
+              30.347396
             ],
             [
-              -81.696,
-              30.343
+              -81.699659,
+              30.345619
             ],
             [
-              -81.696,
-              30.3443
+              -81.696363,
+              30.345619
             ],
             [
-              -81.6977,
-              30.3443
+              -81.696225,
+              30.347396
             ],
             [
-              -81.6977,
-              30.343
+              -81.699659,
+              30.347396
             ]
           ]
         ]
@@ -2016,144 +1470,24 @@
         "coordinates": [
           [
             [
-              -81.699,
-              30.3448
+              -118.212375,
+              33.86867
             ],
             [
-              -81.697,
-              30.3448
+              -118.212375,
+              33.867245
             ],
             [
-              -81.697,
-              30.3462
+              -118.211276,
+              33.867245
             ],
             [
-              -81.699,
-              30.3462
+              -118.211276,
+              33.86867
             ],
             [
-              -81.699,
-              30.3448
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
-        "type": "Intermodal / Drayage Terminal (owned)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.697,
-              30.3456
-            ],
-            [
-              -81.6956,
-              30.3456
-            ],
-            [
-              -81.6956,
-              30.347
-            ],
-            [
-              -81.697,
-              30.347
-            ],
-            [
-              -81.697,
-              30.3456
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
-        "type": "Intermodal / Drayage Terminal (owned)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6974,
-              30.3462
-            ],
-            [
-              -81.6956,
-              30.3462
-            ],
-            [
-              -81.6956,
-              30.3468
-            ],
-            [
-              -81.6974,
-              30.3468
-            ],
-            [
-              -81.6974,
-              30.3462
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
-        "type": "Intermodal / Drayage Terminal (owned)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.2133,
-              33.8664
-            ],
-            [
-              -118.2105,
-              33.8664
-            ],
-            [
-              -118.2105,
-              33.8697
-            ],
-            [
-              -118.2133,
-              33.8697
-            ],
-            [
-              -118.2133,
-              33.8664
+              -118.212375,
+              33.86867
             ]
           ]
         ]
@@ -2196,24 +1530,24 @@
         "coordinates": [
           [
             [
-              -118.2129,
-              33.8676
+              -118.212375,
+              33.86753
             ],
             [
-              -118.2123,
-              33.8676
+              -118.212375,
+              33.867245
             ],
             [
-              -118.2123,
-              33.8682
+              -118.211963,
+              33.867245
             ],
             [
-              -118.2129,
-              33.8682
+              -118.211963,
+              33.86753
             ],
             [
-              -118.2129,
-              33.8676
+              -118.212375,
+              33.86753
             ]
           ]
         ]
@@ -2235,104 +1569,24 @@
         "coordinates": [
           [
             [
-              -118.2132,
-              33.8666
+              -118.212306,
+              33.868613
             ],
             [
-              -118.2113,
-              33.8666
+              -118.212306,
+              33.868385
             ],
             [
-              -118.2113,
-              33.8679
+              -118.211345,
+              33.868385
             ],
             [
-              -118.2132,
-              33.8679
+              -118.211345,
+              33.868613
             ],
             [
-              -118.2132,
-              33.8666
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
-        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.213,
-              33.8687
-            ],
-            [
-              -118.211,
-              33.8687
-            ],
-            [
-              -118.211,
-              33.8696
-            ],
-            [
-              -118.213,
-              33.8696
-            ],
-            [
-              -118.213,
-              33.8687
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
-        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.2127,
-              33.8684
-            ],
-            [
-              -118.2113,
-              33.8684
-            ],
-            [
-              -118.2113,
-              33.8689
-            ],
-            [
-              -118.2127,
-              33.8689
-            ],
-            [
-              -118.2127,
-              33.8684
+              -118.212306,
+              33.868613
             ]
           ]
         ]
@@ -2355,24 +1609,24 @@
         "coordinates": [
           [
             [
-              -95.2876,
-              29.8662
+              -95.289259,
+              29.871767
             ],
             [
-              -95.2847,
-              29.8662
+              -95.289259,
+              29.867718
             ],
             [
-              -95.2847,
-              29.8715
+              -95.285551,
+              29.867718
             ],
             [
-              -95.2876,
-              29.8715
+              -95.285413,
+              29.871767
             ],
             [
-              -95.2876,
-              29.8662
+              -95.289259,
+              29.871767
             ]
           ]
         ]
@@ -2415,24 +1669,63 @@
         "coordinates": [
           [
             [
-              -95.2874,
-              29.8664
+              -95.289259,
+              29.871767
             ],
             [
-              -95.2849,
-              29.8664
+              -95.289259,
+              29.871172
             ],
             [
-              -95.2849,
-              29.87
+              -95.288435,
+              29.871172
             ],
             [
-              -95.2874,
-              29.87
+              -95.288435,
+              29.871767
             ],
             [
-              -95.2874,
-              29.8664
+              -95.289259,
+              29.871767
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.288847,
+              29.871053
+            ],
+            [
+              -95.288984,
+              29.868195
+            ],
+            [
+              -95.287199,
+              29.868195
+            ],
+            [
+              -95.287061,
+              29.871053
+            ],
+            [
+              -95.288847,
+              29.871053
             ]
           ]
         ]
@@ -2455,64 +1748,24 @@
         "coordinates": [
           [
             [
-              -95.2872,
-              29.8698
+              -95.286924,
+              29.871291
             ],
             [
-              -95.285,
-              29.8698
+              -95.286924,
+              29.868195
             ],
             [
-              -95.285,
-              29.8712
+              -95.285825,
+              29.868195
             ],
             [
-              -95.2872,
-              29.8712
+              -95.285825,
+              29.871291
             ],
             [
-              -95.2872,
-              29.8698
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
-        "type": "Intermodal / Drayage Terminal (owned)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2868,
-              29.8693
-            ],
-            [
-              -95.2856,
-              29.8693
-            ],
-            [
-              -95.2856,
-              29.8708
-            ],
-            [
-              -95.2868,
-              29.8708
-            ],
-            [
-              -95.2868,
-              29.8693
+              -95.286924,
+              29.871291
             ]
           ]
         ]
@@ -2535,63 +1788,24 @@
         "coordinates": [
           [
             [
-              -95.287,
-              29.8708
+              -87.874549,
+              42.70353
             ],
             [
-              -95.285,
-              29.8708
+              -87.874961,
+              42.69919
             ],
             [
-              -95.285,
-              29.8715
+              -87.872215,
+              42.699089
             ],
             [
-              -95.287,
-              29.8715
+              -87.871253,
+              42.70353
             ],
             [
-              -95.287,
-              29.8708
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
-        "type": "Intermodal / Drayage Terminal (owned)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8762,
-              42.6985
-            ],
-            [
-              -87.8715,
-              42.6985
-            ],
-            [
-              -87.8715,
-              42.7036
-            ],
-            [
-              -87.8762,
-              42.7036
-            ],
-            [
-              -87.8762,
-              42.6985
+              -87.874549,
+              42.70353
             ]
           ]
         ]
@@ -2634,24 +1848,63 @@
         "coordinates": [
           [
             [
-              -87.8756,
-              42.7002
+              -87.874687,
+              42.699795
             ],
             [
-              -87.8742,
-              42.7002
+              -87.874824,
+              42.69919
             ],
             [
-              -87.8742,
-              42.7036
+              -87.873863,
+              42.69919
             ],
             [
-              -87.8756,
-              42.7036
+              -87.873725,
+              42.699795
             ],
             [
-              -87.8756,
-              42.7002
+              -87.874687,
+              42.699795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.874687,
+              42.701006
+            ],
+            [
+              -87.874961,
+              42.699392
+            ],
+            [
+              -87.873725,
+              42.699291
+            ],
+            [
+              -87.873313,
+              42.701006
+            ],
+            [
+              -87.874687,
+              42.701006
             ]
           ]
         ]
@@ -2674,64 +1927,24 @@
         "coordinates": [
           [
             [
-              -87.8734,
-              42.6996
+              -87.874412,
+              42.703328
             ],
             [
-              -87.8717,
-              42.6996
+              -87.874412,
+              42.699896
             ],
             [
-              -87.8717,
-              42.7018
+              -87.872352,
+              42.699795
             ],
             [
-              -87.8734,
-              42.7018
+              -87.871528,
+              42.703328
             ],
             [
-              -87.8734,
-              42.6996
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
-        "type": "Contract Logistics / Value-Added Warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8748,
-              42.6997
-            ],
-            [
-              -87.8742,
-              42.6997
-            ],
-            [
-              -87.8742,
-              42.7034
-            ],
-            [
-              -87.8748,
-              42.7034
-            ],
-            [
-              -87.8748,
-              42.6997
+              -87.874412,
+              42.703328
             ]
           ]
         ]
@@ -2754,37 +1967,61 @@
         "coordinates": [
           [
             [
-              -87.8737,
-              42.6997
+              -87.275433,
+              33.185822
             ],
             [
-              -87.8732,
-              42.6997
+              -87.275433,
+              33.184213
             ],
             [
-              -87.8732,
-              42.703
+              -87.270489,
+              33.183925
             ],
             [
-              -87.8737,
-              42.703
+              -87.270489,
+              33.185075
             ],
             [
-              -87.8737,
-              42.6997
+              -87.272343,
+              33.185879
+            ],
+            [
+              -87.275433,
+              33.185822
             ]
           ]
         ]
       },
       "properties": {
         "account": "universal-logistics",
-        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
-        "type": "Contract Logistics / Value-Added Warehouse",
+        "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
       }
     },
     {
@@ -2794,24 +2031,107 @@
         "coordinates": [
           [
             [
-              -86.9001,
-              34.6292
+              -87.272687,
+              33.185075
             ],
             [
-              -86.8943,
-              34.6292
+              -87.272687,
+              33.18473
             ],
             [
-              -86.8943,
-              34.6338
+              -87.272275,
+              33.18473
             ],
             [
-              -86.9001,
-              34.6338
+              -87.272275,
+              33.185075
             ],
             [
-              -86.9001,
-              34.6292
+              -87.272687,
+              33.185075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.275433,
+              33.185764
+            ],
+            [
+              -87.275433,
+              33.185477
+            ],
+            [
+              -87.272549,
+              33.185477
+            ],
+            [
+              -87.272549,
+              33.185764
+            ],
+            [
+              -87.275433,
+              33.185764
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.901743,
+              34.636574
+            ],
+            [
+              -86.901743,
+              34.630585
+            ],
+            [
+              -86.899409,
+              34.629342
+            ],
+            [
+              -86.896525,
+              34.63228
+            ],
+            [
+              -86.895975,
+              34.63567
+            ],
+            [
+              -86.901743,
+              34.636574
             ]
           ]
         ]
@@ -2854,24 +2174,24 @@
         "coordinates": [
           [
             [
-              -86.8972,
-              34.6296
+              -86.898997,
+              34.63002
             ],
             [
-              -86.8953,
-              34.6296
+              -86.899409,
+              34.629342
             ],
             [
-              -86.8953,
-              34.6306
+              -86.898447,
+              34.629116
             ],
             [
-              -86.8972,
-              34.6306
+              -86.898035,
+              34.629794
             ],
             [
-              -86.8972,
-              34.6296
+              -86.898997,
+              34.63002
             ]
           ]
         ]
@@ -2883,8 +2203,7 @@
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
         "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
+        "zone": "truckGate"
       }
     },
     {
@@ -2894,37 +2213,57 @@
         "coordinates": [
           [
             [
-              -86.8953,
-              34.6301
+              -86.92809,
+              35.714509
             ],
             [
-              -86.8943,
-              34.6301
+              -86.92809,
+              35.711721
             ],
             [
-              -86.8943,
-              34.6312
+              -86.925343,
+              35.711721
             ],
             [
-              -86.8953,
-              34.6312
+              -86.925343,
+              35.714509
             ],
             [
-              -86.8953,
-              34.6301
+              -86.92809,
+              35.714509
             ]
           ]
         ]
       },
       "properties": {
         "account": "universal-logistics",
-        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
-        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "name": "Universal Logistics - Spring Hill Contract Logistics Warehouse - Spring Hill TN",
+        "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
       }
     },
     {
@@ -2934,37 +2273,57 @@
         "coordinates": [
           [
             [
-              -86.897,
-              34.6301
+              -98.55206,
+              29.299198
             ],
             [
-              -86.895,
-              34.6301
+              -98.55206,
+              29.297102
             ],
             [
-              -86.895,
-              34.6315
+              -98.549657,
+              29.297102
             ],
             [
-              -86.897,
-              34.6315
+              -98.549657,
+              29.299198
             ],
             [
-              -86.897,
-              34.6301
+              -98.55206,
+              29.299198
             ]
           ]
         ]
       },
       "properties": {
         "account": "universal-logistics",
-        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
-        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "name": "Universal Logistics - San Antonio Contract Logistics Warehouse - San Antonio TX",
+        "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
       }
     },
     {
@@ -2974,64 +2333,28 @@
         "coordinates": [
           [
             [
-              -86.8976,
-              34.6314
+              -86.856845,
+              34.654309
             ],
             [
-              -86.8956,
-              34.6314
+              -86.856845,
+              34.650017
             ],
             [
-              -86.8956,
-              34.6328
+              -86.849979,
+              34.650017
             ],
             [
-              -86.8976,
-              34.6328
+              -86.849704,
+              34.652954
             ],
             [
-              -86.8976,
-              34.6314
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
-        "type": "Value-Added Logistics / Sequencing Warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.858,
-              34.6488
+              -86.852313,
+              34.654196
             ],
             [
-              -86.848,
-              34.6488
-            ],
-            [
-              -86.848,
-              34.6565
-            ],
-            [
-              -86.858,
-              34.6565
-            ],
-            [
-              -86.858,
-              34.6488
+              -86.856845,
+              34.654309
             ]
           ]
         ]
@@ -3074,24 +2397,24 @@
         "coordinates": [
           [
             [
-              -86.8532,
-              34.654
+              -86.856983,
+              34.65318
             ],
             [
-              -86.8524,
-              34.654
+              -86.856983,
+              34.652502
             ],
             [
-              -86.8524,
-              34.6546
+              -86.856159,
+              34.652502
             ],
             [
-              -86.8532,
-              34.6546
+              -86.856159,
+              34.65318
             ],
             [
-              -86.8532,
-              34.654
+              -86.856983,
+              34.65318
             ]
           ]
         ]
@@ -3113,104 +2436,24 @@
         "coordinates": [
           [
             [
-              -86.857,
-              34.6495
+              -86.856708,
+              34.652841
             ],
             [
-              -86.855,
-              34.6495
+              -86.856845,
+              34.650242
             ],
             [
-              -86.855,
-              34.6542
+              -86.856021,
+              34.650242
             ],
             [
-              -86.857,
-              34.6542
+              -86.855747,
+              34.652841
             ],
             [
-              -86.857,
-              34.6495
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
-        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.8535,
-              34.6545
-            ],
-            [
-              -86.851,
-              34.6545
-            ],
-            [
-              -86.851,
-              34.6562
-            ],
-            [
-              -86.8535,
-              34.6562
-            ],
-            [
-              -86.8535,
-              34.6545
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
-        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.8545,
-              34.6498
-            ],
-            [
-              -86.8536,
-              34.6498
-            ],
-            [
-              -86.8536,
-              34.653
-            ],
-            [
-              -86.8545,
-              34.653
-            ],
-            [
-              -86.8545,
-              34.6498
+              -86.856708,
+              34.652841
             ]
           ]
         ]
@@ -3233,63 +2476,24 @@
         "coordinates": [
           [
             [
-              -86.8545,
-              34.6538
+              -89.558169,
+              40.849239
             ],
             [
-              -86.852,
-              34.6538
+              -89.558169,
+              40.845915
             ],
             [
-              -86.852,
-              34.6547
+              -89.550479,
+              40.845915
             ],
             [
-              -86.8545,
-              34.6547
+              -89.550479,
+              40.849239
             ],
             [
-              -86.8545,
-              34.6538
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
-        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.557,
-              40.8462
-            ],
-            [
-              -89.5495,
-              40.8462
-            ],
-            [
-              -89.5495,
-              40.8502
-            ],
-            [
-              -89.557,
-              40.8502
-            ],
-            [
-              -89.557,
-              40.8462
+              -89.558169,
+              40.849239
             ]
           ]
         ]
@@ -3332,24 +2536,24 @@
         "coordinates": [
           [
             [
-              -89.5515,
-              40.847
+              -89.558169,
+              40.849031
             ],
             [
-              -89.55,
-              40.847
+              -89.558169,
+              40.848408
             ],
             [
-              -89.55,
-              40.8495
+              -89.557345,
+              40.848408
             ],
             [
-              -89.5515,
-              40.8495
+              -89.557345,
+              40.849031
             ],
             [
-              -89.5515,
-              40.847
+              -89.558169,
+              40.849031
             ]
           ]
         ]
@@ -3361,8 +2565,7 @@
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
         "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
+        "zone": "truckGate"
       }
     },
     {
@@ -3372,24 +2575,24 @@
         "coordinates": [
           [
             [
-              -89.5528,
-              40.8468
+              -89.557895,
+              40.849031
             ],
             [
-              -89.5517,
-              40.8468
+              -89.557895,
+              40.848616
             ],
             [
-              -89.5517,
-              40.8496
+              -89.550753,
+              40.848616
             ],
             [
-              -89.5528,
-              40.8496
+              -89.550753,
+              40.849031
             ],
             [
-              -89.5528,
-              40.8468
+              -89.557895,
+              40.849031
             ]
           ]
         ]
@@ -3412,24 +2615,32 @@
         "coordinates": [
           [
             [
-              -89.5635,
-              40.8355
+              -89.566986,
+              40.839961
             ],
             [
-              -89.5485,
-              40.8355
+              -89.564789,
+              40.836844
             ],
             [
-              -89.5485,
-              40.846
+              -89.561493,
+              40.835182
             ],
             [
-              -89.5635,
-              40.846
+              -89.552704,
+              40.836429
             ],
             [
-              -89.5635,
-              40.8355
+              -89.551605,
+              40.838922
+            ],
+            [
+              -89.558197,
+              40.841
+            ],
+            [
+              -89.566986,
+              40.839961
             ]
           ]
         ]
@@ -3472,24 +2683,24 @@
         "coordinates": [
           [
             [
-              -89.554,
-              40.8415
+              -89.56424,
+              40.837675
             ],
             [
-              -89.5505,
-              40.8415
+              -89.56424,
+              40.836429
             ],
             [
-              -89.5505,
-              40.844
+              -89.562592,
+              40.836429
             ],
             [
-              -89.554,
-              40.844
+              -89.562592,
+              40.837675
             ],
             [
-              -89.554,
-              40.8415
+              -89.56424,
+              40.837675
             ]
           ]
         ]
@@ -3501,8 +2712,7 @@
         "archetype": "#9",
         "archetypeName": "Gate + No GS (remote check-in)",
         "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
+        "zone": "truckGate"
       }
     },
     {
@@ -3512,24 +2722,24 @@
         "coordinates": [
           [
             [
-              -89.556,
-              40.8405
+              -89.558747,
+              40.840377
             ],
             [
-              -89.5535,
-              40.8405
+              -89.559296,
+              40.839338
             ],
             [
-              -89.5535,
-              40.843
+              -89.552704,
+              40.837468
             ],
             [
-              -89.556,
-              40.843
+              -89.552155,
+              40.838507
             ],
             [
-              -89.556,
-              40.8405
+              -89.558747,
+              40.840377
             ]
           ]
         ]
@@ -3552,24 +2762,28 @@
         "coordinates": [
           [
             [
-              -81.177,
-              32.1315
+              -81.17809,
+              32.135061
             ],
             [
-              -81.1732,
-              32.1315
+              -81.17809,
+              32.132502
             ],
             [
-              -81.1732,
-              32.1347
+              -81.175687,
+              32.131456
             ],
             [
-              -81.177,
-              32.1347
+              -81.174451,
+              32.132909
             ],
             [
-              -81.177,
-              32.1315
+              -81.175,
+              32.135061
+            ],
+            [
+              -81.17809,
+              32.135061
             ]
           ]
         ]
@@ -3612,24 +2826,24 @@
         "coordinates": [
           [
             [
-              -81.1762,
-              32.1323
+              -81.175687,
+              32.134363
             ],
             [
-              -81.1754,
-              32.1323
+              -81.175687,
+              32.134014
             ],
             [
-              -81.1754,
-              32.1329
+              -81.175206,
+              32.134014
             ],
             [
-              -81.1762,
-              32.1329
+              -81.175206,
+              32.134363
             ],
             [
-              -81.1762,
-              32.1323
+              -81.175687,
+              32.134363
             ]
           ]
         ]
@@ -3651,24 +2865,24 @@
         "coordinates": [
           [
             [
-              -81.175,
-              32.1329
+              -81.177747,
+              32.134363
             ],
             [
-              -81.1733,
-              32.1329
+              -81.177884,
+              32.133026
             ],
             [
-              -81.1733,
-              32.1346
+              -81.176579,
+              32.132909
             ],
             [
-              -81.175,
-              32.1346
+              -81.176373,
+              32.134247
             ],
             [
-              -81.175,
-              32.1329
+              -81.177747,
+              32.134363
             ]
           ]
         ]
@@ -3691,24 +2905,24 @@
         "coordinates": [
           [
             [
-              -81.1756,
-              32.1315
+              -81.17706,
+              32.132619
             ],
             [
-              -81.1742,
-              32.1315
+              -81.177197,
+              32.131804
             ],
             [
-              -81.1742,
-              32.1328
+              -81.175893,
+              32.131572
             ],
             [
-              -81.1756,
-              32.1328
+              -81.175687,
+              32.132502
             ],
             [
-              -81.1756,
-              32.1315
+              -81.17706,
+              32.132619
             ]
           ]
         ]
@@ -3731,24 +2945,24 @@
         "coordinates": [
           [
             [
-              -87.6455,
-              41.5862
+              -87.646266,
+              41.589138
             ],
             [
-              -87.642,
-              41.5862
+              -87.646266,
+              41.586262
             ],
             [
-              -87.642,
-              41.5888
+              -87.64194,
+              41.586262
             ],
             [
-              -87.6455,
-              41.5888
+              -87.642077,
+              41.589138
             ],
             [
-              -87.6455,
-              41.5862
+              -87.646266,
+              41.589138
             ]
           ]
         ]
@@ -3791,24 +3005,24 @@
         "coordinates": [
           [
             [
-              -87.644,
-              41.58625
+              -87.646266,
+              41.58657
             ],
             [
-              -87.6434,
-              41.58625
+              -87.646266,
+              41.586262
             ],
             [
-              -87.6434,
-              41.5866
+              -87.645785,
+              41.586262
             ],
             [
-              -87.644,
-              41.5866
+              -87.645785,
+              41.58657
             ],
             [
-              -87.644,
-              41.58625
+              -87.646266,
+              41.58657
             ]
           ]
         ]
@@ -3830,24 +3044,24 @@
         "coordinates": [
           [
             [
-              -87.6455,
-              41.5866
+              -87.64606,
+              41.588727
             ],
             [
-              -87.6436,
-              41.5866
+              -87.64606,
+              41.587443
             ],
             [
-              -87.6436,
-              41.5887
+              -87.644,
+              41.587443
             ],
             [
-              -87.6455,
-              41.5887
+              -87.644,
+              41.588727
             ],
             [
-              -87.6455,
-              41.5866
+              -87.64606,
+              41.588727
             ]
           ]
         ]
@@ -3870,37 +3084,57 @@
         "coordinates": [
           [
             [
-              -87.643,
-              41.5868
+              -87.339747,
+              41.604054
             ],
             [
-              -87.6421,
-              41.5868
+              -87.339747,
+              41.600973
             ],
             [
-              -87.6421,
-              41.5886
+              -87.335627,
+              41.600973
             ],
             [
-              -87.643,
-              41.5886
+              -87.335627,
+              41.604054
             ],
             [
-              -87.643,
-              41.5868
+              -87.339747,
+              41.604054
             ]
           ]
         ]
       },
       "properties": {
         "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
-        "type": "Intermodal / Drayage container & chassis yard",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
+        "name": "Universal Intermodal Services - Gary Terminal - Gary IN",
+        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
       }
     },
     {
@@ -3910,63 +3144,28 @@
         "coordinates": [
           [
             [
-              -87.6436,
-              41.5868
+              -85.803899,
+              38.215029
             ],
             [
-              -87.6426,
-              41.5868
+              -85.803899,
+              38.21395
             ],
             [
-              -87.6426,
-              41.5878
+              -85.803487,
+              38.213249
             ],
             [
-              -87.6436,
-              41.5878
+              -85.802182,
+              38.213465
             ],
             [
-              -87.6436,
-              41.5868
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
-        "type": "Intermodal / Drayage container & chassis yard",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.8036,
-              38.21345
+              -85.802113,
+              38.215029
             ],
             [
-              -85.80205,
-              38.21345
-            ],
-            [
-              -85.80205,
-              38.215
-            ],
-            [
-              -85.8036,
-              38.215
-            ],
-            [
-              -85.8036,
-              38.21345
+              -85.803899,
+              38.215029
             ]
           ]
         ]
@@ -4009,24 +3208,24 @@
         "coordinates": [
           [
             [
-              -85.80305,
-              38.2149
+              -85.802982,
+              38.214984
             ],
             [
-              -85.8027,
-              38.2149
+              -85.802984,
+              38.215238
             ],
             [
-              -85.8027,
-              38.21512
+              -85.803304,
+              38.215236
             ],
             [
-              -85.80305,
-              38.21512
+              -85.803302,
+              38.214982
             ],
             [
-              -85.80305,
-              38.2149
+              -85.802982,
+              38.214984
             ]
           ]
         ]
@@ -4048,24 +3247,24 @@
         "coordinates": [
           [
             [
-              -85.8036,
-              38.21345
+              -85.803011,
+              38.213907
             ],
             [
-              -85.80305,
-              38.21345
+              -85.803024,
+              38.215083
             ],
             [
-              -85.80305,
-              38.21455
+              -85.804511,
+              38.215073
             ],
             [
-              -85.8036,
-              38.21455
+              -85.804498,
+              38.213897
             ],
             [
-              -85.8036,
-              38.21345
+              -85.803011,
+              38.213907
             ]
           ]
         ]
@@ -4088,24 +3287,24 @@
         "coordinates": [
           [
             [
-              -85.80315,
-              38.214
+              -85.802073,
+              38.214521
             ],
             [
-              -85.80265,
-              38.214
+              -85.802075,
+              38.214684
             ],
             [
-              -85.80265,
-              38.21475
+              -85.803389,
+              38.214675
             ],
             [
-              -85.80315,
-              38.21475
+              -85.803387,
+              38.214512
             ],
             [
-              -85.80315,
-              38.214
+              -85.802073,
+              38.214521
             ]
           ]
         ]
@@ -4128,24 +3327,28 @@
         "coordinates": [
           [
             [
-              -83.1319,
-              40.0117
+              -83.132173,
+              40.014473
             ],
             [
-              -83.1288,
-              40.0117
+              -83.132311,
+              40.013
             ],
             [
-              -83.1288,
-              40.0147
+              -83.131899,
+              40.011527
             ],
             [
-              -83.1319,
-              40.0147
+              -83.128877,
+              40.011738
             ],
             [
-              -83.1319,
-              40.0117
+              -83.12874,
+              40.014157
+            ],
+            [
+              -83.132173,
+              40.014473
             ]
           ]
         ]
@@ -4188,24 +3391,24 @@
         "coordinates": [
           [
             [
-              -83.13195,
-              40.01278
+              -83.132173,
+              40.012159
             ],
             [
-              -83.1315,
-              40.01278
+              -83.132173,
+              40.011843
             ],
             [
-              -83.1315,
-              40.01305
+              -83.131761,
+              40.011843
             ],
             [
-              -83.13195,
-              40.01305
+              -83.131761,
+              40.012159
             ],
             [
-              -83.13195,
-              40.01278
+              -83.132173,
+              40.012159
             ]
           ]
         ]
@@ -4227,24 +3430,24 @@
         "coordinates": [
           [
             [
-              -83.1312,
-              40.0118
+              -83.131761,
+              40.013526
             ],
             [
-              -83.1289,
-              40.0118
+              -83.13183,
+              40.012474
             ],
             [
-              -83.1289,
-              40.0145
+              -83.130045,
+              40.012369
             ],
             [
-              -83.1312,
-              40.0145
+              -83.129976,
+              40.013421
             ],
             [
-              -83.1312,
-              40.0118
+              -83.131761,
+              40.013526
             ]
           ]
         ]
@@ -4267,24 +3470,68 @@
         "coordinates": [
           [
             [
-              -112.02455,
-              41.10455
+              -83.131761,
+              40.013421
             ],
             [
-              -112.022,
-              41.10455
+              -83.13183,
+              40.013158
             ],
             [
-              -112.022,
-              41.10625
+              -83.130319,
+              40.013053
             ],
             [
-              -112.02455,
-              41.10625
+              -83.130251,
+              40.013316
             ],
             [
-              -112.02455,
-              41.10455
+              -83.131761,
+              40.013421
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Columbus Terminal - Columbus OH",
+        "type": "Intermodal / Drayage Terminal Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.025397,
+              41.106331
+            ],
+            [
+              -112.02526,
+              41.105607
+            ],
+            [
+              -112.024573,
+              41.1054
+            ],
+            [
+              -112.021827,
+              41.106228
+            ],
+            [
+              -112.022376,
+              41.107159
+            ],
+            [
+              -112.025397,
+              41.106331
             ]
           ]
         ]
@@ -4327,24 +3574,24 @@
         "coordinates": [
           [
             [
-              -112.02455,
-              41.1056
+              -112.02526,
+              41.105814
             ],
             [
-              -112.0236,
-              41.1056
+              -112.025123,
+              41.105503
             ],
             [
-              -112.0236,
-              41.10625
+              -112.024711,
+              41.105607
             ],
             [
-              -112.02455,
-              41.10625
+              -112.024848,
+              41.105917
             ],
             [
-              -112.02455,
-              41.1056
+              -112.02526,
+              41.105814
             ]
           ]
         ]
@@ -4356,8 +3603,7 @@
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
         "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
+        "zone": "truckGate"
       }
     },
     {
@@ -4367,24 +3613,24 @@
         "coordinates": [
           [
             [
-              -112.0236,
-              41.1047
+              -112.024711,
+              41.106228
             ],
             [
-              -112.0225,
-              41.1047
+              -112.024505,
+              41.105917
             ],
             [
-              -112.0225,
-              41.106
+              -112.02217,
+              41.10659
             ],
             [
-              -112.0236,
-              41.106
+              -112.022376,
+              41.1069
             ],
             [
-              -112.0236,
-              41.1047
+              -112.024711,
+              41.106228
             ]
           ]
         ]
@@ -4407,24 +3653,24 @@
         "coordinates": [
           [
             [
-              -89.9013,
-              35.0365
+              -89.901573,
+              35.039237
             ],
             [
-              -89.8987,
-              35.0365
+              -89.901573,
+              35.035976
             ],
             [
-              -89.8987,
-              35.0398
+              -89.897591,
+              35.035976
             ],
             [
-              -89.9013,
-              35.0398
+              -89.897591,
+              35.039237
             ],
             [
-              -89.9013,
-              35.0365
+              -89.901573,
+              35.039237
             ]
           ]
         ]
@@ -4467,24 +3713,24 @@
         "coordinates": [
           [
             [
-              -89.9012,
-              35.03855
+              -89.901573,
+              35.039124
             ],
             [
-              -89.9008,
-              35.03855
+              -89.901573,
+              35.038787
             ],
             [
-              -89.9008,
-              35.03895
+              -89.901093,
+              35.038787
             ],
             [
-              -89.9012,
-              35.03895
+              -89.901093,
+              35.039124
             ],
             [
-              -89.9012,
-              35.03855
+              -89.901573,
+              35.039124
             ]
           ]
         ]
@@ -4506,24 +3752,24 @@
         "coordinates": [
           [
             [
-              -89.90115,
-              35.0366
+              -89.901299,
+              35.038562
             ],
             [
-              -89.8988,
-              35.0366
+              -89.901299,
+              35.036426
             ],
             [
-              -89.8988,
-              35.0396
+              -89.899857,
+              35.036426
             ],
             [
-              -89.90115,
-              35.0396
+              -89.899857,
+              35.038562
             ],
             [
-              -89.90115,
-              35.0366
+              -89.901299,
+              35.038562
             ]
           ]
         ]
@@ -4536,6 +3782,46 @@
         "archetypeName": "No Gate / No GS",
         "confidence": "high",
         "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.899788,
+              35.039124
+            ],
+            [
+              -89.899788,
+              35.036088
+            ],
+            [
+              -89.899376,
+              35.036088
+            ],
+            [
+              -89.899376,
+              35.039124
+            ],
+            [
+              -89.899788,
+              35.039124
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Memphis Terminal - Memphis TN",
+        "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
         "index": 1
       }
     }

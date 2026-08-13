@@ -1,0 +1,3756 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.54075,
+              34.01632
+            ],
+            [
+              -117.54015,
+              34.0117
+            ],
+            [
+              -117.5332,
+              34.01165
+            ],
+            [
+              -117.53335,
+              34.0145
+            ],
+            [
+              -117.53365,
+              34.01705
+            ],
+            [
+              -117.53495,
+              34.01725
+            ],
+            [
+              -117.54075,
+              34.01632
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 750,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 93.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.53545,
+              34.0172
+            ],
+            [
+              -117.5355,
+              34.01647
+            ],
+            [
+              -117.5347,
+              34.01645
+            ],
+            [
+              -117.53465,
+              34.01718
+            ],
+            [
+              -117.53545,
+              34.0172
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.54035,
+              34.0137
+            ],
+            [
+              -117.5403,
+              34.01188
+            ],
+            [
+              -117.53795,
+              34.01185
+            ],
+            [
+              -117.5379,
+              34.01365
+            ],
+            [
+              -117.54035,
+              34.0137
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5376,
+              34.0136
+            ],
+            [
+              -117.53765,
+              34.01192
+            ],
+            [
+              -117.535,
+              34.01188
+            ],
+            [
+              -117.53495,
+              34.01355
+            ],
+            [
+              -117.5376,
+              34.0136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5346,
+              34.01355
+            ],
+            [
+              -117.53465,
+              34.01193
+            ],
+            [
+              -117.53355,
+              34.0119
+            ],
+            [
+              -117.5335,
+              34.01352
+            ],
+            [
+              -117.5346,
+              34.01355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5399,
+              34.01635
+            ],
+            [
+              -117.53995,
+              34.0157
+            ],
+            [
+              -117.53775,
+              34.01565
+            ],
+            [
+              -117.5377,
+              34.01628
+            ],
+            [
+              -117.5399,
+              34.01635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.54035,
+              34.0159
+            ],
+            [
+              -117.54037,
+              34.01564
+            ],
+            [
+              -117.53562,
+              34.01556
+            ],
+            [
+              -117.5356,
+              34.01582
+            ],
+            [
+              -117.54035,
+              34.0159
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.53745,
+              34.0146
+            ],
+            [
+              -117.5375,
+              34.01245
+            ],
+            [
+              -117.53715,
+              34.01243
+            ],
+            [
+              -117.5371,
+              34.01458
+            ],
+            [
+              -117.53745,
+              34.0146
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.53585,
+              34.0146
+            ],
+            [
+              -117.5359,
+              34.01245
+            ],
+            [
+              -117.53555,
+              34.01243
+            ],
+            [
+              -117.5355,
+              34.01458
+            ],
+            [
+              -117.53585,
+              34.0146
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5355,
+              34.01675
+            ],
+            [
+              -117.53555,
+              34.0162
+            ],
+            [
+              -117.5344,
+              34.01615
+            ],
+            [
+              -117.53435,
+              34.0167
+            ],
+            [
+              -117.5355,
+              34.01675
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Mira Loma Depot, Mira Loma CA",
+        "type": "Refrigerated + Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5258,
+              37.72025
+            ],
+            [
+              -121.5263,
+              37.7186
+            ],
+            [
+              -121.525,
+              37.71575
+            ],
+            [
+              -121.5206,
+              37.7138
+            ],
+            [
+              -121.5168,
+              37.715
+            ],
+            [
+              -121.5172,
+              37.72045
+            ],
+            [
+              -121.5258,
+              37.72025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 800,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 120.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.52258,
+              37.71705
+            ],
+            [
+              -121.52256,
+              37.71665
+            ],
+            [
+              -121.52166,
+              37.71668
+            ],
+            [
+              -121.52168,
+              37.71708
+            ],
+            [
+              -121.52258,
+              37.71705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5247,
+              37.7164
+            ],
+            [
+              -121.52555,
+              37.71565
+            ],
+            [
+              -121.5238,
+              37.7142
+            ],
+            [
+              -121.523,
+              37.7149
+            ],
+            [
+              -121.5247,
+              37.7164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5192,
+              37.71955
+            ],
+            [
+              -121.51915,
+              37.71505
+            ],
+            [
+              -121.51695,
+              37.715
+            ],
+            [
+              -121.517,
+              37.7195
+            ],
+            [
+              -121.5192,
+              37.71955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5224,
+              37.7197
+            ],
+            [
+              -121.52235,
+              37.71835
+            ],
+            [
+              -121.5205,
+              37.7184
+            ],
+            [
+              -121.52055,
+              37.71975
+            ],
+            [
+              -121.5224,
+              37.7197
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.52232,
+              37.71905
+            ],
+            [
+              -121.52221,
+              37.71653
+            ],
+            [
+              -121.52181,
+              37.71653
+            ],
+            [
+              -121.52192,
+              37.71905
+            ],
+            [
+              -121.52232,
+              37.71905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.52616,
+              37.71994
+            ],
+            [
+              -121.52651,
+              37.7171
+            ],
+            [
+              -121.52611,
+              37.7171
+            ],
+            [
+              -121.52576,
+              37.71994
+            ],
+            [
+              -121.52616,
+              37.71994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.52397,
+              37.71994
+            ],
+            [
+              -121.52437,
+              37.71994
+            ],
+            [
+              -121.52482,
+              37.7171
+            ],
+            [
+              -121.52442,
+              37.7171
+            ],
+            [
+              -121.52397,
+              37.71994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5225,
+              37.71815
+            ],
+            [
+              -121.52248,
+              37.71712
+            ],
+            [
+              -121.52148,
+              37.71715
+            ],
+            [
+              -121.5215,
+              37.71818
+            ],
+            [
+              -121.5225,
+              37.71815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Tracy CA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4968,
+              42.2633
+            ],
+            [
+              -83.4974,
+              42.2603
+            ],
+            [
+              -83.4945,
+              42.26045
+            ],
+            [
+              -83.4892,
+              42.2606
+            ],
+            [
+              -83.4915,
+              42.2632
+            ],
+            [
+              -83.4867,
+              42.26345
+            ],
+            [
+              -83.4868,
+              42.26415
+            ],
+            [
+              -83.4918,
+              42.264
+            ],
+            [
+              -83.4955,
+              42.2638
+            ],
+            [
+              -83.4968,
+              42.2633
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 57.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4927,
+              42.26395
+            ],
+            [
+              -83.49265,
+              42.2633
+            ],
+            [
+              -83.49205,
+              42.2633
+            ],
+            [
+              -83.4921,
+              42.26395
+            ],
+            [
+              -83.4927,
+              42.26395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4962,
+              42.2637
+            ],
+            [
+              -83.4962,
+              42.26325
+            ],
+            [
+              -83.4918,
+              42.2633
+            ],
+            [
+              -83.4918,
+              42.26375
+            ],
+            [
+              -83.4962,
+              42.2637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4968,
+              42.2611
+            ],
+            [
+              -83.4968,
+              42.26065
+            ],
+            [
+              -83.4915,
+              42.26075
+            ],
+            [
+              -83.4915,
+              42.2612
+            ],
+            [
+              -83.4968,
+              42.2611
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4972,
+              42.2629
+            ],
+            [
+              -83.4972,
+              42.2626
+            ],
+            [
+              -83.4887,
+              42.2627
+            ],
+            [
+              -83.4887,
+              42.263
+            ],
+            [
+              -83.4972,
+              42.2629
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4972,
+              42.2621
+            ],
+            [
+              -83.4972,
+              42.2618
+            ],
+            [
+              -83.4887,
+              42.2619
+            ],
+            [
+              -83.4887,
+              42.2622
+            ],
+            [
+              -83.4972,
+              42.2621
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4915,
+              42.264
+            ],
+            [
+              -83.4915,
+              42.26335
+            ],
+            [
+              -83.48715,
+              42.2635
+            ],
+            [
+              -83.4872,
+              42.26415
+            ],
+            [
+              -83.4915,
+              42.264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Van Buren Depot, Belleville MI",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.536,
+              33.6188
+            ],
+            [
+              -84.53625,
+              33.6161
+            ],
+            [
+              -84.5346,
+              33.61445
+            ],
+            [
+              -84.5315,
+              33.6143
+            ],
+            [
+              -84.5302,
+              33.6156
+            ],
+            [
+              -84.531,
+              33.61895
+            ],
+            [
+              -84.536,
+              33.6188
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 59.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5332,
+              33.6187
+            ],
+            [
+              -84.53325,
+              33.6183
+            ],
+            [
+              -84.5325,
+              33.61825
+            ],
+            [
+              -84.53245,
+              33.61865
+            ],
+            [
+              -84.5332,
+              33.6187
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.53265,
+              33.6187
+            ],
+            [
+              -84.5333,
+              33.6184
+            ],
+            [
+              -84.5324,
+              33.617
+            ],
+            [
+              -84.5318,
+              33.6173
+            ],
+            [
+              -84.53265,
+              33.6187
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5352,
+              33.61685
+            ],
+            [
+              -84.53615,
+              33.61615
+            ],
+            [
+              -84.5354,
+              33.6149
+            ],
+            [
+              -84.5344,
+              33.6156
+            ],
+            [
+              -84.5352,
+              33.61685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.53155,
+              33.6156
+            ],
+            [
+              -84.53285,
+              33.6155
+            ],
+            [
+              -84.5331,
+              33.61445
+            ],
+            [
+              -84.53185,
+              33.61455
+            ],
+            [
+              -84.53155,
+              33.6156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5352,
+              33.61592
+            ],
+            [
+              -84.5352,
+              33.61561
+            ],
+            [
+              -84.53274,
+              33.61558
+            ],
+            [
+              -84.53274,
+              33.61589
+            ],
+            [
+              -84.5352,
+              33.61592
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.53155,
+              33.61628
+            ],
+            [
+              -84.5316,
+              33.61522
+            ],
+            [
+              -84.53122,
+              33.61522
+            ],
+            [
+              -84.53117,
+              33.61628
+            ],
+            [
+              -84.53155,
+              33.61628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5331,
+              33.61825
+            ],
+            [
+              -84.5333,
+              33.61785
+            ],
+            [
+              -84.53265,
+              33.6176
+            ],
+            [
+              -84.53245,
+              33.618
+            ],
+            [
+              -84.5331,
+              33.61825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, College Park GA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2456,
+              47.2226
+            ],
+            [
+              -122.2456,
+              47.2172
+            ],
+            [
+              -122.2443,
+              47.2164
+            ],
+            [
+              -122.2413,
+              47.2166
+            ],
+            [
+              -122.2413,
+              47.22
+            ],
+            [
+              -122.24165,
+              47.22255
+            ],
+            [
+              -122.2456,
+              47.2226
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.245,
+              47.2213
+            ],
+            [
+              -122.245,
+              47.22055
+            ],
+            [
+              -122.2436,
+              47.22055
+            ],
+            [
+              -122.2436,
+              47.2213
+            ],
+            [
+              -122.245,
+              47.2213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2456,
+              47.2198
+            ],
+            [
+              -122.2456,
+              47.2166
+            ],
+            [
+              -122.2447,
+              47.2166
+            ],
+            [
+              -122.2447,
+              47.2198
+            ],
+            [
+              -122.2456,
+              47.2198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2431,
+              47.2196
+            ],
+            [
+              -122.2431,
+              47.2168
+            ],
+            [
+              -122.24165,
+              47.2168
+            ],
+            [
+              -122.24165,
+              47.2196
+            ],
+            [
+              -122.2431,
+              47.2196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2447,
+              47.22255
+            ],
+            [
+              -122.2447,
+              47.2217
+            ],
+            [
+              -122.2418,
+              47.2217
+            ],
+            [
+              -122.2418,
+              47.22255
+            ],
+            [
+              -122.2447,
+              47.22255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2445,
+              47.2201
+            ],
+            [
+              -122.2445,
+              47.217
+            ],
+            [
+              -122.244,
+              47.217
+            ],
+            [
+              -122.244,
+              47.2201
+            ],
+            [
+              -122.2445,
+              47.2201
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2433,
+              47.22
+            ],
+            [
+              -122.2433,
+              47.217
+            ],
+            [
+              -122.2429,
+              47.217
+            ],
+            [
+              -122.2429,
+              47.22
+            ],
+            [
+              -122.2433,
+              47.22
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2447,
+              47.22165
+            ],
+            [
+              -122.2447,
+              47.2213
+            ],
+            [
+              -122.2418,
+              47.2213
+            ],
+            [
+              -122.2418,
+              47.22165
+            ],
+            [
+              -122.2447,
+              47.22165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2446,
+              47.2205
+            ],
+            [
+              -122.2446,
+              47.2199
+            ],
+            [
+              -122.2431,
+              47.2199
+            ],
+            [
+              -122.2431,
+              47.2205
+            ],
+            [
+              -122.2446,
+              47.2205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #285, Sumner WA",
+        "type": "Dry Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9637,
+              32.68985
+            ],
+            [
+              -96.958,
+              32.68975
+            ],
+            [
+              -96.9588,
+              32.6968
+            ],
+            [
+              -96.9634,
+              32.697
+            ],
+            [
+              -96.9637,
+              32.68985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 94.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.96045,
+              32.68985
+            ],
+            [
+              -96.9596,
+              32.68985
+            ],
+            [
+              -96.95975,
+              32.6913
+            ],
+            [
+              -96.9606,
+              32.6913
+            ],
+            [
+              -96.96045,
+              32.68985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9596,
+              32.6902
+            ],
+            [
+              -96.9584,
+              32.6902
+            ],
+            [
+              -96.959,
+              32.6962
+            ],
+            [
+              -96.96015,
+              32.6962
+            ],
+            [
+              -96.9596,
+              32.6902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9636,
+              32.6901
+            ],
+            [
+              -96.9623,
+              32.6901
+            ],
+            [
+              -96.9629,
+              32.696
+            ],
+            [
+              -96.9642,
+              32.696
+            ],
+            [
+              -96.9636,
+              32.6901
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.96187,
+              32.6908
+            ],
+            [
+              -96.96199,
+              32.6949
+            ],
+            [
+              -96.96231,
+              32.6949
+            ],
+            [
+              -96.96219,
+              32.6908
+            ],
+            [
+              -96.96187,
+              32.6908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.96107,
+              32.6908
+            ],
+            [
+              -96.96073,
+              32.6908
+            ],
+            [
+              -96.96085,
+              32.6949
+            ],
+            [
+              -96.96119,
+              32.6949
+            ],
+            [
+              -96.96107,
+              32.6908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.96035,
+              32.6915
+            ],
+            [
+              -96.95945,
+              32.6915
+            ],
+            [
+              -96.95975,
+              32.694
+            ],
+            [
+              -96.96065,
+              32.694
+            ],
+            [
+              -96.96035,
+              32.6915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #288/289, Dallas TX",
+        "type": "Refrigerated Depot",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4337,
+              41.3975
+            ],
+            [
+              -88.4339,
+              41.394
+            ],
+            [
+              -88.4337,
+              41.3894
+            ],
+            [
+              -88.4305,
+              41.38915
+            ],
+            [
+              -88.4242,
+              41.3896
+            ],
+            [
+              -88.42315,
+              41.3915
+            ],
+            [
+              -88.42315,
+              41.3966
+            ],
+            [
+              -88.4254,
+              41.39755
+            ],
+            [
+              -88.4337,
+              41.3975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot, Morris IL",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 100,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 482,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 195,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.42345,
+              41.3962
+            ],
+            [
+              -88.4256,
+              41.39615
+            ],
+            [
+              -88.4256,
+              41.39525
+            ],
+            [
+              -88.42345,
+              41.3953
+            ],
+            [
+              -88.42345,
+              41.3962
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot, Morris IL",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4325,
+              41.3973
+            ],
+            [
+              -88.43255,
+              41.3967
+            ],
+            [
+              -88.42565,
+              41.3964
+            ],
+            [
+              -88.4256,
+              41.397
+            ],
+            [
+              -88.4325,
+              41.3973
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot, Morris IL",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4323,
+              41.3947
+            ],
+            [
+              -88.43235,
+              41.3941
+            ],
+            [
+              -88.42625,
+              41.3938
+            ],
+            [
+              -88.4262,
+              41.3944
+            ],
+            [
+              -88.4323,
+              41.3947
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot, Morris IL",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4318,
+              41.3961
+            ],
+            [
+              -88.43185,
+              41.3956
+            ],
+            [
+              -88.42605,
+              41.3954
+            ],
+            [
+              -88.426,
+              41.3959
+            ],
+            [
+              -88.4318,
+              41.3961
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot, Morris IL",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4236,
+              41.396
+            ],
+            [
+              -88.4253,
+              41.39598
+            ],
+            [
+              -88.4253,
+              41.39518
+            ],
+            [
+              -88.4236,
+              41.3952
+            ],
+            [
+              -88.4236,
+              41.396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot, Morris IL",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4677,
+              40.35968
+            ],
+            [
+              -74.46815,
+              40.3574
+            ],
+            [
+              -74.4678,
+              40.3556
+            ],
+            [
+              -74.4633,
+              40.35535
+            ],
+            [
+              -74.46125,
+              40.357
+            ],
+            [
+              -74.4619,
+              40.35965
+            ],
+            [
+              -74.4677,
+              40.35968
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Wet Depot #265, Monroe Township NJ",
+        "type": "Refrigerated Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 85,
+          "trailersVisible": 42,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.46215,
+              40.35735
+            ],
+            [
+              -74.46217,
+              40.35687
+            ],
+            [
+              -74.46172,
+              40.35685
+            ],
+            [
+              -74.4617,
+              40.35733
+            ],
+            [
+              -74.46215,
+              40.35735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Wet Depot #265, Monroe Township NJ",
+        "type": "Refrigerated Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4677,
+              40.3564
+            ],
+            [
+              -74.46778,
+              40.3559
+            ],
+            [
+              -74.46568,
+              40.35578
+            ],
+            [
+              -74.4656,
+              40.35628
+            ],
+            [
+              -74.4677,
+              40.3564
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Wet Depot #265, Monroe Township NJ",
+        "type": "Refrigerated Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4672,
+              40.35705
+            ],
+            [
+              -74.46718,
+              40.35681
+            ],
+            [
+              -74.46258,
+              40.3569
+            ],
+            [
+              -74.4626,
+              40.35714
+            ],
+            [
+              -74.4672,
+              40.35705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Wet Depot #265, Monroe Township NJ",
+        "type": "Refrigerated Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.45648,
+              40.35816
+            ],
+            [
+              -74.45854,
+              40.35476
+            ],
+            [
+              -74.45728,
+              40.35337
+            ],
+            [
+              -74.44985,
+              40.3525
+            ],
+            [
+              -74.4479,
+              40.35581
+            ],
+            [
+              -74.44905,
+              40.35842
+            ],
+            [
+              -74.45648,
+              40.35816
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 750,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 112.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.457,
+              40.3572
+            ],
+            [
+              -74.45735,
+              40.3566
+            ],
+            [
+              -74.45655,
+              40.3564
+            ],
+            [
+              -74.4562,
+              40.357
+            ],
+            [
+              -74.457,
+              40.3572
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4504,
+              40.35835
+            ],
+            [
+              -74.4512,
+              40.35675
+            ],
+            [
+              -74.4465,
+              40.3556
+            ],
+            [
+              -74.4456,
+              40.3572
+            ],
+            [
+              -74.4504,
+              40.35835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4529,
+              40.3547
+            ],
+            [
+              -74.45345,
+              40.35375
+            ],
+            [
+              -74.44915,
+              40.35265
+            ],
+            [
+              -74.44855,
+              40.3536
+            ],
+            [
+              -74.4529,
+              40.3547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4577,
+              40.3549
+            ],
+            [
+              -74.45825,
+              40.35395
+            ],
+            [
+              -74.45615,
+              40.35345
+            ],
+            [
+              -74.4556,
+              40.3544
+            ],
+            [
+              -74.4577,
+              40.3549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.45474,
+              40.35724
+            ],
+            [
+              -74.45505,
+              40.35737
+            ],
+            [
+              -74.45601,
+              40.35608
+            ],
+            [
+              -74.4557,
+              40.35595
+            ],
+            [
+              -74.45474,
+              40.35724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.45357,
+              40.35722
+            ],
+            [
+              -74.45041,
+              40.35587
+            ],
+            [
+              -74.45024,
+              40.35611
+            ],
+            [
+              -74.4534,
+              40.35746
+            ],
+            [
+              -74.45357,
+              40.35722
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.45419,
+              40.3561
+            ],
+            [
+              -74.45432,
+              40.35585
+            ],
+            [
+              -74.45039,
+              40.35471
+            ],
+            [
+              -74.45026,
+              40.35496
+            ],
+            [
+              -74.45419,
+              40.3561
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4553,
+              40.3562
+            ],
+            [
+              -74.456,
+              40.35495
+            ],
+            [
+              -74.4539,
+              40.3546
+            ],
+            [
+              -74.4532,
+              40.35585
+            ],
+            [
+              -74.4553,
+              40.3562
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Dry Depot #175, Monroe Township NJ",
+        "type": "Dry Depot",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0346,
+              40.7614
+            ],
+            [
+              -112.0346,
+              40.7549
+            ],
+            [
+              -112.0293,
+              40.7549
+            ],
+            [
+              -112.0293,
+              40.7614
+            ],
+            [
+              -112.0346,
+              40.7614
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 79.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.03392,
+              40.76155
+            ],
+            [
+              -112.03397,
+              40.75985
+            ],
+            [
+              -112.03338,
+              40.75985
+            ],
+            [
+              -112.03333,
+              40.76155
+            ],
+            [
+              -112.03392,
+              40.76155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.03098,
+              40.75985
+            ],
+            [
+              -112.03098,
+              40.756
+            ],
+            [
+              -112.02935,
+              40.756
+            ],
+            [
+              -112.02935,
+              40.75985
+            ],
+            [
+              -112.03098,
+              40.75985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0333,
+              40.76138
+            ],
+            [
+              -112.0333,
+              40.76055
+            ],
+            [
+              -112.03135,
+              40.76055
+            ],
+            [
+              -112.03135,
+              40.76138
+            ],
+            [
+              -112.0333,
+              40.76138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0346,
+              40.7602
+            ],
+            [
+              -112.0346,
+              40.7556
+            ],
+            [
+              -112.03345,
+              40.7556
+            ],
+            [
+              -112.03345,
+              40.7602
+            ],
+            [
+              -112.0346,
+              40.7602
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.03331,
+              40.76101
+            ],
+            [
+              -112.03364,
+              40.76101
+            ],
+            [
+              -112.03357,
+              40.75515
+            ],
+            [
+              -112.03324,
+              40.75515
+            ],
+            [
+              -112.03331,
+              40.76101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.03133,
+              40.76101
+            ],
+            [
+              -112.03126,
+              40.75515
+            ],
+            [
+              -112.03093,
+              40.75515
+            ],
+            [
+              -112.031,
+              40.76101
+            ],
+            [
+              -112.03133,
+              40.76101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0334,
+              40.76125
+            ],
+            [
+              -112.0334,
+              40.76035
+            ],
+            [
+              -112.0315,
+              40.76035
+            ],
+            [
+              -112.0315,
+              40.76125
+            ],
+            [
+              -112.0334,
+              40.76125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot #584/585, Salt Lake City UT",
+        "type": "Dry Depot",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.28005,
+              39.37735
+            ],
+            [
+              -77.28265,
+              39.3757
+            ],
+            [
+              -77.28545,
+              39.37395
+            ],
+            [
+              -77.2865,
+              39.37315
+            ],
+            [
+              -77.28625,
+              39.3724
+            ],
+            [
+              -77.2829,
+              39.3716
+            ],
+            [
+              -77.2794,
+              39.37155
+            ],
+            [
+              -77.2765,
+              39.37255
+            ],
+            [
+              -77.27665,
+              39.3743
+            ],
+            [
+              -77.27715,
+              39.3763
+            ],
+            [
+              -77.27805,
+              39.37725
+            ],
+            [
+              -77.28005,
+              39.37735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 260,
+          "trailersVisible": 450,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 84,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.27795,
+              39.37685
+            ],
+            [
+              -77.27805,
+              39.3761
+            ],
+            [
+              -77.27725,
+              39.37605
+            ],
+            [
+              -77.27715,
+              39.3768
+            ],
+            [
+              -77.27795,
+              39.37685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.28575,
+              39.37415
+            ],
+            [
+              -77.28675,
+              39.37325
+            ],
+            [
+              -77.28535,
+              39.37215
+            ],
+            [
+              -77.28435,
+              39.37305
+            ],
+            [
+              -77.28575,
+              39.37415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2817,
+              39.37535
+            ],
+            [
+              -77.28255,
+              39.3745
+            ],
+            [
+              -77.28115,
+              39.37375
+            ],
+            [
+              -77.2803,
+              39.3746
+            ],
+            [
+              -77.2817,
+              39.37535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.27915,
+              39.37605
+            ],
+            [
+              -77.2797,
+              39.3754
+            ],
+            [
+              -77.2788,
+              39.37495
+            ],
+            [
+              -77.27825,
+              39.3756
+            ],
+            [
+              -77.27915,
+              39.37605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.281172,
+              39.375229
+            ],
+            [
+              -77.281468,
+              39.375482
+            ],
+            [
+              -77.283488,
+              39.374068
+            ],
+            [
+              -77.283192,
+              39.373815
+            ],
+            [
+              -77.281172,
+              39.375229
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.279445,
+              39.376844
+            ],
+            [
+              -77.279763,
+              39.377081
+            ],
+            [
+              -77.28167,
+              39.375552
+            ],
+            [
+              -77.281352,
+              39.375315
+            ],
+            [
+              -77.279445,
+              39.376844
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.281171,
+              39.371401
+            ],
+            [
+              -77.281043,
+              39.371093
+            ],
+            [
+              -77.27875,
+              39.371664
+            ],
+            [
+              -77.278878,
+              39.371972
+            ],
+            [
+              -77.281171,
+              39.371401
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2774,
+              39.37755
+            ],
+            [
+              -77.2775,
+              39.37705
+            ],
+            [
+              -77.27675,
+              39.37695
+            ],
+            [
+              -77.27665,
+              39.37745
+            ],
+            [
+              -77.2774,
+              39.37755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "costco",
+        "name": "Costco Depot, Monrovia MD",
+        "type": "Refrigerated Depot",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

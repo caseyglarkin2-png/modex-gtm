@@ -1,0 +1,3557 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.16545,
+              39.77855
+            ],
+            [
+              -105.1714,
+              39.77835
+            ],
+            [
+              -105.1711,
+              39.7772
+            ],
+            [
+              -105.1686,
+              39.7769
+            ],
+            [
+              -105.1666,
+              39.7766
+            ],
+            [
+              -105.16545,
+              39.7764
+            ],
+            [
+              -105.16545,
+              39.77855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Golden CO",
+        "type": "Beverage Can Plant (bodies, ends, Alumi-Tek)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.16935,
+              39.77694
+            ],
+            [
+              -105.16935,
+              39.77662
+            ],
+            [
+              -105.16895,
+              39.77662
+            ],
+            [
+              -105.16895,
+              39.77694
+            ],
+            [
+              -105.16935,
+              39.77694
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Golden CO",
+        "type": "Beverage Can Plant (bodies, ends, Alumi-Tek)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.1724,
+              39.78
+            ],
+            [
+              -105.1725,
+              39.77875
+            ],
+            [
+              -105.17005,
+              39.7787
+            ],
+            [
+              -105.1699,
+              39.77995
+            ],
+            [
+              -105.1724,
+              39.78
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Golden CO",
+        "type": "Beverage Can Plant (bodies, ends, Alumi-Tek)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.16852,
+              39.77686
+            ],
+            [
+              -105.16854,
+              39.77668
+            ],
+            [
+              -105.16634,
+              39.77662
+            ],
+            [
+              -105.16632,
+              39.7768
+            ],
+            [
+              -105.16852,
+              39.77686
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Golden CO",
+        "type": "Beverage Can Plant (bodies, ends, Alumi-Tek)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6492,
+              41.0958
+            ],
+            [
+              -83.6492,
+              41.0873
+            ],
+            [
+              -83.6423,
+              41.0858
+            ],
+            [
+              -83.642,
+              41.0872
+            ],
+            [
+              -83.6358,
+              41.0868
+            ],
+            [
+              -83.6358,
+              41.0952
+            ],
+            [
+              -83.6492,
+              41.0958
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.64355,
+              41.0896
+            ],
+            [
+              -83.64355,
+              41.08865
+            ],
+            [
+              -83.64305,
+              41.08865
+            ],
+            [
+              -83.64305,
+              41.0896
+            ],
+            [
+              -83.64355,
+              41.0896
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6372,
+              41.0908
+            ],
+            [
+              -83.6372,
+              41.0865
+            ],
+            [
+              -83.6337,
+              41.0865
+            ],
+            [
+              -83.6337,
+              41.0908
+            ],
+            [
+              -83.6372,
+              41.0908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6456,
+              41.092
+            ],
+            [
+              -83.6456,
+              41.0892
+            ],
+            [
+              -83.6452,
+              41.0892
+            ],
+            [
+              -83.6452,
+              41.092
+            ],
+            [
+              -83.6456,
+              41.092
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6423,
+              41.0908
+            ],
+            [
+              -83.6423,
+              41.087
+            ],
+            [
+              -83.6419,
+              41.087
+            ],
+            [
+              -83.6419,
+              41.0908
+            ],
+            [
+              -83.6423,
+              41.0908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6439,
+              41.0889
+            ],
+            [
+              -83.6439,
+              41.0885
+            ],
+            [
+              -83.64355,
+              41.0885
+            ],
+            [
+              -83.64355,
+              41.0889
+            ],
+            [
+              -83.6439,
+              41.0889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Findlay OH",
+        "type": "Beverage Can Plant (bodies+ends)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4403,
+              30.3518
+            ],
+            [
+              -95.4403,
+              30.3472
+            ],
+            [
+              -95.4374,
+              30.34695
+            ],
+            [
+              -95.4363,
+              30.3469
+            ],
+            [
+              -95.4331,
+              30.347
+            ],
+            [
+              -95.4331,
+              30.3516
+            ],
+            [
+              -95.4403,
+              30.3518
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Conroe TX",
+        "type": "Beverage Can Plant (bodies+Alumi-Tek)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 15,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.43705,
+              30.34765
+            ],
+            [
+              -95.43705,
+              30.34695
+            ],
+            [
+              -95.4366,
+              30.34695
+            ],
+            [
+              -95.4366,
+              30.34765
+            ],
+            [
+              -95.43705,
+              30.34765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Conroe TX",
+        "type": "Beverage Can Plant (bodies+Alumi-Tek)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4376,
+              30.34925
+            ],
+            [
+              -95.43765,
+              30.349
+            ],
+            [
+              -95.43615,
+              30.34895
+            ],
+            [
+              -95.4361,
+              30.3492
+            ],
+            [
+              -95.4376,
+              30.34925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Conroe TX",
+        "type": "Beverage Can Plant (bodies+Alumi-Tek)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.4079,
+              28.0508
+            ],
+            [
+              -82.4085,
+              28.0473
+            ],
+            [
+              -82.4048,
+              28.0473
+            ],
+            [
+              -82.4048,
+              28.0506
+            ],
+            [
+              -82.4079,
+              28.0508
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Tampa FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.4052,
+              28.0476
+            ],
+            [
+              -82.4052,
+              28.0471
+            ],
+            [
+              -82.4048,
+              28.0471
+            ],
+            [
+              -82.4048,
+              28.0476
+            ],
+            [
+              -82.4052,
+              28.0476
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Tampa FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.4051,
+              28.05
+            ],
+            [
+              -82.4051,
+              28.0478
+            ],
+            [
+              -82.4047,
+              28.0478
+            ],
+            [
+              -82.4047,
+              28.05
+            ],
+            [
+              -82.4051,
+              28.05
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Tampa FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.4066,
+              28.0496
+            ],
+            [
+              -82.40665,
+              28.0494
+            ],
+            [
+              -82.40545,
+              28.04935
+            ],
+            [
+              -82.4054,
+              28.04955
+            ],
+            [
+              -82.4066,
+              28.0496
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Tampa FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.616,
+              37.20905
+            ],
+            [
+              -76.6157,
+              37.2044
+            ],
+            [
+              -76.6092,
+              37.2043
+            ],
+            [
+              -76.6085,
+              37.208
+            ],
+            [
+              -76.616,
+              37.20905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Williamsburg VA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 40,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6099,
+              37.2081
+            ],
+            [
+              -76.6099,
+              37.2076
+            ],
+            [
+              -76.6095,
+              37.2076
+            ],
+            [
+              -76.6095,
+              37.2081
+            ],
+            [
+              -76.6099,
+              37.2081
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Williamsburg VA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.612,
+              37.2056
+            ],
+            [
+              -76.612,
+              37.2051
+            ],
+            [
+              -76.6112,
+              37.2051
+            ],
+            [
+              -76.6112,
+              37.2056
+            ],
+            [
+              -76.612,
+              37.2056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Williamsburg VA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6127,
+              37.20605
+            ],
+            [
+              -76.61275,
+              37.20585
+            ],
+            [
+              -76.61205,
+              37.2058
+            ],
+            [
+              -76.612,
+              37.206
+            ],
+            [
+              -76.6127,
+              37.20605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Williamsburg VA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.9754,
+              38.2801
+            ],
+            [
+              -121.9772,
+              38.2788
+            ],
+            [
+              -121.9774,
+              38.2772
+            ],
+            [
+              -121.9756,
+              38.2766
+            ],
+            [
+              -121.9747,
+              38.277
+            ],
+            [
+              -121.9743,
+              38.2796
+            ],
+            [
+              -121.9754,
+              38.2801
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fairfield CA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 18.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.97585,
+              38.2769
+            ],
+            [
+              -121.97575,
+              38.27638
+            ],
+            [
+              -121.9749,
+              38.27638
+            ],
+            [
+              -121.975,
+              38.2769
+            ],
+            [
+              -121.97585,
+              38.2769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fairfield CA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.977,
+              38.2776
+            ],
+            [
+              -121.97655,
+              38.277
+            ],
+            [
+              -121.9758,
+              38.27745
+            ],
+            [
+              -121.97625,
+              38.27805
+            ],
+            [
+              -121.977,
+              38.2776
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fairfield CA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.977,
+              38.2773
+            ],
+            [
+              -121.97677,
+              38.27722
+            ],
+            [
+              -121.97622,
+              38.27852
+            ],
+            [
+              -121.97645,
+              38.2786
+            ],
+            [
+              -121.977,
+              38.2773
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fairfield CA",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -158.0956,
+              21.30765
+            ],
+            [
+              -158.0956,
+              21.306
+            ],
+            [
+              -158.0945,
+              21.3056
+            ],
+            [
+              -158.0938,
+              21.3064
+            ],
+            [
+              -158.0938,
+              21.30745
+            ],
+            [
+              -158.0956,
+              21.30765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Kapolei HI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -158.09565,
+              21.3074
+            ],
+            [
+              -158.09565,
+              21.3069
+            ],
+            [
+              -158.0952,
+              21.3069
+            ],
+            [
+              -158.0952,
+              21.3074
+            ],
+            [
+              -158.09565,
+              21.3074
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Kapolei HI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -158.09525,
+              21.3072
+            ],
+            [
+              -158.09525,
+              21.3064
+            ],
+            [
+              -158.09492,
+              21.30632
+            ],
+            [
+              -158.09492,
+              21.30712
+            ],
+            [
+              -158.09525,
+              21.3072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Kapolei HI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -158.095,
+              21.3072
+            ],
+            [
+              -158.095,
+              21.30632
+            ],
+            [
+              -158.0949,
+              21.30632
+            ],
+            [
+              -158.0949,
+              21.3072
+            ],
+            [
+              -158.095,
+              21.3072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Kapolei HI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7748,
+              40.7513
+            ],
+            [
+              -86.7748,
+              40.74928
+            ],
+            [
+              -86.77235,
+              40.74928
+            ],
+            [
+              -86.77235,
+              40.7513
+            ],
+            [
+              -86.7748,
+              40.7513
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Monticello IN",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 13,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7747,
+              40.75125
+            ],
+            [
+              -86.7747,
+              40.7509
+            ],
+            [
+              -86.7742,
+              40.7509
+            ],
+            [
+              -86.7742,
+              40.75125
+            ],
+            [
+              -86.7747,
+              40.75125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Monticello IN",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7742,
+              40.74952
+            ],
+            [
+              -86.7742,
+              40.74936
+            ],
+            [
+              -86.77255,
+              40.74936
+            ],
+            [
+              -86.77255,
+              40.74952
+            ],
+            [
+              -86.7742,
+              40.74952
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Monticello IN",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7743,
+              40.75082
+            ],
+            [
+              -86.7743,
+              40.7506
+            ],
+            [
+              -86.7733,
+              40.7506
+            ],
+            [
+              -86.7733,
+              40.75082
+            ],
+            [
+              -86.7743,
+              40.75082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Monticello IN",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7742,
+              40.7496
+            ],
+            [
+              -86.7742,
+              40.74952
+            ],
+            [
+              -86.7725,
+              40.74952
+            ],
+            [
+              -86.7725,
+              40.7496
+            ],
+            [
+              -86.7742,
+              40.7496
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Monticello IN",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4256,
+              33.5011
+            ],
+            [
+              -112.4256,
+              33.4985
+            ],
+            [
+              -112.4218,
+              33.4985
+            ],
+            [
+              -112.4218,
+              33.5011
+            ],
+            [
+              -112.4256,
+              33.5011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.425,
+              33.50065
+            ],
+            [
+              -112.425,
+              33.50035
+            ],
+            [
+              -112.4245,
+              33.50035
+            ],
+            [
+              -112.4245,
+              33.50065
+            ],
+            [
+              -112.425,
+              33.50065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4245,
+              33.50092
+            ],
+            [
+              -112.4245,
+              33.5006
+            ],
+            [
+              -112.4225,
+              33.5006
+            ],
+            [
+              -112.4225,
+              33.50092
+            ],
+            [
+              -112.4245,
+              33.50092
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4248,
+              33.49872
+            ],
+            [
+              -112.4248,
+              33.49845
+            ],
+            [
+              -112.4225,
+              33.49845
+            ],
+            [
+              -112.4225,
+              33.49872
+            ],
+            [
+              -112.4248,
+              33.49872
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4245,
+              33.50058
+            ],
+            [
+              -112.4245,
+              33.50048
+            ],
+            [
+              -112.4223,
+              33.50048
+            ],
+            [
+              -112.4223,
+              33.50058
+            ],
+            [
+              -112.4245,
+              33.50058
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4245,
+              33.4988
+            ],
+            [
+              -112.4245,
+              33.49872
+            ],
+            [
+              -112.4223,
+              33.49872
+            ],
+            [
+              -112.4223,
+              33.4988
+            ],
+            [
+              -112.4245,
+              33.4988
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Goodyear AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3164,
+              32.65015
+            ],
+            [
+              -97.3164,
+              32.6478
+            ],
+            [
+              -97.3138,
+              32.6476
+            ],
+            [
+              -97.3138,
+              32.6499
+            ],
+            [
+              -97.3164,
+              32.65015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Worth TX",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 15.6,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3143,
+              32.6484
+            ],
+            [
+              -97.3143,
+              32.64795
+            ],
+            [
+              -97.31385,
+              32.64795
+            ],
+            [
+              -97.31385,
+              32.6484
+            ],
+            [
+              -97.3143,
+              32.6484
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Worth TX",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3146,
+              32.64875
+            ],
+            [
+              -97.3146,
+              32.6479
+            ],
+            [
+              -97.31405,
+              32.6479
+            ],
+            [
+              -97.31405,
+              32.64875
+            ],
+            [
+              -97.3146,
+              32.64875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Worth TX",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.31495,
+              32.64925
+            ],
+            [
+              -97.31495,
+              32.6483
+            ],
+            [
+              -97.31475,
+              32.6483
+            ],
+            [
+              -97.31475,
+              32.64925
+            ],
+            [
+              -97.31495,
+              32.64925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Worth TX",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.387,
+              33.57955
+            ],
+            [
+              -112.387,
+              33.5762
+            ],
+            [
+              -112.3832,
+              33.5762
+            ],
+            [
+              -112.3832,
+              33.57955
+            ],
+            [
+              -112.387,
+              33.57955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Glendale AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3838,
+              33.57975
+            ],
+            [
+              -112.3838,
+              33.5793
+            ],
+            [
+              -112.3832,
+              33.5793
+            ],
+            [
+              -112.3832,
+              33.57975
+            ],
+            [
+              -112.3838,
+              33.57975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Glendale AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3843,
+              33.579
+            ],
+            [
+              -112.3843,
+              33.5772
+            ],
+            [
+              -112.3835,
+              33.5772
+            ],
+            [
+              -112.3835,
+              33.579
+            ],
+            [
+              -112.3843,
+              33.579
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Glendale AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3847,
+              33.5772
+            ],
+            [
+              -112.3847,
+              33.5769
+            ],
+            [
+              -112.3836,
+              33.5769
+            ],
+            [
+              -112.3836,
+              33.5772
+            ],
+            [
+              -112.3847,
+              33.5772
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Glendale AZ",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.83545,
+              42.94505
+            ],
+            [
+              -88.83565,
+              42.94275
+            ],
+            [
+              -88.8327,
+              42.94265
+            ],
+            [
+              -88.8325,
+              42.94495
+            ],
+            [
+              -88.83545,
+              42.94505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Atkinson WI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 15,
+          "trailersVisible": 5,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8337,
+              42.943
+            ],
+            [
+              -88.83375,
+              42.9427
+            ],
+            [
+              -88.83325,
+              42.9427
+            ],
+            [
+              -88.8332,
+              42.943
+            ],
+            [
+              -88.8337,
+              42.943
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Atkinson WI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8331,
+              42.9443
+            ],
+            [
+              -88.8332,
+              42.9432
+            ],
+            [
+              -88.8328,
+              42.9432
+            ],
+            [
+              -88.8327,
+              42.9443
+            ],
+            [
+              -88.8331,
+              42.9443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Atkinson WI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.833,
+              42.9444
+            ],
+            [
+              -88.8331,
+              42.9429
+            ],
+            [
+              -88.8326,
+              42.9429
+            ],
+            [
+              -88.8325,
+              42.9444
+            ],
+            [
+              -88.833,
+              42.9444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Fort Atkinson WI",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7785,
+              41.28905
+            ],
+            [
+              -75.779,
+              41.28395
+            ],
+            [
+              -75.7656,
+              41.28345
+            ],
+            [
+              -75.7652,
+              41.2885
+            ],
+            [
+              -75.7785,
+              41.28905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Pittston PA (Jenkins Township)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 88,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7776,
+              41.2872
+            ],
+            [
+              -75.778,
+              41.2867
+            ],
+            [
+              -75.7772,
+              41.2865
+            ],
+            [
+              -75.7768,
+              41.287
+            ],
+            [
+              -75.7776,
+              41.2872
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Pittston PA (Jenkins Township)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7742,
+              41.2843
+            ],
+            [
+              -75.7744,
+              41.2837
+            ],
+            [
+              -75.7664,
+              41.2833
+            ],
+            [
+              -75.7662,
+              41.2839
+            ],
+            [
+              -75.7742,
+              41.2843
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Pittston PA (Jenkins Township)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7788,
+              41.2896
+            ],
+            [
+              -75.7792,
+              41.2884
+            ],
+            [
+              -75.7754,
+              41.2878
+            ],
+            [
+              -75.775,
+              41.28905
+            ],
+            [
+              -75.7788,
+              41.2896
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Pittston PA (Jenkins Township)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.774,
+              41.2847
+            ],
+            [
+              -75.77405,
+              41.2845
+            ],
+            [
+              -75.76585,
+              41.2841
+            ],
+            [
+              -75.7658,
+              41.2843
+            ],
+            [
+              -75.774,
+              41.2847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Pittston PA (Jenkins Township)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.82715,
+              43.06275
+            ],
+            [
+              -73.8272,
+              43.06135
+            ],
+            [
+              -73.82605,
+              43.06055
+            ],
+            [
+              -73.8243,
+              43.06052
+            ],
+            [
+              -73.82355,
+              43.06175
+            ],
+            [
+              -73.82395,
+              43.06258
+            ],
+            [
+              -73.82715,
+              43.06275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Saratoga Springs NY",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 38,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 35,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.82545,
+              43.0612
+            ],
+            [
+              -73.82565,
+              43.0608
+            ],
+            [
+              -73.8252,
+              43.0607
+            ],
+            [
+              -73.825,
+              43.0611
+            ],
+            [
+              -73.82545,
+              43.0612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Saratoga Springs NY",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.8268,
+              43.0615
+            ],
+            [
+              -73.8272,
+              43.06115
+            ],
+            [
+              -73.8264,
+              43.06075
+            ],
+            [
+              -73.826,
+              43.0611
+            ],
+            [
+              -73.8268,
+              43.0615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Saratoga Springs NY",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.8248,
+              43.0617
+            ],
+            [
+              -73.8252,
+              43.06155
+            ],
+            [
+              -73.825,
+              43.06115
+            ],
+            [
+              -73.8246,
+              43.0613
+            ],
+            [
+              -73.8248,
+              43.0617
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Saratoga Springs NY",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.8264,
+              43.0612
+            ],
+            [
+              -73.82665,
+              43.061
+            ],
+            [
+              -73.82615,
+              43.0607
+            ],
+            [
+              -73.8259,
+              43.0609
+            ],
+            [
+              -73.8264,
+              43.0612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Saratoga Springs NY",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.09375,
+              34.33165
+            ],
+            [
+              -85.0947,
+              34.33095
+            ],
+            [
+              -85.09475,
+              34.32985
+            ],
+            [
+              -85.0937,
+              34.32895
+            ],
+            [
+              -85.0925,
+              34.3294
+            ],
+            [
+              -85.09175,
+              34.33095
+            ],
+            [
+              -85.09375,
+              34.33165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Rome GA (Cans)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 40,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.09405,
+              34.3313
+            ],
+            [
+              -85.0943,
+              34.33095
+            ],
+            [
+              -85.0938,
+              34.33075
+            ],
+            [
+              -85.09355,
+              34.3311
+            ],
+            [
+              -85.09405,
+              34.3313
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Rome GA (Cans)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.09205,
+              34.33055
+            ],
+            [
+              -85.09265,
+              34.3303
+            ],
+            [
+              -85.09255,
+              34.32985
+            ],
+            [
+              -85.09195,
+              34.3301
+            ],
+            [
+              -85.09205,
+              34.33055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Rome GA (Cans)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.09215,
+              34.3305
+            ],
+            [
+              -85.09245,
+              34.3304
+            ],
+            [
+              -85.09235,
+              34.32995
+            ],
+            [
+              -85.09205,
+              34.33005
+            ],
+            [
+              -85.09215,
+              34.3305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Rome GA (Cans)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.09445,
+              34.33
+            ],
+            [
+              -85.09465,
+              34.3298
+            ],
+            [
+              -85.0942,
+              34.32945
+            ],
+            [
+              -85.094,
+              34.32965
+            ],
+            [
+              -85.09445,
+              34.33
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Rome GA (Cans)",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.709357,
+              27.941723
+            ],
+            [
+              -81.709559,
+              27.94684
+            ],
+            [
+              -81.714843,
+              27.946677
+            ],
+            [
+              -81.714641,
+              27.94156
+            ],
+            [
+              -81.709357,
+              27.941723
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Winter Haven FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 73.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.71244,
+              27.941975
+            ],
+            [
+              -81.712745,
+              27.941984
+            ],
+            [
+              -81.71276,
+              27.941625
+            ],
+            [
+              -81.712455,
+              27.941616
+            ],
+            [
+              -81.71244,
+              27.941975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Winter Haven FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.709491,
+              27.945294
+            ],
+            [
+              -81.71132,
+              27.94535
+            ],
+            [
+              -81.711409,
+              27.943106
+            ],
+            [
+              -81.70958,
+              27.94305
+            ],
+            [
+              -81.709491,
+              27.945294
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Winter Haven FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.710972,
+              27.945281
+            ],
+            [
+              -81.710984,
+              27.945604
+            ],
+            [
+              -81.713728,
+              27.945519
+            ],
+            [
+              -81.713716,
+              27.945196
+            ],
+            [
+              -81.710972,
+              27.945281
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Winter Haven FL",
+        "type": "Beverage Can Plant (bodies)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.296362,
+              37.036018
+            ],
+            [
+              -86.293773,
+              37.039905
+            ],
+            [
+              -86.299138,
+              37.042182
+            ],
+            [
+              -86.301727,
+              37.038295
+            ],
+            [
+              -86.296362,
+              37.036018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Bowling Green KY",
+        "type": "Can End Plant (beverage can ends)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 65.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.298207,
+              37.037636
+            ],
+            [
+              -86.297996,
+              37.037953
+            ],
+            [
+              -86.298493,
+              37.038164
+            ],
+            [
+              -86.298704,
+              37.037847
+            ],
+            [
+              -86.298207,
+              37.037636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Bowling Green KY",
+        "type": "Can End Plant (beverage can ends)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.297247,
+              37.03743
+            ],
+            [
+              -86.297067,
+              37.0377
+            ],
+            [
+              -86.299353,
+              37.03867
+            ],
+            [
+              -86.299533,
+              37.0384
+            ],
+            [
+              -86.297247,
+              37.03743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Bowling Green KY",
+        "type": "Can End Plant (beverage can ends)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.297247,
+              37.03743
+            ],
+            [
+              -86.297067,
+              37.0377
+            ],
+            [
+              -86.299353,
+              37.03867
+            ],
+            [
+              -86.299533,
+              37.0384
+            ],
+            [
+              -86.297247,
+              37.03743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Bowling Green KY",
+        "type": "Can End Plant (beverage can ends)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.297954,
+              37.040063
+            ],
+            [
+              -86.298252,
+              37.040189
+            ],
+            [
+              -86.298886,
+              37.039237
+            ],
+            [
+              -86.298588,
+              37.039111
+            ],
+            [
+              -86.297954,
+              37.040063
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Bowling Green KY",
+        "type": "Can End Plant (beverage can ends)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.061104,
+              44.677119
+            ],
+            [
+              -123.061214,
+              44.679363
+            ],
+            [
+              -123.064496,
+              44.679281
+            ],
+            [
+              -123.064386,
+              44.677037
+            ],
+            [
+              -123.061104,
+              44.677119
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Millersburg OR",
+        "type": "Beverage Can Plant (bodies) / Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.062876,
+              44.677696
+            ],
+            [
+              -123.062892,
+              44.678019
+            ],
+            [
+              -123.063524,
+              44.678004
+            ],
+            [
+              -123.063508,
+              44.677681
+            ],
+            [
+              -123.062876,
+              44.677696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Millersburg OR",
+        "type": "Beverage Can Plant (bodies) / Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.062636,
+              44.678889
+            ],
+            [
+              -123.063015,
+              44.678898
+            ],
+            [
+              -123.063064,
+              44.677911
+            ],
+            [
+              -123.062685,
+              44.677902
+            ],
+            [
+              -123.062636,
+              44.678889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ball",
+        "name": "Ball - Millersburg OR",
+        "type": "Beverage Can Plant (bodies) / Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

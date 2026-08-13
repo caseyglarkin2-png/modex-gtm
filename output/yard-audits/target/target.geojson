@@ -1,0 +1,5402 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.180892,
+              32.174872
+            ],
+            [
+              -81.181472,
+              32.173455
+            ],
+            [
+              -81.181343,
+              32.171603
+            ],
+            [
+              -81.179862,
+              32.169968
+            ],
+            [
+              -81.172266,
+              32.170404
+            ],
+            [
+              -81.171108,
+              32.174545
+            ],
+            [
+              -81.171365,
+              32.176724
+            ],
+            [
+              -81.179734,
+              32.176397
+            ],
+            [
+              -81.180892,
+              32.174872
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Savannah (T3684)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 154.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.177522,
+              32.177016
+            ],
+            [
+              -81.177683,
+              32.176785
+            ],
+            [
+              -81.17728,
+              32.17658
+            ],
+            [
+              -81.17712,
+              32.176812
+            ],
+            [
+              -81.177522,
+              32.177016
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Savannah (T3684)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.180377,
+              32.173237
+            ],
+            [
+              -81.179862,
+              32.170077
+            ],
+            [
+              -81.173425,
+              32.170731
+            ],
+            [
+              -81.174455,
+              32.173673
+            ],
+            [
+              -81.180377,
+              32.173237
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Savannah (T3684)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.180313,
+              32.174
+            ],
+            [
+              -81.180377,
+              32.17291
+            ],
+            [
+              -81.172266,
+              32.173346
+            ],
+            [
+              -81.172138,
+              32.174436
+            ],
+            [
+              -81.180313,
+              32.174
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Savannah (T3684)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.77865,
+              47.08318
+            ],
+            [
+              -122.77895,
+              47.0799
+            ],
+            [
+              -122.77555,
+              47.0798
+            ],
+            [
+              -122.77205,
+              47.07975
+            ],
+            [
+              -122.76865,
+              47.07985
+            ],
+            [
+              -122.7688,
+              47.08305
+            ],
+            [
+              -122.77865,
+              47.08318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Lacey",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.77855,
+              47.08178
+            ],
+            [
+              -122.77855,
+              47.08128
+            ],
+            [
+              -122.7779,
+              47.08128
+            ],
+            [
+              -122.7779,
+              47.08178
+            ],
+            [
+              -122.77855,
+              47.08178
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Lacey",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7781,
+              47.08118
+            ],
+            [
+              -122.77815,
+              47.08
+            ],
+            [
+              -122.76915,
+              47.07995
+            ],
+            [
+              -122.76905,
+              47.08108
+            ],
+            [
+              -122.7781,
+              47.08118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Lacey",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.77815,
+              47.08145
+            ],
+            [
+              -122.77815,
+              47.08128
+            ],
+            [
+              -122.76905,
+              47.08118
+            ],
+            [
+              -122.769,
+              47.08135
+            ],
+            [
+              -122.77815,
+              47.08145
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Lacey",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4316,
+              34.1558
+            ],
+            [
+              -117.4316,
+              34.15065
+            ],
+            [
+              -117.4191,
+              34.1506
+            ],
+            [
+              -117.4192,
+              34.15575
+            ],
+            [
+              -117.4316,
+              34.1558
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Rialto (T3806)",
+        "type": "Import Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 320,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 800,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 160,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4249,
+              34.1533
+            ],
+            [
+              -117.42495,
+              34.15235
+            ],
+            [
+              -117.4241,
+              34.15235
+            ],
+            [
+              -117.42405,
+              34.1533
+            ],
+            [
+              -117.4249,
+              34.1533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Rialto (T3806)",
+        "type": "Import Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4271,
+              34.1554
+            ],
+            [
+              -117.4271,
+              34.1518
+            ],
+            [
+              -117.4236,
+              34.1518
+            ],
+            [
+              -117.4236,
+              34.1554
+            ],
+            [
+              -117.4271,
+              34.1554
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Rialto (T3806)",
+        "type": "Import Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4223,
+              34.15555
+            ],
+            [
+              -117.4223,
+              34.1509
+            ],
+            [
+              -117.4205,
+              34.1509
+            ],
+            [
+              -117.4205,
+              34.15555
+            ],
+            [
+              -117.4223,
+              34.15555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Rialto (T3806)",
+        "type": "Import Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4283,
+              34.15555
+            ],
+            [
+              -117.4283,
+              34.15095
+            ],
+            [
+              -117.4279,
+              34.15095
+            ],
+            [
+              -117.4279,
+              34.15555
+            ],
+            [
+              -117.4283,
+              34.15555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Rialto (T3806)",
+        "type": "Import Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4233,
+              34.15555
+            ],
+            [
+              -117.4233,
+              34.15095
+            ],
+            [
+              -117.4229,
+              34.15095
+            ],
+            [
+              -117.4229,
+              34.15555
+            ],
+            [
+              -117.4233,
+              34.15555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Distribution Center Rialto (T3806)",
+        "type": "Import Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.667,
+              36.7109
+            ],
+            [
+              -76.667,
+              36.7092
+            ],
+            [
+              -76.6656,
+              36.7075
+            ],
+            [
+              -76.6615,
+              36.7037
+            ],
+            [
+              -76.6602,
+              36.7042
+            ],
+            [
+              -76.6606,
+              36.7072
+            ],
+            [
+              -76.6618,
+              36.7115
+            ],
+            [
+              -76.6633,
+              36.711
+            ],
+            [
+              -76.667,
+              36.7109
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Suffolk (T3841)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 74.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.667,
+              36.7111
+            ],
+            [
+              -76.6673,
+              36.7103
+            ],
+            [
+              -76.6664,
+              36.7102
+            ],
+            [
+              -76.6661,
+              36.711
+            ],
+            [
+              -76.667,
+              36.7111
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Suffolk (T3841)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6629,
+              36.7101
+            ],
+            [
+              -76.6613,
+              36.7043
+            ],
+            [
+              -76.6603,
+              36.7047
+            ],
+            [
+              -76.6617,
+              36.7109
+            ],
+            [
+              -76.6629,
+              36.7101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Suffolk (T3841)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6643,
+              36.7101
+            ],
+            [
+              -76.6613,
+              36.7039
+            ],
+            [
+              -76.6605,
+              36.7041
+            ],
+            [
+              -76.6635,
+              36.7103
+            ],
+            [
+              -76.6643,
+              36.7101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Import Warehouse Suffolk (T3841)",
+        "type": "Import Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3444,
+              39.78645
+            ],
+            [
+              -75.3452,
+              39.7856
+            ],
+            [
+              -75.3456,
+              39.7849
+            ],
+            [
+              -75.34565,
+              39.77895
+            ],
+            [
+              -75.3427,
+              39.77735
+            ],
+            [
+              -75.3416,
+              39.77785
+            ],
+            [
+              -75.34315,
+              39.7806
+            ],
+            [
+              -75.3432,
+              39.7856
+            ],
+            [
+              -75.3444,
+              39.78645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Logan Township (T3857)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.34235,
+              39.7788
+            ],
+            [
+              -75.34255,
+              39.77835
+            ],
+            [
+              -75.34195,
+              39.7782
+            ],
+            [
+              -75.34175,
+              39.77865
+            ],
+            [
+              -75.34235,
+              39.7788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Logan Township (T3857)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3445,
+              39.78635
+            ],
+            [
+              -75.34535,
+              39.7849
+            ],
+            [
+              -75.3441,
+              39.78415
+            ],
+            [
+              -75.34325,
+              39.7856
+            ],
+            [
+              -75.3445,
+              39.78635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Logan Township (T3857)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3454,
+              39.7846
+            ],
+            [
+              -75.34555,
+              39.7792
+            ],
+            [
+              -75.3452,
+              39.77905
+            ],
+            [
+              -75.34505,
+              39.7844
+            ],
+            [
+              -75.3454,
+              39.7846
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Logan Township (T3857)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.48345,
+              34.11385
+            ],
+            [
+              -117.48345,
+              34.11185
+            ],
+            [
+              -117.4828,
+              34.1101
+            ],
+            [
+              -117.4805,
+              34.1098
+            ],
+            [
+              -117.47785,
+              34.11
+            ],
+            [
+              -117.4772,
+              34.1119
+            ],
+            [
+              -117.48155,
+              34.1136
+            ],
+            [
+              -117.48345,
+              34.11385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Fontana (T0553)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 46.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.48278,
+              34.11062
+            ],
+            [
+              -117.48293,
+              34.11047
+            ],
+            [
+              -117.4827,
+              34.11033
+            ],
+            [
+              -117.48255,
+              34.11048
+            ],
+            [
+              -117.48278,
+              34.11062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Fontana (T0553)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4792,
+              34.11125
+            ],
+            [
+              -117.47976,
+              34.1106
+            ],
+            [
+              -117.47845,
+              34.10995
+            ],
+            [
+              -117.4779,
+              34.1106
+            ],
+            [
+              -117.4792,
+              34.11125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Fontana (T0553)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4833,
+              34.11195
+            ],
+            [
+              -117.4837,
+              34.1114
+            ],
+            [
+              -117.48285,
+              34.111
+            ],
+            [
+              -117.48245,
+              34.11155
+            ],
+            [
+              -117.4833,
+              34.11195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Fontana (T0553)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.48102,
+              34.11118
+            ],
+            [
+              -117.4812,
+              34.11106
+            ],
+            [
+              -117.47823,
+              34.10976
+            ],
+            [
+              -117.47805,
+              34.10988
+            ],
+            [
+              -117.48102,
+              34.11118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Fontana (T0553)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.48168,
+              34.11325
+            ],
+            [
+              -117.48193,
+              34.11316
+            ],
+            [
+              -117.4812,
+              34.11139
+            ],
+            [
+              -117.48095,
+              34.11148
+            ],
+            [
+              -117.48168,
+              34.11325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Fontana (T0553)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.18865,
+              35.44265
+            ],
+            [
+              -119.1809,
+              35.4425
+            ],
+            [
+              -119.18085,
+              35.44765
+            ],
+            [
+              -119.1887,
+              35.44775
+            ],
+            [
+              -119.18865,
+              35.44265
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Shafter (T0593)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 99.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.18855,
+              35.4456
+            ],
+            [
+              -119.18857,
+              35.4452
+            ],
+            [
+              -119.188,
+              35.44519
+            ],
+            [
+              -119.18798,
+              35.44559
+            ],
+            [
+              -119.18855,
+              35.4456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Shafter (T0593)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.1884,
+              35.44485
+            ],
+            [
+              -119.181,
+              35.4448
+            ],
+            [
+              -119.18105,
+              35.44762
+            ],
+            [
+              -119.18845,
+              35.4477
+            ],
+            [
+              -119.1884,
+              35.44485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Shafter (T0593)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.1883,
+              35.44455
+            ],
+            [
+              -119.18109,
+              35.44448
+            ],
+            [
+              -119.1811,
+              35.44478
+            ],
+            [
+              -119.18831,
+              35.44485
+            ],
+            [
+              -119.1883,
+              35.44455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Shafter (T0593)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.85195,
+              34.6483
+            ],
+            [
+              -86.85205,
+              34.64305
+            ],
+            [
+              -86.84585,
+              34.6431
+            ],
+            [
+              -86.8448,
+              34.6443
+            ],
+            [
+              -86.8452,
+              34.648
+            ],
+            [
+              -86.85195,
+              34.6483
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Madison (T0580)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 88.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.84605,
+              34.64445
+            ],
+            [
+              -86.8462,
+              34.64375
+            ],
+            [
+              -86.8449,
+              34.6436
+            ],
+            [
+              -86.8447,
+              34.6443
+            ],
+            [
+              -86.84605,
+              34.64445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Madison (T0580)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8518,
+              34.6479
+            ],
+            [
+              -86.8519,
+              34.6462
+            ],
+            [
+              -86.84575,
+              34.646
+            ],
+            [
+              -86.8456,
+              34.6476
+            ],
+            [
+              -86.8518,
+              34.6479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Madison (T0580)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8518,
+              34.646
+            ],
+            [
+              -86.85185,
+              34.64575
+            ],
+            [
+              -86.84565,
+              34.6456
+            ],
+            [
+              -86.8456,
+              34.64585
+            ],
+            [
+              -86.8518,
+              34.646
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Madison (T0580)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.845,
+              34.64755
+            ],
+            [
+              -86.8449,
+              34.6447
+            ],
+            [
+              -86.8445,
+              34.6447
+            ],
+            [
+              -86.8446,
+              34.64755
+            ],
+            [
+              -86.845,
+              34.64755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Madison (T0580)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5232,
+              31.4249
+            ],
+            [
+              -83.5242,
+              31.4223
+            ],
+            [
+              -83.5238,
+              31.4177
+            ],
+            [
+              -83.5214,
+              31.4172
+            ],
+            [
+              -83.5188,
+              31.4206
+            ],
+            [
+              -83.5192,
+              31.4243
+            ],
+            [
+              -83.5232,
+              31.4249
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tifton (T0556)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 83.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.51985,
+              31.424
+            ],
+            [
+              -83.52,
+              31.4236
+            ],
+            [
+              -83.5195,
+              31.42345
+            ],
+            [
+              -83.51935,
+              31.42385
+            ],
+            [
+              -83.51985,
+              31.424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tifton (T0556)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5232,
+              31.4206
+            ],
+            [
+              -83.5245,
+              31.4194
+            ],
+            [
+              -83.5233,
+              31.4176
+            ],
+            [
+              -83.52195,
+              31.4188
+            ],
+            [
+              -83.5232,
+              31.4206
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tifton (T0556)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.522,
+              31.4233
+            ],
+            [
+              -83.52195,
+              31.4229
+            ],
+            [
+              -83.51955,
+              31.42305
+            ],
+            [
+              -83.5196,
+              31.42345
+            ],
+            [
+              -83.522,
+              31.4233
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tifton (T0556)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.52345,
+              31.42235
+            ],
+            [
+              -83.5238,
+              31.42205
+            ],
+            [
+              -83.52195,
+              31.4195
+            ],
+            [
+              -83.5216,
+              31.4198
+            ],
+            [
+              -83.52345,
+              31.42235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tifton (T0556)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.29985,
+              39.74875
+            ],
+            [
+              -86.299,
+              39.7449
+            ],
+            [
+              -86.2956,
+              39.74455
+            ],
+            [
+              -86.2905,
+              39.74435
+            ],
+            [
+              -86.2907,
+              39.7466
+            ],
+            [
+              -86.2913,
+              39.7484
+            ],
+            [
+              -86.29985,
+              39.74875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Indianapolis (T0559)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 72,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.29775,
+              39.74865
+            ],
+            [
+              -86.29775,
+              39.7482
+            ],
+            [
+              -86.29735,
+              39.7482
+            ],
+            [
+              -86.29735,
+              39.74865
+            ],
+            [
+              -86.29775,
+              39.74865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Indianapolis (T0559)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.299,
+              39.74835
+            ],
+            [
+              -86.299,
+              39.7447
+            ],
+            [
+              -86.2976,
+              39.7447
+            ],
+            [
+              -86.2976,
+              39.74835
+            ],
+            [
+              -86.299,
+              39.74835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Indianapolis (T0559)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2947,
+              39.7465
+            ],
+            [
+              -86.2949,
+              39.7447
+            ],
+            [
+              -86.2915,
+              39.7448
+            ],
+            [
+              -86.2913,
+              39.7465
+            ],
+            [
+              -86.2947,
+              39.7465
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Indianapolis (T0559)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2976,
+              39.7487
+            ],
+            [
+              -86.2976,
+              39.74855
+            ],
+            [
+              -86.292,
+              39.74855
+            ],
+            [
+              -86.292,
+              39.7487
+            ],
+            [
+              -86.2976,
+              39.7487
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Indianapolis (T0559)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2977,
+              39.7484
+            ],
+            [
+              -86.2977,
+              39.7448
+            ],
+            [
+              -86.2975,
+              39.7448
+            ],
+            [
+              -86.2975,
+              39.7484
+            ],
+            [
+              -86.2977,
+              39.7484
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Indianapolis (T0559)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.00115,
+              38.03235
+            ],
+            [
+              -79.0011,
+              38.02855
+            ],
+            [
+              -78.9949,
+              38.0287
+            ],
+            [
+              -78.9952,
+              38.03238
+            ],
+            [
+              -79.00115,
+              38.03235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9956,
+              38.0296
+            ],
+            [
+              -78.99565,
+              38.0291
+            ],
+            [
+              -78.99495,
+              38.02905
+            ],
+            [
+              -78.9949,
+              38.02955
+            ],
+            [
+              -78.9956,
+              38.0296
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.0011,
+              38.02955
+            ],
+            [
+              -79.00105,
+              38.02875
+            ],
+            [
+              -78.9965,
+              38.0288
+            ],
+            [
+              -78.99655,
+              38.0296
+            ],
+            [
+              -79.0011,
+              38.02955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.0012,
+              38.02985
+            ],
+            [
+              -79.0012,
+              38.02965
+            ],
+            [
+              -78.99625,
+              38.02968
+            ],
+            [
+              -78.99625,
+              38.02988
+            ],
+            [
+              -79.0012,
+              38.02985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+        "type": "RDC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.41545,
+              32.46765
+            ],
+            [
+              -95.4153,
+              32.4631
+            ],
+            [
+              -95.4108,
+              32.463
+            ],
+            [
+              -95.4069,
+              32.4633
+            ],
+            [
+              -95.4072,
+              32.46775
+            ],
+            [
+              -95.4106,
+              32.46778
+            ],
+            [
+              -95.41545,
+              32.46765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 97,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4156,
+              32.4676
+            ],
+            [
+              -95.41565,
+              32.46705
+            ],
+            [
+              -95.4144,
+              32.467
+            ],
+            [
+              -95.41435,
+              32.46755
+            ],
+            [
+              -95.4156,
+              32.4676
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4142,
+              32.46758
+            ],
+            [
+              -95.4141,
+              32.4664
+            ],
+            [
+              -95.40755,
+              32.4665
+            ],
+            [
+              -95.4076,
+              32.46768
+            ],
+            [
+              -95.4142,
+              32.46758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.40775,
+              32.4662
+            ],
+            [
+              -95.40775,
+              32.4634
+            ],
+            [
+              -95.40695,
+              32.46345
+            ],
+            [
+              -95.407,
+              32.46625
+            ],
+            [
+              -95.40775,
+              32.4662
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.415,
+              32.4664
+            ],
+            [
+              -95.41498,
+              32.4661
+            ],
+            [
+              -95.40788,
+              32.46625
+            ],
+            [
+              -95.4079,
+              32.46655
+            ],
+            [
+              -95.415,
+              32.4664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.40788,
+              32.4661
+            ],
+            [
+              -95.40785,
+              32.46347
+            ],
+            [
+              -95.40755,
+              32.4635
+            ],
+            [
+              -95.40758,
+              32.46615
+            ],
+            [
+              -95.40788,
+              32.4661
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4144,
+              32.467
+            ],
+            [
+              -95.4144,
+              32.46655
+            ],
+            [
+              -95.411,
+              32.4666
+            ],
+            [
+              -95.411,
+              32.46705
+            ],
+            [
+              -95.4144,
+              32.467
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Tyler (T0578)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6788,
+              39.8915
+            ],
+            [
+              -77.6792,
+              39.8854
+            ],
+            [
+              -77.6764,
+              39.8841
+            ],
+            [
+              -77.6708,
+              39.8845
+            ],
+            [
+              -77.6725,
+              39.8913
+            ],
+            [
+              -77.6788,
+              39.8915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Chambersburg (T0589)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 120.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6782,
+              39.8846
+            ],
+            [
+              -77.67825,
+              39.88415
+            ],
+            [
+              -77.67725,
+              39.8841
+            ],
+            [
+              -77.6772,
+              39.88455
+            ],
+            [
+              -77.6782,
+              39.8846
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Chambersburg (T0589)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6785,
+              39.8911
+            ],
+            [
+              -77.6788,
+              39.8856
+            ],
+            [
+              -77.6743,
+              39.8862
+            ],
+            [
+              -77.6756,
+              39.8909
+            ],
+            [
+              -77.6785,
+              39.8911
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Chambersburg (T0589)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6752,
+              39.8908
+            ],
+            [
+              -77.674,
+              39.88555
+            ],
+            [
+              -77.6734,
+              39.8856
+            ],
+            [
+              -77.6746,
+              39.8907
+            ],
+            [
+              -77.6752,
+              39.8908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Chambersburg (T0589)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2149,
+              33.45075
+            ],
+            [
+              -112.22225,
+              33.45078
+            ],
+            [
+              -112.2223,
+              33.446
+            ],
+            [
+              -112.2149,
+              33.44578
+            ],
+            [
+              -112.2149,
+              33.45075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Phoenix (T0588)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 88,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2156,
+              33.4511
+            ],
+            [
+              -112.2156,
+              33.45008
+            ],
+            [
+              -112.21482,
+              33.4501
+            ],
+            [
+              -112.2148,
+              33.45112
+            ],
+            [
+              -112.2156,
+              33.4511
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Phoenix (T0588)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2162,
+              33.45055
+            ],
+            [
+              -112.2221,
+              33.4506
+            ],
+            [
+              -112.22215,
+              33.44905
+            ],
+            [
+              -112.2162,
+              33.449
+            ],
+            [
+              -112.2162,
+              33.45055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Phoenix (T0588)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2156,
+              33.449
+            ],
+            [
+              -112.22215,
+              33.44903
+            ],
+            [
+              -112.22215,
+              33.44875
+            ],
+            [
+              -112.2156,
+              33.44872
+            ],
+            [
+              -112.2156,
+              33.449
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Phoenix (T0588)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6813,
+              34.1821
+            ],
+            [
+              -80.6826,
+              34.179
+            ],
+            [
+              -80.6823,
+              34.1764
+            ],
+            [
+              -80.6797,
+              34.1758
+            ],
+            [
+              -80.6774,
+              34.177
+            ],
+            [
+              -80.6766,
+              34.1798
+            ],
+            [
+              -80.6784,
+              34.1812
+            ],
+            [
+              -80.6796,
+              34.18175
+            ],
+            [
+              -80.6813,
+              34.1821
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Lugoff (T0594)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 238,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 1200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.68285,
+              34.1779
+            ],
+            [
+              -80.683,
+              34.1775
+            ],
+            [
+              -80.6824,
+              34.17735
+            ],
+            [
+              -80.68225,
+              34.17775
+            ],
+            [
+              -80.68285,
+              34.1779
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Lugoff (T0594)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6783,
+              34.1812
+            ],
+            [
+              -80.6796,
+              34.1788
+            ],
+            [
+              -80.6779,
+              34.1776
+            ],
+            [
+              -80.6768,
+              34.18
+            ],
+            [
+              -80.6783,
+              34.1812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Lugoff (T0594)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.68155,
+              34.1803
+            ],
+            [
+              -80.682,
+              34.1801
+            ],
+            [
+              -80.6808,
+              34.1771
+            ],
+            [
+              -80.68035,
+              34.1773
+            ],
+            [
+              -80.68155,
+              34.1803
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Lugoff (T0594)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6789,
+              34.1811
+            ],
+            [
+              -80.6793,
+              34.18095
+            ],
+            [
+              -80.68,
+              34.17875
+            ],
+            [
+              -80.6796,
+              34.1789
+            ],
+            [
+              -80.6789,
+              34.1811
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Lugoff (T0594)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.47985,
+              43.08135
+            ],
+            [
+              -88.47985,
+              43.0769
+            ],
+            [
+              -88.4772,
+              43.07685
+            ],
+            [
+              -88.47455,
+              43.0772
+            ],
+            [
+              -88.4746,
+              43.0814
+            ],
+            [
+              -88.47985,
+              43.08135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+        "type": "RDC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4777,
+              43.07705
+            ],
+            [
+              -88.4777,
+              43.0767
+            ],
+            [
+              -88.47715,
+              43.0767
+            ],
+            [
+              -88.47715,
+              43.07705
+            ],
+            [
+              -88.4777,
+              43.07705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+        "type": "RDC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4764,
+              43.07995
+            ],
+            [
+              -88.47635,
+              43.07735
+            ],
+            [
+              -88.4746,
+              43.07735
+            ],
+            [
+              -88.47465,
+              43.07995
+            ],
+            [
+              -88.4764,
+              43.07995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+        "type": "RDC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4793,
+              43.08
+            ],
+            [
+              -88.4793,
+              43.0793
+            ],
+            [
+              -88.4766,
+              43.0793
+            ],
+            [
+              -88.4766,
+              43.08
+            ],
+            [
+              -88.4793,
+              43.08
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+        "type": "RDC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.4793,
+              43.0784
+            ],
+            [
+              -88.4793,
+              43.0777
+            ],
+            [
+              -88.4766,
+              43.0777
+            ],
+            [
+              -88.4766,
+              43.0784
+            ],
+            [
+              -88.4793,
+              43.0784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+        "type": "RDC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.117,
+              44.5781
+            ],
+            [
+              -123.11075,
+              44.57795
+            ],
+            [
+              -123.1108,
+              44.57955
+            ],
+            [
+              -123.1115,
+              44.58265
+            ],
+            [
+              -123.11185,
+              44.5829
+            ],
+            [
+              -123.1151,
+              44.58285
+            ],
+            [
+              -123.1168,
+              44.58235
+            ],
+            [
+              -123.11705,
+              44.5808
+            ],
+            [
+              -123.117,
+              44.5781
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Albany (T0558)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 61.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.111,
+              44.5802
+            ],
+            [
+              -123.11105,
+              44.5794
+            ],
+            [
+              -123.11055,
+              44.5794
+            ],
+            [
+              -123.1105,
+              44.5802
+            ],
+            [
+              -123.111,
+              44.5802
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Albany (T0558)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1151,
+              44.58285
+            ],
+            [
+              -123.11515,
+              44.5809
+            ],
+            [
+              -123.11185,
+              44.58095
+            ],
+            [
+              -123.11185,
+              44.58288
+            ],
+            [
+              -123.1151,
+              44.58285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Albany (T0558)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1165,
+              44.58085
+            ],
+            [
+              -123.1165,
+              44.5805
+            ],
+            [
+              -123.1115,
+              44.5804
+            ],
+            [
+              -123.1115,
+              44.58075
+            ],
+            [
+              -123.1165,
+              44.58085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Albany (T0558)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.111,
+              44.5796
+            ],
+            [
+              -123.111,
+              44.5787
+            ],
+            [
+              -123.1105,
+              44.5787
+            ],
+            [
+              -123.1105,
+              44.5796
+            ],
+            [
+              -123.111,
+              44.5796
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Albany (T0558)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.7199,
+              43.1813
+            ],
+            [
+              -73.7206,
+              43.1788
+            ],
+            [
+              -73.718,
+              43.1748
+            ],
+            [
+              -73.7172,
+              43.1726
+            ],
+            [
+              -73.7153,
+              43.1712
+            ],
+            [
+              -73.7135,
+              43.172
+            ],
+            [
+              -73.7143,
+              43.1743
+            ],
+            [
+              -73.7137,
+              43.1764
+            ],
+            [
+              -73.7179,
+              43.18095
+            ],
+            [
+              -73.7199,
+              43.1813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Wilton (T0579)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.7177,
+              43.1752
+            ],
+            [
+              -73.7178,
+              43.17475
+            ],
+            [
+              -73.7173,
+              43.1747
+            ],
+            [
+              -73.7172,
+              43.17515
+            ],
+            [
+              -73.7177,
+              43.1752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Wilton (T0579)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.7153,
+              43.1739
+            ],
+            [
+              -73.7158,
+              43.1723
+            ],
+            [
+              -73.7144,
+              43.1717
+            ],
+            [
+              -73.7139,
+              43.1733
+            ],
+            [
+              -73.7153,
+              43.1739
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Wilton (T0579)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.717,
+              43.1748
+            ],
+            [
+              -73.7176,
+              43.1732
+            ],
+            [
+              -73.7162,
+              43.1728
+            ],
+            [
+              -73.7156,
+              43.1744
+            ],
+            [
+              -73.717,
+              43.1748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Wilton (T0579)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.7188,
+              43.1806
+            ],
+            [
+              -73.7164,
+              43.1754
+            ],
+            [
+              -73.7157,
+              43.1756
+            ],
+            [
+              -73.7183,
+              43.1803
+            ],
+            [
+              -73.7188,
+              43.1806
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Wilton (T0579)",
+        "type": "RDC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.38255,
+              42.27905
+            ],
+            [
+              -85.38455,
+              42.27855
+            ],
+            [
+              -85.38475,
+              42.2764
+            ],
+            [
+              -85.3847,
+              42.2744
+            ],
+            [
+              -85.3812,
+              42.27435
+            ],
+            [
+              -85.37965,
+              42.27465
+            ],
+            [
+              -85.3793,
+              42.27575
+            ],
+            [
+              -85.37925,
+              42.27845
+            ],
+            [
+              -85.37945,
+              42.2789
+            ],
+            [
+              -85.38255,
+              42.27905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Galesburg (T0587)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 92,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.37915,
+              42.2754
+            ],
+            [
+              -85.3792,
+              42.27505
+            ],
+            [
+              -85.3788,
+              42.275
+            ],
+            [
+              -85.37875,
+              42.27535
+            ],
+            [
+              -85.37915,
+              42.2754
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Galesburg (T0587)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.38255,
+              42.27895
+            ],
+            [
+              -85.3826,
+              42.2783
+            ],
+            [
+              -85.3806,
+              42.27815
+            ],
+            [
+              -85.38055,
+              42.2788
+            ],
+            [
+              -85.38255,
+              42.27895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Galesburg (T0587)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.384,
+              42.27815
+            ],
+            [
+              -85.38405,
+              42.27745
+            ],
+            [
+              -85.38285,
+              42.2774
+            ],
+            [
+              -85.3828,
+              42.2781
+            ],
+            [
+              -85.384,
+              42.27815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Galesburg (T0587)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.3844,
+              42.278
+            ],
+            [
+              -85.38435,
+              42.2776
+            ],
+            [
+              -85.38035,
+              42.27775
+            ],
+            [
+              -85.3804,
+              42.27815
+            ],
+            [
+              -85.3844,
+              42.278
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Galesburg (T0587)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.37935,
+              42.2784
+            ],
+            [
+              -85.3798,
+              42.2784
+            ],
+            [
+              -85.37995,
+              42.27575
+            ],
+            [
+              -85.3795,
+              42.2758
+            ],
+            [
+              -85.37935,
+              42.2784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Regional Distribution Center Galesburg (T0587)",
+        "type": "RDC",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.47025,
+              38.28245
+            ],
+            [
+              -104.46965,
+              38.27695
+            ],
+            [
+              -104.4667,
+              38.2769
+            ],
+            [
+              -104.4639,
+              38.27705
+            ],
+            [
+              -104.4636,
+              38.2776
+            ],
+            [
+              -104.46375,
+              38.28235
+            ],
+            [
+              -104.47025,
+              38.28245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 82,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.46545,
+              38.28272
+            ],
+            [
+              -104.46558,
+              38.2813
+            ],
+            [
+              -104.46498,
+              38.2813
+            ],
+            [
+              -104.46485,
+              38.28272
+            ],
+            [
+              -104.46545,
+              38.28272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.4656,
+              38.28205
+            ],
+            [
+              -104.46553,
+              38.2784
+            ],
+            [
+              -104.46368,
+              38.2784
+            ],
+            [
+              -104.46375,
+              38.28205
+            ],
+            [
+              -104.4656,
+              38.28205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.46615,
+              38.27815
+            ],
+            [
+              -104.4662,
+              38.27695
+            ],
+            [
+              -104.464,
+              38.27695
+            ],
+            [
+              -104.46395,
+              38.27815
+            ],
+            [
+              -104.46615,
+              38.27815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.46588,
+              38.2821
+            ],
+            [
+              -104.46578,
+              38.27845
+            ],
+            [
+              -104.46548,
+              38.27845
+            ],
+            [
+              -104.46558,
+              38.2821
+            ],
+            [
+              -104.46588,
+              38.2821
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.4672,
+              38.27838
+            ],
+            [
+              -104.4672,
+              38.27812
+            ],
+            [
+              -104.46455,
+              38.27812
+            ],
+            [
+              -104.46455,
+              38.27838
+            ],
+            [
+              -104.4672,
+              38.27838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.46555,
+              38.28258
+            ],
+            [
+              -104.4656,
+              38.2821
+            ],
+            [
+              -104.4649,
+              38.2821
+            ],
+            [
+              -104.46485,
+              38.28258
+            ],
+            [
+              -104.46555,
+              38.28258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Flow Center Pueblo (T0554)",
+        "type": "Flow Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.47215,
+              42.4784
+            ],
+            [
+              -92.4723,
+              42.477
+            ],
+            [
+              -92.4722,
+              42.475
+            ],
+            [
+              -92.47075,
+              42.4748
+            ],
+            [
+              -92.46862,
+              42.4752
+            ],
+            [
+              -92.4685,
+              42.47595
+            ],
+            [
+              -92.46895,
+              42.47835
+            ],
+            [
+              -92.4701,
+              42.47855
+            ],
+            [
+              -92.47215,
+              42.4784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Cedar Falls (T0590)",
+        "type": "Food Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 58,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4698,
+              42.47578
+            ],
+            [
+              -92.46985,
+              42.4754
+            ],
+            [
+              -92.46912,
+              42.47535
+            ],
+            [
+              -92.46905,
+              42.47572
+            ],
+            [
+              -92.4698,
+              42.47578
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Cedar Falls (T0590)",
+        "type": "Food Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.47205,
+              42.47505
+            ],
+            [
+              -92.47208,
+              42.47485
+            ],
+            [
+              -92.4698,
+              42.47478
+            ],
+            [
+              -92.46975,
+              42.47498
+            ],
+            [
+              -92.47205,
+              42.47505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Cedar Falls (T0590)",
+        "type": "Food Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.47195,
+              42.4782
+            ],
+            [
+              -92.47198,
+              42.478
+            ],
+            [
+              -92.46988,
+              42.47792
+            ],
+            [
+              -92.46985,
+              42.47812
+            ],
+            [
+              -92.47195,
+              42.4782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Cedar Falls (T0590)",
+        "type": "Food Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4719,
+              42.47555
+            ],
+            [
+              -92.47193,
+              42.47535
+            ],
+            [
+              -92.46996,
+              42.47528
+            ],
+            [
+              -92.46992,
+              42.47548
+            ],
+            [
+              -92.4719,
+              42.47555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Cedar Falls (T0590)",
+        "type": "Food Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3537,
+              39.9474
+            ],
+            [
+              -83.354,
+              39.9462
+            ],
+            [
+              -83.3536,
+              39.9456
+            ],
+            [
+              -83.3486,
+              39.945
+            ],
+            [
+              -83.3478,
+              39.9456
+            ],
+            [
+              -83.3483,
+              39.94745
+            ],
+            [
+              -83.35,
+              39.94772
+            ],
+            [
+              -83.3537,
+              39.9474
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center West Jefferson (T3804)",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3488,
+              39.94705
+            ],
+            [
+              -83.3486,
+              39.9466
+            ],
+            [
+              -83.3478,
+              39.94675
+            ],
+            [
+              -83.348,
+              39.9472
+            ],
+            [
+              -83.3488,
+              39.94705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center West Jefferson (T3804)",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3526,
+              39.9478
+            ],
+            [
+              -83.3525,
+              39.9474
+            ],
+            [
+              -83.3485,
+              39.94748
+            ],
+            [
+              -83.3487,
+              39.948
+            ],
+            [
+              -83.3526,
+              39.9478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center West Jefferson (T3804)",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3533,
+              39.9473
+            ],
+            [
+              -83.35325,
+              39.94708
+            ],
+            [
+              -83.35005,
+              39.94718
+            ],
+            [
+              -83.3501,
+              39.94742
+            ],
+            [
+              -83.3533,
+              39.9473
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center West Jefferson (T3804)",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.6388,
+              30.2356
+            ],
+            [
+              -82.639,
+              30.2295
+            ],
+            [
+              -82.6358,
+              30.2287
+            ],
+            [
+              -82.6345,
+              30.2288
+            ],
+            [
+              -82.6332,
+              30.23
+            ],
+            [
+              -82.634,
+              30.2352
+            ],
+            [
+              -82.6388,
+              30.2356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Lake City",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 89.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.6356,
+              30.2289
+            ],
+            [
+              -82.6351,
+              30.2289
+            ],
+            [
+              -82.6344,
+              30.2311
+            ],
+            [
+              -82.6349,
+              30.2312
+            ],
+            [
+              -82.6356,
+              30.2289
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Lake City",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.6388,
+              30.2348
+            ],
+            [
+              -82.6387,
+              30.2302
+            ],
+            [
+              -82.638,
+              30.2302
+            ],
+            [
+              -82.6382,
+              30.2348
+            ],
+            [
+              -82.6388,
+              30.2348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Lake City",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.638,
+              30.2348
+            ],
+            [
+              -82.6378,
+              30.2302
+            ],
+            [
+              -82.6371,
+              30.2302
+            ],
+            [
+              -82.6373,
+              30.2348
+            ],
+            [
+              -82.638,
+              30.2348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Lake City",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.6347,
+              30.234
+            ],
+            [
+              -82.6346,
+              30.2305
+            ],
+            [
+              -82.6341,
+              30.2305
+            ],
+            [
+              -82.6342,
+              30.234
+            ],
+            [
+              -82.6347,
+              30.234
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Lake City",
+        "type": "Food Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.1817,
+              33.2016
+            ],
+            [
+              -97.18155,
+              33.1984
+            ],
+            [
+              -97.1785,
+              33.1984
+            ],
+            [
+              -97.17775,
+              33.1995
+            ],
+            [
+              -97.1779,
+              33.20155
+            ],
+            [
+              -97.1817,
+              33.2016
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Denton",
+        "type": "Food Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.1788,
+              33.20098
+            ],
+            [
+              -97.17884,
+              33.20066
+            ],
+            [
+              -97.17824,
+              33.2006
+            ],
+            [
+              -97.1782,
+              33.20092
+            ],
+            [
+              -97.1788,
+              33.20098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Denton",
+        "type": "Food Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.1792,
+              33.2007
+            ],
+            [
+              -97.17948,
+              33.19862
+            ],
+            [
+              -97.1783,
+              33.1985
+            ],
+            [
+              -97.178,
+              33.20055
+            ],
+            [
+              -97.1792,
+              33.2007
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Denton",
+        "type": "Food Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.17985,
+              33.20055
+            ],
+            [
+              -97.18015,
+              33.19856
+            ],
+            [
+              -97.17965,
+              33.19852
+            ],
+            [
+              -97.17935,
+              33.2005
+            ],
+            [
+              -97.17985,
+              33.20055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "target",
+        "name": "Target Food Distribution Center Denton",
+        "type": "Food Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

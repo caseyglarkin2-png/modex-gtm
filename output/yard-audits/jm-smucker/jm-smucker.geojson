@@ -8,24 +8,32 @@
         "coordinates": [
           [
             [
-              -89.914,
-              30.0312
+              -89.914359,
+              30.035878
             ],
             [
-              -89.9082,
-              30.0312
+              -89.915595,
+              30.033738
             ],
             [
-              -89.9082,
-              30.036
+              -89.91532,
+              30.030171
             ],
             [
-              -89.914,
-              30.036
+              -89.907355,
+              30.02815
             ],
             [
-              -89.914,
-              30.0312
+              -89.905295,
+              30.034808
+            ],
+            [
+              -89.909552,
+              30.036234
+            ],
+            [
+              -89.914359,
+              30.035878
             ]
           ]
         ]
@@ -68,63 +76,24 @@
         "coordinates": [
           [
             [
-              -89.91375,
-              30.03145
+              -89.9112,
+              30.034689
             ],
             [
-              -89.91325,
-              30.03145
+              -89.911475,
+              30.032549
             ],
             [
-              -89.91325,
-              30.03175
+              -89.905707,
+              30.032073
             ],
             [
-              -89.91375,
-              30.03175
-            ],
-            [
-              -89.91375,
-              30.03145
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Coffee Roasting - New Orleans LA",
-        "type": "Manufacturing - Coffee roasting/packaging (bulk)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.91185,
-              30.03255
+              -89.905295,
+              30.034808
             ],
             [
               -89.9112,
-              30.03255
-            ],
-            [
-              -89.9112,
-              30.033
-            ],
-            [
-              -89.91185,
-              30.033
-            ],
-            [
-              -89.91185,
-              30.03255
+              30.034689
             ]
           ]
         ]
@@ -147,24 +116,24 @@
         "coordinates": [
           [
             [
-              -89.9124,
-              30.0326
+              -89.911475,
+              30.032073
             ],
             [
-              -89.911,
-              30.0326
+              -89.911749,
+              30.030171
             ],
             [
-              -89.911,
-              30.0331
+              -89.906531,
+              30.02922
             ],
             [
-              -89.9124,
-              30.0331
+              -89.905981,
+              30.031598
             ],
             [
-              -89.9124,
-              30.0326
+              -89.911475,
+              30.032073
             ]
           ]
         ]
@@ -176,47 +145,7 @@
         "archetype": "#9",
         "archetypeName": "Gate + No GS (remote check-in)",
         "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.9113,
-              30.03285
-            ],
-            [
-              -89.9102,
-              30.03285
-            ],
-            [
-              -89.9102,
-              30.0334
-            ],
-            [
-              -89.9113,
-              30.0334
-            ],
-            [
-              -89.9113,
-              30.03285
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Coffee Roasting - New Orleans LA",
-        "type": "Manufacturing - Coffee roasting/packaging (bulk)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
+        "zone": "dropYard",
         "index": 2
       }
     },
@@ -227,24 +156,24 @@
         "coordinates": [
           [
             [
-              -90.11305,
-              29.9132
+              -90.113299,
+              29.914852
             ],
             [
-              -90.1114,
-              29.9132
+              -90.113299,
+              29.913662
             ],
             [
-              -90.1114,
-              29.9146
+              -90.111788,
+              29.913662
             ],
             [
-              -90.11305,
-              29.9146
+              -90.111788,
+              29.914852
             ],
             [
-              -90.11305,
-              29.9132
+              -90.113299,
+              29.914852
             ]
           ]
         ]
@@ -287,24 +216,24 @@
         "coordinates": [
           [
             [
-              -90.113,
-              29.9137
+              -90.113882,
+              29.914674
             ],
             [
-              -90.1125,
-              29.9137
+              -90.113882,
+              29.91396
             ],
             [
-              -90.1125,
-              29.9144
+              -90.113367,
+              29.91396
             ],
             [
-              -90.113,
-              29.9144
+              -90.113367,
+              29.914674
             ],
             [
-              -90.113,
-              29.9137
+              -90.113882,
+              29.914674
             ]
           ]
         ]
@@ -327,64 +256,36 @@
         "coordinates": [
           [
             [
-              -90.1126,
-              29.91345
+              -87.061697,
+              33.303447
             ],
             [
-              -90.11175,
-              29.91345
+              -87.062659,
+              33.302184
             ],
             [
-              -90.11175,
-              29.91385
+              -87.062521,
+              33.299659
             ],
             [
-              -90.1126,
-              29.91385
+              -87.060049,
+              33.297823
             ],
             [
-              -90.1126,
-              29.91345
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Coffee Silo Operations - New Orleans LA",
-        "type": "Distribution/Processing - Green coffee bean silo operations",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.0632,
-              33.2969
+              -87.056479,
+              33.298741
             ],
             [
-              -87.0568,
-              33.2969
+              -87.056204,
+              33.301266
             ],
             [
-              -87.0568,
-              33.3024
+              -87.058401,
+              33.303217
             ],
             [
-              -87.0632,
-              33.3024
-            ],
-            [
-              -87.0632,
-              33.2969
+              -87.061697,
+              33.303447
             ]
           ]
         ]
@@ -427,24 +328,24 @@
         "coordinates": [
           [
             [
-              -87.058,
-              33.2984
+              -87.0595,
+              33.297823
             ],
             [
-              -87.0573,
-              33.2984
+              -87.0595,
+              33.296904
             ],
             [
-              -87.0573,
-              33.299
+              -87.058401,
+              33.296904
             ],
             [
-              -87.058,
-              33.299
+              -87.058401,
+              33.297823
             ],
             [
-              -87.058,
-              33.2984
+              -87.0595,
+              33.297823
             ]
           ]
         ]
@@ -466,64 +367,24 @@
         "coordinates": [
           [
             [
-              -87.0615,
-              33.2972
+              -87.061835,
+              33.2992
             ],
             [
-              -87.0603,
-              33.2972
+              -87.061972,
+              33.298511
             ],
             [
-              -87.0603,
-              33.2985
+              -87.057989,
+              33.297937
             ],
             [
-              -87.0615,
-              33.2985
+              -87.057852,
+              33.298626
             ],
             [
-              -87.0615,
-              33.2972
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - McCalla AL",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.0625,
-              33.2976
-            ],
-            [
-              -87.0608,
-              33.2976
-            ],
-            [
-              -87.0608,
-              33.3006
-            ],
-            [
-              -87.0625,
-              33.3006
-            ],
-            [
-              -87.0625,
-              33.2976
+              -87.061835,
+              33.2992
             ]
           ]
         ]
@@ -546,63 +407,24 @@
         "coordinates": [
           [
             [
-              -87.0588,
-              33.2976
+              -105.054835,
+              40.164735
             ],
             [
-              -87.0574,
-              33.2976
+              -105.055109,
+              40.162006
             ],
             [
-              -87.0574,
-              33.2989
+              -105.050577,
+              40.161691
             ],
             [
-              -87.0588,
-              33.2989
+              -105.050303,
+              40.16442
             ],
             [
-              -87.0588,
-              33.2976
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - McCalla AL",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -105.0555,
-              40.1608
-            ],
-            [
-              -105.049,
-              40.1608
-            ],
-            [
-              -105.049,
-              40.1668
-            ],
-            [
-              -105.0555,
-              40.1668
-            ],
-            [
-              -105.0555,
-              40.1608
+              -105.054835,
+              40.164735
             ]
           ]
         ]
@@ -645,103 +467,24 @@
         "coordinates": [
           [
             [
-              -105.055,
-              40.1617
+              -105.052912,
+              40.164525
             ],
             [
-              -105.05445,
-              40.1617
+              -105.053049,
+              40.163475
             ],
             [
-              -105.05445,
-              40.16215
+              -105.05044,
+              40.16337
             ],
             [
-              -105.055,
-              40.16215
+              -105.050303,
+              40.16442
             ],
             [
-              -105.055,
-              40.1617
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - Longmont CO",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -105.051,
-              40.1638
-            ],
-            [
-              -105.0492,
-              40.1638
-            ],
-            [
-              -105.0492,
-              40.1658
-            ],
-            [
-              -105.051,
-              40.1658
-            ],
-            [
-              -105.051,
-              40.1638
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - Longmont CO",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -105.0523,
-              40.1625
-            ],
-            [
-              -105.0508,
-              40.1625
-            ],
-            [
-              -105.0508,
-              40.1656
-            ],
-            [
-              -105.0523,
-              40.1656
-            ],
-            [
-              -105.0523,
-              40.1625
+              -105.052912,
+              40.164525
             ]
           ]
         ]
@@ -764,24 +507,28 @@
         "coordinates": [
           [
             [
-              -86.185,
-              36.7608
+              -86.183697,
+              36.76544
             ],
             [
-              -86.179,
-              36.7608
+              -86.184247,
+              36.76335
             ],
             [
-              -86.179,
-              36.7656
+              -86.182873,
+              36.7617
             ],
             [
-              -86.185,
-              36.7656
+              -86.180676,
+              36.76225
             ],
             [
-              -86.185,
-              36.7608
+              -86.180813,
+              36.76522
+            ],
+            [
+              -86.183697,
+              36.76544
             ]
           ]
         ]
@@ -824,143 +571,24 @@
         "coordinates": [
           [
             [
-              -86.1851,
-              36.76385
+              -86.182873,
+              36.76522
             ],
             [
-              -86.1846,
-              36.76385
+              -86.183011,
+              36.76445
             ],
             [
-              -86.1846,
-              36.76425
+              -86.180951,
+              36.76423
             ],
             [
-              -86.1851,
-              36.76425
-            ],
-            [
-              -86.1851,
-              36.76385
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - Scottsville KY",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.1812,
-              36.7636
-            ],
-            [
-              -86.1798,
-              36.7636
-            ],
-            [
-              -86.1798,
+              -86.180813,
               36.765
             ],
             [
-              -86.1812,
-              36.765
-            ],
-            [
-              -86.1812,
-              36.7636
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - Scottsville KY",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.1829,
-              36.7609
-            ],
-            [
-              -86.1816,
-              36.7609
-            ],
-            [
-              -86.1816,
-              36.7621
-            ],
-            [
-              -86.1829,
-              36.7621
-            ],
-            [
-              -86.1829,
-              36.7609
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - Scottsville KY",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.1842,
-              36.7638
-            ],
-            [
-              -86.183,
-              36.7638
-            ],
-            [
-              -86.183,
-              36.7648
-            ],
-            [
-              -86.1842,
-              36.7648
-            ],
-            [
-              -86.1842,
-              36.7638
+              -86.182873,
+              36.76522
             ]
           ]
         ]
@@ -983,64 +611,28 @@
         "coordinates": [
           [
             [
-              -86.1828,
-              36.763
+              -81.764345,
+              40.85154
             ],
             [
-              -86.1815,
-              36.763
+              -81.764895,
+              40.8478
             ],
             [
-              -86.1815,
-              36.7644
+              -81.762697,
+              40.84406
             ],
             [
-              -86.1828,
-              36.7644
+              -81.756105,
+              40.845307
             ],
             [
-              -86.1828,
-              36.763
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Uncrustables - Scottsville KY",
-        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7648,
-              40.8437
+              -81.757204,
+              40.85154
             ],
             [
-              -81.756,
-              40.8437
-            ],
-            [
-              -81.756,
-              40.8525
-            ],
-            [
-              -81.7648,
-              40.8525
-            ],
-            [
-              -81.7648,
-              40.8437
+              -81.764345,
+              40.85154
             ]
           ]
         ]
@@ -1083,143 +675,24 @@
         "coordinates": [
           [
             [
-              -81.7601,
-              40.84395
+              -81.759127,
+              40.846761
             ],
             [
-              -81.759,
-              40.84395
+              -81.759676,
+              40.845099
             ],
             [
-              -81.759,
-              40.84455
+              -81.756655,
+              40.844476
             ],
             [
-              -81.7601,
-              40.84455
+              -81.756105,
+              40.846138
             ],
             [
-              -81.7601,
-              40.84395
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Spreads/Toppings - Orrville OH",
-        "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7613,
-              40.8443
-            ],
-            [
-              -81.7588,
-              40.8443
-            ],
-            [
-              -81.7588,
-              40.8465
-            ],
-            [
-              -81.7613,
-              40.8465
-            ],
-            [
-              -81.7613,
-              40.8443
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Spreads/Toppings - Orrville OH",
-        "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7613,
-              40.8469
-            ],
-            [
-              -81.7598,
-              40.8469
-            ],
-            [
-              -81.7598,
-              40.8481
-            ],
-            [
-              -81.7613,
-              40.8481
-            ],
-            [
-              -81.7613,
-              40.8469
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Spreads/Toppings - Orrville OH",
-        "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7607,
-              40.8472
-            ],
-            [
-              -81.7598,
-              40.8472
-            ],
-            [
-              -81.7598,
-              40.849
-            ],
-            [
-              -81.7607,
-              40.849
-            ],
-            [
-              -81.7607,
-              40.8472
+              -81.759127,
+              40.846761
             ]
           ]
         ]
@@ -1242,63 +715,24 @@
         "coordinates": [
           [
             [
-              -81.7607,
-              40.8466
+              -84.480135,
+              38.043882
             ],
             [
-              -81.7596,
-              40.8466
+              -84.480547,
+              38.041718
             ],
             [
-              -81.7596,
-              40.8474
+              -84.476701,
+              38.04107
             ],
             [
-              -81.7607,
-              40.8474
+              -84.476152,
+              38.043233
             ],
             [
-              -81.7607,
-              40.8466
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Spreads/Toppings - Orrville OH",
-        "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4805,
-              38.0409
-            ],
-            [
-              -84.4753,
-              38.0409
-            ],
-            [
-              -84.4753,
-              38.0445
-            ],
-            [
-              -84.4805,
-              38.0445
-            ],
-            [
-              -84.4805,
-              38.0409
+              -84.480135,
+              38.043882
             ]
           ]
         ]
@@ -1341,143 +775,24 @@
         "coordinates": [
           [
             [
-              -84.476,
-              38.0415
+              -84.480547,
+              38.043233
             ],
             [
-              -84.4752,
-              38.0415
+              -84.480684,
+              38.042584
             ],
             [
-              -84.4752,
-              38.0421
+              -84.478487,
+              38.042259
             ],
             [
-              -84.476,
-              38.0421
+              -84.478349,
+              38.042908
             ],
             [
-              -84.476,
-              38.0415
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Jif Peanut Butter - Lexington KY",
-        "type": "Manufacturing - Peanut butter (Jif)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4793,
-              38.0425
-            ],
-            [
-              -84.4777,
-              38.0425
-            ],
-            [
-              -84.4777,
-              38.0434
-            ],
-            [
-              -84.4793,
-              38.0434
-            ],
-            [
-              -84.4793,
-              38.0425
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Jif Peanut Butter - Lexington KY",
-        "type": "Manufacturing - Peanut butter (Jif)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4798,
-              38.0433
-            ],
-            [
-              -84.4783,
-              38.0433
-            ],
-            [
-              -84.4783,
-              38.0442
-            ],
-            [
-              -84.4798,
-              38.0442
-            ],
-            [
-              -84.4798,
-              38.0433
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Jif Peanut Butter - Lexington KY",
-        "type": "Manufacturing - Peanut butter (Jif)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4762,
-              38.0419
-            ],
-            [
-              -84.4753,
-              38.0419
-            ],
-            [
-              -84.4753,
-              38.0428
-            ],
-            [
-              -84.4762,
-              38.0428
-            ],
-            [
-              -84.4762,
-              38.0419
+              -84.480547,
+              38.043233
             ]
           ]
         ]
@@ -1500,24 +815,24 @@
         "coordinates": [
           [
             [
-              -79.3269,
-              41.0024
+              -79.326755,
+              41.003055
             ],
             [
-              -79.32505,
-              41.0024
+              -79.32679,
+              41.002641
             ],
             [
-              -79.32505,
-              41.00375
+              -79.325691,
+              41.002589
             ],
             [
-              -79.3269,
-              41.00375
+              -79.325657,
+              41.003004
             ],
             [
-              -79.3269,
-              41.0024
+              -79.326755,
+              41.003055
             ]
           ]
         ]
@@ -1560,143 +875,28 @@
         "coordinates": [
           [
             [
-              -79.3258,
-              41.0032
+              -121.804148,
+              39.707334
             ],
             [
-              -79.32525,
-              41.0032
+              -121.804697,
+              39.706277
             ],
             [
-              -79.32525,
-              41.00355
+              -121.803873,
+              39.70501
             ],
             [
-              -79.3258,
-              41.00355
+              -121.800577,
+              39.70501
             ],
             [
-              -79.3258,
-              41.0032
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Peanut Butter - New Bethlehem PA",
-        "type": "Manufacturing - Peanut butter / spreads",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.32575,
-              41.003
+              -121.800303,
+              39.707123
             ],
             [
-              -79.3252,
-              41.003
-            ],
-            [
-              -79.3252,
-              41.00345
-            ],
-            [
-              -79.32575,
-              41.00345
-            ],
-            [
-              -79.32575,
-              41.003
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Peanut Butter - New Bethlehem PA",
-        "type": "Manufacturing - Peanut butter / spreads",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.326,
-              41.00295
-            ],
-            [
-              -79.32545,
-              41.00295
-            ],
-            [
-              -79.32545,
-              41.0033
-            ],
-            [
-              -79.326,
-              41.0033
-            ],
-            [
-              -79.326,
-              41.00295
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker's Peanut Butter - New Bethlehem PA",
-        "type": "Manufacturing - Peanut butter / spreads",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.8056,
-              39.7047
-            ],
-            [
-              -121.8002,
-              39.7047
-            ],
-            [
-              -121.8002,
-              39.7085
-            ],
-            [
-              -121.8056,
-              39.7085
-            ],
-            [
-              -121.8056,
-              39.7047
+              -121.804148,
+              39.707334
             ]
           ]
         ]
@@ -1739,63 +939,24 @@
         "coordinates": [
           [
             [
-              -121.8045,
-              39.70475
+              -121.803873,
+              39.706911
             ],
             [
-              -121.8039,
-              39.70475
+              -121.804011,
+              39.705538
             ],
             [
-              -121.8039,
-              39.7052
+              -121.802637,
+              39.705432
             ],
             [
-              -121.8045,
-              39.7052
+              -121.8025,
+              39.706806
             ],
             [
-              -121.8045,
-              39.70475
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "R.W. Knudsen Juices - Chico CA",
-        "type": "Manufacturing - Juices/beverages (Knudsen)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.806,
-              39.7074
-            ],
-            [
-              -121.8042,
-              39.7074
-            ],
-            [
-              -121.8042,
-              39.7085
-            ],
-            [
-              -121.806,
-              39.7085
-            ],
-            [
-              -121.806,
-              39.7074
+              -121.803873,
+              39.706911
             ]
           ]
         ]
@@ -1818,143 +979,40 @@
         "coordinates": [
           [
             [
-              -121.8036,
-              39.7059
+              -121.6248,
+              36.659693
             ],
             [
-              -121.8027,
-              39.7059
+              -121.624869,
+              36.658812
             ],
             [
-              -121.8027,
-              39.7068
+              -121.624869,
+              36.657214
             ],
             [
-              -121.8036,
-              39.7068
+              -121.624457,
+              36.656608
             ],
             [
-              -121.8036,
-              39.7059
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "R.W. Knudsen Juices - Chico CA",
-        "type": "Manufacturing - Juices/beverages (Knudsen)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.802,
-              39.7068
+              -121.623289,
+              36.656884
             ],
             [
-              -121.8012,
-              39.7068
+              -121.622259,
+              36.657325
             ],
             [
-              -121.8012,
-              39.7074
+              -121.622259,
+              36.658867
             ],
             [
-              -121.802,
-              39.7074
+              -121.623152,
+              36.659803
             ],
             [
-              -121.802,
-              39.7068
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "R.W. Knudsen Juices - Chico CA",
-        "type": "Manufacturing - Juices/beverages (Knudsen)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.8042,
-              39.7056
-            ],
-            [
-              -121.8034,
-              39.7056
-            ],
-            [
-              -121.8034,
-              39.7062
-            ],
-            [
-              -121.8042,
-              39.7062
-            ],
-            [
-              -121.8042,
-              39.7056
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "R.W. Knudsen Juices - Chico CA",
-        "type": "Manufacturing - Juices/beverages (Knudsen)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.6268,
-              36.6552
-            ],
-            [
-              -121.6224,
-              36.6552
-            ],
-            [
-              -121.6224,
-              36.659
-            ],
-            [
-              -121.6268,
-              36.659
-            ],
-            [
-              -121.6268,
-              36.6552
+              -121.6248,
+              36.659693
             ]
           ]
         ]
@@ -1997,63 +1055,24 @@
         "coordinates": [
           [
             [
-              -121.6262,
-              36.657
+              -121.623152,
+              36.658812
             ],
             [
-              -121.6254,
-              36.657
+              -121.623152,
+              36.657325
             ],
             [
-              -121.6254,
-              36.6576
+              -121.622328,
+              36.657325
             ],
             [
-              -121.6262,
-              36.6576
+              -121.622328,
+              36.658812
             ],
             [
-              -121.6262,
-              36.657
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Smucker Plant - Salinas CA",
-        "type": "Manufacturing - Fruit/produce processing",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.6256,
-              36.6562
-            ],
-            [
-              -121.6242,
-              36.6562
-            ],
-            [
-              -121.6242,
-              36.6573
-            ],
-            [
-              -121.6256,
-              36.6573
-            ],
-            [
-              -121.6256,
-              36.6562
+              -121.623152,
+              36.658812
             ]
           ]
         ]
@@ -2076,24 +1095,24 @@
         "coordinates": [
           [
             [
-              -121.6254,
-              36.6564
+              -121.624251,
+              36.658426
             ],
             [
-              -121.6246,
-              36.6564
+              -121.624251,
+              36.658041
             ],
             [
-              -121.6246,
-              36.6576
+              -121.623289,
+              36.658041
             ],
             [
-              -121.6254,
-              36.6576
+              -121.623289,
+              36.658426
             ],
             [
-              -121.6254,
-              36.6564
+              -121.624251,
+              36.658426
             ]
           ]
         ]
@@ -2116,24 +1135,28 @@
         "coordinates": [
           [
             [
-              -76.1099,
-              39.5296
+              -76.109604,
+              39.531446
             ],
             [
-              -76.1072,
-              39.5296
+              -76.109878,
+              39.530599
             ],
             [
-              -76.1072,
-              39.5318
+              -76.109054,
+              39.529858
             ],
             [
-              -76.1099,
-              39.5318
+              -76.107681,
+              39.530281
             ],
             [
-              -76.1099,
-              39.5296
+              -76.107818,
+              39.531235
+            ],
+            [
+              -76.109604,
+              39.531446
             ]
           ]
         ]
@@ -2176,24 +1199,64 @@
         "coordinates": [
           [
             [
-              -76.10905,
-              39.52985
+              -76.109878,
+              39.53044
             ],
             [
-              -76.1082,
-              39.52985
+              -76.110016,
+              39.530069
             ],
             [
-              -76.1082,
-              39.53025
+              -76.109329,
+              39.529858
             ],
             [
-              -76.10905,
-              39.53025
+              -76.109192,
+              39.530281
             ],
             [
-              -76.10905,
-              39.52985
+              -76.109878,
+              39.53044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "jm-smucker",
+        "name": "Smucker Plant - Havre de Grace MD",
+        "type": "Manufacturing - Spreads / portion control products",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.109741,
+              39.530705
+            ],
+            [
+              -76.10981,
+              39.530387
+            ],
+            [
+              -76.108986,
+              39.530281
+            ],
+            [
+              -76.108917,
+              39.530599
+            ],
+            [
+              -76.109741,
+              39.530705
             ]
           ]
         ]
@@ -2216,24 +1279,24 @@
         "coordinates": [
           [
             [
-              -78.8318,
-              42.9081
+              -78.83174,
+              42.90929
             ],
             [
-              -78.829,
-              42.9081
+              -78.83174,
+              42.908184
             ],
             [
-              -78.829,
-              42.9109
+              -78.829268,
+              42.908184
             ],
             [
-              -78.8318,
-              42.9109
+              -78.829268,
+              42.90929
             ],
             [
-              -78.8318,
-              42.9081
+              -78.83174,
+              42.90929
             ]
           ]
         ]
@@ -2276,143 +1339,24 @@
         "coordinates": [
           [
             [
-              -78.8311,
-              42.9092
+              -86.970285,
+              34.60793
             ],
             [
-              -78.8306,
-              42.9092
+              -86.97056,
+              34.606122
             ],
             [
-              -78.8306,
-              42.90945
+              -86.966165,
+              34.604991
             ],
             [
-              -78.8311,
-              42.90945
+              -86.965891,
+              34.607365
             ],
             [
-              -78.8311,
-              42.9092
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Milk-Bone Pet Treats - Buffalo NY",
-        "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -78.8315,
-              42.9094
-            ],
-            [
-              -78.8293,
-              42.9094
-            ],
-            [
-              -78.8293,
-              42.9106
-            ],
-            [
-              -78.8315,
-              42.9106
-            ],
-            [
-              -78.8315,
-              42.9094
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Milk-Bone Pet Treats - Buffalo NY",
-        "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -78.83,
-              42.90825
-            ],
-            [
-              -78.82935,
-              42.90825
-            ],
-            [
-              -78.82935,
-              42.9088
-            ],
-            [
-              -78.83,
-              42.9088
-            ],
-            [
-              -78.83,
-              42.90825
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Milk-Bone Pet Treats - Buffalo NY",
-        "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.9705,
-              34.6048
-            ],
-            [
-              -86.9668,
-              34.6048
-            ],
-            [
-              -86.9668,
-              34.6084
-            ],
-            [
-              -86.9705,
-              34.6084
-            ],
-            [
-              -86.9705,
-              34.6048
+              -86.970285,
+              34.60793
             ]
           ]
         ]
@@ -2455,63 +1399,24 @@
         "coordinates": [
           [
             [
-              -86.9702,
-              34.6048
+              -86.970148,
+              34.606687
             ],
             [
-              -86.9696,
-              34.6048
+              -86.970285,
+              34.606122
             ],
             [
-              -86.9696,
-              34.6051
+              -86.969187,
+              34.605896
             ],
             [
-              -86.9702,
-              34.6051
+              -86.969049,
+              34.606517
             ],
             [
-              -86.9702,
-              34.6048
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Meow Mix Pet Food - Decatur AL",
-        "type": "Manufacturing - Cat food (Meow Mix)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.9701,
-              34.6054
-            ],
-            [
-              -86.9685,
-              34.6054
-            ],
-            [
-              -86.9685,
-              34.6068
-            ],
-            [
-              -86.9701,
-              34.6068
-            ],
-            [
-              -86.9701,
-              34.6054
+              -86.970148,
+              34.606687
             ]
           ]
         ]
@@ -2534,24 +1439,24 @@
         "coordinates": [
           [
             [
-              -86.9685,
-              34.6066
+              -86.970011,
+              34.607478
             ],
             [
-              -86.9676,
-              34.6066
+              -86.970079,
+              34.607026
             ],
             [
-              -86.9676,
-              34.6073
+              -86.968019,
+              34.6068
             ],
             [
-              -86.9685,
-              34.6073
+              -86.967951,
+              34.607252
             ],
             [
-              -86.9685,
-              34.6066
+              -86.970011,
+              34.607478
             ]
           ]
         ]
@@ -2574,24 +1479,24 @@
         "coordinates": [
           [
             [
-              -95.7255,
-              39.0838
+              -95.724898,
+              39.088398
             ],
             [
-              -95.716,
-              39.0838
+              -95.72531,
+              39.0852
             ],
             [
-              -95.716,
-              39.09
+              -95.718168,
+              39.084774
             ],
             [
-              -95.7255,
-              39.09
+              -95.717894,
+              39.087972
             ],
             [
-              -95.7255,
-              39.0838
+              -95.724898,
+              39.088398
             ]
           ]
         ]
@@ -2634,63 +1539,24 @@
         "coordinates": [
           [
             [
-              -95.7245,
-              39.084
+              -95.720366,
+              39.087865
             ],
             [
-              -95.7236,
-              39.084
+              -95.720503,
+              39.08552
             ],
             [
-              -95.7236,
-              39.0844
+              -95.718031,
+              39.085413
             ],
             [
-              -95.7245,
-              39.0844
+              -95.717894,
+              39.087759
             ],
             [
-              -95.7245,
-              39.084
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Pet Food Plant - Topeka KS",
-        "type": "Manufacturing/Distribution - Pet food plant + distribution center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.7195,
-              39.0847
-            ],
-            [
-              -95.7164,
-              39.0847
-            ],
-            [
-              -95.7164,
-              39.0876
-            ],
-            [
-              -95.7195,
-              39.0876
-            ],
-            [
-              -95.7195,
-              39.0847
+              -95.720366,
+              39.087865
             ]
           ]
         ]
@@ -2713,24 +1579,24 @@
         "coordinates": [
           [
             [
-              -95.7233,
-              39.0868
+              -95.724486,
+              39.085413
             ],
             [
-              -95.7205,
-              39.0868
+              -95.724623,
+              39.084561
             ],
             [
-              -95.7205,
-              39.0883
+              -95.718855,
+              39.084134
             ],
             [
-              -95.7233,
-              39.0883
+              -95.718718,
+              39.084987
             ],
             [
-              -95.7233,
-              39.0868
+              -95.724486,
+              39.085413
             ]
           ]
         ]
@@ -2753,24 +1619,24 @@
         "coordinates": [
           [
             [
-              -95.7212,
-              39.0856
+              -95.722563,
+              39.086053
             ],
             [
-              -95.7185,
-              39.0856
+              -95.7227,
+              39.085413
             ],
             [
-              -95.7185,
-              39.0864
+              -95.720503,
+              39.085307
             ],
             [
-              -95.7212,
-              39.0864
+              -95.720366,
+              39.085946
             ],
             [
-              -95.7212,
-              39.0856
+              -95.722563,
+              39.086053
             ]
           ]
         ]
@@ -2793,24 +1659,24 @@
         "coordinates": [
           [
             [
-              -96.2216,
-              38.4153
+              -96.220299,
+              38.419022
             ],
             [
-              -96.2168,
-              38.4153
+              -96.220573,
+              38.416439
             ],
             [
-              -96.2168,
-              38.4197
+              -96.217827,
+              38.416224
             ],
             [
-              -96.2216,
-              38.4197
+              -96.217552,
+              38.418806
             ],
             [
-              -96.2216,
-              38.4153
+              -96.220299,
+              38.419022
             ]
           ]
         ]
@@ -2853,143 +1719,24 @@
         "coordinates": [
           [
             [
-              -96.21755,
-              38.41685
+              -96.220299,
+              38.4173
             ],
             [
-              -96.2172,
-              38.41685
+              -96.220436,
+              38.416654
             ],
             [
-              -96.2172,
-              38.41715
+              -96.217964,
+              38.416439
             ],
             [
-              -96.21755,
-              38.41715
+              -96.217827,
+              38.417085
             ],
             [
-              -96.21755,
-              38.41685
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Emporia KS",
-        "type": "Manufacturing - Sweet baked snacks (Hostess)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.2208,
-              38.4185
-            ],
-            [
-              -96.2185,
-              38.4185
-            ],
-            [
-              -96.2185,
-              38.4197
-            ],
-            [
-              -96.2208,
-              38.4197
-            ],
-            [
-              -96.2208,
-              38.4185
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Emporia KS",
-        "type": "Manufacturing - Sweet baked snacks (Hostess)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.22,
-              38.416
-            ],
-            [
-              -96.2192,
-              38.416
-            ],
-            [
-              -96.2192,
-              38.4172
-            ],
-            [
-              -96.22,
-              38.4172
-            ],
-            [
-              -96.22,
-              38.416
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Emporia KS",
-        "type": "Manufacturing - Sweet baked snacks (Hostess)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.2192,
-              38.4163
-            ],
-            [
-              -96.2182,
-              38.4163
-            ],
-            [
-              -96.2182,
-              38.4172
-            ],
-            [
-              -96.2192,
-              38.4172
-            ],
-            [
-              -96.2192,
-              38.4163
+              -96.220299,
+              38.4173
             ]
           ]
         ]
@@ -3012,64 +1759,28 @@
         "coordinates": [
           [
             [
-              -96.22,
-              38.4172
+              -93.094873,
+              34.054638
             ],
             [
-              -96.219,
-              38.4172
+              -93.095011,
+              34.053614
             ],
             [
-              -96.219,
-              38.418
+              -93.094736,
+              34.052362
             ],
             [
-              -96.22,
-              38.418
+              -93.092401,
+              34.05259
             ],
             [
-              -96.22,
-              38.4172
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Emporia KS",
-        "type": "Manufacturing - Sweet baked snacks (Hostess)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.0958,
-              34.0518
+              -93.092676,
+              34.054638
             ],
             [
-              -93.0915,
-              34.0518
-            ],
-            [
-              -93.0915,
-              34.056
-            ],
-            [
-              -93.0958,
-              34.056
-            ],
-            [
-              -93.0958,
-              34.0518
+              -93.094873,
+              34.054638
             ]
           ]
         ]
@@ -3112,63 +1823,24 @@
         "coordinates": [
           [
             [
-              -93.0948,
-              34.04995
+              -93.093157,
+              34.05441
             ],
             [
-              -93.0944,
-              34.04995
+              -93.093294,
+              34.053614
             ],
             [
-              -93.0944,
-              34.05025
+              -93.092264,
+              34.0535
             ],
             [
-              -93.0948,
-              34.05025
+              -93.092127,
+              34.054296
             ],
             [
-              -93.0948,
-              34.04995
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Arkadelphia AR",
-        "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.0928,
-              34.053
-            ],
-            [
-              -93.0913,
-              34.053
-            ],
-            [
-              -93.0913,
-              34.0556
-            ],
-            [
-              -93.0928,
-              34.0556
-            ],
-            [
-              -93.0928,
-              34.053
+              -93.093157,
+              34.05441
             ]
           ]
         ]
@@ -3191,24 +1863,24 @@
         "coordinates": [
           [
             [
-              -93.0933,
-              34.0524
+              -93.093363,
+              34.05441
             ],
             [
-              -93.0925,
-              34.0524
+              -93.093431,
+              34.053272
             ],
             [
-              -93.0925,
-              34.054
+              -93.092745,
+              34.053216
             ],
             [
-              -93.0933,
-              34.054
+              -93.092676,
+              34.054353
             ],
             [
-              -93.0933,
-              34.0524
+              -93.093363,
+              34.05441
             ]
           ]
         ]
@@ -3231,103 +1903,24 @@
         "coordinates": [
           [
             [
-              -93.095,
-              34.0518
+              -84.970141,
+              32.445359
             ],
             [
-              -93.0928,
-              34.0518
+              -84.970141,
+              32.443273
             ],
             [
-              -93.0928,
-              34.0524
+              -84.967257,
+              32.443273
             ],
             [
-              -93.095,
-              34.0524
+              -84.967257,
+              32.445359
             ],
             [
-              -93.095,
-              34.0518
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Arkadelphia AR",
-        "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.0948,
-              34.0502
-            ],
-            [
-              -93.0943,
-              34.0502
-            ],
-            [
-              -93.0943,
-              34.053
-            ],
-            [
-              -93.0948,
-              34.053
-            ],
-            [
-              -93.0948,
-              34.0502
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Arkadelphia AR",
-        "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.9698,
-              32.4422
-            ],
-            [
-              -84.9663,
-              32.4422
-            ],
-            [
-              -84.9663,
-              32.446
-            ],
-            [
-              -84.9698,
-              32.446
-            ],
-            [
-              -84.9698,
-              32.4422
+              -84.970141,
+              32.445359
             ]
           ]
         ]
@@ -3370,63 +1963,24 @@
         "coordinates": [
           [
             [
-              -84.9671,
-              32.4439
+              -84.968149,
+              32.445127
             ],
             [
-              -84.96675,
-              32.4439
+              -84.968287,
+              32.443621
             ],
             [
-              -84.96675,
-              32.4442
+              -84.966913,
+              32.443505
             ],
             [
-              -84.9671,
-              32.4442
+              -84.966776,
+              32.445011
             ],
             [
-              -84.9671,
-              32.4439
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Columbus GA",
-        "type": "Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.9676,
-              32.4438
-            ],
-            [
-              -84.9664,
-              32.4438
-            ],
-            [
-              -84.9664,
-              32.4458
-            ],
-            [
-              -84.9676,
-              32.4458
-            ],
-            [
-              -84.9676,
-              32.4438
+              -84.968149,
+              32.445127
             ]
           ]
         ]
@@ -3449,24 +2003,24 @@
         "coordinates": [
           [
             [
-              -84.9682,
-              32.4435
+              -84.968973,
+              32.44391
             ],
             [
-              -84.967,
-              32.4435
+              -84.969042,
+              32.443563
             ],
             [
-              -84.967,
-              32.4447
+              -84.967325,
+              32.443505
             ],
             [
-              -84.9682,
-              32.4447
+              -84.967257,
+              32.443852
             ],
             [
-              -84.9682,
-              32.4435
+              -84.968973,
+              32.44391
             ]
           ]
         ]
@@ -3480,45 +2034,6 @@
         "confidence": "medium",
         "zone": "dockApron",
         "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.9666,
-              32.4434
-            ],
-            [
-              -84.9662,
-              32.4434
-            ],
-            [
-              -84.9662,
-              32.4452
-            ],
-            [
-              -84.9666,
-              32.4452
-            ],
-            [
-              -84.9666,
-              32.4434
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "jm-smucker",
-        "name": "Hostess Bakery - Columbus GA",
-        "type": "Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
       }
     }
   ]

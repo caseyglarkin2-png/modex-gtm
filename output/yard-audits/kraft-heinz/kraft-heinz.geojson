@@ -1,0 +1,1941 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.374867,
+              41.783588
+            ],
+            [
+              -88.374867,
+              41.781796
+            ],
+            [
+              -88.371468,
+              41.781847
+            ],
+            [
+              -88.371536,
+              41.783639
+            ],
+            [
+              -88.374867,
+              41.783588
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Aurora",
+        "type": "Cold Storage Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.372429,
+              41.782154
+            ],
+            [
+              -88.372395,
+              41.781924
+            ],
+            [
+              -88.37212,
+              41.781949
+            ],
+            [
+              -88.372154,
+              41.78218
+            ],
+            [
+              -88.372429,
+              41.782154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Aurora",
+        "type": "Cold Storage Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.374867,
+              41.782333
+            ],
+            [
+              -88.374867,
+              41.781796
+            ],
+            [
+              -88.373287,
+              41.781796
+            ],
+            [
+              -88.373322,
+              41.782384
+            ],
+            [
+              -88.374867,
+              41.782333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Aurora",
+        "type": "Cold Storage Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.374867,
+              41.782743
+            ],
+            [
+              -88.374867,
+              41.782487
+            ],
+            [
+              -88.37188,
+              41.782564
+            ],
+            [
+              -88.371914,
+              41.78282
+            ],
+            [
+              -88.374867,
+              41.782743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Aurora",
+        "type": "Cold Storage Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.373322,
+              41.782436
+            ],
+            [
+              -88.373287,
+              41.782052
+            ],
+            [
+              -88.372429,
+              41.782077
+            ],
+            [
+              -88.372463,
+              41.782461
+            ],
+            [
+              -88.373322,
+              41.782436
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Aurora",
+        "type": "Cold Storage Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.131047,
+              42.783953
+            ],
+            [
+              -86.130841,
+              42.782794
+            ],
+            [
+              -86.12521,
+              42.782995
+            ],
+            [
+              -86.125141,
+              42.785061
+            ],
+            [
+              -86.127476,
+              42.785616
+            ],
+            [
+              -86.131047,
+              42.783953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 24.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.127476,
+              42.782995
+            ],
+            [
+              -86.127476,
+              42.782642
+            ],
+            [
+              -86.126927,
+              42.782642
+            ],
+            [
+              -86.126927,
+              42.782995
+            ],
+            [
+              -86.127476,
+              42.782995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.126789,
+              42.78491
+            ],
+            [
+              -86.126721,
+              42.783802
+            ],
+            [
+              -86.125141,
+              42.783953
+            ],
+            [
+              -86.12521,
+              42.785061
+            ],
+            [
+              -86.126789,
+              42.78491
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.126721,
+              42.783802
+            ],
+            [
+              -86.126652,
+              42.783096
+            ],
+            [
+              -86.12521,
+              42.783197
+            ],
+            [
+              -86.12521,
+              42.783902
+            ],
+            [
+              -86.126721,
+              42.783802
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.129124,
+              42.784608
+            ],
+            [
+              -86.129055,
+              42.783852
+            ],
+            [
+              -86.128231,
+              42.783953
+            ],
+            [
+              -86.1283,
+              42.784709
+            ],
+            [
+              -86.129124,
+              42.784608
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.129879,
+              42.783348
+            ],
+            [
+              -86.129811,
+              42.782945
+            ],
+            [
+              -86.127545,
+              42.783096
+            ],
+            [
+              -86.127613,
+              42.783499
+            ],
+            [
+              -86.129879,
+              42.783348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.787751,
+              30.379823
+            ],
+            [
+              -81.787751,
+              30.375498
+            ],
+            [
+              -81.782326,
+              30.375261
+            ],
+            [
+              -81.782326,
+              30.379645
+            ],
+            [
+              -81.787751,
+              30.379823
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville",
+        "type": "Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 198,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 3,
+          "siteAreaAcres": 26.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.787751,
+              30.377927
+            ],
+            [
+              -81.787751,
+              30.377512
+            ],
+            [
+              -81.787339,
+              30.377512
+            ],
+            [
+              -81.787339,
+              30.377927
+            ],
+            [
+              -81.787751,
+              30.377927
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville",
+        "type": "Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.787407,
+              30.378934
+            ],
+            [
+              -81.787476,
+              30.378519
+            ],
+            [
+              -81.782807,
+              30.378401
+            ],
+            [
+              -81.782738,
+              30.378816
+            ],
+            [
+              -81.787407,
+              30.378934
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville",
+        "type": "Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.787476,
+              30.377512
+            ],
+            [
+              -81.787545,
+              30.377098
+            ],
+            [
+              -81.782669,
+              30.376979
+            ],
+            [
+              -81.782601,
+              30.377394
+            ],
+            [
+              -81.787476,
+              30.377512
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville",
+        "type": "Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.787476,
+              30.37615
+            ],
+            [
+              -81.787545,
+              30.375735
+            ],
+            [
+              -81.782669,
+              30.375558
+            ],
+            [
+              -81.782601,
+              30.375972
+            ],
+            [
+              -81.787476,
+              30.37615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville",
+        "type": "Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.776441,
+              30.382368
+            ],
+            [
+              -81.776579,
+              30.380828
+            ],
+            [
+              -81.775823,
+              30.380295
+            ],
+            [
+              -81.773077,
+              30.380472
+            ],
+            [
+              -81.773351,
+              30.382368
+            ],
+            [
+              -81.776441,
+              30.382368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville - Portion Control",
+        "type": "Packaging Supply",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.775823,
+              30.380591
+            ],
+            [
+              -81.775823,
+              30.380176
+            ],
+            [
+              -81.775274,
+              30.380176
+            ],
+            [
+              -81.775274,
+              30.380591
+            ],
+            [
+              -81.775823,
+              30.380591
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville - Portion Control",
+        "type": "Packaging Supply",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.776029,
+              30.380946
+            ],
+            [
+              -81.775961,
+              30.380472
+            ],
+            [
+              -81.773351,
+              30.380472
+            ],
+            [
+              -81.773351,
+              30.380946
+            ],
+            [
+              -81.776029,
+              30.380946
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Foods - Jacksonville - Portion Control",
+        "type": "Packaging Supply",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.612697,
+              41.618053
+            ],
+            [
+              -90.612697,
+              41.614768
+            ],
+            [
+              -90.608715,
+              41.614768
+            ],
+            [
+              -90.608852,
+              41.618053
+            ],
+            [
+              -90.612697,
+              41.618053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Davenport",
+        "type": "Food Processing Company",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 72,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.612835,
+              41.615487
+            ],
+            [
+              -90.612835,
+              41.614768
+            ],
+            [
+              -90.611873,
+              41.614768
+            ],
+            [
+              -90.611873,
+              41.615487
+            ],
+            [
+              -90.612835,
+              41.615487
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Davenport",
+        "type": "Food Processing Company",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.608715,
+              41.616924
+            ],
+            [
+              -90.608715,
+              41.615795
+            ],
+            [
+              -90.607204,
+              41.615795
+            ],
+            [
+              -90.607204,
+              41.616924
+            ],
+            [
+              -90.608715,
+              41.616924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Davenport",
+        "type": "Food Processing Company",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.54362,
+              40.780456
+            ],
+            [
+              -81.543895,
+              40.779
+            ],
+            [
+              -81.542247,
+              40.776088
+            ],
+            [
+              -81.534281,
+              40.776712
+            ],
+            [
+              -81.534693,
+              40.780872
+            ],
+            [
+              -81.54362,
+              40.780456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Massillon",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 51,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.542247,
+              40.780664
+            ],
+            [
+              -81.542109,
+              40.779936
+            ],
+            [
+              -81.541148,
+              40.78004
+            ],
+            [
+              -81.541285,
+              40.780768
+            ],
+            [
+              -81.542247,
+              40.780664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Massillon",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.544581,
+              40.779624
+            ],
+            [
+              -81.545268,
+              40.778792
+            ],
+            [
+              -81.54362,
+              40.778168
+            ],
+            [
+              -81.542933,
+              40.779
+            ],
+            [
+              -81.544581,
+              40.779624
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Massillon",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.541423,
+              40.779832
+            ],
+            [
+              -81.541285,
+              40.779
+            ],
+            [
+              -81.538676,
+              40.779104
+            ],
+            [
+              -81.538813,
+              40.779936
+            ],
+            [
+              -81.541423,
+              40.779832
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Massillon",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.665085,
+              32.908484
+            ],
+            [
+              -96.66536,
+              32.907562
+            ],
+            [
+              -96.664536,
+              32.905486
+            ],
+            [
+              -96.661789,
+              32.905832
+            ],
+            [
+              -96.661721,
+              32.908426
+            ],
+            [
+              -96.665085,
+              32.908484
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Garland",
+        "type": "Manufacturer",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 75,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40.2,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.665085,
+              32.908138
+            ],
+            [
+              -96.665085,
+              32.907735
+            ],
+            [
+              -96.664605,
+              32.907735
+            ],
+            [
+              -96.664605,
+              32.908138
+            ],
+            [
+              -96.665085,
+              32.908138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Garland",
+        "type": "Manufacturer",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.662957,
+              32.905775
+            ],
+            [
+              -96.663025,
+              32.905313
+            ],
+            [
+              -96.660759,
+              32.905198
+            ],
+            [
+              -96.660691,
+              32.905659
+            ],
+            [
+              -96.662957,
+              32.905775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Garland",
+        "type": "Manufacturer",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.665017,
+              32.907158
+            ],
+            [
+              -96.664948,
+              32.906466
+            ],
+            [
+              -96.663781,
+              32.906466
+            ],
+            [
+              -96.663849,
+              32.907158
+            ],
+            [
+              -96.665017,
+              32.907158
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Garland",
+        "type": "Manufacturer",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.664879,
+              32.908484
+            ],
+            [
+              -96.664879,
+              32.908138
+            ],
+            [
+              -96.662957,
+              32.908081
+            ],
+            [
+              -96.662957,
+              32.908426
+            ],
+            [
+              -96.664879,
+              32.908484
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Garland",
+        "type": "Manufacturer",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.093373,
+              41.364492
+            ],
+            [
+              -83.094747,
+              41.363771
+            ],
+            [
+              -83.09612,
+              41.360885
+            ],
+            [
+              -83.095159,
+              41.358926
+            ],
+            [
+              -83.092687,
+              41.359545
+            ],
+            [
+              -83.091313,
+              41.361915
+            ],
+            [
+              -83.090352,
+              41.36408
+            ],
+            [
+              -83.093373,
+              41.364492
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Fremont",
+        "type": "Food Products Supplier",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 88,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.093923,
+              41.363461
+            ],
+            [
+              -83.09406,
+              41.36274
+            ],
+            [
+              -83.093099,
+              41.362637
+            ],
+            [
+              -83.092961,
+              41.363358
+            ],
+            [
+              -83.093923,
+              41.363461
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Fremont",
+        "type": "Food Products Supplier",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.096395,
+              41.363358
+            ],
+            [
+              -83.096807,
+              41.362122
+            ],
+            [
+              -83.095021,
+              41.361812
+            ],
+            [
+              -83.094609,
+              41.363049
+            ],
+            [
+              -83.096395,
+              41.363358
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Fremont",
+        "type": "Food Products Supplier",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.092687,
+              41.363771
+            ],
+            [
+              -83.092961,
+              41.362843
+            ],
+            [
+              -83.090627,
+              41.362534
+            ],
+            [
+              -83.090352,
+              41.363461
+            ],
+            [
+              -83.092687,
+              41.363771
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Fremont",
+        "type": "Food Products Supplier",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.093099,
+              41.361812
+            ],
+            [
+              -83.093236,
+              41.361091
+            ],
+            [
+              -83.091313,
+              41.360885
+            ],
+            [
+              -83.091176,
+              41.361606
+            ],
+            [
+              -83.093099,
+              41.361812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Fremont",
+        "type": "Food Products Supplier",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.21929,
+              43.165252
+            ],
+            [
+              -93.219221,
+              43.163148
+            ],
+            [
+              -93.21414,
+              43.163299
+            ],
+            [
+              -93.214277,
+              43.165352
+            ],
+            [
+              -93.21929,
+              43.165252
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Mason City",
+        "type": "Food Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 25.1,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.21929,
+              43.164901
+            ],
+            [
+              -93.21929,
+              43.164551
+            ],
+            [
+              -93.218809,
+              43.164551
+            ],
+            [
+              -93.218809,
+              43.164901
+            ],
+            [
+              -93.21929,
+              43.164901
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Mason City",
+        "type": "Food Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.218741,
+              43.163499
+            ],
+            [
+              -93.218672,
+              43.163148
+            ],
+            [
+              -93.214758,
+              43.163198
+            ],
+            [
+              -93.214827,
+              43.163549
+            ],
+            [
+              -93.218741,
+              43.163499
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Mason City",
+        "type": "Food Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.803817,
+              26.665956
+            ],
+            [
+              -81.803749,
+              26.664637
+            ],
+            [
+              -81.802238,
+              26.664698
+            ],
+            [
+              -81.802307,
+              26.666017
+            ],
+            [
+              -81.803817,
+              26.665956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Ft Myers",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 6.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.80344,
+              26.665956
+            ],
+            [
+              -81.80344,
+              26.665741
+            ],
+            [
+              -81.803165,
+              26.665741
+            ],
+            [
+              -81.803165,
+              26.665956
+            ],
+            [
+              -81.80344,
+              26.665956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Ft Myers",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.803337,
+              26.665987
+            ],
+            [
+              -81.803337,
+              26.665711
+            ],
+            [
+              -81.802375,
+              26.665711
+            ],
+            [
+              -81.802375,
+              26.665987
+            ],
+            [
+              -81.803337,
+              26.665987
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Ft Myers",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.803577,
+              26.665833
+            ],
+            [
+              -81.80344,
+              26.665158
+            ],
+            [
+              -81.803199,
+              26.665189
+            ],
+            [
+              -81.803337,
+              26.665864
+            ],
+            [
+              -81.803577,
+              26.665833
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kraft-heinz",
+        "name": "Kraft Heinz - Ft Myers",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

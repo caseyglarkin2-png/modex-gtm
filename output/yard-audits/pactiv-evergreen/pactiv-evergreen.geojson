@@ -8,24 +8,24 @@
         "coordinates": [
           [
             [
-              -79.43915,
-              35.13765
+              -79.438437,
+              35.139617
             ],
             [
-              -79.43645,
-              35.13765
+              -79.438711,
+              35.138494
             ],
             [
-              -79.43645,
-              35.13945
+              -79.436926,
+              35.138269
             ],
             [
-              -79.43915,
-              35.13945
+              -79.436651,
+              35.139448
             ],
             [
-              -79.43915,
-              35.13765
+              -79.438437,
+              35.139617
             ]
           ]
         ]
@@ -68,103 +68,24 @@
         "coordinates": [
           [
             [
-              -79.43885,
-              35.13805
+              -79.438299,
+              35.138606
             ],
             [
-              -79.43845,
-              35.13805
+              -79.438368,
+              35.138438
             ],
             [
-              -79.43845,
-              35.1384
+              -79.436995,
+              35.138269
             ],
             [
-              -79.43885,
-              35.1384
+              -79.436926,
+              35.138438
             ],
             [
-              -79.43885,
-              35.13805
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Aberdeen NC",
-        "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.4373,
-              35.13835
-            ],
-            [
-              -79.4365,
-              35.13835
-            ],
-            [
-              -79.4365,
-              35.1391
-            ],
-            [
-              -79.4373,
-              35.1391
-            ],
-            [
-              -79.4373,
-              35.13835
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Aberdeen NC",
-        "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.4383,
-              35.1383
-            ],
-            [
-              -79.4371,
-              35.1383
-            ],
-            [
-              -79.4371,
-              35.13855
-            ],
-            [
-              -79.4383,
-              35.13855
-            ],
-            [
-              -79.4383,
-              35.1383
+              -79.438299,
+              35.138606
             ]
           ]
         ]
@@ -187,24 +108,32 @@
         "coordinates": [
           [
             [
-              -77.3072,
-              42.902
+              -77.304881,
+              42.907512
             ],
             [
-              -77.2972,
-              42.902
+              -77.305156,
+              42.906003
             ],
             [
-              -77.2972,
-              42.9082
+              -77.302959,
+              42.903388
             ],
             [
-              -77.3072,
-              42.9082
+              -77.300349,
+              42.903488
             ],
             [
-              -77.3072,
-              42.902
+              -77.298701,
+              42.9055
+            ],
+            [
+              -77.299113,
+              42.907612
+            ],
+            [
+              -77.304881,
+              42.907512
             ]
           ]
         ]
@@ -247,63 +176,24 @@
         "coordinates": [
           [
             [
-              -77.3033,
-              42.9025
+              -77.305293,
+              42.907814
             ],
             [
-              -77.30255,
-              42.9025
+              -77.30543,
+              42.906204
             ],
             [
-              -77.30255,
-              42.90305
+              -77.302821,
+              42.905902
             ],
             [
-              -77.3033,
-              42.90305
+              -77.302547,
+              42.907512
             ],
             [
-              -77.3033,
-              42.9025
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua NY",
-        "type": "Manufacturing Plant (Food Merchandising campus)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.307,
-              42.9049
-            ],
-            [
-              -77.3042,
-              42.9049
-            ],
-            [
-              -77.3042,
-              42.9069
-            ],
-            [
-              -77.307,
-              42.9069
-            ],
-            [
-              -77.307,
-              42.9049
+              -77.305293,
+              42.907814
             ]
           ]
         ]
@@ -326,64 +216,24 @@
         "coordinates": [
           [
             [
-              -77.3034,
-              42.9053
+              -77.304469,
+              42.906405
             ],
             [
-              -77.3018,
-              42.9053
+              -77.304607,
+              42.905902
             ],
             [
-              -77.3018,
-              42.9068
+              -77.301311,
+              42.905601
             ],
             [
-              -77.3034,
-              42.9068
+              -77.301173,
+              42.906104
             ],
             [
-              -77.3034,
-              42.9053
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua NY",
-        "type": "Manufacturing Plant (Food Merchandising campus)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.3013,
-              42.9059
-            ],
-            [
-              -77.3,
-              42.9059
-            ],
-            [
-              -77.3,
-              42.9066
-            ],
-            [
-              -77.3013,
-              42.9066
-            ],
-            [
-              -77.3013,
-              42.9059
+              -77.304469,
+              42.906405
             ]
           ]
         ]
@@ -406,103 +256,24 @@
         "coordinates": [
           [
             [
-              -77.301,
-              42.9046
+              -77.306521,
+              42.908318
             ],
             [
-              -77.2997,
-              42.9046
+              -77.307483,
+              42.904093
             ],
             [
-              -77.2997,
-              42.9056
+              -77.301852,
+              42.903087
             ],
             [
-              -77.301,
-              42.9056
+              -77.300753,
+              42.907614
             ],
             [
-              -77.301,
-              42.9046
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua NY",
-        "type": "Manufacturing Plant (Food Merchandising campus)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.3033,
-              42.9029
-            ],
-            [
-              -77.3018,
-              42.9029
-            ],
-            [
-              -77.3018,
-              42.9046
-            ],
-            [
-              -77.3033,
-              42.9046
-            ],
-            [
-              -77.3033,
-              42.9029
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua NY",
-        "type": "Manufacturing Plant (Food Merchandising campus)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.3072,
-              42.902
-            ],
-            [
-              -77.2972,
-              42.902
-            ],
-            [
-              -77.2972,
-              42.9082
-            ],
-            [
-              -77.3072,
-              42.9082
-            ],
-            [
-              -77.3072,
-              42.902
+              -77.306521,
+              42.908318
             ]
           ]
         ]
@@ -545,63 +316,24 @@
         "coordinates": [
           [
             [
-              -77.3033,
-              42.9025
+              -77.30762,
+              42.909826
             ],
             [
-              -77.30255,
-              42.9025
+              -77.307757,
+              42.908519
             ],
             [
-              -77.30255,
-              42.90305
+              -77.302951,
+              42.908318
             ],
             [
-              -77.3033,
-              42.90305
+              -77.302813,
+              42.909625
             ],
             [
-              -77.3033,
-              42.9025
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
-        "type": "Distribution Center",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.307,
-              42.9049
-            ],
-            [
-              -77.3042,
-              42.9049
-            ],
-            [
-              -77.3042,
-              42.907
-            ],
-            [
-              -77.307,
-              42.907
-            ],
-            [
-              -77.307,
-              42.9049
+              -77.30762,
+              42.909826
             ]
           ]
         ]
@@ -624,24 +356,24 @@
         "coordinates": [
           [
             [
-              -77.3048,
-              42.9042
+              -77.306659,
+              42.907815
             ],
             [
-              -77.3028,
-              42.9042
+              -77.306796,
+              42.906507
             ],
             [
-              -77.3028,
-              42.9056
+              -77.304324,
+              42.906306
             ],
             [
-              -77.3048,
-              42.9056
+              -77.304187,
+              42.907614
             ],
             [
-              -77.3048,
-              42.9042
+              -77.306659,
+              42.907815
             ]
           ]
         ]
@@ -664,24 +396,24 @@
         "coordinates": [
           [
             [
-              -77.3044,
-              42.9054
+              -77.304873,
+              42.906708
             ],
             [
-              -77.3033,
-              42.9054
+              -77.305011,
+              42.906205
             ],
             [
-              -77.3033,
-              42.9065
+              -77.301989,
+              42.905803
             ],
             [
-              -77.3044,
-              42.9065
+              -77.301852,
+              42.906306
             ],
             [
-              -77.3044,
-              42.9054
+              -77.304873,
+              42.906708
             ]
           ]
         ]
@@ -704,103 +436,24 @@
         "coordinates": [
           [
             [
-              -77.3036,
-              42.9045
+              -97.340923,
+              31.134291
             ],
             [
-              -77.3026,
-              42.9045
+              -97.341197,
+              31.127708
             ],
             [
-              -77.3026,
-              42.9056
+              -97.336803,
+              31.127708
             ],
             [
-              -77.3036,
-              42.9056
+              -97.336528,
+              31.134291
             ],
             [
-              -77.3036,
-              42.9045
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
-        "type": "Distribution Center",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.3033,
-              42.9029
-            ],
-            [
-              -77.3018,
-              42.9029
-            ],
-            [
-              -77.3018,
-              42.9046
-            ],
-            [
-              -77.3033,
-              42.9046
-            ],
-            [
-              -77.3033,
-              42.9029
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
-        "type": "Distribution Center",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3432,
-              31.1262
-            ],
-            [
-              -97.3365,
-              31.1262
-            ],
-            [
-              -97.3365,
-              31.1342
-            ],
-            [
-              -97.3432,
-              31.1342
-            ],
-            [
-              -97.3432,
-              31.1262
+              -97.340923,
+              31.134291
             ]
           ]
         ]
@@ -843,63 +496,24 @@
         "coordinates": [
           [
             [
-              -97.3411,
-              31.1264
+              -97.340648,
+              31.130412
             ],
             [
-              -97.3401,
-              31.1264
+              -97.340648,
+              31.128649
             ],
             [
-              -97.3401,
-              31.1272
+              -97.338313,
+              31.128649
             ],
             [
-              -97.3411,
-              31.1272
+              -97.338313,
+              31.130412
             ],
             [
-              -97.3411,
-              31.1264
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Plant",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3385,
-              31.1305
-            ],
-            [
-              -97.3368,
-              31.1305
-            ],
-            [
-              -97.3368,
-              31.1338
-            ],
-            [
-              -97.3385,
-              31.1338
-            ],
-            [
-              -97.3385,
-              31.1305
+              -97.340648,
+              31.130412
             ]
           ]
         ]
@@ -922,24 +536,24 @@
         "coordinates": [
           [
             [
-              -97.3387,
-              31.1305
+              -97.340373,
+              31.131588
             ],
             [
-              -97.3373,
-              31.1305
+              -97.340373,
+              31.131
             ],
             [
-              -97.3373,
-              31.1338
+              -97.336803,
+              31.131
             ],
             [
-              -97.3387,
-              31.1338
+              -97.336803,
+              31.131588
             ],
             [
-              -97.3387,
-              31.1305
+              -97.340373,
+              31.131588
             ]
           ]
         ]
@@ -962,103 +576,24 @@
         "coordinates": [
           [
             [
-              -97.3418,
-              31.1295
+              -97.340347,
+              31.134475
             ],
             [
-              -97.3406,
-              31.1295
+              -97.340621,
+              31.129538
             ],
             [
-              -97.3406,
-              31.1325
+              -97.337188,
+              31.129538
             ],
             [
-              -97.3418,
-              31.1325
+              -97.336913,
+              31.134475
             ],
             [
-              -97.3418,
-              31.1295
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Plant",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3412,
-              31.1272
-            ],
-            [
-              -97.3395,
-              31.1272
-            ],
-            [
-              -97.3395,
-              31.1295
-            ],
-            [
-              -97.3412,
-              31.1295
-            ],
-            [
-              -97.3412,
-              31.1272
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Plant",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3405,
-              31.1305
-            ],
-            [
-              -97.3353,
-              31.1305
-            ],
-            [
-              -97.3353,
-              31.1356
-            ],
-            [
-              -97.3405,
-              31.1356
-            ],
-            [
-              -97.3405,
-              31.1305
+              -97.340347,
+              31.134475
             ]
           ]
         ]
@@ -1101,103 +636,24 @@
         "coordinates": [
           [
             [
-              -97.3368,
-              31.1329
+              -97.3376,
+              31.133888
             ],
             [
-              -97.3358,
-              31.1329
+              -97.337737,
+              31.130009
             ],
             [
-              -97.3358,
-              31.1336
+              -97.336913,
+              31.130009
             ],
             [
-              -97.3368,
-              31.1336
+              -97.336776,
+              31.133888
             ],
             [
-              -97.3368,
-              31.1329
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3372,
-              31.1332
-            ],
-            [
-              -97.3356,
-              31.1332
-            ],
-            [
-              -97.3356,
-              31.1354
-            ],
-            [
-              -97.3372,
-              31.1354
-            ],
-            [
-              -97.3372,
-              31.1332
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3401,
-              31.1311
-            ],
-            [
-              -97.3388,
-              31.1311
-            ],
-            [
-              -97.3388,
-              31.1347
-            ],
-            [
-              -97.3401,
-              31.1347
-            ],
-            [
-              -97.3401,
-              31.1311
+              -97.3376,
+              31.133888
             ]
           ]
         ]
@@ -1220,103 +676,24 @@
         "coordinates": [
           [
             [
-              -97.338,
-              31.1333
+              -99.815643,
+              32.46445
             ],
             [
-              -97.3365,
-              31.1333
+              -99.814545,
+              32.457382
             ],
             [
-              -97.3365,
-              31.1354
+              -99.809738,
+              32.457845
             ],
             [
-              -97.338,
-              31.1354
+              -99.809463,
+              32.464218
             ],
             [
-              -97.338,
-              31.1333
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3372,
-              31.1332
-            ],
-            [
-              -97.3358,
-              31.1332
-            ],
-            [
-              -97.3358,
-              31.1346
-            ],
-            [
-              -97.3372,
-              31.1346
-            ],
-            [
-              -97.3372,
-              31.1332
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Temple TX Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -99.812,
-              32.4567
-            ],
-            [
-              -99.8082,
-              32.4567
-            ],
-            [
-              -99.8082,
-              32.4615
-            ],
-            [
-              -99.812,
-              32.4615
-            ],
-            [
-              -99.812,
-              32.4567
+              -99.815643,
+              32.46445
             ]
           ]
         ]
@@ -1359,24 +736,24 @@
         "coordinates": [
           [
             [
-              -99.8105,
-              32.4601
+              -99.814545,
+              32.463986
             ],
             [
-              -99.8087,
-              32.4601
+              -99.814545,
+              32.462364
             ],
             [
-              -99.8087,
-              32.46075
+              -99.811523,
+              32.462248
             ],
             [
-              -99.8105,
-              32.46075
+              -99.811523,
+              32.463871
             ],
             [
-              -99.8105,
-              32.4601
+              -99.814545,
+              32.463986
             ]
           ]
         ]
@@ -1399,24 +776,24 @@
         "coordinates": [
           [
             [
-              -99.8105,
-              32.4601
+              -99.811249,
+              32.46109
             ],
             [
-              -99.8087,
-              32.4601
+              -99.811386,
+              32.459931
             ],
             [
-              -99.8087,
-              32.46075
+              -99.809601,
+              32.459699
             ],
             [
-              -99.8105,
-              32.46075
+              -99.809463,
+              32.460858
             ],
             [
-              -99.8105,
-              32.4601
+              -99.811249,
+              32.46109
             ]
           ]
         ]
@@ -1439,64 +816,24 @@
         "coordinates": [
           [
             [
-              -99.8116,
-              32.4576
+              -96.425631,
+              32.101326
             ],
             [
-              -99.8102,
-              32.4576
+              -96.426592,
+              32.098417
             ],
             [
-              -99.8102,
-              32.4585
+              -96.421237,
+              32.096905
             ],
             [
-              -99.8116,
-              32.4585
+              -96.420275,
+              32.099813
             ],
             [
-              -99.8116,
-              32.4576
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Abilene TX",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.4233,
-              32.0959
-            ],
-            [
-              -96.4178,
-              32.0959
-            ],
-            [
-              -96.4178,
-              32.1003
-            ],
-            [
-              -96.4233,
-              32.1003
-            ],
-            [
-              -96.4233,
-              32.0959
+              -96.425631,
+              32.101326
             ]
           ]
         ]
@@ -1539,63 +876,24 @@
         "coordinates": [
           [
             [
-              -96.4213,
-              32.0999
+              -96.422473,
+              32.099464
             ],
             [
-              -96.4205,
-              32.0999
+              -96.42261,
+              32.098534
             ],
             [
-              -96.4205,
-              32.1003
+              -96.420687,
+              32.098068
             ],
             [
-              -96.4213,
-              32.1003
+              -96.42055,
+              32.098999
             ],
             [
-              -96.4213,
-              32.0999
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Corsicana TX Plant",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.4232,
-              32.0964
-            ],
-            [
-              -96.4209,
-              32.0964
-            ],
-            [
-              -96.4209,
-              32.0993
-            ],
-            [
-              -96.4232,
-              32.0993
-            ],
-            [
-              -96.4232,
-              32.0964
+              -96.422473,
+              32.099464
             ]
           ]
         ]
@@ -1618,24 +916,24 @@
         "coordinates": [
           [
             [
-              -96.4213,
-              32.097
+              -96.425494,
+              32.099232
             ],
             [
-              -96.4201,
-              32.097
+              -96.425631,
+              32.09865
             ],
             [
-              -96.4201,
-              32.0995
+              -96.423709,
+              32.098068
             ],
             [
-              -96.4213,
-              32.0995
+              -96.423571,
+              32.09865
             ],
             [
-              -96.4213,
-              32.097
+              -96.425494,
+              32.099232
             ]
           ]
         ]
@@ -1658,24 +956,24 @@
         "coordinates": [
           [
             [
-              -96.4615,
-              32.0721
+              -96.461845,
+              32.077527
             ],
             [
-              -96.4533,
-              32.0721
+              -96.462119,
+              32.07264
             ],
             [
-              -96.4533,
-              32.078
+              -96.456077,
+              32.07264
             ],
             [
-              -96.4615,
-              32.078
+              -96.455802,
+              32.077527
             ],
             [
-              -96.4615,
-              32.0721
+              -96.461845,
+              32.077527
             ]
           ]
         ]
@@ -1718,63 +1016,24 @@
         "coordinates": [
           [
             [
-              -96.4547,
-              32.0739
+              -96.461845,
+              32.074269
             ],
             [
-              -96.4535,
-              32.0739
+              -96.461982,
+              32.072407
             ],
             [
-              -96.4535,
-              32.0747
+              -96.459785,
+              32.071942
             ],
             [
-              -96.4547,
-              32.0747
+              -96.459647,
+              32.073804
             ],
             [
-              -96.4547,
-              32.0739
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Corsicana TX Warehouse",
-        "type": "Warehouse / Distribution",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.4612,
-              32.0726
-            ],
-            [
-              -96.4585,
-              32.0726
-            ],
-            [
-              -96.4585,
-              32.0748
-            ],
-            [
-              -96.4612,
-              32.0748
-            ],
-            [
-              -96.4612,
-              32.0726
+              -96.461845,
+              32.074269
             ]
           ]
         ]
@@ -1797,24 +1056,24 @@
         "coordinates": [
           [
             [
-              -96.459,
-              32.0732
+              -96.460197,
+              32.074618
             ],
             [
-              -96.4552,
-              32.0732
+              -96.460197,
+              32.074036
             ],
             [
-              -96.4552,
-              32.0764
+              -96.456351,
+              32.074036
             ],
             [
-              -96.459,
-              32.0764
+              -96.456351,
+              32.074618
             ],
             [
-              -96.459,
-              32.0732
+              -96.460197,
+              32.074618
             ]
           ]
         ]
@@ -1837,24 +1096,24 @@
         "coordinates": [
           [
             [
-              -83.3912,
-              33.9775
+              -83.392845,
+              33.982405
             ],
             [
-              -83.3868,
-              33.9775
+              -83.39312,
+              33.978761
             ],
             [
-              -83.3868,
-              33.9818
+              -83.388451,
+              33.978533
             ],
             [
-              -83.3912,
-              33.9818
+              -83.388313,
+              33.982178
             ],
             [
-              -83.3912,
-              33.9775
+              -83.392845,
+              33.982405
             ]
           ]
         ]
@@ -1897,103 +1156,24 @@
         "coordinates": [
           [
             [
-              -83.3906,
-              33.9787
+              -83.390373,
+              33.980811
             ],
             [
-              -83.3896,
-              33.9787
+              -83.390511,
+              33.979786
             ],
             [
-              -83.3896,
-              33.9795
+              -83.388588,
+              33.979672
             ],
             [
-              -83.3906,
-              33.9795
+              -83.388451,
+              33.980697
             ],
             [
-              -83.3906,
-              33.9787
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Athens GA",
-        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.389,
-              33.9795
-            ],
-            [
-              -83.3876,
-              33.9795
-            ],
-            [
-              -83.3876,
-              33.981
-            ],
-            [
-              -83.389,
-              33.981
-            ],
-            [
-              -83.389,
-              33.9795
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Athens GA",
-        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.389,
-              33.9795
-            ],
-            [
-              -83.3873,
-              33.9795
-            ],
-            [
-              -83.3873,
-              33.9812
-            ],
-            [
-              -83.389,
-              33.9812
-            ],
-            [
-              -83.389,
-              33.9795
+              -83.390373,
+              33.980811
             ]
           ]
         ]
@@ -2016,24 +1196,24 @@
         "coordinates": [
           [
             [
-              -91.6808,
-              41.9523
+              -91.680411,
+              41.955928
             ],
             [
-              -91.677,
-              41.9523
+              -91.680548,
+              41.953681
             ],
             [
-              -91.677,
-              41.9562
+              -91.677389,
+              41.953579
             ],
             [
-              -91.6808,
-              41.9562
+              -91.677252,
+              41.955826
             ],
             [
-              -91.6808,
-              41.9523
+              -91.680411,
+              41.955928
             ]
           ]
         ]
@@ -2076,24 +1256,24 @@
         "coordinates": [
           [
             [
-              -91.679,
-              41.9533
+              -91.680273,
+              41.954191
             ],
             [
-              -91.6776,
-              41.9533
+              -91.680273,
+              41.953783
             ],
             [
-              -91.6776,
-              41.9544
+              -91.677527,
+              41.953681
             ],
             [
-              -91.679,
-              41.9544
+              -91.677527,
+              41.954089
             ],
             [
-              -91.679,
-              41.9533
+              -91.680273,
+              41.954191
             ]
           ]
         ]
@@ -2116,24 +1296,24 @@
         "coordinates": [
           [
             [
-              -82.1019,
-              28.017
+              -82.102017,
+              28.018485
             ],
             [
-              -82.0985,
-              28.017
+              -82.102085,
+              28.01703
             ],
             [
-              -82.0985,
-              28.01905
+              -82.098858,
+              28.01703
             ],
             [
-              -82.1019,
-              28.01905
+              -82.098789,
+              28.018485
             ],
             [
-              -82.1019,
-              28.017
+              -82.102017,
+              28.018485
             ]
           ]
         ]
@@ -2176,63 +1356,24 @@
         "coordinates": [
           [
             [
-              -82.0993,
-              28.01695
+              -82.101948,
+              28.017394
             ],
             [
-              -82.0986,
-              28.01695
+              -82.101948,
+              28.01703
             ],
             [
-              -82.0986,
-              28.01735
+              -82.099476,
+              28.01703
             ],
             [
-              -82.0993,
-              28.01735
+              -82.099476,
+              28.017394
             ],
             [
-              -82.0993,
-              28.01695
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Plant City FL",
-        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.0993,
-              28.01735
-            ],
-            [
-              -82.09855,
-              28.01735
-            ],
-            [
-              -82.09855,
-              28.0188
-            ],
-            [
-              -82.0993,
-              28.0188
-            ],
-            [
-              -82.0993,
-              28.01735
+              -82.101948,
+              28.017394
             ]
           ]
         ]
@@ -2255,24 +1396,24 @@
         "coordinates": [
           [
             [
-              -78.6423,
-              35.7499
+              -78.642072,
+              35.7516
             ],
             [
-              -78.6394,
-              35.7499
+              -78.64214,
+              35.750207
             ],
             [
-              -78.6394,
-              35.75175
+              -78.639943,
+              35.750207
             ],
             [
-              -78.6423,
-              35.75175
+              -78.639874,
+              35.7516
             ],
             [
-              -78.6423,
-              35.7499
+              -78.642072,
+              35.7516
             ]
           ]
         ]
@@ -2315,24 +1456,24 @@
         "coordinates": [
           [
             [
-              -78.64225,
-              35.75035
+              -78.642552,
+              35.750207
             ],
             [
-              -78.6419,
-              35.75035
+              -78.642552,
+              35.749761
             ],
             [
-              -78.6419,
-              35.75065
+              -78.64063,
+              35.749761
             ],
             [
-              -78.64225,
-              35.75065
+              -78.64063,
+              35.750207
             ],
             [
-              -78.64225,
-              35.75035
+              -78.642552,
+              35.750207
             ]
           ]
         ]
@@ -2344,7 +1485,8 @@
         "archetype": "#9",
         "archetypeName": "Gate + No GS (remote check-in)",
         "confidence": "high",
-        "zone": "truckGate"
+        "zone": "dropYard",
+        "index": 1
       }
     },
     {
@@ -2354,24 +1496,24 @@
         "coordinates": [
           [
             [
-              -78.6417,
-              35.75025
+              -78.640286,
+              35.751322
             ],
             [
-              -78.6409,
-              35.75025
+              -78.640286,
+              35.750319
             ],
             [
-              -78.6409,
-              35.7506
+              -78.639874,
+              35.750319
             ],
             [
-              -78.6417,
-              35.7506
+              -78.639874,
+              35.751322
             ],
             [
-              -78.6417,
-              35.75025
+              -78.640286,
+              35.751322
             ]
           ]
         ]
@@ -2394,64 +1536,24 @@
         "coordinates": [
           [
             [
-              -78.6409,
-              35.75015
+              -120.867955,
+              37.492517
             ],
             [
-              -78.6402,
-              35.75015
+              -120.868092,
+              37.490664
             ],
             [
-              -78.6402,
-              35.75042
+              -120.865345,
+              37.490555
             ],
             [
-              -78.6409,
-              35.75042
+              -120.865208,
+              37.492408
             ],
             [
-              -78.6409,
-              35.75015
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Raleigh NC",
-        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -120.86735,
-              37.4904
-            ],
-            [
-              -120.8649,
-              37.4904
-            ],
-            [
-              -120.8649,
-              37.49245
-            ],
-            [
-              -120.86735,
-              37.49245
-            ],
-            [
-              -120.86735,
-              37.4904
+              -120.867955,
+              37.492517
             ]
           ]
         ]
@@ -2494,63 +1596,24 @@
         "coordinates": [
           [
             [
-              -120.86735,
-              37.491
+              -120.867955,
+              37.491808
             ],
             [
-              -120.8669,
-              37.491
+              -120.867955,
+              37.491536
             ],
             [
-              -120.8669,
-              37.4913
+              -120.865689,
+              37.491482
             ],
             [
-              -120.86735,
-              37.4913
+              -120.865689,
+              37.491754
             ],
             [
-              -120.86735,
-              37.491
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Turlock CA",
-        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -120.8669,
-              37.49095
-            ],
-            [
-              -120.8652,
-              37.49095
-            ],
-            [
-              -120.8652,
-              37.4914
-            ],
-            [
-              -120.8669,
-              37.4914
-            ],
-            [
-              -120.8669,
-              37.49095
+              -120.867955,
+              37.491808
             ]
           ]
         ]
@@ -2573,63 +1636,24 @@
         "coordinates": [
           [
             [
-              -120.867,
-              37.4904
+              -87.771847,
+              41.762778
             ],
             [
-              -120.865,
-              37.4904
+              -87.771847,
+              41.760063
             ],
             [
-              -120.865,
-              37.49095
+              -87.768963,
+              41.760166
             ],
             [
-              -120.867,
-              37.49095
+              -87.7691,
+              41.762778
             ],
             [
-              -120.867,
-              37.4904
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Turlock CA",
-        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.7707,
-              41.7599
-            ],
-            [
-              -87.7675,
-              41.7599
-            ],
-            [
-              -87.7675,
-              41.7632
-            ],
-            [
-              -87.7707,
-              41.7632
-            ],
-            [
-              -87.7707,
-              41.7599
+              -87.771847,
+              41.762778
             ]
           ]
         ]
@@ -2672,24 +1696,64 @@
         "coordinates": [
           [
             [
-              -87.7692,
-              41.7612
+              -87.769443,
+              41.76201
             ],
             [
-              -87.7683,
-              41.7612
+              -87.769443,
+              41.760985
             ],
             [
-              -87.7683,
-              41.7617
+              -87.768276,
+              41.760985
             ],
             [
-              -87.7692,
-              41.7617
+              -87.768276,
+              41.76201
             ],
             [
-              -87.7692,
-              41.7612
+              -87.769443,
+              41.76201
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bedford Park IL",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.769787,
+              41.762624
+            ],
+            [
+              -87.769787,
+              41.761344
+            ],
+            [
+              -87.769443,
+              41.761344
+            ],
+            [
+              -87.769443,
+              41.762624
+            ],
+            [
+              -87.769787,
+              41.762624
             ]
           ]
         ]
@@ -2712,64 +1776,24 @@
         "coordinates": [
           [
             [
-              -87.7702,
-              41.7607
+              -87.811224,
+              41.747127
             ],
             [
-              -87.7694,
-              41.7607
+              -87.811636,
+              41.744975
             ],
             [
-              -87.7694,
-              41.761
+              -87.810057,
+              41.744873
             ],
             [
-              -87.7702,
-              41.761
+              -87.809576,
+              41.747025
             ],
             [
-              -87.7702,
-              41.7607
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Bedford Park IL",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8118,
-              41.7445
-            ],
-            [
-              -87.8094,
-              41.7445
-            ],
-            [
-              -87.8094,
-              41.7473
-            ],
-            [
-              -87.8118,
-              41.7473
-            ],
-            [
-              -87.8118,
-              41.7445
+              -87.811224,
+              41.747127
             ]
           ]
         ]
@@ -2812,103 +1836,24 @@
         "coordinates": [
           [
             [
-              -87.8115,
-              41.7449
+              -87.811087,
+              41.745488
             ],
             [
-              -87.811,
-              41.7449
+              -87.811155,
+              41.74518
             ],
             [
-              -87.811,
-              41.7453
+              -87.810125,
+              41.745078
             ],
             [
-              -87.8115,
-              41.7453
+              -87.810057,
+              41.745385
             ],
             [
-              -87.8115,
-              41.7449
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Bridgeview IL",
-        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8104,
-              41.7446
-            ],
-            [
-              -87.8095,
-              41.7446
-            ],
-            [
-              -87.8095,
-              41.7454
-            ],
-            [
-              -87.8104,
-              41.7454
-            ],
-            [
-              -87.8104,
-              41.7446
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Bridgeview IL",
-        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8115,
-              41.7452
-            ],
-            [
-              -87.8109,
-              41.7452
-            ],
-            [
-              -87.8109,
-              41.7464
-            ],
-            [
-              -87.8115,
-              41.7464
-            ],
-            [
-              -87.8115,
-              41.7452
+              -87.811087,
+              41.745488
             ]
           ]
         ]
@@ -2931,63 +1876,24 @@
         "coordinates": [
           [
             [
-              -87.8109,
-              41.7446
+              -87.865325,
+              41.930263
             ],
             [
-              -87.8095,
-              41.7446
+              -87.865737,
+              41.92679
             ],
             [
-              -87.8095,
-              41.7453
+              -87.863127,
+              41.926687
             ],
             [
-              -87.8109,
-              41.7453
+              -87.862578,
+              41.930161
             ],
             [
-              -87.8109,
-              41.7446
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Bridgeview IL",
-        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8653,
-              41.92365
-            ],
-            [
-              -87.8623,
-              41.92365
-            ],
-            [
-              -87.8623,
-              41.9279
-            ],
-            [
-              -87.8653,
-              41.9279
-            ],
-            [
-              -87.8653,
-              41.92365
+              -87.865325,
+              41.930263
             ]
           ]
         ]
@@ -3030,103 +1936,24 @@
         "coordinates": [
           [
             [
-              -87.8647,
-              41.9254
+              -87.865325,
+              41.929752
             ],
             [
-              -87.8642,
-              41.9254
+              -87.865325,
+              41.929242
             ],
             [
-              -87.8642,
-              41.9258
+              -87.862853,
+              41.929139
             ],
             [
-              -87.8647,
-              41.9258
+              -87.862853,
+              41.92965
             ],
             [
-              -87.8647,
-              41.9254
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Franklin Park IL",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8631,
-              41.9256
-            ],
-            [
-              -87.8623,
-              41.9256
-            ],
-            [
-              -87.8623,
-              41.9266
-            ],
-            [
-              -87.8631,
-              41.9266
-            ],
-            [
-              -87.8631,
-              41.9256
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Franklin Park IL",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8647,
-              41.924
-            ],
-            [
-              -87.8636,
-              41.924
-            ],
-            [
-              -87.8636,
-              41.9247
-            ],
-            [
-              -87.8647,
-              41.9247
-            ],
-            [
-              -87.8647,
-              41.924
+              -87.865325,
+              41.929752
             ]
           ]
         ]
@@ -3149,64 +1976,24 @@
         "coordinates": [
           [
             [
-              -87.8643,
-              41.9262
+              -87.819121,
+              41.238532
             ],
             [
-              -87.8634,
-              41.9262
+              -87.819259,
+              41.236673
             ],
             [
-              -87.8634,
-              41.927
+              -87.817199,
+              41.236673
             ],
             [
-              -87.8643,
-              41.927
+              -87.817061,
+              41.238532
             ],
             [
-              -87.8643,
-              41.9262
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Franklin Park IL",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8201,
-              41.2356
-            ],
-            [
-              -87.8156,
-              41.2356
-            ],
-            [
-              -87.8156,
-              41.2401
-            ],
-            [
-              -87.8201,
-              41.2401
-            ],
-            [
-              -87.8201,
-              41.2356
+              -87.819121,
+              41.238532
             ]
           ]
         ]
@@ -3249,63 +2036,24 @@
         "coordinates": [
           [
             [
-              -87.8183,
-              41.2359
+              -87.817061,
+              41.24039
             ],
             [
-              -87.8174,
-              41.2359
+              -87.817061,
+              41.238532
             ],
             [
-              -87.8174,
-              41.2364
+              -87.814727,
+              41.238532
             ],
             [
-              -87.8183,
-              41.2364
+              -87.814727,
+              41.24039
             ],
             [
-              -87.8183,
-              41.2359
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Manteno IL",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8172,
-              41.2383
-            ],
-            [
-              -87.8156,
-              41.2383
-            ],
-            [
-              -87.8156,
-              41.2396
-            ],
-            [
-              -87.8172,
-              41.2396
-            ],
-            [
-              -87.8172,
-              41.2383
+              -87.817061,
+              41.24039
             ]
           ]
         ]
@@ -3328,64 +2076,24 @@
         "coordinates": [
           [
             [
-              -87.8183,
-              41.2369
+              -87.849821,
+              41.49204
             ],
             [
-              -87.817,
-              41.2369
+              -87.850096,
+              41.488954
             ],
             [
-              -87.817,
-              41.2382
+              -87.843229,
+              41.488748
             ],
             [
-              -87.8183,
-              41.2382
+              -87.842955,
+              41.491629
             ],
             [
-              -87.8183,
-              41.2369
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Manteno IL",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8505,
-              41.487
-            ],
-            [
-              -87.8413,
-              41.487
-            ],
-            [
-              -87.8413,
-              41.4933
-            ],
-            [
-              -87.8505,
-              41.4933
-            ],
-            [
-              -87.8505,
-              41.487
+              -87.849821,
+              41.49204
             ]
           ]
         ]
@@ -3428,63 +2136,24 @@
         "coordinates": [
           [
             [
-              -87.8478,
-              41.4874
+              -87.847899,
+              41.490086
             ],
             [
-              -87.8468,
-              41.4874
+              -87.847899,
+              41.489057
             ],
             [
-              -87.8468,
-              41.4879
+              -87.844603,
+              41.488954
             ],
             [
-              -87.8478,
-              41.4879
+              -87.844603,
+              41.489983
             ],
             [
-              -87.8478,
-              41.4874
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Frankfort IL",
-        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8485,
-              41.4908
-            ],
-            [
-              -87.8461,
-              41.4908
-            ],
-            [
-              -87.8461,
-              41.4926
-            ],
-            [
-              -87.8485,
-              41.4926
-            ],
-            [
-              -87.8485,
-              41.4908
+              -87.847899,
+              41.490086
             ]
           ]
         ]
@@ -3507,64 +2176,24 @@
         "coordinates": [
           [
             [
-              -87.8502,
-              41.4882
+              -87.8468,
+              41.491011
             ],
             [
-              -87.8483,
-              41.4882
+              -87.8468,
+              41.490497
             ],
             [
-              -87.8483,
-              41.4897
+              -87.843504,
+              41.490291
             ],
             [
-              -87.8502,
-              41.4897
+              -87.843504,
+              41.490806
             ],
             [
-              -87.8502,
-              41.4882
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Frankfort IL",
-        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.8462,
-              41.4888
-            ],
-            [
-              -87.8438,
-              41.4888
-            ],
-            [
-              -87.8438,
-              41.4912
-            ],
-            [
-              -87.8462,
-              41.4912
-            ],
-            [
-              -87.8462,
-              41.4888
+              -87.8468,
+              41.491011
             ]
           ]
         ]
@@ -3587,24 +2216,24 @@
         "coordinates": [
           [
             [
-              -88.1192,
-              41.6229
+              -88.123641,
+              41.629053
             ],
             [
-              -88.1127,
-              41.6229
+              -88.123641,
+              41.622483
             ],
             [
-              -88.1127,
-              41.6308
+              -88.118697,
+              41.622483
             ],
             [
-              -88.1192,
-              41.6308
+              -88.118697,
+              41.629053
             ],
             [
-              -88.1192,
-              41.6229
+              -88.123641,
+              41.629053
             ]
           ]
         ]
@@ -3647,143 +2276,24 @@
         "coordinates": [
           [
             [
-              -88.116,
-              41.626
+              -88.123641,
+              41.628642
             ],
             [
-              -88.1152,
-              41.626
+              -88.123641,
+              41.622894
             ],
             [
-              -88.1152,
-              41.6265
+              -88.121993,
+              41.622894
             ],
             [
-              -88.116,
-              41.6265
+              -88.121993,
+              41.628642
             ],
             [
-              -88.116,
-              41.626
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.1192,
-              41.6242
-            ],
-            [
-              -88.1179,
-              41.6242
-            ],
-            [
-              -88.1179,
-              41.6301
-            ],
-            [
-              -88.1192,
-              41.6301
-            ],
-            [
-              -88.1192,
-              41.6242
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.1142,
-              41.6245
-            ],
-            [
-              -88.1129,
-              41.6245
-            ],
-            [
-              -88.1129,
-              41.6296
-            ],
-            [
-              -88.1142,
-              41.6296
-            ],
-            [
-              -88.1142,
-              41.6245
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.1183,
-              41.6243
-            ],
-            [
-              -88.1176,
-              41.6243
-            ],
-            [
-              -88.1176,
-              41.6299
-            ],
-            [
-              -88.1183,
-              41.6299
-            ],
-            [
-              -88.1183,
-              41.6243
+              -88.123641,
+              41.628642
             ]
           ]
         ]
@@ -3806,64 +2316,24 @@
         "coordinates": [
           [
             [
-              -88.1146,
-              41.6246
+              -83.123237,
+              39.996692
             ],
             [
-              -88.1139,
-              41.6246
+              -83.123511,
+              39.995324
             ],
             [
-              -88.1139,
-              41.6295
+              -83.122001,
+              39.995219
             ],
             [
-              -88.1146,
-              41.6295
+              -83.121726,
+              39.996586
             ],
             [
-              -88.1146,
-              41.6246
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.1236,
-              39.99455
-            ],
-            [
-              -83.12155,
-              39.99455
-            ],
-            [
-              -83.12155,
-              39.99735
-            ],
-            [
-              -83.1236,
-              39.99735
-            ],
-            [
-              -83.1236,
-              39.99455
+              -83.123237,
+              39.996692
             ]
           ]
         ]
@@ -3906,103 +2376,24 @@
         "coordinates": [
           [
             [
-              -83.12345,
-              39.99478
+              -83.123099,
+              39.995587
             ],
             [
-              -83.12315,
-              39.99478
+              -83.123168,
+              39.995377
             ],
             [
-              -83.12315,
-              39.995
+              -83.122069,
+              39.995271
             ],
             [
-              -83.12345,
-              39.995
+              -83.122001,
+              39.995482
             ],
             [
-              -83.12345,
-              39.99478
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Columbus OH",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.1232,
-              39.99478
-            ],
-            [
-              -83.1221,
-              39.99478
-            ],
-            [
-              -83.1221,
-              39.99545
-            ],
-            [
-              -83.1232,
-              39.99545
-            ],
-            [
-              -83.1232,
-              39.99478
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Columbus OH",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.1232,
-              39.995
-            ],
-            [
-              -83.1221,
-              39.995
-            ],
-            [
-              -83.1221,
-              39.99545
-            ],
-            [
-              -83.1232,
-              39.99545
-            ],
-            [
-              -83.1232,
-              39.995
+              -83.123099,
+              39.995587
             ]
           ]
         ]
@@ -4025,24 +2416,24 @@
         "coordinates": [
           [
             [
-              -84.0384,
+              -84.037899,
+              33.677457
+            ],
+            [
+              -84.038448,
+              33.675514
+            ],
+            [
+              -84.036663,
               33.6754
             ],
             [
-              -84.0357,
-              33.6754
+              -84.036113,
+              33.677343
             ],
             [
-              -84.0357,
-              33.67835
-            ],
-            [
-              -84.0384,
-              33.67835
-            ],
-            [
-              -84.0384,
-              33.6754
+              -84.037899,
+              33.677457
             ]
           ]
         ]
@@ -4085,63 +2476,24 @@
         "coordinates": [
           [
             [
-              -84.0369,
-              33.67555
+              -84.037487,
+              33.675857
             ],
             [
-              -84.0365,
-              33.67555
+              -84.037555,
+              33.675286
             ],
             [
-              -84.0365,
-              33.6758
+              -84.036319,
+              33.675171
             ],
             [
-              -84.0369,
-              33.6758
+              -84.036251,
+              33.675743
             ],
             [
-              -84.0369,
-              33.67555
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Conyers GA",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.0376,
-              33.6754
-            ],
-            [
-              -84.0365,
-              33.6754
-            ],
-            [
-              -84.0365,
-              33.6761
-            ],
-            [
-              -84.0376,
-              33.6761
-            ],
-            [
-              -84.0376,
-              33.6754
+              -84.037487,
+              33.675857
             ]
           ]
         ]
@@ -4164,24 +2516,24 @@
         "coordinates": [
           [
             [
-              -84.0376,
-              33.67555
+              -84.037967,
+              33.677
             ],
             [
-              -84.0366,
-              33.67555
+              -84.038036,
+              33.676657
             ],
             [
-              -84.0366,
-              33.6764
+              -84.036525,
+              33.676543
             ],
             [
-              -84.0376,
-              33.6764
+              -84.036457,
+              33.676886
             ],
             [
-              -84.0376,
-              33.67555
+              -84.037967,
+              33.677
             ]
           ]
         ]
@@ -4204,24 +2556,24 @@
         "coordinates": [
           [
             [
-              -83.8483,
-              33.6096
+              -83.848947,
+              33.614309
             ],
             [
-              -83.843,
-              33.6096
+              -83.849221,
+              33.609963
             ],
             [
-              -83.843,
-              33.6148
+              -83.844827,
+              33.609734
             ],
             [
-              -83.8483,
-              33.6148
+              -83.844552,
+              33.61408
             ],
             [
-              -83.8483,
-              33.6096
+              -83.848947,
+              33.614309
             ]
           ]
         ]
@@ -4264,103 +2616,24 @@
         "coordinates": [
           [
             [
-              -83.8458,
-              33.6143
+              -83.848672,
+              33.611678
             ],
             [
-              -83.8452,
-              33.6143
+              -83.848809,
+              33.610992
             ],
             [
-              -83.8452,
-              33.61475
+              -83.845239,
+              33.610763
             ],
             [
-              -83.8458,
-              33.61475
+              -83.845101,
+              33.611449
             ],
             [
-              -83.8458,
-              33.6143
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Covington GA Plant",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8448,
-              33.6105
-            ],
-            [
-              -83.8436,
-              33.6105
-            ],
-            [
-              -83.8436,
-              33.6132
-            ],
-            [
-              -83.8448,
-              33.6132
-            ],
-            [
-              -83.8448,
-              33.6105
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Covington GA Plant",
-        "type": "Manufacturing Plant (Foodservice)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8456,
-              33.6108
-            ],
-            [
-              -83.8444,
-              33.6108
-            ],
-            [
-              -83.8444,
-              33.6134
-            ],
-            [
-              -83.8456,
-              33.6134
-            ],
-            [
-              -83.8456,
-              33.6108
+              -83.848672,
+              33.611678
             ]
           ]
         ]
@@ -4383,24 +2656,24 @@
         "coordinates": [
           [
             [
-              -83.8148,
-              33.6044
+              -83.813561,
+              33.608602
             ],
             [
-              -83.8104,
-              33.6044
+              -83.814385,
+              33.605285
             ],
             [
-              -83.8104,
-              33.60825
+              -83.811501,
+              33.604827
             ],
             [
-              -83.8148,
-              33.60825
+              -83.810677,
+              33.608144
             ],
             [
-              -83.8148,
-              33.6044
+              -83.813561,
+              33.608602
             ]
           ]
         ]
@@ -4443,63 +2716,24 @@
         "coordinates": [
           [
             [
-              -83.814,
-              33.6049
+              -83.813973,
+              33.607916
             ],
             [
-              -83.8134,
-              33.6049
+              -83.814248,
+              33.605628
             ],
             [
-              -83.8134,
-              33.60525
+              -83.813424,
+              33.605514
             ],
             [
-              -83.814,
-              33.60525
+              -83.813149,
+              33.607801
             ],
             [
-              -83.814,
-              33.6049
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Covington GA Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8133,
-              33.6046
-            ],
-            [
-              -83.8115,
-              33.6046
-            ],
-            [
-              -83.8115,
-              33.6056
-            ],
-            [
-              -83.8133,
-              33.6056
-            ],
-            [
-              -83.8133,
-              33.6046
+              -83.813973,
+              33.607916
             ]
           ]
         ]
@@ -4522,24 +2756,24 @@
         "coordinates": [
           [
             [
-              -83.8123,
-              33.607
+              -83.8126,
+              33.608144
             ],
             [
-              -83.8108,
-              33.607
+              -83.812875,
+              33.605399
             ],
             [
-              -83.8108,
-              33.6082
+              -83.811776,
+              33.605285
             ],
             [
-              -83.8123,
-              33.6082
+              -83.811501,
+              33.60803
             ],
             [
-              -83.8123,
-              33.607
+              -83.8126,
+              33.608144
             ]
           ]
         ]
@@ -4562,143 +2796,24 @@
         "coordinates": [
           [
             [
-              -83.8136,
-              33.6048
+              -83.649935,
+              32.706139
             ],
             [
-              -83.8123,
-              33.6048
+              -83.650003,
+              32.705099
             ],
             [
-              -83.8123,
-              33.6079
+              -83.647257,
+              32.704983
             ],
             [
-              -83.8136,
-              33.6079
+              -83.647188,
+              32.706023
             ],
             [
-              -83.8136,
-              33.6048
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Covington GA Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8122,
-              33.6054
-            ],
-            [
-              -83.8106,
-              33.6054
-            ],
-            [
-              -83.8106,
-              33.6083
-            ],
-            [
-              -83.8122,
-              33.6083
-            ],
-            [
-              -83.8122,
-              33.6054
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Covington GA Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8141,
-              33.6047
-            ],
-            [
-              -83.8135,
-              33.6047
-            ],
-            [
-              -83.8135,
-              33.6053
-            ],
-            [
-              -83.8141,
-              33.6053
-            ],
-            [
-              -83.8141,
-              33.6047
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Covington GA Distribution Center",
-        "type": "Distribution Center / Regional Mixing Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.6493,
-              32.7049
-            ],
-            [
-              -83.6462,
-              32.7049
-            ],
-            [
-              -83.6462,
-              32.7084
-            ],
-            [
-              -83.6493,
-              32.7084
-            ],
-            [
-              -83.6493,
-              32.7049
+              -83.649935,
+              32.706139
             ]
           ]
         ]
@@ -4741,63 +2856,24 @@
         "coordinates": [
           [
             [
-              -83.64945,
-              32.70605
+              -83.650003,
+              32.707583
             ],
             [
-              -83.64905,
-              32.70605
+              -83.650003,
+              32.707121
             ],
             [
-              -83.64905,
-              32.70645
+              -83.647943,
+              32.707006
             ],
             [
-              -83.64945,
-              32.70645
+              -83.647943,
+              32.707468
             ],
             [
-              -83.64945,
-              32.70605
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Macon GA",
-        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.6496,
-              32.7067
-            ],
-            [
-              -83.6476,
-              32.7067
-            ],
-            [
-              -83.6476,
-              32.7083
-            ],
-            [
-              -83.6496,
-              32.7083
-            ],
-            [
-              -83.6496,
-              32.7067
+              -83.650003,
+              32.707583
             ]
           ]
         ]
@@ -4820,64 +2896,24 @@
         "coordinates": [
           [
             [
-              -83.647,
-              32.7052
+              -83.649935,
+              32.705272
             ],
             [
-              -83.6463,
-              32.7052
+              -83.649935,
+              32.705041
             ],
             [
-              -83.6463,
-              32.706
+              -83.6476,
+              32.704926
             ],
             [
-              -83.647,
-              32.706
+              -83.6476,
+              32.705157
             ],
             [
-              -83.647,
-              32.7052
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Macon GA",
-        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.6487,
-              32.7063
-            ],
-            [
-              -83.6465,
-              32.7063
-            ],
-            [
-              -83.6465,
-              32.70665
-            ],
-            [
-              -83.6487,
-              32.70665
-            ],
-            [
-              -83.6487,
-              32.7063
+              -83.649935,
+              32.705272
             ]
           ]
         ]
@@ -4900,24 +2936,24 @@
         "coordinates": [
           [
             [
-              -92.8212,
-              34.3769
+              -92.821397,
+              34.38011
             ],
             [
-              -92.8174,
-              34.3769
+              -92.821672,
+              34.377163
             ],
             [
-              -92.8174,
-              34.3811
+              -92.817827,
+              34.376937
             ],
             [
-              -92.8212,
-              34.3811
+              -92.817552,
+              34.379883
             ],
             [
-              -92.8212,
-              34.3769
+              -92.821397,
+              34.38011
             ]
           ]
         ]
@@ -4960,63 +2996,24 @@
         "coordinates": [
           [
             [
-              -92.8197,
-              34.3779
+              -92.820573,
+              34.380903
             ],
             [
-              -92.8193,
-              34.3779
+              -92.820711,
+              34.380223
             ],
             [
-              -92.8193,
-              34.37825
+              -92.817689,
+              34.379997
             ],
             [
-              -92.8197,
-              34.37825
+              -92.817552,
+              34.380677
             ],
             [
-              -92.8197,
-              34.3779
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Malvern AR",
-        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.8192,
-              34.3771
-            ],
-            [
-              -92.8178,
-              34.3771
-            ],
-            [
-              -92.8178,
-              34.3781
-            ],
-            [
-              -92.8192,
-              34.3781
-            ],
-            [
-              -92.8192,
-              34.3771
+              -92.820573,
+              34.380903
             ]
           ]
         ]
@@ -5039,64 +3036,24 @@
         "coordinates": [
           [
             [
-              -92.821,
-              34.38
+              -92.820848,
+              34.37875
             ],
             [
-              -92.8196,
-              34.38
+              -92.820985,
+              34.37705
             ],
             [
-              -92.8196,
-              34.381
+              -92.820299,
+              34.376937
             ],
             [
-              -92.821,
-              34.381
+              -92.820161,
+              34.37875
             ],
             [
-              -92.821,
-              34.38
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Malvern AR",
-        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.8193,
-              34.3779
-            ],
-            [
-              -92.8179,
-              34.3779
-            ],
-            [
-              -92.8179,
-              34.37825
-            ],
-            [
-              -92.8193,
-              34.37825
-            ],
-            [
-              -92.8193,
-              34.3779
+              -92.820848,
+              34.37875
             ]
           ]
         ]
@@ -5119,24 +3076,24 @@
         "coordinates": [
           [
             [
-              -80.789,
-              35.6297
+              -80.788211,
+              35.632684
             ],
             [
-              -80.785,
-              35.6297
+              -80.788485,
+              35.630395
             ],
             [
-              -80.785,
-              35.6333
+              -80.786151,
+              35.630172
             ],
             [
-              -80.789,
-              35.6333
+              -80.785876,
+              35.632516
             ],
             [
-              -80.789,
-              35.6297
+              -80.788211,
+              35.632684
             ]
           ]
         ]
@@ -5179,24 +3136,24 @@
         "coordinates": [
           [
             [
-              -80.7884,
-              35.6297
+              -80.788348,
+              35.631121
             ],
             [
-              -80.787,
-              35.6297
+              -80.788417,
+              35.63034
             ],
             [
-              -80.787,
-              35.6311
+              -80.787043,
+              35.630172
             ],
             [
-              -80.7884,
-              35.6311
+              -80.786975,
+              35.630954
             ],
             [
-              -80.7884,
-              35.6297
+              -80.788348,
+              35.631121
             ]
           ]
         ]
@@ -5219,24 +3176,24 @@
         "coordinates": [
           [
             [
-              -80.7877,
-              35.6302
+              -80.788073,
+              35.631679
             ],
             [
-              -80.7862,
-              35.6302
+              -80.788142,
+              35.631344
             ],
             [
-              -80.7862,
-              35.6311
+              -80.786357,
+              35.631177
             ],
             [
-              -80.7877,
-              35.6311
+              -80.786288,
+              35.631512
             ],
             [
-              -80.7877,
-              35.6302
+              -80.788073,
+              35.631679
             ]
           ]
         ]
@@ -5259,24 +3216,24 @@
         "coordinates": [
           [
             [
-              -77.6696,
-              35.2697
+              -77.669099,
+              35.273719
             ],
             [
-              -77.6658,
-              35.2697
+              -77.669236,
+              35.271365
             ],
             [
-              -77.6658,
-              35.2736
+              -77.666764,
+              35.271252
             ],
             [
-              -77.6696,
-              35.2736
+              -77.66649,
+              35.273607
             ],
             [
-              -77.6696,
-              35.2697
+              -77.669099,
+              35.273719
             ]
           ]
         ]
@@ -5319,64 +3276,24 @@
         "coordinates": [
           [
             [
-              -77.6668,
-              35.2707
+              -77.668962,
+              35.272374
             ],
             [
-              -77.6659,
-              35.2707
+              -77.66903,
+              35.271421
             ],
             [
-              -77.6659,
-              35.2727
+              -77.668275,
+              35.271365
             ],
             [
-              -77.6668,
-              35.2727
+              -77.668206,
+              35.272318
             ],
             [
-              -77.6668,
-              35.2707
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Kinston NC Plant",
-        "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.6671,
-              35.2708
-            ],
-            [
-              -77.6663,
-              35.2708
-            ],
-            [
-              -77.6663,
-              35.2727
-            ],
-            [
-              -77.6671,
-              35.2727
-            ],
-            [
-              -77.6671,
-              35.2708
+              -77.668962,
+              35.272374
             ]
           ]
         ]
@@ -5399,24 +3316,63 @@
         "coordinates": [
           [
             [
-              -96.7079,
-              46.8409
+              -77.668893,
+              35.27114
             ],
             [
-              -96.70555,
-              46.8409
+              -77.668962,
+              35.270636
             ],
             [
-              -96.70555,
-              46.84265
+              -77.667588,
+              35.27058
             ],
             [
-              -96.7079,
-              46.84265
+              -77.66752,
+              35.271084
             ],
             [
-              -96.7079,
-              46.8409
+              -77.668893,
+              35.27114
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Kinston NC Plant",
+        "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.707949,
+              46.84222
+            ],
+            [
+              -96.707949,
+              46.841186
+            ],
+            [
+              -96.705477,
+              46.841186
+            ],
+            [
+              -96.705477,
+              46.84222
+            ],
+            [
+              -96.707949,
+              46.84222
             ]
           ]
         ]
@@ -5459,63 +3415,24 @@
         "coordinates": [
           [
             [
-              -96.7079,
-              46.8413
+              -96.707811,
+              46.842079
             ],
             [
-              -96.7074,
-              46.8413
+              -96.707811,
+              46.841515
             ],
             [
-              -96.7074,
-              46.8417
+              -96.707125,
+              46.841515
             ],
             [
-              -96.7079,
-              46.8417
+              -96.707125,
+              46.842079
             ],
             [
-              -96.7079,
-              46.8413
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Moorhead MN",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.7079,
-              46.84175
-            ],
-            [
-              -96.70745,
-              46.84175
-            ],
-            [
-              -96.70745,
-              46.84235
-            ],
-            [
-              -96.7079,
-              46.84235
-            ],
-            [
-              -96.7079,
-              46.84175
+              -96.707811,
+              46.842079
             ]
           ]
         ]
@@ -5538,24 +3455,24 @@
         "coordinates": [
           [
             [
-              -96.70745,
-              46.84165
+              -96.707537,
+              46.841374
             ],
             [
-              -96.707,
-              46.84165
+              -96.707537,
+              46.841186
             ],
             [
-              -96.707,
-              46.84245
+              -96.705614,
+              46.841186
             ],
             [
-              -96.70745,
-              46.84245
+              -96.705614,
+              46.841374
             ],
             [
-              -96.70745,
-              46.84165
+              -96.707537,
+              46.841374
             ]
           ]
         ]
@@ -5578,24 +3495,24 @@
         "coordinates": [
           [
             [
-              -121.26165,
-              37.89255
+              -121.262067,
+              37.895734
             ],
             [
-              -121.2591,
-              37.89255
+              -121.262135,
+              37.892483
             ],
             [
-              -121.2591,
-              37.8954
+              -121.25932,
+              37.892483
             ],
             [
-              -121.26165,
-              37.8954
+              -121.259251,
+              37.895734
             ],
             [
-              -121.26165,
-              37.89255
+              -121.262067,
+              37.895734
             ]
           ]
         ]
@@ -5638,103 +3555,24 @@
         "coordinates": [
           [
             [
-              -121.2602,
-              37.89255
+              -121.261998,
+              37.895084
             ],
             [
-              -121.25955,
-              37.89255
+              -121.261998,
+              37.89335
             ],
             [
-              -121.25955,
-              37.893
+              -121.261723,
+              37.89335
             ],
             [
-              -121.2602,
-              37.893
+              -121.261723,
+              37.895084
             ],
             [
-              -121.2602,
-              37.89255
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Stockton CA",
-        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.261,
-              37.893
-            ],
-            [
-              -121.25985,
-              37.893
-            ],
-            [
-              -121.25985,
-              37.8947
-            ],
-            [
-              -121.261,
-              37.8947
-            ],
-            [
-              -121.261,
-              37.893
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Stockton CA",
-        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.2611,
-              37.893
-            ],
-            [
-              -121.26005,
-              37.893
-            ],
-            [
-              -121.26005,
-              37.8948
-            ],
-            [
-              -121.2611,
-              37.8948
-            ],
-            [
-              -121.2611,
-              37.893
+              -121.261998,
+              37.895084
             ]
           ]
         ]
@@ -5757,24 +3595,24 @@
         "coordinates": [
           [
             [
-              -73.4552,
-              44.7085
+              -73.456895,
+              44.714123
             ],
             [
-              -73.449,
-              44.7085
+              -73.456345,
+              44.708267
             ],
             [
-              -73.449,
-              44.7137
+              -73.449204,
+              44.708853
             ],
             [
-              -73.4552,
-              44.7137
+              -73.449479,
+              44.714318
             ],
             [
-              -73.4552,
-              44.7085
+              -73.456895,
+              44.714123
             ]
           ]
         ]
@@ -5817,143 +3655,24 @@
         "coordinates": [
           [
             [
-              -73.4505,
-              44.7108
+              -73.453187,
+              44.710512
             ],
             [
-              -73.4497,
-              44.7108
+              -73.453324,
+              44.709926
             ],
             [
-              -73.4497,
-              44.7113
+              -73.450989,
+              44.709829
             ],
             [
-              -73.4505,
-              44.7113
+              -73.450852,
+              44.710414
             ],
             [
-              -73.4505,
-              44.7108
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Plattsburgh NY",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -73.4543,
-              44.7111
-            ],
-            [
-              -73.453,
-              44.7111
-            ],
-            [
-              -73.453,
-              44.7123
-            ],
-            [
-              -73.4543,
-              44.7123
-            ],
-            [
-              -73.4543,
-              44.7111
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Plattsburgh NY",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -73.4504,
-              44.7119
-            ],
-            [
-              -73.4493,
-              44.7119
-            ],
-            [
-              -73.4493,
-              44.7128
-            ],
-            [
-              -73.4504,
-              44.7128
-            ],
-            [
-              -73.4504,
-              44.7119
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "pactiv-evergreen",
-        "name": "Pactiv Evergreen - Plattsburgh NY",
-        "type": "Manufacturing Plant (Food Merchandising)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -73.4539,
-              44.7113
-            ],
-            [
-              -73.4529,
-              44.7113
-            ],
-            [
-              -73.4529,
-              44.7122
-            ],
-            [
-              -73.4539,
-              44.7122
-            ],
-            [
-              -73.4539,
-              44.7113
+              -73.453187,
+              44.710512
             ]
           ]
         ]

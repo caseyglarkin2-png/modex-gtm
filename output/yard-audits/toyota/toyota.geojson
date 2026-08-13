@@ -8,24 +8,32 @@
         "coordinates": [
           [
             [
-              -84.5475,
-              38.2475
+              -84.544338,
+              38.270626
             ],
             [
-              -84.5265,
-              38.2475
+              -84.545986,
+              38.259843
             ],
             [
-              -84.5265,
-              38.2705
+              -84.54269,
+              38.248197
             ],
             [
-              -84.5475,
-              38.2705
+              -84.530605,
+              38.246471
             ],
             [
-              -84.5475,
-              38.2475
+              -84.522915,
+              38.255099
+            ],
+            [
+              -84.528408,
+              38.27192
+            ],
+            [
+              -84.544338,
+              38.270626
             ]
           ]
         ]
@@ -68,63 +76,24 @@
         "coordinates": [
           [
             [
-              -84.5318,
-              38.2518
+              -84.543789,
+              38.251648
             ],
             [
-              -84.5302,
-              38.2518
+              -84.54324,
+              38.248628
             ],
             [
-              -84.5302,
-              38.2528
+              -84.537197,
+              38.249059
             ],
             [
-              -84.5318,
-              38.2528
+              -84.537747,
+              38.252079
             ],
             [
-              -84.5318,
-              38.2518
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.5318,
-              38.247
-            ],
-            [
-              -84.5265,
-              38.247
-            ],
-            [
-              -84.5265,
-              38.2502
-            ],
-            [
-              -84.5318,
-              38.2502
-            ],
-            [
-              -84.5318,
-              38.247
+              -84.543789,
+              38.251648
             ]
           ]
         ]
@@ -147,104 +116,24 @@
         "coordinates": [
           [
             [
-              -84.5485,
-              38.2545
+              -84.54269,
+              38.268038
             ],
             [
-              -84.5435,
-              38.2545
+              -84.542141,
+              38.26545
             ],
             [
-              -84.5435,
-              38.259
+              -84.530056,
+              38.266744
             ],
             [
-              -84.5485,
-              38.259
+              -84.530605,
+              38.269332
             ],
             [
-              -84.5485,
-              38.2545
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.543,
-              38.251
-            ],
-            [
-              -84.5385,
-              38.251
-            ],
-            [
-              -84.5385,
-              38.255
-            ],
-            [
-              -84.543,
-              38.255
-            ],
-            [
-              -84.543,
-              38.251
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.541,
-              38.257
-            ],
-            [
-              -84.537,
-              38.257
-            ],
-            [
-              -84.537,
-              38.2605
-            ],
-            [
-              -84.541,
-              38.2605
-            ],
-            [
-              -84.541,
-              38.257
+              -84.54269,
+              38.268038
             ]
           ]
         ]
@@ -267,103 +156,32 @@
         "coordinates": [
           [
             [
-              -84.534,
-              38.253
+              -87.568493,
+              38.303795
             ],
             [
-              -84.529,
-              38.253
+              -87.568493,
+              38.292156
             ],
             [
-              -84.529,
-              38.257
+              -87.567395,
+              38.277064
             ],
             [
-              -84.534,
-              38.257
+              -87.556408,
+              38.277064
             ],
             [
-              -84.534,
-              38.253
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.53,
-              38.2525
+              -87.552014,
+              38.284826
             ],
             [
-              -84.5265,
-              38.2525
+              -87.554211,
+              38.303795
             ],
             [
-              -84.5265,
-              38.256
-            ],
-            [
-              -84.53,
-              38.256
-            ],
-            [
-              -84.53,
-              38.2525
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.572,
-              38.282
-            ],
-            [
-              -87.553,
-              38.282
-            ],
-            [
-              -87.553,
-              38.2985
-            ],
-            [
-              -87.572,
-              38.2985
-            ],
-            [
-              -87.572,
-              38.282
+              -87.568493,
+              38.303795
             ]
           ]
         ]
@@ -406,24 +224,24 @@
         "coordinates": [
           [
             [
-              -87.563,
-              38.2868
+              -87.565197,
+              38.303795
             ],
             [
-              -87.5614,
-              38.2868
+              -87.565197,
+              38.30164
             ],
             [
-              -87.5614,
-              38.2878
+              -87.560803,
+              38.30164
             ],
             [
-              -87.563,
-              38.2878
+              -87.560803,
+              38.303795
             ],
             [
-              -87.563,
-              38.2868
+              -87.565197,
+              38.303795
             ]
           ]
         ]
@@ -445,24 +263,24 @@
         "coordinates": [
           [
             [
-              -87.56,
-              38.287
+              -87.566845,
+              38.287844
             ],
             [
-              -87.5565,
-              38.287
+              -87.566845,
+              38.283101
             ],
             [
-              -87.5565,
-              38.2905
+              -87.560253,
+              38.283101
             ],
             [
-              -87.56,
-              38.2905
+              -87.560253,
+              38.287844
             ],
             [
-              -87.56,
-              38.287
+              -87.566845,
+              38.287844
             ]
           ]
         ]
@@ -485,104 +303,24 @@
         "coordinates": [
           [
             [
-              -87.5685,
-              38.289
+              -87.565197,
+              38.295174
             ],
             [
-              -87.564,
-              38.289
+              -87.565197,
+              38.292587
             ],
             [
-              -87.564,
-              38.2935
+              -87.554211,
+              38.292587
             ],
             [
-              -87.5685,
-              38.2935
+              -87.554211,
+              38.295174
             ],
             [
-              -87.5685,
-              38.289
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.563,
-              38.2895
-            ],
-            [
-              -87.5595,
-              38.2895
-            ],
-            [
-              -87.5595,
-              38.293
-            ],
-            [
-              -87.563,
-              38.293
-            ],
-            [
-              -87.563,
-              38.2895
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.565,
-              38.2885
-            ],
-            [
-              -87.561,
-              38.2885
-            ],
-            [
-              -87.561,
-              38.292
-            ],
-            [
-              -87.565,
-              38.292
-            ],
-            [
-              -87.565,
-              38.2885
+              -87.565197,
+              38.295174
             ]
           ]
         ]
@@ -605,103 +343,32 @@
         "coordinates": [
           [
             [
-              -87.56,
-              38.291
+              -98.556233,
+              29.267292
             ],
             [
-              -87.5565,
-              38.291
+              -98.55843,
+              29.260104
             ],
             [
-              -87.5565,
-              38.294
+              -98.553486,
+              29.248122
             ],
             [
-              -87.56,
-              38.294
+              -98.533711,
+              29.249081
             ],
             [
-              -87.56,
-              38.291
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.5625,
-              38.287
+              -98.529316,
+              29.254832
             ],
             [
-              -87.5595,
-              38.287
+              -98.530415,
+              29.269209
             ],
             [
-              -87.5595,
-              38.2895
-            ],
-            [
-              -87.5625,
-              38.2895
-            ],
-            [
-              -87.5625,
-              38.287
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -98.553,
-              29.252
-            ],
-            [
-              -98.534,
-              29.252
-            ],
-            [
-              -98.534,
-              29.27
-            ],
-            [
-              -98.553,
-              29.27
-            ],
-            [
-              -98.553,
-              29.252
+              -98.556233,
+              29.267292
             ]
           ]
         ]
@@ -744,24 +411,24 @@
         "coordinates": [
           [
             [
-              -98.5462,
-              29.2588
+              -98.551289,
+              29.246205
             ],
             [
-              -98.5446,
-              29.2588
+              -98.551289,
+              29.243329
             ],
             [
-              -98.5446,
-              29.2598
+              -98.547993,
+              29.243329
             ],
             [
-              -98.5462,
-              29.2598
+              -98.547993,
+              29.246205
             ],
             [
-              -98.5462,
-              29.2588
+              -98.551289,
+              29.246205
             ]
           ]
         ]
@@ -783,24 +450,24 @@
         "coordinates": [
           [
             [
-              -98.5455,
-              29.2635
+              -98.546895,
+              29.265854
+            ],
+            [
+              -98.546895,
+              29.256749
             ],
             [
               -98.5425,
-              29.2635
+              29.256749
             ],
             [
               -98.5425,
-              29.267
+              29.265854
             ],
             [
-              -98.5455,
-              29.267
-            ],
-            [
-              -98.5455,
-              29.2635
+              -98.546895,
+              29.265854
             ]
           ]
         ]
@@ -823,64 +490,24 @@
         "coordinates": [
           [
             [
-              -98.543,
-              29.26
+              -98.545796,
+              29.264896
             ],
             [
-              -98.5395,
-              29.26
+              -98.545796,
+              29.2625
             ],
             [
-              -98.5395,
-              29.2635
+              -98.53481,
+              29.262021
             ],
             [
-              -98.543,
-              29.2635
+              -98.53481,
+              29.264417
             ],
             [
-              -98.543,
-              29.26
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -98.5435,
-              29.261
-            ],
-            [
-              -98.539,
-              29.261
-            ],
-            [
-              -98.539,
-              29.2645
-            ],
-            [
-              -98.5435,
-              29.2645
-            ],
-            [
-              -98.5435,
-              29.261
+              -98.545796,
+              29.264896
             ]
           ]
         ]
@@ -903,103 +530,28 @@
         "coordinates": [
           [
             [
-              -98.5455,
-              29.2595
+              -88.90324,
+              34.386847
             ],
             [
-              -98.5425,
-              29.2595
+              -88.90324,
+              34.378687
             ],
             [
-              -98.5425,
-              29.2625
+              -88.893627,
+              34.374153
             ],
             [
-              -98.5455,
-              29.2625
+              -88.88731,
+              34.379367
             ],
             [
-              -98.5455,
-              29.2595
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -98.5455,
-              29.258
+              -88.893627,
+              34.388887
             ],
             [
-              -98.543,
-              29.258
-            ],
-            [
-              -98.543,
-              29.2605
-            ],
-            [
-              -98.5455,
-              29.2605
-            ],
-            [
-              -98.5455,
-              29.258
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.901,
-              34.376
-            ],
-            [
-              -88.884,
-              34.376
-            ],
-            [
-              -88.884,
-              34.387
-            ],
-            [
-              -88.901,
-              34.387
-            ],
-            [
-              -88.901,
-              34.376
+              -88.90324,
+              34.386847
             ]
           ]
         ]
@@ -1042,63 +594,24 @@
         "coordinates": [
           [
             [
-              -88.8908,
-              34.3782
+              -88.900493,
+              34.382767
             ],
             [
-              -88.8892,
-              34.3782
+              -88.899944,
+              34.380727
             ],
             [
-              -88.8892,
-              34.3792
+              -88.897197,
+              34.381407
             ],
             [
-              -88.8908,
-              34.3792
+              -88.897747,
+              34.383447
             ],
             [
-              -88.8908,
-              34.3782
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.8915,
-              34.377
-            ],
-            [
-              -88.888,
-              34.377
-            ],
-            [
-              -88.888,
-              34.3798
-            ],
-            [
-              -88.8915,
-              34.3798
-            ],
-            [
-              -88.8915,
-              34.377
+              -88.900493,
+              34.382767
             ]
           ]
         ]
@@ -1121,64 +634,24 @@
         "coordinates": [
           [
             [
-              -88.895,
-              34.3785
+              -88.897747,
+              34.383673
             ],
             [
-              -88.8918,
-              34.3785
+              -88.897197,
+              34.382313
             ],
             [
-              -88.8918,
-              34.381
+              -88.892253,
+              34.383673
             ],
             [
-              -88.895,
-              34.381
+              -88.892803,
+              34.385033
             ],
             [
-              -88.895,
-              34.3785
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.8955,
-              34.379
-            ],
-            [
-              -88.8915,
-              34.379
-            ],
-            [
-              -88.8915,
-              34.382
-            ],
-            [
-              -88.8955,
-              34.382
-            ],
-            [
-              -88.8955,
-              34.379
+              -88.897747,
+              34.383673
             ]
           ]
         ]
@@ -1201,103 +674,28 @@
         "coordinates": [
           [
             [
-              -88.8985,
-              34.3805
+              -81.996395,
+              38.601864
             ],
             [
-              -88.8955,
-              34.3805
+              -81.997493,
+              38.598
             ],
             [
-              -88.8955,
-              34.383
+              -81.996395,
+              38.591989
             ],
             [
-              -88.8985,
-              34.383
+              -81.992,
+              38.59156
             ],
             [
-              -88.8985,
-              34.3805
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.8918,
-              34.378
+              -81.989253,
+              38.601434
             ],
             [
-              -88.8895,
-              34.378
-            ],
-            [
-              -88.8895,
-              34.3805
-            ],
-            [
-              -88.8918,
-              34.3805
-            ],
-            [
-              -88.8918,
-              34.378
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.997172,
-              38.591712
-            ],
-            [
-              -81.986828,
-              38.591712
-            ],
-            [
-              -81.986828,
-              38.604288
-            ],
-            [
-              -81.997172,
-              38.604288
-            ],
-            [
-              -81.997172,
-              38.591712
+              -81.996395,
+              38.601864
             ]
           ]
         ]
@@ -1340,63 +738,24 @@
         "coordinates": [
           [
             [
-              -81.9956,
-              38.59475
+              -81.995296,
+              38.598
             ],
             [
-              -81.9942,
-              38.59475
+              -81.995845,
+              38.595853
             ],
             [
-              -81.9942,
-              38.59585
+              -81.992549,
+              38.595424
             ],
             [
-              -81.9956,
-              38.59585
+              -81.992,
+              38.597571
             ],
             [
-              -81.9956,
-              38.59475
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
-        "type": "Powertrain Plant (engines/transmissions)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.9918,
-              38.6001
-            ],
-            [
-              -81.9878,
-              38.6001
-            ],
-            [
-              -81.9878,
-              38.6043
-            ],
-            [
-              -81.9918,
-              38.6043
-            ],
-            [
-              -81.9918,
-              38.6001
+              -81.995296,
+              38.598
             ]
           ]
         ]
@@ -1419,24 +778,24 @@
         "coordinates": [
           [
             [
-              -81.9911,
-              38.597
+              -81.995845,
+              38.598859
             ],
             [
-              -81.9899,
-              38.597
+              -81.99612,
+              38.597785
             ],
             [
-              -81.9899,
-              38.6002
+              -81.991176,
+              38.597356
             ],
             [
-              -81.9911,
-              38.6002
+              -81.990901,
+              38.598429
             ],
             [
-              -81.9911,
-              38.597
+              -81.995845,
+              38.598859
             ]
           ]
         ]
@@ -1459,64 +818,28 @@
         "coordinates": [
           [
             [
-              -81.9932,
-              38.5942
+              -86.853493,
+              34.690275
             ],
             [
-              -81.9915,
-              38.5942
+              -86.854592,
+              34.684629
             ],
             [
-              -81.9915,
-              38.5963
+              -86.853493,
+              34.676272
             ],
             [
-              -81.9932,
-              38.5963
+              -86.841408,
+              34.677176
             ],
             [
-              -81.9932,
-              38.5942
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
-        "type": "Powertrain Plant (engines/transmissions)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.8545,
-              34.6755
+              -86.842507,
+              34.689824
             ],
             [
-              -86.842,
-              34.6755
-            ],
-            [
-              -86.842,
-              34.6915
-            ],
-            [
-              -86.8545,
-              34.6915
-            ],
-            [
-              -86.8545,
-              34.6755
+              -86.853493,
+              34.690275
             ]
           ]
         ]
@@ -1559,63 +882,24 @@
         "coordinates": [
           [
             [
-              -86.8465,
-              34.6833
+              -86.844704,
+              34.684629
             ],
             [
-              -86.8451,
-              34.6833
+              -86.844704,
+              34.68079
             ],
             [
-              -86.8451,
-              34.6847
+              -86.841408,
+              34.68079
             ],
             [
-              -86.8465,
-              34.6847
+              -86.841408,
+              34.684629
             ],
             [
-              -86.8465,
-              34.6833
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
-        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.8462,
-              34.6838
-            ],
-            [
-              -86.8434,
-              34.6838
-            ],
-            [
-              -86.8434,
-              34.6856
-            ],
-            [
-              -86.8462,
-              34.6856
-            ],
-            [
-              -86.8462,
-              34.6838
+              -86.844704,
+              34.684629
             ]
           ]
         ]
@@ -1638,64 +922,24 @@
         "coordinates": [
           [
             [
-              -86.8492,
-              34.68
+              -86.849648,
+              34.683048
             ],
             [
-              -86.8464,
-              34.68
+              -86.849648,
+              34.681693
             ],
             [
-              -86.8464,
-              34.6818
+              -86.844704,
+              34.681693
             ],
             [
-              -86.8492,
-              34.6818
+              -86.844704,
+              34.683048
             ],
             [
-              -86.8492,
-              34.68
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
-        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.8472,
-              34.6842
-            ],
-            [
-              -86.8454,
-              34.6842
-            ],
-            [
-              -86.8454,
-              34.6862
-            ],
-            [
-              -86.8472,
-              34.6862
-            ],
-            [
-              -86.8472,
-              34.6842
+              -86.849648,
+              34.683048
             ]
           ]
         ]
@@ -1718,64 +962,32 @@
         "coordinates": [
           [
             [
-              -86.8468,
-              34.6825
+              -79.647578,
+              35.90084
             ],
             [
-              -86.8454,
-              34.6825
+              -79.647578,
+              35.893275
             ],
             [
-              -86.8454,
-              34.6841
+              -79.640986,
+              35.884819
             ],
             [
-              -86.8468,
-              34.6841
+              -79.623408,
+              35.88571
             ],
             [
-              -86.8468,
-              34.6825
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
-        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.642,
-              35.886
+              -79.620112,
+              35.89906
             ],
             [
-              -79.6195,
-              35.886
+              -79.623408,
+              35.90173
             ],
             [
-              -79.6195,
-              35.906
-            ],
-            [
-              -79.642,
-              35.906
-            ],
-            [
-              -79.642,
-              35.886
+              -79.647578,
+              35.90084
             ]
           ]
         ]
@@ -1818,63 +1030,24 @@
         "coordinates": [
           [
             [
-              -79.6332,
-              35.8932
+              -79.643184,
+              35.897725
             ],
             [
-              -79.6318,
-              35.8932
+              -79.643184,
+              35.893275
             ],
             [
-              -79.6318,
-              35.8946
+              -79.634395,
+              35.893275
             ],
             [
-              -79.6332,
-              35.8946
+              -79.634395,
+              35.897725
             ],
             [
-              -79.6332,
-              35.8932
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
-        "type": "Battery Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "low",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -79.6325,
-              35.895
-            ],
-            [
-              -79.6295,
-              35.895
-            ],
-            [
-              -79.6295,
-              35.8972
-            ],
-            [
-              -79.6325,
-              35.8972
-            ],
-            [
-              -79.6325,
-              35.895
+              -79.643184,
+              35.897725
             ]
           ]
         ]
@@ -1897,24 +1070,24 @@
         "coordinates": [
           [
             [
-              -79.6335,
-              35.8946
+              -79.635493,
+              35.893275
             ],
             [
-              -79.6306,
-              35.8946
+              -79.635493,
+              35.89105
             ],
             [
-              -79.6306,
-              35.8962
+              -79.627253,
+              35.89105
             ],
             [
-              -79.6335,
-              35.8962
+              -79.627253,
+              35.893275
             ],
             [
-              -79.6335,
-              35.8946
+              -79.635493,
+              35.893275
             ]
           ]
         ]
@@ -1937,24 +1110,28 @@
         "coordinates": [
           [
             [
-              -86.6435,
-              34.8255
+              -86.642993,
+              34.832656
             ],
             [
-              -86.632,
-              34.8255
+              -86.642993,
+              34.829951
             ],
             [
-              -86.632,
-              34.835
+              -86.641895,
+              34.826795
             ],
             [
-              -86.6435,
-              34.835
+              -86.634204,
+              34.826795
             ],
             [
-              -86.6435,
-              34.8255
+              -86.634204,
+              34.832205
+            ],
+            [
+              -86.642993,
+              34.832656
             ]
           ]
         ]
@@ -1997,24 +1174,24 @@
         "coordinates": [
           [
             [
-              -86.6368,
-              34.8272
+              -86.642993,
+              34.821834
             ],
             [
-              -86.6354,
-              34.8272
+              -86.642993,
+              34.820481
             ],
             [
-              -86.6354,
-              34.8283
+              -86.640247,
+              34.820481
             ],
             [
-              -86.6368,
-              34.8283
+              -86.640247,
+              34.821834
             ],
             [
-              -86.6368,
-              34.8272
+              -86.642993,
+              34.821834
             ]
           ]
         ]
@@ -2036,24 +1213,24 @@
         "coordinates": [
           [
             [
-              -86.6373,
-              34.83
+              -86.640247,
+              34.831755
             ],
             [
-              -86.6348,
-              34.83
+              -86.640247,
+              34.830402
             ],
             [
-              -86.6348,
-              34.8327
+              -86.635303,
+              34.830402
             ],
             [
-              -86.6373,
-              34.8327
+              -86.635303,
+              34.831755
             ],
             [
-              -86.6373,
-              34.83
+              -86.640247,
+              34.831755
             ]
           ]
         ]
@@ -2076,64 +1253,24 @@
         "coordinates": [
           [
             [
-              -86.6347,
-              34.83
+              -86.641345,
+              34.830402
             ],
             [
-              -86.633,
-              34.83
+              -86.641345,
+              34.829275
             ],
             [
-              -86.633,
-              34.8327
+              -86.635852,
+              34.829275
             ],
             [
-              -86.6347,
-              34.8327
+              -86.635852,
+              34.830402
             ],
             [
-              -86.6347,
-              34.83
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
-        "type": "Engine Plant",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.637,
-              34.8285
-            ],
-            [
-              -86.6356,
-              34.8285
-            ],
-            [
-              -86.6356,
-              34.8306
-            ],
-            [
-              -86.637,
-              34.8306
-            ],
-            [
-              -86.637,
-              34.8285
+              -86.641345,
+              34.830402
             ]
           ]
         ]
@@ -2156,24 +1293,28 @@
         "coordinates": [
           [
             [
-              -90.9712,
-              38.9608
+              -90.972061,
+              38.964668
             ],
             [
-              -90.9655,
-              38.9608
+              -90.972611,
+              38.962746
             ],
             [
-              -90.9655,
-              38.9662
+              -90.970413,
+              38.961892
             ],
             [
-              -90.9712,
-              38.9662
+              -90.967667,
+              38.962319
             ],
             [
-              -90.9712,
-              38.9608
+              -90.967941,
+              38.964668
+            ],
+            [
+              -90.972061,
+              38.964668
             ]
           ]
         ]
@@ -2216,103 +1357,24 @@
         "coordinates": [
           [
             [
-              -90.96845,
-              38.96535
+              -90.971512,
+              38.964027
             ],
             [
-              -90.96795,
-              38.96535
+              -90.971512,
+              38.963386
             ],
             [
-              -90.96795,
-              38.96575
+              -90.968216,
+              38.963386
             ],
             [
-              -90.96845,
-              38.96575
+              -90.968216,
+              38.964027
             ],
             [
-              -90.96845,
-              38.96535
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
-        "type": "Powertrain Plant (aluminum castings)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.9673,
-              38.9637
-            ],
-            [
-              -90.9653,
-              38.9637
-            ],
-            [
-              -90.9653,
-              38.9656
-            ],
-            [
-              -90.9673,
-              38.9656
-            ],
-            [
-              -90.9673,
-              38.9637
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
-        "type": "Powertrain Plant (aluminum castings)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.9685,
-              38.96255
-            ],
-            [
-              -90.9668,
-              38.96255
-            ],
-            [
-              -90.9668,
-              38.9631
-            ],
-            [
-              -90.9685,
-              38.9631
-            ],
-            [
-              -90.9685,
-              38.96255
+              -90.971512,
+              38.964027
             ]
           ]
         ]
@@ -2335,24 +1397,28 @@
         "coordinates": [
           [
             [
-              -88.9445,
-              35.5945
+              -88.943747,
+              35.60068
             ],
             [
-              -88.938,
-              35.5945
+              -88.944296,
+              35.597777
             ],
             [
-              -88.938,
-              35.602
+              -88.942099,
+              35.59666
             ],
             [
-              -88.9445,
-              35.602
+              -88.939627,
+              35.597107
             ],
             [
-              -88.9445,
-              35.5945
+              -88.939901,
+              35.60068
+            ],
+            [
+              -88.943747,
+              35.60068
             ]
           ]
         ]
@@ -2395,63 +1461,24 @@
         "coordinates": [
           [
             [
-              -88.93995,
-              35.597
+              -88.942099,
+              35.597553
             ],
             [
-              -88.9394,
-              35.597
+              -88.942099,
+              35.59666
             ],
             [
-              -88.9394,
-              35.5974
+              -88.939901,
+              35.59666
             ],
             [
-              -88.93995,
-              35.5974
+              -88.939901,
+              35.597553
             ],
             [
-              -88.93995,
-              35.597
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
-        "type": "Powertrain Plant (aluminum castings)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.9431,
-              35.5998
-            ],
-            [
-              -88.9417,
-              35.5998
-            ],
-            [
-              -88.9417,
-              35.6008
-            ],
-            [
-              -88.9431,
-              35.6008
-            ],
-            [
-              -88.9431,
-              35.5998
+              -88.942099,
+              35.597553
             ]
           ]
         ]
@@ -2474,24 +1501,24 @@
         "coordinates": [
           [
             [
-              -88.9425,
-              35.5976
+              -88.941549,
+              35.600233
             ],
             [
-              -88.9412,
-              35.5976
+              -88.941549,
+              35.598447
             ],
             [
-              -88.9412,
-              35.599
+              -88.939901,
+              35.598447
             ],
             [
-              -88.9425,
-              35.599
+              -88.939901,
+              35.600233
             ],
             [
-              -88.9425,
-              35.5976
+              -88.941549,
+              35.600233
             ]
           ]
         ]
@@ -2514,63 +1541,24 @@
         "coordinates": [
           [
             [
-              -88.9406,
-              35.5972
+              -118.164335,
+              33.872982
             ],
             [
-              -88.9395,
-              35.5972
+              -118.164335,
+              33.87036
             ],
             [
-              -88.9395,
-              35.5983
+              -118.160077,
+              33.870246
             ],
             [
-              -88.9406,
-              35.5983
+              -118.160077,
+              33.872868
             ],
             [
-              -88.9406,
-              35.5972
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
-        "type": "Powertrain Plant (aluminum castings)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.1645,
-              33.87
-            ],
-            [
-              -118.1603,
-              33.87
-            ],
-            [
-              -118.1603,
-              33.8725
-            ],
-            [
-              -118.1645,
-              33.8725
-            ],
-            [
-              -118.1645,
-              33.87
+              -118.164335,
+              33.872982
             ]
           ]
         ]
@@ -2613,24 +1601,24 @@
         "coordinates": [
           [
             [
-              -118.16095,
-              33.8725
+              -118.16406,
+              33.869904
             ],
             [
-              -118.1603,
-              33.8725
+              -118.16406,
+              33.86922
             ],
             [
-              -118.1603,
-              33.8729
+              -118.160077,
+              33.86922
             ],
             [
-              -118.16095,
-              33.8729
+              -118.160077,
+              33.869904
             ],
             [
-              -118.16095,
-              33.8725
+              -118.16406,
+              33.869904
             ]
           ]
         ]
@@ -2642,7 +1630,8 @@
         "archetype": "#9",
         "archetypeName": "Gate + No GS (remote check-in)",
         "confidence": "medium",
-        "zone": "truckGate"
+        "zone": "dropYard",
+        "index": 1
       }
     },
     {
@@ -2652,24 +1641,24 @@
         "coordinates": [
           [
             [
-              -118.1628,
-              33.871
+              -118.16406,
+              33.87264
             ],
             [
-              -118.1619,
-              33.871
+              -118.16406,
+              33.87207
             ],
             [
-              -118.1619,
-              33.872
+              -118.162,
+              33.87207
             ],
             [
-              -118.1628,
-              33.872
+              -118.162,
+              33.87264
             ],
             [
-              -118.1628,
-              33.871
+              -118.16406,
+              33.87264
             ]
           ]
         ]
@@ -2692,24 +1681,32 @@
         "coordinates": [
           [
             [
-              -84.7115,
-              39.05
+              -84.709549,
+              39.055433
             ],
             [
-              -84.705,
-              39.05
+              -84.710373,
+              39.052767
             ],
             [
-              -84.705,
-              39.056
+              -84.709549,
+              39.050314
             ],
             [
-              -84.7115,
-              39.056
+              -84.706803,
+              39.051807
             ],
             [
-              -84.7115,
-              39.05
+              -84.705704,
+              39.054366
+            ],
+            [
+              -84.705979,
+              39.05522
+            ],
+            [
+              -84.709549,
+              39.055433
             ]
           ]
         ]
@@ -2752,63 +1749,24 @@
         "coordinates": [
           [
             [
-              -84.7053,
-              39.0532
+              -84.710099,
+              39.053727
             ],
             [
-              -84.7046,
-              39.0532
+              -84.709412,
+              39.05074
             ],
             [
-              -84.7046,
-              39.054
+              -84.708313,
+              39.050954
             ],
             [
-              -84.7053,
-              39.054
+              -84.709,
+              39.053833
             ],
             [
-              -84.7053,
-              39.0532
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "North American Parts Center Kentucky - Hebron KY",
-        "type": "Parts Procurement & Distribution Hub",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.7108,
-              39.0506
-            ],
-            [
-              -84.7078,
-              39.0506
-            ],
-            [
-              -84.7078,
-              39.0528
-            ],
-            [
-              -84.7108,
-              39.0528
-            ],
-            [
-              -84.7108,
-              39.0506
+              -84.710099,
+              39.053727
             ]
           ]
         ]
@@ -2831,64 +1789,24 @@
         "coordinates": [
           [
             [
-              -84.7078,
-              39.0518
+              -84.709,
+              39.055006
             ],
             [
-              -84.706,
-              39.0518
+              -84.709137,
+              39.054366
             ],
             [
-              -84.706,
-              39.0543
+              -84.706391,
+              39.054153
             ],
             [
-              -84.7078,
-              39.0543
+              -84.706253,
+              39.054793
             ],
             [
-              -84.7078,
-              39.0518
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "North American Parts Center Kentucky - Hebron KY",
-        "type": "Parts Procurement & Distribution Hub",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.7101,
-              39.0513
-            ],
-            [
-              -84.7083,
-              39.0513
-            ],
-            [
-              -84.7083,
-              39.0545
-            ],
-            [
-              -84.7101,
-              39.0545
-            ],
-            [
-              -84.7101,
-              39.0513
+              -84.709,
+              39.055006
             ]
           ]
         ]
@@ -2911,64 +1829,24 @@
         "coordinates": [
           [
             [
-              -84.7072,
-              39.0523
+              -118.228937,
+              33.780283
             ],
             [
-              -84.7062,
-              39.0523
+              -118.228937,
+              33.771607
             ],
             [
-              -84.7062,
-              39.0548
+              -118.2185,
+              33.771607
             ],
             [
-              -84.7072,
-              39.0548
+              -118.217951,
+              33.780283
             ],
             [
-              -84.7072,
-              39.0523
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "North American Parts Center Kentucky - Hebron KY",
-        "type": "Parts Procurement & Distribution Hub",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.2233,
-              33.7733
-            ],
-            [
-              -118.2147,
-              33.7733
-            ],
-            [
-              -118.2147,
-              33.7823
-            ],
-            [
-              -118.2233,
-              33.7823
-            ],
-            [
-              -118.2233,
-              33.7733
+              -118.228937,
+              33.780283
             ]
           ]
         ]
@@ -3011,63 +1889,24 @@
         "coordinates": [
           [
             [
-              -118.2195,
-              33.7801
+              -118.228388,
+              33.77937
             ],
             [
-              -118.2185,
-              33.7801
+              -118.228388,
+              33.772977
             ],
             [
-              -118.2185,
-              33.7809
+              -118.219049,
+              33.772977
             ],
             [
-              -118.2195,
-              33.7809
+              -118.219049,
+              33.77937
             ],
             [
-              -118.2195,
-              33.7801
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.2233,
-              33.777
-            ],
-            [
-              -118.2185,
-              33.777
-            ],
-            [
-              -118.2185,
-              33.782
-            ],
-            [
-              -118.2233,
-              33.782
-            ],
-            [
-              -118.2233,
-              33.777
+              -118.228388,
+              33.77937
             ]
           ]
         ]
@@ -3090,143 +1929,28 @@
         "coordinates": [
           [
             [
-              -118.22,
-              33.774
+              -122.762789,
+              45.643413
             ],
             [
-              -118.2165,
-              33.774
+              -122.762789,
+              45.639381
             ],
             [
-              -118.2165,
-              33.777
+              -122.759493,
+              45.633427
             ],
             [
-              -118.22,
-              33.777
+              -122.747408,
+              45.632275
             ],
             [
-              -118.22,
-              33.774
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.218,
-              33.7748
+              -122.74631,
+              45.642261
             ],
             [
-              -118.2165,
-              33.7748
-            ],
-            [
-              -118.2165,
-              33.7762
-            ],
-            [
-              -118.218,
-              33.7762
-            ],
-            [
-              -118.218,
-              33.7748
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.218,
-              33.7762
-            ],
-            [
-              -118.2162,
-              33.7762
-            ],
-            [
-              -118.2162,
-              33.7778
-            ],
-            [
-              -118.218,
-              33.7778
-            ],
-            [
-              -118.218,
-              33.7762
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.7565,
-              45.6325
-            ],
-            [
-              -122.749,
-              45.6325
-            ],
-            [
-              -122.749,
-              45.6405
-            ],
-            [
-              -122.7565,
-              45.6405
-            ],
-            [
-              -122.7565,
-              45.6325
+              -122.762789,
+              45.643413
             ]
           ]
         ]
@@ -3269,63 +1993,24 @@
         "coordinates": [
           [
             [
-              -122.7556,
-              45.6366
+              -122.756747,
+              45.641301
             ],
             [
-              -122.7543,
-              45.6366
+              -122.757296,
+              45.636116
             ],
             [
-              -122.7543,
-              45.6376
+              -122.748507,
+              45.63554
             ],
             [
-              -122.7556,
-              45.6376
+              -122.747958,
+              45.640725
             ],
             [
-              -122.7556,
-              45.6366
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.7555,
-              45.637
-            ],
-            [
-              -122.7505,
-              45.637
-            ],
-            [
-              -122.7505,
-              45.6405
-            ],
-            [
-              -122.7555,
-              45.6405
-            ],
-            [
-              -122.7555,
-              45.637
+              -122.756747,
+              45.641301
             ]
           ]
         ]
@@ -3348,143 +2033,28 @@
         "coordinates": [
           [
             [
-              -122.7545,
-              45.6355
+              -74.141493,
+              40.700247
             ],
             [
-              -122.7495,
-              45.6355
+              -74.142042,
+              40.696082
             ],
             [
-              -122.7495,
-              45.6372
+              -74.138197,
+              40.688169
             ],
             [
-              -122.7545,
-              45.6372
+              -74.129408,
+              40.689418
             ],
             [
-              -122.7545,
-              45.6355
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.755,
-              45.636
+              -74.12831,
+              40.698165
             ],
             [
-              -122.753,
-              45.636
-            ],
-            [
-              -122.753,
-              45.6372
-            ],
-            [
-              -122.755,
-              45.6372
-            ],
-            [
-              -122.755,
-              45.636
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.7556,
-              45.6362
-            ],
-            [
-              -122.7543,
-              45.6362
-            ],
-            [
-              -122.7543,
-              45.6372
-            ],
-            [
-              -122.7556,
-              45.6372
-            ],
-            [
-              -122.7556,
-              45.6362
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.1395,
-              40.6905
-            ],
-            [
-              -74.132,
-              40.6905
-            ],
-            [
-              -74.132,
-              40.6985
-            ],
-            [
-              -74.1395,
-              40.6985
-            ],
-            [
-              -74.1395,
-              40.6905
+              -74.141493,
+              40.700247
             ]
           ]
         ]
@@ -3527,63 +2097,24 @@
         "coordinates": [
           [
             [
-              -74.1352,
-              40.6923
+              -74.13016,
+              40.69592
             ],
             [
-              -74.134,
-              40.6923
+              -74.135254,
+              40.696231
             ],
             [
-              -74.134,
-              40.6933
+              -74.135798,
+              40.691038
             ],
             [
-              -74.1352,
-              40.6933
+              -74.130704,
+              40.690727
             ],
             [
-              -74.1352,
-              40.6923
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.137,
-              40.692
-            ],
-            [
-              -74.132,
-              40.692
-            ],
-            [
-              -74.132,
-              40.6985
-            ],
-            [
-              -74.137,
-              40.6985
-            ],
-            [
-              -74.137,
-              40.692
+              -74.13016,
+              40.69592
             ]
           ]
         ]
@@ -3606,143 +2137,24 @@
         "coordinates": [
           [
             [
-              -74.139,
-              40.6905
+              -117.584547,
+              34.033
             ],
             [
-              -74.1355,
-              40.6905
+              -117.584547,
+              34.030269
             ],
             [
-              -74.1355,
-              40.6935
+              -117.578779,
+              34.030269
             ],
             [
-              -74.139,
-              40.6935
+              -117.578779,
+              34.033
             ],
             [
-              -74.139,
-              40.6905
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.137,
-              40.6938
-            ],
-            [
-              -74.1352,
-              40.6938
-            ],
-            [
-              -74.1352,
-              40.6952
-            ],
-            [
-              -74.137,
-              40.6952
-            ],
-            [
-              -74.137,
-              40.6938
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.1355,
-              40.6923
-            ],
-            [
-              -74.134,
-              40.6923
-            ],
-            [
-              -74.134,
-              40.6938
-            ],
-            [
-              -74.1355,
-              40.6938
-            ],
-            [
-              -74.1355,
-              40.6923
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
-        "type": "Vehicle Distribution Center (port processing)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.5852,
-              34.0305
-            ],
-            [
-              -117.5768,
-              34.0305
-            ],
-            [
-              -117.5768,
-              34.0347
-            ],
-            [
-              -117.5852,
-              34.0347
-            ],
-            [
-              -117.5852,
-              34.0305
+              -117.584547,
+              34.033
             ]
           ]
         ]
@@ -3785,63 +2197,24 @@
         "coordinates": [
           [
             [
-              -117.58,
-              34.0309
+              -117.584272,
+              34.030269
             ],
             [
-              -117.579,
-              34.0309
+              -117.584272,
+              34.029358
             ],
             [
-              -117.579,
-              34.0316
+              -117.579053,
+              34.029358
             ],
             [
-              -117.58,
-              34.0316
+              -117.579053,
+              34.030269
             ],
             [
-              -117.58,
-              34.0309
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Parts Distribution Center - Ontario CA",
-        "type": "Parts Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.5842,
-              34.0306
-            ],
-            [
-              -117.578,
-              34.0306
-            ],
-            [
-              -117.578,
-              34.032
-            ],
-            [
-              -117.5842,
-              34.032
-            ],
-            [
-              -117.5842,
-              34.0306
+              -117.584272,
+              34.030269
             ]
           ]
         ]
@@ -3864,24 +2237,24 @@
         "coordinates": [
           [
             [
-              -117.5845,
-              34.0318
+              -117.584272,
+              34.030269
             ],
             [
-              -117.5778,
-              34.0318
+              -117.584272,
+              34.029586
             ],
             [
-              -117.5778,
-              34.0325
+              -117.579053,
+              34.029586
             ],
             [
-              -117.5845,
-              34.0325
+              -117.579053,
+              34.030269
             ],
             [
-              -117.5845,
-              34.0318
+              -117.584272,
+              34.030269
             ]
           ]
         ]
@@ -3904,63 +2277,28 @@
         "coordinates": [
           [
             [
-              -117.58,
-              34.0309
+              -71.236235,
+              42.01736
             ],
             [
-              -117.5785,
-              34.0309
+              -71.236235,
+              42.016442
             ],
             [
-              -117.5785,
-              34.0318
+              -71.235274,
+              42.015728
             ],
             [
-              -117.58,
-              34.0318
+              -71.233626,
+              42.016442
             ],
             [
-              -117.58,
-              34.0309
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Parts Distribution Center - Ontario CA",
-        "type": "Parts Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -71.2368,
-              42.0153
+              -71.234038,
+              42.017768
             ],
             [
-              -71.233,
-              42.0153
-            ],
-            [
-              -71.233,
-              42.0183
-            ],
-            [
-              -71.2368,
-              42.0183
-            ],
-            [
-              -71.2368,
-              42.0153
+              -71.236235,
+              42.01736
             ]
           ]
         ]
@@ -4003,103 +2341,24 @@
         "coordinates": [
           [
             [
-              -71.2342,
-              42.0168
+              -71.236235,
+              42.017258
             ],
             [
-              -71.2334,
-              42.0168
+              -71.236098,
+              42.01685
             ],
             [
-              -71.2334,
-              42.0174
+              -71.234999,
+              42.017054
             ],
             [
-              -71.2342,
-              42.0174
+              -71.235137,
+              42.017462
             ],
             [
-              -71.2342,
-              42.0168
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Parts Distribution Center - Mansfield MA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -71.2366,
-              42.0171
-            ],
-            [
-              -71.2352,
-              42.0171
-            ],
-            [
-              -71.2352,
-              42.018
-            ],
-            [
-              -71.2366,
-              42.018
-            ],
-            [
-              -71.2366,
-              42.0171
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "toyota",
-        "name": "Toyota Parts Distribution Center - Mansfield MA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -71.2362,
-              42.0172
-            ],
-            [
-              -71.2342,
-              42.0172
-            ],
-            [
-              -71.2342,
-              42.0179
-            ],
-            [
-              -71.2362,
-              42.0179
-            ],
-            [
-              -71.2362,
-              42.0172
+              -71.236235,
+              42.017258
             ]
           ]
         ]

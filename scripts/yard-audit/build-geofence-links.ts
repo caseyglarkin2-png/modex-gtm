@@ -18,23 +18,29 @@
 import { readFileSync, readdirSync, existsSync, statSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizeZone, GeometryError, type Position, type Zone } from './geometry.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const AUD = join(ROOT, 'output', 'yard-audits');
-
-type Box = { south: number; west: number; north: number; east: number } | null;
 
 interface Site {
   name?: string;
   type?: string;
   coords?: { lat: number; lng: number };
-  geofences?: { perimeter?: Box };
+  geofences?: { perimeter?: Zone };
   yardMetrics?: { siteAreaAcres?: number };
 }
 
-/** Centre of a {south,west,north,east} box. */
-function boxCentre(b: NonNullable<Box>): { lat: number; lng: number } {
-  return { lat: (b.south + b.north) / 2, lng: (b.west + b.east) / 2 };
+/** Bounding box of a normalized ring, in the sheet's S, W, N, E order. */
+function bboxOf(ring: Position[]): { south: number; west: number; north: number; east: number } {
+  const lngs = ring.map((p) => p[0]);
+  const lats = ring.map((p) => p[1]);
+  return {
+    south: Math.min(...lats),
+    west: Math.min(...lngs),
+    north: Math.max(...lats),
+    east: Math.max(...lngs),
+  };
 }
 
 /** Google Maps satellite link centred on a point. */
@@ -42,21 +48,16 @@ function mapsLink(lat: number, lng: number): string {
   return `https://www.google.com/maps/@${lat.toFixed(6)},${lng.toFixed(6)},400m/data=!3m1!1e3`;
 }
 
-/** geojson.io link carrying a single perimeter Polygon Feature (kept small). */
-function geojsonIoLink(name: string, b: NonNullable<Box>): string {
+/**
+ * geojson.io link carrying the actual traced perimeter (kept small — perimeter
+ * only, no sub-zones, no metrics). This used to re-derive a rectangle from the
+ * box fields; against ring-shaped source that produced `undefined` corners.
+ */
+function geojsonIoLink(name: string, ring: Position[]): string {
   const feature = {
     type: 'Feature',
     properties: { name },
-    geometry: {
-      type: 'Polygon',
-      coordinates: [[
-        [b.west, b.south],
-        [b.east, b.south],
-        [b.east, b.north],
-        [b.west, b.north],
-        [b.west, b.south],
-      ]],
-    },
+    geometry: { type: 'Polygon', coordinates: [ring] },
   };
   return `https://geojson.io/#data=data:application/json,${encodeURIComponent(JSON.stringify(feature))}`;
 }
@@ -95,18 +96,19 @@ function buildSheet(slug: string, display: string, sites: Site[]): string {
   sites.forEach((s, i) => {
     const name = cell(s.name ?? `Site ${i + 1}`);
     const type = cell(s.type ?? '');
-    const perim = s.geofences?.perimeter;
-    if (!perim) {
+    const ring = normalizeZone(s.geofences?.perimeter, `${slug}/site-${i + 1}#perimeter`);
+    if (!ring) {
       lines.push(`| ${i + 1} | ${name} | ${type} | — | — (perimeter unresolved) | — | — | — |`);
       return;
     }
     resolved++;
-    const centre = boxCentre(perim);
+    const b = bboxOf(ring);
+    const centre = { lat: (b.south + b.north) / 2, lng: (b.west + b.east) / 2 };
     const coordStr = `${centre.lat.toFixed(6)}, ${centre.lng.toFixed(6)}`;
-    const bbox = `${perim.south}, ${perim.west}, ${perim.north}, ${perim.east}`;
+    const bbox = `${b.south}, ${b.west}, ${b.north}, ${b.east}`;
     const acres = s.yardMetrics?.siteAreaAcres != null ? String(s.yardMetrics.siteAreaAcres) : '—';
     const maps = `[satellite](${mapsLink(centre.lat, centre.lng)})`;
-    const gio = `[view](${geojsonIoLink(s.name ?? `Site ${i + 1}`, perim)})`;
+    const gio = `[view](${geojsonIoLink(s.name ?? `Site ${i + 1}`, ring)})`;
     lines.push(`| ${i + 1} | ${name} | ${type} | ${coordStr} | ${bbox} | ${acres} | ${maps} | ${gio} |`);
   });
 
@@ -144,4 +146,13 @@ function main(): void {
   console.log(`\n${written} geofence-link sheets written.`);
 }
 
-main();
+try {
+  main();
+} catch (err) {
+  if (err instanceof GeometryError) {
+    console.error('\n✗ source geometry is malformed — refusing to emit link sheets.');
+    console.error(`  ${err.message}`);
+    process.exit(1);
+  }
+  throw err;
+}

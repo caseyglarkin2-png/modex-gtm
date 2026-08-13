@@ -1,0 +1,48 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Tyson Foods Springdale Complex - Springdale AR,Poultry Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@36.19038,-94.12540,400m/data=!3m1!1e3"
+Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE,Beef Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.42785,-96.41696,400m/data=!3m1!1e3"
+Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX,Beef Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@35.2593,-101.6488,400m/data=!3m1!1e3"
+Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS,Beef Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,YES,,,YES,,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@37.9986,-101.0256,400m/data=!3m1!1e3"
+Tyson Fresh Meats Joslin Beef Plant - Joslin IL,Beef Processing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,YES,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@41.5524,-90.2244,400m/data=!3m1!1e3"
+Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA,Pork Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,YES,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.639749,-95.187849,400m/data=!3m1!1e3"
+Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA,Pork Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.5093,-92.261,400m/data=!3m1!1e3"
+Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA,Pork Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@41.29565,-91.35625,400m/data=!3m1!1e3"
+Tyson Foods Sherman Poultry Plant - Sherman TX,Poultry Processing Plant,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.5815,-96.6056,400m/data=!3m1!1e3"
+Tyson Foods Center Poultry Complex - Center TX,Poultry Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,YES,,YES,,,YES,,YES,,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@31.7940,-94.1666,400m/data=!3m1!1e3"
+Tyson Foods Shelbyville Poultry Plant - Shelbyville TN,Poultry Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.47812,-86.4743,400m/data=!3m1!1e3"
+Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC,Poultry Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@36.14299,-81.1632,400m/data=!3m1!1e3"
+Tyson Foods New Holland Poultry Plant - New Holland PA,Poultry Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.096,-76.086,400m/data=!3m1!1e3"
+Tyson Foods Vicksburg Poultry Plant - Vicksburg MS,Poultry Processing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@32.364817,-90.658987,400m/data=!3m1!1e3"
+Tyson Foods Russellville Distribution Center - Russellville AR,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.260484,-93.066226,400m/data=!3m1!1e3"
+Tyson Foods Indianapolis Distribution Center - Indianapolis IN,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.750135,-86.118750,400m/data=!3m1!1e3"
+Tyson Foods Haltom City Distribution Center - Haltom City TX,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@32.822754,-97.287037,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,5,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,8,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,3,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,15,88%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,14,82%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,9,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,8,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

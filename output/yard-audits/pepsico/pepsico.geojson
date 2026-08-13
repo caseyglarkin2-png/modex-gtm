@@ -1,0 +1,7004 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2839,
+              33.44674
+            ],
+            [
+              -112.2839,
+              33.4435
+            ],
+            [
+              -112.28112,
+              33.4435
+            ],
+            [
+              -112.28112,
+              33.44674
+            ],
+            [
+              -112.2839,
+              33.44674
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Tolleson AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2818,
+              33.44692
+            ],
+            [
+              -112.2818,
+              33.44662
+            ],
+            [
+              -112.28145,
+              33.44662
+            ],
+            [
+              -112.28145,
+              33.44692
+            ],
+            [
+              -112.2818,
+              33.44692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Tolleson AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.28155,
+              33.44655
+            ],
+            [
+              -112.28155,
+              33.4439
+            ],
+            [
+              -112.28125,
+              33.4439
+            ],
+            [
+              -112.28125,
+              33.44655
+            ],
+            [
+              -112.28155,
+              33.44655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Tolleson AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.28185,
+              33.44655
+            ],
+            [
+              -112.28185,
+              33.44395
+            ],
+            [
+              -112.28155,
+              33.44395
+            ],
+            [
+              -112.28155,
+              33.44655
+            ],
+            [
+              -112.28185,
+              33.44655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Tolleson AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.019954,
+              36.968463
+            ],
+            [
+              -81.02016,
+              36.966268
+            ],
+            [
+              -81.018307,
+              36.964183
+            ],
+            [
+              -81.012813,
+              36.963305
+            ],
+            [
+              -81.007526,
+              36.963744
+            ],
+            [
+              -81.007595,
+              36.966762
+            ],
+            [
+              -81.010753,
+              36.968353
+            ],
+            [
+              -81.014324,
+              36.968956
+            ],
+            [
+              -81.019954,
+              36.968463
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Wytheville VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 75,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 139,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.01445,
+              36.96835
+            ],
+            [
+              -81.01445,
+              36.96795
+            ],
+            [
+              -81.01405,
+              36.96795
+            ],
+            [
+              -81.01405,
+              36.96835
+            ],
+            [
+              -81.01445,
+              36.96835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Wytheville VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.019542,
+              36.966158
+            ],
+            [
+              -81.019606,
+              36.965986
+            ],
+            [
+              -81.010543,
+              36.963902
+            ],
+            [
+              -81.010479,
+              36.964074
+            ],
+            [
+              -81.019542,
+              36.966158
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Wytheville VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.019611,
+              36.967256
+            ],
+            [
+              -81.019732,
+              36.966929
+            ],
+            [
+              -81.012042,
+              36.965118
+            ],
+            [
+              -81.011921,
+              36.965445
+            ],
+            [
+              -81.019611,
+              36.967256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Wytheville VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0118,
+              36.9666
+            ],
+            [
+              -81.01172,
+              36.9641
+            ],
+            [
+              -81.0113,
+              36.9641
+            ],
+            [
+              -81.01138,
+              36.9666
+            ],
+            [
+              -81.0118,
+              36.9666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Wytheville VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0145,
+              36.9689
+            ],
+            [
+              -81.0144,
+              36.9684
+            ],
+            [
+              -81.0141,
+              36.9684
+            ],
+            [
+              -81.0142,
+              36.9689
+            ],
+            [
+              -81.0145,
+              36.9689
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Wytheville VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2998,
+              39.684
+            ],
+            [
+              -86.30144,
+              39.68321
+            ],
+            [
+              -86.30254,
+              39.68131
+            ],
+            [
+              -86.30213,
+              39.67919
+            ],
+            [
+              -86.3009,
+              39.67835
+            ],
+            [
+              -86.29843,
+              39.67898
+            ],
+            [
+              -86.2976,
+              39.68004
+            ],
+            [
+              -86.29651,
+              39.68109
+            ],
+            [
+              -86.29596,
+              39.68236
+            ],
+            [
+              -86.29733,
+              39.68342
+            ],
+            [
+              -86.29891,
+              39.68421
+            ],
+            [
+              -86.2998,
+              39.684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Indianapolis IN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 250,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 60.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3012,
+              39.6788
+            ],
+            [
+              -86.30075,
+              39.679
+            ],
+            [
+              -86.3009,
+              39.67935
+            ],
+            [
+              -86.30135,
+              39.67915
+            ],
+            [
+              -86.3012,
+              39.6788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Indianapolis IN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2998,
+              39.684
+            ],
+            [
+              -86.3009,
+              39.68257
+            ],
+            [
+              -86.29651,
+              39.68173
+            ],
+            [
+              -86.29596,
+              39.68236
+            ],
+            [
+              -86.29733,
+              39.68342
+            ],
+            [
+              -86.29891,
+              39.68421
+            ],
+            [
+              -86.2998,
+              39.684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Indianapolis IN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.29681,
+              39.68276
+            ],
+            [
+              -86.29488,
+              39.6817
+            ],
+            [
+              -86.29457,
+              39.68203
+            ],
+            [
+              -86.2965,
+              39.68309
+            ],
+            [
+              -86.29681,
+              39.68276
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Indianapolis IN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.30153,
+              39.68318
+            ],
+            [
+              -86.29995,
+              39.68281
+            ],
+            [
+              -86.29985,
+              39.68306
+            ],
+            [
+              -86.30143,
+              39.68343
+            ],
+            [
+              -86.30153,
+              39.68318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Indianapolis IN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.598328,
+              33.711523
+            ],
+            [
+              -84.598053,
+              33.710495
+            ],
+            [
+              -84.597092,
+              33.709581
+            ],
+            [
+              -84.594757,
+              33.709809
+            ],
+            [
+              -84.594345,
+              33.710952
+            ],
+            [
+              -84.594208,
+              33.712208
+            ],
+            [
+              -84.596131,
+              33.713693
+            ],
+            [
+              -84.597779,
+              33.713236
+            ],
+            [
+              -84.598328,
+              33.711523
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Atlanta GA",
+        "type": "Manufacturing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 32.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5988,
+              33.71165
+            ],
+            [
+              -84.59855,
+              33.71125
+            ],
+            [
+              -84.5982,
+              33.71135
+            ],
+            [
+              -84.59845,
+              33.71175
+            ],
+            [
+              -84.5988,
+              33.71165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Atlanta GA",
+        "type": "Manufacturing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.596268,
+              33.713122
+            ],
+            [
+              -84.596611,
+              33.712437
+            ],
+            [
+              -84.594895,
+              33.71118
+            ],
+            [
+              -84.594345,
+              33.712094
+            ],
+            [
+              -84.596268,
+              33.713122
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Atlanta GA",
+        "type": "Manufacturing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.597985,
+              33.712208
+            ],
+            [
+              -84.596611,
+              33.712094
+            ],
+            [
+              -84.596268,
+              33.713008
+            ],
+            [
+              -84.597641,
+              33.713351
+            ],
+            [
+              -84.597985,
+              33.712208
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Atlanta GA",
+        "type": "Manufacturing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.59799,
+              33.71136
+            ],
+            [
+              -84.59661,
+              33.71233
+            ],
+            [
+              -84.59692,
+              33.71264
+            ],
+            [
+              -84.5983,
+              33.71167
+            ],
+            [
+              -84.59799,
+              33.71136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Atlanta GA",
+        "type": "Manufacturing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.59613,
+              33.71004
+            ],
+            [
+              -84.5958,
+              33.70974
+            ],
+            [
+              -84.59443,
+              33.71077
+            ],
+            [
+              -84.59476,
+              33.71107
+            ],
+            [
+              -84.59613,
+              33.71004
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Atlanta GA",
+        "type": "Manufacturing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.491534,
+              28.258322
+            ],
+            [
+              -81.491466,
+              28.257052
+            ],
+            [
+              -81.489337,
+              28.256327
+            ],
+            [
+              -81.486934,
+              28.25681
+            ],
+            [
+              -81.486316,
+              28.257294
+            ],
+            [
+              -81.486316,
+              28.258504
+            ],
+            [
+              -81.491534,
+              28.258322
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Kissimmee FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 24.3,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4865,
+              28.25795
+            ],
+            [
+              -81.4865,
+              28.25765
+            ],
+            [
+              -81.48625,
+              28.25765
+            ],
+            [
+              -81.48625,
+              28.25795
+            ],
+            [
+              -81.4865,
+              28.25795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Kissimmee FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4898,
+              28.25755
+            ],
+            [
+              -81.4898,
+              28.2572
+            ],
+            [
+              -81.4879,
+              28.2572
+            ],
+            [
+              -81.4879,
+              28.25755
+            ],
+            [
+              -81.4898,
+              28.25755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Kissimmee FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.49105,
+              28.25815
+            ],
+            [
+              -81.49105,
+              28.25745
+            ],
+            [
+              -81.49065,
+              28.25745
+            ],
+            [
+              -81.49065,
+              28.25815
+            ],
+            [
+              -81.49105,
+              28.25815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Kissimmee FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4906,
+              28.2581
+            ],
+            [
+              -81.4906,
+              28.25735
+            ],
+            [
+              -81.4899,
+              28.25735
+            ],
+            [
+              -81.4899,
+              28.2581
+            ],
+            [
+              -81.4906,
+              28.2581
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Kissimmee FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.87225,
+              32.7179
+            ],
+            [
+              -96.87225,
+              32.717
+            ],
+            [
+              -96.87112,
+              32.716
+            ],
+            [
+              -96.8706,
+              32.7165
+            ],
+            [
+              -96.869,
+              32.7166
+            ],
+            [
+              -96.869,
+              32.7179
+            ],
+            [
+              -96.87225,
+              32.7179
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 3,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8712,
+              32.71795
+            ],
+            [
+              -96.8712,
+              32.71765
+            ],
+            [
+              -96.87085,
+              32.71765
+            ],
+            [
+              -96.87085,
+              32.71795
+            ],
+            [
+              -96.8712,
+              32.71795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8722,
+              32.71785
+            ],
+            [
+              -96.8722,
+              32.717
+            ],
+            [
+              -96.8714,
+              32.7168
+            ],
+            [
+              -96.8714,
+              32.71785
+            ],
+            [
+              -96.8722,
+              32.71785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8706,
+              32.71795
+            ],
+            [
+              -96.8706,
+              32.7175
+            ],
+            [
+              -96.8695,
+              32.7175
+            ],
+            [
+              -96.8695,
+              32.71795
+            ],
+            [
+              -96.8706,
+              32.71795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8694,
+              32.7177
+            ],
+            [
+              -96.8694,
+              32.7169
+            ],
+            [
+              -96.86895,
+              32.7169
+            ],
+            [
+              -96.86895,
+              32.7177
+            ],
+            [
+              -96.8694,
+              32.7177
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.888132,
+              41.13031
+            ],
+            [
+              -75.888064,
+              41.128293
+            ],
+            [
+              -75.884493,
+              41.128241
+            ],
+            [
+              -75.8836,
+              41.128603
+            ],
+            [
+              -75.883463,
+              41.129431
+            ],
+            [
+              -75.883875,
+              41.130465
+            ],
+            [
+              -75.88463,
+              41.130698
+            ],
+            [
+              -75.887926,
+              41.130672
+            ],
+            [
+              -75.888132,
+              41.13031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 24.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.88842,
+              41.13031
+            ],
+            [
+              -75.88842,
+              41.13017
+            ],
+            [
+              -75.88806,
+              41.13017
+            ],
+            [
+              -75.88806,
+              41.13031
+            ],
+            [
+              -75.88842,
+              41.13031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.887961,
+              41.130595
+            ],
+            [
+              -75.887961,
+              41.129638
+            ],
+            [
+              -75.887446,
+              41.129638
+            ],
+            [
+              -75.887446,
+              41.130595
+            ],
+            [
+              -75.887961,
+              41.130595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.88463,
+              41.130672
+            ],
+            [
+              -75.88463,
+              41.130103
+            ],
+            [
+              -75.883978,
+              41.130103
+            ],
+            [
+              -75.883978,
+              41.130672
+            ],
+            [
+              -75.88463,
+              41.130672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.884356,
+              41.129845
+            ],
+            [
+              -75.884356,
+              41.128759
+            ],
+            [
+              -75.883463,
+              41.128759
+            ],
+            [
+              -75.883463,
+              41.129845
+            ],
+            [
+              -75.884356,
+              41.129845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.887205,
+              41.130491
+            ],
+            [
+              -75.887205,
+              41.13
+            ],
+            [
+              -75.886931,
+              41.13
+            ],
+            [
+              -75.886931,
+              41.130491
+            ],
+            [
+              -75.887205,
+              41.130491
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.887549,
+              41.129793
+            ],
+            [
+              -75.887549,
+              41.129612
+            ],
+            [
+              -75.886999,
+              41.129612
+            ],
+            [
+              -75.886999,
+              41.129793
+            ],
+            [
+              -75.887549,
+              41.129793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Mountain Top PA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2053,
+              37.76377
+            ],
+            [
+              -122.20388,
+              37.7639
+            ],
+            [
+              -122.20419,
+              37.76445
+            ],
+            [
+              -122.2044,
+              37.76488
+            ],
+            [
+              -122.20455,
+              37.76503
+            ],
+            [
+              -122.20505,
+              37.76505
+            ],
+            [
+              -122.20572,
+              37.76438
+            ],
+            [
+              -122.2053,
+              37.76377
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Oakland CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 3.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.20532,
+              37.7639
+            ],
+            [
+              -122.20536,
+              37.76378
+            ],
+            [
+              -122.2052,
+              37.76376
+            ],
+            [
+              -122.20516,
+              37.76388
+            ],
+            [
+              -122.20532,
+              37.7639
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Oakland CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2051,
+              37.76392
+            ],
+            [
+              -122.20508,
+              37.76384
+            ],
+            [
+              -122.20418,
+              37.76388
+            ],
+            [
+              -122.2042,
+              37.76396
+            ],
+            [
+              -122.2051,
+              37.76392
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Gatorade - Oakland CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.765899,
+              39.827371
+            ],
+            [
+              -104.766173,
+              39.824945
+            ],
+            [
+              -104.765624,
+              39.823363
+            ],
+            [
+              -104.763152,
+              39.822519
+            ],
+            [
+              -104.760507,
+              39.822182
+            ],
+            [
+              -104.757073,
+              39.822815
+            ],
+            [
+              -104.752953,
+              39.82408
+            ],
+            [
+              -104.752953,
+              39.827561
+            ],
+            [
+              -104.765899,
+              39.827371
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Denver CO (High Point)",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 140.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.188088,
+              33.827594
+            ],
+            [
+              -84.188088,
+              33.824342
+            ],
+            [
+              -84.18692,
+              33.824228
+            ],
+            [
+              -84.186714,
+              33.823601
+            ],
+            [
+              -84.185204,
+              33.823087
+            ],
+            [
+              -84.18383,
+              33.823315
+            ],
+            [
+              -84.183899,
+              33.828078
+            ],
+            [
+              -84.186577,
+              33.828164
+            ],
+            [
+              -84.188088,
+              33.827594
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tucker GA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 47.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.18408,
+              33.82364
+            ],
+            [
+              -84.18408,
+              33.8235
+            ],
+            [
+              -84.18382,
+              33.8235
+            ],
+            [
+              -84.18382,
+              33.82364
+            ],
+            [
+              -84.18408,
+              33.82364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tucker GA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.186577,
+              33.823886
+            ],
+            [
+              -84.186577,
+              33.823315
+            ],
+            [
+              -84.185204,
+              33.823315
+            ],
+            [
+              -84.185204,
+              33.823886
+            ],
+            [
+              -84.186577,
+              33.823886
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tucker GA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.186577,
+              33.827365
+            ],
+            [
+              -84.186577,
+              33.824913
+            ],
+            [
+              -84.186165,
+              33.824913
+            ],
+            [
+              -84.186165,
+              33.827365
+            ],
+            [
+              -84.186577,
+              33.827365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tucker GA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.186165,
+              33.825768
+            ],
+            [
+              -84.186165,
+              33.824228
+            ],
+            [
+              -84.185822,
+              33.824228
+            ],
+            [
+              -84.185822,
+              33.825768
+            ],
+            [
+              -84.186165,
+              33.825768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tucker GA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.666495,
+              32.804775
+            ],
+            [
+              -96.667181,
+              32.80362
+            ],
+            [
+              -96.667731,
+              32.802928
+            ],
+            [
+              -96.668143,
+              32.802466
+            ],
+            [
+              -96.668143,
+              32.801312
+            ],
+            [
+              -96.667525,
+              32.80085
+            ],
+            [
+              -96.664297,
+              32.80085
+            ],
+            [
+              -96.664229,
+              32.801773
+            ],
+            [
+              -96.664091,
+              32.802755
+            ],
+            [
+              -96.664297,
+              32.803909
+            ],
+            [
+              -96.665465,
+              32.804601
+            ],
+            [
+              -96.666495,
+              32.804775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Mesquite TX",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 25,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 32.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.666563,
+              32.804775
+            ],
+            [
+              -96.666701,
+              32.804486
+            ],
+            [
+              -96.666357,
+              32.804371
+            ],
+            [
+              -96.66622,
+              32.804659
+            ],
+            [
+              -96.666563,
+              32.804775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Mesquite TX",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.666769,
+              32.801773
+            ],
+            [
+              -96.666769,
+              32.801196
+            ],
+            [
+              -96.664572,
+              32.801196
+            ],
+            [
+              -96.664572,
+              32.801773
+            ],
+            [
+              -96.666769,
+              32.801773
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Mesquite TX",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.666357,
+              32.802004
+            ],
+            [
+              -96.666357,
+              32.801716
+            ],
+            [
+              -96.664984,
+              32.801716
+            ],
+            [
+              -96.664984,
+              32.802004
+            ],
+            [
+              -96.666357,
+              32.802004
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Mesquite TX",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.664847,
+              32.802755
+            ],
+            [
+              -96.664847,
+              32.801889
+            ],
+            [
+              -96.664435,
+              32.801889
+            ],
+            [
+              -96.664435,
+              32.802755
+            ],
+            [
+              -96.664847,
+              32.802755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Mesquite TX",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.426069,
+              28.052581
+            ],
+            [
+              -82.426,
+              28.050126
+            ],
+            [
+              -82.424387,
+              28.050126
+            ],
+            [
+              -82.424318,
+              28.050672
+            ],
+            [
+              -82.424181,
+              28.051096
+            ],
+            [
+              -82.424146,
+              28.051702
+            ],
+            [
+              -82.424387,
+              28.052247
+            ],
+            [
+              -82.424936,
+              28.052611
+            ],
+            [
+              -82.426069,
+              28.052581
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tampa FL",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.42602,
+              28.05076
+            ],
+            [
+              -82.42602,
+              28.05062
+            ],
+            [
+              -82.42584,
+              28.05062
+            ],
+            [
+              -82.42584,
+              28.05076
+            ],
+            [
+              -82.42602,
+              28.05076
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tampa FL",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.4247,
+              28.0525
+            ],
+            [
+              -82.4247,
+              28.0522
+            ],
+            [
+              -82.4242,
+              28.0522
+            ],
+            [
+              -82.4242,
+              28.0525
+            ],
+            [
+              -82.4247,
+              28.0525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tampa FL",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.42435,
+              28.05165
+            ],
+            [
+              -82.42435,
+              28.05135
+            ],
+            [
+              -82.42415,
+              28.05135
+            ],
+            [
+              -82.42415,
+              28.05165
+            ],
+            [
+              -82.42435,
+              28.05165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Tampa FL",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.258089,
+              44.792027
+            ],
+            [
+              -93.258089,
+              44.790492
+            ],
+            [
+              -93.255445,
+              44.790492
+            ],
+            [
+              -93.255445,
+              44.792027
+            ],
+            [
+              -93.258089,
+              44.792027
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Burnsville MN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 3,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.2556,
+              44.79055
+            ],
+            [
+              -93.2556,
+              44.79025
+            ],
+            [
+              -93.25525,
+              44.79025
+            ],
+            [
+              -93.25525,
+              44.79055
+            ],
+            [
+              -93.2556,
+              44.79055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Burnsville MN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.25746,
+              44.79198
+            ],
+            [
+              -93.25746,
+              44.79186
+            ],
+            [
+              -93.256,
+              44.79186
+            ],
+            [
+              -93.256,
+              44.79198
+            ],
+            [
+              -93.25746,
+              44.79198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Burnsville MN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.25815,
+              44.7921
+            ],
+            [
+              -93.25815,
+              44.79137
+            ],
+            [
+              -93.25785,
+              44.79137
+            ],
+            [
+              -93.25785,
+              44.7921
+            ],
+            [
+              -93.25815,
+              44.7921
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Burnsville MN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.2559,
+              44.7917
+            ],
+            [
+              -93.2559,
+              44.79095
+            ],
+            [
+              -93.2555,
+              44.79095
+            ],
+            [
+              -93.2555,
+              44.7917
+            ],
+            [
+              -93.2559,
+              44.7917
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Burnsville MN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.268133,
+              29.708107
+            ],
+            [
+              -95.268167,
+              29.706616
+            ],
+            [
+              -95.268064,
+              29.704946
+            ],
+            [
+              -95.265936,
+              29.704946
+            ],
+            [
+              -95.265112,
+              29.706198
+            ],
+            [
+              -95.264425,
+              29.708286
+            ],
+            [
+              -95.265661,
+              29.708465
+            ],
+            [
+              -95.266897,
+              29.708465
+            ],
+            [
+              -95.268133,
+              29.708107
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 28.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.26822,
+              29.7056
+            ],
+            [
+              -95.26822,
+              29.7053
+            ],
+            [
+              -95.26796,
+              29.7053
+            ],
+            [
+              -95.26796,
+              29.7056
+            ],
+            [
+              -95.26822,
+              29.7056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.268,
+              29.70691
+            ],
+            [
+              -95.268,
+              29.70614
+            ],
+            [
+              -95.26697,
+              29.70614
+            ],
+            [
+              -95.26697,
+              29.70691
+            ],
+            [
+              -95.268,
+              29.70691
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.26708,
+              29.70597
+            ],
+            [
+              -95.26708,
+              29.70573
+            ],
+            [
+              -95.2656,
+              29.70573
+            ],
+            [
+              -95.2656,
+              29.70597
+            ],
+            [
+              -95.26708,
+              29.70597
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.26841,
+              29.70823
+            ],
+            [
+              -95.26841,
+              29.70782
+            ],
+            [
+              -95.26786,
+              29.70782
+            ],
+            [
+              -95.26786,
+              29.70823
+            ],
+            [
+              -95.26841,
+              29.70823
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2668,
+              29.70616
+            ],
+            [
+              -95.2668,
+              29.70597
+            ],
+            [
+              -95.2659,
+              29.70597
+            ],
+            [
+              -95.2659,
+              29.70616
+            ],
+            [
+              -95.2668,
+              29.70616
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2682,
+              29.7053
+            ],
+            [
+              -95.2682,
+              29.70495
+            ],
+            [
+              -95.26798,
+              29.70495
+            ],
+            [
+              -95.26798,
+              29.7053
+            ],
+            [
+              -95.2682,
+              29.7053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Houston TX",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.989655,
+              33.414255
+            ],
+            [
+              -111.989655,
+              33.41245
+            ],
+            [
+              -111.985672,
+              33.41245
+            ],
+            [
+              -111.985672,
+              33.414628
+            ],
+            [
+              -111.986599,
+              33.414828
+            ],
+            [
+              -111.987972,
+              33.414685
+            ],
+            [
+              -111.989655,
+              33.414255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 22.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.98975,
+              33.41345
+            ],
+            [
+              -111.98975,
+              33.4131
+            ],
+            [
+              -111.98935,
+              33.4131
+            ],
+            [
+              -111.98935,
+              33.41345
+            ],
+            [
+              -111.98975,
+              33.41345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.98992,
+              33.41383
+            ],
+            [
+              -111.98992,
+              33.41337
+            ],
+            [
+              -111.98909,
+              33.41337
+            ],
+            [
+              -111.98909,
+              33.41383
+            ],
+            [
+              -111.98992,
+              33.41383
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.988,
+              33.41431
+            ],
+            [
+              -111.988,
+              33.41413
+            ],
+            [
+              -111.98704,
+              33.41413
+            ],
+            [
+              -111.98704,
+              33.41431
+            ],
+            [
+              -111.988,
+              33.41431
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.99088,
+              33.41417
+            ],
+            [
+              -111.99088,
+              33.41383
+            ],
+            [
+              -111.99009,
+              33.41383
+            ],
+            [
+              -111.99009,
+              33.41417
+            ],
+            [
+              -111.99088,
+              33.41417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.98828,
+              33.41398
+            ],
+            [
+              -111.98828,
+              33.41375
+            ],
+            [
+              -111.98704,
+              33.41375
+            ],
+            [
+              -111.98704,
+              33.41398
+            ],
+            [
+              -111.98828,
+              33.41398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9899,
+              33.4133
+            ],
+            [
+              -111.9899,
+              33.4129
+            ],
+            [
+              -111.9892,
+              33.4129
+            ],
+            [
+              -111.9892,
+              33.4133
+            ],
+            [
+              -111.9899,
+              33.4133
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Phoenix AZ",
+        "type": "Bottling Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.401763,
+              38.483987
+            ],
+            [
+              -121.401763,
+              38.482456
+            ],
+            [
+              -121.396579,
+              38.482456
+            ],
+            [
+              -121.396579,
+              38.483987
+            ],
+            [
+              -121.401763,
+              38.483987
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 19,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.39668,
+              38.48412
+            ],
+            [
+              -121.39668,
+              38.4839
+            ],
+            [
+              -121.39632,
+              38.4839
+            ],
+            [
+              -121.39632,
+              38.48412
+            ],
+            [
+              -121.39668,
+              38.48412
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40169,
+              38.48393
+            ],
+            [
+              -121.40169,
+              38.48259
+            ],
+            [
+              -121.40011,
+              38.48259
+            ],
+            [
+              -121.40011,
+              38.48393
+            ],
+            [
+              -121.40169,
+              38.48393
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.39955,
+              38.48266
+            ],
+            [
+              -121.39955,
+              38.48252
+            ],
+            [
+              -121.39766,
+              38.48252
+            ],
+            [
+              -121.39766,
+              38.48266
+            ],
+            [
+              -121.39955,
+              38.48266
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40012,
+              38.48306
+            ],
+            [
+              -121.40012,
+              38.48275
+            ],
+            [
+              -121.39902,
+              38.48275
+            ],
+            [
+              -121.39902,
+              38.48306
+            ],
+            [
+              -121.40012,
+              38.48306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.39991,
+              38.4838
+            ],
+            [
+              -121.39991,
+              38.48352
+            ],
+            [
+              -121.39888,
+              38.48352
+            ],
+            [
+              -121.39888,
+              38.4838
+            ],
+            [
+              -121.39991,
+              38.4838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.39876,
+              38.48397
+            ],
+            [
+              -121.39876,
+              38.48381
+            ],
+            [
+              -121.39783,
+              38.48381
+            ],
+            [
+              -121.39783,
+              38.48397
+            ],
+            [
+              -121.39876,
+              38.48397
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Sacramento CA",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.23635,
+              36.073441
+            ],
+            [
+              -115.23635,
+              36.070888
+            ],
+            [
+              -115.231886,
+              36.070888
+            ],
+            [
+              -115.231886,
+              36.073441
+            ],
+            [
+              -115.23635,
+              36.073441
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Las Vegas NV",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 75,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.23215,
+              36.0736
+            ],
+            [
+              -115.23215,
+              36.0733
+            ],
+            [
+              -115.2318,
+              36.0733
+            ],
+            [
+              -115.2318,
+              36.0736
+            ],
+            [
+              -115.23215,
+              36.0736
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Las Vegas NV",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.2356,
+              36.07316
+            ],
+            [
+              -115.2356,
+              36.0726
+            ],
+            [
+              -115.2346,
+              36.0726
+            ],
+            [
+              -115.2346,
+              36.07316
+            ],
+            [
+              -115.2356,
+              36.07316
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Las Vegas NV",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.23598,
+              36.07219
+            ],
+            [
+              -115.23598,
+              36.07191
+            ],
+            [
+              -115.23546,
+              36.07191
+            ],
+            [
+              -115.23546,
+              36.07219
+            ],
+            [
+              -115.23598,
+              36.07219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Las Vegas NV",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.23545,
+              36.0721
+            ],
+            [
+              -115.23545,
+              36.07133
+            ],
+            [
+              -115.23505,
+              36.07133
+            ],
+            [
+              -115.23505,
+              36.0721
+            ],
+            [
+              -115.23545,
+              36.0721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Las Vegas NV",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.23315,
+              36.0725
+            ],
+            [
+              -115.23315,
+              36.07169
+            ],
+            [
+              -115.23285,
+              36.07169
+            ],
+            [
+              -115.23285,
+              36.0725
+            ],
+            [
+              -115.23315,
+              36.0725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Las Vegas NV",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5136,
+              41.54597
+            ],
+            [
+              -87.5131,
+              41.5447
+            ],
+            [
+              -87.5121,
+              41.54368
+            ],
+            [
+              -87.50935,
+              41.54368
+            ],
+            [
+              -87.50925,
+              41.5456
+            ],
+            [
+              -87.5099,
+              41.5456
+            ],
+            [
+              -87.5099,
+              41.54597
+            ],
+            [
+              -87.5136,
+              41.54597
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Munster IN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 19,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5095,
+              41.54615
+            ],
+            [
+              -87.5095,
+              41.54585
+            ],
+            [
+              -87.50905,
+              41.54585
+            ],
+            [
+              -87.50905,
+              41.54615
+            ],
+            [
+              -87.5095,
+              41.54615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Munster IN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5135,
+              41.54582
+            ],
+            [
+              -87.5135,
+              41.54528
+            ],
+            [
+              -87.5131,
+              41.54528
+            ],
+            [
+              -87.5131,
+              41.54582
+            ],
+            [
+              -87.5135,
+              41.54582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Munster IN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.51058,
+              41.54406
+            ],
+            [
+              -87.51058,
+              41.54368
+            ],
+            [
+              -87.50989,
+              41.54368
+            ],
+            [
+              -87.50989,
+              41.54406
+            ],
+            [
+              -87.51058,
+              41.54406
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Munster IN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.51315,
+              41.54525
+            ],
+            [
+              -87.51255,
+              41.54445
+            ],
+            [
+              -87.5123,
+              41.54435
+            ],
+            [
+              -87.5129,
+              41.54515
+            ],
+            [
+              -87.51315,
+              41.54525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Munster IN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.51292,
+              41.54574
+            ],
+            [
+              -87.51292,
+              41.54497
+            ],
+            [
+              -87.5125,
+              41.54497
+            ],
+            [
+              -87.5125,
+              41.54574
+            ],
+            [
+              -87.51292,
+              41.54574
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Munster IN",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4489,
+              41.29448
+            ],
+            [
+              -81.4489,
+              41.29175
+            ],
+            [
+              -81.4446,
+              41.29175
+            ],
+            [
+              -81.4446,
+              41.293
+            ],
+            [
+              -81.44555,
+              41.293
+            ],
+            [
+              -81.44555,
+              41.29448
+            ],
+            [
+              -81.4489,
+              41.29448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Twinsburg OH",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.447,
+              41.2923
+            ],
+            [
+              -81.447,
+              41.2918
+            ],
+            [
+              -81.4465,
+              41.2918
+            ],
+            [
+              -81.4465,
+              41.2923
+            ],
+            [
+              -81.447,
+              41.2923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Twinsburg OH",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4466,
+              41.2943
+            ],
+            [
+              -81.4466,
+              41.292
+            ],
+            [
+              -81.4455,
+              41.292
+            ],
+            [
+              -81.4455,
+              41.2943
+            ],
+            [
+              -81.4466,
+              41.2943
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Twinsburg OH",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.44675,
+              41.2939
+            ],
+            [
+              -81.44675,
+              41.2936
+            ],
+            [
+              -81.4461,
+              41.2936
+            ],
+            [
+              -81.4461,
+              41.2939
+            ],
+            [
+              -81.44675,
+              41.2939
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Twinsburg OH",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4478,
+              41.29345
+            ],
+            [
+              -81.4478,
+              41.29315
+            ],
+            [
+              -81.44725,
+              41.29315
+            ],
+            [
+              -81.44725,
+              41.29345
+            ],
+            [
+              -81.4478,
+              41.29345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Twinsburg OH",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.9271,
+              38.92752
+            ],
+            [
+              -76.92725,
+              38.92645
+            ],
+            [
+              -76.9261,
+              38.92545
+            ],
+            [
+              -76.9252,
+              38.92549
+            ],
+            [
+              -76.9244,
+              38.926
+            ],
+            [
+              -76.92425,
+              38.92655
+            ],
+            [
+              -76.9242,
+              38.9274
+            ],
+            [
+              -76.9247,
+              38.9279
+            ],
+            [
+              -76.9256,
+              38.9276
+            ],
+            [
+              -76.9271,
+              38.92752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Cheverly MD",
+        "type": "Bottling Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 26,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 13.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.9245,
+              38.9267
+            ],
+            [
+              -76.9245,
+              38.9264
+            ],
+            [
+              -76.9241,
+              38.9264
+            ],
+            [
+              -76.9241,
+              38.9267
+            ],
+            [
+              -76.9245,
+              38.9267
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Cheverly MD",
+        "type": "Bottling Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.9261,
+              38.9262
+            ],
+            [
+              -76.9261,
+              38.9255
+            ],
+            [
+              -76.9246,
+              38.9255
+            ],
+            [
+              -76.9246,
+              38.9262
+            ],
+            [
+              -76.9261,
+              38.9262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Cheverly MD",
+        "type": "Bottling Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.925,
+              38.9279
+            ],
+            [
+              -76.925,
+              38.927
+            ],
+            [
+              -76.9243,
+              38.927
+            ],
+            [
+              -76.9243,
+              38.9279
+            ],
+            [
+              -76.925,
+              38.9279
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Cheverly MD",
+        "type": "Bottling Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.9259,
+              38.92645
+            ],
+            [
+              -76.9259,
+              38.9262
+            ],
+            [
+              -76.9251,
+              38.9262
+            ],
+            [
+              -76.9251,
+              38.92645
+            ],
+            [
+              -76.9259,
+              38.92645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Cheverly MD",
+        "type": "Bottling Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.9248,
+              38.9272
+            ],
+            [
+              -76.9248,
+              38.9266
+            ],
+            [
+              -76.92435,
+              38.9266
+            ],
+            [
+              -76.92435,
+              38.9272
+            ],
+            [
+              -76.9248,
+              38.9272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Cheverly MD",
+        "type": "Bottling Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4445,
+              40.57905
+            ],
+            [
+              -74.44455,
+              40.5777
+            ],
+            [
+              -74.4443,
+              40.57595
+            ],
+            [
+              -74.4419,
+              40.576
+            ],
+            [
+              -74.4395,
+              40.57615
+            ],
+            [
+              -74.4394,
+              40.57725
+            ],
+            [
+              -74.4401,
+              40.57935
+            ],
+            [
+              -74.4428,
+              40.5795
+            ],
+            [
+              -74.4445,
+              40.57905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Piscataway NJ",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 85,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 37.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4433,
+              40.57905
+            ],
+            [
+              -74.4433,
+              40.5786
+            ],
+            [
+              -74.4429,
+              40.5786
+            ],
+            [
+              -74.4429,
+              40.57905
+            ],
+            [
+              -74.4433,
+              40.57905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Piscataway NJ",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.44435,
+              40.57775
+            ],
+            [
+              -74.44435,
+              40.57655
+            ],
+            [
+              -74.4436,
+              40.57655
+            ],
+            [
+              -74.4436,
+              40.57775
+            ],
+            [
+              -74.44435,
+              40.57775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Piscataway NJ",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.444,
+              40.5765
+            ],
+            [
+              -74.444,
+              40.5762
+            ],
+            [
+              -74.4423,
+              40.5762
+            ],
+            [
+              -74.4423,
+              40.5765
+            ],
+            [
+              -74.444,
+              40.5765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Piscataway NJ",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4433,
+              40.5769
+            ],
+            [
+              -74.4433,
+              40.5766
+            ],
+            [
+              -74.442,
+              40.5766
+            ],
+            [
+              -74.442,
+              40.5769
+            ],
+            [
+              -74.4433,
+              40.5769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Piscataway NJ",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4433,
+              40.57785
+            ],
+            [
+              -74.4433,
+              40.57762
+            ],
+            [
+              -74.4422,
+              40.57762
+            ],
+            [
+              -74.4422,
+              40.57785
+            ],
+            [
+              -74.4433,
+              40.57785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Piscataway NJ",
+        "type": "Bottling Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9679,
+              35.9633
+            ],
+            [
+              -83.9682,
+              35.9629
+            ],
+            [
+              -83.9682,
+              35.9622
+            ],
+            [
+              -83.9676,
+              35.96145
+            ],
+            [
+              -83.9657,
+              35.9615
+            ],
+            [
+              -83.96565,
+              35.9627
+            ],
+            [
+              -83.9659,
+              35.9633
+            ],
+            [
+              -83.9679,
+              35.9633
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Knoxville TN",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 10.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.966,
+              35.96285
+            ],
+            [
+              -83.966,
+              35.9626
+            ],
+            [
+              -83.9656,
+              35.9626
+            ],
+            [
+              -83.9656,
+              35.96285
+            ],
+            [
+              -83.966,
+              35.96285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Knoxville TN",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9664,
+              35.9629
+            ],
+            [
+              -83.9664,
+              35.96258
+            ],
+            [
+              -83.9658,
+              35.96258
+            ],
+            [
+              -83.9658,
+              35.9629
+            ],
+            [
+              -83.9664,
+              35.9629
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Knoxville TN",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9666,
+              35.96255
+            ],
+            [
+              -83.9666,
+              35.96205
+            ],
+            [
+              -83.9662,
+              35.96205
+            ],
+            [
+              -83.9662,
+              35.96255
+            ],
+            [
+              -83.9666,
+              35.96255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Knoxville TN",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9673,
+              35.96325
+            ],
+            [
+              -83.9673,
+              35.96305
+            ],
+            [
+              -83.9665,
+              35.96305
+            ],
+            [
+              -83.9665,
+              35.96325
+            ],
+            [
+              -83.9673,
+              35.96325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Knoxville TN",
+        "type": "Bottling Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.6728,
+              41.9843
+            ],
+            [
+              -91.6726,
+              41.983
+            ],
+            [
+              -91.6723,
+              41.9815
+            ],
+            [
+              -91.6724,
+              41.9801
+            ],
+            [
+              -91.672,
+              41.98
+            ],
+            [
+              -91.6706,
+              41.9804
+            ],
+            [
+              -91.6692,
+              41.9808
+            ],
+            [
+              -91.6692,
+              41.9818
+            ],
+            [
+              -91.6698,
+              41.983
+            ],
+            [
+              -91.6708,
+              41.9843
+            ],
+            [
+              -91.6718,
+              41.9847
+            ],
+            [
+              -91.6728,
+              41.9843
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Cedar Rapids IA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 26.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.67085,
+              41.98075
+            ],
+            [
+              -91.67085,
+              41.98045
+            ],
+            [
+              -91.6705,
+              41.98045
+            ],
+            [
+              -91.6705,
+              41.98075
+            ],
+            [
+              -91.67085,
+              41.98075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Cedar Rapids IA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.6716,
+              41.98375
+            ],
+            [
+              -91.6716,
+              41.98305
+            ],
+            [
+              -91.67065,
+              41.98305
+            ],
+            [
+              -91.67065,
+              41.98375
+            ],
+            [
+              -91.6716,
+              41.98375
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Cedar Rapids IA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.67165,
+              41.9819
+            ],
+            [
+              -91.6718,
+              41.9817
+            ],
+            [
+              -91.67105,
+              41.98135
+            ],
+            [
+              -91.6709,
+              41.98155
+            ],
+            [
+              -91.67165,
+              41.9819
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Cedar Rapids IA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.6701,
+              41.9815
+            ],
+            [
+              -91.6701,
+              41.9811
+            ],
+            [
+              -91.6695,
+              41.9811
+            ],
+            [
+              -91.6695,
+              41.9815
+            ],
+            [
+              -91.6701,
+              41.9815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Cedar Rapids IA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.814,
+              41.76455
+            ],
+            [
+              -87.814,
+              41.7625
+            ],
+            [
+              -87.81075,
+              41.76255
+            ],
+            [
+              -87.81075,
+              41.7647
+            ],
+            [
+              -87.8113,
+              41.76485
+            ],
+            [
+              -87.8121,
+              41.76455
+            ],
+            [
+              -87.814,
+              41.76455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Bridgeview IL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 15.6,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.81405,
+              41.7627
+            ],
+            [
+              -87.81405,
+              41.7624
+            ],
+            [
+              -87.81375,
+              41.7624
+            ],
+            [
+              -87.81375,
+              41.7627
+            ],
+            [
+              -87.81405,
+              41.7627
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Bridgeview IL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8132,
+              41.76285
+            ],
+            [
+              -87.8132,
+              41.7626
+            ],
+            [
+              -87.8125,
+              41.7626
+            ],
+            [
+              -87.8125,
+              41.76285
+            ],
+            [
+              -87.8132,
+              41.76285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Bridgeview IL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8124,
+              41.7645
+            ],
+            [
+              -87.8124,
+              41.76415
+            ],
+            [
+              -87.8118,
+              41.76415
+            ],
+            [
+              -87.8118,
+              41.7645
+            ],
+            [
+              -87.8124,
+              41.7645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Bridgeview IL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.81395,
+              41.7644
+            ],
+            [
+              -87.81395,
+              41.7636
+            ],
+            [
+              -87.8127,
+              41.7636
+            ],
+            [
+              -87.8127,
+              41.7644
+            ],
+            [
+              -87.81395,
+              41.7644
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Bridgeview IL",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.282882,
+              38.997911
+            ],
+            [
+              -92.283603,
+              38.995163
+            ],
+            [
+              -92.281783,
+              38.995163
+            ],
+            [
+              -92.281508,
+              38.995376
+            ],
+            [
+              -92.280787,
+              38.997884
+            ],
+            [
+              -92.282882,
+              38.997911
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Columbia MO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 13,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.282248,
+              38.995761
+            ],
+            [
+              -92.282257,
+              38.995694
+            ],
+            [
+              -92.282119,
+              38.995677
+            ],
+            [
+              -92.282111,
+              38.995744
+            ],
+            [
+              -92.282248,
+              38.995761
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Columbia MO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.283362,
+              38.99615
+            ],
+            [
+              -92.283431,
+              38.995403
+            ],
+            [
+              -92.281852,
+              38.99551
+            ],
+            [
+              -92.281955,
+              38.996257
+            ],
+            [
+              -92.283362,
+              38.99615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Columbia MO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.281747,
+              38.996794
+            ],
+            [
+              -92.281884,
+              38.996233
+            ],
+            [
+              -92.281541,
+              38.995993
+            ],
+            [
+              -92.281335,
+              38.996633
+            ],
+            [
+              -92.281747,
+              38.996794
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Columbia MO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.28209,
+              38.996607
+            ],
+            [
+              -92.282228,
+              38.99618
+            ],
+            [
+              -92.28185,
+              38.9961
+            ],
+            [
+              -92.281713,
+              38.996527
+            ],
+            [
+              -92.28209,
+              38.996607
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker Oats - Columbia MO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.540696,
+              35.936823
+            ],
+            [
+              -86.539323,
+              35.936378
+            ],
+            [
+              -86.53795,
+              35.936823
+            ],
+            [
+              -86.536988,
+              35.939269
+            ],
+            [
+              -86.538224,
+              35.940047
+            ],
+            [
+              -86.540696,
+              35.936823
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Smyrna TN (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.539529,
+              35.936934
+            ],
+            [
+              -86.539186,
+              35.936711
+            ],
+            [
+              -86.5374,
+              35.938101
+            ],
+            [
+              -86.537744,
+              35.938324
+            ],
+            [
+              -86.539529,
+              35.936934
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Smyrna TN (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.918897,
+              29.763699
+            ],
+            [
+              -95.912676,
+              29.76501
+            ],
+            [
+              -95.911303,
+              29.767573
+            ],
+            [
+              -95.91556,
+              29.768765
+            ],
+            [
+              -95.918924,
+              29.769123
+            ],
+            [
+              -95.918897,
+              29.763699
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PepsiCo - Brookshire TX (1NA Mixing Center DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 76.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.912933,
+              29.768571
+            ],
+            [
+              -95.91307,
+              29.767528
+            ],
+            [
+              -95.912281,
+              29.767349
+            ],
+            [
+              -95.912143,
+              29.768392
+            ],
+            [
+              -95.912933,
+              29.768571
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PepsiCo - Brookshire TX (1NA Mixing Center DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.913931,
+              29.768583
+            ],
+            [
+              -95.914,
+              29.768285
+            ],
+            [
+              -95.913382,
+              29.768196
+            ],
+            [
+              -95.913313,
+              29.768494
+            ],
+            [
+              -95.913931,
+              29.768583
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PepsiCo - Brookshire TX (1NA Mixing Center DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.91798,
+              29.76494
+            ],
+            [
+              -95.91775,
+              29.76448
+            ],
+            [
+              -95.91215,
+              29.76659
+            ],
+            [
+              -95.91238,
+              29.76705
+            ],
+            [
+              -95.91798,
+              29.76494
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PepsiCo - Brookshire TX (1NA Mixing Center DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.892586,
+              28.155165
+            ],
+            [
+              -81.892586,
+              28.150201
+            ],
+            [
+              -81.889427,
+              28.150443
+            ],
+            [
+              -81.889427,
+              28.153955
+            ],
+            [
+              -81.892586,
+              28.155165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker - Lakeland FL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 3,
+          "buildingCount": 1,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.889603,
+              28.154335
+            ],
+            [
+              -81.88962,
+              28.154221
+            ],
+            [
+              -81.889414,
+              28.154199
+            ],
+            [
+              -81.889397,
+              28.154312
+            ],
+            [
+              -81.889603,
+              28.154335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker - Lakeland FL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.889702,
+              28.153955
+            ],
+            [
+              -81.889702,
+              28.151715
+            ],
+            [
+              -81.889462,
+              28.151715
+            ],
+            [
+              -81.889462,
+              28.153955
+            ],
+            [
+              -81.889702,
+              28.153955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker - Lakeland FL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.890869,
+              28.154681
+            ],
+            [
+              -81.890869,
+              28.154378
+            ],
+            [
+              -81.890045,
+              28.154378
+            ],
+            [
+              -81.890045,
+              28.154681
+            ],
+            [
+              -81.890869,
+              28.154681
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker - Lakeland FL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.89008,
+              28.154197
+            ],
+            [
+              -81.89008,
+              28.15123
+            ],
+            [
+              -81.889702,
+              28.15123
+            ],
+            [
+              -81.889702,
+              28.154197
+            ],
+            [
+              -81.89008,
+              28.154197
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker - Lakeland FL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.891934,
+              28.154136
+            ],
+            [
+              -81.891934,
+              28.15123
+            ],
+            [
+              -81.891556,
+              28.15123
+            ],
+            [
+              -81.891556,
+              28.154136
+            ],
+            [
+              -81.891934,
+              28.154136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "Quaker - Lakeland FL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.546519,
+              45.39951
+            ],
+            [
+              -122.545866,
+              45.398811
+            ],
+            [
+              -122.544287,
+              45.397557
+            ],
+            [
+              -122.543463,
+              45.39775
+            ],
+            [
+              -122.543326,
+              45.399148
+            ],
+            [
+              -122.5436,
+              45.399558
+            ],
+            [
+              -122.546519,
+              45.39951
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Portland OR (Clackamas DC)",
+        "type": "Distribution Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.544354,
+              45.399543
+            ],
+            [
+              -122.54438,
+              45.399446
+            ],
+            [
+              -122.544183,
+              45.399422
+            ],
+            [
+              -122.544157,
+              45.399519
+            ],
+            [
+              -122.544354,
+              45.399543
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Portland OR (Clackamas DC)",
+        "type": "Distribution Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.545145,
+              45.399269
+            ],
+            [
+              -122.543703,
+              45.39816
+            ],
+            [
+              -122.543291,
+              45.39842
+            ],
+            [
+              -122.544733,
+              45.399529
+            ],
+            [
+              -122.545145,
+              45.399269
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Portland OR (Clackamas DC)",
+        "type": "Distribution Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.046362,
+              42.356939
+            ],
+            [
+              -83.04619,
+              42.355671
+            ],
+            [
+              -83.04595,
+              42.354149
+            ],
+            [
+              -83.044989,
+              42.353058
+            ],
+            [
+              -83.041555,
+              42.353743
+            ],
+            [
+              -83.04183,
+              42.354656
+            ],
+            [
+              -83.043066,
+              42.357574
+            ],
+            [
+              -83.044577,
+              42.357574
+            ],
+            [
+              -83.046362,
+              42.356939
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Detroit MI (DC)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 35.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.042989,
+              42.354103
+            ],
+            [
+              -83.043006,
+              42.354002
+            ],
+            [
+              -83.042834,
+              42.353989
+            ],
+            [
+              -83.042817,
+              42.354091
+            ],
+            [
+              -83.042989,
+              42.354103
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Detroit MI (DC)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.045195,
+              42.35425
+            ],
+            [
+              -83.044851,
+              42.353185
+            ],
+            [
+              -83.043135,
+              42.35354
+            ],
+            [
+              -83.043478,
+              42.354605
+            ],
+            [
+              -83.045195,
+              42.35425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Detroit MI (DC)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.046499,
+              42.357142
+            ],
+            [
+              -83.046499,
+              42.356686
+            ],
+            [
+              -83.044439,
+              42.356686
+            ],
+            [
+              -83.044439,
+              42.357142
+            ],
+            [
+              -83.046499,
+              42.357142
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Detroit MI (DC)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.044851,
+              42.354656
+            ],
+            [
+              -83.04492,
+              42.354402
+            ],
+            [
+              -83.044096,
+              42.354199
+            ],
+            [
+              -83.044027,
+              42.354453
+            ],
+            [
+              -83.044851,
+              42.354656
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Detroit MI (DC)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.044577,
+              42.35628
+            ],
+            [
+              -83.044714,
+              42.356026
+            ],
+            [
+              -83.043615,
+              42.355722
+            ],
+            [
+              -83.043478,
+              42.355975
+            ],
+            [
+              -83.044577,
+              42.35628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pepsico",
+        "name": "PBNA - Detroit MI (DC)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

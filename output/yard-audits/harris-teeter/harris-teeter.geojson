@@ -1,0 +1,780 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6503,
+              35.06695
+            ],
+            [
+              -80.6507,
+              35.0656
+            ],
+            [
+              -80.6501,
+              35.0647
+            ],
+            [
+              -80.6485,
+              35.0646
+            ],
+            [
+              -80.6476,
+              35.0656
+            ],
+            [
+              -80.6487,
+              35.0664
+            ],
+            [
+              -80.6503,
+              35.06695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+        "type": "Perishable DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 11.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6447,
+              35.06628
+            ],
+            [
+              -80.64485,
+              35.06608
+            ],
+            [
+              -80.64455,
+              35.06598
+            ],
+            [
+              -80.6444,
+              35.06618
+            ],
+            [
+              -80.6447,
+              35.06628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+        "type": "Perishable DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6479,
+              35.066
+            ],
+            [
+              -80.6485,
+              35.0652
+            ],
+            [
+              -80.6476,
+              35.0648
+            ],
+            [
+              -80.647,
+              35.0656
+            ],
+            [
+              -80.6479,
+              35.066
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+        "type": "Perishable DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6496,
+              35.0666
+            ],
+            [
+              -80.64995,
+              35.0664
+            ],
+            [
+              -80.64875,
+              35.0645
+            ],
+            [
+              -80.6484,
+              35.0647
+            ],
+            [
+              -80.6496,
+              35.0666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+        "type": "Perishable DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6464,
+              35.0662
+            ],
+            [
+              -80.6468,
+              35.0657
+            ],
+            [
+              -80.6458,
+              35.06535
+            ],
+            [
+              -80.64545,
+              35.06585
+            ],
+            [
+              -80.6464,
+              35.0662
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+        "type": "Perishable DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.650633,
+              35.066237
+            ],
+            [
+              -80.650908,
+              35.06427
+            ],
+            [
+              -80.649947,
+              35.06249
+            ],
+            [
+              -80.648344,
+              35.062115
+            ],
+            [
+              -80.645827,
+              35.063052
+            ],
+            [
+              -80.64411,
+              35.065394
+            ],
+            [
+              -80.644568,
+              35.066237
+            ],
+            [
+              -80.650633,
+              35.066237
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 53.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.644453,
+              35.065712
+            ],
+            [
+              -80.644682,
+              35.06545
+            ],
+            [
+              -80.64427,
+              35.065263
+            ],
+            [
+              -80.644041,
+              35.065525
+            ],
+            [
+              -80.644453,
+              35.065712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6472,
+              35.0653
+            ],
+            [
+              -80.64823,
+              35.064176
+            ],
+            [
+              -80.64617,
+              35.063052
+            ],
+            [
+              -80.64514,
+              35.064176
+            ],
+            [
+              -80.6472,
+              35.0653
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.65029,
+              35.065487
+            ],
+            [
+              -80.650519,
+              35.06515
+            ],
+            [
+              -80.646399,
+              35.063839
+            ],
+            [
+              -80.64617,
+              35.064176
+            ],
+            [
+              -80.65029,
+              35.065487
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.649489,
+              35.063801
+            ],
+            [
+              -80.649832,
+              35.062527
+            ],
+            [
+              -80.647887,
+              35.062153
+            ],
+            [
+              -80.6472,
+              35.063052
+            ],
+            [
+              -80.649489,
+              35.063801
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9309,
+              36.09565
+            ],
+            [
+              -79.9315,
+              36.0947
+            ],
+            [
+              -79.93215,
+              36.0936
+            ],
+            [
+              -79.9325,
+              36.092
+            ],
+            [
+              -79.9319,
+              36.0911
+            ],
+            [
+              -79.9301,
+              36.0912
+            ],
+            [
+              -79.9288,
+              36.09225
+            ],
+            [
+              -79.92815,
+              36.0936
+            ],
+            [
+              -79.9288,
+              36.09498
+            ],
+            [
+              -79.9309,
+              36.09565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93075,
+              36.09548
+            ],
+            [
+              -79.93087,
+              36.09522
+            ],
+            [
+              -79.9305,
+              36.09512
+            ],
+            [
+              -79.93038,
+              36.09538
+            ],
+            [
+              -79.93075,
+              36.09548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93175,
+              36.093
+            ],
+            [
+              -79.93235,
+              36.0919
+            ],
+            [
+              -79.93145,
+              36.09145
+            ],
+            [
+              -79.93085,
+              36.09255
+            ],
+            [
+              -79.93175,
+              36.093
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9312,
+              36.0943
+            ],
+            [
+              -79.93165,
+              36.09342
+            ],
+            [
+              -79.9308,
+              36.093
+            ],
+            [
+              -79.93035,
+              36.09388
+            ],
+            [
+              -79.9312,
+              36.0943
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.92905,
+              36.0946
+            ],
+            [
+              -79.92952,
+              36.09377
+            ],
+            [
+              -79.92872,
+              36.09335
+            ],
+            [
+              -79.92825,
+              36.09418
+            ],
+            [
+              -79.92905,
+              36.0946
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9306,
+              36.0947
+            ],
+            [
+              -79.9309,
+              36.09455
+            ],
+            [
+              -79.93025,
+              36.09345
+            ],
+            [
+              -79.92995,
+              36.0936
+            ],
+            [
+              -79.9306,
+              36.0947
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93015,
+              36.093
+            ],
+            [
+              -79.93045,
+              36.09285
+            ],
+            [
+              -79.9299,
+              36.09195
+            ],
+            [
+              -79.9296,
+              36.0921
+            ],
+            [
+              -79.93015,
+              36.093
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "harris-teeter",
+        "name": "Harris Teeter Distribution Center Greensboro NC",
+        "type": "Frozen DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

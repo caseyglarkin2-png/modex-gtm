@@ -5,32 +5,32 @@ Google Maps satellite and to geojson.io (perimeter polygon only).
 
 | # | Facility | Type | Centre (lat, lng) | Perimeter bbox (S, W, N, E) | Acres | Maps | geojson.io |
 |---|---|---|---|---|---|---|---|
-| 1 | Kraft Heinz - Aurora |  | — | — (perimeter unresolved) | — | — | — |
+| 1 | Kraft Heinz - Aurora | Cold Storage Facility | 41.782718, -88.373167 | 41.781796, -88.374867, 41.783639, -88.371468 | 9.4 | [satellite](https://www.google.com/maps/@41.782718,-88.373167,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Aurora%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-88.374867%2C41.783588%5D%2C%5B-88.374867%2C41.781796%5D%2C%5B-88.371468%2C41.781847%5D%2C%5B-88.371536%2C41.783639%5D%2C%5B-88.374867%2C41.783588%5D%5D%5D%7D%7D) |
 | 2 | Kraft Heinz - Muscatine |  | — | — (perimeter unresolved) | — | — | — |
-| 3 | Kraft Heinz - Holland |  | — | — (perimeter unresolved) | — | — | — |
-| 4 | Kraft Foods - Jacksonville |  | — | — (perimeter unresolved) | — | — | — |
-| 5 | Kraft Foods - Jacksonville Portion Control |  | — | — (perimeter unresolved) | — | — | — |
-| 6 | Kraft Heinz - Davenport |  | — | — (perimeter unresolved) | — | — | — |
+| 3 | Kraft Heinz - Holland | Food Manufacturer | 42.784205, -86.128094 | 42.782794, -86.131047, 42.785616, -86.125141 | 24.5 | [satellite](https://www.google.com/maps/@42.784205,-86.128094,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Holland%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-86.131047%2C42.783953%5D%2C%5B-86.130841%2C42.782794%5D%2C%5B-86.12521%2C42.782995%5D%2C%5B-86.125141%2C42.785061%5D%2C%5B-86.127476%2C42.785616%5D%2C%5B-86.131047%2C42.783953%5D%5D%5D%7D%7D) |
+| 4 | Kraft Foods - Jacksonville | Warehouse | 30.377542, -81.785038 | 30.375261, -81.787751, 30.379823, -81.782326 | 26.2 | [satellite](https://www.google.com/maps/@30.377542,-81.785038,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Foods%20-%20Jacksonville%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-81.787751%2C30.379823%5D%2C%5B-81.787751%2C30.375498%5D%2C%5B-81.782326%2C30.375261%5D%2C%5B-81.782326%2C30.379645%5D%2C%5B-81.787751%2C30.379823%5D%5D%5D%7D%7D) |
+| 5 | Kraft Foods - Jacksonville - Portion Control | Packaging Supply | 30.381332, -81.774828 | 30.380295, -81.776579, 30.382368, -81.773077 | 14.6 | [satellite](https://www.google.com/maps/@30.381332,-81.774828,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Foods%20-%20Jacksonville%20-%20Portion%20Control%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-81.776441%2C30.382368%5D%2C%5B-81.776579%2C30.380828%5D%2C%5B-81.775823%2C30.380295%5D%2C%5B-81.773077%2C30.380472%5D%2C%5B-81.773351%2C30.382368%5D%2C%5B-81.776441%2C30.382368%5D%5D%5D%7D%7D) |
+| 6 | Kraft Heinz - Davenport | Food Processing Company | 41.616411, -90.610706 | 41.614768, -90.612697, 41.618053, -90.608715 | 72 | [satellite](https://www.google.com/maps/@41.616411,-90.610706,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Davenport%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-90.612697%2C41.618053%5D%2C%5B-90.612697%2C41.614768%5D%2C%5B-90.608715%2C41.614768%5D%2C%5B-90.608852%2C41.618053%5D%2C%5B-90.612697%2C41.618053%5D%5D%5D%7D%7D) |
 | 7 | Kraft Heinz - Winchester |  | — | — (perimeter unresolved) | — | — | — |
-| 8 | Kraft Heinz - Massillon |  | — | — (perimeter unresolved) | — | — | — |
-| 9 | Kraft Heinz - Garland |  | — | — (perimeter unresolved) | — | — | — |
-| 10 | Kraft Heinz - Fremont |  | — | — (perimeter unresolved) | — | — | — |
+| 8 | Kraft Heinz - Massillon | Manufacturer | 40.778480, -81.539088 | 40.776088, -81.543895, 40.780872, -81.534281 | 51 | [satellite](https://www.google.com/maps/@40.778480,-81.539088,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Massillon%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-81.54362%2C40.780456%5D%2C%5B-81.543895%2C40.779%5D%2C%5B-81.542247%2C40.776088%5D%2C%5B-81.534281%2C40.776712%5D%2C%5B-81.534693%2C40.780872%5D%2C%5B-81.54362%2C40.780456%5D%5D%5D%7D%7D) |
+| 9 | Kraft Heinz - Garland | Manufacturer | 32.906985, -96.663541 | 32.905486, -96.66536, 32.908484, -96.661721 | 40.2 | [satellite](https://www.google.com/maps/@32.906985,-96.663541,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Garland%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-96.665085%2C32.908484%5D%2C%5B-96.66536%2C32.907562%5D%2C%5B-96.664536%2C32.905486%5D%2C%5B-96.661789%2C32.905832%5D%2C%5B-96.661721%2C32.908426%5D%2C%5B-96.665085%2C32.908484%5D%5D%5D%7D%7D) |
+| 10 | Kraft Heinz - Fremont | Food Products Supplier | 41.361709, -83.093236 | 41.358926, -83.09612, 41.364492, -83.090352 | 88 | [satellite](https://www.google.com/maps/@41.361709,-83.093236,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Fremont%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-83.093373%2C41.364492%5D%2C%5B-83.094747%2C41.363771%5D%2C%5B-83.09612%2C41.360885%5D%2C%5B-83.095159%2C41.358926%5D%2C%5B-83.092687%2C41.359545%5D%2C%5B-83.091313%2C41.361915%5D%2C%5B-83.090352%2C41.36408%5D%2C%5B-83.093373%2C41.364492%5D%5D%5D%7D%7D) |
 | 11 | Kraft Foods - Springfield |  | — | — (perimeter unresolved) | — | — | — |
 | 12 | Kraft Heinz - Dover |  | — | — (perimeter unresolved) | — | — | — |
-| 13 | Kraft Heinz - Mason City |  | — | — (perimeter unresolved) | — | — | — |
+| 13 | Kraft Heinz - Mason City | Food Manufacturer | 43.164250, -93.216715 | 43.163148, -93.21929, 43.165352, -93.21414 | 25.1 | [satellite](https://www.google.com/maps/@43.164250,-93.216715,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Mason%20City%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-93.21929%2C43.165252%5D%2C%5B-93.219221%2C43.163148%5D%2C%5B-93.21414%2C43.163299%5D%2C%5B-93.214277%2C43.165352%5D%2C%5B-93.21929%2C43.165252%5D%5D%5D%7D%7D) |
 | 14 | Kraft Heinz - Cedar Rapids |  | — | — (perimeter unresolved) | — | — | — |
 | 15 | Kraft Heinz - Mason City |  | — | — (perimeter unresolved) | — | — | — |
 | 16 | Kraft Heinz - Beaver Dam |  | — | — (perimeter unresolved) | — | — | — |
 | 17 | Kraft Heinz - Coshocton |  | — | — (perimeter unresolved) | — | — | — |
 | 18 | Kraft Heinz - Champaign |  | — | — (perimeter unresolved) | — | — | — |
 | 19 | Kraft Heinz - Woodstock |  | — | — (perimeter unresolved) | — | — | — |
-| 20 | Kraft Heinz - Ft Myers |  | — | — (perimeter unresolved) | — | — | — |
+| 20 | Kraft Heinz - Ft Myers | Manufacturer | 26.665327, -81.803027 | 26.664637, -81.803817, 26.666017, -81.802238 | 6.9 | [satellite](https://www.google.com/maps/@26.665327,-81.803027,400m/data=!3m1!1e3) | [view](https://geojson.io/#data=data:application/json,%7B%22type%22%3A%22Feature%22%2C%22properties%22%3A%7B%22name%22%3A%22Kraft%20Heinz%20-%20Ft%20Myers%22%7D%2C%22geometry%22%3A%7B%22type%22%3A%22Polygon%22%2C%22coordinates%22%3A%5B%5B%5B-81.803817%2C26.665956%5D%2C%5B-81.803749%2C26.664637%5D%2C%5B-81.802238%2C26.664698%5D%2C%5B-81.802307%2C26.666017%5D%2C%5B-81.803817%2C26.665956%5D%5D%5D%7D%7D) |
 | 21 | Kraft Heinz - Kendallville |  | — | — (perimeter unresolved) | — | — | — |
 | 22 | Kraft Heinz - Lowville |  | — | — (perimeter unresolved) | — | — | — |
 | 23 | Kraft Heinz - New Ulm |  | — | — (perimeter unresolved) | — | — | — |
 | 24 | Kraft Heinz - Avon |  | — | — (perimeter unresolved) | — | — | — |
 | 25 | Kraft Heinz - Granite City |  | — | — (perimeter unresolved) | — | — | — |
 | 26 | Kraft Heinz - Columbia |  | — | — (perimeter unresolved) | — | — | — |
-| 27 | Kraft Heinz - Ryder Lathrop |  | — | — (perimeter unresolved) | — | — | — |
+| 27 | Kraft Heinz/Ryder - Lathrop |  | — | — (perimeter unresolved) | — | — | — |
 
-0 of 27 perimeters resolved.
+10 of 27 perimeters resolved.

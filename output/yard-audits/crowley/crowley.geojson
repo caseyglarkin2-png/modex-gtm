@@ -8,24 +8,32 @@
         "coordinates": [
           [
             [
-              -81.628,
-              30.35
+              -81.626647,
+              30.362458
             ],
             [
-              -81.6195,
-              30.35
+              -81.629393,
+              30.3544
             ],
             [
-              -81.6195,
-              30.3588
+              -81.63214,
+              30.345393
             ],
             [
-              -81.628,
-              30.3588
+              -81.628295,
+              30.343734
             ],
             [
-              -81.628,
-              30.35
+              -81.622527,
+              30.351556
+            ],
+            [
+              -81.619505,
+              30.35914
+            ],
+            [
+              -81.626647,
+              30.362458
             ]
           ]
         ]
@@ -57,7 +65,9 @@
           "truckGateCount": 1,
           "buildingCount": 9,
           "siteAreaAcres": 197,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 600,
+          "containerGroundSlots": 1400
         }
       }
     },
@@ -68,24 +78,24 @@
         "coordinates": [
           [
             [
-              -81.6256,
-              30.35705
+              -81.631865,
+              30.352504
             ],
             [
-              -81.6247,
-              30.35705
+              -81.631316,
+              30.351082
             ],
             [
-              -81.6247,
-              30.3576
+              -81.629668,
+              30.351793
             ],
             [
-              -81.6256,
-              30.3576
+              -81.630217,
+              30.353215
             ],
             [
-              -81.6256,
-              30.35705
+              -81.631865,
+              30.352504
             ]
           ]
         ]
@@ -107,24 +117,24 @@
         "coordinates": [
           [
             [
-              -81.6259,
-              30.3542
+              -81.629393,
+              30.35677
             ],
             [
-              -81.6229,
-              30.3542
+              -81.630492,
+              30.354163
             ],
             [
-              -81.6229,
-              30.3567
+              -81.627196,
+              30.352504
             ],
             [
-              -81.6259,
-              30.3567
+              -81.626097,
+              30.355111
             ],
             [
-              -81.6259,
-              30.3542
+              -81.629393,
+              30.35677
             ]
           ]
         ]
@@ -147,104 +157,24 @@
         "coordinates": [
           [
             [
-              -81.6245,
-              30.351
+              -81.626097,
+              30.360562
             ],
             [
-              -81.6205,
-              30.351
+              -81.626921,
+              30.358903
             ],
             [
-              -81.6205,
-              30.354
+              -81.622527,
+              30.35677
             ],
             [
-              -81.6245,
-              30.354
+              -81.621703,
+              30.358429
             ],
             [
-              -81.6245,
-              30.351
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
-        "type": "Marine terminal / container port",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6228,
-              30.3555
-            ],
-            [
-              -81.62,
-              30.3555
-            ],
-            [
-              -81.62,
-              30.3582
-            ],
-            [
-              -81.6228,
-              30.3582
-            ],
-            [
-              -81.6228,
-              30.3555
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
-        "type": "Marine terminal / container port",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6215,
-              30.3503
-            ],
-            [
-              -81.6202,
-              30.3503
-            ],
-            [
-              -81.6202,
-              30.3518
-            ],
-            [
-              -81.6215,
-              30.3518
-            ],
-            [
-              -81.6215,
-              30.3503
+              -81.626097,
+              30.360562
             ]
           ]
         ]
@@ -267,63 +197,32 @@
         "coordinates": [
           [
             [
-              -81.6262,
-              30.3568
+              -81.631665,
+              30.340297
             ],
             [
-              -81.6254,
-              30.3568
+              -81.631665,
+              30.334845
             ],
             [
-              -81.6254,
-              30.3577
+              -81.628232,
+              30.334845
             ],
             [
-              -81.6262,
-              30.3577
+              -81.627751,
+              30.336978
             ],
             [
-              -81.6262,
-              30.3568
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
-        "type": "Marine terminal / container port",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6306,
-              30.3358
+              -81.626652,
+              30.338756
             ],
             [
-              -81.627,
-              30.3358
+              -81.627751,
+              30.340416
             ],
             [
-              -81.627,
-              30.3392
-            ],
-            [
-              -81.6306,
-              30.3392
-            ],
-            [
-              -81.6306,
-              30.3358
+              -81.631665,
+              30.340297
             ]
           ]
         ]
@@ -355,7 +254,9 @@
           "truckGateCount": 1,
           "buildingCount": 4,
           "siteAreaAcres": 32,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 70,
+          "containerGroundSlots": 150
         }
       }
     },
@@ -366,24 +267,24 @@
         "coordinates": [
           [
             [
-              -81.6303,
-              30.3381
+              -81.631871,
+              30.338164
             ],
             [
-              -81.6297,
-              30.3381
+              -81.631802,
+              30.337749
             ],
             [
-              -81.6297,
-              30.3386
+              -81.631253,
+              30.337808
             ],
             [
-              -81.6303,
-              30.3386
+              -81.631322,
+              30.338223
             ],
             [
-              -81.6303,
-              30.3381
+              -81.631871,
+              30.338164
             ]
           ]
         ]
@@ -405,24 +306,24 @@
         "coordinates": [
           [
             [
-              -81.6301,
-              30.3379
+              -81.630086,
+              30.340178
             ],
             [
-              -81.6272,
-              30.3379
+              -81.630154,
+              30.339112
             ],
             [
-              -81.6272,
-              30.3391
+              -81.627888,
+              30.339112
             ],
             [
-              -81.6301,
-              30.3391
+              -81.627751,
+              30.340178
             ],
             [
-              -81.6301,
-              30.3379
+              -81.630086,
+              30.340178
             ]
           ]
         ]
@@ -445,24 +346,64 @@
         "coordinates": [
           [
             [
-              -81.6287,
-              30.3368
+              -81.630635,
+              30.338756
             ],
             [
-              -81.6278,
-              30.3368
+              -81.630772,
+              30.337927
             ],
             [
-              -81.6278,
-              30.3377
+              -81.628575,
+              30.337808
             ],
             [
-              -81.6287,
-              30.3377
+              -81.628438,
+              30.338638
             ],
             [
-              -81.6287,
-              30.3368
+              -81.630635,
+              30.338756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.63091,
+              30.337571
+            ],
+            [
+              -81.630978,
+              30.337097
+            ],
+            [
+              -81.62933,
+              30.336978
+            ],
+            [
+              -81.629262,
+              30.337452
+            ],
+            [
+              -81.63091,
+              30.337571
             ]
           ]
         ]
@@ -485,500 +426,32 @@
         "coordinates": [
           [
             [
-              -81.628,
-              30.354
+              -80.126769,
+              26.071429
             ],
             [
-              -81.621,
-              30.354
+              -80.127593,
+              26.066742
             ],
             [
-              -81.621,
-              30.359
+              -80.126769,
+              26.062547
             ],
             [
-              -81.628,
-              30.359
+              -80.123335,
+              26.061807
             ],
             [
-              -81.628,
-              30.354
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "perimeter",
-        "truckGate": true,
-        "guardShack": true,
-        "remoteGs": false,
-        "fastLaneOpportunity": true,
-        "backupSensitive": false,
-        "dropYard": true,
-        "multipleFacilities": true,
-        "scale": true,
-        "shipRcvSeparate": false,
-        "urbanRural": "Urban",
-        "dockDoors": "0-10",
-        "dropArea": "50+",
-        "yardMetrics": {
-          "dockDoorCount": 6,
-          "trailersVisible": 350,
-          "trailerParkingCapacity": 900,
-          "truckGateCount": 1,
-          "buildingCount": 6,
-          "siteAreaAcres": 93,
-          "railServed": true
-        }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6261,
-              30.35655
+              -80.117842,
+              26.062794
             ],
             [
-              -81.625,
-              30.35655
+              -80.117842,
+              26.071182
             ],
             [
-              -81.625,
-              30.3576
-            ],
-            [
-              -81.6261,
-              30.3576
-            ],
-            [
-              -81.6261,
-              30.35655
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6259,
-              30.354
-            ],
-            [
-              -81.6222,
-              30.354
-            ],
-            [
-              -81.6222,
-              30.3567
-            ],
-            [
-              -81.6259,
-              30.3567
-            ],
-            [
-              -81.6259,
-              30.354
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6226,
-              30.3565
-            ],
-            [
-              -81.621,
-              30.3565
-            ],
-            [
-              -81.621,
-              30.3585
-            ],
-            [
-              -81.6226,
-              30.3585
-            ],
-            [
-              -81.6226,
-              30.3565
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6262,
-              30.3568
-            ],
-            [
-              -81.6254,
-              30.3568
-            ],
-            [
-              -81.6254,
-              30.3576
-            ],
-            [
-              -81.6262,
-              30.3576
-            ],
-            [
-              -81.6262,
-              30.3568
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6285,
-              30.3445
-            ],
-            [
-              -81.621,
-              30.3445
-            ],
-            [
-              -81.621,
-              30.3505
-            ],
-            [
-              -81.6285,
-              30.3505
-            ],
-            [
-              -81.6285,
-              30.3445
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "perimeter",
-        "truckGate": true,
-        "guardShack": true,
-        "remoteGs": false,
-        "fastLaneOpportunity": true,
-        "backupSensitive": false,
-        "dropYard": true,
-        "multipleFacilities": true,
-        "scale": true,
-        "shipRcvSeparate": false,
-        "urbanRural": "Urban",
-        "dockDoors": "10-25",
-        "dropArea": "50+",
-        "yardMetrics": {
-          "dockDoorCount": 15,
-          "trailersVisible": 120,
-          "trailerParkingCapacity": 300,
-          "truckGateCount": 1,
-          "buildingCount": 5,
-          "siteAreaAcres": 120,
-          "railServed": true
-        }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6259,
-              30.348
-            ],
-            [
-              -81.625,
-              30.348
-            ],
-            [
-              -81.625,
-              30.3487
-            ],
-            [
-              -81.6259,
-              30.3487
-            ],
-            [
-              -81.6259,
-              30.348
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.628,
-              30.3455
-            ],
-            [
-              -81.6255,
-              30.3455
-            ],
-            [
-              -81.6255,
-              30.3495
-            ],
-            [
-              -81.628,
-              30.3495
-            ],
-            [
-              -81.628,
-              30.3455
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.625,
-              30.3465
-            ],
-            [
-              -81.6228,
-              30.3465
-            ],
-            [
-              -81.6228,
-              30.349
-            ],
-            [
-              -81.625,
-              30.349
-            ],
-            [
-              -81.625,
-              30.3465
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.624,
-              30.347
-            ],
-            [
-              -81.6215,
-              30.347
-            ],
-            [
-              -81.6215,
-              30.35
-            ],
-            [
-              -81.624,
-              30.35
-            ],
-            [
-              -81.624,
-              30.347
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.6259,
-              30.3487
-            ],
-            [
-              -81.6249,
-              30.3487
-            ],
-            [
-              -81.6249,
-              30.3495
-            ],
-            [
-              -81.6259,
-              30.3495
-            ],
-            [
-              -81.6259,
-              30.3487
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-        "type": "Marine terminal / container yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.1262,
-              26.0635
-            ],
-            [
-              -80.1215,
-              26.0635
-            ],
-            [
-              -80.1215,
-              26.07
-            ],
-            [
-              -80.1262,
-              26.07
-            ],
-            [
-              -80.1262,
-              26.0635
+              -80.126769,
+              26.071429
             ]
           ]
         ]
@@ -1010,7 +483,9 @@
           "truckGateCount": 1,
           "buildingCount": 7,
           "siteAreaAcres": 78,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 700,
+          "containerGroundSlots": 1500
         }
       }
     },
@@ -1021,24 +496,24 @@
         "coordinates": [
           [
             [
-              -80.1246,
-              26.0649
+              -80.125121,
+              26.067235
             ],
             [
-              -80.1234,
-              26.0649
+              -80.124846,
+              26.066372
             ],
             [
-              -80.1234,
-              26.0662
+              -80.123747,
+              26.066618
             ],
             [
-              -80.1246,
-              26.0662
+              -80.124022,
+              26.067482
             ],
             [
-              -80.1246,
-              26.0649
+              -80.125121,
+              26.067235
             ]
           ]
         ]
@@ -1060,24 +535,24 @@
         "coordinates": [
           [
             [
-              -80.1236,
-              26.0636
+              -80.126219,
+              26.066495
             ],
             [
-              -80.1216,
-              26.0636
+              -80.125945,
+              26.063041
             ],
             [
-              -80.1216,
-              26.0695
+              -80.11798,
+              26.064028
             ],
             [
-              -80.1236,
-              26.0695
+              -80.118254,
+              26.067235
             ],
             [
-              -80.1236,
-              26.0636
+              -80.126219,
+              26.066495
             ]
           ]
         ]
@@ -1100,24 +575,24 @@
         "coordinates": [
           [
             [
-              -80.1261,
-              26.064
+              -80.12567,
+              26.070442
             ],
             [
-              -80.1247,
-              26.064
+              -80.125533,
+              26.067728
             ],
             [
-              -80.1247,
-              26.069
+              -80.118392,
+              26.067975
             ],
             [
-              -80.1261,
-              26.069
+              -80.118529,
+              26.070689
             ],
             [
-              -80.1261,
-              26.064
+              -80.12567,
+              26.070442
             ]
           ]
         ]
@@ -1140,24 +615,24 @@
         "coordinates": [
           [
             [
-              -80.1239,
-              26.0664
+              -80.126769,
+              26.069209
             ],
             [
-              -80.1228,
-              26.0664
+              -80.126769,
+              26.066742
             ],
             [
-              -80.1228,
-              26.0672
+              -80.125395,
+              26.066742
             ],
             [
-              -80.1239,
-              26.0672
+              -80.125395,
+              26.069209
             ],
             [
-              -80.1239,
-              26.0664
+              -80.126769,
+              26.069209
             ]
           ]
         ]
@@ -1179,24 +654,44 @@
         "coordinates": [
           [
             [
-              -66.1045,
-              18.45
+              -66.105444,
+              18.459601
             ],
             [
-              -66.096,
-              18.45
+              -66.10613,
+              18.457647
             ],
             [
-              -66.096,
-              18.4565
+              -66.105719,
+              18.455042
             ],
             [
-              -66.1045,
-              18.4565
+              -66.102972,
+              18.450352
             ],
             [
-              -66.1045,
-              18.45
+              -66.099813,
+              18.449831
+            ],
+            [
+              -66.096105,
+              18.450352
+            ],
+            [
+              -66.095556,
+              18.455042
+            ],
+            [
+              -66.096655,
+              18.45895
+            ],
+            [
+              -66.1005,
+              18.459211
+            ],
+            [
+              -66.105444,
+              18.459601
             ]
           ]
         ]
@@ -1228,7 +723,9 @@
           "truckGateCount": 1,
           "buildingCount": 9,
           "siteAreaAcres": 160,
-          "railServed": false
+          "railServed": false,
+          "trailerChassisSpots": 220,
+          "containerGroundSlots": 600
         }
       }
     },
@@ -1239,24 +736,24 @@
         "coordinates": [
           [
             [
-              -66.1021,
-              18.4542
+              -66.099127,
+              18.458169
             ],
             [
-              -66.1013,
-              18.4542
+              -66.098852,
+              18.457257
             ],
             [
-              -66.1013,
-              18.4548
+              -66.097753,
+              18.457517
             ],
             [
-              -66.1021,
-              18.4548
+              -66.098028,
+              18.458429
             ],
             [
-              -66.1021,
-              18.4542
+              -66.099127,
+              18.458169
             ]
           ]
         ]
@@ -1278,24 +775,24 @@
         "coordinates": [
           [
             [
-              -66.1018,
-              18.4525
+              -66.101599,
+              18.453739
             ],
             [
-              -66.0965,
-              18.4525
+              -66.101324,
+              18.450092
             ],
             [
-              -66.0965,
-              18.4547
+              -66.097204,
+              18.450352
             ],
             [
-              -66.1018,
-              18.4547
+              -66.097479,
+              18.454
             ],
             [
-              -66.1018,
-              18.4525
+              -66.101599,
+              18.453739
             ]
           ]
         ]
@@ -1318,24 +815,24 @@
         "coordinates": [
           [
             [
-              -66.1008,
-              18.4505
+              -66.097204,
+              18.454
             ],
             [
-              -66.097,
-              18.4505
+              -66.096929,
+              18.450352
             ],
             [
-              -66.097,
-              18.453
+              -66.09432,
+              18.450874
             ],
             [
-              -66.1008,
-              18.453
+              -66.094458,
+              18.454261
             ],
             [
-              -66.1008,
-              18.4505
+              -66.097204,
+              18.454
             ]
           ]
         ]
@@ -1358,103 +855,32 @@
         "coordinates": [
           [
             [
-              -66.1042,
-              18.4538
+              -75.343493,
+              39.856374
             ],
             [
-              -66.1025,
-              18.4538
+              -75.34418,
+              39.852473
             ],
             [
-              -66.1025,
-              18.4552
+              -75.340747,
+              39.849837
             ],
             [
-              -66.1042,
-              18.4552
+              -75.336352,
+              39.853
             ],
             [
-              -66.1042,
-              18.4538
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Isla Grande Terminal - San Juan PR",
-        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -66.1025,
-              18.4547
+              -75.332232,
+              39.856374
             ],
             [
-              -66.0985,
-              18.4547
+              -75.336352,
+              39.85806
             ],
             [
-              -66.0985,
-              18.4553
-            ],
-            [
-              -66.1025,
-              18.4553
-            ],
-            [
-              -66.1025,
-              18.4547
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Isla Grande Terminal - San Juan PR",
-        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3415,
-              39.8495
-            ],
-            [
-              -75.3345,
-              39.8495
-            ],
-            [
-              -75.3345,
-              39.856
-            ],
-            [
-              -75.3415,
-              39.856
-            ],
-            [
-              -75.3415,
-              39.8495
+              -75.343493,
+              39.856374
             ]
           ]
         ]
@@ -1486,7 +912,9 @@
           "truckGateCount": 1,
           "buildingCount": 8,
           "siteAreaAcres": 107,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 260,
+          "containerGroundSlots": 500
         }
       }
     },
@@ -1497,24 +925,24 @@
         "coordinates": [
           [
             [
-              -75.3392,
-              39.8549
+              -75.34212,
+              39.856163
             ],
             [
-              -75.338,
-              39.8549
+              -75.341708,
+              39.85553
             ],
             [
-              -75.338,
-              39.8556
+              -75.340609,
+              39.855952
             ],
             [
-              -75.3392,
-              39.8556
+              -75.341021,
+              39.856584
             ],
             [
-              -75.3392,
-              39.8549
+              -75.34212,
+              39.856163
             ]
           ]
         ]
@@ -1536,24 +964,24 @@
         "coordinates": [
           [
             [
-              -75.34,
-              39.851
+              -75.343493,
+              39.854054
             ],
             [
-              -75.3355,
-              39.851
+              -75.342669,
+              39.852473
             ],
             [
-              -75.3355,
-              39.8545
+              -75.338549,
+              39.853843
             ],
             [
-              -75.34,
-              39.8545
+              -75.339373,
+              39.855319
             ],
             [
-              -75.34,
-              39.851
+              -75.343493,
+              39.854054
             ]
           ]
         ]
@@ -1576,64 +1004,24 @@
         "coordinates": [
           [
             [
-              -75.338,
-              39.8525
+              -75.341021,
+              39.855952
             ],
             [
-              -75.335,
-              39.8525
+              -75.341571,
+              39.855003
             ],
             [
-              -75.335,
-              39.8555
+              -75.337725,
+              39.853738
             ],
             [
-              -75.338,
-              39.8555
+              -75.337176,
+              39.854687
             ],
             [
-              -75.338,
-              39.8525
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Penn Terminals - Eddystone PA",
-        "type": "Marine terminal with dry + refrigerated warehouse",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.34,
-              39.8532
-            ],
-            [
-              -75.337,
-              39.8532
-            ],
-            [
-              -75.337,
-              39.8547
-            ],
-            [
-              -75.34,
-              39.8547
-            ],
-            [
-              -75.34,
-              39.8532
+              -75.341021,
+              39.855952
             ]
           ]
         ]
@@ -1656,63 +1044,44 @@
         "coordinates": [
           [
             [
-              -75.3405,
-              39.8544
+              -75.126873,
+              39.905712
             ],
             [
-              -75.338,
-              39.8544
+              -75.128247,
+              39.90487
             ],
             [
-              -75.338,
-              39.8556
+              -75.128659,
+              39.902973
             ],
             [
-              -75.3405,
-              39.8556
+              -75.128521,
+              39.90055
             ],
             [
-              -75.3405,
-              39.8544
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Penn Terminals - Eddystone PA",
-        "type": "Marine terminal with dry + refrigerated warehouse",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.1305,
-              39.9005
+              -75.126599,
+              39.899602
             ],
             [
-              -75.1215,
-              39.9005
+              -75.124676,
+              39.90055
             ],
             [
-              -75.1215,
-              39.907
+              -75.124127,
+              39.904237
             ],
             [
-              -75.1305,
-              39.907
+              -75.124127,
+              39.905607
             ],
             [
-              -75.1305,
-              39.9005
+              -75.124813,
+              39.906028
+            ],
+            [
+              -75.126873,
+              39.905712
             ]
           ]
         ]
@@ -1744,7 +1113,9 @@
           "truckGateCount": 1,
           "buildingCount": 7,
           "siteAreaAcres": 137,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 110,
+          "containerGroundSlots": 350
         }
       }
     },
@@ -1755,24 +1126,24 @@
         "coordinates": [
           [
             [
-              -75.1242,
-              39.9023
+              -75.124813,
+              39.904343
             ],
             [
-              -75.123,
-              39.9023
+              -75.124539,
+              39.903605
             ],
             [
-              -75.123,
-              39.903
+              -75.123577,
+              39.903816
             ],
             [
-              -75.1242,
-              39.903
+              -75.123852,
+              39.904553
             ],
             [
-              -75.1242,
-              39.9023
+              -75.124813,
+              39.904343
             ]
           ]
         ]
@@ -1794,183 +1165,32 @@
         "coordinates": [
           [
             [
-              -75.127,
-              39.901
+              -77.956395,
+              34.203904
             ],
             [
-              -75.1225,
-              39.901
+              -77.958592,
+              34.195272
             ],
             [
-              -75.1225,
-              39.9035
+              -77.957493,
+              34.18573
             ],
             [
-              -75.127,
-              39.9035
+              -77.954197,
+              34.185275
             ],
             [
-              -75.127,
-              39.901
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
-        "type": "Marine terminal / breakbulk yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.1275,
-              39.904
+              -77.952549,
+              34.193
             ],
             [
-              -75.123,
-              39.904
+              -77.952,
+              34.20345
             ],
             [
-              -75.123,
-              39.9068
-            ],
-            [
-              -75.1275,
-              39.9068
-            ],
-            [
-              -75.1275,
-              39.904
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
-        "type": "Marine terminal / breakbulk yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.1295,
-              39.901
-            ],
-            [
-              -75.1265,
-              39.901
-            ],
-            [
-              -75.1265,
-              39.9032
-            ],
-            [
-              -75.1295,
-              39.9032
-            ],
-            [
-              -75.1295,
-              39.901
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
-        "type": "Marine terminal / breakbulk yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.126,
-              39.9023
-            ],
-            [
-              -75.1235,
-              39.9023
-            ],
-            [
-              -75.1235,
-              39.9033
-            ],
-            [
-              -75.126,
-              39.9033
-            ],
-            [
-              -75.126,
-              39.9023
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
-        "type": "Marine terminal / breakbulk yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.9555,
-              34.187
-            ],
-            [
-              -77.9485,
-              34.187
-            ],
-            [
-              -77.9485,
-              34.198
-            ],
-            [
-              -77.9555,
-              34.198
-            ],
-            [
-              -77.9555,
-              34.187
+              -77.956395,
+              34.203904
             ]
           ]
         ]
@@ -2002,7 +1222,9 @@
           "truckGateCount": 1,
           "buildingCount": 8,
           "siteAreaAcres": 182,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 60,
+          "containerGroundSlots": 400
         }
       }
     },
@@ -2013,24 +1235,24 @@
         "coordinates": [
           [
             [
-              -77.9497,
-              34.1913
+              -77.954747,
+              34.194817
             ],
             [
-              -77.9485,
-              34.1913
+              -77.954472,
+              34.193227
             ],
             [
-              -77.9485,
-              34.192
+              -77.952549,
+              34.193454
             ],
             [
-              -77.9497,
-              34.192
+              -77.952824,
+              34.195045
             ],
             [
-              -77.9497,
-              34.1913
+              -77.954747,
+              34.194817
             ]
           ]
         ]
@@ -2052,24 +1274,24 @@
         "coordinates": [
           [
             [
-              -77.9535,
-              34.189
+              -77.957493,
+              34.191864
             ],
             [
-              -77.949,
-              34.189
+              -77.957768,
+              34.187093
             ],
             [
-              -77.949,
-              34.1945
+              -77.953099,
+              34.187547
             ],
             [
-              -77.9535,
-              34.1945
+              -77.952824,
+              34.192318
             ],
             [
-              -77.9535,
-              34.189
+              -77.957493,
+              34.191864
             ]
           ]
         ]
@@ -2092,24 +1314,24 @@
         "coordinates": [
           [
             [
-              -77.9555,
-              34.188
+              -77.958592,
+              34.198907
             ],
             [
-              -77.953,
-              34.188
+              -77.958317,
+              34.194817
             ],
             [
-              -77.953,
-              34.196
+              -77.954472,
+              34.195272
             ],
             [
-              -77.9555,
-              34.196
+              -77.954747,
+              34.199361
             ],
             [
-              -77.9555,
-              34.188
+              -77.958592,
+              34.198907
             ]
           ]
         ]
@@ -2132,63 +1354,40 @@
         "coordinates": [
           [
             [
-              -77.951,
-              34.1912
+              -89.101317,
+              30.365451
             ],
             [
-              -77.949,
-              34.1912
+              -89.101866,
+              30.361185
             ],
             [
-              -77.949,
-              34.1925
+              -89.101317,
+              30.357156
             ],
             [
-              -77.951,
-              34.1925
+              -89.099669,
+              30.349335
             ],
             [
-              -77.951,
-              34.1912
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
-        "type": "Marine terminal / cargo yard",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.097,
-              30.355
+              -89.096099,
+              30.349809
             ],
             [
-              -89.0905,
-              30.355
+              -89.095824,
+              30.354786
             ],
             [
-              -89.0905,
-              30.3645
+              -89.095,
+              30.358815
             ],
             [
-              -89.097,
-              30.3645
+              -89.096373,
+              30.365451
             ],
             [
-              -89.097,
-              30.355
+              -89.101317,
+              30.365451
             ]
           ]
         ]
@@ -2220,7 +1419,9 @@
           "truckGateCount": 1,
           "buildingCount": 6,
           "siteAreaAcres": 163,
-          "railServed": true
+          "railServed": true,
+          "trailerChassisSpots": 90,
+          "containerGroundSlots": 450
         }
       }
     },
@@ -2231,24 +1432,24 @@
         "coordinates": [
           [
             [
-              -89.0952,
-              30.3628
+              -89.101592,
+              30.365214
             ],
             [
-              -89.0942,
-              30.3628
+              -89.101317,
+              30.363555
             ],
             [
-              -89.0942,
-              30.3642
+              -89.09912,
+              30.364029
             ],
             [
-              -89.0952,
-              30.3642
+              -89.099395,
+              30.365688
             ],
             [
-              -89.0952,
-              30.3628
+              -89.101592,
+              30.365214
             ]
           ]
         ]
@@ -2270,24 +1471,24 @@
         "coordinates": [
           [
             [
-              -89.096,
-              30.3555
+              -89.101042,
+              30.357156
             ],
             [
-              -89.0925,
-              30.3555
+              -89.101317,
+              30.350994
             ],
             [
-              -89.0925,
-              30.361
+              -89.096373,
+              30.351468
             ],
             [
-              -89.096,
-              30.361
+              -89.096099,
+              30.35763
             ],
             [
-              -89.096,
-              30.3555
+              -89.101042,
+              30.357156
             ]
           ]
         ]
@@ -2310,143 +1511,32 @@
         "coordinates": [
           [
             [
-              -89.0965,
-              30.361
+              -84.346073,
+              33.65885
             ],
             [
-              -89.094,
-              30.361
+              -84.345936,
+              33.657479
             ],
             [
-              -89.094,
-              30.364
+              -84.344357,
+              33.657593
             ],
             [
-              -89.0965,
-              30.364
+              -84.344013,
+              33.657364
             ],
             [
-              -89.0965,
-              30.361
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Gulfport Terminal - Gulfport MS",
-        "type": "Marine terminal / port facility",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.0965,
-              30.3555
+              -84.343601,
+              33.657593
             ],
             [
-              -89.0948,
-              30.3555
+              -84.343876,
+              33.658965
             ],
             [
-              -89.0948,
-              30.36
-            ],
-            [
-              -89.0965,
-              30.36
-            ],
-            [
-              -89.0965,
-              30.3555
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Gulfport Terminal - Gulfport MS",
-        "type": "Marine terminal / port facility",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.096,
-              30.3628
-            ],
-            [
-              -89.0945,
-              30.3628
-            ],
-            [
-              -89.0945,
-              30.3642
-            ],
-            [
-              -89.096,
-              30.3642
-            ],
-            [
-              -89.096,
-              30.3628
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Gulfport Terminal - Gulfport MS",
-        "type": "Marine terminal / port facility",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.3462,
-              33.6548
-            ],
-            [
-              -84.3433,
-              33.6548
-            ],
-            [
-              -84.3433,
-              33.6573
-            ],
-            [
-              -84.3462,
-              33.6573
-            ],
-            [
-              -84.3462,
-              33.6548
+              -84.346073,
+              33.65885
             ]
           ]
         ]
@@ -2478,7 +1568,9 @@
           "truckGateCount": 1,
           "buildingCount": 2,
           "siteAreaAcres": 13.5,
-          "railServed": false
+          "railServed": false,
+          "trailerChassisSpots": 55,
+          "containerGroundSlots": 130
         }
       }
     },
@@ -2489,24 +1581,24 @@
         "coordinates": [
           [
             [
-              -84.3443,
-              33.65655
+              -84.344425,
+              33.657593
             ],
             [
-              -84.34395,
-              33.65655
+              -84.344425,
+              33.657193
             ],
             [
-              -84.34395,
-              33.65685
+              -84.343876,
+              33.657193
             ],
             [
-              -84.3443,
-              33.65685
+              -84.343876,
+              33.657593
             ],
             [
-              -84.3443,
-              33.65655
+              -84.344425,
+              33.657593
             ]
           ]
         ]
@@ -2528,24 +1620,24 @@
         "coordinates": [
           [
             [
-              -84.3461,
-              33.65555
+              -84.345799,
+              33.658736
             ],
             [
-              -84.3442,
-              33.65555
+              -84.34573,
+              33.657765
             ],
             [
-              -84.3442,
-              33.6573
+              -84.343945,
+              33.657822
             ],
             [
-              -84.3461,
-              33.6573
+              -84.344013,
+              33.658793
             ],
             [
-              -84.3461,
-              33.65555
+              -84.345799,
+              33.658736
             ]
           ]
         ]
@@ -2568,24 +1660,24 @@
         "coordinates": [
           [
             [
-              -84.3442,
-              33.655
+              -84.345661,
+              33.657364
             ],
             [
-              -84.34335,
-              33.655
+              -84.345661,
+              33.656679
             ],
             [
-              -84.34335,
-              33.6565
+              -84.3447,
+              33.656679
             ],
             [
-              -84.3442,
-              33.6565
+              -84.3447,
+              33.657364
             ],
             [
-              -84.3442,
-              33.655
+              -84.345661,
+              33.657364
             ]
           ]
         ]
@@ -2608,24 +1700,32 @@
         "coordinates": [
           [
             [
-              -81.6956,
-              30.3627
+              -81.695205,
+              30.364703
             ],
             [
-              -81.69335,
-              30.3627
+              -81.695137,
+              30.363992
             ],
             [
-              -81.69335,
-              30.36405
+              -81.695205,
+              30.363104
             ],
             [
-              -81.6956,
-              30.36405
+              -81.694793,
+              30.362452
             ],
             [
-              -81.6956,
-              30.3627
+              -81.693351,
+              30.362571
+            ],
+            [
+              -81.693351,
+              30.364644
+            ],
+            [
+              -81.695205,
+              30.364703
             ]
           ]
         ]
@@ -2657,7 +1757,9 @@
           "truckGateCount": 1,
           "buildingCount": 1,
           "siteAreaAcres": 5.5,
-          "railServed": false
+          "railServed": false,
+          "trailerChassisSpots": 35,
+          "containerGroundSlots": null
         }
       }
     },
@@ -2668,24 +1770,24 @@
         "coordinates": [
           [
             [
-              -81.6956,
-              30.3629
+              -81.695274,
+              30.363696
             ],
             [
-              -81.69525,
-              30.3629
+              -81.69524,
+              30.363489
             ],
             [
-              -81.69525,
-              30.3632
+              -81.694965,
+              30.363518
             ],
             [
-              -81.6956,
-              30.3632
+              -81.694999,
+              30.363726
             ],
             [
-              -81.6956,
-              30.3629
+              -81.695274,
+              30.363696
             ]
           ]
         ]
@@ -2707,64 +1809,24 @@
         "coordinates": [
           [
             [
-              -81.6943,
-              30.3628
+              -81.695068,
+              30.363045
             ],
             [
-              -81.69335,
-              30.3628
+              -81.695034,
+              30.362748
             ],
             [
-              -81.69335,
-              30.3636
+              -81.69366,
+              30.362808
             ],
             [
-              -81.6943,
-              30.3636
+              -81.693695,
+              30.363104
             ],
             [
-              -81.6943,
-              30.3628
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
-        "type": "Distribution center / dry + LCL warehouse",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.695,
-              30.3632
-            ],
-            [
-              -81.69455,
-              30.3632
-            ],
-            [
-              -81.69455,
-              30.3639
-            ],
-            [
-              -81.695,
-              30.3639
-            ],
-            [
-              -81.695,
-              30.3632
+              -81.695068,
+              30.363045
             ]
           ]
         ]
@@ -2787,24 +1849,24 @@
         "coordinates": [
           [
             [
-              -81.69455,
-              30.3628
+              -81.69342,
+              30.364348
             ],
             [
-              -81.69385,
-              30.3628
+              -81.693248,
+              30.363637
             ],
             [
-              -81.69385,
-              30.36335
+              -81.693008,
+              30.363696
             ],
             [
-              -81.69455,
-              30.36335
+              -81.693214,
+              30.364407
             ],
             [
-              -81.69455,
-              30.3628
+              -81.69342,
+              30.364348
             ]
           ]
         ]
@@ -2827,24 +1889,32 @@
         "coordinates": [
           [
             [
-              -81.6982,
-              30.3447
+              -81.699547,
+              30.347585
             ],
             [
-              -81.6954,
-              30.3447
+              -81.699684,
+              30.346104
             ],
             [
-              -81.6954,
-              30.3481
+              -81.698173,
+              30.344622
             ],
             [
-              -81.6982,
-              30.3481
+              -81.695976,
+              30.344622
             ],
             [
-              -81.6982,
-              30.3447
+              -81.695701,
+              30.346637
+            ],
+            [
+              -81.696457,
+              30.347585
+            ],
+            [
+              -81.699547,
+              30.347585
             ]
           ]
         ]
@@ -2876,7 +1946,9 @@
           "truckGateCount": 1,
           "buildingCount": 4,
           "siteAreaAcres": 12.1,
-          "railServed": false
+          "railServed": false,
+          "trailerChassisSpots": 160,
+          "containerGroundSlots": null
         }
       }
     },
@@ -2887,24 +1959,24 @@
         "coordinates": [
           [
             [
-              -81.69605,
-              30.34735
+              -81.696663,
+              30.347585
             ],
             [
-              -81.6956,
-              30.34735
+              -81.696525,
+              30.34717
             ],
             [
-              -81.6956,
-              30.34775
+              -81.695976,
+              30.34723
             ],
             [
-              -81.69605,
-              30.34775
+              -81.696113,
+              30.347644
             ],
             [
-              -81.69605,
-              30.34735
+              -81.696663,
+              30.347585
             ]
           ]
         ]
@@ -2926,24 +1998,24 @@
         "coordinates": [
           [
             [
-              -81.6982,
-              30.3449
+              -81.699272,
+              30.347348
             ],
             [
-              -81.6964,
-              30.3449
+              -81.699272,
+              30.346519
             ],
             [
-              -81.6964,
-              30.3462
+              -81.697075,
+              30.346519
             ],
             [
-              -81.6982,
-              30.3462
+              -81.697075,
+              30.347348
             ],
             [
-              -81.6982,
-              30.3449
+              -81.699272,
+              30.347348
             ]
           ]
         ]
@@ -2966,24 +2038,24 @@
         "coordinates": [
           [
             [
-              -81.6962,
-              30.3462
+              -81.698173,
+              30.346281
             ],
             [
-              -81.69545,
-              30.3462
+              -81.698173,
+              30.345452
             ],
             [
-              -81.69545,
-              30.3476
+              -81.696388,
+              30.345452
             ],
             [
-              -81.6962,
-              30.3476
+              -81.696388,
+              30.346281
             ],
             [
-              -81.6962,
-              30.3462
+              -81.698173,
+              30.346281
             ]
           ]
         ]
@@ -3006,24 +2078,24 @@
         "coordinates": [
           [
             [
-              -81.6979,
-              30.3462
+              -81.69886,
+              30.34723
             ],
             [
-              -81.6962,
-              30.3462
+              -81.698929,
+              30.346874
             ],
             [
-              -81.6962,
-              30.347
+              -81.696869,
+              30.346874
             ],
             [
-              -81.6979,
-              30.347
+              -81.6968,
+              30.34723
             ],
             [
-              -81.6979,
-              30.3462
+              -81.69886,
+              30.34723
             ]
           ]
         ]
@@ -3046,63 +2118,32 @@
         "coordinates": [
           [
             [
-              -81.6964,
-              30.347
+              -80.358981,
+              25.874218
             ],
             [
-              -81.69555,
-              30.347
+              -80.359255,
+              25.873847
             ],
             [
-              -81.69555,
-              30.348
+              -80.359118,
+              25.873291
             ],
             [
-              -81.6964,
-              30.348
+              -80.3585,
+              25.873353
             ],
             [
-              -81.6964,
-              30.347
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "crowley",
-        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
-        "type": "Cross-dock / distribution warehouse",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.35935,
-              25.8728
+              -80.357195,
+              25.873724
             ],
             [
-              -80.3572,
-              25.8728
+              -80.357539,
+              25.874589
             ],
             [
-              -80.3572,
-              25.87445
-            ],
-            [
-              -80.35935,
-              25.87445
-            ],
-            [
-              -80.35935,
-              25.8728
+              -80.358981,
+              25.874218
             ]
           ]
         ]
@@ -3134,7 +2175,9 @@
           "truckGateCount": 0,
           "buildingCount": 1,
           "siteAreaAcres": 6.5,
-          "railServed": false
+          "railServed": false,
+          "trailerChassisSpots": 45,
+          "containerGroundSlots": null
         }
       }
     },
@@ -3145,24 +2188,24 @@
         "coordinates": [
           [
             [
-              -80.3583,
-              25.8729
+              -80.359187,
+              25.873847
             ],
             [
-              -80.3573,
-              25.8729
+              -80.359118,
+              25.873631
             ],
             [
-              -80.3573,
-              25.87385
+              -80.358843,
+              25.873693
             ],
             [
-              -80.3583,
-              25.87385
+              -80.358912,
+              25.873909
             ],
             [
-              -80.3583,
-              25.8729
+              -80.359187,
+              25.873847
             ]
           ]
         ]
@@ -3173,6 +2216,186 @@
         "type": "Temperature-controlled distribution center / warehouse",
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.359049,
+              25.873724
+            ],
+            [
+              -80.358946,
+              25.873476
+            ],
+            [
+              -80.357848,
+              25.873785
+            ],
+            [
+              -80.357951,
+              25.874032
+            ],
+            [
+              -80.359049,
+              25.873724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+        "type": "Temperature-controlled distribution center / warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.3728,
+              25.86715
+            ],
+            [
+              -80.3729,
+              25.8651
+            ],
+            [
+              -80.3715,
+              25.86505
+            ],
+            [
+              -80.3713,
+              25.86705
+            ],
+            [
+              -80.3728,
+              25.86715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Miami Distribution Center - Medley FL",
+        "type": "Distribution center / LCL liner & logistics warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 58,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8,
+          "railServed": false,
+          "trailerChassisSpots": 95,
+          "containerGroundSlots": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.37187,
+              25.86702
+            ],
+            [
+              -80.37189,
+              25.86679
+            ],
+            [
+              -80.37166,
+              25.86678
+            ],
+            [
+              -80.37164,
+              25.86701
+            ],
+            [
+              -80.37187,
+              25.86702
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Miami Distribution Center - Medley FL",
+        "type": "Distribution center / LCL liner & logistics warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.3717,
+              25.867
+            ],
+            [
+              -80.37185,
+              25.86517
+            ],
+            [
+              -80.37155,
+              25.86515
+            ],
+            [
+              -80.3714,
+              25.86698
+            ],
+            [
+              -80.3717,
+              25.867
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Miami Distribution Center - Medley FL",
+        "type": "Distribution center / LCL liner & logistics warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
         "confidence": "high",
         "zone": "dropYard",
         "index": 1
@@ -3185,34 +2408,34 @@
         "coordinates": [
           [
             [
-              -80.3593,
-              25.87295
+              -80.37203,
+              25.86705
             ],
             [
-              -80.3579,
-              25.87295
+              -80.37218,
+              25.8652
             ],
             [
-              -80.3579,
-              25.8738
+              -80.37193,
+              25.86518
             ],
             [
-              -80.3593,
-              25.8738
+              -80.37178,
+              25.86703
             ],
             [
-              -80.3593,
-              25.87295
+              -80.37203,
+              25.86705
             ]
           ]
         ]
       },
       "properties": {
         "account": "crowley",
-        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
-        "type": "Temperature-controlled distribution center / warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
+        "name": "Crowley Miami Distribution Center - Medley FL",
+        "type": "Distribution center / LCL liner & logistics warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
         "confidence": "high",
         "zone": "dockApron",
         "index": 1
@@ -3225,37 +2448,2186 @@
         "coordinates": [
           [
             [
-              -80.3587,
-              25.8737
+              -66.121655,
+              18.424905
             ],
             [
-              -80.35735,
-              25.8737
+              -66.121555,
+              18.424075
             ],
             [
-              -80.35735,
-              25.87445
+              -66.119755,
+              18.42417
             ],
             [
-              -80.3587,
-              25.87445
+              -66.119805,
+              18.424935
             ],
             [
-              -80.3587,
-              25.8737
+              -66.121655,
+              18.424905
             ]
           ]
         ]
       },
       "properties": {
         "account": "crowley",
-        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
-        "type": "Temperature-controlled distribution center / warehouse",
+        "name": "Crowley Liner & Logistics - Guaynabo (Amelia / FTZ 61)",
+        "type": "Liner + logistics warehouse / cross-dock distribution center (NVO/LCL, Foreign-Trade Zone 61)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.5,
+          "railServed": false,
+          "trailerChassisSpots": 80,
+          "containerGroundSlots": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.120015,
+              18.424195
+            ],
+            [
+              -66.119985,
+              18.424055
+            ],
+            [
+              -66.119745,
+              18.42409
+            ],
+            [
+              -66.119775,
+              18.42423
+            ],
+            [
+              -66.120015,
+              18.424195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Liner & Logistics - Guaynabo (Amelia / FTZ 61)",
+        "type": "Liner + logistics warehouse / cross-dock distribution center (NVO/LCL, Foreign-Trade Zone 61)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.121595,
+              18.424445
+            ],
+            [
+              -66.12156,
+              18.424155
+            ],
+            [
+              -66.11977,
+              18.42421
+            ],
+            [
+              -66.119805,
+              18.4245
+            ],
+            [
+              -66.121595,
+              18.424445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Liner & Logistics - Guaynabo (Amelia / FTZ 61)",
+        "type": "Liner + logistics warehouse / cross-dock distribution center (NVO/LCL, Foreign-Trade Zone 61)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.121615,
+              18.424555
+            ],
+            [
+              -66.121595,
+              18.42444
+            ],
+            [
+              -66.119805,
+              18.424495
+            ],
+            [
+              -66.11982,
+              18.42461
+            ],
+            [
+              -66.121615,
+              18.424555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Liner & Logistics - Guaynabo (Amelia / FTZ 61)",
+        "type": "Liner + logistics warehouse / cross-dock distribution center (NVO/LCL, Foreign-Trade Zone 61)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6543,
+              30.4793
+            ],
+            [
+              -81.6544,
+              30.4786
+            ],
+            [
+              -81.6531,
+              30.47685
+            ],
+            [
+              -81.6515,
+              30.47715
+            ],
+            [
+              -81.6516,
+              30.4788
+            ],
+            [
+              -81.6518,
+              30.479
+            ],
+            [
+              -81.6543,
+              30.4793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Tradeport Logistics Campus (Tradeport Distribution Center) - Jacksonville FL",
+        "type": "Distribution center / warehouse (LCL + dry cargo)",
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 26,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13.5,
+          "railServed": false,
+          "trailerChassisSpots": 12,
+          "containerGroundSlots": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.65345,
+              30.47895
+            ],
+            [
+              -81.65345,
+              30.4787
+            ],
+            [
+              -81.65285,
+              30.4787
+            ],
+            [
+              -81.65285,
+              30.47895
+            ],
+            [
+              -81.65345,
+              30.47895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Tradeport Logistics Campus (Tradeport Distribution Center) - Jacksonville FL",
+        "type": "Distribution center / warehouse (LCL + dry cargo)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6519,
+              30.4789
+            ],
+            [
+              -81.6527,
+              30.4771
+            ],
+            [
+              -81.65245,
+              30.47705
+            ],
+            [
+              -81.65165,
+              30.47885
+            ],
+            [
+              -81.6519,
+              30.4789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Tradeport Logistics Campus (Tradeport Distribution Center) - Jacksonville FL",
+        "type": "Distribution center / warehouse (LCL + dry cargo)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.51716,
+              39.09862
+            ],
+            [
+              -84.51712,
+              39.0981
+            ],
+            [
+              -84.51652,
+              39.09812
+            ],
+            [
+              -84.51656,
+              39.09864
+            ],
+            [
+              -84.51716,
+              39.09862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Cincinnati Office - Cincinnati OH",
+        "type": "Logistics office (downtown high-rise, no truck yard)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 0.7,
+          "railServed": false,
+          "trailerChassisSpots": 0,
+          "containerGroundSlots": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.27412,
+              39.89882
+            ],
+            [
+              -75.2743,
+              39.89772
+            ],
+            [
+              -75.27284,
+              39.89738
+            ],
+            [
+              -75.2725,
+              39.89843
+            ],
+            [
+              -75.27412,
+              39.89882
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Folcroft Warehouse - Folcroft PA",
+        "type": "Warehouse / distribution facility (PA receiving location)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.1,
+          "railServed": false,
+          "trailerChassisSpots": 25,
+          "containerGroundSlots": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.27276,
+              39.89786
+            ],
+            [
+              -75.27292,
+              39.8977
+            ],
+            [
+              -75.27272,
+              39.8976
+            ],
+            [
+              -75.27256,
+              39.89776
+            ],
+            [
+              -75.27276,
+              39.89786
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Folcroft Warehouse - Folcroft PA",
+        "type": "Warehouse / distribution facility (PA receiving location)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.27398,
+              39.89876
+            ],
+            [
+              -75.27416,
+              39.8984
+            ],
+            [
+              -75.27298,
+              39.89812
+            ],
+            [
+              -75.27282,
+              39.89847
+            ],
+            [
+              -75.27398,
+              39.89876
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Folcroft Warehouse - Folcroft PA",
+        "type": "Warehouse / distribution facility (PA receiving location)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2731,
+              39.89776
+            ],
+            [
+              -75.27338,
+              39.8976
+            ],
+            [
+              -75.27316,
+              39.89738
+            ],
+            [
+              -75.2729,
+              39.89756
+            ],
+            [
+              -75.2731,
+              39.89776
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Folcroft Warehouse - Folcroft PA",
+        "type": "Warehouse / distribution facility (PA receiving location)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93664,
+              32.84834
+            ],
+            [
+              -79.93705,
+              32.8465
+            ],
+            [
+              -79.9352,
+              32.8461
+            ],
+            [
+              -79.93475,
+              32.8479
+            ],
+            [
+              -79.93664,
+              32.84834
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley North Charleston Terminal - North Charleston SC",
+        "type": "Marine terminal / RoRo-breakbulk cargo yard",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 9.2,
+          "railServed": true,
+          "trailerChassisSpots": 15,
+          "containerGroundSlots": 120
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93822,
+              32.84462
+            ],
+            [
+              -79.93844,
+              32.84438
+            ],
+            [
+              -79.93798,
+              32.84418
+            ],
+            [
+              -79.93776,
+              32.84442
+            ],
+            [
+              -79.93822,
+              32.84462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley North Charleston Terminal - North Charleston SC",
+        "type": "Marine terminal / RoRo-breakbulk cargo yard",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93632,
+              32.84692
+            ],
+            [
+              -79.93656,
+              32.84638
+            ],
+            [
+              -79.93556,
+              32.84602
+            ],
+            [
+              -79.93532,
+              32.84656
+            ],
+            [
+              -79.93632,
+              32.84692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley North Charleston Terminal - North Charleston SC",
+        "type": "Marine terminal / RoRo-breakbulk cargo yard",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.76215,
+              17.69486
+            ],
+            [
+              -64.76223,
+              17.6946
+            ],
+            [
+              -64.76223,
+              17.69423
+            ],
+            [
+              -64.76219,
+              17.69386
+            ],
+            [
+              -64.76199,
+              17.69374
+            ],
+            [
+              -64.76193,
+              17.69412
+            ],
+            [
+              -64.76172,
+              17.69433
+            ],
+            [
+              -64.76161,
+              17.6946
+            ],
+            [
+              -64.76172,
+              17.69492
+            ],
+            [
+              -64.76215,
+              17.69486
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Croix Container Terminal - Wilfred \"Bomba\" Allick Port & Transshipment Center, St. Croix, USVI",
+        "type": "Marine terminal / container port (multipurpose, Ro-Ro + Lo-Lo)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 12,
+          "railServed": false,
+          "trailerChassisSpots": 0,
+          "containerGroundSlots": 400
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.7625,
+              17.6954
+            ],
+            [
+              -64.7625,
+              17.69525
+            ],
+            [
+              -64.76233,
+              17.69525
+            ],
+            [
+              -64.76233,
+              17.6954
+            ],
+            [
+              -64.7625,
+              17.6954
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Croix Container Terminal - Wilfred \"Bomba\" Allick Port & Transshipment Center, St. Croix, USVI",
+        "type": "Marine terminal / container port (multipurpose, Ro-Ro + Lo-Lo)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.76215,
+              17.69468
+            ],
+            [
+              -64.76219,
+              17.69428
+            ],
+            [
+              -64.76176,
+              17.6943
+            ],
+            [
+              -64.76168,
+              17.6947
+            ],
+            [
+              -64.76215,
+              17.69468
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Croix Container Terminal - Wilfred \"Bomba\" Allick Port & Transshipment Center, St. Croix, USVI",
+        "type": "Marine terminal / container port (multipurpose, Ro-Ro + Lo-Lo)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.9511,
+              18.3371
+            ],
+            [
+              -64.95095,
+              18.33475
+            ],
+            [
+              -64.9481,
+              18.3345
+            ],
+            [
+              -64.9484,
+              18.337
+            ],
+            [
+              -64.9511,
+              18.3371
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Thomas Cargo Terminal - Crown Bay Cargo Port, USVI",
+        "type": "Marine terminal / container port (smaller, ungated tier)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 19.4,
+          "railServed": false,
+          "trailerChassisSpots": 25,
+          "containerGroundSlots": 600
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.95005,
+              18.33688
+            ],
+            [
+              -64.95005,
+              18.3366
+            ],
+            [
+              -64.94965,
+              18.3366
+            ],
+            [
+              -64.94965,
+              18.33688
+            ],
+            [
+              -64.95005,
+              18.33688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Thomas Cargo Terminal - Crown Bay Cargo Port, USVI",
+        "type": "Marine terminal / container port (smaller, ungated tier)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.9506,
+              18.3364
+            ],
+            [
+              -64.95055,
+              18.33505
+            ],
+            [
+              -64.9485,
+              18.3349
+            ],
+            [
+              -64.9486,
+              18.3363
+            ],
+            [
+              -64.9506,
+              18.3364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Thomas Cargo Terminal - Crown Bay Cargo Port, USVI",
+        "type": "Marine terminal / container port (smaller, ungated tier)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.9508,
+              18.3349
+            ],
+            [
+              -64.95085,
+              18.33475
+            ],
+            [
+              -64.94835,
+              18.33455
+            ],
+            [
+              -64.9483,
+              18.3347
+            ],
+            [
+              -64.9508,
+              18.3349
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley St. Thomas Cargo Terminal - Crown Bay Cargo Port, USVI",
+        "type": "Marine terminal / container port (smaller, ungated tier)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.61863,
+              15.69912
+            ],
+            [
+              -88.61905,
+              15.69676
+            ],
+            [
+              -88.61702,
+              15.69502
+            ],
+            [
+              -88.61498,
+              15.69386
+            ],
+            [
+              -88.61243,
+              15.69468
+            ],
+            [
+              -88.61168,
+              15.69688
+            ],
+            [
+              -88.61863,
+              15.69912
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Santo Tomas de Castilla Container Terminal - Guatemala",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 2200,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 67,
+          "railServed": false,
+          "trailerChassisSpots": 60,
+          "containerGroundSlots": 2200
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6156,
+              15.6943
+            ],
+            [
+              -88.61514,
+              15.6937
+            ],
+            [
+              -88.61452,
+              15.69408
+            ],
+            [
+              -88.61498,
+              15.69468
+            ],
+            [
+              -88.6156,
+              15.6943
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Santo Tomas de Castilla Container Terminal - Guatemala",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6156,
+              15.6978
+            ],
+            [
+              -88.61635,
+              15.6965
+            ],
+            [
+              -88.6142,
+              15.6956
+            ],
+            [
+              -88.61345,
+              15.6969
+            ],
+            [
+              -88.6156,
+              15.6978
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Santo Tomas de Castilla Container Terminal - Guatemala",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.61435,
+              15.6969
+            ],
+            [
+              -88.61465,
+              15.69635
+            ],
+            [
+              -88.6133,
+              15.69585
+            ],
+            [
+              -88.613,
+              15.6964
+            ],
+            [
+              -88.61435,
+              15.6969
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Santo Tomas de Castilla Container Terminal - Guatemala",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9432,
+              15.8423
+            ],
+            [
+              -87.9442,
+              15.8398
+            ],
+            [
+              -87.9418,
+              15.8374
+            ],
+            [
+              -87.9382,
+              15.837
+            ],
+            [
+              -87.9364,
+              15.8402
+            ],
+            [
+              -87.9376,
+              15.8426
+            ],
+            [
+              -87.9432,
+              15.8423
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Cortes Container Terminal - Honduras",
+        "type": "Marine terminal / container port",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 1100,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false,
+          "trailerChassisSpots": 40,
+          "containerGroundSlots": 1100
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9401,
+              15.8421
+            ],
+            [
+              -87.93965,
+              15.8415
+            ],
+            [
+              -87.93875,
+              15.84185
+            ],
+            [
+              -87.9392,
+              15.84245
+            ],
+            [
+              -87.9401,
+              15.8421
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Cortes Container Terminal - Honduras",
+        "type": "Marine terminal / container port",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9406,
+              15.8419
+            ],
+            [
+              -87.9418,
+              15.8395
+            ],
+            [
+              -87.9384,
+              15.8388
+            ],
+            [
+              -87.9372,
+              15.8412
+            ],
+            [
+              -87.9406,
+              15.8419
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Cortes Container Terminal - Honduras",
+        "type": "Marine terminal / container port",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.0176,
+              18.4262
+            ],
+            [
+              -70.0188,
+              18.424
+            ],
+            [
+              -70.0176,
+              18.4206
+            ],
+            [
+              -70.0143,
+              18.4198
+            ],
+            [
+              -70.0118,
+              18.4218
+            ],
+            [
+              -70.0123,
+              18.4256
+            ],
+            [
+              -70.0176,
+              18.4262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Rio Haina Container Terminal (HIT Margen Oriental) - Dominican Republic",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 3000,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 98,
+          "railServed": false,
+          "trailerChassisSpots": 120,
+          "containerGroundSlots": 3000
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.0178,
+              18.4224
+            ],
+            [
+              -70.0173,
+              18.42175
+            ],
+            [
+              -70.0165,
+              18.42215
+            ],
+            [
+              -70.017,
+              18.4228
+            ],
+            [
+              -70.0178,
+              18.4224
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Rio Haina Container Terminal (HIT Margen Oriental) - Dominican Republic",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.0152,
+              18.4252
+            ],
+            [
+              -70.0157,
+              18.4223
+            ],
+            [
+              -70.0125,
+              18.4218
+            ],
+            [
+              -70.012,
+              18.4247
+            ],
+            [
+              -70.0152,
+              18.4252
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Rio Haina Container Terminal (HIT Margen Oriental) - Dominican Republic",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.0166,
+              18.4256
+            ],
+            [
+              -70.0162,
+              18.4233
+            ],
+            [
+              -70.0154,
+              18.4232
+            ],
+            [
+              -70.0158,
+              18.4255
+            ],
+            [
+              -70.0166,
+              18.4256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Rio Haina Container Terminal (HIT Margen Oriental) - Dominican Republic",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.70335,
+              19.80045
+            ],
+            [
+              -70.7037,
+              19.79945
+            ],
+            [
+              -70.7034,
+              19.7983
+            ],
+            [
+              -70.7015,
+              19.79805
+            ],
+            [
+              -70.7011,
+              19.79835
+            ],
+            [
+              -70.70075,
+              19.8001
+            ],
+            [
+              -70.70335,
+              19.80045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Plata Container Terminal - Puerto Plata, Dominican Republic",
+        "type": "Marine terminal / container port (multipurpose)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 11,
+          "railServed": false,
+          "trailerChassisSpots": 40,
+          "containerGroundSlots": 250
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.702,
+              19.79835
+            ],
+            [
+              -70.70205,
+              19.79805
+            ],
+            [
+              -70.7016,
+              19.79805
+            ],
+            [
+              -70.70155,
+              19.79835
+            ],
+            [
+              -70.702,
+              19.79835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Plata Container Terminal - Puerto Plata, Dominican Republic",
+        "type": "Marine terminal / container port (multipurpose)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -70.7028,
+              19.79985
+            ],
+            [
+              -70.703,
+              19.7989
+            ],
+            [
+              -70.70145,
+              19.7987
+            ],
+            [
+              -70.70125,
+              19.79965
+            ],
+            [
+              -70.7028,
+              19.79985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Plata Container Terminal - Puerto Plata, Dominican Republic",
+        "type": "Marine terminal / container port (multipurpose)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.101,
+              10.0154
+            ],
+            [
+              -83.1027,
+              10.0112
+            ],
+            [
+              -83.0948,
+              10.0102
+            ],
+            [
+              -83.0955,
+              10.0144
+            ],
+            [
+              -83.101,
+              10.0154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica",
+        "type": "Marine terminal / container port",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 5500,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 86,
+          "railServed": false,
+          "trailerChassisSpots": 70,
+          "containerGroundSlots": 5500
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1025,
+              10.01318
+            ],
+            [
+              -83.10272,
+              10.01286
+            ],
+            [
+              -83.10228,
+              10.01268
+            ],
+            [
+              -83.10205,
+              10.013
+            ],
+            [
+              -83.1025,
+              10.01318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica",
+        "type": "Marine terminal / container port",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1001,
+              10.0147
+            ],
+            [
+              -83.1006,
+              10.0121
+            ],
+            [
+              -83.0969,
+              10.0114
+            ],
+            [
+              -83.0964,
+              10.014
+            ],
+            [
+              -83.1001,
+              10.0147
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica",
+        "type": "Marine terminal / container port",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0987,
+              10.0153
+            ],
+            [
+              -83.0988,
+              10.015
+            ],
+            [
+              -83.09755,
+              10.01475
+            ],
+            [
+              -83.09745,
+              10.01505
+            ],
+            [
+              -83.0987,
+              10.0153
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica",
+        "type": "Marine terminal / container port",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.10165,
+              10.01345
+            ],
+            [
+              -83.10195,
+              10.0128
+            ],
+            [
+              -83.1009,
+              10.01255
+            ],
+            [
+              -83.1006,
+              10.0132
+            ],
+            [
+              -83.10165,
+              10.01345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica",
+        "type": "Marine terminal / container port",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.8856,
+              9.3693
+            ],
+            [
+              -79.8888,
+              9.3656
+            ],
+            [
+              -79.8872,
+              9.3612
+            ],
+            [
+              -79.8842,
+              9.3584
+            ],
+            [
+              -79.8793,
+              9.3587
+            ],
+            [
+              -79.8762,
+              9.363
+            ],
+            [
+              -79.8751,
+              9.3672
+            ],
+            [
+              -79.8756,
+              9.3709
+            ],
+            [
+              -79.8856,
+              9.3693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Manzanillo Container Terminal (MIT) - Panama",
+        "type": "Marine container terminal + attached warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 9000,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 140,
+          "railServed": true,
+          "trailerChassisSpots": 80,
+          "containerGroundSlots": 9000
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.8783,
+              9.3647
+            ],
+            [
+              -79.8786,
+              9.3638
+            ],
+            [
+              -79.8777,
+              9.3636
+            ],
+            [
+              -79.8774,
+              9.3645
+            ],
+            [
+              -79.8783,
+              9.3647
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Manzanillo Container Terminal (MIT) - Panama",
+        "type": "Marine container terminal + attached warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.8856,
+              9.3656
+            ],
+            [
+              -79.8874,
+              9.3625
+            ],
+            [
+              -79.8838,
+              9.3612
+            ],
+            [
+              -79.882,
+              9.3643
+            ],
+            [
+              -79.8856,
+              9.3656
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Manzanillo Container Terminal (MIT) - Panama",
+        "type": "Marine container terminal + attached warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.8818,
+              9.3688
+            ],
+            [
+              -79.8827,
+              9.3666
+            ],
+            [
+              -79.8797,
+              9.3656
+            ],
+            [
+              -79.8788,
+              9.3678
+            ],
+            [
+              -79.8818,
+              9.3688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Manzanillo Container Terminal (MIT) - Panama",
+        "type": "Marine container terminal + attached warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.8768,
+              9.3695
+            ],
+            [
+              -79.8771,
+              9.3686
+            ],
+            [
+              -79.8759,
+              9.3683
+            ],
+            [
+              -79.8756,
+              9.3692
+            ],
+            [
+              -79.8768,
+              9.3695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Manzanillo Container Terminal (MIT) - Panama",
+        "type": "Marine container terminal + attached warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
         "confidence": "high",
         "zone": "dockApron",
-        "index": 2
+        "index": 1
       }
     }
   ]

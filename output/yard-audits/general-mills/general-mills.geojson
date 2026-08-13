@@ -8,24 +8,24 @@
         "coordinates": [
           [
             [
-              -91.727,
-              41.9285
+              -91.726517,
+              41.93833
             ],
             [
-              -91.7135,
-              41.9285
+              -91.730088,
+              41.933017
             ],
             [
-              -91.7135,
-              41.9358
+              -91.718827,
+              41.930565
             ],
             [
-              -91.727,
-              41.9358
+              -91.715805,
+              41.936082
             ],
             [
-              -91.727,
-              41.9285
+              -91.726517,
+              41.93833
             ]
           ]
         ]
@@ -68,63 +68,24 @@
         "coordinates": [
           [
             [
-              -91.7183,
-              41.9339
+              -91.725144,
+              41.934243
             ],
             [
-              -91.7172,
-              41.9339
+              -91.725693,
+              41.931791
             ],
             [
-              -91.7172,
-              41.9347
+              -91.722123,
+              41.931178
             ],
             [
-              -91.7183,
-              41.9347
+              -91.721573,
+              41.93363
             ],
             [
-              -91.7183,
-              41.9339
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cedar Rapids IA (Wenig Rd)",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.7262,
-              41.9328
-            ],
-            [
-              -91.7233,
-              41.9328
-            ],
-            [
-              -91.7233,
-              41.9345
-            ],
-            [
-              -91.7262,
-              41.9345
-            ],
-            [
-              -91.7262,
-              41.9328
+              -91.725144,
+              41.934243
             ]
           ]
         ]
@@ -147,64 +108,24 @@
         "coordinates": [
           [
             [
-              -91.7254,
-              41.931
+              -91.725693,
+              41.933017
             ],
             [
-              -91.7235,
-              41.931
-            ],
-            [
-              -91.7235,
-              41.9328
-            ],
-            [
-              -91.7254,
-              41.9328
-            ],
-            [
-              -91.7254,
-              41.931
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cedar Rapids IA (Wenig Rd)",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.7244,
-              41.9312
-            ],
-            [
-              -91.7221,
-              41.9312
-            ],
-            [
-              -91.7221,
+              -91.725968,
               41.9322
             ],
             [
-              -91.7244,
-              41.9322
+              -91.719101,
+              41.93077
             ],
             [
-              -91.7244,
-              41.9312
+              -91.718827,
+              41.931587
+            ],
+            [
+              -91.725693,
+              41.933017
             ]
           ]
         ]
@@ -227,64 +148,24 @@
         "coordinates": [
           [
             [
-              -91.7192,
-              41.9325
+              -91.726517,
+              41.93833
             ],
             [
-              -91.717,
-              41.9325
+              -91.730088,
+              41.933017
             ],
             [
-              -91.717,
-              41.9334
+              -91.718827,
+              41.930565
             ],
             [
-              -91.7192,
-              41.9334
+              -91.715805,
+              41.936082
             ],
             [
-              -91.7192,
-              41.9325
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cedar Rapids IA (Wenig Rd)",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.727,
-              41.9285
-            ],
-            [
-              -91.7135,
-              41.9285
-            ],
-            [
-              -91.7135,
-              41.9358
-            ],
-            [
-              -91.727,
-              41.9358
-            ],
-            [
-              -91.727,
-              41.9285
+              -91.726517,
+              41.93833
             ]
           ]
         ]
@@ -327,63 +208,24 @@
         "coordinates": [
           [
             [
-              -91.7183,
-              41.9339
+              -91.725144,
+              41.934243
             ],
             [
-              -91.7172,
-              41.9339
+              -91.725693,
+              41.931791
             ],
             [
-              -91.7172,
-              41.9347
+              -91.722123,
+              41.931178
             ],
             [
-              -91.7183,
-              41.9347
+              -91.721573,
+              41.93363
             ],
             [
-              -91.7183,
-              41.9339
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cedar Rapids IA (Edgewood Rd)",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.7262,
-              41.9328
-            ],
-            [
-              -91.7233,
-              41.9328
-            ],
-            [
-              -91.7233,
-              41.9345
-            ],
-            [
-              -91.7262,
-              41.9345
-            ],
-            [
-              -91.7262,
-              41.9328
+              -91.725144,
+              41.934243
             ]
           ]
         ]
@@ -406,64 +248,24 @@
         "coordinates": [
           [
             [
-              -91.7254,
-              41.931
+              -91.725693,
+              41.933017
             ],
             [
-              -91.7235,
-              41.931
-            ],
-            [
-              -91.7235,
-              41.9328
-            ],
-            [
-              -91.7254,
-              41.9328
-            ],
-            [
-              -91.7254,
-              41.931
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cedar Rapids IA (Edgewood Rd)",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.7244,
-              41.9312
-            ],
-            [
-              -91.7221,
-              41.9312
-            ],
-            [
-              -91.7221,
+              -91.725968,
               41.9322
             ],
             [
-              -91.7244,
-              41.9322
+              -91.719101,
+              41.93077
             ],
             [
-              -91.7244,
-              41.9312
+              -91.718827,
+              41.931587
+            ],
+            [
+              -91.725693,
+              41.933017
             ]
           ]
         ]
@@ -486,64 +288,24 @@
         "coordinates": [
           [
             [
-              -91.7192,
-              41.9325
+              -78.878167,
+              42.875351
             ],
             [
-              -91.717,
-              41.9325
+              -78.880227,
+              42.871929
             ],
             [
-              -91.717,
-              41.9334
+              -78.876657,
+              42.87062
             ],
             [
-              -91.7192,
-              41.9334
+              -78.874597,
+              42.874042
             ],
             [
-              -91.7192,
-              41.9325
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cedar Rapids IA (Edgewood Rd)",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -78.8782,
-              42.8693
-            ],
-            [
-              -78.8735,
-              42.8693
-            ],
-            [
-              -78.8735,
-              42.8748
-            ],
-            [
-              -78.8782,
-              42.8748
-            ],
-            [
-              -78.8782,
-              42.8693
+              -78.878167,
+              42.875351
             ]
           ]
         ]
@@ -586,64 +348,24 @@
         "coordinates": [
           [
             [
-              -78.8747,
-              42.8709
+              -82.544845,
+              39.098784
             ],
             [
-              -78.8736,
-              42.8709
+              -82.545944,
+              39.094095
             ],
             [
-              -78.8736,
-              42.8719
+              -82.538803,
+              39.093242
             ],
             [
-              -78.8747,
-              42.8719
+              -82.537704,
+              39.097932
             ],
             [
-              -78.8747,
-              42.8709
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Buffalo NY",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.5485,
-              39.09
-            ],
-            [
-              -82.5365,
-              39.09
-            ],
-            [
-              -82.5365,
-              39.1015
-            ],
-            [
-              -82.5485,
-              39.1015
-            ],
-            [
-              -82.5485,
-              39.09
+              -82.544845,
+              39.098784
             ]
           ]
         ]
@@ -686,24 +408,24 @@
         "coordinates": [
           [
             [
-              -82.5398,
-              39.0962
+              -82.538803,
+              39.0958
             ],
             [
-              -82.5385,
-              39.0962
+              -82.539077,
+              39.094734
             ],
             [
-              -82.5385,
-              39.097
+              -82.53688,
+              39.094521
             ],
             [
-              -82.5398,
-              39.097
+              -82.536605,
+              39.095587
             ],
             [
-              -82.5398,
-              39.0962
+              -82.538803,
+              39.0958
             ]
           ]
         ]
@@ -725,104 +447,24 @@
         "coordinates": [
           [
             [
-              -82.543,
-              39.0994
+              -82.543472,
+              39.096653
             ],
             [
-              -82.5395,
-              39.0994
+              -82.543747,
+              39.095587
             ],
             [
-              -82.5395,
-              39.1005
+              -82.539901,
+              39.095161
             ],
             [
-              -82.543,
-              39.1005
+              -82.539627,
+              39.096226
             ],
             [
-              -82.543,
-              39.0994
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Wellston OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.5408,
-              39.096
-            ],
-            [
-              -82.5388,
-              39.096
-            ],
-            [
-              -82.5388,
-              39.0972
-            ],
-            [
-              -82.5408,
-              39.0972
-            ],
-            [
-              -82.5408,
-              39.096
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Wellston OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.5399,
-              39.0962
-            ],
-            [
-              -82.5383,
-              39.0962
-            ],
-            [
-              -82.5383,
-              39.097
-            ],
-            [
-              -82.5399,
-              39.097
-            ],
-            [
-              -82.5399,
-              39.0962
+              -82.543472,
+              39.096653
             ]
           ]
         ]
@@ -845,64 +487,24 @@
         "coordinates": [
           [
             [
-              -82.5408,
-              39.0964
+              -86.394247,
+              35.804119
             ],
             [
-              -82.5398,
-              39.0964
+              -86.397542,
+              35.796545
             ],
             [
-              -82.5398,
-              39.0971
+              -86.392599,
+              35.795654
             ],
             [
-              -82.5408,
-              39.0971
+              -86.389303,
+              35.803228
             ],
             [
-              -82.5408,
-              39.0964
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Wellston OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.395,
-              35.7958
-            ],
-            [
-              -86.3875,
-              35.7958
-            ],
-            [
-              -86.3875,
-              35.8058
-            ],
-            [
-              -86.395,
-              35.8058
-            ],
-            [
-              -86.395,
-              35.7958
+              -86.394247,
+              35.804119
             ]
           ]
         ]
@@ -945,63 +547,24 @@
         "coordinates": [
           [
             [
-              -86.3957,
-              35.802
+              -86.393697,
+              35.802782
             ],
             [
-              -86.3947,
-              35.802
+              -86.394247,
+              35.800554
             ],
             [
-              -86.3947,
-              35.8028
+              -86.390676,
+              35.799886
             ],
             [
-              -86.3957,
-              35.8028
+              -86.390127,
+              35.802114
             ],
             [
-              -86.3957,
-              35.802
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Murfreesboro TN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.3932,
-              35.7968
-            ],
-            [
-              -86.3912,
-              35.7968
-            ],
-            [
-              -86.3912,
-              35.799
-            ],
-            [
-              -86.3932,
-              35.799
-            ],
-            [
-              -86.3932,
-              35.7968
+              -86.393697,
+              35.802782
             ]
           ]
         ]
@@ -1024,104 +587,24 @@
         "coordinates": [
           [
             [
-              -86.391,
-              35.7972
+              -86.394247,
+              35.798327
             ],
             [
-              -86.389,
-              35.7972
+              -86.394796,
+              35.79699
             ],
             [
-              -86.389,
-              35.7995
+              -86.3915,
+              35.796545
             ],
             [
-              -86.391,
-              35.7995
+              -86.390951,
+              35.797881
             ],
             [
-              -86.391,
-              35.7972
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Murfreesboro TN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.3948,
-              35.799
-            ],
-            [
-              -86.393,
-              35.799
-            ],
-            [
-              -86.393,
-              35.8006
-            ],
-            [
-              -86.3948,
-              35.8006
-            ],
-            [
-              -86.3948,
-              35.799
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Murfreesboro TN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.391,
-              35.8015
-            ],
-            [
-              -86.389,
-              35.8015
-            ],
-            [
-              -86.389,
-              35.8035
-            ],
-            [
-              -86.391,
-              35.8035
-            ],
-            [
-              -86.391,
-              35.8015
+              -86.394247,
+              35.798327
             ]
           ]
         ]
@@ -1144,64 +627,24 @@
         "coordinates": [
           [
             [
-              -86.3912,
-              35.7985
+              -83.825373,
+              33.625087
             ],
             [
-              -86.3895,
-              35.7985
+              -83.825648,
+              33.621428
             ],
             [
-              -86.3895,
-              35.8005
+              -83.821253,
+              33.621428
             ],
             [
-              -86.3912,
-              35.8005
+              -83.820704,
+              33.62463
             ],
             [
-              -86.3912,
-              35.7985
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Murfreesboro TN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8278,
-              33.6193
-            ],
-            [
-              -83.8195,
-              33.6193
-            ],
-            [
-              -83.8195,
-              33.6262
-            ],
-            [
-              -83.8278,
-              33.6262
-            ],
-            [
-              -83.8278,
-              33.6193
+              -83.825373,
+              33.625087
             ]
           ]
         ]
@@ -1244,223 +687,24 @@
         "coordinates": [
           [
             [
-              -83.8269,
-              33.6229
+              -83.824275,
+              33.624401
             ],
             [
-              -83.826,
-              33.6229
+              -83.824412,
+              33.623829
             ],
             [
-              -83.826,
+              -83.821665,
               33.6236
             ],
             [
-              -83.8269,
-              33.6236
+              -83.821528,
+              33.624172
             ],
             [
-              -83.8269,
-              33.6229
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Covington GA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8268,
-              33.6247
-            ],
-            [
-              -83.8254,
-              33.6247
-            ],
-            [
-              -83.8254,
-              33.6256
-            ],
-            [
-              -83.8268,
-              33.6256
-            ],
-            [
-              -83.8268,
-              33.6247
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Covington GA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.8249,
-              33.6245
-            ],
-            [
-              -83.8238,
-              33.6245
-            ],
-            [
-              -83.8238,
-              33.6256
-            ],
-            [
-              -83.8249,
-              33.6256
-            ],
-            [
-              -83.8249,
-              33.6245
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Covington GA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.822,
-              33.6218
-            ],
-            [
-              -83.8202,
-              33.6218
-            ],
-            [
-              -83.8202,
-              33.623
-            ],
-            [
-              -83.822,
-              33.623
-            ],
-            [
-              -83.822,
-              33.6218
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Covington GA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.822,
-              33.6204
-            ],
-            [
-              -83.8202,
-              33.6204
-            ],
-            [
-              -83.8202,
-              33.6214
-            ],
-            [
-              -83.822,
-              33.6214
-            ],
-            [
-              -83.822,
-              33.6204
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Covington GA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 4
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.822,
-              33.622
-            ],
-            [
-              -83.8206,
-              33.622
-            ],
-            [
-              -83.8206,
-              33.6229
-            ],
-            [
-              -83.822,
-              33.6229
-            ],
-            [
-              -83.822,
-              33.622
+              -83.824275,
+              33.624401
             ]
           ]
         ]
@@ -1483,64 +727,24 @@
         "coordinates": [
           [
             [
-              -83.8232,
-              33.623
+              -91.4144,
+              39.682857
             ],
             [
-              -83.8222,
-              33.623
+              -91.415224,
+              39.679475
             ],
             [
-              -83.8222,
-              33.6238
+              -91.411379,
+              39.678841
             ],
             [
-              -83.8232,
-              33.6238
+              -91.410555,
+              39.682223
             ],
             [
-              -83.8232,
-              33.623
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Covington GA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.418,
-              39.679
-            ],
-            [
-              -91.4105,
-              39.679
-            ],
-            [
-              -91.4105,
-              39.685
-            ],
-            [
-              -91.418,
-              39.685
-            ],
-            [
-              -91.418,
-              39.679
+              -91.4144,
+              39.682857
             ]
           ]
         ]
@@ -1583,63 +787,24 @@
         "coordinates": [
           [
             [
-              -91.4145,
-              39.6798
+              -91.41646,
+              39.68254
             ],
             [
-              -91.4133,
-              39.6798
+              -91.416735,
+              39.681272
             ],
             [
-              -91.4133,
-              39.6806
+              -91.4144,
+              39.680954
             ],
             [
-              -91.4145,
-              39.6806
+              -91.414125,
+              39.682223
             ],
             [
-              -91.4145,
-              39.6798
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Hannibal MO",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.4162,
-              39.6808
-            ],
-            [
-              -91.4147,
-              39.6808
-            ],
-            [
-              -91.4147,
-              39.6828
-            ],
-            [
-              -91.4162,
-              39.6828
-            ],
-            [
-              -91.4162,
-              39.6808
+              -91.41646,
+              39.68254
             ]
           ]
         ]
@@ -1662,144 +827,24 @@
         "coordinates": [
           [
             [
-              -91.4146,
-              39.6814
+              -91.413851,
+              39.6818
             ],
             [
-              -91.4133,
-              39.6814
+              -91.413988,
+              39.681166
             ],
             [
-              -91.4133,
-              39.6829
+              -91.411241,
+              39.680743
             ],
             [
-              -91.4146,
-              39.6829
+              -91.411104,
+              39.681377
             ],
             [
-              -91.4146,
-              39.6814
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Hannibal MO",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.417,
-              39.6822
-            ],
-            [
-              -91.4156,
-              39.6822
-            ],
-            [
-              -91.4156,
-              39.6833
-            ],
-            [
-              -91.417,
-              39.6833
-            ],
-            [
-              -91.417,
-              39.6822
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Hannibal MO",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.416,
-              39.6783
-            ],
-            [
-              -91.4147,
-              39.6783
-            ],
-            [
-              -91.4147,
-              39.6792
-            ],
-            [
-              -91.416,
-              39.6792
-            ],
-            [
-              -91.416,
-              39.6783
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Hannibal MO",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 4
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -91.4136,
-              39.6819
-            ],
-            [
-              -91.4122,
-              39.6819
-            ],
-            [
-              -91.4122,
-              39.6829
-            ],
-            [
-              -91.4136,
-              39.6829
-            ],
-            [
-              -91.4136,
-              39.6819
+              -91.413851,
+              39.6818
             ]
           ]
         ]
@@ -1822,63 +867,24 @@
         "coordinates": [
           [
             [
-              -91.4142,
-              39.6798
+              -88.893335,
+              42.24492
             ],
             [
-              -91.4129,
-              39.6798
+              -88.894272,
+              42.247071
             ],
             [
-              -91.4129,
-              39.6812
+              -88.902351,
+              42.245114
             ],
             [
-              -91.4142,
-              39.6812
+              -88.901414,
+              42.242963
             ],
             [
-              -91.4142,
-              39.6798
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Hannibal MO",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.9015,
-              42.2415
-            ],
-            [
-              -88.8915,
-              42.2415
-            ],
-            [
-              -88.8915,
-              42.2465
-            ],
-            [
-              -88.9015,
-              42.2465
-            ],
-            [
-              -88.9015,
-              42.2415
+              -88.893335,
+              42.24492
             ]
           ]
         ]
@@ -1921,24 +927,24 @@
         "coordinates": [
           [
             [
-              -88.9002,
-              42.2444
+              -88.902199,
+              42.244009
             ],
             [
-              -88.8994,
-              42.2444
+              -88.902319,
+              42.244284
             ],
             [
-              -88.8994,
-              42.245
+              -88.902689,
+              42.244195
             ],
             [
-              -88.9002,
-              42.245
+              -88.902569,
+              42.24392
             ],
             [
-              -88.9002,
-              42.2444
+              -88.902199,
+              42.244009
             ]
           ]
         ]
@@ -1960,24 +966,24 @@
         "coordinates": [
           [
             [
-              -88.8988,
-              42.2447
+              -88.895036,
+              42.246586
             ],
             [
-              -88.8954,
-              42.2447
+              -88.895149,
+              42.246844
             ],
             [
-              -88.8954,
-              42.2456
+              -88.901612,
+              42.245278
             ],
             [
-              -88.8988,
-              42.2456
+              -88.901499,
+              42.24502
             ],
             [
-              -88.8988,
-              42.2447
+              -88.895036,
+              42.246586
             ]
           ]
         ]
@@ -2000,24 +1006,24 @@
         "coordinates": [
           [
             [
-              -88.8992,
-              42.2444
+              -88.894803,
+              42.246301
             ],
             [
-              -88.894,
-              42.2444
+              -88.894878,
+              42.246473
             ],
             [
-              -88.894,
-              42.2454
+              -88.901571,
+              42.244851
             ],
             [
-              -88.8992,
-              42.2454
+              -88.901496,
+              42.244679
             ],
             [
-              -88.8992,
-              42.2444
+              -88.894803,
+              42.246301
             ]
           ]
         ]
@@ -2040,24 +1046,24 @@
         "coordinates": [
           [
             [
-              -84.967,
-              39.8505
+              -84.966972,
+              39.859849
             ],
             [
-              -84.9605,
-              39.8505
+              -84.967247,
+              39.85247
             ],
             [
-              -84.9605,
-              39.8585
+              -84.960105,
+              39.85247
             ],
             [
-              -84.967,
-              39.8585
+              -84.960105,
+              39.859849
             ],
             [
-              -84.967,
-              39.8505
+              -84.966972,
+              39.859849
             ]
           ]
         ]
@@ -2100,143 +1106,24 @@
         "coordinates": [
           [
             [
-              -84.9656,
-              39.8523
+              -84.966697,
+              39.856687
             ],
             [
-              -84.9647,
-              39.8523
+              -84.966697,
+              39.85247
             ],
             [
-              -84.9647,
-              39.8531
+              -84.963951,
+              39.85247
             ],
             [
-              -84.9656,
-              39.8531
+              -84.963951,
+              39.856687
             ],
             [
-              -84.9656,
-              39.8523
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills (Blue Buffalo) - Richmond IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.967,
-              39.8532
-            ],
-            [
-              -84.9662,
-              39.8532
-            ],
-            [
-              -84.9662,
-              39.8562
-            ],
-            [
-              -84.967,
-              39.8562
-            ],
-            [
-              -84.967,
-              39.8532
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills (Blue Buffalo) - Richmond IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.9668,
-              39.8505
-            ],
-            [
-              -84.9655,
-              39.8505
-            ],
-            [
-              -84.9655,
-              39.8523
-            ],
-            [
-              -84.9668,
-              39.8523
-            ],
-            [
-              -84.9668,
-              39.8505
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills (Blue Buffalo) - Richmond IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.9665,
-              39.851
-            ],
-            [
-              -84.9652,
-              39.851
-            ],
-            [
-              -84.9652,
-              39.8558
-            ],
-            [
-              -84.9665,
-              39.8558
-            ],
-            [
-              -84.9665,
-              39.851
+              -84.966697,
+              39.856687
             ]
           ]
         ]
@@ -2259,64 +1146,24 @@
         "coordinates": [
           [
             [
-              -84.9628,
-              39.8585
+              -75.037873,
+              39.463545
             ],
             [
-              -84.9618,
-              39.8585
+              -75.039247,
+              39.45994
             ],
             [
-              -84.9618,
-              39.86
+              -75.036225,
+              39.459304
             ],
             [
-              -84.9628,
-              39.86
+              -75.034852,
+              39.462908
             ],
             [
-              -84.9628,
-              39.8585
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills (Blue Buffalo) - Richmond IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.0395,
-              39.4593
-            ],
-            [
-              -75.0335,
-              39.4593
-            ],
-            [
-              -75.0335,
-              39.464
-            ],
-            [
-              -75.0395,
-              39.464
-            ],
-            [
-              -75.0395,
-              39.4593
+              -75.037873,
+              39.463545
             ]
           ]
         ]
@@ -2359,63 +1206,24 @@
         "coordinates": [
           [
             [
-              -75.0357,
-              39.4593
+              -75.037599,
+              39.46312
             ],
             [
-              -75.0349,
-              39.4593
+              -75.037873,
+              39.462272
             ],
             [
-              -75.0349,
-              39.4601
+              -75.035951,
+              39.461848
             ],
             [
-              -75.0357,
-              39.4601
+              -75.035676,
+              39.462696
             ],
             [
-              -75.0357,
-              39.4593
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Vineland NJ",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.0372,
-              39.4633
-            ],
-            [
-              -75.0345,
-              39.4633
-            ],
-            [
-              -75.0345,
-              39.4642
-            ],
-            [
-              -75.0372,
-              39.4642
-            ],
-            [
-              -75.0372,
-              39.4633
+              -75.037599,
+              39.46312
             ]
           ]
         ]
@@ -2438,24 +1246,24 @@
         "coordinates": [
           [
             [
-              -75.0384,
-              39.4606
+              -75.038423,
+              39.461
             ],
             [
-              -75.0374,
-              39.4606
+              -75.03856,
+              39.46047
             ],
             [
-              -75.0374,
-              39.4628
+              -75.036637,
+              39.460046
             ],
             [
-              -75.0384,
-              39.4628
+              -75.0365,
+              39.460576
             ],
             [
-              -75.0384,
-              39.4606
+              -75.038423,
+              39.461
             ]
           ]
         ]
@@ -2478,64 +1286,24 @@
         "coordinates": [
           [
             [
-              -75.0374,
-              39.4628
+              -84.432524,
+              39.279425
             ],
             [
-              -75.0354,
-              39.4628
+              -84.432524,
+              39.277087
             ],
             [
-              -75.0354,
-              39.4638
+              -84.430052,
+              39.277087
             ],
             [
-              -75.0374,
-              39.4638
+              -84.430052,
+              39.279425
             ],
             [
-              -75.0374,
-              39.4628
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Vineland NJ",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4332,
-              39.277
-            ],
-            [
-              -84.4302,
-              39.277
-            ],
-            [
-              -84.4302,
-              39.281
-            ],
-            [
-              -84.4332,
-              39.281
-            ],
-            [
-              -84.4332,
-              39.277
+              -84.432524,
+              39.279425
             ]
           ]
         ]
@@ -2578,103 +1346,24 @@
         "coordinates": [
           [
             [
-              -84.43075,
-              39.2768
+              -84.432387,
+              39.277724
             ],
             [
-              -84.4301,
-              39.2768
+              -84.432387,
+              39.277193
             ],
             [
-              -84.4301,
-              39.2773
+              -84.430189,
+              39.277193
             ],
             [
-              -84.43075,
-              39.2773
+              -84.430189,
+              39.277724
             ],
             [
-              -84.43075,
-              39.2768
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cincinnati OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4332,
-              39.2776
-            ],
-            [
-              -84.4325,
-              39.2776
-            ],
-            [
-              -84.4325,
-              39.2803
-            ],
-            [
-              -84.4332,
-              39.2803
-            ],
-            [
-              -84.4332,
-              39.2776
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Cincinnati OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.4327,
-              39.2777
-            ],
-            [
-              -84.43225,
-              39.2777
-            ],
-            [
-              -84.43225,
-              39.2805
-            ],
-            [
-              -84.4327,
-              39.2805
-            ],
-            [
-              -84.4327,
-              39.2777
+              -84.432387,
+              39.277724
             ]
           ]
         ]
@@ -2697,24 +1386,24 @@
         "coordinates": [
           [
             [
-              -87.9238,
-              42.9598
+              -87.924921,
+              42.961653
             ],
             [
-              -87.92,
-              42.9598
+              -87.924921,
+              42.959241
             ],
             [
-              -87.92,
-              42.96235
+              -87.91984,
+              42.959241
             ],
             [
-              -87.9238,
-              42.96235
+              -87.91984,
+              42.961653
             ],
             [
-              -87.9238,
-              42.9598
+              -87.924921,
+              42.961653
             ]
           ]
         ]
@@ -2757,103 +1446,24 @@
         "coordinates": [
           [
             [
-              -87.9215,
-              42.96155
+              -87.924647,
+              42.961552
             ],
             [
-              -87.9209,
-              42.96155
+              -87.924647,
+              42.961351
             ],
             [
-              -87.9209,
-              42.96185
+              -87.9219,
+              42.961351
             ],
             [
-              -87.9215,
-              42.96185
+              -87.9219,
+              42.961552
             ],
             [
-              -87.9215,
-              42.96155
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Milwaukee WI",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.9233,
-              42.9613
-            ],
-            [
-              -87.9224,
-              42.9613
-            ],
-            [
-              -87.9224,
-              42.962
-            ],
-            [
-              -87.9233,
-              42.962
-            ],
-            [
-              -87.9233,
-              42.9613
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Milwaukee WI",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.9233,
-              42.96185
-            ],
-            [
-              -87.9209,
-              42.96185
-            ],
-            [
-              -87.9209,
-              42.96235
-            ],
-            [
-              -87.9233,
-              42.96235
-            ],
-            [
-              -87.9233,
-              42.96185
+              -87.924647,
+              42.961552
             ]
           ]
         ]
@@ -2876,24 +1486,24 @@
         "coordinates": [
           [
             [
-              -85.827,
-              38.327
+              -85.827021,
+              38.329908
             ],
             [
-              -85.821,
-              38.327
+              -85.827296,
+              38.327323
             ],
             [
-              -85.821,
-              38.33
+              -85.823176,
+              38.327107
             ],
             [
-              -85.827,
-              38.33
+              -85.822901,
+              38.329693
             ],
             [
-              -85.827,
-              38.327
+              -85.827021,
+              38.329908
             ]
           ]
         ]
@@ -2936,63 +1546,24 @@
         "coordinates": [
           [
             [
-              -85.8223,
-              38.3272
+              -85.825373,
+              38.327861
             ],
             [
-              -85.8213,
-              38.3272
+              -85.825511,
+              38.327323
             ],
             [
-              -85.8213,
-              38.3278
+              -85.823039,
+              38.327107
             ],
             [
-              -85.8223,
-              38.3278
+              -85.822901,
+              38.327646
             ],
             [
-              -85.8223,
-              38.3272
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - New Albany IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.8248,
-              38.3272
-            ],
-            [
-              -85.8223,
-              38.3272
-            ],
-            [
-              -85.8223,
-              38.3277
-            ],
-            [
-              -85.8248,
-              38.3277
-            ],
-            [
-              -85.8248,
-              38.3272
+              -85.825373,
+              38.327861
             ]
           ]
         ]
@@ -3015,64 +1586,24 @@
         "coordinates": [
           [
             [
-              -85.8266,
-              38.3279
+              -85.826747,
+              38.3284
             ],
             [
-              -85.8256,
-              38.3279
+              -85.826884,
+              38.327969
             ],
             [
-              -85.8256,
-              38.3287
+              -85.824137,
+              38.327754
             ],
             [
-              -85.8266,
-              38.3287
+              -85.824,
+              38.328185
             ],
             [
-              -85.8266,
-              38.3279
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - New Albany IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.8254,
-              38.3274
-            ],
-            [
-              -85.8228,
-              38.3274
-            ],
-            [
-              -85.8228,
-              38.3281
-            ],
-            [
-              -85.8254,
-              38.3281
-            ],
-            [
-              -85.8254,
-              38.3274
+              -85.826747,
+              38.3284
             ]
           ]
         ]
@@ -3095,24 +1626,24 @@
         "coordinates": [
           [
             [
-              -85.51,
-              43.8742
+              -85.510073,
+              43.875996
             ],
             [
-              -85.506,
-              43.8742
+              -85.510348,
+              43.874214
             ],
             [
-              -85.506,
-              43.878
+              -85.507601,
+              43.874016
             ],
             [
-              -85.51,
-              43.878
+              -85.507327,
+              43.875798
             ],
             [
-              -85.51,
-              43.8742
+              -85.510073,
+              43.875996
             ]
           ]
         ]
@@ -3155,103 +1686,24 @@
         "coordinates": [
           [
             [
-              -85.5094,
-              43.876
+              -85.509936,
+              43.875204
             ],
             [
-              -85.5086,
-              43.876
+              -85.510073,
+              43.874709
             ],
             [
-              -85.5086,
-              43.8766
+              -85.507876,
+              43.874511
             ],
             [
-              -85.5094,
-              43.8766
+              -85.507739,
+              43.875006
             ],
             [
-              -85.5094,
-              43.876
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Reed City MI",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.5085,
-              43.8768
-            ],
-            [
-              -85.507,
-              43.8768
-            ],
-            [
-              -85.507,
-              43.8778
-            ],
-            [
-              -85.5085,
-              43.8778
-            ],
-            [
-              -85.5085,
-              43.8768
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Reed City MI",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.5092,
-              43.8756
-            ],
-            [
-              -85.5076,
-              43.8756
-            ],
-            [
-              -85.5076,
-              43.8762
-            ],
-            [
-              -85.5092,
-              43.8762
-            ],
-            [
-              -85.5092,
-              43.8756
+              -85.509936,
+              43.875204
             ]
           ]
         ]
@@ -3274,24 +1726,24 @@
         "coordinates": [
           [
             [
-              -82.9104,
-              40.6693
+              -82.909561,
+              40.673475
             ],
             [
-              -82.9069,
-              40.6693
+              -82.911209,
+              40.670767
             ],
             [
-              -82.9069,
-              40.6739
+              -82.908325,
+              40.669933
             ],
             [
-              -82.9104,
-              40.6739
+              -82.906677,
+              40.672642
             ],
             [
-              -82.9104,
-              40.6693
+              -82.909561,
+              40.673475
             ]
           ]
         ]
@@ -3334,103 +1786,24 @@
         "coordinates": [
           [
             [
-              -82.91045,
-              40.6713
+              -82.909973,
+              40.6716
             ],
             [
-              -82.91,
-              40.6713
+              -82.910248,
+              40.671079
             ],
             [
-              -82.91,
-              40.67165
+              -82.908188,
+              40.670454
             ],
             [
-              -82.91045,
-              40.67165
+              -82.907913,
+              40.670975
             ],
             [
-              -82.91045,
-              40.6713
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Martel OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.9083,
-              40.6723
-            ],
-            [
-              -82.9074,
-              40.6723
-            ],
-            [
-              -82.9074,
-              40.6729
-            ],
-            [
-              -82.9083,
-              40.6729
-            ],
-            [
-              -82.9083,
-              40.6723
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Martel OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.9089,
-              40.6717
-            ],
-            [
-              -82.9081,
-              40.6717
-            ],
-            [
-              -82.9081,
-              40.6725
-            ],
-            [
-              -82.9089,
-              40.6725
-            ],
-            [
-              -82.9089,
-              40.6717
+              -82.909973,
+              40.6716
             ]
           ]
         ]
@@ -3453,24 +1826,24 @@
         "coordinates": [
           [
             [
-              -118.24685,
-              33.86215
+              -118.246561,
+              33.864483
             ],
             [
-              -118.2447,
-              33.86215
+              -118.246561,
+              33.862488
             ],
             [
-              -118.2447,
-              33.86485
+              -118.244776,
+              33.862488
             ],
             [
-              -118.24685,
-              33.86485
+              -118.244776,
+              33.864483
             ],
             [
-              -118.24685,
-              33.86215
+              -118.246561,
+              33.864483
             ]
           ]
         ]
@@ -3513,63 +1886,24 @@
         "coordinates": [
           [
             [
-              -118.24585,
-              33.86215
+              -118.246424,
+              33.86397
             ],
             [
-              -118.2453,
-              33.86215
+              -118.246424,
+              33.863628
             ],
             [
-              -118.2453,
-              33.86255
+              -118.244913,
+              33.863628
             ],
             [
-              -118.24585,
-              33.86255
+              -118.244913,
+              33.86397
             ],
             [
-              -118.24585,
-              33.86215
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Carson CA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.245,
-              33.8625
-            ],
-            [
-              -118.2447,
-              33.8625
-            ],
-            [
-              -118.2447,
-              33.86445
-            ],
-            [
-              -118.245,
-              33.86445
-            ],
-            [
-              -118.245,
-              33.8625
+              -118.246424,
+              33.86397
             ]
           ]
         ]
@@ -3592,64 +1926,24 @@
         "coordinates": [
           [
             [
-              -118.24685,
-              33.8627
+              -118.246424,
+              33.864312
             ],
             [
-              -118.2464,
-              33.8627
+              -118.246424,
+              33.864027
             ],
             [
-              -118.2464,
-              33.8644
+              -118.244913,
+              33.864027
             ],
             [
-              -118.24685,
-              33.8644
+              -118.244913,
+              33.864312
             ],
             [
-              -118.24685,
-              33.8627
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Carson CA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -118.24505,
-              33.8625
-            ],
-            [
-              -118.24485,
-              33.8625
-            ],
-            [
-              -118.24485,
-              33.86445
-            ],
-            [
-              -118.24505,
-              33.86445
-            ],
-            [
-              -118.24505,
-              33.8625
+              -118.246424,
+              33.864312
             ]
           ]
         ]
@@ -3672,64 +1966,24 @@
         "coordinates": [
           [
             [
-              -118.24655,
-              33.8627
+              -121.303047,
+              38.145392
             ],
             [
-              -118.24635,
-              33.8627
+              -121.303047,
+              38.140424
             ],
             [
-              -118.24635,
-              33.8644
+              -121.298103,
+              38.140424
             ],
             [
-              -118.24655,
-              33.8644
+              -121.298103,
+              38.145392
             ],
             [
-              -118.24655,
-              33.8627
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Carson CA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.3033,
-              38.1413
-            ],
-            [
-              -121.2973,
-              38.1413
-            ],
-            [
-              -121.2973,
-              38.14555
-            ],
-            [
-              -121.3033,
-              38.14555
-            ],
-            [
-              -121.3033,
-              38.1413
+              -121.303047,
+              38.145392
             ]
           ]
         ]
@@ -3772,24 +2026,24 @@
         "coordinates": [
           [
             [
-              -121.3025,
-              38.1449
+              -121.303047,
+              38.145284
             ],
             [
-              -121.3015,
-              38.1449
+              -121.303047,
+              38.144744
             ],
             [
-              -121.3015,
-              38.14555
+              -121.301673,
+              38.144744
             ],
             [
-              -121.3025,
-              38.14555
+              -121.301673,
+              38.145284
             ],
             [
-              -121.3025,
-              38.1449
+              -121.303047,
+              38.145284
             ]
           ]
         ]
@@ -3811,24 +2065,24 @@
         "coordinates": [
           [
             [
-              -121.3029,
-              38.1425
+              -121.302772,
+              38.143664
             ],
             [
-              -121.3013,
-              38.1425
+              -121.302772,
+              38.142152
             ],
             [
-              -121.3013,
-              38.14545
+              -121.300025,
+              38.142152
             ],
             [
-              -121.3029,
-              38.14545
+              -121.300025,
+              38.143664
             ],
             [
-              -121.3029,
-              38.1425
+              -121.302772,
+              38.143664
             ]
           ]
         ]
@@ -3851,24 +2105,24 @@
         "coordinates": [
           [
             [
-              -121.302,
-              38.1449
+              -121.302223,
+              38.14496
             ],
             [
-              -121.299,
-              38.1449
+              -121.302223,
+              38.144312
             ],
             [
-              -121.299,
-              38.14545
+              -121.299201,
+              38.144312
             ],
             [
-              -121.302,
-              38.14545
+              -121.299201,
+              38.14496
             ],
             [
-              -121.302,
-              38.1449
+              -121.302223,
+              38.14496
             ]
           ]
         ]
@@ -3891,64 +2145,24 @@
         "coordinates": [
           [
             [
-              -121.298,
-              38.1428
+              -106.610747,
+              35.178996
             ],
             [
-              -121.2974,
-              38.1428
+              -106.611021,
+              35.175628
             ],
             [
-              -121.2974,
-              38.1453
+              -106.606077,
+              35.175404
             ],
             [
-              -121.298,
-              38.1453
+              -106.605803,
+              35.178771
             ],
             [
-              -121.298,
-              38.1428
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Lodi CA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -106.6112,
-              35.175
-            ],
-            [
-              -106.6055,
-              35.175
-            ],
-            [
-              -106.6055,
-              35.18
-            ],
-            [
-              -106.6112,
-              35.18
-            ],
-            [
-              -106.6112,
-              35.175
+              -106.610747,
+              35.178996
             ]
           ]
         ]
@@ -3991,63 +2205,24 @@
         "coordinates": [
           [
             [
-              -106.61025,
-              35.1759
+              -106.610747,
+              35.178322
             ],
             [
-              -106.6097,
-              35.1759
+              -106.610747,
+              35.177088
             ],
             [
-              -106.6097,
-              35.1765
+              -106.608549,
+              35.176976
             ],
             [
-              -106.61025,
-              35.1765
+              -106.608549,
+              35.17821
             ],
             [
-              -106.61025,
-              35.1759
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Albuquerque NM",
-        "type": "Manufacturing Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -106.6111,
-              35.1767
-            ],
-            [
-              -106.6094,
-              35.1767
-            ],
-            [
-              -106.6094,
-              35.1791
-            ],
-            [
-              -106.6111,
-              35.1791
-            ],
-            [
-              -106.6111,
-              35.1767
+              -106.610747,
+              35.178322
             ]
           ]
         ]
@@ -4070,64 +2245,24 @@
         "coordinates": [
           [
             [
-              -106.609,
-              35.1779
+              -106.610197,
+              35.177873
             ],
             [
-              -106.6075,
-              35.1779
+              -106.610197,
+              35.177312
             ],
             [
-              -106.6075,
-              35.1791
+              -106.606901,
+              35.1772
             ],
             [
-              -106.609,
-              35.1791
+              -106.606901,
+              35.177761
             ],
             [
-              -106.609,
-              35.1779
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Albuquerque NM",
-        "type": "Manufacturing Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -106.6094,
-              35.1764
-            ],
-            [
-              -106.609,
-              35.1764
-            ],
-            [
-              -106.609,
-              35.1779
-            ],
-            [
-              -106.6094,
-              35.1779
-            ],
-            [
-              -106.6094,
-              35.1764
+              -106.610197,
+              35.177873
             ]
           ]
         ]
@@ -4150,103 +2285,24 @@
         "coordinates": [
           [
             [
-              -106.6084,
-              35.1779
+              -76.066161,
+              40.927919
             ],
             [
-              -106.6074,
-              35.1779
+              -76.066161,
+              40.926155
             ],
             [
-              -106.6074,
-              35.1784
+              -76.064101,
+              40.926155
             ],
             [
-              -106.6084,
-              35.1784
+              -76.064101,
+              40.927919
             ],
             [
-              -106.6084,
-              35.1779
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Albuquerque NM",
-        "type": "Manufacturing Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -106.6102,
-              35.1755
-            ],
-            [
-              -106.6096,
-              35.1755
-            ],
-            [
-              -106.6096,
-              35.176
-            ],
-            [
-              -106.6102,
-              35.176
-            ],
-            [
-              -106.6102,
-              35.1755
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Albuquerque NM",
-        "type": "Manufacturing Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.0667,
-              40.9259
-            ],
-            [
-              -76.0639,
-              40.9259
-            ],
-            [
-              -76.0639,
-              40.929
-            ],
-            [
-              -76.0667,
-              40.929
-            ],
-            [
-              -76.0667,
-              40.9259
+              -76.066161,
+              40.927919
             ]
           ]
         ]
@@ -4289,63 +2345,24 @@
         "coordinates": [
           [
             [
-              -76.0664,
-              40.9272
+              -76.066436,
+              40.928126
             ],
             [
-              -76.0659,
-              40.9272
+              -76.066436,
+              40.927867
             ],
             [
-              -76.0659,
-              40.9277
+              -76.064376,
+              40.927815
             ],
             [
-              -76.0664,
-              40.9277
+              -76.064376,
+              40.928074
             ],
             [
-              -76.0664,
-              40.9272
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Hazleton PA",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.0663,
-              40.9279
-            ],
-            [
-              -76.0649,
-              40.9279
-            ],
-            [
-              -76.0649,
-              40.9286
-            ],
-            [
-              -76.0663,
-              40.9286
-            ],
-            [
-              -76.0663,
-              40.9279
+              -76.066436,
+              40.928126
             ]
           ]
         ]
@@ -4368,24 +2385,24 @@
         "coordinates": [
           [
             [
-              -76.0655,
-              40.9276
+              -76.065749,
+              40.927608
             ],
             [
-              -76.0649,
-              40.9276
+              -76.065749,
+              40.927296
             ],
             [
-              -76.0649,
-              40.9283
+              -76.064376,
+              40.927296
             ],
             [
-              -76.0655,
-              40.9283
+              -76.064376,
+              40.927608
             ],
             [
-              -76.0655,
-              40.9276
+              -76.065749,
+              40.927608
             ]
           ]
         ]
@@ -4408,24 +2425,24 @@
         "coordinates": [
           [
             [
-              -75.4796,
-              40.5697
+              -75.478861,
+              40.57153
             ],
             [
-              -75.4762,
-              40.5697
+              -75.478999,
+              40.569757
             ],
             [
-              -75.4762,
-              40.572
+              -75.476801,
+              40.569548
             ],
             [
-              -75.4796,
-              40.572
+              -75.476389,
+              40.571217
             ],
             [
-              -75.4796,
-              40.5697
+              -75.478861,
+              40.57153
             ]
           ]
         ]
@@ -4468,63 +2485,24 @@
         "coordinates": [
           [
             [
-              -75.4777,
-              40.5715
+              -75.478724,
+              40.571322
             ],
             [
-              -75.477,
-              40.5715
+              -75.478793,
+              40.571061
             ],
             [
-              -75.477,
-              40.5719
+              -75.477557,
+              40.570904
             ],
             [
-              -75.4777,
-              40.5719
+              -75.477488,
+              40.571165
             ],
             [
-              -75.4777,
-              40.5715
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Allentown PA",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.479,
-              40.5699
-            ],
-            [
-              -75.4783,
-              40.5699
-            ],
-            [
-              -75.4783,
-              40.5708
-            ],
-            [
-              -75.479,
-              40.5708
-            ],
-            [
-              -75.479,
-              40.5699
+              -75.478724,
+              40.571322
             ]
           ]
         ]
@@ -4547,24 +2525,24 @@
         "coordinates": [
           [
             [
-              -75.767,
-              38.6898
+              -75.763541,
+              38.690564
             ],
             [
-              -75.763,
-              38.6898
+              -75.763931,
+              38.692301
             ],
             [
-              -75.763,
-              38.6924
+              -75.767671,
+              38.691782
             ],
             [
-              -75.767,
-              38.6924
+              -75.767281,
+              38.690045
             ],
             [
-              -75.767,
-              38.6898
+              -75.763541,
+              38.690564
             ]
           ]
         ]
@@ -4607,103 +2585,24 @@
         "coordinates": [
           [
             [
-              -75.7661,
-              38.69035
+              -75.765526,
+              38.691202
             ],
             [
-              -75.76555,
-              38.69035
+              -75.765566,
+              38.69138
             ],
             [
-              -75.76555,
-              38.69075
+              -75.767266,
+              38.691144
             ],
             [
-              -75.7661,
-              38.69075
+              -75.767226,
+              38.690966
             ],
             [
-              -75.7661,
-              38.69035
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Federalsburg MD",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.7647,
-              38.6906
-            ],
-            [
-              -75.7638,
-              38.6906
-            ],
-            [
-              -75.7638,
-              38.6911
-            ],
-            [
-              -75.7647,
-              38.6911
-            ],
-            [
-              -75.7647,
-              38.6906
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Federalsburg MD",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.7663,
-              38.69105
-            ],
-            [
-              -75.7654,
-              38.69105
-            ],
-            [
-              -75.7654,
-              38.69145
-            ],
-            [
-              -75.7663,
-              38.69145
-            ],
-            [
-              -75.7663,
-              38.69105
+              -75.765526,
+              38.691202
             ]
           ]
         ]
@@ -4726,63 +2625,24 @@
         "coordinates": [
           [
             [
-              -75.767,
-              38.69035
+              -95.137397,
+              36.6583
             ],
             [
-              -75.766,
-              38.69035
+              -95.137123,
+              36.656537
             ],
             [
-              -75.766,
-              38.691
+              -95.134513,
+              36.656758
             ],
             [
-              -75.767,
-              38.691
+              -95.134788,
+              36.65852
             ],
             [
-              -75.767,
-              38.69035
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Federalsburg MD",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.1368,
-              36.657
-            ],
-            [
-              -95.1342,
-              36.657
-            ],
-            [
-              -95.1342,
-              36.6595
-            ],
-            [
-              -95.1368,
-              36.6595
-            ],
-            [
-              -95.1368,
-              36.657
+              -95.137397,
+              36.6583
             ]
           ]
         ]
@@ -4825,63 +2685,24 @@
         "coordinates": [
           [
             [
-              -95.1369,
-              36.65865
+              -95.136573,
+              36.657198
             ],
             [
-              -95.1364,
-              36.65865
+              -95.136505,
+              36.656647
             ],
             [
-              -95.1364,
-              36.65895
+              -95.134857,
+              36.656758
             ],
             [
-              -95.1369,
-              36.65895
+              -95.134925,
+              36.657308
             ],
             [
-              -95.1369,
-              36.65865
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Vinita OK",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.1362,
-              36.6573
-            ],
-            [
-              -95.1351,
-              36.6573
-            ],
-            [
-              -95.1351,
-              36.658
-            ],
-            [
-              -95.1362,
-              36.658
-            ],
-            [
-              -95.1362,
-              36.6573
+              -95.136573,
+              36.657198
             ]
           ]
         ]
@@ -4904,24 +2725,24 @@
         "coordinates": [
           [
             [
-              -95.1362,
-              36.6579
+              -95.136299,
+              36.65808
             ],
             [
-              -95.1358,
-              36.6579
+              -95.13623,
+              36.657749
             ],
             [
-              -95.1358,
-              36.6584
+              -95.134857,
+              36.657859
             ],
             [
-              -95.1362,
-              36.6584
+              -95.134925,
+              36.65819
             ],
             [
-              -95.1362,
-              36.6579
+              -95.136299,
+              36.65808
             ]
           ]
         ]
@@ -4944,24 +2765,24 @@
         "coordinates": [
           [
             [
-              -111.264,
-              47.5147
+              -111.264072,
+              47.515478
             ],
             [
-              -111.2595,
-              47.5147
+              -111.264003,
+              47.514922
             ],
             [
-              -111.2595,
-              47.5159
+              -111.259883,
+              47.515014
             ],
             [
-              -111.264,
-              47.5159
+              -111.259952,
+              47.515571
             ],
             [
-              -111.264,
-              47.5147
+              -111.264072,
+              47.515478
             ]
           ]
         ]
@@ -5004,63 +2825,24 @@
         "coordinates": [
           [
             [
-              -111.262,
-              47.5154
+              -111.26366,
+              47.515478
             ],
             [
-              -111.2614,
-              47.5154
+              -111.26366,
+              47.515246
             ],
             [
-              -111.2614,
-              47.5157
+              -111.2616,
+              47.515293
             ],
             [
-              -111.262,
-              47.5157
+              -111.2616,
+              47.515525
             ],
             [
-              -111.262,
-              47.5154
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Great Falls MT (Flour Mill)",
-        "type": "Flour Mill",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -111.2608,
-              47.5149
-            ],
-            [
-              -111.2599,
-              47.5149
-            ],
-            [
-              -111.2599,
-              47.5153
-            ],
-            [
-              -111.2608,
-              47.5153
-            ],
-            [
-              -111.2608,
-              47.5149
+              -111.26366,
+              47.515478
             ]
           ]
         ]
@@ -5083,24 +2865,24 @@
         "coordinates": [
           [
             [
-              -93.272,
-              45.0455
+              -93.272997,
+              45.050434
             ],
             [
-              -93.2696,
-              45.0455
+              -93.274508,
+              45.046359
             ],
             [
-              -93.2696,
-              45.0508
+              -93.270113,
+              45.045971
             ],
             [
-              -93.272,
-              45.0508
+              -93.268603,
+              45.050046
             ],
             [
-              -93.272,
-              45.0455
+              -93.272997,
+              45.050434
             ]
           ]
         ]
@@ -5143,63 +2925,24 @@
         "coordinates": [
           [
             [
-              -93.2701,
-              45.0472
+              -93.272173,
+              45.04927
             ],
             [
-              -93.2696,
-              45.0472
+              -93.272311,
+              45.048688
             ],
             [
-              -93.2696,
-              45.0477
+              -93.269839,
+              45.048494
             ],
             [
-              -93.2701,
-              45.0477
+              -93.269701,
+              45.049076
             ],
             [
-              -93.2701,
-              45.0472
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Fridley MN (Flour Mill)",
-        "type": "Flour Mill",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.2713,
-              45.0476
-            ],
-            [
-              -93.2706,
-              45.0476
-            ],
-            [
-              -93.2706,
-              45.0481
-            ],
-            [
-              -93.2713,
-              45.0481
-            ],
-            [
-              -93.2713,
-              45.0476
+              -93.272173,
+              45.04927
             ]
           ]
         ]
@@ -5222,63 +2965,24 @@
         "coordinates": [
           [
             [
-              -93.2706,
-              45.0478
+              -85.385675,
+              34.9935
             ],
             [
-              -93.2698,
-              45.0478
+              -85.383721,
+              34.992679
             ],
             [
-              -93.2698,
-              45.0487
+              -85.381531,
+              34.996226
             ],
             [
-              -93.2706,
-              45.0487
+              -85.383485,
+              34.997047
             ],
             [
-              -93.2706,
-              45.0478
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Fridley MN (Flour Mill)",
-        "type": "Flour Mill",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.3852,
-              34.9924
-            ],
-            [
-              -85.3817,
-              34.9924
-            ],
-            [
-              -85.3817,
-              34.9962
-            ],
-            [
-              -85.3852,
-              34.9962
-            ],
-            [
-              -85.3852,
-              34.9924
+              -85.385675,
+              34.9935
             ]
           ]
         ]
@@ -5321,63 +3025,24 @@
         "coordinates": [
           [
             [
-              -85.3842,
-              34.9963
+              -85.385774,
+              34.993639
             ],
             [
-              -85.3833,
-              34.9963
+              -85.385383,
+              34.993474
             ],
             [
-              -85.3833,
-              34.997
+              -85.383492,
+              34.996537
             ],
             [
-              -85.3842,
-              34.997
+              -85.383883,
+              34.996702
             ],
             [
-              -85.3842,
-              34.9963
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Chattanooga TN Distribution Center",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.3851,
-              34.9926
-            ],
-            [
-              -85.384,
-              34.9926
-            ],
-            [
-              -85.384,
-              34.9957
-            ],
-            [
-              -85.3851,
-              34.9957
-            ],
-            [
-              -85.3851,
-              34.9926
+              -85.385774,
+              34.993639
             ]
           ]
         ]
@@ -5400,24 +3065,24 @@
         "coordinates": [
           [
             [
-              -85.3846,
-              34.9928
+              -85.385408,
+              34.993336
             ],
             [
-              -85.3836,
-              34.9928
+              -85.385213,
+              34.993254
             ],
             [
-              -85.3836,
-              34.9959
+              -85.383172,
+              34.996558
             ],
             [
-              -85.3846,
-              34.9959
+              -85.383367,
+              34.99664
             ],
             [
-              -85.3846,
-              34.9928
+              -85.385408,
+              34.993336
             ]
           ]
         ]
@@ -5440,103 +3105,24 @@
         "coordinates": [
           [
             [
-              -85.3829,
-              34.993
+              -117.511121,
+              34.045803
             ],
             [
-              -85.3821,
-              34.993
+              -117.511121,
+              34.043755
             ],
             [
-              -85.3821,
-              34.995
+              -117.507276,
+              34.043755
             ],
             [
-              -85.3829,
-              34.995
+              -117.507276,
+              34.045803
             ],
             [
-              -85.3829,
-              34.993
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Chattanooga TN Distribution Center",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -85.3842,
-              34.9958
-            ],
-            [
-              -85.383,
-              34.9958
-            ],
-            [
-              -85.383,
-              34.9966
-            ],
-            [
-              -85.3842,
-              34.9966
-            ],
-            [
-              -85.3842,
-              34.9958
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Chattanooga TN Distribution Center",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.51,
-              34.0408
-            ],
-            [
-              -117.507,
-              34.0408
-            ],
-            [
-              -117.507,
-              34.0455
-            ],
-            [
-              -117.51,
-              34.0455
-            ],
-            [
-              -117.51,
-              34.0408
+              -117.511121,
+              34.045803
             ]
           ]
         ]
@@ -5579,103 +3165,24 @@
         "coordinates": [
           [
             [
-              -117.5074,
-              34.0422
+              -117.508649,
+              34.045576
             ],
             [
-              -117.5068,
-              34.0422
+              -117.508649,
+              34.043869
             ],
             [
-              -117.5068,
-              34.0427
+              -117.507276,
+              34.043869
             ],
             [
-              -117.5074,
-              34.0427
+              -117.507276,
+              34.045576
             ],
             [
-              -117.5074,
-              34.0422
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Fontana CA Distribution Center",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.5075,
-              34.0413
-            ],
-            [
-              -117.5068,
-              34.0413
-            ],
-            [
-              -117.5068,
-              34.0452
-            ],
-            [
-              -117.5075,
-              34.0452
-            ],
-            [
-              -117.5075,
-              34.0413
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Fontana CA Distribution Center",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.5079,
-              34.0413
-            ],
-            [
-              -117.5072,
-              34.0413
-            ],
-            [
-              -117.5072,
-              34.0452
-            ],
-            [
-              -117.5079,
-              34.0452
-            ],
-            [
-              -117.5079,
-              34.0413
+              -117.508649,
+              34.045576
             ]
           ]
         ]
@@ -5689,45 +3196,6 @@
         "confidence": "high",
         "zone": "dockApron",
         "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.5094,
-              34.042
-            ],
-            [
-              -117.5082,
-              34.042
-            ],
-            [
-              -117.5082,
-              34.045
-            ],
-            [
-              -117.5094,
-              34.045
-            ],
-            [
-              -117.5094,
-              34.042
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "general-mills",
-        "name": "General Mills - Fontana CA Distribution Center",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
       }
     }
   ]

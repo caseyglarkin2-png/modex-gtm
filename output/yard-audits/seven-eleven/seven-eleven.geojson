@@ -1,0 +1,2611 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.09345,
+              40.77815
+            ],
+            [
+              -73.09338,
+              40.77628
+            ],
+            [
+              -73.0919,
+              40.77578
+            ],
+            [
+              -73.08968,
+              40.776
+            ],
+            [
+              -73.08922,
+              40.77665
+            ],
+            [
+              -73.08948,
+              40.77792
+            ],
+            [
+              -73.09345,
+              40.77815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Bohemia NY",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 42,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 19.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.0934,
+              40.77648
+            ],
+            [
+              -73.09342,
+              40.77622
+            ],
+            [
+              -73.09302,
+              40.7762
+            ],
+            [
+              -73.093,
+              40.77646
+            ],
+            [
+              -73.0934,
+              40.77648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Bohemia NY",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.09232,
+              40.77648
+            ],
+            [
+              -73.09238,
+              40.77618
+            ],
+            [
+              -73.08982,
+              40.77598
+            ],
+            [
+              -73.08975,
+              40.77628
+            ],
+            [
+              -73.09232,
+              40.77648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Bohemia NY",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.08948,
+              40.77735
+            ],
+            [
+              -73.0895,
+              40.77662
+            ],
+            [
+              -73.0892,
+              40.77665
+            ],
+            [
+              -73.08918,
+              40.77738
+            ],
+            [
+              -73.08948,
+              40.77735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Bohemia NY",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.09238,
+              40.77678
+            ],
+            [
+              -73.0924,
+              40.77664
+            ],
+            [
+              -73.08975,
+              40.77648
+            ],
+            [
+              -73.08972,
+              40.77662
+            ],
+            [
+              -73.09238,
+              40.77678
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Bohemia NY",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.08962,
+              40.77735
+            ],
+            [
+              -73.08964,
+              40.77662
+            ],
+            [
+              -73.0895,
+              40.77665
+            ],
+            [
+              -73.08948,
+              40.77738
+            ],
+            [
+              -73.08962,
+              40.77735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Bohemia NY",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.06995,
+              33.93155
+            ],
+            [
+              -118.0699,
+              33.92965
+            ],
+            [
+              -118.0688,
+              33.9295
+            ],
+            [
+              -118.0669,
+              33.92985
+            ],
+            [
+              -118.06745,
+              33.93168
+            ],
+            [
+              -118.06995,
+              33.93155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.07,
+              33.9315
+            ],
+            [
+              -118.06998,
+              33.93095
+            ],
+            [
+              -118.06968,
+              33.93095
+            ],
+            [
+              -118.0697,
+              33.9315
+            ],
+            [
+              -118.07,
+              33.9315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.0694,
+              33.93
+            ],
+            [
+              -118.06935,
+              33.92955
+            ],
+            [
+              -118.06695,
+              33.92958
+            ],
+            [
+              -118.067,
+              33.93005
+            ],
+            [
+              -118.0694,
+              33.93
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.06945,
+              33.93015
+            ],
+            [
+              -118.06943,
+              33.93
+            ],
+            [
+              -118.06698,
+              33.93005
+            ],
+            [
+              -118.067,
+              33.9302
+            ],
+            [
+              -118.06945,
+              33.93015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.06968,
+              33.9312
+            ],
+            [
+              -118.06962,
+              33.9301
+            ],
+            [
+              -118.0695,
+              33.9301
+            ],
+            [
+              -118.06956,
+              33.9312
+            ],
+            [
+              -118.06968,
+              33.9312
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.67335,
+              30.3415
+            ],
+            [
+              -97.67261,
+              30.33988
+            ],
+            [
+              -97.67178,
+              30.34015
+            ],
+            [
+              -97.67252,
+              30.34178
+            ],
+            [
+              -97.67335,
+              30.3415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Austin TX (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 4.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.67295,
+              30.34105
+            ],
+            [
+              -97.67262,
+              30.34033
+            ],
+            [
+              -97.67223,
+              30.34045
+            ],
+            [
+              -97.67256,
+              30.34118
+            ],
+            [
+              -97.67295,
+              30.34105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Austin TX (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.67295,
+              30.34105
+            ],
+            [
+              -97.67262,
+              30.34033
+            ],
+            [
+              -97.67223,
+              30.34045
+            ],
+            [
+              -97.67256,
+              30.34118
+            ],
+            [
+              -97.67295,
+              30.34105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Austin TX (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.95158,
+              40.74482
+            ],
+            [
+              -111.95362,
+              40.74482
+            ],
+            [
+              -111.95362,
+              40.74333
+            ],
+            [
+              -111.95158,
+              40.74333
+            ],
+            [
+              -111.95158,
+              40.74482
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 6.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9517,
+              40.74388
+            ],
+            [
+              -111.9517,
+              40.74352
+            ],
+            [
+              -111.9515,
+              40.74352
+            ],
+            [
+              -111.9515,
+              40.74388
+            ],
+            [
+              -111.9517,
+              40.74388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.95248,
+              40.74452
+            ],
+            [
+              -111.95352,
+              40.74452
+            ],
+            [
+              -111.95352,
+              40.7436
+            ],
+            [
+              -111.95248,
+              40.7436
+            ],
+            [
+              -111.95248,
+              40.74452
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.95238,
+              40.74438
+            ],
+            [
+              -111.95248,
+              40.74438
+            ],
+            [
+              -111.95248,
+              40.74388
+            ],
+            [
+              -111.95238,
+              40.74388
+            ],
+            [
+              -111.95238,
+              40.74438
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.95238,
+              40.74386
+            ],
+            [
+              -111.95238,
+              40.74378
+            ],
+            [
+              -111.95205,
+              40.74378
+            ],
+            [
+              -111.95205,
+              40.74386
+            ],
+            [
+              -111.95238,
+              40.74386
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.95248,
+              40.7436
+            ],
+            [
+              -111.95352,
+              40.7436
+            ],
+            [
+              -111.95352,
+              40.74336
+            ],
+            [
+              -111.95248,
+              40.74336
+            ],
+            [
+              -111.95248,
+              40.7436
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.03285,
+              36.2795
+            ],
+            [
+              -115.034,
+              36.27845
+            ],
+            [
+              -115.0337,
+              36.2769
+            ],
+            [
+              -115.03185,
+              36.27675
+            ],
+            [
+              -115.03175,
+              36.27925
+            ],
+            [
+              -115.03285,
+              36.2795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0323,
+              36.27718
+            ],
+            [
+              -115.03228,
+              36.27672
+            ],
+            [
+              -115.0319,
+              36.27672
+            ],
+            [
+              -115.03192,
+              36.27718
+            ],
+            [
+              -115.0323,
+              36.27718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.033,
+              36.27905
+            ],
+            [
+              -115.03295,
+              36.27848
+            ],
+            [
+              -115.03198,
+              36.27858
+            ],
+            [
+              -115.03205,
+              36.27918
+            ],
+            [
+              -115.033,
+              36.27905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.03195,
+              36.27855
+            ],
+            [
+              -115.032,
+              36.27698
+            ],
+            [
+              -115.03182,
+              36.277
+            ],
+            [
+              -115.03178,
+              36.2786
+            ],
+            [
+              -115.03195,
+              36.27855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0336,
+              36.27838
+            ],
+            [
+              -115.03355,
+              36.27758
+            ],
+            [
+              -115.03312,
+              36.2776
+            ],
+            [
+              -115.03318,
+              36.27842
+            ],
+            [
+              -115.0336,
+              36.27838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0325,
+              36.27838
+            ],
+            [
+              -115.03246,
+              36.27756
+            ],
+            [
+              -115.03218,
+              36.27758
+            ],
+            [
+              -115.03222,
+              36.2784
+            ],
+            [
+              -115.0325,
+              36.27838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.033,
+              36.27758
+            ],
+            [
+              -115.03298,
+              36.27698
+            ],
+            [
+              -115.03212,
+              36.277
+            ],
+            [
+              -115.03215,
+              36.2776
+            ],
+            [
+              -115.033,
+              36.27758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+        "type": "Combined Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.921873,
+              39.796442
+            ],
+            [
+              -104.921884,
+              39.795782
+            ],
+            [
+              -104.92183,
+              39.795172
+            ],
+            [
+              -104.920521,
+              39.795156
+            ],
+            [
+              -104.920199,
+              39.795267
+            ],
+            [
+              -104.92021,
+              39.796442
+            ],
+            [
+              -104.920612,
+              39.79645
+            ],
+            [
+              -104.921873,
+              39.796442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.98,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.921175,
+              39.796627
+            ],
+            [
+              -104.921175,
+              39.796442
+            ],
+            [
+              -104.920585,
+              39.796442
+            ],
+            [
+              -104.920585,
+              39.796627
+            ],
+            [
+              -104.921175,
+              39.796627
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.921524,
+              39.796401
+            ],
+            [
+              -104.921508,
+              39.795403
+            ],
+            [
+              -104.92139,
+              39.795403
+            ],
+            [
+              -104.921417,
+              39.796401
+            ],
+            [
+              -104.921524,
+              39.796401
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.920596,
+              39.796401
+            ],
+            [
+              -104.920585,
+              39.795391
+            ],
+            [
+              -104.920253,
+              39.795391
+            ],
+            [
+              -104.920264,
+              39.796401
+            ],
+            [
+              -104.920596,
+              39.796401
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.981964,
+              33.027055
+            ],
+            [
+              -96.981869,
+              33.025007
+            ],
+            [
+              -96.980336,
+              33.024967
+            ],
+            [
+              -96.980288,
+              33.025368
+            ],
+            [
+              -96.980288,
+              33.027055
+            ],
+            [
+              -96.981964,
+              33.027055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+        "type": "Combined Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.97934,
+              33.025505
+            ],
+            [
+              -96.97934,
+              33.02538
+            ],
+            [
+              -96.97906,
+              33.02538
+            ],
+            [
+              -96.97906,
+              33.025505
+            ],
+            [
+              -96.97934,
+              33.025505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+        "type": "Combined Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.98101,
+              33.02576
+            ],
+            [
+              -96.98108,
+              33.02515
+            ],
+            [
+              -96.98047,
+              33.02509
+            ],
+            [
+              -96.98036,
+              33.02569
+            ],
+            [
+              -96.98101,
+              33.02576
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+        "type": "Combined Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.98102,
+              33.02679
+            ],
+            [
+              -96.98118,
+              33.0251
+            ],
+            [
+              -96.98096,
+              33.02512
+            ],
+            [
+              -96.98079,
+              33.02681
+            ],
+            [
+              -96.98102,
+              33.02679
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+        "type": "Combined Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.98074,
+              33.02684
+            ],
+            [
+              -96.98072,
+              33.02576
+            ],
+            [
+              -96.98034,
+              33.02576
+            ],
+            [
+              -96.98033,
+              33.02685
+            ],
+            [
+              -96.98074,
+              33.02684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+        "type": "Combined Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.035924,
+              41.697521
+            ],
+            [
+              -88.035962,
+              41.69696
+            ],
+            [
+              -88.035897,
+              41.696359
+            ],
+            [
+              -88.034905,
+              41.696327
+            ],
+            [
+              -88.034556,
+              41.696399
+            ],
+            [
+              -88.03461,
+              41.697321
+            ],
+            [
+              -88.035066,
+              41.697461
+            ],
+            [
+              -88.035924,
+              41.697521
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 3.42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.035012,
+              41.696367
+            ],
+            [
+              -88.034985,
+              41.696247
+            ],
+            [
+              -88.034621,
+              41.696239
+            ],
+            [
+              -88.034664,
+              41.696359
+            ],
+            [
+              -88.035012,
+              41.696367
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.035114,
+              41.697381
+            ],
+            [
+              -88.035114,
+              41.696488
+            ],
+            [
+              -88.034889,
+              41.696459
+            ],
+            [
+              -88.034889,
+              41.697321
+            ],
+            [
+              -88.035114,
+              41.697381
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago)",
+        "type": "Combined Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4842,
+              44.8615
+            ],
+            [
+              -93.48445,
+              44.86095
+            ],
+            [
+              -93.4843,
+              44.8601
+            ],
+            [
+              -93.48285,
+              44.85972
+            ],
+            [
+              -93.4812,
+              44.85958
+            ],
+            [
+              -93.48055,
+              44.8604
+            ],
+            [
+              -93.48075,
+              44.8613
+            ],
+            [
+              -93.4815,
+              44.86155
+            ],
+            [
+              -93.4842,
+              44.8615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 13.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.48075,
+              44.86082
+            ],
+            [
+              -93.48081,
+              44.86042
+            ],
+            [
+              -93.48058,
+              44.86038
+            ],
+            [
+              -93.48052,
+              44.86078
+            ],
+            [
+              -93.48075,
+              44.86082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.48345,
+              44.86108
+            ],
+            [
+              -93.48352,
+              44.86062
+            ],
+            [
+              -93.48188,
+              44.86048
+            ],
+            [
+              -93.4818,
+              44.86095
+            ],
+            [
+              -93.48345,
+              44.86108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.48405,
+              44.86138
+            ],
+            [
+              -93.48412,
+              44.86105
+            ],
+            [
+              -93.48322,
+              44.86095
+            ],
+            [
+              -93.48315,
+              44.86128
+            ],
+            [
+              -93.48405,
+              44.86138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.48118,
+              44.86072
+            ],
+            [
+              -93.48128,
+              44.8603
+            ],
+            [
+              -93.48098,
+              44.86026
+            ],
+            [
+              -93.48088,
+              44.86068
+            ],
+            [
+              -93.48118,
+              44.86072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.48402,
+              44.86058
+            ],
+            [
+              -93.48405,
+              44.86038
+            ],
+            [
+              -93.4837,
+              44.86034
+            ],
+            [
+              -93.48367,
+              44.86054
+            ],
+            [
+              -93.48402,
+              44.86058
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4817,
+              44.86048
+            ],
+            [
+              -93.48176,
+              44.8602
+            ],
+            [
+              -93.48098,
+              44.86012
+            ],
+            [
+              -93.48092,
+              44.8604
+            ],
+            [
+              -93.4817,
+              44.86048
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+        "type": "Fresh Food Commissary",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4968,
+              38.3514
+            ],
+            [
+              -77.4973,
+              38.3508
+            ],
+            [
+              -77.4977,
+              38.3495
+            ],
+            [
+              -77.497,
+              38.3473
+            ],
+            [
+              -77.4956,
+              38.34685
+            ],
+            [
+              -77.4945,
+              38.348
+            ],
+            [
+              -77.49475,
+              38.3505
+            ],
+            [
+              -77.4968,
+              38.3514
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 25,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.49645,
+              38.3517
+            ],
+            [
+              -77.4967,
+              38.35115
+            ],
+            [
+              -77.49625,
+              38.35095
+            ],
+            [
+              -77.496,
+              38.3515
+            ],
+            [
+              -77.49645,
+              38.3517
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4949,
+              38.3493
+            ],
+            [
+              -77.4956,
+              38.34875
+            ],
+            [
+              -77.49545,
+              38.348
+            ],
+            [
+              -77.49475,
+              38.34855
+            ],
+            [
+              -77.4949,
+              38.3493
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4938,
+              38.3504
+            ],
+            [
+              -77.49485,
+              38.35
+            ],
+            [
+              -77.4946,
+              38.34915
+            ],
+            [
+              -77.49355,
+              38.34955
+            ],
+            [
+              -77.4938,
+              38.3504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4949,
+              38.3506
+            ],
+            [
+              -77.4956,
+              38.3496
+            ],
+            [
+              -77.4953,
+              38.34945
+            ],
+            [
+              -77.4946,
+              38.35045
+            ],
+            [
+              -77.4949,
+              38.3506
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.496,
+              38.34835
+            ],
+            [
+              -77.4964,
+              38.3474
+            ],
+            [
+              -77.49608,
+              38.34728
+            ],
+            [
+              -77.49568,
+              38.34823
+            ],
+            [
+              -77.496,
+              38.34835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4973,
+              38.35075
+            ],
+            [
+              -77.4977,
+              38.3498
+            ],
+            [
+              -77.49738,
+              38.34968
+            ],
+            [
+              -77.49698,
+              38.35063
+            ],
+            [
+              -77.4973,
+              38.35075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+        "type": "Grocery DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.31118,
+              32.6434
+            ],
+            [
+              -97.31112,
+              32.6379
+            ],
+            [
+              -97.31098,
+              32.6362
+            ],
+            [
+              -97.3072,
+              32.63635
+            ],
+            [
+              -97.30682,
+              32.63785
+            ],
+            [
+              -97.30685,
+              32.64332
+            ],
+            [
+              -97.31118,
+              32.6434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
+        "type": "Grocery DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 100,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 64,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.31168,
+              32.64092
+            ],
+            [
+              -97.3117,
+              32.64047
+            ],
+            [
+              -97.3112,
+              32.64045
+            ],
+            [
+              -97.31118,
+              32.6409
+            ],
+            [
+              -97.31168,
+              32.64092
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
+        "type": "Grocery DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.30905,
+              32.6432
+            ],
+            [
+              -97.30908,
+              32.63962
+            ],
+            [
+              -97.30702,
+              32.6396
+            ],
+            [
+              -97.307,
+              32.64318
+            ],
+            [
+              -97.30905,
+              32.6432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
+        "type": "Grocery DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.30955,
+              32.6433
+            ],
+            [
+              -97.30959,
+              32.63987
+            ],
+            [
+              -97.30916,
+              32.63985
+            ],
+            [
+              -97.30912,
+              32.64328
+            ],
+            [
+              -97.30955,
+              32.6433
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
+        "type": "Grocery DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3109,
+              32.638
+            ],
+            [
+              -97.31088,
+              32.6376
+            ],
+            [
+              -97.3096,
+              32.63762
+            ],
+            [
+              -97.30962,
+              32.63802
+            ],
+            [
+              -97.3109,
+              32.638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "seven-eleven",
+        "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
+        "type": "Grocery DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

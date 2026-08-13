@@ -1,0 +1,3334 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2596,
+              36.3253
+            ],
+            [
+              -94.2601,
+              36.3233
+            ],
+            [
+              -94.2606,
+              36.3207
+            ],
+            [
+              -94.2612,
+              36.3182
+            ],
+            [
+              -94.2598,
+              36.3176
+            ],
+            [
+              -94.2556,
+              36.3172
+            ],
+            [
+              -94.255,
+              36.3192
+            ],
+            [
+              -94.2547,
+              36.3233
+            ],
+            [
+              -94.2559,
+              36.3258
+            ],
+            [
+              -94.2596,
+              36.3253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 240,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 107,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.26075,
+              36.31907
+            ],
+            [
+              -94.2608,
+              36.31868
+            ],
+            [
+              -94.2596,
+              36.31862
+            ],
+            [
+              -94.25955,
+              36.319
+            ],
+            [
+              -94.26075,
+              36.31907
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.25895,
+              36.3254
+            ],
+            [
+              -94.2569,
+              36.32195
+            ],
+            [
+              -94.2551,
+              36.3235
+            ],
+            [
+              -94.256,
+              36.3256
+            ],
+            [
+              -94.25895,
+              36.3254
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2556,
+              36.3233
+            ],
+            [
+              -94.2562,
+              36.31955
+            ],
+            [
+              -94.2552,
+              36.3196
+            ],
+            [
+              -94.2549,
+              36.3236
+            ],
+            [
+              -94.2556,
+              36.3233
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2568,
+              36.3214
+            ],
+            [
+              -94.257,
+              36.3196
+            ],
+            [
+              -94.25545,
+              36.31955
+            ],
+            [
+              -94.2553,
+              36.3213
+            ],
+            [
+              -94.2568,
+              36.3214
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.259,
+              36.3243
+            ],
+            [
+              -94.25862,
+              36.32398
+            ],
+            [
+              -94.2571,
+              36.32505
+            ],
+            [
+              -94.2575,
+              36.3254
+            ],
+            [
+              -94.259,
+              36.3243
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.25735,
+              36.3215
+            ],
+            [
+              -94.25745,
+              36.31955
+            ],
+            [
+              -94.257,
+              36.31952
+            ],
+            [
+              -94.2569,
+              36.32148
+            ],
+            [
+              -94.25735,
+              36.3215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2592,
+              36.3187
+            ],
+            [
+              -94.2592,
+              36.3185
+            ],
+            [
+              -94.2564,
+              36.3185
+            ],
+            [
+              -94.2564,
+              36.3187
+            ],
+            [
+              -94.2592,
+              36.3187
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.26035,
+              36.32
+            ],
+            [
+              -94.26045,
+              36.31915
+            ],
+            [
+              -94.25905,
+              36.31905
+            ],
+            [
+              -94.25895,
+              36.3199
+            ],
+            [
+              -94.26035,
+              36.32
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 6094, Bentonville AR",
+        "type": "General Merchandise Distribution Center (~1.25M sf)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.065256,
+              29.7385
+            ],
+            [
+              -98.06671,
+              29.73444
+            ],
+            [
+              -98.06639,
+              29.73212
+            ],
+            [
+              -98.06362,
+              29.7311
+            ],
+            [
+              -98.06093,
+              29.73119
+            ],
+            [
+              -98.06025,
+              29.73286
+            ],
+            [
+              -98.0614,
+              29.73686
+            ],
+            [
+              -98.065256,
+              29.7385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 92.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.06645,
+              29.73845
+            ],
+            [
+              -98.06665,
+              29.73815
+            ],
+            [
+              -98.06615,
+              29.73795
+            ],
+            [
+              -98.06595,
+              29.73825
+            ],
+            [
+              -98.06645,
+              29.73845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.066777,
+              29.736918
+            ],
+            [
+              -98.067364,
+              29.736291
+            ],
+            [
+              -98.062909,
+              29.733167
+            ],
+            [
+              -98.062322,
+              29.733794
+            ],
+            [
+              -98.066777,
+              29.736918
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.061429,
+              29.736065
+            ],
+            [
+              -98.061965,
+              29.7356
+            ],
+            [
+              -98.061911,
+              29.734019
+            ],
+            [
+              -98.061215,
+              29.734112
+            ],
+            [
+              -98.061429,
+              29.736065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.066549,
+              29.737162
+            ],
+            [
+              -98.066777,
+              29.736918
+            ],
+            [
+              -98.062322,
+              29.733794
+            ],
+            [
+              -98.062094,
+              29.734038
+            ],
+            [
+              -98.066549,
+              29.737162
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.066549,
+              29.737162
+            ],
+            [
+              -98.064,
+              29.737879
+            ],
+            [
+              -98.064112,
+              29.738178
+            ],
+            [
+              -98.066661,
+              29.737461
+            ],
+            [
+              -98.066549,
+              29.737162
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.06615,
+              29.73815
+            ],
+            [
+              -98.0664,
+              29.73785
+            ],
+            [
+              -98.0659,
+              29.73755
+            ],
+            [
+              -98.06565,
+              29.73785
+            ],
+            [
+              -98.06615,
+              29.73815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+        "type": "General Merchandise DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.10405,
+              34.97623
+            ],
+            [
+              -82.10469,
+              34.97368
+            ],
+            [
+              -82.10373,
+              34.97052
+            ],
+            [
+              -82.10051,
+              34.96981
+            ],
+            [
+              -82.09773,
+              34.97175
+            ],
+            [
+              -82.09751,
+              34.97464
+            ],
+            [
+              -82.10051,
+              34.97631
+            ],
+            [
+              -82.10405,
+              34.97623
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3010, Wellford SC",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 91.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.10262,
+              34.97195
+            ],
+            [
+              -82.10272,
+              34.97162
+            ],
+            [
+              -82.10238,
+              34.97155
+            ],
+            [
+              -82.10228,
+              34.97188
+            ],
+            [
+              -82.10262,
+              34.97195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3010, Wellford SC",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.10311,
+              34.97409
+            ],
+            [
+              -82.10311,
+              34.97251
+            ],
+            [
+              -82.09957,
+              34.97207
+            ],
+            [
+              -82.09893,
+              34.97312
+            ],
+            [
+              -82.10311,
+              34.97409
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3010, Wellford SC",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.10284,
+              34.97444
+            ],
+            [
+              -82.10284,
+              34.97418
+            ],
+            [
+              -82.09946,
+              34.97343
+            ],
+            [
+              -82.09946,
+              34.97369
+            ],
+            [
+              -82.10284,
+              34.97444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3010, Wellford SC",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.716905,
+              32.584536
+            ],
+            [
+              -96.716493,
+              32.581411
+            ],
+            [
+              -96.713747,
+              32.579328
+            ],
+            [
+              -96.705781,
+              32.580486
+            ],
+            [
+              -96.705095,
+              32.583263
+            ],
+            [
+              -96.707155,
+              32.585114
+            ],
+            [
+              -96.710313,
+              32.585461
+            ],
+            [
+              -96.716905,
+              32.584536
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3006, Lancaster TX",
+        "type": "Grocery/Perishable DC (730k sf, refrigerated)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 143.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.716905,
+              32.582221
+            ],
+            [
+              -96.716356,
+              32.580949
+            ],
+            [
+              -96.715669,
+              32.581411
+            ],
+            [
+              -96.716219,
+              32.582569
+            ],
+            [
+              -96.716905,
+              32.582221
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3006, Lancaster TX",
+        "type": "Grocery/Perishable DC (730k sf, refrigerated)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.716493,
+              32.581411
+            ],
+            [
+              -96.713747,
+              32.579444
+            ],
+            [
+              -96.708803,
+              32.580949
+            ],
+            [
+              -96.710725,
+              32.582221
+            ],
+            [
+              -96.716493,
+              32.581411
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3006, Lancaster TX",
+        "type": "Grocery/Perishable DC (730k sf, refrigerated)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.716699,
+              32.584073
+            ],
+            [
+              -96.71663,
+              32.583784
+            ],
+            [
+              -96.710245,
+              32.584478
+            ],
+            [
+              -96.710313,
+              32.584767
+            ],
+            [
+              -96.716699,
+              32.584073
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3006, Lancaster TX",
+        "type": "Grocery/Perishable DC (730k sf, refrigerated)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.716699,
+              32.582626
+            ],
+            [
+              -96.716493,
+              32.581527
+            ],
+            [
+              -96.710863,
+              32.582221
+            ],
+            [
+              -96.711,
+              32.583263
+            ],
+            [
+              -96.716699,
+              32.582626
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Perishable DC 3006, Lancaster TX",
+        "type": "Grocery/Perishable DC (730k sf, refrigerated)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.9101,
+              39.8564
+            ],
+            [
+              -85.9101,
+              39.8509
+            ],
+            [
+              -85.9017,
+              39.8509
+            ],
+            [
+              -85.9017,
+              39.8564
+            ],
+            [
+              -85.9101,
+              39.8564
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, McCordsville IN",
+        "type": "E-commerce/Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 144,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 900,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 107,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.91055,
+              39.8532
+            ],
+            [
+              -85.91055,
+              39.8523
+            ],
+            [
+              -85.9099,
+              39.8523
+            ],
+            [
+              -85.9099,
+              39.8532
+            ],
+            [
+              -85.91055,
+              39.8532
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, McCordsville IN",
+        "type": "E-commerce/Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.906,
+              39.85485
+            ],
+            [
+              -85.90185,
+              39.85485
+            ],
+            [
+              -85.90185,
+              39.85625
+            ],
+            [
+              -85.906,
+              39.85625
+            ],
+            [
+              -85.906,
+              39.85485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, McCordsville IN",
+        "type": "E-commerce/Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.91005,
+              39.854
+            ],
+            [
+              -85.9096,
+              39.854
+            ],
+            [
+              -85.9096,
+              39.8554
+            ],
+            [
+              -85.91005,
+              39.8554
+            ],
+            [
+              -85.91005,
+              39.854
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, McCordsville IN",
+        "type": "E-commerce/Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.9095,
+              39.85405
+            ],
+            [
+              -85.9032,
+              39.85405
+            ],
+            [
+              -85.9032,
+              39.8547
+            ],
+            [
+              -85.9095,
+              39.8547
+            ],
+            [
+              -85.9095,
+              39.85405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, McCordsville IN",
+        "type": "E-commerce/Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0952,
+              41.4634
+            ],
+            [
+              -88.0998,
+              41.4636
+            ],
+            [
+              -88.1046,
+              41.463
+            ],
+            [
+              -88.1054,
+              41.4618
+            ],
+            [
+              -88.1042,
+              41.4577
+            ],
+            [
+              -88.1003,
+              41.4582
+            ],
+            [
+              -88.0973,
+              41.4593
+            ],
+            [
+              -88.0949,
+              41.4627
+            ],
+            [
+              -88.0952,
+              41.4634
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, Joliet IL",
+        "type": "E-commerce/Fulfillment Center (1.1M sf next-gen FC)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 102,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0968,
+              41.46255
+            ],
+            [
+              -88.0968,
+              41.4619
+            ],
+            [
+              -88.09515,
+              41.4619
+            ],
+            [
+              -88.09515,
+              41.46255
+            ],
+            [
+              -88.0968,
+              41.46255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, Joliet IL",
+        "type": "E-commerce/Fulfillment Center (1.1M sf next-gen FC)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.10395,
+              41.45844
+            ],
+            [
+              -88.1034,
+              41.45772
+            ],
+            [
+              -88.0981,
+              41.45878
+            ],
+            [
+              -88.09855,
+              41.45964
+            ],
+            [
+              -88.10395,
+              41.45844
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, Joliet IL",
+        "type": "E-commerce/Fulfillment Center (1.1M sf next-gen FC)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1046,
+              41.46256
+            ],
+            [
+              -88.10465,
+              41.4622
+            ],
+            [
+              -88.0971,
+              41.46095
+            ],
+            [
+              -88.09705,
+              41.46131
+            ],
+            [
+              -88.1046,
+              41.46256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, Joliet IL",
+        "type": "E-commerce/Fulfillment Center (1.1M sf next-gen FC)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.104,
+              41.4588
+            ],
+            [
+              -88.10395,
+              41.45844
+            ],
+            [
+              -88.09855,
+              41.45964
+            ],
+            [
+              -88.0986,
+              41.46
+            ],
+            [
+              -88.104,
+              41.4588
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Fulfillment Center, Joliet IL",
+        "type": "E-commerce/Fulfillment Center (1.1M sf next-gen FC)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.601414,
+              37.204368
+            ],
+            [
+              -76.604092,
+              37.200375
+            ],
+            [
+              -76.603611,
+              37.198187
+            ],
+            [
+              -76.596813,
+              37.195288
+            ],
+            [
+              -76.593655,
+              37.196218
+            ],
+            [
+              -76.591252,
+              37.1995
+            ],
+            [
+              -76.592007,
+              37.202071
+            ],
+            [
+              -76.601414,
+              37.204368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 500,
+          "trailersVisible": 450,
+          "trailerParkingCapacity": 800,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 191,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.595472,
+              37.202119
+            ],
+            [
+              -76.595575,
+              37.202057
+            ],
+            [
+              -76.5953,
+              37.201914
+            ],
+            [
+              -76.595197,
+              37.201968
+            ],
+            [
+              -76.595472,
+              37.202119
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.603199,
+              37.204039
+            ],
+            [
+              -76.604023,
+              37.200484
+            ],
+            [
+              -76.602787,
+              37.198898
+            ],
+            [
+              -76.600247,
+              37.202071
+            ],
+            [
+              -76.603199,
+              37.204039
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.600178,
+              37.201961
+            ],
+            [
+              -76.601551,
+              37.200375
+            ],
+            [
+              -76.593517,
+              37.198297
+            ],
+            [
+              -76.592556,
+              37.199938
+            ],
+            [
+              -76.600178,
+              37.201961
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.600796,
+              37.203875
+            ],
+            [
+              -76.592007,
+              37.201688
+            ],
+            [
+              -76.591892,
+              37.201988
+            ],
+            [
+              -76.600681,
+              37.204175
+            ],
+            [
+              -76.600796,
+              37.203875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.600315,
+              37.202071
+            ],
+            [
+              -76.60043,
+              37.201771
+            ],
+            [
+              -76.591641,
+              37.199747
+            ],
+            [
+              -76.591526,
+              37.200047
+            ],
+            [
+              -76.600315,
+              37.202071
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.602993,
+              37.199555
+            ],
+            [
+              -76.594479,
+              37.197476
+            ],
+            [
+              -76.594364,
+              37.197776
+            ],
+            [
+              -76.602878,
+              37.199855
+            ],
+            [
+              -76.602993,
+              37.199555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.602924,
+              37.198898
+            ],
+            [
+              -76.603039,
+              37.198598
+            ],
+            [
+              -76.594113,
+              37.19652
+            ],
+            [
+              -76.593998,
+              37.19682
+            ],
+            [
+              -76.602924,
+              37.198898
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6088, Williamsburg VA",
+        "type": "Import DC (large, port-fed)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55765,
+              34.01158
+            ],
+            [
+              -117.55762,
+              34.00992
+            ],
+            [
+              -117.5512,
+              34.00983
+            ],
+            [
+              -117.55125,
+              34.01147
+            ],
+            [
+              -117.55765,
+              34.01158
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6060, Eastvale CA",
+        "type": "Import DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55764,
+              34.01014
+            ],
+            [
+              -117.55764,
+              34.00989
+            ],
+            [
+              -117.55656,
+              34.00988
+            ],
+            [
+              -117.55656,
+              34.01013
+            ],
+            [
+              -117.55764,
+              34.01014
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6060, Eastvale CA",
+        "type": "Import DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5549,
+              34.01288
+            ],
+            [
+              -117.5549,
+              34.01193
+            ],
+            [
+              -117.5513,
+              34.0119
+            ],
+            [
+              -117.5513,
+              34.01284
+            ],
+            [
+              -117.5549,
+              34.01288
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6060, Eastvale CA",
+        "type": "Import DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5576,
+              34.01154
+            ],
+            [
+              -117.5576,
+              34.01123
+            ],
+            [
+              -117.55132,
+              34.01116
+            ],
+            [
+              -117.5513,
+              34.01146
+            ],
+            [
+              -117.5576,
+              34.01154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6060, Eastvale CA",
+        "type": "Import DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5576,
+              34.01013
+            ],
+            [
+              -117.5576,
+              34.00983
+            ],
+            [
+              -117.55134,
+              34.00976
+            ],
+            [
+              -117.55132,
+              34.01006
+            ],
+            [
+              -117.5576,
+              34.01013
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Import DC 6060, Eastvale CA",
+        "type": "Import DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.603465,
+              33.716256
+            ],
+            [
+              -84.603877,
+              33.715343
+            ],
+            [
+              -84.604289,
+              33.714372
+            ],
+            [
+              -84.604014,
+              33.713172
+            ],
+            [
+              -84.598658,
+              33.712829
+            ],
+            [
+              -84.598246,
+              33.713629
+            ],
+            [
+              -84.598933,
+              33.715914
+            ],
+            [
+              -84.603465,
+              33.716256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4047, Atlanta GA",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.59954,
+              33.714521
+            ],
+            [
+              -84.599575,
+              33.71435
+            ],
+            [
+              -84.599128,
+              33.714236
+            ],
+            [
+              -84.599094,
+              33.714407
+            ],
+            [
+              -84.59954,
+              33.714521
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4047, Atlanta GA",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.603327,
+              33.716028
+            ],
+            [
+              -84.603602,
+              33.715114
+            ],
+            [
+              -84.599345,
+              33.714943
+            ],
+            [
+              -84.59907,
+              33.715799
+            ],
+            [
+              -84.603327,
+              33.716028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4047, Atlanta GA",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.604151,
+              33.7146
+            ],
+            [
+              -84.604083,
+              33.7142
+            ],
+            [
+              -84.599276,
+              33.713743
+            ],
+            [
+              -84.599345,
+              33.714143
+            ],
+            [
+              -84.604151,
+              33.7146
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4047, Atlanta GA",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.604014,
+              33.713138
+            ],
+            [
+              -84.604083,
+              33.712738
+            ],
+            [
+              -84.599276,
+              33.71243
+            ],
+            [
+              -84.599207,
+              33.712829
+            ],
+            [
+              -84.604014,
+              33.713138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4047, Atlanta GA",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6785,
+              33.80955
+            ],
+            [
+              -83.68,
+              33.80905
+            ],
+            [
+              -83.6818,
+              33.8088
+            ],
+            [
+              -83.68135,
+              33.8056
+            ],
+            [
+              -83.67865,
+              33.80425
+            ],
+            [
+              -83.67615,
+              33.80485
+            ],
+            [
+              -83.6752,
+              33.80585
+            ],
+            [
+              -83.67615,
+              33.8082
+            ],
+            [
+              -83.67755,
+              33.8093
+            ],
+            [
+              -83.6785,
+              33.80955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 63.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.67625,
+              33.80668
+            ],
+            [
+              -83.6764,
+              33.80631
+            ],
+            [
+              -83.67575,
+              33.80618
+            ],
+            [
+              -83.6756,
+              33.80655
+            ],
+            [
+              -83.67625,
+              33.80668
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.68155,
+              33.8088
+            ],
+            [
+              -83.6822,
+              33.80715
+            ],
+            [
+              -83.68045,
+              33.8067
+            ],
+            [
+              -83.6798,
+              33.80835
+            ],
+            [
+              -83.68155,
+              33.8088
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6793,
+              33.8092
+            ],
+            [
+              -83.67965,
+              33.80815
+            ],
+            [
+              -83.67835,
+              33.8079
+            ],
+            [
+              -83.678,
+              33.80895
+            ],
+            [
+              -83.6793,
+              33.8092
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.68085,
+              33.8073
+            ],
+            [
+              -83.6804,
+              33.8056
+            ],
+            [
+              -83.68,
+              33.80548
+            ],
+            [
+              -83.68045,
+              33.80718
+            ],
+            [
+              -83.68085,
+              33.8073
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.67865,
+              33.8047
+            ],
+            [
+              -83.6788,
+              33.80443
+            ],
+            [
+              -83.67785,
+              33.80418
+            ],
+            [
+              -83.6777,
+              33.80445
+            ],
+            [
+              -83.67865,
+              33.8047
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6776,
+              33.80795
+            ],
+            [
+              -83.67765,
+              33.80768
+            ],
+            [
+              -83.67645,
+              33.80758
+            ],
+            [
+              -83.6764,
+              33.80785
+            ],
+            [
+              -83.6776,
+              33.80795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Grocery DC 6055, Monroe GA",
+        "type": "Grocery/Perishable DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5132,
+              40.6245
+            ],
+            [
+              -112.5135,
+              40.6205
+            ],
+            [
+              -112.5085,
+              40.616
+            ],
+            [
+              -112.505,
+              40.617
+            ],
+            [
+              -112.5048,
+              40.6235
+            ],
+            [
+              -112.5088,
+              40.6258
+            ],
+            [
+              -112.5132,
+              40.6245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 700,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 146.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.512,
+              40.62415
+            ],
+            [
+              -112.51135,
+              40.6233
+            ],
+            [
+              -112.5108,
+              40.6236
+            ],
+            [
+              -112.51145,
+              40.62445
+            ],
+            [
+              -112.512,
+              40.62415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5128,
+              40.6232
+            ],
+            [
+              -112.5142,
+              40.6222
+            ],
+            [
+              -112.5088,
+              40.617
+            ],
+            [
+              -112.5074,
+              40.618
+            ],
+            [
+              -112.5128,
+              40.6232
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5066,
+              40.6178
+            ],
+            [
+              -112.5096,
+              40.6196
+            ],
+            [
+              -112.5102,
+              40.6175
+            ],
+            [
+              -112.5078,
+              40.6166
+            ],
+            [
+              -112.5066,
+              40.6178
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5104,
+              40.6248
+            ],
+            [
+              -112.5112,
+              40.624
+            ],
+            [
+              -112.5082,
+              40.6228
+            ],
+            [
+              -112.5074,
+              40.6236
+            ],
+            [
+              -112.5104,
+              40.6248
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5126,
+              40.6238
+            ],
+            [
+              -112.5133,
+              40.6234
+            ],
+            [
+              -112.507,
+              40.6174
+            ],
+            [
+              -112.5063,
+              40.6178
+            ],
+            [
+              -112.5126,
+              40.6238
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5118,
+              40.624
+            ],
+            [
+              -112.5082,
+              40.6232
+            ],
+            [
+              -112.5078,
+              40.6238
+            ],
+            [
+              -112.5114,
+              40.6246
+            ],
+            [
+              -112.5118,
+              40.624
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.5106,
+              40.6247
+            ],
+            [
+              -112.5113,
+              40.6244
+            ],
+            [
+              -112.5108,
+              40.6233
+            ],
+            [
+              -112.5101,
+              40.6236
+            ],
+            [
+              -112.5106,
+              40.6247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 7026, Grantsville UT",
+        "type": "General Merchandise Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.81345,
+              42.04565
+            ],
+            [
+              -75.81455,
+              42.04445
+            ],
+            [
+              -75.8116,
+              42.04075
+            ],
+            [
+              -75.8099,
+              42.03965
+            ],
+            [
+              -75.8087,
+              42.04085
+            ],
+            [
+              -75.8072,
+              42.0433
+            ],
+            [
+              -75.8079,
+              42.0454
+            ],
+            [
+              -75.8098,
+              42.046
+            ],
+            [
+              -75.8125,
+              42.0461
+            ],
+            [
+              -75.81345,
+              42.04565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4020, Conklin NY",
+        "type": "General Merchandise DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8143,
+              42.0449
+            ],
+            [
+              -75.81405,
+              42.0447
+            ],
+            [
+              -75.8136,
+              42.04435
+            ],
+            [
+              -75.81385,
+              42.04455
+            ],
+            [
+              -75.8143,
+              42.0449
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4020, Conklin NY",
+        "type": "General Merchandise DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.80905,
+              42.0451
+            ],
+            [
+              -75.8106,
+              42.04275
+            ],
+            [
+              -75.8091,
+              42.04205
+            ],
+            [
+              -75.80755,
+              42.0444
+            ],
+            [
+              -75.80905,
+              42.0451
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4020, Conklin NY",
+        "type": "General Merchandise DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.81245,
+              42.0453
+            ],
+            [
+              -75.8129,
+              42.0447
+            ],
+            [
+              -75.81175,
+              42.04415
+            ],
+            [
+              -75.8113,
+              42.04475
+            ],
+            [
+              -75.81245,
+              42.0453
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4020, Conklin NY",
+        "type": "General Merchandise DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.81075,
+              42.045
+            ],
+            [
+              -75.81345,
+              42.0414
+            ],
+            [
+              -75.8123,
+              42.04085
+            ],
+            [
+              -75.8096,
+              42.04445
+            ],
+            [
+              -75.81075,
+              42.045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4020, Conklin NY",
+        "type": "General Merchandise DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8142,
+              42.0442
+            ],
+            [
+              -75.8166,
+              42.04085
+            ],
+            [
+              -75.8156,
+              42.04035
+            ],
+            [
+              -75.8132,
+              42.0437
+            ],
+            [
+              -75.8142,
+              42.0442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "walmart",
+        "name": "Walmart Regional DC 4020, Conklin NY",
+        "type": "General Merchandise DC",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

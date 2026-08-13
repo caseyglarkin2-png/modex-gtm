@@ -1,0 +1,1824 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0965,
+              41.7814
+            ],
+            [
+              -71.0964,
+              41.7785
+            ],
+            [
+              -71.0943,
+              41.77735
+            ],
+            [
+              -71.0918,
+              41.778
+            ],
+            [
+              -71.0908,
+              41.7788
+            ],
+            [
+              -71.0908,
+              41.7801
+            ],
+            [
+              -71.0925,
+              41.7808
+            ],
+            [
+              -71.0965,
+              41.7814
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 38.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0927,
+              41.77945
+            ],
+            [
+              -71.09285,
+              41.7791
+            ],
+            [
+              -71.09225,
+              41.77895
+            ],
+            [
+              -71.0921,
+              41.7793
+            ],
+            [
+              -71.0927,
+              41.77945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0923,
+              41.7801
+            ],
+            [
+              -71.0928,
+              41.77905
+            ],
+            [
+              -71.0914,
+              41.77855
+            ],
+            [
+              -71.09095,
+              41.77955
+            ],
+            [
+              -71.0923,
+              41.7801
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0914,
+              41.77855
+            ],
+            [
+              -71.0936,
+              41.778
+            ],
+            [
+              -71.0933,
+              41.77745
+            ],
+            [
+              -71.09185,
+              41.778
+            ],
+            [
+              -71.0914,
+              41.77855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0938,
+              41.7802
+            ],
+            [
+              -71.0953,
+              41.778
+            ],
+            [
+              -71.0949,
+              41.77775
+            ],
+            [
+              -71.0934,
+              41.77995
+            ],
+            [
+              -71.0938,
+              41.7802
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0929,
+              41.7805
+            ],
+            [
+              -71.0933,
+              41.7803
+            ],
+            [
+              -71.09195,
+              41.778
+            ],
+            [
+              -71.09155,
+              41.7782
+            ],
+            [
+              -71.0929,
+              41.7805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0933,
+              41.7793
+            ],
+            [
+              -71.0935,
+              41.7789
+            ],
+            [
+              -71.09275,
+              41.77855
+            ],
+            [
+              -71.09255,
+              41.77895
+            ],
+            [
+              -71.0933,
+              41.7793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.096,
+              41.78075
+            ],
+            [
+              -71.0964,
+              41.77855
+            ],
+            [
+              -71.0947,
+              41.778
+            ],
+            [
+              -71.0923,
+              41.7777
+            ],
+            [
+              -71.0908,
+              41.778
+            ],
+            [
+              -71.0906,
+              41.7793
+            ],
+            [
+              -71.0921,
+              41.7801
+            ],
+            [
+              -71.0942,
+              41.7801
+            ],
+            [
+              -71.096,
+              41.78075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.09135,
+              41.7793
+            ],
+            [
+              -71.0914,
+              41.77855
+            ],
+            [
+              -71.091,
+              41.77855
+            ],
+            [
+              -71.09095,
+              41.7793
+            ],
+            [
+              -71.09135,
+              41.7793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0933,
+              41.78
+            ],
+            [
+              -71.094,
+              41.77905
+            ],
+            [
+              -71.0925,
+              41.77835
+            ],
+            [
+              -71.0918,
+              41.7793
+            ],
+            [
+              -71.0933,
+              41.78
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0942,
+              41.7782
+            ],
+            [
+              -71.09455,
+              41.7777
+            ],
+            [
+              -71.09385,
+              41.77745
+            ],
+            [
+              -71.0935,
+              41.77795
+            ],
+            [
+              -71.0942,
+              41.7782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0943,
+              41.78005
+            ],
+            [
+              -71.09445,
+              41.7799
+            ],
+            [
+              -71.0931,
+              41.7793
+            ],
+            [
+              -71.09295,
+              41.77945
+            ],
+            [
+              -71.0943,
+              41.78005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0959,
+              41.7793
+            ],
+            [
+              -71.09618,
+              41.77923
+            ],
+            [
+              -71.09558,
+              41.77818
+            ],
+            [
+              -71.0953,
+              41.77825
+            ],
+            [
+              -71.0959,
+              41.7793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.0906,
+              41.7787
+            ],
+            [
+              -71.091,
+              41.77775
+            ],
+            [
+              -71.0903,
+              41.7776
+            ],
+            [
+              -71.0899,
+              41.77855
+            ],
+            [
+              -71.0906,
+              41.7787
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Freetown MA",
+        "type": "Fresh DC",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.5672,
+              41.8019
+            ],
+            [
+              -72.5674,
+              41.799
+            ],
+            [
+              -72.566,
+              41.7965
+            ],
+            [
+              -72.5643,
+              41.79555
+            ],
+            [
+              -72.56185,
+              41.79565
+            ],
+            [
+              -72.5602,
+              41.7978
+            ],
+            [
+              -72.5598,
+              41.8009
+            ],
+            [
+              -72.5626,
+              41.80235
+            ],
+            [
+              -72.5672,
+              41.8019
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+        "type": "Grocery Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 170,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 93,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.56185,
+              41.8033
+            ],
+            [
+              -72.5621,
+              41.8028
+            ],
+            [
+              -72.5616,
+              41.80265
+            ],
+            [
+              -72.56135,
+              41.80315
+            ],
+            [
+              -72.56185,
+              41.8033
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+        "type": "Grocery Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.5647,
+              41.7977
+            ],
+            [
+              -72.5652,
+              41.7964
+            ],
+            [
+              -72.5627,
+              41.79615
+            ],
+            [
+              -72.5623,
+              41.7974
+            ],
+            [
+              -72.5647,
+              41.7977
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+        "type": "Grocery Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.56185,
+              41.80265
+            ],
+            [
+              -72.56215,
+              41.80145
+            ],
+            [
+              -72.56025,
+              41.8013
+            ],
+            [
+              -72.55995,
+              41.8025
+            ],
+            [
+              -72.56185,
+              41.80265
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+        "type": "Grocery Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.56305,
+              41.79735
+            ],
+            [
+              -72.5632,
+              41.7969
+            ],
+            [
+              -72.56135,
+              41.79665
+            ],
+            [
+              -72.5612,
+              41.7971
+            ],
+            [
+              -72.56305,
+              41.79735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+        "type": "Grocery Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.5643,
+              41.8021
+            ],
+            [
+              -72.56445,
+              41.80165
+            ],
+            [
+              -72.56285,
+              41.8015
+            ],
+            [
+              -72.5627,
+              41.80195
+            ],
+            [
+              -72.5643,
+              41.8021
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+        "type": "Grocery Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.67295,
+              42.49755
+            ],
+            [
+              -73.6725,
+              42.496
+            ],
+            [
+              -73.6714,
+              42.4938
+            ],
+            [
+              -73.6689,
+              42.493
+            ],
+            [
+              -73.6676,
+              42.4938
+            ],
+            [
+              -73.667,
+              42.4967
+            ],
+            [
+              -73.6688,
+              42.49785
+            ],
+            [
+              -73.67295,
+              42.49755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Schodack Landing NY (ADUSA DC02)",
+        "type": "Fresh DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 46.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.6727,
+              42.49735
+            ],
+            [
+              -73.6729,
+              42.497
+            ],
+            [
+              -73.67235,
+              42.49685
+            ],
+            [
+              -73.67215,
+              42.4972
+            ],
+            [
+              -73.6727,
+              42.49735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Schodack Landing NY (ADUSA DC02)",
+        "type": "Fresh DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.6683,
+              42.4949
+            ],
+            [
+              -73.66895,
+              42.4939
+            ],
+            [
+              -73.6676,
+              42.4933
+            ],
+            [
+              -73.667,
+              42.4943
+            ],
+            [
+              -73.6683,
+              42.4949
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Schodack Landing NY (ADUSA DC02)",
+        "type": "Fresh DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.6679,
+              42.4969
+            ],
+            [
+              -73.6684,
+              42.4961
+            ],
+            [
+              -73.66745,
+              42.4956
+            ],
+            [
+              -73.667,
+              42.4964
+            ],
+            [
+              -73.6679,
+              42.4969
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Schodack Landing NY (ADUSA DC02)",
+        "type": "Fresh DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.66835,
+              42.4972
+            ],
+            [
+              -73.66958,
+              42.495
+            ],
+            [
+              -73.6693,
+              42.4949
+            ],
+            [
+              -73.6681,
+              42.4971
+            ],
+            [
+              -73.66835,
+              42.4972
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Fresh DC Schodack Landing NY (ADUSA DC02)",
+        "type": "Fresh DC",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.372539,
+              40.690603
+            ],
+            [
+              -75.373134,
+              40.688
+            ],
+            [
+              -75.37318,
+              40.685223
+            ],
+            [
+              -75.371692,
+              40.684008
+            ],
+            [
+              -75.365856,
+              40.685744
+            ],
+            [
+              -75.363841,
+              40.686959
+            ],
+            [
+              -75.364025,
+              40.687479
+            ],
+            [
+              -75.365283,
+              40.689649
+            ],
+            [
+              -75.367,
+              40.689649
+            ],
+            [
+              -75.367458,
+              40.690638
+            ],
+            [
+              -75.372539,
+              40.690603
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 104.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.364368,
+              40.687688
+            ],
+            [
+              -75.364711,
+              40.687167
+            ],
+            [
+              -75.364025,
+              40.686959
+            ],
+            [
+              -75.363681,
+              40.687479
+            ],
+            [
+              -75.364368,
+              40.687688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.372493,
+              40.690603
+            ],
+            [
+              -75.370433,
+              40.689302
+            ],
+            [
+              -75.367229,
+              40.689649
+            ],
+            [
+              -75.367687,
+              40.690603
+            ],
+            [
+              -75.372493,
+              40.690603
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.373363,
+              40.686126
+            ],
+            [
+              -75.372951,
+              40.685779
+            ],
+            [
+              -75.365352,
+              40.688729
+            ],
+            [
+              -75.365627,
+              40.689076
+            ],
+            [
+              -75.373363,
+              40.686126
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.372493,
+              40.684911
+            ],
+            [
+              -75.37215,
+              40.684564
+            ],
+            [
+              -75.364528,
+              40.687479
+            ],
+            [
+              -75.364826,
+              40.687826
+            ],
+            [
+              -75.372493,
+              40.684911
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+        "type": "Grocery Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.86012,
+              41.69432
+            ],
+            [
+              -72.86058,
+              41.69262
+            ],
+            [
+              -72.85878,
+              41.69128
+            ],
+            [
+              -72.85708,
+              41.69178
+            ],
+            [
+              -72.85628,
+              41.69333
+            ],
+            [
+              -72.86012,
+              41.69432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Frozen DC Plainville CT",
+        "type": "Frozen DC",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.85698,
+              41.69318
+            ],
+            [
+              -72.85722,
+              41.6928
+            ],
+            [
+              -72.85672,
+              41.69262
+            ],
+            [
+              -72.85648,
+              41.693
+            ],
+            [
+              -72.85698,
+              41.69318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Frozen DC Plainville CT",
+        "type": "Frozen DC",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.85988,
+              41.69408
+            ],
+            [
+              -72.86018,
+              41.69354
+            ],
+            [
+              -72.85768,
+              41.69288
+            ],
+            [
+              -72.85738,
+              41.69342
+            ],
+            [
+              -72.85988,
+              41.69408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Frozen DC Plainville CT",
+        "type": "Frozen DC",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.85918,
+              41.6933
+            ],
+            [
+              -72.85936,
+              41.69306
+            ],
+            [
+              -72.85758,
+              41.69238
+            ],
+            [
+              -72.8574,
+              41.69262
+            ],
+            [
+              -72.85918,
+              41.6933
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Frozen DC Plainville CT",
+        "type": "Frozen DC",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.28825,
+              41.34735
+            ],
+            [
+              -74.28805,
+              41.34395
+            ],
+            [
+              -74.2841,
+              41.3438
+            ],
+            [
+              -74.2825,
+              41.3447
+            ],
+            [
+              -74.2832,
+              41.3476
+            ],
+            [
+              -74.28825,
+              41.34735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Cross-Dock Chester NY",
+        "type": "Cross-Dock",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 43.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.28595,
+              41.34745
+            ],
+            [
+              -74.28595,
+              41.34705
+            ],
+            [
+              -74.28525,
+              41.34705
+            ],
+            [
+              -74.28525,
+              41.34745
+            ],
+            [
+              -74.28595,
+              41.34745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Cross-Dock Chester NY",
+        "type": "Cross-Dock",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.28475,
+              41.34655
+            ],
+            [
+              -74.28505,
+              41.34465
+            ],
+            [
+              -74.28315,
+              41.34445
+            ],
+            [
+              -74.28285,
+              41.3463
+            ],
+            [
+              -74.28475,
+              41.34655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Cross-Dock Chester NY",
+        "type": "Cross-Dock",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.28785,
+              41.34415
+            ],
+            [
+              -74.28785,
+              41.3439
+            ],
+            [
+              -74.28525,
+              41.34385
+            ],
+            [
+              -74.28525,
+              41.3441
+            ],
+            [
+              -74.28785,
+              41.34415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Cross-Dock Chester NY",
+        "type": "Cross-Dock",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.28805,
+              41.34455
+            ],
+            [
+              -74.28805,
+              41.3444
+            ],
+            [
+              -74.28515,
+              41.34435
+            ],
+            [
+              -74.28515,
+              41.3445
+            ],
+            [
+              -74.28805,
+              41.34455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Cross-Dock Chester NY",
+        "type": "Cross-Dock",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.28805,
+              41.34595
+            ],
+            [
+              -74.28805,
+              41.34465
+            ],
+            [
+              -74.28785,
+              41.34465
+            ],
+            [
+              -74.28785,
+              41.34595
+            ],
+            [
+              -74.28805,
+              41.34595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "stop-and-shop",
+        "name": "Stop & Shop Cross-Dock Chester NY",
+        "type": "Cross-Dock",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

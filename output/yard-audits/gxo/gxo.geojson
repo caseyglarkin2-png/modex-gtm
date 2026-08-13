@@ -8,24 +8,24 @@
         "coordinates": [
           [
             [
-              -77.7658,
-              39.6014
+              -77.763349,
+              39.605543
             ],
             [
-              -77.7556,
-              39.6014
+              -77.762525,
+              39.603004
             ],
             [
-              -77.7556,
-              39.6074
+              -77.75813,
+              39.603427
             ],
             [
-              -77.7658,
-              39.6074
+              -77.758954,
+              39.605967
             ],
             [
-              -77.7658,
-              39.6014
+              -77.763349,
+              39.605543
             ]
           ]
         ]
@@ -68,222 +68,24 @@
         "coordinates": [
           [
             [
-              -77.75845,
-              39.60255
+              -112.426607,
+              33.413261
             ],
             [
-              -77.75785,
-              39.60255
+              -112.426744,
+              33.410395
             ],
             [
-              -77.75785,
-              39.60295
+              -112.418779,
+              33.41028
             ],
             [
-              -77.75845,
-              39.60295
+              -112.418641,
+              33.413146
             ],
             [
-              -77.75845,
-              39.60255
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Conair Distribution Center - Hagerstown MD",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.7609,
-              39.6031
-            ],
-            [
-              -77.7566,
-              39.6031
-            ],
-            [
-              -77.7566,
-              39.6042
-            ],
-            [
-              -77.7609,
-              39.6042
-            ],
-            [
-              -77.7609,
-              39.6031
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Conair Distribution Center - Hagerstown MD",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.7624,
-              39.6037
-            ],
-            [
-              -77.7618,
-              39.6037
-            ],
-            [
-              -77.7618,
-              39.6052
-            ],
-            [
-              -77.7624,
-              39.6052
-            ],
-            [
-              -77.7624,
-              39.6037
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Conair Distribution Center - Hagerstown MD",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.762,
-              39.6054
-            ],
-            [
-              -77.756,
-              39.6054
-            ],
-            [
-              -77.756,
-              39.6059
-            ],
-            [
-              -77.762,
-              39.6059
-            ],
-            [
-              -77.762,
-              39.6054
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Conair Distribution Center - Hagerstown MD",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.7594,
-              39.6029
-            ],
-            [
-              -77.758,
-              39.6029
-            ],
-            [
-              -77.758,
-              39.6033
-            ],
-            [
-              -77.7594,
-              39.6033
-            ],
-            [
-              -77.7594,
-              39.6029
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Conair Distribution Center - Hagerstown MD",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -112.4262,
-              33.4106
-            ],
-            [
-              -112.418,
-              33.4106
-            ],
-            [
-              -112.418,
-              33.414
-            ],
-            [
-              -112.4262,
-              33.414
-            ],
-            [
-              -112.4262,
-              33.4106
+              -112.426607,
+              33.413261
             ]
           ]
         ]
@@ -326,24 +128,24 @@
         "coordinates": [
           [
             [
-              -112.4216,
-              33.4132
+              -112.426469,
+              33.411427
             ],
             [
-              -112.421,
-              33.4132
+              -112.426469,
+              33.410624
             ],
             [
-              -112.421,
-              33.41355
+              -112.425645,
+              33.410624
             ],
             [
-              -112.4216,
-              33.41355
+              -112.425645,
+              33.411427
             ],
             [
-              -112.4216,
-              33.4132
+              -112.426469,
+              33.411427
             ]
           ]
         ]
@@ -365,24 +167,24 @@
         "coordinates": [
           [
             [
-              -112.4258,
-              33.41335
+              -112.426195,
+              33.413032
             ],
             [
-              -112.4182,
-              33.41335
+              -112.426195,
+              33.412573
             ],
             [
-              -112.4182,
-              33.41395
+              -112.419603,
+              33.412459
             ],
             [
-              -112.4258,
-              33.41395
+              -112.419603,
+              33.412917
             ],
             [
-              -112.4258,
-              33.41335
+              -112.426195,
+              33.413032
             ]
           ]
         ]
@@ -405,64 +207,24 @@
         "coordinates": [
           [
             [
-              -112.419,
-              33.4127
+              -112.426195,
+              33.411198
             ],
             [
-              -112.4182,
-              33.4127
+              -112.426195,
+              33.410739
             ],
             [
-              -112.4182,
-              33.4133
+              -112.419053,
+              33.410624
             ],
             [
-              -112.419,
-              33.4133
+              -112.419053,
+              33.411083
             ],
             [
-              -112.419,
-              33.4127
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -112.4258,
-              33.4131
-            ],
-            [
-              -112.4184,
-              33.4131
-            ],
-            [
-              -112.4184,
-              33.4134
-            ],
-            [
-              -112.4258,
-              33.4134
-            ],
-            [
-              -112.4258,
-              33.4131
+              -112.426195,
+              33.411198
             ]
           ]
         ]
@@ -485,103 +247,24 @@
         "coordinates": [
           [
             [
-              -112.4258,
-              33.4109
+              -81.348087,
+              31.77246
             ],
             [
-              -112.4184,
-              33.4109
+              -81.349254,
+              31.769599
             ],
             [
-              -112.4184,
-              33.41125
+              -81.346576,
+              31.768432
             ],
             [
-              -112.4258,
-              33.41125
+              -81.34534,
+              31.771292
             ],
             [
-              -112.4258,
-              33.4109
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -112.4222,
-              33.4132
-            ],
-            [
-              -112.4208,
-              33.4132
-            ],
-            [
-              -112.4208,
-              33.41335
-            ],
-            [
-              -112.4222,
-              33.41335
-            ],
-            [
-              -112.4222,
-              33.4132
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.3493,
-              31.7685
-            ],
-            [
-              -81.3457,
-              31.7685
-            ],
-            [
-              -81.3457,
-              31.7721
-            ],
-            [
-              -81.3493,
-              31.7721
-            ],
-            [
-              -81.3493,
-              31.7685
+              -81.348087,
+              31.77246
             ]
           ]
         ]
@@ -624,103 +307,24 @@
         "coordinates": [
           [
             [
-              -81.3487,
-              31.7692
+              -81.349391,
+              31.770825
             ],
             [
-              -81.3481,
-              31.7692
+              -81.349117,
+              31.770534
             ],
             [
-              -81.3481,
-              31.76955
+              -81.346439,
+              31.772168
             ],
             [
-              -81.3487,
-              31.76955
+              -81.346713,
+              31.77246
             ],
             [
-              -81.3487,
-              31.7692
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.3479,
-              31.7693
-            ],
-            [
-              -81.346,
-              31.7693
-            ],
-            [
-              -81.346,
-              31.7715
-            ],
-            [
-              -81.3479,
-              31.7715
-            ],
-            [
-              -81.3479,
-              31.7693
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.3481,
-              31.7693
-            ],
-            [
-              -81.3462,
-              31.7693
-            ],
-            [
-              -81.3462,
-              31.7716
-            ],
-            [
-              -81.3481,
-              31.7716
-            ],
-            [
-              -81.3481,
-              31.7693
+              -81.349391,
+              31.770825
             ]
           ]
         ]
@@ -743,64 +347,24 @@
         "coordinates": [
           [
             [
-              -81.3491,
-              31.769
+              -84.536405,
+              33.550993
             ],
             [
-              -81.3476,
-              31.769
+              -84.535439,
+              33.553104
             ],
             [
-              -81.3476,
-              31.7713
+              -84.539465,
+              33.554401
             ],
             [
-              -81.3491,
-              31.7713
+              -84.540431,
+              33.55229
             ],
             [
-              -81.3491,
-              31.769
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.54,
-              33.5505
-            ],
-            [
-              -84.535,
-              33.5505
-            ],
-            [
-              -84.535,
-              33.5546
-            ],
-            [
-              -84.54,
-              33.5546
-            ],
-            [
-              -84.54,
-              33.5505
+              -84.536405,
+              33.550993
             ]
           ]
         ]
@@ -843,64 +407,24 @@
         "coordinates": [
           [
             [
-              -84.5396,
-              33.5508
+              -84.536655,
+              33.551634
             ],
             [
-              -84.5364,
-              33.5508
+              -84.536508,
+              33.551955
             ],
             [
-              -84.5364,
-              33.5534
+              -84.539627,
+              33.55296
             ],
             [
-              -84.5396,
-              33.5534
+              -84.539774,
+              33.552639
             ],
             [
-              -84.5396,
-              33.5508
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Fairburn GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.5394,
-              33.551
-            ],
-            [
-              -84.5366,
-              33.551
-            ],
-            [
-              -84.5366,
-              33.5536
-            ],
-            [
-              -84.5394,
-              33.5536
-            ],
-            [
-              -84.5394,
-              33.551
+              -84.536655,
+              33.551634
             ]
           ]
         ]
@@ -923,24 +447,24 @@
         "coordinates": [
           [
             [
-              -86.487,
-              39.6037
+              -86.489114,
+              39.606881
             ],
             [
-              -86.4805,
-              39.6037
+              -86.489114,
+              39.603707
             ],
             [
-              -86.4805,
-              39.6076
+              -86.481424,
+              39.603707
             ],
             [
-              -86.487,
-              39.6076
+              -86.481424,
+              39.606881
             ],
             [
-              -86.487,
-              39.6037
+              -86.489114,
+              39.606881
             ]
           ]
         ]
@@ -983,24 +507,24 @@
         "coordinates": [
           [
             [
-              -86.4816,
-              39.6063
+              -86.481836,
+              39.60741
             ],
             [
-              -86.481,
-              39.6063
+              -86.481836,
+              39.606881
             ],
             [
-              -86.481,
-              39.6067
+              -86.481012,
+              39.606881
             ],
             [
-              -86.4816,
-              39.6067
+              -86.481012,
+              39.60741
             ],
             [
-              -86.4816,
-              39.6063
+              -86.481836,
+              39.60741
             ]
           ]
         ]
@@ -1022,104 +546,24 @@
         "coordinates": [
           [
             [
-              -86.4865,
-              39.6062
+              -86.48884,
+              39.60667
             ],
             [
-              -86.481,
-              39.6062
+              -86.48884,
+              39.606246
             ],
             [
-              -86.481,
-              39.6069
+              -86.481836,
+              39.606246
             ],
             [
-              -86.4865,
-              39.6069
+              -86.481836,
+              39.60667
             ],
             [
-              -86.4865,
-              39.6062
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Super Hub - Clayton IN",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.4865,
-              39.6039
-            ],
-            [
-              -86.481,
-              39.6039
-            ],
-            [
-              -86.481,
-              39.6046
-            ],
-            [
-              -86.4865,
-              39.6046
-            ],
-            [
-              -86.4865,
-              39.6039
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Super Hub - Clayton IN",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.4864,
-              39.606
-            ],
-            [
-              -86.4812,
-              39.606
-            ],
-            [
-              -86.4812,
-              39.60635
-            ],
-            [
-              -86.4864,
-              39.60635
-            ],
-            [
-              -86.4864,
-              39.606
+              -86.48884,
+              39.60667
             ]
           ]
         ]
@@ -1142,24 +586,24 @@
         "coordinates": [
           [
             [
-              -86.4864,
-              39.6044
+              -86.48884,
+              39.604448
             ],
             [
-              -86.4812,
-              39.6044
+              -86.48884,
+              39.604025
             ],
             [
-              -86.4812,
-              39.60475
+              -86.481836,
+              39.604025
             ],
             [
-              -86.4864,
-              39.60475
+              -86.481836,
+              39.604448
             ],
             [
-              -86.4864,
-              39.6044
+              -86.48884,
+              39.604448
             ]
           ]
         ]
@@ -1182,24 +626,24 @@
         "coordinates": [
           [
             [
-              -86.48697,
-              40.0382
+              -86.490793,
+              40.041826
             ],
             [
-              -86.48363,
-              40.0382
+              -86.490793,
+              40.039197
             ],
             [
-              -86.48363,
-              40.0445
+              -86.487223,
+              40.039197
             ],
             [
-              -86.48697,
-              40.0445
+              -86.487223,
+              40.041826
             ],
             [
-              -86.48697,
-              40.0382
+              -86.490793,
+              40.041826
             ]
           ]
         ]
@@ -1242,103 +686,24 @@
         "coordinates": [
           [
             [
-              -86.48655,
-              40.03855
+              -86.48942,
+              40.041721
             ],
             [
-              -86.48595,
-              40.03855
+              -86.48942,
+              40.0413
             ],
             [
-              -86.48595,
-              40.03895
+              -86.487223,
+              40.0413
             ],
             [
-              -86.48655,
-              40.03895
+              -86.487223,
+              40.041721
             ],
             [
-              -86.48655,
-              40.03855
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Lebanon IN",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.48745,
-              40.04205
-            ],
-            [
-              -86.48645,
-              40.04205
-            ],
-            [
-              -86.48645,
-              40.04305
-            ],
-            [
-              -86.48745,
-              40.04305
-            ],
-            [
-              -86.48745,
-              40.04205
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Lebanon IN",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.48655,
-              40.03955
-            ],
-            [
-              -86.48545,
-              40.03955
-            ],
-            [
-              -86.48545,
-              40.04265
-            ],
-            [
-              -86.48655,
-              40.04265
-            ],
-            [
-              -86.48655,
-              40.03955
+              -86.48942,
+              40.041721
             ]
           ]
         ]
@@ -1361,24 +726,24 @@
         "coordinates": [
           [
             [
-              -86.38505,
-              39.96135
+              -86.385995,
+              39.964924
             ],
             [
-              -86.37965,
-              39.96135
+              -86.385171,
+              39.961134
             ],
             [
-              -86.37965,
-              39.96565
+              -86.379678,
+              39.961766
             ],
             [
-              -86.38505,
-              39.96565
+              -86.380502,
+              39.965555
             ],
             [
-              -86.38505,
-              39.96135
+              -86.385995,
+              39.964924
             ]
           ]
         ]
@@ -1421,63 +786,24 @@
         "coordinates": [
           [
             [
-              -86.38475,
-              39.96235
+              -86.384897,
+              39.965239
             ],
             [
-              -86.38405,
-              39.96235
+              -86.384759,
+              39.963976
             ],
             [
-              -86.38405,
-              39.96285
+              -86.380914,
+              39.964292
             ],
             [
-              -86.38475,
-              39.96285
+              -86.381051,
+              39.965555
             ],
             [
-              -86.38475,
-              39.96235
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Whitestown IN",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.38465,
-              39.96255
-            ],
-            [
-              -86.38205,
-              39.96255
-            ],
-            [
-              -86.38205,
-              39.96545
-            ],
-            [
-              -86.38465,
-              39.96545
-            ],
-            [
-              -86.38465,
-              39.96255
+              -86.384897,
+              39.965239
             ]
           ]
         ]
@@ -1500,64 +826,24 @@
         "coordinates": [
           [
             [
-              -86.38215,
-              39.96155
+              -86.385309,
+              39.962924
             ],
             [
-              -86.37985,
-              39.96155
+              -86.385171,
+              39.962397
             ],
             [
-              -86.37985,
-              39.96445
+              -86.380227,
+              39.962924
             ],
             [
-              -86.38215,
-              39.96445
+              -86.380365,
+              39.96345
             ],
             [
-              -86.38215,
-              39.96155
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Whitestown IN",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.38445,
-              39.96305
-            ],
-            [
-              -86.38215,
-              39.96305
-            ],
-            [
-              -86.38215,
-              39.96535
-            ],
-            [
-              -86.38445,
-              39.96535
-            ],
-            [
-              -86.38445,
-              39.96305
+              -86.385309,
+              39.962924
             ]
           ]
         ]
@@ -1580,64 +866,24 @@
         "coordinates": [
           [
             [
-              -86.38235,
-              39.96165
+              -75.348873,
+              40.462631
             ],
             [
-              -86.38015,
-              39.96165
+              -75.34956,
+              40.458869
             ],
             [
-              -86.38015,
-              39.96395
+              -75.346264,
+              40.45866
             ],
             [
-              -86.38235,
-              39.96395
+              -75.345577,
+              40.462422
             ],
             [
-              -86.38235,
-              39.96165
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Whitestown IN",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.35005,
-              40.4583
-            ],
-            [
-              -75.345,
-              40.4583
-            ],
-            [
-              -75.345,
-              40.4632
-            ],
-            [
-              -75.35005,
-              40.4632
-            ],
-            [
-              -75.35005,
-              40.4583
+              -75.348873,
+              40.462631
             ]
           ]
         ]
@@ -1680,103 +926,24 @@
         "coordinates": [
           [
             [
-              -75.3466,
-              40.4585
+              -75.348736,
+              40.462213
             ],
             [
-              -75.3458,
-              40.4585
+              -75.348873,
+              40.46169
             ],
             [
-              -75.3458,
-              40.45905
+              -75.345989,
+              40.461481
             ],
             [
-              -75.3466,
-              40.45905
+              -75.345852,
+              40.462004
             ],
             [
-              -75.3466,
-              40.4585
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
-        "type": "Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3473,
-              40.45855
-            ],
-            [
-              -75.3452,
-              40.45855
-            ],
-            [
-              -75.3452,
-              40.4601
-            ],
-            [
-              -75.3473,
-              40.4601
-            ],
-            [
-              -75.3473,
-              40.45855
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
-        "type": "Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3472,
-              40.45895
-            ],
-            [
-              -75.3453,
-              40.45895
-            ],
-            [
-              -75.3453,
-              40.46245
-            ],
-            [
-              -75.3472,
-              40.46245
-            ],
-            [
-              -75.3472,
-              40.45895
+              -75.348736,
+              40.462213
             ]
           ]
         ]
@@ -1799,64 +966,24 @@
         "coordinates": [
           [
             [
-              -75.34965,
-              40.46095
+              -77.238381,
+              40.207942
             ],
             [
-              -75.3473,
-              40.46095
+              -77.23742,
+              40.202278
             ],
             [
-              -75.3473,
-              40.46285
+              -77.230553,
+              40.202802
             ],
             [
-              -75.34965,
-              40.46285
+              -77.231515,
+              40.208466
             ],
             [
-              -75.34965,
-              40.46095
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
-        "type": "Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.238,
-              40.20305
-            ],
-            [
-              -77.2287,
-              40.20305
-            ],
-            [
-              -77.2287,
-              40.2068
-            ],
-            [
-              -77.238,
-              40.2068
-            ],
-            [
-              -77.238,
-              40.20305
+              -77.238381,
+              40.207942
             ]
           ]
         ]
@@ -1899,63 +1026,24 @@
         "coordinates": [
           [
             [
-              -77.23755,
-              40.2052
+              -77.231103,
+              40.205634
             ],
             [
-              -77.237,
-              40.2052
+              -77.230965,
+              40.203536
             ],
             [
-              -77.237,
-              40.2056
+              -77.229317,
+              40.203641
             ],
             [
-              -77.23755,
-              40.2056
+              -77.229455,
+              40.205739
             ],
             [
-              -77.23755,
-              40.2052
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Carlisle PA",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.23055,
-              40.20355
-            ],
-            [
-              -77.229,
-              40.20355
-            ],
-            [
-              -77.229,
-              40.2062
-            ],
-            [
-              -77.23055,
-              40.2062
-            ],
-            [
-              -77.23055,
-              40.20355
+              -77.231103,
+              40.205634
             ]
           ]
         ]
@@ -1978,24 +1066,24 @@
         "coordinates": [
           [
             [
-              -77.2374,
-              40.20545
+              -77.237969,
+              40.207837
             ],
             [
-              -77.2298,
-              40.20545
+              -77.237832,
+              40.207207
             ],
             [
-              -77.2298,
-              40.2065
+              -77.231515,
+              40.207732
             ],
             [
-              -77.2374,
-              40.2065
+              -77.231652,
+              40.208361
             ],
             [
-              -77.2374,
-              40.20545
+              -77.237969,
+              40.207837
             ]
           ]
         ]
@@ -2018,24 +1106,24 @@
         "coordinates": [
           [
             [
-              -77.2372,
-              40.20335
+              -77.23742,
+              40.2049
             ],
             [
-              -77.2298,
-              40.20335
+              -77.237283,
+              40.204271
             ],
             [
-              -77.2298,
-              40.20435
+              -77.230965,
+              40.20469
             ],
             [
-              -77.2372,
-              40.20435
+              -77.231103,
+              40.20532
             ],
             [
-              -77.2372,
-              40.20335
+              -77.23742,
+              40.2049
             ]
           ]
         ]
@@ -2058,63 +1146,24 @@
         "coordinates": [
           [
             [
-              -77.2377,
-              40.20475
+              -75.321439,
+              40.607612
             ],
             [
-              -77.237,
-              40.20475
+              -75.310968,
+              40.609096
             ],
             [
-              -77.237,
-              40.2056
+              -75.312607,
+              40.615856
             ],
             [
-              -77.2377,
-              40.2056
+              -75.323078,
+              40.614372
             ],
             [
-              -77.2377,
-              40.20475
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Carlisle PA",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3176,
-              40.6087
-            ],
-            [
-              -75.3132,
-              40.6087
-            ],
-            [
-              -75.3132,
-              40.613
-            ],
-            [
-              -75.3176,
-              40.613
-            ],
-            [
-              -75.3176,
-              40.6087
+              -75.321439,
+              40.607612
             ]
           ]
         ]
@@ -2157,143 +1206,24 @@
         "coordinates": [
           [
             [
-              -75.31708,
-              40.60887
+              -75.316303,
+              40.609765
             ],
             [
-              -75.31662,
-              40.60887
+              -75.315954,
+              40.609815
             ],
             [
-              -75.31662,
-              40.60923
+              -75.316645,
+              40.612661
             ],
             [
-              -75.31708,
-              40.60923
+              -75.316994,
+              40.612611
             ],
             [
-              -75.31708,
-              40.60887
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Bethlehem PA",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3168,
-              40.60955
-            ],
-            [
-              -75.31575,
-              40.60955
-            ],
-            [
-              -75.31575,
-              40.6128
-            ],
-            [
-              -75.3168,
-              40.6128
-            ],
-            [
-              -75.3168,
-              40.60955
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Bethlehem PA",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3143,
-              40.60975
-            ],
-            [
-              -75.3133,
-              40.60975
-            ],
-            [
-              -75.3133,
-              40.61215
-            ],
-            [
-              -75.3143,
-              40.61215
-            ],
-            [
-              -75.3143,
-              40.60975
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Bethlehem PA",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3165,
-              40.60955
-            ],
-            [
-              -75.31585,
-              40.60955
-            ],
-            [
-              -75.31585,
-              40.6127
-            ],
-            [
-              -75.3165,
-              40.6127
-            ],
-            [
-              -75.3165,
-              40.60955
+              -75.316303,
+              40.609765
             ]
           ]
         ]
@@ -2316,103 +1246,24 @@
         "coordinates": [
           [
             [
-              -75.31415,
-              40.6098
+              -76.748872,
+              40.208899
             ],
             [
-              -75.3136,
-              40.6098
+              -76.748872,
+              40.205752
             ],
             [
-              -75.3136,
-              40.6121
+              -76.743516,
+              40.205752
             ],
             [
-              -75.31415,
-              40.6121
+              -76.743516,
+              40.208899
             ],
             [
-              -75.31415,
-              40.6098
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Bethlehem PA",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -75.3172,
-              40.6084
-            ],
-            [
-              -75.3164,
-              40.6084
-            ],
-            [
-              -75.3164,
-              40.609
-            ],
-            [
-              -75.3172,
-              40.609
-            ],
-            [
-              -75.3172,
-              40.6084
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Bethlehem PA",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.7492,
-              40.2064
-            ],
-            [
-              -76.7438,
-              40.2064
-            ],
-            [
-              -76.7438,
-              40.2092
-            ],
-            [
-              -76.7492,
-              40.2092
-            ],
-            [
-              -76.7492,
-              40.2064
+              -76.748872,
+              40.208899
             ]
           ]
         ]
@@ -2455,103 +1306,24 @@
         "coordinates": [
           [
             [
-              -76.744,
-              40.20835
+              -76.748597,
+              40.208689
             ],
             [
-              -76.7434,
-              40.20835
+              -76.748597,
+              40.208165
             ],
             [
-              -76.7434,
-              40.20885
+              -76.743791,
+              40.208165
             ],
             [
-              -76.744,
-              40.20885
+              -76.743791,
+              40.208689
             ],
             [
-              -76.744,
-              40.20835
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Middletown PA",
-        "type": "Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.7492,
-              40.2084
-            ],
-            [
-              -76.744,
-              40.2084
-            ],
-            [
-              -76.744,
-              40.2091
-            ],
-            [
-              -76.7492,
-              40.2091
-            ],
-            [
-              -76.7492,
-              40.2084
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Middletown PA",
-        "type": "Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.7492,
-              40.20815
-            ],
-            [
-              -76.744,
-              40.20815
-            ],
-            [
-              -76.744,
-              40.20855
-            ],
-            [
-              -76.7492,
-              40.20855
-            ],
-            [
-              -76.7492,
-              40.20815
+              -76.748597,
+              40.208689
             ]
           ]
         ]
@@ -2574,24 +1346,64 @@
         "coordinates": [
           [
             [
-              -76.6182,
-              40.3072
+              -76.748597,
+              40.207221
             ],
             [
-              -76.6098,
-              40.3072
+              -76.748597,
+              40.206696
             ],
             [
-              -76.6098,
-              40.3132
+              -76.743791,
+              40.206696
             ],
             [
-              -76.6182,
-              40.3132
+              -76.743791,
+              40.207221
             ],
             [
-              -76.6182,
-              40.3072
+              -76.748597,
+              40.207221
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Middletown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.61862,
+              40.312594
+            ],
+            [
+              -76.61862,
+              40.309243
+            ],
+            [
+              -76.610655,
+              40.309243
+            ],
+            [
+              -76.610655,
+              40.312594
+            ],
+            [
+              -76.61862,
+              40.312594
             ]
           ]
         ]
@@ -2634,24 +1446,24 @@
         "coordinates": [
           [
             [
-              -76.6179,
-              40.3074
+              -76.618071,
+              40.309243
             ],
             [
-              -76.6168,
-              40.3074
+              -76.618071,
+              40.308615
             ],
             [
-              -76.6168,
-              40.3081
+              -76.616972,
+              40.308615
             ],
             [
-              -76.6179,
-              40.3081
+              -76.616972,
+              40.309243
             ],
             [
-              -76.6179,
-              40.3074
+              -76.618071,
+              40.309243
             ]
           ]
         ]
@@ -2673,24 +1485,24 @@
         "coordinates": [
           [
             [
-              -76.6182,
-              40.3123
+              -76.610655,
+              40.312385
             ],
             [
-              -76.6135,
-              40.3123
+              -76.610655,
+              40.310919
             ],
             [
-              -76.6135,
-              40.3132
+              -76.609556,
+              40.310919
             ],
             [
-              -76.6182,
-              40.3132
+              -76.609556,
+              40.312385
             ],
             [
-              -76.6182,
-              40.3123
+              -76.610655,
+              40.312385
             ]
           ]
         ]
@@ -2713,144 +1525,24 @@
         "coordinates": [
           [
             [
-              -76.6135,
-              40.3123
+              -76.618345,
+              40.31249
             ],
             [
-              -76.6098,
-              40.3123
+              -76.618345,
+              40.311966
             ],
             [
-              -76.6098,
-              40.3132
+              -76.610929,
+              40.311966
             ],
             [
-              -76.6135,
-              40.3132
+              -76.610929,
+              40.31249
             ],
             [
-              -76.6135,
-              40.3123
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Palmyra PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.6115,
-              40.3096
-            ],
-            [
-              -76.6098,
-              40.3096
-            ],
-            [
-              -76.6098,
-              40.311
-            ],
-            [
-              -76.6115,
-              40.311
-            ],
-            [
-              -76.6115,
-              40.3096
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Palmyra PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.6182,
-              40.309
-            ],
-            [
-              -76.6155,
-              40.309
-            ],
-            [
-              -76.6155,
-              40.3098
-            ],
-            [
-              -76.6182,
-              40.3098
-            ],
-            [
-              -76.6182,
-              40.309
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Palmyra PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 4
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.6182,
-              40.3118
-            ],
-            [
-              -76.6099,
-              40.3118
-            ],
-            [
-              -76.6099,
-              40.3125
-            ],
-            [
-              -76.6182,
-              40.3125
-            ],
-            [
-              -76.6182,
-              40.3118
+              -76.618345,
+              40.31249
             ]
           ]
         ]
@@ -2873,24 +1565,24 @@
         "coordinates": [
           [
             [
-              -76.6155,
-              40.3093
+              -76.618071,
+              40.309976
             ],
             [
-              -76.6115,
-              40.3093
+              -76.618071,
+              40.309453
             ],
             [
-              -76.6115,
-              40.31
+              -76.611479,
+              40.309453
             ],
             [
-              -76.6155,
-              40.31
+              -76.611479,
+              40.309976
             ],
             [
-              -76.6155,
-              40.3093
+              -76.618071,
+              40.309976
             ]
           ]
         ]
@@ -2913,64 +1605,24 @@
         "coordinates": [
           [
             [
-              -76.6186,
-              40.3095
+              -74.854911,
+              40.016629
             ],
             [
-              -76.6181,
-              40.3095
+              -74.85546,
+              40.011265
             ],
             [
-              -76.6181,
-              40.312
+              -74.852027,
+              40.011055
             ],
             [
-              -76.6186,
-              40.312
+              -74.851477,
+              40.016419
             ],
             [
-              -76.6186,
-              40.3095
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Palmyra PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.8562,
-              40.0108
-            ],
-            [
-              -74.8507,
-              40.0108
-            ],
-            [
-              -74.8507,
-              40.017
-            ],
-            [
-              -74.8562,
-              40.017
-            ],
-            [
-              -74.8562,
-              40.0108
+              -74.854911,
+              40.016629
             ]
           ]
         ]
@@ -3013,143 +1665,24 @@
         "coordinates": [
           [
             [
-              -74.8556,
-              40.0123
+              -74.854636,
+              40.012738
             ],
             [
-              -74.8546,
-              40.0123
+              -74.854773,
+              40.012212
             ],
             [
-              -74.8546,
-              40.013
+              -74.851752,
+              40.012002
             ],
             [
-              -74.8556,
-              40.013
+              -74.851615,
+              40.012527
             ],
             [
-              -74.8556,
-              40.0123
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Distribution Center - Westampton NJ",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.856,
-              40.011
-            ],
-            [
-              -74.8544,
-              40.011
-            ],
-            [
-              -74.8544,
-              40.0168
-            ],
-            [
-              -74.856,
-              40.0168
-            ],
-            [
-              -74.856,
-              40.011
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Distribution Center - Westampton NJ",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.8522,
-              40.011
-            ],
-            [
-              -74.8509,
-              40.011
-            ],
-            [
-              -74.8509,
-              40.0168
-            ],
-            [
-              -74.8522,
-              40.0168
-            ],
-            [
-              -74.8522,
-              40.011
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Distribution Center - Westampton NJ",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -74.8558,
-              40.011
-            ],
-            [
-              -74.855,
-              40.011
-            ],
-            [
-              -74.855,
-              40.0168
-            ],
-            [
-              -74.8558,
-              40.0168
-            ],
-            [
-              -74.8558,
-              40.011
+              -74.854636,
+              40.012738
             ]
           ]
         ]
@@ -3172,64 +1705,24 @@
         "coordinates": [
           [
             [
-              -74.8532,
-              40.011
+              -83.334723,
+              39.946342
             ],
             [
-              -74.8523,
-              40.011
+              -83.334723,
+              39.942026
             ],
             [
-              -74.8523,
-              40.0168
+              -83.331152,
+              39.942026
             ],
             [
-              -74.8532,
-              40.0168
+              -83.331152,
+              39.946342
             ],
             [
-              -74.8532,
-              40.011
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO IKEA Distribution Center - Westampton NJ",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.3353,
-              39.943
-            ],
-            [
-              -83.3301,
-              39.943
-            ],
-            [
-              -83.3301,
-              39.9478
-            ],
-            [
-              -83.3353,
-              39.9478
-            ],
-            [
-              -83.3353,
-              39.943
+              -83.334723,
+              39.946342
             ]
           ]
         ]
@@ -3272,143 +1765,24 @@
         "coordinates": [
           [
             [
-              -83.3345,
-              39.9432
+              -83.334585,
+              39.946132
             ],
             [
-              -83.3337,
-              39.9432
+              -83.334585,
+              39.945605
             ],
             [
-              -83.3337,
-              39.9439
+              -83.331427,
+              39.945605
             ],
             [
-              -83.3345,
-              39.9439
+              -83.331427,
+              39.946132
             ],
             [
-              -83.3345,
-              39.9432
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - West Jefferson OH",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.3347,
-              39.9431
-            ],
-            [
-              -83.3334,
-              39.9431
-            ],
-            [
-              -83.3334,
-              39.947
-            ],
-            [
-              -83.3347,
-              39.947
-            ],
-            [
-              -83.3347,
-              39.9431
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - West Jefferson OH",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.332,
-              39.9447
-            ],
-            [
-              -83.3301,
-              39.9447
-            ],
-            [
-              -83.3301,
-              39.9478
-            ],
-            [
-              -83.332,
-              39.9478
-            ],
-            [
-              -83.332,
-              39.9447
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - West Jefferson OH",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -83.3342,
-              39.9431
-            ],
-            [
-              -83.3333,
-              39.9431
-            ],
-            [
-              -83.3333,
-              39.947
-            ],
-            [
-              -83.3342,
-              39.947
-            ],
-            [
-              -83.3342,
-              39.9431
+              -83.334585,
+              39.946132
             ]
           ]
         ]
@@ -3431,64 +1805,24 @@
         "coordinates": [
           [
             [
-              -83.3326,
-              39.9447
+              -84.195849,
+              33.412082
             ],
             [
-              -83.3317,
-              39.9447
+              -84.195299,
+              33.409446
             ],
             [
-              -83.3317,
-              39.9478
+              -84.19063,
+              33.409904
             ],
             [
-              -83.3326,
-              39.9478
+              -84.191179,
+              33.412541
             ],
             [
-              -83.3326,
-              39.9447
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - West Jefferson OH",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.1955,
-              33.4095
-            ],
-            [
-              -84.1895,
-              33.4095
-            ],
-            [
-              -84.1895,
-              33.4128
-            ],
-            [
-              -84.1955,
-              33.4128
-            ],
-            [
-              -84.1955,
-              33.4095
+              -84.195849,
+              33.412082
             ]
           ]
         ]
@@ -3531,143 +1865,24 @@
         "coordinates": [
           [
             [
-              -84.195,
-              33.4099
+              -84.195711,
+              33.410936
             ],
             [
-              -84.194,
-              33.4099
+              -84.195574,
+              33.410363
             ],
             [
-              -84.194,
-              33.4106
+              -84.190905,
+              33.410821
             ],
             [
-              -84.195,
-              33.4106
+              -84.191042,
+              33.411395
             ],
             [
-              -84.195,
-              33.4099
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - McDonough GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.1954,
-              33.4097
-            ],
-            [
-              -84.1937,
-              33.4097
-            ],
-            [
-              -84.1937,
-              33.4113
-            ],
-            [
-              -84.1954,
-              33.4113
-            ],
-            [
-              -84.1954,
-              33.4097
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - McDonough GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.1944,
-              33.4117
-            ],
-            [
-              -84.1899,
-              33.4117
-            ],
-            [
-              -84.1899,
-              33.4128
-            ],
-            [
-              -84.1944,
-              33.4128
-            ],
-            [
-              -84.1944,
-              33.4117
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - McDonough GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.1942,
-              33.4101
-            ],
-            [
-              -84.1897,
-              33.4101
-            ],
-            [
-              -84.1897,
-              33.412
-            ],
-            [
-              -84.1942,
-              33.412
-            ],
-            [
-              -84.1942,
-              33.4101
+              -84.195711,
+              33.410936
             ]
           ]
         ]
@@ -3690,64 +1905,24 @@
         "coordinates": [
           [
             [
-              -84.1949,
-              33.4115
+              -84.317959,
+              33.620614
             ],
             [
-              -84.1903,
-              33.4115
+              -84.315487,
+              33.616154
             ],
             [
-              -84.1903,
-              33.4128
+              -84.312603,
+              33.617184
             ],
             [
-              -84.1949,
-              33.4128
+              -84.315075,
+              33.621644
             ],
             [
-              -84.1949,
-              33.4115
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - McDonough GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.3176,
-              33.6164
-            ],
-            [
-              -84.3129,
-              33.6164
-            ],
-            [
-              -84.3129,
-              33.6242
-            ],
-            [
-              -84.3176,
-              33.6242
-            ],
-            [
-              -84.3176,
-              33.6164
+              -84.317959,
+              33.620614
             ]
           ]
         ]
@@ -3790,64 +1965,24 @@
         "coordinates": [
           [
             [
-              -84.3142,
-              33.6166
+              -84.317959,
+              33.6205
             ],
             [
-              -84.3129,
-              33.6166
+              -84.317547,
+              33.619814
             ],
             [
-              -84.3129,
-              33.623
+              -84.314937,
+              33.620843
             ],
             [
-              -84.3142,
-              33.623
+              -84.315349,
+              33.621529
             ],
             [
-              -84.3142,
-              33.6166
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Forest Park GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.3148,
-              33.6166
-            ],
-            [
-              -84.3136,
-              33.6166
-            ],
-            [
-              -84.3136,
-              33.623
-            ],
-            [
-              -84.3148,
-              33.623
-            ],
-            [
-              -84.3148,
-              33.6166
+              -84.317959,
+              33.6205
             ]
           ]
         ]
@@ -3870,64 +2005,24 @@
         "coordinates": [
           [
             [
-              -84.3169,
-              33.6218
+              -121.413997,
+              37.763557
             ],
             [
-              -84.3152,
-              33.6218
+              -121.413791,
+              37.761494
             ],
             [
-              -84.3152,
-              33.6236
+              -121.410427,
+              37.761766
             ],
             [
-              -84.3169,
-              33.6236
+              -121.410633,
+              37.763828
             ],
             [
-              -84.3169,
-              33.6218
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Forest Park GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.4143,
-              37.7614
-            ],
-            [
-              -121.4102,
-              37.7614
-            ],
-            [
-              -121.4102,
-              37.7633
-            ],
-            [
-              -121.4143,
-              37.7633
-            ],
-            [
-              -121.4143,
-              37.7614
+              -121.413997,
+              37.763557
             ]
           ]
         ]
@@ -3970,24 +2065,24 @@
         "coordinates": [
           [
             [
-              -121.4133,
-              37.7615
+              -121.413929,
+              37.762037
             ],
             [
-              -121.4108,
-              37.7615
+              -121.41386,
+              37.761657
             ],
             [
-              -121.4108,
-              37.7619
+              -121.410701,
+              37.761929
             ],
             [
-              -121.4133,
-              37.7619
+              -121.41077,
+              37.762309
             ],
             [
-              -121.4133,
-              37.7615
+              -121.413929,
+              37.762037
             ]
           ]
         ]
@@ -4010,24 +2105,24 @@
         "coordinates": [
           [
             [
-              -117.5151,
-              34.0552
+              -117.515046,
+              34.062228
             ],
             [
-              -117.5132,
-              34.0552
+              -117.515046,
+              34.058587
             ],
             [
-              -117.5132,
-              34.0625
+              -117.513123,
+              34.058587
             ],
             [
-              -117.5151,
-              34.0625
+              -117.513123,
+              34.062228
             ],
             [
-              -117.5151,
-              34.0552
+              -117.515046,
+              34.062228
             ]
           ]
         ]
@@ -4070,63 +2165,24 @@
         "coordinates": [
           [
             [
-              -117.5149,
-              34.0622
+              -117.515046,
+              34.062
             ],
             [
-              -117.5144,
-              34.0622
+              -117.515046,
+              34.061545
             ],
             [
-              -117.5144,
-              34.0628
+              -117.513261,
+              34.061545
             ],
             [
-              -117.5149,
-              34.0628
+              -117.513261,
+              34.062
             ],
             [
-              -117.5149,
-              34.0622
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Fontana CA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -117.5149,
-              34.0554
-            ],
-            [
-              -117.5142,
-              34.0554
-            ],
-            [
-              -117.5142,
-              34.0622
-            ],
-            [
-              -117.5149,
-              34.0622
-            ],
-            [
-              -117.5149,
-              34.0554
+              -117.515046,
+              34.062
             ]
           ]
         ]
@@ -4149,24 +2205,24 @@
         "coordinates": [
           [
             [
-              -80.843,
-              35.7693
+              -80.842546,
+              35.772637
             ],
             [
-              -80.8398,
-              35.7693
+              -80.842683,
+              35.770074
             ],
             [
-              -80.8398,
-              35.7728
+              -80.839525,
+              35.769963
             ],
             [
-              -80.843,
-              35.7728
+              -80.839387,
+              35.772525
             ],
             [
-              -80.843,
-              35.7693
+              -80.842546,
+              35.772637
             ]
           ]
         ]
@@ -4209,143 +2265,24 @@
         "coordinates": [
           [
             [
-              -80.8422,
-              35.7701
+              -80.842477,
+              35.770464
             ],
             [
-              -80.8418,
-              35.7701
+              -80.842477,
+              35.770241
             ],
             [
-              -80.8418,
-              35.7705
+              -80.839387,
+              35.77013
             ],
             [
-              -80.8422,
-              35.7705
+              -80.839387,
+              35.770353
             ],
             [
-              -80.8422,
-              35.7701
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Statesville NC",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.842,
-              35.7696
-            ],
-            [
-              -80.8399,
-              35.7696
-            ],
-            [
-              -80.8399,
-              35.7702
-            ],
-            [
-              -80.842,
-              35.7702
-            ],
-            [
-              -80.842,
-              35.7696
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Statesville NC",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.8422,
-              35.7721
-            ],
-            [
-              -80.84,
-              35.7721
-            ],
-            [
-              -80.84,
-              35.7727
-            ],
-            [
-              -80.8422,
-              35.7727
-            ],
-            [
-              -80.8422,
-              35.7721
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Statesville NC",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.8421,
-              35.7699
-            ],
-            [
-              -80.84,
-              35.7699
-            ],
-            [
-              -80.84,
-              35.7704
-            ],
-            [
-              -80.8421,
-              35.7704
-            ],
-            [
-              -80.8421,
-              35.7699
+              -80.842477,
+              35.770464
             ]
           ]
         ]
@@ -4368,103 +2305,24 @@
         "coordinates": [
           [
             [
-              -80.8422,
-              35.7718
+              -81.814609,
+              35.061624
             ],
             [
-              -80.84,
-              35.7718
+              -81.813236,
+              35.056228
             ],
             [
-              -80.84,
-              35.7723
+              -81.809116,
+              35.056678
             ],
             [
-              -80.8422,
-              35.7723
+              -81.810489,
+              35.062074
             ],
             [
-              -80.8422,
-              35.7718
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Statesville NC",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.8429,
-              35.77
-            ],
-            [
-              -80.8421,
-              35.77
-            ],
-            [
-              -80.8421,
-              35.7709
-            ],
-            [
-              -80.8429,
-              35.7709
-            ],
-            [
-              -80.8429,
-              35.77
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Statesville NC",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.8148,
-              35.0565
-            ],
-            [
-              -81.8105,
-              35.0565
-            ],
-            [
-              -81.8105,
-              35.0635
-            ],
-            [
-              -81.8148,
-              35.0635
-            ],
-            [
-              -81.8148,
-              35.0565
+              -81.814609,
+              35.061624
             ]
           ]
         ]
@@ -4507,104 +2365,24 @@
         "coordinates": [
           [
             [
-              -81.8146,
-              35.057
+              -81.814335,
+              35.061399
             ],
             [
-              -81.813,
-              35.057
+              -81.81406,
+              35.060388
             ],
             [
-              -81.813,
-              35.0623
+              -81.810352,
+              35.060837
             ],
             [
-              -81.8146,
-              35.0623
+              -81.810627,
+              35.061849
             ],
             [
-              -81.8146,
-              35.057
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Cowpens SC",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.8115,
-              35.0575
-            ],
-            [
-              -81.8105,
-              35.0575
-            ],
-            [
-              -81.8105,
-              35.0625
-            ],
-            [
-              -81.8115,
-              35.0625
-            ],
-            [
-              -81.8115,
-              35.0575
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Cowpens SC",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.8142,
-              35.0573
-            ],
-            [
-              -81.8129,
-              35.0573
-            ],
-            [
-              -81.8129,
-              35.0622
-            ],
-            [
-              -81.8142,
-              35.0622
-            ],
-            [
-              -81.8142,
-              35.0573
+              -81.814335,
+              35.061399
             ]
           ]
         ]
@@ -4627,64 +2405,24 @@
         "coordinates": [
           [
             [
-              -81.8118,
-              35.0578
-            ],
-            [
-              -81.8108,
-              35.0578
-            ],
-            [
-              -81.8108,
-              35.0623
-            ],
-            [
-              -81.8118,
-              35.0623
-            ],
-            [
-              -81.8118,
-              35.0578
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Cowpens SC",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3079,
-              32.8172
-            ],
-            [
-              -97.306,
-              32.8172
-            ],
-            [
-              -97.306,
+              -97.308111,
               32.8203
             ],
             [
-              -97.3079,
-              32.8203
+              -97.308661,
+              32.816261
             ],
             [
-              -97.3079,
-              32.8172
+              -97.30715,
+              32.816203
+            ],
+            [
+              -97.306601,
+              32.820243
+            ],
+            [
+              -97.308111,
+              32.8203
             ]
           ]
         ]
@@ -4727,63 +2465,24 @@
         "coordinates": [
           [
             [
-              -97.3085,
-              32.81928
+              -97.308043,
+              32.820069
             ],
             [
-              -97.3079,
-              32.81928
+              -97.308111,
+              32.819781
             ],
             [
-              -97.3079,
-              32.81972
+              -97.306738,
+              32.819723
             ],
             [
-              -97.3085,
-              32.81972
+              -97.306669,
+              32.820012
             ],
             [
-              -97.3085,
-              32.81928
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.307,
-              32.8179
-            ],
-            [
-              -97.3064,
-              32.8179
-            ],
-            [
-              -97.3064,
-              32.8196
-            ],
-            [
-              -97.307,
-              32.8196
-            ],
-            [
-              -97.307,
-              32.8179
+              -97.308043,
+              32.820069
             ]
           ]
         ]
@@ -4806,24 +2505,24 @@
         "coordinates": [
           [
             [
-              -97.3093,
-              32.62755
+              -97.308997,
+              32.630057
             ],
             [
-              -97.3048,
-              32.62755
+              -97.308997,
+              32.627686
             ],
             [
-              -97.3048,
-              32.63025
+              -97.305152,
+              32.627628
             ],
             [
-              -97.3093,
-              32.63025
+              -97.305152,
+              32.629999
             ],
             [
-              -97.3093,
-              32.62755
+              -97.308997,
+              32.630057
             ]
           ]
         ]
@@ -4866,103 +2565,24 @@
         "coordinates": [
           [
             [
-              -97.3079,
-              32.62725
+              -97.30886,
+              32.629941
             ],
             [
-              -97.3072,
-              32.62725
+              -97.30886,
+              32.62971
             ],
             [
-              -97.3072,
-              32.6276
+              -97.305289,
+              32.629652
             ],
             [
-              -97.3079,
-              32.6276
+              -97.305289,
+              32.629883
             ],
             [
-              -97.3079,
-              32.62725
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3085,
-              32.62995
-            ],
-            [
-              -97.3056,
-              32.62995
-            ],
-            [
-              -97.3056,
-              32.63025
-            ],
-            [
-              -97.3085,
-              32.63025
-            ],
-            [
-              -97.3085,
-              32.62995
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3088,
-              32.6276
-            ],
-            [
-              -97.3054,
-              32.6276
-            ],
-            [
-              -97.3054,
-              32.62805
-            ],
-            [
-              -97.3088,
-              32.62805
-            ],
-            [
-              -97.3088,
-              32.6276
+              -97.30886,
+              32.629941
             ]
           ]
         ]
@@ -4985,24 +2605,24 @@
         "coordinates": [
           [
             [
-              -97.3087,
-              32.62955
+              -97.30886,
+              32.627975
             ],
             [
-              -97.3054,
-              32.62955
+              -97.30886,
+              32.627743
             ],
             [
-              -97.3054,
-              32.63
+              -97.305289,
+              32.627686
             ],
             [
-              -97.3087,
-              32.63
+              -97.305289,
+              32.627917
             ],
             [
-              -97.3087,
-              32.62955
+              -97.30886,
+              32.627975
             ]
           ]
         ]
@@ -5025,64 +2645,24 @@
         "coordinates": [
           [
             [
-              -97.3092,
-              32.6281
+              -95.254079,
+              29.829357
             ],
             [
-              -97.3089,
-              32.6281
+              -95.254217,
+              29.828404
             ],
             [
-              -97.3089,
-              32.6296
+              -95.250715,
+              29.828047
             ],
             [
-              -97.3092,
-              32.6296
+              -95.250577,
+              29.829
             ],
             [
-              -97.3092,
-              32.6281
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2547,
-              29.8268
-            ],
-            [
-              -95.2503,
-              29.8268
-            ],
-            [
-              -95.2503,
-              29.8304
-            ],
-            [
-              -95.2547,
-              29.8304
-            ],
-            [
-              -95.2547,
-              29.8268
+              -95.254079,
+              29.829357
             ]
           ]
         ]
@@ -5125,63 +2705,24 @@
         "coordinates": [
           [
             [
-              -95.25385,
-              29.82835
+              -95.253873,
+              29.827868
             ],
             [
-              -95.25335,
-              29.82835
+              -95.253942,
+              29.826796
             ],
             [
-              -95.25335,
-              29.8287
+              -95.250371,
+              29.826498
             ],
             [
-              -95.25385,
-              29.8287
+              -95.250303,
+              29.82757
             ],
             [
-              -95.25385,
-              29.82835
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2543,
-              29.8269
-            ],
-            [
-              -95.2506,
-              29.8269
-            ],
-            [
-              -95.2506,
-              29.82835
-            ],
-            [
-              -95.2543,
-              29.82835
-            ],
-            [
-              -95.2543,
-              29.8269
+              -95.253873,
+              29.827868
             ]
           ]
         ]
@@ -5204,24 +2745,24 @@
         "coordinates": [
           [
             [
-              -95.2545,
-              29.8284
+              -95.254148,
+              29.828702
             ],
             [
-              -95.2506,
-              29.8284
+              -95.254217,
+              29.828464
             ],
             [
-              -95.2506,
-              29.8287
+              -95.250715,
+              29.828106
             ],
             [
-              -95.2545,
-              29.8287
+              -95.250646,
+              29.828345
             ],
             [
-              -95.2545,
-              29.8284
+              -95.254148,
+              29.828702
             ]
           ]
         ]
@@ -5244,64 +2785,24 @@
         "coordinates": [
           [
             [
-              -95.2545,
-              29.83
+              -95.491736,
+              29.946723
             ],
             [
-              -95.2506,
-              29.83
+              -95.490363,
+              29.943272
             ],
             [
-              -95.2506,
-              29.83035
+              -95.488303,
+              29.94351
             ],
             [
-              -95.2545,
-              29.83035
+              -95.489676,
+              29.946961
             ],
             [
-              -95.2545,
-              29.83
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
-        "type": "Distribution Center",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.4925,
-              29.9423
-            ],
-            [
-              -95.4883,
-              29.9423
-            ],
-            [
-              -95.4883,
-              29.9468
-            ],
-            [
-              -95.4925,
-              29.9468
-            ],
-            [
-              -95.4925,
-              29.9423
+              -95.491736,
+              29.946723
             ]
           ]
         ]
@@ -5344,63 +2845,24 @@
         "coordinates": [
           [
             [
-              -95.4905,
-              29.9438
+              -95.491599,
+              29.946604
             ],
             [
-              -95.4899,
-              29.9438
+              -95.491324,
+              29.94589
             ],
             [
-              -95.4899,
-              29.9442
+              -95.489539,
+              29.946128
             ],
             [
-              -95.4905,
-              29.9442
+              -95.489813,
+              29.946842
             ],
             [
-              -95.4905,
-              29.9438
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.4904,
-              29.9431
-            ],
-            [
-              -95.4887,
-              29.9431
-            ],
-            [
-              -95.4887,
-              29.9464
-            ],
-            [
-              -95.4904,
-              29.9464
-            ],
-            [
-              -95.4904,
-              29.9431
+              -95.491599,
+              29.946604
             ]
           ]
         ]
@@ -5423,64 +2885,24 @@
         "coordinates": [
           [
             [
-              -95.4921,
-              29.9425
+              -97.031143,
+              32.930257
             ],
             [
-              -95.4908,
-              29.9425
+              -97.030573,
+              32.930798
             ],
             [
-              -95.4908,
-              29.9444
+              -97.032651,
+              32.932363
             ],
             [
-              -95.4921,
-              29.9444
+              -97.033221,
+              32.931822
             ],
             [
-              -95.4921,
-              29.9425
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0336,
-              32.9306
-            ],
-            [
-              -97.0305,
-              32.9306
-            ],
-            [
-              -97.0305,
-              32.9331
-            ],
-            [
-              -97.0336,
-              32.9331
-            ],
-            [
-              -97.0336,
-              32.9306
+              -97.031143,
+              32.930257
             ]
           ]
         ]
@@ -5523,63 +2945,24 @@
         "coordinates": [
           [
             [
-              -97.0334,
-              32.9323
+              -97.031318,
+              32.931068
             ],
             [
-              -97.0329,
-              32.9323
+              -97.031176,
+              32.931203
             ],
             [
-              -97.0329,
-              32.9327
+              -97.033094,
+              32.932648
             ],
             [
-              -97.0334,
-              32.9327
+              -97.033236,
+              32.932513
             ],
             [
-              -97.0334,
-              32.9323
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Grapevine TX",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0334,
-              32.9318
-            ],
-            [
-              -97.032,
-              32.9318
-            ],
-            [
-              -97.032,
-              32.9331
-            ],
-            [
-              -97.0334,
-              32.9331
-            ],
-            [
-              -97.0334,
-              32.9318
+              -97.031318,
+              32.931068
             ]
           ]
         ]
@@ -5602,64 +2985,24 @@
         "coordinates": [
           [
             [
-              -97.0325,
-              32.9309
+              -97.078277,
+              32.67931
             ],
             [
-              -97.031,
-              32.9309
+              -97.078415,
+              32.67827
             ],
             [
-              -97.031,
-              32.9321
+              -97.076355,
+              32.678154
             ],
             [
-              -97.0325,
-              32.9321
+              -97.076217,
+              32.679195
             ],
             [
-              -97.0325,
-              32.9309
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Grapevine TX",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0788,
-              32.6782
-            ],
-            [
-              -97.0756,
-              32.6782
-            ],
-            [
-              -97.0756,
-              32.6798
-            ],
-            [
-              -97.0788,
-              32.6798
-            ],
-            [
-              -97.0788,
-              32.6782
+              -97.078277,
+              32.67931
             ]
           ]
         ]
@@ -5702,103 +3045,24 @@
         "coordinates": [
           [
             [
-              -97.0772,
-              32.6797
+              -97.078209,
+              32.679195
             ],
             [
-              -97.0765,
-              32.6797
+              -97.078277,
+              32.678964
             ],
             [
-              -97.0765,
-              32.67995
+              -97.076355,
+              32.678848
             ],
             [
-              -97.0772,
-              32.67995
+              -97.076286,
+              32.679079
             ],
             [
-              -97.0772,
-              32.6797
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Arlington TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0782,
-              32.6793
-            ],
-            [
-              -97.0758,
-              32.6793
-            ],
-            [
-              -97.0758,
-              32.6798
-            ],
-            [
-              -97.0782,
-              32.6798
-            ],
-            [
-              -97.0782,
-              32.6793
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Arlington TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0783,
-              32.6791
-            ],
-            [
-              -97.0759,
-              32.6791
-            ],
-            [
-              -97.0759,
-              32.67945
-            ],
-            [
-              -97.0783,
-              32.67945
-            ],
-            [
-              -97.0783,
-              32.6791
+              -97.078209,
+              32.679195
             ]
           ]
         ]
@@ -5821,24 +3085,24 @@
         "coordinates": [
           [
             [
-              -111.9937,
-              40.7204
+              -111.9941,
+              40.725501
             ],
             [
-              -111.9915,
-              40.7204
+              -111.994649,
+              40.72269
             ],
             [
-              -111.9915,
-              40.72615
+              -111.992315,
+              40.722586
             ],
             [
-              -111.9937,
-              40.72615
+              -111.991765,
+              40.725396
             ],
             [
-              -111.9937,
-              40.7204
+              -111.9941,
+              40.725501
             ]
           ]
         ]
@@ -5881,64 +3145,24 @@
         "coordinates": [
           [
             [
-              -111.9925,
-              40.7208
+              -111.993963,
+              40.725292
             ],
             [
-              -111.99155,
-              40.7208
+              -111.9941,
+              40.724772
             ],
             [
-              -111.99155,
-              40.7228
+              -111.99204,
+              40.724668
             ],
             [
-              -111.9925,
-              40.7228
+              -111.991903,
+              40.725188
             ],
             [
-              -111.9925,
-              40.7208
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - West Valley City UT",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -111.9936,
-              40.7206
-            ],
-            [
-              -111.9933,
-              40.7206
-            ],
-            [
-              -111.9933,
-              40.726
-            ],
-            [
-              -111.9936,
-              40.726
-            ],
-            [
-              -111.9936,
-              40.7206
+              -111.993963,
+              40.725292
             ]
           ]
         ]
@@ -5961,64 +3185,24 @@
         "coordinates": [
           [
             [
-              -111.9923,
-              40.7206
+              -122.946821,
+              45.556065
             ],
             [
-              -111.992,
-              40.7206
+              -122.946821,
+              45.553661
             ],
             [
-              -111.992,
-              40.726
+              -122.945036,
+              45.553661
             ],
             [
-              -111.9923,
-              40.726
+              -122.945036,
+              45.556065
             ],
             [
-              -111.9923,
-              40.7206
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - West Valley City UT",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.9447,
-              45.5533
-            ],
-            [
-              -122.9425,
-              45.5533
-            ],
-            [
-              -122.9425,
-              45.5565
-            ],
-            [
-              -122.9447,
-              45.5565
-            ],
-            [
-              -122.9447,
-              45.5533
+              -122.946821,
+              45.556065
             ]
           ]
         ]
@@ -6061,64 +3245,24 @@
         "coordinates": [
           [
             [
-              -122.9447,
-              45.5542
+              -122.945173,
+              45.555969
             ],
             [
-              -122.9442,
-              45.5542
+              -122.945173,
+              45.553854
             ],
             [
-              -122.9442,
-              45.556
+              -122.945036,
+              45.553854
             ],
             [
-              -122.9447,
-              45.556
+              -122.945036,
+              45.555969
             ],
             [
-              -122.9447,
-              45.5542
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "gxo",
-        "name": "GXO Logistics Distribution Center - Hillsboro OR",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.9444,
-              45.554
-            ],
-            [
-              -122.9441,
-              45.554
-            ],
-            [
-              -122.9441,
-              45.5561
-            ],
-            [
-              -122.9444,
-              45.5561
-            ],
-            [
-              -122.9444,
-              45.554
+              -122.945173,
+              45.555969
             ]
           ]
         ]
@@ -6141,24 +3285,24 @@
         "coordinates": [
           [
             [
-              -122.8895,
-              45.4905
+              -122.88752,
+              45.495053
             ],
             [
-              -122.882,
-              45.4905
+              -122.88752,
+              45.492165
             ],
             [
-              -122.882,
-              45.496
+              -122.8834,
+              45.492165
             ],
             [
-              -122.8895,
-              45.496
+              -122.8834,
+              45.495053
             ],
             [
-              -122.8895,
-              45.4905
+              -122.88752,
+              45.495053
             ]
           ]
         ]
@@ -6201,24 +3345,24 @@
         "coordinates": [
           [
             [
-              -96.9295,
-              32.9885
+              -96.928622,
+              32.990356
             ],
             [
-              -96.927,
-              32.9885
+              -96.928073,
+              32.989781
             ],
             [
-              -96.927,
-              32.9908
+              -96.926974,
+              32.990529
             ],
             [
-              -96.9295,
-              32.9908
+              -96.927524,
+              32.991105
             ],
             [
-              -96.9295,
-              32.9885
+              -96.928622,
+              32.990356
             ]
           ]
         ]
@@ -6261,24 +3405,24 @@
         "coordinates": [
           [
             [
-              -96.9281,
-              32.9886
+              -96.928554,
+              32.990299
             ],
             [
-              -96.9271,
-              32.9886
+              -96.928348,
+              32.990069
             ],
             [
-              -96.9271,
-              32.9901
+              -96.927386,
+              32.99076
             ],
             [
-              -96.9281,
-              32.9901
+              -96.927592,
+              32.99099
             ],
             [
-              -96.9281,
-              32.9886
+              -96.928554,
+              32.990299
             ]
           ]
         ]

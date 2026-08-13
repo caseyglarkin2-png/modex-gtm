@@ -8,24 +8,28 @@
         "coordinates": [
           [
             [
-              -92.281,
-              42.5095
+              -92.27719,
+              42.525858
             ],
             [
-              -92.2555,
-              42.5095
+              -92.27719,
+              42.521
             ],
             [
-              -92.2555,
-              42.53
+              -92.273895,
+              42.515737
             ],
             [
-              -92.281,
-              42.53
+              -92.266204,
+              42.514927
             ],
             [
-              -92.281,
-              42.5095
+              -92.264556,
+              42.524644
+            ],
+            [
+              -92.27719,
+              42.525858
             ]
           ]
         ]
@@ -68,143 +72,24 @@
         "coordinates": [
           [
             [
-              -92.2615,
-              42.5118
+              -92.273345,
+              42.518976
             ],
             [
-              -92.2595,
-              42.5118
+              -92.27362,
+              42.517761
             ],
             [
-              -92.2595,
-              42.5135
+              -92.267028,
+              42.516951
             ],
             [
-              -92.2615,
-              42.5135
+              -92.266753,
+              42.518166
             ],
             [
-              -92.2615,
-              42.5118
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Tractor Operations - Waterloo IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.2715,
-              42.518
-            ],
-            [
-              -92.265,
-              42.518
-            ],
-            [
-              -92.265,
-              42.523
-            ],
-            [
-              -92.2715,
-              42.523
-            ],
-            [
-              -92.2715,
-              42.518
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Tractor Operations - Waterloo IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.2665,
-              42.5145
-            ],
-            [
-              -92.2615,
-              42.5145
-            ],
-            [
-              -92.2615,
-              42.517
-            ],
-            [
-              -92.2665,
-              42.517
-            ],
-            [
-              -92.2665,
-              42.5145
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Tractor Operations - Waterloo IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.272,
-              42.5195
-            ],
-            [
-              -92.266,
-              42.5195
-            ],
-            [
-              -92.266,
-              42.524
-            ],
-            [
-              -92.272,
-              42.524
-            ],
-            [
-              -92.272,
-              42.5195
+              -92.273345,
+              42.518976
             ]
           ]
         ]
@@ -227,63 +112,24 @@
         "coordinates": [
           [
             [
-              -92.262,
-              42.5108
+              -92.439454,
+              42.468772
             ],
             [
-              -92.2585,
-              42.5108
+              -92.439454,
+              42.466787
             ],
             [
-              -92.2585,
-              42.5128
+              -92.428193,
+              42.466625
             ],
             [
-              -92.262,
-              42.5128
+              -92.428193,
+              42.46861
             ],
             [
-              -92.262,
-              42.5108
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Tractor Operations - Waterloo IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.44,
-              42.462
-            ],
-            [
-              -92.429,
-              42.462
-            ],
-            [
-              -92.429,
-              42.471
-            ],
-            [
-              -92.44,
-              42.471
-            ],
-            [
-              -92.44,
-              42.462
+              -92.439454,
+              42.468772
             ]
           ]
         ]
@@ -326,103 +172,24 @@
         "coordinates": [
           [
             [
-              -92.4305,
-              42.4664
+              -92.436571,
+              42.468408
             ],
             [
-              -92.4292,
-              42.4664
+              -92.436571,
+              42.4678
             ],
             [
-              -92.4292,
-              42.4674
+              -92.428605,
+              42.4678
             ],
             [
-              -92.4305,
-              42.4674
+              -92.428605,
+              42.468408
             ],
             [
-              -92.4305,
-              42.4664
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Engine Works - Waterloo IA",
-        "type": "Engine Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.4312,
-              42.4665
-            ],
-            [
-              -92.429,
-              42.4665
-            ],
-            [
-              -92.429,
-              42.468
-            ],
-            [
-              -92.4312,
-              42.468
-            ],
-            [
-              -92.4312,
-              42.4665
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Engine Works - Waterloo IA",
-        "type": "Engine Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.4322,
-              42.467
-            ],
-            [
-              -92.4305,
-              42.467
-            ],
-            [
-              -92.4305,
-              42.468
-            ],
-            [
-              -92.4322,
-              42.468
-            ],
-            [
-              -92.4322,
-              42.467
+              -92.436571,
+              42.468408
             ]
           ]
         ]
@@ -445,24 +212,28 @@
         "coordinates": [
           [
             [
-              -92.359,
-              42.4975
+              -92.364486,
+              42.503917
             ],
             [
-              -92.346,
-              42.4975
+              -92.363662,
+              42.50007
             ],
             [
-              -92.346,
-              42.506
+              -92.354873,
+              42.49683
             ],
             [
-              -92.359,
-              42.506
+              -92.349105,
+              42.49845
             ],
             [
-              -92.359,
-              42.4975
+              -92.350204,
+              42.504727
+            ],
+            [
+              -92.364486,
+              42.503917
             ]
           ]
         ]
@@ -505,103 +276,24 @@
         "coordinates": [
           [
             [
-              -92.3545,
-              42.5043
+              -92.357071,
+              42.501488
             ],
             [
-              -92.353,
-              42.5043
+              -92.356521,
+              42.500273
             ],
             [
-              -92.353,
-              42.5053
+              -92.350479,
+              42.501285
             ],
             [
-              -92.3545,
-              42.5053
+              -92.351028,
+              42.5025
             ],
             [
-              -92.3545,
-              42.5043
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Drivetrain Operations - Waterloo IA",
-        "type": "Component Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.35,
-              42.502
-            ],
-            [
-              -92.347,
-              42.502
-            ],
-            [
-              -92.347,
-              42.5045
-            ],
-            [
-              -92.35,
-              42.5045
-            ],
-            [
-              -92.35,
-              42.502
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Works - Drivetrain Operations - Waterloo IA",
-        "type": "Component Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.355,
-              42.5045
-            ],
-            [
-              -92.352,
-              42.5045
-            ],
-            [
-              -92.352,
-              42.5055
-            ],
-            [
-              -92.355,
-              42.5055
-            ],
-            [
-              -92.355,
-              42.5045
+              -92.357071,
+              42.501488
             ]
           ]
         ]
@@ -624,24 +316,28 @@
         "coordinates": [
           [
             [
-              -92.37,
-              42.503
+              -92.369944,
+              42.509022
             ],
             [
-              -92.359,
-              42.503
+              -92.371042,
+              42.5072
             ],
             [
-              -92.359,
-              42.5105
+              -92.363627,
+              42.50072
             ],
             [
-              -92.37,
-              42.5105
+              -92.359507,
+              42.50153
             ],
             [
-              -92.37,
-              42.503
+              -92.36088,
+              42.508212
+            ],
+            [
+              -92.369944,
+              42.509022
             ]
           ]
         ]
@@ -684,103 +380,24 @@
         "coordinates": [
           [
             [
-              -92.3655,
-              42.5044
+              -92.368296,
+              42.506188
             ],
             [
-              -92.364,
-              42.5044
+              -92.368571,
+              42.505378
             ],
             [
-              -92.364,
-              42.5053
+              -92.361979,
+              42.50477
             ],
             [
-              -92.3655,
-              42.5053
+              -92.361704,
+              42.50558
             ],
             [
-              -92.3655,
-              42.5044
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Foundry - Waterloo IA",
-        "type": "Foundry",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.3645,
-              42.5045
-            ],
-            [
-              -92.3615,
-              42.5045
-            ],
-            [
-              -92.3615,
-              42.506
-            ],
-            [
-              -92.3645,
-              42.506
-            ],
-            [
-              -92.3645,
-              42.5045
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Foundry - Waterloo IA",
-        "type": "Foundry",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.364,
-              42.505
-            ],
-            [
-              -92.362,
-              42.505
-            ],
-            [
-              -92.362,
-              42.5062
-            ],
-            [
-              -92.364,
-              42.5062
-            ],
-            [
-              -92.364,
-              42.505
+              -92.368296,
+              42.506188
             ]
           ]
         ]
@@ -803,63 +420,28 @@
         "coordinates": [
           [
             [
-              -92.3648,
-              42.5044
+              -90.442317,
+              41.53058
             ],
             [
-              -92.3635,
-              42.5044
+              -90.442592,
+              41.524823
             ],
             [
-              -92.3635,
-              42.5055
+              -90.434627,
+              41.52071
             ],
             [
-              -92.3648,
-              42.5055
+              -90.429408,
+              41.522972
             ],
             [
-              -92.3648,
-              42.5044
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Waterloo Foundry - Waterloo IA",
-        "type": "Foundry",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.443,
-              41.5175
+              -90.431605,
+              41.531608
             ],
             [
-              -90.43,
-              41.5175
-            ],
-            [
-              -90.43,
-              41.532
-            ],
-            [
-              -90.443,
-              41.532
-            ],
-            [
-              -90.443,
-              41.5175
+              -90.442317,
+              41.53058
             ]
           ]
         ]
@@ -902,63 +484,24 @@
         "coordinates": [
           [
             [
-              -90.434,
-              41.5234
+              -90.437099,
+              41.524
             ],
             [
-              -90.4325,
-              41.5234
+              -90.436824,
+              41.522355
             ],
             [
-              -90.4325,
-              41.5246
+              -90.431331,
+              41.522972
             ],
             [
-              -90.434,
-              41.5246
+              -90.431605,
+              41.524617
             ],
             [
-              -90.434,
-              41.5234
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Harvester Works - East Moline IL",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.44,
-              41.526
-            ],
-            [
-              -90.434,
-              41.526
-            ],
-            [
-              -90.434,
-              41.531
-            ],
-            [
-              -90.44,
-              41.531
-            ],
-            [
-              -90.44,
-              41.526
+              -90.437099,
+              41.524
             ]
           ]
         ]
@@ -981,64 +524,24 @@
         "coordinates": [
           [
             [
-              -90.4345,
-              41.5225
+              -90.438747,
+              41.528524
             ],
             [
-              -90.43,
-              41.5225
+              -90.438472,
+              41.527496
             ],
             [
-              -90.43,
-              41.5255
+              -90.432429,
+              41.528112
             ],
             [
-              -90.4345,
-              41.5255
+              -90.432704,
+              41.529141
             ],
             [
-              -90.4345,
-              41.5225
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Harvester Works - East Moline IL",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.4385,
-              41.5235
-            ],
-            [
-              -90.4335,
-              41.5235
-            ],
-            [
-              -90.4335,
-              41.527
-            ],
-            [
-              -90.4385,
-              41.527
-            ],
-            [
-              -90.4385,
-              41.5235
+              -90.438747,
+              41.528524
             ]
           ]
         ]
@@ -1061,63 +564,24 @@
         "coordinates": [
           [
             [
-              -90.4345,
-              41.5215
+              -90.529707,
+              41.508717
             ],
             [
-              -90.4305,
-              41.5215
+              -90.529569,
+              41.506918
             ],
             [
-              -90.4305,
-              41.5245
+              -90.524419,
+              41.507175
             ],
             [
-              -90.4345,
-              41.5245
+              -90.524557,
+              41.508923
             ],
             [
-              -90.4345,
-              41.5215
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Harvester Works - East Moline IL",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.5296,
-              41.5065
-            ],
-            [
-              -90.5238,
-              41.5065
-            ],
-            [
-              -90.5238,
-              41.5097
-            ],
-            [
-              -90.5296,
-              41.5097
-            ],
-            [
-              -90.5296,
-              41.5065
+              -90.529707,
+              41.508717
             ]
           ]
         ]
@@ -1160,64 +624,24 @@
         "coordinates": [
           [
             [
-              -90.529,
-              41.50855
+              -90.529089,
+              41.508769
             ],
             [
-              -90.5276,
-              41.50855
+              -90.529089,
+              41.508358
             ],
             [
-              -90.5276,
-              41.50935
+              -90.524694,
+              41.508358
             ],
             [
-              -90.529,
-              41.50935
+              -90.524694,
+              41.508769
             ],
             [
-              -90.529,
-              41.50855
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Cylinder Works - Moline IL",
-        "type": "Component Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.5278,
-              41.5087
-            ],
-            [
-              -90.5248,
-              41.5087
-            ],
-            [
-              -90.5248,
-              41.5096
-            ],
-            [
-              -90.5278,
-              41.5096
-            ],
-            [
-              -90.5278,
-              41.5087
+              -90.529089,
+              41.508769
             ]
           ]
         ]
@@ -1240,24 +664,24 @@
         "coordinates": [
           [
             [
-              -90.5345,
-              41.5073
+              -90.537067,
+              41.50921
             ],
             [
-              -90.5278,
-              41.5073
+              -90.536793,
+              41.507153
             ],
             [
-              -90.5278,
-              41.5101
+              -90.530063,
+              41.507256
             ],
             [
-              -90.5345,
-              41.5101
+              -90.530338,
+              41.509518
             ],
             [
-              -90.5345,
-              41.5073
+              -90.537067,
+              41.50921
             ]
           ]
         ]
@@ -1300,64 +724,24 @@
         "coordinates": [
           [
             [
-              -90.5299,
-              41.5088
+              -90.535557,
+              41.509004
             ],
             [
-              -90.5283,
-              41.5088
+              -90.535488,
+              41.50849
             ],
             [
-              -90.5283,
-              41.50985
+              -90.530544,
+              41.508593
             ],
             [
-              -90.5299,
-              41.50985
+              -90.530613,
+              41.509107
             ],
             [
-              -90.5299,
-              41.5088
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Seeding Group / Planter Works - Moline IL",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.533,
-              41.5091
-            ],
-            [
-              -90.5295,
-              41.5091
-            ],
-            [
-              -90.5295,
-              41.50985
-            ],
-            [
-              -90.533,
-              41.50985
-            ],
-            [
-              -90.533,
-              41.5091
+              -90.535557,
+              41.509004
             ]
           ]
         ]
@@ -1380,24 +764,28 @@
         "coordinates": [
           [
             [
-              -90.5585,
-              41.597
+              -90.556993,
+              41.604675
             ],
             [
-              -90.5455,
-              41.597
+              -90.557268,
+              41.602622
             ],
             [
-              -90.5455,
-              41.6075
+              -90.555895,
+              41.598719
             ],
             [
-              -90.5585,
-              41.6075
+              -90.547105,
+              41.598719
             ],
             [
-              -90.5585,
-              41.597
+              -90.548204,
+              41.604675
+            ],
+            [
+              -90.556993,
+              41.604675
             ]
           ]
         ]
@@ -1440,63 +828,24 @@
         "coordinates": [
           [
             [
-              -90.558,
-              41.6102
+              -90.555895,
+              41.600773
             ],
             [
-              -90.556,
-              41.6102
+              -90.555895,
+              41.599335
             ],
             [
-              -90.556,
-              41.6112
+              -90.548204,
+              41.599335
             ],
             [
-              -90.558,
-              41.6112
+              -90.548204,
+              41.600773
             ],
             [
-              -90.558,
-              41.6102
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Davenport Works - Davenport IA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.549,
-              41.601
-            ],
-            [
-              -90.546,
-              41.601
-            ],
-            [
-              -90.546,
-              41.6028
-            ],
-            [
-              -90.549,
-              41.6028
-            ],
-            [
-              -90.549,
-              41.601
+              -90.555895,
+              41.600773
             ]
           ]
         ]
@@ -1519,64 +868,24 @@
         "coordinates": [
           [
             [
-              -90.556,
-              41.6033
+              -90.555895,
+              41.603854
             ],
             [
-              -90.5485,
-              41.6033
+              -90.555895,
+              41.603032
             ],
             [
-              -90.5485,
-              41.605
+              -90.548753,
+              41.603032
             ],
             [
-              -90.556,
-              41.605
+              -90.548753,
+              41.603854
             ],
             [
-              -90.556,
-              41.6033
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Davenport Works - Davenport IA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.556,
-              41.6026
-            ],
-            [
-              -90.5485,
-              41.6026
-            ],
-            [
-              -90.5485,
-              41.6036
-            ],
-            [
-              -90.556,
-              41.6036
-            ],
-            [
-              -90.556,
-              41.6026
+              -90.555895,
+              41.603854
             ]
           ]
         ]
@@ -1599,63 +908,28 @@
         "coordinates": [
           [
             [
-              -90.554,
-              41.6028
+              -90.696374,
+              42.570073
             ],
             [
-              -90.5495,
-              41.6028
+              -90.698571,
+              42.566837
             ],
             [
-              -90.5495,
-              41.6052
+              -90.684289,
+              42.556722
             ],
             [
-              -90.554,
-              41.6052
+              -90.678796,
+              42.55915
             ],
             [
-              -90.554,
-              41.6028
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Davenport Works - Davenport IA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.699,
-              42.5565
+              -90.682092,
+              42.567242
             ],
             [
-              -90.6815,
-              42.5565
-            ],
-            [
-              -90.6815,
-              42.574
-            ],
-            [
-              -90.699,
-              42.574
-            ],
-            [
-              -90.699,
-              42.5565
+              -90.696374,
+              42.570073
             ]
           ]
         ]
@@ -1698,63 +972,24 @@
         "coordinates": [
           [
             [
-              -90.694,
-              42.5625
+              -90.690881,
+              42.562387
             ],
             [
-              -90.6915,
-              42.5625
+              -90.69143,
+              42.560364
             ],
             [
-              -90.6915,
-              42.564
+              -90.682641,
+              42.558745
             ],
             [
-              -90.694,
-              42.564
+              -90.682092,
+              42.561173
             ],
             [
-              -90.694,
-              42.5625
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Dubuque Works - Dubuque IA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.6865,
-              42.5656
-            ],
-            [
-              -90.6835,
-              42.5656
-            ],
-            [
-              -90.6835,
-              42.5695
-            ],
-            [
-              -90.6865,
-              42.5695
-            ],
-            [
-              -90.6865,
-              42.5656
+              -90.690881,
+              42.562387
             ]
           ]
         ]
@@ -1777,64 +1012,24 @@
         "coordinates": [
           [
             [
-              -90.688,
-              42.5628
+              -90.693078,
+              42.565623
             ],
             [
-              -90.6845,
-              42.5628
+              -90.693628,
+              42.564005
             ],
             [
-              -90.6845,
-              42.5656
+              -90.684289,
+              42.562387
             ],
             [
-              -90.688,
-              42.5656
+              -90.68374,
+              42.564005
             ],
             [
-              -90.688,
-              42.5628
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Dubuque Works - Dubuque IA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.6875,
-              42.565
-            ],
-            [
-              -90.6855,
-              42.565
-            ],
-            [
-              -90.6855,
-              42.5695
-            ],
-            [
-              -90.6875,
-              42.5695
-            ],
-            [
-              -90.6875,
-              42.565
+              -90.693078,
+              42.565623
             ]
           ]
         ]
@@ -1857,63 +1052,28 @@
         "coordinates": [
           [
             [
-              -90.693,
-              42.5605
+              -93.63707,
+              41.729116
             ],
             [
-              -90.689,
-              42.5605
+              -93.638169,
+              41.724196
             ],
             [
-              -90.689,
-              42.5645
+              -93.634873,
+              41.716816
             ],
             [
-              -90.693,
-              42.5645
+              -93.622788,
+              41.717636
             ],
             [
-              -90.693,
-              42.5605
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Dubuque Works - Dubuque IA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.6375,
-              41.7125
+              -93.623887,
+              41.729116
             ],
             [
-              -93.6225,
-              41.7125
-            ],
-            [
-              -93.6225,
-              41.7285
-            ],
-            [
-              -93.6375,
-              41.7285
-            ],
-            [
-              -93.6375,
-              41.7125
+              -93.63707,
+              41.729116
             ]
           ]
         ]
@@ -1956,143 +1116,24 @@
         "coordinates": [
           [
             [
-              -93.6245,
-              41.7233
+              -93.634873,
+              41.725016
             ],
             [
-              -93.6228,
-              41.7233
+              -93.634873,
+              41.722966
             ],
             [
-              -93.6228,
-              41.7244
+              -93.624985,
+              41.722966
             ],
             [
-              -93.6245,
-              41.7244
+              -93.624985,
+              41.725016
             ],
             [
-              -93.6245,
-              41.7233
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Des Moines Works - Ankeny IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.6285,
-              41.7228
-            ],
-            [
-              -93.6245,
-              41.7228
-            ],
-            [
-              -93.6245,
-              41.725
-            ],
-            [
-              -93.6285,
-              41.725
-            ],
-            [
-              -93.6285,
-              41.7228
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Des Moines Works - Ankeny IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.6305,
-              41.7175
-            ],
-            [
-              -93.6255,
-              41.7175
-            ],
-            [
-              -93.6255,
-              41.72
-            ],
-            [
-              -93.6305,
-              41.72
-            ],
-            [
-              -93.6305,
-              41.7175
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Des Moines Works - Ankeny IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.629,
-              41.7228
-            ],
-            [
-              -93.6255,
-              41.7228
-            ],
-            [
-              -93.6255,
-              41.7242
-            ],
-            [
-              -93.629,
-              41.7242
-            ],
-            [
-              -93.629,
-              41.7228
+              -93.634873,
+              41.725016
             ]
           ]
         ]
@@ -2115,103 +1156,28 @@
         "coordinates": [
           [
             [
-              -93.635,
-              41.719
+              -92.413321,
+              41.006104
             ],
             [
-              -93.632,
-              41.719
+              -92.413733,
+              41.003306
             ],
             [
-              -93.632,
-              41.7205
+              -92.411399,
+              41.000197
             ],
             [
-              -93.635,
-              41.7205
+              -92.406455,
+              41.000922
             ],
             [
-              -93.635,
-              41.719
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Des Moines Works - Ankeny IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.631,
-              41.719
+              -92.407004,
+              41.006208
             ],
             [
-              -93.6265,
-              41.719
-            ],
-            [
-              -93.6265,
-              41.722
-            ],
-            [
-              -93.631,
-              41.722
-            ],
-            [
-              -93.631,
-              41.719
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Des Moines Works - Ankeny IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.4128,
-              40.9998
-            ],
-            [
-              -92.4062,
-              40.9998
-            ],
-            [
-              -92.4062,
-              41.0068
-            ],
-            [
-              -92.4128,
-              41.0068
-            ],
-            [
-              -92.4128,
-              40.9998
+              -92.413321,
+              41.006104
             ]
           ]
         ]
@@ -2254,63 +1220,24 @@
         "coordinates": [
           [
             [
-              -92.4109,
+              -92.413047,
+              41.000922
+            ],
+            [
+              -92.412909,
               41.0003
             ],
             [
-              -92.4102,
-              41.0003
+              -92.407965,
+              41.000508
             ],
             [
-              -92.4102,
-              41.00075
+              -92.408103,
+              41.001129
             ],
             [
-              -92.4109,
-              41.00075
-            ],
-            [
-              -92.4109,
-              41.0003
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Ottumwa Works - Ottumwa IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.4082,
-              40.9997
-            ],
-            [
-              -92.4056,
-              40.9997
-            ],
-            [
-              -92.4056,
-              41.0013
-            ],
-            [
-              -92.4082,
-              41.0013
-            ],
-            [
-              -92.4082,
-              40.9997
+              -92.413047,
+              41.000922
             ]
           ]
         ]
@@ -2333,64 +1260,24 @@
         "coordinates": [
           [
             [
-              -92.4115,
-              41.0037
+              -92.412497,
+              41.005482
             ],
             [
-              -92.4088,
-              41.0037
+              -92.412429,
+              41.004964
             ],
             [
-              -92.4088,
-              41.0056
+              -92.408034,
+              41.005068
             ],
             [
-              -92.4115,
-              41.0056
+              -92.408103,
+              41.005586
             ],
             [
-              -92.4115,
-              41.0037
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Ottumwa Works - Ottumwa IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.4105,
-              41.001
-            ],
-            [
-              -92.4088,
-              41.001
-            ],
-            [
-              -92.4088,
-              41.0021
-            ],
-            [
-              -92.4105,
-              41.0021
-            ],
-            [
-              -92.4105,
-              41.001
+              -92.412497,
+              41.005482
             ]
           ]
         ]
@@ -2413,63 +1300,28 @@
         "coordinates": [
           [
             [
-              -92.4092,
-              41.002
+              -82.189116,
+              33.464735
             ],
             [
-              -92.407,
-              41.002
+              -82.18939,
+              33.463245
             ],
             [
-              -92.407,
-              41.004
+              -82.188292,
+              33.461068
             ],
             [
-              -92.4092,
-              41.004
+              -82.183897,
+              33.461298
             ],
             [
-              -92.4092,
-              41.002
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Ottumwa Works - Ottumwa IA",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.1882,
-              33.4606
+              -82.184446,
+              33.465193
             ],
             [
-              -82.1828,
-              33.4606
-            ],
-            [
-              -82.1828,
-              33.4656
-            ],
-            [
-              -82.1882,
-              33.4656
-            ],
-            [
-              -82.1882,
-              33.4606
+              -82.189116,
+              33.464735
             ]
           ]
         ]
@@ -2512,143 +1364,24 @@
         "coordinates": [
           [
             [
-              -82.1852,
-              33.463
+              -82.186369,
+              33.464276
             ],
             [
-              -82.1844,
-              33.463
+              -82.1863,
+              33.462214
             ],
             [
-              -82.1844,
-              33.4636
+              -82.184378,
+              33.462443
             ],
             [
-              -82.1852,
-              33.4636
+              -82.184446,
+              33.464505
             ],
             [
-              -82.1852,
-              33.463
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.1872,
-              33.461
-            ],
-            [
-              -82.1848,
-              33.461
-            ],
-            [
-              -82.1848,
-              33.4643
-            ],
-            [
-              -82.1872,
-              33.4643
-            ],
-            [
-              -82.1872,
-              33.461
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.1882,
-              33.4618
-            ],
-            [
-              -82.187,
-              33.4618
-            ],
-            [
-              -82.187,
-              33.4647
-            ],
-            [
-              -82.1882,
-              33.4647
-            ],
-            [
-              -82.1882,
-              33.4618
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.1865,
-              33.4625
-            ],
-            [
-              -82.1856,
-              33.4625
-            ],
-            [
-              -82.1856,
-              33.4649
-            ],
-            [
-              -82.1865,
-              33.4649
-            ],
-            [
-              -82.1865,
-              33.4625
+              -82.186369,
+              33.464276
             ]
           ]
         ]
@@ -2671,103 +1404,28 @@
         "coordinates": [
           [
             [
-              -82.1856,
-              33.4618
+              -95.586076,
+              37.099271
             ],
             [
-              -82.1838,
-              33.4618
+              -95.586351,
+              37.097628
             ],
             [
-              -82.1838,
-              33.4626
+              -95.585802,
+              37.095766
             ],
             [
-              -82.1856,
-              33.4626
+              -95.582231,
+              37.095766
             ],
             [
-              -82.1856,
-              33.4618
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.1862,
-              33.462
+              -95.582506,
+              37.099271
             ],
             [
-              -82.1848,
-              33.462
-            ],
-            [
-              -82.1848,
-              33.4638
-            ],
-            [
-              -82.1862,
-              33.4638
-            ],
-            [
-              -82.1862,
-              33.462
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
-        "type": "Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.5868,
-              37.0953
-            ],
-            [
-              -95.5813,
-              37.0953
-            ],
-            [
-              -95.5813,
-              37.1008
-            ],
-            [
-              -95.5868,
-              37.1008
-            ],
-            [
-              -95.5868,
-              37.0953
+              -95.586076,
+              37.099271
             ]
           ]
         ]
@@ -2810,24 +1468,64 @@
         "coordinates": [
           [
             [
-              -95.5837,
-              37.098
+              -95.588823,
+              37.100366
             ],
             [
-              -95.5818,
-              37.098
+              -95.588823,
+              37.097956
             ],
             [
-              -95.5818,
-              37.0993
+              -95.586626,
+              37.097956
             ],
             [
-              -95.5837,
-              37.0993
+              -95.586626,
+              37.100366
             ],
             [
-              -95.5837,
-              37.098
+              -95.588823,
+              37.100366
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "john-deere",
+        "name": "John Deere Coffeyville Works - Coffeyville KS",
+        "type": "Component Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.585527,
+              37.098723
+            ],
+            [
+              -95.585527,
+              37.098175
+            ],
+            [
+              -95.58278,
+              37.098175
+            ],
+            [
+              -95.58278,
+              37.098723
+            ],
+            [
+              -95.585527,
+              37.098723
             ]
           ]
         ]
@@ -2850,63 +1548,28 @@
         "coordinates": [
           [
             [
-              -95.5836,
-              37.0982
+              -90.830176,
+              29.808922
             ],
             [
-              -95.582,
-              37.0982
+              -90.830725,
+              29.806658
             ],
             [
-              -95.582,
-              37.0998
+              -90.830451,
+              29.804513
             ],
             [
-              -95.5836,
-              37.0998
+              -90.826743,
+              29.804275
             ],
             [
-              -95.5836,
-              37.0982
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Coffeyville Works - Coffeyville KS",
-        "type": "Component Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.8302,
-              29.8038
+              -90.826468,
+              29.808565
             ],
             [
-              -90.825,
-              29.8038
-            ],
-            [
-              -90.825,
-              29.8095
-            ],
-            [
-              -90.8302,
-              29.8095
-            ],
-            [
-              -90.8302,
-              29.8038
+              -90.830176,
+              29.808922
             ]
           ]
         ]
@@ -2949,64 +1612,24 @@
         "coordinates": [
           [
             [
-              -90.8282,
-              29.8045
+              -90.830039,
+              29.808088
             ],
             [
-              -90.8265,
-              29.8045
+              -90.830107,
+              29.807492
             ],
             [
-              -90.8265,
-              29.8062
+              -90.826811,
+              29.807254
             ],
             [
-              -90.8282,
-              29.8062
+              -90.826743,
+              29.80785
             ],
             [
-              -90.8282,
-              29.8045
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Thibodaux - Thibodaux LA",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.828,
-              29.8043
-            ],
-            [
-              -90.8264,
-              29.8043
-            ],
-            [
-              -90.8264,
-              29.8056
-            ],
-            [
-              -90.828,
-              29.8056
-            ],
-            [
-              -90.828,
-              29.8043
+              -90.830039,
+              29.808088
             ]
           ]
         ]
@@ -3029,103 +1652,24 @@
         "coordinates": [
           [
             [
-              -90.8285,
-              29.8076
+              -93.202281,
+              37.2442
             ],
             [
-              -90.8265,
-              29.8076
+              -93.202144,
+              37.242997
             ],
             [
-              -90.8265,
-              29.809
+              -93.199741,
+              37.243106
             ],
             [
-              -90.8285,
-              29.809
+              -93.199878,
+              37.244364
             ],
             [
-              -90.8285,
-              29.8076
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Thibodaux - Thibodaux LA",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.829,
-              29.806
-            ],
-            [
-              -90.8268,
-              29.806
-            ],
-            [
-              -90.8268,
-              29.808
-            ],
-            [
-              -90.829,
-              29.808
-            ],
-            [
-              -90.829,
-              29.806
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Thibodaux - Thibodaux LA",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -93.2029,
-              37.2427
-            ],
-            [
-              -93.1992,
-              37.2427
-            ],
-            [
-              -93.1992,
-              37.2448
-            ],
-            [
-              -93.2029,
-              37.2448
-            ],
-            [
-              -93.2029,
-              37.2427
+              -93.202281,
+              37.2442
             ]
           ]
         ]
@@ -3168,24 +1712,24 @@
         "coordinates": [
           [
             [
-              -93.2021,
-              37.2432
+              -93.202075,
+              37.244036
             ],
             [
-              -93.2003,
-              37.2432
+              -93.202041,
+              37.243762
             ],
             [
-              -93.2003,
-              37.244
+              -93.199981,
+              37.243872
             ],
             [
-              -93.2021,
-              37.244
+              -93.200015,
+              37.244145
             ],
             [
-              -93.2021,
-              37.2432
+              -93.202075,
+              37.244036
             ]
           ]
         ]
@@ -3208,63 +1752,28 @@
         "coordinates": [
           [
             [
-              -93.202,
-              37.2431
+              -88.636347,
+              43.457988
             ],
             [
-              -93.1999,
-              37.2431
+              -88.636347,
+              43.454
             ],
             [
-              -93.1999,
-              37.2439
+              -88.634699,
+              43.449613
             ],
             [
-              -93.202,
-              37.2439
+              -88.632501,
+              43.450012
             ],
             [
-              -93.202,
-              37.2431
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Reman - Springfield MO",
-        "type": "Remanufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.6362,
-              43.4485
+              -88.631952,
+              43.457589
             ],
             [
-              -88.6314,
-              43.4485
-            ],
-            [
-              -88.6314,
-              43.4578
-            ],
-            [
-              -88.6362,
-              43.4578
-            ],
-            [
-              -88.6362,
-              43.4485
+              -88.636347,
+              43.457988
             ]
           ]
         ]
@@ -3307,103 +1816,24 @@
         "coordinates": [
           [
             [
-              -88.6332,
-              43.4538
+              -88.635523,
+              43.454997
             ],
             [
-              -88.6322,
-              43.4538
+              -88.63566,
+              43.451807
             ],
             [
-              -88.6322,
-              43.4546
+              -88.632913,
+              43.451607
             ],
             [
-              -88.6332,
-              43.4546
+              -88.632776,
+              43.454798
             ],
             [
-              -88.6332,
-              43.4538
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Horicon Works - Horicon WI",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.635,
-              43.4556
-            ],
-            [
-              -88.6328,
-              43.4556
-            ],
-            [
-              -88.6328,
-              43.4577
-            ],
-            [
-              -88.635,
-              43.4577
-            ],
-            [
-              -88.635,
-              43.4556
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Horicon Works - Horicon WI",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.6344,
-              43.4547
-            ],
-            [
-              -88.633,
-              43.4547
-            ],
-            [
-              -88.633,
-              43.4562
-            ],
-            [
-              -88.6344,
-              43.4562
-            ],
-            [
-              -88.6344,
-              43.4547
+              -88.635523,
+              43.454997
             ]
           ]
         ]
@@ -3426,63 +1856,28 @@
         "coordinates": [
           [
             [
-              -88.6332,
-              43.452
+              -82.895692,
+              36.154676
             ],
             [
-              -88.632,
-              43.452
+              -82.895555,
+              36.153234
             ],
             [
-              -88.632,
-              43.4538
+              -82.891847,
+              36.15024
             ],
             [
-              -88.6332,
-              43.4538
+              -82.886903,
+              36.151349
             ],
             [
-              -88.6332,
-              43.452
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Horicon Works - Horicon WI",
-        "type": "Assembly Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.894,
-              36.1492
+              -82.887453,
+              36.155119
             ],
             [
-              -82.8856,
-              36.1492
-            ],
-            [
-              -82.8856,
-              36.1566
-            ],
-            [
-              -82.894,
-              36.1566
-            ],
-            [
-              -82.894,
-              36.1492
+              -82.895692,
+              36.154676
             ]
           ]
         ]
@@ -3525,63 +1920,24 @@
         "coordinates": [
           [
             [
-              -82.8888,
-              36.155
+              -82.895418,
+              36.154454
             ],
             [
-              -82.8879,
-              36.155
+              -82.89528,
+              36.152458
             ],
             [
-              -82.8879,
-              36.1557
+              -82.890886,
+              36.15268
             ],
             [
-              -82.8888,
-              36.1557
+              -82.891023,
+              36.154676
             ],
             [
-              -82.8888,
-              36.155
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Power Products - Greeneville TN",
-        "type": "Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.8923,
-              36.1528
-            ],
-            [
-              -82.8902,
-              36.1528
-            ],
-            [
-              -82.8902,
-              36.1547
-            ],
-            [
-              -82.8923,
-              36.1547
-            ],
-            [
-              -82.8923,
-              36.1528
+              -82.895418,
+              36.154454
             ]
           ]
         ]
@@ -3604,64 +1960,24 @@
         "coordinates": [
           [
             [
-              -82.8938,
-              36.1508
+              -82.890474,
+              36.153789
             ],
             [
-              -82.8912,
-              36.1508
+              -82.890405,
+              36.153234
             ],
             [
-              -82.8912,
-              36.1528
+              -82.887384,
+              36.153456
             ],
             [
-              -82.8938,
-              36.1528
+              -82.887453,
+              36.154011
             ],
             [
-              -82.8938,
-              36.1508
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Power Products - Greeneville TN",
-        "type": "Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.8896,
-              36.1528
-            ],
-            [
-              -82.8878,
-              36.1528
-            ],
-            [
-              -82.8878,
-              36.1542
-            ],
-            [
-              -82.8896,
-              36.1542
-            ],
-            [
-              -82.8896,
-              36.1528
+              -82.890474,
+              36.153789
             ]
           ]
         ]
@@ -3684,103 +2000,24 @@
         "coordinates": [
           [
             [
-              -82.8906,
-              36.1508
+              -80.095247,
+              36.137809
             ],
             [
-              -82.8888,
-              36.1508
+              -80.095247,
+              36.133373
             ],
             [
-              -82.8888,
-              36.1523
+              -80.089204,
+              36.133373
             ],
             [
-              -82.8906,
-              36.1523
+              -80.089204,
+              36.137809
             ],
             [
-              -82.8906,
-              36.1508
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Power Products - Greeneville TN",
-        "type": "Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.8882,
-              36.1545
-            ],
-            [
-              -82.8868,
-              36.1545
-            ],
-            [
-              -82.8868,
-              36.1554
-            ],
-            [
-              -82.8882,
-              36.1554
-            ],
-            [
-              -82.8882,
-              36.1545
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Power Products - Greeneville TN",
-        "type": "Assembly Plant",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.0972,
-              36.1295
-            ],
-            [
-              -80.0825,
-              36.1295
-            ],
-            [
-              -80.0825,
-              36.1405
-            ],
-            [
-              -80.0972,
-              36.1405
-            ],
-            [
-              -80.0972,
-              36.1295
+              -80.095247,
+              36.137809
             ]
           ]
         ]
@@ -3823,143 +2060,24 @@
         "coordinates": [
           [
             [
-              -80.0916,
-              36.1345
+              -80.094697,
+              36.137144
             ],
             [
-              -80.0906,
-              36.1345
+              -80.094697,
+              36.136256
             ],
             [
-              -80.0906,
-              36.1353
+              -80.089753,
+              36.136256
             ],
             [
-              -80.0916,
-              36.1353
+              -80.089753,
+              36.137144
             ],
             [
-              -80.0916,
-              36.1345
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.0908,
-              36.1342
-            ],
-            [
-              -80.0882,
-              36.1342
-            ],
-            [
-              -80.0882,
-              36.1368
-            ],
-            [
-              -80.0908,
-              36.1368
-            ],
-            [
-              -80.0908,
-              36.1342
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.0856,
-              36.1318
-            ],
-            [
-              -80.0834,
-              36.1318
-            ],
-            [
-              -80.0834,
-              36.1342
-            ],
-            [
-              -80.0856,
-              36.1342
-            ],
-            [
-              -80.0856,
-              36.1318
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.0938,
-              36.1356
-            ],
-            [
-              -80.0918,
-              36.1356
-            ],
-            [
-              -80.0918,
-              36.1372
-            ],
-            [
-              -80.0938,
-              36.1372
-            ],
-            [
-              -80.0938,
-              36.1356
+              -80.094697,
+              36.137144
             ]
           ]
         ]
@@ -3982,103 +2100,28 @@
         "coordinates": [
           [
             [
-              -80.088,
-              36.1332
+              -90.550993,
+              41.450794
             ],
             [
-              -80.0866,
-              36.1332
+              -90.551542,
+              41.447912
             ],
             [
-              -80.0866,
-              36.1346
+              -90.549895,
+              41.444412
             ],
             [
-              -80.088,
-              36.1346
+              -90.542753,
+              41.445029
             ],
             [
-              -80.088,
-              36.1332
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -80.0912,
-              36.1338
+              -90.543852,
+              41.451411
             ],
             [
-              -80.0898,
-              36.1338
-            ],
-            [
-              -80.0898,
-              36.1347
-            ],
-            [
-              -80.0912,
-              36.1347
-            ],
-            [
-              -80.0912,
-              36.1338
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
-        "type": "Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.5498,
-              41.4423
-            ],
-            [
-              -90.5395,
-              41.4423
-            ],
-            [
-              -90.5395,
-              41.4523
-            ],
-            [
-              -90.5498,
-              41.4523
-            ],
-            [
-              -90.5498,
-              41.4423
+              -90.550993,
+              41.450794
             ]
           ]
         ]
@@ -4121,63 +2164,24 @@
         "coordinates": [
           [
             [
-              -90.5448,
-              41.451
+              -90.544127,
+              41.449559
             ],
             [
-              -90.5438,
-              41.451
+              -90.543852,
+              41.445647
             ],
             [
-              -90.5438,
-              41.4518
+              -90.540831,
+              41.445853
             ],
             [
-              -90.5448,
-              41.4518
+              -90.541105,
+              41.449765
             ],
             [
-              -90.5448,
-              41.451
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere North American Parts Distribution Center - Milan IL",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.5432,
-              41.4464
-            ],
-            [
-              -90.5398,
-              41.4464
-            ],
-            [
-              -90.5398,
-              41.45
-            ],
-            [
-              -90.5432,
-              41.45
-            ],
-            [
-              -90.5432,
-              41.4464
+              -90.544127,
+              41.449559
             ]
           ]
         ]
@@ -4200,104 +2204,24 @@
         "coordinates": [
           [
             [
-              -90.5482,
-              41.4432
+              -90.549895,
+              41.44997
             ],
             [
-              -90.5432,
-              41.4432
+              -90.549757,
+              41.448941
             ],
             [
-              -90.5432,
-              41.4468
+              -90.543989,
+              41.449353
             ],
             [
-              -90.5482,
-              41.4468
+              -90.544127,
+              41.450382
             ],
             [
-              -90.5482,
-              41.4432
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere North American Parts Distribution Center - Milan IL",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.5442,
-              41.4468
-            ],
-            [
-              -90.5418,
-              41.4468
-            ],
-            [
-              -90.5418,
-              41.4498
-            ],
-            [
-              -90.5442,
-              41.4498
-            ],
-            [
-              -90.5442,
-              41.4468
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere North American Parts Distribution Center - Milan IL",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -90.5458,
-              41.4462
-            ],
-            [
-              -90.5436,
-              41.4462
-            ],
-            [
-              -90.5436,
-              41.4502
-            ],
-            [
-              -90.5458,
-              41.4502
-            ],
-            [
-              -90.5458,
-              41.4462
+              -90.549895,
+              41.44997
             ]
           ]
         ]
@@ -4320,36 +2244,57 @@
         "coordinates": [
           [
             [
-              -90.5442,
-              41.45
+              -87.304747,
+              41.283651
             ],
             [
-              -90.5426,
-              41.45
+              -87.305571,
+              41.281484
             ],
             [
-              -90.5426,
-              41.4512
+              -87.303099,
+              41.280762
             ],
             [
-              -90.5442,
-              41.4512
+              -87.302,
+              41.282826
             ],
             [
-              -90.5442,
-              41.45
+              -87.304747,
+              41.283651
             ]
           ]
         ]
       },
       "properties": {
         "account": "john-deere",
-        "name": "John Deere North American Parts Distribution Center - Milan IL",
+        "name": "John Deere Distribution Center - Hebron IN",
         "type": "Parts Distribution Center",
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 0,
+          "siteAreaAcres": 234,
+          "railServed": false
+        }
       }
     },
     {
@@ -4359,24 +2304,28 @@
         "coordinates": [
           [
             [
-              -92.2872,
-              42.5077
+              -92.286499,
+              42.51233
             ],
             [
-              -92.2832,
-              42.5077
+              -92.286773,
+              42.510912
             ],
             [
-              -92.2832,
-              42.5129
+              -92.286773,
+              42.507875
             ],
             [
-              -92.2872,
-              42.5129
+              -92.284301,
+              42.507673
             ],
             [
-              -92.2872,
-              42.5077
+              -92.284027,
+              42.512127
+            ],
+            [
+              -92.286499,
+              42.51233
             ]
           ]
         ]
@@ -4419,103 +2368,24 @@
         "coordinates": [
           [
             [
-              -92.2868,
-              42.5119
+              -92.286361,
+              42.510912
             ],
             [
-              -92.2861,
-              42.5119
+              -92.28643,
+              42.508483
             ],
             [
-              -92.2861,
-              42.5125
+              -92.284507,
+              42.50828
             ],
             [
-              -92.2868,
-              42.5125
+              -92.284439,
+              42.51071
             ],
             [
-              -92.2868,
-              42.5119
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Parts Distribution Center - Waterloo IA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.2843,
-              42.5079
-            ],
-            [
-              -92.2833,
-              42.5079
-            ],
-            [
-              -92.2833,
-              42.5117
-            ],
-            [
-              -92.2843,
-              42.5117
-            ],
-            [
-              -92.2843,
-              42.5079
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Parts Distribution Center - Waterloo IA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.2848,
-              42.508
-            ],
-            [
-              -92.2843,
-              42.508
-            ],
-            [
-              -92.2843,
-              42.5114
-            ],
-            [
-              -92.2848,
-              42.5114
-            ],
-            [
-              -92.2848,
-              42.508
+              -92.286361,
+              42.510912
             ]
           ]
         ]
@@ -4538,103 +2408,24 @@
         "coordinates": [
           [
             [
-              -92.2846,
-              42.5115
+              -96.314661,
+              43.1972
             ],
             [
-              -92.284,
-              42.5115
+              -96.314661,
+              43.195799
             ],
             [
-              -92.284,
-              42.5123
+              -96.312876,
+              43.195799
             ],
             [
-              -92.2846,
-              42.5123
+              -96.312876,
+              43.19715
             ],
             [
-              -92.2846,
-              42.5115
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Parts Distribution Center - Waterloo IA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -92.2847,
-              42.5119
-            ],
-            [
-              -92.2837,
-              42.5119
-            ],
-            [
-              -92.2837,
-              42.5128
-            ],
-            [
-              -92.2847,
-              42.5128
-            ],
-            [
-              -92.2847,
-              42.5119
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere Parts Distribution Center - Waterloo IA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.3152,
-              43.1952
-            ],
-            [
-              -96.3122,
-              43.1952
-            ],
-            [
-              -96.3122,
-              43.1985
-            ],
-            [
-              -96.3152,
-              43.1985
-            ],
-            [
-              -96.3152,
-              43.1952
+              -96.314661,
+              43.1972
             ]
           ]
         ]
@@ -4677,63 +2468,24 @@
         "coordinates": [
           [
             [
-              -96.3151,
-              43.1969
+              -96.314524,
+              43.197
             ],
             [
-              -96.3146,
-              43.1969
+              -96.314524,
+              43.1968
             ],
             [
-              -96.3146,
-              43.1974
+              -96.313013,
+              43.19675
             ],
             [
-              -96.3151,
-              43.1974
+              -96.313013,
+              43.19695
             ],
             [
-              -96.3151,
-              43.1969
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere All-Makes Parts Distribution Center - Rock Valley IA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.3146,
-              43.1964
-            ],
-            [
-              -96.3137,
-              43.1964
-            ],
-            [
-              -96.3137,
-              43.1971
-            ],
-            [
-              -96.3146,
-              43.1971
-            ],
-            [
-              -96.3146,
-              43.1964
+              -96.314524,
+              43.197
             ]
           ]
         ]
@@ -4747,45 +2499,6 @@
         "confidence": "medium",
         "zone": "dockApron",
         "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.3147,
-              43.1964
-            ],
-            [
-              -96.3135,
-              43.1964
-            ],
-            [
-              -96.3135,
-              43.1972
-            ],
-            [
-              -96.3147,
-              43.1972
-            ],
-            [
-              -96.3147,
-              43.1964
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "john-deere",
-        "name": "John Deere All-Makes Parts Distribution Center - Rock Valley IA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
       }
     }
   ]

@@ -1,0 +1,5337 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12392,
+              36.19206
+            ],
+            [
+              -94.12508,
+              36.19216
+            ],
+            [
+              -94.1257,
+              36.19212
+            ],
+            [
+              -94.12588,
+              36.1914
+            ],
+            [
+              -94.12615,
+              36.1906
+            ],
+            [
+              -94.12634,
+              36.1899
+            ],
+            [
+              -94.12665,
+              36.189
+            ],
+            [
+              -94.12658,
+              36.18843
+            ],
+            [
+              -94.125,
+              36.18841
+            ],
+            [
+              -94.12489,
+              36.18908
+            ],
+            [
+              -94.12452,
+              36.1902
+            ],
+            [
+              -94.12414,
+              36.1912
+            ],
+            [
+              -94.12392,
+              36.19206
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 10,
+          "siteAreaAcres": 16,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12505,
+              36.18906
+            ],
+            [
+              -94.12551,
+              36.18917
+            ],
+            [
+              -94.12556,
+              36.18904
+            ],
+            [
+              -94.12508,
+              36.18894
+            ],
+            [
+              -94.12505,
+              36.18906
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12641,
+              36.18922
+            ],
+            [
+              -94.12641,
+              36.18842
+            ],
+            [
+              -94.125,
+              36.18842
+            ],
+            [
+              -94.12496,
+              36.18898
+            ],
+            [
+              -94.12508,
+              36.18922
+            ],
+            [
+              -94.12641,
+              36.18922
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12515,
+              36.1921
+            ],
+            [
+              -94.12515,
+              36.19164
+            ],
+            [
+              -94.124,
+              36.19162
+            ],
+            [
+              -94.12392,
+              36.19206
+            ],
+            [
+              -94.12515,
+              36.1921
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12502,
+              36.19149
+            ],
+            [
+              -94.12502,
+              36.19112
+            ],
+            [
+              -94.12432,
+              36.19112
+            ],
+            [
+              -94.12432,
+              36.19149
+            ],
+            [
+              -94.12502,
+              36.19149
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.1254,
+              36.19008
+            ],
+            [
+              -94.1254,
+              36.18978
+            ],
+            [
+              -94.12511,
+              36.18978
+            ],
+            [
+              -94.12511,
+              36.19008
+            ],
+            [
+              -94.1254,
+              36.19008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12571,
+              36.19168
+            ],
+            [
+              -94.12565,
+              36.19132
+            ],
+            [
+              -94.12552,
+              36.19131
+            ],
+            [
+              -94.12557,
+              36.19168
+            ],
+            [
+              -94.12571,
+              36.19168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.12551,
+              36.18986
+            ],
+            [
+              -94.12551,
+              36.18921
+            ],
+            [
+              -94.12492,
+              36.18921
+            ],
+            [
+              -94.12492,
+              36.18986
+            ],
+            [
+              -94.12551,
+              36.18986
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Springdale Complex - Springdale AR",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41476,
+              42.43474
+            ],
+            [
+              -96.41892,
+              42.43474
+            ],
+            [
+              -96.4188,
+              42.432
+            ],
+            [
+              -96.41925,
+              42.43
+            ],
+            [
+              -96.4193,
+              42.428
+            ],
+            [
+              -96.41905,
+              42.425
+            ],
+            [
+              -96.419,
+              42.4224
+            ],
+            [
+              -96.417,
+              42.42235
+            ],
+            [
+              -96.4169,
+              42.423
+            ],
+            [
+              -96.4164,
+              42.4242
+            ],
+            [
+              -96.4152,
+              42.425
+            ],
+            [
+              -96.41508,
+              42.4262
+            ],
+            [
+              -96.41508,
+              42.42846
+            ],
+            [
+              -96.41487,
+              42.4297
+            ],
+            [
+              -96.41479,
+              42.4319
+            ],
+            [
+              -96.41476,
+              42.43474
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 85,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 3,
+          "buildingCount": 25,
+          "siteAreaAcres": 106.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41412,
+              42.43182
+            ],
+            [
+              -96.4155,
+              42.43182
+            ],
+            [
+              -96.4155,
+              42.43132
+            ],
+            [
+              -96.41412,
+              42.43132
+            ],
+            [
+              -96.41412,
+              42.43182
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4173,
+              42.43365
+            ],
+            [
+              -96.4173,
+              42.43185
+            ],
+            [
+              -96.41478,
+              42.43185
+            ],
+            [
+              -96.41478,
+              42.43365
+            ],
+            [
+              -96.4173,
+              42.43365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4168,
+              42.43185
+            ],
+            [
+              -96.4168,
+              42.42965
+            ],
+            [
+              -96.41487,
+              42.42965
+            ],
+            [
+              -96.4147,
+              42.43185
+            ],
+            [
+              -96.4168,
+              42.43185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41735,
+              42.4318
+            ],
+            [
+              -96.4174,
+              42.4304
+            ],
+            [
+              -96.41625,
+              42.4304
+            ],
+            [
+              -96.4162,
+              42.4318
+            ],
+            [
+              -96.41735,
+              42.4318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.419,
+              42.42457
+            ],
+            [
+              -96.419,
+              42.42243
+            ],
+            [
+              -96.41723,
+              42.42243
+            ],
+            [
+              -96.41723,
+              42.42457
+            ],
+            [
+              -96.419,
+              42.42457
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41669,
+              42.43059
+            ],
+            [
+              -96.41669,
+              42.42991
+            ],
+            [
+              -96.41643,
+              42.42991
+            ],
+            [
+              -96.41643,
+              42.43059
+            ],
+            [
+              -96.41669,
+              42.43059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41735,
+              42.43185
+            ],
+            [
+              -96.41735,
+              42.43089
+            ],
+            [
+              -96.41713,
+              42.43089
+            ],
+            [
+              -96.41713,
+              42.43185
+            ],
+            [
+              -96.41735,
+              42.43185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41668,
+              42.43113
+            ],
+            [
+              -96.41668,
+              42.43091
+            ],
+            [
+              -96.416,
+              42.43091
+            ],
+            [
+              -96.416,
+              42.43113
+            ],
+            [
+              -96.41668,
+              42.43113
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.41603,
+              42.43164
+            ],
+            [
+              -96.41603,
+              42.43007
+            ],
+            [
+              -96.41564,
+              42.43007
+            ],
+            [
+              -96.41564,
+              42.43164
+            ],
+            [
+              -96.41603,
+              42.43164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.6533,
+              35.2635
+            ],
+            [
+              -101.6533,
+              35.2553
+            ],
+            [
+              -101.6486,
+              35.2552
+            ],
+            [
+              -101.646,
+              35.2565
+            ],
+            [
+              -101.6452,
+              35.2598
+            ],
+            [
+              -101.6456,
+              35.2629
+            ],
+            [
+              -101.6496,
+              35.2635
+            ],
+            [
+              -101.6533,
+              35.2635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 152.2,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.64795,
+              35.26285
+            ],
+            [
+              -101.64795,
+              35.26225
+            ],
+            [
+              -101.64715,
+              35.26225
+            ],
+            [
+              -101.64715,
+              35.26285
+            ],
+            [
+              -101.64795,
+              35.26285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.64976,
+              35.26235
+            ],
+            [
+              -101.64976,
+              35.26152
+            ],
+            [
+              -101.64802,
+              35.26152
+            ],
+            [
+              -101.64802,
+              35.26235
+            ],
+            [
+              -101.64976,
+              35.26235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.6479,
+              35.26229
+            ],
+            [
+              -101.6479,
+              35.25977
+            ],
+            [
+              -101.64555,
+              35.25977
+            ],
+            [
+              -101.64555,
+              35.26229
+            ],
+            [
+              -101.6479,
+              35.26229
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.64795,
+              35.2613
+            ],
+            [
+              -101.64795,
+              35.25985
+            ],
+            [
+              -101.64758,
+              35.25985
+            ],
+            [
+              -101.64758,
+              35.2613
+            ],
+            [
+              -101.64795,
+              35.2613
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.6496,
+              35.26139
+            ],
+            [
+              -101.6496,
+              35.26119
+            ],
+            [
+              -101.6488,
+              35.26119
+            ],
+            [
+              -101.6488,
+              35.26139
+            ],
+            [
+              -101.6496,
+              35.26139
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.6474,
+              35.2569
+            ],
+            [
+              -101.6474,
+              35.25672
+            ],
+            [
+              -101.6452,
+              35.25672
+            ],
+            [
+              -101.6452,
+              35.2569
+            ],
+            [
+              -101.6474,
+              35.2569
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.648,
+              35.26575
+            ],
+            [
+              -101.648,
+              35.26285
+            ],
+            [
+              -101.647,
+              35.26285
+            ],
+            [
+              -101.647,
+              35.26575
+            ],
+            [
+              -101.648,
+              35.26575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+        "type": "Beef Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.0305,
+              38.00095
+            ],
+            [
+              -101.03075,
+              37.999
+            ],
+            [
+              -101.03045,
+              37.99655
+            ],
+            [
+              -101.0278,
+              37.99628
+            ],
+            [
+              -101.02125,
+              37.9964
+            ],
+            [
+              -101.02125,
+              38.00015
+            ],
+            [
+              -101.0243,
+              38.00015
+            ],
+            [
+              -101.0243,
+              38.00095
+            ],
+            [
+              -101.0305,
+              38.00095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 2,
+          "buildingCount": 10,
+          "siteAreaAcres": 97.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.02362,
+              37.99672
+            ],
+            [
+              -101.02362,
+              37.9963
+            ],
+            [
+              -101.02316,
+              37.9963
+            ],
+            [
+              -101.02316,
+              37.99672
+            ],
+            [
+              -101.02362,
+              37.99672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.02776,
+              37.99765
+            ],
+            [
+              -101.02776,
+              37.99655
+            ],
+            [
+              -101.02379,
+              37.99655
+            ],
+            [
+              -101.02379,
+              37.99765
+            ],
+            [
+              -101.02776,
+              37.99765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.02463,
+              37.99835
+            ],
+            [
+              -101.02463,
+              37.99774
+            ],
+            [
+              -101.02434,
+              37.99774
+            ],
+            [
+              -101.02434,
+              37.99835
+            ],
+            [
+              -101.02463,
+              37.99835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.02496,
+              37.99924
+            ],
+            [
+              -101.02496,
+              37.99882
+            ],
+            [
+              -101.02474,
+              37.99882
+            ],
+            [
+              -101.02474,
+              37.99924
+            ],
+            [
+              -101.02496,
+              37.99924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.02502,
+              37.99848
+            ],
+            [
+              -101.02502,
+              37.99816
+            ],
+            [
+              -101.02482,
+              37.99816
+            ],
+            [
+              -101.02482,
+              37.99848
+            ],
+            [
+              -101.02502,
+              37.99848
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -101.02362,
+              37.99775
+            ],
+            [
+              -101.02362,
+              37.99672
+            ],
+            [
+              -101.0231,
+              37.99672
+            ],
+            [
+              -101.0231,
+              37.99775
+            ],
+            [
+              -101.02362,
+              37.99775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+        "type": "Beef Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2249,
+              41.55445
+            ],
+            [
+              -90.2262,
+              41.5536
+            ],
+            [
+              -90.2271,
+              41.5522
+            ],
+            [
+              -90.2275,
+              41.5508
+            ],
+            [
+              -90.2269,
+              41.54945
+            ],
+            [
+              -90.2243,
+              41.54935
+            ],
+            [
+              -90.22235,
+              41.54985
+            ],
+            [
+              -90.22195,
+              41.5526
+            ],
+            [
+              -90.22203,
+              41.5544
+            ],
+            [
+              -90.2249,
+              41.55445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 53.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.22496,
+              41.55456
+            ],
+            [
+              -90.22502,
+              41.55332
+            ],
+            [
+              -90.22462,
+              41.5533
+            ],
+            [
+              -90.22456,
+              41.55454
+            ],
+            [
+              -90.22496,
+              41.55456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.22462,
+              41.55439
+            ],
+            [
+              -90.22474,
+              41.55314
+            ],
+            [
+              -90.22206,
+              41.55315
+            ],
+            [
+              -90.22204,
+              41.5544
+            ],
+            [
+              -90.22462,
+              41.55439
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2253,
+              41.55433
+            ],
+            [
+              -90.22536,
+              41.55359
+            ],
+            [
+              -90.22482,
+              41.5536
+            ],
+            [
+              -90.22476,
+              41.55434
+            ],
+            [
+              -90.2253,
+              41.55433
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.223799,
+              41.553171
+            ],
+            [
+              -90.224054,
+              41.553171
+            ],
+            [
+              -90.224054,
+              41.552338
+            ],
+            [
+              -90.223799,
+              41.552338
+            ],
+            [
+              -90.223799,
+              41.553171
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.224456,
+              41.553061
+            ],
+            [
+              -90.224456,
+              41.552439
+            ],
+            [
+              -90.2242,
+              41.552439
+            ],
+            [
+              -90.2242,
+              41.553061
+            ],
+            [
+              -90.224456,
+              41.553061
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2247,
+              41.5534
+            ],
+            [
+              -90.2247,
+              41.5529
+            ],
+            [
+              -90.2232,
+              41.5529
+            ],
+            [
+              -90.2232,
+              41.5534
+            ],
+            [
+              -90.2247,
+              41.5534
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+        "type": "Beef Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.19105,
+              42.64238
+            ],
+            [
+              -95.1911,
+              42.64115
+            ],
+            [
+              -95.19386,
+              42.64109
+            ],
+            [
+              -95.19396,
+              42.64026
+            ],
+            [
+              -95.1913,
+              42.6399
+            ],
+            [
+              -95.1886,
+              42.63925
+            ],
+            [
+              -95.1863,
+              42.63862
+            ],
+            [
+              -95.18625,
+              42.64196
+            ],
+            [
+              -95.18866,
+              42.64193
+            ],
+            [
+              -95.18876,
+              42.64238
+            ],
+            [
+              -95.19105,
+              42.64238
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 48,
+          "trailersVisible": 165,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 38.2,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.18625,
+              42.64092
+            ],
+            [
+              -95.18705,
+              42.64092
+            ],
+            [
+              -95.18705,
+              42.64068
+            ],
+            [
+              -95.18625,
+              42.64068
+            ],
+            [
+              -95.18625,
+              42.64092
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.187744,
+              42.641571
+            ],
+            [
+              -95.187744,
+              42.64085
+            ],
+            [
+              -95.186541,
+              42.64085
+            ],
+            [
+              -95.186541,
+              42.641571
+            ],
+            [
+              -95.187744,
+              42.641571
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.1939,
+              42.6411
+            ],
+            [
+              -95.19388,
+              42.64025
+            ],
+            [
+              -95.1912,
+              42.63995
+            ],
+            [
+              -95.1891,
+              42.6403
+            ],
+            [
+              -95.1897,
+              42.6411
+            ],
+            [
+              -95.1939,
+              42.6411
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.187403,
+              42.64075
+            ],
+            [
+              -95.187403,
+              42.640543
+            ],
+            [
+              -95.187027,
+              42.640484
+            ],
+            [
+              -95.187027,
+              42.640691
+            ],
+            [
+              -95.187403,
+              42.64075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.1889,
+              42.64085
+            ],
+            [
+              -95.1889,
+              42.6403
+            ],
+            [
+              -95.1877,
+              42.6403
+            ],
+            [
+              -95.1877,
+              42.64085
+            ],
+            [
+              -95.1889,
+              42.64085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.267671,
+              42.509216
+            ],
+            [
+              -92.267457,
+              42.5089
+            ],
+            [
+              -92.267296,
+              42.507199
+            ],
+            [
+              -92.264775,
+              42.507002
+            ],
+            [
+              -92.264882,
+              42.505697
+            ],
+            [
+              -92.259035,
+              42.505776
+            ],
+            [
+              -92.258927,
+              42.511431
+            ],
+            [
+              -92.259839,
+              42.511668
+            ],
+            [
+              -92.267671,
+              42.509216
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 250,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 14,
+          "siteAreaAcres": 84.4,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.25995,
+              42.51062
+            ],
+            [
+              -92.25995,
+              42.51028
+            ],
+            [
+              -92.25935,
+              42.51028
+            ],
+            [
+              -92.25935,
+              42.51062
+            ],
+            [
+              -92.25995,
+              42.51062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.267082,
+              42.509849
+            ],
+            [
+              -92.266866,
+              42.509375
+            ],
+            [
+              -92.263487,
+              42.510481
+            ],
+            [
+              -92.263702,
+              42.510917
+            ],
+            [
+              -92.267082,
+              42.509849
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.267243,
+              42.508821
+            ],
+            [
+              -92.267189,
+              42.507199
+            ],
+            [
+              -92.265096,
+              42.507081
+            ],
+            [
+              -92.264882,
+              42.508504
+            ],
+            [
+              -92.267243,
+              42.508821
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.262628,
+              42.51064
+            ],
+            [
+              -92.262468,
+              42.510205
+            ],
+            [
+              -92.25925,
+              42.510838
+            ],
+            [
+              -92.259411,
+              42.511273
+            ],
+            [
+              -92.262628,
+              42.51064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.2626,
+              42.5101
+            ],
+            [
+              -92.2626,
+              42.50975
+            ],
+            [
+              -92.2597,
+              42.50975
+            ],
+            [
+              -92.2597,
+              42.5101
+            ],
+            [
+              -92.2626,
+              42.5101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.25935,
+              42.51056
+            ],
+            [
+              -92.25935,
+              42.5103
+            ],
+            [
+              -92.25895,
+              42.5103
+            ],
+            [
+              -92.25895,
+              42.51056
+            ],
+            [
+              -92.25935,
+              42.51056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.35748,
+              41.299
+            ],
+            [
+              -91.35782,
+              41.297
+            ],
+            [
+              -91.3583,
+              41.2944
+            ],
+            [
+              -91.35755,
+              41.2929
+            ],
+            [
+              -91.3568,
+              41.2915
+            ],
+            [
+              -91.3534,
+              41.2931
+            ],
+            [
+              -91.3535,
+              41.296
+            ],
+            [
+              -91.354,
+              41.299
+            ],
+            [
+              -91.35748,
+              41.299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 66.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.35785,
+              41.29688
+            ],
+            [
+              -91.35785,
+              41.29669
+            ],
+            [
+              -91.3571,
+              41.29669
+            ],
+            [
+              -91.3571,
+              41.29688
+            ],
+            [
+              -91.35785,
+              41.29688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.355871,
+              41.296773
+            ],
+            [
+              -91.355924,
+              41.29648
+            ],
+            [
+              -91.354757,
+              41.296299
+            ],
+            [
+              -91.354704,
+              41.296571
+            ],
+            [
+              -91.355871,
+              41.296773
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.3552,
+              41.297639
+            ],
+            [
+              -91.355187,
+              41.296843
+            ],
+            [
+              -91.354368,
+              41.296551
+            ],
+            [
+              -91.354221,
+              41.297448
+            ],
+            [
+              -91.3552,
+              41.297639
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.355656,
+              41.296168
+            ],
+            [
+              -91.355656,
+              41.295433
+            ],
+            [
+              -91.354771,
+              41.295423
+            ],
+            [
+              -91.354771,
+              41.296158
+            ],
+            [
+              -91.355656,
+              41.296168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.3567,
+              41.29655
+            ],
+            [
+              -91.35505,
+              41.29539
+            ],
+            [
+              -91.354805,
+              41.295587
+            ],
+            [
+              -91.356455,
+              41.296747
+            ],
+            [
+              -91.3567,
+              41.29655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+        "type": "Pork Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.60819,
+              33.58308
+            ],
+            [
+              -96.60795,
+              33.58181
+            ],
+            [
+              -96.60659,
+              33.57967
+            ],
+            [
+              -96.60563,
+              33.57829
+            ],
+            [
+              -96.60493,
+              33.57755
+            ],
+            [
+              -96.60356,
+              33.5777
+            ],
+            [
+              -96.60354,
+              33.57909
+            ],
+            [
+              -96.60412,
+              33.58012
+            ],
+            [
+              -96.60417,
+              33.58204
+            ],
+            [
+              -96.605,
+              33.583
+            ],
+            [
+              -96.60606,
+              33.58315
+            ],
+            [
+              -96.60819,
+              33.58308
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 290,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 40.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.60795,
+              33.58209
+            ],
+            [
+              -96.60795,
+              33.58193
+            ],
+            [
+              -96.6072,
+              33.58193
+            ],
+            [
+              -96.6072,
+              33.58209
+            ],
+            [
+              -96.60795,
+              33.58209
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.60819,
+              33.58308
+            ],
+            [
+              -96.60812,
+              33.58212
+            ],
+            [
+              -96.60601,
+              33.58219
+            ],
+            [
+              -96.60606,
+              33.58315
+            ],
+            [
+              -96.60819,
+              33.58308
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.60759,
+              33.58194
+            ],
+            [
+              -96.60759,
+              33.58089
+            ],
+            [
+              -96.60646,
+              33.58089
+            ],
+            [
+              -96.60646,
+              33.58197
+            ],
+            [
+              -96.60759,
+              33.58194
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.60579,
+              33.57929
+            ],
+            [
+              -96.60579,
+              33.57824
+            ],
+            [
+              -96.60496,
+              33.57824
+            ],
+            [
+              -96.60496,
+              33.57929
+            ],
+            [
+              -96.60579,
+              33.57929
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.606,
+              33.58284
+            ],
+            [
+              -96.606,
+              33.58228
+            ],
+            [
+              -96.60561,
+              33.58228
+            ],
+            [
+              -96.60561,
+              33.58284
+            ],
+            [
+              -96.606,
+              33.58284
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.60608,
+              33.58213
+            ],
+            [
+              -96.60608,
+              33.58183
+            ],
+            [
+              -96.60556,
+              33.58183
+            ],
+            [
+              -96.60556,
+              33.58213
+            ],
+            [
+              -96.60608,
+              33.58213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6074,
+              33.58225
+            ],
+            [
+              -96.6074,
+              33.58185
+            ],
+            [
+              -96.60615,
+              33.58185
+            ],
+            [
+              -96.60615,
+              33.58225
+            ],
+            [
+              -96.6074,
+              33.58225
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.16841,
+              31.79285
+            ],
+            [
+              -94.168,
+              31.79272
+            ],
+            [
+              -94.16745,
+              31.79268
+            ],
+            [
+              -94.16648,
+              31.79257
+            ],
+            [
+              -94.16482,
+              31.79262
+            ],
+            [
+              -94.16487,
+              31.79403
+            ],
+            [
+              -94.16518,
+              31.79456
+            ],
+            [
+              -94.16532,
+              31.79548
+            ],
+            [
+              -94.16593,
+              31.79602
+            ],
+            [
+              -94.16795,
+              31.79595
+            ],
+            [
+              -94.1686,
+              31.79497
+            ],
+            [
+              -94.16862,
+              31.79395
+            ],
+            [
+              -94.16841,
+              31.79285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Center Poultry Complex - Center TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 145,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 10,
+          "siteAreaAcres": 29.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.16786,
+              31.793
+            ],
+            [
+              -94.16786,
+              31.79268
+            ],
+            [
+              -94.16763,
+              31.79268
+            ],
+            [
+              -94.16763,
+              31.793
+            ],
+            [
+              -94.16786,
+              31.793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Center Poultry Complex - Center TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.16808,
+              31.79589
+            ],
+            [
+              -94.16746,
+              31.79459
+            ],
+            [
+              -94.16527,
+              31.79456
+            ],
+            [
+              -94.16532,
+              31.79582
+            ],
+            [
+              -94.16808,
+              31.79589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Center Poultry Complex - Center TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.16854,
+              31.79479
+            ],
+            [
+              -94.16854,
+              31.79386
+            ],
+            [
+              -94.16747,
+              31.79386
+            ],
+            [
+              -94.16747,
+              31.79474
+            ],
+            [
+              -94.16854,
+              31.79479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Center Poultry Complex - Center TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.16758,
+              31.79319
+            ],
+            [
+              -94.16754,
+              31.79274
+            ],
+            [
+              -94.16723,
+              31.79275
+            ],
+            [
+              -94.16727,
+              31.7932
+            ],
+            [
+              -94.16758,
+              31.79319
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Center Poultry Complex - Center TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.16793,
+              31.79323
+            ],
+            [
+              -94.16793,
+              31.79271
+            ],
+            [
+              -94.16752,
+              31.79271
+            ],
+            [
+              -94.16752,
+              31.79323
+            ],
+            [
+              -94.16793,
+              31.79323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Center Poultry Complex - Center TX",
+        "type": "Poultry Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4761,
+              35.48003
+            ],
+            [
+              -86.47648,
+              35.47895
+            ],
+            [
+              -86.47653,
+              35.4779
+            ],
+            [
+              -86.47592,
+              35.47694
+            ],
+            [
+              -86.47503,
+              35.47646
+            ],
+            [
+              -86.47417,
+              35.4764
+            ],
+            [
+              -86.4724,
+              35.47628
+            ],
+            [
+              -86.47185,
+              35.47764
+            ],
+            [
+              -86.4718,
+              35.4787
+            ],
+            [
+              -86.4725,
+              35.48
+            ],
+            [
+              -86.4745,
+              35.48004
+            ],
+            [
+              -86.4761,
+              35.48003
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 108,
+          "trailerParkingCapacity": 190,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 37.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.47611,
+              35.47943
+            ],
+            [
+              -86.47611,
+              35.47905
+            ],
+            [
+              -86.47586,
+              35.47905
+            ],
+            [
+              -86.47586,
+              35.47943
+            ],
+            [
+              -86.47611,
+              35.47943
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.47264,
+              35.4789
+            ],
+            [
+              -86.47251,
+              35.47827
+            ],
+            [
+              -86.47299,
+              35.47808
+            ],
+            [
+              -86.47292,
+              35.47758
+            ],
+            [
+              -86.47187,
+              35.47765
+            ],
+            [
+              -86.47185,
+              35.47867
+            ],
+            [
+              -86.47264,
+              35.4789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.47487,
+              35.47711
+            ],
+            [
+              -86.47512,
+              35.47687
+            ],
+            [
+              -86.47496,
+              35.47646
+            ],
+            [
+              -86.47437,
+              35.47645
+            ],
+            [
+              -86.47409,
+              35.47672
+            ],
+            [
+              -86.47408,
+              35.47709
+            ],
+            [
+              -86.47487,
+              35.47711
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.47645,
+              35.47767
+            ],
+            [
+              -86.47645,
+              35.47729
+            ],
+            [
+              -86.47622,
+              35.47729
+            ],
+            [
+              -86.47622,
+              35.47767
+            ],
+            [
+              -86.47645,
+              35.47767
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.47599,
+              35.47745
+            ],
+            [
+              -86.47599,
+              35.47721
+            ],
+            [
+              -86.47587,
+              35.47721
+            ],
+            [
+              -86.47587,
+              35.47745
+            ],
+            [
+              -86.47599,
+              35.47745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.47593,
+              35.47986
+            ],
+            [
+              -86.47591,
+              35.4794
+            ],
+            [
+              -86.47545,
+              35.4794
+            ],
+            [
+              -86.47545,
+              35.47986
+            ],
+            [
+              -86.47593,
+              35.47986
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.16126,
+              36.14555
+            ],
+            [
+              -81.16217,
+              36.14549
+            ],
+            [
+              -81.163,
+              36.1449
+            ],
+            [
+              -81.1643,
+              36.1443
+            ],
+            [
+              -81.1655,
+              36.1437
+            ],
+            [
+              -81.1669,
+              36.1433
+            ],
+            [
+              -81.1669,
+              36.1418
+            ],
+            [
+              -81.1656,
+              36.1415
+            ],
+            [
+              -81.1643,
+              36.1407
+            ],
+            [
+              -81.163,
+              36.1406
+            ],
+            [
+              -81.1615,
+              36.1404
+            ],
+            [
+              -81.1611,
+              36.1414
+            ],
+            [
+              -81.1604,
+              36.14224
+            ],
+            [
+              -81.1609,
+              36.144
+            ],
+            [
+              -81.16118,
+              36.14497
+            ],
+            [
+              -81.16126,
+              36.14555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 2,
+          "buildingCount": 22,
+          "siteAreaAcres": 53,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.162,
+              36.14268
+            ],
+            [
+              -81.162,
+              36.14248
+            ],
+            [
+              -81.16168,
+              36.14248
+            ],
+            [
+              -81.16168,
+              36.14268
+            ],
+            [
+              -81.162,
+              36.14268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.16217,
+              36.14549
+            ],
+            [
+              -81.16215,
+              36.14455
+            ],
+            [
+              -81.1612,
+              36.1447
+            ],
+            [
+              -81.1613,
+              36.14549
+            ],
+            [
+              -81.16217,
+              36.14549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1633,
+              36.142
+            ],
+            [
+              -81.1633,
+              36.14095
+            ],
+            [
+              -81.1617,
+              36.141
+            ],
+            [
+              -81.1618,
+              36.14205
+            ],
+            [
+              -81.1633,
+              36.142
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1639,
+              36.1436
+            ],
+            [
+              -81.164,
+              36.1427
+            ],
+            [
+              -81.16295,
+              36.14265
+            ],
+            [
+              -81.1629,
+              36.14355
+            ],
+            [
+              -81.1639,
+              36.1436
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.16672,
+              36.14449
+            ],
+            [
+              -81.16672,
+              36.14356
+            ],
+            [
+              -81.16551,
+              36.14356
+            ],
+            [
+              -81.16551,
+              36.14449
+            ],
+            [
+              -81.16672,
+              36.14449
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1618,
+              36.14489
+            ],
+            [
+              -81.1618,
+              36.14468
+            ],
+            [
+              -81.16134,
+              36.14466
+            ],
+            [
+              -81.16134,
+              36.14487
+            ],
+            [
+              -81.1618,
+              36.14489
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1622,
+              36.14245
+            ],
+            [
+              -81.1622,
+              36.142
+            ],
+            [
+              -81.1616,
+              36.142
+            ],
+            [
+              -81.1616,
+              36.14245
+            ],
+            [
+              -81.1622,
+              36.14245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.088091,
+              40.096961
+            ],
+            [
+              -76.087582,
+              40.095854
+            ],
+            [
+              -76.087057,
+              40.095074
+            ],
+            [
+              -76.086526,
+              40.094315
+            ],
+            [
+              -76.085678,
+              40.093741
+            ],
+            [
+              -76.084016,
+              40.094069
+            ],
+            [
+              -76.084096,
+              40.094726
+            ],
+            [
+              -76.083989,
+              40.095444
+            ],
+            [
+              -76.083936,
+              40.096654
+            ],
+            [
+              -76.0849,
+              40.097536
+            ],
+            [
+              -76.086429,
+              40.097433
+            ],
+            [
+              -76.088091,
+              40.096961
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 14,
+          "siteAreaAcres": 26.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.0861,
+              40.095072
+            ],
+            [
+              -76.086284,
+              40.095329
+            ],
+            [
+              -76.087,
+              40.095022
+            ],
+            [
+              -76.086816,
+              40.094771
+            ],
+            [
+              -76.0861,
+              40.095072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.085169,
+              40.096941
+            ],
+            [
+              -76.085196,
+              40.095895
+            ],
+            [
+              -76.08415,
+              40.095567
+            ],
+            [
+              -76.083989,
+              40.096633
+            ],
+            [
+              -76.085169,
+              40.096941
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.08651,
+              40.096326
+            ],
+            [
+              -76.086617,
+              40.095587
+            ],
+            [
+              -76.085625,
+              40.095444
+            ],
+            [
+              -76.08549,
+              40.096182
+            ],
+            [
+              -76.08651,
+              40.096326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.086215,
+              40.096859
+            ],
+            [
+              -76.086322,
+              40.096367
+            ],
+            [
+              -76.085785,
+              40.096264
+            ],
+            [
+              -76.085678,
+              40.096756
+            ],
+            [
+              -76.086215,
+              40.096859
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.084981,
+              40.094582
+            ],
+            [
+              -76.085062,
+              40.094295
+            ],
+            [
+              -76.08423,
+              40.094131
+            ],
+            [
+              -76.08415,
+              40.094418
+            ],
+            [
+              -76.084981,
+              40.094582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+        "type": "Poultry Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.66089,
+              32.366285
+            ],
+            [
+              -90.660863,
+              32.365152
+            ],
+            [
+              -90.660756,
+              32.363724
+            ],
+            [
+              -90.659951,
+              32.363701
+            ],
+            [
+              -90.657912,
+              32.363724
+            ],
+            [
+              -90.657617,
+              32.363928
+            ],
+            [
+              -90.657564,
+              32.364699
+            ],
+            [
+              -90.657644,
+              32.365741
+            ],
+            [
+              -90.658342,
+              32.365945
+            ],
+            [
+              -90.65979,
+              32.366013
+            ],
+            [
+              -90.66089,
+              32.366285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 19.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.660326,
+              32.363928
+            ],
+            [
+              -90.660337,
+              32.36367
+            ],
+            [
+              -90.659801,
+              32.363656
+            ],
+            [
+              -90.65979,
+              32.363914
+            ],
+            [
+              -90.660326,
+              32.363928
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.659817,
+              32.365968
+            ],
+            [
+              -90.659828,
+              32.365687
+            ],
+            [
+              -90.658245,
+              32.365651
+            ],
+            [
+              -90.658234,
+              32.365932
+            ],
+            [
+              -90.659817,
+              32.365968
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.658154,
+              32.365741
+            ],
+            [
+              -90.658208,
+              32.364745
+            ],
+            [
+              -90.657832,
+              32.364699
+            ],
+            [
+              -90.657751,
+              32.365673
+            ],
+            [
+              -90.658154,
+              32.365741
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.660809,
+              32.364618
+            ],
+            [
+              -90.660809,
+              32.363793
+            ],
+            [
+              -90.659924,
+              32.363793
+            ],
+            [
+              -90.659924,
+              32.364618
+            ],
+            [
+              -90.660809,
+              32.364618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.659924,
+              32.364654
+            ],
+            [
+              -90.659924,
+              32.36377
+            ],
+            [
+              -90.659656,
+              32.36377
+            ],
+            [
+              -90.659656,
+              32.364654
+            ],
+            [
+              -90.659924,
+              32.364654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.659736,
+              32.365741
+            ],
+            [
+              -90.659736,
+              32.365583
+            ],
+            [
+              -90.658234,
+              32.36556
+            ],
+            [
+              -90.658234,
+              32.365719
+            ],
+            [
+              -90.659736,
+              32.365741
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+        "type": "Poultry Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.070485,
+              35.262131
+            ],
+            [
+              -93.07076,
+              35.261302
+            ],
+            [
+              -93.070705,
+              35.2599
+            ],
+            [
+              -93.068178,
+              35.258588
+            ],
+            [
+              -93.064855,
+              35.258151
+            ],
+            [
+              -93.062383,
+              35.257713
+            ],
+            [
+              -93.061902,
+              35.258409
+            ],
+            [
+              -93.062232,
+              35.259855
+            ],
+            [
+              -93.064209,
+              35.261077
+            ],
+            [
+              -93.06539,
+              35.26156
+            ],
+            [
+              -93.067326,
+              35.262176
+            ],
+            [
+              -93.070485,
+              35.262131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 85,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 66.1,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.061654,
+              35.259807
+            ],
+            [
+              -93.061906,
+              35.260102
+            ],
+            [
+              -93.062446,
+              35.259793
+            ],
+            [
+              -93.062194,
+              35.259498
+            ],
+            [
+              -93.061654,
+              35.259807
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.064472,
+              35.260809
+            ],
+            [
+              -93.064747,
+              35.260108
+            ],
+            [
+              -93.062584,
+              35.259379
+            ],
+            [
+              -93.062137,
+              35.259856
+            ],
+            [
+              -93.064472,
+              35.260809
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.070194,
+              35.261236
+            ],
+            [
+              -93.070194,
+              35.258947
+            ],
+            [
+              -93.069521,
+              35.258947
+            ],
+            [
+              -93.069521,
+              35.261236
+            ],
+            [
+              -93.070194,
+              35.261236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.066503,
+              35.261806
+            ],
+            [
+              -93.066503,
+              35.258947
+            ],
+            [
+              -93.0661,
+              35.258947
+            ],
+            [
+              -93.0661,
+              35.261806
+            ],
+            [
+              -93.066503,
+              35.261806
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.12084,
+              39.74962
+            ],
+            [
+              -86.12064,
+              39.74942
+            ],
+            [
+              -86.119,
+              39.74945
+            ],
+            [
+              -86.1177,
+              39.7503
+            ],
+            [
+              -86.1163,
+              39.75005
+            ],
+            [
+              -86.115729,
+              39.750428
+            ],
+            [
+              -86.11691,
+              39.751418
+            ],
+            [
+              -86.117621,
+              39.751996
+            ],
+            [
+              -86.118388,
+              39.751292
+            ],
+            [
+              -86.12007,
+              39.750025
+            ],
+            [
+              -86.12084,
+              39.74962
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Indianapolis Distribution Center - Indianapolis IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 43,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 128,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 12.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.120216,
+              39.749707
+            ],
+            [
+              -86.120334,
+              39.749903
+            ],
+            [
+              -86.120864,
+              39.749713
+            ],
+            [
+              -86.120746,
+              39.749517
+            ],
+            [
+              -86.120216,
+              39.749707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Indianapolis Distribution Center - Indianapolis IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.117621,
+              39.751996
+            ],
+            [
+              -86.118249,
+              39.751336
+            ],
+            [
+              -86.1177,
+              39.7503
+            ],
+            [
+              -86.1163,
+              39.75005
+            ],
+            [
+              -86.115729,
+              39.750428
+            ],
+            [
+              -86.11691,
+              39.751418
+            ],
+            [
+              -86.117621,
+              39.751996
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Indianapolis Distribution Center - Indianapolis IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.118216,
+              39.750938
+            ],
+            [
+              -86.118484,
+              39.751175
+            ],
+            [
+              -86.120235,
+              39.750006
+            ],
+            [
+              -86.119967,
+              39.749769
+            ],
+            [
+              -86.118216,
+              39.750938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Indianapolis Distribution Center - Indianapolis IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.288413,
+              32.824094
+            ],
+            [
+              -97.288413,
+              32.823125
+            ],
+            [
+              -97.2882,
+              32.822629
+            ],
+            [
+              -97.287184,
+              32.822046
+            ],
+            [
+              -97.285865,
+              32.822675
+            ],
+            [
+              -97.285838,
+              32.82335
+            ],
+            [
+              -97.286216,
+              32.824118
+            ],
+            [
+              -97.288413,
+              32.824094
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Haltom City Distribution Center - Haltom City TX",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 57,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 10.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.286871,
+              32.824002
+            ],
+            [
+              -97.286971,
+              32.82369
+            ],
+            [
+              -97.286249,
+              32.823528
+            ],
+            [
+              -97.286149,
+              32.82384
+            ],
+            [
+              -97.286871,
+              32.824002
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Haltom City Distribution Center - Haltom City TX",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.288313,
+              32.824099
+            ],
+            [
+              -97.288313,
+              32.823834
+            ],
+            [
+              -97.286665,
+              32.823811
+            ],
+            [
+              -97.286665,
+              32.824076
+            ],
+            [
+              -97.288313,
+              32.824099
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Haltom City Distribution Center - Haltom City TX",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.287969,
+              32.823112
+            ],
+            [
+              -97.286682,
+              32.823574
+            ],
+            [
+              -97.286791,
+              32.823823
+            ],
+            [
+              -97.288078,
+              32.823361
+            ],
+            [
+              -97.287969,
+              32.823112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "tyson-foods",
+        "name": "Tyson Foods Haltom City Distribution Center - Haltom City TX",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

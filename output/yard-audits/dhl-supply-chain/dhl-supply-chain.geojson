@@ -8,24 +8,24 @@
         "coordinates": [
           [
             [
-              -88.1465,
-              41.647
+              -88.144932,
+              41.652847
             ],
             [
-              -88.14,
-              41.647
+              -88.147129,
+              41.648332
             ],
             [
-              -88.14,
-              41.654
+              -88.143833,
+              41.647511
             ],
             [
-              -88.1465,
-              41.654
+              -88.141499,
+              41.652026
             ],
             [
-              -88.1465,
-              41.647
+              -88.144932,
+              41.652847
             ]
           ]
         ]
@@ -68,63 +68,24 @@
         "coordinates": [
           [
             [
-              -88.1429,
-              41.65195
+              -88.146031,
+              41.650487
             ],
             [
-              -88.142,
-              41.65195
+              -88.147129,
+              41.64864
             ],
             [
-              -88.142,
-              41.65285
+              -88.145893,
+              41.648332
             ],
             [
-              -88.1429,
-              41.65285
+              -88.144795,
+              41.650179
             ],
             [
-              -88.1429,
-              41.65195
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
-        "type": "Dedicated Customer Distribution Center (spirits)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -88.1462,
-              41.65
-            ],
-            [
-              -88.1449,
-              41.65
-            ],
-            [
-              -88.1449,
-              41.6534
-            ],
-            [
-              -88.1462,
-              41.6534
-            ],
-            [
-              -88.1462,
-              41.65
+              -88.146031,
+              41.650487
             ]
           ]
         ]
@@ -147,24 +108,24 @@
         "coordinates": [
           [
             [
-              -88.1452,
-              41.6479
+              -88.146443,
+              41.651
             ],
             [
-              -88.1441,
-              41.6479
+              -88.146717,
+              41.650487
             ],
             [
-              -88.1441,
-              41.6534
+              -88.142323,
+              41.649358
             ],
             [
-              -88.1452,
-              41.6534
+              -88.142048,
+              41.649871
             ],
             [
-              -88.1452,
-              41.6479
+              -88.146443,
+              41.651
             ]
           ]
         ]
@@ -187,64 +148,24 @@
         "coordinates": [
           [
             [
-              -88.1429,
-              41.6485
+              -86.354919,
+              39.737712
             ],
             [
-              -88.1415,
-              41.6485
+              -86.352355,
+              39.737854
             ],
             [
-              -88.1415,
-              41.6525
+              -86.352631,
+              39.740832
             ],
             [
-              -88.1429,
-              41.6525
+              -86.355195,
+              39.74069
             ],
             [
-              -88.1429,
-              41.6485
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
-        "type": "Dedicated Customer Distribution Center (spirits)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.3556,
-              39.7373
-            ],
-            [
-              -86.3514,
-              39.7373
-            ],
-            [
-              -86.3514,
-              39.741
-            ],
-            [
-              -86.3556,
-              39.741
-            ],
-            [
-              -86.3556,
-              39.7373
+              -86.354919,
+              39.737712
             ]
           ]
         ]
@@ -287,24 +208,24 @@
         "coordinates": [
           [
             [
-              -86.355,
-              39.7379
+              -86.355033,
+              39.737944
             ],
             [
-              -86.3542,
-              39.7379
+              -86.354334,
+              39.737983
             ],
             [
-              -86.3542,
-              39.74
+              -86.354577,
+              39.7406
             ],
             [
-              -86.355,
-              39.74
+              -86.355276,
+              39.740561
             ],
             [
-              -86.355,
-              39.7379
+              -86.355033,
+              39.737944
             ]
           ]
         ]
@@ -327,64 +248,24 @@
         "coordinates": [
           [
             [
-              -86.3528,
-              39.7379
+              -86.35432,
+              39.737957
             ],
             [
-              -86.352,
-              39.7379
+              -86.354087,
+              39.73797
             ],
             [
-              -86.352,
-              39.7401
+              -86.35433,
+              39.740587
             ],
             [
-              -86.3528,
-              39.7401
+              -86.354563,
+              39.740574
             ],
             [
-              -86.3528,
-              39.7379
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
-        "type": "Multi-Customer E-Commerce Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.3547,
-              39.7378
-            ],
-            [
-              -86.3539,
-              39.7378
-            ],
-            [
-              -86.3539,
-              39.7401
-            ],
-            [
-              -86.3547,
-              39.7401
-            ],
-            [
-              -86.3547,
-              39.7378
+              -86.35432,
+              39.737957
             ]
           ]
         ]
@@ -407,64 +288,24 @@
         "coordinates": [
           [
             [
-              -86.3529,
-              39.7378
+              -112.002109,
+              40.736269
             ],
             [
-              -86.3522,
-              39.7378
+              -112.002315,
+              40.733095
             ],
             [
-              -86.3522,
-              39.7401
+              -112.000461,
+              40.732939
             ],
             [
-              -86.3529,
-              39.7401
+              -112.000255,
+              40.736113
             ],
             [
-              -86.3529,
-              39.7378
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
-        "type": "Multi-Customer E-Commerce Fulfillment Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -112.0025,
-              40.7325
-            ],
-            [
-              -112,
-              40.7325
-            ],
-            [
-              -112,
-              40.736
-            ],
-            [
-              -112.0025,
-              40.736
-            ],
-            [
-              -112.0025,
-              40.7325
+              -112.002109,
+              40.736269
             ]
           ]
         ]
@@ -507,24 +348,64 @@
         "coordinates": [
           [
             [
-              -112.0025,
-              40.7328
+              -112.002041,
+              40.736061
             ],
             [
-              -112.0018,
-              40.7328
+              -112.002178,
+              40.733668
             ],
             [
-              -112.0018,
-              40.7358
+              -112.000942,
+              40.733564
             ],
             [
-              -112.0025,
-              40.7358
+              -112.000805,
+              40.735957
             ],
             [
-              -112.0025,
-              40.7328
+              -112.002041,
+              40.736061
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.000805,
+              40.736113
+            ],
+            [
+              -112.000942,
+              40.733095
+            ],
+            [
+              -112.00053,
+              40.733095
+            ],
+            [
+              -112.000393,
+              40.736113
+            ],
+            [
+              -112.000805,
+              40.736113
             ]
           ]
         ]
@@ -547,24 +428,24 @@
         "coordinates": [
           [
             [
-              -76.5412,
-              40.3153
+              -76.541293,
+              40.320175
             ],
             [
-              -76.5305,
-              40.3153
+              -76.541568,
+              40.317243
             ],
             [
-              -76.5305,
-              40.3208
+              -76.533877,
+              40.316825
             ],
             [
-              -76.5412,
-              40.3208
+              -76.533603,
+              40.319756
             ],
             [
-              -76.5412,
-              40.3153
+              -76.541293,
+              40.320175
             ]
           ]
         ]
@@ -607,64 +488,24 @@
         "coordinates": [
           [
             [
-              -76.5385,
-              40.3156
+              -76.541019,
+              40.319756
             ],
             [
-              -76.5325,
-              40.3156
+              -76.541293,
+              40.318919
             ],
             [
-              -76.5325,
-              40.3172
+              -76.534152,
+              40.3185
             ],
             [
-              -76.5385,
-              40.3172
+              -76.533877,
+              40.319338
             ],
             [
-              -76.5385,
-              40.3156
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
-        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.5388,
-              40.317
-            ],
-            [
-              -76.5329,
-              40.317
-            ],
-            [
-              -76.5329,
-              40.3176
-            ],
-            [
-              -76.5388,
-              40.3176
-            ],
-            [
-              -76.5388,
-              40.317
+              -76.541019,
+              40.319756
             ]
           ]
         ]
@@ -687,64 +528,24 @@
         "coordinates": [
           [
             [
-              -76.5388,
-              40.3192
+              -89.860255,
+              34.998531
             ],
             [
-              -76.5329,
-              40.3192
+              -89.860324,
+              34.997406
             ],
             [
-              -76.5329,
-              40.3198
+              -89.858539,
+              34.997294
             ],
             [
-              -76.5388,
-              40.3198
+              -89.85847,
+              34.998419
             ],
             [
-              -76.5388,
-              40.3192
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
-        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.8609,
-              34.9968
-            ],
-            [
-              -89.8582,
-              34.9968
-            ],
-            [
-              -89.8582,
-              34.99885
-            ],
-            [
-              -89.8609,
-              34.99885
-            ],
-            [
-              -89.8609,
-              34.9968
+              -89.860255,
+              34.998531
             ]
           ]
         ]
@@ -787,63 +588,24 @@
         "coordinates": [
           [
             [
-              -89.86065,
-              34.99815
+              -89.860187,
+              34.99825
             ],
             [
-              -89.86025,
-              34.99815
+              -89.860255,
+              34.997912
             ],
             [
-              -89.86025,
-              34.99855
+              -89.858745,
+              34.9978
             ],
             [
-              -89.86065,
-              34.99855
+              -89.858676,
+              34.998137
             ],
             [
-              -89.86065,
-              34.99815
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
-        "type": "Life Sciences & Healthcare Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -89.8604,
-              34.99745
-            ],
-            [
-              -89.8595,
-              34.99745
-            ],
-            [
-              -89.8595,
-              34.99845
-            ],
-            [
-              -89.8604,
-              34.99845
-            ],
-            [
-              -89.8604,
-              34.99745
+              -89.860187,
+              34.99825
             ]
           ]
         ]
@@ -866,24 +628,24 @@
         "coordinates": [
           [
             [
-              -81.5727,
-              30.436
+              -81.574708,
+              30.440721
             ],
             [
-              -81.5698,
-              30.436
+              -81.574571,
+              30.435985
             ],
             [
-              -81.5698,
-              30.4422
+              -81.569215,
+              30.435985
             ],
             [
-              -81.5727,
-              30.4422
+              -81.569215,
+              30.440958
             ],
             [
-              -81.5727,
-              30.436
+              -81.574708,
+              30.440721
             ]
           ]
         ]
@@ -926,63 +688,24 @@
         "coordinates": [
           [
             [
-              -81.5716,
-              30.4356
+              -81.572373,
+              30.440484
             ],
             [
-              -81.5708,
-              30.4356
+              -81.572373,
+              30.439182
             ],
             [
-              -81.5708,
-              30.4364
+              -81.569352,
+              30.4393
             ],
             [
-              -81.5716,
-              30.4364
+              -81.569352,
+              30.440602
             ],
             [
-              -81.5716,
-              30.4356
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.57255,
-              30.4372
-            ],
-            [
-              -81.5719,
-              30.4372
-            ],
-            [
-              -81.5719,
-              30.4415
-            ],
-            [
-              -81.57255,
-              30.4415
-            ],
-            [
-              -81.57255,
-              30.4372
+              -81.572373,
+              30.440484
             ]
           ]
         ]
@@ -1005,64 +728,24 @@
         "coordinates": [
           [
             [
-              -81.5705,
-              30.4368
+              -81.572373,
+              30.440366
             ],
             [
-              -81.5699,
-              30.4368
+              -81.572373,
+              30.439774
             ],
             [
-              -81.5699,
-              30.4417
+              -81.569489,
+              30.439892
             ],
             [
-              -81.5705,
-              30.4417
+              -81.569489,
+              30.440484
             ],
             [
-              -81.5705,
-              30.4368
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.57195,
-              30.4368
-            ],
-            [
-              -81.5715,
-              30.4368
-            ],
-            [
-              -81.5715,
-              30.4418
-            ],
-            [
-              -81.57195,
-              30.4418
-            ],
-            [
-              -81.57195,
-              30.4368
+              -81.572373,
+              30.440366
             ]
           ]
         ]
@@ -1085,103 +768,24 @@
         "coordinates": [
           [
             [
-              -81.571,
-              30.4368
+              -81.787219,
+              35.062849
             ],
             [
-              -81.5705,
-              30.4368
+              -81.786395,
+              35.058577
             ],
             [
-              -81.5705,
-              30.4418
+              -81.777331,
+              35.061275
             ],
             [
-              -81.571,
-              30.4418
+              -81.778155,
+              35.064647
             ],
             [
-              -81.571,
-              30.4368
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.5712,
-              30.4362
-            ],
-            [
-              -81.57,
-              30.4362
-            ],
-            [
-              -81.57,
-              30.4372
-            ],
-            [
-              -81.5712,
-              30.4372
-            ],
-            [
-              -81.5712,
-              30.4362
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7876,
-              35.0578
-            ],
-            [
-              -81.7762,
-              35.0578
-            ],
-            [
-              -81.7762,
-              35.0648
-            ],
-            [
-              -81.7876,
-              35.0648
-            ],
-            [
-              -81.7876,
-              35.0578
+              -81.787219,
+              35.062849
             ]
           ]
         ]
@@ -1224,143 +828,24 @@
         "coordinates": [
           [
             [
-              -81.778,
-              35.063
+              -81.785571,
+              35.063073
             ],
             [
-              -81.777,
-              35.063
+              -81.785571,
+              35.062174
             ],
             [
-              -81.777,
-              35.064
+              -81.77788,
+              35.061949
             ],
             [
-              -81.778,
-              35.064
+              -81.77788,
+              35.062849
             ],
             [
-              -81.778,
-              35.063
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
-        "type": "Dedicated Customer Distribution Center (filtration)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7872,
-              35.059
-            ],
-            [
-              -81.784,
-              35.059
-            ],
-            [
-              -81.784,
-              35.0615
-            ],
-            [
-              -81.7872,
-              35.0615
-            ],
-            [
-              -81.7872,
-              35.059
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
-        "type": "Dedicated Customer Distribution Center (filtration)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7825,
-              35.0625
-            ],
-            [
-              -81.7782,
-              35.0625
-            ],
-            [
-              -81.7782,
-              35.0645
-            ],
-            [
-              -81.7825,
-              35.0645
-            ],
-            [
-              -81.7825,
-              35.0625
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
-        "type": "Dedicated Customer Distribution Center (filtration)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.7855,
-              35.0615
-            ],
-            [
-              -81.7778,
-              35.0615
-            ],
-            [
-              -81.7778,
-              35.0642
-            ],
-            [
-              -81.7855,
-              35.0642
-            ],
-            [
-              -81.7855,
-              35.0615
+              -81.785571,
+              35.063073
             ]
           ]
         ]
@@ -1383,103 +868,24 @@
         "coordinates": [
           [
             [
-              -81.787,
-              35.0585
+              -82.70563,
+              39.84729
             ],
             [
-              -81.7792,
-              35.0585
+              -82.70563,
+              39.845604
             ],
             [
-              -81.7792,
-              35.0625
+              -82.703158,
+              39.845604
             ],
             [
-              -81.787,
-              35.0625
+              -82.703158,
+              39.84729
             ],
             [
-              -81.787,
-              35.0585
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
-        "type": "Dedicated Customer Distribution Center (filtration)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.779,
-              35.0625
-            ],
-            [
-              -81.7772,
-              35.0625
-            ],
-            [
-              -81.7772,
-              35.0638
-            ],
-            [
-              -81.779,
-              35.0638
-            ],
-            [
-              -81.779,
-              35.0625
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
-        "type": "Dedicated Customer Distribution Center (filtration)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.7085,
-              39.843
-            ],
-            [
-              -82.7,
-              39.843
-            ],
-            [
-              -82.7,
-              39.8499
-            ],
-            [
-              -82.7085,
-              39.8499
-            ],
-            [
-              -82.7085,
-              39.843
+              -82.70563,
+              39.84729
             ]
           ]
         ]
@@ -1522,24 +928,24 @@
         "coordinates": [
           [
             [
-              -97.3173,
-              32.8437
+              -97.316661,
+              32.847615
             ],
             [
-              -97.3147,
-              32.8437
+              -97.316799,
+              32.84127
             ],
             [
-              -97.3147,
-              32.8484
+              -97.314189,
+              32.841154
             ],
             [
-              -97.3173,
-              32.8484
+              -97.314052,
+              32.8475
             ],
             [
-              -97.3173,
-              32.8437
+              -97.316661,
+              32.847615
             ]
           ]
         ]
@@ -1582,63 +988,24 @@
         "coordinates": [
           [
             [
-              -97.3172,
-              32.8463
+              -97.315013,
+              32.847384
             ],
             [
-              -97.3166,
-              32.8463
+              -97.315151,
+              32.842769
             ],
             [
-              -97.3166,
-              32.8471
+              -97.314189,
+              32.842769
             ],
             [
-              -97.3172,
-              32.8471
+              -97.314052,
+              32.847384
             ],
             [
-              -97.3172,
-              32.8463
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
-        "type": "Dedicated Customer Distribution Center (CPG/food)",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.31695,
-              32.8442
-            ],
-            [
-              -97.31635,
-              32.8442
-            ],
-            [
-              -97.31635,
-              32.8478
-            ],
-            [
-              -97.31695,
-              32.8478
-            ],
-            [
-              -97.31695,
-              32.8442
+              -97.315013,
+              32.847384
             ]
           ]
         ]
@@ -1661,64 +1028,24 @@
         "coordinates": [
           [
             [
-              -97.3151,
-              32.8442
+              -97.316661,
+              32.847384
             ],
             [
-              -97.3146,
-              32.8442
+              -97.316799,
+              32.841385
             ],
             [
-              -97.3146,
-              32.8478
+              -97.315975,
+              32.841385
             ],
             [
-              -97.3151,
-              32.8478
+              -97.315837,
+              32.847384
             ],
             [
-              -97.3151,
-              32.8442
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
-        "type": "Dedicated Customer Distribution Center (CPG/food)",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.3166,
-              32.8442
-            ],
-            [
-              -97.3161,
-              32.8442
-            ],
-            [
-              -97.3161,
-              32.8479
-            ],
-            [
-              -97.3166,
-              32.8479
-            ],
-            [
-              -97.3166,
-              32.8442
+              -97.316661,
+              32.847384
             ]
           ]
         ]
@@ -1741,103 +1068,32 @@
         "coordinates": [
           [
             [
-              -97.31555,
-              32.8442
+              -86.377973,
+              39.968642
             ],
             [
-              -97.31505,
-              32.8442
+              -86.377905,
+              39.967747
             ],
             [
-              -97.31505,
-              32.8479
+              -86.376463,
+              39.966537
             ],
             [
-              -97.31555,
-              32.8479
+              -86.374952,
+              39.967168
             ],
             [
-              -97.31555,
-              32.8442
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
-        "type": "Dedicated Customer Distribution Center (CPG/food)",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.317,
-              32.8462
+              -86.374677,
+              39.9678
             ],
             [
-              -97.3164,
-              32.8462
+              -86.376257,
+              39.96901
             ],
             [
-              -97.3164,
-              32.8479
-            ],
-            [
-              -97.317,
-              32.8479
-            ],
-            [
-              -97.317,
-              32.8462
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
-        "type": "Dedicated Customer Distribution Center (CPG/food)",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.378,
-              39.9665
-            ],
-            [
-              -86.3754,
-              39.9665
-            ],
-            [
-              -86.3754,
-              39.9693
-            ],
-            [
-              -86.378,
-              39.9693
-            ],
-            [
-              -86.378,
-              39.9665
+              -86.377973,
+              39.968642
             ]
           ]
         ]
@@ -1880,64 +1136,24 @@
         "coordinates": [
           [
             [
-              -86.377,
-              39.9682
+              -86.377973,
+              39.967537
             ],
             [
-              -86.3758,
-              39.9682
+              -86.377973,
+              39.967221
             ],
             [
-              -86.3758,
-              39.9691
+              -86.376325,
+              39.967274
             ],
             [
-              -86.377,
-              39.9691
+              -86.376325,
+              39.96759
             ],
             [
-              -86.377,
-              39.9682
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.3776,
-              39.9672
-            ],
-            [
-              -86.3764,
-              39.9672
-            ],
-            [
-              -86.3764,
-              39.969
-            ],
-            [
-              -86.3776,
-              39.969
-            ],
-            [
-              -86.3776,
-              39.9672
+              -86.377973,
+              39.967537
             ]
           ]
         ]
@@ -1960,24 +1176,24 @@
         "coordinates": [
           [
             [
-              -82.9022,
-              39.8438
+              -82.898888,
+              39.844738
             ],
             [
-              -82.8988,
-              39.8438
+              -82.898737,
+              39.846408
             ],
             [
-              -82.8988,
-              39.847
+              -82.901888,
+              39.846578
             ],
             [
-              -82.9022,
-              39.847
+              -82.902039,
+              39.844908
             ],
             [
-              -82.9022,
-              39.8438
+              -82.898888,
+              39.844738
             ]
           ]
         ]
@@ -2020,64 +1236,24 @@
         "coordinates": [
           [
             [
-              -82.9013,
-              39.8459
+              -82.900004,
+              39.846036
             ],
             [
-              -82.9004,
-              39.8459
+              -82.899987,
+              39.846217
             ],
             [
-              -82.9004,
-              39.8464
+              -82.902146,
+              39.846334
             ],
             [
-              -82.9013,
-              39.8464
+              -82.902163,
+              39.846153
             ],
             [
-              -82.9013,
-              39.8459
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Groveport DC - Groveport OH",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.9013,
-              39.84565
-            ],
-            [
-              -82.9001,
-              39.84565
-            ],
-            [
-              -82.9001,
-              39.8465
-            ],
-            [
-              -82.9013,
-              39.8465
-            ],
-            [
-              -82.9013,
-              39.84565
+              -82.900004,
+              39.846036
             ]
           ]
         ]
@@ -2100,24 +1276,24 @@
         "coordinates": [
           [
             [
-              -84.5372,
-              33.5708
+              -84.537221,
+              33.574114
             ],
             [
-              -84.531,
-              33.5708
+              -84.537221,
+              33.571139
             ],
             [
-              -84.531,
-              33.5745
+              -84.531041,
+              33.571368
             ],
             [
-              -84.5372,
-              33.5745
+              -84.531041,
+              33.574343
             ],
             [
-              -84.5372,
-              33.5708
+              -84.537221,
+              33.574114
             ]
           ]
         ]
@@ -2160,103 +1336,24 @@
         "coordinates": [
           [
             [
-              -84.5365,
-              33.5718
+              -84.537084,
+              33.574
             ],
             [
-              -84.536,
-              33.5718
+              -84.537084,
+              33.573313
             ],
             [
-              -84.536,
-              33.5723
+              -84.531179,
+              33.573542
             ],
             [
-              -84.5365,
-              33.5723
+              -84.531179,
+              33.574228
             ],
             [
-              -84.5365,
-              33.5718
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Keurig DC - Union City GA",
-        "type": "Dedicated Customer Distribution Center (beverage)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.5363,
-              33.5711
-            ],
-            [
-              -84.5316,
-              33.5711
-            ],
-            [
-              -84.5316,
-              33.5718
-            ],
-            [
-              -84.5363,
-              33.5718
-            ],
-            [
-              -84.5363,
-              33.5711
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Keurig DC - Union City GA",
-        "type": "Dedicated Customer Distribution Center (beverage)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.5363,
-              33.5735
-            ],
-            [
-              -84.5316,
-              33.5735
-            ],
-            [
-              -84.5316,
-              33.5741
-            ],
-            [
-              -84.5363,
-              33.5741
-            ],
-            [
-              -84.5363,
-              33.5735
+              -84.537084,
+              33.574
             ]
           ]
         ]
@@ -2279,64 +1376,24 @@
         "coordinates": [
           [
             [
-              -84.5363,
-              33.5713
+              -84.574959,
+              33.633301
             ],
             [
-              -84.5316,
-              33.5713
+              -84.575508,
+              33.629299
             ],
             [
-              -84.5316,
-              33.572
+              -84.570701,
+              33.628956
             ],
             [
-              -84.5363,
-              33.572
+              -84.570152,
+              33.632958
             ],
             [
-              -84.5363,
-              33.5713
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Keurig DC - Union City GA",
-        "type": "Dedicated Customer Distribution Center (beverage)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.5752,
-              33.6298
-            ],
-            [
-              -84.5692,
-              33.6298
-            ],
-            [
-              -84.5692,
-              33.634
-            ],
-            [
-              -84.5752,
-              33.634
-            ],
-            [
-              -84.5752,
-              33.6298
+              -84.574959,
+              33.633301
             ]
           ]
         ]
@@ -2379,64 +1436,24 @@
         "coordinates": [
           [
             [
-              -84.574,
-              33.6311
+              -84.575096,
+              33.632843
             ],
             [
-              -84.5733,
-              33.6311
+              -84.575233,
+              33.632157
             ],
             [
-              -84.5733,
-              33.6316
+              -84.570427,
+              33.631814
             ],
             [
-              -84.574,
-              33.6316
+              -84.570289,
+              33.6325
             ],
             [
-              -84.574,
-              33.6311
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.5732,
-              33.632
-            ],
-            [
-              -84.5704,
-              33.632
-            ],
-            [
-              -84.5704,
-              33.6334
-            ],
-            [
-              -84.5732,
-              33.6334
-            ],
-            [
-              -84.5732,
-              33.632
+              -84.575096,
+              33.632843
             ]
           ]
         ]
@@ -2459,24 +1476,24 @@
         "coordinates": [
           [
             [
-              -80.5378,
-              33.1745
+              -80.539669,
+              33.179639
             ],
             [
-              -80.5332,
-              33.1745
+              -80.540081,
+              33.176421
             ],
             [
-              -80.5332,
-              33.1798
+              -80.533352,
+              33.175961
             ],
             [
-              -80.5378,
-              33.1798
+              -80.532803,
+              33.179294
             ],
             [
-              -80.5378,
-              33.1745
+              -80.539669,
+              33.179639
             ]
           ]
         ]
@@ -2519,24 +1536,24 @@
         "coordinates": [
           [
             [
-              -80.5364,
-              33.1759
+              -80.539669,
+              33.177225
             ],
             [
-              -80.5344,
-              33.1759
+              -80.539807,
+              33.176421
             ],
             [
-              -80.5344,
-              33.1771
+              -80.534451,
+              33.175961
             ],
             [
-              -80.5364,
-              33.1771
+              -80.534313,
+              33.17688
             ],
             [
-              -80.5364,
-              33.1759
+              -80.539669,
+              33.177225
             ]
           ]
         ]
@@ -2559,24 +1576,24 @@
         "coordinates": [
           [
             [
-              -80.5365,
-              33.1758
+              -80.539395,
+              33.178949
             ],
             [
-              -80.5342,
-              33.1758
+              -80.539532,
+              33.17826
             ],
             [
-              -80.5342,
-              33.1773
+              -80.533077,
+              33.17803
             ],
             [
-              -80.5365,
-              33.1773
+              -80.53294,
+              33.17872
             ],
             [
-              -80.5365,
-              33.1758
+              -80.539395,
+              33.178949
             ]
           ]
         ]
@@ -2599,64 +1616,24 @@
         "coordinates": [
           [
             [
-              -80.5354,
-              33.1784
+              -87.849897,
+              41.913962
             ],
             [
-              -80.5338,
-              33.1784
+              -87.849966,
+              41.912889
             ],
             [
-              -80.5338,
-              33.1793
+              -87.845709,
+              41.912787
             ],
             [
-              -80.5354,
-              33.1793
+              -87.84564,
+              41.91386
             ],
             [
-              -80.5354,
-              33.1784
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
-        "type": "Distribution Center (Charleston port-adjacent campus)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -87.85,
-              41.9123
-            ],
-            [
-              -87.8455,
-              41.9123
-            ],
-            [
-              -87.8455,
-              41.9145
-            ],
-            [
-              -87.85,
-              41.9145
-            ],
-            [
-              -87.85,
-              41.9123
+              -87.849897,
+              41.913962
             ]
           ]
         ]
@@ -2699,24 +1676,24 @@
         "coordinates": [
           [
             [
-              -87.8494,
-              41.9122
+              -87.849897,
+              41.912582
             ],
             [
-              -87.8458,
-              41.9122
+              -87.849966,
+              41.911765
             ],
             [
-              -87.8458,
-              41.9128
+              -87.847425,
+              41.911663
             ],
             [
-              -87.8494,
-              41.9128
+              -87.847357,
+              41.91248
             ],
             [
-              -87.8494,
-              41.9122
+              -87.849897,
+              41.912582
             ]
           ]
         ]
@@ -2739,24 +1716,24 @@
         "coordinates": [
           [
             [
-              -87.8494,
-              41.9127
+              -87.849897,
+              41.912838
             ],
             [
-              -87.8458,
-              41.9127
+              -87.849897,
+              41.912685
             ],
             [
-              -87.8458,
-              41.9134
+              -87.845709,
+              41.912582
             ],
             [
-              -87.8494,
-              41.9134
+              -87.845709,
+              41.912736
             ],
             [
-              -87.8494,
-              41.9127
+              -87.849897,
+              41.912838
             ]
           ]
         ]
@@ -2779,24 +1756,24 @@
         "coordinates": [
           [
             [
-              -94.96015,
-              38.7819
+              -94.959679,
+              38.785319
             ],
             [
-              -94.95625,
-              38.7819
+              -94.959748,
+              38.782429
             ],
             [
-              -94.95625,
-              38.78385
+              -94.956589,
+              38.782322
             ],
             [
-              -94.96015,
-              38.78385
+              -94.956521,
+              38.785212
             ],
             [
-              -94.96015,
-              38.7819
+              -94.959679,
+              38.785319
             ]
           ]
         ]
@@ -2839,63 +1816,24 @@
         "coordinates": [
           [
             [
-              -94.95995,
-              38.78175
+              -94.961259,
+              38.784249
             ],
             [
-              -94.95935,
-              38.78175
+              -94.961327,
+              38.782536
             ],
             [
-              -94.95935,
-              38.78215
+              -94.959954,
+              38.782482
             ],
             [
-              -94.95995,
-              38.78215
+              -94.959885,
+              38.784195
             ],
             [
-              -94.95995,
-              38.78175
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
-        "type": "Distribution Center (intermodal logistics park)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -94.95985,
-              38.78305
-            ],
-            [
-              -94.95635,
-              38.78305
-            ],
-            [
-              -94.95635,
-              38.78385
-            ],
-            [
-              -94.95985,
-              38.78385
-            ],
-            [
-              -94.95985,
-              38.78305
+              -94.961259,
+              38.784249
             ]
           ]
         ]
@@ -2918,24 +1856,24 @@
         "coordinates": [
           [
             [
-              -94.95985,
-              38.783
+              -94.959611,
+              38.783606
             ],
             [
-              -94.95635,
-              38.783
+              -94.959611,
+              38.783339
             ],
             [
-              -94.95635,
-              38.7834
+              -94.956589,
+              38.783232
             ],
             [
-              -94.95985,
-              38.7834
+              -94.956589,
+              38.783499
             ],
             [
-              -94.95985,
-              38.783
+              -94.959611,
+              38.783606
             ]
           ]
         ]
@@ -2958,24 +1896,24 @@
         "coordinates": [
           [
             [
-              -84.7272,
-              33.40895
+              -84.728209,
+              33.411418
             ],
             [
-              -84.7247,
-              33.40895
+              -84.72869,
+              33.409985
             ],
             [
-              -84.7247,
-              33.41155
+              -84.725806,
+              33.40924
             ],
             [
-              -84.7272,
-              33.41155
+              -84.725257,
+              33.410673
             ],
             [
-              -84.7272,
-              33.40895
+              -84.728209,
+              33.411418
             ]
           ]
         ]
@@ -3018,63 +1956,24 @@
         "coordinates": [
           [
             [
-              -84.7274,
-              33.40895
+              -84.728347,
+              33.411017
             ],
             [
-              -84.7268,
-              33.40895
+              -84.728484,
+              33.410673
             ],
             [
-              -84.7268,
-              33.40935
+              -84.725737,
+              33.409928
             ],
             [
-              -84.7274,
-              33.40935
+              -84.7256,
+              33.410272
             ],
             [
-              -84.7274,
-              33.40895
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
-        "type": "Multi-Customer E-Commerce Fulfillment Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -84.7269,
-              33.40905
-            ],
-            [
-              -84.7251,
-              33.40905
-            ],
-            [
-              -84.7251,
-              33.41115
-            ],
-            [
-              -84.7269,
-              33.41115
-            ],
-            [
-              -84.7269,
-              33.40905
+              -84.728347,
+              33.411017
             ]
           ]
         ]
@@ -3097,24 +1996,24 @@
         "coordinates": [
           [
             [
-              -86.3135,
-              39.6834
+              -86.311543,
+              39.687247
             ],
             [
-              -86.3087,
-              39.6834
+              -86.311818,
+              39.683653
             ],
             [
-              -86.3087,
-              39.6872
+              -86.308797,
+              39.683442
             ],
             [
-              -86.3135,
-              39.6872
+              -86.308522,
+              39.687035
             ],
             [
-              -86.3135,
-              39.6834
+              -86.311543,
+              39.687247
             ]
           ]
         ]
@@ -3157,63 +2056,24 @@
         "coordinates": [
           [
             [
-              -86.31345,
-              39.6848
+              -86.311406,
+              39.687035
             ],
             [
-              -86.3128,
-              39.6848
+              -86.311543,
+              39.683653
             ],
             [
-              -86.3128,
-              39.6853
+              -86.310857,
+              39.683601
             ],
             [
-              -86.31345,
-              39.6853
+              -86.310719,
+              39.686982
             ],
             [
-              -86.31345,
-              39.6848
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
-        "type": "Multi-Customer E-Commerce Fulfillment Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -86.313,
-              39.6836
-            ],
-            [
-              -86.3116,
-              39.6836
-            ],
-            [
-              -86.3116,
-              39.6866
-            ],
-            [
-              -86.313,
-              39.6866
-            ],
-            [
-              -86.313,
-              39.6836
+              -86.311406,
+              39.687035
             ]
           ]
         ]
@@ -3236,24 +2096,24 @@
         "coordinates": [
           [
             [
-              -86.3116,
-              39.6836
+              -86.311406,
+              39.68693
             ],
             [
-              -86.3105,
-              39.6836
+              -86.311475,
+              39.683918
             ],
             [
-              -86.3105,
-              39.6866
+              -86.310719,
+              39.683865
             ],
             [
-              -86.3116,
-              39.6866
+              -86.310651,
+              39.686877
             ],
             [
-              -86.3116,
-              39.6836
+              -86.311406,
+              39.68693
             ]
           ]
         ]
@@ -3276,24 +2136,24 @@
         "coordinates": [
           [
             [
-              -76.99985,
-              40.23605
+              -76.999805,
+              40.237777
             ],
             [
-              -76.99715,
-              40.23605
+              -76.999873,
+              40.236414
             ],
             [
-              -76.99715,
-              40.238
+              -76.997745,
+              40.236361
             ],
             [
-              -76.99985,
-              40.238
+              -76.997676,
+              40.237724
             ],
             [
-              -76.99985,
-              40.23605
+              -76.999805,
+              40.237777
             ]
           ]
         ]
@@ -3336,63 +2196,24 @@
         "coordinates": [
           [
             [
-              -77,
-              40.23605
+              -76.999805,
+              40.237619
             ],
             [
-              -76.9994,
-              40.23605
+              -76.999805,
+              40.237357
             ],
             [
-              -76.9994,
-              40.2364
+              -76.997745,
+              40.237305
             ],
             [
-              -77,
-              40.2364
+              -76.997745,
+              40.237567
             ],
             [
-              -77,
-              40.23605
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Mechanicsburg PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -76.9979,
-              40.23645
-            ],
-            [
-              -76.9972,
-              40.23645
-            ],
-            [
-              -76.9972,
-              40.23745
-            ],
-            [
-              -76.9979,
-              40.23745
-            ],
-            [
-              -76.9979,
-              40.23645
+              -76.999805,
+              40.237619
             ]
           ]
         ]
@@ -3415,24 +2236,24 @@
         "coordinates": [
           [
             [
-              -114.9362,
-              36.3418
+              -114.936423,
+              36.349493
             ],
             [
-              -114.9325,
-              36.3418
+              -114.937109,
+              36.341197
             ],
             [
-              -114.9325,
-              36.349
+              -114.929556,
+              36.341418
             ],
             [
-              -114.9362,
-              36.349
+              -114.930655,
+              36.349603
             ],
             [
-              -114.9362,
-              36.3418
+              -114.936423,
+              36.349493
             ]
           ]
         ]
@@ -3475,63 +2296,24 @@
         "coordinates": [
           [
             [
-              -114.9322,
-              36.3447
+              -114.933813,
+              36.349493
             ],
             [
-              -114.9315,
-              36.3447
+              -114.933951,
+              36.34717
             ],
             [
-              -114.9315,
-              36.3452
+              -114.931341,
+              36.34717
             ],
             [
-              -114.9322,
-              36.3452
+              -114.931204,
+              36.349493
             ],
             [
-              -114.9322,
-              36.3447
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - North Las Vegas NV",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -114.936,
-              36.3474
-            ],
-            [
-              -114.9328,
-              36.3474
-            ],
-            [
-              -114.9328,
-              36.349
-            ],
-            [
-              -114.936,
-              36.349
-            ],
-            [
-              -114.936,
-              36.3474
+              -114.933813,
+              36.349493
             ]
           ]
         ]
@@ -3554,64 +2336,24 @@
         "coordinates": [
           [
             [
-              -114.9354,
-              36.3444
+              -114.936285,
+              36.34363
             ],
             [
-              -114.9328,
-              36.3444
+              -114.936285,
+              36.343077
             ],
             [
-              -114.9328,
-              36.3456
+              -114.929693,
+              36.342856
             ],
             [
-              -114.9354,
-              36.3456
+              -114.929693,
+              36.343409
             ],
             [
-              -114.9354,
-              36.3444
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - North Las Vegas NV",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -114.9357,
-              36.3478
-            ],
-            [
-              -114.933,
-              36.3478
-            ],
-            [
-              -114.933,
-              36.3487
-            ],
-            [
-              -114.9357,
-              36.3487
-            ],
-            [
-              -114.9357,
-              36.3478
+              -114.936285,
+              36.34363
             ]
           ]
         ]
@@ -3634,104 +2376,24 @@
         "coordinates": [
           [
             [
-              -114.9356,
-              36.3456
+              -82.721745,
+              39.961603
             ],
             [
-              -114.9329,
-              36.3456
+              -82.721745,
+              39.958129
             ],
             [
-              -114.9329,
-              36.3462
+              -82.716389,
+              39.958024
             ],
             [
-              -114.9356,
-              36.3462
+              -82.716251,
+              39.961603
             ],
             [
-              -114.9356,
-              36.3456
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - North Las Vegas NV",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -114.9358,
-              36.344
-            ],
-            [
-              -114.9328,
-              36.344
-            ],
-            [
-              -114.9328,
-              36.3446
-            ],
-            [
-              -114.9358,
-              36.3446
-            ],
-            [
-              -114.9358,
-              36.344
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - North Las Vegas NV",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 3
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.7195,
-              39.9582
-            ],
-            [
-              -82.7158,
-              39.9582
-            ],
-            [
-              -82.7158,
-              39.9625
-            ],
-            [
-              -82.7195,
-              39.9625
-            ],
-            [
-              -82.7195,
-              39.9582
+              -82.721745,
+              39.961603
             ]
           ]
         ]
@@ -3774,63 +2436,24 @@
         "coordinates": [
           [
             [
-              -82.71905,
-              39.95845
+              -82.718723,
+              39.961497
             ],
             [
-              -82.71855,
-              39.95845
+              -82.718586,
+              39.958129
             ],
             [
-              -82.71855,
-              39.95895
+              -82.716389,
+              39.958129
             ],
             [
-              -82.71905,
-              39.95895
+              -82.716251,
+              39.961497
             ],
             [
-              -82.71905,
-              39.95845
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Etna OH",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.7194,
-              39.959
-            ],
-            [
-              -82.7184,
-              39.959
-            ],
-            [
-              -82.7184,
-              39.962
-            ],
-            [
-              -82.7194,
-              39.962
-            ],
-            [
-              -82.7194,
-              39.959
+              -82.718723,
+              39.961497
             ]
           ]
         ]
@@ -3853,24 +2476,24 @@
         "coordinates": [
           [
             [
-              -82.7186,
-              39.9589
+              -82.719273,
+              39.961497
             ],
             [
-              -82.718,
-              39.9589
+              -82.719273,
+              39.958129
             ],
             [
-              -82.718,
-              39.9621
+              -82.718586,
+              39.958129
             ],
             [
-              -82.7186,
-              39.9621
+              -82.718586,
+              39.961497
             ],
             [
-              -82.7186,
-              39.9589
+              -82.719273,
+              39.961497
             ]
           ]
         ]
@@ -3893,63 +2516,24 @@
         "coordinates": [
           [
             [
-              -82.7193,
-              39.9583
+              -82.941167,
+              39.868093
             ],
             [
-              -82.7186,
-              39.9583
+              -82.941579,
+              39.866934
             ],
             [
-              -82.7186,
-              39.9588
+              -82.939451,
+              39.866618
             ],
             [
-              -82.7193,
-              39.9588
+              -82.939039,
+              39.867777
             ],
             [
-              -82.7193,
-              39.9583
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Etna OH",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -82.9414,
-              39.8657
-            ],
-            [
-              -82.9386,
-              39.8657
-            ],
-            [
-              -82.9386,
-              39.8688
-            ],
-            [
-              -82.9414,
-              39.8688
-            ],
-            [
-              -82.9414,
-              39.8657
+              -82.941167,
+              39.868093
             ]
           ]
         ]
@@ -3992,24 +2576,24 @@
         "coordinates": [
           [
             [
-              -82.9408,
-              39.8675
+              -82.941236,
+              39.867988
             ],
             [
-              -82.939,
-              39.8675
+              -82.941305,
+              39.867724
             ],
             [
-              -82.939,
-              39.8687
+              -82.939176,
+              39.867408
             ],
             [
-              -82.9408,
-              39.8687
+              -82.939107,
+              39.867672
             ],
             [
-              -82.9408,
-              39.8675
+              -82.941236,
+              39.867988
             ]
           ]
         ]
@@ -4032,24 +2616,24 @@
         "coordinates": [
           [
             [
-              -95.2738,
-              29.8024
+              -95.274123,
+              29.805592
             ],
             [
-              -95.2717,
-              29.8024
+              -95.273025,
+              29.802255
             ],
             [
-              -95.2717,
-              29.8064
+              -95.270827,
+              29.802732
             ],
             [
-              -95.2738,
-              29.8064
+              -95.271926,
+              29.806068
             ],
             [
-              -95.2738,
-              29.8024
+              -95.274123,
+              29.805592
             ]
           ]
         ]
@@ -4092,143 +2676,24 @@
         "coordinates": [
           [
             [
-              -95.27345,
-              29.80255
+              -95.273917,
+              29.805234
             ],
             [
-              -95.273,
-              29.80255
+              -95.273093,
+              29.802374
             ],
             [
-              -95.273,
-              29.803
+              -95.271926,
+              29.802613
             ],
             [
-              -95.27345,
-              29.803
+              -95.27275,
+              29.805472
             ],
             [
-              -95.27345,
-              29.80255
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Houston TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2737,
-              29.8028
-            ],
-            [
-              -95.273,
-              29.8028
-            ],
-            [
-              -95.273,
-              29.8062
-            ],
-            [
-              -95.2737,
-              29.8062
-            ],
-            [
-              -95.2737,
-              29.8028
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Houston TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2724,
-              29.8028
-            ],
-            [
-              -95.2718,
-              29.8028
-            ],
-            [
-              -95.2718,
-              29.8062
-            ],
-            [
-              -95.2724,
-              29.8062
-            ],
-            [
-              -95.2724,
-              29.8028
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Houston TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2734,
-              29.8028
-            ],
-            [
-              -95.2731,
-              29.8028
-            ],
-            [
-              -95.2731,
-              29.8062
-            ],
-            [
-              -95.2734,
-              29.8062
-            ],
-            [
-              -95.2734,
-              29.8028
+              -95.273917,
+              29.805234
             ]
           ]
         ]
@@ -4251,103 +2716,24 @@
         "coordinates": [
           [
             [
-              -95.2723,
-              29.8028
+              -97.033909,
+              32.835723
             ],
             [
-              -95.2721,
-              29.8028
+              -97.033497,
+              32.834108
             ],
             [
-              -95.2721,
-              29.8062
+              -97.030613,
+              32.834512
             ],
             [
-              -95.2723,
-              29.8062
+              -97.030957,
+              32.835954
             ],
             [
-              -95.2723,
-              29.8028
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Houston TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -95.2735,
-              29.8024
-            ],
-            [
-              -95.273,
-              29.8024
-            ],
-            [
-              -95.273,
-              29.8028
-            ],
-            [
-              -95.2735,
-              29.8028
-            ],
-            [
-              -95.2735,
-              29.8024
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Houston TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0332,
-              32.8336
-            ],
-            [
-              -97.0298,
-              32.8336
-            ],
-            [
-              -97.0298,
-              32.8362
-            ],
-            [
-              -97.0332,
-              32.8362
-            ],
-            [
-              -97.0332,
-              32.8336
+              -97.033909,
+              32.835723
             ]
           ]
         ]
@@ -4390,63 +2776,24 @@
         "coordinates": [
           [
             [
-              -97.03065,
-              32.834
+              -97.033772,
+              32.835377
             ],
             [
-              -97.0302,
-              32.834
+              -97.033703,
+              32.835031
             ],
             [
-              -97.0302,
-              32.8344
+              -97.031231,
+              32.835204
             ],
             [
-              -97.03065,
-              32.8344
+              -97.0313,
+              32.83555
             ],
             [
-              -97.03065,
-              32.834
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.032,
-              32.8338
-            ],
-            [
-              -97.0301,
-              32.8338
-            ],
-            [
-              -97.0301,
-              32.835
-            ],
-            [
-              -97.032,
-              32.835
-            ],
-            [
-              -97.032,
-              32.8338
+              -97.033772,
+              32.835377
             ]
           ]
         ]
@@ -4460,85 +2807,6 @@
         "confidence": "medium",
         "zone": "dockApron",
         "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0327,
-              32.8347
-            ],
-            [
-              -97.0307,
-              32.8347
-            ],
-            [
-              -97.0307,
-              32.8358
-            ],
-            [
-              -97.0327,
-              32.8358
-            ],
-            [
-              -97.0327,
-              32.8347
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -97.0307,
-              32.8338
-            ],
-            [
-              -97.0301,
-              32.8338
-            ],
-            [
-              -97.0301,
-              32.8345
-            ],
-            [
-              -97.0307,
-              32.8345
-            ],
-            [
-              -97.0307,
-              32.8338
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "dhl-supply-chain",
-        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "zone": "staging"
       }
     }
   ]

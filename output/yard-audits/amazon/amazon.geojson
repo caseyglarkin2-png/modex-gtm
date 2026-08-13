@@ -1,0 +1,4273 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.26015,
+              47.41632
+            ],
+            [
+              -122.2601,
+              47.4128
+            ],
+            [
+              -122.25455,
+              47.41285
+            ],
+            [
+              -122.2547,
+              47.41618
+            ],
+            [
+              -122.26015,
+              47.41632
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon BFI4 Fulfillment Center Kent WA",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2556,
+              47.41568
+            ],
+            [
+              -122.25562,
+              47.41527
+            ],
+            [
+              -122.25508,
+              47.41525
+            ],
+            [
+              -122.25505,
+              47.41566
+            ],
+            [
+              -122.2556,
+              47.41568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon BFI4 Fulfillment Center Kent WA",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2601,
+              47.41618
+            ],
+            [
+              -122.26012,
+              47.4159
+            ],
+            [
+              -122.25512,
+              47.41578
+            ],
+            [
+              -122.2551,
+              47.41606
+            ],
+            [
+              -122.2601,
+              47.41618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon BFI4 Fulfillment Center Kent WA",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2601,
+              47.41585
+            ],
+            [
+              -122.26012,
+              47.41564
+            ],
+            [
+              -122.25517,
+              47.41552
+            ],
+            [
+              -122.25515,
+              47.41573
+            ],
+            [
+              -122.2601,
+              47.41585
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon BFI4 Fulfillment Center Kent WA",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2556,
+              47.4156
+            ],
+            [
+              -122.25562,
+              47.41512
+            ],
+            [
+              -122.25448,
+              47.4151
+            ],
+            [
+              -122.25445,
+              47.41558
+            ],
+            [
+              -122.2556,
+              47.4156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon BFI4 Fulfillment Center Kent WA",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.23925,
+              33.87
+            ],
+            [
+              -117.23925,
+              33.86672
+            ],
+            [
+              -117.2349,
+              33.86672
+            ],
+            [
+              -117.2349,
+              33.87
+            ],
+            [
+              -117.23925,
+              33.87
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.23895,
+              33.87
+            ],
+            [
+              -117.23895,
+              33.86975
+            ],
+            [
+              -117.2385,
+              33.86975
+            ],
+            [
+              -117.2385,
+              33.87
+            ],
+            [
+              -117.23895,
+              33.87
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.239,
+              33.86705
+            ],
+            [
+              -117.239,
+              33.86672
+            ],
+            [
+              -117.2356,
+              33.86672
+            ],
+            [
+              -117.2356,
+              33.86705
+            ],
+            [
+              -117.239,
+              33.86705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.239,
+              33.87
+            ],
+            [
+              -117.239,
+              33.86978
+            ],
+            [
+              -117.2356,
+              33.86978
+            ],
+            [
+              -117.2356,
+              33.87
+            ],
+            [
+              -117.239,
+              33.87
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.239,
+              33.86978
+            ],
+            [
+              -117.239,
+              33.86948
+            ],
+            [
+              -117.2356,
+              33.86948
+            ],
+            [
+              -117.2356,
+              33.86978
+            ],
+            [
+              -117.239,
+              33.86978
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.239,
+              33.86734
+            ],
+            [
+              -117.239,
+              33.86705
+            ],
+            [
+              -117.2356,
+              33.86705
+            ],
+            [
+              -117.2356,
+              33.86734
+            ],
+            [
+              -117.239,
+              33.86734
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.23925,
+              33.8698
+            ],
+            [
+              -117.23925,
+              33.867
+            ],
+            [
+              -117.23905,
+              33.867
+            ],
+            [
+              -117.23905,
+              33.8698
+            ],
+            [
+              -117.23925,
+              33.8698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9536,
+              35.0099
+            ],
+            [
+              -89.9547,
+              35.0076
+            ],
+            [
+              -89.9543,
+              35.0064
+            ],
+            [
+              -89.952,
+              35.00615
+            ],
+            [
+              -89.9456,
+              35.0063
+            ],
+            [
+              -89.9447,
+              35.0074
+            ],
+            [
+              -89.9456,
+              35.0094
+            ],
+            [
+              -89.9536,
+              35.0099
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.94625,
+              35.0064
+            ],
+            [
+              -89.94545,
+              35.00642
+            ],
+            [
+              -89.9455,
+              35.0069
+            ],
+            [
+              -89.9463,
+              35.00688
+            ],
+            [
+              -89.94625,
+              35.0064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9472,
+              35.0096
+            ],
+            [
+              -89.9477,
+              35.00825
+            ],
+            [
+              -89.946,
+              35.008
+            ],
+            [
+              -89.9456,
+              35.00935
+            ],
+            [
+              -89.9472,
+              35.0096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9462,
+              35.00735
+            ],
+            [
+              -89.94625,
+              35.00645
+            ],
+            [
+              -89.945,
+              35.0064
+            ],
+            [
+              -89.9449,
+              35.0073
+            ],
+            [
+              -89.9462,
+              35.00735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.95255,
+              35.00935
+            ],
+            [
+              -89.95275,
+              35.00905
+            ],
+            [
+              -89.94925,
+              35.00815
+            ],
+            [
+              -89.94905,
+              35.00845
+            ],
+            [
+              -89.95255,
+              35.00935
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.95205,
+              35.008
+            ],
+            [
+              -89.95225,
+              35.00773
+            ],
+            [
+              -89.9489,
+              35.00688
+            ],
+            [
+              -89.9487,
+              35.00715
+            ],
+            [
+              -89.95205,
+              35.008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.71485,
+              39.08745
+            ],
+            [
+              -84.71515,
+              39.085
+            ],
+            [
+              -84.7148,
+              39.082
+            ],
+            [
+              -84.71335,
+              39.08195
+            ],
+            [
+              -84.71165,
+              39.08335
+            ],
+            [
+              -84.71135,
+              39.0863
+            ],
+            [
+              -84.71205,
+              39.08765
+            ],
+            [
+              -84.71485,
+              39.08745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.71275,
+              39.08682
+            ],
+            [
+              -84.7128,
+              39.08638
+            ],
+            [
+              -84.7122,
+              39.08635
+            ],
+            [
+              -84.71215,
+              39.08678
+            ],
+            [
+              -84.71275,
+              39.08682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.71195,
+              39.0863
+            ],
+            [
+              -84.71225,
+              39.08365
+            ],
+            [
+              -84.7118,
+              39.08355
+            ],
+            [
+              -84.7115,
+              39.08615
+            ],
+            [
+              -84.71195,
+              39.0863
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.71245,
+              39.0865
+            ],
+            [
+              -84.71275,
+              39.08345
+            ],
+            [
+              -84.71245,
+              39.0834
+            ],
+            [
+              -84.71215,
+              39.08645
+            ],
+            [
+              -84.71245,
+              39.0865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.66095,
+              39.0352
+            ],
+            [
+              -84.6611,
+              39.0306
+            ],
+            [
+              -84.6606,
+              39.0266
+            ],
+            [
+              -84.658,
+              39.0262
+            ],
+            [
+              -84.65755,
+              39.029
+            ],
+            [
+              -84.6576,
+              39.0347
+            ],
+            [
+              -84.66095,
+              39.0352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 118,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6582,
+              39.0288
+            ],
+            [
+              -84.65822,
+              39.0274
+            ],
+            [
+              -84.65762,
+              39.0274
+            ],
+            [
+              -84.6576,
+              39.0288
+            ],
+            [
+              -84.6582,
+              39.0288
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.66075,
+              39.02905
+            ],
+            [
+              -84.66082,
+              39.0272
+            ],
+            [
+              -84.65878,
+              39.0272
+            ],
+            [
+              -84.6587,
+              39.02905
+            ],
+            [
+              -84.66075,
+              39.02905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6565,
+              39.0298
+            ],
+            [
+              -84.65655,
+              39.0285
+            ],
+            [
+              -84.65485,
+              39.0285
+            ],
+            [
+              -84.6548,
+              39.0298
+            ],
+            [
+              -84.6565,
+              39.0298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6585,
+              39.0347
+            ],
+            [
+              -84.65853,
+              39.02945
+            ],
+            [
+              -84.65818,
+              39.02945
+            ],
+            [
+              -84.65815,
+              39.0347
+            ],
+            [
+              -84.6585,
+              39.0347
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6564,
+              39.0301
+            ],
+            [
+              -84.65643,
+              39.0286
+            ],
+            [
+              -84.65603,
+              39.0286
+            ],
+            [
+              -84.656,
+              39.0301
+            ],
+            [
+              -84.6564,
+              39.0301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6608,
+              39.0289
+            ],
+            [
+              -84.66085,
+              39.027
+            ],
+            [
+              -84.6577,
+              39.027
+            ],
+            [
+              -84.6576,
+              39.0289
+            ],
+            [
+              -84.6608,
+              39.0289
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.738,
+              32.6629
+            ],
+            [
+              -96.7387,
+              32.662
+            ],
+            [
+              -96.7379,
+              32.6606
+            ],
+            [
+              -96.7362,
+              32.6598
+            ],
+            [
+              -96.7338,
+              32.6597
+            ],
+            [
+              -96.733,
+              32.6606
+            ],
+            [
+              -96.7338,
+              32.6625
+            ],
+            [
+              -96.7347,
+              32.663
+            ],
+            [
+              -96.738,
+              32.6629
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73805,
+              32.66268
+            ],
+            [
+              -96.73815,
+              32.66212
+            ],
+            [
+              -96.73745,
+              32.66205
+            ],
+            [
+              -96.73725,
+              32.66262
+            ],
+            [
+              -96.73805,
+              32.66268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73705,
+              32.66262
+            ],
+            [
+              -96.73682,
+              32.66212
+            ],
+            [
+              -96.73452,
+              32.66232
+            ],
+            [
+              -96.73468,
+              32.66285
+            ],
+            [
+              -96.73705,
+              32.66262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73838,
+              32.66188
+            ],
+            [
+              -96.73828,
+              32.66108
+            ],
+            [
+              -96.73762,
+              32.66112
+            ],
+            [
+              -96.73772,
+              32.66192
+            ],
+            [
+              -96.73838,
+              32.66188
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73692,
+              32.66232
+            ],
+            [
+              -96.73685,
+              32.66208
+            ],
+            [
+              -96.73473,
+              32.66228
+            ],
+            [
+              -96.7348,
+              32.66252
+            ],
+            [
+              -96.73692,
+              32.66232
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73762,
+              32.66192
+            ],
+            [
+              -96.73752,
+              32.66108
+            ],
+            [
+              -96.73722,
+              32.66102
+            ],
+            [
+              -96.73732,
+              32.66186
+            ],
+            [
+              -96.73762,
+              32.66192
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73682,
+              32.66068
+            ],
+            [
+              -96.73692,
+              32.66044
+            ],
+            [
+              -96.73492,
+              32.66028
+            ],
+            [
+              -96.73482,
+              32.66052
+            ],
+            [
+              -96.73682,
+              32.66068
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7378,
+              32.66272
+            ],
+            [
+              -96.73775,
+              32.6625
+            ],
+            [
+              -96.73578,
+              32.66262
+            ],
+            [
+              -96.73582,
+              32.66285
+            ],
+            [
+              -96.7378,
+              32.66272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3371,
+              32.9735
+            ],
+            [
+              -97.337,
+              32.9674
+            ],
+            [
+              -97.3323,
+              32.9672
+            ],
+            [
+              -97.3318,
+              32.97335
+            ],
+            [
+              -97.3371,
+              32.9735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.33695,
+              32.9732
+            ],
+            [
+              -97.33697,
+              32.97294
+            ],
+            [
+              -97.3365,
+              32.97292
+            ],
+            [
+              -97.33648,
+              32.97318
+            ],
+            [
+              -97.33695,
+              32.9732
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3369,
+              32.973
+            ],
+            [
+              -97.33704,
+              32.96777
+            ],
+            [
+              -97.33672,
+              32.96775
+            ],
+            [
+              -97.33658,
+              32.97298
+            ],
+            [
+              -97.3369,
+              32.973
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3366,
+              32.9677
+            ],
+            [
+              -97.33665,
+              32.96728
+            ],
+            [
+              -97.33525,
+              32.9672
+            ],
+            [
+              -97.3352,
+              32.96762
+            ],
+            [
+              -97.3366,
+              32.9677
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.33658,
+              32.97302
+            ],
+            [
+              -97.3367,
+              32.9677
+            ],
+            [
+              -97.33652,
+              32.96768
+            ],
+            [
+              -97.3364,
+              32.973
+            ],
+            [
+              -97.33658,
+              32.97302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.337,
+              32.97348
+            ],
+            [
+              -97.33702,
+              32.97324
+            ],
+            [
+              -97.33674,
+              32.97322
+            ],
+            [
+              -97.33672,
+              32.97346
+            ],
+            [
+              -97.337,
+              32.97348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.16885,
+              33.43513
+            ],
+            [
+              -112.16885,
+              33.43072
+            ],
+            [
+              -112.16048,
+              33.43072
+            ],
+            [
+              -112.16048,
+              33.43507
+            ],
+            [
+              -112.16885,
+              33.43513
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 93.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.1686,
+              33.4318
+            ],
+            [
+              -112.1686,
+              33.43095
+            ],
+            [
+              -112.1677,
+              33.43095
+            ],
+            [
+              -112.1677,
+              33.4318
+            ],
+            [
+              -112.1686,
+              33.4318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.1683,
+              33.43135
+            ],
+            [
+              -112.1683,
+              33.43098
+            ],
+            [
+              -112.1608,
+              33.43098
+            ],
+            [
+              -112.1608,
+              33.43135
+            ],
+            [
+              -112.1683,
+              33.43135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.16835,
+              33.43168
+            ],
+            [
+              -112.16835,
+              33.43138
+            ],
+            [
+              -112.16075,
+              33.43138
+            ],
+            [
+              -112.16075,
+              33.43168
+            ],
+            [
+              -112.16835,
+              33.43168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.16855,
+              33.43095
+            ],
+            [
+              -112.16855,
+              33.43055
+            ],
+            [
+              -112.1677,
+              33.43055
+            ],
+            [
+              -112.1677,
+              33.43095
+            ],
+            [
+              -112.16855,
+              33.43095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0735,
+              41.4848
+            ],
+            [
+              -88.0735,
+              41.4815
+            ],
+            [
+              -88.0701,
+              41.4815
+            ],
+            [
+              -88.0701,
+              41.4863
+            ],
+            [
+              -88.0735,
+              41.4848
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.07205,
+              41.48605
+            ],
+            [
+              -88.072,
+              41.48565
+            ],
+            [
+              -88.0709,
+              41.48575
+            ],
+            [
+              -88.07095,
+              41.48615
+            ],
+            [
+              -88.07205,
+              41.48605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.07355,
+              41.48625
+            ],
+            [
+              -88.0735,
+              41.4845
+            ],
+            [
+              -88.0725,
+              41.48455
+            ],
+            [
+              -88.07255,
+              41.4863
+            ],
+            [
+              -88.07355,
+              41.48625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.07235,
+              41.4862
+            ],
+            [
+              -88.0723,
+              41.48485
+            ],
+            [
+              -88.07055,
+              41.4849
+            ],
+            [
+              -88.0706,
+              41.4863
+            ],
+            [
+              -88.07235,
+              41.4862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0731,
+              41.4847
+            ],
+            [
+              -88.073,
+              41.4819
+            ],
+            [
+              -88.0726,
+              41.48195
+            ],
+            [
+              -88.0727,
+              41.48475
+            ],
+            [
+              -88.0731,
+              41.4847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.07035,
+              41.48385
+            ],
+            [
+              -88.0703,
+              41.4819
+            ],
+            [
+              -88.0699,
+              41.48195
+            ],
+            [
+              -88.06995,
+              41.4839
+            ],
+            [
+              -88.07035,
+              41.48385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0723,
+              41.4856
+            ],
+            [
+              -88.07225,
+              41.48485
+            ],
+            [
+              -88.07055,
+              41.4849
+            ],
+            [
+              -88.0706,
+              41.48565
+            ],
+            [
+              -88.0723,
+              41.4856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.56735,
+              40.19905
+            ],
+            [
+              -74.5686,
+              40.19305
+            ],
+            [
+              -74.56215,
+              40.19265
+            ],
+            [
+              -74.563,
+              40.1973
+            ],
+            [
+              -74.56735,
+              40.19905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+        "type": "Fulfillment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 67.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5669,
+              40.1988
+            ],
+            [
+              -74.5664,
+              40.19825
+            ],
+            [
+              -74.5659,
+              40.1985
+            ],
+            [
+              -74.5664,
+              40.19905
+            ],
+            [
+              -74.5669,
+              40.1988
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+        "type": "Fulfillment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.56619,
+              40.19754
+            ],
+            [
+              -74.563089,
+              40.194085
+            ],
+            [
+              -74.562701,
+              40.194288
+            ],
+            [
+              -74.565802,
+              40.197743
+            ],
+            [
+              -74.56619,
+              40.19754
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+        "type": "Fulfillment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.566505,
+              40.19743
+            ],
+            [
+              -74.563337,
+              40.1939
+            ],
+            [
+              -74.563075,
+              40.194038
+            ],
+            [
+              -74.566243,
+              40.197567
+            ],
+            [
+              -74.566505,
+              40.19743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+        "type": "Fulfillment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.566618,
+              40.197588
+            ],
+            [
+              -74.56612,
+              40.197033
+            ],
+            [
+              -74.565635,
+              40.197287
+            ],
+            [
+              -74.566133,
+              40.197842
+            ],
+            [
+              -74.566618,
+              40.197588
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+        "type": "Fulfillment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7152,
+              39.9558
+            ],
+            [
+              -82.7153,
+              39.953
+            ],
+            [
+              -82.7146,
+              39.9499
+            ],
+            [
+              -82.7096,
+              39.94995
+            ],
+            [
+              -82.7084,
+              39.9515
+            ],
+            [
+              -82.7088,
+              39.9564
+            ],
+            [
+              -82.7152,
+              39.9558
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CMH1 Fulfillment Center Etna OH",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 92.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7101,
+              39.95648
+            ],
+            [
+              -82.71012,
+              39.95585
+            ],
+            [
+              -82.70958,
+              39.95585
+            ],
+            [
+              -82.70955,
+              39.95648
+            ],
+            [
+              -82.7101,
+              39.95648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CMH1 Fulfillment Center Etna OH",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.71095,
+              39.95205
+            ],
+            [
+              -82.71135,
+              39.95015
+            ],
+            [
+              -82.7096,
+              39.95005
+            ],
+            [
+              -82.70915,
+              39.95195
+            ],
+            [
+              -82.71095,
+              39.95205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CMH1 Fulfillment Center Etna OH",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.71505,
+              39.9547
+            ],
+            [
+              -82.7155,
+              39.9545
+            ],
+            [
+              -82.71475,
+              39.95185
+            ],
+            [
+              -82.7143,
+              39.95205
+            ],
+            [
+              -82.71505,
+              39.9547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CMH1 Fulfillment Center Etna OH",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7143,
+              39.95205
+            ],
+            [
+              -82.71478,
+              39.9519
+            ],
+            [
+              -82.7143,
+              39.95025
+            ],
+            [
+              -82.71385,
+              39.9504
+            ],
+            [
+              -82.7143,
+              39.95205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon CMH1 Fulfillment Center Etna OH",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55465,
+              33.99955
+            ],
+            [
+              -117.55485,
+              33.9952
+            ],
+            [
+              -117.5509,
+              33.99505
+            ],
+            [
+              -117.5506,
+              33.99935
+            ],
+            [
+              -117.55465,
+              33.99955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55455,
+              33.99835
+            ],
+            [
+              -117.55455,
+              33.99775
+            ],
+            [
+              -117.55395,
+              33.99775
+            ],
+            [
+              -117.55395,
+              33.99835
+            ],
+            [
+              -117.55455,
+              33.99835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5519,
+              33.9992
+            ],
+            [
+              -117.55215,
+              33.9957
+            ],
+            [
+              -117.55095,
+              33.9956
+            ],
+            [
+              -117.55065,
+              33.99905
+            ],
+            [
+              -117.5519,
+              33.9992
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55205,
+              33.99925
+            ],
+            [
+              -117.55235,
+              33.99565
+            ],
+            [
+              -117.55205,
+              33.9956
+            ],
+            [
+              -117.55175,
+              33.9992
+            ],
+            [
+              -117.55205,
+              33.99925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5543,
+              33.99545
+            ],
+            [
+              -117.55432,
+              33.99515
+            ],
+            [
+              -117.55232,
+              33.9951
+            ],
+            [
+              -117.5523,
+              33.9954
+            ],
+            [
+              -117.5543,
+              33.99545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.28,
+              34.0762
+            ],
+            [
+              -117.285,
+              34.0762
+            ],
+            [
+              -117.2862,
+              34.0745
+            ],
+            [
+              -117.2858,
+              34.0703
+            ],
+            [
+              -117.282,
+              34.0705
+            ],
+            [
+              -117.2795,
+              34.0708
+            ],
+            [
+              -117.28,
+              34.0762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 88.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.27955,
+              34.07505
+            ],
+            [
+              -117.27955,
+              34.0743
+            ],
+            [
+              -117.2789,
+              34.0743
+            ],
+            [
+              -117.2789,
+              34.07505
+            ],
+            [
+              -117.27955,
+              34.07505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2815,
+              34.0762
+            ],
+            [
+              -117.2847,
+              34.0762
+            ],
+            [
+              -117.2847,
+              34.0753
+            ],
+            [
+              -117.2815,
+              34.0753
+            ],
+            [
+              -117.2815,
+              34.0762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2849,
+              34.0747
+            ],
+            [
+              -117.2859,
+              34.0747
+            ],
+            [
+              -117.2856,
+              34.0715
+            ],
+            [
+              -117.2847,
+              34.0715
+            ],
+            [
+              -117.2849,
+              34.0747
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.281,
+              34.07115
+            ],
+            [
+              -117.2843,
+              34.07115
+            ],
+            [
+              -117.2843,
+              34.07065
+            ],
+            [
+              -117.281,
+              34.07065
+            ],
+            [
+              -117.281,
+              34.07115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2815,
+              34.0752
+            ],
+            [
+              -117.2843,
+              34.0752
+            ],
+            [
+              -117.2843,
+              34.07475
+            ],
+            [
+              -117.2815,
+              34.07475
+            ],
+            [
+              -117.2815,
+              34.0752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2796,
+              34.0746
+            ],
+            [
+              -117.2825,
+              34.0746
+            ],
+            [
+              -117.2825,
+              34.0737
+            ],
+            [
+              -117.2796,
+              34.0737
+            ],
+            [
+              -117.2796,
+              34.0746
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.3905,
+              27.73
+            ],
+            [
+              -82.3896,
+              27.724
+            ],
+            [
+              -82.3878,
+              27.7236
+            ],
+            [
+              -82.3854,
+              27.7234
+            ],
+            [
+              -82.3844,
+              27.7246
+            ],
+            [
+              -82.3878,
+              27.7293
+            ],
+            [
+              -82.3905,
+              27.73
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 65.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.3864,
+              27.7256
+            ],
+            [
+              -82.3868,
+              27.7251
+            ],
+            [
+              -82.38595,
+              27.72475
+            ],
+            [
+              -82.38555,
+              27.72525
+            ],
+            [
+              -82.3864,
+              27.7256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.3864,
+              27.7286
+            ],
+            [
+              -82.38725,
+              27.7279
+            ],
+            [
+              -82.385,
+              27.7247
+            ],
+            [
+              -82.38415,
+              27.7254
+            ],
+            [
+              -82.3864,
+              27.7286
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.3879,
+              27.725
+            ],
+            [
+              -82.38835,
+              27.72415
+            ],
+            [
+              -82.3869,
+              27.7239
+            ],
+            [
+              -82.3864,
+              27.72475
+            ],
+            [
+              -82.3879,
+              27.725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.3869,
+              27.72895
+            ],
+            [
+              -82.3873,
+              27.72875
+            ],
+            [
+              -82.3849,
+              27.72525
+            ],
+            [
+              -82.3845,
+              27.72545
+            ],
+            [
+              -82.3869,
+              27.72895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.38895,
+              27.7242
+            ],
+            [
+              -82.38925,
+              27.72365
+            ],
+            [
+              -82.3879,
+              27.7233
+            ],
+            [
+              -82.3876,
+              27.72385
+            ],
+            [
+              -82.38895,
+              27.7242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.19235,
+              37.91285
+            ],
+            [
+              -121.19235,
+              37.9087
+            ],
+            [
+              -121.1901,
+              37.90835
+            ],
+            [
+              -121.1861,
+              37.9085
+            ],
+            [
+              -121.18605,
+              37.91255
+            ],
+            [
+              -121.1876,
+              37.913
+            ],
+            [
+              -121.19235,
+              37.91285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.18915,
+              37.90905
+            ],
+            [
+              -121.18915,
+              37.9084
+            ],
+            [
+              -121.1884,
+              37.9084
+            ],
+            [
+              -121.1884,
+              37.90905
+            ],
+            [
+              -121.18915,
+              37.90905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.19175,
+              37.91245
+            ],
+            [
+              -121.19185,
+              37.9089
+            ],
+            [
+              -121.1905,
+              37.90895
+            ],
+            [
+              -121.19035,
+              37.9125
+            ],
+            [
+              -121.19175,
+              37.91245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.1876,
+              37.91195
+            ],
+            [
+              -121.1876,
+              37.9095
+            ],
+            [
+              -121.18625,
+              37.90955
+            ],
+            [
+              -121.1862,
+              37.912
+            ],
+            [
+              -121.1876,
+              37.91195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.19055,
+              37.9112
+            ],
+            [
+              -121.19055,
+              37.91095
+            ],
+            [
+              -121.18675,
+              37.911
+            ],
+            [
+              -121.18675,
+              37.91125
+            ],
+            [
+              -121.19055,
+              37.9112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.1906,
+              37.90945
+            ],
+            [
+              -121.1906,
+              37.9092
+            ],
+            [
+              -121.1868,
+              37.90925
+            ],
+            [
+              -121.1868,
+              37.9095
+            ],
+            [
+              -121.1906,
+              37.90945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.19035,
+              37.90905
+            ],
+            [
+              -121.19035,
+              37.9085
+            ],
+            [
+              -121.18815,
+              37.90855
+            ],
+            [
+              -121.18815,
+              37.9091
+            ],
+            [
+              -121.19035,
+              37.90905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40525,
+              37.75418
+            ],
+            [
+              -121.4053,
+              37.751
+            ],
+            [
+              -121.40495,
+              37.74945
+            ],
+            [
+              -121.399,
+              37.7497
+            ],
+            [
+              -121.39895,
+              37.7526
+            ],
+            [
+              -121.39945,
+              37.75409
+            ],
+            [
+              -121.40525,
+              37.75418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40072,
+              37.75325
+            ],
+            [
+              -121.40076,
+              37.75296
+            ],
+            [
+              -121.40036,
+              37.7529
+            ],
+            [
+              -121.40032,
+              37.75318
+            ],
+            [
+              -121.40072,
+              37.75325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40023,
+              37.75308
+            ],
+            [
+              -121.40037,
+              37.7497
+            ],
+            [
+              -121.39908,
+              37.74976
+            ],
+            [
+              -121.39897,
+              37.75298
+            ],
+            [
+              -121.40023,
+              37.75308
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40478,
+              37.75015
+            ],
+            [
+              -121.40479,
+              37.74988
+            ],
+            [
+              -121.40106,
+              37.74982
+            ],
+            [
+              -121.40105,
+              37.75009
+            ],
+            [
+              -121.40478,
+              37.75015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.40476,
+              37.75065
+            ],
+            [
+              -121.40477,
+              37.75047
+            ],
+            [
+              -121.40109,
+              37.75041
+            ],
+            [
+              -121.40108,
+              37.75059
+            ],
+            [
+              -121.40476,
+              37.75065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4006,
+              37.753
+            ],
+            [
+              -121.4008,
+              37.75301
+            ],
+            [
+              -121.40082,
+              37.7527
+            ],
+            [
+              -121.4009,
+              37.75081
+            ],
+            [
+              -121.4007,
+              37.7508
+            ],
+            [
+              -121.40062,
+              37.7527
+            ],
+            [
+              -121.4006,
+              37.753
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4014,
+              37.7529
+            ],
+            [
+              -121.40144,
+              37.75195
+            ],
+            [
+              -121.40082,
+              37.7519
+            ],
+            [
+              -121.40078,
+              37.75285
+            ],
+            [
+              -121.4014,
+              37.7529
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

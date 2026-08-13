@@ -1,0 +1,8454 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.053,
+              42.3855
+            ],
+            [
+              -83.0528,
+              42.3782
+            ],
+            [
+              -83.047,
+              42.3765
+            ],
+            [
+              -83.04,
+              42.3762
+            ],
+            [
+              -83.0345,
+              42.38
+            ],
+            [
+              -83.036,
+              42.3855
+            ],
+            [
+              -83.047,
+              42.3885
+            ],
+            [
+              -83.053,
+              42.3855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 380,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.04985,
+              42.38415
+            ],
+            [
+              -83.05025,
+              42.3835
+            ],
+            [
+              -83.04935,
+              42.3833
+            ],
+            [
+              -83.04895,
+              42.38395
+            ],
+            [
+              -83.04985,
+              42.38415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.04,
+              42.3801
+            ],
+            [
+              -83.0396,
+              42.378
+            ],
+            [
+              -83.0374,
+              42.3782
+            ],
+            [
+              -83.0378,
+              42.3803
+            ],
+            [
+              -83.04,
+              42.3801
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0376,
+              42.3839
+            ],
+            [
+              -83.0384,
+              42.383
+            ],
+            [
+              -83.0372,
+              42.3824
+            ],
+            [
+              -83.0364,
+              42.3833
+            ],
+            [
+              -83.0376,
+              42.3839
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0513,
+              42.3826
+            ],
+            [
+              -83.05095,
+              42.3812
+            ],
+            [
+              -83.05015,
+              42.3811
+            ],
+            [
+              -83.0505,
+              42.3825
+            ],
+            [
+              -83.0513,
+              42.3826
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0425,
+              42.3813
+            ],
+            [
+              -83.04275,
+              42.3804
+            ],
+            [
+              -83.04075,
+              42.3802
+            ],
+            [
+              -83.0405,
+              42.3811
+            ],
+            [
+              -83.0425,
+              42.3813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.71855,
+              42.99065
+            ],
+            [
+              -83.72075,
+              42.98575
+            ],
+            [
+              -83.72055,
+              42.98095
+            ],
+            [
+              -83.71775,
+              42.97505
+            ],
+            [
+              -83.71565,
+              42.97005
+            ],
+            [
+              -83.71285,
+              42.97045
+            ],
+            [
+              -83.71245,
+              42.97755
+            ],
+            [
+              -83.71205,
+              42.98555
+            ],
+            [
+              -83.71275,
+              42.99005
+            ],
+            [
+              -83.71855,
+              42.99065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Assembly, Flint MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 3,
+          "buildingCount": 8,
+          "siteAreaAcres": 320,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.71435,
+              42.97425
+            ],
+            [
+              -83.71435,
+              42.97345
+            ],
+            [
+              -83.71345,
+              42.97345
+            ],
+            [
+              -83.71345,
+              42.97425
+            ],
+            [
+              -83.71435,
+              42.97425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Assembly, Flint MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.71565,
+              42.97215
+            ],
+            [
+              -83.71575,
+              42.97005
+            ],
+            [
+              -83.71385,
+              42.96985
+            ],
+            [
+              -83.71375,
+              42.97195
+            ],
+            [
+              -83.71565,
+              42.97215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Assembly, Flint MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.72015,
+              42.98335
+            ],
+            [
+              -83.72045,
+              42.97985
+            ],
+            [
+              -83.71795,
+              42.97955
+            ],
+            [
+              -83.71765,
+              42.98305
+            ],
+            [
+              -83.72015,
+              42.98335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Assembly, Flint MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.71375,
+              42.97275
+            ],
+            [
+              -83.7138,
+              42.97195
+            ],
+            [
+              -83.7126,
+              42.97185
+            ],
+            [
+              -83.71255,
+              42.97265
+            ],
+            [
+              -83.71375,
+              42.97275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Assembly, Flint MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.26715,
+              42.72345
+            ],
+            [
+              -83.27015,
+              42.72075
+            ],
+            [
+              -83.27035,
+              42.71565
+            ],
+            [
+              -83.26555,
+              42.70925
+            ],
+            [
+              -83.25665,
+              42.70885
+            ],
+            [
+              -83.24705,
+              42.71165
+            ],
+            [
+              -83.24705,
+              42.71865
+            ],
+            [
+              -83.25255,
+              42.72385
+            ],
+            [
+              -83.26715,
+              42.72345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Orion Assembly, Lake Orion MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 3,
+          "buildingCount": 8,
+          "siteAreaAcres": 410,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.26485,
+              42.71165
+            ],
+            [
+              -83.26485,
+              42.71055
+            ],
+            [
+              -83.26345,
+              42.71055
+            ],
+            [
+              -83.26345,
+              42.71165
+            ],
+            [
+              -83.26485,
+              42.71165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Orion Assembly, Lake Orion MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.26405,
+              42.71315
+            ],
+            [
+              -83.26405,
+              42.71035
+            ],
+            [
+              -83.25685,
+              42.71035
+            ],
+            [
+              -83.25685,
+              42.71315
+            ],
+            [
+              -83.26405,
+              42.71315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Orion Assembly, Lake Orion MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.26305,
+              42.71385
+            ],
+            [
+              -83.26305,
+              42.71245
+            ],
+            [
+              -83.26095,
+              42.71245
+            ],
+            [
+              -83.26095,
+              42.71385
+            ],
+            [
+              -83.26305,
+              42.71385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Orion Assembly, Lake Orion MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.616,
+              39.1502
+            ],
+            [
+              -94.616,
+              39.139
+            ],
+            [
+              -94.6095,
+              39.134
+            ],
+            [
+              -94.6055,
+              39.1345
+            ],
+            [
+              -94.601,
+              39.138
+            ],
+            [
+              -94.602,
+              39.15
+            ],
+            [
+              -94.616,
+              39.1502
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fairfax Assembly, Kansas City KS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 3,
+          "buildingCount": 8,
+          "siteAreaAcres": 494,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.60905,
+              39.13598
+            ],
+            [
+              -94.60905,
+              39.13558
+            ],
+            [
+              -94.60815,
+              39.13558
+            ],
+            [
+              -94.60815,
+              39.13598
+            ],
+            [
+              -94.60905,
+              39.13598
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fairfax Assembly, Kansas City KS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6094,
+              39.1396
+            ],
+            [
+              -94.6078,
+              39.1358
+            ],
+            [
+              -94.6062,
+              39.1351
+            ],
+            [
+              -94.6079,
+              39.1389
+            ],
+            [
+              -94.6094,
+              39.1396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fairfax Assembly, Kansas City KS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6065,
+              39.1424
+            ],
+            [
+              -94.6062,
+              39.1382
+            ],
+            [
+              -94.6018,
+              39.1382
+            ],
+            [
+              -94.602,
+              39.1424
+            ],
+            [
+              -94.6065,
+              39.1424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fairfax Assembly, Kansas City KS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6088,
+              39.1392
+            ],
+            [
+              -94.6072,
+              39.1355
+            ],
+            [
+              -94.6057,
+              39.1348
+            ],
+            [
+              -94.6073,
+              39.1385
+            ],
+            [
+              -94.6088,
+              39.1392
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fairfax Assembly, Kansas City KS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.96,
+              35.7448
+            ],
+            [
+              -86.9665,
+              35.7427
+            ],
+            [
+              -86.9705,
+              35.739
+            ],
+            [
+              -86.9695,
+              35.7325
+            ],
+            [
+              -86.9656,
+              35.7278
+            ],
+            [
+              -86.9613,
+              35.7272
+            ],
+            [
+              -86.9565,
+              35.7315
+            ],
+            [
+              -86.9535,
+              35.7365
+            ],
+            [
+              -86.953,
+              35.743
+            ],
+            [
+              -86.96,
+              35.7448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 720,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9634,
+              35.7321
+            ],
+            [
+              -86.9631,
+              35.7308
+            ],
+            [
+              -86.9619,
+              35.731
+            ],
+            [
+              -86.9623,
+              35.7323
+            ],
+            [
+              -86.9634,
+              35.7321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9687,
+              35.7352
+            ],
+            [
+              -86.9696,
+              35.7338
+            ],
+            [
+              -86.9681,
+              35.7333
+            ],
+            [
+              -86.9672,
+              35.7347
+            ],
+            [
+              -86.9687,
+              35.7352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9672,
+              35.725
+            ],
+            [
+              -86.9682,
+              35.7234
+            ],
+            [
+              -86.9666,
+              35.7228
+            ],
+            [
+              -86.9656,
+              35.7244
+            ],
+            [
+              -86.9672,
+              35.725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9612,
+              35.7378
+            ],
+            [
+              -86.9614,
+              35.737
+            ],
+            [
+              -86.9599,
+              35.7368
+            ],
+            [
+              -86.9597,
+              35.7376
+            ],
+            [
+              -86.9612,
+              35.7378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9678,
+              35.7346
+            ],
+            [
+              -86.9681,
+              35.7339
+            ],
+            [
+              -86.9669,
+              35.7336
+            ],
+            [
+              -86.9666,
+              35.7343
+            ],
+            [
+              -86.9678,
+              35.7346
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.37015,
+              37.0143
+            ],
+            [
+              -86.37055,
+              37.01005
+            ],
+            [
+              -86.37005,
+              37.008
+            ],
+            [
+              -86.3668,
+              37.00715
+            ],
+            [
+              -86.3623,
+              37.00765
+            ],
+            [
+              -86.3615,
+              37.0095
+            ],
+            [
+              -86.36175,
+              37.01245
+            ],
+            [
+              -86.3645,
+              37.014
+            ],
+            [
+              -86.37015,
+              37.0143
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bowling Green Assembly, Bowling Green KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 235,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3669,
+              37.00735
+            ],
+            [
+              -86.3663,
+              37.0075
+            ],
+            [
+              -86.36615,
+              37.00775
+            ],
+            [
+              -86.36675,
+              37.0076
+            ],
+            [
+              -86.3669,
+              37.00735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bowling Green Assembly, Bowling Green KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3692,
+              37.01
+            ],
+            [
+              -86.3697,
+              37.00925
+            ],
+            [
+              -86.36905,
+              37.00895
+            ],
+            [
+              -86.36855,
+              37.0097
+            ],
+            [
+              -86.3692,
+              37.01
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bowling Green Assembly, Bowling Green KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.36895,
+              37.01115
+            ],
+            [
+              -86.36995,
+              37.00935
+            ],
+            [
+              -86.36915,
+              37.00895
+            ],
+            [
+              -86.36815,
+              37.01075
+            ],
+            [
+              -86.36895,
+              37.01115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bowling Green Assembly, Bowling Green KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.3062,
+              40.97075
+            ],
+            [
+              -85.3074,
+              40.9645
+            ],
+            [
+              -85.307,
+              40.9593
+            ],
+            [
+              -85.2985,
+              40.9593
+            ],
+            [
+              -85.292,
+              40.9605
+            ],
+            [
+              -85.2905,
+              40.9666
+            ],
+            [
+              -85.2913,
+              40.97075
+            ],
+            [
+              -85.3062,
+              40.97075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fort Wayne Assembly, Roanoke IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 716,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.3056,
+              40.96075
+            ],
+            [
+              -85.3056,
+              40.9601
+            ],
+            [
+              -85.3046,
+              40.9601
+            ],
+            [
+              -85.3046,
+              40.96075
+            ],
+            [
+              -85.3056,
+              40.96075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fort Wayne Assembly, Roanoke IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.307,
+              40.9642
+            ],
+            [
+              -85.307,
+              40.9615
+            ],
+            [
+              -85.3042,
+              40.9615
+            ],
+            [
+              -85.3042,
+              40.9642
+            ],
+            [
+              -85.307,
+              40.9642
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fort Wayne Assembly, Roanoke IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.301,
+              40.97
+            ],
+            [
+              -85.301,
+              40.9682
+            ],
+            [
+              -85.2925,
+              40.9682
+            ],
+            [
+              -85.2925,
+              40.97
+            ],
+            [
+              -85.301,
+              40.97
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fort Wayne Assembly, Roanoke IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.3038,
+              40.964
+            ],
+            [
+              -85.3038,
+              40.9598
+            ],
+            [
+              -85.3032,
+              40.9598
+            ],
+            [
+              -85.3032,
+              40.964
+            ],
+            [
+              -85.3038,
+              40.964
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Fort Wayne Assembly, Roanoke IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.8265,
+              38.8255
+            ],
+            [
+              -90.832,
+              38.8205
+            ],
+            [
+              -90.8285,
+              38.8135
+            ],
+            [
+              -90.8175,
+              38.812
+            ],
+            [
+              -90.812,
+              38.8175
+            ],
+            [
+              -90.8175,
+              38.826
+            ],
+            [
+              -90.8265,
+              38.8255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Wentzville Assembly, Wentzville MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 470,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.8211,
+              38.8236
+            ],
+            [
+              -90.82145,
+              38.82285
+            ],
+            [
+              -90.82075,
+              38.8227
+            ],
+            [
+              -90.8204,
+              38.82345
+            ],
+            [
+              -90.8211,
+              38.8236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Wentzville Assembly, Wentzville MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.8255,
+              38.8215
+            ],
+            [
+              -90.8243,
+              38.8225
+            ],
+            [
+              -90.8257,
+              38.8234
+            ],
+            [
+              -90.8269,
+              38.8224
+            ],
+            [
+              -90.8255,
+              38.8215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Wentzville Assembly, Wentzville MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.8236,
+              38.8212
+            ],
+            [
+              -90.82265,
+              38.8203
+            ],
+            [
+              -90.8216,
+              38.82085
+            ],
+            [
+              -90.82255,
+              38.82175
+            ],
+            [
+              -90.8236,
+              38.8212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Wentzville Assembly, Wentzville MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0779,
+              32.743
+            ],
+            [
+              -97.0779,
+              32.735
+            ],
+            [
+              -97.0712,
+              32.7347
+            ],
+            [
+              -97.0668,
+              32.7358
+            ],
+            [
+              -97.0648,
+              32.7378
+            ],
+            [
+              -97.066,
+              32.742
+            ],
+            [
+              -97.0705,
+              32.7434
+            ],
+            [
+              -97.0779,
+              32.743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Arlington Assembly, Arlington TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 3,
+          "buildingCount": 5,
+          "siteAreaAcres": 251.2,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0722,
+              32.7356
+            ],
+            [
+              -97.0722,
+              32.7349
+            ],
+            [
+              -97.0713,
+              32.7349
+            ],
+            [
+              -97.0713,
+              32.7356
+            ],
+            [
+              -97.0722,
+              32.7356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Arlington Assembly, Arlington TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0708,
+              32.7424
+            ],
+            [
+              -97.0706,
+              32.7412
+            ],
+            [
+              -97.0676,
+              32.7414
+            ],
+            [
+              -97.0678,
+              32.7426
+            ],
+            [
+              -97.0708,
+              32.7424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Arlington Assembly, Arlington TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0658,
+              32.7398
+            ],
+            [
+              -97.0665,
+              32.736
+            ],
+            [
+              -97.0648,
+              32.7362
+            ],
+            [
+              -97.0641,
+              32.74
+            ],
+            [
+              -97.0658,
+              32.7398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Arlington Assembly, Arlington TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0784,
+              32.7405
+            ],
+            [
+              -97.0784,
+              32.7372
+            ],
+            [
+              -97.0778,
+              32.7372
+            ],
+            [
+              -97.0778,
+              32.7405
+            ],
+            [
+              -97.0784,
+              32.7405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Arlington Assembly, Arlington TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.56455,
+              42.72755
+            ],
+            [
+              -84.56565,
+              42.72515
+            ],
+            [
+              -84.56475,
+              42.72115
+            ],
+            [
+              -84.56275,
+              42.71795
+            ],
+            [
+              -84.55755,
+              42.71845
+            ],
+            [
+              -84.55505,
+              42.72205
+            ],
+            [
+              -84.55425,
+              42.72515
+            ],
+            [
+              -84.55485,
+              42.72705
+            ],
+            [
+              -84.56455,
+              42.72755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Grand River Assembly, Lansing MI",
+        "type": "Vehicle Assembly + Stamping",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 111,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.56085,
+              42.72575
+            ],
+            [
+              -84.56085,
+              42.72505
+            ],
+            [
+              -84.55995,
+              42.72505
+            ],
+            [
+              -84.55995,
+              42.72575
+            ],
+            [
+              -84.56085,
+              42.72575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Grand River Assembly, Lansing MI",
+        "type": "Vehicle Assembly + Stamping",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.56565,
+              42.72415
+            ],
+            [
+              -84.56565,
+              42.72205
+            ],
+            [
+              -84.56275,
+              42.72205
+            ],
+            [
+              -84.56275,
+              42.72415
+            ],
+            [
+              -84.56565,
+              42.72415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Grand River Assembly, Lansing MI",
+        "type": "Vehicle Assembly + Stamping",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.55735,
+              42.72075
+            ],
+            [
+              -84.55765,
+              42.71965
+            ],
+            [
+              -84.55575,
+              42.71925
+            ],
+            [
+              -84.55545,
+              42.72035
+            ],
+            [
+              -84.55735,
+              42.72075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Grand River Assembly, Lansing MI",
+        "type": "Vehicle Assembly + Stamping",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.56055,
+              42.72375
+            ],
+            [
+              -84.56055,
+              42.72315
+            ],
+            [
+              -84.55915,
+              42.72315
+            ],
+            [
+              -84.55915,
+              42.72375
+            ],
+            [
+              -84.56055,
+              42.72375
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Grand River Assembly, Lansing MI",
+        "type": "Vehicle Assembly + Stamping",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6841,
+              42.69655
+            ],
+            [
+              -84.6844,
+              42.692
+            ],
+            [
+              -84.6842,
+              42.6872
+            ],
+            [
+              -84.6816,
+              42.6836
+            ],
+            [
+              -84.6776,
+              42.6848
+            ],
+            [
+              -84.6752,
+              42.6908
+            ],
+            [
+              -84.6756,
+              42.6964
+            ],
+            [
+              -84.6841,
+              42.69655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Delta Township Assembly, Lansing MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 320,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.68165,
+              42.685
+            ],
+            [
+              -84.6816,
+              42.68445
+            ],
+            [
+              -84.6809,
+              42.6845
+            ],
+            [
+              -84.68095,
+              42.68505
+            ],
+            [
+              -84.68165,
+              42.685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Delta Township Assembly, Lansing MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6806,
+              42.6938
+            ],
+            [
+              -84.68055,
+              42.69295
+            ],
+            [
+              -84.67905,
+              42.693
+            ],
+            [
+              -84.6791,
+              42.69385
+            ],
+            [
+              -84.6806,
+              42.6938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Delta Township Assembly, Lansing MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6793,
+              42.6923
+            ],
+            [
+              -84.67925,
+              42.69145
+            ],
+            [
+              -84.67795,
+              42.6915
+            ],
+            [
+              -84.678,
+              42.69235
+            ],
+            [
+              -84.6793,
+              42.6923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Delta Township Assembly, Lansing MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6813,
+              42.69345
+            ],
+            [
+              -84.68128,
+              42.69305
+            ],
+            [
+              -84.67958,
+              42.6931
+            ],
+            [
+              -84.6796,
+              42.6935
+            ],
+            [
+              -84.6813,
+              42.69345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Delta Township Assembly, Lansing MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.71775,
+              42.97905
+            ],
+            [
+              -83.7178,
+              42.97475
+            ],
+            [
+              -83.7136,
+              42.97475
+            ],
+            [
+              -83.7133,
+              42.97565
+            ],
+            [
+              -83.71355,
+              42.97905
+            ],
+            [
+              -83.71775,
+              42.97905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Engine South, Flint MI",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.71355,
+              42.97615
+            ],
+            [
+              -83.71355,
+              42.9756
+            ],
+            [
+              -83.7132,
+              42.9756
+            ],
+            [
+              -83.7132,
+              42.97615
+            ],
+            [
+              -83.71355,
+              42.97615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Engine South, Flint MI",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7143,
+              42.9764
+            ],
+            [
+              -83.7143,
+              42.9754
+            ],
+            [
+              -83.71345,
+              42.9754
+            ],
+            [
+              -83.71345,
+              42.9764
+            ],
+            [
+              -83.7143,
+              42.9764
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Engine South, Flint MI",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7143,
+              42.9774
+            ],
+            [
+              -83.7143,
+              42.9756
+            ],
+            [
+              -83.71395,
+              42.9756
+            ],
+            [
+              -83.71395,
+              42.9774
+            ],
+            [
+              -83.7143,
+              42.9774
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Engine South, Flint MI",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4068,
+              42.2596
+            ],
+            [
+              -83.4068,
+              42.2516
+            ],
+            [
+              -83.4005,
+              42.2516
+            ],
+            [
+              -83.3962,
+              42.2524
+            ],
+            [
+              -83.3962,
+              42.2596
+            ],
+            [
+              -83.4068,
+              42.2596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Romulus Propulsion Systems, Romulus MI",
+        "type": "Propulsion Systems (Engine / Transmission) Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 180,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.39845,
+              42.25245
+            ],
+            [
+              -83.3983,
+              42.25205
+            ],
+            [
+              -83.39775,
+              42.25215
+            ],
+            [
+              -83.3979,
+              42.25255
+            ],
+            [
+              -83.39845,
+              42.25245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Romulus Propulsion Systems, Romulus MI",
+        "type": "Propulsion Systems (Engine / Transmission) Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3982,
+              42.258
+            ],
+            [
+              -83.3982,
+              42.2572
+            ],
+            [
+              -83.3968,
+              42.2572
+            ],
+            [
+              -83.3968,
+              42.258
+            ],
+            [
+              -83.3982,
+              42.258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Romulus Propulsion Systems, Romulus MI",
+        "type": "Propulsion Systems (Engine / Transmission) Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3988,
+              42.2556
+            ],
+            [
+              -83.3988,
+              42.2547
+            ],
+            [
+              -83.397,
+              42.2547
+            ],
+            [
+              -83.397,
+              42.2556
+            ],
+            [
+              -83.3988,
+              42.2556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Romulus Propulsion Systems, Romulus MI",
+        "type": "Propulsion Systems (Engine / Transmission) Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4009,
+              42.2564
+            ],
+            [
+              -83.4009,
+              42.2561
+            ],
+            [
+              -83.399,
+              42.2561
+            ],
+            [
+              -83.399,
+              42.2564
+            ],
+            [
+              -83.4009,
+              42.2564
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Romulus Propulsion Systems, Romulus MI",
+        "type": "Propulsion Systems (Engine / Transmission) Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9005,
+              42.96985
+            ],
+            [
+              -78.9009,
+              42.9657
+            ],
+            [
+              -78.8906,
+              42.9656
+            ],
+            [
+              -78.8898,
+              42.96935
+            ],
+            [
+              -78.9005,
+              42.96985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Tonawanda Propulsion, Buffalo NY",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 102,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8993,
+              42.9676
+            ],
+            [
+              -78.89945,
+              42.96715
+            ],
+            [
+              -78.89865,
+              42.96705
+            ],
+            [
+              -78.89845,
+              42.96748
+            ],
+            [
+              -78.8993,
+              42.9676
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Tonawanda Propulsion, Buffalo NY",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8929,
+              42.9692
+            ],
+            [
+              -78.89315,
+              42.9683
+            ],
+            [
+              -78.89145,
+              42.96815
+            ],
+            [
+              -78.8912,
+              42.96905
+            ],
+            [
+              -78.8929,
+              42.9692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Tonawanda Propulsion, Buffalo NY",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8988,
+              42.96865
+            ],
+            [
+              -78.89885,
+              42.96835
+            ],
+            [
+              -78.89395,
+              42.96815
+            ],
+            [
+              -78.8939,
+              42.96845
+            ],
+            [
+              -78.8988,
+              42.96865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Tonawanda Propulsion, Buffalo NY",
+        "type": "Engine/Propulsion Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5778,
+              41.714
+            ],
+            [
+              -83.5776,
+              41.7077
+            ],
+            [
+              -83.5712,
+              41.7079
+            ],
+            [
+              -83.5713,
+              41.71405
+            ],
+            [
+              -83.5778,
+              41.714
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Toledo Propulsion Systems, Toledo OH",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 151,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5756,
+              41.7084
+            ],
+            [
+              -83.5756,
+              41.7076
+            ],
+            [
+              -83.575,
+              41.7076
+            ],
+            [
+              -83.575,
+              41.7084
+            ],
+            [
+              -83.5756,
+              41.7084
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Toledo Propulsion Systems, Toledo OH",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5756,
+              41.7139
+            ],
+            [
+              -83.5756,
+              41.7115
+            ],
+            [
+              -83.5735,
+              41.7115
+            ],
+            [
+              -83.5735,
+              41.7139
+            ],
+            [
+              -83.5756,
+              41.7139
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Toledo Propulsion Systems, Toledo OH",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5756,
+              41.7127
+            ],
+            [
+              -83.5756,
+              41.7105
+            ],
+            [
+              -83.575,
+              41.7105
+            ],
+            [
+              -83.575,
+              41.7127
+            ],
+            [
+              -83.5756,
+              41.7127
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Toledo Propulsion Systems, Toledo OH",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8836,
+              43.6069
+            ],
+            [
+              -83.8837,
+              43.6052
+            ],
+            [
+              -83.8824,
+              43.6033
+            ],
+            [
+              -83.8756,
+              43.6034
+            ],
+            [
+              -83.8756,
+              43.6066
+            ],
+            [
+              -83.8836,
+              43.6069
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bay City Powertrain, Bay City MI",
+        "type": "Powertrain Components Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.88025,
+              43.60405
+            ],
+            [
+              -83.88025,
+              43.6038
+            ],
+            [
+              -83.87975,
+              43.6038
+            ],
+            [
+              -83.87975,
+              43.60405
+            ],
+            [
+              -83.88025,
+              43.60405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bay City Powertrain, Bay City MI",
+        "type": "Powertrain Components Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8826,
+              43.60665
+            ],
+            [
+              -83.8826,
+              43.60645
+            ],
+            [
+              -83.8788,
+              43.6063
+            ],
+            [
+              -83.8788,
+              43.6065
+            ],
+            [
+              -83.8826,
+              43.60665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bay City Powertrain, Bay City MI",
+        "type": "Powertrain Components Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.224035,
+              39.706852
+            ],
+            [
+              -84.22429,
+              39.70356
+            ],
+            [
+              -84.21976,
+              39.70333
+            ],
+            [
+              -84.220015,
+              39.706795
+            ],
+            [
+              -84.224035,
+              39.706852
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "DMAX (GM diesel), Moraine OH",
+        "type": "Engine Plant (GM JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 37.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.22401,
+              39.706905
+            ],
+            [
+              -84.22405,
+              39.706585
+            ],
+            [
+              -84.2236,
+              39.70656
+            ],
+            [
+              -84.22356,
+              39.70688
+            ],
+            [
+              -84.22401,
+              39.706905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "DMAX (GM diesel), Moraine OH",
+        "type": "Engine Plant (GM JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.22087,
+              39.70443
+            ],
+            [
+              -84.22106,
+              39.70356
+            ],
+            [
+              -84.22015,
+              39.70347
+            ],
+            [
+              -84.21998,
+              39.70433
+            ],
+            [
+              -84.22087,
+              39.70443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "DMAX (GM diesel), Moraine OH",
+        "type": "Engine Plant (GM JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.22417,
+              39.70609
+            ],
+            [
+              -84.22428,
+              39.70472
+            ],
+            [
+              -84.22383,
+              39.70469
+            ],
+            [
+              -84.22372,
+              39.70606
+            ],
+            [
+              -84.22417,
+              39.70609
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "DMAX (GM diesel), Moraine OH",
+        "type": "Engine Plant (GM JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.22062,
+              39.70606
+            ],
+            [
+              -84.22073,
+              39.70446
+            ],
+            [
+              -84.22036,
+              39.704445
+            ],
+            [
+              -84.22025,
+              39.706045
+            ],
+            [
+              -84.22062,
+              39.70606
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "DMAX (GM diesel), Moraine OH",
+        "type": "Engine Plant (GM JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2236,
+              39.70607
+            ],
+            [
+              -84.2237,
+              39.7047
+            ],
+            [
+              -84.22336,
+              39.70469
+            ],
+            [
+              -84.22326,
+              39.70606
+            ],
+            [
+              -84.2236,
+              39.70607
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "DMAX (GM diesel), Moraine OH",
+        "type": "Engine Plant (GM JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6833,
+              42.6946
+            ],
+            [
+              -84.6836,
+              42.689
+            ],
+            [
+              -84.6834,
+              42.6842
+            ],
+            [
+              -84.6816,
+              42.6827
+            ],
+            [
+              -84.6762,
+              42.683
+            ],
+            [
+              -84.6748,
+              42.6872
+            ],
+            [
+              -84.6736,
+              42.691
+            ],
+            [
+              -84.6743,
+              42.6947
+            ],
+            [
+              -84.6833,
+              42.6946
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Regional Stamping, Delta Township MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 320,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6821,
+              42.68285
+            ],
+            [
+              -84.6812,
+              42.6829
+            ],
+            [
+              -84.6813,
+              42.6842
+            ],
+            [
+              -84.68215,
+              42.6842
+            ],
+            [
+              -84.6821,
+              42.68285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Regional Stamping, Delta Township MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6817,
+              42.6924
+            ],
+            [
+              -84.6817,
+              42.6911
+            ],
+            [
+              -84.6795,
+              42.6911
+            ],
+            [
+              -84.6795,
+              42.6924
+            ],
+            [
+              -84.6817,
+              42.6924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Regional Stamping, Delta Township MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.68155,
+              42.6869
+            ],
+            [
+              -84.68155,
+              42.6859
+            ],
+            [
+              -84.6802,
+              42.6859
+            ],
+            [
+              -84.6802,
+              42.6869
+            ],
+            [
+              -84.68155,
+              42.6869
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Regional Stamping, Delta Township MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6813,
+              42.6918
+            ],
+            [
+              -84.6813,
+              42.6913
+            ],
+            [
+              -84.6798,
+              42.6913
+            ],
+            [
+              -84.6798,
+              42.6918
+            ],
+            [
+              -84.6813,
+              42.6918
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Lansing Regional Stamping, Delta Township MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7018,
+              40.567
+            ],
+            [
+              -85.7023,
+              40.5625
+            ],
+            [
+              -85.7019,
+              40.5597
+            ],
+            [
+              -85.6946,
+              40.5597
+            ],
+            [
+              -85.6923,
+              40.5613
+            ],
+            [
+              -85.6923,
+              40.5669
+            ],
+            [
+              -85.7018,
+              40.567
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Marion Metal Center, Marion IN",
+        "type": "Metal Stamping Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 3,
+          "buildingCount": 1,
+          "siteAreaAcres": 260,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.69265,
+              40.56185
+            ],
+            [
+              -85.69265,
+              40.56135
+            ],
+            [
+              -85.69205,
+              40.56135
+            ],
+            [
+              -85.69205,
+              40.56185
+            ],
+            [
+              -85.69265,
+              40.56185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Marion Metal Center, Marion IN",
+        "type": "Metal Stamping Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6952,
+              40.5649
+            ],
+            [
+              -85.6952,
+              40.5626
+            ],
+            [
+              -85.6926,
+              40.5626
+            ],
+            [
+              -85.6926,
+              40.5649
+            ],
+            [
+              -85.6952,
+              40.5649
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Marion Metal Center, Marion IN",
+        "type": "Metal Stamping Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7016,
+              40.566
+            ],
+            [
+              -85.7016,
+              40.5616
+            ],
+            [
+              -85.6999,
+              40.5616
+            ],
+            [
+              -85.6999,
+              40.566
+            ],
+            [
+              -85.7016,
+              40.566
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Marion Metal Center, Marion IN",
+        "type": "Metal Stamping Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.77695,
+              41.41805
+            ],
+            [
+              -81.77735,
+              41.4156
+            ],
+            [
+              -81.7766,
+              41.4128
+            ],
+            [
+              -81.77205,
+              41.41265
+            ],
+            [
+              -81.76845,
+              41.4142
+            ],
+            [
+              -81.76885,
+              41.4177
+            ],
+            [
+              -81.77695,
+              41.41805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Parma Metal Center, Parma OH",
+        "type": "Stamping/Metal Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 110,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7748,
+              41.418
+            ],
+            [
+              -81.7748,
+              41.4176
+            ],
+            [
+              -81.77415,
+              41.4176
+            ],
+            [
+              -81.77415,
+              41.418
+            ],
+            [
+              -81.7748,
+              41.418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Parma Metal Center, Parma OH",
+        "type": "Stamping/Metal Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7725,
+              41.4145
+            ],
+            [
+              -81.77252,
+              41.4141
+            ],
+            [
+              -81.77082,
+              41.41405
+            ],
+            [
+              -81.7708,
+              41.41445
+            ],
+            [
+              -81.7725,
+              41.4145
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Parma Metal Center, Parma OH",
+        "type": "Stamping/Metal Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7762,
+              41.4148
+            ],
+            [
+              -81.77622,
+              41.41456
+            ],
+            [
+              -81.77272,
+              41.41452
+            ],
+            [
+              -81.7727,
+              41.41476
+            ],
+            [
+              -81.7762,
+              41.4148
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Parma Metal Center, Parma OH",
+        "type": "Stamping/Metal Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.77735,
+              41.417
+            ],
+            [
+              -81.77735,
+              41.4145
+            ],
+            [
+              -81.777,
+              41.4145
+            ],
+            [
+              -81.777,
+              41.417
+            ],
+            [
+              -81.77735,
+              41.417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Parma Metal Center, Parma OH",
+        "type": "Stamping/Metal Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.799,
+              42.9798
+            ],
+            [
+              -83.799,
+              42.9715
+            ],
+            [
+              -83.7868,
+              42.9712
+            ],
+            [
+              -83.7862,
+              42.9793
+            ],
+            [
+              -83.7905,
+              42.9805
+            ],
+            [
+              -83.799,
+              42.9798
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Metal Center, Flint MI",
+        "type": "Stamping/Metal Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 244.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7952,
+              42.9722
+            ],
+            [
+              -83.7952,
+              42.9713
+            ],
+            [
+              -83.7938,
+              42.9713
+            ],
+            [
+              -83.7938,
+              42.9722
+            ],
+            [
+              -83.7952,
+              42.9722
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Metal Center, Flint MI",
+        "type": "Stamping/Metal Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.796,
+              42.9802
+            ],
+            [
+              -83.796,
+              42.9784
+            ],
+            [
+              -83.7895,
+              42.9784
+            ],
+            [
+              -83.7895,
+              42.9802
+            ],
+            [
+              -83.796,
+              42.9802
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Metal Center, Flint MI",
+        "type": "Stamping/Metal Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7905,
+              42.9756
+            ],
+            [
+              -83.7905,
+              42.973
+            ],
+            [
+              -83.7876,
+              42.973
+            ],
+            [
+              -83.7876,
+              42.9756
+            ],
+            [
+              -83.7905,
+              42.9756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Metal Center, Flint MI",
+        "type": "Stamping/Metal Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7998,
+              42.9742
+            ],
+            [
+              -83.7998,
+              42.9722
+            ],
+            [
+              -83.7988,
+              42.9722
+            ],
+            [
+              -83.7988,
+              42.9742
+            ],
+            [
+              -83.7998,
+              42.9742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Metal Center, Flint MI",
+        "type": "Stamping/Metal Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7872,
+              42.9758
+            ],
+            [
+              -83.7876,
+              42.9726
+            ],
+            [
+              -83.7866,
+              42.9728
+            ],
+            [
+              -83.7862,
+              42.976
+            ],
+            [
+              -83.7872,
+              42.9758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Flint Metal Center, Flint MI",
+        "type": "Stamping/Metal Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9214,
+              43.4523
+            ],
+            [
+              -83.9225,
+              43.4505
+            ],
+            [
+              -83.9209,
+              43.4483
+            ],
+            [
+              -83.9194,
+              43.4461
+            ],
+            [
+              -83.9172,
+              43.446
+            ],
+            [
+              -83.9156,
+              43.447
+            ],
+            [
+              -83.9148,
+              43.4505
+            ],
+            [
+              -83.9156,
+              43.4517
+            ],
+            [
+              -83.9214,
+              43.4523
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Saginaw Metal Casting Operations, Saginaw MI",
+        "type": "Metal Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 110,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.91855,
+              43.4469
+            ],
+            [
+              -83.91855,
+              43.4463
+            ],
+            [
+              -83.9179,
+              43.4463
+            ],
+            [
+              -83.9179,
+              43.4469
+            ],
+            [
+              -83.91855,
+              43.4469
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Saginaw Metal Casting Operations, Saginaw MI",
+        "type": "Metal Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9172,
+              43.4502
+            ],
+            [
+              -83.9174,
+              43.4489
+            ],
+            [
+              -83.9158,
+              43.4488
+            ],
+            [
+              -83.9156,
+              43.4501
+            ],
+            [
+              -83.9172,
+              43.4502
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Saginaw Metal Casting Operations, Saginaw MI",
+        "type": "Metal Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9184,
+              43.4498
+            ],
+            [
+              -83.9189,
+              43.4492
+            ],
+            [
+              -83.9182,
+              43.4487
+            ],
+            [
+              -83.9177,
+              43.4493
+            ],
+            [
+              -83.9184,
+              43.4498
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Saginaw Metal Casting Operations, Saginaw MI",
+        "type": "Metal Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.486,
+              38.88195
+            ],
+            [
+              -86.4876,
+              38.8798
+            ],
+            [
+              -86.4879,
+              38.8765
+            ],
+            [
+              -86.4862,
+              38.8749
+            ],
+            [
+              -86.4836,
+              38.8752
+            ],
+            [
+              -86.4823,
+              38.8769
+            ],
+            [
+              -86.4812,
+              38.8788
+            ],
+            [
+              -86.48175,
+              38.88155
+            ],
+            [
+              -86.486,
+              38.88195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bedford Casting Operations, Bedford IN",
+        "type": "Aluminum Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 152,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4827,
+              38.878
+            ],
+            [
+              -86.4827,
+              38.87755
+            ],
+            [
+              -86.48205,
+              38.87755
+            ],
+            [
+              -86.48205,
+              38.878
+            ],
+            [
+              -86.4827,
+              38.878
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bedford Casting Operations, Bedford IN",
+        "type": "Aluminum Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4856,
+              38.8776
+            ],
+            [
+              -86.48575,
+              38.877
+            ],
+            [
+              -86.4844,
+              38.8768
+            ],
+            [
+              -86.4842,
+              38.8774
+            ],
+            [
+              -86.4856,
+              38.8776
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Bedford Casting Operations, Bedford IN",
+        "type": "Aluminum Casting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.32055,
+              41.28135
+            ],
+            [
+              -84.30835,
+              41.28145
+            ],
+            [
+              -84.3079,
+              41.28855
+            ],
+            [
+              -84.3113,
+              41.2901
+            ],
+            [
+              -84.3185,
+              41.2896
+            ],
+            [
+              -84.3206,
+              41.2856
+            ],
+            [
+              -84.32055,
+              41.28135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Defiance Operations, Defiance OH",
+        "type": "Foundry / Casting Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 36,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 235,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.31985,
+              41.2821
+            ],
+            [
+              -84.3188,
+              41.2821
+            ],
+            [
+              -84.3188,
+              41.2827
+            ],
+            [
+              -84.31985,
+              41.2827
+            ],
+            [
+              -84.31985,
+              41.2821
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Defiance Operations, Defiance OH",
+        "type": "Foundry / Casting Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.32075,
+              41.28245
+            ],
+            [
+              -84.31975,
+              41.28245
+            ],
+            [
+              -84.31975,
+              41.28395
+            ],
+            [
+              -84.32075,
+              41.28395
+            ],
+            [
+              -84.32075,
+              41.28245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Defiance Operations, Defiance OH",
+        "type": "Foundry / Casting Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.31895,
+              41.2829
+            ],
+            [
+              -84.3176,
+              41.2829
+            ],
+            [
+              -84.3176,
+              41.2833
+            ],
+            [
+              -84.31895,
+              41.2833
+            ],
+            [
+              -84.31895,
+              41.2829
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Defiance Operations, Defiance OH",
+        "type": "Foundry / Casting Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.25465,
+              42.10775
+            ],
+            [
+              -83.2554,
+              42.0987
+            ],
+            [
+              -83.2459,
+              42.09855
+            ],
+            [
+              -83.24345,
+              42.1001
+            ],
+            [
+              -83.24395,
+              42.10795
+            ],
+            [
+              -83.25465,
+              42.10775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Brownstown Battery Assembly, Brownstown Township MI",
+        "type": "Battery Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 175,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.24805,
+              42.10055
+            ],
+            [
+              -83.2481,
+              42.0995
+            ],
+            [
+              -83.24695,
+              42.09945
+            ],
+            [
+              -83.2469,
+              42.1005
+            ],
+            [
+              -83.24805,
+              42.10055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Brownstown Battery Assembly, Brownstown Township MI",
+        "type": "Battery Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2543,
+              42.1059
+            ],
+            [
+              -83.25425,
+              42.1021
+            ],
+            [
+              -83.2525,
+              42.10215
+            ],
+            [
+              -83.25255,
+              42.10595
+            ],
+            [
+              -83.2543,
+              42.1059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Brownstown Battery Assembly, Brownstown Township MI",
+        "type": "Battery Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2525,
+              42.1064
+            ],
+            [
+              -83.25245,
+              42.10225
+            ],
+            [
+              -83.25175,
+              42.1023
+            ],
+            [
+              -83.2518,
+              42.10645
+            ],
+            [
+              -83.2525,
+              42.1064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Brownstown Battery Assembly, Brownstown Township MI",
+        "type": "Battery Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.24895,
+              42.09905
+            ],
+            [
+              -83.249,
+              42.09875
+            ],
+            [
+              -83.24565,
+              42.09865
+            ],
+            [
+              -83.2456,
+              42.09895
+            ],
+            [
+              -83.24895,
+              42.09905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM - Brownstown Battery Assembly, Brownstown Township MI",
+        "type": "Battery Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8676,
+              41.1582
+            ],
+            [
+              -80.8688,
+              41.153
+            ],
+            [
+              -80.867,
+              41.1482
+            ],
+            [
+              -80.8623,
+              41.1476
+            ],
+            [
+              -80.8587,
+              41.1518
+            ],
+            [
+              -80.8587,
+              41.1564
+            ],
+            [
+              -80.8605,
+              41.1587
+            ],
+            [
+              -80.8676,
+              41.1582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Lordstown (Warren), OH",
+        "type": "Battery Cell Plant (GM / LG Energy Solution JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 156,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8632,
+              41.1493
+            ],
+            [
+              -80.8632,
+              41.1487
+            ],
+            [
+              -80.8623,
+              41.1487
+            ],
+            [
+              -80.8623,
+              41.1493
+            ],
+            [
+              -80.8632,
+              41.1493
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Lordstown (Warren), OH",
+        "type": "Battery Cell Plant (GM / LG Energy Solution JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8628,
+              41.1501
+            ],
+            [
+              -80.8628,
+              41.1491
+            ],
+            [
+              -80.8609,
+              41.1491
+            ],
+            [
+              -80.8609,
+              41.1501
+            ],
+            [
+              -80.8628,
+              41.1501
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Lordstown (Warren), OH",
+        "type": "Battery Cell Plant (GM / LG Energy Solution JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8656,
+              41.1497
+            ],
+            [
+              -80.8656,
+              41.149
+            ],
+            [
+              -80.8615,
+              41.149
+            ],
+            [
+              -80.8615,
+              41.1497
+            ],
+            [
+              -80.8656,
+              41.1497
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Lordstown (Warren), OH",
+        "type": "Battery Cell Plant (GM / LG Energy Solution JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9572,
+              35.75175
+            ],
+            [
+              -86.9574,
+              35.74705
+            ],
+            [
+              -86.953,
+              35.747
+            ],
+            [
+              -86.9501,
+              35.7456
+            ],
+            [
+              -86.9485,
+              35.7478
+            ],
+            [
+              -86.9498,
+              35.75205
+            ],
+            [
+              -86.9572,
+              35.75175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Spring Hill TN",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 110,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9521,
+              35.746
+            ],
+            [
+              -86.95175,
+              35.74525
+            ],
+            [
+              -86.9508,
+              35.7456
+            ],
+            [
+              -86.9512,
+              35.7463
+            ],
+            [
+              -86.9521,
+              35.746
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Spring Hill TN",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9556,
+              35.75135
+            ],
+            [
+              -86.95545,
+              35.75055
+            ],
+            [
+              -86.95285,
+              35.75065
+            ],
+            [
+              -86.953,
+              35.7515
+            ],
+            [
+              -86.9556,
+              35.75135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Spring Hill TN",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9528,
+              35.7506
+            ],
+            [
+              -86.95285,
+              35.75005
+            ],
+            [
+              -86.9516,
+              35.74995
+            ],
+            [
+              -86.95155,
+              35.7505
+            ],
+            [
+              -86.9528,
+              35.7506
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Spring Hill TN",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9562,
+              35.7505
+            ],
+            [
+              -86.95615,
+              35.74715
+            ],
+            [
+              -86.9556,
+              35.7472
+            ],
+            [
+              -86.95565,
+              35.75055
+            ],
+            [
+              -86.9562,
+              35.7505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Spring Hill TN",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6512,
+              42.7198
+            ],
+            [
+              -84.6523,
+              42.7165
+            ],
+            [
+              -84.6518,
+              42.7127
+            ],
+            [
+              -84.649,
+              42.7115
+            ],
+            [
+              -84.6436,
+              42.7125
+            ],
+            [
+              -84.6408,
+              42.7148
+            ],
+            [
+              -84.6418,
+              42.718
+            ],
+            [
+              -84.6456,
+              42.7201
+            ],
+            [
+              -84.6512,
+              42.7198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Lansing/Delta Township MI",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 171.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.646326,
+              42.714423
+            ],
+            [
+              -84.645906,
+              42.713934
+            ],
+            [
+              -84.643181,
+              42.714754
+            ],
+            [
+              -84.643601,
+              42.715243
+            ],
+            [
+              -84.646326,
+              42.714423
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "Ultium Cells - Lansing/Delta Township MI",
+        "type": "Battery Cell Plant (GM JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.64575,
+              43.02525
+            ],
+            [
+              -83.6366,
+              43.02525
+            ],
+            [
+              -83.6366,
+              43.02985
+            ],
+            [
+              -83.64575,
+              43.02985
+            ],
+            [
+              -83.64575,
+              43.02525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Davison Road Processing Center, Burton MI",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 84,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 141,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6373,
+              43.02615
+            ],
+            [
+              -83.6366,
+              43.02615
+            ],
+            [
+              -83.6366,
+              43.02985
+            ],
+            [
+              -83.6373,
+              43.02985
+            ],
+            [
+              -83.6373,
+              43.02615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Davison Road Processing Center, Burton MI",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.645,
+              43.02985
+            ],
+            [
+              -83.645,
+              43.0283
+            ],
+            [
+              -83.637,
+              43.0283
+            ],
+            [
+              -83.637,
+              43.02985
+            ],
+            [
+              -83.645,
+              43.02985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Davison Road Processing Center, Burton MI",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6381,
+              43.0272
+            ],
+            [
+              -83.6381,
+              43.0256
+            ],
+            [
+              -83.6368,
+              43.0256
+            ],
+            [
+              -83.6368,
+              43.0272
+            ],
+            [
+              -83.6381,
+              43.0272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Davison Road Processing Center, Burton MI",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6456,
+              43.0283
+            ],
+            [
+              -83.6456,
+              43.02795
+            ],
+            [
+              -83.6376,
+              43.02795
+            ],
+            [
+              -83.6376,
+              43.0283
+            ],
+            [
+              -83.6456,
+              43.0283
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Davison Road Processing Center, Burton MI",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.90185,
+              35.01125
+            ],
+            [
+              -89.9016,
+              35.00655
+            ],
+            [
+              -89.89865,
+              35.00645
+            ],
+            [
+              -89.89875,
+              35.0112
+            ],
+            [
+              -89.90185,
+              35.01125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Memphis Processing Center, Memphis TN",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.90178,
+              35.01118
+            ],
+            [
+              -89.90178,
+              35.01065
+            ],
+            [
+              -89.90115,
+              35.01065
+            ],
+            [
+              -89.90115,
+              35.01118
+            ],
+            [
+              -89.90178,
+              35.01118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Memphis Processing Center, Memphis TN",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.89925,
+              35.0106
+            ],
+            [
+              -89.89915,
+              35.0067
+            ],
+            [
+              -89.89885,
+              35.0067
+            ],
+            [
+              -89.89895,
+              35.0106
+            ],
+            [
+              -89.89925,
+              35.0106
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Memphis Processing Center, Memphis TN",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.90145,
+              35.00715
+            ],
+            [
+              -89.90145,
+              35.0066
+            ],
+            [
+              -89.90095,
+              35.0066
+            ],
+            [
+              -89.90095,
+              35.00715
+            ],
+            [
+              -89.90145,
+              35.00715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Memphis Processing Center, Memphis TN",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9014,
+              35.0107
+            ],
+            [
+              -89.9013,
+              35.00665
+            ],
+            [
+              -89.90105,
+              35.00665
+            ],
+            [
+              -89.90115,
+              35.0107
+            ],
+            [
+              -89.9014,
+              35.0107
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Memphis Processing Center, Memphis TN",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.89965,
+              35.01065
+            ],
+            [
+              -89.89955,
+              35.0067
+            ],
+            [
+              -89.8993,
+              35.0067
+            ],
+            [
+              -89.8994,
+              35.01065
+            ],
+            [
+              -89.89965,
+              35.01065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Memphis Processing Center, Memphis TN",
+        "type": "CCA Parts Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.57315,
+              42.2514
+            ],
+            [
+              -83.573,
+              42.2499
+            ],
+            [
+              -83.57175,
+              42.24855
+            ],
+            [
+              -83.57,
+              42.2488
+            ],
+            [
+              -83.57,
+              42.2493
+            ],
+            [
+              -83.5695,
+              42.2496
+            ],
+            [
+              -83.5696,
+              42.2514
+            ],
+            [
+              -83.57315,
+              42.2514
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Ypsilanti Processing Center, Ypsilanti MI",
+        "type": "Parts Processing / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 19,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5709,
+              42.24905
+            ],
+            [
+              -83.5709,
+              42.24855
+            ],
+            [
+              -83.5705,
+              42.24855
+            ],
+            [
+              -83.5705,
+              42.24905
+            ],
+            [
+              -83.5709,
+              42.24905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Ypsilanti Processing Center, Ypsilanti MI",
+        "type": "Parts Processing / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.573,
+              42.2511
+            ],
+            [
+              -83.573,
+              42.2498
+            ],
+            [
+              -83.5718,
+              42.2498
+            ],
+            [
+              -83.5718,
+              42.2511
+            ],
+            [
+              -83.573,
+              42.2511
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Ypsilanti Processing Center, Ypsilanti MI",
+        "type": "Parts Processing / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.57175,
+              42.25125
+            ],
+            [
+              -83.57175,
+              42.25095
+            ],
+            [
+              -83.5698,
+              42.25095
+            ],
+            [
+              -83.5698,
+              42.25125
+            ],
+            [
+              -83.57175,
+              42.25125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Ypsilanti Processing Center, Ypsilanti MI",
+        "type": "Parts Processing / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.57195,
+              42.25095
+            ],
+            [
+              -83.57195,
+              42.24935
+            ],
+            [
+              -83.57165,
+              42.24935
+            ],
+            [
+              -83.57165,
+              42.25095
+            ],
+            [
+              -83.57195,
+              42.25095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Ypsilanti Processing Center, Ypsilanti MI",
+        "type": "Parts Processing / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1297,
+              41.66005
+            ],
+            [
+              -88.12995,
+              41.658
+            ],
+            [
+              -88.1263,
+              41.65815
+            ],
+            [
+              -88.126,
+              41.6602
+            ],
+            [
+              -88.1297,
+              41.66005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Chicago Parts Distribution Center, Bolingbrook IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 20,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1267,
+              41.65838
+            ],
+            [
+              -88.1267,
+              41.65818
+            ],
+            [
+              -88.12648,
+              41.65818
+            ],
+            [
+              -88.12648,
+              41.65838
+            ],
+            [
+              -88.1267,
+              41.65838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Chicago Parts Distribution Center, Bolingbrook IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.12955,
+              41.6589
+            ],
+            [
+              -88.12958,
+              41.65835
+            ],
+            [
+              -88.12648,
+              41.65838
+            ],
+            [
+              -88.12645,
+              41.65893
+            ],
+            [
+              -88.12955,
+              41.6589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Chicago Parts Distribution Center, Bolingbrook IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.12955,
+              41.65918
+            ],
+            [
+              -88.12958,
+              41.65888
+            ],
+            [
+              -88.12645,
+              41.6589
+            ],
+            [
+              -88.12642,
+              41.65922
+            ],
+            [
+              -88.12955,
+              41.65918
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Chicago Parts Distribution Center, Bolingbrook IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9888,
+              35.141
+            ],
+            [
+              -80.9895,
+              35.1376
+            ],
+            [
+              -80.9869,
+              35.1375
+            ],
+            [
+              -80.9862,
+              35.1409
+            ],
+            [
+              -80.9888,
+              35.141
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 65,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.98742,
+              35.14052
+            ],
+            [
+              -80.98742,
+              35.1402
+            ],
+            [
+              -80.98714,
+              35.1402
+            ],
+            [
+              -80.98714,
+              35.14052
+            ],
+            [
+              -80.98742,
+              35.14052
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.98905,
+              35.14075
+            ],
+            [
+              -80.98955,
+              35.14005
+            ],
+            [
+              -80.98865,
+              35.13955
+            ],
+            [
+              -80.98815,
+              35.14025
+            ],
+            [
+              -80.98905,
+              35.14075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.98605,
+              35.13815
+            ],
+            [
+              -80.98655,
+              35.13745
+            ],
+            [
+              -80.98555,
+              35.13685
+            ],
+            [
+              -80.98505,
+              35.13755
+            ],
+            [
+              -80.98605,
+              35.13815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.98875,
+              35.14045
+            ],
+            [
+              -80.98895,
+              35.14015
+            ],
+            [
+              -80.98735,
+              35.13925
+            ],
+            [
+              -80.98715,
+              35.13955
+            ],
+            [
+              -80.98875,
+              35.14045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.98645,
+              35.13905
+            ],
+            [
+              -80.98665,
+              35.13875
+            ],
+            [
+              -80.98505,
+              35.13785
+            ],
+            [
+              -80.98485,
+              35.13815
+            ],
+            [
+              -80.98645,
+              35.13905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55495,
+              34.1005
+            ],
+            [
+              -117.55495,
+              34.0992
+            ],
+            [
+              -117.55015,
+              34.0992
+            ],
+            [
+              -117.55015,
+              34.1005
+            ],
+            [
+              -117.55495,
+              34.1005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM Customer Care & Aftersales - Rancho Cucamonga Parts Distribution Center, CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 20,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55252,
+              34.09962
+            ],
+            [
+              -117.55252,
+              34.09936
+            ],
+            [
+              -117.55232,
+              34.09936
+            ],
+            [
+              -117.55232,
+              34.09962
+            ],
+            [
+              -117.55252,
+              34.09962
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM Customer Care & Aftersales - Rancho Cucamonga Parts Distribution Center, CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5548,
+              34.0994
+            ],
+            [
+              -117.5548,
+              34.09923
+            ],
+            [
+              -117.5504,
+              34.09923
+            ],
+            [
+              -117.5504,
+              34.0994
+            ],
+            [
+              -117.5548,
+              34.0994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM Customer Care & Aftersales - Rancho Cucamonga Parts Distribution Center, CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.55485,
+              34.09985
+            ],
+            [
+              -117.55485,
+              34.09955
+            ],
+            [
+              -117.5503,
+              34.09955
+            ],
+            [
+              -117.5503,
+              34.09985
+            ],
+            [
+              -117.55485,
+              34.09985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM Customer Care & Aftersales - Rancho Cucamonga Parts Distribution Center, CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.8997,
+              39.659
+            ],
+            [
+              -119.8997,
+              39.6551
+            ],
+            [
+              -119.8985,
+              39.655
+            ],
+            [
+              -119.89705,
+              39.6556
+            ],
+            [
+              -119.89705,
+              39.6588
+            ],
+            [
+              -119.8985,
+              39.6589
+            ],
+            [
+              -119.8997,
+              39.659
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Reno Parts Distribution Center, Reno NV",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.89775,
+              39.65595
+            ],
+            [
+              -119.89775,
+              39.65535
+            ],
+            [
+              -119.89705,
+              39.65535
+            ],
+            [
+              -119.89705,
+              39.65595
+            ],
+            [
+              -119.89775,
+              39.65595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Reno Parts Distribution Center, Reno NV",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.89815,
+              39.65885
+            ],
+            [
+              -119.89815,
+              39.65605
+            ],
+            [
+              -119.8972,
+              39.65605
+            ],
+            [
+              -119.8972,
+              39.65885
+            ],
+            [
+              -119.89815,
+              39.65885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Reno Parts Distribution Center, Reno NV",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.8984,
+              39.65875
+            ],
+            [
+              -119.8984,
+              39.6561
+            ],
+            [
+              -119.89805,
+              39.6561
+            ],
+            [
+              -119.89805,
+              39.65875
+            ],
+            [
+              -119.8984,
+              39.65875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Reno Parts Distribution Center, Reno NV",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.1411,
+              41.9612
+            ],
+            [
+              -71.1421,
+              41.959
+            ],
+            [
+              -71.1398,
+              41.9573
+            ],
+            [
+              -71.1376,
+              41.9568
+            ],
+            [
+              -71.1362,
+              41.959
+            ],
+            [
+              -71.1366,
+              41.9608
+            ],
+            [
+              -71.1411,
+              41.9612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Boston Parts Distribution Center, Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 42,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 41.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.13905,
+              41.95812
+            ],
+            [
+              -71.13951,
+              41.95758
+            ],
+            [
+              -71.13868,
+              41.95705
+            ],
+            [
+              -71.13822,
+              41.9576
+            ],
+            [
+              -71.13905,
+              41.95812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Boston Parts Distribution Center, Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.14165,
+              41.96015
+            ],
+            [
+              -71.14207,
+              41.95982
+            ],
+            [
+              -71.1399,
+              41.95775
+            ],
+            [
+              -71.13948,
+              41.95808
+            ],
+            [
+              -71.14165,
+              41.96015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Boston Parts Distribution Center, Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.836889,
+              40.19452
+            ],
+            [
+              -74.836603,
+              40.193013
+            ],
+            [
+              -74.833322,
+              40.192349
+            ],
+            [
+              -74.832676,
+              40.194062
+            ],
+            [
+              -74.836889,
+              40.19452
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Philadelphia Parts Distribution Center, Langhorne PA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 27.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.833116,
+              40.193905
+            ],
+            [
+              -74.833281,
+              40.193688
+            ],
+            [
+              -74.832948,
+              40.193609
+            ],
+            [
+              -74.832789,
+              40.193832
+            ],
+            [
+              -74.833116,
+              40.193905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Philadelphia Parts Distribution Center, Langhorne PA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.834699,
+              40.193143
+            ],
+            [
+              -74.834528,
+              40.192933
+            ],
+            [
+              -74.833541,
+              40.193336
+            ],
+            [
+              -74.833708,
+              40.193553
+            ],
+            [
+              -74.834699,
+              40.193143
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Philadelphia Parts Distribution Center, Langhorne PA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.835468,
+              40.193698
+            ],
+            [
+              -74.835302,
+              40.193481
+            ],
+            [
+              -74.834306,
+              40.193879
+            ],
+            [
+              -74.834472,
+              40.194097
+            ],
+            [
+              -74.835468,
+              40.193698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Philadelphia Parts Distribution Center, Langhorne PA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.2472,
+              33.0006
+            ],
+            [
+              -97.2478,
+              32.997
+            ],
+            [
+              -97.2456,
+              32.997
+            ],
+            [
+              -97.245,
+              33.0005
+            ],
+            [
+              -97.2472,
+              33.0006
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Fort Worth Parts Distribution Center, Fort Worth TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 20,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.24685,
+              33.00045
+            ],
+            [
+              -97.24695,
+              32.99995
+            ],
+            [
+              -97.24625,
+              32.9999
+            ],
+            [
+              -97.24615,
+              33.0004
+            ],
+            [
+              -97.24685,
+              33.00045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Fort Worth Parts Distribution Center, Fort Worth TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.24735,
+              33.00035
+            ],
+            [
+              -97.248,
+              32.9973
+            ],
+            [
+              -97.24735,
+              32.99725
+            ],
+            [
+              -97.2467,
+              33.0003
+            ],
+            [
+              -97.24735,
+              33.00035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Fort Worth Parts Distribution Center, Fort Worth TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.24705,
+              33.0002
+            ],
+            [
+              -97.2477,
+              32.9973
+            ],
+            [
+              -97.24755,
+              32.99725
+            ],
+            [
+              -97.2469,
+              33.00015
+            ],
+            [
+              -97.24705,
+              33.0002
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Fort Worth Parts Distribution Center, Fort Worth TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.71492,
+              39.7481
+            ],
+            [
+              -104.71488,
+              39.74572
+            ],
+            [
+              -104.71008,
+              39.7459
+            ],
+            [
+              -104.71012,
+              39.74822
+            ],
+            [
+              -104.71492,
+              39.7481
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Denver Parts Distribution Center, Aurora CO",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 52,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 27,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7148,
+              39.74678
+            ],
+            [
+              -104.7148,
+              39.74648
+            ],
+            [
+              -104.71452,
+              39.74648
+            ],
+            [
+              -104.71452,
+              39.74678
+            ],
+            [
+              -104.7148,
+              39.74678
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Denver Parts Distribution Center, Aurora CO",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.71452,
+              39.74612
+            ],
+            [
+              -104.71452,
+              39.74588
+            ],
+            [
+              -104.71048,
+              39.74592
+            ],
+            [
+              -104.71048,
+              39.74616
+            ],
+            [
+              -104.71452,
+              39.74612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Denver Parts Distribution Center, Aurora CO",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.71452,
+              39.74642
+            ],
+            [
+              -104.71452,
+              39.74614
+            ],
+            [
+              -104.71048,
+              39.74618
+            ],
+            [
+              -104.71048,
+              39.74646
+            ],
+            [
+              -104.71452,
+              39.74642
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Denver Parts Distribution Center, Aurora CO",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.7053,
+              44.9477
+            ],
+            [
+              -92.7052,
+              44.9451
+            ],
+            [
+              -92.6981,
+              44.9456
+            ],
+            [
+              -92.6982,
+              44.948
+            ],
+            [
+              -92.7053,
+              44.9477
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Minneapolis Parts Distribution Center, Hudson WI",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 75,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 39,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.70485,
+              44.94575
+            ],
+            [
+              -92.70485,
+              44.94535
+            ],
+            [
+              -92.70435,
+              44.94535
+            ],
+            [
+              -92.70435,
+              44.94575
+            ],
+            [
+              -92.70485,
+              44.94575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Minneapolis Parts Distribution Center, Hudson WI",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.70435,
+              44.94605
+            ],
+            [
+              -92.70435,
+              44.94575
+            ],
+            [
+              -92.69885,
+              44.94585
+            ],
+            [
+              -92.69885,
+              44.94615
+            ],
+            [
+              -92.70435,
+              44.94605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Minneapolis Parts Distribution Center, Hudson WI",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.70435,
+              44.94605
+            ],
+            [
+              -92.70435,
+              44.9459
+            ],
+            [
+              -92.69885,
+              44.946
+            ],
+            [
+              -92.69885,
+              44.94615
+            ],
+            [
+              -92.70435,
+              44.94605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Minneapolis Parts Distribution Center, Hudson WI",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.70395,
+              44.94775
+            ],
+            [
+              -92.70395,
+              44.94755
+            ],
+            [
+              -92.69885,
+              44.94765
+            ],
+            [
+              -92.69885,
+              44.94785
+            ],
+            [
+              -92.70395,
+              44.94775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Minneapolis Parts Distribution Center, Hudson WI",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5298,
+              30.13888
+            ],
+            [
+              -81.53,
+              30.13615
+            ],
+            [
+              -81.528,
+              30.13585
+            ],
+            [
+              -81.52735,
+              30.13858
+            ],
+            [
+              -81.5298,
+              30.13888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Jacksonville Parts Distribution Center, Jacksonville FL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22.45,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.52785,
+              30.13855
+            ],
+            [
+              -81.52792,
+              30.13828
+            ],
+            [
+              -81.52748,
+              30.13818
+            ],
+            [
+              -81.5274,
+              30.13845
+            ],
+            [
+              -81.52785,
+              30.13855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Jacksonville Parts Distribution Center, Jacksonville FL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.52758,
+              30.13862
+            ],
+            [
+              -81.52823,
+              30.13627
+            ],
+            [
+              -81.52788,
+              30.13622
+            ],
+            [
+              -81.52723,
+              30.13857
+            ],
+            [
+              -81.52758,
+              30.13862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "general-motors",
+        "name": "GM CCA - Jacksonville Parts Distribution Center, Jacksonville FL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

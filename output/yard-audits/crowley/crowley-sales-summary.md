@@ -1,29 +1,31 @@
 # Crowley — YardFlow Yard Audit Summary
 
-**14 facilities audited.**
+**26 facilities audited.**
 
 ## Yard profile
 
 | Metric | Value |
 |---|---|
-| Facilities | 14 |
-| Truck-gated | 13 (93%) |
-| Guarded (staffed shack) | 11 (79%) |
-| Rural / connectivity-exposed | 0 (0%) |
-| Fast-lane opportunity | 9 (64%) |
-| Drop-yard operations | 13 (93%) |
-| Rail-served | 9 (64%) |
-| Total dock doors | 333 |
-| Total trailer-parking capacity | 6,920 |
+| Facilities | 26 |
+| Truck-gated | 22 (85%) |
+| Guarded (staffed shack) | 16 (62%) |
+| Rural / connectivity-exposed | 4 (15%) |
+| Fast-lane opportunity | 11 (42%) |
+| Drop-yard operations | 23 (88%) |
+| Rail-served | 9 (35%) |
+| Total dock doors | 477 |
+| Total trailer-parking capacity | 28,102 |
 
 ## Archetype distribution
 
 | Archetype | Name | Sites | Share |
 |---|---|---|---|
-| #6 | Gate + GS (not BU sens.) + campus | 10 | 71% |
-| #9 | Gate + No GS (remote check-in) | 2 | 14% |
-| #3 | No Gate / No GS | 1 | 7% |
-| #4 | Gate + GS (BU sens.) | 1 | 7% |
+| #6 | Gate + GS (not BU sens.) + campus | 11 | 42% |
+| #9 | Gate + No GS (remote check-in) | 6 | 23% |
+| #3 | No Gate / No GS | 4 | 15% |
+| #4 | Gate + GS (BU sens.) | 3 | 12% |
+| #1 | Gate + GS (not BU sens.) | 1 | 4% |
+| #8 | Gate + GS (not BU sens.) + scale | 1 | 4% |
 
 ## Recommended YardFlow entry point
 

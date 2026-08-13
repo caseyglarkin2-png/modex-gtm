@@ -8,24 +8,24 @@
         "coordinates": [
           [
             [
-              -117.54,
-              34.0241
+              -117.539183,
+              34.026874
             ],
             [
-              -117.5315,
-              34.0241
+              -117.539321,
+              34.024712
             ],
             [
-              -117.5315,
-              34.0273
+              -117.532042,
+              34.024484
             ],
             [
-              -117.54,
-              34.0273
+              -117.531905,
+              34.026647
             ],
             [
-              -117.54,
-              34.0241
+              -117.539183,
+              34.026874
             ]
           ]
         ]
@@ -68,24 +68,142 @@
         "coordinates": [
           [
             [
-              -96.7327,
-              32.6193
+              -117.539321,
+              34.025053
             ],
             [
-              -96.7256,
-              32.6193
+              -117.539321,
+              34.024712
             ],
             [
-              -96.7256,
-              32.6239
+              -117.538771,
+              34.024712
             ],
             [
-              -96.7327,
-              32.6239
+              -117.538771,
+              34.025053
             ],
             [
-              -96.7327,
-              32.6193
+              -117.539321,
+              34.025053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jurupa Valley CA",
+        "type": "Distribution Center (beer/wine/spirits)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.534926,
+              34.02585
+            ],
+            [
+              -117.534926,
+              34.025167
+            ],
+            [
+              -117.532454,
+              34.025053
+            ],
+            [
+              -117.532454,
+              34.025736
+            ],
+            [
+              -117.534926,
+              34.02585
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jurupa Valley CA",
+        "type": "Distribution Center (beer/wine/spirits)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.539046,
+              34.026761
+            ],
+            [
+              -117.539046,
+              34.024939
+            ],
+            [
+              -117.535063,
+              34.024826
+            ],
+            [
+              -117.535063,
+              34.026647
+            ],
+            [
+              -117.539046,
+              34.026761
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jurupa Valley CA",
+        "type": "Distribution Center (beer/wine/spirits)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.725057,
+              32.621704
+            ],
+            [
+              -96.726451,
+              32.623525
+            ],
+            [
+              -96.732892,
+              32.619977
+            ],
+            [
+              -96.731498,
+              32.618157
+            ],
+            [
+              -96.725057,
+              32.621704
             ]
           ]
         ]
@@ -128,24 +246,24 @@
         "coordinates": [
           [
             [
-              -96.7323,
-              32.6184
+              -96.731339,
+              32.619194
             ],
             [
-              -96.7308,
-              32.6184
+              -96.731513,
+              32.619422
             ],
             [
-              -96.7308,
-              32.6196
+              -96.731781,
+              32.619274
             ],
             [
-              -96.7323,
-              32.6196
+              -96.731607,
+              32.619046
             ],
             [
-              -96.7323,
-              32.6184
+              -96.731339,
+              32.619194
             ]
           ]
         ]
@@ -167,64 +285,24 @@
         "coordinates": [
           [
             [
-              -96.73,
-              32.6198
+              -96.72584,
+              32.622395
             ],
             [
-              -96.7262,
-              32.6198
+              -96.725991,
+              32.622592
             ],
             [
-              -96.7262,
-              32.6231
+              -96.732074,
+              32.619241
             ],
             [
-              -96.73,
-              32.6231
+              -96.731923,
+              32.619044
             ],
             [
-              -96.73,
-              32.6198
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
-        "type": "Distribution Center (beer cross-dock, rail-served)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -96.7312,
-              32.6197
-            ],
-            [
-              -96.7266,
-              32.6197
-            ],
-            [
-              -96.7266,
-              32.6233
-            ],
-            [
-              -96.7312,
-              32.6233
-            ],
-            [
-              -96.7312,
-              32.6197
+              -96.72584,
+              32.622395
             ]
           ]
         ]
@@ -247,24 +325,24 @@
         "coordinates": [
           [
             [
-              -96.7327,
-              32.6199
+              -96.72566,
+              32.621992
             ],
             [
-              -96.729,
-              32.6199
+              -96.725979,
+              32.62241
             ],
             [
-              -96.729,
-              32.6234
+              -96.731883,
+              32.619158
             ],
             [
-              -96.7327,
-              32.6234
+              -96.731563,
+              32.618741
             ],
             [
-              -96.7327,
-              32.6199
+              -96.72566,
+              32.621992
             ]
           ]
         ]
@@ -276,8 +354,7 @@
         "archetype": "#3",
         "archetypeName": "No Gate / No GS",
         "confidence": "medium",
-        "zone": "dockApron",
-        "index": 2
+        "zone": "staging"
       }
     },
     {
@@ -287,24 +364,24 @@
         "coordinates": [
           [
             [
-              -81.634,
-              30.42175
+              -81.633341,
+              30.425212
             ],
             [
-              -81.6307,
-              30.42175
+              -81.63341,
+              30.422251
             ],
             [
-              -81.6307,
-              30.4256
+              -81.63135,
+              30.422192
             ],
             [
-              -81.634,
-              30.4256
+              -81.631281,
+              30.425153
             ],
             [
-              -81.634,
-              30.42175
+              -81.633341,
+              30.425212
             ]
           ]
         ]
@@ -347,24 +424,24 @@
         "coordinates": [
           [
             [
-              -81.6318,
-              30.4251
+              -81.633273,
+              30.425212
             ],
             [
-              -81.631,
-              30.4251
+              -81.633273,
+              30.425034
             ],
             [
-              -81.631,
-              30.42585
+              -81.632792,
+              30.425034
             ],
             [
-              -81.6318,
-              30.42585
+              -81.632792,
+              30.425212
             ],
             [
-              -81.6318,
-              30.4251
+              -81.633273,
+              30.425212
             ]
           ]
         ]
@@ -386,64 +463,24 @@
         "coordinates": [
           [
             [
-              -81.6317,
-              30.4218
+              -81.633341,
+              30.425034
             ],
             [
-              -81.6307,
-              30.4218
+              -81.633341,
+              30.42237
             ],
             [
-              -81.6307,
-              30.4253
+              -81.632929,
+              30.42237
             ],
             [
-              -81.6317,
-              30.4253
+              -81.632929,
+              30.425034
             ],
             [
-              -81.6317,
-              30.4218
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Constellation Beer DC - Jacksonville FL",
-        "type": "Distribution Center (beer, rail-served)",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "high",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -81.63215,
-              30.4219
-            ],
-            [
-              -81.6315,
-              30.4219
-            ],
-            [
-              -81.6315,
-              30.4253
-            ],
-            [
-              -81.63215,
-              30.4253
-            ],
-            [
-              -81.63215,
-              30.4219
+              -81.633341,
+              30.425034
             ]
           ]
         ]
@@ -466,24 +503,24 @@
         "coordinates": [
           [
             [
-              -81.6334,
-              30.4219
+              -81.631693,
+              30.425034
             ],
             [
-              -81.6327,
-              30.4219
+              -81.631762,
+              30.42237
             ],
             [
-              -81.6327,
-              30.4253
+              -81.631419,
+              30.42237
             ],
             [
-              -81.6334,
-              30.4253
+              -81.63135,
+              30.425034
             ],
             [
-              -81.6334,
-              30.4219
+              -81.631693,
+              30.425034
             ]
           ]
         ]
@@ -506,24 +543,24 @@
         "coordinates": [
           [
             [
-              -121.4367,
-              36.4999
+              -121.437447,
+              36.503945
             ],
             [
-              -121.4329,
-              36.4999
+              -121.437447,
+              36.499971
             ],
             [
-              -121.4329,
-              36.5046
+              -121.433052,
+              36.499971
             ],
             [
-              -121.4367,
-              36.5046
+              -121.433052,
+              36.503945
             ],
             [
-              -121.4367,
-              36.4999
+              -121.437447,
+              36.503945
             ]
           ]
         ]
@@ -566,24 +603,24 @@
         "coordinates": [
           [
             [
-              -121.4349,
-              36.50025
+              -121.434013,
+              36.501848
             ],
             [
-              -121.43435,
-              36.50025
+              -121.434013,
+              36.501406
             ],
             [
-              -121.43435,
-              36.50065
+              -121.433189,
+              36.501406
             ],
             [
-              -121.4349,
-              36.50065
+              -121.433189,
+              36.501848
             ],
             [
-              -121.4349,
-              36.50025
+              -121.434013,
+              36.501848
             ]
           ]
         ]
@@ -605,64 +642,24 @@
         "coordinates": [
           [
             [
-              -121.4357,
-              36.5019
+              -121.435112,
+              36.5024
             ],
             [
-              -121.4349,
-              36.5019
+              -121.435112,
+              36.501848
             ],
             [
-              -121.4349,
-              36.5027
+              -121.433327,
+              36.501848
             ],
             [
-              -121.4357,
-              36.5027
+              -121.433327,
+              36.5024
             ],
             [
-              -121.4357,
-              36.5019
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Constellation Gonzales Winery - Gonzales CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dropYard",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -121.4349,
-              36.5017
-            ],
-            [
-              -121.4341,
-              36.5017
-            ],
-            [
-              -121.4341,
-              36.5023
-            ],
-            [
-              -121.4349,
-              36.5023
-            ],
-            [
-              -121.4349,
-              36.5017
+              -121.435112,
+              36.5024
             ]
           ]
         ]
@@ -685,24 +682,24 @@
         "coordinates": [
           [
             [
-              -121.4351,
-              36.5005
+              -121.437035,
+              36.503504
             ],
             [
-              -121.4342,
-              36.5005
+              -121.437035,
+              36.502179
             ],
             [
-              -121.4342,
-              36.5013
+              -121.435249,
+              36.502179
             ],
             [
-              -121.4351,
-              36.5013
+              -121.435249,
+              36.503504
             ],
             [
-              -121.4351,
-              36.5005
+              -121.437035,
+              36.503504
             ]
           ]
         ]
@@ -724,24 +721,24 @@
         "coordinates": [
           [
             [
-              -122.4031,
-              38.4336
+              -122.402948,
+              38.437206
             ],
             [
-              -122.3994,
-              38.4336
+              -122.402948,
+              38.435055
             ],
             [
-              -122.3994,
-              38.4378
+              -122.400201,
+              38.435055
             ],
             [
-              -122.4031,
-              38.4378
+              -122.400201,
+              38.437206
             ],
             [
-              -122.4031,
-              38.4336
+              -122.402948,
+              38.437206
             ]
           ]
         ]
@@ -784,142 +781,24 @@
         "coordinates": [
           [
             [
-              -122.4026,
-              38.4365
+              -122.433361,
+              38.475771
             ],
             [
-              -122.40215,
-              38.4365
+              -122.433223,
+              38.473997
             ],
             [
-              -122.40215,
-              38.43695
+              -122.431163,
+              38.474105
             ],
             [
-              -122.4026,
-              38.43695
+              -122.431301,
+              38.475771
             ],
             [
-              -122.4026,
-              38.4365
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Robert Mondavi Winery - Oakville CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.4011,
-              38.4359
-            ],
-            [
-              -122.4005,
-              38.4359
-            ],
-            [
-              -122.4005,
-              38.4364
-            ],
-            [
-              -122.4011,
-              38.4364
-            ],
-            [
-              -122.4011,
-              38.4359
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Robert Mondavi Winery - Oakville CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.4023,
-              38.4365
-            ],
-            [
-              -122.4017,
-              38.4365
-            ],
-            [
-              -122.4017,
-              38.43695
-            ],
-            [
-              -122.4023,
-              38.43695
-            ],
-            [
-              -122.4023,
-              38.4365
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Robert Mondavi Winery - Oakville CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "zone": "staging"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.4339,
-              38.4726
-            ],
-            [
-              -122.4303,
-              38.4726
-            ],
-            [
-              -122.4303,
-              38.4764
-            ],
-            [
-              -122.4339,
-              38.4764
-            ],
-            [
-              -122.4339,
-              38.4726
+              -122.433361,
+              38.475771
             ]
           ]
         ]
@@ -962,103 +841,24 @@
         "coordinates": [
           [
             [
-              -122.434,
-              38.47275
+              -122.403823,
+              38.361311
             ],
             [
-              -122.4337,
-              38.47275
+              -122.40396,
+              38.359265
             ],
             [
-              -122.4337,
-              38.47298
+              -122.401351,
+              38.359158
             ],
             [
-              -122.434,
-              38.47298
+              -122.401213,
+              38.361204
             ],
             [
-              -122.434,
-              38.47275
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "The Prisoner Wine Company - St. Helena CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.43225,
-              38.47475
-            ],
-            [
-              -122.4318,
-              38.47475
-            ],
-            [
-              -122.4318,
-              38.4752
-            ],
-            [
-              -122.43225,
-              38.4752
-            ],
-            [
-              -122.43225,
-              38.47475
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "The Prisoner Wine Company - St. Helena CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -122.4052,
-              38.3575
-            ],
-            [
-              -122.399,
-              38.3575
-            ],
-            [
-              -122.399,
-              38.3635
-            ],
-            [
-              -122.4052,
-              38.3635
-            ],
-            [
-              -122.4052,
-              38.3575
+              -122.403823,
+              38.361311
             ]
           ]
         ]
@@ -1101,24 +901,24 @@
         "coordinates": [
           [
             [
-              -120.7412,
-              35.5779
+              -120.74015,
+              35.578985
             ],
             [
-              -120.7388,
-              35.5779
+              -120.740287,
+              35.578427
             ],
             [
-              -120.7388,
-              35.5796
+              -120.739463,
+              35.578315
             ],
             [
-              -120.7412,
-              35.5796
+              -120.739326,
+              35.578873
             ],
             [
-              -120.7412,
-              35.5779
+              -120.74015,
+              35.578985
             ]
           ]
         ]
@@ -1161,103 +961,24 @@
         "coordinates": [
           [
             [
-              -120.7403,
-              35.57812
+              -120.466194,
+              34.664439
             ],
             [
-              -120.74,
-              35.57812
+              -120.466194,
+              34.663564
             ],
             [
-              -120.74,
-              35.57832
+              -120.465164,
+              34.663564
             ],
             [
-              -120.7403,
-              35.57832
+              -120.465164,
+              34.664439
             ],
             [
-              -120.7403,
-              35.57812
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -120.74035,
-              35.5784
-            ],
-            [
-              -120.7399,
-              35.5784
-            ],
-            [
-              -120.7399,
-              35.5788
-            ],
-            [
-              -120.74035,
-              35.5788
-            ],
-            [
-              -120.74035,
-              35.5784
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -120.4665,
-              34.66325
-            ],
-            [
-              -120.46525,
-              34.66325
-            ],
-            [
-              -120.46525,
-              34.66485
-            ],
-            [
-              -120.4665,
-              34.66485
-            ],
-            [
-              -120.4665,
-              34.66325
+              -120.466194,
+              34.664439
             ]
           ]
         ]
@@ -1300,24 +1021,103 @@
         "coordinates": [
           [
             [
-              -120.4657,
-              34.6636
+              -120.466194,
+              34.664326
             ],
             [
-              -120.46535,
-              34.6636
+              -120.466194,
+              34.664213
             ],
             [
-              -120.46535,
-              34.66455
+              -120.466057,
+              34.664213
             ],
             [
-              -120.4657,
-              34.66455
+              -120.466057,
+              34.664326
             ],
             [
-              -120.4657,
-              34.6636
+              -120.466194,
+              34.664326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Sea Smoke Cellars - Lompoc CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.465679,
+              34.664326
+            ],
+            [
+              -120.465679,
+              34.663705
+            ],
+            [
+              -120.465302,
+              34.663705
+            ],
+            [
+              -120.465302,
+              34.664326
+            ],
+            [
+              -120.465679,
+              34.664326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Sea Smoke Cellars - Lompoc CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.466057,
+              34.664326
+            ],
+            [
+              -120.466057,
+              34.663677
+            ],
+            [
+              -120.465748,
+              34.663677
+            ],
+            [
+              -120.465748,
+              34.664326
+            ],
+            [
+              -120.466057,
+              34.664326
             ]
           ]
         ]
@@ -1340,24 +1140,24 @@
         "coordinates": [
           [
             [
-              -123.0943,
-              45.0724
+              -123.094274,
+              45.073685
             ],
             [
-              -123.0923,
-              45.0724
+              -123.094274,
+              45.072812
             ],
             [
-              -123.0923,
-              45.0746
+              -123.093038,
+              45.072812
             ],
             [
-              -123.0943,
-              45.0746
+              -123.093038,
+              45.073685
             ],
             [
-              -123.0943,
-              45.0724
+              -123.094274,
+              45.073685
             ]
           ]
         ]
@@ -1400,64 +1200,24 @@
         "coordinates": [
           [
             [
-              -123.0937,
-              45.0728
+              -111.445243,
+              40.80868
             ],
             [
-              -123.09325,
-              45.0728
+              -111.445449,
+              40.807692
             ],
             [
-              -123.09325,
-              45.07315
+              -111.44435,
+              40.807536
             ],
             [
-              -123.0937,
-              45.07315
+              -111.444144,
+              40.808524
             ],
             [
-              -123.0937,
-              45.0728
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "Lingua Franca Winery - Salem OR",
-        "type": "Winery / Production Facility",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "zone": "dockApron",
-        "index": 1
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -111.4458,
-              40.8066
-            ],
-            [
-              -111.4432,
-              40.8066
-            ],
-            [
-              -111.4432,
-              40.8094
-            ],
-            [
-              -111.4458,
-              40.8094
-            ],
-            [
-              -111.4458,
-              40.8066
+              -111.445243,
+              40.80868
             ]
           ]
         ]
@@ -1491,85 +1251,6 @@
           "siteAreaAcres": 11,
           "railServed": false
         }
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -111.4474,
-              40.7981
-            ],
-            [
-              -111.4469,
-              40.7981
-            ],
-            [
-              -111.4469,
-              40.7985
-            ],
-            [
-              -111.4474,
-              40.7985
-            ],
-            [
-              -111.4474,
-              40.7981
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "High West Distillery - Wanship UT",
-        "type": "Distillery / Production Facility",
-        "archetype": "#1",
-        "archetypeName": "Gate + GS (not BU sens.)",
-        "confidence": "medium",
-        "zone": "truckGate"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -111.44495,
-              40.8085
-            ],
-            [
-              -111.44455,
-              40.8085
-            ],
-            [
-              -111.44455,
-              40.80885
-            ],
-            [
-              -111.44495,
-              40.80885
-            ],
-            [
-              -111.44495,
-              40.8085
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "account": "constellation-brands",
-        "name": "High West Distillery - Wanship UT",
-        "type": "Distillery / Production Facility",
-        "archetype": "#1",
-        "archetypeName": "Gate + GS (not BU sens.)",
-        "confidence": "medium",
-        "zone": "dockApron",
-        "index": 1
       }
     }
   ]
