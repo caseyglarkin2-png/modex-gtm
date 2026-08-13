@@ -8,6 +8,7 @@ import {
   evidenceFailure,
   isDurableIndependent,
   isSelfCitation,
+  isResolvablePublicUrl,
   isSearchQuery,
   isSelfIssuedApi,
   isShipEligible,
@@ -41,6 +42,35 @@ describe('citation classification', () => {
     // A Maps permalink resolves to a fixed place and camera — not a search.
     expect(isSearchQuery('https://www.google.com/maps/@36.18898,-94.12498,3a,75y/data=!3m1!1e3')).toBe(false);
     expect(isSearchQuery('https://www.reuters.com/business/story-slug')).toBe(false);
+  });
+
+  it('requires a URL a reader could actually open — the denylist alone did not', () => {
+    // Every one of these passed as "durable" before, because none of them is a
+    // yardflow.ai URL, a Google API endpoint, or a search query.
+    expect(isResolvablePublicUrl('data:text/html,hi')).toBe(false);
+    expect(isResolvablePublicUrl('ftp://example.com/x')).toBe(false);
+    expect(isResolvablePublicUrl('http://localhost/x')).toBe(false);
+    expect(isResolvablePublicUrl('http://127.0.0.1/x')).toBe(false);
+    expect(isResolvablePublicUrl('http://build.local/x')).toBe(false);
+    expect(isResolvablePublicUrl('https://t.co/abc')).toBe(false); // opaque, repointable
+    expect(isResolvablePublicUrl('https://bit.ly/abc')).toBe(false);
+    expect(isResolvablePublicUrl('not a url')).toBe(false);
+    // ...and real sources still pass.
+    expect(isResolvablePublicUrl('https://www.reuters.com/business/x')).toBe(true);
+    expect(isResolvablePublicUrl('https://www.fsis.usda.gov/inspection/establishment')).toBe(true);
+    expect(isResolvablePublicUrl('https://www.google.com/maps/@36.1,-94.1,3a,75y')).toBe(true);
+  });
+
+  it('rejects a record whose only citation is unopenable', () => {
+    for (const url of ['data:text/html,hi', 'http://localhost/x', 'https://t.co/abc']) {
+      expect(
+        evidenceFailure('tyson-foods', {
+          verdict: 'confirmed',
+          checkedDivestiture: true,
+          citations: [{ url, date: '2026-07-30' }],
+        }),
+      ).toBe('no-durable-independent-citation');
+    }
   });
 
   it('durable means a reader can open it AND it is dated', () => {

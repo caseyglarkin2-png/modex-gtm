@@ -310,6 +310,22 @@ export function haversineKm(a: LatLng, b: LatLng): number {
  *
  * It also catches the neighbouring failures: a ring traced on the wrong parcel,
  * a ring copy-pasted from another site, and a dropped minus sign.
+ *
+ * KNOWN BLIND SPOT, stated because it is real. A transposition is only visible
+ * as DISTANCE, so it hides wherever |lat - lng| is small — near the lat == lng
+ * diagonal, swapping the two barely moves the point. Measured:
+ *
+ *     lat 0.1  / lng 0.05   swap moves      8 km   INVISIBLE
+ *     lat 10   / lng 9.9    swap moves     16 km   INVISIBLE
+ *     lat 39.9 / lng 41.27  swap moves    191 km   caught (Erzurum, Turkey)
+ *     lat 40   / lng -85    swap moves 14,760 km   caught (any US yard)
+ *
+ * So it takes a facility within roughly 30 km of that diagonal to defeat this —
+ * a narrow band through eastern Turkey, the Gulf of Guinea, and open ocean.
+ * Simulating a transposition on all 1,158 traced perimeters in this corpus: 0
+ * would be missed, and the smallest displacement is 4,805 km (Kapolei HI), 192x
+ * the threshold. If the corpus ever gains a site near lat == lng, this check
+ * stops covering it and the coordinate-order tests become the only guard.
  */
 export const ANCHOR_MAX_KM = 25;
 
