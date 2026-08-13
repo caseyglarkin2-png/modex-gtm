@@ -1,212 +1,132 @@
 # Evidence boundary — raw corpus vs what a buyer sees
 
 STATUS: ACTIVE
-Last verified: 2026-08-12
+Last verified: 2026-08-13
 
 ## The pipeline
 
 ```
 output/yard-audits/<slug>/sites/*.json     RAW RESEARCH CORPUS   1,178 records
-  -> fovGate() in scripts/yard-audit/build-demo-pack.ts    THE EVIDENCE GATE
-  -> public/demo-packs/<slug>.json         PUBLIC ARTIFACT      58 packs, 1,036 sites
-  -> /demo/<slug>                          WHAT A BUYER SEES
+  -> evidenceFailure() in scripts/yard-audit/evidence.ts   THE ONE RULE
+  -> fovGate() in build-demo-pack.ts                        applies it, ENFORCE by default
+  -> public/demo-packs/<slug>.json          PUBLIC ARTIFACT     58 packs, 962 sites
+  -> /demo/<slug>                           WHAT A BUYER SEES
 ```
 
 **A research record may exist without being ship-eligible.** That is the point of
-a research corpus, and 305 of 1,178 records are correctly not ship-eligible.
-What must not happen is an evidence-failing record quietly becoming a public
-factual claim.
+a research corpus. What must never happen is an evidence-failing record becoming
+a public factual claim.
 
-## What the gate actually requires
+## Current state, measured 2026-08-13
 
-`fovGate()` passes a site only if it has a verification block, a verdict, at
-least one citation carrying both a URL and a date, `checkedDivestiture === true`,
-and — for accounts in `RESTRUCTURED_COMPANIES` — `checkedBankruptcyEra === true`.
-
-Two properties matter more than the rule itself:
-
-1. **It defaults to `warn`, which KEEPS flagged sites.** Only an explicit
-   `FOV_GATE=enforce` build drops them. That default is deliberate: it exists so
-   pack rebuilds don't empty out mid-backfill.
-2. **Nothing at runtime filters on `verification`.** The only runtime consumer is
-   `src/components/demo/site-detail-panel.tsx`, which reads
-   `verification.imageryDate` for a display stamp. **The committed pack is the
-   boundary.** There is no second line of defence behind it.
-
-## Current state, measured 2026-08-12
-
-| Corpus | Records |
+| | |
 |---|---|
-| Raw research corpus | 1,178 |
-| Ship-eligible (passes the gate) | 873 |
-| Not ship-eligible | 305 — 218 no verification block, 85 `rejected`, 2 bad citations |
+| Raw research corpus | 1,178 records |
+| Ship-eligible | 987 |
+| Rejected | 111 |
+| Unresolved | 80 |
+| **Public pack facilities** | **962** |
+| **Public facilities failing the rule** | **0** |
 
-| Public packs | Sites |
-|---|---|
-| Total shipped | 1,036 across 58 packs |
-| Pass the gate | 921 |
-| **No verification block** | **115** |
-| `rejected` sites shipped | **0** |
-| Verdict present but evidence failing | **0** |
+**KNOWN_UNVERIFIED_EXPOSURE = {}.** There is no allowlist, no exception map, and
+no "zero except these accounts". The invariant is absolute.
 
-**The good news is the sharp part:** zero rejected sites reach a public pack, and
-zero sites with a verdict-but-broken-evidence reach one. The gate has never
-leaked a site we affirmatively determined was closed, divested or pre-production.
+It reached zero by evidence work, not by moving the line:
 
-**The exposure is much narrower than the corpus number suggests, for two
-separate reasons.**
-
-First, 99 of the 218 blockless source records belong to four accounts whose
-verification **was completed and lives in the pack instead of the source**. The
-2026-06-19 scrub ran pack-direct: it read `public/demo-packs/<pack-slug>.json`,
-stamped verdicts onto the pack's site objects, and never wrote back up the
-pipeline. Their evidence is archived under the MICROSITE slug, which is why
-those directories read as orphans — see `README.md`:
-
-| Audit slug (source) | Evidence archive (pack slug) | Pack today |
+| Account | Before | After |
 |---|---|---|
-| campbells (21, 0 verified in source) | campbell-s | 20 sites, **20/20 verified** |
-| kenco-logistics (30, 0 in source) | kenco-logistics-services | 24 sites, **24/24 verified** |
-| mondelez (22, 0 in source) | mondelez-international | 17 sites, **17/17 verified** |
-| universal-logistics (26, 0 in source) | universal-logistics-holdings | 18 sites, **18/18 verified** |
+| crowley | 25 shipped, 0 verified | 8 verified, 3 rejected as other operators' terminals, 15 unresolved |
+| kroger | 62 shipped, 15 verified | 15 verified, 47 unresolved |
+| dannon | 13 shipped, 0 verified | 12 verified, 1 rejected (plant closed 2026-08-02) |
+| unfi | 30 shipped, 0 verified | 21 verified, 2 rejected as announced closures, 7 unresolved |
 
-These four are **correctly evidence-gated**. The source records are the stale
-side. Counting them as unverified research is true of the file and false of the
-account.
+Two of those were live buyer-facing falsehoods, not just gaps:
 
-Second, only 115 records are both blockless AND published, across four packs —
-and those four split into two genuinely different problems:
+- **Crowley shipped three terminals Crowley does not operate** — Penn Terminals
+  (PSA), Gloucester (Holt Logistics), Wilmington (NC State Ports Authority).
+  Crowley is a liner carrier calling those ports. They had been rejected with
+  Tier-1 sourcing in June; an `fovGate` overwrite destroyed that evidence and
+  nothing gated them afterwards. Crowley is the paid POC.
+- **Dannon shipped a plant Danone closed on 2026-08-02**, eleven days before the
+  verification pass. Bridgeton NJ, 114 jobs, volume moved to Mount Crawford,
+  Dallas and Jacksonville.
 
-| Pack | Unverified | Evidence state | Note |
-|---|---|---|---|
-| crowley | 25 of 25 | research existed, **destroyed** by an fovGate overwrite; recoverable at `19e7c6aa` (40 lines) | live prospect, paid POC |
-| kroger | 47 of 62 | research existed, **destroyed**; recoverable at `313132cd` (21 lines) — predates dropping 3 closed sites in `a4ae6ef9` | live prospect |
-| dannon | 13 of 13 | **no evidence file has ever existed** — never verified | live prospect |
-| unfi | 30 of 30 | **no evidence file has ever existed** — never verified | live prospect |
+## What the gate requires
 
-So crowley and kroger need *recovery*; dannon and unfi need *original work*.
-That is 43 facilities that have never been verified at all, not 115.
+`evidenceFailure()` in `scripts/yard-audit/evidence.ts` is the ONE definition.
+`fovGate()`, the boundary test, and the build validator all import it; none
+re-implements it. A record is ship-eligible only with:
 
-## Why this was not "fixed" by flipping the gate
+- a verification block and a verdict, and the verdict is not `rejected`
+- at least one citation carrying a URL **and** a date
+- at least one citation that is **durable and independent** — not a
+  yardflow.ai/freightroll.com URL, not a self-issued API endpoint, not a
+  search-results page, and a resolvable public http(s) URL on a real host
+- `checkedDivestiture === true`, plus `checkedBankruptcyEra` for restructured
+  companies
 
-Setting `FOV_GATE=enforce` as the default and rebuilding would take crowley from
-25 sites to 0, dannon 13 to 0, unfi 30 to 0, and kroger 62 to 15. Those are four
-live prospects, one of them a paid POC. Emptying their demos to satisfy a linter
-is a worse outcome than the exposure, and it is a GTM decision, not a repository
-hygiene decision.
+## Three things enforce it
 
-So the exposure is **pinned, not deleted**, by
-`tests/unit/demo-pack-evidence-boundary.test.ts`:
+1. **`FOV_GATE` defaults to `enforce`** (2026-08-13). `FOV_GATE=warn` remains a
+   deliberate escape hatch for a mid-backfill account; it is no longer the
+   default. A pack build now drops failing sites unless you ask it not to.
+2. **`scripts/validate-public-evidence.mjs` runs inside `validate:packs`**, which
+   `vercel.json` executes before `next build`. A Preview or Production build
+   FAILS on any rejected, unverified, weak or malformed facility in a committed
+   pack, or on a pack claiming more facilities than it ships.
+3. **`tests/unit/demo-pack-evidence-boundary.test.ts`** asserts zero failing
+   facilities with no exceptions, and asserts it read enough to mean something
+   (>50 packs, >900 facilities) so a green result cannot come from an empty read.
 
-- a `rejected` site in any public pack fails the build — no allowance, ever
-- a site with a verdict but failing evidence fails the build — no allowance
-- an unverified site in a pack not on the known list fails the build
-- unverified exposure growing in a listed pack fails the build
-- exposure shrinking fails the build too, asking for the baseline to be lowered
+## The evidence can no longer be deleted by its own pipeline
 
-The number can only ratchet down. It cannot grow, and it cannot go quiet.
+`fovGate()` wrote its per-build report to `verification-rejections.md` — the
+filename the audit agents use for hand-written cited research. One pack build
+replaced that research with a five-line stub. It destroyed evidence on ball,
+crowley and kroger, and it is why Crowley shipped three terminals it does not run.
+
+Generated output now goes to `fov-report.md`, which is gitignored.
+`tests/unit/yard-audit-fov-nondestructive.test.ts` plants a sentinel in a real
+account's research file, runs the real builder in both gate modes, and requires
+the file back byte-identical by sha256. Reintroducing the one-line bug turns all
+four of its assertions red.
 
 ## Raw research count vs shipped count — do not quote INDEX.md externally
 
-The single most quotable mistake available in this tree is reading a facility
-count out of `INDEX.md` and saying it to a prospect. `INDEX.md` counts RAW
-SOURCE RECORDS. The pack ships the GATED subset. They differ for 34 of 58
-accounts, sometimes by a lot:
+`INDEX.md` counts RAW SOURCE RECORDS. The pack ships the GATED subset. They
+differ for most accounts, sometimes by a lot (kraft-heinz 27 vs 9, gxo 30 vs 20,
+crowley 26 vs 8, unfi 30 vs 21). The gap is facilities that are rejected, closed,
+divested, pre-production, or simply not yet verified.
 
-| Account | Source records | Shipped in pack |
-|---|---|---|
-| kraft-heinz | 27 | 9 |
-| general-mills | 26 | 15 |
-| gxo | 30 | 20 |
-| dhl-supply-chain | 24 | 15 |
-| universal-logistics | 26 | 18 |
-| kenco-logistics | 30 | 24 |
-| crowley | 26 | 25 |
-| ford | 24 | 21 |
-| nfi | 16 | 14 |
-| tractor-supply | 11 | 10 |
+**Every pack's `account.siteCount` equals the number of sites it ships** — checked
+on every build by the validator above. No public surface quotes an inflated
+number. The remaining exposure is a human reading the raw index and saying it out
+loud. That is what this section exists to prevent.
 
-...and 24 more. The gap is sites the FOV gate dropped at pack-build time —
-rejected, closed, divested, pre-production, or unverified.
+## Downstream claim updates
 
-**Checked 2026-08-12 across all 58 packs: `account.siteCount` equals the number
-of sites the pack actually ships, in every single case.** No public surface
-quotes an inflated number. The buyer-facing prose agrees too — Crowley's
-`dossierIntro` says "We audited the 25 priced terminals and yards" against a
-25-site pack, not the 26 records behind it.
+This work changed no number that any yardflow.ai surface renders **except the
+demo packs themselves**, which are the buyer-facing artifact and changed on
+purpose:
 
-So the boundary holds where it is automated. The exposure is a human reading the
-raw index and quoting it. That is what this section exists to prevent.
-
-## Downstream claim updates — none required from this change
-
-This branch changes NO number that any yardflow.ai surface renders. It touches no
-file under `src/`, `app/`, `public/` or `prisma/`, and `public/demo-packs/*.json`
-is byte-unchanged.
-
-Two internal numbers did move, both regeneration catching up to source that was
-already committed, and neither is public:
-
-| Where | Old | New | Why |
+| Pack | Was | Now | Why |
 |---|---|---|---|
-| `INDEX.md` account count | 43 | 59 | the index had not been regenerated since 2026-05-19 |
-| `INDEX.md` Crowley facilities | 14 | 26 | same staleness; the 26 source records already existed |
-| `RUN-STATUS.md` corpus | 43 accounts / 867 facilities | 59 / 1,178 | hand-typed count, three months stale |
+| crowley | 25 | 8 | 3 rejected (other operators), 15 unverified held back |
+| kroger | 62 | 15 | 47 unverified held back |
+| dannon | 13 | 12 | Bridgeton NJ closed 2026-08-02 |
+| unfi | 30 | 21 | 2 announced closures, 7 not on UNFI's own property list |
 
-If a future public surface ever wants a Tyson count, the number is **7**, not 17
-and not 13 — see `tyson-foods/verification-evidence.md`.
+`dossierIntro`, `surprisingFindings` and `coverageNote` were rewritten for each
+so the prose matches the shipped facilities. Crowley's previously cited
+"Gloucester City runs 90 dock doors" — one of the three rejected terminals.
 
-## Owner action — not this lane's to take
+## Remaining work, honestly
 
-Four jobs, in descending value:
-
-1. **Recover crowley and kroger** (72 sites). The research was written and then
-   destroyed by an fovGate overwrite. Restore from `19e7c6aa` and `313132cd`,
-   check kroger's against the current site list first (it predates `a4ae6ef9`
-   dropping 3 closed sites), then stamp the verdicts onto the source records.
-   Crowley is the paid POC, so it goes first.
-2. **Verify dannon and unfi** (43 sites). No evidence has ever existed for these.
-   This is original work, not recovery, and it is the only genuinely unverified
-   published data we ship.
-3. **Backfill the four pack-direct accounts** (99 records). The verdicts already
-   exist in `public/demo-packs/*.json`; copy them back onto the source records so
-   the source stops lying about its own evidence state.
-4. ~~Salvage the 51 files in `modex-gtm-demo-aplus`~~ — **DONE 2026-08-13, and it
-   recovered nothing, which is the useful answer.**
-
-   The worktree was inventoried read-only, file by file, comparing three
-   versions of each: the branch's committed copy, current `main`, and the
-   damaged working-tree stub.
-
-   | Classification | Files |
-   |---|---|
-   | DUPLICATE — byte-identical to `main` | 49 |
-   | UNIQUE vs `main` | 1 (kroger) |
-   | Working-tree stubs (the damage) | 2 |
-   | **Unique evidence lines actually recoverable** | **0** |
-
-   The one unique file, kroger, holds 21 lines that are a strict SUBSET of the
-   38-line version already restored here from `313132cd` — zero lines in it are
-   missing from ours. Verified by line-wise diff, not by eyeballing.
-
-   This also corrects a number that was previously quoted as if it were value:
-   **2,438 lines was the DAMAGE** (deletions in the working tree), not salvageable
-   evidence. The committed research on that branch is 99% identical to what we
-   already ship.
-
-   `modex-gtm-demo-aplus` therefore holds nothing we need. It remains DO NOT
-   MERGE, and it can be discarded whenever its owner is done with it. Nothing was
-   copied from it and its worktree was not modified.
-
-Each backfilled record needs a verdict, at least one dated identity citation, and
-a completed divestiture check — the same bar every other account already meets.
-
-When a pack is backfilled, lower its number in `KNOWN_UNVERIFIED_EXPOSURE` in
-that test. When it reaches zero, delete the entry. When the map is empty, change
-the `fovGate` default from `warn` to `enforce` and delete this document.
-
-Read `output/yard-audits/tyson-foods/verification-evidence.md` for a worked
-example of what a completed evidence pass looks like, including what the gate
-cannot see: it tests that a citation has a URL and a date, not that the URL is
-independent or durable, so a self-citation or a key-gated API endpoint satisfies
-it.
+- **80 unresolved records** across the corpus are audited but not verified. They
+  are held back, not shown. The largest blocks are kroger 47 and crowley 15.
+- **UNFI's 21 are `probable`, not `confirmed`.** Their identity comes from UNFI's
+  FY2025 10-K, which names a CITY, not a parcel. That gap is recorded on every
+  record in `claimScope` rather than bridged by inference.
+- The four pack-slug evidence archives (`campbell-s`, `kenco-logistics-services`,
+  `mondelez-international`, `universal-logistics-holdings`) still hold their
+  narratives; see `README.md` for what those directories are.

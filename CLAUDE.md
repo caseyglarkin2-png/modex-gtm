@@ -12,6 +12,28 @@ current. Open owner items live in the Obsidian vault ledger:
 
 ---
 
+## One writer per worktree
+
+A mutation/adversarial reviewer and the lead writer must NEVER share a writable
+worktree. On 2026-08-13 they did: a reviewer was mutation-testing
+`scripts/yard-audit/evidence.ts` while the lead edited the same file. The lead
+was shown a diff where the `rejected` early-return had been deleted, labelled as
+an intentional edit. Committing that would have made a rejected facility
+ship-eligible — a closed or divested yard reaching a buyer, which is the exact
+failure the reviewer was hired to prevent.
+
+  IMPLEMENTATION worktree   one writer, the lead
+  MUTATION worktree         disposable, exclusive to the mutation agent
+  REVIEW worktree           reviewer owns it, the lead never edits it
+
+Before integrating anything a reviewer touched: stop the agent, read the diff
+against what you actually wrote, and confirm the source is restored. If ownership
+of a worktree changes, release the previous owner explicitly first.
+
+The general rule this is an instance of: when a tool reports a file as
+"modified, intentional", that is not evidence YOU made the change. Check the diff
+against your own intent.
+
 ## 🎯 THE PROSPECT-FACING STANDARD — /demo, /for, microsites (2026-07-09)
 
 Everything this app serves under **yardflow.ai** (the `/demo` subtree, `/for`
