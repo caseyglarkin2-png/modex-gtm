@@ -1,13 +1,20 @@
 name: E2E Click Tests
 
-# Cost note (2026-06-12): per-push E2E was ~100 min/day of Actions
-# at this repo's push cadence. Nightly + manual covers the regression
-# net; run `gh workflow run e2e.yml` before a risky ship.
+# MANUAL ONLY. The nightly schedule was removed 2026-08-13.
+#
+# The 2026-06-12 cost note this replaces reasoned about Actions minutes, which
+# do not apply here: modex-gtm is a PUBLIC repository on standard
+# `ubuntu-latest` runners, and GitHub does not charge for those. The nightly run
+# was dropped because it earned nothing, not because it cost anything.
+#
+# It ran every day against production and could only tell us something the
+# release gate and the post-deploy smoke had not already established — and it
+# reported at 6am against whatever happened to be deployed, with nobody on the
+# hook to read it. No production defect class was ever attributed to it.
+#
+# Run it deliberately before a risky ship: `gh workflow run e2e.yml`.
 on:
   workflow_dispatch:
-  schedule:
-    # Nightly at 6am ET (10:00 UTC) — daily health check before the workday
-    - cron: '0 10 * * *'
 
 concurrency:
   group: e2e-${{ github.ref }}
