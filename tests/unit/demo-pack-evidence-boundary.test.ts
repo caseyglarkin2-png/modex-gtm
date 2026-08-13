@@ -45,13 +45,20 @@ import { evidenceFailure, type Verification } from '../../scripts/yard-audit/evi
 const PACKS = join(process.cwd(), 'public', 'demo-packs');
 const present = existsSync(PACKS);
 
-/** Accounts that ship sites with no verification block, and how many. */
-const KNOWN_UNVERIFIED_EXPOSURE: Record<string, number> = {
-  crowley: 25,
-  dannon: 13,
-  kroger: 47,
-  unfi: 30,
-};
+/**
+ * There is no allowlist any more, and that is the point.
+ *
+ * This map used to hold crowley 25, dannon 13, kroger 47, unfi 30 — 115
+ * buyer-facing facilities shipping with no verification at all. Enforcing zero
+ * then would have emptied four live prospect demos, so the exposure was pinned
+ * and allowed to ratchet down instead. It reached zero on 2026-08-13 by doing
+ * the evidence work: recovering Crowley's destroyed rejections, restoring
+ * Kroger's, and verifying Dannon and UNFI from scratch.
+ *
+ * The invariant is now absolute. If this fails, fix the evidence on the source
+ * record and rebuild the pack with FOV_GATE=enforce. Do not reintroduce an
+ * exception map.
+ */
 
 /**
  * Classification comes from scripts/yard-audit/evidence.ts — the same function
@@ -84,54 +91,40 @@ function auditPacks() {
 describe.skipIf(!present)('public demo packs — evidence boundary', () => {
   const rows = present ? auditPacks() : {};
 
+  it('ships ZERO facilities that fail the evidence rule — no exceptions', () => {
+    const offenders = Object.entries(rows)
+      .filter(([, r]) => r.pass !== r.total)
+      .map(([slug, r]) => `${slug}: ${r.total - r.pass} of ${r.total} failing ` +
+        `(rejected ${r.rejected}, unverified ${r.unverified}, weak ${r.weak})`);
+    expect(offenders, 'a buyer-facing pack contains a facility we cannot stand behind').toEqual([]);
+  });
+
   it('never ships a site we affirmatively rejected', () => {
-    // No allowance. A rejected site is one we determined is closed, divested,
-    // a JV, or pre-production — publishing it is publishing something false.
     const offenders = Object.entries(rows)
       .filter(([, r]) => r.rejected > 0)
       .map(([slug, r]) => `${slug}: ${r.rejected} rejected site(s)`);
     expect(offenders).toEqual([]);
   });
 
-  it('ships no site with a verdict but broken citations or an unchecked divestiture', () => {
-    const offenders = Object.entries(rows)
-      .filter(([, r]) => r.weak > 0)
-      .map(([slug, r]) => `${slug}: ${r.weak} site(s) with a verdict but failing evidence`);
+  it('has facilities to check, so a zero result cannot come from an empty read', () => {
+    const total = Object.values(rows).reduce((n, r) => n + r.total, 0);
+    expect(Object.keys(rows).length).toBeGreaterThan(50);
+    expect(total).toBeGreaterThan(900);
+  });
+
+  it('no pack claims more facilities than it ships', () => {
+    const offenders: string[] = [];
+    for (const f of readdirSync(PACKS).filter((x) => x.endsWith('.json'))) {
+      const pack = JSON.parse(readFileSync(join(PACKS, f), 'utf8')) as {
+        account?: { siteCount?: number };
+        network?: { sites?: unknown[] };
+      };
+      const claimed = pack.account?.siteCount;
+      const shipped = pack.network?.sites?.length ?? 0;
+      if (typeof claimed === 'number' && claimed !== shipped) {
+        offenders.push(`${f}: claims ${claimed}, ships ${shipped}`);
+      }
+    }
     expect(offenders).toEqual([]);
-  });
-
-  it('exposes unverified sites only where already known, and never more', () => {
-    const actual: Record<string, number> = {};
-    for (const [slug, r] of Object.entries(rows)) if (r.unverified > 0) actual[slug] = r.unverified;
-
-    for (const [slug, count] of Object.entries(actual)) {
-      const allowed = KNOWN_UNVERIFIED_EXPOSURE[slug];
-      expect(
-        allowed,
-        `${slug} ships ${count} unverified site(s) and is not a known exposure. ` +
-          `Either give those records a verification block, or rebuild that pack with ` +
-          `FOV_GATE=enforce. Do not add it to the allowlist to make this pass.`,
-      ).toBeDefined();
-      expect(
-        count,
-        `${slug} unverified exposure grew from ${allowed} to ${count}. New unverified ` +
-          `sites reached a buyer-facing pack.`,
-      ).toBeLessThanOrEqual(allowed!);
-    }
-  });
-
-  it('reports when the exposure has shrunk so the baseline can ratchet down', () => {
-    const stale: string[] = [];
-    for (const [slug, allowed] of Object.entries(KNOWN_UNVERIFIED_EXPOSURE)) {
-      const row = rows[slug];
-      if (!row) {
-        stale.push(`${slug}: pack no longer exists — drop it from KNOWN_UNVERIFIED_EXPOSURE`);
-        continue;
-      }
-      if (row.unverified < allowed) {
-        stale.push(`${slug}: now ${row.unverified}, baseline says ${allowed} — lower the baseline`);
-      }
-    }
-    expect(stale).toEqual([]);
   });
 });

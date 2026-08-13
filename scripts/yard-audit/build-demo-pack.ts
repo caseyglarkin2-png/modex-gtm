@@ -391,7 +391,13 @@ async function buildSite(
 //
 // Generated output now gets its own filename, and .gitignore keeps it out.
 function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]): Site[] {
-  const mode = process.env.FOV_GATE === 'enforce' ? 'enforce' : 'warn';
+  // ENFORCE BY DEFAULT since 2026-08-13. This was `warn` while 115 published
+  // facilities across crowley/dannon/kroger/unfi had no verification at all, so
+  // enforcing would have emptied four live prospect demos. Those accounts are
+  // now fully evidenced and public exposure is zero, so the default flipped.
+  // FOV_GATE=warn still exists as a deliberate escape hatch for a mid-backfill
+  // account; it is no longer what happens when you say nothing.
+  const mode = process.env.FOV_GATE === 'warn' ? 'warn' : 'enforce';
   const kept: Site[] = [];
   const flagged: { id: string; reason: string }[] = [];
 
