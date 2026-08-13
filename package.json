@@ -30,6 +30,7 @@
     "test:click:vercel": "playwright test tests/e2e/vercel-click-smoke.spec.ts",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
+    "release:check": "node scripts/release-check.mjs",
     "geo:build": "tsx scripts/yard-audit/build-geojson.ts",
     "geo:validate": "tsx scripts/yard-audit/validate-geojson.ts"
   },
