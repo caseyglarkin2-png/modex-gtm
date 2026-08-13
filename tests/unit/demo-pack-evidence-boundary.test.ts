@@ -1,0 +1,142 @@
+/**
+ * PUBLIC EVIDENCE BOUNDARY.
+ *
+ * The pipeline is:
+ *
+ *   output/yard-audits/<slug>/sites/*.json     raw research corpus
+ *     -> fovGate() in build-demo-pack.ts       the evidence gate
+ *     -> public/demo-packs/<slug>.json         the committed public artifact
+ *     -> /demo/<slug>                          what a buyer sees
+ *
+ * A research record is allowed to exist without being ship-eligible. That is
+ * the point of a research corpus. What is NOT allowed is an evidence-failing
+ * record quietly becoming a public factual claim.
+ *
+ * Two facts make that possible today, and both are load-bearing to understand
+ * before changing anything:
+ *
+ *   1. fovGate defaults to `warn`, which KEEPS flagged sites. Only an explicit
+ *      FOV_GATE=enforce build drops them.
+ *   2. Nothing at runtime filters on `verification`. The only consumer is
+ *      site-detail-panel.tsx, which reads `verification.imageryDate` for a
+ *      display stamp. The committed pack IS the boundary.
+ *
+ * So 115 sites across 4 packs currently ship with no verification block at all.
+ * This test does NOT delete them — crowley, dannon, kroger and unfi are live
+ * prospects, and emptying their demos to satisfy a linter would be a worse
+ * outcome than the exposure. It pins the exposure instead:
+ *
+ *   - a NEW unverified site entering ANY public pack fails the build
+ *   - a pack not on this list shipping ANY unverified site fails the build
+ *   - a `rejected` site reaching a public pack fails the build unconditionally,
+ *     with no allowance, because that is a site we affirmatively determined is
+ *     closed, divested or pre-production
+ *   - when the exposure shrinks, the test says so and asks for the baseline to
+ *     be lowered, so the number can only ratchet down
+ *
+ * The owner action this is holding open is recorded in
+ * output/yard-audits/EVIDENCE-BOUNDARY.md.
+ */
+import { describe, it, expect } from 'vitest';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+const PACKS = join(process.cwd(), 'public', 'demo-packs');
+const present = existsSync(PACKS);
+
+/** Accounts that ship sites with no verification block, and how many. */
+const KNOWN_UNVERIFIED_EXPOSURE: Record<string, number> = {
+  crowley: 25,
+  dannon: 13,
+  kroger: 47,
+  unfi: 30,
+};
+
+/** Mirrors fovGate() in scripts/yard-audit/build-demo-pack.ts. */
+const RESTRUCTURED = new Set(['general-motors']);
+
+type Verification = {
+  verdict?: string;
+  citations?: { url?: string; date?: string }[];
+  checkedDivestiture?: boolean;
+  checkedBankruptcyEra?: boolean;
+};
+
+function classify(slug: string, v: Verification | undefined): 'pass' | 'rejected' | 'unverified' | 'weak' {
+  if (!v || !v.verdict) return 'unverified';
+  if (v.verdict === 'rejected') return 'rejected';
+  const citationsBad = !v.citations?.length || v.citations.some((c) => !c.url || !c.date);
+  const divestitureBad =
+    v.checkedDivestiture !== true || (RESTRUCTURED.has(slug) && v.checkedBankruptcyEra !== true);
+  return citationsBad || divestitureBad ? 'weak' : 'pass';
+}
+
+function auditPacks() {
+  const rows: Record<string, { total: number; pass: number; rejected: number; unverified: number; weak: number }> = {};
+  for (const f of readdirSync(PACKS).filter((x) => x.endsWith('.json')).sort()) {
+    const slug = f.replace(/\.json$/, '');
+    const pack = JSON.parse(readFileSync(join(PACKS, f), 'utf8')) as {
+      network?: { sites?: { verification?: Verification }[] };
+    };
+    const sites = pack.network?.sites ?? [];
+    const row = { total: sites.length, pass: 0, rejected: 0, unverified: 0, weak: 0 };
+    for (const s of sites) row[classify(slug, s.verification)]++;
+    rows[slug] = row;
+  }
+  return rows;
+}
+
+describe.skipIf(!present)('public demo packs — evidence boundary', () => {
+  const rows = present ? auditPacks() : {};
+
+  it('never ships a site we affirmatively rejected', () => {
+    // No allowance. A rejected site is one we determined is closed, divested,
+    // a JV, or pre-production — publishing it is publishing something false.
+    const offenders = Object.entries(rows)
+      .filter(([, r]) => r.rejected > 0)
+      .map(([slug, r]) => `${slug}: ${r.rejected} rejected site(s)`);
+    expect(offenders).toEqual([]);
+  });
+
+  it('ships no site with a verdict but broken citations or an unchecked divestiture', () => {
+    const offenders = Object.entries(rows)
+      .filter(([, r]) => r.weak > 0)
+      .map(([slug, r]) => `${slug}: ${r.weak} site(s) with a verdict but failing evidence`);
+    expect(offenders).toEqual([]);
+  });
+
+  it('exposes unverified sites only where already known, and never more', () => {
+    const actual: Record<string, number> = {};
+    for (const [slug, r] of Object.entries(rows)) if (r.unverified > 0) actual[slug] = r.unverified;
+
+    for (const [slug, count] of Object.entries(actual)) {
+      const allowed = KNOWN_UNVERIFIED_EXPOSURE[slug];
+      expect(
+        allowed,
+        `${slug} ships ${count} unverified site(s) and is not a known exposure. ` +
+          `Either give those records a verification block, or rebuild that pack with ` +
+          `FOV_GATE=enforce. Do not add it to the allowlist to make this pass.`,
+      ).toBeDefined();
+      expect(
+        count,
+        `${slug} unverified exposure grew from ${allowed} to ${count}. New unverified ` +
+          `sites reached a buyer-facing pack.`,
+      ).toBeLessThanOrEqual(allowed!);
+    }
+  });
+
+  it('reports when the exposure has shrunk so the baseline can ratchet down', () => {
+    const stale: string[] = [];
+    for (const [slug, allowed] of Object.entries(KNOWN_UNVERIFIED_EXPOSURE)) {
+      const row = rows[slug];
+      if (!row) {
+        stale.push(`${slug}: pack no longer exists — drop it from KNOWN_UNVERIFIED_EXPOSURE`);
+        continue;
+      }
+      if (row.unverified < allowed) {
+        stale.push(`${slug}: now ${row.unverified}, baseline says ${allowed} — lower the baseline`);
+      }
+    }
+    expect(stale).toEqual([]);
+  });
+});
