@@ -13,11 +13,16 @@ each one against the repo's FOV gate (`scripts/yard-audit/build-demo-pack.ts`),
 which requires a verification block, a verdict, at least one identity citation
 carrying both a URL and a date, and a completed divestiture check.
 
-**13 of 17 pass. 4 do not and must not ship on any prospect-facing surface.**
+**7 of 17 pass. 10 do not and must not ship on any prospect-facing surface.**
+
+(This was 13 of 17 until 2026-08-12, when the gate was tightened to require at
+least one DURABLE, INDEPENDENT citation. Six records were passing on evidence we
+had issued ourselves. See "The six demoted" below — the records are unchanged;
+the bar moved to where it should always have been.)
 
 None of the 17 is rejected — nothing here is closed, divested, or pre-production.
-The four failures are evidence gaps in our own audit, not problems with the
-facilities.
+Every failure is an evidence gap in our own audit, not a problem with the
+facility.
 
 ## Divestiture / closure gauntlet — run 2026-08-12
 
@@ -76,7 +81,9 @@ during the sweep are deliberately NOT recorded here — no URL for them survived
 into this branch, and an uncited number in the evidence file is the exact defect
 this file exists to prevent.
 
-## Do NOT ship (4) — evidence gaps, re-audit required
+## Do NOT ship — 10 of 17
+
+### Four with no usable identity evidence at all
 
 - **07 Waterloo Pork** — no `verification` block at all. The yard was traced and
   classified, but no verdict, operator, tenancy, citation or imagery date was
@@ -91,14 +98,31 @@ this file exists to prevent.
   verdict in the set with nothing supporting it; this is the one to re-audit
   first. UNRESOLVED.
 
-## Ship-eligible (13)
+### Six with evidence, but none of it independent
 
-Confirmed (9): 01 Springdale Complex, 02 Dakota City Beef, 03 Amarillo Beef,
-04 Holcomb Beef, 06 Storm Lake Pork, 09 Sherman Poultry TX, 10 Center Poultry
-Complex TX, 13 New Holland Poultry, 14 Vicksburg Poultry.
+03 Amarillo Beef, 04 Holcomb Beef, 05 Joslin Beef, 06 Storm Lake Pork,
+13 New Holland Poultry, 14 Vicksburg Poultry.
 
-Probable (4): 05 Joslin Beef, 15 Russellville DC, 16 Indianapolis DC,
-17 Haltom City DC.
+Their verdicts and their research are untouched. What changed is that
+`scripts/yard-audit/evidence.ts` now requires at least one citation that a
+reader can open and that we did not issue ourselves. These six were supported
+only by `yardflow.ai/for/tyson-foods` (our own page, cited as evidence for our
+own claim) and by `places.googleapis.com` / `maps.googleapis.com` lookups our
+auditing agent performed — key-gated endpoints that record a query, not a
+document.
+
+One durable third-party or Tyson-owned source per site restores each of them
+legitimately. That is the highest-value remaining work on this account.
+
+The rule change was dry-run across the whole corpus before shipping: it demotes
+6 records, all Tyson, and ZERO sites in any of the 58 public demo packs.
+
+## Ship-eligible — 7 of 17
+
+Confirmed (4): 01 Springdale Complex, 02 Dakota City Beef, 09 Sherman Poultry
+Plant TX, 10 Center Poultry Complex TX.
+
+Probable (3): 15 Russellville DC, 16 Indianapolis DC, 17 Haltom City DC.
 
 `probable` is ship-eligible by repo precedent — Ford shipped 3 probable sites in
 its pack and the FOV gate admits any non-rejected verdict that carries citations.
@@ -108,7 +132,7 @@ its pack and the FOV gate admits any non-rejected verdict that carries citations
 - All 17 sites remain in `sites/` so the account stays consistent with
   `roster.json` (17 facilities) and the 17 dossiers. They therefore all appear in
   `tyson-foods.geojson` and the master index, which are internal audit
-  deliverables. **13 is the number that may appear on a prospect-facing surface.**
+  deliverables. **7 is the number that may appear on a prospect-facing surface.**
 - The FOV gate defaults to `warn`, which keeps flagged sites. Any Tyson demo pack
   must be built with `FOV_GATE=enforce` or it will ship all 17.
 - There is no Tyson demo pack or `/for` page today, so nothing public currently

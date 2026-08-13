@@ -13,6 +13,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { validateFeatureCollection } from '../../scripts/yard-audit/geometry';
+import { evidenceFailure } from '../../scripts/yard-audit/evidence';
 
 const AUD = join(process.cwd(), 'output', 'yard-audits');
 const present = existsSync(AUD);
@@ -93,5 +94,45 @@ describe.skipIf(!present)('yard-audit geojson corpus', () => {
       if (issues.length) broken.push(`${f}: ${issues.length} problem(s) — e.g. ${issues[0].problem}`);
     }
     expect(broken).toEqual([]);
+  });
+});
+
+/**
+ * Tyson's evidence state is written down in prose in
+ * output/yard-audits/tyson-foods/verification-evidence.md. Prose and code drift.
+ * This pins them together: change the records or the rule, and the doc must be
+ * updated in the same commit or the build fails.
+ */
+describe.skipIf(!present)('tyson-foods evidence state matches its evidence document', () => {
+  const SITES = join(AUD, 'tyson-foods', 'sites');
+  const DOC = join(AUD, 'tyson-foods', 'verification-evidence.md');
+
+  it('the computed counts are the counts the document claims', () => {
+    const counts = { ship: 0, confirmed: 0, probable: 0, blocked: 0 };
+    for (const f of readdirSync(SITES).filter((x) => x.endsWith('.json')).sort()) {
+      const v = JSON.parse(readFileSync(join(SITES, f), 'utf8')).verification;
+      if (evidenceFailure('tyson-foods', v)) {
+        counts.blocked++;
+        continue;
+      }
+      counts.ship++;
+      if (v.verdict === 'confirmed') counts.confirmed++;
+      else counts.probable++;
+    }
+
+    const doc = readFileSync(DOC, 'utf8');
+    const claim = (re: RegExp) => Number(doc.match(re)?.[1] ?? -1);
+
+    expect(
+      { ...counts, total: counts.ship + counts.blocked },
+      'Tyson counts changed. Update verification-evidence.md in the same commit.',
+    ).toEqual({ ship: 7, confirmed: 4, probable: 3, blocked: 10, total: 17 });
+
+    expect(claim(/\*\*(\d+) of 17 pass/), 'header count').toBe(counts.ship);
+    expect(claim(/Do NOT ship — (\d+) of 17/), '"do not ship" heading').toBe(counts.blocked);
+    expect(claim(/Ship-eligible — (\d+) of 17/), 'ship-eligible heading').toBe(counts.ship);
+    expect(claim(/Confirmed \((\d+)\):/), 'confirmed list').toBe(counts.confirmed);
+    expect(claim(/Probable \((\d+)\):/), 'probable list').toBe(counts.probable);
+    expect(claim(/\*\*(\d+) is the number that may appear/), 'public-surface caveat').toBe(counts.ship);
   });
 });
