@@ -56,15 +56,27 @@ describe('inline ROI parity with the full calculator', () => {
   });
 
   it('coca-cola inline annual value equals the calculator output to the dollar', () => {
-    // Golden value cross-checked against the actual Flow-State- engine
-    // (buildInputsFromAsks + buildDashboard). Updated 2026-06-05 after d368900
-    // set coca-cola's margin to the beverage band ($2,400/load) instead of the
-    // $1,000 bottled-water default — the prior golden (431_822_741) used the
-    // wrong margin. dc08d15 restored totalGlobalFootprint (270) to the pack.
+    // Golden cross-checked against the Flow-State- engine (buildInputsFromAsks +
+    // buildDashboard). Margin is the beverage band ($2,400/load) per d368900.
+    //
+    // Updated 2026-08-13, from 270 facilities / $1,165,030,764. That golden was
+    // the GLOBAL footprint and went stale at 624b8a08, which mirrored the North
+    // American caps into the demo ROI model on purpose: /for was sizing coca-cola
+    // on the NA cap while /demo used the global figure, so the same company was
+    // quoted two different networks. FOOTPRINT_OVERRIDE['coca-cola'] = 66 is that
+    // cap and it MUST stay equal to gen-for-prize.ts in Flow-State-.
+    //
+    // The new total is 0.9935x the naive 66/270 scaling of the old one. The
+    // residual is per-bucket rounding in the facility mix (26/33/7), not drift —
+    // worth stating so the next reader does not have to re-derive it.
+    //
+    // 66 is deliberately NOT pack.account.networkCount (65). Those measure
+    // different things: 66 is the NA footprint cap the ROI sizes on, 65 is the
+    // SEC-cited US bottler-system production-facility count shown to buyers.
     const pack = loadPack('coca-cola.json');
     const dash = buildROIDashboard(buildAccountRoiModel(pack));
-    expect(dash.totalFacilities).toBe(270);
-    expect(Math.round(dash.comparison.yardFlow.total)).toBe(1_165_030_764);
+    expect(dash.totalFacilities).toBe(66);
+    expect(Math.round(dash.comparison.yardFlow.total)).toBe(282_924_738);
   });
 
   it.each(packFiles)('%s: produces a finite, positive, summing ROI', (file) => {
