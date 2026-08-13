@@ -106,6 +106,56 @@ So the exposure is **pinned, not deleted**, by
 
 The number can only ratchet down. It cannot grow, and it cannot go quiet.
 
+## Raw research count vs shipped count — do not quote INDEX.md externally
+
+The single most quotable mistake available in this tree is reading a facility
+count out of `INDEX.md` and saying it to a prospect. `INDEX.md` counts RAW
+SOURCE RECORDS. The pack ships the GATED subset. They differ for 34 of 58
+accounts, sometimes by a lot:
+
+| Account | Source records | Shipped in pack |
+|---|---|---|
+| kraft-heinz | 27 | 9 |
+| general-mills | 26 | 15 |
+| gxo | 30 | 20 |
+| dhl-supply-chain | 24 | 15 |
+| universal-logistics | 26 | 18 |
+| kenco-logistics | 30 | 24 |
+| crowley | 26 | 25 |
+| ford | 24 | 21 |
+| nfi | 16 | 14 |
+| tractor-supply | 11 | 10 |
+
+...and 24 more. The gap is sites the FOV gate dropped at pack-build time —
+rejected, closed, divested, pre-production, or unverified.
+
+**Checked 2026-08-12 across all 58 packs: `account.siteCount` equals the number
+of sites the pack actually ships, in every single case.** No public surface
+quotes an inflated number. The buyer-facing prose agrees too — Crowley's
+`dossierIntro` says "We audited the 25 priced terminals and yards" against a
+25-site pack, not the 26 records behind it.
+
+So the boundary holds where it is automated. The exposure is a human reading the
+raw index and quoting it. That is what this section exists to prevent.
+
+## Downstream claim updates — none required from this change
+
+This branch changes NO number that any yardflow.ai surface renders. It touches no
+file under `src/`, `app/`, `public/` or `prisma/`, and `public/demo-packs/*.json`
+is byte-unchanged.
+
+Two internal numbers did move, both regeneration catching up to source that was
+already committed, and neither is public:
+
+| Where | Old | New | Why |
+|---|---|---|---|
+| `INDEX.md` account count | 43 | 59 | the index had not been regenerated since 2026-05-19 |
+| `INDEX.md` Crowley facilities | 14 | 26 | same staleness; the 26 source records already existed |
+| `RUN-STATUS.md` corpus | 43 accounts / 867 facilities | 59 / 1,178 | hand-typed count, three months stale |
+
+If a future public surface ever wants a Tyson count, the number is **7**, not 17
+and not 13 — see `tyson-foods/verification-evidence.md`.
+
 ## Owner action — not this lane's to take
 
 Four jobs, in descending value:
