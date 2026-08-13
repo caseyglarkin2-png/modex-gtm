@@ -8,6 +8,7 @@ import {
   evidenceFailure,
   isDurableIndependent,
   isSelfCitation,
+  isSearchQuery,
   isSelfIssuedApi,
   isShipEligible,
 } from '../../scripts/yard-audit/evidence';
@@ -31,6 +32,15 @@ describe('citation classification', () => {
     expect(isSelfIssuedApi('https://example.com/x?key=AIzaSyFake')).toBe(true);
     // A Google MAPS PERMALINK is a durable thing a reader can open — not an API call.
     expect(isSelfIssuedApi('https://www.google.com/maps/@36.19,-94.12,3a,75y/data=!3m1!1e3')).toBe(false);
+  });
+
+  it('treats a search-results page as a query, not a document', () => {
+    expect(isSearchQuery('https://html.duckduckgo.com/html/?q=%22tyson%22+indianapolis')).toBe(true);
+    expect(isSearchQuery('https://www.google.com/search?q=tyson+plant')).toBe(true);
+    expect(isSearchQuery('https://www.bing.com/search?q=x')).toBe(true);
+    // A Maps permalink resolves to a fixed place and camera — not a search.
+    expect(isSearchQuery('https://www.google.com/maps/@36.18898,-94.12498,3a,75y/data=!3m1!1e3')).toBe(false);
+    expect(isSearchQuery('https://www.reuters.com/business/story-slug')).toBe(false);
   });
 
   it('durable means a reader can open it AND it is dated', () => {
@@ -75,6 +85,16 @@ describe('evidenceFailure', () => {
       evidenceFailure('tyson-foods', {
         ...base,
         citations: [{ url: 'https://places.googleapis.com/v1/places:searchNearby?x=1', date: '2026-07-30' }],
+      }),
+    ).toBe('no-durable-independent-citation');
+  });
+
+  it('rejects a record whose only non-self source is a search query', () => {
+    expect(
+      evidenceFailure('tyson-foods', {
+        verdict: 'confirmed',
+        checkedDivestiture: true,
+        citations: [{ url: 'https://html.duckduckgo.com/html/?q=warehouse', date: '2026-07-30' }],
       }),
     ).toBe('no-durable-independent-citation');
   });

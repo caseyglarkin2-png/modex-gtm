@@ -48,11 +48,27 @@ export function isSelfIssuedApi(url: string): boolean {
   return /(googleapis\.com|\bkey=AIza|[?&]api_key=)/i.test(url);
 }
 
+/**
+ * A search-engine RESULTS page. Same defect as a self-issued API call wearing a
+ * friendlier hostname: it is a query WE ran, its contents change under you, and
+ * it establishes nothing on its own. One Tyson record cited
+ * `html.duckduckgo.com/html/?q="1301 S Keystone" Indianapolis warehouse` under
+ * the type "commercial real-estate / business listing aggregation" — the label
+ * describes what the auditor hoped to find, not what the URL is.
+ *
+ * A Google MAPS permalink is not a search: it resolves to a fixed place and a
+ * fixed camera, and a reader opening it sees the same signage the auditor saw.
+ * Those stay durable.
+ */
+export function isSearchQuery(url: string): boolean {
+  return /(duckduckgo\.com\/html|\/search\?|[?&]q=)/i.test(url);
+}
+
 /** A citation a reader could actually open and use to check the claim. */
 export function isDurableIndependent(c: Citation): boolean {
   const url = c.url ?? '';
   if (!url || !c.date) return false;
-  return !isSelfCitation(url) && !isSelfIssuedApi(url);
+  return !isSelfCitation(url) && !isSelfIssuedApi(url) && !isSearchQuery(url);
 }
 
 export type EvidenceFailure =
