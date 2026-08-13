@@ -18,7 +18,7 @@
 import { readFileSync, readdirSync, existsSync, statSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { normalizeZone, GeometryError, type Position, type Zone } from './geometry.ts';
+import { normalizeZone, validateRing, GeometryError, type Position, type Zone } from './geometry.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const AUD = join(ROOT, 'output', 'yard-audits');
@@ -96,7 +96,17 @@ function buildSheet(slug: string, display: string, sites: Site[]): string {
   sites.forEach((s, i) => {
     const name = cell(s.name ?? `Site ${i + 1}`);
     const type = cell(s.type ?? '');
-    const ring = normalizeZone(s.geofences?.perimeter, `${slug}/site-${i + 1}#perimeter`);
+    const where = `${slug}/site-${i + 1}#perimeter`;
+    const ring = normalizeZone(s.geofences?.perimeter, where);
+    // normalizeZone proves the shape parses; it does not range-check. Without
+    // this the link sheet would happily print a bbox and a Maps link for a
+    // coordinate the geojson exporter refuses to write.
+    if (ring) {
+      const issues = validateRing(ring, where);
+      if (issues.length) {
+        throw new GeometryError(issues.map((x) => `${x.path}: ${x.problem}`).join('; '), where);
+      }
+    }
     if (!ring) {
       lines.push(`| ${i + 1} | ${name} | ${type} | — | — (perimeter unresolved) | — | — | — |`);
       return;

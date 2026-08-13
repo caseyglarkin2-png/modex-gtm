@@ -371,12 +371,24 @@ async function buildSite(
 // In BOTH modes an fov-report.md is (over)written per build.
 //
 // It used to overwrite verification-rejections.md, which is where the audit
-// agents put their hand-written, cited rejection research — 53 of those files
-// hold 2,661 lines of Tier-1/Tier-2 sourcing on why a site was excluded. A
-// single pack build replaced each one with a five-line auto-generated stub. The
-// modex-gtm-demo-aplus worktree is sitting on exactly that: 51 files, 2,438
-// lines of citations deleted, 188 lines of stub added, and nothing reads the
-// file anyway. Generated output now gets its own filename.
+// agents put their hand-written, cited rejection research. 56 of those files
+// exist (2,719 lines); 53 still hold Tier-1/Tier-2 sourcing on why a site was
+// excluded. A single pack build replaces each with a five-line stub, and
+// nothing in the repo reads the file, so it only ever cost evidence.
+//
+// This is not hypothetical and it is not fully in the future:
+//   - modex-gtm-demo-aplus is sitting on 51 such files, uncommitted:
+//     2,438 lines of citations deleted, 188 lines of stub added.
+//   - THREE are already stubbed on origin/main — ball, crowley, kroger. Ball
+//     never had research; crowley's 40-line version survives at 19e7c6aa and
+//     kroger's 21-line version at 313132cd. Recover with
+//     `git show <sha>:output/yard-audits/<slug>/verification-rejections.md`,
+//     but check them against the current site list first — kroger dropped 3
+//     closed sites in a4ae6ef9 after that evidence was written.
+//   - Two stub headings exist ("# FOV warn report" and "# FOV enforce report"),
+//     so any recovery sweep must match both.
+//
+// Generated output now gets its own filename, and .gitignore keeps it out.
 const RESTRUCTURED_COMPANIES = new Set(['general-motors']);
 
 function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]): Site[] {

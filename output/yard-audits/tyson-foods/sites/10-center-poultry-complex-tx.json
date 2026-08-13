@@ -293,16 +293,51 @@
     ],
     "checkedDivestiture": true,
     "checkedBankruptcyEra": false,
-    "rationale": "Tyson-branded site monument, Tyson brand trailers and an operating live-haul yard in 2023 Street View plus 2026 satellite showing the yard in active use. Divestiture check not run: WebSearch was unavailable for this run. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "rationale": "Tyson-branded site monument, Tyson brand trailers and an operating live-haul yard in 2023 Street View plus 2026 satellite showing the yard in active use. Divestiture check not run: WebSearch was unavailable for this run. Divestiture/closure gauntlet swept 2026-08-12: checked by name against Tyson's announced closures 2023-2026 (see verification.divestitureCheck.sources) and not present on any of them.",
     "verifiedBy": "agent",
     "verifiedAt": "2026-07-30",
-    "divestitureCheckedAt": "2026-08-12",
-    "divestitureCitation": {
-      "tier": 2,
-      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
-      "date": "2026-08-12",
-      "type": "Divestiture/closure gauntlet",
-      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    "divestitureCheck": {
+      "sweptAt": "2026-08-12",
+      "method": "Checked this facility by name against Tyson's publicly announced plant closures and divestitures 2023-2026, assembled from the sources below. Absence from that list is negative evidence of closure; it is not positive evidence of continued Tyson ownership, which is what verification.citations covers.",
+      "result": "not on any announced closure or divestiture list",
+      "sources": [
+        {
+          "tier": 2,
+          "url": "https://www.npr.org/2023/03/15/1163660388/tyson-foods-closes-poultry-plants-virginia-arkansas",
+          "date": "2023-03-15",
+          "covers": "Glen Allen VA and Van Buren AR poultry plants"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.wattagnet.com/broilers-turkeys/processing-slaughter/article/15543738/tyson-foods-closing-four-poultry-plants",
+          "date": "2023-08",
+          "covers": "Noel MO, Corydon IN, Dexter MO and Noel-area poultry plants"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.nationalhogfarmer.com/market-news/tyson-foods-to-close-perry-iowa-pork-processing-plant",
+          "date": "2024",
+          "covers": "Perry IA pork plant"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+          "date": "2024-12-04",
+          "covers": "Emporia KS beef plant and two Original Philly prepared-foods plants, Philadelphia PA"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.kcur.org/environment-agriculture/2025-12-16/tyson-closing-beef-processing-plant",
+          "date": "2025-12-16",
+          "covers": "Lexington NE beef plant closure, and the Amarillo TX beef plant cut to one shift"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.wrdw.com/2026/04/03/tyson-foods-shutters-georgia-plant-lays-off-168-employees/",
+          "date": "2026-04-03",
+          "covers": "Rome GA prepared-foods plant (Hilshire Brands), closing 2026-05-31"
+        }
+      ]
     }
   },
   "method": "deep-audit"

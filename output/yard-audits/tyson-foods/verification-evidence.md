@@ -26,17 +26,28 @@ that had a verification block, with the rationale that the session's WebSearch
 budget was exhausted. That gauntlet has now been run.
 
 Tyson's announced closures and divestitures 2023-2026 were swept and each of the
-17 audited sites checked against that list by name:
+17 audited sites checked against that list by name. One source per closure, each
+with its real publication date — the full list is on every record under
+`verification.divestitureCheck.sources`:
 
-- 2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR
-- 2024: Perry IA pork, North Little Rock AR
-- 2025: Emporia KS beef; two Original Philly prepared-foods plants, Philadelphia PA
-- 2026: Lexington NE beef (closed 2026-01-20, ~3,200 jobs); Rome GA prepared
-  foods, operated by Hilshire Brands (closing 2026-05-31, 168 jobs)
+| Closure | Source | Published |
+|---|---|---|
+| Glen Allen VA, Van Buren AR poultry | npr.org | 2023-03-15 |
+| Noel MO, Corydon IN, Dexter MO poultry | wattagnet.com | 2023-08 |
+| Perry IA pork | nationalhogfarmer.com | 2024 |
+| Emporia KS beef; 2x Original Philly, Philadelphia PA | agriculturedive.com | 2024-12-04 |
+| Lexington NE beef; Amarillo TX cut to one shift | kcur.org | 2025-12-16 |
+| Rome GA prepared foods (Hilshire Brands) | wrdw.com | 2026-04-03 |
 
 **No audited site appears on that list.** `checkedDivestiture` is now `true` on
 all 15 records that carry a verification block, with the sweep filed under
-`verification.divestitureCitation`. It is deliberately NOT filed in
+`verification.divestitureCheck`. `sweptAt` (2026-08-12) is the date the check was
+run and is deliberately kept separate from each source's publication date, so
+neither can be mistaken for the other.
+
+Absence from a closure list is **negative** evidence — it shows the plant was not
+shut. It is not positive evidence that Tyson still owns the imaged parcel; that
+is what `verification.citations` is for. The sweep is deliberately NOT filed in
 `verification.citations`: that array is the site's *identity* evidence — the
 parcel-was-imaged proof the FOV gate counts — and a closure sweep says nothing
 about which parcel was imaged. Filing it there would have flipped two uncited
@@ -59,8 +70,11 @@ silently carried:
   profile has changed.
   [Tier 2: https://www.foodprocessing.com/ingredients/animal-proteins/news/55133398/tyson-cuts-more-jobs-shifting-further-processing-out-of-wilkesboro-nc-chicken-plant , 2024]
 
-Storm Lake (06), Waterloo (07) and Columbus Junction (08) were each cited in
-2026 coverage as operating, at 17,250 / 19,500 / 10,350 head per day.
+Storm Lake (06), Waterloo (07) and Columbus Junction (08) are absent from every
+closure announcement in the table above. Per-plant throughput figures surfaced
+during the sweep are deliberately NOT recorded here — no URL for them survived
+into this branch, and an uncited number in the evidence file is the exact defect
+this file exists to prevent.
 
 ## Do NOT ship (4) — evidence gaps, re-audit required
 
@@ -102,4 +116,18 @@ its pack and the FOV gate admits any non-rejected verdict that carries citations
 - Citation tiers on the passing records skew to Tier 3 (Street View signage,
   Google Places). That is the corpus norm for identity, but it is weaker than the
   Tier-1 documentary check (10-K Item 2, careers postings) the deep-audit prompt
-  asks for. Seven records say so in their own rationale.
+  asks for. Seven records say so in their own rationale — several carry a verdict
+  of `confirmed` while their own rationale opens "Session WebSearch budget was
+  exhausted, so no Tier-1 documentary check was run." Read those two fields
+  together before quoting a Tyson site as verified.
+- **The FOV gate only tests that a citation has a URL and a date, not that the
+  URL is independent or resolvable.** Two weaknesses show up in this tranche and
+  the gate cannot see either:
+  - Sites 03, 04 and 05 cite `yardflow.ai/for/tyson-foods` — our own page, as
+    evidence for our own claim. That is circular and should be replaced.
+  - Several citations are key-gated Google API endpoints
+    (`places.googleapis.com/v1/places:searchNearby?...`) that the auditing agent
+    issued itself. They are a record of a lookup, not a document a reader can
+    open. Treat them as the weakest tier, not as sourcing.
+  Neither is unique to Tyson — it is a corpus-wide property of the gate. Fixing
+  the gate is out of this lane's scope and is recorded as a follow-up.

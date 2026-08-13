@@ -90,10 +90,16 @@ export function signedArea(ring: Position[]): number {
  */
 function closeAndOrient(open: Position[], context: string): Position[] {
   const distinct = open.slice();
-  // Tolerate a source ring that already repeats its first point.
-  const last = distinct[distinct.length - 1];
-  const first = distinct[0];
-  if (distinct.length > 1 && last[0] === first[0] && last[1] === first[1]) distinct.pop();
+  // Tolerate a source ring that already repeats its first point — however many
+  // times. Popping only one would let [a,b,c,a,a] through as a "closed" ring
+  // carrying a spurious duplicate vertex.
+  while (
+    distinct.length > 1 &&
+    distinct[distinct.length - 1][0] === distinct[0][0] &&
+    distinct[distinct.length - 1][1] === distinct[0][1]
+  ) {
+    distinct.pop();
+  }
 
   if (distinct.length < 3) {
     throw new GeometryError(
@@ -181,8 +187,25 @@ export interface ValidationIssue {
   problem: string;
 }
 
-/** Every rule a generated ring must satisfy before it may be written. */
-export function validateRing(ring: unknown, path: string): ValidationIssue[] {
+/**
+ * Every rule a generated ring must satisfy before it may be written.
+ *
+ * `role` drives the winding rule: RFC 7946 wants an exterior ring
+ * counterclockwise and each interior ring (hole) clockwise, so a blanket check
+ * would reject legal holes.
+ *
+ * Known limit, stated rather than papered over: this cannot detect a
+ * lat/lng transposition. Every US yard in this corpus has a latitude and a
+ * longitude that are both inside the other's legal range, so a swap produces
+ * coordinates that are individually valid and merely in the wrong ocean. Guard
+ * that at the source-reading layer (there is exactly one, `normalizeZone`) and
+ * with the tests that pin lng/lat order, not here.
+ */
+export function validateRing(
+  ring: unknown,
+  path: string,
+  role: 'exterior' | 'interior' = 'exterior',
+): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   if (!Array.isArray(ring)) {
     return [{ path, problem: 'ring is not an array' }];
@@ -222,10 +245,34 @@ export function validateRing(ring: unknown, path: string): ValidationIssue[] {
     }
   }
   if (issues.length === 0) {
-    const first = ring[0] as Position;
-    const last = ring[ring.length - 1] as Position;
+    const r = ring as Position[];
+    const first = r[0];
+    const last = r[r.length - 1];
     if (first[0] !== last[0] || first[1] !== last[1]) {
       issues.push({ path, problem: 'ring is not closed (first position !== last position)' });
+      return issues;
+    }
+    // A ring can be null-free, in-range and closed and still be junk. These are
+    // invariants the generator guarantees, so validating them catches a file
+    // written by an older or hand-edited build, not just a fresh one.
+    for (let i = 1; i < r.length; i++) {
+      if (r[i][0] === r[i - 1][0] && r[i][1] === r[i - 1][1]) {
+        issues.push({ path: `${path}[${i}]`, problem: 'duplicate consecutive position' });
+      }
+    }
+    const area = signedArea(r);
+    if (area === 0) {
+      issues.push({ path, problem: 'ring encloses zero area (degenerate or collinear)' });
+    } else if (role === 'exterior' && area < 0) {
+      issues.push({
+        path,
+        problem: 'exterior ring is clockwise; must be counterclockwise (RFC 7946)',
+      });
+    } else if (role === 'interior' && area > 0) {
+      issues.push({
+        path,
+        problem: 'interior ring (hole) is counterclockwise; must be clockwise (RFC 7946)',
+      });
     }
   }
   return issues;
@@ -241,7 +288,9 @@ export function validateGeometry(geometry: unknown, path: string): ValidationIss
     if (!Array.isArray(g.coordinates) || g.coordinates.length === 0) {
       return [{ path: `${path}.coordinates`, problem: 'Polygon has no rings' }];
     }
-    return g.coordinates.flatMap((r, i) => validateRing(r, `${path}.coordinates[${i}]`));
+    return g.coordinates.flatMap((r, i) =>
+      validateRing(r, `${path}.coordinates[${i}]`, i === 0 ? 'exterior' : 'interior'),
+    );
   }
   if (g.type === 'MultiPolygon') {
     if (!Array.isArray(g.coordinates) || g.coordinates.length === 0) {
@@ -251,7 +300,9 @@ export function validateGeometry(geometry: unknown, path: string): ValidationIss
       if (!Array.isArray(poly) || poly.length === 0) {
         return [{ path: `${path}.coordinates[${pi}]`, problem: 'polygon has no rings' }];
       }
-      return poly.flatMap((r, i) => validateRing(r, `${path}.coordinates[${pi}][${i}]`));
+      return poly.flatMap((r, i) =>
+        validateRing(r, `${path}.coordinates[${pi}][${i}]`, i === 0 ? 'exterior' : 'interior'),
+      );
     });
   }
   return [{ path: `${path}.type`, problem: `unsupported geometry type ${JSON.stringify(g.type)}` }];

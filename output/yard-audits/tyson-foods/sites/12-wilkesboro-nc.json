@@ -18,15 +18,51 @@
     "confidence": "high",
     "note": "Operator identity is directly branded in Street View. Which specific Tyson business unit runs each parcel was not web-verified this run.",
     "checkedDivestiture": true,
-    "divestitureCheckedAt": "2026-08-12",
-    "divestitureCitation": {
-      "tier": 2,
-      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
-      "date": "2026-08-12",
-      "type": "Divestiture/closure gauntlet",
-      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
-    },
-    "rationale": "Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list. OPERATING, CONVERTED: the Wilkesboro fresh plant was converted to bulk processing with ~500 of ~2,500 jobs eliminated; further-processing moved off site. Not closed and not divested, but the shipping profile has changed. [Tier 2: https://www.foodprocessing.com/ingredients/animal-proteins/news/55133398/tyson-cuts-more-jobs-shifting-further-processing-out-of-wilkesboro-nc-chicken-plant , 2024]"
+    "rationale": "Divestiture/closure gauntlet swept 2026-08-12: checked by name against Tyson's announced closures 2023-2026 (see verification.divestitureCheck.sources) and not present on any of them. OPERATING, CONVERTED: the fresh plant was converted to bulk processing, ~500 of ~2,500 jobs eliminated, further-processing moved off site. The shipping profile has changed. [Tier 2: https://www.foodprocessing.com/ingredients/animal-proteins/news/55133398/tyson-cuts-more-jobs-shifting-further-processing-out-of-wilkesboro-nc-chicken-plant , 2024]",
+    "divestitureCheck": {
+      "sweptAt": "2026-08-12",
+      "method": "Checked this facility by name against Tyson's publicly announced plant closures and divestitures 2023-2026, assembled from the sources below. Absence from that list is negative evidence of closure; it is not positive evidence of continued Tyson ownership, which is what verification.citations covers.",
+      "result": "not on any announced closure or divestiture list",
+      "sources": [
+        {
+          "tier": 2,
+          "url": "https://www.npr.org/2023/03/15/1163660388/tyson-foods-closes-poultry-plants-virginia-arkansas",
+          "date": "2023-03-15",
+          "covers": "Glen Allen VA and Van Buren AR poultry plants"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.wattagnet.com/broilers-turkeys/processing-slaughter/article/15543738/tyson-foods-closing-four-poultry-plants",
+          "date": "2023-08",
+          "covers": "Noel MO, Corydon IN, Dexter MO and Noel-area poultry plants"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.nationalhogfarmer.com/market-news/tyson-foods-to-close-perry-iowa-pork-processing-plant",
+          "date": "2024",
+          "covers": "Perry IA pork plant"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+          "date": "2024-12-04",
+          "covers": "Emporia KS beef plant and two Original Philly prepared-foods plants, Philadelphia PA"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.kcur.org/environment-agriculture/2025-12-16/tyson-closing-beef-processing-plant",
+          "date": "2025-12-16",
+          "covers": "Lexington NE beef plant closure, and the Amarillo TX beef plant cut to one shift"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.wrdw.com/2026/04/03/tyson-foods-shutters-georgia-plant-lays-off-168-employees/",
+          "date": "2026-04-03",
+          "covers": "Rome GA prepared-foods plant (Hilshire Brands), closing 2026-05-31"
+        }
+      ],
+      "operationalChange": "OPERATING, CONVERTED: the fresh plant was converted to bulk processing, ~500 of ~2,500 jobs eliminated, further-processing moved off site. The shipping profile has changed. [Tier 2: https://www.foodprocessing.com/ingredients/animal-proteins/news/55133398/tyson-cuts-more-jobs-shifting-further-processing-out-of-wilkesboro-nc-chicken-plant , 2024]"
+    }
   },
   "geofences": {
     "perimeter": {

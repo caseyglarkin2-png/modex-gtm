@@ -46,3 +46,8 @@ output/prospect-discovery/send-queue-*
 
 # Already-contacted exclusion lists (prospect PII)
 exclude/
+
+# Generated per demo-pack build by fovGate(). Regenerable noise; kept out of
+# the tree so it can never be confused with the hand-written, cited
+# verification-rejections.md sitting beside it.
+output/yard-audits/*/fov-report.md

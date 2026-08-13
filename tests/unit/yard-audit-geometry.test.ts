@@ -100,6 +100,13 @@ describe('normalizeZone — source shapes', () => {
     expect(normalizeZone(closedSource, 'x')).toEqual(normalizeZone(FORD_RING, 'x'));
   });
 
+  it('collapses however many trailing duplicates the source carries', () => {
+    const doubled = { ring: [...FORD_RING.ring, FORD_RING.ring[0], FORD_RING.ring[0]] };
+    const out = normalizeZone(doubled, 'x')!;
+    expect(out).toEqual(normalizeZone(FORD_RING, 'x'));
+    expect(validateRing(out, 'r')).toEqual([]); // no spurious repeated vertex
+  });
+
   // ── the actual production bug ──────────────────────────────────────────────
   it('THROWS on the shape that produced [null, null] instead of emitting nulls', () => {
     // Before the fix, the box parser read .west/.south off a ring object,
@@ -113,8 +120,11 @@ describe('normalizeZone — source shapes', () => {
   });
 
   it('rejects malformed source rings', () => {
+    // Pin the ringFromLatLngs guard specifically. `/at least 3/` alone also
+    // matches closeAndOrient's "at least 3 distinct positions", so deleting the
+    // guard under test would leave the suite green.
     expect(() => ringFromLatLngs({ ring: [{ lat: 1, lng: 2 }, { lat: 3, lng: 4 }] }, 'x')).toThrow(
-      /at least 3/,
+      /ring has 2 point\(s\), need at least 3/,
     );
     expect(() =>
       ringFromLatLngs({ ring: [{ lat: 1, lng: 2 }, { lat: 3, lng: 4 }, { lat: null as never, lng: 5 }] }, 'x'),
@@ -194,7 +204,38 @@ describe('validateRing — mutation suite (each case breaks exactly one property
       /3 components/,
     );
     expect(validateRing([1, 2, 3, 4], 'r').length).toBeGreaterThan(0);
-    expect(validateRing('nope', 'r')[0].problem).toMatch(/not an array/);
+    // Pin the top-level guard, not the per-position fallback which shares the
+    // phrase 'position is not an array'.
+    expect(validateRing('nope', 'r')).toEqual([{ path: 'r', problem: 'ring is not an array' }]);
+  });
+
+  it('RED on a ring that is closed, in range, and still junk', () => {
+    // Null-free, in-range and closed is not the same as valid.
+    const flat: Position[] = [[-83.1, 42.3], [-83.1, 42.3], [-83.1, 42.3], [-83.1, 42.3]];
+    expect(validateRing(flat, 'r').some((i) => /duplicate consecutive/.test(i.problem))).toBe(true);
+    expect(validateRing(flat, 'r').some((i) => /zero area/.test(i.problem))).toBe(true);
+
+    const collinear: Position[] = [[0, 0], [1, 1], [2, 2], [0, 0]];
+    expect(validateRing(collinear, 'r')[0].problem).toMatch(/zero area/);
+  });
+
+  it('RED on a clockwise exterior ring, GREEN for a clockwise hole', () => {
+    const cw = [...GOOD_RING].reverse();
+    expect(validateRing(cw, 'r')[0].problem).toMatch(/exterior ring is clockwise/);
+    expect(validateRing(cw, 'r', 'interior')).toEqual([]);
+    expect(validateRing(GOOD_RING, 'r', 'interior')[0].problem).toMatch(/hole.*counterclockwise/);
+  });
+
+  it('accepts a Polygon with a legal clockwise hole', () => {
+    // Clockwise, as RFC 7946 requires of an interior ring.
+    const hole = [
+      [-83.166, 42.305],
+      [-83.166, 42.309],
+      [-83.162, 42.309],
+      [-83.162, 42.305],
+      [-83.166, 42.305],
+    ];
+    expect(validateGeometry({ type: 'Polygon', coordinates: [GOOD_RING, hole] }, 'g')).toEqual([]);
   });
 
   it('GREEN again once the mutations are reverted', () => {
