@@ -1,5 +1,12 @@
 /**
- * Registry slug -> HubSpot company DOMAIN (the S1 amplifier's ground truth).
+ * Account slug -> HubSpot company DOMAIN (the S1 amplifier's ground truth).
+ *
+ * "Account slug" means any slug a buyer-facing surface can emit, which is NOT
+ * the same as a microsite registry slug. src/app/demo/[account]/page.tsx serves
+ * from public/demo-packs/<slug>.json and only additionally consults the
+ * registry, so a pack-only account is a real, live page: `ball` has no registry
+ * module and /demo/ball returns 200. It belongs here precisely because it can
+ * produce engagement that needs stamping.
  *
  * Company resolution for intent stamping was exact-name only, and display names
  * rarely match HubSpot names ("Dannon" vs "Danone"), so only ~7 companies ever

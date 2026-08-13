@@ -3,6 +3,8 @@ import { ACCOUNT_DOMAINS, domainForAccountSlug } from '@/lib/microsites/account-
 import { resolveCompanyForIntent } from '@/lib/microsites/hubspot-intent';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import type { HubSpotCompany } from '@/lib/hubspot/companies';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 // The S1 amplifier: domain-first company resolution for intent stamping.
 // Exact-name matching left ~7 companies ever stamped; these tests lock the
@@ -81,10 +83,33 @@ describe('ACCOUNT_DOMAINS integrity', () => {
     }
   });
 
-  it('every mapped slug exists in the microsite registry', () => {
+  // The point of this assertion is to catch a slug that means NOTHING — a typo
+  // or a dead account would stamp intent against a domain no surface can
+  // produce, which is the poisoned-stamp class this map exists to prevent.
+  //
+  // It used to require a microsite REGISTRY entry, which was the only account
+  // source when it was written. It no longer is: src/app/demo/[account]/page.tsx
+  // reads public/demo-packs/<slug>.json off disk and only ADDITIONALLY consults
+  // the registry, so a pack-only account serves fine. `ball` is exactly that —
+  // /demo/ball returns 200 in production with no registry module. Dropping it
+  // from the map to satisfy the old wording would have silently un-stamped a
+  // live buyer-facing page.
+  //
+  // So the real invariant is "resolves to a real account surface", which still
+  // fails on a typo (neither registry nor pack) while being true of the product
+  // as it actually is.
+  const PACKS = join(process.cwd(), 'public', 'demo-packs');
+  const resolves = (slug: string) =>
+    Boolean(getAccountMicrositeData(slug)) || existsSync(join(PACKS, `${slug}.json`));
+
+  it('every mapped slug resolves to a real account surface (registry or demo pack)', () => {
     for (const [slug] of entries) {
-      expect(getAccountMicrositeData(slug), `unknown registry slug: ${slug}`).toBeTruthy();
+      expect(resolves(slug), `slug resolves to no registry entry and no demo pack: ${slug}`).toBe(true);
     }
+  });
+
+  it('a slug that resolves to nothing is still caught', () => {
+    expect(resolves('not-a-real-account-xyz')).toBe(false);
   });
 
   it('domainForAccountSlug returns null for unmapped slugs', () => {
