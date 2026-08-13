@@ -1,21 +1,38 @@
 # Yard-Audit Run — Status & Resume Point
 
-**Updated:** 2026-05-19 — **run COMPLETE.**
+STATUS: ACTIVE
+Last verified: 2026-08-12
+
 Project = top-prospect truck-yard audits for YardFlow by FreightRoll.
 
-## Snapshot — COMPLETE
-- **43 account folders · 867 facilities** — every account has `sites/`,
+> **Do not hand-type counts into this file.** Every number below is generated.
+> `INDEX.md` and `YardFlow-Master-Index.csv` are the authority; this file is a
+> narrative pointer at them. The 2026-05-19 snapshot said "43 account folders ·
+> 867 facilities" and stayed on the page until 2026-08-12 while the real corpus
+> was 59 and 1,178 — a hand-maintained count silently disagreeing with the
+> generated one for three months. Re-read the generated files, do not edit these.
+
+## Snapshot (regenerate to refresh — `npm run geo:build`, then the builders)
+- **59 account folders · 1,178 facilities** — every account has `sites/`,
   `dossiers/`, and a per-account `*-location-breakdown.csv`.
+- 1,158 facilities carry a traced perimeter; 20 do not (17 have no `geofences`
+  block, 3 have an explicitly null perimeter). None are silently dropped.
 - Mondelez expanded 10 → 24, then 2 confirmed duplicates dropped → **22 sites**.
-- Phase 4 packaging done (see below).
+- Tyson Foods added 2026-07-30 (17 facilities) — see
+  `tyson-foods/verification-evidence.md` for its evidence state.
+- Evidence gating and what actually reaches a buyer: `EVIDENCE-BOUNDARY.md`.
+- What each directory in this tree is: `README.md`.
 
 ## Phase 4 outputs (`output/yard-audits/`)
-- `YardFlow-Master-Audit.xlsx` — 43 account tabs + Index; 867 facilities,
-  43,516 dock doors, 121,280 trailer-parking capacity, 214 rail-served.
-- `YardFlow-Master-Index.csv` — per-account rollup.
-- `INDEX.md` — master index of all 43 accounts.
+- `YardFlow-Master-Audit.xlsx` — 59 account tabs + Index; 1,178 facilities,
+  68,090 dock doors, 201,769 trailer-parking capacity, 264 rail-served.
+- `YardFlow-Master-Index.csv` — per-account rollup (TOTAL row is authoritative).
+- `INDEX.md` — master index of all 59 accounts.
 - Per account: `<slug>.geojson`, `<slug>-geofence-links.md`, `<slug>-sales-summary.md`.
-- `YardFlow-All-Geofences.geojson` — combined, 3,918 geofence features.
+- `YardFlow-All-Geofences.geojson` — combined, 4,409 geofence features.
+- Every generated geometry file is validated by `npm run geo:validate` and by
+  `tests/unit/yard-audit-corpus.test.ts`; the build refuses to write invalid
+  geometry rather than warning about it.
 
 ## Google Drive (root `1arpvfAFP2Gyj1PmVtPvPgrw7Z_XZ115P`)
 - Master Index sheet: https://docs.google.com/spreadsheets/d/133MUua2PCnsAZk03tKyCOPwr3461rJsuCb0K4U1O-FE/edit
