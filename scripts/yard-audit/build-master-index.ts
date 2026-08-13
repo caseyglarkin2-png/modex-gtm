@@ -76,7 +76,9 @@ for (const acct of accounts) {
 
 rows.push(['TOTAL', totFac, totGate, totGuard, totFast, totRural, totRail, totDock, totCap, ''].join(','));
 
-const out = rows.join('\r\n') + '\r\n';
+// LF for the same reason as generate-csv.ts: git stores LF, so a CRLF writer
+// made every rebuild look like a change and hid real ones.
+const out = rows.join('\n') + '\n';
 writeFileSync(join(AUD, 'YardFlow-Master-Index.csv'), out);
 console.log(out);
 console.log(`${rows.length - 2} accounts · ${totFac} facilities · index written to output/yard-audits/YardFlow-Master-Index.csv`);

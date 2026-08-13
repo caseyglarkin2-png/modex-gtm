@@ -144,7 +144,12 @@ export function generateCsv(sites: Site[]): string {
   const out: string[][] = [schema.groupHeaderRow, schema.columnHeaderRow];
   for (const s of sites) out.push(siteRow(s));
   for (const r of summaryBlock(sites)) out.push(r);
-  return out.map(line).join('\r\n') + '\r\n';
+  // LF, not CRLF. RFC 4180 prefers CRLF, but git has always stored these files
+  // with LF, so a CRLF writer made every regeneration report 59 modified CSVs
+  // that were byte-identical in content. That noise masks a real change — it was
+  // mistaken for non-determinism twice during this audit. Writer and repository
+  // now agree, so `git status` after a rebuild means something again.
+  return out.map(line).join('\n') + '\n';
 }
 
 // --- CLI -------------------------------------------------------------------
