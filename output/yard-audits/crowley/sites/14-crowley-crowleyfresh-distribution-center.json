@@ -149,5 +149,36 @@
     "coldStorage": "Crowley web research: 400,000+ cu ft refrigerated space, a refrigerated dock with 9 access doors, a forced-air pre-cooling chamber (20,000 kg/hr), and four independent temperature-controlled chambers (32-50 F).",
     "confidence": "High for facility identification and the no-gate/no-guard-shack determination (open multi-tenant warehouse, Crowley branding confirmed on docked reefers). Whole-building dock count and lane counts remain overhead/Street-View estimates and are flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/logistics/specialized/cold-chain/specs/",
+        "date": "2026-06",
+        "type": "spec",
+        "claim": "Crowley cold-chain specs page lists the CrowleyFresh Miami cold storage facility at 11401 NW 100th Rd, Medley FL 33178 with a refrigerated dock of 9 access doors and four temperature-controlled chambers."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/logistics/supply-chain/warehousing/warehouses/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Crowley warehouse locator lists Miami FL Temperature Controlled at 11401 NW 100th Rd, Medley FL 33178, 400,000 cu ft refrigerated space."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CrowleyFresh/Crowley cold-chain pages list the exact Medley address with matching 9 reefer doors; operated by Crowley today, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "recoveredFrom": {
+      "commit": "19e7c6aa",
+      "recoveredAt": "2026-08-13",
+      "note": "verification restored from the pre-overwrite record; identity reconciled by site id + coordinates"
+    }
+  }
 }

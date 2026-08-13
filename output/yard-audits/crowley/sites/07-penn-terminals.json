@@ -169,5 +169,43 @@
     "entryLanes": "Not directly imaged; estimated single in/out lane at the gate — low confidence.",
     "scale": "No truck scale clearly identified; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.psa-pennterminals.com/contact.htm",
+        "date": "2026-06",
+        "type": "operator-site",
+        "claim": "The Eddystone PA marine terminal at 1 Saville Ave is operated as PSA Penn Terminals, an independent terminal operator."
+      },
+      {
+        "tier": 2,
+        "url": "https://pitchbook.com/profiles/company/61393-15",
+        "date": "2025",
+        "type": "press",
+        "claim": "Penn Terminals Inc. joined the PSA Group in Aug 2019, renamed PSA Penn Terminals; active independent operator as of 2025."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/port-terminals/",
+        "date": "2026-06",
+        "type": "operator-site",
+        "claim": "Crowley lists the Eddystone address as 'Penn Terminals, Inc.' - a port of call naming Penn Terminals as the operating entity, not Crowley."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Different operator: PSA Penn Terminals (independent) runs this terminal; Crowley only calls here as a carrier and operates no yard at the address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "recoveredFrom": {
+      "commit": "19e7c6aa",
+      "recoveredAt": "2026-08-13",
+      "note": "verification restored from the pre-overwrite record; identity reconciled by site id + coordinates"
+    }
+  }
 }

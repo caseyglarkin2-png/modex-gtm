@@ -172,5 +172,36 @@
     "multipleFacilities": "Campus-scale terminal: gate complex, offices, maintenance buildings, multiple container/chassis yards, 3 berths.",
     "backupSensitive": "Large queuing aprons and a roundabout at the McIntosh Road entry give ample truck stacking room - not backup-sensitive."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/port-terminals/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Crowley port-terminals locator lists the Port Everglades terminal at 4300 McIntosh Road, Ft. Lauderdale FL 33316 as an active U.S. Mainland terminal."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/shipping-logistics-announcements/pev-terminal-hours/",
+        "date": "2025",
+        "type": "press",
+        "claim": "Crowley publishes current operating hours for its Port Everglades (PEV) terminal, indicating live operations."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Crowley operates its largest container terminal at Port Everglades Southport under a 10-year lease; no sale/closure signals.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "recoveredFrom": {
+      "commit": "19e7c6aa",
+      "recoveredAt": "2026-08-13",
+      "note": "verification restored from the pre-overwrite record; identity reconciled by site id + coordinates"
+    }
+  }
 }

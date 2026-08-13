@@ -189,5 +189,36 @@
     "railServed": "Set false. The site abuts a major rail yard but no dedicated rail spur is clearly visible running into the property; flagged uncertain.",
     "confidence": "Medium — the cross-dock site is resolved with high spatial confidence (only matching facility on SCL Drive by the rail yard) and the layout matches Crowley's published spec, but no on-site Crowley signage was visible and the roster geocode was badly wrong, so the operator identity rests on circumstantial evidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/logistics/supply-chain/warehousing/warehouses/",
+        "date": "2026-06",
+        "type": "spec",
+        "claim": "Crowley warehouse locator lists Jacksonville FL Cross Dock at 2061 Seaboard Coast Line (SCL) Drive, 32209: 12.1 acres, 31,500 sq ft crossdock, 58 dock doors."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/shipping-logistics-announcements/crowley-logistics-announces-jacksonville-fl-warehouse-location-change/",
+        "date": "2015-09",
+        "type": "press",
+        "claim": "Crowley directs LCL and cross-dock cargo to the 2061 SCL Drive facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact SCL Drive address with matching specs (12.1 ac, 31,500 sqft, 58 doors) on Crowley's current warehouse locator resolves the circumstantial-signage gap.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "recoveredFrom": {
+      "commit": "19e7c6aa",
+      "recoveredAt": "2026-08-13",
+      "note": "verification restored from the pre-overwrite record; identity reconciled by site id + coordinates"
+    }
+  }
 }

@@ -177,5 +177,29 @@
     "scale": "Web profile mentions scales at the broader Talleyrand terminal, but none clearly resolved at this Office #2 gate - left false, flagged uncertain.",
     "railServed": "Heavy rail yards run immediately west/southwest of the property; spurs serve the Talleyrand terminal complex."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.crowley.com/port-terminals/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Crowley lists 1163 Talleyrand Avenue, Jacksonville FL 32206 as 'Port Office #2' handling Puerto Rico, Port Transfers, Breakbulk/NIT, Car Haulers, Individual Vehicle Shippers and cross-dock, Crowley-operated."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Crowley's own locator lists 1163 Talleyrand as an active Crowley-operated terminal office within the JAXPORT Talleyrand complex; JAXPORT-owned, Crowley-leased; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "recoveredFrom": {
+      "commit": "19e7c6aa",
+      "recoveredAt": "2026-08-13",
+      "note": "verification restored from the pre-overwrite record; identity reconciled by site id + coordinates"
+    }
+  }
 }
