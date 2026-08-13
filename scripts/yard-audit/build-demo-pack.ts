@@ -36,6 +36,7 @@ import {
 import { shapeBounds } from '../../src/lib/demo/geofence-geometry';
 import { buildScenario } from '../../src/lib/demo/scenarios';
 import { resolveByAuditSlug } from './slug-map';
+import { evidenceFailure } from './evidence.ts';
 
 // ── Paths ───────────────────────────────────────────────────────────────────
 
@@ -389,8 +390,6 @@ async function buildSite(
 //     so any recovery sweep must match both.
 //
 // Generated output now gets its own filename, and .gitignore keeps it out.
-const RESTRUCTURED_COMPANIES = new Set(['general-motors']);
-
 function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]): Site[] {
   const mode = process.env.FOV_GATE === 'enforce' ? 'enforce' : 'warn';
   const kept: Site[] = [];
@@ -398,21 +397,14 @@ function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]
 
   for (const s of sites) {
     const v = (s as unknown as { verification?: any }).verification;
-    const bad =
-      !v ||
-      !v.verdict ||
-      (v.verdict !== 'rejected' &&
-        (!v.citations?.length || v.citations.some((c: any) => !c.url || !c.date))) ||
-      v.checkedDivestiture !== true ||
-      (RESTRUCTURED_COMPANIES.has(slug) && v.checkedBankruptcyEra !== true);
-    const drop = v?.verdict === 'rejected' || bad;
-    if (drop) {
+    // The rule itself lives in ./evidence.ts. It used to be inline here and
+    // re-implemented from memory in tests and audit scripts, which is how a
+    // rule drifts into three slightly different rules.
+    const failure = evidenceFailure(slug, v);
+    if (failure) {
       flagged.push({
         id: s.id,
-        reason:
-          v?.verdict === 'rejected'
-            ? v.rationale || 'rejected'
-            : 'failed FOV gate (missing/invalid verification)',
+        reason: failure === 'rejected' ? v.rationale || 'rejected' : `failed FOV gate: ${failure}`,
       });
       if (mode === 'enforce') continue; // drop it
     }

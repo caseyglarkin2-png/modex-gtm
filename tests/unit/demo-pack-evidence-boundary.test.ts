@@ -40,6 +40,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { evidenceFailure, type Verification } from '../../scripts/yard-audit/evidence';
 
 const PACKS = join(process.cwd(), 'public', 'demo-packs');
 const present = existsSync(PACKS);
@@ -52,23 +53,17 @@ const KNOWN_UNVERIFIED_EXPOSURE: Record<string, number> = {
   unfi: 30,
 };
 
-/** Mirrors fovGate() in scripts/yard-audit/build-demo-pack.ts. */
-const RESTRUCTURED = new Set(['general-motors']);
-
-type Verification = {
-  verdict?: string;
-  citations?: { url?: string; date?: string }[];
-  checkedDivestiture?: boolean;
-  checkedBankruptcyEra?: boolean;
-};
-
+/**
+ * Classification comes from scripts/yard-audit/evidence.ts — the same function
+ * fovGate() calls. This test used to re-implement the rule, which meant a change
+ * to the gate could leave the test asserting the OLD rule and still passing.
+ */
 function classify(slug: string, v: Verification | undefined): 'pass' | 'rejected' | 'unverified' | 'weak' {
-  if (!v || !v.verdict) return 'unverified';
-  if (v.verdict === 'rejected') return 'rejected';
-  const citationsBad = !v.citations?.length || v.citations.some((c) => !c.url || !c.date);
-  const divestitureBad =
-    v.checkedDivestiture !== true || (RESTRUCTURED.has(slug) && v.checkedBankruptcyEra !== true);
-  return citationsBad || divestitureBad ? 'weak' : 'pass';
+  const failure = evidenceFailure(slug, v);
+  if (!failure) return 'pass';
+  if (failure === 'rejected') return 'rejected';
+  if (failure === 'no-verification-block' || failure === 'no-verdict') return 'unverified';
+  return 'weak';
 }
 
 function auditPacks() {
