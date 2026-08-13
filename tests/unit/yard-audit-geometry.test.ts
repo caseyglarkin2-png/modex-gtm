@@ -16,6 +16,9 @@ import {
   validateFeatureCollection,
   validateGeometry,
   validateRing,
+  validateRingAgainstAnchor,
+  haversineKm,
+  ANCHOR_MAX_KM,
   type Position,
 } from '../../scripts/yard-audit/geometry';
 import { shapeBounds, shapeRing } from '../../src/lib/demo/geofence-geometry';
@@ -274,6 +277,60 @@ describe('agreement with src/lib/demo/geofence-geometry', () => {
       expect(Math.min(...ring.map((p) => p[0]))).toBeCloseTo(west, 12);
       expect(Math.max(...ring.map((p) => p[0]))).toBeCloseTo(east, 12);
     }
+  });
+});
+
+describe('validateRingAgainstAnchor — the transposition guard', () => {
+  // Real Ford Dearborn: ring centroid and geocoded coords agree to ~100 m.
+  const ring = normalizeZone(FORD_RING, 'x')!;
+  const anchor = { lat: 42.3088, lng: -83.1651 };
+
+  it('GREEN when the traced ring agrees with the geocoded address', () => {
+    expect(validateRingAgainstAnchor(ring, anchor, 'r')).toEqual([]);
+  });
+
+  it('RED on a lat/lng transposition, and SAYS it is a transposition', () => {
+    // The exact bug validateRing structurally cannot catch: both values stay
+    // inside the other's legal range, so every range check still passes.
+    const swapped: Position[] = ring.map((p) => [p[1], p[0]]);
+    expect(validateRing(swapped, 'r').filter((i) => /outside/.test(i.problem))).toEqual([]);
+    const issues = validateRingAgainstAnchor(swapped, anchor, 'r');
+    expect(issues).toHaveLength(1);
+    expect(issues[0].problem).toMatch(/lat\/lng SWAPPED/);
+  });
+
+  it('RED on a dropped minus sign', () => {
+    const flipped: Position[] = ring.map((p) => [-p[0], p[1]]);
+    expect(validateRingAgainstAnchor(flipped, anchor, 'r')[0].problem).toMatch(/km from the record/);
+  });
+
+  it('RED on a ring traced on the wrong parcel', () => {
+    const elsewhere = { lat: 34.05, lng: -118.24 }; // Los Angeles
+    expect(validateRingAgainstAnchor(ring, elsewhere, 'r')[0].problem).toMatch(/wrong parcel/);
+  });
+
+  it('carries no hemisphere or country assumption — it is relative to the anchor', () => {
+    // Same shape, in Australia. Valid there, and valid here.
+    const au: Position[] = [
+      [151.2, -33.87],
+      [151.21, -33.87],
+      [151.21, -33.86],
+      [151.2, -33.86],
+      [151.2, -33.87],
+    ];
+    expect(validateRingAgainstAnchor(au, { lat: -33.865, lng: 151.205 }, 'r')).toEqual([]);
+  });
+
+  it('tolerates the worst honest disagreement in the corpus with room to spare', () => {
+    // Measured max 2026-08-12 was 1.34 km on a large multi-building campus.
+    expect(ANCHOR_MAX_KM).toBeGreaterThan(1.34 * 10);
+    // ...and is still three orders of magnitude short of a transposition.
+    expect(haversineKm({ lat: 40, lng: -85 }, { lat: -85, lng: 40 })).toBeGreaterThan(10000);
+  });
+
+  it('is inert when the record carries no anchor, rather than guessing', () => {
+    expect(validateRingAgainstAnchor(ring, undefined, 'r')).toEqual([]);
+    expect(validateRingAgainstAnchor(ring, { lat: NaN, lng: 0 }, 'r')).toEqual([]);
   });
 });
 

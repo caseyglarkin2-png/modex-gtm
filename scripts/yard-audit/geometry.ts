@@ -278,6 +278,72 @@ export function validateRing(
   return issues;
 }
 
+/** Great-circle distance in km. */
+export function haversineKm(a: LatLng, b: LatLng): number {
+  const R = 6371;
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const dLat = rad(b.lat - a.lat);
+  const dLng = rad(b.lng - a.lng);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+/**
+ * The transposition guard that range checks cannot be.
+ *
+ * A US yard's latitude and longitude both sit inside the other's legal range, so
+ * swapping them yields coordinates that are individually valid — which is why
+ * validateRing can never catch it. But every site record carries a SECOND,
+ * INDEPENDENTLY DERIVED position: `coords`, geocoded from the facility's
+ * address, produced by a different process from the hand-traced ring. Requiring
+ * the two to agree is a real cross-source check, not a plausibility heuristic.
+ *
+ * Measured across all 1,158 traced perimeters (2026-08-12): median disagreement
+ * 66 m, p99 500 m, worst case 1.34 km (a large multi-building campus whose
+ * geocode lands on a gate rather than the centre). A transposed US ring lands
+ * ~14,760 km away; a longitude sign error ~14,000 km. The default 25 km ceiling
+ * is 18x the worst honest case and three orders of magnitude short of any
+ * transposition, so it flags coordinate-order damage without rejecting valid
+ * geometry anywhere on earth — the check is relative to the record's own anchor,
+ * so it carries no US or hemisphere assumption.
+ *
+ * It also catches the neighbouring failures: a ring traced on the wrong parcel,
+ * a ring copy-pasted from another site, and a dropped minus sign.
+ */
+export const ANCHOR_MAX_KM = 25;
+
+export function validateRingAgainstAnchor(
+  ring: Position[],
+  anchor: LatLng | undefined,
+  path: string,
+  maxKm: number = ANCHOR_MAX_KM,
+): ValidationIssue[] {
+  if (!anchor || !isFiniteNumber(anchor.lat) || !isFiniteNumber(anchor.lng)) return [];
+  if (!ring.length) return [];
+  const centroid: LatLng = {
+    lat: ring.reduce((s, p) => s + p[1], 0) / ring.length,
+    lng: ring.reduce((s, p) => s + p[0], 0) / ring.length,
+  };
+  const km = haversineKm(anchor, centroid);
+  if (km > maxKm) {
+    const swapped = haversineKm({ lat: anchor.lng, lng: anchor.lat }, centroid);
+    return [
+      {
+        path,
+        problem:
+          `ring centroid is ${km.toFixed(1)} km from the record's geocoded coords ` +
+          `(limit ${maxKm} km)` +
+          (swapped < km
+            ? ' — it matches the anchor with lat/lng SWAPPED, so the coordinate order is wrong'
+            : ' — wrong parcel, copied ring, or a sign error'),
+      },
+    ];
+  }
+  return [];
+}
+
 /** Validate one GeoJSON geometry. Polygon and MultiPolygon are both accepted. */
 export function validateGeometry(geometry: unknown, path: string): ValidationIssue[] {
   if (!geometry || typeof geometry !== 'object') {

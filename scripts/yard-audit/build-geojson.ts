@@ -32,6 +32,7 @@ import { assignArchetype, type Classification } from './lib.ts';
 import {
   normalizeZone,
   validateFeatureCollection,
+  validateRingAgainstAnchor,
   GeometryError,
   type Position,
   type Zone,
@@ -109,6 +110,15 @@ export function siteFeatures(account: string, site: Site, siteId = ''): Feature[
 
   const perimeter = normalizeZone(gf.perimeter, `${where}#perimeter`);
   if (!perimeter) return [];
+
+  // Cross-source agreement: the hand-traced ring must land where the
+  // independently geocoded address says the facility is. This is the only
+  // check that can catch a lat/lng transposition, because a swapped US
+  // coordinate is individually in-range and invisible to a bounds test.
+  const anchorIssues = validateRingAgainstAnchor(perimeter, site.coords, `${where}#perimeter`);
+  if (anchorIssues.length) {
+    throw new GeometryError(anchorIssues.map((i) => i.problem).join('; '), where);
+  }
 
   const a = assignArchetype(site.classification);
   const base = {
