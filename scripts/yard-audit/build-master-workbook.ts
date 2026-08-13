@@ -53,14 +53,24 @@ function accountMetrics(slug: string): Metrics {
   const m: Metrics = { facilities: 0, dockDoors: 0, trailerCap: 0, rail: 0 };
   if (!existsSync(dir)) return m;
   for (const f of readdirSync(dir).filter((x) => x.endsWith('.json'))) {
+    let j: { yardMetrics?: Record<string, unknown> };
     try {
-      const j = JSON.parse(readFileSync(join(dir, f), 'utf8'));
-      const ym = j.yardMetrics ?? {};
-      m.facilities++;
-      m.dockDoors += Number(ym.dockDoorCount) || 0;
-      m.trailerCap += Number(ym.trailerParkingCapacity) || 0;
-      if (ym.railServed === true) m.rail++;
-    } catch { /* skip unreadable json */ }
+      j = JSON.parse(readFileSync(join(dir, f), 'utf8'));
+    } catch (e) {
+      // This used to `catch { /* skip unreadable json */ }`. That is the exact
+      // failure this whole pipeline exists to prevent: facilities is a COUNT
+      // that a human reads off the workbook, so a corrupt record silently
+      // lowered the total and the workbook still looked authoritative. A
+      // facility we cannot read is not a facility we can count.
+      throw new Error(
+        `${slug}/sites/${f} is unreadable, so the facility count would be wrong: ${(e as Error).message}`,
+      );
+    }
+    const ym = j.yardMetrics ?? {};
+    m.facilities++;
+    m.dockDoors += Number(ym.dockDoorCount) || 0;
+    m.trailerCap += Number(ym.trailerParkingCapacity) || 0;
+    if (ym.railServed === true) m.rail++;
   }
   return m;
 }
