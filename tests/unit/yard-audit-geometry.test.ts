@@ -18,6 +18,7 @@ import {
   validateRing,
   type Position,
 } from '../../scripts/yard-audit/geometry';
+import { shapeBounds, shapeRing } from '../../src/lib/demo/geofence-geometry';
 
 /** A real Ford Dearborn perimeter: open, clockwise, 4 points. */
 const FORD_RING = {
@@ -198,6 +199,40 @@ describe('validateRing — mutation suite (each case breaks exactly one property
 
   it('GREEN again once the mutations are reverted', () => {
     expect(validateRing(GOOD_RING, 'r')).toEqual([]);
+  });
+});
+
+/**
+ * The repo already had a ring-or-box reader: src/lib/demo/geofence-geometry.ts,
+ * written when schema v2 introduced oriented polygons. The demo-pack path was
+ * migrated to it; the yard-audit exporters never were, which is the whole bug.
+ * geometry.ts is the exporters' fail-closed layer (it throws, closes, and
+ * orients, none of which shapeRing does) — but the two must never disagree
+ * about what a shape MEANS, so pin that here.
+ */
+describe('agreement with src/lib/demo/geofence-geometry', () => {
+  const shapes = [
+    FORD_RING,
+    { south: 42.3, west: -83.17, north: 42.31, east: -83.15 },
+  ];
+
+  it('normalizeZone covers the same vertices shapeRing does, for both shapes', () => {
+    for (const s of shapes) {
+      const mine = new Set(normalizeZone(s as never, 'x')!.map((p) => `${p[0]},${p[1]}`));
+      const theirs = new Set(shapeRing(s as never).map((p) => `${p.lng},${p.lat}`));
+      expect(mine).toEqual(theirs); // mine is closed, so the repeated vertex collapses
+    }
+  });
+
+  it('normalizeZone produces the same bounds shapeBounds reports', () => {
+    for (const s of shapes) {
+      const ring = normalizeZone(s as never, 'x')!;
+      const [[south, west], [north, east]] = shapeBounds(s as never);
+      expect(Math.min(...ring.map((p) => p[1]))).toBeCloseTo(south, 12);
+      expect(Math.max(...ring.map((p) => p[1]))).toBeCloseTo(north, 12);
+      expect(Math.min(...ring.map((p) => p[0]))).toBeCloseTo(west, 12);
+      expect(Math.max(...ring.map((p) => p[0]))).toBeCloseTo(east, 12);
+    }
   });
 });
 

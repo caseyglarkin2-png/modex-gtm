@@ -368,7 +368,15 @@ async function buildSite(
 //                        packs don't empty out before the Task 0.4 backfill)
 //   enforce            — DROP flagged sites; if the hero (featuredSiteId) is
 //                        flagged, refuse to build (exit 1)
-// In BOTH modes a verification-rejections.md report is (over)written per build.
+// In BOTH modes an fov-report.md is (over)written per build.
+//
+// It used to overwrite verification-rejections.md, which is where the audit
+// agents put their hand-written, cited rejection research — 53 of those files
+// hold 2,661 lines of Tier-1/Tier-2 sourcing on why a site was excluded. A
+// single pack build replaced each one with a five-line auto-generated stub. The
+// modex-gtm-demo-aplus worktree is sitting on exactly that: 51 files, 2,438
+// lines of citations deleted, 188 lines of stub added, and nothing reads the
+// file anyway. Generated output now gets its own filename.
 const RESTRUCTURED_COMPANIES = new Set(['general-motors']);
 
 function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]): Site[] {
@@ -407,7 +415,7 @@ function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]
     '\n';
   try {
     mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, 'verification-rejections.md'), lines);
+    writeFileSync(join(dir, 'fov-report.md'), lines);
   } catch {
     /* report write is best-effort */
   }
