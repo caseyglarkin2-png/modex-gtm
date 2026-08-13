@@ -155,5 +155,36 @@
     "geofences": "Perimeter captures the building plus the north truck/drop yard and south car-parking apron: ~367 m N-S x ~588 m E-W = ~53 acres. truckGate box is the SE fenced-court entrance.",
     "railServed": false
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dnb.com/business-directory/company-profiles.mondelez_global_llc.3b537d750d217ce46bfbaa743c009071.html",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Mondelez Global LLC business profile at '16200 Three Wide Dr Ste 172, Fort Worth, TX 76177-2219'"
+      },
+      {
+        "tier": 1,
+        "url": "https://property.compstak.com/16200-Three-Wide-Drive-Fort-Worth/p/852504",
+        "date": "2026-06",
+        "type": "real-estate",
+        "claim": "Multi-tenant Speedway Distribution Center Bldg C names current tenants City Electric Supply, IPS, and Mondelez International; the for-lease listing covers the other ~166k SF, not Mondelez's leased space"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG (borderline): Mondelez is a named current tenant (Ste 172) in a partially-vacant multi-tenant building; the for-lease/sale listing is the OTHER tenants' vacancy, so Mondelez has not left = INCLUDE (leased). Evidence is CRE-comp/aggregator (no self-attested careers req here) - recommend human spot-check.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

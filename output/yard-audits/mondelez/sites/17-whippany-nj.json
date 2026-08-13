@@ -90,5 +90,26 @@
     "drivewayShort": "Short office-park entrance drive only.",
     "urbanRural": "Suburban Morris County office/commercial corridor on Route 10 with dense surrounding residential and retail - classified Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://ir.mondelezinternational.com/news-releases/news-release-details/mondelez-international-opens-doors-new-global-rd-innovation",
+        "date": "2023-05",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "17-whippany-nj** — Mondelez Global R&D Innovation Center (941/945 State Route 10, Whippany NJ 07981) — REJECTED: NON-FREIGHT R&D. Currently Mondelez-operated, but it is an R&D / innovation center (former Cadbury lab, opened May 2023) with pilot / scale-up lines only — no production-scale dock or trailer yard. No yard to audit per the rubric. [Tier 1: https://ir.mondelezinternational.com/news-releases/news-release-details/mondelez-international-opens-doors-new-global-rd-innovation, 2023-05]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/mondelez-international/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

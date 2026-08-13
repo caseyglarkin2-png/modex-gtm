@@ -140,5 +140,29 @@
     "urbanRural": "Facility sits in the dense Norcross / Atlanta-metro industrial corridor along Brook Hollow Parkway, surrounded by large warehouses - Urban.",
     "postGateStaging": "Front lot and NE truck court provide some inside-property holding space before the docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.mondelezinternational.com/careers/jobs/job/index.html?jobid=r-133916&jobtitle=warehouse+associate",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mondelez careers Warehouse Associate req at 6300 Brook Hollow Parkway, Norcross GA 30071"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Mondelez/Nabisco self-attests active warehouse ops at the exact address via 2026 careers reqs; the only closure found is the unrelated 1400 Murphy Ave Atlanta plant (2021).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

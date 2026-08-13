@@ -163,5 +163,26 @@
     "trailersVisible": "~90 trailers counted across both drop yards / dock aprons; approximate.",
     "trailerParkingCapacity": "Estimated 200 from the two large striped drop yards; low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.colliers.com/en/properties/olive-branch-distribution-center-ii/usa-11244-s-distribution-cove-olive-branch-ms-38654-usa/usa1116123",
+        "date": "2026-06",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "02-kenco-mcs-mississippi** — Kenco MCS Mississippi (Olive Branch MS, 11244 S Distribution Cove) — REJECTED: the exact audited address (\"Olive Branch Distribution Center II\", 181,349 SF — not the ~800,000 SF the pack claims) is currently marketed **for lease / immediate availability with no tenant named and no Kenco tie**. Kenco's actual Olive Branch listing is at a different address (10425 Ridgewood Dr). Wrong building / vacant. [Tier 2: https://www.colliers.com/en/properties/olive-branch-distribution-center-ii/usa-11244-s-distribution-cove-olive-branch-ms-38654-usa/usa1116123, 2026-06]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/kenco-logistics-services/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

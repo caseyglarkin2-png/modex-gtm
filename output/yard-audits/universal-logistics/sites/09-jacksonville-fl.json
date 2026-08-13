@@ -138,5 +138,36 @@
     "multipleFacilities": "Multi-building complex: warehouse/dock building (Amazon), central M&R building, container yard, plus outbuildings — campus layout.",
     "railServed": "The CSX Moncrief rail yard is immediately adjacent to the west but separated by a tree buffer / drainage canal; no rail spur runs into the Universal-operated property itself — drayage moves are by truck. railServed = false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=37666",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Universal Intermodal Services, 2050 Kings Road Building #3, Jacksonville FL 32209, exact address match"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/co/universal-intermodal-services/Jobs/-in-Jacksonville,FL",
+        "date": "2025",
+        "type": "press",
+        "claim": "Active Universal Intermodal Services hiring in Jacksonville FL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact-address directory listing for the ULH intermodal brand + active local hiring; no closure. Macro caveat: ULH intermodal segment contracting (Q3-2025 impairment).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -165,5 +165,29 @@
     "multiStep": "Single gate stage observed; no clear second checkpoint - left false.",
     "buildingCount": "Plant is a connected multi-section complex; counted as effectively 2 main masses but it is one continuous facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/production-associate-weekday-weekend/job/R-148444",
+        "date": "2026-04-02",
+        "type": "careers",
+        "claim": "Active Mondelez production-associate req at 7300 South Kedzie Ave, Chicago IL 60629, posted 2026-04-02"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Reduced post-2016 (lines moved to Salinas) but STILL operating: active Mondelez careers req at 7300 S Kedzie dated 2026; Yelp 'CLOSED' entry is a separate retail/brands listing, not the bakery.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

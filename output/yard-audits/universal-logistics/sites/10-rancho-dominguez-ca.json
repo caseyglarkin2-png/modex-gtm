@@ -138,5 +138,36 @@
     "urbanRural": "Rancho Dominguez sits inside the dense LA-metro industrial fabric near the ports. Classified Urban.",
     "imageryNote": "The dense, irregular industrial parcel and the ~149 m geocode shift make the exact perimeter and truck-gate count approximate; flagged for human review."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=7412",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Southern Counties Express dba Universal Intermodal Services, 18020 South Santa Fe Avenue, Rancho Dominguez CA, exact address match"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/universal-logistics-holdings-inc-acquires-southern-counties-express-inc-300695550.html",
+        "date": "2018",
+        "type": "press",
+        "claim": "ULH acquired Southern Counties Express ($65M); still in the ULH single-employer family"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact-address directory listing tying SCE/Universal Intermodal to 18020 S Santa Fe Ave; subsidiary still ULH-owned. Macro caveat: intermodal segment under stress.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

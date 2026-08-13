@@ -149,5 +149,29 @@
     "drivewayLong": "Loop road plus deep truck court can hold a 3+ truck queue.",
     "buildingCount": "One large warehouse on this parcel; the cleared land to the NE is the (un-built) second building of the Precision Innovation Park master plan, not part of the Tate's parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://en.wikipedia.org/wiki/Tate's_Bake_Shop",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "In Dec 2023 Mondelez moved Tate's into a newly constructed warehouse and distribution development in Shirley (cites LIBN, Winzelberg 2023-12-05)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Mondelez/Tate's occupies the new Shirley warehouse/distribution facility (Precision Innovation Park, 111 Precision Dr) since Dec 2023; framed as a developer-built development Tate's expanded into (leased); no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

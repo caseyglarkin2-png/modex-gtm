@@ -128,5 +128,36 @@
     "urbanRural": "South-metro-Atlanta industrial corridor along S Main St / GA-54 with continuous development - Urban.",
     "siteArea": "Perimeter box ~24 acres covering the building, truck courts, trailer parking and car parking. Approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.theshippersgroup.com/links/2212-jonesboro-georgia-best-warehouse-3pl-4pl/resources/4646-jonesboro-georgia-best-warehouse-3pl-4pl",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "The Shippers Group lists its Jonesboro GA food-grade warehouse at 9250 S Main St (~500,000 SF, 28 dock doors, rail-served)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/shippers-warehouse-jonesboro",
+        "date": "2025-09",
+        "type": "locator",
+        "claim": "Shippers Warehouse listed/updated Sept 2025 at 9250 S Main St, Jonesboro GA 30236"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TSG self-attests the exact 9250 S Main St Jonesboro warehouse; SF/dock/rail specs match; current per 2025 listings + Aug-2025 Street View TSG signage; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

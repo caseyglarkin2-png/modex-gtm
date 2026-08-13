@@ -125,5 +125,36 @@
     "railServed": "No rail spur runs into the property; River Ridge has rail elsewhere but not to this building.",
     "siteAreaAcres": "~39 acres for the building parcel including the SE truck yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kenco-strengthens-e-commerce-offering-opens-centrally-based-fulfillment-center-to-serve-growing-market-sector/",
+        "date": "2020-07",
+        "type": "press",
+        "claim": "Kenco opened a leased River Ridge (Jeffersonville) facility scalable to over 660,000 SF"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.riverridgecc.com/companies/kenco-group/",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "River Ridge Development Authority lists Kenco operating two logistics buildings on the Jeffersonville side"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco operates two River Ridge buildings (idx 1 + this adjacent second building); active operation through 2024-2026; no closure found. (Kenco Indianapolis closure is a different facility.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

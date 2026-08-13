@@ -165,5 +165,36 @@
     "multipleFacilities": "Multiple connected/adjacent building masses: the main bakery, the SE dock building, and ancillary structures.",
     "scale": "No truck scale clearly identified; left low-confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/search-jobs/Portland%2C%20OR/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Mondelez 'Portland Bakery' production/maintenance/QA reqs (100 NE Columbia Blvd), current hiring"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.opb.org/article/2022/02/07/mondelez-workers-at-portlands-nabisco-plant-say-theyre-forced-to-work-overtime-with-little-notice-or-face-penalties/",
+        "date": "2022-02-07",
+        "type": "press",
+        "claim": "Mondelez operating the Nabisco bakery on NE Columbia Blvd making Oreo/Ritz/Chips Ahoy"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "The 'closed 2023' premise is FALSE (conflated with Fair Lawn NJ and Atlanta GA closures); Portland is a retained core US biscuit bakery with active 2025-2026 careers reqs and no WARN/closure source.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

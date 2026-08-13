@@ -130,5 +130,29 @@
     "fastLaneOpportunity": "Wide entrance apron off the highway with room for additional lanes",
     "siteAreaAcres": "Derived from perimeter box ~1060m N-S x ~700m E-W of fenced/cleared area"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/news/campbells-expands-maxton-site-to-fuel-growth-in-soup-and-broth/",
+        "date": "2026-06-11",
+        "type": "press",
+        "claim": "Completed 88,000-sq-ft Maxton expansion with two new aseptic lines (+20% capacity, ~100 jobs); plant operating since 1979 for soup/broth."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's own newsroom (days old) confirms active operation plus a just-completed aseptic expansion; zero negative signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

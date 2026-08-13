@@ -163,5 +163,36 @@
     "trailerParkingCapacity": "~200 — the yard is mostly open gravel/paved and could hold a large number of trailers/chassis/containers; honest estimate.",
     "urbanRural": "Inside the west-Columbus industrial fabric (43228, I-270/I-70 corridor) — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+        "date": "2026-03",
+        "type": "10-K",
+        "claim": "ULH owns terminal yards including Columbus, Ohio (Item 2 Properties, FY2025)"
+      },
+      {
+        "tier": 3,
+        "url": "https://cdllife.com/jobslist/696aafe04a5a01000284248f/columbus-ohio",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "ULH hiring CDL-A intermodal drivers at 2950 International St, Columbus OH 43228"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Columbus appears as a ULH-owned terminal yard in both FY2024 and FY2025 10-Ks, corroborated by 2026 hiring at the exact address; 2025 impairment is accounting, not a closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

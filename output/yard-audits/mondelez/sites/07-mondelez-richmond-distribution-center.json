@@ -137,5 +137,36 @@
     "urbanRural": "Edge-of-metro location: industrial park amid woods and farmland south of the airport, bordered by rural residential. Judged Rural per the small-town/edge-of-town rule.",
     "yardMetrics": "Imagery is recent and clear; trailer and dock counts are honest overhead estimates and may vary."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/mondelez-international-celebrates-grand-opening-of-new-regional-supply-chain-distribution-center-in-virginia/",
+        "date": "2022-12-06",
+        "type": "press",
+        "claim": "Kenco's own press: Sandston VA facility operated by Kenco Logistics for Mondelez"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.bakingbusiness.com/articles/57959-new-mondelez-distribution-hub-opens-in-virginia",
+        "date": "2022-12",
+        "type": "press",
+        "claim": "Mondelez regional DC in Sandston VA, Kenco-operated, $122.5M Henrico investment"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco corporate press plus building owner both name Mondelez at the Sandston/S Airport Dr build-to-suit DC operated by Kenco 3PL; closure gauntlet clean. (Strongest Tier-1 is Dec 2022, just outside 24mo, but it is the operating arrangement.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

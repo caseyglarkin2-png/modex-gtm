@@ -137,5 +137,36 @@
     "siteAreaAcres": "Derived from perimeter box ~580m N-S x ~770m E-W.",
     "locationResolution": "Roster coordinates (APPROXIMATE) landed in residential Willard; web search located plant at 3320 State Route 103 E. Confirmed by satellite."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Campbells/Job/AVP,-Site-Operations-Multi-Site/-in-Willard,OH",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Campbell's recruiting AVP Site Operations at its Willard OH site (current Campbell-operated facility)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-to-expand-goldfish-production-capacity-with-160-million-investment-in-richmond-utah-bakery/",
+        "date": "2023-07-25",
+        "type": "press",
+        "claim": "Campbell names Willard OH among its Goldfish capacity-expansion bakeries."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Willard OH is Campbell/Pepperidge Farm's primary Goldfish bakery (~800 employees), active site-leadership hiring; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

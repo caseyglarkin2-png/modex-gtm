@@ -148,5 +148,36 @@
     "urbanRural": "Edge-of-metro industrial-outdoor-storage zone in Garden City, on the western fringe of the Savannah port area — surrounded by trailer-storage yards and woods, not dense urban fabric. Rural per the rubric's small-town-industrial guidance.",
     "scale": "No truck scale positively identified — flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+        "date": "2026-03",
+        "type": "10-K",
+        "claim": "ULH owns terminal yards including Savannah, Georgia (Item 2 Properties, FY2025, as of 2025-12-31)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/Jobs/Universal-Intermodal/--in-Georgia",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Universal Intermodal actively hiring company drivers/owner-operators in Georgia (Savannah/Garden City)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "ULH owns the Savannah/Garden City terminal (6052 Commerce Court), operated as Universal Intermodal / Mason Dixon, named in the FY2025 10-K with active 2025 hiring. Flag: $81.2M Q3-2025 intermodal impairment + potential divestiture talk; retained in post-impairment 10-K.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

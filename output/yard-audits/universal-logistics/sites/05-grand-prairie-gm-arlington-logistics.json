@@ -123,5 +123,36 @@
     "railServed": "No rail spur enters the property -> false.",
     "siteAreaAcres": "~62 acres for the two-building campus parcel including dock aprons and parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/q-universal-logistics-l-grand-prairie,-tx-jobs.html",
+        "date": "2025",
+        "type": "press",
+        "claim": "Universal Logistics actively hiring warehouse associates in Grand Prairie TX"
+      },
+      {
+        "tier": 3,
+        "url": "https://truckmap.com/place/universal-gm-2305-w-marshall-dr-grand-prairie-tx-75051-usa",
+        "date": "2025",
+        "type": "locator",
+        "claim": "'Universal & GM' operating site at 2305 W Marshall Dr; consignee for GM Arlington components per import records"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Current ULH Grand Prairie hiring + documented 'Universal & GM' Arlington-logistics site; GM Arlington Assembly active; no WARN/closure. No address-specific Tier-1, so corroboration-based.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

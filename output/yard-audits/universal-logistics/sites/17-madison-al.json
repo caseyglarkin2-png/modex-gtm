@@ -129,5 +129,36 @@
     "urbanRural": "The plant sits in open farmland on the edge of the Greenbrier/Huntsville logistics corridor, surrounded by fields — Rural.",
     "geofences": "Perimeter captures the developed plant footprint — buildings, west drop yards, north warehouse, and employee parking: ~857 m N-S x ~916 m E-W ≈ 194 acres (the overall parcel is larger; the box is the operational/developed area). truckGate box is the north checkpoint."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+        "date": "2025-03",
+        "type": "10-K",
+        "claim": "ULH delivers value-added contract logistics inside ~54 customer-provided facilities; automotive = 47% of revenue (confirms captive-in-customer-plant model)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.polaris.com/en-us/locations/huntsville-al/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Polaris Huntsville/Madison AL plant active in 2026 (Slingshot + RANGER); the 2025 Polaris closure was Osceola WI, not Madison AL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Polaris Madison plant confirmed operating in 2026 (closure risk cleared); Universal's captive inbound-logistics role fits ULH's 10-K customer-facility model and was historically address-attested, but lacks a fresh current re-confirmation, flagged medium.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

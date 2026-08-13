@@ -112,5 +112,36 @@
     "scale": "No truck scale visible.",
     "railServed": "No rail spur enters the property (despite the park's proximity to the CSX North Baltimore railyard)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ttnews.com/articles/dhl-run-new-44-million-campbell-soup-logistics-hub",
+        "date": "2017-08",
+        "type": "press",
+        "claim": "DHL Supply Chain to operate Campbell Soup's new $44M, 740,000 sqft Findlay OH distribution center."
+      },
+      {
+        "tier": 1,
+        "url": "https://truckmap.com/place/dhl-supply-chain-1000-campbell-dr-findlay-oh-45840-usa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DHL Supply Chain located at 1000 Campbell Dr, Findlay OH 45840 (the Campbell's DC address)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's-owned DC operated by DHL Supply Chain as 3PL; address occupancy confirms active operation; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

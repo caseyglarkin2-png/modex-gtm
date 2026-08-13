@@ -112,5 +112,36 @@
     "railServed": "No rail spur enters the property.",
     "status": "Yelp marks the retail/outlet listing as CLOSED, but 2026 Maxar satellite imagery shows an active operation - trailers backed into docks, process equipment running. Audited as an operating facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.thecampbellscompany.com/us/en/job/Req-57152/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active 'Production Helper BU Bakery' job opening at Campbell's bakery in Lakeland FL 33805."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.foodbusinessnews.net/articles/22706-pepperidge-plant-to-restart-goldfish-production",
+        "date": "2022",
+        "type": "press",
+        "claim": "Campbell Snacks brought Goldfish baked-cracker production back to its Lakeland bakery on strong demand."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's careers site lists active Lakeland bakery production jobs; no WARN/closure; Yelp 'CLOSED' is an uncitable aggregator artifact.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

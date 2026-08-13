@@ -137,5 +137,26 @@
     "urbanRural": "Wilmer is a small town SE of Dallas off I-45; the site sits in an edge-of-town logistics district bordered by farmland - classified Rural.",
     "siteAreaAcres": "Published figure is ~57 acres; the perimeter box yields ~60 - consistent within estimate tolerance."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.theshippersgroup.com/links/2211-wilmer-texas-best-warehouse-3pl-4pl/resources/4648-wilmer-texas-best-warehouse-3pl-4pl",
+        "date": "2026-06",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "25-kenco-the-shippers-group-wilmer-tx** — Kenco / The Shippers Group (500 S Millers Ferry Road, Wilmer TX) — REJECTED: wrong building. The pack conflated two separate Wilmer warehouses. TSG/Kenco's real Wilmer facility is **201 Sunridge Blvd** (822,000 SF — the very figure the pack cites); the audited **500 S Millers Ferry Rd is a separately-listed Whirlpool Distribution Center** with no source confirming TSG/Kenco operates that exact building. Exact-address operation unproven. SALVAGEABLE by re-pointing this site to 201 Sunridge Blvd and re-auditing. [Tier 1: https://www.theshippersgroup.com/links/2211-wilmer-texas-best-warehouse-3pl-4pl/resources/4648-wilmer-texas-best-warehouse-3pl-4pl, 2026-06]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/kenco-logistics-services/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

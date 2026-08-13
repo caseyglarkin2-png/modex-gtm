@@ -155,5 +155,43 @@
     "railServed": "An active rail line runs immediately along the NE property edge but no spur enters the property; building is not rail-served.",
     "siteAreaAcres": "~68 acres for the fenced industrial parcel (excludes the adjacent public park strip on the west side)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://gmauthority.com/blog/2023/07/gm-to-open-ev-parts-warehouse-near-factory-zero-plant-in-michigan/",
+        "date": "2023-07",
+        "type": "press",
+        "claim": "GM owns the 793,520 sq ft warehouse at 14250 Plymouth Rd; operated by Logistics Insight Corp (LINC, a ULH affiliate); feeds Factory Zero EV programs"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.crainsdetroit.com/manufacturing/gm-plans-ev-parts-warehouse-detroit-350-new-jobs",
+        "date": "2023-07",
+        "type": "press",
+        "claim": "GM EV parts warehouse at former AMC site, 14250 Plymouth Rd, ~350 jobs, staffed by a ULH affiliate"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/co/Logistics-Insight/Jobs/-in-Detroit,MI",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "LINC actively hiring forklift/warehouse roles in Detroit MI as of Dec 2025"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned building, LINC-operated since ~2024 opening, still hiring late 2025; no closure, but Factory Zero EV-volume cuts are a live program-durability risk.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

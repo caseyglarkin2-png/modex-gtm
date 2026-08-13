@@ -160,5 +160,36 @@
     "trailerParkingCapacity": "~350 — the yard is a very large open gravel lot capable of holding a large number of trailers/chassis/containers; honest estimate.",
     "urbanRural": "Inside the Memphis metro industrial fabric (38118, Lamar Ave / Outland Rd intermodal corridor near the airport) — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/viewjob?jk=910e6baffbb828a4",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "ULH / Universal Intermodal hiring CDL-A intermodal driver onsite at '4014 Outland Road, Memphis, TN 38118' verbatim"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+        "date": "2025-03",
+        "type": "10-K",
+        "claim": "ULH owns terminal yards including Memphis, TN (Item 2 Properties, FY2024)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 2025-2026 careers postings name 4014 Outland Rd verbatim as the Universal Intermodal onsite location; FY2024 10-K lists Memphis as an owned terminal yard; Q3-2025 charge is a valuation writedown, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -111,5 +111,36 @@
     "railServed": "Multi-track rail mainline runs along the north property edge but no spur enters the property; not rail-served.",
     "confidence": "Building positively confirmed - a Campbell's-marked box truck and building 425 signage visible in Street View; Pepperidge Farm Downingtown plant at 421 Boot Road."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.inquirer.com/philly/business/20110116_Campbell_Soup_marks_50_years_as_Pepperidge_Farm_s_parent.html",
+        "date": "2011-01",
+        "type": "press",
+        "claim": "Pepperidge Farm operates its own plants 'including those in Downingtown and Denver, Pa.', where Goldfish are baked."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/Jobs/Pepperidge-Farm/-in-Downingtown,PA",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active Pepperidge Farm production job postings at the Downingtown PA bakery (24/7 ops) as of May 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Closure gauntlet clean; current (May 2026) active 24/7 production hiring confirms the small Downingtown bakery is still live.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

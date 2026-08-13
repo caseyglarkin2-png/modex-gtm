@@ -138,5 +138,36 @@
     "railServed": "No rail spur enters the property.",
     "confidence": "High - facility positively confirmed by address and the May 2024 LIXIL/Kenco announcement; ROOFTOP-accurate coords verified on current imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/lixil-americas-selects-kenco-to-manage-ohio-distribution-center/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "Kenco selected to manage LIXIL Americas 906,000 SF Groveport OH DC"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.businesswire.com/news/home/20240515012544/en/LIXIL-Americas-Selects-Kenco-to-Manage-Ohio-Distribution-Center",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "LIXIL/Kenco BusinessWire announcement naming the 906,000 SF Groveport DC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco press + BusinessWire (May 2024) confirm Kenco manages the 906,000 SF LIXIL Americas DC at 3099 Rohr Rd, Groveport; within 24 months; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

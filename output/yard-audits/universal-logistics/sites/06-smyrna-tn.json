@@ -122,5 +122,36 @@
     "urbanRural": "Smyrna TN is a small town; the facility sits in an edge-of-town industrial setting beside the Nissan plant with farmland/woods to the west and south. Classified Rural per the rubric tie-break.",
     "railServed": "No rail spur enters the property; CSX line runs east of the Nissan plant but does not serve this warehouse. railServed = false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hrone.wd1.myworkdayjobs.com/en-US/Universal_Logistics_Holdings/job/UD-SMYRNA-TN/SMYRNA-SWITCHER_JR107061",
+        "date": "2026",
+        "type": "press",
+        "claim": "Active ULH Workday 'Smyrna Switcher' req at UD-SMYRNA-TN"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/CLASS-A-CDL-SMYRNA-SWITCHERS/-in-Smyrna,TN?jid=d38eca8ad2a2a31f",
+        "date": "2026",
+        "type": "press",
+        "claim": "ULH CDL-A yard switchers explicitly at 200 Sam Griffin Rd, Smyrna TN 37167"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple current ULH careers reqs name 200 Sam Griffin Rd (Nissan ILC); no closure/contract-loss signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -87,5 +87,33 @@
     "entryLanes": "null - no truck gate exists.",
     "urbanRural": "Dense urban core (Fulton Market, Chicago) - unambiguously Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://rejournals.com/mondelez-international-leaving-the-suburbs-headed-to-chicagos-fulton-market/",
+        "date": "2019",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.mondelezinternational.com/contact-us/",
+        "date": "2026",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "18-chicago-il** — Mondelez Global Headquarters (905 W Fulton Market, Chicago IL 60607) — REJECTED: NON-FREIGHT OFFICE. Currently Mondelez-operated global HQ, but a leased 5-story downtown office building with no yard, dock bank, or trailer parking. Non-freight corporate office per the rubric. [Tier 1: https://rejournals.com/mondelez-international-leaving-the-suburbs-headed-to-chicagos-fulton-market/, 2019] [Tier 1: https://www.mondelezinternational.com/contact-us/, 2026]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/mondelez-international/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

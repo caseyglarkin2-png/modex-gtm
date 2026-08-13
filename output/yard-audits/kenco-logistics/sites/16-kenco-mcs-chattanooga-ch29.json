@@ -140,5 +140,36 @@
     "railServed": "A rail line runs through the broader Enterprise Park area but no spur enters this building's parcel.",
     "urbanRural": "Inside the Chattanooga metro within the Enterprise Park / Enterprise South industrial fabric - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Kenco-Group/locations/TN/Chattanooga",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kenco Logistics Services actively staffing 100+ Chattanooga warehouse roles (incl. zip 37416) as of June 2026"
+      },
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/tag/chattanooga-tn/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kenco presents Chattanooga as a current operating market / top-area logistics employer"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CH29 is an internal Kenco code with no public address-to-code mapping; specific building cannot be pinned, but Kenco still operates the Enterprise Park Dr cluster (the 2022 $67.1M sale was a Kenco-affiliate sale-leaseback to Northstar, not an exit). Probable, capped on building identity.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

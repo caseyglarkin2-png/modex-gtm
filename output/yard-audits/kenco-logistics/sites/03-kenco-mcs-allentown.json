@@ -125,5 +125,36 @@
     "trailersVisible": "~6 trailers/equipment counted at the NW dock apron; approximate.",
     "trailerParkingCapacity": "Estimated 12; small open court, low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/allentown/",
+        "date": "2023-10",
+        "type": "locator",
+        "claim": "Kenco's own site lists an MCS - Allentown facility location"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.chamberofcommerce.com/business-directory/pennsylvania/allentown/storage-facility/2030779165-kenco-logistics",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "Kenco Logistics active at 6975 Ambassador Dr, Allentown PA 18106"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco self-attests an Allentown MCS on its own locator; operating address corroborated; no closure signal. (Pack SF-discrepancy caveat unchanged.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

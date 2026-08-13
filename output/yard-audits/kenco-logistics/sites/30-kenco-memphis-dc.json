@@ -122,5 +122,26 @@
     "backupSensitive": "The site sits at a busy multi-lane intersection (Democrat Rd), but the dock court is set well back with ample internal stacking room, so backupSensitive=false.",
     "urbanRural": "Dense Memphis industrial district near Lamar Ave / Democrat Rd - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencodistributors.com/",
+        "date": "2026-06",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "30-kenco-memphis-dc** — Kenco Memphis DC (3346 Democrat Drive, Memphis TN) — REJECTED: identity mismatch / name collision. The address is the HQ of **KenCo Distributors Inc**, an unrelated Nashville-based building-materials wholesaler (drywall/insulation/steel/flooring), NOT Kenco Logistics Services / Kenco Group the 3PL. Kenco Group's own warehousing map lists no Memphis facility. Address resolves to a different company. [Tier 1: https://kencodistributors.com/, 2026-06; https://kencogroup.com/warehousing-map/, 2026-06] ## Probable (capped, low-confidence — kept, flag for human review)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/kenco-logistics-services/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

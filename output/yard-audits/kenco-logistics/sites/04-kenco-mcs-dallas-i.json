@@ -157,5 +157,36 @@
     "trailersVisible": "~25 trailers counted in dock aprons / drop yards; drop yards largely empty in this imagery, approximate.",
     "trailerParkingCapacity": "~160 estimated from the large striped W and S drop yards; low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kencos-turnkey-management-solution-will-support-walker-edisons-ongoing-e-commerce-growth/",
+        "date": "2022-01",
+        "type": "press",
+        "claim": "Kenco awarded the Walker Edison DeSoto/Dallas DC, managed turnkey by Kenco (facility, MHE, WMS, personnel)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.gordonhighlander.com/project/kenco/",
+        "date": "2022",
+        "type": "press",
+        "claim": "Gordon Highlander built the ~490,000 SF Kenco/Walker Edison DC at 2119 N I-35E Service Rd, DeSoto"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco self-attests turnkey 3PL operation of the Walker Edison DeSoto DC at the exact address; no closure/contract-loss signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -180,5 +180,36 @@
     "trailersVisible": "~75 trailers counted across the N and S drop yards / dock aprons; approximate.",
     "trailerParkingCapacity": "~170 estimated from the striped N and S drop yards; low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kenco-logistics-opens-new-multi-client-distribution-center/",
+        "date": "2021-05",
+        "type": "press",
+        "claim": "Kenco newsroom announces its new multi-client DC at Perris Logistics Center, 3900 Indian Avenue"
+      },
+      {
+        "tier": 3,
+        "url": "https://iebizjournal.com/newmark-knight-frank-represents-kenco-in-579708-square-foot-lease-transaction-in-perris-ca/",
+        "date": "2019-06",
+        "type": "press",
+        "claim": "Kenco 579,708 SF lease at 3900 Indian Avenue, Perris CA (Clarion Partners landlord; Kenco tenant)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco self-attests operating the 3900 Indian Avenue Perris DC; leased from REIT landlord (owner != operator, OK); no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

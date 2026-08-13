@@ -152,5 +152,36 @@
     "urbanRural": "Edge-of-town Racine County business park (Sturtevant/Mount Pleasant); farmland and open fields immediately south and west. Small-town industrial setting -> Rural per rubric.",
     "scale": "No truck scale visible in the truck path."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.facebook.com/DriveUniversal/posts/4243706279024009/",
+        "date": "2024",
+        "type": "press",
+        "claim": "LINC hiring warehouse associates at 7100 Durand Ave, Sturtevant WI 53177"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.crexi.com/lease/properties/983727/wisconsin-7100-durand-ave",
+        "date": "2025-07",
+        "type": "press",
+        "claim": "~300,410 of 601,160 sq ft VACANT, about half the building marketed for lease"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "LINC-branded hiring + CNH trade records place LINC at 7100 Durand, but the CNH ag program is winding down and ~half the building is now for lease, active but contracting; scale unproven.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

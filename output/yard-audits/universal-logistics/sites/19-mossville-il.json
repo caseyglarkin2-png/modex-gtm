@@ -134,5 +134,26 @@
     "urbanRural": "Edge-of-river-bluff rural setting — farmland surrounds the complex on the west/north; Illinois River and a small residential strip on the SE across IL-29. Rural.",
     "scale": "No truck scale positively identified — flagged uncertain given the campus scale."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+        "date": "2026-03",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "19 Universal Logistics - Mossville Contract Logistics Warehouse (Mossville IL, Caterpillar Mossville plant, 1900 E Old Galena Rd)** — REJECTED: no discrete ULH-operated building verifiable. ULH contract logistics is embedded inside the Caterpillar Mossville engine/manufacturing complex (customer-provided location); mapped onto the customer's plant, not a discrete ULH facility. [Tier 1: https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm, 2026-03 ; Tier 1: https://www.indeed.com/cmp/Universal-Logistics-Holdings-Inc./locations/IL/Mossville, 2026]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

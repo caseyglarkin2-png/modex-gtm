@@ -140,5 +140,29 @@
     "siteAreaAcres": "Derived from perimeter box ~755m N-S x ~370m E-W.",
     "locationResolution": "Roster coordinates (RANGE_INTERPOLATED) landed in central/south Richmond; web search located plant at 901 N 200 W. Confirmed by satellite ~41.9388,-111.8165."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-to-expand-goldfish-production-capacity-with-160-million-investment-in-richmond-utah-bakery/",
+        "date": "2023-07-25",
+        "type": "press",
+        "claim": "Campbell investing $160M in its Richmond UT bakery (+50% Goldfish); facility has made Pepperidge Farm products 50 years, new line operational by end of 2024."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's press release confirms active 50-year Richmond UT bakery + fresh $160M Goldfish expansion; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

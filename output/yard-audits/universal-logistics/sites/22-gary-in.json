@@ -93,5 +93,26 @@
     "resolutionFlag": "FLAGGED FOR HUMAN REVIEW — the Universal Intermodal Gary IN terminal/container-yard has no findable public street address or imagery. All classification fields and yard metrics are unknown placeholders. This site needs a verified address (e.g. from internal ULH property records) before it can be audited.",
     "urbanRural": "Gary IN sits inside the Chicago-metro / Northwest Indiana industrial belt — Urban (best-guess, unconfirmed)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+        "date": "2026-03",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "22 Universal Intermodal Services - Gary Terminal (Gary IN, no address)** — REJECTED: unlocatable. The FY2025 10-K names Gary IN among owned terminal-yard cities, but no findable public street address or imagery exists for a Universal Intermodal Gary terminal (FMCSA shows only the Warren MI corporate address; loadmatch/IANA directories show no Gary IN Universal terminal). The pack itself flagged it unresolved; anchor coords are a placeholder. [Tier 1: https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm, 2026-03] ## Probable / low-confidence (kept, flagged — controller may want to cap or drop)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

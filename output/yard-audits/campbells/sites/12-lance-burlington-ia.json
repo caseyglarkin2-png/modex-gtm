@@ -153,5 +153,26 @@
     "railServed": "A rail mainline runs along the NW edge of the property but no spur enters; railServed false.",
     "confidence": "Medium - the plant is positively identified and the open-access (no gate/no guard) determination is confident from Street View, but dock/trailer counts are difficult to read from overhead and the ownership is a notable data discrepancy."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://en.wikipedia.org/wiki/Snyder%27s-Lance",
+        "date": "2014",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "Lance - Burlington IA** (12-lance-burlington-ia; ~40.8277, -91.1395) — REJECTED: not Campbell's-operated. Snyder's-Lance divested its private-label business, including the Burlington, Iowa plant (and Cambridge, Ontario), to **Shearer's Foods** for ~$430M in **2014** — four years BEFORE Campbell's acquired Snyder's-Lance (2018). The plant still operates today, but as a Shearer's Foods facility, not Campbell's. Campbell's never operated this site. [Tier 2: https://en.wikipedia.org/wiki/Snyder%27s-Lance, 2014] [Tier 2 (current operator): https://en.wikipedia.org/wiki/Shearer%27s_Foods — Shearer's lists Burlington IA among its current manufacturing plants, 2026-06] ## Notes / traps cleared (NOT rejected — flagged for the controller)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/campbell-s/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

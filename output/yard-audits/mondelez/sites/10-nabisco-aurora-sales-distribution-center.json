@@ -162,5 +162,36 @@
     "postGateStaging": "Open east truck court inside the property functions as a holding/queue area before the docks.",
     "truckGateCount": "Two driveway entrances to the east truck court observed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/driver-cdl-warehouse-associate/job/R-102634",
+        "date": "2026-02",
+        "type": "careers",
+        "claim": "Active Mondelez req (R-102634, posted 2026-02-19) at exactly 17689 East 30th Ave, Aurora, CO 80011"
+      },
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/warehouse-associate/job/R-143906",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active Mondelez Warehouse Associate req (R-143906) at the Aurora, CO 80011 facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Two active Mondelez careers reqs (Feb/May 2026) name the exact address; closure gauntlet surfaced only a 2021 strike (confirms operation).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

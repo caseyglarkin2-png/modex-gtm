@@ -141,5 +141,36 @@
     "scale": "No truck scale visible.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-completes-acquisition-of-sovos-brands-inc/",
+        "date": "2024-03-12",
+        "type": "press",
+        "claim": "Campbell completed acquisition of Sovos Brands (Rao's, Michael Angelo's, noosa) for ~$2.7B; placed in Distinctive Brands unit."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/Jobs/Michael-Angelo-S/-in-Austin,TX",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Michael Angelo's production/packaging jobs in the Austin TX area 2025-2026, indicating an operating plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's owns Michael Angelo's via Sovos (closed Mar 2024); Austin plant actively hiring; Texas closure noise is the Paris TX soup plant, not Austin.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

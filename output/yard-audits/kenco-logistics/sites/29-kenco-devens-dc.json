@@ -128,5 +128,36 @@
     "connectivityIssue": "Devens has an established commerce park with surrounding development and good infrastructure; not isolated. connectivityIssue=false.",
     "siteArea": "Perimeter box ~13.5 acres covering the building, SW dock court, SE apron and car parking. Approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.freightwaves.com/news/logistics-in-the-walls",
+        "date": "2019-03",
+        "type": "press",
+        "claim": "USG selected Kenco to manage a distribution center for inbound gypsum serving the Boston market; Kenco runs the USG-Devens operation"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/kencos-usg-boston-ayer",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "'Kenco's USG Boston' at 50 Independence Dr, Devens MA - listing updated January 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco operates the USG gypsum DC at 50 Independence Dr, Devens MA ('Kenco's USG Boston'); still listed/updated Jan 2026; no closure or contract-loss signal. Long-standing contract (maturity caveat).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -97,5 +97,26 @@
     "recommendation": "Flagged for human review. Resolve by obtaining the exact street address from Kenco directly, then re-running the deep audit. Most-probable target: 300 Interstate West Parkway, Lithia Springs/Austell GA.",
     "urbanRural": "If located in the Interstate West Parkway or Six Flags Road industrial parks, the setting is suburban metro-Atlanta industrial - classified Urban, but unverified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/mcs-georgia/",
+        "date": "2024-02",
+        "type": "rejection evidence",
+        "claim": "operator/location evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "08-kenco-mcs-georgia-i** — Kenco MCS Georgia I (Austell GA 30168) — REJECTED: facility never positively located. Roster supplied only city/zip (geocode landed on apartments). Kenco self-lists an address-less \"MCS - Georgia I\" page and hires in Lithia Springs GA, so a Kenco-operated Atlanta building very likely exists, but no public source pins the EXACT building; the probed candidate 7875 White Rd SW is a DIFFERENT operator (Atlanta Bonded Warehouse). No positive found after genuine search. [Tier 1: https://kencogroup.com/kenco_locations/mcs-georgia/, 2024-02 — exists but no street address]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/kenco-logistics-services/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "transcribed by hand: the automated matcher found 2 candidate blocks because record 09 references \"Georgia I\" in its own rationale, so it correctly refused to guess"
+    }
+  }
 }

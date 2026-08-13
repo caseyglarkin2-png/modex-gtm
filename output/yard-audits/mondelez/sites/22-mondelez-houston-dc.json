@@ -155,5 +155,33 @@
     "geofences": "Perimeter captures the geocoded building and its north truck-yard share: ~200 m N-S x ~160 m E-W ≈ 7.9 acres. The truck yard is shared with the neighboring building's tenants.",
     "railServed": false
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2024005770",
+        "date": "2024-05",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.lanefinder.com/c/tgc_logistics/3343220",
+        "date": "2024",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "22-mondelez-houston-dc** — Mondelez Houston DC (6903 W Sam Houston Pkwy N, Houston TX 77041) — REJECTED: DIFFERENT OCCUPANT / MONDELEZ HAS LEFT. The current occupant is Tokyo Gardens Company (TGC Sushi / TGC Logistics) per a 2024 TDLR $2.2M office-buildout permit and FMCSA carrier registration at the address; the building was sold (new owner GOLEE GROUP LLC). The only remaining Mondelez signals are undated aggregator stubs. [Tier 2: https://www.tdlr.texas.gov/TABS/Search/Print/TABS2024005770, 2024-05-24] [Tier 2: https://www.lanefinder.com/c/tgc_logistics/3343220, 2024] ## Low-confidence (PROBABLE — flagged, shipped caveated/capped, NOT removed)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/mondelez-international/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

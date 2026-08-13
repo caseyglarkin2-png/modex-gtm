@@ -161,5 +161,29 @@
     "scale": "No truck scale clearly identified; left low-confidence.",
     "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.mondelezinternational.com/united-states/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Mondelez US operations page lists the Naperville IL facility (Mondelez Global LLC, 1555 W Ogden Ave), Triscuit production"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sole NA Triscuit plant; Mondelez Global LLC operates 1555 W Ogden Ave; no closure/sale/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

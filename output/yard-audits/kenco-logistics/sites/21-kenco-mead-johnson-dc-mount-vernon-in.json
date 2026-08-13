@@ -119,5 +119,26 @@
     "urbanRural": "Edge-of-town along Highway 62 E surrounded by farmland; classified Rural.",
     "multipleFacilities": "The racetrack-shaped tank/manufacturing complex to the SW is the separate Mead Johnson Mount Vernon manufacturing plant, not part of this DC parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.reckitt.com/media-landing/press-releases/2024/mead-johnson-nutrition-tornado-damage-to-mount-vernon-indiana-warehouse/",
+        "date": "2024-07",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "21-kenco-mead-johnson-dc-mount-vernon-in** — Kenco Mead Johnson DC (3101 Highway 62 East, Mount Vernon IN) — REJECTED: DESTROYED. An EF-3 tornado (140 mph) struck the Kenco/Mead Johnson DC on **9 Jul 2024**, collapsing the building; Reckitt/Mead Johnson's own release states it is non-operational with deliveries diverted, and 2025-26 imagery shows it razed to a bare slab. Non-operational. [Tier 2: https://www.reckitt.com/media-landing/press-releases/2024/mead-johnson-nutrition-tornado-damage-to-mount-vernon-indiana-warehouse/, 2024-07; NWS/news: https://www.wevv.com/news/indiana/ef-3-tornado-damage-confirmed-at-kenco-facility-in-mt-vernon/article_3db878f8-3efa-11ef-bf7c-f7b311af7a39.html, 2024-07]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/kenco-logistics-services/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

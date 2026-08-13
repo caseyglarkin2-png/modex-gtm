@@ -107,5 +107,36 @@
     "dropYard": "Dedicated trailer-storage rows on the south/southeast side, separate from the active dock aprons.",
     "yardMetrics": "siteAreaAcres ~34 estimated from the perimeter box. trailersVisible/Capacity are honest overhead estimates; the building footprint plus drop yard rows are extensive. railServed false — no spur into the property; nearest rail is well off-site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hrone.wd1.myworkdayjobs.com/wday/cxs/hrone/Universal_Logistics_Holdings/job/LINC-TANNER-AL/CLASS-A-YARD-SWITCHER--Tanner--AL--CP-_JR123191",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "Universal/LINC hiring Class A Yard Switcher at Tanner AL (location code LINC-TANNER), posted 2026-03-10"
+      },
+      {
+        "tier": 2,
+        "url": "https://workforce.alabama.gov/warn-list/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Alabama WARN list shows no Universal/LINC Tanner closure notice"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "LINC has 16+ open Tanner reqs on its official Workday ATS (one posted 2026-03-10), location-coded LINC-TANNER; clean closure gauntlet; Mazda Toyota still in production.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

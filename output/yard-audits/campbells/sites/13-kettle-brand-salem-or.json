@@ -127,5 +127,36 @@
     "solar": "Large rooftop solar array (one of the larger PNW installations, installed 2001) - confirms identity but not operationally relevant to the yard classification.",
     "confidence": "High - facility positively confirmed by Campbell's signage in Street View; open no-gate/no-guard determination is clear. Dock and trailer counts are honest overhead estimates (flagged)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://business.salemchamber.org/list/member/snyder-s-lance-inc-dba-campbell-s-snacks-kettle-brand-salem-22623",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Snyder's-Lance Inc dba Campbell's Snacks (Kettle Brand - Salem) listed as an active manufacturing member of the Salem Area Chamber."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-to-consolidate-potato-chip-production-as-part-of-ongoing-snacks-network-optimization-strategy/",
+        "date": "2026-01-29",
+        "type": "press",
+        "claim": "Jan 2026 potato-chip consolidation closes ONLY Hyannis MA; Salem not named as closing."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Primary Kettle Brand plant, active 2026 hiring; the closed Oregon plant is Tualatin/Pacific Foods (soup/broth), a different facility.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

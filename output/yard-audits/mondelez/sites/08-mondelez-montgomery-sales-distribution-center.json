@@ -161,5 +161,36 @@
     "urbanRural": "Facility sits on a rural two-lane road (Neelytown Rd) surrounded by woods and grass on the edge of Montgomery; clearly Rural.",
     "truckGateCount": "Two distinct driveway entrances observed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://arcodb.com/news/recently-completed-mondelez-distribution-facility-montgomery-ny/",
+        "date": "2019-12",
+        "type": "press",
+        "claim": "ARCO completed a 100,300 SF Mondelez distribution facility in Montgomery NY"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/cmp/Mondel%C4%93z-International-49d8c823/locations/NY",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mondelez self-lists an active Montgomery NY facility location (corroborating only)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: Mondelez built/opened this ~100k SF DC (2019) and still self-lists Montgomery with no closure/WARN/relocation found, but the only Tier-1 is >24mo and there is a 272-vs-525 Neelytown address ambiguity (Mondelez vs UNFI next door).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

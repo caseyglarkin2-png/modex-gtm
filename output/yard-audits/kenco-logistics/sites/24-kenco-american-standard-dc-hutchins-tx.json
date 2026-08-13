@@ -146,5 +146,36 @@
     "railServed": "No rail spur enters the property.",
     "facts": "801 E Wintergreen Rd: ~625,000 SF Dallas-area DC for American Standard Brands (kitchen/bath products); Kenco runs finished-goods distribution, repackaging, toilet-kit packaging, spotter & yard management, contract security, MHE."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.mhlnews.com/transportation-distribution/article/22044863/american-standard-outsources-texas-dc-operations-to-kenco",
+        "date": "2010",
+        "type": "press",
+        "claim": "American Standard Brands awarded Kenco management/operation of its 625,000 SF Hutchins TX DC (801 E Wintergreen), incl. yard/spotter management"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.businesswire.com/news/home/20240515012544/en/LIXIL-Americas-Selects-Kenco-to-Manage-Ohio-Distribution-Center",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "May 2024 LIXIL (American Standard parent) release: Kenco still manages the Hutchins TX DC; 14+ year relationship, given more LIXIL volume"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco operates the ~625k SF Hutchins DC for American Standard Brands (now LIXIL Americas); May 2024 LIXIL release confirms the contract is current and expanding; active 2026 Hutchins hiring; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

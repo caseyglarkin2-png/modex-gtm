@@ -149,5 +149,36 @@
     "railServed": "A rail line runs parallel to Highway 31 E along the east property edge but no spur enters the property.",
     "trailersVisible": "~55 trailers counted across the central drop yard and dock aprons in zoom-19 imagery; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/mcs-jeffersonville-iii/",
+        "date": "2024-02",
+        "type": "locator",
+        "claim": "Kenco's own location directory publishes 'MCS - Jeffersonville III' as a current Kenco facility"
+      },
+      {
+        "tier": 3,
+        "url": "https://buildwithcambridge.com/silver-creek-logistics-center-building-b/",
+        "date": "2022",
+        "type": "econ-dev",
+        "claim": "Silver Creek Logistics Center Building B (7803 Hwy 31 E, Sellersburg) is 417,410 SF built 2022, matching roster 417,270 SF"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco self-attests 'MCS - Jeffersonville III' on its own locator; SF and metro match Silver Creek Bldg B; no closure/contract-loss found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

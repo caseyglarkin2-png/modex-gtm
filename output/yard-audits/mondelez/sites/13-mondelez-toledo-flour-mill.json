@@ -91,5 +91,33 @@
     "multipleFacilities": "TRUE — the site is a campus of multiple distinct structures: the milling building, separate grain-elevator silo banks, warehouse/loadout buildings, and the office.",
     "urbanRural": "Urban — dense East Toledo industrial/residential fabric on the Maumee riverfront."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.foodbusinessnews.net/articles/29295-mennel-milling-completes-acquisition-of-mondelez-flour-mill",
+        "date": "2025-11",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.toledoblade.com/business/agriculture/2025/11/05/mennel-acquires-toledo-flour-mill-from-mondelez-international/stories/20251105107",
+        "date": "2025-11",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "13-mondelez-toledo-flour-mill** — Mondelez Toledo Flour Mill (2221 Front St, Toledo OH 43605) — REJECTED: DIFFERENT OPERATOR. Mondelez SOLD the mill to Mennel Milling; the deal closed Nov 3, 2025. Mennel now owns and operates the mill (it only toll-supplies flour back to Mondelez), so the operator is no longer Mondelez. [Tier 2: https://www.foodbusinessnews.net/articles/29295-mennel-milling-completes-acquisition-of-mondelez-flour-mill, 2025-11] [Tier 2: https://www.toledoblade.com/business/agriculture/2025/11/05/mennel-acquires-toledo-flour-mill-from-mondelez-international/stories/20251105107, 2025-11-05]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/mondelez-international/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

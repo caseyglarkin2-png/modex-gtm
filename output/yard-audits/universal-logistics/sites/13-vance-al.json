@@ -139,5 +139,26 @@
     "_candidate": "The likely operating environment is a value-added/sequencing line inside an MBUSI-owned or supplier-park building (e.g. the Will Walker Road logistics corridor NW of the plant at ~33.184,-87.272, where several large logistics warehouses sit) or a leased warehouse in the Brookwood/Cottondale corridor. coords here point at the Will Walker Rd logistics-warehouse cluster as the best-available area anchor only - NOT a confirmed Universal building.",
     "_classification": "All 22 classification fields are best-guess defaults (no-gate / open-site is typical for OEM supplier-park value-added warehouses, and the corridor is Rural) and must be treated as unverified pending a confirmed address. Geofences and yardMetrics left null/zero because no specific building was locked."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+        "date": "2025-03",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "13 Universal Logistics - Vance Value-Added Facility (Vance AL, no address)** — REJECTED: no discrete operating building verifiable. Only a city-level Indeed/Glassdoor presence near MBUSI; the named MBUSI Vance LSPs are BLG/Penske/Schnellecke/Celadon, not Universal; ULH 10-K Item 2 discloses no Alabama property. Pack already flagged unresolved; anchor coords are a placeholder. [Tier 1: https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm, 2025-03 ; Tier 1: https://www.automotivelogistics.media/mercedes-benz-switches-from-one-to-three-lsps-in-alabama/17357.article, 2017]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

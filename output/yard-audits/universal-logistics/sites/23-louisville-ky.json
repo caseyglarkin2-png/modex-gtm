@@ -158,5 +158,36 @@
     "railServed": "No rail spur runs into this parcel. It is a drayage/cross-dock terminal that trucks containers to/from the nearby CSX Osborn intermodal ramp; rail does not enter the property.",
     "urbanRural": "Inside the Louisville metro industrial fabric (40216 / I-264 corridor) — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gocrown.ws/property/2338-millers-lane/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Crown Enterprises (Moroun, holds ULH real estate) lists 2338 Millers Lane as a 23,591 SF terminal, 46 cross-dock doors, 4.72 acres, exact building match"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.nlrb.gov/case/21-CA-286645",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Names 'Mason-Dixon Intermodal d/b/a Universal Intermodal Services' as a ULH single-employer entity"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Independent sources place the ULH intermodal operator at the exact 46-door Crown-owned building; only 2025 negative is a non-cash impairment, no WARN/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -146,5 +146,36 @@
     "railServed": "No rail spur enters the property; drayage moves are by truck. railServed = false.",
     "urbanRural": "Site sits within the NE Houston metro industrial fabric with adjacent residential subdivision. Classified Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=13091",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Universal Intermodal Services, 7800 E. Little York, Ste. A, Houston TX 77016, exact address match"
+      },
+      {
+        "tier": 3,
+        "url": "https://cdllife.com/jobslist/6883dead9da35e0002827558/houston-texas",
+        "date": "2025",
+        "type": "press",
+        "claim": "ULH/Universal hiring local CDL-A intermodal drivers out of Houston"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact-address directory listing + current Houston intermodal driver req; terminal operating. Flag: ULH intermodal is the most financially stressed segment ($81.2M Q3-2025 impairment).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

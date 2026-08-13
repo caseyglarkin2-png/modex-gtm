@@ -162,5 +162,36 @@
     "railServed": "No rail spur enters the property -> false.",
     "siteAreaAcres": "~95 acres for the fenced campus including the southern gravel trailer yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Non-CDL-Switcher/-in-Romulus,MI?jid=93b75aa49a2ec566",
+        "date": "2025",
+        "type": "press",
+        "claim": "Universal Logistics Holdings hiring Non-CDL Switcher at 29129 Ecorse Rd, Romulus MI"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/viewjob?jk=0b400e7f4a06ebb7",
+        "date": "2025",
+        "type": "press",
+        "claim": "Hi-Lo/forklift role, Romulus MI 48174, active value-added/warehouse ops"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Multiple current ULH job reqs tied to the exact address (yard switcher, hi-lo, dock); no closure or re-tenant negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

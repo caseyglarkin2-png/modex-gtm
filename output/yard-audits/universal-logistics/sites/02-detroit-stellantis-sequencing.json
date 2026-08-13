@@ -137,5 +137,26 @@
     "railServed": "A rail line runs along the west edge of the campus with old/abandoned spurs but no live spur servicing the building -> railServed false.",
     "siteAreaAcres": "~58 acres for the main fenced operation including the immediate trailer yards."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.crainsdetroit.com/manufacturing/moroun-owned-universal-logistics-lay-677-detroit",
+        "date": "2024-04",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "02 Logistics Insight Corp - Stellantis Sequencing Plant (Detroit MI, 6836 Georgia St)** — REJECTED: confirmed PERMANENT CLOSURE. ULH announced closure of Logistics Insights Corp + Universal Dedicated of Detroit (677 layoffs) at the ~1M sq ft auto-parts sequencing plant; Stellantis pulled the Jeep Grand Cherokee sequencing contract and moved it to a nonunion operator; layoffs began Feb 18, 2025. The pack's own WARN flag is verified correct. [Tier 2: https://www.crainsdetroit.com/manufacturing/moroun-owned-universal-logistics-lay-677-detroit, 2024-04 ; Tier 2: https://moparinsiders.com/detroit-warehouse-serving-stellantis-to-close/, 2025-01]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

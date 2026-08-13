@@ -161,5 +161,33 @@
     "fastLaneOpportunity": "TRUE — a vast paved yard and wide gate apron leave abundant room for express/bypass lanes.",
     "urbanRural": "Edge-of-Aurora industrial area bordered by retention ponds, light industrial, and open land; judged Rural per the small-town-industrial tie-break."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.showcase.com/2380-sullivan-rd-aurora-il-60506/30754125/",
+        "date": "2025",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.linklogistics.com/industrial-properties/il/aurora/2380-sullivan-rd-aurora-il-60506-00100/",
+        "date": "2025",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "15-mondelez-aurora-distribution-center** — Mondelez Aurora DC (2380 Sullivan Rd, Aurora IL 60506; DHL/Exel-operated) — REJECTED: VACATED / ON THE MARKET FOR LEASE. The exact-address ~530k SF cold-chain DC is marketed available (coming available July 2025) by the landlord (Link Logistics), indicating DHL/Mondelez wound down or vacated operations. Surviving \"DHL Mondelez\" aggregator pages are stale Tier-3. [Tier 2: https://www.showcase.com/2380-sullivan-rd-aurora-il-60506/30754125/, 2025] [Tier 2: https://www.linklogistics.com/industrial-properties/il/aurora/2380-sullivan-rd-aurora-il-60506-00100/, 2025]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/mondelez-international/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

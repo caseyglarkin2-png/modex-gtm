@@ -156,5 +156,36 @@
     "urbanRural": "Edge-of-town build-to-suit industrial park bordered by other warehouses and single-family residential; judged Rural per the small-town-industrial tie-break.",
     "buildingCount": "One warehouse on the Mondelez parcel; neighboring buildings in the Becknell park are separate tenants."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/warehouse-associate/job/28975576",
+        "date": "2026-01",
+        "type": "careers",
+        "claim": "Mondelez official careers: Warehouse Associate req at 120 Commerce Lane, Tatamy PA 18085"
+      },
+      {
+        "tier": 1,
+        "url": "https://becknellindustrial.com/images/uploads/property_files/Becknell_-_Kraft+Mondelez_-_Long-Term_Relationship.pdf",
+        "date": "2016",
+        "type": "press",
+        "claim": "Becknell build-to-suit ~100,300 sq ft DC in Tatamy PA leased to Mondelez"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Mondelez-branded careers reqs at the exact 120 Commerce Lane address (Jan 2026) plus Becknell build-to-suit/lease corroboration; no Tatamy closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

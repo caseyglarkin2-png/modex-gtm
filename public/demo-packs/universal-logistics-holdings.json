@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:24:29.487Z",
+  "builtAt": "2026-08-13T15:56:19.070Z",
   "account": {
     "slug": "universal-logistics-holdings",
     "displayName": "Universal Logistics Holdings",
@@ -9,10 +9,10 @@
     "coverageNote": {
       "auditedCount": 18,
       "estimatedFootprint": 80,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Universal Logistics Holdings operates ~80 US company-operated terminals and value-added sites across truckload, intermodal, contract logistics, and value-added services. We audited 18.",
-      "auditedScope": "US"
+      "note": "Universal Logistics Holdings operates ~80 US company-operated terminals and value-added sites across truckload, intermodal, contract logistics, and value-added services. We audited 18."
     },
     "networkCount": 80,
     "networkCountSource": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
@@ -24,14 +24,13 @@
       "4,790 trailer spots across 18 audited sites. Universal parks more trailers per facility than any pure-contract 3PL.",
       "Polaris Madison AL is 194 acres of Polaris-dedicated contract logistics. Single-shipper at scale.",
       "GM Arlington runs 130 docks. Universal handles GM's Arlington Logistics inside the plant footprint."
-    ],
-    "extrapolationConfidenceShare": 0.7
+    ]
   },
   "research": null,
   "network": {
     "bbox": [
       -118.212375,
-      29.297102,
+      29.867718,
       -79.898456,
       42.70353
     ],
@@ -51,39 +50,6 @@
     "sites": [
       {
         "id": "01-detroit-gm-ev-warehouse",
-        "verification": {
-          "verdict": "confirmed",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            {
-              "tier": 3,
-              "url": "https://gmauthority.com/blog/2023/07/gm-to-open-ev-parts-warehouse-near-factory-zero-plant-in-michigan/",
-              "date": "2023-07",
-              "type": "press",
-              "claim": "GM owns the 793,520 sq ft warehouse at 14250 Plymouth Rd; operated by Logistics Insight Corp (LINC, a ULH affiliate); feeds Factory Zero EV programs"
-            },
-            {
-              "tier": 2,
-              "url": "https://www.crainsdetroit.com/manufacturing/gm-plans-ev-parts-warehouse-detroit-350-new-jobs",
-              "date": "2023-07",
-              "type": "press",
-              "claim": "GM EV parts warehouse at former AMC site, 14250 Plymouth Rd, ~350 jobs, staffed by a ULH affiliate"
-            },
-            {
-              "tier": 3,
-              "url": "https://www.ziprecruiter.com/co/Logistics-Insight/Jobs/-in-Detroit,MI",
-              "date": "2025-12",
-              "type": "press",
-              "claim": "LINC actively hiring forklift/warehouse roles in Detroit MI as of Dec 2025"
-            }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "GM-owned building, LINC-operated since ~2024 opening, still hiring late 2025; no closure, but Factory Zero EV-volume cuts are a live program-durability risk.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
         "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
         "type": "Value-Added Logistics Center / Sequencing Warehouse",
         "archetype": "#9",
@@ -276,68 +242,53 @@
         },
         "dossierExcerpt": "Address: 14250 Plymouth Rd, Detroit, MI 48227\nResolved center: 42.375600, -83.184600\nType: Value-Added Logistics Center / Sequencing Warehouse\nConfidence: High\n\n---\n\n### Location confirmation\n\nThe roster coordinate (42.374891, -83.184189) landed on the SW side of a single\nvery large, brand-new rectangular distribution building running NW–SE. Web\nresearch (Crain's Detroit Business, GM Authority, Automotive News) confirms the\nidentity: GM redeveloped the long-abandoned former AMC headquarters site at\n14250 Plymouth Rd into a ~793,520 sq ft EV-parts warehouse, built by NorthPoint\nDevelopment LLC, GM-owned and operated by Logistics Insight Corp (LINC, a\nUniversal Logistics Holdings company). It feeds parts to GM Factory Zero\n(Hummer EV, Silverado EV). The 2020 Street View along Plymouth Rd still shows",
         "mapsUrl": "https://www.google.com/maps/@42.375600,-83.184600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/01-detroit-gm-ev-warehouse-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3756,
-              "lng": -83.1846
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/01-detroit-gm-ev-warehouse-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3756,
-              "lng": -83.1846
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Brand-new (~2023-2024) 793,520 sq ft single warehouse on the redeveloped former AMC headquarters site at 14250 Plymouth Rd; built by NorthPoint Development, GM-owned, operated by Logistics Insight Corp (LINC, a Universal Logistics Holdings company) supplying EV parts to GM Factory Zero. Confirmed via Crain's Detroit / GM Authority and current satellite imagery.",
           "truckGate": "Single controlled truck entrance off Plymouth Rd via a wide divided access drive that leads into the SW truck yard. Property is fully fenced/landscaped-bermed. No barrier arm or booth resolvable in current imagery at the road, but the truck yard is a secured private GM-owned operation; classified as a controlled gate.",
-          "guardShack": "No guard booth resolvable in satellite imagery at the entrance. Given a GM-owned EV-parts secured site, access is most likely kiosk / call-box / badge controlled rather than a staffed shack, remoteGs set true. Low confidence on the absence of a shack.",
+          "guardShack": "No guard booth resolvable in satellite imagery at the entrance. Given a GM-owned EV-parts secured site, access is most likely kiosk / call-box / badge controlled rather than a staffed shack — remoteGs set true. Low confidence on the absence of a shack.",
           "dockDoors": "Continuous loading-dock run the full length of the SW long face (trailers backed in at intervals) plus a secondary bank along the north end wall. NE long face along the railroad is solid windowless wall. Estimate ~100-120 doors total -> 50+ band.",
           "dropYard": "Long striped trailer-parking lot runs parallel to the SW dock apron with marked stalls and trailers parked without tractors -> dedicated drop yard.",
           "shipRcvSeparate": "Two physically distinct dock clusters on different faces (SW long face and north end wall) -> ship/receive can run from separate banks.",
           "fastLaneOpportunity": "Wide divided access drive and a large open SW truck yard apron leave ample paved width to add an express/bypass lane.",
           "railServed": "An active rail line runs immediately along the NE property edge but no spur enters the property; building is not rail-served.",
           "siteAreaAcres": "~68 acres for the fenced industrial parcel (excludes the adjacent public park strip on the west side)."
-        }
-      },
-      {
-        "id": "03-romulus-value-added-center",
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "3PL",
-          "tenancy": "owned",
+          "tenancy": "leased",
           "citations": [
             {
               "tier": 3,
-              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Non-CDL-Switcher/-in-Romulus,MI?jid=93b75aa49a2ec566",
-              "date": "2025",
+              "url": "https://gmauthority.com/blog/2023/07/gm-to-open-ev-parts-warehouse-near-factory-zero-plant-in-michigan/",
+              "date": "2023-07",
               "type": "press",
-              "claim": "Universal Logistics Holdings hiring Non-CDL Switcher at 29129 Ecorse Rd, Romulus MI"
+              "claim": "GM owns the 793,520 sq ft warehouse at 14250 Plymouth Rd; operated by Logistics Insight Corp (LINC, a ULH affiliate); feeds Factory Zero EV programs"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.crainsdetroit.com/manufacturing/gm-plans-ev-parts-warehouse-detroit-350-new-jobs",
+              "date": "2023-07",
+              "type": "press",
+              "claim": "GM EV parts warehouse at former AMC site, 14250 Plymouth Rd, ~350 jobs, staffed by a ULH affiliate"
             },
             {
               "tier": 3,
-              "url": "https://www.indeed.com/viewjob?jk=0b400e7f4a06ebb7",
-              "date": "2025",
+              "url": "https://www.ziprecruiter.com/co/Logistics-Insight/Jobs/-in-Detroit,MI",
+              "date": "2025-12",
               "type": "press",
-              "claim": "Hi-Lo/forklift role, Romulus MI 48174, active value-added/warehouse ops"
+              "claim": "LINC actively hiring forklift/warehouse roles in Detroit MI as of Dec 2025"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "Multiple current ULH job reqs tied to the exact address (yard switcher, hi-lo, dock); no closure or re-tenant negative found.",
+          "rationale": "GM-owned building, LINC-operated since ~2024 opening, still hiring late 2025; no closure, but Factory Zero EV-volume cuts are a live program-durability risk.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "03-romulus-value-added-center",
         "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
         "type": "Value-Added Logistics Center / Cross-Dock Terminal",
         "archetype": "#9",
@@ -489,72 +440,50 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Address: 29129 Ecorse Rd, Romulus, MI 48174\nResolved center: 42.251528, -83.323800\nType: Value-Added Logistics Center / Cross-Dock Terminal\nConfidence: Medium\n\n---\n\n### Location confirmation\n\nThe roster coordinate landed squarely on a large multi-building logistics\ncampus south of Ecorse Rd. Web research (Yellow Pages, Waze, Universal\nLogistics hiring posts) confirms Universal Logistics / Logistics Insight Corp\n(LINC) operates a value-added logistics and cross-dock terminal at 29129 Ecorse\nRd, Romulus, a 10-K named owned operating property. 2025 Street View along\nEcorse Rd shows the yard packed with XPO Logistics-, LINC Logistics- and\nUniversal-branded trailers behind a chain-link fence. Positively identified.\n\n### Key views\n\n- Wide satellite (z16-17): A sprawling, trailer-dense campus, several long",
+        "dossierExcerpt": "Address: 29129 Ecorse Rd, Romulus, MI 48174\nResolved center: 42.251528, -83.323800\nType: Value-Added Logistics Center / Cross-Dock Terminal\nConfidence: Medium\n\n---\n\n### Location confirmation\n\nThe roster coordinate landed squarely on a large multi-building logistics\ncampus south of Ecorse Rd. Web research (Yellow Pages, Waze, Universal\nLogistics hiring posts) confirms Universal Logistics / Logistics Insight Corp\n(LINC) operates a value-added logistics and cross-dock terminal at 29129 Ecorse\nRd, Romulus — a 10-K named owned operating property. 2025 Street View along\nEcorse Rd shows the yard packed with XPO Logistics-, LINC Logistics- and\nUniversal-branded trailers behind a chain-link fence. Positively identified.\n\n### Key views\n\n- Wide satellite (z16-17): A sprawling, trailer-dense campus — several long",
         "mapsUrl": "https://www.google.com/maps/@42.251528,-83.323800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/03-romulus-value-added-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.251528,
-              "lng": -83.3238
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/03-romulus-value-added-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.251528,
-              "lng": -83.3238
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "facility": "Universal Logistics / Logistics Insight Corp (LINC) cross-dock and value-added logistics campus at 29129 Ecorse Rd, Romulus MI (Wayne County, near Detroit Metro Airport). A sprawling multi-building terminal: several long narrow cross-dock buildings (dock doors on both long faces) plus extensive trailer-storage yards. Street View shows the yard packed with XPO Logistics-, LINC Logistics- and Universal-branded trailers, operates as a multi-tenant/3PL cross-dock terminal. Confirmed via Yellow Pages, Waze, Universal Logistics hiring posts (incl. a 'Gate Clerk' role at this address).",
-          "truckGate": "Whole campus is fenced, 2025 Street View confirms continuous chain-link perimeter fence along the full Ecorse Rd frontage with trailers parked behind it. Truck access is through a single wide controlled opening in the fence off Ecorse Rd, with jersey-barrier lane control at the gap and a canopy/structure near the entrance drive. A Universal 'Gate Clerk' job posting at this address implies a gate-check function.",
+          "facility": "Universal Logistics / Logistics Insight Corp (LINC) cross-dock and value-added logistics campus at 29129 Ecorse Rd, Romulus MI (Wayne County, near Detroit Metro Airport). A sprawling multi-building terminal: several long narrow cross-dock buildings (dock doors on both long faces) plus extensive trailer-storage yards. Street View shows the yard packed with XPO Logistics-, LINC Logistics- and Universal-branded trailers — operates as a multi-tenant/3PL cross-dock terminal. Confirmed via Yellow Pages, Waze, Universal Logistics hiring posts (incl. a 'Gate Clerk' role at this address).",
+          "truckGate": "Whole campus is fenced — 2025 Street View confirms continuous chain-link perimeter fence along the full Ecorse Rd frontage with trailers parked behind it. Truck access is through a single wide controlled opening in the fence off Ecorse Rd, with jersey-barrier lane control at the gap and a canopy/structure near the entrance drive. A Universal 'Gate Clerk' job posting at this address implies a gate-check function.",
           "guardShack": "No standalone guard booth (1-3 vehicle footprint) cleanly resolves at the entrance opening, though a small canopy structure sits along the entry drive. Access control most likely a gate-clerk kiosk / check-in point rather than a classic shack -> remoteGs true. Low confidence.",
           "dockDoors": "Multiple long narrow cross-dock buildings, each with continuous dock-door banks on BOTH long faces and trailers backed in along them -> a very high total, estimated ~200+ doors -> 50+ band.",
-          "dropArea": "The entire campus functions as a drop yard, hundreds of trailers parked in marked rows across multiple lots, including a large gravel trailer-storage yard south of the drainage ditch -> 50+ band; dropYard true.",
+          "dropArea": "The entire campus functions as a drop yard — hundreds of trailers parked in marked rows across multiple lots, including a large gravel trailer-storage yard south of the drainage ditch -> 50+ band; dropYard true.",
           "multipleFacilities": "Multi-building campus: ~6 distinct cross-dock/warehouse buildings plus separate satellite trailer yards.",
           "shipRcvSeparate": "Cross-dock buildings load and unload from both faces of the same building; not a separated ship-vs-receive bank layout -> false.",
           "fastLaneOpportunity": "Wide entrance opening and very large open yard apron leave ample room to add an express/bypass lane.",
-          "urbanRural": "Edge-of-town industrial setting in Romulus, bordered by light residential and open/vacant land, near Detroit Metro Airport; per the rubric's small-town-vs-urban tie-breaker, classified Rural.",
+          "urbanRural": "Edge-of-town industrial setting in Romulus — bordered by light residential and open/vacant land, near Detroit Metro Airport; per the rubric's small-town-vs-urban tie-breaker, classified Rural.",
           "railServed": "No rail spur enters the property -> false.",
           "siteAreaAcres": "~95 acres for the fenced campus including the southern gravel trailer yard."
-        }
-      },
-      {
-        "id": "04-dearborn-intermodal-terminal",
+        },
         "verification": {
           "verdict": "confirmed",
-          "operator": "self",
+          "operator": "3PL",
           "tenancy": "owned",
           "citations": [
             {
-              "tier": 1,
-              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
-              "date": "2024-12",
-              "type": "10-K",
-              "claim": "ULH owns terminal yards including Dearborn, Michigan (Item 2 Properties, FY2024)"
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Non-CDL-Switcher/-in-Romulus,MI?jid=93b75aa49a2ec566",
+              "date": "2025",
+              "type": "press",
+              "claim": "Universal Logistics Holdings hiring Non-CDL Switcher at 29129 Ecorse Rd, Romulus MI"
             },
             {
               "tier": 3,
-              "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=2600",
-              "date": "2026",
-              "type": "locator",
-              "claim": "Universal Intermodal Services listed at 4440 Wyoming St, Dearborn MI"
+              "url": "https://www.indeed.com/viewjob?jk=0b400e7f4a06ebb7",
+              "date": "2025",
+              "type": "press",
+              "claim": "Hi-Lo/forklift role, Romulus MI 48174, active value-added/warehouse ops"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "ULH 10-K names Dearborn as an owned terminal; Universal Intermodal recruiting at the terminal; intermodal terminals are core owned infrastructure, lowest churn.",
+          "rationale": "Multiple current ULH job reqs tied to the exact address (yard switcher, hi-lo, dock); no closure or re-tenant negative found.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "04-dearborn-intermodal-terminal",
         "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#9",
@@ -691,72 +620,50 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Address: 4440 Wyoming Ave, Dearborn, MI 48126\nResolved center: 42.321600, -83.154800\nType: Intermodal / Drayage Terminal (owned)\nConfidence: Medium\n\n---\n\n### Location confirmation\n\nThe roster coordinate (with a 64 m geocoder offset noted) landed on a small\nred-roofed office building on the west side of Wyoming Ave. Web research\n(loadmatch.com directory; Universal Intermodal service-locations page; D&B)\nconfirms Universal Intermodal Services operates a drayage/intermodal terminal\nat 4440 Wyoming Ave (St), Dearborn, a 10-K named owned terminal property.\n2025 Street View shows a \"Universal\"-branded sign at the entrance to the large\nfenced container/chassis yard on the EAST side of Wyoming Ave, that fenced\nyard is the operational terminal. Universal Intermodal describes these as",
+        "dossierExcerpt": "Address: 4440 Wyoming Ave, Dearborn, MI 48126\nResolved center: 42.321600, -83.154800\nType: Intermodal / Drayage Terminal (owned)\nConfidence: Medium\n\n---\n\n### Location confirmation\n\nThe roster coordinate (with a 64 m geocoder offset noted) landed on a small\nred-roofed office building on the west side of Wyoming Ave. Web research\n(loadmatch.com directory; Universal Intermodal service-locations page; D&B)\nconfirms Universal Intermodal Services operates a drayage/intermodal terminal\nat 4440 Wyoming Ave (St), Dearborn — a 10-K named owned terminal property.\n2025 Street View shows a \"Universal\"-branded sign at the entrance to the large\nfenced container/chassis yard on the EAST side of Wyoming Ave — that fenced\nyard is the operational terminal. Universal Intermodal describes these as",
         "mapsUrl": "https://www.google.com/maps/@42.321600,-83.154800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/04-dearborn-intermodal-terminal-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3216,
-              "lng": -83.1548
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/04-dearborn-intermodal-terminal-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3216,
-              "lng": -83.1548
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "facility": "Universal Intermodal Services drayage / intermodal terminal at 4440 Wyoming Ave (St), Dearborn MI, a 10-K named owned terminal property. Per Universal Intermodal's own description these are 'secure container yards coupled with maintenance and repair facilities offering container storage.' Confirmed via loadmatch.com directory and a Universal-branded sign visible at the yard entrance in 2025 Street View. The roster geocode landed on a small red-roofed office building on the west side of Wyoming Ave; the operational terminal yard is the large fenced container/chassis lot on the east side of Wyoming.",
-          "type": "This is an intermodal/drayage CONTAINER YARD, not a dock-door warehouse, it stores and stages ocean/domestic containers and chassis and contains a container maintenance & repair (M&R) building. dockDoors classified NONE accordingly.",
+          "facility": "Universal Intermodal Services drayage / intermodal terminal at 4440 Wyoming Ave (St), Dearborn MI — a 10-K named owned terminal property. Per Universal Intermodal's own description these are 'secure container yards coupled with maintenance and repair facilities offering container storage.' Confirmed via loadmatch.com directory and a Universal-branded sign visible at the yard entrance in 2025 Street View. The roster geocode landed on a small red-roofed office building on the west side of Wyoming Ave; the operational terminal yard is the large fenced container/chassis lot on the east side of Wyoming.",
+          "type": "This is an intermodal/drayage CONTAINER YARD, not a dock-door warehouse — it stores and stages ocean/domestic containers and chassis and contains a container maintenance & repair (M&R) building. dockDoors classified NONE accordingly.",
           "truckGate": "The yard is fully fenced (chain-link along Wyoming Ave, confirmed in 2025 Street View) with wide controlled driveway openings / sliding gates and a Universal-branded sign at the entrance. Truck access is gated. Estimated ~2 gate openings along the Wyoming Ave frontage.",
           "guardShack": "No standalone guard booth resolves at the gate openings in imagery or Street View. Container/drayage yards of this type typically run a gate-clerk kiosk / OCR check rather than a manned shack -> remoteGs true. Low confidence.",
-          "dropArea": "The yard is wall-to-wall container, chassis and trailer storage, hundreds of units parked across multiple gravel/paved lots -> 50+ band; the whole site is a drop yard.",
+          "dropArea": "The yard is wall-to-wall container, chassis and trailer storage — hundreds of units parked across multiple gravel/paved lots -> 50+ band; the whole site is a drop yard.",
           "multipleFacilities": "Multi-element terminal: a long maintenance/repair building, an office, and several distinct container/chassis storage sub-yards.",
           "scale": "No truck scale clearly resolved; intermodal terminals sometimes have one but none confirmed here -> left false, flagged uncertain.",
           "railServed": "An active rail line runs through the broader district to the south, but no rail spur is visible entering this drayage yard (drayage terminals move containers by truck to/from separate rail ramps) -> railServed false, flagged uncertain.",
           "fastLaneOpportunity": "Very large open yard apron and wide gate openings leave ample room to add an express/bypass lane.",
           "urbanRural": "Dense Dearborn/Detroit industrial fabric -> Urban.",
           "siteAreaAcres": "~41 acres for the fenced Universal terminal parcel; the surrounding corridor holds other operators' yards and is excluded."
-        }
-      },
-      {
-        "id": "05-grand-prairie-gm-arlington-logistics",
+        },
         "verification": {
           "verdict": "confirmed",
-          "operator": "3PL",
-          "tenancy": "leased",
+          "operator": "self",
+          "tenancy": "owned",
           "citations": [
             {
-              "tier": 3,
-              "url": "https://www.indeed.com/q-universal-logistics-l-grand-prairie,-tx-jobs.html",
-              "date": "2025",
-              "type": "press",
-              "claim": "Universal Logistics actively hiring warehouse associates in Grand Prairie TX"
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+              "date": "2024-12",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Dearborn, Michigan (Item 2 Properties, FY2024)"
             },
             {
               "tier": 3,
-              "url": "https://truckmap.com/place/universal-gm-2305-w-marshall-dr-grand-prairie-tx-75051-usa",
-              "date": "2025",
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=2600",
+              "date": "2026",
               "type": "locator",
-              "claim": "'Universal & GM' operating site at 2305 W Marshall Dr; consignee for GM Arlington components per import records"
+              "claim": "Universal Intermodal Services listed at 4440 Wyoming St, Dearborn MI"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "Current ULH Grand Prairie hiring + documented 'Universal & GM' Arlington-logistics site; GM Arlington Assembly active; no WARN/closure. No address-specific Tier-1, so corroboration-based.",
+          "rationale": "ULH 10-K names Dearborn as an owned terminal; Universal Intermodal recruiting at the terminal; intermodal terminals are core owned infrastructure, lowest churn.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "05-grand-prairie-gm-arlington-logistics",
         "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
         "type": "Value-Added Logistics / Sub-Assembly Center",
         "archetype": "#3",
@@ -904,73 +811,51 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Address: 2305 W Marshall Dr, Grand Prairie, TX 75051\nResolved center: 32.719500, -97.037200\nType: Value-Added Logistics / Sub-Assembly Center\nConfidence: High\n\n---\n\n### Location confirmation\n\nThe roster coordinate (283 m geocoder offset noted) landed on a large\nwarehouse in the Great Southwest Industrial District. Web research (TruckMap\nand Waze list it as \"Universal & GM\"; Panjiva shipper records as \"GM Arlington\n(Universal Logistics)\"; businessyab) confirms Universal Logistics operates a\nvalue-added logistics / sub-assembly center here serving GM Arlington Assembly\n(Tahoe / Suburban / Yukon / Escalade). 2022 Street View shows Universal-branded\ntrailers backed into the dock doors. Positively identified. The campus is two\nbuildings, a long N–S main warehouse plus a second blue-roofed building at the",
+        "dossierExcerpt": "Address: 2305 W Marshall Dr, Grand Prairie, TX 75051\nResolved center: 32.719500, -97.037200\nType: Value-Added Logistics / Sub-Assembly Center\nConfidence: High\n\n---\n\n### Location confirmation\n\nThe roster coordinate (283 m geocoder offset noted) landed on a large\nwarehouse in the Great Southwest Industrial District. Web research (TruckMap\nand Waze list it as \"Universal & GM\"; Panjiva shipper records as \"GM Arlington\n(Universal Logistics)\"; businessyab) confirms Universal Logistics operates a\nvalue-added logistics / sub-assembly center here serving GM Arlington Assembly\n(Tahoe / Suburban / Yukon / Escalade). 2022 Street View shows Universal-branded\ntrailers backed into the dock doors. Positively identified. The campus is two\nbuildings — a long N–S main warehouse plus a second blue-roofed building at the",
         "mapsUrl": "https://www.google.com/maps/@32.719500,-97.037200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/05-grand-prairie-gm-arlington-logistics-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.7195,
-              "lng": -97.0372
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/05-grand-prairie-gm-arlington-logistics-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.7195,
-              "lng": -97.0372
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Universal Logistics value-added logistics / sub-assembly center serving GM Arlington Assembly (Tahoe/Suburban/Yukon/Escalade), at 2305 W Marshall Dr, Grand Prairie TX, inside the Great Southwest Industrial District. A ~1.2M sq ft campus: a long N-S main warehouse with dock doors on both long faces plus a second blue-roofed building at the north end. Confirmed via TruckMap/Waze ('Universal & GM'), Panjiva shipper records ('GM Arlington (Universal Logistics)'), and 2022 Street View showing Universal-branded trailers backed in at the docks.",
-          "truckGate": "Open speculative-build industrial-park campus, 2022 Street View shows the dock aprons on both faces of the building open directly to the campus drives with NO perimeter fence, NO barrier arm/gate, and NO checkpoint structure. Trucks drive straight from W Marshall Dr onto the dock apron. Matches the 'No Gate / No GS' archetype.",
+          "truckGate": "Open speculative-build industrial-park campus — 2022 Street View shows the dock aprons on both faces of the building open directly to the campus drives with NO perimeter fence, NO barrier arm/gate, and NO checkpoint structure. Trucks drive straight from W Marshall Dr onto the dock apron. Matches the 'No Gate / No GS' archetype.",
           "guardShack": "No guard booth anywhere on the site.",
           "dockDoors": "The long main building has continuous dock-door banks on BOTH its east and west long faces (trailers backed in along both), plus dock doors on the second building -> very high total, estimated ~120-140 -> 50+ band.",
           "shipRcvSeparate": "Dock banks on two physically separate building faces (east face and west face) -> shipping and receiving can run from separate clusters.",
           "dropArea": "Some trailer-parking rows on the west side beyond the dock apron, but most parked trailers are dock-staged at doors; modest dedicated drop space -> 10-25 band. Flagged uncertain.",
           "dropYard": "No large dedicated standalone trailer-storage lot separate from dock staging -> false.",
-          "multipleFacilities": "Two-building campus, the long main warehouse plus a second (blue-roofed) building at the north end.",
-          "drivewayShort": "Open apron directly off the public drive, no deep gated approach; the staging is the apron itself -> drivewayShort.",
+          "multipleFacilities": "Two-building campus — the long main warehouse plus a second (blue-roofed) building at the north end.",
+          "drivewayShort": "Open apron directly off the public drive — no deep gated approach; the staging is the apron itself -> drivewayShort.",
           "urbanRural": "Dense Dallas-Fort Worth metro industrial fabric (Great Southwest Industrial District) -> Urban.",
           "railServed": "No rail spur enters the property -> false.",
           "siteAreaAcres": "~62 acres for the two-building campus parcel including dock aprons and parking."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.indeed.com/q-universal-logistics-l-grand-prairie,-tx-jobs.html",
+              "date": "2025",
+              "type": "press",
+              "claim": "Universal Logistics actively hiring warehouse associates in Grand Prairie TX"
+            },
+            {
+              "tier": 3,
+              "url": "https://truckmap.com/place/universal-gm-2305-w-marshall-dr-grand-prairie-tx-75051-usa",
+              "date": "2025",
+              "type": "locator",
+              "claim": "'Universal & GM' operating site at 2305 W Marshall Dr; consignee for GM Arlington components per import records"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "Current ULH Grand Prairie hiring + documented 'Universal & GM' Arlington-logistics site; GM Arlington Assembly active; no WARN/closure. No address-specific Tier-1, so corroboration-based.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
         "id": "06-smyrna-tn",
-        "verification": {
-          "verdict": "confirmed",
-          "operator": "self",
-          "tenancy": "leased",
-          "citations": [
-            {
-              "tier": 1,
-              "url": "https://hrone.wd1.myworkdayjobs.com/en-US/Universal_Logistics_Holdings/job/UD-SMYRNA-TN/SMYRNA-SWITCHER_JR107061",
-              "date": "2026",
-              "type": "press",
-              "claim": "Active ULH Workday 'Smyrna Switcher' req at UD-SMYRNA-TN"
-            },
-            {
-              "tier": 1,
-              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/CLASS-A-CDL-SMYRNA-SWITCHERS/-in-Smyrna,TN?jid=d38eca8ad2a2a31f",
-              "date": "2026",
-              "type": "press",
-              "claim": "ULH CDL-A yard switchers explicitly at 200 Sam Griffin Rd, Smyrna TN 37167"
-            }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": false,
-          "rationale": "Multiple current ULH careers reqs name 200 Sam Griffin Rd (Nissan ILC); no closure/contract-loss signal.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
         "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
         "type": "Integrated Logistics Center / Sequencing Warehouse",
         "archetype": "#7",
@@ -1083,30 +968,8 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster coordinates (35.952729, -86.485103) landed mid-roof on a very large\nwhite-roof warehouse southwest of the Nissan Smyrna assembly plant. The\nfacility was confirmed via multiple independent listings, TruckMap\n(\"Nissan Integrated Logistics Center Universal, 200 Sam Griffin Rd\"),\nImportYeti, Indeed (Universal-operated), and Chamber of Commerce, all placing\nUniversal Logistics' Nissan ILC at this address. Universal also runs a\ncompanion \"Universal Dedicated of Smyrna\" yard-switching operation here\n(switcher/CDL-A job postings). The building is a single continuous structure\nrunning roughly NNE–SSW, ~890 m long, consistent with the ~1.5M sq ft figure\nin the roster source. Center locked at 35.95250, -86.48480.",
+        "dossierExcerpt": "Roster coordinates (35.952729, -86.485103) landed mid-roof on a very large\nwhite-roof warehouse southwest of the Nissan Smyrna assembly plant. The\nfacility was confirmed via multiple independent listings — TruckMap\n(\"Nissan Integrated Logistics Center Universal, 200 Sam Griffin Rd\"),\nImportYeti, Indeed (Universal-operated), and Chamber of Commerce — all placing\nUniversal Logistics' Nissan ILC at this address. Universal also runs a\ncompanion \"Universal Dedicated of Smyrna\" yard-switching operation here\n(switcher/CDL-A job postings). The building is a single continuous structure\nrunning roughly NNE–SSW, ~890 m long, consistent with the ~1.5M sq ft figure\nin the roster source. Center locked at 35.95250, -86.48480.",
         "mapsUrl": "https://www.google.com/maps/@35.9525,-86.4848,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/06-smyrna-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.9525,
-              "lng": -86.4848
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/06-smyrna-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.9525,
-              "lng": -86.4848
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteResolution": "Confirmed via TruckMap, ImportYeti, Indeed and Chamber of Commerce listings as the Nissan Integrated Logistics Center operated by Universal Logistics at 200 Sam Griffin Rd, Smyrna TN 37167. A single very large (~1.5M sq ft) low white-roof warehouse running roughly NNE-SSW, immediately southwest of the Nissan Smyrna assembly plant. Roster coords landed mid-roof; locked center at 35.95250,-86.48480.",
           "truckGate": "Z19 satellite of the SW corner shows a clear controlled checkpoint where the main driveway meets the access road: a small guard-booth structure straddling the lane with pedestrian turnstiles alongside, perimeter chain-link fence around the whole property. Street View of Sam Griffin Rd / the back access road confirms continuous perimeter fencing. truckGate = true.",
@@ -1118,36 +981,36 @@
           "buildingCount": "Primary structure is one continuous warehouse; a smaller separate office/support building sits near the NE end - counted as 2. multipleFacilities left false as it is not a true campus of large buildings.",
           "urbanRural": "Smyrna TN is a small town; the facility sits in an edge-of-town industrial setting beside the Nissan plant with farmland/woods to the west and south. Classified Rural per the rubric tie-break.",
           "railServed": "No rail spur enters the property; CSX line runs east of the Nissan plant but does not serve this warehouse. railServed = false."
-        }
-      },
-      {
-        "id": "07-cloverdale-va",
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
-          "tenancy": "owned",
+          "tenancy": "leased",
           "citations": [
             {
               "tier": 1,
-              "url": "https://investors.universallogistics.com/news-releases/news-release-details/universal-invest-50-million-create-45-new-jobs-expansion-greater",
-              "date": "2024-01",
+              "url": "https://hrone.wd1.myworkdayjobs.com/en-US/Universal_Logistics_Holdings/job/UD-SMYRNA-TN/SMYRNA-SWITCHER_JR107061",
+              "date": "2026",
               "type": "press",
-              "claim": "ULH $50M heavy-truck-division expansion into Greater Roanoke (Botetourt), 45 jobs, operational 2025"
+              "claim": "Active ULH Workday 'Smyrna Switcher' req at UD-SMYRNA-TN"
             },
             {
               "tier": 1,
-              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Assembler-8/-in-Cloverdale,VA?jid=bbf6471169ba5ba0",
-              "date": "2025",
+              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/CLASS-A-CDL-SMYRNA-SWITCHERS/-in-Smyrna,TN?jid=d38eca8ad2a2a31f",
+              "date": "2026",
               "type": "press",
-              "claim": "ULH 'Assembler' / on-site assembly reqs in Cloverdale VA at 1796 Lee Hwy, facility live"
+              "claim": "ULH CDL-A yard switchers explicitly at 200 Sam Griffin Rd, Smyrna TN 37167"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Dated ULH PR + current on-site assembly/engineering reqs at 1796 Lee Hwy confirm the heavy-truck facility came online and operates.",
+          "rationale": "Multiple current ULH careers reqs name 200 Sam Griffin Rd (Nissan ILC); no closure/contract-loss signal.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "07-cloverdale-va",
         "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
         "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
         "archetype": "#3",
@@ -1321,30 +1184,8 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "Roster coordinates landed on the roof of a large dark-roof warehouse off\nLee Hwy (US-11) in Cloverdale, Botetourt County. Confirmed via PRNewswire,\nthe Roanoke Times, Commercial Property Executive, WSET-TV and LoopNet: this\nis the ~254,000 sq ft building on ~37 acres at 1796 Lee Hwy that Universal\nLogistics acquired for a ~$50M expansion of its heavy-truck division ,\nthird-party assembly, sequencing, and value-added warehouse services,\nannounced January 2024, ~45 new jobs. The building previously served as a\nSouthern States Cooperative distribution center. Center locked at\n37.37224, -79.90340.",
+        "dossierExcerpt": "Roster coordinates landed on the roof of a large dark-roof warehouse off\nLee Hwy (US-11) in Cloverdale, Botetourt County. Confirmed via PRNewswire,\nthe Roanoke Times, Commercial Property Executive, WSET-TV and LoopNet: this\nis the ~254,000 sq ft building on ~37 acres at 1796 Lee Hwy that Universal\nLogistics acquired for a ~$50M expansion of its heavy-truck division —\nthird-party assembly, sequencing, and value-added warehouse services,\nannounced January 2024, ~45 new jobs. The building previously served as a\nSouthern States Cooperative distribution center. Center locked at\n37.37224, -79.90340.",
         "mapsUrl": "https://www.google.com/maps/@37.37224,-79.9034,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/07-cloverdale-va-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.37224,
-              "lng": -79.9034
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/07-cloverdale-va-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.37224,
-              "lng": -79.9034
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteResolution": "Confirmed via PRNewswire, Roanoke Times, Commercial Property Executive, WSET and LoopNet as Universal Logistics' Roanoke/Botetourt value-added facility at 1796 Lee Hwy, Cloverdale VA 24077 - a ~254,000 sq ft warehouse on 37 acres, a former Southern States Cooperative distribution center, acquired by Universal for a ~$50M heavy-truck-division expansion (third-party assembly, sequencing, value-added services) announced Jan 2024. Roster coords landed on the building roof; locked center 37.37224,-79.90340.",
           "truckGate": "The main truck driveway enters the property off Lee Hwy (US-11) at the SW corner. Street View (2023-2024) of the entrance shows an OPEN driveway running into the paved yard - no barrier arm, no sliding/swing gate across the truck lane, no checkpoint pinch-point. A small green swing gate is visible on a minor side path but it does not control the main truck drive. truckGate = false.",
@@ -1357,36 +1198,36 @@
           "railServed": "A rail line runs NE-SW immediately east of the building behind a vegetation buffer, but no rail spur enters the property - no rail siding visible serving the warehouse. railServed = false.",
           "urbanRural": "Cloverdale is a small unincorporated community in Botetourt County; the facility sits in an edge-of-town setting with residential frontage and woods/farmland around. Classified Rural.",
           "imageryNote": "The facility was mid-expansion as of the 2024 announcement; current imagery may predate completion of new value-added/assembly buildout, which could change dock and yard counts."
-        }
-      },
-      {
-        "id": "09-jacksonville-fl",
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
-          "tenancy": "leased",
+          "tenancy": "owned",
           "citations": [
             {
-              "tier": 3,
-              "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=37666",
-              "date": "2026",
-              "type": "locator",
-              "claim": "Universal Intermodal Services, 2050 Kings Road Building #3, Jacksonville FL 32209, exact address match"
+              "tier": 1,
+              "url": "https://investors.universallogistics.com/news-releases/news-release-details/universal-invest-50-million-create-45-new-jobs-expansion-greater",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "ULH $50M heavy-truck-division expansion into Greater Roanoke (Botetourt), 45 jobs, operational 2025"
             },
             {
-              "tier": 3,
-              "url": "https://www.ziprecruiter.com/co/universal-intermodal-services/Jobs/-in-Jacksonville,FL",
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Assembler-8/-in-Cloverdale,VA?jid=bbf6471169ba5ba0",
               "date": "2025",
               "type": "press",
-              "claim": "Active Universal Intermodal Services hiring in Jacksonville FL"
+              "claim": "ULH 'Assembler' / on-site assembly reqs in Cloverdale VA at 1796 Lee Hwy, facility live"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Exact-address directory listing for the ULH intermodal brand + active local hiring; no closure. Macro caveat: ULH intermodal segment contracting (Q3-2025 impairment).",
+          "rationale": "Dated ULH PR + current on-site assembly/engineering reqs at 1796 Lee Hwy confirm the heavy-truck facility came online and operates.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "09-jacksonville-fl",
         "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#9",
@@ -1518,42 +1359,17 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Roster supplied 2050 Kings Rd, Jacksonville FL with ROOFTOP geocode at\n30.347409, -81.699267. Satellite probing around that point revealed a large\nmulti-tenant industrial complex sitting immediately **east of the CSX Moncrief\nrail yard**, exactly the setting expected of a port/rail-corridor drayage\nterminal. Web search confirmed Universal Intermodal Services lists 2050 Kings\nRoad, Jacksonville FL 32209 as its terminal and operates \"40 terminals and\neight container yards\" as a C-TPAT-certified bonded carrier.\n\nThe complex is shared: the long dock-door building on the south side carries an\nAmazon banner (Street View), indicating an Amazon delivery/sortation\nco-tenant. Universal Intermodal occupies the trailer/container drayage yard\nportion, the \"Bldg 3\" in the address reflects the multi-building campus. The",
+        "dossierExcerpt": "Roster supplied 2050 Kings Rd, Jacksonville FL with ROOFTOP geocode at\n30.347409, -81.699267. Satellite probing around that point revealed a large\nmulti-tenant industrial complex sitting immediately **east of the CSX Moncrief\nrail yard** — exactly the setting expected of a port/rail-corridor drayage\nterminal. Web search confirmed Universal Intermodal Services lists 2050 Kings\nRoad, Jacksonville FL 32209 as its terminal and operates \"40 terminals and\neight container yards\" as a C-TPAT-certified bonded carrier.\n\nThe complex is shared: the long dock-door building on the south side carries an\nAmazon banner (Street View), indicating an Amazon delivery/sortation\nco-tenant. Universal Intermodal occupies the trailer/container drayage yard\nportion — the \"Bldg 3\" in the address reflects the multi-building campus. The",
         "mapsUrl": "https://www.google.com/maps/@30.3455,-81.6965,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/09-jacksonville-fl-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 30.3455,
-              "lng": -81.6965
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/09-jacksonville-fl-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 30.3455,
-              "lng": -81.6965
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteResolution": "Universal Intermodal Services occupies the trailer/container drayage yard portion of a large multi-tenant industrial complex at 2050 Kings Rd, Jacksonville FL, immediately east of the CSX Moncrief rail yard. The complex is shared with an Amazon delivery/sortation tenant (the long dock-door building on the south carries an Amazon banner). 'Bldg 3' in the roster address reflects the multi-building campus.",
-          "truckGate": "Site is perimeter chain-link fenced with swing gates at multiple internal points; access driveways run south off the residential streets (off Kings Rd). No barrier arm seen in Street View, but the fenced yard openings act as controlled truck-gate pinch points, classed as truckGate true / remoteGs true (no staffed booth).",
+          "truckGate": "Site is perimeter chain-link fenced with swing gates at multiple internal points; access driveways run south off the residential streets (off Kings Rd). No barrier arm seen in Street View, but the fenced yard openings act as controlled truck-gate pinch points — classed as truckGate true / remoteGs true (no staffed booth).",
           "guardShack": "No staffed guard booth observed in any Street View pass of the entrance drives. C-TPAT secure terminal per Universal Intermodal corporate materials implies access control, but it appears gate/fence-based, not a manned shack.",
           "dockDoors": "~28 dock doors estimated; the long dock building is largely Amazon-tenanted, so dock count primarily serves the co-tenant rather than Universal's drayage operation. Universal's own operation is yard + an M&R-style central building with minimal docks.",
           "dropYard": "Extensive trailer and chassis storage: a large south trailer-storage lot plus multiple in-complex trailer rows and a stacked-container yard (NE). Clear dedicated drop-yard character.",
-          "multipleFacilities": "Multi-building complex: warehouse/dock building (Amazon), central M&R building, container yard, plus outbuildings, campus layout.",
-          "railServed": "The CSX Moncrief rail yard is immediately adjacent to the west but separated by a tree buffer / drainage canal; no rail spur runs into the Universal-operated property itself, drayage moves are by truck. railServed = false."
-        }
-      },
-      {
-        "id": "10-rancho-dominguez-ca",
+          "multipleFacilities": "Multi-building complex: warehouse/dock building (Amazon), central M&R building, container yard, plus outbuildings — campus layout.",
+          "railServed": "The CSX Moncrief rail yard is immediately adjacent to the west but separated by a tree buffer / drainage canal; no rail spur runs into the Universal-operated property itself — drayage moves are by truck. railServed = false."
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -1561,25 +1377,28 @@
           "citations": [
             {
               "tier": 3,
-              "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=7412",
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=37666",
               "date": "2026",
               "type": "locator",
-              "claim": "Southern Counties Express dba Universal Intermodal Services, 18020 South Santa Fe Avenue, Rancho Dominguez CA, exact address match"
+              "claim": "Universal Intermodal Services, 2050 Kings Road Building #3, Jacksonville FL 32209, exact address match"
             },
             {
-              "tier": 1,
-              "url": "https://www.prnewswire.com/news-releases/universal-logistics-holdings-inc-acquires-southern-counties-express-inc-300695550.html",
-              "date": "2018",
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/co/universal-intermodal-services/Jobs/-in-Jacksonville,FL",
+              "date": "2025",
               "type": "press",
-              "claim": "ULH acquired Southern Counties Express ($65M); still in the ULH single-employer family"
+              "claim": "Active Universal Intermodal Services hiring in Jacksonville FL"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Exact-address directory listing tying SCE/Universal Intermodal to 18020 S Santa Fe Ave; subsidiary still ULH-owned. Macro caveat: intermodal segment under stress.",
+          "rationale": "Exact-address directory listing for the ULH intermodal brand + active local hiring; no closure. Macro caveat: ULH intermodal segment contracting (Q3-2025 impairment).",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "10-rancho-dominguez-ca",
         "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
         "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
         "archetype": "#9",
@@ -1708,30 +1527,8 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The loadmatch.com directory and FMCSA list Universal Intermodal Services /\nSouthern Counties Express Inc (dba Universal Intermodal Services) at the\nRancho Dominguez terminal, 18020 S Santa Fe Ave, Rancho Dominguez CA 90221 ,\na drayage / container-yard terminal serving the LA / Long Beach ports. The\nroster geocode shifted ~149 m; the fenced building-plus-yard parcel fronting\nS Santa Fe Ave (a major industrial arterial) is the audit target. Center\nlocked at 33.86810, -118.21210.",
+        "dossierExcerpt": "The loadmatch.com directory and FMCSA list Universal Intermodal Services /\nSouthern Counties Express Inc (dba Universal Intermodal Services) at the\nRancho Dominguez terminal, 18020 S Santa Fe Ave, Rancho Dominguez CA 90221 —\na drayage / container-yard terminal serving the LA / Long Beach ports. The\nroster geocode shifted ~149 m; the fenced building-plus-yard parcel fronting\nS Santa Fe Ave (a major industrial arterial) is the audit target. Center\nlocked at 33.86810, -118.21210.",
         "mapsUrl": "https://www.google.com/maps/@33.8681,-118.2121,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/10-rancho-dominguez-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.8681,
-              "lng": -118.2121
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/10-rancho-dominguez-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.8681,
-              "lng": -118.2121
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteResolution": "Universal Intermodal Services / Southern Counties Express Inc dba Universal Intermodal Services, Rancho Dominguez CA terminal at 18020 S Santa Fe Ave, Rancho Dominguez CA 90221 - confirmed via loadmatch.com directory and FMCSA. A drayage / container-yard terminal serving the LA/Long Beach ports in the dense Rancho Dominguez industrial district. Roster geocode moved 149 m; the fenced building-plus-yard property fronting S Santa Fe Ave is the audit target. Center locked at 33.86810,-118.21210.",
           "truckGate": "The whole property is ringed by chain-link perimeter fence. Street View of the S Santa Fe Ave frontage shows fenced front yards with sliding gates set in the fence line at the driveway openings - controlled truck access. Universal Intermodal markets itself as a C-TPAT certified secure carrier, consistent with access control. truckGate = true (flagged uncertain - sliding gates seen but the gate lane was not captured open / in use in Street View).",
@@ -1743,10 +1540,7 @@
           "railServed": "A rail line runs through the broader district nearby but no rail spur enters this fenced parcel - drayage moves are by truck. railServed = false.",
           "urbanRural": "Rancho Dominguez sits inside the dense LA-metro industrial fabric near the ports. Classified Urban.",
           "imageryNote": "The dense, irregular industrial parcel and the ~149 m geocode shift make the exact perimeter and truck-gate count approximate; flagged for human review."
-        }
-      },
-      {
-        "id": "11-houston-tx",
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -1754,25 +1548,28 @@
           "citations": [
             {
               "tier": 3,
-              "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=13091",
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=7412",
               "date": "2026",
               "type": "locator",
-              "claim": "Universal Intermodal Services, 7800 E. Little York, Ste. A, Houston TX 77016, exact address match"
+              "claim": "Southern Counties Express dba Universal Intermodal Services, 18020 South Santa Fe Avenue, Rancho Dominguez CA, exact address match"
             },
             {
-              "tier": 3,
-              "url": "https://cdllife.com/jobslist/6883dead9da35e0002827558/houston-texas",
-              "date": "2025",
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/universal-logistics-holdings-inc-acquires-southern-counties-express-inc-300695550.html",
+              "date": "2018",
               "type": "press",
-              "claim": "ULH/Universal hiring local CDL-A intermodal drivers out of Houston"
+              "claim": "ULH acquired Southern Counties Express ($65M); still in the ULH single-employer family"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Exact-address directory listing + current Houston intermodal driver req; terminal operating. Flag: ULH intermodal is the most financially stressed segment ($81.2M Q3-2025 impairment).",
+          "rationale": "Exact-address directory listing tying SCE/Universal Intermodal to 18020 S Santa Fe Ave; subsidiary still ULH-owned. Macro caveat: intermodal segment under stress.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "11-houston-tx",
         "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#3",
@@ -1872,8 +1669,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 20,
@@ -1944,30 +1740,8 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The loadmatch.com directory lists the Universal Intermodal Services Houston\nterminal at 7800 E Little York Rd, Houston TX 77016. The same address is also\nassociated with Universal Truckload Service, both Universal Logistics\nHoldings companies. The site is a drayage / intermodal terminal in NE\nHouston, on the south side of E Little York Rd, with a residential\nsubdivision to the W and open field to the E. The roster ROOFTOP coordinates\nland in the terminal yard; center locked at 29.87010, -95.28610.",
+        "dossierExcerpt": "The loadmatch.com directory lists the Universal Intermodal Services Houston\nterminal at 7800 E Little York Rd, Houston TX 77016. The same address is also\nassociated with Universal Truckload Service — both Universal Logistics\nHoldings companies. The site is a drayage / intermodal terminal in NE\nHouston, on the south side of E Little York Rd, with a residential\nsubdivision to the W and open field to the E. The roster ROOFTOP coordinates\nland in the terminal yard; center locked at 29.87010, -95.28610.",
         "mapsUrl": "https://www.google.com/maps/@29.8701,-95.2861,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/11-houston-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.8701,
-              "lng": -95.2861
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/11-houston-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.8701,
-              "lng": -95.2861
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteResolution": "loadmatch.com directory lists the Universal Intermodal Services Houston terminal at 7800 E Little York Rd, Houston TX 77016; the address is also tied to Universal Truckload Service (both Universal Logistics Holdings companies). A drayage / intermodal terminal in NE Houston south of E Little York Rd, with residential to the W and open field to the E. Roster coords land in the yard; center locked at 29.87010,-95.28610.",
           "truckGate": "The property fronts E Little York Rd with an OPEN, ungated yard apron. Street View (2025) of the road frontage shows no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point - trucks drive straight off the public road into the yard. truckGate = false (flagged uncertain - the deep interior of the yard could not be walked, but the road-frontage entrance is clearly uncontrolled).",
@@ -1980,36 +1754,36 @@
           "buildingCount": "Two buildings - the long terminal/M&R building and a smaller secondary building. multipleFacilities left false (not a campus of large buildings).",
           "railServed": "No rail spur enters the property; drayage moves are by truck. railServed = false.",
           "urbanRural": "Site sits within the NE Houston metro industrial fabric with adjacent residential subdivision. Classified Urban."
-        }
-      },
-      {
-        "id": "12-sturtevant-wi",
+        },
         "verification": {
-          "verdict": "probable",
-          "operator": "3PL",
+          "verdict": "confirmed",
+          "operator": "self",
           "tenancy": "leased",
           "citations": [
             {
               "tier": 3,
-              "url": "https://www.facebook.com/DriveUniversal/posts/4243706279024009/",
-              "date": "2024",
-              "type": "press",
-              "claim": "LINC hiring warehouse associates at 7100 Durand Ave, Sturtevant WI 53177"
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=13091",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Universal Intermodal Services, 7800 E. Little York, Ste. A, Houston TX 77016, exact address match"
             },
             {
               "tier": 3,
-              "url": "https://www.crexi.com/lease/properties/983727/wisconsin-7100-durand-ave",
-              "date": "2025-07",
+              "url": "https://cdllife.com/jobslist/6883dead9da35e0002827558/houston-texas",
+              "date": "2025",
               "type": "press",
-              "claim": "~300,410 of 601,160 sq ft VACANT, about half the building marketed for lease"
+              "claim": "ULH/Universal hiring local CDL-A intermodal drivers out of Houston"
             }
           ],
           "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "LINC-branded hiring + CNH trade records place LINC at 7100 Durand, but the CNH ag program is winding down and ~half the building is now for lease, active but contracting; scale unproven.",
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact-address directory listing + current Houston intermodal driver req; terminal operating. Flag: ULH intermodal is the most financially stressed segment ($81.2M Q3-2025 impairment).",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "12-sturtevant-wi",
         "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
         "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
@@ -2191,30 +1965,8 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "- Address: 7100 Durand Ave, Sturtevant, WI 53177 (Racine County / Mount Pleasant edge)\n- Locked coordinates: 42.70030, -87.87400 (building center)\n- Confirmation: Roster supplied a ROOFTOP geocode at 42.699445, -87.872248 (near the SE corner). Web search confirmed 7100 Durand Ave Ste 300 is LINC Logistics, a division of Universal Logistics Holdings, and that the facility serves CNH (Case New Holland), \"CNH Oakland LINC Logistics\" appears in U.S. port-examiner / Panjiva import records at this exact address, and the site is also listed as \"Oakland Logistics, 7100 Durand Ave Ste 300.\" Universal Logistics job postings repeatedly list Sturtevant/Racine WI warehouse-associate and dock-clerk roles at this address. Satellite confirms one very large (~1,300 ft long) white-roof distribution building, consistent with a large contract-logistics warehouse, not an office.",
+        "dossierExcerpt": "- Address: 7100 Durand Ave, Sturtevant, WI 53177 (Racine County / Mount Pleasant edge)\n- Locked coordinates: 42.70030, -87.87400 (building center)\n- Confirmation: Roster supplied a ROOFTOP geocode at 42.699445, -87.872248 (near the SE corner). Web search confirmed 7100 Durand Ave Ste 300 is LINC Logistics, a division of Universal Logistics Holdings, and that the facility serves CNH (Case New Holland) — \"CNH Oakland LINC Logistics\" appears in U.S. port-examiner / Panjiva import records at this exact address, and the site is also listed as \"Oakland Logistics, 7100 Durand Ave Ste 300.\" Universal Logistics job postings repeatedly list Sturtevant/Racine WI warehouse-associate and dock-clerk roles at this address. Satellite confirms one very large (~1,300 ft long) white-roof distribution building — consistent with a large contract-logistics warehouse, not an office.",
         "mapsUrl": "https://www.google.com/maps/@42.70030,-87.87400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/12-sturtevant-wi-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.7003,
-              "lng": -87.874
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/12-sturtevant-wi-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.7003,
-              "lng": -87.874
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Open site. The building sits behind a wide grass setback on a business-park road; truck driveways connect directly to the public road with no barrier arm, sliding gate, or checkpoint pinch-point. No perimeter fence on the east frontage.",
           "guardShack": "No guard booth at any driveway. Street View of the east frontage and the south end shows only open paved aprons and a small office at the south corner of the building - no 1-3-space booth structure.",
@@ -2223,36 +1975,36 @@
           "dockDoorCount": "Estimate from overhead - building is ~1300+ ft long with dock banks on both long faces; ~70 doors is an honest midpoint, flagged low-confidence.",
           "urbanRural": "Edge-of-town Racine County business park (Sturtevant/Mount Pleasant); farmland and open fields immediately south and west. Small-town industrial setting -> Rural per rubric.",
           "scale": "No truck scale visible in the truck path."
-        }
-      },
-      {
-        "id": "14-tanner-al",
+        },
         "verification": {
-          "verdict": "confirmed",
+          "verdict": "probable",
           "operator": "3PL",
           "tenancy": "leased",
           "citations": [
             {
-              "tier": 1,
-              "url": "https://hrone.wd1.myworkdayjobs.com/wday/cxs/hrone/Universal_Logistics_Holdings/job/LINC-TANNER-AL/CLASS-A-YARD-SWITCHER--Tanner--AL--CP-_JR123191",
-              "date": "2026-03",
+              "tier": 3,
+              "url": "https://www.facebook.com/DriveUniversal/posts/4243706279024009/",
+              "date": "2024",
               "type": "press",
-              "claim": "Universal/LINC hiring Class A Yard Switcher at Tanner AL (location code LINC-TANNER), posted 2026-03-10"
+              "claim": "LINC hiring warehouse associates at 7100 Durand Ave, Sturtevant WI 53177"
             },
             {
-              "tier": 2,
-              "url": "https://workforce.alabama.gov/warn-list/",
-              "date": "2026-06",
+              "tier": 3,
+              "url": "https://www.crexi.com/lease/properties/983727/wisconsin-7100-durand-ave",
+              "date": "2025-07",
               "type": "press",
-              "claim": "Alabama WARN list shows no Universal/LINC Tanner closure notice"
+              "claim": "~300,410 of 601,160 sq ft VACANT, about half the building marketed for lease"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "LINC has 16+ open Tanner reqs on its official Workday ATS (one posted 2026-03-10), location-coded LINC-TANNER; clean closure gauntlet; Mazda Toyota still in production.",
+          "rationale": "LINC-branded hiring + CNH trade records place LINC at 7100 Durand, but the CNH ag program is winding down and ~half the building is now for lease, active but contracting; scale unproven.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "14-tanner-al",
         "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
         "type": "Value-Added Logistics / Sequencing Warehouse",
         "archetype": "#3",
@@ -2348,73 +2100,51 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster supplied no address or coordinates. Web research resolved the facility:\n\n- Universal Logistics' own recruiting posting \"Class A Yard Switcher, Tanner, AL\" (Workday / ZipRecruiter / Glassdoor) lists the in-person apply address as 5271 Endeavor Way, Tanner, AL 35671. A dedicated yard-switcher (hostler) role confirms an active trailer yard at the site.\n- Commercial-real-estate listings (LoopNet, Crexi, Showcase) identify 5271 Endeavor Way as a 2021-built ~300k+ sq ft distribution / warehouse building in SouthPoint Business Park, Tanner, 40 ft clear, 51 dock doors, 2 drive-in doors, ~179 car spaces.\n- Google geocoding returns a ROOFTOP match at 34.6318, -86.8968 (the NW office corner of the building).\n- Context: Tanner sits in Limestone County beside I-565, ~10 mi from the Mazda Toyota Manufacturing USA plant in Huntsville/Madison, consistent with the roster's note that this facility serves MTM automotive value-added work.",
+        "dossierExcerpt": "The roster supplied no address or coordinates. Web research resolved the facility:\n\n- Universal Logistics' own recruiting posting \"Class A Yard Switcher — Tanner, AL\" (Workday / ZipRecruiter / Glassdoor) lists the in-person apply address as 5271 Endeavor Way, Tanner, AL 35671. A dedicated yard-switcher (hostler) role confirms an active trailer yard at the site.\n- Commercial-real-estate listings (LoopNet, Crexi, Showcase) identify 5271 Endeavor Way as a 2021-built ~300k+ sq ft distribution / warehouse building in SouthPoint Business Park, Tanner — 40 ft clear, 51 dock doors, 2 drive-in doors, ~179 car spaces.\n- Google geocoding returns a ROOFTOP match at 34.6318, -86.8968 (the NW office corner of the building).\n- Context: Tanner sits in Limestone County beside I-565, ~10 mi from the Mazda Toyota Manufacturing USA plant in Huntsville/Madison — consistent with the roster's note that this facility serves MTM automotive value-added work.",
         "mapsUrl": "https://www.google.com/maps/@34.63115,-86.89625,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/14-tanner-al-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.63115,
-              "lng": -86.89625
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/14-tanner-al-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.63115,
-              "lng": -86.89625
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Resolved to 5271 Endeavor Way NW, Tanner, AL 35671 (ROOFTOP geocode 34.6318,-86.8968). Confirmed via Universal Logistics 'Class A Yard Switcher - Tanner, AL' job posting which lists the in-person apply address as 5271 Endeavor Way; LoopNet/Crexi/Showcase list it as a 2021-built ~300k+ sq ft distribution warehouse with 51 dock doors in SouthPoint Business Park. Street View confirms the office-front warehouse and the spec-built dock yards.",
           "truckGate": "No controlled truck entrance. The building sits inside SouthPoint Business Park; dock yards open directly onto shared internal park drives. Office-front driveway (Street View, NW face) runs straight to the parking lot with no barrier arm, gate, or pinch-point.",
           "guardShack": "No guard booth at any approach. No staffed structure visible at the office driveway or the truck-side park drives.",
           "remoteGs": "false because there is no truck gate at all.",
-          "drivewayLong": "The internal park drives and dock aprons provide deep approach room, easily 3+ trucks of stacking before the docks.",
+          "drivewayLong": "The internal park drives and dock aprons provide deep approach room — easily 3+ trucks of stacking before the docks.",
           "fastLaneOpportunity": "Wide paved aprons and abundant unused paved width around the drop yards; ample room to add an express/bypass lane if a gate were ever installed.",
           "dockDoors": "Crexi/Showcase listing states 51 dock doors. Satellite corroborates dense dock banks on the SW long face and the NW (office) face with trailers backed in.",
           "dropArea": "Large drop yard south/southeast of the building with multiple rows of parked trailers; z20 imagery shows 25+ trailers in marked stalls in the southern yard alone, plus more along the SE.",
           "shipRcvSeparate": "Docks run on two distinct faces of the building (NW long face near the office and SW/SE long face), consistent with separate shipping and receiving banks in a cross-dock value-added layout.",
-          "urbanRural": "Rural, Tanner is a small Limestone County community; the site is in an edge-of-town spec industrial park (SouthPoint Business Park) beside I-565, with farmland and woods adjacent.",
+          "urbanRural": "Rural — Tanner is a small Limestone County community; the site is in an edge-of-town spec industrial park (SouthPoint Business Park) beside I-565, with farmland and woods adjacent.",
           "dropYard": "Dedicated trailer-storage rows on the south/southeast side, separate from the active dock aprons.",
-          "yardMetrics": "siteAreaAcres ~34 estimated from the perimeter box. trailersVisible/Capacity are honest overhead estimates; the building footprint plus drop yard rows are extensive. railServed false, no spur into the property; nearest rail is well off-site."
-        }
-      },
-      {
-        "id": "17-madison-al",
+          "yardMetrics": "siteAreaAcres ~34 estimated from the perimeter box. trailersVisible/Capacity are honest overhead estimates; the building footprint plus drop yard rows are extensive. railServed false — no spur into the property; nearest rail is well off-site."
+        },
         "verification": {
-          "verdict": "probable",
+          "verdict": "confirmed",
           "operator": "3PL",
-          "tenancy": "owned",
+          "tenancy": "leased",
           "citations": [
             {
               "tier": 1,
-              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
-              "date": "2025-03",
-              "type": "10-K",
-              "claim": "ULH delivers value-added contract logistics inside ~54 customer-provided facilities; automotive = 47% of revenue (confirms captive-in-customer-plant model)"
+              "url": "https://hrone.wd1.myworkdayjobs.com/wday/cxs/hrone/Universal_Logistics_Holdings/job/LINC-TANNER-AL/CLASS-A-YARD-SWITCHER--Tanner--AL--CP-_JR123191",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "Universal/LINC hiring Class A Yard Switcher at Tanner AL (location code LINC-TANNER), posted 2026-03-10"
             },
             {
-              "tier": 1,
-              "url": "https://www.polaris.com/en-us/locations/huntsville-al/",
-              "date": "2026",
-              "type": "locator",
-              "claim": "Polaris Huntsville/Madison AL plant active in 2026 (Slingshot + RANGER); the 2025 Polaris closure was Osceola WI, not Madison AL"
+              "tier": 2,
+              "url": "https://workforce.alabama.gov/warn-list/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Alabama WARN list shows no Universal/LINC Tanner closure notice"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "Polaris Madison plant confirmed operating in 2026 (closure risk cleared); Universal's captive inbound-logistics role fits ULH's 10-K customer-facility model and was historically address-attested, but lacks a fresh current re-confirmation, flagged medium.",
+          "rationale": "LINC has 16+ open Tanner reqs on its official Workday ATS (one posted 2026-03-10), location-coded LINC-TANNER; clean closure gauntlet; Mazda Toyota still in production.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "17-madison-al",
         "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
         "type": "Contract Logistics / inbound logistics inside manufacturing plant",
         "archetype": "#6",
@@ -2531,74 +2261,52 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Status: RESOLVED, confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0, Location\nConfirmed address: 7049 Greenbrier Pkwy NW, Madison AL 35756, the\nPolaris Industries off-road-vehicle manufacturing plant in the\nGreenbrier corridor of Limestone County, in the Huntsville metro. Universal\nLogistics runs inbound contract logistics (parts sequencing / value-added\nwarehousing) inside the Polaris plant, so the audited yard is the Polaris\nplant's captive freight yard. Google geocode returned a ROOFTOP match at\n`34.6521957, -86.8525792`. Locked center: `34.65205, -86.85300`.\n\n> This is not the Mazda-Toyota Manufacturing plant at 9000 Greenbrier Pkwy\n> (a separate, larger facility ~1.5 mi NE). The earlier stub's \"near Mazda\n> Toyota\" note led to ambiguity, the correct site is the Polaris plant.",
+        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 7049 Greenbrier Pkwy NW, Madison AL 35756 — the\nPolaris Industries off-road-vehicle manufacturing plant in the\nGreenbrier corridor of Limestone County, in the Huntsville metro. Universal\nLogistics runs inbound contract logistics (parts sequencing / value-added\nwarehousing) inside the Polaris plant, so the audited yard is the Polaris\nplant's captive freight yard. Google geocode returned a ROOFTOP match at\n`34.6521957, -86.8525792`. Locked center: `34.65205, -86.85300`.\n\n> This is not the Mazda-Toyota Manufacturing plant at 9000 Greenbrier Pkwy\n> (a separate, larger facility ~1.5 mi NE). The earlier stub's \"near Mazda\n> Toyota\" note led to ambiguity — the correct site is the Polaris plant.",
         "mapsUrl": "https://www.google.com/maps/@34.65205,-86.85300,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/17-madison-al-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.65205,
-              "lng": -86.853
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/17-madison-al-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.65205,
-              "lng": -86.853
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "locate": "Resolved to 7049 Greenbrier Pkwy NW, Madison AL 35756, the Polaris Industries off-road-vehicle manufacturing plant in the Limestone County / Huntsville-area Greenbrier corridor. Universal Logistics runs inbound contract logistics (sequencing/value-added warehousing) INSIDE the Polaris plant; the audited yard is the Polaris plant's captive freight yard. Confirmed NOT the Mazda-Toyota plant at 9000 Greenbrier Pkwy (a separate, larger facility ~1.5 mi NE). Google geocode returned a ROOFTOP match at 34.6521957,-86.8525792.",
+          "locate": "Resolved to 7049 Greenbrier Pkwy NW, Madison AL 35756 — the Polaris Industries off-road-vehicle manufacturing plant in the Limestone County / Huntsville-area Greenbrier corridor. Universal Logistics runs inbound contract logistics (sequencing/value-added warehousing) INSIDE the Polaris plant; the audited yard is the Polaris plant's captive freight yard. Confirmed NOT the Mazda-Toyota plant at 9000 Greenbrier Pkwy (a separate, larger facility ~1.5 mi NE). Google geocode returned a ROOFTOP match at 34.6521957,-86.8525792.",
           "truckGate": "The main plant entrance on the north access loop has a clear controlled checkpoint: a guard house structure in the road median with multiple barrier-arm-controlled lanes (visible as striped barrier marks across the lanes), with vehicles queued. truckGate = true.",
-          "guardShack": "A guard house / gatehouse sits in the median of the entrance checkpoint with controlled lanes on each side, a staffed booth. guardShack = true; remoteGs = false.",
-          "entryLanes": "The checkpoint shows roughly 2 inbound and 2 outbound controlled lanes split around the central guard house, wide multi-lane gate.",
+          "guardShack": "A guard house / gatehouse sits in the median of the entrance checkpoint with controlled lanes on each side — a staffed booth. guardShack = true; remoteGs = false.",
+          "entryLanes": "The checkpoint shows roughly 2 inbound and 2 outbound controlled lanes split around the central guard house — wide multi-lane gate.",
           "fastLaneOpportunity": "The multi-lane checkpoint and very wide gate apron leave clear physical room for an express/bypass lane.",
-          "multipleFacilities": "A manufacturing campus: a large main plant building plus a separate large distribution/warehouse building on the north end and ancillary structures, multiple large building clusters on one property.",
-          "drop": "Extensive trailer drop yards, the west side of the plant holds many hundreds of trailers in long rows (inbound parts/components staging for the contract-logistics operation); a second staging/drop area sits at the north warehouse. dropArea 50+, dropYard true.",
-          "dockDoorCount": "The plant has extensive dock banks (a long dock face on the building's west side plus the north warehouse dock bank), 50+ band; ~70 estimated. Flagged uncertain given plant scale.",
-          "shipRcvSeparate": "Inbound parts docks/yards on the west face are physically separate from finished-vehicle outbound staging, separate clusters.",
+          "multipleFacilities": "A manufacturing campus: a large main plant building plus a separate large distribution/warehouse building on the north end and ancillary structures — multiple large building clusters on one property.",
+          "drop": "Extensive trailer drop yards — the west side of the plant holds many hundreds of trailers in long rows (inbound parts/components staging for the contract-logistics operation); a second staging/drop area sits at the north warehouse. dropArea 50+, dropYard true.",
+          "dockDoorCount": "The plant has extensive dock banks (a long dock face on the building's west side plus the north warehouse dock bank) — 50+ band; ~70 estimated. Flagged uncertain given plant scale.",
+          "shipRcvSeparate": "Inbound parts docks/yards on the west face are physically separate from finished-vehicle outbound staging — separate clusters.",
           "scale": "No distinct truck scale observed in the truck path; scale = false.",
-          "railServed": "No rail spur into the plant property observed, railServed = false.",
-          "urbanRural": "The plant sits in open farmland on the edge of the Greenbrier/Huntsville logistics corridor, surrounded by fields, Rural.",
-          "geofences": "Perimeter captures the developed plant footprint, buildings, west drop yards, north warehouse, and employee parking: ~857 m N-S x ~916 m E-W ≈ 194 acres (the overall parcel is larger; the box is the operational/developed area). truckGate box is the north checkpoint."
-        }
-      },
-      {
-        "id": "20-savannah-ga",
+          "railServed": "No rail spur into the plant property observed — railServed = false.",
+          "urbanRural": "The plant sits in open farmland on the edge of the Greenbrier/Huntsville logistics corridor, surrounded by fields — Rural.",
+          "geofences": "Perimeter captures the developed plant footprint — buildings, west drop yards, north warehouse, and employee parking: ~857 m N-S x ~916 m E-W ≈ 194 acres (the overall parcel is larger; the box is the operational/developed area). truckGate box is the north checkpoint."
+        },
         "verification": {
-          "verdict": "confirmed",
-          "operator": "self",
+          "verdict": "probable",
+          "operator": "3PL",
           "tenancy": "owned",
           "citations": [
             {
               "tier": 1,
-              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
-              "date": "2026-03",
+              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+              "date": "2025-03",
               "type": "10-K",
-              "claim": "ULH owns terminal yards including Savannah, Georgia (Item 2 Properties, FY2025, as of 2025-12-31)"
+              "claim": "ULH delivers value-added contract logistics inside ~54 customer-provided facilities; automotive = 47% of revenue (confirms captive-in-customer-plant model)"
             },
             {
-              "tier": 3,
-              "url": "https://www.ziprecruiter.com/Jobs/Universal-Intermodal/--in-Georgia",
-              "date": "2025-10",
-              "type": "press",
-              "claim": "Universal Intermodal actively hiring company drivers/owner-operators in Georgia (Savannah/Garden City)"
+              "tier": 1,
+              "url": "https://www.polaris.com/en-us/locations/huntsville-al/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Polaris Huntsville/Madison AL plant active in 2026 (Slingshot + RANGER); the 2025 Polaris closure was Osceola WI, not Madison AL"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "ULH owns the Savannah/Garden City terminal (6052 Commerce Court), operated as Universal Intermodal / Mason Dixon, named in the FY2025 10-K with active 2025 hiring. Flag: $81.2M Q3-2025 intermodal impairment + potential divestiture talk; retained in post-impairment 10-K.",
+          "rationale": "Polaris Madison plant confirmed operating in 2026 (closure risk cleared); Universal's captive inbound-logistics role fits ULH's 10-K customer-facility model and was historically address-attested, but lacks a fresh current re-confirmation, flagged medium.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "20-savannah-ga",
         "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#9",
@@ -2738,44 +2446,19 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "The roster supplied no address and no coordinates, only \"ULH 2025 10-K Item 2\nProperties, Savannah GA named as owned terminal yard property serving Port of\nSavannah.\" Web search and the loadmatch intermodal directory resolved Universal\nIntermodal Services' Savannah terminal to **6052 Commerce Court, Garden City /\nSavannah GA 31408**, ~1.6 miles from the Port of Savannah. The address geocoded\nto 32.1329, -81.1751; satellite probing confirmed a truck / intermodal terminal\nat that point.\n\nNote: directories show 6052 Commerce Ct shared with Mason Dixon Intermodal ,\nthe audited yard is the Universal Intermodal drayage terminal at that address.\nMedium confidence.",
+        "dossierExcerpt": "The roster supplied no address and no coordinates — only \"ULH 2025 10-K Item 2\nProperties — Savannah GA named as owned terminal yard property serving Port of\nSavannah.\" Web search and the loadmatch intermodal directory resolved Universal\nIntermodal Services' Savannah terminal to **6052 Commerce Court, Garden City /\nSavannah GA 31408**, ~1.6 miles from the Port of Savannah. The address geocoded\nto 32.1329, -81.1751; satellite probing confirmed a truck / intermodal terminal\nat that point.\n\nNote: directories show 6052 Commerce Ct shared with Mason Dixon Intermodal —\nthe audited yard is the Universal Intermodal drayage terminal at that address.\nMedium confidence.",
         "mapsUrl": "https://www.google.com/maps/@32.1332,-81.175,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/20-savannah-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.1332,
-              "lng": -81.175
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/20-savannah-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.1332,
-              "lng": -81.175
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "siteResolution": "No street address in roster. Web search + loadmatch directory resolved Universal Intermodal Services' Savannah terminal to 6052 Commerce Court, Garden City/Savannah GA 31408, ~1.6 mi from the Port of Savannah. Geocoded to 32.1329, -81.1751 and confirmed by satellite as a truck/intermodal terminal: a central shop/office building surrounded by a paved truck yard full of tractors and trailers, fuel tanks, and adjacent trailer-storage parcels. Street View (2025-11) shows tractors and trailers parked behind chain-link fencing. Note: 6052 Commerce Ct is shared with Mason Dixon Intermodal in directories, the audited yard is the Universal Intermodal drayage terminal at that address. Medium confidence.",
-          "truckGate": "The terminal yard is perimeter chain-link fenced; truck access is via a gated fenced opening off the access road on the west side. No barrier arm was directly resolved, classed truckGate true / remoteGs true (gated fenced access, no clearly visible staffed booth). C-TPAT/FAST-certified secure terminal status corroborates access control.",
+          "siteResolution": "No street address in roster. Web search + loadmatch directory resolved Universal Intermodal Services' Savannah terminal to 6052 Commerce Court, Garden City/Savannah GA 31408 — ~1.6 mi from the Port of Savannah. Geocoded to 32.1329, -81.1751 and confirmed by satellite as a truck/intermodal terminal: a central shop/office building surrounded by a paved truck yard full of tractors and trailers, fuel tanks, and adjacent trailer-storage parcels. Street View (2025-11) shows tractors and trailers parked behind chain-link fencing. Note: 6052 Commerce Ct is shared with Mason Dixon Intermodal in directories — the audited yard is the Universal Intermodal drayage terminal at that address. Medium confidence.",
+          "truckGate": "The terminal yard is perimeter chain-link fenced; truck access is via a gated fenced opening off the access road on the west side. No barrier arm was directly resolved — classed truckGate true / remoteGs true (gated fenced access, no clearly visible staffed booth). C-TPAT/FAST-certified secure terminal status corroborates access control.",
           "guardShack": "No staffed guard booth positively resolved at the entrance in satellite or Street View. Access control appears fence/gate-based; classed guardShack false / remoteGs true. Flagged uncertain.",
-          "dockDoors": "This is a drayage terminal, not a warehouse, the central building is an M&R shop (sawtooth-roof shop bays) plus office. Only a handful of shop/dock bays (~4); classed dockDoors 0-10.",
-          "dropArea": "Extensive trailer/container/chassis storage: the paved core yard plus multiple adjacent unpaved storage parcels hold rows of trailers, dropArea 50+ / dropYard true. Classic drayage drop-yard.",
+          "dockDoors": "This is a drayage terminal, not a warehouse — the central building is an M&R shop (sawtooth-roof shop bays) plus office. Only a handful of shop/dock bays (~4); classed dockDoors 0-10.",
+          "dropArea": "Extensive trailer/container/chassis storage: the paved core yard plus multiple adjacent unpaved storage parcels hold rows of trailers — dropArea 50+ / dropYard true. Classic drayage drop-yard.",
           "postGateStaging": "Generous paved yard inside the gate gives ample truck holding/queue depth before the shop bays.",
           "railServed": "A rail line runs along the east side of the corridor (across the highway buffer) but no spur enters the terminal property; drayage moves are truck-only. railServed = false.",
-          "urbanRural": "Edge-of-metro industrial-outdoor-storage zone in Garden City, on the western fringe of the Savannah port area, surrounded by trailer-storage yards and woods, not dense urban fabric. Rural per the rubric's small-town-industrial guidance.",
-          "scale": "No truck scale positively identified, flagged uncertain."
-        }
-      },
-      {
-        "id": "21-harvey-il",
+          "urbanRural": "Edge-of-metro industrial-outdoor-storage zone in Garden City, on the western fringe of the Savannah port area — surrounded by trailer-storage yards and woods, not dense urban fabric. Rural per the rubric's small-town-industrial guidance.",
+          "scale": "No truck scale positively identified — flagged uncertain."
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -2786,22 +2469,25 @@
               "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
               "date": "2026-03",
               "type": "10-K",
-              "claim": "ULH owns terminal yards including Harvey, Illinois (Item 2 Properties, FY2025, as of 2025-12-31)"
+              "claim": "ULH owns terminal yards including Savannah, Georgia (Item 2 Properties, FY2025, as of 2025-12-31)"
             },
             {
-              "tier": 1,
-              "url": "https://www.breakroom.cc/en-us/jobs/listing/758102-universal-logistics-holdings-inc-cdl-a-contractors-harvey",
-              "date": "2025",
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/Jobs/Universal-Intermodal/--in-Georgia",
+              "date": "2025-10",
               "type": "press",
-              "claim": "ULH 'CDL A Contractors (Harvey)' active hiring at the Harvey terminal"
+              "claim": "Universal Intermodal actively hiring company drivers/owner-operators in Georgia (Savannah/Garden City)"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
-          "rationale": "ULH owns the Harvey IL drayage terminal (250 E 167th St, the Universal Intermodal Chicago ops center on the CN corridor), named in the FY2025 10-K with active 2025 hiring. Flag: intermodal-segment impairment/divestiture risk; retained in post-impairment 10-K.",
+          "rationale": "ULH owns the Savannah/Garden City terminal (6052 Commerce Court), operated as Universal Intermodal / Mason Dixon, named in the FY2025 10-K with active 2025 hiring. Flag: $81.2M Q3-2025 intermodal impairment + potential divestiture talk; retained in post-impairment 10-K.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "21-harvey-il",
         "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
         "type": "Intermodal / Drayage container & chassis yard",
         "archetype": "#9",
@@ -2926,45 +2612,20 @@
           "dropYard": true,
           "multiStep": false
         },
-        "dossierExcerpt": "Status: RESOLVED, confidence HIGH (re-audit; earlier audit geocoded the wrong building)\n\n### Step 0, Location\nConfirmed address: 250 E 167th St, Harvey IL 60426, Universal Intermodal\nServices' Chicago operations center, an open container/chassis drayage yard\nagainst the CN Harvey rail corridor. Google geocode returned `41.5877278,\n-87.6439306`. Locked center: `41.58770, -87.64400`.\n\n> The earlier audit geocoded the wrong building, it placed the site at\n> `41.58590, -87.64029`, an older brick industrial building on a mixed\n> residential block, and was correctly flagged low-confidence. This re-audit\n> uses the confirmed address and pins the actual operating drayage yard:\n> satellite shows a large open container/chassis yard with an office and\n> maintenance shops, directly against the CN rail corridor.",
+        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit; earlier audit geocoded the wrong building)\n\n### Step 0 — Location\nConfirmed address: 250 E 167th St, Harvey IL 60426 — Universal Intermodal\nServices' Chicago operations center, an open container/chassis drayage yard\nagainst the CN Harvey rail corridor. Google geocode returned `41.5877278,\n-87.6439306`. Locked center: `41.58770, -87.64400`.\n\n> The earlier audit geocoded the wrong building — it placed the site at\n> `41.58590, -87.64029`, an older brick industrial building on a mixed\n> residential block — and was correctly flagged low-confidence. This re-audit\n> uses the confirmed address and pins the actual operating drayage yard:\n> satellite shows a large open container/chassis yard with an office and\n> maintenance shops, directly against the CN rail corridor.",
         "mapsUrl": "https://www.google.com/maps/@41.58770,-87.64400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/21-harvey-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.5877,
-              "lng": -87.644
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/21-harvey-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.5877,
-              "lng": -87.644
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "locate": "Re-resolved to 250 E 167th St, Harvey IL 60426, Universal Intermodal Services' Chicago operations center. The EARLIER audit geocoded the wrong building (an older brick industrial building on a mixed residential block) and was flagged low-confidence; this re-audit uses the confirmed address and pins the actual operating drayage yard. Google geocode returned 41.5877278,-87.6439306. Satellite confirms a large open container/chassis drayage yard with an office and maintenance buildings, sitting directly against the CN Harvey rail corridor.",
-          "facilityNature": "An open intermodal/drayage yard, NOT a warehouse. The site is a large paved lot used for chassis storage, container storage, and drayage-tractor parking, with a small office building and maintenance/repair shop buildings. There is essentially no dock-warehouse function.",
-          "truckGate": "The yard is fully enclosed by chain-link fence along E 167th St. Street View (Jul 2024) shows a defined truck-entrance pinch-point, a wide paved gate opening in the fence line off 167th St. truckGate = true (controlled fenced perimeter with a single defined entrance).",
-          "guardShack": "No staffed standalone guard booth observed at the gate opening, a fenced entrance with no median booth and no barrier arm visible. Check-in is presumed handled at the interior office building. Classed remoteGs = true; guardShack flagged uncertain (a small gate booth could exist but is not visible in imagery).",
-          "dockDoors": "No warehouse dock bank. The maintenance/repair shop buildings have a handful of service-bay doors only, dockDoors 0-10 (effectively a maintenance shop, not loading docks).",
-          "drop": "The dominant feature is massive chassis and container storage, hundreds of chassis in skeletal rows plus stacked containers across the open lot. dropArea 50+, dropYard true.",
-          "railServed": "The CN Harvey (CN Gateway) intermodal rail corridor runs immediately west of the yard, and the yard exists to dray containers to/from that ramp, but NO rail spur runs into this property itself. railServed = false.",
-          "fastLaneOpportunity": "Very large open paved yard with abundant unused width at the entrance, ample room for an express/bypass lane.",
-          "urbanRural": "Harvey IL is inside the dense south-suburban Chicago metro fabric, Urban.",
+          "locate": "Re-resolved to 250 E 167th St, Harvey IL 60426 — Universal Intermodal Services' Chicago operations center. The EARLIER audit geocoded the wrong building (an older brick industrial building on a mixed residential block) and was flagged low-confidence; this re-audit uses the confirmed address and pins the actual operating drayage yard. Google geocode returned 41.5877278,-87.6439306. Satellite confirms a large open container/chassis drayage yard with an office and maintenance buildings, sitting directly against the CN Harvey rail corridor.",
+          "facilityNature": "An open intermodal/drayage yard — NOT a warehouse. The site is a large paved lot used for chassis storage, container storage, and drayage-tractor parking, with a small office building and maintenance/repair shop buildings. There is essentially no dock-warehouse function.",
+          "truckGate": "The yard is fully enclosed by chain-link fence along E 167th St. Street View (Jul 2024) shows a defined truck-entrance pinch-point — a wide paved gate opening in the fence line off 167th St. truckGate = true (controlled fenced perimeter with a single defined entrance).",
+          "guardShack": "No staffed standalone guard booth observed at the gate opening — a fenced entrance with no median booth and no barrier arm visible. Check-in is presumed handled at the interior office building. Classed remoteGs = true; guardShack flagged uncertain (a small gate booth could exist but is not visible in imagery).",
+          "dockDoors": "No warehouse dock bank. The maintenance/repair shop buildings have a handful of service-bay doors only — dockDoors 0-10 (effectively a maintenance shop, not loading docks).",
+          "drop": "The dominant feature is massive chassis and container storage — hundreds of chassis in skeletal rows plus stacked containers across the open lot. dropArea 50+, dropYard true.",
+          "railServed": "The CN Harvey (CN Gateway) intermodal rail corridor runs immediately west of the yard, and the yard exists to dray containers to/from that ramp — but NO rail spur runs into this property itself. railServed = false.",
+          "fastLaneOpportunity": "Very large open paved yard with abundant unused width at the entrance — ample room for an express/bypass lane.",
+          "urbanRural": "Harvey IL is inside the dense south-suburban Chicago metro fabric — Urban.",
           "geofences": "Perimeter captures the fenced drayage yard: ~290 m N-S x ~292 m E-W ≈ 21 acres. dropYards boxes cover the chassis/container storage blocks; truckGate box is the 167th St entrance pinch-point."
-        }
-      },
-      {
-        "id": "23-louisville-ky",
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -2972,25 +2633,28 @@
           "citations": [
             {
               "tier": 1,
-              "url": "https://www.gocrown.ws/property/2338-millers-lane/",
-              "date": "2026-06",
-              "type": "press",
-              "claim": "Crown Enterprises (Moroun, holds ULH real estate) lists 2338 Millers Lane as a 23,591 SF terminal, 46 cross-dock doors, 4.72 acres, exact building match"
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+              "date": "2026-03",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Harvey, Illinois (Item 2 Properties, FY2025, as of 2025-12-31)"
             },
             {
               "tier": 1,
-              "url": "https://www.nlrb.gov/case/21-CA-286645",
-              "date": "2026-06",
+              "url": "https://www.breakroom.cc/en-us/jobs/listing/758102-universal-logistics-holdings-inc-cdl-a-contractors-harvey",
+              "date": "2025",
               "type": "press",
-              "claim": "Names 'Mason-Dixon Intermodal d/b/a Universal Intermodal Services' as a ULH single-employer entity"
+              "claim": "ULH 'CDL A Contractors (Harvey)' active hiring at the Harvey terminal"
             }
           ],
           "checkedDivestiture": true,
-          "checkedBankruptcyEra": false,
-          "rationale": "Independent sources place the ULH intermodal operator at the exact 46-door Crown-owned building; only 2025 negative is a non-cash impairment, no WARN/closure.",
+          "checkedBankruptcyEra": true,
+          "rationale": "ULH owns the Harvey IL drayage terminal (250 E 167th St, the Universal Intermodal Chicago ops center on the CN corridor), named in the FY2025 10-K with active 2025 hiring. Flag: intermodal-segment impairment/divestiture risk; retained in post-impairment 10-K.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "23-louisville-ky",
         "name": "Universal Logistics - Louisville Terminal - Louisville KY",
         "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
         "archetype": "#3",
@@ -3176,44 +2840,19 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied no address or coordinates, only \"Louisville KY named as owned\nterminal/operating property\" from the ULH 2025 10-K. Resolution path:\n\n1. The loadmatch.com intermodal directory lists **Universal Intermodal Services, Inc.\n   / Louisville, KY at 2338 Millers Ln, Louisville, KY 40216** (companyID 3521).\n2. The address is independently corroborated by a Crown Enterprises real-estate\n   listing (gocrown.ws/property/2338-millers-lane). Crown Enterprises is the\n   Moroun-family real-estate company that holds the Universal/ULH property portfolio ,\n   strong confirmation this is the ULH-owned terminal named in the 10-K. Crown's\n   listing describes the parcel precisely: 4.72 acres, three structures ,\n   a 16,195 SF terminal building with 46 cross-dock doors, a 2,516 SF warehouse,",
+        "dossierExcerpt": "The roster supplied no address or coordinates — only \"Louisville KY named as owned\nterminal/operating property\" from the ULH 2025 10-K. Resolution path:\n\n1. The loadmatch.com intermodal directory lists **Universal Intermodal Services, Inc.\n   / Louisville, KY at 2338 Millers Ln, Louisville, KY 40216** (companyID 3521).\n2. The address is independently corroborated by a Crown Enterprises real-estate\n   listing (gocrown.ws/property/2338-millers-lane). Crown Enterprises is the\n   Moroun-family real-estate company that holds the Universal/ULH property portfolio —\n   strong confirmation this is the ULH-owned terminal named in the 10-K. Crown's\n   listing describes the parcel precisely: 4.72 acres, three structures —\n   a 16,195 SF terminal building with 46 cross-dock doors, a 2,516 SF warehouse,",
         "mapsUrl": "https://www.google.com/maps/@38.21422,-85.8028,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/23-louisville-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.21422,
-              "lng": -85.8028
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/23-louisville-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.21422,
-              "lng": -85.8028
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Resolved to 2338 Millers Ln, Louisville KY 40216 via loadmatch.com directory (Universal Intermodal Services) and the Crown Enterprises real-estate listing (gocrown.ws), which is the Moroun-family property company that holds ULH/Universal real estate. Crown's Google Maps embed placed the parcel at 38.214222,-85.802804.",
-          "truckGate": "Street View (2024-07) from Millers Lane shows the yard frontage fully open, no barrier arm, no sliding/swing gate, no fencing across the truck driveway at the public road. Trucks enter directly off Millers Lane.",
+          "truckGate": "Street View (2024-07) from Millers Lane shows the yard frontage fully open — no barrier arm, no sliding/swing gate, no fencing across the truck driveway at the public road. Trucks enter directly off Millers Lane.",
           "guardShack": "No guard booth visible at the entrance or anywhere on the property in satellite or Street View. Only the metal-sided terminal/office building is present.",
           "dockDoors": "Crown Enterprises listing states 46 cross-dock doors on the 16,195 SF terminal building; satellite confirms a long narrow cross-dock building with trailers backed against both long faces. Banded 25-50.",
-          "dropArea": "Yard (mostly gravel/dirt) is filled with stacked ocean containers and parked trailers/chassis, clearly a working drop/storage yard. Banded 50+.",
-          "drivewayLong": "Open paved/gravel apron and internal yard provide ample stacking depth between the road and the dock building, 3+ trucks could queue.",
+          "dropArea": "Yard (mostly gravel/dirt) is filled with stacked ocean containers and parked trailers/chassis — clearly a working drop/storage yard. Banded 50+.",
+          "drivewayLong": "Open paved/gravel apron and internal yard provide ample stacking depth between the road and the dock building — 3+ trucks could queue.",
           "buildingCount": "Three structures per the property record: 16,195 SF terminal, 2,516 SF warehouse, 4,880 SF office (the office is integrated into the terminal building's near end).",
           "railServed": "No rail spur runs into this parcel. It is a drayage/cross-dock terminal that trucks containers to/from the nearby CSX Osborn intermodal ramp; rail does not enter the property.",
-          "urbanRural": "Inside the Louisville metro industrial fabric (40216 / I-264 corridor), Urban."
-        }
-      },
-      {
-        "id": "24-columbus-oh",
+          "urbanRural": "Inside the Louisville metro industrial fabric (40216 / I-264 corridor) — Urban."
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -3221,25 +2860,28 @@
           "citations": [
             {
               "tier": 1,
-              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
-              "date": "2026-03",
-              "type": "10-K",
-              "claim": "ULH owns terminal yards including Columbus, Ohio (Item 2 Properties, FY2025)"
+              "url": "https://www.gocrown.ws/property/2338-millers-lane/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Crown Enterprises (Moroun, holds ULH real estate) lists 2338 Millers Lane as a 23,591 SF terminal, 46 cross-dock doors, 4.72 acres, exact building match"
             },
             {
-              "tier": 3,
-              "url": "https://cdllife.com/jobslist/696aafe04a5a01000284248f/columbus-ohio",
-              "date": "2026-01",
+              "tier": 1,
+              "url": "https://www.nlrb.gov/case/21-CA-286645",
+              "date": "2026-06",
               "type": "press",
-              "claim": "ULH hiring CDL-A intermodal drivers at 2950 International St, Columbus OH 43228"
+              "claim": "Names 'Mason-Dixon Intermodal d/b/a Universal Intermodal Services' as a ULH single-employer entity"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Columbus appears as a ULH-owned terminal yard in both FY2024 and FY2025 10-Ks, corroborated by 2026 hiring at the exact address; 2025 impairment is accounting, not a closure.",
+          "rationale": "Independent sources place the ULH intermodal operator at the exact 46-door Crown-owned building; only 2025 negative is a non-cash impairment, no WARN/closure.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "24-columbus-oh",
         "name": "Universal Logistics - Columbus Terminal - Columbus OH",
         "type": "Intermodal / Drayage Terminal Yard (owned)",
         "archetype": "#3",
@@ -3425,49 +3067,24 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied no address or coordinates, only \"Columbus OH named as owned\nterminal/operating property\" from the ULH 2025 10-K. Resolution path:\n\n1. The loadmatch.com intermodal directory lists **Universal Intermodal Services,\n   Inc. / Columbus, OH at 2950 International St, Columbus, OH 43228**\n   (companyID 5853). The profile describes a Columbus terminal with ingate/outgate,\n   ~37 drivers, a secured parking lot, and a container-yard depot handling MSC and\n   Maersk containers.\n2. The address is independently corroborated by iBegin, Superpages and Yelp\n   listings, all at 2950 International St, phone 614-777-9393, several branded\n   \"Mason Dixon Lines\" (a Universal/ULH operating brand).\n3. The geocoding-API rooftop point fell on a neighboring multi-tenant distribution\n   warehouse. The actual terminal is the parcel ~150 m east, fronting International",
+        "dossierExcerpt": "The roster supplied no address or coordinates — only \"Columbus OH named as owned\nterminal/operating property\" from the ULH 2025 10-K. Resolution path:\n\n1. The loadmatch.com intermodal directory lists **Universal Intermodal Services,\n   Inc. / Columbus, OH at 2950 International St, Columbus, OH 43228**\n   (companyID 5853). The profile describes a Columbus terminal with ingate/outgate,\n   ~37 drivers, a secured parking lot, and a container-yard depot handling MSC and\n   Maersk containers.\n2. The address is independently corroborated by iBegin, Superpages and Yelp\n   listings — all at 2950 International St, phone 614-777-9393, several branded\n   \"Mason Dixon Lines\" (a Universal/ULH operating brand).\n3. The geocoding-API rooftop point fell on a neighboring multi-tenant distribution\n   warehouse. The actual terminal is the parcel ~150 m east, fronting International",
         "mapsUrl": "https://www.google.com/maps/@40.013,-83.1308,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/24-columbus-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.013,
-              "lng": -83.1308
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/24-columbus-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.013,
-              "lng": -83.1308
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "location": "Resolved to 2950 International St, Columbus, OH 43228 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Columbus OH, companyID 5853). Address independently corroborated by iBegin, Superpages, and Yelp listings (all show 2950 International St, phone 614-777-9393, also branded 'Mason Dixon Lines', a Universal/ULH operating brand). The geocoding-API rooftop point (40.0129, -83.1330) landed on a neighboring multi-tenant DC; the terminal yard is the parcel ~150 m east, fronting International St, confirmed by a Street View 'Universal Intermodal Services' sign on the property fence (pano 2021-07).",
-          "truckGate": "Street View along International St (2021-07) shows the truck entrance driveway is a wide open paved apron meeting International St, NO barrier arm, NO sliding/swing gate across the truck lane. The container yard has perimeter chain-link fencing along the road frontage, but the entrance driveway itself is uncontrolled and open.",
+          "location": "Resolved to 2950 International St, Columbus, OH 43228 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Columbus OH, companyID 5853). Address independently corroborated by iBegin, Superpages, and Yelp listings (all show 2950 International St, phone 614-777-9393, also branded 'Mason Dixon Lines' — a Universal/ULH operating brand). The geocoding-API rooftop point (40.0129, -83.1330) landed on a neighboring multi-tenant DC; the terminal yard is the parcel ~150 m east, fronting International St — confirmed by a Street View 'Universal Intermodal Services' sign on the property fence (pano 2021-07).",
+          "truckGate": "Street View along International St (2021-07) shows the truck entrance driveway is a wide open paved apron meeting International St — NO barrier arm, NO sliding/swing gate across the truck lane. The container yard has perimeter chain-link fencing along the road frontage, but the entrance driveway itself is uncontrolled and open.",
           "guardShack": "No staffed booth visible at the entrance or anywhere on the property in satellite or Street View. Only an L-shaped metal office/equipment-shop building is present.",
           "remoteGs": "No truck gate (open uncontrolled entrance), so no remote check-in implied.",
-          "dockDoors": "NONE, this is a drayage/intermodal terminal yard, not a cross-dock. The only building is an office/equipment-shop with no rhythm of loading-dock doors.",
-          "dropArea": "Banded 50+. Street View (2021) showed the yard densely stacked with ocean containers (MSC, Maersk and others). 2026 satellite shows the yard dominated by flatbed/chassis rows carrying steel/material loads plus parked trailers, a large working drop/storage yard.",
-          "drivewayLong": "The wide gravel/paved yard provides deep stacking between International St and the yard interior, 3+ trucks could queue inside without spilling onto the road.",
-          "fastLaneOpportunity": "The entrance apron is very wide with substantial unused paved width, physical room to add a bypass/express lane exists.",
+          "dockDoors": "NONE — this is a drayage/intermodal terminal yard, not a cross-dock. The only building is an office/equipment-shop with no rhythm of loading-dock doors.",
+          "dropArea": "Banded 50+. Street View (2021) showed the yard densely stacked with ocean containers (MSC, Maersk and others). 2026 satellite shows the yard dominated by flatbed/chassis rows carrying steel/material loads plus parked trailers — a large working drop/storage yard.",
+          "drivewayLong": "The wide gravel/paved yard provides deep stacking between International St and the yard interior — 3+ trucks could queue inside without spilling onto the road.",
+          "fastLaneOpportunity": "The entrance apron is very wide with substantial unused paved width — physical room to add a bypass/express lane exists.",
           "buildingCount": "Two structures: a long L-shaped office/equipment-shop building near the SW corner and a small adjacent shed.",
           "railServed": "No rail spur runs into the parcel. It is a truck drayage terminal in the I-270 / West Belt Dr corridor that interchanges with the nearby CSX Columbus intermodal ramp; rail does not enter the property.",
-          "siteAreaAcres": "~21.8 acres computed from the perimeter box, a large open terminal yard bounded by International St (W) and the I-270 / rail corridor tree line (N/E).",
-          "trailersVisible": "~40 trailers/chassis estimated from 2026 satellite, low confidence, the yard is irregularly loaded.",
-          "trailerParkingCapacity": "~200, the yard is mostly open gravel/paved and could hold a large number of trailers/chassis/containers; honest estimate.",
-          "urbanRural": "Inside the west-Columbus industrial fabric (43228, I-270/I-70 corridor), Urban."
-        }
-      },
-      {
-        "id": "25-clearfield-ut",
+          "siteAreaAcres": "~21.8 acres computed from the perimeter box — a large open terminal yard bounded by International St (W) and the I-270 / rail corridor tree line (N/E).",
+          "trailersVisible": "~40 trailers/chassis estimated from 2026 satellite — low confidence, the yard is irregularly loaded.",
+          "trailerParkingCapacity": "~200 — the yard is mostly open gravel/paved and could hold a large number of trailers/chassis/containers; honest estimate.",
+          "urbanRural": "Inside the west-Columbus industrial fabric (43228, I-270/I-70 corridor) — Urban."
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -3475,25 +3092,28 @@
           "citations": [
             {
               "tier": 1,
-              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-ex21_1.htm",
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
               "date": "2026-03",
               "type": "10-K",
-              "claim": "'Specialized Rail Service, Inc.' listed as a principal ULH subsidiary (Exhibit 21.1, FY2025)"
+              "claim": "ULH owns terminal yards including Columbus, Ohio (Item 2 Properties, FY2025)"
             },
             {
-              "tier": 1,
-              "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=506498",
-              "date": "2026-06",
+              "tier": 3,
+              "url": "https://cdllife.com/jobslist/696aafe04a5a01000284248f/columbus-ohio",
+              "date": "2026-01",
               "type": "press",
-              "claim": "SPECIALIZED RAIL SERVICE INC, DBA UNIVERSAL, status ACTIVE, 120 E 700 S, Clearfield UT 84015"
+              "claim": "ULH hiring CDL-A intermodal drivers at 2950 International St, Columbus OH 43228"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "FY2025 10-K lists SRS as a subsidiary and Clearfield UT as ULH-owned; live FMCSA SAFER (2026-06) shows USDOT 506498 ACTIVE at the exact address under DBA 'UNIVERSAL'.",
+          "rationale": "Columbus appears as a ULH-owned terminal yard in both FY2024 and FY2025 10-Ks, corroborated by 2026 hiring at the exact address; 2025 impairment is accounting, not a closure.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "25-clearfield-ut",
         "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
         "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
         "archetype": "#3",
@@ -3665,48 +3285,23 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied no address or coordinates, only \"Clearfield UT named as owned\nterminal/operating property\" from the ULH 2025 10-K. Resolution path:\n\n1. Specialized Rail Service, Inc. (SRS) is a Clearfield, UT-based intermodal\n   drayage / transloading / warehousing-and-distribution / intermodal-facility-\n   management operator, founded 1992. **Universal Logistics Holdings acquired SRS\n   in October 2018 for $12.3M.** SRS is the ULH operating presence behind the\n   10-K-named Clearfield property.\n2. The SRS address is firm: 120 E 700 S, Clearfield, UT 84015, confirmed\n   identically by FMCSA SAFER (USDOT 506498, physical and mailing address),\n   loadmatch.com (companyID 504), Yelp, Dun & Bradstreet, and Loc8NearMe.\n3. The exact parcel is not positively confirmed. 120 E 700 S sits inside a",
+        "dossierExcerpt": "The roster supplied no address or coordinates — only \"Clearfield UT named as owned\nterminal/operating property\" from the ULH 2025 10-K. Resolution path:\n\n1. Specialized Rail Service, Inc. (SRS) is a Clearfield, UT-based intermodal\n   drayage / transloading / warehousing-and-distribution / intermodal-facility-\n   management operator, founded 1992. **Universal Logistics Holdings acquired SRS\n   in October 2018 for $12.3M.** SRS is the ULH operating presence behind the\n   10-K-named Clearfield property.\n2. The SRS address is firm: 120 E 700 S, Clearfield, UT 84015 — confirmed\n   identically by FMCSA SAFER (USDOT 506498, physical and mailing address),\n   loadmatch.com (companyID 504), Yelp, Dun & Bradstreet, and Loc8NearMe.\n3. The exact parcel is not positively confirmed. 120 E 700 S sits inside a",
         "mapsUrl": "https://www.google.com/maps/@41.1054,-112.0232,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/25-clearfield-ut-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.1054,
-              "lng": -112.0232
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/25-clearfield-ut-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.1054,
-              "lng": -112.0232
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "location": "MEDIUM-CONFIDENCE LOCATION. Resolved to 120 E 700 S, Clearfield, UT 84015, the Specialized Rail Service, Inc. (SRS) facility. SRS is a Clearfield-based intermodal drayage / transload / warehousing operator acquired by Universal Logistics Holdings in October 2018 ($12.3M); it is the ULH operating presence behind the 10-K-named 'Clearfield UT owned terminal property'. Address is firm: confirmed identically by FMCSA SAFER (USDOT 506498), loadmatch.com, Yelp, D&B, and Loc8NearMe. However, 120 E 700 S sits inside a dense multi-tenant industrial district and NO SRS signage was visible in any Street View; the exact parcel is address-interpolated. Resolved to the rail-served warehouse/transload building at ~41.1054,-112.0232 because (a) it is directly served by a Union Pacific rail line/spur, the defining feature of a 'Specialized Rail Service' transload facility, (b) it sits on the 700 South surface street where the address interpolates, and (c) SRS's stated business is rail transload + cross-dock + warehouse distribution. The exact parcel within this district could not be positively confirmed.",
+          "location": "MEDIUM-CONFIDENCE LOCATION. Resolved to 120 E 700 S, Clearfield, UT 84015 — the Specialized Rail Service, Inc. (SRS) facility. SRS is a Clearfield-based intermodal drayage / transload / warehousing operator acquired by Universal Logistics Holdings in October 2018 ($12.3M); it is the ULH operating presence behind the 10-K-named 'Clearfield UT owned terminal property'. Address is firm: confirmed identically by FMCSA SAFER (USDOT 506498), loadmatch.com, Yelp, D&B, and Loc8NearMe. However, 120 E 700 S sits inside a dense multi-tenant industrial district and NO SRS signage was visible in any Street View; the exact parcel is address-interpolated. Resolved to the rail-served warehouse/transload building at ~41.1054,-112.0232 because (a) it is directly served by a Union Pacific rail line/spur — the defining feature of a 'Specialized Rail Service' transload facility, (b) it sits on the 700 South surface street where the address interpolates, and (c) SRS's stated business is rail transload + cross-dock + warehouse distribution. The exact parcel within this district could not be positively confirmed.",
           "truckGate": "MEDIUM CONFIDENCE. Street View (2022-11) of the building frontage and yard shows internal industrial-park roads with employee parking and decorative block walls; no barrier arm or sliding/swing gate was observed across a truck lane. Classified false (open, uncontrolled industrial-park access), but the exact entrance could not be definitively walked.",
           "guardShack": "No guard booth visible in satellite or Street View. Classified false.",
           "remoteGs": "No identified truck gate, so no remote check-in implied; false.",
-          "dockDoors": "Banded 10-25. The rail-served warehouse building shows a dock apron with trailers backed along its SW face in satellite; estimated ~14 doors. Low confidence, partly tree-obscured.",
+          "dockDoors": "Banded 10-25. The rail-served warehouse building shows a dock apron with trailers backed along its SW face in satellite; estimated ~14 doors. Low confidence — partly tree-obscured.",
           "dropArea": "Banded 10-25. A truck/trailer yard with parked trailers and chassis lies NW of the building; transload material is staged along the rail side. Low confidence.",
-          "dropYard": "true, a dedicated trailer/chassis yard adjoins the building; low confidence.",
-          "railServed": "true, a Union Pacific rail line runs directly alongside the NE face of the building, with covered hopper railcars parked on the spur and lumber/material being transloaded. Consistent with SRS's rail-transload / intermodal-facility-management business. This is the highest-confidence physical finding for the site.",
+          "dropYard": "true — a dedicated trailer/chassis yard adjoins the building; low confidence.",
+          "railServed": "true — a Union Pacific rail line runs directly alongside the NE face of the building, with covered hopper railcars parked on the spur and lumber/material being transloaded. Consistent with SRS's rail-transload / intermodal-facility-management business. This is the highest-confidence physical finding for the site.",
           "buildingCount": "One long warehouse/transload building running NW-SE alongside the rail. Adjacent parcels (a petroleum/chemical tank farm to the SW) are separate tenants and excluded.",
-          "siteAreaAcres": "~9.2 acres computed for the building + immediate yard parcel, low confidence given the parcel-boundary ambiguity in this multi-tenant district. SRS operates ~140 tractors regionally; the Clearfield footprint audited here covers the rail-served building and its adjoining truck yard only.",
+          "siteAreaAcres": "~9.2 acres computed for the building + immediate yard parcel — low confidence given the parcel-boundary ambiguity in this multi-tenant district. SRS operates ~140 tractors regionally; the Clearfield footprint audited here covers the rail-served building and its adjoining truck yard only.",
           "urbanRural": "Clearfield is a small Davis County city north of Salt Lake City; the facility sits in a small-town industrial district. Per the rubric's small-town-industrial guidance, classified Rural.",
-          "trailersVisible": "~25, honest overhead estimate, low confidence.",
-          "trailerParkingCapacity": "~90, honest estimate for the adjoining truck yard, low confidence."
-        }
-      },
-      {
-        "id": "26-memphis-tn",
+          "trailersVisible": "~25 — honest overhead estimate, low confidence.",
+          "trailerParkingCapacity": "~90 — honest estimate for the adjoining truck yard, low confidence."
+        },
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
@@ -3714,25 +3309,28 @@
           "citations": [
             {
               "tier": 1,
-              "url": "https://www.indeed.com/viewjob?jk=910e6baffbb828a4",
-              "date": "2026-06",
-              "type": "press",
-              "claim": "ULH / Universal Intermodal hiring CDL-A intermodal driver onsite at '4014 Outland Road, Memphis, TN 38118' verbatim"
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-ex21_1.htm",
+              "date": "2026-03",
+              "type": "10-K",
+              "claim": "'Specialized Rail Service, Inc.' listed as a principal ULH subsidiary (Exhibit 21.1, FY2025)"
             },
             {
               "tier": 1,
-              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
-              "date": "2025-03",
-              "type": "10-K",
-              "claim": "ULH owns terminal yards including Memphis, TN (Item 2 Properties, FY2024)"
+              "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=506498",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "SPECIALIZED RAIL SERVICE INC, DBA UNIVERSAL, status ACTIVE, 120 E 700 S, Clearfield UT 84015"
             }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
-          "rationale": "Active 2025-2026 careers postings name 4014 Outland Rd verbatim as the Universal Intermodal onsite location; FY2024 10-K lists Memphis as an owned terminal yard; Q3-2025 charge is a valuation writedown, no closure.",
+          "rationale": "FY2025 10-K lists SRS as a subsidiary and Clearfield UT as ULH-owned; live FMCSA SAFER (2026-06) shows USDOT 506498 ACTIVE at the exact address under DBA 'UNIVERSAL'.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
-        },
+        }
+      },
+      {
+        "id": "26-memphis-tn",
         "name": "Universal Logistics - Memphis Terminal - Memphis TN",
         "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
         "archetype": "#3",
@@ -3915,45 +3513,49 @@
           "totalBaselineMs": 3030000,
           "totalYnsMs": 2640000
         },
-        "dossierExcerpt": "The roster supplied no address or coordinates, only \"Memphis TN named as owned\nterminal/yard property (major rail-ramp hub)\" from the ULH 2025 10-K. Resolution\npath:\n\n1. The loadmatch.com intermodal directory lists **Universal Intermodal Services,\n   Inc. / Memphis, TN at 4014 Outland Rd, Memphis, TN 38118** (companyID 2565).\n   The profile describes a 58-acre yard, a container-yard (CY) depot handling\n   APL, Evergreen and other private container pools, with top-lift container\n   handlers, private 20'/40' chassis, and ~35 drivers.\n2. The same address appears across third-party directories branded **\"Mason Dixon\n   Intermodal\"** (phone 901-546-9273), Mason Dixon is a Universal/ULH operating\n   brand; some listings show \"Universal Intermodal Svc\" at the identical address.\n3. Street View confirms stacked Evergreen ocean containers in the yard at this",
+        "dossierExcerpt": "The roster supplied no address or coordinates — only \"Memphis TN named as owned\nterminal/yard property (major rail-ramp hub)\" from the ULH 2025 10-K. Resolution\npath:\n\n1. The loadmatch.com intermodal directory lists **Universal Intermodal Services,\n   Inc. / Memphis, TN at 4014 Outland Rd, Memphis, TN 38118** (companyID 2565).\n   The profile describes a 58-acre yard — a container-yard (CY) depot handling\n   APL, Evergreen and other private container pools, with top-lift container\n   handlers, private 20'/40' chassis, and ~35 drivers.\n2. The same address appears across third-party directories branded **\"Mason Dixon\n   Intermodal\"** (phone 901-546-9273) — Mason Dixon is a Universal/ULH operating\n   brand; some listings show \"Universal Intermodal Svc\" at the identical address.\n3. Street View confirms stacked Evergreen ocean containers in the yard at this",
         "mapsUrl": "https://www.google.com/maps/@35.038,-89.9002,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/26-memphis-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.038,
-              "lng": -89.9002
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/26-memphis-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.038,
-              "lng": -89.9002
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
-          "location": "Resolved to 4014 Outland Rd, Memphis, TN 38118 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Memphis, TN, companyID 2565). The same address appears across third-party directories branded 'Mason Dixon Intermodal' (phone 901-546-9273), Mason Dixon is a Universal/ULH operating brand; some listings show 'Universal Intermodal Svc' at the identical address. The loadmatch profile describes a 58-acre container-yard depot handling APL/Evergreen and other private container pools, with top-lift handlers, private 20'/40' chassis, and ~35 drivers. Street View confirms stacked Evergreen ocean containers in the yard.",
-          "truckGate": "Street View along Outland Rd (2025-04 / 2025-11) shows the yard frontage is tree-screened with the container yard directly behind. The truck entrance is a wide open gravel/paved apron meeting Outland Rd near the north end of the yard, NO barrier arm, NO sliding/swing gate across the truck lane visible. The yard's road edge is largely open dirt apron rather than a continuous controlled gate line.",
+          "location": "Resolved to 4014 Outland Rd, Memphis, TN 38118 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Memphis, TN, companyID 2565). The same address appears across third-party directories branded 'Mason Dixon Intermodal' (phone 901-546-9273) — Mason Dixon is a Universal/ULH operating brand; some listings show 'Universal Intermodal Svc' at the identical address. The loadmatch profile describes a 58-acre container-yard depot handling APL/Evergreen and other private container pools, with top-lift handlers, private 20'/40' chassis, and ~35 drivers. Street View confirms stacked Evergreen ocean containers in the yard.",
+          "truckGate": "Street View along Outland Rd (2025-04 / 2025-11) shows the yard frontage is tree-screened with the container yard directly behind. The truck entrance is a wide open gravel/paved apron meeting Outland Rd near the north end of the yard — NO barrier arm, NO sliding/swing gate across the truck lane visible. The yard's road edge is largely open dirt apron rather than a continuous controlled gate line.",
           "guardShack": "No staffed booth visible at the entrance or anywhere on the property in satellite or Street View. Only equipment-shop / small office buildings are present in the yard interior.",
           "remoteGs": "No truck gate (open uncontrolled entrance), so no remote check-in implied.",
-          "dockDoors": "NONE, this is a drayage/intermodal container yard, not a cross-dock. The buildings in the yard are equipment shops / a small office with no rhythm of loading-dock doors.",
-          "dropArea": "Banded 50+. Satellite (2026) shows the yard densely loaded with stacked ocean containers (multiple colors), long rows of chassis, and parked trailers, a large working container/chassis storage yard. Street View confirms stacked Evergreen containers.",
+          "dockDoors": "NONE — this is a drayage/intermodal container yard, not a cross-dock. The buildings in the yard are equipment shops / a small office with no rhythm of loading-dock doors.",
+          "dropArea": "Banded 50+. Satellite (2026) shows the yard densely loaded with stacked ocean containers (multiple colors), long rows of chassis, and parked trailers — a large working container/chassis storage yard. Street View confirms stacked Evergreen containers.",
           "drivewayLong": "The yard is a very large open gravel lot; ample depth between Outland Rd and the yard interior for 3+ trucks to queue without spilling onto the road.",
-          "fastLaneOpportunity": "The Outland Rd frontage and entrance apron are very wide with substantial unused width, physical room to add a bypass/express lane.",
-          "buildingCount": "Three small structures in the yard interior, an equipment/maintenance shop, a smaller shop/canopy, and a small office building. No large warehouse.",
-          "railServed": "false, no rail spur runs into this parcel. It is a truck drayage container yard in the Lamar Ave / Outland Rd intermodal corridor that interchanges with Memphis-area rail ramps (BNSF/NS/CN/UP); rail does not enter the property.",
-          "siteAreaAcres": "~21.5 acres computed from the perimeter box for the ACTIVE container yard. The loadmatch directory claims a 58-acre yard, that larger figure likely includes the adjoining vacant grass field south of the active yard and/or additional Universal-controlled land. Geofenced to the active yard; the 58-acre directory claim is noted as a discrepancy.",
-          "trailersVisible": "~60 trailers/chassis estimated from 2026 satellite, low confidence, the yard is densely and irregularly loaded with containers and chassis.",
-          "trailerParkingCapacity": "~350, the yard is a very large open gravel lot capable of holding a large number of trailers/chassis/containers; honest estimate.",
-          "urbanRural": "Inside the Memphis metro industrial fabric (38118, Lamar Ave / Outland Rd intermodal corridor near the airport), Urban."
+          "fastLaneOpportunity": "The Outland Rd frontage and entrance apron are very wide with substantial unused width — physical room to add a bypass/express lane.",
+          "buildingCount": "Three small structures in the yard interior — an equipment/maintenance shop, a smaller shop/canopy, and a small office building. No large warehouse.",
+          "railServed": "false — no rail spur runs into this parcel. It is a truck drayage container yard in the Lamar Ave / Outland Rd intermodal corridor that interchanges with Memphis-area rail ramps (BNSF/NS/CN/UP); rail does not enter the property.",
+          "siteAreaAcres": "~21.5 acres computed from the perimeter box for the ACTIVE container yard. The loadmatch directory claims a 58-acre yard — that larger figure likely includes the adjoining vacant grass field south of the active yard and/or additional Universal-controlled land. Geofenced to the active yard; the 58-acre directory claim is noted as a discrepancy.",
+          "trailersVisible": "~60 trailers/chassis estimated from 2026 satellite — low confidence, the yard is densely and irregularly loaded with containers and chassis.",
+          "trailerParkingCapacity": "~350 — the yard is a very large open gravel lot capable of holding a large number of trailers/chassis/containers; honest estimate.",
+          "urbanRural": "Inside the Memphis metro industrial fabric (38118, Lamar Ave / Outland Rd intermodal corridor near the airport) — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/viewjob?jk=910e6baffbb828a4",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "ULH / Universal Intermodal hiring CDL-A intermodal driver onsite at '4014 Outland Road, Memphis, TN 38118' verbatim"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+              "date": "2025-03",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Memphis, TN (Item 2 Properties, FY2024)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active 2025-2026 careers postings name 4014 Outland Rd verbatim as the Universal Intermodal onsite location; FY2024 10-K lists Memphis as an owned terminal yard; Q3-2025 charge is a valuation writedown, no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

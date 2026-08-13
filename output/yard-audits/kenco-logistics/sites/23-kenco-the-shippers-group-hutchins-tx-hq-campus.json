@@ -176,5 +176,36 @@
     "urbanRural": "Hutchins is an edge-of-metro DFW industrial-park setting south of Dallas off I-45, surrounded by farmland and scattered warehouses; classified Rural per the small-town-industrial tie-breaker.",
     "facts": "1015 W Wintergreen Rd / WG-2: 560,000 SF, built 2018, 109,000 SF cooler, multi-client food-grade BRC-certified. Former TSG corporate HQ; The Shippers Group acquired by Kenco Jan 2024."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kenco-acquires-the-shippers-group/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "Kenco acquired The Shippers Group (Jan 2024), HQ Hutchins TX, adding 3.8M SF across FL/GA/TX"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/kenco/Jobs/-in-Hutchins,TX",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Active Kenco requisitions in Hutchins TX (22 openings) as of April 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TSG WG-2 (560k SF, former TSG HQ, 1015 W Wintergreen) became a Kenco facility via the Jan 2024 acquisition; active 2026 Hutchins hiring; no post-acquisition divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

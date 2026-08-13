@@ -109,5 +109,29 @@
     "drivewayShort": "Short entrance drive from Distribution Dr into the yard - only 1-2 truck depth before the apron.",
     "urbanRural": "Dense SE Memphis industrial park, surrounded by warehouses and metro fabric - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/driver-cdl-warehouse-associate/job/R-161123",
+        "date": "2026-06-03",
+        "type": "careers",
+        "claim": "Active Mondelez Driver CDL/Warehouse Associate req at '5812 Distribution Dr., Memphis, TN 38141', posted 2026-06-03"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active dated Mondelez warehouse careers req at the exact address (Jun 2026) plus assessor-reported Mondelez Global LLC ownership; closure gauntlet returned only an unrelated GXO closure at 5295 Logistics Dr.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

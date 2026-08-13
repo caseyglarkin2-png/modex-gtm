@@ -129,5 +129,29 @@
     "railServed": "A rail line runs along the south side of the broader Enterprise Park area; no spur enters this parcel.",
     "urbanRural": "Within the Chattanooga metro Enterprise Park industrial fabric - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Kenco-Group/locations/TN/Chattanooga",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kenco Logistics Services actively staffing 100+ Chattanooga warehouse roles (zip 37416) as of June 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "6301 Enterprise Park Dr (210,000 SF / 12+ acres, 'KENCO BP II') exactly matches BP2; it was a Kenco-affiliate sale-leaseback (JDK->Northstar 2022), not a Kenco exit. LOW-CONFIDENCE: a Tier-3 Yelp 'CLOSED' tag (Oct 2025) at 6301 is an aggregator signal (never overruling) but warrants a cap; no Tier-2 press of a Kenco vacate.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

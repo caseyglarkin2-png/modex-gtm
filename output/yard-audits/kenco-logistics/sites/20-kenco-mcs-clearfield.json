@@ -129,5 +129,36 @@
     "railServed": "TRUE - rail spurs run through the Freeport Center streets and along the building rows; G8 has a rail dock per the Freeport standard layout.",
     "urbanRural": "Within the Clearfield/Ogden metro and the dense Freeport Center industrial complex - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/warehousing-map/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Kenco's warehousing map lists 'Salt Lake City Area, Utah' as a current operating region (Freeport Center/Clearfield is in that metro)"
+      },
+      {
+        "tier": 3,
+        "url": "https://clearfield-ut.opendi.us/1544908.html",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Kenco Logistic Services listed at #G8 Freeport Center, 7th Street, Clearfield UT"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco occupies Freeport Center building G8 (food-grade ~90k SF); Kenco's live SLC-area region listing + directories corroborate current operation; no Tier-2 negative. Lower confidence on the exact G8 unit.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

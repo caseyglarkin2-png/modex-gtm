@@ -155,5 +155,36 @@
     "geofences": "Perimeter captures the building plus the screened south truck court and the west dock court: ~173 m N-S x ~217 m E-W ≈ 9.3 acres. truckGate box is the south-side screened-court entrance off the public street.",
     "railServed": false
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/nabisco-ontario",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Nabisco listing at 5815 Clark St, Ontario CA 91761 shown as updated March 2026 (recency corroboration only)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/Jobs/Mondelez/--in-Ontario",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Current (May 2026) Mondelez Ontario CA job openings; aggregator, address not pinned to 5815 Clark (corroborating only)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: multiple aggregators (DnB, chamber, Yelp 'updated Mar 2026') place an active ~51-70-employee Mondelez/Nabisco DC at the exact address with current Ontario job postings and no closure/WARN signal, but there is no clean Tier-1 self-attested locator or address-pinned careers req.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

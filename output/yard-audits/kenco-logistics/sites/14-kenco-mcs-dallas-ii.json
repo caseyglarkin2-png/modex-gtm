@@ -138,5 +138,36 @@
     "railServed": "No rail spur enters the property.",
     "confidence": "Medium - corridor and Kenco presence confirmed; the three same-coord Kenco Lancaster facilities cannot be individually pinned from public data. idx 14 reflects the smallest (rear-load) building in the cluster."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/dallas-walker-edison/",
+        "date": "2023-10",
+        "type": "locator",
+        "claim": "Kenco's own locations directory carries a live MCS - Dallas II page"
+      },
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/warehousing-map/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Kenco warehousing map lists its current Dallas MCS facilities"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco's own locator carries a live MCS Dallas II page; same confirmed Danieldale/Lancaster corridor; active Lancaster hiring; no closure found. Building-level pick is the soft spot.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

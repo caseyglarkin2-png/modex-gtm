@@ -157,5 +157,26 @@
     "urbanRural": "Maryville/Blount County is a small-metro edge setting; the site sits in a planned industrial park alongside DENSO and ICC, off US-321, with woods and farmland nearby. Classified Rural per the rubric tie-break.",
     "railServed": "No rail spur enters the complex. railServed = false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=839281",
+        "date": "2026",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "08 Universal Logistics Services - Maryville Terminal (Maryville TN, 1615 Robert C Jackson Dr)** — REJECTED: WRONG COMPANY (name collision). \"Universal Logistics Services Inc\" (USDOT 839281, MC 371555, ~77 trucks, GM Jim Brinkley) is an unrelated independent carrier, NOT a Universal Logistics Holdings subsidiary. The NLRB single-employer case enumerating ULH's actual subsidiaries does not include it. [Tier 1: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=839281, 2026 ; Tier 1: https://www.nlrb.gov/case/21-CA-286645, 2022]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

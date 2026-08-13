@@ -146,5 +146,36 @@
     "urbanRural": "Great Southwest / Grand Lakes industrial district between Dallas and Fort Worth on I-30 - dense metro industrial fabric, Urban.",
     "yardMetrics": "Counts (dockDoorCount ~130, trailersVisible ~90, capacity ~160, siteAreaAcres ~42) are honest estimates for the whole 3953 building; TSG's 281k SF suite is a fraction of this. Reported at building level per audit convention."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.theshippersgroup.com/links/2202-locations/resources/8846-grand-prairie-texas-best-warehouse-location-3pl-4pl",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "The Shippers Group lists a Grand Prairie TX warehouse, 280,000 SF dedicated, in the Grand Lakes industrial park"
+      },
+      {
+        "tier": 3,
+        "url": "https://truckmap.com/place/shippers-warehouse-3953-grand-lakes-way-grand-prairie-tx-75050-usa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Shippers Warehouse located at 3953 Grand Lakes Way, Grand Prairie TX 75050"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TSG/Kenco operates a 280k SF Grand Prairie suite in the Grand Lakes park; listings place Shippers Warehouse at the audited 3953 Grand Lakes Way; no negative. Flag: 3845-vs-3953 suite ambiguity for the geofence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

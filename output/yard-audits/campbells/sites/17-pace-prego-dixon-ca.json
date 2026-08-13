@@ -137,5 +137,36 @@
     "railServed": "A rail corridor runs in the broader area but no spur enters the property; tomato intake is by truck. railServed=false.",
     "scale": "Truck scales are likely present at an agricultural intake plant of this scale but not clearly resolved in imagery - left false, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-and-partners-receive-3-4-million-usda-grant-to-support-sustainable-tomato-growing-practices-in-california/",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "Campbell's CA tomato operations (Dixon/Stockton) active; $3.4M USDA RCPP grant for CA processing tomatoes."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.dailyrepublic.com/townnews/food_industry/business-journal-campbell-soup-processes-660-000-tons-of-tomatoes-at-dixon-plant/article_f71f528c-6479-11ee-83e7-9f9a9210132d.html",
+        "date": "2023-10",
+        "type": "press",
+        "claim": "Dixon plant processes 660,000 tons of tomatoes/yr into Prego/Pace sauce material."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's largest CA tomato plant, self-operated by Campbell Soup Supply Co.; recent (2024) corporate activity, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

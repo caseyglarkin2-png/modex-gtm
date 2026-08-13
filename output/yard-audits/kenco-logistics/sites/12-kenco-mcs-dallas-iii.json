@@ -131,5 +131,36 @@
     "railServed": "No rail spur enters this building's property; rail lines in the wider corridor do not serve it.",
     "confidence": "Medium - building-level identity within the three same-coord Kenco Lancaster facilities could not be confirmed from public data; audit reflects the large cross-dock building at the roster coordinate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/viewjob?jk=c472bd319fae8a35",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "Active Kenco 'Logistics Coordinator I' requisition at 2821 Danieldale Road, Lancaster TX 75134"
+      },
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/dallas-walker-edison/",
+        "date": "2024-02",
+        "type": "locator",
+        "claim": "Kenco's own locator publishes current MCS-Dallas (Lancaster-area) facilities"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Kenco careers req at the anchor address 2821 Danieldale Rd; Kenco self-lists MCS-Dallas; no closure found. Building-level pick among three same-coord Lancaster buildings is the roster medium-confidence assignment.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

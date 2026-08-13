@@ -145,5 +145,36 @@
     "urbanRural": "Dense south-Stockton industrial district - Urban.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-and-partners-receive-3-4-million-usda-grant-to-support-sustainable-tomato-growing-practices-in-california/",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "Campbell's CA tomato operations (Dixon and Stockton) named as active in Oct 2024 USDA RCPP partnership."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-takes-steps-to-improve-supply-chain-productivity-and-increase-utilization-of-u-s-manufacturing-network-company-to-close-sacramento-plant/",
+        "date": "2012-09",
+        "type": "press",
+        "claim": "Closure was the SACRAMENTO soup plant; Stockton/Dixon tomato plants NOT closed."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Stockton tomato-paste plant (Campbell Soup Supply Co.) is current; the divested/closed CA assets were Bakersfield/Bolthouse and Sacramento, not Stockton.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -108,5 +108,36 @@
     "railServed": "A rail line runs immediately along the south property boundary but no spur enters the parcel - the building is not rail-served.",
     "urbanRural": "Within the Chattanooga metro Enterprise Park industrial fabric - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Kenco-Group/locations/TN/Chattanooga",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kenco Logistics Services actively staffing 100+ Chattanooga warehouse roles (zip 37416, Enterprise Park area) as of June 2026"
+      },
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/tag/chattanooga-tn/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kenco self-presents Chattanooga as a current operating market"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "6170 Enterprise Park Dr is the confirmed Kenco building ('Kenco Logistics Services-Stryker'); Kenco still operates under lease (2022 sale was a sale-leaseback by Kenco affiliate JDK to Northstar); heavy current hiring. CH7B internal-code match is best-effort but the address is confirmed Kenco.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

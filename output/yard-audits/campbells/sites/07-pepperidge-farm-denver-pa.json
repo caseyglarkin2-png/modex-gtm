@@ -123,5 +123,36 @@
     "siteAreaAcres": "Derived from perimeter box ~870m N-S x ~720m E-W.",
     "locationResolution": "Roster coordinates landed inside the plant footprint; confirmed by satellite and Street View (Pepperidge Farm monument sign at the entrance)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://lancasteronline.com/news/local/lancaster-county-s-pepperidge-farm-plant-has-a-new-snack-the-sold-out-chilean-sea/article_98b4034c-9799-11ef-af78-c780e957ddb1.html",
+        "date": "2024-11",
+        "type": "press",
+        "claim": "Lancaster County's Pepperidge Farm (Denver PA) plant actively producing Goldfish incl. a limited-run flavor; current operating bakery."
+      },
+      {
+        "tier": 1,
+        "url": "https://lancasteronline.com/business/local_business/more-milano-cookies-coming-pepperidge-farms-denver-plant-expands-eyes-new-distribution-center/article_6b3c2da2-a85c-11eb-85d8-a37090547fcb.html",
+        "date": "2021-04",
+        "type": "press",
+        "claim": "Denver plant completed expansion doubling Milano capacity; workforce ~810; produces Goldfish, bread, cookies."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Major Goldfish/cookie bakery, recent expansion + Nov-2024 production news; closure gauntlet clean.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

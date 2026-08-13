@@ -134,5 +134,26 @@
     "railServed": "No rail spur enters the property; the Caterpillar Chillicothe campus is road-served at this building. false.",
     "urbanRural": "Edge-of-town rural setting — cornfields directly across E Cedar Hills Drive, farmland surrounding. Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+        "date": "2026-03",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "18 Universal Logistics - Chillicothe Contract Logistics Warehouse (Chillicothe IL, ~2800 E Cedar Hills Dr)** — REJECTED: no discrete ULH-operated building verifiable. ULH runs pick/pack/sequencing INSIDE Caterpillar's Chillicothe warehouse — a customer-provided location per the FY2025 10-K (value-added at ~50 customer-provided locations), not a discrete ULH facility. The building is Caterpillar's. [Tier 1: https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm, 2026-03 ; Tier 1: https://www.indeed.com/cmp/Universal-Logistics-Holdings,-Inc./locations/IL/Chillicothe, 2026]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

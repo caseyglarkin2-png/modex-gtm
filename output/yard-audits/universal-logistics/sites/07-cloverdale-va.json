@@ -148,5 +148,36 @@
     "urbanRural": "Cloverdale is a small unincorporated community in Botetourt County; the facility sits in an edge-of-town setting with residential frontage and woods/farmland around. Classified Rural.",
     "imageryNote": "The facility was mid-expansion as of the 2024 announcement; current imagery may predate completion of new value-added/assembly buildout, which could change dock and yard counts."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investors.universallogistics.com/news-releases/news-release-details/universal-invest-50-million-create-45-new-jobs-expansion-greater",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "ULH $50M heavy-truck-division expansion into Greater Roanoke (Botetourt), 45 jobs, operational 2025"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Assembler-8/-in-Cloverdale,VA?jid=bbf6471169ba5ba0",
+        "date": "2025",
+        "type": "press",
+        "claim": "ULH 'Assembler' / on-site assembly reqs in Cloverdale VA at 1796 Lee Hwy, facility live"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dated ULH PR + current on-site assembly/engineering reqs at 1796 Lee Hwy confirm the heavy-truck facility came online and operates.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

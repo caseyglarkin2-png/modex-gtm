@@ -130,5 +130,36 @@
     "scale": "No truck scale visible.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/life-at-campbells/our-pretzel-pride/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Campbell makes Snyder's of Hanover pretzels and Snack Factory Pretzel Crisps at its Campbell Snacks plant in Goodyear AZ (7.4M lbs Pretzel Rods/yr)."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.industrynet.com/listing/1731154/snyders-lance-inc",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Snyder's-Lance, Inc. listed operating in Goodyear AZ."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's own newsroom names Goodyear AZ as an operating Campbell Snacks pretzel plant; not a phantom.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

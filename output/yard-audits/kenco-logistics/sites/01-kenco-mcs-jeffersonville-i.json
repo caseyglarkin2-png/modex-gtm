@@ -143,5 +143,36 @@
     "trailersVisible": "~35 trailers counted in NW dock apron z19/z20 imagery; approximate.",
     "trailerParkingCapacity": "Estimated 90 from drop-yard depth; low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kenco-autostore-live-at-jeffersonville-distribution-center/",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "Kenco newsroom: AutoStore live at its Jeffersonville IN DC (49,000 bins / 130 robots)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.riverridgecc.com/companies/kenco-group/",
+        "date": "2024-09",
+        "type": "econ-dev",
+        "claim": "River Ridge Development Authority lists Kenco at 201 River Ridge Parkway, scalable to 660,000+ SF"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 self-attested current operation at the exact address; AutoStore live Aug 2024, DC opened Sept 2024; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

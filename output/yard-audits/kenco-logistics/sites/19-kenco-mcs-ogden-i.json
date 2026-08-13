@@ -107,5 +107,36 @@
     "urbanRural": "Inside the Ogden metro within the dense Business Depot Ogden industrial fabric - Urban.",
     "refrigeration": "Roof-mounted refrigeration/HVAC units near the south end are consistent with a food-grade / temperature-controlled DC for Oatly product."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kenco-logistics-builds-new-warehouse-facility-for-sustainable-foods-customer-supporting-green-operations/",
+        "date": "2021-04",
+        "type": "press",
+        "claim": "Kenco built, staffs, and manages Oatly's finished-goods warehouse/DC in the Ogden UT area"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Kenco/Jobs/-in-Ogden,UT",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Active Kenco warehouse/forklift requisitions in Ogden UT as of April 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco-built/operated finished-goods DC for Oatly at 1025 Depot Dr; active 2026 Kenco hiring in Ogden; no DC closure. (Oatly PLANT assets sold to Ya YA Foods Jan 2023, not the Kenco DC.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

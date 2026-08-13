@@ -126,5 +126,36 @@
     "urbanRural": "Edge-of-town isolated industrial site surrounded by farmland and open scrub; Rural.",
     "imagery": "Street View at the property dates to 2012 (pre-construction empty land) so gate determination relies on current satellite (Maxar 2026), which is clear."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hourlyjobs-us.mondelezinternational.com/clif-bar-packaging-operator/job/R-163232",
+        "date": "2026-04-02",
+        "type": "careers",
+        "claim": "Mondelez Clif Bar Packaging Operator req at the Twin Falls bakery posted 2026-04-02"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.mondelezinternational.com/careers/jobs/job/index.html?jobid=r-167913&jobtitle=hse+specialist",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active HSE Specialist req at Clif Bar Twin Falls, Idaho (one of ~12 live Mondelez Twin Falls reqs)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Numerous active Mondelez Clif Bar careers reqs at the Twin Falls bakery through 2026; no closure or divestiture negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -136,5 +136,36 @@
     "siteAreaAcres": "~33 acres derived from perimeter box (~415m N-S x ~360m E-W of fenced property).",
     "railServed": "No rail spur into the property; solar array occupies land to the east where a spur might otherwise run."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hartfordbusiness.com/article/campbell-soup-to-close-norwalk-office-expand-bloomfield-site-as-part-of-consolidation-plan",
+        "date": "2018-08",
+        "type": "press",
+        "claim": "Campbell's will CONTINUE making Pepperidge Farm products at the Bloomfield bakery (opened 2002, 400+ employees) and GROW it; only the Norwalk corporate office closes."
+      },
+      {
+        "tier": 2,
+        "url": "https://patch.com/connecticut/norwalk/norwalk-pepperidge-farm-office-close-move-jobs-new-jersey",
+        "date": "2018-08",
+        "type": "press",
+        "claim": "Corroborates the closure was the Norwalk HQ office moving to NJ, NOT the Bloomfield plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Live bread/rolls/stuffing plant; only nearby closure was the Norwalk corporate office, paired with a commitment to grow Bloomfield.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

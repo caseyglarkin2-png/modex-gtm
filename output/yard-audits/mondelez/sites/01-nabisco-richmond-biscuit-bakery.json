@@ -158,5 +158,36 @@
     "scale": "No truck scale clearly visible in overhead imagery; left low-confidence.",
     "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.globenewswire.com/news-release/2023/10/14/2760233/0/en/Mondel%C4%93z-International-Celebrates-50th-Anniversary-of-Iconic-Richmond-Biscuit-Manufacturing-Plant.html",
+        "date": "2023-10-14",
+        "type": "press",
+        "claim": "Mondelez PR celebrates 50th anniversary of operating the Richmond Biscuit Manufacturing Plant on Laburnum Ave (650 employees; Oreo/Ritz/Nilla/Chips Ahoy/Wheat Thins)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.vedp.org/press-release/2021-11/mondelez-international-inc-henrico-county",
+        "date": "2021-11",
+        "type": "econ-dev",
+        "claim": "Virginia econ-dev release: $122.5M expansion of Richmond Biscuit Bakery, new high-speed OREO line, Henrico County"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dated Mondelez self-PR (Oct 2023) plus state econ-dev expansion confirm Mondelez owns and operates the Laburnum Ave bakery; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

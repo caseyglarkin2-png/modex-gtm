@@ -137,5 +137,36 @@
     "siteAreaAcres": "Derived from perimeter box ~610m N-S x ~610m E-W; excludes the separate solar farm to the south.",
     "railServed": "No rail spur into the property; adjacent solar farm occupies the land to the south."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/news/snyders-of-hanover-and-snack-factory-pretzel-crisps-named-official-pretzels-of-the-cincinnati-reds/",
+        "date": "2023-04-24",
+        "type": "press",
+        "claim": "Campbell Snacks (division of Campbell) includes Snyder's of Hanover pretzels as a current brand."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.snydersofhanover.com/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Snyder's of Hanover operates a 400,000+ sq ft Hanover facility with processing, packaging, warehousing, R&D lab."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Snyder's of Hanover is a current Campbell's brand HQ'd and made in Hanover PA; only nearby closure was the unrelated Snyder of Berlin (Utz) plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

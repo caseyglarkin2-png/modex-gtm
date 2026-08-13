@@ -125,5 +125,29 @@
     "multipleFacilities": "Infinity Park is a multi-building park but each building is a separate parcel/address; the audited facility is one building, so multipleFacilities=false for this site.",
     "urbanRural": "Within Orlando metro dense industrial fabric near John Young Pkwy / Beachline Expwy - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.theshippersgroup.com/links/2421-orlando-florida/resources/9037-orlando-florida-warehouse-location",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "The Shippers Group lists its Orlando FL warehouse at 2612 Consulate Dr Suite 800, 58,000 SF dedicated"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TSG (Kenco) self-attests the exact 2612 Consulate Dr Suite 800 / 58,000 SF Orlando suite; matches pack; no closure/contract-loss signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -146,5 +146,36 @@
     "railServed": "A light-rail (LYNX) passenger line runs through/alongside the campus, but no freight rail spur serves the docks; railServed false.",
     "confidence": "Medium overall - the facility is positively identified (LANCE water tower and buildings visible in Street View) and the fenced campus perimeter is confirmed, but the exact gate/guard-booth structure and several counts are estimates from a very large multi-building campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.aol.com/news/inside-campbell-snacks-10m-charlotte-095300968.html",
+        "date": "2024",
+        "type": "press",
+        "claim": "Campbell's Charlotte facility is a 1.2M-sq-ft plant making Lance crackers, potato chips and snacks with ~1,500 employees; new Philip Lance Center."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.costar.com/article/1381495765/campbell-soup-to-close-part-of-north-carolina-snack-plant",
+        "date": "2023-05",
+        "type": "press",
+        "claim": "Only the Emerald nuts BUILDING at the Charlotte site closed; the cracker/chip plant continued."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Campbell's Snacks cracker/chip plant (~1,500 staff) with current hiring; only the adjacent Emerald nuts unit closed (2023), not the plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

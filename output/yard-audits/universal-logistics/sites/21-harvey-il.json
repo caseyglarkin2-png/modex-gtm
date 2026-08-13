@@ -134,5 +134,36 @@
     "urbanRural": "Harvey IL is inside the dense south-suburban Chicago metro fabric — Urban.",
     "geofences": "Perimeter captures the fenced drayage yard: ~290 m N-S x ~292 m E-W ≈ 21 acres. dropYards boxes cover the chassis/container storage blocks; truckGate box is the 167th St entrance pinch-point."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+        "date": "2026-03",
+        "type": "10-K",
+        "claim": "ULH owns terminal yards including Harvey, Illinois (Item 2 Properties, FY2025, as of 2025-12-31)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.breakroom.cc/en-us/jobs/listing/758102-universal-logistics-holdings-inc-cdl-a-contractors-harvey",
+        "date": "2025",
+        "type": "press",
+        "claim": "ULH 'CDL A Contractors (Harvey)' active hiring at the Harvey terminal"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "ULH owns the Harvey IL drayage terminal (250 E 167th St, the Universal Intermodal Chicago ops center on the CN corridor), named in the FY2025 10-K with active 2025 hiring. Flag: intermodal-segment impairment/divestiture risk; retained in post-impairment 10-K.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

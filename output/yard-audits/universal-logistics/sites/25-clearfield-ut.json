@@ -148,5 +148,36 @@
     "trailersVisible": "~25 — honest overhead estimate, low confidence.",
     "trailerParkingCapacity": "~90 — honest estimate for the adjoining truck yard, low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-ex21_1.htm",
+        "date": "2026-03",
+        "type": "10-K",
+        "claim": "'Specialized Rail Service, Inc.' listed as a principal ULH subsidiary (Exhibit 21.1, FY2025)"
+      },
+      {
+        "tier": 1,
+        "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=506498",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "SPECIALIZED RAIL SERVICE INC, DBA UNIVERSAL, status ACTIVE, 120 E 700 S, Clearfield UT 84015"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FY2025 10-K lists SRS as a subsidiary and Clearfield UT as ULH-owned; live FMCSA SAFER (2026-06) shows USDOT 506498 ACTIVE at the exact address under DBA 'UNIVERSAL'.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/universal-logistics-holdings.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

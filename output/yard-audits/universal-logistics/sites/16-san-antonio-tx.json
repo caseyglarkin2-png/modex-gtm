@@ -95,5 +95,26 @@
     "_candidate": "TMMTX (1 Lone Star Pass, off Applewhite Rd, south San Antonio ~29.298,-98.550) is notable for integrating 20+ on-site suppliers ON the same campus - some under the same roof - plus an adjacent supplier-logistics corridor. Universal's San Antonio operation most plausibly runs a sequencing / value-added line INSIDE the Toyota campus or in a leased corridor warehouse, neither of which carries an independent, publicly-mappable Universal street identity. coords here point at the TMMTX campus as a best-available area anchor only - NOT a confirmed Universal building.",
     "_classification": "All 22 classification fields are best-guess defaults pending a confirmed address and must be treated as unverified. urbanRural set Urban (south San Antonio metro fabric). Geofences and yardMetrics left null/zero because no specific building was locked."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1308208/000095017025040283/ulh-20241231.htm",
+        "date": "2025-03",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "16 Universal Logistics - San Antonio Contract Logistics Warehouse (San Antonio TX, no address)** — REJECTED: no discrete operating building verifiable. Indeed/Glassdoor city presence only; ULH never names San Antonio or Toyota in any SEC filing (EDGAR full-text: 0 hits); TMMTX on-site sequencing is run by Toyota Tsusho America. Anchor coords are a placeholder. [Tier 1: https://www.sec.gov/Archives/edgar/data/1308208/000095017025040283/ulh-20241231.htm, 2025-03 ; Tier 2: https://pressroom.toyota.com/tmmtx-welcomes-new-on-site-suppliers/, 2024]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

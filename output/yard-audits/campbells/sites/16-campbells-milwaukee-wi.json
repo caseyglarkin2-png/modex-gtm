@@ -120,5 +120,36 @@
     "urbanRural": "Dense Milwaukee industrial district immediately west of General Mitchell International Airport - Urban.",
     "railServed": "No rail spur runs into the property; a rail corridor exists in the broader district but not onto this parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fsis.usda.gov/inspection/fsis-inspected-establishments/campbell-soup-supply-co.-llc",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Campbell Soup Supply Co. LLC listed as a current FSIS-inspected establishment (Milwaukee)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.fooddive.com/news/campbell-soup-to-refurbish-spice-plant-remain-in-milwaukee/216501/",
+        "date": "2013-03",
+        "type": "press",
+        "claim": "Campbell consolidated spice production at Milwaukee, its only U.S. spice operation; invested to refurbish and remain."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sole Campbell U.S. spice plant, operated by Campbell Soup Supply Co.; current FSIS listing, no closure/divestiture signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -142,5 +142,29 @@
     "fastLaneOpportunity": "Wide internal yard aprons with ample paved width.",
     "siteAreaAcres": "Derived from perimeter box ~890m N-S x ~830m E-W."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.foodprocessing.com/on-the-plant-floor/plant-operations-and-engineering/news/55128940/campbells-paris-texas-plant-to-lose-soup-operations-shift-to-sauce-salsa",
+        "date": "2024-07-26",
+        "type": "press",
+        "claim": "Campbell's shifting RTS soup production from Paris TX to its Napoleon OH and Maxton NC plants (Napoleon a continuing/growing soup plant)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Campbell's largest soup/V8 plant, actively hiring in 2026 and a named destination for consolidated Paris soup volume; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -166,5 +166,36 @@
     "fastLaneOpportunity": "Wide truck-yard drives and a deep apron at the NW entrance provide room for an express/bypass lane.",
     "siteAreaAcres": "~30 acres for the south building parcel; matches reported 28-30 acre Perris Logistics Center site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/mcs-perris-ii/",
+        "date": "2024-02",
+        "type": "locator",
+        "claim": "Kenco's own site lists a dedicated MCS - Perris II location (second building of the Perris campus)"
+      },
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kenco-logistics-opens-new-multi-client-distribution-center/",
+        "date": "2021-05",
+        "type": "press",
+        "claim": "Kenco operates the 3900 Indian Avenue Perris Logistics Center campus"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco self-attests an MCS - Perris II on its own locator (same 3900 Indian Avenue campus as Perris I); leased, Kenco-operated; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

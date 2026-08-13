@@ -141,5 +141,36 @@
     "urbanRural": "Edge-of-Calhoun industrial park along I-75, surrounded by woods and scattered rural residential; classified Rural.",
     "railServed": "No rail spur runs into the property; the I-75 corridor is adjacent but no siding."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/news/kerry-opens-north-georgia-distribution-center-with-kenco-group/",
+        "date": "2023-01",
+        "type": "press",
+        "claim": "Kenco operates Kerry's 468,000 SF North Georgia DC in Calhoun GA, serving Kerry's Calhoun and Rome GA facilities"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Job/calhoun-kenco-logistics-jobs-SRCH_IL.0,7_IC1155752_KO8,23.htm",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Active Kenco Logistics warehouse requisitions in Calhoun GA as of April 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kenco-operated dedicated DC for Kerry Group (opened Jan 2023); active 2026 Kenco hiring in Calhoun; no closure/contract-loss found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

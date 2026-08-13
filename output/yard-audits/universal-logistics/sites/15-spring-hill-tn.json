@@ -95,5 +95,26 @@
     "_candidate": "Spring Hill's automotive 3PL warehouse stock is concentrated near Cleburne Rd / Saturn Pkwy SW of the GM plant. The major named logistics centers (e.g. 3521 Cleburne Rd 'Spring Hill/Legacy Logistics Center', 115 dock doors) are tenanted by Comprehensive Logistics, Magna Seating, and Tenneco - NOT Universal. Universal most plausibly runs a value-added/sequencing line INSIDE a GM-controlled building (GM converted Powertrain space into an on-site Logistics Operations Center) or a leased warehouse not publicly documented. coords here point at the GM Spring Hill plant complex as a best-available area anchor only - NOT a confirmed Universal building.",
     "_classification": "All 22 classification fields are best-guess defaults pending a confirmed address and must be treated as unverified. Geofences and yardMetrics left null/zero because no specific building was locked."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+        "date": "2025-02",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "15 Universal Logistics - Spring Hill Contract Logistics Warehouse (Spring Hill TN, no address)** — REJECTED: no discrete operating building verifiable. Universal's GM Spring Hill operation is REAL (Facebook launch post + 100+ jobs) but runs on GM premises (the Logistics Operations Center is a conversion inside GM's own plant); no public source ties Universal to a discrete street address; the named local buildings are tenanted by Comprehensive Logistics/Magna/Tenneco. Anchor coords are a placeholder. [Tier 1: https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm, 2025-02 ; Tier 2: https://idealcontracting.com/projects/gm-spring-hill-assembly-plant-logistics-operations-center/, 2024]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/universal-logistics-holdings/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

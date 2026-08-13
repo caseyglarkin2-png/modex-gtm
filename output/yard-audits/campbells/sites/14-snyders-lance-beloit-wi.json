@@ -140,5 +140,36 @@
     "windTurbines": "The Kettle Beloit plant is documented as having 18 rooftop wind turbines and LEED-Gold certification - a distinctive marker that could not be clearly confirmed on the candidate building at available imagery resolution.",
     "recommendation": "Flagged for human review - the exact Campbell's/Kettle building in Beloit (3150 Kettle Way) should be confirmed against the roster's '1101 Willowbrook Road' address before relying on this audit."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-to-consolidate-potato-chip-production-as-part-of-ongoing-snacks-network-optimization-strategy/",
+        "date": "2026-01-29",
+        "type": "press",
+        "claim": "Production from the closing Hyannis MA plant transfers to more modern plants in Beloit WI, Charlotte NC, Hanover PA (Beloit a receiving plant)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Campbells-7/jobs/l-Beloit,-WI",
+        "date": "2026-01",
+        "type": "careers",
+        "claim": "Active Campbell's production job postings in Beloit WI in 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Named as a receiving plant in the Jan 2026 consolidation; ~300 employees, active hiring, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/campbell-s.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

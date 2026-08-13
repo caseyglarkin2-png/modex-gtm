@@ -156,5 +156,36 @@
     "truckGateCount": "Two truck access points - east corridor and SW drive.",
     "siteAreaAcres": "~25.5 acres for the 6509 parcel including building, west drop yard and east corridor."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/viewjob?jk=119425cd194c58bf",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Active Kenco 'eCom Seasonal Warehouse Worker - Chino, CA 91708' requisition staffs the site now"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.chamberofcommerce.com/business-directory/california/chino/warehouse/2004244741-kenco-logistics-services",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "Kenco Logistics Services listed at 6509 Kimball Ave, Chino CA 91708"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact address 6509 Kimball Ave matches roster; active 2026 Kenco Chino careers postings; clean divestiture gauntlet.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/kenco-logistics-services.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

@@ -165,5 +165,36 @@
     "dockDoorCount": "90 is an overhead estimate across multiple building faces; bands clearly land in 50+.",
     "scale": "No truck scale positively identified in available imagery; left false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Job/east-hanover-mondelez-jobs-SRCH_IL.0,12_IC1126743_KO13,21.htm",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "47 active Mondelez reqs in East Hanover NJ (incl. supply chain manager, product development engineer) as of Mar 2026"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.mondelezinternational.com/united-states/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Mondelez lists East Hanover NJ as its North America headquarters / Nabisco home base"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active NA HQ plus Nabisco bakery/DC campus; current careers reqs and food-manufacturer classification confirm operations; no closure/sale (the 2021 NJ closure was Fair Lawn, a separate site). Freight-relevant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

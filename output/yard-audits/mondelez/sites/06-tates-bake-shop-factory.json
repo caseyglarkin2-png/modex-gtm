@@ -124,5 +124,29 @@
     "drivewayShort": "Gate-to-dock approach holds only 1-2 trucks; loading apron is immediately inside the entrance.",
     "buildingCount": "Main bakery building plus a small attached/adjacent office annex on the NE corner."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://en.wikipedia.org/wiki/Tate's_Bake_Shop",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "After the Dec 2023 Shirley move, the 40,000 sq ft East Moriches factory 'remained in use' producing the brand's cookies for national distribution (cites LIBN 2023-12-05)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "East Moriches was NOT consolidated into Shirley; the original 40k sq ft factory remained in use after the Dec 2023 Shirley distribution move and is described as actively producing as of Jan 2026; no closure/WARN negative. (Strongest live signal is Tier-3 Yelp; Tier-1 anchor is the LIBN-sourced 'remained in use' statement.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }

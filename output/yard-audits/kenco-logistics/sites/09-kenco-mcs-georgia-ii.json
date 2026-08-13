@@ -97,5 +97,26 @@
     "recommendation": "Flagged for human review. Resolve by obtaining the exact street address from Kenco, then re-running the deep audit. See dossier 08 for the shared-campus research.",
     "urbanRural": "Suburban metro-Atlanta industrial setting if located in the candidate parks - classified Urban but unverified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://kencogroup.com/kenco_locations/mcs-georgia/",
+        "date": "2024-02",
+        "type": "rejection evidence",
+        "claim": "operator/closure evidence supporting the rejection"
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "09-kenco-mcs-georgia-ii** — Kenco MCS Georgia II (Austell GA 30168) — REJECTED: second building of the same unlocated Austell campus as Georgia I; Kenco's site references a distinct \"mcs-georgia-ii\" page but with no street address; exact building unresolved. No positive found. [Tier 1: https://kencogroup.com/kenco_locations/mcs-georgia/, 2024-02]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "transcribedFrom": {
+      "file": "output/yard-audits/kenco-logistics-services/verification-rejections.md",
+      "transcribedAt": "2026-08-13",
+      "note": "verdict and sourcing written pack-direct by the 2026-06-19 FOV scrub; transcribed onto the canonical source record, which the pack build had dropped"
+    }
+  }
 }

@@ -163,5 +163,36 @@
     "scale": "No truck scale identified; left low-confidence.",
     "exitLanes": "Open driveway; outbound lane count not separately determinable."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/job-listing/clif-bar-production-team-member-mondel%C4%93z-international-JV_KO0,31_KE32,54.htm?jl=1009819397275",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Active Mondelez Clif Bar Production Team Member req at the Indianapolis bakery, 7575 Georgetown Rd"
+      },
+      {
+        "tier": 1,
+        "url": "https://indychamber.com/member-directory/clif-bar-baking-company-of-indianapolis/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Clif Bar Baking Co. of Indianapolis, LLC listed at 7575 Georgetown Rd, Indianapolis IN 46268 (Mondelez division)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Mondelez careers reqs at 7575 Georgetown Rd; the only Indiana Mondelez closure was the separate Enjoy Life Foods plant in Jeffersonville (different brand/city), not this Clif Bar plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19",
+    "backfilledFrom": {
+      "pack": "public/demo-packs/mondelez-international.json",
+      "backfilledAt": "2026-08-13",
+      "note": "verification was written pack-direct by the 2026-06-19 FOV scrub and never propagated to source; copied verbatim after reconciling site id and coordinates"
+    }
+  }
 }
