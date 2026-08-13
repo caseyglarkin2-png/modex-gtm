@@ -1,0 +1,329 @@
+{
+  "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+  "type": "Beef Processing Plant",
+  "coords": {
+    "lat": 35.2593,
+    "lng": -101.6488
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson+Fresh+Meats+beef+plant+Amarillo+Texas",
+        "date": "2026-07",
+        "type": "places-api",
+        "claim": "Google Places API (New) returns establishment 'Tyson Foods' at 5000 FM1912, Amarillo, TX 79108 @ 35.2583166,-101.6496981, plus a second Tyson establishment 'Tyson Forward Whse' at the same address - both landing inside the complex audited here."
+      },
+      {
+        "tier": 1,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson+Fresh+Meats+beef+plant+Amarillo+Texas",
+        "date": "2026-07",
+        "type": "places-api",
+        "claim": "Google Places also returns a dedicated POI 'Amarillo Tyson OTR (Truck Entrance)' at 16325 E St Francis Ave, Amarillo TX @ 35.2651671,-101.6475004 - the exact public-road mouth of the north truck drive imaged in this audit."
+      },
+      {
+        "tier": 2,
+        "url": "https://yardflow.ai/for/tyson-foods",
+        "date": "2026-07",
+        "type": "roster",
+        "claim": "Facility carried on the YardFlow Tyson Foods flagship site list (public-record beef plant roster)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Session WebSearch budget was exhausted, so the Step -1 web gate was waived per run instructions. Confirmation rests on two independent Google Places establishment records naming Tyson on this exact complex, a Tyson-named OTR truck-entrance POI on the adjoining public road, and the physical signature - curved livestock crowd pens, a single very large multi-stage process complex, a rail spur with a standing car string, ~1,400-stall employee parking and a 300+ trailer drop yard - which is consistent only with a large red-meat harvest plant. A February 2026 Street View pano at the truck entrance shows a live over-the-road tractor-trailer leaving the property, so the site is operating. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list. OPERATING, REDUCED: Amarillo beef was cut to one full-capacity shift in January 2026 (~1,700 workers affected) when Tyson closed Lexington NE. Not closed and not divested, but throughput — and therefore yard volume — is materially below what the audit imagery shows. [Tier 2: https://www.kcur.org/environment-agriculture/2025-12-16/tyson-closing-beef-processing-plant , 2025-12]",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.2635,
+          "lng": -101.6533
+        },
+        {
+          "lat": 35.2635,
+          "lng": -101.6496
+        },
+        {
+          "lat": 35.2629,
+          "lng": -101.6456
+        },
+        {
+          "lat": 35.2598,
+          "lng": -101.6452
+        },
+        {
+          "lat": 35.2565,
+          "lng": -101.646
+        },
+        {
+          "lat": 35.2552,
+          "lng": -101.6486
+        },
+        {
+          "lat": 35.2553,
+          "lng": -101.6533
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.26285,
+          "lng": -101.64795
+        },
+        {
+          "lat": 35.26285,
+          "lng": -101.64715
+        },
+        {
+          "lat": 35.26225,
+          "lng": -101.64715
+        },
+        {
+          "lat": 35.26225,
+          "lng": -101.64795
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.26235,
+            "lng": -101.64976
+          },
+          {
+            "lat": 35.26235,
+            "lng": -101.64802
+          },
+          {
+            "lat": 35.26152,
+            "lng": -101.64802
+          },
+          {
+            "lat": 35.26152,
+            "lng": -101.64976
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.26229,
+            "lng": -101.6479
+          },
+          {
+            "lat": 35.26229,
+            "lng": -101.64555
+          },
+          {
+            "lat": 35.25977,
+            "lng": -101.64555
+          },
+          {
+            "lat": 35.25977,
+            "lng": -101.6479
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.2613,
+            "lng": -101.64795
+          },
+          {
+            "lat": 35.2613,
+            "lng": -101.64758
+          },
+          {
+            "lat": 35.25985,
+            "lng": -101.64758
+          },
+          {
+            "lat": 35.25985,
+            "lng": -101.64795
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.26139,
+            "lng": -101.6496
+          },
+          {
+            "lat": 35.26139,
+            "lng": -101.6488
+          },
+          {
+            "lat": 35.26119,
+            "lng": -101.6488
+          },
+          {
+            "lat": 35.26119,
+            "lng": -101.6496
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.2569,
+            "lng": -101.6474
+          },
+          {
+            "lat": 35.2569,
+            "lng": -101.6452
+          },
+          {
+            "lat": 35.25672,
+            "lng": -101.6452
+          },
+          {
+            "lat": 35.25672,
+            "lng": -101.6474
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.26575,
+          "lng": -101.648
+        },
+        {
+          "lat": 35.26575,
+          "lng": -101.647
+        },
+        {
+          "lat": 35.26285,
+          "lng": -101.647
+        },
+        {
+          "lat": 35.26285,
+          "lng": -101.648
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "staging": {
+        "heading": 181,
+        "pano": "rBGNuy8PhrCB7mXmNuz-zg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 300,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 12,
+    "siteAreaAcres": 152.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.2593,-101.6488,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dockDoorCount",
+    "buildingCount"
+  ],
+  "fieldNotes": {
+    "location": "Roster coordinate 35.206982,-101.832007 was city-level Amarillo and about 17 km WSW of the plant. Corrected by Google Places (New) to the real complex at 5000 FM1912, north of I-40 / US-60 and east of N Farm to Market Rd 1912. Audited center pinned to 35.2593,-101.6488 from z16 satellite.",
+    "imagery": "Satellite is native to about z19 and clean; z20 crops are usable, z21 is visibly upsampled. Street View exists at exactly one pano on the property - rBGNuy8PhrCB7mXmNuz-zg at 35.265401,-101.647484, captured 2026-02, sitting 15 m inside the truck entrance off E St Francis Ave. Every zone centroid returns ZERO_RESULTS, so hasCoverage is true only for the staging corridor, which physically contains that pano.",
+    "truckGate": "The property mouth on E St Francis Ave (35.2657,-101.6475) is an open, unbarriered concrete drive - Street View from two headings shows no arm, no booth, no fence at the road, only a small direction sign board. Control sits 330 m south, at 35.26256,-101.64757, where the drive reaches a checkpoint plaza: a 21.5 m x 10 m building set in the middle of the pavement with a truck lane on each side, a truck standing at the east lane in the imagery, and a narrow 1.7 m x 21.6 m pale deck in that east lane. Called true on that checkpoint pinch-point, not on a property-line gate.",
+    "guardShack": "The checkpoint building is larger than a classic 1-3 stall booth - it measures roughly 21.5 m by 10 m at z20/z21 with a 9 m northward shadow, so a single-story structure of real size. It is not the main plant (that is 500 m south) and it is not an office block; it sits astride the truck lane with vehicles queued at its end, which is the signature of a staffed gate/scale house. Called true, flagged medium.",
+    "remoteGs": "False by rule - a staffed checkpoint building is present.",
+    "scale": "A pale rectangular deck about 1.7 m x 21.6 m runs along the east (inbound) lane beside the checkpoint building, with a tractor-trailer standing on it in the capture. That is the standard overhead signature of a truck scale platform. Not independently confirmed at this resolution; flagged.",
+    "preGateStaging": "The entrance corridor runs 330 m of full-width concrete from the public road to the checkpoint, plus a wide apron at St Francis Ave. Twenty-plus trucks can stack inside the property line before reaching the checkpoint, and the 2026-02 Street View shows a tractor-trailer using it. Unambiguously true.",
+    "postGateStaging": "Immediately south of the checkpoint the pavement opens into a 3.6-acre paved trailer lot (35.2615 to 35.2624, -101.6480 to -101.6498) before any dock face is reached.",
+    "drivewayLong": "330 m from public road to checkpoint, then a further 400 m of internal spine to the main dock faces. Queue depth is not a constraint here.",
+    "backupSensitive": "False. E St Francis Ave is a rural section-line road, the entrance apron is wide, and there is a third of a kilometre of private drive before any control point. A queue cannot reach the public road.",
+    "entryExitTogether": "One truck drive serves both directions at one point on the property line; the checkpoint building splits it into an east (inbound, scaled) lane and a west lane. A second, narrower drive 50 m west off the same road is the employee car entrance and does not carry trucks.",
+    "entryLanes": "One inbound lane at the checkpoint, one outbound, read from the lane geometry either side of the building at z20. The approach pavement is far wider than two lanes, so the count is of usable gate lanes, not of pavement. Flagged.",
+    "fastLaneOpportunity": "Strong. The approach reads as three-plus lanes of concrete at the public road and stays wide the whole way in; there is unused paved width on both sides of the checkpoint building and 330 m of private corridor to work with. Room for a dedicated bypass or express lane without acquiring land.",
+    "dockDoors": "Four separate dock banks. Plant east wall from 35.26130 to 35.25985 - about 160 m of continuous dock with 17-18 trailers backed in at capture (z19/z20). North face bank near 35.26130,-101.6492 - about 80 m with 11 trailers backed in. South warehouse south face from -101.6474 to -101.6452 - about 200 m of door rhythm with trailers and rail cars alongside. West building north face - a further 90 m of docked trailers. Total frontage well over 500 m; at a conservative 5 m door pitch that is 95-plus doors. Band 50+ is safe; the point estimate of 95 is the soft number.",
+    "dropArea": "Two drop yards. North paved yard 3.6 acres with roughly 55 trailers standing in four rows. East yard 14.8 acres of graded surface holding roughly 145 trailers in angled rows, plus more along the plant spine. Comfortably 50+.",
+    "trailersVisible": "About 300 across the whole site at capture, counted band by band at z18. Row pitch measured at 4.4-5.0 m. Treat as plus or minus 15 percent.",
+    "trailerParkingCapacity": "About 450, from 18.4 acres of measured drop yard at the observed row pitch. The east yard is only about a third occupied in this capture, so the headroom is real.",
+    "shipRcvSeparate": "Live cattle receiving is a curved crowd-pen fan on the south end at roughly 35.2565,-101.6489, physically separate from the boxed-beef shipping docks on the plant's east wall and the south warehouse. Two distinct truck populations, two distinct dock clusters.",
+    "multipleFacilities": "Campus. Main harvest and fabrication complex, a separate south cold-storage / shipping warehouse, a detached east warehouse-shop, a north dock building, rendering and utility structures, livestock pens, plus a wastewater lagoon east of the fence line.",
+    "scaleNote": "Only one scale-like deck was found, at the north checkpoint. A livestock scale on the cattle-receiving side is likely but was not resolved.",
+    "railServed": "True and substantial. A spur curves in from the BNSF / US-60 corridor at the south-east and runs along the south warehouse's south wall; a long standing string of rail cars is visible on it at 35.2556 to 35.2564, -101.6470 to -101.6455, with additional cars spotted on a siding at 35.2564,-101.6466.",
+    "urbanRural": "Rural. Section-line roads, dryland and pivot-irrigated fields on all four sides, nearest neighbours a church and a trucking yard. Amarillo's dense fabric is 12 km west; the setting here is open country.",
+    "connectivityIssue": "False. The site sits 1 km north of I-40 / US-60 on the Amarillo metro edge, so cellular coverage is very likely adequate. Inferred, flagged.",
+    "multiStep": "False. The checkpoint plaza combines gate and scale in one stage; no second booth was found between it and the docks.",
+    "siteAreaAcres": "152.2 acres from the traced perimeter - plant, both drop yards, employee lots, cattle pens, the north entrance corridor and the checkpoint. Excludes the wastewater lagoon 600 m east and the treatment ponds further north-east, whose parcel boundary could not be established from imagery.",
+    "geofenceOrientation": "This complex is built square to the section grid - every dock wall, trailer row and drive in the z18-z20 crops runs within a couple of degrees of true north-south or east-west. The near-rectangular rings here reflect the site's real geometry, not a north-aligned default."
+  },
+  "method": "deep-audit"
+}

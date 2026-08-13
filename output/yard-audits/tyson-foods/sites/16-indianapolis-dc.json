@@ -1,0 +1,253 @@
+{
+  "name": "Tyson Foods Indianapolis Distribution Center - Indianapolis IN",
+  "type": "Distribution Center",
+  "coords": {
+    "lat": 39.750135,
+    "lng": -86.11875
+  },
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@39.750135,-86.118750,400m/data=!3m1!1e3",
+        "date": "2026",
+        "type": "satellite + Street View imagery",
+        "claim": "Active refrigerated distribution warehouse at 1301 S Keystone Ave: one ~194 m dock face with ~22 trailers backed in, a fenced 100+ trailer drop yard to the north-east, gated chain-link perimeter. 2024-09 Street View shows the gate, fencing and full car park - current operation."
+      },
+      {
+        "tier": 3,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Tyson+Foods+Distribution+Center,+Indianapolis,+IN",
+        "date": "2026-07-30",
+        "type": "geocoder rooftop resolution",
+        "claim": "The CRM string 'Tyson Foods Distribution Center, Indianapolis, IN' resolves ROOFTOP to 1301 S Keystone Ave, Indianapolis, IN 46203 (39.7500232, -86.1207583) - the exact CRM seed."
+      },
+      {
+        "tier": 3,
+        "url": "https://html.duckduckgo.com/html/?q=%221301+S+Keystone%22+Indianapolis+warehouse+OR+%22distribution+center%22",
+        "date": "2026-07-30",
+        "type": "commercial real-estate / business listing aggregation",
+        "claim": "1301 S Keystone Avenue described as a 216,520 sq ft cooler/freezer facility fully leased to Tyson Foods, serving as a mixing and distribution hub for Tyson's Indiana protein production, with 43 dock doors, 128 trailer spaces and 32-36 ft clear height. Tyson Sales and Distribution, Inc is separately listed at the address."
+      }
+    ],
+    "imageryDate": "2026 satellite; Street View 2024-09 (S Keystone Ave frontage and gate), 2015-08 (in-yard panos)",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address, building and CRM seed all agree, and a real-estate description states the cooler/freezer is fully leased to Tyson Foods with specs that match the imagery. Capped at probable because no company self-attested Tier-1 source could be pulled (session web-search budget exhausted) and because Interstate Warehousing, a third-party cold-storage operator, is also listed at this address, leaving open whether Tyson staffs the yard directly or through a 3PL. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.74962,
+          "lng": -86.12084
+        },
+        {
+          "lat": 39.750025,
+          "lng": -86.12007
+        },
+        {
+          "lat": 39.751292,
+          "lng": -86.118388
+        },
+        {
+          "lat": 39.751996,
+          "lng": -86.117621
+        },
+        {
+          "lat": 39.751418,
+          "lng": -86.11691
+        },
+        {
+          "lat": 39.750428,
+          "lng": -86.115729
+        },
+        {
+          "lat": 39.75005,
+          "lng": -86.1163
+        },
+        {
+          "lat": 39.7503,
+          "lng": -86.1177
+        },
+        {
+          "lat": 39.74945,
+          "lng": -86.119
+        },
+        {
+          "lat": 39.74942,
+          "lng": -86.12064
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.749707,
+          "lng": -86.120216
+        },
+        {
+          "lat": 39.749903,
+          "lng": -86.120334
+        },
+        {
+          "lat": 39.749713,
+          "lng": -86.120864
+        },
+        {
+          "lat": 39.749517,
+          "lng": -86.120746
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.751996,
+            "lng": -86.117621
+          },
+          {
+            "lat": 39.751418,
+            "lng": -86.11691
+          },
+          {
+            "lat": 39.750428,
+            "lng": -86.115729
+          },
+          {
+            "lat": 39.75005,
+            "lng": -86.1163
+          },
+          {
+            "lat": 39.7503,
+            "lng": -86.1177
+          },
+          {
+            "lat": 39.751336,
+            "lng": -86.118249
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.750938,
+            "lng": -86.118216
+          },
+          {
+            "lat": 39.749769,
+            "lng": -86.119967
+          },
+          {
+            "lat": 39.750006,
+            "lng": -86.120235
+          },
+          {
+            "lat": 39.751175,
+            "lng": -86.118484
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 148,
+        "pano": "PX0efmTfzfoDf9p7GfKi0g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 139,
+        "pano": "8L1bwZINbKElhmCvUF4aIg",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 87,
+        "pano": "upBzz5qp6_eWyAj02cMSfA",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 163,
+        "pano": "3anfpGsFTJWgIl5MYEnlmg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 43,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 128,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 12.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.750135,-86.118750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "site": "1301 S Keystone Ave, Indianapolis 46203 - a leased refrigerated (cooler/freezer) distribution warehouse on the near south-east side, wedged between the Pleasant Run ravine on the north-west and a rail line on the south-east. Described in real-estate material as 216,520 sq ft with 43 dock doors and 128 trailer spaces; the imagery trace of the main rectangle comes out around 160-170k sq ft, so either the trace is short at the south end or the listed figure includes attached space. Adjacent buildings on the same block (a large dark-roof warehouse to the south-west, a grey warehouse to the south-east) are separate tenants and are excluded from the perimeter.",
+    "truckGate": "TRUE, confirmed unambiguously. A zoomed Street View frame (2024-09 pano 8L1bwZINbKElhmCvUF4aIg, heading 123, fov 32) shows a two-leaf chain-link swing gate standing across the driveway at roughly 39.7497,-86.1205, with cross-braced gate frames, barbed-wire-topped chain-link fence running both ways off it, and warning/notice signage on the fabric. The same two gate leaves are visible from overhead at z20 as a pair of ~10 m ladder-like objects swung open against the curb islands. Single truck entrance off S Keystone Ave; no other opening exists (the north-east yard dead-ends at the rail and the ravine).",
+    "guardShack": "FALSE. No booth, shed or kiosk structure anywhere at or inside the gate in the z19/z20 satellite or in any Street View frame. The nearest building is the two-storey flat-roof office at the warehouse's south-west corner, roughly 100 m past the gate with a staff car park around it - an office, not a gate booth.",
+    "remoteGs": "TRUE by rule and by read. A real gate exists with no staffed booth, so check-in happens by call box, app or by reporting to the office. No call box was resolvable in imagery but the gate stands open in both the 2024 Street View and the 2026 satellite, which is what an unstaffed gate looks like in practice.",
+    "preGateStaging": "FALSE. Only about 30 m of asphalt apron separates the gate from the S Keystone Ave curb - one tractor-trailer, and it is shared with car traffic to the office. There is no truck waiting area outside the gate.",
+    "postGateStaging": "TRUE. Past the gate the drive opens into roughly 100 m of unmarked paved yard before the dock apron, plus the apron itself.",
+    "backupSensitive": "TRUE, and this is the sharpest physical finding on the site. The gate sits about 30 m off S Keystone Ave, a busy multi-lane urban arterial. A second truck waiting at the gate has nowhere to stand except on Keystone. Any check-in delay at this gate becomes a public-road problem immediately.",
+    "fastLaneOpportunity": "FALSE. The gate opening itself is wide (two leaves, roughly 12 m) but there is no room between the gate and S Keystone Ave to develop a bypass or express lane - the apron is one truck deep. The remedy here is moving check-in off the gate, not adding a lane.",
+    "dockDoors": "25-50 band. Real-estate description states 43 dock doors; overhead imagery is consistent - a single continuous dock face roughly 194 m long on the warehouse's north-west wall with about 22 trailers backed in at z18, which implies door centres near 4.5 m.",
+    "dropArea": "50+. Real-estate description states 128 trailer spaces. Counting rows in the north-east yard at z18 gives on the order of 110-120 trailers on the ground, so the yard is running close to full.",
+    "shipRcvSeparate": "FALSE. All docks are on one wall (the north-west face). The south-east wall faces the neighbouring building and the rail with no dock doors.",
+    "scale": "FALSE, listed as uncertain. No scale deck or scale house was resolvable at z20 anywhere on the truck path. Not expected on a leased cold-storage DC of this size, but the negative is imagery-limited.",
+    "railServed": "FALSE. A rail line runs along the south-east property line but no spur enters the parcel; the track passes through with no siding, switch or rail dock on this property.",
+    "urbanRural": "Urban. Dense Indianapolis near-south-east side, residential street grid immediately across S Keystone Ave.",
+    "multipleFacilities": "FALSE for the audited parcel - one warehouse plus its office. The block does carry other large warehouses, but those are separate tenants with their own drives off S Keystone and are not inside this perimeter.",
+    "operator": "Flagged for the sales conversation: Interstate Warehousing, a third-party cold-storage provider, is also listed at 1301 S Keystone Ave. The yard may be run by a 3PL on Tyson's behalf rather than by Tyson staff. Worth confirming before any outbound that assumes Tyson controls gate process here.",
+    "siteAreaAcres": "12.6 acres from the traced perimeter. The perimeter deliberately excludes the neighbouring dark-roof and grey warehouses; if the leased premises turn out to include the grey building to the south-east, the figure rises."
+  },
+  "method": "deep-audit"
+}

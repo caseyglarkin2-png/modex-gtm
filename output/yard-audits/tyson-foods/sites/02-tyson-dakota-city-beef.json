@@ -1,0 +1,423 @@
+{
+  "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+  "type": "Beef Processing Plant",
+  "coords": {
+    "lat": 42.42785,
+    "lng": -96.41696
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://places.googleapis.com/v1/places:searchNearby?location=42.428627,-96.415967",
+        "date": "2026-07-30",
+        "type": "Google Places (New) nearby search",
+        "claim": "Returns 'Tyson Fresh Meats' at 5200 Dakota Ave, Dakota City NE 68731 (42.428627,-96.415967), 'Tyson Foods' at 5200 Ibp Ave (42.427556,-96.415113), 'Dakota City, Tyson Fresh Meats' at 1671 Ibp Ave, 'TYSON TRUCK ENTRANCE' at 360 164th St (42.431284,-96.415733), and 'Tyson Chemical Receiving' at 1655 Ibp Ave - five separate Tyson-named records inside the traced perimeter."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@42.43175,-96.41425,3a,75y/data=!3m1!1e3",
+        "date": "2023-08",
+        "type": "Street View imagery",
+        "claim": "2023-08 pano at the Ibp Ave truck entrance shows an active plant: tractor-trailers moving on the entrance drive, occupied dock faces, full trailer yards. 2026 satellite shows the same yards occupied."
+      }
+    ],
+    "imageryDate": "2023-08 / 2019-07 (Street View) / 2026 Airbus-Maxar (satellite)",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Session WebSearch budget was exhausted, so no Tier-1 documentary check (10-K Item 2, plant locator, careers reqs) was run and no affirmative divestiture check was performed. Identity rests on five Tyson-named Google Places records inside the traced perimeter plus 2023-08 and 2026 imagery showing an active, fully occupied plant. Dakota City is Tyson Fresh Meats' flagship beef plant; divestiture risk is low but was not affirmatively checked. Neighbouring operators (empirical foods / Dakota Cold Storage on 164th St to the west, Ingredion further west) were identified and excluded from the geofence. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.43474,
+          "lng": -96.41476
+        },
+        {
+          "lat": 42.4319,
+          "lng": -96.41479
+        },
+        {
+          "lat": 42.4297,
+          "lng": -96.41487
+        },
+        {
+          "lat": 42.42846,
+          "lng": -96.41508
+        },
+        {
+          "lat": 42.4262,
+          "lng": -96.41508
+        },
+        {
+          "lat": 42.425,
+          "lng": -96.4152
+        },
+        {
+          "lat": 42.4242,
+          "lng": -96.4164
+        },
+        {
+          "lat": 42.423,
+          "lng": -96.4169
+        },
+        {
+          "lat": 42.42235,
+          "lng": -96.417
+        },
+        {
+          "lat": 42.4224,
+          "lng": -96.419
+        },
+        {
+          "lat": 42.425,
+          "lng": -96.41905
+        },
+        {
+          "lat": 42.428,
+          "lng": -96.4193
+        },
+        {
+          "lat": 42.43,
+          "lng": -96.41925
+        },
+        {
+          "lat": 42.432,
+          "lng": -96.4188
+        },
+        {
+          "lat": 42.43474,
+          "lng": -96.41892
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.43182,
+          "lng": -96.41412
+        },
+        {
+          "lat": 42.43182,
+          "lng": -96.4155
+        },
+        {
+          "lat": 42.43132,
+          "lng": -96.4155
+        },
+        {
+          "lat": 42.43132,
+          "lng": -96.41412
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.43365,
+            "lng": -96.4173
+          },
+          {
+            "lat": 42.43365,
+            "lng": -96.41478
+          },
+          {
+            "lat": 42.43185,
+            "lng": -96.41478
+          },
+          {
+            "lat": 42.43185,
+            "lng": -96.4173
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.43185,
+            "lng": -96.4168
+          },
+          {
+            "lat": 42.43185,
+            "lng": -96.4147
+          },
+          {
+            "lat": 42.42965,
+            "lng": -96.41487
+          },
+          {
+            "lat": 42.42965,
+            "lng": -96.4168
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.4318,
+            "lng": -96.41735
+          },
+          {
+            "lat": 42.4318,
+            "lng": -96.4162
+          },
+          {
+            "lat": 42.4304,
+            "lng": -96.41625
+          },
+          {
+            "lat": 42.4304,
+            "lng": -96.4174
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.42457,
+            "lng": -96.419
+          },
+          {
+            "lat": 42.42457,
+            "lng": -96.41723
+          },
+          {
+            "lat": 42.42243,
+            "lng": -96.41723
+          },
+          {
+            "lat": 42.42243,
+            "lng": -96.419
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.43059,
+            "lng": -96.41669
+          },
+          {
+            "lat": 42.43059,
+            "lng": -96.41643
+          },
+          {
+            "lat": 42.42991,
+            "lng": -96.41643
+          },
+          {
+            "lat": 42.42991,
+            "lng": -96.41669
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.43185,
+            "lng": -96.41735
+          },
+          {
+            "lat": 42.43185,
+            "lng": -96.41713
+          },
+          {
+            "lat": 42.43089,
+            "lng": -96.41713
+          },
+          {
+            "lat": 42.43089,
+            "lng": -96.41735
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.43113,
+            "lng": -96.41668
+          },
+          {
+            "lat": 42.43113,
+            "lng": -96.416
+          },
+          {
+            "lat": 42.43091,
+            "lng": -96.416
+          },
+          {
+            "lat": 42.43091,
+            "lng": -96.41668
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 42.43164,
+          "lng": -96.41603
+        },
+        {
+          "lat": 42.43164,
+          "lng": -96.41564
+        },
+        {
+          "lat": 42.43007,
+          "lng": -96.41564
+        },
+        {
+          "lat": 42.43007,
+          "lng": -96.41603
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 270,
+        "pano": "A0E06vUj-AqurAx_oSZF4Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 247,
+        "pano": "FUABoi9GvqwMlzTvdkKzeg",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 343,
+          "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+          "hasCoverage": true
+        },
+        {
+          "heading": 187,
+          "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+          "hasCoverage": true
+        },
+        {
+          "heading": 234,
+          "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+          "hasCoverage": true
+        },
+        {
+          "heading": 237,
+          "pano": "zpRIM2521yTnYjHibTn6-A",
+          "hasCoverage": true
+        }
+      ],
+      "dockAprons": [
+        {
+          "heading": 205,
+          "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+          "hasCoverage": true
+        },
+        {
+          "heading": 253,
+          "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+          "hasCoverage": true
+        },
+        {
+          "heading": 217,
+          "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+          "hasCoverage": true
+        }
+      ],
+      "staging": {
+        "heading": 190,
+        "pano": "P2CNwZ8JoYvweC9rP6Cdng",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 85,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 380,
+    "truckGateCount": 3,
+    "buildingCount": 25,
+    "siteAreaAcres": 106.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.42785,-96.41696,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "multiStep",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "buildingCount"
+  ],
+  "fieldNotes": {
+    "truckGate": "True, high confidence, but the control point is NOT at the public road. The main truck entrance is a wide concrete drive leaving Ibp Ave at 42.43172,-96.41415 as an open T-intersection with no barrier at the road. Control sits inside: 2019-07 Street View (pano taken on the entrance drive, heading 228, fov 26) shows chain-link swing gates with a locking post, diagonal bracing and yellow bollards closing the drive into the trailer yards, with restriction signage on the fence. A dedicated truck check-in building sits a further ~600 m west in the truck lane at 42.43125,-96.41585 - Google Places carries a POI at that exact spot named 'TYSON TRUCK ENTRANCE' (360 164th St).",
+    "guardShack": "Medium confidence. A small brick building with a hipped roof, footprint measured at z21 as roughly 7.0 m x 6.1 m (1-2 parking spaces), sits at 42.43140,-96.41472 on a gravel pad on the south side of the main entrance drive, about 55 m in from Ibp Ave, behind the perimeter chain-link and immediately beside the trailer-yard fence. It matches a gatehouse in size, roof form and position, and it is plainly not the main building. What was NOT observed: a barrier arm beside it, or a person in it. Separately, the interior truck check-in building at 42.43125,-96.41585 is far larger (about 12.7 m x 18.7 m at z20) - that is a driver check-in office, not a booth.",
+    "remoteGs": "False because guardShack was called true. If the brick building at the entrance turns out to be unstaffed, this site flips to remoteGs true - that is the single highest-value thing to confirm on a call.",
+    "preGateStaging": "Several hundred metres of wide concrete drive between the Ibp Ave curb cut and the first interior gate line, plus open concrete aprons on both sides. Effectively unlimited pre-gate stacking.",
+    "postGateStaging": "Large open concrete artery inside the gates (traced as `staging`, 1.38 acres) running south past the check-in building toward the dock faces.",
+    "drivewayLong": "The entrance drive runs roughly 600 m west from Ibp Ave to the truck check-in building, and the dock faces are further west and south again. Far more than 3 trucks of stacking.",
+    "backupSensitive": "False. Rural site, open T-intersection onto a low-volume county road, hundreds of metres of on-property concrete before any control point.",
+    "entryLanes": "The entrance drive is a wide unstriped concrete road - visually 2 lanes each way at the road, widening inside. Recorded 2/2; low confidence because there are no lane markings.",
+    "exitLanes": "Same shared drive as entry.",
+    "fastLaneOpportunity": "Very large amounts of unstriped concrete width at the entrance and at the check-in building. Physical room for a bypass lane is not the constraint here.",
+    "dockDoors": "'50+' is high confidence; the count of 85 is an estimate. Directly counted from z19: about 17-20 trailers backed square into an east-facing wall at 42.43025,-96.41656 across a 75 m dock face; about 13 on a west-facing wall at 42.43137,-96.41724; about 10-12 along the south face of the large shed at 42.43102,-96.41634. That is roughly 41-45 in three banks alone, with further banks visible on the north warehouse and in the 2023-08 ground-level view west from the entrance. 85 is the aggregate estimate across the campus.",
+    "dropArea": "Four drop yards traced, 32.5 acres of trailer parking in total: north yard 10.25 acres, north-mid yard 10.02 acres, west-of-check-in yard 3.64 acres, south yard 8.56 acres. Each individually holds well over 50 trailers.",
+    "shipRcvSeparate": "Confirmed by geometry: at least three distinct dock banks on different building faces and on opposite sides of the plant spine (east-facing bank at 42.43025, west-facing bank at 42.43137, south-facing shed bank at 42.43102), plus a separate chemical-receiving point (Google Places 'Tyson Chemical Receiving', 1655 Ibp Ave) at the south end.",
+    "urbanRural": "Rural. Dakota City NE has roughly 2,000 residents; the plant is bounded by row-crop farmland on the east and north, the rail corridor and river bottom on the west, and the town's residential grid only at the far south. The nearest dense fabric is South Sioux City / Sioux City several km northeast.",
+    "connectivityIssue": "False. Rural but not isolated - the plant is on the edge of the Sioux City metro with a town immediately south, a state highway alongside, and multiple carriers serving the corridor.",
+    "multipleFacilities": "Campus, unambiguously. The complex runs about 1.4 km north to south: a north warehouse/cold-storage cluster with its own trailer yard, a central process spine roughly 800 m long, a maintenance and shed cluster mid-site, and a south yard/rail cluster. Note the adjacent operators to the west on 164th St (empirical foods, Dakota Cold Storage) were identified and excluded from the perimeter.",
+    "scale": "Not visually confirmed. No unambiguous weigh deck or scale house was found at the Ibp Ave entrance or beside the check-in building at z20/z21. A beef plant of this size almost certainly weighs inbound cattle and outbound product, so treat this false as 'not found from overhead' rather than 'absent'. Flagged.",
+    "multiStep": "Probable two-stage flow: the entrance gatehouse and chain-link gate line at 42.4314,-96.4147, then a separate truck check-in building 600 m west at 42.43125,-96.41585 with its own fenced lane. Recorded true but flagged - it rests on inferring the function of both structures from footprint and position.",
+    "railServed": "Yes, heavily. A continuous line of rail cars runs alongside the plant's entire west edge in the current imagery, with a multi-track yard at the south end (42.4245 to 42.4255, around -96.4192) and additional sidings north. Rail is integral to this site, not incidental.",
+    "siteAreaAcres": "106.5 acres from the traced 15-vertex perimeter (431,000 sq m). The site is a long north-south ribbon roughly 1,380 m x 300-360 m between the rail corridor (west) and Ibp Ave (east). Boundary accuracy is roughly plus/minus 30 m; the softest edges are the southeast, where paved lots fade into grass buffer, and the west, where the operational yard meets the rail right-of-way.",
+    "trailersVisible": "About 280, plus or minus 60. Counted by block from the current satellite pass: about 76 in the north yard alone (10.25 acres, five long rows), with comparable densities across the north-mid, west and south yards. Observed density is roughly one trailer per 520 sq m of drop yard, which is a wide-aisle layout.",
+    "trailerParkingCapacity": "About 380, plus or minus 80. Derived from 32.5 acres of traced drop yard at a realistic packed density; the yards are currently run at wide aisle spacing, so the theoretical ceiling is higher than this figure.",
+    "truckGateCount": "3 recorded, approximate. Confirmed: the main truck entrance off Ibp Ave at 42.43172,-96.41415. Also present: a second yard drive to Ibp Ave near 42.43362,-96.41417 and a plant drive near 42.42780,-96.41450. Several other curb cuts along Ibp Ave serve employee parking rather than trucks and were not counted.",
+    "buildingCount": "25, approximate. The central process mass is many joined structures counted as several; outbuildings, sheds, the cold-storage warehouses, the maintenance shed and the entrance structures make up the rest."
+  },
+  "method": "deep-audit"
+}

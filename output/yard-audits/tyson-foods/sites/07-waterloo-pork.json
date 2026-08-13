@@ -1,0 +1,140 @@
+{
+  "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+  "type": "Pork Processing Plant",
+  "coords": { "lat": 42.5093, "lng": -92.261 },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 42.509216, "lng": -92.267671 },
+        { "lat": 42.511668, "lng": -92.259839 },
+        { "lat": 42.511431, "lng": -92.258927 },
+        { "lat": 42.505776, "lng": -92.259035 },
+        { "lat": 42.505697, "lng": -92.264882 },
+        { "lat": 42.507002, "lng": -92.264775 },
+        { "lat": 42.507199, "lng": -92.267296 },
+        { "lat": 42.5089, "lng": -92.267457 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 42.51062, "lng": -92.25995 },
+        { "lat": 42.51062, "lng": -92.25935 },
+        { "lat": 42.51028, "lng": -92.25935 },
+        { "lat": 42.51028, "lng": -92.25995 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 42.509849, "lng": -92.267082 },
+          { "lat": 42.510917, "lng": -92.263702 },
+          { "lat": 42.510481, "lng": -92.263487 },
+          { "lat": 42.509375, "lng": -92.266866 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.508821, "lng": -92.267243 },
+          { "lat": 42.508504, "lng": -92.264882 },
+          { "lat": 42.507081, "lng": -92.265096 },
+          { "lat": 42.507199, "lng": -92.267189 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.51064, "lng": -92.262628 },
+          { "lat": 42.511273, "lng": -92.259411 },
+          { "lat": 42.510838, "lng": -92.25925 },
+          { "lat": 42.510205, "lng": -92.262468 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 42.5101, "lng": -92.2626 },
+          { "lat": 42.5101, "lng": -92.2597 },
+          { "lat": 42.50975, "lng": -92.2597 },
+          { "lat": 42.50975, "lng": -92.2626 }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        { "lat": 42.51056, "lng": -92.25935 },
+        { "lat": 42.51056, "lng": -92.25895 },
+        { "lat": 42.5103, "lng": -92.25895 },
+        { "lat": 42.5103, "lng": -92.25935 }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "cWpz7rP_bLP2SLyu3Z96uw", "hasCoverage": true },
+      "truckGate": { "heading": 276, "pano": "YQMIK99AN6cbsOUlyXHwhQ", "hasCoverage": true },
+      "staging": { "heading": 275, "pano": "YQMIK99AN6cbsOUlyXHwhQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 250,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 14,
+    "siteAreaAcres": 84.4,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.5093,-92.261,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "shipRcvSeparate",
+    "dockDoors",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "truckGate": "Confirmed in Street View (pano YQMIK99AN6cbsOUlyXHwhQ, captured 2026-04, heading ~272 deg). The truck drive leaves the north-south county road at 42.51042,-92.25883 and runs ~90 m west to a checkpoint: a booth/kiosk with a canopy sits in the lane, chain-link fence lines the south side of the drive, and jersey barriers channel the approach. Controlled entry, not an open driveway.",
+    "guardShack": "A concrete-block gatehouse with a railed roof deck, windsock, HVAC unit and a bank of red/green regulatory sign boards sits on the north side of the drive at ~42.51052,-92.25979 (footprint ~8 m x 11 m in z20/z21 satellite). A person and a parked car are visible at the adjacent lane-side booth in the 2026-04 pano. Staffed booth, so remoteGs is false.",
+    "preGateStaging": "About 90 m of wide paved apron between the public road and the checkpoint, entirely on Tyson pavement. Holds roughly 4-5 tractor-trailers nose to tail and is wide enough to stack two abreast.",
+    "backupSensitive": "Set false: the ~90 m pre-gate apron plus the wide entrance flare absorb a queue, and the county road it meets is a low-volume rural two-lane. Overflow beyond ~5 trucks would still reach the road, so this is a judgement call rather than a hard negative.",
+    "entryLanes": "The drive measures ~11 m of pavement at the checkpoint (z20), consistent with one inbound and one outbound lane, but individual lane striping is not resolvable in either satellite or the 2026 pano. Reported 1/1 with low confidence.",
+    "fastLaneOpportunity": "Large unused paved width on both sides of the checkpoint and a very wide entrance flare at the road. Physical room for a bypass/express lane exists without new pavement.",
+    "dockDoors": "Estimate, not a count. The main plant presents a continuous north-facing dock wall roughly 250 m long with trailers backed in at a regular rhythm (z19 imagery shows ~16 occupied/empty bay positions across a 92 m sample, about 5-6 m spacing), plus additional dock faces on the west buildings and the large white distribution building on the south-west. 60 is the midpoint estimate; the band 50+ is solid.",
+    "dropArea": "Very large. Herringbone trailer rows fill the north-west yard along the rail, a second fan-shaped drop yard sits west of the employee lot, and a third row runs north of the plant. Well over 50 parked trailers without tractors.",
+    "trailersVisible": "Counted approximately 111 trailers in the south-west z18 frame alone; total across all captured imagery is roughly 230-270. Reported 250.",
+    "trailerParkingCapacity": "Derived from ~16 acres of traced drop-yard pavement at roughly 25-30 trailers per acre including drive aisles. Approximate.",
+    "shipRcvSeparate": "The finished-product dock bank runs along the plant's north face while live/raw receiving and the rendering and utility buildings sit on the west and south-west of the complex, served by separate drives. Physically distinct dock clusters, but the two functions could not be labelled definitively from overhead imagery.",
+    "scale": "No truck scale deck could be positively identified. A small rectangular pad sits beside the gatehouse at z21, but it is more consistent with the building footprint than a weigh platform. Reported false rather than guessed true; a plant of this size very likely has one.",
+    "multipleFacilities": "Campus: main process plant, a large separate white distribution/cold building to the south-west, several long narrow support buildings on the west, and outbuildings. All inside one fence.",
+    "railServed": "Confirmed. Rail cars are parked on a spur running east-west through the property just south of the plant (visible at 42.5083,-92.2646, z18), and the mainline runs along the north-west property edge with a second spur arcing around the east side.",
+    "urbanRural": "South-east edge of Waterloo IA, surrounded by row-crop fields on three sides. Per the rubric's edge-of-town/farmland test this is Rural, not Urban.",
+    "perimeter": "Bounded by the rail corridor on the north-west, the north-south county road on the east, the east-west county road on the south, and open field on the west. The John Deere equipment lot immediately north (rows of green tractors at 42.5119,-92.2625) was checked and EXCLUDED - it is a separate dealer property, not Tyson. Wastewater lagoons south of the south road are also excluded from the yard geofence.",
+    "siteAreaAcres": "84.4 acres computed from the perimeter ring. Covers the fenced operational yard only.",
+    "verification": "Web search was unavailable for this run, so no documentary confirmation was fetched. Identification rests on imagery plus the roster's ROOFTOP-precision geocode landing directly on the complex: a very large multi-building protein-processing plant with hog-scale receiving buildings, ~250 refrigerated trailers, rail service and a 1,000+ stall employee lot at the address given. Tyson's Waterloo pork plant is a long-established, publicly known site. Confidence in the operator is high but not documentarily verified in this session."
+  },
+  "method": "deep-audit"
+}

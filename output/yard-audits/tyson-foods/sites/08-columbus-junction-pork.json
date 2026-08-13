@@ -1,0 +1,139 @@
+{
+  "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+  "type": "Pork Processing Plant",
+  "coords": { "lat": 41.29565, "lng": -91.35625 },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.299, "lng": -91.35748 },
+        { "lat": 41.299, "lng": -91.354 },
+        { "lat": 41.296, "lng": -91.3535 },
+        { "lat": 41.2931, "lng": -91.3534 },
+        { "lat": 41.2915, "lng": -91.3568 },
+        { "lat": 41.2929, "lng": -91.35755 },
+        { "lat": 41.2944, "lng": -91.3583 },
+        { "lat": 41.297, "lng": -91.35782 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 41.29688, "lng": -91.35785 },
+        { "lat": 41.29688, "lng": -91.3571 },
+        { "lat": 41.29669, "lng": -91.3571 },
+        { "lat": 41.29669, "lng": -91.35785 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.296773, "lng": -91.355871 },
+          { "lat": 41.296571, "lng": -91.354704 },
+          { "lat": 41.296299, "lng": -91.354757 },
+          { "lat": 41.29648, "lng": -91.355924 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 41.297639, "lng": -91.3552 },
+          { "lat": 41.297448, "lng": -91.354221 },
+          { "lat": 41.296551, "lng": -91.354368 },
+          { "lat": 41.296843, "lng": -91.355187 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 41.296168, "lng": -91.355656 },
+          { "lat": 41.296158, "lng": -91.354771 },
+          { "lat": 41.295423, "lng": -91.354771 },
+          { "lat": 41.295433, "lng": -91.355656 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.29655, "lng": -91.3567 },
+          { "lat": 41.29539, "lng": -91.35505 },
+          { "lat": 41.295587, "lng": -91.354805 },
+          { "lat": 41.296747, "lng": -91.356455 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 89, "pano": "l454AsXIPCvFZgXI4I6P1w", "hasCoverage": true },
+      "truckGate": { "heading": 100, "pano": "tpKGFp3-OQVvyrn6WU1uPQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 260,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 12,
+    "siteAreaAcres": 66.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.29565,-91.35625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoors",
+    "shipRcvSeparate",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "scale",
+    "connectivityIssue",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "location": "The roster coordinate (41.278636, -91.359877, APPROXIMATE) was the town center of Columbus Junction and roughly 2.3 km SOUTH of the plant. The plant was found by stepping out to z14, spotting the only large industrial complex in the frame, and converting its pixel position to 41.29622, -91.357295, then refining to a plant center of 41.29565, -91.35625. The complex reads unambiguously as a large meat plant: 600+ stall employee lot, ~260 refrigerated trailers, a multi-lagoon wastewater treatment train (clarifiers plus green, dark and pink lagoons), and a 190 m dock wall.",
+    "truckGate": "FALSE. Two access drives leave the state highway (main/mid drive at 41.29693,-91.35775, south drive at 41.29477,-91.35845). Street View from September 2024 at both shows an open paved driveway with no barrier arm, no sliding gate, no booth and no checkpoint pinch-point. Chain-link perimeter fence runs along the highway frontage but simply stops at the drive openings; the south drive is flanked by yellow bollards only. A z19 satellite pass down the internal drive from the highway to the trailer yard shows no gatehouse, booth or scale anywhere along it. This is an open site.",
+    "guardShack": "FALSE. No booth structure at either entrance in the 2024-09 panoramas or in z19/z18 satellite. The nearest building to the mid entrance is an office block set back ~90 m south of the drive with its own car park, not a lane-side gatehouse.",
+    "remoteGs": "FALSE by rule: there is no truck gate, so remote check-in cannot be inferred from the gate.",
+    "preGateStaging": "FALSE. With no gate there is no pre-gate hold. Notably, trailers are parked on the highway shoulder along the west side of the road (visible at 41.2972,-91.3592, z18) - yard overflow is spilling onto the public right of way.",
+    "postGateStaging": "TRUE in substance rather than in the strict gate-relative sense. There is no gate, but a very large paved yard sits between the entrance drive and the dock wall and clearly holds trucks before the doors. The `staging` geofence is left null because with no gate the yard is undifferentiated - there is no discrete pre or post zone to draw.",
+    "drivewayLong": "The mid drive runs roughly 250 m from the highway to the trailer yard, easily 3+ trucks deep. A tractor-trailer is visible mid-drive in the z19 imagery.",
+    "backupSensitive": "FALSE. Deep approach, very large paved yard, and a low-volume rural state highway. There is no pinch-point where a queue would block anything.",
+    "entryExitTogether": "Two uncontrolled access points exist (mid and south). Each appears to carry traffic in both directions - a tractor-trailer is seen exiting the south drive in the 2024-09 pano - so this is recorded as together rather than a designated in-gate/out-gate pair. Directional assignment could not be confirmed from imagery; both this and entryExitSeparate are flagged uncertain.",
+    "entryLanes": "Null. There is no gate and no lane striping at either entrance, so an inbound lane count is not meaningful here.",
+    "fastLaneOpportunity": "FALSE. There is no gate to bypass. The constraint at this site is yard density and dock turns, not gate throughput.",
+    "dockDoors": "45, band 25-50. Measured from the primary dock wall on the plant's north-east face, which runs about 190 m on a ~133 degree bearing from 41.29655,-91.35670 to 41.29539,-91.35505. A z19 sample showed 11 backed trailers across ~90 m of that wall at roughly 5.5-6 m centres, giving about 32 positions on the main face; additional doors exist on the east face of the large white building and around the south loop. 45 is the midpoint. This sits near the 25-50 / 50+ boundary and could tip either way - flagged uncertain.",
+    "dropArea": "50+. The yard is densely packed with parked trailers in three large blocks plus a long nose-to-tail column on the east edge. Roughly 100 counted in a single 282 m z18 frame.",
+    "trailersVisible": "260, extrapolated from ~100 counted in the central z18 frame plus the north and south blocks and the highway-shoulder overflow.",
+    "trailerParkingCapacity": "320. The drop yard is already close to full in the captured imagery, so headroom is limited - this estimate is a modest uplift on the observed count, not a large one. Flagged uncertain.",
+    "shipRcvSeparate": "FALSE, flagged uncertain. One continuous dock bank dominates the north-east face. The south side of the plant is a large paved turnaround with tanker and utility loading rather than a second dock cluster, and the east face of the white building shows a possible second door line that could not be confirmed as a distinct shipping or receiving bank.",
+    "scale": "No truck scale deck was identified anywhere on the site or at either entrance. Reported false rather than assumed.",
+    "urbanRural": "Rural. The plant sits in the Iowa River bottom about 2.3 km north of Columbus Junction (population under 2,000), with row-crop fields west, timber east and the river beyond.",
+    "connectivityIssue": "FALSE, flagged uncertain. The site is rural and hemmed by timber and river bottom, but it is only 2.3 km from a town, sits on a state highway with continuous Street View coverage, and has adjacent development. It does not meet the rubric's 'far from any town, no nearby development' bar.",
+    "multipleFacilities": "TRUE. Main process plant, a large separate white building on the south-west of the complex, a full wastewater treatment plant (clarifiers plus four lagoons) on the south-east, and a separate blue-roof shop/warehouse parcel with its own pond across the highway to the west.",
+    "railServed": "FALSE. No rail spur, siding or right of way anywhere on or adjacent to the property. Checked the west parcel, the north field access and the full site perimeter.",
+    "perimeter": "Bounded by the state highway on the west, the timber and river bottom on the east, the north gravel overflow parking at about 41.2990, and the south edge of the wastewater lagoons at about 41.2915. The shop/warehouse parcel across the highway to the west is excluded from the ring and noted separately. 66.2 acres.",
+    "dockAprons": "The plant is NOT square to north - the main building sits at roughly 33 degrees off east-west. The dock apron ring is a rotated quad traced parallel to that wall, not an axis-aligned box.",
+    "verification": "Web search was unavailable for this run, so no documentary confirmation was fetched. Identification rests on imagery: the only large industrial complex within several km of Columbus Junction, with the unmistakable signature of a major protein plant (multi-lagoon wastewater train, 600+ car employee lot, 260 reefer trailers, 190 m dock wall). Tyson's Columbus Junction pork plant is a long-established, publicly known site. Operator confidence is high but not documentarily verified in this session."
+  },
+  "method": "deep-audit"
+}

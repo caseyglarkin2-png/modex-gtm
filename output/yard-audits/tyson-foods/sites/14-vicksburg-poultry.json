@@ -1,0 +1,304 @@
+{
+  "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 32.364817,
+    "lng": -90.658987
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.366285,
+          "lng": -90.66089
+        },
+        {
+          "lat": 32.366013,
+          "lng": -90.65979
+        },
+        {
+          "lat": 32.365945,
+          "lng": -90.658342
+        },
+        {
+          "lat": 32.365741,
+          "lng": -90.657644
+        },
+        {
+          "lat": 32.364699,
+          "lng": -90.657564
+        },
+        {
+          "lat": 32.363928,
+          "lng": -90.657617
+        },
+        {
+          "lat": 32.363724,
+          "lng": -90.657912
+        },
+        {
+          "lat": 32.363701,
+          "lng": -90.659951
+        },
+        {
+          "lat": 32.363724,
+          "lng": -90.660756
+        },
+        {
+          "lat": 32.365152,
+          "lng": -90.660863
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.363928,
+          "lng": -90.660326
+        },
+        {
+          "lat": 32.363914,
+          "lng": -90.65979
+        },
+        {
+          "lat": 32.363656,
+          "lng": -90.659801
+        },
+        {
+          "lat": 32.36367,
+          "lng": -90.660337
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.365968,
+            "lng": -90.659817
+          },
+          {
+            "lat": 32.365932,
+            "lng": -90.658234
+          },
+          {
+            "lat": 32.365651,
+            "lng": -90.658245
+          },
+          {
+            "lat": 32.365687,
+            "lng": -90.659828
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.365741,
+            "lng": -90.658154
+          },
+          {
+            "lat": 32.365673,
+            "lng": -90.657751
+          },
+          {
+            "lat": 32.364699,
+            "lng": -90.657832
+          },
+          {
+            "lat": 32.364745,
+            "lng": -90.658208
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.364618,
+            "lng": -90.660809
+          },
+          {
+            "lat": 32.364618,
+            "lng": -90.659924
+          },
+          {
+            "lat": 32.363793,
+            "lng": -90.659924
+          },
+          {
+            "lat": 32.363793,
+            "lng": -90.660809
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.364654,
+            "lng": -90.659924
+          },
+          {
+            "lat": 32.364654,
+            "lng": -90.659656
+          },
+          {
+            "lat": 32.36377,
+            "lng": -90.659656
+          },
+          {
+            "lat": 32.36377,
+            "lng": -90.659924
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.365741,
+            "lng": -90.659736
+          },
+          {
+            "lat": 32.365719,
+            "lng": -90.658234
+          },
+          {
+            "lat": 32.36556,
+            "lng": -90.658234
+          },
+          {
+            "lat": 32.365583,
+            "lng": -90.659736
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 356,
+        "pano": "SGEVGfXDcMcv8CnQG6VYFg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 347,
+        "pano": "BZDNO-06OEX52A5yEG_r3A",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 84,
+          "pano": "Tv40GWYPxSg6dKgEa87bVw",
+          "hasCoverage": true
+        }
+      ],
+      "dockAprons": [
+        {
+          "heading": 352,
+          "pano": "2IQOyQfBd9OUB0qxokgrXg",
+          "hasCoverage": true
+        }
+      ]
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 2,
+    "buildingCount": 12,
+    "siteAreaAcres": 19.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.364817,-90.658987,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryExitSeparate"
+  ],
+  "fieldNotes": {
+    "location": "The roster coordinates (32.398947,-90.791323, flagged APPROXIMATE) were WRONG by ~12.6 km - they landed in woodland and subdivisions north-west of Vicksburg with no industrial site of any kind. Corrected via the Google Geocoding and Places APIs, both of which return 'Tyson Foods Inc', 1785 Interplex Cir, Vicksburg MS 39183 at 32.3648171,-90.6589868 (ROOFTOP). Satellite at that point shows a large poultry processing plant with an extensive trailer yard; Street View shows Tyson-branded reefers ('Tyson Crispy Strips', 'Jimmy Dean') parked inside the fence. Site sits in the Ceres industrial park east of Vicksburg, north of Armory Road.",
+    "truckGate": "The whole property is enclosed in chain-link fence, confirmed along the entire Armory Road frontage in Street View (March 2025). Gates found at both ends: (a) a cantilever/rolling chain-link gate with an electric gate operator cabinet on the drop-yard lane at the south-west corner (~32.36389,-90.66024), and (b) a double swing gate with a STOP sign and yellow bollards on the east lane (~32.36395,-90.65810). The wide main apron between them (~32.36379,-90.65985) reads as an open paved throat with two grass islands and no barrier in the lane itself, so gate control on that specific lane is unconfirmed.",
+    "guardShack": "No guard booth found at either gate in any Street View heading or in z20-z21 satellite. A small prefab shed with a single door and one window sits inside the east gate, but an identical shed stands elsewhere on the site, so both read as storage rather than a staffed booth. Recorded false at medium confidence.",
+    "remoteGs": "Set true on the basis of gated fence line + electric gate operator + STOP control with no staffed booth, which is the signature of driver self-check-in (kiosk / call box / app).",
+    "preGateStaging": "Tractor-trailers were parked on the wide gravel shoulder of Armory Road outside the fence in March 2025 imagery (two separate panos were fully blocked by roadside trailers). That is functioning overflow/pre-gate staging even though no marked stalls exist.",
+    "entryExitSeparate": "Two gated lanes at opposite ends of the south frontage (south-west drop-yard lane and east lane), which reads as separate in/out routing, but the flow direction was not confirmed. Flagged uncertain.",
+    "dockDoors": "Canopied dock banks run the plant's west face - three banks showing ~13 docked positions inside a single 80 m window - plus a dock line on the north face and the south-west shipping building. Estimated 50-60 doors total; band 50+, exact count is an overhead estimate.",
+    "dropArea": "Three distinct trailer-storage areas: a ~24-trailer row along the north property line, a curved ~10-trailer row on the east perimeter road, and a ~12-trailer south-west lot. Comfortably 50+.",
+    "trailersVisible": "~90 counted across the site in current imagery; approximate.",
+    "shipRcvSeparate": "Finished-goods docks on the west face, a separate dock line on the north face, and a distinct shipping building at the south-west corner.",
+    "multipleFacilities": "Single connected plant complex plus outbuildings; not a campus. NOTE the large white-roofed warehouse immediately south across Armory Road is Unified Brands (88 Armory Rd), a different company, and is excluded from the geofence.",
+    "scale": "No truck scale positively isolated. As at New Holland, this reads as a further-processing / prepared-foods plant rather than a live-haul kill plant: no poultry holding sheds and no open-sided cage trailers are visible, only dry vans and reefers. Recorded false, unverified.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Ceres industrial park east of Vicksburg; the site is ringed by cropland and woodland. Rural.",
+    "connectivityIssue": "Occupied industrial park on the I-20 corridor with neighbouring manufacturers and a large employee lot; no coverage concern.",
+    "backupSensitive": "Armory Road is a low-traffic industrial-park road and the main entrance apron is ~50 m wide with deep stacking room inside the fence. Not backup sensitive.",
+    "boundary": "Perimeter traced to the fenced Tyson property: plant, north drop yard, east perimeter trailer row, south-west drop yard and the west employee lot, bounded by Interplex Circle on the west and Armory Road on the south."
+  },
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson%20Foods%20plant%20Vicksburg%20Mississippi",
+        "date": "2026-07",
+        "type": "locator",
+        "claim": "Google Places returns a single result, 'Tyson Foods Inc' (primaryType manufacturer), 1785 Interplex Cir, Vicksburg MS 39183 at 32.3648171,-90.6589868."
+      },
+      {
+        "tier": 1,
+        "url": "https://maps.googleapis.com/maps/api/streetview?pano=QpT0XmXvhuiD8HxBvGoRsw",
+        "date": "2025-03",
+        "type": "site-signage",
+        "claim": "Street View at the plant's south-west entrance shows Tyson-branded refrigerated trailers ('Tyson Crispy Strips') parked inside the fenced yard, and a Jimmy Dean (Tyson brand) trailer on the west side, with the plant running."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operator confirmed from the Google Places manufacturer listing plus Tyson brand livery on trailers inside the fence in March 2025 Street View. Web search was unavailable for this run, so no news/closure sweep was performed; the plant is visibly active in current imagery (full drop yards, trailers docked, steam plumes). Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+  "type": "Beef Processing Plant",
+  "coords": {
+    "lat": 41.5524,
+    "lng": -90.2244
+  },
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Tyson+Fresh+Meats+Joslin+Illinois",
+        "date": "2026-07",
+        "type": "geocoder",
+        "claim": "Google Geocoding API resolves 'Tyson Fresh Meats Joslin Illinois' to an establishment at 28424 38th Ave N, Hillsdale IL 61257 @ 41.5558309,-90.2247559 - the north end of the industrial complex audited here."
+      },
+      {
+        "tier": 2,
+        "url": "https://yardflow.ai/for/tyson-foods",
+        "date": "2026-07",
+        "type": "roster",
+        "claim": "Facility carried on the YardFlow Tyson Foods flagship site list (public-record beef plant roster)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Session WebSearch budget was exhausted for this run, so the Step -1 web gate was waived per run instructions. Confirmation rests on the Google geocoder landing an establishment record for Tyson Fresh Meats Joslin directly on this complex, plus the physical signature (livestock pens, single very large process building, 100+ trailer drop yard, ~1,400-stall employee lot) which is only consistent with a large red-meat plant. No Street View coverage exists anywhere on or adjacent to the property, so no on-site signage confirmation was possible. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.55445,
+          "lng": -90.2249
+        },
+        {
+          "lat": 41.5544,
+          "lng": -90.22203
+        },
+        {
+          "lat": 41.5526,
+          "lng": -90.22195
+        },
+        {
+          "lat": 41.54985,
+          "lng": -90.22235
+        },
+        {
+          "lat": 41.54935,
+          "lng": -90.2243
+        },
+        {
+          "lat": 41.54945,
+          "lng": -90.2269
+        },
+        {
+          "lat": 41.5508,
+          "lng": -90.2275
+        },
+        {
+          "lat": 41.5522,
+          "lng": -90.2271
+        },
+        {
+          "lat": 41.5536,
+          "lng": -90.2262
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.55456,
+          "lng": -90.22496
+        },
+        {
+          "lat": 41.55454,
+          "lng": -90.22456
+        },
+        {
+          "lat": 41.5533,
+          "lng": -90.22462
+        },
+        {
+          "lat": 41.55332,
+          "lng": -90.22502
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.55439,
+            "lng": -90.22462
+          },
+          {
+            "lat": 41.5544,
+            "lng": -90.22204
+          },
+          {
+            "lat": 41.55315,
+            "lng": -90.22206
+          },
+          {
+            "lat": 41.55314,
+            "lng": -90.22474
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.55433,
+            "lng": -90.2253
+          },
+          {
+            "lat": 41.55434,
+            "lng": -90.22476
+          },
+          {
+            "lat": 41.5536,
+            "lng": -90.22482
+          },
+          {
+            "lat": 41.55359,
+            "lng": -90.22536
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.553171,
+            "lng": -90.223799
+          },
+          {
+            "lat": 41.553171,
+            "lng": -90.224054
+          },
+          {
+            "lat": 41.552338,
+            "lng": -90.224054
+          },
+          {
+            "lat": 41.552338,
+            "lng": -90.223799
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.553061,
+            "lng": -90.224456
+          },
+          {
+            "lat": 41.553061,
+            "lng": -90.2242
+          },
+          {
+            "lat": 41.552439,
+            "lng": -90.2242
+          },
+          {
+            "lat": 41.552439,
+            "lng": -90.224456
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.5534,
+          "lng": -90.2247
+        },
+        {
+          "lat": 41.5534,
+          "lng": -90.2232
+        },
+        {
+          "lat": 41.5529,
+          "lng": -90.2232
+        },
+        {
+          "lat": 41.5529,
+          "lng": -90.2247
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "staging": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 53.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.5524,-90.2244,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "dockDoors",
+    "railServed"
+  ],
+  "fieldNotes": {
+    "imagery": "Street View metadata returns ZERO_RESULTS at every point on the access road, the yard, and the plant perimeter (nearest pano is 245 m north on the residential road through Joslin, 2023-05). All gate and dock calls therefore rest on satellite alone, and native resolution tops out near z19 - z20/z21 crops are visibly upsampled. That is why the access-control fields are flagged.",
+    "truckGate": "No barrier arm, sliding gate, or booth is visible where the private access drive crosses the property line into the drop yard (41.5544,-90.2247). What IS visible is a control point ~200 m further in, on the single truck spine at 41.55347,-90.22476: the drive necks down to a rail-guided lane roughly 4.5 m wide by 12 m long, flanked by two parallel post-and-rail lines, with the whole inbound truck flow funneled through it. Called true on that pinch-point, not on a property-line gate.",
+    "guardShack": "No booth-scale structure found. Two candidate objects beside the control lane resolve at z21 to ~2-3 m dark-olive blobs (vegetation or containers), not a windowed booth with a multi-side footprint. No guard building at the north entrance, the SE employee-lot entrance, or along the access drive.",
+    "remoteGs": "Derived: control point present, no staffed booth found, so check-in is presumably kiosk / call-box / phone. Inherits the same uncertainty as truckGate and guardShack.",
+    "scale": "Same feature as the truckGate call - a rectangular rail-flanked pad in the truck path is the classic overhead signature of a truck scale. Not independently confirmed; a beef plant taking live cattle would be expected to weigh, which supports it.",
+    "preGateStaging": "A separate paved lot with 15-20 tractors and trailers plus a small building sits north of the at-grade rail crossing, outside the yard (41.5548 to 41.5552, -90.2247), and tractors were also parked along the access-drive shoulder.",
+    "backupSensitive": "The yard mouth sits roughly 60 m south of an active at-grade rail crossing on the only access drive. A queue at the internal control point backs straight over that crossing before it ever reaches a public road.",
+    "dockDoors": "Two banks counted. Cold-storage / distribution building west wall (41.55317 to 41.55234, -90.22380): ~93 m of dock face at ~3.9 m pitch, 11 trailers backed in at capture, estimate 24 doors. Plant east face (41.55306 to 41.55244, -90.22446): three canopied door groups totaling ~19 door bays. Total estimate 45. Band 25-50 is safe; the site could reach 50+ if the north-face and livestock-side doors were counted.",
+    "dropArea": "Four to five long trailer rows east and west of the truck spine, roughly 140 trailers standing at capture across ~8.5 acres of drop yard. Comfortably 50+.",
+    "trailerParkingCapacity": "Estimate from 8.44 acres of measured drop yard plus the staging apron at typical 36 m row pitch. Honest range 200-260.",
+    "shipRcvSeparate": "Finished-product shipping runs off the cold-storage building's west wall; the plant's own east-face docks and the livestock receiving pens on the south end are physically separate clusters.",
+    "multipleFacilities": "Campus: process plant, separate cold-storage/distribution building, livestock holding pens on the south end, wastewater/utility cluster on the west, plus outbuildings and a shop.",
+    "railServed": "Called false. A multi-track siding with a long string of covered hopper cars runs immediately along the west property line, but no spur was seen crossing the drainage and service road into the yard in z18 imagery. Flagged - a spur entering north or south of the frames audited cannot be ruled out.",
+    "urbanRural": "Open row-crop farmland on all four sides; the village of Joslin is a scattering of houses to the north. Rural, unambiguously.",
+    "connectivityIssue": "Rural but not isolated - a state highway and a village sit 400 m north, so coverage is likely adequate. Inferred, low confidence.",
+    "siteAreaAcres": "53.2 acres from the traced perimeter (drop yard, plant, cold storage, livestock pens, employee lots, wastewater). Excludes the mowed field east of the drop yard and the far overflow lot, whose ownership could not be established from imagery.",
+    "geofenceOrientation": "The complex sits close to true north-south; the plant spine and the trailer rows both run within a few degrees of the cardinal grid, so the rings here are near-rectangular by the site's real geometry, not by default."
+  },
+  "method": "deep-audit"
+}

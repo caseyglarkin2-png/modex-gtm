@@ -1,0 +1,235 @@
+{
+  "name": "Tyson Foods Haltom City Distribution Center - Haltom City TX",
+  "type": "Distribution Center",
+  "coords": {
+    "lat": 32.822754,
+    "lng": -97.287037
+  },
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@32.824151,-97.286278,3a,75y,200h",
+        "date": "2025-07",
+        "type": "Street View branded monument signage",
+        "claim": "A blue Tyson monument sign with the Tyson logo stands at the Meacham Blvd entrance to this campus, photographed 2025-07. Current, on-site, company-branded signage at the gate."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@32.823755,-97.286462,3a,75y,210h",
+        "date": "2021-09",
+        "type": "Street View trailer livery at the dock",
+        "claim": "Elevated pano over the dock apron shows Hillshire Farm liveried trailers backed into the dock face. Hillshire Brands is a Tyson Foods company, corroborating Tyson operation of this DC."
+      },
+      {
+        "tier": 3,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Tyson+Foods+Distribution+Center,+Haltom+City,+TX",
+        "date": "2026-07-30",
+        "type": "geocoder rooftop resolution",
+        "claim": "'Tyson Foods Distribution Center, Haltom City, TX' resolves ROOFTOP to 4000 Meacham Blvd, Haltom City, TX 76117 (32.8227543, -97.2870366) - the exact CRM seed. 'Tyson Foods, Haltom City, TX' resolves to the adjoining 3900 Meacham Blvd."
+      }
+    ],
+    "imageryDate": "2026 satellite (Vexcel/Maxar); Street View 2025-07 (Meacham Blvd frontage and gate), 2021-09 (elevated yard pano)",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Three independent Tier-3 sources agree - a current Tyson-branded monument sign at the gate, Tyson-brand (Hillshire Farm) trailers at the dock, and a rooftop geocode of the CRM address onto this exact campus - with no Tier-2 negative found. No company self-attested Tier-1 source could be pulled (session web-search budget exhausted), so the verdict stops at probable. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.824094,
+          "lng": -97.288413
+        },
+        {
+          "lat": 32.824118,
+          "lng": -97.286216
+        },
+        {
+          "lat": 32.82335,
+          "lng": -97.285838
+        },
+        {
+          "lat": 32.822675,
+          "lng": -97.285865
+        },
+        {
+          "lat": 32.822046,
+          "lng": -97.287184
+        },
+        {
+          "lat": 32.822629,
+          "lng": -97.2882
+        },
+        {
+          "lat": 32.823125,
+          "lng": -97.288413
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.824002,
+          "lng": -97.286871
+        },
+        {
+          "lat": 32.82369,
+          "lng": -97.286971
+        },
+        {
+          "lat": 32.823528,
+          "lng": -97.286249
+        },
+        {
+          "lat": 32.82384,
+          "lng": -97.286149
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.824099,
+            "lng": -97.288313
+          },
+          {
+            "lat": 32.824076,
+            "lng": -97.286665
+          },
+          {
+            "lat": 32.823811,
+            "lng": -97.286665
+          },
+          {
+            "lat": 32.823834,
+            "lng": -97.288313
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.823112,
+            "lng": -97.287969
+          },
+          {
+            "lat": 32.823574,
+            "lng": -97.286682
+          },
+          {
+            "lat": 32.823823,
+            "lng": -97.286791
+          },
+          {
+            "lat": 32.823361,
+            "lng": -97.288078
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 230,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRDZvdF9lU3c.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 211,
+        "pano": "5cRrvSJoBH79FesJ78hmIA",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 172,
+        "pano": "OtpGAvxLvFr3uz7opYjF8A",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 240,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRDZvdF9lU3c.",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 57,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 10.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.822754,-97.287037,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "site": "The CRM record name ('Haltom City Distribution Center truck entrance') is a Google Maps POI artifact, but it points at a real facility: 4000 Meacham Blvd, Haltom City TX 76117, a Tyson distribution centre. It sits on a campus with the older Tyson plant at 3900 Meacham Blvd immediately to the west; the two are joined by an enclosed overhead bridge. This audit is scoped to the 4000 Meacham DC and its yard - the building, its north-west dock face, the north drop line along Meacham Blvd, and the guarded Meacham entrance. The 3900 Meacham plant, its west dock face and its separate uncontrolled drive off the west arterial are noted but not measured.",
+    "truckGate": "TRUE, confirmed with strong evidence. A zoomed Street View frame from the 2025-07 Meacham Blvd pano (5cRrvSJoBH79FesJ78hmIA, heading 211, fov 38) shows a guard house on an island in the drive with a red-trimmed canopy over the lanes, red-and-white striped barrier arms across the lanes, yellow bollards, and chain-link fence with a gate running off to the side. At z21 the same island resolves as a ~10 x 6 m building on a raised gravel/concrete median with a tractor-trailer stopped directly alongside it in the inbound lane.",
+    "guardShack": "TRUE. The island building measures roughly 10 x 6 m at z21 - a one-to-three-vehicle footprint, canopied over the drive lanes, sited in the middle of the truck entrance about 50 m in from Meacham Blvd. That is a guard house, not the main building (the DC and its office wing are 150 m further south-west).",
+    "remoteGs": "FALSE by rule - a guard shack is present, so this is a staffed gate, not a kiosk/app check-in.",
+    "preGateStaging": "TRUE. About 50 m of wide concrete apron sits between the Meacham Blvd curb and the guard house, plus the drive fans out to roughly 30 m of width at the island. Two tractor-trailers can wait clear of the public road.",
+    "postGateStaging": "TRUE. Past the guard house the drive opens into a large unmarked paved yard before the dock apron.",
+    "backupSensitive": "FALSE. The 50 m setback and wide apron keep a short queue off Meacham Blvd, which is itself a wide industrial arterial with a shoulder. This is the opposite of the Indianapolis site.",
+    "entryExitTogether": "TRUE. Inbound and outbound lanes run either side of the same guard island at one point on the property line. entryLanes and exitLanes read as 1 each from overhead but the island is long and the apron wide, so both are listed as uncertain.",
+    "fastLaneOpportunity": "TRUE. The concrete apron at the guard island is roughly 30 m wide with clearly unused paved width beside the barrier arms - physical room for a bypass or express lane without new paving.",
+    "dockDoors": "25-50 band, estimated 35. The DC's north-west face carries a continuous canopied dock bank roughly 131 m long, with about 17 trailers backed in at z18. 131 m at typical 4 m door centres gives ~32 positions; called 35 to allow for the north-east end under the office canopy. Flagged as an estimate - the doors sit under a continuous canopy and are not directly countable from overhead.",
+    "dropArea": "25-50. A single long drop line runs east-west along the Meacham Blvd frontage holding about 30 dropped trailers at z18, plus scattered trailers in the middle of the yard. Yard capacity is roughly 70.",
+    "shipRcvSeparate": "FALSE for the audited DC - all its docks are on the one north-west face. The adjoining 3900 Meacham plant has its own separate dock bank facing west, so at campus level shipping and receiving are physically split across two buildings.",
+    "scale": "FALSE, listed as uncertain. No scale deck or scale house was resolvable at z20/z21 on the truck path through the gate or in the yard.",
+    "railServed": "FALSE. A multi-track rail corridor runs along the south-east property line and a rail yard sits beyond it, but no spur, switch or rail dock enters this parcel.",
+    "multipleFacilities": "TRUE. The DC is joined by an enclosed overhead bridge to the older Tyson plant at 3900 Meacham Blvd, making this one campus with two large building clusters.",
+    "urbanRural": "Urban. Haltom City / north-east Fort Worth industrial district inside the DFW metro, with arterials and neighbouring industrial parks on all sides.",
+    "secondAccess": "The 3900 Meacham plant has its own drive off the west arterial into its dock apron. Street View 2025-07 shows that drive as open concrete with a fire-lane curb and chain-link fence alongside but no barrier arm or booth. If a prospect conversation covers the whole campus, that second access is the uncontrolled one.",
+    "siteAreaAcres": "10.9 acres for the DC parcel as traced. The full campus including 3900 Meacham roughly doubles this."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,268 @@
+{
+  "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+  "type": "Distribution Center",
+  "coords": {
+    "lat": 35.260484,
+    "lng": -93.066226
+  },
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@35.26048,-93.06623,400m/data=!3m1!1e3",
+        "date": "2026",
+        "type": "satellite + Street View imagery",
+        "claim": "Fully active food-industry campus at 4820 E Main St: two ~250m refrigerated buildings with long dock faces, ~200+ trailer drop yard, on-site feed mill and rail dock. Street View 2025-09 and 2026-02 both show the yard fully populated with trailers, i.e. current operation, not idled or vacant."
+      },
+      {
+        "tier": 3,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Tyson+Foods+Distribution+Center,+Russellville,+AR",
+        "date": "2026-07-30",
+        "type": "geocoder rooftop resolution",
+        "claim": "The query 'Tyson Foods Distribution Center, Russellville, AR' resolves ROOFTOP to 4820 E Main St, Russellville, AR 72802 (35.2604842, -93.0662256) - the exact CRM seed point and the center of this campus."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@35.25952,-93.06222,3a,75y",
+        "date": "2019-09",
+        "type": "Street View trailer livery",
+        "claim": "A trailer inside the fenced yard carries WRIGHT BRAND ('PIG OUT!') livery. Wright Brand is a Tyson Foods brand, corroborating Tyson operation of this yard."
+      }
+    ],
+    "imageryDate": "2026 satellite; Street View 2026-02 (west approach), 2025-09 (E Main frontage), 2019-09 (entrance apron)",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Location is pinned with certainty (rooftop geocode of the CRM address lands dead-center on an active food campus) and imagery shows current, heavy operation; Tyson operatorship rests on Tier-3 corroboration only because the session web-search budget was exhausted, so the verdict is capped at probable. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.262131,
+          "lng": -93.070485
+        },
+        {
+          "lat": 35.262176,
+          "lng": -93.067326
+        },
+        {
+          "lat": 35.26156,
+          "lng": -93.06539
+        },
+        {
+          "lat": 35.261077,
+          "lng": -93.064209
+        },
+        {
+          "lat": 35.259855,
+          "lng": -93.062232
+        },
+        {
+          "lat": 35.258409,
+          "lng": -93.061902
+        },
+        {
+          "lat": 35.257713,
+          "lng": -93.062383
+        },
+        {
+          "lat": 35.258151,
+          "lng": -93.064855
+        },
+        {
+          "lat": 35.258588,
+          "lng": -93.068178
+        },
+        {
+          "lat": 35.2599,
+          "lng": -93.070705
+        },
+        {
+          "lat": 35.261302,
+          "lng": -93.07076
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.259807,
+          "lng": -93.061654
+        },
+        {
+          "lat": 35.260102,
+          "lng": -93.061906
+        },
+        {
+          "lat": 35.259793,
+          "lng": -93.062446
+        },
+        {
+          "lat": 35.259498,
+          "lng": -93.062194
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.260809,
+            "lng": -93.064472
+          },
+          {
+            "lat": 35.259856,
+            "lng": -93.062137
+          },
+          {
+            "lat": 35.259379,
+            "lng": -93.062584
+          },
+          {
+            "lat": 35.260108,
+            "lng": -93.064747
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.261236,
+            "lng": -93.070194
+          },
+          {
+            "lat": 35.261236,
+            "lng": -93.069521
+          },
+          {
+            "lat": 35.258947,
+            "lng": -93.069521
+          },
+          {
+            "lat": 35.258947,
+            "lng": -93.070194
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.261806,
+            "lng": -93.066503
+          },
+          {
+            "lat": 35.261806,
+            "lng": -93.0661
+          },
+          {
+            "lat": 35.258947,
+            "lng": -93.0661
+          },
+          {
+            "lat": 35.258947,
+            "lng": -93.066503
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 221,
+        "pano": "hnH_hQw3BunxwnPUfKjgUw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 235,
+        "pano": "d1hsGrUxNY-TAjsCxz4u4Q",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 213,
+        "pano": "w8XnNBviJdnlov0UVzdZbg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 85,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 66.1,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.260484,-93.066226,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "scale",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "site": "Not a standalone warehouse. The CRM address 4820 E Main St resolves to a full Tyson complex on the south side of I-40 east of Russellville: two ~250 m long refrigerated production/distribution buildings, an on-site feed mill with grain bins and a bulk-loadout, a large fenced trailer drop yard, a rail-served dock, and a separate south-east support building. Audited as one campus.",
+    "truckGate": "FALSE with good evidence. The main truck approach off E Main St (US-64) at 35.2598,-93.0620 is a wide open concrete apron with a generous corner radius and no barrier arm, no sliding gate, no pinch-point (z20 satellite). Street View from 2019-09 sits ON that apron and the 2025-09 / 2026-02 panos run along the frontage and into the site - Google's car drove the internal road past the employee lot and feed mill, which is only possible on an uncontrolled entrance. The secondary north-west access off the west public road (35.2629,-93.0706, SV 2026-02) is likewise an open concrete drive with no gate and no fence across it.",
+    "guardShack": "FALSE. No booth at either entrance in z19/z20 satellite or in any Street View frame. The one small mid-yard structure at 35.25947,-93.06422 is a ~30 x 25 m flat-roof office with rooftop HVAC and a staff car park beside it - a driver/dispatch office in the middle of the drop yard, an order of magnitude too large for a gate booth and not positioned at any property entrance.",
+    "remoteGs": "FALSE by rule - there is no truck gate, so remote gate service does not apply. No kiosk or call box was visible at either entrance.",
+    "perimeterFence": "Chain-link fencing does run along the E Main frontage of the trailer drop yard (clearly visible in the 2019-09 and 2025-09 Street View frames). The fence is present but the vehicle openings in it are not controlled.",
+    "drivewayLong": "From the E Main apron to the nearest dock face is roughly 500 m of internal road across open paved yard. Queue depth is effectively unlimited.",
+    "backupSensitive": "FALSE. E Main St here is a rural two-lane with wide shoulders and the site has hundreds of metres of internal stacking before any dock. A gate queue could not reach the public road.",
+    "entryExitTogether": "TRUE for the primary E Main drive, which is a single two-way drive used both directions. Flagged rather than entryExitSeparate because the second (north-west) access serves the north side of the campus rather than acting as a dedicated out-gate. truckGateCount is set to 2 to record both openings.",
+    "fastLaneOpportunity": "TRUE on physical room only. The E Main apron is roughly 40 m of unused paved width and the internal road is far wider than a single lane, so an express/bypass lane could be added trivially. Since there is no gate today this is greenfield room, not a bypass around an existing checkpoint.",
+    "dockDoors": "50+, estimated at ~85 total and flagged as approximate. Building A's west face carries a continuous row of ~40 backed-in trailers over a ~245 m dock wall (z19 count of 23-24 trailers over a 141 m stretch). Building B's east face carries a further ~30-35 positions over ~190 m. Add the rail dock canopy on the south end and short faces. Individual door leaves are under canopies and are not directly countable from overhead.",
+    "dropArea": "50+. The fenced trailer lot east of the buildings runs roughly 220 x 150 m and holds tightly packed rows of dropped trailers (z19 shows trailers parked shoulder to shoulder at roughly 3 m centres). Visible count across the whole site is on the order of 230; capacity around 300. Both numbers are +/- 20% reads off overhead imagery, not exact counts.",
+    "shipRcvSeparate": "TRUE on physical evidence, inferred on function. Two entirely separate dock banks exist on different buildings and different faces - building A's west face and building B's east face - plus a rail dock on the south end. Which bank is inbound versus outbound cannot be determined from imagery.",
+    "scale": "FALSE, but listed as uncertain. No unambiguous scale deck or scale house was resolvable at z20 anywhere on the truck path, including around the feed mill where bulk feed trailers load. A feed mill of this size would normally have a truck scale, so absence here is a limit of the imagery rather than a confident negative.",
+    "multipleFacilities": "TRUE. Two large production/distribution buildings, a feed mill with grain bins and elevator tower, a mid-yard driver office, a south-east support building with its own dock and car park, and a rail-served covered dock.",
+    "railServed": "TRUE, directly evidenced. A spur leaves the mainline on the south boundary and runs into the property alongside a covered rail dock on the south end of building B; hopper cars are parked on it in the 2026 imagery (z19 at 35.25892,-93.06617).",
+    "urbanRural": "Rural. Edge of Russellville (population under 30k), farmland and woodland on three sides, an interstate on the fourth. Small-town industrial, so Rural per the rubric.",
+    "connectivityIssue": "FALSE. Directly alongside I-40 with a town two miles west; cellular coverage is very unlikely to be the constraint.",
+    "confidence": "Capped at medium. The physical read is strong (2026 satellite, three Street View vintages, multiple zoom levels) but Tyson operatorship rests on Tier-3 corroboration only, since the session web-search budget was exhausted before the Tier-1 locator / careers / 10-K checks could be run."
+  },
+  "method": "deep-audit"
+}

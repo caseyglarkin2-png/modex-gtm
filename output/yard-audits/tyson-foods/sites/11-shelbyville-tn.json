@@ -1,0 +1,315 @@
+{
+  "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 35.47812,
+    "lng": -86.4743
+  },
+  "verification": {
+    "verdict": "probable",
+    "method": "imagery + geocode corroboration (WebSearch budget exhausted this run)",
+    "evidence": [
+      "Google Geocoding returned ROOFTOP for 'Tyson Foods, Shelbyville, TN' at 35.478006,-86.475062, which lands inside this complex.",
+      "Reverse geocode of the plant centroid and of the guarded entrance drive both return 901 Jackson St, Shelbyville, TN 37160.",
+      "Overhead imagery is unambiguously an integrated poultry complex: live-haul coop trailers in two large yards, live-receiving sheds with ridge ventilation, two anaerobic digesters plus a clarifier and a polishing lagoon, and a dense connected process block. No competing poultry processor is visible in Shelbyville at this scale.",
+      "Street View (2023-05) at the entrance shows a staffed brick guard booth flying the US, Tennessee and a corporate flag on the plant approach drive."
+    ],
+    "confidence": "medium-high",
+    "note": "Operator identity is inferred from the rooftop geocode plus site typology, not from a web-verified 2026 company source. Re-verify before quoting the plant by name in outbound.",
+    "checkedDivestiture": true,
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    },
+    "rationale": "Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list."
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.48003,
+          "lng": -86.4761
+        },
+        {
+          "lat": 35.48004,
+          "lng": -86.4745
+        },
+        {
+          "lat": 35.48,
+          "lng": -86.4725
+        },
+        {
+          "lat": 35.4787,
+          "lng": -86.4718
+        },
+        {
+          "lat": 35.47764,
+          "lng": -86.47185
+        },
+        {
+          "lat": 35.47628,
+          "lng": -86.4724
+        },
+        {
+          "lat": 35.4764,
+          "lng": -86.47417
+        },
+        {
+          "lat": 35.47646,
+          "lng": -86.47503
+        },
+        {
+          "lat": 35.47694,
+          "lng": -86.47592
+        },
+        {
+          "lat": 35.4779,
+          "lng": -86.47653
+        },
+        {
+          "lat": 35.47895,
+          "lng": -86.47648
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.47943,
+          "lng": -86.47611
+        },
+        {
+          "lat": 35.47943,
+          "lng": -86.47586
+        },
+        {
+          "lat": 35.47905,
+          "lng": -86.47586
+        },
+        {
+          "lat": 35.47905,
+          "lng": -86.47611
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.4789,
+            "lng": -86.47264
+          },
+          {
+            "lat": 35.47867,
+            "lng": -86.47185
+          },
+          {
+            "lat": 35.47765,
+            "lng": -86.47187
+          },
+          {
+            "lat": 35.47758,
+            "lng": -86.47292
+          },
+          {
+            "lat": 35.47808,
+            "lng": -86.47299
+          },
+          {
+            "lat": 35.47827,
+            "lng": -86.47251
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.47711,
+            "lng": -86.47487
+          },
+          {
+            "lat": 35.47709,
+            "lng": -86.47408
+          },
+          {
+            "lat": 35.47672,
+            "lng": -86.47409
+          },
+          {
+            "lat": 35.47645,
+            "lng": -86.47437
+          },
+          {
+            "lat": 35.47646,
+            "lng": -86.47496
+          },
+          {
+            "lat": 35.47687,
+            "lng": -86.47512
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.47767,
+            "lng": -86.47645
+          },
+          {
+            "lat": 35.47767,
+            "lng": -86.47622
+          },
+          {
+            "lat": 35.47729,
+            "lng": -86.47622
+          },
+          {
+            "lat": 35.47729,
+            "lng": -86.47645
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.47745,
+            "lng": -86.47599
+          },
+          {
+            "lat": 35.47745,
+            "lng": -86.47587
+          },
+          {
+            "lat": 35.47721,
+            "lng": -86.47587
+          },
+          {
+            "lat": 35.47721,
+            "lng": -86.47599
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.47986,
+          "lng": -86.47593
+        },
+        {
+          "lat": 35.47986,
+          "lng": -86.47545
+        },
+        {
+          "lat": 35.4794,
+          "lng": -86.47545
+        },
+        {
+          "lat": 35.4794,
+          "lng": -86.47591
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 143,
+        "pano": "YLPSYy0zO7GobdUpc6CRtg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 182,
+        "pano": "YLPSYy0zO7GobdUpc6CRtg",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 208,
+        "pano": "YLPSYy0zO7GobdUpc6CRtg",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 108,
+    "trailerParkingCapacity": 190,
+    "truckGateCount": 1,
+    "buildingCount": 12,
+    "siteAreaAcres": 37.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.47812,-86.4743,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoors",
+    "scale",
+    "truckGateCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "railServed"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single guarded approach drive off the north side of the property. Street View pano YLPSYy0zO7GobdUpc6CRtg (2023-05) looking south shows the drive pinching down around a landscaped island, yellow bollards on both shoulders, and chain-link fence running east from the island. Satellite z20 confirms the drive splits into one lane each side of the island. This is a checkpoint pinch-point, not an open driveway.",
+    "guardShack": "Unambiguous. A small brick booth (~8 m x 9 m footprint including its island) sits in the median with windows on multiple faces, signage on the near wall, three flagpoles (US, Tennessee, corporate) and bollard protection. Verified in Street View at fov 12 and in z20 satellite.",
+    "remoteGs": "False by rule: a manned booth is present.",
+    "preGateStaging": "Large concrete pad plus gravel apron east of the drive, OUTSIDE the booth (traced as `staging`). Street View at heading 208 shows an open ~45 m x 25 m slab with old equipment footings and a utility cabinet; it is unused paved width a truck queue can occupy.",
+    "postGateStaging": "The entire yard between the booth and the process block is open compacted gravel/asphalt roughly 350 m deep. Trucks can hold anywhere.",
+    "drivewayLong": "Booth to the nearest dock face is roughly 400 m. Well beyond a 3-truck queue.",
+    "backupSensitive": "False. The approach drive runs about 200 m from the public street to the booth with a wide apron beside it; a queue would not reach the road.",
+    "entryLanes": "One inbound and one outbound lane split by the booth island. No third lane, but see fastLaneOpportunity.",
+    "fastLaneOpportunity": "The concrete pad east of the booth is unused paved width directly on the approach; a bypass or express lane could be striped there without new construction.",
+    "dockDoors": "LOW CONFIDENCE. This is an older integrated poultry complex with docks distributed in several small banks rather than one wall. Confirmed at z20: 3-4 trailers backed into the west face (35.47745,-86.47576), 2-3 trailers on the east face, plus long ribbed canopies over the north and south-east faces that hide the door line from overhead. 20 doors is an estimate; band 10-25.",
+    "dropArea": "Two large trailer fields plus a west-edge row, all holding trailers with no tractor. Comfortably 50+.",
+    "trailersVisible": "Estimate from z19 crops: roughly 55 in the east yard around the digesters, 33 in the south live-haul yard, 8 along the west fence line, 12 around the process block. Most are live-haul poultry coop trailers, not dry vans. Count is approximate.",
+    "trailerParkingCapacity": "Both yards carry visible slack gravel; capacity estimated at about 190 trailers.",
+    "shipRcvSeparate": "Live-bird receiving (south and east live sheds with the coop-trailer yards) is physically separated from the finished-goods docks on the west and east building faces. Treated as separate ship/receive clusters, but the split is inferred from typology rather than read directly off door signage.",
+    "urbanRural": "Shelbyville is a town of roughly 24,000. The plant sits inside a bend of the Duck River on the west edge of town with farmland immediately west and a residential grid 400 m northwest. Small-town industrial, so Rural per the rubric.",
+    "connectivityIssue": "False. Residential Shelbyville abuts the property and downtown is about 1.5 km northeast.",
+    "multipleFacilities": "Campus: the process block, the wastewater plant (two digesters, clarifier, polishing lagoon), live-receiving sheds, a maintenance/garage building and an office all sit on one property. A large legacy industrial building immediately north (35.4828,-86.4725) shares the internal road network but shows an empty, weeded yard and is likely a separate or dormant parcel.",
+    "scale": "No truck scale positively identified. The concrete pad east of the gate carries bolt patterns from a removed structure and could be a decommissioned scale, but nothing conclusive. Called false; flagged uncertain.",
+    "truckGateCount": "Counted as 1. The yard is physically continuous with the adjoining industrial parcel to the north via an internal road, so an unguarded secondary route may exist. Flagged uncertain.",
+    "railServed": "A rail line runs northwest of the property alongside the approach corridor, but no spur was seen entering the Tyson yard. Called false at medium confidence.",
+    "streetViewMeta": "The only Street View pano near the site is YLPSYy0zO7GobdUpc6CRtg at 35.47993,-86.47595 (captured 2023-05), about 80 m north of the booth on the approach drive. Google's car stopped there, which is itself consistent with a controlled entrance. Interior zones have no coverage."
+  },
+  "method": "deep-audit"
+}

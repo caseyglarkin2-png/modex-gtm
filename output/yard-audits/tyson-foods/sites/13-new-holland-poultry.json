@@ -1,0 +1,286 @@
+{
+  "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 40.096,
+    "lng": -76.086
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.096961,
+          "lng": -76.088091
+        },
+        {
+          "lat": 40.097433,
+          "lng": -76.086429
+        },
+        {
+          "lat": 40.097536,
+          "lng": -76.0849
+        },
+        {
+          "lat": 40.096654,
+          "lng": -76.083936
+        },
+        {
+          "lat": 40.095444,
+          "lng": -76.083989
+        },
+        {
+          "lat": 40.094726,
+          "lng": -76.084096
+        },
+        {
+          "lat": 40.094069,
+          "lng": -76.084016
+        },
+        {
+          "lat": 40.093741,
+          "lng": -76.085678
+        },
+        {
+          "lat": 40.094315,
+          "lng": -76.086526
+        },
+        {
+          "lat": 40.095074,
+          "lng": -76.087057
+        },
+        {
+          "lat": 40.095854,
+          "lng": -76.087582
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.095072,
+          "lng": -76.0861
+        },
+        {
+          "lat": 40.095329,
+          "lng": -76.086284
+        },
+        {
+          "lat": 40.095022,
+          "lng": -76.087
+        },
+        {
+          "lat": 40.094771,
+          "lng": -76.086816
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.096941,
+            "lng": -76.085169
+          },
+          {
+            "lat": 40.096633,
+            "lng": -76.083989
+          },
+          {
+            "lat": 40.095567,
+            "lng": -76.08415
+          },
+          {
+            "lat": 40.095895,
+            "lng": -76.085196
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.096326,
+            "lng": -76.08651
+          },
+          {
+            "lat": 40.096182,
+            "lng": -76.08549
+          },
+          {
+            "lat": 40.095444,
+            "lng": -76.085625
+          },
+          {
+            "lat": 40.095587,
+            "lng": -76.086617
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.096859,
+            "lng": -76.086215
+          },
+          {
+            "lat": 40.096756,
+            "lng": -76.085678
+          },
+          {
+            "lat": 40.096264,
+            "lng": -76.085785
+          },
+          {
+            "lat": 40.096367,
+            "lng": -76.086322
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.094582,
+            "lng": -76.084981
+          },
+          {
+            "lat": 40.094418,
+            "lng": -76.08415
+          },
+          {
+            "lat": 40.094131,
+            "lng": -76.08423
+          },
+          {
+            "lat": 40.094295,
+            "lng": -76.085062
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 62,
+        "pano": "u6_miVAjMLkgg_bAE1kLow",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 60,
+        "pano": "YFpMDgd43ScF7jOJuILxqQ",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 222,
+          "pano": "HgvfpPZFkxn1Cvt9ycESWA",
+          "hasCoverage": true
+        }
+      ],
+      "dockAprons": [
+        {
+          "heading": 61,
+          "pano": "ETDmNelnOwQZ33i5ul576g",
+          "hasCoverage": true
+        }
+      ]
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 14,
+    "siteAreaAcres": 26.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.096,-76.086,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "backupSensitive",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "location": "Roster lat/lng (40.09554,-76.086927) is correct to within a few hundred metres and resolves to the plant. Google Places returns 'Tyson New Holland', 403 S Custer Ave, New Holland PA 17557 at exactly that point. Confirmed on the ground: a Tyson monument sign at the S Custer Ave entrance reads 'Tyson - NEW HOLLAND COMPLEX' and a second blue sign reads 'Tyson - NEW HOLLAND FACILITY, 403 S. CUSTER AVE' (Street View, April 2025). Campus center pinned at 40.0960,-76.0860.",
+    "truckGate": "Continuous chain-link perimeter fence with privacy slats around the plant and yard, confirmed in four Street View headings along S Custer Ave. Employee/visitor parking sits OUTSIDE the fence; the plant and truck yard sit inside. A gate with a booth beside it straddles the entrance drive roughly 60 m in from S Custer Ave (~40.09510,-76.08644). An on-site wayfinding sign at the entrance lists 'Guard House' among the destinations.",
+    "guardShack": "Small purpose-built booth with a metal awning roof, windows on multiple faces and Tyson branding, standing beside the gate leaf in the fence line at ~40.09510,-76.08644. Read at fov 4.5 deg from the Street View pano at 40.094887,-76.087214 (April 2025). Corroborated by the entrance wayfinding sign listing 'Guard House'.",
+    "backupSensitive": "The entrance drive from S Custer Ave to the gate measures ~62 m, which stacks roughly 3 tractor-trailers before a queue reaches the public road. Flagged true on that geometry, though wide paved aprons flank the drive and a second (north) access exists, so the practical risk is moderate rather than severe.",
+    "truckGateCount": "Two accesses: the guarded main gate off S Custer Ave (40.09483,-76.08707 at the road) and an unguarded service drive off the street at the north edge of the property (~40.09882,-76.08671). The north drive is narrow and reads as a service/back route rather than a primary truck lane.",
+    "entryLanes": "A yellow-hatched pavement island is visible near the gate at z20-21, suggesting a split in/out lane pair, but the lane count could not be resolved cleanly. Recorded 1/1; treat as unverified.",
+    "dockDoors": "Multi-building campus: dock banks on the main plant's east and south faces, a separate warehouse/freezer building inside the yard, and the south building's east face. ~25-35 trailers were seen backed in at once. Total door count estimated at 50-60 from overhead; band 50+ but the exact count is an estimate.",
+    "dropArea": "Extensive trailer parking without tractors: a fan of ~18 trailers in the east yard, ~10 in the plant's south-west apron, ~9 at the south building, plus scattered rows. Comfortably 50+.",
+    "trailersVisible": "~70 counted across the campus in the current imagery; approximate.",
+    "shipRcvSeparate": "Distinct dock banks on different building faces and a physically separate south building with its own east-face dock apron.",
+    "multipleFacilities": "One fenced campus containing the main processing plant, an inboard warehouse/freezer, a south building group, several outbuildings and a north service building.",
+    "scale": "No truck scale positively isolated in imagery. Note this reads as a further-processing plant, not a live-haul slaughter complex: no poultry holding sheds and no open-sided cage trailers are present, only dry vans and reefers. A receiving scale is therefore less likely than at a kill plant. Recorded false, unverified.",
+    "railServed": "No rail spur enters the property in any of the imagery examined.",
+    "urbanRural": "New Holland is a small Lancaster County borough; the plant's east, south and west edges abut cropland. Rural.",
+    "connectivityIssue": "Borough setting with a lattice communications tower on the property itself; no coverage concern.",
+    "boundary": "Perimeter traced to the developed/fenced campus (plant, truck yard, associated parking, south building). Tyson-associated mowed ground and a service building extend further north toward W Jackson St and are not included in the acreage. Note Savencia Cheese / Zausner Foods (400 S Custer Ave) is a separate operator on the WEST side of S Custer Ave and is excluded, as are the trailers parked in that lot."
+  },
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://maps.googleapis.com/maps/api/streetview?pano=YFpMDgd43ScF7jOJuILxqQ",
+        "date": "2025-04",
+        "type": "site-signage",
+        "claim": "Street View pano at 40.094887,-76.087214 shows a Tyson monument sign reading 'Tyson - NEW HOLLAND COMPLEX' and a blue sign reading 'Tyson - NEW HOLLAND FACILITY, 403 S. CUSTER AVE' at the plant entrance, with the fenced, operating plant behind it."
+      },
+      {
+        "tier": 2,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson%20Foods%20New%20Holland%20PA",
+        "date": "2026-07",
+        "type": "locator",
+        "claim": "Google Places returns a single result, 'Tyson New Holland', 403 S Custer Ave, New Holland PA 17557 at 40.09554,-76.0869269."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operator confirmed from current on-site Tyson branding (April 2025 Street View) plus the Google Places listing. Web search was unavailable for this run, so no news/closure sweep was performed; the plant is visibly active in current imagery (trailers docked, yard full, plumes from the stacks). Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+  "type": "Beef Processing Plant",
+  "coords": {
+    "lat": 37.9986,
+    "lng": -101.0256
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=Tyson+Fresh+Meats+Holcomb+KS",
+        "date": "2026-07",
+        "type": "geocoder",
+        "claim": "Google Geocoding API returns a ROOFTOP result for 'Tyson Fresh Meats Holcomb KS' at 3105 I B P Rd, Holcomb, KS 67851 @ 37.9984432,-101.023048 - inside the complex audited here. The street name I B P Rd preserves the plant's IBP origin."
+      },
+      {
+        "tier": 1,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson+Fresh+Meats+Holcomb+Kansas+beef+plant",
+        "date": "2026-07",
+        "type": "places-api",
+        "claim": "Google Places API (New) returns a single establishment 'Tyson Fresh Meats' at the same address and coordinate."
+      },
+      {
+        "tier": 2,
+        "url": "https://yardflow.ai/for/tyson-foods",
+        "date": "2026-07",
+        "type": "roster",
+        "claim": "Facility carried on the YardFlow Tyson Foods flagship site list (public-record beef plant roster)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Session WebSearch budget was exhausted, so the Step -1 web gate was waived per run instructions. Confirmation rests on a ROOFTOP geocoder hit and a Places establishment record both naming Tyson Fresh Meats on this complex, the IBP-derived road name, and the physical signature - a radial cattle crowd-pen fan with livestock pots queued to unload, a single very large multi-stage process complex, a rail spur with cars spotted, roughly 1,800 stalls of employee parking and a 300-trailer drop yard. Street View along N IBP Rd (2024-06) shows the fenced trailer yard and the plant, and the yard is full of trailers in the current satellite capture, so the site is operating. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.00095,
+          "lng": -101.0305
+        },
+        {
+          "lat": 38.00095,
+          "lng": -101.0243
+        },
+        {
+          "lat": 38.00015,
+          "lng": -101.0243
+        },
+        {
+          "lat": 38.00015,
+          "lng": -101.02125
+        },
+        {
+          "lat": 37.9964,
+          "lng": -101.02125
+        },
+        {
+          "lat": 37.99628,
+          "lng": -101.0278
+        },
+        {
+          "lat": 37.99655,
+          "lng": -101.03045
+        },
+        {
+          "lat": 37.999,
+          "lng": -101.03075
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.99672,
+          "lng": -101.02362
+        },
+        {
+          "lat": 37.99672,
+          "lng": -101.02316
+        },
+        {
+          "lat": 37.9963,
+          "lng": -101.02316
+        },
+        {
+          "lat": 37.9963,
+          "lng": -101.02362
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.99765,
+            "lng": -101.02776
+          },
+          {
+            "lat": 37.99765,
+            "lng": -101.02379
+          },
+          {
+            "lat": 37.99655,
+            "lng": -101.02379
+          },
+          {
+            "lat": 37.99655,
+            "lng": -101.02776
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.99835,
+            "lng": -101.02463
+          },
+          {
+            "lat": 37.99835,
+            "lng": -101.02434
+          },
+          {
+            "lat": 37.99774,
+            "lng": -101.02434
+          },
+          {
+            "lat": 37.99774,
+            "lng": -101.02463
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.99924,
+            "lng": -101.02496
+          },
+          {
+            "lat": 37.99924,
+            "lng": -101.02474
+          },
+          {
+            "lat": 37.99882,
+            "lng": -101.02474
+          },
+          {
+            "lat": 37.99882,
+            "lng": -101.02496
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.99848,
+            "lng": -101.02502
+          },
+          {
+            "lat": 37.99848,
+            "lng": -101.02482
+          },
+          {
+            "lat": 37.99816,
+            "lng": -101.02482
+          },
+          {
+            "lat": 37.99816,
+            "lng": -101.02502
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 37.99775,
+          "lng": -101.02362
+        },
+        {
+          "lat": 37.99775,
+          "lng": -101.0231
+        },
+        {
+          "lat": 37.99672,
+          "lng": -101.0231
+        },
+        {
+          "lat": 37.99672,
+          "lng": -101.02362
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 358,
+        "pano": "Y3WycGULUrhpxL-XsPuF1w",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "staging": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 44,
+    "trailersVisible": 300,
+    "trailerParkingCapacity": 380,
+    "truckGateCount": 2,
+    "buildingCount": 10,
+    "siteAreaAcres": 97.7,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.9986,-101.0256,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "dockDoors",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
+  "fieldNotes": {
+    "location": "Roster coordinate 37.998443,-101.023048 was already ROOFTOP-accurate and landed inside the complex, at the east edge near the employee lots. Audited center re-pinned to the middle of the operating footprint at 37.9986,-101.0256 from z16 satellite. The plant sits between US-50 / US-400 to the north, N IBP Rd to the south and the Arkansas River rail corridor beyond that.",
+    "imagery": "Satellite is native and clean to about z19; the z20 crops used for the entrance and the cattle-receiving scale are usable but soft. Street View runs the full length of N IBP Rd (captured 2024-06) and gives clean ground-level views of the south property line and the truck entrance, which is why the no-gate call is high confidence even though the overall audit is medium.",
+    "truckGate": "False, and this one is well evidenced. The main truck entrance leaves N IBP Rd at 37.99645,-101.02339 as a wide unmarked concrete drive running due north between the fenced trailer yard (west) and the employee lots (east). Street View pano Y3WycGULUrhpxL-XsPuF1w at two headings (0 and 330) shows: chain-link perimeter fence, trailers standing behind it, and a completely open drive - no barrier arm, no sliding gate, no booth, no lane markings, no pinch-point. Satellite at z18 and z20 confirms the same: nothing structural in the truck path at the property line, and nothing along the drive for the next 350 m either.",
+    "guardShack": "False. No booth-scale structure at the entrance, along the internal drive, or at the second N IBP Rd curb cut. The nearest buildings to the drive are a 19 m x 31 m office-scale block set back 200 m inside at 37.99838,-101.02318, which is the employee-side building, not a gate booth.",
+    "remoteGs": "False by rule - remoteGs requires a truck gate to exist, and there is none.",
+    "preGateStaging": "False by the rubric's definition - there is no gate to stage before. Physically the site does have room: the N IBP Rd shoulder is wide and the entrance apron is a broad concrete flare.",
+    "postGateStaging": "True in substance if not in name. Once inside, trucks run a 350 m paved corridor between the drop yard and the employee lots before reaching any dock; tractors and trailers are visibly staged along both shoulders of that corridor at 37.9970 to 37.9978, -101.0234. That corridor is the de facto holding area.",
+    "drivewayLong": "About 350 m from N IBP Rd to the first dock face. Queue depth is not a constraint.",
+    "backupSensitive": "False. N IBP Rd is a low-volume rural section road, the drive is roughly 20 m of concrete at the mouth, and there is a third of a kilometre of private pavement inside. A queue would never reach the road.",
+    "entryExitTogether": "Freight trucks enter and leave through the single N IBP Rd drive. Live-cattle trucks use a separate west approach off the Farmers Ditch road into the crowd-pen fan, which is why truckGateCount is 2, but for the freight population it is one shared point.",
+    "entryLanes": "Null. There is no gate and no lane striping at the entrance - just a wide unmarked concrete apron - so an honest lane count cannot be taken. The pavement would carry two lanes each way if it were marked.",
+    "exitLanes": "Null, same reason as entryLanes.",
+    "fastLaneOpportunity": "True, and this is the notable finding here. The entrance carries a very large unused paved width and 350 m of private corridor with nothing built in it. There is room to install a gate, a scale and a bypass lane without touching the public road or losing trailer stalls.",
+    "dockDoors": "Four banks counted at z18/z19. Main cold-storage / shipping warehouse west wall from 37.99835 to 37.99774 - about 68 m of dock face with 9 trailers backed in, estimate 17 doors. Second building east face near 37.99832,-101.02492 - about 35 m with 5 trailers backed in, estimate 9 doors. North building face from 37.99924 to 37.99882 - about 47 m with 5-6 trailers backed in, estimate 12 doors. A fourth short face near 37.99880,-101.02440 adds about 6. Total estimate 44. Band 25-50 is the honest call, but the site sits near the top of it and could cross 50 if faces on the plant's north and west sides carry doors not resolvable in this imagery.",
+    "dropArea": "One very large drop yard south-west of the plant, 10.5 acres, four packed rows running east-west at a measured 5.0 m pitch, roughly 250-280 trailers standing in the capture. Comfortably 50+.",
+    "trailersVisible": "About 300 site-wide - roughly 260 in the main drop yard plus trailers at the docks, along the internal corridor and around the north buildings. Counted band by band at z18 with pitch calibrated against the z20 crop at the yard's south fence. Treat as plus or minus 15 percent.",
+    "trailerParkingCapacity": "About 380. The 10.5-acre drop yard supports roughly 300 stalls at the observed pitch and is close to full in this capture; the corridor and dock aprons carry the rest. Little headroom without paving new ground.",
+    "shipRcvSeparate": "Live cattle receiving is the radial crowd-pen fan on the west end at roughly 37.9998,-101.0282, with livestock pots queued nose-to-tail on the approach. Boxed-beef shipping runs off the cold-storage warehouse's west wall and the north-building docks, 400 m east. Two separate truck populations and two separate dock clusters.",
+    "scale": "True, medium confidence. A rectangular pad about 11 m x 23 m sits in the cattle-truck path at 37.99978,-101.02830 with a 14 m x 10 m building immediately beside it - the standard scale-plus-scale-house signature. No scale was found on the freight side; if one exists it is inside a building.",
+    "multipleFacilities": "Campus. Main harvest and fabrication complex, a separate cold-storage / shipping warehouse, a north building, rendering and tallow structures on the west with tank cars alongside, the cattle pen fan, shops and outbuildings, plus two wastewater lagoons on a separate parcel south of N IBP Rd.",
+    "railServed": "True. Multiple sidings run east-west through the plant's west and south-west side at roughly 37.9979 to 37.9981, -101.0262 to -101.0272, with boxcars, gondolas and tank cars spotted on them at capture; the spur ties into the Arkansas River corridor main line south of the property.",
+    "urbanRural": "Rural and genuinely isolated. Centre-pivot irrigated fields on every side, the Arkansas River bottom to the south, Holcomb about 4 km west and Garden City about 10 km east.",
+    "connectivityIssue": "Called false, but flagged. The site is isolated farmland, which normally argues for coverage risk; against that it sits 800 m south of the US-50 / US-400 corridor and 10 km from Garden City. Inferred only.",
+    "multiStep": "False. There is no first checkpoint, so there is no second.",
+    "siteAreaAcres": "97.7 acres from the traced perimeter - plant, cattle pens, drop yard, both employee lots and the internal corridor. Excludes the wastewater lagoons south of N IBP Rd and the farm parcels the plant roads cross.",
+    "geofenceOrientation": "The complex is built square to the section grid - dock walls, trailer rows, parking bays and the entrance drive all run within a couple of degrees of true north-south or east-west in the z18-z20 crops. The near-rectangular rings here reflect the site's real geometry, not a north-aligned default. The only rotated feature is the cattle-pen fan, which is radial by design and is covered by the perimeter's west bulge."
+  },
+  "method": "deep-audit"
+}

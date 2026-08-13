@@ -1,0 +1,358 @@
+{
+  "name": "Tyson Foods Springdale Complex - Springdale AR",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 36.19038,
+    "lng": -94.1254
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.google.com/maps/@36.18898,-94.12498,3a,75y/data=!3m1!1e3",
+        "date": "2025-03",
+        "type": "Street View signage",
+        "claim": "Tyson monument sign on a brick base at the Jefferson St entrance reading 'Tyson - MAIN/VISITOR ENTRANCE / SHIPPING / SOUTH TEAM MEMBER PARKING'; Tyson-liveried reefer trailers parked behind it. Pano captured 2025-03."
+      },
+      {
+        "tier": 3,
+        "url": "https://places.googleapis.com/v1/places:searchNearby?location=36.19071,-94.12525",
+        "date": "2026-07-30",
+        "type": "Google Places (New) nearby search",
+        "claim": "'Tyson Foods Inc.', primaryType manufacturer, 600 Berry St, Springdale, AR 72764 at 36.190375,-94.125687 - the parcel imaged."
+      }
+    ],
+    "imageryDate": "2025-03 (Street View) / 2026 Airbus-Maxar (satellite)",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Session WebSearch budget was exhausted, so no Tier-1 documentary check (10-K Item 2, careers reqs) was run; identity was established from 2025-03 on-property Tyson signage, Tyson-branded equipment in the yard, and the Google Places business record. Springdale is Tyson's headquarters town and this is its original processing complex - divestiture risk is low but was not affirmatively checked. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.19206,
+          "lng": -94.12392
+        },
+        {
+          "lat": 36.19216,
+          "lng": -94.12508
+        },
+        {
+          "lat": 36.19212,
+          "lng": -94.1257
+        },
+        {
+          "lat": 36.1914,
+          "lng": -94.12588
+        },
+        {
+          "lat": 36.1906,
+          "lng": -94.12615
+        },
+        {
+          "lat": 36.1899,
+          "lng": -94.12634
+        },
+        {
+          "lat": 36.189,
+          "lng": -94.12665
+        },
+        {
+          "lat": 36.18843,
+          "lng": -94.12658
+        },
+        {
+          "lat": 36.18841,
+          "lng": -94.125
+        },
+        {
+          "lat": 36.18908,
+          "lng": -94.12489
+        },
+        {
+          "lat": 36.1902,
+          "lng": -94.12452
+        },
+        {
+          "lat": 36.1912,
+          "lng": -94.12414
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.18906,
+          "lng": -94.12505
+        },
+        {
+          "lat": 36.18917,
+          "lng": -94.12551
+        },
+        {
+          "lat": 36.18904,
+          "lng": -94.12556
+        },
+        {
+          "lat": 36.18894,
+          "lng": -94.12508
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 36.18922,
+            "lng": -94.12641
+          },
+          {
+            "lat": 36.18922,
+            "lng": -94.12508
+          },
+          {
+            "lat": 36.18898,
+            "lng": -94.12496
+          },
+          {
+            "lat": 36.18842,
+            "lng": -94.125
+          },
+          {
+            "lat": 36.18842,
+            "lng": -94.12641
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.1921,
+            "lng": -94.12515
+          },
+          {
+            "lat": 36.19206,
+            "lng": -94.12392
+          },
+          {
+            "lat": 36.19162,
+            "lng": -94.124
+          },
+          {
+            "lat": 36.19164,
+            "lng": -94.12515
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.19149,
+            "lng": -94.12502
+          },
+          {
+            "lat": 36.19149,
+            "lng": -94.12432
+          },
+          {
+            "lat": 36.19112,
+            "lng": -94.12432
+          },
+          {
+            "lat": 36.19112,
+            "lng": -94.12502
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 36.19008,
+            "lng": -94.1254
+          },
+          {
+            "lat": 36.19008,
+            "lng": -94.12511
+          },
+          {
+            "lat": 36.18978,
+            "lng": -94.12511
+          },
+          {
+            "lat": 36.18978,
+            "lng": -94.1254
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.19168,
+            "lng": -94.12571
+          },
+          {
+            "lat": 36.19168,
+            "lng": -94.12557
+          },
+          {
+            "lat": 36.19131,
+            "lng": -94.12552
+          },
+          {
+            "lat": 36.19132,
+            "lng": -94.12565
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.18986,
+          "lng": -94.12551
+        },
+        {
+          "lat": 36.18986,
+          "lng": -94.12492
+        },
+        {
+          "lat": 36.18921,
+          "lng": -94.12492
+        },
+        {
+          "lat": 36.18921,
+          "lng": -94.12551
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 293,
+        "pano": "ff746YAtWWTX_ou1HpGpAw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 267,
+        "pano": "EVnim-MPaPNMbDnFYgVOtQ",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 266,
+          "pano": "qIATD1EbOtz0yIbxteDwfA",
+          "hasCoverage": true
+        },
+        {
+          "heading": 282,
+          "pano": "KCikkx-nHtob4g7gT7qIqg",
+          "hasCoverage": true
+        },
+        {
+          "heading": 291,
+          "pano": "SaBcEfYtdgkNBDLBT1jVeQ",
+          "hasCoverage": true
+        }
+      ],
+      "dockAprons": [
+        {
+          "heading": 293,
+          "pano": "DxImmExQ6sILbigsK8kLfg",
+          "hasCoverage": true
+        },
+        {
+          "heading": 291,
+          "pano": "CHmmWzFDaY26nqJlnio7TA",
+          "hasCoverage": true
+        }
+      ],
+      "staging": {
+        "heading": 295,
+        "pano": "j58vECs401i6slj125Z3vQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 2,
+    "buildingCount": 10,
+    "siteAreaAcres": 16,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.19038,-94.12540,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "Two controlled truck entrances, both off Jefferson St. (1) Main entrance at 36.18906,-94.12504 - the Tyson monument sign there reads MAIN/VISITOR ENTRANCE / SHIPPING; a staffed guard booth sits about 45 m inside the curb cut, directly in the truck path. (2) North entrance at 36.19158,-94.12400 - a black cantilever slide gate mounted on the fence line, photographed standing open in the 2025-03 pano. The whole property is enclosed by a continuous ornamental steel palisade fence, visible along Jefferson St in every pano sampled.",
+    "guardShack": "Confirmed visually, not inferred. 2025-03 Street View (pano RpjocBAe6Ri47BtrjfGzZg, heading 286, fov 25) shows a tan 1-story booth roughly 10 m x 5 m with windows on multiple faces, a covered entry and steps, and a golf cart parked beside it, sitting in the truck lane about 45 m inside the Jefferson St main entrance. Confirmed again on z21 satellite at 36.18910,-94.12544. It is not the main building.",
+    "remoteGs": "False - a physical staffed booth is present, so this is not a kiosk/call-box site.",
+    "preGateStaging": "About 45 m of paved drive between the Jefferson St curb cut and the guard booth, wide enough to hold 2-3 tractor-trailers ahead of the checkpoint.",
+    "postGateStaging": "Large paved holding area inside the booth (the ~0.95-acre internal drive/apron traced as `staging`) between the checkpoint and the dock faces.",
+    "drivewayLong": "Gate-to-dock run is roughly 180-200 m from the Jefferson St entrance north to the east-facing shipping docks; easily 3+ trucks of stacking.",
+    "backupSensitive": "False. The curb cut opens immediately into a 2.8-acre paved drop yard, so a queue at the booth holds on-property rather than on Jefferson St.",
+    "entryLanes": "Main curb cut measures roughly 13-15 m and is unstriped, so lane count is functional rather than marked; recorded as 1 in / 1 out. Low confidence.",
+    "exitLanes": "Same unstriped curb cut; entry and exit share it.",
+    "fastLaneOpportunity": "The entrance apron is unstriped and widens immediately into a large open yard - physical room exists to add a bypass/express lane past the booth without construction.",
+    "dockDoors": "Medium confidence. Directly counted: about 14-16 enclosed freight dock positions on the east/southeast shipping face (8 trailers backed in at z20, plus a second bank of 5-6 north of it), and about 12-13 truck bays with regular rhythm along the southeast face of the northwest live-haul shed. Combined estimate 28 puts the site in 25-50. If live-haul receiving bays are excluded and only conventional freight docks counted, the band would be 10-25. This is a legacy multi-decade poultry complex, so additional docks may sit inside enclosed refrigerated structures and are not visible from overhead.",
+    "dropArea": "Three distinct trailer-parking areas traced. The south drop yard alone (2.8 acres, at 36.18885,-94.12557) held about 41 trailers parked around its perimeter in the current imagery; the two north-yard zones held about 38 more in angled rows. Well over 50.",
+    "shipRcvSeparate": "Physically separate clusters: finished-goods shipping docks on the east/southeast face (the entrance sign literally routes SHIPPING to the Jefferson St gate), and raw/live-haul receiving on the northwest shed against the rail corridor, on the opposite side of the complex.",
+    "urbanRural": "Urban. The plant sits inside Springdale's built fabric in the Fayetteville-Springdale-Rogers metro, bounded by E Huntsville Ave, Jefferson St, apartment complexes to the west and an employee lot across the street.",
+    "multipleFacilities": "Campus. Distinct clusters: the main process/prepared-foods building mass, the east shipping/warehouse wing, the northwest live-haul shed, a north office/maintenance building, and an on-site wastewater treatment plant (clarifier plus a blue-domed digester).",
+    "scale": "No truck scale deck or scale house found in either entrance path at z20/z21. Recorded false, medium confidence - a scale inside an enclosed dock area would not be visible.",
+    "multiStep": "No second checkpoint stage visible after the guard booth. Left false.",
+    "railServed": "Yes. The plant's entire west edge abuts the Arkansas and Missouri rail corridor, with sidings holding covered hoppers and tank cars alongside the process area and a covered rail unloading shed between tracks at roughly 36.19053,-94.12657. Note the corridor is shared and also carries stored/derelict cars, so the exact number of Tyson-served spurs is not fully separable from overhead.",
+    "siteAreaAcres": "16.0 acres, computed from the traced perimeter (64,700 sq m). Compact for a plant of this output - it is hemmed in by the rail corridor on the west and Jefferson St on the east. Perimeter accuracy roughly plus/minus 15 m on the west side where the fence line follows the irregular rail right-of-way.",
+    "trailerParkingCapacity": "Estimate. South drop yard 2.8 acres at perimeter-row layout with a maneuvering core is about 70-80 trailers; the two north drop zones (about 2 acres combined) about 50-60. Total 140, plus or minus 25.",
+    "trailersVisible": "Counted from the current satellite pass: about 41 in the south drop yard, about 38 across the north yard rows, about 8 backed into the east shipping docks, plus roughly 8 staged along the building faces. Total about 95, plus or minus 15."
+  },
+  "method": "deep-audit"
+}

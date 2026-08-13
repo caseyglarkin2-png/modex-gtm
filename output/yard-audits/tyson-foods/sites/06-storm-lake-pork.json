@@ -1,0 +1,287 @@
+{
+  "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+  "type": "Pork Processing Plant",
+  "coords": {
+    "lat": 42.639749,
+    "lng": -95.187849
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://maps.googleapis.com/maps/api/streetview?pano=M7pfOH1Kii67p3X8Y_-PHg&heading=270",
+        "date": "2024-06",
+        "type": "streetview",
+        "claim": "Google Street View from the public road on the plant's east frontage (42.63993,-95.18619, captured 2024-06) shows the Tyson wordmark and logo on the process building, behind the site's white perimeter fence."
+      },
+      {
+        "tier": 1,
+        "url": "https://maps.googleapis.com/maps/api/geocode/json?address=1009+Richland+Dr+Storm+Lake+IA",
+        "date": "2026-07",
+        "type": "geocoder",
+        "claim": "Google Geocoding API resolves 'Tyson Fresh Meats Storm Lake Iowa' to an establishment at 1009 Richland Dr, Storm Lake IA 50588 @ 42.6399405,-95.1872102, and the same address as a premise @ 42.6397490,-95.1878492 - both on this complex."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tyson branding is legible on the building from the public street in 2024 Street View, and the geocoder resolves the Tyson Fresh Meats establishment record to this premise. Session WebSearch budget was exhausted so no news check for a 2025-2026 closure or divestiture was run; the operating signature in current imagery (packed trailer yards, thousands of employee cars, tank car spotted at the plant wall) is that of a running plant. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list. OPERATING: cited in 2026 coverage as one of Tyson's most cost-efficient pork plants (17,250 head/day).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.64238,
+          "lng": -95.19105
+        },
+        {
+          "lat": 42.64238,
+          "lng": -95.18876
+        },
+        {
+          "lat": 42.64193,
+          "lng": -95.18866
+        },
+        {
+          "lat": 42.64196,
+          "lng": -95.18625
+        },
+        {
+          "lat": 42.63862,
+          "lng": -95.1863
+        },
+        {
+          "lat": 42.63925,
+          "lng": -95.1886
+        },
+        {
+          "lat": 42.6399,
+          "lng": -95.1913
+        },
+        {
+          "lat": 42.64026,
+          "lng": -95.19396
+        },
+        {
+          "lat": 42.64109,
+          "lng": -95.19386
+        },
+        {
+          "lat": 42.64115,
+          "lng": -95.1911
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.64092,
+          "lng": -95.18625
+        },
+        {
+          "lat": 42.64092,
+          "lng": -95.18705
+        },
+        {
+          "lat": 42.64068,
+          "lng": -95.18705
+        },
+        {
+          "lat": 42.64068,
+          "lng": -95.18625
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.641571,
+            "lng": -95.187744
+          },
+          {
+            "lat": 42.641571,
+            "lng": -95.186541
+          },
+          {
+            "lat": 42.64085,
+            "lng": -95.186541
+          },
+          {
+            "lat": 42.64085,
+            "lng": -95.187744
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.6411,
+            "lng": -95.1939
+          },
+          {
+            "lat": 42.6411,
+            "lng": -95.1897
+          },
+          {
+            "lat": 42.6403,
+            "lng": -95.1891
+          },
+          {
+            "lat": 42.63995,
+            "lng": -95.1912
+          },
+          {
+            "lat": 42.64025,
+            "lng": -95.19388
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.64075,
+            "lng": -95.187403
+          },
+          {
+            "lat": 42.640691,
+            "lng": -95.187027
+          },
+          {
+            "lat": 42.640484,
+            "lng": -95.187027
+          },
+          {
+            "lat": 42.640543,
+            "lng": -95.187403
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 42.64085,
+          "lng": -95.1889
+        },
+        {
+          "lat": 42.64085,
+          "lng": -95.1877
+        },
+        {
+          "lat": 42.6403,
+          "lng": -95.1877
+        },
+        {
+          "lat": 42.6403,
+          "lng": -95.1889
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 272,
+        "pano": "XJV7VbwUhL8wZB7pSDKfQg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "XJV7VbwUhL8wZB7pSDKfQg",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 314,
+        "pano": "XJV7VbwUhL8wZB7pSDKfQg",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 249,
+        "pano": "XJV7VbwUhL8wZB7pSDKfQg",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 260,
+        "pano": "XJV7VbwUhL8wZB7pSDKfQg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 48,
+    "trailersVisible": 165,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 2,
+    "buildingCount": 12,
+    "siteAreaAcres": 38.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.639749,-95.187849,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "truckGateCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "Ground-truthed. Street View from inside the east truck entrance (pano XJV7VbwUhL8wZB7pSDKfQg @ 42.64080,-95.18656, 2021-11) looking west shows an open paved yard with no barrier arm, no gate leaf, no booth and no lane control - trucks roll straight from the city street into the trailer yard. The 2024-06 panos along the east frontage show only a white ornamental picket fence and jersey barriers at the corner, which screen the yard but do not gate it.",
+    "guardShack": "No booth at the truck entrance in either the 2021 or 2024 Street View. The one gatehouse-like structure on site is a ~10 x 16 m building at 42.64106,-95.18928, sitting on the fence line between the employee car lot and the plant yard - that is a personnel entry / security office on the walking route, not a truck-lane booth. A brick office building with visitor parking sits at the NE corner (42.64183,-95.18625), also not on the truck path.",
+    "remoteGs": "False by rule - remoteGs only applies when a gate exists. There is no gate.",
+    "preGateStaging": "None. The entrance is a curb cut off a signalized city intersection with no apron or truck stalls outside the property line.",
+    "backupSensitive": "The truck entrance is ~35 m west of a signalized intersection on a public city street, with residential blocks immediately south. Any inbound queue spills directly into that signal. This is the single most sales-relevant physical fact on this site.",
+    "dockDoors": "Plant north face: 8 trailers backed in over ~31 m of wall at 3.8 m pitch (42.64054,-95.18740 to 42.64048,-95.18703). Further east along the same face, ~6 more. West face: ~5-7. South/east faces: ~5. Occupied positions counted total ~30; total installed doors estimated 48 across the four faces. Band 25-50, with 50+ plausible.",
+    "dropArea": "Two large trailer parks - a north block against the east road (~2 acres) and a long arm running WNW along the rail corridor to 42.6410,-95.1939 (~10 acres). Roughly 165 trailers standing at capture. Clearly 50+.",
+    "trailerParkingCapacity": "Estimate 280 from ~12 acres of measured drop yard at observed row pitch. Honest range 250-320. The yards were near-full in the capture, so realized capacity is close to what is visible.",
+    "railServed": "Confirmed. Street View from the south side of the rail corridor (42.63898,-95.18900, 2021-11, heading 20) shows a rail tank car spotted directly against the plant's south wall alongside a tanker truck, and z18 imagery west of the plant shows turnouts off the CN main into the yard at approximately 42.6401,-95.1912.",
+    "shipRcvSeparate": "Distinct dock banks on the north face (finished product, feeding the north trailer park) and on the west/south faces, on different buildings of the campus.",
+    "urbanRural": "Storm Lake is a town of roughly 11,000 and the plant sits inside the street grid with houses across the road, but per the rubric small-town industrial resolves to Rural rather than Urban.",
+    "connectivityIssue": "False - the site is inside a town, adjacent to a signalized arterial and residential blocks.",
+    "multipleFacilities": "Campus of a dozen-plus connected and separate structures: kill/cut/process buildings, cold storage, maintenance shop on the west arm, utility and ammonia plant, office building at the NE corner, plus the security building on the employee-lot fence line.",
+    "scale": "No truck scale found in the truck path in z19-z20 imagery or in the entrance Street View. Called false, but flagged: a plant receiving live hogs would normally weigh somewhere, and a scale set inside the process yard would not be visible from the frames audited.",
+    "truckGateCount": "Two counted: the main east entrance off the signalized intersection, plus a second yard access at the west end of the rail-side arm. The west arm access could not be resolved to a formal driveway, hence the flag.",
+    "siteAreaAcres": "38.2 acres from the traced perimeter - employee lots on the north, the plant block, and the trailer arm running WNW along the rail. Excludes the separate industrial complex east of the road, which the geocoder does not attribute to Tyson.",
+    "geofenceOrientation": "The employee lots and the east frontage run on the city's north-south grid, but the whole southern edge and the west trailer arm follow the CN rail corridor on a WNW-ESE bearing. The west drop-yard ring is traced as a five-vertex polygon along that rail line rather than a north-aligned box.",
+    "adjacentSite": "A second large industrial complex with its own trailer fleet and car lot sits immediately east across the road (centered near 42.6396,-95.1840). It is excluded from this audit - the Tyson establishment record resolves to the west complex only."
+  },
+  "method": "deep-audit"
+}

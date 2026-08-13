@@ -1,0 +1,309 @@
+{
+  "name": "Tyson Foods Center Poultry Complex - Center TX",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 31.794,
+    "lng": -94.1666
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.79285,
+          "lng": -94.16841
+        },
+        {
+          "lat": 31.79395,
+          "lng": -94.16862
+        },
+        {
+          "lat": 31.79497,
+          "lng": -94.1686
+        },
+        {
+          "lat": 31.79595,
+          "lng": -94.16795
+        },
+        {
+          "lat": 31.79602,
+          "lng": -94.16593
+        },
+        {
+          "lat": 31.79548,
+          "lng": -94.16532
+        },
+        {
+          "lat": 31.79456,
+          "lng": -94.16518
+        },
+        {
+          "lat": 31.79403,
+          "lng": -94.16487
+        },
+        {
+          "lat": 31.79262,
+          "lng": -94.16482
+        },
+        {
+          "lat": 31.79257,
+          "lng": -94.16648
+        },
+        {
+          "lat": 31.79268,
+          "lng": -94.16745
+        },
+        {
+          "lat": 31.79272,
+          "lng": -94.168
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.793,
+          "lng": -94.16786
+        },
+        {
+          "lat": 31.793,
+          "lng": -94.16763
+        },
+        {
+          "lat": 31.79268,
+          "lng": -94.16763
+        },
+        {
+          "lat": 31.79268,
+          "lng": -94.16786
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 31.79589,
+            "lng": -94.16808
+          },
+          {
+            "lat": 31.79582,
+            "lng": -94.16532
+          },
+          {
+            "lat": 31.79456,
+            "lng": -94.16527
+          },
+          {
+            "lat": 31.79459,
+            "lng": -94.16746
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 31.79479,
+            "lng": -94.16854
+          },
+          {
+            "lat": 31.79474,
+            "lng": -94.16747
+          },
+          {
+            "lat": 31.79386,
+            "lng": -94.16747
+          },
+          {
+            "lat": 31.79386,
+            "lng": -94.16854
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 31.79319,
+            "lng": -94.16758
+          },
+          {
+            "lat": 31.7932,
+            "lng": -94.16727
+          },
+          {
+            "lat": 31.79275,
+            "lng": -94.16723
+          },
+          {
+            "lat": 31.79274,
+            "lng": -94.16754
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 31.79323,
+          "lng": -94.16793
+        },
+        {
+          "lat": 31.79323,
+          "lng": -94.16752
+        },
+        {
+          "lat": 31.79271,
+          "lng": -94.16752
+        },
+        {
+          "lat": 31.79271,
+          "lng": -94.16793
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 9,
+        "pano": "U04R9A9LoZwBlPsdy8y-gA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 16,
+        "pano": "J9e9LPF5rqo_fRJhAHChhg",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 68,
+          "pano": "dfd1k65wVlnC4ATS5zETuw",
+          "hasCoverage": true
+        },
+        {
+          "heading": 82,
+          "pano": "MZUwUsTB36X2c0B7DfgATQ",
+          "hasCoverage": true
+        }
+      ],
+      "dockAprons": [
+        {
+          "heading": 13,
+          "pano": "RAnLzmhByBHe73s9FGvrqw",
+          "hasCoverage": true
+        }
+      ],
+      "staging": {
+        "heading": 13,
+        "pano": "J9e9LPF5rqo_fRJhAHChhg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 145,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 2,
+    "buildingCount": 10,
+    "siteAreaAcres": 29.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.7940,-94.1666,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoors",
+    "connectivityIssue",
+    "multiStep",
+    "railServed"
+  ],
+  "fieldNotes": {
+    "location": "Roster coords (31.795296,-94.18026) were city-level Center and landed ~1.3 km west of the plant. Real facility: 1019 Shelbyville St, Center TX 75935 (Google Places API New) at 31.7943885,-94.1682278; locked complex center 31.7940,-94.1666 after pinning the buildings from satellite.",
+    "identity": "Confirmed on the ground: the site monument sign inside the front fence reads 'Tyson - Center Processing Plant, 1019 Shelbyville St' (Street View 2023-09 at 31.79266,-94.16792), a Hillshire Farm (Tyson brand) trailer and Tyson live-haul coop trucks are on the drive, and the City of Center water tower sits directly behind the plant.",
+    "layout": "This is a full live-bird poultry complex, not a distribution site. The signature feature is the large dark live-haul holding shed (roughly 190 m x 90 m of fan-and-canopy structure) in the north yard, ringed by dozens of open coop trailers staged in radial rows. Finished-goods dry vans and reefers work a separate dock bank on the south face facing Shelbyville St.",
+    "truckGate": "Called FALSE, and this is the single most consequential call on this site. Both truck entrances off Shelbyville St are open curb cuts: a ~21 m wide unmarked paved throat at 31.79284,-94.16774 that runs straight into the dock apron, and a second ~20 m apron ~55 m west at ~31.79285,-94.16845 serving the west/live-haul yard. No barrier arm, no sliding gate, no booth and no lane markings at either. The property IS fenced (black ornamental picket along the Shelbyville St frontage, chain-link with the water tower behind on the west), so the fence terminates at open driveways. Street View 2023-09 heading 8 and 68 from the curb cut and z20/z21 satellite both show an uninterrupted drive. Medium confidence: a swing gate parked open against the fence would not be separable at this resolution.",
+    "guardShack": "None found at either entrance. The only small structures near the drives are a utility cabinet on the frontage and a landscaped island with yellow pipe bollards. Nothing with the booth signature (small footprint, multi-side windows, set beside the lane).",
+    "remoteGs": "False by rule: remoteGs applies only when a gate exists without a booth. No gate here, so no kiosk inference.",
+    "backupSensitive": "The main dock drive meets Shelbyville St (the state highway through Center) with an at-grade rail crossing roughly 45 m west of the curb cut, and the dock apron begins only ~90 m in. A live-haul truck is captured queued on the drive in the 2023-09 pano with its trailer still near the highway. A short backup at the dock face reaches the highway.",
+    "drivewayLong": "Entrance to the dock apron is ~90-100 m of open pavement, enough for 3+ trucks to hold.",
+    "entryExitSeparate": "Two distinct property entrances ~55 m apart on the same road, serving different flows (finished-goods dock vs west/live-haul yard). Marked separate rather than together, though neither is a controlled gate.",
+    "entryLanes": "Left null. Both entrances are wide unmarked aprons, not lanes; assigning a lane count would be invented precision.",
+    "fastLaneOpportunity": "Large amounts of unused paved width at both curb cuts plus a deep interior apron. Physically the easiest kind of site to add a controlled inbound lane and a bypass to.",
+    "dockDoors": "~20, band 10-25. Counted ~9-10 reefers backed in along ~43 m of the south-facing dock wall under a blue canopy (z19 plus the ground-level view at heading 68 from the entrance, which shows about 8 trailers in one frame), plus additional doors on the plant's inner faces not fully visible. Medium confidence.",
+    "dropArea": "Well over 50. Two large trailer areas: the north live-haul yard (~8.2 acres) with dozens of coop trailers staged around the holding shed, and a west storage lot (~2.5 acres) with packed rows of vans and coop trailers.",
+    "trailerCounts": "trailersVisible 145 / capacity 200 are estimates from row counts and lot density across the z17/z18 imagery, not a hand count. Live-haul coop trailers dominate the number.",
+    "shipRcvSeparate": "Yes, and unusually cleanly: live-bird receiving is a physically separate operation in the north yard (holding shed, coop trailers, its own internal loop) from finished-goods shipping on the south dock face.",
+    "multipleFacilities": "Campus. Processing plant, live-haul holding shed, several detached warehouses/sheds, an office block and wastewater treatment ponds to the north-east on the same landholding.",
+    "scale": "No scale deck resolvable. A live-haul complex almost certainly weighs birds in, so a scale probably exists somewhere on the internal loop; left false and flagged uncertain rather than guessed.",
+    "railServed": "Called false, but this is the weakest metric on the site. A multi-track rail corridor with active sidings and rail cars runs immediately west of the plant boundary road, and the plant's south drive crosses it. No spur was observed passing inside the fence to a building. Flagged uncertain.",
+    "urbanRural": "Center TX, pop ~5,000, deep East Texas, pine forest on three sides. Rural.",
+    "connectivityIssue": "The plant sits inside the town with houses, a school-type building and commercial development adjacent, so coverage is likely adequate. Inferred, flagged uncertain.",
+    "siteArea": "29.3 acres from the traced perimeter, covering the fenced operational complex. The wastewater lagoons north-east are probably also Tyson land but are excluded from the yard perimeter.",
+    "streetView": "Frontage coverage is 2023-09 and good. The north live-haul yard has no modern pano: the nearest coverage is a 2013-10 pano on a dirt road ~250 m west, so the dropYards Street View entries are distant and mainly orient the zone rather than show it.",
+    "webResearch": "Session WebSearch budget was exhausted for this run. Identity rests on the on-site Tyson monument sign, Tyson/Hillshire equipment and the Google Places record."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.google.com/maps/@31.79266,-94.16792,3a,75y,340h,90t",
+        "date": "2023-09",
+        "type": "imagery",
+        "claim": "Street View at the plant entrance shows the Tyson monument sign reading 'Center Processing Plant, 1019 Shelbyville St', with Tyson live-haul coop trucks and a Hillshire Farm trailer on site."
+      },
+      {
+        "tier": 2,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson%20Foods%20Center%20Texas%20poultry%20plant",
+        "date": "2026-07",
+        "type": "locator",
+        "claim": "Google Places (New) returns 'Tyson Foods Inc.', 1019 Shelbyville St, Center TX 75935 at 31.7943885,-94.1682278."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tyson-branded site monument, Tyson brand trailers and an operating live-haul yard in 2023 Street View plus 2026 satellite showing the yard in active use. Divestiture check not run: WebSearch was unavailable for this run. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,348 @@
+{
+  "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 33.5815,
+    "lng": -96.6056
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.58308,
+          "lng": -96.60819
+        },
+        {
+          "lat": 33.58315,
+          "lng": -96.60606
+        },
+        {
+          "lat": 33.583,
+          "lng": -96.605
+        },
+        {
+          "lat": 33.58204,
+          "lng": -96.60417
+        },
+        {
+          "lat": 33.58012,
+          "lng": -96.60412
+        },
+        {
+          "lat": 33.57909,
+          "lng": -96.60354
+        },
+        {
+          "lat": 33.5777,
+          "lng": -96.60356
+        },
+        {
+          "lat": 33.57755,
+          "lng": -96.60493
+        },
+        {
+          "lat": 33.57829,
+          "lng": -96.60563
+        },
+        {
+          "lat": 33.57967,
+          "lng": -96.60659
+        },
+        {
+          "lat": 33.58181,
+          "lng": -96.60795
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.58209,
+          "lng": -96.60795
+        },
+        {
+          "lat": 33.58209,
+          "lng": -96.6072
+        },
+        {
+          "lat": 33.58193,
+          "lng": -96.6072
+        },
+        {
+          "lat": 33.58193,
+          "lng": -96.60795
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.58308,
+            "lng": -96.60819
+          },
+          {
+            "lat": 33.58315,
+            "lng": -96.60606
+          },
+          {
+            "lat": 33.58219,
+            "lng": -96.60601
+          },
+          {
+            "lat": 33.58212,
+            "lng": -96.60812
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.58194,
+            "lng": -96.60759
+          },
+          {
+            "lat": 33.58197,
+            "lng": -96.60646
+          },
+          {
+            "lat": 33.58089,
+            "lng": -96.60646
+          },
+          {
+            "lat": 33.58089,
+            "lng": -96.60759
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.57929,
+            "lng": -96.60579
+          },
+          {
+            "lat": 33.57929,
+            "lng": -96.60496
+          },
+          {
+            "lat": 33.57824,
+            "lng": -96.60496
+          },
+          {
+            "lat": 33.57824,
+            "lng": -96.60579
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.58284,
+            "lng": -96.606
+          },
+          {
+            "lat": 33.58284,
+            "lng": -96.60561
+          },
+          {
+            "lat": 33.58228,
+            "lng": -96.60561
+          },
+          {
+            "lat": 33.58228,
+            "lng": -96.606
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.58213,
+            "lng": -96.60608
+          },
+          {
+            "lat": 33.58213,
+            "lng": -96.60556
+          },
+          {
+            "lat": 33.58183,
+            "lng": -96.60556
+          },
+          {
+            "lat": 33.58183,
+            "lng": -96.60608
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.58225,
+          "lng": -96.6074
+        },
+        {
+          "lat": 33.58225,
+          "lng": -96.60615
+        },
+        {
+          "lat": 33.58185,
+          "lng": -96.60615
+        },
+        {
+          "lat": 33.58185,
+          "lng": -96.6074
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 253,
+        "pano": "B3zY7b7Ltt_1nrJuP_Zh6Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 77,
+        "pano": "7t8RfGmE1dit2WIqv2MFdw",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 78,
+          "pano": "jngcF5h1orI9wgujFvh2FQ",
+          "hasCoverage": true
+        },
+        {
+          "heading": 80,
+          "pano": "RqZj-kQ1zRQWGfcrVsFLtg",
+          "hasCoverage": true
+        },
+        {
+          "heading": 77,
+          "pano": "miujWKGyIRX2u-YKWMlQkQ",
+          "hasCoverage": true
+        }
+      ],
+      "dockAprons": [
+        {
+          "heading": 268,
+          "pano": "XP4Kom1xtxFEeEeV8eaUmg",
+          "hasCoverage": true
+        },
+        {
+          "heading": 266,
+          "pano": "ku84BMOOJhkFt4OYiNQIKQ",
+          "hasCoverage": true
+        }
+      ],
+      "staging": {
+        "heading": 78,
+        "pano": "NeZ-NJEHMzj8bbIII3MVcw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 290,
+    "trailerParkingCapacity": 360,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 40.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.5815,-96.6056,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "dockDoors",
+    "connectivityIssue",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "location": "Roster coords (33.635662,-96.60888) were city-level Sherman and landed ~6.1 km north of the plant, in the middle of town. The real facility is the Tyson complex on the WEST side of US-75 at the south edge of Sherman, formatted address 4700 US-75, Sherman TX 75090 (Google Places API New, textSearch 'Tyson Foods Sherman Texas plant' -> 33.5807678,-96.6055118). Locked plant/yard center 33.5815,-96.6056.",
+    "identity": "Positively Tyson from ground truth, not inference: April 2026 Street View at the west gate (pano VV9oC68x80QiRK89oLO3Bw / 7t8RfGmE1dit2WIqv2MFdw, 33.58200,-96.60815) shows a 'Tyson' sign zip-tied to the barbed-wire perimeter fence and a Tyson Foods 53ft reefer ('We feed the world like family', unit 77398) at the checkpoint.",
+    "facilityType": "Roster labels this a Poultry Processing Plant. Imagery shows NO live-haul infrastructure: no coop trailers, no live-bird holding shed with fans, no dead-bird / offal dock. The truck fleet is all dry van and reefer and the yard reads as a further-processing / prepared-foods plant with a very large finished-goods trailer operation. Type kept as given, flagged here.",
+    "truckGate": "Controlled. Single truck entrance on the west boundary road at 33.58201,-96.60758: barbed-wire-topped chain-link perimeter, a checkpoint pinch-point with traffic cones channeling trucks past a booth, and a Tyson sign on the fence. Street View (2026-04) shows a tractor-trailer stopped at the booth with two hi-vis staff working the lane.",
+    "guardShack": "Yes. Masonry/brick booth with a flat canopy roof, roughly a 2-vehicle footprint, sitting on an island in the middle of the entrance drive with windows facing both the inbound and outbound lane. Visible in Street View pano 7t8RfGmE1dit2WIqv2MFdw at heading ~87 and as a small structure straddling the drive at z19/z20 satellite.",
+    "backupSensitive": "An active rail line runs parallel to the west boundary road and the gate drive CROSSES it roughly 40 m outside the booth (rails visible in the Street View foreground and as a dark line at z19). Only ~40 m of stacking exists between the rail crossing and the guard booth, so a two- or three-truck queue at the booth sits on or across the tracks and the road.",
+    "preGateStaging": "Broad paved apron between the road and the gate, west of the fence; a Tyson tractor-trailer is parked on it in the 2026-04 pano. Room for a handful of trucks but it is the same pavement that spans the rail crossing.",
+    "drivewayLong": "Gate to the nearest dock face is ~200 m of open paved yard; the internal approach easily holds 3+ trucks.",
+    "entryLanes": "The drive at the booth is ~14 m wide with the booth island in the middle, so it reads as one inbound and one outbound lane. No painted lane markings resolvable; flagged uncertain.",
+    "fastLaneOpportunity": "Very wide paved gate apron plus a huge open yard immediately inside; ample unused width to add a bypass / express lane past the booth.",
+    "dockDoors": "Estimated ~40 total, band 25-50. Counted from z19: the north-west-facing dock bank has ~13 trailers backed in along ~62 m of wall (so roughly 16 doors at typical 12 ft centers) and a second, south-facing bank has ~9-10 trailers along ~47 m (roughly 12 doors), plus canopied dock positions at the south end of the building. Overhead counting of doors behind backed-in trailers is inherently approximate.",
+    "dropArea": "Very large. Three distinct trailer-storage areas: the north lot (~5.2 acres, 4 packed rows), a mid lot (~3.1 acres) and a south lot (~2.2 acres, two long facing rows). Well over 50 trailers parked without tractors.",
+    "trailerCounts": "trailersVisible 290 and capacity 360 are density estimates (packed nose-in rows at roughly 4 m pitch in ~25 m row bands, cross-checked against measured lot areas). Treat as +/-20 percent, not a hand count.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (a north-west-facing bank and a south-facing bank), consistent with split shipping and receiving. Inferred from geometry, not confirmed operationally.",
+    "scale": "No truck scale deck positively isolated in the imagery. A light rectangular pad sits in the drive just west of the booth but resolution at z20 is at its limit; left false and flagged uncertain.",
+    "urbanRural": "South edge of Sherman TX (pop ~45k) on US-75, with an industrial park to the north and open farmland to the west and south. Small-town industrial, so Rural per rubric.",
+    "railServed": "A rail line runs along the west property boundary and the gate drive crosses it, but no spur was observed entering the fence or serving a building. Called false.",
+    "siteArea": "40.7 acres from the traced perimeter ring, which follows the developed/fenced operational footprint (trailer yards + plant + employee lots). Undeveloped Tyson-owned land beyond the fence, if any, is excluded.",
+    "webResearch": "Session WebSearch budget was exhausted for this run, so no press/locator corroboration was pulled. Identity rests on on-site Tyson signage and Tyson-liveried equipment in 2026 Street View plus the Google Places record, which is strong first-party ground truth."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.google.com/maps/@33.58200,-96.60815,3a,75y,95h,90t",
+        "date": "2026-04",
+        "type": "imagery",
+        "claim": "Street View at the plant's west truck gate shows a 'Tyson' sign on the perimeter fence, a manned guard booth and a Tyson Foods reefer at the checkpoint."
+      },
+      {
+        "tier": 2,
+        "url": "https://places.googleapis.com/v1/places:searchText?textQuery=Tyson%20Foods%20Sherman%20Texas%20plant",
+        "date": "2026-07",
+        "type": "locator",
+        "claim": "Google Places (New) returns 'Tyson Foods Inc', 4700 US-75, Sherman TX 75090 at 33.5807678,-96.6055118, typed manufacturer/wholesaler/food."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tyson signage and Tyson-liveried tractors/trailers on site in April 2026 Street View, plus an active manned gate. Divestiture check not run: WebSearch was unavailable for this run. Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-07-30",
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    }
+  },
+  "method": "deep-audit"
+}

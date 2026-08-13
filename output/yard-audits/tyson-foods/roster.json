@@ -1,0 +1,281 @@
+{
+  "account": "Tyson Foods",
+  "generatedAt": "2026-07-30",
+  "facilityCount": 17,
+  "note": "Seed roster. Production sites are the 14 publicly-known flagship Tyson sites already carried on yardflow.ai/for/tyson-foods (located from public record). DCs are TAM-tagged Tyson distribution centers from the HubSpot/vault TAM layer. Coordinates are approximate city/name-level seeds; deep-audit agents pin the exact building per Step 0.",
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Tyson Foods Springdale Complex - Springdale AR",
+      "city": "Springdale",
+      "state": "AR",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, Springdale, AR",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 36.18836,
+      "lng": -94.129762,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Tyson Fresh Meats Dakota City Beef Plant - Dakota City NE",
+      "city": "Dakota City",
+      "state": "NE",
+      "type": "Beef Processing Plant",
+      "address": "Tyson Fresh Meats, Dakota City, NE",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 42.428627,
+      "lng": -96.415967,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Tyson Fresh Meats Amarillo Beef Plant - Amarillo TX",
+      "city": "Amarillo",
+      "state": "TX",
+      "type": "Beef Processing Plant",
+      "address": "Tyson Fresh Meats, Amarillo, TX",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 35.206982,
+      "lng": -101.832007,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Tyson Fresh Meats Holcomb Beef Plant - Holcomb KS",
+      "city": "Holcomb",
+      "state": "KS",
+      "type": "Beef Processing Plant",
+      "address": "Tyson Fresh Meats, Holcomb, KS",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 37.998443,
+      "lng": -101.023048,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Tyson Fresh Meats Joslin Beef Plant - Joslin IL",
+      "city": "Joslin",
+      "state": "IL",
+      "type": "Beef Processing Plant",
+      "address": "Tyson Fresh Meats, Joslin, IL",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 41.555831,
+      "lng": -90.224756,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Tyson Fresh Meats Storm Lake Pork Plant - Storm Lake IA",
+      "city": "Storm Lake",
+      "state": "IA",
+      "type": "Pork Processing Plant",
+      "address": "Tyson Fresh Meats, Storm Lake, IA",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 42.639941,
+      "lng": -95.18721,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Tyson Fresh Meats Waterloo Pork Plant - Waterloo IA",
+      "city": "Waterloo",
+      "state": "IA",
+      "type": "Pork Processing Plant",
+      "address": "Tyson Fresh Meats, Waterloo, IA",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 42.508843,
+      "lng": -92.260476,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Tyson Fresh Meats Columbus Junction Pork Plant - Columbus Junction IA",
+      "city": "Columbus Junction",
+      "state": "IA",
+      "type": "Pork Processing Plant",
+      "address": "Tyson Fresh Meats, Columbus Junction, IA",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 41.278636,
+      "lng": -91.359877,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Tyson Foods Sherman Poultry Plant - Sherman TX",
+      "city": "Sherman",
+      "state": "TX",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, Sherman, TX",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 33.635662,
+      "lng": -96.60888,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Tyson Foods Center Poultry Complex - Center TX",
+      "city": "Center",
+      "state": "TX",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, Center, TX",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 31.795296,
+      "lng": -94.18026,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Tyson Foods Shelbyville Poultry Plant - Shelbyville TN",
+      "city": "Shelbyville",
+      "state": "TN",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, Shelbyville, TN",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 35.478006,
+      "lng": -86.475062,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+      "city": "Wilkesboro",
+      "state": "NC",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, Wilkesboro, NC",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 36.145965,
+      "lng": -81.16064,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Tyson Foods New Holland Poultry Plant - New Holland PA",
+      "city": "New Holland",
+      "state": "PA",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, New Holland, PA",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 40.09554,
+      "lng": -76.086927,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Tyson Foods Vicksburg Poultry Plant - Vicksburg MS",
+      "city": "Vicksburg",
+      "state": "MS",
+      "type": "Poultry Processing Plant",
+      "address": "Tyson Foods, Vicksburg, MS",
+      "source": "yardflow.ai/for/tyson-foods flagship site list (public record)",
+      "lat": 32.398947,
+      "lng": -90.791323,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Tyson Foods Russellville Distribution Center - Russellville AR",
+      "city": "Russellville",
+      "state": "AR",
+      "type": "Distribution Center",
+      "address": "Tyson Foods Distribution Center, Russellville, AR",
+      "source": "HubSpot TAM company 55459486839 (vault TAM note)",
+      "lat": 35.260519,
+      "lng": -93.066286,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Tyson Foods Indianapolis Distribution Center - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "Tyson Foods Distribution Center, Indianapolis, IN",
+      "source": "HubSpot TAM company (vault TAM note)",
+      "lat": 39.750023,
+      "lng": -86.120758,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Tyson Foods Haltom City Distribution Center - Haltom City TX",
+      "city": "Haltom City",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "Tyson Foods Distribution Center, Haltom City, TX",
+      "source": "HubSpot TAM company 55459558575 (vault TAM note)",
+      "lat": 32.822754,
+      "lng": -97.287037,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-07-30"
+}

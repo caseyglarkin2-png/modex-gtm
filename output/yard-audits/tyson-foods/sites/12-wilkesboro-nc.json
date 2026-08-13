@@ -1,0 +1,338 @@
+{
+  "name": "Tyson Foods Wilkesboro Poultry Complex - Wilkesboro NC",
+  "type": "Poultry Processing Plant",
+  "coords": {
+    "lat": 36.14299,
+    "lng": -81.1632
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "method": "Street View branding + imagery (WebSearch budget exhausted this run)",
+    "evidence": [
+      "Street View pano lxgqT2KVvIQ2EzNqqbIuMQ (2024-04) on the northeast frontage shows a trailer inside the fence with TYSON on the door.",
+      "Street View pano GjpUr_P9jDd_LPY4mwumJQ (2024-08) on the south side shows a red Tyson sign on the plant frontage.",
+      "Street View pano 071J6kMt_DIEdPkY8ae89A (2021-10) shows a manned guard booth with two barrier arms controlling the plant yard entrance.",
+      "The roster coordinate was APPROXIMATE (city centroid). Reverse geocoding the resolved complex returns 100 N Brook St / 700-704 S Factory St, Wilkesboro NC 28697, matching the historic Holly Farms / Tyson plant block.",
+      "Overhead imagery shows an integrated poultry campus spanning multiple parcels and public streets in downtown Wilkesboro, with roughly 180 trailers on site and a ~1,000-space employee lot."
+    ],
+    "confidence": "high",
+    "note": "Operator identity is directly branded in Street View. Which specific Tyson business unit runs each parcel was not web-verified this run.",
+    "checkedDivestiture": true,
+    "divestitureCheckedAt": "2026-08-12",
+    "divestitureCitation": {
+      "tier": 2,
+      "url": "https://www.agriculturedive.com/news/tyson-closes-3-meat-plants-lays-off-1000-workers-Emporia-Philadelphia/734578/",
+      "date": "2026-08-12",
+      "type": "Divestiture/closure gauntlet",
+      "claim": "Tyson closure sweep 2023-2026 checked this site by name against the announced-closure list (2023 poultry: Noel MO, Corydon IN, Glen Allen VA, Van Buren AR; 2024: Perry IA pork, North Little Rock AR; 2025: Emporia KS beef, 2x Original Philly PA prepared; 2026: Lexington NE beef closed Jan 20 2026, Rome GA prepared closing May 31 2026). This site does not appear on it. Checked against agriculturedive.com, kcur.org and wrdw.com reporting; swept 2026-08-12."
+    },
+    "rationale": "Divestiture/closure gauntlet run 2026-08-12: this site was checked by name against Tyson's announced closures 2023-2026 and does not appear on that list. OPERATING, CONVERTED: the Wilkesboro fresh plant was converted to bulk processing with ~500 of ~2,500 jobs eliminated; further-processing moved off site. Not closed and not divested, but the shipping profile has changed. [Tier 2: https://www.foodprocessing.com/ingredients/animal-proteins/news/55133398/tyson-cuts-more-jobs-shifting-further-processing-out-of-wilkesboro-nc-chicken-plant , 2024]"
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.14555,
+          "lng": -81.16126
+        },
+        {
+          "lat": 36.14497,
+          "lng": -81.16118
+        },
+        {
+          "lat": 36.144,
+          "lng": -81.1609
+        },
+        {
+          "lat": 36.14224,
+          "lng": -81.1604
+        },
+        {
+          "lat": 36.1414,
+          "lng": -81.1611
+        },
+        {
+          "lat": 36.1404,
+          "lng": -81.1615
+        },
+        {
+          "lat": 36.1406,
+          "lng": -81.163
+        },
+        {
+          "lat": 36.1407,
+          "lng": -81.1643
+        },
+        {
+          "lat": 36.1415,
+          "lng": -81.1656
+        },
+        {
+          "lat": 36.1418,
+          "lng": -81.1669
+        },
+        {
+          "lat": 36.1433,
+          "lng": -81.1669
+        },
+        {
+          "lat": 36.1437,
+          "lng": -81.1655
+        },
+        {
+          "lat": 36.1443,
+          "lng": -81.1643
+        },
+        {
+          "lat": 36.1449,
+          "lng": -81.163
+        },
+        {
+          "lat": 36.14549,
+          "lng": -81.16217
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.14268,
+          "lng": -81.162
+        },
+        {
+          "lat": 36.14268,
+          "lng": -81.16168
+        },
+        {
+          "lat": 36.14248,
+          "lng": -81.16168
+        },
+        {
+          "lat": 36.14248,
+          "lng": -81.162
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 36.14549,
+            "lng": -81.16217
+          },
+          {
+            "lat": 36.14549,
+            "lng": -81.1613
+          },
+          {
+            "lat": 36.1447,
+            "lng": -81.1612
+          },
+          {
+            "lat": 36.14455,
+            "lng": -81.16215
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.142,
+            "lng": -81.1633
+          },
+          {
+            "lat": 36.14205,
+            "lng": -81.1618
+          },
+          {
+            "lat": 36.141,
+            "lng": -81.1617
+          },
+          {
+            "lat": 36.14095,
+            "lng": -81.1633
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.1436,
+            "lng": -81.1639
+          },
+          {
+            "lat": 36.14355,
+            "lng": -81.1629
+          },
+          {
+            "lat": 36.14265,
+            "lng": -81.16295
+          },
+          {
+            "lat": 36.1427,
+            "lng": -81.164
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.14449,
+            "lng": -81.16672
+          },
+          {
+            "lat": 36.14449,
+            "lng": -81.16551
+          },
+          {
+            "lat": 36.14356,
+            "lng": -81.16551
+          },
+          {
+            "lat": 36.14356,
+            "lng": -81.16672
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 36.14489,
+            "lng": -81.1618
+          },
+          {
+            "lat": 36.14487,
+            "lng": -81.16134
+          },
+          {
+            "lat": 36.14466,
+            "lng": -81.16134
+          },
+          {
+            "lat": 36.14468,
+            "lng": -81.1618
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.14245,
+          "lng": -81.1622
+        },
+        {
+          "lat": 36.14245,
+          "lng": -81.1616
+        },
+        {
+          "lat": 36.142,
+          "lng": -81.1616
+        },
+        {
+          "lat": 36.142,
+          "lng": -81.1622
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 297,
+        "pano": "071J6kMt_DIEdPkY8ae89A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 326,
+        "pano": "071J6kMt_DIEdPkY8ae89A",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 234,
+        "pano": "ouhmn2HQs1C1qPTZpSTKsQ",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 343,
+        "pano": "7GPPLIU38xaxxxpU4JxgnA",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 2,
+    "buildingCount": 22,
+    "siteAreaAcres": 53,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.14299,-81.1632,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoors",
+    "scale",
+    "truckGateCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "backupSensitive"
+  ],
+  "fieldNotes": {
+    "location": "Roster coordinate was APPROXIMATE and landed on the Wilkesboro town centroid. The complex was resolved about 400 m southwest, straddling the US-421 Business corridor between N Brook St and S Factory St. It is a multi-parcel campus: public streets run through it and Tyson yard sits on both sides of the highway.",
+    "truckGate": "Unambiguous. Street View pano 071J6kMt_DIEdPkY8ae89A (2021-10) at heading 326 shows TWO red-and-white barrier arms in the down position across two lanes, a guard booth between them, chain-link fence, a stop sign on the outbound lane and traffic barrels. Confirmed in plan at z20 (36.14258,-81.16186).",
+    "guardShack": "Small white booth with windows on multiple faces sitting between the inbound and outbound arms; roughly 5 m x 9 m including its canopy at z20. Manned checkpoint, not a kiosk.",
+    "remoteGs": "False by rule: a manned booth is present.",
+    "preGateStaging": "Large open paved apron immediately outside the gate (traced as `staging`, about 45 m x 54 m). Street View shows it empty and wide open in front of the arms; trucks stack there without touching a public street.",
+    "postGateStaging": "Deep open yard behind the gate serving the shop canopy, the dock banks and three trailer fields.",
+    "drivewayLong": "From the gate to the nearest dock bank is well over 200 m across open yard.",
+    "backupSensitive": "Called FALSE at the guarded gate: the outbound apron is a large paved plaza with room for many trucks. Flagged uncertain because the campus has additional service driveways that meet public streets with almost no setback (Street View on the northeast frontage shows trailers parked directly behind a fence at the sidewalk line), so backups at those points would reach the road.",
+    "entryLanes": "One inbound lane with its own barrier arm; one outbound lane with the second arm and a stop sign. Both at the same point of the property line, so entryExitTogether.",
+    "fastLaneOpportunity": "The pre-gate apron is a wide open plaza, far more paved width than the two lanes use. A bypass or express lane could be added without new pavement.",
+    "dockDoors": "Band 50+, LOW-to-MEDIUM confidence. Directly counted occupied dock positions: about 10 trailers backed into the north face at 36.14478,-81.16166, about 5 more on an adjoining face, about 4 at the top of that block, and a further line of roughly 12 reefers visible from ground level in Street View pano GjpUr_P9jDd_LPY4mwumJQ at heading 3. That is roughly 31 positively identified positions with several building faces obscured by canopies and by other buildings. Total door count on a 53-acre multi-building poultry campus of this scale is judged to exceed 50; `dockDoorCount: 55` is an inference, not a count.",
+    "dropArea": "Four distinct trailer fields (northeast along the highway, central, south, and a satellite lot on the north side of the highway) all holding trailers without tractors. Far beyond 50.",
+    "trailersVisible": "Approximately 180 across the campus: about 35 in the northeast yard, about 22 in the satellite lot north of the highway, about 35 in the central yard, about 60 in the south yard and shop area, about 25 around the south sheds, plus roughly 20 sitting at docks. Multiple carriers are present in the yard (Tyson-branded plus Prime and produce reefers), which is a mixed-fleet drop yard, not a captive fleet lot.",
+    "trailerParkingCapacity": "Roughly 250. Yards read close to full in the imagery, so slack is limited.",
+    "truckGateCount": "2, flagged uncertain. One guarded gate was positively identified. A second unguarded service driveway breaks the fence on the northeast frontage at about 36.14489,-81.16116. The campus is large enough and split across enough streets that further gates are plausible.",
+    "shipRcvSeparate": "True. Separate dock banks sit on physically different buildings across the campus: the north-face bank at 36.14478,-81.16166, the long red-and-blue roofed shed at 36.14254,-81.16279, and the reefer line visible from the south. Live receiving and finished-goods shipping are not on the same face.",
+    "urbanRural": "Wilkesboro is a small town (roughly 3,600 residents) with North Wilkesboro adjacent. The plant is embedded in the downtown street grid, but the broader setting is small-town, so Rural per the rubric.",
+    "connectivityIssue": "False. The site is inside a town centre with commercial development on every side.",
+    "multipleFacilities": "True and pronounced. This is a campus of at least four distinct building clusters plus a satellite trailer lot across the highway, separated by public streets. Audited as one operating complex.",
+    "scale": "No truck scale positively identified in satellite or in any of the Street View sweeps of the gate and frontage. Called false; flagged uncertain because scale houses are commonly tucked behind the gate out of camera view.",
+    "railServed": "No rail spur seen entering any parcel. The curved structure west of the plant is a culverted creek crossing, not a track.",
+    "siteAreaAcres": "53.0 acres from the traced perimeter. Flagged uncertain because the campus is multi-parcel and the ring necessarily encloses several public street rights-of-way; the true Tyson-owned acreage is somewhat less, and the satellite trailer lot north of the highway (about 2.8 acres, traced as the fourth dropYard) sits outside the ring.",
+    "streetViewMeta": "Interior zones have no coverage. The three panos used are all on public streets: 071J6kMt_DIEdPkY8ae89A (2021-10, the gate), ouhmn2HQs1C1qPTZpSTKsQ (2021-10, the pre-gate apron) and 7GPPLIU38xaxxxpU4JxgnA (2024-08, looking north across the south yard). The `perimeter` entry reuses the gate pano aimed at the campus centroid, which is the frame a driver actually sees on arrival."
+  },
+  "method": "deep-audit"
+}
