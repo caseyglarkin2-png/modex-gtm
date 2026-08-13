@@ -139,5 +139,43 @@
     "siteAreaAcres": "Perimeter box (~245m x ~499m) yields ~30 acres for the UNFI parcel.",
     "address": "Roster lists 22450 Day St; the on-site office address marker reads 14160 Day St and the building is the correct 613,200 sq ft UNFI Western-region DC. The 22450 figure appears to be a stale/incorrect roster address — site identity is confirmed by building size, layout and the UNFI office signage."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+        "date": "2025-08-02",
+        "type": "SEC Form 10-K, Item 2 Properties (FY2025)",
+        "claim": "UNFI's FY2025 Form 10-K, Item 2 Properties, lists a distribution centre at \"Moreno Valley, California\" as of 2025-08-02. Our roster address for this record is \"22450 Day St, Moreno Valley, CA 92553\"."
+      }
+    ],
+    "checkedDivestiture": true,
+    "divestitureCheck": {
+      "sweptAt": "2026-08-13",
+      "method": "Checked against UNFI's FY2025 10-K property table and against its publicly announced 2025-2026 network consolidation. UNFI has closed 12 distribution centres in six years, so presence on the 10-K list alone is not treated as proof of current operation; the announced closures were checked by name.",
+      "result": "present on the FY2025 property list and not named in any announced closure",
+      "sources": [
+        {
+          "tier": 1,
+          "url": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+          "date": "2025-08-02",
+          "type": "SEC Form 10-K, Item 2 Properties (FY2025)"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.supplychaindive.com/news/unfi-closes-distribution-centers-optimization-plan/751269/",
+          "date": "2025-06-24",
+          "covers": "UNFI network optimisation, the Allentown PA closure, and Central-region consolidations"
+        }
+      ]
+    },
+    "claimScope": "CITY-LEVEL identity only. The 10-K names the city, not the parcel. This record is `probable` rather than `confirmed` because no retrieved source ties UNFI to the specific parcel traced here.",
+    "rationale": "PROBABLE: UNFI's own SEC 10-K property table lists a distribution centre in Moreno Valley, California as of 2025-08-02, and this record sits in that city. That establishes the company operates a DC there. It does NOT establish that the parcel traced here is that DC, and no source retrieved in this pass closes that gap, so the verdict stops at probable.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-08-13"
+  }
 }

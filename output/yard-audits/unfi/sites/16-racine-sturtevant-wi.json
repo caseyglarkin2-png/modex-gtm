@@ -135,5 +135,28 @@
     "urbanRural": "Edge-of-town industrial corridor in Sturtevant/Mount Pleasant WI, with open farm fields on the west and south property lines; rural per rubric.",
     "status": "UNFI announced (March 2026) the permanent closure of this Sturtevant facility, eliminating 443 jobs; consolidation absorbs volume into surviving Midwest DCs. Audit reflects the yard's physical state from current imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.wgtd.org/news/unfi-plans-pull-out-sturtevant-layoff-announcement-comes-top-reductions-cree",
+        "date": "2026-03-17",
+        "type": "closure reporting",
+        "claim": "UNFI \"is consolidating its Racine County operation with a facility in Joliet, Illinois that it plans to expand\"; 443 positions eliminated, layoffs expected to begin summer 2026."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+        "date": "2025-08-02",
+        "type": "SEC Form 10-K, Item 2 Properties (FY2025)",
+        "claim": "Listed as \"Sturtevant, Wisconsin\" in the FY2025 property table as of 2025-08-02, before the announced closure took effect."
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "REJECTED: ANNOUNCED PERMANENT CLOSURE. UNFI is closing its Sturtevant (Racine County) Wisconsin distribution centre and consolidating the operation into Joliet, Illinois, which it plans to expand and upgrade. 443 positions eliminated, layoffs beginning summer 2026. The retrievable reporting does not state a confirmed final closing date, so this rejection rests on the announced permanent closure and the consolidation target, not on a date I do not have. Note the receiving site, Joliet IL, is 28-joliet-il in this same account.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-08-13"
+  }
 }

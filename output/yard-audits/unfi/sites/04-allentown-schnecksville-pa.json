@@ -119,5 +119,28 @@
     "siteAreaAcres": "107 acres per the published North Valley Trade Center parcel figure.",
     "entryLanes/exitLanes": "Estimated 2/2; gate not directly visible in Street View (berm blocks view)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.supplychaindive.com/news/unfi-closes-distribution-centers-optimization-plan/751269/",
+        "date": "2025-06-24",
+        "type": "closure reporting",
+        "claim": "UNFI is \"closing its Allentown, Pennsylvania, facility in fiscal year 2026, following the termination of an agreement with Key Food\", 716 employees affected."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+        "date": "2025-08-02",
+        "type": "SEC Form 10-K, Item 2 Properties (FY2025)",
+        "claim": "Listed as \"Allentown, Pennsylvania\" in the FY2025 property table as of 2025-08-02, before the announced closure took effect."
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "REJECTED: ANNOUNCED PERMANENT CLOSURE. UNFI is closing its Allentown, Pennsylvania distribution centre in fiscal year 2026 following termination of its Key Food agreement, affecting 716 employees. The site still appears in the FY2025 10-K property table (as of 2025-08-02), which is consistent with closing during FY2026 rather than contradicting it. No source I could retrieve gives a confirmed completion date, so this rejection rests on the announced permanent closure and the headcount, not on a date I do not have. A current-operations yard audit of a distribution centre being shut down would misrepresent it.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-08-13"
+  }
 }

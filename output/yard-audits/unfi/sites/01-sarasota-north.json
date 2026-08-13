@@ -116,5 +116,43 @@
     "railServed": "A rail line runs N-S immediately along the WEST side of the parcel. No spur observed entering the property in construction-era imagery; the DC is a truck-served grocery DC. Marked false but flagged — verify if a spur is added.",
     "siteAreaAcres": "~95 acres estimated for the UNFI parcel within the 300-acre SRQ Logistics Center master plan; the perimeter box is approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+        "date": "2025-08-02",
+        "type": "SEC Form 10-K, Item 2 Properties (FY2025)",
+        "claim": "UNFI's FY2025 Form 10-K, Item 2 Properties, lists a distribution centre at \"Sarasota North, Florida\" as of 2025-08-02. Our roster address for this record is \"6272 McIntosh Rd, Sarasota, FL 34238\"."
+      }
+    ],
+    "checkedDivestiture": true,
+    "divestitureCheck": {
+      "sweptAt": "2026-08-13",
+      "method": "Checked against UNFI's FY2025 10-K property table and against its publicly announced 2025-2026 network consolidation. UNFI has closed 12 distribution centres in six years, so presence on the 10-K list alone is not treated as proof of current operation; the announced closures were checked by name.",
+      "result": "present on the FY2025 property list and not named in any announced closure",
+      "sources": [
+        {
+          "tier": 1,
+          "url": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+          "date": "2025-08-02",
+          "type": "SEC Form 10-K, Item 2 Properties (FY2025)"
+        },
+        {
+          "tier": 2,
+          "url": "https://www.supplychaindive.com/news/unfi-closes-distribution-centers-optimization-plan/751269/",
+          "date": "2025-06-24",
+          "covers": "UNFI network optimisation, the Allentown PA closure, and Central-region consolidations"
+        }
+      ]
+    },
+    "claimScope": "CITY-LEVEL identity only. The 10-K names the city, not the parcel. This record is `probable` rather than `confirmed` because no retrieved source ties UNFI to the specific parcel traced here.",
+    "rationale": "PROBABLE: UNFI's own SEC 10-K property table lists a distribution centre in Sarasota North, Florida as of 2025-08-02, and this record sits in that city. That establishes the company operates a DC there. It does NOT establish that the parcel traced here is that DC, and no source retrieved in this pass closes that gap, so the verdict stops at probable.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-08-13"
+  }
 }
