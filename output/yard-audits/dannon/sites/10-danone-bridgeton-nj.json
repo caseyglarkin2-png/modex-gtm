@@ -153,5 +153,28 @@
     "urbanRural": "Rural - the plant sits on the edge of Bridgeton, NJ (a small South Jersey city) with farmland, woods, and scattered houses around it; not dense metro fabric.",
     "operationalNote": "Closure announced - Danone plans to shut this plant Aug 2, 2026 with 114 layoffs, relocating Silk production to Mount Crawford VA, Dallas TX, and Jacksonville FL. Still operating as of the May 2026 audit date; imagery (satellite + Dec 2025 Street View) shows active trailers and dock use."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://njbiz.com/danone-south-jersey-plant-closure-114-jobs/",
+        "date": "2026-05-07",
+        "type": "closure reporting",
+        "claim": "\"The site will close Aug. 2 and the company will complete layoffs by Nov. 2, according to Danone North America.\" Names the plant at 70 Rosenhayn Ave, 114 jobs."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.danone.com/us/en/our-locations.html",
+        "date": "2026-08-13",
+        "type": "company-official facility list (street addresses)",
+        "claim": "Danone's current locations page lists 12 US plants and does NOT include Bridgeton NJ, consistent with the closure."
+      }
+    ],
+    "checkedDivestiture": true,
+    "rationale": "REJECTED: CLOSED. Danone North America closed the Bridgeton NJ plant (70 Rosenhayn Ave) on 2026-08-02, eleven days before this verification pass, cutting 114 jobs with layoffs completing by 2026-11-02. Production moved to Mount Crawford VA, Dallas TX and Jacksonville FL. Corroborated by absence: Bridgeton is the ONLY one of our 13 published Danone facilities missing from Danone's own current locations page. A closed plant cannot be shown to a buyer as an operating yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-08-13"
+  }
 }

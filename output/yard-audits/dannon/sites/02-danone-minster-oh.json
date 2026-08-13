@@ -165,5 +165,43 @@
     "postGateStaging": "Wide paved interior yard between trailer rows and dock doors offers ample inside staging.",
     "urbanRural": "Edge-of-town site - the plant abuts a residential subdivision on the north but open farmland on the south, east, and west; small-town setting -> Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.danone.com/us/en/our-locations.html",
+        "date": "2026-08-13",
+        "type": "company-official facility list (street addresses)",
+        "claim": "Danone North America's own locations page lists this plant at \"216 Southgate Drive Minster, OH 45865\". Our roster address for this record is \"216 Southgate Drive, Minster, OH 45865\", which matches at street level, and the record's coordinates were geocoded from that address."
+      }
+    ],
+    "checkedDivestiture": true,
+    "divestitureCheck": {
+      "sweptAt": "2026-08-13",
+      "method": "Danone's own locations page is its current operating list, so presence on it is positive evidence the plant is still running. Cross-checked against the 2026 restructuring, which named Bridgeton NJ as the closure and named Mount Crawford, Dallas and Jacksonville as receiving its volume.",
+      "result": "present on the current company locations page; not closed or divested",
+      "sources": [
+        {
+          "tier": 1,
+          "url": "https://careers.danone.com/us/en/our-locations.html",
+          "date": "2026-08-13",
+          "type": "company-official facility list (street addresses)"
+        },
+        {
+          "tier": 2,
+          "url": "https://njbiz.com/danone-south-jersey-plant-closure-114-jobs/",
+          "date": "2026-05-07",
+          "covers": "the 2026 Danone North America manufacturing restructuring and the single US plant closure it produced"
+        }
+      ]
+    },
+    "claimScope": "address-level identity from the operator's own published facility list, plus a geocode of that address. Not an independent parcel survey.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-08-13",
+    "rationale": "CONFIRMED: Danone North America publishes this plant on its own locations page with a full street address, and that address matches this record's roster address at street level. The record's coordinates were geocoded from that same address. Identity is therefore address-level from the operator itself; it is not an independent parcel survey. The same page is the operating-status check: it is Danone's current facility list, and the only one of our 13 published Danone sites missing from it is Bridgeton NJ, which Danone closed on 2026-08-02."
+  }
 }
