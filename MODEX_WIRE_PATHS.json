@@ -1,0 +1,572 @@
+{
+  "ticket": "M1 — modex-gtm provider-wire inventory",
+  "generated": "2026-08-16",
+  "repo_head": "8fd809eccb72b271ee6c47f39e552dbf75e9b93f",
+  "method": "Traced from src/lib/email/gmail-sender.ts::sendViaGmail (the Gmail REST write) outward through the real import graph. Every claim below was read from code at HEAD, not from comments. Comment claims that failed verification are recorded in `comment_drift`.",
+
+  "wire_functions": [
+    {
+      "id": "WIRE-APP",
+      "file": "src/lib/email/gmail-sender.ts",
+      "function": "sendViaGmail",
+      "provider": "Gmail REST users.messages.send",
+      "capped": true,
+      "cap_enforcement": "assertUnderDailyCap() at line 230, before the fetch. Fails CLOSED on unreadable ledger.",
+      "note": "The only capped wire in the repo. All 8 application paths funnel through it."
+    },
+    {
+      "id": "WIRE-BATCH",
+      "file": "scripts/batch-send-gmail.ts",
+      "function": "sendViaGmail (local redefinition, line 129)",
+      "provider": "Gmail REST users.messages.send (line 134, own fetch)",
+      "capped": false,
+      "note": "Independent implementation. Does NOT import daily-cap."
+    },
+    {
+      "id": "WIRE-WAVE1",
+      "file": "scripts/wave1-resend-gmail.ts",
+      "function": "sendViaGmail (local redefinition, line 85)",
+      "provider": "Gmail REST users.messages.send (line 90, own fetch)",
+      "capped": false,
+      "note": "No Prisma import at all. No guard, no ledger, no cap."
+    },
+    {
+      "id": "WIRE-CAPTURE",
+      "file": "scripts/capture-token-and-send.mjs",
+      "function": "sendEmail (local, line 59)",
+      "provider": "Gmail REST users.messages.send (line 62, own fetch)",
+      "capped": false,
+      "note": "NOT in the reported three-file set. Recipient hardcoded to caseyglarkin2@gmail.com."
+    },
+    {
+      "id": "WIRE-SETUP",
+      "file": "scripts/setup-gmail-send.mjs",
+      "function": "sendTestEmail (local, line 102)",
+      "provider": "Gmail REST users.messages.send (line 105, own fetch)",
+      "capped": false,
+      "note": "NOT in the reported three-file set. Recipient hardcoded to caseyglarkin2@gmail.com."
+    }
+  ],
+
+  "correction_to_briefing": {
+    "claim": "exactly three files in modex contain a send implementation",
+    "verdict": "FALSE — there are five",
+    "missed": ["scripts/capture-token-and-send.mjs", "scripts/setup-gmail-send.mjs"],
+    "why_missed": "Both use the URL form `messages/send`, not the SDK form `messages.send`; a grep on the dotted token misses them. Both are self-test harnesses addressed to Casey's own inbox, so the operational risk is lower than WIRE-BATCH/WIRE-WAVE1 — but they are uncapped, unguarded Gmail writers holding live OAuth flows, and an edited `to:` makes either prospect-capable."
+  },
+
+  "transport_paths": [
+    {
+      "id": "T1",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/email/send/route.ts (POST)",
+      "trigger": "Manual — operator clicks send in /discovery UI",
+      "scheduled": false,
+      "purpose_motion": "HUMAN_APPROVED_1TO1 (manual discovery send)",
+      "sender_mailbox": "casey@freightroll.com (env FROM_EMAIL; no per-identity sender passed)",
+      "provider": "Gmail",
+      "final_wire_function": "performSend -> sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "Operator / generated-content record",
+      "live_enable_flag": "none — always live when authenticated",
+      "autonomy_authority": "NONE. isOutreachPaused() deliberately does NOT gate this route (documented exemption in feature-flags.ts:39-40).",
+      "suppression_source": "prisma.unsubscribedEmail + recipient-guard (bounce/role/freq)",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE (no idempotency key on this path)",
+      "hourly_cap": "IP rate-limit only (rateLimit(`email:${ip}`)) — not a send cap",
+      "daily_cap": "200 (DEFAULT_DAILY_CAP; EMAIL_DAILY_CAP absent in prod)",
+      "send_confirmation": "Gmail message id + threadId returned",
+      "durable_ledger": "EmailLog row",
+      "hubspot_projection": "logSendToHubSpot in client.ts (HUBSPOT_LOGGING_ENABLED=true)",
+      "attribution_support": "tracking_id open pixel, campaign_tag",
+      "auth": "NextAuth session via middleware (path NOT in the middleware exemption list)",
+      "current_live_state": "LIVE — reachable by any authenticated session"
+    },
+    {
+      "id": "T2",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/cron/queue/[id]/send/route.ts (POST)",
+      "trigger": "External — clawd-control-plane polls /api/cron/queue/due then POSTs each id",
+      "scheduled": false,
+      "scheduled_note": "NOT in vercel.json crons. Drained only by clawd calling in.",
+      "purpose_motion": "PROSPECT_OUTREACH (the Draft Queue 1:1 drain)",
+      "sender_mailbox": "Per-identity — send-deps resolves the draft owner's own refresh token via getRefreshTokenFor(); falls back to env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "sendQueueItem -> prodSendDeps -> wrapAndSend -> sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "dispatch-daily / warm-dispatch -> clawd draft-batch -> DraftQueueItem rows",
+      "live_enable_flag": "isOutreachPaused() — reads OUTREACH_PAUSED",
+      "autonomy_authority": "modex-LOCAL ONLY. Reads its own OUTREACH_PAUSED env var. Has NO knowledge of clawd's canonical autonomy state.",
+      "suppression_source": "evaluateSendGuards: unsubscribedEmail + recipient-guard; plus reply-pause via newestInboundFrom()",
+      "account_hold_source": "NONE",
+      "dedup_source": "DraftQueueItem.idempotency_key (@unique, `owner:to_email:run:step`) + status claim transition (approved->sending)",
+      "hourly_cap": "rateLimit('queue-agent-send') — coarse, not a send quota",
+      "daily_cap": "200 (shared WIRE-APP ceiling)",
+      "send_confirmation": "provider_message_id stamped the instant Gmail returns; sideeffects_done flag distinguishes sent-but-postproc-pending",
+      "durable_ledger": "DraftQueueItem + EmailLog",
+      "hubspot_projection": "logSendToHubSpot via client.ts",
+      "attribution_support": "campaign_tag, variant_key/experiment_id, tracking_id",
+      "auth": "QUEUE_AGENT_SECRET bearer only (query ?secret= rejected)",
+      "current_live_state": "ARMED. OUTREACH_PAUSED is ABSENT in production => isOutreachPaused() === false => this route will send on request. See headline_risk."
+    },
+    {
+      "id": "T3",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/cron/process-send-jobs/route.ts",
+      "trigger": "Manual/external with CRON_SECRET",
+      "scheduled": false,
+      "scheduled_note": "NOT in vercel.json crons — despite living under /api/cron.",
+      "purpose_motion": "PROSPECT_OUTREACH (SendJob batch drain)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "SendJob rows",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE — no isOutreachPaused() check",
+      "suppression_source": "whatever sendEmail applies (no perform-send guard chain on this path)",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "200 (WIRE-APP)",
+      "send_confirmation": "message id",
+      "durable_ledger": "EmailLog",
+      "hubspot_projection": "via client.ts",
+      "attribution_support": "partial",
+      "auth": "?secret= / CRON_SECRET equality check",
+      "current_live_state": "LIVE-ON-DEMAND. Route comment records each hit drains up to 2 jobs x 100 recipients."
+    },
+    {
+      "id": "T4",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/email/send-bulk/route.ts (POST)",
+      "trigger": "Manual",
+      "scheduled": false,
+      "purpose_motion": "PROSPECT_OUTREACH (bulk)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "sendBulk -> sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "Operator-supplied recipients array",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "per-send guards inside sendEmail only",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "200 (WIRE-APP). This is the path the cap's in-process reservation memo exists for — Promise.allSettled fires all payloads at once.",
+      "send_confirmation": "per-payload settled results",
+      "durable_ledger": "EmailLog per result, status 'sent'|'failed'",
+      "hubspot_projection": "via client.ts",
+      "attribution_support": "partial",
+      "auth": "NextAuth session via middleware",
+      "current_live_state": "LIVE"
+    },
+    {
+      "id": "T5",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/email/monday-bump/route.ts (POST)",
+      "trigger": "Manual (and scripts/monday-bump.ts CLI, package.json `campaign:monday-bump`)",
+      "scheduled": false,
+      "purpose_motion": "PROSPECT_OUTREACH (follow-up bump)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "prior EmailLog threads",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "sendEmail-level only",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "200 (WIRE-APP)",
+      "send_confirmation": "message id",
+      "durable_ledger": "EmailLog",
+      "hubspot_projection": "via client.ts",
+      "attribution_support": "partial",
+      "auth": "NextAuth session via middleware",
+      "current_live_state": "LIVE"
+    },
+    {
+      "id": "T6",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/engagement/thread/[id]/reply/route.ts (POST)",
+      "trigger": "Manual — operator replies in the engagement inbox UI",
+      "scheduled": false,
+      "purpose_motion": "HUMAN_APPROVED_1TO1 (thread reply)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "inbound reply thread",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE (correctly — human-initiated)",
+      "suppression_source": "sendEmail-level only",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "200 (WIRE-APP)",
+      "send_confirmation": "message id + threadId",
+      "durable_ledger": "EmailLog",
+      "hubspot_projection": "via client.ts",
+      "attribution_support": "thread_id",
+      "auth": "NextAuth session via middleware",
+      "current_live_state": "LIVE"
+    },
+    {
+      "id": "T7",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/cron/daily-digest/route.ts",
+      "trigger": "Vercel cron",
+      "scheduled": true,
+      "schedule": "0 12 * * *",
+      "purpose_motion": "OPERATOR_ALERT (internal digest to Casey)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "sendEmail -> sendViaGmail (WIRE-APP)",
+      "upstream_producer": "internal metrics queries",
+      "live_enable_flag": "none",
+      "autonomy_authority": "N/A — operator alert, exempt by design",
+      "suppression_source": "n/a (internal recipient)",
+      "account_hold_source": "n/a",
+      "dedup_source": "none",
+      "hourly_cap": "none",
+      "daily_cap": "200 (WIRE-APP) — NOTE: an operator alert consumes a prospect-send slot",
+      "send_confirmation": "message id",
+      "durable_ledger": "EmailLog (so the digest counts against the ceiling)",
+      "hubspot_projection": "via client.ts — an internal digest gets a HubSpot activity",
+      "attribution_support": "n/a",
+      "auth": "isAuthorizedCronRequest (Bearer / x-cron-secret / ?secret=)",
+      "current_live_state": "LIVE — scheduled daily 12:00 UTC"
+    },
+    {
+      "id": "T8",
+      "repo": "modex-gtm",
+      "entrypoint": "src/app/api/admin/gmail-token/route.ts (GET)",
+      "trigger": "Manual admin GET",
+      "scheduled": false,
+      "purpose_motion": "SYSTEM_INTERNAL (token probe / smoke test)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "dynamic import sendViaGmail (WIRE-APP) — BYPASSES client.sendEmail",
+      "upstream_producer": "none",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "NONE — hardcoded to caseyglarkin2@gmail.com",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "200 (WIRE-APP — this is the path that justified putting the cap at the wire rather than at routes)",
+      "send_confirmation": "throws on failure",
+      "durable_ledger": "NONE — bypasses client.ts, so no EmailLog row is written",
+      "hubspot_projection": "NONE — bypasses client.ts",
+      "attribution_support": "none",
+      "auth": "NextAuth session + ADMINS allowlist",
+      "current_live_state": "LIVE — and obsolete. See defects D3.",
+      "defect": "A GET with an irreversible side effect; returns the raw GOOGLE_REFRESH_TOKEN in the response body; mutates process.env at runtime. Its own docstring says to delete it once GOOGLE_REFRESH_TOKEN is set in Vercel — it IS set in production."
+    },
+    {
+      "id": "T9",
+      "repo": "modex-gtm",
+      "entrypoint": "scripts/batch-send-gmail.ts (CLI, --contacts=<name>)",
+      "trigger": "Manual CLI on an operator workstation",
+      "scheduled": false,
+      "purpose_motion": "PROSPECT_OUTREACH (wave batch)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "WIRE-BATCH (own implementation)",
+      "upstream_producer": "scripts/contacts/*.ts CONTACTS arrays",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "imports src/lib/email/recipient-guard (line 227-230) — partial",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "RATE_LIMIT_MS=6000 pacing only",
+      "daily_cap": "NONE — bypasses assertUnderDailyCap entirely",
+      "send_confirmation": "Gmail message id",
+      "durable_ledger": "writes prisma.emailLog (line 340) — so its sends DO count against other paths' ceiling",
+      "hubspot_projection": "NONE",
+      "attribution_support": "unsubscribe URL only",
+      "current_live_state": "RUNNABLE — no flag gates it"
+    },
+    {
+      "id": "T10",
+      "repo": "modex-gtm",
+      "entrypoint": "scripts/wave1-resend-gmail.ts (CLI)",
+      "trigger": "Manual CLI on an operator workstation",
+      "scheduled": false,
+      "purpose_motion": "PROSPECT_OUTREACH",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "WIRE-WAVE1 (own implementation)",
+      "upstream_producer": "HARDCODED CONTACTS array at line 162 — real prospects (e.g. @genmills.com)",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "NONE — no recipient-guard, no unsubscribe check",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "RATE_LIMIT_MS=8000 pacing only",
+      "daily_cap": "NONE",
+      "send_confirmation": "Gmail message id (console only)",
+      "durable_ledger": "NONE — no Prisma import whatsoever",
+      "hubspot_projection": "NONE",
+      "attribution_support": "unsubscribe URL only",
+      "current_live_state": "RUNNABLE — the least-governed prospect send path in the repo. See defects D2."
+    },
+    {
+      "id": "T11",
+      "repo": "modex-gtm",
+      "entrypoint": "scripts/capture-token-and-send.mjs / scripts/setup-gmail-send.mjs",
+      "trigger": "Manual CLI",
+      "scheduled": false,
+      "purpose_motion": "SYSTEM_INTERNAL (OAuth setup smoke tests)",
+      "sender_mailbox": "casey@freightroll.com (hardcoded in the URL path)",
+      "provider": "Gmail",
+      "final_wire_function": "WIRE-CAPTURE / WIRE-SETUP",
+      "upstream_producer": "hardcoded test payloads to caseyglarkin2@gmail.com",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "NONE",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "NONE",
+      "send_confirmation": "console",
+      "durable_ledger": "NONE",
+      "hubspot_projection": "NONE",
+      "attribution_support": "none",
+      "current_live_state": "RUNNABLE — self-addressed, so low blast radius today"
+    },
+    {
+      "id": "T12",
+      "repo": "modex-gtm",
+      "entrypoint": "scripts/follow-up-sender.ts, scripts/touch3-sender.ts, scripts/touch4-sender.ts, scripts/monday-bump.ts, scripts/send-preview-emails.ts",
+      "trigger": "Manual CLI",
+      "scheduled": false,
+      "purpose_motion": "PROSPECT_OUTREACH (touch sequences)",
+      "sender_mailbox": "env/Casey",
+      "provider": "Gmail",
+      "final_wire_function": "require('../src/lib/email/client').sendEmail -> WIRE-APP",
+      "upstream_producer": "Prisma queries",
+      "live_enable_flag": "none",
+      "autonomy_authority": "NONE",
+      "suppression_source": "sendEmail-level only",
+      "account_hold_source": "NONE",
+      "dedup_source": "NONE",
+      "hourly_cap": "none",
+      "daily_cap": "200 — these DO go through the capped wire",
+      "durable_ledger": "EmailLog",
+      "hubspot_projection": "via client.ts",
+      "current_live_state": "RUNNABLE, but correctly capped"
+    }
+  ],
+
+  "producers_stagers_not_transports": [
+    {
+      "component": "src/app/api/cron/dispatch-daily/route.ts",
+      "class": "PRODUCER",
+      "schedule": "0 11 * * 1-5",
+      "what_it_does": "selectFreshTopAccounts -> prepareClawdDispatch -> dispatchDraftBatch, which POSTs {CLAWD_CONTROL_PLANE_URL}/api/yardflow/draft-batch. It transmits nothing to a mail provider.",
+      "flag": "AUTO_DISPATCH_DAILY_ENABLED",
+      "live_state": "OFF (value read as 'false' — see live_flags)"
+    },
+    {
+      "component": "src/app/api/cron/warm-dispatch/route.ts",
+      "class": "PRODUCER",
+      "schedule": "15 12 * * 1-5",
+      "what_it_does": "reads DraftQueueItem rows and POSTs a draft batch to clawd. No provider write.",
+      "flag": "WARM_DISPATCH_ENABLED (absent => false) and isOutreachPaused()",
+      "live_state": "OFF via WARM_DISPATCH_ENABLED default-false"
+    },
+    {
+      "component": "src/app/api/cron/drip-sequence/route.ts",
+      "class": "PRODUCER",
+      "schedule": "0 13 * * *",
+      "what_it_does": "runCampaignDripCheck() in src/lib/campaigns/drip.ts, which imports ONLY prisma and ./templates. It creates DB follow-up activities. VERIFIED not a send path.",
+      "flag": "DRIP_SEQUENCE_ENABLED (absent => defaults TRUE)",
+      "live_state": "ON — but produces DB activity rows, not email. Not a transport."
+    },
+    {
+      "component": "src/app/api/cron/queue/due/route.ts",
+      "class": "STAGER / dispatcher",
+      "schedule": "not scheduled — clawd polls it",
+      "what_it_does": "hands clawd up to 25 due approved DraftQueueItem ids. Gated by isOutreachPaused().",
+      "live_state": "ARMED (OUTREACH_PAUSED absent)"
+    },
+    {
+      "component": "src/app/api/cron/check-inbox/route.ts",
+      "class": "READER",
+      "schedule": "*/5 * * * *",
+      "what_it_does": "Gmail messages.list/get + reply classification. Read-only against Gmail."
+    },
+    {
+      "component": "src/lib/email/gmail-inbox.ts, src/lib/campaigns/gmail-invite-scan.ts, scripts/check-replies.ts",
+      "class": "READER",
+      "what_it_does": "Gmail v1 messages list/get. The POST calls in these files are OAuth token exchanges to oauth2.googleapis.com/token, not sends. VERIFIED."
+    },
+    {
+      "component": "src/lib/hubspot/emails.ts::logSendToHubSpot",
+      "class": "CRM PROJECTION",
+      "what_it_does": "Writes a HubSpot engagement AFTER a successful provider send. HubSpot is not a transport plane in modex; nothing in this repo sends mail through HubSpot.",
+      "flag": "HUBSPOT_LOGGING_ENABLED = 'true' in production"
+    },
+    {
+      "component": "crons with no send path: sync-hubspot, reenrich-contacts, qualification, pounce-scan, refresh-intel",
+      "class": "PRODUCER / ENRICHMENT",
+      "what_it_does": "No email imports. refresh-intel and check-inbox emit Slack notifications only."
+    }
+  ],
+
+  "live_flags_M2": {
+    "source": "vercel env pull --environment=production (authoritative decrypted deployment env), project prj_rSVCgdXqOqsXEmlrS1v8v2eoPV9V, team team_TkAjtDWif68PlLtgaIYZ5PLr, read 2026-08-16",
+    "note": "The v10 REST endpoint returns still-encrypted v2 envelopes even with decrypt=true; the CLI pull is what actually resolves values.",
+    "values": {
+      "AUTO_DISPATCH_DAILY_ENABLED": {
+        "raw": "false\\n",
+        "effective": false,
+        "read_by": "src/app/api/cron/dispatch-daily/route.ts:14 — (env || 'false').toLowerCase() === 'true'",
+        "confidence": "READ, not inferred"
+      },
+      "WARM_DISPATCH_ENABLED": {
+        "raw": null,
+        "effective": false,
+        "read_by": "src/app/api/cron/warm-dispatch/route.ts:24 — absent => 'false'",
+        "confidence": "READ (absence confirmed against the full 81-var project env)"
+      },
+      "OUTREACH_PAUSED": {
+        "raw": null,
+        "effective": false,
+        "meaning": "NOT PAUSED",
+        "read_by": "src/lib/feature-flags.ts:43 isOutreachPaused() — absent => regex fails => false",
+        "confidence": "READ"
+      },
+      "DRIP_SEQUENCE_ENABLED": {
+        "raw": null,
+        "effective": true,
+        "note": "envBool default is TRUE. Cron is armed, but the code path is a producer, not a transport.",
+        "confidence": "READ"
+      },
+      "EMAIL_DAILY_CAP": {
+        "raw": null,
+        "effective": 200,
+        "note": "DEFAULT_DAILY_CAP",
+        "confidence": "READ"
+      },
+      "EMAIL_DAILY_CAP_DISABLED": {
+        "raw": null,
+        "effective": false,
+        "meaning": "the ceiling is ACTIVE",
+        "confidence": "READ"
+      },
+      "HUBSPOT_LOGGING_ENABLED": {
+        "raw": "true",
+        "effective": true,
+        "confidence": "READ"
+      },
+      "NOTIFICATIONS_PAUSED": {
+        "raw": "0",
+        "effective": false,
+        "confidence": "READ"
+      },
+      "QUEUE_AGENT_SECRET": {
+        "raw": "<present, not printed>",
+        "effective": "set — the Draft Queue drain is authenticable by clawd",
+        "confidence": "READ"
+      }
+    },
+    "additional_send_agent_flags_discovered": [
+      "QUEUE_AGENT_SECRET — gates T2/queue-due, the clawd drain",
+      "CRON_SECRET — gates T3 process-send-jobs and T7 daily-digest",
+      "SOURCE_APPROVAL_GATE_ENABLED — present in prod env, gates hard approval checks on generated-content sends in /api/email/send"
+    ],
+    "unknowns": []
+  },
+
+  "headline_risk": {
+    "statement": "The modex Draft Queue drain (T2) is ARMED while clawd's canonical outreach autonomy is HALTED.",
+    "mechanism": "T2 and queue/due gate exclusively on modex's own OUTREACH_PAUSED env var. That var is ABSENT from modex production, so isOutreachPaused() returns false and modex considers outreach un-paused. modex reads nothing from clawd's autonomy state. Any caller holding QUEUE_AGENT_SECRET can drain approved DraftQueueItem rows to the Gmail wire right now.",
+    "residual_mitigations": "The 200/day ceiling, unsubscribe + recipient-guard, reply-pause, and idempotency_key all still apply. This is a governance gap, not an unguarded firehose.",
+    "confirms_briefing": "Yes — this is the predicted 'clawd kill-switch does not gate modex' risk, now verified with the actual production value rather than inferred."
+  },
+
+  "defects": [
+    {
+      "id": "D1",
+      "severity": "high",
+      "title": "OUTREACH_PAUSED is unset, so modex's only outreach kill-switch is off by default",
+      "detail": "isOutreachPaused() is fail-OPEN: an absent variable means 'not paused'. The kill-switch that gates the entire automated Draft Queue drain has never been set in production. Target for M4."
+    },
+    {
+      "id": "D2",
+      "severity": "high",
+      "title": "scripts/wave1-resend-gmail.ts is an ungoverned prospect send path",
+      "detail": "Own Gmail wire, hardcoded real prospect addresses (@genmills.com), no recipient-guard, no unsubscribe check, no daily cap, and NO Prisma import at all — so its sends write no EmailLog row. Every message it sends is invisible to the daily ceiling, which means the ceiling for all other paths silently undercounts. This is the 'an unreadable path must never contribute a zero' failure in concrete form."
+    },
+    {
+      "id": "D3",
+      "severity": "high",
+      "title": "/api/admin/gmail-token returns the raw GOOGLE_REFRESH_TOKEN and sends mail on GET",
+      "detail": "A GET with an irreversible side effect (a live Gmail send), which also returns the refresh token in the JSON body and assigns process.env.GOOGLE_REFRESH_TOKEN at runtime. Its own docstring instructs deleting it once the var is set in Vercel; it IS set. Obsolete path — deletion candidate under AGENTS.md."
+    },
+    {
+      "id": "D4",
+      "severity": "medium",
+      "title": "AUTO_DISPATCH_DAILY_ENABLED holds a trailing newline and the comparison does not trim",
+      "detail": "The stored value is `false\\n`. dispatch-daily:14 compares `(env||'false').toLowerCase() === 'true'` with no .trim(). Today this fails safe. But an operator setting it to 'true' through the same tooling that produced this value would get 'true\\n', which is !== 'true' — the switch would silently not arm, with no signal. A flag whose ON position may not work is a flag an operator cannot trust."
+    },
+    {
+      "id": "D5",
+      "severity": "medium",
+      "title": "recipient-guard fails OPEN",
+      "detail": "src/lib/email/recipient-guard.ts:115-117 — `catch { return { ok: true, domain } }`. A DB error during the bounce/frequency lookup lets the send proceed. Deliberate for reply paths, wrong for PROSPECT_OUTREACH. This is exactly the purpose-scoped fail-closed split M6 calls for."
+    },
+    {
+      "id": "D6",
+      "severity": "medium",
+      "title": "EmailLog.status conflates do-not-resend with provider truth",
+      "detail": "One column carries `sent | delivered | opened | clicked | bounced`, and send-bulk additionally writes 'failed'. There is no separate delivery_state. The daily cap has to compensate with a NON_SEND_STATUSES exclusion list to avoid counting its own refusals. Confirms the M7 premise."
+    },
+    {
+      "id": "D7",
+      "severity": "medium",
+      "title": "No from_email column on EmailLog, so the 'daily cap' cannot be per-mailbox",
+      "detail": "send-deps sends as the draft owner's identity (Jake's token), but every send lands on one shared counter. 200 sends by another identity block Casey's mailbox, which has sent nothing. Documented honestly in daily-cap.ts; recording it as a real constraint on M4/M6."
+    },
+    {
+      "id": "D8",
+      "severity": "low",
+      "title": "An operator alert consumes a prospect-send slot and gets a HubSpot activity",
+      "detail": "daily-digest (T7) goes through client.sendEmail, so it writes an EmailLog row, counts against the 200/day prospect ceiling, and is projected into HubSpot as an engagement. Motion taxonomy (M5) should separate OPERATOR_ALERT accounting from PROSPECT_OUTREACH."
+    },
+    {
+      "id": "D9",
+      "severity": "low",
+      "title": "allowBypass() auto-deletes unsubscribe records",
+      "detail": "perform-send.ts:85-94 and 183-186 — for internal domains (freightroll.com, yardflow.ai) a matching unsubscribedEmail row is DELETED rather than skipped. It is a bypass named as a bypass, which M5 explicitly rules out; it should be expressed as a motion (SYSTEM_INTERNAL / OPERATOR_ALERT), and it should not mutate suppression state as a side effect of a send."
+    }
+  ],
+
+  "comment_drift": [
+    {
+      "location": "src/lib/email/gmail-sender.ts:6-9 and src/lib/email/daily-cap.ts:4-9",
+      "claim": "Two CLI scripts define their OWN local sendViaGmail and remain uncapped",
+      "verdict": "TRUE BUT UNDERCOUNTS — batch-send-gmail.ts and wave1-resend-gmail.ts do exactly this, and two more files (capture-token-and-send.mjs, setup-gmail-send.mjs) also write to the Gmail wire uncapped."
+    },
+    {
+      "location": "src/lib/email/gmail-sender.ts:220-226",
+      "claim": "Seven application paths reach this function: perform-send, send-bulk, process-send-jobs, monday-bump, engagement thread reply, daily digest, admin gmail-token probe",
+      "verdict": "VERIFIED ACCURATE. All seven exist and reach the wire. The count is honest — perform-send is correctly described as covering both manual /discovery and the clawd Draft Queue, which are two distinct triggers (T1 and T2) sharing one function."
+    },
+    {
+      "location": "src/lib/email/daily-cap.ts:17-24",
+      "claim": "APP-WIDE, NOT PER-MAILBOX; per-identity sending is live via send-deps",
+      "verdict": "VERIFIED ACCURATE — send-deps.ts imports getRefreshTokenFor and passes a sender object through toInput."
+    },
+    {
+      "location": "src/app/api/admin/gmail-token/route.ts:1-5",
+      "claim": "DELETE this endpoint after you've set GOOGLE_REFRESH_TOKEN in Vercel",
+      "verdict": "STALE INSTRUCTION, UNACTIONED. GOOGLE_REFRESH_TOKEN is present in production env; the endpoint is still live."
+    }
+  ],
+
+  "cross_plane_notes": {
+    "modex_to_clawd": "dispatch-daily and warm-dispatch POST to {CLAWD_CONTROL_PLANE_URL}/api/yardflow/draft-batch. Both are OFF.",
+    "clawd_to_modex": "clawd polls GET /api/cron/queue/due and POSTs /api/cron/queue/{id}/send with QUEUE_AGENT_SECRET. This is the live cross-plane send channel and the M4 target.",
+    "topology_note_for_M4": "modex prod has DATABASE_URL and CLAWD_CONTROL_PLANE_URL + CLAWD_CONTROL_PLANE_TOKEN. Whether modex's Postgres is the same instance clawd uses for its autonomy table is NOT yet established — I have not compared the hosts. That measurement gates the M4 choice between reading the shared Postgres authority and calling clawd's authority endpoint. Flagging rather than assuming."
+  }
+}
