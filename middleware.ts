@@ -19,6 +19,12 @@ export const config = {
      * - /api/intel (read-only intel export for clawd; own x-queue-secret auth)
      * - /api/geocode (internal geocoder for clawd proximity; own QUEUE_AGENT_SECRET auth)
      * - /api/pounce (Pounce Spine ingest; own x-pounce-token auth)
+     * - /api/suppression (cross-plane do-not-contact leg for clawd; own
+     *   x-pounce-token auth). It MUST bypass the session wrapper: clawd reads
+     *   a non-200 as UNREADABLE, the contract maps UNREADABLE to UNKNOWN, and
+     *   UNKNOWN refuses the send. Wrapped, this route 401s every lookup and
+     *   holds every wave at 100% while looking like a working fail-closed
+     *   gate. Pinned by tests/unit/middleware-matcher.test.ts.
      * - /api/concierge (concierge booking->deal webhook; own x-concierge-secret auth)
      * - /api/proof (local deterministic e2e seed helpers)
      * - /unsubscribe (public unsubscribe page)
@@ -36,6 +42,6 @@ export const config = {
      * - /api/microsites/roi-lead (public ROI->pipeline ingest; ROI_LEAD_SECRET-gated)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/intel|api/geocode|api/campaigns|api/e|api/pounce|api/concierge|api/proposal|api/proof|api/for|api/slack|api/outbox|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/intel|api/geocode|api/campaigns|api/e|api/pounce|api/suppression|api/concierge|api/proposal|api/proof|api/for|api/slack|api/outbox|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
