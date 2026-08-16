@@ -421,6 +421,11 @@ export async function GET(request: Request) {
       to: DIGEST_TO,
       subject: `YardFlow daily — ${dateStr}${subjectBits.length ? ` · ${subjectBits.join(' · ')}` : ''}`,
       html,
+      // An internal digest to the operator, not outreach. Declared so the
+      // canonical kill-switch still lets it through during a halt: this mail is
+      // how a human learns the system IS halted, and a guard that silences its
+      // own status report hides its effects.
+      purpose: 'OPERATOR_ALERT',
     });
 
     await markCronSuccess(CRON_NAME, {

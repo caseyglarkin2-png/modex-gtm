@@ -9,6 +9,7 @@
  * the Gmail API directly, so they are NOT covered by this and remain uncapped.
  */
 import { assertUnderDailyCap } from './daily-cap';
+import { assertAutonomyPermitsSend, type SendPurpose } from './autonomy-gate';
 
 // Read at call time, not module load time, so dynamically-set values work
 function getGmailConfig() {
@@ -42,6 +43,10 @@ interface GmailSendPayload {
    *  refresh token and From/{userEmail}/messages URL instead of the Casey env
    *  token. When absent, behavior is exactly as before (env/Casey). */
   sender?: { refreshToken: string; userEmail: string };
+  /** Why this message is being sent. Absent means PROSPECT_OUTREACH, so a
+   *  caller that does not declare is GATED by the canonical kill-switch rather
+   *  than exempted. Only OPERATOR_ALERT is exempt. See ./autonomy-gate.ts. */
+  purpose?: SendPurpose;
 }
 
 interface OAuthTokenResponse {
@@ -225,6 +230,16 @@ export async function sendViaGmail(
   // those routes would have left the others open, and more routes will be
   // added. This is the one place every app send must pass.
   //
+  // THE CANONICAL KILL-SWITCH, checked immediately before transmission and at
+  // the wire for the same reason the ceiling is: gating any subset of the eight
+  // application paths leaves the rest open.
+  //
+  // The authority is clawd's, read over HTTP; modex holds no autonomy state of
+  // its own. Refuses when outreach is halted, when the two repos have drifted,
+  // and when the authority cannot be read at all - unreadable is not permission.
+  // OPERATOR_ALERT is exempt so alerts still reach a human during a halt.
+  await assertAutonomyPermitsSend(payload.purpose);
+
   // Throws DailyCapExceededError, which fails CLOSED on an unreadable ledger.
   // See src/lib/email/daily-cap.ts for why this guard alone does that.
   await assertUnderDailyCap();

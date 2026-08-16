@@ -14,6 +14,19 @@ vi.mock('@/lib/prisma', () => ({
   prisma: { emailLog: { count: vi.fn(async () => 0) } },
 }));
 
+// sendViaGmail also consults the CANONICAL clawd kill-switch before the wire
+// (src/lib/email/autonomy-gate.ts), which fails CLOSED when the authority is
+// unreadable - and under vitest it is unconfigured, so every send here would be
+// refused before a single assertion about tokens or mailbox URLs could run.
+//
+// Mocked as a permissive gate because these tests are about the TRANSPORT, not
+// the switch. That does mean removing the autonomy check from sendViaGmail
+// would not fail this file; email-autonomy-gate.test.ts asserts the wiring
+// behaviourally instead, exactly as email-daily-cap.test.ts does for the cap.
+vi.mock('@/lib/email/autonomy-gate', () => ({
+  assertAutonomyPermitsSend: vi.fn(async () => undefined),
+}));
+
 import { buildMimeMessage, sendViaGmail } from '@/lib/email/gmail-sender';
 
 /**

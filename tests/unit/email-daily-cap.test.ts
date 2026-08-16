@@ -177,6 +177,14 @@ describe('the gate is wired into the transport', () => {
     vi.resetModules();
     const countAtCap = vi.fn(async () => 9999);
     vi.doMock('@/lib/prisma', () => ({ prisma: { emailLog: { count: countAtCap } } }));
+    // The canonical kill-switch is checked BEFORE the ceiling and fails closed
+    // on an unreadable authority, which under vitest it always is. Without this
+    // the send is refused by autonomy and this test would assert the cap while
+    // proving nothing about it - the exact "an unrelated guard tripped on the
+    // same root cause" confusion this suite exists to avoid.
+    vi.doMock('@/lib/email/autonomy-gate', () => ({
+      assertAutonomyPermitsSend: vi.fn(async () => undefined),
+    }));
 
     const fetchSpy = vi.fn();
     vi.stubGlobal('fetch', fetchSpy);
@@ -193,6 +201,7 @@ describe('the gate is wired into the transport', () => {
 
     vi.unstubAllGlobals();
     vi.doUnmock('@/lib/prisma');
+    vi.doUnmock('@/lib/email/autonomy-gate');
     vi.resetModules();
   });
 

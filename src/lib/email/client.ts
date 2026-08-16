@@ -1,5 +1,6 @@
 import { sendViaGmail, isGmailSenderConfigured } from './gmail-sender';
 import type { InlineImage } from '@/lib/email/inline-image';
+import type { SendPurpose } from '@/lib/email/autonomy-gate';
 import { logSendToHubSpot } from '@/lib/hubspot/emails';
 
 export interface EmailPayload {
@@ -19,6 +20,9 @@ export interface EmailPayload {
    *  message sends as this user (their refresh token + From). When absent,
    *  behavior is exactly as today (env/Casey). */
   sender?: { refreshToken: string; userEmail: string };
+  /** Why this message is being sent. Absent means PROSPECT_OUTREACH and is
+   *  therefore gated by the canonical kill-switch. Forwarded to the wire. */
+  purpose?: SendPurpose;
 }
 
 export interface EmailSendResult {
