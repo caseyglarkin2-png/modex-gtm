@@ -1,0 +1,268 @@
+{
+  "_doc": [
+    "CANONICAL cross-repo acceptance vectors for the suppression contract.",
+    "",
+    "THE INVARIANT THESE ENCODE:",
+    "  ANY authoritative plane says DO NOT CONTACT  =>  governed prospect send REFUSES,",
+    "  evaluated at send time, at the irreversible boundary.",
+    "    - positive suppression on any trusted leg            -> BLOCK",
+    "    - negative permission (clear to send) is valid ONLY when ALL required",
+    "      legs were successfully consulted",
+    "    - a required leg unreadable -> UNKNOWN -> an automated prospect send",
+    "      REFUSES. An unreadable authority NEVER becomes CLEAR.",
+    "",
+    "WHY THIS FILE IS SHARED. Three planes can mail a prospect: clawd governed",
+    "Gmail, modex governed Gmail, and the war-room SendGrid coverage lane. One",
+    "sales system cannot hold three definitions of 'do not contact'. This file is",
+    "copied verbatim into all three repos and each repo's suite pins its SHA-256,",
+    "so a copy that drifts turns that repo RED instead of quietly disagreeing.",
+    "A suppression key that differs between the asking plane and the answering",
+    "plane is worse than no key at all: it reports CLEAR with total confidence.",
+    "",
+    "EVERY VECTOR ASSERTS A SPECIFIC REASON, never merely that something was",
+    "blocked. `assert reason == 'modex_do_not_contact'` and not `assert blocked`.",
+    "A suite of positive cases alone would pass against `() => 'blocked'`.",
+    "",
+    "PROVENANCE: measured 2026-08-16 against the real stores. 242 of 1,936 modex",
+    "personas carry do_not_contact=TRUE; 204 are absent from clawd suppression;",
+    "146 of those are targetable by clawd today; 1 was already mailed at that",
+    "exact address. S1 and S2 are the two confirmed fires, not inventions."
+  ],
+  "version": 1,
+  "_key_vectors_doc": [
+    "The block_key pairs, pinned here so the TypeScript and Python mirrors are",
+    "held to ONE definition of who a person is. This is the highest-stakes",
+    "drift in the estate: if the ASKING plane and the ANSWERING plane key",
+    "differently, the answering plane replies 'no suppression matched' with",
+    "total confidence, and that is indistinguishable from consent.",
+    "",
+    "`siblings` MUST produce the same key. `different_people` MUST NOT.",
+    "The controls are not padding: a first pass keyed on any shared name token",
+    "reported 88 sibling pairs where 7 survive inspection."
+  ],
+  "key_vectors": {
+    "siblings": [
+      ["john.drake@homedepot.com", "john_d_drake@homedepot.com"],
+      ["john.deaton@homedepot.com", "john_deaton@homedepot.com"],
+      ["amit.kalra@homedepot.com", "amit_kalra@homedepot.com"],
+      ["dakota.socha@heb.com", "socha.dakota@heb.com"],
+      ["troy.shaw@heb.com", "shaw.troy@heb.com"],
+      ["troy.retzloff@heb.com", "retzloff.troy@heb.com"],
+      ["david.chambers@pepsico.com", "david.j.chambers@pepsico.com"]
+    ],
+    "different_people": [
+      ["brian.watson@pepsico.com", "brian.guinn@pepsico.com"],
+      ["isaac.scott@pepsico.com", "karen.scott@pepsico.com"],
+      ["david.chambers@pepsico.com", "david.stein@pepsico.com"],
+      ["john.drake@homedepot.com", "john.deaton@homedepot.com"]
+    ],
+    "expected_keys": {
+      "john.drake@homedepot.com": "drake.john@homedepot.com",
+      "john_d_drake@homedepot.com": "drake.john@homedepot.com",
+      "shaw.troy@heb.com": "shaw.troy@heb.com",
+      "david.j.chambers@pepsico.com": "chambers.david@pepsico.com",
+      "john.smith@gmail.com": "johnsmith@gmail.com",
+      "john.drake+yardflow@homedepot.com": "drake.john@homedepot.com",
+      "a.b.c@pepsico.com": "a.b.c@pepsico.com"
+    },
+    "unkeyable": ["", "not-an-email", "@nolocal.com", "nodomain@", "two@at@signs.com", "nodot@localhost"]
+  },
+  "vectors": [
+    {
+      "id": "S1",
+      "name": "EXACT do-not-contact recorded in modex",
+      "why": "seannewtz@dswinc.com is do_not_contact=TRUE in modex AND appears in clawd's outreach_sends at that EXACT address. Not an alias miss, not a dedup miss: a straight override of a decision we recorded and could see.",
+      "candidate_email": "seannewtz@dswinc.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": ["seannewtz@dswinc.com"] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "modex_do_not_contact"
+    },
+    {
+      "id": "S2",
+      "name": "SIBLING address, blocked via the coarse block_key",
+      "why": "modex holds john.drake@homedepot.com as do_not_contact; clawd mailed john_d_drake@homedepot.com. Both a visibility failure AND a person-resolution failure. Exact-match suppression cannot catch this.",
+      "candidate_email": "john_d_drake@homedepot.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": ["john.drake@homedepot.com"] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "modex_do_not_contact"
+    },
+    {
+      "id": "S3",
+      "name": "FALSE-SIBLING CONTROL, two humans sharing one token",
+      "why": "A first pass keyed on ANY shared name token reported 88 'siblings'; at a large employer one shared token is just a common first name. brian.watson and brian.guinn are different people and a suppression on one must NOT silently suppress the other. This control is why the key requires the full surviving token set.",
+      "candidate_email": "brian.guinn@pepsico.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": ["brian.watson@pepsico.com"] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "authorize": { "hubspot_contact_id": "hs-guinn-1", "canonical_key": null, "canonical_status": null },
+      "automated": true,
+      "expect_blocked": false,
+      "expect_reason": ""
+    },
+    {
+      "id": "S4",
+      "name": "modex leg UNREADABLE on an automated prospect send",
+      "why": "The whole point of the contract. An authority we cannot read is UNKNOWN, and UNKNOWN is not CLEAR. Turning an unreachable store into permission is how a halt stays falsely LIVE.",
+      "candidate_email": "someone@homedepot.com",
+      "legs": {
+        "modex": { "readable": false },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "unknown_modex"
+    },
+    {
+      "id": "S5",
+      "name": "clawd suppression TRUE, modex candidate",
+      "why": "The mirror of S1. clawd's do_not_send is authoritative for every plane, not only for clawd's own Gmail. Direction of visibility must not decide whether a decision counts.",
+      "candidate_email": "someone@dswinc.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": ["someone@dswinc.com"] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "clawd_do_not_send"
+    },
+    {
+      "id": "S6",
+      "name": "SendGrid global/unsubscribe suppression TRUE",
+      "why": "The recipient's OWN act, and the only leg that is legally binding rather than an inference we maintain about them. It currently reaches clawd through a nightly cron sync that silently no-ops without an API key, which means yesterday's unsubscribe is invisible to today's send. It must be a read, not a sync.",
+      "candidate_email": "optedout@heb.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": ["optedout@heb.com"] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "sendgrid_suppression"
+    },
+    {
+      "id": "S7",
+      "name": "ALL required legs CLEAR and a strict authorize identity is valid",
+      "why": "The contract must be able to say YES, or it is a kill switch rather than a gate. This is the only vector that proceeds, and it proceeds to the DOWNSTREAM guards (autonomy, caps, dedup) rather than to the wire.",
+      "candidate_email": "clear.prospect@heb.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "authorize": { "hubspot_contact_id": "hs-4471", "canonical_key": null, "canonical_status": null },
+      "automated": true,
+      "expect_blocked": false,
+      "expect_reason": ""
+    },
+    {
+      "id": "S8",
+      "name": "coarse block_key MATCHES but strict authorize_key does NOT",
+      "why": "THE ASYMMETRY, stated as a test. A strict identity mismatch must never RESCUE a coarse block. The keys are not two opinions to be reconciled: block_key governs refusal and authorize_key governs permission, and permission cannot overturn a refusal. If this ever goes green by allowing, someone has wired authorize_key into the blocking path.",
+      "candidate_email": "john_d_drake@homedepot.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": ["john.drake@homedepot.com"] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "authorize": { "hubspot_contact_id": "hs-a-different-human", "canonical_key": null, "canonical_status": null },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "modex_do_not_contact"
+    },
+    {
+      "id": "S9",
+      "name": "strict authorize identity EXISTS but a suppression leg is positive",
+      "why": "S8's sibling on the other axis. A perfectly resolved HubSpot identity is an answer to 'who is this', never to 'may we mail them'. A resolved person who opted out is a resolved person who opted out.",
+      "candidate_email": "resolved.person@pepsico.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": ["resolved.person@pepsico.com"] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "authorize": { "hubspot_contact_id": "hs-9001", "canonical_key": "ck-9001", "canonical_status": "resolved" },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "hubspot_optout"
+    },
+    {
+      "id": "S10",
+      "name": "VERBAL do-not-call blocks EMAIL",
+      "why": "A human said 'do not contact me' out loud on a call. Today that blocks the SendGrid lane and not Gmail, so the same person is protected on one plane and cold-emailed from another. LEAD ruled 2026-08-16 that it blocks email: a false block is recoverable and invisible to the buyer, a false allow is neither, and honouring it on Gmail is a TIGHTENING on one plane rather than a loosening on any. Recorded as a reversible default.",
+      "candidate_email": "said.no@homedepot.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": ["said.no@homedepot.com"] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "verbal_do_not_call"
+    },
+    {
+      "id": "S11",
+      "name": "HubSpot leg UNREADABLE on an automated prospect send",
+      "why": "S4 for the leg LEAD made required on 2026-08-16. HubSpot is the only authority all three planes already write to, and it is the recipient's own act rather than our inference. Unreadable is UNKNOWN, never CLEAR.",
+      "candidate_email": "someone@pepsico.com",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": false },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "unknown_hubspot"
+    },
+    {
+      "id": "S12",
+      "name": "an unkeyable candidate address is UNKNOWN, not CLEAR",
+      "why": "block_key returns null for input it cannot key. A leg cannot answer a question about a person it cannot identify, so 'no suppression row matched' is not evidence of consent here. The empty-string case is the one an operator hits with a malformed import.",
+      "candidate_email": "not-an-email",
+      "legs": {
+        "modex": { "readable": true, "suppressed_emails": [] },
+        "clawd": { "readable": true, "suppressed_emails": [] },
+        "hubspot": { "readable": true, "optout_emails": [] },
+        "sendgrid": { "readable": true, "suppressed_emails": [] },
+        "verbal": { "readable": true, "do_not_call_emails": [] }
+      },
+      "automated": true,
+      "expect_blocked": true,
+      "expect_reason": "unkeyable_candidate"
+    }
+  ]
+}
