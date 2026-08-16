@@ -27,6 +27,20 @@ vi.mock('@/lib/email/autonomy-gate', () => ({
   assertAutonomyPermitsSend: vi.fn(async () => undefined),
 }));
 
+// sendViaGmail also consults the CROSS-PLANE SUPPRESSION CONTRACT before the
+// wire (src/lib/email/suppression-gate.ts), which fails CLOSED when the
+// authority is unreadable - and under vitest it is unconfigured, so every send
+// here would be refused before a single assertion could run.
+//
+// Mocked as a permissive gate for the same reason the autonomy gate above is:
+// these tests are about the TRANSPORT, not about consent. That does mean
+// removing the suppression check from sendViaGmail would not fail this file;
+// email-suppression-gate.test.ts asserts the wiring behaviourally instead,
+// exactly as email-daily-cap.test.ts does for the cap.
+vi.mock('@/lib/email/suppression-gate', () => ({
+  assertSuppressionPermitsSend: vi.fn(async () => undefined),
+}));
+
 import { buildMimeMessage, sendViaGmail } from '@/lib/email/gmail-sender';
 
 /**
