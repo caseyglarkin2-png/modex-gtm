@@ -84,6 +84,18 @@ async function loadSender() {
   vi.doMock('@/lib/prisma', () => ({
     prisma: { emailLog: { count: vi.fn(async () => 0) } },
   }));
+  // The CROSS-PLANE SUPPRESSION CONTRACT also sits at this wire and also fails
+  // CLOSED on an unreadable authority, which is what it is under vitest. Mocked
+  // permissively because this suite is about the KILL SWITCH: an unconfigured
+  // suppression authority would refuse first and every assertion here would
+  // pass for the wrong reason — the precise "an unrelated guard tripped on the
+  // same root cause" confusion this file's own header warns about.
+  //
+  // Its own wiring is asserted behaviourally in email-suppression-gate.test.ts,
+  // the same split this file already relies on for the daily cap.
+  vi.doMock('@/lib/email/suppression-gate', () => ({
+    assertSuppressionPermitsSend: vi.fn(async () => undefined),
+  }));
   return import('@/lib/email/gmail-sender');
 }
 

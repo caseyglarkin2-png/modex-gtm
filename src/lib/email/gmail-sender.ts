@@ -10,6 +10,7 @@
  */
 import { assertUnderDailyCap } from './daily-cap';
 import { assertAutonomyPermitsSend, type SendPurpose } from './autonomy-gate';
+import { assertSuppressionPermitsSend } from './suppression-gate';
 
 // Read at call time, not module load time, so dynamically-set values work
 function getGmailConfig() {
@@ -239,6 +240,26 @@ export async function sendViaGmail(
   // and when the authority cannot be read at all - unreadable is not permission.
   // OPERATOR_ALERT is exempt so alerts still reach a human during a halt.
   await assertAutonomyPermitsSend(payload.purpose);
+
+  // THE CROSS-PLANE SUPPRESSION CONTRACT, the third and last plane to get it.
+  // clawd's `_boundary_check` and war-room's SendGrid lane were already gated;
+  // this function was not, so modex was the last way to mail someone we had
+  // recorded a decision NOT to contact.
+  //
+  // A KILL SWITCH IS NOT A CONSENT GATE. The line above and `OUTREACH_PAUSED`
+  // both stop sending, but they are switches: the moment either is lifted, a
+  // do-not-contact recipient is reachable again. Measured 2026-08-16: 242 of
+  // 1,936 personas carry do_not_contact=TRUE, 204 were invisible to clawd, and
+  // one had already been mailed at that exact address.
+  //
+  // Checks TO, CC and BCC — a gate reading only `to` has a documented bypass.
+  // Fails CLOSED on every unprovable state, because an unreadable authority is
+  // not permission. OPERATOR_ALERT is exempt so a human still learns that
+  // suppression is holding a wave.
+  await assertSuppressionPermitsSend(
+    { to: payload.to, cc: payload.cc, bcc: payload.bcc },
+    payload.purpose,
+  );
 
   // Throws DailyCapExceededError, which fails CLOSED on an unreadable ledger.
   // See src/lib/email/daily-cap.ts for why this guard alone does that.

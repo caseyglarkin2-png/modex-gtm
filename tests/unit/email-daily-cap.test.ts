@@ -185,6 +185,12 @@ describe('the gate is wired into the transport', () => {
     vi.doMock('@/lib/email/autonomy-gate', () => ({
       assertAutonomyPermitsSend: vi.fn(async () => undefined),
     }));
+    // Same reasoning for the suppression contract: this suite is about the
+    // CAP, and an unconfigured suppression authority would refuse first and
+    // prove nothing about the cap.
+    vi.doMock('@/lib/email/suppression-gate', () => ({
+      assertSuppressionPermitsSend: vi.fn(async () => undefined),
+    }));
 
     const fetchSpy = vi.fn();
     vi.stubGlobal('fetch', fetchSpy);
@@ -202,6 +208,7 @@ describe('the gate is wired into the transport', () => {
     vi.unstubAllGlobals();
     vi.doUnmock('@/lib/prisma');
     vi.doUnmock('@/lib/email/autonomy-gate');
+    vi.doUnmock('@/lib/email/suppression-gate');
     vi.resetModules();
   });
 
