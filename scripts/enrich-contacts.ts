@@ -161,7 +161,20 @@ async function enrichPersona(persona: {
       quality_score: quality.score,
       quality_band: quality.band,
       is_contact_ready: quality.isReady,
-      do_not_contact: false,
+      // do_not_contact is DELIBERATELY ABSENT, and the honest reason is
+      // narrower than it first looked. It used to be written `false` here,
+      // which reads like enrichment un-suppressing people - but the selector
+      // below already filters `do_not_contact: false`, so this only ever wrote
+      // false to rows that were already false. It was a no-op, not a live
+      // un-suppression.
+      //
+      // Removed anyway, as defence in depth: the safety of that write depends
+      // entirely on a WHERE clause two hundred lines away, and the day someone
+      // widens the selector to re-enrich everyone, this line silently becomes
+      // the un-suppression it always looked like. Enrichment learns things
+      // about a person; it is not evidence they changed their mind about
+      // hearing from us.
+      // Pinned by tests/unit/enrich-does-not-unsuppress.test.ts.
       contact_standard_version: CONTACT_STANDARD_VERSION,
       last_enriched_at: new Date(),
     },

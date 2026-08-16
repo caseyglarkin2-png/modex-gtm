@@ -181,7 +181,18 @@ export async function evaluateSendGuards(
   for (const email of outboundRecipients) {
     if (!unsubscribedSet.has(email.toLowerCase())) continue;
     if (allowBypass(email)) {
-      await prisma.unsubscribedEmail.delete({ where: { email } }).catch(() => {});
+      // SKIP THE SUPPRESSION, KEEP THE RECORD. This used to
+      // `prisma.unsubscribedEmail.delete(...).catch(() => {})`, which made a
+      // send path the thing that erased the evidence somebody had asked us to
+      // stop. `allowBypass` only matches internal addresses, so the blast
+      // radius was our own mailboxes rather than prospects - but an unsubscribe
+      // row records a decision, and bypassing a decision is not the same act as
+      // deleting the record of it.
+      //
+      // The swallowed `.catch` made it worse than it looked: the delete could
+      // have failed every time and nothing would behave differently, so there
+      // was no way to tell "erased" from "silently failed to erase".
+      // Pinned by tests/unit/perform-send-suppression-evidence.test.ts.
       continue;
     }
     const block = unsubscribedSendBlocker(email);
