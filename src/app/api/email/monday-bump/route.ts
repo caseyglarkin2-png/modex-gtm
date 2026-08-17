@@ -93,9 +93,9 @@ function wrapHtml(bodyText: string, accountName: string): string {
 <p style="margin:0;font-size:12px;">
 <a href="https://yardflow.ai" style="color:#0e7490;text-decoration:none;font-weight:500;">yardflow.ai</a>
 <span style="color:#d1d5db;margin:0 6px;">|</span>
-<a href="https://yardflow.ai/roi" style="color:#0e7490;text-decoration:none;font-weight:500;">Run ROI</a>
+<a href="https://yardflow.ai/roi/" style="color:#0e7490;text-decoration:none;font-weight:500;">Run ROI</a>
 <span style="color:#d1d5db;margin:0 6px;">|</span>
-<a href="https://yardflow.ai/overview" style="color:#0e7490;text-decoration:none;font-weight:500;">Short Overview</a></p>
+<a href="https://yardflow.ai/product/" style="color:#0e7490;text-decoration:none;font-weight:500;">Short Overview</a></p>
 </td></tr></table></td></tr></table></body></html>`;
 }
 

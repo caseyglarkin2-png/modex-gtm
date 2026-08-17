@@ -149,7 +149,7 @@ function CompareColumn({ pack, slug }: { pack: DemoPack | null; slug: string }) 
 
       <div className="mt-auto flex flex-wrap gap-2 pt-2">
         <a
-          href={`${MICROSITE_BASE}/roi?source=demo-compare&pack=${encodeURIComponent(slug)}`}
+          href={`${MICROSITE_BASE}/roi/?source=demo-compare&pack=${encodeURIComponent(slug)}`}
           target="_blank"
           rel="noopener noreferrer"
           data-ms-cta-id={`compare-run-roi-${slug}`}
