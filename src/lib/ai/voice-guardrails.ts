@@ -173,7 +173,7 @@ ${POST_PIVOT_BANNED.map(p => `- "${p}" (retired pre-pivot doctrine)`).join('\n')
 POST-PIVOT CANON (hard rules, never violate):
 - NEVER use the word "throughput". The metric word is "production capacity" or "volume".
 - NEVER say "not a YMS" or position YardFlow against a YMS. YardFlow is PRO-YMS: a great YMS is the execution brain, and flowYMS is YardFlow's.
-- NEVER write "flowSPOTTER" as a standalone module. Spotter move execution is folded into flowTWIN.
+- NEVER write "flowSPOTTER" as a standalone module. Spotter move execution is folded into flowVISION.
 - Approved: "flowYMS", "production capacity", "driver journey first, automate last".
 
 Strategic language to use when relevant:

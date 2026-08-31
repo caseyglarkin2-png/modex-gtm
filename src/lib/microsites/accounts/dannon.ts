@@ -100,7 +100,7 @@ const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
  *       modules: [
  *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: `Standardizes the gate process across ${DANNON_FACILITY_COUNT_LABEL} Danone facilities.` },
  *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. Temperature-zone aware.', relevanceToAccount: 'Enforces temp-zone dock assignment. Fresh dairy goes to refrigerated. Every time.' },
- *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Visibility into dwell time for perishable loads. Freshness clock starts in the yard.' },
+ *         { id: 'flowVISION', name: 'flowVISION', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Visibility into dwell time for perishable loads. Freshness clock starts in the yard.' },
  *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view with alerting and cross-site performance intelligence.', relevanceToAccount: 'One view across all Danone North America yard operations.' },
  *       ],
  *       accountFit: 'Primo proof should land hardest here because both are high-volume food / beverage-style networks with plant production capacity pressure.',
@@ -210,7 +210,7 @@ export const dannon: AccountMicrositeData = {
         headline: 'The Yard Network System, one operating layer for every yard in the network.',
         body: 'YardFlow is not another single-site yard tool. It is the Yard Network System: a complete, modern YMS that replaces the 40-year-old legacy systems, plus the standardized driver experience, gate-and-carrier accountability, a passive digital twin of every yard, and a live network command view, priced to run across all 13 plants, not just the flagship. It is the layer that finally connects your TMS, WMS, and planning stack to the physical trailer. And you can watch it work: a live network map turns sites green, amber, and red; it stress-tests a hurricane or a demand spike before it lands; it reads every truck and chassis at the gate; and it updates the yard from satellite and spotter cameras while drivers just do their jobs.',
         proofLinks: [
-          { label: 'Live network console', href: 'https://www.yardflow.ai/YNS/ui_kits/operator-app/', note: 'map · flowSIM · flowTWIN · flowGATE' },
+          { label: 'Live network console', href: 'https://www.yardflow.ai/YNS/ui_kits/operator-app/', note: 'map · flowSIM · flowVISION · flowGATE' },
           { label: 'Driver experience', href: 'https://www.yardflow.ai/YNS/ui_kits/flowdriver/' },
           { label: 'Danone’s network, modeled', href: '/demo/dannon', note: 'your 13 plants' },
         ],

@@ -435,7 +435,7 @@ Subject: under 6 words, lowercase, no company name, no "re:" tricks. Make it sou
 
 MANDATORY OPENING STRATEGY for this email: Use the "${secondaryStrategy}" approach. Completely different angle from Step 1.
 
-Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: drop & hook time cut from 48 to 24 minutes (truck turn speed, NOT volume), a module name (flowTWIN, flowYMS), or the customer quote about capturing additional volume headcount neutral. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
+Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: drop & hook time cut from 48 to 24 minutes (truck turn speed, NOT volume), a module name (flowVISION, flowYMS), or the customer quote about capturing additional volume headcount neutral. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
 
 Make the yard problem feel more expensive than before. Tighter. Harder.
 Default to "we," not "I."

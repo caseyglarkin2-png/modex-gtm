@@ -69,7 +69,7 @@ export const NARRATIONS: Record<string, Narration> = {
   },
   'spotter.dispatch': {
     baseline: 'Yard spotter waits for a dispatch radio call. Driver waits for the spotter to find the trailer.',
-    yns: 'Yard Spot Mgt posts the move the instant flowGATE checks the truck in; the spotter sees the trailer\'s live position in flowTWIN (RTLS) and drives straight to it.',
+    yns: 'Yard Spot Mgt posts the move the instant flowGATE checks the truck in; the spotter sees the trailer\'s live position in flowVISION (RTLS) and drives straight to it.',
   },
   'spotter.dispatch.fastlane': {
     baseline: 'Driver gets stuck behind queued trucks. No bypass — every truck waits the same time.',

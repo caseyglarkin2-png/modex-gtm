@@ -266,7 +266,7 @@
       "flowDRIVER": "One gate process across 40+ protein, grocery, and cold-storage facilities.",
       "flowBOL": "Captures inbound details before a live-animal delivery or reefer load even reaches the dock.",
       "flowSPOTTER": "Sequences reefer and dry loads to the right dock type. 24/7 protein facilities need automated priority.",
-      "flowTWIN": "Network-wide dwell and throughput data the new CSCO needs from day one."
+      "flowVISION": "Network-wide dwell and throughput data the new CSCO needs from day one."
     },
     "person_hero_overrides": {
       "Will Bonifant": "Will, you are inheriting 40+ yards that have never been standardized. This is the window to set the network standard.",
@@ -347,7 +347,7 @@
       "flowDRIVER": "One gate process for coffee, snacks, and pet food. Three supply chains, one check-in standard.",
       "flowBOL": "Captures load type at the gate so temp-sensitive coffee and heavy pet food pallets route correctly.",
       "flowSPOTTER": "Sequences mixed load profiles - light high-cube snacks vs. heavy palletized pet food - to the right dock.",
-      "flowTWIN": "Network-wide visibility the new Chief Product Supply Officer needs to measure integration progress."
+      "flowVISION": "Network-wide visibility the new Chief Product Supply Officer needs to measure integration progress."
     },
     "person_hero_overrides": {
       "Rob Ferguson": "Rob, you inherited 25+ facilities from three different supply chains. The yard is the layer none of them standardized.",
@@ -426,7 +426,7 @@
       "flowDRIVER": "Automates gate check-in across 200+ DCs. One process for RDCs, SDCs, and flatbed yards.",
       "flowBOL": "Captures BOL data at the gate so dock assignment starts before the driver parks.",
       "flowSPOTTER": "Sequences trailers to dock doors across mixed-use yards. Flatbed, dry van, LTL - handled.",
-      "flowTWIN": "Network-wide dwell visibility across every facility type. CFO-ready throughput data."
+      "flowVISION": "Network-wide dwell visibility across every facility type. CFO-ready throughput data."
     },
     "person_hero_overrides": {
       "John Deaton": "John, 200+ facilities. Every DC type runs its own yard. The variance tax across that network is massive.",
@@ -740,7 +740,7 @@
       "flowDRIVER": "Handles oversized equipment staging. Combines and tractors do not fit in dock doors - flowDRIVER adapts.",
       "flowBOL": "Captures load details for aftermarket parts, dealer delivery, and implements - different cargo, same process.",
       "flowSPOTTER": "Sequences flatbed staging, parts inbound, and dealer outbound in shared yards. Priority-based, not first-come.",
-      "flowTWIN": "Yard-level visibility across 60+ depots, assembly plants, and foundries. One view for Moline."
+      "flowVISION": "Yard-level visibility across 60+ depots, assembly plants, and foundries. One view for Moline."
     },
     "person_hero_overrides": {
       "Cory Reed": "Cory, Deere builds autonomous machines. The yards between the factory and the dealer are still the most manual process in the network.",

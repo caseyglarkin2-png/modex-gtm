@@ -87,7 +87,7 @@ import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
  *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Campbell\'s\'s facility network.' },
  *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Campbell\'s\'s facility network.' },
  *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Campbell\'s\'s facility network.' },
- *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Campbell\'s\'s facility network.' },
+ *         { id: 'flowVISION', name: 'flowVISION', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Campbell\'s\'s facility network.' },
  *       ],
  *       accountFit: 'Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore, he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.',
  *     },

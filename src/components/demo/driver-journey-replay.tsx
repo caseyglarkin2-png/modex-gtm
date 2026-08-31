@@ -321,7 +321,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
 
         {/* Capability strip, names the real YNS modules behind the run so the
             demo doesn't reduce the platform to a single gate->dock->exit move.
-            Module names mirror the live operator console (flowGATE / flowTWIN /
+            Module names mirror the live operator console (flowGATE / flowVISION /
             Yard Spot Mgt / Dock Mgt / Appointments). */}
         <div className="mb-3 rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
@@ -330,7 +330,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           <div className="mt-2 flex flex-wrap gap-1.5">
             {[
               { name: 'flowGATE', note: 'machine-vision gate check-in' },
-              { name: 'flowTWIN', note: 'RTLS yard twin' },
+              { name: 'flowVISION', note: 'Camera-built yard twin' },
               { name: 'Yard Spot Mgt', note: 'spotter dispatch' },
               { name: 'Dock Mgt', note: 'door orchestration' },
               { name: 'Appointments', note: 'drop-and-hook planning' },

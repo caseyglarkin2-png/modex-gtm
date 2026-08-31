@@ -54,11 +54,11 @@ export const YARDFLOW_PRODUCT = {
       bullets: ['Touchless BOL creation', 'Single source repository', 'Immutable timestamp trail'],
     },
     {
-      id: 'flowTWIN',
-      name: 'flowTWIN',
+      id: 'flowVISION',
+      name: 'flowVISION',
       shortName: 'Digital Twin + Moves',
       verb: 'Map',
-      description: 'Machine vision and GPS-enabled digital twin of the yard for real-time location, dwell, and lane state, with spotter move execution and task queues built in (the former flowSPOTTER is folded into flowTWIN).',
+      description: 'Machine vision and GPS-enabled digital twin of the yard for real-time location, dwell, and lane state, with spotter move execution and task queues built in (the former flowSPOTTER is folded into flowVISION).',
       bullets: ['Live yard topology', 'Trailer and lane state awareness', 'In-app spotter move queue and completion'],
     },
     {
@@ -74,7 +74,7 @@ export const YARDFLOW_PRODUCT = {
       name: 'flowAI',
       shortName: 'AI Copilot',
       verb: 'Recommend',
-      description: 'AI agent that reads flowTWIN and operational data to recommend the next move, route exceptions, and continuously tune the standard. It rides on top of flowYMS, it does not replace it.',
+      description: 'AI agent that reads flowVISION and operational data to recommend the next move, route exceptions, and continuously tune the standard. It rides on top of flowYMS, it does not replace it.',
       bullets: ['Action recommendations by state', 'Escalation and exception routing', 'Continuous standard optimization'],
     },
     {
@@ -180,7 +180,7 @@ The 4-Step Driver Journey (deployed first, role-first spine):
 3. Dock Assignment: Seamless dock handoff with timestamped direction and clear accountability
 4. BOL Proof: Touchless BOL capture with a defensible chain of custody from arrival to release
 
-The Suite: flowDRIVER (verify), flowGATE (admit), flowBOL (document), flowTWIN (map, with spotter moves folded in), flowNETWORK (scale), flowAI (recommend), and flowYMS (orchestrate — the execution brain). There is no standalone flowSPOTTER anymore; move execution lives inside flowTWIN.
+The Suite: flowDRIVER (verify), flowGATE (admit), flowBOL (document), flowVISION (map, with spotter moves folded in), flowNETWORK (scale), flowAI (recommend), and flowYMS (orchestrate — the execution brain). There is no standalone flowSPOTTER anymore; move execution lives inside flowVISION.
 
 Product frame (post-pivot canon — do not contradict):
 - YardFlow is role-first and system-first. Standardize the yard roles and the driver journey first, prove production capacity, then automate.

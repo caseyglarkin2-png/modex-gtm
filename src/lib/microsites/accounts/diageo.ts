@@ -77,7 +77,7 @@ import type { AccountMicrositeData } from '../schema';
  *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Diageo\'s facility network.' },
  *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Diageo\'s facility network.' },
  *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Diageo\'s facility network.' },
- *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Diageo\'s facility network.' },
+ *         { id: 'flowVISION', name: 'flowVISION', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Diageo\'s facility network.' },
  *       ],
  *       accountFit: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
  *     },
