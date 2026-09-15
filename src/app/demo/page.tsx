@@ -268,7 +268,7 @@ async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null>
   const thumbEntry = THUMB_BY_SLUG.get(anchor.slug);
   const thumbSrc = hasThumb ? `/gallery-thumbs/${anchor.slug}.png` : undefined;
   const thumbAlt = hasThumb && thumbEntry
-    ? `Audited facility — ${pack.account.displayName}: ${thumbEntry.name}`
+    ? `Audited facility, ${pack.account.displayName}: ${thumbEntry.name}`
     : undefined;
 
   return {

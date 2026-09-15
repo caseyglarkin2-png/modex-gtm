@@ -19,15 +19,16 @@ import { useState } from 'react';
  * Sticky (not fixed) so it takes layout space and never overlaps page content.
  */
 
-// Mirrors the canonical top bar (Flow-State- config/navigation.ts):
-// Product, Solutions, Demo, ROI, Research. Research is the /resources
-// library (2026-07-09 IA); under yardflow.ai these resolve natively.
+// Mirrors the canonical top bar (Flow-State- config/navigation.ts, IA of
+// 2026-09-15): Product, Solutions, Proof, Resources, ROI. The /demo directory
+// left the bar (it is sales collateral, footer-linked as "Audited networks");
+// under yardflow.ai these resolve natively.
 const NAV = [
   { href: '/product/', label: 'Product' },
   { href: '/solutions/', label: 'Solutions' },
-  { href: '/demo/', label: 'Demo' },
+  { href: '/proof/', label: 'Proof' },
+  { href: '/resources/', label: 'Resources' },
   { href: '/roi/', label: 'ROI' },
-  { href: '/resources/', label: 'Research' },
 ];
 
 const NEON = '#00B4FF';
@@ -84,7 +85,7 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
               className="hidden items-center gap-1 whitespace-nowrap rounded-xl bg-[#00B4FF] px-4 py-2 text-sm font-semibold text-[#050505] no-underline transition-all hover:shadow-[0_0_24px_rgba(0,180,255,0.5)] sm:inline-flex"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z" /></svg>
-              Book a Yard Network Audit
+              Pick a time
             </Link>
             <button
               className="p-2 text-[#00B4FF] lg:hidden"
@@ -120,7 +121,7 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
                 onClick={() => setMenuOpen(false)}
                 className="block w-full rounded-xl bg-[#00B4FF] px-4 py-3 text-center text-sm font-semibold text-[#050505] no-underline"
               >
-                Book a Yard Network Audit
+                Pick a time
               </Link>
             </div>
           </nav>
@@ -135,9 +136,10 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
           <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#8A93A0]">
             <Link href="/product/" className="no-underline hover:text-[#00B4FF]">Product</Link>
             <Link href="/solutions/" className="no-underline hover:text-[#00B4FF]">Solutions</Link>
-            <Link href="/demo/" className="no-underline hover:text-[#00B4FF]">Demo</Link>
+            <Link href="/proof/" className="no-underline hover:text-[#00B4FF]">Proof</Link>
+            <Link href="/resources/" className="no-underline hover:text-[#00B4FF]">Resources</Link>
             <Link href="/roi/" className="no-underline hover:text-[#00B4FF]">ROI</Link>
-            <Link href="/resources/" className="no-underline hover:text-[#00B4FF]">Research</Link>
+            <Link href="/demo/" className="no-underline hover:text-[#00B4FF]">Audited networks</Link>
             <Link href="/security/" className="no-underline hover:text-[#00B4FF]">Security</Link>
             <Link href="/contact/" className="no-underline hover:text-[#00B4FF]">Contact</Link>
           </nav>
