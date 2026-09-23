@@ -1,0 +1,59 @@
+{
+  "schema": "gap-seed-evidence.v1",
+  "note": "Fixture evidence the four seed families cite (S3-T11). Every ref is fresh, public (external_ok), not superseded and not first-party; every number a seed body uses appears in the title of the ref that step cites, which is the C01 rule. The observation sentence and its [[SRC:id]] marker are the slot a per-prospect render replaces with real evidence; these fixtures exist so the seed shape compiles as written. The pipeline names are placeholders for the C05 named_pipeline rule, not real accounts.",
+  "namedPipeline": ["Example Beverage Co", "Northwind Logistics / Northwind Freight"],
+  "families": {
+    "network_standardization": {
+      "hypothesis": {
+        "observation": "The annual report lists 41 distribution centers folded in from three regional operators over six years.",
+        "problemHypothesis": "Each region still runs its own version of the same shift, so one trailer event is counted three ways before it reaches the executive.",
+        "problemFamily": "network_standardization"
+      },
+      "evidence": [
+        { "id": "ns_ev_1", "signalType": "acquisition", "title": "Annual report 2025: 41 distribution centers across three acquired regional networks", "url": "https://example.test/ns/annual-report-2025", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "ns_ev_2", "signalType": "job_posting", "title": "Careers: Regional Operations Analyst, reconciles DC scorecards across regions", "url": "https://example.test/ns/careers/regional-ops-analyst", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "ns_ev_3", "signalType": "news", "title": "Investor day 2026: one operating model initiative, integration owner in the COO office", "url": "https://example.test/ns/investor-day-2026", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "ns_ev_4", "signalType": "news", "title": "Q2 earnings call: integration target for the acquired network, shared systems by year end", "url": "https://example.test/ns/q2-call", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false }
+      ]
+    },
+    "hidden_capacity": {
+      "hypothesis": {
+        "observation": "The Fontana DC opened 30 more dock doors in the spring expansion while the lot still holds about 180 trailer spots.",
+        "problemHypothesis": "The doors are no longer the constraint; the lot is, and reactive moves are where the added capacity goes to wait.",
+        "problemFamily": "hidden_capacity"
+      },
+      "evidence": [
+        { "id": "hc_ev_1", "signalType": "site_expansion", "title": "Fontana DC expansion: 30 new dock doors, lot unchanged at 180 trailer spots (trade press)", "url": "https://example.test/hc/fontana-expansion", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "hc_ev_2", "signalType": "job_posting", "title": "Careers: two second-shift spotter openings at Fontana, mandatory weekend overtime", "url": "https://example.test/hc/careers/spotter-fontana", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "hc_ev_3", "signalType": "news", "title": "Q2 earnings call: Fontana shipping near capacity, next wave of volume routed there", "url": "https://example.test/hc/q2-call", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "hc_ev_4", "signalType": "news", "title": "Investor deck: Fontana named highest-volume DC in the network for the coming peak", "url": "https://example.test/hc/investor-deck", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false }
+      ]
+    },
+    "automation_readiness": {
+      "hypothesis": {
+        "observation": "The Columbus plant announced an autonomous yard truck pilot for the second half of the year.",
+        "problemHypothesis": "The truck will be fine; the moves it is handed are not deterministic yet, so radio calls and clipboard notes still decide which trailer goes where.",
+        "problemFamily": "automation_readiness"
+      },
+      "evidence": [
+        { "id": "ar_ev_1", "signalType": "automation_program", "title": "Press release: autonomous yard truck pilot at the Columbus plant, second half of the year", "url": "https://example.test/ar/columbus-pilot", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "ar_ev_2", "signalType": "job_posting", "title": "Careers: Automation Engineer, Columbus, exception handling for lot robotics", "url": "https://example.test/ar/careers/automation-engineer", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "ar_ev_3", "signalType": "news", "title": "Investor presentation: automation-first capex program, Columbus as the proving ground", "url": "https://example.test/ar/investor-presentation", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "ar_ev_4", "signalType": "news", "title": "Trade coverage: the Columbus automation playbook is meant to travel to the other plants", "url": "https://example.test/ar/trade-coverage", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false }
+      ]
+    },
+    "new_sites_acquisitions": {
+      "hypothesis": {
+        "observation": "The Bluewater acquisition brings six plants into the network at the close of Q3.",
+        "problemHypothesis": "The day-one plan covers the ERP and the brand while the yards sit on a list called later, so two operating vocabularies collide at the fence first.",
+        "problemFamily": "network_standardization"
+      },
+      "evidence": [
+        { "id": "na_ev_1", "signalType": "acquisition", "title": "Press release: acquisition of Bluewater Foods, six plants, closing at the end of Q3", "url": "https://example.test/na/bluewater-acquisition", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "na_ev_2", "signalType": "job_posting", "title": "Careers: Integration PMO Lead for the Bluewater deal, harmonize site processes", "url": "https://example.test/na/careers/integration-lead", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "na_ev_3", "signalType": "news", "title": "Q2 earnings call: Bluewater cost target tied to shared logistics within a year", "url": "https://example.test/na/q2-call", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false },
+        { "id": "na_ev_4", "signalType": "new_site", "title": "Local news: new Reno distribution center opening next year", "url": "https://example.test/na/reno-dc", "externalOk": true, "fresh": true, "superseded": false, "firstParty": false }
+      ]
+    }
+  }
+}
