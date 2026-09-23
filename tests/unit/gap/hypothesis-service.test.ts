@@ -13,6 +13,7 @@ const NOW = new Date('2026-09-23T12:00:00.000Z');
 const FUTURE_A = new Date('2026-10-23T12:00:00.000Z');
 const FUTURE_B = new Date('2026-10-05T12:00:00.000Z');
 const PAST = new Date('2026-09-01T12:00:00.000Z');
+const LATER = new Date('2026-09-15T12:00:00.000Z');
 
 /** A spy typed to accept any arguments, so `mock.calls[n][m]` is indexable under strict tsc. */
 function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
@@ -26,7 +27,7 @@ function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
  */
 function makePrisma() {
   const tx = {
-    prospectingHypothesis: { create: asyncSpy(), update: asyncSpy(), updateMany: asyncSpy() },
+    prospectingHypothesis: { findUnique: asyncSpy(), create: asyncSpy(), update: asyncSpy(), updateMany: asyncSpy() },
     hypothesisSignal: { createMany: asyncSpy(), deleteMany: asyncSpy() },
     hypothesisEvent: { create: asyncSpy(async () => ({ id: 'evt_tx' })) },
   };
@@ -271,7 +272,7 @@ describe('loadSnapshot', () => {
         reviewed_by: 'casey',
         primary_persona: { do_not_contact: false, email: 'Ops@Acme.com' },
         sequence_version: { status: 'frozen', steps: [{ productProofAllowed: true }] },
-        dispositions: [{ response_class: 'problem_confirmed', created_at: PAST }],
+        dispositions: [{ id: 'D1', response_class: 'problem_confirmed', created_at: PAST }],
       }),
     );
     prisma.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
@@ -295,7 +296,7 @@ describe('loadSnapshot', () => {
         { id: 'S1', hasEvidence: true, expiresAt: FUTURE_A, title: 'New Ohio DC', evidenceUrl: 'https://x/a' },
         { id: 'S2', hasEvidence: true, expiresAt: FUTURE_B, title: 'Trailer count doubled', evidenceUrl: null },
       ],
-      confirmedDispositions: [{ responseClass: 'problem_confirmed', createdAt: PAST }],
+      confirmedDispositions: [{ id: 'D1', responseClass: 'problem_confirmed', createdAt: PAST }],
     });
     expect(prisma.unsubscribedEmail.findUnique).toHaveBeenCalledWith({
       where: { email: 'ops@acme.com' },
@@ -303,7 +304,10 @@ describe('loadSnapshot', () => {
     });
     const query = prisma.prospectingHypothesis.findUnique.mock.calls[0][0];
     expect(query.where).toEqual({ id: 'H1' });
-    expect(query.include.dispositions.where).toEqual({ human_confirmed: true });
+    expect(query.include.dispositions).toEqual({
+      where: { human_confirmed: true },
+      select: { id: true, response_class: true, created_at: true },
+    });
     expect(query.include.account).toEqual({ select: { hubspot_company_id: true } });
     expect(query.include.signals.include.signal.select.title).toBe(true);
   });
@@ -466,6 +470,53 @@ describe('transitionHypothesis', () => {
     expect(auditSpy).not.toHaveBeenCalled();
   });
 
+  it('approve refuses no_evidence when no linked signal carries a url or text', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(
+      row({
+        status: 'review_required',
+        observation: 'They opened a second DC in Ohio [S:S1].',
+        signals: [
+          {
+            signal_id: 'S1',
+            role: 'primary',
+            signal: { id: 'S1', title: 'Bare', evidence_url: null, evidence_text: null, freshness_expires_at: FUTURE_A },
+          },
+        ],
+      }),
+    );
+    // A permissive DB so a wrongly-passing guard would surface as the wrong result, not a mock crash.
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
+    expect(out).toEqual({ ok: false, reason: 'no_evidence' });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+    expect(auditSpy).not.toHaveBeenCalled();
+  });
+
+  it('approve succeeds when the only evidence is evidence_text', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(
+      row({
+        status: 'review_required',
+        observation: 'They opened a second DC in Ohio [S:S1].',
+        signals: [
+          {
+            signal_id: 'S1',
+            role: 'primary',
+            signal: {
+              id: 'S1',
+              title: 'Text only',
+              evidence_url: null,
+              evidence_text: 'operator said so on the call',
+              freshness_expires_at: FUTURE_A,
+            },
+          },
+        ],
+      }),
+    );
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
+    expect(out).toEqual({ ok: true, from: 'review_required', to: 'approved', effects: ['set_reviewed'] });
+  });
+
   it('activate sets activated_at and expires_at to the earliest signal expiry', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'approved', reviewed_by: 'casey' }));
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('approved'));
@@ -484,12 +535,16 @@ describe('transitionHypothesis', () => {
     expect(auditSpy.mock.calls[0][1]).toMatchObject({ kind: 'hypothesis.activated' });
   });
 
-  it('resolve stores the resolution JSON with problem partial for partially_confirmed', async () => {
+  it('resolve: target from the newest confirmed disposition, resolution cites the problem_* dispositions newest first', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(
       row({
         status: 'active',
         reviewed_by: 'casey',
-        dispositions: [{ response_class: 'problem_confirmed', created_at: PAST }],
+        dispositions: [
+          { id: 'D1', response_class: 'problem_confirmed', created_at: PAST },
+          { id: 'D3', response_class: 'request_information', created_at: LATER },
+          { id: 'D2', response_class: 'problem_partially_confirmed', created_at: LATER },
+        ],
       }),
     );
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('active'));
@@ -505,7 +560,11 @@ describe('transitionHypothesis', () => {
       ok: true,
       from: 'active',
       to: 'partially_confirmed',
-      effects: ['set_resolved', 'stop_enrollments:hypothesis_resolved'],
+      effects: [
+        'set_resolved',
+        'stop_enrollments:hypothesis_resolved',
+        `resolved_by_disposition:${LATER.toISOString()}`,
+      ],
     });
     expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
       where: { id: 'H1', status: 'active' },
@@ -518,7 +577,7 @@ describe('transitionHypothesis', () => {
           rootCause: 'unknown',
           impact: 'unknown',
           notes: 'half the yards',
-          dispositionIds: [],
+          dispositionIds: ['D2', 'D1'],
           bidIds: [],
         },
       },
@@ -527,6 +586,42 @@ describe('transitionHypothesis', () => {
       kind: 'hypothesis.resolved',
       review: { intent: 'half the yards' },
     });
+  });
+
+  it('resolve without ctx.outcome derives confirmed from a lone problem_confirmed disposition', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(
+      row({
+        status: 'active',
+        reviewed_by: 'casey',
+        dispositions: [{ id: 'D1', response_class: 'problem_confirmed', created_at: PAST }],
+      }),
+    );
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('active'));
+
+    const out = await transitionHypothesis(prisma, 'H1', 'resolve', { now: NOW, actor: 'casey' }, deps);
+    expect(out).toMatchObject({ ok: true, to: 'confirmed' });
+    const data = prisma.tx.prospectingHypothesis.updateMany.mock.calls[0][0].data;
+    expect(data.status).toBe('confirmed');
+    expect(data.resolution).toMatchObject({ problem: 'confirmed', dispositionIds: ['D1'], notes: null });
+  });
+
+  it('resolve with a mismatching ctx.outcome passes the machine refusal through with zero writes', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(
+      row({
+        status: 'active',
+        reviewed_by: 'casey',
+        dispositions: [{ id: 'D1', response_class: 'problem_rejected', created_at: PAST }],
+      }),
+    );
+    const out = await transitionHypothesis(
+      prisma,
+      'H1',
+      'resolve',
+      { now: NOW, actor: 'casey', outcome: 'confirmed' },
+      deps,
+    );
+    expect(out).toEqual({ ok: false, reason: 'outcome_mismatch:rejected' });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
   });
 
   it('withdraw stamps resolved_at and resolved_by without a resolution JSON', async () => {
@@ -551,26 +646,78 @@ describe('transitionHypothesis', () => {
 
 describe('updateDraftNarrative', () => {
   let prisma: Prisma;
+  /** The narrative row as the in-transaction findUnique returns it. */
+  function narrativeRow(overrides: Record<string, unknown> = {}) {
+    return {
+      id: 'H1',
+      status: 'draft',
+      problem_family: 'hidden_capacity',
+      secondary_families: [],
+      persona: 'site_ops',
+      observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+      problem_hypothesis: 'My guess is the new DC is running gate checks on paper.',
+      root_cause_hypotheses: ['Gate waiting'],
+      impact_hypotheses: ['Fewer turns'],
+      why_now: null,
+      falsification_questions: ['Do drivers check in at a guard shack?'],
+      what_a_no_means: null,
+      contrary_evidence: null,
+      predicted_buyer_language: null,
+      buying_center: null,
+      confidence: 60,
+      signals: [
+        { signal_id: 'S1', role: 'primary' },
+        { signal_id: 'S2', role: 'supporting' },
+      ],
+      ...overrides,
+    };
+  }
   beforeEach(() => {
     prisma = makePrisma();
     prisma.prospectingSignal.findMany.mockImplementation(async (args: { where: { id: { in: string[] } } }) =>
       args.where.id.in.filter((id) => id === 'S1' || id === 'S2' || id === 'S3').map((id) => ({ id })),
     );
-    prisma.tx.prospectingHypothesis.update.mockResolvedValue({ id: 'H1' });
     prisma.tx.hypothesisSignal.deleteMany.mockResolvedValue({ count: 2 });
     prisma.tx.hypothesisSignal.createMany.mockResolvedValue({ count: 1 });
   });
 
-  it('narrative_frozen on an active row with zero writes', async () => {
-    prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'active' }));
+  it('narrative_frozen on an active row: read inside tx, zero writes', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(narrativeRow({ status: 'active' }));
     const out = await updateDraftNarrative(prisma, 'H1', { whyNow: 'new DC' }, 'casey');
     expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
-    expect(prisma.$transaction).not.toHaveBeenCalled();
-    expect(prisma.tx.prospectingHypothesis.update).not.toHaveBeenCalled();
+    expect(prisma.tx.prospectingHypothesis.findUnique).toHaveBeenCalledTimes(1);
+    expect(prisma.prospectingHypothesis.findUnique).not.toHaveBeenCalled();
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('narrative_frozen when a patch races an approve: the status-in predicate matches nothing and nothing else runs', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(narrativeRow({ status: 'review_required' }));
+    // Between the read and the write a reviewer approved the row.
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(
+      async (args: { where: { status?: { in: string[] } } }) => ({
+        count: args.where.status === undefined || args.where.status.in.includes('approved') ? 1 : 0,
+      }),
+    );
+    const out = await updateDraftNarrative(
+      prisma,
+      'H1',
+      { whyNow: 'new DC', signalIds: ['S3'], observation: 'Trailer counts doubled [S:S3].' },
+      'casey',
+    );
+    expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
+      where: { id: 'H1', status: { in: ['draft', 'review_required'] } },
+      data: { why_now: 'new DC', observation: 'Trailer counts doubled [S:S3].' },
+    });
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
   });
 
   it('fails closed with the validator reason when the new observation cites an unlinked signal', async () => {
-    prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'draft' }));
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(narrativeRow({ status: 'draft' }));
     const out = await updateDraftNarrative(
       prisma,
       'H1',
@@ -578,37 +725,73 @@ describe('updateDraftNarrative', () => {
       'casey',
     );
     expect(out).toEqual({ ok: false, reason: 'unlinked_citation' });
-    expect(prisma.$transaction).not.toHaveBeenCalled();
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
   });
 
-  it('happy path replaces the join rows and records an edit event inside tx', async () => {
-    prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'review_required' }));
+  it('happy path: optimistic updateMany, join rows replaced after the count check, edit event carries before/after', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(narrativeRow({ status: 'review_required' }));
+    prisma.tx.prospectingHypothesis.updateMany.mockResolvedValue({ count: 1 });
     const out = await updateDraftNarrative(
       prisma,
       'H1',
-      { observation: 'Trailer counts doubled [S:S3].', signalIds: ['S3'], primarySignalId: 'S3', whyNow: 'new DC' },
+      {
+        observation: 'Trailer counts doubled [S:S3].',
+        signalIds: ['S3'],
+        primarySignalId: 'S3',
+        whyNow: 'new DC',
+        confidence: 60,
+      },
       'casey',
     );
     expect(out).toEqual({ ok: true, id: 'H1', status: 'review_required' });
 
     expect(prisma.$transaction).toHaveBeenCalledTimes(1);
-    expect(prisma.tx.prospectingHypothesis.update).toHaveBeenCalledWith({
-      where: { id: 'H1' },
-      data: { observation: 'Trailer counts doubled [S:S3].', why_now: 'new DC' },
+    expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
+      where: { id: 'H1', status: { in: ['draft', 'review_required'] } },
+      data: { observation: 'Trailer counts doubled [S:S3].', why_now: 'new DC', confidence: 60 },
     });
+    expect(prisma.tx.prospectingHypothesis.update).not.toHaveBeenCalled();
     expect(prisma.tx.hypothesisSignal.deleteMany).toHaveBeenCalledWith({ where: { hypothesis_id: 'H1' } });
     expect(prisma.tx.hypothesisSignal.createMany).toHaveBeenCalledWith({
       data: [{ hypothesis_id: 'H1', signal_id: 'S3', role: 'primary', linked_by: 'casey' }],
     });
-    expect(prisma.tx.hypothesisEvent.create.mock.calls[0][0].data).toMatchObject({
+    // Order inside the transaction: count check before the join replacement.
+    const updateOrder = prisma.tx.prospectingHypothesis.updateMany.mock.invocationCallOrder[0];
+    const deleteOrder = prisma.tx.hypothesisSignal.deleteMany.mock.invocationCallOrder[0];
+    expect(updateOrder).toBeLessThan(deleteOrder);
+
+    expect(prisma.tx.hypothesisEvent.create.mock.calls[0][0].data).toEqual({
       hypothesis_id: 'H1',
       from_status: 'review_required',
       to_status: 'review_required',
       action: 'edit',
       actor: 'casey',
-      payload: { fields: ['observation', 'signalIds', 'primarySignalId', 'whyNow'] },
+      reason: null,
+      payload: {
+        fields: ['observation', 'signalIds', 'primarySignalId', 'whyNow', 'confidence'],
+        // confidence 60 -> 60 is unchanged, so it has no before/after entry.
+        changes: {
+          observation: {
+            before: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+            after: 'Trailer counts doubled [S:S3].',
+          },
+          whyNow: { before: null, after: 'new DC' },
+          signalIds: { before: ['S1', 'S2'], after: ['S3'] },
+          primarySignalId: { before: 'S1', after: 'S3' },
+        },
+      },
     });
     expect(prisma.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('empty_patch and bad_confidence refuse before any read', async () => {
+    expect(await updateDraftNarrative(prisma, 'H1', {}, 'casey')).toEqual({ ok: false, reason: 'empty_patch' });
+    expect(await updateDraftNarrative(prisma, 'H1', { confidence: 140 }, 'casey')).toEqual({
+      ok: false,
+      reason: 'bad_confidence',
+    });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
   });
 });
 

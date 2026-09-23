@@ -23,6 +23,7 @@
 import { audit as defaultAudit, recordHypothesisEvent, type GapAuditKind } from '../audit';
 import { mirrorHypothesisEvent as defaultMirror, type MirrorAction } from '../hubspot-mirror';
 import {
+  DISPOSITION_OUTCOMES,
   expiresAtFor,
   transition,
   type HypothesisAction,
@@ -81,6 +82,7 @@ export interface LoadedSnapshot extends HypothesisSnapshot {
   whatANoMeans: string | null;
   confidence: number;
   linkedSignals: LoadedSignal[];
+  confirmedDispositions: Array<{ id: string; responseClass: string; createdAt: Date }>;
 }
 
 export type TransitionOutcome =
@@ -340,7 +342,7 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
       sequence_version: { select: { status: true, steps: true } },
       dispositions: {
         where: { human_confirmed: true },
-        select: { response_class: true, created_at: true },
+        select: { id: true, response_class: true, created_at: true },
       },
     },
   });
@@ -389,6 +391,7 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
     version,
     expiresAt: row.expires_at ?? null,
     confirmedDispositions: (row.dispositions ?? []).map((d: any) => ({
+      id: d.id,
       responseClass: d.response_class,
       createdAt: d.created_at,
     })),
@@ -399,9 +402,26 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
 // transition
 // ---------------------------------------------------------------------------
 
+/** The resolution JSON's `problem` value for a terminal resolve status. */
+function problemForStatus(to: HypothesisStatus): 'confirmed' | 'partial' | 'rejected' {
+  if (to === 'confirmed') return 'confirmed';
+  if (to === 'partially_confirmed') return 'partial';
+  return 'rejected';
+}
+
+/** Ids of the confirmed problem_* dispositions, newest first: the evidence the resolution rests on. */
+function resolvingDispositionIds(snapshot: LoadedSnapshot): string[] {
+  return snapshot.confirmedDispositions
+    .filter((d) => d.responseClass in DISPOSITION_OUTCOMES)
+    .slice()
+    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .map((d) => d.id);
+}
+
 function columnsForEffects(
   effects: readonly string[],
   action: HypothesisAction,
+  to: HypothesisStatus,
   snapshot: LoadedSnapshot,
   ctx: TransitionContext,
 ): Record<string, unknown> {
@@ -419,12 +439,15 @@ function columnsForEffects(
       data.resolved_at = ctx.now;
       data.resolved_by = actor;
       data.resolution = {
-        problem:
-          ctx.outcome === 'confirmed' ? 'confirmed' : ctx.outcome === 'partially_confirmed' ? 'partial' : 'rejected',
+        // The machine derived `to` from the newest confirmed disposition, so
+        // the problem verdict follows the target status, never ctx.outcome.
+        problem: problemForStatus(to),
+        // rootCause and impact stay unknown until BID (Sprint 4) lands.
         rootCause: 'unknown',
         impact: 'unknown',
         notes: ctx.reason ?? null,
-        dispositionIds: [],
+        dispositionIds: resolvingDispositionIds(snapshot),
+        // bidIds stays empty until BID capture (Sprint 4) links buyer input rows.
         bidIds: [],
       };
     }
@@ -461,7 +484,7 @@ export async function transitionHypothesis(
   const from = snapshot.status;
   const { to, effects } = decision;
   const actor = ctx.actor ?? 'system';
-  const data = { status: to, ...columnsForEffects(effects, action, snapshot, ctx) };
+  const data = { status: to, ...columnsForEffects(effects, action, to, snapshot, ctx) };
 
   try {
     await prisma.$transaction(async (tx: any) => {
@@ -541,11 +564,46 @@ export async function transitionHypothesis(
 // narrative edits
 // ---------------------------------------------------------------------------
 
+class NarrativeRefusal extends Error {
+  constructor(public readonly reason: string) {
+    super(reason);
+    this.name = 'NarrativeRefusal';
+  }
+}
+
+const NARRATIVE_SELECT = {
+  id: true,
+  status: true,
+  problem_family: true,
+  secondary_families: true,
+  persona: true,
+  observation: true,
+  problem_hypothesis: true,
+  root_cause_hypotheses: true,
+  impact_hypotheses: true,
+  why_now: true,
+  falsification_questions: true,
+  what_a_no_means: true,
+  contrary_evidence: true,
+  predicted_buyer_language: true,
+  buying_center: true,
+  confidence: true,
+  signals: { select: { signal_id: true, role: true } },
+} as const;
+
+function sameValue(a: unknown, b: unknown): boolean {
+  return JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+}
+
 /**
  * Edit the narrative of a hypothesis that has not left draft/review_required.
- * A new observation or a new signal set is re-validated against the (new)
- * linked set and fails closed with the validator's reason. Records an `edit`
- * event in the same transaction.
+ * The read, the validation and the write all happen inside ONE transaction:
+ * the row is loaded through `tx`, the update carries an optimistic
+ * `status: { in: [draft, review_required] }` predicate, and a zero-row match
+ * (a patch racing an approve) rolls back and surfaces as `narrative_frozen`,
+ * never as a thrown error. A new observation or signal set is re-validated
+ * against the (new) linked set and fails closed with the validator's reason.
+ * The `edit` event payload records `{ before, after }` per changed field.
  */
 export async function updateDraftNarrative(
   prisma: any,
@@ -553,69 +611,75 @@ export async function updateDraftNarrative(
   patch: NarrativePatch,
   actor: string,
 ): Promise<NarrativeResult> {
-  const row = await prisma.prospectingHypothesis.findUnique({
-    where: { id },
-    select: {
-      id: true,
-      status: true,
-      observation: true,
-      signals: { select: { signal_id: true, role: true } },
-    },
-  });
-  if (!row) return { ok: false, reason: 'not_found' };
-  if (!EDITABLE_STATUSES.includes(row.status)) return { ok: false, reason: 'narrative_frozen' };
-
-  const currentIds: string[] = (row.signals ?? []).map((link: any) => link.signal_id);
-  const nextIds = patch.signalIds ?? currentIds;
-
+  const fields = Object.keys(patch).filter((key) => (patch as Record<string, unknown>)[key] !== undefined);
+  if (fields.length === 0) return { ok: false, reason: 'empty_patch' };
+  if (patch.confidence !== undefined && !isConfidence(patch.confidence)) {
+    return { ok: false, reason: 'bad_confidence' };
+  }
   if (patch.signalIds !== undefined) {
     if (patch.signalIds.length === 0) return { ok: false, reason: 'no_signals' };
     const unknown = await firstUnknownSignal(prisma, patch.signalIds);
     if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
   }
 
-  if (patch.observation !== undefined || patch.signalIds !== undefined) {
-    const observation = validateObservation(patch.observation ?? row.observation, nextIds);
-    if (!observation.ok) return { ok: false, reason: observation.reason };
-  }
+  try {
+    const status: HypothesisStatus = await prisma.$transaction(async (tx: any) => {
+      const row = await tx.prospectingHypothesis.findUnique({ where: { id }, select: NARRATIVE_SELECT });
+      if (!row) throw new NarrativeRefusal('not_found');
+      if (!EDITABLE_STATUSES.includes(row.status)) throw new NarrativeRefusal('narrative_frozen');
 
-  if (patch.confidence !== undefined && !isConfidence(patch.confidence)) {
-    return { ok: false, reason: 'bad_confidence' };
-  }
+      const currentIds: string[] = (row.signals ?? []).map((link: any) => link.signal_id);
+      const currentPrimary: string | null =
+        (row.signals ?? []).find((link: any) => link.role === 'primary')?.signal_id ?? null;
+      const nextIds = patch.signalIds ?? currentIds;
+      const nextPrimary = patch.primarySignalId !== undefined ? patch.primarySignalId : currentPrimary;
 
-  const data: Record<string, unknown> = {};
-  for (const key of Object.keys(NARRATIVE_COLUMNS) as Array<keyof typeof NARRATIVE_COLUMNS>) {
-    if (patch[key] !== undefined) data[NARRATIVE_COLUMNS[key]] = patch[key];
-  }
+      if (patch.observation !== undefined || patch.signalIds !== undefined) {
+        const observation = validateObservation(patch.observation ?? row.observation, nextIds);
+        if (!observation.ok) throw new NarrativeRefusal(observation.reason);
+      }
 
-  const fields = Object.keys(patch).filter((key) => (patch as Record<string, unknown>)[key] !== undefined);
-  if (fields.length === 0) return { ok: false, reason: 'empty_patch' };
+      const data: Record<string, unknown> = {};
+      const changes: Record<string, { before: unknown; after: unknown }> = {};
+      for (const key of Object.keys(NARRATIVE_COLUMNS) as Array<keyof typeof NARRATIVE_COLUMNS>) {
+        if (patch[key] === undefined) continue;
+        const column = NARRATIVE_COLUMNS[key];
+        data[column] = patch[key];
+        if (!sameValue(row[column], patch[key])) changes[key] = { before: row[column] ?? null, after: patch[key] };
+      }
+      if (patch.signalIds !== undefined && !sameValue(currentIds, nextIds)) {
+        changes.signalIds = { before: currentIds, after: nextIds };
+      }
+      if (patch.primarySignalId !== undefined && !sameValue(currentPrimary, nextPrimary)) {
+        changes.primarySignalId = { before: currentPrimary, after: nextPrimary };
+      }
 
-  const replaceJoins = patch.signalIds !== undefined;
-  const primarySignalId =
-    patch.primarySignalId !== undefined
-      ? patch.primarySignalId
-      : ((row.signals ?? []).find((link: any) => link.role === 'primary')?.signal_id ?? null);
+      const moved = await tx.prospectingHypothesis.updateMany({
+        where: { id, status: { in: [...EDITABLE_STATUSES] } },
+        data,
+      });
+      if (moved.count !== 1) throw new NarrativeRefusal('narrative_frozen');
 
-  await prisma.$transaction(async (tx: any) => {
-    if (Object.keys(data).length > 0) {
-      await tx.prospectingHypothesis.update({ where: { id }, data });
-    }
-    if (replaceJoins) {
-      await tx.hypothesisSignal.deleteMany({ where: { hypothesis_id: id } });
-      await tx.hypothesisSignal.createMany({ data: joinRows(id, nextIds, primarySignalId, actor) });
-    }
-    await recordHypothesisEvent(prisma, tx, {
-      hypothesisId: id,
-      fromStatus: row.status,
-      toStatus: row.status,
-      action: 'edit',
-      actor,
-      payload: { fields },
+      if (patch.signalIds !== undefined || patch.primarySignalId !== undefined) {
+        await tx.hypothesisSignal.deleteMany({ where: { hypothesis_id: id } });
+        await tx.hypothesisSignal.createMany({ data: joinRows(id, nextIds, nextPrimary, actor) });
+      }
+
+      await recordHypothesisEvent(prisma, tx, {
+        hypothesisId: id,
+        fromStatus: row.status,
+        toStatus: row.status,
+        action: 'edit',
+        actor,
+        payload: { fields, changes },
+      });
+      return row.status;
     });
-  });
-
-  return { ok: true, id, status: row.status };
+    return { ok: true, id, status };
+  } catch (error) {
+    if (error instanceof NarrativeRefusal) return { ok: false, reason: error.reason };
+    throw error;
+  }
 }
 
 // ---------------------------------------------------------------------------
