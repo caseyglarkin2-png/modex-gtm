@@ -59,3 +59,7 @@ enforced HERE:
   "%s | YardFlow by FreightRoll" — no em dash.
 - **Deploy:** push main → Vercel; verify the LIVE yardflow.ai/demo/* pages
   after (the proxy adds failure modes the preview doesn't show).
+
+## GAP Prospecting OS (2026-09-23)
+
+The hypothesis, BID, disposition, routing and learning layer lives under `src/lib/gap/**`, `src/app/gap/**`, `src/app/api/gap/**`, `scripts/gap/**` and `tests/unit/gap/**`, behind the call-time `GAP_*` flags in `src/lib/gap/flags.ts` (all default off; with them unset every GAP surface answers 404 and no GAP code writes anything). The living spec and ticket ledger is `docs/GAP_PROSPECTING_OS.md`; do not create a second plan. Schema invariants live in `prisma/sql/2026-09-23-gap-os.sql` and must be re-applied after every `prisma db push`, then proven with `scripts/gap/verify-triggers.ts`. The Sprint 1 demo is `scripts/gap/e2e-sprint1.ts` (scratch database only; it refuses any other host).
