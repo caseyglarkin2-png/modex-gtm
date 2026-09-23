@@ -63,7 +63,7 @@ export function HypothesisList({ items, status }: HypothesisListProps) {
     }
   }
 
-  async function afterTransition(_result: TransitionResponse) {
+  async function afterTransition(_result: TransitionResponse | null) {
     if (selected) {
       try {
         setSelected(await fetchRow(selected.id));
@@ -155,7 +155,7 @@ export function HypothesisList({ items, status }: HypothesisListProps) {
       )}
 
       {selected ? (
-        <HypothesisDrawer hypothesis={selected} onClose={() => setSelected(null)} onTransition={(result) => void afterTransition(result)} />
+        <HypothesisDrawer hypothesis={selected} onClose={() => setSelected(null)} onTransition={(result) => void afterTransition(result)} onChanged={() => void afterTransition(null)} />
       ) : null}
     </div>
   );

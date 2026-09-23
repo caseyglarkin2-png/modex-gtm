@@ -17,8 +17,12 @@
  * close_unresolved) are disabled until a reason is typed. The server still
  * decides; these gates only stop the obvious 409s.
  *
- * Fact registration lives on the account page (Sprint 2). There is no
- * signals endpoint yet, so nothing here creates a signal.
+ * Facts are registered and linked from the Signals section through
+ * <AddFactForm> (S2-T10): POST /api/gap/signals, then POST
+ * /api/gap/hypotheses/{id}/signals. After a link the drawer asks its owner
+ * to refetch through `onChanged`; an owner that only wired `onTransition`
+ * gets a same-status result with the `signals_linked` effect, which the
+ * list page already answers with a refetch.
  */
 
 import { useState } from 'react';
@@ -29,6 +33,7 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LEGAL_TRANSITIONS, isTerminalStatus, type HypothesisAction, type HypothesisStatus, type ResolutionOutcome } from '@/lib/gap/hypothesis/machine';
 import { extractCitationIds } from '@/lib/gap/hypothesis/observation';
+import { AddFactForm } from './add-fact-form';
 import { FactBlock, HypothesisBlock, type FactSignal } from './fact-hypothesis-blocks';
 
 // ---------------------------------------------------------------------------
@@ -89,6 +94,8 @@ export interface HypothesisDrawerProps {
   hypothesis: HypothesisRow;
   onClose: () => void;
   onTransition: (result: TransitionResponse) => void;
+  /** The row changed without a status move (a fact was linked). Falls back to `onTransition` with a same-status result. */
+  onChanged?: () => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -180,7 +187,7 @@ export function hasCitedFact(hypothesis: Pick<HypothesisRow, 'observation' | 'si
 // Component
 // ---------------------------------------------------------------------------
 
-export function HypothesisDrawer({ hypothesis, onClose, onTransition }: HypothesisDrawerProps) {
+export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged }: HypothesisDrawerProps) {
   const [reason, setReason] = useState('');
   const [outcome, setOutcome] = useState<ResolutionOutcome>('confirmed');
   const [busy, setBusy] = useState<HypothesisAction | null>(null);
@@ -232,6 +239,11 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition }: Hypothes
     }
   }
 
+  function afterFactLinked() {
+    if (onChanged) onChanged();
+    else onTransition({ from: status, to: status, effects: ['signals_linked'] });
+  }
+
   function disabledFor(action: HypothesisAction): { disabled: boolean; title?: string } {
     if (busy !== null) return { disabled: true };
     if (EVIDENCE_ACTIONS.has(action) && !evidenced) return { disabled: true, title: NEEDS_CITED_FACT };
@@ -269,7 +281,6 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition }: Hypothes
 
         <section className="mt-6" data-testid="hypothesis-signals">
           <h3 className="text-sm font-semibold">Signals ({links.length})</h3>
-          <p className="mt-1 text-xs text-[var(--muted-foreground)]">Register facts from the account page (Sprint 2)</p>
           {links.length === 0 ? (
             <p className="mt-2 text-sm italic text-[var(--muted-foreground)]">No signals linked</p>
           ) : (
@@ -304,6 +315,14 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition }: Hypothes
               })}
             </ul>
           )}
+          {!terminal ? (
+            <AddFactForm
+              hypothesisId={hypothesis.id}
+              accountName={hypothesis.account_name}
+              status={status}
+              onLinked={afterFactLinked}
+            />
+          ) : null}
         </section>
 
         {!terminal ? (

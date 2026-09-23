@@ -317,6 +317,41 @@ describe('<HypothesisDrawer>', () => {
     expect(within(events).getByText('propose')).toBeInTheDocument();
     expect(within(events).getByText('casey@freightroll.com')).toBeInTheDocument();
     expect(within(events).getByText(/draft/)).toBeInTheDocument();
-    expect(screen.getByText('Register facts from the account page (Sprint 2)')).toBeInTheDocument();
+    expect(screen.queryByText('Register facts from the account page (Sprint 2)')).toBeNull();
+    expect(within(signals).getByTestId('add-fact-form')).toBeInTheDocument();
+  });
+
+  it('a linked fact asks the owner to refetch: onChanged when given, else onTransition with a same-status signals_linked result', async () => {
+    fetchMock
+      .mockResolvedValueOnce(jsonResponse({ id: 'sig_new', created: true }, 201))
+      .mockResolvedValueOnce(jsonResponse({ linked: ['sig_new'], already: [] }, 200));
+    const onTransition = vi.fn();
+    const onChanged = vi.fn();
+    const { unmount } = render(
+      <HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={onTransition} onChanged={onChanged} />,
+    );
+    fireEvent.change(screen.getByLabelText('What you know'), { target: { value: 'A fact.' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add fact' }));
+    await waitFor(() => expect(onChanged).toHaveBeenCalledTimes(1));
+    expect(onTransition).not.toHaveBeenCalled();
+    unmount();
+
+    fetchMock
+      .mockResolvedValueOnce(jsonResponse({ id: 'sig_new', created: true }, 201))
+      .mockResolvedValueOnce(jsonResponse({ linked: ['sig_new'], already: [] }, 200));
+    render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={onTransition} />);
+    fireEvent.change(screen.getByLabelText('What you know'), { target: { value: 'A fact.' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add fact' }));
+    await waitFor(() => expect(onTransition).toHaveBeenCalledWith({ from: 'draft', to: 'draft', effects: ['signals_linked'] }));
+  });
+
+  it('a terminal status renders no add-fact form; an active one renders it frozen with the hint', () => {
+    const { unmount } = render(<HypothesisDrawer hypothesis={row({ status: 'rejected' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+    expect(screen.queryByTestId('add-fact-form')).toBeNull();
+    unmount();
+
+    render(<HypothesisDrawer hypothesis={row({ status: 'active' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+    expect(screen.getByTestId('add-fact-frozen')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add fact' })).toBeDisabled();
   });
 });

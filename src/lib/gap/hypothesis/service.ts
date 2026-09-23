@@ -683,6 +683,144 @@ export async function updateDraftNarrative(
 }
 
 // ---------------------------------------------------------------------------
+// signal links (S2-T10)
+// ---------------------------------------------------------------------------
+
+export type LinkSignalsResult =
+  | { ok: true; id: string; status: HypothesisStatus; linked: string[]; already: string[] }
+  | { ok: false; reason: string };
+
+export type UnlinkSignalResult =
+  | { ok: true; id: string; status: HypothesisStatus; unlinked: string }
+  | { ok: false; reason: string };
+
+const LINK_SELECT = {
+  id: true,
+  status: true,
+  observation: true,
+  signals: { select: { signal_id: true, role: true } },
+} as const;
+
+/**
+ * Append the `edit` event for a join change. Same payload shape as
+ * updateDraftNarrative (`fields` + `changes` with before/after) so the
+ * history reads one way whichever path changed the links.
+ */
+async function recordLinkEdit(
+  prisma: any,
+  tx: any,
+  id: string,
+  status: HypothesisStatus,
+  actor: string,
+  before: string[],
+  after: string[],
+): Promise<void> {
+  await recordHypothesisEvent(prisma, tx, {
+    hypothesisId: id,
+    fromStatus: status,
+    toStatus: status,
+    action: 'edit',
+    actor,
+    payload: { fields: ['signalIds'], changes: { signalIds: { before, after } } },
+  });
+}
+
+/**
+ * Take the optimistic status lock on a row that must still be editable. An
+ * empty `data` is a deliberate no-op update: Prisma bumps `updated_at` and
+ * the WHERE predicate is what matters. A zero-row match means the row moved
+ * past review between our read and this write.
+ */
+async function lockEditable(tx: any, id: string): Promise<void> {
+  const moved = await tx.prospectingHypothesis.updateMany({
+    where: { id, status: { in: [...EDITABLE_STATUSES] } },
+    data: {},
+  });
+  if (moved.count !== 1) throw new NarrativeRefusal('narrative_frozen');
+}
+
+/**
+ * Link signals to a hypothesis that has not left draft/review_required.
+ * Idempotent: ids already on the row are reported in `already` and never
+ * rewritten; when nothing is new, nothing is written and no event lands.
+ * New links are `supporting`; the primary is chosen through the narrative
+ * patch. Unknown ids refuse before the transaction as `unknown_signal:<id>`.
+ */
+export async function linkSignals(
+  prisma: any,
+  id: string,
+  signalIds: readonly string[],
+  actor: string,
+): Promise<LinkSignalsResult> {
+  const requested = Array.from(new Set(signalIds));
+  if (requested.length === 0) return { ok: false, reason: 'no_signals' };
+  const unknown = await firstUnknownSignal(prisma, requested);
+  if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
+
+  try {
+    return await prisma.$transaction(async (tx: any): Promise<LinkSignalsResult> => {
+      const row = await tx.prospectingHypothesis.findUnique({ where: { id }, select: LINK_SELECT });
+      if (!row) throw new NarrativeRefusal('not_found');
+      if (!EDITABLE_STATUSES.includes(row.status)) throw new NarrativeRefusal('narrative_frozen');
+
+      const currentIds: string[] = (row.signals ?? []).map((link: any) => link.signal_id);
+      const current = new Set(currentIds);
+      const linked = requested.filter((signalId) => !current.has(signalId));
+      const already = requested.filter((signalId) => current.has(signalId));
+      if (linked.length === 0) return { ok: true, id, status: row.status, linked, already };
+
+      await lockEditable(tx, id);
+      await tx.hypothesisSignal.createMany({ data: joinRows(id, linked, null, actor) });
+      await recordLinkEdit(prisma, tx, id, row.status, actor, currentIds, [...currentIds, ...linked]);
+      return { ok: true, id, status: row.status, linked, already };
+    });
+  } catch (error) {
+    if (error instanceof NarrativeRefusal) return { ok: false, reason: error.reason };
+    throw error;
+  }
+}
+
+/**
+ * Remove one signal link from a hypothesis that has not left
+ * draft/review_required. The observation is re-validated against the
+ * post-unlink set INSIDE the transaction, and an observation that still
+ * cites the signal refuses `unlinked_citation` before any write. Other
+ * validator reasons (an empty observation, an uncited sentence) are not
+ * caused by the unlink and do not block it.
+ */
+export async function unlinkSignal(
+  prisma: any,
+  id: string,
+  signalId: string,
+  actor: string,
+): Promise<UnlinkSignalResult> {
+  try {
+    return await prisma.$transaction(async (tx: any): Promise<UnlinkSignalResult> => {
+      const row = await tx.prospectingHypothesis.findUnique({ where: { id }, select: LINK_SELECT });
+      if (!row) throw new NarrativeRefusal('not_found');
+      if (!EDITABLE_STATUSES.includes(row.status)) throw new NarrativeRefusal('narrative_frozen');
+
+      const currentIds: string[] = (row.signals ?? []).map((link: any) => link.signal_id);
+      if (!currentIds.includes(signalId)) throw new NarrativeRefusal('not_linked');
+      const nextIds = currentIds.filter((current) => current !== signalId);
+
+      const observation = validateObservation(row.observation ?? '', nextIds);
+      if (!observation.ok && observation.reason === 'unlinked_citation') {
+        throw new NarrativeRefusal('unlinked_citation');
+      }
+
+      await lockEditable(tx, id);
+      await tx.hypothesisSignal.deleteMany({ where: { hypothesis_id: id, signal_id: signalId } });
+      await recordLinkEdit(prisma, tx, id, row.status, actor, currentIds, nextIds);
+      return { ok: true, id, status: row.status, unlinked: signalId };
+    });
+  } catch (error) {
+    if (error instanceof NarrativeRefusal) return { ok: false, reason: error.reason };
+    throw error;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // expiry sweep
 // ---------------------------------------------------------------------------
 

@@ -2,9 +2,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   expireDue,
+  linkSignals,
   loadSnapshot,
   proposeHypothesis,
   transitionHypothesis,
+  unlinkSignal,
   updateDraftNarrative,
   type ProposeInput,
 } from '@/lib/gap/hypothesis/service';
@@ -792,6 +794,202 @@ describe('updateDraftNarrative', () => {
       reason: 'bad_confidence',
     });
     expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+});
+
+describe('linkSignals', () => {
+  let prisma: Prisma;
+  /** The link row as the in-transaction findUnique returns it. */
+  function linkRow(overrides: Record<string, unknown> = {}) {
+    return {
+      id: 'H1',
+      status: 'draft',
+      observation: 'They opened a second DC in Ohio [S:S1].',
+      signals: [{ signal_id: 'S1', role: 'primary' }],
+      ...overrides,
+    };
+  }
+  beforeEach(() => {
+    prisma = makePrisma();
+    prisma.prospectingSignal.findMany.mockImplementation(async (args: { where: { id: { in: string[] } } }) =>
+      args.where.id.in.filter((id) => ['S1', 'S2', 'S3'].includes(id)).map((id) => ({ id })),
+    );
+    prisma.tx.prospectingHypothesis.updateMany.mockResolvedValue({ count: 1 });
+    prisma.tx.hypothesisSignal.createMany.mockResolvedValue({ count: 1 });
+  });
+
+  it('no_signals on an empty list and unknown_signal:<id> before any transaction', async () => {
+    expect(await linkSignals(prisma, 'H1', [], 'casey')).toEqual({ ok: false, reason: 'no_signals' });
+    expect(await linkSignals(prisma, 'H1', ['S2', 'S9'], 'casey')).toEqual({ ok: false, reason: 'unknown_signal:S9' });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+
+  it('narrative_frozen on an active row: read inside tx, zero writes', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow({ status: 'active' }));
+    const out = await linkSignals(prisma, 'H1', ['S2'], 'casey');
+    expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
+    expect(prisma.tx.prospectingHypothesis.findUnique).toHaveBeenCalledTimes(1);
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('narrative_frozen when the link races an approve: the status-in predicate matches nothing, no join rows, no event', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow({ status: 'review_required' }));
+    prisma.tx.prospectingHypothesis.updateMany.mockResolvedValue({ count: 0 });
+    const out = await linkSignals(prisma, 'H1', ['S2'], 'casey');
+    expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
+      where: { id: 'H1', status: { in: ['draft', 'review_required'] } },
+      data: {},
+    });
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('not_found when the row is missing', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(null);
+    expect(await linkSignals(prisma, 'H1', ['S2'], 'casey')).toEqual({ ok: false, reason: 'not_found' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+  });
+
+  it('idempotent relink: an already-linked id is reported in `already`, nothing is written', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow());
+    const out = await linkSignals(prisma, 'H1', ['S1', 'S1'], 'casey');
+    expect(out).toEqual({ ok: true, id: 'H1', status: 'draft', linked: [], already: ['S1'] });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('happy path: only the new ids become supporting join rows after the count check; the edit event carries before/after', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow({ status: 'review_required' }));
+    const out = await linkSignals(prisma, 'H1', ['S1', 'S2', 'S3', 'S2'], 'casey');
+    expect(out).toEqual({ ok: true, id: 'H1', status: 'review_required', linked: ['S2', 'S3'], already: ['S1'] });
+
+    expect(prisma.$transaction).toHaveBeenCalledTimes(1);
+    expect(prisma.tx.hypothesisSignal.createMany).toHaveBeenCalledWith({
+      data: [
+        { hypothesis_id: 'H1', signal_id: 'S2', role: 'supporting', linked_by: 'casey' },
+        { hypothesis_id: 'H1', signal_id: 'S3', role: 'supporting', linked_by: 'casey' },
+      ],
+    });
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    const updateOrder = prisma.tx.prospectingHypothesis.updateMany.mock.invocationCallOrder[0];
+    const createOrder = prisma.tx.hypothesisSignal.createMany.mock.invocationCallOrder[0];
+    expect(updateOrder).toBeLessThan(createOrder);
+
+    expect(prisma.tx.hypothesisEvent.create.mock.calls[0][0].data).toEqual({
+      hypothesis_id: 'H1',
+      from_status: 'review_required',
+      to_status: 'review_required',
+      action: 'edit',
+      actor: 'casey',
+      reason: null,
+      payload: {
+        fields: ['signalIds'],
+        changes: { signalIds: { before: ['S1'], after: ['S1', 'S2', 'S3'] } },
+      },
+    });
+    expect(prisma.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+});
+
+describe('unlinkSignal', () => {
+  let prisma: Prisma;
+  function linkRow(overrides: Record<string, unknown> = {}) {
+    return {
+      id: 'H1',
+      status: 'draft',
+      observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+      signals: [
+        { signal_id: 'S1', role: 'primary' },
+        { signal_id: 'S2', role: 'supporting' },
+      ],
+      ...overrides,
+    };
+  }
+  beforeEach(() => {
+    prisma = makePrisma();
+    prisma.tx.prospectingHypothesis.updateMany.mockResolvedValue({ count: 1 });
+    prisma.tx.hypothesisSignal.deleteMany.mockResolvedValue({ count: 1 });
+  });
+
+  it('narrative_frozen on an approved row: zero writes', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow({ status: 'approved' }));
+    const out = await unlinkSignal(prisma, 'H1', 'S2', 'casey');
+    expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('not_linked when the id is not on the row, with zero writes', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow());
+    expect(await unlinkSignal(prisma, 'H1', 'S9', 'casey')).toEqual({ ok: false, reason: 'not_linked' });
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+  });
+
+  it('unlinked_citation when the observation still cites the signal: the post-unlink set is what the validator sees, zero writes', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow());
+    const out = await unlinkSignal(prisma, 'H1', 'S2', 'casey');
+    expect(out).toEqual({ ok: false, reason: 'unlinked_citation' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('unlinking the last signal refuses unlinked_citation while the observation cites it, and succeeds once the observation is empty', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(
+      linkRow({ observation: 'Only fact [S:S1].', signals: [{ signal_id: 'S1', role: 'primary' }] }),
+    );
+    expect(await unlinkSignal(prisma, 'H1', 'S1', 'casey')).toEqual({ ok: false, reason: 'unlinked_citation' });
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(
+      linkRow({ observation: '', signals: [{ signal_id: 'S1', role: 'primary' }] }),
+    );
+    expect(await unlinkSignal(prisma, 'H1', 'S1', 'casey')).toEqual({ ok: true, id: 'H1', status: 'draft', unlinked: 'S1' });
+    expect(prisma.tx.hypothesisSignal.deleteMany).toHaveBeenCalledWith({ where: { hypothesis_id: 'H1', signal_id: 'S1' } });
+  });
+
+  it('narrative_frozen when the unlink races an approve: status-in predicate matches nothing, no delete, no event', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(
+      linkRow({ status: 'review_required', observation: 'They opened a second DC in Ohio [S:S1].' }),
+    );
+    prisma.tx.prospectingHypothesis.updateMany.mockResolvedValue({ count: 0 });
+    const out = await unlinkSignal(prisma, 'H1', 'S2', 'casey');
+    expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
+      where: { id: 'H1', status: { in: ['draft', 'review_required'] } },
+      data: {},
+    });
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('happy path: an uncited signal is removed after the count check; the edit event carries before/after', async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(
+      linkRow({ status: 'review_required', observation: 'They opened a second DC in Ohio [S:S1].' }),
+    );
+    const out = await unlinkSignal(prisma, 'H1', 'S2', 'casey');
+    expect(out).toEqual({ ok: true, id: 'H1', status: 'review_required', unlinked: 'S2' });
+    expect(prisma.tx.hypothesisSignal.deleteMany).toHaveBeenCalledWith({ where: { hypothesis_id: 'H1', signal_id: 'S2' } });
+    const updateOrder = prisma.tx.prospectingHypothesis.updateMany.mock.invocationCallOrder[0];
+    const deleteOrder = prisma.tx.hypothesisSignal.deleteMany.mock.invocationCallOrder[0];
+    expect(updateOrder).toBeLessThan(deleteOrder);
+    expect(prisma.tx.hypothesisEvent.create.mock.calls[0][0].data).toEqual({
+      hypothesis_id: 'H1',
+      from_status: 'review_required',
+      to_status: 'review_required',
+      action: 'edit',
+      actor: 'casey',
+      reason: null,
+      payload: {
+        fields: ['signalIds'],
+        changes: { signalIds: { before: ['S1', 'S2'], after: ['S1'] } },
+      },
+    });
   });
 });
 
