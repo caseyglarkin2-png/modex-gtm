@@ -5,13 +5,20 @@
  * real client, and NODE_ENV=test keeps the external-write guard armed for the
  * one test that exercises it on purpose.
  */
+import fs from 'node:fs';
+import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 import {
+  dispositionMirrorKey,
+  dispositionNoteBody,
   hypothesisNoteBody,
+  mirrorDisposition,
   mirrorHypothesisEvent,
   mirrorKey,
   statusForAction,
   type MirrorDeps,
+  type MirrorDispositionDeps,
+  type MirrorDispositionInput,
   type MirrorEvent,
 } from '@/lib/gap/hubspot-mirror';
 import { PROBLEM_FAMILIES, RESPONSE_CLASSES } from '@/lib/gap/taxonomy';
@@ -526,5 +533,365 @@ describe('ensureGapProperties (src/lib/hubspot/properties)', () => {
     await expect(ensureGapProperties(client as never)).rejects.toThrow('HubSpot 500');
     await expect(ensureGapProperties(client as never)).resolves.toBeUndefined();
     expect(create).toHaveBeenCalledTimes(5);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// S4-T6: contact-level mirror for dispositions.
+// ---------------------------------------------------------------------------
+
+function makeDisposition(overrides: Partial<MirrorDispositionInput> = {}): MirrorDispositionInput {
+  return {
+    dispositionId: 'disp_1',
+    hubspotContactId: '5001',
+    responseClass: 'problem_confirmed',
+    confirmedAt: new Date('2026-09-23T11:30:00Z'),
+    hypothesisId: 'hyp_1',
+    accountName: 'Acme Foods',
+    summary: 'problem_confirmed via email on "Ohio DC runs the old gate process"',
+    channel: 'email',
+    hypothesisTitle: 'Ohio DC runs the old gate process',
+    ...overrides,
+  };
+}
+
+type DispPrismaStub = {
+  gapHubSpotMirror: { findUnique: ReturnType<typeof vi.fn>; upsert: ReturnType<typeof vi.fn> };
+  conversationDisposition: { findFirst: ReturnType<typeof vi.fn> };
+};
+
+function makeDispPrisma(
+  existing: { key: string; error: string | null; note_id?: string | null } | null = null,
+  newer: { id: string } | null = null,
+): DispPrismaStub {
+  return {
+    gapHubSpotMirror: {
+      findUnique: vi.fn().mockResolvedValue(existing),
+      upsert: vi.fn().mockImplementation(async (args: { create: unknown }) => args.create),
+    },
+    conversationDisposition: { findFirst: vi.fn().mockResolvedValue(newer) },
+  };
+}
+
+type MockedDispDeps = MirrorDispositionDeps & {
+  createContactNote: Mock<(contactId: string, body: string) => Promise<string | null>>;
+  updateContactProperties: Mock<(contactId: string, properties: Record<string, string>) => Promise<unknown>>;
+  ensureGapProperties: Mock<() => Promise<void>>;
+};
+
+function makeDispDeps(overrides: Partial<MirrorDispositionDeps> = {}): MockedDispDeps {
+  const defaults: MockedDispDeps = {
+    createContactNote: vi.fn<(contactId: string, body: string) => Promise<string | null>>(async () => 'note_91'),
+    updateContactProperties: vi.fn<(contactId: string, properties: Record<string, string>) => Promise<unknown>>(
+      async () => undefined,
+    ),
+    ensureGapProperties: vi.fn(async () => undefined),
+    syncEnabled: () => true,
+    assertWriteAllowed: () => undefined,
+    now: () => new Date('2026-09-23T12:00:00Z'),
+  };
+  return { ...defaults, ...overrides } as MockedDispDeps;
+}
+
+function hubspotCallCount(deps: MockedDispDeps): number {
+  return (
+    deps.ensureGapProperties.mock.calls.length +
+    deps.createContactNote.mock.calls.length +
+    deps.updateContactProperties.mock.calls.length
+  );
+}
+
+type RecordedRow = { error: string | null; note_id: string | null };
+function recordedRows(prisma: DispPrismaStub): RecordedRow[] {
+  return prisma.gapHubSpotMirror.upsert.mock.calls.map((c) => (c as [{ create: RecordedRow }])[0].create);
+}
+
+describe('dispositionNoteBody', () => {
+  it('carries the class, channel, account, hypothesis title, summary and the gap:disp marker; never an em dash', () => {
+    const body = dispositionNoteBody({ key: 'gap:disp:disp_1', ...makeDisposition() });
+    expect(body).toContain('<b>GAP · DISPOSITION PROBLEM_CONFIRMED</b> <i>(email, 2026-09-23T11:30:00.000Z)</i>');
+    expect(body).toContain('<br>Account: Acme Foods');
+    expect(body).toContain('<br>Hypothesis: Ohio DC runs the old gate process');
+    expect(body).toContain('<br>Summary: problem_confirmed via email on &quot;Ohio DC runs the old gate process&quot;');
+    expect(body).toContain('<span style="color:#888">gap:disp:disp_1</span>');
+    expect(body).not.toContain('—');
+  });
+
+  it('falls back to the hypothesis id and "unknown channel", and escapes HTML', () => {
+    const body = dispositionNoteBody({
+      key: 'k',
+      ...makeDisposition({ channel: undefined, hypothesisTitle: undefined, summary: '<b>x</b>' }),
+    });
+    expect(body).toContain('(unknown channel, ');
+    expect(body).toContain('<br>Hypothesis: hyp_1');
+    expect(body).toContain('Summary: &lt;b&gt;x&lt;/b&gt;');
+  });
+
+  it('withholds a summary or title that carries a private-intent token', () => {
+    const body = dispositionNoteBody({
+      key: 'k',
+      ...makeDisposition({
+        summary: 'problem_confirmed after they visited our demo page',
+        hypothesisTitle: 'intent_score 80 on /demo/acme',
+      }),
+    });
+    expect(body).not.toContain('visited our demo');
+    expect(body).not.toContain('/demo/');
+    expect(body).not.toContain('intent_score');
+    expect(body).toContain('Summary: (withheld: private intent token)');
+    expect(body).toContain('Hypothesis: (withheld: private intent token)');
+  });
+
+  it('has no input for the buyer raw language', () => {
+    const src = fs.readFileSync(path.join(process.cwd(), 'src/lib/gap/hubspot-mirror.ts'), 'utf8');
+    const start = src.indexOf('export function dispositionNoteBody');
+    const end = src.indexOf('export async function mirrorDisposition');
+    expect(start).toBeGreaterThan(0);
+    expect(src.slice(start, end)).not.toMatch(/buyerLanguage|buyer_language/);
+  });
+});
+
+describe('mirrorDisposition gates (in order, with call counts)', () => {
+  it('GAP_OS_ENABLED off -> skipped:gap_disabled, zero prisma and zero HubSpot calls', async () => {
+    delete process.env.GAP_OS_ENABLED;
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps();
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({ status: 'skipped:gap_disabled' });
+    expect(prisma.gapHubSpotMirror.findUnique).toHaveBeenCalledTimes(0);
+    expect(hubspotCallCount(deps)).toBe(0);
+  });
+
+  it('GAP_HUBSPOT_MIRROR_ENABLED off -> skipped:gap_mirror_disabled with zero calls, even with sync on', async () => {
+    delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps({ syncEnabled: () => true });
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({ status: 'skipped:gap_mirror_disabled' });
+    expect(prisma.gapHubSpotMirror.findUnique).toHaveBeenCalledTimes(0);
+    expect(prisma.gapHubSpotMirror.upsert).toHaveBeenCalledTimes(0);
+    expect(hubspotCallCount(deps)).toBe(0);
+  });
+
+  it('the mirror flag is checked before HUBSPOT_SYNC_ENABLED', async () => {
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'false';
+    const result = await mirrorDisposition(makeDispPrisma(), makeDisposition(), makeDispDeps({ syncEnabled: () => false }));
+    expect(result.status).toBe('skipped:gap_mirror_disabled');
+  });
+
+  it('sync off -> skipped:hubspot_sync_disabled, zero calls', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps({ syncEnabled: () => false });
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({ status: 'skipped:hubspot_sync_disabled' });
+    expect(prisma.gapHubSpotMirror.findUnique).toHaveBeenCalledTimes(0);
+    expect(hubspotCallCount(deps)).toBe(0);
+  });
+
+  it('no contact id -> skipped:no_contact_id before the row lookup, zero calls', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps();
+    const result = await mirrorDisposition(prisma, makeDisposition({ hubspotContactId: null }), deps);
+    expect(result).toEqual({ status: 'skipped:no_contact_id' });
+    expect(prisma.gapHubSpotMirror.findUnique).toHaveBeenCalledTimes(0);
+    expect(hubspotCallCount(deps)).toBe(0);
+  });
+});
+
+describe('mirrorDisposition idempotency', () => {
+  it('builds the documented key', () => {
+    expect(dispositionMirrorKey('disp_1')).toBe('gap:disp:disp_1');
+  });
+
+  it('second call with an existing error-free row -> skipped:already_mirrored and ZERO HubSpot calls', async () => {
+    const prisma = makeDispPrisma({ key: 'gap:disp:disp_1', error: null, note_id: 'note_old' });
+    const deps = makeDispDeps();
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({ status: 'skipped:already_mirrored', mirrorId: 'gap:disp:disp_1', noteId: 'note_old' });
+    expect(prisma.gapHubSpotMirror.findUnique).toHaveBeenCalledWith({ where: { key: 'gap:disp:disp_1' } });
+    expect(deps.ensureGapProperties).toHaveBeenCalledTimes(0);
+    expect(deps.createContactNote).toHaveBeenCalledTimes(0);
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(0);
+    expect(prisma.gapHubSpotMirror.upsert).toHaveBeenCalledTimes(0);
+  });
+
+  it('first call writes, second call (row now present) makes zero HubSpot calls', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps();
+    const first = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(first.status).toBe('written');
+    expect(hubspotCallCount(deps)).toBe(3);
+
+    prisma.gapHubSpotMirror.findUnique.mockResolvedValue(recordedRows(prisma)[0]);
+    const second = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(second.status).toBe('skipped:already_mirrored');
+    expect(hubspotCallCount(deps)).toBe(3);
+    expect(prisma.gapHubSpotMirror.upsert).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('mirrorDisposition happy path', () => {
+  it('ensures properties, writes one contact note with the marker, stamps class and ISO time, records a contact row', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps();
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+
+    expect(result).toEqual({ status: 'written', mirrorId: 'gap:disp:disp_1', noteId: 'note_91' });
+    expect(deps.ensureGapProperties).toHaveBeenCalledTimes(1);
+    expect(deps.createContactNote).toHaveBeenCalledTimes(1);
+    const [contactId, body] = deps.createContactNote.mock.calls[0] as [string, string];
+    expect(contactId).toBe('5001');
+    expect(body).toContain('gap:disp:disp_1');
+    expect(body).toContain('PROBLEM_CONFIRMED');
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(1);
+    expect(deps.updateContactProperties).toHaveBeenCalledWith('5001', {
+      yardflow_gap_last_disposition: 'problem_confirmed',
+      yardflow_gap_last_disposition_at: '2026-09-23T11:30:00.000Z',
+    });
+    expect(prisma.conversationDisposition.findFirst).toHaveBeenCalledWith({
+      where: {
+        hubspot_contact_id: '5001',
+        human_confirmed: true,
+        confirmed_at: { gt: new Date('2026-09-23T11:30:00Z') },
+        id: { not: 'disp_1' },
+      },
+      select: { id: true },
+    });
+    expect(prisma.gapHubSpotMirror.upsert).toHaveBeenCalledTimes(1);
+    const args = prisma.gapHubSpotMirror.upsert.mock.calls[0][0];
+    expect(args.where).toEqual({ key: 'gap:disp:disp_1' });
+    expect(args.create).toEqual({
+      key: 'gap:disp:disp_1',
+      object_type: 'contact',
+      object_id: '5001',
+      note_id: 'note_91',
+      written_at: new Date('2026-09-23T12:00:00Z'),
+      error: null,
+    });
+  });
+
+  it('writes the note before the property stamp', async () => {
+    const order: string[] = [];
+    const deps = makeDispDeps({
+      createContactNote: vi.fn(async () => {
+        order.push('note');
+        return 'note_91';
+      }),
+      updateContactProperties: vi.fn(async () => {
+        order.push('props');
+      }),
+    });
+    await mirrorDisposition(makeDispPrisma(), makeDisposition(), deps);
+    expect(order).toEqual(['note', 'props']);
+  });
+
+  it('recency guard: a newer confirmed disposition on the contact keeps the note but withholds the stamp', async () => {
+    const prisma = makeDispPrisma(null, { id: 'disp_2' });
+    const deps = makeDispDeps();
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({
+      status: 'written',
+      mirrorId: 'gap:disp:disp_1',
+      noteId: 'note_91',
+      propertiesSkipped: 'newer_disposition_exists',
+    });
+    expect(deps.createContactNote).toHaveBeenCalledTimes(1);
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(0);
+    expect(recordedRows(prisma)[0].error).toBeNull();
+  });
+});
+
+describe('mirrorDisposition failures (recorded, never thrown)', () => {
+  it('null note id -> error:note_id_missing recorded, NO mirror row (error null) written, no property stamp', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps({ createContactNote: vi.fn().mockResolvedValue(null) });
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({ status: 'error:note_id_missing', mirrorId: 'gap:disp:disp_1', noteId: null });
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(0);
+    const rows = recordedRows(prisma);
+    expect(rows.filter((r) => r.error === null)).toHaveLength(0);
+    expect(rows).toHaveLength(1);
+    expect(rows[0].error).toBe('note_id_missing');
+    expect(rows[0].note_id).toBeNull();
+
+    // The retry runs both halves because nothing landed.
+    prisma.gapHubSpotMirror.findUnique.mockResolvedValue({ key: 'gap:disp:disp_1', error: 'note_id_missing', note_id: null });
+    deps.createContactNote.mockResolvedValueOnce('note_92');
+    const retry = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(retry).toEqual({ status: 'written', mirrorId: 'gap:disp:disp_1', noteId: 'note_92' });
+    expect(deps.createContactNote).toHaveBeenCalledTimes(2);
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(1);
+  });
+
+  it('HubSpot throwing on the property stamp -> error:<reason> with the note id kept, no throw', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps({
+      updateContactProperties: vi.fn().mockRejectedValue(new Error('HubSpot 429: rate limited')),
+    });
+    await expect(mirrorDisposition(prisma, makeDisposition(), deps)).resolves.toEqual({
+      status: 'error:HubSpot 429: rate limited',
+      mirrorId: 'gap:disp:disp_1',
+      noteId: 'note_91',
+    });
+    const row = recordedRows(prisma)[0];
+    expect(row.error).toBe('HubSpot 429: rate limited');
+    expect(row.note_id).toBe('note_91');
+  });
+
+  it('a retry after a failed stamp reuses the recorded note id: zero new notes, one stamp, success row', async () => {
+    const prisma = makeDispPrisma({ key: 'gap:disp:disp_1', error: 'HubSpot 429: rate limited', note_id: 'note_91' });
+    const deps = makeDispDeps();
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result).toEqual({ status: 'written', mirrorId: 'gap:disp:disp_1', noteId: 'note_91' });
+    expect(deps.createContactNote).toHaveBeenCalledTimes(0);
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(1);
+    expect(prisma.gapHubSpotMirror.upsert.mock.calls[0][0].update).toEqual({
+      object_type: 'contact',
+      object_id: '5001',
+      note_id: 'note_91',
+      written_at: new Date('2026-09-23T12:00:00Z'),
+      error: null,
+    });
+  });
+
+  it('HubSpot throwing on the note -> error recorded with note_id null, no stamp attempted', async () => {
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps({ createContactNote: vi.fn().mockRejectedValue(new Error('HubSpot 500: notes down')) });
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result.status).toBe('error:HubSpot 500: notes down');
+    expect(deps.updateContactProperties).toHaveBeenCalledTimes(0);
+    expect(recordedRows(prisma)[0].note_id).toBeNull();
+  });
+
+  it('the real external-write guard blocks under NODE_ENV=test with zero HubSpot calls', async () => {
+    Object.assign(process.env, { NODE_ENV: 'test' });
+    delete process.env.ALLOW_EXTERNAL_WRITES_IN_TEST;
+    delete process.env.BLOCK_EXTERNAL_WRITES_IN_TEST;
+    const prisma = makeDispPrisma();
+    const deps = makeDispDeps({ assertWriteAllowed: undefined });
+    const result = await mirrorDisposition(prisma, makeDisposition(), deps);
+    expect(result.status).toMatch(/^error:\[external-write-guard\] blocked hubspot write in test mode: gap\.mirrorDisposition/);
+    expect(hubspotCallCount(deps)).toBe(0);
+  });
+
+  it('never throws when the mirror table is unreachable', async () => {
+    const prisma = {
+      gapHubSpotMirror: {
+        findUnique: vi.fn().mockRejectedValue(new Error('db down')),
+        upsert: vi.fn().mockRejectedValue(new Error('db down')),
+      },
+      conversationDisposition: { findFirst: vi.fn() },
+    };
+    const deps = makeDispDeps();
+    await expect(mirrorDisposition(prisma, makeDisposition(), deps)).resolves.toEqual({ status: 'error:db down' });
+    expect(hubspotCallCount(deps)).toBe(0);
+  });
+});
+
+describe('mirrorDisposition never touches pipeline stages (structural)', () => {
+  it('the mirror module source contains no "deal" and no stage or lifecycle property', () => {
+    const src = fs.readFileSync(path.join(process.cwd(), 'src/lib/gap/hubspot-mirror.ts'), 'utf8');
+    expect(src.toLowerCase()).not.toContain('deal');
+    expect(src).not.toMatch(/hs_pipeline|dealstage|lifecyclestage/i);
   });
 });
