@@ -1,0 +1,79 @@
+{
+  "run_id": "top100-fixture",
+  "schema": 1,
+  "portal": "3819073",
+  "accounts": {
+    "alpha-example-com": {
+      "key": "alpha-example-com",
+      "name": "Alpha Freight Example",
+      "domain": "alpha.example.com",
+      "company_id": "900001",
+      "tier": "A",
+      "segment": "wholesale_distribution",
+      "rank": 1,
+      "score": 90,
+      "preferred_sender": "sender@example.com",
+      "selected": true,
+      "branches": {},
+      "sequence": {
+        "hubspot_sequence_id": "311000001",
+        "name": "YF | Top100 | Alpha Freight Example",
+        "templates": { "1": "t-a1", "2": "t-a2", "3": "t-a3", "4": "t-a4" },
+        "delays_business_days": [0, 4, 5, 6],
+        "built_at": "2026-09-14T15:00:00.000Z",
+        "enrolled": 1,
+        "state": "ENROLLED",
+        "enrolled_checked_at": "2026-09-17T00:00:00.000Z"
+      }
+    },
+    "beta-example-com": {
+      "key": "beta-example-com",
+      "name": "Beta Foods Example",
+      "domain": "beta.example.com",
+      "company_id": "900002",
+      "tier": "B",
+      "segment": "food_and_beverage",
+      "rank": 2,
+      "score": 80,
+      "preferred_sender": "sender@example.com",
+      "selected": true,
+      "branches": {},
+      "sequence": {
+        "hubspot_sequence_id": "311000002",
+        "name": "YF | Top100 | Beta Foods Example",
+        "templates": { "1": "t-b1", "2": "t-b2", "3": "t-b3", "4": "t-b4" },
+        "delays_business_days": [0, 4, 5, 6],
+        "built_at": "2026-09-14T15:00:01.000Z",
+        "enrolled": 0,
+        "state": "BUILT_NOT_ENROLLED",
+        "enrolled_checked_at": "2026-09-17T00:00:00.000Z"
+      }
+    },
+    "gamma-example-com": {
+      "key": "gamma-example-com",
+      "name": "Gamma Retail Example",
+      "domain": "gamma.example.com",
+      "company_id": "900003",
+      "tier": "B",
+      "segment": "retail",
+      "rank": 3,
+      "score": 70,
+      "preferred_sender": "sender@example.com",
+      "selected": true,
+      "branches": {},
+      "sequence": {
+        "hubspot_sequence_id": "311000003",
+        "name": "YF | Top100 | Gamma Retail Example",
+        "templates": { "1": "t-g1", "2": "t-g2", "3": "t-g3", "4": "t-g4" },
+        "delays_business_days": [0, 4, 5, 6],
+        "built_at": "2026-09-14T15:00:02.000Z",
+        "enrolled": 0,
+        "state": "BUILT_NOT_ENROLLED",
+        "enrolled_checked_at": null
+      }
+    }
+  },
+  "selected_keys": ["alpha-example-com", "beta-example-com", "gamma-example-com"],
+  "reserve": [],
+  "senders": { "sender@example.com": { "status": "VERIFIED", "notes": null } }
+}
