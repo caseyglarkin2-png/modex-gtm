@@ -13,8 +13,12 @@
  * next call retries. Failures are recorded on the row and NEVER thrown to the
  * caller: mirroring must not break the hypothesis service.
  *
- * Gates, in order: GAP_OS_ENABLED (call-time), HUBSPOT_SYNC_ENABLED, a HubSpot
- * company id, the idempotency row, then assertExternalWriteAllowed.
+ * Gates, in order: GAP_OS_ENABLED (call-time), GAP_HUBSPOT_MIRROR_ENABLED
+ * (call-time, default OFF), HUBSPOT_SYNC_ENABLED, a HubSpot company id, the
+ * idempotency row, then assertExternalWriteAllowed. Both GAP flags must be on:
+ * HUBSPOT_SYNC_ENABLED defaults ON in src/lib/feature-flags.ts, so without the
+ * GAP-specific mirror flag a GAP-enabled deploy would write live notes and
+ * properties with no switch of its own.
  *
  * Every HubSpot call goes through `deps` so tests stub them; the defaults are
  * the real src/lib/hubspot writers. House convention for DB glue: `prisma: any`.
@@ -29,7 +33,7 @@ import {
   GAP_PROPERTY_NAMES,
   type GapStatusOption,
 } from '@/lib/hubspot/properties';
-import { isGapOsEnabled } from './flags';
+import { gapFlag, isGapOsEnabled } from './flags';
 
 export const MIRROR_ACTIONS = [
   'submitted',
@@ -83,6 +87,7 @@ export interface MirrorDeps {
 
 export type MirrorSkipReason =
   | 'gap_disabled'
+  | 'gap_mirror_disabled'
   | 'hubspot_sync_disabled'
   | 'no_company_id'
   | 'already_written';
@@ -201,6 +206,7 @@ export async function mirrorHypothesisEvent(
   const now = deps.now ?? (() => new Date());
 
   if (!isGapOsEnabled()) return { status: 'skipped', reason: 'gap_disabled' };
+  if (!gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')) return { status: 'skipped', reason: 'gap_mirror_disabled' };
   if (!syncEnabled()) return { status: 'skipped', reason: 'hubspot_sync_disabled' };
   const companyId = event.hypothesis.hubspotCompanyId;
   if (!companyId) return { status: 'skipped', reason: 'no_company_id' };

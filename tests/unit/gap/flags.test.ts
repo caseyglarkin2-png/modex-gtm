@@ -16,6 +16,7 @@ const FLAG_NAMES = [
   'GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED',
   'GAP_AUTO_ENROLL_ENABLED',
   'GAP_AUTO_ENROLL_SHADOW',
+  'GAP_HUBSPOT_MIRROR_ENABLED',
 ] as const;
 
 let savedEnv: NodeJS.ProcessEnv;
@@ -37,9 +38,13 @@ afterEach(() => {
 });
 
 describe('GAP_FLAGS', () => {
-  it('has exactly eight entries in the documented order', () => {
-    expect(GAP_FLAGS).toHaveLength(8);
+  it('has exactly nine entries in the documented order', () => {
+    expect(GAP_FLAGS).toHaveLength(9);
     expect([...GAP_FLAGS]).toEqual([...FLAG_NAMES]);
+  });
+
+  it('lists GAP_HUBSPOT_MIRROR_ENABLED last', () => {
+    expect(GAP_FLAGS[GAP_FLAGS.length - 1]).toBe('GAP_HUBSPOT_MIRROR_ENABLED');
   });
 });
 
@@ -74,6 +79,22 @@ describe('gapFlag', () => {
     delete process.env.GAP_ROUTING_ENABLED;
     expect(process.env.GAP_ROUTING_ENABLED).toBeUndefined();
     expect(gapFlag('GAP_ROUTING_ENABLED')).toBe(false);
+  });
+
+  it('GAP_HUBSPOT_MIRROR_ENABLED defaults off and reads truthy and falsy spellings at call time', () => {
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'true';
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(true);
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'false';
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = '1';
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(true);
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = '0';
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
+    // It is its own switch: GAP_OS_ENABLED on does not turn it on.
+    process.env.GAP_OS_ENABLED = 'true';
+    delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
   });
 
   it('reads each flag by its own name, not a shared switch', () => {

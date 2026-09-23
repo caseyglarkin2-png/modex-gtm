@@ -3,8 +3,9 @@
  *
  *   DATABASE_URL=postgresql://...@127.0.0.1:5433/gap_dev \
  *   GAP_OS_ENABLED=true GAP_HYPOTHESIS_ENABLED=true \
- *   HUBSPOT_SYNC_ENABLED=false \
  *   npx tsx scripts/gap/e2e-sprint1.ts
+ *
+ * Leave HUBSPOT_SYNC_ENABLED and GAP_HUBSPOT_MIRROR_ENABLED unset.
  *
  * Walks the committed Sprint 1 surface in order: seed, hypothesize (twice, the
  * second run must be idempotent), the full draft -> review_required -> approved
@@ -21,9 +22,10 @@
  *     the first write, so no HubSpot or war-room call can be made even by the
  *     service's fire-and-forget mirror and review-feed hooks.
  *   - HUBSPOT_SYNC_ENABLED is read from feature-flags at module load and its
- *     codebase default is ON when unset (src/lib/feature-flags.ts). The script
- *     never overrides it; step 6 asserts the mirror reports
- *     `hubspot_sync_disabled`, so the flag has to be set to false explicitly.
+ *     codebase default is ON when unset (src/lib/feature-flags.ts). That is
+ *     why the mirror has its own default-OFF gate, GAP_HUBSPOT_MIRROR_ENABLED
+ *     (S1-T11b). Step 6 runs with that flag unset and asserts the mirror
+ *     reports `gap_mirror_disabled` before it ever consults sync or HubSpot.
  *   - The cleanup transaction disables the four GAP guard triggers that forbid
  *     DELETE (append-only events and audit, BID immutability, the post-review
  *     signal unlink guard) and re-enables them in the same transaction. That is
@@ -181,7 +183,7 @@ async function main(): Promise<number> {
   console.log(`database ${dbHost}`);
   console.log(`git ${gitSha}`);
   console.log(
-    `env GAP_OS_ENABLED=${gapFlag('GAP_OS_ENABLED')} GAP_HYPOTHESIS_ENABLED=${gapFlag('GAP_HYPOTHESIS_ENABLED')} HUBSPOT_SYNC_ENABLED(resolved)=${HUBSPOT_SYNC_ENABLED} raw=${process.env.HUBSPOT_SYNC_ENABLED === undefined ? '<unset>' : JSON.stringify(process.env.HUBSPOT_SYNC_ENABLED)} scrubbed=[${scrubbed.join(',')}]`,
+    `env GAP_OS_ENABLED=${gapFlag('GAP_OS_ENABLED')} GAP_HYPOTHESIS_ENABLED=${gapFlag('GAP_HYPOTHESIS_ENABLED')} GAP_HUBSPOT_MIRROR_ENABLED=${gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')} HUBSPOT_SYNC_ENABLED(resolved)=${HUBSPOT_SYNC_ENABLED} raw=${process.env.HUBSPOT_SYNC_ENABLED === undefined ? '<unset>' : JSON.stringify(process.env.HUBSPOT_SYNC_ENABLED)} scrubbed=[${scrubbed.join(',')}]`,
   );
   counts.gitSha = gitSha;
   counts.databaseHost = dbHost;
@@ -198,6 +200,7 @@ async function main(): Promise<number> {
     expect('preflight', gapFlag('GAP_OS_ENABLED'), 'GAP_OS_ENABLED is not on');
     expect('preflight', gapFlag('GAP_HYPOTHESIS_ENABLED'), 'GAP_HYPOTHESIS_ENABLED is not on');
     expect('preflight', process.env.HUBSPOT_ACCESS_TOKEN === undefined, 'HUBSPOT_ACCESS_TOKEN still present');
+    expect('preflight', !gapFlag('GAP_HUBSPOT_MIRROR_ENABLED'), 'GAP_HUBSPOT_MIRROR_ENABLED is on; this run must exercise the default-off mirror gate');
     const liveTriggers = await prisma.pounceTrigger.count({
       where: { dismissed: false, first_seen_at: { gte: new Date(now.getTime() - 24 * 60 * 60 * 1000) } },
     });
@@ -398,9 +401,9 @@ async function main(): Promise<number> {
       where: { OR: [{ key: { startsWith: `gap:hyp:${draftId}:` } }, { key: { startsWith: `gap:hyp:${noFactsId}:` } }] },
     });
     counts.mirrorRows = mirrorRows;
-    expect('6 mirror', mirror.status === 'skipped' && mirror.reason === 'hubspot_sync_disabled', `mirror -> ${JSON.stringify(mirror)}, expected skipped/hubspot_sync_disabled (HUBSPOT_SYNC_ENABLED resolved ${HUBSPOT_SYNC_ENABLED}; ${mirrorRows} gap_hubspot_mirror rows for this run)`);
+    expect('6 mirror', mirror.status === 'skipped' && mirror.reason === 'gap_mirror_disabled', `mirror -> ${JSON.stringify(mirror)}, expected skipped/gap_mirror_disabled (GAP_HUBSPOT_MIRROR_ENABLED=${gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')}, HUBSPOT_SYNC_ENABLED resolved ${HUBSPOT_SYNC_ENABLED}; ${mirrorRows} gap_hubspot_mirror rows for this run)`);
     expect('6 mirror', mirrorRows === 0, `${mirrorRows} gap_hubspot_mirror rows exist for this run, expected 0`);
-    pass('6 mirror', `skipped/hubspot_sync_disabled, 0 gap_hubspot_mirror rows`);
+    pass('6 mirror', `skipped/gap_mirror_disabled with HUBSPOT_SYNC_ENABLED resolved ${HUBSPOT_SYNC_ENABLED}, 0 gap_hubspot_mirror rows`);
 
     // 7. PIC import, applied twice.
     const fixture = JSON.parse(readFileSync(FIXTURE_PATH, 'utf8')) as PicLike;
@@ -474,7 +477,7 @@ function writeReport(input: { failure: StepFailure | null; tag: string; dbHost: 
     `- Database: ${input.dbHost} (scratch only; the script refuses any other host)`,
     `- Git: ${input.gitSha}`,
     `- Ran at: ${new Date().toISOString()}`,
-    `- HUBSPOT_SYNC_ENABLED as resolved by feature-flags: ${String(counts.hubspotSyncEnabledResolved)}`,
+    `- HUBSPOT_SYNC_ENABLED as resolved by feature-flags: ${String(counts.hubspotSyncEnabledResolved)} (the mirror is gated by GAP_HUBSPOT_MIRROR_ENABLED, default off, before it reads this)`,
     `- Credentials scrubbed from the process before the first write: ${String(counts.scrubbedEnv)}`,
     '',
     '## Steps',

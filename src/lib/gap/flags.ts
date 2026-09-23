@@ -1,8 +1,10 @@
 /// GAP Prospecting OS feature flags.
 ///
 /// Every flag is read from process.env at CALL time, never at module load.
-/// Two of these flags can cause outbound (GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED
-/// and GAP_AUTO_ENROLL_ENABLED, with GAP_AUTO_ENROLL_SHADOW as its rehearsal),
+/// Three of these flags can cause outbound (GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED,
+/// GAP_AUTO_ENROLL_ENABLED with GAP_AUTO_ENROLL_SHADOW as its rehearsal, and
+/// GAP_HUBSPOT_MIRROR_ENABLED, which lets the mirror write live HubSpot notes
+/// and properties; HUBSPOT_SYNC_ENABLED alone defaults ON and is not enough),
 /// so flipping one off plus a redeploy must halt that path on the very next
 /// request. That is the same guarantee OUTREACH_PAUSED gives via
 /// isOutreachPaused() in src/lib/feature-flags.ts, and it is deliberately not
@@ -25,6 +27,7 @@ export const GAP_FLAGS = [
   'GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED',
   'GAP_AUTO_ENROLL_ENABLED',
   'GAP_AUTO_ENROLL_SHADOW',
+  'GAP_HUBSPOT_MIRROR_ENABLED',
 ] as const;
 
 export type GapFlagName = (typeof GAP_FLAGS)[number];

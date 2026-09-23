@@ -21,6 +21,7 @@ let savedEnv: NodeJS.ProcessEnv;
 beforeEach(() => {
   savedEnv = { ...process.env };
   process.env.GAP_OS_ENABLED = 'true';
+  process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'true';
 });
 
 afterEach(() => {
@@ -173,6 +174,37 @@ describe('mirrorHypothesisEvent gates', () => {
     expect(deps.ensureGapProperties).not.toHaveBeenCalled();
     expect(deps.createCompanyNote).not.toHaveBeenCalled();
     expect(deps.updateCompanyProperties).not.toHaveBeenCalled();
+  });
+
+  it('skips with gap_mirror_disabled when GAP_HUBSPOT_MIRROR_ENABLED is unset, even with sync on, and calls nothing', async () => {
+    delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+    const prisma = makePrisma();
+    const deps = makeDeps({ syncEnabled: () => true });
+    const result = await mirrorHypothesisEvent(prisma, makeEvent(), deps);
+    expect(result).toEqual({ status: 'skipped', reason: 'gap_mirror_disabled' });
+    expect(prisma.gapHubSpotMirror.findUnique).not.toHaveBeenCalled();
+    expect(deps.ensureGapProperties).not.toHaveBeenCalled();
+    expect(deps.createCompanyNote).not.toHaveBeenCalled();
+    expect(deps.updateCompanyProperties).not.toHaveBeenCalled();
+  });
+
+  it('skips with gap_mirror_disabled when the flag is spelled false', async () => {
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'false';
+    const result = await mirrorHypothesisEvent(makePrisma(), makeEvent(), makeDeps());
+    expect(result).toEqual({ status: 'skipped', reason: 'gap_mirror_disabled' });
+  });
+
+  it('checks GAP_OS_ENABLED before the mirror flag', async () => {
+    delete process.env.GAP_OS_ENABLED;
+    delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+    const result = await mirrorHypothesisEvent(makePrisma(), makeEvent(), makeDeps());
+    expect(result).toEqual({ status: 'skipped', reason: 'gap_disabled' });
+  });
+
+  it('checks the mirror flag before HUBSPOT_SYNC_ENABLED', async () => {
+    delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+    const result = await mirrorHypothesisEvent(makePrisma(), makeEvent(), makeDeps({ syncEnabled: () => false }));
+    expect(result).toEqual({ status: 'skipped', reason: 'gap_mirror_disabled' });
   });
 
   it('skips with hubspot_sync_disabled when sync is off', async () => {
