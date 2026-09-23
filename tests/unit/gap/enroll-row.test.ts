@@ -13,9 +13,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 import {
   buildEnrollRows,
+  loadCompileGate,
   loadDecisions,
   renderEnrollTableJson,
   renderEnrollTableMarkdown,
+  COMPILE_MISSING,
   ENROLL_TABLE_HEADER,
   ENROLL_TABLE_DIVIDER,
 } from '@/lib/gap/routing/enroll-row';
@@ -26,9 +28,13 @@ const mockedAuth = vi.fn();
 const mockedFindFirst = vi.fn();
 const mockedFindMany = vi.fn();
 const mockedConfigFind = vi.fn();
+const mockedCompileFindMany = vi.fn();
+const mockedApprovalFindFirst = vi.fn();
 const fakePrisma = {
   routingDecision: { findFirst: mockedFindFirst, findMany: mockedFindMany },
   systemConfig: { findUnique: mockedConfigFind },
+  gapCompile: { findMany: mockedCompileFindMany },
+  sendApprovalRequest: { findFirst: mockedApprovalFindFirst },
 };
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
@@ -134,6 +140,7 @@ function twoAccountFixture(): EnrollRowItem[] {
       displayName: 'Ada Lovelace',
       preferredSender: 'casey@yardflow.ai',
       whatIKnow: 'Two new DCs opened in Q2 per the 10-K.',
+      compile: { ok: true, compileIds: ['c0', 'c1', 'c2', 'c3'] },
     },
     {
       decision: decision('enroll_gap_sequence', 'build_required'),
@@ -219,6 +226,7 @@ describe('buildEnrollRows', () => {
       {
         decision: decision('enroll_gap_sequence'),
         inputs: { account: account('Boston Beer Company'), persona: persona(1, 'ada@bostonbeer.com', NATIVE_SEQ) },
+        compile: { ok: true, compileIds: [] },
       },
     ]);
     expect(table.rows[0].contacts).toEqual([
@@ -244,6 +252,7 @@ describe('buildEnrollRows', () => {
         decision: decision('enroll_gap_sequence', 'hubspot_native'),
         inputs: { account: account('Acme | Foods'), persona: persona(1, 'x@acme.com', NATIVE_SEQ) },
         displayName: 'X | Y',
+        compile: { ok: true, compileIds: [] },
       },
     ]);
     const md = renderEnrollTableMarkdown(table);
@@ -285,10 +294,233 @@ describe('renderEnrollTableJson', () => {
 // loadDecisions
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Compile gate (S3-T10 phase 2)
+// ---------------------------------------------------------------------------
+
+describe('buildEnrollRows compile gate', () => {
+  function nativeItem(compile: EnrollRowItem['compile']): EnrollRowItem {
+    return {
+      decision: decision('enroll_gap_sequence', 'hubspot_native'),
+      inputs: { account: account('Boston Beer Company'), persona: persona(1, 'ada@bostonbeer.com', NATIVE_SEQ) },
+      displayName: 'Ada Lovelace',
+      preferredSender: 'casey@yardflow.ai',
+      ...(compile === undefined ? {} : { compile }),
+    };
+  }
+
+  it('a contact whose four steps passed the compiler is rendered under Enroll', () => {
+    const table = buildEnrollRows([nativeItem({ ok: true, compileIds: ['c0', 'c1', 'c2', 'c3'] })]);
+    expect(table.rows[0].contacts.map((c) => c.email)).toEqual(['ada@bostonbeer.com']);
+    expect(table.skipped).toEqual([]);
+  });
+
+  it('one failing step lands the contact under Skip with compile_not_passed:<stepIndex>', () => {
+    const table = buildEnrollRows([nativeItem({ ok: false, reason: 'compile_not_passed:1', stepIndex: 1 })]);
+    expect(table.rows[0].contacts).toEqual([]);
+    expect(table.skipped).toEqual([
+      { account: 'Boston Beer Company', personaId: 1, name: 'Ada Lovelace', email: 'ada@bostonbeer.com', reason: 'compile_not_passed:1' },
+    ]);
+    expect(renderEnrollTableMarkdown(table).split('\n')[2]).toContain('| none | Ada Lovelace (compile_not_passed:1) |');
+  });
+
+  it('a missing compile lands the contact under Skip with compile_missing', () => {
+    const table = buildEnrollRows([nativeItem({ ok: false, reason: COMPILE_MISSING, stepIndex: 0 })]);
+    expect(table.rows[0].contacts).toEqual([]);
+    expect(table.skipped[0].reason).toBe('compile_missing');
+  });
+
+  it('the gate runs after the lane filters: a sequence_block or a missing email still names its own reason', () => {
+    const blocked: EnrollRowItem = {
+      decision: decision('enroll_gap_sequence', 'hubspot_native'),
+      inputs: { account: account('Boston Beer Company'), persona: persona(2, 'bob@bostonbeer.com', BLOCKED_SEQ) },
+      displayName: 'Bob Byrne',
+      compile: { ok: false, reason: COMPILE_MISSING, stepIndex: 0 },
+    };
+    const noEmail: EnrollRowItem = {
+      decision: decision('enroll_gap_sequence', 'hubspot_native'),
+      inputs: { account: account('Boston Beer Company'), persona: persona(3, null, NATIVE_SEQ) },
+      displayName: 'Cy Chen',
+      compile: { ok: false, reason: COMPILE_MISSING, stepIndex: 0 },
+    };
+    const table = buildEnrollRows([blocked, noEmail]);
+    expect(table.skipped.map((s) => s.reason)).toEqual(['HUBSPOT_CROSS_ACCOUNT_BOUNCE', 'no email']);
+  });
+
+  it('fails closed: a native item without the compile field is skipped as compile_missing', () => {
+    const table = buildEnrollRows([nativeItem(undefined)]);
+    expect(table.rows[0].contacts).toEqual([]);
+    expect(table.skipped).toEqual([
+      { account: 'Boston Beer Company', personaId: 1, name: 'Ada Lovelace', email: 'ada@bostonbeer.com', reason: 'compile_missing' },
+    ]);
+  });
+
+  it('non-native items keep their own reasons whether or not a compile field is present', () => {
+    const table = buildEnrollRows([
+      {
+        decision: decision('enroll_gap_sequence', 'build_required'),
+        inputs: { account: account('Ocean Spray'), persona: persona(3, 'cy@oceanspray.com', NOT_BUILT) },
+      },
+      {
+        decision: decision('enroll_gap_sequence', 'modex_queue'),
+        inputs: { account: account('Ocean Spray'), persona: persona(4, 'di@oceanspray.com', null) },
+        compile: { ok: false, reason: COMPILE_MISSING, stepIndex: 0 },
+      },
+    ]);
+    expect(table.skipped.map((s) => s.reason)).toEqual([
+      'build_required (no rig-built sequence for this account)',
+      'modex_queue (no native sequence; secondary lane)',
+    ]);
+  });
+});
+
+describe('loadCompileGate', () => {
+  const CONTACT = 'c1';
+  const path = ['contract', 'top100Compile', 'hubspotContactId'];
+
+  function compileRows(verdicts: Array<[number, string, string?]>) {
+    return verdicts.map(([step, verdict, id]) => ({ id: id ?? `cmp_${step}_${verdict}`, step_index: step, verdict }));
+  }
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedApprovalFindFirst.mockResolvedValue(null);
+  });
+
+  it('queries the compile rows by the top100Compile contact key, newest first', async () => {
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'pass'], [2, 'pass'], [3, 'pass']]));
+    const gate = await loadCompileGate(fakePrisma as never, CONTACT);
+    expect(mockedCompileFindMany).toHaveBeenCalledWith({
+      where: { inputs_snapshot: { path, equals: CONTACT } },
+      orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
+      select: { id: true, step_index: true, verdict: true },
+    });
+    expect(gate).toEqual({ ok: true, compileIds: ['cmp_0_pass', 'cmp_1_pass', 'cmp_2_pass', 'cmp_3_pass'] });
+    expect(mockedApprovalFindFirst).not.toHaveBeenCalled();
+  });
+
+  it('no rows at all -> compile_missing at step 0, without touching approvals', async () => {
+    mockedCompileFindMany.mockResolvedValue([]);
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_missing', stepIndex: 0 });
+    expect(mockedApprovalFindFirst).not.toHaveBeenCalled();
+  });
+
+  it('a missing later step -> compile_missing naming that step', async () => {
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'pass'], [3, 'pass']]));
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_missing', stepIndex: 2 });
+  });
+
+  it('a rejected step -> compile_not_passed:<stepIndex>, the first problem in step order', async () => {
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'reject'], [2, 'reject'], [3, 'pass']]));
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:1', stepIndex: 1 });
+  });
+
+  it('the newest row per step wins: an older pass under a newer reject is not a pass', async () => {
+    mockedCompileFindMany.mockResolvedValue([
+      { id: 'newer_reject', step_index: 2, verdict: 'reject' },
+      { id: 'older_pass', step_index: 2, verdict: 'pass' },
+      ...compileRows([[0, 'pass'], [1, 'pass'], [3, 'pass']]),
+    ]);
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:2', stepIndex: 2 });
+  });
+
+  it('review_required with an approved SendApprovalRequest counts as a pass', async () => {
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'review_required', 'cmp_rev'], [2, 'pass'], [3, 'pass']]));
+    mockedApprovalFindFirst.mockResolvedValue({ id: 'apr_1', status: 'approved' });
+    const gate = await loadCompileGate(fakePrisma as never, CONTACT);
+    expect(mockedApprovalFindFirst).toHaveBeenCalledWith({
+      where: { risk_reasons: { has: 'gap_compile:cmp_rev' } },
+      orderBy: { created_at: 'desc' },
+      select: { id: true, status: true },
+    });
+    expect(gate).toEqual({ ok: true, compileIds: ['cmp_0_pass', 'cmp_rev', 'cmp_2_pass', 'cmp_3_pass'] });
+  });
+
+  it('review_required with a pending or missing request -> compile_not_passed:<stepIndex>', async () => {
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'pass'], [2, 'pass'], [3, 'review_required', 'cmp_rev']]));
+    mockedApprovalFindFirst.mockResolvedValue({ id: 'apr_1', status: 'pending' });
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:3', stepIndex: 3 });
+    mockedApprovalFindFirst.mockResolvedValue(null);
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:3', stepIndex: 3 });
+  });
+
+  it('a contact without a HubSpot id is compile_missing without a query', async () => {
+    expect(await loadCompileGate(fakePrisma as never, null)).toEqual({ ok: false, reason: 'compile_missing', stepIndex: null });
+    expect(mockedCompileFindMany).not.toHaveBeenCalled();
+  });
+});
+
 describe('loadDecisions', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockedConfigFind.mockResolvedValue(null);
+    mockedCompileFindMany.mockResolvedValue([]);
+    mockedApprovalFindFirst.mockResolvedValue(null);
+  });
+
+  it('attaches the compile gate to native items only and skips non-native targets without a compile query', async () => {
+    mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
+    mockedFindMany.mockResolvedValue([
+      {
+        id: 'd1',
+        run_id: 'run_9',
+        action: 'enroll_gap_sequence',
+        lane: 'work_queue',
+        rule_id: 'enroll',
+        priority: 88,
+        explain: decision('enroll_gap_sequence').explain,
+        inputs_snapshot: { account: account('Boston Beer Company'), persona: persona(1, 'ada@bostonbeer.com', NATIVE_SEQ), target: 'hubspot_native' },
+        persona: { name: 'Ada Lovelace' },
+      },
+      {
+        id: 'd2',
+        run_id: 'run_9',
+        action: 'enroll_gap_sequence',
+        lane: 'work_queue',
+        rule_id: 'enroll',
+        priority: 50,
+        explain: decision('enroll_gap_sequence').explain,
+        inputs_snapshot: { account: account('Ocean Spray', '222'), persona: persona(3, 'cy@oceanspray.com', NOT_BUILT), target: 'build_required' },
+        persona: { name: 'Cy Chen' },
+      },
+    ]);
+    mockedCompileFindMany.mockResolvedValue([
+      { id: 'a0', step_index: 0, verdict: 'pass' },
+      { id: 'a1', step_index: 1, verdict: 'reject' },
+      { id: 'a2', step_index: 2, verdict: 'pass' },
+      { id: 'a3', step_index: 3, verdict: 'pass' },
+    ]);
+    const items = await loadDecisions(fakePrisma as never);
+    expect(items).toHaveLength(2);
+    expect(items[0].compile).toEqual({ ok: false, reason: 'compile_not_passed:1', stepIndex: 1 });
+    expect(items[1].compile).toBeUndefined();
+    expect(mockedCompileFindMany).toHaveBeenCalledTimes(1);
+    expect(mockedCompileFindMany.mock.calls[0][0].where.inputs_snapshot.equals).toBe('c1');
+    const table = buildEnrollRows(items);
+    expect(table.rows[0].contacts).toEqual([]);
+    expect(table.skipped.map((s) => [s.name, s.reason])).toEqual([
+      ['Ada Lovelace', 'compile_not_passed:1'],
+      ['Cy Chen', 'build_required (no rig-built sequence for this account)'],
+    ]);
+  });
+
+  it('a native item with no compile rows renders as compile_missing end to end', async () => {
+    mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
+    mockedFindMany.mockResolvedValue([
+      {
+        id: 'd1',
+        run_id: 'run_9',
+        action: 'enroll_gap_sequence',
+        lane: 'work_queue',
+        rule_id: 'enroll',
+        priority: 88,
+        explain: decision('enroll_gap_sequence').explain,
+        inputs_snapshot: { account: account('Boston Beer Company'), persona: persona(1, 'ada@bostonbeer.com', NATIVE_SEQ), target: 'hubspot_native' },
+        persona: { name: 'Ada Lovelace' },
+      },
+    ]);
+    const table = buildEnrollRows(await loadDecisions(fakePrisma as never));
+    expect(renderEnrollTableMarkdown(table).split('\n')[2]).toContain('| none | Ada Lovelace (compile_missing) |');
   });
 
   it('returns an empty list when no run exists, without querying rows', async () => {
@@ -363,6 +595,8 @@ describe('GET /api/gap/queue/enroll-rows', () => {
     mockedAuth.mockResolvedValue(SESSION);
     mockedFindFirst.mockResolvedValue(null);
     mockedFindMany.mockResolvedValue([]);
+    mockedCompileFindMany.mockResolvedValue([]);
+    mockedApprovalFindFirst.mockResolvedValue(null);
   });
 
   afterEach(() => {

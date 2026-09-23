@@ -147,6 +147,13 @@ describe('toCompileInputs', () => {
       namedPipeline: [],
       journey: 'cold',
     });
+    expect(riley3.input.contract).toHaveProperty('top100Compile', {
+      laneKey: 'acme-example-com',
+      hubspotContactId: RILEY,
+      personKey: RILEY,
+      step: 3,
+      stepIndex: 2,
+    });
     expect(riley3.input.contract).not.toHaveProperty('journeyStage');
     expect(riley3.input.contract).not.toHaveProperty('wordRange');
     expect(riley3.input.contract).not.toHaveProperty('validateClaims');

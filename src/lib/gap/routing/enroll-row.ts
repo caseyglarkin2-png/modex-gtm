@@ -13,9 +13,30 @@
  * RoutingDecision rows are written by S2-T7, which lands after this ticket,
  * so the reader is deliberately tolerant of an empty table and of rows whose
  * `inputs_snapshot` does not yet carry `account` and `persona`.
+ *
+ * Compile gate (S3-T10 phase 2, additive): a `hubspot_native` contact renders
+ * under Enroll only when each of its four Top100 steps has a GapCompile row
+ * whose verdict is `pass`, or `review_required` with an approved
+ * SendApprovalRequest (`isApproved` in compiler/approval.ts). The rows are
+ * the ones `scripts/gap/compile-top100.ts --persist` writes: they carry
+ * `inputs_snapshot.contract.top100Compile.hubspotContactId` (the constant
+ * TOP100_COMPILE_KEY in import/top100-compile.ts), and the newest row per
+ * (contact, step_index) is the one that counts. Steps are checked in order
+ * and the first problem names the skip: `compile_missing` when a step has no
+ * row, `compile_not_passed:<stepIndex>` when it has one that is not a pass
+ * or an approved review. `loadDecisions` evaluates the gate for every
+ * native item and sets `EnrollRowItem.compile`; `buildEnrollRows` fails
+ * closed: a native item with no `compile` field at all is `compile_missing`,
+ * so a pure caller (the enroll service builds its own item) must evaluate
+ * the gate, or carry `{ ok: true }` deliberately, to render a contact.
+ * modex_queue and build_required items keep their own reasons. The gate
+ * reads no flag: this is the human enroll table, so GAP_AUTO_ENROLL does not
+ * enter into it.
  */
 
 import type { PrismaClient } from '@prisma/client';
+import { isApproved } from '../compiler/approval';
+import { TOP100_COMPILE_KEY } from '../import/top100-compile';
 import type { RoutingAction } from '../taxonomy';
 import { resolveLatestRunId } from './queue';
 import { resolveEnrollTarget } from './rules';
@@ -43,6 +64,19 @@ export const SKIP_REASON: Record<Exclude<EnrollTarget, 'hubspot_native'> | 'no_e
   no_email: 'no email',
 };
 
+/** Number of Top100 touches per contact; every lane sequence carries exactly four. */
+export const COMPILE_GATE_STEP_COUNT = 4;
+
+export const COMPILE_MISSING = 'compile_missing';
+
+export function compileNotPassed(stepIndex: number): string {
+  return `compile_not_passed:${stepIndex}`;
+}
+
+export type CompileGateResult =
+  | { ok: true; compileIds: string[] }
+  | { ok: false; reason: string; stepIndex: number | null };
+
 export interface EnrollRowItem {
   decision: RoutingDecision;
   inputs: Pick<RoutingInputs, 'account' | 'persona'>;
@@ -52,6 +86,12 @@ export interface EnrollRowItem {
   preferredSender?: string | null;
   /** The Tier A "what I know" line; rendered as a trailing `<br>` note in the contacts cell. */
   whatIKnow?: string | null;
+  /**
+   * The compile gate verdict for this contact (see the header). Set by
+   * `loadDecisions` for every native item. Absent on a native item reads as
+   * `compile_missing` (fail closed); ignored on non-native items.
+   */
+  compile?: CompileGateResult | null;
 }
 
 export interface EnrollContact {
@@ -153,6 +193,16 @@ export function buildEnrollRows(items: EnrollRowItem[]): EnrollTable {
       skip(SKIP_REASON.no_email);
       continue;
     }
+    // Compile gate, fail closed: only copy the compiler passed (or a human
+    // approved) is enrollable, and a native item nobody evaluated is missing.
+    if (!item.compile) {
+      skip(COMPILE_MISSING);
+      continue;
+    }
+    if (!item.compile.ok) {
+      skip(item.compile.reason);
+      continue;
+    }
     row.contacts.push({
       account: account.name,
       personaId: persona.id,
@@ -237,7 +287,8 @@ export function renderEnrollTableJson(table: EnrollTable): EnrollTableJson {
 // Reader: RoutingDecision rows -> items
 // ---------------------------------------------------------------------------
 
-type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig'>;
+/** The routing reader plus the two tables the compile gate reads (`gapCompile.findMany`, `sendApprovalRequest.findFirst`). */
+type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig' | 'gapCompile' | 'sendApprovalRequest'>;
 
 type Obj = Record<string, unknown>;
 
@@ -315,7 +366,7 @@ export async function loadDecisions(prisma: DecisionReader, runId?: string): Pro
       explain: isObj(row.explain) ? (row.explain as unknown as RoutingExplain) : EMPTY_EXPLAIN,
       ...(target && TARGETS.has(target) ? { target: target as EnrollTarget } : {}),
     };
-    items.push({
+    const item: EnrollRowItem = {
       decision,
       inputs: {
         account: snap.account as unknown as RoutingInputs['account'],
@@ -324,7 +375,73 @@ export async function loadDecisions(prisma: DecisionReader, runId?: string): Pro
       displayName: optStr(snap.displayName) ?? optStr(row.persona?.name),
       preferredSender: optStr(snap.preferredSender),
       whatIKnow: optStr(snap.whatIKnow),
-    });
+    };
+    if (targetOf(item) === 'hubspot_native') {
+      item.compile = await loadCompileGate(prisma, item.inputs.persona.hubspotContactId ?? null);
+    }
+    items.push(item);
   }
   return items;
+}
+
+// ---------------------------------------------------------------------------
+// Compile gate reader
+// ---------------------------------------------------------------------------
+
+type CompileGateReader = Pick<DecisionReader, 'gapCompile' | 'sendApprovalRequest'>;
+
+interface CompileGateRow {
+  id: string;
+  step_index: number | null;
+  verdict: string;
+}
+
+/**
+ * Evaluate the compile gate for one Top100 contact (see the header). Reads
+ * the compile rows keyed to the contact through
+ * `inputs_snapshot.contract.<TOP100_COMPILE_KEY>.hubspotContactId`, newest
+ * first, keeps the newest per step_index, then walks steps 0..3 in order:
+ * no row -> `compile_missing`; `pass` -> next step; `review_required` with an
+ * approved request -> next step; anything else -> `compile_not_passed:<i>`.
+ * A contact without a HubSpot id has no key to look up and is
+ * `compile_missing`. Never writes.
+ */
+export async function loadCompileGate(
+  prisma: CompileGateReader,
+  hubspotContactId: string | null,
+  stepCount = COMPILE_GATE_STEP_COUNT,
+): Promise<CompileGateResult> {
+  if (!hubspotContactId) return { ok: false, reason: COMPILE_MISSING, stepIndex: null };
+
+  const raw = await prisma.gapCompile.findMany({
+    where: { inputs_snapshot: { path: ['contract', TOP100_COMPILE_KEY, 'hubspotContactId'], equals: hubspotContactId } },
+    orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
+    select: { id: true, step_index: true, verdict: true },
+  });
+  const rows: CompileGateRow[] = Array.isArray(raw) ? raw : [];
+
+  const newestByStep = new Map<number, CompileGateRow>();
+  for (const row of rows) {
+    if (typeof row.step_index !== 'number') continue;
+    if (!newestByStep.has(row.step_index)) newestByStep.set(row.step_index, row);
+  }
+
+  const compileIds: string[] = [];
+  for (let stepIndex = 0; stepIndex < stepCount; stepIndex += 1) {
+    const row = newestByStep.get(stepIndex);
+    if (!row) return { ok: false, reason: COMPILE_MISSING, stepIndex };
+    if (row.verdict === 'pass') {
+      compileIds.push(row.id);
+      continue;
+    }
+    if (row.verdict === 'review_required') {
+      const approval = await isApproved(prisma, row.id);
+      if (approval.approved) {
+        compileIds.push(row.id);
+        continue;
+      }
+    }
+    return { ok: false, reason: compileNotPassed(stepIndex), stepIndex };
+  }
+  return { ok: true, compileIds };
 }

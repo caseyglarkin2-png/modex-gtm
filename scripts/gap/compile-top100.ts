@@ -4,6 +4,7 @@
  *
  *   npx tsx scripts/gap/compile-top100.ts <laneDir> <outDir> \
  *     [--accounts a,b] [--critic] [--persist] [--now <iso>] [--created-by <who>]
+ *   npx tsx scripts/gap/compile-top100.ts <laneDir> <outDir> --summary-only [same flags]
  *
  * Reads every `<laneDir>/data/sequences/*.json` (or only the listed account
  * keys), pairs each with `<laneDir>/data/research/<key>.json`, runs every
@@ -11,6 +12,10 @@
  * `<outDir>/_summary.json`, then prints the per-check table. The lane
  * directory is an argument on purpose; nothing here names it, and nothing is
  * ever written into it.
+ *
+ * `--summary-only` compiles everything, prints the per-check table and
+ * totals, and writes only `<outDir>/_summary.json` (the per-account files
+ * are skipped). It is the cheap re-run after a compiler change.
  *
  * Dry run by default: a stub critic answers pass so the verdict is the
  * deterministic checks alone, no prisma is touched, and the process exits 0
@@ -23,6 +28,12 @@
  * the environment; the token is never printed). Without `--critic` the token
  * is deleted from the environment before anything loads, and
  * HUBSPOT_ACCESS_TOKEN is always deleted, so no code path can reach HubSpot.
+ *
+ * `--persist` writes one GapCompile row per contact per step through
+ * `compile()`; each row's `inputs_snapshot.contract.top100Compile` carries
+ * {laneKey, hubspotContactId, personKey, step, stepIndex}, which is the key
+ * the enroll-row compile gate (src/lib/gap/routing/enroll-row.ts) reads to
+ * decide whether a Top100 contact renders under Enroll or under Skip.
  */
 const WANT_CRITIC = process.argv.includes('--critic');
 if (process.env.HUBSPOT_ACCESS_TOKEN !== undefined) delete process.env.HUBSPOT_ACCESS_TOKEN;
@@ -53,6 +64,7 @@ interface Args {
   accounts: string[] | null;
   critic: boolean;
   persist: boolean;
+  summaryOnly: boolean;
   now: Date;
   createdBy: string;
 }
@@ -60,7 +72,7 @@ interface Args {
 function usage(message?: string): never {
   if (message) console.error(message);
   console.error(
-    'usage: npx tsx scripts/gap/compile-top100.ts <laneDir> <outDir> [--accounts a,b] [--critic] [--persist] [--now <iso>] [--created-by <who>]',
+    'usage: npx tsx scripts/gap/compile-top100.ts <laneDir> <outDir> [--accounts a,b] [--critic] [--persist] [--summary-only] [--now <iso>] [--created-by <who>]',
   );
   process.exit(1);
 }
@@ -72,6 +84,7 @@ function parseArgs(argv: string[]): Args {
     accounts: null,
     critic: false,
     persist: false,
+    summaryOnly: false,
     now: new Date(),
     createdBy: 'compile-top100',
   };
@@ -84,6 +97,7 @@ function parseArgs(argv: string[]): Args {
     const arg = argv[i];
     if (arg === '--critic') args.critic = true;
     else if (arg === '--persist') args.persist = true;
+    else if (arg === '--summary-only') args.summaryOnly = true;
     else if (arg === '--accounts') {
       args.accounts = takeValue(arg, i).split(',').map((s) => s.trim()).filter((s) => s.length > 0);
       i += 1;
@@ -219,8 +233,10 @@ async function main(): Promise<void> {
       results.set(entry, await compile(entry.input, deps));
     }
 
-    const report = buildAccountReport(prepared, results, { now: args.now, compilerVersion: COMPILER_VERSION, critic: criticLabel });
-    writeFileSync(path.join(args.outDir, `${key}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+    if (!args.summaryOnly) {
+      const report = buildAccountReport(prepared, results, { now: args.now, compilerVersion: COMPILER_VERSION, critic: criticLabel });
+      writeFileSync(path.join(args.outDir, `${key}.json`), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+    }
     allSteps.push(...compiledSteps(prepared, results));
     if (prepared.warnings.length > 0) accountWarnings[key] = prepared.warnings;
     accountsCompiled += 1;
@@ -233,6 +249,7 @@ async function main(): Promise<void> {
     compilerVersion: COMPILER_VERSION,
     critic: criticLabel,
     persisted: args.persist,
+    summaryOnly: args.summaryOnly,
     laneDir: path.resolve(args.laneDir),
     accountsRequested: keys.length,
     accountsCompiled,
@@ -250,7 +267,7 @@ async function main(): Promise<void> {
   const warningCount = Object.values(accountWarnings).reduce((n, w) => n + w.length, 0);
   if (warningCount > 0) console.log(`account warnings: ${warningCount} across ${Object.keys(accountWarnings).length} accounts (see _summary.json)`);
   printTable(summary);
-  console.log(`\nwrote ${path.resolve(args.outDir)}`);
+  console.log(args.summaryOnly ? `\nsummary only: wrote ${path.resolve(path.join(args.outDir, '_summary.json'))}` : `\nwrote ${path.resolve(args.outDir)}`);
   if (prisma?.$disconnect) await prisma.$disconnect();
 }
 

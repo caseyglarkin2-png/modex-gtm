@@ -138,6 +138,24 @@ export interface ToCompileInputsResult {
 export const TOP100_COMPILE_CREATED_BY = 'compile-top100';
 export const TOP100_JOURNEY = 'cold';
 
+/**
+ * Contract field that keys a persisted compile to a Top100 contact and step.
+ * `compile()` stores the contract verbatim in `GapCompile.inputs_snapshot
+ * .contract`, so the enroll-row gate (routing/enroll-row.ts, S3-T10 phase 2)
+ * finds a contact's four compiles with the JSON path
+ * `['contract', TOP100_COMPILE_KEY, 'hubspotContactId']`. The same constant
+ * is read there; change it in one place only.
+ */
+export const TOP100_COMPILE_KEY = 'top100Compile';
+
+export interface Top100CompileKey {
+  laneKey: string;
+  hubspotContactId: string | null;
+  personKey: string;
+  step: number;
+  stepIndex: number;
+}
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -269,6 +287,7 @@ export function toCompileInputs(
         if (!knownIds.has(id)) warnings.push(`unknown_evidence_id:${personKey}:${step}:${id}`);
       }
 
+      const hubspotContactId = str(seq.hubspot_contact_id) || null;
       const contract: Record<string, unknown> = {
         evidence: evidence.refs,
         evidenceIds,
@@ -277,13 +296,17 @@ export function toCompileInputs(
         claimsUsed,
         stepCount: touches.length,
         journey: TOP100_JOURNEY,
+        // The lookup key the enroll-row compile gate reads back off
+        // GapCompile.inputs_snapshot.contract (compile() persists the whole
+        // contract there under --persist). See TOP100_COMPILE_KEY.
+        [TOP100_COMPILE_KEY]: { laneKey: key, hubspotContactId, personKey, step, stepIndex },
       };
       if (wordRange) contract.wordRange = { min: wordRange.min, max: wordRange.max };
 
       inputs.push({
         personKey,
         person: seq.person,
-        hubspotContactId: str(seq.hubspot_contact_id) || null,
+        hubspotContactId,
         stepIndex,
         step,
         input: {
