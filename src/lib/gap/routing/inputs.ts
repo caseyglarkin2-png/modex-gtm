@@ -35,7 +35,7 @@ import { normalizeScore } from '../../pounce/fit';
 import { hasRoleGate } from '../../revops/qualification/model';
 import { heatScore, tierNumber } from '../../revops/heat/heat-score';
 import type { HeatSignals } from '../../revops/heat/heat-score';
-import { HYPOTHESIS_TERMINAL_STATUSES, isPersona, isProblemFamily, isResponseClass } from '../taxonomy';
+import { isPersona, isProblemFamily, isResponseClass } from '../taxonomy';
 import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
@@ -298,6 +298,7 @@ function buildSignals(rows: TriggerRow[], now: Date): RoutingInputs['signals'] {
     firstSeenAt: r.first_seen_at,
     title: r.title,
     url: r.url || null,
+    source: r.source,
   }));
   const newest = freshTriggers.reduce<Date | null>(
     (acc, t) => (acc == null || t.firstSeenAt.getTime() > acc.getTime() ? t.firstSeenAt : acc),
@@ -400,7 +401,7 @@ function buildPersona(
   };
 }
 
-function buildHypothesis(h: HypothesisRow | null, now: Date): RoutingHypothesisInput | null {
+function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: boolean): RoutingHypothesisInput | null {
   if (!h) return null;
   const links = h.signals ?? [];
   const signals = links.map((l) => l.signal).filter((s): s is SignalRow => !!s);
@@ -415,6 +416,7 @@ function buildHypothesis(h: HypothesisRow | null, now: Date): RoutingHypothesisI
     family: isProblemFamily(h.problem_family) ? h.problem_family : 'unmapped',
     confidence: h.confidence,
     evidenceFresh,
+    hasNewerVersion,
     expiresAt: h.expires_at ?? null,
     resumeAt: asDate(m.resumeAt),
     version: 1,
@@ -504,13 +506,13 @@ async function assembleLoaded(
   const signals = buildSignals(triggerRows, now);
   const slug = triggerRows[0]?.account_slug ?? null;
 
-  // Hypothesis: the persona's own newest non-terminal, else the account-level (null persona) one.
+  // Hypothesis: the persona's own newest row of ANY status, else the
+  // account-level (null persona) one. Terminal rows are loaded on purpose
+  // (R2-4): a resolved hypothesis must reach R13 instead of re-entering the
+  // queue as research, and a terminal row that a newer version supersedes
+  // is marked `hasNewerVersion` so R13 stays quiet on it.
   const hypothesisWhere = (personaId: number | null) => ({
-    where: {
-      account_name: account.name,
-      primary_persona_id: personaId,
-      status: { notIn: [...HYPOTHESIS_TERMINAL_STATUSES] },
-    },
+    where: { account_name: account.name, primary_persona_id: personaId },
     orderBy: { created_at: 'desc' as const },
     include: { signals: { include: { signal: true } } },
   });
@@ -521,6 +523,13 @@ async function assembleLoaded(
     hypothesisRow = (await read('hypothesis_account', () =>
       prisma.prospectingHypothesis.findFirst(hypothesisWhere(null)),
     )) as HypothesisRow | null;
+  }
+  let hasNewerVersion = false;
+  if (hypothesisRow) {
+    const supersededBy = (await read('hypothesis_newer', () =>
+      prisma.prospectingHypothesis.count({ where: { supersedes_id: hypothesisRow!.id } }),
+    )) as number;
+    hasNewerVersion = supersededBy > 0;
   }
 
   // Comms: keyed by the persona's lowercased email. No email means nothing outbound can be in flight.
@@ -543,7 +552,7 @@ async function assembleLoaded(
     account: buildAccount(account, slug, snapshot, signals, now),
     signals,
     persona: buildPersona(persona, snapshot, top100),
-    hypothesis: buildHypothesis(hypothesisRow, now),
+    hypothesis: buildHypothesis(hypothesisRow, now, hasNewerVersion),
     comms,
     suppression: suppressionVerdict,
     freshness,

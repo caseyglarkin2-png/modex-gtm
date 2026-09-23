@@ -16,6 +16,9 @@
  * Mapping, deliberately three-valued because the rules table treats them
  * differently (R0 blocks, R0b blocks with research_required):
  *   refusal (blocked: true)          -> 'suppressed', refusing leg marked 'hit'
+ *   outage refusal (blocked: true with reason unknown_<leg> or a non-empty
+ *   unknown_legs, and no positive leg) -> 'unknown', the unreadable leg
+ *                                    marked 'unknown' (R2-2: an outage is not a hit)
  *   clean answer (blocked: false)    -> 'clear'
  *   missing config, network error, non-2xx, malformed body, timeout
  *                                    -> 'unknown', never 'clear'
@@ -45,6 +48,13 @@ export interface ClawdSuppressionReaderOptions {
   fetchImpl?: typeof fetch;
   env?: Record<string, string | undefined>;
   timeoutMs?: number;
+}
+
+/** clawd's reason for a leg it could not read: `unknown_<leg>` (fail closed on its side). */
+const UNKNOWN_REASON = /^unknown_/;
+
+function unknownLegNames(v: unknown): string[] {
+  return Array.isArray(v) ? v.filter((name): name is string => typeof name === 'string' && name.length > 0) : [];
 }
 
 const unknown = (leg: string = CONTRACT_LEG): SuppressionReadResult => ({
@@ -131,8 +141,23 @@ async function readOnce(
   }
 
   if (r.blocked) {
-    const leg = String(r.reason ?? '').trim() || 'suppressed';
-    legs[leg] = 'hit';
+    const reason = String(r.reason ?? '').trim();
+    // clawd answers an UNREADABLE leg with `blocked: true, reason: unknown_<leg>`
+    // (fail closed on its side). That is an outage, not a hit: a `blocked`
+    // whose only cause is an unknown_* reason or a non-empty unknown_legs, with
+    // no positive leg, is `unknown` here so R0b (research_required, nothing
+    // outbound) fires instead of R0 reading the outage as a suppression (R2-2).
+    // A positive reason beside an unreadable leg is still a hit.
+    const positive = reason.length > 0 && !UNKNOWN_REASON.test(reason);
+    const unreadable = UNKNOWN_REASON.test(reason) || unknownLegNames(r.unknown_legs).length > 0;
+    if (!positive && unreadable) {
+      if (UNKNOWN_REASON.test(reason)) {
+        const named = reason.replace(UNKNOWN_REASON, '');
+        legs[named || CONTRACT_LEG] = 'unknown';
+      }
+      return { verdict: 'unknown', legs };
+    }
+    legs[reason || 'suppressed'] = 'hit';
     return { verdict: 'suppressed', legs };
   }
   if (Object.keys(legs).length === 0) legs[CONTRACT_LEG] = 'clear';

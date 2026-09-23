@@ -87,12 +87,13 @@ function makePrisma(db: Db) {
               (h) =>
                 h.account_name === where.account_name &&
                 h.primary_persona_id === where.primary_persona_id &&
-                !where.status.notIn.includes(h.status),
+                (where.status === undefined || !where.status.notIn.includes(h.status)),
             ),
             'created_at',
           ),
         ),
       ),
+      count: vi.fn(async ({ where }: any) => db.hypotheses.filter((h) => h.supersedes_id === where.supersedes_id).length),
     },
     sequenceEnrollment: {
       findFirst: vi.fn(async ({ where }: any) =>
@@ -359,6 +360,7 @@ describe('assembleRoutingInputs full fixture', () => {
         firstSeenAt: daysAgo(8),
         title: 'Acme Foods opens new distribution center in Ohio',
         url: 'https://example.com/acme-ohio',
+        source: 'news',
       },
       {
         id: '9002',
@@ -368,6 +370,7 @@ describe('assembleRoutingInputs full fixture', () => {
         firstSeenAt: daysAgo(12),
         title: 'Acme Foods names new chief supply chain officer',
         url: 'https://example.com/acme-csco',
+        source: 'news',
       },
     ]);
     expect(i.signals.freshTriggers[0].normScore).toBe(33);
@@ -399,6 +402,7 @@ describe('assembleRoutingInputs full fixture', () => {
       family: 'hidden_capacity',
       confidence: 60,
       evidenceFresh: true,
+      hasNewerVersion: false,
       expiresAt: daysAhead(30),
       resumeAt: new Date('2026-10-01T00:00:00.000Z'),
       version: 1,
@@ -443,16 +447,52 @@ describe('assembleRoutingInputs full fixture', () => {
     expect(i.hypothesis?.evidenceIds).toEqual([]);
   });
 
-  it('falls back to the null-persona hypothesis only when the persona has none, and skips terminal ones', async () => {
+  it('loads the newest hypothesis of ANY status for the persona, falling back to the null-persona one only when the persona has none (R2-4)', async () => {
     const db = fullDb();
-    db.hypotheses[0].status = 'rejected'; // persona's own is terminal
+    db.hypotheses[0].status = 'rejected'; // persona's own is terminal and still the newest row for the persona
     const i = await assemble(db);
-    expect(i.hypothesis?.id).toBe('hyp-account');
-    expect(i.hypothesis?.status).toBe('draft');
+    expect(i.hypothesis?.id).toBe('hyp-persona');
+    expect(i.hypothesis?.status).toBe('rejected');
+    expect(i.hypothesis?.hasNewerVersion).toBe(false);
+    const ri = routePersona(i);
+    expect(ri.kind === 'decision' && ri.decision.ruleId).toBe('hyp_resolved');
 
-    db.hypotheses[1].status = 'expired';
+    db.hypotheses = db.hypotheses.filter((h) => h.id === 'hyp-account');
+    db.hypotheses[0].status = 'expired';
     const j = await assemble(db);
-    expect(j.hypothesis).toBeNull();
+    expect(j.hypothesis?.id).toBe('hyp-account');
+    expect(j.hypothesis?.status).toBe('expired');
+
+    db.hypotheses = [];
+    const k = await assemble(db);
+    expect(k.hypothesis).toBeNull();
+  });
+
+  it('a confirmed hypothesis with a newer draft version: the newest row is the draft, so R11 applies; a terminal row superseded elsewhere carries hasNewerVersion true (R2-4)', async () => {
+    const db = fullDb();
+    db.hypotheses[0].status = 'confirmed';
+    db.hypotheses.push({
+      ...db.hypotheses[0],
+      id: 'hyp-persona-v2',
+      status: 'draft',
+      supersedes_id: 'hyp-persona',
+      created_at: daysAgo(1),
+    });
+    const i = await assemble(db);
+    expect(i.hypothesis?.id).toBe('hyp-persona-v2');
+    expect(i.hypothesis?.status).toBe('draft');
+    expect(i.hypothesis?.hasNewerVersion).toBe(false);
+    const routed = routePersona(i);
+    expect(routed.kind === 'decision' && routed.decision.ruleId).toBe('hyp_proposed');
+
+    // The newer version was reopened under another persona: the confirmed row is still this persona's newest, and it is superseded.
+    db.hypotheses[2].primary_persona_id = 99;
+    const j = await assemble(db);
+    expect(j.hypothesis?.id).toBe('hyp-persona');
+    expect(j.hypothesis?.status).toBe('confirmed');
+    expect(j.hypothesis?.hasNewerVersion).toBe(true);
+    const rj = routePersona(j);
+    expect(rj.kind === 'decision' && rj.decision.ruleId).not.toBe('hyp_resolved');
   });
 
   it('evidenceFresh is false when the only evidenced signal is expired', async () => {
@@ -754,6 +794,31 @@ describe('createClawdSuppressionReader', () => {
     const refused = { ok: true, legs_read: { modex: true, hubspot: true }, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'hubspot_optout', keys: [EMAIL_LOWER], unknown_legs: [] }] };
     const s = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(refused)), env }).read({ to: EMAIL });
     expect(s).toEqual({ verdict: 'suppressed', legs: { modex: 'clear', hubspot: 'clear', hubspot_optout: 'hit' } });
+  });
+
+  it("clawd's unreadable-leg refusal (blocked true, reason unknown_<leg>, unknown_legs) is unknown, never suppressed (R2-2)", async () => {
+    const outage = {
+      ok: true,
+      legs_read: { clawd: true, hubspot: true },
+      results: [{ email: EMAIL_LOWER, blocked: true, reason: 'unknown_modex', keys: [], unknown_legs: ['modex'] }],
+    };
+    const r = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(outage)), env }).read({ to: EMAIL });
+    expect(r).toEqual({ verdict: 'unknown', legs: { clawd: 'clear', hubspot: 'clear', modex: 'unknown' } });
+
+    // The reason alone, without unknown_legs, still names the unreadable leg.
+    const reasonOnly = { ok: true, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'unknown_clawd' }] };
+    const q = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(reasonOnly)), env }).read({ to: EMAIL });
+    expect(q).toEqual({ verdict: 'unknown', legs: { clawd: 'unknown' } });
+  });
+
+  it('a positive hit stays suppressed: do_not_send, and a hit beside an unreadable leg (R2-2)', async () => {
+    const dns = { ok: true, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'do_not_send' }] };
+    const r = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(dns)), env }).read({ to: EMAIL });
+    expect(r).toEqual({ verdict: 'suppressed', legs: { do_not_send: 'hit' } });
+
+    const mixed = { ok: true, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'hubspot_optout', unknown_legs: ['clawd'] }] };
+    const s = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(mixed)), env }).read({ to: EMAIL });
+    expect(s).toEqual({ verdict: 'suppressed', legs: { clawd: 'unknown', hubspot_optout: 'hit' } });
   });
 
   it('a hung authority times out to unknown', async () => {

@@ -458,7 +458,7 @@ async function main(): Promise<number> {
     const cited = extractCitationIds(String(before.observation ?? ''));
     expect('2 hypothesize', cited.length > 0, `ops draft observation carries no [S: citation: ${JSON.stringify(before.observation)}`);
     const unlink = await unlinkSignal(prisma, opsDraftId, cited[0], ACTOR);
-    expect('2 hypothesize', !unlink.ok && unlink.reason === 'unlinked_citation', `unlinkSignal of cited ${cited[0]} -> ${JSON.stringify(unlink)}, expected unlinked_citation`);
+    expect('2 hypothesize', !unlink.ok && unlink.reason === 'signal_cited', `unlinkSignal of cited ${cited[0]} -> ${JSON.stringify(unlink)}, expected signal_cited (N5)`);
     const afterUnlink = await getHypothesis(prisma, opsDraftId);
     expect('2 hypothesize', afterUnlink.signals.length === signalsBefore + 1, `signal count ${afterUnlink.signals.length} after the refused unlink, expected ${signalsBefore + 1}`);
 
@@ -475,7 +475,7 @@ async function main(): Promise<number> {
     }
     counts.hypothesesApproved = approved;
     counts.opsDraftSignals = afterUnlink.signals.length;
-    pass('2 hypothesize', `signals.created=${run1.signals.created} proposed=${run1.proposed} opsDraft=${opsDraftId} (${opsDraft.problem_family}) execDraft=${execDraft.id} (${execDraft.problem_family}); fact ${fact.id} linked (${signalsBefore} -> ${signalsBefore + 1}), relink already, unlink of cited ${cited[0]} refused unlinked_citation; ${approved} drafts submitted and approved`);
+    pass('2 hypothesize', `signals.created=${run1.signals.created} proposed=${run1.proposed} opsDraft=${opsDraftId} (${opsDraft.problem_family}) execDraft=${execDraft.id} (${execDraft.problem_family}); fact ${fact.id} linked (${signalsBefore} -> ${signalsBefore + 1}), relink already, unlink of cited ${cited[0]} refused signal_cited; ${approved} drafts submitted and approved`);
 
     // 3. Enrollment-truth sync over the Top100 fixtures, twice.
     let readbackCalls = 0;
@@ -511,14 +511,15 @@ async function main(): Promise<number> {
     });
     expect('3 sync', enrollment?.legacy === true && enrollment.status === 'active' && enrollment.to_email === dellFirst.email!.toLowerCase(), `enrollment ${expectedEnrollmentId} -> ${JSON.stringify(enrollment && { legacy: enrollment.legacy, status: enrollment.status, to_email: enrollment.to_email })}`);
     expect('3 sync', enrollment!.account_name === dellAccount.name, `enrollment account ${enrollment!.account_name}, expected ${dellAccount.name}`);
-    expect('3 sync', enrollment!.version.status === 'frozen' && enrollment!.version.frozen_by_enrollment_id === expectedEnrollmentId, `first non-test enrollment did not freeze its version: ${JSON.stringify(enrollment!.version)}`);
+    // R2-5: a legacy readback row (legacy=true) never freezes the placeholder scaffold; the version stays draft and unclaimed.
+    expect('3 sync', enrollment!.version.status === 'draft' && enrollment!.version.frozen_by_enrollment_id == null, `legacy enrollment must not freeze its version (R2-5), got ${JSON.stringify(enrollment!.version)}, expected status draft with no frozen_by_enrollment_id`);
     const sync2 = await runEnrollmentSync(prisma, syncOpts, { readContacts });
     counts.sync2FamiliesExisting = sync2.families.existing;
     counts.sync2EnrollmentsUnchanged = sync2.enrollments.unchanged;
     expect('3 sync', sync2.families.created === 0 && sync2.families.existing === sync1.families.created, `second sync families -> ${JSON.stringify(sync2.families)}, expected created 0 existing ${sync1.families.created}`);
     expect('3 sync', sync2.enrollments.created === 0 && sync2.enrollments.updated === 0 && sync2.enrollments.unchanged === 1, `second sync enrollments -> ${JSON.stringify(sync2.enrollments)}, expected created 0 updated 0 unchanged 1`);
     counts.readbackCalls = readbackCalls;
-    pass('3 sync', `families created ${sync1.families.created} (${fixtureSequenceIds.join(', ')}), enrollments created 1 (${expectedEnrollmentId}, legacy, version frozen), rosters missing ${JSON.stringify(sync1.rostersMissing)}, reported ${JSON.stringify(sync1.reported)}; second run created 0 / existing ${sync2.families.existing} / unchanged 1; ${readbackCalls} readback calls`);
+    pass('3 sync', `families created ${sync1.families.created} (${fixtureSequenceIds.join(', ')}), enrollments created 1 (${expectedEnrollmentId}, legacy, version still draft per R2-5), rosters missing ${JSON.stringify(sync1.rostersMissing)}, reported ${JSON.stringify(sync1.reported)}; second run created 0 / existing ${sync2.families.existing} / unchanged 1; ${readbackCalls} readback calls`);
 
     // 4. Reply poller with a human reply and an out-of-office, twice.
     const engagements: HubSpotEmailEngagement[] = [
@@ -564,7 +565,7 @@ async function main(): Promise<number> {
     expect('4 replies', watermark?.value === engagements[1].timestamp.toISOString(), `watermark ${watermark?.value}, expected ${engagements[1].timestamp.toISOString()}`);
     pass('4 replies', `first poll created 1 filtered {auto_reply_subject: 1}, inbound ${inbound[0].id} on ${inbound[0].thread_id}, notifications reply + filtered_inbound; second poll created 0 existing 2; watermark advanced; ${searchCalls} fixture searches`);
 
-    // 5. Shadow routing run A: the ready persona is in flight, the exec persona enrolls, the suppressed one needs research.
+    // 5. Shadow routing run A: the ready persona is in flight, the exec persona enrolls, the do_not_contact persona is blocked at R0 (R2-1).
     let snapshotCalls = 0;
     const snapshotProvider: HubSpotSnapshotProvider = async (name, companyId) => {
       snapshotCalls += 1;
@@ -611,7 +612,8 @@ async function main(): Promise<number> {
     expect('5 routing', !opsRowA, `the in-flight ready persona was stored as ${opsRowA?.rule_id}; a skip must never be stored`);
     expect('5 routing', execRowA?.rule_id === 'enroll' && execRowA.action === 'enroll_gap_sequence' && execRowA.lane === 'work_queue', `exec persona rule ${execRowA?.rule_id} action ${execRowA?.action} lane ${execRowA?.lane}, expected enroll / enroll_gap_sequence / work_queue`);
     expect('5 routing', (execRowA!.inputs_snapshot as any).target === 'modex_queue' && execRowA!.hypothesis_id === execDraft.id, `exec target ${(execRowA!.inputs_snapshot as any).target} hypothesis ${execRowA!.hypothesis_id}, expected modex_queue on ${execDraft.id}`);
-    expect('5 routing', dncRowA?.rule_id === 'no_hypothesis' && dncRowA.action === 'research_required', `suppressed persona rule ${dncRowA?.rule_id} action ${dncRowA?.action}, expected no_hypothesis / research_required`);
+    // R2-1: the persona's do_not_contact column is authoritative on its own; a clear remote verdict never routes it past R0.
+    expect('5 routing', dncRowA?.rule_id === 'suppressed' && dncRowA.action === 'do_not_contact' && dncRowA.lane === 'blocked', `suppressed persona rule ${dncRowA?.rule_id} action ${dncRowA?.action} lane ${dncRowA?.lane}, expected suppressed / do_not_contact / blocked (R2-1)`);
     const queue = await listQueue(prisma, { runId: runIdA });
     expect('5 routing', queue.runId === runIdA && queue.items.length === rowsA.length && queue.nextCursor === null, `listQueue -> runId ${queue.runId} items ${queue.items.length} nextCursor ${queue.nextCursor}`);
     for (let i = 1; i < queue.items.length; i += 1) {
@@ -629,7 +631,7 @@ async function main(): Promise<number> {
     expect('5 routing', acted?.human_action === 'enrolled_by_hand' && acted.human_actor === ACTOR, `stamped ${JSON.stringify(acted)}`);
     const lastRun = await prisma.systemConfig.findUnique({ where: { key: LAST_RUN_CONFIG_KEY } });
     expect('5 routing', lastRun?.value === runIdA, `${LAST_RUN_CONFIG_KEY} is ${lastRun?.value}, expected ${runIdA}`);
-    pass('5 routing', `run A mode shadow: ${runA.decisions} decisions ${JSON.stringify(runA.byRule)}, skips ${JSON.stringify(runA.skips)}; exec persona ${execPersona.id} -> enroll (target modex_queue, hypothesis ${execDraft.id}); suppressed persona -> no_hypothesis; every row carries account + persona; queue ordered by priority; human action ok then already_acted, missing id not_found`);
+    pass('5 routing', `run A mode shadow: ${runA.decisions} decisions ${JSON.stringify(runA.byRule)}, skips ${JSON.stringify(runA.skips)}; exec persona ${execPersona.id} -> enroll (target modex_queue, hypothesis ${execDraft.id}); do_not_contact persona -> suppressed / do_not_contact / blocked (R2-1); every row carries account + persona; queue ordered by priority; human action ok then already_acted, missing id not_found`);
 
     // 6. Enroll table off run A.
     const items = await loadDecisions(prisma, runIdA);

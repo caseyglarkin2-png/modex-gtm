@@ -134,10 +134,28 @@ function lastDisposition(i: RoutingInputs) {
   return i.comms.lastDisposition;
 }
 
+/**
+ * The leg name for the modex `Persona.do_not_contact` column. The same name
+ * clawd uses when its modex leg refuses, so a remote hit and the local column
+ * collapse to one leg instead of two spellings of the same fact.
+ */
+export const MODEX_DO_NOT_CONTACT_LEG = 'modex_do_not_contact';
+
+/**
+ * Every leg that says "do not contact": the remote legs marked `hit`, plus the
+ * local column (R2-1). The column is authoritative on its own; a lagging or
+ * unreadable remote leg never clears a person we recorded as never-contact.
+ */
 function suppressedLegs(i: RoutingInputs): string[] {
-  return Object.entries(i.suppression.legs)
+  const legs = Object.entries(i.suppression.legs)
     .filter(([, v]) => v === 'hit')
     .map(([k]) => k);
+  if (i.persona.doNotContact && !legs.includes(MODEX_DO_NOT_CONTACT_LEG)) legs.push(MODEX_DO_NOT_CONTACT_LEG);
+  return legs;
+}
+
+function isSuppressed(i: RoutingInputs): boolean {
+  return i.suppression.verdict === 'suppressed' || i.persona.doNotContact;
 }
 
 function unknownLegs(i: RoutingInputs): string[] {
@@ -166,12 +184,24 @@ export const RULES: RoutingRule[] = [
   {
     id: 'suppressed',
     label: 'R0',
-    when: (i) => i.suppression.verdict === 'suppressed',
+    when: isSuppressed,
     action: 'do_not_contact',
     lane: 'blocked',
     blocked: true,
     reason: (i) => `suppressed:${suppressedLegs(i).join(',') || 'unspecified'}`,
-    predicate: (i) => `suppression verdict is suppressed on ${suppressedLegs(i).join(', ') || 'an unspecified leg'}`,
+    predicate: (i) => {
+      const parts: string[] = [];
+      if (i.suppression.verdict === 'suppressed') {
+        const remote = Object.entries(i.suppression.legs)
+          .filter(([, v]) => v === 'hit')
+          .map(([k]) => k);
+        parts.push(`suppression verdict is suppressed on ${remote.join(', ') || 'an unspecified leg'}`);
+      }
+      if (i.persona.doNotContact) {
+        parts.push(`persona is recorded do_not_contact (${MODEX_DO_NOT_CONTACT_LEG})${parts.length === 0 ? '; remote verdict is clear' : ''}`);
+      }
+      return parts.join('; ');
+    },
   },
   {
     id: 'suppression_unknown',
@@ -318,9 +348,12 @@ export const RULES: RoutingRule[] = [
   {
     id: 'hyp_resolved',
     label: 'R13',
+    // Terminal AND no newer version (R2-4): a reopened hypothesis is a new
+    // row with supersedes_id, and that row owns the routing, not this one.
     when: (i) =>
       i.hypothesis != null &&
-      (HYPOTHESIS_TERMINAL_STATUSES as readonly string[]).includes(i.hypothesis.status),
+      (HYPOTHESIS_TERMINAL_STATUSES as readonly string[]).includes(i.hypothesis.status) &&
+      !i.hypothesis.hasNewerVersion,
     action: 'nurture',
     lane: 'work_queue',
     reason: () => 'loop_closed',
@@ -339,12 +372,13 @@ export const RULES: RoutingRule[] = [
   {
     id: 'hot_email',
     label: 'R15',
-    when: (i) => hypothesisLive(i) && isHot(i) && !hasUsablePhone(i) && i.persona.emailValid,
+    // emailUsable, not emailValid (R2-8): a bounced address is never a send target.
+    when: (i) => hypothesisLive(i) && isHot(i) && !hasUsablePhone(i) && emailUsable(i),
     action: 'one_off_email',
     lane: 'work_queue',
     bonus: ACTION_BONUS.one_off_email,
     reason: () => 'hot',
-    predicate: () => 'hypothesis is approved, the account is hot, no usable phone, email is valid',
+    predicate: () => 'hypothesis is approved, the account is hot, no usable phone, email is usable',
   },
   {
     id: 'cooldown',
@@ -359,23 +393,26 @@ export const RULES: RoutingRule[] = [
   {
     id: 'enroll',
     label: 'R17',
+    // emailUsable, not emailValid (R2-8): a hard-bounced address with a usable phone was enrolled before this.
     when: (i) =>
-      hypothesisLive(i) && i.account.tam === 'in' && tierFits(i) && i.persona.roleGatePassed && i.persona.emailValid,
+      hypothesisLive(i) && i.account.tam === 'in' && tierFits(i) && i.persona.roleGatePassed && emailUsable(i),
     action: 'enroll_gap_sequence',
     lane: 'work_queue',
     bonus: ACTION_BONUS.enroll_gap_sequence,
     reason: (i) => `enroll:${resolveEnrollTarget(i)}`,
     predicate: (i) =>
-      `hypothesis is approved, TAM in, tier ${i.account.tamTier || 'unrated'} at heat tier ${i.account.heatTier}, role gate passed, email valid; target ${resolveEnrollTarget(i)}`,
+      `hypothesis is approved, TAM in, tier ${i.account.tamTier || 'unrated'} at heat tier ${i.account.heatTier}, role gate passed, email usable; target ${resolveEnrollTarget(i)}`,
   },
   {
     id: 'linkedin',
     label: 'R18',
-    when: (i) => hypothesisLive(i) && !i.persona.emailValid && !!i.persona.linkedinUrl,
+    // emailUsable, not emailValid (R2-8, concern 1): a hard-bounced address has no email path either.
+    when: (i) => hypothesisLive(i) && !emailUsable(i) && !!i.persona.linkedinUrl,
     action: 'linkedin_manual_task',
     lane: 'work_queue',
-    reason: () => 'no_valid_email',
-    predicate: () => 'hypothesis is approved, no valid email, LinkedIn profile present',
+    reason: () => 'no_usable_email',
+    predicate: (i) =>
+      `hypothesis is approved, email is ${i.persona.emailValid ? `marked ${i.persona.emailStatus}` : 'invalid'}, LinkedIn profile present`,
   },
   {
     id: 'default',

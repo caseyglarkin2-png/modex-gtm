@@ -19,11 +19,14 @@ export interface ForbiddenExplainPattern {
 }
 
 /**
- * Anchored, case-insensitive patterns that mark private first-party intent.
- * Ordinary language must route: "intention", "intentional", "opened a new DC",
- * "the plant opened in 2024" and "for" inside a URL path are public facts.
+ * The COPY-SAFE private-intent floor (the pre-R2-13 anchored list). This is
+ * what the compiler's C06 check runs over outbound copy, where "We
+ * downloaded the 10-K" is ordinary language and an allowlisted last-step
+ * link may legitimately point at yardflow.ai/. Every entry here is also in
+ * FORBIDDEN_EXPLAIN_PATTERNS; only the routing list carries the wider
+ * R2-13 phrasings.
  */
-export const FORBIDDEN_EXPLAIN_PATTERNS: readonly ForbiddenExplainPattern[] = [
+export const PRIVATE_INTENT_COPY_PATTERNS: readonly ForbiddenExplainPattern[] = [
   { label: 'intent score/signal/source/at', pattern: /\bintent(_|\s)?(score|signal|signals|source|at)\b/i },
   { label: 'buying intent', pattern: /\bbuying intent\b/i },
   { label: 'last_intent', pattern: /\blast_intent\b/i },
@@ -39,7 +42,45 @@ export const FORBIDDEN_EXPLAIN_PATTERNS: readonly ForbiddenExplainPattern[] = [
   { label: 'opens and clicks', pattern: /\bopen(s|ed)? and click(s|ed)?\b/i },
 ];
 
+/**
+ * Anchored, case-insensitive patterns that mark private first-party intent
+ * in ROUTING EXPLAIN text: the copy-safe floor plus the wider R2-13
+ * phrasings (click, download, engagement score, hot lead, own host, page
+ * view, "viewed the", "opened it"). Ordinary language must route:
+ * "intention", "intentional", "opened a new DC", "the plant opened in 2024"
+ * and "for" inside a URL path are public facts. Not for outbound copy: C06
+ * uses PRIVATE_INTENT_COPY_PATTERNS.
+ */
+export const FORBIDDEN_EXPLAIN_PATTERNS: readonly ForbiddenExplainPattern[] = [
+  ...PRIVATE_INTENT_COPY_PATTERNS,
+  { label: 'clicked the/a link', pattern: /\bclick(ed|s)?\s+(the|a|an|our|your|on)\b/i },
+  { label: 'download(ed)', pattern: /\bdownload(ed|s)?\b/i },
+  { label: 'engagement score', pattern: /\bengagement score\b/i },
+  { label: 'hot lead', pattern: /\bhot lead(s)?\b/i },
+  { label: 'page view', pattern: /\bpage ?views?\b/i },
+  { label: 'yardflow.ai/ path', pattern: /\byardflow\.ai\//i },
+  { label: 'viewed the', pattern: /\bviewed the\b/i },
+  { label: 'opened it', pattern: /\bopened it\b/i },
+];
+
 const PRIVATE_CATEGORIES = new Set(['intent', 'website_behavior', 'first_party_intent']);
+
+/**
+ * Trigger sources that are first-party behavior by definition (R2-13). A
+ * trigger from one of these is private however innocuous its title, so it
+ * never reaches whyAccount, whyNow or signalIds. The four pounce producers
+ * today (news, x, clawd, web) are public-news detectors and are not listed;
+ * an intent-engine producer that starts writing `PounceTrigger` rows must
+ * use one of these source names or be added here.
+ */
+export const PRIVATE_TRIGGER_SOURCES: ReadonlySet<string> = new Set([
+  'intent',
+  'intent_engine',
+  'microsite',
+  'first_party',
+  'first_party_intent',
+  'website_behavior',
+]);
 
 /** Returns the label of the first forbidden pattern found in `text`, or null. */
 export function containsForbidden(text: string): string | null {
@@ -49,8 +90,9 @@ export function containsForbidden(text: string): string | null {
   return null;
 }
 
-/** A trigger is public when neither its title nor its categories reveal first-party behavior. */
+/** A trigger is public when neither its source, its categories nor its title reveal first-party behavior. */
 export function isPublicTrigger(t: RoutingSignalInput): boolean {
+  if (PRIVATE_TRIGGER_SOURCES.has(String(t.source ?? '').trim().toLowerCase())) return false;
   if (t.categories.some((c) => PRIVATE_CATEGORIES.has(c.toLowerCase()))) return false;
   return containsForbidden(t.title) == null;
 }
@@ -176,13 +218,33 @@ export function buildExplain(i: RoutingInputs, rule: RoutingRule, rules?: Routin
   };
 }
 
-/** Throws naming the offending field and token when any explain field carries private intent. */
+/** Stable marker at the head of every explain-leak message; `ExplainLeakError.name` carries the same word. */
+export const EXPLAIN_LEAK_MARKER = 'explain_leak';
+
+/**
+ * The tripwire's error. Carries the offending field and pattern label so the
+ * run can count `explain_leak:<field>` and continue (R2-3) without matching
+ * on message text. Any other error out of the router is not this class.
+ */
+export class ExplainLeakError extends Error {
+  readonly name = 'ExplainLeakError';
+  constructor(
+    readonly field: keyof RoutingExplain,
+    readonly label: string,
+  ) {
+    super(`${EXPLAIN_LEAK_MARKER}: explain.${field} leaks private intent (${label}); private intent never leaves the router`);
+  }
+}
+
+export function isExplainLeakError(err: unknown): err is ExplainLeakError {
+  return err instanceof ExplainLeakError || (err instanceof Error && err.name === 'ExplainLeakError');
+}
+
+/** Throws `ExplainLeakError` naming the offending field and token when any explain field carries private intent. */
 export function assertExplainClean(explain: RoutingExplain): void {
   for (const [field, value] of Object.entries(explain)) {
     const text = Array.isArray(value) ? value.join('\n') : String(value ?? '');
     const label = containsForbidden(text);
-    if (label) {
-      throw new Error(`explain.${field} leaks private intent (${label}); private intent never leaves the router`);
-    }
+    if (label) throw new ExplainLeakError(field as keyof RoutingExplain, label);
   }
 }

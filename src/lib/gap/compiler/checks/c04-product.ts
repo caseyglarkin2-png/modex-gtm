@@ -12,7 +12,7 @@
  * "we downloaded the 10-K") must pass.
  */
 
-import { FORBIDDEN_EXPLAIN_PATTERNS, type ForbiddenExplainPattern } from '../../routing/explain';
+import { PRIVATE_INTENT_COPY_PATTERNS, type ForbiddenExplainPattern } from '../../routing/explain';
 import { firstBodySentence, spanOf, stripMarkers } from '../text';
 import type { Check, CheckSpan } from '../types';
 import { checkHypothesisAsFact, checkProspectRoiPredicted } from './c02-hedge';
@@ -38,7 +38,7 @@ export const COPY_INTENT_PATTERNS: readonly ForbiddenExplainPattern[] = [
   { label: 'hot lead', pattern: /\bhot lead\b/i },
 ];
 
-const ALL_INTENT_PATTERNS: readonly ForbiddenExplainPattern[] = [...COPY_INTENT_PATTERNS, ...FORBIDDEN_EXPLAIN_PATTERNS];
+const ALL_INTENT_PATTERNS: readonly ForbiddenExplainPattern[] = [...COPY_INTENT_PATTERNS, ...PRIVATE_INTENT_COPY_PATTERNS];
 
 export const checkProductLeads: Check = (draft, ctx) => {
   if (ctx.stepIndex !== 0) {

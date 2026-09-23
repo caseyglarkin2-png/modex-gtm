@@ -40,6 +40,7 @@ function base(): RoutingInputs {
           firstSeenAt: daysAgo(3),
           title: 'Acme Foods opens new distribution center in Ohio',
           url: 'https://example.com/acme-ohio',
+          source: 'news',
         },
       ],
       newestAgeDays: 3,
@@ -67,6 +68,7 @@ function base(): RoutingInputs {
       family: 'hidden_capacity',
       confidence: 0.6,
       evidenceFresh: true,
+      hasNewerVersion: false,
       expiresAt: daysAhead(30),
       resumeAt: null,
       version: 1,
@@ -105,6 +107,7 @@ function withHotTrigger(inputs: RoutingInputs, title = 'Acme Foods launches yard
       firstSeenAt: daysAgo(2),
       title,
       url: 'https://example.com/acme-automation',
+      source: 'news',
     },
   ];
   inputs.signals.newestAgeDays = 2;
@@ -160,6 +163,33 @@ describe('routePersona, one rule at a time', () => {
     expect(d.blocked).toBe(true);
     expect(d.reason).toBe('suppressed:clawd');
     expect(d.explain.whyAction).toContain('clawd');
+  });
+
+  it('R0 also fires on persona.doNotContact with a clear remote verdict, naming the modex_do_not_contact leg (R2-1)', () => {
+    const i = base();
+    i.persona.doNotContact = true;
+    i.suppression = { verdict: 'clear', legs: { clawd: 'clear' } };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('suppressed');
+    expect(d.action).toBe('do_not_contact');
+    expect(d.lane).toBe('blocked');
+    expect(d.blocked).toBe(true);
+    expect(d.reason).toBe('suppressed:modex_do_not_contact');
+    expect(d.explain.whyAction).toContain('modex_do_not_contact');
+  });
+
+  it('R0 names both legs when the remote verdict and persona.doNotContact both fire, and never duplicates the modex leg (R2-1)', () => {
+    const both = base();
+    both.persona.doNotContact = true;
+    both.suppression = { verdict: 'suppressed', legs: { clawd: 'hit' } };
+    const d = decision(routePersona(both));
+    expect(d.ruleId).toBe('suppressed');
+    expect(d.reason).toBe('suppressed:clawd,modex_do_not_contact');
+
+    const dup = base();
+    dup.persona.doNotContact = true;
+    dup.suppression = { verdict: 'suppressed', legs: { modex_do_not_contact: 'hit' } };
+    expect(decision(routePersona(dup)).reason).toBe('suppressed:modex_do_not_contact');
   });
 
   it('R0b suppression_unknown: verdict unknown routes research_required, blocked, reason suppression_unknown', () => {
@@ -328,15 +358,28 @@ describe('routePersona, one rule at a time', () => {
     expect(ed.reason).toBe('hypothesis_expired');
   });
 
-  it('R13 hyp_resolved: every terminal status routes nurture loop_closed', () => {
+  it('R13 hyp_resolved: every terminal status with no newer version routes nurture loop_closed', () => {
     for (const status of ['confirmed', 'partially_confirmed', 'rejected', 'unresolved', 'expired'] as const) {
       const i = base();
       i.hypothesis!.status = status;
+      i.hypothesis!.hasNewerVersion = false;
       const d = decision(routePersona(i));
       expect(d.ruleId, status).toBe('hyp_resolved');
       expect(d.action).toBe('nurture');
       expect(d.reason).toBe('loop_closed');
     }
+  });
+
+  it('R13 does not fire on a terminal hypothesis that a newer version supersedes; R10 never fires while a hypothesis row exists (R2-4)', () => {
+    const superseded = base();
+    superseded.hypothesis!.status = 'confirmed';
+    superseded.hypothesis!.hasNewerVersion = true;
+    const d = decision(routePersona(superseded));
+    expect(d.ruleId).not.toBe('hyp_resolved');
+    expect(d.ruleId).not.toBe('no_hypothesis');
+    // Nothing live to enroll on and the loop is not closed: the default row owns it.
+    expect(d.ruleId).toBe('default');
+    expect(d.reason).toBe('no_fit_for_sequence');
   });
 
   it('R14 hot_call: hot trigger, usable phone and role gate route call_now', () => {
@@ -471,6 +514,53 @@ describe('routePersona, one rule at a time', () => {
       sequenceName: 'Acme Foods GAP',
     };
     expect(decision(routePersona(ineligible)).target).toBe('build_required');
+  });
+
+  it('R18 also tests emailUsable: hard-bounced email, usable phone, approved hypothesis, LinkedIn URL, not hot -> linkedin_manual_task (R2-8, concern 1)', () => {
+    const i = base();
+    i.persona.emailValid = true;
+    i.persona.emailStatus = 'hard_bounced';
+    i.persona.linkedinUrl = 'https://www.linkedin.com/in/acme-vp';
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('linkedin');
+    expect(d.action).toBe('linkedin_manual_task');
+    expect(d.reason).toBe('no_usable_email');
+    expect(d.explain.whyAction).toContain('R18 linkedin');
+    // R18 still needs a live hypothesis: with none, nothing routes to LinkedIn.
+    const none = base();
+    none.persona.emailValid = true;
+    none.persona.emailStatus = 'hard_bounced';
+    none.hypothesis = null;
+    expect(decision(routePersona(none)).ruleId).toBe('no_hypothesis');
+  });
+
+  it('R17 never enrolls a hard-bounced address: usable phone, approved hypothesis, TAM in, no LinkedIn -> R19 default nurture, not enroll (R2-8)', () => {
+    const i = base();
+    i.persona.emailValid = true;
+    i.persona.emailStatus = 'hard_bounced';
+    i.persona.linkedinUrl = null;
+    // The phone is usable, so R4 (contact_invalid) does not catch this; R17 must refuse on its own.
+    const d = decision(routePersona(i));
+    expect(d.ruleId).not.toBe('enroll');
+    expect(d.action).not.toBe('enroll_gap_sequence');
+    expect(d.ruleId).toBe('default');
+    expect(d.action).toBe('nurture');
+    expect(d.reason).toBe('no_fit_for_sequence');
+    expect(d.explain.whyPerson).toContain('hard_bounced');
+  });
+
+  it('R15 tests emailUsable, not emailValid: a hot account with a bounced email and no usable phone is contact_invalid, never one_off_email (R2-8)', () => {
+    const i = withHotTrigger(base());
+    i.persona.phoneStatus = 'wrong';
+    i.persona.emailValid = true;
+    i.persona.emailStatus = 'bounced';
+    const d = decision(routePersona(i));
+    expect(d.ruleId).not.toBe('hot_email');
+    expect(d.ruleId).toBe('bounced_or_invalid');
+    expect(d.reason).toBe('contact_invalid');
+    // Prove the R15 predicate itself refuses, independent of R4's precedence.
+    const r15 = RULES.find((r) => r.id === 'hot_email')!;
+    expect(r15.when(i)).toBe(false);
   });
 
   it('R17 enroll: tier C with heat tier 3 or better still enrolls; tier C at heat tier 4 does not', () => {
@@ -621,6 +711,7 @@ describe('explain', () => {
         firstSeenAt: daysAgo(1),
         title: 'Contact viewed /for/acme',
         url: null,
+        source: 'news',
       },
       ...i.signals.freshTriggers,
     ];
@@ -681,6 +772,69 @@ describe('explain', () => {
     none.hypothesis!.whatANoMeans = null;
     none.hypothesis!.falsificationQuestions = [];
     expect(decision(routePersona(none)).explain.wouldProveWrong).toBe('no falsification recorded');
+  });
+
+  it('the review probes are caught: click, download, hot lead, engagement score, own host, page view, viewed the, opened it (R2-13)', () => {
+    const clean = decision(routePersona(base())).explain;
+    const probes = [
+      'clicked the pricing link',
+      'downloaded the deck',
+      'hot lead',
+      'engagement score 87',
+      'visited yardflow.ai/roi yesterday',
+      'viewed the ROI calculator',
+      'opened it three times',
+      'three page views on Monday',
+      'a pageview from the plant',
+      'clicks a link every week',
+    ];
+    for (const probe of probes) {
+      expect(() => assertExplainClean({ ...clean, whyNow: probe }), probe).toThrow(/whyNow/);
+      expect(() => assertExplainClean({ ...clean, whyAccount: probe }), probe).toThrow(/whyAccount/);
+    }
+    const stillPublic = ['the plant opened', 'with the intention of adding a shift', 'a hot summer for the freight market'];
+    for (const text of stillPublic) {
+      expect(() => assertExplainClean({ ...clean, whyNow: text }), text).not.toThrow();
+    }
+  });
+
+  it('the copy-safe list stays at the pre-R2-13 anchors: it passes "We downloaded the 10-K" and "yardflow.ai/proof" while the explain list catches both (R2-13 split for C06)', async () => {
+    const { PRIVATE_INTENT_COPY_PATTERNS } = await import('@/lib/gap/routing/explain');
+    const matches = (list: readonly { pattern: RegExp }[], text: string) => list.some(({ pattern }) => pattern.test(text));
+    for (const text of ['We downloaded the 10-K and read the segment note.', 'See yardflow.ai/proof for the numbers.', 'clicked the pricing link', 'hot lead']) {
+      expect(matches(PRIVATE_INTENT_COPY_PATTERNS, text), `copy list on "${text}"`).toBe(false);
+      expect(matches(FORBIDDEN_EXPLAIN_PATTERNS, text), `explain list on "${text}"`).toBe(true);
+    }
+    // The copy list is still the private-intent floor: every pre-R2-13 anchor is in it and in the explain list.
+    for (const text of ['intent score 90', 'visited our demo', 'landed on /for/acme-foods', 'opened our email twice']) {
+      expect(matches(PRIVATE_INTENT_COPY_PATTERNS, text), `copy list on "${text}"`).toBe(true);
+      expect(matches(FORBIDDEN_EXPLAIN_PATTERNS, text), `explain list on "${text}"`).toBe(true);
+    }
+    expect(PRIVATE_INTENT_COPY_PATTERNS.length).toBeLessThan(FORBIDDEN_EXPLAIN_PATTERNS.length);
+    for (const entry of PRIVATE_INTENT_COPY_PATTERNS) expect(FORBIDDEN_EXPLAIN_PATTERNS).toContain(entry);
+  });
+
+  it('a trigger whose source is the intent engine is private by source, whatever its title says (R2-13)', () => {
+    const i = base();
+    i.signals.freshTriggers = [
+      {
+        id: 'sig-engine',
+        score: 9,
+        normScore: 50,
+        categories: ['expansion'],
+        firstSeenAt: daysAgo(1),
+        title: 'Acme Foods activity',
+        url: null,
+        source: 'intent_engine',
+      },
+      ...i.signals.freshTriggers,
+    ];
+    const d = decision(routePersona(i));
+    expect(d.explain.whyAccount).toContain('Acme Foods opens new distribution center in Ohio');
+    expect(d.explain.whyAccount).not.toContain('Acme Foods activity');
+    expect(d.explain.whyNow).not.toContain('sig-engine');
+    expect(d.explain.signalIds).not.toContain('sig-engine');
+    expect(d.explain.signalIds).toContain('sig-1');
   });
 
   it('assertExplainClean throws naming the field and the pattern label', () => {
