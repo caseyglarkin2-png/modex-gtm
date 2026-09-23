@@ -5,9 +5,11 @@ import {
   HYPOTHESIS_TERMINAL_STATUSES,
 } from '@/lib/gap/taxonomy';
 import {
+  DISPOSITION_OUTCOMES,
   LEGAL_TRANSITIONS,
   expiresAtFor,
   isTerminalStatus,
+  newestConfirmedDisposition,
   transition,
   type HypothesisAction,
   type HypothesisSnapshot,
@@ -51,6 +53,9 @@ function snapshot(overrides: Partial<HypothesisSnapshot> = {}): HypothesisSnapsh
 }
 
 const ctx = { now: NOW };
+
+/** An observation that cites only sig_a, for fixtures that link only sig_a. */
+const OBSERVATION_ONLY_A = 'They opened a second DC in Ohio [S:sig_a].';
 
 describe('terminal statuses', () => {
   for (const status of HYPOTHESIS_TERMINAL_STATUSES) {
@@ -201,6 +206,7 @@ describe('review_required + approve', () => {
       transition(
         snapshot({
           status: 'review_required',
+          observation: OBSERVATION_ONLY_A,
           linkedSignals: [{ id: 'sig_a', hasEvidence: false, expiresAt: FUTURE }],
         }),
         'approve',
@@ -230,6 +236,7 @@ describe('review_required + approve', () => {
       transition(
         snapshot({
           status: 'review_required',
+          observation: OBSERVATION_ONLY_A,
           linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: null }],
         }),
         'approve',
@@ -243,12 +250,70 @@ describe('review_required + approve', () => {
       transition(
         snapshot({
           status: 'review_required',
+          observation: OBSERVATION_ONLY_A,
           linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: new Date(NOW) }],
         }),
         'approve',
         reviewCtx,
       ),
     ).toEqual({ ok: false, reason: 'evidence_expired' });
+  });
+
+  describe('re-runs the submit guard set (review-stage edits cannot bypass it)', () => {
+    it('refuses unhedged_hypothesis', () => {
+      expect(
+        transition(
+          snapshot({ status: 'review_required', problemHypothesis: 'The new DC runs gate checks on paper.' }),
+          'approve',
+          reviewCtx,
+        ),
+      ).toEqual({ ok: false, reason: 'unhedged_hypothesis' });
+    });
+
+    it('refuses unmapped_family', () => {
+      expect(
+        transition(snapshot({ status: 'review_required', problemFamily: 'unmapped' }), 'approve', reviewCtx),
+      ).toEqual({ ok: false, reason: 'unmapped_family' });
+    });
+
+    it('refuses no_falsification', () => {
+      expect(
+        transition(snapshot({ status: 'review_required', falsificationQuestions: [] }), 'approve', reviewCtx),
+      ).toEqual({ ok: false, reason: 'no_falsification' });
+    });
+
+    it('refuses no_problem', () => {
+      expect(
+        transition(snapshot({ status: 'review_required', problemHypothesis: '' }), 'approve', reviewCtx),
+      ).toEqual({ ok: false, reason: 'no_problem' });
+    });
+
+    it('refuses no_signals', () => {
+      expect(transition(snapshot({ status: 'review_required', linkedSignals: [] }), 'approve', reviewCtx)).toEqual({
+        ok: false,
+        reason: 'no_signals',
+      });
+    });
+
+    it('refuses uncited_sentence', () => {
+      expect(
+        transition(
+          snapshot({ status: 'review_required', observation: 'Cited [S:sig_a]. Not cited.' }),
+          'approve',
+          reviewCtx,
+        ),
+      ).toEqual({ ok: false, reason: 'uncited_sentence' });
+    });
+
+    it('runs the submit guards before the actor guard', () => {
+      expect(
+        transition(
+          snapshot({ status: 'review_required', problemHypothesis: 'The new DC runs gate checks on paper.' }),
+          'approve',
+          { now: NOW, actor: '' },
+        ),
+      ).toEqual({ ok: false, reason: 'unhedged_hypothesis' });
+    });
   });
 });
 
@@ -294,7 +359,11 @@ describe('approved + activate', () => {
   it('refuses no_evidence', () => {
     expect(
       transition(
-        { ...activatable(), linkedSignals: [{ id: 'sig_a', hasEvidence: false, expiresAt: null }] },
+        {
+          ...activatable(),
+          observation: OBSERVATION_ONLY_A,
+          linkedSignals: [{ id: 'sig_a', hasEvidence: false, expiresAt: null }],
+        },
         'activate',
         ctx,
       ),
@@ -304,7 +373,11 @@ describe('approved + activate', () => {
   it('refuses evidence_expired', () => {
     expect(
       transition(
-        { ...activatable(), linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: PAST }] },
+        {
+          ...activatable(),
+          observation: OBSERVATION_ONLY_A,
+          linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: PAST }],
+        },
         'activate',
         ctx,
       ),
@@ -344,35 +417,135 @@ describe('approved + activate', () => {
       ),
     ).toEqual({ ok: false, reason: 'first_touch_proof' });
   });
+
+  describe('re-runs the submit guard set (defense in depth)', () => {
+    it('refuses uncited_sentence', () => {
+      expect(
+        transition({ ...activatable(), observation: 'Cited [S:sig_a]. Not cited.' }, 'activate', ctx),
+      ).toEqual({ ok: false, reason: 'uncited_sentence' });
+    });
+
+    it('refuses unhedged_hypothesis', () => {
+      expect(
+        transition({ ...activatable(), problemHypothesis: 'Your yards are bleeding hours.' }, 'activate', ctx),
+      ).toEqual({ ok: false, reason: 'unhedged_hypothesis' });
+    });
+
+    it('refuses unmapped_family', () => {
+      expect(transition({ ...activatable(), problemFamily: 'unmapped' }, 'activate', ctx)).toEqual({
+        ok: false,
+        reason: 'unmapped_family',
+      });
+    });
+
+    it('runs the submit guards before not_reviewed', () => {
+      expect(
+        transition({ ...activatable(), reviewedBy: null, falsificationQuestions: [] }, 'activate', ctx),
+      ).toEqual({ ok: false, reason: 'no_falsification' });
+    });
+  });
 });
 
 describe('active + resolve', () => {
+  const OLDER = new Date('2026-08-20T09:00:00.000Z');
+  const NEWER = new Date('2026-09-10T09:00:00.000Z');
+  const resolveEffects = (createdAt: Date) => [
+    'set_resolved',
+    'stop_enrollments:hypothesis_resolved',
+    `resolved_by_disposition:${createdAt.toISOString()}`,
+  ];
   const resolvable = () =>
     snapshot({
       status: 'active',
       confirmedDispositions: [{ responseClass: 'problem_partially_confirmed', createdAt: PAST }],
     });
 
-  it('moves to the requested outcome with resolve effects', () => {
-    expect(transition(resolvable(), 'resolve', { now: NOW, outcome: 'partially_confirmed' })).toEqual({
+  it('derives the outcome from the confirmed disposition when ctx.outcome is absent', () => {
+    expect(transition(resolvable(), 'resolve', ctx)).toEqual({
       ok: true,
       to: 'partially_confirmed',
-      effects: ['set_resolved', 'stop_enrollments:hypothesis_resolved'],
+      effects: resolveEffects(PAST),
     });
   });
 
-  it('moves to each of the three outcomes', () => {
-    for (const outcome of ['confirmed', 'partially_confirmed', 'rejected'] as const) {
-      expect(transition(resolvable(), 'resolve', { now: NOW, outcome })).toEqual({
-        ok: true,
-        to: outcome,
-        effects: ['set_resolved', 'stop_enrollments:hypothesis_resolved'],
-      });
+  it('accepts a ctx.outcome that agrees with the derived one', () => {
+    expect(transition(resolvable(), 'resolve', { now: NOW, outcome: 'partially_confirmed' })).toEqual({
+      ok: true,
+      to: 'partially_confirmed',
+      effects: resolveEffects(PAST),
+    });
+  });
+
+  it('refuses outcome_mismatch naming the derived outcome when ctx.outcome disagrees', () => {
+    expect(transition(resolvable(), 'resolve', { now: NOW, outcome: 'confirmed' })).toEqual({
+      ok: false,
+      reason: 'outcome_mismatch:partially_confirmed',
+    });
+  });
+
+  it('maps each resolving response class to its status', () => {
+    const cases = [
+      ['problem_confirmed', 'confirmed'],
+      ['problem_partially_confirmed', 'partially_confirmed'],
+      ['problem_rejected', 'rejected'],
+    ] as const;
+    expect(Object.entries(DISPOSITION_OUTCOMES)).toEqual(cases.map(([k, v]) => [k, v]));
+    for (const [responseClass, to] of cases) {
+      expect(
+        transition(
+          { ...resolvable(), confirmedDispositions: [{ responseClass, createdAt: PAST }] },
+          'resolve',
+          ctx,
+        ),
+      ).toEqual({ ok: true, to, effects: resolveEffects(PAST) });
     }
   });
 
-  it('refuses no_outcome', () => {
-    expect(transition(resolvable(), 'resolve', ctx)).toEqual({ ok: false, reason: 'no_outcome' });
+  it('the newest confirmed disposition decides, regardless of array order', () => {
+    const dispositions = [
+      { responseClass: 'problem_rejected', createdAt: NEWER },
+      { responseClass: 'problem_confirmed', createdAt: OLDER },
+    ];
+    expect(transition({ ...resolvable(), confirmedDispositions: dispositions }, 'resolve', ctx)).toEqual({
+      ok: true,
+      to: 'rejected',
+      effects: resolveEffects(NEWER),
+    });
+    expect(
+      transition({ ...resolvable(), confirmedDispositions: [...dispositions].reverse() }, 'resolve', ctx),
+    ).toEqual({ ok: true, to: 'rejected', effects: resolveEffects(NEWER) });
+  });
+
+  it('ignores non-resolving dispositions when picking the newest', () => {
+    expect(
+      transition(
+        {
+          ...resolvable(),
+          confirmedDispositions: [
+            { responseClass: 'problem_confirmed', createdAt: OLDER },
+            { responseClass: 'meeting_accepted', createdAt: NEWER },
+          ],
+        },
+        'resolve',
+        ctx,
+      ),
+    ).toEqual({ ok: true, to: 'confirmed', effects: resolveEffects(OLDER) });
+  });
+
+  it('a seller-picked outcome cannot override the newest disposition', () => {
+    expect(
+      transition(
+        {
+          ...resolvable(),
+          confirmedDispositions: [
+            { responseClass: 'problem_confirmed', createdAt: OLDER },
+            { responseClass: 'problem_rejected', createdAt: NEWER },
+          ],
+        },
+        'resolve',
+        { now: NOW, outcome: 'confirmed' },
+      ),
+    ).toEqual({ ok: false, reason: 'outcome_mismatch:rejected' });
   });
 
   it('refuses no_confirmed_disposition when there are no dispositions', () => {
@@ -381,7 +554,7 @@ describe('active + resolve', () => {
     ).toEqual({ ok: false, reason: 'no_confirmed_disposition' });
   });
 
-  it('refuses no_confirmed_disposition when no disposition is a problem_ class', () => {
+  it('refuses no_confirmed_disposition when no disposition is a resolving class', () => {
     expect(
       transition(
         {
@@ -392,6 +565,23 @@ describe('active + resolve', () => {
         { now: NOW, outcome: 'confirmed' },
       ),
     ).toEqual({ ok: false, reason: 'no_confirmed_disposition' });
+  });
+
+  it('never returns no_outcome: an absent outcome is derived, not refused', () => {
+    const result = transition(resolvable(), 'resolve', { now: NOW });
+    expect(result.ok).toBe(true);
+  });
+});
+
+describe('newestConfirmedDisposition', () => {
+  it('returns null for an empty list', () => {
+    expect(newestConfirmedDisposition([])).toBeNull();
+  });
+
+  it('breaks createdAt ties toward the later array entry', () => {
+    const a = { responseClass: 'problem_confirmed', createdAt: PAST };
+    const b = { responseClass: 'problem_rejected', createdAt: new Date(PAST) };
+    expect(newestConfirmedDisposition([a, b])).toBe(b);
   });
 });
 

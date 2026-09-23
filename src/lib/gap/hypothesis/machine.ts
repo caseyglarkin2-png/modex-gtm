@@ -8,6 +8,12 @@
  * so tests and UI can render it without re-deriving it.
  *
  * Refusal reasons are stable strings: callers and tests match on them.
+ *
+ * Two invariants worth naming. The submit guard set (signals, cited
+ * observation, hedged problem, falsification questions, mapped family) is
+ * re-run on approve and on activate, because narrative edits are accepted
+ * while a hypothesis sits in review. And resolve never takes the seller's
+ * word for the outcome: the newest confirmed disposition decides.
  */
 
 import {
@@ -73,7 +79,11 @@ export type TransitionResult =
 export interface LegalTransition {
   from: HypothesisStatus;
   action: HypothesisAction;
-  /** The destination status, or `'outcome'` when the destination is `ctx.outcome`. */
+  /**
+   * The destination status, or `'outcome'` when the destination is derived from
+   * the newest confirmed disposition (see `DISPOSITION_OUTCOMES`). A `ctx.outcome`
+   * that disagrees with the derived one is refused with `outcome_mismatch:<derived>`.
+   */
   to: HypothesisStatus | 'outcome';
 }
 
@@ -132,6 +142,31 @@ function evidenceGuard(snapshot: HypothesisSnapshot, now: Date): 'no_evidence' |
   return null;
 }
 
+/** Response classes that resolve a hypothesis, and the status each one resolves to. */
+export const DISPOSITION_OUTCOMES: Readonly<Record<string, ResolutionOutcome>> = {
+  problem_confirmed: 'confirmed',
+  problem_partially_confirmed: 'partially_confirmed',
+  problem_rejected: 'rejected',
+};
+
+/**
+ * The newest disposition with a resolving response class, or `null`. Ties on
+ * createdAt go to the later entry in the array. The seller does not pick the
+ * outcome; the buyer's latest answer does.
+ */
+export function newestConfirmedDisposition(
+  dispositions: readonly { responseClass: string; createdAt: Date }[],
+): { responseClass: string; createdAt: Date } | null {
+  let newest: { responseClass: string; createdAt: Date } | null = null;
+  for (const disposition of dispositions) {
+    if (!(disposition.responseClass in DISPOSITION_OUTCOMES)) continue;
+    if (newest === null || disposition.createdAt.getTime() >= newest.createdAt.getTime()) {
+      newest = disposition;
+    }
+  }
+  return newest;
+}
+
 function isHedged(problemHypothesis: string): boolean {
   const lower = problemHypothesis.toLowerCase();
   return HEDGE_TOKENS.some((token) => lower.includes(token));
@@ -152,6 +187,8 @@ function submitGuard(snapshot: HypothesisSnapshot): string | null {
 }
 
 function activateGuard(snapshot: HypothesisSnapshot, now: Date): string | null {
+  const narrative = submitGuard(snapshot);
+  if (narrative) return narrative;
   if (!nonBlank(snapshot.reviewedBy)) return 'not_reviewed';
   const evidence = evidenceGuard(snapshot, now);
   if (evidence) return evidence;
@@ -198,6 +235,10 @@ export function transition(
   }
 
   if (from === 'review_required' && action === 'approve') {
+    // Review-stage narrative edits can land after submit, so the submit guard
+    // set is re-run here: nothing unhedged, unmapped or unfalsifiable gets approved.
+    const narrative = submitGuard(snapshot);
+    if (narrative) return refuse(narrative);
     if (!nonBlank(ctx.actor)) return refuse('no_actor');
     const evidence = evidenceGuard(snapshot, ctx.now);
     if (evidence) return refuse(evidence);
@@ -210,10 +251,15 @@ export function transition(
   }
 
   if (from === 'active' && action === 'resolve') {
-    if (!ctx.outcome) return refuse('no_outcome');
-    const confirmed = snapshot.confirmedDispositions.some((d) => d.responseClass.startsWith('problem_'));
-    if (!confirmed) return refuse('no_confirmed_disposition');
-    return move(ctx.outcome, ['set_resolved', 'stop_enrollments:hypothesis_resolved']);
+    const deciding = newestConfirmedDisposition(snapshot.confirmedDispositions);
+    if (!deciding) return refuse('no_confirmed_disposition');
+    const derived = DISPOSITION_OUTCOMES[deciding.responseClass];
+    if (ctx.outcome !== undefined && ctx.outcome !== derived) return refuse(`outcome_mismatch:${derived}`);
+    return move(derived, [
+      'set_resolved',
+      'stop_enrollments:hypothesis_resolved',
+      `resolved_by_disposition:${deciding.createdAt.toISOString()}`,
+    ]);
   }
 
   if (from === 'active' && action === 'close_unresolved') {
