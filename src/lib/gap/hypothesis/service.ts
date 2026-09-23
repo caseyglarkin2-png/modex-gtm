@@ -32,7 +32,7 @@ import {
   type LinkedSignal,
   type TransitionContext,
 } from './machine';
-import { validateObservation } from './observation';
+import { extractCitationIds, validateObservation } from './observation';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -183,19 +183,6 @@ function isConfidence(value: number): boolean {
   return Number.isInteger(value) && value >= 0 && value <= 100;
 }
 
-/** `null` when every id exists, else the first missing id. */
-async function firstUnknownSignal(prisma: any, signalIds: readonly string[]): Promise<string | null> {
-  const found: Array<{ id: string }> = await prisma.prospectingSignal.findMany({
-    where: { id: { in: [...signalIds] } },
-    select: { id: true },
-  });
-  const known = new Set(found.map((signal) => signal.id));
-  for (const id of signalIds) {
-    if (!known.has(id)) return id;
-  }
-  return null;
-}
-
 function joinRows(hypothesisId: string, signalIds: readonly string[], primarySignalId: string | null | undefined, linkedBy: string) {
   const unique = Array.from(new Set(signalIds));
   return unique.map((signalId) => ({
@@ -253,8 +240,12 @@ export async function proposeHypothesis(prisma: any, input: ProposeInput): Promi
   if (hasObservation && !hasSignals) return { ok: false, reason: 'no_signals' };
 
   if (hasSignals) {
-    const unknown = await firstUnknownSignal(prisma, input.signalIds);
-    if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
+    const lookup = await signalAccounts(prisma, input.signalIds);
+    if ('unknown' in lookup) return { ok: false, reason: `unknown_signal:${lookup.unknown}` };
+    // Every linked signal must be a fact about THIS account (R2-9).
+    for (const signalId of input.signalIds) {
+      if (lookup.accounts.get(signalId) !== input.accountName) return { ok: false, reason: 'signal_account_mismatch' };
+    }
   }
 
   if (hasObservation) {
@@ -573,6 +564,7 @@ class NarrativeRefusal extends Error {
 
 const NARRATIVE_SELECT = {
   id: true,
+  account_name: true,
   status: true,
   problem_family: true,
   secondary_families: true,
@@ -616,10 +608,12 @@ export async function updateDraftNarrative(
   if (patch.confidence !== undefined && !isConfidence(patch.confidence)) {
     return { ok: false, reason: 'bad_confidence' };
   }
+  let patchedAccounts: Map<string, string | null> | null = null;
   if (patch.signalIds !== undefined) {
     if (patch.signalIds.length === 0) return { ok: false, reason: 'no_signals' };
-    const unknown = await firstUnknownSignal(prisma, patch.signalIds);
-    if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
+    const lookup = await signalAccounts(prisma, patch.signalIds);
+    if ('unknown' in lookup) return { ok: false, reason: `unknown_signal:${lookup.unknown}` };
+    patchedAccounts = lookup.accounts;
   }
 
   try {
@@ -627,6 +621,12 @@ export async function updateDraftNarrative(
       const row = await tx.prospectingHypothesis.findUnique({ where: { id }, select: NARRATIVE_SELECT });
       if (!row) throw new NarrativeRefusal('not_found');
       if (!EDITABLE_STATUSES.includes(row.status)) throw new NarrativeRefusal('narrative_frozen');
+      // Every patched signal must be a fact about THIS hypothesis's account (R2-9).
+      if (patchedAccounts) {
+        for (const signalId of patch.signalIds ?? []) {
+          if (patchedAccounts.get(signalId) !== row.account_name) throw new NarrativeRefusal('signal_account_mismatch');
+        }
+      }
 
       const currentIds: string[] = (row.signals ?? []).map((link: any) => link.signal_id);
       const currentPrimary: string | null =
@@ -696,10 +696,32 @@ export type UnlinkSignalResult =
 
 const LINK_SELECT = {
   id: true,
+  account_name: true,
   status: true,
   observation: true,
   signals: { select: { signal_id: true, role: true } },
 } as const;
+
+/**
+ * The account each requested signal is registered against, or the first
+ * unknown id. A signal is a fact about ONE account; linking it to another
+ * account's hypothesis would let GAP_SIGNAL_FROZEN pin the wrong account
+ * forever (R2-9).
+ */
+async function signalAccounts(
+  prisma: any,
+  signalIds: readonly string[],
+): Promise<{ unknown: string } | { accounts: Map<string, string | null> }> {
+  const found: Array<{ id: string; account_name: string | null }> = await prisma.prospectingSignal.findMany({
+    where: { id: { in: [...signalIds] } },
+    select: { id: true, account_name: true },
+  });
+  const accounts = new Map(found.map((signal) => [signal.id, signal.account_name ?? null]));
+  for (const id of signalIds) {
+    if (!accounts.has(id)) return { unknown: id };
+  }
+  return { accounts };
+}
 
 /**
  * Append the `edit` event for a join change. Same payload shape as
@@ -758,14 +780,18 @@ export async function linkSignals(
 ): Promise<LinkSignalsResult> {
   const requested = Array.from(new Set(signalIds));
   if (requested.length === 0) return { ok: false, reason: 'no_signals' };
-  const unknown = await firstUnknownSignal(prisma, requested);
-  if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
+  const lookup = await signalAccounts(prisma, requested);
+  if ('unknown' in lookup) return { ok: false, reason: `unknown_signal:${lookup.unknown}` };
 
   try {
     return await prisma.$transaction(async (tx: any): Promise<LinkSignalsResult> => {
       const row = await tx.prospectingHypothesis.findUnique({ where: { id }, select: LINK_SELECT });
       if (!row) throw new NarrativeRefusal('not_found');
       if (!EDITABLE_STATUSES.includes(row.status)) throw new NarrativeRefusal('narrative_frozen');
+      // Every requested signal must be a fact about THIS hypothesis's account (R2-9).
+      for (const signalId of requested) {
+        if (lookup.accounts.get(signalId) !== row.account_name) throw new NarrativeRefusal('signal_account_mismatch');
+      }
 
       const currentIds: string[] = (row.signals ?? []).map((link: any) => link.signal_id);
       const current = new Set(currentIds);
@@ -786,11 +812,11 @@ export async function linkSignals(
 
 /**
  * Remove one signal link from a hypothesis that has not left
- * draft/review_required. The observation is re-validated against the
- * post-unlink set INSIDE the transaction, and an observation that still
- * cites the signal refuses `unlinked_citation` before any write. Other
- * validator reasons (an empty observation, an uncited sentence) are not
- * caused by the unlink and do not block it.
+ * draft/review_required. The observation's citation ids are read INSIDE the
+ * transaction, and an observation that still cites the signal refuses
+ * `signal_cited` before any write (N5). Other observation defects (an empty
+ * observation, an uncited sentence) are not caused by the unlink and do
+ * not block it.
  */
 export async function unlinkSignal(
   prisma: any,
@@ -808,10 +834,11 @@ export async function unlinkSignal(
       if (!currentIds.includes(signalId)) throw new NarrativeRefusal('not_linked');
       const nextIds = currentIds.filter((current) => current !== signalId);
 
-      const observation = validateObservation(row.observation ?? '', nextIds);
-      if (!observation.ok && observation.reason === 'unlinked_citation') {
-        throw new NarrativeRefusal('unlinked_citation');
-      }
+      // Read the citations directly (N5): an observation that still cites
+      // this signal refuses `signal_cited`, independent of the validator's
+      // reason ordering (an empty or uncited sentence elsewhere is not
+      // caused by the unlink and does not block it).
+      if (extractCitationIds(row.observation ?? '').includes(signalId)) throw new NarrativeRefusal('signal_cited');
 
       await lockEditable(tx, id);
       await tx.hypothesisSignal.deleteMany({ where: { hypothesis_id: id, signal_id: signalId } });

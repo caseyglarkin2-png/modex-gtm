@@ -14,8 +14,9 @@
  *   400 invalid_body / invalid_query   shape
  *   404 not_found                       the service could not load the row
  *   409 narrative_frozen                the row left review (or moved under us)
- *   409 unlinked_citation               the observation still cites the signal
- *   422 <reason>                        unknown_signal:<id>, no_signals, not_linked
+ *   409 signal_cited                    the observation still cites the signal (N5)
+ *   422 <reason>                        unknown_signal:<id>, no_signals, not_linked,
+ *                                       signal_account_mismatch (R2-9)
  *   200 {linked, already} / {unlinked}
  */
 
@@ -32,7 +33,7 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 const LinkSchema = z.object({ signalIds: z.array(z.string().min(1)).min(1) });
 
-const CONFLICT_REASONS: ReadonlySet<string> = new Set(['narrative_frozen', 'unlinked_citation']);
+const CONFLICT_REASONS: ReadonlySet<string> = new Set(['narrative_frozen', 'signal_cited']);
 
 function firstField(error: z.ZodError): string {
   return error.issues[0]?.path.map(String).join('.') || 'body';

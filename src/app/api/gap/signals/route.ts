@@ -14,8 +14,12 @@
  *                        never quotable as public evidence. A blank text is
  *                        the adapter's `no_evidence_text` refusal (422).
  *   public               `url` required and must parse as http(s) (400 field
- *                        url). Registered as sourceKind `manual` with
- *                        sourceId `manual:<sha1(url)>`, `externalOk` true.
+ *                        url) on a PUBLIC host: loopback, private ranges,
+ *                        `.local`/`.internal` and `PRIVATE_FACT_HOSTS` answer
+ *                        422 `private_host`; `type` intent or website_behavior
+ *                        answers 422 `private_type` (R2-10). Registered as sourceKind `manual` with
+ *                        sourceId `manual:<sha1(accountName + "\n" + url)>`
+ *                        (R2-9: keyed on the account too), `externalOk` true.
  *
  * The account must exist (404 account_not_found). 201 `{id, created}`;
  * `created` is false when the same source was already registered, because
@@ -71,16 +75,66 @@ function sha1(value: string): string {
   return createHash('sha1').update(value).digest('hex');
 }
 
-/** The url when it parses with an http(s) scheme, else null. */
-function httpUrl(raw: string | undefined): string | null {
+/**
+ * Hosts that can never be a PUBLIC fact (R2-10): our own properties and the
+ * tools we read prospects through. A url on one of these is first-party
+ * knowledge at best and private intent at worst; the operator branch is
+ * the honest place for it. A host matches when it equals an entry or ends
+ * with `.` + the entry.
+ */
+export const PRIVATE_FACT_HOSTS: readonly string[] = [
+  'yardflow.ai',
+  'freightroll.com',
+  'hubspot.com',
+  'app.hubspot.com',
+  'docs.google.com',
+  'drive.google.com',
+];
+
+/** Signal types a public fact may not carry: both name first-party behavior. */
+const PRIVATE_FACT_TYPES: ReadonlySet<SignalType> = new Set<SignalType>(['intent', 'website_behavior']);
+
+const PRIVATE_SUFFIXES = ['.local', '.internal', '.localhost'];
+
+/** IPv4 loopback, RFC 1918 and link-local ranges. */
+function isPrivateIpv4(host: string): boolean {
+  const m = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(host);
+  if (!m) return false;
+  const [a, b] = [Number(m[1]), Number(m[2])];
+  if (a === 127 || a === 10) return true;
+  if (a === 172 && b >= 16 && b <= 31) return true;
+  if (a === 192 && b === 168) return true;
+  if (a === 169 && b === 254) return true;
+  return false;
+}
+
+/** Loopback, private ranges, local suffixes and the own-domain list. */
+export function isPrivateHost(hostname: string): boolean {
+  let host = hostname.trim().toLowerCase();
+  if (host.endsWith('.')) host = host.slice(0, -1);
+  if (host.startsWith('[') && host.endsWith(']')) host = host.slice(1, -1);
+  if (!host) return true;
+  if (host === 'localhost' || host === '::1' || host === '0:0:0:0:0:0:0:1') return true;
+  if (isPrivateIpv4(host)) return true;
+  if (PRIVATE_SUFFIXES.some((suffix) => host.endsWith(suffix))) return true;
+  return PRIVATE_FACT_HOSTS.some((entry) => host === entry || host.endsWith(`.${entry}`));
+}
+
+type HttpUrlResult = { ok: true; url: string } | { ok: false; reason: 'invalid_url' | 'private_host' };
+
+/** The url when it parses with an http(s) scheme on a public host; the refusal reason otherwise. */
+function httpUrl(raw: string | undefined): HttpUrlResult {
   const trimmed = (raw ?? '').trim();
-  if (!trimmed) return null;
+  if (!trimmed) return { ok: false, reason: 'invalid_url' };
+  let parsed: URL;
   try {
-    const parsed = new URL(trimmed);
-    return parsed.protocol === 'http:' || parsed.protocol === 'https:' ? parsed.toString() : null;
+    parsed = new URL(trimmed);
   } catch {
-    return null;
+    return { ok: false, reason: 'invalid_url' };
   }
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return { ok: false, reason: 'invalid_url' };
+  if (isPrivateHost(parsed.hostname)) return { ok: false, reason: 'private_host' };
+  return { ok: true, url: parsed.toString() };
 }
 
 function trimOrNull(value: string | null | undefined): string | null {
@@ -104,7 +158,10 @@ function publicFactInput(body: Body, url: string, observedAt: Date, registeredBy
     hubspotCompanyId: trimOrNull(body.hubspotCompanyId),
     personaId: body.personaId ?? null,
     sourceKind: 'manual',
-    sourceId: `manual:${sha1(url)}`,
+    // Keyed on account + url, as the operator branch is (R2-9): one story
+    // cited for two accounts is two facts, so the second account can never
+    // link (and freeze) the first account's signal id.
+    sourceId: `manual:${sha1(`${body.accountName.trim()}\n${url}`)}`,
     type,
     title: trimOrNull(body.title) ?? clip(url, TITLE_MAX),
     summary: null,
@@ -144,9 +201,13 @@ export async function POST(request: NextRequest) {
 
   let input: ProspectingSignalInput;
   if (body.kind === 'public') {
-    const url = httpUrl(body.url);
-    if (!url) return invalidBody('url');
-    input = publicFactInput(body, url, observedAt, email);
+    const checked = httpUrl(body.url);
+    if (!checked.ok) {
+      if (checked.reason === 'private_host') return NextResponse.json({ error: 'private_host' }, { status: 422 });
+      return invalidBody('url');
+    }
+    if (body.type && PRIVATE_FACT_TYPES.has(body.type)) return NextResponse.json({ error: 'private_type' }, { status: 422 });
+    input = publicFactInput(body, checked.url, observedAt, email);
   } else {
     const text = body.text ?? '';
     const projected = fromOperatorKnowledge(

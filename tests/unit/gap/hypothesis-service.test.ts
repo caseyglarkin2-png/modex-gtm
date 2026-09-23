@@ -139,12 +139,23 @@ describe('proposeHypothesis', () => {
   let prisma: Prisma;
   beforeEach(() => {
     prisma = makePrisma();
+    const accounts: Record<string, string> = { S1: 'Acme Logistics', S2: 'Acme Logistics', S4: 'Beta Dairy' };
     prisma.prospectingSignal.findMany.mockImplementation(async (args: { where: { id: { in: string[] } } }) =>
-      args.where.id.in.filter((id) => id === 'S1' || id === 'S2').map((id) => ({ id })),
+      args.where.id.in.filter((id) => id in accounts).map((id) => ({ id, account_name: accounts[id] })),
     );
     prisma.prospectingHypothesis.findFirst.mockResolvedValue(null);
     prisma.tx.prospectingHypothesis.create.mockResolvedValue({ id: 'H_new' });
     prisma.tx.hypothesisSignal.createMany.mockResolvedValue({ count: 2 });
+  });
+
+  it("signal_account_mismatch when a linked signal belongs to another account, before any transaction (R2-9)", async () => {
+    const out = await proposeHypothesis(
+      prisma,
+      proposeInput({ signalIds: ['S1', 'S4'], observation: 'Ohio DC [S:S1]. Beta story [S:S4].' }),
+    );
+    expect(out).toEqual({ ok: false, reason: 'signal_account_mismatch' });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+    expect(prisma.tx.prospectingHypothesis.create).not.toHaveBeenCalled();
   });
 
   it('refuses with no_signals and writes nothing when an observation is given with empty signalIds', async () => {
@@ -652,6 +663,7 @@ describe('updateDraftNarrative', () => {
   function narrativeRow(overrides: Record<string, unknown> = {}) {
     return {
       id: 'H1',
+      account_name: 'Acme Logistics',
       status: 'draft',
       problem_family: 'hidden_capacity',
       secondary_families: [],
@@ -676,11 +688,23 @@ describe('updateDraftNarrative', () => {
   }
   beforeEach(() => {
     prisma = makePrisma();
+    const accounts: Record<string, string> = { S1: 'Acme Logistics', S2: 'Acme Logistics', S3: 'Acme Logistics', S4: 'Beta Dairy' };
     prisma.prospectingSignal.findMany.mockImplementation(async (args: { where: { id: { in: string[] } } }) =>
-      args.where.id.in.filter((id) => id === 'S1' || id === 'S2' || id === 'S3').map((id) => ({ id })),
+      args.where.id.in.filter((id) => id in accounts).map((id) => ({ id, account_name: accounts[id] })),
     );
     prisma.tx.hypothesisSignal.deleteMany.mockResolvedValue({ count: 2 });
     prisma.tx.hypothesisSignal.createMany.mockResolvedValue({ count: 1 });
+  });
+
+  it("signal_account_mismatch when a patched signal belongs to another account: read inside tx, zero writes (R2-9)", async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(narrativeRow({ status: 'draft' }));
+    const out = await updateDraftNarrative(prisma, 'H1', { signalIds: ['S1', 'S2', 'S4'] }, 'casey');
+    expect(out).toEqual({ ok: false, reason: 'signal_account_mismatch' });
+    expect(prisma.tx.prospectingHypothesis.findUnique.mock.calls[0][0].select).toMatchObject({ account_name: true });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
   });
 
   it('narrative_frozen on an active row: read inside tx, zero writes', async () => {
@@ -803,16 +827,19 @@ describe('linkSignals', () => {
   function linkRow(overrides: Record<string, unknown> = {}) {
     return {
       id: 'H1',
+      account_name: 'Acme Logistics',
       status: 'draft',
       observation: 'They opened a second DC in Ohio [S:S1].',
       signals: [{ signal_id: 'S1', role: 'primary' }],
       ...overrides,
     };
   }
+  /** S1..S3 belong to the hypothesis account; S4 is a real signal registered against another account. */
+  const SIGNAL_ACCOUNTS: Record<string, string> = { S1: 'Acme Logistics', S2: 'Acme Logistics', S3: 'Acme Logistics', S4: 'Beta Dairy' };
   beforeEach(() => {
     prisma = makePrisma();
     prisma.prospectingSignal.findMany.mockImplementation(async (args: { where: { id: { in: string[] } } }) =>
-      args.where.id.in.filter((id) => ['S1', 'S2', 'S3'].includes(id)).map((id) => ({ id })),
+      args.where.id.in.filter((id) => id in SIGNAL_ACCOUNTS).map((id) => ({ id, account_name: SIGNAL_ACCOUNTS[id] })),
     );
     prisma.tx.prospectingHypothesis.updateMany.mockResolvedValue({ count: 1 });
     prisma.tx.hypothesisSignal.createMany.mockResolvedValue({ count: 1 });
@@ -822,6 +849,17 @@ describe('linkSignals', () => {
     expect(await linkSignals(prisma, 'H1', [], 'casey')).toEqual({ ok: false, reason: 'no_signals' });
     expect(await linkSignals(prisma, 'H1', ['S2', 'S9'], 'casey')).toEqual({ ok: false, reason: 'unknown_signal:S9' });
     expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+
+  it("signal_account_mismatch when a signal's account_name differs from the hypothesis account_name: zero writes (R2-9)", async () => {
+    prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow());
+    const out = await linkSignals(prisma, 'H1', ['S2', 'S4'], 'casey');
+    expect(out).toEqual({ ok: false, reason: 'signal_account_mismatch' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
+    // The in-transaction row read must select account_name, or the guard has nothing to compare.
+    expect(prisma.tx.prospectingHypothesis.findUnique.mock.calls[0][0].select).toMatchObject({ account_name: true });
   });
 
   it('narrative_frozen on an active row: read inside tx, zero writes', async () => {
@@ -931,20 +969,20 @@ describe('unlinkSignal', () => {
     expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
   });
 
-  it('unlinked_citation when the observation still cites the signal: the post-unlink set is what the validator sees, zero writes', async () => {
+  it('signal_cited when the observation still cites the signal, read straight off the citation ids, zero writes (N5)', async () => {
     prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(linkRow());
     const out = await unlinkSignal(prisma, 'H1', 'S2', 'casey');
-    expect(out).toEqual({ ok: false, reason: 'unlinked_citation' });
+    expect(out).toEqual({ ok: false, reason: 'signal_cited' });
     expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
     expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
     expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
   });
 
-  it('unlinking the last signal refuses unlinked_citation while the observation cites it, and succeeds once the observation is empty', async () => {
+  it('unlinking the last signal refuses signal_cited while the observation cites it, and succeeds once the observation is empty', async () => {
     prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(
       linkRow({ observation: 'Only fact [S:S1].', signals: [{ signal_id: 'S1', role: 'primary' }] }),
     );
-    expect(await unlinkSignal(prisma, 'H1', 'S1', 'casey')).toEqual({ ok: false, reason: 'unlinked_citation' });
+    expect(await unlinkSignal(prisma, 'H1', 'S1', 'casey')).toEqual({ ok: false, reason: 'signal_cited' });
     expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
 
     prisma.tx.prospectingHypothesis.findUnique.mockResolvedValue(

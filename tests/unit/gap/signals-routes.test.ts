@@ -160,6 +160,71 @@ describe('POST /api/gap/signals', () => {
     expect(mockedRegister).not.toHaveBeenCalled();
   });
 
+  it('public url on loopback, a private range, a .local/.internal host or an own domain -> 422 private_host, nothing registered (R2-10)', async () => {
+    const rejected = [
+      'http://localhost/status',
+      'http://LOCALHOST:3000/x',
+      'http://127.0.0.1/x',
+      'http://127.9.9.9/x',
+      'http://[::1]/x',
+      'http://10.0.0.5/x',
+      'http://172.16.0.1/x',
+      'http://172.31.255.254/x',
+      'http://192.168.1.10/x',
+      'http://169.254.10.1/x',
+      'https://intranet.local/wiki',
+      'https://db.internal/page',
+      'https://yardflow.ai/roi',
+      'https://www.yardflow.ai/for/acme',
+      'https://freightroll.com/',
+      'https://app.hubspot.com/contacts/3819073/record/0-1/1',
+      'https://hubspot.com/x',
+      'https://docs.google.com/document/d/abc',
+      'https://drive.google.com/file/d/abc',
+      'https://YardFlow.AI./trailing-dot',
+    ];
+    for (const url of rejected) {
+      const res = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url }));
+      expect(res.status, url).toBe(422);
+      expect(await res.json(), url).toEqual({ error: 'private_host' });
+    }
+    expect(mockedRegister).not.toHaveBeenCalled();
+
+    // Neighbours of every range and list entry stay public.
+    const allowed = [
+      'http://11.0.0.1/x',
+      'http://172.32.0.1/x',
+      'http://172.15.255.255/x',
+      'http://192.169.0.1/x',
+      'http://169.253.0.1/x',
+      'https://notyardflow.ai/x',
+      'https://news.google.com/x',
+      'https://hubspot.community.example/x',
+      'https://localhost.example.com/x',
+    ];
+    for (const url of allowed) {
+      const res = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url }));
+      expect(res.status, url).toBe(201);
+    }
+    expect(mockedRegister).toHaveBeenCalledTimes(allowed.length);
+  });
+
+  it('PRIVATE_FACT_HOSTS is the exact own-domain list', async () => {
+    const { PRIVATE_FACT_HOSTS } = await import('@/app/api/gap/signals/route');
+    expect([...PRIVATE_FACT_HOSTS]).toEqual(['yardflow.ai', 'freightroll.com', 'hubspot.com', 'app.hubspot.com', 'docs.google.com', 'drive.google.com']);
+  });
+
+  it('a public fact may not carry type intent or website_behavior -> 422 private_type (R2-10)', async () => {
+    for (const type of ['intent', 'website_behavior']) {
+      const res = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url: 'https://news.test/a', type }));
+      expect(res.status, type).toBe(422);
+      expect(await res.json(), type).toEqual({ error: 'private_type' });
+    }
+    expect(mockedRegister).not.toHaveBeenCalled();
+    const ok = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url: 'https://news.test/a', type: 'new_site' }));
+    expect(ok.status).toBe(201);
+  });
+
   it('unparseable observedAt -> 400 field observedAt', async () => {
     const res = await registerPOST(
       jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url: 'https://x.test/a', observedAt: 'yesterday-ish' }),
@@ -226,7 +291,20 @@ describe('POST /api/gap/signals', () => {
     expect(first).toBe(second);
   });
 
-  it('public happy path: manual source keyed by sha1(url), externalOk true, excerpt as evidenceText, type honored, 201 with created false when it already existed', async () => {
+  it('public fact sourceId is keyed on account + url, so two accounts citing one url get two facts (R2-9)', async () => {
+    const url = 'https://news.test/shared-story';
+    await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url }));
+    await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: '  Acme Foods  ', kind: 'public', url }));
+    mockedAccountFind.mockResolvedValue({ name: 'Beta Dairy' });
+    await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Beta Dairy', kind: 'public', url }));
+    const ids = mockedRegister.mock.calls.map((c) => String((c as [unknown, Record<string, unknown>])[1].sourceId));
+    expect(ids[0]).toBe(`manual:${createHash('sha1').update(`Acme Foods\n${url}`).digest('hex')}`);
+    expect(ids[1]).toBe(ids[0]);
+    expect(ids[2]).toBe(`manual:${createHash('sha1').update(`Beta Dairy\n${url}`).digest('hex')}`);
+    expect(ids[2]).not.toBe(ids[0]);
+  });
+
+  it('public happy path: manual source keyed by sha1(account + url), externalOk true, excerpt as evidenceText, type honored, 201 with created false when it already existed', async () => {
     mockedRegister.mockResolvedValue({ id: 'sig_old', created: false });
     const res = await registerPOST(
       jsonRequest(SIGNALS, 'POST', {
@@ -246,7 +324,7 @@ describe('POST /api/gap/signals', () => {
     expect(input).toMatchObject({
       accountName: 'Acme Foods',
       sourceKind: 'manual',
-      sourceId: `manual:${createHash('sha1').update('https://news.test/acme-opens-reno-dc').digest('hex')}`,
+      sourceId: `manual:${createHash('sha1').update('Acme Foods\nhttps://news.test/acme-opens-reno-dc').digest('hex')}`,
       type: 'new_site',
       title: 'Acme opens Reno DC',
       sourceType: 'public_secondary',
@@ -326,10 +404,10 @@ describe('DELETE /api/gap/hypotheses/[id]/signals', () => {
     expect(mockedUnlink).toHaveBeenCalledWith(fakePrisma, 'hyp_1', 'sig_2', 'casey@freightroll.com');
   });
 
-  it('409 narrative_frozen, 409 unlinked_citation, 422 not_linked', async () => {
+  it('409 narrative_frozen, 409 signal_cited, 422 not_linked', async () => {
     for (const [reason, status] of [
       ['narrative_frozen', 409],
-      ['unlinked_citation', 409],
+      ['signal_cited', 409],
       ['not_linked', 422],
     ] as const) {
       mockedUnlink.mockResolvedValueOnce({ ok: false, reason });
