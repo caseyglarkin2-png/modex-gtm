@@ -858,6 +858,8 @@ describe('routePersona over assembled inputs', () => {
   it('a trigger inside the hot window drives R14 hot_call through the normalized score', async () => {
     const db = fullDb();
     db.triggers[0].first_seen_at = daysAgo(3);
+    // Raw 9 on the news scale normalizes to 49.5, above the derived hot threshold of 44.
+    db.triggers[0].score = 9;
     const r = routePersona(await assemble(db));
     expect(r.kind === 'decision' && r.decision.ruleId).toBe('hot_call');
     expect(r.kind === 'decision' && r.decision.reason).toBe('hot');
