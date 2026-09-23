@@ -116,16 +116,16 @@
       "thin_research": false,
       "research_state": "ELIGIBLE",
       "selected": true,
-      "sender_reason": "prior correspondence from casey@freightroll.com with 1 committee member(s); Rafael Quintero: casey@freightroll.com last 2026-05-12",
+      "sender_reason": "prior correspondence from casey@freightroll.com with 1 committee member(s); Priya Lindqvist: casey@freightroll.com last 2026-04-27",
       "sender_assigned_at": "2026-09-13T11:05:24.316Z",
       "sequence": {
-        "hubspot_sequence_id": "311519882",
+        "hubspot_sequence_id": "311420117",
         "name": "YF | Top100 | Dell",
         "templates": {
-          "1": "129819537",
-          "2": "129819651",
-          "3": "129818738",
-          "4": "129819695"
+          "1": "129420111",
+          "2": "129420112",
+          "3": "129420113",
+          "4": "129420114"
         },
         "delays_business_days": [
           0,
@@ -254,16 +254,16 @@
       "thin_research": false,
       "research_state": "ELIGIBLE",
       "selected": true,
-      "sender_reason": "prior correspondence from casey@freightroll.com with 1 committee member(s); Corin Ashby: casey@freightroll.com last 2026-08-18",
+      "sender_reason": "prior correspondence from casey@freightroll.com with 1 committee member(s); Tomas Reyes-Hale: casey@freightroll.com last 2026-07-30",
       "sender_assigned_at": "2026-09-13T11:05:32.647Z",
       "sequence": {
-        "hubspot_sequence_id": "311861043",
+        "hubspot_sequence_id": "311420229",
         "name": "YF | Top100 | JB Hunt",
         "templates": {
-          "1": "129902751",
-          "2": "129900971",
-          "3": "129900972",
-          "4": "129902763"
+          "1": "129420221",
+          "2": "129420222",
+          "3": "129420223",
+          "4": "129420224"
         },
         "delays_business_days": [
           0,

@@ -79,8 +79,8 @@ const dellRoster = readRoster(readFileSync(join(FIXTURES, 'top100-roster.json'),
 
 const DELL = manifest.accounts['dell-com'];
 const JBHUNT = manifest.accounts['jbhunt-com'];
-const DELL_SEQ = DELL.sequence!.hubspotSequenceId; // 311519882
-const JBHUNT_SEQ = JBHUNT.sequence!.hubspotSequenceId; // 311861043
+const DELL_SEQ = DELL.sequence!.hubspotSequenceId; // 311420117
+const JBHUNT_SEQ = JBHUNT.sequence!.hubspotSequenceId; // 311420229
 
 const NOW = new Date('2026-09-23T12:00:00.000Z');
 const OPTS = { program: 'top100-2026-09-12', portal: '3819073', createdBy: 'test' };
@@ -234,9 +234,9 @@ describe('planFamilies', () => {
       key: 'dell-com',
       accountName: 'Dell',
       hubspotCompanyId: '54406388074',
-      hubspotSequenceId: '311519882',
+      hubspotSequenceId: '311420117',
       name: 'YF | Top100 | Dell',
-      templateIds: { '1': '129819537', '2': '129819651', '3': '129818738', '4': '129819695' },
+      templateIds: { '1': '129420111', '2': '129420112', '3': '129420113', '4': '129420114' },
       delaysBusinessDays: [0, 4, 5, 6],
       builtAt: '2026-09-14T16:07:47.811Z',
       preferredSender: 'casey@freightroll.com',
@@ -389,7 +389,7 @@ describe('readbackContacts', () => {
         id: '1',
         properties: {
           hs_sequences_actively_enrolled_count: '2',
-          hs_latest_sequence_enrolled: '311519882',
+          hs_latest_sequence_enrolled: '311420117',
           hs_latest_sequence_enrolled_date: '2026-09-15T17:17:39.791Z',
         },
       },
@@ -405,7 +405,7 @@ describe('readbackContacts', () => {
       { id: '4', properties: { hs_sequences_actively_enrolled_count: '1', hs_latest_sequence_enrolled: '9', hs_latest_sequence_enrolled_date: '1757956659791' } },
     ]);
     const out = await readbackContacts({ readContacts }, ['1', '2', '3', '4']);
-    expect(out.get('1')).toEqual({ activelyEnrolledCount: 2, latestSequenceId: '311519882', latestEnrolledAt: new Date('2026-09-15T17:17:39.791Z') });
+    expect(out.get('1')).toEqual({ activelyEnrolledCount: 2, latestSequenceId: '311420117', latestEnrolledAt: new Date('2026-09-15T17:17:39.791Z') });
     expect(out.get('2')).toEqual({ activelyEnrolledCount: 0, latestSequenceId: null, latestEnrolledAt: null });
     expect(out.get('3')).toEqual({ activelyEnrolledCount: 0, latestSequenceId: null, latestEnrolledAt: null });
     expect(out.get('4')!.latestEnrolledAt).toEqual(new Date(1757956659791));

@@ -48,9 +48,9 @@ describe('parseManifest', () => {
       preferredSender: 'casey@freightroll.com',
       selected: true,
       sequence: {
-        hubspotSequenceId: '311519882',
+        hubspotSequenceId: '311420117',
         name: 'YF | Top100 | Dell',
-        templateIds: { '1': '129819537', '2': '129819651', '3': '129818738', '4': '129819695' },
+        templateIds: { '1': '129420111', '2': '129420112', '3': '129420113', '4': '129420114' },
         delaysBusinessDays: [0, 4, 5, 6],
         builtAt: '2026-09-14T16:07:47.811Z',
         enrolled: 5,
@@ -67,7 +67,7 @@ describe('parseManifest', () => {
     expect(jb.rank).toBe(63);
     expect(jb.sequence?.state).toBe('BUILT_NOT_ENROLLED');
     expect(jb.sequence?.enrolled).toBe(0);
-    expect(jb.sequence?.hubspotSequenceId).toBe('311861043');
+    expect(jb.sequence?.hubspotSequenceId).toBe('311420229');
   });
 
   it('an account without a sequence block parses sequence as null', () => {
@@ -335,8 +335,8 @@ describe('parseMonitor', () => {
   });
 
   it('parses replies, bounced, optedOut and halts arrays', () => {
-    expect(mon.replies).toEqual(['Jamie Taylor (keurigdrpepper-com) 2026-09-17T12:50:22Z']);
-    expect(mon.bounced).toEqual(['sarah.horn@conagra.com']);
+    expect(mon.replies).toEqual(['Morgan Vale (keurigdrpepper-com) 2026-09-17T12:50:22Z']);
+    expect(mon.bounced).toEqual(['lena.marsh@example.com']);
     expect(mon.optedOut).toEqual([]);
     expect(mon.halts).toEqual([]);
   });
