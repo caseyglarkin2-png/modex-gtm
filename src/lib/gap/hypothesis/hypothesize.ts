@@ -10,18 +10,28 @@
  *      trigger id) and load the account's contact-ready personas.
  *   3. Load the account's OPEN hypotheses (draft, review_required, approved,
  *      active) so a (persona, family) that is already being worked is not
- *      proposed a second time.
+ *      proposed a second time, plus its TERMINAL ones with their linked
+ *      signal ids, so a withdrawn or resolved hypothesis is not rebuilt from
+ *      the same signals until a genuinely new one appears.
  *   4. Build candidates with the pure builder, then propose each surviving
- *      candidate as a draft. `dryRun` counts everything and writes no
- *      hypothesis (signals are still registered: they are frozen facts, not
- *      outreach, and the builder needs their ids).
+ *      candidate as a draft under a deterministic `sourceRef` (account,
+ *      persona, family, hash of the signal ids), so the service's
+ *      duplicate_source_ref refusal makes a re-run a no-op. `dryRun` counts
+ *      everything and writes no hypothesis (signals are still registered:
+ *      they are frozen facts, not outreach, and the builder needs their ids).
+ *
+ * One account's failure (a trigger whose Account row is missing makes
+ * registerSignal throw) is isolated: it is counted and named in the report
+ * and the run moves on to the next account.
  *
  * House convention for DB glue is `prisma: any` (see ./service.ts).
  *
  * Voice: no em dashes, "yards" plural.
  */
 
-import type { Persona as PersonaKey } from '../taxonomy';
+import { createHash } from 'node:crypto';
+
+import { HYPOTHESIS_TERMINAL_STATUSES, type Persona as PersonaKey } from '../taxonomy';
 import { fromPounceTrigger, type PounceTriggerRow, type ProspectingSignalInput } from '../signals/projection';
 import { registerSignal as defaultRegisterSignal, type RegisterResult } from '../signals/registry';
 import {
@@ -64,9 +74,15 @@ export interface HypothesizeReport {
   signals: { created: number; existing: number; refused: number };
   candidates: number;
   proposed: number;
+  /** Proposals the service refused as duplicate_source_ref: the same candidate already exists. */
+  existing: number;
   skippedOpen: number;
+  /** Candidates whose (persona, family) already has a terminal hypothesis built on the same or more signals. */
+  skippedResolved: number;
   refused: Record<string, number>;
   buildSkipped: Record<string, number>;
+  /** Account keys whose per-account body threw; the run continued past them. */
+  errors: string[];
   dryRun: boolean;
 }
 
@@ -82,9 +98,11 @@ interface PersonaRow {
   do_not_contact: boolean;
 }
 
-interface OpenHypothesisRow {
+interface PriorHypothesisRow {
   primary_persona_id: number | null;
   problem_family: string;
+  status: string;
+  signals?: Array<{ signal_id: string }>;
 }
 
 // ---------------------------------------------------------------------------
@@ -142,6 +160,69 @@ function bump(counter: Record<string, number>, key: string): void {
 
 function openKey(personaId: number | null, family: string): string {
   return `${personaId ?? 'none'}:${family}`;
+}
+
+/**
+ * Deterministic proposal key so the same candidate is never proposed twice:
+ * the service refuses a repeat as duplicate_source_ref. The hash covers the
+ * sorted signal ids, so a genuinely new signal yields a new ref.
+ */
+export function pounceSourceRef(accountName: string, personaId: number, family: string, signalIds: readonly string[]): string {
+  const digest = createHash('sha1').update([...signalIds].sort().join('\n')).digest('hex').slice(0, 12);
+  return `pounce:${accountName}:${personaId}:${family}:${digest}`;
+}
+
+const OPEN_SET: ReadonlySet<string> = new Set(OPEN_HYPOTHESIS_STATUSES);
+const TERMINAL_SET: ReadonlySet<string> = new Set(HYPOTHESIS_TERMINAL_STATUSES);
+
+/** What the account's prior hypotheses block, in the shapes the candidate loop checks. */
+interface PriorIndex {
+  /** Open (persona, family) keys, plus family-only keys for open import drafts with no persona. */
+  open: Set<string>;
+  /** Terminal rows by (persona, family): each entry is that row's linked signal id set. */
+  terminal: Map<string, Array<Set<string>>>;
+}
+
+function indexPrior(rows: PriorHypothesisRow[]): PriorIndex {
+  const open = new Set<string>();
+  const terminal = new Map<string, Array<Set<string>>>();
+  for (const row of rows) {
+    if (OPEN_SET.has(row.status)) {
+      open.add(openKey(row.primary_persona_id, row.problem_family));
+    } else if (TERMINAL_SET.has(row.status) && row.primary_persona_id !== null) {
+      const key = openKey(row.primary_persona_id, row.problem_family);
+      const ids = new Set((row.signals ?? []).map((link) => link.signal_id));
+      const list = terminal.get(key);
+      if (list) list.push(ids);
+      else terminal.set(key, [ids]);
+    }
+  }
+  return { open, terminal };
+}
+
+/**
+ * An open row with the same (persona, family) blocks, and so does an open row
+ * with the same family and no persona (an import draft not yet assigned): it
+ * is the same problem being worked for the whole account.
+ */
+function blockedByOpen(index: PriorIndex, personaId: number, family: string): boolean {
+  return index.open.has(openKey(personaId, family)) || index.open.has(openKey(null, family));
+}
+
+/**
+ * A terminal row with the same (persona, family) whose linked signals are a
+ * superset of, or equal to, the candidate's blocks: nothing new has been
+ * observed since that hypothesis was resolved or withdrawn.
+ */
+function blockedByResolved(index: PriorIndex, personaId: number, family: string, signalIds: readonly string[]): boolean {
+  const priors = index.terminal.get(openKey(personaId, family));
+  if (!priors) return false;
+  return priors.some((linked) => signalIds.every((id) => linked.has(id)));
+}
+
+function errorKey(err: unknown): string {
+  if (err instanceof Error && err.name && err.name !== 'Error') return err.name;
+  return 'account_error';
 }
 
 /** A registered signal in the builder's shape, from the projected input plus its store id. */
@@ -205,9 +286,12 @@ export async function runHypothesize(
     signals: { created: 0, existing: 0, refused: 0 },
     candidates: 0,
     proposed: 0,
+    existing: 0,
     skippedOpen: 0,
+    skippedResolved: 0,
     refused: {},
     buildSkipped: {},
+    errors: [],
     dryRun,
   };
 
@@ -222,78 +306,121 @@ export async function runHypothesize(
   for (const [accountName, accountTriggers] of byAccount) {
     report.accountsScanned += 1;
     report.triggersSeen += accountTriggers.length;
-
-    // 2a. Register each trigger as a frozen signal.
-    const signals: BuildSignal[] = [];
-    for (const trigger of accountTriggers) {
-      const projected = fromPounceTrigger(trigger, { registeredBy: actor, now });
-      if (!projected.ok) {
-        report.signals.refused += 1;
-        continue;
-      }
-      const registered = await registerSignal(prisma, projected.signal);
-      if (registered.created) report.signals.created += 1;
-      else report.signals.existing += 1;
-      signals.push(toBuildSignal(registered.id, projected.signal, trigger.categories));
-    }
-
-    // 2b. Contact-ready personas with an address on file.
-    const personaRows: PersonaRow[] = await prisma.persona.findMany({
-      where: {
-        account_name: accountName,
-        is_contact_ready: true,
-        do_not_contact: false,
-        email: { not: null },
-      },
-      orderBy: { id: 'asc' },
-    });
-    const personas = personaRows
-      .filter((row) => typeof row.email === 'string' && row.email.trim().length > 0)
-      .map(toBuildPersona);
-
-    // 3. What is already being worked for this account.
-    const openRows: OpenHypothesisRow[] = await prisma.prospectingHypothesis.findMany({
-      where: { account_name: accountName, status: { in: [...OPEN_HYPOTHESIS_STATUSES] } },
-      select: { primary_persona_id: true, problem_family: true },
-    });
-    const open = new Set(openRows.map((row) => openKey(row.primary_persona_id, row.problem_family)));
-
-    // 4. Build, then propose what is not already open.
-    const built = buildCandidates({ accountName, personas, signals, now });
-    for (const skip of built.skipped) bump(report.buildSkipped, skip.reason);
-    report.candidates += built.candidates.length;
-
-    for (const candidate of built.candidates) {
-      if (open.has(openKey(candidate.personaId, candidate.problemFamily))) {
-        report.skippedOpen += 1;
-        continue;
-      }
-      if (dryRun) continue;
-
-      const result = await proposeHypothesis(prisma, {
-        accountName: candidate.accountName,
-        primaryPersonaId: candidate.personaId,
-        persona: candidate.persona,
-        problemFamily: candidate.problemFamily,
-        secondaryFamilies: candidate.secondaryFamilies,
-        observation: candidate.observation,
-        problemHypothesis: candidate.problemHypothesis,
-        rootCauseHypotheses: candidate.rootCauseHypotheses,
-        impactHypotheses: candidate.impactHypotheses,
-        whyNow: candidate.whyNow,
-        falsificationQuestions: candidate.falsificationQuestions,
-        whatANoMeans: candidate.whatANoMeans,
-        confidence: candidate.confidence,
-        signalIds: candidate.signalIds,
-        primarySignalId: candidate.primarySignalId,
-        sourceRef: null,
-        metadata: { builder: candidate.provenance, source: 'pounce' },
-        createdBy: actor,
+    try {
+      await hypothesizeAccount(prisma, accountName, accountTriggers, { now, dryRun, actor }, report, {
+        registerSignal,
+        proposeHypothesis,
+        buildCandidates,
       });
-      if (result.ok) report.proposed += 1;
-      else bump(report.refused, result.reason);
+    } catch (err) {
+      // One bad account (say, a trigger whose Account row is missing) must
+      // not abort the whole run: count it, name it, move on.
+      bump(report.refused, errorKey(err));
+      report.errors.push(accountName);
     }
   }
 
   return report;
+}
+
+interface AccountContext {
+  now: Date;
+  dryRun: boolean;
+  actor: string;
+}
+
+async function hypothesizeAccount(
+  prisma: any,
+  accountName: string,
+  accountTriggers: PounceTriggerRow[],
+  ctx: AccountContext,
+  report: HypothesizeReport,
+  deps: Required<HypothesizeDeps>,
+): Promise<void> {
+  const { now, dryRun, actor } = ctx;
+  const { registerSignal, proposeHypothesis, buildCandidates } = deps;
+
+  // 2a. Register each trigger as a frozen signal.
+  const signals: BuildSignal[] = [];
+  for (const trigger of accountTriggers) {
+    const projected = fromPounceTrigger(trigger, { registeredBy: actor, now });
+    if (!projected.ok) {
+      report.signals.refused += 1;
+      continue;
+    }
+    const registered = await registerSignal(prisma, projected.signal);
+    if (registered.created) report.signals.created += 1;
+    else report.signals.existing += 1;
+    signals.push(toBuildSignal(registered.id, projected.signal, trigger.categories));
+  }
+
+  // 2b. Contact-ready personas with an address on file.
+  const personaRows: PersonaRow[] = await prisma.persona.findMany({
+    where: {
+      account_name: accountName,
+      is_contact_ready: true,
+      do_not_contact: false,
+      email: { not: null },
+    },
+    orderBy: { id: 'asc' },
+  });
+  const personas = personaRows
+    .filter((row) => typeof row.email === 'string' && row.email.trim().length > 0)
+    .map(toBuildPersona);
+
+  // 3. What is already being worked, or was already resolved, for this account.
+  const priorRows: PriorHypothesisRow[] = await prisma.prospectingHypothesis.findMany({
+    where: {
+      account_name: accountName,
+      status: { in: [...OPEN_HYPOTHESIS_STATUSES, ...HYPOTHESIS_TERMINAL_STATUSES] },
+    },
+    select: {
+      primary_persona_id: true,
+      problem_family: true,
+      status: true,
+      signals: { select: { signal_id: true } },
+    },
+  });
+  const prior = indexPrior(priorRows);
+
+  // 4. Build, then propose what is neither open nor already resolved on these signals.
+  const built = buildCandidates({ accountName, personas, signals, now });
+  for (const skip of built.skipped) bump(report.buildSkipped, skip.reason);
+  report.candidates += built.candidates.length;
+
+  for (const candidate of built.candidates) {
+    if (blockedByOpen(prior, candidate.personaId, candidate.problemFamily)) {
+      report.skippedOpen += 1;
+      continue;
+    }
+    if (blockedByResolved(prior, candidate.personaId, candidate.problemFamily, candidate.signalIds)) {
+      report.skippedResolved += 1;
+      continue;
+    }
+    if (dryRun) continue;
+
+    const result = await proposeHypothesis(prisma, {
+      accountName: candidate.accountName,
+      primaryPersonaId: candidate.personaId,
+      persona: candidate.persona,
+      problemFamily: candidate.problemFamily,
+      secondaryFamilies: candidate.secondaryFamilies,
+      observation: candidate.observation,
+      problemHypothesis: candidate.problemHypothesis,
+      rootCauseHypotheses: candidate.rootCauseHypotheses,
+      impactHypotheses: candidate.impactHypotheses,
+      whyNow: candidate.whyNow,
+      falsificationQuestions: candidate.falsificationQuestions,
+      whatANoMeans: candidate.whatANoMeans,
+      confidence: candidate.confidence,
+      signalIds: candidate.signalIds,
+      primarySignalId: candidate.primarySignalId,
+      sourceRef: pounceSourceRef(candidate.accountName, candidate.personaId, candidate.problemFamily, candidate.signalIds),
+      metadata: { builder: candidate.provenance, source: 'pounce' },
+      createdBy: actor,
+    });
+    if (result.ok) report.proposed += 1;
+    else if (result.reason === 'duplicate_source_ref') report.existing += 1;
+    else bump(report.refused, result.reason);
+  }
 }

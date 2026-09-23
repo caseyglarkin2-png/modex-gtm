@@ -3,6 +3,7 @@ import { NextRequest } from 'next/server';
 
 import type { BuildCandidate, BuildInput, BuildResult } from '@/lib/gap/hypothesis/build';
 import type { HypothesizeReport } from '@/lib/gap/hypothesis/hypothesize';
+import { HYPOTHESIS_TERMINAL_STATUSES } from '@/lib/gap/taxonomy';
 
 // ---------------------------------------------------------------------------
 // Module mocks (hoisted). The route tests need runHypothesize, the cron
@@ -37,7 +38,7 @@ vi.mock('@/lib/gap/hypothesis/hypothesize', async (importOriginal) => {
 const jobModule = await vi.importActual<typeof import('@/lib/gap/hypothesis/hypothesize')>(
   '@/lib/gap/hypothesis/hypothesize',
 );
-const { runHypothesize, personaKeyFor } = jobModule;
+const { runHypothesize, personaKeyFor, pounceSourceRef } = jobModule;
 const { GET } = await import('@/app/api/cron/gap-hypothesize/route');
 
 // ---------------------------------------------------------------------------
@@ -208,12 +209,42 @@ describe('runHypothesize (job)', () => {
       problemFamily: 'hidden_capacity',
       signalIds: ['sig_101'],
       primarySignalId: 'sig_101',
-      sourceRef: null,
+      sourceRef: expect.stringMatching(/^pounce:Acme Logistics:1:hidden_capacity:[0-9a-f]{12}$/),
       createdBy: 'cron:gap-hypothesize',
       metadata: { builder: { builder: 'gap-builder-v1', familyHits: { hidden_capacity: 1 } }, source: 'pounce' },
     });
     expect(report.proposed).toBe(1);
     expect(report.candidates).toBe(1);
+  });
+
+  it('gives every proposal a deterministic sourceRef that is stable across runs and changes only with the signal set', async () => {
+    const deps1 = makeDeps([candidate({ signalIds: ['sig_101', 'sig_102'] })]);
+    const deps2 = makeDeps([candidate({ signalIds: ['sig_102', 'sig_101'] })]);
+    await runHypothesize(makePrisma({ triggers: [trigger()], personas: [persona()] }), { now: NOW }, deps1);
+    await runHypothesize(makePrisma({ triggers: [trigger()], personas: [persona()] }), { now: new Date(NOW.getTime() + DAY_MS) }, deps2);
+
+    const ref1 = deps1.proposeHypothesis.mock.calls[0][1].sourceRef;
+    const ref2 = deps2.proposeHypothesis.mock.calls[0][1].sourceRef;
+    expect(ref1).toBe(ref2);
+    expect(ref1).toBe(pounceSourceRef(ACCOUNT, 1, 'hidden_capacity', ['sig_101', 'sig_102']));
+    expect(ref1).toMatch(/^pounce:Acme Logistics:1:hidden_capacity:[0-9a-f]{12}$/);
+
+    // A new signal, a different persona or a different family each yield a different ref.
+    expect(pounceSourceRef(ACCOUNT, 1, 'hidden_capacity', ['sig_101', 'sig_102', 'sig_103'])).not.toBe(ref1);
+    expect(pounceSourceRef(ACCOUNT, 2, 'hidden_capacity', ['sig_101', 'sig_102'])).not.toBe(ref1);
+    expect(pounceSourceRef(ACCOUNT, 1, 'driver_gate_scale', ['sig_101', 'sig_102'])).not.toBe(ref1);
+  });
+
+  it('counts a duplicate_source_ref refusal as existing, not refused: the day-two re-run is a no-op', async () => {
+    const prisma = makePrisma({ triggers: [trigger()], personas: [persona()] });
+    const deps = makeDeps([candidate()]);
+    deps.proposeHypothesis.mockResolvedValueOnce({ ok: false, reason: 'duplicate_source_ref', existingId: 'hyp_old' });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.proposed).toBe(0);
+    expect(report.existing).toBe(1);
+    expect(report.refused).toEqual({});
   });
 
   it('skips a candidate whose (persona, family) already has an open hypothesis and never proposes it', async () => {
@@ -234,8 +265,95 @@ describe('runHypothesize (job)', () => {
     const openWhere = prisma.prospectingHypothesis.findMany.mock.calls[0][0].where;
     expect(openWhere).toMatchObject({
       account_name: ACCOUNT,
-      status: { in: ['draft', 'review_required', 'approved', 'active'] },
+      status: { in: ['draft', 'review_required', 'approved', 'active', ...HYPOTHESIS_TERMINAL_STATUSES] },
     });
+    expect(prisma.prospectingHypothesis.findMany.mock.calls[0][0].select).toMatchObject({
+      status: true,
+      signals: { select: { signal_id: true } },
+    });
+  });
+
+  it('an open row with the same family and no persona (an import draft) blocks every persona', async () => {
+    const prisma = makePrisma({
+      triggers: [trigger()],
+      personas: [persona({ id: 1 }), persona({ id: 2, email: 'two@acme.example' })],
+      open: [{ primary_persona_id: null, problem_family: 'hidden_capacity', status: 'draft' }],
+    });
+    const deps = makeDeps([candidate({ personaId: 1 }), candidate({ personaId: 2 }), candidate({ personaId: 2, problemFamily: 'driver_gate_scale' })]);
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.skippedOpen).toBe(2);
+    expect(report.proposed).toBe(1);
+    expect(deps.proposeHypothesis.mock.calls[0][1].problemFamily).toBe('driver_gate_scale');
+  });
+
+  it('skips a candidate whose (persona, family) has a terminal hypothesis linked to a superset of its signals', async () => {
+    const prisma = makePrisma({
+      triggers: [trigger({ id: 101 }), trigger({ id: 102, title: 'Acme adds automation to Ohio DC', categories: ['autonomy'] })],
+      personas: [persona()],
+      open: [
+        // Withdrawn on the same two signals: the equal case blocks.
+        { primary_persona_id: 1, problem_family: 'hidden_capacity', status: 'rejected', signals: [{ signal_id: 'sig_101' }, { signal_id: 'sig_102' }] },
+        // Resolved on a strict superset: still blocks (nothing new since).
+        { primary_persona_id: 1, problem_family: 'driver_gate_scale', status: 'confirmed', signals: [{ signal_id: 'sig_101' }, { signal_id: 'sig_102' }, { signal_id: 'sig_099' }] },
+        // Expired on a strict subset: the candidate carries a new signal, so it goes through.
+        { primary_persona_id: 1, problem_family: 'yard_state_integrity', status: 'expired', signals: [{ signal_id: 'sig_101' }] },
+        // A terminal row for another persona never blocks this one.
+        { primary_persona_id: 2, problem_family: 'cost_to_ship', status: 'unresolved', signals: [{ signal_id: 'sig_101' }, { signal_id: 'sig_102' }] },
+      ],
+    });
+    const deps = makeDeps([
+      candidate({ problemFamily: 'hidden_capacity', signalIds: ['sig_101', 'sig_102'] }),
+      candidate({ problemFamily: 'driver_gate_scale', signalIds: ['sig_101', 'sig_102'] }),
+      candidate({ problemFamily: 'yard_state_integrity', signalIds: ['sig_101', 'sig_102'] }),
+      candidate({ problemFamily: 'cost_to_ship', signalIds: ['sig_101', 'sig_102'] }),
+    ]);
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.skippedResolved).toBe(2);
+    expect(report.skippedOpen).toBe(0);
+    expect(report.proposed).toBe(2);
+    expect(deps.proposeHypothesis.mock.calls.map((call) => call[1].problemFamily)).toEqual(['yard_state_integrity', 'cost_to_ship']);
+  });
+
+  it('a throwing account is counted and named, and the run continues to the next account', async () => {
+    const prisma = makePrisma({
+      triggers: [trigger({ id: 1, account_name: 'Ghost Freight', score: 9 }), trigger({ id: 2, account_name: 'Beta', score: 7 })],
+      personas: [persona({ account_name: 'Beta' })],
+    });
+    const deps = makeDeps([candidate({ accountName: 'Beta' })]);
+    class ForeignKeyViolation extends Error {
+      constructor() {
+        super('Foreign key constraint violated: prospecting_signals_account_name_fkey');
+        this.name = 'PrismaClientKnownRequestError';
+      }
+    }
+    deps.registerSignal.mockImplementationOnce(async () => {
+      throw new ForeignKeyViolation();
+    });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.errors).toEqual(['Ghost Freight']);
+    expect(report.refused).toEqual({ PrismaClientKnownRequestError: 1 });
+    expect(report.accountsScanned).toBe(2);
+    expect(deps.buildCandidates).toHaveBeenCalledTimes(1);
+    expect(deps.buildCandidates.mock.calls[0][0].accountName).toBe('Beta');
+    expect(report.proposed).toBe(1);
+  });
+
+  it('a plain Error from an account is keyed account_error', async () => {
+    const prisma = makePrisma({ triggers: [trigger()], personas: [persona()] });
+    const deps = makeDeps([candidate()]);
+    deps.registerSignal.mockRejectedValueOnce(new Error('boom'));
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.refused).toEqual({ account_error: 1 });
+    expect(report.errors).toEqual([ACCOUNT]);
+    expect(report.proposed).toBe(0);
   });
 
   it('dryRun counts everything but never calls proposeHypothesis', async () => {
@@ -254,12 +372,13 @@ describe('runHypothesize (job)', () => {
   it('counts a refused propose under its reason', async () => {
     const prisma = makePrisma({ triggers: [trigger()], personas: [persona()] });
     const deps = makeDeps([candidate()]);
-    deps.proposeHypothesis.mockResolvedValueOnce({ ok: false, reason: 'duplicate_source_ref', existingId: 'hyp_old' });
+    deps.proposeHypothesis.mockResolvedValueOnce({ ok: false, reason: 'observation_uncited' });
 
     const report = await runHypothesize(prisma, { now: NOW }, deps);
 
     expect(report.proposed).toBe(0);
-    expect(report.refused).toEqual({ duplicate_source_ref: 1 });
+    expect(report.existing).toBe(0);
+    expect(report.refused).toEqual({ observation_uncited: 1 });
   });
 
   it('counts adapter refusals and build skips by reason, and existing signals separately from created', async () => {
@@ -309,9 +428,12 @@ describe('runHypothesize (job)', () => {
       signals: { created: 1, existing: 0, refused: 0 },
       candidates: 1,
       proposed: 1,
+      existing: 0,
       skippedOpen: 0,
+      skippedResolved: 0,
       refused: {},
       buildSkipped: {},
+      errors: [],
       dryRun: false,
     });
   });
@@ -354,9 +476,12 @@ const REPORT: HypothesizeReport = {
   signals: { created: 2, existing: 0, refused: 0 },
   candidates: 1,
   proposed: 1,
+  existing: 0,
   skippedOpen: 0,
+  skippedResolved: 0,
   refused: {},
   buildSkipped: {},
+  errors: [],
   dryRun: false,
 };
 
