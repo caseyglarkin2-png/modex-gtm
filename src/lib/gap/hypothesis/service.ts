@@ -726,15 +726,19 @@ async function recordLinkEdit(
 }
 
 /**
- * Take the optimistic status lock on a row that must still be editable. An
- * empty `data` is a deliberate no-op update: Prisma bumps `updated_at` and
- * the WHERE predicate is what matters. A zero-row match means the row moved
- * past review between our read and this write.
+ * Take the optimistic status lock on a row that must still be editable. The
+ * WHERE predicate is what matters, but it only bites when there is a real
+ * write: Prisma issues NO UPDATE for an empty `data` object and returns
+ * count 0 (proven with query logging on the scratch database, Sprint 2 e2e),
+ * which would make every link and unlink read as `narrative_frozen`. So the
+ * lock writes `updated_at` explicitly. The DB trigger only freezes rows past
+ * review, so a draft or review_required row accepts it. A zero-row match
+ * means the row moved past review between our read and this write.
  */
 async function lockEditable(tx: any, id: string): Promise<void> {
   const moved = await tx.prospectingHypothesis.updateMany({
     where: { id, status: { in: [...EDITABLE_STATUSES] } },
-    data: {},
+    data: { updated_at: new Date() },
   });
   if (moved.count !== 1) throw new NarrativeRefusal('narrative_frozen');
 }

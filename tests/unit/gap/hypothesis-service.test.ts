@@ -841,7 +841,8 @@ describe('linkSignals', () => {
     expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
     expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
       where: { id: 'H1', status: { in: ['draft', 'review_required'] } },
-      data: {},
+      // A real column write: an empty data object is a no-op in Prisma and the predicate would never bite.
+      data: { updated_at: expect.any(Date) },
     });
     expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
     expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
@@ -962,7 +963,8 @@ describe('unlinkSignal', () => {
     expect(out).toEqual({ ok: false, reason: 'narrative_frozen' });
     expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
       where: { id: 'H1', status: { in: ['draft', 'review_required'] } },
-      data: {},
+      // A real column write: an empty data object is a no-op in Prisma and the predicate would never bite.
+      data: { updated_at: expect.any(Date) },
     });
     expect(prisma.tx.hypothesisSignal.deleteMany).not.toHaveBeenCalled();
     expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
