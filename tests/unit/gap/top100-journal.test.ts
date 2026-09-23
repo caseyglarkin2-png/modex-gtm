@@ -53,6 +53,7 @@ function empty(): ExistingState {
 function enrollment(id: string, enrolledAt: string, overrides: Partial<ExistingEnrollment> = {}): ExistingEnrollment {
   return {
     id,
+    engine: 'hubspot_native',
     family_id: ALPHA_FAMILY,
     hubspot_contact_id: CONTACT_A,
     enrolled_at: enrolledAt,
@@ -187,12 +188,22 @@ describe('planTop100Journal over the fixture (empty ledger)', () => {
     expect(gamma[0].provenance).toMatchObject({ kind: 'manifest', op: null, journal_ts: '2026-09-14T15:00:02.000Z' });
   });
 
-  it('versions are draft with no frozen_at when the family has no enrollment', () => {
-    for (const v of p.versions) {
-      expect(v.status).toBe('draft');
-      expect(v.frozen_at).toBeNull();
+  it('R3-7: journal-provenance versions are frozen at journal_ts with no citing enrollment, even with no enrollment in the ledger', () => {
+    const journal = p.versions.filter((v) => v.provenance.kind === 'journal');
+    expect(journal).toHaveLength(4);
+    for (const v of journal) {
+      expect(v.status).toBe('frozen');
+      expect(v.frozen_at).toBe(v.provenance.journal_ts);
       expect(v.frozen_by_enrollment_id).toBeNull();
     }
+  });
+
+  it('R3-7: the manifest-only placeholder stays draft while its family has no enrollment', () => {
+    const gamma = p.versions.filter((v) => v.hubspot_sequence_id === GAMMA_SEQ);
+    expect(gamma).toHaveLength(1);
+    expect(gamma[0].provenance.kind).toBe('manifest');
+    expect(gamma[0].status).toBe('draft');
+    expect(gamma[0].frozen_at).toBeNull();
   });
 
   it('copy events: zero-based step_index, parsed revision, deterministic ids, journal fields carried', () => {
@@ -264,7 +275,7 @@ describe('legacy enrollments', () => {
     return existing;
   }
 
-  it('versions of a family with an enrollment are frozen at journal_ts with no freezing enrollment', () => {
+  it('versions of a family with an enrollment are frozen at journal_ts with no freezing enrollment; so are the journal versions of a family without one (R3-7)', () => {
     const p = plan(withEnrollments([enrollment('e-frozen', V2_TS)]));
     const alpha = p.versions.filter((v) => v.family_id === ALPHA_FAMILY);
     expect(alpha).toHaveLength(2);
@@ -274,9 +285,32 @@ describe('legacy enrollments', () => {
       expect(v.frozen_by_enrollment_id).toBeNull();
     }
     const beta = p.versions.filter((v) => v.hubspot_sequence_id === BETA_SEQ);
-    expect(beta.every((v) => v.status === 'draft')).toBe(true);
+    expect(beta).toHaveLength(2);
+    expect(beta.every((v) => v.status === 'frozen' && v.frozen_at === v.provenance.journal_ts)).toBe(true);
     expect(p.counts.families_existing).toBe(1);
     expect(p.counts.families_new).toBe(2);
+  });
+
+  it('R3-7: a manifest-only placeholder is frozen at built_at once its family has an enrollment', () => {
+    const existing = empty();
+    const gammaFamily = familyIdFor(GAMMA_SEQ);
+    existing.familiesByHubspotId[GAMMA_SEQ] = { id: gammaFamily, hubspot_sequence_id: GAMMA_SEQ };
+    existing.enrollmentsByKey['e-gamma'] = enrollment('e-gamma', '2026-09-15T00:00:00.000Z', { family_id: gammaFamily, rendered_steps: [], sequence_version_id: 'v-any' });
+    const p = plan(existing);
+    const gamma = p.versions.filter((v) => v.hubspot_sequence_id === GAMMA_SEQ);
+    expect(gamma).toHaveLength(1);
+    expect(gamma[0]).toMatchObject({ status: 'frozen', frozen_at: '2026-09-14T15:00:02.000Z', frozen_by_enrollment_id: null });
+  });
+
+  it('R3-1: a modex legacy enrollment with no rendered copy is never pending; only engine hubspot_native is attributed', () => {
+    const p = plan(withEnrollments([
+      enrollment('e-modex', V2_TS, { engine: 'modex_draft_queue' }),
+      enrollment('e-manual', V2_TS, { engine: 'manual' }),
+      enrollment('e-hubspot', V2_TS),
+    ]));
+    expect(p.enrollmentUpdates.map((u) => u.id)).toEqual(['e-hubspot']);
+    expect(p.counts).toMatchObject({ enrollments_pending: 1, enrollments_attributed: 1, enrollments_unattributed: 0 });
+    expect(p.warnings.some((w) => w.includes('e-modex') || w.includes('e-manual'))).toBe(false);
   });
 
   it('pickVersionAt boundary: enrolled_at equal to the v2 journal_ts picks v2; one ms earlier picks v1', () => {
@@ -368,7 +402,7 @@ describe('structural: no HubSpot reach from the planner or the CLI', () => {
     expect(cli.indexOf("delete process.env[name]")).toBeLessThan(cli.indexOf("import { existsSync"));
     expect(cli).toMatch(/HUBSPOT_ACCESS_TOKEN/);
     expect(cli).toMatch(/gap_disabled/);
-    expect(cli).toMatch(/WHERE id = \$\{u\.id\} AND legacy = true AND rendered_steps IS NULL/);
+    expect(cli).toMatch(/WHERE id = \$\{u\.id\} AND legacy = true AND engine = 'hubspot_native' AND rendered_steps IS NULL/);
     expect(cli).not.toMatch(/sequence_version_id IS NULL/);
   });
 

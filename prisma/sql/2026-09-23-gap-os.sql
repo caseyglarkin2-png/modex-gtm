@@ -12,8 +12,9 @@
 --
 -- Every guard raises with a distinct token so the verifier and the services can
 -- assert the reason, not just "it failed":
---   GAP_VERSION_FROZEN      sequence_versions: only draft rows change; frozen -> retired is the one exception
---   GAP_ENROLLMENT_PIN      sequence_enrollments: the pins never move after insert
+--   GAP_VERSION_FROZEN      sequence_versions: only draft rows change; draft -> frozen only by a citing live enrollment;
+--                           frozen -> retired is the one exception; a row is inserted frozen only by an import (R3-7b)
+--   GAP_ENROLLMENT_PIN      sequence_enrollments: the pins never move after insert; the one backfill arm is R3-1
 --   GAP_APPEND_ONLY         sequence_copy_events, hypothesis_events, gap_audit_events: no UPDATE, no DELETE
 --   GAP_BID_IMMUTABLE       buyer_input_data: raw language and identity write-once; nothing moves once confirmed; no DELETE
 --   GAP_SIGNAL_FROZEN       prospecting_signals: fact columns frozen after insert (only metadata moves)
@@ -131,6 +132,11 @@ CREATE UNIQUE INDEX IF NOT EXISTS gap_uq_hypotheses_source_ref
 
 -- ---------------------------------------------------------------------------
 -- 3. sequence_versions: frozen unless draft (GAP_VERSION_FROZEN)
+--    R3-7b: draft -> frozen is the freeze trigger's move (it cites the live
+--    enrollment it just saw); a plain UPDATE cannot freeze a draft. A row is
+--    INSERTED frozen only by an import that reconstructs what HubSpot or the
+--    modex queue actually ran (provenance.kind journal | manifest |
+--    modex_legacy) and it must say when (frozen_at).
 -- ---------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION gap_version_guard()
@@ -139,6 +145,7 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
   changed text[] := ARRAY[]::text[];
+  prov_kind text;
 BEGIN
   IF TG_OP = 'DELETE' THEN
     IF OLD.status <> 'draft' THEN
@@ -147,11 +154,42 @@ BEGIN
     RETURN OLD;
   END IF;
 
-  -- Draft rows may change freely. The only way off draft is frozen (first
-  -- non-test enrollment); a draft nobody wants is deleted, not retired.
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.status = 'frozen' THEN
+      prov_kind := NEW.provenance->>'kind';
+      IF prov_kind IS NULL OR prov_kind NOT IN ('journal', 'manifest', 'modex_legacy') THEN
+        RAISE EXCEPTION 'GAP_VERSION_FROZEN: sequence_versions.% cannot be inserted frozen; only an import (provenance.kind journal, manifest or modex_legacy) may, got %', NEW.id, COALESCE(prov_kind, 'none');
+      END IF;
+      IF NEW.frozen_at IS NULL THEN
+        RAISE EXCEPTION 'GAP_VERSION_FROZEN: sequence_versions.% inserted frozen (provenance.kind %) without frozen_at', NEW.id, prov_kind;
+      END IF;
+    END IF;
+    RETURN NEW;
+  END IF;
+
+  -- Draft rows may change freely. The only way off draft is frozen, and only
+  -- by citing the live (non-test, non-legacy) enrollment pinned to this
+  -- version that froze it; a draft nobody wants is deleted, not retired.
   IF OLD.status = 'draft' THEN
     IF NEW.status NOT IN ('draft', 'frozen') THEN
       RAISE EXCEPTION 'GAP_VERSION_FROZEN: sequence_versions.% is draft and may only become frozen, not %', OLD.id, NEW.status;
+    END IF;
+    IF NEW.status = 'frozen' THEN
+      IF NEW.frozen_by_enrollment_id IS NULL THEN
+        RAISE EXCEPTION 'GAP_VERSION_FROZEN: sequence_versions.% may only become frozen by its first live enrollment; frozen_by_enrollment_id is null', OLD.id;
+      END IF;
+      IF NEW.frozen_at IS NULL THEN
+        RAISE EXCEPTION 'GAP_VERSION_FROZEN: sequence_versions.% may not become frozen without frozen_at', OLD.id;
+      END IF;
+      IF NOT EXISTS (
+        SELECT 1 FROM sequence_enrollments e
+         WHERE e.id = NEW.frozen_by_enrollment_id
+           AND e.sequence_version_id = NEW.id
+           AND e.is_test = false
+           AND e.legacy = false
+      ) THEN
+        RAISE EXCEPTION 'GAP_VERSION_FROZEN: sequence_versions.% may only become frozen by a non-test, non-legacy enrollment pinned to it; % is not one', OLD.id, NEW.frozen_by_enrollment_id;
+      END IF;
     END IF;
     RETURN NEW;
   END IF;
@@ -178,6 +216,11 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+
+DROP TRIGGER IF EXISTS gap_version_guard_ins ON sequence_versions;
+CREATE TRIGGER gap_version_guard_ins
+  BEFORE INSERT ON sequence_versions
+  FOR EACH ROW EXECUTE FUNCTION gap_version_guard();
 
 DROP TRIGGER IF EXISTS gap_version_guard_upd ON sequence_versions;
 CREATE TRIGGER gap_version_guard_upd
@@ -222,7 +265,7 @@ CREATE TRIGGER gap_enrollment_freeze_version
 
 -- ---------------------------------------------------------------------------
 -- 5. sequence_enrollments: pins immutable after insert (GAP_ENROLLMENT_PIN);
---    R2-5b: one-time attribution backfill for legacy rows with NULL rendered_steps
+--    R2-5b / R3-1: one-time attribution backfill for HubSpot legacy rows
 -- ---------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION gap_enrollment_pin_guard()
@@ -231,13 +274,28 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
   changed text[] := ARRAY[]::text[];
+  backfill boolean;
+BEGIN
   -- R2-5b: a Sprint 2 legacy readback row was inserted against the placeholder
   -- v1 with no rendered steps. Its attribution to the reconstructed journal
-  -- version (S3-T4) is a one-time backfill of exactly three columns, allowed
-  -- only while rendered_steps is still NULL; once set, the row is fully
-  -- pinned again. Every other pinned column stays refused throughout.
-  backfill boolean := (OLD.legacy = true AND OLD.rendered_steps IS NULL);
-BEGIN
+  -- version (S3-T4) is a one-time backfill of exactly three columns. R3-1
+  -- narrows the arm to what that backfill actually is: the row is a HubSpot
+  -- readback (engine hubspot_native; a modex legacy row has rendered_steps
+  -- NULL by design and never qualifies), the statement sets rendered_steps
+  -- (so the arm closes in the same statement it is used), and the new version
+  -- belongs to the row's own family. Every other pinned column stays refused
+  -- throughout, and once rendered_steps is set the row is fully pinned again.
+  backfill := (
+    OLD.legacy = true
+    AND OLD.engine = 'hubspot_native'
+    AND OLD.rendered_steps IS NULL
+    AND NEW.rendered_steps IS NOT NULL
+    AND EXISTS (
+      SELECT 1 FROM sequence_versions v
+       WHERE v.id = NEW.sequence_version_id
+         AND v.family_id = OLD.family_id
+    )
+  );
   IF NOT backfill AND NEW.sequence_version_id IS DISTINCT FROM OLD.sequence_version_id THEN changed := array_append(changed, 'sequence_version_id'); END IF;
   IF NEW.family_id IS DISTINCT FROM OLD.family_id THEN changed := array_append(changed, 'family_id'); END IF;
   IF NEW.engine IS DISTINCT FROM OLD.engine THEN changed := array_append(changed, 'engine'); END IF;

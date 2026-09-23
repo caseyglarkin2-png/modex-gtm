@@ -21,11 +21,14 @@
  *   createMany. Idempotency key is `provenance.journal_ts`;
  * - `SequenceCopyEvent` rows: one per `update/contact` row whose property is
  *   `yf_top100_step{N}_{subject,body}`, keyed `${contact}|${property}|${ts}`;
- * - enrollment attribution: every existing enrollment still lacking a
- *   pinned version or rendered copy gets the family version whose journal_ts
- *   is the newest at or before `enrolled_at` (`pickVersionAt`, S3-T3) and its
- *   `rendered_steps` reconstructed from the journal's copy events at that
- *   moment (`reconstructRenderedSteps`, S3-T3).
+ * - enrollment attribution: every existing HubSpot enrollment (engine
+ *   `hubspot_native`; R3-1) still lacking a pinned version or rendered copy
+ *   gets the family version whose journal_ts is the newest at or before
+ *   `enrolled_at` (`pickVersionAt`, S3-T3) and its `rendered_steps`
+ *   reconstructed from the journal's copy events at that moment
+ *   (`reconstructRenderedSteps`, S3-T3). A modex legacy row has
+ *   rendered_steps NULL by design (its DraftQueueItem rows are the record)
+ *   and is never pending.
  *
  * Journal row shape, read from the lane on 2026-09-23: CRM writes carry
  * `action` ("create" | "update") and `object` ("sequence" |
@@ -37,11 +40,15 @@
  * comma-separated list (template ids when `key` names one account, sequence
  * ids when `key` is "*").
  *
- * Legacy frozen versions: when a family already has an enrollment, the
- * imported versions are `frozen` with `frozen_at = journal_ts` and
- * `frozen_by_enrollment_id = null`. Nobody enrolled through GAP, so there is
- * no single freezing enrollment to cite; the journal timestamp is the moment
- * the shape became real in HubSpot.
+ * Frozen on import (R3-7): a journal-provenance version is what HubSpot
+ * actually ran, so it is inserted `frozen` with `frozen_at = journal_ts` and
+ * `frozen_by_enrollment_id = null` whether or not the ledger holds an
+ * enrollment for the family. Nobody enrolled through GAP, so there is no
+ * single freezing enrollment to cite; the journal timestamp is the moment
+ * the shape became real in HubSpot. A manifest-only placeholder (no
+ * create/sequence row) is frozen the same way once its family has an
+ * enrollment and stays draft until then. The GAP_VERSION_FROZEN insert arm
+ * admits a frozen insert only from these import kinds.
  *
  * Ids are deterministic (uuid v5 in GAP_JOURNAL_NS over the natural key) so
  * a re-run plans the same ids and `rendered_steps.copyEventIds` can cite
@@ -114,6 +121,8 @@ export interface ExistingVersion extends VersionAtCandidate {
 
 export interface ExistingEnrollment {
   id: string;
+  /** hubspot_native | modex_draft_queue | manual; only hubspot_native rows are attributed (R3-1). */
+  engine: string;
   family_id: string;
   hubspot_contact_id: string | null;
   enrolled_at: Date | string;
@@ -412,6 +421,8 @@ export function planTop100Journal(input: {
     const steps = fromLaneScaffold(seq.delaysBusinessDays, seq.templateIds);
     const max = ctx.candidates.reduce((m, v) => (v.version > m ? v.version : m), 0);
     const id = versionIdFor(ctx.id, row.ts);
+    // R3-7: journal history is what HubSpot ran; it is never editable.
+    const frozen = row.kind === 'journal' || ctx.hasEnrollment;
     const insert: VersionInsert = {
       id,
       family_id: ctx.id,
@@ -419,7 +430,7 @@ export function planTop100Journal(input: {
       version: max + 1,
       steps,
       steps_hash: stepsHash(steps),
-      status: ctx.hasEnrollment ? 'frozen' : 'draft',
+      status: frozen ? 'frozen' : 'draft',
       hubspot_template_ids: { ...seq.templateIds },
       provenance: {
         kind: row.kind,
@@ -434,7 +445,7 @@ export function planTop100Journal(input: {
         ...(row.templateChange ? { template_change: row.templateChange } : {}),
       },
       change_note: changeNote,
-      frozen_at: ctx.hasEnrollment ? row.ts : null,
+      frozen_at: frozen ? row.ts : null,
       frozen_by_enrollment_id: null,
       created_by: opts.importedBy,
     };
@@ -564,11 +575,13 @@ export function planTop100Journal(input: {
     eventsByContact.set(e.hubspotContactId, list);
   }
 
-  // Pass 4: legacy enrollment attribution.
+  // Pass 4: legacy enrollment attribution. Only HubSpot readback rows are
+  // candidates (R3-1); a modex legacy row carries no rendered copy by design.
   const ctxByFamilyId = new Map<string, FamilyCtx>();
   for (const ctx of bySequenceId.values()) ctxByFamilyId.set(ctx.id, ctx);
 
   const pending = Object.values(existing.enrollmentsByKey)
+    .filter((e) => e.engine === ENGINE)
     .filter((e) => e.sequence_version_id === null || e.rendered_steps === null || e.rendered_steps === undefined)
     .sort((a, b) => a.id.localeCompare(b.id));
   for (const e of pending) {

@@ -452,6 +452,70 @@ const guards: Guard[] = [
     },
   },
   {
+    name: 'GAP_VERSION_FROZEN draft -> frozen only by a citing live enrollment (R3-7b)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_VERSION_FROZEN';
+      const fam = await insertFamily(tx);
+      const draft = await insertVersion(tx, fam);
+      const W = `WHERE id = ${q(draft)}`;
+      await expectRefused(tx, g, T, `UPDATE sequence_versions SET status = 'frozen', frozen_at = now() ${W}`, 'draft -> frozen by a plain UPDATE (no frozen_by_enrollment_id)');
+      await expectRefused(tx, g, T, `UPDATE sequence_versions SET status = 'frozen', frozen_at = now(), frozen_by_enrollment_id = ${q(`${TAG}_nonexistent`)} ${W}`, 'draft -> frozen citing an enrollment that does not exist');
+      const testEnr = await insertEnrollment(tx, fam, draft, account, { is_test: 'true' });
+      await expectRefused(tx, g, T, `UPDATE sequence_versions SET status = 'frozen', frozen_at = now(), frozen_by_enrollment_id = ${q(testEnr)} ${W}`, 'draft -> frozen citing a test enrollment');
+      const legacyEnr = await insertEnrollment(tx, fam, draft, account, { legacy: 'true' });
+      await expectRefused(tx, g, T, `UPDATE sequence_versions SET status = 'frozen', frozen_at = now(), frozen_by_enrollment_id = ${q(legacyEnr)} ${W}`, 'draft -> frozen citing a legacy enrollment');
+      const otherDraft = await insertVersion(tx, fam);
+      const otherEnr = await insertEnrollment(tx, fam, otherDraft, account);
+      await expectRefused(tx, g, T, `UPDATE sequence_versions SET status = 'frozen', frozen_at = now(), frozen_by_enrollment_id = ${q(otherEnr)} ${W}`, 'draft -> frozen citing a live enrollment pinned to another version');
+      const still = await scalar<string>(tx, `SELECT status FROM sequence_versions ${W}`);
+      if (still !== 'draft') throw new GuardFailure(g, `the draft moved to ${still} without a citing live enrollment`);
+      await expectOk(tx, g, `UPDATE sequence_versions SET steps = '[]'::jsonb, steps_hash = 'still-draft' ${W}`, 'draft: still editable');
+
+      // The allowed path is the freeze trigger's own statement (AFTER INSERT on
+      // a live enrollment), which cites the row it just saw; the BEFORE UPDATE
+      // guard admits exactly that.
+      const enr = await insertEnrollment(tx, fam, draft, account);
+      const row = (await tx.$queryRawUnsafe(`SELECT status, frozen_by_enrollment_id, frozen_at FROM sequence_versions ${W}`)) as Array<{ status: string; frozen_by_enrollment_id: string | null; frozen_at: Date | null }>;
+      const v = row[0];
+      if (!v || v.status !== 'frozen' || v.frozen_by_enrollment_id !== enr || !v.frozen_at) {
+        throw new GuardFailure(g, `the freeze trigger's own statement was refused or incomplete: ${JSON.stringify(v)}, expected frozen by ${enr}`);
+      }
+    },
+  },
+  {
+    name: 'GAP_VERSION_FROZEN insert: frozen only with import provenance (R3-7b)',
+    async run(tx) {
+      const g = this.name;
+      const T = 'GAP_VERSION_FROZEN';
+      const fam = await insertFamily(tx);
+      const frozenInsert = (overrides: Record<string, string>) => {
+        const id = nid('ver');
+        const cols: Record<string, string> = {
+          id: q(id),
+          family_id: q(fam),
+          version: String(++versionSeq),
+          steps: `'[]'::jsonb`,
+          steps_hash: q(`hash_${id}`),
+          status: q('frozen'),
+          frozen_at: 'now()',
+          updated_at: 'now()',
+          ...overrides,
+        };
+        return `INSERT INTO sequence_versions (${Object.keys(cols).join(',')}) VALUES (${Object.values(cols).join(',')})`;
+      };
+      await expectRefused(tx, g, T, frozenInsert({}), 'insert frozen with no provenance');
+      await expectRefused(tx, g, T, frozenInsert({ provenance: `'{"kind":"gap_edit"}'::jsonb` }), 'insert frozen with provenance kind gap_edit (a live family)');
+      await expectRefused(tx, g, T, frozenInsert({ provenance: `'{"source":"manifest"}'::jsonb` }), 'insert frozen with provenance lacking kind (the Sprint 2 placeholder shape)');
+      await expectRefused(tx, g, T, frozenInsert({ provenance: `'{"kind":"journal"}'::jsonb`, frozen_at: 'NULL' }), 'insert frozen journal without frozen_at');
+      await expectOk(tx, g, frozenInsert({ provenance: `'{"kind":"journal","journal_ts":"2026-09-14T15:00:00.000Z"}'::jsonb` }), 'insert frozen with provenance kind journal');
+      await expectOk(tx, g, frozenInsert({ provenance: `'{"kind":"manifest"}'::jsonb` }), 'insert frozen with provenance kind manifest');
+      await expectOk(tx, g, frozenInsert({ provenance: `'{"kind":"modex_legacy","sequence_id":1}'::jsonb` }), 'insert frozen with provenance kind modex_legacy');
+      await expectOk(tx, g, frozenInsert({ status: q('draft'), frozen_at: 'NULL' }), 'insert draft with no provenance (the live path)');
+      await expectOk(tx, g, frozenInsert({ status: q('draft'), frozen_at: 'NULL', provenance: `'{"kind":"gap_edit"}'::jsonb` }), 'insert draft with any provenance');
+    },
+  },
+  {
     name: 'GAP_VERSION_FROZEN delete',
     async run(tx, account) {
       const g = this.name;
@@ -494,39 +558,56 @@ const guards: Guard[] = [
     },
   },
   {
-    name: 'GAP_ENROLLMENT_PIN legacy attribution backfill (R2-5b)',
+    name: 'GAP_ENROLLMENT_PIN legacy attribution backfill: hubspot_native only, own family, rendered_steps in the same statement (R3-1)',
     async run(tx, account) {
       const g = this.name;
       const T = 'GAP_ENROLLMENT_PIN';
-      const fam = await insertFamily(tx);
+      const fam = await insertFamily(tx, { engine: q('hubspot_native'), hubspot_sequence_id: q(`${TAG}_hs_r31a`) });
+      const famOther = await insertFamily(tx, { engine: q('hubspot_native'), hubspot_sequence_id: q(`${TAG}_hs_r31b`) });
       const placeholder = await insertVersion(tx, fam);
       const reconstructed = await insertVersion(tx, fam);
       const later = await insertVersion(tx, fam);
+      const foreign = await insertVersion(tx, famOther);
       const steps = `'[{"index":0,"subject":"s","body":"b"}]'::jsonb`;
+      const three = (versionId: string) => `sequence_version_id = ${q(versionId)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1'`;
 
-      // A Sprint 2 readback row: legacy, pinned to the placeholder, no rendered steps yet.
-      const legacy = await insertEnrollment(tx, fam, placeholder, account, { legacy: 'true' });
+      // R3-1: a modex legacy row has rendered_steps NULL by design (the
+      // DraftQueueItem rows are its record). It never qualifies for the
+      // backfill arm, so it can never be re-pointed at another version.
+      const modexLegacy = await insertEnrollment(tx, fam, placeholder, account, { engine: q('modex_draft_queue'), legacy: 'true' });
+      const M = `WHERE id = ${q(modexLegacy)}`;
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(reconstructed)} ${M}`, 'modex legacy row: the three attribution columns (engine modex_draft_queue never qualifies)');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)} ${M}`, 'modex legacy row: sequence_version_id alone');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = ${steps}, rendered_steps_hash = 'h1' ${M}`, 'modex legacy row: rendered copy alone');
+
+      // A Sprint 2 HubSpot readback row: legacy, hubspot_native, pinned to the placeholder, no rendered steps yet.
+      const legacy = await insertEnrollment(tx, fam, placeholder, account, { engine: q('hubspot_native'), legacy: 'true' });
       const W = `WHERE id = ${q(legacy)}`;
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET to_email = 'other@example.com' ${W}`, 'legacy before backfill: to_email');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1', to_email = 'other@example.com' ${W}`, 'legacy before backfill: three columns plus to_email');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1', legacy = false ${W}`, 'legacy before backfill: three columns plus legacy');
-      await expectOk(tx, g, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1' ${W}`, 'legacy before backfill: the three attribution columns');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(foreign)} ${W}`, 'hubspot_native legacy row: a version from another family');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)} ${W}`, 'hubspot_native legacy row: sequence_version_id without rendered_steps');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps_hash = 'h1' ${W}`, 'hubspot_native legacy row: version and hash without rendered_steps');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET to_email = 'other@example.com' ${W}`, 'hubspot_native legacy row: to_email');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(reconstructed)}, to_email = 'other@example.com' ${W}`, 'hubspot_native legacy row: three columns plus to_email');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(reconstructed)}, legacy = false ${W}`, 'hubspot_native legacy row: three columns plus legacy');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(foreign)}, family_id = ${q(famOther)} ${W}`, 'hubspot_native legacy row: three columns plus family_id (moving the row to the other family)');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(reconstructed)}, engine = 'modex_draft_queue' ${W}`, 'hubspot_native legacy row: three columns plus engine');
+      await expectOk(tx, g, `UPDATE sequence_enrollments SET ${three(reconstructed)} ${W}`, 'hubspot_native legacy row: the proper single-statement backfill');
       const pinned = await scalar<string>(tx, `SELECT sequence_version_id FROM sequence_enrollments ${W}`);
       if (pinned !== reconstructed) throw new GuardFailure(g, `backfill did not land (sequence_version_id=${pinned})`);
 
       // Once rendered_steps is set the row is fully pinned again.
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(later)} ${W}`, 'legacy after backfill: second version change');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = '[]'::jsonb ${W}`, 'legacy after backfill: rendered_steps');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps_hash = 'h2' ${W}`, 'legacy after backfill: rendered_steps_hash');
-      await expectOk(tx, g, `UPDATE sequence_enrollments SET external_state = '{"seen":true}'::jsonb ${W}`, 'legacy after backfill: readback still writable');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(later)} ${W}`, 'after backfill: second version change');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(later)} ${W}`, 'after backfill: the three columns again');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = '[]'::jsonb ${W}`, 'after backfill: rendered_steps');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps_hash = 'h2' ${W}`, 'after backfill: rendered_steps_hash');
+      await expectOk(tx, g, `UPDATE sequence_enrollments SET external_state = '{"seen":true}'::jsonb ${W}`, 'after backfill: readback still writable');
 
-      // A non-legacy row with NULL rendered_steps gets no backfill arm.
-      const modex = await insertEnrollment(tx, fam, placeholder, account, { legacy: 'false' });
-      const M = `WHERE id = ${q(modex)}`;
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1' ${M}`, 'non-legacy: the three attribution columns must stay refused');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)} ${M}`, 'non-legacy: sequence_version_id');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = ${steps} ${M}`, 'non-legacy: rendered_steps');
-      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps_hash = 'h1' ${M}`, 'non-legacy: rendered_steps_hash');
+      // A non-legacy hubspot_native row with NULL rendered_steps gets no backfill arm.
+      const live = await insertEnrollment(tx, fam, placeholder, account, { engine: q('hubspot_native'), legacy: 'false' });
+      const L = `WHERE id = ${q(live)}`;
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET ${three(reconstructed)} ${L}`, 'non-legacy hubspot_native: the three attribution columns must stay refused');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)} ${L}`, 'non-legacy hubspot_native: sequence_version_id');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = ${steps} ${L}`, 'non-legacy hubspot_native: rendered_steps');
     },
   },
   {

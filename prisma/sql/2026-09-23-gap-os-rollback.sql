@@ -17,6 +17,7 @@
 -- 1. Triggers (before the functions they reference)
 -- ---------------------------------------------------------------------------
 
+DROP TRIGGER IF EXISTS gap_version_guard_ins ON sequence_versions;
 DROP TRIGGER IF EXISTS gap_version_guard_upd ON sequence_versions;
 DROP TRIGGER IF EXISTS gap_version_guard_del ON sequence_versions;
 DROP TRIGGER IF EXISTS gap_enrollment_freeze_version ON sequence_enrollments;

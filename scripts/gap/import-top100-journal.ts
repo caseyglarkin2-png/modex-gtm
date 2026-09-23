@@ -12,11 +12,13 @@
  * With `--apply`, every write happens inside one transaction: families and
  * versions with createMany, copy events with createMany skipDuplicates, and
  * enrollment attribution through a raw UPDATE guarded by
- * `legacy = true AND rendered_steps IS NULL`. That is exactly the backfill
- * arm of the GAP_ENROLLMENT_PIN trigger: the three attribution columns
- * (`sequence_version_id`, `rendered_steps`, `rendered_steps_hash`) may change
- * once, on a legacy row that has no rendered copy yet, and never again. The
- * output reports both the planned and the written counts.
+ * `legacy = true AND engine = 'hubspot_native' AND rendered_steps IS NULL`.
+ * That is exactly the backfill arm of the GAP_ENROLLMENT_PIN trigger (R3-1):
+ * the three attribution columns (`sequence_version_id`, `rendered_steps`,
+ * `rendered_steps_hash`) may change once, in one statement, on a HubSpot
+ * legacy row that has no rendered copy yet, to a version of the row's own
+ * family, and never again. The output reports both the planned and the
+ * written counts.
  *
  * Refuses (exit 1) when GAP_OS_ENABLED is not on (`gap_disabled`), when
  * DATABASE_URL is unset, or when the lane files are missing. No HubSpot
@@ -104,7 +106,7 @@ async function loadExisting(prisma: any, accountNames: string[]): Promise<Existi
   if (familyIds.length > 0) {
     const enrollmentRows: ExistingEnrollment[] = await prisma.sequenceEnrollment.findMany({
       where: { family_id: { in: familyIds } },
-      select: { id: true, family_id: true, hubspot_contact_id: true, enrolled_at: true, sequence_version_id: true, rendered_steps: true },
+      select: { id: true, engine: true, family_id: true, hubspot_contact_id: true, enrolled_at: true, sequence_version_id: true, rendered_steps: true },
     });
     for (const e of enrollmentRows) enrollmentsByKey[e.id] = e;
   }
@@ -197,7 +199,7 @@ async function applyPlan(prisma: any, plan: JournalPlan): Promise<ApplyCounts> {
                    SET sequence_version_id = ${u.sequence_version_id},
                        rendered_steps = ${JSON.stringify(u.rendered_steps)}::jsonb,
                        rendered_steps_hash = ${u.rendered_steps_hash}
-                   WHERE id = ${u.id} AND legacy = true AND rendered_steps IS NULL`,
+                   WHERE id = ${u.id} AND legacy = true AND engine = 'hubspot_native' AND rendered_steps IS NULL`,
       );
       out.enrollments_written += n;
     }
