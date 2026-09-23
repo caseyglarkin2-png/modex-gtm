@@ -171,7 +171,9 @@ function toProposeInput(
     signalIds,
     primarySignalId,
     sourceRef: plan.sourceRef,
-    metadata: plan.metadata,
+    // needsObservation tells the service this draft is legitimately uncited; the
+    // submit guard still refuses to advance it until an operator cites signals.
+    metadata: { ...plan.metadata, needsObservation: plan.needsObservation },
     createdBy,
   };
 }

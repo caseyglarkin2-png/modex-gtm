@@ -75,6 +75,7 @@ describe('applyPlan: research plan through stub deps', () => {
     expect(proposed.predictedBuyerLanguage).toBeNull();
     expect(proposed.persona).toBe('supply_chain');
     expect(proposed.confidence).toBe(75);
+    expect((proposed.metadata as Record<string, unknown>).needsObservation).toBe(false);
 
     expect(deps.createBid).not.toHaveBeenCalled();
     expect(report).toEqual({
@@ -118,6 +119,9 @@ describe('applyPlan: PIC plan with a BID', () => {
     expect(deps.proposeHypothesis).toHaveBeenCalledTimes(2);
     const first = vi.mocked(deps.proposeHypothesis).mock.calls[0][1];
     expect(first.observation).toBe('');
+    expect(first.signalIds).toHaveLength(1);
+    expect((first.metadata as Record<string, unknown>).needsObservation).toBe(true);
+    expect((first.metadata as Record<string, unknown>).picConfidence).toBe('MODERATE');
     expect(first.predictedBuyerLanguage).toBe(
       JSON.stringify({ text: 'We lose trailers at Greensburg every shift', predicted: false, sourceRef: 'pic:honda#0' }),
     );
