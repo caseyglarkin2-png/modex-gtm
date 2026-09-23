@@ -1,6 +1,6 @@
 FIXED 390d75d1 (C06 keeps a copy-safe subset) |FIXED 6460d7a1 (roster) + 172db27b (manifest names) |FIXED d2e8f92a |FIXED 10bc31db |FIXED 10bc31db (propose and narrative guarded too) |FIXED 390d75d1 (R18 included) |FIXED 8d57bbd6 |FIXED 6460d7a1 |FIXED 172db27b (plus R2-5b backfill arm; e2e 50f4df7d) |FIXED 390d75d1 |FIXED 559ef922 |FIXED 390d75d1 |FIXED 390d75d1 |# YardFlow GAP Prospecting OS: production build specification
 
-STATUS: ACTIVE (GO received 2026-09-23; Sprints 1 and 2 SHIPPED on branch feat/gap-os-phase0, see section 11; Sprint 3 next)
+STATUS: ACTIVE (GO received 2026-09-23; Sprints 1, 2 and 3 SHIPPED on branch feat/gap-os-phase0, see section 11; Sprint 3 review next, then Sprint 4)
 <!-- verified:2026-09-23 -->
 
 Supersedes the draft `Downloads/YardFlow_GAP_Prospecting_OS_Spec.md` (2026-09-23), which named `caseyglarkin2-png/GTM-YardFlow` as the host. Reconnaissance showed that repo is an abandoned prototype; this document is the single master plan and lives in the repo that hosts the build. There is no second plan. Every accepted implementation or reviewer finding that changes work is folded back into this file in the same commit.
