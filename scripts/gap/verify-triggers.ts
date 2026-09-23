@@ -274,6 +274,15 @@ function copyEventInsertSql(id: string, overrides: Record<string, string> = {}):
   return `INSERT INTO sequence_copy_events (${Object.keys(cols).join(',')}) VALUES (${Object.values(cols).join(',')})`;
 }
 
+/**
+ * draft -> active with everything the R1-7 guard demands (a reviewer and, on
+ * the row, at least one linked signal carrying evidence). Links are added
+ * BEFORE this runs because N4 refuses a link into a hypothesis past review.
+ */
+function promoteToActiveSql(hypothesisId: string): string {
+  return `UPDATE prospecting_hypotheses SET status = 'active', reviewed_by = 'verify', reviewed_at = now(), activated_at = now() WHERE id = ${q(hypothesisId)}`;
+}
+
 function hypothesisEventInsertSql(id: string, hypothesisId: string): string {
   return `INSERT INTO hypothesis_events (id, hypothesis_id, from_status, to_status, action, actor) VALUES (${q(id)}, ${q(hypothesisId)}, 'draft', 'review_required', 'submit', 'verify')`;
 }
@@ -386,7 +395,7 @@ const guards: Guard[] = [
     },
   },
   {
-    name: 'FREEZE first non-test enrollment freezes its version; test enrollments do not',
+    name: 'FREEZE first non-test, non-legacy enrollment freezes its version; test and legacy enrollments do not (R2-5)',
     async run(tx, account) {
       const g = this.name;
       const fam = await insertFamily(tx);
@@ -394,6 +403,14 @@ const guards: Guard[] = [
       await insertEnrollment(tx, fam, verTest, account, { is_test: 'true' });
       const afterTest = await scalar<string>(tx, `SELECT status FROM sequence_versions WHERE id = ${q(verTest)}`);
       if (afterTest !== 'draft') throw new GuardFailure(g, `a test enrollment froze the version (status=${afterTest})`);
+
+      // R2-5: a legacy readback row (HubSpot said this contact is enrolled in a
+      // lane-built sequence) is a ledger entry, not a modex send. It must not
+      // freeze the placeholder scaffold as v1.
+      const verLegacy = await insertVersion(tx, fam);
+      await insertEnrollment(tx, fam, verLegacy, account, { is_test: 'false', legacy: 'true' });
+      const afterLegacy = await scalar<string>(tx, `SELECT status FROM sequence_versions WHERE id = ${q(verLegacy)}`);
+      if (afterLegacy !== 'draft') throw new GuardFailure(g, `a legacy=true non-test enrollment froze the version (status=${afterLegacy}); the freeze trigger WHEN clause must exclude legacy rows`);
 
       const ver = await insertVersion(tx, fam);
       const enr = await insertEnrollment(tx, fam, ver, account);
@@ -474,6 +491,42 @@ const guards: Guard[] = [
       await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET legacy = true ${W}`, 'legacy');
       await expectOk(tx, g, `UPDATE sequence_enrollments SET status = 'paused', current_step_index = 1, external_state = '{"enrolled":true}'::jsonb, external_synced_at = now() ${W}`, 'status/step/readback');
       await expectOk(tx, g, `UPDATE sequence_enrollments SET status = 'stopped', stop_reason = 'replied', stopped_at = now(), stopped_by = 'verify' ${W}`, 'stop with reason');
+    },
+  },
+  {
+    name: 'GAP_ENROLLMENT_PIN legacy attribution backfill (R2-5b)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_ENROLLMENT_PIN';
+      const fam = await insertFamily(tx);
+      const placeholder = await insertVersion(tx, fam);
+      const reconstructed = await insertVersion(tx, fam);
+      const later = await insertVersion(tx, fam);
+      const steps = `'[{"index":0,"subject":"s","body":"b"}]'::jsonb`;
+
+      // A Sprint 2 readback row: legacy, pinned to the placeholder, no rendered steps yet.
+      const legacy = await insertEnrollment(tx, fam, placeholder, account, { legacy: 'true' });
+      const W = `WHERE id = ${q(legacy)}`;
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET to_email = 'other@example.com' ${W}`, 'legacy before backfill: to_email');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1', to_email = 'other@example.com' ${W}`, 'legacy before backfill: three columns plus to_email');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1', legacy = false ${W}`, 'legacy before backfill: three columns plus legacy');
+      await expectOk(tx, g, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1' ${W}`, 'legacy before backfill: the three attribution columns');
+      const pinned = await scalar<string>(tx, `SELECT sequence_version_id FROM sequence_enrollments ${W}`);
+      if (pinned !== reconstructed) throw new GuardFailure(g, `backfill did not land (sequence_version_id=${pinned})`);
+
+      // Once rendered_steps is set the row is fully pinned again.
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(later)} ${W}`, 'legacy after backfill: second version change');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = '[]'::jsonb ${W}`, 'legacy after backfill: rendered_steps');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps_hash = 'h2' ${W}`, 'legacy after backfill: rendered_steps_hash');
+      await expectOk(tx, g, `UPDATE sequence_enrollments SET external_state = '{"seen":true}'::jsonb ${W}`, 'legacy after backfill: readback still writable');
+
+      // A non-legacy row with NULL rendered_steps gets no backfill arm.
+      const modex = await insertEnrollment(tx, fam, placeholder, account, { legacy: 'false' });
+      const M = `WHERE id = ${q(modex)}`;
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)}, rendered_steps = ${steps}, rendered_steps_hash = 'h1' ${M}`, 'non-legacy: the three attribution columns must stay refused');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sequence_version_id = ${q(reconstructed)} ${M}`, 'non-legacy: sequence_version_id');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps = ${steps} ${M}`, 'non-legacy: rendered_steps');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps_hash = 'h1' ${M}`, 'non-legacy: rendered_steps_hash');
     },
   },
   {
@@ -589,13 +642,33 @@ const guards: Guard[] = [
     name: 'GAP_HYPOTHESIS_FROZEN unlink signal',
     async run(tx, account) {
       const g = this.name;
-      const sig = await insertSignal(tx, account);
+      // Links are added while the hypothesis is still draft (N4 refuses a link
+      // into a hypothesis past review), then the hypothesis is promoted.
+      const sig = await insertSignal(tx, account, { evidence_text: q('Evidence for the unlink case.') });
       const draft = await insertHypothesis(tx, account);
-      const active = await insertHypothesis(tx, account, { status: q('active') });
-      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(draft)}, ${q(sig)}, 'primary'), (${q(active)}, ${q(sig)}, 'supporting')`, 'link both');
+      const active = await insertHypothesis(tx, account);
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(draft)}, ${q(sig)}, 'primary'), (${q(active)}, ${q(sig)}, 'supporting')`, 'link both while draft');
+      await expectOk(tx, g, promoteToActiveSql(active), 'promote the second hypothesis to active');
       await expectRefused(tx, g, 'gap_ck_hypothesis_signals_role', `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(draft)}, ${q(await insertSignal(tx, account))}, 'decorative')`, 'role=decorative');
       await expectRefused(tx, g, 'GAP_HYPOTHESIS_FROZEN', `DELETE FROM hypothesis_signals WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sig)}`, 'unlink from active');
       await expectOk(tx, g, `DELETE FROM hypothesis_signals WHERE hypothesis_id = ${q(draft)} AND signal_id = ${q(sig)}`, 'unlink from draft');
+    },
+  },
+  {
+    name: 'GAP_HYPOTHESIS_FROZEN link into a hypothesis past review (N4)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_HYPOTHESIS_FROZEN';
+      const sig = await insertSignal(tx, account);
+      const draft = await insertHypothesis(tx, account);
+      const review = await insertHypothesis(tx, account, { status: q('review_required') });
+      const active = await insertHypothesis(tx, account, { status: q('active') });
+      const rejected = await insertHypothesis(tx, account, { status: q('rejected') });
+      const link = (hyp: string) => `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(hyp)}, ${q(sig)}, 'supporting')`;
+      await expectRefused(tx, g, T, link(active), 'link into active');
+      await expectRefused(tx, g, T, link(rejected), 'link into rejected');
+      await expectOk(tx, g, link(draft), 'link into draft');
+      await expectOk(tx, g, link(review), 'link into review_required');
     },
   },
   {
@@ -603,13 +676,14 @@ const guards: Guard[] = [
     async run(tx, account) {
       const g = this.name;
       const T = 'GAP_HYPOTHESIS_FROZEN';
-      const sigA = await insertSignal(tx, account);
+      const sigA = await insertSignal(tx, account, { evidence_text: q('Evidence for the re-point case.') });
       const sigB = await insertSignal(tx, account);
       const sigC = await insertSignal(tx, account);
       const draft = await insertHypothesis(tx, account);
       const draft2 = await insertHypothesis(tx, account);
-      const active = await insertHypothesis(tx, account, { status: q('active') });
-      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(active)}, ${q(sigA)}, 'primary'), (${q(draft)}, ${q(sigB)}, 'primary')`, 'link');
+      const active = await insertHypothesis(tx, account);
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(active)}, ${q(sigA)}, 'primary'), (${q(draft)}, ${q(sigB)}, 'primary')`, 'link while draft');
+      await expectOk(tx, g, promoteToActiveSql(active), 'promote to active');
       await expectRefused(tx, g, T, `UPDATE hypothesis_signals SET signal_id = ${q(sigC)} WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sigA)}`, 'active: re-point signal_id');
       await expectRefused(tx, g, T, `UPDATE hypothesis_signals SET hypothesis_id = ${q(draft2)} WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sigA)}`, 'active: move link out');
       await expectRefused(tx, g, T, `UPDATE hypothesis_signals SET hypothesis_id = ${q(active)} WHERE hypothesis_id = ${q(draft)} AND signal_id = ${q(sigB)}`, 'draft: move link INTO active');

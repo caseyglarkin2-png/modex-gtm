@@ -17,7 +17,7 @@
 --   GAP_APPEND_ONLY         sequence_copy_events, hypothesis_events, gap_audit_events: no UPDATE, no DELETE
 --   GAP_BID_IMMUTABLE       buyer_input_data: raw language and identity write-once; nothing moves once confirmed; no DELETE
 --   GAP_SIGNAL_FROZEN       prospecting_signals: fact columns frozen after insert (only metadata moves)
---   GAP_HYPOTHESIS_FROZEN   prospecting_hypotheses narrative frozen past review; hypothesis_signals cannot unlink or re-point past review
+--   GAP_HYPOTHESIS_FROZEN   prospecting_hypotheses narrative frozen past review; hypothesis_signals cannot link, unlink or re-point past review
 --   GAP_HYPOTHESIS_UNSUPPORTED  prospecting_hypotheses cannot enter approved/active without reviewed_by and one evidenced linked signal
 --   GAP_DISPOSITION_FROZEN  conversation_dispositions: classes and buyer language frozen once confirmed; confirmation never reverts
 -- CHECK constraints are named gap_ck_<table>_<column> so a violation names itself.
@@ -190,7 +190,10 @@ CREATE TRIGGER gap_version_guard_del
   FOR EACH ROW EXECUTE FUNCTION gap_version_guard();
 
 -- ---------------------------------------------------------------------------
--- 4. sequence_enrollments: first non-test enrollment freezes its version
+-- 4. sequence_enrollments: first non-test, non-legacy enrollment freezes its
+--    version. R2-5: a legacy=true row is a readback ledger entry (HubSpot said
+--    the contact is in a lane-built sequence); nobody received the placeholder
+--    scaffold, so it must stay draft for S3-T4 to reconstruct the real steps.
 -- ---------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION gap_enrollment_freeze_version()
@@ -214,11 +217,12 @@ DROP TRIGGER IF EXISTS gap_enrollment_freeze_version ON sequence_enrollments;
 CREATE TRIGGER gap_enrollment_freeze_version
   AFTER INSERT ON sequence_enrollments
   FOR EACH ROW
-  WHEN (NEW.is_test = false)
+  WHEN (NEW.is_test = false AND NEW.legacy = false)
   EXECUTE FUNCTION gap_enrollment_freeze_version();
 
 -- ---------------------------------------------------------------------------
--- 5. sequence_enrollments: pins immutable after insert (GAP_ENROLLMENT_PIN)
+-- 5. sequence_enrollments: pins immutable after insert (GAP_ENROLLMENT_PIN);
+--    R2-5b: one-time attribution backfill for legacy rows with NULL rendered_steps
 -- ---------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION gap_enrollment_pin_guard()
@@ -227,16 +231,22 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
   changed text[] := ARRAY[]::text[];
+  -- R2-5b: a Sprint 2 legacy readback row was inserted against the placeholder
+  -- v1 with no rendered steps. Its attribution to the reconstructed journal
+  -- version (S3-T4) is a one-time backfill of exactly three columns, allowed
+  -- only while rendered_steps is still NULL; once set, the row is fully
+  -- pinned again. Every other pinned column stays refused throughout.
+  backfill boolean := (OLD.legacy = true AND OLD.rendered_steps IS NULL);
 BEGIN
-  IF NEW.sequence_version_id IS DISTINCT FROM OLD.sequence_version_id THEN changed := array_append(changed, 'sequence_version_id'); END IF;
+  IF NOT backfill AND NEW.sequence_version_id IS DISTINCT FROM OLD.sequence_version_id THEN changed := array_append(changed, 'sequence_version_id'); END IF;
   IF NEW.family_id IS DISTINCT FROM OLD.family_id THEN changed := array_append(changed, 'family_id'); END IF;
   IF NEW.engine IS DISTINCT FROM OLD.engine THEN changed := array_append(changed, 'engine'); END IF;
   IF NEW.to_email IS DISTINCT FROM OLD.to_email THEN changed := array_append(changed, 'to_email'); END IF;
   IF NEW.hubspot_contact_id IS DISTINCT FROM OLD.hubspot_contact_id THEN changed := array_append(changed, 'hubspot_contact_id'); END IF;
   IF NEW.hubspot_sequence_id IS DISTINCT FROM OLD.hubspot_sequence_id THEN changed := array_append(changed, 'hubspot_sequence_id'); END IF;
   IF NEW.hypothesis_id IS DISTINCT FROM OLD.hypothesis_id THEN changed := array_append(changed, 'hypothesis_id'); END IF;
-  IF NEW.rendered_steps IS DISTINCT FROM OLD.rendered_steps THEN changed := array_append(changed, 'rendered_steps'); END IF;
-  IF NEW.rendered_steps_hash IS DISTINCT FROM OLD.rendered_steps_hash THEN changed := array_append(changed, 'rendered_steps_hash'); END IF;
+  IF NOT backfill AND NEW.rendered_steps IS DISTINCT FROM OLD.rendered_steps THEN changed := array_append(changed, 'rendered_steps'); END IF;
+  IF NOT backfill AND NEW.rendered_steps_hash IS DISTINCT FROM OLD.rendered_steps_hash THEN changed := array_append(changed, 'rendered_steps_hash'); END IF;
   IF NEW.enrolled_at IS DISTINCT FROM OLD.enrolled_at THEN changed := array_append(changed, 'enrolled_at'); END IF;
   IF NEW.legacy IS DISTINCT FROM OLD.legacy THEN changed := array_append(changed, 'legacy'); END IF;
 
@@ -451,9 +461,11 @@ CREATE TRIGGER gap_hypothesis_guard
   BEFORE UPDATE ON prospecting_hypotheses
   FOR EACH ROW EXECUTE FUNCTION gap_hypothesis_guard();
 
--- hypothesis_signals: a link cannot be removed or re-pointed once its
+-- hypothesis_signals: a link cannot be added, removed or re-pointed once its
 -- hypothesis left review. Both ends are checked on UPDATE so a link cannot be
--- moved out of, or into, a hypothesis that is past review.
+-- moved out of, or into, a hypothesis that is past review, and INSERT (N4)
+-- checks the target the same way, so the evidence set of an approved or
+-- active hypothesis is exactly what the reviewer saw.
 CREATE OR REPLACE FUNCTION gap_hypothesis_signal_unlink_guard()
 RETURNS trigger
 LANGUAGE plpgsql
@@ -462,6 +474,14 @@ DECLARE
   parent_status text;
   target_status text;
 BEGIN
+  IF TG_OP = 'INSERT' THEN
+    SELECT status INTO target_status FROM prospecting_hypotheses WHERE id = NEW.hypothesis_id;
+    IF target_status IS NOT NULL AND target_status NOT IN ('draft', 'review_required') THEN
+      RAISE EXCEPTION 'GAP_HYPOTHESIS_FROZEN: hypothesis % is %; a link to signal % cannot be added', NEW.hypothesis_id, target_status, NEW.signal_id;
+    END IF;
+    RETURN NEW;
+  END IF;
+
   SELECT status INTO parent_status FROM prospecting_hypotheses WHERE id = OLD.hypothesis_id;
 
   IF TG_OP = 'DELETE' THEN
@@ -488,7 +508,7 @@ $$;
 
 DROP TRIGGER IF EXISTS gap_hypothesis_signal_unlink_guard ON hypothesis_signals;
 CREATE TRIGGER gap_hypothesis_signal_unlink_guard
-  BEFORE UPDATE OR DELETE ON hypothesis_signals
+  BEFORE INSERT OR UPDATE OR DELETE ON hypothesis_signals
   FOR EACH ROW EXECUTE FUNCTION gap_hypothesis_signal_unlink_guard();
 
 -- ---------------------------------------------------------------------------
