@@ -21,6 +21,13 @@
  * `enroll_gap_sequence` RoutingDecision for the hypothesis, exactly as the
  * enroll service does.
  *
+ * Compile rows (R3-5): the report and the enroll button read rows compiled
+ * for THIS hypothesis on the resolved version (`hypothesisCompileWhere`).
+ * Template-level rows (hypothesis_id null, from a `template: true` compile of
+ * the version's template copy) are a second query and render under their
+ * own "template compile (shadow only)" heading; they never feed `compileIds`
+ * or the cleared state.
+ *
  * Never rendered: `inputs_snapshot`, `critic` payloads, `last_intent_source`
  * or any other private intent field. The report component picks columns by
  * name (see compile-report.tsx) and this page passes it nothing else.
@@ -31,6 +38,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
+import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler/preview-rows';
 import { getHypothesis } from '@/lib/gap/hypothesis/service';
 import { resolveEnrollTarget } from '@/lib/gap/routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
@@ -182,12 +190,15 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
   const steps = parsed && parsed.ok ? parsed.steps.steps : [];
 
   let reportSteps: CompileReportStep[] = [];
+  let templateSteps: CompileReportStep[] = [];
   let compileIds: string[] = [];
   if (version && steps.length > 0) {
+    const select = { id: true, step_index: true, verdict: true, checks: true, word_count: true, cta_family: true, created_at: true };
+    // Rows for this hypothesis only: these are the report and the gate input.
     const rows: CompileRowLike[] = await prisma.gapCompile.findMany({
-      where: { sequence_version_id: version.id, OR: [{ hypothesis_id: hypothesis.id }, { hypothesis_id: null }] },
+      where: hypothesisCompileWhere(version.id, hypothesis.id),
       orderBy: { created_at: 'desc' },
-      select: { id: true, step_index: true, verdict: true, checks: true, word_count: true, cta_family: true, created_at: true },
+      select,
     });
     const newest = newestPerStep(rows, steps.length);
     reportSteps = await Promise.all(
@@ -198,6 +209,16 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
       }),
     );
     compileIds = newest.filter((r): r is CompileRowLike => r !== null).map((r) => r.id);
+
+    // Template-level rows: shown apart, never a gate input.
+    const templateRows: CompileRowLike[] = await prisma.gapCompile.findMany({
+      where: templateCompileWhere(version.id),
+      orderBy: { created_at: 'desc' },
+      select,
+    });
+    if (templateRows.length > 0) {
+      templateSteps = newestPerStep(templateRows, steps.length).map((row, i) => toReportStep(i, row, stepCopy(steps, i), null));
+    }
   }
 
   const cleared = allStepsCleared(reportSteps);
@@ -268,6 +289,21 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
       </section>
 
       <CompileReport steps={reportSteps} />
+
+      {templateSteps.length > 0 ? (
+        <section className="space-y-3 rounded-md border border-dashed border-[var(--border)] p-4" data-testid="template-compile">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+              template compile (shadow only)
+            </p>
+            <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+              Compiled from the version&apos;s template copy with no hypothesis, so no evidence and no observation were
+              checked. These rows never unlock the enroll row above.
+            </p>
+          </div>
+          <CompileReport steps={templateSteps} />
+        </section>
+      ) : null}
 
       {persona && version ? (
         <EnrollShadowButton
