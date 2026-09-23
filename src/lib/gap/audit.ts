@@ -42,8 +42,6 @@ export type GapAuditKind =
   | 'enroll.shadow'
   | 'enroll.live'
   | 'enroll.row_emitted'
-  | 'schedule.compile_not_passed'
-  | 'schedule.skipped'
   | 'enroll.refused'
   | 'flag.refused'
   | 'copy_drift'
