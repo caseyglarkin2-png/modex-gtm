@@ -158,6 +158,25 @@ describe('buildCandidates: personas', () => {
     expect(candidates.filter((c) => c.personaId === 3)).toHaveLength(0);
   });
 
+  it('a persona whose email is invalid is skipped with persona_email_invalid and gets no candidate', () => {
+    const invalid: BuildPersona = { id: 1, personaKey: 'site_ops', name: 'Plant Logistics Manager', doNotContact: false, emailValid: false };
+    const { candidates, skipped } = buildCandidates({ ...INPUT, personas: [invalid] });
+    expect(skipped).toContainEqual({ personaId: 1, reason: 'persona_email_invalid' });
+    expect(skipped.filter((s) => s.personaId === 1 && s.reason === 'persona_email_invalid')).toHaveLength(1);
+    expect(candidates).toHaveLength(0);
+    // The same persona with a valid address builds normally, so the skip is the address, not the persona.
+    const valid = buildCandidates({ ...INPUT, personas: [{ ...invalid, emailValid: true }] });
+    expect(valid.candidates.length).toBeGreaterThan(0);
+    expect(valid.skipped.some((s) => s.reason === 'persona_email_invalid')).toBe(false);
+  });
+
+  it('doNotContact wins over an invalid email as the skip reason', () => {
+    const both: BuildPersona = { id: 9, personaKey: 'site_ops', name: 'Both', doNotContact: true, emailValid: false };
+    const { skipped } = buildCandidates({ ...INPUT, personas: [both] });
+    expect(skipped).toContainEqual({ personaId: 9, reason: 'persona_suppressed' });
+    expect(skipped.some((s) => s.personaId === 9 && s.reason === 'persona_email_invalid')).toBe(false);
+  });
+
   it('no candidate is produced without signal ids', () => {
     const { candidates } = result();
     expect(candidates.length).toBeGreaterThan(0);

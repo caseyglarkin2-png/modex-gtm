@@ -105,10 +105,17 @@ export interface HypothesisBlockProps {
   confidence: number;
 }
 
-function SubSection({ title, children }: { title: string; children: ReactNode }) {
+/**
+ * A titled sub-section. `kind="fact-derived"` marks a sub-section whose text
+ * is factual (the cited signals' titles and ages) although it sits inside
+ * the HYPOTHESIS block; it gets a "From cited signals" caption so the reader
+ * does not take it for seller inference.
+ */
+function SubSection({ title, kind, children }: { title: string; kind?: 'fact-derived'; children: ReactNode }) {
   return (
-    <div className="mt-3">
+    <div className="mt-3" {...(kind ? { 'data-kind': kind } : {})}>
       <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{title}</h4>
+      {kind === 'fact-derived' ? <Caption>From cited signals</Caption> : null}
       <div className="mt-1">{children}</div>
     </div>
   );
@@ -154,7 +161,7 @@ export function HypothesisBlock({
       <SubSection title="Impacts">
         <BulletList items={impactHypotheses} empty="No impact proposed" />
       </SubSection>
-      <SubSection title="Why now">
+      <SubSection title="Why now" kind="fact-derived">
         {whyNow && whyNow.trim().length > 0 ? (
           <p>{whyNow}</p>
         ) : (

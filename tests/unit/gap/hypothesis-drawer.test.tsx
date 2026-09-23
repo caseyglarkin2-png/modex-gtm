@@ -131,6 +131,30 @@ describe('<HypothesisBlock>', () => {
     expect(within(block).getByText('The family is wrong for this account.')).toBeInTheDocument();
   });
 
+  it('captions "Why now" as fact-derived ("From cited signals") inside the HYPOTHESIS block, and nothing else', () => {
+    render(
+      <HypothesisBlock
+        problemHypothesis="Acme may be losing dock hours."
+        rootCauseHypotheses={['No gate-to-dock visibility']}
+        impactHypotheses={['Detention spend rising']}
+        whyNow="The Reno ramp doubles inbound volume."
+        falsificationQuestions={['Does Reno run its own gate?']}
+        whatANoMeans="The family is wrong for this account."
+        confidence={55}
+      />,
+    );
+    const block = screen.getByTestId('hypothesis-block');
+    const factDerived = block.querySelectorAll('[data-kind="fact-derived"]');
+    expect(factDerived).toHaveLength(1);
+    const whyNow = factDerived[0] as HTMLElement;
+    expect(within(whyNow).getByText('Why now')).toBeInTheDocument();
+    expect(within(whyNow).getByText('From cited signals')).toBeInTheDocument();
+    expect(within(whyNow).getByText('The Reno ramp doubles inbound volume.')).toBeInTheDocument();
+    // The seller-inference caption stays on the block, outside the fact-derived sub-section.
+    expect(within(whyNow).queryByText('Seller inference, unproven')).toBeNull();
+    expect(within(block).getAllByText('From cited signals')).toHaveLength(1);
+  });
+
   it('gives the two blocks different data-block attributes', () => {
     render(
       <>

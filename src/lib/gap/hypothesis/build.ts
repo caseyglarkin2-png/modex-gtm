@@ -53,6 +53,7 @@ export interface BuildPersona {
   name: string;
   title?: string | null;
   doNotContact: boolean;
+  /** False when the address on file is malformed or bounced: no candidate, since nothing could be sent. */
   emailValid: boolean;
 }
 
@@ -94,6 +95,7 @@ export type BuildSkipReason =
   | 'first_party_omitted_from_observation'
   | 'title_omitted_forbidden_language'
   | 'persona_suppressed'
+  | 'persona_email_invalid'
   | 'persona_not_relevant'
   | 'persona_family_capped'
   | 'no_citable_signal'
@@ -432,6 +434,10 @@ export function buildCandidates(input: BuildInput): BuildResult {
   for (const persona of personas) {
     if (persona.doNotContact) {
       skipped.push({ personaId: persona.id, reason: 'persona_suppressed' });
+      continue;
+    }
+    if (!persona.emailValid) {
+      skipped.push({ personaId: persona.id, reason: 'persona_email_invalid' });
       continue;
     }
 

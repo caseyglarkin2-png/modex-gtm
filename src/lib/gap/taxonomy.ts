@@ -105,7 +105,7 @@ export const PROBLEM_FAMILY_CATALOG: Record<ProblemFamily, ProblemFamilyDefiniti
       'Gate waiting',
       'Trailer search',
       'Stale asset state',
-      'Dock and yard divergence',
+      'Dock and yards divergence',
       'Reactive spotting',
       'Sequential manual handoffs',
     ],
