@@ -38,6 +38,14 @@
  * engagement cannot push the floor into the future). A dry run never writes
  * it. The search uses GTE, so the newest engagement is re-read on the next
  * run and counted `existing`; that overlap is the price of never missing one.
+ *
+ * R2-11: the search sorts hs_timestamp ASCENDING explicitly (the string form
+ * left the direction to HubSpot's default), and a run that filled its page
+ * (`seen >= limit`) never advances the watermark: the cut may have landed
+ * inside a burst of equal timestamps or ahead of rows the search dropped, so
+ * the floor stays put and the report says `watermarkHeld: true` with reason
+ * `page_full`. The next run re-reads from the same floor; dedup makes that
+ * free. Raise `limit` or run again to drain a backlog.
  */
 
 import { classifyInboundReply } from '@/lib/email/reply-precision';
@@ -92,6 +100,9 @@ export interface PollReport {
   /** Non-human verdicts keyed by the classifier's reason string. */
   filtered: Record<string, number>;
   dryRun: boolean;
+  /** R2-11: true when the run did not advance the watermark although it saw rows. */
+  watermarkHeld: boolean;
+  watermarkHeldReason: 'page_full' | null;
 }
 
 interface ScopedPersona {
@@ -179,6 +190,8 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     unknownSender: 0,
     filtered: {},
     dryRun: opts.dryRun,
+    watermarkHeld: false,
+    watermarkHeldReason: null,
   };
 
   let newest: Date | null = null;
@@ -291,7 +304,13 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
 
   report.newest = newest ? newest.toISOString() : null;
 
-  if (!opts.dryRun && newest) {
+  // R2-11: a full page is not proof that everything up to `newest` was read.
+  if (newest && engagements.length >= limit) {
+    report.watermarkHeld = true;
+    report.watermarkHeldReason = 'page_full';
+  }
+
+  if (!opts.dryRun && newest && !report.watermarkHeld) {
     const advanced = newest > opts.now ? opts.now : newest;
     const value = advanced.toISOString();
     await prisma.systemConfig.upsert({
@@ -317,7 +336,7 @@ export interface EmailsSearchClient {
           doSearch: (request: {
             filterGroups: Array<{ filters: Array<{ propertyName: string; operator: any; value?: string }> }>;
             properties: string[];
-            sorts: string[];
+            sorts: Array<{ propertyName: string; direction: 'ASCENDING' | 'DESCENDING' }>;
             limit: number;
             after?: string;
           }) => Promise<{ results: Array<{ id: string; properties: Record<string, string | null> }>; paging?: { next?: { after?: string } } }>;
@@ -385,7 +404,7 @@ export async function searchIncomingEmailsFromHubSpot(
             },
           ],
           properties: SEARCH_PROPERTIES,
-          sorts: ['hs_timestamp'],
+          sorts: [{ propertyName: 'hs_timestamp', direction: 'ASCENDING' }],
           limit: pageLimit,
           ...(after ? { after } : {}),
         }),

@@ -238,6 +238,40 @@ describe('pollHubSpotReplies: watermark', () => {
     expect(report.newest).toBeNull();
     expect(prisma.systemConfig.upsert).not.toHaveBeenCalled();
     expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(stored);
+    expect(report).toMatchObject({ watermarkHeld: false, watermarkHeldReason: null });
+  });
+
+  it('R2-11: a capped run (seen >= limit) does NOT advance the watermark and reports watermarkHeld page_full', async () => {
+    const stored = '2026-09-21T08:00:00.000Z';
+    const prisma = makePrisma({ config: { [WATERMARK_KEY]: stored } });
+    const rows = [engagement({ id: '1' }), OOO, STRANGER];
+
+    const report = await pollHubSpotReplies(
+      prisma,
+      { now: NOW, dryRun: false, limit: 3 },
+      { searchIncomingEmails: makeSearch(rows) },
+    );
+
+    expect(report.seen).toBe(3);
+    expect(report.newest).toBe(STRANGER.timestamp.toISOString());
+    expect(report).toMatchObject({ watermarkHeld: true, watermarkHeldReason: 'page_full' });
+    // The page may have been cut mid-timestamp; the floor stays put so the next run re-reads from it.
+    expect(prisma.systemConfig.upsert).not.toHaveBeenCalled();
+    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(stored);
+    // The rows themselves still landed.
+    expect(report.created).toBe(1);
+    expect(prisma.__store.messages.size).toBe(1);
+  });
+
+  it('R2-11: a run under the limit advances the watermark and reports it not held', async () => {
+    const prisma = makePrisma();
+    const report = await pollHubSpotReplies(
+      prisma,
+      { now: NOW, dryRun: false, limit: 4 },
+      { searchIncomingEmails: makeSearch([engagement(), OOO, STRANGER]) },
+    );
+    expect(report).toMatchObject({ seen: 3, watermarkHeld: false, watermarkHeldReason: null });
+    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(STRANGER.timestamp.toISOString());
   });
 });
 
@@ -264,6 +298,8 @@ describe('pollHubSpotReplies: classification and persistence', () => {
       unknownSender: 1,
       filtered: { auto_reply_subject: 1 },
       dryRun: false,
+      watermarkHeld: false,
+      watermarkHeldReason: null,
     });
 
     const { messages, threads, notifications } = prisma.__store;
@@ -478,7 +514,9 @@ describe('searchIncomingEmailsFromHubSpot', () => {
         ],
       },
     ]);
-    expect(req.sorts).toEqual(['hs_timestamp']);
+    // R2-11: the string form leaves the direction to HubSpot's default; the
+    // watermark logic needs oldest-first, so the direction is stated.
+    expect(req.sorts).toEqual([{ propertyName: 'hs_timestamp', direction: 'ASCENDING' }]);
     expect(req.limit).toBe(10);
     expect(rows).toEqual([
       {
@@ -597,6 +635,8 @@ const REPORT: PollReport = {
   unknownSender: 1,
   filtered: { auto_reply_subject: 1 },
   dryRun: false,
+  watermarkHeld: false,
+  watermarkHeldReason: null,
 };
 
 function makeReq(opts: { headers?: Record<string, string>; url?: string } = {}) {
@@ -648,8 +688,18 @@ describe('GET /api/cron/gap-hubspot-replies (route)', () => {
     expect(mockedPoll).not.toHaveBeenCalled();
   });
 
-  it('a scheduled Bearer call claims the day, applies and returns the report', async () => {
+  it('N9: a Bearer call WITHOUT ?mode is a dry run: no claim, dryRun true, mode dryrun', async () => {
+    mockedPoll.mockResolvedValue({ ...REPORT, dryRun: true });
     const res = await GET(makeReq({ headers: { authorization: 'Bearer shh' } }));
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ...REPORT, dryRun: true, mode: 'dryrun' });
+    expect(mockedClaim).not.toHaveBeenCalled();
+    expect(mockedPoll).toHaveBeenCalledTimes(1);
+    expect(mockedPoll.mock.calls[0][1]).toMatchObject({ dryRun: true, limit: 200, since: null });
+  });
+
+  it('a Bearer call with ?mode=apply claims the day, applies and returns the report', async () => {
+    const res = await GET(makeReq({ headers: { authorization: 'Bearer shh' }, url: 'http://localhost/api/cron/gap-hubspot-replies?mode=apply' }));
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ ...REPORT, mode: 'apply' });
     expect(mockedClaim).toHaveBeenCalledWith('gap-hubspot-replies', expect.any(Date));
@@ -669,8 +719,8 @@ describe('GET /api/cron/gap-hubspot-replies (route)', () => {
     expect(mockedPoll.mock.calls[0][1]).toMatchObject({ dryRun: true });
   });
 
-  it('?dryRun=1 forces a dry run even on a scheduled call', async () => {
-    await GET(makeReq({ headers: { authorization: 'Bearer shh' }, url: 'http://localhost/api/cron/gap-hubspot-replies?dryRun=1' }));
+  it('?dryRun=1 forces a dry run even with ?mode=apply', async () => {
+    await GET(makeReq({ headers: { authorization: 'Bearer shh' }, url: 'http://localhost/api/cron/gap-hubspot-replies?mode=apply&dryRun=1' }));
     expect(mockedClaim).not.toHaveBeenCalled();
     expect(mockedPoll.mock.calls[0][1]).toMatchObject({ dryRun: true });
   });
@@ -704,7 +754,7 @@ describe('GET /api/cron/gap-hubspot-replies (route)', () => {
 
   it('releases the daily claim and answers 500 when the job throws', async () => {
     mockedPoll.mockRejectedValueOnce(new Error('hubspot down'));
-    const res = await GET(makeReq({ headers: { authorization: 'Bearer shh' } }));
+    const res = await GET(makeReq({ headers: { authorization: 'Bearer shh' }, url: 'http://localhost/api/cron/gap-hubspot-replies?mode=apply' }));
     expect(res.status).toBe(500);
     expect(await res.json()).toEqual({ error: 'hubspot down' });
     expect(mockedRelease).toHaveBeenCalledWith('gap-hubspot-replies', expect.any(Date));

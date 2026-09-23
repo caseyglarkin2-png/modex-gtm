@@ -62,9 +62,9 @@ function loadLane(dir: string) {
  * - Auth first (Bearer, x-cron-secret, or legacy ?secret=), then the GAP
  *   flags. A scheduled run with the feature off answers 200 with the skip
  *   payload so the schedule never reads as an outage.
- * - mode: Vercel-SCHEDULED invocations (Bearer auth, no explicit mode) apply.
- *   Manual calls default to dry run; pass ?mode=apply to write. ?dryRun=1
- *   forces a dry run in every case. Same convention as /api/cron/gap-hypothesize.
+ * - mode (N9): dry run unless ?mode=apply, for every caller including a
+ *   Vercel schedule or an agent Bearer call. ?dryRun=1 forces a dry run in
+ *   every case. Same convention as POST /api/gap/routing/run.
  * - Inputs: GAP_TOP100_DIR names the lane checkout (run_manifest.json and
  *   data/roster/<key>.json). Unset answers 200 skipped before any claim or
  *   HubSpot read, as does a missing HUBSPOT_ACCESS_TOKEN.
@@ -78,9 +78,12 @@ export async function GET(request: Request) {
   }
 
   const url = new URL(request.url);
-  const modeParam = url.searchParams.get('mode');
-  const isScheduled = (request.headers.get('authorization') ?? '').startsWith('Bearer ') && !modeParam;
-  const dryRun = url.searchParams.get('dryRun') === '1' || (modeParam !== 'apply' && !isScheduled);
+  // N9: dry run unless ?mode=apply, the same convention as POST
+  // /api/gap/routing/run. A Bearer call without the mode (a Vercel schedule,
+  // an agent) rehearses; when this route is scheduled, vercel.json must carry
+  // ?mode=apply on the path. ?dryRun=1 wins in every case.
+  const apply = url.searchParams.get('mode') === 'apply';
+  const dryRun = url.searchParams.get('dryRun') === '1' || !apply;
   const mode = dryRun ? 'dryrun' : 'apply';
   const force = url.searchParams.get('force') === '1';
   const now = new Date();

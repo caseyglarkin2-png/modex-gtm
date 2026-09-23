@@ -44,9 +44,9 @@ function parseSince(raw: string | null): Date | null {
  *   flags. A scheduled run with the feature off answers 200 with the skip
  *   payload so the schedule never reads as an outage. Gated on
  *   GAP_ROUTING_ENABLED because routing is the consumer of what this writes.
- * - mode: Vercel-SCHEDULED invocations (Bearer auth, no explicit mode) apply.
- *   Manual calls default to dry run; pass ?mode=apply to write. ?dryRun=1
- *   forces a dry run in every case. Same convention as gap-hypothesize.
+ * - mode (N9): dry run unless ?mode=apply, for every caller including a
+ *   Vercel schedule or an agent Bearer call. ?dryRun=1 forces a dry run in
+ *   every case. Same convention as POST /api/gap/routing/run.
  * - Idempotency: an apply run claims the day via claimDailyRun. A dry run
  *   writes nothing, so it does not claim. ?force=1 bypasses the claim; the
  *   secret already matched by then, so only a holder of CRON_SECRET can force.
@@ -59,9 +59,12 @@ export async function GET(request: Request) {
   }
 
   const url = new URL(request.url);
-  const modeParam = url.searchParams.get('mode');
-  const isScheduled = (request.headers.get('authorization') ?? '').startsWith('Bearer ') && !modeParam;
-  const dryRun = url.searchParams.get('dryRun') === '1' || (modeParam !== 'apply' && !isScheduled);
+  // N9: dry run unless ?mode=apply, the same convention as POST
+  // /api/gap/routing/run. A Bearer call without the mode (a Vercel schedule,
+  // an agent) rehearses; when this route is scheduled, vercel.json must carry
+  // ?mode=apply on the path. ?dryRun=1 wins in every case.
+  const apply = url.searchParams.get('mode') === 'apply';
+  const dryRun = url.searchParams.get('dryRun') === '1' || !apply;
   const mode = dryRun ? 'dryrun' : 'apply';
   const force = url.searchParams.get('force') === '1';
   const limit = clampInt(url.searchParams.get('limit'), DEFAULT_LIMIT, 1, MAX_LIMIT);
