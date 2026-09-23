@@ -88,6 +88,12 @@ describe('C06 PRIVATE_INTENT_EXPOSED', () => {
     ['You downloaded the whitepaper.', /you downloaded/i],
     ['Great to see you on our website.', /on our site/i],
     ['Check the /demo/acme walkthrough.', /demo/i],
+    // R3-8: bare "intent" and "looked at our ... page" are first-party intent too.
+    ['Your intent data shows a spike this quarter.', /^body exposes private intent \(intent\)/],
+    ['Someone at Kroger looked at our yard scorecard page twice.', /looked at/i],
+    ['Your team checked out the yard calculator last week.', /checked out/i],
+    ['Somebody there browsed our proof site.', /browsed/i],
+    ['Your ops lead checked out the website on Monday.', /checked out/i],
   ];
 
   for (const [body, label] of cases) {
@@ -114,6 +120,11 @@ describe('C06 PRIVATE_INTENT_EXPOSED', () => {
       'You mentioned the Ohio expansion at the conference.',
       'The plant opened a second gate.',
       'We saw the earnings call transcript.',
+      'With the best of intentions, the second shift started in March.',
+      'The intentional slowdown at the gate is public.',
+      'They looked at the Dayton site for a second dock.',
+      'The scorecard page is public.',
+      'She listened intently to the driver.',
     ]) {
       expect(checkPrivateIntentExposed(draft(body), ctx(0)).passed, body).toBe(true);
     }

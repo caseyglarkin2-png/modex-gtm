@@ -28,6 +28,10 @@ export interface ForbiddenExplainPattern {
  */
 export const PRIVATE_INTENT_COPY_PATTERNS: readonly ForbiddenExplainPattern[] = [
   { label: 'intent score/signal/source/at', pattern: /\bintent(_|\s)?(score|signal|signals|source|at)\b/i },
+  // R3-8: the bare word. The lookahead spells out what the word boundary
+  // already excludes (intention, intentional, intently); "intent_score" has
+  // no boundary after "intent" and is the first entry's job.
+  { label: 'intent', pattern: /\bintent(?!ion|ly)\b/i },
   { label: 'buying intent', pattern: /\bbuying intent\b/i },
   { label: 'last_intent', pattern: /\blast_intent\b/i },
   { label: 'email_reply_verified', pattern: /\bemail_reply_verified\b/i },
@@ -40,6 +44,15 @@ export const PRIVATE_INTENT_COPY_PATTERNS: readonly ForbiddenExplainPattern[] = 
   { label: 'opened email/deck/link/message', pattern: /\bopened (our|the|your)\s*(email|deck|link|message)\b/i },
   { label: 'tracking pixel', pattern: /\btracking pixel\b/i },
   { label: 'opens and clicks', pattern: /\bopen(s|ed)? and click(s|ed)?\b/i },
+  // R3-8: "looked at our yard scorecard page", "checked out the ROI calculator",
+  // "browsed our proof site". A "site" after "the" is a physical place in this
+  // business ("looked at the Dayton site for a second dock"), so "site" only
+  // counts after "our"; "website" counts after either.
+  {
+    label: 'looked at/checked out/browsed our|the ... page/site/scorecard/calculator',
+    pattern:
+      /\b(looked at|checked out|browsed) (?:(our|the)\b[^.!?\n]*\b(page|scorecard|calculator|website)\b|our\b[^.!?\n]*\bsite\b)/i,
+  },
 ];
 
 /**

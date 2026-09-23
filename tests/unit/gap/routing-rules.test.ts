@@ -806,9 +806,23 @@ describe('explain', () => {
       expect(matches(FORBIDDEN_EXPLAIN_PATTERNS, text), `explain list on "${text}"`).toBe(true);
     }
     // The copy list is still the private-intent floor: every pre-R2-13 anchor is in it and in the explain list.
-    for (const text of ['intent score 90', 'visited our demo', 'landed on /for/acme-foods', 'opened our email twice']) {
+    for (const text of [
+      'intent score 90',
+      'visited our demo',
+      'landed on /for/acme-foods',
+      'opened our email twice',
+      // R3-8: bare "intent" and "looked at our ... page" join the floor.
+      'Your intent data shows a spike this quarter.',
+      'Someone at Kroger looked at our yard scorecard page twice.',
+      'checked out the ROI calculator',
+      'browsed our proof site',
+    ]) {
       expect(matches(PRIVATE_INTENT_COPY_PATTERNS, text), `copy list on "${text}"`).toBe(true);
       expect(matches(FORBIDDEN_EXPLAIN_PATTERNS, text), `explain list on "${text}"`).toBe(true);
+    }
+    for (const text of ['with the best of intentions', 'the plant opened', 'an intentional second shift', 'listened intently']) {
+      expect(matches(PRIVATE_INTENT_COPY_PATTERNS, text), `copy list on "${text}"`).toBe(false);
+      expect(matches(FORBIDDEN_EXPLAIN_PATTERNS, text), `explain list on "${text}"`).toBe(false);
     }
     expect(PRIVATE_INTENT_COPY_PATTERNS.length).toBeLessThan(FORBIDDEN_EXPLAIN_PATTERNS.length);
     for (const entry of PRIVATE_INTENT_COPY_PATTERNS) expect(FORBIDDEN_EXPLAIN_PATTERNS).toContain(entry);
