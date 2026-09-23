@@ -67,8 +67,13 @@ export async function scheduleNextStep(prisma: any, item: any): Promise<number |
 
 /** The statuses a stop may touch: unsent AND unclaimed. A `sending` row has
  *  been claimed by a worker; it is left alone and stays under the reply-pause
- *  guard and the wire gates in send-deps, exactly as before. */
-const STOPPABLE_STATUSES = [STATUS.draft, STATUS.approved];
+ *  guard and the wire gates in send-deps, exactly as before.
+ *
+ *  R2-7: `failed` belongs here too. It is unsent, the legacy delete removed it
+ *  (its where clause was `notIn [sent, sending]`), and a `failed` row left
+ *  behind by a stop is exactly what `retryDraft` re-approves, which would
+ *  revive a run the recipient asked us to end. */
+const STOPPABLE_STATUSES = [STATUS.draft, STATUS.approved, STATUS.failed];
 
 /** GAP OS (S2-T2): stop one sequence run by marking its unsent items skipped
  *  with `sequence_stopped:<reason>`. Returns the number of rows marked.

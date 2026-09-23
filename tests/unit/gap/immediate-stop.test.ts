@@ -59,8 +59,26 @@ function step0Item(overrides: Record<string, unknown> = {}) {
 }
 
 /** The only statuses a stop may touch: unsent and unclaimed. `sending` rows
- *  are claimed by a worker and stay under the reply-pause + wire gates. */
-const STOPPABLE = [STATUS.draft, STATUS.approved];
+ *  are claimed by a worker and stay under the reply-pause + wire gates.
+ *  R2-7: `failed` is unsent too; the legacy delete removed it, and left alone
+ *  a `retryDraft` would re-approve it and revive the stopped run. */
+const STOPPABLE = [STATUS.draft, STATUS.approved, STATUS.failed];
+
+/** A stateful updateMany so a test can see WHICH rows a stop touches. */
+function inMemoryUpdateMany(rows: Array<Record<string, unknown>>) {
+  return async ({ where, data }: { where: { sequence_run_id?: string; to_email?: string; status: { in: string[] } }; data: Record<string, unknown> }) => {
+    let count = 0;
+    for (const row of rows) {
+      const runMatch = where.sequence_run_id === undefined || row.sequence_run_id === where.sequence_run_id;
+      const emailMatch = where.to_email === undefined || row.to_email === where.to_email;
+      if (runMatch && emailMatch && where.status.in.includes(row.status as string)) {
+        Object.assign(row, data);
+        count += 1;
+      }
+    }
+    return { count };
+  };
+}
 
 describe('stopRun (flag on)', () => {
   let prisma: ReturnType<typeof makePrisma>;
@@ -84,7 +102,7 @@ describe('stopRun (flag on)', () => {
     expect(prisma.draftQueueItem.deleteMany).not.toHaveBeenCalled();
   });
 
-  it('the where clause excludes sending, sent, failed and skipped (claimed or terminal rows are untouched)', async () => {
+  it('the where clause excludes sending, sent and skipped (claimed or terminal rows are untouched) and includes failed (R2-7)', async () => {
     prisma.draftQueueItem.updateMany.mockResolvedValue({ count: 0 });
 
     await stopRun(prisma, 'run-abc', 'unsubscribed');
@@ -92,9 +110,30 @@ describe('stopRun (flag on)', () => {
     const where = prisma.draftQueueItem.updateMany.mock.calls[0][0].where;
     expect(where.status.in).not.toContain(STATUS.sending);
     expect(where.status.in).not.toContain(STATUS.sent);
-    expect(where.status.in).not.toContain(STATUS.failed);
     expect(where.status.in).not.toContain(STATUS.skipped);
+    expect(where.status.in).toContain(STATUS.failed);
     expect(where.status).not.toHaveProperty('notIn');
+  });
+
+  it('R2-7: a failed row of the run is marked skipped with the reason, so retryDraft cannot revive the stopped run', async () => {
+    const rows = [
+      { id: 1, sequence_run_id: 'run-abc', status: STATUS.sent },
+      { id: 2, sequence_run_id: 'run-abc', status: STATUS.failed, skipped_reason: null },
+      { id: 3, sequence_run_id: 'run-abc', status: STATUS.approved, skipped_reason: null },
+      { id: 4, sequence_run_id: 'run-abc', status: STATUS.sending },
+      { id: 5, sequence_run_id: 'run-other', status: STATUS.failed, skipped_reason: null },
+    ];
+    prisma.draftQueueItem.updateMany.mockImplementation(inMemoryUpdateMany(rows));
+
+    const n = await stopRun(prisma, 'run-abc', 'replied');
+
+    expect(n).toBe(2);
+    expect(rows[1]).toEqual({ id: 2, sequence_run_id: 'run-abc', status: STATUS.skipped, skipped_reason: 'sequence_stopped:replied' });
+    expect(rows[2].status).toBe(STATUS.skipped);
+    expect(rows[0].status).toBe(STATUS.sent);
+    expect(rows[3].status).toBe(STATUS.sending);
+    expect(rows[4].status).toBe(STATUS.failed);
+    expect(prisma.draftQueueItem.deleteMany).not.toHaveBeenCalled();
   });
 
   it('empty run id -> 0 with no DB call at all', async () => {
