@@ -19,11 +19,15 @@
  * Body (JSON, optional): `{ accountNames?: string[], dryRun?: boolean, maxPairs?: number }`.
  * The same keys are accepted as query params for curl convenience.
  *
- * HubSpot: the per-account snapshot reads `yardflow_tam` through the existing
- * `getCompanyById` reader when the Account carries a hubspot_company_id.
- * That reader fetches no tier, intent or trigger fields, so the snapshot
- * carries TAM only; a missing id, no HubSpot config, or a failed read is a
- * null snapshot (tam unknown, routed to research).
+ * HubSpot: two READS per account, never a write. The company read
+ * (`client.crm.companies.basicApi.getById`) fetches yardflow_tam, tam_tier,
+ * intent_score, last_intent_at, trigger_score and last_trigger_at; the
+ * contacts batch read (`client.crm.contacts.batchApi.read`, the same call
+ * /api/cron/gap-enrollment-sync makes) fetches yardflow_qual_verdict and
+ * last_intent_source for the account's contact-ready personas. `getCompanyById`
+ * in companies.ts fetches yardflow_tam only, so it is not used here. When
+ * HubSpot is not configured the provider answers null and routing proceeds
+ * with tam unknown, which routes to research_required by design.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -33,8 +37,9 @@ import { prisma } from '@/lib/prisma';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { getCompanyById } from '@/lib/hubspot/companies';
-import { DEFAULT_MAX_PAIRS, runRouting, snapshotFromCompany } from '@/lib/gap/routing/run';
+import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from '@/lib/hubspot/client';
+import { DEFAULT_MAX_PAIRS, createHubSpotSnapshotProvider, runRouting } from '@/lib/gap/routing/run';
+import type { SnapshotReads } from '@/lib/gap/routing/run';
 import { createClawdSuppressionReader } from '@/lib/gap/routing/suppression-read';
 
 export const dynamic = 'force-dynamic';
@@ -77,14 +82,30 @@ function queryOverrides(request: NextRequest): Record<string, unknown> {
   return raw;
 }
 
-async function hubspotSnapshot(_accountName: string, hubspotCompanyId: string | null) {
-  if (!hubspotCompanyId) return null;
-  try {
-    return snapshotFromCompany(await getCompanyById(hubspotCompanyId));
-  } catch {
-    return null;
-  }
-}
+/** The SDK reads, wired here so the run module stays free of the HubSpot client. */
+const hubspotReads: SnapshotReads = {
+  async readCompany(hubspotCompanyId, properties) {
+    const client = getHubSpotClient();
+    const res = await withHubSpotRetry(
+      () => client.crm.companies.basicApi.getById(hubspotCompanyId, [...properties]),
+      `gap-routing company read (${hubspotCompanyId})`,
+    );
+    return res ? { properties: res.properties ?? {} } : null;
+  },
+  async readContacts(ids, properties) {
+    const client = getHubSpotClient();
+    const res = await withHubSpotRetry(
+      () =>
+        client.crm.contacts.batchApi.read({
+          inputs: ids.map((id) => ({ id })),
+          properties: [...properties],
+          propertiesWithHistory: [],
+        }),
+      `gap-routing contacts batch read (${ids.length})`,
+    );
+    return (res.results ?? []).map((r) => ({ id: String(r.id), properties: r.properties ?? {} }));
+  },
+};
 
 export async function POST(request: NextRequest) {
   const skip = assertGapEnabled('GAP_ROUTING_ENABLED');
@@ -125,7 +146,10 @@ export async function POST(request: NextRequest) {
         maxPairs: parsed.data.maxPairs ?? DEFAULT_MAX_PAIRS,
         ...(parsed.data.accountNames ? { accountNames: parsed.data.accountNames } : {}),
       },
-      { suppression: createClawdSuppressionReader(), hubspotSnapshot },
+      {
+        suppression: createClawdSuppressionReader(),
+        hubspotSnapshot: createHubSpotSnapshotProvider(prisma, hubspotReads, { configured: isHubSpotConfigured }),
+      },
     );
     return NextResponse.json(report);
   } catch (error) {

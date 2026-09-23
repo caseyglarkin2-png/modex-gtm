@@ -15,8 +15,10 @@
  *
  * Everything with a network or a clock is injected through `deps`:
  * - `suppression`: the routing-time suppression read (never the send gate).
- * - `hubspotSnapshot`: the per-account HubSpot read; absent means a null
+ * - `hubspotSnapshot`: the per-account HubSpot read (company properties plus
+ *   the personas' contact properties); absent or unconfigured means a null
  *   snapshot and `tam: 'unknown'`, which the rules route to research.
+ *   `createHubSpotSnapshotProvider` is the default, over injected reads.
  * - `top100`: the Top100 manifest and rosters, when the caller has them.
  * - `assemble` / `route` / `audit`: the real functions by default, mocks in
  *   tests. No test in this module touches the network.
@@ -123,15 +125,143 @@ export function tamFromProperty(value: string | null | undefined): HubSpotAccoun
   return 'unknown';
 }
 
+/** Company properties the snapshot reads (same set the heat assembler reads). */
+export const SNAPSHOT_COMPANY_PROPERTIES = [
+  'yardflow_tam',
+  'tam_tier',
+  'intent_score',
+  'last_intent_at',
+  'trigger_score',
+  'last_trigger_at',
+] as const;
+
+/** Contact properties the snapshot reads: the qualification verdict and the last intent source. */
+export const SNAPSHOT_CONTACT_PROPERTIES = ['yardflow_qual_verdict', 'last_intent_source'] as const;
+
+/** HubSpot's contacts batch read takes at most 100 ids per call. */
+export const CONTACT_BATCH_SIZE = 100;
+
+export type HubSpotProps = Record<string, string | null | undefined>;
+
+export interface HubSpotContactRead {
+  id: string;
+  properties: HubSpotProps;
+}
+
+/** The two READS the provider needs. Both are injected; the route wires the SDK, tests wire fakes. */
+export interface SnapshotReads {
+  readCompany(hubspotCompanyId: string, properties: readonly string[]): Promise<{ properties: HubSpotProps } | null>;
+  readContacts(hubspotContactIds: string[], properties: readonly string[]): Promise<HubSpotContactRead[]>;
+}
+
+function tierFromProperty(value: string | null | undefined): HubSpotAccountSnapshot['tamTier'] {
+  const v = String(value ?? '').trim().toUpperCase();
+  return v === 'A' || v === 'B' || v === 'C' ? v : '';
+}
+
+function intFromProperty(value: string | null | undefined): number | null {
+  const s = String(value ?? '').trim();
+  if (!s) return null;
+  const n = Number.parseInt(s, 10);
+  return Number.isFinite(n) ? n : null;
+}
+
+function dateFromProperty(value: string | null | undefined): Date | null {
+  const s = String(value ?? '').trim();
+  if (!s) return null;
+  // HubSpot returns date-times as ISO strings, and datetime properties sometimes as epoch millis.
+  const d = /^\d{11,}$/.test(s) ? new Date(Number(s)) : new Date(s);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function strFromProperty(value: string | null | undefined): string | null {
+  const s = String(value ?? '').trim();
+  return s ? s : null;
+}
+
 /**
- * Build the assembler's snapshot from the fields `getCompanyById` returns.
- * That reader fetches `yardflow_tam` only, so tier, intent and trigger fields
- * stay empty here and heat ranks by fresh triggers alone. A null company (no
- * HubSpot config, no id, or a failed read) is a null snapshot.
+ * Build the assembler's snapshot from raw HubSpot properties. A null company
+ * with no contacts is a null snapshot; a null company with contacts still
+ * carries them (tam unknown), so a persona's verified-reply leg can fire on an
+ * account whose company row is missing.
  */
-export function snapshotFromCompany(company: { yardflow_tam?: string | null } | null | undefined): HubSpotAccountSnapshot | null {
-  if (!company) return null;
-  return { tam: tamFromProperty(company.yardflow_tam), tamTier: '' };
+export function snapshotFromProperties(company: HubSpotProps | null, contacts: HubSpotContactRead[] = []): HubSpotAccountSnapshot | null {
+  if (!company && contacts.length === 0) return null;
+  const snapshot: HubSpotAccountSnapshot = {
+    tam: tamFromProperty(company?.yardflow_tam),
+    tamTier: tierFromProperty(company?.tam_tier),
+    intentScore: intFromProperty(company?.intent_score),
+    lastIntentAt: dateFromProperty(company?.last_intent_at),
+    triggerScore: intFromProperty(company?.trigger_score),
+    lastTriggerAt: dateFromProperty(company?.last_trigger_at),
+  };
+  if (contacts.length > 0) {
+    snapshot.contacts = {};
+    for (const c of contacts) {
+      const id = String(c.id ?? '').trim();
+      if (!id) continue;
+      snapshot.contacts[id] = {
+        qualVerdict: strFromProperty(c.properties?.yardflow_qual_verdict),
+        lastIntentSource: strFromProperty(c.properties?.last_intent_source),
+      };
+    }
+  }
+  return snapshot;
+}
+
+export interface SnapshotProviderOptions {
+  /** Default: always configured. The route passes `isHubSpotConfigured`. */
+  configured?: () => boolean;
+}
+
+/**
+ * The run's default snapshot provider: one company read plus one contacts
+ * batch read per account (all reads, never a write). Contact ids come from
+ * the account's contact-ready Persona rows. Unconfigured HubSpot is a null
+ * snapshot for every account; a failed read degrades to "that part unknown"
+ * rather than failing the run.
+ */
+export function createHubSpotSnapshotProvider(
+  prisma: PrismaLike,
+  reads: SnapshotReads,
+  opts: SnapshotProviderOptions = {},
+): HubSpotSnapshotProvider {
+  const configured = opts.configured ?? (() => true);
+  return async (accountName, hubspotCompanyId) => {
+    if (!configured()) return null;
+
+    let company: HubSpotProps | null = null;
+    if (hubspotCompanyId) {
+      try {
+        company = (await reads.readCompany(hubspotCompanyId, SNAPSHOT_COMPANY_PROPERTIES))?.properties ?? null;
+      } catch {
+        company = null;
+      }
+    }
+
+    let contactIds: string[] = [];
+    try {
+      const rows = (await prisma.persona.findMany({
+        where: { account_name: accountName, is_contact_ready: true, hubspot_contact_id: { not: null } },
+        select: { hubspot_contact_id: true },
+      })) as Array<{ hubspot_contact_id: string | null }>;
+      contactIds = [...new Set(rows.map((r) => String(r.hubspot_contact_id ?? '').trim()).filter(Boolean))];
+    } catch {
+      contactIds = [];
+    }
+
+    const contacts: HubSpotContactRead[] = [];
+    for (let i = 0; i < contactIds.length; i += CONTACT_BATCH_SIZE) {
+      const batch = contactIds.slice(i, i + CONTACT_BATCH_SIZE);
+      try {
+        contacts.push(...(await reads.readContacts(batch, SNAPSHOT_CONTACT_PROPERTIES)));
+      } catch {
+        // This batch reads as unknown; the others still count.
+      }
+    }
+
+    return snapshotFromProperties(company, contacts);
+  };
 }
 
 /** The manifest account for a name or HubSpot id, when the Top100 lane knows it. */

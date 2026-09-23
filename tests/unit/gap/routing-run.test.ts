@@ -18,18 +18,31 @@ import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
 import type { RouteResult, RoutingDecision, RoutingInputs } from '@/lib/gap/routing/types';
 
 const mockedAuth = vi.fn();
-const mockedGetCompanyById = vi.fn();
+const mockedGetHubSpotClient = vi.fn();
+const mockedIsHubSpotConfigured = vi.fn(() => false);
 // Delegates are swapped per test; the module mock hands out this one object.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const fakePrisma: Record<string, any> = {};
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: fakePrisma }));
-vi.mock('@/lib/hubspot/companies', () => ({ getCompanyById: mockedGetCompanyById }));
+vi.mock('@/lib/hubspot/client', () => ({
+  getHubSpotClient: mockedGetHubSpotClient,
+  isHubSpotConfigured: mockedIsHubSpotConfigured,
+  withHubSpotRetry: async (fn: () => Promise<unknown>) => fn(),
+}));
 
-const { runRouting, SHADOW_MODE, LAST_RUN_CONFIG_KEY, snapshotFromCompany, tamFromProperty } = await import(
-  '@/lib/gap/routing/run'
-);
+const {
+  runRouting,
+  SHADOW_MODE,
+  LAST_RUN_CONFIG_KEY,
+  CONTACT_BATCH_SIZE,
+  SNAPSHOT_COMPANY_PROPERTIES,
+  SNAPSHOT_CONTACT_PROPERTIES,
+  createHubSpotSnapshotProvider,
+  snapshotFromProperties,
+  tamFromProperty,
+} = await import('@/lib/gap/routing/run');
 const { listQueue, recordHumanAction, decodeCursor, encodeCursor } = await import('@/lib/gap/routing/queue');
 const { POST: runPOST } = await import('@/app/api/gap/routing/run/route');
 const { GET: queueGET } = await import('@/app/api/gap/queue/route');
@@ -135,7 +148,10 @@ function makeStore() {
     }),
   };
   const systemConfig = { upsert: vi.fn(async (_args: Record<string, unknown>) => ({})) };
-  const account = { findMany: vi.fn(async (_args: Record<string, unknown>): Promise<Row[]> => []) };
+  const account = {
+    findMany: vi.fn(async (_args: Record<string, unknown>): Promise<Row[]> => []),
+    findUnique: vi.fn(async (_args: Record<string, unknown>): Promise<Row | null> => null),
+  };
   const persona = { findMany: vi.fn(async (_args: Record<string, unknown>): Promise<Row[]> => []) };
   return { rows, routingDecision, systemConfig, account, persona };
 }
@@ -469,12 +485,110 @@ describe('runRouting', () => {
     expect(report.accountsScanned).toBe(0);
   });
 
-  it('snapshotFromCompany maps yardflow_tam and nothing else', () => {
-    expect(snapshotFromCompany(null)).toBeNull();
-    expect(snapshotFromCompany({ yardflow_tam: 'in' })).toEqual({ tam: 'in', tamTier: '' });
-    expect(snapshotFromCompany({ yardflow_tam: 'OUT' })).toEqual({ tam: 'out', tamTier: '' });
-    expect(snapshotFromCompany({ yardflow_tam: '' })).toEqual({ tam: 'unknown', tamTier: '' });
+  it('snapshotFromProperties maps the six company fields and the per-contact verdict and intent source', () => {
+    expect(snapshotFromProperties(null)).toBeNull();
+    expect(snapshotFromProperties(null, [])).toBeNull();
+    expect(snapshotFromProperties({ yardflow_tam: 'in' })).toEqual({
+      tam: 'in', tamTier: '', intentScore: null, lastIntentAt: null, triggerScore: null, lastTriggerAt: null,
+    });
+    expect(snapshotFromProperties({ yardflow_tam: 'OUT', tam_tier: 'b', intent_score: '42', last_intent_at: '2026-09-20T10:00:00Z', trigger_score: '7', last_trigger_at: '1758400000000' })).toEqual({
+      tam: 'out', tamTier: 'B', intentScore: 42, lastIntentAt: new Date('2026-09-20T10:00:00Z'), triggerScore: 7, lastTriggerAt: new Date(1758400000000),
+    });
+    expect(snapshotFromProperties({ yardflow_tam: '', tam_tier: 'Z', intent_score: 'abc', last_intent_at: 'not a date' })).toMatchObject({ tam: 'unknown', tamTier: '', intentScore: null, lastIntentAt: null });
     expect(tamFromProperty('maybe')).toBe('unknown');
+
+    const withContacts = snapshotFromProperties(null, [
+      { id: '9', properties: { yardflow_qual_verdict: 'sql', last_intent_source: 'reply' } },
+      { id: '10', properties: { yardflow_qual_verdict: '', last_intent_source: null } },
+      { id: '', properties: { yardflow_qual_verdict: 'sql' } },
+    ]);
+    expect(withContacts).toMatchObject({ tam: 'unknown' });
+    expect(withContacts?.contacts).toEqual({
+      '9': { qualVerdict: 'sql', lastIntentSource: 'reply' },
+      '10': { qualVerdict: null, lastIntentSource: null },
+    });
+  });
+
+  describe('createHubSpotSnapshotProvider', () => {
+    function fakeReads(companyProps: Record<string, string | null> | null = { yardflow_tam: 'in', tam_tier: 'A' }) {
+      return {
+        readCompany: vi.fn(async (_id: string, _props: readonly string[]) => (companyProps ? { properties: companyProps } : null)),
+        readContacts: vi.fn(async (ids: string[], _props: readonly string[]) =>
+          ids.map((id) => ({ id, properties: { yardflow_qual_verdict: id === '9' ? 'sql' : 'none', last_intent_source: id === '9' ? 'reply' : null } })),
+        ),
+      };
+    }
+
+    it('unconfigured HubSpot -> null for every account, no reads at all', async () => {
+      const reads = fakeReads();
+      const provider = createHubSpotSnapshotProvider(store, reads, { configured: () => false });
+      await expect(provider('Acme Foods', '111')).resolves.toBeNull();
+      expect(reads.readCompany).not.toHaveBeenCalled();
+      expect(reads.readContacts).not.toHaveBeenCalled();
+      expect(store.persona.findMany).not.toHaveBeenCalled();
+    });
+
+    it('reads the company with the six properties and the contact-ready personas with the two contact properties', async () => {
+      const reads = fakeReads();
+      store.persona.findMany.mockResolvedValue([{ hubspot_contact_id: '9' }, { hubspot_contact_id: '10' }, { hubspot_contact_id: '9' }, { hubspot_contact_id: null }]);
+      const provider = createHubSpotSnapshotProvider(store, reads);
+      const snap = await provider('Acme Foods', '111');
+      expect(reads.readCompany).toHaveBeenCalledWith('111', SNAPSHOT_COMPANY_PROPERTIES);
+      expect(SNAPSHOT_COMPANY_PROPERTIES).toEqual(['yardflow_tam', 'tam_tier', 'intent_score', 'last_intent_at', 'trigger_score', 'last_trigger_at']);
+      expect(store.persona.findMany).toHaveBeenCalledWith({
+        where: { account_name: 'Acme Foods', is_contact_ready: true, hubspot_contact_id: { not: null } },
+        select: { hubspot_contact_id: true },
+      });
+      expect(reads.readContacts).toHaveBeenCalledTimes(1);
+      expect(reads.readContacts).toHaveBeenCalledWith(['9', '10'], SNAPSHOT_CONTACT_PROPERTIES);
+      expect(SNAPSHOT_CONTACT_PROPERTIES).toEqual(['yardflow_qual_verdict', 'last_intent_source']);
+      expect(snap).toEqual({
+        tam: 'in', tamTier: 'A', intentScore: null, lastIntentAt: null, triggerScore: null, lastTriggerAt: null,
+        contacts: { '9': { qualVerdict: 'sql', lastIntentSource: 'reply' }, '10': { qualVerdict: 'none', lastIntentSource: null } },
+      });
+    });
+
+    it('no company id -> no company read, contacts still carried with tam unknown', async () => {
+      const reads = fakeReads();
+      store.persona.findMany.mockResolvedValue([{ hubspot_contact_id: '9' }]);
+      const provider = createHubSpotSnapshotProvider(store, reads);
+      const snap = await provider('Beta Dairy', null);
+      expect(reads.readCompany).not.toHaveBeenCalled();
+      expect(snap).toMatchObject({ tam: 'unknown', contacts: { '9': { qualVerdict: 'sql', lastIntentSource: 'reply' } } });
+    });
+
+    it('no company id and no contacts -> null; no contact ids -> no batch call', async () => {
+      const reads = fakeReads();
+      store.persona.findMany.mockResolvedValue([]);
+      const provider = createHubSpotSnapshotProvider(store, reads);
+      await expect(provider('Beta Dairy', null)).resolves.toBeNull();
+      expect(reads.readContacts).not.toHaveBeenCalled();
+      await expect(provider('Acme Foods', '111')).resolves.toMatchObject({ tam: 'in' });
+      expect(reads.readContacts).not.toHaveBeenCalled();
+    });
+
+    it('batches contact reads at 100 ids', async () => {
+      const reads = fakeReads();
+      const ids = Array.from({ length: 250 }, (_, i) => ({ hubspot_contact_id: String(1000 + i) }));
+      store.persona.findMany.mockResolvedValue(ids);
+      const snap = await createHubSpotSnapshotProvider(store, reads)('Acme Foods', '111');
+      expect(CONTACT_BATCH_SIZE).toBe(100);
+      expect(reads.readContacts.mock.calls.map((c) => c[0].length)).toEqual([100, 100, 50]);
+      expect(Object.keys(snap?.contacts ?? {})).toHaveLength(250);
+    });
+
+    it('a failed company read or a failed batch degrades that part to unknown, never the run', async () => {
+      const reads = fakeReads();
+      reads.readCompany.mockRejectedValue(new Error('429 forever'));
+      reads.readContacts.mockRejectedValueOnce(new Error('batch down'));
+      const ids = Array.from({ length: 120 }, (_, i) => ({ hubspot_contact_id: String(i + 1) }));
+      store.persona.findMany.mockResolvedValue(ids);
+      const snap = await createHubSpotSnapshotProvider(store, reads)('Acme Foods', '111');
+      expect(snap?.tam).toBe('unknown');
+      expect(Object.keys(snap?.contacts ?? {})).toHaveLength(20);
+      store.persona.findMany.mockRejectedValue(new Error('db down'));
+      await expect(createHubSpotSnapshotProvider(store, reads)('Acme Foods', '111')).resolves.toBeNull();
+    });
   });
 
   it('structural: run.ts never writes any mode but shadow', () => {
@@ -661,6 +775,8 @@ describe('routes', () => {
     delete process.env.CLAWD_CONTROL_PLANE_URL;
     delete process.env.CLAWD_CONTROL_PLANE_TOKEN;
     mockedAuth.mockResolvedValue(SESSION);
+    mockedIsHubSpotConfigured.mockReturnValue(false);
+    mockedGetHubSpotClient.mockReset();
     store = makeStore();
     installStore(store);
     globalThis.fetch = vi.fn(async () => {
@@ -760,7 +876,7 @@ describe('routes', () => {
       expect(body.runId).toMatch(/^run-\d{4}-\d{2}-\d{2}T/);
       expect(store.systemConfig.upsert).not.toHaveBeenCalled();
       expect(store.routingDecision.create).not.toHaveBeenCalled();
-      expect(mockedGetCompanyById).not.toHaveBeenCalled();
+      expect(mockedGetHubSpotClient).not.toHaveBeenCalled();
     });
 
     it('?mode=apply writes the run pointer; ?dryRun=1 wins over apply', async () => {
@@ -782,6 +898,25 @@ describe('routes', () => {
       const res = await runPOST(post(RUN, { accountNames: ['Acme Foods'], maxPairs: 7 }));
       expect(res.status).toBe(200);
       expect(store.account.findMany).toHaveBeenLastCalledWith({ where: { name: { in: ['Acme Foods'] } }, select: { name: true, hubspot_company_id: true } });
+    });
+
+    it('with HubSpot configured and one account, the route reads the company and contacts through the SDK and never writes', async () => {
+      mockedIsHubSpotConfigured.mockReturnValue(true);
+      const getById = vi.fn(async () => ({ id: '111', properties: { yardflow_tam: 'in', tam_tier: 'A', intent_score: '5' } }));
+      const batchRead = vi.fn(async () => ({ results: [{ id: '9', properties: { yardflow_qual_verdict: 'sql', last_intent_source: 'reply' } }] }));
+      const client = { crm: { companies: { basicApi: { getById, update: vi.fn() } }, contacts: { batchApi: { read: batchRead, update: vi.fn() } } } };
+      mockedGetHubSpotClient.mockReturnValue(client);
+      store.account.findMany.mockResolvedValue([{ name: 'Acme Foods', hubspot_company_id: '111' }]);
+      store.persona.findMany.mockResolvedValue([{ hubspot_contact_id: '9' }]);
+
+      const res = await runPOST(post(RUN, { accountNames: ['Acme Foods'] }));
+      expect(res.status).toBe(200);
+      expect(getById).toHaveBeenCalledWith('111', ['yardflow_tam', 'tam_tier', 'intent_score', 'last_intent_at', 'trigger_score', 'last_trigger_at']);
+      expect(batchRead).toHaveBeenCalledWith({ inputs: [{ id: '9' }], properties: ['yardflow_qual_verdict', 'last_intent_source'], propertiesWithHistory: [] });
+      expect(client.crm.companies.basicApi.update).not.toHaveBeenCalled();
+      expect(client.crm.contacts.batchApi.update).not.toHaveBeenCalled();
+      // The real assembler then reads the Account row through the fake and reports it missing; the snapshot reads happened first.
+      expect((await res.json()).skips).toEqual({ account_not_found: 1 });
     });
 
     it('bad body -> 400 naming the field', async () => {
