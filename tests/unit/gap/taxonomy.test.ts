@@ -256,20 +256,46 @@ describe('gap taxonomy tuples', () => {
       'might',
       'may be',
       'could be',
-      'if ',
-      '?',
     ]);
+    // R3-6: a question mark or a bare "if " is not a hedge. Any "?" or "if " in
+    // the paragraph used to satisfy C02 and C10 outright.
+    expect(HEDGE_TOKENS).not.toContain('?');
+    expect(HEDGE_TOKENS).not.toContain('if ');
     expect([...ASSERTIVE_PATTERNS]).toEqual([
       'you are losing',
       'your yards are',
       'you have no',
       'you (are|re) (wasting|bleeding)',
+      '\\byou lose\\b',
+      '\\byour \\w+(?: \\w+)? spends\\b',
+      '\\byour \\w+(?: \\w+)? (?:is|are) \\w+ing\\b',
+      '\\bnobody can\\b',
+      '\\bevery shift\\b',
     ]);
     for (const source of ASSERTIVE_PATTERNS) {
       expect(() => new RegExp(source, 'i')).not.toThrow();
     }
     expect(new RegExp(ASSERTIVE_PATTERNS[3], 'i').test('You are bleeding money at the gate')).toBe(true);
     expect(new RegExp(ASSERTIVE_PATTERNS[3], 'i').test('you re wasting hours')).toBe(true);
+    const assertive = (text: string) => ASSERTIVE_PATTERNS.some((source) => new RegExp(source, 'i').test(text));
+    for (const certain of [
+      'You lose two hours per truck.',
+      'Your dock office spends the morning on radio calls.',
+      'Your gate is sitting idle between waves.',
+      'Your clerks are chasing trailers by radio.',
+      'Nobody can say where the trailer is.',
+      'Every shift starts with a lot walk.',
+    ]) {
+      expect(assertive(certain), certain).toBe(true);
+    }
+    for (const fine of [
+      'My guess is your gate is the constraint.',
+      'Your gate spend on clerks is public.',
+      'You might lose the slot on a bad Tuesday.',
+      'Somebody can usually say where the trailer is.',
+    ]) {
+      expect(assertive(fine), fine).toBe(false);
+    }
   });
 });
 

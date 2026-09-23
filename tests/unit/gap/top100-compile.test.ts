@@ -11,9 +11,11 @@
  * the adapter hands the compiler, not a stubbed check.
  */
 
-import { readFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import os from 'node:os';
 import path from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from 'vitest';
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { COMPILER_VERSION } from '@/lib/gap/compiler';
@@ -271,7 +273,8 @@ describe('compile outcomes on the fixture lane', () => {
     const { summary } = await compileFixture();
     expect(summary.perCheck).toEqual({
       C01: { pass: 4, review: 0, reject: 4 },
-      C02: { pass: 8, review: 0, reject: 0 },
+      // R3-6: Jordan's steps 2 and 4 hedge with "?" or "if " only, which no longer counts.
+      C02: { pass: 6, review: 0, reject: 2 },
       C03: { pass: 8, review: 0, reject: 0 },
       C04: { pass: 8, review: 0, reject: 0 },
       C05: { pass: 8, review: 0, reject: 0 },
@@ -291,11 +294,11 @@ describe('compile outcomes on the fixture lane', () => {
     expect(summary.perAccount).toEqual({ 'acme-example-com': { pass: 1, review: 0, reject: 7 } });
     expect(summary.worst.map((w) => [w.person, w.step, w.verdict, w.failed, w.code])).toEqual([
       ['Riley Okafor', 4, 'reject', 3, 'C12'],
+      ['Jordan Vale', 2, 'reject', 2, 'C01'],
+      ['Jordan Vale', 4, 'reject', 2, 'C01'],
       ['Riley Okafor', 2, 'reject', 2, 'C01'],
       ['Riley Okafor', 3, 'reject', 2, 'C12'],
-      ['Jordan Vale', 2, 'reject', 1, 'C01'],
       ['Jordan Vale', 3, 'reject', 1, 'C01'],
-      ['Jordan Vale', 4, 'reject', 1, 'C01'],
       ['Riley Okafor', 1, 'reject', 1, 'C09'],
     ]);
     expect(summary.worst[0]).toMatchObject({
@@ -432,4 +435,65 @@ describe('reduceReport', () => {
   it('is empty on no results', () => {
     expect(reduceReport([])).toEqual({ perCheck: {}, perAccount: {}, totals: { pass: 0, review: 0, reject: 0, steps: 0, accounts: 0 }, worst: [] });
   });
+});
+
+// ---------------------------------------------------------------------------
+// The CLI (R3-14, R3-3): a dry run can never show a stub pass as a pass, and
+// --persist needs the real critic
+// ---------------------------------------------------------------------------
+
+describe('compile-top100 CLI', () => {
+  const ROOT = process.cwd();
+  const TSX = path.join(ROOT, 'node_modules', 'tsx', 'dist', 'cli.mjs');
+  const SCRIPT = path.join(ROOT, 'scripts', 'gap', 'compile-top100.ts');
+  const tmp = mkdtempSync(path.join(os.tmpdir(), 'gap-compile-top100-'));
+  const laneDir = path.join(tmp, 'lane');
+  cpSync(FIXTURES, path.join(laneDir, 'data'), { recursive: true });
+
+  afterAll(() => {
+    rmSync(tmp, { recursive: true, force: true });
+  });
+
+  function run(args: string[]) {
+    const env = { ...process.env };
+    delete env.GAP_OS_ENABLED;
+    delete env.DATABASE_URL;
+    delete env.MC_API_TOKEN;
+    delete env.CLAWD_BASE_URL;
+    const proc = spawnSync(process.execPath, [TSX, SCRIPT, ...args], { cwd: ROOT, encoding: 'utf8', env, timeout: 120_000 });
+    return { status: proc.status, out: `${proc.stdout}\n${proc.stderr}` };
+  }
+
+  it('--persist without --critic is refused as persist_requires_critic (exit 1) before anything is read or written', () => {
+    const outDir = path.join(tmp, 'out-refused');
+    const { status, out } = run([laneDir, outDir, '--persist']);
+    expect(status, out).toBe(1);
+    expect(out).toContain('persist_requires_critic');
+    expect(existsSync(path.join(outDir, '_summary.json'))).toBe(false);
+  }, 120_000);
+
+  it('a dry run labels the critic stub and never reports a pass: the clean step is review_required', () => {
+    const outDir = path.join(tmp, 'out-dry');
+    const { status, out } = run([laneDir, outDir, '--now', NOW.toISOString(), '--created-by', 'casey']);
+    expect(status, out).toBe(0);
+    expect(out).toContain('critic=stub');
+    const summary = JSON.parse(readFileSync(path.join(outDir, '_summary.json'), 'utf8'));
+    expect(summary.critic).toBe('stub');
+    expect(summary.persisted).toBe(false);
+    expect(summary.createdBy).toBe('compile-top100:casey');
+    expect(summary.totals).toEqual({ pass: 0, review: 1, reject: 7, steps: 8, accounts: 1 });
+    const report = JSON.parse(readFileSync(path.join(outDir, 'acme-example-com.json'), 'utf8'));
+    expect(report.critic).toBe('stub');
+    const jordanStep1 = report.people.find((p: { personKey: string }) => p.personKey === JORDAN).steps[0];
+    expect(jordanStep1.verdict).toBe('review_required');
+    expect(jordanStep1.critic).toEqual({ ok: true, verdict: 'review', score: 0, findings: [] });
+
+    // N11: no persona names on stdout or in the summary's worst list; the contact id stands in.
+    expect(out).toContain('worst:');
+    expect(out).not.toContain('Jordan Vale');
+    expect(out).not.toContain('Riley Okafor');
+    expect(summary.worst.length).toBeGreaterThan(0);
+    for (const w of summary.worst) expect([JORDAN, RILEY]).toContain(w.person);
+    expect(JSON.stringify(summary)).not.toMatch(/Jordan|Riley|Vale|Okafor/);
+  }, 120_000);
 });

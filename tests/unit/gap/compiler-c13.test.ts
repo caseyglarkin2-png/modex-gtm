@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import type { ClaimsValidator } from '@/lib/gap/compiler/checks/c07-structure';
-import { checkClaims, stepIsQuestion } from '@/lib/gap/compiler/checks/c13-claims';
+import { checkClaims, forbiddenClaimPhrases, stepIsQuestion } from '@/lib/gap/compiler/checks/c13-claims';
 import type { CompileContext, CompileDraft } from '@/lib/gap/compiler/types';
 
 function ctxWith(contract: unknown): CompileContext {
@@ -97,5 +97,76 @@ describe('C13 CLAIMS', () => {
     const validateClaims = vi.fn<ClaimsValidator>(() => ({ ok: true }));
     checkClaims(draft(QUESTION_BODY), ctxWith({ claimsUsed: ['CR-001', 7, null, ''], validateClaims }));
     expect(validateClaims).toHaveBeenCalledWith(['CR-001'], expect.anything());
+  });
+});
+
+// ---------------------------------------------------------------------------
+// N1: the body is scanned for DO_NOT_USE and INTERNAL_ONLY text whether or not
+// the claim is declared. Before this, a body carrying CR-029's banned phrasing
+// with claimsUsed [] passed C13.
+// ---------------------------------------------------------------------------
+
+describe('C13 forbidden claim text (N1)', () => {
+  const HYP = 'My guess is the clerks exist to keep inbound trailers moving when the dock and the lot disagree about what is where.';
+  const withHypothesis = (sentence: string) => QUESTION_BODY.replace(HYP, `${HYP} ${sentence}`);
+
+  it('exposes the scanned phrases from the committed snapshot, CR-029 included', () => {
+    const entries = forbiddenClaimPhrases();
+    const cr029 = entries.find((e) => e.id === 'CR-029');
+    expect(cr029).toBeDefined();
+    expect(cr029!.status).toBe('DO_NOT_USE');
+    expect(cr029!.phrases).toEqual(expect.arrayContaining(['not a YMS', 'coexist', 'layer above', 'not a replacement', 'not displacement']));
+    expect(entries.every((e) => e.status === 'DO_NOT_USE' || e.status === 'INTERNAL_ONLY')).toBe(true);
+    expect(entries.some((e) => e.id === 'CR-001')).toBe(false);
+  });
+
+  it("rejects CR-029's phrasing in the body with claimsUsed [] and names the id, the phrase and the surface", () => {
+    const body = withHypothesis('YardFlow is not a YMS, it runs beside the one you have.');
+    const r = checkClaims(draft(body), ctxWith({ claimsUsed: [] }));
+    expect(r).toMatchObject({ code: 'C13', passed: false, severity: 'reject' });
+    expect(r.detail).toBe('claim_text_forbidden:CR-029 (DO_NOT_USE phrasing "not a YMS" in the body)');
+    expect(r.span?.text).toBe('not a YMS');
+    expect(body.slice(r.span!.start, r.span!.end)).toBe('not a YMS');
+  });
+
+  it('matches whole phrases after normalising case, spacing and curly quotes, and the inflected single-word form', () => {
+    expect(checkClaims(draft(withHypothesis('It is NOT A  YMS.')), ctxWith(null)).detail).toContain('claim_text_forbidden:CR-029');
+    expect(checkClaims(draft(withHypothesis('It coexists with your YMS.')), ctxWith(null)).detail).toContain('claim_text_forbidden:CR-029');
+    expect(checkClaims(draft(withHypothesis('Think of it as a layer above the YMS.')), ctxWith(null)).detail).toContain(
+      'claim_text_forbidden:CR-029',
+    );
+  });
+
+  it('scans the subject too', () => {
+    const r = checkClaims({ subject: 'A layer above your YMS', body: QUESTION_BODY }, ctxWith(null));
+    expect(r.passed).toBe(false);
+    expect(r.detail).toBe('claim_text_forbidden:CR-029 (DO_NOT_USE phrasing "layer above" in the subject)');
+  });
+
+  it("rejects an INTERNAL_ONLY claim's canonical text (CR-017) and a DO_NOT_USE figure (CR-024)", () => {
+    const cr017 = forbiddenClaimPhrases().find((e) => e.id === 'CR-017')!;
+    const canonical = cr017.phrases[0];
+    const r = checkClaims(draft(withHypothesis(canonical)), ctxWith(null));
+    expect(r.detail).toMatch(/^claim_text_forbidden:CR-017 \(INTERNAL_ONLY phrasing /);
+    const figure = checkClaims(draft(withHypothesis('The cost of inaction is $70,363 a month.')), ctxWith(null));
+    expect(figure.detail).toBe('claim_text_forbidden:CR-024 (DO_NOT_USE phrasing "$70,363" in the body)');
+  });
+
+  it('runs before the declared-id validation, so a passing validator cannot launder banned text', () => {
+    const validateClaims = vi.fn<ClaimsValidator>(() => ({ ok: true }));
+    const r = checkClaims(draft(withHypothesis('It is not a replacement for your YMS.')), ctxWith({ claimsUsed: ['CR-001'], validateClaims }));
+    expect(r.passed).toBe(false);
+    expect(r.detail).toContain('claim_text_forbidden:CR-029');
+    expect(validateClaims).not.toHaveBeenCalled();
+  });
+
+  it('passes ordinary language that shares words with a banned phrase', () => {
+    for (const sentence of [
+      'The lot sits a level above the dock.',
+      'Every yard runs its own YMS today.',
+      'Displacement of the clerk role is the question.',
+    ]) {
+      expect(checkClaims(draft(withHypothesis(sentence)), ctxWith(null)).passed, sentence).toBe(true);
+    }
   });
 });

@@ -51,9 +51,12 @@ describe('C02 HYPOTHESIS_AS_FACT', () => {
     expect(r.detail).toMatch(/hedge/i);
   });
 
-  it('allows an assertive pattern inside a question', () => {
-    const r = checkHypothesisAsFact(draft(`${OBS}\n\nAre your yards losing capacity at the gate?`), ctx);
+  it('allows an assertive pattern inside a question (the paragraph still needs a real hedge; the "?" is not one)', () => {
+    const r = checkHypothesisAsFact(draft(`${OBS}\n\nMy guess is the gate. Are your yards losing capacity at the gate?`), ctx);
     expect(r.passed).toBe(true);
+    const bare = checkHypothesisAsFact(draft(`${OBS}\n\nAre your yards losing capacity at the gate?`), ctx);
+    expect(bare.passed).toBe(false);
+    expect(bare.detail).toMatch(/carries no hedge token/);
   });
 
   it('uses the first paragraph as the hypothesis when nothing is cited', () => {
@@ -72,6 +75,69 @@ describe('C02 HYPOTHESIS_AS_FACT', () => {
     const r = checkHypothesisAsFact(draft(''), ctx);
     expect(r.passed).toBe(false);
     expect(r.detail).toMatch(/no hypothesis paragraph/i);
+  });
+
+  // R3-6: a question mark or a bare "if " no longer counts as a hedge, and a
+  // second-person declarative sentence about the prospect must carry its own
+  // hedge token. The reviewer's probe passed on the strength of "Which door
+  // do you trust least?" alone.
+  describe('R3-6: certainty about the prospect', () => {
+    const PROBE =
+      'You lose two hours per truck every shift because nobody can say where the trailer is. ' +
+      'Your dock office spends the morning on radio calls. Which door do you trust least?';
+
+    it("rejects the reviewer's probe and names the assertive sentence", () => {
+      const body = `${OBS}\n\n${PROBE}`;
+      const r = checkHypothesisAsFact(draft(body), ctx);
+      expect(r).toMatchObject({ code: 'C02', passed: false, severity: 'reject' });
+      expect(r.detail).toContain('You lose two hours per truck every shift because nobody can say where the trailer is.');
+      expect(r.detail).toMatch(/assertive pattern/);
+      expect(r.span?.text).toBe('You lose two hours per truck every shift because nobody can say where the trailer is.');
+      expect(body.slice(r.span!.start, r.span!.end)).toBe(r.span!.text);
+    });
+
+    it('a question mark alone is not a hedge', () => {
+      const r = checkHypothesisAsFact(draft(`${OBS}\n\nThe gate is where the slot goes. Is that close?`), ctx);
+      expect(r.passed).toBe(false);
+      expect(r.detail).toMatch(/carries no hedge token/);
+      expect(r.detail).not.toContain('?');
+    });
+
+    it('a bare "if " is not a hedge', () => {
+      const r = checkHypothesisAsFact(draft(`${OBS}\n\nIf the gate is the constraint, the slot goes there.`), ctx);
+      expect(r.passed).toBe(false);
+      expect(r.detail).toMatch(/carries no hedge token/);
+    });
+
+    it('a second-person declarative sentence needs its own hedge even when the paragraph is hedged elsewhere', () => {
+      const body = `${OBS}\n\nMy guess is the gate. Your dock office runs on radio calls.`;
+      const r = checkHypothesisAsFact(draft(body), ctx);
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe(
+        'second-person claim without a hedge: "Your dock office runs on radio calls." states something about the prospect as fact; hedge it (one of: my guess, i suspect, likely, usually, tends to, might, may be, could be) or ask it',
+      );
+      expect(r.span?.text).toBe('Your dock office runs on radio calls.');
+    });
+
+    it('passes a second-person declarative that carries a hedge, and a second-person question', () => {
+      expect(checkHypothesisAsFact(draft(`${OBS}\n\nYour dock office likely runs on radio calls.`), ctx).passed).toBe(true);
+      expect(checkHypothesisAsFact(draft(`${OBS}\n\nMy guess is the gate. Does your dock office run on radio calls?`), ctx).passed).toBe(true);
+    });
+
+    it('the certainty patterns each reject outside a question', () => {
+      for (const sentence of [
+        'You lose a slot a day.',
+        'Your dock office spends the morning on radio calls.',
+        'Your gate is sitting idle between waves.',
+        'Your clerks are chasing trailers by radio.',
+        'Nobody can say where the trailer is.',
+        'Every shift starts with a lot walk.',
+      ]) {
+        const r = checkHypothesisAsFact(draft(`${OBS}\n\nMy guess is the gate. ${sentence}`), ctx);
+        expect(r.passed, sentence).toBe(false);
+        expect(r.detail, sentence).toContain(sentence);
+      }
+    });
   });
 });
 

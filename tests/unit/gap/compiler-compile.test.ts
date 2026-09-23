@@ -17,6 +17,7 @@ import { GROUP_B_CHECKS } from '@/lib/gap/compiler/checks/c04-product';
 import { GROUP_C_CHECKS } from '@/lib/gap/compiler/checks/c13-claims';
 import { ALL_CHECKS, CHECK_CODES, COMPILER_VERSION, codeOfCheck } from '@/lib/gap/compiler';
 import { compile, type CompileDeps, type CompileInput } from '@/lib/gap/compiler/compile';
+import { wordCount } from '@/lib/gap/compiler/text';
 import type { Check, CheckSeverity } from '@/lib/gap/compiler/types';
 import type { CriticClient, CriticScoreResult } from '@/lib/gap/critic-client';
 
@@ -247,6 +248,80 @@ describe('compile: verdicts', () => {
     const r = await compile(input({ contract: null }), deps());
     expect(['reject', 'review_required', 'pass']).toContain(r.verdict);
     expect(r.checks).toHaveLength(16);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// R3-3: the contract cannot widen the gate outside the Top100 adapter path
+// ---------------------------------------------------------------------------
+
+describe('compile: contract sanitising (R3-3)', () => {
+  const FILLER_WORDS = 'the lot and the dock disagree about where the trailer is on every wave'.split(' ');
+  const fillerOf = (n: number) => `${Array.from({ length: n }, (_, i) => FILLER_WORDS[i % FILLER_WORDS.length]).join(' ')}.`;
+  /** The reviewer's 127-word probe length. */
+  const LONG_BODY = PASSING_BODY.replace(
+    'disagree about what is where.',
+    `disagree about what is where. ${fillerOf(127 - wordCount(PASSING_BODY))}`,
+  );
+  const MEETING_BODY = PASSING_BODY.replace(
+    'How many trailers sit past their appointment on a normal Tuesday?',
+    'Open to a quick call on it?',
+  );
+
+  it('a session caller\'s wordRange is ignored: C07 judges the 127-word body against the step-0 default', async () => {
+    const prisma = fakePrisma();
+    const r = await compile(
+      input({ body: LONG_BODY, contract: { ...PASSING_CONTRACT, wordRange: { min: 1, max: 5000 } } }),
+      deps({ prisma }),
+    );
+    expect(r.verdict).toBe('reject');
+    expect(r.checks.find((c) => c.code === 'C07')?.detail).toBe('127 words, outside 45..80 for step 0');
+    const { data } = (prisma.gapCompile.create.mock.calls[0] as unknown as [{ data: Record<string, unknown> }])[0];
+    const snapshot = data.inputs_snapshot as Record<string, unknown>;
+    expect(snapshot.contract).not.toHaveProperty('wordRange');
+    expect(snapshot.ignoredContractKeys).toEqual(['wordRange']);
+  });
+
+  it('the compile-top100 adapter keeps its lane wordRange, clamped to the spec\'s 45..120', async () => {
+    const r = await compile(
+      input({ body: LONG_BODY, createdBy: 'compile-top100', contract: { ...PASSING_CONTRACT, wordRange: { min: 1, max: 5000 } } }),
+      deps(),
+    );
+    expect(r.checks.find((c) => c.code === 'C07')?.detail).toBe('127 words, outside 45..120 for step 0');
+    const inside = await compile(
+      input({ body: LONG_BODY, createdBy: 'compile-top100:casey', contract: { ...PASSING_CONTRACT, wordRange: { min: 50, max: 130 } } }),
+      deps(),
+    );
+    expect(inside.checks.find((c) => c.code === 'C07')?.detail).toBe('127 words, outside 50..120 for step 0');
+  });
+
+  it('journeyStage meeting_prep from the contract is ignored: the meeting ask still fails C09 at step 0', async () => {
+    const r = await compile(input({ body: MEETING_BODY, contract: { ...PASSING_CONTRACT, journeyStage: 'meeting_prep' } }), deps());
+    expect(r.verdict).toBe('reject');
+    expect(r.allowedCtaFamily).toBe('scorecard_reply');
+    expect(r.checks.find((c) => c.code === 'C09')?.detail).toContain('meeting_request is disallowed before a meeting (step 0, sequence_step_1)');
+  });
+
+  it('journeyStage sequence_step_2_plus is a cold stage and is honoured', async () => {
+    const r = await compile(input({ contract: { ...PASSING_CONTRACT, journeyStage: 'sequence_step_2_plus' } }), deps());
+    expect(r.allowedCtaFamily).toBe('asset_offer');
+  });
+
+  it('top100Compile is persisted only on the adapter path', async () => {
+    const key = { laneKey: 'acme', hubspotContactId: '100', personKey: '100', step: 1, stepIndex: 0 };
+    const session = fakePrisma();
+    await compile(input({ contract: { ...PASSING_CONTRACT, top100Compile: key } }), deps({ prisma: session }));
+    const sessionSnapshot = (session.gapCompile.create.mock.calls[0] as unknown as [{ data: Record<string, unknown> }])[0].data
+      .inputs_snapshot as Record<string, unknown>;
+    expect(sessionSnapshot.contract).not.toHaveProperty('top100Compile');
+    expect(sessionSnapshot.ignoredContractKeys).toEqual(['top100Compile']);
+
+    const lane = fakePrisma();
+    await compile(input({ createdBy: 'compile-top100', contract: { ...PASSING_CONTRACT, top100Compile: key } }), deps({ prisma: lane }));
+    const laneSnapshot = (lane.gapCompile.create.mock.calls[0] as unknown as [{ data: Record<string, unknown> }])[0].data
+      .inputs_snapshot as Record<string, unknown>;
+    expect((laneSnapshot.contract as Record<string, unknown>).top100Compile).toEqual(key);
+    expect(laneSnapshot).not.toHaveProperty('ignoredContractKeys');
   });
 });
 

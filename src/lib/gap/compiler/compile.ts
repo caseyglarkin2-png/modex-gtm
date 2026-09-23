@@ -28,6 +28,26 @@
  * The claims validator is injected through `deps.validateClaims`, never taken
  * from the request contract, so a caller cannot smuggle a permissive one in.
  *
+ * Contract sanitising (R3-3): three keys can widen the gate, so the
+ * orchestrator does not take them on trust from whoever built the contract:
+ *   wordRange      honoured only on the Top100 adapter path (`createdBy`
+ *                  starts with `compile-top100`, the only producer with a
+ *                  lane-authored range) and then clamped inside the spec's
+ *                  45..120; everywhere else it is dropped and C07 uses the
+ *                  per-step defaults.
+ *   journeyStage   honoured only when it is a cold sequence stage
+ *                  (sequence_step_1, sequence_step_2_plus); any other stage
+ *                  (meeting_prep reaches the CTA policy's meeting branch) is
+ *                  dropped and the stage derives from stepIndex.
+ *   top100Compile  the enroll-row gate's lookup key; persisted only on the
+ *                  adapter path so a session compile can never masquerade as
+ *                  a lane row.
+ * `inputs_snapshot.contract` is the contract the checks actually saw (after
+ * the drops), and `inputs_snapshot.ignoredContractKeys` lists what was
+ * dropped, so a row can be read for what it judged. The route adds its own
+ * allowlist in front of this (src/app/api/gap/compile/route.ts); this is the
+ * floor for every programmatic caller.
+ *
  * Audit: the local `gapAuditEvent` write is what tests assert. The war-room
  * review-feed fan-out (fire-and-forget inside audit()) fires only for a
  * `pass`, because a pass is the verdict that makes copy eligible to send and
@@ -40,7 +60,7 @@ import { getCtaPolicy, type CtaFamily } from '../../revops/cold-outbound-policy'
 import { audit, type AuditResult } from '../audit';
 import type { CriticClient, CriticScoreResult } from '../critic-client';
 import type { postReviewLog } from '../review-feed';
-import { findCtaSentences, journeyStageFor, type ClaimsValidator } from './checks/c07-structure';
+import { SPEC_WORD_RANGE, findCtaSentences, journeyStageFor, type ClaimsValidator, type WordRange } from './checks/c07-structure';
 import { markerIds } from './checks/c12-newinfo';
 import { ALL_CHECKS, COMPILER_VERSION, codeOfCheck } from './index';
 import { wordCount } from './text';
@@ -65,6 +85,12 @@ export interface CompileInput {
   /** The loose check contract (see the header). Null or junk reads as empty. */
   contract: unknown;
   createdBy: string;
+  /**
+   * A template-level compile (R3-3): the version's template copy judged with
+   * no hypothesis, so `hypothesisId` is null by construction. Recorded on the
+   * snapshot as `template: true`; such rows are shadow-only evidence.
+   */
+  template?: boolean;
 }
 
 export type CompileCriticOutcome =
@@ -138,13 +164,74 @@ export function readEvidenceRefs(raw: unknown): CompileEvidenceRef[] {
   return out;
 }
 
-function buildContext(input: CompileInput, validateClaims: ClaimsValidator | null | undefined): CompileContext {
-  const raw = isRecord(input.contract) ? input.contract : {};
-  const hyp = isRecord(raw.hypothesis) ? raw.hypothesis : {};
-  const { hypothesis: _hypothesis, evidence: _evidence, validateClaims: _ignored, ...rest } = raw;
+/** The only producer whose contract may carry a lane word range and the Top100 lookup key. */
+export const ADAPTER_CREATED_BY_PREFIX = 'compile-top100';
+
+export function isAdapterPath(createdBy: string): boolean {
+  return typeof createdBy === 'string' && createdBy.startsWith(ADAPTER_CREATED_BY_PREFIX);
+}
+
+/** Journey stages a contract may name; anything else derives from stepIndex. */
+const COLD_SEQUENCE_STAGES: ReadonlySet<string> = new Set(['sequence_step_1', 'sequence_step_2_plus']);
+
+/** The contract key the Top100 adapter writes and the enroll-row gate reads back (import/top100-compile.ts). */
+const TOP100_COMPILE_KEY = 'top100Compile';
+
+/** Clamp a lane range inside the spec's outer bound; null when it is not a usable range. */
+export function clampWordRange(raw: unknown): WordRange | null {
+  if (!isRecord(raw)) return null;
+  const { min, max } = raw;
+  if (typeof min !== 'number' || typeof max !== 'number' || !Number.isFinite(min) || !Number.isFinite(max) || min > max) return null;
+  const clamped = { min: Math.max(min, SPEC_WORD_RANGE.min), max: Math.min(max, SPEC_WORD_RANGE.max) };
+  return clamped.min <= clamped.max ? clamped : null;
+}
+
+interface SanitizedContract {
+  /** The contract the checks see and the row persists (hypothesis and evidence included). */
+  contract: Record<string, unknown>;
+  /** Keys dropped because the producer may not set them. */
+  ignored: string[];
+}
+
+/** Apply the R3-3 rules (see the header). Never throws on junk. */
+export function sanitizeContract(raw: unknown, createdBy: string): SanitizedContract {
+  const source = isRecord(raw) ? raw : {};
+  const contract: Record<string, unknown> = { ...source };
+  const ignored: string[] = [];
+  const adapter = isAdapterPath(createdBy);
+
+  if ('validateClaims' in contract) {
+    delete contract.validateClaims;
+    ignored.push('validateClaims');
+  }
+  if ('wordRange' in contract) {
+    const clamped = adapter ? clampWordRange(contract.wordRange) : null;
+    if (clamped) contract.wordRange = clamped;
+    else {
+      delete contract.wordRange;
+      ignored.push('wordRange');
+    }
+  }
+  if ('journeyStage' in contract && !(typeof contract.journeyStage === 'string' && COLD_SEQUENCE_STAGES.has(contract.journeyStage))) {
+    delete contract.journeyStage;
+    ignored.push('journeyStage');
+  }
+  if (TOP100_COMPILE_KEY in contract && !adapter) {
+    delete contract[TOP100_COMPILE_KEY];
+    ignored.push(TOP100_COMPILE_KEY);
+  }
+  return { contract, ignored };
+}
+
+function buildContext(
+  input: CompileInput,
+  sanitized: Record<string, unknown>,
+  validateClaims: ClaimsValidator | null | undefined,
+): CompileContext {
+  const hyp = isRecord(sanitized.hypothesis) ? sanitized.hypothesis : {};
+  const { hypothesis: _hypothesis, evidence: _evidence, ...rest } = sanitized;
   void _hypothesis;
   void _evidence;
-  void _ignored;
   const contract: Record<string, unknown> = { ...rest };
   if (validateClaims) contract.validateClaims = validateClaims;
   if (Array.isArray(input.priorEvidenceIds) && !Array.isArray(contract.priorEvidenceIds)) {
@@ -157,7 +244,7 @@ function buildContext(input: CompileInput, validateClaims: ClaimsValidator | nul
       problemHypothesis: str(hyp.problemHypothesis),
       problemFamily: str(hyp.problemFamily) || 'unmapped',
     },
-    evidence: readEvidenceRefs(raw.evidence),
+    evidence: readEvidenceRefs(sanitized.evidence),
     priorStepBodies: Array.isArray(input.priorBodies) ? input.priorBodies.filter((b): b is string => typeof b === 'string') : [],
     contract,
   };
@@ -201,7 +288,8 @@ export async function compile(input: CompileInput, deps: CompileDeps): Promise<C
   const checks = deps.checks ?? ALL_CHECKS;
   const now = deps.now ?? (() => new Date());
   const draft: CompileDraft = { subject: input.subject, body: input.body };
-  const ctx = buildContext(input, deps.validateClaims);
+  const sanitized = sanitizeContract(input.contract, input.createdBy);
+  const ctx = buildContext(input, sanitized.contract, deps.validateClaims);
 
   const results = runChecks(checks, draft, ctx);
   const anyReject = results.some((r) => !r.passed && r.severity === 'reject');
@@ -254,7 +342,9 @@ export async function compile(input: CompileInput, deps: CompileDeps): Promise<C
     subject: input.subject,
     body: input.body,
     priorBodies: ctx.priorStepBodies,
-    contract: isRecord(input.contract) ? input.contract : null,
+    contract: isRecord(input.contract) ? sanitized.contract : null,
+    ...(sanitized.ignored.length > 0 ? { ignoredContractKeys: sanitized.ignored } : {}),
+    ...(input.template === true ? { template: true } : {}),
     createdBy: input.createdBy,
     compiledAt: now().toISOString(),
   });

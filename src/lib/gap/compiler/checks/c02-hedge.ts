@@ -2,10 +2,15 @@
  * GAP message compiler checks (Sprint 3, S3-T7): C02 HYPOTHESIS_AS_FACT and
  * C03 PROSPECT_ROI_PREDICTED. Spec section 8. Pure: no I/O.
  *
- * C02: the hypothesis paragraph carries a hedge token and no assertive
- * second-person claim outside a question. The observation paragraph is the
- * first paragraph carrying a `[[SRC:` or `[S:` marker; the hypothesis is the
- * paragraph after it, or the first paragraph when nothing is cited.
+ * C02: the hypothesis paragraph carries a hedge token, no assertive
+ * second-person claim outside a question, and (R3-6) every second-person
+ * declarative sentence in it carries its own hedge token: a sentence with
+ * "you" or "your" and no question mark states something about the prospect,
+ * and a hedge two sentences away does not soften it. A question mark and a
+ * bare "if " stopped counting as hedges in the same change (HEDGE_TOKENS).
+ * The observation paragraph is the first paragraph carrying a `[[SRC:` or
+ * `[S:` marker; the hypothesis is the paragraph after it, or the first
+ * paragraph when nothing is cited.
  *
  * C03: no sentence pairs a second-person reference with a money, percent or
  * payback token outside a question. Canon Primo proof ("48 to 24 minutes
@@ -60,6 +65,7 @@ export const checkHypothesisAsFact: Check = (draft) => {
     };
   }
 
+  const hedgeList = HEDGE_TOKENS.map((t) => t.trim()).join(', ');
   for (const { sentence, span } of sentenceSpans(draft.body, paragraph)) {
     if (isQuestion(sentence)) continue;
     const hit = ASSERTIVE_RES.find((re) => re.test(sentence));
@@ -69,6 +75,16 @@ export const checkHypothesisAsFact: Check = (draft) => {
         passed: false,
         severity: 'reject',
         detail: `hypothesis stated as fact: "${sentence}" matches assertive pattern /${hit.source}/ outside a question`,
+        span,
+      };
+    }
+    // R3-6: a declarative sentence about the prospect must hedge itself.
+    if (hasSecondPerson(sentence) && !hasHedgeToken(sentence)) {
+      return {
+        code: C02_CODE,
+        passed: false,
+        severity: 'reject',
+        detail: `second-person claim without a hedge: "${sentence}" states something about the prospect as fact; hedge it (one of: ${hedgeList}) or ask it`,
         span,
       };
     }

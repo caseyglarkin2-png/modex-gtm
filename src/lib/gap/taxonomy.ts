@@ -426,7 +426,14 @@ export type StopReason = (typeof STOP_REASONS)[number];
 // Hypothesis language guards
 // ---------------------------------------------------------------------------
 
-/** Lowercase substrings that mark a hypothesis as hedged (a guess, not a claim). */
+/**
+ * Lowercase substrings that mark a hypothesis as hedged (a guess, not a claim).
+ * A question mark and a bare "if " are NOT hedges (R3-6, 2026-09-23): a
+ * paragraph that states the prospect's problem as fact and then asks "Which
+ * door do you trust least?" is still stating it as fact. Every consumer
+ * (compiler C02 and C10, hypothesis build and submit guards, PIC import
+ * `hedge()`) reads this one list.
+ */
 export const HEDGE_TOKENS = [
   'my guess',
   'i suspect',
@@ -436,17 +443,26 @@ export const HEDGE_TOKENS = [
   'might',
   'may be',
   'could be',
-  'if ',
-  '?',
 ] as const;
 export type HedgeToken = (typeof HEDGE_TOKENS)[number];
 
-/** Regex source strings that match unhedged second-person claims. Compile with the `i` flag. */
+/**
+ * Regex source strings that match unhedged second-person claims, plus the
+ * certainty forms the reviewer's probe used ("you lose", "your <noun> spends",
+ * "your <noun> is/are <verb>ing", "nobody can", "every shift"). Compile with
+ * the `i` flag. C02 applies them to declarative sentences only; a question
+ * is exempt there, not here.
+ */
 export const ASSERTIVE_PATTERNS = [
   'you are losing',
   'your yards are',
   'you have no',
   'you (are|re) (wasting|bleeding)',
+  '\\byou lose\\b',
+  '\\byour \\w+(?: \\w+)? spends\\b',
+  '\\byour \\w+(?: \\w+)? (?:is|are) \\w+ing\\b',
+  '\\bnobody can\\b',
+  '\\bevery shift\\b',
 ] as const;
 
 // ---------------------------------------------------------------------------

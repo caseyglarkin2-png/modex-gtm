@@ -17,23 +17,35 @@
  * totals, and writes only `<outDir>/_summary.json` (the per-account files
  * are skipped). It is the cheap re-run after a compiler change.
  *
- * Dry run by default: a stub critic answers pass so the verdict is the
- * deterministic checks alone, no prisma is touched, and the process exits 0
- * whatever the verdicts are (a reject is a finding, not a failure). Exit 1 is
- * reserved for a refusal: the lane directory is missing (`missing_lane_dir`),
- * `--persist` without GAP_OS_ENABLED (`gap_disabled`) or without a
- * DATABASE_URL (`no_database_url`).
+ * Dry run by default: a stub critic answers `review` (R3-14), so the verdict
+ * is the deterministic checks alone and a clean step reads review_required,
+ * never pass; the report labels `critic: stub` so nobody mistakes the dry
+ * run for a judged one. No prisma is touched, and the process exits 0
+ * whatever the verdicts are (a reject is a finding, not a failure). Exit 1
+ * is reserved for a refusal: `--persist` without `--critic`
+ * (`persist_requires_critic`: gate rows must be judged by the real critic),
+ * the lane directory is missing (`missing_lane_dir`), `--persist` without
+ * GAP_OS_ENABLED (`gap_disabled`) or without a DATABASE_URL
+ * (`no_database_url`).
  *
  * `--critic` uses the real clawd client (CLAWD_BASE_URL and MC_API_TOKEN from
  * the environment; the token is never printed). Without `--critic` the token
  * is deleted from the environment before anything loads, and
  * HUBSPOT_ACCESS_TOKEN is always deleted, so no code path can reach HubSpot.
  *
- * `--persist` writes one GapCompile row per contact per step through
- * `compile()`; each row's `inputs_snapshot.contract.top100Compile` carries
- * {laneKey, hubspotContactId, personKey, step, stepIndex}, which is the key
- * the enroll-row compile gate (src/lib/gap/routing/enroll-row.ts) reads to
- * decide whether a Top100 contact renders under Enroll or under Skip.
+ * `--persist` (with `--critic`) writes one GapCompile row per contact per
+ * step through `compile()`; each row's `inputs_snapshot.contract.top100Compile`
+ * carries {laneKey, hubspotContactId, personKey, step, stepIndex}, which is
+ * the key the enroll-row compile gate (src/lib/gap/routing/enroll-row.ts)
+ * reads to decide whether a Top100 contact renders under Enroll or under
+ * Skip. `compile()` persists that key, and honours the lane's word range,
+ * only when `createdBy` starts with `compile-top100` (R3-3), so
+ * `--created-by <who>` is recorded as `compile-top100:<who>`; the summary
+ * file carries the value used.
+ *
+ * Privacy (N11): stdout and `_summary.json` show a person as the HubSpot
+ * contact id (else initials), never the lane's persona name; the
+ * per-account files in `<outDir>` keep the names and stay local.
  */
 const WANT_CRITIC = process.argv.includes('--critic');
 if (process.env.HUBSPOT_ACCESS_TOKEN !== undefined) delete process.env.HUBSPOT_ACCESS_TOKEN;
@@ -45,9 +57,11 @@ import path from 'node:path';
 import { validateClaimsUsed } from '../../src/lib/gap/claims/validate-claims';
 import { COMPILER_VERSION } from '../../src/lib/gap/compiler';
 import { compile, type CompileDeps, type CompileResult } from '../../src/lib/gap/compiler/compile';
+import { redactWorst } from '../../src/lib/gap/compiler/redact-person';
 import { makeCriticClient, type CriticClient } from '../../src/lib/gap/critic-client';
 import { isGapOsEnabled } from '../../src/lib/gap/flags';
 import {
+  TOP100_COMPILE_CREATED_BY,
   buildAccountReport,
   compiledSteps,
   reduceReport,
@@ -86,7 +100,7 @@ function parseArgs(argv: string[]): Args {
     persist: false,
     summaryOnly: false,
     now: new Date(),
-    createdBy: 'compile-top100',
+    createdBy: TOP100_COMPILE_CREATED_BY,
   };
   const takeValue = (flag: string, i: number): string => {
     const value = argv[i + 1];
@@ -107,7 +121,9 @@ function parseArgs(argv: string[]): Args {
       args.now = now;
       i += 1;
     } else if (arg === '--created-by') {
-      args.createdBy = takeValue(arg, i);
+      // compile() keys the adapter path off this prefix (R3-3); never let a
+      // custom actor drop the lane rows off the enroll gate's lookup.
+      args.createdBy = `${TOP100_COMPILE_CREATED_BY}:${takeValue(arg, i)}`;
       i += 1;
     } else if (arg.startsWith('--')) usage(`unknown argument ${arg}`);
     else if (!args.laneDir) args.laneDir = arg;
@@ -116,6 +132,10 @@ function parseArgs(argv: string[]): Args {
   }
   if (!args.laneDir) usage('<laneDir> is required');
   if (!args.outDir) usage('<outDir> is required');
+  if (args.persist && !args.critic) {
+    console.error('persist_requires_critic: --persist writes enroll-gate rows, and the dry-run stub critic never judges them; add --critic');
+    process.exit(1);
+  }
   return args;
 }
 
@@ -123,8 +143,13 @@ function readJson<T>(file: string): T {
   return JSON.parse(readFileSync(file, 'utf8')) as T;
 }
 
+/**
+ * The dry-run critic. It answers `review`, never `pass`: a dry run is the
+ * deterministic checks alone, and a step that clears them must still read
+ * review_required until the real critic (`--critic`) has judged it (R3-14).
+ */
 const STUB_CRITIC: CriticClient = {
-  score: async () => ({ ok: true, verdict: 'pass', score: 100, findings: [] }),
+  score: async () => ({ ok: true, verdict: 'review', score: 0, findings: [] }),
 };
 
 function pad(value: string | number, width: number): string {
@@ -242,13 +267,15 @@ async function main(): Promise<void> {
     accountsCompiled += 1;
   }
 
-  const summary = reduceReport(allSteps);
+  // N11: stdout and the summary file leave the machine; persona names do not.
+  const summary = { ...reduceReport(allSteps), worst: redactWorst(reduceReport(allSteps).worst, allSteps) };
   const summaryFile = {
     schema: 'gap-compile-top100-summary.v1',
     compiledAt: args.now.toISOString(),
     compilerVersion: COMPILER_VERSION,
     critic: criticLabel,
     persisted: args.persist,
+    createdBy: args.createdBy,
     summaryOnly: args.summaryOnly,
     laneDir: path.resolve(args.laneDir),
     accountsRequested: keys.length,
