@@ -60,6 +60,13 @@ model Account {
   contact_candidates    AccountContactCandidate[]
   research_runs         ResearchRun[]
   evidence_records      EvidenceRecord[]
+  prospecting_signals   ProspectingSignal[]
+  prospecting_hypotheses ProspectingHypothesis[]
+  conversation_dispositions ConversationDisposition[]
+  buyer_input_data      BuyerInputData[]
+  sequence_families     SequenceFamily[]
+  sequence_enrollments  SequenceEnrollment[]
+  routing_decisions     RoutingDecision[]
 
   @@map("accounts")
 }
@@ -115,6 +122,12 @@ model Persona {
   canonical_conflicts CanonicalConflict[]
   research_runs       ResearchRun[]
   evidence_records    EvidenceRecord[]
+  prospecting_signals ProspectingSignal[]
+  prospecting_hypotheses ProspectingHypothesis[]
+  conversation_dispositions ConversationDisposition[]
+  buyer_input_data    BuyerInputData[]
+  sequence_enrollments SequenceEnrollment[]
+  routing_decisions   RoutingDecision[]
 
   @@unique([account_name, email])
   @@index([account_name])
@@ -714,6 +727,12 @@ model DraftQueueItem {
   parent_item_id      Int?
   experiment_id       String?
   variant_key         String?
+  /// GAP OS (2026-09-23): the immutable SequenceVersion this item was scheduled
+  /// from. Null for legacy runs and while GAP_OS_ENABLED is off; the runtime
+  /// then falls back to today's live `sequences` read. No FK on purpose: this
+  /// is a hot table and the pin is informational until the enrollment row
+  /// (which does carry the FK) exists. See docs/GAP_PROSPECTING_OS.md 5.3.
+  sequence_version_id String?
   // result + crash-safe recovery
   idempotency_key     String    @unique // deterministic: owner:to_email:run:step
   email_log_id        Int?
@@ -736,6 +755,7 @@ model DraftQueueItem {
   @@index([campaign_tag])
   @@index([sequence_run_id, status])
   @@index([parent_item_id])
+  @@index([sequence_version_id])
   @@map("draft_queue_items")
 }
 
@@ -1277,4 +1297,521 @@ model ForPage {
   updated_at DateTime @updatedAt
 
   @@map("for_pages")
+}
+// ---------------------------------------------------------------------------
+// GAP Prospecting OS (2026-09-23). Additive. Spec: docs/GAP_PROSPECTING_OS.md
+// section 4. Every enum-like column is a String here and a CHECK constraint in
+// prisma/sql/2026-09-23-gap-os.sql; the immutability rules below are Postgres
+// triggers in that same file (rerun it after every `db push`, which can
+// recreate a table and drop its triggers). Verified by scripts/gap/verify-triggers.ts.
+// ---------------------------------------------------------------------------
+
+/// A registered FACT: one observed, sourced thing about an account. Never a
+/// guess. Rows are created on demand by the projection adapters (pounce
+/// trigger, evidence record, Top100 evidence, PIC citation, operator
+/// knowledge) and by operators; ingest never dual-writes. `(source_kind,
+/// source_id)` makes registration idempotent. The fact fields (title, summary,
+/// evidence, observed_at, source identity, claim_class) are frozen after insert
+/// by trigger GAP_SIGNAL_FROZEN; only confidence, freshness, external_ok and
+/// metadata may move.
+model ProspectingSignal {
+  id                   String    @id @default(cuid())
+  account_name         String
+  hubspot_company_id   String?
+  persona_id           Int?
+  source_kind          String // pounce_trigger | evidence_record | top100_evidence | pic_citation | operator_knowledge | crm | manual
+  source_id            String
+  type                 String // acquisition | new_site | site_expansion | automation_program | job_posting | technology_signal | news | intent | website_behavior | manual_research | other
+  title                String
+  summary              String?
+  source_type          String // public_primary | public_secondary | first_party_intent | first_party | crm | manual
+  evidence_url         String?
+  evidence_text        String?
+  claim_class          String?
+  /// Preserved from Top100 evidence and honored by the compiler: false means
+  /// the fact may inform a hypothesis but never appear in outbound copy.
+  external_ok          Boolean?
+  observed_at          DateTime
+  ingested_at          DateTime  @default(now())
+  confidence           Int // 0..100 (CHECK in hand SQL)
+  freshness_expires_at DateTime?
+  metadata             Json?
+  registered_by        String
+  updated_at           DateTime  @updatedAt
+
+  account Account  @relation(fields: [account_name], references: [name])
+  persona Persona? @relation(fields: [persona_id], references: [id])
+
+  hypothesis_links HypothesisSignal[]
+
+  @@unique([source_kind, source_id])
+  @@index([account_name])
+  @@index([persona_id])
+  @@index([hubspot_company_id])
+  @@index([type, observed_at])
+  @@index([freshness_expires_at])
+  @@map("prospecting_signals")
+}
+
+/// A seller INFERENCE about one account (and usually one persona): what we
+/// think the problem is, why, and what would prove us wrong. The observation
+/// is facts only: every sentence carries at least one `[S:<signal id>]` token
+/// whose id is linked through HypothesisSignal (validated in code, section
+/// 5.1). Narrative columns freeze once status leaves draft/review_required
+/// (trigger GAP_HYPOTHESIS_FROZEN); a reopen is a new row with supersedes_id.
+/// Status values and transitions: section 5.1.
+model ProspectingHypothesis {
+  id                       String    @id @default(cuid())
+  account_name             String
+  primary_persona_id       Int?
+  problem_family           String // seven families + unmapped
+  secondary_families       Json? // string[]
+  observation              String
+  problem_hypothesis       String
+  root_cause_hypotheses    Json // string[]
+  impact_hypotheses        Json // string[]
+  why_now                  String?
+  falsification_questions  Json // string[]
+  /// PIC `whatANoMeans` or research `disproof`, verbatim.
+  what_a_no_means          String?
+  contrary_evidence        String?
+  /// Seller-predicted buyer language. Never BID; BID is what the buyer said.
+  predicted_buyer_language String?
+  buying_center            String?
+  persona                  String // nine personas (taxonomy)
+  confidence               Int // 0..100 (CHECK in hand SQL)
+  status                   String    @default("draft") // draft | review_required | approved | active | confirmed | partially_confirmed | rejected | unresolved | expired
+  /// `pic:<slug>#<row>` | `research:<run>:<key>` | manual. The partial unique
+  /// (WHERE source_ref IS NOT NULL) lives in the hand SQL.
+  source_ref               String?
+  created_by               String
+  reviewed_by              String?
+  reviewed_at              DateTime?
+  activated_at             DateTime?
+  expires_at               DateTime?
+  resolved_at              DateTime?
+  resolved_by              String?
+  /// {problem, rootCause, impact, notes, dispositionIds[], bidIds[]} built only
+  /// from human-confirmed disposition and BID rows.
+  resolution               Json?
+  sequence_family_id       String?
+  sequence_version_id      String?
+  supersedes_id            String?   @unique
+  metadata                 Json?
+  created_at               DateTime  @default(now())
+  updated_at               DateTime  @updatedAt
+
+  account          Account                @relation(fields: [account_name], references: [name])
+  primary_persona  Persona?               @relation(fields: [primary_persona_id], references: [id])
+  sequence_family  SequenceFamily?        @relation(fields: [sequence_family_id], references: [id])
+  sequence_version SequenceVersion?       @relation(fields: [sequence_version_id], references: [id])
+  supersedes       ProspectingHypothesis? @relation("HypothesisSupersession", fields: [supersedes_id], references: [id])
+  superseded_by    ProspectingHypothesis? @relation("HypothesisSupersession")
+
+  signals      HypothesisSignal[]
+  events       HypothesisEvent[]
+  dispositions ConversationDisposition[]
+  bids         BuyerInputData[]
+  enrollments  SequenceEnrollment[]
+
+  @@index([account_name, status])
+  @@index([status, expires_at])
+  @@index([primary_persona_id])
+  @@index([sequence_family_id])
+  @@index([sequence_version_id])
+  @@index([source_ref])
+  @@map("prospecting_hypotheses")
+}
+
+/// Join: which registered facts a hypothesis cites, and in what role. A link
+/// cannot be removed once the hypothesis has left draft/review_required
+/// (trigger GAP_HYPOTHESIS_FROZEN on DELETE), so an activated hypothesis
+/// always keeps the evidence it was approved on.
+model HypothesisSignal {
+  hypothesis_id String
+  signal_id     String
+  role          String   @default("supporting") // primary | supporting
+  linked_by     String?
+  created_at    DateTime @default(now())
+
+  hypothesis ProspectingHypothesis @relation(fields: [hypothesis_id], references: [id])
+  signal     ProspectingSignal     @relation(fields: [signal_id], references: [id])
+
+  @@id([hypothesis_id, signal_id])
+  @@index([signal_id])
+  @@map("hypothesis_signals")
+}
+
+/// Append-only audit of every hypothesis transition, written in the same
+/// transaction as the status change. UPDATE and DELETE raise GAP_APPEND_ONLY.
+model HypothesisEvent {
+  id            String   @id @default(cuid())
+  hypothesis_id String
+  from_status   String?
+  to_status     String?
+  action        String
+  actor         String
+  reason        String?
+  payload       Json?
+  created_at    DateTime @default(now())
+
+  hypothesis ProspectingHypothesis @relation(fields: [hypothesis_id], references: [id])
+
+  @@index([hypothesis_id, created_at])
+  @@map("hypothesis_events")
+}
+
+/// Append-only audit ledger for every GAP action that is not a hypothesis
+/// transition (routing acts, enrollments, dispositions, HubSpot mirror writes,
+/// cron runs). `audit()` writes the row and then fire-and-forgets the war-room
+/// review feed. UPDATE and DELETE raise GAP_APPEND_ONLY.
+model GapAuditEvent {
+  id           String   @id @default(cuid())
+  kind         String
+  actor        String
+  subject_type String
+  subject_id   String
+  payload      Json?
+  created_at   DateTime @default(now())
+
+  @@index([kind, created_at])
+  @@index([subject_type, subject_id])
+  @@map("gap_audit_events")
+}
+
+/// What a reply, call or meeting MEANT, judged by a human. An AI-suggested row
+/// with human_confirmed=false has NO effects anywhere. `(source_kind,
+/// source_id)` makes capture idempotent (inbound message id, HubSpot
+/// engagement id, call id). human_confirmed flips false -> true only, and the
+/// classes and buyer language freeze once confirmed (trigger
+/// GAP_DISPOSITION_FROZEN). Response classes: section 7.
+model ConversationDisposition {
+  id                    String    @id @default(cuid())
+  hypothesis_id         String
+  account_name          String
+  persona_id            Int?
+  contact_email         String // ALWAYS lowercased on write
+  hubspot_contact_id    String?
+  enrollment_id         String?
+  activity_id           Int?
+  inbound_message_id    String? // Gmail messageId
+  hubspot_engagement_id String?
+  email_log_id          Int?
+  source_kind           String
+  source_id             String
+  channel               String // call | email | linkedin | meeting
+  response_class        String // section 7 list incl. call-only no_answer | voicemail | gatekeeper
+  root_cause_class      String?
+  impact_class          String?
+  objection             String?
+  buyer_language        String?
+  next_best_action      String?
+  ai_suggested          Json?
+  human_confirmed       Boolean   @default(false)
+  confirmed_by          String?
+  confirmed_at          DateTime?
+  created_by            String
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
+
+  hypothesis ProspectingHypothesis @relation(fields: [hypothesis_id], references: [id])
+  account    Account               @relation(fields: [account_name], references: [name])
+  persona    Persona?              @relation(fields: [persona_id], references: [id])
+  enrollment SequenceEnrollment?   @relation(fields: [enrollment_id], references: [id])
+
+  bids BuyerInputData[]
+
+  @@unique([source_kind, source_id])
+  @@index([hypothesis_id])
+  @@index([account_name])
+  @@index([persona_id])
+  @@index([enrollment_id])
+  @@index([contact_email])
+  @@index([hubspot_contact_id])
+  @@map("conversation_dispositions")
+}
+
+/// Buyer TRUTH: something the buyer actually said, in their words. Write-once
+/// raw language, no delete path, corrections are a new row with supersedes_id
+/// (unique: one correction per row). Only `human_confirmed && !superseded`
+/// rows feed resolution. Trigger GAP_BID_IMMUTABLE refuses any change to the
+/// identity and language columns, and ANY change once confirmed. No BID code
+/// ever writes Persona.do_not_contact.
+model BuyerInputData {
+  id                 String    @id @default(cuid())
+  hypothesis_id      String
+  account_name       String
+  persona_id         Int?
+  contact_email      String // ALWAYS lowercased on write
+  disposition_id     String?
+  inbound_message_id String?
+  activity_id        Int?
+  type               String // current_state | business_problem | root_cause | impact | metric | future_state | priority | constraint | objection
+  raw_buyer_language String // write-once
+  normalized_summary String? // editable only while unconfirmed
+  numeric_value      Decimal?  @db.Decimal(18, 4)
+  unit               String?
+  source             String // call | email | meeting | linkedin
+  captured_at        DateTime
+  captured_by        String
+  ai_extracted       Boolean   @default(false)
+  human_confirmed    Boolean   @default(false)
+  confirmed_by       String?
+  confirmed_at       DateTime?
+  supersedes_id      String?   @unique
+  metadata           Json?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+
+  hypothesis    ProspectingHypothesis    @relation(fields: [hypothesis_id], references: [id])
+  account       Account                  @relation(fields: [account_name], references: [name])
+  persona       Persona?                 @relation(fields: [persona_id], references: [id])
+  disposition   ConversationDisposition? @relation(fields: [disposition_id], references: [id])
+  supersedes    BuyerInputData?          @relation("BidSupersession", fields: [supersedes_id], references: [id])
+  superseded_by BuyerInputData?          @relation("BidSupersession")
+
+  @@index([hypothesis_id])
+  @@index([account_name])
+  @@index([persona_id])
+  @@index([disposition_id])
+  @@index([contact_email])
+  @@map("buyer_input_data")
+}
+
+/// The sequence OBJECT. For `hubspot_native` the family IS the HubSpot
+/// sequence (hubspot_sequence_id unique); `legacy_sequence_id` links the
+/// pre-GAP `sequences` row for modex runs. Shapes live in SequenceVersion; a
+/// family carries the identity and the engine only.
+model SequenceFamily {
+  id                  String    @id @default(cuid())
+  name                String?
+  engine              String // hubspot_native | modex_draft_queue | manual
+  program             String? // e.g. top100-2026-09-12
+  account_name        String?
+  problem_family      String?
+  persona             String?
+  hubspot_sequence_id String?   @unique
+  hubspot_portal_id   String?
+  legacy_sequence_id  Int?      @unique
+  archived_at         DateTime?
+  created_by          String?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+
+  account Account? @relation(fields: [account_name], references: [name])
+
+  versions    SequenceVersion[]
+  enrollments SequenceEnrollment[]
+  hypotheses  ProspectingHypothesis[]
+
+  @@index([account_name])
+  @@index([engine, program])
+  @@map("sequence_families")
+}
+
+/// One immutable SHAPE of a family. `steps` is steps.v2 (per step: delay
+/// {value, unit}, purpose, sourcePurpose, condition, askType,
+/// productProofAllowed, requiredEvidenceTypes[], claimsUsed[], templates);
+/// `steps_hash` is sha256 of the canonical JSON. draft -> frozen on the first
+/// non-test enrollment (trigger on sequence_enrollments), frozen -> retired by
+/// hand. Any other change off draft raises GAP_VERSION_FROZEN; "edit" means
+/// createVersion as draft max+1. Retiring blocks new enrollments only.
+model SequenceVersion {
+  id                      String    @id @default(cuid())
+  family_id               String
+  version                 Int
+  steps                   Json
+  steps_hash              String
+  status                  String    @default("draft") // draft | frozen | retired
+  hubspot_template_ids    Json?
+  /// {journal_ts, journal_evidence, source_file, source_sha256, revision,
+  /// built_at, imported_at, imported_by}
+  provenance              Json?
+  change_note             String?
+  frozen_at               DateTime?
+  frozen_by_enrollment_id String?
+  retired_at              DateTime?
+  created_by              String?
+  created_at              DateTime  @default(now())
+  updated_at              DateTime  @updatedAt
+
+  family SequenceFamily @relation(fields: [family_id], references: [id])
+
+  enrollments SequenceEnrollment[]
+  hypotheses  ProspectingHypothesis[]
+  compiles    GapCompile[]
+
+  @@unique([family_id, version])
+  @@index([status])
+  @@map("sequence_versions")
+}
+
+/// Append-only record of per-person copy pushes into HubSpot contact
+/// properties (`yf_top100_stepN_*`). HubSpot templates read the property at
+/// send time, so the copy a prospect received at step N is the newest event
+/// before that step's send (`copyAt`, pure). UPDATE and DELETE raise
+/// GAP_APPEND_ONLY.
+model SequenceCopyEvent {
+  id                 String   @id @default(cuid())
+  hubspot_contact_id String
+  account_key        String
+  property           String
+  step_index         Int
+  field              String
+  old_value          String?
+  new_value          String
+  ts                 DateTime
+  evidence           String?
+  revision           String?
+  readback           Json?
+  result             String?
+  pushed_by          String?
+  source             String // journal_import | gap_push
+  created_at         DateTime @default(now())
+
+  @@unique([hubspot_contact_id, property, ts])
+  @@index([account_key])
+  @@index([hubspot_contact_id, step_index, ts])
+  @@map("sequence_copy_events")
+}
+
+/// One prospect running one pinned version. The id is supplied, never
+/// generated: `DraftQueueItem.sequence_run_id` for modex, or uuid v5 over
+/// `${hubspot_sequence_id}:${hubspot_contact_id}` for HubSpot, so an import
+/// is idempotent without an external id. The pins (version, family, engine,
+/// recipient, hypothesis, rendered copy, enrolled_at, legacy) are immutable
+/// after insert (trigger GAP_ENROLLMENT_PIN). A non-test insert freezes its
+/// version. At most one active/paused/stop_pending row per to_email (partial
+/// unique in the hand SQL). Stopping records a reason; nothing is deleted.
+model SequenceEnrollment {
+  id                    String    @id
+  engine                String // hubspot_native | modex_draft_queue | manual
+  family_id             String
+  sequence_version_id   String
+  hypothesis_id         String?
+  account_name          String
+  persona_id            Int?
+  to_email              String // ALWAYS lowercased on write
+  hubspot_contact_id    String?
+  hubspot_sequence_id   String?
+  hubspot_enrollment_id String?
+  sender                String
+  owner                 String
+  status                String    @default("active") // active | paused | stop_pending | stopped | completed
+  stop_reason           String? // replied | unsubscribed | in_thread | bounced | dnc | suppressed | manual | hypothesis_resolved | hypothesis_expired | sequence_retired | legacy_unknown
+  stop_requested_at     DateTime?
+  stopped_at            DateTime?
+  stopped_by            String?
+  current_step_index    Int       @default(0)
+  /// Exact per-person copy as of enrolled_at, reconstructed from copy events.
+  /// Null for modex, where the DraftQueueItem rows are the record.
+  rendered_steps        Json?
+  rendered_steps_hash   String?
+  external_state        Json? // HubSpot readback
+  external_synced_at    DateTime?
+  /// Internal recipients never freeze a version. The predicate is a structural
+  /// copy of perform-send.ts:85-91.
+  is_test               Boolean   @default(false)
+  legacy                Boolean   @default(false)
+  enrolled_by           String
+  enrolled_at           DateTime  @default(now())
+  completed_at          DateTime?
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
+
+  family     SequenceFamily         @relation(fields: [family_id], references: [id])
+  version    SequenceVersion        @relation(fields: [sequence_version_id], references: [id])
+  hypothesis ProspectingHypothesis? @relation(fields: [hypothesis_id], references: [id])
+  account    Account                @relation(fields: [account_name], references: [name])
+  persona    Persona?               @relation(fields: [persona_id], references: [id])
+
+  dispositions ConversationDisposition[]
+
+  @@index([to_email, status])
+  @@index([hubspot_contact_id])
+  @@index([sequence_version_id, status])
+  @@index([family_id])
+  @@index([hypothesis_id])
+  @@index([account_name])
+  @@index([persona_id])
+  @@index([status, enrolled_at])
+  @@map("sequence_enrollments")
+}
+
+/// Idempotency ledger for every GAP write into HubSpot. `key` is the
+/// deterministic write key (e.g. `hyp:<id>:<event>`); a second call with the
+/// same key makes zero HubSpot calls. A failed write is recorded here with
+/// `error` (fail-open), never retried blindly.
+model GapHubSpotMirror {
+  key         String   @id
+  object_type String
+  object_id   String
+  note_id     String?
+  written_at  DateTime @default(now())
+  error       String?
+
+  @@index([object_type, object_id])
+  @@map("gap_hubspot_mirror")
+}
+
+/// One routed (account, persona) pair from one routing run (section 6). Every
+/// run is `shadow` until the gates in section 10 are earned; `human_action`
+/// records what the human actually did so shadow decisions can be compared.
+model RoutingDecision {
+  id                 String    @id @default(cuid())
+  run_id             String
+  mode               String // shadow | live
+  account_name       String
+  persona_id         Int?
+  hypothesis_id      String?
+  action             String // research_required | approve_hypothesis | call_now | enroll_gap_sequence | one_off_email | linkedin_manual_task | nurture | do_not_contact
+  lane               String // work_queue | reply_triage | blocked
+  rule_id            String
+  priority           Int
+  explain            Json
+  inputs_snapshot    Json
+  human_action       String?
+  human_actor        String?
+  human_action_at    DateTime?
+  acted_by_system_at DateTime?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+
+  account Account  @relation(fields: [account_name], references: [name])
+  persona Persona? @relation(fields: [persona_id], references: [id])
+
+  @@index([run_id, priority, id])
+  @@index([account_name, persona_id])
+  @@index([persona_id])
+  @@index([hypothesis_id])
+  @@map("routing_decisions")
+}
+
+/// One compiler verdict (section 8): the deterministic floor under the
+/// editorial scorecard. `approveBatch` refuses a queue item whose latest
+/// compile is not a pass. `result` is the full CompileResult.
+model GapCompile {
+  id                  String   @id @default(cuid())
+  hypothesis_id       String?
+  sequence_version_id String?
+  draft_queue_item_id Int?
+  step_index          Int?
+  verdict             String // pass | review_required | reject
+  checks              Json
+  word_count          Int?
+  cta_family          String?
+  evidence_ids_used   Json?
+  compiler_version    String
+  critic              Json?
+  inputs_snapshot     Json?
+  result              Json
+  created_by          String?
+  created_at          DateTime @default(now())
+
+  version SequenceVersion? @relation(fields: [sequence_version_id], references: [id])
+
+  @@index([hypothesis_id, created_at])
+  @@index([draft_queue_item_id, created_at])
+  @@index([sequence_version_id])
+  @@map("gap_compiles")
 }
