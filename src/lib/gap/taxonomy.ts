@@ -267,6 +267,14 @@ export type RoutingAction = (typeof ROUTING_ACTIONS)[number];
 export const ROUTING_LANES = ['work_queue', 'reply_triage', 'blocked'] as const;
 export type RoutingLane = (typeof ROUTING_LANES)[number];
 
+/**
+ * What a human may record against a routing decision (`POST
+ * /api/gap/decisions/{id}/act`). Closed so the shadow comparison in Sprint 5
+ * groups on a vocabulary, not free text (review nit N3).
+ */
+export const HUMAN_ACTIONS = ['enrolled_by_hand', 'called', 'emailed', 'dismissed', 'deferred'] as const;
+export type HumanAction = (typeof HUMAN_ACTIONS)[number];
+
 // ---------------------------------------------------------------------------
 // Responses
 // ---------------------------------------------------------------------------

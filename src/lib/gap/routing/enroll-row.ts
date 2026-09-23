@@ -17,6 +17,7 @@
 
 import type { PrismaClient } from '@prisma/client';
 import type { RoutingAction } from '../taxonomy';
+import { resolveLatestRunId } from './queue';
 import { resolveEnrollTarget } from './rules';
 import type { EnrollTarget, RoutingDecision, RoutingExplain, RoutingInputs } from './types';
 
@@ -236,7 +237,7 @@ export function renderEnrollTableJson(table: EnrollTable): EnrollTableJson {
 // Reader: RoutingDecision rows -> items
 // ---------------------------------------------------------------------------
 
-type DecisionReader = Pick<PrismaClient, 'routingDecision'>;
+type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig'>;
 
 type Obj = Record<string, unknown>;
 
@@ -274,18 +275,16 @@ interface DecisionRow {
 }
 
 /**
- * Read the `enroll_gap_sequence` decisions of one run (the newest when
- * `runId` is omitted). An empty table, or a run with no enroll decisions,
+ * Read the `enroll_gap_sequence` decisions of one run. When `runId` is
+ * omitted the run is the `gap_routing_last_run` pointer, falling back to the
+ * newest row only when the pointer is missing (N6), so a partial run never
+ * feeds the enroll table. An empty table, or a run with no enroll decisions,
  * yields an empty list, never an error. Rows whose snapshot lacks `account`
  * or `persona` objects are dropped: the emitter cannot name what it cannot see.
  */
 export async function loadDecisions(prisma: DecisionReader, runId?: string): Promise<EnrollRowItem[]> {
-  let run = runId;
-  if (!run) {
-    const newest = await prisma.routingDecision.findFirst({ orderBy: { created_at: 'desc' }, select: { run_id: true } });
-    if (!newest) return [];
-    run = newest.run_id;
-  }
+  const run = runId || (await resolveLatestRunId(prisma));
+  if (!run) return [];
   const rows = (await prisma.routingDecision.findMany({
     where: { run_id: run, action: ENROLL_ACTION },
     orderBy: [{ priority: 'desc' }, { id: 'desc' }],

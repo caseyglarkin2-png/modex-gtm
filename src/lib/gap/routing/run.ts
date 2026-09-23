@@ -26,10 +26,12 @@
 
 import { audit as auditEvent } from '../audit';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
+import { EXPLAIN_LEAK_MARKER, isExplainLeakError } from './explain';
 import { assembleForAccount, isSkip } from './inputs';
 import type { AssembleAccountArgs, AssembleForAccountOptions, AssembleResult, HubSpotAccountSnapshot, Top100Context } from './inputs';
 import { routePersona } from './route';
 import type { SuppressionReader } from './suppression-read';
+import { LAST_RUN_CONFIG_KEY } from './types';
 import type { RouteResult, RoutingDecision, RoutingInputs } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,7 +42,8 @@ export const SHADOW_MODE = 'shadow' as const;
 
 export const DEFAULT_MAX_PAIRS = 500;
 export const DEFAULT_MAX_PERSONAS_PER_ACCOUNT = 2;
-export const LAST_RUN_CONFIG_KEY = 'gap_routing_last_run';
+/** Defined in types.ts (the queue reads it too); re-exported so callers of the run keep one import. */
+export { LAST_RUN_CONFIG_KEY };
 
 export interface RunRoutingOptions {
   now: Date;
@@ -410,7 +413,21 @@ export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, de
       }
       if (report.pairs >= maxPairs) break;
       report.pairs += 1;
-      const outcome = route(result);
+      let outcome: RouteResult;
+      try {
+        outcome = route(result);
+      } catch (err) {
+        // The explain tripwire fired on this pair's human text (observation,
+        // sequence block, would-prove-wrong). Count it and keep going so one
+        // forbidden token never leaves a partial run as the newest queue
+        // (R2-3). The tripwire itself stays: nothing leaky is stored. Any
+        // other error is a real fault and still aborts the run.
+        if (isExplainLeakError(err)) {
+          bump(report.skips, `${EXPLAIN_LEAK_MARKER}:${err.field}`);
+          continue;
+        }
+        throw err;
+      }
       if (outcome.kind === 'skip') {
         bump(report.skips, outcome.reason);
         continue;

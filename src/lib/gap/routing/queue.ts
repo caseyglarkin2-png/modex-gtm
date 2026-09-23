@@ -11,6 +11,8 @@
  */
 
 import { audit as auditEvent } from '../audit';
+import type { HumanAction } from '../taxonomy';
+import { LAST_RUN_CONFIG_KEY } from './types';
 import type { RoutingExplain } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -175,18 +177,33 @@ function toItem(row: DecisionRow): QueueItem {
 // listQueue
 // ---------------------------------------------------------------------------
 
+/**
+ * The run the queue shows when the caller names none (N6): the
+ * `gap_routing_last_run` pointer, which run.ts advances only AFTER every row
+ * of a run is written, so a run that crashed half-way never becomes the
+ * queue. The newest row is the fallback only when the pointer is missing.
+ * Shared by the queue and the enroll-row emitter.
+ */
+export async function resolveLatestRunId(prisma: PrismaLike): Promise<string | undefined> {
+  const pointer = (await prisma.systemConfig.findUnique({
+    where: { key: LAST_RUN_CONFIG_KEY },
+    select: { value: true },
+  })) as { value: string } | null | undefined;
+  const pointed = pointer?.value?.trim();
+  if (pointed) return pointed;
+  const newest = (await prisma.routingDecision.findFirst({
+    orderBy: { created_at: 'desc' },
+    select: { run_id: true },
+  })) as { run_id: string } | null;
+  return newest?.run_id || undefined;
+}
+
 export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {}): Promise<ListQueueResult> {
   const limit = Math.min(MAX_QUEUE_LIMIT, Math.max(1, Math.trunc(opts.limit ?? DEFAULT_QUEUE_LIMIT)));
 
   let runId = opts.runId?.trim() || undefined;
-  if (!runId) {
-    const newest = (await prisma.routingDecision.findFirst({
-      orderBy: { created_at: 'desc' },
-      select: { run_id: true },
-    })) as { run_id: string } | null;
-    if (!newest) return { runId: null, items: [], nextCursor: null };
-    runId = newest.run_id;
-  }
+  if (!runId) runId = await resolveLatestRunId(prisma);
+  if (!runId) return { runId: null, items: [], nextCursor: null };
 
   const where: Record<string, unknown> = { run_id: runId };
   if (opts.action) where.action = opts.action;
@@ -229,7 +246,7 @@ export interface RecordHumanActionDeps {
 export async function recordHumanAction(
   prisma: PrismaLike,
   decisionId: string,
-  action: string,
+  action: HumanAction,
   actor: string,
   deps: RecordHumanActionDeps = {},
 ): Promise<HumanActionResult> {

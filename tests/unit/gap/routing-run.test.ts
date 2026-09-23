@@ -147,7 +147,10 @@ function makeStore() {
       return { count };
     }),
   };
-  const systemConfig = { upsert: vi.fn(async (_args: Record<string, unknown>) => ({})) };
+  const systemConfig = {
+    upsert: vi.fn(async (_args: Record<string, unknown>) => ({})),
+    findUnique: vi.fn(async (_args: Record<string, unknown>): Promise<{ key: string; value: string } | null> => null),
+  };
   const account = {
     findMany: vi.fn(async (_args: Record<string, unknown>): Promise<Row[]> => []),
     findUnique: vi.fn(async (_args: Record<string, unknown>): Promise<Row | null> => null),
@@ -240,6 +243,7 @@ function inputsFor(accountName: string, personaId: number, extra: Partial<Routin
       family: 'hidden_capacity',
       confidence: 70,
       evidenceFresh: true,
+      hasNewerVersion: false,
       expiresAt: null,
       resumeAt: null,
       version: 1,
@@ -478,6 +482,33 @@ describe('runRouting', () => {
     ]);
   });
 
+  it('an explain leak in one pair is counted as skips explain_leak:<field> and the run completes with the other decisions written (R2-3)', async () => {
+    const leaky = inputsFor('Acme Foods', 1);
+    leaky.hypothesis!.observation = 'The VP browsed the microsite twice.';
+    const clean = inputsFor('Acme Foods', 2);
+    // The REAL router: the tripwire in assertExplainClean must throw, and run.ts must catch only that.
+    const report = await runRouting(
+      store,
+      { now: NOW, runId: 'run-L', actor: 'test', accountNames: ['Acme Foods'] },
+      { suppression, assemble: assembler({ 'Acme Foods': [leaky, clean] }), audit: vi.fn(async () => ({ stored: true, reviewQueued: false })) },
+    );
+    expect(report.skips).toEqual({ 'explain_leak:whyProblem': 1 });
+    expect(report.pairs).toBe(2);
+    expect(report.decisions).toBe(1);
+    expect(store.rows.map((r) => [r.run_id, r.persona_id])).toEqual([['run-L', 2]]);
+    expect(store.systemConfig.upsert).toHaveBeenCalledTimes(1);
+  });
+
+  it('any other router error still aborts the run (R2-3 keeps the tripwire narrow)', async () => {
+    const route = vi.fn(() => {
+      throw new Error('router exploded');
+    });
+    await expect(
+      runRouting(store, { now: NOW, runId: 'run-X', actor: 'test' }, { suppression, assemble: assembler(twoByTwo()), route }),
+    ).rejects.toThrow('router exploded');
+    expect(store.rows).toEqual([]);
+  });
+
   it('defaults runId to run-<now ISO>', async () => {
     store.account.findMany.mockResolvedValue([]);
     const report = await runRouting(store, { now: NOW, actor: 'test' }, { suppression, assemble: assembler({}), route: vi.fn(), audit: vi.fn() });
@@ -666,7 +697,23 @@ describe('listQueue', () => {
     expect((await listQueue(store, { runId: 'run-A', action: 'call_now', lane: 'blocked' })).items).toEqual([]);
   });
 
-  it('defaults to the latest run by created_at and scopes items to it', async () => {
+  it('reads the gap_routing_last_run pointer first: a newer partial run never becomes the queue while the pointer names the completed one (N6)', async () => {
+    await seed(store, { priority: 50, run_id: 'run-A' });
+    await seed(store, { priority: 40, run_id: 'run-A' });
+    // run-B crashed mid-way: rows exist, the pointer was never advanced.
+    await seed(store, { priority: 99, run_id: 'run-B' });
+    store.systemConfig.findUnique.mockResolvedValue({ key: LAST_RUN_CONFIG_KEY, value: 'run-A' });
+    const result = await listQueue(store);
+    expect(result.runId).toBe('run-A');
+    expect(result.items.map((i) => [i.id, i.priority])).toEqual([
+      ['d01', 50],
+      ['d02', 40],
+    ]);
+    expect(store.systemConfig.findUnique).toHaveBeenCalledWith({ where: { key: LAST_RUN_CONFIG_KEY }, select: { value: true } });
+    expect(store.routingDecision.findFirst).not.toHaveBeenCalled();
+  });
+
+  it('defaults to the latest run by created_at only when the pointer is missing, and scopes items to it', async () => {
     await seed(store, { priority: 99, run_id: 'run-A' });
     await seed(store, { priority: 10, run_id: 'run-B' });
     await seed(store, { priority: 20, run_id: 'run-B' });
@@ -852,6 +899,20 @@ describe('routes', () => {
       expect(await res.json()).toMatchObject({ mode: 'shadow', dryRun: true });
     });
 
+    it('run: Bearer CRON_SECRET in the header is accepted; ?secret= in the query never is (N1)', async () => {
+      mockedAuth.mockResolvedValue(null);
+      process.env.CRON_SECRET = 'cron-secret';
+      const query = await runPOST(post(`${RUN}?secret=cron-secret`, {}));
+      expect(query.status).toBe(401);
+      expect(await query.json()).toEqual({ error: 'unauthenticated' });
+      expect(store.account.findMany).not.toHaveBeenCalled();
+
+      const header = await runPOST(post(RUN, {}, { authorization: 'Bearer cron-secret' }));
+      expect(header.status).toBe(200);
+      const xcron = await runPOST(post(RUN, {}, { 'x-cron-secret': 'cron-secret' }));
+      expect(xcron.status).toBe(200);
+    });
+
     it('queue: cron token is not a session -> 401', async () => {
       mockedAuth.mockResolvedValue(null);
       process.env.CRON_SECRET = 'cron-secret';
@@ -980,6 +1041,21 @@ describe('routes', () => {
       const res = await actPOST(post(ACT('ghost'), { action: 'dismissed' }), idParams('ghost'));
       expect(res.status).toBe(404);
       expect(await res.json()).toEqual({ error: 'not_found' });
+    });
+
+    it('an action outside HUMAN_ACTIONS -> 400 invalid_body field action, row untouched (N3)', async () => {
+      const { HUMAN_ACTIONS } = await import('@/lib/gap/taxonomy');
+      expect([...HUMAN_ACTIONS]).toEqual(['enrolled_by_hand', 'called', 'emailed', 'dismissed', 'deferred']);
+      const id = await seed(store, { priority: 1 });
+      const res = await actPOST(post(ACT(id), { action: 'enrolled_by_hand_twice' }), idParams(id));
+      expect(res.status).toBe(400);
+      expect(await res.json()).toEqual({ error: 'invalid_body', field: 'action' });
+      expect(store.routingDecision.updateMany).not.toHaveBeenCalled();
+      for (const action of HUMAN_ACTIONS) {
+        const fresh = await seed(store, { priority: 1 });
+        const ok = await actPOST(post(ACT(fresh), { action }), idParams(fresh));
+        expect(ok.status, action).toBe(200);
+      }
     });
 
     it('missing or blank action -> 400 invalid_body', async () => {

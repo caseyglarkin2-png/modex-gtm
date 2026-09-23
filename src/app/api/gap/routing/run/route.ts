@@ -8,9 +8,10 @@
  * Gate: `assertGapEnabled('GAP_ROUTING_ENABLED')` first; a flag off answers
  * 404 with the skip payload for every caller.
  *
- * Auth: a session, or the cron/agent tokens the hypotheses route accepts
- * (`x-gap-token` = CRON_SECRET, Bearer/x-cron-secret CRON_SECRET, Bearer
- * QUEUE_AGENT_SECRET). Agent callers act as `cron`.
+ * Auth: a session, or a HEADER carrying a token (`x-gap-token` = CRON_SECRET,
+ * `Authorization: Bearer` or `x-cron-secret` = CRON_SECRET, Bearer
+ * QUEUE_AGENT_SECRET). `?secret=` in the query is never accepted here (N1).
+ * Agent callers act as `cron`.
  *
  * Mode: dry run by default, matching /api/cron/gap-hypothesize. Pass
  * `?mode=apply` to write rows; `?dryRun=1` or body `dryRun: true` forces a
@@ -34,7 +35,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from '@/lib/hubspot/client';
@@ -63,11 +63,20 @@ async function sessionEmail(): Promise<string | null> {
   return typeof email === 'string' && email.length > 0 ? email : null;
 }
 
+/**
+ * Header-only agent auth (N1): `x-gap-token`, `Authorization: Bearer` or
+ * `x-cron-secret` carrying CRON_SECRET, or the queue agent's own Bearer.
+ * The shared cron helper also honors `?secret=`, which lands in access
+ * logs, so it is deliberately NOT reused here.
+ */
 function isGapAgentRequest(request: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
-  const token = request.headers.get('x-gap-token');
-  if (secret && token === secret) return true;
-  return isAuthorizedCronRequest(request) || isAuthorizedQueueAgent(request);
+  if (secret) {
+    if (request.headers.get('x-gap-token') === secret) return true;
+    if (request.headers.get('authorization') === `Bearer ${secret}`) return true;
+    if (request.headers.get('x-cron-secret') === secret) return true;
+  }
+  return isAuthorizedQueueAgent(request);
 }
 
 /** Query params folded into the body shape so one schema validates both. */

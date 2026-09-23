@@ -25,7 +25,11 @@ import type { RoutingAccountInput, RoutingDecision, RoutingPersonaInput, Routing
 const mockedAuth = vi.fn();
 const mockedFindFirst = vi.fn();
 const mockedFindMany = vi.fn();
-const fakePrisma = { routingDecision: { findFirst: mockedFindFirst, findMany: mockedFindMany } };
+const mockedConfigFind = vi.fn();
+const fakePrisma = {
+  routingDecision: { findFirst: mockedFindFirst, findMany: mockedFindMany },
+  systemConfig: { findUnique: mockedConfigFind },
+};
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: fakePrisma }));
@@ -282,7 +286,10 @@ describe('renderEnrollTableJson', () => {
 // ---------------------------------------------------------------------------
 
 describe('loadDecisions', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedConfigFind.mockResolvedValue(null);
+  });
 
   it('returns an empty list when no run exists, without querying rows', async () => {
     mockedFindFirst.mockResolvedValue(null);
@@ -291,7 +298,17 @@ describe('loadDecisions', () => {
     expect(mockedFindMany).not.toHaveBeenCalled();
   });
 
-  it('reads the newest run when runId is omitted and only enroll_gap_sequence rows', async () => {
+  it('reads the gap_routing_last_run pointer first and never looks at the newest row while it is set (N6)', async () => {
+    mockedConfigFind.mockResolvedValue({ value: 'run_completed' });
+    mockedFindFirst.mockResolvedValue({ run_id: 'run_partial_newer' });
+    mockedFindMany.mockResolvedValue([]);
+    await loadDecisions(fakePrisma as never);
+    expect(mockedConfigFind).toHaveBeenCalledWith({ where: { key: 'gap_routing_last_run' }, select: { value: true } });
+    expect(mockedFindFirst).not.toHaveBeenCalled();
+    expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_completed', action: 'enroll_gap_sequence' });
+  });
+
+  it('reads the newest run only when the pointer is missing, and only enroll_gap_sequence rows', async () => {
     mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
     mockedFindMany.mockResolvedValue([
       {

@@ -2,7 +2,8 @@
  * POST /api/gap/decisions/[id]/act   body `{ action: string }`
  *
  * GAP Prospecting OS, Sprint 2, S2-T7. Records what the operator did with a
- * routing decision (for example `enrolled_by_hand`, `dismissed`, `called`).
+ * routing decision: one of `HUMAN_ACTIONS` in taxonomy.ts (enrolled_by_hand,
+ * called, emailed, dismissed, deferred); anything else is 400 field action.
  * The stamp is write-once: 200 `{ok:true}` the first time, 409
  * `{error:'already_acted'}` after, 404 `{error:'not_found'}` for an unknown id.
  * Session only; this is a human's record, never a system's.
@@ -17,11 +18,13 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { recordHumanAction } from '@/lib/gap/routing/queue';
+import { HUMAN_ACTIONS } from '@/lib/gap/taxonomy';
 
 export const dynamic = 'force-dynamic';
 
+/** `action` is closed to HUMAN_ACTIONS (N3); anything else is 400 naming the field. */
 const BodySchema = z.object({
-  action: z.string().trim().min(1).max(64),
+  action: z.enum(HUMAN_ACTIONS),
 });
 
 function firstField(error: z.ZodError): string {
