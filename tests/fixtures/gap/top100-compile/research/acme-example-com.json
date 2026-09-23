@@ -1,0 +1,92 @@
+{
+  "schema": "research.v1",
+  "key": "acme-example-com",
+  "company_id": "",
+  "name": "Acme Foods",
+  "domain": "example.com",
+  "researched_at": "2026-09-12T00:00:00Z",
+  "worker": "fixture",
+  "structural_problem": "Two Ohio sites define dock dwell differently.",
+  "value_hypothesis": "A common gate baseline across the Ohio sites.",
+  "confidence": "medium",
+  "confidence_note": "CONFIDENCE-NOTE-SENTINEL fixture text that must never reach a contract.",
+  "skeptic_objection": "SKEPTIC-OBJECTION-SENTINEL the yards may already run on a vendor YMS.",
+  "contrary_evidence": "CONTRARY-EVIDENCE-SENTINEL a later note says the clerks are seasonal.",
+  "causal_chain": {
+    "observed_change": "Acme posted gate-clerk roles.",
+    "yard_dependency": "Gate check-in runs on paper.",
+    "affected_kpi": "Driver turn time.",
+    "decision_owner": "VP Supply Chain",
+    "capability": "Driver check-in standardized across sites.",
+    "first_conversation": "How is dwell defined today?",
+    "disproof": "A common real-time dock metric already exists."
+  },
+  "why_now": {
+    "trigger": "Gate-clerk hiring in August 2026.",
+    "event_date": "2026-08-20",
+    "published": "2026-08-20",
+    "evidence_ids": ["E1"],
+    "strength": "active_initiative"
+  },
+  "incumbent": { "name": "", "verified": false, "evidence_ids": [] },
+  "evidence": [
+    {
+      "evidence_id": "E1",
+      "claim": "Acme Foods posted three gate-clerk roles at its Ohio distribution center in August 2026.",
+      "source_url": "https://example.com/careers/ohio-gate-clerk",
+      "source_type": "job_posting",
+      "published": "2026-08-20",
+      "event_date": "2026-08-20",
+      "retrieved": "2026-09-12",
+      "excerpt": "Gate Clerk (night shift), Ohio DC. Three openings.",
+      "confidence": "high",
+      "class": "FACT",
+      "external_ok": true,
+      "contradiction": ""
+    },
+    {
+      "evidence_id": "E2",
+      "claim": "Acme Foods opened a new plant in Dayton, Ohio in March 2025.",
+      "source_url": "https://example.com/news/dayton-plant",
+      "source_type": "trade_press",
+      "published": "2025-03-01",
+      "event_date": "2025-03-01",
+      "retrieved": "2026-09-12",
+      "excerpt": "Acme Foods opens Dayton plant.",
+      "confidence": "high",
+      "class": "FACT",
+      "external_ok": true,
+      "contradiction": ""
+    },
+    {
+      "evidence_id": "E3",
+      "claim": "Acme Foods announced an automation program for its Ohio yards.",
+      "source_url": "https://example.com/news/automation-program",
+      "source_type": "newsroom",
+      "published": "unknown",
+      "event_date": "unknown",
+      "retrieved": "2026-09-12",
+      "excerpt": "Acme Foods announces yard automation program.",
+      "confidence": "medium",
+      "class": "FACT",
+      "external_ok": true,
+      "contradiction": "A later filing says the program was paused before any site went live."
+    },
+    {
+      "evidence_id": "E4",
+      "claim": "Acme Foods likely still runs paper check-in at the Ohio gate.",
+      "source_url": "https://example.com/news/dayton-plant",
+      "source_type": "other",
+      "published": "unknown",
+      "event_date": "unknown",
+      "retrieved": "2026-09-12",
+      "excerpt": "",
+      "confidence": "low",
+      "class": "INFERENCE",
+      "external_ok": true,
+      "contradiction": ""
+    }
+  ],
+  "unknowns": ["UNKNOWNS-SENTINEL exact Ohio site count"],
+  "eligibility_flags": { "found_open_pursuit_or_deal_signal": false, "note": "" }
+}

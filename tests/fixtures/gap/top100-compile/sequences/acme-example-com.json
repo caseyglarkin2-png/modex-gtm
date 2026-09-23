@@ -1,0 +1,157 @@
+{
+  "schema": "sequences.v1",
+  "key": "acme-example-com",
+  "account": "Acme Foods",
+  "drafted_at": "2026-09-12T00:00:00Z",
+  "writer": "fixture",
+  "status": "DRAFT_REVIEW_REQUIRED",
+  "account_thesis": "Two Ohio sites, two definitions of dwell.",
+  "buyer_map": [],
+  "entry_plan": {},
+  "sequences": [
+    {
+      "person": "Jordan Vale",
+      "hubspot_contact_id": "100000000001",
+      "preferred_sender": "casey@example.com",
+      "touches": [
+        {
+          "step": 1,
+          "purpose": "earn_reply",
+          "day": 0,
+          "condition": "start",
+          "subject": "Ohio gate roles",
+          "body": "Hi Jordan,\n\nAcme Foods posted three gate-clerk roles at the Ohio distribution center in August [[SRC:E1]]. Two of them are night shift.\n\nMy guess is the clerks exist to keep inbound trailers moving when the dock and the lot disagree about what is where.\n\nHow many trailers sit past their appointment on a normal Tuesday?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "How many trailers sit past their appointment on a normal Tuesday?",
+          "evidence_ids": [
+            "E1"
+          ],
+          "claims_used": [],
+          "next_step": "if reply: engage directly; if silence: step 2 on day 4"
+        },
+        {
+          "step": 2,
+          "purpose": "clarify_consequence",
+          "day": 4,
+          "condition": "no reply to step 1",
+          "subject": "Dayton plant",
+          "body": "Hi Jordan,\n\nAcme Foods opened a new plant in Dayton [[SRC:E2]], and the receiving side of a new plant usually inherits the gate routine of the nearest older site.\n\nIf Dayton checks drivers in on paper the way the Ohio distribution center does, the two sites will disagree about dwell before the first quarter closes.\n\nWorth sending over the yard-network scorecard?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Worth sending over the yard-network scorecard?",
+          "evidence_ids": [
+            "E2"
+          ],
+          "claims_used": [],
+          "next_step": "if reply: engage directly; if silence: step 3 on day 9"
+        },
+        {
+          "step": 3,
+          "purpose": "address_obstacle",
+          "day": 9,
+          "condition": "no reply to steps 1-2",
+          "subject": "Paper at the gate",
+          "body": "Hi Jordan,\n\nAcme Foods runs paper check-in at the Ohio gate [[SRC:E4]], which is the pattern where the guard shack and the dock office keep two different lists of the same trailers.\n\nMy guess is the night clerks spend their shift reconciling those lists rather than moving freight.\n\nReply and I'll send the short version.\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Reply and I'll send the short version.",
+          "evidence_ids": [
+            "E4"
+          ],
+          "claims_used": [],
+          "next_step": "if reply: engage directly; if silence: step 4 on day 15"
+        },
+        {
+          "step": 4,
+          "purpose": "next_step_or_close",
+          "day": 15,
+          "condition": "no reply to steps 1-3",
+          "subject": "Sequencing the Ohio program",
+          "body": "Hi Jordan,\n\nAcme Foods announced an automation program for its Ohio yards [[SRC:E3]], and automation lands badly when the gate still runs on a clipboard.\n\nThe order of operations that held at Primo Brands is at https://yardflow.ai/order-of-operations/ if the sequencing question is live at Acme.\n\nWorth sending over the yard-network scorecard?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Worth sending over the yard-network scorecard?",
+          "evidence_ids": [
+            "E3"
+          ],
+          "claims_used": [],
+          "next_step": "if reply: engage directly; if silence: mark account cold"
+        }
+      ]
+    },
+    {
+      "person": "Riley Okafor",
+      "hubspot_contact_id": "100000000002",
+      "preferred_sender": "casey@example.com",
+      "touches": [
+        {
+          "step": 1,
+          "purpose": "earn_reply",
+          "day": 0,
+          "condition": "start",
+          "subject": "Ohio gate roles",
+          "body": "Hi Riley,\n\nAcme Foods posted three gate-clerk roles at the Ohio distribution center in August [[SRC:E1]]. Two of them are night shift.\n\nMy guess is the clerks exist to keep inbound trailers moving when the dock and the lot disagree about what is where.\n\nOpen to a quick call on it?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Open to a quick call on it?",
+          "evidence_ids": [
+            "E1"
+          ],
+          "claims_used": [],
+          "next_step": "if reply: engage directly; if silence: step 2 on day 4"
+        },
+        {
+          "step": 2,
+          "purpose": "clarify_consequence",
+          "day": 4,
+          "condition": "no reply to step 1",
+          "subject": "Dock doors and dwell",
+          "body": "Hi Riley,\n\nThe 110 dock doors at the Ohio distribution center likely receive from two yards that keep separate check-in sheets, so the same trailer can be waiting on one list and moving on the other.\n\nMy guess is the dispatch desk spends the first hour of every shift reconciling those two sheets.\n\nWorth sending over the yard-network scorecard?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Worth sending over the yard-network scorecard?",
+          "evidence_ids": [
+            "E1"
+          ],
+          "claims_used": [],
+          "next_step": "if reply: engage directly; if silence: step 3 on day 9"
+        },
+        {
+          "step": 3,
+          "purpose": "address_obstacle",
+          "day": 9,
+          "condition": "no reply to steps 1-2",
+          "subject": "Half the turn is waiting",
+          "body": "Hi Riley,\n\nAcme Foods posted three gate-clerk roles at the Ohio distribution center in August [[SRC:E1]], and a clerk hire usually means the check-in line is being managed by hand.\n\nMy guess is the same split holds in Ohio: at Primo, half of the turn was pure wait, not the physical move, measured in a side-by-side pilot.\n\nReply and I'll send the short version.\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Reply and I'll send the short version.",
+          "evidence_ids": [
+            "E1"
+          ],
+          "claims_used": [
+            "INF-007"
+          ],
+          "next_step": "if reply: engage directly; if silence: step 4 on day 15"
+        },
+        {
+          "step": 4,
+          "purpose": "next_step_or_close",
+          "day": 15,
+          "condition": "no reply to steps 1-3",
+          "subject": "Ohio Gate Comparison Note",
+          "body": "Hi Riley,\n\nMy guess is the two Ohio yards will keep disagreeing about dwell until one check-in routine runs at both, and pricing is the usual reason that conversation stalls.\n\nThe proof page at https://yardflow.ai/proof/ shows what one common routine looked like at Primo Brands.\n\nWorth sending over the yard-network scorecard?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "cta": "Worth sending over the yard-network scorecard?",
+          "evidence_ids": [
+            "E1"
+          ],
+          "claims_used": [
+            "CR-021"
+          ],
+          "next_step": "if reply: engage directly; if silence: mark account cold"
+        }
+      ]
+    }
+  ],
+  "reply_handling": {},
+  "branch_drafts": [],
+  "stop_rules": "a real reply stops that person's plan",
+  "archived_sequences": [
+    {
+      "person": "Sam Archived",
+      "hubspot_contact_id": "100000000003",
+      "preferred_sender": "casey@example.com",
+      "touches": [],
+      "archived_at": "2026-09-13T00:00:00Z",
+      "reason": "no longer in roster selected_people after rebuild"
+    }
+  ],
+  "revision": 1
+}
