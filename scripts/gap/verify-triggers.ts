@@ -553,6 +553,12 @@ const guards: Guard[] = [
       await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET rendered_steps_hash = 'h' ${W}`, 'rendered_steps_hash');
       await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET enrolled_at = now() - interval '1 day' ${W}`, 'enrolled_at');
       await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET legacy = true ${W}`, 'legacy');
+      // R3-N6: identity of the send never moves either.
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET is_test = true ${W}`, 'is_test (R3-N6)');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET persona_id = 1 ${W}`, 'persona_id (R3-N6)');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET account_name = ${q(`GAP Verify Other ${TAG}`)} ${W}`, 'account_name (R3-N6)');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET owner = 'someone@example.com' ${W}`, 'owner (R3-N6)');
+      await expectRefused(tx, g, T, `UPDATE sequence_enrollments SET sender = 'someone@example.com' ${W}`, 'sender (R3-N6)');
       await expectOk(tx, g, `UPDATE sequence_enrollments SET status = 'paused', current_step_index = 1, external_state = '{"enrolled":true}'::jsonb, external_synced_at = now() ${W}`, 'status/step/readback');
       await expectOk(tx, g, `UPDATE sequence_enrollments SET status = 'stopped', stop_reason = 'replied', stopped_at = now(), stopped_by = 'verify' ${W}`, 'stop with reason');
     },

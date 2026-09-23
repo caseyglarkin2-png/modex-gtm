@@ -14,7 +14,8 @@
 -- assert the reason, not just "it failed":
 --   GAP_VERSION_FROZEN      sequence_versions: only draft rows change; draft -> frozen only by a citing live enrollment;
 --                           frozen -> retired is the one exception; a row is inserted frozen only by an import (R3-7b)
---   GAP_ENROLLMENT_PIN      sequence_enrollments: the pins never move after insert; the one backfill arm is R3-1
+--   GAP_ENROLLMENT_PIN      sequence_enrollments: the pins (incl. is_test, persona_id, account_name, owner, sender; R3-N6)
+--                           never move after insert; the one backfill arm is R3-1
 --   GAP_APPEND_ONLY         sequence_copy_events, hypothesis_events, gap_audit_events: no UPDATE, no DELETE
 --   GAP_BID_IMMUTABLE       buyer_input_data: raw language and identity write-once; nothing moves once confirmed; no DELETE
 --   GAP_SIGNAL_FROZEN       prospecting_signals: fact columns frozen after insert (only metadata moves)
@@ -307,6 +308,14 @@ BEGIN
   IF NOT backfill AND NEW.rendered_steps_hash IS DISTINCT FROM OLD.rendered_steps_hash THEN changed := array_append(changed, 'rendered_steps_hash'); END IF;
   IF NEW.enrolled_at IS DISTINCT FROM OLD.enrolled_at THEN changed := array_append(changed, 'enrolled_at'); END IF;
   IF NEW.legacy IS DISTINCT FROM OLD.legacy THEN changed := array_append(changed, 'legacy'); END IF;
+  -- R3-N6: who was enrolled, by whom, as what. is_test decides whether the
+  -- row froze its version and whether it counts as a real send; flipping it
+  -- after insert rewrites that history.
+  IF NEW.is_test IS DISTINCT FROM OLD.is_test THEN changed := array_append(changed, 'is_test'); END IF;
+  IF NEW.persona_id IS DISTINCT FROM OLD.persona_id THEN changed := array_append(changed, 'persona_id'); END IF;
+  IF NEW.account_name IS DISTINCT FROM OLD.account_name THEN changed := array_append(changed, 'account_name'); END IF;
+  IF NEW.owner IS DISTINCT FROM OLD.owner THEN changed := array_append(changed, 'owner'); END IF;
+  IF NEW.sender IS DISTINCT FROM OLD.sender THEN changed := array_append(changed, 'sender'); END IF;
 
   IF array_length(changed, 1) > 0 THEN
     RAISE EXCEPTION 'GAP_ENROLLMENT_PIN: sequence_enrollments.% refused change to %', OLD.id, array_to_string(changed, ',');
