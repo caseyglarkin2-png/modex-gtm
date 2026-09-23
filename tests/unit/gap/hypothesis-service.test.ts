@@ -128,11 +128,49 @@ describe('proposeHypothesis', () => {
     prisma.tx.hypothesisSignal.createMany.mockResolvedValue({ count: 2 });
   });
 
-  it('refuses with no_signals and writes nothing when signalIds is empty', async () => {
+  it('refuses with no_signals and writes nothing when an observation is given with empty signalIds', async () => {
     const out = await proposeHypothesis(prisma, proposeInput({ signalIds: [], primarySignalId: null }));
     expect(out).toEqual({ ok: false, reason: 'no_signals' });
     expect(prisma.$transaction).not.toHaveBeenCalled();
     expect(prisma.prospectingSignal.findMany).not.toHaveBeenCalled();
+  });
+
+  it('accepts an empty observation with empty signalIds as a draft that needs facts: needsObservation metadata, zero join rows', async () => {
+    const out = await proposeHypothesis(
+      prisma,
+      proposeInput({ observation: '', signalIds: [], primarySignalId: null, metadata: { source: 'pic' } }),
+    );
+    expect(out).toEqual({ ok: true, id: 'H_new', status: 'draft' });
+    expect(prisma.prospectingSignal.findMany).not.toHaveBeenCalled();
+
+    const create = prisma.tx.prospectingHypothesis.create.mock.calls[0][0];
+    expect(create.data.status).toBe('draft');
+    expect(create.data.observation).toBe('');
+    expect(create.data.metadata).toEqual({ source: 'pic', needsObservation: true });
+    expect(prisma.tx.hypothesisSignal.createMany).not.toHaveBeenCalled();
+    expect(prisma.tx.hypothesisEvent.create.mock.calls[0][0].data).toMatchObject({
+      hypothesis_id: 'H_new',
+      from_status: null,
+      to_status: 'draft',
+      action: 'propose',
+    });
+  });
+
+  it('accepts linked signals with an empty observation (facts linked, prose not yet written)', async () => {
+    const out = await proposeHypothesis(prisma, proposeInput({ observation: '' }));
+    expect(out).toEqual({ ok: true, id: 'H_new', status: 'draft' });
+    expect(prisma.prospectingSignal.findMany).toHaveBeenCalledTimes(1);
+
+    const create = prisma.tx.prospectingHypothesis.create.mock.calls[0][0];
+    expect(create.data.observation).toBe('');
+    expect(create.data.metadata).toEqual({ needsObservation: true });
+    expect(prisma.tx.hypothesisSignal.createMany.mock.calls[0][0].data).toHaveLength(2);
+  });
+
+  it('does not flag needsObservation when the observation is present', async () => {
+    await proposeHypothesis(prisma, proposeInput({ metadata: { source: 'pic' } }));
+    const create = prisma.tx.prospectingHypothesis.create.mock.calls[0][0];
+    expect(create.data.metadata).toEqual({ source: 'pic' });
   });
 
   it('names the unknown signal id', async () => {

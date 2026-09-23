@@ -180,6 +180,17 @@ function joinRows(hypothesisId: string, signalIds: readonly string[], primarySig
   }));
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+/** Merge `needsObservation: true` into caller metadata; a non-object value is kept under `meta`. */
+function withNeedsObservation(metadata: unknown): Record<string, unknown> {
+  if (metadata === undefined || metadata === null) return { needsObservation: true };
+  if (isPlainObject(metadata)) return { ...metadata, needsObservation: true };
+  return { meta: metadata, needsObservation: true };
+}
+
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
 }
@@ -201,15 +212,29 @@ class StaleStatusError extends Error {
  * Create a hypothesis in `draft`. Guards run before any write; the row, its
  * signal links and the `propose` event land in one transaction. No audit
  * fan-out: submit is a separate action and is what the review feed sees.
+ *
+ * A draft is the seller's work in progress, so two incomplete shapes are
+ * accepted: no observation and no signals (a PIC-seeded inference that still
+ * needs facts, stored with `metadata.needsObservation = true`), and signals
+ * linked but no prose yet. A non-empty observation must validate against a
+ * non-empty signal set. The machine's submit guard (`no_signals`,
+ * `empty_observation`) keeps every incomplete draft from advancing.
  */
 export async function proposeHypothesis(prisma: any, input: ProposeInput): Promise<ProposeResult> {
-  if (input.signalIds.length === 0) return { ok: false, reason: 'no_signals' };
+  const hasObservation = input.observation.trim().length > 0;
+  const hasSignals = input.signalIds.length > 0;
 
-  const unknown = await firstUnknownSignal(prisma, input.signalIds);
-  if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
+  if (hasObservation && !hasSignals) return { ok: false, reason: 'no_signals' };
 
-  const observation = validateObservation(input.observation, input.signalIds);
-  if (!observation.ok) return { ok: false, reason: observation.reason };
+  if (hasSignals) {
+    const unknown = await firstUnknownSignal(prisma, input.signalIds);
+    if (unknown !== null) return { ok: false, reason: `unknown_signal:${unknown}` };
+  }
+
+  if (hasObservation) {
+    const observation = validateObservation(input.observation, input.signalIds);
+    if (!observation.ok) return { ok: false, reason: observation.reason };
+  }
 
   if (!isConfidence(input.confidence)) return { ok: false, reason: 'bad_confidence' };
 
@@ -242,13 +267,16 @@ export async function proposeHypothesis(prisma: any, input: ProposeInput): Promi
     source_ref: input.sourceRef ?? null,
     created_by: input.createdBy,
   };
-  if (input.metadata !== undefined) data.metadata = input.metadata;
+  const metadata = hasObservation ? input.metadata : withNeedsObservation(input.metadata);
+  if (metadata !== undefined) data.metadata = metadata;
 
   const id: string = await prisma.$transaction(async (tx: any) => {
     const created = await tx.prospectingHypothesis.create({ data, select: { id: true } });
-    await tx.hypothesisSignal.createMany({
-      data: joinRows(created.id, input.signalIds, input.primarySignalId, input.createdBy),
-    });
+    if (hasSignals) {
+      await tx.hypothesisSignal.createMany({
+        data: joinRows(created.id, input.signalIds, input.primarySignalId, input.createdBy),
+      });
+    }
     await recordHypothesisEvent(prisma, tx, {
       hypothesisId: created.id,
       fromStatus: null,
