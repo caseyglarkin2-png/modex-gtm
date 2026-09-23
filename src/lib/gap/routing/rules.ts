@@ -9,6 +9,7 @@
  * Pure: no Prisma, no fetch, no clock. Time comes from `inputs.now`.
  */
 
+import { normalizeScore } from '../../pounce/fit';
 import { PING_THRESHOLD } from '../../pounce/score';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
 import type { RoutingAction, RoutingLane } from '../taxonomy';
@@ -42,6 +43,16 @@ export const ACTION_BONUS: Record<RoutingAction, number> = {
   nurture: 0,
   do_not_contact: 0,
 };
+
+/**
+ * The hot-trigger threshold on the NORMALIZED 0-100 scale the assembler feeds
+ * as `freshTriggers[].normScore`. PING_THRESHOLD (8) is a RAW news score;
+ * comparing normScore against it directly would read a weak normalized news
+ * score as hot. Derived exactly as ACCOUNT_TRIGGER_SQL_THRESHOLD in
+ * src/lib/revops/qualification/model.ts, so the two cannot drift apart.
+ * `RoutingFreshness.hotTriggerNormThreshold` overrides it per run.
+ */
+export const HOT_TRIGGER_NORM_THRESHOLD = normalizeScore(PING_THRESHOLD, 'news');
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -82,16 +93,21 @@ function hypothesisExpired(i: RoutingInputs): boolean {
   return exp != null && exp.getTime() <= i.now.getTime();
 }
 
-/** A fresh public trigger at or above the ping tier within the hot window. */
+export function hotTriggerNormThreshold(i: RoutingInputs): number {
+  return i.freshness.hotTriggerNormThreshold ?? HOT_TRIGGER_NORM_THRESHOLD;
+}
+
+/** A fresh trigger at or above the normalized ping tier within the hot window. */
 export function hotTrigger(i: RoutingInputs) {
   const { hotTriggerDays } = i.freshness;
+  const threshold = hotTriggerNormThreshold(i);
   return i.signals.freshTriggers.find(
-    (t) => t.normScore >= PING_THRESHOLD && withinDays(i.now, t.firstSeenAt, hotTriggerDays),
+    (t) => t.normScore >= threshold && withinDays(i.now, t.firstSeenAt, hotTriggerDays),
   );
 }
 
 /**
- * "Hot" = a fresh trigger at or above PING_THRESHOLD within hotTriggerDays,
+ * "Hot" = a fresh trigger with normScore at or above HOT_TRIGGER_NORM_THRESHOLD within hotTriggerDays,
  * OR a verified email reply, OR fresh account intent at or above 60.
  * The intent legs are private inputs: they may drive the rule but never explain text.
  */

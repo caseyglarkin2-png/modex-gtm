@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { PING_THRESHOLD } from '@/lib/pounce/score';
-import { RULES, priorityFor } from '@/lib/gap/routing/rules';
+import { HOT_TRIGGER_NORM_THRESHOLD, RULES, priorityFor } from '@/lib/gap/routing/rules';
 import { FORBIDDEN_EXPLAIN_PATTERNS, assertExplainClean } from '@/lib/gap/routing/explain';
 import { routeAll, routePersona } from '@/lib/gap/routing/route';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
@@ -99,8 +99,8 @@ function withHotTrigger(inputs: RoutingInputs, title = 'Acme Foods launches yard
   inputs.signals.freshTriggers = [
     {
       id: 'sig-hot',
-      score: 12,
-      normScore: PING_THRESHOLD,
+      score: PING_THRESHOLD,
+      normScore: HOT_TRIGGER_NORM_THRESHOLD,
       categories: ['autonomy'],
       firstSeenAt: daysAgo(2),
       title,
@@ -361,13 +361,44 @@ describe('routePersona, one rule at a time', () => {
     staleIntent.account.lastIntentAt = daysAgo(8);
     expect(decision(routePersona(staleIntent)).ruleId).toBe('enroll');
 
-    const belowPing = withHotTrigger(base());
-    belowPing.signals.freshTriggers[0].normScore = PING_THRESHOLD - 1;
-    expect(decision(routePersona(belowPing)).ruleId).toBe('enroll');
-
     const oldTrigger = withHotTrigger(base());
     oldTrigger.signals.freshTriggers[0].firstSeenAt = daysAgo(8);
     expect(decision(routePersona(oldTrigger)).ruleId).toBe('enroll');
+  });
+
+  it('hot-trigger threshold is PING_THRESHOLD normalized as a news score (8 x 5.5 = 44), not the raw 8', () => {
+    expect(HOT_TRIGGER_NORM_THRESHOLD).toBe(44);
+    expect(HOT_TRIGGER_NORM_THRESHOLD).toBe(PING_THRESHOLD * 5.5);
+
+    const justBelow = withHotTrigger(base());
+    justBelow.signals.freshTriggers[0].normScore = HOT_TRIGGER_NORM_THRESHOLD - 1;
+    expect(decision(routePersona(justBelow)).ruleId).toBe('enroll');
+
+    const atThreshold = withHotTrigger(base());
+    atThreshold.signals.freshTriggers[0].normScore = HOT_TRIGGER_NORM_THRESHOLD;
+    expect(decision(routePersona(atThreshold)).ruleId).toBe('hot_call');
+
+    const above = withHotTrigger(base());
+    above.signals.freshTriggers[0].normScore = 100;
+    expect(decision(routePersona(above)).ruleId).toBe('hot_call');
+
+    // A weak normalized news score that happens to clear the RAW constant is not hot.
+    const weakNormalized = withHotTrigger(base());
+    weakNormalized.signals.freshTriggers[0].score = 2;
+    weakNormalized.signals.freshTriggers[0].normScore = 11;
+    expect(decision(routePersona(weakNormalized)).ruleId).toBe('enroll');
+  });
+
+  it('freshness.hotTriggerNormThreshold overrides the derived threshold', () => {
+    const lowered = withHotTrigger(base());
+    lowered.signals.freshTriggers[0].normScore = 20;
+    lowered.freshness.hotTriggerNormThreshold = 20;
+    expect(decision(routePersona(lowered)).ruleId).toBe('hot_call');
+
+    const raised = withHotTrigger(base());
+    raised.signals.freshTriggers[0].normScore = HOT_TRIGGER_NORM_THRESHOLD;
+    raised.freshness.hotTriggerNormThreshold = HOT_TRIGGER_NORM_THRESHOLD + 1;
+    expect(decision(routePersona(raised)).ruleId).toBe('enroll');
   });
 
   it('R15 hot_email: hot without a usable phone but with a valid email routes one_off_email', () => {

@@ -110,6 +110,12 @@ export interface RoutingFreshness {
   hypothesisTtlDays: number;
   hotTriggerDays: number;
   cooldownDays: number;
+  /**
+   * Hot-trigger threshold on the normalized 0-100 `normScore` scale. Defaults
+   * to `HOT_TRIGGER_NORM_THRESHOLD` in rules.ts (PING_THRESHOLD normalized as a
+   * news score); set it only to pin a number in a test or a deliberate run.
+   */
+  hotTriggerNormThreshold?: number;
 }
 
 export type SuppressionLegVerdict = 'clear' | 'hit' | 'unknown';
