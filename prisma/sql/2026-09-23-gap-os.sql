@@ -16,8 +16,9 @@
 --   GAP_ENROLLMENT_PIN      sequence_enrollments: the pins never move after insert
 --   GAP_APPEND_ONLY         sequence_copy_events, hypothesis_events, gap_audit_events: no UPDATE, no DELETE
 --   GAP_BID_IMMUTABLE       buyer_input_data: raw language and identity write-once; nothing moves once confirmed; no DELETE
---   GAP_SIGNAL_FROZEN       prospecting_signals: fact columns frozen after insert
---   GAP_HYPOTHESIS_FROZEN   prospecting_hypotheses narrative frozen past review; hypothesis_signals cannot unlink past review
+--   GAP_SIGNAL_FROZEN       prospecting_signals: fact columns frozen after insert (only metadata moves)
+--   GAP_HYPOTHESIS_FROZEN   prospecting_hypotheses narrative frozen past review; hypothesis_signals cannot unlink or re-point past review
+--   GAP_HYPOTHESIS_UNSUPPORTED  prospecting_hypotheses cannot enter approved/active without reviewed_by and one evidenced linked signal
 --   GAP_DISPOSITION_FROZEN  conversation_dispositions: classes and buyer language frozen once confirmed; confirmation never reverts
 -- CHECK constraints are named gap_ck_<table>_<column> so a violation names itself.
 
@@ -347,7 +348,8 @@ CREATE TRIGGER gap_bid_guard_del
   FOR EACH ROW EXECUTE FUNCTION gap_bid_guard();
 
 -- ---------------------------------------------------------------------------
--- 8. prospecting_signals: fact columns frozen after insert (GAP_SIGNAL_FROZEN)
+-- 8. prospecting_signals: fact columns frozen after insert (GAP_SIGNAL_FROZEN);
+--    only metadata may change
 -- ---------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION gap_signal_guard()
@@ -366,6 +368,12 @@ BEGIN
   IF NEW.source_id IS DISTINCT FROM OLD.source_id THEN changed := array_append(changed, 'source_id'); END IF;
   IF NEW.source_type IS DISTINCT FROM OLD.source_type THEN changed := array_append(changed, 'source_type'); END IF;
   IF NEW.claim_class IS DISTINCT FROM OLD.claim_class THEN changed := array_append(changed, 'claim_class'); END IF;
+  -- An operator fact must never flip to public, a fact never moves accounts,
+  -- confidence is set at registration, and expiry is never extended.
+  IF NEW.external_ok IS DISTINCT FROM OLD.external_ok THEN changed := array_append(changed, 'external_ok'); END IF;
+  IF NEW.account_name IS DISTINCT FROM OLD.account_name THEN changed := array_append(changed, 'account_name'); END IF;
+  IF NEW.confidence IS DISTINCT FROM OLD.confidence THEN changed := array_append(changed, 'confidence'); END IF;
+  IF NEW.freshness_expires_at IS DISTINCT FROM OLD.freshness_expires_at THEN changed := array_append(changed, 'freshness_expires_at'); END IF;
 
   IF array_length(changed, 1) > 0 THEN
     RAISE EXCEPTION 'GAP_SIGNAL_FROZEN: prospecting_signals.% refused change to % (register a new signal instead)', OLD.id, array_to_string(changed, ',');
@@ -391,6 +399,26 @@ AS $$
 DECLARE
   changed text[] := ARRAY[]::text[];
 BEGIN
+  -- R1-7 begin: the machine's approve/activate guards, enforced at the DB.
+  -- Entering approved or active requires a reviewer and at least one linked
+  -- signal that carries evidence (a url or first-party text). Code checks
+  -- expiry and suppression; this is the floor nothing can bypass.
+  IF NEW.status IN ('approved', 'active') AND OLD.status NOT IN ('approved', 'active') THEN
+    IF NEW.reviewed_by IS NULL THEN
+      RAISE EXCEPTION 'GAP_HYPOTHESIS_UNSUPPORTED: prospecting_hypotheses.% cannot become % without reviewed_by', OLD.id, NEW.status;
+    END IF;
+    IF NOT EXISTS (
+      SELECT 1
+        FROM hypothesis_signals hs
+        JOIN prospecting_signals s ON s.id = hs.signal_id
+       WHERE hs.hypothesis_id = NEW.id
+         AND (s.evidence_url IS NOT NULL OR s.evidence_text IS NOT NULL)
+    ) THEN
+      RAISE EXCEPTION 'GAP_HYPOTHESIS_UNSUPPORTED: prospecting_hypotheses.% cannot become % without a linked signal carrying evidence_url or evidence_text', OLD.id, NEW.status;
+    END IF;
+  END IF;
+  -- R1-7 end
+
   IF OLD.status IN ('draft', 'review_required') THEN
     RETURN NEW;
   END IF;
@@ -404,6 +432,11 @@ BEGIN
   IF NEW.what_a_no_means IS DISTINCT FROM OLD.what_a_no_means THEN changed := array_append(changed, 'what_a_no_means'); END IF;
   IF NEW.problem_family IS DISTINCT FROM OLD.problem_family THEN changed := array_append(changed, 'problem_family'); END IF;
   IF NEW.persona IS DISTINCT FROM OLD.persona THEN changed := array_append(changed, 'persona'); END IF;
+  IF NEW.confidence IS DISTINCT FROM OLD.confidence THEN changed := array_append(changed, 'confidence'); END IF;
+  IF NEW.secondary_families IS DISTINCT FROM OLD.secondary_families THEN changed := array_append(changed, 'secondary_families'); END IF;
+  IF NEW.contrary_evidence IS DISTINCT FROM OLD.contrary_evidence THEN changed := array_append(changed, 'contrary_evidence'); END IF;
+  IF NEW.predicted_buyer_language IS DISTINCT FROM OLD.predicted_buyer_language THEN changed := array_append(changed, 'predicted_buyer_language'); END IF;
+  IF NEW.buying_center IS DISTINCT FROM OLD.buying_center THEN changed := array_append(changed, 'buying_center'); END IF;
 
   IF array_length(changed, 1) > 0 THEN
     RAISE EXCEPTION 'GAP_HYPOTHESIS_FROZEN: prospecting_hypotheses.% is %; refused change to % (reopen with a new row carrying supersedes_id)', OLD.id, OLD.status, array_to_string(changed, ',');
@@ -418,25 +451,44 @@ CREATE TRIGGER gap_hypothesis_guard
   BEFORE UPDATE ON prospecting_hypotheses
   FOR EACH ROW EXECUTE FUNCTION gap_hypothesis_guard();
 
--- hypothesis_signals: a link cannot be removed once the hypothesis left review.
+-- hypothesis_signals: a link cannot be removed or re-pointed once its
+-- hypothesis left review. Both ends are checked on UPDATE so a link cannot be
+-- moved out of, or into, a hypothesis that is past review.
 CREATE OR REPLACE FUNCTION gap_hypothesis_signal_unlink_guard()
 RETURNS trigger
 LANGUAGE plpgsql
 AS $$
 DECLARE
   parent_status text;
+  target_status text;
 BEGIN
   SELECT status INTO parent_status FROM prospecting_hypotheses WHERE id = OLD.hypothesis_id;
-  IF parent_status IS NOT NULL AND parent_status NOT IN ('draft', 'review_required') THEN
-    RAISE EXCEPTION 'GAP_HYPOTHESIS_FROZEN: hypothesis % is %; signal % cannot be unlinked', OLD.hypothesis_id, parent_status, OLD.signal_id;
+
+  IF TG_OP = 'DELETE' THEN
+    IF parent_status IS NOT NULL AND parent_status NOT IN ('draft', 'review_required') THEN
+      RAISE EXCEPTION 'GAP_HYPOTHESIS_FROZEN: hypothesis % is %; signal % cannot be unlinked', OLD.hypothesis_id, parent_status, OLD.signal_id;
+    END IF;
+    RETURN OLD;
   END IF;
-  RETURN OLD;
+
+  IF NEW.signal_id IS DISTINCT FROM OLD.signal_id OR NEW.hypothesis_id IS DISTINCT FROM OLD.hypothesis_id THEN
+    IF parent_status IS NOT NULL AND parent_status NOT IN ('draft', 'review_required') THEN
+      RAISE EXCEPTION 'GAP_HYPOTHESIS_FROZEN: hypothesis % is %; link to signal % cannot be re-pointed', OLD.hypothesis_id, parent_status, OLD.signal_id;
+    END IF;
+    IF NEW.hypothesis_id IS DISTINCT FROM OLD.hypothesis_id THEN
+      SELECT status INTO target_status FROM prospecting_hypotheses WHERE id = NEW.hypothesis_id;
+      IF target_status IS NOT NULL AND target_status NOT IN ('draft', 'review_required') THEN
+        RAISE EXCEPTION 'GAP_HYPOTHESIS_FROZEN: hypothesis % is %; a link cannot be moved into it', NEW.hypothesis_id, target_status;
+      END IF;
+    END IF;
+  END IF;
+  RETURN NEW;
 END;
 $$;
 
 DROP TRIGGER IF EXISTS gap_hypothesis_signal_unlink_guard ON hypothesis_signals;
 CREATE TRIGGER gap_hypothesis_signal_unlink_guard
-  BEFORE DELETE ON hypothesis_signals
+  BEFORE UPDATE OR DELETE ON hypothesis_signals
   FOR EACH ROW EXECUTE FUNCTION gap_hypothesis_signal_unlink_guard();
 
 -- ---------------------------------------------------------------------------

@@ -1312,8 +1312,8 @@ model ForPage {
 /// knowledge) and by operators; ingest never dual-writes. `(source_kind,
 /// source_id)` makes registration idempotent. The fact fields (title, summary,
 /// evidence, observed_at, source identity, claim_class) are frozen after insert
-/// by trigger GAP_SIGNAL_FROZEN; only confidence, freshness, external_ok and
-/// metadata may move.
+/// by trigger GAP_SIGNAL_FROZEN, as are account_name, confidence, external_ok
+/// and freshness_expires_at; only metadata may move.
 model ProspectingSignal {
   id                   String    @id @default(cuid())
   account_name         String

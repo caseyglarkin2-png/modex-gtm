@@ -559,7 +559,7 @@ const guards: Guard[] = [
       await expectRefused(tx, g, T, `UPDATE prospecting_signals SET source_id = 'other' ${W}`, 'source_id');
       await expectRefused(tx, g, T, `UPDATE prospecting_signals SET source_type = 'crm' ${W}`, 'source_type');
       await expectRefused(tx, g, T, `UPDATE prospecting_signals SET claim_class = 'FACT' ${W}`, 'claim_class');
-      await expectOk(tx, g, `UPDATE prospecting_signals SET confidence = 80, freshness_expires_at = now() + interval '30 days', external_ok = false, metadata = '{"seen":1}'::jsonb ${W}`, 'confidence/freshness/external_ok/metadata');
+      await expectOk(tx, g, `UPDATE prospecting_signals SET metadata = '{"seen":1}'::jsonb ${W}`, 'metadata');
     },
   },
   {
@@ -580,7 +580,7 @@ const guards: Guard[] = [
       await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET what_a_no_means = 'n' ${W}`, 'what_a_no_means');
       await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET problem_family = 'cost_to_ship' ${W}`, 'problem_family');
       await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET persona = 'finance_procurement' ${W}`, 'persona');
-      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'confirmed', resolved_at = now(), resolved_by = 'verify', resolution = '{"problem":"confirmed"}'::jsonb, contrary_evidence = 'none' ${W}`, 'active: non-narrative columns');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'confirmed', resolved_at = now(), resolved_by = 'verify', resolution = '{"problem":"confirmed"}'::jsonb, metadata = '{"note":1}'::jsonb ${W}`, 'active: non-narrative columns');
       await expectOk(tx, g, `UPDATE prospecting_hypotheses SET observation = 'rewritten [S:y]', problem_family = 'cost_to_ship' WHERE id = ${q(draft)}`, 'draft: narrative');
       await expectOk(tx, g, `UPDATE prospecting_hypotheses SET observation = 'rewritten [S:y]' WHERE id = ${q(review)}`, 'review_required: narrative');
     },
@@ -596,6 +596,106 @@ const guards: Guard[] = [
       await expectRefused(tx, g, 'gap_ck_hypothesis_signals_role', `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(draft)}, ${q(await insertSignal(tx, account))}, 'decorative')`, 'role=decorative');
       await expectRefused(tx, g, 'GAP_HYPOTHESIS_FROZEN', `DELETE FROM hypothesis_signals WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sig)}`, 'unlink from active');
       await expectOk(tx, g, `DELETE FROM hypothesis_signals WHERE hypothesis_id = ${q(draft)} AND signal_id = ${q(sig)}`, 'unlink from draft');
+    },
+  },
+  {
+    name: 'GAP_HYPOTHESIS_FROZEN re-point link by update (R1-6)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_HYPOTHESIS_FROZEN';
+      const sigA = await insertSignal(tx, account);
+      const sigB = await insertSignal(tx, account);
+      const sigC = await insertSignal(tx, account);
+      const draft = await insertHypothesis(tx, account);
+      const draft2 = await insertHypothesis(tx, account);
+      const active = await insertHypothesis(tx, account, { status: q('active') });
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id, role) VALUES (${q(active)}, ${q(sigA)}, 'primary'), (${q(draft)}, ${q(sigB)}, 'primary')`, 'link');
+      await expectRefused(tx, g, T, `UPDATE hypothesis_signals SET signal_id = ${q(sigC)} WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sigA)}`, 'active: re-point signal_id');
+      await expectRefused(tx, g, T, `UPDATE hypothesis_signals SET hypothesis_id = ${q(draft2)} WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sigA)}`, 'active: move link out');
+      await expectRefused(tx, g, T, `UPDATE hypothesis_signals SET hypothesis_id = ${q(active)} WHERE hypothesis_id = ${q(draft)} AND signal_id = ${q(sigB)}`, 'draft: move link INTO active');
+      await expectOk(tx, g, `UPDATE hypothesis_signals SET role = 'supporting' WHERE hypothesis_id = ${q(active)} AND signal_id = ${q(sigA)}`, 'active: role only');
+      await expectOk(tx, g, `UPDATE hypothesis_signals SET signal_id = ${q(sigC)} WHERE hypothesis_id = ${q(draft)} AND signal_id = ${q(sigB)}`, 'draft: re-point signal_id');
+      await expectOk(tx, g, `UPDATE hypothesis_signals SET hypothesis_id = ${q(draft2)} WHERE hypothesis_id = ${q(draft)} AND signal_id = ${q(sigC)}`, 'draft: move link to another draft');
+    },
+  },
+  {
+    name: 'GAP_HYPOTHESIS_UNSUPPORTED approve without reviewer (R1-7)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_HYPOTHESIS_UNSUPPORTED';
+      const sig = await insertSignal(tx, account, { evidence_url: q('https://example.com/fact') });
+      const hyp = await insertHypothesis(tx, account, { status: q('review_required') });
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id) VALUES (${q(hyp)}, ${q(sig)})`, 'link evidenced signal');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET status = 'approved' WHERE id = ${q(hyp)}`, 'approved with reviewed_by NULL');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET status = 'active', activated_at = now() WHERE id = ${q(hyp)}`, 'active with reviewed_by NULL');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'draft' WHERE id = ${q(hyp)}`, 'review_required -> draft needs nothing');
+    },
+  },
+  {
+    name: 'GAP_HYPOTHESIS_UNSUPPORTED approve without evidence (R1-7)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_HYPOTHESIS_UNSUPPORTED';
+      const bare = await insertSignal(tx, account);
+      const none = await insertHypothesis(tx, account, { status: q('review_required') });
+      const unevidenced = await insertHypothesis(tx, account, { status: q('review_required') });
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id) VALUES (${q(unevidenced)}, ${q(bare)})`, 'link a signal with no url and no text');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET status = 'approved', reviewed_by = 'verify', reviewed_at = now() WHERE id = ${q(none)}`, 'no linked signals');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET status = 'approved', reviewed_by = 'verify', reviewed_at = now() WHERE id = ${q(unevidenced)}`, 'linked signal without evidence');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'rejected', reviewed_by = 'verify' WHERE id = ${q(unevidenced)}`, 'withdraw needs no evidence');
+    },
+  },
+  {
+    name: 'GAP_HYPOTHESIS_UNSUPPORTED approve with reviewer and evidenced signal allowed (R1-7)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_HYPOTHESIS_UNSUPPORTED';
+      const bare = await insertSignal(tx, account);
+      const evidenced = await insertSignal(tx, account, { evidence_text: q('Anna is truck only.') });
+      const hyp = await insertHypothesis(tx, account, { status: q('review_required') });
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id) VALUES (${q(hyp)}, ${q(bare)}), (${q(hyp)}, ${q(evidenced)})`, 'link one bare and one evidenced signal');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'approved', reviewed_by = 'verify', reviewed_at = now() WHERE id = ${q(hyp)}`, 'approve');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'active', activated_at = now() WHERE id = ${q(hyp)}`, 'approved -> active');
+      // A second hypothesis goes draft -> active directly with the same evidence: allowed.
+      const hyp2 = await insertHypothesis(tx, account);
+      await expectOk(tx, g, `INSERT INTO hypothesis_signals (hypothesis_id, signal_id) VALUES (${q(hyp2)}, ${q(evidenced)})`, 'link evidenced');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET status = 'active' WHERE id = ${q(hyp2)}`, 'draft -> active without reviewer');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET status = 'active', reviewed_by = 'verify', reviewed_at = now(), activated_at = now() WHERE id = ${q(hyp2)}`, 'draft -> active with reviewer + evidence');
+    },
+  },
+  {
+    name: 'GAP_SIGNAL_FROZEN external_ok, account_name, confidence, freshness (R1-8)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_SIGNAL_FROZEN';
+      const other = `GAP Verify Other ${TAG}`;
+      await expectOk(tx, g, `INSERT INTO accounts (rank, name, vertical, updated_at) VALUES (9998, ${q(other)}, 'verify', now())`, 'second account');
+      const sig = await insertSignal(tx, account, { external_ok: 'false', freshness_expires_at: `now() + interval '7 days'` });
+      const W = `WHERE id = ${q(sig)}`;
+      await expectRefused(tx, g, T, `UPDATE prospecting_signals SET external_ok = true ${W}`, 'external_ok false -> true');
+      await expectRefused(tx, g, T, `UPDATE prospecting_signals SET external_ok = NULL ${W}`, 'external_ok false -> null');
+      await expectRefused(tx, g, T, `UPDATE prospecting_signals SET account_name = ${q(other)} ${W}`, 'account_name');
+      await expectRefused(tx, g, T, `UPDATE prospecting_signals SET confidence = 90 ${W}`, 'confidence');
+      await expectRefused(tx, g, T, `UPDATE prospecting_signals SET freshness_expires_at = now() + interval '90 days' ${W}`, 'freshness extended');
+      await expectRefused(tx, g, T, `UPDATE prospecting_signals SET freshness_expires_at = NULL ${W}`, 'freshness cleared');
+      await expectOk(tx, g, `UPDATE prospecting_signals SET metadata = '{"seen":2}'::jsonb, hubspot_company_id = '99', persona_id = NULL ${W}`, 'metadata and resolution pointers');
+    },
+  },
+  {
+    name: 'GAP_HYPOTHESIS_FROZEN confidence, secondary_families, contrary_evidence, predicted_buyer_language, buying_center (R1-9b)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_HYPOTHESIS_FROZEN';
+      const draft = await insertHypothesis(tx, account);
+      const active = await insertHypothesis(tx, account, { status: q('active') });
+      const W = `WHERE id = ${q(active)}`;
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET confidence = 41 ${W}`, 'confidence bump on active');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET secondary_families = '["cost_to_ship"]'::jsonb ${W}`, 'secondary_families');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET contrary_evidence = 'none' ${W}`, 'contrary_evidence');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET predicted_buyer_language = 'we lose trailers' ${W}`, 'predicted_buyer_language');
+      await expectRefused(tx, g, T, `UPDATE prospecting_hypotheses SET buying_center = 'ops' ${W}`, 'buying_center');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET confidence = 41, secondary_families = '["cost_to_ship"]'::jsonb, contrary_evidence = 'none', predicted_buyer_language = 'x', buying_center = 'ops' WHERE id = ${q(draft)}`, 'all five on draft');
+      await expectOk(tx, g, `UPDATE prospecting_hypotheses SET expires_at = now() + interval '30 days', sequence_family_id = NULL, metadata = '{"k":1}'::jsonb ${W}`, 'active: operational columns');
     },
   },
   {
