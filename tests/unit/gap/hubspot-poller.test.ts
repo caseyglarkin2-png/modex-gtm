@@ -28,8 +28,11 @@ const mockedStarted = vi.fn(async () => undefined);
 const mockedSuccess = vi.fn(async () => undefined);
 const mockedSkipped = vi.fn(async () => undefined);
 const mockedFailure = vi.fn(async () => undefined);
+/** S4-T4: ingest is a module mock; its own writes are reply-ingest.test.ts. */
+const mockedIngest = vi.fn<(...args: any[]) => Promise<any>>();
 
 vi.mock('@/lib/prisma', () => ({ prisma: { __tag: 'route-prisma' } }));
+vi.mock('@/lib/gap/replies/ingest', () => ({ ingestReply: mockedIngest }));
 vi.mock('@/lib/cron-idempotency', () => ({
   claimDailyRun: mockedClaim,
   releaseDailyRun: mockedRelease,
@@ -619,6 +622,114 @@ describe('S2-T9 structural: no HubSpot write path', () => {
       expect(src.includes('sequenceRun'), name).toBe(false);
       expect(src.includes('sequenceEnrollment'), name).toBe(false);
     }
+  });
+
+  it('S4-T4: the only sequence effect is the one ingestReply call, behind isGapOsEnabled(), after the InboundMessage upsert', () => {
+    expect(POLLER.match(/ingestReply\(/g)?.length).toBe(1);
+    expect(POLLER).toContain("from '@/lib/gap/replies/ingest'");
+    expect(POLLER.indexOf('isGapOsEnabled()')).toBeLessThan(POLLER.indexOf('ingestReply('));
+    expect(POLLER.indexOf('inboundMessage.upsert')).toBeLessThan(POLLER.indexOf('ingestReply('));
+    // No direct stop or pause of its own.
+    expect(POLLER).not.toMatch(/stopRun/);
+    expect(POLLER).not.toMatch(/pause\(/);
+    expect(POLLER).not.toMatch(/stop\(/);
+    expect(ROUTE).not.toContain('ingestReply');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// S4-T4: reply ingestion under the flag
+// ---------------------------------------------------------------------------
+
+describe('pollHubSpotReplies: S4-T4 reply ingestion', () => {
+  const savedFlag = process.env.GAP_OS_ENABLED;
+  beforeEach(() => {
+    delete process.env.GAP_OS_ENABLED;
+    mockedIngest.mockReset();
+    mockedIngest.mockResolvedValue({ ok: true, action: 'paused', enrollments: [{ id: 'enr_1' }], itemsStopped: 2 });
+  });
+  afterAll(() => {
+    if (savedFlag === undefined) delete process.env.GAP_OS_ENABLED;
+    else process.env.GAP_OS_ENABLED = savedFlag;
+  });
+
+  it('flag off: an apply run with a human reply never calls ingestReply and the report has no gap key', async () => {
+    const prisma = makePrisma();
+    const report = await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
+    expect(mockedIngest).not.toHaveBeenCalled();
+    expect('gap' in report).toBe(false);
+    expect(prisma.__store.messages.size).toBe(1);
+  });
+
+  it('flag on: exactly one ingestReply call per human reply, after the transaction, with the hubspot source, the local message id, the contact id and the verdict passed through', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrisma();
+    const order: string[] = [];
+    prisma.$transaction.mockImplementation(async (fn: (tx: any) => Promise<unknown>) => {
+      order.push('transaction');
+      return fn(prisma);
+    });
+    mockedIngest.mockImplementation(async () => {
+      order.push('ingest');
+      return { ok: true, action: 'paused', enrollments: [{ id: 'enr_1' }], itemsStopped: 2 };
+    });
+
+    const report = await pollHubSpotReplies(
+      prisma,
+      { now: NOW, dryRun: false },
+      { searchIncomingEmails: makeSearch([engagement(), OOO, STRANGER]) },
+    );
+
+    expect(mockedIngest).toHaveBeenCalledTimes(1);
+    const [client, arg] = mockedIngest.mock.calls[0];
+    expect(client).toBe(prisma);
+    expect(arg).toEqual({
+      contactEmail: 'pat@acme.example',
+      source: 'hubspot',
+      inboundMessageId: 'hs:5551',
+      hubspotContactId: CONTACT_ID,
+      receivedAt: engagement().timestamp,
+      isAutoresponder: false,
+      now: NOW,
+    });
+    expect(order).toEqual(['transaction', 'ingest']);
+    expect(report.gap).toEqual({ paused: 1, errors: [] });
+    // The rest of the report is what it was before.
+    expect(report).toMatchObject({ seen: 3, created: 1, unknownSender: 1, filtered: { auto_reply_subject: 1 } });
+  });
+
+  it('flag on: the out-of-office never reaches ingest (filtered before the InboundMessage)', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrisma();
+    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([OOO]) });
+    expect(mockedIngest).not.toHaveBeenCalled();
+  });
+
+  it('flag on, dry run: nothing is written and ingest is not called; the report carries no gap key', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrisma();
+    const report = await pollHubSpotReplies(prisma, { now: NOW, dryRun: true }, { searchIncomingEmails: makeSearch([engagement()]) });
+    expect(mockedIngest).not.toHaveBeenCalled();
+    expect('gap' in report).toBe(false);
+  });
+
+  it('flag on: a second apply run (dedup hit) does not call ingest again', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrisma();
+    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
+    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
+    expect(mockedIngest).toHaveBeenCalledTimes(1);
+  });
+
+  it('flag on: an ingest failure lands on report.gap.errors, the row stays written and the watermark still advances', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    mockedIngest.mockRejectedValue(new Error('enrollment table on fire'));
+    const prisma = makePrisma();
+    const report = await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
+    expect(report.gap).toEqual({ paused: 0, errors: ['hs:5551: enrollment table on fire'] });
+    expect(report.created).toBe(1);
+    expect(prisma.__store.messages.has('hs:5551')).toBe(true);
+    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(engagement().timestamp.toISOString());
   });
 });
 

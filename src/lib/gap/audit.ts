@@ -39,6 +39,7 @@ export type GapAuditKind =
   | 'disposition.recorded'
   | 'bid.captured'
   | 'bid.confirmed'
+  | 'reply.ingested'
   | 'enroll.shadow'
   | 'enroll.live'
   | 'enroll.row_emitted'

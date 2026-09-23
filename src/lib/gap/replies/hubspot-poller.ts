@@ -15,9 +15,14 @@
  *     changes nothing. The structural test greps this file for every write
  *     helper name the codebase owns and asserts the only `client.crm.*` call is
  *     `objects.emails.searchApi.doSearch`.
- *   - write an Activity, change Persona email_status, or stop a sequence run.
- *     Dispositions are Sprint 4; until then a reply is a fact in the inbox
- *     table and nothing else.
+ *   - write an Activity or change Persona email_status. With GAP_OS_ENABLED
+ *     off it does not touch a sequence either: a reply is a fact in the inbox
+ *     table and nothing else. S4-T4: with the flag ON, and only in apply mode,
+ *     each human reply is handed to `ingestReply` (replies/ingest.ts) AFTER
+ *     its InboundMessage is written; that module pauses the sender's live
+ *     enrollment through the enrollment service and skips its unsent modex
+ *     items. This file still owns no sequence write of its own, and a failure
+ *     inside ingest lands on `report.gap.errors`, never on the run.
  *   - treat an autoresponder as a reply. The same precision gate check-inbox
  *     runs (classifyInboundReply) runs here; a non-human verdict lands as a
  *     `filtered_inbound` notification (apply mode only) and never as an
@@ -49,6 +54,8 @@
  */
 
 import { classifyInboundReply } from '@/lib/email/reply-precision';
+import { isGapOsEnabled } from '@/lib/gap/flags';
+import { ingestReply } from '@/lib/gap/replies/ingest';
 import { getHubSpotClient, withHubSpotRetry } from '@/lib/hubspot/client';
 
 export const WATERMARK_KEY = 'gap_hubspot_replies_watermark';
@@ -103,6 +110,8 @@ export interface PollReport {
   /** R2-11: true when the run did not advance the watermark although it saw rows. */
   watermarkHeld: boolean;
   watermarkHeldReason: 'page_full' | null;
+  /** S4-T4: present only under GAP_OS_ENABLED in apply mode. */
+  gap?: { paused: number; errors: string[] };
 }
 
 interface ScopedPersona {
@@ -193,6 +202,9 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     watermarkHeld: false,
     watermarkHeldReason: null,
   };
+  // S4-T4: null when the flag is off (or dry run) so the report is unchanged.
+  const gap = !opts.dryRun && isGapOsEnabled() ? { paused: 0, errors: [] as string[] } : null;
+  if (gap) report.gap = gap;
 
   let newest: Date | null = null;
 
@@ -300,6 +312,27 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
         },
       });
     });
+
+    // S4-T4: the InboundMessage exists; hand the human reply to ingest so the
+    // sender's live enrollment pauses now. The verdict computed above is
+    // passed through as-is (it is human here, the filter `continue`d above).
+    if (gap) {
+      try {
+        const ingest = await ingestReply(prisma, {
+          contactEmail: fromEmail,
+          source: 'hubspot',
+          inboundMessageId: messageId,
+          hubspotContactId: persona.hubspot_contact_id,
+          receivedAt: engagement.timestamp,
+          isAutoresponder: !verdict.isHumanReply,
+          now: opts.now,
+        });
+        if (ingest.action === 'paused') gap.paused += 1;
+      } catch (ingestError) {
+        const message = ingestError instanceof Error ? ingestError.message : String(ingestError);
+        gap.errors.push(`${messageId}: ${message}`);
+      }
+    }
   }
 
   report.newest = newest ? newest.toISOString() : null;

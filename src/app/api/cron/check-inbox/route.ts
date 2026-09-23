@@ -11,6 +11,8 @@ import { INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
+import { isGapOsEnabled } from '@/lib/gap/flags';
+import { ingestReply } from '@/lib/gap/replies/ingest';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
@@ -75,6 +77,11 @@ export async function GET(request: Request) {
     let filtered = 0;
     let lowConfidence = 0;
     const filterReasons: Record<string, number> = {};
+    // S4-T4: reply ingestion under GAP_OS_ENABLED. Null when the flag is off so
+    // the report and the response stay byte identical to today.
+    const gapIngest: { paused: number; errors: string[] } | null = isGapOsEnabled()
+      ? { paused: 0, errors: [] }
+      : null;
 
     for (const reply of replies) {
       // Check if we already processed this message. Covers BOTH notification types
@@ -220,6 +227,30 @@ export async function GET(request: Request) {
         console.error('Failed to persist inbound message', persistError);
       }
 
+      // S4-T4: under the GAP flag a human reply (the precision gate passed it
+      // above) pauses the sender's live enrollment and stops its unsent items
+      // NOW, instead of waiting for the lazy reply-pause in send-deps.ts at
+      // the next send attempt. Flag off: `gapIngest` is null and nothing here
+      // runs, so the prisma call sequence is unchanged. Flag on: a failure is
+      // recorded on the run report and never fails the cron.
+      if (gapIngest) {
+        try {
+          const ingest = await ingestReply(prisma, {
+            contactEmail: reply.fromEmail,
+            source: 'gmail',
+            inboundMessageId: reply.messageId,
+            receivedAt: reply.receivedAt,
+            isAutoresponder: !verdict.isHumanReply,
+            now: new Date(),
+          });
+          if (ingest.action === 'paused') gapIngest.paused++;
+        } catch (ingestError) {
+          const message = ingestError instanceof Error ? ingestError.message : String(ingestError);
+          gapIngest.errors.push(`${reply.messageId}: ${message}`);
+          console.error('[check-inbox] GAP reply ingest failed', ingestError);
+        }
+      }
+
       // Create Activity if persona found
       if (persona) {
         await prisma.activity.create({
@@ -340,6 +371,7 @@ export async function GET(request: Request) {
         filtered,
         lowConfidence,
         filterReasons,
+        ...(gapIngest ? { gapReplyIngest: gapIngest } : {}),
       },
     }).catch(() => undefined);
 
@@ -354,6 +386,8 @@ export async function GET(request: Request) {
       filtered,
       filtered_reasons: filterReasons,
       low_confidence_accepted: lowConfidence,
+      // S4-T4: present only under GAP_OS_ENABLED.
+      ...(gapIngest ? { gap_reply_ingest: gapIngest } : {}),
     });
   } catch (error) {
     Sentry.captureException(error);
