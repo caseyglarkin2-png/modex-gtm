@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { validateToken } from '@/lib/email/unsubscribe-token';
-import { upsertContact } from '@/lib/hubspot/contacts';
+import { recordUnsubscribe } from '@/lib/email/unsubscribe';
 
 const UnsubscribeSchema = z.object({
   email: z.string().email('Valid email required'),
@@ -64,41 +64,22 @@ export async function POST(req: NextRequest) {
     }
     // else: no token but within backward-compat window — allow
 
-    // Check if already unsubscribed
-    const existing = await prisma.unsubscribedEmail.findUnique({
-      where: { email },
+    // The consent write path (UnsubscribedEmail + Persona.do_not_contact +
+    // the HubSpot hs_email_optout mirror) lives in recordUnsubscribe so the
+    // GAP do_not_contact disposition takes the identical path. Same call
+    // order and response bodies as before the extraction (S4-T1).
+    const result = await recordUnsubscribe(prisma, {
+      email,
+      source: 'unsubscribe_link',
+      emailLogId,
+      reason,
     });
 
-    if (existing) {
+    if (!result.created) {
       return NextResponse.json({
         success: true,
         message: 'Email already unsubscribed',
       });
-    }
-
-    // Add to unsubscribed list
-    await prisma.unsubscribedEmail.create({
-      data: {
-        email,
-        email_log_id: emailLogId,
-        reason,
-      },
-    });
-
-    // Also mark persona as do_not_contact
-    await prisma.persona.updateMany({
-      where: { email },
-      data: { do_not_contact: true },
-    });
-
-    // Sync opt-out to HubSpot (non-blocking, non-fatal)
-    try {
-      const persona = await prisma.persona.findFirst({ where: { email } });
-      if (persona?.hubspot_contact_id) {
-        await upsertContact({ email, hs_email_optout: 'true' });
-      }
-    } catch {
-      // HubSpot sync failure must not block unsubscribe
     }
 
     return NextResponse.json({
