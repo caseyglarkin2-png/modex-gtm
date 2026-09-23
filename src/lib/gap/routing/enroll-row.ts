@@ -20,8 +20,10 @@
  * SendApprovalRequest (`isApproved` in compiler/approval.ts). The rows are
  * the ones `scripts/gap/compile-top100.ts --persist` writes: they carry
  * `inputs_snapshot.contract.top100Compile.hubspotContactId` (the constant
- * TOP100_COMPILE_KEY in import/top100-compile.ts), and the newest row per
- * (contact, step_index) is the one that counts. Steps are checked in order
+ * TOP100_COMPILE_KEY in import/top100-compile.ts) AND a `created_by` that
+ * starts with `compile-top100` (the script's created_by value, R3-3: a row
+ * anyone else keyed to the contact does not count), and the newest such row
+ * per (contact, step_index) is the one that counts. Steps are checked in order
  * and the first problem names the skip: `compile_missing` when a step has no
  * row, `compile_not_passed:<stepIndex>` when it has one that is not a pass
  * or an approved review. `loadDecisions` evaluates the gate for every
@@ -32,11 +34,21 @@
  * modex_queue and build_required items keep their own reasons. The gate
  * reads no flag: this is the human enroll table, so GAP_AUTO_ENROLL does not
  * enter into it.
+ *
+ * Suppression (R3-2): an item may carry `suppressed`, the name of the leg that
+ * fired (`unsubscribed` | `modex_do_not_contact` | `bounced`, the same legs
+ * the enroll service and `enroll()` refuse on). Such a contact is listed
+ * under Skip as `suppressed:<leg>` before every other filter, because a
+ * suppressed address must never render under Enroll whatever else is true
+ * of it. `loadDecisions` fills it from the snapshot persona (`doNotContact`,
+ * a bounced `emailStatus`) and one `unsubscribedEmail` lookup on the
+ * lowercased email.
  */
 
 import type { PrismaClient } from '@prisma/client';
 import { isApproved } from '../compiler/approval';
 import { TOP100_COMPILE_KEY } from '../import/top100-compile';
+import { suppressionLegFor } from '../sequence/enrollment';
 import type { RoutingAction } from '../taxonomy';
 import { resolveLatestRunId } from './queue';
 import { resolveEnrollTarget } from './rules';
@@ -69,6 +81,9 @@ export const COMPILE_GATE_STEP_COUNT = 4;
 
 export const COMPILE_MISSING = 'compile_missing';
 
+/** The `created_by` prefix of rows scripts/gap/compile-top100.ts writes (its default createdBy; a run tag may follow). */
+export const TOP100_COMPILE_CREATED_BY_PREFIX = 'compile-top100';
+
 export function compileNotPassed(stepIndex: number): string {
   return `compile_not_passed:${stepIndex}`;
 }
@@ -92,6 +107,12 @@ export interface EnrollRowItem {
    * `compile_missing` (fail closed); ignored on non-native items.
    */
   compile?: CompileGateResult | null;
+  /** R3-2: the suppression leg that fired for this contact, or null/absent when clear. */
+  suppressed?: string | null;
+}
+
+export function suppressedReason(leg: string): string {
+  return `suppressed:${leg}`;
 }
 
 export interface EnrollContact {
@@ -179,6 +200,11 @@ export function buildEnrollRows(items: EnrollRowItem[]): EnrollTable {
       skipped.push(s);
     };
 
+    // Suppression wins over everything (R3-2): the leg is the reason.
+    if (typeof item.suppressed === 'string' && item.suppressed.length > 0) {
+      skip(suppressedReason(item.suppressed));
+      continue;
+    }
     // The lane's filter, in its order: a sequence_block wins over everything else.
     if (top100?.sequenceBlock) {
       skip(top100.sequenceBlock);
@@ -287,8 +313,8 @@ export function renderEnrollTableJson(table: EnrollTable): EnrollTableJson {
 // Reader: RoutingDecision rows -> items
 // ---------------------------------------------------------------------------
 
-/** The routing reader plus the two tables the compile gate reads (`gapCompile.findMany`, `sendApprovalRequest.findFirst`). */
-type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig' | 'gapCompile' | 'sendApprovalRequest'>;
+/** The routing reader plus the two tables the compile gate reads (`gapCompile.findMany`, `sendApprovalRequest.findFirst`) and the unsubscribed table (R3-2). */
+type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig' | 'gapCompile' | 'sendApprovalRequest' | 'unsubscribedEmail'>;
 
 type Obj = Record<string, unknown>;
 
@@ -376,12 +402,31 @@ export async function loadDecisions(prisma: DecisionReader, runId?: string): Pro
       preferredSender: optStr(snap.preferredSender),
       whatIKnow: optStr(snap.whatIKnow),
     };
+    item.suppressed = await loadSuppressionLeg(prisma, item.inputs.persona);
     if (targetOf(item) === 'hubspot_native') {
       item.compile = await loadCompileGate(prisma, item.inputs.persona.hubspotContactId ?? null);
     }
     items.push(item);
   }
   return items;
+}
+
+// ---------------------------------------------------------------------------
+// Suppression reader (R3-2)
+// ---------------------------------------------------------------------------
+
+type SuppressionLegReader = Pick<DecisionReader, 'unsubscribedEmail'>;
+
+/**
+ * The leg that suppresses this persona, or null: the unsubscribed table on
+ * the lowercased email (skipped when there is no email), then the snapshot's
+ * `doNotContact`, then a bounced `emailStatus`. Same precedence as the enroll
+ * service. Never writes.
+ */
+export async function loadSuppressionLeg(prisma: SuppressionLegReader, persona: RoutingInputs['persona']): Promise<string | null> {
+  const email = (persona.email ?? '').trim().toLowerCase();
+  const unsubscribed = email ? Boolean(await prisma.unsubscribedEmail.findUnique({ where: { email }, select: { id: true } })) : false;
+  return suppressionLegFor({ unsubscribed, doNotContact: persona.doNotContact === true, emailStatus: persona.emailStatus ?? null });
 }
 
 // ---------------------------------------------------------------------------
@@ -394,13 +439,16 @@ interface CompileGateRow {
   id: string;
   step_index: number | null;
   verdict: string;
+  created_by: string | null;
 }
 
 /**
  * Evaluate the compile gate for one Top100 contact (see the header). Reads
  * the compile rows keyed to the contact through
  * `inputs_snapshot.contract.<TOP100_COMPILE_KEY>.hubspotContactId`, newest
- * first, keeps the newest per step_index, then walks steps 0..3 in order:
+ * first, drops every row whose `created_by` does not start with
+ * TOP100_COMPILE_CREATED_BY_PREFIX (R3-3), keeps the newest per step_index,
+ * then walks steps 0..3 in order:
  * no row -> `compile_missing`; `pass` -> next step; `review_required` with an
  * approved request -> next step; anything else -> `compile_not_passed:<i>`.
  * A contact without a HubSpot id has no key to look up and is
@@ -416,13 +464,14 @@ export async function loadCompileGate(
   const raw = await prisma.gapCompile.findMany({
     where: { inputs_snapshot: { path: ['contract', TOP100_COMPILE_KEY, 'hubspotContactId'], equals: hubspotContactId } },
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
-    select: { id: true, step_index: true, verdict: true },
+    select: { id: true, step_index: true, verdict: true, created_by: true },
   });
   const rows: CompileGateRow[] = Array.isArray(raw) ? raw : [];
 
   const newestByStep = new Map<number, CompileGateRow>();
   for (const row of rows) {
     if (typeof row.step_index !== 'number') continue;
+    if (typeof row.created_by !== 'string' || !row.created_by.startsWith(TOP100_COMPILE_CREATED_BY_PREFIX)) continue;
     if (!newestByStep.has(row.step_index)) newestByStep.set(row.step_index, row);
   }
 

@@ -21,6 +21,8 @@ import {
   complete,
   confirmStop,
   enroll,
+  isSuppressed,
+  suppressionLegFor,
   pause,
   readbackShowsEnrolled,
   recordExternalEnrollment,
@@ -31,6 +33,11 @@ import {
   type EnrollInput,
   type RecordExternalEnrollmentInput,
 } from '@/lib/gap/sequence/enrollment';
+import { staticSuppressionReader, type SuppressionReader } from '@/lib/gap/routing/suppression-read';
+
+/** R3-10: every guard-order and happy-path case injects a CLEAR cross-plane reader; the reader itself is exercised below. */
+const CLEAR: SuppressionReader = staticSuppressionReader('clear');
+const OPTS = { suppression: CLEAR };
 
 const NOW = new Date('2026-09-23T15:00:00.000Z');
 
@@ -139,7 +146,7 @@ describe('enroll refusals, in guard order', () => {
   it('gap_disabled when the flag is off, before any read', async () => {
     delete process.env.GAP_OS_ENABLED;
     const prisma = makePrisma();
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'gap_disabled' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'gap_disabled' });
     expect(prisma.sequenceVersion.findUnique).not.toHaveBeenCalled();
     expect(prisma.$transaction).not.toHaveBeenCalled();
   });
@@ -147,7 +154,7 @@ describe('enroll refusals, in guard order', () => {
   it('version_retired before suppression is consulted', async () => {
     const prisma = makePrisma();
     prisma.sequenceVersion.findUnique.mockResolvedValue({ id: 'v1', family_id: 'fam_1', status: 'retired' });
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'version_retired' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'version_retired' });
     expect(prisma.unsubscribedEmail.findUnique).not.toHaveBeenCalled();
     expect(prisma.$transaction).not.toHaveBeenCalled();
   });
@@ -155,16 +162,16 @@ describe('enroll refusals, in guard order', () => {
   it('version_not_found and family_mismatch are distinct refusals', async () => {
     const prisma = makePrisma();
     prisma.sequenceVersion.findUnique.mockResolvedValueOnce(null);
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'version_not_found' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'version_not_found' });
     prisma.sequenceVersion.findUnique.mockResolvedValueOnce({ id: 'v1', family_id: 'fam_other', status: 'draft' });
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'family_mismatch' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'family_mismatch' });
     expect(prisma.$transaction).not.toHaveBeenCalled();
   });
 
   it('suppressed via unsubscribed_emails, looked up on the lowercased address, before already_enrolled', async () => {
     const prisma = makePrisma();
     prisma.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'suppressed' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'suppressed', leg: 'unsubscribed' });
     expect(prisma.unsubscribedEmail.findUnique.mock.calls[0][0]).toEqual({
       where: { email: 'jane.doe@acme-logistics.com' },
       select: { id: true },
@@ -176,15 +183,15 @@ describe('enroll refusals, in guard order', () => {
   it('suppressed via the persona do_not_contact flag', async () => {
     const prisma = makePrisma();
     prisma.persona.findUnique.mockResolvedValue({ do_not_contact: true });
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'suppressed' });
-    expect(prisma.persona.findUnique.mock.calls[0][0]).toEqual({ where: { id: 7 }, select: { do_not_contact: true } });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'suppressed', leg: 'modex_do_not_contact' });
+    expect(prisma.persona.findUnique.mock.calls[0][0]).toEqual({ where: { id: 7 }, select: { do_not_contact: true, email_status: true } });
     expect(prisma.sequenceEnrollment.findFirst).not.toHaveBeenCalled();
   });
 
   it('already_enrolled when a live enrollment exists for the address, before the hypothesis check', async () => {
     const prisma = makePrisma();
     prisma.sequenceEnrollment.findFirst.mockResolvedValue({ id: 'enr_live' });
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'already_enrolled' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'already_enrolled' });
     expect(prisma.sequenceEnrollment.findFirst.mock.calls[0][0]).toEqual({
       where: { to_email: 'jane.doe@acme-logistics.com', status: { in: ['active', 'paused', 'stop_pending'] } },
       select: { id: true },
@@ -197,7 +204,7 @@ describe('enroll refusals, in guard order', () => {
     for (const status of ['draft', 'review_required', 'confirmed', 'expired']) {
       const prisma = makePrisma();
       prisma.prospectingHypothesis.findUnique.mockResolvedValue({ status });
-      expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'hypothesis_not_ready' });
+      expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'hypothesis_not_ready' });
       expect(prisma.$transaction).not.toHaveBeenCalled();
     }
   });
@@ -205,24 +212,131 @@ describe('enroll refusals, in guard order', () => {
   it('hypothesis_not_found when the id does not resolve; no check without a hypothesis', async () => {
     const prisma = makePrisma();
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(null);
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'hypothesis_not_found' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'hypothesis_not_found' });
     const prisma2 = makePrisma();
-    expect((await enroll(prisma2, enrollInput({ hypothesisId: null }))).ok).toBe(true);
+    expect((await enroll(prisma2, enrollInput({ hypothesisId: null }), OPTS)).ok).toBe(true);
     expect(prisma2.prospectingHypothesis.findUnique).not.toHaveBeenCalled();
   });
 
   it('already_enrolled when the partial unique index rejects the insert inside the transaction', async () => {
     const prisma = makePrisma();
     prisma.tx.sequenceEnrollment.create.mockRejectedValue(Object.assign(new Error('unique'), { code: 'P2002' }));
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'already_enrolled' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'already_enrolled' });
     expect(mockedAudit).not.toHaveBeenCalled();
   });
 
   it('draft_item_not_found when the stamp touches no row, so the transaction rolls back', async () => {
     const prisma = makePrisma();
     prisma.tx.draftQueueItem.updateMany.mockResolvedValue({ count: 0 });
-    expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'draft_item_not_found' });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'draft_item_not_found' });
     expect(mockedAudit).not.toHaveBeenCalled();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// R3-10: the bounced leg and the cross-plane contract read
+// ---------------------------------------------------------------------------
+
+describe('enroll suppression (R3-10): bounced status and the cross-plane read', () => {
+  it('a bounced persona email status refuses suppressed:bounced before the cross-plane read', async () => {
+    for (const status of ['bounced', 'hard_bounced']) {
+      const prisma = makePrisma();
+      prisma.persona.findUnique.mockResolvedValue({ do_not_contact: false, email_status: status });
+      const reader = { read: vi.fn(async () => ({ verdict: 'clear' as const, legs: {} })) };
+      expect(await enroll(prisma, enrollInput(), { suppression: reader })).toEqual({ ok: false, reason: 'suppressed', leg: 'bounced' });
+      expect(reader.read).not.toHaveBeenCalled();
+      expect(prisma.$transaction).not.toHaveBeenCalled();
+    }
+  });
+
+  it('the cross-plane read is consulted with the lowercased address after the local legs and before already_enrolled', async () => {
+    const prisma = makePrisma();
+    const read = vi.fn(async (_input: { to: string }) => ({ verdict: 'clear' as const, legs: { clawd_contract: 'clear' as const } }));
+    const reader = { read };
+    expect((await enroll(prisma, enrollInput(), { suppression: reader })).ok).toBe(true);
+    expect(read).toHaveBeenCalledTimes(1);
+    expect(read.mock.calls[0]?.[0]).toEqual({ to: 'jane.doe@acme-logistics.com' });
+    // Local legs first: the reader is never asked about an unsubscribed address.
+    const prisma2 = makePrisma();
+    prisma2.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
+    const reader2 = { read: vi.fn(async () => ({ verdict: 'clear' as const, legs: {} })) };
+    await enroll(prisma2, enrollInput(), { suppression: reader2 });
+    expect(reader2.read).not.toHaveBeenCalled();
+  });
+
+  it('a suppressed verdict refuses suppressed with the clawd leg that hit', async () => {
+    const prisma = makePrisma();
+    const r = await enroll(prisma, enrollInput(), { suppression: staticSuppressionReader('suppressed', { do_not_send: 'hit', clawd_contract: 'clear' }) });
+    expect(r).toEqual({ ok: false, reason: 'suppressed', leg: 'clawd:do_not_send' });
+    expect(prisma.sequenceEnrollment.findFirst).not.toHaveBeenCalled();
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+
+  it('an unknown verdict refuses suppression_unknown (an unreadable authority is not permission)', async () => {
+    const prisma = makePrisma();
+    const r = await enroll(prisma, enrollInput(), { suppression: staticSuppressionReader('unknown', { do_not_send: 'unknown' }) });
+    expect(r).toEqual({ ok: false, reason: 'suppression_unknown', leg: 'clawd:do_not_send' });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+
+  it('a reader that throws is unknown, never clear', async () => {
+    const prisma = makePrisma();
+    const reader = {
+      read: vi.fn(async () => {
+        throw new Error('ECONNRESET');
+      }),
+    };
+    expect(await enroll(prisma, enrollInput(), { suppression: reader })).toEqual({ ok: false, reason: 'suppression_unknown', leg: 'clawd:threw' });
+  });
+
+  it('the DEFAULT reader is the routing clawd contract reader: with no CLAWD_CONTROL_PLANE_* config it answers unknown and enroll refuses', async () => {
+    const saved = { url: process.env.CLAWD_CONTROL_PLANE_URL, token: process.env.CLAWD_CONTROL_PLANE_TOKEN };
+    delete process.env.CLAWD_CONTROL_PLANE_URL;
+    delete process.env.CLAWD_CONTROL_PLANE_TOKEN;
+    try {
+      const prisma = makePrisma();
+      expect(await enroll(prisma, enrollInput())).toEqual({ ok: false, reason: 'suppression_unknown', leg: 'clawd:clawd_contract' });
+      expect(prisma.$transaction).not.toHaveBeenCalled();
+    } finally {
+      if (saved.url !== undefined) process.env.CLAWD_CONTROL_PLANE_URL = saved.url;
+      if (saved.token !== undefined) process.env.CLAWD_CONTROL_PLANE_TOKEN = saved.token;
+    }
+  });
+
+  it('recordExternalEnrollment shares the same three legs and the cross-plane read', async () => {
+    const prisma = makePrisma();
+    prisma.persona.findUnique.mockResolvedValue({ do_not_contact: false, email_status: 'hard_bounced' });
+    expect(await recordExternalEnrollment(prisma, externalInput({ personaId: 7 }), OPTS)).toEqual({ ok: false, reason: 'suppressed', leg: 'bounced' });
+    const prisma2 = makePrisma();
+    expect(await recordExternalEnrollment(prisma2, externalInput(), { suppression: staticSuppressionReader('unknown') })).toEqual({
+      ok: false,
+      reason: 'suppression_unknown',
+      leg: 'clawd:clawd_contract',
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// R3-2: the exported suppression read names its leg
+// ---------------------------------------------------------------------------
+
+describe('isSuppressed (exported for the enroll service)', () => {
+  it('names the unsubscribed leg first, then the modex do_not_contact leg, else null', async () => {
+    const prisma = makePrisma();
+    expect(await isSuppressed(prisma, 'jane.doe@acme-logistics.com', 7)).toBeNull();
+    prisma.persona.findUnique.mockResolvedValue({ do_not_contact: true });
+    expect(await isSuppressed(prisma, 'jane.doe@acme-logistics.com', 7)).toBe('modex_do_not_contact');
+    prisma.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
+    expect(await isSuppressed(prisma, 'jane.doe@acme-logistics.com', 7)).toBe('unsubscribed');
+  });
+
+  it('suppressionLegFor is the pure rule: unsubscribed, then do_not_contact, then a bounced email status', () => {
+    expect(suppressionLegFor({ unsubscribed: false, doNotContact: false, emailStatus: 'verified' })).toBeNull();
+    expect(suppressionLegFor({ unsubscribed: false, doNotContact: false, emailStatus: 'hard_bounced' })).toBe('bounced');
+    expect(suppressionLegFor({ unsubscribed: false, doNotContact: false, emailStatus: 'bounced' })).toBe('bounced');
+    expect(suppressionLegFor({ unsubscribed: false, doNotContact: true, emailStatus: 'hard_bounced' })).toBe('modex_do_not_contact');
+    expect(suppressionLegFor({ unsubscribed: true, doNotContact: true, emailStatus: 'hard_bounced' })).toBe('unsubscribed');
+    expect(suppressionLegFor({ unsubscribed: false, doNotContact: false, emailStatus: null })).toBeNull();
   });
 });
 
@@ -233,7 +347,7 @@ describe('enroll refusals, in guard order', () => {
 describe('enroll happy path', () => {
   it('external recipient: inserts is_test false, freezes the version, stamps the draft item, all inside the tx, then audits enroll.live', async () => {
     const prisma = makePrisma();
-    const r = await enroll(prisma, enrollInput());
+    const r = await enroll(prisma, enrollInput(), OPTS);
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     expect(r.id).toMatch(uuidRe);
@@ -283,7 +397,7 @@ describe('enroll happy path', () => {
 
   it('internal recipient casey@freightroll.com: is_test true and the version is NOT frozen', async () => {
     const prisma = makePrisma();
-    const r = await enroll(prisma, enrollInput({ toEmail: 'Casey@FreightRoll.com' }));
+    const r = await enroll(prisma, enrollInput({ toEmail: 'Casey@FreightRoll.com' }), OPTS);
     expect(r).toMatchObject({ ok: true, isTest: true, frozen: false });
     expect(prisma.tx.sequenceEnrollment.create.mock.calls[0][0].data).toMatchObject({
       to_email: 'casey@freightroll.com',
@@ -298,7 +412,7 @@ describe('enroll happy path', () => {
     const prisma = makePrisma();
     prisma.sequenceVersion.findUnique.mockResolvedValue({ id: 'v1', family_id: 'fam_1', status: 'frozen' });
     prisma.tx.sequenceVersion.findUnique.mockResolvedValue({ id: 'v1', status: 'frozen' });
-    const r = await enroll(prisma, enrollInput());
+    const r = await enroll(prisma, enrollInput(), OPTS);
     expect(r).toMatchObject({ ok: true, isTest: false, frozen: false });
     expect(prisma.tx.sequenceVersion.updateMany).not.toHaveBeenCalled();
   });
@@ -311,28 +425,28 @@ describe('enroll happy path', () => {
 describe('recordExternalEnrollment', () => {
   it('refuses no_readback without external_state, before any read', async () => {
     const prisma = makePrisma();
-    expect(await recordExternalEnrollment(prisma, externalInput({ externalState: null }))).toEqual({ ok: false, reason: 'no_readback' });
+    expect(await recordExternalEnrollment(prisma, externalInput({ externalState: null }), OPTS)).toEqual({ ok: false, reason: 'no_readback' });
     expect(prisma.sequenceVersion.findUnique).not.toHaveBeenCalled();
   });
 
   it('shares the suppression and already_enrolled guards', async () => {
     const prisma = makePrisma();
     prisma.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u' });
-    expect(await recordExternalEnrollment(prisma, externalInput())).toEqual({ ok: false, reason: 'suppressed' });
+    expect(await recordExternalEnrollment(prisma, externalInput(), OPTS)).toEqual({ ok: false, reason: 'suppressed', leg: 'unsubscribed' });
 
     const prisma2 = makePrisma();
     prisma2.sequenceEnrollment.findUnique.mockResolvedValue({ id: 'enr-uuid-v5' });
-    expect(await recordExternalEnrollment(prisma2, externalInput())).toEqual({ ok: false, reason: 'already_enrolled' });
+    expect(await recordExternalEnrollment(prisma2, externalInput(), OPTS)).toEqual({ ok: false, reason: 'already_enrolled' });
 
     const prisma3 = makePrisma();
     prisma3.sequenceEnrollment.findFirst.mockResolvedValue({ id: 'other' });
-    expect(await recordExternalEnrollment(prisma3, externalInput())).toEqual({ ok: false, reason: 'already_enrolled' });
+    expect(await recordExternalEnrollment(prisma3, externalInput(), OPTS)).toEqual({ ok: false, reason: 'already_enrolled' });
     expect(prisma3.$transaction).not.toHaveBeenCalled();
   });
 
   it('inserts hubspot_native with the readback and freezes the version for an external, non-legacy row', async () => {
     const prisma = makePrisma();
-    const r = await recordExternalEnrollment(prisma, externalInput());
+    const r = await recordExternalEnrollment(prisma, externalInput(), OPTS);
     expect(r).toEqual({ ok: true, id: 'enr-uuid-v5', isTest: false, frozen: true });
     expect(prisma.tx.sequenceEnrollment.create.mock.calls[0][0].data).toMatchObject({
       id: 'enr-uuid-v5',
@@ -353,7 +467,7 @@ describe('recordExternalEnrollment', () => {
 
   it('legacy true: the row is recorded as legacy and the version is NOT frozen', async () => {
     const prisma = makePrisma();
-    const r = await recordExternalEnrollment(prisma, externalInput({ legacy: true }));
+    const r = await recordExternalEnrollment(prisma, externalInput({ legacy: true }), OPTS);
     expect(r).toEqual({ ok: true, id: 'enr-uuid-v5', isTest: false, frozen: false });
     expect(prisma.tx.sequenceEnrollment.create.mock.calls[0][0].data).toMatchObject({ legacy: true, is_test: false });
     expect(prisma.tx.sequenceVersion.findUnique).not.toHaveBeenCalled();
@@ -363,7 +477,7 @@ describe('recordExternalEnrollment', () => {
 
   it('internal recipient: is_test true, no freeze', async () => {
     const prisma = makePrisma();
-    const r = await recordExternalEnrollment(prisma, externalInput({ toEmail: 'jake@yardflow.ai' }));
+    const r = await recordExternalEnrollment(prisma, externalInput({ toEmail: 'jake@yardflow.ai' }), OPTS);
     expect(r).toEqual({ ok: true, id: 'enr-uuid-v5', isTest: true, frozen: false });
     expect(prisma.tx.sequenceVersion.updateMany).not.toHaveBeenCalled();
   });

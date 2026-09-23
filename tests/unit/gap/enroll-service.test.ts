@@ -20,7 +20,9 @@ const { mockedAudit, mockedEnroll, mockedRecord, mockedAutonomyHalted, mockedCom
 }));
 
 vi.mock('@/lib/gap/audit', () => ({ audit: mockedAudit }));
-vi.mock('@/lib/gap/sequence/enrollment', () => ({
+// The real module stays underneath (isSuppressed is exercised for real); only the two writers are mocked.
+vi.mock('@/lib/gap/sequence/enrollment', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/lib/gap/sequence/enrollment')>()),
   enroll: mockedEnroll,
   recordExternalEnrollment: mockedRecord,
 }));
@@ -29,7 +31,10 @@ vi.mock('@/lib/gap/compiler/compile', () => ({ compile: mockedCompile }));
 vi.mock('@/lib/gap/sequences/service', () => ({ materializeSequence: mockedMaterialize }));
 
 import { enrollFromDecision, evidenceRefsFromSignals, verifyCompiles, type EnrollDeps, type EnrollFromDecisionInput } from '@/lib/gap/enroll/service';
-import { enrollmentId } from '@/lib/gap/sequence/external-sync';
+import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
+
+/** R3-10: the service reads the cross-plane contract before the target; every case injects a CLEAR reader unless it tests the read. */
+const SUPPRESSION_CLEAR = staticSuppressionReader('clear');
 
 const CRITIC_STUB = { score: vi.fn(async () => ({ ok: true as const, verdict: 'pass' as const, score: 100, findings: [] })) };
 const ITEM_COMPILE_PASS = { id: 'cmp_item', verdict: 'pass', checks: [], critic: { ok: true, verdict: 'pass', score: 100, findings: [] } };
@@ -69,8 +74,8 @@ const STEPS = {
   ],
 };
 
-function compileRow(id: string, stepIndex: number, verdict: string, createdAt = '2026-09-22T00:00:00.000Z', versionId = 'v1') {
-  return { id, sequence_version_id: versionId, step_index: stepIndex, verdict, created_at: new Date(createdAt) };
+function compileRow(id: string, stepIndex: number, verdict: string, createdAt = '2026-09-22T00:00:00.000Z', versionId = 'v1', hypothesisId: string | null = 'H1') {
+  return { id, sequence_version_id: versionId, step_index: stepIndex, verdict, created_at: new Date(createdAt), hypothesis_id: hypothesisId };
 }
 
 const PASSING_COMPILES = [compileRow('c0', 0, 'pass'), compileRow('c1', 1, 'pass')];
@@ -99,6 +104,7 @@ function makePrisma(opts: { compiles?: any[]; decision?: any; version?: any; per
     },
     gapCompile: { findMany: asyncSpy(async () => opts.compiles ?? PASSING_COMPILES) },
     sendApprovalRequest: { findFirst: asyncSpy(async () => null) },
+    unsubscribedEmail: { findUnique: asyncSpy(async () => null) },
     prospectingHypothesis: {
       findUnique: asyncSpy(async () =>
         opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics' } : opts.hypothesis,
@@ -114,6 +120,7 @@ function makePrisma(opts: { compiles?: any[]; decision?: any; version?: any; per
               account_name: 'Acme Logistics',
               hubspot_contact_id: '222',
               do_not_contact: false,
+              email_status: 'verified',
             }
           : opts.persona,
       ),
@@ -180,6 +187,7 @@ function deps(overrides: Partial<EnrollDeps> = {}): EnrollDeps & { addOne: Retur
     autonomy: vi.fn(async () => ({ halted: false })),
     addOne: asyncSpy(async () => ({ ok: true, id: 4242 })),
     critic: CRITIC_STUB,
+    suppression: SUPPRESSION_CLEAR,
     ...overrides,
   } as any;
 }
@@ -191,8 +199,13 @@ function refusedPredicates(): string[] {
 let savedEnv: Record<string, string | undefined>;
 
 beforeEach(() => {
-  savedEnv = { GAP_OS_ENABLED: process.env.GAP_OS_ENABLED, GAP_AUTO_ENROLL_ENABLED: process.env.GAP_AUTO_ENROLL_ENABLED };
+  savedEnv = {
+    GAP_OS_ENABLED: process.env.GAP_OS_ENABLED,
+    GAP_AUTO_ENROLL_ENABLED: process.env.GAP_AUTO_ENROLL_ENABLED,
+    GAP_MESSAGE_COMPILER_ENABLED: process.env.GAP_MESSAGE_COMPILER_ENABLED,
+  };
   process.env.GAP_OS_ENABLED = 'true';
+  process.env.GAP_MESSAGE_COMPILER_ENABLED = 'true';
   delete process.env.GAP_AUTO_ENROLL_ENABLED;
   mockedAudit.mockClear();
   mockedEnroll.mockReset();
@@ -278,6 +291,30 @@ describe('enrollFromDecision guards, in order', () => {
         deps(),
       ),
     ).toEqual({ ok: false, reason: 'compile_wrong_version:c1' });
+  });
+
+  it('R3-3: a compile row bound to another hypothesis refuses compile_wrong_hypothesis:<id> in every mode', async () => {
+    const compiles = [compileRow('c0', 0, 'pass'), compileRow('c1', 1, 'pass', '2026-09-22T00:00:00.000Z', 'v1', 'H_other')];
+    for (const mode of ['shadow', 'live'] as const) {
+      const prisma = makePrisma({ compiles });
+      const r = await enrollFromDecision(prisma, input({ mode }), deps());
+      expect(r).toEqual({ ok: false, reason: 'compile_wrong_hypothesis:c1' });
+      expect(prisma.prospectingHypothesis.findUnique).not.toHaveBeenCalled();
+    }
+    expect(refusedPredicates()).toEqual(['compile_wrong_hypothesis:c1', 'compile_wrong_hypothesis:c1']);
+    // The select carries hypothesis_id so the rule reads the column, never the snapshot.
+    const prisma = makePrisma({ compiles });
+    await enrollFromDecision(prisma, input(), deps());
+    expect(prisma.gapCompile.findMany.mock.calls[0][0].select).toMatchObject({ hypothesis_id: true });
+  });
+
+  it('R3-3: a template-level row (hypothesis_id null) is accepted for SHADOW only; live refuses compile_template_only:<id> (verifyCompiles owns the rule)', async () => {
+    const compiles = [compileRow('c0', 0, 'pass', '2026-09-22T00:00:00.000Z', 'v1', null), compileRow('c1', 1, 'pass')];
+    expect((await enrollFromDecision(makePrisma({ compiles }), input({ mode: 'shadow' }), deps())).ok).toBe(true);
+    expect(await enrollFromDecision(makePrisma({ compiles }), input({ mode: 'live' }), deps())).toEqual({ ok: false, reason: 'compile_template_only:c0' });
+    const prisma = makePrisma();
+    expect(await verifyCompiles(prisma, 2, compiles)).toBe('compile_template_only:c0');
+    expect(await verifyCompiles(prisma, 2, compiles, { allowTemplateRows: true })).toBeNull();
   });
 
   it('compile_not_passed:<stepIndex> names the first step without a passing newest compile', async () => {
@@ -426,6 +463,105 @@ describe('target resolution', () => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// R3-2: suppression before target resolution, every mode, every target
+// ---------------------------------------------------------------------------
+
+describe('suppression is read before the target is resolved (R3-2)', () => {
+  const personaRow = (extra: Record<string, unknown>) => ({
+    id: 7,
+    name: 'Jane Doe',
+    email: 'jane.doe@acme-logistics.com',
+    account_name: 'Acme Logistics',
+    hubspot_contact_id: '222',
+    do_not_contact: false,
+    email_status: 'verified',
+    ...extra,
+  });
+
+  it('hubspot_native shadow: a do_not_contact persona refuses suppressed naming the modex leg and emits no row', async () => {
+    const prisma = makePrisma({ persona: personaRow({ do_not_contact: true }) });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow' }), deps());
+    expect(r).toEqual({ ok: false, reason: 'suppressed', detail: 'modex_do_not_contact' });
+    expect(refusedPredicates()).toEqual(['suppressed']);
+    expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'suppressed', leg: 'modex_do_not_contact' });
+    // Refused before the decision (and so the target) is read.
+    expect(prisma.routingDecision.findUnique).not.toHaveBeenCalled();
+    expect(writes(prisma)).toEqual([]);
+  });
+
+  it('hubspot_native live: an unsubscribed address refuses suppressed:unsubscribed, looked up on the lowercased email', async () => {
+    const prisma = makePrisma();
+    prisma.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(r).toEqual({ ok: false, reason: 'suppressed', detail: 'unsubscribed' });
+    expect(prisma.unsubscribedEmail.findUnique.mock.calls[0][0]).toEqual({ where: { email: 'jane.doe@acme-logistics.com' }, select: { id: true } });
+    expect(mockedRecord).not.toHaveBeenCalled();
+    expect(writes(prisma)).toEqual([]);
+  });
+
+  it('modex_queue shadow and live: a hard_bounced persona email refuses suppressed:bounced before addOne', async () => {
+    const modex = decisionRow({ inputs_snapshot: snapshot({ target: 'modex_queue', persona: { id: 7, email: 'jane.doe@acme-logistics.com', hubspotContactId: null, top100: null } }) });
+    for (const mode of ['shadow', 'live'] as const) {
+      const prisma = makePrisma({ decision: modex, persona: personaRow({ email_status: 'hard_bounced' }) });
+      const d = deps();
+      const r = await enrollFromDecision(prisma, input({ mode }), d);
+      expect(r).toEqual({ ok: false, reason: 'suppressed', detail: 'bounced' });
+      expect(d.addOne).not.toHaveBeenCalled();
+      expect(mockedEnroll).not.toHaveBeenCalled();
+      expect(mockedMaterialize).not.toHaveBeenCalled();
+    }
+  });
+
+  it('R3-10: the cross-plane read runs after the local legs; suppressed names the clawd leg, unknown refuses suppression_unknown', async () => {
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow' }), deps({ suppression: staticSuppressionReader('suppressed', { do_not_send: 'hit' }) }));
+    expect(r).toEqual({ ok: false, reason: 'suppressed', detail: 'clawd:do_not_send' });
+    expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'suppressed', leg: 'clawd:do_not_send' });
+    expect(prisma.routingDecision.findUnique).not.toHaveBeenCalled();
+
+    const unknown = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps({ suppression: staticSuppressionReader('unknown') }));
+    expect(unknown).toEqual({ ok: false, reason: 'suppression_unknown', detail: 'clawd:clawd_contract' });
+    expect(refusedPredicates().at(-1)).toBe('suppression_unknown');
+
+    // A local leg refuses before the reader is consulted.
+    const reader = { read: vi.fn(async () => ({ verdict: 'clear' as const, legs: {} })) };
+    const local = makePrisma();
+    local.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
+    await enrollFromDecision(local, input(), deps({ suppression: reader }));
+    expect(reader.read).not.toHaveBeenCalled();
+  });
+
+  it('R3-10: the same reader is handed to enroll() on the modex live path', async () => {
+    const modex = decisionRow({ inputs_snapshot: snapshot({ target: 'modex_queue', persona: { id: 7, email: 'jane.doe@acme-logistics.com', hubspotContactId: null, top100: null } }) });
+    const reader = { read: vi.fn(async () => ({ verdict: 'clear' as const, legs: {} })) };
+    const r = await enrollFromDecision(makePrisma({ decision: modex }), input({ mode: 'live' }), deps({ suppression: reader }));
+    expect(r.ok).toBe(true);
+    expect(mockedEnroll.mock.calls[0][2]).toEqual({ suppression: reader });
+  });
+
+  it('R3-10: without an injected reader the default is the clawd contract reader, which is unknown when unconfigured', async () => {
+    const saved = { url: process.env.CLAWD_CONTROL_PLANE_URL, token: process.env.CLAWD_CONTROL_PLANE_TOKEN };
+    delete process.env.CLAWD_CONTROL_PLANE_URL;
+    delete process.env.CLAWD_CONTROL_PLANE_TOKEN;
+    try {
+      const { suppression: _drop, ...noReader } = deps();
+      expect(await enrollFromDecision(makePrisma(), input(), noReader)).toEqual({ ok: false, reason: 'suppression_unknown', detail: 'clawd:clawd_contract' });
+    } finally {
+      if (saved.url !== undefined) process.env.CLAWD_CONTROL_PLANE_URL = saved.url;
+      if (saved.token !== undefined) process.env.CLAWD_CONTROL_PLANE_TOKEN = saved.token;
+    }
+  });
+
+  it('the unsubscribed leg wins over do_not_contact, and both win over bounced (first refusal names the leg)', async () => {
+    const prisma = makePrisma({ persona: personaRow({ do_not_contact: true, email_status: 'bounced' }) });
+    prisma.unsubscribedEmail.findUnique.mockResolvedValue({ id: 'u1' });
+    expect(await enrollFromDecision(prisma, input(), deps())).toEqual({ ok: false, reason: 'suppressed', detail: 'unsubscribed' });
+    const prisma2 = makePrisma({ persona: personaRow({ do_not_contact: true, email_status: 'bounced' }) });
+    expect(await enrollFromDecision(prisma2, input(), deps())).toEqual({ ok: false, reason: 'suppressed', detail: 'modex_do_not_contact' });
+  });
+});
+
 describe('hubspot_native', () => {
   it('shadow returns the enroll-table row, no enrollment, zero writes, audited enroll.shadow', async () => {
     const prisma = makePrisma();
@@ -448,41 +584,17 @@ describe('hubspot_native', () => {
     expect(mockedAudit.mock.calls[0][1].payload).toMatchObject({ kind: 'enroll_row', recorded: false, target: 'hubspot_native' });
   });
 
-  it('live WITHOUT a readback emits the row and records nothing (the service never calls HubSpot)', async () => {
+  it('R3-13: live emits the row and records NOTHING, whatever the caller sends: the enrollment-sync cron is the only recorder', async () => {
     const prisma = makePrisma();
-    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
-    expect(r).toMatchObject({ ok: true, kind: 'enroll_row', mode: 'live', enrollment: null });
+    // A readback smuggled through the input shape is ignored: the field no longer exists on the service input.
+    const smuggled = { ...input({ mode: 'live' }), readback: { activelyEnrolledCount: 1, latestSequenceId: '333', latestEnrolledAt: null } } as unknown as EnrollFromDecisionInput;
+    const r = await enrollFromDecision(prisma, smuggled, deps());
+    expect(r).toEqual({ ok: true, kind: 'enroll_row', target: 'hubspot_native', mode: 'live', row: expect.any(Object), enrollment: null });
     expect(mockedRecord).not.toHaveBeenCalled();
     expect(writes(prisma)).toEqual([]);
-    expect(mockedAudit.mock.calls.map((c) => c[1].kind)).toEqual(['enroll.live']);
-  });
-
-  it('live WITH a readback records the enrollment through recordExternalEnrollment under the v5 id', async () => {
-    const readback = { activelyEnrolledCount: 1, latestSequenceId: '333', latestEnrolledAt: '2026-09-23T14:00:00.000Z' };
-    const r = await enrollFromDecision(makePrisma(), input({ mode: 'live', readback }), deps());
-    expect(r).toMatchObject({ ok: true, kind: 'enroll_row', enrollment: { id: 'ext_1', frozen: true, isTest: false } });
-    expect(mockedRecord).toHaveBeenCalledTimes(1);
-    // recordExternalEnrollment audits the record itself; the service adds no second row.
-    expect(mockedAudit.mock.calls.map((c) => c[1].kind)).toEqual([]);
-    expect(mockedRecord.mock.calls[0][1]).toMatchObject({
-      id: enrollmentId('333', '222'),
-      familyId: 'fam_1',
-      versionId: 'v1',
-      toEmail: 'jane.doe@acme-logistics.com',
-      hubspotContactId: '222',
-      hubspotSequenceId: '333',
-      hypothesisId: 'H1',
-      personaId: 7,
-      externalState: readback,
-      enrolledBy: 'casey@freightroll.com',
-    });
-  });
-
-  it('a refusal from recordExternalEnrollment passes through verbatim', async () => {
-    mockedRecord.mockResolvedValue({ ok: false, reason: 'already_enrolled' });
-    const readback = { activelyEnrolledCount: 1, latestSequenceId: '333', latestEnrolledAt: null };
-    const r = await enrollFromDecision(makePrisma(), input({ mode: 'live', readback }), deps());
-    expect(r).toEqual({ ok: false, reason: 'already_enrolled' });
+    // N4: an emitted-only outcome is not an enrollment; it audits enroll.row_emitted, never enroll.live.
+    expect(mockedAudit.mock.calls.map((c) => c[1].kind)).toEqual(['enroll.row_emitted']);
+    expect(mockedAudit.mock.calls[0][1].payload).toMatchObject({ kind: 'enroll_row', recorded: false, target: 'hubspot_native' });
   });
 });
 
@@ -573,7 +685,8 @@ describe('modex_queue', () => {
       enrollment: { id: 'enr_1', frozen: true, isTest: false },
     });
     expect(mockedMaterialize).toHaveBeenCalledTimes(1);
-    expect(mockedMaterialize).toHaveBeenCalledWith(prisma, { versionId: 'v1', compileIds: ['c0', 'c1'] }, 'casey@freightroll.com', expect.objectContaining({ owner: 'casey@freightroll.com' }));
+    // R3-3: materialize is told which hypothesis the rows must be bound to.
+    expect(mockedMaterialize).toHaveBeenCalledWith(prisma, { versionId: 'v1', hypothesisId: 'H1', compileIds: ['c0', 'c1'] }, 'casey@freightroll.com', expect.objectContaining({ owner: 'casey@freightroll.com' }));
     // The created item carries the Sequence id (the runtime's first guard); a draft-only stamp right after addOne.
     expect(prisma.draftQueueItem.updateMany).toHaveBeenCalledWith({ where: { id: 4242, status: 'draft' }, data: { sequence_id: 77 } });
     // The per-item compile is keyed to the created item and judges the RENDERED copy.
@@ -623,11 +736,24 @@ describe('modex_queue', () => {
       draftItemId: 4242,
       now: NOW,
       enrolledBy: 'casey@freightroll.com',
-    });
+    }, { suppression: SUPPRESSION_CLEAR });
     // The only write the service makes itself is the sequence_id stamp: addOne, compile(), materializeSequence()
     // and enroll() own their inserts, and enroll() owns the enroll.live audit row, so the service adds none.
     expect(writes(prisma)).toEqual(['draftQueueItem.updateManyx1']);
     expect(mockedAudit.mock.calls.map((c) => c[1].kind)).toEqual([]);
+  });
+
+  it('N9: live refuses compiler_disabled while GAP_MESSAGE_COMPILER_ENABLED is off, before materialize and addOne; shadow is unaffected', async () => {
+    delete process.env.GAP_MESSAGE_COMPILER_ENABLED;
+    const d = deps();
+    const r = await enrollFromDecision(makePrisma({ decision: modexDecision() }), input({ mode: 'live' }), d);
+    expect(r).toEqual({ ok: false, reason: 'compiler_disabled' });
+    expect(refusedPredicates()).toEqual(['compiler_disabled']);
+    expect(mockedMaterialize).not.toHaveBeenCalled();
+    expect(d.addOne).not.toHaveBeenCalled();
+    expect(mockedCompile).not.toHaveBeenCalled();
+    const shadow = await enrollFromDecision(makePrisma({ decision: modexDecision() }), input({ mode: 'shadow' }), deps());
+    expect(shadow).toMatchObject({ ok: true, kind: 'modex_shadow' });
   });
 
   it('live: a materialize refusal passes through verbatim and addOne is never called', async () => {
@@ -744,6 +870,82 @@ describe('modex_queue', () => {
       data: { status: 'skipped', skipped_reason: 'gap_enroll_refused:suppressed' },
     });
     expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'suppressed', draftItemId: 4242, parked: true });
+  });
+
+  it('R3-4: the slot is filled from the hypothesis; the queue gets the STRIPPED copy, the compiler the MARKED copy', async () => {
+    const slotted = { ...STEPS, steps: [{ ...STEPS.steps[0], templates: { subjectTemplate: 'Gate clerks at {{account}}', bodyTemplate: 'Hi {{first_name}},\n{{observation}}\n\nMy guess is the lot.\n\nCasey', hubspotTemplateId: null } }, STEPS.steps[1]] };
+    const hypothesis = {
+      id: 'H1',
+      status: 'approved',
+      account_name: 'Acme Logistics',
+      observation: 'Acme posted three gate-clerk roles [S:sig_1].',
+      problem_hypothesis: 'The lot is the constraint.',
+      problem_family: 'hidden_capacity',
+      signals: [{ signal: { id: 'sig_1', title: 'Three gate-clerk roles posted', evidence_url: 'https://example.com/jobs', external_ok: true, observed_at: new Date('2026-09-20T00:00:00.000Z'), freshness_expires_at: null, source_type: 'public_primary', metadata: null } }],
+    };
+    const d = deps();
+    const live = await enrollFromDecision(makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted }, hypothesis }), input({ mode: 'live' }), d);
+    expect(live.ok).toBe(true);
+    const queued = d.addOne.mock.calls[0][0].body;
+    expect(queued).toBe('Hi Jane,\nAcme posted three gate-clerk roles.\n\nMy guess is the lot.\n\nCasey');
+    expect(queued).not.toContain('[[');
+    const compiledBody = mockedCompile.mock.calls[0][0].body;
+    expect(compiledBody).toBe('Hi Jane,\nAcme posted three gate-clerk roles [[SRC:sig_1]].\n\nMy guess is the lot.\n\nCasey');
+    expect(mockedCompile.mock.calls[0][0].contract.evidence[0]).toMatchObject({ id: 'sig_1', fresh: true, externalOk: true });
+
+    const shadow = await enrollFromDecision(makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted }, hypothesis }), input({ mode: 'shadow' }), deps());
+    expect(shadow).toMatchObject({ ok: true, kind: 'modex_shadow' });
+    expect((shadow as any).wouldBe.body).toBe(queued);
+  });
+
+  it('R3-4: unrendered_placeholder:observation refuses shadow and live when the hypothesis has no observation, before addOne', async () => {
+    const slotted = { ...STEPS, steps: [{ ...STEPS.steps[0], templates: { subjectTemplate: 'S', bodyTemplate: 'Hi {{first_name}},\n{{observation}}\n\nCasey', hubspotTemplateId: null } }, STEPS.steps[1]] };
+    for (const mode of ['shadow', 'live'] as const) {
+      const prisma = makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted } });
+      const d = deps();
+      const r = await enrollFromDecision(prisma, input({ mode }), d);
+      expect(r).toEqual({ ok: false, reason: 'unrendered_placeholder:observation' });
+      expect(d.addOne).not.toHaveBeenCalled();
+      expect(mockedMaterialize).not.toHaveBeenCalled();
+      expect(writes(prisma)).toEqual([]);
+      expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'unrendered_placeholder:observation', token: 'observation' });
+    }
+  });
+
+  it('R3-12: an exception after addOne parks the orphan as skipped gap_enroll_error:<name> and rethrows (enroll() throwing)', async () => {
+    class DbGone extends Error {
+      constructor() {
+        super('connection reset');
+        this.name = 'DbGone';
+      }
+    }
+    mockedEnroll.mockRejectedValue(new DbGone());
+    const prisma = makePrisma({ decision: modexDecision() });
+    await expect(enrollFromDecision(prisma, input({ mode: 'live' }), deps())).rejects.toThrow('connection reset');
+    expect(prisma.draftQueueItem.updateMany).toHaveBeenLastCalledWith({
+      where: { id: 4242, status: 'draft' },
+      data: { status: 'skipped', skipped_reason: 'gap_enroll_error:DbGone' },
+    });
+  });
+
+  it('R3-12: the same park applies when the per-item compile throws, and a park failure never masks the original error', async () => {
+    mockedCompile.mockRejectedValue(new TypeError('critic exploded'));
+    const prisma = makePrisma({ decision: modexDecision() });
+    await expect(enrollFromDecision(prisma, input({ mode: 'live' }), deps())).rejects.toThrow('critic exploded');
+    expect(prisma.draftQueueItem.updateMany).toHaveBeenLastCalledWith({
+      where: { id: 4242, status: 'draft' },
+      data: { status: 'skipped', skipped_reason: 'gap_enroll_error:TypeError' },
+    });
+    expect(mockedEnroll).not.toHaveBeenCalled();
+
+    // The park itself failing (the database is gone) still surfaces the ORIGINAL error.
+    mockedCompile.mockRejectedValue(new TypeError('critic exploded'));
+    const broken = makePrisma({ decision: modexDecision() });
+    broken.draftQueueItem.updateMany.mockImplementation(async ({ data }: any) => {
+      if (data?.status === 'skipped') throw new Error('park failed');
+      return { count: 1 };
+    });
+    await expect(enrollFromDecision(broken, input({ mode: 'live' }), deps())).rejects.toThrow('critic exploded');
   });
 
   it('step_has_no_copy:0 when the version step 0 carries no templates', async () => {

@@ -30,11 +30,13 @@ const mockedFindMany = vi.fn();
 const mockedConfigFind = vi.fn();
 const mockedCompileFindMany = vi.fn();
 const mockedApprovalFindFirst = vi.fn();
+const mockedUnsubscribedFind = vi.fn();
 const fakePrisma = {
   routingDecision: { findFirst: mockedFindFirst, findMany: mockedFindMany },
   systemConfig: { findUnique: mockedConfigFind },
   gapCompile: { findMany: mockedCompileFindMany },
   sendApprovalRequest: { findFirst: mockedApprovalFindFirst },
+  unsubscribedEmail: { findUnique: mockedUnsubscribedFind },
 };
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
@@ -355,6 +357,25 @@ describe('buildEnrollRows compile gate', () => {
     ]);
   });
 
+  it('R3-2: a suppressed contact lands under Skip as suppressed:<leg> before every other filter, never under Enroll', () => {
+    const table = buildEnrollRows([{ ...nativeItem({ ok: true, compileIds: ['c0', 'c1', 'c2', 'c3'] }), suppressed: 'unsubscribed' }]);
+    expect(table.rows[0].contacts).toEqual([]);
+    expect(table.skipped).toEqual([
+      { account: 'Boston Beer Company', personaId: 1, name: 'Ada Lovelace', email: 'ada@bostonbeer.com', reason: 'suppressed:unsubscribed' },
+    ]);
+    // Suppression wins over a sequence_block and over a missing email: the leg is the reason.
+    const blocked: EnrollRowItem = {
+      decision: decision('enroll_gap_sequence', 'hubspot_native'),
+      inputs: { account: account('Boston Beer Company'), persona: persona(2, 'bob@bostonbeer.com', BLOCKED_SEQ) },
+      displayName: 'Bob Byrne',
+      compile: { ok: true, compileIds: ['c0', 'c1', 'c2', 'c3'] },
+      suppressed: 'modex_do_not_contact',
+    };
+    expect(buildEnrollRows([blocked]).skipped.map((s) => s.reason)).toEqual(['suppressed:modex_do_not_contact']);
+    // An explicit null or empty leg is "not suppressed".
+    expect(buildEnrollRows([{ ...nativeItem({ ok: true, compileIds: ['c0', 'c1', 'c2', 'c3'] }), suppressed: null }]).skipped).toEqual([]);
+  });
+
   it('non-native items keep their own reasons whether or not a compile field is present', () => {
     const table = buildEnrollRows([
       {
@@ -379,7 +400,7 @@ describe('loadCompileGate', () => {
   const path = ['contract', 'top100Compile', 'hubspotContactId'];
 
   function compileRows(verdicts: Array<[number, string, string?]>) {
-    return verdicts.map(([step, verdict, id]) => ({ id: id ?? `cmp_${step}_${verdict}`, step_index: step, verdict }));
+    return verdicts.map(([step, verdict, id]) => ({ id: id ?? `cmp_${step}_${verdict}`, step_index: step, verdict, created_by: 'compile-top100' }));
   }
 
   beforeEach(() => {
@@ -393,7 +414,7 @@ describe('loadCompileGate', () => {
     expect(mockedCompileFindMany).toHaveBeenCalledWith({
       where: { inputs_snapshot: { path, equals: CONTACT } },
       orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
-      select: { id: true, step_index: true, verdict: true },
+      select: { id: true, step_index: true, verdict: true, created_by: true },
     });
     expect(gate).toEqual({ ok: true, compileIds: ['cmp_0_pass', 'cmp_1_pass', 'cmp_2_pass', 'cmp_3_pass'] });
     expect(mockedApprovalFindFirst).not.toHaveBeenCalled();
@@ -417,8 +438,8 @@ describe('loadCompileGate', () => {
 
   it('the newest row per step wins: an older pass under a newer reject is not a pass', async () => {
     mockedCompileFindMany.mockResolvedValue([
-      { id: 'newer_reject', step_index: 2, verdict: 'reject' },
-      { id: 'older_pass', step_index: 2, verdict: 'pass' },
+      { id: 'newer_reject', step_index: 2, verdict: 'reject', created_by: 'compile-top100' },
+      { id: 'older_pass', step_index: 2, verdict: 'pass', created_by: 'compile-top100' },
       ...compileRows([[0, 'pass'], [1, 'pass'], [3, 'pass']]),
     ]);
     expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:2', stepIndex: 2 });
@@ -444,6 +465,22 @@ describe('loadCompileGate', () => {
     expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:3', stepIndex: 3 });
   });
 
+  it('R3-3: only rows written by the compile-top100 script (created_by prefix) honour the contact key; anyone else\'s row is ignored', async () => {
+    mockedCompileFindMany.mockResolvedValue([
+      // Newest first: a pass keyed to the contact but written by someone else must not count.
+      { id: 'foreign_pass', step_index: 1, verdict: 'pass', created_by: 'e2e3' },
+      { id: 'script_reject', step_index: 1, verdict: 'reject', created_by: 'compile-top100' },
+      ...compileRows([[0, 'pass'], [2, 'pass'], [3, 'pass']]),
+    ]);
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_not_passed:1', stepIndex: 1 });
+    // A run-tagged created_by still starts with the prefix.
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'pass'], [2, 'pass'], [3, 'pass']]).map((r) => ({ ...r, created_by: 'compile-top100:e2e3' })));
+    expect((await loadCompileGate(fakePrisma as never, CONTACT)).ok).toBe(true);
+    // Rows with no created_by at all never count.
+    mockedCompileFindMany.mockResolvedValue(compileRows([[0, 'pass'], [1, 'pass'], [2, 'pass'], [3, 'pass']]).map((r) => ({ ...r, created_by: null })));
+    expect(await loadCompileGate(fakePrisma as never, CONTACT)).toEqual({ ok: false, reason: 'compile_missing', stepIndex: 0 });
+  });
+
   it('a contact without a HubSpot id is compile_missing without a query', async () => {
     expect(await loadCompileGate(fakePrisma as never, null)).toEqual({ ok: false, reason: 'compile_missing', stepIndex: null });
     expect(mockedCompileFindMany).not.toHaveBeenCalled();
@@ -456,6 +493,41 @@ describe('loadDecisions', () => {
     mockedConfigFind.mockResolvedValue(null);
     mockedCompileFindMany.mockResolvedValue([]);
     mockedApprovalFindFirst.mockResolvedValue(null);
+    mockedUnsubscribedFind.mockResolvedValue(null);
+  });
+
+  it('R3-2: fills suppressed from the snapshot persona (doNotContact, bounced emailStatus) and the unsubscribed table, on the lowercased email', async () => {
+    mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
+    const row = (id: string, p: RoutingPersonaInput) => ({
+      id,
+      run_id: 'run_9',
+      action: 'enroll_gap_sequence',
+      lane: 'work_queue',
+      rule_id: 'enroll',
+      priority: 88,
+      explain: decision('enroll_gap_sequence').explain,
+      inputs_snapshot: { account: account('Boston Beer Company'), persona: p, target: 'hubspot_native' },
+      persona: { name: `Person ${id}` },
+    });
+    mockedFindMany.mockResolvedValue([
+      row('d1', { ...persona(1, 'Ada@BostonBeer.com', NATIVE_SEQ), doNotContact: true }),
+      row('d2', { ...persona(2, 'bob@bostonbeer.com', NATIVE_SEQ), emailStatus: 'hard_bounced' }),
+      row('d3', persona(3, 'cy@bostonbeer.com', NATIVE_SEQ)),
+      row('d4', persona(4, 'di@bostonbeer.com', NATIVE_SEQ)),
+    ]);
+    mockedUnsubscribedFind.mockImplementation(async ({ where }: { where: { email: string } }) => (where.email === 'cy@bostonbeer.com' ? { id: 'u' } : null));
+    mockedCompileFindMany.mockResolvedValue([0, 1, 2, 3].map((i) => ({ id: `a${i}`, step_index: i, verdict: 'pass', created_by: 'compile-top100' })));
+
+    const items = await loadDecisions(fakePrisma as never);
+    expect(items.map((i) => i.suppressed)).toEqual(['modex_do_not_contact', 'bounced', 'unsubscribed', null]);
+    expect(mockedUnsubscribedFind.mock.calls.map((c) => c[0].where.email)).toEqual(['ada@bostonbeer.com', 'bob@bostonbeer.com', 'cy@bostonbeer.com', 'di@bostonbeer.com']);
+    const table = buildEnrollRows(items);
+    expect(table.rows[0].contacts.map((c) => c.personaId)).toEqual([4]);
+    expect(table.skipped.map((s) => [s.personaId, s.reason])).toEqual([
+      [1, 'suppressed:modex_do_not_contact'],
+      [2, 'suppressed:bounced'],
+      [3, 'suppressed:unsubscribed'],
+    ]);
   });
 
   it('attaches the compile gate to native items only and skips non-native targets without a compile query', async () => {
@@ -485,10 +557,10 @@ describe('loadDecisions', () => {
       },
     ]);
     mockedCompileFindMany.mockResolvedValue([
-      { id: 'a0', step_index: 0, verdict: 'pass' },
-      { id: 'a1', step_index: 1, verdict: 'reject' },
-      { id: 'a2', step_index: 2, verdict: 'pass' },
-      { id: 'a3', step_index: 3, verdict: 'pass' },
+      { id: 'a0', step_index: 0, verdict: 'pass', created_by: 'compile-top100' },
+      { id: 'a1', step_index: 1, verdict: 'reject', created_by: 'compile-top100' },
+      { id: 'a2', step_index: 2, verdict: 'pass', created_by: 'compile-top100' },
+      { id: 'a3', step_index: 3, verdict: 'pass', created_by: 'compile-top100' },
     ]);
     const items = await loadDecisions(fakePrisma as never);
     expect(items).toHaveLength(2);

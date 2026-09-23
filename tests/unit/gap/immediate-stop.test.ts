@@ -7,6 +7,11 @@
  * this file only covers the flag-on branch and the two new helpers.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+const { mockedCompile } = vi.hoisted(() => ({ mockedCompile: vi.fn<(...args: any[]) => Promise<any>>() }));
+// R3-4: the runtime compiles every pinned step per item; mocked here so the pin tests stay about the pin.
+vi.mock('@/lib/gap/compiler/compile', () => ({ compile: mockedCompile }));
+
 import { STATUS } from '@/lib/queue/types';
 import { fromLegacyModexSteps } from '@/lib/gap/sequence/steps';
 import {
@@ -20,6 +25,8 @@ import {
 const savedGapOs = process.env.GAP_OS_ENABLED;
 beforeEach(() => {
   process.env.GAP_OS_ENABLED = 'true';
+  mockedCompile.mockReset();
+  mockedCompile.mockResolvedValue({ id: 'cmp_rt', verdict: 'pass', checks: [], critic: { ok: true, verdict: 'pass', score: 100, findings: [] } });
 });
 afterEach(() => {
   if (savedGapOs === undefined) delete process.env.GAP_OS_ENABLED;
@@ -36,7 +43,8 @@ function makePrisma() {
     sequenceEnrollment: { findUnique: vi.fn().mockResolvedValue(null) },
     sequenceVersion: { findUnique: vi.fn().mockResolvedValue(null) },
     emailLog: { findUnique: vi.fn() },
-    draftQueueItem: { create: vi.fn(), deleteMany: vi.fn(), updateMany: vi.fn(), findUnique: vi.fn() },
+    draftQueueItem: { create: vi.fn(), deleteMany: vi.fn(), updateMany: vi.fn(), findUnique: vi.fn(), findMany: vi.fn().mockResolvedValue([]) },
+    gapAuditEvent: { create: vi.fn().mockResolvedValue({ id: 'aud_1' }) },
   };
 }
 
@@ -269,7 +277,13 @@ describe('scheduleNextStep (flag on) carries the version pin forward', () => {
     expect(data.step_index).toBe(1);
     expect(data.parent_item_id).toBe(100);
     expect(data.sequence_run_id).toBe('run-abc');
-    expect(data.status).toBe(STATUS.approved);
+    // R3-4: a pinned step is created draft and earns approved from its own compile.
+    expect(data.status).toBe(STATUS.draft);
+    expect(mockedCompile).toHaveBeenCalledTimes(1);
+    expect(prisma.draftQueueItem.updateMany).toHaveBeenCalledWith({
+      where: { id: 201, status: STATUS.draft },
+      data: { status: STATUS.approved, approved_at: expect.any(Date) },
+    });
   });
 
   it('item without a version (legacy run) -> no sequence_version_id key on the created row', async () => {

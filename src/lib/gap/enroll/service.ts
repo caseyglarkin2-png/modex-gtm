@@ -8,10 +8,13 @@
  * that target allows:
  *
  *   hubspot_native   emit the enroll-table row (the lane's hand-enroll table,
- *                    S2-T8) and record a SequenceEnrollment ONLY when mode is
- *                    live AND the caller supplies a HubSpot readback. The
- *                    service never calls HubSpot; it records what HubSpot
- *                    said (spec 5.2, "record").
+ *                    S2-T8). Shadow and live both answer `enroll_row` with
+ *                    `enrollment: null` (R3-13): the service never calls
+ *                    HubSpot and never records what a caller CLAIMS HubSpot
+ *                    said. The enrollment-sync cron
+ *                    (src/app/api/cron/gap-enrollment-sync/route.ts) is the
+ *                    only recorder of hubspot_native enrollments, from a
+ *                    readback it takes itself (spec 5.2, "record").
  *   modex_queue      mode live: materialize the runtime `Sequence` row for
  *                    the version through `materializeSequence` (idempotent,
  *                    needs the passing compile ids verified above; its
@@ -20,10 +23,10 @@
  *                    theirs) and stamp that Sequence id on it (the runtime's
  *                    first guard; without it step 1 would never schedule),
  *                    compile the
- *                    item's RENDERED copy through `compile()` with the item's
- *                    id (so the approveBatch guard has an item-level row;
- *                    refuses `compile_not_passed:0` unless pass or an approved
- *                    review, parking the orphan), and then `enroll()` from
+ *                    item's RENDERED, MARKED copy through `compile()` with the
+ *                    item's id (so the approveBatch guard has an item-level
+ *                    row; refuses `compile_not_passed:0` unless pass or an
+ *                    approved review, parking the orphan), and then `enroll()` from
  *                    sequence/enrollment.ts with that item id. The enrollment
  *                    id enroll() generates IS the run id; this service does
  *                    not mint a second one, and enroll() writes the
@@ -43,23 +46,60 @@
  *                                the machine, not the person.
  *   version_not_found / version_retired / invalid_version_steps
  *   compile_not_found:<id> / compile_wrong_version:<id>
+ *   compile_wrong_hypothesis:<id> R3-3: a named row bound to another
+ *                                hypothesis never counts.
+ *   compile_template_only:<id>   R3-3: a template-level row (hypothesis_id
+ *                                null) is accepted for SHADOW only; live
+ *                                refuses it (verifyCompiles owns the rule),
+ *                                and so does materializeSequence.
  *   compile_not_passed:<stepIndex>
  *                                every step of the version needs, among the
  *                                named compile rows, a newest row whose
  *                                verdict is pass, or review_required with an
  *                                approved SendApprovalRequest (isApproved).
+ *   compiler_disabled            mode live, modex_queue only (N9): the per-item
+ *                                compile needs GAP_MESSAGE_COMPILER_ENABLED;
+ *                                with it off nothing is materialized or queued.
+ *                                Shadow is unaffected.
  *   autonomy_halted              mode live only: the canonical clawd kill
  *                                switch (`autonomyHalted('outreach')`, the
  *                                same reader `sendViaGmail` gates on). Halted,
  *                                unreachable, or a thrown read all refuse.
  *                                Shadow never reads it.
+ *   unrendered_placeholder:<token>
+ *                                modex only (R3-4): the step-0 templates are
+ *                                rendered through sequence/render.ts, the
+ *                                `{{observation}}` slot filled from the
+ *                                hypothesis observation ([S:id] tokens become
+ *                                [[SRC:id]] markers). The compiler judges the
+ *                                MARKED copy; the queue receives the STRIPPED
+ *                                copy. Any `{{token}}` left after rendering
+ *                                refuses before shadow audits or live queues.
  *   hypothesis_not_found / persona_not_found / no_email
+ *   suppressed /                 R3-2 and R3-10: BEFORE the target is resolved,
+ *   suppression_unknown          for every mode and every target, the same
+ *                                guard enroll() runs (`checkSuppression`: the
+ *                                unsubscribed table, Persona.do_not_contact, a
+ *                                bounced email status, then the cross-plane
+ *                                clawd contract read). The refusal detail and
+ *                                audit `leg` name what fired: unsubscribed |
+ *                                modex_do_not_contact | bounced | clawd:<leg>.
+ *                                An unreadable authority is `suppression_unknown`,
+ *                                never permission. The reader is `deps.suppression`
+ *                                (default: the routing clawd reader) and is
+ *                                handed to enroll() unchanged. A suppressed
+ *                                contact never reaches the enroll-table row,
+ *                                the would-be item or addOne.
  *   build_required
  *
  * The wrapped `enroll()` keeps every guard it owns (suppressed,
  * already_enrolled, hypothesis_not_ready, ...); a refusal from it is passed
  * through verbatim and the just-created draft item is parked as skipped
- * with `gap_enroll_refused:<reason>` so it can never be approved.
+ * with `gap_enroll_refused:<reason>` so it can never be approved. R3-12: an
+ * EXCEPTION anywhere after addOne (the stamp, the compile, enroll()) parks
+ * the same item as skipped with `gap_enroll_error:<error name>` and
+ * rethrows, so a thrown error never leaves an un-parked, un-stamped draft
+ * that sendNow could send.
  *
  * House conventions: `prisma: any` glue, refusal objects `{ok:false, reason}`,
  * no network here except the injected autonomy reader. Voice: no em dashes.
@@ -69,7 +109,6 @@ import { audit } from '@/lib/gap/audit';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { isApproved } from '@/lib/gap/compiler/approval';
 import { compile, type CompileDeps } from '@/lib/gap/compiler/compile';
-import type { CompileEvidenceRef } from '@/lib/gap/compiler/types';
 import { makeCriticClient, type CriticClient } from '@/lib/gap/critic-client';
 import { gapFlag } from '@/lib/gap/flags';
 import {
@@ -80,15 +119,13 @@ import {
 } from '@/lib/gap/routing/enroll-row';
 import { resolveEnrollTarget } from '@/lib/gap/routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
-import {
-  enroll,
-  recordExternalEnrollment,
-  type EnrollRefusal,
-  type ExternalReadback,
-  type RecordExternalRefusal,
-} from '@/lib/gap/sequence/enrollment';
-import { enrollmentId as externalEnrollmentId } from '@/lib/gap/sequence/external-sync';
-import { firstNameOf, renderPlaceholders } from '@/lib/gap/sequence/render';
+import { checkSuppression, enroll, type EnrollRefusal } from '@/lib/gap/sequence/enrollment';
+import type { SuppressionReader } from '@/lib/gap/routing/suppression-read';
+import { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
+import { firstNameOf, renderStepCopy, EVIDENCE_SIGNAL_SELECT, type EvidenceSignalRow } from '@/lib/gap/sequence/render';
+
+/** Re-exported: the projection now lives with the compiler it serves (R3-3); callers of the old service export keep working. */
+export { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
 import { parseSteps } from '@/lib/gap/sequence/steps';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
@@ -118,8 +155,6 @@ export interface EnrollFromDecisionInput {
   actorKind: ActorKind;
   mode: EnrollMode;
   now: Date;
-  /** hubspot_native only: what HubSpot says after the human enrolled by hand. */
-  readback?: ExternalReadback | null;
   /** Queue owner (modex) and enrollment owner. Defaults to the actor's email, else DEFAULT_OWNER. */
   owner?: string | null;
   /** Sending identity. Defaults to the decision's preferred sender, else the owner. */
@@ -151,6 +186,8 @@ export interface EnrollDeps {
   fetchImpl?: typeof fetch;
   /** The per-item compile's critic (modex live). Defaults to the real clawd client; tests inject a stub. */
   critic?: CriticClient;
+  /** The cross-plane suppression reader (R3-10). Defaults to the routing clawd contract reader; tests and the scratch e2e inject a static one. */
+  suppression?: SuppressionReader;
   /** The per-item compile's claims validator. Defaults to the committed snapshot validator; null disables. */
   validateClaims?: CompileDeps['validateClaims'];
   /**
@@ -170,18 +207,21 @@ export type EnrollServiceRefusal =
   | `invalid_version_steps:${string}`
   | `compile_not_found:${string}`
   | `compile_wrong_version:${string}`
+  | `compile_wrong_hypothesis:${string}`
+  | `compile_template_only:${string}`
   | `compile_not_passed:${number}`
+  | 'compiler_disabled'
   | 'autonomy_halted'
   | 'hypothesis_not_found'
   | 'persona_not_found'
   | 'no_email'
   | 'build_required'
   | 'step_has_no_copy:0'
+  | `unrendered_placeholder:${string}`
   | `queue_refused:${string}`
   | 'compile_not_passed:0'
   | MaterializeRefusal
-  | EnrollRefusal
-  | RecordExternalRefusal;
+  | EnrollRefusal;
 
 export interface WouldBeDraftItem {
   toEmail: string;
@@ -203,7 +243,8 @@ export type EnrollServiceResult =
       target: 'hubspot_native';
       mode: EnrollMode;
       row: EnrollTableJson;
-      enrollment: { id: string; frozen: boolean; isTest: boolean } | null;
+      /** Always null (R3-13): the enrollment-sync cron records hubspot_native enrollments, never this service. */
+      enrollment: null;
     }
   | {
       ok: true;
@@ -246,18 +287,31 @@ interface CompileRowLike {
   step_index: number | null;
   verdict: string;
   created_at: Date | string;
+  hypothesis_id?: string | null;
+}
+
+export interface VerifyCompilesOptions {
+  /** Shadow only: a template-level row (hypothesis_id null) may stand in for a step. Live never accepts one. */
+  allowTemplateRows?: boolean;
 }
 
 /**
- * Pure: for every step index the newest named compile row must be a pass,
- * or a review_required whose approval the caller resolved. Returns the
- * first failing step, or null.
+ * Pure: every named row must be bound to a hypothesis unless template rows
+ * are allowed (`compile_template_only:<id>` otherwise, R3-3), and for every
+ * step index the newest named compile row must be a pass, or a
+ * review_required whose approval the caller resolved. Returns the first
+ * refusal, or null.
  */
 export async function verifyCompiles(
   prisma: any,
   stepCount: number,
   rows: readonly CompileRowLike[],
-): Promise<`compile_not_passed:${number}` | null> {
+  opts: VerifyCompilesOptions = {},
+): Promise<`compile_not_passed:${number}` | `compile_template_only:${string}` | null> {
+  if (!opts.allowTemplateRows) {
+    const template = rows.find((r) => (r.hypothesis_id ?? null) === null);
+    if (template) return `compile_template_only:${template.id}`;
+  }
   for (let i = 0; i < stepCount; i += 1) {
     const forStep = rows
       .filter((r) => r.step_index === i)
@@ -344,53 +398,6 @@ function preferredSenderOf(decision: DecisionRow | null): string | null {
   return isObj(snap) ? optStr(snap.preferredSender) : null;
 }
 
-/** Evidence freshness window for the default per-item compile contract (spec section 6, 45 days). */
-const EVIDENCE_MAX_AGE_DAYS = 45;
-const DAY_MS = 24 * 60 * 60 * 1000;
-
-interface SignalRow {
-  id: string;
-  title: string;
-  evidence_url: string | null;
-  external_ok: boolean | null;
-  observed_at: Date | string;
-  freshness_expires_at: Date | string | null;
-  source_type: string;
-  metadata?: unknown;
-}
-
-function isFirstParty(sourceType: string): boolean {
-  return sourceType.startsWith('first_party') || sourceType === 'crm' || sourceType === 'manual';
-}
-
-/** Linked signals as compile evidence refs, fail-closed on every unstated flag. */
-export function evidenceRefsFromSignals(signals: readonly SignalRow[], now: Date): CompileEvidenceRef[] {
-  const out: CompileEvidenceRef[] = [];
-  for (const s of signals) {
-    if (!s || typeof s.id !== 'string') continue;
-    const observed = s.observed_at instanceof Date ? s.observed_at : new Date(s.observed_at);
-    const expires = s.freshness_expires_at
-      ? s.freshness_expires_at instanceof Date
-        ? s.freshness_expires_at
-        : new Date(s.freshness_expires_at)
-      : null;
-    const fresh = expires
-      ? expires.getTime() > now.getTime()
-      : !Number.isNaN(observed.getTime()) && now.getTime() - observed.getTime() <= EVIDENCE_MAX_AGE_DAYS * DAY_MS;
-    const superseded = isObj(s.metadata) && s.metadata.superseded === true;
-    out.push({
-      id: s.id,
-      title: s.title ?? '',
-      url: s.evidence_url ?? null,
-      externalOk: s.external_ok === true,
-      fresh,
-      superseded,
-      firstParty: isFirstParty(s.source_type ?? ''),
-    });
-  }
-  return out;
-}
-
 interface PersonaRow {
   id: number;
   name: string | null;
@@ -398,6 +405,7 @@ interface PersonaRow {
   account_name: string;
   hubspot_contact_id: string | null;
   do_not_contact: boolean;
+  email_status: string | null;
 }
 
 interface HypothesisRow {
@@ -407,7 +415,7 @@ interface HypothesisRow {
   observation?: string | null;
   problem_hypothesis?: string | null;
   problem_family?: string | null;
-  signals?: Array<{ signal: SignalRow | null }> | null;
+  signals?: Array<{ signal: EvidenceSignalRow | null }> | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -467,15 +475,19 @@ export async function enrollFromDecision(
       ? []
       : await prisma.gapCompile.findMany({
           where: { id: { in: compileIds } },
-          select: { id: true, sequence_version_id: true, step_index: true, verdict: true, created_at: true },
+          select: { id: true, sequence_version_id: true, step_index: true, verdict: true, created_at: true, hypothesis_id: true },
         });
   const byId = new Map(compileRows.map((r) => [r.id, r]));
   for (const id of compileIds) {
     const row = byId.get(id);
     if (!row) return refuse(`compile_not_found:${id}`);
     if (row.sequence_version_id !== version.id) return refuse(`compile_wrong_version:${id}`);
+    // R3-3: a compile row is evidence about ONE hypothesis and person. A row bound elsewhere never counts;
+    // a null row is a template judgment that verifyCompiles accepts for shadow only (compile_template_only).
+    const boundTo = row.hypothesis_id ?? null;
+    if (boundTo !== null && boundTo !== input.hypothesisId) return refuse(`compile_wrong_hypothesis:${id}`, { boundTo });
   }
-  const notPassed = await verifyCompiles(prisma, steps.length, compileRows);
+  const notPassed = await verifyCompiles(prisma, steps.length, compileRows, { allowTemplateRows: input.mode === 'shadow' });
   if (notPassed) return refuse(notPassed);
 
   // 5. Live reads the canonical kill switch; shadow never does.
@@ -500,32 +512,23 @@ export async function enrollFromDecision(
       observation: true,
       problem_hypothesis: true,
       problem_family: true,
-      signals: {
-        select: {
-          signal: {
-            select: {
-              id: true,
-              title: true,
-              evidence_url: true,
-              external_ok: true,
-              observed_at: true,
-              freshness_expires_at: true,
-              source_type: true,
-              metadata: true,
-            },
-          },
-        },
-      },
+      signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } },
     },
   });
   if (!hypothesis) return refuse('hypothesis_not_found');
   const persona: PersonaRow | null = await prisma.persona.findUnique({
     where: { id: input.personaId },
-    select: { id: true, name: true, email: true, account_name: true, hubspot_contact_id: true, do_not_contact: true },
+    select: { id: true, name: true, email: true, account_name: true, hubspot_contact_id: true, do_not_contact: true, email_status: true },
   });
   if (!persona) return refuse('persona_not_found');
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
+
+  // 6b. Suppression, before any target is resolved (R3-2, R3-10): the same
+  // guard enroll() runs, local legs then the cross-plane read; the leg is named.
+  const suppressionOpts = deps.suppression ? { suppression: deps.suppression } : {};
+  const suppression = await checkSuppression(prisma, email, persona.id, suppressionOpts);
+  if (!suppression.ok) return refuse(suppression.reason, { leg: suppression.leg, detail: suppression.leg });
 
   // 7. Target from the persona's Top100 entry (the decision snapshot carries it).
   const decision = await loadDecision(prisma, input);
@@ -542,7 +545,7 @@ export async function enrollFromDecision(
   if (target === 'build_required') return refuse('build_required', { target });
 
   // -------------------------------------------------------------------------
-  // hubspot_native: the enroll-table row; record only from a live readback.
+  // hubspot_native: the enroll-table row, never a recorded enrollment (R3-13).
   // -------------------------------------------------------------------------
   if (target === 'hubspot_native') {
     const item: EnrollRowItem = {
@@ -580,42 +583,15 @@ export async function enrollFromDecision(
     };
     const row = renderEnrollTableJson(buildEnrollRows([item]));
 
-    let enrollment: { id: string; frozen: boolean; isTest: boolean } | null = null;
-    if (input.mode === 'live' && input.readback) {
-      const hubspotSequenceId = top100?.hubspotSequenceId ?? '';
-      const hubspotContactId = persona.hubspot_contact_id ?? '';
-      const recorded = await recordExternalEnrollment(prisma, {
-        id: externalEnrollmentId(hubspotSequenceId, hubspotContactId),
-        familyId: version.family_id,
-        versionId: version.id,
-        toEmail: email,
-        accountName,
-        hubspotContactId,
-        hubspotSequenceId,
-        personaId: persona.id,
-        hypothesisId: hypothesis.id,
-        sender,
-        owner,
-        externalState: input.readback,
-        enrolledAt: input.now,
-        enrolledBy: input.actor,
-        now: input.now,
-      });
-      if (!recorded.ok) return refuse(recorded.reason, { target });
-      enrollment = { id: recorded.id, frozen: recorded.frozen, isTest: recorded.isTest };
-    }
-
-    // recordExternalEnrollment writes its own enroll.live row; the emitted-only outcomes are audited here.
-    if (enrollment === null) {
-      await audit(prisma, {
-        kind: input.mode === 'live' ? 'enroll.live' : 'enroll.shadow',
-        actor: input.actor,
-        subjectType: SUBJECT_TYPE,
-        subjectId: input.hypothesisId,
-        payload: { ...base, target, kind: 'enroll_row', row, enrollmentId: null, recorded: false },
-      });
-    }
-    return { ok: true, kind: 'enroll_row', target, mode: input.mode, row, enrollment };
+    // The row is the whole outcome (N4): live audits enroll.row_emitted, never enroll.live; shadow stays enroll.shadow.
+    await audit(prisma, {
+      kind: input.mode === 'live' ? 'enroll.row_emitted' : 'enroll.shadow',
+      actor: input.actor,
+      subjectType: SUBJECT_TYPE,
+      subjectId: input.hypothesisId,
+      payload: { ...base, target, kind: 'enroll_row', row, enrollmentId: null, recorded: false },
+    });
+    return { ok: true, kind: 'enroll_row', target, mode: input.mode, row, enrollment: null };
   }
 
   // -------------------------------------------------------------------------
@@ -625,14 +601,19 @@ export async function enrollFromDecision(
   const subjectTemplate = step0?.templates?.subjectTemplate ?? null;
   const bodyTemplate = step0?.templates?.bodyTemplate ?? null;
   if (!subjectTemplate || !bodyTemplate) return refuse('step_has_no_copy:0', { target });
-  const values = { firstName: firstNameOf(persona.name), account: accountName };
+  // R3-4: the slot render. The compiler judges `rendered.marked`; the queue gets `rendered.queued`.
+  const rendered = renderStepCopy(
+    { subject: subjectTemplate, body: bodyTemplate },
+    { firstName: firstNameOf(persona.name), account: accountName, observation: hypothesis.observation ?? null },
+  );
+  if (rendered.unrendered) return refuse(`unrendered_placeholder:${rendered.unrendered}`, { target, token: rendered.unrendered });
   const wouldBe: WouldBeDraftItem = {
     toEmail: email,
     accountName,
     personaId: persona.id,
     personaName: persona.name,
-    subject: renderPlaceholders(subjectTemplate, values),
-    body: renderPlaceholders(bodyTemplate, values),
+    subject: rendered.queued.subject,
+    body: rendered.queued.body,
     sequenceVersionId: version.id,
     stepIndex: 0,
     owner,
@@ -650,8 +631,11 @@ export async function enrollFromDecision(
     return { ok: true, kind: 'modex_shadow', target, mode: 'shadow', wouldBe };
   }
 
+  // N9: the live path compiles the item; the compiler must be switched on.
+  if (!gapFlag('GAP_MESSAGE_COMPILER_ENABLED')) return refuse('compiler_disabled', { target });
+
   // The runtime Sequence row the step-0 item must point at (idempotent; the compile ids were verified above).
-  const materialized = await materializeSequence(prisma, { versionId: version.id, compileIds }, input.actor, { owner, now: () => input.now });
+  const materialized = await materializeSequence(prisma, { versionId: version.id, hypothesisId: hypothesis.id, compileIds }, input.actor, { owner, now: () => input.now });
   if (!materialized.ok) return refuse(materialized.reason, { target });
   const sequenceId = materialized.sequenceId;
 
@@ -672,23 +656,27 @@ export async function enrollFromDecision(
     return refuse(`queue_refused:${added.reason ?? 'unknown'}`, { target });
   }
   const draftItemId = added.id;
-  // addOne's input has no sequence_id; stamp it before anything else can act on the item.
-  await prisma.draftQueueItem.updateMany({ where: { id: draftItemId, status: 'draft' }, data: { sequence_id: sequenceId } });
 
-  const park = async (reason: string): Promise<void> => {
+  const parkAs = async (skippedReason: string): Promise<void> => {
     try {
       await prisma.draftQueueItem.updateMany({
         where: { id: draftItemId, status: 'draft' },
-        data: { status: 'skipped', skipped_reason: `gap_enroll_refused:${reason}` },
+        data: { status: 'skipped', skipped_reason: skippedReason },
       });
     } catch {
-      // The refusal is the answer; the audit payload records the intent to park.
+      // The refusal (or the original error) is the answer; the audit payload records the intent to park.
     }
   };
+  const park = (reason: string): Promise<void> => parkAs(`gap_enroll_refused:${reason}`);
 
-  // Per-item compile on the RENDERED copy, keyed to the item so the approveBatch guard finds an item-level row.
+  // An arrow const (not a hoisted declaration) so the null-narrowing of hypothesis, persona and target above carries in.
+  const afterAddOne = async (): Promise<EnrollServiceResult> => {
+  // addOne's input has no sequence_id; stamp it before anything else can act on the item.
+  await prisma.draftQueueItem.updateMany({ where: { id: draftItemId, status: 'draft' }, data: { sequence_id: sequenceId } });
+
+  // Per-item compile on the RENDERED, MARKED copy, keyed to the item so the approveBatch guard finds an item-level row.
   const signals = Array.isArray(hypothesis.signals)
-    ? hypothesis.signals.map((l) => l.signal).filter((x): x is SignalRow => !!x)
+    ? hypothesis.signals.map((l) => l.signal).filter((x): x is EvidenceSignalRow => !!x)
     : [];
   const contract: Record<string, unknown> = {
     hypothesis: {
@@ -707,8 +695,8 @@ export async function enrollFromDecision(
       sequenceVersionId: version.id,
       draftQueueItemId: draftItemId,
       stepIndex: 0,
-      subject: wouldBe.subject,
-      body: wouldBe.body,
+      subject: rendered.marked.subject,
+      body: rendered.marked.body,
       priorBodies: [],
       contract,
       createdBy: input.actor,
@@ -738,20 +726,24 @@ export async function enrollFromDecision(
     });
   }
 
-  const enrolled = await enroll(prisma, {
-    familyId: version.family_id,
-    versionId: version.id,
-    engine: 'modex_draft_queue',
-    toEmail: email,
-    accountName,
-    personaId: persona.id,
-    hypothesisId: hypothesis.id,
-    sender,
-    owner,
-    draftItemId,
-    now: input.now,
-    enrolledBy: input.actor,
-  });
+  const enrolled = await enroll(
+    prisma,
+    {
+      familyId: version.family_id,
+      versionId: version.id,
+      engine: 'modex_draft_queue',
+      toEmail: email,
+      accountName,
+      personaId: persona.id,
+      hypothesisId: hypothesis.id,
+      sender,
+      owner,
+      draftItemId,
+      now: input.now,
+      enrolledBy: input.actor,
+    },
+    suppressionOpts,
+  );
   if (!enrolled.ok) {
     // Park the orphan so it can never be approved; enroll() owns the reason.
     await park(enrolled.reason);
@@ -769,4 +761,13 @@ export async function enrollFromDecision(
     compileId: compiled.id ?? null,
     enrollment: { id: enrolled.id, frozen: enrolled.frozen, isTest: enrolled.isTest },
   };
+  };
+
+  // R3-12: from here on an exception parks the orphan before it propagates.
+  try {
+    return await afterAddOne();
+  } catch (err) {
+    await parkAs(`gap_enroll_error:${err instanceof Error && err.name ? err.name : 'Error'}`);
+    throw err;
+  }
 }

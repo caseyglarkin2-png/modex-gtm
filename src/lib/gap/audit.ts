@@ -41,11 +41,16 @@ export type GapAuditKind =
   | 'bid.confirmed'
   | 'enroll.shadow'
   | 'enroll.live'
+  | 'enroll.row_emitted'
+  | 'schedule.compile_not_passed'
+  | 'schedule.skipped'
   | 'enroll.refused'
   | 'flag.refused'
   | 'copy_drift'
   | 'sequence.materialized'
-  | 'schedule.unrendered_placeholder';
+  | 'schedule.unrendered_placeholder'
+  | 'schedule.compile_not_passed'
+  | 'schedule.skipped';
 
 export interface HypothesisEventInput {
   hypothesisId: string;

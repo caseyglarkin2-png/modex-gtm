@@ -9,6 +9,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const mockedAuth = vi.fn();
+const mockedSendQueueItem = vi.fn();
 
 const mockedPrisma = {
   unsubscribedEmail: { findUnique: vi.fn() },
@@ -22,6 +23,7 @@ const mockedPrisma = {
     deleteMany: vi.fn(),
   },
   gapCompile: { findMany: vi.fn() },
+  sendApprovalRequest: { findFirst: vi.fn() },
   sequence: { findUnique: vi.fn(), create: vi.fn(), findMany: vi.fn() },
   experiment: { create: vi.fn() },
 };
@@ -29,10 +31,10 @@ const mockedPrisma = {
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/email/gmail-inbox', () => ({ threadExistsWith: vi.fn() }));
-vi.mock('@/lib/queue/send', () => ({ sendQueueItem: vi.fn() }));
+vi.mock('@/lib/queue/send', () => ({ sendQueueItem: mockedSendQueueItem }));
 vi.mock('@/lib/queue/send-deps', () => ({ prodSendDeps: vi.fn(() => ({})) }));
 
-const { approveBatch } = await import('@/app/discovery/queue-actions');
+const { approveBatch, retryDraft, sendNow } = await import('@/app/discovery/queue-actions');
 
 const REP = 'rep@freightroll.com';
 const ACTIVE = { in: ['draft', 'approved'] };
@@ -77,6 +79,22 @@ describe('approveBatch with GAP_OS_ENABLED off', () => {
     expect(calls[0][0].data.batch_id).toBe(calls[1][0].data.batch_id);
     expect(mockedPrisma.draftQueueItem.findMany).not.toHaveBeenCalled();
     expect(mockedPrisma.gapCompile.findMany).not.toHaveBeenCalled();
+  });
+
+  it('R3-11 flag off: sendNow and retryDraft make exactly today\'s calls (one owner-scoped updateMany each, no guard reads)', async () => {
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 0 });
+    expect(await sendNow(10)).toEqual({ ok: false, reason: 'not_found_or_forbidden' });
+    expect(mockedPrisma.draftQueueItem.updateMany.mock.calls).toEqual([
+      [{ where: { id: 10, owner: REP, status: ACTIVE }, data: { status: 'approved', approved_at: expect.any(Date) } }],
+    ]);
+    expect(await retryDraft(11)).toEqual({ ok: false, reason: 'not_retryable' });
+    expect(mockedPrisma.draftQueueItem.updateMany.mock.calls[1]).toEqual([
+      { where: { id: 11, owner: REP, status: 'failed', provider_message_id: null }, data: { status: 'approved', error_message: null } },
+    ]);
+    expect(mockedPrisma.draftQueueItem.updateMany).toHaveBeenCalledTimes(2);
+    expect(mockedPrisma.draftQueueItem.findMany).not.toHaveBeenCalled();
+    expect(mockedPrisma.gapCompile.findMany).not.toHaveBeenCalled();
+    expect(mockedSendQueueItem).not.toHaveBeenCalled();
   });
 
   it('a stamped item with a rejecting compile is still approved when the flag is off (legacy path unchanged)', async () => {
@@ -127,6 +145,26 @@ describe('approveBatch with GAP_OS_ENABLED on', () => {
     expect(mockedPrisma.gapCompile.findMany.mock.calls[0][0].orderBy).toEqual({ created_at: 'desc' });
   });
 
+  it('N3: a review_required latest compile clears through an APPROVED SendApprovalRequest, exactly as the enroll service and the enroll-row gate do; pending refuses', async () => {
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([{ id: 10, sequence_version_id: 'ver_1', step_index: 0 }]);
+    mockedPrisma.gapCompile.findMany.mockResolvedValue([{ id: 'cmp_rev', draft_queue_item_id: 10, sequence_version_id: 'ver_1', step_index: 0, verdict: 'review_required' }]);
+    mockedPrisma.sendApprovalRequest.findFirst.mockResolvedValue({ id: 'sar_1', status: 'approved' });
+
+    expect(await approveBatch([10])).toStrictEqual({ ok: true, approved: 1, refused: [] });
+    expect(mockedPrisma.sendApprovalRequest.findFirst).toHaveBeenCalledWith({
+      where: { risk_reasons: { has: 'gap_compile:cmp_rev' } },
+      orderBy: { created_at: 'desc' },
+      select: { id: true, status: true },
+    });
+
+    mockedPrisma.draftQueueItem.updateMany.mockClear();
+    mockedPrisma.sendApprovalRequest.findFirst.mockResolvedValue({ id: 'sar_1', status: 'pending' });
+    expect(await approveBatch([10])).toStrictEqual({ ok: true, approved: 0, refused: [{ id: 10, reason: 'compile_not_passed' }] });
+    expect(await sendNow(10)).toStrictEqual({ ok: false, reason: 'compile_not_passed' });
+    expect(await retryDraft(10)).toStrictEqual({ ok: false, reason: 'compile_not_passed' });
+    expect(mockedPrisma.draftQueueItem.updateMany).not.toHaveBeenCalled();
+  });
+
   it('the LATEST compile decides: an older pass under a newer review_required is refused', async () => {
     mockedPrisma.draftQueueItem.findMany.mockResolvedValue([{ id: 10, sequence_version_id: 'ver_1', step_index: 0 }]);
     // Ordered newest first, as the query asks.
@@ -175,6 +213,43 @@ describe('approveBatch with GAP_OS_ENABLED on', () => {
     expect(res).toStrictEqual({ ok: true, approved: 2, refused: [] });
     expect(mockedPrisma.gapCompile.findMany).not.toHaveBeenCalled();
     expect(mockedPrisma.draftQueueItem.updateMany.mock.calls).toEqual([updateCall(30), updateCall(31)]);
+  });
+
+  it('R3-11: sendNow refuses a stamped item whose newest compile is a reject with compile_not_passed, before any write or send', async () => {
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([{ id: 10, sequence_version_id: 'ver_1', step_index: 1 }]);
+    mockedPrisma.gapCompile.findMany.mockResolvedValue([
+      { draft_queue_item_id: 10, sequence_version_id: 'ver_1', step_index: 1, verdict: 'reject' },
+      { draft_queue_item_id: 10, sequence_version_id: 'ver_1', step_index: 1, verdict: 'pass' },
+    ]);
+
+    const res = await sendNow(10);
+
+    expect(res).toStrictEqual({ ok: false, reason: 'compile_not_passed' });
+    expect(mockedPrisma.draftQueueItem.updateMany).not.toHaveBeenCalled();
+    expect(mockedSendQueueItem).not.toHaveBeenCalled();
+    expect(mockedPrisma.draftQueueItem.findMany).toHaveBeenCalledWith({
+      where: { id: { in: [10] }, sequence_version_id: { not: null } },
+      select: { id: true, sequence_version_id: true, step_index: true },
+    });
+  });
+
+  it('R3-11: retryDraft refuses a stamped item whose newest compile is a reject with compile_not_passed, before the re-approve', async () => {
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([{ id: 12, sequence_version_id: 'ver_1', step_index: 2 }]);
+    mockedPrisma.gapCompile.findMany.mockResolvedValue([{ draft_queue_item_id: 12, sequence_version_id: 'ver_1', step_index: 2, verdict: 'reject' }]);
+
+    const res = await retryDraft(12);
+
+    expect(res).toStrictEqual({ ok: false, reason: 'compile_not_passed' });
+    expect(mockedPrisma.draftQueueItem.updateMany).not.toHaveBeenCalled();
+  });
+
+  it('R3-11: an unstamped item passes both guards untouched (sendNow reaches the approve write; retryDraft reaches the re-approve)', async () => {
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([]);
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 0 });
+    expect(await sendNow(30)).toEqual({ ok: false, reason: 'not_found_or_forbidden' });
+    expect(await retryDraft(31)).toEqual({ ok: false, reason: 'not_retryable' });
+    expect(mockedPrisma.draftQueueItem.updateMany).toHaveBeenCalledTimes(2);
+    expect(mockedPrisma.gapCompile.findMany).not.toHaveBeenCalled();
   });
 
   it('scheduled approve staggers over the surviving items only', async () => {

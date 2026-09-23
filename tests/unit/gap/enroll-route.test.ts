@@ -119,7 +119,6 @@ describe('POST /api/gap/enroll', () => {
       mode: 'shadow',
       actor: 'casey@freightroll.com',
       actorKind: 'human',
-      readback: null,
     });
     expect(inputArg.now).toBeInstanceOf(Date);
     expect(depsArg.addOne).toBe(mockedAddOne);
@@ -152,14 +151,37 @@ describe('POST /api/gap/enroll', () => {
     expect(mockedService).not.toHaveBeenCalled();
   });
 
-  it('passes decisionId, readback, owner and sender through when given', async () => {
-    const readback = { activelyEnrolledCount: 1, latestSequenceId: '333', latestEnrolledAt: null };
-    await POST(post({ ...VALID_BODY, decisionId: 'dec_1', readback, owner: 'jake@freightroll.com', sender: 'casey@yardflow.ai' }));
+  it('passes decisionId, owner and sender through when given, and never a readback key', async () => {
+    await POST(post({ ...VALID_BODY, decisionId: 'dec_1', owner: 'casey@freightroll.com', sender: 'casey@yardflow.ai' }));
     expect(mockedService.mock.calls[0][1]).toMatchObject({
       decisionId: 'dec_1',
-      readback,
-      owner: 'jake@freightroll.com',
+      owner: 'casey@freightroll.com',
       sender: 'casey@yardflow.ai',
     });
+    expect('readback' in mockedService.mock.calls[0][1]).toBe(false);
+  });
+
+  it('N8: sender and owner must be one of the two sending identities; anything else is 422 naming the field', async () => {
+    const badSender = await POST(post({ ...VALID_BODY, sender: 'jake@freightroll.com' }));
+    expect(badSender.status).toBe(422);
+    expect(await badSender.json()).toEqual({ error: 'sender_not_allowed', field: 'sender' });
+    const badOwner = await POST(post({ ...VALID_BODY, owner: 'jake@freightroll.com' }));
+    expect(badOwner.status).toBe(422);
+    expect(await badOwner.json()).toEqual({ error: 'owner_not_allowed', field: 'owner' });
+    const cased = await POST(post({ ...VALID_BODY, sender: 'Casey@YardFlow.ai' }));
+    expect(cased.status).toBe(422);
+    expect(mockedService).not.toHaveBeenCalled();
+    for (const identity of ['casey@yardflow.ai', 'casey@freightroll.com']) {
+      expect((await POST(post({ ...VALID_BODY, sender: identity, owner: identity }))).status).toBe(200);
+    }
+  });
+
+  it('R3-13: a body carrying readback (any value, even null) is 422 readback_not_accepted and the service is never called', async () => {
+    for (const readback of [{ activelyEnrolledCount: 1, latestSequenceId: '333', latestEnrolledAt: null }, null, 'yes']) {
+      const res = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true, readback }));
+      expect(res.status).toBe(422);
+      expect(await res.json()).toEqual({ error: 'readback_not_accepted', field: 'readback' });
+    }
+    expect(mockedService).not.toHaveBeenCalled();
   });
 });

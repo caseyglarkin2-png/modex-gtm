@@ -21,6 +21,17 @@
  * `confirm: true` (422 `confirm_required` otherwise) so a UI cannot enroll
  * live by leaving a field out. Status codes: 200 with the service result;
  * 409 with `{error: <reason>}` on a refusal; 400 unparsable JSON; 422 shape.
+ *
+ * N8: `sender` and `owner`, when given, must be one of SENDING_IDENTITIES
+ * (the two identities that send: casey@yardflow.ai, casey@freightroll.com);
+ * anything else is 422 `sender_not_allowed` / `owner_not_allowed` naming
+ * the field, so a body cannot point a run at an identity nobody sends from.
+ *
+ * R3-13: the body carries NO `readback`. A HubSpot readback was a request
+ * body claim, and a claim is not what HubSpot says. A body with a `readback`
+ * key of any value is 422 `readback_not_accepted`. The enrollment-sync cron
+ * (src/app/api/cron/gap-enrollment-sync/route.ts) is the only recorder of
+ * hubspot_native enrollments; this route only emits the enroll-table row.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -34,11 +45,8 @@ import { addOne } from '@/app/discovery/queue-actions';
 
 export const dynamic = 'force-dynamic';
 
-const ReadbackSchema = z.object({
-  activelyEnrolledCount: z.number().int().min(0),
-  latestSequenceId: z.string().nullable(),
-  latestEnrolledAt: z.string().nullable(),
-});
+/** The only identities a GAP run may send from or be owned by (N8). Exact, lowercase. */
+export const SENDING_IDENTITIES: readonly string[] = ['casey@yardflow.ai', 'casey@freightroll.com'];
 
 const BodySchema = z.object({
   decisionId: z.string().min(1).optional(),
@@ -48,7 +56,6 @@ const BodySchema = z.object({
   compileIds: z.array(z.string().min(1)).min(1),
   mode: z.enum(['shadow', 'live']).default('shadow'),
   confirm: z.boolean().optional(),
-  readback: ReadbackSchema.nullable().optional(),
   owner: z.string().email().optional(),
   sender: z.string().min(1).optional(),
 });
@@ -89,6 +96,9 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'invalid_body', field: 'body' }, { status: 400 });
   }
+  if (raw && typeof raw === 'object' && 'readback' in (raw as Record<string, unknown>)) {
+    return NextResponse.json({ error: 'readback_not_accepted', field: 'readback' }, { status: 422 });
+  }
   const parsed = BodySchema.safeParse(raw);
   if (!parsed.success) {
     return NextResponse.json({ error: 'invalid_body', field: firstField(parsed.error) }, { status: 422 });
@@ -97,6 +107,12 @@ export async function POST(request: NextRequest) {
 
   if (input.mode === 'live' && input.confirm !== true) {
     return NextResponse.json({ error: 'confirm_required', field: 'confirm' }, { status: 422 });
+  }
+  if (input.sender !== undefined && !SENDING_IDENTITIES.includes(input.sender)) {
+    return NextResponse.json({ error: 'sender_not_allowed', field: 'sender' }, { status: 422 });
+  }
+  if (input.owner !== undefined && !SENDING_IDENTITIES.includes(input.owner)) {
+    return NextResponse.json({ error: 'owner_not_allowed', field: 'owner' }, { status: 422 });
   }
 
   const result = await enrollFromDecision(
@@ -111,7 +127,6 @@ export async function POST(request: NextRequest) {
       actorKind,
       mode: input.mode,
       now: new Date(),
-      readback: input.readback ?? null,
       owner: input.owner ?? null,
       sender: input.sender ?? null,
     },

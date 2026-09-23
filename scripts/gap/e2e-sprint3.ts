@@ -7,33 +7,43 @@
  *   npx tsx scripts/gap/e2e-sprint3.ts
  *
  * Walks the committed Sprint 3 surface in order: seed (account, persona,
- * two registered facts, a hypothesis proposed, approved and activated), a
- * family and version from the Network Standardization seed with the twin
- * refusal, every step compiled through `compile()` with a stub critic and
- * persisted, a meeting ask rejected at step 0 (C09), the approval path on a
- * review_required compile (idempotent), `materializeSequence` refused then
- * created then idempotent, `enrollFromDecision` in shadow (zero writes) and
- * live through the REAL `addOne` into the Draft Queue (enrollment row, the
- * version frozen by the trigger, the item stamped, an item-level compile
- * row), the approveBatch guard's data contract, `scheduleNextStep` for step
- * 1 under the flag (pinned steps, rendered placeholders, deterministic key,
- * business-day delay), the frozen version refused by the service and by the
- * database, a stop that skips the unsent rows including a failed one, the
- * Top100 journal import dry run over its fixture, and the compile-top100
- * persist path over its fixture with the enroll-row compile gate reading the
- * exact skip reasons. Every step prints one PASS/FAIL line; the first FAIL
- * stops the run and the process exits 1. Every row the run creates is
- * deleted in the finally block, in dependency order.
+ * two registered facts, a hypothesis proposed, approved and activated whose
+ * observation is real fixture-backed text citing both facts with [S:id]
+ * tokens), a family and version from the Network Standardization seed with
+ * the twin refusal, every step compiled through `compile()` with a stub
+ * critic and persisted (step 0 with the hypothesis observation rendered into
+ * its `{{observation}}` slot, R3-4), a meeting ask rejected at step 0 (C09),
+ * the approval path on a review_required compile (idempotent),
+ * `materializeSequence` refused then created then idempotent (bound to the
+ * hypothesis, R3-3), `enrollFromDecision` in shadow (zero writes) and live
+ * through the REAL `addOne` into the Draft Queue (enrollment row, the version
+ * frozen by the trigger, the item stamped, an item-level compile row that
+ * judged the MARKED copy while the queued body carries no marker), the
+ * approveBatch guard's data contract, `scheduleNextStep` for step 1 under
+ * the flag (pinned steps, rendered placeholders, deterministic key,
+ * business-day delay, created draft then approved by its own per-item
+ * compile) and for step 2 (created draft and LEFT draft because its fixture
+ * marker does not resolve against the hypothesis signals, with the
+ * `schedule.compile_not_passed` audit row), the frozen version refused by the
+ * service and by the database, a stop that skips the unsent rows including a
+ * failed one, the Top100 journal import dry run over its fixture, and the
+ * compile-top100 persist path over its fixture with the enroll-row compile
+ * gate reading the exact skip reasons. Every step prints one PASS/FAIL line;
+ * the first FAIL stops the run and the process exits 1. Every row the run
+ * creates is deleted in the finally block, in dependency order.
  *
  * Safety rails, all fail-closed:
  *   - DATABASE_URL must point at 127.0.0.1:5433/gap_dev. Anything else exits 2
  *     before a client is built.
  *   - HUBSPOT_ACCESS_TOKEN, MC_API_TOKEN, GOOGLE_REFRESH_TOKEN,
- *     GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET are deleted from process.env
- *     before the first write and asserted gone. No HubSpot, clawd or Gmail
- *     call can be made: the critic is a stub, the autonomy reader is a stub,
- *     `addOne`'s Gmail thread check sees no credentials and reports no
- *     thread, and the review-feed poster has no token.
+ *     GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, CLAWD_CONTROL_PLANE_URL and
+ *     CLAWD_CONTROL_PLANE_TOKEN are deleted from process.env before the
+ *     first write and asserted gone. No HubSpot, clawd or Gmail call can be
+ *     made: the critic is a stub, the autonomy reader is a stub, the
+ *     cross-plane suppression reader is a static CLEAR (R3-10; the default
+ *     clawd reader would answer unknown and refuse), `addOne`'s Gmail thread
+ *     check sees no credentials and reports no thread, and the review-feed
+ *     poster has no token.
  *   - The four seed families must already exist on the scratch database
  *     (scripts/gap/seed-families.ts --apply); the run creates its OWN family
  *     and version from the seed steps so the shared seed rows are never
@@ -51,7 +61,7 @@
  * Writes docs/gap/sprint3-e2e-latest.md (no em dashes, no secrets) on every
  * run, PASS or FAIL, before cleanup.
  */
-for (const name of ['HUBSPOT_ACCESS_TOKEN', 'MC_API_TOKEN', 'GOOGLE_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET'] as const) {
+for (const name of ['HUBSPOT_ACCESS_TOKEN', 'MC_API_TOKEN', 'GOOGLE_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'CLAWD_CONTROL_PLANE_URL', 'CLAWD_CONTROL_PLANE_TOKEN'] as const) {
   if (process.env[name] !== undefined) delete process.env[name];
 }
 
@@ -75,9 +85,12 @@ import {
   type LaneResearchFile,
   type LaneSequenceFile,
 } from '../../src/lib/gap/import/top100-compile';
-import { buildEnrollRows, loadCompileGate, type EnrollRowItem } from '../../src/lib/gap/routing/enroll-row';
+import { buildEnrollRows, loadCompileGate, TOP100_COMPILE_CREATED_BY_PREFIX, type EnrollRowItem } from '../../src/lib/gap/routing/enroll-row';
+import { staticSuppressionReader } from '../../src/lib/gap/routing/suppression-read';
 import type { RoutingInputs } from '../../src/lib/gap/routing/types';
 import { stop } from '../../src/lib/gap/sequence/enrollment';
+import { evidenceRefsFromSignals } from '../../src/lib/gap/compiler/evidence-from-signals';
+import { renderStepCopy, EVIDENCE_SIGNAL_SELECT } from '../../src/lib/gap/sequence/render';
 import { createFamily } from '../../src/lib/gap/sequence/family';
 import { createVersion, updateVersionSteps } from '../../src/lib/gap/sequence/version';
 import { materializeSequence } from '../../src/lib/gap/sequences/service';
@@ -99,7 +112,10 @@ const JOURNAL_FIXTURE_DIR = path.join('tests', 'fixtures', 'gap', 'top100-journa
 const SEED_KEY = 'network_standardization';
 const ACTOR = 'e2e3';
 const OWNER = 'casey@freightroll.com';
-const SCRUBBED_ENV = ['HUBSPOT_ACCESS_TOKEN', 'MC_API_TOKEN', 'GOOGLE_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET'] as const;
+const SCRUBBED_ENV = ['HUBSPOT_ACCESS_TOKEN', 'MC_API_TOKEN', 'GOOGLE_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'CLAWD_CONTROL_PLANE_URL', 'CLAWD_CONTROL_PLANE_TOKEN'] as const;
+/** created_by of the lane compiles in step 14: the enroll-row gate honours only rows written under the script's prefix (R3-3). */
+const LANE_CREATED_BY = `${TOP100_COMPILE_CREATED_BY_PREFIX}:${'e2e3'}`;
+const RUNTIME_ACTOR = 'sequence-runtime';
 /** Fixture contacts of tests/fixtures/gap/top100-compile: Jordan passes step 1 and rejects steps 2 to 4 on C01; Riley rejects step 1 on C09 (meeting ask). */
 const FIXTURE_JORDAN = '100000000001';
 const FIXTURE_RILEY = '100000000002';
@@ -177,6 +193,7 @@ const criticReview: CriticClient = {
   score: async () => ({ ok: true, verdict: 'review', score: 88, findings: [{ source: 'congruence', rule: 'e2e', severity: 'warn', message: 'stub review' }] }),
 };
 const autonomyLive = async () => ({ halted: false });
+const suppressionClear = staticSuppressionReader('clear');
 
 // ---------------------------------------------------------------------------
 // What the run creates, for cleanup
@@ -252,18 +269,24 @@ async function main(): Promise<number> {
   let failure: StepFailure | null = null;
   let seeded = false;
 
+  // Filled by step 1: the real hypothesis observation (its [S:id] tokens name the registered facts) and those facts as evidence refs.
+  let observation = '';
+  let realRefs: ReturnType<typeof evidenceRefsFromSignals> = [];
   const contractFor = (stepIndex: number) => ({
-    hypothesis: fx.hypothesis,
-    evidence: fx.evidence,
+    hypothesis: { ...fx.hypothesis, observation },
+    // Step 0 cites the REAL facts through the slot; steps 1 to 3 still cite the seed's fixture refs.
+    evidence: [...realRefs, ...fx.evidence],
     proofRefs: [],
     namedPipeline: seedEvidence.namedPipeline,
     claimsUsed: seed.steps.steps[stepIndex].claimsUsed,
     stepCount: seed.steps.steps.length,
   });
-  const stepCopy = (i: number) => ({
-    subject: seed.steps.steps[i].templates?.subjectTemplate ?? '',
-    body: seed.steps.steps[i].templates?.bodyTemplate ?? '',
-  });
+  /** The MARKED copy the compiler judges: the observation slot filled, the person placeholders left as the seed test leaves them. */
+  const stepCopy = (i: number) =>
+    renderStepCopy(
+      { subject: seed.steps.steps[i].templates?.subjectTemplate ?? '', body: seed.steps.steps[i].templates?.bodyTemplate ?? '' },
+      { firstName: '{{first_name}}', account: '{{account}}', observation },
+    ).marked;
 
   try {
     // 0. Preflight.
@@ -329,7 +352,7 @@ async function main(): Promise<number> {
       primaryPersonaId: persona.id,
       persona: seed.persona,
       problemFamily: seed.problemFamily,
-      observation: `${accountName} lists 41 distribution centers folded in from three regional operators [S:${fact1.id}] and posts three gate-clerk roles at its Ohio distribution center [S:${fact2.id}].`,
+      observation: `${accountName} lists 41 distribution centers from three regional operators [S:${fact1.id}] and posts three gate-clerk roles in Ohio [S:${fact2.id}].`,
       problemHypothesis: 'My guess is each acquired site still runs its own gate process, so the network cannot see its yards the same way from one site to the next.',
       rootCauseHypotheses: ['No shared gate standard across the acquired sites'],
       impactHypotheses: ['Detention and clerk headcount rise site by site'],
@@ -351,7 +374,11 @@ async function main(): Promise<number> {
     const hyp = await getHypothesis(prisma, hypothesisId);
     expect('1 seed', hyp?.status === 'active' && hyp.signals.length === 2, `hypothesis ${hypothesisId} is ${hyp?.status} with ${hyp?.signals?.length} signals, expected active with 2`);
     counts.hypothesisSignals = hyp.signals.length;
-    pass('1 seed', `account, persona ${persona.id} (${personaEmail}), facts ${fact1.id} (operator) + ${fact2.id} (public url), hypothesis ${hypothesisId} active (${seed.problemFamily} / ${seed.persona})`);
+    const hypRow = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesisId }, select: { observation: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } } });
+    observation = hypRow?.observation ?? '';
+    realRefs = evidenceRefsFromSignals((hypRow?.signals ?? []).map((l) => l.signal), now);
+    expect('1 seed', observation.includes(`[S:${fact1.id}]`) && observation.includes(`[S:${fact2.id}]`) && realRefs.length === 2 && realRefs.every((r) => r.fresh), `observation "${observation.slice(0, 80)}" refs ${JSON.stringify(realRefs.map((r) => [r.id, r.fresh, r.externalOk, r.firstParty]))}`);
+    pass('1 seed', `account, persona ${persona.id} (${personaEmail}), facts ${fact1.id} (operator) + ${fact2.id} (public url), hypothesis ${hypothesisId} active (${seed.problemFamily} / ${seed.persona}), observation cites both facts with [S:id] tokens`);
 
     // 2. Family and version from the seed, then the twin refusal.
     const family = await createFamily(prisma, {
@@ -375,8 +402,12 @@ async function main(): Promise<number> {
     expect('2 version', versionRow?.status === 'draft', `version ${v1.id} is ${versionRow?.status}, expected draft`);
     pass('2 version', `family ${family.id}, version ${v1.id} v1 draft (hash ${v1.stepsHash.slice(0, 12)}), identical steps refused identical_to_version:1`);
 
-    // 3. Compile every step of the version, persisted.
+    // 3. Compile every step of the version, persisted. Step 0 is the slot render (R3-4): its only marker is the real fact.
     const stepCount = seed.steps.steps.length;
+    const storedStep0 = seed.steps.steps[0].templates?.bodyTemplate ?? '';
+    expect('3 compile', storedStep0.includes('{{observation}}') && !storedStep0.includes('[[SRC:'), `stored step 0 should carry the slot and no marker: ${storedStep0.slice(0, 120)}`);
+    const marked0 = stepCopy(0).body;
+    expect('3 compile', marked0.includes(`[[SRC:${fact1.id}]]`) && marked0.includes(`[[SRC:${fact2.id}]]`) && !marked0.includes('{{observation}}'), `rendered step 0 should carry the fact markers: ${marked0.slice(0, 200)}`);
     const versionCompileIds: string[] = [];
     const priorBodies: string[] = [];
     let versionCheckCount = 0;
@@ -396,7 +427,7 @@ async function main(): Promise<number> {
     expect('3 compile', persisted === stepCount, `${persisted} pass rows persisted for version ${v1.id}, expected ${stepCount}`);
     counts.versionStepsCompiled = stepCount;
     counts.versionChecksRun = versionCheckCount;
-    pass('3 compile', `${stepCount} steps pass through ${versionCheckCount} checks with the stub critic, ${persisted} GapCompile rows persisted (${versionCompileIds.map((id) => id.slice(0, 8)).join(', ')})`);
+    pass('3 compile', `${stepCount} steps pass through ${versionCheckCount} checks with the stub critic (step 0 = slot render citing facts ${fact1.id.slice(0, 8)} and ${fact2.id.slice(0, 8)}), ${persisted} GapCompile rows persisted (${versionCompileIds.map((id) => id.slice(0, 8)).join(', ')})`);
 
     // 4. A meeting ask at step 0 is rejected by C09.
     const step0 = stepCopy(0);
@@ -426,18 +457,26 @@ async function main(): Promise<number> {
     pass('5 approval', `review_required compile ${review.id}, one pending gap_compile request ${(approval1 as { id: string }).id} (risk 30), second call existing`);
 
     // 6. materializeSequence: refused, created, idempotent.
-    const noIds = await materializeSequence(prisma, { versionId: v1.id, compileIds: [] }, ACTOR);
+    const noIds = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: [] }, ACTOR);
     expect('6 materialize', !noIds.ok && noIds.reason === 'no_compile_ids', `materialize with no ids -> ${JSON.stringify(noIds)}`);
-    const partial = await materializeSequence(prisma, { versionId: v1.id, compileIds: versionCompileIds.slice(0, 2) }, ACTOR);
+    const partial = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds.slice(0, 2) }, ACTOR);
     expect('6 materialize', !partial.ok && partial.reason === 'step_not_compiled:2', `materialize with 2 of ${stepCount} ids -> ${JSON.stringify(partial)}, expected step_not_compiled:2`);
-    const mat1 = await materializeSequence(prisma, { versionId: v1.id, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
+    // R3-3: the same rows are refused for another hypothesis.
+    const wrongHyp = await materializeSequence(prisma, { versionId: v1.id, hypothesisId: `${hypothesisId}-other`, compileIds: versionCompileIds }, ACTOR);
+    expect('6 materialize', !wrongHyp.ok && wrongHyp.reason === `compile_wrong_hypothesis:${versionCompileIds[0]}`, `materialize for another hypothesis -> ${JSON.stringify(wrongHyp)}, expected compile_wrong_hypothesis:${versionCompileIds[0]}`);
+    const mat1 = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
     expect('6 materialize', mat1.ok && !mat1.existing && mat1.steps.length === stepCount, `materialize -> ${JSON.stringify(mat1)}`);
     if (!mat1.ok) throw new Error('unreachable');
     created.sequenceName = mat1.name;
-    const mat2 = await materializeSequence(prisma, { versionId: v1.id, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
+    const mat2 = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
     expect('6 materialize', mat2.ok && mat2.existing && mat2.sequenceId === mat1.sequenceId, `second materialize -> ${JSON.stringify(mat2)}`);
+    // S11: a same-named Sequence whose steps drifted is a collision, never reused.
+    await prisma.sequence.update({ where: { id: mat1.sequenceId }, data: { steps: mat1.steps.map((s, i) => (i === 1 ? { ...s, delayDays: 9 } : s)) as object[] } });
+    const collision = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
+    expect('6 materialize', !collision.ok && collision.reason === 'sequence_name_collision', `materialize over drifted steps -> ${JSON.stringify(collision)}, expected sequence_name_collision`);
+    await prisma.sequence.update({ where: { id: mat1.sequenceId }, data: { steps: mat1.steps as object[] } });
     counts.sequenceId = mat1.sequenceId;
-    pass('6 materialize', `no_compile_ids, then step_not_compiled:2, then Sequence ${mat1.sequenceId} "${mat1.name}" with ${mat1.steps.length} steps, second call existing`);
+    pass('6 materialize', `no_compile_ids, step_not_compiled:2, compile_wrong_hypothesis for another hypothesis, then Sequence ${mat1.sequenceId} "${mat1.name}" with ${mat1.steps.length} steps, second call existing, drifted steps under the same name refused sequence_name_collision`);
 
     // 7. enrollFromDecision shadow: zero writes.
     const tableCounts = async () => ({
@@ -450,22 +489,23 @@ async function main(): Promise<number> {
     const shadow = await enrollFromDecision(
       prisma,
       { hypothesisId, personaId: persona.id, sequenceVersionId: v1.id, compileIds: versionCompileIds, actor: ACTOR, actorKind: 'human', mode: 'shadow', now },
-      { addOne, autonomy: autonomyLive, critic: criticPass, contract: contractFor(0) },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, contract: contractFor(0) },
     );
     const afterShadow = await tableCounts();
     expect('7 shadow', shadow.ok && shadow.kind === 'modex_shadow' && shadow.target === 'modex_queue', `shadow -> ${JSON.stringify(shadow).slice(0, 300)}`);
     if (!shadow.ok || shadow.kind !== 'modex_shadow') throw new Error('unreachable');
     expect('7 shadow', shadow.wouldBe.toEmail === personaEmail && shadow.wouldBe.body.startsWith('Hi Priya,') && !shadow.wouldBe.body.includes('{{'), `would-be item ${JSON.stringify({ to: shadow.wouldBe.toEmail, subject: shadow.wouldBe.subject, head: shadow.wouldBe.body.slice(0, 40) })}`);
+    expect('7 shadow', !shadow.wouldBe.body.includes('[[') && !shadow.wouldBe.body.includes('[S:') && shadow.wouldBe.body.includes('lists 41 distribution centers from three regional operators and posts three gate-clerk roles in Ohio.'), `would-be body should carry the observation stripped of markers: ${shadow.wouldBe.body.slice(0, 260)}`);
     expect('7 shadow', JSON.stringify(before) === JSON.stringify(afterShadow), `shadow wrote rows: before ${JSON.stringify(before)} after ${JSON.stringify(afterShadow)}`);
     const shadowAudit = await prisma.gapAuditEvent.count({ where: { kind: 'enroll.shadow', actor: ACTOR, subject_id: hypothesisId, created_at: { gte: runStart } } });
     expect('7 shadow', shadowAudit === 1, `${shadowAudit} enroll.shadow audit rows, expected 1`);
-    pass('7 shadow', `modex_shadow for ${personaEmail}: subject "${shadow.wouldBe.subject}", body rendered (Hi Priya,), zero writes (${JSON.stringify(before)}), 1 enroll.shadow audit row`);
+    pass('7 shadow', `modex_shadow for ${personaEmail}: subject "${shadow.wouldBe.subject}", body rendered (Hi Priya, observation in the slot, no marker), zero writes (${JSON.stringify(before)}), 1 enroll.shadow audit row`);
 
     // 8. enrollFromDecision live through the real addOne.
     const live = await enrollFromDecision(
       prisma,
       { hypothesisId, personaId: persona.id, sequenceVersionId: v1.id, compileIds: versionCompileIds, actor: ACTOR, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: 'casey@yardflow.ai' },
-      { addOne, autonomy: autonomyLive, critic: criticPass, contract: contractFor(0) },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, contract: contractFor(0) },
     );
     expect('8 live', live.ok && live.kind === 'modex_enrolled', `live -> ${JSON.stringify(live).slice(0, 400)}`);
     if (!live.ok || live.kind !== 'modex_enrolled') throw new Error('unreachable');
@@ -482,13 +522,18 @@ async function main(): Promise<number> {
     expect('8 live', item!.sequence_id === mat1.sequenceId && live.sequenceId === mat1.sequenceId, `item sequence_id ${item!.sequence_id}, service sequenceId ${live.sequenceId}, expected ${mat1.sequenceId} (the step 6 Sequence, reused)`);
     const sequenceRows = await prisma.sequence.count({ where: { name: mat1.name } });
     expect('8 live', sequenceRows === 1, `${sequenceRows} Sequence rows named "${mat1.name}", expected 1 (materialize is idempotent)`);
-    const itemCompile = await prisma.gapCompile.findFirst({ where: { draft_queue_item_id: itemId }, orderBy: { created_at: 'desc' }, select: { id: true, verdict: true, hypothesis_id: true, sequence_version_id: true, step_index: true } });
-    expect('8 live', itemCompile?.verdict === 'pass' && itemCompile.id === live.compileId && itemCompile.hypothesis_id === hypothesisId && itemCompile.step_index === 0, `item-level compile ${JSON.stringify(itemCompile)}`);
+    const itemCompile = await prisma.gapCompile.findFirst({ where: { draft_queue_item_id: itemId }, orderBy: { created_at: 'desc' }, select: { id: true, verdict: true, hypothesis_id: true, sequence_version_id: true, step_index: true, inputs_snapshot: true, evidence_ids_used: true } });
+    expect('8 live', itemCompile?.verdict === 'pass' && itemCompile.id === live.compileId && itemCompile.hypothesis_id === hypothesisId && itemCompile.step_index === 0, `item-level compile ${JSON.stringify(itemCompile && { id: itemCompile.id, verdict: itemCompile.verdict, hyp: itemCompile.hypothesis_id, step: itemCompile.step_index })}`);
+    // R3-4: the compiler judged the MARKED copy; the queue holds the STRIPPED copy.
+    const judgedBody = String((itemCompile!.inputs_snapshot as { body?: unknown } | null)?.body ?? '');
+    const usedIds = Array.isArray(itemCompile!.evidence_ids_used) ? (itemCompile!.evidence_ids_used as string[]) : [];
+    expect('8 live', judgedBody.includes(`[[SRC:${fact1.id}]]`) && judgedBody.includes(`[[SRC:${fact2.id}]]`) && usedIds.includes(fact1.id) && usedIds.includes(fact2.id), `item compile should have judged the marked copy: body ${judgedBody.slice(0, 200)} ids ${JSON.stringify(usedIds)}`);
+    expect('8 live', !item!.body.includes('[[') && !item!.body.includes('[S:') && item!.body.includes('posts three gate-clerk roles in Ohio.'), `queued body should carry no marker: ${item!.body.slice(0, 260)}`);
     const liveAudit = await prisma.gapAuditEvent.count({ where: { kind: 'enroll.live', subject_id: enrollmentId, created_at: { gte: runStart } } });
     expect('8 live', liveAudit === 1, `${liveAudit} enroll.live audit rows for ${enrollmentId}, expected exactly 1 (enroll() writes it; the service adds none)`);
     counts.enrollmentId = enrollmentId;
     counts.draftItemId = itemId;
-    pass('8 live', `enrollment ${enrollmentId} active on v1, version FROZEN by the trigger (frozen_by_enrollment_id matches), draft item ${itemId} stamped (run, step 0, version, sequence_id ${item!.sequence_id} from the idempotent materialize), item-level GapCompile ${itemCompile!.id} pass, 1 enroll.live audit row`);
+    pass('8 live', `enrollment ${enrollmentId} active on v1, version FROZEN by the trigger (frozen_by_enrollment_id matches), draft item ${itemId} stamped (run, step 0, version, sequence_id ${item!.sequence_id} from the idempotent materialize), item-level GapCompile ${itemCompile!.id} pass judged the MARKED copy (evidence_ids_used = both facts) while the queued body carries no marker, 1 enroll.live audit row`);
 
     // 9. The approveBatch guard's data contract (approveBatch itself needs a NextAuth request scope).
     const guardWouldApprove = async (id: number): Promise<boolean> => {
@@ -536,20 +581,48 @@ async function main(): Promise<number> {
     // Only the send outcome is simulated here; sequence_id was stamped by the service in step 8.
     await prisma.draftQueueItem.update({ where: { id: itemId }, data: { status: STATUS.sent, sent_at: sentAt } });
     const sentItem = await prisma.draftQueueItem.findUnique({ where: { id: itemId } });
-    const nextId = await scheduleNextStep(prisma, sentItem);
+    // R3-4: the runtime compiles every later step per item. Step 1 cites the seed's fixture ref, so the fixture refs are handed in as extra contract evidence (the same injection the enroll service offers); the critic is the stub.
+    const nextId = await scheduleNextStep(prisma, sentItem, { critic: criticPass, contract: { evidence: [...realRefs, ...fx.evidence], namedPipeline: seedEvidence.namedPipeline }, now: () => now });
     expect('10 schedule', typeof nextId === 'number', `scheduleNextStep returned ${String(nextId)}`);
     const nextItem = await prisma.draftQueueItem.findUnique({ where: { id: nextId as number } });
     const expectedKey = sequenceStepIdempotencyKey(OWNER, personaEmail, enrollmentId, 1);
     const step1Template = seed.steps.steps[1].templates?.bodyTemplate ?? '';
-    expect('10 schedule', nextItem?.step_index === 1 && nextItem.sequence_run_id === enrollmentId && nextItem.sequence_version_id === v1.id && nextItem.idempotency_key === expectedKey && nextItem.status === STATUS.approved, `step 1 item ${JSON.stringify(nextItem && { step: nextItem.step_index, run: nextItem.sequence_run_id, version: nextItem.sequence_version_id, key: nextItem.idempotency_key, status: nextItem.status })}`);
+    expect('10 schedule', nextItem?.step_index === 1 && nextItem.sequence_run_id === enrollmentId && nextItem.sequence_version_id === v1.id && nextItem.idempotency_key === expectedKey, `step 1 item ${JSON.stringify(nextItem && { step: nextItem.step_index, run: nextItem.sequence_run_id, version: nextItem.sequence_version_id, key: nextItem.idempotency_key, status: nextItem.status })}`);
     const accountRendered = step1Template.includes('{{account}}') ? nextItem!.body.includes(accountName) : true;
     expect('10 schedule', step1Template.includes('{{first_name}}') && !nextItem!.body.includes('{{') && nextItem!.body.startsWith('Hi Priya,') && accountRendered, `step 1 body not rendered: ${nextItem!.body.slice(0, 80)}`);
+    expect('10 schedule', step1Template.includes('[[SRC:') && !nextItem!.body.includes('[[') && !nextItem!.body.includes('[S:'), `step 1 queued body should carry no marker: ${nextItem!.body.slice(0, 200)}`);
+    // Created draft, then approved by its OWN compile row (keyed to the item, written by the runtime, judged the marked copy).
+    const step1Compile = await prisma.gapCompile.findFirst({ where: { draft_queue_item_id: nextId as number }, orderBy: { created_at: 'desc' }, select: { id: true, verdict: true, created_by: true, hypothesis_id: true, sequence_version_id: true, step_index: true, inputs_snapshot: true } });
+    if (step1Compile) created.compileIds.push(step1Compile.id);
+    const step1Judged = String((step1Compile?.inputs_snapshot as { body?: unknown } | null)?.body ?? '');
+    expect('10 schedule', step1Compile?.verdict === 'pass' && step1Compile.created_by === RUNTIME_ACTOR && step1Compile.hypothesis_id === hypothesisId && step1Compile.sequence_version_id === v1.id && step1Compile.step_index === 1 && step1Judged.includes('[[SRC:ns_ev_2]]'), `step 1 item-level compile ${JSON.stringify(step1Compile && { id: step1Compile.id, verdict: step1Compile.verdict, by: step1Compile.created_by, step: step1Compile.step_index, marked: step1Judged.includes('[[SRC:ns_ev_2]]') })}`);
+    expect('10 schedule', nextItem!.status === STATUS.approved && !!nextItem!.approved_at, `step 1 item should be approved by its own pass, got ${nextItem!.status}`);
+    const step1NotPassed = await prisma.gapAuditEvent.count({ where: { kind: 'schedule.compile_not_passed', subject_id: String(nextId), created_at: { gte: runStart } } });
+    expect('10 schedule', step1NotPassed === 0, `${step1NotPassed} schedule.compile_not_passed rows for the passing step 1, expected 0`);
     // Friday + 4 business days (seed cadence) = the following Thursday at the same hour.
     expect('10 schedule', nextItem!.scheduled_for?.toISOString() === '2026-10-01T14:00:00.000Z', `scheduled_for ${nextItem!.scheduled_for?.toISOString()}, expected 2026-10-01T14:00:00.000Z (Friday + 4 business days)`);
-    const again = await scheduleNextStep(prisma, sentItem);
-    expect('10 schedule', again === nextId, `a second scheduleNextStep returned ${String(again)}, expected the same id ${nextId} (deterministic key)`);
+    const again = await scheduleNextStep(prisma, sentItem, { critic: criticPass, contract: { evidence: [...realRefs, ...fx.evidence] }, now: () => now });
+    const step1Compiles = await prisma.gapCompile.count({ where: { draft_queue_item_id: nextId as number } });
+    expect('10 schedule', again === nextId && step1Compiles === 1, `a second scheduleNextStep returned ${String(again)} with ${step1Compiles} compile rows, expected the same id ${nextId} (deterministic key) and 1 row (no recompile)`);
+    // The reject leg: step 2 scheduled with ONLY the hypothesis signals as evidence. Its fixture marker [[SRC:ns_ev_3]] does not resolve, C01 rejects, the row stays draft and the runtime audits it.
+    const step1SentAt = new Date('2026-10-01T14:00:00.000Z');
+    await prisma.draftQueueItem.update({ where: { id: nextId as number }, data: { status: STATUS.sent, sent_at: step1SentAt } });
+    const step1Sent = await prisma.draftQueueItem.findUnique({ where: { id: nextId as number } });
+    const step2Id = await scheduleNextStep(prisma, step1Sent, { critic: criticPass, now: () => now });
+    expect('10 schedule', typeof step2Id === 'number' && step2Id !== nextId, `scheduleNextStep for step 2 returned ${String(step2Id)}`);
+    const step2Item = await prisma.draftQueueItem.findUnique({ where: { id: step2Id as number } });
+    const step2Compile = await prisma.gapCompile.findFirst({ where: { draft_queue_item_id: step2Id as number }, orderBy: { created_at: 'desc' }, select: { id: true, verdict: true, checks: true } });
+    if (step2Compile) created.compileIds.push(step2Compile.id);
+    const step2Failed = Array.isArray(step2Compile?.checks) ? (step2Compile!.checks as Array<{ code: string; passed: boolean }>).filter((c) => !c.passed).map((c) => c.code) : [];
+    expect('10 schedule', step2Item?.step_index === 2 && step2Item.status === STATUS.draft && step2Item.skipped_reason === null && !step2Item.approved_at, `step 2 item ${JSON.stringify(step2Item && { step: step2Item.step_index, status: step2Item.status, skipped: step2Item.skipped_reason })}, expected draft with no skipped_reason`);
+    expect('10 schedule', step2Compile?.verdict === 'reject' && step2Failed.includes('C01'), `step 2 compile ${JSON.stringify(step2Compile && { verdict: step2Compile.verdict, failed: step2Failed })}, expected reject on C01 (fixture marker unresolved against the hypothesis signals)`);
+    const step2Audit = await prisma.gapAuditEvent.findFirst({ where: { kind: 'schedule.compile_not_passed', subject_id: String(step2Id), created_at: { gte: runStart } }, select: { payload: true } });
+    const step2Payload = (step2Audit?.payload ?? {}) as { verdict?: string; compileId?: string; failedChecks?: string[] };
+    expect('10 schedule', step2Payload.verdict === 'reject' && step2Payload.compileId === step2Compile!.id && (step2Payload.failedChecks ?? []).includes('C01'), `schedule.compile_not_passed audit ${JSON.stringify(step2Payload)}`);
+    expect('10 schedule', !(await guardWouldApprove(step2Id as number)), `the approveBatch guard contract would approve the rejected step 2 item ${step2Id}`);
     counts.step1ItemId = nextId as number;
-    pass('10 schedule', `step 1 item ${nextId} from the pinned version, placeholders rendered, key ${expectedKey}, scheduled 2026-10-01T14:00Z (Friday + 4 business days), rerun returns the same id`);
+    counts.step2ItemId = step2Id as number;
+    pass('10 schedule', `step 1 item ${nextId} from the pinned version, placeholders rendered, no marker queued, key ${expectedKey}, scheduled 2026-10-01T14:00Z (Friday + 4 business days), created draft then APPROVED by its own item-level compile ${step1Compile!.id} (pass, by ${RUNTIME_ACTOR}), rerun returns the same id with no recompile; step 2 item ${step2Id} created draft and LEFT draft: compile ${step2Compile!.id} reject on C01 (fixture marker ns_ev_3 unresolved against the hypothesis signals), schedule.compile_not_passed audited, guard refuses it`);
 
     // 11. The frozen version refuses edits: the service, then the database trigger.
     const edited = { ...seed.steps, steps: seed.steps.steps.map((s, i) => (i === 1 ? { ...s, delay: { value: 9, unit: 'business_days' as const } } : s)) };
@@ -567,16 +640,17 @@ async function main(): Promise<number> {
     // 12. Stop: unsent rows are skipped, a failed row included; the sent row is untouched.
     await prisma.draftQueueItem.update({ where: { id: nextId as number }, data: { status: STATUS.failed, error_message: 'e2e failed row' } });
     const stopped = await stop(prisma, enrollmentId, 'replied', ACTOR, now);
-    expect('12 stop', stopped.ok && stopped.status === 'stopped' && stopped.skipped === 1, `stop -> ${JSON.stringify(stopped)}`);
+    expect('12 stop', stopped.ok && stopped.status === 'stopped' && stopped.skipped === 2, `stop -> ${JSON.stringify(stopped)}, expected 2 skipped (the failed step 1 and the draft step 2)`);
     const runRows = await prisma.draftQueueItem.findMany({ where: { sequence_run_id: enrollmentId }, select: { id: true, status: true, skipped_reason: true }, orderBy: { id: 'asc' } });
     const sentRow = runRows.find((r) => r.id === itemId);
     const failedRow = runRows.find((r) => r.id === nextId);
-    expect('12 stop', sentRow?.status === STATUS.sent && failedRow?.status === STATUS.skipped && failedRow.skipped_reason === 'sequence_stopped:replied', `run rows after stop ${JSON.stringify(runRows)}`);
+    const draftRow = runRows.find((r) => r.id === step2Id);
+    expect('12 stop', sentRow?.status === STATUS.sent && failedRow?.status === STATUS.skipped && failedRow.skipped_reason === 'sequence_stopped:replied' && draftRow?.status === STATUS.skipped && draftRow.skipped_reason === 'sequence_stopped:replied', `run rows after stop ${JSON.stringify(runRows)}`);
     const stoppedRow = await prisma.sequenceEnrollment.findUnique({ where: { id: enrollmentId }, select: { status: true, stop_reason: true, stopped_by: true } });
     expect('12 stop', stoppedRow?.status === 'stopped' && stoppedRow.stop_reason === 'replied' && stoppedRow.stopped_by === ACTOR, `enrollment after stop ${JSON.stringify(stoppedRow)}`);
     const terminal = await stop(prisma, enrollmentId, 'manual', ACTOR, now);
     expect('12 stop', !terminal.ok && terminal.reason === 'terminal', `second stop -> ${JSON.stringify(terminal)}, expected terminal`);
-    pass('12 stop', `stop(replied) skipped 1 row (the failed step 1, now sequence_stopped:replied), the sent step 0 untouched, enrollment stopped by ${ACTOR}, second stop terminal`);
+    pass('12 stop', `stop(replied) skipped 2 rows (the failed step 1 and the draft step 2, both sequence_stopped:replied), the sent step 0 untouched, enrollment stopped by ${ACTOR}, second stop terminal`);
 
     // 13. Top100 journal import dry run over its fixture.
     const journalOut = execSync(`npx tsx scripts/gap/import-top100-journal.ts ${JOURNAL_FIXTURE_DIR}`, {
@@ -593,7 +667,7 @@ async function main(): Promise<number> {
     pass('13 journal', `dry run over ${JOURNAL_FIXTURE_DIR}: ${JSON.stringify(journal.counts)}, ${journal.warnings.length} warnings, nothing written`);
 
     // 14. compile-top100 persist path over its fixture, then the enroll-row gate.
-    const prepared = toCompileInputs(laneSequence, laneResearch, { now, claimsValidator: validateClaimsUsed, namedPipeline: [], createdBy: ACTOR });
+    const prepared = toCompileInputs(laneSequence, laneResearch, { now, claimsValidator: validateClaimsUsed, namedPipeline: [], createdBy: LANE_CREATED_BY });
     const results = new Map<(typeof prepared.inputs)[number], CompileResult>();
     for (const entry of prepared.inputs) {
       const r = await compile(entry.input, { critic: criticPass, validateClaims: validateClaimsUsed, now: () => now, prisma });
@@ -602,8 +676,8 @@ async function main(): Promise<number> {
     }
     const summary = reduceReport(compiledSteps(prepared, results));
     expect('14 top100 gate', summary.totals.steps === 8 && summary.totals.pass === 1 && summary.totals.reject === 7, `fixture lane totals ${JSON.stringify(summary.totals)}, expected 8 steps, 1 pass, 7 reject`);
-    const persistedLane = await prisma.gapCompile.count({ where: { created_by: ACTOR, inputs_snapshot: { path: ['contract', TOP100_COMPILE_KEY, 'laneKey'], equals: laneSequence.key } } });
-    expect('14 top100 gate', persistedLane === 8, `${persistedLane} lane rows persisted with the ${TOP100_COMPILE_KEY} key, expected 8`);
+    const persistedLane = await prisma.gapCompile.count({ where: { created_by: LANE_CREATED_BY, inputs_snapshot: { path: ['contract', TOP100_COMPILE_KEY, 'laneKey'], equals: laneSequence.key } } });
+    expect('14 top100 gate', persistedLane === 8, `${persistedLane} lane rows persisted with the ${TOP100_COMPILE_KEY} key under created_by ${LANE_CREATED_BY}, expected 8`);
     const rileyGate = await loadCompileGate(prisma, FIXTURE_RILEY);
     const jordanGate = await loadCompileGate(prisma, FIXTURE_JORDAN);
     expect('14 top100 gate', !rileyGate.ok && rileyGate.reason === 'compile_not_passed:0', `Riley (meeting ask at step 1) gate -> ${JSON.stringify(rileyGate)}, expected compile_not_passed:0`);
@@ -621,7 +695,7 @@ async function main(): Promise<number> {
           body: copy.body,
           priorBodies: [...cleanPrior],
           contract: { ...contractFor(i), [TOP100_COMPILE_KEY]: { laneKey: 'e2e3-clean', hubspotContactId: created.syntheticContactId, personKey: created.syntheticContactId, step: i + 1, stepIndex: i } },
-          createdBy: ACTOR,
+          createdBy: LANE_CREATED_BY,
         },
         { critic: criticPass, validateClaims: validateClaimsUsed, now: () => now, prisma },
       );
@@ -631,6 +705,24 @@ async function main(): Promise<number> {
     }
     const cleanGate = await loadCompileGate(prisma, created.syntheticContactId);
     expect('14 top100 gate', cleanGate.ok && cleanGate.compileIds.length === 4, `clean contact gate -> ${JSON.stringify(cleanGate)}`);
+    // R3-3: the same four steps keyed to a second contact but written by someone else do not count for the gate.
+    const foreignContact = `${tag}-foreign`;
+    const foreign = await compile(
+      {
+        hypothesisId: null,
+        sequenceVersionId: null,
+        stepIndex: 0,
+        subject: stepCopy(0).subject,
+        body: stepCopy(0).body,
+        priorBodies: [],
+        contract: { ...contractFor(0), [TOP100_COMPILE_KEY]: { laneKey: 'e2e3-foreign', hubspotContactId: foreignContact, personKey: foreignContact, step: 1, stepIndex: 0 } },
+        createdBy: ACTOR,
+      },
+      { critic: criticPass, validateClaims: validateClaimsUsed, now: () => now, prisma },
+    );
+    if (foreign.id) created.compileIds.push(foreign.id);
+    const foreignGate = await loadCompileGate(prisma, foreignContact);
+    expect('14 top100 gate', foreign.verdict === 'pass' && !foreignGate.ok && foreignGate.reason === 'compile_missing' && foreignGate.stepIndex === 0, `a passing row written by ${ACTOR} (not the script) should not count: gate -> ${JSON.stringify(foreignGate)}`);
     const nativeItem = (contactId: string, email: string, gate: EnrollRowItem['compile']): EnrollRowItem => ({
       decision: { action: 'enroll_gap_sequence', lane: 'work_queue', ruleId: 'enroll', priority: 80, blocked: false, target: 'hubspot_native', explain: { whyAccount: '', whyPerson: '', whyProblem: '', whyNow: '', whyAction: '', evidenceIds: [], signalIds: [], wouldProveWrong: '' } },
       inputs: {
@@ -646,7 +738,7 @@ async function main(): Promise<number> {
     counts.laneStepsCompiled = summary.totals.steps;
     counts.laneStepsPass = summary.totals.pass;
     counts.laneStepsReject = summary.totals.reject;
-    pass('14 top100 gate', `fixture lane 8 steps (1 pass, 7 reject) persisted with the ${TOP100_COMPILE_KEY} key; gate: Riley compile_not_passed:0 (meeting ask), Jordan compile_not_passed:1 (stale ref at step 2), synthetic clean contact ok with 4 ids; enroll table: 1 contact under Enroll, Riley skipped as "compile_not_passed:0"`);
+    pass('14 top100 gate', `fixture lane 8 steps (1 pass, 7 reject) persisted with the ${TOP100_COMPILE_KEY} key under created_by ${LANE_CREATED_BY}; gate: Riley compile_not_passed:0 (meeting ask), Jordan compile_not_passed:1 (stale ref at step 2), synthetic clean contact ok with 4 ids, a pass written by ${ACTOR} ignored (compile_missing); enroll table: 1 contact under Enroll, Riley skipped as "compile_not_passed:0"`);
 
     for (const name of SCRUBBED_ENV) expect('15 credentials', process.env[name] === undefined, `${name} reappeared in process.env during the run`);
     pass('15 credentials', 'no credential reappeared; no HubSpot, clawd or Gmail call was possible');
@@ -702,7 +794,8 @@ function writeReport(input: { failure: StepFailure | null; tag: string; dbHost: 
     `- Git: ${input.gitSha}`,
     `- Ran at: ${new Date().toISOString()}`,
     `- Credentials scrubbed from the process before the first write: ${String(counts.scrubbedEnv)}`,
-    '- No HubSpot, clawd or Gmail call is possible in this run: stub critic, stub autonomy reader, Gmail credentials absent for the queue dedup thread check, review-feed poster without a token.',
+    '- No HubSpot, clawd or Gmail call is possible in this run: stub critic, stub autonomy reader, static CLEAR suppression reader (the default clawd reader answers unknown without config and refuses), Gmail credentials absent for the queue dedup thread check, review-feed poster without a token.',
+    '- R3-4: step 0 is the observation slot; the compiler judges the marked copy, the queue holds the stripped copy; later steps are created draft and earn approved from their own per-item compile (step 1 with the fixture refs handed in; step 2 with the hypothesis signals only stays draft, rejected on C01).',
     '- Not exercised: `approveBatch` (NextAuth `auth()` needs a request scope); step 9 asserts the guard data contract instead and the unit suite covers the guard.',
     '',
     '## Steps',
@@ -739,7 +832,13 @@ async function cleanup(prisma: PrismaClient, c: Created, runStart: Date): Promis
     const removed: Record<string, number> = {};
     const hypothesisIds = (await tx.prospectingHypothesis.findMany({ where: { account_name: c.accountName }, select: { id: true } })).map((h) => h.id);
     const enrollmentIds = (await tx.sequenceEnrollment.findMany({ where: { account_name: c.accountName }, select: { id: true } })).map((e) => e.id);
-    const compileIds = Array.from(new Set([...c.compileIds, ...(await tx.gapCompile.findMany({ where: { created_by: ACTOR }, select: { id: true } })).map((r) => r.id)]));
+    const runItemIds = (await tx.draftQueueItem.findMany({ where: { OR: [{ to_email: { in: c.emails } }, { account_name: c.accountName }] }, select: { id: true } })).map((r) => r.id);
+    const compileIds = Array.from(
+      new Set([
+        ...c.compileIds,
+        ...(await tx.gapCompile.findMany({ where: { OR: [{ created_by: { in: [ACTOR, LANE_CREATED_BY] } }, { draft_queue_item_id: { in: runItemIds } }] }, select: { id: true } })).map((r) => r.id),
+      ]),
+    );
 
     for (const [table, trigger] of DELETE_GUARDS) {
       await tx.$executeRawUnsafe(`ALTER TABLE ${table} DISABLE TRIGGER ${trigger}`);
@@ -750,8 +849,8 @@ async function cleanup(prisma: PrismaClient, c: Created, runStart: Date): Promis
           where: {
             created_at: { gte: runStart },
             OR: [
-              { actor: { in: [ACTOR, 'sequence-runtime'] } },
-              { subject_id: { in: [...hypothesisIds, ...enrollmentIds] } },
+              { actor: { in: [ACTOR, RUNTIME_ACTOR, LANE_CREATED_BY] } },
+              { subject_id: { in: [...hypothesisIds, ...enrollmentIds, ...runItemIds.map(String)] } },
             ],
           },
         })

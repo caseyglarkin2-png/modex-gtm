@@ -9,6 +9,17 @@
  * what unit tests assert) and stamps the draft item. Audit `enroll.live`
  * lands after the transaction commits.
  *
+ * Suppression (R3-10): both writers refuse on three LOCAL legs (the
+ * unsubscribed table, `Persona.do_not_contact`, a bounced persona email
+ * status) and then on the CROSS-PLANE clawd contract, the same read routing
+ * makes (`createClawdSuppressionReader` in routing/suppression-read.ts): a
+ * `suppressed` verdict refuses `suppressed`, an `unknown` verdict (outage,
+ * unconfigured, malformed, a reader that threw) refuses
+ * `suppression_unknown`. The reader is injected through the options so tests
+ * and the scratch e2e never touch the network; the default is the real one.
+ * Every suppression refusal carries `leg`, the name of what fired
+ * (`unsubscribed` | `modex_do_not_contact` | `bounced` | `clawd:<leg>`).
+ *
  * `recordExternalEnrollment` is the thin hubspot_native counterpart: it
  * records what HubSpot says, never enrolls anyone there, and shares the
  * suppression, already_enrolled and freeze invariants. Freeze is skipped for
@@ -34,6 +45,7 @@ import { randomUUID } from 'node:crypto';
 
 import { audit } from '@/lib/gap/audit';
 import { gapFlag } from '@/lib/gap/flags';
+import { CONTRACT_LEG, createClawdSuppressionReader, type SuppressionReader } from '@/lib/gap/routing/suppression-read';
 import { isInternalRecipient } from '@/lib/gap/sequence/internal-recipient';
 import { freezeVersionForEnrollment } from '@/lib/gap/sequence/version';
 import { LIVE_ENROLLMENT_STATUSES } from '@/lib/gap/sequence/family';
@@ -53,15 +65,74 @@ function normalizeEmail(email: string): string {
   return (email ?? '').trim().toLowerCase();
 }
 
-/** unsubscribed_emails hit, or the persona's do_not_contact. */
-async function isSuppressed(prisma: any, email: string, personaId: number | null | undefined): Promise<boolean> {
+/**
+ * The suppression legs an enrollment refuses on, named so a refusal can say
+ * which one fired (R3-2). Order of precedence: unsubscribed, then the modex
+ * `Persona.do_not_contact` flag, then a bounced email status, then the
+ * cross-plane clawd contract (`clawd:<leg>`, R3-10).
+ */
+export type SuppressionLeg = 'unsubscribed' | 'modex_do_not_contact' | 'bounced' | `clawd:${string}`;
+
+export interface SuppressionOptions {
+  /** The cross-plane contract reader. Defaults to the routing clawd reader; tests inject a static one. */
+  suppression?: SuppressionReader;
+}
+
+export type SuppressionCheck = { ok: true } | { ok: false; reason: 'suppressed' | 'suppression_unknown'; leg: SuppressionLeg };
+
+/** The persona email statuses that count as bounced (the same set routing/rules.ts uses for emailUsable). */
+export const BOUNCED_EMAIL_STATUSES: ReadonlySet<string> = new Set(['bounced', 'hard_bounced']);
+
+/** Pure: the first leg that fires, or null. */
+export function suppressionLegFor(input: { unsubscribed: boolean; doNotContact: boolean; emailStatus: string | null | undefined }): SuppressionLeg | null {
+  if (input.unsubscribed) return 'unsubscribed';
+  if (input.doNotContact) return 'modex_do_not_contact';
+  if (input.emailStatus != null && BOUNCED_EMAIL_STATUSES.has(input.emailStatus)) return 'bounced';
+  return null;
+}
+
+/**
+ * The local suppression read: unsubscribed_emails on the lowercased address,
+ * then the persona's do_not_contact and bounced email status. Exported so
+ * the enroll service runs the SAME read before it resolves a target (R3-2).
+ */
+export async function isSuppressed(prisma: any, email: string, personaId: number | null | undefined): Promise<SuppressionLeg | null> {
   const hit = await prisma.unsubscribedEmail.findUnique({ where: { email }, select: { id: true } });
-  if (hit) return true;
+  if (hit) return 'unsubscribed';
   if (typeof personaId === 'number') {
-    const persona = await prisma.persona.findUnique({ where: { id: personaId }, select: { do_not_contact: true } });
-    if (persona?.do_not_contact === true) return true;
+    const persona = await prisma.persona.findUnique({ where: { id: personaId }, select: { do_not_contact: true, email_status: true } });
+    return suppressionLegFor({ unsubscribed: false, doNotContact: persona?.do_not_contact === true, emailStatus: persona?.email_status ?? null });
   }
-  return false;
+  return null;
+}
+
+/** The leg a cross-plane result names: the first `hit` leg for a suppression, the first `unknown` leg for an outage, else the aggregate. */
+function crossPlaneLeg(legs: Record<string, string>, want: 'hit' | 'unknown'): SuppressionLeg {
+  const named = Object.entries(legs).find(([, v]) => v === want)?.[0];
+  return `clawd:${named ?? CONTRACT_LEG}`;
+}
+
+/**
+ * The full suppression guard (R3-10): the local legs, then the cross-plane
+ * contract read. Never throws; a reader that throws is `unknown`, and an
+ * unknown authority refuses `suppression_unknown`, never clears.
+ */
+export async function checkSuppression(prisma: any, email: string, personaId: number | null | undefined, opts: SuppressionOptions = {}): Promise<SuppressionCheck> {
+  const local = await isSuppressed(prisma, email, personaId);
+  if (local) return { ok: false, reason: 'suppressed', leg: local };
+  const reader = opts.suppression ?? createClawdSuppressionReader();
+  let verdict: 'clear' | 'suppressed' | 'unknown';
+  let legs: Record<string, string> = {};
+  try {
+    const r = await reader.read({ to: email });
+    verdict = r.verdict;
+    legs = r.legs ?? {};
+  } catch {
+    return { ok: false, reason: 'suppression_unknown', leg: 'clawd:threw' };
+  }
+  if (verdict === 'suppressed') return { ok: false, reason: 'suppressed', leg: crossPlaneLeg(legs, 'hit') };
+  if (verdict !== 'clear') return { ok: false, reason: 'suppression_unknown', leg: crossPlaneLeg(legs, 'unknown') };
+  return { ok: true };
 }
 
 async function hasLiveEnrollment(prisma: any, email: string): Promise<boolean> {
@@ -107,6 +178,7 @@ export type EnrollRefusal =
   | 'version_retired'
   | 'family_mismatch'
   | 'suppressed'
+  | 'suppression_unknown'
   | 'already_enrolled'
   | 'hypothesis_not_found'
   | 'hypothesis_not_ready'
@@ -114,13 +186,14 @@ export type EnrollRefusal =
 
 export type EnrollResult =
   | { ok: true; id: string; isTest: boolean; frozen: boolean }
-  | { ok: false; reason: EnrollRefusal };
+  | { ok: false; reason: EnrollRefusal; leg?: SuppressionLeg };
 
 /**
  * Guards, in order: flag, version (exists, same family, not retired),
- * suppression, already_enrolled, hypothesis readiness. Then one transaction.
+ * suppression (local legs, then the cross-plane read), already_enrolled,
+ * hypothesis readiness. Then one transaction.
  */
-export async function enroll(prisma: any, input: EnrollInput): Promise<EnrollResult> {
+export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionOptions = {}): Promise<EnrollResult> {
   if (!gapFlag('GAP_OS_ENABLED')) return { ok: false, reason: 'gap_disabled' };
   if (input.engine !== 'modex_draft_queue') return { ok: false, reason: 'bad_engine' };
 
@@ -133,7 +206,8 @@ export async function enroll(prisma: any, input: EnrollInput): Promise<EnrollRes
   if (version.family_id !== input.familyId) return { ok: false, reason: 'family_mismatch' };
 
   const email = normalizeEmail(input.toEmail);
-  if (await isSuppressed(prisma, email, input.personaId)) return { ok: false, reason: 'suppressed' };
+  const suppression = await checkSuppression(prisma, email, input.personaId, opts);
+  if (!suppression.ok) return { ok: false, reason: suppression.reason, leg: suppression.leg };
   if (await hasLiveEnrollment(prisma, email)) return { ok: false, reason: 'already_enrolled' };
 
   if (input.hypothesisId) {
@@ -262,11 +336,12 @@ export type RecordExternalRefusal =
   | 'version_retired'
   | 'family_mismatch'
   | 'suppressed'
+  | 'suppression_unknown'
   | 'already_enrolled';
 
 export type RecordExternalResult =
   | { ok: true; id: string; isTest: boolean; frozen: boolean }
-  | { ok: false; reason: RecordExternalRefusal };
+  | { ok: false; reason: RecordExternalRefusal; leg?: SuppressionLeg };
 
 /**
  * Record a HubSpot enrollment that a readback proved. `no_readback` without
@@ -278,6 +353,7 @@ export type RecordExternalResult =
 export async function recordExternalEnrollment(
   prisma: any,
   input: RecordExternalEnrollmentInput,
+  opts: SuppressionOptions = {},
 ): Promise<RecordExternalResult> {
   if (!gapFlag('GAP_OS_ENABLED')) return { ok: false, reason: 'gap_disabled' };
   if (!input.externalState) return { ok: false, reason: 'no_readback' };
@@ -291,7 +367,8 @@ export async function recordExternalEnrollment(
   if (version.family_id !== input.familyId) return { ok: false, reason: 'family_mismatch' };
 
   const email = normalizeEmail(input.toEmail);
-  if (await isSuppressed(prisma, email, input.personaId)) return { ok: false, reason: 'suppressed' };
+  const suppression = await checkSuppression(prisma, email, input.personaId, opts);
+  if (!suppression.ok) return { ok: false, reason: suppression.reason, leg: suppression.leg };
 
   const existing = await prisma.sequenceEnrollment.findUnique({ where: { id: input.id }, select: { id: true } });
   if (existing) return { ok: false, reason: 'already_enrolled' };

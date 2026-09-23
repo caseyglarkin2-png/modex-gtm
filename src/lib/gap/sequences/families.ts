@@ -13,12 +13,19 @@
  * "throughput", no "standardize paper".
  *
  * Placeholders: `{{first_name}}` and `{{account}}` are rendered per person;
- * the compiler treats them as text. `[[SRC:<id>]]` marks the observation
- * sentence and names a fixture ref in tests/fixtures/gap/seed-evidence.json.
- * That sentence and its marker are the slot a per-prospect render replaces
- * with a real, fresh, public evidence ref; the seed carries fixture refs so
- * the shape compiles as written and a template can never pass C01 against
- * live evidence by accident (an unresolved marker rejects).
+ * the compiler treats them as text. Step 0 carries NO prospect fact of its
+ * own (R3-4): its observation sentence is the slot `{{observation}}`, which
+ * src/lib/gap/sequence/render.ts fills from the hypothesis observation with
+ * its `[S:<signal id>]` tokens turned into `[[SRC:<signal id>]]` markers, so
+ * C01 resolves the cited fact against the hypothesis's own signals. The
+ * stored step-0 body therefore carries no `[[SRC:` marker at all, and a
+ * template with the slot left unfilled is refused `unrendered_placeholder`.
+ * Steps 1 to 3 still carry a `[[SRC:<id>]]` marker naming a fixture ref in
+ * tests/fixtures/gap/seed-evidence.json: those refs exist so the shape
+ * compiles as written, and a fixture marker can never pass C01 against live
+ * evidence by accident (an unresolved marker rejects), which is what leaves
+ * a later step in `draft` under the per-item compile until real per-prospect
+ * copy replaces it.
  *
  * Proof appears only from the canon (src/lib/gap/compiler/canon.ts) with its
  * required phrasing: 48 to 24 minutes measured, about 5% observed, 24 sites
@@ -56,7 +63,7 @@ export interface SeedStepCopy {
   askType: 'question' | 'asset_offer';
   requiredEvidenceTypes: SignalType[];
   claimsUsed: string[];
-  /** Fixture evidence ids this step cites (its `[[SRC:id]]` markers, in order). */
+  /** Fixture evidence ids this step cites (its `[[SRC:id]]` markers, in order); empty on step 0, whose fact comes through the slot. */
   evidence: string[];
 }
 
@@ -109,14 +116,14 @@ const NETWORK_STANDARDIZATION: SeedStepCopy[] = [
   {
     subject: 'Three regions, one number',
     paragraphs: [
-      "Nobody thinks about the wiring until the lights flicker in one room and not the others. {{account}}'s annual report lists 41 distribution centers folded in from three regional operators over six years [[SRC:ns_ev_1]].",
-      'My guess is each region still runs its own version of the same shift, so one trailer event gets counted three different ways across sites before it reaches you.',
-      'Which of the three regions do you trust least when the numbers disagree?',
+      'Nobody thinks about the wiring until the lights flicker in one room and not the others. {{observation}}',
+      'My guess is each region still runs its own version of the same shift, so one trailer event gets counted more than one way across sites before it reaches you.',
+      'Which region do you trust least when the numbers disagree?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['acquisition', 'site_expansion'],
     claimsUsed: [],
-    evidence: ['ns_ev_1'],
+    evidence: [],
   },
   {
     subject: 'The analyst who reconciles',
@@ -134,7 +141,7 @@ const NETWORK_STANDARDIZATION: SeedStepCopy[] = [
     subject: 'One model, three fence lines',
     paragraphs: [
       'Your investor day deck names one operating model as a 2026 priority and puts the integration owner in the COO office [[SRC:ns_ev_3]].',
-      'If the model stops at the warehouse door, the yards keep three vocabularies. Primo Brands started at the fence instead: 24 sites live on one protocol, same driver journey, same clocks, before any system consolidation.',
+      'If the model stops at the warehouse door, the yards likely keep three vocabularies. Primo Brands started at the fence instead: 24 sites live on one protocol, same driver journey, same clocks, before any system consolidation.',
       'If useful, I can send the 1-page scorecard peers use to grade one definition across facilities.',
     ],
     askType: 'asset_offer',
@@ -164,14 +171,14 @@ const HIDDEN_CAPACITY: SeedStepCopy[] = [
   {
     subject: 'Doors versus spots at Fontana',
     paragraphs: [
-      'Airports do not pour runways when the taxiway is the problem. Your Fontana DC opened 30 more dock doors this spring; the lot still holds about 180 trailer spots [[SRC:hc_ev_1]].',
-      'My guess is the doors are no longer the constraint. The spots are, and the tractor hunting for the right trailer is where the new capacity goes to wait.',
+      'Airports do not pour runways when the taxiway is the problem. {{observation}}',
+      'My guess is the doors are no longer the constraint. The spots are, and the tractor hunting for the right trailer is where the new capacity waits.',
       'How many doors sit empty on a normal Tuesday because nobody can say where the trailer is?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['site_expansion'],
     claimsUsed: [],
-    evidence: ['hc_ev_1'],
+    evidence: [],
   },
   {
     subject: 'Weekend overtime on the lot',
@@ -219,14 +226,14 @@ const AUTOMATION_READINESS: SeedStepCopy[] = [
   {
     subject: 'Road markings before the truck',
     paragraphs: [
-      'A self-driving car is only as calm as the road markings it reads. Your Columbus plant announced an autonomous yard truck pilot for the second half of the year [[SRC:ar_ev_1]].',
+      'A self-driving car is only as calm as the road markings it reads. {{observation}}',
       'My guess is the truck will be fine. The open point is whether the moves it gets handed are deterministic yet, or whether a radio call still decides which trailer goes where.',
-      "What share of Columbus moves start from a written rule versus a spotter's judgment?",
+      "What share of the moves there start from a written rule versus a spotter's judgment?",
     ],
     askType: 'question',
     requiredEvidenceTypes: ['automation_program'],
     claimsUsed: [],
-    evidence: ['ar_ev_1'],
+    evidence: [],
   },
   {
     subject: 'The exception list at Columbus',
@@ -244,7 +251,7 @@ const AUTOMATION_READINESS: SeedStepCopy[] = [
     subject: 'Clean events before robots',
     paragraphs: [
       'Your investor presentation frames the capex program as automation first, with Columbus as the proving ground [[SRC:ar_ev_3]].',
-      'Automation compounds whatever it lands on. If the arrival, dock and status events are already clean, the robots inherit a clean lot; if they are not, the program spends its first year documenting exceptions. Primo Brands cut drop-and-hook turn time from 48 to 24 minutes, measured in a side-by-side pilot, before any automated move.',
+      'Automation compounds whatever it lands on. If the arrival, dock and status events are already clean, the robots inherit a clean lot; if they are not, the program usually spends its first year documenting exceptions. Primo Brands cut drop-and-hook turn time from 48 to 24 minutes, measured in a side-by-side pilot, before any automated move.',
       'Which of those three events does Columbus trust least: arrival, dock or status?',
     ],
     askType: 'question',
@@ -274,14 +281,14 @@ const NEW_SITES_ACQUISITIONS: SeedStepCopy[] = [
   {
     subject: 'Six plants and the forks',
     paragraphs: [
-      'Two families moving into one house argue about the forks long before they argue about money. Your Bluewater acquisition brings six plants into the network at the close of Q3 [[SRC:na_ev_1]].',
+      'Two families moving into one house argue about the forks long before they argue about money. {{observation}}',
       'My guess is the day-one plan covers the ERP and the brand, and the yards sit on a list called later. That is usually where two operating vocabularies collide first, at the fence.',
-      'Which of the six plants takes its first truck from your existing lanes?',
+      'Which of the acquired plants takes its first truck from your existing lanes?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['acquisition'],
     claimsUsed: [],
-    evidence: ['na_ev_1'],
+    evidence: [],
   },
   {
     subject: 'Harmonizing at the fence',

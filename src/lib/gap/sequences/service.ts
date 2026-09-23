@@ -7,7 +7,10 @@
  * Why the input carries compile ids: a version is a SHAPE, and a shape is
  * only send-eligible once the compiler has passed each step of it. The
  * caller names the GapCompile rows it is relying on; the service verifies,
- * through prisma, that every one exists, belongs to this version, and that
+ * through prisma, that every one exists, belongs to this version, is bound
+ * to the hypothesis being enrolled (R3-3: `hypothesis_id === hypothesisId`;
+ * a template-level row with a null hypothesis never counts here, because
+ * materialize is a live act), and that
  * for every step of the version the NEWEST named row is a `pass`. Version
  * status is not the gate here: a draft with four passes may materialize,
  * a frozen version too; a retired version is refused because it blocks new
@@ -20,7 +23,11 @@
  * keys and the GAP runtime routes business-day delays through it.
  *
  * Idempotent on the row name `<family name> v<version>`: a second call finds
- * the existing row and answers `existing: true` without writing. The audit
+ * the existing row, compares its stored steps with `toLegacySteps(version)`
+ * by value, and answers `existing: true` without writing; a row of that name
+ * whose steps differ is refused `sequence_name_collision` (S11), because a
+ * run stamped with that Sequence id would schedule copy the compile rows
+ * never judged. The audit
  * kind `sequence.materialized` is not yet in GapAuditKind (src/lib/gap/audit.ts
  * belongs to another ticket); it is cast here and the union should gain it.
  *
@@ -31,10 +38,12 @@ import { audit, type AuditResult, type GapAuditKind } from '@/lib/gap/audit';
 import { toLegacySteps, type ResolvedStep } from '@/lib/gap/sequence/resolve-steps';
 import { parseSteps } from '@/lib/gap/sequence/steps';
 
-export const MATERIALIZED_AUDIT_KIND = 'sequence.materialized' as GapAuditKind;
+export const MATERIALIZED_AUDIT_KIND: GapAuditKind = 'sequence.materialized';
 
 export interface MaterializeInput {
   versionId: string;
+  /** The hypothesis every named compile row must be bound to (R3-3). */
+  hypothesisId: string;
   /** The GapCompile row ids the caller relies on; every step needs one whose newest verdict is pass. */
   compileIds: string[];
 }
@@ -52,8 +61,11 @@ export type MaterializeRefusal =
   | `invalid_version_steps:${string}`
   | `compile_not_found:${string}`
   | `compile_wrong_version:${string}`
+  | `compile_wrong_hypothesis:${string}`
+  | `compile_template_only:${string}`
   | `step_not_compiled:${number}`
-  | `step_not_passed:${number}`;
+  | `step_not_passed:${number}`
+  | 'sequence_name_collision';
 
 export type MaterializeResult =
   | { ok: true; sequenceId: number; name: string; existing: boolean; steps: ResolvedStep[]; audit?: AuditResult }
@@ -65,6 +77,29 @@ interface CompileRowLike {
   step_index: number | null;
   verdict: string;
   created_at: Date | string;
+  hypothesis_id?: string | null;
+}
+
+/** Key-order-independent JSON for a by-value comparison of stored steps against the mapping. */
+function canonicalJson(value: unknown): string {
+  const sort = (v: unknown): unknown => {
+    if (Array.isArray(v)) return v.map(sort);
+    if (v && typeof v === 'object') {
+      return Object.fromEntries(
+        Object.keys(v as Record<string, unknown>)
+          .sort()
+          .map((k) => [k, sort((v as Record<string, unknown>)[k])]),
+      );
+    }
+    return v;
+  };
+  return JSON.stringify(sort(value));
+}
+
+/** True when the stored `sequences.steps` Json equals the mapping by value. */
+export function storedStepsMatch(stored: unknown, expected: ResolvedStep[]): boolean {
+  if (!Array.isArray(stored)) return false;
+  return canonicalJson(stored) === canonicalJson(expected);
 }
 
 export function sequenceNameFor(familyName: string | null | undefined, version: number): string {
@@ -108,13 +143,16 @@ export async function materializeSequence(
 
   const rows: CompileRowLike[] = await prisma.gapCompile.findMany({
     where: { id: { in: compileIds } },
-    select: { id: true, sequence_version_id: true, step_index: true, verdict: true, created_at: true },
+    select: { id: true, sequence_version_id: true, step_index: true, verdict: true, created_at: true, hypothesis_id: true },
   });
   const byId = new Map(rows.map((r) => [r.id, r]));
   for (const id of compileIds) {
     const row = byId.get(id);
     if (!row) return { ok: false, reason: `compile_not_found:${id}` };
     if (row.sequence_version_id !== version.id) return { ok: false, reason: `compile_wrong_version:${id}` };
+    const boundTo = row.hypothesis_id ?? null;
+    if (boundTo === null) return { ok: false, reason: `compile_template_only:${id}` };
+    if (boundTo !== input.hypothesisId) return { ok: false, reason: `compile_wrong_hypothesis:${id}` };
   }
   const refusal = verifyStepCompiles(parsed.steps.steps.length, rows);
   if (refusal) return { ok: false, reason: refusal };
@@ -125,9 +163,12 @@ export async function materializeSequence(
   const existing = await prisma.sequence.findFirst({
     where: { name },
     orderBy: { created_at: 'asc' },
-    select: { id: true },
+    select: { id: true, steps: true },
   });
-  if (existing) return { ok: true, sequenceId: existing.id, name, existing: true, steps };
+  if (existing) {
+    if (!storedStepsMatch(existing.steps, steps)) return { ok: false, reason: 'sequence_name_collision' };
+    return { ok: true, sequenceId: existing.id, name, existing: true, steps };
+  }
 
   const created = await prisma.sequence.create({
     data: { name, owner: opts.owner ?? actor, steps },

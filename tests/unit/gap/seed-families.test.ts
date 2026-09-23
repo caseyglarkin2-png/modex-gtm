@@ -3,9 +3,15 @@
  * through the S3-T9 orchestrator `compile()` with a stub critic that passes,
  * against the fixture evidence in tests/fixtures/gap/seed-evidence.json and
  * the committed claims snapshot validator. Every one of the sixteen checks
- * (groups A, B and C, review checks included) must pass on the stored body
- * AND on a rendered body (placeholders filled), because the greeting line
- * only strips once `{{first_name}}` is a name and C04 / C07 must hold there.
+ * (groups A, B and C, review checks included) must pass with the person
+ * placeholders unrendered AND rendered, because the greeting line only
+ * strips once `{{first_name}}` is a name and C04 / C07 must hold there.
+ *
+ * R3-4: step 0 carries no prospect fact of its own. Its observation sentence
+ * is the slot `{{observation}}`, filled here (as the enroll service and the
+ * runtime fill it) from the fixture hypothesis observation, whose `[S:<id>]`
+ * token names the family's first fixture ref and becomes the `[[SRC:<id>]]`
+ * marker C01 resolves. The stored step-0 body is asserted marker-free.
  *
  * Voice invariants (no em dash, no "throughput", no singular "yard" outside
  * the accepted compounds) are scanned across every subject and body.
@@ -25,6 +31,7 @@ import { markerIds } from '@/lib/gap/compiler/checks/c12-newinfo';
 import { CHECK_CODES } from '@/lib/gap/compiler';
 import { stripGreetingAndSignature, wordCount } from '@/lib/gap/compiler/text';
 import type { CriticClient } from '@/lib/gap/critic-client';
+import { renderStepCopy } from '@/lib/gap/sequence/render';
 import { parseSteps, stepsHash, validateStepsForVersion } from '@/lib/gap/sequence/steps';
 import {
   SEED_DELAYS_BUSINESS_DAYS,
@@ -60,10 +67,15 @@ const CRITIC_PASS: CriticClient = { score: vi.fn(async () => ({ ok: true as cons
 
 const RENDER = { firstName: 'Kara', account: 'Acme Logistics' };
 
+/** The fixture hypothesis observation, verbatim: the fixture carries its own `[S:<first evidence id>]` citation, as a real hypothesis observation must. */
+function observationFor(fam: SeedFamily): string {
+  return FIXTURE.families[fam.key].hypothesis.observation.trim();
+}
+
 function contractFor(fam: SeedFamily, stepIndex: number) {
   const fx = FIXTURE.families[fam.key];
   return {
-    hypothesis: fx.hypothesis,
+    hypothesis: { ...fx.hypothesis, observation: observationFor(fam) },
     evidence: fx.evidence,
     proofRefs: [],
     namedPipeline: FIXTURE.namedPipeline,
@@ -72,13 +84,15 @@ function contractFor(fam: SeedFamily, stepIndex: number) {
   };
 }
 
+/** The MARKED copy the compiler judges: the observation slot is always filled; `rendered` toggles the person placeholders. */
 function stepCopy(fam: SeedFamily, i: number, rendered: boolean): { subject: string; body: string } {
   const t = fam.steps.steps[i].templates!;
   const subject = t.subjectTemplate ?? '';
   const body = t.bodyTemplate ?? '';
+  const slotted = renderStepCopy({ subject, body }, { firstName: '{{first_name}}', account: '{{account}}', observation: observationFor(fam) }).marked;
   return rendered
-    ? { subject: renderSeedPlaceholders(subject, RENDER), body: renderSeedPlaceholders(body, RENDER) }
-    : { subject, body };
+    ? { subject: renderSeedPlaceholders(slotted.subject, RENDER), body: renderSeedPlaceholders(slotted.body, RENDER) }
+    : slotted;
 }
 
 async function compileStep(fam: SeedFamily, i: number, rendered: boolean): Promise<CompileResult> {
@@ -167,6 +181,33 @@ describe('seed families: shape', () => {
           seen.add(id);
         }
       });
+    }
+  });
+
+  it('R3-4: every fixture observation cites the family\'s first evidence ref with a [S:id] token on every sentence', () => {
+    for (const fam of SEED_FAMILIES) {
+      const fx = FIXTURE.families[fam.key];
+      const obs = fx.hypothesis.observation;
+      expect(obs, `${fam.key} observation`).toContain(`[S:${fx.evidence[0].id}]`);
+      for (const sentence of obs.split(/(?<=[.!?])\s+/)) expect(/\[S:[A-Za-z0-9_-]+\]/.test(sentence), `${fam.key} uncited sentence: ${sentence}`).toBe(true);
+    }
+  });
+
+  it('R3-4: the stored step-0 body carries the {{observation}} slot and no [[SRC: marker (no prospect fact of its own); the slot render carries the hypothesis marker', () => {
+    for (const fam of SEED_FAMILIES) {
+      const stored = fam.steps.steps[0].templates?.bodyTemplate ?? '';
+      expect(stored, `${fam.key} step 0 slot`).toContain('{{observation}}');
+      expect(stored, `${fam.key} step 0 stored marker`).not.toContain('[[SRC:');
+      expect(fam.evidence[0], `${fam.key} step 0 evidence`).toEqual([]);
+      const firstRef = FIXTURE.families[fam.key].evidence[0].id;
+      const r = renderStepCopy({ subject: '', body: stored }, { ...RENDER, observation: observationFor(fam) });
+      expect(r.unrendered).toBeNull();
+      expect(r.marked.body).toContain(`[[SRC:${firstRef}]]`);
+      expect(r.queued.body).not.toContain('[[');
+      expect(r.queued.body).not.toContain('[S:');
+      // The slot is the ONLY fact-bearing sentence of paragraph 1: paragraph 1 is the hook plus the slot.
+      const paragraph1 = stored.split('\n')[1];
+      expect(paragraph1.endsWith('{{observation}}'), `${fam.key} paragraph 1: ${paragraph1}`).toBe(true);
     }
   });
 });
