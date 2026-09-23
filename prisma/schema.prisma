@@ -1110,6 +1110,10 @@ model InboundMessage {
   received_at DateTime
   read        Boolean  @default(false)
   created_at  DateTime @default(now())
+  /// Where the row came from: gmail | hubspot. HubSpot rows use id `hs:<engagementId>`.
+  source                String  @default("gmail")
+  /// HubSpot engagement id when source is hubspot; null for gmail rows.
+  hubspot_engagement_id String?
 
   thread EmailThread @relation(fields: [thread_id], references: [id], onDelete: Cascade)
 
@@ -1117,6 +1121,8 @@ model InboundMessage {
   @@index([from_email])
   @@index([received_at])
   @@index([read])
+  @@index([source, received_at])
+  @@index([hubspot_engagement_id])
   @@map("inbound_messages")
 }
 
