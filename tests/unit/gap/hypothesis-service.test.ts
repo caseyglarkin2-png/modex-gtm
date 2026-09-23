@@ -83,18 +83,34 @@ function row(overrides: Record<string, unknown> = {}) {
     observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
     problem_hypothesis: 'My guess is the new DC is running gate checks on paper.',
     falsification_questions: ['Do drivers check in at a guard shack?'],
+    why_now: 'Second DC opened',
+    what_a_no_means: 'Gate is already digital',
+    confidence: 60,
     reviewed_by: null,
     expires_at: null,
+    account: { hubspot_company_id: '9001' },
     signals: [
       {
         signal_id: 'S1',
         role: 'primary',
-        signal: { id: 'S1', evidence_url: 'https://x/a', evidence_text: null, freshness_expires_at: FUTURE_A },
+        signal: {
+          id: 'S1',
+          title: 'New Ohio DC',
+          evidence_url: 'https://x/a',
+          evidence_text: null,
+          freshness_expires_at: FUTURE_A,
+        },
       },
       {
         signal_id: 'S2',
         role: 'supporting',
-        signal: { id: 'S2', evidence_url: null, evidence_text: 'seen on site', freshness_expires_at: FUTURE_B },
+        signal: {
+          id: 'S2',
+          title: 'Trailer count doubled',
+          evidence_url: null,
+          evidence_text: 'seen on site',
+          freshness_expires_at: FUTURE_B,
+        },
       },
     ],
     primary_persona: { do_not_contact: false, email: 'Ops@Acme.com' },
@@ -265,15 +281,19 @@ describe('loadSnapshot', () => {
     expect(snap).toMatchObject({
       id: 'H1',
       accountName: 'Acme Logistics',
+      hubspotCompanyId: '9001',
       primaryPersonaId: 7,
       sequenceVersionId: null,
+      whyNow: 'Second DC opened',
+      whatANoMeans: 'Gate is already digital',
+      confidence: 60,
       status: 'approved',
       reviewedBy: 'casey',
       personaSuppressed: true,
       version: { status: 'frozen', firstTouchProductProof: true },
       linkedSignals: [
-        { id: 'S1', hasEvidence: true, expiresAt: FUTURE_A },
-        { id: 'S2', hasEvidence: true, expiresAt: FUTURE_B },
+        { id: 'S1', hasEvidence: true, expiresAt: FUTURE_A, title: 'New Ohio DC', evidenceUrl: 'https://x/a' },
+        { id: 'S2', hasEvidence: true, expiresAt: FUTURE_B, title: 'Trailer count doubled', evidenceUrl: null },
       ],
       confirmedDispositions: [{ responseClass: 'problem_confirmed', createdAt: PAST }],
     });
@@ -284,6 +304,8 @@ describe('loadSnapshot', () => {
     const query = prisma.prospectingHypothesis.findUnique.mock.calls[0][0];
     expect(query.where).toEqual({ id: 'H1' });
     expect(query.include.dispositions.where).toEqual({ human_confirmed: true });
+    expect(query.include.account).toEqual({ select: { hubspot_company_id: true } });
+    expect(query.include.signals.include.signal.select.title).toBe(true);
   });
 
   it('returns null for a missing row and skips the unsubscribe lookup without a persona email', async () => {
@@ -301,10 +323,14 @@ describe('loadSnapshot', () => {
 describe('transitionHypothesis', () => {
   let prisma: Prisma;
   let auditSpy: AsyncSpy;
+  let mirrorSpy: AsyncSpy;
+  let deps: { audit: AsyncSpy; mirror: AsyncSpy };
   beforeEach(() => {
     prisma = makePrisma();
     prisma.unsubscribedEmail.findUnique.mockResolvedValue(null);
     auditSpy = asyncSpy(async () => ({ stored: true, reviewQueued: true }));
+    mirrorSpy = asyncSpy(async () => ({ ok: true }));
+    deps = { audit: auditSpy, mirror: mirrorSpy };
   });
 
   it('not_found when the row is missing', async () => {
@@ -316,19 +342,20 @@ describe('transitionHypothesis', () => {
 
   it('passes a machine refusal through unchanged with zero writes', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'draft' }));
-    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, { audit: auditSpy });
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
     expect(out).toEqual({ ok: false, reason: 'ILLEGAL_TRANSITION:draft->approve' });
     expect(prisma.$transaction).not.toHaveBeenCalled();
     expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
     expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
     expect(auditSpy).not.toHaveBeenCalled();
+    expect(mirrorSpy).not.toHaveBeenCalled();
   });
 
   it('approve: optimistic updateMany on the from status, event inside tx, audit after commit', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'review_required' }));
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
 
-    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, { audit: auditSpy });
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
     expect(out).toEqual({ ok: true, from: 'review_required', to: 'approved', effects: ['set_reviewed'] });
 
     expect(prisma.$transaction).toHaveBeenCalledTimes(1);
@@ -360,6 +387,70 @@ describe('transitionHypothesis', () => {
       payload: { from: 'review_required', to: 'approved', effects: ['set_reviewed'] },
       review: { target: 'Acme Logistics', title: 'approve hidden_capacity', intent: 'approve' },
     });
+
+    expect(mirrorSpy).toHaveBeenCalledTimes(1);
+    const [mirrorPrisma, mirrorEvent] = mirrorSpy.mock.calls[0] as unknown as [unknown, Record<string, unknown>];
+    expect(mirrorPrisma).toBe(prisma);
+    expect(mirrorEvent).toEqual({
+      hypothesisId: 'H1',
+      action: 'approved',
+      hypothesis: {
+        accountName: 'Acme Logistics',
+        hubspotCompanyId: '9001',
+        problemFamily: 'hidden_capacity',
+        observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+        problemHypothesis: 'My guess is the new DC is running gate checks on paper.',
+        whyNow: 'Second DC opened',
+        falsificationQuestions: ['Do drivers check in at a guard shack?'],
+        whatANoMeans: 'Gate is already digital',
+        confidence: 60,
+        status: 'approved',
+      },
+      evidence: [
+        { id: 'S1', title: 'New Ohio DC', url: 'https://x/a' },
+        { id: 'S2', title: 'Trailer count doubled', url: null },
+      ],
+    });
+  });
+
+  it('reject_review is audited but never mirrored', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'review_required' }));
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
+
+    const out = await transitionHypothesis(
+      prisma,
+      'H1',
+      'reject_review',
+      { now: NOW, actor: 'casey', reason: 'observation too thin' },
+      deps,
+    );
+    expect(out).toEqual({ ok: true, from: 'review_required', to: 'draft', effects: [] });
+    expect(auditSpy.mock.calls[0][1]).toMatchObject({ kind: 'hypothesis.review_rejected' });
+    expect(mirrorSpy).not.toHaveBeenCalled();
+  });
+
+  it('a rejecting mirror never fails the transition', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'review_required' }));
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
+    mirrorSpy.mockRejectedValue(new Error('hubspot 500'));
+
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
+    expect(out).toEqual({ ok: true, from: 'review_required', to: 'approved', effects: ['set_reviewed'] });
+    expect(mirrorSpy).toHaveBeenCalledTimes(1);
+    // Let the swallowed rejection settle so vitest sees no unhandled rejection.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
+
+  it('a mirror that throws synchronously never fails the transition', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'draft' }));
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('draft'));
+    mirrorSpy.mockImplementation(() => {
+      throw new Error('bad delegate');
+    });
+
+    const out = await transitionHypothesis(prisma, 'H1', 'submit', { now: NOW, actor: 'casey' }, deps);
+    expect(out).toEqual({ ok: true, from: 'draft', to: 'review_required', effects: [] });
+    expect(mirrorSpy.mock.calls[0][1]).toMatchObject({ action: 'submitted', hypothesis: { status: 'review_required' } });
   });
 
   it('stale_status: the row moved under us, so updateMany matches nothing and no event is written', async () => {
@@ -367,7 +458,7 @@ describe('transitionHypothesis', () => {
     // A concurrent approver already moved the row to approved.
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('approved'));
 
-    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, { audit: auditSpy });
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
     expect(out).toEqual({ ok: false, reason: 'stale_status' });
     expect(prisma.$transaction).toHaveBeenCalledTimes(1);
     expect(prisma.tx.hypothesisEvent.create).not.toHaveBeenCalled();
@@ -379,7 +470,7 @@ describe('transitionHypothesis', () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'approved', reviewed_by: 'casey' }));
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('approved'));
 
-    const out = await transitionHypothesis(prisma, 'H1', 'activate', { now: NOW, actor: 'casey' }, { audit: auditSpy });
+    const out = await transitionHypothesis(prisma, 'H1', 'activate', { now: NOW, actor: 'casey' }, deps);
     expect(out).toEqual({
       ok: true,
       from: 'approved',
@@ -408,7 +499,7 @@ describe('transitionHypothesis', () => {
       'H1',
       'resolve',
       { now: NOW, actor: 'casey', outcome: 'partially_confirmed', reason: 'half the yards' },
-      { audit: auditSpy },
+      deps,
     );
     expect(out).toEqual({
       ok: true,
@@ -447,7 +538,7 @@ describe('transitionHypothesis', () => {
       'H1',
       'withdraw',
       { now: NOW, actor: 'casey', reason: 'wrong account' },
-      { audit: auditSpy },
+      deps,
     );
     expect(out).toEqual({ ok: true, from: 'draft', to: 'rejected', effects: [] });
     expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
@@ -538,8 +629,11 @@ describe('expireDue', () => {
       count: args.where.status === rows[args.where.id].status ? 1 : 0,
     }));
 
-    const out = await expireDue(prisma, NOW, 'cron', { audit: auditSpy });
+    const mirrorSpy = asyncSpy(async () => ({ ok: true }));
+    const out = await expireDue(prisma, NOW, 'cron', { audit: auditSpy, mirror: mirrorSpy });
     expect(out).toEqual({ expired: 2, skipped: [{ id: 'H3', reason: 'not_yet_expired' }] });
+    expect(mirrorSpy).toHaveBeenCalledTimes(2);
+    expect(mirrorSpy.mock.calls.map((c) => (c[1] as { action: string }).action)).toEqual(['expired', 'expired']);
 
     expect(prisma.prospectingHypothesis.findMany).toHaveBeenCalledWith({
       where: { status: { in: ['approved', 'active'] }, expires_at: { lte: NOW } },

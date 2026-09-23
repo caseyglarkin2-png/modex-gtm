@@ -21,6 +21,7 @@
  */
 
 import { audit as defaultAudit, recordHypothesisEvent, type GapAuditKind } from '../audit';
+import { mirrorHypothesisEvent as defaultMirror, type MirrorAction } from '../hubspot-mirror';
 import {
   expiresAtFor,
   transition,
@@ -64,11 +65,22 @@ export type ProposeResult =
   | { ok: true; id: string; status: 'draft' }
   | { ok: false; reason: string; existingId?: string };
 
+/** A linked signal as the service loads it: the machine's view plus what the HubSpot mirror needs. */
+export interface LoadedSignal extends LinkedSignal {
+  title: string;
+  evidenceUrl: string | null;
+}
+
 export interface LoadedSnapshot extends HypothesisSnapshot {
   id: string;
   accountName: string;
+  hubspotCompanyId: string | null;
   primaryPersonaId: number | null;
   sequenceVersionId: string | null;
+  whyNow: string | null;
+  whatANoMeans: string | null;
+  confidence: number;
+  linkedSignals: LoadedSignal[];
 }
 
 export type TransitionOutcome =
@@ -77,6 +89,7 @@ export type TransitionOutcome =
 
 export interface ServiceDeps {
   audit?: typeof defaultAudit;
+  mirror?: typeof defaultMirror;
 }
 
 export interface NarrativePatch {
@@ -125,6 +138,17 @@ const AUDIT_KIND: Record<HypothesisAction, GapAuditKind> = {
   close_unresolved: 'hypothesis.closed_unresolved',
   expire: 'hypothesis.expired',
   withdraw: 'hypothesis.withdrawn',
+};
+
+/** HubSpot mirror action per transition action. reject_review is not mirrored. */
+const MIRROR_ACTION: Partial<Record<HypothesisAction, MirrorAction>> = {
+  submit: 'submitted',
+  approve: 'approved',
+  activate: 'activated',
+  resolve: 'resolved',
+  close_unresolved: 'closed_unresolved',
+  expire: 'expired',
+  withdraw: 'withdrawn',
 };
 
 const EDITABLE_STATUSES: readonly HypothesisStatus[] = ['draft', 'review_required'];
@@ -304,10 +328,11 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
   const row = await prisma.prospectingHypothesis.findUnique({
     where: { id },
     include: {
+      account: { select: { hubspot_company_id: true } },
       signals: {
         include: {
           signal: {
-            select: { id: true, evidence_url: true, evidence_text: true, freshness_expires_at: true },
+            select: { id: true, title: true, evidence_url: true, evidence_text: true, freshness_expires_at: true },
           },
         },
       },
@@ -329,10 +354,12 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
     unsubscribed = Boolean(hit);
   }
 
-  const linkedSignals: LinkedSignal[] = (row.signals ?? []).map((link: any) => ({
+  const linkedSignals: LoadedSignal[] = (row.signals ?? []).map((link: any) => ({
     id: link.signal?.id ?? link.signal_id,
     hasEvidence: Boolean(link.signal?.evidence_url || link.signal?.evidence_text),
     expiresAt: link.signal?.freshness_expires_at ?? null,
+    title: typeof link.signal?.title === 'string' ? link.signal.title : '',
+    evidenceUrl: link.signal?.evidence_url ?? null,
   }));
 
   const versionRow = row.sequence_version ?? null;
@@ -344,8 +371,12 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
   return {
     id: row.id,
     accountName: row.account_name,
+    hubspotCompanyId: row.account?.hubspot_company_id ?? null,
     primaryPersonaId: row.primary_persona_id ?? null,
     sequenceVersionId: row.sequence_version_id ?? null,
+    whyNow: row.why_now ?? null,
+    whatANoMeans: row.what_a_no_means ?? null,
+    confidence: typeof row.confidence === 'number' ? row.confidence : 0,
     status: row.status,
     problemFamily: row.problem_family,
     persona: row.persona,
@@ -468,6 +499,39 @@ export async function transitionHypothesis(
     }).catch(() => undefined);
   } catch {
     // A synchronous throw from an injected audit must not surface either.
+  }
+
+  // HubSpot mirror, also fire-and-forget after commit. The mirror records its
+  // own failures and never throws, but an injected one might, so it is wrapped
+  // the same way. reject_review has no mirror action.
+  const mirrorAction = MIRROR_ACTION[action];
+  if (mirrorAction) {
+    const mirrorFn = deps.mirror ?? defaultMirror;
+    try {
+      void mirrorFn(prisma, {
+        hypothesisId: id,
+        action: mirrorAction,
+        hypothesis: {
+          accountName: snapshot.accountName,
+          hubspotCompanyId: snapshot.hubspotCompanyId,
+          problemFamily: snapshot.problemFamily,
+          observation: snapshot.observation,
+          problemHypothesis: snapshot.problemHypothesis,
+          whyNow: snapshot.whyNow,
+          falsificationQuestions: snapshot.falsificationQuestions,
+          whatANoMeans: snapshot.whatANoMeans,
+          confidence: snapshot.confidence,
+          status: to,
+        },
+        evidence: snapshot.linkedSignals.map((signal) => ({
+          id: signal.id,
+          title: signal.title,
+          url: signal.evidenceUrl,
+        })),
+      }).catch(() => undefined);
+    } catch {
+      // Never let the mirror surface into the transition result.
+    }
   }
 
   return { ok: true, from, to, effects };
