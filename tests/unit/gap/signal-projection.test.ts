@@ -399,6 +399,32 @@ describe('fromPicCitation', () => {
     expect(expectOk(fromPicCitation(pic({ verbatim: undefined }), CTX)).signal.evidenceText).toBeNull();
   });
 
+  it.each(['transcript:2026-09-01-acme-discovery#t=1210', 'call-intel:acme-2026-09-01', 'https://x.example.com/p'])(
+    'a buyer-sourced ref (%s) carries the verbatim as evidenceText and leaves summary null',
+    (ref) => {
+      const row = pic({ ref });
+      const { signal } = expectOk(fromPicCitation(row, CTX));
+      expect(signal.evidenceText).toBe(row.verbatim);
+      expect(signal.summary).toBeNull();
+    },
+  );
+
+  it.each(['dossier:acme', 'for-pack:acme', 'vault:acme'])(
+    'a seller-document ref (%s) puts the verbatim in summary and leaves evidenceText null, so it cannot satisfy the evidence guard',
+    (ref) => {
+      const row = pic({ ref });
+      const { signal } = expectOk(fromPicCitation(row, CTX));
+      expect(signal.evidenceText).toBeNull();
+      expect(signal.summary).toBe(row.verbatim);
+    },
+  );
+
+  it('a seller-document ref with no verbatim leaves both summary and evidenceText null', () => {
+    const { signal } = expectOk(fromPicCitation(pic({ ref: 'dossier:acme', verbatim: '   ' }), CTX));
+    expect(signal.evidenceText).toBeNull();
+    expect(signal.summary).toBeNull();
+  });
+
   it.each([
     ['BUYER_CONFIRMED', 90],
     ['STRONG', 75],

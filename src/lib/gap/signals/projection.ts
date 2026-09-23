@@ -395,6 +395,25 @@ function picSourceType(ref: string): SignalSourceType {
   return 'manual';
 }
 
+/**
+ * Refs whose verbatim is the buyer's or the world's own words: a call
+ * transcript, call intel, or a public page. Only these may carry the
+ * verbatim as `evidenceText`.
+ */
+const PIC_BUYER_WORDS_PREFIXES = ['transcript:', 'call-intel:'] as const;
+
+function picVerbatimIsEvidence(ref: string): boolean {
+  return isHttpRef(ref) || PIC_BUYER_WORDS_PREFIXES.some((prefix) => ref.startsWith(prefix));
+}
+
+/**
+ * A PIC citation's verbatim becomes `evidenceText` ONLY when the ref points
+ * at something the buyer said or a public source (`transcript:`,
+ * `call-intel:`, http(s)). For `for-pack:`, `dossier:` and `vault:` refs the
+ * verbatim is a seller document quoting itself, so it goes to `summary` and
+ * `evidenceText` stays null: a seller document must never satisfy the
+ * evidence guard that gates a hypothesis on buyer-sourced evidence.
+ */
 export function fromPicCitation(c: PicCitationRow, ctx: ProjectionContext): ProjectionResult {
   const ref = c.ref.trim();
   if (!PIC_REF_PREFIXES.some((prefix) => ref.startsWith(prefix))) return refuse('unresolvable_ref');
@@ -403,6 +422,8 @@ export function fromPicCitation(c: PicCitationRow, ctx: ProjectionContext): Proj
 
   const type: SignalType = 'manual_research';
   const refHash = createHash('sha1').update(ref).digest('hex');
+  const verbatim = trimOrNull(c.verbatim);
+  const verbatimIsEvidence = picVerbatimIsEvidence(ref);
 
   return {
     ok: true,
@@ -414,10 +435,10 @@ export function fromPicCitation(c: PicCitationRow, ctx: ProjectionContext): Proj
       sourceId: `${c.slug.trim()}:${refHash}`,
       type,
       title: clip(c.problem, TITLE_MAX),
-      summary: null,
+      summary: verbatimIsEvidence ? null : verbatim,
       sourceType: picSourceType(ref),
       evidenceUrl: isHttpRef(ref) ? ref : null,
-      evidenceText: trimOrNull(c.verbatim),
+      evidenceText: verbatimIsEvidence ? verbatim : null,
       claimClass: null,
       externalOk: null,
       observedAt,
