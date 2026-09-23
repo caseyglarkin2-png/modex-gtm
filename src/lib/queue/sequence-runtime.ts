@@ -12,6 +12,8 @@ import { clampToWindow, DEFAULT_WINDOW } from './schedule';
 import { isGapOsEnabled } from '../gap/flags';
 import { resolveSteps } from '../gap/sequence/resolve-steps';
 import { toCalendarDelayDays } from '../gap/sequence/business-days';
+import { firstNameOf, renderPlaceholders, unrenderedPlaceholder } from '../gap/sequence/render';
+import { audit } from '../gap/audit';
 
 /** GAP OS (S3-T5): the deterministic idempotency key the schema comment on
  *  DraftQueueItem promises (`owner:to_email:run:step`). Used under the flag
@@ -19,6 +21,15 @@ import { toCalendarDelayDays } from '../gap/sequence/business-days';
  *  the SAME key and hits the @unique instead of creating a twin step. */
 export function sequenceStepIdempotencyKey(owner: string, toEmail: string, runId: string, stepIndex: number): string {
   return `${owner}:${toEmail}:${runId}:${stepIndex}`;
+}
+
+/** The parent item's persona name, else the Persona row's name when the item only carries an id. Flag-on only. */
+async function personaNameFor(prisma: any, item: any): Promise<string | null> {
+  const fromItem = typeof item.persona_name === 'string' ? item.persona_name.trim() : '';
+  if (fromItem) return fromItem;
+  if (item.persona_id == null || !prisma?.persona?.findUnique) return null;
+  const row = await prisma.persona.findUnique({ where: { id: item.persona_id }, select: { name: true } });
+  return typeof row?.name === 'string' ? row.name : null;
 }
 
 function isUniqueViolation(err: unknown): boolean {
@@ -37,7 +48,12 @@ function isUniqueViolation(err: unknown): boolean {
  *  imported); a paused, stopped or completed enrollment schedules nothing
  *  (spec 5.3); the created row is stamped with the resolved version and keyed
  *  deterministically; a business-day delay is converted to calendar days from
- *  the send time before the pure step math. */
+ *  the send time before the pure step math; the step's `{{first_name}}` and
+ *  `{{account}}` placeholders are rendered from the parent item (S3-T12,
+ *  same rule as the enroll service, src/lib/gap/sequence/render.ts) and a
+ *  body or subject that still carries a `{{token}}` schedules NOTHING: the
+ *  runtime audits `schedule.unrendered_placeholder` naming the token and
+ *  returns null, because the queue sends what it holds. */
 export async function scheduleNextStep(prisma: any, item: any): Promise<number | null> {
   if (!item.sequence_id || item.step_index == null) return null;
   const gapEnabled = isGapOsEnabled();
@@ -70,6 +86,25 @@ export async function scheduleNextStep(prisma: any, item: any): Promise<number |
   // item without a pin: the created row is exactly what it was before.
   const versionId = gapEnabled ? (resolved.versionId ?? item.sequence_version_id ?? null) : null;
   const versionPin = versionId ? { sequence_version_id: versionId } : {};
+  // Flag off: the copy is the template verbatim, byte for byte as before.
+  let subject: string = next.step.subjectTemplate || item.subject;
+  let body: string = next.step.bodyTemplate || item.body;
+  if (gapEnabled) {
+    const values = { firstName: firstNameOf(await personaNameFor(prisma, item)), account: String(item.account_name ?? '') };
+    subject = renderPlaceholders(subject, values);
+    body = renderPlaceholders(body, values);
+    const token = unrenderedPlaceholder(subject) ?? unrenderedPlaceholder(body);
+    if (token !== null) {
+      await audit(prisma, {
+        kind: 'schedule.unrendered_placeholder',
+        actor: 'sequence-runtime',
+        subjectType: 'draft_queue_item',
+        subjectId: String(item.id),
+        payload: { token, stepIndex: next.step.stepIndex, runId: item.sequence_run_id ?? null, versionId, toEmail: item.to_email },
+      });
+      return null;
+    }
+  }
   const idempotencyKey =
     gapEnabled && item.sequence_run_id
       ? sequenceStepIdempotencyKey(item.owner, item.to_email, item.sequence_run_id, next.step.stepIndex)
@@ -84,8 +119,8 @@ export async function scheduleNextStep(prisma: any, item: any): Promise<number |
         persona_id: item.persona_id,
         owner: item.owner,
         created_by: item.owner,
-        subject: next.step.subjectTemplate || item.subject,
-        body: next.step.bodyTemplate || item.body,
+        subject,
+        body,
         image_url: item.image_url,
         status: STATUS.approved,
         approved_at: new Date(),

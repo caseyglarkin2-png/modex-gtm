@@ -12,6 +12,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { fromLegacyModexSteps } from '@/lib/gap/sequence/steps';
+import { firstNameOf, renderPlaceholders, unrenderedPlaceholder } from '@/lib/gap/sequence/render';
+import { renderSeedPlaceholders } from '@/lib/gap/sequences/families';
 import { STATUS } from '@/lib/queue/types';
 import { scheduleNextStep, sequenceStepIdempotencyKey } from '@/lib/queue/sequence-runtime';
 
@@ -273,6 +275,126 @@ describe('scheduleNextStep, flag ON without an enrollment', () => {
     expect(await scheduleNextStep(prisma, step0Item({ sequence_id: null }))).toBeNull();
     expect(prisma.sequenceEnrollment.findUnique).not.toHaveBeenCalled();
     expect(prisma.sequence.findUnique).not.toHaveBeenCalled();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// S3-T12: placeholder rendering under the flag
+// ---------------------------------------------------------------------------
+
+const TEMPLATED = [
+  { stepIndex: 0, delayDays: 0, subjectTemplate: 'S0', bodyTemplate: 'B0' },
+  { stepIndex: 1, delayDays: 3, subjectTemplate: 'Re: {{account}} gate clerks', bodyTemplate: 'Hi {{first_name}},\n\n{{account}} posted three gate-clerk roles.\n\nCasey' },
+];
+const V2_TEMPLATED = fromLegacyModexSteps(TEMPLATED);
+const UNRENDERABLE = [
+  { stepIndex: 0, delayDays: 0, subjectTemplate: 'S0', bodyTemplate: 'B0' },
+  { stepIndex: 1, delayDays: 3, subjectTemplate: 'Re: {{account}}', bodyTemplate: 'Hi {{first_name}}, as {{title}} you know.' },
+];
+const V2_UNRENDERABLE = fromLegacyModexSteps(UNRENDERABLE);
+
+function makePrismaWithAudit() {
+  return {
+    ...makePrisma(),
+    persona: { findUnique: vi.fn().mockResolvedValue({ name: 'Priya Natarajan' }) },
+    gapAuditEvent: { create: vi.fn().mockResolvedValue({ id: 'aud_1' }) },
+  };
+}
+
+describe('render helpers', () => {
+  it('renders exactly {{first_name}} and {{account}}, identically to the families seed renderer', () => {
+    const text = 'Hi {{first_name}}, {{account}} and {{other}} stay.';
+    const values = { firstName: 'Kara', account: 'Acme Logistics' };
+    expect(renderPlaceholders(text, values)).toBe('Hi Kara, Acme Logistics and {{other}} stay.');
+    expect(renderPlaceholders(text, values)).toBe(renderSeedPlaceholders(text, values));
+  });
+
+  it('firstNameOf takes the first word and falls back to "there"', () => {
+    expect(firstNameOf('Kara Jones')).toBe('Kara');
+    expect(firstNameOf('  ')).toBe('there');
+    expect(firstNameOf(null)).toBe('there');
+  });
+
+  it('unrenderedPlaceholder names the first token left, or null', () => {
+    expect(unrenderedPlaceholder('Hi Kara')).toBeNull();
+    expect(unrenderedPlaceholder('Hi {{first_name}}')).toBe('first_name');
+    expect(unrenderedPlaceholder('as {{ title }} you')).toBe('title');
+    expect(unrenderedPlaceholder('{{}}')).toBe('empty');
+  });
+});
+
+describe('scheduleNextStep placeholder rendering (S3-T12)', () => {
+  it('flag ON: renders {{first_name}} from the item persona_name and {{account}} from account_name on the pinned step', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue(enrollment('active', V2_TEMPLATED));
+
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }));
+
+    expect(out).toBe(201);
+    const data = prisma.draftQueueItem.create.mock.calls[0][0].data;
+    expect(data.subject).toBe('Re: Acme Logistics gate clerks');
+    expect(data.body).toBe('Hi Kara,\n\nAcme Logistics posted three gate-clerk roles.\n\nCasey');
+    expect(prisma.persona.findUnique).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create).not.toHaveBeenCalled();
+  });
+
+  it('flag ON: an item without persona_name reads the Persona row by persona_id', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue(enrollment('active', V2_TEMPLATED));
+
+    await scheduleNextStep(prisma, step0Item({ persona_name: null, persona_id: 7 }));
+
+    expect(prisma.persona.findUnique).toHaveBeenCalledWith({ where: { id: 7 }, select: { name: true } });
+    expect(prisma.draftQueueItem.create.mock.calls[0][0].data.body.startsWith('Hi Priya,')).toBe(true);
+  });
+
+  it('flag ON: no name anywhere renders the fallback greeting', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.persona.findUnique.mockResolvedValue(null);
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue(enrollment('active', V2_TEMPLATED));
+    await scheduleNextStep(prisma, step0Item({ persona_name: '', persona_id: 7 }));
+    expect(prisma.draftQueueItem.create.mock.calls[0][0].data.body.startsWith('Hi there,')).toBe(true);
+  });
+
+  it('flag OFF: the template is queued byte for byte, braces and all, and no persona is read', async () => {
+    delete process.env.GAP_OS_ENABLED;
+    const prisma = {
+      sequence: { findUnique: vi.fn().mockResolvedValue({ id: 9, steps: TEMPLATED }) },
+      sequenceEnrollment: throwingDelegate('sequenceEnrollment'),
+      sequenceVersion: throwingDelegate('sequenceVersion'),
+      persona: throwingDelegate('persona'),
+      gapAuditEvent: throwingDelegate('gapAuditEvent'),
+      emailLog: { findUnique: vi.fn() },
+      draftQueueItem: { create: vi.fn().mockResolvedValue({ id: 201 }), findUnique: vi.fn() },
+    };
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }));
+    expect(out).toBe(201);
+    const data = prisma.draftQueueItem.create.mock.calls[0][0].data;
+    expect(data.subject).toBe('Re: {{account}} gate clerks');
+    expect(data.body).toBe(TEMPLATED[1].bodyTemplate);
+  });
+
+  it('flag ON: a token the renderer does not know schedules NOTHING and audits schedule.unrendered_placeholder with the token', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue(enrollment('active', V2_UNRENDERABLE));
+
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }));
+
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create).toHaveBeenCalledTimes(1);
+    const row = prisma.gapAuditEvent.create.mock.calls[0][0].data;
+    expect(row).toMatchObject({
+      kind: 'schedule.unrendered_placeholder',
+      actor: 'sequence-runtime',
+      subject_type: 'draft_queue_item',
+      subject_id: '100',
+    });
+    expect(row.payload).toMatchObject({ token: 'title', stepIndex: 1, runId: 'run-abc', versionId: 'ver-enr', toEmail: 'person@example.com' });
   });
 });
 

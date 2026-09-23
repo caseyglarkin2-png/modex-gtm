@@ -43,7 +43,9 @@ export type GapAuditKind =
   | 'enroll.live'
   | 'enroll.refused'
   | 'flag.refused'
-  | 'copy_drift';
+  | 'copy_drift'
+  | 'sequence.materialized'
+  | 'schedule.unrendered_placeholder';
 
 export interface HypothesisEventInput {
   hypothesisId: string;
