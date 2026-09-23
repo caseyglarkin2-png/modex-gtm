@@ -85,9 +85,10 @@ const JBHUNT_SEQ = JBHUNT.sequence!.hubspotSequenceId; // 311861043
 const NOW = new Date('2026-09-23T12:00:00.000Z');
 const OPTS = { program: 'top100-2026-09-12', portal: '3819073', createdBy: 'test' };
 
-const fernanda = dellRoster.people.find((p) => p.name === 'Fernanda Codorniz')!;
-const audrey = dellRoster.people.find((p) => p.name === 'Xu Audrey')!;
-const thean = dellRoster.people.find((p) => p.name === 'Thean Khaw')!;
+// R2-12: the roster fixture is synthesized; these three are its first three selected people.
+const fernanda = dellRoster.people.find((p) => p.name === 'Mara Ellison')!;
+const audrey = dellRoster.people.find((p) => p.name === 'Devin Okafor')!;
+const thean = dellRoster.people.find((p) => p.name === 'Lin Tanaka')!;
 
 function readbackRow(over: Partial<ContactReadback> = {}): ContactReadback {
   return {
@@ -98,7 +99,7 @@ function readbackRow(over: Partial<ContactReadback> = {}): ContactReadback {
   };
 }
 
-/** A readback where Fernanda is in Dell's sequence, Audrey in the 09-11 blast, Thean not enrolled. */
+/** A readback where the first person is in Dell's sequence, the second in the 09-11 blast, the third not enrolled. */
 function dellReadback(): Map<string, ContactReadback> {
   return new Map<string, ContactReadback>([
     [fernanda.hubspotContactId!, readbackRow()],
@@ -433,26 +434,32 @@ describe('planEnrollments', () => {
       accountName: 'Dell',
       hubspotContactId: fernanda.hubspotContactId!,
       hubspotSequenceId: DELL_SEQ,
-      toEmail: 'fernanda.codorniz@dell.com',
+      toEmail: 'mara.ellison@example.com',
       sender: 'casey@freightroll.com',
       owner: 'sync',
       status: 'active',
       enrolledAt: new Date('2026-09-15T17:17:39.791Z'),
-      externalState: { activelyEnrolledCount: 1, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z' },
+      externalState: {
+        activelyEnrolledCount: 1,
+        latestSequenceId: DELL_SEQ,
+        latestEnrolledAt: '2026-09-15T17:17:39.791Z',
+        // N7: the readback never carries a step index, so 0 is a placeholder and says so.
+        current_step_index_unknown: true,
+      },
       legacy: true,
       enrolledBy: 'sync',
     });
-    // Fernanda is in Dell's sequence; Audrey is in the blast; Thean is not enrolled.
+    // First person in Dell's sequence; second in the blast; third not enrolled.
     expect(plans).toHaveLength(1);
     expect(reported).toContainEqual({ contactId: audrey.hubspotContactId, reason: 'other_sequence', detail: BLAST_SEQUENCE_2026_09_11 });
     expect(reported).toContainEqual({ contactId: thean.hubspotContactId, reason: 'not_enrolled' });
   });
 
   it('the id is uuid v5 over `${sequenceId}:${contactId}` in GAP_ENROLLMENT_NS, stable and sequence-specific', () => {
-    const a = enrollmentId(DELL_SEQ, '220046701453');
-    expect(a).toBe(enrollmentId(DELL_SEQ, '220046701453'));
-    expect(a).not.toBe(enrollmentId(JBHUNT_SEQ, '220046701453'));
-    expect(a).toBe(uuidV5(GAP_ENROLLMENT_NS, `${DELL_SEQ}:220046701453`));
+    const a = enrollmentId(DELL_SEQ, '900000000001');
+    expect(a).toBe(enrollmentId(DELL_SEQ, '900000000001'));
+    expect(a).not.toBe(enrollmentId(JBHUNT_SEQ, '900000000001'));
+    expect(a).toBe(uuidV5(GAP_ENROLLMENT_NS, `${DELL_SEQ}:900000000001`));
     expect(a).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
   });
 
@@ -488,13 +495,29 @@ describe('planEnrollments', () => {
   });
 
   it('lowercases the email, falls back to now when the enrolled date is unknown and to unknown when the sender is unset', () => {
-    const upper: Top100RosterPerson = { ...fernanda, email: 'Fernanda.Codorniz@Dell.com' };
+    const upper: Top100RosterPerson = { ...fernanda, email: 'Mara.Ellison@Example.com' };
     const rb = new Map([[fernanda.hubspotContactId!, readbackRow({ latestEnrolledAt: null })]]);
     const acct = { ...DELL, preferredSender: null };
     const { plans } = planEnrollments([acct], { 'dell-com': [upper] }, rb, { now: NOW, enrolledBy: 'sync' });
-    expect(plans[0].toEmail).toBe('fernanda.codorniz@dell.com');
+    expect(plans[0].toEmail).toBe('mara.ellison@example.com');
     expect(plans[0].enrolledAt).toEqual(NOW);
     expect(plans[0].sender).toBe('unknown');
+  });
+
+  it('N7: a readback without latestEnrolledAt keeps enrolled_at = now (the column is NOT NULL) and marks external_state.enrolled_at_unknown', () => {
+    const rb = new Map([[fernanda.hubspotContactId!, readbackRow({ latestEnrolledAt: null })]]);
+    const { plans } = planEnrollments([DELL], { 'dell-com': [fernanda] }, rb, { now: NOW, enrolledBy: 'sync' });
+    expect(plans[0].enrolledAt).toEqual(NOW);
+    expect(plans[0].externalState).toEqual({
+      activelyEnrolledCount: 1,
+      latestSequenceId: DELL_SEQ,
+      latestEnrolledAt: null,
+      enrolled_at_unknown: true,
+      current_step_index_unknown: true,
+    });
+    // With a date the marker is absent, so its presence means exactly "placeholder".
+    const dated = planEnrollments([DELL], { 'dell-com': [fernanda] }, dellReadback(), { now: NOW, enrolledBy: 'sync' });
+    expect(dated.plans[0].externalState).not.toHaveProperty('enrolled_at_unknown');
   });
 });
 
@@ -522,14 +545,14 @@ describe('applyEnrollments', () => {
       family_id: fam.ids[DELL_SEQ]!.familyId,
       sequence_version_id: fam.ids[DELL_SEQ]!.versionId,
       account_name: 'Dell',
-      to_email: 'fernanda.codorniz@dell.com',
+      to_email: 'mara.ellison@example.com',
       hubspot_contact_id: fernanda.hubspotContactId,
       hubspot_sequence_id: DELL_SEQ,
       sender: 'casey@freightroll.com',
       owner: 'sync',
       status: 'active',
       current_step_index: 0,
-      external_state: { activelyEnrolledCount: 1, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z' },
+      external_state: { activelyEnrolledCount: 1, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z', current_step_index_unknown: true },
       external_synced_at: NOW,
       is_test: false,
       legacy: true,
@@ -547,7 +570,7 @@ describe('applyEnrollments', () => {
     expect(db.spies.enrollmentUpdate).not.toHaveBeenCalled();
   });
 
-  it('readback flipping to not enrolled completes the active row and refreshes external_state only', async () => {
+  it('R2-6: readback flipping to not enrolled STOPS the active row with stop_reason legacy_unknown, never completed', async () => {
     const { db, fam, plans, readback } = await planned();
     await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback });
 
@@ -558,17 +581,73 @@ describe('applyEnrollments', () => {
     expect(nowPlans).toEqual([]);
 
     const res = await applyEnrollments(db.prisma, nowPlans, { dryRun: false, now: later, familyIds: fam.ids, readback: flipped });
-    expect(res).toMatchObject({ created: 0, updated: 1, unchanged: 0 });
+    expect(res).toMatchObject({ created: 0, updated: 1, unchanged: 0, otherSequenceActive: 0 });
     expect(db.spies.enrollmentUpdate).toHaveBeenCalledTimes(1);
     const { where, data } = db.spies.enrollmentUpdate.mock.calls[0][0];
     expect(where).toEqual({ id: enrollmentId(DELL_SEQ, fernanda.hubspotContactId!) });
+    // HubSpot only says "no longer actively enrolled": a reply, a bounce, a
+    // manual unenroll and a natural finish all look the same, so the row is
+    // stopped with the honest reason, not completed.
     expect(data).toEqual({
-      status: 'completed',
-      completed_at: later,
-      external_state: { activelyEnrolledCount: 0, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z' },
+      status: 'stopped',
+      stop_reason: 'legacy_unknown',
+      stopped_at: later,
+      external_state: { activelyEnrolledCount: 0, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z', current_step_index_unknown: true },
       external_synced_at: later,
     });
+    expect(data.status).not.toBe('completed');
+    expect(data).not.toHaveProperty('completed_at');
     expect(Object.keys(data)).not.toEqual(expect.arrayContaining(['to_email', 'enrolled_at', 'legacy', 'family_id', 'sequence_version_id']));
+  });
+
+  it('R2-6: an active row whose contact is actively enrolled in a DIFFERENT sequence is held other_sequence_active, status untouched', async () => {
+    const { db, fam, plans, readback } = await planned();
+    await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback });
+
+    const later = new Date('2026-09-24T12:00:00.000Z');
+    const elsewhere = new Map(readback);
+    // Still enrolled in two sequences; HubSpot reports the blast as the latest.
+    elsewhere.set(fernanda.hubspotContactId!, readbackRow({ activelyEnrolledCount: 2, latestSequenceId: BLAST_SEQUENCE_2026_09_11 }));
+    const { plans: nowPlans } = planEnrollments([DELL], rosters, elsewhere, { now: later, enrolledBy: 'sync' });
+    expect(nowPlans).toEqual([]);
+
+    const res = await applyEnrollments(db.prisma, nowPlans, { dryRun: false, now: later, familyIds: fam.ids, readback: elsewhere });
+    expect(res).toMatchObject({ created: 0, updated: 0, unchanged: 0, otherSequenceActive: 1 });
+    expect(db.spies.enrollmentUpdate).toHaveBeenCalledTimes(1);
+    const { data } = db.spies.enrollmentUpdate.mock.calls[0][0];
+    expect(data).toEqual({
+      external_state: {
+        activelyEnrolledCount: 2,
+        latestSequenceId: BLAST_SEQUENCE_2026_09_11,
+        latestEnrolledAt: '2026-09-15T17:17:39.791Z',
+        current_step_index_unknown: true,
+        hold: 'other_sequence_active',
+      },
+      external_synced_at: later,
+    });
+    expect(data).not.toHaveProperty('status');
+    expect(data).not.toHaveProperty('stop_reason');
+    expect(db.store.enrollments[0].status).toBe('active');
+
+    // The same readback again: the hold is already recorded, nothing is written.
+    const again = await applyEnrollments(db.prisma, [], { dryRun: false, now: later, familyIds: fam.ids, readback: elsewhere });
+    expect(again).toMatchObject({ created: 0, updated: 0, unchanged: 0, otherSequenceActive: 1 });
+    expect(db.spies.enrollmentUpdate).toHaveBeenCalledTimes(1);
+  });
+
+  it('R2-6: a dry run counts the hold and the stop but writes neither', async () => {
+    const { db, fam, plans, readback } = await planned();
+    await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback });
+    const elsewhere = new Map(readback);
+    elsewhere.set(fernanda.hubspotContactId!, readbackRow({ activelyEnrolledCount: 1, latestSequenceId: BLAST_SEQUENCE_2026_09_11 }));
+    const held = await applyEnrollments(db.prisma, [], { dryRun: true, now: NOW, familyIds: fam.ids, readback: elsewhere });
+    expect(held).toMatchObject({ otherSequenceActive: 1, updated: 0 });
+    const gone = new Map(readback);
+    gone.set(fernanda.hubspotContactId!, readbackRow({ activelyEnrolledCount: 0 }));
+    const stopped = await applyEnrollments(db.prisma, [], { dryRun: true, now: NOW, familyIds: fam.ids, readback: gone });
+    expect(stopped).toMatchObject({ otherSequenceActive: 0, updated: 1 });
+    expect(db.spies.enrollmentUpdate).not.toHaveBeenCalled();
+    expect(db.store.enrollments[0].status).toBe('active');
   });
 
   it('an active row with a stop requested is not completed by the sync; only the readback is recorded', async () => {
@@ -606,7 +685,64 @@ describe('applyEnrollments', () => {
       expect(call[0].data.stop_reason).toBeUndefined();
     }
     // The readback is still recorded on the row so the disagreement is visible.
-    expect(db.store.enrollments[0].external_state).toEqual({ activelyEnrolledCount: 1, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z' });
+    expect(db.store.enrollments[0].external_state).toEqual({ activelyEnrolledCount: 1, latestSequenceId: DELL_SEQ, latestEnrolledAt: '2026-09-15T17:17:39.791Z', current_step_index_unknown: true });
+  });
+
+  it('N7: the unknown markers are sticky: a later readback that carries a date keeps enrolled_at_unknown on the row', async () => {
+    const { db, fam } = await seededFamilies();
+    const undated = new Map([[fernanda.hubspotContactId!, readbackRow({ latestEnrolledAt: null })]]);
+    const { plans: first } = planEnrollments([DELL], rosters, undated, { now: NOW, enrolledBy: 'sync' });
+    await applyEnrollments(db.prisma, first, { dryRun: false, now: NOW, familyIds: fam.ids, readback: undated });
+    expect(db.store.enrollments[0]).toMatchObject({ enrolled_at: NOW, external_state: { enrolled_at_unknown: true, current_step_index_unknown: true } });
+
+    const later = new Date('2026-09-24T12:00:00.000Z');
+    const dated = dellReadback();
+    const { plans: second } = planEnrollments([DELL], rosters, dated, { now: later, enrolledBy: 'sync' });
+    const res = await applyEnrollments(db.prisma, second, { dryRun: false, now: later, familyIds: fam.ids, readback: dated });
+    expect(res).toMatchObject({ created: 0, updated: 1 });
+    const { data } = db.spies.enrollmentUpdate.mock.calls[0][0];
+    // enrolled_at is pinned and still the placeholder, so the marker must survive.
+    expect(data.external_state).toEqual({
+      activelyEnrolledCount: 1,
+      latestSequenceId: DELL_SEQ,
+      latestEnrolledAt: '2026-09-15T17:17:39.791Z',
+      enrolled_at_unknown: true,
+      current_step_index_unknown: true,
+    });
+    expect(data).not.toHaveProperty('enrolled_at');
+
+    // The sweep carries them too when the row is stopped.
+    const gone = new Map([[fernanda.hubspotContactId!, readbackRow({ activelyEnrolledCount: 0 })]]);
+    await applyEnrollments(db.prisma, [], { dryRun: false, now: later, familyIds: fam.ids, readback: gone });
+    expect(db.store.enrollments[0].status).toBe('stopped');
+    expect(db.store.enrollments[0].external_state).toMatchObject({ enrolled_at_unknown: true, current_step_index_unknown: true });
+  });
+
+  it('N7: a unique violation (P2002) on one row is reported enroll_collision:<email> and the run continues', async () => {
+    const { db, fam } = await seededFamilies();
+    const rb = dellReadback();
+    rb.set(thean.hubspotContactId!, readbackRow()); // the third person is in the sequence too
+    const { plans } = planEnrollments([DELL], rosters, rb, { now: NOW, enrolledBy: 'sync' });
+    expect(plans.map((p) => p.toEmail)).toEqual([fernanda.email, thean.email]);
+
+    const realCreate = db.prisma.sequenceEnrollment.create.getMockImplementation()!;
+    db.prisma.sequenceEnrollment.create.mockImplementation(async (args: { data: Row }) => {
+      if (args.data.to_email === fernanda.email) {
+        throw Object.assign(new Error('Unique constraint failed on the fields: (to_email)'), { code: 'P2002', meta: { target: ['to_email'] } });
+      }
+      return realCreate(args);
+    });
+
+    const res = await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback: rb });
+    expect(res).toMatchObject({ created: 1, updated: 0, unchanged: 0 });
+    expect(res.held).toEqual([{ id: plans[0].id, reason: `enroll_collision:${fernanda.email}` }]);
+    expect(db.store.enrollments.map((e) => e.to_email)).toEqual([thean.email]);
+  });
+
+  it('N7: any other create error still aborts the run (only P2002 is a collision)', async () => {
+    const { db, fam, plans, readback } = await planned();
+    db.prisma.sequenceEnrollment.create.mockRejectedValueOnce(Object.assign(new Error('connection reset'), { code: 'P1017' }));
+    await expect(applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback })).rejects.toThrow('connection reset');
   });
 
   it('a plan whose family was not resolved is held family_unresolved, not created', async () => {
@@ -657,7 +793,7 @@ describe('runEnrollmentSync', () => {
       dryRun: false,
       families: { created: 2, existing: 0, skipped: [] },
       contactsRead: 7,
-      enrollments: { created: 1, updated: 0, unchanged: 0, held: [] },
+      enrollments: { created: 1, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [] },
       reported: { other_sequence: 1, not_enrolled: 5, no_email: 0, no_contact_id: 0 },
       rostersMissing: ['jbhunt-com'],
     });

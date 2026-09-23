@@ -23,10 +23,20 @@
  * uuid v5 over `${hubspot_sequence_id}:${hubspot_contact_id}` in
  * GAP_ENROLLMENT_NS, so a second run with the same readback writes nothing.
  * On an existing enrollment only `external_state`, `external_synced_at`,
- * `status` (active to completed) and `completed_at` ever change; the pinned
- * columns are never written (the GAP_ENROLLMENT_PIN trigger refuses them
- * anyway), a stopped row is never reopened, and a row with a stop requested
- * keeps its status for the stop path to finish.
+ * `status` (active to stopped), `stop_reason` and `stopped_at` ever change;
+ * the pinned columns are never written (the GAP_ENROLLMENT_PIN trigger refuses
+ * them anyway), a stopped row is never reopened, and a row with a stop
+ * requested keeps its status for the stop path to finish.
+ *
+ * Completion sweep (R2-6): an active row whose contact HubSpot no longer
+ * reports in that sequence is `stopped` with `stop_reason: 'legacy_unknown'`,
+ * never `completed`, because the readback cannot tell a natural finish from a
+ * reply, a bounce or a manual unenroll. When the contact is still actively
+ * enrolled somewhere (`activelyEnrolledCount > 0`) but the latest sequence
+ * differs, the row may still be running in ours (HubSpot exposes only the
+ * latest), so the sweep holds: `external_state.hold = 'other_sequence_active'`
+ * is recorded, the status is untouched, and the row is counted
+ * `otherSequenceActive`.
  */
 import { hash } from 'node:crypto';
 
@@ -99,6 +109,20 @@ export interface ExternalState {
   activelyEnrolledCount: number;
   latestSequenceId: string | null;
   latestEnrolledAt: string | null;
+  /** R2-6: set by the sweep when the contact is actively enrolled elsewhere and this row could not be resolved. */
+  hold?: 'other_sequence_active';
+  /**
+   * N7: `enrolled_at` is NOT NULL in the schema, so when the readback carries
+   * no `hs_latest_sequence_enrolled_date` the row is written with `now` and
+   * this marker says the column is a placeholder. Sticky for the life of the
+   * row: the column is pinned and a later date cannot correct it.
+   */
+  enrolled_at_unknown?: true;
+  /**
+   * N7: `current_step_index` is NOT NULL and the readback never carries a
+   * step, so every HubSpot-native legacy row holds 0 as a placeholder.
+   */
+  current_step_index_unknown?: true;
 }
 
 export interface ReadContactsDeps {
@@ -131,12 +155,19 @@ export interface EnrollmentPlan {
   enrolledBy: string;
 }
 
-export type HeldReason = 'stopped_not_reopened' | 'not_reopened' | 'family_unresolved';
+export type HeldReason =
+  | 'stopped_not_reopened'
+  | 'not_reopened'
+  | 'family_unresolved'
+  /** N7: the partial unique on to_email refused the create; the run continues. */
+  | `enroll_collision:${string}`;
 
 export interface ApplyResult {
   created: number;
   updated: number;
   unchanged: number;
+  /** R2-6: active rows held because the contact is actively enrolled in a different sequence. Not counted in updated/unchanged. */
+  otherSequenceActive: number;
   held: Array<{ id: string; reason: HeldReason }>;
 }
 
@@ -220,6 +251,21 @@ function toExternalState(rb: ContactReadback): ExternalState {
 
 function sameState(a: unknown, b: ExternalState): boolean {
   return canonicalJson(a ?? null) === canonicalJson(b);
+}
+
+/** N7: the placeholder markers, once on a row, survive every later readback. */
+function withStickyMarkers(existing: unknown, next: ExternalState): ExternalState {
+  const prev = (existing && typeof existing === 'object' ? existing : {}) as Partial<ExternalState>;
+  return {
+    ...next,
+    ...(prev.enrolled_at_unknown === true ? { enrolled_at_unknown: true as const } : {}),
+    ...(prev.current_step_index_unknown === true ? { current_step_index_unknown: true as const } : {}),
+  };
+}
+
+/** Prisma's unique-violation code, matched structurally so the module needs no client import. */
+function isUniqueViolation(err: unknown): boolean {
+  return !!err && typeof err === 'object' && (err as { code?: unknown }).code === 'P2002';
 }
 
 function inSequence(rb: ContactReadback | undefined, sequenceId: string): boolean {
@@ -449,7 +495,11 @@ export function planEnrollments(
         owner,
         status: 'active',
         enrolledAt: rb.latestEnrolledAt ?? opts.now,
-        externalState: toExternalState(rb),
+        externalState: {
+          ...toExternalState(rb),
+          ...(rb.latestEnrolledAt ? {} : { enrolled_at_unknown: true as const }),
+          current_step_index_unknown: true,
+        },
         legacy: true,
         enrolledBy: opts.enrolledBy,
       });
@@ -462,14 +512,14 @@ export function planEnrollments(
 /**
  * Write the plans and reconcile existing HubSpot-native rows against the
  * readback. Only `external_state`, `external_synced_at`, `status` (active to
- * completed) and `completed_at` are ever written on an existing row.
+ * stopped), `stop_reason` and `stopped_at` are ever written on an existing row.
  */
 export async function applyEnrollments(
   prisma: SyncPrisma,
   plans: EnrollmentPlan[],
   opts: { dryRun: boolean; now: Date; familyIds: Record<string, FamilyIds | null>; readback: Map<string, ContactReadback> },
 ): Promise<ApplyResult> {
-  const result: ApplyResult = { created: 0, updated: 0, unchanged: 0, held: [] };
+  const result: ApplyResult = { created: 0, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [] };
   const seen = new Set<string>();
 
   for (const plan of plans) {
@@ -482,30 +532,43 @@ export async function applyEnrollments(
         result.held.push({ id: plan.id, reason: 'family_unresolved' });
         continue;
       }
-      result.created += 1;
-      if (opts.dryRun) continue;
-      await prisma.sequenceEnrollment.create({
-        data: {
-          id: plan.id,
-          engine: ENGINE,
-          family_id: ids!.familyId,
-          sequence_version_id: ids!.versionId,
-          account_name: plan.accountName,
-          to_email: plan.toEmail,
-          hubspot_contact_id: plan.hubspotContactId,
-          hubspot_sequence_id: plan.hubspotSequenceId,
-          sender: plan.sender,
-          owner: plan.owner,
-          status: plan.status,
-          current_step_index: 0,
-          external_state: plan.externalState,
-          external_synced_at: opts.now,
-          is_test: false,
-          legacy: plan.legacy,
-          enrolled_by: plan.enrolledBy,
-          enrolled_at: plan.enrolledAt,
-        },
-      });
+      if (opts.dryRun) {
+        result.created += 1;
+        continue;
+      }
+      try {
+        await prisma.sequenceEnrollment.create({
+          data: {
+            id: plan.id,
+            engine: ENGINE,
+            family_id: ids!.familyId,
+            sequence_version_id: ids!.versionId,
+            account_name: plan.accountName,
+            to_email: plan.toEmail,
+            hubspot_contact_id: plan.hubspotContactId,
+            hubspot_sequence_id: plan.hubspotSequenceId,
+            sender: plan.sender,
+            owner: plan.owner,
+            status: plan.status,
+            // N7: placeholder; external_state.current_step_index_unknown says so.
+            current_step_index: 0,
+            external_state: plan.externalState,
+            external_synced_at: opts.now,
+            is_test: false,
+            legacy: plan.legacy,
+            enrolled_by: plan.enrolledBy,
+            // N7: placeholder (now) when the readback had no date; external_state.enrolled_at_unknown says so.
+            enrolled_at: plan.enrolledAt,
+          },
+        });
+        result.created += 1;
+      } catch (err) {
+        // N7: the partial unique on to_email (active/paused/stop_pending) says
+        // this address already has a live row under another id. Report it and
+        // keep going; anything else is a real failure and aborts the run.
+        if (!isUniqueViolation(err)) throw err;
+        result.held.push({ id: plan.id, reason: `enroll_collision:${plan.toEmail}` });
+      }
       continue;
     }
 
@@ -513,7 +576,8 @@ export async function applyEnrollments(
     if (existing.status !== 'active') {
       result.held.push({ id: plan.id, reason: existing.status === 'stopped' ? 'stopped_not_reopened' : 'not_reopened' });
     }
-    if (sameState(existing.external_state, plan.externalState)) {
+    const nextState = withStickyMarkers(existing.external_state, plan.externalState);
+    if (sameState(existing.external_state, nextState)) {
       if (existing.status === 'active') result.unchanged += 1;
       continue;
     }
@@ -521,12 +585,14 @@ export async function applyEnrollments(
     if (opts.dryRun) continue;
     await prisma.sequenceEnrollment.update({
       where: { id: plan.id },
-      data: { external_state: plan.externalState, external_synced_at: opts.now },
+      data: { external_state: nextState, external_synced_at: opts.now },
     });
   }
 
   // Active rows not in this run's plans: if the readback covers the contact
-  // and says they are no longer in that sequence, the run is complete.
+  // and says they are no longer actively enrolled anywhere, the run is over
+  // for a reason HubSpot does not expose (stopped, legacy_unknown). If they
+  // are still actively enrolled but the latest sequence is another one, hold.
   const sequenceIds = [...new Set([...Object.keys(opts.familyIds), ...plans.map((p) => p.hubspotSequenceId)])];
   if (sequenceIds.length > 0) {
     const active = await prisma.sequenceEnrollment.findMany({
@@ -537,7 +603,18 @@ export async function applyEnrollments(
       const rb = row.hubspot_contact_id ? opts.readback.get(String(row.hubspot_contact_id)) : undefined;
       if (!rb) continue; // not observed this run; say nothing
       if (inSequence(rb, String(row.hubspot_sequence_id))) continue; // covered by a plan if it was in scope
-      const state = toExternalState(rb);
+      const state = withStickyMarkers(row.external_state, toExternalState(rb));
+      if (rb.activelyEnrolledCount > 0) {
+        // R2-6: actively enrolled elsewhere; ours may still be running.
+        const heldState: ExternalState = { ...state, hold: 'other_sequence_active' };
+        result.otherSequenceActive += 1;
+        if (sameState(row.external_state, heldState) || opts.dryRun) continue;
+        await prisma.sequenceEnrollment.update({
+          where: { id: row.id },
+          data: { external_state: heldState, external_synced_at: opts.now },
+        });
+        continue;
+      }
       const stopRequested = row.stop_requested_at !== null && row.stop_requested_at !== undefined;
       if (stopRequested && sameState(row.external_state, state)) {
         result.unchanged += 1;
@@ -549,7 +626,7 @@ export async function applyEnrollments(
         where: { id: row.id },
         data: stopRequested
           ? { external_state: state, external_synced_at: opts.now }
-          : { status: 'completed', completed_at: opts.now, external_state: state, external_synced_at: opts.now },
+          : { status: 'stopped', stop_reason: 'legacy_unknown', stopped_at: opts.now, external_state: state, external_synced_at: opts.now },
       });
     }
   }

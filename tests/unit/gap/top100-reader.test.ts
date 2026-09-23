@@ -149,11 +149,11 @@ describe('parseRoster', () => {
   it('parses an ELIGIBLE person to the exact shape', () => {
     expect(r.people[0]).toEqual({
       key: 'dell-com',
-      name: 'Fernanda Codorniz',
-      title: 'VP & CFO, Online and Retail, SMB Strategy & Operations, Business Partner to COO',
+      name: 'Mara Ellison',
+      title: 'VP & CFO, Regional Operations, Business Partner to COO',
       functions: ['exec_sponsor'],
-      hubspotContactId: '220046701453',
-      email: 'fernanda.codorniz@dell.com',
+      hubspotContactId: '900000000001',
+      email: 'mara.ellison@example.com',
       emailState: 'VERIFIED_DELIVERABLE',
       emailSource: 'hubspot',
       eligibility: 'ELIGIBLE',
@@ -171,10 +171,10 @@ describe('parseRoster', () => {
   });
 
   it('a HOLD_RECENT_TOUCH person keeps lastTouch and touchLane', () => {
-    const aditya = r.people.find((p) => p.name === 'Aditya Ramachandran');
-    expect(aditya?.eligibility).toBe('HOLD_RECENT_TOUCH');
-    expect(aditya?.lastTouch).toBe('2026-09-08');
-    expect(aditya?.touchLane).toBe('warroom_series');
+    const held = r.people.find((p) => p.name === 'Rafael Quintero');
+    expect(held?.eligibility).toBe('HOLD_RECENT_TOUCH');
+    expect(held?.lastTouch).toBe('2026-09-08');
+    expect(held?.touchLane).toBe('warroom_series');
   });
 
   it('an unknown eligibility value is preserved with eligibilityKnown false and a warning', () => {
@@ -183,7 +183,7 @@ describe('parseRoster', () => {
     const parsed = parseRoster(raw);
     expect(parsed.people[1].eligibility).toBe('HOLD_MYSTERY');
     expect(parsed.people[1].eligibilityKnown).toBe(false);
-    expect(parsed.warnings).toEqual(['dell-com: Xu Audrey: unknown eligibility HOLD_MYSTERY']);
+    expect(parsed.warnings).toEqual(['dell-com: Devin Okafor: unknown eligibility HOLD_MYSTERY']);
   });
 
   it('throws bad_roster when selected_people is not an array', () => {
@@ -231,11 +231,11 @@ describe('eligibleForEnroll', () => {
     const parsed = parseRoster(rosterFixture);
     const go = parsed.people.filter(eligibleForEnroll).map((p) => p.name);
     expect(go).toEqual([
-      'Fernanda Codorniz',
-      'Xu Audrey',
-      'Thean Khaw',
-      'Charles Yeager',
-      'Eric Baize',
+      'Mara Ellison',
+      'Devin Okafor',
+      'Lin Tanaka',
+      'Casimir Vale',
+      'Odette Brannigan',
     ]);
   });
 });
