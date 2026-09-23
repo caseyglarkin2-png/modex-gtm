@@ -120,13 +120,16 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
     expect(r2.detail).toContain('nope2');
   });
 
-  it('fails when the hypothesis has an observation but the body cites nothing', () => {
+  it('fails when the hypothesis has an observation but the body cites nothing, quoting the first sentence', () => {
     const r = checkObservationUnsupported(draft(body('Your DC posted roles.', HYP)), ctx());
     expect(r.passed).toBe(false);
-    expect(r.detail).toMatch(/observation paragraph/);
+    expect(r.detail).toBe(
+      'observation_unsupported: the body carries no marker and no resolved evidence id supports the first sentence "Your DC posted roles."',
+    );
+    expect(r.span?.text).toBe('Your DC posted roles.');
   });
 
-  it('allows an uncited body when the hypothesis observation is empty', () => {
+  it('allows an uncited body when the hypothesis observation is empty and the contract carries no evidenceIds', () => {
     const r = checkObservationUnsupported(
       draft(body('Gate clerks usually carry the slot.', HYP)),
       ctx({ hypothesis: { observation: '', problemHypothesis: 'hyp', problemFamily: 'gate_congestion' } }),
@@ -142,14 +145,148 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
     expect(r.passed).toBe(true);
   });
 
-  it('fails a number absent from every cited title and names the token', () => {
+  it('passes a number present only in the cited excerpt', () => {
+    const r = checkObservationUnsupported(
+      draft(body('Your Ohio DC added 110 dock doors this spring [[SRC:ev_1]].', HYP)),
+      ctx({ evidence: [ref('ev_1', { title: 'Ohio DC expansion', excerpt: 'The expansion adds 110 dock doors.' })] }),
+    );
+    expect(r.passed).toBe(true);
+  });
+
+  it('fails a number absent from every cited title and excerpt and names the token', () => {
     const r = checkObservationUnsupported(
       draft(body('Your Ohio DC turns 3,000 trailers a week [[SRC:ev_1]].', HYP)),
-      ctx({ evidence: [ref('ev_1', { title: 'Ohio DC expansion adds 110 dock doors' })] }),
+      ctx({ evidence: [ref('ev_1', { title: 'Ohio DC expansion adds 110 dock doors', excerpt: 'Adds 110 doors.' })] }),
     );
     expect(r.passed).toBe(false);
-    expect(r.detail).toContain('3,000 trailers');
+    expect(r.detail).toBe(
+      'number "3,000 trailers" is neither in a cited evidence title or excerpt nor a canon figure: "Your Ohio DC turns 3,000 trailers a week [[SRC:ev_1]]."',
+    );
     expect(r.span?.text).toBe('3,000 trailers');
+  });
+
+  describe('lane citation convention (contract.evidenceIds beside an unmarked body)', () => {
+    const UNMARKED = 'Your Ohio DC added 110 dock doors this spring.';
+    const doors = (over: Partial<CompileEvidenceRef> = {}) => ref('ev_1', { title: 'Ohio DC expansion adds 110 dock doors', ...over });
+
+    it('takes contract.evidenceIds as the citation set: the number is covered and the observation is supported', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors()], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r).toMatchObject({ code: 'C01', passed: true, severity: 'reject' });
+      expect(r.detail).toBe('0 marker(s) + 1 evidence_ids resolve to fresh evidence; every number is cited or canon');
+    });
+
+    it('covers a number from the excerpt of an evidence_ids ref', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors({ title: 'Ohio DC expansion', excerpt: '110 dock doors added' })], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r.passed).toBe(true);
+    });
+
+    it('still fails a number no cited ref carries', () => {
+      const r = checkObservationUnsupported(
+        draft(body('Your Ohio DC turns 3,000 trailers a week.', HYP)),
+        ctx({ evidence: [doors()], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toMatch(/^number "3,000 trailers" is neither in a cited evidence title or excerpt nor a canon figure/);
+    });
+
+    it('fails a stale evidence_ids entry with the marker wording, naming the source evidence_ids', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors({ fresh: false })], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe('evidence_ids ev_1 cites stale evidence ev_1');
+      expect(r.span).toBeNull();
+    });
+
+    it('fails a superseded evidence_ids entry', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors({ superseded: true })], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe('evidence_ids ev_1 cites superseded evidence ev_1');
+    });
+
+    it('fails an evidence_ids entry that resolves to no ref (a refused not-a-fact row)', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors()], contract: { evidenceIds: ['ev_1', 'E4'] } }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe('evidence_ids E4 resolves to no evidence ref (id E4)');
+    });
+
+    it('fails an evidence_ids entry that is neither external_ok nor first-party', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors({ externalOk: false, firstParty: false })], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe('evidence_ids ev_1 cites evidence ev_1 that is neither external_ok nor first-party');
+    });
+
+    it('resolves an id that is both a marker and an evidence_ids entry once, with the marker wording', () => {
+      const r = checkObservationUnsupported(
+        draft(body('Your Ohio DC added 110 dock doors this spring [[SRC:ev_1]].', HYP)),
+        ctx({ evidence: [doors({ fresh: false })], contract: { evidenceIds: ['ev_1'] } }),
+      );
+      expect(r.detail).toBe('marker [[SRC:ev_1]] cites stale evidence ev_1');
+      expect(r.span?.text).toBe('[[SRC:ev_1]]');
+    });
+
+    it('applies the observation-first rule under the lane convention at step 0: an empty evidenceIds list with no marker fails even with no hypothesis observation', () => {
+      const r = checkObservationUnsupported(
+        draft(body('Gate clerks usually carry the slot.', HYP)),
+        ctx({
+          stepIndex: 0,
+          hypothesis: { observation: '', problemHypothesis: 'hyp', problemFamily: 'gate_congestion' },
+          contract: { evidenceIds: [] },
+        }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe(
+        'observation_unsupported: the body carries no marker and no resolved evidence id supports the first sentence "Gate clerks usually carry the slot."',
+      );
+    });
+
+    it('does not fire the lane-convention term on a later step: an empty evidenceIds list at step 2 is C12\'s "no evidence id", not a C01 reject', () => {
+      const r = checkObservationUnsupported(
+        draft(body('Gate clerks usually carry the slot.', HYP)),
+        ctx({
+          stepIndex: 2,
+          hypothesis: { observation: '', problemHypothesis: 'hyp', problemFamily: 'gate_congestion' },
+          contract: { evidenceIds: [] },
+        }),
+      );
+      expect(r.passed).toBe(true);
+      expect(r.detail).toBe('0 marker(s) + 0 evidence_ids resolve to fresh evidence; every number is cited or canon');
+    });
+
+    it('keeps the hypothesis-observation gate on every step: a later uncited step with an observation still fails', () => {
+      const r = checkObservationUnsupported(
+        draft(body('Your DC posted roles.', HYP)),
+        ctx({ stepIndex: 2, contract: { evidenceIds: [] } }),
+      );
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe(
+        'observation_unsupported: the body carries no marker and no resolved evidence id supports the first sentence "Your DC posted roles."',
+      );
+    });
+
+    it('ignores junk in contract.evidenceIds', () => {
+      const r = checkObservationUnsupported(
+        draft(body(UNMARKED, HYP)),
+        ctx({ evidence: [doors()], contract: { evidenceIds: ['ev_1', 7, null, ''] } }),
+      );
+      expect(r.passed).toBe(true);
+    });
   });
 
   it('passes the canon turn-time figure phrased as measured', () => {

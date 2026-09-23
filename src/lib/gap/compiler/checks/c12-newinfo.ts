@@ -2,14 +2,17 @@
  * GAP message compiler check (Sprint 3, S3-T8): C12 FOLLOWUP_NEW_INFO. Spec
  * section 8. Pure: no I/O.
  *
- * Reject on step 1 and later unless BOTH hold: at least one marker id in the
- * body (`[[SRC:id]]` or `[S:id]`) appears in no prior step body, AND the
- * content-word Jaccard similarity to every prior body is under 0.6. Content
- * words are lowercased runs of four or more letters with stopwords removed,
- * measured after stripping markers, the greeting and the signature.
+ * Reject on step 1 and later unless BOTH hold: at least one cited evidence id
+ * (a `[[SRC:id]]` / `[S:id]` marker in the body OR an entry of the step's
+ * `contract.evidenceIds`, the lane's beside-the-body citation, S3-T13) is
+ * used by no prior step (prior bodies' markers plus `contract.priorEvidenceIds`),
+ * AND the content-word Jaccard similarity to every prior body is under 0.6.
+ * Content words are lowercased runs of four or more letters with stopwords
+ * removed, measured after stripping markers, the greeting and the signature.
+ * The detail names the new id(s).
  */
 
-import { stripGreetingAndSignature, stripMarkers } from '../text';
+import { readCitationContract, stripGreetingAndSignature, stripMarkers } from '../text';
 import type { Check } from '../types';
 
 export const C12_CODE = 'C12';
@@ -55,8 +58,11 @@ export const checkFollowupNewInfo: Check = (draft, ctx) => {
     return { code: C12_CODE, passed: true, severity: 'reject', detail: 'step 0', span: null };
   }
 
-  const ids = markerIds(draft.body);
-  const priorIds = new Set(ctx.priorStepBodies.flatMap(markerIds));
+  // Citation set = markers UNION the step's beside-the-body evidence ids;
+  // prior set = every prior body's markers UNION every prior step's ids.
+  const citation = readCitationContract(ctx.contract);
+  const ids = [...new Set([...markerIds(draft.body), ...citation.evidenceIds])];
+  const priorIds = new Set([...ctx.priorStepBodies.flatMap(markerIds), ...citation.priorEvidenceIds.flat()]);
   const reused = ids.filter((id) => priorIds.has(id));
   const fresh = ids.filter((id) => !priorIds.has(id));
 
@@ -65,7 +71,7 @@ export const checkFollowupNewInfo: Check = (draft, ctx) => {
       code: C12_CODE,
       passed: false,
       severity: 'reject',
-      detail: `no evidence id: a follow-up cites at least one marker unused in prior steps (prior ids: ${[...priorIds].join(', ') || 'none'})`,
+      detail: `no evidence id: a follow-up cites at least one evidence id unused in prior steps, as a marker or in evidence_ids (prior ids: ${[...priorIds].join(', ') || 'none'})`,
       span: null,
     };
   }
@@ -74,7 +80,7 @@ export const checkFollowupNewInfo: Check = (draft, ctx) => {
       code: C12_CODE,
       passed: false,
       severity: 'reject',
-      detail: `no new evidence id: every marker is reused from a prior step (reused ids: ${reused.join(', ')})`,
+      detail: `no new evidence id: every cited id is reused from a prior step (reused ids: ${reused.join(', ')})`,
       span: null,
     };
   }

@@ -7,6 +7,7 @@ import {
   checkSubjectForm,
   checkWordCount,
   classifyCtaFamily,
+  findCtaSentences,
   readGroupCContract,
 } from '@/lib/gap/compiler/checks/c07-structure';
 import { wordCount } from '@/lib/gap/compiler/text';
@@ -227,6 +228,73 @@ describe('C09 ONE_CTA', () => {
     const r = checkOneCta(draft(body), ctxAt(0));
     expect(r.passed).toBe(false);
     expect(r.detail).toContain('CTA family light_reaction is not the allowed scorecard_reply');
+  });
+
+  describe('the lane conditional-offer form ("If ..., I can/I\'ll <offer verb> ...")', () => {
+    const SESSION = "If a short working session on the Dallas cross-dock would help, I'll set the time.";
+    const YARD_READ = 'If useful, I can pull together the two-page yard read for your Wilmer site.';
+    const STEP1_CTA = 'Worth sending over the short version of how a peer network handled the second building?';
+
+    it('finds the conditional offer as the single CTA', () => {
+      const ctas = findCtaSentences(STEP1.replace(STEP1_CTA, YARD_READ));
+      expect(ctas.map((c) => [c.sentence, c.family])).toEqual([[YARD_READ, 'asset_offer']]);
+    });
+
+    it('classifies "set the time" as meeting_request and rejects it pre-meeting', () => {
+      expect(classifyCtaFamily(SESSION)).toBe('meeting_request');
+      const r = checkOneCta(draft(STEP1.replace(STEP1_CTA, SESSION)), ctxAt(1));
+      expect(r.passed).toBe(false);
+      expect(r.detail).toBe(`CTA family meeting_request is disallowed before a meeting (step 1, sequence_step_2_plus): "${SESSION}"`);
+      expect(r.span?.text).toBe(SESSION);
+    });
+
+    it('classifies a document offer as asset_offer: passes at step 2+, rejected at step 0', () => {
+      expect(classifyCtaFamily(YARD_READ)).toBe('asset_offer');
+      const later = checkOneCta(draft(STEP1.replace(STEP1_CTA, YARD_READ)), ctxAt(2));
+      expect(later.passed).toBe(true);
+      expect(later.detail).toBe(`one CTA (asset_offer): "${YARD_READ}"`);
+      const early = checkOneCta(draft(STEP0.replace('How many trailers sit past their appointment on a normal Tuesday?', YARD_READ)), ctxAt(0));
+      expect(early.passed).toBe(false);
+      expect(early.detail).toBe(`CTA family asset_offer is not the allowed scorecard_reply for step 0 (sequence_step_1): "${YARD_READ}"`);
+    });
+
+    it('keeps the policy scorecard_reply phrase ahead of the asset heuristic in the conditional form', () => {
+      expect(classifyCtaFamily('If useful, I can send the 1-page scorecard.')).toBe('scorecard_reply');
+    });
+
+    it('classifies the other offer verbs per the existing families', () => {
+      expect(classifyCtaFamily('If helpful, I can walk you through the Dallas gate on one screen.')).toBe('meeting_request');
+      expect(classifyCtaFamily('If it helps, we could find 15 minutes on the Dallas gate.')).toBe('meeting_request');
+      expect(classifyCtaFamily('If it helps, I could grab time on the Dallas gate.')).toBe('meeting_request');
+      expect(classifyCtaFamily("If it would help, I'd share the comparison.")).toBe('asset_offer');
+      expect(classifyCtaFamily('If useful, I can draft a one-page summary of the two definitions.')).toBe('asset_offer');
+      expect(classifyCtaFamily('If useful, I can show the order of operations that held at Primo.')).toBe('asset_offer');
+      expect(classifyCtaFamily('If useful, I can put together the scorecard.')).toBe('asset_offer');
+    });
+
+    it('finds a "worth" conditional only as a question, plus the curly-apostrophe offer form', () => {
+      const worthQuestion = 'If the second building is live, worth sending over the scorecard?';
+      expect(findCtaSentences(STEP1.replace(STEP1_CTA, worthQuestion)).map((c) => [c.sentence, c.family])).toEqual([
+        [worthQuestion, 'asset_offer'],
+      ]);
+      const curly = `If a short working session would help, I${String.fromCharCode(0x2019)}ll set the time.`;
+      expect(findCtaSentences(STEP1.replace(STEP1_CTA, curly)).map((c) => c.family)).toEqual(['meeting_request']);
+    });
+
+    it('does not read a conditional clause without a first-person offer as a CTA, including a bare "worth" opt-out', () => {
+      const plain = [
+        'If Dayton checks drivers in on paper the way the Ohio site does, the two sites will disagree about dwell.',
+        'If the two yards share a clerk, the night list is the one that drifts.',
+        'If the dock sends a trailer back to the lot, the clerk logs it twice.',
+        "If it's already covered, this isn't worth pursuing.",
+        'If a scorecard is worth your time, say so.',
+      ];
+      for (const sentence of plain) {
+        expect(findCtaSentences(STEP0.replace('Two of them are night shift.', sentence)).map((c) => c.sentence), sentence).toEqual([
+          'How many trailers sit past their appointment on a normal Tuesday?',
+        ]);
+      }
+    });
   });
 
   it('allows a meeting request only when the contract stage is meeting_prep', () => {

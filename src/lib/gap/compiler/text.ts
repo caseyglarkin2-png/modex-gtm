@@ -120,6 +120,40 @@ export function firstBodySentence(body: string): string {
   return splitSentences(stripGreetingAndSignature(body))[0] ?? '';
 }
 
+// ---------------------------------------------------------------------------
+// Citation contract (S3-T13): the lane cites evidence beside the body
+// ---------------------------------------------------------------------------
+
+export interface CitationContract {
+  /** This step's beside-the-body citation ids (`contract.evidenceIds`), deduplicated, junk dropped. */
+  evidenceIds: string[];
+  /** Prior steps' ids (`contract.priorEvidenceIds`), index-aligned; a junk entry reads as an empty step. */
+  priorEvidenceIds: string[][];
+  /** True when the contract carries an `evidenceIds` list at all, i.e. the lane convention is in play. */
+  laneConvention: boolean;
+}
+
+function idList(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  const out = new Set<string>();
+  for (const v of value) if (typeof v === 'string' && v.length > 0) out.add(v);
+  return [...out];
+}
+
+/**
+ * Read the citation ids the lane carries beside the body. HubSpot-native copy
+ * reaches the prospect verbatim, so the lane never writes a `[[SRC:id]]`
+ * marker into a body; it lists the touch's evidence in `evidence_ids` instead.
+ * C01 and C12 take that list as the citation set alongside the body's markers.
+ * Anything missing or malformed reads as empty and never throws.
+ */
+export function readCitationContract(contract: unknown): CitationContract {
+  const c = contract && typeof contract === 'object' && !Array.isArray(contract) ? (contract as Record<string, unknown>) : {};
+  const laneConvention = Array.isArray(c.evidenceIds);
+  const prior = Array.isArray(c.priorEvidenceIds) ? c.priorEvidenceIds.map(idList) : [];
+  return { evidenceIds: idList(c.evidenceIds), priorEvidenceIds: prior, laneConvention };
+}
+
 /** Locate `text` inside `haystack` from `from`; null when absent. */
 export function spanOf(haystack: string, text: string, from = 0): CheckSpan | null {
   if (text.length === 0) return null;

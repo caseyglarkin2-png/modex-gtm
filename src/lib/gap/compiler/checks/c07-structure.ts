@@ -13,18 +13,25 @@
  *   claimsUsed     string[]       C13 ids to validate
  *   validateClaims function       C13 validator (S3-T1 shape, documented in c13-claims.ts)
  *
+ * C09 CTA finder: a question, a CTA phrase ("would you", "let me know", ...),
+ * a policy scorecard_reply phrase, or the lane's conditional-offer form (an
+ * "If ..." sentence whose main clause is a first-person offer;
+ * `CONDITIONAL_OFFER_RE`, S3-T13).
+ *
  * C09 CTA classification (documented patterns, first match wins):
  *   meeting_request  calendar, 15/20/30 minutes, hop or jump on a call, book time,
  *                    "next week?", schedule a, a quick/short call or meeting, demo,
- *                    walkthrough, benchmark call
+ *                    walkthrough, walk you through, benchmark call, set the time,
+ *                    working session
  *   scorecard_reply  a phrase cold-outbound-policy lists as scorecard_reply language
  *                    ("Worth sending over the yard-network scorecard?", "Reply and
  *                    I'll send the short version.", "If useful, I can send the
  *                    1-page scorecard."), checked before the asset heuristic
- *   asset_offer      an offer verb (send, share, forward, worth a look) in the same
- *                    sentence as an approved asset noun (scorecard, short version,
- *                    1-page, one-pager, proof page, order of operations, ROI model,
- *                    comparison, a yardflow.ai path)
+ *   asset_offer      an offer verb (send, share, forward, worth a look, put together,
+ *                    pull together, draft, show) in the same sentence as an approved
+ *                    asset noun (scorecard, short version, 1-page, two-page,
+ *                    one-pager, proof page, order of operations, ROI model,
+ *                    comparison, summary, yard read, a yardflow.ai path)
  *   scorecard_reply  any other question: the diagnostic the buyer answers with a fact
  *   light_reaction   a CTA phrase that is none of the above ("let me know")
  * Acceptance: the family equals `getCtaPolicy('outreach_sequence', stage)
@@ -188,14 +195,29 @@ export const CTA_PHRASE_RE =
 
 /** Scheduling asks; forbidden at every pre-meeting stage. */
 export const MEETING_REQUEST_RE =
-  /\bcalendar\b|\b(?:15|20|30|fifteen|twenty|thirty) minutes\b|\b(?:hop|jump) on a call\b|\bbook (?:some |a )?time\b|\bnext week\?|\bschedule (?:a|some|time)\b|\ba (?:quick|short|brief) (?:call|chat|meeting)\b|\bgrab (?:time|a slot)\b|\bmeet (?:for|next|this|on)\b|\bdemo\b|\bwalkthrough\b|\bbenchmark call\b/i;
+  /\bcalendar\b|\b(?:15|20|30|fifteen|twenty|thirty) minutes\b|\b(?:hop|jump) on a call\b|\bbook (?:some |a )?time\b|\bnext week\?|\bschedule (?:a|some|time)\b|\ba (?:quick|short|brief) (?:call|chat|meeting)\b|\bgrab (?:time|a slot)\b|\bmeet (?:for|next|this|on)\b|\bdemo\b|\bwalkthrough\b|\bwalk you through\b|\bbenchmark call\b|\bset (?:the|a|up a|up some) time\b|\bworking session\b/i;
 
 /** An offer to send something, when paired with an approved asset noun. */
-export const OFFER_VERB_RE = /\b(?:send|sending|share|sharing|forward|pass along|worth a look)\b/i;
+export const OFFER_VERB_RE =
+  /\b(?:send|sending|share|sharing|forward|pass along|worth a look|put together|pull together|draft|show)\b/i;
 
 /** The assets the lane may offer (DRAFT_CONTRACT step 4 plus the policy's scorecard language). */
 export const ASSET_NOUN_RE =
-  /\bscorecard\b|\bshort version\b|\b(?:1|one)[- ]page\b|\bone[- ]pager\b|\bproof page\b|\border of operations\b|\bROI (?:model|page|calculator)\b|\bcomparison\b|\byardflow\.ai\//i;
+  /\bscorecard\b|\bshort version\b|\b(?:1|one|2|two)[- ]page\b|\bone[- ]pager\b|\bproof page\b|\border of operations\b|\bROI (?:model|page|calculator)\b|\bcomparison\b|\bsummary\b|\byard read\b|\byardflow\.ai\//i;
+
+/**
+ * The lane's conditional-offer form (S3-T13): a sentence opening with "If"
+ * whose main clause is a first-person offer ("If useful, I can pull together
+ * ...", "If a working session would help, I'll set the time."). A "worth"
+ * conditional counts only as a question, which the question rule already
+ * finds; a bare "worth" clause ("If it's already covered, this isn't worth
+ * pursuing.") is an opt-out hedge, not a CTA, and the real-lane run proved
+ * it (37 false double-CTAs). A conditional with no first-person offer ("If
+ * Dayton checks drivers in on paper, the two sites will disagree") is not a
+ * CTA either.
+ */
+export const CONDITIONAL_OFFER_RE =
+  /^if\b[^.!?]*?(?:\b(?:i|we)(?:(?:'|’)(?:ll|d)| will| can| could| would)?\s+(?:send|share|show|draft|put together|pull together|walk you through|set (?:the|a|up a|up some) time|grab (?:time|a slot)|find (?:15|20|30|fifteen|twenty|thirty) minutes)\b|\bhappy to (?:send|share|show|draft|put together|pull together|walk you through)\b)/i;
 
 /**
  * The phrases `buildColdOutboundPolicyNotes` lists as preferred scorecard_reply
@@ -225,7 +247,12 @@ export function findCtaSentences(body: string): CtaSentence[] {
   const out: CtaSentence[] = [];
   for (const { sentence, span } of sentenceSpans(body, content)) {
     const plain = stripMarkers(sentence);
-    if (isQuestion(plain) || CTA_PHRASE_RE.test(plain) || SCORECARD_REPLY_PHRASE_RE.test(plain)) {
+    if (
+      isQuestion(plain) ||
+      CTA_PHRASE_RE.test(plain) ||
+      SCORECARD_REPLY_PHRASE_RE.test(plain) ||
+      CONDITIONAL_OFFER_RE.test(plain.trim())
+    ) {
       out.push({ sentence, span, family: classifyCtaFamily(plain) });
     }
   }

@@ -2,14 +2,22 @@
  * GAP message compiler checks (Sprint 3, S3-T6): C01 OBSERVATION_UNSUPPORTED,
  * C05 PROOF_UNSUPPORTED and C10 OBSERVATION_FIRST. Spec section 8. Pure: no I/O.
  *
- * C01: every `[[SRC:id]]` or `[S:id]` marker resolves to an evidence ref that
- * is fresh, not superseded and either external_ok or first-party; the body
- * carries an observation paragraph (a paragraph with a marker) whenever the
- * hypothesis has an observation; a first-party ref is never quoted as public;
- * every number token is either in the title of a cited ref (same digits) or
- * inside a canon figure. Canon PHRASING (measured, observed, modeled,
- * committed) is C05's job, so "48 to 24 minutes proved" passes C01 and fails
- * C05.
+ * C01: the citation set is the body's `[[SRC:id]]` / `[S:id]` markers UNION
+ * the step's `contract.evidenceIds` (the lane cites beside the body because
+ * HubSpot-native copy reaches the prospect verbatim, S3-T13). Every cited id
+ * resolves to an evidence ref that is fresh, not superseded and either
+ * external_ok or first-party, with the same detail wording for both forms
+ * ("marker [[SRC:id]]" or "evidence_ids id" as the source). Observation-first:
+ * a body with no marker must carry at least one resolved evidence_ids entry
+ * to support its first sentence whenever the hypothesis has an observation
+ * (any step) or, at step 0 only, whenever the contract carries an evidenceIds
+ * list at all (a later step citing nothing is C12's reject, not C01's), else
+ * `observation_unsupported` quoting that sentence. A first-party ref is never
+ * quoted as public. Every number token is either in the title or excerpt of
+ * a cited ref (same digits) or inside a canon figure. Canon PHRASING
+ * (measured, observed, modeled, committed) is C05's job, so "48 to 24 minutes
+ * proved" passes C01 and fails C05. Marker-carrying bodies behave exactly as
+ * before the lane convention was accepted.
  *
  * C05: a named organization followed by a result verb is proof. It is allowed
  * only for PUBLIC_REFERENCE_CUSTOMERS or when the sentence cites a marker
@@ -41,6 +49,7 @@ import {
 import {
   bodyParagraphs,
   hasMarker,
+  readCitationContract,
   sentenceSpans,
   spanOf,
   splitSentences,
@@ -196,27 +205,55 @@ function pass(code: string, detail: string): CheckResult {
 // C01 OBSERVATION_UNSUPPORTED
 // ---------------------------------------------------------------------------
 
+/**
+ * The reason a cited id is not usable, in the shared wording; `source` is the
+ * citation form ("marker [[SRC:id]]" or "evidence_ids id"). Null when the ref
+ * is fresh, not superseded and external_ok or first-party.
+ */
+function citationFault(source: string, id: string, ref: CompileEvidenceRef | undefined): string | null {
+  if (!ref) return `${source} resolves to no evidence ref (id ${id})`;
+  if (ref.superseded) return `${source} cites superseded evidence ${id}`;
+  if (!ref.fresh) return `${source} cites stale evidence ${id}`;
+  if (!ref.externalOk && !ref.firstParty) return `${source} cites evidence ${id} that is neither external_ok nor first-party`;
+  return null;
+}
+
 export const checkObservationUnsupported: Check = (draft, ctx) => {
   const refs = refById(ctx);
   const markers = markersIn(draft.body);
+  const citation = readCitationContract(ctx.contract);
 
   for (const marker of markers) {
     const span: CheckSpan = { start: marker.index, end: marker.index + marker.text.length, text: marker.text };
-    const ref = refs.get(marker.id);
-    if (!ref) return fail(C01_CODE, `marker ${marker.text} resolves to no evidence ref (id ${marker.id})`, span);
-    if (ref.superseded) return fail(C01_CODE, `marker ${marker.text} cites superseded evidence ${marker.id}`, span);
-    if (!ref.fresh) return fail(C01_CODE, `marker ${marker.text} cites stale evidence ${marker.id}`, span);
-    if (!ref.externalOk && !ref.firstParty) {
-      return fail(C01_CODE, `marker ${marker.text} cites evidence ${marker.id} that is neither external_ok nor first-party`, span);
-    }
+    const fault = citationFault(`marker ${marker.text}`, marker.id, refs.get(marker.id));
+    if (fault) return fail(C01_CODE, fault, span);
   }
 
+  // The lane's beside-the-body citations: same rules, no span (nothing in the text to point at).
+  const markerIdSet = new Set(markers.map((m) => m.id));
+  const extraIds = citation.evidenceIds.filter((id) => !markerIdSet.has(id));
+  for (const id of extraIds) {
+    const fault = citationFault(`evidence_ids ${id}`, id, refs.get(id));
+    if (fault) return fail(C01_CODE, fault, null);
+  }
+
+  // Observation-first: with no marker in the body, the first sentence must be
+  // supported by at least one resolved beside-the-body id. The rule fires
+  // when there is an observation to support (the hypothesis has one, any
+  // step) or, at step 0 only, when the lane convention is in play (the
+  // contract carries an evidenceIds list: a cold open citing nothing is
+  // unsupported). A later step citing nothing is C12's "no evidence id"
+  // reject and is not double-counted here; an uncited transparent-hypothesis
+  // body with no observation stays C10's business.
   const paragraphs = bodyParagraphs(draft.body);
-  if (ctx.hypothesis.observation.trim().length > 0 && !paragraphs.some(hasMarker)) {
+  const hasObservation = ctx.hypothesis.observation.trim().length > 0;
+  const coldOpenUncited = citation.laneConvention && ctx.stepIndex === 0;
+  if ((hasObservation || coldOpenUncited) && !paragraphs.some(hasMarker) && extraIds.length === 0) {
+    const first = splitSentences(paragraphs[0] ?? '')[0] ?? '';
     return fail(
       C01_CODE,
-      'no observation paragraph: the hypothesis has an observation but no body paragraph carries a marker',
-      spanOf(draft.body, paragraphs[0] ?? ''),
+      `observation_unsupported: the body carries no marker and no resolved evidence id supports the first sentence "${first}"`,
+      spanOf(draft.body, first),
     );
   }
 
@@ -235,8 +272,13 @@ export const checkObservationUnsupported: Check = (draft, ctx) => {
     }
   }
 
-  const citedTitles = markers
-    .map((m) => refs.get(m.id)?.title ?? '')
+  // Number coverage text: the title and excerpt of every resolved cited ref.
+  const citedIds = [...markerIdSet, ...extraIds];
+  const coverage = citedIds
+    .flatMap((id) => {
+      const ref = refs.get(id);
+      return ref ? [ref.title, ref.excerpt ?? ''] : [];
+    })
     .filter((t) => t.length > 0)
     .map((t) => t.replace(/,/g, ''));
 
@@ -250,17 +292,20 @@ export const checkObservationUnsupported: Check = (draft, ctx) => {
       if (inCanon) continue;
       const digits = tokenDigits(token);
       const digitsRe = new RegExp(`(?<![\\d.])${escapeRe(digits)}(?![\\d.])`);
-      if (digits.length > 0 && citedTitles.some((t) => digitsRe.test(t))) continue;
+      if (digits.length > 0 && coverage.some((t) => digitsRe.test(t))) continue;
       const tokenSpan = span ? spanOf(draft.body, token, span.start) : spanOf(draft.body, token);
       return fail(
         C01_CODE,
-        `number "${token}" is neither in a cited evidence title nor a canon figure: "${sentence}"`,
+        `number "${token}" is neither in a cited evidence title or excerpt nor a canon figure: "${sentence}"`,
         tokenSpan,
       );
     }
   }
 
-  return pass(C01_CODE, `${markers.length} marker(s) resolve to fresh evidence; every number is cited or canon`);
+  return pass(
+    C01_CODE,
+    `${markers.length} marker(s) + ${extraIds.length} evidence_ids resolve to fresh evidence; every number is cited or canon`,
+  );
 };
 
 // ---------------------------------------------------------------------------

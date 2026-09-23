@@ -14,7 +14,7 @@
  *
  * C14 warns on three habits: singular "yard" outside a compound (yard network,
  * yard management, yard system, yard state, yard check, yard truck, yard move,
- * yard spotting), consecutive sentences opening with the same word, and a
+ * yard spotting, spaced or hyphenated), consecutive sentences opening with the same word, and a
  * sentence opening with "I" (Casey does not start sentences with I).
  */
 
@@ -157,9 +157,13 @@ export const checkBannedPhrases: Check = (draft, ctx) => {
 // C14 VOICE_WARN
 // ---------------------------------------------------------------------------
 
-/** Singular "yard" not opening one of the accepted compounds. */
+/**
+ * Singular "yard" not opening one of the accepted compounds. The compound may
+ * be spaced or hyphenated ("yard-network scorecard" is the policy's own CTA
+ * phrase, S3-T13); "yard-side" is still singular.
+ */
 export const SINGULAR_YARD_RE =
-  /\byard\b(?!\s+(?:network|management|system|state|check|checks|truck|trucks|move|moves|spotting))/i;
+  /\byard\b(?!(?:\s+|-)(?:network|management|system|state|check|checks|truck|trucks|move|moves|spotting)\b)/i;
 
 const I_OPENER_RE = /^I(?:'(?:ll|m|ve|d))?\b/;
 

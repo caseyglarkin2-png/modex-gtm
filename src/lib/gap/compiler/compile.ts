@@ -56,6 +56,12 @@ export interface CompileInput {
   subject: string;
   body: string;
   priorBodies: string[];
+  /**
+   * Prior steps' beside-the-body citation ids (the lane's `touches[].evidence_ids`),
+   * index-aligned with `priorBodies`; copied onto the contract as `priorEvidenceIds`
+   * for C12 when the contract does not already carry one (S3-T13).
+   */
+  priorEvidenceIds?: string[][];
   /** The loose check contract (see the header). Null or junk reads as empty. */
   contract: unknown;
   createdBy: string;
@@ -126,6 +132,7 @@ export function readEvidenceRefs(raw: unknown): CompileEvidenceRef[] {
       fresh: bool(entry.fresh),
       superseded: bool(entry.superseded),
       firstParty: bool(entry.firstParty),
+      ...(typeof entry.excerpt === 'string' && entry.excerpt.length > 0 ? { excerpt: entry.excerpt } : {}),
     });
   }
   return out;
@@ -140,6 +147,9 @@ function buildContext(input: CompileInput, validateClaims: ClaimsValidator | nul
   void _ignored;
   const contract: Record<string, unknown> = { ...rest };
   if (validateClaims) contract.validateClaims = validateClaims;
+  if (Array.isArray(input.priorEvidenceIds) && !Array.isArray(contract.priorEvidenceIds)) {
+    contract.priorEvidenceIds = input.priorEvidenceIds;
+  }
   return {
     stepIndex: input.stepIndex,
     hypothesis: {

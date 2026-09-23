@@ -107,6 +107,14 @@ describe('toCompileInputs', () => {
     expect(riley[1].input.priorBodies).toEqual([riley[0].input.body]);
   });
 
+  it('priorEvidenceIds are the same person\'s earlier evidence_ids, index-aligned with priorBodies (S3-T13)', () => {
+    const jordan = prepared.inputs.filter((e) => e.personKey === JORDAN);
+    expect(jordan.map((e) => e.input.priorEvidenceIds)).toEqual([[], [['E1']], [['E1'], ['E2']], [['E1'], ['E2'], ['E4']]]);
+    const riley = prepared.inputs.filter((e) => e.personKey === RILEY);
+    expect(riley.map((e) => e.input.priorEvidenceIds)).toEqual([[], [['E1']], [['E1'], ['E1']], [['E1'], ['E1'], ['E1']]]);
+    for (const e of prepared.inputs) expect(e.input.priorEvidenceIds).toHaveLength(e.input.priorBodies.length);
+  });
+
   it('builds evidence refs from the research ledger: E1 fresh, E2 stale, E3 superseded, E4 refused as not a fact', () => {
     const contract = prepared.inputs[0].input.contract as { evidence: CompileEvidenceRef[] };
     expect(contract.evidence.map((r) => [r.id, r.fresh, r.superseded, r.externalOk, r.firstParty])).toEqual([
@@ -122,9 +130,25 @@ describe('toCompileInputs', () => {
       fresh: true,
       superseded: false,
       firstParty: false,
+      excerpt: 'Gate Clerk (night shift), Ohio DC. Three openings.',
     });
     const refs = evidenceRefsFromResearch(research, NOW);
     expect(refs.refused).toEqual({ E4: 'not_a_fact' });
+    expect(refs.refs.map((r) => [r.id, r.excerpt])).toEqual([
+      ['E1', 'Gate Clerk (night shift), Ohio DC. Three openings.'],
+      ['E2', 'Acme Foods opens Dayton plant.'],
+      ['E3', 'Acme Foods announces yard automation program.'],
+    ]);
+  });
+
+  it('omits excerpt on a ref whose ledger row has none, so C01 coverage never reads an empty string', () => {
+    const blank: LaneResearchFile = {
+      key: research.key,
+      evidence: [{ ...research.evidence[0], excerpt: '' }, { ...research.evidence[1], excerpt: undefined }],
+    };
+    const refs = evidenceRefsFromResearch(blank, NOW).refs;
+    expect(refs).toHaveLength(2);
+    for (const r of refs) expect(r).not.toHaveProperty('excerpt');
   });
 
   it('reports the exact warnings: retrieved-date fallback, refused row, archived people, unmarked bodies', () => {
@@ -225,12 +249,12 @@ describe('compile outcomes on the fixture lane', () => {
     expect(s.result.checks.filter((c) => !c.passed).map((c) => c.code)).toEqual(['C09']);
   });
 
-  it('an unmarked body is judged as written: C01 fails the uncited number, C12 finds no evidence id', async () => {
+  it('an unmarked body is judged as written: C01 fails the uncited number, C12 finds its evidence_ids entry reused from step 1', async () => {
     const { steps } = await compileFixture();
     const s = stepOf(steps, RILEY, 2);
     expect(s.result.evidenceIdsUsed).toEqual([]);
-    expect(check(s, 'C01').detail).toMatch(/^number "110 dock doors" is neither in a cited evidence title nor a canon figure/);
-    expect(check(s, 'C12').detail).toBe('no evidence id: a follow-up cites at least one marker unused in prior steps (prior ids: E1)');
+    expect(check(s, 'C01').detail).toMatch(/^number "110 dock doors" is neither in a cited evidence title or excerpt nor a canon figure/);
+    expect(check(s, 'C12').detail).toBe('no new evidence id: every cited id is reused from a prior step (reused ids: E1)');
   });
 
   it('C13 refuses the question-only claim outside a question and the DO_NOT_USE claim by id', async () => {
@@ -259,22 +283,25 @@ describe('compile outcomes on the fixture lane', () => {
       C11: { pass: 8, review: 0, reject: 0 },
       C12: { pass: 5, review: 0, reject: 3 },
       C13: { pass: 6, review: 0, reject: 2 },
-      C14: { pass: 4, review: 4, reject: 0 },
+      C14: { pass: 8, review: 0, reject: 0 },
       C15: { pass: 7, review: 1, reject: 0 },
       C16: { pass: 8, review: 0, reject: 0 },
     });
     expect(summary.totals).toEqual({ pass: 1, review: 0, reject: 7, steps: 8, accounts: 1 });
     expect(summary.perAccount).toEqual({ 'acme-example-com': { pass: 1, review: 0, reject: 7 } });
     expect(summary.worst.map((w) => [w.person, w.step, w.verdict, w.failed, w.code])).toEqual([
-      ['Riley Okafor', 4, 'reject', 4, 'C12'],
-      ['Riley Okafor', 2, 'reject', 3, 'C01'],
+      ['Riley Okafor', 4, 'reject', 3, 'C12'],
+      ['Riley Okafor', 2, 'reject', 2, 'C01'],
       ['Riley Okafor', 3, 'reject', 2, 'C12'],
-      ['Jordan Vale', 2, 'reject', 2, 'C01'],
-      ['Jordan Vale', 4, 'reject', 2, 'C01'],
+      ['Jordan Vale', 2, 'reject', 1, 'C01'],
       ['Jordan Vale', 3, 'reject', 1, 'C01'],
+      ['Jordan Vale', 4, 'reject', 1, 'C01'],
       ['Riley Okafor', 1, 'reject', 1, 'C09'],
     ]);
-    expect(summary.worst[0]).toMatchObject({ account: 'acme-example-com', detail: expect.stringContaining('no evidence id') });
+    expect(summary.worst[0]).toMatchObject({
+      account: 'acme-example-com',
+      detail: 'no new evidence id: every cited id is reused from a prior step (reused ids: E1)',
+    });
   });
 });
 
@@ -304,6 +331,7 @@ describe('report privacy and determinism', () => {
     const serialized = JSON.stringify(report);
     expect(serialized).not.toContain('"body"');
     expect(serialized).not.toContain('"priorBodies"');
+    expect(serialized).not.toContain('"priorEvidenceIds"');
     expect(serialized).not.toContain('Two of them are night shift');
     expect(report.people.map((p) => [p.personKey, p.steps.length])).toEqual([[JORDAN, 4], [RILEY, 4]]);
     expect(report.people[1].steps[2]).toMatchObject({

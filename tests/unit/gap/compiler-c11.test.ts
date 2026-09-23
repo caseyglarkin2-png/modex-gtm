@@ -140,6 +140,23 @@ describe('C14 VOICE_WARN', () => {
     expect(checkVoiceWarn(draft(body), ctxAt(0)).passed).toBe(true);
   });
 
+  it('accepts the policy phrase "yard-network scorecard" (hyphenated, any case)', () => {
+    const policy = CLEAN.replace(
+      'How many trailers sit past their appointment on a normal Tuesday?',
+      'Worth sending over the yard-network scorecard?',
+    );
+    expect(checkVoiceWarn(draft(policy), ctxAt(0))).toMatchObject({ code: 'C14', passed: true, detail: 'no voice warnings' });
+    expect(checkVoiceWarn(draft(withSentence('The YARD-NETWORK view is one list.')), ctxAt(0)).passed).toBe(true);
+    expect(checkVoiceWarn(draft(withSentence('The Yard Network view is one list.')), ctxAt(0)).passed).toBe(true);
+  });
+
+  it('still warns on a hyphenated singular yard that is not a compound', () => {
+    const body = withSentence('The yard-side clerk keeps the list.');
+    const r = checkVoiceWarn(draft(body), ctxAt(0));
+    expect(r.passed).toBe(false);
+    expect(r.detail).toBe('singular "yard" (yards is plural in the network sense): "yard"');
+  });
+
   it('warns on consecutive sentences opening with the same word', () => {
     const body = withSentence('The clerks are night shift. The lot is full by six.');
     const r = checkVoiceWarn(draft(body), ctxAt(0));

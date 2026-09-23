@@ -32,8 +32,11 @@
  * The lane cites evidence outside the copy (`evidence_ids` on the touch)
  * rather than with `[[SRC:id]]` markers in the body. This adapter prepends
  * nothing: an unmarked body is passed as written, `evidenceIds` travels on
- * the contract for the record, and `unmarked_body:<personKey>:<step>` is a
- * warning, so C01 and C10 judge the text the way a buyer would read it.
+ * the contract as the step's citation set (C01 and C12 read it beside the
+ * body's markers since S3-T13), the earlier touches' ids travel as
+ * `priorEvidenceIds` index-aligned with `priorBodies`, the ledger `excerpt`
+ * rides on each ref for C01 number coverage, and
+ * `unmarked_body:<personKey>:<step>` stays a warning for the record.
  *
  * The journey stage is left to the compiler (step 0 = sequence_step_1, later
  * = sequence_step_2_plus), which is what the lane's DRAFT_CONTRACT step rules
@@ -234,6 +237,8 @@ export function evidenceRefsFromResearch(
       fresh: isFresh(signal.freshnessExpiresAt, now),
       superseded: str(row.contradiction).trim().length > 0,
       firstParty: signal.sourceType === 'first_party',
+      // The ledger excerpt counts toward C01 number coverage (S3-T13); absent when blank.
+      ...(str(row.excerpt).trim().length > 0 ? { excerpt: str(row.excerpt).trim() } : {}),
     });
   }
   return { refs, warnings, refused };
@@ -276,6 +281,9 @@ export function toCompileInputs(
     if (touches.length !== 4) warnings.push(`touch_count:${personKey}:${touches.length}`);
 
     const priorBodies: string[] = [];
+    // Index-aligned with priorBodies: the earlier touches' evidence_ids, so C12
+    // can tell a reused beside-the-body citation from a new one (S3-T13).
+    const priorEvidenceIds: string[][] = [];
     touches.forEach((touch, stepIndex) => {
       const step = Number.isFinite(Number(touch.step)) ? Number(touch.step) : stepIndex + 1;
       const body = str(touch.body);
@@ -317,11 +325,13 @@ export function toCompileInputs(
           subject: str(touch.subject),
           body,
           priorBodies: [...priorBodies],
+          priorEvidenceIds: priorEvidenceIds.map((ids) => [...ids]),
           contract,
           createdBy,
         },
       });
       priorBodies.push(body);
+      priorEvidenceIds.push([...evidenceIds]);
     });
   }
 
