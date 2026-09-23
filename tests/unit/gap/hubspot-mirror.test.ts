@@ -360,6 +360,54 @@ describe('mirrorHypothesisEvent failures', () => {
     expect(args.create.note_id).toBe('note_77');
   });
 
+  it('retrying a row whose note landed but whose property update failed reuses the note and never posts a second one', async () => {
+    const prisma = makePrisma();
+    prisma.gapHubSpotMirror.findUnique.mockResolvedValue({
+      key: 'gap:hyp:hyp_1:submitted',
+      error: 'PROPERTY_DOESNT_EXIST',
+      note_id: 'note_77',
+    });
+    const deps = makeDeps();
+
+    const result = await mirrorHypothesisEvent(prisma, makeEvent(), deps);
+
+    expect(result).toEqual({ status: 'written', noteId: 'note_77' });
+    expect(deps.createCompanyNote).toHaveBeenCalledTimes(0);
+    expect(deps.updateCompanyProperties).toHaveBeenCalledTimes(1);
+    expect(deps.updateCompanyProperties).toHaveBeenCalledWith('901', {
+      yardflow_gap_status: 'hypothesis_proposed',
+      yardflow_gap_problem_family: 'hidden_capacity',
+    });
+    expect(prisma.gapHubSpotMirror.upsert).toHaveBeenCalledTimes(1);
+    const args = prisma.gapHubSpotMirror.upsert.mock.calls[0][0];
+    expect(args.where).toEqual({ key: 'gap:hyp:hyp_1:submitted' });
+    expect(args.update).toEqual({
+      object_type: 'company',
+      object_id: '901',
+      note_id: 'note_77',
+      written_at: new Date('2026-09-23T12:00:00Z'),
+      error: null,
+    });
+  });
+
+  it('a retry that fails again on the property update keeps the stored note id on the row', async () => {
+    const prisma = makePrisma();
+    prisma.gapHubSpotMirror.findUnique.mockResolvedValue({
+      key: 'gap:hyp:hyp_1:submitted',
+      error: 'PROPERTY_DOESNT_EXIST',
+      note_id: 'note_77',
+    });
+    const deps = makeDeps({
+      updateCompanyProperties: vi.fn().mockRejectedValue(new Error('PROPERTY_DOESNT_EXIST')),
+    });
+
+    const result = await mirrorHypothesisEvent(prisma, makeEvent(), deps);
+
+    expect(result).toEqual({ status: 'error', reason: 'PROPERTY_DOESNT_EXIST', noteId: 'note_77' });
+    expect(deps.createCompanyNote).toHaveBeenCalledTimes(0);
+    expect(prisma.gapHubSpotMirror.upsert.mock.calls[0][0].update.note_id).toBe('note_77');
+  });
+
   it('records the real external-write guard message under NODE_ENV=test with zero HubSpot calls', async () => {
     Object.assign(process.env, { NODE_ENV: 'test' });
     delete process.env.ALLOW_EXTERNAL_WRITES_IN_TEST;

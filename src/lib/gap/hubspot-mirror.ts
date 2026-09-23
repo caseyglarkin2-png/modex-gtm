@@ -10,7 +10,9 @@
  * Idempotent via `GapHubSpotMirror` (table gap_hubspot_mirror): a row with a
  * null `error` means the event is already mirrored and the call makes ZERO
  * HubSpot calls. A row with a non-null `error` is a recorded failure and the
- * next call retries. Failures are recorded on the row and NEVER thrown to the
+ * next call retries; when that row already carries a `note_id` the note
+ * landed and only the property update is redone, so a retry never posts a
+ * second note. Failures are recorded on the row and NEVER thrown to the
  * caller: mirroring must not break the hypothesis service.
  *
  * Gates, in order: GAP_OS_ENABLED (call-time), GAP_HUBSPOT_MIRROR_ENABLED
@@ -223,15 +225,20 @@ export async function mirrorHypothesisEvent(
     return { status: 'skipped', reason: 'already_written', noteId: existing.note_id ?? null };
   }
 
-  let noteId: string | null = null;
+  // A prior failed attempt may have landed the note before the property
+  // update failed. That note is on the company timeline already: reuse its
+  // id and redo only the property update, or the retry posts a second note.
+  let noteId: string | null = existing?.note_id ?? null;
   try {
     assertWriteAllowed();
     await ensure();
-    noteId = await createNote(
-      companyId,
-      hypothesisNoteBody({ key, action: event.action, hypothesis: event.hypothesis, evidence: event.evidence }),
-    );
-    if (!noteId) throw new Error('note_not_created');
+    if (!noteId) {
+      noteId = await createNote(
+        companyId,
+        hypothesisNoteBody({ key, action: event.action, hypothesis: event.hypothesis, evidence: event.evidence }),
+      );
+      if (!noteId) throw new Error('note_not_created');
+    }
     await updateProps(companyId, {
       [GAP_PROPERTY_NAMES.companyStatus]: statusForAction(event.action, event.hypothesis.status),
       [GAP_PROPERTY_NAMES.companyProblemFamily]: event.hypothesis.problemFamily,
