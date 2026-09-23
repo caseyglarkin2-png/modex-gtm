@@ -670,13 +670,19 @@ async function main(): Promise<number> {
     const rowsU = await prisma.routingDecision.findMany({ where: { run_id: runIdU }, select: { rule_id: true, action: true, lane: true, persona_id: true } });
     expect('7 suppression', runU.decisions === 3 && rowsU.length === 3, `unknown run -> ${JSON.stringify(runU)} with ${rowsU.length} rows, expected 3 decisions`);
     for (const r of rowsU) {
+      // R2-1: the local do_not_contact column outranks an unreadable clawd leg, so the DNC persona is
+      // suppressed even when the contract is unknown; every other persona is unknown -> research.
+      if (r.persona_id === dncPersona.id) {
+        expect('7 suppression', r.rule_id === 'suppressed' && r.action === 'do_not_contact' && r.lane === 'blocked', `unknown run dnc persona ${r.persona_id}: ${r.rule_id} / ${r.action} / ${r.lane}, expected suppressed / do_not_contact / blocked (local do_not_contact outranks unknown, R2-1)`);
+        continue;
+      }
       expect('7 suppression', r.rule_id === 'suppression_unknown' && r.action === 'research_required' && r.lane === 'blocked', `unknown run persona ${r.persona_id}: ${r.rule_id} / ${r.action} / ${r.lane}, expected suppression_unknown / research_required / blocked`);
     }
     const blockedQueue = await listQueue(prisma, { runId: runIdS, lane: 'blocked' });
     expect('7 suppression', blockedQueue.items.length === 3 && blockedQueue.items.every((q) => q.blocked), `blocked lane filter returned ${blockedQueue.items.length} items`);
     counts.suppressedDecisions = rowsS.length;
     counts.unknownDecisions = rowsU.length;
-    pass('7 suppression', `suppressed -> ${rowsS.length} x do_not_contact/blocked (rule suppressed); unknown -> ${rowsU.length} x research_required/blocked (rule suppression_unknown); queue lane=blocked filter returns ${blockedQueue.items.length}`);
+    pass('7 suppression', `suppressed -> ${rowsS.length} x do_not_contact/blocked (rule suppressed); unknown -> ${rowsU.length} rows: dnc persona suppressed (local column outranks unknown, R2-1), others research_required/blocked (rule suppression_unknown); queue lane=blocked filter returns ${blockedQueue.items.length}`);
 
     // 8. Stop, do not delete, under the flag; then prove the recipient unlocked.
     const dqBefore = await prisma.draftQueueItem.findMany({ where: { sequence_run_id: created.sequenceRunId }, select: { id: true, status: true, skipped_reason: true } });
