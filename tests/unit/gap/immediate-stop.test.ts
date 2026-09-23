@@ -8,6 +8,7 @@
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { STATUS } from '@/lib/queue/types';
+import { fromLegacyModexSteps } from '@/lib/gap/sequence/steps';
 import {
   cancelDownstream,
   onSendOutcome,
@@ -25,11 +26,17 @@ afterEach(() => {
   else process.env.GAP_OS_ENABLED = savedGapOs;
 });
 
+/** S3-T5: under the flag the runtime resolves steps through the enrollment
+ *  pin and the item stamp before the live read, so the flag-on mock carries
+ *  those two delegates (null by default = "no pin", which falls through to
+ *  the live read exactly as a never-imported legacy run does). */
 function makePrisma() {
   return {
     sequence: { findUnique: vi.fn() },
+    sequenceEnrollment: { findUnique: vi.fn().mockResolvedValue(null) },
+    sequenceVersion: { findUnique: vi.fn().mockResolvedValue(null) },
     emailLog: { findUnique: vi.fn() },
-    draftQueueItem: { create: vi.fn(), deleteMany: vi.fn(), updateMany: vi.fn() },
+    draftQueueItem: { create: vi.fn(), deleteMany: vi.fn(), updateMany: vi.fn(), findUnique: vi.fn() },
   };
 }
 
@@ -251,6 +258,8 @@ describe('scheduleNextStep (flag on) carries the version pin forward', () => {
   });
 
   it('item has sequence_version_id -> the next step is created with the same id', async () => {
+    // S3-T5: the stamp is now READ (item_stamp source), so the version must exist.
+    prisma.sequenceVersion.findUnique.mockResolvedValue({ id: 'ver-1', status: 'frozen', steps: fromLegacyModexSteps(TWO_STEP) });
     const out = await scheduleNextStep(prisma, step0Item({ sequence_version_id: 'ver-1' }));
 
     expect(out).toBe(201);

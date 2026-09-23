@@ -10,15 +10,41 @@ import { STATUS } from './types';
 import { nextStepSchedule, type SequenceStep } from './sequence';
 import { clampToWindow, DEFAULT_WINDOW } from './schedule';
 import { isGapOsEnabled } from '../gap/flags';
+import { resolveSteps } from '../gap/sequence/resolve-steps';
+import { toCalendarDelayDays } from '../gap/sequence/business-days';
+
+/** GAP OS (S3-T5): the deterministic idempotency key the schema comment on
+ *  DraftQueueItem promises (`owner:to_email:run:step`). Used under the flag
+ *  only; a crash between create and the caller's bookkeeping then re-derives
+ *  the SAME key and hits the @unique instead of creating a twin step. */
+export function sequenceStepIdempotencyKey(owner: string, toEmail: string, runId: string, stepIndex: number): string {
+  return `${owner}:${toEmail}:${runId}:${stepIndex}`;
+}
+
+function isUniqueViolation(err: unknown): boolean {
+  return Boolean(err && typeof err === 'object' && (err as { code?: unknown }).code === 'P2002');
+}
 
 /** After a SENT step, create the next step's DraftQueueItem (if any). Bypasses
- *  dedup on purpose — a sequence intentionally re-contacts the same recipient.
- *  Returns the new item id or null. */
+ *  dedup on purpose: a sequence intentionally re-contacts the same recipient.
+ *  Returns the new item id or null.
+ *
+ *  Steps come from `resolveSteps` (S3-T5). Flag OFF: the one Prisma read is
+ *  `prisma.sequence.findUnique({ where: { id } })` exactly as before, the
+ *  created row is byte-identical (no version stamp, random idempotency key).
+ *  Flag ON: the run's SequenceEnrollment pin, else the item's own stamp, else
+ *  the live read (documented fallback for a legacy run that was never
+ *  imported); a paused, stopped or completed enrollment schedules nothing
+ *  (spec 5.3); the created row is stamped with the resolved version and keyed
+ *  deterministically; a business-day delay is converted to calendar days from
+ *  the send time before the pure step math. */
 export async function scheduleNextStep(prisma: any, item: any): Promise<number | null> {
   if (!item.sequence_id || item.step_index == null) return null;
-  const seq = await prisma.sequence.findUnique({ where: { id: item.sequence_id } });
-  if (!seq) return null;
-  const steps = seq.steps as SequenceStep[];
+  const gapEnabled = isGapOsEnabled();
+  const resolved = await resolveSteps(prisma, item, { gapEnabled });
+  if (resolved.reason) return null;
+  if (gapEnabled && resolved.enrollmentStatus && resolved.enrollmentStatus !== 'active') return null;
+  const steps = resolved.steps as SequenceStep[];
   // bounce gate: if the step we just sent bounced, do not follow up
   let priorBounced = false;
   if (item.email_log_id) {
@@ -28,41 +54,63 @@ export async function scheduleNextStep(prisma: any, item: any): Promise<number |
     });
     priorBounced = !!log?.bounce_type;
   }
-  const next = nextStepSchedule(steps, item.step_index, item.sent_at ?? new Date(), {
-    priorBounced,
-  });
+  const sentAt: Date = item.sent_at ?? new Date();
+  const next = nextStepSchedule(steps, item.step_index, sentAt, { priorBounced });
   if (!next) return null;
+  let scheduledFor = next.scheduledFor;
+  if (gapEnabled) {
+    const resolvedStep = resolved.steps.find((s) => s.stepIndex === next.step.stepIndex);
+    if (resolvedStep?.delayUnit === 'business_days') {
+      const calendarDays = toCalendarDelayDays(sentAt, resolvedStep.delayDays);
+      scheduledFor = nextStepSchedule([{ ...next.step, delayDays: calendarDays }], item.step_index, sentAt)!.scheduledFor;
+    }
+  }
   // GAP OS: carry the immutable version pin forward so every step of a run is
   // attributed to the same SequenceVersion (spec 5.3). Flag off, or a legacy
   // item without a pin: the created row is exactly what it was before.
-  const versionPin =
-    isGapOsEnabled() && item.sequence_version_id
-      ? { sequence_version_id: item.sequence_version_id }
-      : {};
-  const created = await prisma.draftQueueItem.create({
-    data: {
-      ...versionPin,
-      to_email: item.to_email,
-      account_name: item.account_name,
-      persona_name: item.persona_name,
-      persona_id: item.persona_id,
-      owner: item.owner,
-      created_by: item.owner,
-      subject: next.step.subjectTemplate || item.subject,
-      body: next.step.bodyTemplate || item.body,
-      image_url: item.image_url,
-      status: STATUS.approved,
-      approved_at: new Date(),
-      scheduled_for: clampToWindow(next.scheduledFor, DEFAULT_WINDOW),
-      sequence_id: item.sequence_id,
-      sequence_run_id: item.sequence_run_id,
-      step_index: next.step.stepIndex,
-      parent_item_id: item.id,
-      idempotency_key: randomUUID(),
-    },
-    select: { id: true },
-  });
-  return created.id;
+  const versionId = gapEnabled ? (resolved.versionId ?? item.sequence_version_id ?? null) : null;
+  const versionPin = versionId ? { sequence_version_id: versionId } : {};
+  const idempotencyKey =
+    gapEnabled && item.sequence_run_id
+      ? sequenceStepIdempotencyKey(item.owner, item.to_email, item.sequence_run_id, next.step.stepIndex)
+      : randomUUID();
+  try {
+    const created = await prisma.draftQueueItem.create({
+      data: {
+        ...versionPin,
+        to_email: item.to_email,
+        account_name: item.account_name,
+        persona_name: item.persona_name,
+        persona_id: item.persona_id,
+        owner: item.owner,
+        created_by: item.owner,
+        subject: next.step.subjectTemplate || item.subject,
+        body: next.step.bodyTemplate || item.body,
+        image_url: item.image_url,
+        status: STATUS.approved,
+        approved_at: new Date(),
+        scheduled_for: clampToWindow(scheduledFor, DEFAULT_WINDOW),
+        sequence_id: item.sequence_id,
+        sequence_run_id: item.sequence_run_id,
+        step_index: next.step.stepIndex,
+        parent_item_id: item.id,
+        idempotency_key: idempotencyKey,
+      },
+      select: { id: true },
+    });
+    return created.id;
+  } catch (err) {
+    // Under the flag the key is deterministic, so a retry after a crash lands
+    // here: the step already exists, return it instead of a twin.
+    if (gapEnabled && isUniqueViolation(err)) {
+      const existing = await prisma.draftQueueItem.findUnique({
+        where: { idempotency_key: idempotencyKey },
+        select: { id: true },
+      });
+      if (existing) return existing.id;
+    }
+    throw err;
+  }
 }
 
 /** The statuses a stop may touch: unsent AND unclaimed. A `sending` row has
