@@ -109,6 +109,33 @@ describe('planTop100ResearchImport: hypothesis fields', () => {
     }
   });
 
+  it('renders the excerpt (the source words, verbatim) when the row has one, and the claim only when it does not', () => {
+    const withExcerpt = research.evidence.find((e) => e.evidence_id === 'E3');
+    if (!withExcerpt) throw new Error('fixture lost E3');
+    expect(withExcerpt.excerpt.trim().length).toBeGreaterThan(0);
+    expect(withExcerpt.excerpt).not.toBe(withExcerpt.claim);
+
+    // E3 carries an excerpt: the template line is the excerpt's first sentence, not the claim's.
+    const lineFromExcerpt = h.observationTemplate.find((line) => line.evidenceId === 'E3');
+    expect(lineFromExcerpt?.text).toBe('Cost Reduction Target: 1.5 trillion yen ($9.4 billion)');
+    expect(lineFromExcerpt?.text.startsWith('On September 2, 2026, Honda announced')).toBe(false);
+
+    // The same row with a blank excerpt falls back to the claim.
+    const stripped: ResearchV1Like = {
+      ...research,
+      evidence: research.evidence.map((e) => (e.evidence_id === 'E3' ? { ...e, excerpt: '   ' } : e)),
+    };
+    const [fallback] = planTop100ResearchImport(stripped, OPTS).hypotheses;
+    const lineFromClaim = fallback.observationTemplate.find((line) => line.evidenceId === 'E3');
+    expect(lineFromClaim?.text.startsWith('On September 2, 2026, Honda announced a plan to cut')).toBe(true);
+    expect(lineFromClaim?.text.startsWith('Cost Reduction Target')).toBe(false);
+    expect(lineFromClaim?.text.length).toBeLessThanOrEqual(160);
+
+    // Either way the claim stays in the signal summary.
+    expect(fallback.signals.find((sig) => sig.sourceId.endsWith(':E3'))?.summary).toBe(withExcerpt.claim);
+    expect(h.signals.find((sig) => sig.sourceId.endsWith(':E3'))?.summary).toBe(withExcerpt.claim);
+  });
+
   it('renders template lines that validate as cited sentences once ids are substituted', () => {
     const rendered = h.observationTemplate.map((line) => `${line.text} [S:sig_${line.evidenceId}].`).join(' ');
     const ids = h.observationTemplate.map((line) => `sig_${line.evidenceId}`);

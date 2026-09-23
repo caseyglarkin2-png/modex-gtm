@@ -4,9 +4,12 @@
  * Pure. Takes one `research.v1` file (yardflow-hubspot `top100/data/research/
  * <key>.json`) and returns a plan: every FACT evidence row as a signal input,
  * INFERENCE and UNKNOWN rows refused by name, and ONE draft hypothesis whose
- * observation is a template over the why_now FACT evidence. Signal ids are
- * not known until registration, so the template carries the signal SOURCE id
- * and `./apply` substitutes the registered id into `[S:<id>]` tokens.
+ * observation is a template over the why_now FACT evidence. Each template
+ * line is the source's own words (the row's `excerpt`) when the row has one,
+ * and the researcher's `claim` only as a fallback; the claim always stays in
+ * the signal summary. Signal ids are not known until registration, so the
+ * template carries the signal SOURCE id and `./apply` substitutes the
+ * registered id into `[S:<id>]` tokens.
  *
  * Voice: no em dashes, "yards" plural.
  */
@@ -124,10 +127,20 @@ export function personaFromDecisionOwner(title: string): Persona {
   return 'executive_ops';
 }
 
-/** The first sentence of a claim, clipped, with its terminator removed so the citation token sits inside it. */
-function templateText(claim: string): string {
-  const first = splitSentences(claim)[0] ?? claim;
+/** The first sentence of the text, clipped, with its terminator removed so the citation token sits inside it. */
+function templateText(text: string): string {
+  const first = splitSentences(text)[0] ?? text;
   return clip(first, OBSERVATION_CLIP).replace(/[.!?\s]+$/, '');
+}
+
+/**
+ * What an observation line quotes: the source's own words (`excerpt`) when
+ * the row carries any, else the researcher's `claim`. An observation is a
+ * fact the buyer could read for themselves, so the verbatim wins.
+ */
+function observationSource(row: Pick<ResearchEvidenceLike, 'claim' | 'excerpt'>): string {
+  const excerpt = typeof row.excerpt === 'string' ? row.excerpt.trim() : '';
+  return excerpt.length > 0 ? excerpt : row.claim;
 }
 
 // ---------------------------------------------------------------------------
@@ -143,7 +156,7 @@ export function planTop100ResearchImport(research: ResearchV1Like, opts: Researc
   const signals: ProspectingSignalInput[] = [];
   const signalRefusals: SignalRefusal[] = [];
   const signalSourceIdByEvidence = new Map<string, string>();
-  const claimByEvidence = new Map<string, string>();
+  const observationSourceByEvidence = new Map<string, string>();
 
   for (const row of research.evidence) {
     const projected = fromTop100Evidence(
@@ -154,7 +167,7 @@ export function planTop100ResearchImport(research: ResearchV1Like, opts: Researc
       const signal = { ...projected.signal, hubspotCompanyId };
       signals.push(signal);
       signalSourceIdByEvidence.set(row.evidence_id, signal.sourceId);
-      claimByEvidence.set(row.evidence_id, row.claim);
+      observationSourceByEvidence.set(row.evidence_id, observationSource(row));
     } else {
       signalRefusals.push({ ref: row.evidence_id, reason: projected.reason });
     }
@@ -167,7 +180,7 @@ export function planTop100ResearchImport(research: ResearchV1Like, opts: Researc
     observationTemplate.push({
       evidenceId,
       signalSourceId,
-      text: templateText(claimByEvidence.get(evidenceId) ?? ''),
+      text: templateText(observationSourceByEvidence.get(evidenceId) ?? ''),
     });
   }
 
