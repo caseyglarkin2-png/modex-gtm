@@ -135,6 +135,7 @@ function makePrisma(seed: { accounts?: Row[]; families?: Row[]; versions?: Row[]
     versionUpdateMany: vi.fn(),
     enrollmentCreate: vi.fn(),
     enrollmentUpdate: vi.fn(),
+    enrollmentUpdateMany: vi.fn(),
   };
 
   const prisma = {
@@ -184,7 +185,8 @@ function makePrisma(seed: { accounts?: Row[]; families?: Row[]; versions?: Row[]
         enrollments.filter(
           (e) =>
             (where.engine === undefined || e.engine === where.engine) &&
-            (where.status === undefined || e.status === where.status) &&
+            (where.status === undefined ||
+              (where.status?.in === undefined ? e.status === where.status : where.status.in.includes(e.status))) &&
             (where.hubspot_sequence_id?.in === undefined || where.hubspot_sequence_id.in.includes(e.hubspot_sequence_id)),
         ),
       ),
@@ -200,6 +202,14 @@ function makePrisma(seed: { accounts?: Row[]; families?: Row[]; versions?: Row[]
         if (!row) throw new Error(`no enrollment ${where.id}`);
         Object.assign(row, data);
         return row;
+      }),
+      // SF1: confirmStop's optimistic move() (stop_pending -> stopped).
+      updateMany: vi.fn(async ({ where, data }: { where: { id: string; status: { in: string[] } }; data: Row }) => {
+        spies.enrollmentUpdateMany({ where, data });
+        const row = enrollments.find((e) => e.id === where.id && where.status.in.includes(e.status));
+        if (!row) return { count: 0 };
+        Object.assign(row, data);
+        return { count: 1 };
       }),
     },
   };
@@ -909,6 +919,68 @@ describe('B7: attribution recovery from enroll.row_emitted audits', () => {
     expect(res).toMatchObject({ created: 1, suppressedButEnrolled: [] });
     expect(db.store.enrollments[0]).toMatchObject({ legacy: true });
     expect(db.store.enrollments[0].hypothesis_id).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// SF1 (Opus adversarial review, 2026-09-24, paired with B7 in the fix order):
+// stop_pending never resolved because the sweep selected only `active`.
+// ---------------------------------------------------------------------------
+
+describe('SF1: the sweep resolves stop_pending rows too', () => {
+  function stopPendingRow(over: Record<string, unknown> = {}): Row {
+    return {
+      id: enrollmentId(DELL_SEQ, fernanda.hubspotContactId!),
+      engine: 'hubspot_native',
+      status: 'stop_pending',
+      stop_reason: 'replied',
+      stop_requested_at: NOW,
+      hubspot_contact_id: fernanda.hubspotContactId,
+      hubspot_sequence_id: DELL_SEQ,
+      external_state: null,
+      ...over,
+    };
+  }
+
+  /**
+   * Mutate the sweep's query back to `status: 'active'` and this goes RED:
+   * the row is never selected, updateMany is never called, and the row
+   * holds the to_email partial unique forever.
+   */
+  it('a stop_pending row is confirmed stopped once the readback shows it out of the sequence', async () => {
+    const { db, fam } = await seededFamilies();
+    db.store.enrollments.push(stopPendingRow());
+    const goneFromSequence = new Map([[fernanda.hubspotContactId!, readbackRow({ activelyEnrolledCount: 0, latestSequenceId: null, latestEnrolledAt: null })]]);
+
+    const res = await applyEnrollments(db.prisma, [], { dryRun: false, now: NOW, familyIds: fam.ids, readback: goneFromSequence });
+
+    expect(res.updated).toBe(1);
+    expect(db.store.enrollments[0].status).toBe('stopped');
+    expect(db.spies.enrollmentUpdateMany).toHaveBeenCalledTimes(1);
+    expect(db.spies.enrollmentUpdateMany.mock.calls[0][0].where).toEqual({ id: stopPendingRow().id, status: { in: ['stop_pending'] } });
+  });
+
+  it('a stop_pending row still actively enrolled in the SAME sequence is left alone (still_enrolled, not confirmed)', async () => {
+    const { db, fam } = await seededFamilies();
+    db.store.enrollments.push(stopPendingRow());
+    const stillIn = new Map([[fernanda.hubspotContactId!, readbackRow()]]); // still active in DELL_SEQ
+
+    await applyEnrollments(db.prisma, [], { dryRun: false, now: NOW, familyIds: fam.ids, readback: stillIn });
+
+    expect(db.store.enrollments[0].status).toBe('stop_pending');
+    expect(db.spies.enrollmentUpdateMany).not.toHaveBeenCalled();
+  });
+
+  it('a dry run counts the confirmation but writes nothing', async () => {
+    const { db, fam } = await seededFamilies();
+    db.store.enrollments.push(stopPendingRow());
+    const gone = new Map([[fernanda.hubspotContactId!, readbackRow({ activelyEnrolledCount: 0, latestSequenceId: null })]]);
+
+    const res = await applyEnrollments(db.prisma, [], { dryRun: true, now: NOW, familyIds: fam.ids, readback: gone });
+
+    expect(res.updated).toBe(1);
+    expect(db.store.enrollments[0].status).toBe('stop_pending');
+    expect(db.spies.enrollmentUpdateMany).not.toHaveBeenCalled();
   });
 });
 

@@ -42,7 +42,7 @@ import { hash } from 'node:crypto';
 
 import { LANE_PURPOSES, LANE_PURPOSE_MAP } from '@/lib/gap/taxonomy';
 import { builtSequences, type Top100Manifest, type Top100ManifestAccount, type Top100RosterPerson } from '@/lib/gap/top100/reader';
-import { recordExternalEnrollment, type SuppressionOptions } from '@/lib/gap/sequence/enrollment';
+import { confirmStop, recordExternalEnrollment, type ExternalReadback, type SuppressionOptions } from '@/lib/gap/sequence/enrollment';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -222,6 +222,8 @@ export interface SyncPrisma {
     findMany(args: Args): PromiseLike<Row[]>;
     create(args: Args): PromiseLike<Row>;
     update(args: Args): PromiseLike<Row>;
+    /** SF1: confirmStop's `move()` uses this for the optimistic stop_pending -> stopped transition. */
+    updateMany?(args: Args): PromiseLike<{ count: number }>;
   };
   /** B7: read-only, used to recover attribution. Absent = attribution is skipped, every row stays legacy (unchanged prior behavior). */
   gapAuditEvent?: { findMany(args: Args): PromiseLike<Row[]> };
@@ -754,16 +756,39 @@ export async function applyEnrollments(
   // and says they are no longer actively enrolled anywhere, the run is over
   // for a reason HubSpot does not expose (stopped, legacy_unknown). If they
   // are still actively enrolled but the latest sequence is another one, hold.
+  //
+  // SF1 (Opus adversarial review, 2026-09-24): stop_pending rows are pulled
+  // in too. Before this fix the sweep selected only `status: 'active'`, so a
+  // row already stop_pending (the rig or Casey asked to unenroll) was never
+  // revisited: confirmStop had no caller, the row held the to_email partial
+  // unique forever, and R2 in_flight kept masking R3 reply_pending for that
+  // address.
   const sequenceIds = [...new Set([...Object.keys(opts.familyIds), ...plans.map((p) => p.hubspotSequenceId)])];
   if (sequenceIds.length > 0) {
     const active = await prisma.sequenceEnrollment.findMany({
-      where: { engine: ENGINE, status: 'active', hubspot_sequence_id: { in: sequenceIds } },
+      where: { engine: ENGINE, status: { in: ['active', 'stop_pending'] }, hubspot_sequence_id: { in: sequenceIds } },
     });
     for (const row of active) {
       if (seen.has(row.id)) continue;
       const rb = row.hubspot_contact_id ? opts.readback.get(String(row.hubspot_contact_id)) : undefined;
       if (!rb) continue; // not observed this run; say nothing
       if (inSequence(rb, String(row.hubspot_sequence_id))) continue; // covered by a plan if it was in scope
+
+      if (row.status === 'stop_pending') {
+        // confirmStop refuses (still_enrolled) unless the readback already
+        // shows this contact out of the sequence; the inSequence check above
+        // already guarantees that here.
+        result.updated += 1;
+        if (opts.dryRun) continue;
+        const readback: ExternalReadback = {
+          activelyEnrolledCount: rb.activelyEnrolledCount,
+          latestSequenceId: rb.latestSequenceId,
+          latestEnrolledAt: rb.latestEnrolledAt ? rb.latestEnrolledAt.toISOString() : null,
+        };
+        await confirmStop(prisma, row.id, readback, 'gap-enrollment-sync', opts.now);
+        continue;
+      }
+
       const state = withStickyMarkers(row.external_state, toExternalState(rb));
       if (rb.activelyEnrolledCount > 0) {
         // R2-6: actively enrolled elsewhere; ours may still be running.
