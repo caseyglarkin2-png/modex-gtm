@@ -75,7 +75,18 @@ export function CallMode({ personaId, client = defaultGapApiClient }: { personaI
             source: { kind: 'call', id: sourceId },
             problemFamily: brief.hypothesis.problemFamily,
           }}
-          onSubmitted={() => void load()}
+          onSubmitted={() => {
+            // SHOULD FIX (Opus adversarial review, 2026-09-24): a submit
+            // alone never cleared the form (that only happens on Escape or
+            // an explicit reset), so `sourceId` survived a successful post
+            // and a second genuine call tap reused it, colliding with the
+            // first on the unique (source_kind, source_id) and reading back
+            // as a 409 -- exactly the case the module doc above already
+            // promised was handled ("a new id is issued after every
+            // recorded disposition"), but the code never did it.
+            setSourceId(callSourceId(personaId));
+            void load();
+          }}
           onCleared={() => setSourceId(callSourceId(personaId))}
         />
       ) : (
