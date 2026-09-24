@@ -95,6 +95,22 @@ export interface AssembleArgs {
 
 export type AssembleAccountArgs = Omit<AssembleArgs, 'personaId'>;
 
+/**
+ * 6A-T5: an OPTIONAL identity-resolution fallback for when the exact account
+ * lookup misses. Undefined by default, so every caller that does not pass
+ * one gets byte-identical behavior to before this ticket (an immediate
+ * account_not_found). In practice `args.accountName` should already be
+ * canonical by the time it reaches routing (6A-T4 resolves it upstream at
+ * signal registration); this exists only as a defensive second chance for a
+ * caller that has not gone through that path.
+ */
+export interface AssembleOpts {
+  resolveAccountName?: (
+    prisma: PrismaLike,
+    input: { rawName: string },
+  ) => Promise<{ ok: true; accountName: string } | { ok: false; reason: string }>;
+}
+
 export type AssembleResult = RoutingInputs | { skip: string };
 
 export function isSkip(r: AssembleResult): r is { skip: string } {
@@ -456,15 +472,31 @@ function buildLastDisposition(d: DispositionRow | null): RoutingLastDisposition 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export async function assembleRoutingInputs(prisma: PrismaLike, args: AssembleArgs): Promise<AssembleResult> {
+export async function assembleRoutingInputs(
+  prisma: PrismaLike,
+  args: AssembleArgs,
+  opts: AssembleOpts = {},
+): Promise<AssembleResult> {
   const now = args.now ?? new Date();
   const freshness = args.freshness ?? DEFAULT_FRESHNESS;
   const snapshot = args.hubspotSnapshot ?? null;
 
   try {
-    const account = (await read('account', () =>
+    let account = (await read('account', () =>
       prisma.account.findUnique({ where: { name: args.accountName } }),
     )) as AccountRow | null;
+
+    if (!account && opts.resolveAccountName) {
+      const resolved = await read('account_identity_fallback', () =>
+        opts.resolveAccountName!(prisma, { rawName: args.accountName }),
+      );
+      if (resolved.ok) {
+        account = (await read('account', () =>
+          prisma.account.findUnique({ where: { name: resolved.accountName } }),
+        )) as AccountRow | null;
+      }
+    }
+
     if (!account) return { skip: 'account_not_found' };
 
     const persona = (await read('persona', () =>
