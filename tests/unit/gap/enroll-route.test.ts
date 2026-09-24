@@ -17,7 +17,10 @@ const { mockedAuth, mockedService, mockedAddOne } = vi.hoisted(() => ({
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: { __tag: 'fake-prisma' } }));
-vi.mock('@/lib/gap/enroll/service', () => ({ enrollFromDecision: mockedService }));
+vi.mock('@/lib/gap/enroll/service', () => ({
+  enrollFromDecision: mockedService,
+  SENDING_IDENTITIES: ['casey@yardflow.ai', 'casey@freightroll.com'],
+}));
 vi.mock('@/app/discovery/queue-actions', () => ({ addOne: mockedAddOne }));
 
 const { POST } = await import('@/app/api/gap/enroll/route');

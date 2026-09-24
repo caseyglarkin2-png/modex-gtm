@@ -771,6 +771,32 @@ describe('modex_queue', () => {
     expect(mockedAudit.mock.calls[0][1].payload.wouldBe).toMatchObject({ toEmail: 'jane.doe@acme-logistics.com' });
   });
 
+  it('SF10: an actor who is not a vetted sending identity never becomes owner; falls back to DEFAULT_OWNER', async () => {
+    const prisma = makePrisma({ decision: modexDecision() });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow', actor: 'jordan@freightroll.com' }), deps());
+    expect((r as any).wouldBe.owner).toBe('casey@freightroll.com');
+  });
+
+  it('SF10: an explicit owner still wins over the actor fallback (unchanged)', async () => {
+    const prisma = makePrisma({ decision: modexDecision() });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow', owner: 'casey@yardflow.ai' }), deps());
+    expect((r as any).wouldBe.owner).toBe('casey@yardflow.ai');
+  });
+
+  it('SF10: a decision snapshot whose preferredSender is not a vetted sending identity never becomes sender; falls back to owner', async () => {
+    const decision = decisionRow({
+      inputs_snapshot: snapshot({
+        target: 'modex_queue',
+        persona: { id: 7, email: 'jane.doe@acme-logistics.com', hubspotContactId: null, top100: null },
+        preferredSender: 'not-a-sending-identity@example.com',
+      }),
+    });
+    const prisma = makePrisma({ decision });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow' }), deps());
+    expect((r as any).wouldBe.sender).toBe('casey@freightroll.com');
+    expect((r as any).wouldBe.owner).toBe('casey@freightroll.com');
+  });
+
   it('live materializes the Sequence once, then addOne, then compiles the created item, then enroll() with the item id it returned', async () => {
     const order: string[] = [];
     const d = deps({
@@ -830,6 +856,12 @@ describe('modex_queue', () => {
     });
     expect(compileDeps.critic).toBe(CRITIC_STUB);
     expect(compileDeps.prisma).toBe(prisma);
+    // SF10 (Opus adversarial review, 2026-09-24): addOne's second arg becomes
+    // DraftQueueItem.owner, the ONLY field send-deps.ts reads to resolve the
+    // actual sending Gmail identity. It must be `sender` (casey@yardflow.ai,
+    // this decision's preferredSender), never the administrative `owner`
+    // (casey@freightroll.com, the actor) -- otherwise the queue item would
+    // send from an identity nobody recorded as the sender.
     expect(d.addOne).toHaveBeenCalledWith(
       {
         toEmail: 'jane.doe@acme-logistics.com',
@@ -841,7 +873,7 @@ describe('modex_queue', () => {
         campaignTag: 'gap:H1',
         source: 'casey',
       },
-      'casey@freightroll.com',
+      'casey@yardflow.ai',
     );
     expect(mockedEnroll).toHaveBeenCalledWith(prisma, {
       familyId: 'fam_1',

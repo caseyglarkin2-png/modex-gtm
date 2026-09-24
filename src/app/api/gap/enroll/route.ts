@@ -40,13 +40,13 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { enrollFromDecision, type ActorKind } from '@/lib/gap/enroll/service';
+import { enrollFromDecision, SENDING_IDENTITIES, type ActorKind } from '@/lib/gap/enroll/service';
 import { addOne } from '@/app/discovery/queue-actions';
 
 export const dynamic = 'force-dynamic';
 
-/** The only identities a GAP run may send from or be owned by (N8). Exact, lowercase. */
-export const SENDING_IDENTITIES: readonly string[] = ['casey@yardflow.ai', 'casey@freightroll.com'];
+/** The only identities a GAP run may send from or be owned by (N8). Exact, lowercase. Owned by the service (SF10) so its own owner/sender fallbacks apply the same list. */
+export { SENDING_IDENTITIES };
 
 const BodySchema = z.object({
   decisionId: z.string().min(1).optional(),

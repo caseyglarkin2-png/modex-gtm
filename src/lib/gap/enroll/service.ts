@@ -136,6 +136,15 @@ import type { QueueAddInput } from '@/lib/validations';
 
 export const ENROLL_ACTION: RoutingAction = 'enroll_gap_sequence';
 export const DEFAULT_OWNER = 'casey@freightroll.com';
+/**
+ * The only identities a GAP run may send from or be owned by (N8). Exact,
+ * lowercase. The route validates an EXPLICIT `owner`/`sender` against this
+ * list; SF10 (Opus adversarial review, 2026-09-24) closes the gap that left
+ * -- so the service itself must apply the same list to its own fallbacks
+ * (an authenticated caller's `actor` email, or a routing decision's
+ * `preferredSender` snapshot), neither of which the route validates.
+ */
+export const SENDING_IDENTITIES: readonly string[] = ['casey@yardflow.ai', 'casey@freightroll.com'];
 const SUBJECT_TYPE = 'gap_enroll';
 
 // ---------------------------------------------------------------------------
@@ -609,8 +618,17 @@ export async function enrollFromDecision(
       ? resolveEnrollTarget({ persona: { top100 } } as unknown as RoutingInputs)
       : (snapshotTarget(decision) ?? resolveEnrollTarget({ persona: { top100 } } as unknown as RoutingInputs));
 
-  const owner = (input.owner ?? '').trim() || (input.actor.includes('@') ? input.actor : DEFAULT_OWNER);
-  const sender = (input.sender ?? '').trim() || preferredSenderOf(decision) || owner;
+  // SF10 (Opus adversarial review, 2026-09-24): an authenticated caller's
+  // own email is a real session identity, but it is not necessarily one of
+  // the two identities that can actually send (SENDING_IDENTITIES); trusting
+  // it unvalidated let `owner` (and, through it, `sender`'s fallback) carry
+  // an email nobody can send from, recorded as if it were the sender.
+  const ownerFallback = input.actor.includes('@') ? input.actor : '';
+  const owner = (input.owner ?? '').trim() || (SENDING_IDENTITIES.includes(ownerFallback) ? ownerFallback : DEFAULT_OWNER);
+  // A routing decision's `preferredSender` snapshot is equally unvalidated
+  // (Top100 roster data, not a vetted identity); the same guard applies.
+  const preferredSender = preferredSenderOf(decision) ?? '';
+  const sender = (input.sender ?? '').trim() || (SENDING_IDENTITIES.includes(preferredSender) ? preferredSender : owner);
   const accountName = hypothesis.account_name || persona.account_name;
 
   // B6 (Opus adversarial review, 2026-09-24): an open deal, a booked
@@ -719,6 +737,17 @@ export async function enrollFromDecision(
   if (!materialized.ok) return refuse(materialized.reason, { target });
   const sequenceId = materialized.sequenceId;
 
+  // SF10 (Opus adversarial review, 2026-09-24): DraftQueueItem has no
+  // sender column; `owner` is the ONLY field send-deps.ts reads to resolve
+  // the actual Gmail identity that sends (getRefreshTokenFor(prisma,
+  // item.owner)) and the only one queue-actions.ts's resolveSenderIdentity
+  // reads. Passing the administrative `owner` here, while SequenceEnrollment
+  // below is recorded with a possibly-different `sender`, meant the
+  // enrollment's own record of "who sends" could name an identity that
+  // never actually sent anything. `sender` (which already falls back to
+  // `owner` when no preferred sender applies) is the value that must reach
+  // the queue item, so the recorded identity and the one that actually sends
+  // are the same account.
   const added = await deps.addOne(
     {
       toEmail: wouldBe.toEmail,
@@ -730,7 +759,7 @@ export async function enrollFromDecision(
       campaignTag: `gap:${hypothesis.id}`,
       source: 'casey',
     },
-    owner,
+    sender,
   );
   if (!added.ok || typeof added.id !== 'number') {
     return refuse(`queue_refused:${added.reason ?? 'unknown'}`, { target });
