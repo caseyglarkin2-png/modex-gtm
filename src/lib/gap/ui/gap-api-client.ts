@@ -24,6 +24,7 @@
  */
 
 import type { BidSource, BidType, Channel, ResponseClass } from '../taxonomy';
+import type { LearningReport } from '../learning/query';
 
 // ---------------------------------------------------------------------------
 // Result shape
@@ -413,6 +414,12 @@ export function suggestReply(replyId: string, opts: ClientOptions = {}): Promise
   return postJson<SuggestResult>(suggestUrl(replyId), {}, opts);
 }
 
+export const LEARNING_URL = '/api/gap/learning';
+
+export function getLearningReport(opts: ClientOptions = {}): Promise<ApiResult<LearningReport>> {
+  return request<LearningReport>(LEARNING_URL, { method: 'GET' }, opts);
+}
+
 // ---------------------------------------------------------------------------
 // Client object (what components take as a prop)
 // ---------------------------------------------------------------------------
@@ -423,6 +430,7 @@ export interface GapApiClient {
   postDisposition(body: DispositionBody): Promise<ApiResult<DispositionResult>>;
   postBid(body: BidBody): Promise<ApiResult<BidResult>>;
   suggestReply(replyId: string): Promise<ApiResult<SuggestResult>>;
+  getLearningReport(): Promise<ApiResult<LearningReport>>;
 }
 
 export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
@@ -432,6 +440,7 @@ export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
     postDisposition: (body) => postDisposition(body, opts),
     postBid: (body) => postBid(body, opts),
     suggestReply: (replyId) => suggestReply(replyId, opts),
+    getLearningReport: () => getLearningReport(opts),
   };
 }
 
