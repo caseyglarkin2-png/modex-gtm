@@ -773,6 +773,38 @@ describe('applyEnrollments', () => {
     expect(db.spies.enrollmentCreate).not.toHaveBeenCalled();
     expect(db.spies.enrollmentUpdate).not.toHaveBeenCalled();
   });
+
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Before this fix, the
+   * created row's account_name was the manifest's raw display name
+   * (plan.accountName), not the resolved Account.name. SequenceEnrollment.
+   * account_name has a foreign key to Account.name, so any divergence
+   * (here: the real account is named differently from the manifest, matched
+   * instead by hubspot_company_id, exactly the case upsertFamilies already
+   * handles for the family's own account_name) would throw a P2003 straight
+   * through the one try/catch that only expects P2002, ABORTING THE WHOLE
+   * RUN, not just this one row. Mutate the fix back to plan.accountName and
+   * this goes RED (asserts the wrong name; in a real Postgres it would throw).
+   */
+  it('SHOULD FIX: the created row uses the RESOLVED Account.name, not the manifest display name', async () => {
+    // The real account is named differently from the manifest ("Dell"); only
+    // hubspot_company_id matches, exactly like resolveAccountName's OR match.
+    const db = makePrisma({ accounts: [{ name: 'Dell Technologies, Inc.', hubspot_company_id: '54406388074' }] });
+    const fam = await upsert(db.prisma, planFamilies(manifest, OPTS));
+    expect(fam.accountNames[DELL_SEQ]).toBe('Dell Technologies, Inc.');
+    const { plans } = planEnrollments([DELL], rosters, dellReadback(), { now: NOW, enrolledBy: 'sync' });
+
+    await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, accountNames: fam.accountNames, readback: dellReadback() });
+
+    const row = db.spies.enrollmentCreate.mock.calls[0][0];
+    expect(row.account_name).toBe('Dell Technologies, Inc.');
+  });
+
+  it('SHOULD FIX: no accountNames map falls back to the manifest name (prior behavior), not a thrown error', async () => {
+    const { db, fam, plans, readback } = await planned();
+    await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback });
+    expect(db.spies.enrollmentCreate.mock.calls[0][0].account_name).toBe('Dell');
+  });
 });
 
 // ---------------------------------------------------------------------------

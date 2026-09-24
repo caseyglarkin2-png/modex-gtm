@@ -97,6 +97,14 @@ export interface FamilyUpsertResult {
   skipped: Array<{ key: string; reason: FamilySkipReason }>;
   /** hubspot_sequence_id -> ids; null when a dry run would have created the family. */
   ids: Record<string, FamilyIds | null>;
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24): hubspot_sequence_id ->
+   * the RESOLVED `Account.name` (via resolveAccountName, the same read this
+   * function already uses for the family's own `account_name`). Every plan
+   * that reaches here has a resolved family, so this is always populated
+   * for a key present in `ids`.
+   */
+  accountNames: Record<string, string>;
 }
 
 export interface ContactReadback {
@@ -183,7 +191,7 @@ export interface ApplyResult {
 
 export interface SyncReport {
   dryRun: boolean;
-  families: Omit<FamilyUpsertResult, 'ids'>;
+  families: Omit<FamilyUpsertResult, 'ids' | 'accountNames'>;
   contactsRead: number;
   enrollments: ApplyResult;
   reported: Record<ReportedReason, number>;
@@ -449,7 +457,7 @@ export async function upsertFamilies(
   plans: FamilyPlan[],
   opts: { dryRun: boolean; now: Date },
 ): Promise<FamilyUpsertResult> {
-  const result: FamilyUpsertResult = { created: 0, existing: 0, skipped: [], ids: {} };
+  const result: FamilyUpsertResult = { created: 0, existing: 0, skipped: [], ids: {}, accountNames: {} };
 
   for (const plan of plans) {
     const accountName = await resolveAccountName(prisma, plan);
@@ -457,6 +465,7 @@ export async function upsertFamilies(
       result.skipped.push({ key: plan.key, reason: 'account_not_found' });
       continue;
     }
+    result.accountNames[plan.hubspotSequenceId] = accountName;
 
     let family = await prisma.sequenceFamily.findUnique({ where: { hubspot_sequence_id: plan.hubspotSequenceId } });
     if (family) {
@@ -634,6 +643,17 @@ export async function applyEnrollments(
     /** B7: when omitted, every new row stays legacy (prior behavior). */
     attribution?: AttributionFinder;
     suppression?: SuppressionOptions;
+    /**
+     * SHOULD FIX (Opus adversarial review, 2026-09-24): hubspot_sequence_id
+     * -> the RESOLVED Account.name (upsertFamilies's own FamilyUpsertResult.
+     * accountNames). SequenceEnrollment.account_name has a foreign key to
+     * Account.name; the manifest's own display name (plan.accountName) can
+     * differ (case, punctuation) and previously threw P2003 straight through
+     * the one try/catch that only expects P2002, aborting the whole run.
+     * When omitted, or when a plan's sequence id has no entry, falls back to
+     * plan.accountName (prior behavior) rather than refusing to write.
+     */
+    accountNames?: Record<string, string>;
   },
 ): Promise<ApplyResult> {
   const result: ApplyResult = { created: 0, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [], suppressedButEnrolled: [] };
@@ -649,6 +669,9 @@ export async function applyEnrollments(
         result.held.push({ id: plan.id, reason: 'family_unresolved' });
         continue;
       }
+      // SHOULD FIX (Opus adversarial review, 2026-09-24): write the RESOLVED
+      // account name, not the manifest's raw display name (see the opts doc above).
+      const resolvedAccountName = opts.accountNames?.[plan.hubspotSequenceId] ?? plan.accountName;
       if (opts.dryRun) {
         result.created += 1;
         continue;
@@ -667,7 +690,7 @@ export async function applyEnrollments(
             familyId: ids!.familyId,
             versionId: attribution.versionId,
             toEmail: plan.toEmail,
-            accountName: plan.accountName,
+            accountName: resolvedAccountName,
             hubspotContactId: plan.hubspotContactId,
             hubspotSequenceId: plan.hubspotSequenceId,
             personaId: attribution.personaId,
@@ -706,7 +729,7 @@ export async function applyEnrollments(
             engine: ENGINE,
             family_id: ids!.familyId,
             sequence_version_id: ids!.versionId,
-            account_name: plan.accountName,
+            account_name: resolvedAccountName,
             to_email: plan.toEmail,
             hubspot_contact_id: plan.hubspotContactId,
             hubspot_sequence_id: plan.hubspotSequenceId,
@@ -872,6 +895,7 @@ export async function runEnrollmentSync(
     dryRun: opts.dryRun,
     now: opts.now,
     familyIds: families.ids,
+    accountNames: families.accountNames,
     readback,
     attribution,
     suppression: deps.suppression,
