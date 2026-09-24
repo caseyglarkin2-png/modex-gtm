@@ -562,6 +562,9 @@ Executing `docs/GAP_RUNTIME_HANDOFF.md` end to end on branch `feat/gap-os-runtim
 
 **6C DONE** for this phase's scope: Gmail (`gmail_direct`/`gmail_draft`, 6C-T0/T1) and HubSpot sequence (6C-T2) adapters both complete, both dark, both tested with fakes only. Real live Sequence CRUD stays an owner-gated future step (the browser rig remains the operational publisher until then, per the addendum). Full `tests/unit/gap`: 106 files, 2376 tests, 0 failures; `npx tsc --noEmit` clean throughout.
 
+### 6D: generic campaign reconciliation (in progress)
+- 6D-T1 -- resolved the `enrollment_id` mutability question named in section 2: `conversation_dispositions.enrollment_id` now freezes the FIRST time it is set to a non-null value (hand SQL `prisma/sql/2026-09-24-gap-reconcile.sql` + rollback, new trigger `GAP_DISPOSITION_ENROLLMENT_FROZEN`), independent of `human_confirmed` -- attribution is a fact about which send produced a reply, decided once at reconciliation time, never a judgment call `human_confirmed` governs. A row born with it already set is frozen from birth too; writing the SAME value again is a no-op, not a refused change. `verify-triggers.ts` extended to 33 guards. Confirmed RED (reattribution accepted) before applying the SQL, GREEN (33/33) after.
+
 **6A scoping note, recorded for auditability:** the "reply address matcher" wiring named in the original ticket text was deliberately left out. `src/lib/gap/replies/list.ts` resolves inbound replies to a PERSONA by exact email match (already anchored to a real enrollment/persona row, SF8's dedup-by-lowest-id already governs collisions), a different identity axis than company-name-to-account. Folding a company-name resolver into it would be a premature abstraction with no concrete caller today; the acceptance case named in the runtime handoff (Pounce triggers vs `accounts.name`) is fully covered by 6A-T4.
 
 ## 12. Migration, backfill and rollback

@@ -926,6 +926,37 @@ const guards: Guard[] = [
       await expectRefused(tx, g, 'Key (normalized_alias)', aliasInsertSql(nid('alias')), 'same normalized_alias twice, even for a different source');
     },
   },
+  {
+    name: 'GAP_DISPOSITION_ENROLLMENT_FROZEN (6D)',
+    async run(tx, account) {
+      const g = this.name;
+      const T = 'GAP_DISPOSITION_ENROLLMENT_FROZEN';
+      const hyp = await insertHypothesis(tx, account);
+      const fam = await insertFamily(tx);
+      const ver = await insertVersion(tx, fam);
+      const enrA = await insertEnrollment(tx, fam, ver, account);
+      const enrB = await insertEnrollment(tx, fam, ver, account);
+
+      // A row born with enrollment_id unset, then set for the first time: allowed.
+      const unset = await insertDisposition(tx, hyp, account);
+      await expectOk(tx, g, `UPDATE conversation_dispositions SET enrollment_id = ${q(enrA)} WHERE id = ${q(unset)}`, 'first attribution');
+      await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET enrollment_id = ${q(enrB)} WHERE id = ${q(unset)}`, 'reattribution to a different enrollment');
+      await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET enrollment_id = NULL WHERE id = ${q(unset)}`, 'clearing an already-set attribution');
+      await expectOk(tx, g, `UPDATE conversation_dispositions SET enrollment_id = ${q(enrA)} WHERE id = ${q(unset)}`, 'writing the SAME value again is a no-op, not a change');
+
+      // A row born WITH enrollment_id already set: also frozen from birth.
+      const bornSet = await insertDisposition(tx, hyp, account, { enrollment_id: q(enrA) });
+      await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET enrollment_id = ${q(enrB)} WHERE id = ${q(bornSet)}`, 'a row born with enrollment_id set cannot be reattributed');
+
+      // Independent of human_confirmed: an UNCONFIRMED row's attribution is
+      // just as frozen as a confirmed one (attribution is a fact, not a
+      // judgment call the human_confirmed gate governs).
+      const other = await scalar<string>(tx, `SELECT human_confirmed FROM conversation_dispositions WHERE id = ${q(unset)}`);
+      if (other !== 'false' && String(other) !== 'false') {
+        throw new GuardFailure(g, `fixture assumption broken: expected an unconfirmed row, got human_confirmed=${other}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
