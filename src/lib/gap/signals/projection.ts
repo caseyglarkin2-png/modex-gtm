@@ -432,9 +432,22 @@ export function fromPicCitation(c: PicCitationRow, ctx: ProjectionContext): Proj
       hubspotCompanyId: null,
       personaId: null,
       sourceKind: 'pic_citation',
-      sourceId: `${c.slug.trim()}:${refHash}`,
+      // SF7 (Opus adversarial review, 2026-09-24): the id used to dedupe was
+      // hashed from `ref` alone, so two DIFFERENT PIC rows citing the SAME
+      // ref (the same call, cited to support two different problems)
+      // collided; the registry's idempotent (source_kind, source_id) upsert
+      // then silently kept whichever row registered first, so the second
+      // row's hypothesis linked to a fact titled with the first row's
+      // inference. rowIndex scopes the id to the row that cites it; the
+      // same row re-citing the same ref still dedupes.
+      sourceId: `${c.slug.trim()}:${c.rowIndex}:${refHash}`,
       type,
-      title: clip(c.problem, TITLE_MAX),
+      // SF7: the title must be the EVIDENCE (what the ref actually says),
+      // never `c.problem` (the sheet's seller-inferred problem category).
+      // `hypothesis/build.ts` assembles the auto-generated observation from
+      // signal titles VERBATIM, so a title sourced from the seller's own
+      // inference would let that inference pose as an observed fact.
+      title: verbatim ? clip(verbatim, TITLE_MAX) : clip(ref, TITLE_MAX),
       summary: verbatimIsEvidence ? null : verbatim,
       sourceType: picSourceType(ref),
       evidenceUrl: isHttpRef(ref) ? ref : null,
@@ -449,6 +462,10 @@ export function fromPicCitation(c: PicCitationRow, ctx: ProjectionContext): Proj
         speaker: trimOrNull(c.speaker),
         rowIndex: c.rowIndex,
         picConfidence: c.confidence,
+        // The seller's inferred problem, kept for traceability only: never
+        // read as title, summary or evidenceText, so it can never pose as
+        // the buyer's own words or the cited document's own text.
+        picProblem: c.problem.trim(),
       },
       registeredBy: ctx.registeredBy,
     },
