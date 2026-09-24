@@ -541,6 +541,9 @@ Executing `docs/GAP_RUNTIME_HANDOFF.md` end to end on branch `feat/gap-os-runtim
 
 **6A DONE.** All acceptance criteria from docs/GAP_RUNTIME_HANDOFF.md section 3 met: the Niagara Bottling case resolves, an ambiguous collision refuses, a genuinely unknown company refuses `unresolved_company` and never creates an Account. Full `tests/unit/gap`: 101 files, 2348 tests, 0 failures; `npx tsc --noEmit` clean throughout.
 
+### 6B: multi-engine execution contract (in progress)
+- 6B-T1 -- SF16 remainder closed: `tests/unit/gap/gap-noninterference.test.ts` pins the exact `draftQueueItem.create` payload `addOne` (`src/app/discovery/queue-actions.ts`) produces for a plain, non-GAP `QueueAddInput` -- every field, by full-object equality, not just the two fields the existing `tests/unit/queue-actions.test.ts` checked. `approveBatch`'s non-GAP shape was already comprehensively pinned by `tests/unit/gap/approve-batch-guard.test.ts`; this file's approveBatch case is a light corroborating check. Mutation-tested: adding a stray `sequence_version_id` field to `addOne`'s create call (simulating exactly the kind of accidental GAP-field leak SF16 exists to catch) breaks the pin with a field-level diff naming it, restored.
+
 **6A scoping note, recorded for auditability:** the "reply address matcher" wiring named in the original ticket text was deliberately left out. `src/lib/gap/replies/list.ts` resolves inbound replies to a PERSONA by exact email match (already anchored to a real enrollment/persona row, SF8's dedup-by-lowest-id already governs collisions), a different identity axis than company-name-to-account. Folding a company-name resolver into it would be a premature abstraction with no concrete caller today; the acceptance case named in the runtime handoff (Pounce triggers vs `accounts.name`) is fully covered by 6A-T4.
 
 ## 12. Migration, backfill and rollback
