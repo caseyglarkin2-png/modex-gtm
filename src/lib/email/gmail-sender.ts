@@ -300,3 +300,77 @@ export function isGmailSenderConfigured(): boolean {
   const { clientId, clientSecret, refreshToken } = getGmailConfig();
   return !!(clientId && clientSecret && refreshToken);
 }
+
+/**
+ * GAP Prospecting OS, Sprint 6C: create a Gmail DRAFT (never sent). A draft
+ * is not a delivery -- the owner addendum (2026-09-24) is explicit that
+ * drafting and sending are distinct execution states, so this function only
+ * ever calls `drafts.create`, never `messages.send`.
+ *
+ * Checked: suppression (assertSuppressionPermitsSend) -- a draft sitting in
+ * the mailbox addressed to a suppressed contact is itself the mistake this
+ * guards against, even though nothing left the building yet. NOT checked:
+ * the autonomy kill switch or the daily send cap, because a draft consumes
+ * neither the mailbox's live-send budget nor reaches a human's inbox; a
+ * human reviews and sends it deliberately (the same reasoning the
+ * addendum gives for keeping the browser rig as the operational publisher
+ * until user-level auth is intentionally added).
+ */
+export async function createGmailDraft(
+  payload: GmailSendPayload,
+): Promise<{ provider: 'gmail'; draftId: string; messageId: string | null; threadId: string | null }> {
+  await assertSuppressionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose);
+
+  const userEmail = payload.sender?.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = await getAccessToken(payload.sender?.refreshToken);
+  const raw = base64Url(buildMimeMessage(payload));
+
+  const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/drafts`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: payload.threadId ? { raw, threadId: payload.threadId } : { raw } }),
+  });
+
+  if (!res.ok) {
+    const errBody = await res.text();
+    throw new Error(`Gmail draft create failed (${res.status}): ${errBody.slice(0, 200)}`);
+  }
+
+  const result = (await res.json()) as { id?: string; message?: { id?: string; threadId?: string } };
+  if (!result.id) throw new Error('Gmail draft create returned no draft id');
+  return { provider: 'gmail', draftId: result.id, messageId: result.message?.id ?? null, threadId: result.message?.threadId ?? null };
+}
+
+/**
+ * GAP Prospecting OS, Sprint 6C: send a PREVIOUSLY CREATED draft. This is
+ * the one moment a draft becomes a delivery, so it runs the SAME gates a
+ * direct send does (autonomy, suppression -- rechecked fresh against `to`/
+ * `cc`/`bcc`, since a recipient can unsubscribe in the time between drafting
+ * and sending -- and the daily cap). Unlike drafting, this is the real thing.
+ */
+export async function sendGmailDraft(
+  draftId: string,
+  recipients: { to: string; cc?: string[]; bcc?: string },
+  opts: { userEmail?: string; sender?: { refreshToken: string; userEmail: string }; purpose?: SendPurpose } = {},
+): Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }> {
+  await assertAutonomyPermitsSend(opts.purpose);
+  await assertSuppressionPermitsSend(recipients, opts.purpose);
+  await assertUnderDailyCap();
+
+  const userEmail = opts.sender?.userEmail ?? opts.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = await getAccessToken(opts.sender?.refreshToken);
+
+  const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/drafts/send`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: draftId }),
+  });
+
+  if (!res.ok) {
+    const errBody = await res.text();
+    throw new Error(`Gmail draft send failed (${res.status}): ${errBody.slice(0, 200)}`);
+  }
+
+  const result = (await res.json()) as { id?: string; threadId?: string };
+  return { provider: 'gmail', id: result.id ?? null, threadId: result.threadId ?? null };
+}
