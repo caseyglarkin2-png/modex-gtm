@@ -833,8 +833,10 @@ describe('modex_queue', () => {
     expect(mockedMaterialize).toHaveBeenCalledTimes(1);
     // R3-3: materialize is told which hypothesis the rows must be bound to.
     expect(mockedMaterialize).toHaveBeenCalledWith(prisma, { versionId: 'v1', hypothesisId: 'H1', compileIds: ['c0', 'c1'] }, 'casey@freightroll.com', expect.objectContaining({ owner: 'casey@freightroll.com' }));
-    // The created item carries the Sequence id (the runtime's first guard); a draft-only stamp right after addOne.
-    expect(prisma.draftQueueItem.updateMany).toHaveBeenCalledWith({ where: { id: 4242, status: 'draft' }, data: { sequence_id: 77 } });
+    // The created item carries the Sequence id (the runtime's first guard) AND
+    // sequence_version_id (SF11: gates it into queue-actions.ts's gapCompileGuard
+    // from this instant, before compile() runs), a draft-only stamp right after addOne.
+    expect(prisma.draftQueueItem.updateMany).toHaveBeenCalledWith({ where: { id: 4242, status: 'draft' }, data: { sequence_id: 77, sequence_version_id: 'v1' } });
     // The per-item compile is keyed to the created item and judges the RENDERED copy.
     expect(mockedCompile).toHaveBeenCalledTimes(1);
     const [compileInput, compileDeps] = mockedCompile.mock.calls[0];
@@ -893,6 +895,19 @@ describe('modex_queue', () => {
     // and enroll() own their inserts, and enroll() owns the enroll.live audit row, so the service adds none.
     expect(writes(prisma)).toEqual(['draftQueueItem.updateManyx1']);
     expect(mockedAudit.mock.calls.map((c) => c[1].kind)).toEqual([]);
+  });
+
+  it('SF11: the item is stamped with sequence_version_id BEFORE compile() is invoked, so a request that dies mid-compile (no JS exception, so R3-12 never runs) still leaves the item gated, never gate-invisible to queue-actions.ts\'s gapCompileGuard', async () => {
+    let stampedBeforeCompileRan = false;
+    mockedCompile.mockImplementation(async () => {
+      stampedBeforeCompileRan = prisma.draftQueueItem.updateMany.mock.calls.some(
+        (c: any) => c[0]?.data?.sequence_version_id === 'v1',
+      );
+      return ITEM_COMPILE_PASS;
+    });
+    const prisma = makePrisma({ decision: modexDecision() });
+    await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(stampedBeforeCompileRan).toBe(true);
   });
 
   it('N9: live refuses compiler_disabled while GAP_MESSAGE_COMPILER_ENABLED is off, before materialize and addOne; shadow is unaffected', async () => {

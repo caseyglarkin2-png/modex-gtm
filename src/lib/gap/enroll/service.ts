@@ -780,8 +780,23 @@ export async function enrollFromDecision(
 
   // An arrow const (not a hoisted declaration) so the null-narrowing of hypothesis, persona and target above carries in.
   const afterAddOne = async (): Promise<EnrollServiceResult> => {
-  // addOne's input has no sequence_id; stamp it before anything else can act on the item.
-  await prisma.draftQueueItem.updateMany({ where: { id: draftItemId, status: 'draft' }, data: { sequence_id: sequenceId } });
+  // addOne's input has no sequence_id or sequence_version_id; stamp both
+  // before anything else can act on the item. SF11 (Opus adversarial
+  // review, 2026-09-24): queue-actions.ts's gapCompileGuard (the ONE guard
+  // every send-eligible path runs) only recognizes an item as GAP-gated when
+  // sequence_version_id is non-null; an item without it is "returned
+  // untouched" -- approvable through the ordinary, non-GAP send flow with NO
+  // compile check at all. enroll() only stamps sequence_version_id at the
+  // very end, after compile() and its critic call succeed, so a request that
+  // times out or is killed mid-compile (no JS exception for R3-12's catch to
+  // run) left the item gate-invisible: an uncompiled, un-critic-reviewed
+  // draft, sitting in status 'draft', sendable through the normal queue.
+  // Stamping sequence_version_id HERE, before compile runs, makes the item
+  // gated from the instant it exists: any crash before enroll() completes
+  // leaves it REFUSED by the compile guard (no passing compile row yet),
+  // never silently approvable. enroll() re-stamps the same value later
+  // (sequence/enrollment.ts); both writes agree, so the repeat is a no-op.
+  await prisma.draftQueueItem.updateMany({ where: { id: draftItemId, status: 'draft' }, data: { sequence_id: sequenceId, sequence_version_id: version.id } });
 
   // Per-item compile on the RENDERED, MARKED copy, keyed to the item so the approveBatch guard finds an item-level row.
   const signals = Array.isArray(hypothesis.signals)
