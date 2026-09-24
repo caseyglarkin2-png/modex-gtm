@@ -1,0 +1,175 @@
+{
+  "slug": "honda",
+  "displayName": "Honda North America",
+  "vertical": "B - Automotive",
+  "wave": 2,
+  "tier": "B",
+  "wedge": "Full Suite",
+  "evidenceDepth": "MENTIONED",
+  "costOfInaction": {
+    "lowUsd": 182390,
+    "highUsd": 1732706,
+    "highestLeverageAssumption": "How many plants come into scope. Our engine puts the cost of delay at about $7,600 per facility per month, so the two sites the workbook scopes for year one is roughly $0.18M a year and the full nineteen facility model is roughly $1.73M a year. The much larger $126.5M modelled network value rests on roughly $3,600 of margin per shipment, which is high because vehicles, engines and sequenced parts are high value per load, and it is the single assumption to test before anyone quotes it. Neither figure includes line side shortage cost or premium freight, which would dominate a real automotive case and which no Honda site has given us."
+  },
+  "opener": "We mapped fourteen of your US sites. Greensburg holds about six hundred trailer spots against seventy doors on fourteen hundred and eighty acres, all through one gate. Anna runs a hundred and ten doors with no rail at all, and the battery case line is landing on it now. Eleven of the fourteen have no second mode of any kind. You build ninety nine percent of what you sell here, so we wanted to ask where the ceiling on that actually sits.",
+  "topDiscoveryQuestions": [
+    "At Greensburg, when a sequenced trailer is needed at a door, how does the spotter learn which trailer it is and where it is standing?",
+    "If you compared gate to dock time at Anna and at Lincoln this month, could you, and what exactly would you be comparing?",
+    "When the Ohio plants went to mixed production, what changed about how inbound arrives at the gate, and who owned that part of the retool?"
+  ],
+  "contradictions": [
+    {
+      "field": "wedge",
+      "workbookSays": "RTLS. Multi-plant Ohio and Alabama footprint with the same process culture as Toyota, and the same build-versus-buy risk.",
+      "ourRecordSays": "Twelve of the fourteen audited sites already have a controlled truck gate and ten of those staff a booth, so there is a manual arrival step at nearly every site that a location layer does not touch. The gap is not where a trailer is, it is that no two plants record an arrival the same way, so the company that reports everything else at network level cannot report this one.",
+      "resolution": "Override the wedge to Full Suite and lead with the arrival record. Keep the workbook's framing warning, because the build-versus-buy instinct is correct and the answer is a measured single plant result they could copy internally rather than a network sale.",
+      "citation": "for-pack:honda.json"
+    },
+    {
+      "field": "tam_tier",
+      "workbookSays": "Tier B.",
+      "ourRecordSays": "The account is split across three HubSpot company records with different tiers on each: honda.com at tier C with 8 contacts, hna.honda.com at tier A with 3 contacts, and haci.honda.com at tier A whose contacts are Honda Aircraft and are excluded from this committee. The dossier reads tamTier A off the second record. No tier here describes the account, because no record is the account.",
+      "resolution": "Do not quote a tier. Merge the two automotive records before any list build, and treat the aircraft record as a different company. Trust the workbook's B as a working estimate and note that neither it nor the CRM is evidence of engagement, of which there is none.",
+      "citation": "hubspot:portal-3819073"
+    },
+    {
+      "field": "sites_in_scope_y1",
+      "workbookSays": "2 sites in scope for year one, Wave 2, Tier B, warm path score 1.",
+      "ourRecordSays": "Three counts are in circulation and they disagree. The site audit covers 14 US sites. The dossier and the pack put the US footprint at about 21 freight facilities and North America at about 22. The prize model runs 19 facilities. Honda operates roughly 100 plants in more than 30 countries globally.",
+      "resolution": "Open on the fourteen site audit because that is the number we actually looked at. The dollars are built on nineteen facilities, so say nineteen when quoting them. Never quote the hundred, which is a global manufacturing count and not a freight footprint.",
+      "citation": "for-pack:honda.json"
+    }
+  ],
+  "gradedAt": null,
+  "grade": null,
+  "rows": [
+    {
+      "problem": "Greensburg sits on 1,480 acres with about 600 trailer spots against 70 dock doors, and every one of those trailers comes through a single managed truck gate",
+      "rootCause": "The plant was built greenfield with room to grow, so the pavement was cheap and the access was not. Just-in-time sequencing then filled the pavement, because parts held on trailers are parts that did not need a building. The result is more than eight trailer spots for every door, the widest ratio anywhere in the audited sample, funnelled through one entrance running around the clock.",
+      "businessImpact": "About $72,000 a year of spotter time at Greensburg on our modelled archetype rather than measured at this plant, and the archetype plainly understates it, because it assumes ordinary yards rather than 1,480 acres cycling six hundred trailers through one gate",
+      "derivation": {
+        "formula": "2 spotters x 3 shifts x $60,000/FTE = $360,000 x 20% efficiency gain = $72,000/yr at one site",
+        "assumptions": [
+          {
+            "claim": "Greensburg runs 2 spotters per shift across 3 shifts",
+            "basis": "our ROI model with-yms default. A 24 hour plant with roughly 380 trailers standing against 600 spots runs more than that, so this is a floor we would rather have corrected than guessed upward",
+            "askOnCall": true
+          },
+          {
+            "claim": "the 20% spotter gain applies to a sequenced assembly plant",
+            "basis": "the gain is our model factor, calibrated on distribution yards where a late trailer is a late delivery, not on a plant where a mis-sequenced trailer stops a line",
+            "askOnCall": true
+          }
+        ],
+        "anchor": {
+          "kind": "our-roi-model",
+          "ref": "Flow-State-/flow-state-site/src/lib/roi/csvModel.ts DEFAULT_CSV_ROI_INPUTS.withYms spotter inputs",
+          "note": "The 1,480 acres, 70 doors, 600 spots, 380 trailers standing and the single truck gate come from our own site audit. The dollars are the archetype's, and at this site they understate it."
+        }
+      },
+      "personalImpact": "The Greensburg plant logistics manager holds the arrival order for a 24 hour Civic and CR-V plant in people's heads and cannot hand it over cleanly at shift change",
+      "buyingCenter": "user",
+      "buyerLanguage": {
+        "text": "Greensburg has plenty of room, the yards are not the constraint",
+        "predicted": true
+      },
+      "howWeDetect": "At Greensburg, when a sequenced trailer is needed at a door, how does the spotter learn which trailer it is and where it is standing?",
+      "whatANoMeans": "If Greensburg already sequences trailers against the line electronically, we are late at that plant and the argument moves to Anna and to Lincoln",
+      "confidence": "MODERATE",
+      "citations": [
+        {
+          "ref": "for-pack:honda.json 06-honda-manufacturing-of-indiana-hmin-greensburg-in yardMetrics",
+          "at": "2026-06-19"
+        },
+        {
+          "ref": "dossier:honda flagshipYards",
+          "at": "2026-08-21"
+        }
+      ],
+      "accountSpecific": true,
+      "incumbentContext": null,
+      "lastVerified": "2026-08-23"
+    },
+    {
+      "problem": "Anna runs 110 dock doors and about 420 trailer spots on 690 acres with no rail at all, so every engine and every battery case leaves on a trailer through one of three gates",
+      "rootCause": "The plant was sited and expanded as a machining asset, and rail was never part of the design because engines ship in truckload quantities to plants that are themselves truck-fed. That was sound while the product mix was stable. The megacasting line for battery cases now adds heavy new inbound and outbound flow to a site with no second mode to relieve it.",
+      "businessImpact": "UNKNOWN in dollars until we see what share of the gate traffic is the new battery case flow rather than engines, and that split decides whether this is a growing problem or a settled one",
+      "personalImpact": "The Anna plant manager is absorbing a new product line into a site where the gates, and not the machining line, set what actually ships",
+      "buyingCenter": "user",
+      "buyerLanguage": {
+        "text": "Anna has always run truck only, that is how the plant works",
+        "predicted": true
+      },
+      "howWeDetect": "As the battery case line comes up at Anna, how many more trailers a day does that put through the gates, and who is tracking that number?",
+      "whatANoMeans": "If the battery case flow runs on a dedicated closed loop between named plants with its own scheduling, this row closes and the case rests on Greensburg and Lincoln",
+      "confidence": "MODERATE",
+      "citations": [
+        {
+          "ref": "for-pack:honda.json 04-anna-engine-plant yardMetrics, railServed false",
+          "at": "2026-06-19"
+        },
+        {
+          "ref": "dossier:honda surprisingFindings, first of six 6,000-ton megacasting machines for EV battery cases",
+          "at": "2026-08-21"
+        }
+      ],
+      "accountSpecific": true,
+      "incumbentContext": null,
+      "lastVerified": "2026-08-23"
+    },
+    {
+      "problem": "Lincoln puts engine and vehicle assembly inside one 900 acre complex behind three gates, with 120 dock doors and about 380 trailer spots and no rail",
+      "rootCause": "Combining engine and vehicle assembly on one site shortened the internal move and made the site the largest in the audited sample by dock count. It also means one arrival flow now feeds two production lines with different sequences and different tolerances, and nothing at the gate distinguishes which line a trailer belongs to.",
+      "businessImpact": "UNKNOWN in dollars, and the reason it matters is structural rather than financial. A single gate backup here starves two lines at once, and there is no rail to absorb any of it",
+      "personalImpact": "The Lincoln plant logistics lead answers for two production lines fed through the same gates and has one set of eyes for both",
+      "buyingCenter": "champion",
+      "buyerLanguage": {
+        "text": "Lincoln is our biggest plant and it has run this way for years",
+        "predicted": true
+      },
+      "howWeDetect": "At Lincoln, when a trailer arrives, what tells the gate whether it is engine inbound or vehicle inbound, and how is that recorded?",
+      "whatANoMeans": "If the two flows are physically separated at Lincoln with their own entrances and their own records, the row closes and we should be asking about the parts network instead. Graded from our own files only; the only source we hold for this is internal, so it needs an outside source before it is stated as established.",
+      "confidence": "MODERATE",
+      "citations": [
+        {
+          "ref": "for-pack:honda.json 05-honda-manufacturing-of-alabama yardMetrics, featuredSiteId",
+          "at": "2026-06-19"
+        },
+        {
+          "ref": "dossier:honda flagshipYards",
+          "at": "2026-08-21"
+        }
+      ],
+      "accountSpecific": true,
+      "incumbentContext": null,
+      "lastVerified": "2026-08-23"
+    },
+    {
+      "problem": "The Ohio plants are being repointed at flexible mixed production, so more model variants now run down the same lines through the same gate footprint that was sized for the old mix",
+      "rootCause": "The EV programme was cancelled in March 2026 and the billion dollar Ohio retool was rebranded around flexible production. Flexibility was engineered inside the buildings, where the geometry is fixed and the data already exists. Every additional variant multiplies the distinct sequenced part numbers arriving at a gate whose capacity did not change.",
+      "businessImpact": "UNKNOWN in dollars, and it sets the framing rather than the value. Flexible production is the stated goal and the gates feeding it are the one part of the flexibility that was never in the retool scope",
+      "personalImpact": "The supply chain planning unit manager owns a sequencing plan that now has more variants in it and the same number of gates to deliver it through",
+      "buyingCenter": "champion",
+      "buyerLanguage": {
+        "text": "we just spent over a billion retooling for flexible production, why is the yards a separate problem",
+        "predicted": true
+      },
+      "howWeDetect": "When the Ohio plants went to mixed production, what changed about how inbound arrives at the gate, and who owned that part of the retool?",
+      "whatANoMeans": "If the retool did cover inbound arrival and the gates were rebuilt with the lines, we are late in Ohio and the argument moves to Lincoln and to the parts network",
+      "confidence": "STRONG",
+      "citations": [
+        {
+          "ref": "https://hondanews.com/en-US/releases/beyond-evs-honda-ev-hub-in-ohio-reimagines-approach-to-manufacturing",
+          "at": "2025-11"
+        },
+        {
+          "ref": "https://www.wardsauto.com/news/honda-cancels-0-series-evs-ohio/814632/",
+          "at": "2026-03"
+        }
+      ],
+      "accountSpecific": true,
+      "incumbentContext": null,
+      "lastVerified": "2026-08-23"
+    }
+  ]
+}

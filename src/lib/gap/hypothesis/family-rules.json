@@ -1,0 +1,121 @@
+{
+  "network_standardization": {
+    "cues": [
+      "acquisition",
+      "acquired",
+      "integration",
+      "standardize",
+      "standardization",
+      "rollout",
+      "network",
+      "across facilities",
+      "across sites",
+      "local process",
+      "point solution",
+      "tribal knowledge",
+      "inconsistent",
+      "bespoke",
+      "operating variation"
+    ]
+  },
+  "hidden_capacity": {
+    "cues": [
+      "dock doors",
+      "trailer spots",
+      "gate",
+      "sequenced",
+      "just-in-time",
+      "late trailer",
+      "line starves",
+      "capacity",
+      "production capacity",
+      "turns",
+      "overtime",
+      "spotting",
+      "handoff",
+      "waiting at the gate",
+      "runs late"
+    ]
+  },
+  "yard_state_integrity": {
+    "cues": [
+      "rfid",
+      "tag",
+      "where a trailer is",
+      "trailer search",
+      "yard state",
+      "visibility",
+      "yard check",
+      "stale",
+      "sensor",
+      "manual update",
+      "wrong move",
+      "dock starvation",
+      "cannot trust",
+      "lost trailer"
+    ]
+  },
+  "driver_gate_scale": {
+    "cues": [
+      "guard shack",
+      "check-in",
+      "paperwork",
+      "clipboard",
+      "driver",
+      "gate queue",
+      "guard",
+      "queue",
+      "turn time",
+      "sign-in sheet",
+      "identity",
+      "site rules"
+    ]
+  },
+  "automation_readiness": {
+    "cues": [
+      "robot",
+      "agv",
+      "autonomous",
+      "machine vision",
+      "automation",
+      "pilot",
+      "manual fallback",
+      "undocumented exception",
+      "manual approval",
+      "deterministic",
+      "yard truck"
+    ]
+  },
+  "cost_to_ship": {
+    "cues": [
+      "detention",
+      "accessorial",
+      "dwell",
+      "cost per",
+      "cost to ship",
+      "carrier",
+      "freight spend",
+      "transportation cost",
+      "driver productivity",
+      "milestone",
+      "service cost",
+      "landed cost"
+    ]
+  },
+  "chain_of_custody": {
+    "cues": [
+      "seal",
+      "custody",
+      "bill of lading",
+      "claims",
+      "theft",
+      "audit",
+      "fraud",
+      "dispute",
+      "compliance",
+      "timestamp",
+      "reconstruct",
+      "paper document"
+    ]
+  }
+}

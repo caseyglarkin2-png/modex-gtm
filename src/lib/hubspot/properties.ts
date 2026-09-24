@@ -24,6 +24,7 @@ let companyIntentEnsured = false;
 export function __resetYardflowPropertyCache() {
   ensured = false;
   companyIntentEnsured = false;
+  __resetGapPropertyCache();
 }
 
 // Account-level intent properties on the COMPANY object (mirror of the contact
@@ -198,5 +199,160 @@ export async function ensureQualificationProperties(): Promise<void> {
       const msg = err instanceof Error ? err.message : String(err);
       if (!/already exists|PROPERTY_ALREADY_EXISTS|409/i.test(msg)) throw err;
     }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// GAP Prospecting OS properties (docs/GAP_PROSPECTING_OS.md section 9, S1-T11)
+// ---------------------------------------------------------------------------
+
+import { PROBLEM_FAMILIES, RESPONSE_CLASSES } from '@/lib/gap/taxonomy';
+import type { Client as HubSpotClient } from '@hubspot/api-client';
+
+export const GAP_PROPERTY_NAMES = {
+  companyStatus: 'yardflow_gap_status',
+  companyProblemFamily: 'yardflow_gap_problem_family',
+  contactLastDisposition: 'yardflow_gap_last_disposition',
+  contactLastDispositionAt: 'yardflow_gap_last_disposition_at',
+} as const;
+
+export const GAP_STATUS_OPTIONS = [
+  'none',
+  'hypothesis_proposed',
+  'hypothesis_approved',
+  'in_sequence',
+  'conversation',
+  'resolved_confirmed',
+  'resolved_rejected',
+  'nurture',
+] as const;
+export type GapStatusOption = (typeof GAP_STATUS_OPTIONS)[number];
+
+const GAP_ADVISORY =
+  'Written by the modex GAP layer (GAP Prospecting OS). Advisory only: it mirrors hypothesis state held in modex Postgres and never drives deal stage or lifecycle.';
+
+function enumOptions(values: readonly string[]) {
+  return values.map((value, displayOrder) => ({
+    label: value.replace(/_/g, ' '),
+    value,
+    displayOrder,
+    hidden: false,
+  }));
+}
+
+interface GapPropertyDef {
+  objectType: 'companies' | 'contacts';
+  name: string;
+  label: string;
+  type: PropertyCreateTypeEnum;
+  fieldType: PropertyCreateFieldTypeEnum;
+  groupName: string;
+  description: string;
+  options?: ReturnType<typeof enumOptions>;
+}
+
+const GAP_PROPERTIES: ReadonlyArray<GapPropertyDef> = [
+  {
+    objectType: 'companies',
+    name: GAP_PROPERTY_NAMES.companyStatus,
+    label: 'YardFlow GAP Status',
+    type: PropertyCreateTypeEnum.Enumeration,
+    fieldType: PropertyCreateFieldTypeEnum.Select,
+    groupName: 'companyinformation',
+    description: `Where this account sits in the GAP hypothesis motion. ${GAP_ADVISORY}`,
+    options: enumOptions(GAP_STATUS_OPTIONS),
+  },
+  {
+    objectType: 'companies',
+    name: GAP_PROPERTY_NAMES.companyProblemFamily,
+    label: 'YardFlow GAP Problem Family',
+    type: PropertyCreateTypeEnum.Enumeration,
+    fieldType: PropertyCreateFieldTypeEnum.Select,
+    groupName: 'companyinformation',
+    description: `Problem family of the most recent GAP hypothesis for this account, for segmentation. ${GAP_ADVISORY}`,
+    options: enumOptions(PROBLEM_FAMILIES),
+  },
+  {
+    objectType: 'contacts',
+    name: GAP_PROPERTY_NAMES.contactLastDisposition,
+    label: 'YardFlow GAP Last Disposition',
+    type: PropertyCreateTypeEnum.Enumeration,
+    fieldType: PropertyCreateFieldTypeEnum.Select,
+    groupName: 'contactinformation',
+    description: `Most recent GAP response class for this contact (hs_lead_status is human-curated and keeps its own semantics). ${GAP_ADVISORY}`,
+    options: enumOptions(RESPONSE_CLASSES),
+  },
+  {
+    objectType: 'contacts',
+    name: GAP_PROPERTY_NAMES.contactLastDispositionAt,
+    label: 'YardFlow GAP Last Disposition At',
+    type: PropertyCreateTypeEnum.Datetime,
+    fieldType: PropertyCreateFieldTypeEnum.Date,
+    groupName: 'contactinformation',
+    description: `When the most recent GAP disposition was recorded. ${GAP_ADVISORY}`,
+  },
+];
+
+// Memoized PROMISE (not a boolean) so concurrent callers share one provisioning
+// pass. A rejected pass clears the memo so the next caller retries.
+let gapEnsured: Promise<void> | null = null;
+
+/** Reset the GAP property memo (tests only). Also cleared by __resetYardflowPropertyCache. */
+export function __resetGapPropertyCache() {
+  gapEnsured = null;
+}
+
+/**
+ * Ensure the four GAP properties exist (two on COMPANY, two on CONTACT).
+ * Idempotent, memoized per process, tolerant of a concurrent create (409).
+ * With no client injected it no-ops unless HubSpot is configured and sync is
+ * on, like ensureCompanyIntentProperties. Throws only on genuine errors, and a
+ * throw is not memoized.
+ */
+export async function ensureGapProperties(client?: HubSpotClient): Promise<void> {
+  if (gapEnsured) return gapEnsured;
+  if (!client && (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED)) return;
+
+  const hs = client ?? getHubSpotClient();
+  gapEnsured = (async () => {
+    for (const p of GAP_PROPERTIES) {
+      try {
+        await withHubSpotRetry(
+          () => hs.crm.properties.coreApi.getByName(p.objectType, p.name),
+          `ensureGapProperties.get(${p.name})`,
+        );
+        continue; // already exists
+      } catch {
+        // not found (or transient): try to create it
+      }
+      try {
+        await withHubSpotRetry(
+          () =>
+            hs.crm.properties.coreApi.create(p.objectType, {
+              name: p.name,
+              label: p.label,
+              type: p.type,
+              fieldType: p.fieldType,
+              groupName: p.groupName,
+              description: p.description,
+              hasUniqueValue: false,
+              hidden: false,
+              formField: false,
+              ...(p.options ? { options: p.options } : {}),
+            }),
+          `ensureGapProperties.create(${p.name})`,
+        );
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        if (!/already exists|PROPERTY_ALREADY_EXISTS|409/i.test(msg)) throw err;
+      }
+    }
+  })();
+
+  try {
+    await gapEnsured;
+  } catch (err) {
+    gapEnsured = null;
+    throw err;
   }
 }

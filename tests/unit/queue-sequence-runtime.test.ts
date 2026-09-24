@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { STATUS } from '@/lib/queue/types';
 import {
   scheduleNextStep,
@@ -6,12 +6,24 @@ import {
   onSendOutcome,
 } from '@/lib/queue/sequence-runtime';
 
+/** This file pins the FLAG-OFF (legacy) behavior. GAP_OS_ENABLED is read at
+ *  call time, so an ambient value in the shell would silently flip every
+ *  assertion below; force it off for the whole file and restore afterwards. */
+const savedGapOs = process.env.GAP_OS_ENABLED;
+beforeEach(() => {
+  delete process.env.GAP_OS_ENABLED;
+});
+afterEach(() => {
+  if (savedGapOs === undefined) delete process.env.GAP_OS_ENABLED;
+  else process.env.GAP_OS_ENABLED = savedGapOs;
+});
+
 /** Minimal prisma mock covering the surfaces the runtime touches. */
 function makePrisma() {
   return {
     sequence: { findUnique: vi.fn() },
     emailLog: { findUnique: vi.fn() },
-    draftQueueItem: { create: vi.fn(), deleteMany: vi.fn() },
+    draftQueueItem: { create: vi.fn(), deleteMany: vi.fn(), updateMany: vi.fn() },
   };
 }
 
@@ -102,6 +114,37 @@ describe('scheduleNextStep', () => {
       select: { bounce_type: true },
     });
   });
+
+  it('flag off: the created row carries NO sequence_version_id, even when the item has one', async () => {
+    prisma.sequence.findUnique.mockResolvedValue({ id: 9, steps: TWO_STEP });
+    prisma.draftQueueItem.create.mockResolvedValue({ id: 201 });
+
+    await scheduleNextStep(prisma, step0Item({ sequence_version_id: 'ver-1' }));
+
+    const data = prisma.draftQueueItem.create.mock.calls[0][0].data;
+    expect('sequence_version_id' in data).toBe(false);
+    expect(Object.keys(data).sort()).toEqual(
+      [
+        'account_name',
+        'approved_at',
+        'body',
+        'created_by',
+        'idempotency_key',
+        'image_url',
+        'owner',
+        'parent_item_id',
+        'persona_id',
+        'persona_name',
+        'scheduled_for',
+        'sequence_id',
+        'sequence_run_id',
+        'status',
+        'step_index',
+        'subject',
+        'to_email',
+      ].sort(),
+    );
+  });
 });
 
 describe('cancelDownstream', () => {
@@ -128,6 +171,35 @@ describe('cancelDownstream', () => {
     const n = await cancelDownstream(prisma, '');
     expect(n).toBe(0);
     expect(prisma.draftQueueItem.deleteMany).not.toHaveBeenCalled();
+  });
+
+  it('flag off: deleteMany with the exact legacy where clause, updateMany NEVER called (byte-identical pin)', async () => {
+    prisma.draftQueueItem.deleteMany.mockResolvedValue({ count: 3 });
+
+    // the reason argument is accepted but must not change the legacy call
+    const n = await cancelDownstream(prisma, 'run-abc', 'replied');
+
+    expect(n).toBe(3);
+    expect(prisma.draftQueueItem.deleteMany).toHaveBeenCalledTimes(1);
+    expect(prisma.draftQueueItem.deleteMany.mock.calls[0]).toEqual([
+      {
+        where: {
+          sequence_run_id: 'run-abc',
+          status: { notIn: [STATUS.sent, STATUS.sending] },
+        },
+      },
+    ]);
+    expect(prisma.draftQueueItem.updateMany).not.toHaveBeenCalled();
+  });
+
+  it('flag spelled "false": still the legacy deleteMany path', async () => {
+    process.env.GAP_OS_ENABLED = 'false';
+    prisma.draftQueueItem.deleteMany.mockResolvedValue({ count: 1 });
+
+    await cancelDownstream(prisma, 'run-abc');
+
+    expect(prisma.draftQueueItem.deleteMany).toHaveBeenCalledTimes(1);
+    expect(prisma.draftQueueItem.updateMany).not.toHaveBeenCalled();
   });
 });
 
@@ -156,6 +228,7 @@ describe('onSendOutcome', () => {
     });
 
     expect(prisma.draftQueueItem.deleteMany).toHaveBeenCalledTimes(1);
+    expect(prisma.draftQueueItem.updateMany).not.toHaveBeenCalled();
     expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
   });
 

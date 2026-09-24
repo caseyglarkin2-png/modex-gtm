@@ -15,6 +15,76 @@ import { onSendOutcome } from '@/lib/queue/sequence-runtime';
 import { staggerTimes, clampToWindow, selectDue, DEFAULT_WINDOW } from '@/lib/queue/schedule';
 import { assignVariants } from '@/lib/queue/variant';
 import { QueueAddSchema, type QueueAddInput } from '@/lib/validations';
+import { isGapOsEnabled } from '@/lib/gap/flags';
+import { isApproved } from '@/lib/gap/compiler/approval';
+
+/** One GAP item the compile guard excluded from a batch approval (S3-T11). */
+export interface ApproveRefusal {
+  id: number;
+  reason: 'compile_not_passed';
+}
+
+/**
+ * GAP OS (S3-T11), called only under GAP_OS_ENABLED. An item stamped with a
+ * `sequence_version_id` is a GAP item and may be approved only when its
+ * LATEST GapCompile verdict is `pass`, or `review_required` with an APPROVED
+ * SendApprovalRequest (`isApproved`, N3: the same rule the enroll service and
+ * the enroll-row gate apply, so the three surfaces agree): first the compile
+ * of the item itself (`draft_queue_item_id`), else a template-level compile
+ * of its pinned version and step (`sequence_version_id` + `step_index`, with
+ * no item id). Items without a stamp are returned untouched. Nothing is written.
+ *
+ * R3-11: this is the ONE guard every path that can make a GAP item sendable
+ * runs: `approveBatch`, `sendNow` (approve-then-send) and `retryDraft`
+ * (re-approve). Flag off, none of them reads it and each call list is
+ * exactly what it was.
+ */
+async function gapCompileGuard(ids: number[]): Promise<{ ids: number[]; refused: ApproveRefusal[] }> {
+  const stamped: Array<{ id: number; sequence_version_id: string | null; step_index: number | null }> =
+    await prisma.draftQueueItem.findMany({
+      where: { id: { in: ids }, sequence_version_id: { not: null } },
+      select: { id: true, sequence_version_id: true, step_index: true },
+    });
+  if (stamped.length === 0) return { ids, refused: [] };
+
+  const versionIds = Array.from(new Set(stamped.map((r) => r.sequence_version_id as string)));
+  const compiles: Array<{
+    id: string;
+    draft_queue_item_id: number | null;
+    sequence_version_id: string | null;
+    step_index: number | null;
+    verdict: string;
+  }> = await prisma.gapCompile.findMany({
+    where: {
+      OR: [{ draft_queue_item_id: { in: stamped.map((r) => r.id) } }, { sequence_version_id: { in: versionIds } }],
+    },
+    select: { id: true, draft_queue_item_id: true, sequence_version_id: true, step_index: true, verdict: true },
+    orderBy: { created_at: 'desc' },
+  });
+
+  const refused: ApproveRefusal[] = [];
+  for (const item of stamped) {
+    const latest =
+      compiles.find((c) => c.draft_queue_item_id === item.id) ??
+      compiles.find(
+        (c) =>
+          c.draft_queue_item_id == null &&
+          c.sequence_version_id === item.sequence_version_id &&
+          c.step_index === item.step_index,
+      );
+    if (latest?.verdict === 'pass') continue;
+    if (latest?.verdict === 'review_required' && (await isApproved(prisma, latest.id)).approved) continue;
+    refused.push({ id: item.id, reason: 'compile_not_passed' });
+  }
+  const refusedIds = new Set(refused.map((r) => r.id));
+  return { ids: ids.filter((id) => !refusedIds.has(id)), refused };
+}
+
+/** The single-item form of the guard for sendNow and retryDraft: null when the item may proceed, else the refusal reason. Flag off: never called. */
+async function gapCompileRefusalFor(id: number): Promise<ApproveRefusal['reason'] | null> {
+  const guard = await gapCompileGuard([id]);
+  return guard.refused.length > 0 ? guard.refused[0].reason : null;
+}
 
 /** Optional A/B experiment attached to an approveBatch call. */
 interface ApproveExperiment {
@@ -198,9 +268,13 @@ export async function removeDraft(
   return { ok: true };
 }
 
-/** Owner-scoped approve-then-send. */
+/** Owner-scoped approve-then-send. Under GAP_OS_ENABLED a stamped item whose newest compile is not a pass is refused `compile_not_passed` before any write (R3-11). */
 export async function sendNow(id: number) {
   const session = (await auth()) as SessionLike;
+  if (isGapOsEnabled()) {
+    const refusal = await gapCompileRefusalFor(id);
+    if (refusal) return { ok: false as const, reason: refusal };
+  }
   const r = await prisma.draftQueueItem.updateMany({
     where: ownerWhere(id, session, [STATUS.draft, STATUS.approved]),
     data: { status: STATUS.approved, approved_at: new Date() },
@@ -222,10 +296,22 @@ export async function sendNow(id: number) {
 export async function approveBatch(
   ids: number[],
   opts?: { scheduledFor?: Date; staggerMinutes?: number; experiment?: ApproveExperiment },
-): Promise<{ ok: true; approved: number } | { ok: false; reason: string }> {
+): Promise<{ ok: true; approved: number; refused?: ApproveRefusal[] } | { ok: false; reason: string }> {
   const session = (await auth()) as SessionLike;
   const email = session?.user?.email ?? undefined;
   const role = session?.user?.role;
+
+  // GAP OS (S3-T11): under the flag, drop every GAP item whose latest compile
+  // is not a pass before anything below runs, and report it. Flag off: this
+  // block is skipped and every call below is exactly what it was.
+  let refused: ApproveRefusal[] | undefined;
+  if (isGapOsEnabled()) {
+    const guard = await gapCompileGuard(ids);
+    ids = guard.ids;
+    refused = guard.refused;
+  }
+  const withRefusals = <T extends { ok: true; approved: number }>(r: T): T & { refused?: ApproveRefusal[] } =>
+    refused ? { ...r, refused } : r;
 
   // Optional A/B experiment: create the experiment, then deterministically
   // assign one variant per recipient so each item can be stamped below. Mirrors
@@ -290,7 +376,7 @@ export async function approveBatch(
       });
       total += r.count;
     }
-    return { ok: true, approved: total };
+    return withRefusals({ ok: true, approved: total });
   }
 
   const times = staggerTimes(opts.scheduledFor, ids.length, opts.staggerMinutes ?? 0).map((t) =>
@@ -311,15 +397,21 @@ export async function approveBatch(
     });
     total += r.count;
   }
-  return { ok: true, approved: total };
+  return withRefusals({ ok: true, approved: total });
 }
 
 /** Retry a failed send. Only items that never reached Gmail (provider_message_id null)
- *  are retryable; a failed-but-already-sent row must be reconciled by hand, not re-sent. */
+ *  are retryable; a failed-but-already-sent row must be reconciled by hand, not re-sent.
+ *  Under GAP_OS_ENABLED a stamped item whose newest compile is not a pass is refused
+ *  `compile_not_passed` before the re-approve (R3-11). */
 export async function retryDraft(
   id: number,
 ): Promise<{ ok: true } | { ok: false; reason: string }> {
   const session = (await auth()) as SessionLike;
+  if (isGapOsEnabled()) {
+    const refusal = await gapCompileRefusalFor(id);
+    if (refusal) return { ok: false, reason: refusal };
+  }
   const r = await prisma.draftQueueItem.updateMany({
     where: { ...ownerWhere(id, session), status: STATUS.failed, provider_message_id: null },
     data: { status: STATUS.approved, error_message: null },

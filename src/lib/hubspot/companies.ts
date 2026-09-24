@@ -228,3 +228,25 @@ export async function updateCompanyTrigger(
     `updateCompanyTrigger(${companyId})`,
   ).catch(() => undefined);
 }
+
+/**
+ * Generic company property writer for the GAP mirror (S1-T11). Unlike the
+ * intent / trigger writers above this one THROWS on failure: the caller
+ * (src/lib/gap/hubspot-mirror.ts) records the error on its idempotency row so
+ * the write is retried, which a swallowed error would silently prevent.
+ * Skips (returns false) when HubSpot is not configured or sync is off.
+ */
+export async function updateCompanyProperties(
+  companyId: string,
+  properties: Record<string, string>,
+): Promise<boolean> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return false;
+  assertExternalWriteAllowed('hubspot', 'updateCompanyProperties');
+
+  const client = getHubSpotClient();
+  await withHubSpotRetry(
+    () => client.crm.companies.basicApi.update(companyId, { properties }),
+    `updateCompanyProperties(${companyId})`,
+  );
+  return true;
+}

@@ -57,6 +57,16 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   { name: 'process-generation-jobs', label: 'Generation Job Worker', path: '/api/cron/process-generation-jobs', schedule: 'unregistered (manual only)' },
   { name: 'process-send-jobs', label: 'Send Job Worker', path: '/api/cron/process-send-jobs', schedule: 'unregistered (manual only)' },
   { name: 'monday-bump', label: 'Monday Bump', path: '/api/email/monday-bump', schedule: 'unregistered (manual only)' },
+
+  // --- GAP Prospecting OS (Sprint 2) ---
+  // Unscheduled by design until the program is switched on; each is dry-run by
+  // default and manual-trigger-only for a holder of CRON_SECRET.
+  // gap-hypothesize: builds account hypotheses from signals for the top-100 accounts.
+  { name: 'gap-hypothesize', label: 'GAP Hypothesize', path: '/api/cron/gap-hypothesize', schedule: 'unregistered (manual only)' },
+  // gap-enrollment-sync: reads HubSpot sequence enrollment truth back into the local enrollment rows (read-only against HubSpot).
+  { name: 'gap-enrollment-sync', label: 'GAP Enrollment Sync', path: '/api/cron/gap-enrollment-sync', schedule: 'unregistered (manual only)' },
+  // gap-hubspot-replies: polls HubSpot INCOMING_EMAIL engagements into InboundMessage with source hubspot (read-only against HubSpot).
+  { name: 'gap-hubspot-replies', label: 'GAP HubSpot Replies', path: '/api/cron/gap-hubspot-replies', schedule: 'unregistered (manual only)' },
 ];
 
 function cronKey(name: string) {

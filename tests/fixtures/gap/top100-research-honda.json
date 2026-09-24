@@ -1,0 +1,97 @@
+{
+  "schema": "research.v1",
+  "key": "honda-com",
+  "company_id": "55554513979",
+  "name": "Honda",
+  "domain": "hna.honda.com",
+  "researched_at": "2026-09-12T00:00:00Z",
+  "why_now": {
+    "trigger": "Two converging cost/capacity pressures, one already documented in the vault and one newly identified this pass. First (existing): in March 2026 Honda cancelled its entire North American EV program and the 0 Series, taking up to a 2.5 trillion yen ($15.7B) hit and its first net loss since 1957, and is pivoting its $1B+ Ohio EV Hub retooling (Marysville, East Liberty, Anna) to flexible mixed hybrid/ICE production. Second (new, this pass): on September 2, 2026 -- ten days before this research -- Honda announced a global plan to cut 1.5 trillion yen (~$9.4B) in costs over four years by demanding 30% price reductions from suppliers on pressed/forged components, electrical parts, and software-defined-vehicle parts, and by shifting sourcing toward Chinese suppliers. Both point the same direction: Honda needs capacity and cost out of its existing US plants without new capital, at the same time its Ohio network is absorbing more production variants on the same gate footprint.",
+    "event_date": "2026-09-02",
+    "published": "2026-09-02",
+    "evidence_ids": [
+      "E3",
+      "E4"
+    ],
+    "strength": "recent_consequential"
+  },
+  "structural_problem": "Honda's flexible-production retool reimagines the assembly line; the yard is the part that thesis does not yet run. Every plant depends on just-in-time sequencing through a small number of managed gates (Greensburg runs ~600 trailer spots through one gate), and neither the EV-cancellation pivot nor the new $9.4B cost program addresses that layer.",
+  "confidence": "high",
+  "initial_use_case": "trailer_state",
+  "value_hypothesis": "Honda cancelled a $15.7 billion EV program in March 2026 and, ten days before this research, announced a separate $9.4 billion global cost-cutting mandate demanding 30% price cuts from suppliers. Both point at the same thing: Honda needs capacity and cost out of the plants it already has, without new capital. Ninety-nine percent of what Honda sells in the US is built in roughly 11 plants running just-in-time sequencing through a handful of managed gates -- Greensburg alone runs about 600 trailer spots through one gate, 24/7. Primo Brands' driver-journey layer alone produced about 5% more volume, observed, on flat dock-office headcount (YardFlow's own measured comparison, not a Honda number), and YardFlow's conservative modeled floor for that effect, scaled to a single site, runs $1M+ in incremental annual profit -- a labeled model, not a promise, and not yet run against Honda's plant economics. One plant yard, one pilot feeding clean gate-to-dock data into HDMA's existing sequencing systems, is a way to hand Honda's cost-cutting mandate a real number instead of another supplier price demand.",
+  "causal_chain": {
+    "observed_change": "March 2026 EV program cancellation and Ohio Hub pivot to flexible mixed production; September 2, 2026 announcement of a $9.4B, four-year global cost-cutting program targeting suppliers.",
+    "yard_dependency": "Flexible mixed production means more model variants moving through the same fixed gate and dock-door footprint at each plant; JIT sequencing has zero slack for gate delay, so any trailer backup directly starves the line.",
+    "affected_kpi": "Realized production capacity and cost per vehicle, against a backdrop of Honda's own reported net loss and an active supplier cost-reduction program.",
+    "decision_owner": "Paul Dentinger, SVP and Center Lead, Purchasing & Supply Chain.",
+    "capability": "Live trailer-state and gate-to-dock visibility feeding HDMA's just-in-time sequencing systems.",
+    "first_conversation": "You just told suppliers to cut 30% out of their costs. Before that ripples through your own plants, what's your visibility into how much of your own capacity is sitting idle at the gate right now?",
+    "disproof": "If Honda's plant yards already run with minimal gate delay and no material sequencing disruption tied to trailer staging, the yard-execution lever this pitch targets does not exist and the causal chain breaks."
+  },
+  "skeptic_objection": "You'll say Honda just told its entire supplier base to cut costs by 30%, and the same institutional posture that produces that demand externally will resist any new vendor spend internally, however strong the ROI case, until the cost-cutting program itself is further along and its own capital-allocation priorities are set.",
+  "contrary_evidence": "Honda has not itself connected the EV cancellation, the Ohio retool, or the September 2026 cost-cutting program to yard or gate execution specifically; that link is YardFlow's inference. An active, aggressive supplier cost-reduction mandate could just as easily translate into a freeze on new vendor evaluations internally as into an opening for one.",
+  "unknowns": [
+    "Whether HDMA's leadership has publicly connected the September 2026 cost-cutting program or the EV-cancellation pivot to yard or gate execution specifically (not found; this is YardFlow's inference).",
+    "Current status of Andrew Rader, Matthew Morris, Mike Lapham, Linda Adams, Michael Saneholtz, and Michael Boyer was not independently reconfirmed this pass; carried from the vault's July 2026 sourcing.",
+    "Whether jromesburg and brian.beard (already emailed) map to any named committee member under a different email, or are separate, previously unidentified contacts.",
+    "No dedicated automation/CI engineering committee member identified."
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E1",
+      "claim": "Honda operates roughly 11 US auto/engine/transmission/powersports/power-equipment plants plus about 10 parts distribution centers; named flagship yards include Honda Manufacturing of Alabama (120 dock doors/380 trailer spots/900 acres), Anna Engine Plant (110 dock doors/420 trailer spots/690 acres, truck-only), and Honda Manufacturing of Indiana (70 dock doors/600 trailer spots/1,480 acres, single managed gate). Honda recognized 56 North American suppliers on $36.7B of 2025 spend under just-in-time sequencing.",
+      "source_url": "https://hondainamerica.com/manufacturing/",
+      "source_type": "leadership_page",
+      "published": "unknown",
+      "event_date": "unknown",
+      "retrieved": "2026-09-12",
+      "excerpt": "Carried forward from the existing vault dossier (02_Accounts/Honda.md), itself sourced to hondainamerica.com/manufacturing/ and mexicobusiness.news/automotive/news/honda-recognizes-56-suppliers-us367-billion-spend.",
+      "confidence": "high",
+      "class": "FACT",
+      "external_ok": true,
+      "contradiction": ""
+    },
+    {
+      "evidence_id": "E2",
+      "claim": "In March 2026 Honda cancelled its entire North American EV program and the 0 Series, taking up to a 2.5 trillion yen ($15.7B) hit and its first net loss since 1957, pivoting its $1B+ Ohio EV Hub retooling to flexible mixed hybrid/ICE production.",
+      "source_url": "https://www.automotivemanufacturingsolutions.com/strategy/honda-scraps-its-ev-future-in-157bn-retreat/2630846",
+      "source_type": "trade_press",
+      "published": "unknown",
+      "event_date": "2026-03",
+      "retrieved": "2026-09-12",
+      "excerpt": "Carried forward from the existing vault dossier's sourcing.",
+      "confidence": "high",
+      "class": "FACT",
+      "external_ok": true,
+      "contradiction": ""
+    },
+    {
+      "evidence_id": "E3",
+      "claim": "On September 2, 2026, Honda announced a plan to cut approximately 1.5 trillion yen ($9.4 billion) in costs globally over four years (by 2030), demanding 30% price reductions from suppliers on pressed/forged components, electrical parts, and software-defined-vehicle parts, and shifting sourcing toward Chinese suppliers.",
+      "source_url": "https://www.jalopnik.com/2249434/honda-wants-9-billion-cost-cutting/",
+      "source_type": "trade_press",
+      "published": "2026-09-02",
+      "event_date": "2026-09-02",
+      "retrieved": "2026-09-12",
+      "excerpt": "Cost Reduction Target: 1.5 trillion yen ($9.4 billion). Timeline: Four years (by 2030). Key Categories Targeted (30% reduction each): Pressed and forged components; Electrical parts; Software-defined vehicle (SDV) components.",
+      "confidence": "high",
+      "class": "FACT",
+      "external_ok": true,
+      "contradiction": ""
+    },
+    {
+      "evidence_id": "E4",
+      "claim": "Honda's 2026 global business briefing states a goal to improve production efficiency by approximately 20% over the next five years through resource-investment allocation in new models and equipment, and plans to launch 15 next-generation hybrid models globally by fiscal year-end March 2030, primarily in North America, starting in 2027.",
+      "source_url": "https://global.honda/en/newsroom/news/2026/c260514beng.html",
+      "source_type": "newsroom",
+      "published": "2026-05-14",
+      "event_date": "2026-05-14",
+      "retrieved": "2026-09-12",
+      "excerpt": "Honda will strive to improve production efficiency by approximately 20% over the next five years... starting in 2027, Honda will begin launching its next-generation hybrid models, planning to launch 15 next-generation hybrid models globally by the end of the fiscal year ending March 31, 2030.",
+      "confidence": "medium",
+      "class": "INFERENCE",
+      "external_ok": false,
+      "contradiction": "Drawn from search-result synthesis rather than an independently opened primary page this pass."
+    }
+  ]
+}
