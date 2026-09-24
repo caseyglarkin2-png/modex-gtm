@@ -1,22 +1,29 @@
 /**
- * GAP API client for the Sprint 4 UI (GAP Prospecting OS, S4-T5).
+ * GAP API client for the Sprint 4 UI (GAP Prospecting OS, S4-T5; contract
+ * parity with the S4-T3 routes in S4-T7).
  *
- * Typed fetch wrappers over the Sprint 4 contract in
- * docs/GAP_PROSPECTING_OS.md ("API contract (fixed here so the UI and the
- * service can be built in parallel)"). Every call goes through `request`,
- * which never throws: a non-2xx answer becomes `{ ok: false, status, error,
- * field? }` with the server's `error` string verbatim and its `field` when
- * the body carries one (the 400 `invalid_body` shape); a network failure or
- * an unparseable body becomes `{ ok: false, status: 0 | status, error }`.
+ * Typed fetch wrappers over the Sprint 4 routes. The types here are the
+ * ROUTE shapes, field for field: `src/app/api/gap/dispositions/route.ts`
+ * (zod body, 201 body), `src/app/api/gap/bids/route.ts`,
+ * `src/lib/gap/replies/list.ts` (`ReplyItem`, `StoredSuggestion`),
+ * `src/lib/gap/replies/suggest.ts` and `src/lib/gap/replies/brief.ts`
+ * (`CallBrief`). tests/unit/gap/contract-parity.test.ts pins them to the
+ * route side: a drift there fails that test, never a page at runtime.
+ *
+ * Every call goes through `request`, which never throws: a non-2xx answer
+ * becomes `{ ok: false, status, error, field? }` with the server's `error`
+ * string verbatim (a flag-off 404 carries the skip payload's `reason`, e.g.
+ * `GAP_OS_ENABLED=false`) and its `field` when the body carries one (the 400
+ * `invalid_body` shape); a network failure or an unparseable body becomes
+ * `{ ok: false, status: 0 | status, error }`.
  *
  * `fetchImpl` is injectable on every function and on the client factory so
- * components render against a stub in tests and the routes can land later.
+ * components render against a stub in tests.
  *
  * Voice: no em dashes, "yards" plural.
  */
 
 import type { BidSource, BidType, Channel, ResponseClass } from '../taxonomy';
-import type { FactSignal } from '@/components/gap/fact-hypothesis-blocks';
 
 // ---------------------------------------------------------------------------
 // Result shape
@@ -33,7 +40,7 @@ export interface ApiOk<T> {
 export interface ApiErr {
   ok: false;
   status: number;
-  /** The server's `error` string verbatim, else `http_<status>` or `network_error`. */
+  /** The server's `error` string verbatim (or a skip payload's `reason`), else `http_<status>` or `network_error`. */
   error: string;
   /** Present on a 400 `invalid_body` answer: the field the server refused. */
   field?: string;
@@ -46,9 +53,14 @@ export interface ClientOptions {
 }
 
 // ---------------------------------------------------------------------------
-// Contract types
+// Contract types (route truth; see the header)
 // ---------------------------------------------------------------------------
 
+/**
+ * Same members as `DISPOSITION_SOURCE_KINDS` in src/lib/gap/disposition/service.ts.
+ * Duplicated because that module pulls Prisma glue into a client bundle; the
+ * parity test asserts the two arrays are equal.
+ */
 export const DISPOSITION_SOURCE_KINDS = ['inbound_message', 'hubspot_engagement', 'call', 'meeting', 'manual'] as const;
 export type DispositionSourceKind = (typeof DISPOSITION_SOURCE_KINDS)[number];
 
@@ -57,15 +69,22 @@ export interface DispositionSource {
   id: string;
 }
 
+/** One entry of the route's `bids` array (zod `BidSchema`, strict). */
 export interface DispositionBidInput {
   type: BidType;
   rawBuyerLanguage: string;
   normalizedSummary?: string;
-  numericValue?: number;
+  numericValue?: number | string;
   unit?: string;
 }
 
-/** `POST /api/gap/dispositions` body. Optional keys are omitted, never sent as null. */
+/**
+ * `POST /api/gap/dispositions` body (zod `BodySchema`, strict: no extra keys).
+ * Optional keys are omitted, never sent as null. `personaId` may be a number
+ * or a digit string (the route transforms it). `resumeAt` (timing, ISO with
+ * offset) and `referral` (referral) are the route's optional widening; the
+ * form does not send them today.
+ */
 export interface DispositionBody {
   hypothesisId: string;
   personaId?: number | string;
@@ -79,25 +98,50 @@ export interface DispositionBody {
   nextBestAction?: string;
   source: DispositionSource;
   bids?: DispositionBidInput[];
+  /** The unconfirmed AI row (`ReplySuggestion.id`) this submit adopts; 409 `ai_suggestion_mismatch` when it names another source or hypothesis. */
   aiSuggestionId?: string;
+  resumeAt?: string;
+  referral?: { name?: string; title?: string; email?: string };
 }
 
+export type DispositionStep = 'stop' | 'unsubscribe' | 'resolve' | 'retarget' | 'referral' | 'mirror';
+
+/** One refusal the service recorded while applying effects (the row itself was written). */
+export interface DispositionRefusal {
+  step: DispositionStep;
+  reason: string;
+  id?: string;
+}
+
+/** The 201 `effects` block of a HUMAN (session) submit. `retarget` and `referral` appear only for those classes. */
 export interface DispositionEffects {
   stopped: string[];
   unsubscribed: boolean;
-  resolution: null | { outcome: string; confidence: number };
+  resolution: null | { outcome: string; confidence: number | null };
   mirrored: boolean;
+  retarget?: { closedHypothesisId: string; draftHypothesisId: string | null };
+  referral?: { fromBidId: string | null; name?: string; title?: string };
 }
 
-/** `POST /api/gap/dispositions` 201 body. */
+/**
+ * `POST /api/gap/dispositions` 201 body. The pages are session-authenticated,
+ * so the actor is always human and `effects` is always the block above; an
+ * agent (header-token) submit answers `effects: 'none'`, which this UI never
+ * receives.
+ *
+ * 409 reasons the route emits: `duplicate_source` (with `existingId`),
+ * `hypothesis_not_found`, `hypothesis_not_active`, `persona_not_found`,
+ * `suppressed_target_mismatch`, `ai_suggestion_not_found`,
+ * `ai_suggestion_not_adoptable`, `ai_suggestion_mismatch`, `agent_cannot_confirm`.
+ */
 export interface DispositionResult {
   dispositionId: string;
   bidIds: string[];
   effects: DispositionEffects;
-  refusals: unknown[];
+  refusals: DispositionRefusal[];
 }
 
-/** `POST /api/gap/bids` body. */
+/** `POST /api/gap/bids` body (zod, strict). `source` is a BID source, not the disposition channel. */
 export interface BidBody {
   hypothesisId: string;
   contactEmail: string;
@@ -105,50 +149,61 @@ export interface BidBody {
   type: BidType;
   rawBuyerLanguage: string;
   normalizedSummary?: string;
-  numericValue?: number;
+  numericValue?: number | string;
   unit?: string;
   source: BidSource;
   supersedesId?: string;
 }
 
+/** `POST /api/gap/bids` 201 body. */
 export interface BidResult {
   bidId: string;
+  humanConfirmed: boolean;
+  supersedesId: string | null;
 }
 
 export interface ReplySuggestionBid {
-  type: BidType | string;
+  type: string;
   quote: string;
   why: string;
 }
 
-/** The AI suggestion on a reply. Never truth; the form never pre-selects it. */
+/**
+ * The stored AI suggestion (`StoredSuggestion` in list.ts): the UNCONFIRMED
+ * ai-created disposition row. `id` is that row's id and is what the form
+ * sends back as `aiSuggestionId`. Never truth; the form never pre-selects it.
+ */
 export interface ReplySuggestion {
-  id?: string;
-  responseClass: ResponseClass | string;
+  id: string;
+  responseClass: string;
   bids: ReplySuggestionBid[];
   why: string;
 }
 
 export type ReplySourceKind = Extract<DispositionSourceKind, 'inbound_message' | 'hubspot_engagement'>;
 
-/** One row of `GET /api/gap/replies`. */
+/** One row of `GET /api/gap/replies` (`ReplyItem` in list.ts). */
 export interface ReplyItem {
+  /** InboundMessage.id (the Gmail message id, or `hs:<engagementId>`). */
   id: string;
+  /** kind by the message's source; id is ALWAYS the inbound row's id. */
   source: { kind: ReplySourceKind; id: string };
   contactEmail: string;
-  personaId: number | string | null;
+  personaId: number | null;
   accountName: string;
+  /** Empty string when the address has no hypothesis. */
   hypothesisId: string;
-  /** Optional widening of the contract: the hypothesis's family or title when the route sends one. */
-  hypothesisTitle?: string | null;
+  /** The hypothesis's problem family, else null. */
+  hypothesisTitle: string | null;
   subject: string | null;
-  /** First 280 chars, no HTML. */
+  /** First 280 chars of the plain text, no HTML. */
   snippet: string;
   receivedAt: string;
   enrollmentId: string | null;
-  /** Optional widening of the contract: the enrollment's status when the route sends one. */
-  enrollmentStatus?: string | null;
+  enrollmentStatus: string | null;
   suggestion?: ReplySuggestion | null;
+  /** The confirmed disposition id; present only when `state=all` returns a dispositioned reply. */
+  dispositionId?: string | null;
 }
 
 export interface RepliesPage {
@@ -163,25 +218,38 @@ export interface ListRepliesParams {
   cursor?: string | null;
 }
 
+/** `POST /api/gap/replies/[id]/suggest` body: `null` means the model's answer was unusable; `rejected` says why. */
 export interface SuggestResult {
   suggestion: ReplySuggestion | null;
+  rejected?: string;
 }
 
 export interface BriefPersona {
-  id: number | string;
+  id: number;
+  personaKey: string | null;
   name: string | null;
-  title?: string | null;
+  title: string | null;
   email: string | null;
-  phone?: string | null;
-  personaKey?: string | null;
+  phone: string | null;
+  role: string | null;
+  doNotContact: boolean;
 }
 
 export interface BriefAccount {
   name: string;
-  hubspotCompanyId?: string | null;
-  tam?: string | null;
-  tamTier?: string | null;
-  heatTier?: number | null;
+  hubspotCompanyId: string | null;
+  tier: string | null;
+  vertical: string | null;
+}
+
+/** A linked signal of the FACT block (`BriefSignal` in brief.ts; a superset of the FACT block's `FactSignal`). */
+export interface BriefSignal {
+  id: string;
+  title: string | null;
+  source_kind: string | null;
+  evidence_url: string | null;
+  evidence_text: string | null;
+  observed_at: string | null;
 }
 
 export interface BriefHypothesis {
@@ -189,14 +257,19 @@ export interface BriefHypothesis {
   status: string;
   problemFamily: string;
   confidence: number;
+  /** FACT block */
   observation: string;
-  signals: FactSignal[];
+  signals: BriefSignal[];
+  /** HYPOTHESIS block */
   problemHypothesis: string;
   rootCauseHypotheses: string[];
   impactHypotheses: string[];
   whyNow: string | null;
   falsificationQuestions: string[];
   whatANoMeans: string | null;
+  contraryEvidence: string | null;
+  predictedBuyerLanguage: string | null;
+  /** what_a_no_means and contrary_evidence, the non-empty ones. */
   wouldProveWrong: string[];
 }
 
@@ -204,19 +277,21 @@ export interface BriefDisposition {
   id: string;
   channel: string;
   responseClass: string;
-  buyerLanguage?: string | null;
+  buyerLanguage: string | null;
+  humanConfirmed: boolean;
   createdAt: string;
 }
 
+/** An open BID: unconfirmed and unsuperseded, so `humanConfirmed` is always false here. */
 export interface BriefBid {
   id: string;
   type: string;
   rawBuyerLanguage: string;
   humanConfirmed: boolean;
-  capturedAt?: string | null;
+  capturedAt: string | null;
 }
 
-/** `GET /api/gap/call/[personaId]` body: the pre-call brief. */
+/** `GET /api/gap/call/[personaId]` body: the pre-call brief (`CallBrief` in brief.ts). */
 export interface CallBrief {
   persona: BriefPersona;
   account: BriefAccount;
@@ -248,6 +323,14 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+/** The error string of a non-2xx body: `error` verbatim, else a flag-off skip payload's `reason`, else `http_<status>`. */
+export function errorOf(body: unknown, status: number): string {
+  const record = isRecord(body) ? body : {};
+  if (typeof record.error === 'string' && record.error.length > 0) return record.error;
+  if (record.skipped === true && typeof record.reason === 'string' && record.reason.length > 0) return record.reason;
+  return `http_${status}`;
+}
+
 /** One request. Never throws; the result carries the outcome. */
 export async function request<T>(url: string, init: RequestInit, opts: ClientOptions = {}): Promise<ApiResult<T>> {
   const doFetch = resolveFetch(opts.fetchImpl);
@@ -266,7 +349,7 @@ export async function request<T>(url: string, init: RequestInit, opts: ClientOpt
   }
 
   const record = isRecord(body) ? body : {};
-  const error = typeof record.error === 'string' && record.error.length > 0 ? record.error : `http_${res.status}`;
+  const error = errorOf(body, res.status);
   const field = typeof record.field === 'string' && record.field.length > 0 ? record.field : undefined;
   return field ? { ok: false, status: res.status, error, field } : { ok: false, status: res.status, error };
 }

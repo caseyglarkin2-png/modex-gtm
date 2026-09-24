@@ -15,8 +15,17 @@ import type { CallBrief } from '@/lib/gap/ui/gap-api-client';
 
 function brief(overrides: Partial<CallBrief> = {}): CallBrief {
   return {
-    persona: { id: 41, name: 'Jordan Reyes', title: 'VP Operations', email: 'jordan@acme.example', phone: '+1 555 0100', personaKey: 'executive_ops' },
-    account: { name: 'Acme Foods', hubspotCompanyId: '123', tam: 'in', tamTier: 'A', heatTier: 2 },
+    persona: {
+      id: 41,
+      personaKey: 'executive_ops',
+      name: 'Jordan Reyes',
+      title: 'VP Operations',
+      email: 'jordan@acme.example',
+      phone: '+1 555 0100',
+      role: 'economic_buyer',
+      doNotContact: false,
+    },
+    account: { name: 'Acme Foods', hubspotCompanyId: '123', tier: 'A', vertical: 'food_and_beverage' },
     hypothesis: {
       id: 'hyp_1',
       status: 'active',
@@ -33,14 +42,18 @@ function brief(overrides: Partial<CallBrief> = {}): CallBrief {
       whyNow: 'The Reno ramp lands this quarter.',
       falsificationQuestions: ['Does Reno run its own gate with no dwell problem?'],
       whatANoMeans: 'The yards are not the constraint at Reno.',
+      contraryEvidence: 'Detention is already near zero.',
+      predictedBuyerLanguage: 'Trucks stack up at the gate every morning.',
       wouldProveWrong: ['Reno runs a separate gate with no queue.', 'Detention is already near zero.'],
     },
     lastDispositions: [
-      { id: 'd1', channel: 'email', responseClass: 'request_information', buyerLanguage: 'Send me the two-site comparison.', createdAt: '2026-09-20T14:00:00.000Z' },
+      { id: 'd1', channel: 'email', responseClass: 'request_information', buyerLanguage: 'Send me the two-site comparison.', humanConfirmed: true, createdAt: '2026-09-20T14:00:00.000Z' },
+      { id: 'd0', channel: 'call', responseClass: 'voicemail', buyerLanguage: null, humanConfirmed: false, createdAt: '2026-09-19T14:00:00.000Z' },
     ],
+    // Open BIDs are unconfirmed and unsuperseded by definition (brief.ts), so every row here is unconfirmed.
     openBids: [
-      { id: 'b1', type: 'business_problem', rawBuyerLanguage: 'Trucks wait an hour at the gate.', humanConfirmed: true },
-      { id: 'b2', type: 'impact', rawBuyerLanguage: 'We pay detention weekly.', humanConfirmed: false },
+      { id: 'b1', type: 'business_problem', rawBuyerLanguage: 'Trucks wait an hour at the gate.', humanConfirmed: false, capturedAt: '2026-09-20T14:00:00.000Z' },
+      { id: 'b2', type: 'impact', rawBuyerLanguage: 'We pay detention weekly.', humanConfirmed: false, capturedAt: null },
     ],
     suggestedQuestions: ['Which door do you trust least?', 'How do you find a trailer today?'],
     ...overrides,
@@ -73,8 +86,15 @@ describe('<PreCallBrief>', () => {
     expect(screen.getByText('jordan@acme.example', { exact: false })).toBeInTheDocument();
     expect(screen.getByTestId('brief-account')).toHaveTextContent('Acme Foods');
     expect(screen.getByTestId('brief-account')).toHaveTextContent('tier A');
-    expect(screen.getByTestId('brief-account')).toHaveTextContent('heat tier 2');
+    expect(screen.getByTestId('brief-account')).toHaveTextContent('food and beverage');
+    expect(screen.getByText('economic buyer')).toBeInTheDocument();
+    expect(screen.queryByTestId('brief-do-not-contact')).toBeNull();
     expect(screen.getByText('hidden capacity')).toBeInTheDocument();
+  });
+
+  it('warns when the persona is do-not-contact', () => {
+    render(<PreCallBrief brief={brief({ persona: { ...brief().persona, doNotContact: true } })} />);
+    expect(screen.getByTestId('brief-do-not-contact')).toHaveTextContent('do not contact');
   });
 
   it('renders would-prove-wrong, last dispositions, open BIDs and suggested questions under their labels', () => {
@@ -88,11 +108,13 @@ describe('<PreCallBrief>', () => {
     expect(dispositions).toHaveTextContent('request information');
     expect(dispositions).toHaveTextContent('Send me the two-site comparison.');
     expect(dispositions).toHaveTextContent('email 2026-09-20 14:00Z');
+    expect(dispositions).toHaveTextContent('voicemail');
+    expect(within(dispositions).getAllByText('unconfirmed')).toHaveLength(1);
 
     const bids = screen.getByTestId('brief-bids');
     expect(within(bids).getByText(BRIEF_LABELS.openBids)).toBeInTheDocument();
     expect(bids).toHaveTextContent('Trucks wait an hour at the gate.');
-    expect(within(bids).getAllByText('unconfirmed')).toHaveLength(1);
+    expect(within(bids).getAllByText('unconfirmed')).toHaveLength(2);
 
     const questions = screen.getByTestId('brief-questions');
     expect(within(questions).getByText(BRIEF_LABELS.suggestedQuestions)).toBeInTheDocument();
@@ -114,7 +136,7 @@ describe('<PreCallBrief>', () => {
   });
 
   it('falls back to the email when the persona has no name', () => {
-    render(<PreCallBrief brief={brief({ persona: { id: 7, name: null, email: 'ops@acme.example' } })} />);
+    render(<PreCallBrief brief={brief({ persona: { id: 7, personaKey: null, name: null, title: null, email: 'ops@acme.example', phone: null, role: null, doNotContact: false } })} />);
     expect(screen.getByTestId('brief-persona')).toHaveTextContent('ops@acme.example');
   });
 });

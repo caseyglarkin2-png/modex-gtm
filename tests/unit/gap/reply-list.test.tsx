@@ -33,6 +33,7 @@ function item(overrides: Partial<ReplyItem> = {}): ReplyItem {
 }
 
 const SUGGESTION = {
+  id: 'disp_ai_1',
   responseClass: 'problem_confirmed',
   bids: [{ type: 'business_problem', quote: 'trucks sit at the gate for an hour', why: 'names the problem' }],
   why: 'agrees with the hypothesis',
@@ -68,6 +69,13 @@ describe('<ReplyList>', () => {
     const second = within(rows[1]);
     expect(second.getByTestId('source-badge')).toHaveTextContent('hubspot');
     expect(second.getByTestId('reply-enrollment')).toHaveTextContent('not enrolled');
+  });
+
+  it('marks a dispositioned row (state=all) and leaves an undispositioned one unmarked', () => {
+    render(<ReplyList items={[item(), item({ id: 'r2', dispositionId: 'disp_9' })]} expandedId={null} onToggle={() => {}} renderExpanded={() => null} />);
+    const rows = screen.getAllByTestId('reply-row');
+    expect(within(rows[0]).queryByTestId('reply-dispositioned')).toBeNull();
+    expect(within(rows[1]).getByTestId('reply-dispositioned')).toHaveTextContent('dispositioned');
   });
 
   it('shows the AI chip ONLY when a suggestion is present, labelled exactly', () => {

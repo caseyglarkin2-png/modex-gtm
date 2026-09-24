@@ -72,6 +72,7 @@ const EMAIL_PREFILL: DispositionPrefill = {
 };
 
 const SUGGESTION: ReplySuggestion = {
+  id: 'disp_ai_1',
   responseClass: 'problem_confirmed',
   bids: [{ type: 'business_problem', quote: 'Trucks sit at the gate for an hour.', why: 'names the problem' }],
   why: 'The reply agrees with the hypothesis.',

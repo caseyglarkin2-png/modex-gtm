@@ -8,7 +8,8 @@
  * contact, the account, the hypothesis, when it arrived, and whether the
  * address is enrolled. An "AI suggestion" chip appears ONLY when the row
  * carries a `suggestion`, labelled exactly `AI_SUGGESTION_LABEL`; the list
- * never chooses a class for the human. Clicking a row asks the owner to
+ * never chooses a class for the human. A "dispositioned" badge marks a row
+ * that carries `dispositionId` (only `state=all` returns those). Clicking a row asks the owner to
  * toggle it; the owner renders the disposition form inline through
  * `renderExpanded` with the reply's ids prefilled.
  *
@@ -94,6 +95,11 @@ export function ReplyList({ items, expandedId, onToggle, renderExpanded, loading
                 </Badge>
                 <span className="font-medium">{item.subject?.trim() || '(no subject)'}</span>
                 <span className="text-xs text-[var(--muted-foreground)]">{formatWhen(item.receivedAt, true)}</span>
+                {item.dispositionId ? (
+                  <Badge data-testid="reply-dispositioned" variant="outline">
+                    dispositioned
+                  </Badge>
+                ) : null}
                 {item.suggestion ? <AiSuggestionChip suggestion={item.suggestion} /> : null}
               </span>
               <span data-testid="reply-snippet" className="line-clamp-2 text-[var(--muted-foreground)]">

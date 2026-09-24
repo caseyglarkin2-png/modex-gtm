@@ -58,11 +58,17 @@ export function PreCallBrief({ brief }: PreCallBriefProps) {
             {persona?.email ?? 'no email'}
             {persona?.phone ? <span className="ml-2">{persona.phone}</span> : null}
             {persona?.personaKey ? <span className="ml-2">{words(persona.personaKey)}</span> : null}
+            {persona?.role ? <span className="ml-2">{words(persona.role)}</span> : null}
+            {persona?.doNotContact ? (
+              <Badge data-testid="brief-do-not-contact" variant="destructive" className="ml-2">
+                do not contact
+              </Badge>
+            ) : null}
           </p>
           <p data-testid="brief-account" className="mt-1">
             {account?.name}
-            {account?.tamTier ? <span className="ml-2 text-xs text-[var(--muted-foreground)]">tier {account.tamTier}</span> : null}
-            {typeof account?.heatTier === 'number' ? <span className="ml-2 text-xs text-[var(--muted-foreground)]">heat tier {account.heatTier}</span> : null}
+            {account?.tier ? <span className="ml-2 text-xs text-[var(--muted-foreground)]">tier {account.tier}</span> : null}
+            {account?.vertical ? <span className="ml-2 text-xs text-[var(--muted-foreground)]">{words(account.vertical)}</span> : null}
           </p>
         </div>
         {hypothesis ? (
@@ -117,6 +123,7 @@ export function PreCallBrief({ brief }: PreCallBriefProps) {
                     <span className="text-xs text-[var(--muted-foreground)]">
                       {String(row.channel)} {formatWhen(row.createdAt, true)}
                     </span>
+                    {row.humanConfirmed ? null : <Badge variant="warning">unconfirmed</Badge>}
                   </span>
                   {row.buyerLanguage ? <q className="text-[var(--muted-foreground)]">{row.buyerLanguage}</q> : null}
                 </li>
