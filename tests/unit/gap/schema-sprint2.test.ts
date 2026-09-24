@@ -63,6 +63,37 @@ describe('S2-T1: InboundMessage schema (structural)', () => {
   });
 });
 
+describe('SF15 (Opus adversarial review, 2026-09-24): the rollback reverts inbound_messages too', () => {
+  const ROLLBACK_PATH = path.resolve(__dirname, '../../../prisma/sql/2026-09-23-gap-os-rollback.sql');
+
+  function rollback(): string {
+    return readFileSync(ROLLBACK_PATH, 'utf8');
+  }
+
+  it('drops both S2-T1 columns on inbound_messages', () => {
+    const sql = rollback();
+    expect(sql).toMatch(/ALTER TABLE IF EXISTS inbound_messages DROP COLUMN IF EXISTS source;/);
+    expect(sql).toMatch(/ALTER TABLE IF EXISTS inbound_messages DROP COLUMN IF EXISTS hubspot_engagement_id;/);
+  });
+
+  it('drops both S2-T1 indexes, by name, before the column drops that would also remove them', () => {
+    const sql = rollback();
+    const sourceIdxAt = sql.indexOf('DROP INDEX IF EXISTS inbound_messages_source_received_at_idx;');
+    const engagementIdxAt = sql.indexOf('DROP INDEX IF EXISTS inbound_messages_hubspot_engagement_id_idx;');
+    const sourceColAt = sql.indexOf('DROP COLUMN IF EXISTS source;');
+    expect(sourceIdxAt).toBeGreaterThan(-1);
+    expect(engagementIdxAt).toBeGreaterThan(-1);
+    expect(sourceIdxAt).toBeLessThan(sourceColAt);
+  });
+
+  it('never touches the pre-existing inbound_messages columns (id, thread_id, from_email, ...)', () => {
+    const sql = rollback();
+    for (const col of ['id', 'thread_id', 'from_email', 'received_at', 'read']) {
+      expect(sql).not.toMatch(new RegExp(`DROP COLUMN IF EXISTS ${col};`));
+    }
+  });
+});
+
 describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
   const GAP_CRONS = ['gap-hypothesize', 'gap-enrollment-sync', 'gap-hubspot-replies'] as const;
 
