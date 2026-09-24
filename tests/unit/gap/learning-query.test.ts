@@ -322,4 +322,30 @@ describe('buildLearningReport', () => {
     const report = await buildLearningReport(prisma, { now });
     expect(report.replyBacklog).toEqual({ count: 1, oldestAgeHours: 72, thresholdHours: 24 });
   });
+
+  it('6F: breaks conversations down by the real enrollment engine, never a caller-supplied label', async () => {
+    const prisma = makePrisma({
+      dispositions: [
+        disposition({ id: 'D1', hypothesis_id: 'H1', enrollment: { sender: 'a@x.com', engine: 'hubspot_native' } }),
+        disposition({ id: 'D2', hypothesis_id: 'H1', enrollment: { sender: 'a@x.com', engine: 'modex_draft_queue' } }),
+      ],
+    });
+    const report = await buildLearningReport(prisma);
+    const keys = report.byEngine.map((r) => r.key).sort();
+    expect(keys).toEqual(['hubspot_native', 'modex_draft_queue']);
+  });
+
+  it('6F: counts an open hypothesis older than the threshold as stale, never a terminal one regardless of age', async () => {
+    const now = new Date('2026-09-24T12:00:00.000Z');
+    const dayMs = 24 * 60 * 60 * 1000;
+    const prisma = makePrisma({
+      hypotheses: [
+        hypothesis({ id: 'H1', status: 'active', created_at: new Date(now.getTime() - 30 * dayMs) }),
+        hypothesis({ id: 'H2', status: 'draft', created_at: new Date(now.getTime() - 1 * dayMs) }),
+        hypothesis({ id: 'H3', status: 'confirmed', created_at: new Date(now.getTime() - 90 * dayMs) }),
+      ],
+    });
+    const report = await buildLearningReport(prisma, { now });
+    expect(report.staleHypotheses).toEqual({ value: 0.5, n: 2, numerator: 1, denominator: 2 });
+  });
 });

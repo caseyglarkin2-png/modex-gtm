@@ -345,3 +345,34 @@ export function computeSignalYield(
     })
     .sort((a, b) => b.signalCount - a.signalCount);
 }
+
+// ---------------------------------------------------------------------------
+// 6F: stale-hypothesis count. "What should we do more/less of": an open
+// hypothesis nobody has moved in a long time is exactly the kind of thing
+// operational learning exists to surface, not just resolution rates.
+// ---------------------------------------------------------------------------
+
+export interface StaleHypothesisInput {
+  status: string;
+  createdAt: Date;
+}
+
+/** Default threshold: a session-chosen number (like SF14's compile-age default), not a product decision. Override via the caller's own arg. */
+export const DEFAULT_STALE_HYPOTHESIS_DAYS = 14;
+
+/**
+ * `rate` of stale-among-open: numerator is open hypotheses older than the
+ * threshold, denominator is every open hypothesis (a terminal hypothesis is
+ * never "stale" -- it already resolved, expired or was withdrawn).
+ */
+export function computeStaleHypotheses(
+  hypotheses: readonly StaleHypothesisInput[],
+  openStatuses: ReadonlySet<string>,
+  now: Date,
+  thresholdDays: number = DEFAULT_STALE_HYPOTHESIS_DAYS,
+): Rate {
+  const cutoff = now.getTime() - thresholdDays * 24 * 60 * 60 * 1000;
+  const open = hypotheses.filter((h) => openStatuses.has(h.status));
+  const stale = open.filter((h) => h.createdAt.getTime() < cutoff);
+  return rate(stale.length, open.length);
+}
