@@ -20,6 +20,7 @@
  */
 
 import { selectConfirmedBids, numericValueOf } from '../bid/select';
+import { isInternalRecipient } from '../sequence/internal-recipient';
 import {
   computeFunnel,
   breakdownByHypothesisDimension,
@@ -59,7 +60,7 @@ function nonEmpty(value: unknown): boolean {
 }
 
 export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
-  const [hypothesisRows, dispositionRows, bidRows] = await Promise.all([
+  const [hypothesisRows, dispositionRows, bidRows, enrollmentAttributionRows] = await Promise.all([
     prisma.prospectingHypothesis.findMany({
       select: {
         id: true,
@@ -67,15 +68,17 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
         account_name: true,
         problem_family: true,
         persona: true,
-        sequence_family_id: true,
-        sequence_version_id: true,
         account: { select: { tier: true } },
         signals: { select: { role: true, signal: { select: { type: true } } } },
       },
     }),
-    // The gate: only a HUMAN-CONFIRMED disposition is a conversation. See file header.
+    // The gate: only a HUMAN-CONFIRMED disposition is a conversation (see
+    // file header). B9 (Opus adversarial review, 2026-09-24): also excludes
+    // an is_test enrollment, so an internal test run's confirmed dispositions
+    // never feed resolution, precision or the G5 gate. The OR lets through
+    // dispositions with no enrollment at all (a call or manual channel).
     prisma.conversationDisposition.findMany({
-      where: { human_confirmed: true },
+      where: { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] },
       select: {
         id: true,
         hypothesis_id: true,
@@ -83,6 +86,7 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
         channel: true,
         root_cause_class: true,
         impact_class: true,
+        contact_email: true,
         enrollment: { select: { sender: true } },
       },
     }),
@@ -97,7 +101,31 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
         unit: true,
       },
     }),
+    // B8 (Opus adversarial review, 2026-09-24): ProspectingHypothesis.sequence_family_id
+    // and .sequence_version_id are never written by any code path (grep of
+    // src and scripts). SequenceEnrollment.hypothesis_id is the real
+    // attribution; the newest enrollment per hypothesis wins.
+    prisma.sequenceEnrollment.findMany({
+      where: { hypothesis_id: { not: null } },
+      select: { hypothesis_id: true, family_id: true, sequence_version_id: true, enrolled_at: true },
+      orderBy: { enrolled_at: 'desc' },
+    }),
   ]);
+
+  // B9: the internal-recipient exclusion cannot be expressed as a Prisma
+  // `where` (the FROM_EMAIL override is an env read), so it runs here,
+  // structurally identical to the is_test predicate perform-send.ts and
+  // sequence/enrollment.ts already apply.
+  const externalDispositionRows = (dispositionRows as any[]).filter((d) => !isInternalRecipient(d.contact_email));
+
+  const sequenceAttributionByHypothesis = new Map<string, { familyId: string | null; versionId: string | null }>();
+  for (const row of enrollmentAttributionRows as any[]) {
+    if (!row.hypothesis_id || sequenceAttributionByHypothesis.has(row.hypothesis_id)) continue;
+    sequenceAttributionByHypothesis.set(row.hypothesis_id, {
+      familyId: row.family_id ?? null,
+      versionId: row.sequence_version_id ?? null,
+    });
+  }
 
   const confirmedBids = selectConfirmedBids(
     (bidRows as any[]).map((b) => ({ id: b.id, humanConfirmed: b.human_confirmed === true, supersedesId: b.supersedes_id ?? null })),
@@ -122,6 +150,7 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
   const hypotheses: LearningHypothesisRow[] = (hypothesisRows as any[]).map((h) => {
     const signals: Array<{ role: string; signal: { type: string } | null }> = h.signals ?? [];
     const primary = signals.find((s) => s.role === 'primary') ?? signals[0];
+    const attribution = sequenceAttributionByHypothesis.get(h.id);
     return {
       id: h.id,
       status: h.status,
@@ -129,13 +158,13 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
       problemFamily: h.problem_family ?? null,
       persona: h.persona ?? null,
       tamTier: h.account?.tier ?? null,
-      sequenceFamilyId: h.sequence_family_id ?? null,
-      sequenceVersionId: h.sequence_version_id ?? null,
+      sequenceFamilyId: attribution?.familyId ?? null,
+      sequenceVersionId: attribution?.versionId ?? null,
       primarySignalType: primary?.signal?.type ?? null,
     };
   });
 
-  const conversations: LearningConversationRow[] = (dispositionRows as any[]).map((d) => {
+  const conversations: LearningConversationRow[] = externalDispositionRows.map((d) => {
     const quantified = quantifiedImpactHypIds.has(d.hypothesis_id);
     return {
       id: d.id,
