@@ -502,6 +502,51 @@ describe('target resolution', () => {
     ).toEqual({ ok: false, reason: 'no_email' });
   });
 
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Before this fix,
+   * hypothesisId and personaId were resolved independently with no relation
+   * enforced between them: a hypothesis for one account and a persona from
+   * a completely different account both resolved fine on their own, so the
+   * service would compile/attribute one company's evidence and copy while
+   * enrolling a different company's actual contact. Mutate the check away
+   * and this goes RED.
+   */
+  it('account_mismatch: a persona from a different account than the hypothesis is refused before suppression or target resolution', async () => {
+    const prisma = makePrisma({
+      persona: { id: 7, name: 'Jane Doe', email: 'jane.doe@other-co.com', account_name: 'Other Co', hubspot_contact_id: '222', do_not_contact: false, email_status: 'verified' },
+    });
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r).toEqual({ ok: false, reason: 'account_mismatch' });
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+  });
+
+  it('account_mismatch control: the same account on both sides enrolls normally', async () => {
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). An explicit decisionId
+   * names one RoutingDecision row, routed for ONE persona; if the caller's
+   * personaId names someone else, that row's target/snapshot (Top100
+   * eligibility, preferred sender) would silently apply to the wrong person.
+   */
+  it('decision_persona_mismatch: an explicit decisionId for a different persona is refused', async () => {
+    const prisma = makePrisma({ decision: decisionRow({ persona_id: 999 }) });
+    const r = await enrollFromDecision(prisma, input({ decisionId: 'dec_1', personaId: 7 }), deps());
+    expect(r).toEqual({ ok: false, reason: 'decision_persona_mismatch' });
+  });
+
+  it('decision_persona_mismatch control: a matching persona_id, or no decisionId at all, enrolls normally', async () => {
+    const matching = makePrisma({ decision: decisionRow({ persona_id: 7 }) });
+    expect((await enrollFromDecision(matching, input({ decisionId: 'dec_1', personaId: 7 }), deps())).ok).toBe(true);
+
+    const noDecisionId = makePrisma({ decision: decisionRow({ persona_id: 999 }) });
+    expect((await enrollFromDecision(noDecisionId, input({ decisionId: undefined, personaId: 7 }), deps())).ok).toBe(true);
+  });
+
   it('build_required from the Top100 entry (in the roster, no built sequence) refuses and creates nothing', async () => {
     const prisma = makePrisma({
       decision: decisionRow({

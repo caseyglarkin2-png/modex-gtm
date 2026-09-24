@@ -219,6 +219,8 @@ export type EnrollServiceRefusal =
   | 'hypothesis_not_found'
   | 'persona_not_found'
   | 'no_email'
+  | 'account_mismatch'
+  | 'decision_persona_mismatch'
   | 'active_opportunity'
   | 'build_required'
   | 'step_has_no_copy:0'
@@ -352,6 +354,7 @@ interface DecisionRow {
   priority: number;
   explain: unknown;
   inputs_snapshot: unknown;
+  persona_id: number | null;
 }
 
 const DECISION_SELECT = {
@@ -363,6 +366,7 @@ const DECISION_SELECT = {
   priority: true,
   explain: true,
   inputs_snapshot: true,
+  persona_id: true,
 } as const;
 
 async function loadDecision(prisma: any, input: EnrollFromDecisionInput): Promise<DecisionRow | null> {
@@ -571,6 +575,17 @@ export async function enrollFromDecision(
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
 
+  // SHOULD FIX (Opus adversarial review, 2026-09-24): hypothesisId and
+  // personaId are two independent caller-supplied ids with no relation
+  // enforced between them. Without this check, a hypothesis for Account A
+  // and a persona from Account B both resolve fine on their own, and the
+  // service would compile/attribute Account A's evidence and copy while
+  // enrolling Account B's actual contact -- sending one company's
+  // buyer-specific claims to a different company's inbox.
+  if (persona.account_name !== hypothesis.account_name) {
+    return refuse('account_mismatch', { hypothesisAccount: hypothesis.account_name, personaAccount: persona.account_name });
+  }
+
   // 6b. Suppression, before any target is resolved (R3-2, R3-10): the same
   // guard enroll() runs, local legs then the cross-plane read; the leg is named.
   const suppressionOpts = deps.suppression ? { suppression: deps.suppression } : {};
@@ -579,6 +594,15 @@ export async function enrollFromDecision(
 
   // 7. Target from the persona's Top100 entry (the decision snapshot carries it).
   const decision = await loadDecision(prisma, input);
+  // SHOULD FIX (Opus adversarial review, 2026-09-24): an explicit decisionId
+  // names a specific RoutingDecision row; that row was routed for ONE
+  // persona. If the caller's personaId names someone else, the decision's
+  // target/snapshot (Top100 eligibility, preferred sender) would silently
+  // apply to the wrong person. A decision resolved by the personaId lookup
+  // fallback (no decisionId given) cannot mismatch by construction.
+  if (input.decisionId && decision && decision.persona_id != null && decision.persona_id !== input.personaId) {
+    return refuse('decision_persona_mismatch', { decisionPersonaId: decision.persona_id, requestedPersonaId: input.personaId });
+  }
   const top100 = deps.top100 !== undefined ? deps.top100 : top100Of(decision);
   const target: EnrollTarget =
     deps.top100 !== undefined
