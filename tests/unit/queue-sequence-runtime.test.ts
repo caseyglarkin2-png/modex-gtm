@@ -115,35 +115,54 @@ describe('scheduleNextStep', () => {
     });
   });
 
-  it('flag off: the created row carries NO sequence_version_id, even when the item has one', async () => {
+  /**
+   * B5 (Opus adversarial review, 2026-09-24, LIVE NOW). Before this fix,
+   * flag-off scheduling created the next step verbatim from `Sequence.steps`
+   * and approved it directly (no compile), even for a run GAP had pinned to
+   * an immutable version. Turning the flag off mid-run to roll back therefore
+   * made outbound LESS safe: a version-pinned item's next step still got
+   * created and approved raw. Mutate the guard away and this goes RED.
+   */
+  it('B5: flag off + a version-pinned item schedules NOTHING, not a raw approved step', async () => {
+    prisma.sequence.findUnique.mockResolvedValue({ id: 9, steps: TWO_STEP });
+
+    const out = await scheduleNextStep(prisma, step0Item({ sequence_version_id: 'ver-1' }));
+
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+  });
+
+  /**
+   * B5, second half: even without a version pin on the item, a legacy
+   * `Sequence.steps` row can itself carry unrendered GAP templates (written
+   * by materializeSequence). Flag off must never approve a step whose copy
+   * still has a literal {{token}} in it.
+   */
+  it('B5: flag off + an unrendered {{token}} in the step copy schedules NOTHING', async () => {
+    prisma.sequence.findUnique.mockResolvedValue({
+      id: 9,
+      steps: [
+        { stepIndex: 0, delayDays: 0, subjectTemplate: 'S0', bodyTemplate: 'B0' },
+        { stepIndex: 1, delayDays: 3, subjectTemplate: 'Following up, {{first_name}}', bodyTemplate: '{{observation}}' },
+      ],
+    });
+
+    const out = await scheduleNextStep(prisma, step0Item());
+
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+  });
+
+  it('B5 control: flag off, no version pin, no unrendered token, still schedules normally', async () => {
     prisma.sequence.findUnique.mockResolvedValue({ id: 9, steps: TWO_STEP });
     prisma.draftQueueItem.create.mockResolvedValue({ id: 201 });
 
-    await scheduleNextStep(prisma, step0Item({ sequence_version_id: 'ver-1' }));
+    const out = await scheduleNextStep(prisma, step0Item());
 
+    expect(out).toBe(201);
     const data = prisma.draftQueueItem.create.mock.calls[0][0].data;
     expect('sequence_version_id' in data).toBe(false);
-    expect(Object.keys(data).sort()).toEqual(
-      [
-        'account_name',
-        'approved_at',
-        'body',
-        'created_by',
-        'idempotency_key',
-        'image_url',
-        'owner',
-        'parent_item_id',
-        'persona_id',
-        'persona_name',
-        'scheduled_for',
-        'sequence_id',
-        'sequence_run_id',
-        'status',
-        'step_index',
-        'subject',
-        'to_email',
-      ].sort(),
-    );
+    expect(data.status).toBe(STATUS.approved);
   });
 });
 

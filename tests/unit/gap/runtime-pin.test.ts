@@ -117,9 +117,12 @@ describe('scheduleNextStep, flag OFF', () => {
       sequenceVersion: throwingDelegate('sequenceVersion'),
       emailLog: { findUnique: vi.fn() },
       draftQueueItem: { create: vi.fn().mockResolvedValue({ id: 201 }), findUnique: vi.fn() },
+      gapAuditEvent: throwingDelegate('gapAuditEvent'),
     };
 
-    const out = await scheduleNextStep(prisma, step0Item({ sequence_version_id: 'ver-1' }));
+    // No version stamp on the item: this is a genuinely legacy run, so the
+    // B5 flag-off refusal never triggers and scheduling proceeds as before.
+    const out = await scheduleNextStep(prisma, step0Item());
 
     expect(out).toBe(201);
     expect(prisma.sequence.findUnique).toHaveBeenCalledTimes(1);
@@ -134,6 +137,33 @@ describe('scheduleNextStep, flag OFF', () => {
     expect(data.status).toBe(STATUS.approved);
     expect(data.approved_at).toBeInstanceOf(Date);
     expect(mockedCompile).not.toHaveBeenCalled();
+  });
+
+  /**
+   * B5 (Opus adversarial review, 2026-09-24, LIVE NOW). A version-stamped
+   * item under flag-off used to be scheduled from the live sequence anyway
+   * (this test used to assert exactly that). That made the kill switch
+   * LESS safe: rolling GAP_OS_ENABLED off mid-run let the next step of a
+   * GAP-compiled run through with no compile. Now it schedules nothing, and
+   * still never touches the enrollment/version delegates (the pre-check
+   * only looks at the item's own stamp).
+   */
+  it('B5: a version-stamped item under flag off schedules NOTHING, and never touches enrollment/version delegates', async () => {
+    const prisma = {
+      sequence: { findUnique: vi.fn().mockResolvedValue({ id: 9, steps: TWO_STEP }) },
+      sequenceEnrollment: throwingDelegate('sequenceEnrollment'),
+      sequenceVersion: throwingDelegate('sequenceVersion'),
+      emailLog: { findUnique: vi.fn() },
+      draftQueueItem: { create: vi.fn().mockResolvedValue({ id: 201 }), findUnique: vi.fn() },
+      gapAuditEvent: { create: vi.fn().mockResolvedValue({ id: 'aud_1' }) },
+    };
+
+    const out = await scheduleNextStep(prisma, step0Item({ sequence_version_id: 'ver-1' }));
+
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create).toHaveBeenCalledTimes(1);
+    expect(prisma.gapAuditEvent.create.mock.calls[0][0].data).toMatchObject({ kind: 'schedule.skipped' });
   });
 
   it('flag spelled "false": still the legacy path', async () => {
@@ -595,22 +625,30 @@ describe('scheduleNextStep placeholder rendering (S3-T12)', () => {
     expect(prisma.draftQueueItem.create.mock.calls[0][0].data.body.startsWith('Hi there,')).toBe(true);
   });
 
-  it('flag OFF: the template is queued byte for byte, braces and all, and no persona is read', async () => {
+  /**
+   * B5 (Opus adversarial review, 2026-09-24, LIVE NOW). This test used to
+   * prove the template was queued byte for byte, braces and all, and
+   * approved directly: a legacy `Sequence.steps` row carrying unrendered
+   * GAP templates (materializeSequence writes exactly this shape) would be
+   * sent to a prospect with a literal "{{account}}" in the subject line.
+   * Flag off now refuses to schedule a step whose copy still has a
+   * {{token}}, rather than queuing it verbatim.
+   */
+  it('B5: flag OFF + an unrendered {{token}} schedules NOTHING, not the raw template', async () => {
     delete process.env.GAP_OS_ENABLED;
     const prisma = {
       sequence: { findUnique: vi.fn().mockResolvedValue({ id: 9, steps: TEMPLATED }) },
       sequenceEnrollment: throwingDelegate('sequenceEnrollment'),
       sequenceVersion: throwingDelegate('sequenceVersion'),
       persona: throwingDelegate('persona'),
-      gapAuditEvent: throwingDelegate('gapAuditEvent'),
+      gapAuditEvent: { create: vi.fn().mockResolvedValue({ id: 'aud_1' }) },
       emailLog: { findUnique: vi.fn() },
       draftQueueItem: { create: vi.fn().mockResolvedValue({ id: 201 }), findUnique: vi.fn() },
     };
     const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }));
-    expect(out).toBe(201);
-    const data = prisma.draftQueueItem.create.mock.calls[0][0].data;
-    expect(data.subject).toBe('Re: {{account}} gate clerks');
-    expect(data.body).toBe(TEMPLATED[1].bodyTemplate);
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create.mock.calls[0][0].data).toMatchObject({ kind: 'schedule.skipped' });
   });
 
   it('flag ON: a token the renderer does not know schedules NOTHING and audits schedule.unrendered_placeholder with the token', async () => {
