@@ -117,7 +117,13 @@ function makePrisma(seed: { personas?: unknown[]; config?: Record<string, string
       }),
     },
     persona: {
-      findMany: vi.fn(async () => personas),
+      // SF8: only sorts when the caller explicitly asks for id asc (as
+      // production now does), so a fixture seeded out of id order proves
+      // the caller REQUESTS deterministic ordering, not just that a
+      // first-wins dedupe exists over whatever order the DB happened to hand back.
+      findMany: vi.fn(async (q: any = {}) =>
+        q?.orderBy?.id === 'asc' ? [...(personas as any[])].sort((a, b) => a.id - b.id) : personas,
+      ),
     },
     notification: {
       findFirst: vi.fn(async ({ where }: any) =>
@@ -374,6 +380,31 @@ describe('pollHubSpotReplies: classification and persistence', () => {
 
     // One transaction per persisted engagement, and only for the human reply.
     expect(prisma.$transaction).toHaveBeenCalledTimes(1);
+  });
+
+  it('SF8: a reply from an email shared by two personas attributes to the lowest-id persona, deterministically, regardless of DB row order', async () => {
+    const shared = 'dup@acme.example';
+    const prisma = makePrisma({
+      personas: [
+        // Seeded out of id order: the fix must sort, not trust array order.
+        { id: 20, email: shared, account_name: 'Wrong Account', hubspot_contact_id: '9099' },
+        { id: 3, email: shared, account_name: ACCOUNT, hubspot_contact_id: CONTACT_ID },
+      ],
+    });
+
+    const report = await pollHubSpotReplies(
+      prisma,
+      { now: NOW, dryRun: false },
+      { searchIncomingEmails: makeSearch([engagement({ fromEmail: shared })]) },
+    );
+
+    expect(report.created).toBe(1);
+    expect(report.unknownSender).toBe(0);
+    const msg = prisma.__store.messages.get('hs:5551');
+    // Attributed to persona id 3 (ACCOUNT/CONTACT_ID), never id 20.
+    expect(msg).toMatchObject({ thread_id: `hs-thread:${CONTACT_ID}` });
+    expect(prisma.__store.threads.get(`hs-thread:${CONTACT_ID}`)).toMatchObject({ account_name: ACCOUNT });
+    expect(prisma.__store.threads.has('hs-thread:9099')).toBe(false);
   });
 
   it('the out-of-office autoresponder is filtered under the exact classifier reason and recorded as filtered_inbound, never as an InboundMessage', async () => {

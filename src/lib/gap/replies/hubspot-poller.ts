@@ -178,6 +178,12 @@ async function loadScopedPersonas(prisma: any): Promise<Map<string, ScopedPerson
   const rows: Array<{ email: string | null; account_name: string; hubspot_contact_id: string | null }> =
     await prisma.persona.findMany({
       where: { hubspot_contact_id: { not: null }, email: { not: null } },
+      // SF8 (Opus adversarial review, 2026-09-24): explicit, deterministic
+      // order so the first-wins dedupe below (byEmail.has) is reproducible.
+      // The SAME rule (lowest persona id wins a duplicate email) is used by
+      // replies/list.ts's loadKnownAddresses, so the poller and reply
+      // triage attribute a shared-email reply to the same persona.
+      orderBy: { id: 'asc' },
       select: { email: true, account_name: true, hubspot_contact_id: true },
     });
   const byEmail = new Map<string, ScopedPersona>();

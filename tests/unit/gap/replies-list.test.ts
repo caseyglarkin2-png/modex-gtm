@@ -9,7 +9,7 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { htmlToText, listReplies, snippetOf, sourceOfInbound, suggestionFromRow, SNIPPET_LENGTH } from '@/lib/gap/replies/list';
+import { htmlToText, listReplies, loadKnownAddresses, snippetOf, sourceOfInbound, suggestionFromRow, SNIPPET_LENGTH } from '@/lib/gap/replies/list';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
@@ -47,7 +47,11 @@ const MESSAGES = [
 function makePrisma(dispositions: any[] = []) {
   return {
     sequenceEnrollment: { findMany: asyncSpy(async () => ENROLLMENTS) },
-    persona: { findMany: asyncSpy(async () => PERSONAS) },
+    persona: {
+      findMany: asyncSpy(async (q: any = {}) =>
+        q?.orderBy?.id === 'asc' ? [...PERSONAS].sort((a, b) => a.id - b.id) : PERSONAS,
+      ),
+    },
     inboundMessage: {
       findMany: asyncSpy(async (q: any) => {
         const emails: string[] = q.where.from_email.in;
@@ -176,5 +180,35 @@ describe('listReplies', () => {
     prisma.persona.findMany.mockResolvedValueOnce([]);
     expect(await listReplies(prisma)).toEqual({ items: [], nextCursor: null });
     expect(prisma.inboundMessage.findMany).not.toHaveBeenCalled();
+  });
+});
+
+describe('loadKnownAddresses', () => {
+  it('SF8: two personas sharing an email resolve to the lowest-id persona, deterministically, regardless of DB row order', async () => {
+    const shared = 'dup@acme.example';
+    const outOfOrder = {
+      sequenceEnrollment: { findMany: asyncSpy(async () => []) },
+      persona: {
+        // Seeded newest-id-first: the fix must sort, not trust array order,
+        // the SAME rule hubspot-poller.ts's loadScopedPersonas uses, so a
+        // reply from a shared email attributes to the same persona in both
+        // reply triage and the poller.
+        findMany: asyncSpy(async (q: any = {}) => {
+          // Raw (unsorted) order puts the WRONG persona last, so a caller
+          // that forgets to request id-asc order and relies on last-wins
+          // (the pre-fix behavior) would pick the wrong one.
+          const rows = [
+            { id: 4, email: shared, account_name: 'Right Account', hubspot_contact_id: 'hs-4', prospecting_hypotheses: [{ id: 'HR', status: 'active', problem_family: 'right_family', created_at: T(0) }] },
+            { id: 30, email: shared, account_name: 'Wrong Account', hubspot_contact_id: 'hs-30', prospecting_hypotheses: [{ id: 'HW', status: 'active', problem_family: 'wrong_family', created_at: T(0) }] },
+          ];
+          return q?.orderBy?.id === 'asc' ? rows.sort((a, b) => a.id - b.id) : rows;
+        }),
+      },
+    };
+    const map = await loadKnownAddresses(outOfOrder);
+    const known = map.get(shared);
+    expect(known?.personaId).toBe(4);
+    expect(known?.accountName).toBe('Right Account');
+    expect(known?.hypothesisId).toBe('HR');
   });
 });
