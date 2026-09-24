@@ -7,14 +7,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
-const { mockedAuth, mockedBuild } = vi.hoisted(() => ({
+const { mockedAuth, mockedBuild, mockedPrograms } = vi.hoisted(() => ({
   mockedAuth: vi.fn<(...args: any[]) => Promise<any>>(),
   mockedBuild: vi.fn<(...args: any[]) => Promise<any>>(),
+  mockedPrograms: vi.fn<(...args: any[]) => Promise<any>>(),
 }));
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: { __tag: 'fake-prisma' } }));
-vi.mock('@/lib/gap/learning/query', () => ({ buildLearningReport: mockedBuild }));
+vi.mock('@/lib/gap/learning/query', () => ({ buildLearningReport: mockedBuild, listLearningPrograms: mockedPrograms }));
 
 const { GET } = await import('@/app/api/gap/learning/route');
 
@@ -38,6 +39,8 @@ beforeEach(() => {
   mockedAuth.mockResolvedValue(SESSION);
   mockedBuild.mockReset();
   mockedBuild.mockResolvedValue(REPORT);
+  mockedPrograms.mockReset();
+  mockedPrograms.mockResolvedValue([]);
 });
 
 afterEach(() => {
@@ -69,10 +72,10 @@ describe('GET /api/gap/learning', () => {
     expect(res.status).toBe(401);
   });
 
-  it('a session returns the report verbatim', async () => {
+  it('a session returns the report plus the applied filters and the program list', async () => {
     const res = await GET(get());
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual(REPORT);
+    expect(await res.json()).toEqual({ ...REPORT, filters: { program: null, from: null, to: null }, programs: [] });
   });
 
   it('an agent bearer token authorizes without a session', async () => {
@@ -80,5 +83,36 @@ describe('GET /api/gap/learning', () => {
     const res = await GET(get({ authorization: 'Bearer cron-secret-value' }));
     expect(res.status).toBe(200);
     expect(mockedBuild).toHaveBeenCalledTimes(1);
+  });
+
+  /**
+   * R-A (owner-confirmed finish requirement, 2026-09-24): campaign/program
+   * and date-range filters. Mutate parseFilters away and this goes RED: the
+   * filter query params silently stop reaching buildLearningReport.
+   */
+  it('R-A: parses ?program= and ?from=/?to= and passes them to buildLearningReport', async () => {
+    const url = `${BASE}?program=Inland26&from=2026-09-01&to=2026-09-30`;
+    const res = await GET(new NextRequest(url, { method: 'GET' }));
+    expect(res.status).toBe(200);
+    expect(mockedBuild).toHaveBeenCalledWith(
+      expect.anything(),
+      { program: 'Inland26', from: new Date('2026-09-01'), to: new Date('2026-09-30') },
+    );
+    const body = await res.json();
+    expect(body.filters).toEqual({ program: 'Inland26', from: '2026-09-01T00:00:00.000Z', to: '2026-09-30T00:00:00.000Z' });
+    expect(mockedPrograms).toHaveBeenCalledTimes(1);
+  });
+
+  it('R-A: an invalid date query param degrades to unfiltered rather than a 400', async () => {
+    const res = await GET(new NextRequest(`${BASE}?from=not-a-date`, { method: 'GET' }));
+    expect(res.status).toBe(200);
+    expect(mockedBuild).toHaveBeenCalledWith(expect.anything(), { program: null, from: null, to: null });
+  });
+
+  it('R-A: the response carries the program list for the UI filter', async () => {
+    mockedPrograms.mockResolvedValue(['Inland26', 'top100-2026-09-12']);
+    const res = await GET(get());
+    const body = await res.json();
+    expect(body.programs).toEqual(['Inland26', 'top100-2026-09-12']);
   });
 });

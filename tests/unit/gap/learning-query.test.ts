@@ -179,6 +179,94 @@ describe('loadLearningInputs: AI/unconfirmed exclusion', () => {
   });
 });
 
+describe('R-A: campaign/program and date-range filters (owner-confirmed finish requirement, 2026-09-24)', () => {
+  it('no filters: the disposition where clause is the plain B9 gate, no program/date added', async () => {
+    const prisma = makePrisma();
+    await loadLearningInputs(prisma);
+    expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] } }),
+    );
+    expect(prisma.sequenceEnrollment.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { hypothesis_id: { not: null } } }),
+    );
+  });
+
+  /**
+   * Mutate the program branch away (fall back to the no-filter OR gate) and
+   * this goes RED: the where clause stops requiring family.program, so a
+   * bare-call disposition (no enrollment) would leak into a campaign report.
+   */
+  it('a program filter requires a real, external, in-program enrollment; a bare call cannot match', async () => {
+    const prisma = makePrisma();
+    await loadLearningInputs(prisma, { program: 'Inland26' });
+    expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { human_confirmed: true, enrollment: { is_test: false, family: { program: 'Inland26' } } } }),
+    );
+    expect(prisma.sequenceEnrollment.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { hypothesis_id: { not: null }, family: { program: 'Inland26' } } }),
+    );
+  });
+
+  it('a program filter restricts hypotheses to the ones with an enrollment in that program', async () => {
+    const prisma = makePrisma({
+      hypotheses: [hypothesis({ id: 'H1' }), hypothesis({ id: 'H2', account_name: 'Other Co' })],
+      // Only H1 has an enrollment; as if the DB's family.program filter had already run.
+      enrollments: [{ hypothesis_id: 'H1', family_id: 'F1', sequence_version_id: 'V1', enrolled_at: new Date('2026-09-01T00:00:00.000Z') }],
+    });
+    const { hypotheses } = await loadLearningInputs(prisma, { program: 'Inland26' });
+    expect(hypotheses.map((h) => h.id)).toEqual(['H1']);
+  });
+
+  it('no program filter: every hypothesis is kept regardless of enrollment', async () => {
+    const prisma = makePrisma({
+      hypotheses: [hypothesis({ id: 'H1' }), hypothesis({ id: 'H2', account_name: 'Other Co' })],
+      enrollments: [],
+    });
+    const { hypotheses } = await loadLearningInputs(prisma);
+    expect(hypotheses.map((h) => h.id).sort()).toEqual(['H1', 'H2']);
+  });
+
+  it('a date range is pushed onto confirmed_at as gte/lte', async () => {
+    const prisma = makePrisma();
+    const from = new Date('2026-09-01T00:00:00.000Z');
+    const to = new Date('2026-09-30T23:59:59.999Z');
+    await loadLearningInputs(prisma, { from, to });
+    expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: expect.objectContaining({ confirmed_at: { gte: from, lte: to } }) }),
+    );
+  });
+
+  it('an open-ended range (from only, or to only) omits the other bound', async () => {
+    const prisma = makePrisma();
+    const from = new Date('2026-09-01T00:00:00.000Z');
+    await loadLearningInputs(prisma, { from });
+    expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: expect.objectContaining({ confirmed_at: { gte: from } }) }),
+    );
+  });
+
+  it('buildLearningReport threads filters through to loadLearningInputs', async () => {
+    const prisma = makePrisma({
+      hypotheses: [hypothesis({ id: 'H1' })],
+      enrollments: [{ hypothesis_id: 'H1', family_id: 'F1', sequence_version_id: 'V1', enrolled_at: new Date('2026-09-01T00:00:00.000Z') }],
+    });
+    const report = await buildLearningReport(prisma, { program: 'Inland26' });
+    expect(prisma.sequenceEnrollment.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: expect.objectContaining({ family: { program: 'Inland26' } }) }),
+    );
+    expect(report.counts.hypotheses).toBe(1);
+  });
+
+  it('listLearningPrograms returns distinct, non-null program names', async () => {
+    const { listLearningPrograms } = await import('@/lib/gap/learning/query');
+    const findMany = asyncSpy(async () => [{ program: 'Inland26' }, { program: 'top100-2026-09-12' }]);
+    const prisma = { sequenceFamily: { findMany } };
+    const programs = await listLearningPrograms(prisma);
+    expect(programs).toEqual(['Inland26', 'top100-2026-09-12']);
+    expect(findMany).toHaveBeenCalledWith(expect.objectContaining({ where: { program: { not: null } }, distinct: ['program'] }));
+  });
+});
+
 describe('buildLearningReport', () => {
   it('assembles the funnel and every breakdown with counts, over a zero-data prisma without throwing', async () => {
     const prisma = makePrisma();

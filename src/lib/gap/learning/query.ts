@@ -52,6 +52,27 @@ export interface LearningInputs {
   conversations: LearningConversationRow[];
 }
 
+/**
+ * R-A (owner-confirmed finish requirement, 2026-09-24): campaign/program and
+ * date-range filters over the learning report. Answers "how did <program>
+ * perform" and "what happened in this window", not a BI platform: two
+ * filters, both optional, both pushed into the query.
+ *
+ * `program` matches `SequenceFamily.program` through the same
+ * SequenceEnrollment attribution B8 uses. A conversation whose disposition
+ * has no enrollment at all (a bare phone call, never enrolled) carries no
+ * program and is excluded when this filter is set, since it cannot be
+ * attributed to the campaign in question. `from`/`to` filter conversations
+ * by `ConversationDisposition.confirmed_at`, inclusive; hypotheses are not
+ * date-filtered by themselves (a hypothesis can span the window), only
+ * restricted by `program` when that filter is set.
+ */
+export interface LearningFilters {
+  program?: string | null;
+  from?: Date | null;
+  to?: Date | null;
+}
+
 /** BID types that carry a root-cause or impact signal (mirrors resolution.ts). */
 const IMPACT_BID_TYPES = new Set(['impact', 'metric']);
 
@@ -59,7 +80,25 @@ function nonEmpty(value: unknown): boolean {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
+export async function loadLearningInputs(prisma: any, filters: LearningFilters = {}): Promise<LearningInputs> {
+  const program = filters.program?.trim() || null;
+
+  const dispositionWhere: Record<string, unknown> = program
+    ? // A program filter requires a real, external, in-program enrollment;
+      // a disposition with no enrollment (a bare call) cannot match a program.
+      { human_confirmed: true, enrollment: { is_test: false, family: { program } } }
+    : // No program filter: the B9 OR gate lets a no-enrollment disposition through.
+      { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] };
+  if (filters.from || filters.to) {
+    dispositionWhere.confirmed_at = {
+      ...(filters.from ? { gte: filters.from } : {}),
+      ...(filters.to ? { lte: filters.to } : {}),
+    };
+  }
+
+  const enrollmentWhere: Record<string, unknown> = { hypothesis_id: { not: null } };
+  if (program) enrollmentWhere.family = { program };
+
   const [hypothesisRows, dispositionRows, bidRows, enrollmentAttributionRows] = await Promise.all([
     prisma.prospectingHypothesis.findMany({
       select: {
@@ -75,10 +114,9 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
     // The gate: only a HUMAN-CONFIRMED disposition is a conversation (see
     // file header). B9 (Opus adversarial review, 2026-09-24): also excludes
     // an is_test enrollment, so an internal test run's confirmed dispositions
-    // never feed resolution, precision or the G5 gate. The OR lets through
-    // dispositions with no enrollment at all (a call or manual channel).
+    // never feed resolution, precision or the G5 gate.
     prisma.conversationDisposition.findMany({
-      where: { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] },
+      where: dispositionWhere,
       select: {
         id: true,
         hypothesis_id: true,
@@ -106,7 +144,7 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
     // src and scripts). SequenceEnrollment.hypothesis_id is the real
     // attribution; the newest enrollment per hypothesis wins.
     prisma.sequenceEnrollment.findMany({
-      where: { hypothesis_id: { not: null } },
+      where: enrollmentWhere,
       select: { hypothesis_id: true, family_id: true, sequence_version_id: true, enrolled_at: true },
       orderBy: { enrolled_at: 'desc' },
     }),
@@ -126,6 +164,11 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
       versionId: row.sequence_version_id ?? null,
     });
   }
+
+  // R-A: a program filter also restricts which hypotheses count toward the
+  // funnel's denominator, to the ones with at least one enrollment in that
+  // program (via the same attribution map, itself already program-scoped).
+  const hypothesisIdsInScope = program ? sequenceAttributionByHypothesis : null;
 
   const confirmedBids = selectConfirmedBids(
     (bidRows as any[]).map((b) => ({ id: b.id, humanConfirmed: b.human_confirmed === true, supersedesId: b.supersedes_id ?? null })),
@@ -147,22 +190,24 @@ export async function loadLearningInputs(prisma: any): Promise<LearningInputs> {
     }
   }
 
-  const hypotheses: LearningHypothesisRow[] = (hypothesisRows as any[]).map((h) => {
-    const signals: Array<{ role: string; signal: { type: string } | null }> = h.signals ?? [];
-    const primary = signals.find((s) => s.role === 'primary') ?? signals[0];
-    const attribution = sequenceAttributionByHypothesis.get(h.id);
-    return {
-      id: h.id,
-      status: h.status,
-      accountName: h.account_name,
-      problemFamily: h.problem_family ?? null,
-      persona: h.persona ?? null,
-      tamTier: h.account?.tier ?? null,
-      sequenceFamilyId: attribution?.familyId ?? null,
-      sequenceVersionId: attribution?.versionId ?? null,
-      primarySignalType: primary?.signal?.type ?? null,
-    };
-  });
+  const hypotheses: LearningHypothesisRow[] = (hypothesisRows as any[])
+    .filter((h) => !hypothesisIdsInScope || hypothesisIdsInScope.has(h.id))
+    .map((h) => {
+      const signals: Array<{ role: string; signal: { type: string } | null }> = h.signals ?? [];
+      const primary = signals.find((s) => s.role === 'primary') ?? signals[0];
+      const attribution = sequenceAttributionByHypothesis.get(h.id);
+      return {
+        id: h.id,
+        status: h.status,
+        accountName: h.account_name,
+        problemFamily: h.problem_family ?? null,
+        persona: h.persona ?? null,
+        tamTier: h.account?.tier ?? null,
+        sequenceFamilyId: attribution?.familyId ?? null,
+        sequenceVersionId: attribution?.versionId ?? null,
+        primarySignalType: primary?.signal?.type ?? null,
+      };
+    });
 
   const conversations: LearningConversationRow[] = externalDispositionRows.map((d) => {
     const quantified = quantifiedImpactHypIds.has(d.hypothesis_id);
@@ -196,8 +241,8 @@ export interface LearningReport {
   counts: { hypotheses: number; conversations: number };
 }
 
-export async function buildLearningReport(prisma: any): Promise<LearningReport> {
-  const { hypotheses, conversations } = await loadLearningInputs(prisma);
+export async function buildLearningReport(prisma: any, filters: LearningFilters = {}): Promise<LearningReport> {
+  const { hypotheses, conversations } = await loadLearningInputs(prisma, filters);
 
   const signalCountRows = await prisma.prospectingSignal.groupBy({ by: ['type'], _count: { _all: true } });
   const signalCounts = new Map<string, number>((signalCountRows as any[]).map((r) => [r.type, r._count._all as number]));
@@ -219,4 +264,15 @@ export async function buildLearningReport(prisma: any): Promise<LearningReport> 
     ),
     counts: { hypotheses: hypotheses.length, conversations: conversations.length },
   };
+}
+
+/** R-A: distinct SequenceFamily.program values, for the UI's campaign filter. Newest-created families first. */
+export async function listLearningPrograms(prisma: any): Promise<string[]> {
+  const rows: Array<{ program: string | null }> = await prisma.sequenceFamily.findMany({
+    where: { program: { not: null } },
+    select: { program: true },
+    distinct: ['program'],
+    orderBy: { created_at: 'desc' },
+  });
+  return rows.map((r) => r.program).filter((p): p is string => typeof p === 'string' && p.length > 0);
 }

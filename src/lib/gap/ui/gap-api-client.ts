@@ -416,8 +416,39 @@ export function suggestReply(replyId: string, opts: ClientOptions = {}): Promise
 
 export const LEARNING_URL = '/api/gap/learning';
 
-export function getLearningReport(opts: ClientOptions = {}): Promise<ApiResult<LearningReport>> {
-  return request<LearningReport>(LEARNING_URL, { method: 'GET' }, opts);
+/** R-A: what the route actually echoes back on top of the report itself, as plain-JSON dates (the wire shape, not LearningFilters' Date type). */
+export interface LearningFiltersApplied {
+  program: string | null;
+  from: string | null;
+  to: string | null;
+}
+
+export interface LearningReportResponse extends LearningReport {
+  filters: LearningFiltersApplied;
+  programs: string[];
+}
+
+/** R-A: the UI's filter params. Dates are plain `yyyy-mm-dd` strings, same as an `<input type="date">` value. */
+export interface LearningReportParams {
+  program?: string | null;
+  from?: string | null;
+  to?: string | null;
+}
+
+export function learningUrl(params: LearningReportParams = {}): string {
+  const query = new URLSearchParams();
+  if (params.program) query.set('program', params.program);
+  if (params.from) query.set('from', params.from);
+  if (params.to) query.set('to', params.to);
+  const qs = query.toString();
+  return qs ? `${LEARNING_URL}?${qs}` : LEARNING_URL;
+}
+
+export function getLearningReport(
+  params: LearningReportParams = {},
+  opts: ClientOptions = {},
+): Promise<ApiResult<LearningReportResponse>> {
+  return request<LearningReportResponse>(learningUrl(params), { method: 'GET' }, opts);
 }
 
 // ---------------------------------------------------------------------------
@@ -430,7 +461,7 @@ export interface GapApiClient {
   postDisposition(body: DispositionBody): Promise<ApiResult<DispositionResult>>;
   postBid(body: BidBody): Promise<ApiResult<BidResult>>;
   suggestReply(replyId: string): Promise<ApiResult<SuggestResult>>;
-  getLearningReport(): Promise<ApiResult<LearningReport>>;
+  getLearningReport(params?: LearningReportParams): Promise<ApiResult<LearningReportResponse>>;
 }
 
 export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
@@ -440,7 +471,7 @@ export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
     postDisposition: (body) => postDisposition(body, opts),
     postBid: (body) => postBid(body, opts),
     suggestReply: (replyId) => suggestReply(replyId, opts),
-    getLearningReport: () => getLearningReport(opts),
+    getLearningReport: (params) => getLearningReport(params, opts),
   };
 }
 
