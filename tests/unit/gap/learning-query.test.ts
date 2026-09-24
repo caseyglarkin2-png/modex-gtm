@@ -75,6 +75,23 @@ describe('loadLearningInputs: AI/unconfirmed exclusion', () => {
     expect(conversations[0]).toMatchObject({ impactAcknowledged: true, impactQuantified: true, sender: 'casey@freightroll.com' });
   });
 
+  it('a root-cause BID confirmed on one conversation marks EVERY problem-confirming conversation of that hypothesis true (deliberate hypothesis-wide fan-out, not per-conversation or time-ordered)', async () => {
+    const prisma = makePrisma({
+      hypotheses: [{ id: 'H1', status: 'confirmed', account_name: 'Acme', problem_family: 'hidden_capacity', persona: 'site_ops', sequence_family_id: null, sequence_version_id: null, account: null, signals: [] }],
+      dispositions: [
+        { id: 'D1', hypothesis_id: 'H1', response_class: 'problem_confirmed', channel: 'email', root_cause_class: null, impact_class: null, enrollment: null },
+        { id: 'D2', hypothesis_id: 'H1', response_class: 'problem_partially_confirmed', channel: 'call', root_cause_class: null, impact_class: null, enrollment: null },
+      ],
+      // The root-cause BID is tied to D2 (the LATER conversation); D1 (earlier) still reads confirmed.
+      bids: [{ id: 'B1', hypothesis_id: 'H1', type: 'root_cause', human_confirmed: true, supersedes_id: null, numeric_value: null, unit: null }],
+    });
+    const { conversations } = await loadLearningInputs(prisma);
+    const d1 = conversations.find((c) => c.id === 'D1');
+    const d2 = conversations.find((c) => c.id === 'D2');
+    expect(d1?.rootCauseConfirmed).toBe(true);
+    expect(d2?.rootCauseConfirmed).toBe(true);
+  });
+
   it('sequence family and version ride along on the hypothesis row (sequence-version attribution)', async () => {
     const prisma = makePrisma({
       hypotheses: [

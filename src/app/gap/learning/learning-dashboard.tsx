@@ -155,9 +155,9 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <RateTile label="Problem resonance" r={f.problemResonanceRate} help="Problem confirmed or partial / substantive conversations" />
-          <RateTile label="Root cause confirmed" r={f.rootCauseConfirmationRate} help="/ problem-confirming conversations" />
-          <RateTile label="Impact acknowledged" r={f.impactAcknowledgmentRate} help="/ problem-confirming conversations" />
-          <RateTile label="Impact quantified" r={f.impactQuantificationRate} help="/ problem-confirming conversations" />
+          <RateTile label="Root cause confirmed" r={f.rootCauseConfirmationRate} help="Confirmed anywhere on the hypothesis / problem-confirming conversations" />
+          <RateTile label="Impact acknowledged" r={f.impactAcknowledgmentRate} help="Confirmed anywhere on the hypothesis / problem-confirming conversations" />
+          <RateTile label="Impact quantified" r={f.impactQuantificationRate} help="Confirmed anywhere on the hypothesis / problem-confirming conversations" />
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <RateTile label="Problem to meeting" r={f.problemToMeetingRate} help="Meetings accepted / problem-confirming hypotheses" />

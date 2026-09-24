@@ -93,11 +93,22 @@ export interface FunnelConversation {
   hypothesisId: string;
   responseClass: string;
   channel: string;
-  /** A root-cause signal exists for this conversation's hypothesis: a confirmed, unsuperseded root_cause BID, or the disposition's own root_cause_class. */
+  /**
+   * A root-cause signal exists ANYWHERE on this conversation's hypothesis: a
+   * confirmed, unsuperseded root_cause BID on any of the hypothesis's
+   * conversations, or this disposition's own root_cause_class. Not
+   * conversation-scoped or time-ordered: a BID confirmed on a later touch
+   * marks every problem-confirming conversation of that hypothesis true,
+   * including earlier ones. Deliberate (query.ts), because root cause and
+   * impact are properties of the account's overall answer, not of one reply;
+   * it cannot push a rate over 1 (the denominator is conversation-counted the
+   * same way), but it does mean rootCauseConfirmationRate reads as "did the
+   * hypothesis establish a root cause", not "did THIS message contain one".
+   */
   rootCauseConfirmed: boolean;
-  /** A confirmed, unsuperseded impact/metric BID exists, or the disposition's own impact_class. */
+  /** Same hypothesis-wide rule as rootCauseConfirmed, for impact/metric BID types or impact_class. */
   impactAcknowledged: boolean;
-  /** A confirmed, unsuperseded impact/metric BID carries a numeric value and a unit. Implies impactAcknowledged. */
+  /** A confirmed, unsuperseded impact/metric BID (anywhere on the hypothesis) carries a numeric value and a unit. Implies impactAcknowledged. */
   impactQuantified: boolean;
 }
 

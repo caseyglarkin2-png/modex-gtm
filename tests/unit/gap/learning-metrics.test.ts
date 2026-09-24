@@ -120,6 +120,15 @@ describe('computeConversationFunnel', () => {
     expect(funnel.problemResonanceRate).toEqual({ value: 1 / 3, n: 3, numerator: 1, denominator: 3 });
   });
 
+  it('a hypothesis with two problem-confirming conversations, both flagged rootCauseConfirmed (the query layer\'s deliberate hypothesis-wide fan-out), still bounds the rate at 1', () => {
+    const conversations = [
+      conv({ id: 'c1', hypothesisId: 'h1', responseClass: 'problem_confirmed', rootCauseConfirmed: true }),
+      conv({ id: 'c2', hypothesisId: 'h1', responseClass: 'problem_partially_confirmed', rootCauseConfirmed: true }),
+    ];
+    const funnel = computeConversationFunnel(conversations);
+    expect(funnel.rootCauseConfirmationRate).toEqual({ value: 1, n: 2, numerator: 2, denominator: 2 });
+  });
+
   it('root cause confirmed counts only among problem-confirming conversations', () => {
     const conversations = [
       conv({ id: 'c1', hypothesisId: 'h1', responseClass: 'problem_confirmed', rootCauseConfirmed: true }),
