@@ -35,20 +35,23 @@
  * reads no flag: this is the human enroll table, so GAP_AUTO_ENROLL does not
  * enter into it.
  *
- * Suppression (R3-2): an item may carry `suppressed`, the name of the leg that
- * fired (`unsubscribed` | `modex_do_not_contact` | `bounced`, the same legs
- * the enroll service and `enroll()` refuse on). Such a contact is listed
- * under Skip as `suppressed:<leg>` before every other filter, because a
- * suppressed address must never render under Enroll whatever else is true
- * of it. `loadDecisions` fills it from the snapshot persona (`doNotContact`,
- * a bounced `emailStatus`) and one `unsubscribedEmail` lookup on the
- * lowercased email.
+ * Suppression (R3-2, widened by a later SHOULD FIX to the cross-plane leg):
+ * an item may carry `suppressed`, the name of the leg that fired
+ * (`unsubscribed` | `modex_do_not_contact` | `bounced` | `clawd:<leg>`, the
+ * same legs the enroll service and `enroll()` refuse on -- `checkSuppression`
+ * in sequence/enrollment.ts, not the routing snapshot's possibly-stale
+ * copy). Such a contact is listed under Skip as `suppressed:<leg>` before
+ * every other filter, because a suppressed address must never render under
+ * Enroll whatever else is true of it -- for the hubspot_native lane this
+ * table is the ONLY gate a human reads before enrolling by hand.
+ * `loadDecisions` fills it via `loadSuppressionLeg`, threading an optional
+ * `SuppressionOptions` so a caller (or a test) can inject the reader.
  */
 
 import type { PrismaClient } from '@prisma/client';
 import { isApproved } from '../compiler/approval';
 import { TOP100_COMPILE_KEY } from '../import/top100-compile';
-import { suppressionLegFor } from '../sequence/enrollment';
+import { checkSuppression, isSuppressed, type SuppressionOptions } from '../sequence/enrollment';
 import type { RoutingAction } from '../taxonomy';
 import { resolveLatestRunId } from './queue';
 import { resolveEnrollTarget } from './rules';
@@ -314,7 +317,7 @@ export function renderEnrollTableJson(table: EnrollTable): EnrollTableJson {
 // ---------------------------------------------------------------------------
 
 /** The routing reader plus the two tables the compile gate reads (`gapCompile.findMany`, `sendApprovalRequest.findFirst`) and the unsubscribed table (R3-2). */
-type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig' | 'gapCompile' | 'sendApprovalRequest' | 'unsubscribedEmail'>;
+type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig' | 'gapCompile' | 'sendApprovalRequest' | 'unsubscribedEmail' | 'persona'>;
 
 type Obj = Record<string, unknown>;
 
@@ -359,7 +362,7 @@ interface DecisionRow {
  * yields an empty list, never an error. Rows whose snapshot lacks `account`
  * or `persona` objects are dropped: the emitter cannot name what it cannot see.
  */
-export async function loadDecisions(prisma: DecisionReader, runId?: string): Promise<EnrollRowItem[]> {
+export async function loadDecisions(prisma: DecisionReader, runId?: string, deps: SuppressionOptions = {}): Promise<EnrollRowItem[]> {
   const run = runId || (await resolveLatestRunId(prisma));
   if (!run) return [];
   const rows = (await prisma.routingDecision.findMany({
@@ -402,7 +405,7 @@ export async function loadDecisions(prisma: DecisionReader, runId?: string): Pro
       preferredSender: optStr(snap.preferredSender),
       whatIKnow: optStr(snap.whatIKnow),
     };
-    item.suppressed = await loadSuppressionLeg(prisma, item.inputs.persona);
+    item.suppressed = await loadSuppressionLeg(prisma, item.inputs.persona, deps);
     if (targetOf(item) === 'hubspot_native') {
       item.compile = await loadCompileGate(prisma, item.inputs.persona.hubspotContactId ?? null);
     }
@@ -415,18 +418,38 @@ export async function loadDecisions(prisma: DecisionReader, runId?: string): Pro
 // Suppression reader (R3-2)
 // ---------------------------------------------------------------------------
 
-type SuppressionLegReader = Pick<DecisionReader, 'unsubscribedEmail'>;
+type SuppressionLegReader = Pick<DecisionReader, 'unsubscribedEmail' | 'persona'>;
 
 /**
- * The leg that suppresses this persona, or null: the unsubscribed table on
- * the lowercased email (skipped when there is no email), then the snapshot's
- * `doNotContact`, then a bounced `emailStatus`. Same precedence as the enroll
- * service. Never writes.
+ * SHOULD FIX (Opus adversarial review, 2026-09-24): the leg that suppresses
+ * this persona, or null. Runs the SAME `checkSuppression` the enroll service
+ * and `enroll()` run (R3-2, R3-10): the local legs (unsubscribed table on
+ * the lowercased email, a fresh `Persona.do_not_contact`/bounced read, not
+ * the routing snapshot's possibly-stale copy) THEN the cross-plane clawd
+ * contract. Before this fix the hand-enroll table only ever checked the
+ * local legs, so a human could read a contact as enrollable here while
+ * clawd's cross-plane check would refuse them the moment a real
+ * `enroll()`/`recordExternalEnrollment` call ran -- and for the
+ * hubspot_native lane, this table IS the only gate: a human copies it and
+ * enrolls in HubSpot by hand, with no code in the loop after. An unreadable
+ * clawd leg reads as suppressed here too (fail closed), labelled with its
+ * `clawd:<leg>` reason like every other cross-plane refusal in this codebase.
+ * Never writes.
  */
-export async function loadSuppressionLeg(prisma: SuppressionLegReader, persona: RoutingInputs['persona']): Promise<string | null> {
+export async function loadSuppressionLeg(
+  prisma: SuppressionLegReader,
+  persona: RoutingInputs['persona'],
+  opts: SuppressionOptions = {},
+): Promise<string | null> {
   const email = (persona.email ?? '').trim().toLowerCase();
-  const unsubscribed = email ? Boolean(await prisma.unsubscribedEmail.findUnique({ where: { email }, select: { id: true } })) : false;
-  return suppressionLegFor({ unsubscribed, doNotContact: persona.doNotContact === true, emailStatus: persona.emailStatus ?? null });
+  if (!email) {
+    // No address to check against the cross-plane contract; the local legs
+    // (unsubscribed table skipped, a fresh persona.do_not_contact/bounced
+    // read) still apply, exactly as isSuppressed does inside checkSuppression.
+    return isSuppressed(prisma, email, persona.id);
+  }
+  const check = await checkSuppression(prisma, email, persona.id, opts);
+  return check.ok ? null : check.leg;
 }
 
 // ---------------------------------------------------------------------------
