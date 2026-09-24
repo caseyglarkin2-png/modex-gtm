@@ -25,6 +25,7 @@
 
 import type { BidSource, BidType, Channel, ResponseClass } from '../taxonomy';
 import type { LearningReport } from '../learning/query';
+import type { AgreementReport } from '../routing/agreement';
 
 // ---------------------------------------------------------------------------
 // Result shape
@@ -451,6 +452,17 @@ export function getLearningReport(
   return request<LearningReportResponse>(learningUrl(params), { method: 'GET' }, opts);
 }
 
+export const ROUTING_AGREEMENT_URL = '/api/gap/routing/agreement';
+
+/** R-B: GET /api/gap/routing/agreement, `?runId=` optional. */
+export function getRoutingAgreement(
+  params: { runId?: string | null } = {},
+  opts: ClientOptions = {},
+): Promise<ApiResult<AgreementReport>> {
+  const url = params.runId ? `${ROUTING_AGREEMENT_URL}?runId=${encodeURIComponent(params.runId)}` : ROUTING_AGREEMENT_URL;
+  return request<AgreementReport>(url, { method: 'GET' }, opts);
+}
+
 // ---------------------------------------------------------------------------
 // Client object (what components take as a prop)
 // ---------------------------------------------------------------------------
@@ -462,6 +474,7 @@ export interface GapApiClient {
   postBid(body: BidBody): Promise<ApiResult<BidResult>>;
   suggestReply(replyId: string): Promise<ApiResult<SuggestResult>>;
   getLearningReport(params?: LearningReportParams): Promise<ApiResult<LearningReportResponse>>;
+  getRoutingAgreement(params?: { runId?: string | null }): Promise<ApiResult<AgreementReport>>;
 }
 
 export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
@@ -472,6 +485,7 @@ export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
     postBid: (body) => postBid(body, opts),
     suggestReply: (replyId) => suggestReply(replyId, opts),
     getLearningReport: (params) => getLearningReport(params, opts),
+    getRoutingAgreement: (params) => getRoutingAgreement(params, opts),
   };
 }
 
