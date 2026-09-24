@@ -104,7 +104,10 @@ import { STATUS } from '../../src/lib/queue/types';
 // Rails
 // ---------------------------------------------------------------------------
 
-const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:5433\/gap_dev(?:\?.*)?$/;
+// RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
+// (55432/gap_finish_e2e) used when the persistent 5433/gap_dev credentials
+// are unavailable. Still loopback-only, still an exact-literal allowlist.
+const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'sprint3-e2e-latest.md');
 const SEED_EVIDENCE_FIXTURE = path.join('tests', 'fixtures', 'gap', 'seed-evidence.json');
 const COMPILE_FIXTURE_DIR = path.join('tests', 'fixtures', 'gap', 'top100-compile');
@@ -585,7 +588,15 @@ async function main(): Promise<number> {
     const nextId = await scheduleNextStep(prisma, sentItem, { critic: criticPass, contract: { evidence: [...realRefs, ...fx.evidence], namedPipeline: seedEvidence.namedPipeline }, now: () => now });
     expect('10 schedule', typeof nextId === 'number', `scheduleNextStep returned ${String(nextId)}`);
     const nextItem = await prisma.draftQueueItem.findUnique({ where: { id: nextId as number } });
-    const expectedKey = sequenceStepIdempotencyKey(OWNER, personaEmail, enrollmentId, 1);
+    // SF10 (Opus adversarial review, 2026-09-24): the step-0 enroll call above
+    // deliberately diverges owner (OWNER, the administrative identity) from
+    // sender ('casey@yardflow.ai'); the queue item's persisted `owner` column
+    // is now the SENDER (the identity that actually sends), not OWNER --
+    // that is the fix. scheduleNextStep keys the next step off the item's
+    // real `owner` column (sequence-runtime.ts), so the expected key must
+    // match what actually got persisted, not the administrative constant.
+    expect('10 schedule', sentItem!.owner === 'casey@yardflow.ai', `step 0 item owner ${sentItem!.owner}, expected the sender casey@yardflow.ai (SF10), not the administrative OWNER`);
+    const expectedKey = sequenceStepIdempotencyKey(sentItem!.owner, personaEmail, enrollmentId, 1);
     const step1Template = seed.steps.steps[1].templates?.bodyTemplate ?? '';
     expect('10 schedule', nextItem?.step_index === 1 && nextItem.sequence_run_id === enrollmentId && nextItem.sequence_version_id === v1.id && nextItem.idempotency_key === expectedKey, `step 1 item ${JSON.stringify(nextItem && { step: nextItem.step_index, run: nextItem.sequence_run_id, version: nextItem.sequence_version_id, key: nextItem.idempotency_key, status: nextItem.status })}`);
     const accountRendered = step1Template.includes('{{account}}') ? nextItem!.body.includes(accountName) : true;

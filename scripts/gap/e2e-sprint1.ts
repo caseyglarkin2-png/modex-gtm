@@ -58,7 +58,10 @@ import { registerSignal } from '../../src/lib/gap/signals/registry';
 // Rails
 // ---------------------------------------------------------------------------
 
-const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:5433\/gap_dev(?:\?.*)?$/;
+// RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
+// (55432/gap_finish_e2e) used when the persistent 5433/gap_dev credentials
+// are unavailable. Still loopback-only, still an exact-literal allowlist.
+const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'sprint1-e2e-latest.md');
 const FIXTURE_PATH = path.join('tests', 'fixtures', 'gap', 'pic-honda.json');
 const ACTOR = 'e2e';

@@ -103,7 +103,10 @@ import { STATUS } from '../../src/lib/queue/types';
 // Rails
 // ---------------------------------------------------------------------------
 
-const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:5433\/gap_dev(?:\?.*)?$/;
+// RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
+// (55432/gap_finish_e2e) used when the persistent 5433/gap_dev credentials
+// are unavailable. Still loopback-only, still an exact-literal allowlist.
+const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'sprint4-e2e-latest.md');
 const SEED_EVIDENCE_FIXTURE = path.join('tests', 'fixtures', 'gap', 'seed-evidence.json');
 const SEED_KEY = 'network_standardization';
@@ -601,8 +604,14 @@ async function main(): Promise<number> {
     expect('5 disposition', JSON.stringify(dispKinds) === JSON.stringify(['reply.suggested', 'disposition.recorded', 'disposition.effects']), `disposition audit kinds ${JSON.stringify(dispKinds)}`);
     expect('5 disposition', hypKinds.filter((k) => k === 'hypothesis.resolved').length === 1 && hypKinds.filter((k) => k === 'hypothesis.activated').length === 1, `hypothesis audit kinds ${JSON.stringify(hypKinds)}`);
     expect('5 disposition', JSON.stringify(enrKinds) === JSON.stringify(['enroll.live', 'decision.human_action:enrollment.pause', 'decision.human_action:enrollment.stop']), `enrollment audit kinds ${JSON.stringify(enrKinds)}`);
+    // B1+B2 (Opus adversarial review, 2026-09-24): the service now refuses
+    // ANY terminal-status hypothesis with `hypothesis_terminal` (isTerminalStatus),
+    // not only a narrower `hypothesis_not_active` check against `active` alone
+    // -- the fix that lets a non-terminal (e.g. paused) hypothesis still
+    // record stop/DNC effects. `hypothesis_not_active` no longer exists as a
+    // disposition refusal reason.
     const dup = await recordDisposition(prisma, base({ buyerLanguage: REPLY_TEXT }));
-    expect('5 disposition', !dup.ok && dup.kind === 'refused' && dup.reason === 'hypothesis_not_active', `duplicate on the resolved hypothesis -> ${JSON.stringify(dup)} (the hypothesis is no longer active, so the unique is never reached)`);
+    expect('5 disposition', !dup.ok && dup.kind === 'refused' && dup.reason === 'hypothesis_terminal', `duplicate on the resolved hypothesis -> ${JSON.stringify(dup)} (the hypothesis is terminal, so the unique is never reached)`);
     // The unique on (source_kind, source_id) is proven on an ACTIVE hypothesis: the second persona's still-active one with the same source key.
     const dupSource = await recordDisposition(prisma, base({ hypothesisId: h2, personaId: p2.id, contactEmail: emails.call, buyerLanguage: REPLY_TEXT }));
     expect('5 disposition', !dupSource.ok && dupSource.kind === 'refused' && dupSource.reason === 'duplicate_source' && dupSource.existingId === aiRowId, `duplicate source -> ${JSON.stringify(dupSource)}`);
@@ -614,7 +623,7 @@ async function main(): Promise<number> {
     counts.dispositionId = aiRowId;
     counts.confirmedBidIds = recorded.bidIds.join(',');
     counts.resolutionConfidence = 85;
-    pass('5 disposition', `ai row ${aiRowId.slice(0, 8)} became the human's row (confirmed_by ${OWNER}, metadata.aiSuggestion matched=true), 2 BIDs confirmed, enrollment stopped (replied), hypothesis ${h1.slice(0, 8)} confirmed at 85 (60 email + 15 quote + 10 root cause) citing both BID ids, mirror skipped:gap_mirror_disabled with no mirror row; audit kinds disposition=[reply.suggested, disposition.recorded, disposition.effects], hypothesis has one hypothesis.resolved, enrollment has one enrollment.pause + one enrollment.stop + one enroll.live; resubmit on the resolved hypothesis -> hypothesis_not_active, same source on an active hypothesis -> duplicate_source (existingId); the reply left the undispositioned list, state=all carries dispositionId, and routing inputs now read the reply as dispositioned with lastDisposition problem_confirmed`);
+    pass('5 disposition', `ai row ${aiRowId.slice(0, 8)} became the human's row (confirmed_by ${OWNER}, metadata.aiSuggestion matched=true), 2 BIDs confirmed, enrollment stopped (replied), hypothesis ${h1.slice(0, 8)} confirmed at 85 (60 email + 15 quote + 10 root cause) citing both BID ids, mirror skipped:gap_mirror_disabled with no mirror row; audit kinds disposition=[reply.suggested, disposition.recorded, disposition.effects], hypothesis has one hypothesis.resolved, enrollment has one enrollment.pause + one enrollment.stop + one enroll.live; resubmit on the resolved hypothesis -> hypothesis_terminal, same source on an active hypothesis -> duplicate_source (existingId); the reply left the undispositioned list, state=all carries dispositionId, and routing inputs now read the reply as dispositioned with lastDisposition problem_confirmed`);
 
     // 6. DB truth: the confirmed row is frozen, a BID cannot be deleted, a correction is a superseding insert.
     const refused = async (fn: () => Promise<unknown>): Promise<string> => {
@@ -743,7 +752,13 @@ async function main(): Promise<number> {
     expect('10 brief', dncBrief?.persona.doNotContact === true && dncBrief.lastDispositions[0]?.responseClass === 'do_not_contact', `dnc persona brief ${JSON.stringify(dncBrief && { dnc: dncBrief.persona.doNotContact, last: dncBrief.lastDispositions[0]?.responseClass })}`);
     pass('10 brief', `brief for persona ${p1.id}: FACT block observation cites both facts and the signals list carries both (one with the public url), the confirmed disposition with the buyer's words is the only disposition, zero open BIDs (all confirmed or superseded), the falsification question is the suggested question; the dnc persona's brief says doNotContact`);
 
-    // 11. An agent-created disposition is unconfirmed with no effects; the only adoption path refuses it.
+    // 11. An agent-created disposition is unconfirmed with no effects.
+    // B1+B2 (Opus adversarial review, 2026-09-24): resolveAdoptable now
+    // adopts ANY unconfirmed row for the source, not only created_by 'ai'
+    // rows -- an agent route stores rows as created_by 'cron'/AGENT_ACTOR,
+    // and the old created_by-only check permanently blocked a human from
+    // ever confirming an agent-posted row. ai_suggestion_not_adoptable now
+    // fires only when the named row is ALREADY human_confirmed.
     const agent = await recordDisposition(prisma, {
       hypothesisId: h2,
       personaId: p2.id,
@@ -769,16 +784,28 @@ async function main(): Promise<number> {
       channel: 'email',
       responseClass: 'problem_rejected',
       source: { kind: 'manual', id: `${tag}:agent` },
+      buyerLanguage: 'Confirmed by hand: they do not have that problem.',
       aiSuggestionId: agent.dispositionId,
       actor: OWNER,
       actorKind: 'human',
       now,
     });
-    expect('11 agent row', !adopt.ok && adopt.kind === 'refused' && adopt.reason === 'ai_suggestion_not_adoptable', `human adoption of the agent row -> ${JSON.stringify(adopt)}`);
+    expect('11 agent row', adopt.ok && adopt.dispositionId === agent.dispositionId && adopt.humanConfirmed === true, `human adoption of the agent row -> ${JSON.stringify(adopt)}`);
+    if (!adopt.ok) throw new Error('unreachable');
+    const adoptedRow = await prisma.conversationDisposition.findUnique({ where: { id: adopt.dispositionId }, select: { human_confirmed: true, created_by: true, confirmed_by: true } });
+    expect('11 agent row', adoptedRow?.human_confirmed === true && adoptedRow.created_by === AGENT_ACTOR && adoptedRow.confirmed_by === OWNER, `adopted row ${JSON.stringify(adoptedRow)}, expected human_confirmed true, created_by kept as ${AGENT_ACTOR} (the original poster), confirmed_by ${OWNER}`);
+    const h2AfterAdopt = await prisma.prospectingHypothesis.findUnique({ where: { id: h2 }, select: { status: true } });
+    expect('11 agent row', h2AfterAdopt?.status === 'rejected', `hypothesis after the adopted problem_rejected disposition ${JSON.stringify(h2AfterAdopt)}, expected rejected`);
     const agentConfirm = await recordDisposition(prisma, { hypothesisId: h2, personaId: p2.id, contactEmail: emails.call, channel: 'email', responseClass: 'problem_rejected', source: { kind: 'manual', id: `${tag}:agent-2` }, aiSuggestionId: aiRowId, actor: AGENT_ACTOR, actorKind: 'agent', now });
     expect('11 agent row', !agentConfirm.ok && agentConfirm.kind === 'refused' && agentConfirm.reason === 'agent_cannot_confirm', `agent with aiSuggestionId -> ${JSON.stringify(agentConfirm)}`);
+    // The adopted disposition just resolved h2 to 'rejected' (a terminal
+    // status), so a second submit against h2 hits the terminal-hypothesis
+    // guard before resolveAdoptable is even reached; on a still-active
+    // hypothesis the same resubmit would instead refuse ai_suggestion_not_adoptable.
+    const reAdopt = await recordDisposition(prisma, { hypothesisId: h2, personaId: p2.id, contactEmail: emails.call, channel: 'email', responseClass: 'problem_rejected', source: { kind: 'manual', id: `${tag}:agent` }, aiSuggestionId: agent.dispositionId, actor: OWNER, actorKind: 'human', now });
+    expect('11 agent row', !reAdopt.ok && reAdopt.kind === 'refused' && reAdopt.reason === 'hypothesis_terminal', `re-adopting on the now-resolved hypothesis -> ${JSON.stringify(reAdopt)}, expected hypothesis_terminal`);
     counts.agentDispositionId = agent.dispositionId;
-    pass('11 agent row', `agent (cron) problem_rejected on ${emails.call} stored unconfirmed with effects none and only disposition.recorded audited; hypothesis ${h2.slice(0, 8)} still active with no resolution; a human adopting it through aiSuggestionId is refused ai_suggestion_not_adoptable (only created_by ai rows adopt: NO human confirm path for agent rows exists, named debt), an agent passing aiSuggestionId is refused agent_cannot_confirm`);
+    pass('11 agent row', `agent (cron) problem_rejected on ${emails.call} stored unconfirmed with effects none and only disposition.recorded audited; hypothesis ${h2.slice(0, 8)} still active with no resolution; a human adopting it through aiSuggestionId SUCCEEDS (B1+B2: created_by stays ${AGENT_ACTOR}, confirmed_by becomes ${OWNER}, hypothesis resolves rejected); an agent passing aiSuggestionId is refused agent_cannot_confirm; resubmitting on the now-resolved hypothesis is refused hypothesis_terminal`);
 
     for (const name of SCRUBBED_ENV) expect('12 credentials', process.env[name] === undefined, `${name} reappeared in process.env during the run`);
     pass('12 credentials', 'no credential reappeared; no HubSpot, clawd, Gmail or model call was possible');
