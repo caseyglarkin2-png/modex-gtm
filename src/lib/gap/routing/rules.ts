@@ -12,8 +12,8 @@
 import { normalizeScore } from '../../pounce/fit';
 import { PING_THRESHOLD } from '../../pounce/score';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
-import type { RoutingAction, RoutingLane } from '../taxonomy';
-import type { EnrollTarget, RoutingInputs } from './types';
+import type { RoutingAction, RoutingLane, ResponseClass } from '../taxonomy';
+import type { EnrollTarget, RoutingInputs, RoutingLastDisposition } from './types';
 
 export interface RoutingRule {
   id: string;
@@ -135,6 +135,50 @@ function lastDisposition(i: RoutingInputs) {
 }
 
 /**
+ * B6 (Opus adversarial review, 2026-09-24): protect active commercial
+ * motion. An open deal, a booked meeting, or a recent confirmed positive
+ * disposition means cold prospecting is inappropriate; a human is already
+ * in conversation. `Account.pipeline_stage` is modex's own progression
+ * (src/lib/pipeline.ts), largely DERIVED from ordinary outreach activity;
+ * `targeted`/`contacted`/`engaged` are what routing itself produces on the
+ * way to a real conversation and must not block further routing (R2
+ * in_flight and R16 cooldown already govern that). Only `meeting` (a
+ * meeting was booked or requested) and later (`proposal`, `closed`) signal
+ * genuine commercial momentum worth protecting.
+ */
+const ADVANCED_PIPELINE_STAGES = new Set(['meeting', 'proposal', 'closed']);
+
+/** The minimal slice `hasActiveOpportunity` needs, so enroll/service.ts (B6)
+ *  can build one from a fresh targeted read instead of a full RoutingInputs. */
+export interface ActiveOpportunityInputs {
+  account: Pick<RoutingInputs['account'], 'pipelineStage'>;
+  comms: Pick<RoutingInputs['comms'], 'meetingBooked' | 'lastDisposition'>;
+  now: Date;
+  freshness: Pick<RoutingInputs['freshness'], 'cooldownDays'>;
+}
+
+function hasOpenPipelineStage(i: ActiveOpportunityInputs): boolean {
+  const stage = i.account.pipelineStage;
+  return !!stage && ADVANCED_PIPELINE_STAGES.has(stage);
+}
+
+const POSITIVE_DISPOSITION_CLASSES = new Set<ResponseClass>(['meeting_accepted', 'request_information']);
+
+function recentPositiveDisposition(i: ActiveOpportunityInputs): RoutingLastDisposition | null {
+  const d = i.comms.lastDisposition;
+  if (d == null || !POSITIVE_DISPOSITION_CLASSES.has(d.responseClass)) return null;
+  return withinDays(i.now, d.at, i.freshness.cooldownDays) ? d : null;
+}
+
+/** Exported for enroll/service.ts (B6): the enroll guard re-checks this
+ *  predicate against a fresh read at enroll time, so a routing decision that
+ *  has gone stale (a meeting booked after the decision was made) still
+ *  blocks. Same predicate, not a second opportunity model. */
+export function hasActiveOpportunity(i: ActiveOpportunityInputs): boolean {
+  return hasOpenPipelineStage(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
+}
+
+/**
  * The leg name for the modex `Persona.do_not_contact` column. The same name
  * clawd uses when its modex leg refuses, so a remote hit and the local column
  * collapse to one leg instead of two spellings of the same fact.
@@ -236,6 +280,24 @@ export const RULES: RoutingRule[] = [
     lane: 'reply_triage',
     reason: () => 'reply_pending',
     predicate: () => 'an inbound reply has no disposition yet',
+  },
+  {
+    id: 'active_opportunity',
+    label: 'R3b',
+    when: hasActiveOpportunity,
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: (i) => {
+      if (hasOpenPipelineStage(i)) return 'active_opportunity:pipeline';
+      if (i.comms.meetingBooked) return 'active_opportunity:meeting_booked';
+      return 'active_opportunity:recent_positive_disposition';
+    },
+    predicate: (i) => {
+      if (hasOpenPipelineStage(i)) return `account has an open pipeline stage (${i.account.pipelineStage})`;
+      if (i.comms.meetingBooked) return 'a meeting is booked';
+      const d = recentPositiveDisposition(i)!;
+      return `a confirmed ${d.responseClass} disposition ${Math.round(ageDays(i.now, d.at))} days ago (within ${i.freshness.cooldownDays})`;
+    },
   },
   {
     id: 'bounced_or_invalid',

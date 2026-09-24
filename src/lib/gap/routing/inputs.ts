@@ -620,8 +620,10 @@ async function readComms(prisma: PrismaLike, email: string): Promise<RoutingComm
     lastInboundAt,
     undispositionedInbound,
     lastDisposition: buildLastDisposition(lastConfirmed),
-    // Sprint 4 wires meeting outcomes; until then nothing here can claim one.
-    meetingBooked: false,
+    // B6 (Opus adversarial review, 2026-09-24): derived from the same
+    // confirmed-only read that feeds lastDisposition, so an AI-suggested,
+    // unconfirmed "meeting_accepted" can never claim a meeting is booked.
+    meetingBooked: lastConfirmed?.response_class === 'meeting_accepted',
   };
 }
 

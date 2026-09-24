@@ -95,8 +95,19 @@ function snapshot(overrides: Record<string, unknown> = {}) {
   };
 }
 
-function makePrisma(opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any } = {}) {
+function makePrisma(
+  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any } = {},
+) {
   const p = {
+    // B6 (Opus adversarial review, 2026-09-24): the active-opportunity guard.
+    // Defaults to "nothing active" so every existing test is unaffected;
+    // opts.account / opts.lastDisposition let a test assert the refusal.
+    account: {
+      findUnique: asyncSpy(async () => (opts.account === undefined ? { pipeline_stage: null } : opts.account)),
+    },
+    conversationDisposition: {
+      findFirst: asyncSpy(async () => (opts.lastDisposition === undefined ? null : opts.lastDisposition)),
+    },
     sequenceVersion: {
       findUnique: asyncSpy(async () =>
         opts.version === undefined ? { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: STEPS } : opts.version,
@@ -265,6 +276,35 @@ describe('enrollFromDecision guards, in order', () => {
   it('shadow from an agent is allowed with the flag off', async () => {
     const prisma = makePrisma();
     const r = await enrollFromDecision(prisma, input({ mode: 'shadow', actor: 'cron', actorKind: 'agent' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  /**
+   * B6 (Opus adversarial review, 2026-09-24). Before this fix, enroll had no
+   * active-opportunity check at all: a meeting-stage account or a booked
+   * meeting still enrolled into a cold GAP sequence. This is a FRESH read
+   * (prisma.account / prisma.conversationDisposition), not the routing
+   * decision's snapshot, so it still refuses even when the decision being
+   * acted on predates the opportunity opening. Mutate the guard away and
+   * these go RED.
+   */
+  it('active_opportunity refuses enrollment when the account is at the meeting pipeline stage', async () => {
+    const prisma = makePrisma({ account: { pipeline_stage: 'meeting' } });
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r).toEqual({ ok: false, reason: 'active_opportunity' });
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+  });
+
+  it('active_opportunity refuses enrollment on a confirmed meeting_accepted disposition within cooldown', async () => {
+    const prisma = makePrisma({ lastDisposition: { response_class: 'meeting_accepted', created_at: NOW } });
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r).toEqual({ ok: false, reason: 'active_opportunity' });
+  });
+
+  it('active_opportunity control: an early pipeline stage and no positive disposition still enroll normally', async () => {
+    const prisma = makePrisma({ account: { pipeline_stage: 'contacted' } });
+    const r = await enrollFromDecision(prisma, input(), deps());
     expect(r.ok).toBe(true);
   });
 

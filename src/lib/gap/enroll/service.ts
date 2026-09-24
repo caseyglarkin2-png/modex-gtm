@@ -117,8 +117,10 @@ import {
   type EnrollRowItem,
   type EnrollTableJson,
 } from '@/lib/gap/routing/enroll-row';
-import { resolveEnrollTarget } from '@/lib/gap/routing/rules';
+import { hasActiveOpportunity, resolveEnrollTarget, type ActiveOpportunityInputs } from '@/lib/gap/routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
+import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
+import { isResponseClass } from '@/lib/gap/taxonomy';
 import { checkSuppression, enroll, type EnrollRefusal } from '@/lib/gap/sequence/enrollment';
 import type { SuppressionReader } from '@/lib/gap/routing/suppression-read';
 import { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
@@ -215,6 +217,7 @@ export type EnrollServiceRefusal =
   | 'hypothesis_not_found'
   | 'persona_not_found'
   | 'no_email'
+  | 'active_opportunity'
   | 'build_required'
   | 'step_has_no_copy:0'
   | `unrendered_placeholder:${string}`
@@ -398,6 +401,38 @@ function preferredSenderOf(decision: DecisionRow | null): string | null {
   return isObj(snap) ? optStr(snap.preferredSender) : null;
 }
 
+/**
+ * B6 (Opus adversarial review, 2026-09-24): a fresh read, not the routing
+ * decision's snapshot, because the decision can be stale (a meeting booked,
+ * or a deal opened, after routing ran but before enroll executes). Reuses
+ * routing/rules.ts's hasActiveOpportunity so this is the same predicate
+ * R3b applies, not a second opportunity model.
+ */
+async function loadActiveOpportunityInputs(prisma: any, accountName: string, email: string, now: Date): Promise<ActiveOpportunityInputs> {
+  const account: { pipeline_stage: string | null } | null = await prisma.account.findUnique({
+    where: { name: accountName },
+    select: { pipeline_stage: true },
+  });
+  const lastConfirmed: { response_class: string; created_at: Date } | null = await prisma.conversationDisposition.findFirst({
+    where: { contact_email: email, human_confirmed: true },
+    orderBy: { created_at: 'desc' },
+    select: { response_class: true, created_at: true },
+  });
+  const lastDisposition =
+    lastConfirmed && isResponseClass(lastConfirmed.response_class)
+      ? { responseClass: lastConfirmed.response_class, at: lastConfirmed.created_at }
+      : null;
+  return {
+    account: { pipelineStage: account?.pipeline_stage ?? null },
+    comms: {
+      meetingBooked: lastConfirmed?.response_class === 'meeting_accepted',
+      lastDisposition,
+    },
+    now,
+    freshness: { cooldownDays: DEFAULT_FRESHNESS.cooldownDays },
+  };
+}
+
 interface PersonaRow {
   id: number;
   name: string | null;
@@ -541,6 +576,15 @@ export async function enrollFromDecision(
   const owner = (input.owner ?? '').trim() || (input.actor.includes('@') ? input.actor : DEFAULT_OWNER);
   const sender = (input.sender ?? '').trim() || preferredSenderOf(decision) || owner;
   const accountName = hypothesis.account_name || persona.account_name;
+
+  // B6 (Opus adversarial review, 2026-09-24): an open deal, a booked
+  // meeting, or a recent confirmed positive disposition means a human is
+  // already in conversation. Cold-enrolling into a GAP sequence on top of
+  // that is the exact failure the routing R3b rule exists to prevent; enroll
+  // refuses the same predicate against a fresh read, since a routing
+  // decision consumed here can be older than the opportunity that opened.
+  const opportunity = await loadActiveOpportunityInputs(prisma, accountName, email, input.now);
+  if (hasActiveOpportunity(opportunity)) return refuse('active_opportunity');
 
   if (target === 'build_required') return refuse('build_required', { target });
 
