@@ -209,6 +209,10 @@ export interface EnrollDeps {
    * (the e2e's fixture refs) passes them here.
    */
   contract?: Record<string, unknown> | null;
+  /** SF14 (6B-T2), opt-in: see VerifyCompilesOptions.maxCompileAgeMs. Undefined skips the staleness check. */
+  maxCompileAgeMs?: number;
+  /** SF14 (6B-T2), opt-in: recheck every cited signal's freshness at enroll time. Default false (unchanged behavior). */
+  checkEvidenceFreshness?: boolean;
 }
 
 export type EnrollServiceRefusal =
@@ -223,6 +227,8 @@ export type EnrollServiceRefusal =
   | `compile_wrong_hypothesis:${string}`
   | `compile_template_only:${string}`
   | `compile_not_passed:${number}`
+  | `compile_stale:${number}`
+  | 'evidence_expired'
   | 'compiler_disabled'
   | 'autonomy_halted'
   | 'hypothesis_not_found'
@@ -309,6 +315,25 @@ interface CompileRowLike {
 export interface VerifyCompilesOptions {
   /** Shadow only: a template-level row (hypothesis_id null) may stand in for a step. Live never accepts one. */
   allowTemplateRows?: boolean;
+  /**
+   * SF14 (6B-T2): when BOTH `now` and `maxCompileAgeMs` are given, the
+   * newest passing (or approved review_required) compile row for each step
+   * must not be older than the limit, or the step refuses
+   * `compile_stale:<stepIndex>`. Either field left undefined skips the
+   * check entirely -- the default, so every caller that does not opt in is
+   * byte-identical to before this ticket. The threshold is a policy
+   * decision this module does not make for the caller; see
+   * DEFAULT_MAX_COMPILE_AGE_MS below for the one opt-in path in this repo.
+   */
+  now?: Date;
+  maxCompileAgeMs?: number;
+}
+
+/** SF14 helper: age-check the newest row for a step, opt-in only (see VerifyCompilesOptions). */
+function staleness(row: CompileRowLike, opts: VerifyCompilesOptions, stepIndex: number): `compile_stale:${number}` | null {
+  if (!opts.now || opts.maxCompileAgeMs === undefined) return null;
+  const age = opts.now.getTime() - new Date(row.created_at).getTime();
+  return age > opts.maxCompileAgeMs ? `compile_stale:${stepIndex}` : null;
 }
 
 /**
@@ -323,7 +348,7 @@ export async function verifyCompiles(
   stepCount: number,
   rows: readonly CompileRowLike[],
   opts: VerifyCompilesOptions = {},
-): Promise<`compile_not_passed:${number}` | `compile_template_only:${string}` | null> {
+): Promise<`compile_not_passed:${number}` | `compile_template_only:${string}` | `compile_stale:${number}` | null> {
   if (!opts.allowTemplateRows) {
     const template = rows.find((r) => (r.hypothesis_id ?? null) === null);
     if (template) return `compile_template_only:${template.id}`;
@@ -334,15 +359,50 @@ export async function verifyCompiles(
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     const newest = forStep[0];
     if (!newest) return `compile_not_passed:${i}`;
-    if (newest.verdict === 'pass') continue;
+    if (newest.verdict === 'pass') {
+      const stale = staleness(newest, opts, i);
+      if (stale) return stale;
+      continue;
+    }
     if (newest.verdict === 'review_required') {
       const approval = await isApproved(prisma, newest.id);
-      if (approval.approved) continue;
+      if (approval.approved) {
+        const stale = staleness(newest, opts, i);
+        if (stale) return stale;
+        continue;
+      }
     }
     return `compile_not_passed:${i}`;
   }
   return null;
 }
+
+export interface EvidenceFreshnessRow {
+  freshness_expires_at: Date | string | null;
+}
+
+/**
+ * SF14 (6B-T2): a cited signal's `freshness_expires_at`, when set, must not
+ * already be past `now`. Same IS-NULL-OR-future predicate
+ * `signals/registry.ts`'s `findSignalsForAccount` already uses for "still
+ * fresh". Pure; opt-in only (see `EnrollDeps.checkEvidenceFreshness`).
+ */
+export function checkEvidenceFreshness(signals: readonly EvidenceFreshnessRow[], now: Date): 'evidence_expired' | null {
+  for (const s of signals) {
+    if (!s.freshness_expires_at) continue;
+    if (new Date(s.freshness_expires_at).getTime() <= now.getTime()) return 'evidence_expired';
+  }
+  return null;
+}
+
+/**
+ * SF14 (6B-T2): a conservative default for the one opt-in caller in this
+ * repo (see the e2e / 6B execution-contract adapters). 24 hours. This is a
+ * threshold this session chose, not a product decision; any caller that
+ * enables `deps.maxCompileAgeMs` should pass its own value rather than lean
+ * on this constant once a real policy exists.
+ */
+export const DEFAULT_MAX_COMPILE_AGE_MS = 24 * 60 * 60 * 1000;
 
 /** The default reader: the same canonical clawd switch `sendViaGmail` gates on. A thrown read is a halt. */
 export async function readAutonomy(): Promise<AutonomyVerdict> {
@@ -547,7 +607,10 @@ export async function enrollFromDecision(
     const boundTo = row.hypothesis_id ?? null;
     if (boundTo !== null && boundTo !== input.hypothesisId) return refuse(`compile_wrong_hypothesis:${id}`, { boundTo });
   }
-  const notPassed = await verifyCompiles(prisma, steps.length, compileRows, { allowTemplateRows: input.mode === 'shadow' });
+  const notPassed = await verifyCompiles(prisma, steps.length, compileRows, {
+    allowTemplateRows: input.mode === 'shadow',
+    ...(deps.maxCompileAgeMs !== undefined ? { now: input.now, maxCompileAgeMs: deps.maxCompileAgeMs } : {}),
+  });
   if (notPassed) return refuse(notPassed);
 
   // 5. Live reads the canonical kill switch; shadow never does.
@@ -576,6 +639,15 @@ export async function enrollFromDecision(
     },
   });
   if (!hypothesis) return refuse('hypothesis_not_found');
+
+  // SF14 (6B-T2), opt-in only: recheck that every cited signal is still
+  // fresh as of `now`. Off by default; see EnrollDeps.checkEvidenceFreshness.
+  if (deps.checkEvidenceFreshness) {
+    const linkedSignals = (hypothesis.signals ?? []).map((link) => link.signal).filter((s): s is EvidenceSignalRow => s !== null);
+    const stale = checkEvidenceFreshness(linkedSignals, input.now);
+    if (stale) return refuse(stale);
+  }
+
   const persona: PersonaRow | null = await prisma.persona.findUnique({
     where: { id: input.personaId },
     select: { id: true, name: true, email: true, account_name: true, hubspot_contact_id: true, do_not_contact: true, email_status: true },
