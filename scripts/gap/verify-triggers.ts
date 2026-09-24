@@ -868,7 +868,11 @@ const guards: Guard[] = [
       const disp = await insertDisposition(tx, hyp, account);
       const W = `WHERE id = ${q(disp)}`;
       await expectOk(tx, g, `UPDATE conversation_dispositions SET response_class = 'timing', buyer_language = 'call me in Q1' ${W}`, 'unconfirmed: class + language');
+      await expectOk(tx, g, `UPDATE conversation_dispositions SET metadata = '{"resumeAt":"2027-01-04T00:00:00.000Z"}'::jsonb ${W}`, 'unconfirmed: metadata');
       await expectOk(tx, g, `UPDATE conversation_dispositions SET human_confirmed = true, confirmed_by = 'verify', confirmed_at = now() ${W}`, 'confirm');
+      // S4-T3: a confirmed row's resumeAt is a fact; metadata freezes with the classes.
+      await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET metadata = '{"resumeAt":"2027-06-01T00:00:00.000Z"}'::jsonb ${W}`, 'metadata after confirm');
+      await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET metadata = NULL ${W}`, 'metadata cleared after confirm');
       await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET response_class = 'not_priority' ${W}`, 'response_class after confirm');
       await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET root_cause_class = 'x' ${W}`, 'root_cause_class after confirm');
       await expectRefused(tx, g, T, `UPDATE conversation_dispositions SET impact_class = 'x' ${W}`, 'impact_class after confirm');

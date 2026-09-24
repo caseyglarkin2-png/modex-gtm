@@ -21,7 +21,7 @@
 --   GAP_SIGNAL_FROZEN       prospecting_signals: fact columns frozen after insert (only metadata moves)
 --   GAP_HYPOTHESIS_FROZEN   prospecting_hypotheses narrative frozen past review; hypothesis_signals cannot link, unlink or re-point past review
 --   GAP_HYPOTHESIS_UNSUPPORTED  prospecting_hypotheses cannot enter approved/active without reviewed_by and one evidenced linked signal
---   GAP_DISPOSITION_FROZEN  conversation_dispositions: classes and buyer language frozen once confirmed; confirmation never reverts
+--   GAP_DISPOSITION_FROZEN  conversation_dispositions: classes, buyer language and metadata frozen once confirmed; confirmation never reverts
 -- CHECK constraints are named gap_ck_<table>_<column> so a violation names itself.
 
 -- ---------------------------------------------------------------------------
@@ -579,8 +579,8 @@ CREATE TRIGGER gap_hypothesis_signal_unlink_guard
   FOR EACH ROW EXECUTE FUNCTION gap_hypothesis_signal_unlink_guard();
 
 -- ---------------------------------------------------------------------------
--- 10. conversation_dispositions: classes and buyer language frozen once
---     confirmed; confirmation never reverts (GAP_DISPOSITION_FROZEN)
+-- 10. conversation_dispositions: classes, buyer language and metadata frozen
+--     once confirmed; confirmation never reverts (GAP_DISPOSITION_FROZEN)
 -- ---------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION gap_disposition_guard()
@@ -602,6 +602,8 @@ BEGIN
   IF NEW.root_cause_class IS DISTINCT FROM OLD.root_cause_class THEN changed := array_append(changed, 'root_cause_class'); END IF;
   IF NEW.impact_class IS DISTINCT FROM OLD.impact_class THEN changed := array_append(changed, 'impact_class'); END IF;
   IF NEW.buyer_language IS DISTINCT FROM OLD.buyer_language THEN changed := array_append(changed, 'buyer_language'); END IF;
+  -- S4-T3: metadata carries resumeAt, referral and the AI agreement record; a confirmed row's resumeAt is a fact.
+  IF NEW.metadata IS DISTINCT FROM OLD.metadata THEN changed := array_append(changed, 'metadata'); END IF;
 
   IF array_length(changed, 1) > 0 THEN
     RAISE EXCEPTION 'GAP_DISPOSITION_FROZEN: conversation_dispositions.% is human_confirmed; refused change to %', OLD.id, array_to_string(changed, ',');

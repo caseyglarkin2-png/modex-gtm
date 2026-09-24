@@ -95,6 +95,7 @@ DROP TABLE IF EXISTS gap_audit_events CASCADE;
 DROP TABLE IF EXISTS routing_decisions CASCADE;
 DROP TABLE IF EXISTS gap_hubspot_mirror CASCADE;
 DROP TABLE IF EXISTS buyer_input_data CASCADE;
+-- S4-T3 added conversation_dispositions.metadata (Json?); it goes with the table, no separate DROP COLUMN.
 DROP TABLE IF EXISTS conversation_dispositions CASCADE;
 DROP TABLE IF EXISTS sequence_enrollments CASCADE;
 DROP TABLE IF EXISTS sequence_copy_events CASCADE;

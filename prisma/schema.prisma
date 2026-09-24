@@ -1512,7 +1512,9 @@ model ConversationDisposition {
   objection             String?
   buyer_language        String?
   next_best_action      String?
-  ai_suggested          Json?
+  ai_suggested          Json? // the AI suggestion only (class, bids with quotes, why); never the human's verdict
+  /// Sprint 4 (S4-T3): resumeAt (timing), referral {name, title} and the aiSuggestion agreement record. Frozen with the classes once human_confirmed.
+  metadata              Json?
   human_confirmed       Boolean   @default(false)
   confirmed_by          String?
   confirmed_at          DateTime?
