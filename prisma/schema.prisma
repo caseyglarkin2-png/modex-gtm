@@ -67,6 +67,7 @@ model Account {
   sequence_families     SequenceFamily[]
   sequence_enrollments  SequenceEnrollment[]
   routing_decisions     RoutingDecision[]
+  gap_account_aliases   GapAccountAlias[]
 
   @@map("accounts")
 }
@@ -1357,6 +1358,31 @@ model ProspectingSignal {
   @@index([type, observed_at])
   @@index([freshness_expires_at])
   @@map("prospecting_signals")
+}
+
+/// GAP Prospecting OS (Sprint 6A): an explicitly registered alias for an
+/// account -- a name a real source emitted that a human or the hypothesize
+/// job confirmed maps to this account. `normalized_alias` is
+/// normalizeCompanyName(alias) (src/lib/gap/identity/normalize.ts); the
+/// unique index makes registration idempotent per normalized key and is the
+/// DB-level backstop against a source's alias table racing to different
+/// accounts for the same name. This is tier C in the identity resolver
+/// (src/lib/gap/identity/resolve.ts): a curated, explicit mapping, always
+/// subordinate to a HubSpot company id or a verified domain.
+model GapAccountAlias {
+  id               String   @id @default(cuid())
+  alias            String
+  normalized_alias String
+  account_name     String
+  source           String
+  created_by       String
+  created_at       DateTime @default(now())
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@unique([normalized_alias])
+  @@index([account_name])
+  @@map("gap_account_aliases")
 }
 
 /// A seller INFERENCE about one account (and usually one persona): what we

@@ -532,6 +532,7 @@ Executing `docs/GAP_RUNTIME_HANDOFF.md` end to end on branch `feat/gap-os-runtim
 
 **Ticket ledger (one line per commit, oldest first):**
 - 6A-T2 -- pure identity resolver (`src/lib/gap/identity/normalize.ts`, `resolve.ts`) implementing the precedence above: A/B/C/D tiers, ambiguous-within-a-tier falls through rather than winning, a higher tier's disagreement with a lower one is returned as `conflict` (never silently dropped), deterministic string normalization only (no fuzzy/edit-distance matching). 20 tests (`tests/unit/gap/identity-normalize.test.ts`, `identity-resolve.test.ts`), including the literal acceptance case ("Niagara Bottling, Llc" resolves to "Niagara Bottling"). Mutation-tested: reversing the tier precedence order breaks 5 tests with the specific conflict/tier assertions, restored.
+- 6A-T1 -- schema: `GapAccountAlias` (`gap_account_aliases`, additive, cuid id, unique on `normalized_alias`) is tier C's explicit alias table; hand SQL `prisma/sql/2026-09-24-gap-identity.sql` + rollback adds the `source` provenance CHECK (`hypothesize_cron` | `manual`); `verify-triggers.ts` extended to 32 guards. Confirmed RED against the table before `db push` (the new guards' fixture inserts failed with `relation "gap_account_aliases" does not exist`), GREEN (32/32) after `db push` + hand SQL on the scratch DB.
 
 ## 12. Migration, backfill and rollback
 

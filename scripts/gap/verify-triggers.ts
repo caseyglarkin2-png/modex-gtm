@@ -882,6 +882,50 @@ const guards: Guard[] = [
       await expectRefused(tx, g, 'Key (source_kind, source_id)', dispositionInsertSql(nid('disp'), hyp, account, { source_kind: q('verify'), source_id: q(disp) }), 'same (source_kind, source_id) twice');
     },
   },
+  {
+    name: 'CHECK gap_account_aliases.source (6A)',
+    async run(tx, account) {
+      const g = this.name;
+      const aliasInsertSql = (id: string, overrides: Record<string, string> = {}) => {
+        const cols: Record<string, string> = {
+          id: q(id),
+          alias: q('Verify Alias Co'),
+          normalized_alias: q(`verify alias ${id}`),
+          account_name: q(account),
+          source: q('manual'),
+          created_by: q('verify'),
+          created_at: 'now()',
+          ...overrides,
+        };
+        return `INSERT INTO gap_account_aliases (${Object.keys(cols).join(',')}) VALUES (${Object.values(cols).join(',')})`;
+      };
+      await expectRefused(tx, g, 'gap_ck_gap_account_aliases_source', aliasInsertSql(nid('alias'), { source: q('scraped_guess') }), 'source=scraped_guess');
+      await expectOk(tx, g, aliasInsertSql(nid('alias'), { source: q('hypothesize_cron') }), 'source=hypothesize_cron');
+      await expectOk(tx, g, aliasInsertSql(nid('alias')), 'source=manual');
+    },
+  },
+  {
+    name: 'UNIQUE gap_account_aliases.normalized_alias (6A)',
+    async run(tx, account) {
+      const g = this.name;
+      const key = `verify dup ${nid('key')}`;
+      const aliasInsertSql = (id: string, overrides: Record<string, string> = {}) => {
+        const cols: Record<string, string> = {
+          id: q(id),
+          alias: q('Verify Dup Co'),
+          normalized_alias: q(key),
+          account_name: q(account),
+          source: q('manual'),
+          created_by: q('verify'),
+          created_at: 'now()',
+          ...overrides,
+        };
+        return `INSERT INTO gap_account_aliases (${Object.keys(cols).join(',')}) VALUES (${Object.values(cols).join(',')})`;
+      };
+      await expectOk(tx, g, aliasInsertSql(nid('alias')), 'first registration');
+      await expectRefused(tx, g, 'Key (normalized_alias)', aliasInsertSql(nid('alias')), 'same normalized_alias twice, even for a different source');
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
