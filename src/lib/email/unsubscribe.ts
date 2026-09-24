@@ -98,8 +98,11 @@ export async function recordUnsubscribe(
     },
   });
 
+  // Case-insensitive: Persona.email is stored as imported (e.g. "John@Acme.com"),
+  // not normalized, so an exact-case match here can silently miss the persona
+  // and leave the cross-plane do_not_contact leg clear.
   const updated = await prisma.persona.updateMany({
-    where: { email },
+    where: { email: { equals: email, mode: 'insensitive' } },
     data: { do_not_contact: true },
   });
   const personaUpdated = typeof updated?.count === 'number' ? updated.count : 0;
@@ -111,7 +114,7 @@ export async function recordUnsubscribe(
 
   let hubspot: RecordUnsubscribeHubSpotOutcome;
   try {
-    const persona = await prisma.persona.findFirst({ where: { email } });
+    const persona = await prisma.persona.findFirst({ where: { email: { equals: email, mode: 'insensitive' } } });
     if (persona?.hubspot_contact_id) {
       const upsert = input.hubspot?.client?.upsertContact ?? defaultUpsertContact;
       const id = await upsert({ email, hs_email_optout: 'true' });

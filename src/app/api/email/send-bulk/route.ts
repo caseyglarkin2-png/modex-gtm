@@ -139,11 +139,18 @@ export async function POST(req: NextRequest) {
     accountNames: accountInvariant.scopedAccountNames,
     emails: [...resolvedRecipients.map((recipient) => recipient.to), ...accountInvariant.normalizedCc],
   });
+  // Query lower-cased: UnsubscribedEmail.email is always stored lower-cased
+  // (recordUnsubscribe normalizes on write), but resolvedRecipients[].to can
+  // carry any case, and Postgres `in` is an exact-case match.
   const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
-    where: { email: { in: [...resolvedRecipients.map((recipient) => recipient.to), ...accountInvariant.normalizedCc] } },
+    where: {
+      email: {
+        in: [...resolvedRecipients.map((recipient) => recipient.to.toLowerCase()), ...accountInvariant.normalizedCc],
+      },
+    },
     select: { email: true },
   });
-  const unsubscribedSet = new Set(unsubscribedRows.map((row) => row.email));
+  const unsubscribedSet = new Set(unsubscribedRows.map((row) => row.email.toLowerCase()));
   const ccEligibility = await Promise.all(
     accountInvariant.normalizedCc.map(async (email) => ({
       email,
