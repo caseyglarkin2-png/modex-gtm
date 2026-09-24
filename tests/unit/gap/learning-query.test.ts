@@ -288,4 +288,19 @@ describe('buildLearningReport', () => {
     expect(report.byTamTier.find((r) => r.key === 'Tier 1')?.funnel.resolutionRate.numerator).toBe(1);
     expect(report.signalYield).toEqual([{ signalType: 'acquisition', signalCount: 3, hypothesisCount: 0, rate: { value: 0, n: 3, numerator: 0, denominator: 3 } }]);
   });
+
+  it('SF16: two hypotheses sharing the SAME primary signal count that signal once, never exceeding 100% of registered signals', async () => {
+    const prisma = makePrisma({
+      hypotheses: [
+        hypothesis({ id: 'H1', persona: 'site_ops', signals: [{ role: 'primary', signal: { id: 'S1', type: 'acquisition' } }] }),
+        hypothesis({ id: 'H2', persona: 'ops_manager', signals: [{ role: 'primary', signal: { id: 'S1', type: 'acquisition' } }] }),
+      ],
+      dispositions: [],
+      signalCounts: [{ type: 'acquisition', _count: { _all: 1 } }],
+    });
+    const report = await buildLearningReport(prisma);
+    const yield_ = report.signalYield.find((r) => r.signalType === 'acquisition');
+    expect(yield_).toEqual({ signalType: 'acquisition', signalCount: 1, hypothesisCount: 1, rate: { value: 1, n: 1, numerator: 1, denominator: 1 } });
+    expect(yield_!.hypothesisCount).toBeLessThanOrEqual(yield_!.signalCount);
+  });
 });

@@ -41,6 +41,8 @@ export interface LearningHypothesisRow extends FunnelHypothesis {
   sequenceFamilyId: string | null;
   sequenceVersionId: string | null;
   primarySignalType: string | null;
+  /** SF16 (Opus adversarial review, 2026-09-24): the primary signal's own id, so yield can dedupe distinct signals rather than count hypotheses. */
+  primarySignalId: string | null;
 }
 
 export interface LearningConversationRow extends FunnelConversation {
@@ -108,7 +110,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
         problem_family: true,
         persona: true,
         account: { select: { tier: true } },
-        signals: { select: { role: true, signal: { select: { type: true } } } },
+        signals: { select: { role: true, signal: { select: { id: true, type: true } } } },
       },
     }),
     // The gate: only a HUMAN-CONFIRMED disposition is a conversation (see
@@ -193,7 +195,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
   const hypotheses: LearningHypothesisRow[] = (hypothesisRows as any[])
     .filter((h) => !hypothesisIdsInScope || hypothesisIdsInScope.has(h.id))
     .map((h) => {
-      const signals: Array<{ role: string; signal: { type: string } | null }> = h.signals ?? [];
+      const signals: Array<{ role: string; signal: { id: string; type: string } | null }> = h.signals ?? [];
       const primary = signals.find((s) => s.role === 'primary') ?? signals[0];
       const attribution = sequenceAttributionByHypothesis.get(h.id);
       return {
@@ -206,6 +208,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
         sequenceFamilyId: attribution?.familyId ?? null,
         sequenceVersionId: attribution?.versionId ?? null,
         primarySignalType: primary?.signal?.type ?? null,
+        primarySignalId: primary?.signal?.id ?? null,
       };
     });
 
@@ -260,7 +263,9 @@ export async function buildLearningReport(prisma: any, filters: LearningFilters 
     dispositionDistribution: dispositionDistribution(conversations),
     signalYield: computeSignalYield(
       signalCounts,
-      hypotheses.map((h) => h.primarySignalType).filter((t): t is string => t !== null),
+      hypotheses
+        .filter((h): h is typeof h & { primarySignalType: string; primarySignalId: string } => h.primarySignalType !== null && h.primarySignalId !== null)
+        .map((h) => ({ signalType: h.primarySignalType, signalId: h.primarySignalId })),
     ),
     counts: { hypotheses: hypotheses.length, conversations: conversations.length },
   };
