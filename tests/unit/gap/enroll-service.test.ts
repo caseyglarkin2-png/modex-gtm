@@ -214,10 +214,12 @@ beforeEach(() => {
     GAP_OS_ENABLED: process.env.GAP_OS_ENABLED,
     GAP_AUTO_ENROLL_ENABLED: process.env.GAP_AUTO_ENROLL_ENABLED,
     GAP_MESSAGE_COMPILER_ENABLED: process.env.GAP_MESSAGE_COMPILER_ENABLED,
+    OUTREACH_PAUSED: process.env.OUTREACH_PAUSED,
   };
   process.env.GAP_OS_ENABLED = 'true';
   process.env.GAP_MESSAGE_COMPILER_ENABLED = 'true';
   delete process.env.GAP_AUTO_ENROLL_ENABLED;
+  delete process.env.OUTREACH_PAUSED;
   mockedAudit.mockClear();
   mockedEnroll.mockReset();
   mockedRecord.mockReset();
@@ -271,6 +273,39 @@ describe('enrollFromDecision guards, in order', () => {
     const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
     expect(r.ok).toBe(true);
     expect(refusedPredicates()).toEqual([]);
+  });
+
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Spec section 10 names
+   * OUTREACH_PAUSED as a reused kill switch checked at enroll, alongside
+   * the autonomy halt; no code read it. OUTREACH_PAUSED's established
+   * meaning elsewhere (feature-flags.ts) is "automation only, not a
+   * deliberate operator action", so this is scoped like GAP_AUTO_ENROLL_
+   * ENABLED just above it: a machine actor only. Mutate the check away and
+   * this goes RED.
+   */
+  it('OUTREACH_PAUSED refuses a live enroll from an agent, even with GAP_AUTO_ENROLL_ENABLED on', async () => {
+    process.env.GAP_AUTO_ENROLL_ENABLED = 'true';
+    process.env.OUTREACH_PAUSED = 'true';
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live', actor: 'cron', actorKind: 'agent' }), deps());
+    expect(r).toEqual({ ok: false, reason: 'outreach_paused' });
+    expect(prisma.sequenceVersion.findUnique).not.toHaveBeenCalled();
+    expect(refusedPredicates()).toEqual(['outreach_paused']);
+  });
+
+  it('OUTREACH_PAUSED never blocks a human enrolling live through the UI (a deliberate operator action)', async () => {
+    process.env.OUTREACH_PAUSED = 'true';
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  it('OUTREACH_PAUSED never blocks shadow mode', async () => {
+    process.env.OUTREACH_PAUSED = 'true';
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow', actor: 'cron', actorKind: 'agent' }), deps());
+    expect(r.ok).toBe(true);
   });
 
   it('shadow from an agent is allowed with the flag off', async () => {

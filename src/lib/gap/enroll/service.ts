@@ -105,6 +105,7 @@
  * no network here except the injected autonomy reader. Voice: no em dashes.
  */
 import { autonomyHalted } from '@/lib/email/autonomy-gate';
+import { isOutreachPaused } from '@/lib/feature-flags';
 import { audit } from '@/lib/gap/audit';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { isApproved } from '@/lib/gap/compiler/approval';
@@ -204,6 +205,7 @@ export interface EnrollDeps {
 export type EnrollServiceRefusal =
   | 'gap_disabled'
   | 'enroll_disabled'
+  | 'outreach_paused'
   | 'version_not_found'
   | 'version_retired'
   | `invalid_version_steps:${string}`
@@ -490,6 +492,16 @@ export async function enrollFromDecision(
   // 2. Live from a machine needs the earned flag; a human through the UI does not.
   if (input.mode === 'live' && input.actorKind !== 'human' && !gapFlag('GAP_AUTO_ENROLL_ENABLED')) {
     return refuse('enroll_disabled');
+  }
+
+  // 2b. SHOULD FIX (Opus adversarial review, 2026-09-24): spec section 10
+  // names OUTREACH_PAUSED as a reused kill switch, checked at enroll
+  // alongside the autonomy halt, but no code read it here. Scoped to a
+  // machine actor, matching OUTREACH_PAUSED's established meaning
+  // elsewhere (feature-flags.ts: "does NOT affect a deliberate operator
+  // action, only the automation") and this same actorKind split one line up.
+  if (input.mode === 'live' && input.actorKind !== 'human' && isOutreachPaused()) {
+    return refuse('outreach_paused');
   }
 
   // 3. The version and its steps.
