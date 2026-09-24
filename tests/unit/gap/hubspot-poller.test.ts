@@ -244,7 +244,17 @@ describe('pollHubSpotReplies: watermark', () => {
     expect(report).toMatchObject({ watermarkHeld: false, watermarkHeldReason: null });
   });
 
-  it('R2-11: a capped run (seen >= limit) does NOT advance the watermark and reports watermarkHeld page_full', async () => {
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24): before this fix, ANY
+   * full page held the watermark at its pre-run floor, so a backlog past
+   * `limit` never drained -- since/limit never change on their own, so the
+   * next run re-read this exact same page forever. The three fixture rows
+   * carry distinct timestamps, so there is no genuine ambiguity at the
+   * tail; the run must advance to the row just before the batch's newest
+   * timestamp (here, OOO's, since STRANGER alone owns the newest one).
+   * Mutate the fix back to "any full page holds" and this goes RED.
+   */
+  it('SHOULD FIX: a capped run with distinct timestamps still advances the watermark (partial advance, not a stall)', async () => {
     const stored = '2026-09-21T08:00:00.000Z';
     const prisma = makePrisma({ config: { [WATERMARK_KEY]: stored } });
     const rows = [engagement({ id: '1' }), OOO, STRANGER];
@@ -257,13 +267,35 @@ describe('pollHubSpotReplies: watermark', () => {
 
     expect(report.seen).toBe(3);
     expect(report.newest).toBe(STRANGER.timestamp.toISOString());
-    expect(report).toMatchObject({ watermarkHeld: true, watermarkHeldReason: 'page_full' });
-    // The page may have been cut mid-timestamp; the floor stays put so the next run re-reads from it.
-    expect(prisma.systemConfig.upsert).not.toHaveBeenCalled();
-    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(stored);
+    // Advanced to OOO's timestamp (the row just before the tie-free newest one), not all the way to STRANGER's.
+    expect(report).toMatchObject({ watermarkHeld: false, watermarkHeldReason: null, watermarkPartialAdvance: true });
+    expect(prisma.systemConfig.upsert).toHaveBeenCalledTimes(1);
+    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(OOO.timestamp.toISOString());
     // The rows themselves still landed.
     expect(report.created).toBe(1);
     expect(prisma.__store.messages.size).toBe(1);
+  });
+
+  it('R2-11 preserved: a genuinely ambiguous full page (every row ties on the newest timestamp) still holds at the original floor', async () => {
+    const stored = '2026-09-21T08:00:00.000Z';
+    const prisma = makePrisma({ config: { [WATERMARK_KEY]: stored } });
+    const tied = new Date(NOW.getTime() - 30 * 60 * 1000);
+    const rows = [
+      engagement({ id: '1', timestamp: tied }),
+      engagement({ id: '2', timestamp: tied }),
+      engagement({ id: '3', timestamp: tied }),
+    ];
+
+    const report = await pollHubSpotReplies(
+      prisma,
+      { now: NOW, dryRun: false, limit: 3 },
+      { searchIncomingEmails: makeSearch(rows) },
+    );
+
+    expect(report).toMatchObject({ watermarkHeld: true, watermarkHeldReason: 'page_full' });
+    expect(report.watermarkPartialAdvance).toBeUndefined();
+    expect(prisma.systemConfig.upsert).not.toHaveBeenCalled();
+    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(stored);
   });
 
   it('R2-11: a run under the limit advances the watermark and reports it not held', async () => {
@@ -624,11 +656,12 @@ describe('S2-T9 structural: no HubSpot write path', () => {
     }
   });
 
-  it('S4-T4: the only sequence effect is the one ingestReply call, behind isGapOsEnabled(), after the InboundMessage upsert', () => {
-    expect(POLLER.match(/ingestReply\(/g)?.length).toBe(1);
+  it('S4-T4: the only sequence effect is ingestReply, behind isGapOsEnabled(), after the InboundMessage upsert (a new row, or a SHOULD FIX retry on a dedup hit)', () => {
+    // Two call sites: the new-row path and the dedup-hit retry path (SHOULD FIX, 2026-09-24).
+    expect(POLLER.match(/ingestReply\(/g)?.length).toBe(2);
     expect(POLLER).toContain("from '@/lib/gap/replies/ingest'");
     expect(POLLER.indexOf('isGapOsEnabled()')).toBeLessThan(POLLER.indexOf('ingestReply('));
-    expect(POLLER.indexOf('inboundMessage.upsert')).toBeLessThan(POLLER.indexOf('ingestReply('));
+    expect(POLLER.indexOf('inboundMessage.upsert')).toBeLessThan(POLLER.lastIndexOf('ingestReply('));
     // No direct stop or pause of its own.
     expect(POLLER).not.toMatch(/stopRun/);
     expect(POLLER).not.toMatch(/pause\(/);
@@ -713,12 +746,35 @@ describe('pollHubSpotReplies: S4-T4 reply ingestion', () => {
     expect('gap' in report).toBe(false);
   });
 
-  it('flag on: a second apply run (dedup hit) does not call ingest again', async () => {
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Before this fix, once
+   * the Notification/InboundMessage committed, `already` was true on every
+   * later run and the row was skipped outright -- a failed ingestReply
+   * (a thrown error, a transient DB hiccup) was never retried, so a real
+   * human reply could sit forever with its live enrollment still unpaused.
+   * ingestReply is idempotent by construction (driven by the enrollment's
+   * CURRENT live status; see its own header), so retrying it on a dedup
+   * hit is always safe. Mutate the retry away and this goes RED.
+   */
+  it('flag on: a second apply run (dedup hit) retries ingestReply, because the first run may have failed after the row was written', async () => {
     process.env.GAP_OS_ENABLED = 'true';
     const prisma = makePrisma();
     await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
-    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
-    expect(mockedIngest).toHaveBeenCalledTimes(1);
+    const report2 = await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement()]) });
+    expect(mockedIngest).toHaveBeenCalledTimes(2);
+    expect(mockedIngest.mock.calls[1][1]).toEqual(mockedIngest.mock.calls[0][1]);
+    // No row is rewritten on the retry: still exactly one message, one dedup hit counted.
+    expect(prisma.__store.messages.size).toBe(1);
+    expect(report2.existing).toBe(1);
+  });
+
+  it('flag on: a dedup-hit retry never fires for a FILTERED reply (it never called ingest the first time either)', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrisma();
+    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([OOO]) });
+    mockedIngest.mockClear();
+    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([OOO]) });
+    expect(mockedIngest).not.toHaveBeenCalled();
   });
 
   it('flag on: an ingest failure lands on report.gap.errors, the row stays written and the watermark still advances', async () => {
