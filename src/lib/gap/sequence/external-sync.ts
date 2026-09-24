@@ -42,6 +42,7 @@ import { hash } from 'node:crypto';
 
 import { LANE_PURPOSES, LANE_PURPOSE_MAP } from '@/lib/gap/taxonomy';
 import { builtSequences, type Top100Manifest, type Top100ManifestAccount, type Top100RosterPerson } from '@/lib/gap/top100/reader';
+import { recordExternalEnrollment, type SuppressionOptions } from '@/lib/gap/sequence/enrollment';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -169,6 +170,15 @@ export interface ApplyResult {
   /** R2-6: active rows held because the contact is actively enrolled in a different sequence. Not counted in updated/unchanged. */
   otherSequenceActive: number;
   held: Array<{ id: string; reason: HeldReason }>;
+  /**
+   * B7 (Opus adversarial review, 2026-09-24): a contact HubSpot reports as
+   * actively enrolled, whose recovered attribution (hypothesis + version)
+   * checked suppressed or suppression_unknown. Never written as a row: a
+   * suppressed contact still running in HubSpot is a fact the operator must
+   * see and act on (unenroll in HubSpot), not one the sync silently
+   * normalizes into an ordinary legacy row.
+   */
+  suppressedButEnrolled: Array<{ id: string; reason: 'suppressed' | 'suppression_unknown'; leg?: string }>;
 }
 
 export interface SyncReport {
@@ -178,6 +188,22 @@ export interface SyncReport {
   enrollments: ApplyResult;
   reported: Record<ReportedReason, number>;
   rostersMissing: string[];
+}
+
+/**
+ * B7: the hypothesis + version a live `enroll.row_emitted` audit proves for a
+ * (hubspotSequenceId, hubspotContactId) pair. When found, the sync attributes
+ * the enrollment to real GAP execution instead of writing an unattributed
+ * `legacy: true` row.
+ */
+export interface RowEmittedAttribution {
+  hypothesisId: string;
+  versionId: string;
+  personaId: number | null;
+}
+
+export interface AttributionFinder {
+  find(hubspotSequenceId: string, hubspotContactId: string): RowEmittedAttribution | null;
 }
 
 // Minimal structural view of the Prisma delegates this module touches, so the
@@ -197,6 +223,8 @@ export interface SyncPrisma {
     create(args: Args): PromiseLike<Row>;
     update(args: Args): PromiseLike<Row>;
   };
+  /** B7: read-only, used to recover attribution. Absent = attribution is skipped, every row stays legacy (unchanged prior behavior). */
+  gapAuditEvent?: { findMany(args: Args): PromiseLike<Row[]> };
 }
 
 // ---------------------------------------------------------------------------
@@ -270,6 +298,85 @@ function isUniqueViolation(err: unknown): boolean {
 
 function inSequence(rb: ContactReadback | undefined, sequenceId: string): boolean {
   return !!rb && rb.activelyEnrolledCount > 0 && rb.latestSequenceId === sequenceId;
+}
+
+// ---------------------------------------------------------------------------
+// B7: attribution recovery from `enroll.row_emitted` audit rows
+// ---------------------------------------------------------------------------
+
+interface RowEmittedAuditRow {
+  payload: unknown;
+}
+
+interface ExtractedRowEmitted {
+  hypothesisId: string;
+  versionId: string;
+  personaId: number | null;
+  hubspotSequenceId: string;
+  hubspotContactIds: string[];
+}
+
+/**
+ * Pure: pulls the attribution and the (sequence, contacts) it covers out of
+ * one `enroll.row_emitted` audit payload (enroll/service.ts's `base` plus
+ * `target`/`row`). Malformed or non-hubspot_native payloads yield null; this
+ * never throws on unexpected shapes because the payload is a JSON column an
+ * older audit row may not match.
+ */
+function extractRowEmitted(payload: unknown): ExtractedRowEmitted | null {
+  if (!payload || typeof payload !== 'object') return null;
+  const p = payload as Record<string, unknown>;
+  if (typeof p.hypothesisId !== 'string' || typeof p.versionId !== 'string') return null;
+  const table = p.row as { rows?: unknown[] } | undefined;
+  if (!table || !Array.isArray(table.rows)) return null;
+  for (const raw of table.rows) {
+    if (!raw || typeof raw !== 'object') continue;
+    const row = raw as { sequence?: { hubspotSequenceId?: unknown } | null; enroll?: unknown[] };
+    const hubspotSequenceId = row.sequence?.hubspotSequenceId;
+    if (typeof hubspotSequenceId !== 'string' || hubspotSequenceId.length === 0) continue;
+    const hubspotContactIds = (row.enroll ?? [])
+      .map((c) => (c && typeof c === 'object' ? (c as { hubspotContactId?: unknown }).hubspotContactId : null))
+      .filter((id): id is string => typeof id === 'string' && id.length > 0);
+    if (hubspotContactIds.length === 0) continue;
+    return {
+      hypothesisId: p.hypothesisId,
+      versionId: p.versionId,
+      personaId: typeof p.personaId === 'number' ? p.personaId : null,
+      hubspotSequenceId,
+      hubspotContactIds,
+    };
+  }
+  return null;
+}
+
+function attributionKey(hubspotSequenceId: string, hubspotContactId: string): string {
+  return `${hubspotSequenceId}:${hubspotContactId}`;
+}
+
+/**
+ * Builds a lookup keyed `${hubspotSequenceId}:${hubspotContactId}` from a
+ * batch of `enroll.row_emitted` audit rows. Rows must be newest-first
+ * (`orderBy: { created_at: 'desc' }`): a key is set only once, so the newest
+ * emit for a pair wins over an older one filed against a different
+ * hypothesis (a re-target, a superseded draft).
+ */
+export function buildAttributionIndex(rows: RowEmittedAuditRow[]): Map<string, RowEmittedAttribution> {
+  const index = new Map<string, RowEmittedAttribution>();
+  for (const row of rows) {
+    const extracted = extractRowEmitted(row.payload);
+    if (!extracted) continue;
+    for (const contactId of extracted.hubspotContactIds) {
+      const key = attributionKey(extracted.hubspotSequenceId, contactId);
+      if (index.has(key)) continue;
+      index.set(key, { hypothesisId: extracted.hypothesisId, versionId: extracted.versionId, personaId: extracted.personaId });
+    }
+  }
+  return index;
+}
+
+/** Wraps an index built by `buildAttributionIndex` as the `AttributionFinder` `applyEnrollments` consumes. */
+export function attributionFinderFromIndex(index: Map<string, RowEmittedAttribution>): AttributionFinder {
+  return { find: (hubspotSequenceId, hubspotContactId) => index.get(attributionKey(hubspotSequenceId, hubspotContactId)) ?? null };
 }
 
 /**
@@ -517,9 +624,17 @@ export function planEnrollments(
 export async function applyEnrollments(
   prisma: SyncPrisma,
   plans: EnrollmentPlan[],
-  opts: { dryRun: boolean; now: Date; familyIds: Record<string, FamilyIds | null>; readback: Map<string, ContactReadback> },
+  opts: {
+    dryRun: boolean;
+    now: Date;
+    familyIds: Record<string, FamilyIds | null>;
+    readback: Map<string, ContactReadback>;
+    /** B7: when omitted, every new row stays legacy (prior behavior). */
+    attribution?: AttributionFinder;
+    suppression?: SuppressionOptions;
+  },
 ): Promise<ApplyResult> {
-  const result: ApplyResult = { created: 0, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [] };
+  const result: ApplyResult = { created: 0, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [], suppressedButEnrolled: [] };
   const seen = new Set<string>();
 
   for (const plan of plans) {
@@ -536,6 +651,52 @@ export async function applyEnrollments(
         result.created += 1;
         continue;
       }
+
+      // B7 (Opus adversarial review, 2026-09-24): a real GAP enroll proves
+      // this contact's hypothesis and compiled version. Go through the full
+      // service (suppression, version and family checks) and attribute the
+      // row instead of writing an unattributed legacy scaffold.
+      const attribution = opts.attribution?.find(plan.hubspotSequenceId, plan.hubspotContactId) ?? null;
+      if (attribution) {
+        const recorded = await recordExternalEnrollment(
+          prisma,
+          {
+            id: plan.id,
+            familyId: ids!.familyId,
+            versionId: attribution.versionId,
+            toEmail: plan.toEmail,
+            accountName: plan.accountName,
+            hubspotContactId: plan.hubspotContactId,
+            hubspotSequenceId: plan.hubspotSequenceId,
+            personaId: attribution.personaId,
+            hypothesisId: attribution.hypothesisId,
+            sender: plan.sender,
+            owner: plan.owner,
+            externalState: plan.externalState,
+            legacy: false,
+            enrolledAt: plan.enrolledAt,
+            enrolledBy: plan.enrolledBy,
+            now: opts.now,
+          },
+          opts.suppression ?? {},
+        );
+        if (recorded.ok) {
+          result.created += 1;
+          continue;
+        }
+        if (recorded.reason === 'suppressed' || recorded.reason === 'suppression_unknown') {
+          result.suppressedButEnrolled.push({ id: plan.id, reason: recorded.reason, leg: recorded.leg });
+          continue;
+        }
+        if (recorded.reason === 'already_enrolled') {
+          continue; // a concurrent writer beat this run to the same row; nothing to do.
+        }
+        // version_not_found / version_retired / family_mismatch / no_readback:
+        // the recovered attribution itself is unusable. Fall through and
+        // record the enrollment FACT unattributed, exactly as before B7,
+        // rather than losing it.
+      }
+
       try {
         await prisma.sequenceEnrollment.create({
           data: {
@@ -650,7 +811,7 @@ export async function runEnrollmentSync(
     portal: string;
     actor: string;
   },
-  deps: ReadContactsDeps,
+  deps: ReadContactsDeps & { suppression?: SuppressionOptions },
 ): Promise<SyncReport> {
   const familyPlans = planFamilies(opts.manifest, { program: opts.program, portal: opts.portal, createdBy: opts.actor });
   const families = await upsertFamilies(prisma, familyPlans, { dryRun: opts.dryRun, now: opts.now });
@@ -669,7 +830,27 @@ export async function runEnrollmentSync(
 
   const readback = await readbackContacts(deps, contactIds);
   const { plans, reported } = planEnrollments(accounts, opts.rosters, readback, { now: opts.now, enrolledBy: opts.actor });
-  const enrollments = await applyEnrollments(prisma, plans, { dryRun: opts.dryRun, now: opts.now, familyIds: families.ids, readback });
+
+  // B7: recover hypothesis/version attribution from live `enroll.row_emitted`
+  // audits before writing. Absent delegate (older prisma glue in a test) ->
+  // no attribution, every row stays legacy, byte-identical to before B7.
+  const auditRows = prisma.gapAuditEvent
+    ? await prisma.gapAuditEvent.findMany({
+        where: { kind: 'enroll.row_emitted' },
+        orderBy: { created_at: 'desc' },
+        select: { payload: true },
+      })
+    : [];
+  const attribution = attributionFinderFromIndex(buildAttributionIndex(auditRows as RowEmittedAuditRow[]));
+
+  const enrollments = await applyEnrollments(prisma, plans, {
+    dryRun: opts.dryRun,
+    now: opts.now,
+    familyIds: families.ids,
+    readback,
+    attribution,
+    suppression: deps.suppression,
+  });
 
   const counts: Record<ReportedReason, number> = { other_sequence: 0, not_enrolled: 0, no_email: 0, no_contact_id: 0 };
   for (const r of reported) counts[r.reason] += 1;

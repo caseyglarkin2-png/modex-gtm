@@ -13,11 +13,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { readManifest, readRoster, type Top100Manifest, type Top100RosterPerson } from '@/lib/gap/top100/reader';
 import { LANE_PURPOSES, LANE_PURPOSE_MAP } from '@/lib/gap/taxonomy';
+import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
 import {
   BLAST_SEQUENCE_2026_09_11,
   GAP_ENROLLMENT_NS,
   READBACK_PROPERTIES,
   applyEnrollments,
+  attributionFinderFromIndex,
+  buildAttributionIndex,
   canonicalJson,
   enrollmentId,
   planEnrollments,
@@ -763,6 +766,153 @@ describe('applyEnrollments', () => {
 });
 
 // ---------------------------------------------------------------------------
+// B7 (Opus adversarial review, 2026-09-24): attribution recovery from
+// `enroll.row_emitted` audits, through recordExternalEnrollment.
+// ---------------------------------------------------------------------------
+
+/** Adds the delegates recordExternalEnrollment needs on top of the plain in-memory prisma. */
+function extendForAttribution(db: Awaited<ReturnType<typeof seededFamilies>>['db'], opts: { unsubscribed?: string[]; personas?: Row[] } = {}) {
+  const unsubscribed = opts.unsubscribed ?? [];
+  const personas = opts.personas ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const prisma: any = {
+    ...db.prisma,
+    sequenceVersion: {
+      ...db.prisma.sequenceVersion,
+      findUnique: vi.fn(async ({ where }: { where: { id: string } }) => db.store.versions.find((v) => v.id === where.id) ?? null),
+      updateMany: vi.fn(async ({ where, data }: { where: Row; data: Row }) => {
+        const row = db.store.versions.find((v) => v.id === where.id && v.status === where.status);
+        if (!row) return { count: 0 };
+        Object.assign(row, data);
+        return { count: 1 };
+      }),
+    },
+    sequenceEnrollment: {
+      ...db.prisma.sequenceEnrollment,
+      findFirst: vi.fn(async ({ where }: { where: Row }) =>
+        db.store.enrollments.find((e) => e.to_email === where.to_email && where.status.in.includes(e.status)) ?? null,
+      ),
+    },
+    unsubscribedEmail: { findUnique: vi.fn(async ({ where }: { where: { email: string } }) => (unsubscribed.includes(where.email) ? { id: 'ue_1' } : null)) },
+    persona: { findUnique: vi.fn(async ({ where }: { where: { id: number } }) => personas.find((p) => p.id === where.id) ?? null) },
+    gapAuditEvent: { findMany: vi.fn(async () => []) },
+  };
+  prisma.$transaction = vi.fn(async (fn: (tx: unknown) => Promise<unknown>) => fn(prisma));
+  return prisma;
+}
+
+/** One `enroll.row_emitted` audit payload naming the given sequence/contact pair. */
+function rowEmittedPayload(over: { hypothesisId: string; versionId: string; personaId: number | null; hubspotSequenceId: string; hubspotContactId: string }) {
+  return {
+    hypothesisId: over.hypothesisId,
+    versionId: over.versionId,
+    personaId: over.personaId,
+    target: 'hubspot_native',
+    row: {
+      rows: [
+        {
+          sequence: { hubspotSequenceId: over.hubspotSequenceId, name: 'Dell Sequence' },
+          enroll: [{ personaId: over.personaId, hubspotContactId: over.hubspotContactId, name: 'Mara Ellison', email: 'mara.ellison@example.com' }],
+        },
+      ],
+    },
+  };
+}
+
+describe('B7: attribution recovery from enroll.row_emitted audits', () => {
+  const CLEAR = staticSuppressionReader('clear');
+  const rosters = { 'dell-com': dellRoster.people };
+  const savedFlag = process.env.GAP_OS_ENABLED;
+  beforeEach(() => {
+    process.env.GAP_OS_ENABLED = 'true';
+  });
+  afterEach(() => {
+    if (savedFlag === undefined) delete process.env.GAP_OS_ENABLED;
+    else process.env.GAP_OS_ENABLED = savedFlag;
+  });
+
+  async function planned(readback = dellReadback()) {
+    const { db, fam } = await seededFamilies();
+    const { plans } = planEnrollments([DELL], rosters, readback, { now: NOW, enrolledBy: 'sync' });
+    return { db, fam, plans, readback };
+  }
+
+  /**
+   * Verify per the review: emit row -> readback -> sync gives a row with
+   * hypothesis_id, the compiled version, legacy=false, and a frozen version.
+   * Mutate the fix away (drop the attribution lookup) and this goes RED:
+   * the row reverts to legacy=true, hypothesis_id null, an unfrozen scaffold.
+   */
+  it('a matching row_emitted audit attributes the row: hypothesis_id set, legacy false, version frozen', async () => {
+    const { db, fam, plans, readback } = await planned();
+    const prisma = extendForAttribution(db);
+    const versionId = fam.ids[DELL_SEQ]!.versionId;
+    const attribution = attributionFinderFromIndex(
+      buildAttributionIndex([
+        { payload: rowEmittedPayload({ hypothesisId: 'H1', versionId, personaId: 7, hubspotSequenceId: DELL_SEQ, hubspotContactId: fernanda.hubspotContactId! }) },
+      ]),
+    );
+
+    const res = await applyEnrollments(prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback, attribution, suppression: { suppression: CLEAR } });
+
+    expect(res).toMatchObject({ created: 1, suppressedButEnrolled: [] });
+    const row = db.store.enrollments.find((e: Row) => e.id === enrollmentId(DELL_SEQ, fernanda.hubspotContactId!));
+    expect(row).toMatchObject({ hypothesis_id: 'H1', persona_id: 7, legacy: false, sequence_version_id: versionId });
+    expect(db.store.versions.find((v: Row) => v.id === versionId)).toMatchObject({ status: 'frozen', frozen_by_enrollment_id: row!.id });
+  });
+
+  it('no matching audit: the row stays legacy, exactly as before B7', async () => {
+    const { db, fam, plans, readback } = await planned();
+    const attribution = attributionFinderFromIndex(buildAttributionIndex([]));
+    const res = await applyEnrollments(db.prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback, attribution });
+    expect(res).toMatchObject({ created: 1, suppressedButEnrolled: [] });
+    const row = db.store.enrollments[0];
+    expect(row.legacy).toBe(true);
+    expect(row.hypothesis_id).toBeUndefined();
+  });
+
+  /**
+   * A suppressed contact HubSpot still reports as actively enrolled must be
+   * surfaced (an operator must unenroll it in HubSpot), never silently
+   * written as an ordinary row.
+   */
+  it('a suppressed contact with a matching audit is surfaced, not written', async () => {
+    const { db, fam, plans, readback } = await planned();
+    const prisma = extendForAttribution(db, { unsubscribed: [fernanda.email!.toLowerCase()] });
+    const versionId = fam.ids[DELL_SEQ]!.versionId;
+    const attribution = attributionFinderFromIndex(
+      buildAttributionIndex([
+        { payload: rowEmittedPayload({ hypothesisId: 'H1', versionId, personaId: 7, hubspotSequenceId: DELL_SEQ, hubspotContactId: fernanda.hubspotContactId! }) },
+      ]),
+    );
+
+    const res = await applyEnrollments(prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback, attribution, suppression: { suppression: CLEAR } });
+
+    expect(res.created).toBe(0);
+    expect(res.suppressedButEnrolled).toEqual([{ id: enrollmentId(DELL_SEQ, fernanda.hubspotContactId!), reason: 'suppressed', leg: 'unsubscribed' }]);
+    expect(db.store.enrollments).toHaveLength(0);
+  });
+
+  it('a version_retired attribution falls through to the legacy write rather than losing the enrollment', async () => {
+    const { db, fam, plans, readback } = await planned();
+    const prisma = extendForAttribution(db);
+    const versionId = fam.ids[DELL_SEQ]!.versionId;
+    db.store.versions.find((v: Row) => v.id === versionId)!.status = 'retired';
+    const attribution = attributionFinderFromIndex(
+      buildAttributionIndex([
+        { payload: rowEmittedPayload({ hypothesisId: 'H1', versionId, personaId: 7, hubspotSequenceId: DELL_SEQ, hubspotContactId: fernanda.hubspotContactId! }) },
+      ]),
+    );
+
+    const res = await applyEnrollments(prisma, plans, { dryRun: false, now: NOW, familyIds: fam.ids, readback, attribution, suppression: { suppression: CLEAR } });
+
+    expect(res).toMatchObject({ created: 1, suppressedButEnrolled: [] });
+    expect(db.store.enrollments[0]).toMatchObject({ legacy: true });
+    expect(db.store.enrollments[0].hypothesis_id).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
 // runEnrollmentSync (end to end over the in-memory prisma)
 // ---------------------------------------------------------------------------
 
@@ -793,7 +943,7 @@ describe('runEnrollmentSync', () => {
       dryRun: false,
       families: { created: 2, existing: 0, skipped: [] },
       contactsRead: 7,
-      enrollments: { created: 1, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [] },
+      enrollments: { created: 1, updated: 0, unchanged: 0, otherSequenceActive: 0, held: [], suppressedButEnrolled: [] },
       reported: { other_sequence: 1, not_enrolled: 5, no_email: 0, no_contact_id: 0 },
       rostersMissing: ['jbhunt-com'],
     });
