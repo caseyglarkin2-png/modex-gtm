@@ -20,6 +20,7 @@
  */
 
 import { selectConfirmedBids, numericValueOf } from '../bid/select';
+import { loadReplyBacklog, type ReplyBacklog } from './reply-backlog';
 import { isInternalRecipient } from '../sequence/internal-recipient';
 import {
   computeFunnel,
@@ -73,6 +74,8 @@ export interface LearningFilters {
   program?: string | null;
   from?: Date | null;
   to?: Date | null;
+  /** 6E: clock for the reply backlog metric. Defaults to `new Date()`. */
+  now?: Date;
 }
 
 /** BID types that carry a root-cause or impact signal (mirrors resolution.ts). */
@@ -242,10 +245,13 @@ export interface LearningReport {
   dispositionDistribution: Array<{ responseClass: string; count: number }>;
   signalYield: ReturnType<typeof computeSignalYield>;
   counts: { hypotheses: number; conversations: number };
+  /** 6E: replies (Gmail or HubSpot, already unified at ingestion) with no disposition yet, past the threshold. */
+  replyBacklog: ReplyBacklog;
 }
 
 export async function buildLearningReport(prisma: any, filters: LearningFilters = {}): Promise<LearningReport> {
   const { hypotheses, conversations } = await loadLearningInputs(prisma, filters);
+  const replyBacklog = await loadReplyBacklog(prisma, filters.now ?? new Date());
 
   const signalCountRows = await prisma.prospectingSignal.groupBy({ by: ['type'], _count: { _all: true } });
   const signalCounts = new Map<string, number>((signalCountRows as any[]).map((r) => [r.type, r._count._all as number]));
@@ -268,6 +274,7 @@ export async function buildLearningReport(prisma: any, filters: LearningFilters 
         .map((h) => ({ signalType: h.primarySignalType, signalId: h.primarySignalId })),
     ),
     counts: { hypotheses: hypotheses.length, conversations: conversations.length },
+    replyBacklog,
   };
 }
 

@@ -26,7 +26,7 @@ const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
 import type { InlineImage } from './inline-image';
 
-interface GmailSendPayload {
+export interface GmailSendPayload {
   to: string;
   cc?: string[];
   bcc?: string;

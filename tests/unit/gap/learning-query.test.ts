@@ -24,6 +24,7 @@ function makePrisma(overrides: {
   bids?: any[];
   signalCounts?: any[];
   enrollments?: any[];
+  inboundMessages?: any[];
 } = {}) {
   return {
     prospectingHypothesis: { findMany: asyncSpy(async () => overrides.hypotheses ?? []) },
@@ -31,6 +32,9 @@ function makePrisma(overrides: {
     buyerInputData: { findMany: asyncSpy(async () => overrides.bids ?? []) },
     prospectingSignal: { groupBy: asyncSpy(async () => overrides.signalCounts ?? []) },
     sequenceEnrollment: { findMany: asyncSpy(async () => overrides.enrollments ?? []) },
+    // 6E: reply backlog. Empty by default so existing tests, which do not
+    // assert on it, are unaffected.
+    inboundMessage: { findMany: asyncSpy(async () => overrides.inboundMessages ?? []) },
   };
 }
 
@@ -302,5 +306,20 @@ describe('buildLearningReport', () => {
     const yield_ = report.signalYield.find((r) => r.signalType === 'acquisition');
     expect(yield_).toEqual({ signalType: 'acquisition', signalCount: 1, hypothesisCount: 1, rate: { value: 1, n: 1, numerator: 1, denominator: 1 } });
     expect(yield_!.hypothesisCount).toBeLessThanOrEqual(yield_!.signalCount);
+  });
+
+  it('6E: surfaces the reply backlog, excluding a message that already has a disposition regardless of source_kind', async () => {
+    const now = new Date('2026-09-24T12:00:00.000Z');
+    const dayMs = 24 * 60 * 60 * 1000;
+    const prisma = makePrisma({
+      inboundMessages: [
+        { id: 'm_gmail_old', received_at: new Date(now.getTime() - 2 * dayMs) },
+        { id: 'm_hubspot_old', received_at: new Date(now.getTime() - 3 * dayMs) },
+        { id: 'm_recent', received_at: new Date(now.getTime() - 1 * 60 * 60 * 1000) },
+      ],
+      dispositions: [{ source_id: 'm_gmail_old' }],
+    });
+    const report = await buildLearningReport(prisma, { now });
+    expect(report.replyBacklog).toEqual({ count: 1, oldestAgeHours: 72, thresholdHours: 24 });
   });
 });
