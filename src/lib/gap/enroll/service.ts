@@ -105,6 +105,7 @@
  * no network here except the injected autonomy reader. Voice: no em dashes.
  */
 import { autonomyHalted } from '@/lib/email/autonomy-gate';
+import { isOutreachPaused } from '@/lib/feature-flags';
 import { audit } from '@/lib/gap/audit';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { isApproved } from '@/lib/gap/compiler/approval';
@@ -117,8 +118,10 @@ import {
   type EnrollRowItem,
   type EnrollTableJson,
 } from '@/lib/gap/routing/enroll-row';
-import { resolveEnrollTarget } from '@/lib/gap/routing/rules';
+import { hasActiveOpportunity, resolveEnrollTarget, type ActiveOpportunityInputs } from '@/lib/gap/routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
+import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
+import { isResponseClass } from '@/lib/gap/taxonomy';
 import { checkSuppression, enroll, type EnrollRefusal } from '@/lib/gap/sequence/enrollment';
 import type { SuppressionReader } from '@/lib/gap/routing/suppression-read';
 import { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
@@ -133,6 +136,15 @@ import type { QueueAddInput } from '@/lib/validations';
 
 export const ENROLL_ACTION: RoutingAction = 'enroll_gap_sequence';
 export const DEFAULT_OWNER = 'casey@freightroll.com';
+/**
+ * The only identities a GAP run may send from or be owned by (N8). Exact,
+ * lowercase. The route validates an EXPLICIT `owner`/`sender` against this
+ * list; SF10 (Opus adversarial review, 2026-09-24) closes the gap that left
+ * -- so the service itself must apply the same list to its own fallbacks
+ * (an authenticated caller's `actor` email, or a routing decision's
+ * `preferredSender` snapshot), neither of which the route validates.
+ */
+export const SENDING_IDENTITIES: readonly string[] = ['casey@yardflow.ai', 'casey@freightroll.com'];
 const SUBJECT_TYPE = 'gap_enroll';
 
 // ---------------------------------------------------------------------------
@@ -202,6 +214,7 @@ export interface EnrollDeps {
 export type EnrollServiceRefusal =
   | 'gap_disabled'
   | 'enroll_disabled'
+  | 'outreach_paused'
   | 'version_not_found'
   | 'version_retired'
   | `invalid_version_steps:${string}`
@@ -215,6 +228,9 @@ export type EnrollServiceRefusal =
   | 'hypothesis_not_found'
   | 'persona_not_found'
   | 'no_email'
+  | 'account_mismatch'
+  | 'decision_persona_mismatch'
+  | 'active_opportunity'
   | 'build_required'
   | 'step_has_no_copy:0'
   | `unrendered_placeholder:${string}`
@@ -347,6 +363,7 @@ interface DecisionRow {
   priority: number;
   explain: unknown;
   inputs_snapshot: unknown;
+  persona_id: number | null;
 }
 
 const DECISION_SELECT = {
@@ -358,6 +375,7 @@ const DECISION_SELECT = {
   priority: true,
   explain: true,
   inputs_snapshot: true,
+  persona_id: true,
 } as const;
 
 async function loadDecision(prisma: any, input: EnrollFromDecisionInput): Promise<DecisionRow | null> {
@@ -396,6 +414,38 @@ function snapshotTarget(decision: DecisionRow | null): EnrollTarget | null {
 function preferredSenderOf(decision: DecisionRow | null): string | null {
   const snap = decision?.inputs_snapshot;
   return isObj(snap) ? optStr(snap.preferredSender) : null;
+}
+
+/**
+ * B6 (Opus adversarial review, 2026-09-24): a fresh read, not the routing
+ * decision's snapshot, because the decision can be stale (a meeting booked,
+ * or a deal opened, after routing ran but before enroll executes). Reuses
+ * routing/rules.ts's hasActiveOpportunity so this is the same predicate
+ * R3b applies, not a second opportunity model.
+ */
+async function loadActiveOpportunityInputs(prisma: any, accountName: string, email: string, now: Date): Promise<ActiveOpportunityInputs> {
+  const account: { pipeline_stage: string | null } | null = await prisma.account.findUnique({
+    where: { name: accountName },
+    select: { pipeline_stage: true },
+  });
+  const lastConfirmed: { response_class: string; created_at: Date } | null = await prisma.conversationDisposition.findFirst({
+    where: { contact_email: email, human_confirmed: true },
+    orderBy: { created_at: 'desc' },
+    select: { response_class: true, created_at: true },
+  });
+  const lastDisposition =
+    lastConfirmed && isResponseClass(lastConfirmed.response_class)
+      ? { responseClass: lastConfirmed.response_class, at: lastConfirmed.created_at }
+      : null;
+  return {
+    account: { pipelineStage: account?.pipeline_stage ?? null },
+    comms: {
+      meetingBooked: lastConfirmed?.response_class === 'meeting_accepted',
+      lastDisposition,
+    },
+    now,
+    freshness: { cooldownDays: DEFAULT_FRESHNESS.cooldownDays },
+  };
 }
 
 interface PersonaRow {
@@ -455,6 +505,16 @@ export async function enrollFromDecision(
   // 2. Live from a machine needs the earned flag; a human through the UI does not.
   if (input.mode === 'live' && input.actorKind !== 'human' && !gapFlag('GAP_AUTO_ENROLL_ENABLED')) {
     return refuse('enroll_disabled');
+  }
+
+  // 2b. SHOULD FIX (Opus adversarial review, 2026-09-24): spec section 10
+  // names OUTREACH_PAUSED as a reused kill switch, checked at enroll
+  // alongside the autonomy halt, but no code read it here. Scoped to a
+  // machine actor, matching OUTREACH_PAUSED's established meaning
+  // elsewhere (feature-flags.ts: "does NOT affect a deliberate operator
+  // action, only the automation") and this same actorKind split one line up.
+  if (input.mode === 'live' && input.actorKind !== 'human' && isOutreachPaused()) {
+    return refuse('outreach_paused');
   }
 
   // 3. The version and its steps.
@@ -524,6 +584,17 @@ export async function enrollFromDecision(
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
 
+  // SHOULD FIX (Opus adversarial review, 2026-09-24): hypothesisId and
+  // personaId are two independent caller-supplied ids with no relation
+  // enforced between them. Without this check, a hypothesis for Account A
+  // and a persona from Account B both resolve fine on their own, and the
+  // service would compile/attribute Account A's evidence and copy while
+  // enrolling Account B's actual contact -- sending one company's
+  // buyer-specific claims to a different company's inbox.
+  if (persona.account_name !== hypothesis.account_name) {
+    return refuse('account_mismatch', { hypothesisAccount: hypothesis.account_name, personaAccount: persona.account_name });
+  }
+
   // 6b. Suppression, before any target is resolved (R3-2, R3-10): the same
   // guard enroll() runs, local legs then the cross-plane read; the leg is named.
   const suppressionOpts = deps.suppression ? { suppression: deps.suppression } : {};
@@ -532,15 +603,42 @@ export async function enrollFromDecision(
 
   // 7. Target from the persona's Top100 entry (the decision snapshot carries it).
   const decision = await loadDecision(prisma, input);
+  // SHOULD FIX (Opus adversarial review, 2026-09-24): an explicit decisionId
+  // names a specific RoutingDecision row; that row was routed for ONE
+  // persona. If the caller's personaId names someone else, the decision's
+  // target/snapshot (Top100 eligibility, preferred sender) would silently
+  // apply to the wrong person. A decision resolved by the personaId lookup
+  // fallback (no decisionId given) cannot mismatch by construction.
+  if (input.decisionId && decision && decision.persona_id != null && decision.persona_id !== input.personaId) {
+    return refuse('decision_persona_mismatch', { decisionPersonaId: decision.persona_id, requestedPersonaId: input.personaId });
+  }
   const top100 = deps.top100 !== undefined ? deps.top100 : top100Of(decision);
   const target: EnrollTarget =
     deps.top100 !== undefined
       ? resolveEnrollTarget({ persona: { top100 } } as unknown as RoutingInputs)
       : (snapshotTarget(decision) ?? resolveEnrollTarget({ persona: { top100 } } as unknown as RoutingInputs));
 
-  const owner = (input.owner ?? '').trim() || (input.actor.includes('@') ? input.actor : DEFAULT_OWNER);
-  const sender = (input.sender ?? '').trim() || preferredSenderOf(decision) || owner;
+  // SF10 (Opus adversarial review, 2026-09-24): an authenticated caller's
+  // own email is a real session identity, but it is not necessarily one of
+  // the two identities that can actually send (SENDING_IDENTITIES); trusting
+  // it unvalidated let `owner` (and, through it, `sender`'s fallback) carry
+  // an email nobody can send from, recorded as if it were the sender.
+  const ownerFallback = input.actor.includes('@') ? input.actor : '';
+  const owner = (input.owner ?? '').trim() || (SENDING_IDENTITIES.includes(ownerFallback) ? ownerFallback : DEFAULT_OWNER);
+  // A routing decision's `preferredSender` snapshot is equally unvalidated
+  // (Top100 roster data, not a vetted identity); the same guard applies.
+  const preferredSender = preferredSenderOf(decision) ?? '';
+  const sender = (input.sender ?? '').trim() || (SENDING_IDENTITIES.includes(preferredSender) ? preferredSender : owner);
   const accountName = hypothesis.account_name || persona.account_name;
+
+  // B6 (Opus adversarial review, 2026-09-24): an open deal, a booked
+  // meeting, or a recent confirmed positive disposition means a human is
+  // already in conversation. Cold-enrolling into a GAP sequence on top of
+  // that is the exact failure the routing R3b rule exists to prevent; enroll
+  // refuses the same predicate against a fresh read, since a routing
+  // decision consumed here can be older than the opportunity that opened.
+  const opportunity = await loadActiveOpportunityInputs(prisma, accountName, email, input.now);
+  if (hasActiveOpportunity(opportunity)) return refuse('active_opportunity');
 
   if (target === 'build_required') return refuse('build_required', { target });
 
@@ -639,6 +737,17 @@ export async function enrollFromDecision(
   if (!materialized.ok) return refuse(materialized.reason, { target });
   const sequenceId = materialized.sequenceId;
 
+  // SF10 (Opus adversarial review, 2026-09-24): DraftQueueItem has no
+  // sender column; `owner` is the ONLY field send-deps.ts reads to resolve
+  // the actual Gmail identity that sends (getRefreshTokenFor(prisma,
+  // item.owner)) and the only one queue-actions.ts's resolveSenderIdentity
+  // reads. Passing the administrative `owner` here, while SequenceEnrollment
+  // below is recorded with a possibly-different `sender`, meant the
+  // enrollment's own record of "who sends" could name an identity that
+  // never actually sent anything. `sender` (which already falls back to
+  // `owner` when no preferred sender applies) is the value that must reach
+  // the queue item, so the recorded identity and the one that actually sends
+  // are the same account.
   const added = await deps.addOne(
     {
       toEmail: wouldBe.toEmail,
@@ -650,7 +759,7 @@ export async function enrollFromDecision(
       campaignTag: `gap:${hypothesis.id}`,
       source: 'casey',
     },
-    owner,
+    sender,
   );
   if (!added.ok || typeof added.id !== 'number') {
     return refuse(`queue_refused:${added.reason ?? 'unknown'}`, { target });
@@ -671,8 +780,23 @@ export async function enrollFromDecision(
 
   // An arrow const (not a hoisted declaration) so the null-narrowing of hypothesis, persona and target above carries in.
   const afterAddOne = async (): Promise<EnrollServiceResult> => {
-  // addOne's input has no sequence_id; stamp it before anything else can act on the item.
-  await prisma.draftQueueItem.updateMany({ where: { id: draftItemId, status: 'draft' }, data: { sequence_id: sequenceId } });
+  // addOne's input has no sequence_id or sequence_version_id; stamp both
+  // before anything else can act on the item. SF11 (Opus adversarial
+  // review, 2026-09-24): queue-actions.ts's gapCompileGuard (the ONE guard
+  // every send-eligible path runs) only recognizes an item as GAP-gated when
+  // sequence_version_id is non-null; an item without it is "returned
+  // untouched" -- approvable through the ordinary, non-GAP send flow with NO
+  // compile check at all. enroll() only stamps sequence_version_id at the
+  // very end, after compile() and its critic call succeed, so a request that
+  // times out or is killed mid-compile (no JS exception for R3-12's catch to
+  // run) left the item gate-invisible: an uncompiled, un-critic-reviewed
+  // draft, sitting in status 'draft', sendable through the normal queue.
+  // Stamping sequence_version_id HERE, before compile runs, makes the item
+  // gated from the instant it exists: any crash before enroll() completes
+  // leaves it REFUSED by the compile guard (no passing compile row yet),
+  // never silently approvable. enroll() re-stamps the same value later
+  // (sequence/enrollment.ts); both writes agree, so the repeat is a no-op.
+  await prisma.draftQueueItem.updateMany({ where: { id: draftItemId, status: 'draft' }, data: { sequence_id: sequenceId, sequence_version_id: version.id } });
 
   // Per-item compile on the RENDERED, MARKED copy, keyed to the item so the approveBatch guard finds an item-level row.
   const signals = Array.isArray(hypothesis.signals)

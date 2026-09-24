@@ -35,7 +35,7 @@ import { normalizeScore } from '../../pounce/fit';
 import { hasRoleGate } from '../../revops/qualification/model';
 import { heatScore, tierNumber } from '../../revops/heat/heat-score';
 import type { HeatSignals } from '../../revops/heat/heat-score';
-import { isPersona, isProblemFamily, isResponseClass } from '../taxonomy';
+import { isPersona, isProblemFamily, isResponseClass, NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
 import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
@@ -602,10 +602,29 @@ async function readComms(prisma: PrismaLike, email: string): Promise<RoutingComm
   // S4-T7: only a HUMAN-CONFIRMED row dispositions a reply. An unconfirmed AI
   // suggestion row (created_by ai, human_confirmed false) is stored, never
   // acted on, and must not hide the reply from R3 reply_pending. The same
-  // confirmed read feeds lastDisposition, so the rules never see an unconfirmed row.
+  // confirmed read feeds undispositionedInbound, so the rules never see an
+  // unconfirmed row.
   const lastConfirmed = (await read('disposition_confirmed', () =>
     prisma.conversationDisposition.findFirst({
       where: { contact_email: email, human_confirmed: true },
+      orderBy: { created_at: 'desc' },
+    }),
+  )) as DispositionRow | null;
+
+  // SF4 (Opus adversarial review, 2026-09-24): a call-only outcome (no_answer,
+  // voicemail, gatekeeper, out_of_office) carries no buyer decision -- the
+  // model's own effects table keeps the sequence running on it -- but being
+  // the newest CONFIRMED row was enough to become lastDisposition and
+  // meetingBooked, silently erasing a prior timing/not_priority/objection
+  // disposition (switching off R6/R7's nurture window) or a booked meeting.
+  // Routing reads only the newest SUBSTANTIVE (not call-only) disposition.
+  const lastSubstantive = (await read('disposition_confirmed_substantive', () =>
+    prisma.conversationDisposition.findFirst({
+      where: {
+        contact_email: email,
+        human_confirmed: true,
+        response_class: { notIn: [...NON_STOPPING_RESPONSE_CLASSES] },
+      },
       orderBy: { created_at: 'desc' },
     }),
   )) as DispositionRow | null;
@@ -619,9 +638,12 @@ async function readComms(prisma: PrismaLike, email: string): Promise<RoutingComm
     lastOutboundAt: lastOutbound?.sent_at ?? null,
     lastInboundAt,
     undispositionedInbound,
-    lastDisposition: buildLastDisposition(lastConfirmed),
-    // Sprint 4 wires meeting outcomes; until then nothing here can claim one.
-    meetingBooked: false,
+    lastDisposition: buildLastDisposition(lastSubstantive),
+    // B6 (Opus adversarial review, 2026-09-24): derived from the same
+    // confirmed, substantive-only read that feeds lastDisposition, so
+    // neither an unconfirmed AI suggestion (B6) nor a later call-only
+    // outcome (SF4) can claim or erase a booked meeting.
+    meetingBooked: lastSubstantive?.response_class === 'meeting_accepted',
   };
 }
 

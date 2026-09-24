@@ -173,13 +173,37 @@ describe('step 1: refusals, before any write', () => {
     expect(out).toEqual({ ok: false, kind: 'invalid_body', field: 'source.kind', reason: 'unknown_source_kind' });
   });
 
-  it('hypothesis_not_found and hypothesis_not_active are refusals with zero writes', async () => {
+  it('hypothesis_not_found and a terminal hypothesis are refusals with zero writes', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValueOnce(null);
     expect(await recordDisposition(prisma, input(), deps)).toEqual({ ok: false, kind: 'refused', reason: 'hypothesis_not_found' });
-    prisma.prospectingHypothesis.findUnique.mockResolvedValueOnce({ ...HYPOTHESIS, status: 'approved' });
-    expect(await recordDisposition(prisma, input(), deps)).toEqual({ ok: false, kind: 'refused', reason: 'hypothesis_not_active' });
+    prisma.prospectingHypothesis.findUnique.mockResolvedValueOnce({ ...HYPOTHESIS, status: 'rejected' });
+    expect(await recordDisposition(prisma, input(), deps)).toEqual({ ok: false, kind: 'refused', reason: 'hypothesis_terminal' });
     expect(prisma.$transaction).not.toHaveBeenCalled();
     expect(calls).toEqual([]);
+  });
+
+  /**
+   * B1 (Opus adversarial review, 2026-09-24). Before this fix, recording a
+   * disposition required `status === 'active'`, so a prospect replying "stop
+   * emailing me" on an `approved`-but-not-yet-activated run had their
+   * do_not_contact refused outright: recordUnsubscribe never ran and the
+   * enrollment never stopped. Only the resolve step (section 5.1) actually
+   * needs `active`; every other non-terminal status must still record stop,
+   * DNC and mirror effects. Mutate the guard back to `status !== 'active'`
+   * and this goes RED.
+   */
+  it('B1: an approved (non-terminal, non-active) hypothesis still records do_not_contact effects', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValueOnce({ ...HYPOTHESIS, status: 'approved' });
+    prisma.sequenceEnrollment.findMany.mockResolvedValueOnce([{ id: 'E1', engine: 'modex_draft_queue', status: 'active' }]);
+    const out = await recordDisposition(prisma, input({ responseClass: 'do_not_contact', buyerLanguage: null }), deps);
+    expect(out).toMatchObject({
+      ok: true,
+      effects: { stopped: ['E1'], unsubscribed: true, resolution: null, mirrored: true },
+      refusals: [],
+    });
+    expect(deps.recordUnsubscribe).toHaveBeenCalledTimes(1);
+    // The hypothesis's own status is untouched by this path; only resolve writes it.
+    expect(prisma.prospectingHypothesis.update).not.toHaveBeenCalled();
   });
 
   it('suppressed_target_mismatch when personaId belongs to another account', async () => {
@@ -260,16 +284,50 @@ describe('step 2: the row and its BIDs in one transaction', () => {
     expect(bids[1]).toMatchObject({ disposition_id: 'D1', type: 'metric', numeric_value: 40, unit: 'minutes', human_confirmed: true });
   });
 
-  it('duplicate_source: a unique collision answers with the existing id and nothing after step 2 runs', async () => {
-    prisma.tx.conversationDisposition.create.mockRejectedValueOnce(Object.assign(new Error('unique'), { code: 'P2002' }));
-    prisma.conversationDisposition.findUnique.mockResolvedValueOnce({ id: 'D_old' });
+  it('duplicate_source: an existing CONFIRMED row for the source is a genuine duplicate, refused before any write', async () => {
+    prisma.conversationDisposition.findUnique.mockResolvedValueOnce({ id: 'D_old', human_confirmed: true });
     const out = await recordDisposition(prisma, input(), deps);
     expect(out).toEqual({ ok: false, kind: 'refused', reason: 'duplicate_source', existingId: 'D_old' });
     expect(prisma.conversationDisposition.findUnique).toHaveBeenCalledWith({
       where: { source_kind_source_id: { source_kind: 'call', source_id: 'call:7:1' } },
-      select: { id: true },
+      select: expect.objectContaining({ id: true, human_confirmed: true }),
     });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
     expect(calls).toEqual([]);
+  });
+
+  it('duplicate_source: a genuine P2002 race (no row visible at check time) still resolves cleanly, not a thrown error', async () => {
+    prisma.conversationDisposition.findUnique.mockResolvedValueOnce(null); // resolveAdoptable's pre-check
+    prisma.tx.conversationDisposition.create.mockRejectedValueOnce(Object.assign(new Error('unique'), { code: 'P2002' }));
+    prisma.conversationDisposition.findUnique.mockResolvedValueOnce({ id: 'D_old' }); // the post-hoc lookup in the catch
+    const out = await recordDisposition(prisma, input(), deps);
+    expect(out).toEqual({ ok: false, kind: 'refused', reason: 'duplicate_source', existingId: 'D_old' });
+    expect(calls).toEqual([]);
+  });
+
+  /**
+   * B2 (Opus adversarial review, 2026-09-24). Before this fix, an existing
+   * UNCONFIRMED row for the same source (posted by an agent, stored with
+   * `created_by: 'cron'`, and possibly against a different hypothesis)
+   * caused the human's create to hit the (source_kind, source_id) unique
+   * constraint and return duplicate_source outright: the buyer's answer,
+   * including a DNC, could never be recorded. `created_by` and
+   * `hypothesis_id` are both mutable while unconfirmed, so the human's
+   * submit now silently adopts the row instead.
+   */
+  it('B2: an unconfirmed cron-created row for the source, filed against a different hypothesis, is adopted by the human submit', async () => {
+    prisma.conversationDisposition.findUnique.mockResolvedValueOnce({
+      id: 'D_cron', hypothesis_id: 'H_other', source_kind: 'call', source_id: 'call:7:1',
+      human_confirmed: false, created_by: 'cron', response_class: 'timing', ai_suggested: null,
+    });
+    const out = await recordDisposition(prisma, input(), deps);
+    expect(out).toMatchObject({ ok: true, dispositionId: 'D_cron' });
+    expect(prisma.tx.conversationDisposition.create).not.toHaveBeenCalled();
+    const call = prisma.tx.conversationDisposition.updateMany.mock.calls[0][0];
+    expect(call.where).toEqual({ id: 'D_cron', human_confirmed: false });
+    expect(call.data).toMatchObject({
+      hypothesis_id: 'H1', response_class: 'problem_confirmed', human_confirmed: true, confirmed_by: 'casey', created_by: 'cron',
+    });
   });
 
   it('timing stores resumeAt in metadata and leaves the hypothesis active', async () => {

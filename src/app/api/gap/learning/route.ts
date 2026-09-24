@@ -14,7 +14,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { buildLearningReport } from '@/lib/gap/learning/query';
+import { buildLearningReport, listLearningPrograms, type LearningFilters } from '@/lib/gap/learning/query';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,6 +34,19 @@ function isGapAgentRequest(request: NextRequest): boolean {
   return isAuthorizedQueueAgent(request);
 }
 
+/** R-A: `?program=`, `?from=`, `?to=` (ISO dates, inclusive). An invalid date is ignored, not a 400: a bad filter degrades to unfiltered, never a broken dashboard. */
+function parseFilters(request: NextRequest): LearningFilters {
+  const params = request.nextUrl.searchParams;
+  const program = params.get('program');
+  const parseDate = (key: string): Date | null => {
+    const raw = params.get(key);
+    if (!raw) return null;
+    const d = new Date(raw);
+    return Number.isNaN(d.getTime()) ? null : d;
+  };
+  return { program: program?.trim() || null, from: parseDate('from'), to: parseDate('to') };
+}
+
 export async function GET(request: NextRequest) {
   const skip = assertGapEnabled();
   if (skip) return NextResponse.json(skip, { status: 404 });
@@ -41,6 +54,7 @@ export async function GET(request: NextRequest) {
   const email = await sessionEmail();
   if (!email && !isGapAgentRequest(request)) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
 
-  const report = await buildLearningReport(prisma);
-  return NextResponse.json(report);
+  const filters = parseFilters(request);
+  const [report, programs] = await Promise.all([buildLearningReport(prisma, filters), listLearningPrograms(prisma)]);
+  return NextResponse.json({ ...report, filters, programs });
 }

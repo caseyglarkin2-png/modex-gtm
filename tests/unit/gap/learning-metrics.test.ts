@@ -266,11 +266,44 @@ describe('dispositionDistribution', () => {
 });
 
 describe('computeSignalYield', () => {
-  it('joins signal counts to hypothesis counts by type independently, with a zero-hypothesis type visible', () => {
-    const rows = computeSignalYield(new Map([['acquisition', 4], ['job_posting', 2]]), ['acquisition']);
+  it('joins signal counts to distinct primary-signal counts by type independently, with a zero-hypothesis type visible', () => {
+    const rows = computeSignalYield(
+      new Map([['acquisition', 4], ['job_posting', 2]]),
+      [{ signalType: 'acquisition', signalId: 's1' }],
+    );
     const acquisition = rows.find((r) => r.signalType === 'acquisition');
     const jobPosting = rows.find((r) => r.signalType === 'job_posting');
     expect(acquisition).toEqual({ signalType: 'acquisition', signalCount: 4, hypothesisCount: 1, rate: rate(1, 4) });
     expect(jobPosting).toEqual({ signalType: 'job_posting', signalCount: 2, hypothesisCount: 0, rate: rate(0, 2) });
+  });
+
+  it('SF16: several hypotheses sharing one primary signal count that signal ONCE, never exceeding signalCount (yield cannot exceed 100%)', () => {
+    const rows = computeSignalYield(
+      new Map([['acquisition', 1]]),
+      [
+        { signalType: 'acquisition', signalId: 's1' },
+        { signalType: 'acquisition', signalId: 's1' },
+        { signalType: 'acquisition', signalId: 's1' },
+      ],
+    );
+    const acquisition = rows.find((r) => r.signalType === 'acquisition');
+    expect(acquisition).toEqual({ signalType: 'acquisition', signalCount: 1, hypothesisCount: 1, rate: rate(1, 1) });
+    expect(acquisition!.hypothesisCount).toBeLessThanOrEqual(acquisition!.signalCount);
+  });
+
+  it('SF16: two DIFFERENT signals of the same type each driving a hypothesis count as two, not merged', () => {
+    const rows = computeSignalYield(
+      new Map([['acquisition', 3]]),
+      [
+        { signalType: 'acquisition', signalId: 's1' },
+        { signalType: 'acquisition', signalId: 's2' },
+      ],
+    );
+    expect(rows.find((r) => r.signalType === 'acquisition')).toEqual({
+      signalType: 'acquisition',
+      signalCount: 3,
+      hypothesisCount: 2,
+      rate: rate(2, 3),
+    });
   });
 });

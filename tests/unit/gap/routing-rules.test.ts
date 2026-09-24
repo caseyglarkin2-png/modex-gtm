@@ -132,6 +132,7 @@ describe('RULES ordering', () => {
       'tam_out',
       'in_flight',
       'reply_pending',
+      'active_opportunity',
       'bounced_or_invalid',
       'disp_wrong_person',
       'disp_timing',
@@ -223,6 +224,50 @@ describe('routePersona, one rule at a time', () => {
     expect(d.action).toBe('one_off_email');
     expect(d.lane).toBe('reply_triage');
     expect(d.blocked).toBe(false);
+  });
+
+  /**
+   * B6 (Opus adversarial review, 2026-09-24). Before this rule existed, an
+   * account with an open deal, or a buyer who just accepted a meeting,
+   * routed straight to call_now/enroll_gap_sequence for a cold sequence.
+   * Mutate the guard away and these three go RED.
+   */
+  it('R3b active_opportunity: a meeting-stage account routes nurture, not enroll or hot_call', () => {
+    const i = base();
+    i.account.pipelineStage = 'meeting';
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('active_opportunity');
+    expect(d.action).toBe('nurture');
+    expect(d.blocked).toBe(false);
+    expect(d.reason).toBe('active_opportunity:pipeline');
+  });
+
+  it('R3b active_opportunity: a booked meeting routes nurture even with a hot trigger and usable phone', () => {
+    const i = withHotTrigger(base());
+    i.comms.meetingBooked = true;
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('active_opportunity');
+    expect(d.reason).toBe('active_opportunity:meeting_booked');
+  });
+
+  it('R3b active_opportunity: a confirmed meeting_accepted disposition within cooldown routes nurture; past cooldown falls through', () => {
+    const i = base();
+    i.comms.lastDisposition = { responseClass: 'meeting_accepted', at: daysAgo(3) };
+    let d = decision(routePersona(i));
+    expect(d.ruleId).toBe('active_opportunity');
+    expect(d.reason).toBe('active_opportunity:recent_positive_disposition');
+
+    const stale = base();
+    stale.comms.lastDisposition = { responseClass: 'meeting_accepted', at: daysAgo(30) };
+    d = decision(routePersona(stale));
+    expect(d.ruleId).not.toBe('active_opportunity');
+  });
+
+  it('R3b control: an early pipeline stage (targeted/contacted/engaged) does NOT block routing', () => {
+    const i = base();
+    i.account.pipelineStage = 'contacted';
+    const d = decision(routePersona(i));
+    expect(d.ruleId).not.toBe('active_opportunity');
   });
 
   it('R4 bounced_or_invalid: invalid email and no phone routes research_required contact_invalid', () => {

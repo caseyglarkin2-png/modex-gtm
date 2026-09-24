@@ -392,14 +392,17 @@ describe('S4-T4 structural', () => {
     expect(prismaAt).toBeGreaterThan(autoAt);
   });
 
-  it('both writers call ingestReply exactly once, behind isGapOsEnabled(), after their InboundMessage write', () => {
-    for (const [name, src] of [
-      ['check-inbox', CHECK_INBOX],
-      ['hubspot-poller', POLLER],
+  it('both writers call ingestReply behind isGapOsEnabled(), after their InboundMessage write for a new row', () => {
+    // check-inbox: exactly one call site, the new-row path.
+    // hubspot-poller: two (SHOULD FIX, 2026-09-24, adds a dedup-hit retry
+    // call site, textually BEFORE the upsert; the new-row site stays after it).
+    for (const [name, src, expectedCalls] of [
+      ['check-inbox', CHECK_INBOX, 1],
+      ['hubspot-poller', POLLER, 2],
     ] as const) {
-      expect(src.match(/ingestReply\(/g)?.length, name).toBe(1);
+      expect(src.match(/ingestReply\(/g)?.length, name).toBe(expectedCalls);
       expect(src, name).toContain('isGapOsEnabled()');
-      expect(src.indexOf('inboundMessage.upsert'), name).toBeLessThan(src.indexOf('ingestReply('));
+      expect(src.indexOf('inboundMessage.upsert'), name).toBeLessThan(src.lastIndexOf('ingestReply('));
       expect(src.indexOf('isGapOsEnabled()'), name).toBeLessThan(src.indexOf('ingestReply('));
     }
   });

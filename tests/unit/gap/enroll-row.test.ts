@@ -31,18 +31,30 @@ const mockedConfigFind = vi.fn();
 const mockedCompileFindMany = vi.fn();
 const mockedApprovalFindFirst = vi.fn();
 const mockedUnsubscribedFind = vi.fn();
+const mockedPersonaFind = vi.fn();
 const fakePrisma = {
   routingDecision: { findFirst: mockedFindFirst, findMany: mockedFindMany },
   systemConfig: { findUnique: mockedConfigFind },
   gapCompile: { findMany: mockedCompileFindMany },
   sendApprovalRequest: { findFirst: mockedApprovalFindFirst },
   unsubscribedEmail: { findUnique: mockedUnsubscribedFind },
+  persona: { findUnique: mockedPersonaFind },
 };
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: fakePrisma }));
 
 const { GET } = await import('@/app/api/gap/queue/enroll-rows/route');
+const { staticSuppressionReader } = await import('@/lib/gap/routing/suppression-read');
+
+/**
+ * SHOULD FIX (Opus adversarial review, 2026-09-24): loadSuppressionLeg now
+ * runs the full cross-plane checkSuppression, not just the snapshot's
+ * doNotContact/emailStatus, so every loadDecisions call here injects a
+ * clear reader (this file only proves LOCAL suppression paths; the
+ * cross-plane leg itself is proven in enroll-row-suppression.test.ts).
+ */
+const CLEAR_SUPPRESSION = { suppression: staticSuppressionReader('clear') };
 
 const BASE = 'http://localhost/api/gap/queue/enroll-rows';
 const SESSION = { user: { email: 'casey@freightroll.com' } };
@@ -494,9 +506,10 @@ describe('loadDecisions', () => {
     mockedCompileFindMany.mockResolvedValue([]);
     mockedApprovalFindFirst.mockResolvedValue(null);
     mockedUnsubscribedFind.mockResolvedValue(null);
+    mockedPersonaFind.mockResolvedValue(null);
   });
 
-  it('R3-2: fills suppressed from the snapshot persona (doNotContact, bounced emailStatus) and the unsubscribed table, on the lowercased email', async () => {
+  it('R3-2: fills suppressed from a FRESH persona read (do_not_contact, bounced email_status), never the routing snapshot, plus the unsubscribed table on the lowercased email', async () => {
     mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
     const row = (id: string, p: RoutingPersonaInput) => ({
       id,
@@ -510,15 +523,22 @@ describe('loadDecisions', () => {
       persona: { name: `Person ${id}` },
     });
     mockedFindMany.mockResolvedValue([
-      row('d1', { ...persona(1, 'Ada@BostonBeer.com', NATIVE_SEQ), doNotContact: true }),
-      row('d2', { ...persona(2, 'bob@bostonbeer.com', NATIVE_SEQ), emailStatus: 'hard_bounced' }),
+      // The snapshot itself says doNotContact: false / emailValid for every
+      // one of these; only the fresh persona.findUnique read below decides.
+      row('d1', persona(1, 'Ada@BostonBeer.com', NATIVE_SEQ)),
+      row('d2', persona(2, 'bob@bostonbeer.com', NATIVE_SEQ)),
       row('d3', persona(3, 'cy@bostonbeer.com', NATIVE_SEQ)),
       row('d4', persona(4, 'di@bostonbeer.com', NATIVE_SEQ)),
     ]);
+    mockedPersonaFind.mockImplementation(async ({ where }: { where: { id: number } }) => {
+      if (where.id === 1) return { do_not_contact: true, email_status: null };
+      if (where.id === 2) return { do_not_contact: false, email_status: 'hard_bounced' };
+      return null;
+    });
     mockedUnsubscribedFind.mockImplementation(async ({ where }: { where: { email: string } }) => (where.email === 'cy@bostonbeer.com' ? { id: 'u' } : null));
     mockedCompileFindMany.mockResolvedValue([0, 1, 2, 3].map((i) => ({ id: `a${i}`, step_index: i, verdict: 'pass', created_by: 'compile-top100' })));
 
-    const items = await loadDecisions(fakePrisma as never);
+    const items = await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
     expect(items.map((i) => i.suppressed)).toEqual(['modex_do_not_contact', 'bounced', 'unsubscribed', null]);
     expect(mockedUnsubscribedFind.mock.calls.map((c) => c[0].where.email)).toEqual(['ada@bostonbeer.com', 'bob@bostonbeer.com', 'cy@bostonbeer.com', 'di@bostonbeer.com']);
     const table = buildEnrollRows(items);
@@ -527,6 +547,40 @@ describe('loadDecisions', () => {
       [1, 'suppressed:modex_do_not_contact'],
       [2, 'suppressed:bounced'],
       [3, 'suppressed:unsubscribed'],
+    ]);
+  });
+
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Before this fix the
+   * hand-enroll table only checked the local legs; a contact clear of every
+   * local leg but suppressed on the cross-plane clawd contract still
+   * rendered under Enroll here, even though a real enroll()/
+   * recordExternalEnrollment call for the SAME contact would refuse
+   * `suppressed`. For hubspot_native this table is the only gate: a human
+   * copies it and enrolls in HubSpot by hand. Mutate loadSuppressionLeg back
+   * to the local-only check and this goes RED.
+   */
+  it('SHOULD FIX: a contact clear of every local leg is still skipped when the cross-plane clawd contract says suppressed', async () => {
+    mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
+    mockedFindMany.mockResolvedValue([
+      {
+        id: 'd1',
+        run_id: 'run_9',
+        action: 'enroll_gap_sequence',
+        lane: 'work_queue',
+        rule_id: 'enroll',
+        priority: 88,
+        explain: decision('enroll_gap_sequence').explain,
+        inputs_snapshot: { account: account('Boston Beer Company'), persona: persona(1, 'ada@bostonbeer.com', NATIVE_SEQ), target: 'hubspot_native' },
+        persona: { name: 'Ada Lovelace' },
+      },
+    ]);
+    mockedCompileFindMany.mockResolvedValue([0, 1, 2, 3].map((i) => ({ id: `a${i}`, step_index: i, verdict: 'pass', created_by: 'compile-top100' })));
+
+    const items = await loadDecisions(fakePrisma as never, undefined, { suppression: staticSuppressionReader('suppressed', { hs_email_optout: 'hit' }) });
+    expect(items[0].suppressed).toBe('clawd:hs_email_optout');
+    expect(buildEnrollRows(items).skipped).toEqual([
+      { account: 'Boston Beer Company', personaId: 1, name: 'Ada Lovelace', email: 'ada@bostonbeer.com', reason: 'suppressed:clawd:hs_email_optout' },
     ]);
   });
 
@@ -562,7 +616,7 @@ describe('loadDecisions', () => {
       { id: 'a2', step_index: 2, verdict: 'pass', created_by: 'compile-top100' },
       { id: 'a3', step_index: 3, verdict: 'pass', created_by: 'compile-top100' },
     ]);
-    const items = await loadDecisions(fakePrisma as never);
+    const items = await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
     expect(items).toHaveLength(2);
     expect(items[0].compile).toEqual({ ok: false, reason: 'compile_not_passed:1', stepIndex: 1 });
     expect(items[1].compile).toBeUndefined();
@@ -591,13 +645,13 @@ describe('loadDecisions', () => {
         persona: { name: 'Ada Lovelace' },
       },
     ]);
-    const table = buildEnrollRows(await loadDecisions(fakePrisma as never));
+    const table = buildEnrollRows(await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION));
     expect(renderEnrollTableMarkdown(table).split('\n')[2]).toContain('| none | Ada Lovelace (compile_missing) |');
   });
 
   it('returns an empty list when no run exists, without querying rows', async () => {
     mockedFindFirst.mockResolvedValue(null);
-    const items = await loadDecisions(fakePrisma as never);
+    const items = await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
     expect(items).toEqual([]);
     expect(mockedFindMany).not.toHaveBeenCalled();
   });
@@ -606,7 +660,7 @@ describe('loadDecisions', () => {
     mockedConfigFind.mockResolvedValue({ value: 'run_completed' });
     mockedFindFirst.mockResolvedValue({ run_id: 'run_partial_newer' });
     mockedFindMany.mockResolvedValue([]);
-    await loadDecisions(fakePrisma as never);
+    await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
     expect(mockedConfigFind).toHaveBeenCalledWith({ where: { key: 'gap_routing_last_run' }, select: { value: true } });
     expect(mockedFindFirst).not.toHaveBeenCalled();
     expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_completed', action: 'enroll_gap_sequence' });
@@ -634,7 +688,7 @@ describe('loadDecisions', () => {
       },
       { id: 'd2', run_id: 'run_9', action: 'enroll_gap_sequence', lane: 'work_queue', rule_id: 'enroll', priority: 1, explain: {}, inputs_snapshot: null, persona: null },
     ]);
-    const items = await loadDecisions(fakePrisma as never);
+    const items = await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
     expect(mockedFindFirst).toHaveBeenCalledWith({ orderBy: { created_at: 'desc' }, select: { run_id: true } });
     expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_9', action: 'enroll_gap_sequence' });
     expect(items).toHaveLength(1);
@@ -647,7 +701,7 @@ describe('loadDecisions', () => {
 
   it('uses the given runId without looking up the newest run', async () => {
     mockedFindMany.mockResolvedValue([]);
-    await loadDecisions(fakePrisma as never, 'run_3');
+    await loadDecisions(fakePrisma as never, 'run_3', CLEAR_SUPPRESSION);
     expect(mockedFindFirst).not.toHaveBeenCalled();
     expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_3', action: 'enroll_gap_sequence' });
   });

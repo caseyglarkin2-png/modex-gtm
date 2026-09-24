@@ -95,8 +95,19 @@ function snapshot(overrides: Record<string, unknown> = {}) {
   };
 }
 
-function makePrisma(opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any } = {}) {
+function makePrisma(
+  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any } = {},
+) {
   const p = {
+    // B6 (Opus adversarial review, 2026-09-24): the active-opportunity guard.
+    // Defaults to "nothing active" so every existing test is unaffected;
+    // opts.account / opts.lastDisposition let a test assert the refusal.
+    account: {
+      findUnique: asyncSpy(async () => (opts.account === undefined ? { pipeline_stage: null } : opts.account)),
+    },
+    conversationDisposition: {
+      findFirst: asyncSpy(async () => (opts.lastDisposition === undefined ? null : opts.lastDisposition)),
+    },
     sequenceVersion: {
       findUnique: asyncSpy(async () =>
         opts.version === undefined ? { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: STEPS } : opts.version,
@@ -203,10 +214,12 @@ beforeEach(() => {
     GAP_OS_ENABLED: process.env.GAP_OS_ENABLED,
     GAP_AUTO_ENROLL_ENABLED: process.env.GAP_AUTO_ENROLL_ENABLED,
     GAP_MESSAGE_COMPILER_ENABLED: process.env.GAP_MESSAGE_COMPILER_ENABLED,
+    OUTREACH_PAUSED: process.env.OUTREACH_PAUSED,
   };
   process.env.GAP_OS_ENABLED = 'true';
   process.env.GAP_MESSAGE_COMPILER_ENABLED = 'true';
   delete process.env.GAP_AUTO_ENROLL_ENABLED;
+  delete process.env.OUTREACH_PAUSED;
   mockedAudit.mockClear();
   mockedEnroll.mockReset();
   mockedRecord.mockReset();
@@ -262,9 +275,71 @@ describe('enrollFromDecision guards, in order', () => {
     expect(refusedPredicates()).toEqual([]);
   });
 
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Spec section 10 names
+   * OUTREACH_PAUSED as a reused kill switch checked at enroll, alongside
+   * the autonomy halt; no code read it. OUTREACH_PAUSED's established
+   * meaning elsewhere (feature-flags.ts) is "automation only, not a
+   * deliberate operator action", so this is scoped like GAP_AUTO_ENROLL_
+   * ENABLED just above it: a machine actor only. Mutate the check away and
+   * this goes RED.
+   */
+  it('OUTREACH_PAUSED refuses a live enroll from an agent, even with GAP_AUTO_ENROLL_ENABLED on', async () => {
+    process.env.GAP_AUTO_ENROLL_ENABLED = 'true';
+    process.env.OUTREACH_PAUSED = 'true';
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live', actor: 'cron', actorKind: 'agent' }), deps());
+    expect(r).toEqual({ ok: false, reason: 'outreach_paused' });
+    expect(prisma.sequenceVersion.findUnique).not.toHaveBeenCalled();
+    expect(refusedPredicates()).toEqual(['outreach_paused']);
+  });
+
+  it('OUTREACH_PAUSED never blocks a human enrolling live through the UI (a deliberate operator action)', async () => {
+    process.env.OUTREACH_PAUSED = 'true';
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  it('OUTREACH_PAUSED never blocks shadow mode', async () => {
+    process.env.OUTREACH_PAUSED = 'true';
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow', actor: 'cron', actorKind: 'agent' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
   it('shadow from an agent is allowed with the flag off', async () => {
     const prisma = makePrisma();
     const r = await enrollFromDecision(prisma, input({ mode: 'shadow', actor: 'cron', actorKind: 'agent' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  /**
+   * B6 (Opus adversarial review, 2026-09-24). Before this fix, enroll had no
+   * active-opportunity check at all: a meeting-stage account or a booked
+   * meeting still enrolled into a cold GAP sequence. This is a FRESH read
+   * (prisma.account / prisma.conversationDisposition), not the routing
+   * decision's snapshot, so it still refuses even when the decision being
+   * acted on predates the opportunity opening. Mutate the guard away and
+   * these go RED.
+   */
+  it('active_opportunity refuses enrollment when the account is at the meeting pipeline stage', async () => {
+    const prisma = makePrisma({ account: { pipeline_stage: 'meeting' } });
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r).toEqual({ ok: false, reason: 'active_opportunity' });
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+  });
+
+  it('active_opportunity refuses enrollment on a confirmed meeting_accepted disposition within cooldown', async () => {
+    const prisma = makePrisma({ lastDisposition: { response_class: 'meeting_accepted', created_at: NOW } });
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r).toEqual({ ok: false, reason: 'active_opportunity' });
+  });
+
+  it('active_opportunity control: an early pipeline stage and no positive disposition still enroll normally', async () => {
+    const prisma = makePrisma({ account: { pipeline_stage: 'contacted' } });
+    const r = await enrollFromDecision(prisma, input(), deps());
     expect(r.ok).toBe(true);
   });
 
@@ -425,6 +500,51 @@ describe('target resolution', () => {
         deps(),
       ),
     ).toEqual({ ok: false, reason: 'no_email' });
+  });
+
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). Before this fix,
+   * hypothesisId and personaId were resolved independently with no relation
+   * enforced between them: a hypothesis for one account and a persona from
+   * a completely different account both resolved fine on their own, so the
+   * service would compile/attribute one company's evidence and copy while
+   * enrolling a different company's actual contact. Mutate the check away
+   * and this goes RED.
+   */
+  it('account_mismatch: a persona from a different account than the hypothesis is refused before suppression or target resolution', async () => {
+    const prisma = makePrisma({
+      persona: { id: 7, name: 'Jane Doe', email: 'jane.doe@other-co.com', account_name: 'Other Co', hubspot_contact_id: '222', do_not_contact: false, email_status: 'verified' },
+    });
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r).toEqual({ ok: false, reason: 'account_mismatch' });
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+  });
+
+  it('account_mismatch control: the same account on both sides enrolls normally', async () => {
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input(), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24). An explicit decisionId
+   * names one RoutingDecision row, routed for ONE persona; if the caller's
+   * personaId names someone else, that row's target/snapshot (Top100
+   * eligibility, preferred sender) would silently apply to the wrong person.
+   */
+  it('decision_persona_mismatch: an explicit decisionId for a different persona is refused', async () => {
+    const prisma = makePrisma({ decision: decisionRow({ persona_id: 999 }) });
+    const r = await enrollFromDecision(prisma, input({ decisionId: 'dec_1', personaId: 7 }), deps());
+    expect(r).toEqual({ ok: false, reason: 'decision_persona_mismatch' });
+  });
+
+  it('decision_persona_mismatch control: a matching persona_id, or no decisionId at all, enrolls normally', async () => {
+    const matching = makePrisma({ decision: decisionRow({ persona_id: 7 }) });
+    expect((await enrollFromDecision(matching, input({ decisionId: 'dec_1', personaId: 7 }), deps())).ok).toBe(true);
+
+    const noDecisionId = makePrisma({ decision: decisionRow({ persona_id: 999 }) });
+    expect((await enrollFromDecision(noDecisionId, input({ decisionId: undefined, personaId: 7 }), deps())).ok).toBe(true);
   });
 
   it('build_required from the Top100 entry (in the roster, no built sequence) refuses and creates nothing', async () => {
@@ -651,6 +771,32 @@ describe('modex_queue', () => {
     expect(mockedAudit.mock.calls[0][1].payload.wouldBe).toMatchObject({ toEmail: 'jane.doe@acme-logistics.com' });
   });
 
+  it('SF10: an actor who is not a vetted sending identity never becomes owner; falls back to DEFAULT_OWNER', async () => {
+    const prisma = makePrisma({ decision: modexDecision() });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow', actor: 'jordan@freightroll.com' }), deps());
+    expect((r as any).wouldBe.owner).toBe('casey@freightroll.com');
+  });
+
+  it('SF10: an explicit owner still wins over the actor fallback (unchanged)', async () => {
+    const prisma = makePrisma({ decision: modexDecision() });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow', owner: 'casey@yardflow.ai' }), deps());
+    expect((r as any).wouldBe.owner).toBe('casey@yardflow.ai');
+  });
+
+  it('SF10: a decision snapshot whose preferredSender is not a vetted sending identity never becomes sender; falls back to owner', async () => {
+    const decision = decisionRow({
+      inputs_snapshot: snapshot({
+        target: 'modex_queue',
+        persona: { id: 7, email: 'jane.doe@acme-logistics.com', hubspotContactId: null, top100: null },
+        preferredSender: 'not-a-sending-identity@example.com',
+      }),
+    });
+    const prisma = makePrisma({ decision });
+    const r = await enrollFromDecision(prisma, input({ mode: 'shadow' }), deps());
+    expect((r as any).wouldBe.sender).toBe('casey@freightroll.com');
+    expect((r as any).wouldBe.owner).toBe('casey@freightroll.com');
+  });
+
   it('live materializes the Sequence once, then addOne, then compiles the created item, then enroll() with the item id it returned', async () => {
     const order: string[] = [];
     const d = deps({
@@ -687,8 +833,10 @@ describe('modex_queue', () => {
     expect(mockedMaterialize).toHaveBeenCalledTimes(1);
     // R3-3: materialize is told which hypothesis the rows must be bound to.
     expect(mockedMaterialize).toHaveBeenCalledWith(prisma, { versionId: 'v1', hypothesisId: 'H1', compileIds: ['c0', 'c1'] }, 'casey@freightroll.com', expect.objectContaining({ owner: 'casey@freightroll.com' }));
-    // The created item carries the Sequence id (the runtime's first guard); a draft-only stamp right after addOne.
-    expect(prisma.draftQueueItem.updateMany).toHaveBeenCalledWith({ where: { id: 4242, status: 'draft' }, data: { sequence_id: 77 } });
+    // The created item carries the Sequence id (the runtime's first guard) AND
+    // sequence_version_id (SF11: gates it into queue-actions.ts's gapCompileGuard
+    // from this instant, before compile() runs), a draft-only stamp right after addOne.
+    expect(prisma.draftQueueItem.updateMany).toHaveBeenCalledWith({ where: { id: 4242, status: 'draft' }, data: { sequence_id: 77, sequence_version_id: 'v1' } });
     // The per-item compile is keyed to the created item and judges the RENDERED copy.
     expect(mockedCompile).toHaveBeenCalledTimes(1);
     const [compileInput, compileDeps] = mockedCompile.mock.calls[0];
@@ -710,6 +858,12 @@ describe('modex_queue', () => {
     });
     expect(compileDeps.critic).toBe(CRITIC_STUB);
     expect(compileDeps.prisma).toBe(prisma);
+    // SF10 (Opus adversarial review, 2026-09-24): addOne's second arg becomes
+    // DraftQueueItem.owner, the ONLY field send-deps.ts reads to resolve the
+    // actual sending Gmail identity. It must be `sender` (casey@yardflow.ai,
+    // this decision's preferredSender), never the administrative `owner`
+    // (casey@freightroll.com, the actor) -- otherwise the queue item would
+    // send from an identity nobody recorded as the sender.
     expect(d.addOne).toHaveBeenCalledWith(
       {
         toEmail: 'jane.doe@acme-logistics.com',
@@ -721,7 +875,7 @@ describe('modex_queue', () => {
         campaignTag: 'gap:H1',
         source: 'casey',
       },
-      'casey@freightroll.com',
+      'casey@yardflow.ai',
     );
     expect(mockedEnroll).toHaveBeenCalledWith(prisma, {
       familyId: 'fam_1',
@@ -741,6 +895,19 @@ describe('modex_queue', () => {
     // and enroll() own their inserts, and enroll() owns the enroll.live audit row, so the service adds none.
     expect(writes(prisma)).toEqual(['draftQueueItem.updateManyx1']);
     expect(mockedAudit.mock.calls.map((c) => c[1].kind)).toEqual([]);
+  });
+
+  it('SF11: the item is stamped with sequence_version_id BEFORE compile() is invoked, so a request that dies mid-compile (no JS exception, so R3-12 never runs) still leaves the item gated, never gate-invisible to queue-actions.ts\'s gapCompileGuard', async () => {
+    let stampedBeforeCompileRan = false;
+    mockedCompile.mockImplementation(async () => {
+      stampedBeforeCompileRan = prisma.draftQueueItem.updateMany.mock.calls.some(
+        (c: any) => c[0]?.data?.sequence_version_id === 'v1',
+      );
+      return ITEM_COMPILE_PASS;
+    });
+    const prisma = makePrisma({ decision: modexDecision() });
+    await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(stampedBeforeCompileRan).toBe(true);
   });
 
   it('N9: live refuses compiler_disabled while GAP_MESSAGE_COMPILER_ENABLED is off, before materialize and addOne; shadow is unaffected', async () => {

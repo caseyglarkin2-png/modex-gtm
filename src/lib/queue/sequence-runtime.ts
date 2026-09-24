@@ -229,6 +229,30 @@ export async function scheduleNextStep(prisma: any, item: any, opts: ScheduleOpt
   let body: string = next.step.bodyTemplate || item.body;
   let marked: StepCopy | null = null;
   let run: RunContext | null = null;
+  // B5 (Opus adversarial review, 2026-09-24): the kill switch must never make
+  // outbound LESS safe. Flag off skips the render-and-compile block below, so
+  // a version-pinned item (this run was compiled under GAP) or a step whose
+  // copy still carries an unrendered {{token}} (a GAP-materialized
+  // Sequence.steps row, see sequences/service.ts materializeSequence) must
+  // never be approved raw. Schedule nothing instead; the run pauses until the
+  // flag is back on or an operator intervenes.
+  if (!gapEnabled && (item.sequence_version_id || /\{\{/.test(subject) || /\{\{/.test(body))) {
+    await audit(prisma, {
+      kind: SCHEDULE_SKIPPED_KIND,
+      actor: RUNTIME_ACTOR,
+      subjectType: 'draft_queue_item',
+      subjectId: String(item.id),
+      payload: {
+        reason: item.sequence_version_id ? 'gap_flag_off_version_pinned' : 'gap_flag_off_unrendered_template',
+        source: resolved.source,
+        versionId: item.sequence_version_id ?? null,
+        runId: item.sequence_run_id ?? null,
+        stepIndex: item.step_index,
+        toEmail: item.to_email,
+      },
+    });
+    return null;
+  }
   if (gapEnabled) {
     run = await loadRunContext(prisma, item.sequence_run_id);
     const rendered = renderStepCopy(

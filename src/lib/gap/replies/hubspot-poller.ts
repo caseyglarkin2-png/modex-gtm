@@ -45,12 +45,16 @@
  * run and counted `existing`; that overlap is the price of never missing one.
  *
  * R2-11: the search sorts hs_timestamp ASCENDING explicitly (the string form
- * left the direction to HubSpot's default), and a run that filled its page
- * (`seen >= limit`) never advances the watermark: the cut may have landed
- * inside a burst of equal timestamps or ahead of rows the search dropped, so
- * the floor stays put and the report says `watermarkHeld: true` with reason
- * `page_full`. The next run re-reads from the same floor; dedup makes that
- * free. Raise `limit` or run again to drain a backlog.
+ * left the direction to HubSpot's default). A run that filled its page
+ * (`seen >= limit`) advances the watermark only to the row just before any
+ * tie at the batch's newest timestamp (SHOULD FIX, 2026-09-24: the original
+ * fix held the floor at its PRE-RUN value on every full page, which never
+ * moved on its own and stalled permanently once a backlog passed `limit` --
+ * the next run re-read the identical page forever). `watermarkPartialAdvance`
+ * marks that case in the report. Only the degenerate case where every
+ * fetched row shares one exact timestamp still holds at the original floor
+ * (`watermarkHeld: true`, reason `page_full`); the next run re-reads from
+ * there, and dedup makes that free. Raise `limit` to drain a backlog faster.
  */
 
 import { classifyInboundReply } from '@/lib/email/reply-precision';
@@ -110,6 +114,14 @@ export interface PollReport {
   /** R2-11: true when the run did not advance the watermark although it saw rows. */
   watermarkHeld: boolean;
   watermarkHeldReason: 'page_full' | null;
+  /**
+   * SHOULD FIX (Opus adversarial review, 2026-09-24): true when a full page
+   * advanced the watermark only PART of the way to `newest` (to just before
+   * a same-timestamp tie at the tail), rather than the whole way. The run
+   * still made real progress; `watermarkHeld` stays false because the floor
+   * did move. Absent (undefined) on a run that was not capped at all.
+   */
+  watermarkPartialAdvance?: boolean;
   /** S4-T4: present only under GAP_OS_ENABLED in apply mode. */
   gap?: { paused: number; errors: string[] };
 }
@@ -166,6 +178,12 @@ async function loadScopedPersonas(prisma: any): Promise<Map<string, ScopedPerson
   const rows: Array<{ email: string | null; account_name: string; hubspot_contact_id: string | null }> =
     await prisma.persona.findMany({
       where: { hubspot_contact_id: { not: null }, email: { not: null } },
+      // SF8 (Opus adversarial review, 2026-09-24): explicit, deterministic
+      // order so the first-wins dedupe below (byEmail.has) is reproducible.
+      // The SAME rule (lowest persona id wins a duplicate email) is used by
+      // replies/list.ts's loadKnownAddresses, so the poller and reply
+      // triage attribute a shared-email reply to the same persona.
+      orderBy: { id: 'asc' },
       select: { email: true, account_name: true, hubspot_contact_id: true },
     });
   const byEmail = new Map<string, ScopedPersona>();
@@ -217,9 +235,40 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     // filtered engagement is not re-recorded on every run.
     const already = await prisma.notification.findFirst({
       where: { source_id: messageId, type: { in: ['reply', FILTERED_TYPE] } },
+      select: { type: true },
     });
     if (already) {
       report.existing += 1;
+      // SHOULD FIX (Opus adversarial review, 2026-09-24): a failed
+      // ingestReply after the InboundMessage/Notification had already
+      // committed was never retried -- this row read `already` on every
+      // later run and the enrollment stayed unpaused forever. ingestReply
+      // is idempotent by construction (it is driven by the enrollment's
+      // CURRENT live status, no dedup key of its own; see its own header),
+      // so retrying it costs one cheap query when there is nothing left to
+      // do. Only a `reply`-type row can still have live work; a filtered
+      // one never called ingest in the first place.
+      if (gap && already.type === 'reply') {
+        const retryEmail = (engagement.fromEmail ?? '').trim().toLowerCase();
+        const retryPersona = retryEmail ? personas.get(retryEmail) : undefined;
+        if (retryPersona) {
+          try {
+            const retryIngest = await ingestReply(prisma, {
+              contactEmail: retryEmail,
+              source: 'hubspot',
+              inboundMessageId: messageId,
+              hubspotContactId: retryPersona.hubspot_contact_id,
+              receivedAt: engagement.timestamp,
+              isAutoresponder: false,
+              now: opts.now,
+            });
+            if (retryIngest.action === 'paused') gap.paused += 1;
+          } catch (retryError) {
+            const message = retryError instanceof Error ? retryError.message : String(retryError);
+            gap.errors.push(`${messageId}: ${message}`);
+          }
+        }
+      }
       continue;
     }
 
@@ -337,14 +386,40 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
 
   report.newest = newest ? newest.toISOString() : null;
 
-  // R2-11: a full page is not proof that everything up to `newest` was read.
+  // R2-11, revised by a SHOULD FIX (Opus adversarial review, 2026-09-24): a
+  // full page is not proof that everything up to `newest` was read -- rows
+  // sharing the batch's newest hs_timestamp may have siblings HubSpot did
+  // not return in this page. The original fix held the watermark at its
+  // PRE-RUN floor whenever the page was full, which stalled permanently on
+  // any backlog past `limit`: since/limit never change on their own, the
+  // next run re-read the identical page forever. Engagements arrive
+  // ascending, so only the rows tied to `newest` are genuinely ambiguous;
+  // advance to the timestamp of the row just before that tie, so a full
+  // page still makes real progress and only the ambiguous tail is re-read
+  // next time. Only the degenerate case (every fetched row shares one
+  // timestamp) still holds at the original floor.
+  let advanceTo: Date | null = newest;
   if (newest && engagements.length >= limit) {
-    report.watermarkHeld = true;
-    report.watermarkHeldReason = 'page_full';
+    const newestMs = newest.getTime();
+    let boundary: Date | null = null;
+    for (let i = engagements.length - 1; i >= 0; i -= 1) {
+      if (engagements[i].timestamp.getTime() !== newestMs) {
+        boundary = engagements[i].timestamp;
+        break;
+      }
+    }
+    if (boundary) {
+      advanceTo = boundary;
+      report.watermarkPartialAdvance = true;
+    } else {
+      advanceTo = null;
+      report.watermarkHeld = true;
+      report.watermarkHeldReason = 'page_full';
+    }
   }
 
-  if (!opts.dryRun && newest && !report.watermarkHeld) {
-    const advanced = newest > opts.now ? opts.now : newest;
+  if (!opts.dryRun && advanceTo) {
+    const advanced = advanceTo > opts.now ? opts.now : advanceTo;
     const value = advanced.toISOString();
     await prisma.systemConfig.upsert({
       where: { key: WATERMARK_KEY },

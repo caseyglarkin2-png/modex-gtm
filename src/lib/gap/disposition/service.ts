@@ -63,6 +63,7 @@ import { captureBid, validateBidInput, type BidActor } from '../bid/capture';
 import type { ActorKind } from '../enroll/service';
 import { mirrorDisposition as defaultMirror, type DispositionMirrorResult } from '../hubspot-mirror';
 import { proposeHypothesis as defaultPropose, transitionHypothesis as defaultTransition } from '../hypothesis/service';
+import { isTerminalStatus, type HypothesisStatus } from '../hypothesis/machine';
 import { resolutionRecord, scoreResolution, type ResolutionDisposition } from '../hypothesis/resolution';
 import { stop as defaultStop, stopEnrollmentsForHypothesis as defaultStopForHypothesis } from '../sequence/enrollment';
 import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
@@ -266,26 +267,56 @@ interface AiSuggestionRow {
   ai_suggested: unknown;
 }
 
-async function loadAiSuggestion(prisma: any, id: string, input: RecordDispositionInput): Promise<AiSuggestionRow> {
-  const row: AiSuggestionRow | null = await prisma.conversationDisposition.findUnique({
-    where: { id },
-    select: {
-      id: true,
-      hypothesis_id: true,
-      source_kind: true,
-      source_id: true,
-      human_confirmed: true,
-      created_by: true,
-      response_class: true,
-      ai_suggested: true,
-    },
-  });
-  if (!row) throw new Refusal('refused', 'ai_suggestion_not_found');
-  if (row.human_confirmed || row.created_by !== AI_ACTOR) throw new Refusal('refused', 'ai_suggestion_not_adoptable');
-  if (row.hypothesis_id !== input.hypothesisId || row.source_kind !== input.source.kind || row.source_id !== input.source.id) {
-    throw new Refusal('refused', 'ai_suggestion_mismatch');
+const AI_SUGGESTION_SELECT = {
+  id: true,
+  hypothesis_id: true,
+  source_kind: true,
+  source_id: true,
+  human_confirmed: true,
+  created_by: true,
+  response_class: true,
+  ai_suggested: true,
+} as const;
+
+/**
+ * B2 (Opus adversarial review, 2026-09-24): an existing UNCONFIRMED row for
+ * this source must never permanently block a human from recording their
+ * disposition, whatever posted it first (an agent route stores agent rows
+ * as `created_by: 'cron'`, not `'ai'`) or which hypothesis it was filed
+ * against. `created_by` and `hypothesis_id` are both mutable while
+ * unconfirmed (the freeze trigger only locks classes and identity once
+ * `human_confirmed` flips), so the human's submit silently adopts the row.
+ *
+ * SOURCE is the one thing that is not negotiable: `(source_kind, source_id)`
+ * is the row's real identity (and its unique key), so an explicit
+ * `aiSuggestionId` naming a row for a DIFFERENT source is refused rather
+ * than silently reassigned to this submission's source.
+ *
+ * Two paths in: the caller named a specific suggestion id (explicit
+ * confirm-with-edits from the UI), or it didn't and this call auto-detects
+ * a same-source unconfirmed row so a P2002 on create is never the first
+ * thing a human sees.
+ */
+async function resolveAdoptable(prisma: any, input: RecordDispositionInput): Promise<AiSuggestionRow | null> {
+  if (input.aiSuggestionId) {
+    const row: AiSuggestionRow | null = await prisma.conversationDisposition.findUnique({
+      where: { id: input.aiSuggestionId },
+      select: AI_SUGGESTION_SELECT,
+    });
+    if (!row) throw new Refusal('refused', 'ai_suggestion_not_found');
+    if (row.human_confirmed) throw new Refusal('refused', 'ai_suggestion_not_adoptable');
+    if (row.source_kind !== input.source.kind || row.source_id !== input.source.id) {
+      throw new Refusal('refused', 'ai_suggestion_mismatch');
+    }
+    return row;
   }
-  return row;
+  const existing: AiSuggestionRow | null = await prisma.conversationDisposition.findUnique({
+    where: { source_kind_source_id: { source_kind: input.source.kind, source_id: input.source.id } },
+    select: AI_SUGGESTION_SELECT,
+  });
+  if (!existing) return null;
+  if (existing.human_confirmed) throw new Refusal('refused', 'duplicate_source', undefined, existing.id);
+  return existing;
 }
 
 function metadataFor(input: RecordDispositionInput, valid: ValidDisposition, ai: AiSuggestionRow | null): Record<string, unknown> | null {
@@ -359,9 +390,17 @@ export async function recordDisposition(
       },
     });
     if (!hypothesis) throw new Refusal('refused', 'hypothesis_not_found');
-    if (hypothesis.status !== 'active') throw new Refusal('refused', 'hypothesis_not_active');
+    // B1: a buyer's answer (stop, DNC, mirror) must be recordable for any
+    // non-terminal hypothesis, not only `active`. An `approved` hypothesis
+    // that has not yet been manually activated must still be able to record
+    // a "stop emailing me" reply. Only step 5 (resolve) keeps the stricter
+    // `active`-only requirement, enforced by the state machine itself
+    // (the transition table has no `resolve` edge off `active`).
+    if (isTerminalStatus(hypothesis.status as HypothesisStatus)) {
+      throw new Refusal('refused', 'hypothesis_terminal');
+    }
     persona = await resolvePersona(prisma, hypothesis, input.personaId, valid.contactEmail);
-    if (input.aiSuggestionId) ai = await loadAiSuggestion(prisma, input.aiSuggestionId, input);
+    ai = await resolveAdoptable(prisma, input);
 
     // BID shapes are checked before the transaction so a bad BID never costs a row.
     bidInputs.forEach((bid, index) => {

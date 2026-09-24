@@ -15,9 +15,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { defaultGapApiClient, type GapApiClient } from '@/lib/gap/ui/gap-api-client';
+import { defaultGapApiClient, type GapApiClient, type LearningReportParams } from '@/lib/gap/ui/gap-api-client';
 import { isLowSample, type Rate } from '@/lib/gap/learning/metrics';
 import type { LearningReport } from '@/lib/gap/learning/query';
+import type { AgreementReport } from '@/lib/gap/routing/agreement';
 
 function formatPercent(value: number | null): string {
   return value === null ? '—' : `${Math.round(value * 100)}%`;
@@ -107,17 +108,170 @@ function BreakdownTable<K extends string, F>({
   );
 }
 
+/**
+ * R-A (owner-confirmed finish requirement, 2026-09-24): campaign/program and
+ * date-range filters. Answers "how did <program> perform" and "what
+ * happened in this window", not a BI platform: one select, two date
+ * inputs, applied on change (no separate Apply step to keep this small).
+ */
+function FilterBar({
+  programs,
+  value,
+  onChange,
+}: {
+  programs: string[];
+  value: LearningReportParams;
+  onChange: (next: LearningReportParams) => void;
+}) {
+  return (
+    <div className="flex flex-wrap items-end gap-4" aria-label="Learning report filters">
+      <label className="flex flex-col gap-1 text-sm">
+        <span className="text-[var(--muted-foreground)]">Campaign</span>
+        <select
+          aria-label="Campaign"
+          className="rounded-md border border-[var(--border)] bg-transparent px-2 py-1 text-sm"
+          value={value.program ?? ''}
+          onChange={(e) => onChange({ ...value, program: e.target.value || null })}
+        >
+          <option value="">All campaigns</option>
+          {programs.map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="flex flex-col gap-1 text-sm">
+        <span className="text-[var(--muted-foreground)]">From</span>
+        <input
+          aria-label="From date"
+          type="date"
+          className="rounded-md border border-[var(--border)] bg-transparent px-2 py-1 text-sm"
+          value={value.from ?? ''}
+          onChange={(e) => onChange({ ...value, from: e.target.value || null })}
+        />
+      </label>
+      <label className="flex flex-col gap-1 text-sm">
+        <span className="text-[var(--muted-foreground)]">To</span>
+        <input
+          aria-label="To date"
+          type="date"
+          className="rounded-md border border-[var(--border)] bg-transparent px-2 py-1 text-sm"
+          value={value.to ?? ''}
+          onChange={(e) => onChange({ ...value, to: e.target.value || null })}
+        />
+      </label>
+      {value.program || value.from || value.to ? (
+        <button
+          type="button"
+          className="text-sm text-[var(--muted-foreground)] underline"
+          onClick={() => onChange({ program: null, from: null, to: null })}
+        >
+          Clear
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
+/** R-B: an AgreementRate tile, same visual language as RateTile but over {agreements, disagreements, rate, n}. */
+function AgreementRateTile({ label, rate }: { label: string; rate: { agreements: number; disagreements: number; rate: number | null; n: number } }) {
+  const insufficient = rate.n === 0;
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm font-medium text-[var(--muted-foreground)]">{label}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex items-baseline gap-2">
+        <span className="text-3xl font-semibold tabular-nums">{formatPercent(rate.rate)}</span>
+        <span className="text-sm text-[var(--muted-foreground)] tabular-nums">
+          {rate.agreements}/{rate.n}
+        </span>
+        {insufficient ? (
+          <Badge variant="outline">no comparable decisions</Badge>
+        ) : isLowSample({ value: rate.rate, n: rate.n, numerator: rate.agreements, denominator: rate.n }) ? (
+          <Badge variant="warning">low sample, n={rate.n}</Badge>
+        ) : null}
+      </CardContent>
+    </Card>
+  );
+}
+
+/**
+ * R-B (owner-confirmed finish requirement, 2026-09-24): routing
+ * recommendation vs actual human action, the gate G1 evaluator's data
+ * source before any routing rule earns canary eligibility. Loads
+ * independently of the learning report (a different table, a different
+ * question) so a slow or failed agreement fetch never blocks the funnel.
+ */
+function RoutingAgreementSection({ client }: { client: GapApiClient }) {
+  const [report, setReport] = useState<AgreementReport | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const result = await client.getRoutingAgreement();
+      if (cancelled) return;
+      if (result.ok) setReport(result.data);
+      else setError(result.error);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [client]);
+
+  return (
+    <section aria-labelledby="agreement-heading" className="space-y-3">
+      <h2 id="agreement-heading" className="text-lg font-semibold">
+        Routing vs human action (shadow-mode gate G1)
+      </h2>
+      {error ? (
+        <p className="text-sm text-[var(--destructive)]" role="alert">
+          Could not load the agreement report: {error}
+        </p>
+      ) : !report ? (
+        <p className="text-sm text-[var(--muted-foreground)]">Loading...</p>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <AgreementRateTile label="Overall agreement" rate={report.overall} />
+          </div>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <BreakdownTable
+              title="By rule"
+              rows={report.byRuleId.map((r) => ({ key: r.key, funnel: r.rate }))}
+              rateOf={(rate) => ({ value: rate.rate, n: rate.n, numerator: rate.agreements, denominator: rate.n })}
+            />
+            <BreakdownTable
+              title="By recommended action"
+              rows={report.byAction.map((r) => ({ key: r.key, funnel: r.rate }))}
+              rateOf={(rate) => ({ value: rate.rate, n: rate.n, numerator: rate.agreements, denominator: rate.n })}
+            />
+          </div>
+          <p className="text-xs text-[var(--muted-foreground)]">
+            {report.totalDecisions} routing decisions total; {report.overall.n} comparable (a human action was recorded).
+          </p>
+        </>
+      )}
+    </section>
+  );
+}
+
 export function LearningDashboard({ client = defaultGapApiClient }: { client?: GapApiClient }) {
   const [report, setReport] = useState<LearningReport | null>(null);
+  const [programs, setPrograms] = useState<string[]>([]);
+  const [filters, setFilters] = useState<LearningReportParams>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (params: LearningReportParams) => {
     setLoading(true);
     setError(null);
-    const result = await client.getLearningReport();
+    const result = await client.getLearningReport(params);
     if (result.ok) {
       setReport(result.data);
+      setPrograms(result.data.programs ?? []);
     } else {
       setError(result.error);
       setReport(null);
@@ -126,10 +280,11 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
   }, [client]);
 
   useEffect(() => {
-    void load();
-  }, [load]);
+    void load(filters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [load, filters.program, filters.from, filters.to]);
 
-  if (loading) return <p className="text-sm text-[var(--muted-foreground)]">Loading...</p>;
+  if (loading && !report) return <p className="text-sm text-[var(--muted-foreground)]">Loading...</p>;
   if (error) return <p className="text-sm text-[var(--destructive)]" role="alert">Could not load the learning report: {error}</p>;
   if (!report) return null;
 
@@ -137,6 +292,7 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
 
   return (
     <div className="space-y-8">
+      <FilterBar programs={programs} value={filters} onChange={setFilters} />
       <section aria-labelledby="hypothesis-funnel-heading" className="space-y-3">
         <h2 id="hypothesis-funnel-heading" className="text-lg font-semibold">
           Hypothesis funnel
@@ -262,6 +418,8 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
           {report.counts.hypotheses} hypotheses, {report.counts.conversations} confirmed conversations in this report.
         </p>
       </section>
+
+      <RoutingAgreementSection client={client} />
     </div>
   );
 }

@@ -354,15 +354,38 @@ describe('fromPicCitation', () => {
     const row = pic();
     const { signal } = expectOk(fromPicCitation(row, CTX));
     expect(signal.sourceKind).toBe('pic_citation');
-    expect(signal.sourceId).toBe(`acme:${sha1(row.ref)}`);
-    expect(signal.title).toBe(row.problem);
+    expect(signal.sourceId).toBe(`acme:${row.rowIndex}:${sha1(row.ref)}`);
+    // SF7 (Opus adversarial review, 2026-09-24): the title is the cited
+    // verbatim (evidence), never the sheet's seller-inferred `problem`.
+    expect(signal.title).toBe(row.verbatim);
     expect(signal.evidenceText).toBe(row.verbatim);
     expect(signal.evidenceUrl).toBeNull();
     expect(signal.sourceType).toBe('first_party');
     expect(signal.type).toBe('manual_research');
     expect(signal.confidence).toBe(90);
     expect(signal.observedAt.toISOString()).toBe(new Date('2026-09-01').toISOString());
-    expect(signal.metadata).toMatchObject({ ref: row.ref, speaker: 'VP Ops', rowIndex: 3 });
+    expect(signal.metadata).toMatchObject({ ref: row.ref, speaker: 'VP Ops', rowIndex: 3, picProblem: row.problem });
+  });
+
+  it('SF7: two different rows citing the same ref get distinct sourceIds, so neither row overwrites the other in the idempotent registry', () => {
+    const sameRef = 'transcript:2026-09-01-acme-discovery#t=1210';
+    const rowA = pic({ rowIndex: 3, ref: sameRef, problem: 'Trailer search eats production capacity.', verbatim: 'We lose an hour a shift finding trailers.' });
+    const rowB = pic({ rowIndex: 7, ref: sameRef, problem: 'Gate congestion at shift change.', verbatim: 'Gate backs up every shift change.' });
+    const a = expectOk(fromPicCitation(rowA, CTX)).signal;
+    const b = expectOk(fromPicCitation(rowB, CTX)).signal;
+    expect(a.sourceId).not.toBe(b.sourceId);
+    expect(a.title).toBe(rowA.verbatim);
+    expect(b.title).toBe(rowB.verbatim);
+
+    // The same row re-citing the same ref still dedupes (idempotent on re-import).
+    const rowARepeat = pic({ rowIndex: 3, ref: sameRef, problem: rowA.problem, verbatim: rowA.verbatim });
+    expect(expectOk(fromPicCitation(rowARepeat, CTX)).signal.sourceId).toBe(a.sourceId);
+  });
+
+  it('SF7: a citation with no verbatim titles from the ref, never from the seller-inferred problem', () => {
+    const { signal } = expectOk(fromPicCitation(pic({ ref: 'https://x.example.com/p', verbatim: undefined }), CTX));
+    expect(signal.title).toBe('https://x.example.com/p');
+    expect(signal.title).not.toContain('production capacity');
   });
 
   it.each(['for-pack:acme', 'dossier:acme', 'transcript:x', 'call-intel:x', 'vault:x', 'http://a', 'https://a'])(

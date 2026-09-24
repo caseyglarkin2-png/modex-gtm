@@ -379,6 +379,39 @@ describe('Bulk email send API', () => {
     });
   });
 
+  it('B4: blocks a bulk recipient whose case differs from the stored unsubscribe row', async () => {
+    // Emulates real Postgres `IN` semantics (case-sensitive exact match) so
+    // this is only GREEN because the route lower-cases recipients before
+    // querying. jane@acme.com is how recordUnsubscribe always stores it;
+    // the recipient here arrives upper-case, as a prospect's own reply-to
+    // header or a stale CRM import might carry it.
+    mockedPrisma.prisma.unsubscribedEmail.findMany.mockImplementation(async ({ where }: any) => {
+      const wanted: string[] = where.email.in;
+      return wanted.includes('jane@acme.com') ? [{ email: 'jane@acme.com' }] : [];
+    });
+
+    const req = new NextRequest('http://localhost/api/email/send-bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        recipients: [{ to: 'JANE@ACME.COM', readinessScore: 90, readinessTier: 'high', stale: false }],
+        subject: 'Bulk subject',
+        bodyHtml: 'Bulk send body',
+        generatedContentId: 99,
+      }),
+      headers: { 'content-type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
+    });
+
+    const res = await sendBulkPOST(req);
+    const payload = await res.json();
+
+    expect(res.status).toBe(400);
+    expect(payload.code).toBe('NO_SENDABLE_RECIPIENTS');
+    expect(payload.skipped).toEqual([
+      { to: 'jane@acme.com', reason: 'Recipient explicitly unsubscribed' },
+    ]);
+    expect(mockedSendBulk).not.toHaveBeenCalled();
+  });
+
   it('returns a hard-block response when no bulk recipients remain sendable', async () => {
     mockedPrisma.prisma.unsubscribedEmail.findMany.mockResolvedValue([{ email: 'skip@example.com' }]);
 

@@ -212,6 +212,10 @@ export async function loadKnownAddresses(prisma: any): Promise<Map<string, Known
   });
   const personas: PersonaRow[] = await prisma.persona.findMany({
     where: { email: { not: null }, prospecting_hypotheses: { some: {} } },
+    // SF8 (Opus adversarial review, 2026-09-24): explicit, deterministic
+    // order so duplicate-email resolution below is reproducible rather than
+    // whatever order the DB happens to return.
+    orderBy: { id: 'asc' },
     select: {
       id: true,
       email: true,
@@ -226,6 +230,12 @@ export async function loadKnownAddresses(prisma: any): Promise<Map<string, Known
   for (const p of personas) {
     const email = normalizeEmail(p.email);
     if (!email) continue;
+    // SF8: when two personas share an email, the lowest-id persona wins,
+    // never the last one the query happened to return. This is the SAME
+    // rule hubspot-poller.ts's loadScopedPersonas uses to resolve a reply's
+    // persona; the two disagreeing let a reply mean one persona/hypothesis
+    // to the poller and a different one to reply triage.
+    if (map.has(email)) continue;
     const hyp = pickHypothesis(p.prospecting_hypotheses);
     for (const h of p.prospecting_hypotheses) hypothesisTitles.set(h.id, h.problem_family);
     map.set(email, {

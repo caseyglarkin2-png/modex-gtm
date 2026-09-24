@@ -303,24 +303,44 @@ export interface SignalYieldRow {
   rate: Rate;
 }
 
+/** One hypothesis's primary signal: which registered signal, of which type, drove it. */
+export interface HypothesisPrimarySignalRef {
+  signalType: string;
+  signalId: string;
+}
+
 /**
- * `signalCounts` and `hypothesisSignalTypes` are independent inputs (a
+ * `signalCounts` and `hypothesisPrimarySignals` are independent inputs (a
  * signal type can exist with zero hypotheses, or vice versa if a hypothesis
  * cites a signal type no longer freshly registered) so this stays a pure
  * join rather than assuming one side is a superset of the other.
+ *
+ * SF16 (Opus adversarial review, 2026-09-24): `hypothesisCount` counts
+ * DISTINCT SIGNALS that are the primary driver of at least one hypothesis,
+ * never hypotheses themselves. Several hypotheses can share one primary
+ * signal (the same acquisition trigger driving a hypothesis for two
+ * personas at the account); counting hypotheses let yield exceed 100% of
+ * the signals that exist. Deduping by signalId caps hypothesisCount at
+ * signalCount by construction: a primary signal is always a real
+ * ProspectingSignal of its own type, so it is one of the signals signalCount
+ * already counted for that type.
  */
 export function computeSignalYield(
   signalCounts: ReadonlyMap<string, number>,
-  hypothesisPrimarySignalTypes: readonly string[],
+  hypothesisPrimarySignals: readonly HypothesisPrimarySignalRef[],
 ): SignalYieldRow[] {
-  const hypothesisCountByType = new Map<string, number>();
-  for (const type of hypothesisPrimarySignalTypes) hypothesisCountByType.set(type, (hypothesisCountByType.get(type) ?? 0) + 1);
+  const signalIdsByType = new Map<string, Set<string>>();
+  for (const { signalType, signalId } of hypothesisPrimarySignals) {
+    const set = signalIdsByType.get(signalType) ?? new Set<string>();
+    set.add(signalId);
+    signalIdsByType.set(signalType, set);
+  }
 
-  const types = new Set<string>([...signalCounts.keys(), ...hypothesisCountByType.keys()]);
+  const types = new Set<string>([...signalCounts.keys(), ...signalIdsByType.keys()]);
   return [...types]
     .map((signalType) => {
       const signalCount = signalCounts.get(signalType) ?? 0;
-      const hypothesisCount = hypothesisCountByType.get(signalType) ?? 0;
+      const hypothesisCount = signalIdsByType.get(signalType)?.size ?? 0;
       return { signalType, signalCount, hypothesisCount, rate: rate(hypothesisCount, signalCount) };
     })
     .sort((a, b) => b.signalCount - a.signalCount);

@@ -173,8 +173,11 @@ export async function evaluateSendGuards(
   }
 
   const outboundRecipients = [resolvedRecipient.to, ...accountInvariant.normalizedCc];
+  // Query lower-cased: UnsubscribedEmail.email is always stored lower-cased
+  // (recordUnsubscribe normalizes on write), but recipients here can carry
+  // any case, and Postgres `in` is an exact-case match.
   const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
-    where: { email: { in: outboundRecipients } },
+    where: { email: { in: outboundRecipients.map((email) => email.toLowerCase()) } },
     select: { email: true },
   });
   const unsubscribedSet = new Set(unsubscribedRows.map((row) => row.email.toLowerCase()));

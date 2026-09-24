@@ -77,8 +77,8 @@ function postJson(body: Record<string, unknown>) {
 const ROUTE_FRESH_SEQUENCE: Call[] = [
   ['unsubscribedEmail.findUnique', { where: { email: FRESH } }],
   ['unsubscribedEmail.create', { data: { email: FRESH, email_log_id: 42, reason: 'no longer relevant' } }],
-  ['persona.updateMany', { where: { email: FRESH }, data: { do_not_contact: true } }],
-  ['persona.findFirst', { where: { email: FRESH } }],
+  ['persona.updateMany', { where: { email: { equals: FRESH, mode: 'insensitive' } }, data: { do_not_contact: true } }],
+  ['persona.findFirst', { where: { email: { equals: FRESH, mode: 'insensitive' } } }],
   ['hubspot.upsertContact', { email: FRESH, hs_email_optout: 'true' }],
 ];
 
@@ -197,7 +197,10 @@ describe('recordUnsubscribe helper', () => {
     upsertContact.mockRejectedValueOnce(new Error('hubspot down'));
     const result = await recordUnsubscribe(prismaMock, { email: FRESH, source: 'manual' });
     expect(create).toHaveBeenCalledTimes(1);
-    expect(updateMany).toHaveBeenCalledWith({ where: { email: FRESH }, data: { do_not_contact: true } });
+    expect(updateMany).toHaveBeenCalledWith({
+      where: { email: { equals: FRESH, mode: 'insensitive' } },
+      data: { do_not_contact: true },
+    });
     expect(result).toStrictEqual({ ok: true, created: true, personaUpdated: 1, hubspot: 'failed:hubspot down' });
   });
 
@@ -251,8 +254,8 @@ describe('recordUnsubscribe helper', () => {
     expect(calls).toStrictEqual([
       ['unsubscribedEmail.findUnique', { where: { email: FRESH } }],
       ['unsubscribedEmail.create', { data: { email: FRESH, email_log_id: undefined, reason: undefined } }],
-      ['persona.updateMany', { where: { email: FRESH }, data: { do_not_contact: true } }],
-      ['persona.findFirst', { where: { email: FRESH } }],
+      ['persona.updateMany', { where: { email: { equals: FRESH, mode: 'insensitive' } }, data: { do_not_contact: true } }],
+      ['persona.findFirst', { where: { email: { equals: FRESH, mode: 'insensitive' } } }],
       ['hubspot.upsertContact', { email: FRESH, hs_email_optout: 'true' }],
     ]);
   });

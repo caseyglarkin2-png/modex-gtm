@@ -120,7 +120,10 @@ function makePrisma(db: Db) {
         findFirst(
           byDesc(
             db.dispositions.filter(
-              (d) => d.contact_email === where.contact_email && (where.human_confirmed === undefined || d.human_confirmed === where.human_confirmed),
+              (d) =>
+                d.contact_email === where.contact_email &&
+                (where.human_confirmed === undefined || d.human_confirmed === where.human_confirmed) &&
+                (where.response_class?.notIn === undefined || !where.response_class.notIn.includes(d.response_class)),
             ),
             'created_at',
           ),
@@ -665,6 +668,24 @@ describe('comms', () => {
     const confirmed = await assemble(db);
     expect(confirmed.comms.undispositionedInbound).toBe(false);
     expect(confirmed.comms.lastDisposition?.responseClass).toBe('problem_confirmed');
+  });
+
+  it('SF4: a call-only outcome after a timing disposition never becomes lastDisposition or clears meetingBooked', async () => {
+    const db = fullDb();
+    db.dispositions.push(
+      { contact_email: EMAIL_LOWER, response_class: 'timing', created_at: daysAgo(6), confirmed_at: daysAgo(6), human_confirmed: true, ai_suggested: { resumeAt: daysAhead(30).toISOString() } },
+      // A later call reaches voicemail: call-only, no buyer decision, but IS the newest confirmed row.
+      { contact_email: EMAIL_LOWER, response_class: 'voicemail', created_at: daysAgo(1), confirmed_at: daysAgo(1), human_confirmed: true, ai_suggested: null },
+    );
+    const i = await assemble(db);
+    expect(i.comms.lastDisposition?.responseClass).toBe('timing');
+    expect(i.comms.meetingBooked).toBe(false);
+
+    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'meeting_accepted', created_at: daysAgo(3), confirmed_at: daysAgo(3), human_confirmed: true, ai_suggested: null });
+    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'gatekeeper', created_at: daysAgo(0.5), confirmed_at: daysAgo(0.5), human_confirmed: true, ai_suggested: null });
+    const booked = await assemble(db);
+    expect(booked.comms.meetingBooked).toBe(true);
+    expect(booked.comms.lastDisposition?.responseClass).toBe('meeting_accepted');
   });
 
   it('lastDisposition is the newest human_confirmed disposition only, with resumeAt and referral from its metadata', async () => {

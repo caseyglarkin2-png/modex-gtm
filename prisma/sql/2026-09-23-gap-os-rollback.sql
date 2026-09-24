@@ -111,3 +111,21 @@ DROP TABLE IF EXISTS prospecting_signals CASCADE;
 -- ---------------------------------------------------------------------------
 
 ALTER TABLE IF EXISTS draft_queue_items DROP COLUMN IF EXISTS sequence_version_id;
+
+-- ---------------------------------------------------------------------------
+-- 7. inbound_messages.source and .hubspot_engagement_id (S2-T1, 2026-09-23),
+--    the ONLY other pre-existing table GAP OS's schema touches (section 12:
+--    both additive-only, both confirmed by the production preflight). SF15
+--    (Opus adversarial review, 2026-09-24): section 6 above rolled back the
+--    draft_queue_items column but this file never mentioned this one, so a
+--    rollback left source/hubspot_engagement_id (and their indexes) behind.
+--    Explicit index drops first, though Postgres also drops an index
+--    automatically when its column is dropped; names are Prisma's default
+--    convention (<table>_<col(s)>_idx) for a plain `db push`, no hand
+--    migration file named them.
+-- ---------------------------------------------------------------------------
+
+DROP INDEX IF EXISTS inbound_messages_source_received_at_idx;
+DROP INDEX IF EXISTS inbound_messages_hubspot_engagement_id_idx;
+ALTER TABLE IF EXISTS inbound_messages DROP COLUMN IF EXISTS source;
+ALTER TABLE IF EXISTS inbound_messages DROP COLUMN IF EXISTS hubspot_engagement_id;

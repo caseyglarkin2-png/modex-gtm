@@ -252,6 +252,38 @@ describe('correctBid', () => {
     expect(await correctBid(prisma, 'B1', { rawBuyerLanguage: 'x', capturedBy: HUMAN })).toEqual({ ok: false, reason: 'already_superseded' });
   });
 
+  /**
+   * B3 (Opus adversarial review, 2026-09-24). Before this fix, an agent's
+   * unconfirmed correction could supersede a human-confirmed BID: by the
+   * fail-closed rule in bid/select.ts (only human_confirmed && !superseded
+   * rows feed resolution), the confirmed evidence would silently drop out
+   * of resolution and learning the moment the new, unconfirmed row existed.
+   * Mutate the guard back to remove the human_confirmed check and this
+   * goes RED.
+   */
+  it('B3: an agent correcting a human-confirmed row is refused correction_requires_human, no write', async () => {
+    prisma.buyerInputData.findUnique.mockResolvedValue(storedRow({ human_confirmed: true, confirmed_by: 'casey', confirmed_at: NOW }));
+    const result = await correctBid(prisma, 'B1', { rawBuyerLanguage: 'the agent guesses forty', capturedBy: AGENT });
+    expect(result).toEqual({ ok: false, reason: 'correction_requires_human' });
+    expect(prisma.buyerInputData.create).not.toHaveBeenCalled();
+    // The pre-check happens before the already_superseded read, not after.
+    expect(prisma.buyerInputData.findFirst).not.toHaveBeenCalled();
+  });
+
+  it('B3 control: a human can still correct a human-confirmed row', async () => {
+    prisma.buyerInputData.findUnique.mockResolvedValue(storedRow({ human_confirmed: true, confirmed_by: 'casey', confirmed_at: NOW }));
+    prisma.buyerInputData.findFirst.mockResolvedValue(null);
+    const result = await correctBid(prisma, 'B1', { rawBuyerLanguage: 'actually it is sixty', capturedBy: HUMAN, confirm: true });
+    expect(result).toEqual({ ok: true, id: 'B_new', humanConfirmed: true, supersedesId: 'B1' });
+  });
+
+  it('B3 control: an agent may still correct its OWN unconfirmed row', async () => {
+    prisma.buyerInputData.findUnique.mockResolvedValue(storedRow({ human_confirmed: false }));
+    prisma.buyerInputData.findFirst.mockResolvedValue(null);
+    const result = await correctBid(prisma, 'B1', { rawBuyerLanguage: 'revised guess', capturedBy: AGENT });
+    expect(result).toEqual({ ok: true, id: 'B_new', humanConfirmed: false, supersedesId: 'B1' });
+  });
+
   it('validates the correction like a capture', async () => {
     prisma.buyerInputData.findUnique.mockResolvedValue(storedRow());
     prisma.buyerInputData.findFirst.mockResolvedValue(null);

@@ -52,7 +52,7 @@ function report(dryRun: boolean): SyncReport {
     dryRun,
     families: { created: 0, existing: 2, skipped: [] },
     contactsRead: 7,
-    enrollments: { created: 0, updated: 0, unchanged: 1, otherSequenceActive: 0, held: [] },
+    enrollments: { created: 0, updated: 0, unchanged: 1, otherSequenceActive: 0, held: [], suppressedButEnrolled: [] },
     reported: { other_sequence: 1, not_enrolled: 5, no_email: 0, no_contact_id: 0 },
     rostersMissing: ['jbhunt-com'],
   };

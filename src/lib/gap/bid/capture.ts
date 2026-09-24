@@ -77,7 +77,8 @@ export type BidRefusal =
   | 'bid_not_found'
   | 'already_superseded'
   | 'not_human'
-  | 'bid_confirmed';
+  | 'bid_confirmed'
+  | 'correction_requires_human';
 
 export interface ValidBid {
   hypothesisId: string;
@@ -251,6 +252,15 @@ export async function correctBid(
 ): Promise<CaptureResult> {
   const original = await prisma.buyerInputData.findUnique({ where: { id: bidId } });
   if (!original) return { ok: false, reason: 'bid_not_found' };
+
+  // B3 (Opus adversarial review, 2026-09-24): an agent's unconfirmed
+  // correction must never supersede human-confirmed buyer truth. By the
+  // fail-closed rule in bid/select.ts, superseding a confirmed row drops it
+  // out of resolution and learning even though the new row is only an
+  // AI guess. Human-confirmed BID wins; only a human may correct it.
+  if (original.human_confirmed && input.capturedBy.kind !== 'human') {
+    return { ok: false, reason: 'correction_requires_human' };
+  }
 
   const existing = await prisma.buyerInputData.findFirst({ where: { supersedes_id: bidId }, select: { id: true } });
   if (existing) return { ok: false, reason: 'already_superseded' };

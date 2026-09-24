@@ -81,7 +81,10 @@ import { STATUS } from '../../src/lib/queue/types';
 // Rails
 // ---------------------------------------------------------------------------
 
-const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:5433\/gap_dev(?:\?.*)?$/;
+// RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
+// (55432/gap_finish_e2e) used when the persistent 5433/gap_dev credentials
+// are unavailable. Still loopback-only, still an exact-literal allowlist.
+const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'sprint2-e2e-latest.md');
 const MANIFEST_FIXTURE = path.join('tests', 'fixtures', 'gap', 'top100-manifest.json');
 const ROSTER_FIXTURE = path.join('tests', 'fixtures', 'gap', 'top100-roster.json');
@@ -633,8 +636,15 @@ async function main(): Promise<number> {
     expect('5 routing', lastRun?.value === runIdA, `${LAST_RUN_CONFIG_KEY} is ${lastRun?.value}, expected ${runIdA}`);
     pass('5 routing', `run A mode shadow: ${runA.decisions} decisions ${JSON.stringify(runA.byRule)}, skips ${JSON.stringify(runA.skips)}; exec persona ${execPersona.id} -> enroll (target modex_queue, hypothesis ${execDraft.id}); do_not_contact persona -> suppressed / do_not_contact / blocked (R2-1); every row carries account + persona; queue ordered by priority; human action ok then already_acted, missing id not_found`);
 
-    // 6. Enroll table off run A.
-    const items = await loadDecisions(prisma, runIdA);
+    // 6. Enroll table off run A. SF12 (Opus adversarial review, 2026-09-24):
+    // loadDecisions now checks the SAME cross-plane clawd leg routing does
+    // (loadSuppressionLeg -> checkSuppression), so it needs the same test
+    // suppression reader every other suppression-relevant call in this
+    // script already injects; without it, the default reader sees no
+    // CLAWD_CONTROL_PLANE_URL/TOKEN (deliberately scrubbed by this script's
+    // own safety rails) and fails closed (unreadable -> suppressed), which
+    // is the CORRECT SF12 behavior, not a regression to route around.
+    const items = await loadDecisions(prisma, runIdA, { suppression: staticSuppressionReader('clear') });
     expect('6 enroll rows', items.length === 1 && items[0].inputs.persona.id === execPersona.id, `loadDecisions returned ${items.length} enroll items (${items.map((i) => i.inputs.persona.id).join(',')}), expected 1 for persona ${execPersona.id}`);
     const table = buildEnrollRows(items);
     const rendered = renderEnrollTableMarkdown(table);
