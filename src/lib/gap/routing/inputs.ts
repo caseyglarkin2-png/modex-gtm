@@ -599,13 +599,10 @@ async function readComms(prisma: PrismaLike, email: string): Promise<RoutingComm
       select: { received_at: true },
     }),
   )) as { received_at: Date } | null;
-  const newestDisposition = (await read('disposition_newest', () =>
-    prisma.conversationDisposition.findFirst({
-      where: { contact_email: email },
-      orderBy: { created_at: 'desc' },
-      select: { created_at: true },
-    }),
-  )) as { created_at: Date } | null;
+  // S4-T7: only a HUMAN-CONFIRMED row dispositions a reply. An unconfirmed AI
+  // suggestion row (created_by ai, human_confirmed false) is stored, never
+  // acted on, and must not hide the reply from R3 reply_pending. The same
+  // confirmed read feeds lastDisposition, so the rules never see an unconfirmed row.
   const lastConfirmed = (await read('disposition_confirmed', () =>
     prisma.conversationDisposition.findFirst({
       where: { contact_email: email, human_confirmed: true },
@@ -615,7 +612,7 @@ async function readComms(prisma: PrismaLike, email: string): Promise<RoutingComm
 
   const lastInboundAt = lastInbound?.received_at ?? null;
   const undispositionedInbound =
-    lastInboundAt != null && (newestDisposition == null || lastInboundAt.getTime() > newestDisposition.created_at.getTime());
+    lastInboundAt != null && (lastConfirmed == null || lastInboundAt.getTime() > lastConfirmed.created_at.getTime());
 
   return {
     inFlight: enrollment != null || draft != null,

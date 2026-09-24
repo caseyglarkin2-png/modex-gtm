@@ -639,16 +639,32 @@ describe('comms', () => {
     expect(i.comms.lastInboundAt).toEqual(daysAgo(7));
   });
 
-  it('undispositionedInbound is true when the inbound is newer than the last disposition, false otherwise, true with no disposition', async () => {
+  it('undispositionedInbound is true when the inbound is newer than the last CONFIRMED disposition, false otherwise, true with no disposition', async () => {
     const db = fullDb();
     db.inbound.push({ from_email: EMAIL_LOWER, received_at: daysAgo(2) });
     expect((await assemble(db)).comms.undispositionedInbound).toBe(true);
 
-    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'timing', created_at: daysAgo(1), human_confirmed: false, ai_suggested: null });
+    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'timing', created_at: daysAgo(1), human_confirmed: true, confirmed_at: daysAgo(1), ai_suggested: null });
     expect((await assemble(db)).comms.undispositionedInbound).toBe(false);
 
     db.inbound.push({ from_email: EMAIL_LOWER, received_at: daysAgo(0.5) });
     expect((await assemble(db)).comms.undispositionedInbound).toBe(true);
+  });
+
+  it('S4-T7: an unconfirmed AI suggestion row never dispositions a reply (still undispositioned), a confirmed row does, and lastDisposition ignores the AI row', async () => {
+    const db = fullDb();
+    db.inbound.push({ from_email: EMAIL_LOWER, received_at: daysAgo(2) });
+    // Only an AI row (created_by ai, human_confirmed false), newer than the reply: R3 must still see the reply pending.
+    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'problem_confirmed', created_at: daysAgo(1), human_confirmed: false, created_by: 'ai', ai_suggested: { responseClass: 'problem_confirmed', bids: [], why: 'x' } });
+    const withAi = await assemble(db);
+    expect(withAi.comms.undispositionedInbound).toBe(true);
+    expect(withAi.comms.lastDisposition).toBeNull();
+
+    // A human confirms: the reply is dispositioned and the confirmed row is the last disposition.
+    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'problem_confirmed', created_at: daysAgo(0.5), confirmed_at: daysAgo(0.5), human_confirmed: true, ai_suggested: null });
+    const confirmed = await assemble(db);
+    expect(confirmed.comms.undispositionedInbound).toBe(false);
+    expect(confirmed.comms.lastDisposition?.responseClass).toBe('problem_confirmed');
   });
 
   it('lastDisposition is the newest human_confirmed disposition only, with resumeAt and referral from its metadata', async () => {

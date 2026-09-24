@@ -526,6 +526,11 @@ async function main(): Promise<number> {
     const page2 = await listReplies(prisma, { state: 'undispositioned' });
     const item2 = page2.items.find((i) => i.id === msg1);
     expect('4 suggest', item2?.suggestion?.id === aiRowId && item2.suggestion.responseClass === 'problem_confirmed', `listed suggestion ${JSON.stringify(item2?.suggestion)}`);
+    // Routing still sees the reply pending while only the AI row exists: R3 reads undispositionedInbound from CONFIRMED rows only.
+    const routingWithAi = await assembleRoutingInputs(prisma, { accountName, personaId: p1.id, now, suppression: suppressionClear });
+    expect('4 suggest', !isSkip(routingWithAi), `assembleRoutingInputs for persona ${p1.id} skipped: ${JSON.stringify(routingWithAi)}`);
+    if (isSkip(routingWithAi)) throw new Error('unreachable');
+    expect('4 suggest', routingWithAi.comms.undispositionedInbound === true && routingWithAi.comms.lastDisposition === null && routingWithAi.comms.lastInboundAt !== null, `routing inputs with only the AI row: ${JSON.stringify(routingWithAi.comms)}`);
     // A quote the buyer never wrote is rejected: a second message from the call persona (a known address with a hypothesis).
     const msg2 = `${tag}-msg-2`;
     const thread2 = `${tag}-thread-2`;
@@ -539,7 +544,7 @@ async function main(): Promise<number> {
     const rejectedRows = await prisma.conversationDisposition.count({ where: { source_kind: 'inbound_message', source_id: msg2 } });
     expect('4 suggest', rejected.ok && rejected.suggestion === null && 'rejected' in rejected && rejected.rejected === 'quote_not_found:0' && (rejectedAudit?.payload as { rejected?: string } | null)?.rejected === 'quote_not_found:0' && rejectedRows === 0, `bad-quote suggest -> ${JSON.stringify(rejected)} audit ${JSON.stringify(rejectedAudit)} rows ${rejectedRows}`);
     counts.aiSuggestionRowId = aiRowId;
-    pass('4 suggest', `unconfirmed ai row ${aiRowId.slice(0, 8)} (created_by ai, problem_confirmed, quote verbatim) with the hypothesis still active, the enrollment still paused, no unsubscribe row, no resolution, no BID; second call idempotent (1 model call); a quote not in the text -> null, quote_not_found:0, reply.suggest_rejected audited, no row`);
+    pass('4 suggest', `unconfirmed ai row ${aiRowId.slice(0, 8)} (created_by ai, problem_confirmed, quote verbatim) with the hypothesis still active, the enrollment still paused, no unsubscribe row, no resolution, no BID, and routing inputs still show the reply undispositioned with no lastDisposition; second call idempotent (1 model call); a quote not in the text -> null, quote_not_found:0, reply.suggest_rejected audited, no row`);
 
     // 5. Human disposition adopts the ai row, stops the run, resolves confirmed at 85, mirror skipped; duplicate refused.
     const base = (over: Partial<RecordDispositionInput>): RecordDispositionInput => ({
@@ -601,13 +606,15 @@ async function main(): Promise<number> {
     // The unique on (source_kind, source_id) is proven on an ACTIVE hypothesis: the second persona's still-active one with the same source key.
     const dupSource = await recordDisposition(prisma, base({ hypothesisId: h2, personaId: p2.id, contactEmail: emails.call, buyerLanguage: REPLY_TEXT }));
     expect('5 disposition', !dupSource.ok && dupSource.kind === 'refused' && dupSource.reason === 'duplicate_source' && dupSource.existingId === aiRowId, `duplicate source -> ${JSON.stringify(dupSource)}`);
+    const routingConfirmed = await assembleRoutingInputs(prisma, { accountName, personaId: p1.id, now, suppression: suppressionClear });
+    expect('5 disposition', !isSkip(routingConfirmed) && routingConfirmed.comms.undispositionedInbound === false && routingConfirmed.comms.lastDisposition?.responseClass === 'problem_confirmed', `routing inputs after the confirmed disposition: ${JSON.stringify(isSkip(routingConfirmed) ? routingConfirmed : routingConfirmed.comms)}`);
     const listedAfter = (await listReplies(prisma, { state: 'undispositioned' })).items.some((i) => i.id === msg1);
     const listedAll = (await listReplies(prisma, { state: 'all' })).items.find((i) => i.id === msg1);
     expect('5 disposition', !listedAfter && listedAll?.dispositionId === aiRowId, `after the disposition: undispositioned still lists it=${listedAfter}, all carries dispositionId ${listedAll?.dispositionId}`);
     counts.dispositionId = aiRowId;
     counts.confirmedBidIds = recorded.bidIds.join(',');
     counts.resolutionConfidence = 85;
-    pass('5 disposition', `ai row ${aiRowId.slice(0, 8)} became the human's row (confirmed_by ${OWNER}, metadata.aiSuggestion matched=true), 2 BIDs confirmed, enrollment stopped (replied), hypothesis ${h1.slice(0, 8)} confirmed at 85 (60 email + 15 quote + 10 root cause) citing both BID ids, mirror skipped:gap_mirror_disabled with no mirror row; audit kinds disposition=[reply.suggested, disposition.recorded, disposition.effects], hypothesis has one hypothesis.resolved, enrollment has one enrollment.pause + one enrollment.stop + one enroll.live; resubmit on the resolved hypothesis -> hypothesis_not_active, same source on an active hypothesis -> duplicate_source (existingId); the reply left the undispositioned list and state=all carries dispositionId`);
+    pass('5 disposition', `ai row ${aiRowId.slice(0, 8)} became the human's row (confirmed_by ${OWNER}, metadata.aiSuggestion matched=true), 2 BIDs confirmed, enrollment stopped (replied), hypothesis ${h1.slice(0, 8)} confirmed at 85 (60 email + 15 quote + 10 root cause) citing both BID ids, mirror skipped:gap_mirror_disabled with no mirror row; audit kinds disposition=[reply.suggested, disposition.recorded, disposition.effects], hypothesis has one hypothesis.resolved, enrollment has one enrollment.pause + one enrollment.stop + one enroll.live; resubmit on the resolved hypothesis -> hypothesis_not_active, same source on an active hypothesis -> duplicate_source (existingId); the reply left the undispositioned list, state=all carries dispositionId, and routing inputs now read the reply as dispositioned with lastDisposition problem_confirmed`);
 
     // 6. DB truth: the confirmed row is frozen, a BID cannot be deleted, a correction is a superseding insert.
     const refused = async (fn: () => Promise<unknown>): Promise<string> => {
