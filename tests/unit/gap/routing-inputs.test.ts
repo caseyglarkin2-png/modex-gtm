@@ -13,6 +13,7 @@ import type { HubSpotAccountSnapshot } from '@/lib/gap/routing/inputs';
 import {
   CONTRACT_LEG,
   createClawdSuppressionReader,
+  SUPPRESSION_READ_TIMEOUT_MS,
   staticSuppressionReader,
 } from '@/lib/gap/routing/suppression-read';
 import type { SuppressionReader } from '@/lib/gap/routing/suppression-read';
@@ -877,6 +878,10 @@ describe('createClawdSuppressionReader', () => {
     const both = { ok: true, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'modex_do_not_contact', keys: ['modex_do_not_contact', 'hubspot_optout'], unknown_legs: [] }] };
     const r = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(both)), env }).read({ to: EMAIL });
     expect(r).toEqual({ verdict: 'suppressed', legs: { modex_do_not_contact: 'hit', hubspot_optout: 'hit' } });
+  });
+
+  it('the routing read allows for the measured 3-4 s contract latency (final pass)', () => {
+    expect(SUPPRESSION_READ_TIMEOUT_MS).toBeGreaterThanOrEqual(10_000);
   });
 
   it('a hung authority times out to unknown', async () => {
