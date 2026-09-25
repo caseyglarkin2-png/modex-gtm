@@ -63,7 +63,7 @@ async function fetchQueue(action: string, lane: string, cursor: string | null): 
 // Queue tab
 // ---------------------------------------------------------------------------
 
-function QueueTab() {
+function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
   const [action, setAction] = useState('');
   const [lane, setLane] = useState('');
   const [runId, setRunId] = useState<string | null>(null);
@@ -94,7 +94,10 @@ function QueueTab() {
 
   useEffect(() => {
     void loadFirst(action, lane);
-  }, [action, lane, loadFirst]);
+    // reloadKey is intentionally in the dependency array with no other use:
+    // a Run Routing pass changes it (the new run's id) so the queue refetches
+    // automatically, with no manual page refresh.
+  }, [action, lane, reloadKey, loadFirst]);
 
   async function loadMore() {
     if (!nextCursor) return;
@@ -193,7 +196,14 @@ function QueueTab() {
       {loading ? (
         <p className="text-sm italic text-[var(--muted-foreground)]">Loading decisions...</p>
       ) : items.length === 0 ? (
-        <p className="text-sm italic text-[var(--muted-foreground)]">No decisions in the latest run. Run routing from the cron or the API.</p>
+        <div className="space-y-1">
+          <p className="text-sm italic text-[var(--muted-foreground)]">
+            {runId ? 'No decisions match this filter.' : 'No routing run yet.'}
+          </p>
+          <p className="text-xs text-[var(--muted-foreground)]">
+            Routing creates GAP recommendations. It does not contact anyone. Use Run routing above.
+          </p>
+        </div>
       ) : (
         <div className="space-y-3">
           {items.map((item) => (
@@ -309,7 +319,7 @@ function EnrollRowsTab() {
 // Shell
 // ---------------------------------------------------------------------------
 
-export function WorkQueue() {
+export function WorkQueue({ reloadKey }: { reloadKey?: string | number }) {
   return (
     <Tabs defaultValue="queue">
       <TabsList aria-label="Work queue sections">
@@ -318,7 +328,13 @@ export function WorkQueue() {
         <TabsTrigger value="enroll-rows">Enroll rows</TabsTrigger>
       </TabsList>
       <TabsContent value="queue">
-        <QueueTab />
+        <p className="mb-3 text-sm">
+          <span className="font-medium">GAP recommends what to do next.</span>{' '}
+          <span className="text-[var(--muted-foreground)]">
+            After you actually take the action, tell GAP what you did so it can compare its recommendation with your judgment.
+          </span>
+        </p>
+        <QueueTab reloadKey={reloadKey} />
       </TabsContent>
       <TabsContent value="in-flight">
         <InFlightTab />

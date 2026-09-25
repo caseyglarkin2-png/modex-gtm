@@ -25,7 +25,8 @@
  * list page already answers with a refetch.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -223,6 +224,13 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
   const [outcome, setOutcome] = useState<ResolutionOutcome>('confirmed');
   const [busy, setBusy] = useState<HypothesisAction | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [justActivated, setJustActivated] = useState(false);
+
+  // A fresh hypothesis in the drawer (Previous/Next, or opening a new row)
+  // never inherits the previous one's "just activated" banner.
+  useEffect(() => {
+    setJustActivated(false);
+  }, [hypothesis.id]);
 
   const status = hypothesis.status;
   const terminal = isTerminalStatus(status);
@@ -266,6 +274,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
         return;
       }
       setReason('');
+      setJustActivated(payload.to === 'active');
       onTransition({
         from: payload.from as HypothesisStatus,
         to: payload.to as HypothesisStatus,
@@ -304,6 +313,15 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
             {hypothesis.updated_at ? ` Updated ${formatWhen(hypothesis.updated_at)}.` : ''}
           </SheetDescription>
         </SheetHeader>
+
+        {justActivated ? (
+          <div data-testid="hypothesis-activated-banner" className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--border)] bg-[var(--accent)] p-3 text-sm">
+            <p>Hypothesis active. Run routing to generate a recommendation.</p>
+            <Button asChild type="button" size="sm" variant="outline">
+              <Link href="/gap">Go to Queue</Link>
+            </Button>
+          </div>
+        ) : null}
 
         {!terminal && primaryAction ? (
           <section
