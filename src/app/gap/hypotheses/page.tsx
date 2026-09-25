@@ -39,7 +39,8 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
   const status = parseStatus(params.status);
   const { items } = await listHypotheses(prisma, { limit: 50, ...(status ? { status } : {}) });
   // Account theses shared by 2+ people come first (grouped review), then the one-off table.
-  const groups = orderGroupsForReview(await loadThesisGroups(prisma)).filter((g) => !status || g.members.some((m) => m.status === status));
+  // Every thesis shows regardless of the status filter, so an approved group never vanishes from view.
+  const groups = orderGroupsForReview(await loadThesisGroups(prisma));
   const cards = await withRecordedNotes(prisma, groups.map(toThesisCard));
 
   return (

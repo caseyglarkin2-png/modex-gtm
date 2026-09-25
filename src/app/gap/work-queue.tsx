@@ -20,6 +20,9 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ROUTING_ACTIONS, ROUTING_LANES } from '@/lib/gap/taxonomy';
 import { DecisionCard, type QueueItem } from '@/components/gap/decision-card';
+import { sellerLaneOf, type SellerLane } from '@/lib/gap/routing/card-readiness';
+
+const LANE_TITLE: Record<string, string> = { ready: 'Ready to contact', research: 'Research', follow_up: 'Follow up' };
 
 interface QueueResponse {
   runId: string | null;
@@ -80,7 +83,7 @@ async function fetchQueue(action: string, lane: string, cursor: string | null): 
 // Queue tab
 // ---------------------------------------------------------------------------
 
-function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
+function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | number; sellerLane?: SellerLane | null }) {
   const [action, setAction] = useState('');
   const [lane, setLane] = useState('');
   const [runId, setRunId] = useState<string | null>(null);
@@ -163,9 +166,19 @@ function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
     }
   }
 
+  const shown = sellerLane ? items.filter((item) => sellerLaneOf(item) === sellerLane) : items;
+
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-end gap-3">
+      {sellerLane ? (
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">{LANE_TITLE[sellerLane] ?? sellerLane}</h2>
+          <Link href="/gap" className="text-xs underline">Show all cards</Link>
+        </div>
+      ) : null}
+      <details className="text-xs">
+        <summary className="cursor-pointer text-[var(--muted-foreground)]">Filters and system details</summary>
+      <div className="mt-2 flex flex-wrap items-end gap-3">
         <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
           Action
           <select aria-label="Action filter" className={SELECT_CLASS} value={action} onChange={(event) => setAction(event.target.value)}>
@@ -200,6 +213,7 @@ function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
           )}
         </p>
       </div>
+      </details>
 
       {error ? (
         <p role="alert" className="text-sm text-[var(--destructive)]">
@@ -209,10 +223,10 @@ function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
 
       {loading ? (
         <p className="text-sm italic text-[var(--muted-foreground)]">Loading decisions...</p>
-      ) : items.length === 0 ? (
+      ) : shown.length === 0 ? (
         <div className="space-y-1">
           <p className="text-sm italic text-[var(--muted-foreground)]">
-            {runId ? 'No decisions match this filter.' : 'No routing run yet.'}
+            {runId ? (sellerLane ? 'Nothing in this lane right now.' : 'No decisions match this filter.') : 'No routing run yet.'}
           </p>
           <p className="text-xs text-[var(--muted-foreground)]">
             Routing creates GAP recommendations. It does not contact anyone. Use Run routing above.
@@ -220,7 +234,7 @@ function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
         </div>
       ) : (
         <div className="space-y-3">
-          {items.map((item) => (
+          {shown.map((item) => (
             <DecisionCard
               key={item.id}
               item={item}
@@ -333,13 +347,13 @@ function EnrollRowsTab() {
 // Shell
 // ---------------------------------------------------------------------------
 
-export function WorkQueue({ reloadKey }: { reloadKey?: string | number }) {
+export function WorkQueue({ reloadKey, sellerLane = null }: { reloadKey?: string | number; sellerLane?: SellerLane | null }) {
   return (
     <Tabs defaultValue="queue">
       <TabsList aria-label="Work queue sections">
         <TabsTrigger value="queue">Queue</TabsTrigger>
-        <TabsTrigger value="in-flight">In flight</TabsTrigger>
-        <TabsTrigger value="enroll-rows">Enroll rows</TabsTrigger>
+        <TabsTrigger value="in-flight">In flight (details)</TabsTrigger>
+        <TabsTrigger value="enroll-rows">Enroll rows (details)</TabsTrigger>
       </TabsList>
       <TabsContent value="queue">
         <p className="mb-3 text-sm">
@@ -348,7 +362,7 @@ export function WorkQueue({ reloadKey }: { reloadKey?: string | number }) {
             After you actually take the action, tell GAP what you did so it can compare its recommendation with your judgment.
           </span>
         </p>
-        <QueueTab reloadKey={reloadKey} />
+        <QueueTab reloadKey={reloadKey} sellerLane={sellerLane} />
       </TabsContent>
       <TabsContent value="in-flight">
         <InFlightTab />

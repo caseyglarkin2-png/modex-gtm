@@ -188,10 +188,12 @@ describe('<HypothesisDrawer>', () => {
     vi.unstubAllGlobals();
   });
 
-  it('draft with an unsupported observation: seller-facing Submit exists, Approve is not rendered', () => {
+  it('draft with an unsupported observation: Approve + use is shown but disabled with the reason; no separate submit ceremony', () => {
     render(<HypothesisDrawer hypothesis={row({ observation: '', signals: [] })} onClose={vi.fn()} onTransition={vi.fn()} />);
-    expect(screen.getByRole('button', { name: 'Ready for review' })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Approve hypothesis' })).toBeNull();
+    const approve = screen.getByRole('button', { name: 'Approve + use' });
+    expect(approve).toBeDisabled();
+    expect(approve).toHaveAttribute('title', 'Needs at least one cited fact');
+    expect(screen.queryByRole('button', { name: 'Ready for review' })).toBeNull();
     expect(screen.getByTestId('fact-block')).toHaveAttribute('data-state', 'unsupported');
   });
 
@@ -207,7 +209,7 @@ describe('<HypothesisDrawer>', () => {
         onTransition={vi.fn()}
       />,
     );
-    const approve = screen.getByRole('button', { name: 'Approve hypothesis' });
+    const approve = screen.getByRole('button', { name: 'Approve + use' });
     expect(approve).toBeDisabled();
     expect(approve).toHaveAttribute('title', 'Needs at least one cited fact');
   });
@@ -220,7 +222,7 @@ describe('<HypothesisDrawer>', () => {
         onTransition={vi.fn()}
       />,
     );
-    expect(screen.getByRole('button', { name: 'Approve hypothesis' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Approve + use' })).toBeDisabled();
   });
 
   it('approved with no evidence: Activate is disabled with the title', () => {
@@ -240,12 +242,12 @@ describe('<HypothesisDrawer>', () => {
     expect(activate).toHaveAttribute('title', 'Needs at least one cited fact');
   });
 
-  it('review_required with evidence: Approve PATCHes {action:"approve"} and calls onTransition', async () => {
-    fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'review_required', to: 'approved', effects: ['set_reviewed'] }, 200));
+  it('review_required with evidence: Approve + use PATCHes {advance:"approve_and_use"} (one click, legal transitions server side) and calls onTransition', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ hypothesisId: 'hyp_1', ok: true, from: 'review_required', to: 'active', detail: 'approved and in use' }, 200));
     const onTransition = vi.fn();
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={onTransition} />);
 
-    const approve = screen.getByRole('button', { name: 'Approve hypothesis' });
+    const approve = screen.getByRole('button', { name: 'Approve + use' });
     expect(approve).toBeEnabled();
     fireEvent.click(approve);
 
@@ -253,18 +255,16 @@ describe('<HypothesisDrawer>', () => {
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('/api/gap/hypotheses/hyp_1');
     expect(init.method).toBe('PATCH');
-    expect(JSON.parse(String(init.body))).toEqual({ action: 'approve' });
-    await waitFor(() =>
-      expect(onTransition).toHaveBeenCalledWith({ from: 'review_required', to: 'approved', effects: ['set_reviewed'] }),
-    );
+    expect(JSON.parse(String(init.body))).toEqual({ advance: 'approve_and_use' });
+    await waitFor(() => expect(onTransition).toHaveBeenCalledWith({ from: 'review_required', to: 'active', effects: [] }));
   });
 
   it('a 409 {error:"no_evidence"} renders the plain-English refusal inline', async () => {
-    fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'no_evidence' }, 409));
+    fetchMock.mockResolvedValueOnce(jsonResponse({ hypothesisId: 'hyp_1', ok: false, from: 'review_required', to: 'review_required', detail: 'approve refused: no_evidence' }, 409));
     const onTransition = vi.fn();
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={onTransition} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Approve hypothesis' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Approve + use' }));
 
     const error = await screen.findByTestId('hypothesis-action-error');
     expect(error).toHaveTextContent('Needs at least one cited fact');
@@ -272,10 +272,10 @@ describe('<HypothesisDrawer>', () => {
   });
 
   it('an unknown refusal code falls back to the raw string, never hidden', async () => {
-    fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'some_new_code' }, 409));
+    fetchMock.mockResolvedValueOnce(jsonResponse({ ok: false, detail: 'approve refused: some_new_code' }, 409));
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Approve hypothesis' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Approve + use' }));
 
     const error = await screen.findByTestId('hypothesis-action-error');
     expect(error).toHaveTextContent('some_new_code');
@@ -322,16 +322,17 @@ describe('<HypothesisDrawer>', () => {
   it('draft: the sticky decision area shows the primary action and names the reason-gated secondary', () => {
     render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={vi.fn()} />);
     const sticky = screen.getByTestId('hypothesis-sticky-decision');
-    expect(within(sticky).getByRole('button', { name: 'Ready for review' })).toBeInTheDocument();
+    expect(within(sticky).getByRole('button', { name: 'Approve + use' })).toBeInTheDocument();
+    expect(within(sticky).getByRole('button', { name: 'Approve only' })).toBeInTheDocument();
     expect(within(sticky).getByText(/Reject hypothesis/)).toBeInTheDocument();
     // Reject hypothesis needs a reason, so its actual button lives in the lower Actions section, not duplicated here.
     expect(within(sticky).queryByRole('button', { name: 'Reject hypothesis' })).toBeNull();
   });
 
-  it('review_required: the sticky decision area recommends Approve, with Needs work / Reject hypothesis as secondary', () => {
+  it('review_required: the sticky decision area recommends Approve + use, with Needs work / Reject hypothesis as secondary', () => {
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
     const sticky = screen.getByTestId('hypothesis-sticky-decision');
-    expect(within(sticky).getByRole('button', { name: 'Approve hypothesis' })).toBeInTheDocument();
+    expect(within(sticky).getByRole('button', { name: 'Approve + use' })).toBeInTheDocument();
     expect(within(sticky).getByText(/Needs work.*Reject hypothesis/)).toBeInTheDocument();
   });
 
@@ -362,7 +363,7 @@ describe('<HypothesisDrawer>', () => {
     expect(screen.queryByTestId('hypothesis-review-nav')).toBeNull();
   });
 
-  it('shows a "Hypothesis active" banner with a Go to Queue link right after Use in routing succeeds', async () => {
+  it('shows an "approved and in use" banner with a Go to Queue link right after Use in routing succeeds', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'approved', to: 'active', effects: ['set_activated'] }, 200));
     render(<HypothesisDrawer hypothesis={row({ status: 'approved' })} onClose={vi.fn()} onTransition={vi.fn()} />);
 
@@ -370,16 +371,16 @@ describe('<HypothesisDrawer>', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Use in routing' }));
 
     const banner = await screen.findByTestId('hypothesis-activated-banner');
-    expect(banner).toHaveTextContent('Hypothesis active. Run routing to generate a recommendation.');
+    expect(banner).toHaveTextContent('Approved and in use. Run routing and this person gets a recommendation.');
     const goToQueue = within(banner).getByRole('link', { name: 'Go to Queue' });
     expect(goToQueue).toHaveAttribute('href', '/gap');
   });
 
   it('does not show the activation banner for a transition that does not land on active', async () => {
-    fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'review_required', to: 'approved', effects: [] }, 200));
+    fetchMock.mockResolvedValueOnce(jsonResponse({ hypothesisId: 'hyp_1', ok: true, from: 'review_required', to: 'approved', detail: 'approved' }, 200));
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Approve hypothesis' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Approve only' }));
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
     expect(screen.queryByTestId('hypothesis-activated-banner')).toBeNull();
   });
