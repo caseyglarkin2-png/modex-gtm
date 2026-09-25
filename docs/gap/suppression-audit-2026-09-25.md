@@ -1,6 +1,6 @@
 # GAP suppression provenance audit (2026-09-25)
 
-STATUS: SHIPPED 2026-09-25 (production READ audit; 10 proven corrections applied)
+STATUS: SHIPPED 2026-09-25 (production READ audit; 10 proven corrections + 2 owner-decision corrections applied)
 <!-- verified:2026-09-25 -->
 
 ## Why this exists
@@ -83,13 +83,16 @@ still refuses on `modex_do_not_contact` and `clawd_do_not_send`.
 
 ## Casey review queue (left unchanged; provenance not provable)
 
-1. **Compliance ambiguity, 5 Frito-Lay personas (11-15).** The 2026-04-08 doc
-   `docs/reviewable-resend-candidates-2026-04-08.md` says Brian Watson, Beth
-   Mars, Bob Fanslow, David Chambers and Isaac Scott had `unsubscribed_emails`
-   rows. Those rows no longer exist and no plane shows an opt-out. Their DNC
-   flag is untouched, so email stays blocked at send. Casey decides whether
-   those were recipient unsubscribes (then they should be restored as
-   unsubscribes) or remediation suppressions.
+1. **Frito-Lay (11-15): RESOLVED 2026-09-25 by owner decision.** Casey decided
+   Brian Watson, Beth Mars, Bob Fanslow and David Chambers are good contacts.
+   Live preconditions were still enforced: **Brian Watson (11) and Beth Mars
+   (12) cleared** (only the local March-wave flag; no DSN; no opt-out on any
+   plane; receipts carry `owner_decision: Casey`; manifest
+   `docs/gap/suppression-owner-override-2026-09-25.json`). **Bob Fanslow (15)
+   and David Chambers (14) NOT cleared**: each has a Google "Address not found"
+   DSN from 2026-04-02 and a current clawd `do_not_send` reason `hard_bounce`
+   (2026-06-02), i.e. a confirmed invalid mailbox; the script refused them on
+   its own. Isaac Scott (13) untouched (outside the decision).
 2. **85 unproven March-wave bounces** (accounts: Niagara Bottling 10, Hormel 7,
    Flowers Foods 6, FedEx 5, Home Depot 4, Georgia Pacific 4, H-E-B 4,
    Hyundai 4, John Deere 4, Kenco 4, TreeHouse 4, and others; General Mills

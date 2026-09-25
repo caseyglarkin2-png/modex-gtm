@@ -143,6 +143,7 @@ describe('RULES ordering', () => {
       'no_hypothesis',
       'hyp_proposed',
       'hyp_stale',
+      'evidence_thin',
       'hyp_resolved',
       'hot_call',
       'hot_email',
@@ -239,6 +240,19 @@ describe('routePersona, one rule at a time', () => {
     i.persona.emailStatus = 'bounced';
     i.suppression = { verdict: 'unknown', legs: { clawd_contract: 'unknown' } };
     expect(decision(routePersona(i)).ruleId).toBe('suppression_unknown');
+  });
+
+  it('R12b evidence_thin: a live hypothesis resting only on an unquoted keyword hit is research, never an email (Joey, closeout)', () => {
+    const i = base();
+    i.hypothesis!.evidenceThin = true;
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('evidence_thin');
+    expect(d.action).toBe('research_required');
+    expect(d.lane).toBe('work_queue');
+    expect(d.explain.whyAction).toContain('keyword');
+    const quoted = base();
+    quoted.hypothesis!.evidenceThin = false;
+    expect(decision(routePersona(quoted)).ruleId).toBe('enroll');
   });
 
   it('R0b suppression_unknown: verdict unknown routes research_required, blocked, reason suppression_unknown', () => {

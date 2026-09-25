@@ -33,6 +33,45 @@ function clawdOk(overrides: Record<string, unknown> = {}) {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+});
+
+function clearCriticEnv() {
+  for (const k of ['CLAWD_BASE_URL', 'CLAWD_URL', 'CLAWD_CONTROL_PLANE_URL', 'MC_API_TOKEN', 'CLAWD_CONTROL_PLANE_TOKEN']) vi.stubEnv(k, '');
+}
+
+describe('makeCriticClient: env fallback to the clawd control plane (closeout 2026-09-25)', () => {
+  it('uses CLAWD_CONTROL_PLANE_URL + CLAWD_CONTROL_PLANE_TOKEN when the critic-specific names are unset (production today)', async () => {
+    clearCriticEnv();
+    vi.stubEnv('CLAWD_CONTROL_PLANE_URL', 'https://cp.example.test/');
+    vi.stubEnv('CLAWD_CONTROL_PLANE_TOKEN', 'cp-token');
+    const fetchImpl = vi.fn(async () => jsonResponse(clawdOk()));
+    const r = await makeCriticClient({ fetchImpl: fetchImpl as unknown as typeof fetch }).score(INPUT);
+    expect(r).toMatchObject({ ok: true, verdict: 'pass' });
+    const [url, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
+    expect(url).toBe('https://cp.example.test/api/critic/score');
+    expect((init.headers as Record<string, string>).Authorization).toBe('Bearer cp-token');
+  });
+
+  it('the critic-specific names still win when set', async () => {
+    clearCriticEnv();
+    vi.stubEnv('CLAWD_BASE_URL', 'https://critic.example.test');
+    vi.stubEnv('CLAWD_CONTROL_PLANE_URL', 'https://cp.example.test');
+    vi.stubEnv('MC_API_TOKEN', 'mc');
+    vi.stubEnv('CLAWD_CONTROL_PLANE_TOKEN', 'cp');
+    const fetchImpl = vi.fn(async () => jsonResponse(clawdOk()));
+    await makeCriticClient({ fetchImpl: fetchImpl as unknown as typeof fetch }).score(INPUT);
+    const [url, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
+    expect(url).toBe('https://critic.example.test/api/critic/score');
+    expect((init.headers as Record<string, string>).Authorization).toBe('Bearer mc');
+  });
+
+  it('with nothing configured it is still critic_unconfigured (fail closed to review, never pass)', async () => {
+    clearCriticEnv();
+    const fetchImpl = vi.fn();
+    expect(await makeCriticClient({ fetchImpl: fetchImpl as unknown as typeof fetch }).score(INPUT)).toEqual({ ok: false, reason: 'critic_unconfigured' });
+    expect(fetchImpl).not.toHaveBeenCalled();
+  });
 });
 
 describe('makeCriticClient: configuration', () => {

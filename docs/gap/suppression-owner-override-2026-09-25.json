@@ -1,0 +1,12 @@
+{
+  "purpose": "Owner decision (Casey, 2026-09-25): these Frito-Lay contacts are good and their stale do-not-contact flags should be removed. The April 2026 doc listing unsubscribe rows for them was reviewed by Casey. Every LIVE precondition still applies (only the local March-wave flag remains; no unsubscribe row; clawd contract keys exactly [modex_do_not_contact]). Bob Fanslow (15) and David Chambers (14) were in Casey's list but are NOT here: each has a Google 'Address not found' DSN (2026-04-02, msgs 19d4f68fc0352350 and 19d4f6479b13fbb4) and a current clawd do_not_send reason hard_bounce (2026-06-02), i.e. a confirmed invalid mailbox. Isaac Scott (13) is not here (not part of the decision).",
+  "verifiedAt": "2026-09-25",
+  "entries": [
+    { "personaId": 11, "email": "brian.watson@pepsico.com", "account": "Frito-Lay", "name": "Brian Watson", "tier": "owner",
+      "ownerDecision": "Casey", "ownerReason": "historical suppression reviewed and explicitly cleared",
+      "evidence": ["Resend bounces 2026-03-27 12:32 and 21:51 UTC (bounce_type null)", "no DSN for the address in casey@freightroll.com", "HubSpot hs_email_optout null, no hard bounce reason", "clawd contract keys exactly [modex_do_not_contact]", "no unsubscribed_emails row"] },
+    { "personaId": 12, "email": "beth.mars@pepsico.com", "account": "Frito-Lay", "name": "Beth Mars", "tier": "owner",
+      "ownerDecision": "Casey", "ownerReason": "historical suppression reviewed and explicitly cleared",
+      "evidence": ["Resend bounces 2026-03-27 12:32 and 21:51 UTC (bounce_type null)", "no DSN for the address in casey@freightroll.com", "no HubSpot contact", "clawd contract keys exactly [modex_do_not_contact]", "no unsubscribed_emails row"] }
+  ]
+}

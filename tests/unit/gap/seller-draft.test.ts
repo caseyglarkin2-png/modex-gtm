@@ -61,7 +61,12 @@ function prismaOf(d: Db) {
   return {
     routingDecision: {
       findUnique: vi.fn(async ({ where }: any) => d.decisions.find((x) => x.id === where.id) ?? null),
-      findFirst: vi.fn(async ({ where }: any) => d.decisions.find((x) => x.hypothesis_id === where.hypothesis_id && x.action === where.action) ?? null),
+      findFirst: vi.fn(async ({ where }: any) => {
+        if (where.created_at?.gt) {
+          return d.decisions.filter((x) => x.persona_id === where.persona_id && x.created_at > where.created_at.gt).sort((a, b) => b.created_at - a.created_at)[0] ?? null;
+        }
+        return d.decisions.find((x) => x.hypothesis_id === where.hypothesis_id && x.action === where.action) ?? null;
+      }),
       updateMany: vi.fn(async () => ({ count: 0 })),
       update: vi.fn(),
     },
@@ -152,6 +157,7 @@ const baseDeps = (d: Db, verdict: 'pass' | 'review_required' | 'reject' = 'pass'
   compile: fakeCompile(d, verdict),
   gmail,
   senderAddress: () => 'casey@freightroll.com',
+  gapSender: () => null,
   unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe?email=${encodeURIComponent(e)}&token=t`,
 });
 
@@ -249,6 +255,16 @@ describe('createSellerGmailDraft', () => {
     expect(d.audit.some((a) => a.kind === DRAFTED)).toBe(false);
   });
 
+  it('an email card superseded by a newer research decision for the same person refuses (Joey after R12b)', async () => {
+    const d = db();
+    d.decisions.push({ id: 'dec-joey-new', lane: 'work_queue', action: 'research_required', hypothesis_id: 'hyp-kr', persona_id: 1886, account_name: 'Kroger', rule_id: 'evidence_thin', inputs_snapshot: {}, created_at: new Date(NOW.getTime() + 60_000) });
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d, 'pass', gmail));
+    expect(r).toMatchObject({ ok: false, reason: 'decision_superseded' });
+    expect(!r.ok && r.detail).toContain('evidence_thin');
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
+  });
+
   it('rejected copy never drafts and names the failing checks', async () => {
     const d = db();
     const gmail = gmailFake();
@@ -301,6 +317,31 @@ describe('createSellerGmailDraft', () => {
   });
 });
 
+describe('GAP drafts use the casey@yardflow.ai identity end to end (closeout)', () => {
+  const YF = { serviceAccountJson: '{"client_email":"x","private_key":"y"}', userEmail: 'casey@yardflow.ai', displayName: 'Casey Larkin' };
+
+  it('hands the GAP sender to Gmail and records casey@yardflow.ai as the sender identity', async () => {
+    const d = db();
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d, 'pass', gmail), gapSender: () => YF });
+    expect(r.ok && !('checked' in r) && r.receipt.senderIdentity).toBe('casey@yardflow.ai');
+    expect((gmail.createGmailDraft.mock.calls[0] as any)[0].sender).toEqual(YF);
+  });
+
+  it('reconciles against the SAME mailbox, and refuses if the GAP mailbox changed since the draft', async () => {
+    const d = db();
+    const prisma = prismaOf(d);
+    await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), gapSender: () => YF });
+    const getDraftState = vi.fn(async () => ({ exists: true as const, messageId: 'm' }));
+    const ok = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'c', now: NOW }, { gapSender: () => YF, getDraftState });
+    expect(ok).toMatchObject({ ok: true, fate: 'drafted' });
+    expect((getDraftState.mock.calls[0] as unknown[])[1]).toEqual(YF);
+    const moved = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'c', now: NOW }, { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState });
+    expect(moved).toMatchObject({ ok: false, reason: 'sender_mailbox_mismatch' });
+    expect(getDraftState).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe('draft -> sent reconciliation', () => {
   const drafted = { recipient: 'joey.maggard@kroger.com', createdAt: NOW.toISOString() };
   const msg = (over: Partial<{ id: string; labelIds: string[]; internalDate: Date; to: string }>) => ({
@@ -327,7 +368,7 @@ describe('draft -> sent reconciliation', () => {
     const r = await reconcileDraft(
       prisma,
       { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'casey', now: new Date(NOW.getTime() + 120_000) },
-      { getDraftState: async () => ({ exists: false }), getThread: async () => [msg({})] },
+      { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState: async () => ({ exists: false }), getThread: async () => [msg({})] },
     );
     expect(r).toMatchObject({ ok: true, fate: 'sent', changed: true });
     expect(r.ok && r.sent).toMatchObject({ gmailDraftId: 'r-draft-1', gmailSentMessageId: 'm-sent-9', gmailThreadId: 't-1', engine: 'gmail_direct' });
@@ -336,7 +377,7 @@ describe('draft -> sent reconciliation', () => {
     expect(records[0].fate).toBe('sent');
     expect(prisma.routingDecision.updateMany).not.toHaveBeenCalled();
 
-    const again = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'casey', now: NOW }, { getDraftState: async () => { throw new Error('should not read'); } });
+    const again = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'casey', now: NOW }, { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState: async () => { throw new Error('should not read'); } });
     expect(again).toMatchObject({ ok: true, fate: 'sent', changed: false });
   });
 
@@ -344,7 +385,7 @@ describe('draft -> sent reconciliation', () => {
     const d = db();
     const prisma = prismaOf(d);
     await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
-    const r = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'casey', now: NOW }, { getDraftState: async () => { throw new Error('500'); } });
+    const r = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'casey', now: NOW }, { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState: async () => { throw new Error('500'); } });
     expect(r).toMatchObject({ ok: false, reason: 'gmail_unreadable' });
     expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED || a.kind === DRAFT_SENT)).toBe(false);
   });

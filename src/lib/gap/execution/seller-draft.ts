@@ -39,6 +39,8 @@ import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
 import { appendLedger, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
+import { gapGmailSender } from './gap-sender';
+import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,6 +52,7 @@ export const EMAIL_ACTIONS: ReadonlySet<string> = new Set(['enroll_gap_sequence'
 export type SellerDraftRefusal =
   | 'decision_not_found'
   | 'decision_blocked'
+  | 'decision_superseded'
   | 'not_an_email_action'
   | 'no_hypothesis'
   | 'hypothesis_not_found'
@@ -94,6 +97,8 @@ export interface SellerDraftDeps {
   compile?: typeof defaultCompile;
   gmail?: GmailAdapterDeps;
   senderAddress?: () => string;
+  /** The GAP Gmail identity (gap-sender.ts); null means the env identity. */
+  gapSender?: () => GmailSender | null;
   unsubscribeUrl?: (email: string) => string;
 }
 
@@ -142,9 +147,21 @@ export async function createSellerGmailDraft(
 
   const decision = await prisma.routingDecision.findUnique({
     where: { id: decisionId },
-    select: { id: true, lane: true, action: true, hypothesis_id: true, persona_id: true, account_name: true },
+    select: { id: true, lane: true, action: true, hypothesis_id: true, persona_id: true, account_name: true, created_at: true },
   });
   if (!decision) return { ok: false, reason: 'decision_not_found' };
+  // Routing moves on: an older "email" card for this person must not draft
+  // once a newer run said something else (research, block, hold).
+  const newer = decision.persona_id != null
+    ? await prisma.routingDecision.findFirst({
+        where: { persona_id: decision.persona_id, account_name: decision.account_name, created_at: { gt: decision.created_at } },
+        orderBy: { created_at: 'desc' },
+        select: { id: true, action: true, rule_id: true },
+      })
+    : null;
+  if (newer && !EMAIL_ACTIONS.has(newer.action)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_superseded', detail: `newer decision ${newer.id} is ${newer.action} (${newer.rule_id})` });
+  }
   if (decision.lane === 'blocked' || decision.action === 'do_not_contact') return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_blocked' });
   if (!EMAIL_ACTIONS.has(decision.action)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'not_an_email_action', detail: decision.action });
   if (!decision.hypothesis_id) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_hypothesis' });
@@ -252,7 +269,10 @@ export async function createSellerGmailDraft(
     return refuse(prisma, actor, decisionId, { ok: false, reason: 'unsubscribe_link_unavailable', detail: err instanceof Error ? err.message : String(err) });
   }
 
-  const senderIdentity = (deps.senderAddress ?? gmailSenderAddress)();
+  // The GAP mailbox (casey@yardflow.ai) when configured: it sets the token, the
+  // Gmail API mailbox and the MIME From together. Else the env identity.
+  const gapSender = (deps.gapSender ?? gapGmailSender)();
+  const senderIdentity = gapSender?.userEmail ?? (deps.senderAddress ?? gmailSenderAddress)();
   const intent: ExecutionIntent = {
     engine: 'gmail_draft',
     personaId: persona.id,
@@ -275,6 +295,7 @@ export async function createSellerGmailDraft(
       html: draftHtml(pack.rendered.queued.body, unsubscribeUrl),
       text: draftText(pack.rendered.queued.body, unsubscribeUrl),
       headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
+      ...(gapSender ? { sender: gapSender } : {}),
     },
     deps.gmail ?? {},
   );

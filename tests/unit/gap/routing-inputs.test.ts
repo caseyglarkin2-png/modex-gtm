@@ -412,6 +412,7 @@ describe('assembleRoutingInputs full fixture', () => {
       family: 'hidden_capacity',
       confidence: 60,
       evidenceFresh: true,
+      evidenceThin: false,
       hasNewerVersion: false,
       expiresAt: daysAhead(30),
       resumeAt: new Date('2026-10-01T00:00:00.000Z'),
@@ -725,6 +726,19 @@ describe('comms', () => {
 // ---------------------------------------------------------------------------
 // Suppression at the assembler seam
 // ---------------------------------------------------------------------------
+
+describe('hypothesis evidence depth (closeout)', () => {
+  it('evidenceThin is true only when every linked signal is an auto-ingested trigger with no quoted text or summary', async () => {
+    const { buildHypothesisForTest } = await import('@/lib/gap/routing/inputs');
+    const now = new Date('2026-09-25T00:00:00Z');
+    const h = (signals: any[]) => ({ id: 'h', status: 'active', problem_family: 'hidden_capacity', confidence: 42, observation: 'o', problem_hypothesis: 'p', metadata: null, signals: signals.map((signal) => ({ signal })) });
+    const keyword = { id: 's1', source_kind: 'pounce_trigger', title: 'KR 10-Q (2026-06-26) mentions: capital expenditure', summary: '', evidence_url: 'https://sec.gov/x', evidence_text: '', freshness_expires_at: null };
+    expect(buildHypothesisForTest(h([keyword]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(h([{ ...keyword, evidence_text: 'Capital investments totaled $1.5 billion' }]) as any, now)!.evidenceThin).toBe(false);
+    expect(buildHypothesisForTest(h([keyword, { ...keyword, id: 's2', source_kind: 'operator_knowledge' }]) as any, now)!.evidenceThin).toBe(false);
+    expect(buildHypothesisForTest(h([]) as any, now)!.evidenceThin).toBe(false);
+  });
+});
 
 describe('suppression input', () => {
   it('a reader answering unknown yields verdict unknown', async () => {

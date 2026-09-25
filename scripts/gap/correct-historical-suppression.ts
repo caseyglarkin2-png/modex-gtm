@@ -4,8 +4,12 @@
  *   npx tsx scripts/gap/correct-historical-suppression.ts                 # dry run (default)
  *   npx tsx scripts/gap/correct-historical-suppression.ts --apply         # write
  *   npx tsx scripts/gap/correct-historical-suppression.ts --revert        # undo exactly what --apply did
+ *   ... --manifest docs/gap/<other>.json                                   # a different evidence manifest
  *
- * Reads the evidence manifest docs/gap/suppression-correction-2026-09-25.json.
+ * Reads the evidence manifest docs/gap/suppression-correction-2026-09-25.json
+ * (or --manifest). An entry may carry `ownerDecision` + `ownerReason`: the
+ * owner resolved a historical ambiguity; every LIVE precondition below still
+ * has to hold, and the receipt records the decision.
  * NOT a bulk unsuppress: only the persona ids named there, each with its own
  * evidence (see docs/gap/suppression-audit-2026-09-25.md for how each was
  * proven). Every precondition is re-verified LIVE before any write, and a
@@ -34,7 +38,8 @@ delete process.env.HUBSPOT_ACCESS_TOKEN;
 import { readFileSync } from 'node:fs';
 import { PrismaClient } from '@prisma/client';
 
-const MANIFEST = 'docs/gap/suppression-correction-2026-09-25.json';
+const manifestArg = process.argv.indexOf('--manifest');
+const MANIFEST = manifestArg > 0 && process.argv[manifestArg + 1] ? process.argv[manifestArg + 1] : 'docs/gap/suppression-correction-2026-09-25.json';
 const CLAWD = process.env.CLAWD_CONTROL_PLANE_URL?.trim() || 'https://clawd-control-plane-production.up.railway.app';
 const TOKEN = process.env.CLAWD_CONTROL_PLANE_TOKEN?.trim() || process.env.MC_API_TOKEN?.trim() || '';
 const ACTOR = 'gap-final-pass:correct-historical-suppression';
@@ -44,8 +49,11 @@ interface Entry {
   email: string;
   account: string;
   name: string;
-  tier: 'A' | 'B';
+  tier: 'A' | 'B' | 'owner';
   evidence: string[];
+  /** Owner resolution of a historical ambiguity (e.g. 'Casey'); preconditions still apply. */
+  ownerDecision?: string;
+  ownerReason?: string;
 }
 
 interface Precheck {
@@ -137,6 +145,7 @@ async function apply(entries: Entry[]) {
             class: 'soft_deliverability',
             tier: e.tier,
             evidence: e.evidence,
+            ...(e.ownerDecision ? { owner_decision: e.ownerDecision, reason: e.ownerReason ?? null } : {}),
             precheck: 'contract keys exactly [modex_do_not_contact]; no unsubscribed_emails row; row state matched',
             manifest: MANIFEST,
             correctedAt: now,
@@ -151,7 +160,7 @@ async function apply(entries: Entry[]) {
 
 async function revert() {
   const receipts = (await prisma.gapAuditEvent.findMany({
-    where: { kind: 'suppression.corrected', actor: ACTOR },
+    where: { kind: 'suppression.corrected', actor: ACTOR, payload: { path: ['manifest'], equals: MANIFEST } },
     orderBy: { created_at: 'asc' },
   })) as Array<{ id: string; subject_id: string; payload: { email: string } }>;
   for (const r of receipts) {

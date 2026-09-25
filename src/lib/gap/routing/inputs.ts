@@ -162,6 +162,13 @@ interface SignalRow {
   evidence_url: string | null;
   evidence_text: string | null;
   freshness_expires_at: Date | null;
+  source_kind?: string | null;
+  summary?: string | null;
+}
+
+/** An auto-ingested keyword trigger that quotes nothing (see RoutingHypothesisInput.evidenceThin). */
+function isUnquotedTrigger(s: SignalRow): boolean {
+  return s.source_kind === 'pounce_trigger' && !(s.evidence_text ?? '').trim() && !(s.summary ?? '').trim();
 }
 
 interface HypothesisRow {
@@ -432,6 +439,7 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     family: isProblemFamily(h.problem_family) ? h.problem_family : 'unmapped',
     confidence: h.confidence,
     evidenceFresh,
+    evidenceThin: signals.length > 0 && signals.every(isUnquotedTrigger),
     hasNewerVersion,
     expiresAt: h.expires_at ?? null,
     resumeAt: asDate(m.resumeAt),
@@ -444,6 +452,11 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     evidenceIds: evidenced.map((s) => s.id),
     signalIds: signals.map((s) => s.id),
   };
+}
+
+/** Test seam for the hypothesis section builder. */
+export function buildHypothesisForTest(h: HypothesisRow | null, now: Date): RoutingHypothesisInput | null {
+  return buildHypothesis(h, now, false);
 }
 
 function buildLastDisposition(d: DispositionRow | null): RoutingLastDisposition | null {

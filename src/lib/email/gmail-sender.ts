@@ -30,6 +30,17 @@ export function gmailSenderAddress(): string {
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
 import type { InlineImage } from './inline-image';
+import { mintDelegatedAccessToken } from './google-delegated';
+
+/**
+ * A per-message Gmail identity. Either a user's OAuth refresh token (minted
+ * against the app's GOOGLE_CLIENT_ID/SECRET), or a Workspace domain-wide
+ * delegation service account acting as `userEmail` (google-delegated.ts).
+ * `displayName` only shapes the From header; the address is always userEmail.
+ */
+export type GmailSender =
+  | { refreshToken: string; userEmail: string; displayName?: string }
+  | { serviceAccountJson: string; userEmail: string; displayName?: string };
 
 export interface GmailSendPayload {
   to: string;
@@ -48,7 +59,7 @@ export interface GmailSendPayload {
   /** Per-identity sender. When set, the message is sent using this user's
    *  refresh token and From/{userEmail}/messages URL instead of the Casey env
    *  token. When absent, behavior is exactly as before (env/Casey). */
-  sender?: { refreshToken: string; userEmail: string };
+  sender?: GmailSender;
   /** Why this message is being sent. Absent means PROSPECT_OUTREACH, so a
    *  caller that does not declare is GATED by the canonical kill-switch rather
    *  than exempted. Only OPERATOR_ALERT is exempt. See ./autonomy-gate.ts. */
@@ -113,7 +124,9 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
   // From-line: when a per-identity sender is set, send as that user (bare
   // address, no display name); otherwise keep the env/Casey From exactly.
   const fromHeader = payload.sender
-    ? `From: ${sanitizeHeader(payload.sender.userEmail)}`
+    ? payload.sender.displayName
+      ? `From: ${sanitizeHeader(payload.sender.displayName)} <${sanitizeHeader(payload.sender.userEmail)}>`
+      : `From: ${sanitizeHeader(payload.sender.userEmail)}`
     : `From: ${sanitizeHeader(FROM_NAME)} <${sanitizeHeader(FROM_EMAIL)}>`;
 
   // Per-message envelope headers (From/To/Subject/…), shared by both layouts.
@@ -190,6 +203,12 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
   ];
 
   return `${headers.join('\r\n')}\r\n\r\n${parts.join('\r\n')}`;
+}
+
+/** An access token for this sender: delegated service account, per-user refresh token, or the env identity. */
+export async function accessTokenForSender(sender?: GmailSender): Promise<string> {
+  if (sender && 'serviceAccountJson' in sender) return mintDelegatedAccessToken(sender.serviceAccountJson, sender.userEmail);
+  return getAccessToken(sender?.refreshToken);
 }
 
 async function getAccessToken(overrideRefreshToken?: string): Promise<string> {
@@ -274,7 +293,7 @@ export async function sendViaGmail(
   // the sender's refresh token and address the mailbox URL to the sender.
   // Otherwise send via the env/Casey identity exactly as before.
   const userEmail = payload.sender?.userEmail ?? getGmailConfig().userEmail;
-  const accessToken = await getAccessToken(payload.sender?.refreshToken);
+  const accessToken = await accessTokenForSender(payload.sender);
   const raw = base64Url(buildMimeMessage(payload));
 
   const res = await fetch(
@@ -327,7 +346,7 @@ export async function createGmailDraft(
   await assertSuppressionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose);
 
   const userEmail = payload.sender?.userEmail ?? getGmailConfig().userEmail;
-  const accessToken = await getAccessToken(payload.sender?.refreshToken);
+  const accessToken = await accessTokenForSender(payload.sender);
   const raw = base64Url(buildMimeMessage(payload));
 
   const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/drafts`, {
@@ -356,14 +375,14 @@ export async function createGmailDraft(
 export async function sendGmailDraft(
   draftId: string,
   recipients: { to: string; cc?: string[]; bcc?: string },
-  opts: { userEmail?: string; sender?: { refreshToken: string; userEmail: string }; purpose?: SendPurpose } = {},
+  opts: { userEmail?: string; sender?: GmailSender; purpose?: SendPurpose } = {},
 ): Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }> {
   await assertAutonomyPermitsSend(opts.purpose);
   await assertSuppressionPermitsSend(recipients, opts.purpose);
   await assertUnderDailyCap();
 
   const userEmail = opts.sender?.userEmail ?? opts.userEmail ?? getGmailConfig().userEmail;
-  const accessToken = await getAccessToken(opts.sender?.refreshToken);
+  const accessToken = await accessTokenForSender(opts.sender);
 
   const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/drafts/send`, {
     method: 'POST',

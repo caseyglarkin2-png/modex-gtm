@@ -28,6 +28,8 @@ import {
   type GmailDraftState,
   type GmailThreadMessageMeta,
 } from '@/lib/email/gmail-inbox';
+import { gmailSenderAddress, type GmailSender } from '@/lib/email/gmail-sender';
+import { gapGmailSender } from './gap-sender';
 import {
   appendLedger,
   DRAFT_DISCARDED,
@@ -72,13 +74,15 @@ export function observeDraft(
 }
 
 export interface ReconcileDraftDeps {
-  getDraftState?: (draftId: string) => Promise<GmailDraftState>;
-  getThread?: (threadId: string) => Promise<GmailThreadMessageMeta[]>;
+  getDraftState?: (draftId: string, sender?: GmailSender) => Promise<GmailDraftState>;
+  getThread?: (threadId: string, sender?: GmailSender) => Promise<GmailThreadMessageMeta[]>;
+  gapSender?: () => GmailSender | null;
+  envMailbox?: () => string;
 }
 
 export type ReconcileDraftResult =
   | { ok: true; gmailDraftId: string; fate: DraftFate; changed: boolean; sent?: DraftSentPayload }
-  | { ok: false; reason: 'draft_not_found' | 'gmail_unreadable'; detail?: string };
+  | { ok: false; reason: 'draft_not_found' | 'gmail_unreadable' | 'sender_mailbox_mismatch'; detail?: string };
 
 export async function reconcileDraft(
   prisma: PrismaLike,
@@ -91,10 +95,19 @@ export async function reconcileDraft(
     return { ok: true, gmailDraftId: input.gmailDraftId, fate: record.fate, changed: false, ...(record.sent ? { sent: record.sent } : {}) };
   }
 
+  // Read the draft back from the SAME mailbox it was created in. If the GAP
+  // mailbox changed since, refuse rather than read the wrong inbox.
+  const gapSender = (deps.gapSender ?? gapGmailSender)();
+  const mailbox = gapSender?.userEmail ?? (deps.envMailbox ?? gmailSenderAddress)();
+  if (record.drafted.senderIdentity.toLowerCase() !== mailbox.toLowerCase()) {
+    return { ok: false, reason: 'sender_mailbox_mismatch', detail: `draft was created in ${record.drafted.senderIdentity}, reading ${mailbox}` };
+  }
+  const sender = gapSender ?? undefined;
+
   let obs: DraftObservation;
   try {
-    const state = await (deps.getDraftState ?? defaultGetDraftState)(input.gmailDraftId);
-    const thread = state.exists || !record.drafted.gmailThreadId ? [] : await (deps.getThread ?? defaultGetThread)(record.drafted.gmailThreadId);
+    const state = await (deps.getDraftState ?? defaultGetDraftState)(input.gmailDraftId, sender);
+    const thread = state.exists || !record.drafted.gmailThreadId ? [] : await (deps.getThread ?? defaultGetThread)(record.drafted.gmailThreadId, sender);
     obs = observeDraft(record.drafted, state, thread);
   } catch (err) {
     // Unreadable is not "discarded": write nothing, say so.

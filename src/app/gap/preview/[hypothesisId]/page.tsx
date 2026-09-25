@@ -43,6 +43,7 @@ import { loadActionPack } from '@/lib/gap/execution/action-pack';
 import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
 import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
+import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
@@ -50,7 +51,8 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { CopyButton } from '@/components/gap/copy-button';
 import { FactBlock, HypothesisBlock } from '@/components/gap/fact-hypothesis-blocks';
-import { HypothesisStatusBadge, asStringList } from '@/components/gap/hypothesis-drawer';
+import { HypothesisStatusBadge } from '@/components/gap/hypothesis-drawer';
+import { asStringList } from '@/lib/gap/ui/format';
 import {
   CompileReport,
   allStepsCleared,
@@ -162,6 +164,25 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
           : hypothesis.status !== 'active'
             ? 'The hypothesis is not active.'
             : null;
+  // A newer routing decision for this person that is not an email supersedes this card (the service refuses too).
+  const newerDecision = decision && decision.persona_id != null
+    ? await prisma.routingDecision.findFirst({
+        where: { persona_id: decision.persona_id, account_name: decision.account_name, created_at: { gt: decision.created_at } },
+        orderBy: { created_at: 'desc' },
+        select: { id: true, action: true, rule_id: true },
+      })
+    : null;
+  const superseded = newerDecision && !EMAIL_ACTIONS.has(newerDecision.action)
+    ? `A newer routing run changed this card to ${newerDecision.action.replace(/_/g, ' ')} (${newerDecision.rule_id.replace(/_/g, ' ')}). No draft from this older card.`
+    : null;
+  const pendingApproval =
+    pack.compile && pack.compile.verdict === 'review_required' && !pack.compile.approved && pack.compile.approvalRequestId && pack.compile.approvalStatus === 'pending'
+      ? {
+          id: pack.compile.approvalRequestId,
+          reason:
+            ((await prisma.sendApprovalRequest.findUnique({ where: { id: pack.compile.approvalRequestId }, select: { comment: true } })) as { comment: string | null } | null)?.comment ?? '',
+        }
+      : null;
   const drafts: DraftRow[] = decision
     ? (await listDraftRecords(prisma, decision.id)).map((d) => ({
         gmailDraftId: d.drafted.gmailDraftId,
@@ -338,9 +359,10 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         <SellerDraftPanel
           decisionId={decision.id}
           emailReady={emailReady}
-          senderIdentity={gmailSenderAddress()}
+          senderIdentity={gapGmailSender()?.userEmail ?? gmailSenderAddress()}
           drafts={drafts}
-          ineligibleReason={draftIneligible}
+          ineligibleReason={superseded ?? draftIneligible}
+          pendingApproval={pendingApproval}
         />
       ) : null}
 

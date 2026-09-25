@@ -3,6 +3,7 @@
  * Used by /api/cron/check-inbox to create Notifications and update email status.
  */
 import * as Sentry from '@sentry/nextjs';
+import { accessTokenForSender, type GmailSender } from './gmail-sender';
 
 const GMAIL_API = 'https://gmail.googleapis.com/gmail/v1';
 
@@ -436,16 +437,17 @@ async function getOrCreateLabel(
 // ---------------------------------------------------------------------------
 // GAP draft -> sent reconciliation reads (final pass, 2026-09-25). Read-only:
 // drafts.get and threads.get (metadata). Nothing here creates, sends, labels
-// or deletes. The same env identity and token as every read above.
+// or deletes. An explicit `sender` reads THAT mailbox (the GAP draft mailbox);
+// without one, the env identity, as every read above.
 // ---------------------------------------------------------------------------
 
 export type GmailDraftState = { exists: true; messageId: string | null } | { exists: false };
 
 /** Does this draft still exist? 404 means Gmail no longer has it (sent or deleted); any other failure throws. */
-export async function getGmailDraftState(draftId: string): Promise<GmailDraftState> {
-  const config = getGmailConfig();
-  const accessToken = await getAccessToken();
-  const url = `${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/drafts/${encodeURIComponent(draftId)}?format=minimal`;
+export async function getGmailDraftState(draftId: string, sender?: GmailSender): Promise<GmailDraftState> {
+  const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/drafts/${encodeURIComponent(draftId)}?format=minimal`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
   if (res.status === 404) return { exists: false };
   if (!res.ok) throw new Error(`Gmail drafts.get failed (${res.status})`);
@@ -462,10 +464,10 @@ export interface GmailThreadMessageMeta {
 }
 
 /** Message metadata for one thread (To/From/labels/date). A missing thread is an empty list. */
-export async function getGmailThreadMessages(threadId: string): Promise<GmailThreadMessageMeta[]> {
-  const config = getGmailConfig();
-  const accessToken = await getAccessToken();
-  const url = `${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From`;
+export async function getGmailThreadMessages(threadId: string, sender?: GmailSender): Promise<GmailThreadMessageMeta[]> {
+  const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
