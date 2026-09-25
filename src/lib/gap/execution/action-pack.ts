@@ -105,6 +105,10 @@ export interface ActionPack {
   compile: PackCompile | null;
   /** Compiler-cleared for this exact copy. */
   emailReady: boolean;
+  /** The step rendered. */
+  stepIndex: number;
+  /** Citations in the copy that are not this hypothesis's evidence (template fixtures). */
+  unresolvedCitations: string[];
 }
 
 const PERSONA_SELECT = {
@@ -192,10 +196,10 @@ export function contentHashOf(copy: { subject: string; body: string }): string {
 /** The newest compile row that judged exactly this marked step-0 copy. */
 export async function findCompileForCopy(
   prisma: PrismaLike,
-  args: { hypothesisId: string; versionId: string; marked: { subject: string; body: string } },
+  args: { hypothesisId: string; versionId: string; marked: { subject: string; body: string }; stepIndex?: number },
 ): Promise<PackCompile | null> {
   const rows: Array<{ id: string; verdict: string; created_at: Date; inputs_snapshot: unknown }> = await prisma.gapCompile.findMany({
-    where: { hypothesis_id: args.hypothesisId, sequence_version_id: args.versionId, step_index: 0 },
+    where: { hypothesis_id: args.hypothesisId, sequence_version_id: args.versionId, step_index: args.stepIndex ?? 0 },
     orderBy: { created_at: 'desc' },
     take: 25,
     select: { id: true, verdict: true, created_at: true, inputs_snapshot: true },
@@ -224,6 +228,8 @@ export interface LoadActionPackArgs {
   hypothesisId: string;
   personaId?: number | null;
   decisionId?: string | null;
+  /** Which sequence step to render (default 0; a due follow-up passes its step). */
+  stepIndex?: number;
 }
 
 export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArgs): Promise<ActionPack | null> {
@@ -274,7 +280,8 @@ export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArg
   const parsed = version ? parseSteps(version.steps) : null;
   const steps = parsed && parsed.ok ? parsed.steps.steps : [];
 
-  const step0 = steps[0];
+  const stepIndex = Math.max(0, args.stepIndex ?? 0);
+  const step0 = steps[stepIndex];
   const rendered =
     persona && step0?.templates?.subjectTemplate && step0.templates.bodyTemplate
       ? renderStepCopy(
@@ -285,8 +292,20 @@ export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArg
 
   const compile =
     rendered && version && rendered.unrendered === null
-      ? await findCompileForCopy(prisma, { hypothesisId: hypothesis.id, versionId: version.id, marked: rendered.marked })
+      ? await findCompileForCopy(prisma, { hypothesisId: hypothesis.id, versionId: version.id, marked: rendered.marked, stepIndex })
       : null;
+
+  // Citations the copy makes that are NOT this hypothesis's linked signals
+  // (a seed template's fixture evidence, e.g. "[[SRC:hc_ev_2]]" about
+  // "Fontana"): the rendered text would state someone else's facts as this
+  // account's. Surfaced so the page never offers that copy as usable.
+  const linked = new Set<string>(
+    Array.isArray(hypothesis.signals) ? hypothesis.signals.map((l: { signal_id?: string; signal?: { id?: string } }) => l.signal?.id ?? l.signal_id ?? '').filter(Boolean) : [],
+  );
+  const unresolvedCitations = rendered
+    ? [...`${rendered.marked.subject}
+${rendered.marked.body}`.matchAll(/\[\[SRC:([A-Za-z0-9_-]+)\]\]/g)].map((m) => m[1]).filter((id) => !linked.has(id))
+    : [];
 
   return {
     hypothesis,
@@ -301,6 +320,8 @@ export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArg
     rendered,
     contentHash: rendered ? contentHashOf(rendered.queued) : null,
     compile,
-    emailReady: rendered !== null && rendered.unrendered === null && compileCleared(compile),
+    emailReady: rendered !== null && rendered.unrendered === null && unresolvedCitations.length === 0 && compileCleared(compile),
+    stepIndex,
+    unresolvedCitations,
   };
 }

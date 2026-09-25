@@ -139,6 +139,13 @@ const ONE_HUMAN_REPLY_CALLS = [
   'systemConfig.upsert',
 ];
 
+/**
+ * With GAP_OS_ENABLED the cron ALSO runs the passive draft -> sent
+ * reconciliation (last mile): one ledger read after the inbox's own writes.
+ * The inbox's sequence above is unchanged.
+ */
+const ONE_HUMAN_REPLY_CALLS_GAP_ON = [...ONE_HUMAN_REPLY_CALLS, 'gapAuditEvent.findMany'];
+
 const savedEnv = { CRON_SECRET: process.env.CRON_SECRET, GAP_OS_ENABLED: process.env.GAP_OS_ENABLED };
 beforeEach(() => {
   process.env.CRON_SECRET = SECRET;
@@ -210,7 +217,7 @@ describe('check-inbox: flag on', () => {
     expect(res.status).toBe(200);
 
     // The route's own prisma sequence is unchanged; ingest adds calls of its own only inside ingest.ts.
-    expect(calls).toEqual(ONE_HUMAN_REPLY_CALLS);
+    expect(calls).toEqual(ONE_HUMAN_REPLY_CALLS_GAP_ON);
 
     expect(mockedIngest).toHaveBeenCalledTimes(1);
     const [, arg] = mockedIngest.mock.calls[0];
@@ -260,7 +267,7 @@ describe('check-inbox: flag on', () => {
     expect(body.notifications_created).toBe(1);
     expect(body.gap_reply_ingest).toEqual({ paused: 0, errors: ['gm-msg-1: enrollment table on fire'] });
     // Everything after the ingest point still ran.
-    expect(calls).toEqual(ONE_HUMAN_REPLY_CALLS);
+    expect(calls).toEqual(ONE_HUMAN_REPLY_CALLS_GAP_ON);
     expect(mockedMarkAsProcessed).toHaveBeenCalledWith('gm-msg-1');
     const stats = (mockedCronSuccess.mock.calls[0] as any)[1].stats;
     expect(stats.gapReplyIngest).toEqual({ paused: 0, errors: ['gm-msg-1: enrollment table on fire'] });

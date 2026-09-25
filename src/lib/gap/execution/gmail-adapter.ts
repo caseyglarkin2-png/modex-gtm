@@ -64,7 +64,11 @@ function toPayload(intent: ExecutionIntent, input: GmailAdapterInput): GmailSend
   if (input.headers !== undefined) payload.headers = { ...input.headers };
   if (intent.threadContext) {
     payload.threadId = intent.threadContext.threadId;
-    const headers: Record<string, string> = { ...(payload.headers ?? {}), Subject: intent.threadContext.subject };
+    // The thread subject IS the message subject. buildMimeMessage already
+    // writes Subject from payload.subject; adding it again as a custom header
+    // produced two Subject lines on every threaded draft.
+    payload.subject = intent.threadContext.subject;
+    const headers: Record<string, string> = { ...(payload.headers ?? {}) };
     if (intent.threadContext.inReplyTo) headers['In-Reply-To'] = intent.threadContext.inReplyTo;
     if (intent.threadContext.references?.length) headers.References = intent.threadContext.references.join(' ');
     payload.headers = headers;

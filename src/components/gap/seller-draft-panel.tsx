@@ -38,6 +38,8 @@ export interface SellerDraftPanelProps {
   ineligibleReason: string | null;
   /** The pending SendApprovalRequest for exactly this copy, if the compiler asked for review. */
   pendingApproval?: { id: string; reason: string } | null;
+  /** Which touch this panel drafts (0 = first email). */
+  stepIndex?: number;
 }
 
 type Outcome =
@@ -61,7 +63,7 @@ function when(iso: string): string {
   return Number.isNaN(d.getTime()) ? iso : d.toLocaleString();
 }
 
-export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, drafts, ineligibleReason, pendingApproval = null }: SellerDraftPanelProps) {
+export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, drafts, ineligibleReason, pendingApproval = null, stepIndex = 0 }: SellerDraftPanelProps) {
   const router = useRouter();
   const [busy, setBusy] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
@@ -76,7 +78,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
       const res = await fetch(base, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(checkOnly ? { checkOnly: true } : {}),
+        body: JSON.stringify({ ...(checkOnly ? { checkOnly: true } : {}), ...(stepIndex > 0 ? { stepIndex } : {}) }),
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- untyped route JSON, read field by field
       const data = (await res.json().catch(() => ({}))) as Record<string, any>;
@@ -155,14 +157,14 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
     <section data-testid="seller-draft-panel" className="space-y-3 rounded-md border border-[var(--border)] p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Gmail draft</p>
-        <p className="text-[11px] text-[var(--muted-foreground)]">Creates a draft only. You send it from Gmail.</p>
+        <p className="text-[11px] text-[var(--muted-foreground)]">From {senderIdentity}. Creates a draft only. You send it from Gmail.</p>
       </div>
 
       {ineligibleReason ? (
         <p data-testid="draft-ineligible" className="text-xs text-[var(--muted-foreground)]">{ineligibleReason}</p>
       ) : emailReady ? (
         <Button type="button" size="sm" disabled={busy !== null} onClick={() => post(false)}>
-          {busy === 'draft' ? 'Creating draft...' : 'Create Gmail draft'}
+          {busy === 'draft' ? 'Creating draft...' : stepIndex > 0 ? `Create Gmail draft (touch ${stepIndex + 1})` : 'Create Gmail draft'}
         </Button>
       ) : (
         <div className="space-y-1">

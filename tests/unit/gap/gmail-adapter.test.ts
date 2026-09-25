@@ -69,7 +69,8 @@ describe('gmailDirectAdapter', () => {
 
     const payload = mockedSendViaGmail.mock.calls[0][0];
     expect(payload.threadId).toBe('t1');
-    expect(payload.headers).toEqual({ Subject: 'Re: Hi', 'In-Reply-To': '<b@x>', References: '<a@x> <b@x>' });
+    expect(payload.headers).toEqual({ 'In-Reply-To': '<b@x>', References: '<a@x> <b@x>' });
+    expect(payload.subject).toBe('Re: Hi');
   });
 });
 

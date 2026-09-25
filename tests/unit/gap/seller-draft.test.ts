@@ -159,6 +159,7 @@ const baseDeps = (d: Db, verdict: 'pass' | 'review_required' | 'reject' = 'pass'
   senderAddress: () => 'casey@freightroll.com',
   gapSender: () => null,
   signature: async () => null,
+  nextTouch: async () => ({ state: 'not_started' as const }),
   unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe?email=${encodeURIComponent(e)}&token=t`,
 });
 
@@ -365,6 +366,73 @@ describe('signature (verified 2026-09-25: Gmail does NOT add the signature to AP
     const p = (gmail.createGmailDraft.mock.calls[0] as any)[0];
     expect(p.text).toContain('Casey Larkin, YardFlow by FreightRoll');
     expect(p.html).not.toContain('gmail_signature');
+  });
+});
+
+describe('follow-up touches (multi-touch manual loop)', () => {
+  const sentTouch = { stepIndex: 0, sentAt: '2026-09-24T15:00:00.000Z', subject: 'Doors versus spots', gmailSentMessageId: 'm0', gmailThreadId: 't1' };
+  const due = { state: 'due' as const, stepIndex: 1, dueAt: '2026-09-30T15:00:00.000Z', sent: [sentTouch], threadFrom: sentTouch, pendingDraftId: null };
+  function cleanStep1(d: Db) {
+    const steps = JSON.parse(JSON.stringify(HC.steps));
+    steps.steps[1].templates.bodyTemplate = 'Hi {{first_name}},\nFollowing up on the question about empty doors.\n\nMy guess is the lot, not the doors, sets the pace.\n\nWorth a short scorecard?\n\nCasey Larkin, YardFlow by FreightRoll';
+    d.versions[0].steps = steps;
+  }
+
+  it('a DUE touch 2 drafts in the SAME Gmail thread with In-Reply-To from Gmail truth, and records step + parent message', async () => {
+    const d = db();
+    cleanStep1(d);
+    const gmail = gmailFake();
+    const getMessageHeaders = vi.fn(async () => ({ messageIdHeader: '<abc@mail.gmail.com>', subject: 'Doors versus spots' }));
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW, stepIndex: 1 }, { ...baseDeps(d, 'pass', gmail), nextTouch: async () => due, getMessageHeaders });
+    expect(r.ok && !('checked' in r) && r.receipt).toMatchObject({ stepIndex: 1, inReplyToGmailMessageId: 'm0', subject: 'Re: Doors versus spots' });
+    const p = (gmail.createGmailDraft.mock.calls[0] as any)[0];
+    expect(p.threadId).toBe('t1');
+    expect(p.subject).toBe('Re: Doors versus spots');
+    expect(p.headers).toMatchObject({ 'In-Reply-To': '<abc@mail.gmail.com>', References: '<abc@mail.gmail.com>' });
+    expect(p.headers.Subject).toBeUndefined();
+    expect(getMessageHeaders).toHaveBeenCalledWith('m0', undefined);
+  });
+
+  it('no thread id on record: a fresh message with the step subject, never a guessed thread', async () => {
+    const d = db();
+    cleanStep1(d);
+    const gmail = gmailFake();
+    const noThread = { ...due, threadFrom: { ...sentTouch, gmailThreadId: null } };
+    await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW, stepIndex: 1 }, { ...baseDeps(d, 'pass', gmail), nextTouch: async () => noThread });
+    const p = (gmail.createGmailDraft.mock.calls[0] as any)[0];
+    expect(p.threadId).toBeUndefined();
+    expect(p.subject).toBe(HC.steps.steps[1].templates!.subjectTemplate);
+  });
+
+  it.each([
+    [{ state: 'waiting', stepIndex: 1, dueAt: '2026-09-30T15:00:00.000Z', sent: [], threadFrom: {}, pendingDraftId: null }, 'touch_not_due'],
+    [{ state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sent: [] }, 'sequence_stopped'],
+    [{ state: 'stopped', reason: 'do_not_contact', detail: 'DNC', sent: [] }, 'sequence_stopped'],
+    [{ state: 'unknown', detail: 'thread unreadable', sent: [] }, 'reply_truth_unavailable'],
+  ])('touch 2 when next-touch is %j is refused (%s) with no Gmail call', async (touch, reason) => {
+    const d = db();
+    cleanStep1(d);
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW, stepIndex: 1 }, { ...baseDeps(d, 'pass', gmail), nextTouch: async () => touch as any });
+    expect(r).toMatchObject({ ok: false, reason });
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
+  });
+
+  it('a second first touch is refused once touch 1 was sent', async () => {
+    const d = db();
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW }, { ...baseDeps(d, 'pass', gmail), nextTouch: async () => due });
+    expect(r).toMatchObject({ ok: false, reason: 'first_touch_already_sent' });
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
+  });
+
+  it("the seed family's touch 2 cites fixture evidence about another company ('Fontana'): refused, never drafted", async () => {
+    const d = db();
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW, stepIndex: 1 }, { ...baseDeps(d, 'pass', gmail), nextTouch: async () => due });
+    expect(r).toMatchObject({ ok: false, reason: 'template_citations_unresolved' });
+    expect(!r.ok && r.detail).toContain('hc_ev_2');
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
   });
 });
 

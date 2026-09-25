@@ -630,7 +630,8 @@ function emptyComms(): RoutingCommsInput {
   };
 }
 
-async function readComms(prisma: PrismaLike, email: string): Promise<RoutingCommsInput> {
+/** Exported for the GAP next-touch evaluator (same comms truth routing uses). */
+export async function readComms(prisma: PrismaLike, email: string): Promise<RoutingCommsInput> {
   const enrollment = await read('sequence_enrollment', () =>
     prisma.sequenceEnrollment.findFirst({
       where: { to_email: email, status: { in: [...IN_FLIGHT_ENROLLMENT_STATUSES] } },

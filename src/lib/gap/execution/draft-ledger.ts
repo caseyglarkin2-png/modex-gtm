@@ -46,6 +46,10 @@ export interface DraftedPayload {
   /** The exact body placed in the draft (before the unsubscribe footer). */
   bodySnapshot: string;
   sequenceVersionId: string;
+  /** Which step of the pinned version this draft is (absent on pre-sequence rows = 0). */
+  stepIndex?: number;
+  /** Follow-ups only: the Gmail message this draft replies to (reconciled truth), else null. */
+  inReplyToGmailMessageId?: string | null;
   compileId: string;
   gmailDraftId: string;
   gmailDraftMessageId: string | null;
