@@ -425,6 +425,19 @@ export const RULES: RoutingRule[] = [
         : `hypothesis ${i.hypothesis!.id} rests on evidence older than ${i.freshness.evidenceMaxAgeDays} days`,
   },
   {
+    id: 'evidence_thin',
+    label: 'R12b',
+    // Closeout 2026-09-25: Joey Maggard's card recommended an email on a
+    // hypothesis whose only evidence was "KR 10-Q mentions: capital
+    // expenditure". A keyword hit is not a reason to contact someone.
+    when: (i) => hypothesisLive(i) && i.hypothesis!.evidenceThin === true,
+    action: 'research_required',
+    lane: 'work_queue',
+    reason: () => 'evidence_thin',
+    predicate: (i) =>
+      `hypothesis ${i.hypothesis!.id} rests only on an automated keyword hit with no quoted evidence; add a sourced fact before any outreach`,
+  },
+  {
     id: 'hyp_resolved',
     label: 'R13',
     // Terminal AND no newer version (R2-4): a reopened hypothesis is a new

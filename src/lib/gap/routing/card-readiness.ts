@@ -157,6 +157,12 @@ export function cardReadiness(item: ReadinessInput): CardReadiness {
           // The router looks for this person's own hypothesis, then an account-level one; the account may
           // still have hypotheses written for OTHER people (Kroger does), so never claim it has none.
           return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix() });
+        case 'evidence_thin':
+          return withWarning({
+            state: 'missing_prerequisite' as const,
+            missing: `The hypothesis for ${item.account.name} rests only on an automated keyword hit (a filing that "mentions capital expenditure"), which is not a reason to contact ${name}. Add one sourced, quoted fact about a distribution center, dock, yard or site change (a DC opening, expansion, consolidation or automation program, or a yard, gate or dock job posting) and link it to the hypothesis.`,
+            fix: hypothesisFix(),
+          });
         case 'bounced_or_invalid':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable email or phone for ${name}.`, fix: contactFix(item, 'Find a current email or phone') });
         case 'tam_unknown':

@@ -84,6 +84,13 @@ export interface RoutingHypothesisInput {
   confidence: number;
   evidenceFresh: boolean;
   /**
+   * True when EVERY linked signal is an auto-ingested trigger with no quoted
+   * evidence text and no summary (e.g. "KR 10-Q mentions: capital
+   * expenditure"): a keyword hit, not a fact a seller can cite. R12b routes it
+   * to research. Absent or false otherwise.
+   */
+  evidenceThin?: boolean;
+  /**
    * True when a row exists whose `supersedes_id` points at this hypothesis
    * (a reopen). The assembler loads the persona's NEWEST row of any status,
    * so this is normally false; it is true when the reopen landed under
