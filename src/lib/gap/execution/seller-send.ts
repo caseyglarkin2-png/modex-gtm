@@ -38,6 +38,7 @@ import {
   DIRECT_RELEASED,
   DIRECT_SENT,
   DRAFT_SUBJECT_TYPE,
+  type CrmLogMethod,
   type DirectSentPayload,
 } from './draft-ledger';
 import { gmailDirectAdapter, type GmailAdapterDeps, type GmailAdapterInput } from './gmail-adapter';
@@ -54,7 +55,20 @@ export type SellerSendRefusal =
   | 'send_in_progress_or_unknown'
   | 'send_refused';
 
+/**
+ * The CRM logging method for a send, from trusted server configuration
+ * (GAP_CRM_LOG_METHOD). connected_inbox applies only to a known HubSpot
+ * contact ("Log all emails" logs known contacts). No BCC is ever added: the
+ * connected inbox logs the send itself, and a second mechanism would
+ * duplicate the activity.
+ */
+export function crmLogMethodFor(hubspotContactId: string | null, env: Record<string, string | undefined> = process.env): CrmLogMethod {
+  return env.GAP_CRM_LOG_METHOD?.trim() === 'connected_inbox' && hubspotContactId ? 'connected_inbox' : 'none';
+}
+
 export interface SendPreview {
+  /** HubSpot ON (the send will be logged) or UNAVAILABLE. */
+  crmLogging: 'on' | 'unavailable';
   fromName: string;
   from: string;
   toName: string | null;
@@ -167,6 +181,7 @@ export async function sendSellerEmail(
     return {
       ok: true,
       preview: {
+        crmLogging: crmLogMethodFor(p.hubspotContactId) === 'none' ? 'unavailable' : 'on',
         fromName: p.gapSender?.displayName ?? 'Casey Larkin',
         from: p.senderIdentity,
         toName: p.personaName,
@@ -262,6 +277,9 @@ export async function sendSellerEmail(
     sentAt,
     confirmedBy: actor,
     confirmedAt: now.toISOString(),
+    crmLogMethod: crmLogMethodFor(p.hubspotContactId),
+    crmLogStatus: crmLogMethodFor(p.hubspotContactId) === 'none' ? 'none' : 'expected',
+    hubspotContactId: p.hubspotContactId,
   };
   let ledgerError: string | undefined;
   try {

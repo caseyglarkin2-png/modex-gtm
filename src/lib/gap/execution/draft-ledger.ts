@@ -98,7 +98,20 @@ export interface DirectSentPayload {
   sentAt: string;
   confirmedBy: string;
   confirmedAt: string;
+  /** How HubSpot records this send. Exactly one method, never two. */
+  crmLogMethod: CrmLogMethod;
+  /** 'expected' = the proven mechanism applies but this activity was not read back; 'none' = not logged. */
+  crmLogStatus: 'expected' | 'none';
+  hubspotContactId: string | null;
 }
+
+/**
+ * connected_inbox: casey@yardflow.ai is a connected HubSpot inbox and the
+ * portal logs all email with known contacts; a Gmail API send was proven to
+ * log exactly one EMAIL activity (2026-09-25, docs/gap/crm-logging-2026-09-25.md).
+ * hubspot_bcc is reserved for the documented fallback and is not in use.
+ */
+export type CrmLogMethod = 'connected_inbox' | 'hubspot_bcc' | 'none';
 
 export interface DraftedPayload {
   engine: 'gmail_draft';

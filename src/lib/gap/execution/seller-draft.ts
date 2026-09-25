@@ -203,6 +203,8 @@ export interface PreparedSellerEmail {
   accountName: string;
   personaId: number;
   personaName: string | null;
+  /** The person's HubSpot contact id, when known (CRM logging needs a known contact). */
+  hubspotContactId: string | null;
   recipient: string;
   senderIdentity: string;
   gapSender: GmailSender | null;
@@ -428,6 +430,7 @@ export async function prepareSellerEmail(
       accountName: pack.hypothesis.account_name,
       personaId: persona.id,
       personaName: persona.name ?? null,
+      hubspotContactId: persona.hubspot_contact_id ?? null,
       recipient: email,
       senderIdentity,
       gapSender: gapSender ?? null,

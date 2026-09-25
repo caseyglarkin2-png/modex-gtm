@@ -217,3 +217,58 @@ describe('click-time gates are re-run (never trust the rendered card)', () => {
     expect(direct).not.toHaveBeenCalled();
   });
 });
+
+describe('CRM logging: exactly one method, never a BCC, never a resend', () => {
+  it('connected inbox: receipt records crm_log_method=connected_inbox with the HubSpot contact; the wire carries NO cc and NO bcc', async () => {
+    process.env.GAP_CRM_LOG_METHOD = 'connected_inbox';
+    try {
+      const d = db();
+      const prisma = sendPrisma(d);
+      const direct = adapter();
+      const pv = await preview(prisma, d, deps(d, direct));
+      expect(pv.crmLogging).toBe('on');
+      await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: pv.to } }, deps(d, direct));
+      const [, wire] = direct.mock.calls[0] as any[];
+      expect(wire.bcc).toBeUndefined();
+      expect(wire.cc).toBeUndefined();
+      expect(d.audit.find((a) => a.kind === DIRECT_SENT)!.payload).toMatchObject({ crmLogMethod: 'connected_inbox', crmLogStatus: 'expected', hubspotContactId: '217681150841' });
+    } finally {
+      delete process.env.GAP_CRM_LOG_METHOD;
+    }
+  });
+
+  it('unknown HubSpot contact or no configured method: HubSpot UNAVAILABLE, recorded truthfully as none, the email still sends once', async () => {
+    process.env.GAP_CRM_LOG_METHOD = 'connected_inbox';
+    try {
+      const d = db();
+      d.personas[0].hubspot_contact_id = null;
+      const prisma = sendPrisma(d);
+      const direct = adapter();
+      const pv = await preview(prisma, d, deps(d, direct));
+      expect(pv.crmLogging).toBe('unavailable');
+      await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: pv.to } }, deps(d, direct));
+      expect(direct).toHaveBeenCalledTimes(1);
+      expect(d.audit.find((a) => a.kind === DIRECT_SENT)!.payload).toMatchObject({ crmLogMethod: 'none', crmLogStatus: 'none' });
+    } finally {
+      delete process.env.GAP_CRM_LOG_METHOD;
+    }
+  });
+
+  it('a failed post-send write (ledger/CRM side) never causes a second Gmail call', async () => {
+    const d = db();
+    const prisma = sendPrisma(d);
+    const direct = adapter();
+    const pv = await preview(prisma, d, deps(d, direct));
+    const create = prisma.gapAuditEvent.create;
+    prisma.gapAuditEvent.create = vi.fn(async (args: any) => {
+      if (args.data.kind === DIRECT_SENT) throw new Error('db down');
+      return create(args);
+    });
+    const confirm = { contentHash: pv.contentHash, recipient: pv.to };
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm }, deps(d, direct));
+    expect(r).toMatchObject({ ok: true, alreadySent: false, ledgerError: 'db down' });
+    prisma.gapAuditEvent.create = create;
+    expect(await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm }, deps(d, direct))).toMatchObject({ ok: false, reason: 'send_in_progress_or_unknown' });
+    expect(direct).toHaveBeenCalledTimes(1);
+  });
+});
