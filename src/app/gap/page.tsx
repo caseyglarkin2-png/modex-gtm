@@ -14,27 +14,37 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
+import { listQueue } from '@/lib/gap/routing/queue';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, type GapCockpitData } from '@/components/gap/gap-cockpit';
-import { WorkQueue } from './work-queue';
+import { GapQueueSection } from './gap-queue-section';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP Work Queue' };
 
 const REPLY_TILE_LIMIT = 50;
+// A hypothesis in either status is "routable" (src/lib/gap/routing/rules.ts hypothesisLive).
+const ROUTABLE_HYPOTHESIS_STATUSES = ['approved', 'active'] as const;
 
-async function loadCockpitData(): Promise<GapCockpitData> {
-  const [hypothesesToReview, routingDecisionsPending, repliesPage] = await Promise.all([
+async function loadCockpitData(): Promise<{ cockpit: GapCockpitData; latestRunId: string | null; canRunRouting: boolean }> {
+  const [hypothesesToReview, routableCount, latestQueuePage, repliesPage] = await Promise.all([
     prisma.prospectingHypothesis.count({ where: { status: { in: ['draft', 'review_required'] } } }),
-    prisma.routingDecision.count({ where: { human_action: null } }),
+    prisma.prospectingHypothesis.count({ where: { status: { in: [...ROUTABLE_HYPOTHESIS_STATUSES] } } }),
+    listQueue(prisma, { limit: 100 }),
     listReplies(prisma, { state: 'undispositioned', limit: REPLY_TILE_LIMIT }),
   ]);
+  const routingDecisionsPending = latestQueuePage.items.filter((item) => !item.humanAction).length;
   return {
-    hypothesesToReview,
-    routingDecisionsPending,
-    repliesNeedingReview: { count: repliesPage.items.length, atLeast: repliesPage.nextCursor !== null },
-    shadowEnabled: process.env.GAP_AUTO_ENROLL_SHADOW === 'true',
+    cockpit: {
+      hypothesesToReview,
+      routingDecisionsPending,
+      repliesNeedingReview: { count: repliesPage.items.length, atLeast: repliesPage.nextCursor !== null },
+      shadowEnabled: process.env.GAP_AUTO_ENROLL_SHADOW === 'true',
+    },
+    latestRunId: latestQueuePage.runId,
+    // Enable Run routing when there is something new to route, or a prior run to refresh.
+    canRunRouting: routableCount > 0 || latestQueuePage.runId !== null,
   };
 }
 
@@ -44,7 +54,7 @@ export default async function GapWorkQueuePage() {
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
 
-  const cockpit = await loadCockpitData();
+  const { cockpit, latestRunId, canRunRouting } = await loadCockpitData();
 
   return (
     <div className="space-y-6">
@@ -57,7 +67,7 @@ export default async function GapWorkQueuePage() {
       </div>
       <GapSubnav />
       <GapCockpit data={cockpit} />
-      <WorkQueue />
+      <GapQueueSection latestRunId={latestRunId} canRunRouting={canRunRouting} />
     </div>
   );
 }

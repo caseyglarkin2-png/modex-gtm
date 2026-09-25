@@ -362,6 +362,28 @@ describe('<HypothesisDrawer>', () => {
     expect(screen.queryByTestId('hypothesis-review-nav')).toBeNull();
   });
 
+  it('shows a "Hypothesis active" banner with a Go to Queue link right after Use in routing succeeds', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'approved', to: 'active', effects: ['set_activated'] }, 200));
+    render(<HypothesisDrawer hypothesis={row({ status: 'approved' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+
+    expect(screen.queryByTestId('hypothesis-activated-banner')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Use in routing' }));
+
+    const banner = await screen.findByTestId('hypothesis-activated-banner');
+    expect(banner).toHaveTextContent('Hypothesis active. Run routing to generate a recommendation.');
+    const goToQueue = within(banner).getByRole('link', { name: 'Go to Queue' });
+    expect(goToQueue).toHaveAttribute('href', '/gap');
+  });
+
+  it('does not show the activation banner for a transition that does not land on active', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'review_required', to: 'approved', effects: [] }, 200));
+    render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Approve hypothesis' }));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(screen.queryByTestId('hypothesis-activated-banner')).toBeNull();
+  });
+
   it('renders the signal list and the event history', () => {
     render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={vi.fn()} />);
     const signals = screen.getByTestId('hypothesis-signals');

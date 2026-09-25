@@ -204,8 +204,8 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
             {item.humanActionAt ? ` at ${formatWhen(item.humanActionAt, true)}` : ''}
           </p>
         ) : (
-          <div className="w-full space-y-2">
-            <p className="text-xs font-medium">Casey:</p>
+          <div className="w-full space-y-2 border-t border-[var(--border)] pt-3">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Casey actually did</p>
             <div className="flex flex-wrap items-center gap-2">
               <Button type="button" size="sm" disabled={acting} onClick={() => onAct(String(item.action))}>
                 {acting ? 'Saving...' : 'I did this'}
@@ -215,7 +215,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
               </Button>
             </div>
             <p className="text-[11px] text-[var(--muted-foreground)]">
-              This only records what you actually did. It never sends an email or enrolls anyone.
+              These buttons record your action. They do not send email or enroll anyone.
             </p>
           </div>
         )}

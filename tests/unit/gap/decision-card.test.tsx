@@ -128,7 +128,8 @@ describe('<DecisionCard>', () => {
   it('labels the recommendation as GAP\'s and the buttons as recording, not performing, the action', () => {
     render(<DecisionCard item={item()} onAct={() => {}} />);
     expect(screen.getByText('GAP recommends')).toBeInTheDocument();
-    expect(screen.getByText(/only records what you actually did/i)).toBeInTheDocument();
+    expect(screen.getByText(/record your action/i)).toBeInTheDocument();
+    expect(screen.getByText('Casey actually did')).toBeInTheDocument();
   });
 
   it('clicking "I did this" calls onAct with the decision action, "I did something else" with other', () => {
