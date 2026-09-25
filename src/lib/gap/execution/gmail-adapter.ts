@@ -30,6 +30,8 @@ export interface GmailAdapterInput {
   text?: string;
   replyTo?: string;
   sender?: { refreshToken: string; userEmail: string };
+  /** Extra MIME headers (e.g. List-Unsubscribe). Threading headers from the intent win on a clash. */
+  headers?: Record<string, string>;
 }
 
 /**
@@ -58,9 +60,10 @@ function toPayload(intent: ExecutionIntent, input: GmailAdapterInput): GmailSend
   if (input.text !== undefined) payload.text = input.text;
   if (input.replyTo !== undefined) payload.replyTo = input.replyTo;
   if (input.sender !== undefined) payload.sender = input.sender;
+  if (input.headers !== undefined) payload.headers = { ...input.headers };
   if (intent.threadContext) {
     payload.threadId = intent.threadContext.threadId;
-    const headers: Record<string, string> = { Subject: intent.threadContext.subject };
+    const headers: Record<string, string> = { ...(payload.headers ?? {}), Subject: intent.threadContext.subject };
     if (intent.threadContext.inReplyTo) headers['In-Reply-To'] = intent.threadContext.inReplyTo;
     if (intent.threadContext.references?.length) headers.References = intent.threadContext.references.join(' ');
     payload.headers = headers;
@@ -107,6 +110,7 @@ export async function gmailDraftAdapter(intent: ExecutionIntent, input: GmailAda
       engineId: result.draftId,
       createdAt: intent.now,
       threadId: result.threadId,
+      draftMessageId: result.messageId,
     };
   } catch (err) {
     return refusedReceipt('gmail_draft', intent.now, err);

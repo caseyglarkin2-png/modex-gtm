@@ -22,6 +22,11 @@ function getGmailConfig() {
   };
 }
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@freightroll.com';
+
+/** The mailbox the env identity drafts and sends from (the default sender of every function here). */
+export function gmailSenderAddress(): string {
+  return getGmailConfig().userEmail;
+}
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
 import type { InlineImage } from './inline-image';
