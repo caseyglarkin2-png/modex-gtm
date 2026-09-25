@@ -11,10 +11,20 @@
 import { RunRoutingPanel } from '@/components/gap/run-routing-panel';
 import { WorkQueue } from './work-queue';
 
-export function GapQueueSection({ latestRunId, canRunRouting }: { latestRunId: string | null; canRunRouting: boolean }) {
+export function GapQueueSection({
+  latestRunId,
+  canRunRouting,
+  routableHypotheses,
+  routableAccounts,
+}: {
+  latestRunId: string | null;
+  canRunRouting: boolean;
+  routableHypotheses: number;
+  routableAccounts: number;
+}) {
   return (
     <div className="space-y-4">
-      <RunRoutingPanel canRun={canRunRouting} />
+      <RunRoutingPanel canRun={canRunRouting} routableHypotheses={routableHypotheses} routableAccounts={routableAccounts} />
       <WorkQueue reloadKey={latestRunId ?? undefined} />
     </div>
   );

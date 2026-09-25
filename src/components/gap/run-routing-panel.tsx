@@ -1,15 +1,26 @@
 'use client';
 
 /**
- * Run Routing panel (dogfood operator-loop fix).
+ * Run Routing panel (dogfood operator-loop fix, hardened 2026-09-25 after a
+ * production interactive run defaulted to the broad account universe and
+ * hung until Vercel's 300s maxDuration killed it).
  *
  * The one button that turns "activate a hypothesis" into "see a
  * recommendation card," without Casey ever touching an API or a cron.
- * POSTs /api/gap/routing/run?mode=apply from the authenticated browser
- * session (same-origin fetch, cookies carried automatically) -- never a
- * CRON_SECRET in the browser. Routing itself only ever creates
- * `RoutingDecision` rows (mode: shadow); it cannot send email or enroll
- * anyone, and this panel says so before and after every run.
+ * POSTs /api/gap/routing/run?mode=apply with `{ scope: 'routable_hypotheses' }`
+ * from the authenticated browser session (same-origin fetch, cookies carried
+ * automatically) -- never a CRON_SECRET in the browser, never a client-
+ * supplied account list. The SERVER resolves that scope to the accounts
+ * carrying an approved/active hypothesis; this button never falls back to
+ * the broad default. Routing itself only ever creates `RoutingDecision`
+ * rows (mode: shadow); it cannot send email or enroll anyone, and this
+ * panel says so before and after every run.
+ *
+ * A client-side 60s AbortController bounds the request: an interactive
+ * click over a small, capped scope should never need Vercel's full 300s
+ * function budget, and Casey should never be left staring at "Running..."
+ * indefinitely. On timeout, no automatic retry (that could double-run
+ * shadow routing) -- the message says exactly that and how to recover.
  */
 
 import { useState } from 'react';
@@ -27,11 +38,21 @@ export interface RunRoutingReport {
 export interface RunRoutingPanelProps {
   /** At least one hypothesis is approved/active (routable), or a prior run exists to refresh. */
   canRun: boolean;
+  /** How many approved/active hypotheses, and how many distinct accounts, THIS run will cover. Shown before the click. */
+  routableHypotheses: number;
+  routableAccounts: number;
   /** Called after a successful run so the owning page can refresh dependent surfaces (the Queue). */
   onComplete?: (report: RunRoutingReport) => void;
 }
 
-type RunState = { kind: 'idle' } | { kind: 'running' } | { kind: 'done'; report: RunRoutingReport; at: string } | { kind: 'error'; message: string };
+type RunState =
+  | { kind: 'idle' }
+  | { kind: 'running' }
+  | { kind: 'done'; report: RunRoutingReport; at: string }
+  | { kind: 'error'; message: string }
+  | { kind: 'timeout' };
+
+const CLIENT_TIMEOUT_MS = 60_000;
 
 function summarizeSkips(skips: Record<string, number>): string {
   const entries = Object.entries(skips).sort((a, b) => b[1] - a[1]);
@@ -39,17 +60,20 @@ function summarizeSkips(skips: Record<string, number>): string {
   return entries.map(([reason, count]) => `${reason.replace(/_/g, ' ')} (${count})`).join(', ');
 }
 
-export function RunRoutingPanel({ canRun, onComplete }: RunRoutingPanelProps) {
+export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, onComplete }: RunRoutingPanelProps) {
   const router = useRouter();
   const [state, setState] = useState<RunState>({ kind: 'idle' });
 
   async function run() {
     setState({ kind: 'running' });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), CLIENT_TIMEOUT_MS);
     try {
       const res = await fetch('/api/gap/routing/run?mode=apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ scope: 'routable_hypotheses' }),
+        signal: controller.signal,
       });
       let json: unknown = null;
       try {
@@ -75,7 +99,13 @@ export function RunRoutingPanel({ canRun, onComplete }: RunRoutingPanelProps) {
       onComplete?.(report);
       router.refresh();
     } catch (caught) {
+      if (caught instanceof DOMException && caught.name === 'AbortError') {
+        setState({ kind: 'timeout' });
+        return;
+      }
       setState({ kind: 'error', message: caught instanceof Error ? caught.message : 'network_error' });
+    } finally {
+      clearTimeout(timer);
     }
   }
 
@@ -87,7 +117,13 @@ export function RunRoutingPanel({ canRun, onComplete }: RunRoutingPanelProps) {
         <Button type="button" disabled={!canRun || running} onClick={() => void run()}>
           {running ? 'Running...' : 'Run routing'}
         </Button>
-        <p className="text-xs text-[var(--muted-foreground)]">Creates recommendation cards only. Does not send or enroll.</p>
+        <div className="text-xs text-[var(--muted-foreground)]">
+          <p data-testid="run-routing-scope">
+            {routableHypotheses} routable {routableHypotheses === 1 ? 'hypothesis' : 'hypotheses'}, {routableAccounts} account
+            {routableAccounts === 1 ? '' : 's'}
+          </p>
+          <p>Routes only accounts with approved or active hypotheses. Creates recommendation cards only. Does not send or enroll.</p>
+        </div>
       </div>
 
       {state.kind === 'done' ? (
@@ -101,6 +137,12 @@ export function RunRoutingPanel({ canRun, onComplete }: RunRoutingPanelProps) {
             <li>Run at: {state.at}</li>
           </ul>
         </div>
+      ) : null}
+
+      {state.kind === 'timeout' ? (
+        <p role="alert" data-testid="run-routing-timeout" className="mt-3 text-sm text-[var(--destructive)]">
+          Routing is taking too long. No outbound action was taken. Check routing status before trying again.
+        </p>
       ) : null}
 
       {state.kind === 'error' ? (
