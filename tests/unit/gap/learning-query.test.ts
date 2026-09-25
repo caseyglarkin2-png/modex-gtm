@@ -25,6 +25,7 @@ function makePrisma(overrides: {
   signalCounts?: any[];
   enrollments?: any[];
   inboundMessages?: any[];
+  gapHubSpotMirrors?: any[];
 } = {}) {
   return {
     prospectingHypothesis: { findMany: asyncSpy(async () => overrides.hypotheses ?? []) },
@@ -35,6 +36,7 @@ function makePrisma(overrides: {
     // 6E: reply backlog. Empty by default so existing tests, which do not
     // assert on it, are unaffected.
     inboundMessage: { findMany: asyncSpy(async () => overrides.inboundMessages ?? []) },
+    gapHubSpotMirror: { findMany: asyncSpy(async () => overrides.gapHubSpotMirrors ?? []) },
   };
 }
 
@@ -313,10 +315,12 @@ describe('buildLearningReport', () => {
     const dayMs = 24 * 60 * 60 * 1000;
     const prisma = makePrisma({
       inboundMessages: [
-        { id: 'm_gmail_old', received_at: new Date(now.getTime() - 2 * dayMs) },
-        { id: 'm_hubspot_old', received_at: new Date(now.getTime() - 3 * dayMs) },
-        { id: 'm_recent', received_at: new Date(now.getTime() - 1 * 60 * 60 * 1000) },
+        { id: 'm_gmail_old', received_at: new Date(now.getTime() - 2 * dayMs), from_email: 'buyer@acme.example', source: 'gmail', hubspot_engagement_id: null },
+        { id: 'm_hubspot_old', received_at: new Date(now.getTime() - 3 * dayMs), from_email: 'other@acme.example', source: 'hubspot', hubspot_engagement_id: 'eng_1' },
+        { id: 'm_recent', received_at: new Date(now.getTime() - 1 * 60 * 60 * 1000), from_email: 'buyer@acme.example', source: 'gmail', hubspot_engagement_id: null },
       ],
+      enrollments: [{ to_email: 'buyer@acme.example' }],
+      gapHubSpotMirrors: [{ object_id: 'eng_1' }],
       dispositions: [{ source_id: 'm_gmail_old' }],
     });
     const report = await buildLearningReport(prisma, { now });

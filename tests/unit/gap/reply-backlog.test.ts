@@ -33,19 +33,38 @@ describe('computeReplyBacklog', () => {
   });
 });
 
+function makeBacklogPrisma(overrides: {
+  messages?: any[];
+  enrollments?: any[];
+  mirrors?: any[];
+  dispositions?: any[];
+} = {}) {
+  return {
+    inboundMessage: {
+      findMany: vi.fn<(...args: any[]) => Promise<any>>(async () => overrides.messages ?? []),
+    },
+    sequenceEnrollment: {
+      findMany: vi.fn<(...args: any[]) => Promise<any>>(async () => overrides.enrollments ?? []),
+    },
+    gapHubSpotMirror: {
+      findMany: vi.fn<(...args: any[]) => Promise<any>>(async () => overrides.mirrors ?? []),
+    },
+    conversationDisposition: {
+      findMany: vi.fn<(...args: any[]) => Promise<any>>(async () => overrides.dispositions ?? []),
+    },
+  };
+}
+
 describe('loadReplyBacklog', () => {
   it('joins InboundMessage against ConversationDisposition by the SAME (source_kind, source_id) predicate disposition/service.ts uses', async () => {
-    const prisma = {
-      inboundMessage: {
-        findMany: vi.fn<(...args: any[]) => Promise<any>>(async () => [
-          { id: 'm1', received_at: new Date(NOW.getTime() - 30 * HOUR) },
-          { id: 'm2', received_at: new Date(NOW.getTime() - 30 * HOUR) },
-        ]),
-      },
-      conversationDisposition: {
-        findMany: vi.fn<(...args: any[]) => Promise<any>>(async () => [{ source_id: 'm1' }]),
-      },
-    };
+    const prisma = makeBacklogPrisma({
+      messages: [
+        { id: 'm1', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'buyer@acme.com', source: 'gmail', hubspot_engagement_id: null },
+        { id: 'm2', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'buyer@acme.com', source: 'gmail', hubspot_engagement_id: null },
+      ],
+      enrollments: [{ to_email: 'buyer@acme.com' }],
+      dispositions: [{ source_id: 'm1' }],
+    });
 
     const backlog = await loadReplyBacklog(prisma, NOW);
 
@@ -54,14 +73,79 @@ describe('loadReplyBacklog', () => {
   });
 
   it('an empty message window never even queries dispositions', async () => {
-    const prisma = {
-      inboundMessage: { findMany: vi.fn(async () => []) },
-      conversationDisposition: { findMany: vi.fn() },
-    };
+    const prisma = makeBacklogPrisma({ messages: [] });
 
     const backlog = await loadReplyBacklog(prisma, NOW);
 
     expect(backlog).toEqual({ count: 0, oldestAgeHours: null, thresholdHours: 24 });
     expect(prisma.conversationDisposition.findMany).not.toHaveBeenCalled();
+  });
+
+  it('unrelated inbound mail (no GAP enrollment, no GAP-mirrored engagement) does not count as backlog', async () => {
+    const prisma = makeBacklogPrisma({
+      messages: [
+        { id: 'm1', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'random@somewhere.com', source: 'gmail', hubspot_engagement_id: null },
+      ],
+      enrollments: [{ to_email: 'buyer@acme.com' }], // a different, GAP-known address
+    });
+
+    const backlog = await loadReplyBacklog(prisma, NOW);
+
+    expect(backlog).toEqual({ count: 0, oldestAgeHours: null, thresholdHours: 24 });
+    expect(prisma.conversationDisposition.findMany).not.toHaveBeenCalled();
+  });
+
+  it('a real GAP-related gmail reply (from a SequenceEnrollment recipient) counts', async () => {
+    const prisma = makeBacklogPrisma({
+      messages: [
+        { id: 'm1', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'Buyer@Acme.com', source: 'gmail', hubspot_engagement_id: null },
+      ],
+      enrollments: [{ to_email: 'buyer@acme.com' }],
+    });
+
+    const backlog = await loadReplyBacklog(prisma, NOW);
+
+    expect(backlog.count).toBe(1);
+  });
+
+  it('a real GAP-related hubspot reply (a GAP-mirrored engagement id) counts', async () => {
+    const prisma = makeBacklogPrisma({
+      messages: [
+        { id: 'hs:1', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'buyer@acme.com', source: 'hubspot', hubspot_engagement_id: 'eng_1' },
+      ],
+      mirrors: [{ object_id: 'eng_1' }],
+    });
+
+    const backlog = await loadReplyBacklog(prisma, NOW);
+
+    expect(backlog.count).toBe(1);
+  });
+
+  it('an unmirrored hubspot engagement does not count, even from a known GAP address', async () => {
+    const prisma = makeBacklogPrisma({
+      messages: [
+        { id: 'hs:2', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'buyer@acme.com', source: 'hubspot', hubspot_engagement_id: 'eng_2' },
+      ],
+      enrollments: [{ to_email: 'buyer@acme.com' }],
+      mirrors: [{ object_id: 'some_other_engagement' }],
+    });
+
+    const backlog = await loadReplyBacklog(prisma, NOW);
+
+    expect(backlog).toEqual({ count: 0, oldestAgeHours: null, thresholdHours: 24 });
+  });
+
+  it('a human-confirmed disposition removes a GAP-attributed message from backlog', async () => {
+    const prisma = makeBacklogPrisma({
+      messages: [
+        { id: 'm1', received_at: new Date(NOW.getTime() - 30 * HOUR), from_email: 'buyer@acme.com', source: 'gmail', hubspot_engagement_id: null },
+      ],
+      enrollments: [{ to_email: 'buyer@acme.com' }],
+      dispositions: [{ source_id: 'm1' }],
+    });
+
+    const backlog = await loadReplyBacklog(prisma, NOW);
+
+    expect(backlog).toEqual({ count: 0, oldestAgeHours: null, thresholdHours: 24 });
   });
 });
