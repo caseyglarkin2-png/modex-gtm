@@ -2,8 +2,10 @@
  * POST /api/gap/decisions/[id]/act   body `{ action: string }`
  *
  * GAP Prospecting OS, Sprint 2, S2-T7. Records what the operator did with a
- * routing decision: one of `HUMAN_ACTIONS` in taxonomy.ts (enrolled_by_hand,
- * called, emailed, dismissed, deferred); anything else is 400 field action.
+ * routing decision: one of `HUMAN_ACTIONS` in taxonomy.ts; anything else is
+ * 400 field action. The UI ("I did this" / "I did something else") always
+ * submits a HumanAction, never a RoutingAction string -- see
+ * `src/lib/gap/routing/agreement.ts`'s `RECOMMENDED_HUMAN_ACTION`.
  * The stamp is write-once: 200 `{ok:true}` the first time, 409
  * `{error:'already_acted'}` after, 404 `{error:'not_found'}` for an unknown id.
  * Session only; this is a human's record, never a system's.

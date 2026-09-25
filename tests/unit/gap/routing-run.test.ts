@@ -1045,7 +1045,17 @@ describe('routes', () => {
 
     it('an action outside HUMAN_ACTIONS -> 400 invalid_body field action, row untouched (N3)', async () => {
       const { HUMAN_ACTIONS } = await import('@/lib/gap/taxonomy');
-      expect([...HUMAN_ACTIONS]).toEqual(['enrolled_by_hand', 'called', 'emailed', 'dismissed', 'deferred']);
+      expect([...HUMAN_ACTIONS]).toEqual([
+        'enrolled_by_hand',
+        'called',
+        'emailed',
+        'dismissed',
+        'deferred',
+        'researched',
+        'approved_hypothesis',
+        'linkedin_messaged',
+        'do_not_contact',
+      ]);
       const id = await seed(store, { priority: 1 });
       const res = await actPOST(post(ACT(id), { action: 'enrolled_by_hand_twice' }), idParams(id));
       expect(res.status).toBe(400);

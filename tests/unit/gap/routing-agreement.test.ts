@@ -9,8 +9,15 @@
  * disagreement.
  */
 import { describe, expect, it } from 'vitest';
-import { agrees, computeAgreement, HUMAN_ACTION_AGREEMENT, type AgreementDecision } from '@/lib/gap/routing/agreement';
-import { HUMAN_ACTIONS, ROUTING_ACTIONS, type RoutingAction } from '@/lib/gap/taxonomy';
+import {
+  agrees,
+  computeAgreement,
+  everyRoutingActionHasAnAgreeingHumanAction,
+  HUMAN_ACTION_AGREEMENT,
+  RECOMMENDED_HUMAN_ACTION,
+  type AgreementDecision,
+} from '@/lib/gap/routing/agreement';
+import { HUMAN_ACTIONS, ROUTING_ACTIONS } from '@/lib/gap/taxonomy';
 
 function decision(over: Partial<AgreementDecision> = {}): AgreementDecision {
   return { id: 'd1', action: 'call_now', ruleId: 'hot_call', humanAction: 'called', ...over };
@@ -53,10 +60,39 @@ describe('HUMAN_ACTION_AGREEMENT + agrees', () => {
     expect(agrees('do_not_contact', 'deferred')).toBe(false);
   });
 
-  it('research_required, approve_hypothesis and linkedin_manual_task have no human action that agrees with them', () => {
-    const gapActions: RoutingAction[] = ['research_required', 'approve_hypothesis', 'linkedin_manual_task'];
-    for (const action of gapActions) {
-      for (const h of HUMAN_ACTIONS) expect(agrees(action, h)).toBe(false);
+  it('researched agrees only with research_required (dogfood fix, 2026-09-25: closed the former agreement gap)', () => {
+    expect(agrees('research_required', 'researched')).toBe(true);
+    expect(agrees('call_now', 'researched')).toBe(false);
+  });
+
+  it('approved_hypothesis agrees only with approve_hypothesis', () => {
+    expect(agrees('approve_hypothesis', 'approved_hypothesis')).toBe(true);
+    expect(agrees('call_now', 'approved_hypothesis')).toBe(false);
+  });
+
+  it('linkedin_messaged agrees only with linkedin_manual_task', () => {
+    expect(agrees('linkedin_manual_task', 'linkedin_messaged')).toBe(true);
+    expect(agrees('call_now', 'linkedin_messaged')).toBe(false);
+  });
+
+  it('do_not_contact (the human action) agrees only with do_not_contact (the routing action)', () => {
+    expect(agrees('do_not_contact', 'do_not_contact')).toBe(true);
+    expect(agrees('nurture', 'do_not_contact')).toBe(false);
+  });
+
+  it('INVARIANT: every ROUTING_ACTION has at least one HumanAction that can agree with it -- no recommendation is structurally incapable of agreement', () => {
+    expect(everyRoutingActionHasAnAgreeingHumanAction()).toBe(true);
+    for (const action of ROUTING_ACTIONS) {
+      const hasAgreeingHumanAction = HUMAN_ACTIONS.some((h) => agrees(action, h));
+      expect(hasAgreeingHumanAction, `${action} has no HumanAction that can agree with it`).toBe(true);
+    }
+  });
+
+  it('RECOMMENDED_HUMAN_ACTION covers every routing action, and each mapping is a real agreement, not a guess', () => {
+    for (const action of ROUTING_ACTIONS) {
+      const recommended = RECOMMENDED_HUMAN_ACTION[action];
+      expect(recommended, `no RECOMMENDED_HUMAN_ACTION for ${action}`).toBeDefined();
+      expect(agrees(action, recommended)).toBe(true);
     }
   });
 });
@@ -101,8 +137,11 @@ describe('computeAgreement', () => {
     ]);
   });
 
-  it('a human action recorded against research_required/approve_hypothesis/linkedin_manual_task is always a disagreement', () => {
-    const report = computeAgreement([decision({ action: 'research_required', humanAction: 'called', ruleId: 'no_hypothesis' })]);
-    expect(report.overall).toEqual({ agreements: 0, disagreements: 1, rate: 0, n: 1 });
+  it('a mismatched human action against research_required is a disagreement; the matching one (researched) agrees', () => {
+    const mismatched = computeAgreement([decision({ action: 'research_required', humanAction: 'called', ruleId: 'no_hypothesis' })]);
+    expect(mismatched.overall).toEqual({ agreements: 0, disagreements: 1, rate: 0, n: 1 });
+
+    const matched = computeAgreement([decision({ action: 'research_required', humanAction: 'researched', ruleId: 'no_hypothesis' })]);
+    expect(matched.overall).toEqual({ agreements: 1, disagreements: 0, rate: 1, n: 1 });
   });
 });

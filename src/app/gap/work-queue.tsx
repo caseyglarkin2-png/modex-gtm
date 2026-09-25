@@ -39,6 +39,23 @@ async function readError(res: Response): Promise<string> {
   return `HTTP ${res.status}`;
 }
 
+/**
+ * The server always answers a refusal with a specific `{error: "<code>"}`
+ * body (see /api/gap/decisions/[id]/act/route.ts); Casey should never have
+ * to reason from a bare HTTP status. Unmapped codes fall back to the raw
+ * code text, never a status number alone.
+ */
+const ACT_ERROR_TEXT: Record<string, string> = {
+  invalid_body: 'Invalid action',
+  already_acted: 'Already recorded',
+  not_found: 'Not found',
+  unauthenticated: 'Not signed in',
+};
+
+function describeActError(code: string): string {
+  return ACT_ERROR_TEXT[code] ?? code;
+}
+
 function queueUrl(action: string, lane: string, cursor: string | null): string {
   const params = new URLSearchParams();
   if (action) params.set('action', action);
@@ -130,12 +147,9 @@ function QueueTab({ reloadKey }: { reloadKey?: string | number }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: humanAction }),
       });
-      if (res.status === 409) {
-        setActErrors((current) => ({ ...current, [item.id]: 'already acted' }));
-        return;
-      }
       if (!res.ok) {
-        setActErrors((current) => ({ ...current, [item.id]: `Refused: ${res.status}` }));
+        const message = describeActError(await readError(res));
+        setActErrors((current) => ({ ...current, [item.id]: message }));
         return;
       }
       const at = new Date().toISOString();
