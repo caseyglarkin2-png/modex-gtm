@@ -764,7 +764,7 @@ describe('listQueue', () => {
       target: 'modex_queue',
       explain: { whyAccount: 'x' },
       account: { name: 'Acme Foods', hubspotCompanyId: '111', tam: 'in', tamTier: 'A', heatTier: 2 },
-      persona: { id: 1, personaKey: 'site_ops', displayName: 'Ann Acme', email: 'a@acme.example', hubspotContactId: '9' },
+      persona: { id: 1, personaKey: 'site_ops', displayName: 'Ann Acme', email: 'a@acme.example', hubspotContactId: '9', title: null, phone: null, linkedinUrl: null },
       hypothesis: { id: 'hyp-9', status: 'approved', family: 'hidden_capacity', confidence: 70 },
       humanAction: null,
       humanActionAt: null,
@@ -772,6 +772,48 @@ describe('listQueue', () => {
     });
     await listQueue(store, { runId: 'run-A', limit: 0 });
     expect(store.routingDecision.findMany.mock.calls[1][0].take).toBe(2);
+  });
+
+  it('hydrates live contact fields (title, phone, linkedin) from the canonical Persona row, never from the frozen snapshot (Seller Action Center, dogfood fix 2026-09-25)', async () => {
+    await seed(store, {
+      priority: 5,
+      persona_id: 1,
+      inputs_snapshot: {
+        account: { name: 'Acme Foods', hubspotCompanyId: '111', tam: 'in', tamTier: 'A', heatTier: 2 },
+        persona: { id: 1, personaKey: 'site_ops', email: 'stale@acme.example', hubspotContactId: '9' },
+        displayName: 'Ann Acme (frozen)',
+      },
+    });
+    store.persona.findMany.mockResolvedValue([
+      { id: 1, name: 'Ann Acme', title: 'VP Supply Chain', phone: '(555) 111-2222', linkedin_url: 'https://linkedin.com/in/annacme', email: 'ann@acme.example', hubspot_contact_id: '9' },
+    ]);
+    const { items } = await listQueue(store, { runId: 'run-A' });
+    expect(store.persona.findMany).toHaveBeenCalledWith({
+      where: { id: { in: [1] } },
+      select: { id: true, name: true, title: true, phone: true, linkedin_url: true, email: true, hubspot_contact_id: true },
+    });
+    expect(items[0].persona).toMatchObject({
+      displayName: 'Ann Acme', // live, not the frozen "(frozen)" snapshot value
+      email: 'ann@acme.example',
+      title: 'VP Supply Chain',
+      phone: '(555) 111-2222',
+      linkedinUrl: 'https://linkedin.com/in/annacme',
+    });
+  });
+
+  it('falls back to the frozen snapshot when the persona no longer exists, and never queries Persona with an empty id list', async () => {
+    await seed(store, {
+      priority: 5,
+      persona_id: null,
+      inputs_snapshot: {
+        account: { name: 'Acme Foods', hubspotCompanyId: '111', tam: 'in', tamTier: 'A', heatTier: 2 },
+        persona: { id: null, personaKey: 'site_ops', email: 'a@acme.example', hubspotContactId: '9' },
+        displayName: 'Ann Acme',
+      },
+    });
+    const { items } = await listQueue(store, { runId: 'run-A' });
+    expect(store.persona.findMany).not.toHaveBeenCalled();
+    expect(items[0].persona).toMatchObject({ displayName: 'Ann Acme', title: null, phone: null, linkedinUrl: null });
   });
 });
 

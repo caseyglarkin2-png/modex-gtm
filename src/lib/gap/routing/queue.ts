@@ -55,6 +55,10 @@ export interface QueueItem {
     displayName: string | null;
     email: string | null;
     hubspotContactId: string | null;
+    /** Live-hydrated from the canonical Persona row (dogfood Seller Action Center, 2026-09-25); null if the persona no longer exists. Never written back to the frozen snapshot. */
+    title: string | null;
+    phone: string | null;
+    linkedinUrl: string | null;
   };
   hypothesis: { id: string; status: string; family: string; confidence: number } | null;
   humanAction: string | null;
@@ -128,7 +132,17 @@ export function decodeCursor(cursor: string): { priority: number; id: string } |
 // Row -> item
 // ---------------------------------------------------------------------------
 
-function toItem(row: DecisionRow): QueueItem {
+/** Live Persona fields hydrated in on read (never snapshotted, never written back). */
+export interface LivePersonaFields {
+  title: string | null;
+  phone: string | null;
+  linkedinUrl: string | null;
+  email: string | null;
+  hubspotContactId: string | null;
+  displayName: string | null;
+}
+
+function toItem(row: DecisionRow, live?: LivePersonaFields | null): QueueItem {
   const snap = isObj(row.inputs_snapshot) ? row.inputs_snapshot : {};
   const account = isObj(snap.account) ? snap.account : {};
   const persona = isObj(snap.persona) ? snap.persona : {};
@@ -152,9 +166,15 @@ function toItem(row: DecisionRow): QueueItem {
     persona: {
       id: optNum(persona.id) ?? row.persona_id,
       personaKey: optStr(persona.personaKey),
-      displayName: optStr(snap.displayName),
-      email: optStr(persona.email),
-      hubspotContactId: optStr(persona.hubspotContactId),
+      // Live values win when the persona still exists (a seller acting today
+      // needs today's contact info, not the frozen-at-routing-time snapshot);
+      // the frozen snapshot is the fallback for a persona later deleted.
+      displayName: live?.displayName ?? optStr(snap.displayName),
+      email: live?.email ?? optStr(persona.email),
+      hubspotContactId: live?.hubspotContactId ?? optStr(persona.hubspotContactId),
+      title: live?.title ?? null,
+      phone: live?.phone ?? null,
+      linkedinUrl: live?.linkedinUrl ?? null,
     },
     hypothesis:
       hypothesis && typeof hypothesis.id === 'string'
@@ -226,7 +246,38 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
   const last = page[page.length - 1];
   const nextCursor = rows.length > limit && last ? encodeCursor(last.priority, last.id) : null;
 
-  return { runId, items: page.map(toItem), nextCursor };
+  const personaIds = [...new Set(page.map((r) => r.persona_id).filter((id): id is number => typeof id === 'number'))];
+  const liveById = new Map<number, LivePersonaFields>();
+  if (personaIds.length > 0) {
+    const personas: Array<{
+      id: number;
+      name: string | null;
+      title: string | null;
+      phone: string | null;
+      linkedin_url: string | null;
+      email: string | null;
+      hubspot_contact_id: string | null;
+    }> = await prisma.persona.findMany({
+      where: { id: { in: personaIds } },
+      select: { id: true, name: true, title: true, phone: true, linkedin_url: true, email: true, hubspot_contact_id: true },
+    });
+    for (const p of personas) {
+      liveById.set(p.id, {
+        displayName: optStr(p.name),
+        title: optStr(p.title),
+        phone: optStr(p.phone),
+        linkedinUrl: optStr(p.linkedin_url),
+        email: optStr(p.email),
+        hubspotContactId: optStr(p.hubspot_contact_id),
+      });
+    }
+  }
+
+  return {
+    runId,
+    items: page.map((row) => toItem(row, typeof row.persona_id === 'number' ? liveById.get(row.persona_id) : null)),
+    nextCursor,
+  };
 }
 
 // ---------------------------------------------------------------------------
