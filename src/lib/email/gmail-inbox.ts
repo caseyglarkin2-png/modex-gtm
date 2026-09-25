@@ -461,13 +461,14 @@ export interface GmailThreadMessageMeta {
   internalDate: Date;
   to: string;
   from: string;
+  subject?: string;
 }
 
 /** Message metadata for one thread (To/From/labels/date). A missing thread is an empty list. */
 export async function getGmailThreadMessages(threadId: string, sender?: GmailSender): Promise<GmailThreadMessageMeta[]> {
   const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
   const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
-  const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From`;
+  const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From&metadataHeaders=Subject`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
@@ -483,6 +484,23 @@ export async function getGmailThreadMessages(threadId: string, sender?: GmailSen
       internalDate: new Date(Number(m.internalDate ?? 0)),
       to: h('To'),
       from: h('From'),
+      subject: h('Subject'),
     };
   });
+}
+
+/** The RFC 822 Message-ID and Subject of one message (for threading a follow-up). Null when unreadable. */
+export async function getGmailMessageHeaders(messageId: string, sender?: GmailSender): Promise<{ messageIdHeader: string | null; subject: string | null } | null> {
+  try {
+    const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
+    const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
+    const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages/${encodeURIComponent(messageId)}?format=metadata&metadataHeaders=Message-ID&metadataHeaders=Subject`;
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { payload?: { headers?: Array<{ name?: string; value?: string }> } };
+    const h = (name: string) => data.payload?.headers?.find((x) => (x.name ?? '').toLowerCase() === name.toLowerCase())?.value ?? null;
+    return { messageIdHeader: h('Message-ID'), subject: h('Subject') };
+  } catch {
+    return null;
+  }
 }

@@ -29,7 +29,7 @@
  */
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
-import { gmailSenderAddress } from '@/lib/email/gmail-sender';
+import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { generateToken } from '@/lib/email/unsubscribe-token';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
@@ -40,6 +40,8 @@ import { compileCleared, findCompileForCopy, loadActionPack } from './action-pac
 import { appendLedger, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
+import { computeNextTouch, type NextTouch } from './next-touch';
+import { getGmailMessageHeaders } from '@/lib/email/gmail-inbox';
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
 
@@ -53,6 +55,12 @@ export type SellerDraftRefusal =
   | 'decision_not_found'
   | 'decision_blocked'
   | 'decision_superseded'
+  | 'first_touch_already_sent'
+  | 'touch_not_due'
+  | 'sequence_stopped'
+  | 'reply_truth_unavailable'
+  | 'template_citations_unresolved'
+  | 'no_step_copy'
   | 'not_an_email_action'
   | 'no_hypothesis'
   | 'hypothesis_not_found'
@@ -99,6 +107,12 @@ export interface SellerDraftDeps {
   senderAddress?: () => string;
   /** The GAP Gmail identity (gap-sender.ts); null means the env identity. */
   gapSender?: () => GmailSender | null;
+  /** Next-touch truth (next-touch.ts); injectable for tests. */
+  nextTouch?: (prisma: PrismaLike, decisionId: string, now: Date) => Promise<NextTouch>;
+  /** RFC Message-ID + Subject of the prior sent message, for threading. */
+  getMessageHeaders?: (messageId: string, sender?: GmailSender) => Promise<{ messageIdHeader: string | null; subject: string | null } | null>;
+  /** The sender's real Gmail signature (null when unreadable: the template sign-off stays). */
+  signature?: (sender: GmailSender | undefined) => Promise<string | null>;
   unsubscribeUrl?: (email: string) => string;
 }
 
@@ -111,17 +125,48 @@ function escapeHtml(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-/** Plain paragraphs, no tracking pixel, no branded wrapper: this is Casey's own 1:1 email. */
-export function draftHtml(body: string, unsubscribeUrl: string): string {
-  const paragraphs = body
+/** The plain sign-off line the seed templates end with (sequences/families.ts SIGNATURE). */
+export const TEMPLATE_SIGNOFF = 'Casey Larkin, YardFlow by FreightRoll';
+
+/** Drop the template's plain sign-off when the real Gmail signature replaces it. */
+function withoutTemplateSignoff(body: string): string {
+  const trimmed = body.replace(/\s+$/, '');
+  return trimmed.endsWith(TEMPLATE_SIGNOFF) ? trimmed.slice(0, -TEMPLATE_SIGNOFF.length).replace(/\s+$/, '') : trimmed;
+}
+
+/** The signature as plain text for the text/plain part. */
+export function signatureText(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&middot;|&#183;/g, '·')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n\s*\n+/g, '\n')
+    .trim();
+}
+
+/**
+ * Plain paragraphs, no tracking pixel, no branded wrapper: this is Casey's own
+ * 1:1 email. With `signatureHtml` (the sender's real Gmail signature, which
+ * Gmail does not add to API-created drafts), it replaces the template's plain
+ * sign-off line; without it the body is exactly the rendered copy.
+ */
+export function draftHtml(body: string, unsubscribeUrl: string, signatureHtml: string | null = null): string {
+  const text = signatureHtml ? withoutTemplateSignoff(body) : body;
+  const paragraphs = text
     .split(/\n{2,}/)
     .map((p) => `<p style="margin:0 0 14px 0;">${escapeHtml(p).replace(/\n/g, '<br />')}</p>`)
     .join('\n');
-  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.</p>\n</div>`;
+  const signature = signatureHtml ? `\n<div class="gmail_signature">${signatureHtml}</div>` : '';
+  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}${signature}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.</p>\n</div>`;
 }
 
-export function draftText(body: string, unsubscribeUrl: string): string {
-  return `${body}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
+export function draftText(body: string, unsubscribeUrl: string, signatureHtml: string | null = null): string {
+  const text = signatureHtml ? `${withoutTemplateSignoff(body)}\n\n${signatureText(signatureHtml)}` : body;
+  return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
 }
 
 async function refuse(
@@ -140,7 +185,7 @@ async function refuse(
 
 export async function createSellerGmailDraft(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean },
+  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean; stepIndex?: number },
   deps: SellerDraftDeps = {},
 ): Promise<SellerDraftResult> {
   const { decisionId, actor, now } = input;
@@ -166,7 +211,24 @@ export async function createSellerGmailDraft(
   if (!EMAIL_ACTIONS.has(decision.action)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'not_an_email_action', detail: decision.action });
   if (!decision.hypothesis_id) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_hypothesis' });
 
-  const pack = await loadActionPack(prisma, { hypothesisId: decision.hypothesis_id, decisionId });
+  // Which touch. Step 0 only before anything was sent; a later step only when
+  // next-touch says it is due and no stop rule fired (reply, DNC, unsubscribe,
+  // invalid address, meeting booked). Unreadable reply truth prepares nothing.
+  const stepIndex = Math.max(0, input.stepIndex ?? 0);
+  const touch = await (deps.nextTouch ?? computeNextTouch)(prisma, decisionId, now);
+  if (stepIndex === 0 && touch.state !== 'not_started') {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'first_touch_already_sent', detail: touch.state });
+  }
+  if (stepIndex > 0) {
+    if (touch.state === 'stopped') return refuse(prisma, actor, decisionId, { ok: false, reason: 'sequence_stopped', detail: touch.detail });
+    if (touch.state === 'unknown') return refuse(prisma, actor, decisionId, { ok: false, reason: 'reply_truth_unavailable', detail: touch.detail });
+    if (touch.state !== 'due' || touch.stepIndex !== stepIndex) {
+      const when = touch.state === 'waiting' ? ` (touch ${touch.stepIndex + 1} due ${touch.dueAt})` : ` (${touch.state})`;
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'touch_not_due', detail: `step ${stepIndex} is not due${when}` });
+    }
+  }
+
+  const pack = await loadActionPack(prisma, { hypothesisId: decision.hypothesis_id, decisionId, stepIndex });
   if (!pack) return refuse(prisma, actor, decisionId, { ok: false, reason: 'hypothesis_not_found' });
   if (pack.hypothesis.status !== 'active') return refuse(prisma, actor, decisionId, { ok: false, reason: 'hypothesis_not_active', detail: pack.hypothesis.status });
   const persona = pack.persona;
@@ -176,9 +238,19 @@ export async function createSellerGmailDraft(
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
   if (!pack.version) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_version' });
-  const step0 = pack.steps[0];
-  if (!pack.rendered || !step0) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_step0_copy' });
+  const step0 = pack.steps[stepIndex];
+  if (!pack.rendered || !step0) return refuse(prisma, actor, decisionId, { ok: false, reason: stepIndex === 0 ? 'no_step0_copy' : 'no_step_copy' });
   if (pack.rendered.unrendered) return refuse(prisma, actor, decisionId, { ok: false, reason: 'unrendered_placeholder', detail: pack.rendered.unrendered });
+  if (pack.unresolvedCitations.length > 0) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'template_citations_unresolved', detail: `the copy cites evidence that is not this hypothesis's: ${pack.unresolvedCitations.join(', ')}` });
+  }
+  const sentBodies =
+    touch.state === 'waiting' || touch.state === 'due'
+      ? (await listDraftRecords(prisma, decisionId))
+          .filter((r) => r.fate === 'sent' && (r.drafted.stepIndex ?? 0) < stepIndex)
+          .sort((a, b) => (a.drafted.stepIndex ?? 0) - (b.drafted.stepIndex ?? 0))
+          .map((r) => r.drafted.bodySnapshot)
+      : [];
   const contentHash = pack.contentHash!;
 
   // Idempotency: this exact copy already drafted for this card and still a draft.
@@ -195,10 +267,10 @@ export async function createSellerGmailDraft(
       {
         hypothesisId: pack.hypothesis.id,
         sequenceVersionId: pack.version.id,
-        stepIndex: 0,
+        stepIndex,
         subject: pack.rendered.marked.subject,
         body: pack.rendered.marked.body,
-        priorBodies: [],
+        priorBodies: sentBodies,
         contract: {
           hypothesis: {
             observation: pack.hypothesis.observation ?? '',
@@ -244,7 +316,7 @@ export async function createSellerGmailDraft(
         detail: reasons.join(', '),
       });
     }
-    compileRow = await findCompileForCopy(prisma, { hypothesisId: pack.hypothesis.id, versionId: pack.version.id, marked: pack.rendered.marked });
+    compileRow = await findCompileForCopy(prisma, { hypothesisId: pack.hypothesis.id, versionId: pack.version.id, marked: pack.rendered.marked, stepIndex });
     if (!compileRow && compiled.verdict === 'pass' && compiled.id) {
       compileRow = { id: compiled.id, verdict: 'pass', created_at: now, approved: false, approvalRequestId: null, approvalStatus: null };
     }
@@ -273,15 +345,35 @@ export async function createSellerGmailDraft(
   // Gmail API mailbox and the MIME From together. Else the env identity.
   const gapSender = (deps.gapSender ?? gapGmailSender)();
   const senderIdentity = gapSender?.userEmail ?? (deps.senderAddress ?? gmailSenderAddress)();
+  const signatureHtml = await (deps.signature ?? getGmailSignature)(gapSender ?? undefined);
+
+  // Threading: only from reconciled truth. The prior touch's Gmail thread id
+  // and message id come from the SENT ledger row; the RFC Message-ID is read
+  // from Gmail. No thread id on record means a fresh message, never a guess.
+  let threadContext: ExecutionIntent['threadContext'] = null;
+  let subject = pack.rendered.queued.subject;
+  let inReplyToGmailMessageId: string | null = null;
+  if (stepIndex > 0 && (touch.state === 'due' || touch.state === 'waiting') && touch.threadFrom.gmailThreadId) {
+    subject = `Re: ${touch.sent[0].subject.replace(/^\s*(re:\s*)+/i, '')}`;
+    const hdr = await (deps.getMessageHeaders ?? getGmailMessageHeaders)(touch.threadFrom.gmailSentMessageId, gapSender ?? undefined);
+    threadContext = {
+      threadId: touch.threadFrom.gmailThreadId,
+      subject,
+      ...(hdr?.messageIdHeader ? { inReplyTo: hdr.messageIdHeader, references: [hdr.messageIdHeader] } : {}),
+    };
+    inReplyToGmailMessageId = touch.threadFrom.gmailSentMessageId;
+  }
+
   const intent: ExecutionIntent = {
     engine: 'gmail_draft',
     personaId: persona.id,
     hypothesisId: pack.hypothesis.id,
     sequenceVersionId: pack.version.id,
-    stepIndex: 0,
+    stepIndex,
     compileIds: [compileRow!.id],
     senderIdentity,
-    idempotencyKey: `gmail_draft:${decisionId}:${contentHash}`,
+    idempotencyKey: `gmail_draft:${decisionId}:${stepIndex}:${contentHash}`,
+    threadContext,
     actor,
     actorKind: 'human',
     mode: 'live',
@@ -291,9 +383,9 @@ export async function createSellerGmailDraft(
     intent,
     {
       to: email,
-      subject: pack.rendered.queued.subject,
-      html: draftHtml(pack.rendered.queued.body, unsubscribeUrl),
-      text: draftText(pack.rendered.queued.body, unsubscribeUrl),
+      subject,
+      html: draftHtml(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
+      text: draftText(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
       headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
       ...(gapSender ? { sender: gapSender } : {}),
     },
@@ -312,10 +404,12 @@ export async function createSellerGmailDraft(
     accountName: pack.hypothesis.account_name,
     recipient: email,
     senderIdentity,
-    subject: pack.rendered.queued.subject,
+    subject,
     contentHash,
     bodySnapshot: pack.rendered.queued.body,
     sequenceVersionId: pack.version.id,
+    stepIndex,
+    inReplyToGmailMessageId,
     compileId: compileRow!.id,
     gmailDraftId: receipt.engineId,
     gmailDraftMessageId: receipt.draftMessageId ?? null,

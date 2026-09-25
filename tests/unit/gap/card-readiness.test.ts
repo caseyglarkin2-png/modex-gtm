@@ -113,3 +113,44 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
     expect(cardReadiness(item({ blocked: true, action: 'research_required', ruleId: 'suppression_unknown', suppression: { class: 'service_unreadable', hits: [] } }))).toMatchObject({ state: 'blocked', title: 'Suppression status unknown' });
   });
 });
+
+describe('cardReadiness: sequence cards (last mile)', () => {
+  const base = () => ({
+    id: 'dec-1', action: 'enroll_gap_sequence', blocked: false, ruleId: 'enroll',
+    account: { name: 'Kroger', hubspotCompanyId: '555' },
+    persona: { id: 1886, displayName: 'Joey Maggard', email: 'joey@kroger.com', hubspotContactId: '1' },
+    hypothesis: { id: 'hyp-1' }, suppression: { class: 'clear' as const, hits: [] },
+  });
+
+  it('WAITING: touch 2 due Wed, no action to take', () => {
+    const r = cardReadiness({ ...base(), touch: { state: 'waiting', stepIndex: 1, dueAt: '2026-09-30T15:00:00.000Z', sentCount: 1 } });
+    expect(r.state === 'actionable' && r.primary.label).toBe('Waiting: touch 2 due Wed, Sep 30');
+    expect(r.state === 'actionable' && r.primary.href).toBeNull();
+  });
+
+  it('FOLLOW UP: touch due opens the action pack', () => {
+    const r = cardReadiness({ ...base(), touch: { state: 'due', stepIndex: 1, dueAt: '2026-09-30T15:00:00.000Z', sentCount: 1 } });
+    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Follow up: open action pack (touch 2)', href: '/gap/preview/hyp-1?personaId=1886&decisionId=dec-1' });
+  });
+
+  it('REPLIED: sequence stopped, points at logging the reply', () => {
+    const r = cardReadiness({ ...base(), touch: { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sentCount: 1 } });
+    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Log the reply', href: '/gap/replies' });
+  });
+
+  it('unreadable sequence state is a named prerequisite, never an outreach action', () => {
+    expect(cardReadiness({ ...base(), touch: { state: 'unknown', detail: 'Gmail 503', sentCount: 1 } }).state).toBe('missing_prerequisite');
+  });
+});
+
+describe('cardReadiness: RESEARCH THIS', () => {
+  it('evidence-gap research cards are researchable; other prerequisites are not', () => {
+    const b = { id: 'd', action: 'research_required', blocked: false, account: { name: 'Kroger', hubspotCompanyId: '1' }, persona: { id: 1, displayName: 'Joey', email: 'j@k.com', hubspotContactId: '2' }, hypothesis: { id: 'h' } };
+    for (const ruleId of ['evidence_thin', 'no_hypothesis', 'hyp_stale']) {
+      const r = cardReadiness({ ...b, ruleId });
+      expect(r.state === 'missing_prerequisite' && r.researchable).toBe(true);
+    }
+    const tam = cardReadiness({ ...b, ruleId: 'tam_unknown' });
+    expect(tam.state === 'missing_prerequisite' && tam.researchable).toBeFalsy();
+  });
+});

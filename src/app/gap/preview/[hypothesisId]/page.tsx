@@ -44,6 +44,7 @@ import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
 import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
+import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch';
 import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
@@ -96,7 +97,17 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
   // One loader for the page AND the draft service (action-pack.ts): the copy
   // shown here is byte-for-byte the copy a draft would carry, for the person
   // on the card, judged by the compile row for exactly this copy.
-  const pack = await loadActionPack(prisma, { hypothesisId, personaId: personaIdParam, decisionId: decisionIdParam });
+  // The touch this card is on: a DUE follow-up renders that step; otherwise step 0.
+  let touch: NextTouch | null = null;
+  if (decisionIdParam) {
+    try {
+      touch = await computeNextTouch(prisma, decisionIdParam, new Date());
+    } catch {
+      touch = { state: 'unknown', detail: 'Could not evaluate the sequence.', sent: [] };
+    }
+  }
+  const touchStep = touch?.state === 'due' ? touch.stepIndex : 0;
+  const pack = await loadActionPack(prisma, { hypothesisId, personaId: personaIdParam, decisionId: decisionIdParam, stepIndex: touchStep });
   if (!pack) notFound();
   const { hypothesis, persona, decision, target, top100, version, steps } = pack;
 
@@ -183,6 +194,21 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
             ((await prisma.sendApprovalRequest.findUnique({ where: { id: pack.compile.approvalRequestId }, select: { comment: true } })) as { comment: string | null } | null)?.comment ?? '',
         }
       : null;
+  const fmtDay = (iso: string) => new Date(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+  const touchIneligible = !touch || touch.state === 'not_started' || touch.state === 'due'
+    ? null
+    : touch.state === 'waiting'
+      ? `Touch ${touch.stepIndex + 1} is due ${fmtDay(touch.dueAt)}. Nothing to draft yet.`
+      : touch.state === 'stopped'
+        ? `Sequence stopped: ${touch.detail}`
+        : touch.state === 'complete'
+          ? 'Every touch in this sequence has been sent.'
+          : touch.state === 'unknown'
+            ? `Sequence status unknown: ${touch.detail} Nothing is prepared until it can be read.`
+            : null;
+  const citationIneligible = pack.unresolvedCitations.length > 0
+    ? `This step's template cites evidence that is not this account's (${pack.unresolvedCitations.join(', ')}). It must be rewritten with this account's facts before it can be drafted.`
+    : null;
   const drafts: DraftRow[] = decision
     ? (await listDraftRecords(prisma, decision.id)).map((d) => ({
         gmailDraftId: d.drafted.gmailDraftId,
@@ -316,6 +342,30 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         </div>
       </section>
 
+      {touch && touch.state !== 'not_started' ? (
+        <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</p>
+          {'sent' in touch
+            ? touch.sent.map((t) => (
+                <p key={t.gmailSentMessageId}>
+                  Touch {t.stepIndex + 1} sent {fmtDay(t.sentAt)}
+                </p>
+              ))
+            : null}
+          {touch.state === 'waiting' ? <p className="font-medium">Waiting: touch {touch.stepIndex + 1} due {fmtDay(touch.dueAt)}</p> : null}
+          {touch.state === 'due' ? <p className="font-medium">Follow up: touch {touch.stepIndex + 1} is due now (shown below)</p> : null}
+          {touch.state === 'stopped' ? <p className="font-medium text-[var(--destructive)]">Sequence stopped: {touch.detail}</p> : null}
+          {touch.state === 'complete' ? <p className="font-medium">Sequence complete</p> : null}
+          {touch.state === 'unknown' ? <p className="font-medium">Sequence status unknown: {touch.detail}</p> : null}
+        </section>
+      ) : null}
+
+      {pack.unresolvedCitations.length > 0 ? (
+        <p role="alert" data-testid="unresolved-citations" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
+          This step&apos;s template states facts from placeholder evidence ({pack.unresolvedCitations.join(', ')}), not from {hypothesis.account_name}&apos;s own signals. Do not send it as written.
+        </p>
+      ) : null}
+
       {renderedEmail ? (
         <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -333,7 +383,7 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
             <p className="mt-1 whitespace-pre-wrap text-sm" data-testid="email-body">{renderedEmail.queued.body}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={renderedEmail.queued.body} label="Copy email" />
+            {pack.unresolvedCitations.length === 0 ? <CopyButton text={renderedEmail.queued.body} label="Copy email" /> : null}
             {persona?.email ? <CopyButton text={persona.email} label="Copy email address" /> : null}
           </div>
           {!emailReady ? (
@@ -361,8 +411,9 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
           emailReady={emailReady}
           senderIdentity={gapGmailSender()?.userEmail ?? gmailSenderAddress()}
           drafts={drafts}
-          ineligibleReason={superseded ?? draftIneligible}
+          ineligibleReason={superseded ?? touchIneligible ?? citationIneligible ?? draftIneligible}
           pendingApproval={pendingApproval}
+          stepIndex={touchStep}
         />
       ) : null}
 

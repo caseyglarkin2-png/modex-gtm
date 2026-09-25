@@ -357,3 +357,14 @@ describe('<DecisionCard> leak guard', () => {
     }
   });
 });
+
+describe('<DecisionCard> RESEARCH THIS', () => {
+  it('a research card with an evidence gap shows Research this; running it never touches the draft route', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ runId: 'run1', outcome: 'insufficient_evidence', facts: [], rejected: [], conflicts: [] }), { status: 200 }));
+    render(<DecisionCard item={item({ action: 'research_required', ruleId: 'evidence_thin' })} onAct={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Research this' }));
+    expect(await screen.findByTestId('research-none')).toHaveTextContent('No defensible outreach trigger found.');
+    expect(fetchMock.mock.calls.map(([u]) => String(u))).toEqual(['/api/gap/research']);
+    fetchMock.mockRestore();
+  });
+});

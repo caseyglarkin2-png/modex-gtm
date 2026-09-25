@@ -41,6 +41,8 @@ export interface ReadinessInput {
   };
   hypothesis: { id: string; status?: string } | null;
   suppression?: { class: SuppressionClass; hits: string[] } | null;
+  /** Multi-touch state for a card with a Gmail-proven sent touch (queue.ts TouchSummary). */
+  touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
 }
 
 export interface Link {
@@ -57,7 +59,10 @@ export type CardReadiness =
       secondary: Link[];
       warning?: { title: string; body: string };
     }
-  | { state: 'missing_prerequisite'; missing: string; fix: Link; warning?: { title: string; body: string } };
+  | { state: 'missing_prerequisite'; missing: string; fix: Link; warning?: { title: string; body: string }; researchable?: boolean };
+
+/** Rules whose missing prerequisite is EVIDENCE, so RESEARCH THIS can close it. */
+export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin', 'no_hypothesis', 'hyp_stale']);
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
 
@@ -94,6 +99,11 @@ function hypothesisFix(): Link {
 }
 
 export function cardReadiness(item: ReadinessInput): CardReadiness {
+  const r = readinessOf(item);
+  return r.state === 'missing_prerequisite' && RESEARCHABLE_RULES.has(item.ruleId) && !item.touch ? { ...r, researchable: true } : r;
+}
+
+function readinessOf(item: ReadinessInput): CardReadiness {
   const cls = item.suppression?.class ?? 'clear';
 
   if (item.blocked || item.action === 'do_not_contact') {
@@ -124,6 +134,31 @@ export function cardReadiness(item: ReadinessInput): CardReadiness {
   }
 
   const withWarning = <T extends object>(r: T): T => (warning ? { ...r, warning } : r);
+
+  // A card already in a sequence speaks in touches, not in first-email terms.
+  if (item.touch) {
+    const t = item.touch;
+    const nth = (t.stepIndex ?? 0) + 1;
+    const day = t.dueAt ? new Date(t.dueAt).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : '';
+    switch (t.state) {
+      case 'waiting':
+        return { state: 'actionable', primary: { label: `Waiting: touch ${nth} due ${day}`, href: null, note: `Touch ${t.sentCount} sent. Nothing to do until then.` }, secondary: packLink ? [packLink] : [] };
+      case 'due':
+        return {
+          state: 'actionable',
+          primary: packLink ? { label: `Follow up: open action pack (touch ${nth})`, href: packLink.href } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No hypothesis on this card to render the follow-up from.' },
+          secondary: [],
+        };
+      case 'stopped':
+        return t.reason === 'replied'
+          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap/replies' }, secondary: packLink ? [packLink] : [] }
+          : { state: 'actionable', primary: { label: `Sequence stopped`, href: null, note: t.detail ?? 'A stop rule fired.' }, secondary: [] };
+      case 'complete':
+        return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: packLink ? [packLink] : [] };
+      case 'unknown':
+        return { state: 'missing_prerequisite', missing: `Sequence status could not be read (${t.detail ?? 'Gmail unreadable'}). Nothing is prepared until it can be.`, fix: packLink ?? hypothesisFix() };
+    }
+  }
 
   switch (item.action) {
     case 'enroll_gap_sequence':

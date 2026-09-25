@@ -43,15 +43,18 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
   if (!id?.trim()) return NextResponse.json({ error: 'decision_not_found' }, { status: 404 });
 
   // Optional body `{ checkOnly: true }`: compile and gate the copy, draft nothing.
+  // `{ stepIndex: n }` names the follow-up touch; the service refuses it unless it is due.
   let checkOnly = false;
+  let stepIndex = 0;
   try {
-    const raw = (await request.json()) as unknown;
-    checkOnly = typeof raw === 'object' && raw !== null && (raw as { checkOnly?: unknown }).checkOnly === true;
+    const raw = (await request.json()) as { checkOnly?: unknown; stepIndex?: unknown } | null;
+    checkOnly = raw?.checkOnly === true;
+    stepIndex = typeof raw?.stepIndex === 'number' && Number.isInteger(raw.stepIndex) && raw.stepIndex >= 0 ? raw.stepIndex : 0;
   } catch {
     checkOnly = false;
   }
 
-  const result = await createSellerGmailDraft(prisma, { decisionId: id.trim(), actor: email, now: new Date(), checkOnly });
+  const result = await createSellerGmailDraft(prisma, { decisionId: id.trim(), actor: email, now: new Date(), checkOnly, stepIndex });
   if (!result.ok) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { ok: _ok, reason, ...rest } = result;

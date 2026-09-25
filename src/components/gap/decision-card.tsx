@@ -33,6 +33,7 @@ import {
   telHref,
 } from '@/lib/gap/routing/seller-action';
 import { cardReadiness } from '@/lib/gap/routing/card-readiness';
+import { ResearchThis } from './research-this';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge } from './hypothesis-drawer';
 import { formatWhen } from '@/lib/gap/ui/format';
@@ -81,6 +82,7 @@ export interface QueueItem {
   hypothesis: QueueItemHypothesis | null;
   /** Provenance class of the suppression the router saw (optional for older payloads). */
   suppression?: { class: SuppressionClass; hits: string[] } | null;
+  touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
   humanAction: string | null;
   humanActionAt: string | null;
   createdAt: string;
@@ -198,6 +200,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
     },
     hypothesis: item.hypothesis ? { id: item.hypothesis.id, status: item.hypothesis.status } : null,
     suppression: item.suppression ?? null,
+    touch: item.touch ?? null,
   });
 
   return (
@@ -318,6 +321,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
           >
             {readiness.fix.label}
           </a>
+          {readiness.researchable ? <ResearchThis decisionId={item.id} /> : null}
         </div>
       ) : null}
 

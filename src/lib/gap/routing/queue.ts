@@ -64,10 +64,24 @@ export interface QueueItem {
   hypothesis: { id: string; status: string; family: string; confidence: number } | null;
   /** Provenance class of the suppression the router saw, re-derived from the frozen snapshot (routing only; the send gate still refuses any hit). */
   suppression: { class: SuppressionClass; hits: string[] };
+  /** The multi-touch state, only for cards with a Gmail-proven sent touch. */
+  touch?: TouchSummary | null;
   humanAction: string | null;
   humanActionAt: Date | null;
   createdAt: Date;
 }
+
+export interface TouchSummary {
+  state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown';
+  stepIndex?: number;
+  dueAt?: string;
+  reason?: string;
+  detail?: string;
+  sentCount: number;
+}
+
+/** Cards per page whose next touch is evaluated (each may read one Gmail thread). */
+export const MAX_TOUCH_EVALUATIONS = 20;
 
 export interface ListQueueResult {
   runId: string | null;
@@ -292,11 +306,48 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
     }
   }
 
-  return {
-    runId,
-    items: page.map((row) => toItem(row, typeof row.persona_id === 'number' ? liveById.get(row.persona_id) : null)),
-    nextCursor,
-  };
+  const items = page.map((row) => toItem(row, typeof row.persona_id === 'number' ? liveById.get(row.persona_id) : null));
+  await attachTouches(prisma, items);
+  return { runId, items, nextCursor };
+}
+
+/**
+ * Next-touch state for cards that have a Gmail-proven sent touch (last mile).
+ * One indexed ledger read for the page, then at most MAX_TOUCH_EVALUATIONS
+ * evaluations. Never breaks the queue: any failure leaves `touch` unset.
+ */
+async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Promise<void> {
+  if (items.length === 0 || typeof prisma?.gapAuditEvent?.findMany !== 'function') return;
+  try {
+    // Lazy: the queue module must not load the execution layer (Gmail, ledger) at import time.
+    const { DRAFT_SENT } = await import('../execution/draft-ledger');
+    const { computeNextTouch } = await import('../execution/next-touch');
+    const sentRows = (await prisma.gapAuditEvent.findMany({
+      where: { subject_type: 'routing_decision', subject_id: { in: items.map((i) => i.id) }, kind: DRAFT_SENT },
+      select: { subject_id: true },
+    })) as Array<{ subject_id: string }>;
+    const withSends = [...new Set(sentRows.map((r) => r.subject_id))].slice(0, MAX_TOUCH_EVALUATIONS);
+    const now = new Date();
+    for (const id of withSends) {
+      const item = items.find((i) => i.id === id);
+      if (!item) continue;
+      try {
+        const t = await computeNextTouch(prisma, id, now);
+        if (t.state === 'not_started') continue;
+        item.touch = {
+          state: t.state,
+          sentCount: t.sent.length,
+          ...(t.state === 'waiting' || t.state === 'due' ? { stepIndex: t.stepIndex, dueAt: t.dueAt } : {}),
+          ...(t.state === 'stopped' ? { reason: t.reason, detail: t.detail } : {}),
+          ...(t.state === 'unknown' ? { detail: t.detail } : {}),
+        };
+      } catch {
+        // leave touch unset
+      }
+    }
+  } catch {
+    // leave every touch unset
+  }
 }
 
 // ---------------------------------------------------------------------------
