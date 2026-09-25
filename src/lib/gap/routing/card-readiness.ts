@@ -128,7 +128,7 @@ export function cardReadiness(item: ReadinessInput): CardReadiness {
   switch (item.action) {
     case 'enroll_gap_sequence':
     case 'one_off_email': {
-      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No approved hypothesis for ${item.account.name}, so there is no email to send.`, fix: hypothesisFix() });
+      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix() });
       if (!item.persona.email) return withWarning({ state: 'missing_prerequisite' as const, missing: `No email address on file for ${name}.`, fix: contactFix(item, 'Add an email in HubSpot') });
       return withWarning({ state: 'actionable' as const, primary: packLink!, secondary: [] });
     }
@@ -154,7 +154,9 @@ export function cardReadiness(item: ReadinessInput): CardReadiness {
     default: {
       switch (item.ruleId) {
         case 'no_hypothesis':
-          return withWarning({ state: 'missing_prerequisite' as const, missing: `No approved hypothesis for ${item.account.name} yet, so there is no outreach to prepare.`, fix: hypothesisFix() });
+          // The router looks for this person's own hypothesis, then an account-level one; the account may
+          // still have hypotheses written for OTHER people (Kroger does), so never claim it has none.
+          return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix() });
         case 'bounced_or_invalid':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable email or phone for ${name}.`, fix: contactFix(item, 'Find a current email or phone') });
         case 'tam_unknown':

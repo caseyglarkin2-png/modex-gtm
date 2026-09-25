@@ -42,7 +42,14 @@ export interface SuppressionReader {
 /** The aggregate leg name when clawd answers without naming an authority. */
 export const CONTRACT_LEG = 'clawd_contract';
 
-export const SUPPRESSION_READ_TIMEOUT_MS = 5_000;
+/**
+ * Measured 2026-09-25: clawd's contract answers in about 3.0 to 3.6 s warm
+ * (it reads five legs, HubSpot among them). At 5 s a cold call timed out and
+ * routed two provably clear General Mills contacts to R0b "suppression
+ * unknown". Routing only: a timeout is still `unknown` (fail closed), and the
+ * send-time gate keeps its own behavior.
+ */
+export const SUPPRESSION_READ_TIMEOUT_MS = 12_000;
 
 export interface ClawdSuppressionReaderOptions {
   fetchImpl?: typeof fetch;
