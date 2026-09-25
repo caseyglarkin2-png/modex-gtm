@@ -42,9 +42,13 @@ import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler
 import { getHypothesis } from '@/lib/gap/hypothesis/service';
 import { resolveEnrollTarget } from '@/lib/gap/routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
+import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
 import { parseSteps } from '@/lib/gap/sequence/steps';
+import { firstNameOf, renderStepCopy } from '@/lib/gap/sequence/render';
+import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
+import { CopyButton } from '@/components/gap/copy-button';
 import { FactBlock, HypothesisBlock } from '@/components/gap/fact-hypothesis-blocks';
 import { HypothesisStatusBadge, asStringList } from '@/components/gap/hypothesis-drawer';
 import {
@@ -173,9 +177,14 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
   const persona = hypothesis.primary_persona_id
     ? await prisma.persona.findUnique({
         where: { id: hypothesis.primary_persona_id },
-        select: { id: true, name: true, title: true, email: true, hubspot_contact_id: true },
+        select: { id: true, name: true, title: true, email: true, phone: true, linkedin_url: true, hubspot_contact_id: true },
       })
     : null;
+
+  const account = await prisma.account.findUnique({
+    where: { name: hypothesis.account_name },
+    select: { hubspot_company_id: true },
+  });
 
   const decision: DecisionLite | null = await prisma.routingDecision.findFirst({
     where: { hypothesis_id: hypothesis.id, action: 'enroll_gap_sequence' },
@@ -222,6 +231,41 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
   }
 
   const cleared = allStepsCleared(reportSteps);
+
+  // The fully rendered, placeholder-free step-0 copy (Seller Action Center,
+  // dogfood fix 2026-09-25). `renderStepCopy`'s QUEUED copy is exactly "ready
+  // to send" text: markers and {{tokens}} resolved, nothing left to fill in.
+  // Gated by the SAME compiler verdict (reportSteps[0]) the enroll button
+  // already uses, so this never claims "ready to send" when the compiler
+  // has not cleared it.
+  const step0 = steps[0] as { templates?: { subjectTemplate?: string | null; bodyTemplate?: string | null } | null } | undefined;
+  const renderedEmail =
+    persona && step0?.templates
+      ? renderStepCopy(
+          { subject: step0.templates.subjectTemplate ?? '', body: step0.templates.bodyTemplate ?? '' },
+          { firstName: firstNameOf(persona.name), account: hypothesis.account_name, observation: hypothesis.observation },
+        )
+      : null;
+  const step0Verdict = reportSteps[0]?.verdict ?? 'missing';
+  const emailReady = renderedEmail !== null && renderedEmail.unrendered === null && step0Verdict === 'pass';
+
+  const callPack =
+    persona && renderedEmail
+      ? buildCallPack({
+          firstName: firstNameOf(persona.name),
+          senderFirstName: 'Casey',
+          accountName: hypothesis.account_name,
+          observationPlain: stripObservationCitations(hypothesis.observation ?? ''),
+          problemHypothesis: hypothesis.problem_hypothesis ?? '',
+          diagnosticQuestion: asStringList(hypothesis.falsification_questions)[0] ?? null,
+        })
+      : null;
+
+  const mailto = persona?.email ? mailtoHref(persona.email) : null;
+  const tel = persona?.phone ? telHref(persona.phone) : null;
+  const contactUrl = persona?.hubspot_contact_id ? hubspotContactUrl(persona.hubspot_contact_id) : null;
+  const companyUrl = account?.hubspot_company_id ? hubspotCompanyUrl(account.hubspot_company_id) : null;
+
   const signals = Array.isArray(hypothesis.signals)
     ? hypothesis.signals.map((link: { signal?: unknown }) => link.signal).filter((s: unknown): s is Obj => isObj(s))
     : [];
@@ -256,12 +300,45 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Persona</p>
           {persona ? (
-            <p className="mt-1">
-              {persona.name}
-              {persona.title ? <span className="text-[var(--muted-foreground)]">, {persona.title}</span> : null}
-              <br />
-              <span className="text-xs text-[var(--muted-foreground)]">{persona.email ?? 'no email'}</span>
-            </p>
+            <div className="mt-1">
+              <p>
+                {persona.name}
+                {persona.title ? <span className="text-[var(--muted-foreground)]">, {persona.title}</span> : null}
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2 text-xs" data-testid="preview-contact-buttons">
+                {mailto ? (
+                  <a href={mailto} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                    Email
+                  </a>
+                ) : (
+                  <span className="italic text-[var(--muted-foreground)]">email unavailable</span>
+                )}
+                {tel ? (
+                  <a href={tel} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                    Call
+                  </a>
+                ) : (
+                  <span className="italic text-[var(--muted-foreground)]">phone unavailable</span>
+                )}
+                {persona.linkedin_url ? (
+                  <a href={persona.linkedin_url} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                    LinkedIn
+                  </a>
+                ) : (
+                  <span className="italic text-[var(--muted-foreground)]">LinkedIn unavailable</span>
+                )}
+                {contactUrl ? (
+                  <a href={contactUrl} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                    HubSpot contact
+                  </a>
+                ) : null}
+                {companyUrl ? (
+                  <a href={companyUrl} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                    HubSpot account
+                  </a>
+                ) : null}
+              </div>
+            </div>
           ) : (
             <p className="mt-1 italic text-[var(--muted-foreground)]">no primary persona</p>
           )}
@@ -287,6 +364,60 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
           )}
         </div>
       </section>
+
+      {renderedEmail ? (
+        <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email</p>
+            <Badge data-testid="email-readiness" variant={emailReady ? 'success' : 'warning'}>
+              {emailReady ? 'Ready to send' : 'Needs copy review'}
+            </Badge>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Subject</p>
+            <p className="mt-1 text-sm" data-testid="email-subject">{renderedEmail.queued.subject}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Body</p>
+            <p className="mt-1 whitespace-pre-wrap text-sm" data-testid="email-body">{renderedEmail.queued.body}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <CopyButton text={renderedEmail.queued.body} label="Copy email" />
+            {persona?.email ? <CopyButton text={persona.email} label="Copy email address" /> : null}
+          </div>
+          {!emailReady ? (
+            <p className="text-xs text-[var(--muted-foreground)]">
+              This copy has not cleared the compiler yet (see the report below for the exact failing checks). It is shown for review, not for sending.
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
+      {callPack ? (
+        <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Opener</p>
+            <p className="mt-1 text-sm" data-testid="call-opener">{callPack.opener}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 1 (current state / root cause)</p>
+            <p className="mt-1 text-sm">{callPack.diagnostic1}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 2 (business impact)</p>
+            <p className="mt-1 text-sm">{callPack.diagnostic2}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds)</p>
+            <p className="mt-1 text-sm">{callPack.voicemail}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <CopyButton text={callPack.opener} label="Copy call opener" />
+            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
+          </div>
+        </section>
+      ) : null}
 
       <CompileReport steps={reportSteps} />
 

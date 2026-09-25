@@ -125,9 +125,9 @@ describe('<DecisionCard>', () => {
     expect(screen.getByTestId('acted')).toHaveTextContent('Acted: I called at 2026-09-23 14:05Z');
   });
 
-  it('labels the recommendation as GAP\'s and the buttons as recording, not performing, the action', () => {
+  it('leads with the seller-facing action, and labels the buttons as recording, not performing, the action', () => {
     render(<DecisionCard item={item()} onAct={() => {}} />);
-    expect(screen.getByText('GAP recommends')).toBeInTheDocument();
+    expect(screen.getByTestId('seller-action-label')).toHaveTextContent('Call Jordan');
     expect(screen.getByText(/record your action/i)).toBeInTheDocument();
     expect(screen.getByText('Casey actually did')).toBeInTheDocument();
   });
@@ -224,6 +224,90 @@ describe('<DecisionCard> blocked (safety refusal) cards', () => {
     render(<DecisionCard item={item({ blocked: true, lane: 'blocked', ruleId: 'some_future_rule' })} onAct={() => {}} />);
     expect(screen.getByTestId('blocked-panel')).toHaveTextContent('some_future_rule');
     expect(screen.queryByRole('button', { name: 'I did this' })).toBeNull();
+  });
+});
+
+describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('shows the seller-facing action, not the raw routing action, above the fold', () => {
+    render(<DecisionCard item={item({ action: 'enroll_gap_sequence' })} onAct={() => {}} />);
+    expect(screen.getByTestId('seller-action-label')).toHaveTextContent('Email Jordan');
+  });
+
+  it('renders working contact buttons for whatever contact data exists', () => {
+    vi.stubEnv('NEXT_PUBLIC_HUBSPOT_PORTAL_ID', '3819073');
+    render(
+      <DecisionCard
+        item={item({
+          persona: {
+            id: 41,
+            personaKey: 'vp_operations',
+            displayName: 'Jordan Reyes',
+            email: 'jordan@acme.example',
+            hubspotContactId: '900',
+            phone: '(555) 123-4567',
+            linkedinUrl: 'https://linkedin.com/in/jordanreyes',
+          },
+        })}
+        onAct={() => {}}
+      />,
+    );
+    const buttons = screen.getByTestId('contact-buttons');
+    expect(within(buttons).getByRole('link', { name: /Email/ })).toHaveAttribute('href', 'mailto:jordan@acme.example');
+    expect(within(buttons).getByRole('link', { name: /Call/ })).toHaveAttribute('href', 'tel:5551234567');
+    expect(within(buttons).getByRole('link', { name: /LinkedIn/ })).toHaveAttribute('href', 'https://linkedin.com/in/jordanreyes');
+    expect(within(buttons).getByRole('link', { name: /HubSpot contact/ })).toHaveAttribute('href', 'https://app.hubspot.com/contacts/3819073/contact/900');
+  });
+
+  it('is honest about missing contact fields instead of inventing anything', () => {
+    render(
+      <DecisionCard
+        item={item({ persona: { id: 41, personaKey: 'vp_operations', displayName: 'Jordan Reyes', email: null, hubspotContactId: null, phone: null, linkedinUrl: null } })}
+        onAct={() => {}}
+      />,
+    );
+    const buttons = screen.getByTestId('contact-buttons');
+    expect(within(buttons).getByText('email unavailable')).toBeInTheDocument();
+    expect(within(buttons).getByText('phone unavailable')).toBeInTheDocument();
+    expect(within(buttons).getByText('LinkedIn unavailable')).toBeInTheDocument();
+    expect(within(buttons).queryByRole('link', { name: /HubSpot contact/ })).toBeNull();
+  });
+
+  it('links to the action pack (the hypothesis preview) for an outreach-eligible card with a hypothesis', () => {
+    render(<DecisionCard item={item({ action: 'enroll_gap_sequence' })} onAct={() => {}} />);
+    expect(screen.getByRole('link', { name: /Open action pack/ })).toHaveAttribute('href', '/gap/preview/hyp_1');
+  });
+
+  it('never shows an action pack link for call_now or research_required (not outreach-copy actions)', () => {
+    render(<DecisionCard item={item({ action: 'call_now' })} onAct={() => {}} />);
+    expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
+  });
+
+  it('research_required with no hypothesis shows the honest missing-prerequisite panel, never a fabricated outreach draft', () => {
+    render(<DecisionCard item={item({ action: 'research_required', hypothesis: null })} onAct={() => {}} />);
+    const panel = screen.getByTestId('research-required-panel');
+    expect(panel).toHaveTextContent('Research required');
+    expect(panel).toHaveTextContent('no approved hypothesis');
+    expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
+    expect(screen.queryByTestId('rendered-email')).toBeNull();
+  });
+
+  it('a blocked card never shows contact buttons or an action pack link', () => {
+    render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'do_not_contact', ruleId: 'suppressed' })} onAct={() => {}} />);
+    expect(screen.queryByTestId('contact-buttons')).toBeNull();
+    expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
+    expect(screen.queryByTestId('research-required-panel')).toBeNull();
+  });
+
+  it('keeps the routing internals (rule id, explain, evidence counts) available but collapsed below the fold', () => {
+    render(<DecisionCard item={item()} onAct={() => {}} />);
+    const details = screen.getByTestId('routing-details');
+    expect(details.tagName).toBe('DETAILS');
+    expect(within(details).getByText('R7')).toBeInTheDocument();
+    expect(within(details).getByTestId('explain')).toBeInTheDocument();
   });
 });
 

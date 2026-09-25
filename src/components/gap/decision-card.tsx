@@ -18,11 +18,21 @@
  */
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { ExternalLink, Linkedin, Mail, Phone } from 'lucide-react';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { EnrollTarget, RoutingExplain } from '@/lib/gap/routing/types';
 import { HUMAN_ACTIONS, type HumanAction, type RoutingAction, type RoutingLane } from '@/lib/gap/taxonomy';
 import { RECOMMENDED_HUMAN_ACTION } from '@/lib/gap/routing/agreement';
+import {
+  hubspotCompanyUrl,
+  hubspotContactUrl,
+  mailtoHref,
+  OUTREACH_ROUTING_ACTIONS,
+  sellerActionLabel,
+  telHref,
+} from '@/lib/gap/routing/seller-action';
 import { HypothesisStatusBadge, formatWhen } from './hypothesis-drawer';
 
 // ---------------------------------------------------------------------------
@@ -43,6 +53,9 @@ export interface QueueItemPersona {
   displayName: string | null;
   email: string | null;
   hubspotContactId: string | null;
+  title?: string | null;
+  phone?: string | null;
+  linkedinUrl?: string | null;
 }
 
 export interface QueueItemHypothesis {
@@ -183,11 +196,19 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
   const chipClass = ACTION_CHIP_CLASS[item.action] ?? 'border-[var(--border)] text-[var(--foreground)]';
   const acted = typeof item.humanAction === 'string' && item.humanAction.length > 0;
   const personaLabel = item.persona.displayName?.trim() || item.persona.email?.trim() || `persona ${String(item.persona.id)}`;
+  const firstName = item.persona.displayName?.trim()?.split(/\s+/)[0] ?? null;
   const tamLabel = item.account.tam === 'in' ? 'TAM in' : item.account.tam === 'out' ? 'TAM out' : 'TAM unknown';
   const tierLabel = item.account.tamTier ? `tier ${item.account.tamTier}` : 'no tier';
   const target = item.target && item.target in TARGET_LABEL ? item.target : null;
   const recommendedHumanAction = item.action in RECOMMENDED_HUMAN_ACTION ? RECOMMENDED_HUMAN_ACTION[item.action as RoutingAction] : null;
   const otherOptions = HUMAN_ACTIONS.filter((a) => a !== recommendedHumanAction);
+  const sellerLabel = sellerActionLabel(item.action, firstName, item.account.name);
+  const mailto = mailtoHref(item.persona.email);
+  const tel = telHref(item.persona.phone ?? null);
+  const contactUrl = item.persona.hubspotContactId ? hubspotContactUrl(item.persona.hubspotContactId) : null;
+  const companyUrl = item.account.hubspotCompanyId ? hubspotCompanyUrl(item.account.hubspotCompanyId) : null;
+  const isOutreach = OUTREACH_ROUTING_ACTIONS.has(item.action as RoutingAction);
+  const isNoHypothesis = !item.hypothesis && item.action === 'research_required';
 
   return (
     <article
@@ -196,36 +217,131 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
       data-action={item.action}
       className="rounded-md border border-[var(--border)] bg-[var(--background)] p-4 text-sm shadow-sm"
     >
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
-        {item.blocked ? 'System block' : 'GAP recommends'}
-      </p>
-      <header className="mt-1 flex flex-wrap items-center gap-2">
-        <Badge data-testid="action-chip" className={chipClass}>
-          {words(String(item.action))}
-        </Badge>
-        <span className="font-mono text-xs text-[var(--muted-foreground)]">{item.ruleId}</span>
-        <span className="text-xs text-[var(--muted-foreground)]">priority {item.priority}</span>
-        <Badge variant="outline">{words(String(item.lane))}</Badge>
-        {item.blocked ? <Badge variant="destructive">blocked</Badge> : null}
-        {target ? (
-          <Badge data-testid="target-chip" variant={TARGET_VARIANT[target]}>
-            {TARGET_LABEL[target]}
-          </Badge>
-        ) : null}
-      </header>
+      {item.blocked ? (
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--destructive)]">System block</p>
+      ) : (
+        <p data-testid="seller-action-label" className="text-base font-semibold">
+          {sellerLabel}
+        </p>
+      )}
 
-      <div className="mt-3 space-y-1">
+      <div className="mt-2 space-y-1">
         <p data-testid="account-line" className="font-medium">
           {item.account.name}
-          <span className="ml-2 font-normal text-[var(--muted-foreground)]">
+          <span className="ml-2 font-normal text-xs text-[var(--muted-foreground)]">
             {tamLabel}, {tierLabel}, heat tier {item.account.heatTier}
           </span>
         </p>
         <p data-testid="persona-line">
           {personaLabel}
-          <span className="ml-2 text-[var(--muted-foreground)]">{words(item.persona.personaKey)}</span>
+          <span className="ml-2 text-[var(--muted-foreground)]">{item.persona.title || words(item.persona.personaKey)}</span>
         </p>
-        <div data-testid="hypothesis-line" className="flex flex-wrap items-center gap-2">
+      </div>
+
+      {!item.blocked ? (
+        <div data-testid="contact-buttons" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+          {mailto ? (
+            <a href={mailto} className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+              <Mail className="h-3 w-3" /> Email
+            </a>
+          ) : (
+            <span className="italic text-[var(--muted-foreground)]">email unavailable</span>
+          )}
+          {tel ? (
+            <a href={tel} className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+              <Phone className="h-3 w-3" /> Call
+            </a>
+          ) : (
+            <span className="italic text-[var(--muted-foreground)]">phone unavailable</span>
+          )}
+          {item.persona.linkedinUrl ? (
+            <a
+              href={item.persona.linkedinUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]"
+            >
+              <Linkedin className="h-3 w-3" /> LinkedIn
+            </a>
+          ) : (
+            <span className="italic text-[var(--muted-foreground)]">LinkedIn unavailable</span>
+          )}
+          {contactUrl ? (
+            <a
+              href={contactUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]"
+            >
+              <ExternalLink className="h-3 w-3" /> HubSpot contact
+            </a>
+          ) : null}
+          {companyUrl ? (
+            <a
+              href={companyUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]"
+            >
+              <ExternalLink className="h-3 w-3" /> HubSpot account
+            </a>
+          ) : null}
+        </div>
+      ) : null}
+
+      {!item.blocked && isOutreach && item.hypothesis ? (
+        <div className="mt-3">
+          <Link
+            href={`/gap/preview/${encodeURIComponent(item.hypothesis.id)}`}
+            className="inline-flex items-center gap-1 rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90"
+          >
+            Open action pack (email + call script)
+          </Link>
+        </div>
+      ) : null}
+
+      {!item.blocked && isNoHypothesis ? (
+        <div data-testid="research-required-panel" className="mt-3 space-y-2 rounded-md border border-dashed border-[var(--border)] p-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Research required</p>
+          <p className="text-xs text-[var(--muted-foreground)]">Missing: no approved hypothesis for this account yet. No outreach draft exists to show.</p>
+          <div className="flex flex-wrap gap-2 text-xs">
+            {companyUrl ? (
+              <a href={companyUrl} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                Open account
+              </a>
+            ) : null}
+            {contactUrl ? (
+              <a href={contactUrl} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                Open contact
+              </a>
+            ) : null}
+            <Link href="/gap/hypotheses?status=draft" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+              Review / create hypothesis
+            </Link>
+          </div>
+        </div>
+      ) : null}
+
+      <details className="mt-3 text-xs" data-testid="routing-details">
+        <summary className="cursor-pointer select-none font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+          Routing details
+        </summary>
+        <header className="mt-2 flex flex-wrap items-center gap-2">
+          <Badge data-testid="action-chip" className={chipClass}>
+            {words(String(item.action))}
+          </Badge>
+          <span className="font-mono text-xs text-[var(--muted-foreground)]">{item.ruleId}</span>
+          <span className="text-xs text-[var(--muted-foreground)]">priority {item.priority}</span>
+          <Badge variant="outline">{words(String(item.lane))}</Badge>
+          {item.blocked ? <Badge variant="destructive">blocked</Badge> : null}
+          {target ? (
+            <Badge data-testid="target-chip" variant={TARGET_VARIANT[target]}>
+              {TARGET_LABEL[target]}
+            </Badge>
+          ) : null}
+        </header>
+
+        <div data-testid="hypothesis-line" className="mt-2 flex flex-wrap items-center gap-2">
           {item.hypothesis ? (
             <>
               <span>{words(item.hypothesis.family)}</span>
@@ -236,20 +352,20 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
             <span className="italic text-[var(--muted-foreground)]">No hypothesis</span>
           )}
         </div>
-      </div>
 
-      <dl data-testid="explain" className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-[max-content_1fr]">
-        {EXPLAIN_LABELS.map(({ key, label }) => (
-          <div key={key} className="contents">
-            <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{label}</dt>
-            <dd className="leading-6">{textOf(item.explain?.[key])}</dd>
-          </div>
-        ))}
-      </dl>
+        <dl data-testid="explain" className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-[max-content_1fr]">
+          {EXPLAIN_LABELS.map(({ key, label }) => (
+            <div key={key} className="contents">
+              <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{label}</dt>
+              <dd className="leading-6">{textOf(item.explain?.[key])}</dd>
+            </div>
+          ))}
+        </dl>
 
-      <p data-testid="evidence-counts" className="mt-3 text-xs text-[var(--muted-foreground)]">
-        {countOf(item.explain?.evidenceIds)} evidence, {countOf(item.explain?.signalIds)} signals
-      </p>
+        <p data-testid="evidence-counts" className="mt-3 text-xs text-[var(--muted-foreground)]">
+          {countOf(item.explain?.evidenceIds)} evidence, {countOf(item.explain?.signalIds)} signals
+        </p>
+      </details>
 
       <footer className="mt-3 flex flex-wrap items-center gap-2">
         {item.blocked ? (
