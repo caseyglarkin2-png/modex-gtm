@@ -72,6 +72,27 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
     expect(r).toMatchObject({ code: 'C01', passed: true, severity: 'reject' });
   });
 
+  it('rejects a subject naming a place the body never mentions (the "Fontana" seed subject sent to Kroger, final pass)', () => {
+    const r = checkObservationUnsupported(draft(body(OBS, HYP), 'Doors versus spots at Fontana'), ctx());
+    expect(r).toMatchObject({ code: 'C01', passed: false, severity: 'reject' });
+    expect(r.detail).toContain('"Fontana"');
+    expect(r.detail).toContain('subject');
+  });
+
+  it('rejects a subject count the body never states ("Six plants", "Three regions")', () => {
+    expect(checkObservationUnsupported(draft(body(OBS, HYP), 'Six plants and the forks'), ctx()).detail).toContain('"Six"');
+    expect(checkObservationUnsupported(draft(body(OBS, HYP), 'Three regions, one number'), ctx()).passed).toBe(true);
+    const noCount = 'Your Ohio DC posted gate-clerk roles in August [[SRC:ev_1]].';
+    const r = checkObservationUnsupported(draft(body(noCount, HYP), 'Three regions, one number'), ctx());
+    expect(r.passed).toBe(false);
+    expect(r.detail).toContain('"Three"');
+  });
+
+  it('passes a subject whose specifics come from the cited body ("Ohio gate")', () => {
+    expect(checkObservationUnsupported(draft(body(OBS, HYP), 'Ohio gate'), ctx()).passed).toBe(true);
+    expect(checkObservationUnsupported(draft(body(OBS, HYP), 'Doors versus spots'), ctx()).passed).toBe(true);
+  });
+
   it('fails a superseded ref and names the id', () => {
     const r = checkObservationUnsupported(
       draft(body(OBS, HYP)),

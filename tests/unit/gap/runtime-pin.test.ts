@@ -400,6 +400,12 @@ describe('render helpers', () => {
     expect(firstNameOf(null)).toBe('there');
   });
 
+  it('firstNameOf capitalises an all-lowercase stored name ("joey maggard" -> Joey) and keeps deliberate casing (final pass)', () => {
+    expect(firstNameOf('joey maggard')).toBe('Joey');
+    expect(firstNameOf('DeShawn Price')).toBe('DeShawn');
+    expect(firstNameOf('mary-kate olsen')).toBe('Mary-kate');
+  });
+
   it('unrenderedPlaceholder names the first token left, or null', () => {
     expect(unrenderedPlaceholder('Hi Kara')).toBeNull();
     expect(unrenderedPlaceholder('Hi {{first_name}}')).toBe('first_name');
