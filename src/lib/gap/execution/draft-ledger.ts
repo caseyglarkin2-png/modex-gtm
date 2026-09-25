@@ -30,6 +30,33 @@ export const DRAFT_REFUSED = 'execution.gmail_draft_refused' as const;
 export const DRAFT_SENT = 'execution.gmail_draft_sent' as const;
 export const DRAFT_DISCARDED = 'execution.gmail_draft_discarded' as const;
 export const DRAFT_SUBJECT_TYPE = 'routing_decision';
+/**
+ * A send Casey made BY HAND from Gmail (he copied the action pack's rendered
+ * copy), reconciled to the real Gmail sent message. Not a GAP draft: there is
+ * no draft id, and none is ever fabricated. engine 'manual', channel gmail.
+ */
+export const MANUAL_SENT = 'execution.gmail_manual_sent' as const;
+
+export interface ManualSentPayload {
+  engine: 'manual';
+  channel: 'gmail';
+  status: 'sent';
+  routingDecisionId: string;
+  hypothesisId: string;
+  personaId: number;
+  accountName: string;
+  recipient: string;
+  senderIdentity: string;
+  subject: string;
+  sequenceVersionId: string;
+  stepIndex: number;
+  gmailSentMessageId: string;
+  gmailThreadId: string;
+  rfcMessageId: string | null;
+  sentAt: string;
+  matchedOn: string[];
+  recordedAt: string;
+}
 
 export interface DraftedPayload {
   engine: 'gmail_draft';
@@ -117,7 +144,7 @@ export async function listDraftRecords(prisma: PrismaLike, decisionId: string): 
 /** Append one ledger row. THROWS on failure: a receipt that silently did not land is a lie. */
 export async function appendLedger(
   prisma: PrismaLike,
-  kind: typeof DRAFTED | typeof DRAFT_REFUSED | typeof DRAFT_SENT | typeof DRAFT_DISCARDED,
+  kind: typeof DRAFTED | typeof DRAFT_REFUSED | typeof DRAFT_SENT | typeof DRAFT_DISCARDED | typeof MANUAL_SENT,
   actor: string,
   decisionId: string,
   payload: Record<string, unknown>,

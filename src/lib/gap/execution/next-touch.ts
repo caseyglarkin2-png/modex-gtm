@@ -30,7 +30,7 @@ import { HARD_INVALID_STATUSES } from '../suppression/provenance';
 import { addBusinessDays } from '../sequence/business-days';
 import { parseSteps } from '../sequence/steps';
 import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
-import { listDraftRecords, type DraftRecord } from './draft-ledger';
+import { DRAFT_SUBJECT_TYPE, listDraftRecords, MANUAL_SENT, type DraftRecord, type ManualSentPayload } from './draft-ledger';
 import { gapGmailSender } from './gap-sender';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,14 +98,29 @@ function sentTouches(records: DraftRecord[]): SentTouch[] {
     .sort((a, b) => a.stepIndex - b.stepIndex || a.sentAt.localeCompare(b.sentAt));
 }
 
+/** Sends Casey made by hand and reconciled to Gmail (MANUAL_SENT), as touches. */
+async function manualTouches(prisma: PrismaLike, decisionId: string): Promise<Array<{ touch: SentTouch; payload: ManualSentPayload }>> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  const rows: Array<{ payload: unknown }> = await prisma.gapAuditEvent.findMany({
+    where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: decisionId, kind: MANUAL_SENT },
+    select: { payload: true },
+  });
+  return rows
+    .map((r) => r.payload as ManualSentPayload)
+    .filter((p) => p && typeof p.gmailSentMessageId === 'string')
+    .map((p) => ({ payload: p, touch: { stepIndex: p.stepIndex ?? 0, sentAt: p.sentAt, subject: p.subject, gmailSentMessageId: p.gmailSentMessageId, gmailThreadId: p.gmailThreadId ?? null } }));
+}
+
 export async function computeNextTouch(prisma: PrismaLike, decisionId: string, now: Date, deps: NextTouchDeps = {}): Promise<NextTouch> {
   const records = await listDraftRecords(prisma, decisionId);
-  const sent = sentTouches(records);
+  const manual = await manualTouches(prisma, decisionId);
+  const sent = [...sentTouches(records), ...manual.map((m) => m.touch)].sort((a, b) => a.stepIndex - b.stepIndex || a.sentAt.localeCompare(b.sentAt));
   if (sent.length === 0) return { state: 'not_started' };
 
   const first = sent[0];
   const last = sent[sent.length - 1];
-  const anchor = records.find((r) => r.fate === 'sent')!.drafted;
+  const draftAnchor = records.find((r) => r.fate === 'sent')?.drafted;
+  const anchor = draftAnchor ?? { recipient: manual[0].payload.recipient, personaId: manual[0].payload.personaId, sequenceVersionId: manual[0].payload.sequenceVersionId };
   const recipient = anchor.recipient.toLowerCase();
 
   // Stop rules that need no Gmail read.
