@@ -39,6 +39,8 @@ import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
 import { appendLedger, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
+import { gapGmailSender } from './gap-sender';
+import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -94,6 +96,8 @@ export interface SellerDraftDeps {
   compile?: typeof defaultCompile;
   gmail?: GmailAdapterDeps;
   senderAddress?: () => string;
+  /** The GAP Gmail identity (gap-sender.ts); null means the env identity. */
+  gapSender?: () => GmailSender | null;
   unsubscribeUrl?: (email: string) => string;
 }
 
@@ -252,7 +256,10 @@ export async function createSellerGmailDraft(
     return refuse(prisma, actor, decisionId, { ok: false, reason: 'unsubscribe_link_unavailable', detail: err instanceof Error ? err.message : String(err) });
   }
 
-  const senderIdentity = (deps.senderAddress ?? gmailSenderAddress)();
+  // The GAP mailbox (casey@yardflow.ai) when configured: it sets the token, the
+  // Gmail API mailbox and the MIME From together. Else the env identity.
+  const gapSender = (deps.gapSender ?? gapGmailSender)();
+  const senderIdentity = gapSender?.userEmail ?? (deps.senderAddress ?? gmailSenderAddress)();
   const intent: ExecutionIntent = {
     engine: 'gmail_draft',
     personaId: persona.id,
@@ -275,6 +282,7 @@ export async function createSellerGmailDraft(
       html: draftHtml(pack.rendered.queued.body, unsubscribeUrl),
       text: draftText(pack.rendered.queued.body, unsubscribeUrl),
       headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
+      ...(gapSender ? { sender: gapSender } : {}),
     },
     deps.gmail ?? {},
   );

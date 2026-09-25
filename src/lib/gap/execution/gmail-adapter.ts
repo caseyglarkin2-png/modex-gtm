@@ -18,6 +18,7 @@ import {
   sendGmailDraft as defaultSendGmailDraft,
   sendViaGmail as defaultSendViaGmail,
   type GmailSendPayload,
+  type GmailSender,
 } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent, ExecutionReceipt } from './contract';
 
@@ -29,7 +30,7 @@ export interface GmailAdapterInput {
   html: string;
   text?: string;
   replyTo?: string;
-  sender?: { refreshToken: string; userEmail: string };
+  sender?: GmailSender;
   /** Extra MIME headers (e.g. List-Unsubscribe). Threading headers from the intent win on a clash. */
   headers?: Record<string, string>;
 }

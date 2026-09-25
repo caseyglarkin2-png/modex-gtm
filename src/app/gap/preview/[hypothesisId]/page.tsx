@@ -43,6 +43,7 @@ import { loadActionPack } from '@/lib/gap/execution/action-pack';
 import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
 import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
+import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
@@ -339,7 +340,7 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         <SellerDraftPanel
           decisionId={decision.id}
           emailReady={emailReady}
-          senderIdentity={gmailSenderAddress()}
+          senderIdentity={gapGmailSender()?.userEmail ?? gmailSenderAddress()}
           drafts={drafts}
           ineligibleReason={draftIneligible}
         />
