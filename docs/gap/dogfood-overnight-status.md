@@ -99,27 +99,18 @@ authorization to run production reads.
 
 ## Exact next task
 
-Phase 5/6: evaluate shadow readiness. Current read: production has ZERO
-genuine human disposition/decision records yet to compare against a GAP
-routing recommendation (the 20 draft hypotheses from Phase 4 have not been
-reviewed by Casey; the Inland26 sends predate GAP and never went through
-hypothesis/routing). Per the overnight directive's own Phase 6 gate ("If at
-least one legitimate recommendation-vs-human-action comparison exists..."),
-that gate is NOT met. Plan: do not flip `GAP_AUTO_ENROLL_SHADOW`. Write
-`docs/gap/shadow-readiness.md` instead, documenting the exact missing gate
-and what Casey reviewing the Phase 4 cohort would unlock. Then move to
-Phase 9 (learning validation) and Phase 11 (PR).
+DONE for tonight. All independently executable phases (0-4, 6, 8-11)
+complete; see `docs/gap/DOGFOOD_MORNING_BRIEF.md` for the final summary and
+`docs/gap/casey-morning-decision-queue.md` for what's waiting on Casey.
+Next session should start there, not re-run Phases 0-4 (idempotent, but
+unnecessary -- nothing changed since this checkpoint unless Casey has
+already acted).
 
-## Test results
+## Test results (final, Phase 10)
 
-- `npx vitest run tests/unit/gap` (full GAP suite): 2433/2433 pass at
-  commit `1e2e7263` (Phase 0). Not rerun after Phases 1-4 since those
-  phases only ran existing, already-tested production code via new
-  one-off scripts (no library code changed) -- `identity-service.test.ts`
-  and `hypothesize-cron.test.ts` spot-checked green after Phase 2/4
-  (registerAlias / runHypothesize behavior unchanged, exercised for real).
-- `npx tsc --noEmit`: clean on all touched files, checked after every
-  phase.
+- `npx vitest run tests/unit/gap` (full GAP suite): **2433/2433 pass**,
+  final run at commit `73e1677c`.
+- `npx tsc --noEmit` (full repo): clean.
 
 ## Casey decisions needed later
 
