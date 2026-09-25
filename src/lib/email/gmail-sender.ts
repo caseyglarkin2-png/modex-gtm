@@ -318,6 +318,29 @@ export async function sendViaGmail(
 }
 
 /**
+ * The sender's real Gmail signature (HTML) from its send-as settings, or null.
+ * Read-only (users.settings.sendAs.get; gmail.modify / gmail.readonly suffice).
+ * Gmail does NOT insert the signature into API-created drafts (verified
+ * 2026-09-25 with an internal draft in casey@yardflow.ai), so a caller that
+ * wants the real signature must add it itself. Never throws.
+ */
+export async function getGmailSignature(sender?: GmailSender): Promise<string | null> {
+  try {
+    const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
+    const accessToken = await accessTokenForSender(sender);
+    const res = await fetch(
+      `https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(mailbox)}/settings/sendAs/${encodeURIComponent(mailbox)}`,
+      { headers: { Authorization: `Bearer ${accessToken}` } },
+    );
+    if (!res.ok) return null;
+    const data = (await res.json()) as { signature?: string };
+    return data.signature && data.signature.trim() ? data.signature : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Check if Gmail sender is configured (env vars present).
  */
 export function isGmailSenderConfigured(): boolean {

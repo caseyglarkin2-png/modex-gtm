@@ -158,6 +158,7 @@ const baseDeps = (d: Db, verdict: 'pass' | 'review_required' | 'reject' = 'pass'
   gmail,
   senderAddress: () => 'casey@freightroll.com',
   gapSender: () => null,
+  signature: async () => null,
   unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe?email=${encodeURIComponent(e)}&token=t`,
 });
 
@@ -339,6 +340,31 @@ describe('GAP drafts use the casey@yardflow.ai identity end to end (closeout)', 
     const moved = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'c', now: NOW }, { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState });
     expect(moved).toMatchObject({ ok: false, reason: 'sender_mailbox_mismatch' });
     expect(getDraftState).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('signature (verified 2026-09-25: Gmail does NOT add the signature to API-created drafts)', () => {
+  const SIG = '<div dir="ltr">Casey Larkin &middot; Sales<br>YardFlow by FreightRoll<br>c. 410-236-7434 &middot; <a href="https://yardflow.ai">yardflow.ai</a></div>';
+
+  it('the real Gmail signature replaces the template sign-off, once, in both parts', async () => {
+    const d = db();
+    const gmail = gmailFake();
+    await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW }, { ...baseDeps(d, 'pass', gmail), signature: async () => SIG });
+    const p = (gmail.createGmailDraft.mock.calls[0] as any)[0];
+    expect(p.html).toContain('<div class="gmail_signature">' + SIG + '</div>');
+    expect(p.html).not.toContain('Casey Larkin, YardFlow by FreightRoll');
+    expect(p.text).toContain('410-236-7434');
+    expect(p.text).not.toContain('Casey Larkin, YardFlow by FreightRoll');
+    expect(p.html.indexOf('gmail_signature')).toBeLessThan(p.html.indexOf('Unsubscribe'));
+  });
+
+  it('an unreadable signature leaves the rendered copy (with its plain sign-off) untouched', async () => {
+    const d = db();
+    const gmail = gmailFake();
+    await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'c', now: NOW }, { ...baseDeps(d, 'pass', gmail), signature: async () => null });
+    const p = (gmail.createGmailDraft.mock.calls[0] as any)[0];
+    expect(p.text).toContain('Casey Larkin, YardFlow by FreightRoll');
+    expect(p.html).not.toContain('gmail_signature');
   });
 });
 

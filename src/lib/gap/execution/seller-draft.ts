@@ -29,7 +29,7 @@
  */
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
-import { gmailSenderAddress } from '@/lib/email/gmail-sender';
+import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { generateToken } from '@/lib/email/unsubscribe-token';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
@@ -99,6 +99,8 @@ export interface SellerDraftDeps {
   senderAddress?: () => string;
   /** The GAP Gmail identity (gap-sender.ts); null means the env identity. */
   gapSender?: () => GmailSender | null;
+  /** The sender's real Gmail signature (null when unreadable: the template sign-off stays). */
+  signature?: (sender: GmailSender | undefined) => Promise<string | null>;
   unsubscribeUrl?: (email: string) => string;
 }
 
@@ -111,17 +113,48 @@ function escapeHtml(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-/** Plain paragraphs, no tracking pixel, no branded wrapper: this is Casey's own 1:1 email. */
-export function draftHtml(body: string, unsubscribeUrl: string): string {
-  const paragraphs = body
+/** The plain sign-off line the seed templates end with (sequences/families.ts SIGNATURE). */
+export const TEMPLATE_SIGNOFF = 'Casey Larkin, YardFlow by FreightRoll';
+
+/** Drop the template's plain sign-off when the real Gmail signature replaces it. */
+function withoutTemplateSignoff(body: string): string {
+  const trimmed = body.replace(/\s+$/, '');
+  return trimmed.endsWith(TEMPLATE_SIGNOFF) ? trimmed.slice(0, -TEMPLATE_SIGNOFF.length).replace(/\s+$/, '') : trimmed;
+}
+
+/** The signature as plain text for the text/plain part. */
+export function signatureText(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&middot;|&#183;/g, '·')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n\s*\n+/g, '\n')
+    .trim();
+}
+
+/**
+ * Plain paragraphs, no tracking pixel, no branded wrapper: this is Casey's own
+ * 1:1 email. With `signatureHtml` (the sender's real Gmail signature, which
+ * Gmail does not add to API-created drafts), it replaces the template's plain
+ * sign-off line; without it the body is exactly the rendered copy.
+ */
+export function draftHtml(body: string, unsubscribeUrl: string, signatureHtml: string | null = null): string {
+  const text = signatureHtml ? withoutTemplateSignoff(body) : body;
+  const paragraphs = text
     .split(/\n{2,}/)
     .map((p) => `<p style="margin:0 0 14px 0;">${escapeHtml(p).replace(/\n/g, '<br />')}</p>`)
     .join('\n');
-  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.</p>\n</div>`;
+  const signature = signatureHtml ? `\n<div class="gmail_signature">${signatureHtml}</div>` : '';
+  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}${signature}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.</p>\n</div>`;
 }
 
-export function draftText(body: string, unsubscribeUrl: string): string {
-  return `${body}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
+export function draftText(body: string, unsubscribeUrl: string, signatureHtml: string | null = null): string {
+  const text = signatureHtml ? `${withoutTemplateSignoff(body)}\n\n${signatureText(signatureHtml)}` : body;
+  return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
 }
 
 async function refuse(
@@ -273,6 +306,7 @@ export async function createSellerGmailDraft(
   // Gmail API mailbox and the MIME From together. Else the env identity.
   const gapSender = (deps.gapSender ?? gapGmailSender)();
   const senderIdentity = gapSender?.userEmail ?? (deps.senderAddress ?? gmailSenderAddress)();
+  const signatureHtml = await (deps.signature ?? getGmailSignature)(gapSender ?? undefined);
   const intent: ExecutionIntent = {
     engine: 'gmail_draft',
     personaId: persona.id,
@@ -292,8 +326,8 @@ export async function createSellerGmailDraft(
     {
       to: email,
       subject: pack.rendered.queued.subject,
-      html: draftHtml(pack.rendered.queued.body, unsubscribeUrl),
-      text: draftText(pack.rendered.queued.body, unsubscribeUrl),
+      html: draftHtml(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
+      text: draftText(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
       headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
       ...(gapSender ? { sender: gapSender } : {}),
     },
