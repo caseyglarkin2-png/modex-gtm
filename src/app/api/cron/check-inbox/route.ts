@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
+import { reconcilePendingDrafts } from '@/lib/gap/execution/draft-batch';
 import { prisma } from '@/lib/prisma';
 import { getRecentReplies, markAsProcessed } from '@/lib/email/gmail-inbox';
 import { classifyInboundReply } from '@/lib/email/reply-precision';
@@ -357,6 +358,17 @@ export async function GET(request: Request) {
       create: { key: FAIL_KEY, value: '0' },
     }).catch(() => undefined);
 
+    // GAP passive draft -> sent reconciliation (read-only toward Gmail,
+    // bounded, idempotent). Never fails the inbox run.
+    let gapDraftReconcile: Awaited<ReturnType<typeof reconcilePendingDrafts>> | { error: string } | null = null;
+    if (isGapOsEnabled()) {
+      try {
+        gapDraftReconcile = await reconcilePendingDrafts(prisma, { now: new Date() });
+      } catch (err) {
+        gapDraftReconcile = { error: err instanceof Error ? err.message : String(err) };
+      }
+    }
+
     await markCronSuccess(CRON_NAME, {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
@@ -372,6 +384,7 @@ export async function GET(request: Request) {
         lowConfidence,
         filterReasons,
         ...(gapIngest ? { gapReplyIngest: gapIngest } : {}),
+        ...(gapDraftReconcile ? { gapDraftReconcile } : {}),
       },
     }).catch(() => undefined);
 
@@ -388,6 +401,7 @@ export async function GET(request: Request) {
       low_confidence_accepted: lowConfidence,
       // S4-T4: present only under GAP_OS_ENABLED.
       ...(gapIngest ? { gap_reply_ingest: gapIngest } : {}),
+      ...(gapDraftReconcile ? { gap_draft_reconcile: gapDraftReconcile } : {}),
     });
   } catch (error) {
     Sentry.captureException(error);
