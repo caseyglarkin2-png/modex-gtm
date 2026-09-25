@@ -271,8 +271,31 @@ export type RoutingLane = (typeof ROUTING_LANES)[number];
  * What a human may record against a routing decision (`POST
  * /api/gap/decisions/{id}/act`). Closed so the shadow comparison in Sprint 5
  * groups on a vocabulary, not free text (review nit N3).
+ *
+ * The first five (enrolled_by_hand, called, emailed, dismissed, deferred)
+ * are the original set; historical `RoutingDecision.human_action` rows use
+ * only these and are never rewritten. `researched`, `approved_hypothesis`,
+ * `linkedin_messaged` and `do_not_contact` were added (dogfood fix, 2026-09-25)
+ * because every `RoutingAction` must have at least one `HumanAction` that can
+ * represent "I actually did what GAP recommended" -- see
+ * `./routing/agreement.ts`'s `RECOMMENDED_HUMAN_ACTION` and the invariant
+ * test in `agreement.test.ts`. Before this fix, `research_required`,
+ * `approve_hypothesis` and `linkedin_manual_task` had no human action that
+ * could ever agree with them, and the UI's "I did this" button posted the
+ * RoutingAction string itself (never a member of this list), which the API
+ * correctly refused with 400 -- that was the dogfood bug.
  */
-export const HUMAN_ACTIONS = ['enrolled_by_hand', 'called', 'emailed', 'dismissed', 'deferred'] as const;
+export const HUMAN_ACTIONS = [
+  'enrolled_by_hand',
+  'called',
+  'emailed',
+  'dismissed',
+  'deferred',
+  'researched',
+  'approved_hypothesis',
+  'linkedin_messaged',
+  'do_not_contact',
+] as const;
 export type HumanAction = (typeof HUMAN_ACTIONS)[number];
 
 // ---------------------------------------------------------------------------

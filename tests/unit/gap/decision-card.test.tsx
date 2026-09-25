@@ -119,10 +119,10 @@ describe('<DecisionCard>', () => {
     expect(screen.queryByText('confidence', { exact: false })).not.toBeInTheDocument();
   });
 
-  it('acted state hides the buttons and shows "Acted: call_now" with the time', () => {
-    render(<DecisionCard item={item({ humanAction: 'call_now', humanActionAt: '2026-09-23T14:05:00.000Z' })} onAct={() => {}} />);
+  it('acted state hides the buttons and shows the plain-English action with the time', () => {
+    render(<DecisionCard item={item({ humanAction: 'called', humanActionAt: '2026-09-23T14:05:00.000Z' })} onAct={() => {}} />);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
-    expect(screen.getByTestId('acted')).toHaveTextContent('Acted: call_now at 2026-09-23 14:05Z');
+    expect(screen.getByTestId('acted')).toHaveTextContent('Acted: I called at 2026-09-23 14:05Z');
   });
 
   it('labels the recommendation as GAP\'s and the buttons as recording, not performing, the action', () => {
@@ -132,14 +132,49 @@ describe('<DecisionCard>', () => {
     expect(screen.getByText('Casey actually did')).toBeInTheDocument();
   });
 
-  it('clicking "I did this" calls onAct with the decision action, "I did something else" with other', () => {
+  it('clicking "I did this" records the HumanAction that agrees with the recommendation, never the routing action string', () => {
     const onAct = vi.fn();
-    render(<DecisionCard item={item()} onAct={onAct} />);
+    render(<DecisionCard item={item({ action: 'call_now' })} onAct={onAct} />);
     fireEvent.click(screen.getByRole('button', { name: 'I did this' }));
-    expect(onAct).toHaveBeenCalledWith('call_now');
+    expect(onAct).toHaveBeenCalledWith('called');
+  });
+
+  it.each([
+    ['research_required', 'researched'],
+    ['approve_hypothesis', 'approved_hypothesis'],
+    ['call_now', 'called'],
+    ['enroll_gap_sequence', 'enrolled_by_hand'],
+    ['one_off_email', 'emailed'],
+    ['linkedin_manual_task', 'linkedin_messaged'],
+    ['nurture', 'deferred'],
+    ['do_not_contact', 'do_not_contact'],
+  ] as const)('"I did this" on %s records %s', (action, humanAction) => {
+    const onAct = vi.fn();
+    render(<DecisionCard item={item({ action })} onAct={onAct} />);
+    fireEvent.click(screen.getByRole('button', { name: 'I did this' }));
+    expect(onAct).toHaveBeenCalledWith(humanAction);
+  });
+
+  it('"I did something else" opens a chooser of valid human actions, never posts the literal string "other"', () => {
+    const onAct = vi.fn();
+    render(<DecisionCard item={item({ action: 'call_now' })} onAct={onAct} />);
     fireEvent.click(screen.getByRole('button', { name: 'I did something else' }));
-    expect(onAct).toHaveBeenLastCalledWith('other');
-    expect(onAct).toHaveBeenCalledTimes(2);
+
+    const select = screen.getByLabelText('What did you actually do?');
+    // The recommended action (called, for call_now) is not offered as an "else" choice.
+    expect(within(select).queryByRole('option', { name: 'I called' })).toBeNull();
+    expect(within(select).getByRole('option', { name: 'I emailed' })).toBeInTheDocument();
+
+    fireEvent.change(select, { target: { value: 'emailed' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record' }));
+    expect(onAct).toHaveBeenCalledWith('emailed');
+    expect(onAct).not.toHaveBeenCalledWith('other');
+  });
+
+  it('Record stays disabled until a choice is made in the chooser', () => {
+    render(<DecisionCard item={item()} onAct={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: 'I did something else' }));
+    expect(screen.getByRole('button', { name: 'Record' })).toBeDisabled();
   });
 
   it('disables both buttons while acting and shows the act error inline', () => {
@@ -162,6 +197,33 @@ describe('<DecisionCard>', () => {
     render(<DecisionCard item={item({ explain: { ...EXPLAIN, wouldProveWrong: '   ' } })} onAct={() => {}} />);
     const term = screen.getByText('Would prove us wrong', { selector: 'dt' });
     expect(term.nextElementSibling).toHaveTextContent('Not stated');
+  });
+});
+
+describe('<DecisionCard> blocked (safety refusal) cards', () => {
+  it('a suppressed card shows SYSTEM BLOCK / Do not contact, never the human-action buttons', () => {
+    render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'do_not_contact', ruleId: 'suppressed' })} onAct={() => {}} />);
+    expect(screen.getByText('System block')).toBeInTheDocument();
+    expect(screen.getByTestId('blocked-panel')).toHaveTextContent('Do not contact');
+    expect(screen.getByTestId('blocked-panel')).toHaveTextContent('This person or account is suppressed');
+    expect(screen.queryByText('Casey actually did')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'I did this' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'I did something else' })).toBeNull();
+  });
+
+  it('a suppression_unknown card is presented as a fail-closed block, not "go research this account"', () => {
+    render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'research_required', ruleId: 'suppression_unknown' })} onAct={() => {}} />);
+    const panel = screen.getByTestId('blocked-panel');
+    expect(panel).toHaveTextContent('Suppression status unknown');
+    expect(panel).toHaveTextContent('No outbound action is allowed until suppression can be verified');
+    expect(panel).toHaveTextContent('Retry routing when the suppression service is available');
+    expect(screen.queryByRole('button', { name: 'I did this' })).toBeNull();
+  });
+
+  it('an unrecognized blocked rule still refuses to show human-action buttons, with a generic message', () => {
+    render(<DecisionCard item={item({ blocked: true, lane: 'blocked', ruleId: 'some_future_rule' })} onAct={() => {}} />);
+    expect(screen.getByTestId('blocked-panel')).toHaveTextContent('some_future_rule');
+    expect(screen.queryByRole('button', { name: 'I did this' })).toBeNull();
   });
 });
 

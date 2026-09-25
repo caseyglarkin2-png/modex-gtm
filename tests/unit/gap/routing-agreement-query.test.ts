@@ -61,4 +61,30 @@ describe('loadAgreementReport', () => {
     expect(report.totalDecisions).toBe(1);
     expect(report.overall.n).toBe(0);
   });
+
+  /**
+   * Dogfood fix (2026-09-25): a blocked row is a system safety refusal
+   * (suppressed, suppression_unknown), never a real operator recommendation.
+   * It must never enter the agreement denominator, even if it somehow
+   * carries a human_action -- dropped entirely, not merely comparable-zero.
+   */
+  it('a lane:"blocked" row is excluded from the agreement report entirely, even with a human_action set', async () => {
+    const prisma = makePrisma([
+      row({ id: 'd1', action: 'do_not_contact', lane: 'blocked', human_action: 'do_not_contact', rule_id: 'suppressed' }),
+      row({ id: 'd2', action: 'call_now', lane: 'work_queue', human_action: 'called' }),
+    ]);
+    const report = await loadAgreementReport(prisma);
+    expect(report.totalDecisions).toBe(1);
+    expect(report.overall).toEqual({ agreements: 1, disagreements: 0, rate: 1, n: 1 });
+  });
+
+  it('a real recommendation with no Casey action yet stays comparable-zero, never counted as disagreement, and a blocked row never masks that', async () => {
+    const prisma = makePrisma([
+      row({ id: 'd1', action: 'research_required', lane: 'blocked', human_action: null, rule_id: 'suppression_unknown' }),
+      row({ id: 'd2', action: 'approve_hypothesis', lane: 'work_queue', human_action: null }),
+    ]);
+    const report = await loadAgreementReport(prisma);
+    expect(report.totalDecisions).toBe(1); // only d2; the blocked d1 never even reaches totalDecisions
+    expect(report.overall).toEqual({ agreements: 0, disagreements: 0, rate: null, n: 0 });
+  });
 });

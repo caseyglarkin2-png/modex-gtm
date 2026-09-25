@@ -13,28 +13,30 @@
  * Pure: no Prisma, no fetch, no clock.
  */
 
-import type { HumanAction, RoutingAction } from '../taxonomy';
+import { ROUTING_ACTIONS, type HumanAction, type RoutingAction } from '../taxonomy';
 
 /**
- * The vocabularies do not line up one to one (RoutingAction has 8 members,
- * HumanAction has 5, and HumanAction has no entry for a LinkedIn touch or an
- * "approve the hypothesis" action). Each human action maps to the routing
- * action(s) it counts as agreeing with; a routing action reached through no
- * listed human action, or a human action that names a different routing
- * action, is a disagreement.
+ * Each human action maps to the routing action(s) it counts as agreeing
+ * with; a routing action reached through no listed human action, or a human
+ * action that names a different routing action, is a disagreement.
  *
- *   enrolled_by_hand -> enroll_gap_sequence (the operator did what the router said)
- *   called           -> call_now
- *   emailed          -> one_off_email
- *   dismissed        -> do_not_contact, nurture (the operator agreed nothing should go out now)
- *   deferred         -> nurture (the operator agreed to hold, on the router's own "not yet" action)
+ *   enrolled_by_hand    -> enroll_gap_sequence (the operator did what the router said)
+ *   called              -> call_now
+ *   emailed             -> one_off_email
+ *   dismissed           -> do_not_contact, nurture (the operator agreed nothing should go out now; kept for historical rows)
+ *   deferred            -> nurture (the operator agreed to hold, on the router's own "not yet" action)
+ *   researched          -> research_required
+ *   approved_hypothesis -> approve_hypothesis
+ *   linkedin_messaged   -> linkedin_manual_task
+ *   do_not_contact      -> do_not_contact
  *
- * research_required, approve_hypothesis and linkedin_manual_task have no
- * human action that can agree with them under the current closed vocabulary
- * (HUMAN_ACTIONS, taxonomy.ts): any human action recorded against one of
- * those routing decisions is a disagreement by construction. That is a real
- * vocabulary gap, not a bug; it is why HUMAN_ACTIONS is closed (review nit
- * N3, taxonomy.ts) rather than free text.
+ * Before the dogfood fix (2026-09-25), research_required, approve_hypothesis
+ * and linkedin_manual_task had NO human action that could ever agree with
+ * them -- a structural gap in the closed vocabulary (HUMAN_ACTIONS,
+ * taxonomy.ts), not a bug in this map. `researched`, `approved_hypothesis`
+ * and `linkedin_messaged` close it. The invariant this file guarantees (see
+ * `agreement.test.ts`): every ROUTING_ACTIONS member has at least one
+ * HumanAction key whose list includes it.
  */
 export const HUMAN_ACTION_AGREEMENT: Readonly<Record<HumanAction, readonly RoutingAction[]>> = {
   enrolled_by_hand: ['enroll_gap_sequence'],
@@ -42,10 +44,44 @@ export const HUMAN_ACTION_AGREEMENT: Readonly<Record<HumanAction, readonly Routi
   emailed: ['one_off_email'],
   dismissed: ['do_not_contact', 'nurture'],
   deferred: ['nurture'],
+  researched: ['research_required'],
+  approved_hypothesis: ['approve_hypothesis'],
+  linkedin_messaged: ['linkedin_manual_task'],
+  do_not_contact: ['do_not_contact'],
+};
+
+/**
+ * The ONE human action that means "I actually did what GAP recommended,"
+ * per routing action -- what "I did this" writes. Distinct from
+ * HUMAN_ACTION_AGREEMENT, which is broader (e.g. `dismissed` also agrees
+ * with `do_not_contact` for historical rows) and answers a different
+ * question ("does this count as agreement") than this one ("what is THE
+ * exact matching action").
+ */
+export const RECOMMENDED_HUMAN_ACTION: Readonly<Record<RoutingAction, HumanAction>> = {
+  research_required: 'researched',
+  approve_hypothesis: 'approved_hypothesis',
+  call_now: 'called',
+  enroll_gap_sequence: 'enrolled_by_hand',
+  one_off_email: 'emailed',
+  linkedin_manual_task: 'linkedin_messaged',
+  nurture: 'deferred',
+  do_not_contact: 'do_not_contact',
 };
 
 export function agrees(routingAction: RoutingAction, humanAction: HumanAction): boolean {
   return HUMAN_ACTION_AGREEMENT[humanAction].includes(routingAction);
+}
+
+/**
+ * The invariant this module guarantees: no RoutingAction may be structurally
+ * incapable of agreement. Exported so a test can assert it directly rather
+ * than trusting the map's authors; also cheap enough to call once at import
+ * time in dev if that is ever wanted, though nothing here does that today.
+ */
+export function everyRoutingActionHasAnAgreeingHumanAction(): boolean {
+  const covered = new Set(Object.values(HUMAN_ACTION_AGREEMENT).flat());
+  return ROUTING_ACTIONS.every((action) => covered.has(action));
 }
 
 export interface AgreementRate {

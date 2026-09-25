@@ -17,10 +17,12 @@
  * Voice: no em dashes, "yards" plural, "production capacity".
  */
 
+import { useState } from 'react';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { EnrollTarget, RoutingExplain } from '@/lib/gap/routing/types';
-import type { RoutingAction, RoutingLane } from '@/lib/gap/taxonomy';
+import { HUMAN_ACTIONS, type HumanAction, type RoutingAction, type RoutingLane } from '@/lib/gap/taxonomy';
+import { RECOMMENDED_HUMAN_ACTION } from '@/lib/gap/routing/agreement';
 import { HypothesisStatusBadge, formatWhen } from './hypothesis-drawer';
 
 // ---------------------------------------------------------------------------
@@ -125,17 +127,67 @@ function countOf(value: unknown): number {
   return Array.isArray(value) ? value.length : 0;
 }
 
+/**
+ * Plain-English, human-readable phrasing for every HumanAction, used both by
+ * the "I did something else" chooser and to render an already-acted card.
+ */
+export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
+  researched: 'I researched it',
+  approved_hypothesis: 'I approved the hypothesis',
+  called: 'I called',
+  emailed: 'I emailed',
+  enrolled_by_hand: 'I enrolled manually',
+  linkedin_messaged: 'I messaged on LinkedIn',
+  deferred: 'I deferred it',
+  do_not_contact: 'I marked do not contact',
+  dismissed: 'I dismissed this recommendation',
+};
+
+/**
+ * A safety refusal (blocked: true) is not a human decision request -- there
+ * is nothing for Casey to agree or disagree with, so it gets its own plain-
+ * English panel instead of the recommends/actually-did apparatus. Keyed by
+ * `ruleId` (the two blocked rules today: R0 `suppressed`, R0b
+ * `suppression_unknown`); anything else blocked falls back to a generic
+ * "system block" message rather than presenting it as a live recommendation.
+ */
+const BLOCKED_COPY: Record<string, { title: string; body: string; remediation?: string }> = {
+  suppressed: {
+    title: 'Do not contact',
+    body: 'This person or account is suppressed. GAP will not recommend outreach.',
+  },
+  suppression_unknown: {
+    title: 'Suppression status unknown',
+    body: 'GAP could not verify whether this person is safe to contact. No outbound action is allowed until suppression can be verified.',
+    remediation: 'Retry routing when the suppression service is available.',
+  },
+};
+
+function blockedCopyFor(ruleId: string): { title: string; body: string; remediation?: string } {
+  return (
+    BLOCKED_COPY[ruleId] ?? {
+      title: 'System block',
+      body: `GAP refused to recommend an action here (rule ${ruleId}).`,
+    }
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 
 export function DecisionCard({ item, onAct, acting = false, actError = null }: DecisionCardProps) {
+  const [choosingOther, setChoosingOther] = useState(false);
+  const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
+
   const chipClass = ACTION_CHIP_CLASS[item.action] ?? 'border-[var(--border)] text-[var(--foreground)]';
   const acted = typeof item.humanAction === 'string' && item.humanAction.length > 0;
   const personaLabel = item.persona.displayName?.trim() || item.persona.email?.trim() || `persona ${String(item.persona.id)}`;
   const tamLabel = item.account.tam === 'in' ? 'TAM in' : item.account.tam === 'out' ? 'TAM out' : 'TAM unknown';
   const tierLabel = item.account.tamTier ? `tier ${item.account.tamTier}` : 'no tier';
   const target = item.target && item.target in TARGET_LABEL ? item.target : null;
+  const recommendedHumanAction = item.action in RECOMMENDED_HUMAN_ACTION ? RECOMMENDED_HUMAN_ACTION[item.action as RoutingAction] : null;
+  const otherOptions = HUMAN_ACTIONS.filter((a) => a !== recommendedHumanAction);
 
   return (
     <article
@@ -144,7 +196,9 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
       data-action={item.action}
       className="rounded-md border border-[var(--border)] bg-[var(--background)] p-4 text-sm shadow-sm"
     >
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">GAP recommends</p>
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+        {item.blocked ? 'System block' : 'GAP recommends'}
+      </p>
       <header className="mt-1 flex flex-wrap items-center gap-2">
         <Badge data-testid="action-chip" className={chipClass}>
           {words(String(item.action))}
@@ -198,22 +252,62 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
       </p>
 
       <footer className="mt-3 flex flex-wrap items-center gap-2">
-        {acted ? (
+        {item.blocked ? (
+          (() => {
+            const copy = blockedCopyFor(item.ruleId);
+            return (
+              <div data-testid="blocked-panel" className="w-full space-y-1 border-t border-[var(--border)] pt-3">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--destructive)]">{copy.title}</p>
+                <p className="text-xs text-[var(--muted-foreground)]">{copy.body}</p>
+                {copy.remediation ? <p className="text-xs italic text-[var(--muted-foreground)]">{copy.remediation}</p> : null}
+              </div>
+            );
+          })()
+        ) : acted ? (
           <p data-testid="acted" className="text-xs text-[var(--muted-foreground)]">
-            Acted: {item.humanAction}
+            Acted: {HUMAN_ACTION_LABEL[item.humanAction as HumanAction] ?? item.humanAction}
             {item.humanActionAt ? ` at ${formatWhen(item.humanActionAt, true)}` : ''}
           </p>
         ) : (
           <div className="w-full space-y-2 border-t border-[var(--border)] pt-3">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Casey actually did</p>
-            <div className="flex flex-wrap items-center gap-2">
-              <Button type="button" size="sm" disabled={acting} onClick={() => onAct(String(item.action))}>
-                {acting ? 'Saving...' : 'I did this'}
-              </Button>
-              <Button type="button" size="sm" variant="outline" disabled={acting} onClick={() => onAct('other')}>
-                I did something else
-              </Button>
-            </div>
+            {choosingOther ? (
+              <div className="flex flex-wrap items-center gap-2">
+                <select
+                  aria-label="What did you actually do?"
+                  className="h-9 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm shadow-sm"
+                  value={chosenOther}
+                  onChange={(event) => setChosenOther(event.target.value as HumanAction)}
+                >
+                  <option value="">Choose what you did...</option>
+                  {otherOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {HUMAN_ACTION_LABEL[option]}
+                    </option>
+                  ))}
+                </select>
+                <Button type="button" size="sm" disabled={acting || !chosenOther} onClick={() => chosenOther && onAct(chosenOther)}>
+                  {acting ? 'Saving...' : 'Record'}
+                </Button>
+                <Button type="button" size="sm" variant="outline" disabled={acting} onClick={() => setChoosingOther(false)}>
+                  Cancel
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  type="button"
+                  size="sm"
+                  disabled={acting || !recommendedHumanAction}
+                  onClick={() => recommendedHumanAction && onAct(recommendedHumanAction)}
+                >
+                  {acting ? 'Saving...' : 'I did this'}
+                </Button>
+                <Button type="button" size="sm" variant="outline" disabled={acting} onClick={() => setChoosingOther(true)}>
+                  I did something else
+                </Button>
+              </div>
+            )}
             <p className="text-[11px] text-[var(--muted-foreground)]">
               These buttons record your action. They do not send email or enroll anyone.
             </p>
