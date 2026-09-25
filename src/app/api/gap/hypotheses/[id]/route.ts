@@ -25,6 +25,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { getHypothesis, transitionHypothesis, updateDraftNarrative } from '@/lib/gap/hypothesis/service';
+import { advanceHypothesis } from '@/lib/gap/hypothesis/thesis-groups';
 import { PERSONAS, PROBLEM_FAMILIES, UNMAPPED_FAMILY } from '@/lib/gap/taxonomy';
 
 export const dynamic = 'force-dynamic';
@@ -102,6 +103,18 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
   if (typeof body !== 'object' || body === null) return invalidBody('action');
   const keys = body as Record<string, unknown>;
   const { id } = await params;
+
+  // APPROVE + USE IN ROUTING / APPROVE ONLY in one click: the ordinary
+  // transitions in order (submit, approve[, activate]), each audited.
+  if (keys.advance !== undefined) {
+    const parsed = z.object({ advance: z.enum(['approve', 'approve_and_use']) }).strict().safeParse(body);
+    if (!parsed.success) return invalidBody('advance');
+    const row = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: { status: true } });
+    if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
+    const use = parsed.data.advance === 'approve_and_use';
+    const r = await advanceHypothesis(prisma, id, row.status, { use, actor, now: new Date(), reason: use ? 'approve + use in routing' : 'approve only' });
+    return NextResponse.json(r, { status: r.ok ? 200 : 409 });
+  }
 
   if (keys.action !== undefined) {
     const parsed = ActionSchema.safeParse(body);

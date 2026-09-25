@@ -52,7 +52,7 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     expect(r.ok).toBe(false);
     expect(r.results).toEqual([
       { hypothesisId: 'd1', ok: true, from: 'draft', to: 'approved', detail: 'approved' },
-      { hypothesisId: 'd2', ok: false, from: 'review_required', to: null, detail: 'approve refused: unhedged_hypothesis' },
+      { hypothesisId: 'd2', ok: false, from: 'draft', to: 'review_required', detail: 'approve refused: unhedged_hypothesis' },
       { hypothesisId: 'd3', ok: true, from: 'review_required', to: 'approved', detail: 'approved' },
       { hypothesisId: 'a1', ok: true, from: 'active', to: 'active', detail: 'already active; unchanged' },
     ]);
@@ -60,6 +60,19 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     expect(calls).toEqual(['d1:submit', 'd1:approve', 'd2:submit', 'd2:approve', 'd3:approve']);
     expect(calls.some((c: string) => c.endsWith(':activate'))).toBe(false);
     for (const c of transition.mock.calls) expect(c[3]).toMatchObject({ actor: 'casey@freightroll.com', reason: expect.stringContaining('group review') });
+  });
+
+  it('APPROVE + USE runs submit, approve, activate per checked row (legal transitions, each audited); only checked rows move', async () => {
+    const { prisma } = db(PEP());
+    const fp = (await loadThesisGroups(prisma))[0].fingerprint;
+    const transition = vi.fn(async (_p: unknown, id: string, action: string) => (id === 'd3' && action === 'activate' ? { ok: false as const, reason: 'suppressed' } : { ok: true as const, id, from: 'x', to: 'y', effects: [] })) as any;
+    const r = await approveSelectedSiblings(prisma, { fingerprint: fp, hypothesisIds: ['d1', 'd3'], actor: 'casey@freightroll.com', now: NOW, use: true }, { transition });
+    expect(transition.mock.calls.map((c: any[]) => `${c[1]}:${c[2]}`)).toEqual(['d1:submit', 'd1:approve', 'd1:activate', 'd3:approve', 'd3:activate']);
+    expect(r.results).toEqual([
+      { hypothesisId: 'd1', ok: true, from: 'draft', to: 'active', detail: 'approved and in use' },
+      { hypothesisId: 'd3', ok: false, from: 'review_required', to: 'approved', detail: 'approved, but not in use: suppressed' },
+    ]);
+    for (const c of transition.mock.calls) expect(c[3].reason).toContain('approve + use selected siblings (2 of 4');
   });
 
   it('refuses ids outside the group (no bulk approval outside a reviewed sibling group)', async () => {

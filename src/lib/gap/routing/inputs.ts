@@ -714,7 +714,18 @@ export async function readComms(prisma: PrismaLike, email: string): Promise<Rout
 
 export interface AssembleForAccountOptions {
   maxPersonas?: number;
+  /**
+   * People Casey already approved a hypothesis for at this account (first-
+   * principles pass, 2026-09-25). They are routed IN ADDITION to the top
+   * `maxPersonas` by seniority: approving a thesis for a person must lead to a
+   * recommendation for that person, not vanish because two more senior people
+   * exist. Still contact-ready only; capped by MAX_HYPOTHESIS_PERSONAS.
+   */
+  includePersonaIds?: readonly number[];
 }
+
+/** Hard cap on hypothesis-named people routed per account in one run. */
+export const MAX_HYPOTHESIS_PERSONAS = 10;
 
 /**
  * Inputs for the top `maxPersonas` (default 2) contact-ready personas of an
@@ -742,10 +753,12 @@ export async function assembleForAccount(
     throw err;
   }
 
-  const chosen = personas
+  const reachable = personas
     .filter((p) => lower(p.email) != null || (p.phone != null && p.phone.trim() !== ''))
-    .sort((a, b) => seniorityRankFor(b.seniority) - seniorityRankFor(a.seniority) || a.id - b.id)
-    .slice(0, maxPersonas);
+    .sort((a, b) => seniorityRankFor(b.seniority) - seniorityRankFor(a.seniority) || a.id - b.id);
+  const top = reachable.slice(0, maxPersonas);
+  const named = new Set((opts.includePersonaIds ?? []).slice(0, MAX_HYPOTHESIS_PERSONAS));
+  const chosen = [...top, ...reachable.filter((p) => named.has(p.id) && !top.includes(p))];
 
   const out: AssembleResult[] = [];
   for (const p of chosen) {

@@ -1107,7 +1107,8 @@ describe('routes', () => {
 
       it('an explicit accountNames call (agent/cron) is unaffected: no scope means no ProspectingHypothesis lookup at all', async () => {
         await runPOST(post(RUN, { accountNames: ['Acme Foods'] }));
-        expect(store.prospectingHypothesis.findMany).not.toHaveBeenCalled();
+        // The only hypothesis reads are per named account (whose approved people to route), never the scope query.
+        for (const call of store.prospectingHypothesis.findMany.mock.calls as any[]) expect(call[0].where.account_name).toBe('Acme Foods');
       });
     });
   });

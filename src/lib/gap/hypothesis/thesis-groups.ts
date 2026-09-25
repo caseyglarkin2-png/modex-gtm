@@ -99,9 +99,50 @@ export interface SiblingResult {
   detail: string;
 }
 
+/**
+ * APPROVE (+ USE IN ROUTING) for one hypothesis: the ordinary state-machine
+ * transitions in order, each audited by transitionHypothesis with `reason`.
+ *   draft -> submit -> approve [-> activate]
+ *   review_required -> approve [-> activate]
+ *   approved -> [activate]            (use only)
+ *   active -> unchanged
+ * Nothing here enrolls, drafts or sends; `use` only makes the thesis
+ * routable, and only because Casey clicked it.
+ */
+export async function advanceHypothesis(
+  prisma: PrismaLike,
+  id: string,
+  from: string,
+  opts: { use: boolean; actor: string; now: Date; reason: string },
+  transition: typeof transitionHypothesis = transitionHypothesis,
+): Promise<SiblingResult> {
+  const ctx = { now: opts.now, actor: opts.actor, reason: opts.reason };
+  let status = from;
+  if (status === 'active' || (status === 'approved' && !opts.use)) {
+    return { hypothesisId: id, ok: true, from, to: status, detail: `already ${status}; unchanged` };
+  }
+  if (!REVIEWABLE_STATUSES.has(status) && status !== 'approved') {
+    return { hypothesisId: id, ok: false, from, to: null, detail: `cannot approve from ${status}` };
+  }
+  if (status === 'draft') {
+    const s = await transition(prisma, id, 'submit', ctx);
+    if (!s.ok) return { hypothesisId: id, ok: false, from, to: null, detail: `submit refused: ${s.reason}` };
+    status = 'review_required';
+  }
+  if (status === 'review_required') {
+    const a = await transition(prisma, id, 'approve', ctx);
+    if (!a.ok) return { hypothesisId: id, ok: false, from, to: status, detail: `approve refused: ${a.reason}` };
+    status = 'approved';
+  }
+  if (!opts.use) return { hypothesisId: id, ok: true, from, to: 'approved', detail: 'approved' };
+  const u = await transition(prisma, id, 'activate', ctx);
+  if (!u.ok) return { hypothesisId: id, ok: false, from, to: 'approved', detail: `approved, but not in use: ${u.reason}` };
+  return { hypothesisId: id, ok: true, from, to: 'active', detail: from === 'approved' ? 'now in use' : 'approved and in use' };
+}
+
 export async function approveSelectedSiblings(
   prisma: PrismaLike,
-  input: { fingerprint: string; hypothesisIds: string[]; actor: string; now: Date },
+  input: { fingerprint: string; hypothesisIds: string[]; actor: string; now: Date; use?: boolean },
   deps: { transition?: typeof transitionHypothesis } = {},
 ): Promise<{ ok: boolean; reason?: string; results: SiblingResult[] }> {
   const transition = deps.transition ?? transitionHypothesis;
@@ -112,25 +153,11 @@ export async function approveSelectedSiblings(
   const outsiders = selected.filter((id) => !members.has(id));
   if (outsiders.length > 0) return { ok: false, reason: `not_in_group:${outsiders.join(',')}`, results: [] };
 
-  const reason = `group review ${input.fingerprint.slice(0, 12)}: approve selected siblings (${selected.length} of ${group.members.length}, ${group.accountName} ${group.problemFamily})`;
+  const verb = input.use ? 'approve + use selected siblings' : 'approve selected siblings';
+  const reason = `group review ${input.fingerprint.slice(0, 12)}: ${verb} (${selected.length} of ${group.members.length}, ${group.accountName} ${group.problemFamily})`;
   const results: SiblingResult[] = [];
   for (const id of selected) {
-    const m = members.get(id)!;
-    if (!REVIEWABLE_STATUSES.has(m.status)) {
-      results.push({ hypothesisId: id, ok: true, from: m.status, to: m.status, detail: `already ${m.status}; unchanged` });
-      continue;
-    }
-    let status = m.status;
-    if (status === 'draft') {
-      const s = await transition(prisma, id, 'submit', { now: input.now, actor: input.actor, reason });
-      if (!s.ok) {
-        results.push({ hypothesisId: id, ok: false, from: status, to: null, detail: `submit refused: ${s.reason}` });
-        continue;
-      }
-      status = 'review_required';
-    }
-    const a = await transition(prisma, id, 'approve', { now: input.now, actor: input.actor, reason });
-    results.push(a.ok ? { hypothesisId: id, ok: true, from: m.status, to: 'approved', detail: 'approved' } : { hypothesisId: id, ok: false, from: status, to: null, detail: `approve refused: ${a.reason}` });
+    results.push(await advanceHypothesis(prisma, id, members.get(id)!.status, { use: input.use === true, actor: input.actor, now: input.now, reason }, transition));
   }
   return { ok: results.every((r) => r.ok), results };
 }
