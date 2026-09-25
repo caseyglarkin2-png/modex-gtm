@@ -131,3 +131,20 @@ describe('manual send (Joey Maggard, sent by hand from casey@yardflow.ai)', asyn
     expect(audit.some((a) => (a.kind as string) === DRAFTED)).toBe(false);
   });
 });
+
+describe('SEND FROM YARDFLOW anchors the multi-touch loop', async () => {
+  const { DIRECT_SENT } = await import('@/lib/gap/execution/draft-ledger');
+  const row = { id: 'x', kind: DIRECT_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(), payload: { engine: 'gmail_direct', stepIndex: 0, recipient: 'joey.maggard@kroger.com', personaId: 1886, sequenceVersionId: 'v1', subject: 'Doors versus spots', gmailSentMessageId: 'msg-1', gmailThreadId: 'thr-1', sentAt: SENT_AT.toISOString() } };
+  const withDirect = (extra: Record<string, unknown> = {}) => {
+    const p = ledger([], extra);
+    p.gapAuditEvent.findMany = vi.fn(async ({ where }: any) => [row].filter((a) => a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind)))) as any;
+    return p;
+  };
+  it('touch 2 waits on the real sent time; nothing is auto-sent', async () => {
+    const t = await computeNextTouch(withDirect(), 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(t).toMatchObject({ state: 'waiting', stepIndex: 1, threadFrom: { gmailSentMessageId: 'msg-1', gmailThreadId: 'thr-1' } });
+  });
+  it('a buyer reply stops the remaining touches', async () => {
+    expect(await computeNextTouch(withDirect({ inbound: 'Re: Doors versus spots' }), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason: 'replied' });
+  });
+});

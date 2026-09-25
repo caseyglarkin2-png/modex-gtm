@@ -9,7 +9,7 @@
  * the Gmail API directly, so they are NOT covered by this and remain uncapped.
  */
 import { assertUnderDailyCap } from './daily-cap';
-import { assertAutonomyPermitsSend, type SendPurpose } from './autonomy-gate';
+import { assertAutonomyPermitsSend, assertHumanApprovedOneToOne, type HumanConfirmation, type SendPurpose } from './autonomy-gate';
 import { assertSuppressionPermitsSend } from './suppression-gate';
 
 // Read at call time, not module load time, so dynamically-set values work
@@ -64,6 +64,8 @@ export interface GmailSendPayload {
    *  caller that does not declare is GATED by the canonical kill-switch rather
    *  than exempted. Only OPERATOR_ALERT is exempt. See ./autonomy-gate.ts. */
   purpose?: SendPurpose;
+  /** Required (and checked at the wire) when purpose is HUMAN_APPROVED_1TO1. */
+  humanConfirmation?: HumanConfirmation;
 }
 
 interface OAuthTokenResponse {
@@ -263,6 +265,9 @@ export async function sendViaGmail(
   // its own. Refuses when outreach is halted, when the two repos have drifted,
   // and when the authority cannot be read at all - unreadable is not permission.
   // OPERATOR_ALERT is exempt so alerts still reach a human during a halt.
+  // A HUMAN_APPROVED_1TO1 send must prove, at the wire, that it is one
+  // confirmed email to one confirmed person; otherwise it is refused here.
+  if (payload.purpose === 'HUMAN_APPROVED_1TO1') assertHumanApprovedOneToOne(payload);
   await assertAutonomyPermitsSend(payload.purpose);
 
   // THE CROSS-PLANE SUPPRESSION CONTRACT, the third and last plane to get it.

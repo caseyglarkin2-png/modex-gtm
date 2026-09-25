@@ -20,6 +20,7 @@ import {
   type GmailSendPayload,
   type GmailSender,
 } from '@/lib/email/gmail-sender';
+import type { HumanConfirmation, SendPurpose } from '@/lib/email/autonomy-gate';
 import type { ExecutionIntent, ExecutionReceipt } from './contract';
 
 export interface GmailAdapterInput {
@@ -33,6 +34,10 @@ export interface GmailAdapterInput {
   sender?: GmailSender;
   /** Extra MIME headers (e.g. List-Unsubscribe). Threading headers from the intent win on a clash. */
   headers?: Record<string, string>;
+  /** Default PROSPECT_OUTREACH. The wire gates decide what a purpose may do; this only passes it through. */
+  purpose?: SendPurpose;
+  /** Passed through to the wire, which checks it for a human-approved 1:1 send. */
+  humanConfirmation?: HumanConfirmation;
 }
 
 /**
@@ -54,8 +59,9 @@ function toPayload(intent: ExecutionIntent, input: GmailAdapterInput): GmailSend
     to: input.to,
     subject: input.subject,
     html: input.html,
-    purpose: 'PROSPECT_OUTREACH',
+    purpose: input.purpose ?? 'PROSPECT_OUTREACH',
   };
+  if (input.humanConfirmation !== undefined) payload.humanConfirmation = { ...input.humanConfirmation };
   if (input.cc !== undefined) payload.cc = input.cc;
   if (input.bcc !== undefined) payload.bcc = input.bcc;
   if (input.text !== undefined) payload.text = input.text;

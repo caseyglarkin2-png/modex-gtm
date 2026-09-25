@@ -58,6 +58,48 @@ export interface ManualSentPayload {
   recordedAt: string;
 }
 
+/**
+ * SEND FROM YARDFLOW (first-principles pass, 2026-09-25): Casey confirmed one
+ * email and GAP sent it through gmailDirectAdapter. The external call is
+ * bracketed so a crash never reads as "nothing happened" or falsely "sent":
+ *   CLAIMED   written under an advisory lock BEFORE the Gmail call; while it
+ *             stands unresolved no second send of that key is attempted
+ *   SENT      the Gmail message and thread ids, after Gmail answered
+ *   RELEASED  Gmail provably did not send (a gate refused before the wire,
+ *             or Gmail answered an error); the key may be tried again
+ * A claim with neither SENT nor RELEASED is UNKNOWN: GAP refuses to send it
+ * again and tells Casey to check Gmail Sent. It never guesses.
+ */
+export const DIRECT_CLAIMED = 'execution.gmail_direct_claimed' as const;
+export const DIRECT_SENT = 'execution.gmail_direct_sent' as const;
+export const DIRECT_RELEASED = 'execution.gmail_direct_released' as const;
+export const DIRECT_REFUSED = 'execution.gmail_direct_refused' as const;
+
+export interface DirectSentPayload {
+  engine: 'gmail_direct';
+  channel: 'gmail';
+  status: 'sent';
+  idempotencyKey: string;
+  routingDecisionId: string;
+  hypothesisId: string;
+  personaId: number;
+  accountName: string;
+  recipient: string;
+  senderIdentity: string;
+  subject: string;
+  contentHash: string;
+  bodySnapshot: string;
+  sequenceVersionId: string;
+  stepIndex: number;
+  compileId: string;
+  gmailSentMessageId: string;
+  gmailThreadId: string | null;
+  inReplyToGmailMessageId: string | null;
+  sentAt: string;
+  confirmedBy: string;
+  confirmedAt: string;
+}
+
 export interface DraftedPayload {
   engine: 'gmail_draft';
   status: 'drafted';
@@ -144,7 +186,16 @@ export async function listDraftRecords(prisma: PrismaLike, decisionId: string): 
 /** Append one ledger row. THROWS on failure: a receipt that silently did not land is a lie. */
 export async function appendLedger(
   prisma: PrismaLike,
-  kind: typeof DRAFTED | typeof DRAFT_REFUSED | typeof DRAFT_SENT | typeof DRAFT_DISCARDED | typeof MANUAL_SENT,
+  kind:
+    | typeof DRAFTED
+    | typeof DRAFT_REFUSED
+    | typeof DRAFT_SENT
+    | typeof DRAFT_DISCARDED
+    | typeof MANUAL_SENT
+    | typeof DIRECT_CLAIMED
+    | typeof DIRECT_SENT
+    | typeof DIRECT_RELEASED
+    | typeof DIRECT_REFUSED,
   actor: string,
   decisionId: string,
   payload: Record<string, unknown>,
