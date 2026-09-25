@@ -31,6 +31,8 @@ export type GapAuditKind =
   | 'hypothesis.expired'
   | 'hypothesis.withdrawn'
   | 'signal.registered'
+  | 'identity.conflict'
+  | 'automation.kill_switch_drill'
   | 'routing.run'
   | 'decision.human_action'
   | 'compile.result'

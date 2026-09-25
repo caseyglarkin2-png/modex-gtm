@@ -32,6 +32,14 @@
 import { createHash } from 'node:crypto';
 
 import { HYPOTHESIS_TERMINAL_STATUSES, type Persona as PersonaKey } from '../taxonomy';
+import { audit as defaultAudit } from '../audit';
+import {
+  loadIdentityContext as defaultLoadIdentityContext,
+  registerAlias as defaultRegisterAlias,
+  type RegisterAliasInput,
+  type RegisterAliasResult,
+} from '../identity/service';
+import { resolveIdentity as defaultResolveIdentity, type IdentityContext, type IdentityInput, type ResolveIdentityResult } from '../identity/resolve';
 import { fromPounceTrigger, type PounceTriggerRow, type ProspectingSignalInput } from '../signals/projection';
 import { registerSignal as defaultRegisterSignal, type RegisterResult } from '../signals/registry';
 import {
@@ -66,11 +74,31 @@ export interface HypothesizeDeps {
   registerSignal?: (prisma: any, input: ProspectingSignalInput) => Promise<RegisterResult>;
   proposeHypothesis?: (prisma: any, input: ProposeInput) => Promise<ProposeResult>;
   buildCandidates?: (input: BuildInput) => BuildResult;
+  /** 6A: identity resolution. Injectable so tests need not stand up the real DB-backed context. */
+  loadIdentityContext?: (prisma: any) => Promise<IdentityContext>;
+  resolveIdentity?: (ctx: IdentityContext, input: IdentityInput) => ResolveIdentityResult;
+  registerAlias?: (prisma: any, input: RegisterAliasInput) => Promise<RegisterAliasResult>;
+  audit?: (prisma: any, input: Parameters<typeof defaultAudit>[1]) => ReturnType<typeof defaultAudit>;
 }
 
 export interface HypothesizeReport {
   accountsScanned: number;
   triggersSeen: number;
+  /**
+   * 6A: per-trigger identity resolution, BEFORE grouping. `refused` reasons
+   * are the resolver's own (`unresolved_company`, `ambiguous_identity`,
+   * `no_input`); a refused trigger is skipped for signal registration
+   * entirely -- it never reaches registerSignal, so it can never throw the
+   * FK violation that used to abort its whole account's processing.
+   */
+  identity: {
+    resolved: number;
+    /** A resolution via the normalized-name fallback tier was cached as an explicit alias for next run. */
+    aliasesRegistered: number;
+    /** A higher tier (company id/domain) disagreed with a lower one; the higher tier won and the disagreement was audited. */
+    conflicts: number;
+    refused: Record<string, number>;
+  };
   signals: { created: number; existing: number; refused: number };
   candidates: number;
   proposed: number;
@@ -243,19 +271,22 @@ function toBuildSignal(id: string, signal: ProspectingSignalInput, categories: s
 }
 
 /**
- * Group triggers by account in first-seen order. The query is ordered by
- * score desc, so the first trigger of each account is its best and the map's
- * insertion order ranks accounts by their best trigger. Capped at `max`.
+ * Group triggers by their RESOLVED (6A canonical) account name, in the
+ * resolution order (which preserves the score-desc query order). The first
+ * trigger of each account is its best and the map's insertion order ranks
+ * accounts by their best trigger. Capped at `max`.
  */
-function groupByAccount(triggers: PounceTriggerRow[], max: number): Map<string, PounceTriggerRow[]> {
+function groupByResolvedAccount(
+  resolved: Array<{ trigger: PounceTriggerRow; accountName: string }>,
+  max: number,
+): Map<string, PounceTriggerRow[]> {
   const groups = new Map<string, PounceTriggerRow[]>();
-  for (const trigger of triggers) {
-    const name = trigger.account_name.trim();
-    const existing = groups.get(name);
+  for (const { trigger, accountName } of resolved) {
+    const existing = groups.get(accountName);
     if (existing) {
       existing.push(trigger);
     } else if (groups.size < max) {
-      groups.set(name, [trigger]);
+      groups.set(accountName, [trigger]);
     }
   }
   return groups;
@@ -273,6 +304,10 @@ export async function runHypothesize(
   const registerSignal = deps.registerSignal ?? defaultRegisterSignal;
   const proposeHypothesis = deps.proposeHypothesis ?? defaultProposeHypothesis;
   const buildCandidates = deps.buildCandidates ?? defaultBuildCandidates;
+  const loadIdentityContext = deps.loadIdentityContext ?? defaultLoadIdentityContext;
+  const resolveIdentity = deps.resolveIdentity ?? defaultResolveIdentity;
+  const registerAlias = deps.registerAlias ?? defaultRegisterAlias;
+  const audit = deps.audit ?? defaultAudit;
 
   const now = opts.now;
   const lookbackDays = opts.lookbackDays ?? DEFAULT_LOOKBACK_DAYS;
@@ -283,6 +318,7 @@ export async function runHypothesize(
   const report: HypothesizeReport = {
     accountsScanned: 0,
     triggersSeen: 0,
+    identity: { resolved: 0, aliasesRegistered: 0, conflicts: 0, refused: {} },
     signals: { created: 0, existing: 0, refused: 0 },
     candidates: 0,
     proposed: 0,
@@ -301,7 +337,55 @@ export async function runHypothesize(
     where: { dismissed: false, first_seen_at: { gte: since } },
     orderBy: [{ score: 'desc' }, { first_seen_at: 'desc' }],
   });
-  const byAccount = groupByAccount(triggers, Math.max(0, maxAccounts));
+
+  // 6A: resolve every trigger's account identity BEFORE grouping. A trigger
+  // that does not resolve to exactly one Account is skipped here, counted by
+  // reason, and never reaches registerSignal -- so it can never throw the FK
+  // violation that used to abort its whole (raw-named) account's processing.
+  const identityContext = await loadIdentityContext(prisma);
+  const resolvedTriggers: Array<{ trigger: PounceTriggerRow; accountName: string }> = [];
+  for (const trigger of triggers) {
+    const result = resolveIdentity(identityContext, {
+      rawName: trigger.account_name,
+      hubspotCompanyId: trigger.hubspot_company_id ?? null,
+    });
+    if (!result.ok) {
+      bump(report.identity.refused, result.reason);
+      continue;
+    }
+    report.identity.resolved += 1;
+    if (result.conflict) {
+      report.identity.conflicts += 1;
+      await audit(prisma, {
+        kind: 'identity.conflict',
+        actor,
+        subjectType: 'pounce_trigger',
+        subjectId: String(trigger.id),
+        payload: {
+          rawName: trigger.account_name,
+          resolvedVia: result.via,
+          resolvedAccountName: result.accountName,
+          conflictVia: result.conflict.via,
+          conflictAccountName: result.conflict.accountName,
+        },
+      });
+    }
+    // A resolution earned only through name normalization is cached as an
+    // explicit alias, so the next run resolves it through the faster, higher
+    // -confidence tier C instead of re-deriving it from the raw name every time.
+    if (!dryRun && result.via === 'normalized' && trigger.account_name.trim() !== result.accountName) {
+      const registered = await registerAlias(prisma, {
+        alias: trigger.account_name,
+        accountName: result.accountName,
+        source: 'hypothesize_cron',
+        createdBy: actor,
+      });
+      if (registered.created) report.identity.aliasesRegistered += 1;
+    }
+    resolvedTriggers.push({ trigger, accountName: result.accountName });
+  }
+
+  const byAccount = groupByResolvedAccount(resolvedTriggers, Math.max(0, maxAccounts));
 
   for (const [accountName, accountTriggers] of byAccount) {
     report.accountsScanned += 1;
@@ -335,12 +419,15 @@ async function hypothesizeAccount(
   accountTriggers: PounceTriggerRow[],
   ctx: AccountContext,
   report: HypothesizeReport,
-  deps: Required<HypothesizeDeps>,
+  deps: Required<Pick<HypothesizeDeps, 'registerSignal' | 'proposeHypothesis' | 'buildCandidates'>>,
 ): Promise<void> {
   const { now, dryRun, actor } = ctx;
   const { registerSignal, proposeHypothesis, buildCandidates } = deps;
 
-  // 2a. Register each trigger as a frozen signal.
+  // 2a. Register each trigger as a frozen signal, under the 6A-resolved
+  // canonical account name (accountName here), never the trigger's own raw
+  // text: fromPounceTrigger is a pure projection and knows nothing about
+  // identity resolution, so its accountName is overridden at this call site.
   const signals: BuildSignal[] = [];
   for (const trigger of accountTriggers) {
     const projected = fromPounceTrigger(trigger, { registeredBy: actor, now });
@@ -348,10 +435,11 @@ async function hypothesizeAccount(
       report.signals.refused += 1;
       continue;
     }
-    const registered = await registerSignal(prisma, projected.signal);
+    const signalInput: ProspectingSignalInput = { ...projected.signal, accountName };
+    const registered = await registerSignal(prisma, signalInput);
     if (registered.created) report.signals.created += 1;
     else report.signals.existing += 1;
-    signals.push(toBuildSignal(registered.id, projected.signal, trigger.categories));
+    signals.push(toBuildSignal(registered.id, signalInput, trigger.categories));
   }
 
   // 2b. Contact-ready personas with an address on file.

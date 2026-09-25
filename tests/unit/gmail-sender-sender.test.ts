@@ -41,7 +41,9 @@ vi.mock('@/lib/email/suppression-gate', () => ({
   assertSuppressionPermitsSend: vi.fn(async () => undefined),
 }));
 
-import { buildMimeMessage, sendViaGmail } from '@/lib/email/gmail-sender';
+import { buildMimeMessage, createGmailDraft, sendGmailDraft, sendViaGmail } from '@/lib/email/gmail-sender';
+import { assertAutonomyPermitsSend } from '@/lib/email/autonomy-gate';
+import { assertSuppressionPermitsSend } from '@/lib/email/suppression-gate';
 
 /**
  * Per-identity send: when a `sender` is supplied, the MIME `From` must be the
@@ -129,5 +131,92 @@ describe('sendViaGmail — per-identity token + mailbox URL', () => {
 
     const res = await sendViaGmail({ ...BASE });
     expect(res).toEqual({ provider: 'gmail', id: 'm2', threadId: 't2' });
+  });
+});
+
+describe('createGmailDraft (6C): drafting is not delivery', () => {
+  const ORIGINAL_ENV = { ...process.env };
+
+  beforeEach(() => {
+    process.env.GOOGLE_CLIENT_ID = 'cid';
+    process.env.GOOGLE_CLIENT_SECRET = 'secret';
+    process.env.GOOGLE_REFRESH_TOKEN = 'casey-env-rt';
+    delete process.env.GMAIL_USER_EMAIL;
+    vi.clearAllMocks();
+  });
+  afterEach(() => {
+    process.env = { ...ORIGINAL_ENV };
+    vi.restoreAllMocks();
+  });
+
+  it('checks suppression but never the autonomy kill switch or the daily cap, and calls drafts.create, never messages.send', async () => {
+    const fetchMock = vi.fn(async (url: string | URL) => {
+      const u = String(url);
+      if (u.includes('oauth2.googleapis.com/token')) {
+        return new Response(JSON.stringify({ access_token: 'casey-access' }), { status: 200 });
+      }
+      expect(u).toContain('/users/casey%40freightroll.com/drafts');
+      expect(u).not.toContain('messages/send');
+      return new Response(JSON.stringify({ id: 'draft_1', message: { id: 'msg_placeholder', threadId: 't1' } }), { status: 200 });
+    });
+    vi.stubGlobal('fetch', fetchMock as unknown as typeof fetch);
+
+    const res = await createGmailDraft({ ...BASE });
+
+    expect(res).toEqual({ provider: 'gmail', draftId: 'draft_1', messageId: 'msg_placeholder', threadId: 't1' });
+    expect(assertSuppressionPermitsSend).toHaveBeenCalledWith({ to: BASE.to, cc: undefined, bcc: undefined }, undefined);
+    expect(assertAutonomyPermitsSend).not.toHaveBeenCalled();
+  });
+
+  it('propagates a suppression refusal without ever reaching the wire', async () => {
+    vi.mocked(assertSuppressionPermitsSend).mockRejectedValueOnce(new Error('suppressed: unsubscribed'));
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock as unknown as typeof fetch);
+
+    await expect(createGmailDraft({ ...BASE })).rejects.toThrow('suppressed: unsubscribed');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('sendGmailDraft (6C): the one moment a draft becomes delivery', () => {
+  const ORIGINAL_ENV = { ...process.env };
+
+  beforeEach(() => {
+    process.env.GOOGLE_CLIENT_ID = 'cid';
+    process.env.GOOGLE_CLIENT_SECRET = 'secret';
+    process.env.GOOGLE_REFRESH_TOKEN = 'casey-env-rt';
+    delete process.env.GMAIL_USER_EMAIL;
+    vi.clearAllMocks();
+  });
+  afterEach(() => {
+    process.env = { ...ORIGINAL_ENV };
+    vi.restoreAllMocks();
+  });
+
+  it('rechecks autonomy AND suppression fresh (a recipient can unsubscribe between draft and send) before calling drafts.send', async () => {
+    const fetchMock = vi.fn(async (url: string | URL) => {
+      const u = String(url);
+      if (u.includes('oauth2.googleapis.com/token')) {
+        return new Response(JSON.stringify({ access_token: 'casey-access' }), { status: 200 });
+      }
+      expect(u).toContain('/users/casey%40freightroll.com/drafts/send');
+      return new Response(JSON.stringify({ id: 'msg_real', threadId: 't1' }), { status: 200 });
+    });
+    vi.stubGlobal('fetch', fetchMock as unknown as typeof fetch);
+
+    const res = await sendGmailDraft('draft_1', { to: 'recipient@example.com' });
+
+    expect(res).toEqual({ provider: 'gmail', id: 'msg_real', threadId: 't1' });
+    expect(assertAutonomyPermitsSend).toHaveBeenCalled();
+    expect(assertSuppressionPermitsSend).toHaveBeenCalledWith({ to: 'recipient@example.com' }, undefined);
+  });
+
+  it('a suppression refusal at send time still stops it, even though the draft already exists', async () => {
+    vi.mocked(assertSuppressionPermitsSend).mockRejectedValueOnce(new Error('suppressed: unsubscribed since drafting'));
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock as unknown as typeof fetch);
+
+    await expect(sendGmailDraft('draft_1', { to: 'recipient@example.com' })).rejects.toThrow('unsubscribed since drafting');
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

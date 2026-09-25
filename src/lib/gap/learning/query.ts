@@ -20,6 +20,7 @@
  */
 
 import { selectConfirmedBids, numericValueOf } from '../bid/select';
+import { loadReplyBacklog, type ReplyBacklog } from './reply-backlog';
 import { isInternalRecipient } from '../sequence/internal-recipient';
 import {
   computeFunnel,
@@ -27,16 +28,22 @@ import {
   breakdownByConversationDimension,
   dispositionDistribution,
   computeSignalYield,
+  computeStaleHypotheses,
+  DEFAULT_STALE_HYPOTHESIS_DAYS,
   type ConversationFunnel,
   type FunnelConversation,
   type FunnelHypothesis,
   type LearningFunnel,
+  type Rate,
 } from './metrics';
+import { OPEN_HYPOTHESIS_STATUSES } from '../hypothesis/hypothesize';
 
 export interface LearningHypothesisRow extends FunnelHypothesis {
   accountName: string;
   problemFamily: string | null;
   persona: string | null;
+  /** 6F: staleness is measured from this. */
+  createdAt: Date;
   tamTier: string | null;
   sequenceFamilyId: string | null;
   sequenceVersionId: string | null;
@@ -47,6 +54,8 @@ export interface LearningHypothesisRow extends FunnelHypothesis {
 
 export interface LearningConversationRow extends FunnelConversation {
   sender: string | null;
+  /** 6F: hubspot_native | modex_draft_queue | manual, or null for a bare call with no enrollment. */
+  engine: string | null;
 }
 
 export interface LearningInputs {
@@ -73,6 +82,10 @@ export interface LearningFilters {
   program?: string | null;
   from?: Date | null;
   to?: Date | null;
+  /** 6E: clock for the reply backlog metric. Defaults to `new Date()`. */
+  now?: Date;
+  /** 6F: override for the stale-hypothesis threshold. Defaults to DEFAULT_STALE_HYPOTHESIS_DAYS. */
+  staleThresholdDays?: number;
 }
 
 /** BID types that carry a root-cause or impact signal (mirrors resolution.ts). */
@@ -109,6 +122,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
         account_name: true,
         problem_family: true,
         persona: true,
+        created_at: true,
         account: { select: { tier: true } },
         signals: { select: { role: true, signal: { select: { id: true, type: true } } } },
       },
@@ -127,7 +141,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
         root_cause_class: true,
         impact_class: true,
         contact_email: true,
-        enrollment: { select: { sender: true } },
+        enrollment: { select: { sender: true, engine: true } },
       },
     }),
     prisma.buyerInputData.findMany({
@@ -204,6 +218,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
         accountName: h.account_name,
         problemFamily: h.problem_family ?? null,
         persona: h.persona ?? null,
+        createdAt: h.created_at,
         tamTier: h.account?.tier ?? null,
         sequenceFamilyId: attribution?.familyId ?? null,
         sequenceVersionId: attribution?.versionId ?? null,
@@ -220,6 +235,7 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
       responseClass: d.response_class,
       channel: d.channel,
       sender: d.enrollment?.sender ?? null,
+      engine: d.enrollment?.engine ?? null,
       rootCauseConfirmed: nonEmpty(d.root_cause_class) || rootCauseHypIds.has(d.hypothesis_id),
       impactAcknowledged: nonEmpty(d.impact_class) || impactHypIds.has(d.hypothesis_id) || quantified,
       impactQuantified: quantified,
@@ -239,13 +255,27 @@ export interface LearningReport {
   bySequenceVersion: Array<{ key: string; funnel: LearningFunnel }>;
   byChannel: Array<{ key: string; funnel: ConversationFunnel }>;
   bySender: Array<{ key: string; funnel: ConversationFunnel }>;
+  /** 6F: which engine actually sent it, from the real enrollment, never a caller-supplied label. */
+  byEngine: Array<{ key: string; funnel: ConversationFunnel }>;
   dispositionDistribution: Array<{ responseClass: string; count: number }>;
   signalYield: ReturnType<typeof computeSignalYield>;
   counts: { hypotheses: number; conversations: number };
+  /** 6E: replies (Gmail or HubSpot, already unified at ingestion) with no disposition yet, past the threshold. */
+  replyBacklog: ReplyBacklog;
+  /** 6F: open hypotheses older than the threshold, among all open hypotheses. */
+  staleHypotheses: Rate;
 }
 
 export async function buildLearningReport(prisma: any, filters: LearningFilters = {}): Promise<LearningReport> {
   const { hypotheses, conversations } = await loadLearningInputs(prisma, filters);
+  const now = filters.now ?? new Date();
+  const replyBacklog = await loadReplyBacklog(prisma, now);
+  const staleHypotheses = computeStaleHypotheses(
+    hypotheses,
+    new Set(OPEN_HYPOTHESIS_STATUSES),
+    now,
+    filters.staleThresholdDays ?? DEFAULT_STALE_HYPOTHESIS_DAYS,
+  );
 
   const signalCountRows = await prisma.prospectingSignal.groupBy({ by: ['type'], _count: { _all: true } });
   const signalCounts = new Map<string, number>((signalCountRows as any[]).map((r) => [r.type, r._count._all as number]));
@@ -260,6 +290,7 @@ export async function buildLearningReport(prisma: any, filters: LearningFilters 
     bySequenceVersion: breakdownByHypothesisDimension(hypotheses, conversations, (h) => h.sequenceVersionId),
     byChannel: breakdownByConversationDimension(conversations, (c) => c.channel),
     bySender: breakdownByConversationDimension(conversations, (c) => c.sender),
+    byEngine: breakdownByConversationDimension(conversations, (c) => c.engine),
     dispositionDistribution: dispositionDistribution(conversations),
     signalYield: computeSignalYield(
       signalCounts,
@@ -268,6 +299,8 @@ export async function buildLearningReport(prisma: any, filters: LearningFilters 
         .map((h) => ({ signalType: h.primarySignalType, signalId: h.primarySignalId })),
     ),
     counts: { hypotheses: hypotheses.length, conversations: conversations.length },
+    replyBacklog,
+    staleHypotheses,
   };
 }
 

@@ -30,7 +30,14 @@ vi.mock('@/lib/email/autonomy-gate', () => ({ autonomyHalted: mockedAutonomyHalt
 vi.mock('@/lib/gap/compiler/compile', () => ({ compile: mockedCompile }));
 vi.mock('@/lib/gap/sequences/service', () => ({ materializeSequence: mockedMaterialize }));
 
-import { enrollFromDecision, evidenceRefsFromSignals, verifyCompiles, type EnrollDeps, type EnrollFromDecisionInput } from '@/lib/gap/enroll/service';
+import {
+  checkEvidenceFreshness,
+  enrollFromDecision,
+  evidenceRefsFromSignals,
+  verifyCompiles,
+  type EnrollDeps,
+  type EnrollFromDecisionInput,
+} from '@/lib/gap/enroll/service';
 import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
 
 /** R3-10: the service reads the cross-plane contract before the target; every case injects a CLEAR reader unless it tests the read. */
@@ -431,6 +438,80 @@ describe('enrollFromDecision guards, in order', () => {
     expect(await verifyCompiles(prisma, 2, [compileRow('a', 0, 'pass')])).toBe('compile_not_passed:1');
     expect(await verifyCompiles(prisma, 2, [compileRow('a', 0, 'reject'), compileRow('b', 1, 'pass')])).toBe('compile_not_passed:0');
     expect(await verifyCompiles(prisma, 2, PASSING_COMPILES)).toBeNull();
+  });
+
+  // -------------------------------------------------------------------------
+  // SF14 (6B-T2): compile staleness and evidence freshness, both OPT-IN
+  // (undefined by default), closing the gap named in the finish-pass ledger:
+  // "compile verdicts have no age limit at enroll time, and signal freshness
+  // is not rechecked". Every test above this point runs with neither opt-in
+  // set and is unaffected, proven by the full 60-test run staying green
+  // after this ticket landed.
+  // -------------------------------------------------------------------------
+
+  describe('SF14: compile staleness (verifyCompiles opt-in)', () => {
+    it('is a no-op by default, even for a compile far older than any reasonable threshold', async () => {
+      const prisma = makePrisma();
+      // PASSING_COMPILES is dated 2026-09-22; NOW is 2026-09-23T15:00 (~39.5h later).
+      expect(await verifyCompiles(prisma, 2, PASSING_COMPILES)).toBeNull();
+      expect(await verifyCompiles(prisma, 2, PASSING_COMPILES, { now: NOW })).toBeNull(); // now alone, no maxCompileAgeMs: still off
+    });
+
+    it('refuses compile_stale:<step> for the first step whose newest compile exceeds the age limit, when both now and maxCompileAgeMs are given', async () => {
+      const prisma = makePrisma();
+      const oneHourMs = 60 * 60 * 1000;
+      const r = await verifyCompiles(prisma, 2, PASSING_COMPILES, { now: NOW, maxCompileAgeMs: oneHourMs });
+      expect(r).toBe('compile_stale:0');
+    });
+
+    it('a fresh-enough compile under the same threshold passes', async () => {
+      const prisma = makePrisma();
+      const fortyEightHoursMs = 48 * 60 * 60 * 1000;
+      const r = await verifyCompiles(prisma, 2, PASSING_COMPILES, { now: NOW, maxCompileAgeMs: fortyEightHoursMs });
+      expect(r).toBeNull();
+    });
+
+    it('the enroll service refuses compile_stale end to end only when deps.maxCompileAgeMs is set', async () => {
+      const prisma = makePrisma();
+      const withoutOptIn = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+      expect(withoutOptIn.ok).toBe(true);
+
+      const withOptIn = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps({ maxCompileAgeMs: 60 * 60 * 1000 }));
+      expect(withOptIn).toEqual({ ok: false, reason: 'compile_stale:0' });
+      expect(refusedPredicates()).toContain('compile_stale:0');
+    });
+  });
+
+  describe('SF14: evidence freshness recheck (checkEvidenceFreshness opt-in)', () => {
+    it('null and future freshness_expires_at are both fresh; a past one is expired', () => {
+      expect(checkEvidenceFreshness([{ freshness_expires_at: null }], NOW)).toBeNull();
+      expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-12-01T00:00:00.000Z' }], NOW)).toBeNull();
+      expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-09-01T00:00:00.000Z' }], NOW)).toBe('evidence_expired');
+    });
+
+    it('the enroll service refuses evidence_expired only when deps.checkEvidenceFreshness is true, and never with the default hypothesis fixture (no signals array)', async () => {
+      const withoutOptIn = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps());
+      expect(withoutOptIn.ok).toBe(true);
+
+      const expiredHypothesis = {
+        id: 'H1',
+        status: 'approved',
+        account_name: 'Acme Logistics',
+        signals: [{ signal: { id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z' } }],
+      };
+      const withOptIn = await enrollFromDecision(
+        makePrisma({ hypothesis: expiredHypothesis }),
+        input({ mode: 'live' }),
+        deps({ checkEvidenceFreshness: true }),
+      );
+      expect(withOptIn).toEqual({ ok: false, reason: 'evidence_expired' });
+      expect(refusedPredicates()).toContain('evidence_expired');
+
+      // A fresh signal under the same opt-in still succeeds.
+      const freshHypothesis = { ...expiredHypothesis, signals: [{ signal: { id: 'sig_1', freshness_expires_at: '2026-12-01T00:00:00.000Z' } }] };
+      const stillOk = await enrollFromDecision(makePrisma({ hypothesis: freshHypothesis }), input({ mode: 'live' }), deps({ checkEvidenceFreshness: true }));
+      expect(stillOk.ok).toBe(true);
+    });
   });
 });
 

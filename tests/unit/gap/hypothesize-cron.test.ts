@@ -3,6 +3,7 @@ import { NextRequest } from 'next/server';
 
 import type { BuildCandidate, BuildInput, BuildResult } from '@/lib/gap/hypothesis/build';
 import type { HypothesizeReport } from '@/lib/gap/hypothesis/hypothesize';
+import type { IdentityInput, ResolveIdentityResult } from '@/lib/gap/identity/resolve';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '@/lib/gap/taxonomy';
 
 // ---------------------------------------------------------------------------
@@ -129,7 +130,25 @@ function makeDeps(candidates: BuildCandidate[] = [candidate()], skipped: BuildRe
   }));
   const proposeHypothesis = asyncSpy(async () => ({ ok: true as const, id: `hyp_${++nextId}`, status: 'draft' as const }));
   const buildCandidates = vi.fn<(input: BuildInput) => BuildResult>(() => ({ candidates, skipped }));
-  return { registerSignal, proposeHypothesis, buildCandidates };
+  const loadIdentityContext = asyncSpy(async () => ({
+    accountsByHubspotCompanyId: new Map(),
+    verifiedDomainToAccounts: new Map(),
+    aliasToAccounts: new Map(),
+    accountNames: [],
+  }));
+  // Default: identity passthrough (every raw trigger name resolves to
+  // itself via the normalized tier), so the existing behavioral tests below
+  // need not know about 6A. Tests that exercise identity resolution itself
+  // override resolveIdentity per case.
+  const resolveIdentity = vi.fn((_ctx: unknown, input: IdentityInput): ResolveIdentityResult => ({
+    ok: true,
+    accountName: (input.rawName ?? '').trim(),
+    via: 'normalized',
+    confidence: 100,
+  }));
+  const registerAlias = asyncSpy(async () => ({ created: true, id: 'alias_new' }));
+  const audit = asyncSpy(async () => ({ stored: true, reviewQueued: false }));
+  return { registerSignal, proposeHypothesis, buildCandidates, loadIdentityContext, resolveIdentity, registerAlias, audit };
 }
 
 // ---------------------------------------------------------------------------
@@ -425,6 +444,7 @@ describe('runHypothesize (job)', () => {
     expect(report).toEqual({
       accountsScanned: 1,
       triggersSeen: 1,
+      identity: { resolved: 1, aliasesRegistered: 0, conflicts: 0, refused: {} },
       signals: { created: 1, existing: 0, refused: 0 },
       candidates: 1,
       proposed: 1,
@@ -436,6 +456,128 @@ describe('runHypothesize (job)', () => {
       errors: [],
       dryRun: false,
     });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 6A: identity resolution wired into the job. Sprint 1-5 tests above exercise
+// hypothesizeAccount's own logic with a passthrough resolver; these exercise
+// runHypothesize's NEW pre-grouping resolution step itself: refusal is
+// counted and skips the trigger (never reaches registerSignal, so it can
+// never throw the FK violation the old raw-name grouping could), a tier
+// conflict is audited, and a normalized-tier resolution is cached as an alias.
+// ---------------------------------------------------------------------------
+
+describe('runHypothesize identity resolution (6A)', () => {
+  it('the headline acceptance case: "Niagara Bottling, Llc" resolves and is grouped under the canonical account, never thrown as an FK violation', async () => {
+    const prisma = makePrisma({
+      triggers: [trigger({ id: 201, account_name: 'Niagara Bottling, Llc' })],
+      personas: [persona({ account_name: 'Niagara Bottling' })],
+    });
+    const deps = makeDeps([candidate({ accountName: 'Niagara Bottling' })]);
+    deps.resolveIdentity.mockReturnValue({
+      ok: true,
+      accountName: 'Niagara Bottling',
+      via: 'normalized',
+      confidence: 70,
+    });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.identity).toEqual({ resolved: 1, aliasesRegistered: 1, conflicts: 0, refused: {} });
+    expect(report.errors).toEqual([]);
+    expect(deps.registerSignal.mock.calls[0][1]).toMatchObject({ accountName: 'Niagara Bottling' });
+    expect(deps.buildCandidates.mock.calls[0][0].accountName).toBe('Niagara Bottling');
+    expect(deps.registerAlias).toHaveBeenCalledWith(prisma, {
+      alias: 'Niagara Bottling, Llc',
+      accountName: 'Niagara Bottling',
+      source: 'hypothesize_cron',
+      createdBy: 'cron:gap-hypothesize',
+    });
+  });
+
+  it('a genuinely unknown company is refused unresolved_company, skipped, and never reaches registerSignal', async () => {
+    const prisma = makePrisma({ triggers: [trigger({ id: 202, account_name: 'Nobody Has Heard Of This Co' })] });
+    const deps = makeDeps();
+    deps.resolveIdentity.mockReturnValue({ ok: false, reason: 'unresolved_company' });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.identity).toEqual({ resolved: 0, aliasesRegistered: 0, conflicts: 0, refused: { unresolved_company: 1 } });
+    expect(report.accountsScanned).toBe(0);
+    expect(report.errors).toEqual([]);
+    expect(deps.registerSignal).not.toHaveBeenCalled();
+  });
+
+  it('an ambiguous collision is refused ambiguous_identity and skipped', async () => {
+    const prisma = makePrisma({ triggers: [trigger({ id: 203, account_name: 'Acme Corp' })] });
+    const deps = makeDeps();
+    deps.resolveIdentity.mockReturnValue({ ok: false, reason: 'ambiguous_identity' });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.identity.refused).toEqual({ ambiguous_identity: 1 });
+    expect(deps.registerSignal).not.toHaveBeenCalled();
+  });
+
+  it('a company-id/domain conflict with a name-derived candidate is audited, never silently dropped, and the higher tier still wins', async () => {
+    const prisma = makePrisma({
+      triggers: [trigger({ id: 204, account_name: 'Wrong Guess Inc', hubspot_company_id: 'hs-real' })],
+      personas: [persona({ account_name: 'Real Account' })],
+    });
+    const deps = makeDeps([candidate({ accountName: 'Real Account' })]);
+    deps.resolveIdentity.mockReturnValue({
+      ok: true,
+      accountName: 'Real Account',
+      via: 'hubspot_company_id',
+      confidence: 100,
+      conflict: { via: 'normalized', accountName: 'Wrong Guess Inc' },
+    });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.identity.conflicts).toBe(1);
+    expect(deps.audit).toHaveBeenCalledWith(
+      prisma,
+      expect.objectContaining({
+        kind: 'identity.conflict',
+        subjectType: 'pounce_trigger',
+        subjectId: '204',
+        payload: expect.objectContaining({
+          rawName: 'Wrong Guess Inc',
+          resolvedVia: 'hubspot_company_id',
+          resolvedAccountName: 'Real Account',
+          conflictVia: 'normalized',
+          conflictAccountName: 'Wrong Guess Inc',
+        }),
+      }),
+    );
+    // The higher tier's answer is what gets used, not the conflicting one.
+    expect(deps.buildCandidates.mock.calls[0][0].accountName).toBe('Real Account');
+    // A hubspot_company_id resolution is not the normalized fallback tier, so it is not cached as an alias.
+    expect(deps.registerAlias).not.toHaveBeenCalled();
+  });
+
+  it('dryRun still resolves identity and counts it, but registers no alias', async () => {
+    const prisma = makePrisma({ triggers: [trigger({ id: 205, account_name: 'Niagara Bottling, Llc' })] });
+    const deps = makeDeps([]);
+    deps.resolveIdentity.mockReturnValue({ ok: true, accountName: 'Niagara Bottling', via: 'normalized', confidence: 70 });
+
+    const report = await runHypothesize(prisma, { now: NOW, dryRun: true }, deps);
+
+    expect(report.identity.resolved).toBe(1);
+    expect(report.dryRun).toBe(true);
+    expect(deps.registerAlias).not.toHaveBeenCalled();
+  });
+
+  it('an exact-name resolution is not re-cached as an alias (the raw name already equals the canonical one)', async () => {
+    const prisma = makePrisma({ triggers: [trigger({ id: 206, account_name: ACCOUNT })], personas: [persona()] });
+    const deps = makeDeps([candidate()]);
+    deps.resolveIdentity.mockReturnValue({ ok: true, accountName: ACCOUNT, via: 'normalized', confidence: 100 });
+
+    await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(deps.registerAlias).not.toHaveBeenCalled();
   });
 });
 
@@ -473,6 +615,7 @@ describe('personaKeyFor', () => {
 const REPORT: HypothesizeReport = {
   accountsScanned: 1,
   triggersSeen: 2,
+  identity: { resolved: 2, aliasesRegistered: 0, conflicts: 0, refused: {} },
   signals: { created: 2, existing: 0, refused: 0 },
   candidates: 1,
   proposed: 1,
