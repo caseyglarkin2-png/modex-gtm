@@ -94,7 +94,7 @@ describe('registerAlias', () => {
       source: 'hypothesize_cron',
       createdBy: 'cron:gap-hypothesize',
     });
-    expect(result).toEqual({ created: true, id: 'alias_1' });
+    expect(result).toEqual({ status: 'CREATED', created: true, id: 'alias_1' });
     expect(prisma.gapAccountAlias.create.mock.calls[0][0].data).toMatchObject({
       alias: 'Niagara Bottling, Llc',
       normalized_alias: 'niagara bottling',
@@ -104,16 +104,36 @@ describe('registerAlias', () => {
     });
   });
 
-  it('is idempotent: a second registration under the same normalized key returns the existing row and creates nothing', async () => {
+  it('is idempotent: a second registration under the same normalized key for the same account returns ALREADY_MATCHED and creates nothing', async () => {
     const prisma = makePrisma() as unknown as Prisma;
-    prisma.gapAccountAlias.findUnique = asyncSpy(async () => ({ id: 'alias_existing' }));
+    prisma.gapAccountAlias.findUnique = asyncSpy(async () => ({ id: 'alias_existing', account_name: 'Niagara Bottling' }));
     const result = await registerAlias(prisma, {
       alias: 'Niagara Bottling LLC',
       accountName: 'Niagara Bottling',
       source: 'hypothesize_cron',
       createdBy: 'cron:gap-hypothesize',
     });
-    expect(result).toEqual({ created: false, id: 'alias_existing' });
+    expect(result).toEqual({ status: 'ALREADY_MATCHED', created: false, id: 'alias_existing' });
+    expect(prisma.gapAccountAlias.create).not.toHaveBeenCalled();
+  });
+
+  it('reports a CONFLICT (never overwrites) when the same normalized alias already maps to a different account', async () => {
+    const prisma = makePrisma() as unknown as Prisma;
+    prisma.gapAccountAlias.findUnique = asyncSpy(async () => ({ id: 'alias_existing', account_name: 'Niagara Bottling Inc' }));
+    const result = await registerAlias(prisma, {
+      alias: 'Niagara Bottling LLC',
+      accountName: 'Niagara Bottling Co',
+      source: 'hypothesize_cron',
+      createdBy: 'cron:gap-hypothesize',
+    });
+    expect(result).toEqual({
+      status: 'CONFLICT',
+      created: false,
+      id: 'alias_existing',
+      normalizedAlias: 'niagara bottling',
+      existingAccountName: 'Niagara Bottling Inc',
+      requestedAccountName: 'Niagara Bottling Co',
+    });
     expect(prisma.gapAccountAlias.create).not.toHaveBeenCalled();
   });
 });

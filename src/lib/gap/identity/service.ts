@@ -85,24 +85,47 @@ export interface RegisterAliasInput {
   createdBy: string;
 }
 
-export interface RegisterAliasResult {
-  created: boolean;
-  id: string;
-}
+export type RegisterAliasResult =
+  | { status: 'CREATED'; id: string; created: true }
+  | { status: 'ALREADY_MATCHED'; id: string; created: false }
+  | {
+      status: 'CONFLICT';
+      id: string;
+      created: false;
+      normalizedAlias: string;
+      existingAccountName: string;
+      requestedAccountName: string;
+    };
 
 /**
  * Register an explicit alias. Idempotent on the normalized key (the DB
  * unique index on normalized_alias is the backstop; this check-then-create
  * is the same accepted race window as registerSignal in ../signals/registry.ts).
+ *
+ * `created` is kept alongside `status` for existing truthy-check callers;
+ * new callers should switch on `status` to see CONFLICT, which `created`
+ * alone cannot distinguish from ALREADY_MATCHED.
  */
 export async function registerAlias(prisma: any, input: RegisterAliasInput): Promise<RegisterAliasResult> {
   const normalized_alias = normalizeCompanyName(input.alias);
 
   const existing = await prisma.gapAccountAlias.findUnique({
     where: { normalized_alias },
-    select: { id: true },
+    select: { id: true, account_name: true },
   });
-  if (existing) return { created: false, id: existing.id };
+  if (existing) {
+    if (existing.account_name === input.accountName) {
+      return { status: 'ALREADY_MATCHED', id: existing.id, created: false };
+    }
+    return {
+      status: 'CONFLICT',
+      id: existing.id,
+      created: false,
+      normalizedAlias: normalized_alias,
+      existingAccountName: existing.account_name,
+      requestedAccountName: input.accountName,
+    };
+  }
 
   const row = await prisma.gapAccountAlias.create({
     data: {
@@ -113,5 +136,5 @@ export async function registerAlias(prisma: any, input: RegisterAliasInput): Pro
       created_by: input.createdBy,
     },
   });
-  return { created: true, id: row.id };
+  return { status: 'CREATED', id: row.id, created: true };
 }
