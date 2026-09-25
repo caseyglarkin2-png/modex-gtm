@@ -33,6 +33,7 @@ import {
   telHref,
 } from '@/lib/gap/routing/seller-action';
 import { cardReadiness } from '@/lib/gap/routing/card-readiness';
+import { ResearchThis } from './research-this';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge } from './hypothesis-drawer';
 import { formatWhen } from '@/lib/gap/ui/format';
@@ -320,6 +321,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
           >
             {readiness.fix.label}
           </a>
+          {readiness.researchable ? <ResearchThis decisionId={item.id} /> : null}
         </div>
       ) : null}
 

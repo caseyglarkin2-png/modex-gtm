@@ -59,7 +59,10 @@ export type CardReadiness =
       secondary: Link[];
       warning?: { title: string; body: string };
     }
-  | { state: 'missing_prerequisite'; missing: string; fix: Link; warning?: { title: string; body: string } };
+  | { state: 'missing_prerequisite'; missing: string; fix: Link; warning?: { title: string; body: string }; researchable?: boolean };
+
+/** Rules whose missing prerequisite is EVIDENCE, so RESEARCH THIS can close it. */
+export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin', 'no_hypothesis', 'hyp_stale']);
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
 
@@ -96,6 +99,11 @@ function hypothesisFix(): Link {
 }
 
 export function cardReadiness(item: ReadinessInput): CardReadiness {
+  const r = readinessOf(item);
+  return r.state === 'missing_prerequisite' && RESEARCHABLE_RULES.has(item.ruleId) && !item.touch ? { ...r, researchable: true } : r;
+}
+
+function readinessOf(item: ReadinessInput): CardReadiness {
   const cls = item.suppression?.class ?? 'clear';
 
   if (item.blocked || item.action === 'do_not_contact') {

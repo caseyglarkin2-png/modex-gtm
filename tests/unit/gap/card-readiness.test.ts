@@ -142,3 +142,15 @@ describe('cardReadiness: sequence cards (last mile)', () => {
     expect(cardReadiness({ ...base(), touch: { state: 'unknown', detail: 'Gmail 503', sentCount: 1 } }).state).toBe('missing_prerequisite');
   });
 });
+
+describe('cardReadiness: RESEARCH THIS', () => {
+  it('evidence-gap research cards are researchable; other prerequisites are not', () => {
+    const b = { id: 'd', action: 'research_required', blocked: false, account: { name: 'Kroger', hubspotCompanyId: '1' }, persona: { id: 1, displayName: 'Joey', email: 'j@k.com', hubspotContactId: '2' }, hypothesis: { id: 'h' } };
+    for (const ruleId of ['evidence_thin', 'no_hypothesis', 'hyp_stale']) {
+      const r = cardReadiness({ ...b, ruleId });
+      expect(r.state === 'missing_prerequisite' && r.researchable).toBe(true);
+    }
+    const tam = cardReadiness({ ...b, ruleId: 'tam_unknown' });
+    expect(tam.state === 'missing_prerequisite' && tam.researchable).toBeFalsy();
+  });
+});
