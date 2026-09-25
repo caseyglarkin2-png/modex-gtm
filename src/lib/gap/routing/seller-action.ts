@@ -32,9 +32,18 @@ export function sellerActionLabel(action: RoutingAction | string, firstName: str
 /** Actions where the primary instruction is to send outreach (eligible for an email/call action pack). */
 export const OUTREACH_ROUTING_ACTIONS: ReadonlySet<RoutingAction> = new Set(['enroll_gap_sequence', 'one_off_email']);
 
+/**
+ * YardFlow's HubSpot portal. A public identifier (it is in every HubSpot URL),
+ * not a secret. The default exists because production never set
+ * NEXT_PUBLIC_HUBSPOT_PORTAL_ID, so every HubSpot button on the Seller Action
+ * Center silently rendered nothing (final pass, 2026-09-25). An env value
+ * still wins.
+ */
+export const DEFAULT_HUBSPOT_PORTAL_ID = '3819073';
+
 /** Read lazily (not captured at module load) so tests can stub the env var. */
 function hubspotPortalId(): string {
-  return process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || '';
+  return process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || process.env.HUBSPOT_PORTAL_ID || DEFAULT_HUBSPOT_PORTAL_ID;
 }
 
 /** Same URL convention as src/app/contacts/contacts-table.tsx and src/app/accounts/[slug]/page.tsx. */

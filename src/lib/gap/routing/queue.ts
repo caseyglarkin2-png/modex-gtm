@@ -14,6 +14,7 @@ import { audit as auditEvent } from '../audit';
 import type { HumanAction } from '../taxonomy';
 import { LAST_RUN_CONFIG_KEY } from './types';
 import type { RoutingExplain } from './types';
+import { classifySuppression, type SuppressionClass } from '../suppression/provenance';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -61,6 +62,8 @@ export interface QueueItem {
     linkedinUrl: string | null;
   };
   hypothesis: { id: string; status: string; family: string; confidence: number } | null;
+  /** Provenance class of the suppression the router saw, re-derived from the frozen snapshot (routing only; the send gate still refuses any hit). */
+  suppression: { class: SuppressionClass; hits: string[] };
   humanAction: string | null;
   humanActionAt: Date | null;
   createdAt: Date;
@@ -142,6 +145,21 @@ export interface LivePersonaFields {
   displayName: string | null;
 }
 
+function suppressionOfSnapshot(snap: Obj, persona: Obj): QueueItem['suppression'] {
+  const sup = isObj(snap.suppression) ? snap.suppression : {};
+  const verdict = sup.verdict === 'suppressed' || sup.verdict === 'unknown' ? sup.verdict : 'clear';
+  const legs: Record<string, 'clear' | 'hit' | 'unknown'> = {};
+  if (isObj(sup.legs)) {
+    for (const [k, v] of Object.entries(sup.legs)) if (v === 'clear' || v === 'hit' || v === 'unknown') legs[k] = v;
+  }
+  const c = classifySuppression({
+    verdict,
+    legs,
+    persona: { doNotContact: persona.doNotContact === true, emailStatus: optStr(persona.emailStatus) },
+  });
+  return { class: c.class, hits: c.hits };
+}
+
 function toItem(row: DecisionRow, live?: LivePersonaFields | null): QueueItem {
   const snap = isObj(row.inputs_snapshot) ? row.inputs_snapshot : {};
   const account = isObj(snap.account) ? snap.account : {};
@@ -187,6 +205,7 @@ function toItem(row: DecisionRow, live?: LivePersonaFields | null): QueueItem {
         : row.hypothesis_id
           ? { id: row.hypothesis_id, status: '', family: '', confidence: 0 }
           : null,
+    suppression: suppressionOfSnapshot(snap, persona),
     humanAction: row.human_action ?? null,
     humanActionAt: row.human_action_at ?? null,
     createdAt: row.created_at,
