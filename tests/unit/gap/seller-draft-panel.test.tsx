@@ -54,13 +54,13 @@ describe('<SellerDraftPanel>', () => {
     expect(fetchMock.mock.calls.some(([u]) => String(u).includes('/act'))).toBe(false);
   });
 
-  it('Check copy sends checkOnly and, on review, points at the approval queue', async () => {
+  it('Check copy sends checkOnly and, on review, is approved inline (no detour to a generic queue)', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(jsonResponse({ error: 'copy_review_required', detail: 'critic_unconfigured' }, 409));
     render(<SellerDraftPanel {...base} emailReady={false} />);
     fireEvent.click(screen.getByRole('button', { name: 'Check copy' }));
     await waitFor(() => expect(screen.getByTestId('draft-review')).toHaveTextContent('critic_unconfigured'));
     expect((fetchMock.mock.calls[0][1] as RequestInit).body).toBe('{"checkOnly":true}');
-    expect(screen.getByRole('link', { name: 'Open the approval queue' })).toHaveAttribute('href', '/queue');
+    expect(screen.queryByRole('link', { name: 'Open the approval queue' })).toBeNull();
   });
 
   it('lists drafts with their fate and offers Check if sent only for a draft still in Gmail', () => {

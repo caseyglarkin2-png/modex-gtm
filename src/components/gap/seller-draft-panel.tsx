@@ -49,7 +49,7 @@ type Outcome =
   | { kind: 'refused'; reason: string; detail: string };
 
 const REASON_COPY: Record<string, string> = {
-  copy_review_required: 'The copy needs your approval before it can be drafted. Approve it in the queue, then come back.',
+  copy_review_required: 'The copy needs your approval first. Approve it right here.',
   copy_rejected: 'The compiler rejected this copy. Nothing was drafted.',
   gmail_refused: 'Gmail or the suppression gate refused the draft. Nothing was drafted.',
   decision_blocked: 'This card is a system block. Nothing can be drafted.',
@@ -156,7 +156,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
   return (
     <section data-testid="seller-draft-panel" className="space-y-3 rounded-md border border-[var(--border)] p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Gmail draft</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Save as Gmail draft</p>
         <p className="text-[11px] text-[var(--muted-foreground)]">From {senderIdentity}. Creates a draft only. You send it from Gmail.</p>
       </div>
 
@@ -172,7 +172,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
             {busy === 'check' ? 'Checking...' : 'Check copy'}
           </Button>
           <p className="text-[11px] text-[var(--muted-foreground)]">
-            Runs the compiler on this exact email. If it needs review, an approval request lands in the queue. Nothing is drafted or sent.
+            Runs the compiler on this exact email. If it needs your review, you approve it here. Nothing is drafted or sent.
           </p>
         </div>
       )}
@@ -200,11 +200,8 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
                 {busy === 'approve' ? 'Approving...' : 'Approve this copy'}
               </Button>
             ) : null}
-            <a href="/queue" className="underline">
-              Open the approval queue
-            </a>
           </div>
-          <p className="text-[11px] text-[var(--muted-foreground)]">Approving records your review of the copy above. It does not draft or send anything; this page reloads with Create Gmail draft.</p>
+          <p className="text-[11px] text-[var(--muted-foreground)]">Approving records your review of the copy above. It does not draft or send anything; this page reloads with Send email and Save draft.</p>
           {approveError ? <p role="alert" className="text-[var(--destructive)]">{approveError}</p> : null}
         </div>
       ) : null}
