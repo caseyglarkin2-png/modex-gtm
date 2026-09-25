@@ -307,7 +307,7 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     render(<DecisionCard item={item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null })} onAct={() => {}} />);
     const panel = screen.getByTestId('missing-prerequisite');
     expect(panel).toHaveTextContent('Missing prerequisite');
-    expect(panel).toHaveTextContent('No approved hypothesis');
+    expect(panel).toHaveTextContent('No hypothesis covers Jordan at Acme Foods');
     expect(within(panel).getByRole('link', { name: /Review or create a hypothesis/ })).toHaveAttribute('href', '/gap/hypotheses?status=draft');
     expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
     expect(screen.queryByTestId('rendered-email')).toBeNull();
