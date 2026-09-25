@@ -577,6 +577,21 @@ async function assembleLoaded(
     } catch {
       suppressionVerdict = { verdict: 'unknown', legs: {} };
     }
+    // The local unsubscribe table is a HARD COMPLIANCE leg read directly
+    // (final pass, 2026-09-25): recordUnsubscribe writes it for a recipient's
+    // own unsubscribe and for a human do-not-contact disposition, and the
+    // router's provenance taxonomy must see it as the recipient's decision,
+    // not as the bare `do_not_contact` boolean it also sets. Unreadable is
+    // unknown, never clear.
+    try {
+      const unsub = (await prisma.unsubscribedEmail.findFirst({
+        where: { email: { equals: email, mode: 'insensitive' } },
+        select: { id: true },
+      })) as { id: string } | null;
+      if (unsub) suppressionVerdict = { verdict: 'suppressed', legs: { ...suppressionVerdict.legs, unsubscribed: 'hit' } };
+    } catch {
+      suppressionVerdict = { verdict: 'unknown', legs: { ...suppressionVerdict.legs, unsubscribed: 'unknown' } };
+    }
   }
 
   return {

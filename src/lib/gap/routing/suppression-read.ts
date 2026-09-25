@@ -122,7 +122,7 @@ async function readOnce(
   if (!d || typeof d !== 'object' || d.ok !== true || !Array.isArray(d.results)) return unknown();
   if (d.results.length !== 1) return unknown();
 
-  const r = d.results[0] as { email?: unknown; blocked?: unknown; reason?: unknown; unknown_legs?: unknown } | null;
+  const r = d.results[0] as { email?: unknown; blocked?: unknown; reason?: unknown; keys?: unknown; unknown_legs?: unknown } | null;
   if (!r || typeof r !== 'object') return unknown();
   if (String(r.email ?? '').trim().toLowerCase() !== email) return unknown();
   if (typeof r.blocked !== 'boolean') return unknown();
@@ -158,6 +158,17 @@ async function readOnce(
       return { verdict: 'unknown', legs };
     }
     legs[reason || 'suppressed'] = 'hit';
+    // Every positive key, not only the primary reason (final pass,
+    // 2026-09-25). clawd orders its reasons modex first, so a person with a
+    // soft local bounce AND a HubSpot opt-out answered reason
+    // `modex_do_not_contact` and the opt-out lived only in `keys`. Once the
+    // router classifies legs by provenance, dropping a key would let the
+    // softer leg mask the harder one.
+    if (Array.isArray(r.keys)) {
+      for (const k of r.keys) {
+        if (typeof k === 'string' && k && !k.includes('@') && !UNKNOWN_REASON.test(k)) legs[k] = 'hit';
+      }
+    }
     return { verdict: 'suppressed', legs };
   }
   if (Object.keys(legs).length === 0) legs[CONTRACT_LEG] = 'clear';

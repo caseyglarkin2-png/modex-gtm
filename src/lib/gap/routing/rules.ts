@@ -14,6 +14,7 @@ import { PING_THRESHOLD } from '../../pounce/score';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
 import type { RoutingAction, RoutingLane, ResponseClass } from '../taxonomy';
 import type { EnrollTarget, RoutingInputs, RoutingLastDisposition } from './types';
+import { classifySuppression, type SuppressionClassification } from '../suppression/provenance';
 
 export interface RoutingRule {
   id: string;
@@ -80,7 +81,23 @@ export function hasUsablePhone(i: RoutingInputs): boolean {
 export function emailUsable(i: RoutingInputs): boolean {
   const { emailValid, emailStatus } = i.persona;
   if (!emailValid) return false;
-  return !(emailStatus != null && BOUNCED_EMAIL_STATUSES.has(emailStatus));
+  if (emailStatus != null && BOUNCED_EMAIL_STATUSES.has(emailStatus)) return false;
+  // A suppressed address is never an email target, whatever its class: the
+  // send gate refuses it, so routing must not recommend an email action.
+  // Phone and LinkedIn stay open for the soft and invalid-address classes.
+  return !suppressionOf(i).emailBlockedAtSend;
+}
+
+/**
+ * The provenance class of this person's suppression (src/lib/gap/suppression/
+ * provenance.ts). Routing only: the send gate still refuses on any hit.
+ */
+export function suppressionOf(i: RoutingInputs): SuppressionClassification {
+  return classifySuppression({
+    verdict: i.suppression.verdict,
+    legs: i.suppression.legs,
+    persona: { doNotContact: i.persona.doNotContact, emailStatus: i.persona.emailStatus },
+  });
 }
 
 export function hypothesisLive(i: RoutingInputs): boolean {
@@ -187,19 +204,15 @@ export const MODEX_DO_NOT_CONTACT_LEG = 'modex_do_not_contact';
 
 /**
  * Every leg that says "do not contact": the remote legs marked `hit`, plus the
- * local column (R2-1). The column is authoritative on its own; a lagging or
- * unreadable remote leg never clears a person we recorded as never-contact.
+ * local column (R2-1), in that order, never the modex leg twice.
  */
 function suppressedLegs(i: RoutingInputs): string[] {
-  const legs = Object.entries(i.suppression.legs)
-    .filter(([, v]) => v === 'hit')
-    .map(([k]) => k);
-  if (i.persona.doNotContact && !legs.includes(MODEX_DO_NOT_CONTACT_LEG)) legs.push(MODEX_DO_NOT_CONTACT_LEG);
-  return legs;
+  return suppressionOf(i).hits;
 }
 
-function isSuppressed(i: RoutingInputs): boolean {
-  return i.suppression.verdict === 'suppressed' || i.persona.doNotContact;
+/** R0: only a HARD COMPLIANCE class is a permanent system block (final pass, 2026-09-25). */
+function isHardSuppressed(i: RoutingInputs): boolean {
+  return suppressionOf(i).class === 'hard_compliance';
 }
 
 function unknownLegs(i: RoutingInputs): string[] {
@@ -228,23 +241,16 @@ export const RULES: RoutingRule[] = [
   {
     id: 'suppressed',
     label: 'R0',
-    when: isSuppressed,
+    when: isHardSuppressed,
     action: 'do_not_contact',
     lane: 'blocked',
     blocked: true,
     reason: (i) => `suppressed:${suppressedLegs(i).join(',') || 'unspecified'}`,
     predicate: (i) => {
-      const parts: string[] = [];
-      if (i.suppression.verdict === 'suppressed') {
-        const remote = Object.entries(i.suppression.legs)
-          .filter(([, v]) => v === 'hit')
-          .map(([k]) => k);
-        parts.push(`suppression verdict is suppressed on ${remote.join(', ') || 'an unspecified leg'}`);
-      }
-      if (i.persona.doNotContact) {
-        parts.push(`persona is recorded do_not_contact (${MODEX_DO_NOT_CONTACT_LEG})${parts.length === 0 ? '; remote verdict is clear' : ''}`);
-      }
-      return parts.join('; ');
+      const c = suppressionOf(i);
+      const hard = c.reasons.filter((r) => r.class === 'hard_compliance').map((r) => r.leg);
+      const local = i.persona.doNotContact ? `; persona is recorded do_not_contact (${MODEX_DO_NOT_CONTACT_LEG})` : '';
+      return `hard compliance suppression on ${hard.join(', ') || 'an unspecified leg'}${local}`;
     },
   },
   {
@@ -257,6 +263,17 @@ export const RULES: RoutingRule[] = [
     reason: () => 'suppression_unknown',
     predicate: (i) =>
       `suppression verdict is unknown (${unknownLegs(i).join(', ') || 'no leg answered'}); nothing outbound may be created`,
+  },
+  {
+    id: 'suppression_review',
+    label: 'R0c',
+    // A DNC whose origin cannot be proven: never a silent permanent DNC, never outreach.
+    when: (i) => suppressionOf(i).class === 'unknown_provenance',
+    action: 'research_required',
+    lane: 'work_queue',
+    reason: (i) => `suppression_review:${suppressedLegs(i).join(',')}`,
+    predicate: (i) =>
+      `a do-not-contact flag exists on ${suppressedLegs(i).join(', ')} but its origin cannot be proven; review it before any outreach (email stays blocked at send)`,
   },
   {
     id: 'tam_out',
