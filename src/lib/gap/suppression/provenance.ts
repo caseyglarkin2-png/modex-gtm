@@ -158,7 +158,7 @@ export const SUPPRESSION_CLASS_COPY: Record<SuppressionClass, { title: string; b
   },
   soft_deliverability: {
     title: 'Historical bounce, not a do-not-contact',
-    body: 'This person was flagged by an old provider bounce (the March 2026 Resend-era wave), not by their own request or a proven bad address. Phone and LinkedIn are fine. Email stays blocked at send until the flag is reviewed and corrected.',
+    body: 'This person was flagged by an old provider bounce (the March 2026 Resend-era wave). No opt-out, spam report or verbal request is recorded on any plane today, and the address was never proven bad. Phone and LinkedIn are allowed. Email stays blocked at send until the flag is reviewed and corrected.',
   },
   unknown_provenance: {
     title: 'Suppression needs review',
