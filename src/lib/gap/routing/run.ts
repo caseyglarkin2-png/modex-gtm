@@ -323,6 +323,49 @@ async function listDefaultAccounts(prisma: PrismaLike, cap: number): Promise<Acc
   return rows;
 }
 
+/**
+ * The interactive "Run routing" button's scope (dogfood fix, 2026-09-25).
+ * `hypothesisLive` in ./rules.ts is the same "approved or active" test,
+ * applied there to one already-assembled RoutingInputs; this is the
+ * account-selection-time version of the same rule, over the DB directly.
+ */
+export const ROUTABLE_HYPOTHESIS_STATUSES = ['approved', 'active'] as const;
+
+/** A conservative cap: an interactive click must never scan hundreds of accounts. */
+export const DEFAULT_ROUTABLE_SCOPE_ACCOUNT_CAP = 25;
+
+export interface RoutableHypothesisScope {
+  hypothesesCount: number;
+  accountNames: string[];
+}
+
+export interface RoutableHypothesisScopeTooLarge {
+  tooLarge: true;
+  accountCount: number;
+  cap: number;
+}
+
+/**
+ * Distinct account names carrying an approved/active hypothesis, deduplicated.
+ * Refuses (rather than silently routing the world) when that set is larger
+ * than `cap` -- the interactive button must never fall back to the broad
+ * account universe.
+ */
+export async function resolveRoutableHypothesisScope(
+  prisma: PrismaLike,
+  cap: number = DEFAULT_ROUTABLE_SCOPE_ACCOUNT_CAP,
+): Promise<RoutableHypothesisScope | RoutableHypothesisScopeTooLarge> {
+  const rows: Array<{ account_name: string }> = await prisma.prospectingHypothesis.findMany({
+    where: { status: { in: [...ROUTABLE_HYPOTHESIS_STATUSES] } },
+    select: { account_name: true },
+  });
+  const accountNames = [...new Set(rows.map((r) => r.account_name))];
+  if (accountNames.length > cap) {
+    return { tooLarge: true, accountCount: accountNames.length, cap };
+  }
+  return { hypothesesCount: rows.length, accountNames };
+}
+
 async function listNamedAccounts(prisma: PrismaLike, names: string[]): Promise<AccountRef[]> {
   const unique = [...new Set(names.map((n) => n.trim()).filter((n) => n.length > 0))];
   if (unique.length === 0) return [];

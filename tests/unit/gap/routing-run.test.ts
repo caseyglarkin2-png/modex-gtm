@@ -156,7 +156,8 @@ function makeStore() {
     findUnique: vi.fn(async (_args: Record<string, unknown>): Promise<Row | null> => null),
   };
   const persona = { findMany: vi.fn(async (_args: Record<string, unknown>): Promise<Row[]> => []) };
-  return { rows, routingDecision, systemConfig, account, persona };
+  const prospectingHypothesis = { findMany: vi.fn(async (_args: Record<string, unknown>): Promise<Row[]> => []) };
+  return { rows, routingDecision, systemConfig, account, persona, prospectingHypothesis };
 }
 
 type Store = ReturnType<typeof makeStore>;
@@ -168,6 +169,7 @@ function installStore(store: Store) {
     systemConfig: store.systemConfig,
     account: store.account,
     persona: store.persona,
+    prospectingHypothesis: store.prospectingHypothesis,
   });
 }
 
@@ -429,6 +431,22 @@ describe('runRouting', () => {
     expect(route).toHaveBeenCalledTimes(3);
     expect(store.routingDecision.create).toHaveBeenCalledTimes(3);
     expect(store.account.findMany.mock.calls[0][0]).toMatchObject({ take: 3 });
+  });
+
+  it('a real fault mid-run (e.g. the platform killing the request) never advances the last-run pointer, even though earlier accounts already wrote real decisions (dogfood fix, 2026-09-25: this is the invariant that kept the stuck production run from polluting the visible Queue)', async () => {
+    const route = vi.fn((inputs: RoutingInputs) => {
+      if (inputs.account.name === 'Beta Dairy') throw new Error('killed mid-run');
+      return decisionFor(inputs);
+    });
+    await expect(
+      runRouting(store, { now: NOW, runId: 'run-KILLED', actor: 'test' }, { suppression, assemble: assembler(twoByTwo()), route, audit: vi.fn() }),
+    ).rejects.toThrow('killed mid-run');
+
+    // Acme Foods (processed first) already wrote its real decisions...
+    expect(store.routingDecision.create).toHaveBeenCalledTimes(2);
+    expect(store.rows.every((r) => r.run_id === 'run-KILLED')).toBe(true);
+    // ...but the pointer that makes a run "the latest visible one" was never touched.
+    expect(store.systemConfig.upsert).not.toHaveBeenCalled();
   });
 
   it('default selection drops TAM-out accounts per the snapshot provider; an explicit name goes to the rules', async () => {
@@ -987,6 +1005,67 @@ describe('routes', () => {
       const notJson = await runPOST(post(RUN, '{nope'));
       expect(notJson.status).toBe(400);
       expect(store.account.findMany).not.toHaveBeenCalled();
+    });
+
+    describe('scope: routable_hypotheses (dogfood fix, 2026-09-25)', () => {
+      it('resolves distinct accounts with an approved/active hypothesis, server-side -- never trusts a client account list', async () => {
+        store.prospectingHypothesis.findMany.mockResolvedValue([
+          { account_name: 'General Mills' },
+          { account_name: 'Kroger' },
+          { account_name: 'Kroger' }, // two hypotheses, same account: deduplicated
+        ]);
+        const res = await runPOST(post(`${RUN}?mode=apply`, { scope: 'routable_hypotheses' }));
+        expect(res.status).toBe(200);
+        expect(store.prospectingHypothesis.findMany).toHaveBeenCalledWith(
+          expect.objectContaining({ where: { status: { in: ['approved', 'active'] } } }),
+        );
+        // Exactly the two distinct accounts reach the account lookup, never the broad default.
+        expect(store.account.findMany).toHaveBeenCalledWith({
+          where: { name: { in: ['General Mills', 'Kroger'] } },
+          select: { name: true, hubspot_company_id: true },
+        });
+      });
+
+      it('scope and accountNames together -> 400, an explicit account list is never mixed with the server-resolved scope', async () => {
+        const res = await runPOST(post(RUN, { scope: 'routable_hypotheses', accountNames: ['Acme Foods'] }));
+        expect(res.status).toBe(400);
+        expect((await res.json()).error).toBe('invalid_body');
+        expect(store.prospectingHypothesis.findMany).not.toHaveBeenCalled();
+      });
+
+      it('an unrelated Account row with no routable hypothesis is never scanned by the interactive scope', async () => {
+        store.prospectingHypothesis.findMany.mockResolvedValue([{ account_name: 'Kroger' }]);
+        await runPOST(post(`${RUN}?mode=apply`, { scope: 'routable_hypotheses' }));
+        const args = store.account.findMany.mock.calls.at(-1)?.[0] as { where: { name: { in: string[] } } };
+        expect(args.where.name.in).toEqual(['Kroger']);
+        expect(args.where.name.in).not.toContain('Some Unrelated Account');
+      });
+
+      it('more routable accounts than the cap -> 400 with a useful message, never silently routing the world', async () => {
+        store.prospectingHypothesis.findMany.mockResolvedValue(
+          Array.from({ length: 30 }, (_, i) => ({ account_name: `Account ${i}` })),
+        );
+        const res = await runPOST(post(`${RUN}?mode=apply`, { scope: 'routable_hypotheses' }));
+        expect(res.status).toBe(400);
+        const body = await res.json();
+        expect(body.error).toBe('routable_scope_too_large');
+        expect(body.accountCount).toBe(30);
+        expect(typeof body.cap).toBe('number');
+        expect(store.account.findMany).not.toHaveBeenCalled();
+      });
+
+      it('zero routable hypotheses -> 400 no_routable_hypotheses, never falls back to the broad default', async () => {
+        store.prospectingHypothesis.findMany.mockResolvedValue([]);
+        const res = await runPOST(post(`${RUN}?mode=apply`, { scope: 'routable_hypotheses' }));
+        expect(res.status).toBe(400);
+        expect((await res.json()).error).toBe('no_routable_hypotheses');
+        expect(store.account.findMany).not.toHaveBeenCalled();
+      });
+
+      it('an explicit accountNames call (agent/cron) is unaffected: no scope means no ProspectingHypothesis lookup at all', async () => {
+        await runPOST(post(RUN, { accountNames: ['Acme Foods'] }));
+        expect(store.prospectingHypothesis.findMany).not.toHaveBeenCalled();
+      });
     });
   });
 

@@ -15,6 +15,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
 import { listQueue } from '@/lib/gap/routing/queue';
+import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, type GapCockpitData } from '@/components/gap/gap-cockpit';
@@ -24,17 +25,28 @@ export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP Work Queue' };
 
 const REPLY_TILE_LIMIT = 50;
-// A hypothesis in either status is "routable" (src/lib/gap/routing/rules.ts hypothesisLive).
-const ROUTABLE_HYPOTHESIS_STATUSES = ['approved', 'active'] as const;
 
-async function loadCockpitData(): Promise<{ cockpit: GapCockpitData; latestRunId: string | null; canRunRouting: boolean }> {
-  const [hypothesesToReview, routableCount, latestQueuePage, repliesPage] = await Promise.all([
+interface LoadedPageData {
+  cockpit: GapCockpitData;
+  latestRunId: string | null;
+  canRunRouting: boolean;
+  routableHypotheses: number;
+  routableAccounts: number;
+}
+
+async function loadCockpitData(): Promise<LoadedPageData> {
+  const [hypothesesToReview, routableScope, latestQueuePage, repliesPage] = await Promise.all([
     prisma.prospectingHypothesis.count({ where: { status: { in: ['draft', 'review_required'] } } }),
-    prisma.prospectingHypothesis.count({ where: { status: { in: [...ROUTABLE_HYPOTHESIS_STATUSES] } } }),
+    // The exact scope the Run Routing button will use (resolveRoutableHypothesisScope
+    // is the single source of truth, shared with the route) -- so the count shown
+    // before the click always matches what the click actually does.
+    resolveRoutableHypothesisScope(prisma),
     listQueue(prisma, { limit: 100 }),
     listReplies(prisma, { state: 'undispositioned', limit: REPLY_TILE_LIMIT }),
   ]);
   const routingDecisionsPending = latestQueuePage.items.filter((item) => !item.humanAction).length;
+  const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
+  const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
   return {
     cockpit: {
       hypothesesToReview,
@@ -44,7 +56,9 @@ async function loadCockpitData(): Promise<{ cockpit: GapCockpitData; latestRunId
     },
     latestRunId: latestQueuePage.runId,
     // Enable Run routing when there is something new to route, or a prior run to refresh.
-    canRunRouting: routableCount > 0 || latestQueuePage.runId !== null,
+    canRunRouting: routableHypotheses > 0 || latestQueuePage.runId !== null,
+    routableHypotheses,
+    routableAccounts,
   };
 }
 
@@ -54,7 +68,7 @@ export default async function GapWorkQueuePage() {
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
 
-  const { cockpit, latestRunId, canRunRouting } = await loadCockpitData();
+  const { cockpit, latestRunId, canRunRouting, routableHypotheses, routableAccounts } = await loadCockpitData();
 
   return (
     <div className="space-y-6">
@@ -67,7 +81,12 @@ export default async function GapWorkQueuePage() {
       </div>
       <GapSubnav />
       <GapCockpit data={cockpit} />
-      <GapQueueSection latestRunId={latestRunId} canRunRouting={canRunRouting} />
+      <GapQueueSection
+        latestRunId={latestRunId}
+        canRunRouting={canRunRouting}
+        routableHypotheses={routableHypotheses}
+        routableAccounts={routableAccounts}
+      />
     </div>
   );
 }

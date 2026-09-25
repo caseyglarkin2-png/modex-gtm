@@ -38,7 +38,7 @@ import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from '@/lib/hubspot/client';
-import { DEFAULT_MAX_PAIRS, createHubSpotSnapshotProvider, runRouting } from '@/lib/gap/routing/run';
+import { DEFAULT_MAX_PAIRS, createHubSpotSnapshotProvider, resolveRoutableHypothesisScope, runRouting } from '@/lib/gap/routing/run';
 import type { SnapshotReads } from '@/lib/gap/routing/run';
 import { createClawdSuppressionReader } from '@/lib/gap/routing/suppression-read';
 
@@ -49,8 +49,20 @@ const MAX_PAIRS_CAP = 2000;
 
 const BodySchema = z.object({
   accountNames: z.array(z.string().min(1)).min(1).max(500).optional(),
+  /**
+   * The interactive "Run routing" button's scope (dogfood fix, 2026-09-25):
+   * the server, not the browser, resolves the distinct accounts carrying an
+   * approved/active hypothesis, deduplicated and capped. Mutually exclusive
+   * with an explicit `accountNames` (a scoped call's account list is never
+   * client-supplied) -- programmatic/agent callers keep using `accountNames`
+   * or the broad default when neither is given.
+   */
+  scope: z.literal('routable_hypotheses').optional(),
   dryRun: z.boolean().optional(),
   maxPairs: z.number().int().min(1).max(MAX_PAIRS_CAP).optional(),
+}).refine((body) => !(body.scope && body.accountNames), {
+  message: 'scope and accountNames are mutually exclusive',
+  path: ['scope'],
 });
 
 function firstField(error: z.ZodError): string {
@@ -85,6 +97,8 @@ function queryOverrides(request: NextRequest): Record<string, unknown> {
   const raw: Record<string, unknown> = {};
   const names = sp.get('accountNames');
   if (names) raw.accountNames = names.split(',').map((s) => s.trim()).filter(Boolean);
+  const scope = sp.get('scope');
+  if (scope) raw.scope = scope;
   const maxPairs = sp.get('maxPairs');
   if (maxPairs) raw.maxPairs = Number.parseInt(maxPairs, 10);
   if (sp.get('dryRun') === '1') raw.dryRun = true;
@@ -145,6 +159,21 @@ export async function POST(request: NextRequest) {
   const dryRun = parsed.data.dryRun === true || !apply;
   const now = new Date();
 
+  let accountNames = parsed.data.accountNames;
+  if (parsed.data.scope === 'routable_hypotheses') {
+    const scope = await resolveRoutableHypothesisScope(prisma);
+    if ('tooLarge' in scope) {
+      return NextResponse.json(
+        { error: 'routable_scope_too_large', accountCount: scope.accountCount, cap: scope.cap },
+        { status: 400 },
+      );
+    }
+    if (scope.accountNames.length === 0) {
+      return NextResponse.json({ error: 'no_routable_hypotheses' }, { status: 400 });
+    }
+    accountNames = scope.accountNames;
+  }
+
   try {
     const report = await runRouting(
       prisma,
@@ -153,7 +182,7 @@ export async function POST(request: NextRequest) {
         actor,
         dryRun,
         maxPairs: parsed.data.maxPairs ?? DEFAULT_MAX_PAIRS,
-        ...(parsed.data.accountNames ? { accountNames: parsed.data.accountNames } : {}),
+        ...(accountNames ? { accountNames } : {}),
       },
       {
         suppression: createClawdSuppressionReader(),

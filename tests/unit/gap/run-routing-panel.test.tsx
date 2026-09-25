@@ -24,17 +24,23 @@ describe('<RunRoutingPanel>', () => {
     vi.unstubAllGlobals();
   });
 
-  it('always explains that routing is safe, and disables Run routing when there is nothing to route', () => {
-    render(<RunRoutingPanel canRun={false} />);
-    expect(screen.getByText('Creates recommendation cards only. Does not send or enroll.')).toBeInTheDocument();
+  it('always explains that routing is safe, shows the scope, and disables Run routing when there is nothing to route', () => {
+    render(<RunRoutingPanel canRun={false} routableHypotheses={0} routableAccounts={0} />);
+    expect(screen.getByText(/Routes only accounts with approved or active hypotheses/)).toBeInTheDocument();
+    expect(screen.getByText(/Creates recommendation cards only\. Does not send or enroll\./)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Run routing' })).toBeDisabled();
   });
 
-  it('POSTs /api/gap/routing/run?mode=apply as an authenticated same-origin request (no secret in the body or URL)', async () => {
+  it('shows the exact routable scope before the click', () => {
+    render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
+    expect(screen.getByTestId('run-routing-scope')).toHaveTextContent('3 routable hypotheses, 2 accounts');
+  });
+
+  it('POSTs /api/gap/routing/run?mode=apply with scope:routable_hypotheses, never a client-supplied account list or a secret', async () => {
     fetchMock.mockResolvedValueOnce(
       jsonResponse({ runId: 'run-1', accountsScanned: 2, pairs: 3, decisions: 1, skips: { tam_out: 1 } }),
     );
-    render(<RunRoutingPanel canRun />);
+    render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
 
     fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
     expect(screen.getByRole('button', { name: 'Running...' })).toBeDisabled();
@@ -43,7 +49,8 @@ describe('<RunRoutingPanel>', () => {
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('/api/gap/routing/run?mode=apply');
     expect(init.method).toBe('POST');
-    expect(String(init.body)).not.toMatch(/secret/i);
+    expect(JSON.parse(String(init.body))).toEqual({ scope: 'routable_hypotheses' });
+    expect(String(init.body)).not.toMatch(/secret|accountNames/i);
     expect(Object.keys(init.headers as Record<string, string>).join(',')).not.toMatch(/cron|secret/i);
   });
 
@@ -51,7 +58,7 @@ describe('<RunRoutingPanel>', () => {
     fetchMock.mockResolvedValueOnce(
       jsonResponse({ runId: 'run-1', accountsScanned: 2, pairs: 3, decisions: 1, skips: { tam_out: 1 } }),
     );
-    render(<RunRoutingPanel canRun />);
+    render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
     fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
 
     const summary = await screen.findByTestId('run-routing-complete');
@@ -64,11 +71,38 @@ describe('<RunRoutingPanel>', () => {
 
   it('shows a plain error when the run fails, and does not refresh', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'unauthenticated' }, 401));
-    render(<RunRoutingPanel canRun />);
+    render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
     fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
 
     const error = await screen.findByTestId('run-routing-error');
     expect(error).toHaveTextContent('unauthenticated');
     expect(refreshMock).not.toHaveBeenCalled();
+  });
+
+  it('an aborted request (the 60s client timeout firing) shows the timeout message, never refreshes, and never auto-retries', async () => {
+    fetchMock.mockImplementationOnce(() => Promise.reject(new DOMException('Aborted', 'AbortError')));
+    render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
+
+    const timeout = await screen.findByTestId('run-routing-timeout');
+    expect(timeout).toHaveTextContent('Routing is taking too long. No outbound action was taken. Check routing status before trying again.');
+    expect(refreshMock).not.toHaveBeenCalled();
+    expect(fetchMock).toHaveBeenCalledTimes(1); // no automatic retry
+  });
+
+  it('wires an AbortController signal into the fetch call, aborting no earlier than 60 seconds', () => {
+    vi.useFakeTimers();
+    const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
+    fetchMock.mockImplementationOnce(() => new Promise(() => {})); // never resolves on its own
+    render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
+
+    vi.advanceTimersByTime(59_999);
+    expect(abortSpy).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(abortSpy).toHaveBeenCalledTimes(1);
+
+    abortSpy.mockRestore();
+    vi.useRealTimers();
   });
 });
