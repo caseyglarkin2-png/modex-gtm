@@ -34,4 +34,27 @@ HYPOTHESIS, WRONG PERSON, LIVE OPPORTUNITY, OTHER.**
 
 ---
 
-(more items appended below as later phases surface them)
+## 3. SNDR (Schneider National) and Loblaw: ambiguous on the HubSpot side too
+
+- **Why now**: unlike the other 9 tickers, SNDR has 5 similarly-named HubSpot company records and Loblaw has "Loblaws" vs "Loblaw Companies," neither an exact match. No Account row exists for either yet either, so no alias was written.
+- **GAP recommended action**: RESEARCH -- pick the correct HubSpot company id by hand, then it becomes an ordinary Account-creation-or-linking decision (not something this session did).
+- **Link**: `docs/gap/dogfood-identity-after.md`
+
+## 4. CL (Colgate-Palmolive), KNX (Knight-Swift), Target: no existing Account row at all
+
+- **Why now**: HubSpot has a clean single match for all three, but production has zero Account rows to alias them to. Not an identity-resolution bug -- these accounts were never onboarded.
+- **GAP recommended action**: OTHER -- if these are meant to be tracked, an Account row needs to be created through the normal onboarding path (account creation was not authorized in this dogfood run).
+
+## 5. Pre-existing near-duplicate Account rows (found, not created by this session)
+
+"FedEx" / "FedEx Corporation", "Coca-Cola" / "The Coca-Cola Company", "RXO" / "RXO, Inc." all have two Account rows under the same normalized name. Each currently resolves silently to whichever row the scan hits first -- a real latent risk, not touched here (merge is not authorized).
+
+- **GAP recommended action**: RESEARCH -- worth a real dedup pass through the existing canonical/dedup engine (`src/lib/gap/revops/*`), on your call.
+- **Link**: `docs/gap/dogfood-identity-after.md`
+
+## 6. Real hypothesis cohort ready for review: 20 draft hypotheses, 8 accounts
+
+See `/gap/hypotheses/` -- created from live, resolved Pounce signals (10-Q/10-K capex mentions, automation/consolidation news), zero fabricated evidence. Account breakdown: UNFI (1), PepsiCo (9, one per contact-ready persona), FedEx (1), The Home Depot (2), Coca-Cola (1), General Mills (4), Kroger (2). All `status: draft`, human review required before anything moves. PepsiCo's 9 near-identical drafts (same signal, 9 different persona targets) are a real review-load flag worth noting -- not a bug, but you may want to consolidate which personas actually matter before approving any.
+
+- **GAP recommended action**: CONTACT/ENROLL, HOLD, or REJECT HYPOTHESIS per hypothesis, your call in the UI.
+- **Link**: `/gap/hypotheses/`, `docs/gap/dogfood-hypothesis-cohort.md`

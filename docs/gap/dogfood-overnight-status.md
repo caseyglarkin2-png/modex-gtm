@@ -15,27 +15,50 @@ are already committed, trust `git log`, not this paragraph.
 
 ## Completed phases
 
-- **Phase 0 (D0, D1)**: DONE, committed (`6e19df91`, `1e2e7263`), pushed to
-  `origin/feat/gap-os-dogfood`. registerAlias CONFLICT reporting +
-  GAP-scoped reply backlog. 2433 GAP tests pass.
-- **Phase 1 (identity coverage audit, read-only)**: DONE. Script
-  `scripts/gap/dogfood-identity-audit.ts`, report
-  `docs/gap/dogfood-identity-before.md`. Production result: 0/1707 accounts
-  have `hubspot_company_id`, 0 verified domains, 0 aliases. Pounce cohort
-  (43 distinct non-dismissed account_names, last 500 triggers): 16 resolve
-  by normalized name, 27 UNRESOLVED, 0 AMBIGUOUS. 11 of the 27 are bare
-  ticker symbols (LOW, GXO, PG, MATX, SNDR, CHRW, CL, ARCB, KNX, JBHT, CAG).
+- **Phase 0 (D0, D1)**: DONE, committed (`6e19df91`, `1e2e7263`), pushed.
+  registerAlias CONFLICT reporting + GAP-scoped reply backlog. 2433 GAP
+  tests pass.
+- **Phase 1 (identity coverage audit, read-only)**: DONE, committed
+  (`a0274ea5`), pushed. `docs/gap/dogfood-identity-before.md`. 0/1707
+  accounts had `hubspot_company_id`; Pounce cohort 16/43 resolved.
+- **Phase 2 (identity bootstrap writes)**: DONE. `docs/gap/dogfood-identity-after.md`.
+  12 accounts backfilled with `hubspot_company_id`, 7 ticker-symbol
+  `GapAccountAlias` rows created (all CREATED, zero CONFLICT). Coverage
+  16/43 -> 23/43 (53%). 3 tickers/names skipped for lack of a deterministic
+  match on one side or the other (logged, not guessed).
+- **Phase 3 (Inland26 reconciliation, read-only)**: DONE, committed
+  (`1e67ddfa`), pushed. `docs/gap/inland26-dogfood-reconciliation.md`.
+  Corrected the earlier by-hand AMBIGUOUS call on Tyson Foods (resolves
+  cleanly against live data; real outcome is HYPOTHESIS_MISSING). Walmart
+  stays IDENTITY_UNRESOLVED.
+- **Phase 4 (real hypothesis cohort)**: DONE. `docs/gap/dogfood-hypothesis-cohort.md`.
+  20 real draft hypotheses across 8 accounts (UNFI, PepsiCo x9, FedEx, Home
+  Depot x2, Coca-Cola, General Mills x4, Kroger x2), built from live 10-Q/
+  10-K and news signals via the real (non-dry-run) `runHypothesize`. All
+  `status: draft`. Zero sends, zero enrollments, zero fabricated evidence.
 
 ## Production writes made
 
-None yet as of this checkpoint.
+- `Account.hubspot_company_id` set on 12 rows (Phase 2): Unfi, Niagara
+  Bottling, Amazon, PepsiCo, John Deere, The Home Depot, Odfl, UPS, Kraft
+  Heinz, XPO, General Mills, Kroger.
+- `GapAccountAlias` created for 7 tickers (Phase 2): LOW, GXO, PG, MATX,
+  ARCB, JBHT, CAG -> their real canonical Account names.
+- `ProspectingSignal` rows: 17 new + 6 already-existing reused (Phase 4),
+  frozen facts, not outreach.
+- `ProspectingHypothesis` rows: 20 new, all `status: draft` (Phase 4).
 
 ## Production writes NOT made (and why)
 
-- No `Account.hubspot_company_id` backfill yet -- Phase 2, in progress.
-- No `GapAccountAlias` rows yet -- same.
-- No Inland26 GAP-local reconciliation records yet -- Phase 3, not started.
-- No `ProspectingHypothesis` rows yet -- Phase 4, not started.
+- No `Account` created, merged, or deleted anywhere (not authorized).
+- No `GapAccountAlias` written for Walmart, CL, KNX, SNDR, Loblaw, Target
+  -- each lacks a deterministic 1:1 match on the HubSpot side, the Account
+  side, or both. See `docs/gap/dogfood-identity-after.md` and the decision
+  queue.
+- No Inland26 `ConversationDisposition` rows written -- all six evidence
+  rows classified IDENTITY_UNRESOLVED or HYPOTHESIS_MISSING, neither of
+  which is ever recorded as a disposition.
+- No HubSpot write, no Gmail write, no send, no enrollment, anywhere.
 
 ## Current flags (unchanged from session start; NOT touched)
 
@@ -69,31 +92,38 @@ authorization to run production reads.
 
 ## Unresolved blockers
 
-- None blocking yet. Ticker-symbol aliasing (11 names) and the Walmart /
-  Pinc / Cloumbian names need human judgment before any alias write --
-  queued as CASEY_REVIEW_REQUIRED items, not a stop condition.
+- None stop-the-run blocking. Walmart's canonical account, CL/KNX/SNDR/
+  Loblaw/Target's missing HubSpot-or-Account match, and the pre-existing
+  FedEx/Coca-Cola/RXO near-duplicate Account rows all need human judgment
+  -- queued in `docs/gap/casey-morning-decision-queue.md`, not guessed.
 
 ## Exact next task
 
-Phase 2: for the 16 already-resolved Pounce accounts and the 11 ticker
-symbols, look up each company in HubSpot (MCP `search_crm_objects` /
-`get_crm_objects`) to get its real `hubspot_company_id` and domain. Where
-exactly one HubSpot company deterministically matches exactly one existing
-`Account` row, write `Account.hubspot_company_id`. For the 11 tickers,
-write a `GapAccountAlias` (ticker -> canonical account name) only when the
-mapping is unambiguous (one Account row, not a near-duplicate pair like the
-already-documented Tyson Foods/Tyson case). Ambiguous cases go to
-`docs/gap/casey-morning-decision-queue.md` as CASEY_REVIEW_REQUIRED, not
-guessed. Then re-run `scripts/gap/dogfood-identity-audit.ts` and write
-`docs/gap/dogfood-identity-after.md`.
+Phase 5/6: evaluate shadow readiness. Current read: production has ZERO
+genuine human disposition/decision records yet to compare against a GAP
+routing recommendation (the 20 draft hypotheses from Phase 4 have not been
+reviewed by Casey; the Inland26 sends predate GAP and never went through
+hypothesis/routing). Per the overnight directive's own Phase 6 gate ("If at
+least one legitimate recommendation-vs-human-action comparison exists..."),
+that gate is NOT met. Plan: do not flip `GAP_AUTO_ENROLL_SHADOW`. Write
+`docs/gap/shadow-readiness.md` instead, documenting the exact missing gate
+and what Casey reviewing the Phase 4 cohort would unlock. Then move to
+Phase 9 (learning validation) and Phase 11 (PR).
 
 ## Test results
 
-- `npx vitest run tests/unit/gap` (full GAP suite): 2433/2433 pass, as of
-  commit `1e2e7263`.
-- `npx tsc --noEmit`: clean on all touched files.
+- `npx vitest run tests/unit/gap` (full GAP suite): 2433/2433 pass at
+  commit `1e2e7263` (Phase 0). Not rerun after Phases 1-4 since those
+  phases only ran existing, already-tested production code via new
+  one-off scripts (no library code changed) -- `identity-service.test.ts`
+  and `hypothesize-cron.test.ts` spot-checked green after Phase 2/4
+  (registerAlias / runHypothesize behavior unchanged, exercised for real).
+- `npx tsc --noEmit`: clean on all touched files, checked after every
+  phase.
 
 ## Casey decisions needed later
 
-See `docs/gap/casey-morning-decision-queue.md` once Phase 2+ populates it
-(not created yet as of this checkpoint).
+See `docs/gap/casey-morning-decision-queue.md` (6 items as of this
+checkpoint: Walmart canonical account, Tyson hypothesis tracking, SNDR/
+Loblaw ambiguity, CL/KNX/Target missing Account rows, FedEx/Coca-Cola/RXO
+dedup, and reviewing the 20-hypothesis Phase 4 cohort).
