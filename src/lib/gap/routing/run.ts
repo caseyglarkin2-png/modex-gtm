@@ -366,6 +366,20 @@ export async function resolveRoutableHypothesisScope(
   return { hypothesesCount: rows.length, accountNames };
 }
 
+/** Primary people of this account's approved/active hypotheses (routed beside the top N). */
+async function hypothesisPersonaIds(prisma: PrismaLike, accountName: string): Promise<number[]> {
+  if (typeof prisma?.prospectingHypothesis?.findMany !== 'function') return [];
+  try {
+    const rows: Array<{ primary_persona_id: number | null }> = await prisma.prospectingHypothesis.findMany({
+      where: { account_name: accountName, status: { in: [...ROUTABLE_HYPOTHESIS_STATUSES] }, primary_persona_id: { not: null } },
+      select: { primary_persona_id: true },
+    });
+    return [...new Set(rows.map((r) => r.primary_persona_id).filter((x): x is number => typeof x === 'number'))];
+  } catch {
+    return [];
+  }
+}
+
 async function listNamedAccounts(prisma: PrismaLike, names: string[]): Promise<AccountRef[]> {
   const unique = [...new Set(names.map((n) => n.trim()).filter((n) => n.length > 0))];
   if (unique.length === 0) return [];
@@ -445,7 +459,7 @@ export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, de
     const results = await assemble(
       prisma,
       { accountName: account.name, now, hubspotSnapshot: snapshot, top100: top100ContextFor(deps.top100, account), suppression: deps.suppression },
-      { maxPersonas },
+      { maxPersonas, includePersonaIds: await hypothesisPersonaIds(prisma, account.name) },
     );
 
     const routed: Array<{ inputs: RoutingInputs; decision: RoutingDecision }> = [];

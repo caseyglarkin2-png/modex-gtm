@@ -212,3 +212,27 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     }
   }
 }
+
+/**
+ * Casey's work lanes on /gap (first-principles pass, 2026-09-25). One pure
+ * answer per card, shared by the lane counts and the queue filter:
+ *   review     GAP proposed a hypothesis for this person; Casey judges it
+ *   research   evidence or contact data is missing (RESEARCH THIS, find contact)
+ *   ready      contact now: email, call or LinkedIn, and the card is actionable
+ *   follow_up  a sent sequence has its next touch due
+ *   later      nurture, or a sequence waiting/complete/stopped, or already acted on
+ *   blocked    a system block (suppression, do not contact)
+ */
+export type SellerLane = 'review' | 'research' | 'ready' | 'follow_up' | 'later' | 'blocked';
+
+const CONTACT_NOW_ACTIONS: ReadonlySet<string> = new Set(['call_now', 'enroll_gap_sequence', 'one_off_email', 'linkedin_manual_task']);
+
+export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | null }): SellerLane {
+  if (item.touch) return item.touch.state === 'due' ? 'follow_up' : 'later';
+  if (item.humanAction) return 'later';
+  if (item.action === 'approve_hypothesis') return 'review';
+  const r = cardReadiness(item);
+  if (r.state === 'blocked') return 'blocked';
+  if (r.state === 'missing_prerequisite') return 'research';
+  return CONTACT_NOW_ACTIONS.has(item.action) ? 'ready' : 'later';
+}

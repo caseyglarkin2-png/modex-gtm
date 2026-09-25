@@ -64,10 +64,11 @@ import {
   type ReportApproval,
 } from '@/components/gap/compile-report';
 import { SellerDraftPanel, type DraftRow } from '@/components/gap/seller-draft-panel';
+import { SendFromYardflow } from '@/components/gap/send-from-yardflow';
 import { EnrollShadowButton } from './enroll-shadow-button';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Preview' };
+export const metadata = { title: 'Action pack' };
 
 type Params = { hypothesisId: string };
 
@@ -233,6 +234,22 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         })
       : null;
 
+  // Above the fold (first-principles pass): why now, and what GAP recommends, in plain words.
+  const whyNow = (hypothesis.why_now as string | null)?.trim() || stripObservationCitations(hypothesis.observation ?? '').trim() || null;
+  const RECOMMENDS: Record<string, string> = {
+    enroll_gap_sequence: 'EMAIL',
+    one_off_email: 'EMAIL',
+    call_now: 'CALL',
+    linkedin_manual_task: 'LINKEDIN',
+    research_required: 'RESEARCH',
+    approve_hypothesis: 'REVIEW',
+    nurture: 'WAIT',
+    do_not_contact: 'DO NOT CONTACT',
+  };
+  const recommends = decision ? RECOMMENDS[decision.action] ?? null : null;
+  const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
+  // SEND EMAIL shows only when every page-level check passed and the compiler cleared this exact copy; the server re-checks all of it at the click.
+  const sendable = Boolean(renderedEmail && decision && emailReady && !(superseded ?? touchIneligible ?? citationIneligible ?? draftIneligible));
   const mailto = persona?.email ? mailtoHref(persona.email) : null;
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const contactUrl = persona?.hubspot_contact_id ? hubspotContactUrl(persona.hubspot_contact_id) : null;
@@ -244,17 +261,24 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
 
   return (
     <div className="space-y-6">
-      <Breadcrumb
-        items={[{ label: 'Home', href: '/' }, { label: 'Hypotheses', href: '/gap/hypotheses' }, { label: 'Preview' }]}
-      />
+      <Breadcrumb items={[{ label: 'GAP', href: '/gap' }, { label: 'Ready', href: '/gap?lane=ready' }, { label: hypothesis.account_name }]} />
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">{hypothesis.account_name}</h1>
-          <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-            {String(hypothesis.problem_family).replace(/_/g, ' ')} for {String(hypothesis.persona).replace(/_/g, ' ')}
+          <p className="mt-1 text-sm" data-testid="pack-person">
+            {persona ? (
+              <>
+                <span className="font-medium">{persona.name}</span>
+                {persona.title ? <span className="text-[var(--muted-foreground)]">, {persona.title}</span> : null}
+              </>
+            ) : (
+              <span className="italic text-[var(--muted-foreground)]">no person on this card</span>
+            )}
           </p>
         </div>
-        <HypothesisStatusBadge status={hypothesis.status} />
+        {recommends ? (
+          <Badge data-testid="gap-recommends" variant="outline" className="text-xs">GAP recommends: {recommends}</Badge>
+        ) : null}
       </div>
 
       {pack.personaRefused ? (
@@ -262,6 +286,126 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
           The person requested for this action pack does not belong to {hypothesis.account_name} ({pack.personaRefused.replace(/_/g, ' ')}). Nothing is rendered for them.
         </p>
       ) : null}
+      {whyNow ? (
+        <section data-testid="why-now" className="rounded-md border border-[var(--border)] p-4 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Why now</p>
+          <p className="mt-1">{whyNow}</p>
+        </section>
+      ) : null}
+
+      {touch && touch.state !== 'not_started' ? (
+        <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</p>
+          {'sent' in touch
+            ? touch.sent.map((t) => (
+                <p key={t.gmailSentMessageId}>
+                  Touch {t.stepIndex + 1} sent {fmtDay(t.sentAt)}
+                </p>
+              ))
+            : null}
+          {touch.state === 'waiting' ? <p className="font-medium">Waiting: touch {touch.stepIndex + 1} due {fmtDay(touch.dueAt)}</p> : null}
+          {touch.state === 'due' ? <p className="font-medium">Follow up: touch {touch.stepIndex + 1} is due now (shown below)</p> : null}
+          {touch.state === 'stopped' ? <p className="font-medium text-[var(--destructive)]">Sequence stopped: {touch.detail}</p> : null}
+          {touch.state === 'complete' ? <p className="font-medium">Sequence complete</p> : null}
+          {touch.state === 'unknown' ? <p className="font-medium">Sequence status unknown: {touch.detail}</p> : null}
+        </section>
+      ) : null}
+
+      {pack.unresolvedCitations.length > 0 ? (
+        <p role="alert" data-testid="unresolved-citations" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
+          This step&apos;s template states facts from placeholder evidence ({pack.unresolvedCitations.join(', ')}), not from {hypothesis.account_name}&apos;s own signals. Do not send it as written.
+        </p>
+      ) : null}
+
+      {renderedEmail ? (
+        <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email</p>
+            <Badge data-testid="email-readiness" variant={emailReady ? 'success' : 'warning'}>
+              {emailReady ? 'Ready to send' : 'Needs your review'}
+            </Badge>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Subject</p>
+            <p className="mt-1 text-sm" data-testid="email-subject">{renderedEmail.queued.subject}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Body</p>
+            <p className="mt-1 whitespace-pre-wrap text-sm" data-testid="email-body">{renderedEmail.queued.body}</p>
+          </div>
+          {sendable && decision ? <SendFromYardflow decisionId={decision.id} stepIndex={touchStep} mailbox={mailbox} /> : null}
+          <div className="flex flex-wrap gap-2">
+            {pack.unresolvedCitations.length === 0 ? <CopyButton text={renderedEmail.queued.body} label="Copy email" /> : null}
+            {persona?.email ? <CopyButton text={persona.email} label="Copy email address" /> : null}
+          </div>
+          {!emailReady ? (
+            <p className="text-xs text-[var(--muted-foreground)]">
+              This copy has not cleared the compiler yet. It is shown for review, not for sending.{compileNote ? ` ${compileNote}` : ''}
+            </p>
+          ) : null}
+        </section>
+      ) : (
+        <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
+          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
+          <p className="mt-1">
+            {!persona
+              ? 'No person is attached to this action pack.'
+              : !version
+                ? `No GAP sequence family exists for ${String(hypothesis.problem_family).replace(/_/g, ' ')} yet, so there is no email to render.`
+                : 'The sequence has no step 0 copy to render.'}
+          </p>
+        </section>
+      )}
+
+      {renderedEmail && decision ? (
+        <details className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="save-draft-details" open={!sendable}>
+          <summary className="cursor-pointer font-medium">Save as Gmail draft instead (edit in Gmail)</summary>
+          <div className="mt-3">
+          {renderedEmail && decision ? (
+        <SellerDraftPanel
+          decisionId={decision.id}
+          emailReady={emailReady}
+          senderIdentity={gapGmailSender()?.userEmail ?? gmailSenderAddress()}
+          drafts={drafts}
+          ineligibleReason={superseded ?? touchIneligible ?? citationIneligible ?? draftIneligible}
+          pendingApproval={pendingApproval}
+          stepIndex={touchStep}
+        />
+      ) : null}
+
+          </div>
+        </details>
+      ) : null}
+
+      {callPack ? (
+        <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Opener</p>
+            <p className="mt-1 text-sm" data-testid="call-opener">{callPack.opener}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 1 (current state / root cause)</p>
+            <p className="mt-1 text-sm">{callPack.diagnostic1}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 2 (business impact)</p>
+            <p className="mt-1 text-sm">{callPack.diagnostic2}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds)</p>
+            <p className="mt-1 text-sm">{callPack.voicemail}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <CopyButton text={callPack.opener} label="Copy call opener" />
+            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
+          </div>
+        </section>
+      ) : null}
+
+      <details className="rounded-md border border-[var(--border)] p-3" data-testid="why-gap">
+        <summary className="cursor-pointer text-sm font-medium">Why GAP thinks this (evidence, and what would prove us wrong)</summary>
+        <div className="mt-3 space-y-4">
       <FactBlock observation={hypothesis.observation} signals={signals as never} />
       <HypothesisBlock
         problemHypothesis={hypothesis.problem_hypothesis}
@@ -272,16 +416,13 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         whatANoMeans={hypothesis.what_a_no_means}
         confidence={hypothesis.confidence}
       />
+        </div>
+      </details>
 
-      <section className="grid gap-3 rounded-md border border-[var(--border)] p-4 text-sm sm:grid-cols-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Persona</p>
+      <details className="rounded-md border border-[var(--border)] p-3" data-testid="system-details">
+        <summary className="cursor-pointer text-sm font-medium">System details</summary>
+        <div className="mt-3 space-y-4 text-sm">
           {persona ? (
-            <div className="mt-1">
-              <p>
-                {persona.name}
-                {persona.title ? <span className="text-[var(--muted-foreground)]">, {persona.title}</span> : null}
-              </p>
               <div className="mt-2 flex flex-wrap gap-2 text-xs" data-testid="preview-contact-buttons">
                 {mailto ? (
                   <a href={mailto} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
@@ -315,11 +456,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
                   </a>
                 ) : null}
               </div>
-            </div>
-          ) : (
-            <p className="mt-1 italic text-[var(--muted-foreground)]">no primary persona</p>
-          )}
-        </div>
+          ) : null}
+          <section className="grid gap-3 sm:grid-cols-2">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Target</p>
           <p className="mt-1">
@@ -340,109 +478,7 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
             <p className="mt-1 italic text-[var(--muted-foreground)]">no draft or frozen version for this family</p>
           )}
         </div>
-      </section>
-
-      {touch && touch.state !== 'not_started' ? (
-        <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</p>
-          {'sent' in touch
-            ? touch.sent.map((t) => (
-                <p key={t.gmailSentMessageId}>
-                  Touch {t.stepIndex + 1} sent {fmtDay(t.sentAt)}
-                </p>
-              ))
-            : null}
-          {touch.state === 'waiting' ? <p className="font-medium">Waiting: touch {touch.stepIndex + 1} due {fmtDay(touch.dueAt)}</p> : null}
-          {touch.state === 'due' ? <p className="font-medium">Follow up: touch {touch.stepIndex + 1} is due now (shown below)</p> : null}
-          {touch.state === 'stopped' ? <p className="font-medium text-[var(--destructive)]">Sequence stopped: {touch.detail}</p> : null}
-          {touch.state === 'complete' ? <p className="font-medium">Sequence complete</p> : null}
-          {touch.state === 'unknown' ? <p className="font-medium">Sequence status unknown: {touch.detail}</p> : null}
-        </section>
-      ) : null}
-
-      {pack.unresolvedCitations.length > 0 ? (
-        <p role="alert" data-testid="unresolved-citations" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
-          This step&apos;s template states facts from placeholder evidence ({pack.unresolvedCitations.join(', ')}), not from {hypothesis.account_name}&apos;s own signals. Do not send it as written.
-        </p>
-      ) : null}
-
-      {renderedEmail ? (
-        <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email</p>
-            <Badge data-testid="email-readiness" variant={emailReady ? 'success' : 'warning'}>
-              {emailReady ? 'Ready to send' : 'Needs copy review'}
-            </Badge>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Subject</p>
-            <p className="mt-1 text-sm" data-testid="email-subject">{renderedEmail.queued.subject}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Body</p>
-            <p className="mt-1 whitespace-pre-wrap text-sm" data-testid="email-body">{renderedEmail.queued.body}</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {pack.unresolvedCitations.length === 0 ? <CopyButton text={renderedEmail.queued.body} label="Copy email" /> : null}
-            {persona?.email ? <CopyButton text={persona.email} label="Copy email address" /> : null}
-          </div>
-          {!emailReady ? (
-            <p className="text-xs text-[var(--muted-foreground)]">
-              This copy has not cleared the compiler yet. It is shown for review, not for sending.{compileNote ? ` ${compileNote}` : ''}
-            </p>
-          ) : null}
-        </section>
-      ) : (
-        <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
-          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
-          <p className="mt-1">
-            {!persona
-              ? 'No person is attached to this action pack.'
-              : !version
-                ? `No GAP sequence family exists for ${String(hypothesis.problem_family).replace(/_/g, ' ')} yet, so there is no email to render.`
-                : 'The sequence has no step 0 copy to render.'}
-          </p>
-        </section>
-      )}
-
-      {renderedEmail && decision ? (
-        <SellerDraftPanel
-          decisionId={decision.id}
-          emailReady={emailReady}
-          senderIdentity={gapGmailSender()?.userEmail ?? gmailSenderAddress()}
-          drafts={drafts}
-          ineligibleReason={superseded ?? touchIneligible ?? citationIneligible ?? draftIneligible}
-          pendingApproval={pendingApproval}
-          stepIndex={touchStep}
-        />
-      ) : null}
-
-      {callPack ? (
-        <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Opener</p>
-            <p className="mt-1 text-sm" data-testid="call-opener">{callPack.opener}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 1 (current state / root cause)</p>
-            <p className="mt-1 text-sm">{callPack.diagnostic1}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 2 (business impact)</p>
-            <p className="mt-1 text-sm">{callPack.diagnostic2}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds)</p>
-            <p className="mt-1 text-sm">{callPack.voicemail}</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <CopyButton text={callPack.opener} label="Copy call opener" />
-            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
-          </div>
-        </section>
-      ) : null}
-
+          </section>
       <CompileReport steps={reportSteps} />
 
       {templateSteps.length > 0 ? (
@@ -475,6 +511,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
           The enroll row is available once every step has passed or its review is approved.
         </p>
       ) : null}
+        </div>
+      </details>
     </div>
   );
 }

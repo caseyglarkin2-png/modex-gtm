@@ -16,16 +16,18 @@ export function GapQueueSection({
   canRunRouting,
   routableHypotheses,
   routableAccounts,
+  sellerLane = null,
 }: {
   latestRunId: string | null;
   canRunRouting: boolean;
   routableHypotheses: number;
   routableAccounts: number;
+  sellerLane?: 'research' | 'ready' | 'follow_up' | null;
 }) {
   return (
     <div className="space-y-4">
       <RunRoutingPanel canRun={canRunRouting} routableHypotheses={routableHypotheses} routableAccounts={routableAccounts} />
-      <WorkQueue reloadKey={latestRunId ?? undefined} />
+      <WorkQueue reloadKey={latestRunId ?? undefined} sellerLane={sellerLane} />
     </div>
   );
 }

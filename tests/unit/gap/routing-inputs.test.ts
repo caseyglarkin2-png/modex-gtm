@@ -972,6 +972,19 @@ describe('assembleForAccount', () => {
     expect(three.map((r) => (isSkip(r) ? r.skip : r.persona.id))).toEqual([43, 42, 44]);
   });
 
+  it('people with an approved/active hypothesis are routed IN ADDITION to the top 2 (approval never vanishes); still contact-ready only', async () => {
+    const db = fullDb();
+    const base = db.personas[0];
+    db.personas.push(
+      { ...base, id: 43, seniority: 'executive', email: 'ceo@acme.example', hubspot_contact_id: '333' },
+      { ...base, id: 44, seniority: 'director', email: 'dir@acme.example', hubspot_contact_id: '444' },
+      { ...base, id: 47, seniority: 'individual_contributor', email: 'ic@acme.example', hubspot_contact_id: '777' },
+      { ...base, id: 46, seniority: 'executive', email: 'notready@acme.example', hubspot_contact_id: '666', is_contact_ready: false },
+    );
+    const out = await assembleForAccount(makePrisma(db), { accountName: ACCOUNT, now: NOW, suppression: reader() }, { includePersonaIds: [47, 46, 43] });
+    expect(out.map((r) => (isSkip(r) ? r.skip : r.persona.id))).toEqual([43, 42, 47]);
+  });
+
   it('skips account_not_found once, and names a failed persona read', async () => {
     expect(await assembleForAccount(makePrisma(emptyDb()), { accountName: 'Nobody', now: NOW, suppression: reader() })).toEqual([{ skip: 'account_not_found' }]);
     const prisma = makePrisma(fullDb());

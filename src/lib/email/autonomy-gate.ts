@@ -54,7 +54,59 @@ export type ClawdMotion = (typeof CLAWD_MOTIONS)[number];
  * UNKNOWN); the two values here are the minimum this gate needs to honour the
  * operator-alert exemption without pre-empting that ticket.
  */
-export type SendPurpose = 'PROSPECT_OUTREACH' | 'OPERATOR_ALERT';
+export type SendPurpose = 'PROSPECT_OUTREACH' | 'OPERATOR_ALERT' | 'HUMAN_APPROVED_1TO1';
+
+/**
+ * HUMAN_APPROVED_1TO1 (2026-09-25, owner policy): Casey, authenticated, clicked
+ * CONFIRM + SEND on exactly one reviewed email to exactly one person. The
+ * `outreach` motion halt exists to stop AUTONOMOUS and agent-initiated
+ * outbound; it was never meant to stop the owner sending one email himself
+ * (the halt's own recorded reason: "Nothing blocks Casey sending from Gmail by
+ * hand"). So this purpose passes the `outreach` motion halt and nothing else:
+ *   - a GLOBAL halt still refuses it
+ *   - an unreadable autonomy state still refuses it (fail closed)
+ *   - suppression and the daily cap still apply (only OPERATOR_ALERT is exempt there)
+ *   - the wire refuses it unless the payload carries a fresh HumanConfirmation
+ *     bound to its single recipient (assertHumanApprovedOneToOne)
+ * Exactly one module may declare it (src/lib/gap/execution/seller-send.ts,
+ * reachable only from a session-authenticated route); a test scans the tree.
+ */
+export interface HumanConfirmation {
+  /** The authenticated session email that pressed CONFIRM + SEND. */
+  actor: string;
+  /** The one recipient Casey confirmed (lowercased). */
+  recipient: string;
+  /** The content snapshot Casey confirmed (the GAP content hash). */
+  contentHash: string;
+  confirmedAt: Date;
+}
+
+/** A confirmation older than this is not a confirmation of THIS send. */
+export const HUMAN_CONFIRMATION_MAX_AGE_MS = 10 * 60 * 1000;
+
+export class HumanConfirmationError extends Error {
+  constructor(reason: string) {
+    super(`HUMAN_APPROVED_1TO1 refused: ${reason}`);
+    this.name = 'HumanConfirmationError';
+  }
+}
+
+/** Structural wire check for HUMAN_APPROVED_1TO1: one recipient, no cc/bcc, a fresh confirmation of exactly that recipient. */
+export function assertHumanApprovedOneToOne(
+  payload: { to: string; cc?: string[]; bcc?: string; humanConfirmation?: HumanConfirmation },
+  now: Date = new Date(),
+): void {
+  const c = payload.humanConfirmation;
+  if (!c) throw new HumanConfirmationError('no human confirmation');
+  const to = String(payload.to ?? '').trim().toLowerCase();
+  if (!to || /[,;\s]/.test(to) || !/^[^@]+@[^@]+\.[^@]+$/.test(to)) throw new HumanConfirmationError('exactly one recipient required');
+  if ((payload.cc?.length ?? 0) > 0 || (payload.bcc ?? '').trim()) throw new HumanConfirmationError('no cc or bcc on a 1:1 send');
+  if (!/^[^@\s]+@[^@\s]+$/.test(c.actor ?? '')) throw new HumanConfirmationError('no authenticated actor');
+  if ((c.recipient ?? '').trim().toLowerCase() !== to) throw new HumanConfirmationError('recipient differs from the confirmed recipient');
+  if (!c.contentHash) throw new HumanConfirmationError('no confirmed content snapshot');
+  const age = now.getTime() - new Date(c.confirmedAt).getTime();
+  if (!(age >= 0 && age <= HUMAN_CONFIRMATION_MAX_AGE_MS)) throw new HumanConfirmationError('confirmation is stale');
+}
 
 export interface AutonomyState {
   /** null = UNREADABLE. A different fact from halted, and never renders as live. */
@@ -210,5 +262,9 @@ export async function assertAutonomyPermitsSend(
 ): Promise<void> {
   if (purpose === 'OPERATOR_ALERT') return;
   const verdict = await autonomyHalted('outreach');
-  if (verdict.halted) throw new AutonomyHaltedError(verdict.reason, verdict.unreadable);
+  if (!verdict.halted) return;
+  // A human-approved 1:1 send passes ONLY the outreach MOTION halt. The global
+  // halt and an unreadable state still refuse it.
+  if (purpose === 'HUMAN_APPROVED_1TO1' && !verdict.unreadable && verdict.reason === 'outreach motion halted') return;
+  throw new AutonomyHaltedError(verdict.reason, verdict.unreadable);
 }

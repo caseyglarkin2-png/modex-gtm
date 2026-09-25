@@ -36,6 +36,9 @@ interface Corroboration {
 }
 
 const REVIEWABLE = new Set(['draft', 'review_required']);
+/** Rows APPROVE + USE can still move (approved rows only need "use"). */
+const SELECTABLE = new Set(['draft', 'review_required', 'approved']);
+const STATUS_WORDS: Record<string, string> = { draft: 'needs review', review_required: 'needs review', approved: 'approved, not in use', active: 'in use' };
 const DEPTH_TONE: Record<string, string> = {
   INSUFFICIENT: 'border-[var(--destructive)] text-[var(--destructive)]',
   'SINGLE-SOURCE': 'border-amber-500 text-amber-600',
@@ -62,20 +65,37 @@ function DepthBadge({ card }: { card: ThesisCard }) {
 function ThesisGroupCard({ card, openInitially }: { card: ThesisCard; openInitially: boolean }) {
   const router = useRouter();
   const [open, setOpen] = useState(openInitially);
-  const [checked, setChecked] = useState<Set<string>>(() => new Set(card.members.filter((m) => REVIEWABLE.has(m.status)).map((m) => m.id)));
-  const [busy, setBusy] = useState<'approve' | 'corroborate' | 'attach' | null>(null);
+  const [checked, setChecked] = useState<Set<string>>(() => new Set(card.members.filter((m) => SELECTABLE.has(m.status)).map((m) => m.id)));
+  const [busy, setBusy] = useState<'approve' | 'use' | 'corroborate' | 'attach' | 'route' | null>(null);
+  const [success, setSuccess] = useState<{ n: number; use: boolean } | null>(null);
+  const [routed, setRouted] = useState<{ decisions: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<RowResult[] | null>(null);
   const [corr, setCorr] = useState<Corroboration | null>(null);
   const [attached, setAttached] = useState<RowResult[] | null>(null);
   const nameOf = (id: string) => card.members.find((m) => m.id === id)?.personaName ?? id;
 
-  async function approve() {
-    setBusy('approve'); setError(null); setResults(null);
+  async function approve(use: boolean) {
+    setBusy(use ? 'use' : 'approve'); setError(null); setResults(null); setSuccess(null); setRouted(null);
     try {
-      const r = await post<{ results: RowResult[] }>({ op: 'approve', fingerprint: card.fingerprint, hypothesisIds: [...checked] });
+      const r = await post<{ results: RowResult[] }>({ op: 'approve', fingerprint: card.fingerprint, hypothesisIds: [...checked], use });
       if (!r.ok && !r.data.results?.length) setError(r.data.reason ?? r.data.error ?? 'approve_failed');
-      setResults(r.data.results ?? []);
+      const rows = r.data.results ?? [];
+      setResults(rows);
+      const moved = rows.filter((x) => x.ok && x.to === (use ? 'active' : 'approved')).length;
+      if (moved > 0) setSuccess({ n: moved, use });
+      router.refresh();
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
+  }
+
+  /** ROUTE THESE: the same routing run as the queue's button; approved people are always routed. */
+  async function route() {
+    setBusy('route'); setError(null);
+    try {
+      const res = await fetch('/api/gap/routing/run?mode=apply', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ scope: 'routable_hypotheses' }) });
+      const data = (await res.json().catch(() => ({}))) as { decisions?: number; error?: string };
+      if (!res.ok) setError(data.error ?? `routing failed (HTTP ${res.status})`);
+      else setRouted({ decisions: data.decisions ?? 0 });
       router.refresh();
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
   }
@@ -103,7 +123,7 @@ function ThesisGroupCard({ card, openInitially }: { card: ThesisCard; openInitia
         <div>
           <p className="font-semibold">{card.accountName} · {card.problemFamily.replace(/_/g, ' ')}</p>
           <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-            {card.members.length} people share this thesis · {card.reviewable} awaiting review
+            {card.members.length} people share this thesis · {(() => { const waiting = card.members.filter((m) => SELECTABLE.has(m.status)).length; const inUse = card.members.filter((m) => m.status === 'active').length; return [waiting ? `${waiting} waiting for you` : null, inUse ? `${inUse} in use` : null].filter(Boolean).join(' · '); })()}
           </p>
           <p className="mt-1 text-xs text-[var(--muted-foreground)]">
             {card.members.map((m) => m.personaName ?? 'unknown').join(', ')}
@@ -111,7 +131,7 @@ function ThesisGroupCard({ card, openInitially }: { card: ThesisCard; openInitia
           <div className="mt-2"><DepthBadge card={card} /></div>
         </div>
         <Button type="button" size="sm" variant={open ? 'outline' : 'default'} onClick={() => setOpen(!open)}>
-          {open ? 'Close' : 'Review account thesis'}
+          {open ? 'Close' : 'Review thesis'}
         </Button>
       </div>
 
@@ -187,7 +207,7 @@ function ThesisGroupCard({ card, openInitially }: { card: ThesisCard; openInitia
             <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">People</h3>
             <ul className="mt-1 space-y-1">
               {card.members.map((m) => {
-                const editable = REVIEWABLE.has(m.status);
+                const editable = SELECTABLE.has(m.status);
                 return (
                   <li key={m.id} className="flex items-center gap-2">
                     <input
@@ -203,15 +223,40 @@ function ThesisGroupCard({ card, openInitially }: { card: ThesisCard; openInitia
                     />
                     <span>{m.personaName ?? 'unknown'}</span>
                     <span className="text-xs text-[var(--muted-foreground)]">{m.personaTitle ?? ''}</span>
-                    <Badge variant="outline" className="text-[10px]">{m.status.replace(/_/g, ' ')}</Badge>
+                    <Badge variant="outline" className="text-[10px]">{STATUS_WORDS[m.status] ?? m.status.replace(/_/g, ' ')}</Badge>
                   </li>
                 );
               })}
             </ul>
-            <Button type="button" size="sm" className="mt-3" disabled={busy !== null || checked.size === 0} onClick={() => void approve()}>
-              {busy === 'approve' ? 'Approving...' : `Approve selected siblings (${checked.size})`}
-            </Button>
-            <p className="mt-1 text-xs text-[var(--muted-foreground)]">Approves only. Nothing is activated, enrolled, drafted or sent.</p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <Button type="button" size="sm" disabled={busy !== null || checked.size === 0} onClick={() => void approve(true)}>
+                {busy === 'use' ? 'Approving...' : `Approve + use for ${checked.size}`}
+              </Button>
+              <Button type="button" size="sm" variant="ghost" disabled={busy !== null || checked.size === 0} onClick={() => void approve(false)}>
+                {busy === 'approve' ? 'Approving...' : 'Approve only'}
+              </Button>
+            </div>
+            <p className="mt-1 text-xs text-[var(--muted-foreground)]">Use means GAP recommends who to contact. Nothing is enrolled, drafted or sent.</p>
+            {success ? (
+              <div data-testid="thesis-success" className="mt-3 space-y-2 rounded-md border border-emerald-600/40 bg-emerald-500/10 p-3">
+                <p className="font-semibold uppercase tracking-wide">
+                  {success.n} {card.accountName} {success.n === 1 ? 'hypothesis' : 'hypotheses'} approved{success.use ? ' + in use' : ''}
+                </p>
+                {success.use ? (
+                  routed ? (
+                    <p>
+                      Routed. <a className="underline" href="/gap?lane=ready">Open READY</a> to see who to contact.
+                    </p>
+                  ) : (
+                    <Button type="button" size="sm" disabled={busy !== null} onClick={() => void route()}>
+                      {busy === 'route' ? 'Routing...' : `Route these ${success.n}`}
+                    </Button>
+                  )
+                ) : (
+                  <p className="text-xs">Approved, not in use yet. They stay on this card; press Approve + use when you want GAP to recommend contacts.</p>
+                )}
+              </div>
+            ) : null}
             {results ? <ResultList results={results} nameOf={nameOf} /> : null}
           </section>
           {error ? <p role="alert" className="text-[var(--destructive)]">{error}</p> : null}
@@ -240,10 +285,10 @@ export function ThesisGroupReview({ cards }: { cards: ThesisCard[] }) {
       <div>
         <h2 className="text-lg font-semibold">Account theses</h2>
         <p className="text-sm text-[var(--muted-foreground)]">
-          Identical hypotheses for different people at one account, reviewed once. Pending and better-corroborated theses first. One-offs are in the table below.
+          One thesis, several people at one account: review it once. Waiting and better-corroborated theses first. One-off hypotheses are in the table below.
         </p>
       </div>
-      {cards.map((c, i) => <ThesisGroupCard key={c.fingerprint} card={c} openInitially={i === 0 && c.reviewable > 0} />)}
+      {cards.map((c, i) => <ThesisGroupCard key={c.fingerprint} card={c} openInitially={i === 0 && c.members.some((m) => SELECTABLE.has(m.status))} />)}
     </section>
   );
 }

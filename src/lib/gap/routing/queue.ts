@@ -320,13 +320,13 @@ async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Promise<vo
   if (items.length === 0 || typeof prisma?.gapAuditEvent?.findMany !== 'function') return;
   try {
     // Lazy: the queue module must not load the execution layer (Gmail, ledger) at import time.
-    const { DRAFT_SENT, DRAFTED, MANUAL_SENT } = await import('../execution/draft-ledger');
+    const { DIRECT_SENT, DRAFT_SENT, DRAFTED, MANUAL_SENT } = await import('../execution/draft-ledger');
     const { computeNextTouch } = await import('../execution/next-touch');
     // A sequence belongs to the PERSON: a send recorded on an earlier card for
     // this person (e.g. Joey's hand-sent email) still drives today's card.
     const since = new Date(Date.now() - 120 * 24 * 60 * 60 * 1000);
     const sentRows = (await prisma.gapAuditEvent.findMany({
-      where: { subject_type: 'routing_decision', kind: { in: [DRAFT_SENT, MANUAL_SENT] }, created_at: { gte: since } },
+      where: { subject_type: 'routing_decision', kind: { in: [DRAFT_SENT, MANUAL_SENT, DIRECT_SENT] }, created_at: { gte: since } },
       select: { subject_id: true, kind: true, payload: true },
       take: 500,
     })) as Array<{ subject_id: string; kind: string; payload: unknown }>;

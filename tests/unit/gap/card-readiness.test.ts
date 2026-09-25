@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cardReadiness, type ReadinessInput } from '@/lib/gap/routing/card-readiness';
+import { cardReadiness, sellerLaneOf, type ReadinessInput } from '@/lib/gap/routing/card-readiness';
 import { ROUTING_ACTIONS } from '@/lib/gap/taxonomy';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 
@@ -152,5 +152,22 @@ describe('cardReadiness: RESEARCH THIS', () => {
     }
     const tam = cardReadiness({ ...b, ruleId: 'tam_unknown' });
     expect(tam.state === 'missing_prerequisite' && tam.researchable).toBeFalsy();
+  });
+});
+
+describe('sellerLaneOf: the /gap work lanes', () => {
+  it('an actionable email card is READY; once Casey acted it leaves READY', () => {
+    expect(sellerLaneOf(item())).toBe('ready');
+    expect(sellerLaneOf({ ...item(), humanAction: 'emailed' })).toBe('later');
+  });
+  it('a due touch is FOLLOW UP; a waiting, stopped or complete sequence is not', () => {
+    expect(sellerLaneOf(item({ touch: { state: 'due', stepIndex: 1, dueAt: '2026-10-01T00:00:00Z', sentCount: 1 } }))).toBe('follow_up');
+    for (const state of ['waiting', 'stopped', 'complete', 'unknown'] as const) expect(sellerLaneOf(item({ touch: { state, sentCount: 1 } }))).toBe('later');
+  });
+  it('missing evidence is RESEARCH; a proposed hypothesis is REVIEW; a system block is blocked; nurture is later', () => {
+    expect(sellerLaneOf(item({ action: 'research_required', ruleId: 'evidence_thin' }))).toBe('research');
+    expect(sellerLaneOf(item({ action: 'approve_hypothesis', ruleId: 'hyp_proposed' }))).toBe('review');
+    expect(sellerLaneOf(item({ action: 'do_not_contact', blocked: true, ruleId: 'suppressed' }))).toBe('blocked');
+    expect(sellerLaneOf(item({ action: 'nurture', ruleId: 'active_opportunity' }))).toBe('later');
   });
 });

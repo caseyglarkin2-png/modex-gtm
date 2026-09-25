@@ -279,6 +279,32 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
     }
   }
 
+  const canAdvance = status === 'draft' || status === 'review_required';
+
+  async function advance(kind: 'approve' | 'approve_and_use') {
+    setBusy(kind === 'approve' ? 'approve' : 'activate');
+    setError(null);
+    try {
+      const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(hypothesis.id)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ advance: kind }),
+      });
+      const payload = ((await res.json().catch(() => ({}))) ?? {}) as Record<string, unknown>;
+      if (!res.ok) {
+        const code = typeof payload.detail === 'string' ? payload.detail.replace(/^.*refused: /, '') : typeof payload.error === 'string' ? payload.error : `HTTP ${res.status}`;
+        setError(describeRefusal(code));
+        return;
+      }
+      setJustActivated(payload.to === 'active');
+      onTransition({ from: status, to: (payload.to as HypothesisStatus) ?? status, effects: [] });
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'network_error');
+    } finally {
+      setBusy(null);
+    }
+  }
+
   function afterFactLinked() {
     if (onChanged) onChanged();
     else onTransition({ from: status, to: status, effects: ['signals_linked'] });
@@ -308,7 +334,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
 
         {justActivated ? (
           <div data-testid="hypothesis-activated-banner" className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--border)] bg-[var(--accent)] p-3 text-sm">
-            <p>Hypothesis active. Run routing to generate a recommendation.</p>
+            <p>Approved and in use. Run routing and this person gets a recommendation.</p>
             <Button asChild type="button" size="sm" variant="outline">
               <Link href="/gap">Go to Queue</Link>
             </Button>
@@ -324,7 +350,17 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
               What do I do with this?
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              {(() => {
+              {canAdvance ? (
+                <>
+                  <Button type="button" disabled={disabledFor('approve').disabled} title={disabledFor('approve').title} onClick={() => void advance('approve_and_use')}>
+                    {busy === 'activate' ? 'Approving...' : 'Approve + use'}
+                  </Button>
+                  <Button type="button" variant="ghost" disabled={disabledFor('approve').disabled} onClick={() => void advance('approve')}>
+                    {busy === 'approve' ? 'Approving...' : 'Approve only'}
+                  </Button>
+                </>
+              ) : null}
+              {!canAdvance && (() => {
                 const gate = disabledFor(primaryAction);
                 return (
                   <Button type="button" disabled={gate.disabled} title={gate.title} onClick={() => void run(primaryAction)}>
@@ -333,7 +369,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
                 );
               })()}
               {secondaryActions
-                .filter((action) => !REASON_ACTIONS.has(action))
+                .filter((action) => !REASON_ACTIONS.has(action) && !(canAdvance && (action === 'submit' || action === 'approve')))
                 .map((action) => {
                   const gate = disabledFor(action);
                   return (

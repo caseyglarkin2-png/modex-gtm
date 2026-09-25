@@ -30,7 +30,7 @@ import { HARD_INVALID_STATUSES } from '../suppression/provenance';
 import { addBusinessDays } from '../sequence/business-days';
 import { parseSteps } from '../sequence/steps';
 import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
-import { DRAFT_SUBJECT_TYPE, listDraftRecords, MANUAL_SENT, type DraftRecord, type ManualSentPayload } from './draft-ledger';
+import { DRAFT_SUBJECT_TYPE, DIRECT_SENT, listDraftRecords, MANUAL_SENT, type DraftRecord, type ManualSentPayload } from './draft-ledger';
 import { gapGmailSender } from './gap-sender';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,11 +98,11 @@ function sentTouches(records: DraftRecord[]): SentTouch[] {
     .sort((a, b) => a.stepIndex - b.stepIndex || a.sentAt.localeCompare(b.sentAt));
 }
 
-/** Sends Casey made by hand and reconciled to Gmail (MANUAL_SENT), as touches. */
+/** Sends recorded without a draft: by hand (MANUAL_SENT) or by SEND FROM YARDFLOW (DIRECT_SENT), as touches. */
 async function manualTouches(prisma: PrismaLike, decisionId: string): Promise<Array<{ touch: SentTouch; payload: ManualSentPayload }>> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
   const rows: Array<{ payload: unknown }> = await prisma.gapAuditEvent.findMany({
-    where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: decisionId, kind: MANUAL_SENT },
+    where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: decisionId, kind: { in: [MANUAL_SENT, DIRECT_SENT] } },
     select: { payload: true },
   });
   return rows

@@ -2,7 +2,7 @@
  * GET  /api/gap/theses                     account thesis groups in review order
  * POST /api/gap/theses  `{op, fingerprint, ...}`
  *
- *   op approve      `{hypothesisIds}`  APPROVE SELECTED SIBLINGS: the normal
+ *   op approve      `{hypothesisIds, use?}`  APPROVE (+ USE) SELECTED SIBLINGS: the normal
  *                   submit/approve transitions per row, each audited with the
  *                   group action and the operator; per-row results. Ids outside
  *                   the group are refused (409). Never activates, never sends.
@@ -26,7 +26,7 @@ export const maxDuration = 120;
 
 const Fp = z.string().regex(/^[0-9a-f]{64}$/);
 const Body = z.discriminatedUnion('op', [
-  z.object({ op: z.literal('approve'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50) }).strict(),
+  z.object({ op: z.literal('approve'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50), use: z.boolean().optional() }).strict(),
   z.object({ op: z.literal('corroborate'), fingerprint: Fp, force: z.boolean().optional() }).strict(),
   z.object({ op: z.literal('attach'), fingerprint: Fp, signalIds: z.array(z.string().min(1)).min(1).max(20) }).strict(),
 ]);
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
   const now = new Date();
 
   if (b.op === 'approve') {
-    const r = await approveSelectedSiblings(prisma, { fingerprint: b.fingerprint, hypothesisIds: b.hypothesisIds, actor, now });
+    const r = await approveSelectedSiblings(prisma, { fingerprint: b.fingerprint, hypothesisIds: b.hypothesisIds, actor, now, use: b.use === true });
     if (r.reason === 'group_not_found') return NextResponse.json(r, { status: 404 });
     if (r.reason?.startsWith('not_in_group')) return NextResponse.json(r, { status: 409 });
     return NextResponse.json(r);

@@ -483,7 +483,7 @@ function preferredSenderOf(decision: DecisionRow | null): string | null {
  * routing/rules.ts's hasActiveOpportunity so this is the same predicate
  * R3b applies, not a second opportunity model.
  */
-async function loadActiveOpportunityInputs(prisma: any, accountName: string, email: string, now: Date): Promise<ActiveOpportunityInputs> {
+export async function loadActiveOpportunityInputs(prisma: any, accountName: string, email: string, now: Date): Promise<ActiveOpportunityInputs> {
   const account: { pipeline_stage: string | null } | null = await prisma.account.findUnique({
     where: { name: accountName },
     select: { pipeline_stage: true },

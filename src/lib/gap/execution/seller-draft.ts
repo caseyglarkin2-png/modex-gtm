@@ -37,7 +37,9 @@ import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
 import { makeCriticClient } from '../critic-client';
 import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
-import { appendLedger, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
+import { appendLedger, DIRECT_REFUSED, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
+import { hasActiveOpportunity } from '../routing/rules';
+import { loadActiveOpportunityInputs } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
 import { computeNextTouch, type NextTouch } from './next-touch';
@@ -75,7 +77,8 @@ export type SellerDraftRefusal =
   | 'copy_rejected'
   | 'copy_review_required'
   | 'unsubscribe_link_unavailable'
-  | 'gmail_refused';
+  | 'gmail_refused'
+  | 'active_opportunity';
 
 export type SellerDraftResult =
   | {
@@ -114,6 +117,12 @@ export interface SellerDraftDeps {
   /** The sender's real Gmail signature (null when unreadable: the template sign-off stays). */
   signature?: (sender: GmailSender | undefined) => Promise<string | null>;
   unsubscribeUrl?: (email: string) => string;
+  /** True when someone is already in conversation (send only). */
+  activeOpportunity?: (prisma: PrismaLike, accountName: string, email: string, now: Date) => Promise<boolean>;
+}
+
+async function defaultActiveOpportunity(prisma: PrismaLike, accountName: string, email: string, now: Date): Promise<boolean> {
+  return hasActiveOpportunity(await loadActiveOpportunityInputs(prisma, accountName, email, now));
 }
 
 function defaultUnsubscribeUrl(email: string): string {
@@ -169,26 +178,68 @@ export function draftText(body: string, unsubscribeUrl: string, signatureHtml: s
   return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
 }
 
-async function refuse(
+type Refusal = Extract<SellerDraftResult, { ok: false }>;
+
+async function refuseAs(
+  kind: typeof DRAFT_REFUSED | typeof DIRECT_REFUSED,
   prisma: PrismaLike,
   actor: string,
   decisionId: string,
-  r: Extract<SellerDraftResult, { ok: false }>,
-): Promise<SellerDraftResult> {
+  r: Refusal,
+): Promise<Refusal> {
   try {
-    await appendLedger(prisma, DRAFT_REFUSED, actor, decisionId, { ...r });
+    await appendLedger(prisma, kind, actor, decisionId, { ...r });
   } catch {
     // The refusal is the answer; a lost refusal row loses nothing but the audit line.
   }
   return r;
 }
 
-export async function createSellerGmailDraft(
+/** Everything a draft or a direct send needs, after every click-time gate passed. */
+export interface PreparedSellerEmail {
+  decisionId: string;
+  stepIndex: number;
+  hypothesisId: string;
+  accountName: string;
+  personaId: number;
+  personaName: string | null;
+  /** The person's HubSpot contact id, when known (CRM logging needs a known contact). */
+  hubspotContactId: string | null;
+  recipient: string;
+  senderIdentity: string;
+  gapSender: GmailSender | null;
+  subject: string;
+  bodySnapshot: string;
+  contentHash: string;
+  sequenceVersionId: string;
+  compileId: string;
+  html: string;
+  text: string;
+  headers: Record<string, string>;
+  threadContext: ExecutionIntent['threadContext'];
+  inReplyToGmailMessageId: string | null;
+}
+
+export type PrepareResult =
+  | Refusal
+  | { ok: true; checked: true; compileId: string }
+  | { ok: true; existingDraft: DraftedPayload }
+  | { ok: true; prepared: PreparedSellerEmail };
+
+/**
+ * The click-time gates shared by CREATE GMAIL DRAFT and SEND FROM YARDFLOW:
+ * one implementation, so the two can never disagree about what is sendable.
+ * `mode: 'send'` also re-reads the active-opportunity predicate (the one
+ * enroll and routing R3b use) and ledgers refusals as direct-send refusals.
+ */
+export async function prepareSellerEmail(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean; stepIndex?: number },
+  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean; stepIndex?: number; mode?: 'draft' | 'send' },
   deps: SellerDraftDeps = {},
-): Promise<SellerDraftResult> {
+): Promise<PrepareResult> {
   const { decisionId, actor, now } = input;
+  const mode = input.mode ?? 'draft';
+  const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(mode === 'send' ? DIRECT_REFUSED : DRAFT_REFUSED, pr, a, d, r);
 
   const decision = await prisma.routingDecision.findUnique({
     where: { id: decisionId },
@@ -237,6 +288,12 @@ export async function createSellerGmailDraft(
   if (!email) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_email' });
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
+  if (mode === 'send') {
+    const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
+    if (opportunity) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'active_opportunity', detail: 'An open deal, a booked meeting or a recent positive reply: someone is already in conversation here.' });
+    }
+  }
   if (!pack.version) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_version' });
   const step0 = pack.steps[stepIndex];
   if (!pack.rendered || !step0) return refuse(prisma, actor, decisionId, { ok: false, reason: stepIndex === 0 ? 'no_step0_copy' : 'no_step_copy' });
@@ -255,7 +312,7 @@ export async function createSellerGmailDraft(
 
   // Idempotency: this exact copy already drafted for this card and still a draft.
   const existing = (await listDraftRecords(prisma, decisionId)).find((d) => d.fate === 'drafted' && d.drafted.contentHash === contentHash);
-  if (existing && !input.checkOnly) return { ok: true, alreadyDrafted: true, receipt: existing.drafted };
+  if (existing && !input.checkOnly && mode === 'draft') return { ok: true, existingDraft: existing.drafted };
 
   // Compiler clearance for exactly this marked copy.
   let compileRow = pack.compile;
@@ -364,13 +421,56 @@ export async function createSellerGmailDraft(
     inReplyToGmailMessageId = touch.threadFrom.gmailSentMessageId;
   }
 
+  return {
+    ok: true,
+    prepared: {
+      decisionId,
+      stepIndex,
+      hypothesisId: pack.hypothesis.id,
+      accountName: pack.hypothesis.account_name,
+      personaId: persona.id,
+      personaName: persona.name ?? null,
+      hubspotContactId: persona.hubspot_contact_id ?? null,
+      recipient: email,
+      senderIdentity,
+      gapSender: gapSender ?? null,
+      subject,
+      bodySnapshot: pack.rendered.queued.body,
+      contentHash,
+      sequenceVersionId: pack.version.id,
+      compileId: compileRow!.id,
+      html: draftHtml(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
+      text: draftText(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
+      headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
+      threadContext,
+      inReplyToGmailMessageId,
+    },
+  };
+}
+
+export async function createSellerGmailDraft(
+  prisma: PrismaLike,
+  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean; stepIndex?: number },
+  deps: SellerDraftDeps = {},
+): Promise<SellerDraftResult> {
+  const { decisionId, actor, now } = input;
+  const prep = await prepareSellerEmail(prisma, { ...input, mode: 'draft' }, deps);
+  if (!prep.ok) return prep;
+  if ('checked' in prep) return prep;
+  if ('existingDraft' in prep) return { ok: true, alreadyDrafted: true, receipt: prep.existingDraft };
+  const p = prep.prepared;
+  const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(DRAFT_REFUSED, pr, a, d, r);
+  const { stepIndex, contentHash, senderIdentity, threadContext, subject, inReplyToGmailMessageId } = p;
+  const email = p.recipient;
+  const gapSender = p.gapSender;
+
   const intent: ExecutionIntent = {
     engine: 'gmail_draft',
-    personaId: persona.id,
-    hypothesisId: pack.hypothesis.id,
-    sequenceVersionId: pack.version.id,
+    personaId: p.personaId,
+    hypothesisId: p.hypothesisId,
+    sequenceVersionId: p.sequenceVersionId,
     stepIndex,
-    compileIds: [compileRow!.id],
+    compileIds: [p.compileId],
     senderIdentity,
     idempotencyKey: `gmail_draft:${decisionId}:${stepIndex}:${contentHash}`,
     threadContext,
@@ -384,9 +484,9 @@ export async function createSellerGmailDraft(
     {
       to: email,
       subject,
-      html: draftHtml(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
-      text: draftText(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
-      headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
+      html: p.html,
+      text: p.text,
+      headers: { ...p.headers },
       ...(gapSender ? { sender: gapSender } : {}),
     },
     deps.gmail ?? {},
@@ -399,18 +499,18 @@ export async function createSellerGmailDraft(
     engine: 'gmail_draft',
     status: 'drafted',
     routingDecisionId: decisionId,
-    hypothesisId: pack.hypothesis.id,
-    personaId: persona.id,
-    accountName: pack.hypothesis.account_name,
+    hypothesisId: p.hypothesisId,
+    personaId: p.personaId,
+    accountName: p.accountName,
     recipient: email,
     senderIdentity,
     subject,
     contentHash,
-    bodySnapshot: pack.rendered.queued.body,
-    sequenceVersionId: pack.version.id,
+    bodySnapshot: p.bodySnapshot,
+    sequenceVersionId: p.sequenceVersionId,
     stepIndex,
     inReplyToGmailMessageId,
-    compileId: compileRow!.id,
+    compileId: p.compileId,
     gmailDraftId: receipt.engineId,
     gmailDraftMessageId: receipt.draftMessageId ?? null,
     gmailThreadId: receipt.threadId ?? null,
