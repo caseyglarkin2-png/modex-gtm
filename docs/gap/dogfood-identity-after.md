@@ -55,3 +55,7 @@ None of these were touched. Each currently resolves (tier C, normalized name) to
 Note on RESOLVED_BY_HUBSPOT_ID staying 0: the coverage-audit script (`dogfood-identity-audit.ts`) resolves each Pounce account name WITHOUT that trigger's own `hubspot_company_id` column (it was not selected/passed through in Phase 1's script). The 12 accounts now carrying `Account.hubspot_company_id` will resolve at tier A automatically the next time the real hypothesize cron runs, if the trigger's own row happens to carry a matching `hubspot_company_id` -- that is a Pounce-ingest-side fact this audit does not check. Tier A capability was added; whether it fires depends on data this script does not read. Worth confirming in a later pass, not a blocker now.
 
 Global account base: `Account.hubspot_company_id` coverage moved from 0/1,707 to **12/1,707**.
+
+## Update: Walmart Inc. (owner decision, follow-up pass, 2026-09-24)
+
+Casey confirmed the canonical enterprise account is "Walmart Inc." (walmart.com), not "Walmart Distribution Center." Created a new `Account` row for it (deterministic, single HubSpot match, see `scripts/gap/dogfood-walmart-identity.ts`), with a resolved `CanonicalCompany`/`CanonicalAccountLink` and an explicit `GapAccountAlias`. This is the first, and only, new `Account` row this dogfood run created, done under explicit owner authorization for this specific case (not a general account-creation permission). Coverage after this change: **24/43 (56%)**, `hubspot_company_id` on 13/1,708 accounts.

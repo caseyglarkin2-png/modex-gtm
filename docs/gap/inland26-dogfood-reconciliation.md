@@ -23,6 +23,33 @@ Six HubSpot `EMAILS` engagements, `hs_email_status: SENT`, owner 85093129 (Casey
 | Walmart / nichole.sanko | IDENTITY_UNRESOLVED | -- | -- | -- |
 | Walmart / ivy.barney | IDENTITY_UNRESOLVED | -- | -- | -- |
 
+## Update: after the Walmart Inc. identity fix (owner decision, 2026-09-24)
+
+Casey confirmed "Walmart Distribution Center" is NOT the canonical enterprise
+account. HubSpot search (`domain = walmart.com`, exact match) found exactly
+one deterministic company (id `8536615003`, name "Walmart"; the only other
+candidate, "Walmart eCommerce Mexico", is `walmart.com.mx`, a different
+domain). Per that owner authorization, created a real `Account` row
+"Walmart Inc." (id 1892, `hubspot_company_id=8536615003`), a resolved
+`CanonicalCompany`/`CanonicalAccountLink` pair for the domain, and an
+explicit `GapAccountAlias` (Walmart -> Walmart Inc.). "Walmart Distribution
+Center" (id 674) was NOT touched, merged, or deleted.
+Script: `scripts/gap/dogfood-walmart-identity.ts`.
+
+Re-running the reconciler (same script, `scripts/gap/dogfood-inland26-reconcile.ts`):
+
+| Row | Outcome | Account | Hypothesis | Enrollment |
+|---|---|---|---|---|
+| Walmart / chris.anderson0 | **HYPOTHESIS_MISSING** | Walmart Inc. | none | none |
+| Walmart / nichole.sanko | **HYPOTHESIS_MISSING** | Walmart Inc. | none | none |
+| Walmart / ivy.barney | **HYPOTHESIS_MISSING** | Walmart Inc. | none | none |
+| Tyson Foods (all 3) | HYPOTHESIS_MISSING | Tyson Foods | none | none | (unchanged)
+
+All 6 evidence rows now resolve to a real account. None are MATCHED (no
+`ConversationDisposition` written) -- there was never a GAP hypothesis
+behind any of these sends, and none is fabricated to close the gap.
+HYPOTHESIS_MISSING remains the honest, correct outcome for all six.
+
 **Correction to the earlier hand-classification:** the dry-run doc classified Tyson as AMBIGUOUS ("two near-duplicate Account rows, neither carrying a hubspot_company_id, normalization does not cleanly disambiguate"). The real resolver, run against live production data, resolves "Tyson Foods" cleanly (`ok: true`) -- it is NOT ambiguous today. That earlier note was itself hand-derived from a morning snapshot doc, not a fresh query; this run is the fresh query, and it disagrees. Treat the hand-classification as superseded by this result, per the recency-discipline rule (fetch before declaring state).
 
 Walmart remains IDENTITY_UNRESOLVED, matching the earlier finding: no canonical `Account` row exists for parent "Walmart," only a narrower "Walmart Distribution Center" record that does not normalize-match.
