@@ -112,9 +112,33 @@ export function mapClawdCriticResponse(payload: unknown): Extract<CriticScoreRes
   return { ok: true, verdict: finalVerdict, score: payload.score, findings };
 }
 
+/** The first non-empty value. */
+function firstSet(...values: Array<string | undefined>): string {
+  for (const v of values) if (v && v.trim()) return v.trim();
+  return '';
+}
+
+/**
+ * Where the critic lives. The critic is a route on the same clawd control
+ * plane the suppression gate already reads (`CLAWD_CONTROL_PLANE_URL`, bearer
+ * `CLAWD_CONTROL_PLANE_TOKEN`); verified 2026-09-25 that production's
+ * control-plane URL and token are the same host and credential as
+ * `MC_API_TOKEN` and that `POST /api/critic/score` accepts them. So the
+ * critic falls back to those names instead of requiring a duplicate copy of
+ * the same secret. The critic-specific names still win when set. Nothing
+ * configured is still `critic_unconfigured` (review, never pass).
+ */
+export function criticConfigFromEnv(env: Record<string, string | undefined> = process.env): { baseUrl: string; token: string } {
+  return {
+    baseUrl: firstSet(env.CLAWD_BASE_URL, env.CLAWD_URL, env.CLAWD_CONTROL_PLANE_URL).replace(/\/+$/, ''),
+    token: firstSet(env.MC_API_TOKEN, env.CLAWD_CONTROL_PLANE_TOKEN),
+  };
+}
+
 export function makeCriticClient(opts: MakeCriticClientOptions = {}): CriticClient {
-  const baseUrl = (opts.baseUrl ?? process.env.CLAWD_BASE_URL ?? process.env.CLAWD_URL ?? '').trim().replace(/\/+$/, '');
-  const token = (opts.token ?? process.env.MC_API_TOKEN ?? '').trim();
+  const fromEnv = criticConfigFromEnv();
+  const baseUrl = (opts.baseUrl ?? fromEnv.baseUrl).trim().replace(/\/+$/, '');
+  const token = (opts.token ?? fromEnv.token).trim();
   const fetchImpl = opts.fetchImpl ?? fetch;
   const timeoutMs = opts.timeoutMs ?? CRITIC_TIMEOUT_MS;
 
