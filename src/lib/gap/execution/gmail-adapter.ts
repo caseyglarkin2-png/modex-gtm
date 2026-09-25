@@ -14,9 +14,9 @@
  * every GAP surface that will eventually invoke them.
  */
 import {
-  createGmailDraft,
-  sendGmailDraft,
-  sendViaGmail,
+  createGmailDraft as defaultCreateGmailDraft,
+  sendGmailDraft as defaultSendGmailDraft,
+  sendViaGmail as defaultSendViaGmail,
   type GmailSendPayload,
 } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent, ExecutionReceipt } from './contract';
@@ -30,6 +30,20 @@ export interface GmailAdapterInput {
   text?: string;
   replyTo?: string;
   sender?: { refreshToken: string; userEmail: string };
+}
+
+/**
+ * Injectable transport, mirroring `hubspotSequenceAdapter`'s `deps.fetchImpl`.
+ * Defaults to the real `gmail-sender.ts` functions; a caller proving the
+ * adapter end to end with a fake transport (never a real Gmail/OAuth call)
+ * overrides one or more here. Never used to weaken a real guard: the real
+ * functions' autonomy/suppression/cap checks still run whenever the real
+ * functions are the ones actually called.
+ */
+export interface GmailAdapterDeps {
+  createGmailDraft?: typeof defaultCreateGmailDraft;
+  sendGmailDraft?: typeof defaultSendGmailDraft;
+  sendViaGmail?: typeof defaultSendViaGmail;
 }
 
 function toPayload(intent: ExecutionIntent, input: GmailAdapterInput): GmailSendPayload {
@@ -65,7 +79,8 @@ function refusedReceipt(engine: ExecutionReceipt['engine'], now: Date, err: unkn
 }
 
 /** engine: 'gmail_direct'. Sends immediately through the existing sendViaGmail (autonomy + suppression + daily cap, unchanged). */
-export async function gmailDirectAdapter(intent: ExecutionIntent, input: GmailAdapterInput): Promise<ExecutionReceipt> {
+export async function gmailDirectAdapter(intent: ExecutionIntent, input: GmailAdapterInput, deps: GmailAdapterDeps = {}): Promise<ExecutionReceipt> {
+  const sendViaGmail = deps.sendViaGmail ?? defaultSendViaGmail;
   try {
     const result = await sendViaGmail(toPayload(intent, input));
     return {
@@ -82,7 +97,8 @@ export async function gmailDirectAdapter(intent: ExecutionIntent, input: GmailAd
 }
 
 /** engine: 'gmail_draft'. Creates a draft only (createGmailDraft: suppression checked, autonomy/cap deliberately not). */
-export async function gmailDraftAdapter(intent: ExecutionIntent, input: GmailAdapterInput): Promise<ExecutionReceipt> {
+export async function gmailDraftAdapter(intent: ExecutionIntent, input: GmailAdapterInput, deps: GmailAdapterDeps = {}): Promise<ExecutionReceipt> {
+  const createGmailDraft = deps.createGmailDraft ?? defaultCreateGmailDraft;
   try {
     const result = await createGmailDraft(toPayload(intent, input));
     return {
@@ -106,7 +122,9 @@ export async function sendDraftedGmailAdapter(
   intent: ExecutionIntent,
   draftReceipt: ExecutionReceipt,
   recipients: { to: string; cc?: string[]; bcc?: string },
+  deps: GmailAdapterDeps = {},
 ): Promise<ExecutionReceipt> {
+  const sendGmailDraft = deps.sendGmailDraft ?? defaultSendGmailDraft;
   if (draftReceipt.engine !== 'gmail_draft' || draftReceipt.status !== 'drafted' || !draftReceipt.engineId) {
     return refusedReceipt('gmail_direct', intent.now, new Error('supersedes_receipt_not_a_draft'));
   }
