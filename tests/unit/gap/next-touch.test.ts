@@ -23,7 +23,7 @@ function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
     audit.push({ id: `s${step}`, kind: DRAFT_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(SENT_AT.getTime() + step), payload: { gmailDraftId: `r${step}`, gmailSentMessageId: `m${step}`, gmailThreadId: 't1', sentAt: new Date(SENT_AT.getTime() + step * 86_400_000 * 5).toISOString() } });
   }
   return {
-    gapAuditEvent: { findMany: vi.fn(async ({ where }: any) => audit.filter((a) => a.subject_id === where.subject_id && where.kind.in.includes(a.kind)).sort((a, b) => b.created_at - a.created_at)) },
+    gapAuditEvent: { findMany: vi.fn(async ({ where }: any) => audit.filter((a) => a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind))).sort((a, b) => b.created_at - a.created_at)) },
     persona: { findUnique: vi.fn(async () => ({ do_not_contact: false, email_status: 'unverified', ...(extra.persona as object) })) },
     unsubscribedEmail: { findFirst: vi.fn(async () => (extra.unsub ? { id: 'u' } : null)) },
     conversationDisposition: { findFirst: vi.fn(async ({ where }: any) => (extra.disposition && !where.response_class.notIn.includes(extra.disposition) ? { response_class: extra.disposition } : null)) },
@@ -96,5 +96,38 @@ describe('computeNextTouch', () => {
 
   it('every step sent: complete', async () => {
     expect(await computeNextTouch(ledger([0, 1, 2, 3]), 'dec-1', new Date('2026-12-01T00:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'complete' });
+  });
+});
+
+describe('manual send (Joey Maggard, sent by hand from casey@yardflow.ai)', async () => {
+  const { matchManualSend } = await import('@/lib/gap/execution/manual-send');
+  const { MANUAL_SENT } = await import('@/lib/gap/execution/draft-ledger');
+  const rendered = {
+    recipient: 'joey.maggard@kroger.com',
+    subject: 'Doors versus spots',
+    body: 'Hi Joey,\nAirports do not pour runways when the taxiway is the problem. KR 10-Q (2026-06-26) mentions: capital expenditure.\n\nMy guess is the doors are no longer the constraint. The spots are, and the tractor hunting for the right trailer is where the new capacity waits.\n\nHow many doors sit empty on a normal Tuesday because nobody can say where the trailer is?\n\nCasey Larkin, YardFlow by FreightRoll',
+  };
+  const real = {
+    id: '1a0da5d97f8142c0', threadId: '1a0da5c10f51fe73', to: 'joey.maggard@kroger.com', subject: 'doors versus spots', sentAt: '2026-09-25T20:59:19.000Z', rfcMessageId: '<x@mail.gmail.com>',
+    text: 'Hi Joey,\r\nAirports do not pour runways when the taxiway is the problem. KR 10-Q\r\n(2026-06-26) mentions: capital expenditure.\r\n\r\nMy guess is the doors are no longer the constraint. The spots are, and the\r\ntractor hunting for the right trailer is where the new capacity waits.\r\n\r\nHow many doors sit empty on a normal Tuesday because nobody can say where\r\nthe trailer is?\r\n\r\nHappy Friday,\r\nCasey Larkin · *Founding AE*, YardFlow by FreightRoll · c. 410-236-7434',
+  };
+
+  it('matches the real sent message uniquely (case-insensitive subject, wrapped body, Casey own sign-off)', () => {
+    expect(matchManualSend(rendered, [real])).toMatchObject({ kind: 'match', message: { id: '1a0da5d97f8142c0' } });
+  });
+
+  it('two matching sends are ambiguous and are returned, never guessed; different copy is no match', () => {
+    expect(matchManualSend(rendered, [real, { ...real, id: 'dup' }])).toMatchObject({ kind: 'ambiguous' });
+    expect(matchManualSend(rendered, [{ ...real, text: 'A different email entirely about something else.' }])).toMatchObject({ kind: 'none' });
+  });
+
+  it('a manual send anchors the next touch on the REAL sent time with no draft record (Fri Sep 25 -> Thu Oct 1)', async () => {
+    const audit = [{ id: 'm', kind: MANUAL_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(), payload: { engine: 'manual', stepIndex: 0, recipient: 'joey.maggard@kroger.com', personaId: 1886, sequenceVersionId: 'v1', subject: 'doors versus spots', gmailSentMessageId: real.id, gmailThreadId: real.threadId, sentAt: real.sentAt } }];
+    const p = ledger([]);
+    p.gapAuditEvent.findMany = vi.fn(async ({ where }: any) => audit.filter((a) => a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind)))) as any;
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(t).toMatchObject({ state: 'waiting', stepIndex: 1, threadFrom: { gmailSentMessageId: '1a0da5d97f8142c0', gmailThreadId: '1a0da5c10f51fe73' } });
+    expect(t.state === 'waiting' && t.dueAt.slice(0, 10)).toBe('2026-10-01');
+    expect(audit.some((a) => (a.kind as string) === DRAFTED)).toBe(false);
   });
 });

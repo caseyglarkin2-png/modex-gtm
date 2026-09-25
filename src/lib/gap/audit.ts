@@ -61,7 +61,9 @@ export type GapAuditKind =
   | 'execution.gmail_drafted'
   | 'execution.gmail_draft_refused'
   | 'execution.gmail_draft_sent'
-  | 'execution.gmail_draft_discarded';
+  | 'execution.gmail_draft_discarded'
+  | 'execution.gmail_manual_sent'
+  | 'hypothesis.sibling_note';
 
 export interface HypothesisEventInput {
   hypothesisId: string;

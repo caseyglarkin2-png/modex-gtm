@@ -12,9 +12,11 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listHypotheses } from '@/lib/gap/hypothesis/service';
+import { loadThesisGroups, orderGroupsForReview, toThesisCard, withRecordedNotes } from '@/lib/gap/hypothesis/thesis-groups';
 import { HYPOTHESIS_STATUSES, type HypothesisStatus } from '@/lib/gap/taxonomy';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
+import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
 import { HypothesisList } from './hypothesis-list';
 
 export const dynamic = 'force-dynamic';
@@ -36,6 +38,9 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
   const params = (await searchParams) ?? {};
   const status = parseStatus(params.status);
   const { items } = await listHypotheses(prisma, { limit: 50, ...(status ? { status } : {}) });
+  // Account theses shared by 2+ people come first (grouped review), then the one-off table.
+  const groups = orderGroupsForReview(await loadThesisGroups(prisma)).filter((g) => !status || g.members.some((m) => m.status === status));
+  const cards = await withRecordedNotes(prisma, groups.map(toThesisCard));
 
   return (
     <div className="space-y-6">
@@ -47,6 +52,7 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
           Cited facts first in each drawer, seller inference below. Nothing advances without a cited fact.
         </p>
       </div>
+      <ThesisGroupReview cards={cards} />
       <HypothesisList items={items} status={status} />
     </div>
   );

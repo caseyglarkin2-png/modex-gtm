@@ -65,6 +65,8 @@ export interface ResearchInput {
   decisionId: string | null;
   actor: string;
   now: Date;
+  /** Extra run context kept on the ResearchRun (e.g. the sibling thesis fingerprint). */
+  context?: Record<string, unknown>;
 }
 
 export interface ResearchDeps {
@@ -188,7 +190,23 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
 
   await prisma.researchRun.update({
     where: { id: run.id },
-    data: { provider_status: { purpose: 'gap_research_this', hypothesisId: input.hypothesisId, decisionId: input.decisionId, problemFamily: input.problemFamily, notes, outcome, facts: facts.length, freshFacts: facts.filter((f) => f.fresh).length, rejected: rejected.length, conflicts } },
+    data: {
+      provider_status: {
+        purpose: 'gap_research_this',
+        hypothesisId: input.hypothesisId,
+        decisionId: input.decisionId,
+        problemFamily: input.problemFamily,
+        ...(input.context ?? {}),
+        notes,
+        outcome,
+        facts: facts.length,
+        freshFacts: facts.filter((f) => f.fresh).length,
+        rejected: rejected.length,
+        conflicts,
+        // The full result, so a thesis research run is reused instead of repeated.
+        result: JSON.parse(JSON.stringify({ runId: run.id, outcome, facts, rejected, conflicts, notes })),
+      },
+    },
   });
   await prisma.gapAuditEvent.create({
     data: { kind: 'research.completed', actor: input.actor, subject_type: 'research_run', subject_id: run.id, payload: { outcome, accountName: input.accountName, personaId: input.personaId, hypothesisId: input.hypothesisId, facts: facts.length, rejected: rejected.length } },

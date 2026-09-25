@@ -1,0 +1,68 @@
+/**
+ * GET  /api/gap/theses                     account thesis groups in review order
+ * POST /api/gap/theses  `{op, fingerprint, ...}`
+ *
+ *   op approve      `{hypothesisIds}`  APPROVE SELECTED SIBLINGS: the normal
+ *                   submit/approve transitions per row, each audited with the
+ *                   group action and the operator; per-row results. Ids outside
+ *                   the group are refused (409). Never activates, never sends.
+ *   op corroborate  `{force?}`         FIND CORROBORATING EVIDENCE: one research
+ *                   run for the whole thesis (reused 24h); corroborated,
+ *                   no_second_source or contradicts. Links nothing.
+ *   op attach       `{signalIds}`      link chosen verified facts to every
+ *                   editable sibling; frozen siblings are reported, not changed.
+ *
+ * Session only; gated like every hypothesis route (GAP_HYPOTHESIS_ENABLED).
+ */
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
+import { assertGapEnabled } from '@/lib/gap/flags';
+import { approveSelectedSiblings, attachEvidenceToThesis, corroborateThesis, loadThesisGroups, orderGroupsForReview } from '@/lib/gap/hypothesis/thesis-groups';
+
+export const dynamic = 'force-dynamic';
+export const maxDuration = 120;
+
+const Fp = z.string().regex(/^[0-9a-f]{64}$/);
+const Body = z.discriminatedUnion('op', [
+  z.object({ op: z.literal('approve'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50) }).strict(),
+  z.object({ op: z.literal('corroborate'), fingerprint: Fp, force: z.boolean().optional() }).strict(),
+  z.object({ op: z.literal('attach'), fingerprint: Fp, signalIds: z.array(z.string().min(1)).min(1).max(20) }).strict(),
+]);
+
+async function sessionEmail(): Promise<string | null> {
+  const email = (await auth())?.user?.email;
+  return typeof email === 'string' && email.length > 0 ? email : null;
+}
+
+export async function GET() {
+  const skip = assertGapEnabled('GAP_HYPOTHESIS_ENABLED');
+  if (skip) return NextResponse.json(skip, { status: 404 });
+  if (!(await sessionEmail())) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+  return NextResponse.json({ groups: orderGroupsForReview(await loadThesisGroups(prisma)) });
+}
+
+export async function POST(request: NextRequest) {
+  const skip = assertGapEnabled('GAP_HYPOTHESIS_ENABLED');
+  if (skip) return NextResponse.json(skip, { status: 404 });
+  const actor = await sessionEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+  const parsed = Body.safeParse(await request.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: 'invalid_body', field: parsed.error.issues[0]?.path.join('.') || 'body' }, { status: 400 });
+  const b = parsed.data;
+  const now = new Date();
+
+  if (b.op === 'approve') {
+    const r = await approveSelectedSiblings(prisma, { fingerprint: b.fingerprint, hypothesisIds: b.hypothesisIds, actor, now });
+    if (r.reason === 'group_not_found') return NextResponse.json(r, { status: 404 });
+    if (r.reason?.startsWith('not_in_group')) return NextResponse.json(r, { status: 409 });
+    return NextResponse.json(r);
+  }
+  if (b.op === 'corroborate') {
+    const r = await corroborateThesis(prisma, { fingerprint: b.fingerprint, actor, now, force: b.force });
+    return NextResponse.json(r, { status: r.ok ? 200 : 404 });
+  }
+  const r = await attachEvidenceToThesis(prisma, { fingerprint: b.fingerprint, signalIds: b.signalIds, actor });
+  return NextResponse.json(r, { status: r.reason === 'group_not_found' ? 404 : 200 });
+}

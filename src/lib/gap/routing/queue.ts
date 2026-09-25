@@ -320,17 +320,36 @@ async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Promise<vo
   if (items.length === 0 || typeof prisma?.gapAuditEvent?.findMany !== 'function') return;
   try {
     // Lazy: the queue module must not load the execution layer (Gmail, ledger) at import time.
-    const { DRAFT_SENT } = await import('../execution/draft-ledger');
+    const { DRAFT_SENT, DRAFTED, MANUAL_SENT } = await import('../execution/draft-ledger');
     const { computeNextTouch } = await import('../execution/next-touch');
+    // A sequence belongs to the PERSON: a send recorded on an earlier card for
+    // this person (e.g. Joey's hand-sent email) still drives today's card.
+    const since = new Date(Date.now() - 120 * 24 * 60 * 60 * 1000);
     const sentRows = (await prisma.gapAuditEvent.findMany({
-      where: { subject_type: 'routing_decision', subject_id: { in: items.map((i) => i.id) }, kind: DRAFT_SENT },
-      select: { subject_id: true },
-    })) as Array<{ subject_id: string }>;
-    const withSends = [...new Set(sentRows.map((r) => r.subject_id))].slice(0, MAX_TOUCH_EVALUATIONS);
+      where: { subject_type: 'routing_decision', kind: { in: [DRAFT_SENT, MANUAL_SENT] }, created_at: { gte: since } },
+      select: { subject_id: true, kind: true, payload: true },
+      take: 500,
+    })) as Array<{ subject_id: string; kind: string; payload: unknown }>;
+    const draftedRows = (await prisma.gapAuditEvent.findMany({
+      where: { subject_type: 'routing_decision', kind: DRAFTED, subject_id: { in: [...new Set(sentRows.map((r) => r.subject_id))] } },
+      select: { subject_id: true, payload: true },
+    })) as Array<{ subject_id: string; payload: unknown }>;
+    const personaOf = new Map<string, number>();
+    for (const r of [...sentRows, ...draftedRows]) {
+      const pid = (r.payload as { personaId?: unknown } | null)?.personaId;
+      if (typeof pid === 'number') personaOf.set(r.subject_id, pid);
+    }
+    const decisionForPersona = new Map<number, string>();
+    for (const r of sentRows) {
+      const pid = personaOf.get(r.subject_id);
+      if (pid !== undefined && !decisionForPersona.has(pid)) decisionForPersona.set(pid, r.subject_id);
+    }
+    const pairs = items
+      .map((i) => [i, typeof i.persona.id === 'number' ? decisionForPersona.get(i.persona.id) : undefined] as const)
+      .filter((p): p is readonly [QueueItem, string] => typeof p[1] === 'string')
+      .slice(0, MAX_TOUCH_EVALUATIONS);
     const now = new Date();
-    for (const id of withSends) {
-      const item = items.find((i) => i.id === id);
-      if (!item) continue;
+    for (const [item, id] of pairs) {
       try {
         const t = await computeNextTouch(prisma, id, now);
         if (t.state === 'not_started') continue;

@@ -83,6 +83,8 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  // Applies to: this hypothesis only, or every sibling sharing this account thesis.
+  const [scope, setScope] = useState<'this' | 'siblings'>('this');
 
   const frozen = !EDITABLE.has(String(status));
   const textReady = text.trim().length > 0;
@@ -141,7 +143,20 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
         return;
       }
       const already = Array.isArray(linkedPayload.already) && linkedPayload.already.length > 0;
-      setNotice(already ? 'Already linked' : registeredPayload.created === false ? 'Linked an existing fact' : 'Fact linked');
+      let siblingNote = '';
+      if (scope === 'siblings') {
+        const sib = await fetch(`/api/gap/hypotheses/${encodeURIComponent(hypothesisId)}/sibling-note`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ signalId: registeredPayload.id }),
+        });
+        const sibPayload = await readJson(sib);
+        const rows = Array.isArray(sibPayload.results) ? (sibPayload.results as Array<{ ok: boolean; detail: string }>) : [];
+        siblingNote = !sib.ok
+          ? `; siblings: ${sibPayload.reason === 'no_siblings' ? 'none share this thesis' : errorOf(sibPayload, sib)}`
+          : `; siblings: ${rows.filter((r) => r.ok && r.detail.startsWith('note linked')).length} linked, ${rows.filter((r) => r.detail.includes('frozen')).length} frozen (recorded, not merged), ${rows.filter((r) => !r.ok).length} failed`;
+      }
+      setNotice((already ? 'Already linked' : registeredPayload.created === false ? 'Linked an existing fact' : 'Fact linked') + siblingNote);
       reset();
       onLinked();
     } catch (caught) {
@@ -273,6 +288,17 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
           />
         </div>
       ) : null}
+
+      <fieldset className="flex flex-wrap items-center gap-3 text-xs" disabled={frozen || busy}>
+        <legend className="sr-only">Applies to</legend>
+        <span className="text-[var(--muted-foreground)]">Applies to:</span>
+        <label className="flex items-center gap-1">
+          <input type="radio" name="fact-scope" checked={scope === 'this'} onChange={() => setScope('this')} /> this hypothesis only
+        </label>
+        <label className="flex items-center gap-1">
+          <input type="radio" name="fact-scope" checked={scope === 'siblings'} onChange={() => setScope('siblings')} /> shared thesis siblings
+        </label>
+      </fieldset>
 
       <div className="flex flex-wrap items-center gap-3">
         <Button type="submit" size="sm" disabled={submitGate.disabled} title={submitGate.title}>
