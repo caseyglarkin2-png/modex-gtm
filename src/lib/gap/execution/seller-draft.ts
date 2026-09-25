@@ -52,6 +52,7 @@ export const EMAIL_ACTIONS: ReadonlySet<string> = new Set(['enroll_gap_sequence'
 export type SellerDraftRefusal =
   | 'decision_not_found'
   | 'decision_blocked'
+  | 'decision_superseded'
   | 'not_an_email_action'
   | 'no_hypothesis'
   | 'hypothesis_not_found'
@@ -146,9 +147,21 @@ export async function createSellerGmailDraft(
 
   const decision = await prisma.routingDecision.findUnique({
     where: { id: decisionId },
-    select: { id: true, lane: true, action: true, hypothesis_id: true, persona_id: true, account_name: true },
+    select: { id: true, lane: true, action: true, hypothesis_id: true, persona_id: true, account_name: true, created_at: true },
   });
   if (!decision) return { ok: false, reason: 'decision_not_found' };
+  // Routing moves on: an older "email" card for this person must not draft
+  // once a newer run said something else (research, block, hold).
+  const newer = decision.persona_id != null
+    ? await prisma.routingDecision.findFirst({
+        where: { persona_id: decision.persona_id, account_name: decision.account_name, created_at: { gt: decision.created_at } },
+        orderBy: { created_at: 'desc' },
+        select: { id: true, action: true, rule_id: true },
+      })
+    : null;
+  if (newer && !EMAIL_ACTIONS.has(newer.action)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_superseded', detail: `newer decision ${newer.id} is ${newer.action} (${newer.rule_id})` });
+  }
   if (decision.lane === 'blocked' || decision.action === 'do_not_contact') return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_blocked' });
   if (!EMAIL_ACTIONS.has(decision.action)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'not_an_email_action', detail: decision.action });
   if (!decision.hypothesis_id) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_hypothesis' });

@@ -78,3 +78,31 @@ describe('<SellerDraftPanel>', () => {
     expect(screen.getAllByRole('button', { name: 'Check if sent' })).toHaveLength(1);
   });
 });
+
+describe('<SellerDraftPanel> approval deep link (closeout)', () => {
+  it('a pending review on this exact copy shows why and approves it in place, then reloads the pack', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    render(<SellerDraftPanel {...base} emailReady={false} pendingApproval={{ id: 'apr-42', reason: 'review_required: C15' }} />);
+    const box = screen.getByTestId('draft-review');
+    expect(box).toHaveTextContent('Why: review_required: C15');
+    fireEvent.click(screen.getByRole('button', { name: 'Approve this copy' }));
+    await waitFor(() => expect(refreshMock).toHaveBeenCalled());
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe('/api/revops/send-approvals');
+    expect(init.method).toBe('PATCH');
+    expect(JSON.parse(String(init.body))).toEqual({ id: 'apr-42', action: 'approve' });
+    expect(fetchMock.mock.calls.some(([u]) => String(u).includes('gmail-draft'))).toBe(false);
+  });
+
+  it('Check copy that opens a review surfaces Approve this copy for the returned approval id', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+      new Response(JSON.stringify({ error: 'copy_review_required', detail: 'C15', approvalRequestId: 'apr-7' }), { status: 409 }),
+    );
+    render(<SellerDraftPanel {...base} emailReady={false} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Check copy' }));
+    await screen.findByRole('button', { name: 'Approve this copy' });
+    fetchMock.mockResolvedValueOnce(new Response('{}', { status: 200 }));
+    fireEvent.click(screen.getByRole('button', { name: 'Approve this copy' }));
+    await waitFor(() => expect(JSON.parse(String((fetchMock.mock.calls[1][1] as RequestInit).body))).toEqual({ id: 'apr-7', action: 'approve' }));
+  });
+});

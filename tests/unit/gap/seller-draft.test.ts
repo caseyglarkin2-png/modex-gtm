@@ -61,7 +61,12 @@ function prismaOf(d: Db) {
   return {
     routingDecision: {
       findUnique: vi.fn(async ({ where }: any) => d.decisions.find((x) => x.id === where.id) ?? null),
-      findFirst: vi.fn(async ({ where }: any) => d.decisions.find((x) => x.hypothesis_id === where.hypothesis_id && x.action === where.action) ?? null),
+      findFirst: vi.fn(async ({ where }: any) => {
+        if (where.created_at?.gt) {
+          return d.decisions.filter((x) => x.persona_id === where.persona_id && x.created_at > where.created_at.gt).sort((a, b) => b.created_at - a.created_at)[0] ?? null;
+        }
+        return d.decisions.find((x) => x.hypothesis_id === where.hypothesis_id && x.action === where.action) ?? null;
+      }),
       updateMany: vi.fn(async () => ({ count: 0 })),
       update: vi.fn(),
     },
@@ -248,6 +253,16 @@ describe('createSellerGmailDraft', () => {
     expect(r).toEqual({ ok: true, checked: true, compileId: 'cmp-1' });
     expect(gmail.createGmailDraft).not.toHaveBeenCalled();
     expect(d.audit.some((a) => a.kind === DRAFTED)).toBe(false);
+  });
+
+  it('an email card superseded by a newer research decision for the same person refuses (Joey after R12b)', async () => {
+    const d = db();
+    d.decisions.push({ id: 'dec-joey-new', lane: 'work_queue', action: 'research_required', hypothesis_id: 'hyp-kr', persona_id: 1886, account_name: 'Kroger', rule_id: 'evidence_thin', inputs_snapshot: {}, created_at: new Date(NOW.getTime() + 60_000) });
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d, 'pass', gmail));
+    expect(r).toMatchObject({ ok: false, reason: 'decision_superseded' });
+    expect(!r.ok && r.detail).toContain('evidence_thin');
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
   });
 
   it('rejected copy never drafts and names the failing checks', async () => {

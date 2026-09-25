@@ -36,12 +36,14 @@ export interface SellerDraftPanelProps {
   drafts: DraftRow[];
   /** Why the draft button is unavailable even when copy is ready (blocked card, no email...). Null when eligible. */
   ineligibleReason: string | null;
+  /** The pending SendApprovalRequest for exactly this copy, if the compiler asked for review. */
+  pendingApproval?: { id: string; reason: string } | null;
 }
 
 type Outcome =
   | { kind: 'drafted'; recipient: string; subject: string; at: string; already: boolean; ledgerError?: string }
   | { kind: 'cleared' }
-  | { kind: 'review'; detail: string }
+  | { kind: 'review'; detail: string; approvalId: string | null }
   | { kind: 'refused'; reason: string; detail: string };
 
 const REASON_COPY: Record<string, string> = {
@@ -59,7 +61,7 @@ function when(iso: string): string {
   return Number.isNaN(d.getTime()) ? iso : d.toLocaleString();
 }
 
-export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, drafts, ineligibleReason }: SellerDraftPanelProps) {
+export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, drafts, ineligibleReason, pendingApproval = null }: SellerDraftPanelProps) {
   const router = useRouter();
   const [busy, setBusy] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
@@ -92,7 +94,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
         });
         router.refresh();
       } else if (data.error === 'copy_review_required') {
-        setOutcome({ kind: 'review', detail: String(data.detail ?? '') });
+        setOutcome({ kind: 'review', detail: String(data.detail ?? ''), approvalId: typeof data.approvalRequestId === 'string' ? data.approvalRequestId : null });
       } else {
         const reason = String(data.error ?? `HTTP ${res.status}`);
         const detail = [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ');
@@ -104,6 +106,29 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
       setBusy(null);
     }
   }
+
+  const [approveError, setApproveError] = useState<string | null>(null);
+  /** Approve THIS copy through the existing approval resolver, then reload the pack (it re-reads clearance). */
+  async function approve(approvalId: string) {
+    setBusy('approve');
+    setApproveError(null);
+    try {
+      const res = await fetch('/api/revops/send-approvals', {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: approvalId, action: 'approve' }),
+      });
+      if (!res.ok) setApproveError(`Approval failed (HTTP ${res.status}).`);
+      else {
+        setOutcome(null);
+        router.refresh();
+      }
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  const review = outcome?.kind === 'review' ? { id: outcome.approvalId, reason: outcome.detail } : pendingApproval;
 
   async function reconcile(gmailDraftId: string) {
     setBusy(`r:${gmailDraftId}`);
@@ -163,13 +188,22 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
         </div>
       ) : null}
       {outcome?.kind === 'cleared' ? <p className="text-xs">Copy cleared. You can create the draft now.</p> : null}
-      {outcome?.kind === 'review' ? (
-        <div data-testid="draft-review" className="space-y-1 text-xs">
-          <p>{REASON_COPY.copy_review_required}</p>
-          {outcome.detail ? <p className="text-[var(--muted-foreground)]">Why: {outcome.detail}</p> : null}
-          <a href="/queue" className="underline">
-            Open the approval queue
-          </a>
+      {!emailReady && !ineligibleReason && review ? (
+        <div data-testid="draft-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs">
+          <p className="font-semibold">This exact email needs your review before it can be drafted.</p>
+          {review.reason ? <p className="text-[var(--muted-foreground)]">Why: {review.reason}</p> : null}
+          <div className="flex flex-wrap items-center gap-2">
+            {review.id ? (
+              <Button type="button" size="sm" disabled={busy !== null} onClick={() => approve(review.id!)}>
+                {busy === 'approve' ? 'Approving...' : 'Approve this copy'}
+              </Button>
+            ) : null}
+            <a href="/queue" className="underline">
+              Open the approval queue
+            </a>
+          </div>
+          <p className="text-[11px] text-[var(--muted-foreground)]">Approving records your review of the copy above. It does not draft or send anything; this page reloads with Create Gmail draft.</p>
+          {approveError ? <p role="alert" className="text-[var(--destructive)]">{approveError}</p> : null}
         </div>
       ) : null}
       {outcome?.kind === 'refused' ? (

@@ -50,6 +50,7 @@ export interface PackDecision {
   hypothesis_id: string | null;
   account_name: string;
   inputs_snapshot: unknown;
+  created_at: Date;
 }
 
 export interface PackPersona {
@@ -234,7 +235,7 @@ export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArg
   let personaSource: ActionPack['personaSource'] = 'none';
   let personaRefused: string | null = null;
 
-  const DECISION_SELECT = { id: true, rule_id: true, action: true, lane: true, persona_id: true, hypothesis_id: true, account_name: true, inputs_snapshot: true };
+  const DECISION_SELECT = { id: true, rule_id: true, action: true, lane: true, persona_id: true, hypothesis_id: true, account_name: true, inputs_snapshot: true, created_at: true };
   if (args.decisionId) {
     const d: PackDecision | null = await prisma.routingDecision.findUnique({ where: { id: args.decisionId }, select: DECISION_SELECT });
     if (d && d.account_name === hypothesis.account_name) {
