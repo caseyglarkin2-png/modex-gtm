@@ -53,10 +53,11 @@ describe('hubspotContactUrl / hubspotCompanyUrl', () => {
     expect(hubspotCompanyUrl('123')).toBe('https://app.hubspot.com/contacts/3819073/company/123');
   });
 
-  it('never invents a link when the portal id is not configured', () => {
+  it('falls back to the YardFlow portal when production never set the env var (final pass)', () => {
     vi.stubEnv('NEXT_PUBLIC_HUBSPOT_PORTAL_ID', '');
-    expect(hubspotContactUrl('900')).toBeNull();
-    expect(hubspotCompanyUrl('123')).toBeNull();
+    vi.stubEnv('HUBSPOT_PORTAL_ID', '');
+    expect(hubspotContactUrl('900')).toBe('https://app.hubspot.com/contacts/3819073/contact/900');
+    expect(hubspotCompanyUrl('123')).toBe('https://app.hubspot.com/contacts/3819073/company/123');
   });
 
   it('never invents a link when the id itself is missing', () => {

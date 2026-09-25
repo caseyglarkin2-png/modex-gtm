@@ -147,7 +147,9 @@ describe('<DecisionCard>', () => {
     ['one_off_email', 'emailed'],
     ['linkedin_manual_task', 'linkedin_messaged'],
     ['nurture', 'deferred'],
-    ['do_not_contact', 'do_not_contact'],
+    // do_not_contact is not here: the router only emits it through R0 (blocked),
+    // and cardReadiness treats the action as a block even if a payload forgets
+    // `blocked`, so there is no "I did this" to press (final pass).
   ] as const)('"I did this" on %s records %s', (action, humanAction) => {
     const onAct = vi.fn();
     render(<DecisionCard item={item({ action })} onAct={onAct} />);
@@ -205,7 +207,7 @@ describe('<DecisionCard> blocked (safety refusal) cards', () => {
     render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'do_not_contact', ruleId: 'suppressed' })} onAct={() => {}} />);
     expect(screen.getByText('System block')).toBeInTheDocument();
     expect(screen.getByTestId('blocked-panel')).toHaveTextContent('Do not contact');
-    expect(screen.getByTestId('blocked-panel')).toHaveTextContent('This person or account is suppressed');
+    expect(screen.getByTestId('blocked-panel')).toHaveTextContent('said stop');
     expect(screen.queryByText('Casey actually did')).toBeNull();
     expect(screen.queryByRole('button', { name: 'I did this' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'I did something else' })).toBeNull();
@@ -215,8 +217,9 @@ describe('<DecisionCard> blocked (safety refusal) cards', () => {
     render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'research_required', ruleId: 'suppression_unknown' })} onAct={() => {}} />);
     const panel = screen.getByTestId('blocked-panel');
     expect(panel).toHaveTextContent('Suppression status unknown');
-    expect(panel).toHaveTextContent('No outbound action is allowed until suppression can be verified');
-    expect(panel).toHaveTextContent('Retry routing when the suppression service is available');
+    expect(panel).toHaveTextContent('Nothing outbound is allowed until it can be verified');
+    expect(panel).toHaveTextContent('No do-not-contact was recorded because of this');
+    expect(panel).toHaveTextContent('Run routing again when the suppression service answers');
     expect(screen.queryByRole('button', { name: 'I did this' })).toBeNull();
   });
 
@@ -278,19 +281,34 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
 
   it('links to the action pack (the hypothesis preview) for an outreach-eligible card with a hypothesis', () => {
     render(<DecisionCard item={item({ action: 'enroll_gap_sequence' })} onAct={() => {}} />);
-    expect(screen.getByRole('link', { name: /Open action pack/ })).toHaveAttribute('href', '/gap/preview/hyp_1');
+    expect(screen.getByRole('link', { name: /Open action pack/ })).toHaveAttribute('href', '/gap/preview/hyp_1?personaId=41&decisionId=dec_1');
   });
 
-  it('never shows an action pack link for call_now or research_required (not outreach-copy actions)', () => {
-    render(<DecisionCard item={item({ action: 'call_now' })} onAct={() => {}} />);
-    expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
+  it('call_now leads with the tel: link and offers the action pack (call pack) as the secondary link (final pass)', () => {
+    render(<DecisionCard item={item({ action: 'call_now', persona: { ...item().persona, phone: '(555) 123-4567' } })} onAct={() => {}} />);
+    const actionable = screen.getByTestId('readiness-actionable');
+    expect(within(actionable).getByRole('link', { name: /^Call / })).toHaveAttribute('href', 'tel:5551234567');
+    expect(within(actionable).getByRole('link', { name: /Open action pack/ })).toBeInTheDocument();
+  });
+
+  it('call_now without a phone is a missing prerequisite with a fix link, never a bare name', () => {
+    render(<DecisionCard item={item({ action: 'call_now', persona: { ...item().persona, phone: null } })} onAct={() => {}} />);
+    expect(screen.getByTestId('missing-prerequisite')).toHaveTextContent('No usable phone number');
+    expect(screen.queryByTestId('readiness-actionable')).toBeNull();
+  });
+
+  it('a soft historical bounce card shows the warning, not a do-not-contact block', () => {
+    render(<DecisionCard item={item({ action: 'linkedin_manual_task', persona: { ...item().persona, linkedinUrl: 'https://linkedin.com/in/x' }, suppression: { class: 'soft_deliverability', hits: ['modex_do_not_contact'] } })} onAct={() => {}} />);
+    expect(screen.getByTestId('suppression-warning')).toHaveTextContent('Historical bounce, not a do-not-contact');
+    expect(screen.queryByTestId('blocked-panel')).toBeNull();
   });
 
   it('research_required with no hypothesis shows the honest missing-prerequisite panel, never a fabricated outreach draft', () => {
-    render(<DecisionCard item={item({ action: 'research_required', hypothesis: null })} onAct={() => {}} />);
-    const panel = screen.getByTestId('research-required-panel');
-    expect(panel).toHaveTextContent('Research required');
-    expect(panel).toHaveTextContent('no approved hypothesis');
+    render(<DecisionCard item={item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null })} onAct={() => {}} />);
+    const panel = screen.getByTestId('missing-prerequisite');
+    expect(panel).toHaveTextContent('Missing prerequisite');
+    expect(panel).toHaveTextContent('No approved hypothesis');
+    expect(within(panel).getByRole('link', { name: /Review or create a hypothesis/ })).toHaveAttribute('href', '/gap/hypotheses?status=draft');
     expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
     expect(screen.queryByTestId('rendered-email')).toBeNull();
   });
@@ -299,7 +317,7 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'do_not_contact', ruleId: 'suppressed' })} onAct={() => {}} />);
     expect(screen.queryByTestId('contact-buttons')).toBeNull();
     expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
-    expect(screen.queryByTestId('research-required-panel')).toBeNull();
+    expect(screen.queryByTestId('missing-prerequisite')).toBeNull();
   });
 
   it('keeps the routing internals (rule id, explain, evidence counts) available but collapsed below the fold', () => {

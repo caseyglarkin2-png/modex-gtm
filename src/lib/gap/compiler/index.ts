@@ -36,7 +36,7 @@ export type {
 export type { ClaimsValidator, ClaimsValidationContext, ClaimsValidationResult } from './checks/c07-structure';
 
 /** Bump on any change to a check, the verdict rule or the critic mapping. */
-export const COMPILER_VERSION = 'gap-compiler.2026-09-23.2';
+export const COMPILER_VERSION = 'gap-compiler.2026-09-25.1';
 
 /** [code, check] pairs in code order. The single source of the roster. */
 const ROSTER: ReadonlyArray<readonly [string, Check]> = [

@@ -39,12 +39,12 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
 import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler/preview-rows';
-import { getHypothesis } from '@/lib/gap/hypothesis/service';
-import { resolveEnrollTarget } from '@/lib/gap/routing/rules';
-import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
+import { loadActionPack } from '@/lib/gap/execution/action-pack';
+import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
+import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
+import { gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
-import { parseSteps } from '@/lib/gap/sequence/steps';
-import { firstNameOf, renderStepCopy } from '@/lib/gap/sequence/render';
+import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
@@ -60,6 +60,7 @@ import {
   type CompileRowLike,
   type ReportApproval,
 } from '@/components/gap/compile-report';
+import { SellerDraftPanel, type DraftRow } from '@/components/gap/seller-draft-panel';
 import { EnrollShadowButton } from './enroll-shadow-button';
 
 export const dynamic = 'force-dynamic';
@@ -71,132 +72,36 @@ type Obj = Record<string, unknown>;
 function isObj(v: unknown): v is Obj {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
-function optStr(v: unknown): string | null {
-  return typeof v === 'string' && v.trim().length > 0 ? v : null;
-}
-
-const TARGETS: ReadonlySet<string> = new Set<EnrollTarget>(['hubspot_native', 'modex_queue', 'build_required']);
-const ENGINE_FOR_TARGET: Record<EnrollTarget, string | null> = {
-  hubspot_native: 'hubspot_native',
-  modex_queue: 'modex_draft_queue',
-  build_required: null,
-};
-
-interface DecisionLite {
-  id: string;
-  rule_id: string;
-  inputs_snapshot: unknown;
-}
-
-function top100Of(decision: DecisionLite | null): RoutingTop100Input | null {
-  const snap = decision?.inputs_snapshot;
-  if (!isObj(snap) || !isObj(snap.persona) || !isObj(snap.persona.top100)) return null;
-  const t = snap.persona.top100;
-  return {
-    eligibility: optStr(t.eligibility) ?? '',
-    sequenceBlock: optStr(t.sequenceBlock),
-    hubspotSequenceId: optStr(t.hubspotSequenceId),
-    sequenceName: optStr(t.sequenceName),
-  };
-}
-
-function targetOf(decision: DecisionLite | null): EnrollTarget {
-  const snap = decision?.inputs_snapshot;
-  const stored = isObj(snap) ? optStr(snap.target) : null;
-  if (stored && TARGETS.has(stored)) return stored as EnrollTarget;
-  return resolveEnrollTarget({ persona: { top100: top100Of(decision) } } as unknown as RoutingInputs);
-}
-
-interface VersionRow {
-  id: string;
-  family_id: string;
-  version: number;
-  status: string;
-  steps: unknown;
-  family?: { id: string; name: string | null; engine: string } | null;
-}
-
-const VERSION_SELECT = {
-  id: true,
-  family_id: true,
-  version: true,
-  status: true,
-  steps: true,
-  family: { select: { id: true, name: true, engine: true } },
-} as const;
-
-async function newestVersionOfFamily(familyId: string): Promise<VersionRow | null> {
-  return prisma.sequenceVersion.findFirst({
-    where: { family_id: familyId, status: { in: ['draft', 'frozen'] } },
-    orderBy: { version: 'desc' },
-    select: VERSION_SELECT,
-  });
-}
-
-async function resolveVersion(
-  hypothesis: { sequence_version_id: string | null; sequence_family_id: string | null; problem_family: string },
-  target: EnrollTarget,
-): Promise<VersionRow | null> {
-  if (hypothesis.sequence_version_id) {
-    const own = await prisma.sequenceVersion.findUnique({ where: { id: hypothesis.sequence_version_id }, select: VERSION_SELECT });
-    if (own) return own;
-  }
-  if (hypothesis.sequence_family_id) {
-    const v = await newestVersionOfFamily(hypothesis.sequence_family_id);
-    if (v) return v;
-  }
-  const engine = ENGINE_FOR_TARGET[target];
-  const families: Array<{ id: string }> = await prisma.sequenceFamily.findMany({
-    where: { problem_family: hypothesis.problem_family, archived_at: null, ...(engine ? { engine } : {}) },
-    orderBy: { created_at: 'desc' },
-    select: { id: true },
-    take: 5,
-  });
-  for (const f of families) {
-    const v = await newestVersionOfFamily(f.id);
-    if (v) return v;
-  }
-  return null;
-}
 
 function stepCopy(steps: Array<{ templates?: { subjectTemplate?: string | null; bodyTemplate?: string | null } | null }>, i: number) {
   const t = steps[i]?.templates ?? null;
   return { subject: t?.subjectTemplate ?? null, body: t?.bodyTemplate ?? null };
 }
 
-export default async function PreviewPage({ params }: { params: Promise<Params> }) {
+type Search = { personaId?: string; decisionId?: string };
+
+export default async function PreviewPage({ params, searchParams }: { params: Promise<Params>; searchParams?: Promise<Search> }) {
   if (assertGapEnabled('GAP_MESSAGE_COMPILER_ENABLED')) notFound();
 
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
 
   const { hypothesisId } = await params;
-  const hypothesis = await getHypothesis(prisma, hypothesisId);
-  if (!hypothesis) notFound();
+  const search = (await searchParams) ?? {};
+  const personaIdParam = search.personaId && /^\d+$/.test(search.personaId) ? Number(search.personaId) : null;
+  const decisionIdParam = search.decisionId?.trim() || null;
 
-  const persona = hypothesis.primary_persona_id
-    ? await prisma.persona.findUnique({
-        where: { id: hypothesis.primary_persona_id },
-        select: { id: true, name: true, title: true, email: true, phone: true, linkedin_url: true, hubspot_contact_id: true },
-      })
-    : null;
+  // One loader for the page AND the draft service (action-pack.ts): the copy
+  // shown here is byte-for-byte the copy a draft would carry, for the person
+  // on the card, judged by the compile row for exactly this copy.
+  const pack = await loadActionPack(prisma, { hypothesisId, personaId: personaIdParam, decisionId: decisionIdParam });
+  if (!pack) notFound();
+  const { hypothesis, persona, decision, target, top100, version, steps } = pack;
 
   const account = await prisma.account.findUnique({
     where: { name: hypothesis.account_name },
     select: { hubspot_company_id: true },
   });
-
-  const decision: DecisionLite | null = await prisma.routingDecision.findFirst({
-    where: { hypothesis_id: hypothesis.id, action: 'enroll_gap_sequence' },
-    orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
-    select: { id: true, rule_id: true, inputs_snapshot: true },
-  });
-  const target = targetOf(decision);
-  const top100 = top100Of(decision);
-
-  const version = await resolveVersion(hypothesis, target);
-  const parsed = version ? parseSteps(version.steps) : null;
-  const steps = parsed && parsed.ok ? parsed.steps.steps : [];
 
   let reportSteps: CompileReportStep[] = [];
   let templateSteps: CompileReportStep[] = [];
@@ -232,22 +137,42 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
 
   const cleared = allStepsCleared(reportSteps);
 
-  // The fully rendered, placeholder-free step-0 copy (Seller Action Center,
-  // dogfood fix 2026-09-25). `renderStepCopy`'s QUEUED copy is exactly "ready
-  // to send" text: markers and {{tokens}} resolved, nothing left to fill in.
-  // Gated by the SAME compiler verdict (reportSteps[0]) the enroll button
-  // already uses, so this never claims "ready to send" when the compiler
-  // has not cleared it.
-  const step0 = steps[0] as { templates?: { subjectTemplate?: string | null; bodyTemplate?: string | null } | null } | undefined;
-  const renderedEmail =
-    persona && step0?.templates
-      ? renderStepCopy(
-          { subject: step0.templates.subjectTemplate ?? '', body: step0.templates.bodyTemplate ?? '' },
-          { firstName: firstNameOf(persona.name), account: hypothesis.account_name, observation: hypothesis.observation },
-        )
-      : null;
-  const step0Verdict = reportSteps[0]?.verdict ?? 'missing';
-  const emailReady = renderedEmail !== null && renderedEmail.unrendered === null && step0Verdict === 'pass';
+  // Ready to send means the compiler cleared THIS exact rendered copy (a pass,
+  // or a review Casey approved), not merely that some step-0 row exists.
+  const renderedEmail = pack.rendered;
+  const emailReady = pack.emailReady;
+  const compileNote = !pack.compile
+    ? 'Not compiled yet. Check copy runs the compiler on exactly this email.'
+    : pack.compile.verdict === 'review_required' && !pack.compile.approved
+      ? `Compiled: needs review (approval ${pack.compile.approvalStatus ?? 'not requested'}).`
+      : pack.compile.verdict === 'reject'
+        ? 'Compiled: rejected. See the report below.'
+        : null;
+
+  // The draft panel is for an email card opened from the Work Queue.
+  const isEmailCard = decision != null && EMAIL_ACTIONS.has(decision.action) && decision.lane !== 'blocked' && pack.personaSource === 'decision';
+  const draftIneligible = !decision || pack.personaSource !== 'decision'
+    ? 'Open this action pack from a Work Queue card to create a Gmail draft for that person.'
+    : !isEmailCard
+      ? 'This card does not recommend email, so there is no draft to create.'
+      : !persona?.email
+        ? 'No email address on file for this person.'
+        : persona.do_not_contact
+          ? 'This person carries a do-not-contact flag. Email stays blocked at send; no draft.'
+          : hypothesis.status !== 'active'
+            ? 'The hypothesis is not active.'
+            : null;
+  const drafts: DraftRow[] = decision
+    ? (await listDraftRecords(prisma, decision.id)).map((d) => ({
+        gmailDraftId: d.drafted.gmailDraftId,
+        recipient: d.drafted.recipient,
+        subject: d.drafted.subject,
+        createdAt: d.drafted.createdAt,
+        fate: d.fate,
+        sentAt: d.sent?.sentAt ?? null,
+        gmailSentMessageId: d.sent?.gmailSentMessageId ?? null,
+      }))
+    : [];
 
   const callPack =
     persona && renderedEmail
@@ -285,6 +210,11 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
         <HypothesisStatusBadge status={hypothesis.status} />
       </div>
 
+      {pack.personaRefused ? (
+        <p role="alert" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
+          The person requested for this action pack does not belong to {hypothesis.account_name} ({pack.personaRefused.replace(/_/g, ' ')}). Nothing is rendered for them.
+        </p>
+      ) : null}
       <FactBlock observation={hypothesis.observation} signals={signals as never} />
       <HypothesisBlock
         problemHypothesis={hypothesis.problem_hypothesis}
@@ -387,10 +317,31 @@ export default async function PreviewPage({ params }: { params: Promise<Params> 
           </div>
           {!emailReady ? (
             <p className="text-xs text-[var(--muted-foreground)]">
-              This copy has not cleared the compiler yet (see the report below for the exact failing checks). It is shown for review, not for sending.
+              This copy has not cleared the compiler yet. It is shown for review, not for sending.{compileNote ? ` ${compileNote}` : ''}
             </p>
           ) : null}
         </section>
+      ) : (
+        <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
+          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
+          <p className="mt-1">
+            {!persona
+              ? 'No person is attached to this action pack.'
+              : !version
+                ? `No GAP sequence family exists for ${String(hypothesis.problem_family).replace(/_/g, ' ')} yet, so there is no email to render.`
+                : 'The sequence has no step 0 copy to render.'}
+          </p>
+        </section>
+      )}
+
+      {renderedEmail && decision ? (
+        <SellerDraftPanel
+          decisionId={decision.id}
+          emailReady={emailReady}
+          senderIdentity={gmailSenderAddress()}
+          drafts={drafts}
+          ineligibleReason={draftIneligible}
+        />
       ) : null}
 
       {callPack ? (

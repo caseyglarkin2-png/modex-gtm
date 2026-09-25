@@ -302,11 +302,53 @@ export const checkObservationUnsupported: Check = (draft, ctx) => {
     }
   }
 
+  const subjectSpecific = unsupportedSubjectSpecific(draft.subject, draft.body);
+  if (subjectSpecific) {
+    const subject = draft.subject.trim();
+    return fail(
+      C01_CODE,
+      `subject names "${subjectSpecific}", which the body never states; a subject is sent uncited, so every place, name or count in it must come from the cited body: "${subject}"`,
+      spanOf(draft.subject, subjectSpecific),
+    );
+  }
+
   return pass(
     C01_CODE,
     `${markers.length} marker(s) + ${extraIds.length} evidence_ids resolve to fresh evidence; every number is cited or canon`,
   );
 };
+
+/** Count words a subject can use to assert a prospect fact ("Six plants", "Three regions"). "one" is too common to count. */
+const SUBJECT_COUNT_WORDS = new Set(['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'dozen']);
+
+/**
+ * Final pass (2026-09-25): the subject line is sent with no citation, and the
+ * seed family subjects carried template specifics ("Doors versus spots at
+ * Fontana", "Six plants and the forks") that would reach any account the
+ * family was rendered for. A specific in the subject (a digit, a count word,
+ * or a capitalised word after the first) must appear in the body, where C01's
+ * marker and number rules already hold it to cited evidence. Returns the
+ * first unsupported token, or null.
+ */
+export function unsupportedSubjectSpecific(subject: string, body: string): string | null {
+  const words = subject.trim().split(/\s+/).map((w) => w.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, '')).filter(Boolean);
+  const lowerBody = body.toLowerCase();
+  // In a Title Case subject every word is capitalised, so a capital says
+  // nothing about proper nouns; C15 already flags Title Case for review.
+  const rest = words.slice(1);
+  const titleCase = rest.length > 0 && rest.filter((w) => /^[A-Z]/.test(w)).length * 2 >= rest.length;
+  for (let i = 0; i < words.length; i += 1) {
+    const w = words[i];
+    const lower = w.toLowerCase();
+    const isDigit = /\d/.test(w);
+    const isCount = SUBJECT_COUNT_WORDS.has(lower);
+    const isProper = !titleCase && i > 0 && /^[A-Z][a-z]+$/.test(w);
+    if (!isDigit && !isCount && !isProper) continue;
+    const re = new RegExp(`(?<![a-z0-9])${escapeRe(lower)}(?![a-z0-9])`);
+    if (!re.test(lowerBody)) return w;
+  }
+  return null;
+}
 
 // ---------------------------------------------------------------------------
 // C05 PROOF_UNSUPPORTED

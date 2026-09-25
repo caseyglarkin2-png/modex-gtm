@@ -129,6 +129,7 @@ describe('RULES ordering', () => {
     expect(RULES.map((r) => r.id)).toEqual([
       'suppressed',
       'suppression_unknown',
+      'suppression_review',
       'tam_out',
       'in_flight',
       'reply_pending',
@@ -154,43 +155,90 @@ describe('RULES ordering', () => {
 });
 
 describe('routePersona, one rule at a time', () => {
-  it('R0 suppressed: verdict suppressed routes do_not_contact, blocked, lane blocked, names the leg', () => {
+  it('R0 suppressed: a hard-compliance leg routes do_not_contact, blocked, lane blocked, names the leg', () => {
     const i = base();
-    i.suppression = { verdict: 'suppressed', legs: { unsubscribed: 'clear', clawd: 'hit' } };
+    i.suppression = { verdict: 'suppressed', legs: { unsubscribed: 'clear', hubspot_optout: 'hit' } };
     const d = decision(routePersona(i));
     expect(d.ruleId).toBe('suppressed');
     expect(d.action).toBe('do_not_contact');
     expect(d.lane).toBe('blocked');
     expect(d.blocked).toBe(true);
-    expect(d.reason).toBe('suppressed:clawd');
-    expect(d.explain.whyAction).toContain('clawd');
+    expect(d.reason).toBe('suppressed:hubspot_optout');
+    expect(d.explain.whyAction).toContain('hubspot_optout');
   });
 
-  it('R0 also fires on persona.doNotContact with a clear remote verdict, naming the modex_do_not_contact leg (R2-1)', () => {
+  it('R0 names every leg when a hard leg and the local column both fire, never duplicating the modex leg (R2-1)', () => {
+    const both = base();
+    both.persona.doNotContact = true;
+    both.suppression = { verdict: 'suppressed', legs: { verbal_do_not_call: 'hit' } };
+    const d = decision(routePersona(both));
+    expect(d.ruleId).toBe('suppressed');
+    expect(d.reason).toBe('suppressed:verbal_do_not_call,modex_do_not_contact');
+
+    const dup = base();
+    dup.persona.doNotContact = true;
+    dup.suppression = { verdict: 'suppressed', legs: { modex_do_not_contact: 'hit', unsubscribed: 'hit' } };
+    expect(decision(routePersona(dup)).reason).toBe('suppressed:modex_do_not_contact,unsubscribed');
+  });
+
+  it('R0c suppression_review: the local column with no provenance is review-required research, not a blocked permanent DNC', () => {
     const i = base();
     i.persona.doNotContact = true;
     i.suppression = { verdict: 'clear', legs: { clawd: 'clear' } };
     const d = decision(routePersona(i));
-    expect(d.ruleId).toBe('suppressed');
-    expect(d.action).toBe('do_not_contact');
-    expect(d.lane).toBe('blocked');
-    expect(d.blocked).toBe(true);
-    expect(d.reason).toBe('suppressed:modex_do_not_contact');
-    expect(d.explain.whyAction).toContain('modex_do_not_contact');
+    expect(d.ruleId).toBe('suppression_review');
+    expect(d.action).toBe('research_required');
+    expect(d.lane).toBe('work_queue');
+    expect(d.blocked).toBe(false);
+    expect(d.reason).toBe('suppression_review:modex_do_not_contact');
+    expect(d.explain.whyAction).toContain('cannot be proven');
   });
 
-  it('R0 names both legs when the remote verdict and persona.doNotContact both fire, and never duplicates the modex leg (R2-1)', () => {
-    const both = base();
-    both.persona.doNotContact = true;
-    both.suppression = { verdict: 'suppressed', legs: { clawd: 'hit' } };
-    const d = decision(routePersona(both));
-    expect(d.ruleId).toBe('suppressed');
-    expect(d.reason).toBe('suppressed:clawd,modex_do_not_contact');
+  it('R0c: a clawd do_not_send hit (reason not on the wire) is review, never outreach', () => {
+    const i = withHotTrigger(base());
+    i.suppression = { verdict: 'suppressed', legs: { clawd_do_not_send: 'hit' } };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('suppression_review');
+    expect(d.action).toBe('research_required');
+  });
 
-    const dup = base();
-    dup.persona.doNotContact = true;
-    dup.suppression = { verdict: 'suppressed', legs: { modex_do_not_contact: 'hit' } };
-    expect(decision(routePersona(dup)).reason).toBe('suppressed:modex_do_not_contact');
+  it('soft historical bounce (General Mills shape) is NOT a DNC: routes call/LinkedIn, never an email action', () => {
+    const hot = withHotTrigger(base());
+    hot.persona.doNotContact = true;
+    hot.persona.emailStatus = 'bounced';
+    hot.suppression = { verdict: 'suppressed', legs: { clawd: 'clear', modex: 'clear', modex_do_not_contact: 'hit' } };
+    const d = decision(routePersona(hot));
+    expect(d.ruleId).toBe('hot_call');
+    expect(d.blocked).toBe(false);
+
+    const cold = base();
+    cold.persona.doNotContact = true;
+    cold.persona.emailStatus = 'bounced';
+    cold.suppression = { verdict: 'suppressed', legs: { modex_do_not_contact: 'hit' } };
+    const c = decision(routePersona(cold));
+    expect(c.ruleId).toBe('linkedin');
+    expect(c.action).toBe('linkedin_manual_task');
+  });
+
+  it('hard invalid address: email off, no phone and no LinkedIn means research (find a new address), not a DNC', () => {
+    const i = base();
+    i.persona.doNotContact = true;
+    i.persona.emailStatus = 'hard_bounce';
+    i.persona.phone = null;
+    i.persona.linkedinUrl = null;
+    i.suppression = { verdict: 'suppressed', legs: { modex_do_not_contact: 'hit' } };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('bounced_or_invalid');
+    expect(d.action).toBe('research_required');
+    expect(d.blocked).toBe(false);
+  });
+
+  it('an unreadable service still blocks even when the local column reads soft (R0b before classification)', () => {
+    const i = base();
+    i.persona.doNotContact = true;
+    i.persona.emailStatus = 'bounced';
+    i.suppression = { verdict: 'unknown', legs: { clawd_contract: 'unknown' } };
+    expect(decision(routePersona(i)).ruleId).toBe('suppression_unknown');
   });
 
   it('R0b suppression_unknown: verdict unknown routes research_required, blocked, reason suppression_unknown', () => {

@@ -432,3 +432,55 @@ async function getOrCreateLabel(
     return null;
   }
 }
+
+// ---------------------------------------------------------------------------
+// GAP draft -> sent reconciliation reads (final pass, 2026-09-25). Read-only:
+// drafts.get and threads.get (metadata). Nothing here creates, sends, labels
+// or deletes. The same env identity and token as every read above.
+// ---------------------------------------------------------------------------
+
+export type GmailDraftState = { exists: true; messageId: string | null } | { exists: false };
+
+/** Does this draft still exist? 404 means Gmail no longer has it (sent or deleted); any other failure throws. */
+export async function getGmailDraftState(draftId: string): Promise<GmailDraftState> {
+  const config = getGmailConfig();
+  const accessToken = await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/drafts/${encodeURIComponent(draftId)}?format=minimal`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+  if (res.status === 404) return { exists: false };
+  if (!res.ok) throw new Error(`Gmail drafts.get failed (${res.status})`);
+  const data = (await res.json()) as { message?: { id?: string } };
+  return { exists: true, messageId: data.message?.id ?? null };
+}
+
+export interface GmailThreadMessageMeta {
+  id: string;
+  labelIds: string[];
+  internalDate: Date;
+  to: string;
+  from: string;
+}
+
+/** Message metadata for one thread (To/From/labels/date). A missing thread is an empty list. */
+export async function getGmailThreadMessages(threadId: string): Promise<GmailThreadMessageMeta[]> {
+  const config = getGmailConfig();
+  const accessToken = await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+  if (res.status === 404) return [];
+  if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
+  const data = (await res.json()) as {
+    messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
+  };
+  return (data.messages ?? []).map((m) => {
+    const headers = m.payload?.headers ?? [];
+    const h = (name: string) => headers.find((x) => (x.name ?? '').toLowerCase() === name.toLowerCase())?.value ?? '';
+    return {
+      id: m.id ?? '',
+      labelIds: m.labelIds ?? [],
+      internalDate: new Date(Number(m.internalDate ?? 0)),
+      to: h('To'),
+      from: h('From'),
+    };
+  });
+}

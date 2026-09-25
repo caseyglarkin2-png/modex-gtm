@@ -57,7 +57,11 @@ export type GapAuditKind =
   | 'sequence.materialized'
   | 'schedule.unrendered_placeholder'
   | 'schedule.compile_not_passed'
-  | 'schedule.skipped';
+  | 'schedule.skipped'
+  | 'execution.gmail_drafted'
+  | 'execution.gmail_draft_refused'
+  | 'execution.gmail_draft_sent'
+  | 'execution.gmail_draft_discarded';
 
 export interface HypothesisEventInput {
   hypothesisId: string;

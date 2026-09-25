@@ -29,10 +29,11 @@ import {
   hubspotCompanyUrl,
   hubspotContactUrl,
   mailtoHref,
-  OUTREACH_ROUTING_ACTIONS,
   sellerActionLabel,
   telHref,
 } from '@/lib/gap/routing/seller-action';
+import { cardReadiness } from '@/lib/gap/routing/card-readiness';
+import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge, formatWhen } from './hypothesis-drawer';
 
 // ---------------------------------------------------------------------------
@@ -77,6 +78,8 @@ export interface QueueItem {
   account: QueueItemAccount;
   persona: QueueItemPersona;
   hypothesis: QueueItemHypothesis | null;
+  /** Provenance class of the suppression the router saw (optional for older payloads). */
+  suppression?: { class: SuppressionClass; hits: string[] } | null;
   humanAction: string | null;
   humanActionAt: string | null;
   createdAt: string;
@@ -156,35 +159,6 @@ export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
   dismissed: 'I dismissed this recommendation',
 };
 
-/**
- * A safety refusal (blocked: true) is not a human decision request -- there
- * is nothing for Casey to agree or disagree with, so it gets its own plain-
- * English panel instead of the recommends/actually-did apparatus. Keyed by
- * `ruleId` (the two blocked rules today: R0 `suppressed`, R0b
- * `suppression_unknown`); anything else blocked falls back to a generic
- * "system block" message rather than presenting it as a live recommendation.
- */
-const BLOCKED_COPY: Record<string, { title: string; body: string; remediation?: string }> = {
-  suppressed: {
-    title: 'Do not contact',
-    body: 'This person or account is suppressed. GAP will not recommend outreach.',
-  },
-  suppression_unknown: {
-    title: 'Suppression status unknown',
-    body: 'GAP could not verify whether this person is safe to contact. No outbound action is allowed until suppression can be verified.',
-    remediation: 'Retry routing when the suppression service is available.',
-  },
-};
-
-function blockedCopyFor(ruleId: string): { title: string; body: string; remediation?: string } {
-  return (
-    BLOCKED_COPY[ruleId] ?? {
-      title: 'System block',
-      body: `GAP refused to recommend an action here (rule ${ruleId}).`,
-    }
-  );
-}
-
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
@@ -207,8 +181,23 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
   const tel = telHref(item.persona.phone ?? null);
   const contactUrl = item.persona.hubspotContactId ? hubspotContactUrl(item.persona.hubspotContactId) : null;
   const companyUrl = item.account.hubspotCompanyId ? hubspotCompanyUrl(item.account.hubspotCompanyId) : null;
-  const isOutreach = OUTREACH_ROUTING_ACTIONS.has(item.action as RoutingAction);
-  const isNoHypothesis = !item.hypothesis && item.action === 'research_required';
+  const readiness = cardReadiness({
+    id: item.id,
+    action: String(item.action),
+    blocked: item.blocked,
+    ruleId: item.ruleId,
+    account: { name: item.account.name, hubspotCompanyId: item.account.hubspotCompanyId },
+    persona: {
+      id: item.persona.id,
+      displayName: item.persona.displayName,
+      email: item.persona.email,
+      phone: item.persona.phone ?? null,
+      linkedinUrl: item.persona.linkedinUrl ?? null,
+      hubspotContactId: item.persona.hubspotContactId,
+    },
+    hypothesis: item.hypothesis ? { id: item.hypothesis.id, status: item.hypothesis.status } : null,
+    suppression: item.suppression ?? null,
+  });
 
   return (
     <article
@@ -289,36 +278,45 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
         </div>
       ) : null}
 
-      {!item.blocked && isOutreach && item.hypothesis ? (
-        <div className="mt-3">
-          <Link
-            href={`/gap/preview/${encodeURIComponent(item.hypothesis.id)}`}
-            className="inline-flex items-center gap-1 rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90"
-          >
-            Open action pack (email + call script)
-          </Link>
+      {readiness.state !== 'blocked' && readiness.warning ? (
+        <div data-testid="suppression-warning" className="mt-3 rounded-md border border-amber-500/40 bg-amber-500/10 p-2 text-xs">
+          <p className="font-semibold">{readiness.warning.title}</p>
+          <p className="mt-1 text-[var(--muted-foreground)]">{readiness.warning.body}</p>
         </div>
       ) : null}
 
-      {!item.blocked && isNoHypothesis ? (
-        <div data-testid="research-required-panel" className="mt-3 space-y-2 rounded-md border border-dashed border-[var(--border)] p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Research required</p>
-          <p className="text-xs text-[var(--muted-foreground)]">Missing: no approved hypothesis for this account yet. No outreach draft exists to show.</p>
-          <div className="flex flex-wrap gap-2 text-xs">
-            {companyUrl ? (
-              <a href={companyUrl} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-                Open account
-              </a>
-            ) : null}
-            {contactUrl ? (
-              <a href={contactUrl} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-                Open contact
-              </a>
-            ) : null}
-            <Link href="/gap/hypotheses?status=draft" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-              Review / create hypothesis
+      {readiness.state === 'actionable' ? (
+        <div data-testid="readiness-actionable" className="mt-3 flex flex-wrap items-center gap-2">
+          {readiness.primary.href ? (
+            <a
+              href={readiness.primary.href}
+              {...(readiness.primary.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+              className="inline-flex items-center gap-1 rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90"
+            >
+              {readiness.primary.label}
+            </a>
+          ) : (
+            <p className="text-xs text-[var(--muted-foreground)]">{'note' in readiness.primary ? readiness.primary.note : null}</p>
+          )}
+          {readiness.secondary.map((link) => (
+            <Link key={link.href} href={link.href} className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)]">
+              {link.label}
             </Link>
-          </div>
+          ))}
+        </div>
+      ) : null}
+
+      {readiness.state === 'missing_prerequisite' ? (
+        <div data-testid="missing-prerequisite" className="mt-3 space-y-2 rounded-md border border-dashed border-[var(--border)] p-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
+          <p className="text-xs">{readiness.missing}</p>
+          <a
+            href={readiness.fix.href}
+            {...(readiness.fix.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+            className="inline-flex rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)]"
+          >
+            {readiness.fix.label}
+          </a>
         </div>
       ) : null}
 
@@ -368,17 +366,12 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
       </details>
 
       <footer className="mt-3 flex flex-wrap items-center gap-2">
-        {item.blocked ? (
-          (() => {
-            const copy = blockedCopyFor(item.ruleId);
-            return (
-              <div data-testid="blocked-panel" className="w-full space-y-1 border-t border-[var(--border)] pt-3">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--destructive)]">{copy.title}</p>
-                <p className="text-xs text-[var(--muted-foreground)]">{copy.body}</p>
-                {copy.remediation ? <p className="text-xs italic text-[var(--muted-foreground)]">{copy.remediation}</p> : null}
-              </div>
-            );
-          })()
+        {readiness.state === 'blocked' ? (
+          <div data-testid="blocked-panel" className="w-full space-y-1 border-t border-[var(--border)] pt-3">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--destructive)]">{readiness.title}</p>
+            <p className="text-xs text-[var(--muted-foreground)]">{readiness.body}</p>
+            {readiness.remediation ? <p className="text-xs italic text-[var(--muted-foreground)]">{readiness.remediation}</p> : null}
+          </div>
         ) : acted ? (
           <p data-testid="acted" className="text-xs text-[var(--muted-foreground)]">
             Acted: {HUMAN_ACTION_LABEL[item.humanAction as HumanAction] ?? item.humanAction}

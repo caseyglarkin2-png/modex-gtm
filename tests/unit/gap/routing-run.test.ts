@@ -766,6 +766,7 @@ describe('listQueue', () => {
       account: { name: 'Acme Foods', hubspotCompanyId: '111', tam: 'in', tamTier: 'A', heatTier: 2 },
       persona: { id: 1, personaKey: 'site_ops', displayName: 'Ann Acme', email: 'a@acme.example', hubspotContactId: '9', title: null, phone: null, linkedinUrl: null },
       hypothesis: { id: 'hyp-9', status: 'approved', family: 'hidden_capacity', confidence: 70 },
+      suppression: { class: 'clear', hits: [] },
       humanAction: null,
       humanActionAt: null,
       createdAt: expect.any(Date),

@@ -68,6 +68,8 @@ export interface ExecutionReceipt {
   sentAt?: Date | null;
   /** Gmail only: preserved across drafted -> sent and reply/follow-up steps. */
   threadId?: string | null;
+  /** gmail_draft only: the Gmail message id INSIDE the draft (not the draft id, not a sent message id). */
+  draftMessageId?: string | null;
   /** A 'sent' receipt that followed a 'drafted' one names the draft's engineId here. Never set otherwise. */
   supersedesEngineId?: string | null;
   refusalReason?: string | null;

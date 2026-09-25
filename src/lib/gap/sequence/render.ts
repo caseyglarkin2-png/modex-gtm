@@ -76,7 +76,12 @@ const OBSERVATION_TOKEN_RE = /\[S:([A-Za-z0-9_-]+)\]/g;
 /** The first word of a display name, or the fallback when there is none. */
 export function firstNameOf(name: string | null | undefined): string {
   const n = (name ?? '').trim();
-  return n ? n.split(/\s+/)[0] : FALLBACK_FIRST_NAME;
+  if (!n) return FALLBACK_FIRST_NAME;
+  const first = n.split(/\s+/)[0];
+  // Enrichment stores some names all-lowercase ("joey maggard"); a greeting
+  // of "Hi joey" reads as a mail merge. Capitalise only an all-lowercase
+  // name, so deliberate casing ("DeShawn") is never rewritten.
+  return first === first.toLowerCase() ? first.charAt(0).toUpperCase() + first.slice(1) : first;
 }
 
 /** Replace every `{{first_name}}` and `{{account}}`; nothing else is touched. */

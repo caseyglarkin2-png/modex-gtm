@@ -79,7 +79,7 @@ describe('gmailDraftAdapter', () => {
 
     const receipt = await gmailDraftAdapter(intent({ engine: 'gmail_draft' }), INPUT);
 
-    expect(receipt).toEqual({ engine: 'gmail_draft', status: 'drafted', engineId: 'draft_1', createdAt: NOW, threadId: null });
+    expect(receipt).toEqual({ engine: 'gmail_draft', status: 'drafted', engineId: 'draft_1', createdAt: NOW, threadId: null, draftMessageId: null });
     expect(mockedSendViaGmail).not.toHaveBeenCalled();
   });
 });

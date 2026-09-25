@@ -1,0 +1,26 @@
+{
+  "purpose": "Individually proven false historical suppressions. Each person's ONLY suppression is the local modex do_not_contact flag set with email_status 'bounced' by the March 27-28 2026 Resend-era bounce wave (bounce type never recorded). Every other plane is clear (clawd contract keys exactly [modex_do_not_contact]: no HubSpot opt-out, no SendGrid permanent list, no clawd do_not_send, no verbal DNC), no unsubscribed_emails row, and the mailbox casey@freightroll.com (which demonstrably receives bounce notices: 200+ DSNs since 2026-03-25) holds NO bounce notice and NO request to stop for the address. Script: scripts/gap/correct-historical-suppression.ts. Audit: docs/gap/suppression-audit-2026-09-25.md.",
+  "verifiedAt": "2026-09-25",
+  "entries": [
+    { "personaId": 8, "email": "ryan.underwood@genmills.com", "account": "General Mills", "name": "Ryan Underwood", "tier": "A",
+      "evidence": ["Resend bounces 2026-03-27 12:55 and 21:50 UTC (email_logs 39, 153; bounce_type null)", "Out-of-office auto-reply FROM Ryan.Underwood@genmills.com to casey@freightroll.com, 2026-04-30 12:46 UTC (Gmail msg 19dde6cd27bcefff): the mailbox exists and receives mail", "HubSpot hs_email_last_open_date 2026-04-30T12:46:07Z", "Gmail sends 2026-04-02, 04-20, 04-23, 04-30, 06-12 with no DSN"] },
+    { "personaId": 36, "email": "ryan.hutcherson@gapac.com", "account": "Georgia Pacific", "name": "Ryan Hutcherson", "tier": "A",
+      "evidence": ["Resend bounce 2026-03-27 21:50 UTC; later Gmail sends", "Out-of-office auto-reply FROM ryan.hutcherson@gapac.com, 2026-04-08 20:15 UTC (Gmail msg 19d6ebc33e2d2818)", "Gmail sends 2026-04-02, 04-08, 04-20, 04-23, 04-30, 06-02, 06-12, 08-18 with no DSN"] },
+    { "personaId": 7, "email": "nisar.ahsanullah@genmills.com", "account": "General Mills", "name": "Nisar Ahsanullah", "tier": "B",
+      "evidence": ["Resend bounces 2026-03-27 (email_logs 25, 27, 162; bounce_type null), same day and same pattern as Ryan Underwood at the same domain, whose address is proven live", "Gmail send 2026-04-02 18:10 UTC (msg 19d4f63864f84cee) with no DSN in the mailbox since"] },
+    { "personaId": 26, "email": "rob.ferguson@jmsmucker.com", "account": "JM Smucker", "name": "Rob Ferguson", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:51 UTC", "Gmail sends 2026-04-02, 04-20, 04-23, 04-30, 05-01, 06-02, 06-12, 06-23 with no DSN"] },
+    { "personaId": 27, "email": "anbu.kuppusamy@jmsmucker.com", "account": "JM Smucker", "name": "Anbu Kuppusamy", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:50 UTC", "Gmail sends 2026-04-17, 04-30, 05-01, 06-02, 06-12, 06-23 with no DSN"] },
+    { "personaId": 31, "email": "john.deaton@homedepot.com", "account": "The Home Depot", "name": "John Deaton", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:50 UTC", "Gmail sends 2026-04-02, 04-20, 04-23, 04-30, 06-02, 06-12 with no DSN"] },
+    { "personaId": 41, "email": "troy.retzloff@heb.com", "account": "H-E-B", "name": "Troy Retzloff", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:49 UTC", "Gmail sends 2026-04-02, 04-08, 04-20, 04-23, 04-30, 06-12 with no DSN"] },
+    { "personaId": 51, "email": "jim.small@honda.com", "account": "Honda", "name": "Jim Small", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:49 UTC", "Gmail sends 2026-04-02, 04-30, 06-12 with no DSN"] },
+    { "personaId": 56, "email": "cory.reed@johndeere.com", "account": "John Deere", "name": "Cory Reed", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:49 UTC", "Gmail sends 2026-04-02, 04-20, 04-23, 04-30, 06-12, 09-16, 09-22 with no DSN"] },
+    { "personaId": 61, "email": "kristi.montgomery@kencogroup.com", "account": "Kenco Logistics Services", "name": "Kristi Montgomery", "tier": "B",
+      "evidence": ["Resend bounce 2026-03-27 21:48 UTC", "Gmail sends 2026-04-02, 04-20, 05-11, 05-12 with no DSN; kencogroup.com demonstrably returns DSNs for unknown users (tushar.chandrakapure, 2026-06-23 and 08-18), so silence is meaningful"] }
+  ]
+}

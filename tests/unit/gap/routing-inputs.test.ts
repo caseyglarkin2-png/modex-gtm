@@ -41,6 +41,7 @@ interface Db {
   emailLogs: any[];
   inbound: any[];
   dispositions: any[];
+  unsubscribed?: string[];
 }
 
 function emptyDb(): Db {
@@ -67,6 +68,11 @@ function makePrisma(db: Db) {
       findUnique: vi.fn(async ({ where }: any) => db.personas.find((p) => p.id === where.id) ?? null),
       findMany: vi.fn(async ({ where }: any) =>
         db.personas.filter((p) => p.account_name === where.account_name && (where.is_contact_ready === undefined || p.is_contact_ready === where.is_contact_ready)),
+      ),
+    },
+    unsubscribedEmail: {
+      findFirst: vi.fn(async ({ where }: any) =>
+        (db.unsubscribed ?? []).includes(String(where.email.equals).toLowerCase()) ? { id: 'u1' } : null,
       ),
     },
     pounceTrigger: {
@@ -730,6 +736,15 @@ describe('suppression input', () => {
     expect(i.suppression).toEqual({ verdict: 'suppressed', legs: { modex_do_not_contact: 'hit' } });
   });
 
+  it('an unsubscribe-table row is a hard unsubscribed leg even when every remote leg is clear (final pass)', async () => {
+    const db = fullDb();
+    db.unsubscribed = [EMAIL_LOWER];
+    const i = await assemble(db, { suppression: reader('clear') });
+    expect(i.suppression).toEqual({ verdict: 'suppressed', legs: { [CONTRACT_LEG]: 'clear', unsubscribed: 'hit' } });
+    const d = routePersona(i);
+    expect(d.kind === 'decision' && d.decision.ruleId).toBe('suppressed');
+  });
+
   it('a persona without email is unknown with empty legs, and the reader is never asked', async () => {
     const db = fullDb();
     db.personas[0].email = null;
@@ -856,6 +871,12 @@ describe('createClawdSuppressionReader', () => {
     const mixed = { ok: true, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'hubspot_optout', unknown_legs: ['clawd'] }] };
     const s = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(mixed)), env }).read({ to: EMAIL });
     expect(s).toEqual({ verdict: 'suppressed', legs: { clawd: 'unknown', hubspot_optout: 'hit' } });
+  });
+
+  it('every positive key is a hit, so a soft primary reason never hides an opt-out in keys (final pass)', async () => {
+    const both = { ok: true, results: [{ email: EMAIL_LOWER, blocked: true, reason: 'modex_do_not_contact', keys: ['modex_do_not_contact', 'hubspot_optout'], unknown_legs: [] }] };
+    const r = await createClawdSuppressionReader({ fetchImpl: vi.fn(async () => json(both)), env }).read({ to: EMAIL });
+    expect(r).toEqual({ verdict: 'suppressed', legs: { modex_do_not_contact: 'hit', hubspot_optout: 'hit' } });
   });
 
   it('a hung authority times out to unknown', async () => {

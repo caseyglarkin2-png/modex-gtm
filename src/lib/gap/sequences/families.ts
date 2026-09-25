@@ -114,7 +114,7 @@ function family(
 
 const NETWORK_STANDARDIZATION: SeedStepCopy[] = [
   {
-    subject: 'Three regions, one number',
+    subject: 'Every region, one number',
     paragraphs: [
       'Nobody thinks about the wiring until the lights flicker in one room and not the others. {{observation}}',
       'My guess is each region still runs its own version of the same shift, so one trailer event gets counted more than one way across sites before it reaches you.',
@@ -169,7 +169,7 @@ const NETWORK_STANDARDIZATION: SeedStepCopy[] = [
 
 const HIDDEN_CAPACITY: SeedStepCopy[] = [
   {
-    subject: 'Doors versus spots at Fontana',
+    subject: 'Doors versus spots',
     paragraphs: [
       'Airports do not pour runways when the taxiway is the problem. {{observation}}',
       'My guess is the doors are no longer the constraint. The spots are, and the tractor hunting for the right trailer is where the new capacity waits.',
@@ -279,7 +279,7 @@ const AUTOMATION_READINESS: SeedStepCopy[] = [
 
 const NEW_SITES_ACQUISITIONS: SeedStepCopy[] = [
   {
-    subject: 'Six plants and the forks',
+    subject: 'New plants and the forks',
     paragraphs: [
       'Two families moving into one house argue about the forks long before they argue about money. {{observation}}',
       'My guess is the day-one plan covers the ERP and the brand, and the yards sit on a list called later. That is usually where two operating vocabularies collide first, at the fence.',
