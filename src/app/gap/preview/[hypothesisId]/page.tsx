@@ -50,7 +50,8 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { CopyButton } from '@/components/gap/copy-button';
 import { FactBlock, HypothesisBlock } from '@/components/gap/fact-hypothesis-blocks';
-import { HypothesisStatusBadge, asStringList } from '@/components/gap/hypothesis-drawer';
+import { HypothesisStatusBadge } from '@/components/gap/hypothesis-drawer';
+import { asStringList } from '@/lib/gap/ui/format';
 import {
   CompileReport,
   allStepsCleared,

@@ -34,7 +34,8 @@ import {
 } from '@/lib/gap/routing/seller-action';
 import { cardReadiness } from '@/lib/gap/routing/card-readiness';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
-import { HypothesisStatusBadge, formatWhen } from './hypothesis-drawer';
+import { HypothesisStatusBadge } from './hypothesis-drawer';
+import { formatWhen } from '@/lib/gap/ui/format';
 
 // ---------------------------------------------------------------------------
 // Queue row shape (the GET /api/gap/queue contract, S2-T7)

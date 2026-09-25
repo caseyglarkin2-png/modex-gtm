@@ -125,17 +125,9 @@ export function HypothesisStatusBadge({ status }: { status: HypothesisStatus | s
   return <Badge variant={variant}>{String(status).replace(/_/g, ' ')}</Badge>;
 }
 
-export function asStringList(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
-}
-
-export function formatWhen(value: string | Date | null | undefined, withTime = false): string {
-  if (!value) return '';
-  const date = value instanceof Date ? value : new Date(value);
-  if (Number.isNaN(date.getTime())) return String(value);
-  const iso = date.toISOString();
-  return withTime ? `${iso.slice(0, 10)} ${iso.slice(11, 16)}Z` : iso.slice(0, 10);
-}
+// Re-exported for client callers; the implementations are plain (server-safe) in lib/gap/ui/format.ts.
+import { asStringList, formatWhen } from '@/lib/gap/ui/format';
+export { asStringList, formatWhen };
 
 // ---------------------------------------------------------------------------
 // Actions

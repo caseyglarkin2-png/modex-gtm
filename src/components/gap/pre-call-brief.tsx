@@ -13,7 +13,8 @@
 import { Badge } from '@/components/ui/badge';
 import type { CallBrief } from '@/lib/gap/ui/gap-api-client';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
-import { HypothesisStatusBadge, formatWhen } from './hypothesis-drawer';
+import { HypothesisStatusBadge } from './hypothesis-drawer';
+import { formatWhen } from '@/lib/gap/ui/format';
 
 export const BRIEF_LABELS = {
   wouldProveWrong: 'Would prove wrong',
