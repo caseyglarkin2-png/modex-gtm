@@ -137,9 +137,13 @@ export function classifySuppression(e: SuppressionEvidence): SuppressionClassifi
   const emailBlockedAtSend = hits.length > 0 || e.verdict !== 'clear';
 
   if (reasons.length === 0) {
-    return { class: e.verdict === 'unknown' ? 'service_unreadable' : 'clear', hits, reasons, emailBlockedAtSend };
+    if (e.verdict === 'unknown') return { class: 'service_unreadable', hits, reasons, emailBlockedAtSend };
+    // A verdict of `suppressed` whose legs name nothing still refuses; read as unknown provenance, never clear.
+    if (e.verdict === 'suppressed') {
+      return { class: 'unknown_provenance', hits: ['suppressed'], reasons: [{ leg: 'suppressed', class: 'unknown_provenance' }], emailBlockedAtSend };
+    }
+    return { class: 'clear', hits, reasons, emailBlockedAtSend };
   }
-  // A verdict of `suppressed` whose legs name nothing still refuses; read as unknown provenance.
   let worst = reasons[0].class;
   for (const r of reasons) if (SEVERITY[r.class] > SEVERITY[worst]) worst = r.class;
   return { class: worst, hits, reasons, emailBlockedAtSend };

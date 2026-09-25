@@ -52,6 +52,12 @@ describe('classifySuppression', () => {
     expect(classifySuppression(ev({ dnc: true, status: 'blocked' })).class).toBe('unknown_provenance');
   });
 
+  it('a suppressed verdict that names no leg is unknown provenance, never clear', () => {
+    const c = classifySuppression(ev({ verdict: 'suppressed', legs: { clawd: 'clear' } }));
+    expect(c.class).toBe('unknown_provenance');
+    expect(c.emailBlockedAtSend).toBe(true);
+  });
+
   it('clawd do_not_send carries no reason on the wire: unknown_provenance', () => {
     expect(classifySuppression(ev({ verdict: 'suppressed', legs: { clawd_do_not_send: 'hit' } })).class).toBe('unknown_provenance');
   });
