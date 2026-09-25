@@ -96,6 +96,11 @@ export interface HypothesisDrawerProps {
   onTransition: (result: TransitionResponse) => void;
   /** The row changed without a status move (a fact was linked). Falls back to `onTransition` with a same-status result. */
   onChanged?: () => void;
+  /** Fast review mode (S5): Previous/Next through the current filtered list without closing the drawer. */
+  onPrevious?: () => void;
+  onNext?: () => void;
+  hasPrevious?: boolean;
+  hasNext?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -146,15 +151,22 @@ const ACTION_ORDER: readonly HypothesisAction[] = [
   'withdraw',
 ];
 
+/**
+ * Seller-facing button copy. The backend action name (and the whole state
+ * machine) is unchanged -- this is presentation only, so a Casey who never
+ * hears "submit" or "activate" still knows exactly what pressing the button
+ * does. Keep the underlying HypothesisAction visible via ACTION_ORDER /
+ * legalActionsFor(), never rename the action itself.
+ */
 const ACTION_LABEL: Record<HypothesisAction, string> = {
-  submit: 'Submit',
-  approve: 'Approve',
-  activate: 'Activate',
+  submit: 'Ready for review',
+  approve: 'Approve hypothesis',
+  activate: 'Use in routing',
   resolve: 'Resolve',
-  close_unresolved: 'Close unresolved',
+  close_unresolved: 'Close, unresolved',
   expire: 'Expire',
-  reject_review: 'Reject review',
-  withdraw: 'Withdraw',
+  reject_review: 'Needs work',
+  withdraw: 'Reject hypothesis',
 };
 
 const REASON_ACTIONS: ReadonlySet<HypothesisAction> = new Set(['withdraw', 'reject_review', 'close_unresolved']);
@@ -163,6 +175,25 @@ const DESTRUCTIVE_ACTIONS: ReadonlySet<HypothesisAction> = new Set(['withdraw', 
 const OUTCOMES: readonly ResolutionOutcome[] = ['confirmed', 'partially_confirmed', 'rejected'];
 
 export const NEEDS_CITED_FACT = 'Needs at least one cited fact';
+
+/** The primary ("what do I do with this") action for each status, when one exists. */
+const PRIMARY_ACTION: Partial<Record<HypothesisStatus, HypothesisAction>> = {
+  draft: 'submit',
+  review_required: 'approve',
+  approved: 'activate',
+};
+
+/** Server refusal reasons (machine error codes), translated to plain English. Unknown codes fall back to the raw string, never hidden. */
+const REFUSAL_TEXT: Record<string, string> = {
+  no_evidence: NEEDS_CITED_FACT,
+  GAP_HYPOTHESIS_FROZEN: 'This hypothesis is frozen and can no longer be edited.',
+  invalid_transition: 'That action is not available from the current status.',
+  reason_required: 'A reason is required for this action.',
+};
+
+export function describeRefusal(code: string): string {
+  return REFUSAL_TEXT[code] ?? code;
+}
 
 /** The actions the machine table allows from `status`, in display order. */
 export function legalActionsFor(status: HypothesisStatus): HypothesisAction[] {
@@ -187,7 +218,7 @@ export function hasCitedFact(hypothesis: Pick<HypothesisRow, 'observation' | 'si
 // Component
 // ---------------------------------------------------------------------------
 
-export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged }: HypothesisDrawerProps) {
+export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged, onPrevious, onNext, hasPrevious, hasNext }: HypothesisDrawerProps) {
   const [reason, setReason] = useState('');
   const [outcome, setOutcome] = useState<ResolutionOutcome>('confirmed');
   const [busy, setBusy] = useState<HypothesisAction | null>(null);
@@ -202,6 +233,14 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged 
   const links = hypothesis.signals ?? [];
   const factSignals: FactSignal[] = links.flatMap((link) => (link.signal ? [link.signal] : []));
   const events = hypothesis.events ?? [];
+  const primaryAction = PRIMARY_ACTION[status];
+  const secondaryActions = actions.filter((action) => action !== primaryAction);
+  // When a primary action exists, the sticky decision area above already
+  // renders it plus every non-reason secondary action; this lower section
+  // then carries only the reason-requiring actions (which need the Reason
+  // input right here) so no button renders twice with the same name.
+  const lowerActions = primaryAction ? actions.filter((action) => REASON_ACTIONS.has(action)) : actions;
+  const showFastReview = Boolean(onPrevious || onNext);
 
   async function run(action: HypothesisAction) {
     setBusy(action);
@@ -223,7 +262,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged 
       }
       const payload = (json && typeof json === 'object' ? json : {}) as Record<string, unknown>;
       if (!res.ok) {
-        setError(typeof payload.error === 'string' ? payload.error : `HTTP ${res.status}`);
+        setError(typeof payload.error === 'string' ? describeRefusal(payload.error) : `HTTP ${res.status}`);
         return;
       }
       setReason('');
@@ -265,6 +304,60 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged 
             {hypothesis.updated_at ? ` Updated ${formatWhen(hypothesis.updated_at)}.` : ''}
           </SheetDescription>
         </SheetHeader>
+
+        {!terminal && primaryAction ? (
+          <section
+            data-testid="hypothesis-sticky-decision"
+            className="sticky top-0 z-10 mt-4 rounded-md border border-[var(--border)] bg-[var(--background)] p-3 shadow-sm"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+              What do I do with this?
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              {(() => {
+                const gate = disabledFor(primaryAction);
+                return (
+                  <Button type="button" disabled={gate.disabled} title={gate.title} onClick={() => void run(primaryAction)}>
+                    {busy === primaryAction ? `${ACTION_LABEL[primaryAction]}...` : ACTION_LABEL[primaryAction]}
+                  </Button>
+                );
+              })()}
+              {secondaryActions
+                .filter((action) => !REASON_ACTIONS.has(action))
+                .map((action) => {
+                  const gate = disabledFor(action);
+                  return (
+                    <Button
+                      key={action}
+                      type="button"
+                      variant="outline"
+                      disabled={gate.disabled}
+                      title={gate.title}
+                      onClick={() => void run(action)}
+                    >
+                      {busy === action ? `${ACTION_LABEL[action]}...` : ACTION_LABEL[action]}
+                    </Button>
+                  );
+                })}
+              {secondaryActions.some((action) => REASON_ACTIONS.has(action)) ? (
+                <span className="text-xs text-[var(--muted-foreground)]">
+                  See Actions below for {secondaryActions.filter((a) => REASON_ACTIONS.has(a)).map((a) => ACTION_LABEL[a]).join(' / ')} (needs a reason)
+                </span>
+              ) : null}
+            </div>
+          </section>
+        ) : null}
+
+        {showFastReview ? (
+          <div data-testid="hypothesis-review-nav" className="mt-3 flex items-center justify-between text-sm">
+            <Button type="button" variant="outline" size="sm" disabled={!hasPrevious} onClick={() => onPrevious?.()}>
+              Previous
+            </Button>
+            <Button type="button" variant="outline" size="sm" disabled={!hasNext} onClick={() => onNext?.()}>
+              Next
+            </Button>
+          </div>
+        ) : null}
 
         <div className="mt-6 space-y-4">
           <FactBlock observation={hypothesis.observation ?? ''} signals={factSignals} />
@@ -362,7 +455,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged 
               </div>
             ) : null}
             <div className="mt-3 flex flex-wrap gap-2">
-              {actions.map((action) => {
+              {lowerActions.map((action) => {
                 const gate = disabledFor(action);
                 return (
                   <Button

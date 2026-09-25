@@ -188,10 +188,10 @@ describe('<HypothesisDrawer>', () => {
     vi.unstubAllGlobals();
   });
 
-  it('draft with an unsupported observation: Submit exists, Approve is not rendered', () => {
+  it('draft with an unsupported observation: seller-facing Submit exists, Approve is not rendered', () => {
     render(<HypothesisDrawer hypothesis={row({ observation: '', signals: [] })} onClose={vi.fn()} onTransition={vi.fn()} />);
-    expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Approve' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Ready for review' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Approve hypothesis' })).toBeNull();
     expect(screen.getByTestId('fact-block')).toHaveAttribute('data-state', 'unsupported');
   });
 
@@ -207,7 +207,7 @@ describe('<HypothesisDrawer>', () => {
         onTransition={vi.fn()}
       />,
     );
-    const approve = screen.getByRole('button', { name: 'Approve' });
+    const approve = screen.getByRole('button', { name: 'Approve hypothesis' });
     expect(approve).toBeDisabled();
     expect(approve).toHaveAttribute('title', 'Needs at least one cited fact');
   });
@@ -220,7 +220,7 @@ describe('<HypothesisDrawer>', () => {
         onTransition={vi.fn()}
       />,
     );
-    expect(screen.getByRole('button', { name: 'Approve' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Approve hypothesis' })).toBeDisabled();
   });
 
   it('approved with no evidence: Activate is disabled with the title', () => {
@@ -235,7 +235,7 @@ describe('<HypothesisDrawer>', () => {
         onTransition={vi.fn()}
       />,
     );
-    const activate = screen.getByRole('button', { name: 'Activate' });
+    const activate = screen.getByRole('button', { name: 'Use in routing' });
     expect(activate).toBeDisabled();
     expect(activate).toHaveAttribute('title', 'Needs at least one cited fact');
   });
@@ -245,7 +245,7 @@ describe('<HypothesisDrawer>', () => {
     const onTransition = vi.fn();
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={onTransition} />);
 
-    const approve = screen.getByRole('button', { name: 'Approve' });
+    const approve = screen.getByRole('button', { name: 'Approve hypothesis' });
     expect(approve).toBeEnabled();
     fireEvent.click(approve);
 
@@ -259,23 +259,33 @@ describe('<HypothesisDrawer>', () => {
     );
   });
 
-  it('a 409 {error:"no_evidence"} renders the reason string verbatim inline', async () => {
+  it('a 409 {error:"no_evidence"} renders the plain-English refusal inline', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'no_evidence' }, 409));
     const onTransition = vi.fn();
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={onTransition} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Approve' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Approve hypothesis' }));
 
     const error = await screen.findByTestId('hypothesis-action-error');
-    expect(error).toHaveTextContent('no_evidence');
+    expect(error).toHaveTextContent('Needs at least one cited fact');
     expect(onTransition).not.toHaveBeenCalled();
   });
 
-  it('Withdraw is disabled until a reason is typed, then the PATCH body carries the reason', async () => {
+  it('an unknown refusal code falls back to the raw string, never hidden', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ error: 'some_new_code' }, 409));
+    render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Approve hypothesis' }));
+
+    const error = await screen.findByTestId('hypothesis-action-error');
+    expect(error).toHaveTextContent('some_new_code');
+  });
+
+  it('Reject hypothesis (withdraw) is disabled until a reason is typed, then the PATCH body carries the reason', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'draft', to: 'rejected', effects: [] }, 200));
     render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={vi.fn()} />);
 
-    const withdraw = screen.getByRole('button', { name: 'Withdraw' });
+    const withdraw = screen.getByRole('button', { name: 'Reject hypothesis' });
     expect(withdraw).toBeDisabled();
 
     fireEvent.change(screen.getByLabelText('Reason'), { target: { value: 'Duplicate of hyp_0' } });
@@ -303,9 +313,53 @@ describe('<HypothesisDrawer>', () => {
     render(<HypothesisDrawer hypothesis={row({ status: 'expired' })} onClose={vi.fn()} onTransition={vi.fn()} />);
     expect(screen.getByText('Closed')).toBeInTheDocument();
     expect(screen.queryByTestId('hypothesis-actions')).toBeNull();
-    for (const name of ['Submit', 'Approve', 'Activate', 'Withdraw', 'Resolve', 'Expire']) {
+    expect(screen.queryByTestId('hypothesis-sticky-decision')).toBeNull();
+    for (const name of ['Ready for review', 'Approve hypothesis', 'Use in routing', 'Reject hypothesis', 'Resolve', 'Expire']) {
       expect(screen.queryByRole('button', { name })).toBeNull();
     }
+  });
+
+  it('draft: the sticky decision area shows the primary action and names the reason-gated secondary', () => {
+    render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={vi.fn()} />);
+    const sticky = screen.getByTestId('hypothesis-sticky-decision');
+    expect(within(sticky).getByRole('button', { name: 'Ready for review' })).toBeInTheDocument();
+    expect(within(sticky).getByText(/Reject hypothesis/)).toBeInTheDocument();
+    // Reject hypothesis needs a reason, so its actual button lives in the lower Actions section, not duplicated here.
+    expect(within(sticky).queryByRole('button', { name: 'Reject hypothesis' })).toBeNull();
+  });
+
+  it('review_required: the sticky decision area recommends Approve, with Needs work / Reject hypothesis as secondary', () => {
+    render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+    const sticky = screen.getByTestId('hypothesis-sticky-decision');
+    expect(within(sticky).getByRole('button', { name: 'Approve hypothesis' })).toBeInTheDocument();
+    expect(within(sticky).getByText(/Needs work.*Reject hypothesis/)).toBeInTheDocument();
+  });
+
+  it('renders Previous/Next only when the owner passes review-mode callbacks, and disables the edge it cannot move to', () => {
+    const onPrevious = vi.fn();
+    const onNext = vi.fn();
+    render(
+      <HypothesisDrawer
+        hypothesis={row()}
+        onClose={vi.fn()}
+        onTransition={vi.fn()}
+        onPrevious={onPrevious}
+        onNext={onNext}
+        hasPrevious={false}
+        hasNext={true}
+      />,
+    );
+    const nav = screen.getByTestId('hypothesis-review-nav');
+    expect(within(nav).getByRole('button', { name: 'Previous' })).toBeDisabled();
+    const next = within(nav).getByRole('button', { name: 'Next' });
+    expect(next).toBeEnabled();
+    fireEvent.click(next);
+    expect(onNext).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders no Previous/Next nav when the owner does not opt into review mode', () => {
+    render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={vi.fn()} />);
+    expect(screen.queryByTestId('hypothesis-review-nav')).toBeNull();
   });
 
   it('renders the signal list and the event history', () => {

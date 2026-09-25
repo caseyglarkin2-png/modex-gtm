@@ -380,7 +380,21 @@ export async function runHypothesize(
         source: 'hypothesize_cron',
         createdBy: actor,
       });
-      if (registered.created) report.identity.aliasesRegistered += 1;
+      if (registered.status === 'CREATED') {
+        report.identity.aliasesRegistered += 1;
+      } else if (registered.status === 'CONFLICT') {
+        await audit(prisma, {
+          kind: 'identity.alias_conflict',
+          actor,
+          subjectType: 'pounce_trigger',
+          subjectId: String(trigger.id),
+          payload: {
+            normalizedAlias: registered.normalizedAlias,
+            existingAccountName: registered.existingAccountName,
+            requestedAccountName: registered.requestedAccountName,
+          },
+        });
+      }
     }
     resolvedTriggers.push({ trigger, accountName: result.accountName });
   }

@@ -146,7 +146,7 @@ function makeDeps(candidates: BuildCandidate[] = [candidate()], skipped: BuildRe
     via: 'normalized',
     confidence: 100,
   }));
-  const registerAlias = asyncSpy(async () => ({ created: true, id: 'alias_new' }));
+  const registerAlias = asyncSpy(async () => ({ status: 'CREATED' as const, created: true, id: 'alias_new' }));
   const audit = asyncSpy(async () => ({ stored: true, reviewQueued: false }));
   return { registerSignal, proposeHypothesis, buildCandidates, loadIdentityContext, resolveIdentity, registerAlias, audit };
 }
@@ -494,6 +494,45 @@ describe('runHypothesize identity resolution (6A)', () => {
       source: 'hypothesize_cron',
       createdBy: 'cron:gap-hypothesize',
     });
+  });
+
+  it('an alias registration CONFLICT is audited, never overwrites, and does not count as a new alias', async () => {
+    const prisma = makePrisma({
+      triggers: [trigger({ id: 206, account_name: 'Niagara Bottling, Llc' })],
+      personas: [persona({ account_name: 'Niagara Bottling' })],
+    });
+    const deps = makeDeps([candidate({ accountName: 'Niagara Bottling' })]);
+    deps.resolveIdentity.mockReturnValue({
+      ok: true,
+      accountName: 'Niagara Bottling',
+      via: 'normalized',
+      confidence: 70,
+    });
+    deps.registerAlias.mockResolvedValue({
+      status: 'CONFLICT',
+      created: false,
+      id: 'alias_existing',
+      normalizedAlias: 'niagara bottling',
+      existingAccountName: 'Niagara Bottling Holdings',
+      requestedAccountName: 'Niagara Bottling',
+    });
+
+    const report = await runHypothesize(prisma, { now: NOW }, deps);
+
+    expect(report.identity.aliasesRegistered).toBe(0);
+    expect(deps.audit).toHaveBeenCalledWith(
+      prisma,
+      expect.objectContaining({
+        kind: 'identity.alias_conflict',
+        subjectType: 'pounce_trigger',
+        subjectId: '206',
+        payload: expect.objectContaining({
+          normalizedAlias: 'niagara bottling',
+          existingAccountName: 'Niagara Bottling Holdings',
+          requestedAccountName: 'Niagara Bottling',
+        }),
+      }),
+    );
   });
 
   it('a genuinely unknown company is refused unresolved_company, skipped, and never reaches registerSignal', async () => {

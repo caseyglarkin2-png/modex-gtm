@@ -125,6 +125,12 @@ describe('<DecisionCard>', () => {
     expect(screen.getByTestId('acted')).toHaveTextContent('Acted: call_now at 2026-09-23 14:05Z');
   });
 
+  it('labels the recommendation as GAP\'s and the buttons as recording, not performing, the action', () => {
+    render(<DecisionCard item={item()} onAct={() => {}} />);
+    expect(screen.getByText('GAP recommends')).toBeInTheDocument();
+    expect(screen.getByText(/only records what you actually did/i)).toBeInTheDocument();
+  });
+
   it('clicking "I did this" calls onAct with the decision action, "I did something else" with other', () => {
     const onAct = vi.fn();
     render(<DecisionCard item={item()} onAct={onAct} />);
