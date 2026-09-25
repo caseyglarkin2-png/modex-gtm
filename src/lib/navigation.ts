@@ -10,6 +10,7 @@ import {
   Inbox,
   ListTodo,
   Megaphone,
+  Radar,
   Search,
   Settings,
   Smartphone,
@@ -44,6 +45,7 @@ export const canonicalNavModules: NavModule[] = [
   { id: 'work-queue', label: 'Work Queue', href: '/queue', icon: ListTodo, aliases: ['/queue', '/queue/generations', '/capture'] },
   { id: 'analytics', label: 'Analytics', href: '/analytics', icon: BarChart3, aliases: ['/analytics', '/analytics/emails', '/analytics/quarterly'] },
   { id: 'discovery', label: 'Discovery', href: '/discovery', icon: Compass, aliases: ['/discovery'] },
+  { id: 'gap-os', label: 'GAP OS', href: '/gap', icon: Radar, aliases: ['/gap', '/gap/hypotheses', '/gap/learning'] },
   { id: 'ops', label: 'Ops', href: '/ops', icon: Settings, aliases: ['/ops', '/admin/crons', '/admin/generation-metrics'] },
 ];
 

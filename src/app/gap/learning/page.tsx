@@ -12,6 +12,7 @@ import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { GapSubnav } from '@/components/gap/gap-subnav';
 import { LearningDashboard } from './learning-dashboard';
 
 export const dynamic = 'force-dynamic';
@@ -26,6 +27,7 @@ export default async function GapLearningPage() {
   return (
     <div className="space-y-6">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP Work Queue', href: '/gap' }, { label: 'Learning' }]} />
+      <GapSubnav />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">What did the system learn</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">

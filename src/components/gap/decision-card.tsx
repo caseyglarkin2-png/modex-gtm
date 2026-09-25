@@ -144,7 +144,8 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
       data-action={item.action}
       className="rounded-md border border-[var(--border)] bg-[var(--background)] p-4 text-sm shadow-sm"
     >
-      <header className="flex flex-wrap items-center gap-2">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">GAP recommends</p>
+      <header className="mt-1 flex flex-wrap items-center gap-2">
         <Badge data-testid="action-chip" className={chipClass}>
           {words(String(item.action))}
         </Badge>
@@ -203,14 +204,20 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
             {item.humanActionAt ? ` at ${formatWhen(item.humanActionAt, true)}` : ''}
           </p>
         ) : (
-          <>
-            <Button type="button" size="sm" disabled={acting} onClick={() => onAct(String(item.action))}>
-              {acting ? 'Saving...' : 'I did this'}
-            </Button>
-            <Button type="button" size="sm" variant="outline" disabled={acting} onClick={() => onAct('other')}>
-              I did something else
-            </Button>
-          </>
+          <div className="w-full space-y-2">
+            <p className="text-xs font-medium">Casey:</p>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button type="button" size="sm" disabled={acting} onClick={() => onAct(String(item.action))}>
+                {acting ? 'Saving...' : 'I did this'}
+              </Button>
+              <Button type="button" size="sm" variant="outline" disabled={acting} onClick={() => onAct('other')}>
+                I did something else
+              </Button>
+            </div>
+            <p className="text-[11px] text-[var(--muted-foreground)]">
+              This only records what you actually did. It never sends an email or enrolls anyone.
+            </p>
+          </div>
         )}
         {actError ? (
           <span role="alert" data-testid="act-error" className="text-xs text-[var(--destructive)]">

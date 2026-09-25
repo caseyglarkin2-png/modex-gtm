@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { canonicalNavModules, commandRoutes, getPageLabelForPath, isActiveNavModule } from '@/lib/navigation';
 
 describe('canonical navigation', () => {
-  it('declares eleven unique top-level modules', () => {
+  it('declares twelve unique top-level modules', () => {
     expect(canonicalNavModules.map((module) => module.label)).toEqual([
       'Home',
       'Accounts',
@@ -14,11 +14,21 @@ describe('canonical navigation', () => {
       'Work Queue',
       'Analytics',
       'Discovery',
+      'GAP OS',
       'Ops',
     ]);
 
-    expect(new Set(canonicalNavModules.map((module) => module.href)).size).toBe(11);
-    expect(new Set(canonicalNavModules.map((module) => module.label)).size).toBe(11);
+    expect(new Set(canonicalNavModules.map((module) => module.href)).size).toBe(12);
+    expect(new Set(canonicalNavModules.map((module) => module.label)).size).toBe(12);
+  });
+
+  it('GAP OS covers the queue, hypotheses, and learning surfaces', () => {
+    const gap = canonicalNavModules.find((module) => module.label === 'GAP OS');
+    expect(gap).toBeDefined();
+    expect(gap!.href).toBe('/gap');
+    expect(getPageLabelForPath('/gap/hypotheses')).toBe('GAP OS');
+    expect(getPageLabelForPath('/gap/learning')).toBe('GAP OS');
+    expect(getPageLabelForPath('/gap')).toBe('GAP OS');
   });
 
   it('maps legacy routes to their canonical owners', () => {

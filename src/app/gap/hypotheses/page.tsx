@@ -14,6 +14,7 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { listHypotheses } from '@/lib/gap/hypothesis/service';
 import { HYPOTHESIS_STATUSES, type HypothesisStatus } from '@/lib/gap/taxonomy';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { GapSubnav } from '@/components/gap/gap-subnav';
 import { HypothesisList } from './hypothesis-list';
 
 export const dynamic = 'force-dynamic';
@@ -38,7 +39,8 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Hypotheses' }]} />
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP OS', href: '/gap' }, { label: 'Hypotheses' }]} />
+      <GapSubnav />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Hypotheses</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
