@@ -369,6 +369,29 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
   return { runId, asOf: current?.asOf ?? null, items, nextCursor };
 }
 
+/** Page cap for `listAllCurrent`: 10 x 100 cards. */
+export const MAX_CURRENT_PAGES = 10;
+
+/**
+ * Every current card, page by page. The cockpit's lane counts and lanes are
+ * per-card (`sellerLaneOf`), so they must see all cards, not the first
+ * priority-ordered page: one page of high-priority READY cards would hide
+ * every RESEARCH card behind it.
+ */
+export async function listAllCurrent(prisma: PrismaLike): Promise<{ asOf: string | null; items: QueueItem[]; truncated: boolean }> {
+  const items: QueueItem[] = [];
+  let cursor: string | undefined;
+  let asOf: string | null = null;
+  for (let page = 0; page < MAX_CURRENT_PAGES; page += 1) {
+    const r = await listQueue(prisma, { limit: MAX_QUEUE_LIMIT, ...(cursor ? { cursor } : {}) });
+    asOf ??= r.asOf;
+    items.push(...r.items);
+    if (!r.nextCursor) return { asOf, items, truncated: false };
+    cursor = r.nextCursor;
+  }
+  return { asOf, items, truncated: true };
+}
+
 /**
  * Next-touch state for cards that have a Gmail-proven sent touch (last mile).
  * One indexed ledger read for the page, then at most MAX_TOUCH_EVALUATIONS

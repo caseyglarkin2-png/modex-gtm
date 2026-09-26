@@ -103,6 +103,20 @@ describe('<WorkQueue> empty states and reload', () => {
     expect(screen.getByTestId('research-outcome')).toHaveTextContent('2 ready to contact');
   });
 
+  it('a RESEARCH card behind a full page of higher-priority READY cards still shows: the lane reads every page (debt burn, 2026-09-26)', async () => {
+    const base = { lane: 'work_queue', blocked: false, target: null, explain: null, humanAction: null, humanActionAt: null, createdAt: '2026-09-26T00:00:00Z', suppression: { class: 'clear', hits: [] } };
+    const account = { name: 'Acme', hubspotCompanyId: '1', tam: 'in', tamTier: 'A', heatTier: 4 };
+    const person = (id: number) => ({ id, personaKey: null, displayName: `P${id}`, email: `p${id}@acme.com`, hubspotContactId: null, title: 'VP' });
+    const ready = Array.from({ length: 100 }, (_, i) => ({ ...base, id: `d${i}`, priority: 90, action: 'enroll_gap_sequence', ruleId: 'enroll', account, persona: person(i), hypothesis: { id: 'h', status: 'active', family: 'x', confidence: 1 } }));
+    fetchMock
+      .mockResolvedValueOnce(jsonResponse({ asOf: '2026-09-26T12:00:00.000Z', items: ready, nextCursor: 'c1' }))
+      .mockResolvedValueOnce(jsonResponse({ asOf: '2026-09-26T12:00:00.000Z', items: [{ ...base, id: 'r1', priority: 5, action: 'research_required', ruleId: 'bounced_or_invalid', account, persona: person(500), hypothesis: null }], nextCursor: null }));
+    render(<WorkQueue sellerLane="research" />);
+    await screen.findByTestId('decision-card');
+    expect(String(fetchMock.mock.calls[1][0])).toBe('/api/gap/queue?limit=100&cursor=c1');
+    expect(screen.queryByText('Nothing in this lane right now.')).toBeNull();
+  });
+
   it('refetches the queue when reloadKey changes (a completed routing run), with no page reload', async () => {
     fetchMock.mockResolvedValue(jsonResponse({ asOf: '2026-09-26T12:00:00.000Z', items: [], nextCursor: null }));
     const { rerender } = render(<WorkQueue reloadKey="run-1" />);

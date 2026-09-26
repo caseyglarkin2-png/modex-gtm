@@ -51,8 +51,11 @@ const ACT_ERROR_TEXT: Record<string, string> = {
   unauthenticated: 'Not signed in',
 };
 
+/** Pages the lane reads on load: the lane filter is per card, so it must see every card, not one priority page. */
+const MAX_PAGES = 10;
+
 async function fetchQueue(cursor: string | null): Promise<QueueResponse> {
-  const res = await fetch(cursor ? `/api/gap/queue?cursor=${encodeURIComponent(cursor)}` : '/api/gap/queue', { cache: 'no-store' });
+  const res = await fetch(`/api/gap/queue?limit=100${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`, { cache: 'no-store' });
   if (!res.ok) throw new Error(await readError(res));
   const body = (await res.json()) as Partial<QueueResponse>;
   return {
@@ -130,9 +133,14 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
     setLoading(true);
     setError(null);
     try {
-      const page = await fetchQueue(null);
+      let page = await fetchQueue(null);
+      const all = [...page.items];
+      for (let n = 1; n < MAX_PAGES && page.nextCursor; n += 1) {
+        page = await fetchQueue(page.nextCursor);
+        all.push(...page.items);
+      }
       setAsOf(page.asOf);
-      setItems(page.items);
+      setItems(all);
       setNextCursor(page.nextCursor);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'load_failed');

@@ -42,7 +42,7 @@ const {
   snapshotFromProperties,
   tamFromProperty,
 } = await import('@/lib/gap/routing/run');
-const { listQueue, recordHumanAction, decodeCursor, encodeCursor } = await import('@/lib/gap/routing/queue');
+const { listAllCurrent, listQueue, recordHumanAction, decodeCursor, encodeCursor } = await import('@/lib/gap/routing/queue');
 const { sellerLaneOf } = await import('@/lib/gap/routing/card-readiness');
 const { POST: runPOST } = await import('@/app/api/gap/routing/run/route');
 const { GET: queueGET } = await import('@/app/api/gap/queue/route');
@@ -836,6 +836,14 @@ describe('listQueue', () => {
       [1, 'later'],
     ]);
     expect(sellerLaneOf({ ...items[1], lane: 'work_queue', touch: { state: 'due', stepIndex: 1, sentCount: 1 } })).toBe('follow_up');
+  });
+
+  it('listAllCurrent reads every page, so the cockpit counts never stop at the first priority page', async () => {
+    for (let i = 1; i <= 130; i += 1) await seed(store, { priority: i % 7, ...person(i) });
+    const all = await listAllCurrent(store);
+    expect(all.items).toHaveLength(130);
+    expect(all.truncated).toBe(false);
+    expect(new Set(all.items.map((i) => i.id)).size).toBe(130);
   });
 
   it('a targeted run that fails on one account leaves every current card in place', async () => {

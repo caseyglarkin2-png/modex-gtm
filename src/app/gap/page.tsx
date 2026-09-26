@@ -26,7 +26,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
-import { listQueue, type QueueItem } from '@/lib/gap/routing/queue';
+import { listAllCurrent, type QueueItem } from '@/lib/gap/routing/queue';
 import { cockpitOpenHref, sellerLaneOf } from '@/lib/gap/routing/card-readiness';
 import { listHypotheses } from '@/lib/gap/hypothesis/service';
 import { loadThesisGroups, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
@@ -63,7 +63,7 @@ async function loadCockpit() {
   const [hypothesesToReview, routableScope, queue, repliesPage, rawGroups, active] = await Promise.all([
     prisma.prospectingHypothesis.count({ where: { status: { in: ['draft', 'review_required'] } } }),
     resolveRoutableHypothesisScope(prisma),
-    listQueue(prisma, { limit: 100 }),
+    listAllCurrent(prisma),
     listReplies(prisma, { state: 'undispositioned', limit: REPLY_TILE_LIMIT }),
     loadThesisGroups(prisma).catch((): LoadedGroup[] => []),
     prisma.prospectingHypothesis.findMany({ where: { status: 'active', primary_persona_id: { not: null } }, select: { primary_persona_id: true } }),
