@@ -164,6 +164,10 @@ describe('sellerLaneOf: the /gap work lanes', () => {
     expect(sellerLaneOf(item({ touch: { state: 'due', stepIndex: 1, dueAt: '2026-10-01T00:00:00Z', sentCount: 1 } }))).toBe('follow_up');
     for (const state of ['waiting', 'stopped', 'complete', 'unknown'] as const) expect(sellerLaneOf(item({ touch: { state, sentCount: 1 } }))).toBe('later');
   });
+  it('a person whose reply is waiting (R3, reply_triage) is never READY: the reply is decided in REPLIES first', () => {
+    expect(sellerLaneOf({ ...item({ action: 'one_off_email', ruleId: 'reply_pending' }), lane: 'reply_triage' })).toBe('later');
+    expect(sellerLaneOf({ ...item({ action: 'one_off_email', ruleId: 'hot' }), lane: 'work_queue' })).toBe('ready');
+  });
   it('missing evidence is RESEARCH; a proposed hypothesis is REVIEW; a system block is blocked; nurture is later', () => {
     expect(sellerLaneOf(item({ action: 'research_required', ruleId: 'evidence_thin' }))).toBe('research');
     expect(sellerLaneOf(item({ action: 'approve_hypothesis', ruleId: 'hyp_proposed' }))).toBe('review');

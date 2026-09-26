@@ -234,9 +234,12 @@ export type SellerLane = 'review' | 'research' | 'ready' | 'follow_up' | 'later'
 
 const CONTACT_NOW_ACTIONS: ReadonlySet<string> = new Set(['call_now', 'enroll_gap_sequence', 'one_off_email', 'linkedin_manual_task']);
 
-export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | null }): SellerLane {
+export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | null; lane?: string }): SellerLane {
   if (item.touch) return item.touch.state === 'due' ? 'follow_up' : 'later';
   if (item.humanAction) return 'later';
+  // R3 reply_pending: the buyer replied and nobody has said what it meant. That
+  // decision lives in REPLIES; a READY card here would offer a cold first email.
+  if (item.lane === 'reply_triage') return 'later';
   if (item.action === 'approve_hypothesis') return 'review';
   const r = cardReadiness(item);
   if (r.state === 'blocked') return 'blocked';
