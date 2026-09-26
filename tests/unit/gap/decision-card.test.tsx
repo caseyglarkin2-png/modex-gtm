@@ -128,8 +128,8 @@ describe('<DecisionCard>', () => {
   it('leads with the seller-facing action, and labels the buttons as recording, not performing, the action', () => {
     render(<DecisionCard item={item()} onAct={() => {}} />);
     expect(screen.getByTestId('seller-action-label')).toHaveTextContent('Call Jordan');
-    expect(screen.getByText(/record your action/i)).toBeInTheDocument();
-    expect(screen.getByText('Casey actually did')).toBeInTheDocument();
+    expect(screen.getByText(/never send or enroll/i)).toBeInTheDocument();
+    expect(screen.getByText('Log what you did')).toBeInTheDocument();
   });
 
   it('clicking "I did this" records the HumanAction that agrees with the recommendation, never the routing action string', () => {
@@ -281,14 +281,14 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
 
   it('links to the action pack (the hypothesis preview) for an outreach-eligible card with a hypothesis', () => {
     render(<DecisionCard item={item({ action: 'enroll_gap_sequence' })} onAct={() => {}} />);
-    expect(screen.getByRole('link', { name: /Open action pack/ })).toHaveAttribute('href', '/gap/preview/hyp_1?personaId=41&decisionId=dec_1');
+    expect(screen.getByRole('link', { name: /Open email and call script/ })).toHaveAttribute('href', '/gap?lane=ready&open=dec_1#card-dec_1');
   });
 
   it('call_now leads with the tel: link and offers the action pack (call pack) as the secondary link (final pass)', () => {
     render(<DecisionCard item={item({ action: 'call_now', persona: { ...item().persona, phone: '(555) 123-4567' } })} onAct={() => {}} />);
     const actionable = screen.getByTestId('readiness-actionable');
     expect(within(actionable).getByRole('link', { name: /^Call / })).toHaveAttribute('href', 'tel:5551234567');
-    expect(within(actionable).getByRole('link', { name: /Open action pack/ })).toBeInTheDocument();
+    expect(within(actionable).getByRole('link', { name: /Open email and call script/ })).toBeInTheDocument();
   });
 
   it('call_now without a phone is a missing prerequisite with a fix link, never a bare name', () => {
@@ -308,15 +308,15 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     const panel = screen.getByTestId('missing-prerequisite');
     expect(panel).toHaveTextContent('Missing prerequisite');
     expect(panel).toHaveTextContent('No hypothesis covers Jordan at Acme Foods');
-    expect(within(panel).getByRole('link', { name: /Review or create a hypothesis/ })).toHaveAttribute('href', '/gap/hypotheses?status=draft');
-    expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
+    expect(within(panel).getByRole('link', { name: /Review or create a hypothesis/ })).toHaveAttribute('href', '/gap?lane=review');
+    expect(screen.queryByRole('link', { name: /Open email and call script/ })).toBeNull();
     expect(screen.queryByTestId('rendered-email')).toBeNull();
   });
 
   it('a blocked card never shows contact buttons or an action pack link', () => {
     render(<DecisionCard item={item({ blocked: true, lane: 'blocked', action: 'do_not_contact', ruleId: 'suppressed' })} onAct={() => {}} />);
     expect(screen.queryByTestId('contact-buttons')).toBeNull();
-    expect(screen.queryByRole('link', { name: /Open action pack/ })).toBeNull();
+    expect(screen.queryByRole('link', { name: /Open email and call script/ })).toBeNull();
     expect(screen.queryByTestId('missing-prerequisite')).toBeNull();
   });
 
@@ -366,5 +366,21 @@ describe('<DecisionCard> RESEARCH THIS', () => {
     expect(await screen.findByTestId('research-none')).toHaveTextContent('No defensible outreach trigger found.');
     expect(fetchMock.mock.calls.map(([u]) => String(u))).toEqual(['/api/gap/research']);
     fetchMock.mockRestore();
+  });
+});
+
+describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)', () => {
+  it('an open card renders its action pack inline, and its own open link becomes Close', () => {
+    render(
+      <DecisionCard
+        item={item({ action: 'enroll_gap_sequence', ruleId: 'enroll', hypothesis: { id: 'hyp_1', status: 'active', family: 'hidden_capacity', confidence: 42 } })}
+        onAct={vi.fn()}
+        expanded={<p>PACK BODY</p>}
+        closeHref="/gap?lane=ready"
+      />,
+    );
+    expect(within(screen.getByTestId('card-expanded')).getByText('PACK BODY')).toBeInTheDocument();
+    expect(screen.getByTestId('card-close')).toHaveAttribute('href', '/gap?lane=ready');
+    expect(screen.queryByRole('link', { name: /Open email and call script/ })).toBeNull();
   });
 });

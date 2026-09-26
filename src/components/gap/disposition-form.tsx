@@ -327,6 +327,16 @@ export function DispositionForm({
   const options = useMemo(() => chipOptions(prefill.problemFamily), [prefill.problemFamily]);
   const refusal = validateDraft(draft, channel);
   const problem = isProblemClass(draft.responseClass);
+  // Weekend reduction (2026-09-26): when the suggested class needs nothing else (no buyer
+  // quote, no objection), agreeing with it is ONE human click that records it. A class that
+  // needs the buyer's words still goes through the form; the AI never records anything alone.
+  const confirmable = useMemo(() => {
+    if (mode !== 'reply' || !suggestion) return null;
+    const cls = String(suggestion.responseClass);
+    if (!(CONVERSATION_CLASSES as readonly string[]).includes(cls)) return null;
+    const candidate: DispositionDraft = { ...emptyDraft(), responseClass: cls as ResponseClass };
+    return validateDraft(candidate, channel) === null ? candidate : null;
+  }, [mode, suggestion, channel]);
 
   useEffect(() => {
     if (autoFocus) formRef.current?.focus();
@@ -458,6 +468,11 @@ export function DispositionForm({
             }}
           >
             Use suggestion
+          </Button>
+        ) : null}
+        {confirmable && !result ? (
+          <Button type="button" size="sm" data-testid="confirm-suggestion" disabled={busy} onClick={() => void post(confirmable)}>
+            Confirm: {words(String(confirmable.responseClass))}
           </Button>
         ) : null}
       </div>

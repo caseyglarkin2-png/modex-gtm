@@ -37,9 +37,9 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from '@/lib/hubspot/client';
+import { isHubSpotConfigured } from '@/lib/hubspot/client';
 import { DEFAULT_MAX_PAIRS, createHubSpotSnapshotProvider, resolveRoutableHypothesisScope, runRouting } from '@/lib/gap/routing/run';
-import type { SnapshotReads } from '@/lib/gap/routing/run';
+import { hubspotReads } from '@/lib/gap/routing/interactive';
 import { createClawdSuppressionReader } from '@/lib/gap/routing/suppression-read';
 
 export const dynamic = 'force-dynamic';
@@ -104,31 +104,6 @@ function queryOverrides(request: NextRequest): Record<string, unknown> {
   if (sp.get('dryRun') === '1') raw.dryRun = true;
   return raw;
 }
-
-/** The SDK reads, wired here so the run module stays free of the HubSpot client. */
-const hubspotReads: SnapshotReads = {
-  async readCompany(hubspotCompanyId, properties) {
-    const client = getHubSpotClient();
-    const res = await withHubSpotRetry(
-      () => client.crm.companies.basicApi.getById(hubspotCompanyId, [...properties]),
-      `gap-routing company read (${hubspotCompanyId})`,
-    );
-    return res ? { properties: res.properties ?? {} } : null;
-  },
-  async readContacts(ids, properties) {
-    const client = getHubSpotClient();
-    const res = await withHubSpotRetry(
-      () =>
-        client.crm.contacts.batchApi.read({
-          inputs: ids.map((id) => ({ id })),
-          properties: [...properties],
-          propertiesWithHistory: [],
-        }),
-      `gap-routing contacts batch read (${ids.length})`,
-    );
-    return (res.results ?? []).map((r) => ({ id: String(r.id), properties: r.properties ?? {} }));
-  },
-};
 
 export async function POST(request: NextRequest) {
   const skip = assertGapEnabled('GAP_ROUTING_ENABLED');

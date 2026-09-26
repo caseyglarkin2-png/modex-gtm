@@ -1,36 +1,21 @@
 /**
- * /gap/preview/[hypothesisId] (GAP Prospecting OS, Sprint 3, S3-T12).
+ * /gap/preview/[hypothesisId] (Sprint 3 S3-T12; demoted 2026-09-26).
  *
- * Server page behind GAP_OS_ENABLED + GAP_MESSAGE_COMPILER_ENABLED: a flag
- * that is off means 404, the same answer the compile and enroll APIs give.
- * The session is enforced by middleware for every page; the explicit
- * auth() check is a second lock.
+ * The shareable DEEP LINK and DIAGNOSTIC view of one action pack. Normal
+ * selling never needs it: READY and FOLLOW UP cards open the same
+ * <ActionPackView> inline on /gap. This page adds only what a diagnosis
+ * needs: target, version, the per-step compile report, the template compile
+ * rows (shown apart, never a gate input) and the shadow enroll row.
  *
- * What it shows, top to bottom: the hypothesis (FACT observation with its
- * cited signals, the HYPOTHESIS block, what a "no" would mean), the persona
- * and the resolved enroll target, the version under review, then one
- * CompileReport card per step built from the NEWEST GapCompile row per
- * step. When every step is cleared (pass, or review approved) the shadow
- * button posts to /api/gap/enroll. No live button this sprint.
- *
- * Version resolution: the hypothesis's own `sequence_version_id` when set;
- * else the newest draft or frozen version of its `sequence_family_id`; else
- * the newest draft or frozen version of the newest unarchived family whose
- * `problem_family` matches the hypothesis's problem family (engine
- * preferred by the resolved target). Target resolution reads the newest
- * `enroll_gap_sequence` RoutingDecision for the hypothesis, exactly as the
- * enroll service does.
+ * Gate: GAP_MESSAGE_COMPILER_ENABLED (off means 404); auth() is a second lock.
  *
  * Compile rows (R3-5): the report and the enroll button read rows compiled
  * for THIS hypothesis on the resolved version (`hypothesisCompileWhere`).
- * Template-level rows (hypothesis_id null, from a `template: true` compile of
- * the version's template copy) are a second query and render under their
- * own "template compile (shadow only)" heading; they never feed `compileIds`
- * or the cleared state.
+ * Template-level rows are a second query under their own "template compile
+ * (shadow only)" heading; they never feed `compileIds` or the cleared state.
  *
  * Never rendered: `inputs_snapshot`, `critic` payloads, `last_intent_source`
- * or any other private intent field. The report component picks columns by
- * name (see compile-report.tsx) and this page passes it nothing else.
+ * or any other private intent field.
  */
 
 import { notFound, redirect } from 'next/navigation';
@@ -39,21 +24,10 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
 import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler/preview-rows';
-import { loadActionPack } from '@/lib/gap/execution/action-pack';
-import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
-import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
-import { gmailSenderAddress } from '@/lib/email/gmail-sender';
-import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
-import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch';
 import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
-import { firstNameOf } from '@/lib/gap/sequence/render';
-import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
-import { CopyButton } from '@/components/gap/copy-button';
-import { FactBlock, HypothesisBlock } from '@/components/gap/fact-hypothesis-blocks';
-import { HypothesisStatusBadge } from '@/components/gap/hypothesis-drawer';
-import { asStringList } from '@/lib/gap/ui/format';
+import { ActionPackView, resolveActionPack } from '@/components/gap/action-pack-view';
 import {
   CompileReport,
   allStepsCleared,
@@ -63,26 +37,29 @@ import {
   type CompileRowLike,
   type ReportApproval,
 } from '@/components/gap/compile-report';
-import { SellerDraftPanel, type DraftRow } from '@/components/gap/seller-draft-panel';
-import { SendFromYardflow } from '@/components/gap/send-from-yardflow';
 import { EnrollShadowButton } from './enroll-shadow-button';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Action pack' };
 
 type Params = { hypothesisId: string };
-
-type Obj = Record<string, unknown>;
-function isObj(v: unknown): v is Obj {
-  return typeof v === 'object' && v !== null && !Array.isArray(v);
-}
+type Search = { personaId?: string; decisionId?: string };
 
 function stepCopy(steps: Array<{ templates?: { subjectTemplate?: string | null; bodyTemplate?: string | null } | null }>, i: number) {
   const t = steps[i]?.templates ?? null;
   return { subject: t?.subjectTemplate ?? null, body: t?.bodyTemplate ?? null };
 }
 
-type Search = { personaId?: string; decisionId?: string };
+const RECOMMENDS: Record<string, string> = {
+  enroll_gap_sequence: 'EMAIL',
+  one_off_email: 'EMAIL',
+  call_now: 'CALL',
+  linkedin_manual_task: 'LINKEDIN',
+  research_required: 'RESEARCH',
+  approve_hypothesis: 'REVIEW',
+  nurture: 'WAIT',
+  do_not_contact: 'DO NOT CONTACT',
+};
 
 export default async function PreviewPage({ params, searchParams }: { params: Promise<Params>; searchParams?: Promise<Search> }) {
   if (assertGapEnabled('GAP_MESSAGE_COMPILER_ENABLED')) notFound();
@@ -92,42 +69,23 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
 
   const { hypothesisId } = await params;
   const search = (await searchParams) ?? {};
-  const personaIdParam = search.personaId && /^\d+$/.test(search.personaId) ? Number(search.personaId) : null;
-  const decisionIdParam = search.decisionId?.trim() || null;
-
-  // One loader for the page AND the draft service (action-pack.ts): the copy
-  // shown here is byte-for-byte the copy a draft would carry, for the person
-  // on the card, judged by the compile row for exactly this copy.
-  // The touch this card is on: a DUE follow-up renders that step; otherwise step 0.
-  let touch: NextTouch | null = null;
-  if (decisionIdParam) {
-    try {
-      touch = await computeNextTouch(prisma, decisionIdParam, new Date());
-    } catch {
-      touch = { state: 'unknown', detail: 'Could not evaluate the sequence.', sent: [] };
-    }
-  }
-  const touchStep = touch?.state === 'due' ? touch.stepIndex : 0;
-  const pack = await loadActionPack(prisma, { hypothesisId, personaId: personaIdParam, decisionId: decisionIdParam, stepIndex: touchStep });
+  const target = {
+    hypothesisId,
+    personaId: search.personaId && /^\d+$/.test(search.personaId) ? Number(search.personaId) : null,
+    decisionId: search.decisionId?.trim() || null,
+  };
+  const { pack } = await resolveActionPack(target);
   if (!pack) notFound();
-  const { hypothesis, persona, decision, target, top100, version, steps } = pack;
+  const { hypothesis, persona, decision, target: enrollTarget, top100, version, steps } = pack;
 
-  const account = await prisma.account.findUnique({
-    where: { name: hypothesis.account_name },
-    select: { hubspot_company_id: true },
-  });
+  const account = await prisma.account.findUnique({ where: { name: hypothesis.account_name }, select: { hubspot_company_id: true } });
 
   let reportSteps: CompileReportStep[] = [];
   let templateSteps: CompileReportStep[] = [];
   let compileIds: string[] = [];
   if (version && steps.length > 0) {
     const select = { id: true, step_index: true, verdict: true, checks: true, word_count: true, cta_family: true, created_at: true };
-    // Rows for this hypothesis only: these are the report and the gate input.
-    const rows: CompileRowLike[] = await prisma.gapCompile.findMany({
-      where: hypothesisCompileWhere(version.id, hypothesis.id),
-      orderBy: { created_at: 'desc' },
-      select,
-    });
+    const rows: CompileRowLike[] = await prisma.gapCompile.findMany({ where: hypothesisCompileWhere(version.id, hypothesis.id), orderBy: { created_at: 'desc' }, select });
     const newest = newestPerStep(rows, steps.length);
     reportSteps = await Promise.all(
       newest.map(async (row, i) => {
@@ -137,131 +95,21 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
       }),
     );
     compileIds = newest.filter((r): r is CompileRowLike => r !== null).map((r) => r.id);
-
-    // Template-level rows: shown apart, never a gate input.
-    const templateRows: CompileRowLike[] = await prisma.gapCompile.findMany({
-      where: templateCompileWhere(version.id),
-      orderBy: { created_at: 'desc' },
-      select,
-    });
+    const templateRows: CompileRowLike[] = await prisma.gapCompile.findMany({ where: templateCompileWhere(version.id), orderBy: { created_at: 'desc' }, select });
     if (templateRows.length > 0) {
       templateSteps = newestPerStep(templateRows, steps.length).map((row, i) => toReportStep(i, row, stepCopy(steps, i), null));
     }
   }
-
   const cleared = allStepsCleared(reportSteps);
-
-  // Ready to send means the compiler cleared THIS exact rendered copy (a pass,
-  // or a review Casey approved), not merely that some step-0 row exists.
-  const renderedEmail = pack.rendered;
-  const emailReady = pack.emailReady;
-  const compileNote = !pack.compile
-    ? 'Not compiled yet. Check copy runs the compiler on exactly this email.'
-    : pack.compile.verdict === 'review_required' && !pack.compile.approved
-      ? `Compiled: needs review (approval ${pack.compile.approvalStatus ?? 'not requested'}).`
-      : pack.compile.verdict === 'reject'
-        ? 'Compiled: rejected. See the report below.'
-        : null;
-
-  // The draft panel is for an email card opened from the Work Queue.
-  const isEmailCard = decision != null && EMAIL_ACTIONS.has(decision.action) && decision.lane !== 'blocked' && pack.personaSource === 'decision';
-  const draftIneligible = !decision || pack.personaSource !== 'decision'
-    ? 'Open this action pack from a Work Queue card to create a Gmail draft for that person.'
-    : !isEmailCard
-      ? 'This card does not recommend email, so there is no draft to create.'
-      : !persona?.email
-        ? 'No email address on file for this person.'
-        : persona.do_not_contact
-          ? 'This person carries a do-not-contact flag. Email stays blocked at send; no draft.'
-          : hypothesis.status !== 'active'
-            ? 'The hypothesis is not active.'
-            : null;
-  // A newer routing decision for this person that is not an email supersedes this card (the service refuses too).
-  const newerDecision = decision && decision.persona_id != null
-    ? await prisma.routingDecision.findFirst({
-        where: { persona_id: decision.persona_id, account_name: decision.account_name, created_at: { gt: decision.created_at } },
-        orderBy: { created_at: 'desc' },
-        select: { id: true, action: true, rule_id: true },
-      })
-    : null;
-  const superseded = newerDecision && !EMAIL_ACTIONS.has(newerDecision.action)
-    ? `A newer routing run changed this card to ${newerDecision.action.replace(/_/g, ' ')} (${newerDecision.rule_id.replace(/_/g, ' ')}). No draft from this older card.`
-    : null;
-  const pendingApproval =
-    pack.compile && pack.compile.verdict === 'review_required' && !pack.compile.approved && pack.compile.approvalRequestId && pack.compile.approvalStatus === 'pending'
-      ? {
-          id: pack.compile.approvalRequestId,
-          reason:
-            ((await prisma.sendApprovalRequest.findUnique({ where: { id: pack.compile.approvalRequestId }, select: { comment: true } })) as { comment: string | null } | null)?.comment ?? '',
-        }
-      : null;
-  const fmtDay = (iso: string) => new Date(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/New_York' });
-  const touchIneligible = !touch || touch.state === 'not_started' || touch.state === 'due'
-    ? null
-    : touch.state === 'waiting'
-      ? `Touch ${touch.stepIndex + 1} is due ${fmtDay(touch.dueAt)}. Nothing to draft yet.`
-      : touch.state === 'stopped'
-        ? `Sequence stopped: ${touch.detail}`
-        : touch.state === 'complete'
-          ? 'Every touch in this sequence has been sent.'
-          : touch.state === 'unknown'
-            ? `Sequence status unknown: ${touch.detail} Nothing is prepared until it can be read.`
-            : null;
-  const citationIneligible = pack.unresolvedCitations.length > 0
-    ? `This step's template cites evidence that is not this account's (${pack.unresolvedCitations.join(', ')}). It must be rewritten with this account's facts before it can be drafted.`
-    : null;
-  const drafts: DraftRow[] = decision
-    ? (await listDraftRecords(prisma, decision.id)).map((d) => ({
-        gmailDraftId: d.drafted.gmailDraftId,
-        recipient: d.drafted.recipient,
-        subject: d.drafted.subject,
-        createdAt: d.drafted.createdAt,
-        fate: d.fate,
-        sentAt: d.sent?.sentAt ?? null,
-        gmailSentMessageId: d.sent?.gmailSentMessageId ?? null,
-      }))
-    : [];
-
-  const callPack =
-    persona && renderedEmail
-      ? buildCallPack({
-          firstName: firstNameOf(persona.name),
-          senderFirstName: 'Casey',
-          accountName: hypothesis.account_name,
-          observationPlain: stripObservationCitations(hypothesis.observation ?? ''),
-          problemHypothesis: hypothesis.problem_hypothesis ?? '',
-          diagnosticQuestion: asStringList(hypothesis.falsification_questions)[0] ?? null,
-        })
-      : null;
-
-  // Above the fold (first-principles pass): why now, and what GAP recommends, in plain words.
-  const whyNow = (hypothesis.why_now as string | null)?.trim() || stripObservationCitations(hypothesis.observation ?? '').trim() || null;
-  const RECOMMENDS: Record<string, string> = {
-    enroll_gap_sequence: 'EMAIL',
-    one_off_email: 'EMAIL',
-    call_now: 'CALL',
-    linkedin_manual_task: 'LINKEDIN',
-    research_required: 'RESEARCH',
-    approve_hypothesis: 'REVIEW',
-    nurture: 'WAIT',
-    do_not_contact: 'DO NOT CONTACT',
-  };
   const recommends = decision ? RECOMMENDS[decision.action] ?? null : null;
-  const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
-  // SEND EMAIL shows only when every page-level check passed and the compiler cleared this exact copy; the server re-checks all of it at the click.
-  const sendable = Boolean(renderedEmail && decision && emailReady && !(superseded ?? touchIneligible ?? citationIneligible ?? draftIneligible));
   const mailto = persona?.email ? mailtoHref(persona.email) : null;
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const contactUrl = persona?.hubspot_contact_id ? hubspotContactUrl(persona.hubspot_contact_id) : null;
   const companyUrl = account?.hubspot_company_id ? hubspotCompanyUrl(account.hubspot_company_id) : null;
 
-  const signals = Array.isArray(hypothesis.signals)
-    ? hypothesis.signals.map((link: { signal?: unknown }) => link.signal).filter((s: unknown): s is Obj => isObj(s))
-    : [];
-
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'GAP', href: '/gap' }, { label: 'Ready', href: '/gap?lane=ready' }, { label: hypothesis.account_name }]} />
+      <Breadcrumb items={[{ label: 'GAP', href: '/gap' }, { label: hypothesis.account_name }]} />
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">{hypothesis.account_name}</h1>
@@ -281,143 +129,7 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         ) : null}
       </div>
 
-      {pack.personaRefused ? (
-        <p role="alert" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
-          The person requested for this action pack does not belong to {hypothesis.account_name} ({pack.personaRefused.replace(/_/g, ' ')}). Nothing is rendered for them.
-        </p>
-      ) : null}
-      {whyNow ? (
-        <section data-testid="why-now" className="rounded-md border border-[var(--border)] p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Why now</p>
-          <p className="mt-1">{whyNow}</p>
-        </section>
-      ) : null}
-
-      {touch && touch.state !== 'not_started' ? (
-        <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</p>
-          {'sent' in touch
-            ? touch.sent.map((t) => (
-                <p key={t.gmailSentMessageId}>
-                  Touch {t.stepIndex + 1} sent {fmtDay(t.sentAt)}
-                </p>
-              ))
-            : null}
-          {touch.state === 'waiting' ? <p className="font-medium">Waiting: touch {touch.stepIndex + 1} due {fmtDay(touch.dueAt)}</p> : null}
-          {touch.state === 'due' ? <p className="font-medium">Follow up: touch {touch.stepIndex + 1} is due now (shown below)</p> : null}
-          {touch.state === 'stopped' ? <p className="font-medium text-[var(--destructive)]">Sequence stopped: {touch.detail}</p> : null}
-          {touch.state === 'complete' ? <p className="font-medium">Sequence complete</p> : null}
-          {touch.state === 'unknown' ? <p className="font-medium">Sequence status unknown: {touch.detail}</p> : null}
-        </section>
-      ) : null}
-
-      {pack.unresolvedCitations.length > 0 ? (
-        <p role="alert" data-testid="unresolved-citations" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
-          This step&apos;s template states facts from placeholder evidence ({pack.unresolvedCitations.join(', ')}), not from {hypothesis.account_name}&apos;s own signals. Do not send it as written.
-        </p>
-      ) : null}
-
-      {renderedEmail ? (
-        <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email</p>
-            <Badge data-testid="email-readiness" variant={emailReady ? 'success' : 'warning'}>
-              {emailReady ? 'Ready to send' : 'Needs your review'}
-            </Badge>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Subject</p>
-            <p className="mt-1 text-sm" data-testid="email-subject">{renderedEmail.queued.subject}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Body</p>
-            <p className="mt-1 whitespace-pre-wrap text-sm" data-testid="email-body">{renderedEmail.queued.body}</p>
-          </div>
-          {sendable && decision ? <SendFromYardflow decisionId={decision.id} stepIndex={touchStep} mailbox={mailbox} /> : null}
-          <div className="flex flex-wrap gap-2">
-            {pack.unresolvedCitations.length === 0 ? <CopyButton text={renderedEmail.queued.body} label="Copy email" /> : null}
-            {persona?.email ? <CopyButton text={persona.email} label="Copy email address" /> : null}
-          </div>
-          {!emailReady ? (
-            <p className="text-xs text-[var(--muted-foreground)]">
-              This copy has not cleared the compiler yet. It is shown for review, not for sending.{compileNote ? ` ${compileNote}` : ''}
-            </p>
-          ) : null}
-        </section>
-      ) : (
-        <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
-          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
-          <p className="mt-1">
-            {!persona
-              ? 'No person is attached to this action pack.'
-              : !version
-                ? `No GAP sequence family exists for ${String(hypothesis.problem_family).replace(/_/g, ' ')} yet, so there is no email to render.`
-                : 'The sequence has no step 0 copy to render.'}
-          </p>
-        </section>
-      )}
-
-      {renderedEmail && decision ? (
-        <details className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="save-draft-details" open={!sendable}>
-          <summary className="cursor-pointer font-medium">Save as Gmail draft instead (edit in Gmail)</summary>
-          <div className="mt-3">
-          {renderedEmail && decision ? (
-        <SellerDraftPanel
-          decisionId={decision.id}
-          emailReady={emailReady}
-          senderIdentity={gapGmailSender()?.userEmail ?? gmailSenderAddress()}
-          drafts={drafts}
-          ineligibleReason={superseded ?? touchIneligible ?? citationIneligible ?? draftIneligible}
-          pendingApproval={pendingApproval}
-          stepIndex={touchStep}
-        />
-      ) : null}
-
-          </div>
-        </details>
-      ) : null}
-
-      {callPack ? (
-        <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Opener</p>
-            <p className="mt-1 text-sm" data-testid="call-opener">{callPack.opener}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 1 (current state / root cause)</p>
-            <p className="mt-1 text-sm">{callPack.diagnostic1}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Diagnostic 2 (business impact)</p>
-            <p className="mt-1 text-sm">{callPack.diagnostic2}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds)</p>
-            <p className="mt-1 text-sm">{callPack.voicemail}</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <CopyButton text={callPack.opener} label="Copy call opener" />
-            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
-          </div>
-        </section>
-      ) : null}
-
-      <details className="rounded-md border border-[var(--border)] p-3" data-testid="why-gap">
-        <summary className="cursor-pointer text-sm font-medium">Why GAP thinks this (evidence, and what would prove us wrong)</summary>
-        <div className="mt-3 space-y-4">
-      <FactBlock observation={hypothesis.observation} signals={signals as never} />
-      <HypothesisBlock
-        problemHypothesis={hypothesis.problem_hypothesis}
-        rootCauseHypotheses={asStringList(hypothesis.root_cause_hypotheses)}
-        impactHypotheses={asStringList(hypothesis.impact_hypotheses)}
-        whyNow={hypothesis.why_now}
-        falsificationQuestions={asStringList(hypothesis.falsification_questions)}
-        whatANoMeans={hypothesis.what_a_no_means}
-        confidence={hypothesis.confidence}
-      />
-        </div>
-      </details>
+      <ActionPackView target={target} />
 
       <details className="rounded-md border border-[var(--border)] p-3" data-testid="system-details">
         <summary className="cursor-pointer text-sm font-medium">System details</summary>
@@ -461,8 +173,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Target</p>
           <p className="mt-1">
-            <Badge variant="outline" data-target={target}>
-              {target.replace(/_/g, ' ')}
+            <Badge variant="outline" data-target={enrollTarget}>
+              {enrollTarget.replace(/_/g, ' ')}
             </Badge>
             {top100?.sequenceName ? <span className="ml-2 text-xs text-[var(--muted-foreground)]">{top100.sequenceName}</span> : null}
           </p>

@@ -66,8 +66,13 @@ export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin',
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
 
-/** Where a draft hypothesis for any account is reviewed and approved today. */
-export const HYPOTHESIS_REVIEW_HREF = '/gap/hypotheses?status=draft';
+/** Where a draft hypothesis for any account is reviewed and approved: the cockpit REVIEW lane. */
+export const HYPOTHESIS_REVIEW_HREF = '/gap?lane=review';
+
+/** Open a card's action pack inline in its cockpit lane (no page transition). */
+export function cockpitOpenHref(lane: 'ready' | 'follow_up', decisionId: string): string {
+  return `/gap?lane=${lane}&open=${encodeURIComponent(decisionId)}#card-${encodeURIComponent(decisionId)}`;
+}
 
 export function actionPackHref(hypothesisId: string, personaId: number | string | null, decisionId: string): string {
   const q = new URLSearchParams();
@@ -120,9 +125,11 @@ function readinessOf(item: ReadinessInput): CardReadiness {
 
   const warning = WARNING_CLASSES.has(cls) ? SUPPRESSION_CLASS_COPY[cls] : undefined;
   const name = firstName(item);
+  // The full action pack as a history/diagnostic deep link, and the same pack opened inline in the cockpit.
   const packLink = item.hypothesis
-    ? { label: 'Open action pack (email + call script)', href: actionPackHref(item.hypothesis.id, item.persona.id, item.id) }
+    ? { label: 'Action pack (history)', href: actionPackHref(item.hypothesis.id, item.persona.id, item.id) }
     : null;
+  const openPack = item.hypothesis ? { label: 'Open email and call script', href: cockpitOpenHref('ready', item.id) } : null;
 
   if (item.ruleId === 'suppression_review' || cls === 'unknown_provenance') {
     const hits = item.suppression?.hits?.join(', ') || 'a do-not-contact flag';
@@ -146,12 +153,12 @@ function readinessOf(item: ReadinessInput): CardReadiness {
       case 'due':
         return {
           state: 'actionable',
-          primary: packLink ? { label: `Follow up: open action pack (touch ${nth})`, href: packLink.href } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No hypothesis on this card to render the follow-up from.' },
+          primary: item.hypothesis ? { label: `Follow up: touch ${nth}`, href: cockpitOpenHref('follow_up', item.id) } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No hypothesis on this card to render the follow-up from.' },
           secondary: [],
         };
       case 'stopped':
         return t.reason === 'replied'
-          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap/replies' }, secondary: packLink ? [packLink] : [] }
+          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' }, secondary: packLink ? [packLink] : [] }
           : { state: 'actionable', primary: { label: `Sequence stopped`, href: null, note: t.detail ?? 'A stop rule fired.' }, secondary: [] };
       case 'complete':
         return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: packLink ? [packLink] : [] };
@@ -165,17 +172,17 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     case 'one_off_email': {
       if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix() });
       if (!item.persona.email) return withWarning({ state: 'missing_prerequisite' as const, missing: `No email address on file for ${name}.`, fix: contactFix(item, 'Add an email in HubSpot') });
-      return withWarning({ state: 'actionable' as const, primary: packLink!, secondary: [] });
+      return withWarning({ state: 'actionable' as const, primary: openPack!, secondary: [] });
     }
     case 'call_now': {
       const tel = telHref(item.persona.phone ?? null);
       if (!tel) return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable phone number for ${name}.`, fix: contactFix(item, 'Add a phone in HubSpot') });
-      return withWarning({ state: 'actionable' as const, primary: { label: `Call ${name}`, href: tel }, secondary: packLink ? [packLink] : [] });
+      return withWarning({ state: 'actionable' as const, primary: { label: `Call ${name}`, href: tel }, secondary: openPack ? [openPack] : [] });
     }
     case 'linkedin_manual_task': {
       const li = item.persona.linkedinUrl?.trim();
       if (!li) return withWarning({ state: 'missing_prerequisite' as const, missing: `No LinkedIn profile on file for ${name}.`, fix: contactFix(item, 'Add a LinkedIn URL in HubSpot') });
-      return withWarning({ state: 'actionable' as const, primary: { label: `Message ${name} on LinkedIn`, href: li }, secondary: packLink ? [packLink] : [] });
+      return withWarning({ state: 'actionable' as const, primary: { label: `Message ${name} on LinkedIn`, href: li }, secondary: openPack ? [openPack] : [] });
     }
     case 'approve_hypothesis':
       return withWarning({ state: 'actionable' as const, primary: { label: 'Review the hypothesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
@@ -227,9 +234,12 @@ export type SellerLane = 'review' | 'research' | 'ready' | 'follow_up' | 'later'
 
 const CONTACT_NOW_ACTIONS: ReadonlySet<string> = new Set(['call_now', 'enroll_gap_sequence', 'one_off_email', 'linkedin_manual_task']);
 
-export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | null }): SellerLane {
+export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | null; lane?: string }): SellerLane {
   if (item.touch) return item.touch.state === 'due' ? 'follow_up' : 'later';
   if (item.humanAction) return 'later';
+  // R3 reply_pending: the buyer replied and nobody has said what it meant. That
+  // decision lives in REPLIES; a READY card here would offer a cold first email.
+  if (item.lane === 'reply_triage') return 'later';
   if (item.action === 'approve_hypothesis') return 'review';
   const r = cardReadiness(item);
   if (r.state === 'blocked') return 'blocked';

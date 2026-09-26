@@ -79,7 +79,7 @@ describe('<RunRoutingPanel>', () => {
     expect(refreshMock).not.toHaveBeenCalled();
   });
 
-  it('an aborted request (the 60s client timeout firing) shows the timeout message, never refreshes, and never auto-retries', async () => {
+  it('an aborted request (the 150s client timeout firing) shows the timeout message, never refreshes, and never auto-retries', async () => {
     fetchMock.mockImplementationOnce(() => Promise.reject(new DOMException('Aborted', 'AbortError')));
     render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
     fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
@@ -90,14 +90,14 @@ describe('<RunRoutingPanel>', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1); // no automatic retry
   });
 
-  it('wires an AbortController signal into the fetch call, aborting no earlier than 60 seconds', () => {
+  it('wires an AbortController signal into the fetch call, aborting no earlier than 150 seconds (a real 7-account run takes about 64s)', () => {
     vi.useFakeTimers();
     const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
     fetchMock.mockImplementationOnce(() => new Promise(() => {})); // never resolves on its own
     render(<RunRoutingPanel canRun routableHypotheses={3} routableAccounts={2} />);
     fireEvent.click(screen.getByRole('button', { name: 'Run routing' }));
 
-    vi.advanceTimersByTime(59_999);
+    vi.advanceTimersByTime(149_999);
     expect(abortSpy).not.toHaveBeenCalled();
     vi.advanceTimersByTime(1);
     expect(abortSpy).toHaveBeenCalledTimes(1);

@@ -75,6 +75,46 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     for (const c of transition.mock.calls) expect(c[3].reason).toContain('approve + use selected siblings (2 of 4');
   });
 
+  it('APPROVE + USE reports who is now in use (what the route then routes); a row that did not activate is not in it', async () => {
+    const { prisma } = db(PEP());
+    const fp = (await loadThesisGroups(prisma))[0].fingerprint;
+    const transition = vi.fn(async (_p: unknown, id: string, action: string) => (id === 'd3' && action === 'activate' ? { ok: false as const, reason: 'suppressed' } : { ok: true as const, id, from: 'x', to: 'y', effects: [] })) as any;
+    const r = await approveSelectedSiblings(prisma, { fingerprint: fp, hypothesisIds: ['d1', 'd3'], actor: 'c', now: NOW, use: true }, { transition });
+    expect(r.inUse).toEqual([{ personaId: 916, name: 'p916' }]);
+  });
+
+  it('USE THIS EVIDENCE + APPROVE + USE: links the chosen facts to the SELECTED editable rows only, then approves; frozen rows are reported, not mutated', async () => {
+    linkSignalsMock.mockClear();
+    const { prisma } = db(PEP());
+    const fp = (await loadThesisGroups(prisma))[0].fingerprint;
+    const transition = vi.fn(async (_p: unknown, id: string) => ({ ok: true as const, id, from: 'x', to: 'y', effects: [] })) as any;
+    const r = await approveSelectedSiblings(prisma, { fingerprint: fp, hypothesisIds: ['d1', 'd3', 'a1'], actor: 'casey@freightroll.com', now: NOW, use: true, signalIds: ['ev1', 'ev1', 'ev2'] }, { transition });
+    expect(linkSignalsMock.mock.calls.map((c: any[]) => [c[1], c[2], c[3]])).toEqual([
+      ['d1', ['ev1', 'ev2'], 'casey@freightroll.com'],
+      ['d3', ['ev1', 'ev2'], 'casey@freightroll.com'],
+    ]);
+    expect(r.attached).toEqual([
+      { hypothesisId: 'd1', ok: true, from: 'draft', to: 'draft', detail: 'linked 2' },
+      { hypothesisId: 'd3', ok: true, from: 'review_required', to: 'review_required', detail: 'linked 2' },
+      { hypothesisId: 'a1', ok: true, from: 'active', to: 'active', detail: 'active narrative is frozen; evidence not added' },
+    ]);
+    // d2 was not selected: never linked, never transitioned.
+    expect(transition.mock.calls.some((c: any[]) => c[1] === 'd2')).toBe(false);
+    for (const c of transition.mock.calls) expect(c[3].reason).toContain('use evidence + approve + use selected siblings');
+  });
+
+  it('a refused evidence link stops approval for THAT row only, with the reason', async () => {
+    linkSignalsMock.mockClear();
+    linkSignalsMock.mockImplementationOnce((async () => ({ ok: false, reason: 'signal_not_found' })) as any);
+    const { prisma } = db(PEP());
+    const fp = (await loadThesisGroups(prisma))[0].fingerprint;
+    const transition = vi.fn(async (_p: unknown, id: string) => ({ ok: true as const, id, from: 'x', to: 'y', effects: [] })) as any;
+    const r = await approveSelectedSiblings(prisma, { fingerprint: fp, hypothesisIds: ['d1', 'd3'], actor: 'c', now: NOW, use: true, signalIds: ['ev1'] }, { transition });
+    expect(r.results[0]).toEqual({ hypothesisId: 'd1', ok: false, from: 'draft', to: null, detail: 'not approved: the evidence could not be linked' });
+    expect(r.results[1]).toMatchObject({ hypothesisId: 'd3', ok: true, to: 'active' });
+    expect(transition.mock.calls.some((c: any[]) => c[1] === 'd1')).toBe(false);
+  });
+
   it('refuses ids outside the group (no bulk approval outside a reviewed sibling group)', async () => {
     const { prisma } = db(PEP());
     const fp = (await loadThesisGroups(prisma))[0].fingerprint;

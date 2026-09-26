@@ -363,3 +363,21 @@ describe('structural: the components read only contract fields', () => {
     }
   });
 });
+
+describe('one-click reply confirmation (weekend reduction, 2026-09-26)', () => {
+  it('a suggested class that needs nothing else: Confirm records it in ONE human click', async () => {
+    const { client, postDisposition } = clientWith({ ok: true, status: 201, data: CREATED });
+    render(<DispositionForm mode="reply" prefill={EMAIL_PREFILL} client={client} suggestion={{ ...SUGGESTION, responseClass: 'timing', bids: [] }} />);
+    expect(postDisposition).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByTestId('confirm-suggestion'));
+    await screen.findByTestId('disposition-effects');
+    expect(posted(postDisposition)).toMatchObject({ responseClass: 'timing', channel: 'email' });
+  });
+
+  it('a suggested class that needs the buyer words offers no one-click confirm (the human must quote the buyer)', () => {
+    const { client } = clientWith({ ok: true, status: 201, data: CREATED });
+    render(<DispositionForm mode="reply" prefill={EMAIL_PREFILL} client={client} suggestion={SUGGESTION} />);
+    expect(screen.queryByTestId('confirm-suggestion')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Use suggestion' })).toBeInTheDocument();
+  });
+});

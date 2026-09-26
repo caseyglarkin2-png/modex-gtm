@@ -142,9 +142,9 @@ export async function advanceHypothesis(
 
 export async function approveSelectedSiblings(
   prisma: PrismaLike,
-  input: { fingerprint: string; hypothesisIds: string[]; actor: string; now: Date; use?: boolean },
+  input: { fingerprint: string; hypothesisIds: string[]; actor: string; now: Date; use?: boolean; signalIds?: string[] },
   deps: { transition?: typeof transitionHypothesis } = {},
-): Promise<{ ok: boolean; reason?: string; results: SiblingResult[] }> {
+): Promise<{ ok: boolean; reason?: string; results: SiblingResult[]; attached?: SiblingResult[]; inUse?: Array<{ personaId: number; name: string | null }> }> {
   const transition = deps.transition ?? transitionHypothesis;
   const group = await groupFor(prisma, input.fingerprint);
   if (!group) return { ok: false, reason: 'group_not_found', results: [] };
@@ -153,13 +153,41 @@ export async function approveSelectedSiblings(
   const outsiders = selected.filter((id) => !members.has(id));
   if (outsiders.length > 0) return { ok: false, reason: `not_in_group:${outsiders.join(',')}`, results: [] };
 
-  const verb = input.use ? 'approve + use selected siblings' : 'approve selected siblings';
+  // USE THIS EVIDENCE + APPROVE + USE: link the facts Casey chose to the SELECTED
+  // editable rows first (each link audited by linkSignals), then approve. A frozen
+  // (approved) row is reported, never mutated. A refused link stops that row.
+  const attached: SiblingResult[] = [];
+  const signalIds = [...new Set(input.signalIds ?? [])];
+  if (signalIds.length > 0) {
+    for (const id of selected) {
+      const m = members.get(id)!;
+      if (!REVIEWABLE_STATUSES.has(m.status)) {
+        attached.push({ hypothesisId: id, ok: true, from: m.status, to: m.status, detail: `${m.status} narrative is frozen; evidence not added` });
+        continue;
+      }
+      const r = await linkSignals(prisma, id, signalIds, input.actor);
+      attached.push(r.ok ? { hypothesisId: id, ok: true, from: m.status, to: m.status, detail: `linked ${r.linked.length}` } : { hypothesisId: id, ok: false, from: m.status, to: null, detail: `link refused: ${r.reason}` });
+    }
+  }
+  const linkFailed = new Set(attached.filter((a) => !a.ok).map((a) => a.hypothesisId));
+
+  const verb = `${signalIds.length > 0 ? 'use evidence + ' : ''}${input.use ? 'approve + use selected siblings' : 'approve selected siblings'}`;
   const reason = `group review ${input.fingerprint.slice(0, 12)}: ${verb} (${selected.length} of ${group.members.length}, ${group.accountName} ${group.problemFamily})`;
   const results: SiblingResult[] = [];
   for (const id of selected) {
+    if (linkFailed.has(id)) {
+      results.push({ hypothesisId: id, ok: false, from: members.get(id)!.status, to: null, detail: 'not approved: the evidence could not be linked' });
+      continue;
+    }
     results.push(await advanceHypothesis(prisma, id, members.get(id)!.status, { use: input.use === true, actor: input.actor, now: input.now, reason }, transition));
   }
-  return { ok: results.every((r) => r.ok), results };
+  // The people now in use: what the caller routes and reports on.
+  const inUse = results
+    .filter((r) => r.ok && r.to === 'active')
+    .map((r) => members.get(r.hypothesisId)!)
+    .filter((m) => typeof m.primary_persona_id === 'number')
+    .map((m) => ({ personaId: m.primary_persona_id as number, name: m.personaName }));
+  return { ok: results.every((r) => r.ok), results, inUse, ...(signalIds.length > 0 ? { attached } : {}) };
 }
 
 /**

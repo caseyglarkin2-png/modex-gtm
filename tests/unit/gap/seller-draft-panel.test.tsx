@@ -19,13 +19,12 @@ afterEach(() => {
 });
 
 describe('<SellerDraftPanel>', () => {
-  it('offers Create Gmail draft only when the copy is compiler-cleared; otherwise Check copy', () => {
+  it('offers Create Gmail draft whether or not the copy was checked; there is no CHECK COPY step (the server checks on the click)', () => {
     const { rerender } = render(<SellerDraftPanel {...base} emailReady />);
     expect(screen.getByRole('button', { name: 'Create Gmail draft' })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Check copy' })).toBeNull();
     rerender(<SellerDraftPanel {...base} emailReady={false} />);
-    expect(screen.getByRole('button', { name: 'Check copy' })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Create Gmail draft' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Create Gmail draft' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Check copy' })).toBeNull();
     expect(screen.queryByRole('button', { name: /send/i })).toBeNull();
   });
 
@@ -54,12 +53,12 @@ describe('<SellerDraftPanel>', () => {
     expect(fetchMock.mock.calls.some(([u]) => String(u).includes('/act'))).toBe(false);
   });
 
-  it('Check copy sends checkOnly and, on review, is approved inline (no detour to a generic queue)', async () => {
+  it('an unchecked copy: Create Gmail draft (never checkOnly) and, on review, is approved inline (no detour to a generic queue)', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(jsonResponse({ error: 'copy_review_required', detail: 'critic_unconfigured' }, 409));
     render(<SellerDraftPanel {...base} emailReady={false} />);
-    fireEvent.click(screen.getByRole('button', { name: 'Check copy' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Create Gmail draft' }));
     await waitFor(() => expect(screen.getByTestId('draft-review')).toHaveTextContent('critic_unconfigured'));
-    expect((fetchMock.mock.calls[0][1] as RequestInit).body).toBe('{"checkOnly":true}');
+    expect((fetchMock.mock.calls[0][1] as RequestInit).body).toBe('{}');
     expect(screen.queryByRole('link', { name: 'Open the approval queue' })).toBeNull();
   });
 
@@ -94,12 +93,12 @@ describe('<SellerDraftPanel> approval deep link (closeout)', () => {
     expect(fetchMock.mock.calls.some(([u]) => String(u).includes('gmail-draft'))).toBe(false);
   });
 
-  it('Check copy that opens a review surfaces Approve this copy for the returned approval id', async () => {
+  it('a draft click that opens a review surfaces Approve this copy for the returned approval id', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
       new Response(JSON.stringify({ error: 'copy_review_required', detail: 'C15', approvalRequestId: 'apr-7' }), { status: 409 }),
     );
     render(<SellerDraftPanel {...base} emailReady={false} />);
-    fireEvent.click(screen.getByRole('button', { name: 'Check copy' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Create Gmail draft' }));
     await screen.findByRole('button', { name: 'Approve this copy' });
     fetchMock.mockResolvedValueOnce(new Response('{}', { status: 200 }));
     fireEvent.click(screen.getByRole('button', { name: 'Approve this copy' }));

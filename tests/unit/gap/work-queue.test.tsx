@@ -27,18 +27,54 @@ describe('<WorkQueue> empty states and reload', () => {
     expect(screen.getByText(/does not contact anyone/i)).toBeInTheDocument();
   });
 
-  it('distinguishes a real run with a filtered-empty result from no run at all', async () => {
+  it('distinguishes an empty lane from no run at all', async () => {
     fetchMock.mockResolvedValue(jsonResponse({ runId: 'run-1', items: [], nextCursor: null }));
-    render(<WorkQueue />);
-    await waitFor(() => expect(screen.getByText('No decisions match this filter.')).toBeInTheDocument());
+    render(<WorkQueue sellerLane="ready" />);
+    await waitFor(() => expect(screen.getByText('Nothing in this lane right now.')).toBeInTheDocument());
   });
 
-  it('states the operator loop above the queue: GAP recommends, Casey records', async () => {
-    fetchMock.mockResolvedValue(jsonResponse({ runId: null, items: [], nextCursor: null }));
-    render(<WorkQueue />);
+  it('no filters, no In flight / Enroll rows tabs, no "tell GAP what you did" preamble: the lane is the work', async () => {
+    fetchMock.mockResolvedValue(jsonResponse({ runId: 'run-1', items: [], nextCursor: null }));
+    render(<WorkQueue sellerLane="ready" />);
     await waitFor(() => expect(fetchMock).toHaveBeenCalled());
-    expect(screen.getByText('GAP recommends what to do next.')).toBeInTheDocument();
-    expect(screen.getByText(/tell GAP what you did/i)).toBeInTheDocument();
+    expect(screen.queryByRole('tab')).toBeNull();
+    expect(screen.queryByLabelText(/filter/i)).toBeNull();
+    expect(screen.queryByText(/tell GAP what you did/i)).toBeNull();
+  });
+
+  it('READY: only ready cards show, and the open card renders its action pack inline', async () => {
+    const hyp = { id: 'hyp_1', status: 'active', family: 'hidden_capacity', confidence: 42 };
+    const base = { lane: 'work_queue', priority: 50, blocked: false, target: null, explain: null, humanAction: null, humanActionAt: null, createdAt: '2026-09-26T00:00:00Z', suppression: { class: 'clear', hits: [] } };
+    const person = (id: number, name: string) => ({ id, personaKey: null, displayName: name, email: `${name}@pepsico.com`, hubspotContactId: null, title: 'VP' });
+    const account = { name: 'PepsiCo', hubspotCompanyId: '1', tam: 'in', tamTier: 'A', heatTier: 4 };
+    fetchMock.mockResolvedValue(
+      jsonResponse({
+        runId: 'run-1',
+        nextCursor: null,
+        items: [
+          { ...base, id: 'd1', action: 'enroll_gap_sequence', ruleId: 'enroll', account, persona: person(916, 'salvador'), hypothesis: hyp },
+          { ...base, id: 'd2', action: 'research_required', ruleId: 'no_hypothesis', account, persona: person(928, 'michelle'), hypothesis: null },
+        ],
+      }),
+    );
+    render(<WorkQueue sellerLane="ready" openId="d1" openPanel={<p>PACK</p>} closeHref="/gap?lane=ready" />);
+    await screen.findByText('PACK');
+    expect(screen.getAllByTestId('decision-card')).toHaveLength(1);
+  });
+
+  it('RESEARCH: people at one account missing the same evidence collapse into ONE group with one research action', async () => {
+    const base = { lane: 'work_queue', priority: 50, blocked: false, target: null, explain: null, humanAction: null, humanActionAt: null, createdAt: '2026-09-26T00:00:00Z', suppression: { class: 'clear', hits: [] }, action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null };
+    const account = { name: 'General Mills', hubspotCompanyId: '1', tam: 'in', tamTier: 'B', heatTier: 4 };
+    const person = (id: number, name: string) => ({ id, personaKey: null, displayName: name, email: `${name}@gm.com`, hubspotContactId: null });
+    fetchMock.mockResolvedValue(
+      jsonResponse({ runId: 'run-1', nextCursor: null, items: [{ ...base, id: 'r1', account, persona: person(7, 'Ryan') }, { ...base, id: 'r2', account, persona: person(8, 'Nisar') }] }),
+    );
+    render(<WorkQueue sellerLane="research" />);
+    const group = await screen.findByTestId('research-group');
+    expect(group).toHaveTextContent('2 people affected');
+    expect(group).toHaveTextContent('Ryan, Nisar');
+    expect(screen.getAllByTestId('research-this')).toHaveLength(1);
+    expect(screen.queryAllByTestId('decision-card')).toHaveLength(0);
   });
 
   it('refetches the queue when reloadKey changes (a completed routing run), with no page reload', async () => {

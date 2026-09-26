@@ -9,6 +9,11 @@
  * `onAct`. Once `humanAction` is set the buttons go away and the card shows
  * what was done and when.
  *
+ * Weekend reduction (2026-09-26): an opened card renders its action pack
+ * inline (`expanded`, a server-rendered node from /gap), its own "open" link
+ * becomes Close, and the "what I actually did" log is collapsed: a direct
+ * send already records it, so it is only for doing something else.
+ *
  * Every explain field is rendered as a React text node, never as HTML. The
  * card reads only the fields named in `QueueItem`; private intent
  * (`intentScore`, `lastIntentSource`) is not part of the contract and the
@@ -17,7 +22,7 @@
  * Voice: no em dashes, "yards" plural, "production capacity".
  */
 
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { ExternalLink, Linkedin, Mail, Phone } from 'lucide-react';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
@@ -94,6 +99,10 @@ export interface DecisionCardProps {
   acting?: boolean;
   /** Inline note from the last act attempt, e.g. "already acted". */
   actError?: string | null;
+  /** The action pack for this card, rendered inline when the card is open. */
+  expanded?: ReactNode;
+  /** Where Close goes when the card is open (the lane without `open`). */
+  closeHref?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -166,7 +175,7 @@ export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
 // Component
 // ---------------------------------------------------------------------------
 
-export function DecisionCard({ item, onAct, acting = false, actError = null }: DecisionCardProps) {
+export function DecisionCard({ item, onAct, acting = false, actError = null, expanded = null, closeHref = '/gap' }: DecisionCardProps) {
   const [choosingOther, setChoosingOther] = useState(false);
   const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
 
@@ -208,7 +217,8 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
       data-testid="decision-card"
       data-decision-id={item.id}
       data-action={item.action}
-      className="rounded-md border border-[var(--border)] bg-[var(--background)] p-4 text-sm shadow-sm"
+      id={`card-${item.id}`}
+      className={`scroll-mt-4 rounded-md border bg-[var(--background)] p-4 text-sm shadow-sm ${expanded ? 'border-[var(--primary)]' : 'border-[var(--border)]'}`}
     >
       {item.blocked ? (
         <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--destructive)]">System block</p>
@@ -291,7 +301,18 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
 
       {readiness.state === 'actionable' ? (
         <div data-testid="readiness-actionable" className="mt-3 flex flex-wrap items-center gap-2">
-          {readiness.primary.href ? (
+          {expanded && readiness.primary.href?.includes('&open=') ? (
+            <Link href={closeHref} scroll={false} data-testid="card-close" className="rounded-md border border-[var(--border)] px-3 py-1.5 text-xs hover:bg-[var(--muted)]">
+              Close
+            </Link>
+          ) : readiness.primary.href?.startsWith('/gap?') ? (
+            <Link
+              href={readiness.primary.href}
+              className="inline-flex items-center gap-1 rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90"
+            >
+              {readiness.primary.label}
+            </Link>
+          ) : readiness.primary.href ? (
             <a
               href={readiness.primary.href}
               {...(readiness.primary.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
@@ -302,11 +323,19 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
           ) : (
             <p className="text-xs text-[var(--muted-foreground)]">{'note' in readiness.primary ? readiness.primary.note : null}</p>
           )}
-          {readiness.secondary.map((link) => (
-            <Link key={link.href} href={link.href} className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)]">
-              {link.label}
-            </Link>
-          ))}
+          {readiness.secondary
+            .filter((link) => !(expanded && link.href.includes('&open=')))
+            .map((link) => (
+              <Link key={link.href} href={link.href} className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)]">
+                {link.label}
+              </Link>
+            ))}
+        </div>
+      ) : null}
+
+      {expanded ? (
+        <div data-testid="card-expanded" className="mt-4 border-t border-[var(--border)] pt-4">
+          {expanded}
         </div>
       ) : null}
 
@@ -383,8 +412,8 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
             {item.humanActionAt ? ` at ${formatWhen(item.humanActionAt, true)}` : ''}
           </p>
         ) : (
-          <div className="w-full space-y-2 border-t border-[var(--border)] pt-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Casey actually did</p>
+          <details className="w-full space-y-2 border-t border-[var(--border)] pt-3" data-testid="log-what-you-did">
+            <summary className="cursor-pointer text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Log what you did</summary>
             {choosingOther ? (
               <div className="flex flex-wrap items-center gap-2">
                 <select
@@ -423,9 +452,9 @@ export function DecisionCard({ item, onAct, acting = false, actError = null }: D
               </div>
             )}
             <p className="text-[11px] text-[var(--muted-foreground)]">
-              These buttons record your action. They do not send email or enroll anyone.
+              Only needed when you acted outside GAP. A send from GAP is recorded for you. These buttons never send or enroll.
             </p>
-          </div>
+          </details>
         )}
         {actError ? (
           <span role="alert" data-testid="act-error" className="text-xs text-[var(--destructive)]">

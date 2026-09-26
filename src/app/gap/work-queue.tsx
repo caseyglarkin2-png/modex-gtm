@@ -1,36 +1,36 @@
 'use client';
 
 /**
- * Work queue (GAP Prospecting OS, Sprint 2, S2-T11).
+ * The cockpit's card lanes: RESEARCH, READY and FOLLOW UP (Sprint 2 S2-T11;
+ * reduced 2026-09-26).
  *
- * Three tabs. "Queue" fetches GET /api/gap/queue with the action and lane
- * filters, renders each decision as a <DecisionCard>, and appends the next
- * page through `nextCursor`. Acting posts to
- * POST /api/gap/decisions/{id}/act and updates the card in place; a 409
- * shows "already acted" inline on that card. "In flight" is a note, not a
- * lane: the router stores skips, not decisions, for prospects already in a
- * sequence, so there is nothing to list here yet. "Enroll rows" fetches the
- * markdown from GET /api/gap/queue/enroll-rows?format=md and shows it in a
- * <pre> with a guarded Copy button.
+ * Fetches GET /api/gap/queue (the latest routing run), keeps the cards in
+ * `sellerLane` (sellerLaneOf, the same function the cockpit counts with) and
+ * renders each as a <DecisionCard>. The card named by `openId` renders the
+ * server-built action pack (`openPanel`) inline, so READY -> SEND EMAIL ->
+ * CONFIRM + SEND never leaves /gap.
+ *
+ * RESEARCH groups repeated work: cards at one account missing the same
+ * evidence (same rule, same hypothesis) collapse into one group with one
+ * FIND EVIDENCE action; the proposal it produces covers every person in the
+ * group, so the result comes back to REVIEW as one shared thesis.
+ *
+ * Removed 2026-09-26: the "In flight" and "Enroll rows" tabs (a paragraph and
+ * a markdown dump for a retired manual loop; GET /api/gap/queue/enroll-rows
+ * stays for agents) and the action/lane enum filters.
  */
 
-import { useCallback, useEffect, useState } from 'react';
-import Link from 'next/link';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ROUTING_ACTIONS, ROUTING_LANES } from '@/lib/gap/taxonomy';
 import { DecisionCard, type QueueItem } from '@/components/gap/decision-card';
-import { sellerLaneOf, type SellerLane } from '@/lib/gap/routing/card-readiness';
-
-const LANE_TITLE: Record<string, string> = { ready: 'Ready to contact', research: 'Research', follow_up: 'Follow up' };
+import { ResearchThis } from '@/components/gap/research-this';
+import { RESEARCHABLE_RULES, cardReadiness, sellerLaneOf, type SellerLane } from '@/lib/gap/routing/card-readiness';
 
 interface QueueResponse {
   runId: string | null;
   items: QueueItem[];
   nextCursor: string | null;
 }
-
-const SELECT_CLASS = 'h-9 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm shadow-sm';
 
 async function readError(res: Response): Promise<string> {
   try {
@@ -42,12 +42,7 @@ async function readError(res: Response): Promise<string> {
   return `HTTP ${res.status}`;
 }
 
-/**
- * The server always answers a refusal with a specific `{error: "<code>"}`
- * body (see /api/gap/decisions/[id]/act/route.ts); Casey should never have
- * to reason from a bare HTTP status. Unmapped codes fall back to the raw
- * code text, never a status number alone.
- */
+/** The server answers a refusal with `{error: "<code>"}`; Casey never reasons from a bare status. */
 const ACT_ERROR_TEXT: Record<string, string> = {
   invalid_body: 'Invalid action',
   already_acted: 'Already recorded',
@@ -55,21 +50,8 @@ const ACT_ERROR_TEXT: Record<string, string> = {
   unauthenticated: 'Not signed in',
 };
 
-function describeActError(code: string): string {
-  return ACT_ERROR_TEXT[code] ?? code;
-}
-
-function queueUrl(action: string, lane: string, cursor: string | null): string {
-  const params = new URLSearchParams();
-  if (action) params.set('action', action);
-  if (lane) params.set('lane', lane);
-  if (cursor) params.set('cursor', cursor);
-  const query = params.toString();
-  return query ? `/api/gap/queue?${query}` : '/api/gap/queue';
-}
-
-async function fetchQueue(action: string, lane: string, cursor: string | null): Promise<QueueResponse> {
-  const res = await fetch(queueUrl(action, lane, cursor), { cache: 'no-store' });
+async function fetchQueue(cursor: string | null): Promise<QueueResponse> {
+  const res = await fetch(cursor ? `/api/gap/queue?cursor=${encodeURIComponent(cursor)}` : '/api/gap/queue', { cache: 'no-store' });
   if (!res.ok) throw new Error(await readError(res));
   const body = (await res.json()) as Partial<QueueResponse>;
   return {
@@ -79,13 +61,59 @@ async function fetchQueue(action: string, lane: string, cursor: string | null): 
   };
 }
 
-// ---------------------------------------------------------------------------
-// Queue tab
-// ---------------------------------------------------------------------------
+/** RESEARCH cards that share one missing piece of evidence at one account: one group, one action. */
+export function groupResearch<T extends Pick<QueueItem, 'id' | 'ruleId' | 'touch' | 'account' | 'hypothesis'>>(items: readonly T[]): Array<{ key: string; items: T[] }> {
+  const groups = new Map<string, T[]>();
+  for (const item of items) {
+    const shared = RESEARCHABLE_RULES.has(item.ruleId) && !item.touch;
+    const key = shared ? `${item.account.name}|${item.ruleId}|${item.hypothesis?.id ?? ''}` : `one|${item.id}`;
+    groups.set(key, [...(groups.get(key) ?? []), item]);
+  }
+  return [...groups.entries()].map(([key, g]) => ({ key, items: g }));
+}
 
-function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | number; sellerLane?: SellerLane | null }) {
-  const [action, setAction] = useState('');
-  const [lane, setLane] = useState('');
+function ResearchGroup({ items, renderCard }: { items: QueueItem[]; renderCard: (item: QueueItem) => ReactNode }) {
+  const [open, setOpen] = useState(false);
+  const first = items[0];
+  const personaIds = items.map((i) => i.persona.id).filter((id): id is number => typeof id === 'number');
+  const what =
+    first.ruleId === 'no_hypothesis'
+      ? `No thesis covers these people at ${first.account.name} yet, so there is nothing to contact them about.`
+      : first.ruleId === 'evidence_thin'
+        ? `The ${first.account.name} thesis rests only on an automated keyword hit. It needs one sourced, quoted fact about a site, dock or yard change.`
+        : `The ${first.account.name} thesis rests on stale evidence.`;
+  const readiness = cardReadiness({ ...first, action: String(first.action), touch: first.touch ?? null });
+  return (
+    <article data-testid="research-group" className="space-y-3 rounded-md border border-[var(--border)] bg-[var(--background)] p-4 text-sm shadow-sm">
+      <div>
+        <p className="text-base font-semibold">{first.account.name}</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+          {items.length} people affected · {first.ruleId === 'no_hypothesis' ? 'no thesis yet' : first.ruleId === 'evidence_thin' ? 'single keyword hit' : 'stale evidence'}
+        </p>
+        <p className="mt-1 text-xs text-[var(--muted-foreground)]">{items.map((i) => i.persona.displayName ?? i.persona.email ?? 'unknown').join(', ')}</p>
+      </div>
+      <p className="text-xs">{what}</p>
+      {readiness.state === 'missing_prerequisite' && readiness.warning ? <p className="text-xs text-amber-700">{readiness.warning.title}</p> : null}
+      <ResearchThis decisionId={first.id} personaIds={personaIds} />
+      <button type="button" className="text-xs underline" onClick={() => setOpen(!open)}>
+        {open ? 'Hide each person' : 'Show each person'}
+      </button>
+      {open ? <div className="space-y-3">{items.map(renderCard)}</div> : null}
+    </article>
+  );
+}
+
+export interface WorkQueueProps {
+  /** Changes when a routing run lands, so the list refetches with no page reload. */
+  reloadKey?: string | number;
+  sellerLane?: SellerLane | null;
+  /** The card whose action pack is open, and that pack (server-rendered on /gap). */
+  openId?: string | null;
+  openPanel?: ReactNode;
+  closeHref?: string;
+}
+
+export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPanel = null, closeHref = '/gap' }: WorkQueueProps) {
   const [runId, setRunId] = useState<string | null>(null);
   const [items, setItems] = useState<QueueItem[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
@@ -95,11 +123,11 @@ function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | numbe
   const [acting, setActing] = useState<string | null>(null);
   const [actErrors, setActErrors] = useState<Record<string, string>>({});
 
-  const loadFirst = useCallback(async (nextAction: string, nextLane: string) => {
+  const loadFirst = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const page = await fetchQueue(nextAction, nextLane, null);
+      const page = await fetchQueue(null);
       setRunId(page.runId);
       setItems(page.items);
       setNextCursor(page.nextCursor);
@@ -113,18 +141,16 @@ function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | numbe
   }, []);
 
   useEffect(() => {
-    void loadFirst(action, lane);
-    // reloadKey is intentionally in the dependency array with no other use:
-    // a Run Routing pass changes it (the new run's id) so the queue refetches
-    // automatically, with no manual page refresh.
-  }, [action, lane, reloadKey, loadFirst]);
+    void loadFirst();
+    // reloadKey has no other use: a routing run changes it and the lane refetches.
+  }, [reloadKey, loadFirst]);
 
   async function loadMore() {
     if (!nextCursor) return;
     setLoadingMore(true);
     setError(null);
     try {
-      const page = await fetchQueue(action, lane, nextCursor);
+      const page = await fetchQueue(nextCursor);
       setItems((current) => {
         const seen = new Set(current.map((item) => item.id));
         return [...current, ...page.items.filter((item) => !seen.has(item.id))];
@@ -151,14 +177,12 @@ function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | numbe
         body: JSON.stringify({ action: humanAction }),
       });
       if (!res.ok) {
-        const message = describeActError(await readError(res));
-        setActErrors((current) => ({ ...current, [item.id]: message }));
+        const code = await readError(res);
+        setActErrors((current) => ({ ...current, [item.id]: ACT_ERROR_TEXT[code] ?? code }));
         return;
       }
       const at = new Date().toISOString();
-      setItems((current) =>
-        current.map((row) => (row.id === item.id ? { ...row, humanAction, humanActionAt: at } : row)),
-      );
+      setItems((current) => current.map((row) => (row.id === item.id ? { ...row, humanAction, humanActionAt: at } : row)));
     } catch (caught) {
       setActErrors((current) => ({ ...current, [item.id]: caught instanceof Error ? caught.message : 'network_error' }));
     } finally {
@@ -166,84 +190,43 @@ function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | numbe
     }
   }
 
-  const shown = sellerLane ? items.filter((item) => sellerLaneOf(item) === sellerLane) : items;
+  // The open card stays visible even after acting on it moves it to another lane (success never hides the result).
+  const shown = sellerLane ? items.filter((item) => sellerLaneOf(item) === sellerLane || item.id === openId) : items;
+  const renderCard = (item: QueueItem) => (
+    <DecisionCard
+      key={item.id}
+      item={item}
+      acting={acting === item.id}
+      actError={actErrors[item.id] ?? null}
+      onAct={(humanAction) => void act(item, humanAction)}
+      expanded={item.id === openId ? openPanel : null}
+      closeHref={closeHref}
+    />
+  );
 
   return (
     <div className="space-y-4">
-      {sellerLane ? (
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">{LANE_TITLE[sellerLane] ?? sellerLane}</h2>
-          <Link href="/gap" className="text-xs underline">Show all cards</Link>
-        </div>
-      ) : null}
-      <details className="text-xs">
-        <summary className="cursor-pointer text-[var(--muted-foreground)]">Filters and system details</summary>
-      <div className="mt-2 flex flex-wrap items-end gap-3">
-        <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
-          Action
-          <select aria-label="Action filter" className={SELECT_CLASS} value={action} onChange={(event) => setAction(event.target.value)}>
-            <option value="">all actions</option>
-            {ROUTING_ACTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option.replace(/_/g, ' ')}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
-          Lane
-          <select aria-label="Lane filter" className={SELECT_CLASS} value={lane} onChange={(event) => setLane(event.target.value)}>
-            <option value="">all lanes</option>
-            {ROUTING_LANES.map((option) => (
-              <option key={option} value={option}>
-                {option.replace(/_/g, ' ')}
-              </option>
-            ))}
-          </select>
-        </label>
-        <p data-testid="queue-summary" className="text-xs text-[var(--muted-foreground)]">
-          {runId ? (
-            <>
-              run <code className="font-mono">{runId}</code>, {items.length} loaded{nextCursor ? ', more available' : ''}
-            </>
-          ) : loading ? (
-            'loading'
-          ) : (
-            'no run yet'
-          )}
-        </p>
-      </div>
-      </details>
-
       {error ? (
         <p role="alert" className="text-sm text-[var(--destructive)]">
-          Could not load the queue: <code className="font-mono">{error}</code>
+          Could not load the cards: <code className="font-mono">{error}</code>
         </p>
       ) : null}
 
       {loading ? (
-        <p className="text-sm italic text-[var(--muted-foreground)]">Loading decisions...</p>
+        <p className="text-sm italic text-[var(--muted-foreground)]">Loading...</p>
       ) : shown.length === 0 ? (
         <div className="space-y-1">
-          <p className="text-sm italic text-[var(--muted-foreground)]">
-            {runId ? (sellerLane ? 'Nothing in this lane right now.' : 'No decisions match this filter.') : 'No routing run yet.'}
-          </p>
+          <p className="text-sm italic text-[var(--muted-foreground)]">{runId ? 'Nothing in this lane right now.' : 'No routing run yet.'}</p>
           <p className="text-xs text-[var(--muted-foreground)]">
-            Routing creates GAP recommendations. It does not contact anyone. Use Run routing above.
+            GAP routes on its own when you approve and use a thesis. Routing creates recommendations only; it does not contact anyone.
           </p>
+        </div>
+      ) : sellerLane === 'research' ? (
+        <div className="space-y-3">
+          {groupResearch(shown).map((g) => (g.items.length > 1 ? <ResearchGroup key={g.key} items={g.items} renderCard={renderCard} /> : renderCard(g.items[0])))}
         </div>
       ) : (
-        <div className="space-y-3">
-          {shown.map((item) => (
-            <DecisionCard
-              key={item.id}
-              item={item}
-              acting={acting === item.id}
-              actError={actErrors[item.id] ?? null}
-              onAct={(humanAction) => void act(item, humanAction)}
-            />
-          ))}
-        </div>
+        <div className="space-y-3">{shown.map(renderCard)}</div>
       )}
 
       {nextCursor ? (
@@ -252,124 +235,5 @@ function QueueTab({ reloadKey, sellerLane = null }: { reloadKey?: string | numbe
         </Button>
       ) : null}
     </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// In flight tab
-// ---------------------------------------------------------------------------
-
-function InFlightTab() {
-  return (
-    <div className="space-y-2 text-sm">
-      <p>In-flight prospects are excluded from routing (rule R2). The router records them as skips, not decisions, so there is no list to show here.</p>
-      <p className="text-[var(--muted-foreground)]">
-        See the{' '}
-        <Link href="/queue" className="text-[var(--primary)] hover:underline">
-          Draft Queue
-        </Link>{' '}
-        for drafts in flight and{' '}
-        <Link href="/gap/hypotheses" className="text-[var(--primary)] hover:underline">
-          Hypotheses
-        </Link>{' '}
-        for active enrollments.
-      </p>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Enroll rows tab
-// ---------------------------------------------------------------------------
-
-function EnrollRowsTab() {
-  const [markdown, setMarkdown] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [copied, setCopied] = useState<'idle' | 'copied' | 'unavailable'>('idle');
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch('/api/gap/queue/enroll-rows?format=md', { cache: 'no-store' });
-        if (!res.ok) throw new Error(await readError(res));
-        const text = await res.text();
-        if (!cancelled) setMarkdown(text);
-      } catch (caught) {
-        if (!cancelled) setError(caught instanceof Error ? caught.message : 'load_failed');
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  async function copy() {
-    if (markdown === null) return;
-    const clipboard = typeof navigator !== 'undefined' ? navigator.clipboard : undefined;
-    if (!clipboard || typeof clipboard.writeText !== 'function') {
-      setCopied('unavailable');
-      return;
-    }
-    try {
-      await clipboard.writeText(markdown);
-      setCopied('copied');
-    } catch {
-      setCopied('unavailable');
-    }
-  }
-
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <Button type="button" variant="outline" size="sm" disabled={markdown === null} onClick={() => void copy()}>
-          Copy
-        </Button>
-        {copied === 'copied' ? <span className="text-xs text-[var(--muted-foreground)]">Copied</span> : null}
-        {copied === 'unavailable' ? <span className="text-xs text-[var(--destructive)]">Clipboard unavailable, select the text instead</span> : null}
-      </div>
-      {error ? (
-        <p role="alert" className="text-sm text-[var(--destructive)]">
-          Could not load enroll rows: <code className="font-mono">{error}</code>
-        </p>
-      ) : markdown === null ? (
-        <p className="text-sm italic text-[var(--muted-foreground)]">Loading enroll rows...</p>
-      ) : markdown.trim().length === 0 ? (
-        <p className="text-sm italic text-[var(--muted-foreground)]">No enroll rows in the latest run.</p>
-      ) : (
-        <pre className="overflow-x-auto rounded-md border border-[var(--border)] bg-[var(--muted)]/60 p-4 text-xs leading-5">{markdown}</pre>
-      )}
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Shell
-// ---------------------------------------------------------------------------
-
-export function WorkQueue({ reloadKey, sellerLane = null }: { reloadKey?: string | number; sellerLane?: SellerLane | null }) {
-  return (
-    <Tabs defaultValue="queue">
-      <TabsList aria-label="Work queue sections">
-        <TabsTrigger value="queue">Queue</TabsTrigger>
-        <TabsTrigger value="in-flight">In flight (details)</TabsTrigger>
-        <TabsTrigger value="enroll-rows">Enroll rows (details)</TabsTrigger>
-      </TabsList>
-      <TabsContent value="queue">
-        <p className="mb-3 text-sm">
-          <span className="font-medium">GAP recommends what to do next.</span>{' '}
-          <span className="text-[var(--muted-foreground)]">
-            After you actually take the action, tell GAP what you did so it can compare its recommendation with your judgment.
-          </span>
-        </p>
-        <QueueTab reloadKey={reloadKey} sellerLane={sellerLane} />
-      </TabsContent>
-      <TabsContent value="in-flight">
-        <InFlightTab />
-      </TabsContent>
-      <TabsContent value="enroll-rows">
-        <EnrollRowsTab />
-      </TabsContent>
-    </Tabs>
   );
 }
