@@ -787,6 +787,25 @@ describe('listQueue', () => {
     expect(result.asOf).toBe((store.rows[3].created_at as Date).toISOString());
   });
 
+  it('a run killed part way (no completion marker) is never current: its people keep their last finished card', async () => {
+    const a1 = await seed(store, { priority: 50, run_id: 'run-done', ...person(1) });
+    await seed(store, { priority: 99, run_id: 'run-killed', ...person(1) });
+    await seed(store, { priority: 99, run_id: 'run-killed', ...person(2) });
+    (store as unknown as Record<string, unknown>).gapAuditEvent = {
+      findMany: vi.fn(async ({ where }: { where: { kind: string; subject_id: { in: string[] } } }) =>
+        where.kind === 'routing.run' ? where.subject_id.in.filter((id) => id === 'run-done').map((subject_id) => ({ subject_id })) : [],
+      ),
+    };
+    expect((await listQueue(store)).items.map((i) => [i.id, i.persona.id])).toEqual([[a1, 1]]);
+  });
+
+  it('runRouting writes its completion marker before it returns, so its cards are current the moment Casey sees the outcome', async () => {
+    const audit = vi.fn(async (_p: unknown, _i: AuditInput) => ({ stored: true, reviewQueued: false }));
+    await runRouting(store, { now: NOW, runId: 'run-M2', actor: 't', accountNames: ['Acme Foods'] }, { suppression: staticSuppressionReader('clear'), assemble: assembler({ 'Acme Foods': [inputsFor('Acme Foods', 1)] }), route: (i) => decisionFor(i), audit });
+    expect(audit).toHaveBeenCalledTimes(1);
+    expect(audit.mock.calls[0][1]).toMatchObject({ kind: 'routing.run', subjectType: 'routing_run', subjectId: 'run-M2' });
+  });
+
   it('the same person at two accounts is two subjects', async () => {
     await seed(store, { priority: 50, ...person(1, 'Acme Foods') });
     await seed(store, { priority: 40, ...person(1, 'Beta Dairy') });

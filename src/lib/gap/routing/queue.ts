@@ -237,6 +237,14 @@ function toItem(row: DecisionRow, live?: LivePersonaFields | null): QueueItem {
 // Current decisions
 // ---------------------------------------------------------------------------
 
+/**
+ * The audit kind run.ts writes once every account of a run is committed. A
+ * run without it was killed part way (2026-09-25 13:53: the platform stopped
+ * a broad run after 68 rows): its rows are never current, so its people keep
+ * their last finished card.
+ */
+export const ROUTING_RUN_DONE = 'routing.run';
+
 /** A thesis that ended (rejected, expired, resolved) no longer supports a recommendation. */
 const ENDED: ReadonlySet<string> = new Set(HYPOTHESIS_TERMINAL_STATUSES);
 
@@ -256,6 +264,9 @@ export interface CurrentDecisions {
  * replace their older card, never sit beside it. So a run that routes only
  * person 2 leaves persons 1 and 3 on their earlier cards.
  *
+ * Only decisions from finished runs count (ROUTING_RUN_DONE), so a run killed
+ * part way leaves its people on their previous cards.
+ *
  * Applicable: the decision cites no hypothesis, or its hypothesis still exists
  * and has not ended. When the newest decision no longer applies the subject
  * shows no card (an older card would be older reasoning, not a fallback); the
@@ -268,10 +279,22 @@ export interface CurrentDecisions {
  * Postgres as DISTINCT ON (account_name, persona_id).
  */
 export async function currentDecisions(prisma: PrismaLike): Promise<CurrentDecisions> {
-  const rows = (await prisma.routingDecision.findMany({
+  const all = (await prisma.routingDecision.findMany({
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
-    select: { id: true, account_name: true, persona_id: true, hypothesis_id: true, created_at: true },
-  })) as Array<{ id: string; account_name: string; persona_id: number | null; hypothesis_id: string | null; created_at: Date }>;
+    select: { id: true, run_id: true, account_name: true, persona_id: true, hypothesis_id: true, created_at: true },
+  })) as Array<{ id: string; run_id: string; account_name: string; persona_id: number | null; hypothesis_id: string | null; created_at: Date }>;
+
+  // Only finished runs count (ROUTING_RUN_DONE). A reader without the audit
+  // table (a test fake) sees every run as finished.
+  let rows = all;
+  if (typeof prisma?.gapAuditEvent?.findMany === 'function' && all.length > 0) {
+    const done = (await prisma.gapAuditEvent.findMany({
+      where: { kind: ROUTING_RUN_DONE, subject_type: 'routing_run', subject_id: { in: [...new Set(all.map((r) => r.run_id))] } },
+      select: { subject_id: true },
+    })) as Array<{ subject_id: string }>;
+    const finished = new Set(done.map((d) => d.subject_id));
+    rows = all.filter((r) => finished.has(r.run_id));
+  }
 
   const newest = new Map<string, (typeof rows)[number]>();
   for (const row of rows) {

@@ -9,8 +9,8 @@
  *
  * MODE IS ALWAYS SHADOW IN SPRINT 2. Every row this file writes carries
  * `mode: SHADOW_MODE`. Nothing here enrolls, sends, or calls HubSpot to write;
- * the only side effects are `routing_decisions` rows and one fire-and-forget
- * audit event. A structural test greps this file to prove the other mode value
+ * the only side effects are `routing_decisions` rows and one audit event,
+ * the run's completion marker. A structural test greps this file to prove the other mode value
  * never appears here.
  *
  * There is no "latest run" (debt burn, 2026-09-26): the queue shows each
@@ -32,6 +32,7 @@
 
 import { audit as auditEvent } from '../audit';
 import { createLimiter, withTimeout } from './bounded';
+import { ROUTING_RUN_DONE } from './queue';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import { EXPLAIN_LEAK_MARKER, isExplainLeakError } from './explain';
 import { assembleForAccount, isSkip } from './inputs';
@@ -607,18 +608,22 @@ export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, de
   // Anything still queued (past the pair budget) starts as a no-op.
   budgetSpent = true;
 
-  // Fire-and-forget: the audit ledger never gates the report.
-  void Promise.resolve()
-    .then(() =>
-      audit(prisma, {
-        kind: 'routing.run',
-        actor: opts.actor,
-        subjectType: 'routing_run',
-        subjectId: runId,
-        payload: { ...report },
-      }),
-    )
-    .catch(() => undefined);
+  // The run's completion marker (queue.ts ROUTING_RUN_DONE): written only
+  // after every account was committed, so a run the platform kills half-way
+  // never becomes anyone's current card. Awaited so the rows are current the
+  // moment the report returns; a failed write never fails the report (the
+  // run's rows then stay out of the queue, like a killed run's).
+  try {
+    await audit(prisma, {
+      kind: ROUTING_RUN_DONE,
+      actor: opts.actor,
+      subjectType: 'routing_run',
+      subjectId: runId,
+      payload: { ...report },
+    });
+  } catch {
+    // audit() already swallows its own write failures
+  }
 
   return report;
 }
