@@ -201,11 +201,10 @@ TECHNICAL
   routable scope (cap 25 accounts). Past 25 accounts in use, approve returns
   `routable_scope_too_large` inline. Next: a per-person newest-decision queue
   read. Monday: no.
-- Local `npm run build` fails type-check on `src/app/api/cron/refresh-intel/route.ts`
-  exporting `shouldNag` (in main since July; Vercel builds pass). Next: move
-  `shouldNag` to a lib module. Monday: no.
-- `checkOnly` on the gmail-draft route has no UI caller now. Kept (route tests
-  pin it). Next: delete with its tests. Monday: no.
+- PAID (debt burn, 2026-09-26): `shouldNag` moved to `src/lib/intel/refresh-nag.ts`;
+  local `npm run build` passes.
+- PAID (debt burn, 2026-09-26): the gmail-draft `checkOnly` mode is deleted (the
+  route is session-only and no caller sent it).
 
 DATA
 - The ambiguous historical bounce population stays suppressed at send (FedEx x2,

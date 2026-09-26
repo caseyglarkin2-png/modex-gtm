@@ -93,15 +93,6 @@ describe('createSellerGmailDraft', () => {
     expect(gmail.createGmailDraft).not.toHaveBeenCalled();
   });
 
-  it('checkOnly compiles and gates the copy but never drafts', async () => {
-    const d = db();
-    const gmail = gmailFake();
-    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW, checkOnly: true }, baseDeps(d, 'pass', gmail));
-    expect(r).toEqual({ ok: true, checked: true, compileId: 'cmp-1' });
-    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
-    expect(d.audit.some((a) => a.kind === DRAFTED)).toBe(false);
-  });
-
   it('an email card superseded by a newer research decision for the same person refuses (Joey after R12b)', async () => {
     const d = db();
     d.decisions.push({ id: 'dec-joey-new', lane: 'work_queue', action: 'research_required', hypothesis_id: 'hyp-kr', persona_id: 1886, account_name: 'Kroger', rule_id: 'evidence_thin', inputs_snapshot: {}, created_at: new Date(NOW.getTime() + 60_000) });

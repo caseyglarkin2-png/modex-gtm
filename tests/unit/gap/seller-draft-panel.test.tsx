@@ -62,7 +62,7 @@ describe('<SellerDraftPanel>', () => {
     expect(fetchMock.mock.calls.some(([u]) => String(u).includes('/act'))).toBe(false);
   });
 
-  it('an unchecked copy: Create Gmail draft (never checkOnly) and, on review, is approved inline (no detour to a generic queue)', async () => {
+  it('an unchecked copy: Create Gmail draft posts an empty body and, on review, is approved inline (no detour to a generic queue)', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(jsonResponse({ error: 'copy_review_required', detail: 'critic_unconfigured' }, 409));
     render(<SellerDraftPanel {...base} emailReady={false} />);
     fireEvent.click(screen.getByRole('button', { name: 'Create Gmail draft' }));
