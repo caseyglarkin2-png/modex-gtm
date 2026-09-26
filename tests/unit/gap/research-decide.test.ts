@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- hand-rolled prisma and machine fakes */
 import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/lib/hubspot/client', () => ({ getHubSpotClient: vi.fn(), isHubSpotConfigured: () => false, withHubSpotRetry: vi.fn() }));

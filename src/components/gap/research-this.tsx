@@ -38,7 +38,7 @@ interface Result {
   rejected: Array<{ url: string; reason: string }>;
   conflicts: Array<{ site: string; signalIds: string[] }>;
 }
-export interface Narrative {
+interface Narrative {
   observation: string;
   problemHypothesis: string;
   rootCauses: string[];
@@ -105,7 +105,7 @@ function List({ items, empty }: { items: string[]; empty: string }) {
 }
 
 /** The proposed thesis, exactly as it will be approved. */
-export function ProposedThesis({ narrative, links = {} }: { narrative: Narrative; links?: Record<string, string> }) {
+function ProposedThesis({ narrative, links = {} }: { narrative: Narrative; links?: Record<string, string> }) {
   return (
     <div data-testid="proposed-thesis" className="space-y-2">
       <Section label="Facts">

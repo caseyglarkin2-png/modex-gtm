@@ -9,7 +9,7 @@
  *
  * `buildEnrollRows` and the two renderers are pure. `loadDecisions` is the
  * one reader: it takes a Prisma client (type-only import, no runtime
- * dependency) and turns the latest run's decision rows into emitter items.
+ * dependency) and turns the current decisions (or one named run's) into emitter items.
  * RoutingDecision rows are written by S2-T7, which lands after this ticket,
  * so the reader is deliberately tolerant of an empty table and of rows whose
  * `inputs_snapshot` does not yet carry `account` and `persona`.

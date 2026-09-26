@@ -77,7 +77,7 @@ async function loadCockpit() {
   const waitingGroups = groups.filter((g) => g.members.some((m) => WAITING.has(m.status)));
 
   // People in use with no current card, or a card from before they were in use.
-  // Only possible for rows activated before APPROVE + USE routed on its own.
+  // Rows activated before APPROVE + USE routed on its own, or whose account's routing failed.
   const cardFor = new Map(queue.items.map((i) => [i.persona.id, i]));
   const unrouted = [...new Set(active.map((a) => a.primary_persona_id as number))].filter((pid) => {
     const card = cardFor.get(pid);
@@ -181,8 +181,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       {data.unrouted > 0 ? (
         <section data-testid="unrouted-notice" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
           <p>
-            {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation (put in use before GAP
-            routed on its own). One routing pass fixes it; it creates cards only and contacts no one.
+            {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation (routing did not
+            finish for them). One routing pass fixes it; it creates cards only and contacts no one.
           </p>
           {routingPanel}
         </section>

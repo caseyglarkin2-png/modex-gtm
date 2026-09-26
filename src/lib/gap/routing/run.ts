@@ -424,16 +424,16 @@ async function displayNames(prisma: PrismaLike, ids: number[]): Promise<Map<numb
 }
 
 /** Accounts routed at once. Each account then competes for the person slots below. */
-export const ACCOUNT_CONCURRENCY = 3;
+const ACCOUNT_CONCURRENCY = 3;
 /**
  * People assembled at once across the whole run. Each person costs about a
  * dozen DB reads plus one Clawd suppression read (about 3s, measured
  * 2026-09-26; four in parallel take about 4.5s), so this also caps the run's
  * concurrent Clawd reads.
  */
-export const PERSON_CONCURRENCY = 4;
+const PERSON_CONCURRENCY = 4;
 /** One account that hangs is reported failed; its unrelated neighbours still land. */
-export const ACCOUNT_TIMEOUT_MS = 120_000;
+const ACCOUNT_TIMEOUT_MS = 120_000;
 
 type AccountStep = { assembleSkip: string } | { routeSkip: string } | { inputs: RoutingInputs; decision: RoutingDecision };
 

@@ -5,8 +5,9 @@
  * production interactive run defaulted to the broad account universe and
  * hung until Vercel's 300s maxDuration killed it).
  *
- * The one button that turns "activate a hypothesis" into "see a
- * recommendation card," without Casey ever touching an API or a cron.
+ * Diagnostic since the debt burn (2026-09-26): APPROVE + USE routes its own
+ * people, so this button is for retrying people whose routing failed and for
+ * a broad refresh. A run replaces only the cards of the people it routes.
  * POSTs /api/gap/routing/run?mode=apply with `{ scope: 'routable_hypotheses' }`
  * from the authenticated browser session (same-origin fetch, cookies carried
  * automatically) -- never a CRON_SECRET in the browser, never a client-

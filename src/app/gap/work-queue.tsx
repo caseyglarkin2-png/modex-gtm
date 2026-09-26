@@ -4,7 +4,7 @@
  * The cockpit's card lanes: RESEARCH, READY and FOLLOW UP (Sprint 2 S2-T11;
  * reduced 2026-09-26).
  *
- * Fetches GET /api/gap/queue (the latest routing run), keeps the cards in
+ * Fetches GET /api/gap/queue (each person's current card), keeps the cards in
  * `sellerLane` (sellerLaneOf, the same function the cockpit counts with) and
  * renders each as a <DecisionCard>. The card named by `openId` renders the
  * server-built action pack (`openPanel`) inline, so READY -> SEND EMAIL ->
