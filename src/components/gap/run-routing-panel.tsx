@@ -155,7 +155,7 @@ export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, 
 
       {!canRun && state.kind === 'idle' ? (
         <p className="mt-2 text-xs italic text-[var(--muted-foreground)]">
-          No hypothesis is ready to route yet. Approve or activate one in Hypotheses first.
+          Nothing is in use yet. Approve + use a thesis in Review; it routes on its own.
         </p>
       ) : null}
     </section>
