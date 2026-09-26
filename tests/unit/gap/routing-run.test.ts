@@ -797,7 +797,8 @@ describe('listQueue', () => {
       ),
     };
     expect((await listQueue(store)).items.map((i) => [i.id, i.persona.id])).toEqual([[a1, 1]]);
-  });
+    // An audit table on the reader also wakes the lazy touch evaluator import; give it room under suite load.
+  }, 30_000);
 
   it('runRouting writes its completion marker before it returns, so its cards are current the moment Casey sees the outcome', async () => {
     const audit = vi.fn(async (_p: unknown, _i: AuditInput) => ({ stored: true, reviewQueued: false }));
