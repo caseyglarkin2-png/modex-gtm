@@ -45,8 +45,6 @@ import { addOne } from '@/app/discovery/queue-actions';
 
 export const dynamic = 'force-dynamic';
 
-/** The only identities a GAP run may send from or be owned by (N8). Exact, lowercase. Owned by the service (SF10) so its own owner/sender fallbacks apply the same list. */
-export { SENDING_IDENTITIES };
 
 const BodySchema = z.object({
   decisionId: z.string().min(1).optional(),

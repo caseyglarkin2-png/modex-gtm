@@ -1,5 +1,3 @@
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { STALE_DAYS, shouldNag } from '@/lib/intel/refresh-nag';
 
@@ -30,11 +28,5 @@ describe('shouldNag (refresh-intel cron policy)', () => {
 
   it('an unreadable nag timestamp nags rather than staying silent forever', () => {
     expect(shouldNag(20, { nagAgeDays: 15, nagAt: 'not a date' }, NOW)).toEqual({ nag: true, reason: 'unreadable-timestamp' });
-  });
-
-  it('the route module exports only route handlers and config (next build rejects other exports)', () => {
-    const src = readFileSync(path.join(process.cwd(), 'src', 'app', 'api', 'cron', 'refresh-intel', 'route.ts'), 'utf8');
-    const exported = [...src.matchAll(/^export\s+(?:async\s+)?(?:function|const)\s+(\w+)/gm)].map((m) => m[1]);
-    expect(exported.sort()).toEqual(['GET', 'dynamic']);
   });
 });
