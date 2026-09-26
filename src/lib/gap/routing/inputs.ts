@@ -31,6 +31,7 @@
  *   fed with Persona.seniority, Persona.function and Persona.title.
  */
 
+import { createLimiter, type Limiter } from './bounded';
 import { normalizeScore } from '../../pounce/fit';
 import { hasRoleGate } from '../../revops/qualification/model';
 import { heatScore, tierNumber } from '../../revops/heat/heat-score';
@@ -541,6 +542,17 @@ async function assembleLoaded(
   const { now, freshness, snapshot, top100, suppression } = ctx;
 
   // Signals: non-dismissed triggers within four hot windows, newest first.
+  // Suppression: the injected read, never the wire gate. It is the slow leg
+  // (a Clawd round trip, about 3s) and needs only the email, so it starts now
+  // and overlaps the DB reads below. A failed read is unknown, never clear.
+  const email = lower(persona.email);
+  const remoteSuppression: Promise<RoutingInputs['suppression']> | null = email
+    ? (async () => suppression.read({ to: email }))().then(
+        (r) => ({ verdict: r.verdict, legs: { ...r.legs } }),
+        () => ({ verdict: 'unknown' as const, legs: {} }),
+      )
+    : null;
+
   const since = new Date(now.getTime() - freshness.hotTriggerDays * 4 * DAY_MS);
   const triggerRows = (await read('pounce_triggers', () =>
     prisma.pounceTrigger.findMany({
@@ -578,18 +590,11 @@ async function assembleLoaded(
   }
 
   // Comms: keyed by the persona's lowercased email. No email means nothing outbound can be in flight.
-  const email = lower(persona.email);
   const comms = email ? await readComms(prisma, email) : emptyComms();
 
-  // Suppression: the injected read, never the wire gate.
   let suppressionVerdict: RoutingInputs['suppression'] = { verdict: 'unknown', legs: {} };
-  if (email) {
-    try {
-      const r = await suppression.read({ to: email });
-      suppressionVerdict = { verdict: r.verdict, legs: { ...r.legs } };
-    } catch {
-      suppressionVerdict = { verdict: 'unknown', legs: {} };
-    }
+  if (email && remoteSuppression) {
+    suppressionVerdict = await remoteSuppression;
     // The local unsubscribe table is a HARD COMPLIANCE leg read directly
     // (final pass, 2026-09-25): recordUnsubscribe writes it for a recipient's
     // own unsubscribe and for a human do-not-contact disposition, and the
@@ -722,6 +727,16 @@ export interface AssembleForAccountOptions {
    * exist. Still contact-ready only; capped by MAX_HYPOTHESIS_PERSONAS.
    */
   includePersonaIds?: readonly number[];
+  /**
+   * Targeted routing (debt burn, 2026-09-26): route exactly these people and
+   * no one else at the account (APPROVE + USE routes the people Casey just put
+   * in use). Overrides `maxPersonas` and `includePersonaIds`; still reachable
+   * contact-ready people only, so a person with no email or phone is simply
+   * not routed.
+   */
+  onlyPersonaIds?: readonly number[];
+  /** Bounds concurrent per-person assembly (each does DB reads plus one Clawd suppression read). Default: one at a time. */
+  limit?: Limiter;
 }
 
 /** Hard cap on hypothesis-named people routed per account in one run. */
@@ -756,13 +771,17 @@ export async function assembleForAccount(
   const reachable = personas
     .filter((p) => lower(p.email) != null || (p.phone != null && p.phone.trim() !== ''))
     .sort((a, b) => seniorityRankFor(b.seniority) - seniorityRankFor(a.seniority) || a.id - b.id);
-  const top = reachable.slice(0, maxPersonas);
-  const named = new Set((opts.includePersonaIds ?? []).slice(0, MAX_HYPOTHESIS_PERSONAS));
-  const chosen = [...top, ...reachable.filter((p) => named.has(p.id) && !top.includes(p))];
-
-  const out: AssembleResult[] = [];
-  for (const p of chosen) {
-    out.push(await assembleRoutingInputs(prisma, { ...args, personaId: p.id }));
+  let chosen: PersonaRow[];
+  if (opts.onlyPersonaIds) {
+    const only = new Set(opts.onlyPersonaIds);
+    chosen = reachable.filter((p) => only.has(p.id));
+  } else {
+    const top = reachable.slice(0, maxPersonas);
+    const named = new Set((opts.includePersonaIds ?? []).slice(0, MAX_HYPOTHESIS_PERSONAS));
+    chosen = [...top, ...reachable.filter((p) => named.has(p.id) && !top.includes(p))];
   }
-  return out;
+
+  // One promise per person, awaited together: the output keeps `chosen` order however the reads finish.
+  const limit = opts.limit ?? createLimiter(1);
+  return Promise.all(chosen.map((p) => limit(() => assembleRoutingInputs(prisma, { ...args, personaId: p.id }))));
 }

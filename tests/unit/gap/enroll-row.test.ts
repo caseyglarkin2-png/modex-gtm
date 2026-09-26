@@ -27,13 +27,17 @@ import type { RoutingAccountInput, RoutingDecision, RoutingPersonaInput, Routing
 const mockedAuth = vi.fn();
 const mockedFindFirst = vi.fn();
 const mockedFindMany = vi.fn();
+/** The current-decision reduction's read (queue.ts currentDecisions): no `where`, narrow select. */
+const CURRENT = [{ id: 'cur', account_name: 'Boston Beer Company', persona_id: 1, hypothesis_id: null, created_at: new Date('2026-09-26T12:00:00Z') }];
+const mockedCurrent = vi.fn(async (): Promise<unknown[]> => CURRENT);
 const mockedConfigFind = vi.fn();
 const mockedCompileFindMany = vi.fn();
 const mockedApprovalFindFirst = vi.fn();
 const mockedUnsubscribedFind = vi.fn();
 const mockedPersonaFind = vi.fn();
 const fakePrisma = {
-  routingDecision: { findFirst: mockedFindFirst, findMany: mockedFindMany },
+  routingDecision: { findFirst: mockedFindFirst, findMany: (args: { where?: unknown }) => (args?.where ? mockedFindMany(args) : mockedCurrent()) },
+  prospectingHypothesis: { findMany: vi.fn(async () => []) },
   systemConfig: { findUnique: mockedConfigFind },
   gapCompile: { findMany: mockedCompileFindMany },
   sendApprovalRequest: { findFirst: mockedApprovalFindFirst },
@@ -649,24 +653,33 @@ describe('loadDecisions', () => {
     expect(renderEnrollTableMarkdown(table).split('\n')[2]).toContain('| none | Ada Lovelace (compile_missing) |');
   });
 
-  it('returns an empty list when no run exists, without querying rows', async () => {
-    mockedFindFirst.mockResolvedValue(null);
+  it('returns an empty list when there are no current decisions, without querying rows', async () => {
+    mockedCurrent.mockResolvedValueOnce([]);
     const items = await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
     expect(items).toEqual([]);
     expect(mockedFindMany).not.toHaveBeenCalled();
   });
 
-  it('reads the gap_routing_last_run pointer first and never looks at the newest row while it is set (N6)', async () => {
-    mockedConfigFind.mockResolvedValue({ value: 'run_completed' });
-    mockedFindFirst.mockResolvedValue({ run_id: 'run_partial_newer' });
+  it('with no runId reads the CURRENT decisions (each person\'s newest card), never a run pointer or the newest run', async () => {
+    mockedCurrent.mockResolvedValueOnce([
+      { id: 'newest', account_name: 'Boston Beer Company', persona_id: 1, hypothesis_id: null, created_at: new Date('2026-09-26T12:00:00Z') },
+      { id: 'older', account_name: 'Boston Beer Company', persona_id: 1, hypothesis_id: null, created_at: new Date('2026-09-25T12:00:00Z') },
+      { id: 'other', account_name: 'Boston Beer Company', persona_id: 2, hypothesis_id: null, created_at: new Date('2026-09-24T12:00:00Z') },
+    ]);
     mockedFindMany.mockResolvedValue([]);
     await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
-    expect(mockedConfigFind).toHaveBeenCalledWith({ where: { key: 'gap_routing_last_run' }, select: { value: true } });
+    expect(mockedConfigFind).not.toHaveBeenCalled();
     expect(mockedFindFirst).not.toHaveBeenCalled();
-    expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_completed', action: 'enroll_gap_sequence' });
+    expect(mockedFindMany.mock.calls[0][0].where).toEqual({ id: { in: ['newest', 'other'] }, action: 'enroll_gap_sequence' });
   });
 
-  it('reads the newest run only when the pointer is missing, and only enroll_gap_sequence rows', async () => {
+  it('a named runId reads that run only', async () => {
+    mockedFindMany.mockResolvedValue([]);
+    await loadDecisions(fakePrisma as never, 'run_9', CLEAR_SUPPRESSION);
+    expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_9', action: 'enroll_gap_sequence' });
+  });
+
+  it('reads only enroll_gap_sequence rows and projects them', async () => {
     mockedFindFirst.mockResolvedValue({ run_id: 'run_9' });
     mockedFindMany.mockResolvedValue([
       {
@@ -689,8 +702,7 @@ describe('loadDecisions', () => {
       { id: 'd2', run_id: 'run_9', action: 'enroll_gap_sequence', lane: 'work_queue', rule_id: 'enroll', priority: 1, explain: {}, inputs_snapshot: null, persona: null },
     ]);
     const items = await loadDecisions(fakePrisma as never, undefined, CLEAR_SUPPRESSION);
-    expect(mockedFindFirst).toHaveBeenCalledWith({ orderBy: { created_at: 'desc' }, select: { run_id: true } });
-    expect(mockedFindMany.mock.calls[0][0].where).toEqual({ run_id: 'run_9', action: 'enroll_gap_sequence' });
+    expect(mockedFindMany.mock.calls[0][0].where).toEqual({ id: { in: ['cur'] }, action: 'enroll_gap_sequence' });
     expect(items).toHaveLength(1);
     expect(items[0].displayName).toBe('Ada Lovelace');
     expect(items[0].preferredSender).toBe('casey@yardflow.ai');

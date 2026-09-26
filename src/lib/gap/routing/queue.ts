@@ -1,10 +1,14 @@
 /**
- * GAP routing queue read + human-action capture (Sprint 2, S2-T7).
+ * GAP routing queue read + human-action capture (Sprint 2, S2-T7; current
+ * decisions since the debt burn, 2026-09-26).
  *
- * `listQueue` pages one run's `routing_decisions` rows, highest priority
- * first, with a stable keyset cursor so a page never repeats or skips a row
- * while new runs land. `recordHumanAction` stamps what the operator did with
- * a decision, once; the row is the record and a second stamp is refused.
+ * `listQueue` pages the CURRENT decisions, highest priority first, with a
+ * stable keyset cursor so a page never repeats or skips a row while new runs
+ * land. A current decision is the newest row for its routing subject, from
+ * whichever run wrote it, whose thesis still stands (see `currentDecisions`).
+ * Naming `runId` pages that one run instead (diagnostics, the e2e scripts).
+ * `recordHumanAction` stamps what the operator did with a decision, once; the
+ * row is the record and a second stamp is refused.
  *
  * Both readers take the house `prisma: any` glue and read the row plus its
  * `inputs_snapshot` (written by run.ts). Nothing here enrolls or sends.
@@ -12,7 +16,7 @@
 
 import { audit as auditEvent } from '../audit';
 import type { HumanAction } from '../taxonomy';
-import { LAST_RUN_CONFIG_KEY } from './types';
+import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
 import type { RoutingExplain } from './types';
 import { classifySuppression, type SuppressionClass } from '../suppression/provenance';
 
@@ -84,7 +88,10 @@ export interface TouchSummary {
 export const MAX_TOUCH_EVALUATIONS = 20;
 
 export interface ListQueueResult {
+  /** The run named by the caller; null for the current-decision view. */
   runId: string | null;
+  /** Newest `created_at` among the current decisions (ISO): changes whenever any routing lands. */
+  asOf: string | null;
   items: QueueItem[];
   nextCursor: string | null;
 }
@@ -227,38 +234,82 @@ function toItem(row: DecisionRow, live?: LivePersonaFields | null): QueueItem {
 }
 
 // ---------------------------------------------------------------------------
-// listQueue
+// Current decisions
 // ---------------------------------------------------------------------------
 
-/**
- * The run the queue shows when the caller names none (N6): the
- * `gap_routing_last_run` pointer, which run.ts advances only AFTER every row
- * of a run is written, so a run that crashed half-way never becomes the
- * queue. The newest row is the fallback only when the pointer is missing.
- * Shared by the queue and the enroll-row emitter.
- */
-export async function resolveLatestRunId(prisma: PrismaLike): Promise<string | undefined> {
-  const pointer = (await prisma.systemConfig.findUnique({
-    where: { key: LAST_RUN_CONFIG_KEY },
-    select: { value: true },
-  })) as { value: string } | null | undefined;
-  const pointed = pointer?.value?.trim();
-  if (pointed) return pointed;
-  const newest = (await prisma.routingDecision.findFirst({
-    orderBy: { created_at: 'desc' },
-    select: { run_id: true },
-  })) as { run_id: string } | null;
-  return newest?.run_id || undefined;
+/** A thesis that ended (rejected, expired, resolved) no longer supports a recommendation. */
+const ENDED: ReadonlySet<string> = new Set(HYPOTHESIS_TERMINAL_STATUSES);
+
+export interface CurrentDecisions {
+  ids: string[];
+  /** Live status of every hypothesis a current decision cites. */
+  hypothesisStatus: Map<string, string>;
+  asOf: string | null;
 }
+
+/**
+ * The operator queue's rows: for each routing subject, its newest decision
+ * from any run, if that decision still applies.
+ *
+ * ROUTING SUBJECT = one person at one account, (account_name, persona_id).
+ * Not the hypothesis: a person routed again after their thesis changed must
+ * replace their older card, never sit beside it. So a run that routes only
+ * person 2 leaves persons 1 and 3 on their earlier cards.
+ *
+ * Applicable: the decision cites no hypothesis, or its hypothesis still exists
+ * and has not ended. When the newest decision no longer applies the subject
+ * shows no card (an older card would be older reasoning, not a fallback); the
+ * next routing of that person replaces it. Readiness is still decided per card
+ * from the LIVE hypothesis status (card-readiness.ts), so an approved-only
+ * thesis stays REVIEW and nothing turns READY because it is merely newest.
+ *
+ * Volume (2026-09-26): 128 rows, 88 subjects, so the reduction runs in memory
+ * over three narrow columns. Past tens of thousands of rows, move it into
+ * Postgres as DISTINCT ON (account_name, persona_id).
+ */
+export async function currentDecisions(prisma: PrismaLike): Promise<CurrentDecisions> {
+  const rows = (await prisma.routingDecision.findMany({
+    orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
+    select: { id: true, account_name: true, persona_id: true, hypothesis_id: true, created_at: true },
+  })) as Array<{ id: string; account_name: string; persona_id: number | null; hypothesis_id: string | null; created_at: Date }>;
+
+  const newest = new Map<string, (typeof rows)[number]>();
+  for (const row of rows) {
+    const subject = `${row.account_name}\u0000${row.persona_id ?? ''}`;
+    if (!newest.has(subject)) newest.set(subject, row);
+  }
+
+  const cited = [...new Set([...newest.values()].map((r) => r.hypothesis_id).filter((id): id is string => typeof id === 'string'))];
+  const hypothesisStatus = new Map<string, string>();
+  if (cited.length > 0) {
+    const hyps = (await prisma.prospectingHypothesis.findMany({
+      where: { id: { in: cited } },
+      select: { id: true, status: true },
+    })) as Array<{ id: string; status: string }>;
+    for (const h of hyps) hypothesisStatus.set(h.id, h.status);
+  }
+
+  const current = [...newest.values()].filter((r) => {
+    if (!r.hypothesis_id) return true;
+    const status = hypothesisStatus.get(r.hypothesis_id);
+    return status !== undefined && !ENDED.has(status);
+  });
+  const asOf = current.reduce<Date | null>((max, r) => (!max || r.created_at > max ? r.created_at : max), null);
+  return { ids: current.map((r) => r.id), hypothesisStatus, asOf: asOf ? asOf.toISOString() : null };
+}
+
+// ---------------------------------------------------------------------------
+// listQueue
+// ---------------------------------------------------------------------------
 
 export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {}): Promise<ListQueueResult> {
   const limit = Math.min(MAX_QUEUE_LIMIT, Math.max(1, Math.trunc(opts.limit ?? DEFAULT_QUEUE_LIMIT)));
 
-  let runId = opts.runId?.trim() || undefined;
-  if (!runId) runId = await resolveLatestRunId(prisma);
-  if (!runId) return { runId: null, items: [], nextCursor: null };
+  const runId = opts.runId?.trim() || null;
+  const current = runId ? null : await currentDecisions(prisma);
+  if (current && current.ids.length === 0) return { runId: null, asOf: null, items: [], nextCursor: null };
 
-  const where: Record<string, unknown> = { run_id: runId };
+  const where: Record<string, unknown> = runId ? { run_id: runId } : { id: { in: current!.ids } };
   if (opts.action) where.action = opts.action;
   if (opts.lane) where.lane = opts.lane;
   if (opts.ruleId) where.rule_id = opts.ruleId;
@@ -307,8 +358,15 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
   }
 
   const items = page.map((row) => toItem(row, typeof row.persona_id === 'number' ? liveById.get(row.persona_id) : null));
+  // The thesis may have moved since routing (approved -> active, or back to review): readiness reads today's status.
+  if (current) {
+    for (const item of items) {
+      const live = item.hypothesis ? current.hypothesisStatus.get(item.hypothesis.id) : undefined;
+      if (item.hypothesis && live) item.hypothesis = { ...item.hypothesis, status: live };
+    }
+  }
   await attachTouches(prisma, items);
-  return { runId, items, nextCursor };
+  return { runId, asOf: current?.asOf ?? null, items, nextCursor };
 }
 
 /**

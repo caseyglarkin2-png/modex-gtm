@@ -35,6 +35,8 @@ export interface RunRoutingReport {
   pairs: number;
   decisions: number;
   skips: Record<string, number>;
+  /** Accounts that failed, with the exact reason; every other account's cards landed or stayed. */
+  failed: Array<{ accountName: string; reason: string }>;
 }
 
 export interface RunRoutingPanelProps {
@@ -96,6 +98,7 @@ export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, 
         pairs: Number(payload.pairs ?? 0),
         decisions: Number(payload.decisions ?? 0),
         skips: (payload.skips && typeof payload.skips === 'object' ? (payload.skips as Record<string, number>) : {}),
+        failed: Array.isArray(payload.failed) ? (payload.failed as RunRoutingReport['failed']) : [],
       };
       setState({ kind: 'done', report, at: new Date().toISOString() });
       onComplete?.(report);
@@ -136,6 +139,11 @@ export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, 
             <li>Personas evaluated: {state.report.pairs}</li>
             <li>Decisions created: {state.report.decisions}</li>
             <li>Skipped: {summarizeSkips(state.report.skips)}</li>
+            {state.report.failed.length > 0 ? (
+              <li data-testid="run-routing-failed" className="text-[var(--destructive)]">
+                Failed ({state.report.failed.length}, their earlier cards stay): {state.report.failed.map((f) => `${f.accountName}: ${f.reason}`).join('; ')}
+              </li>
+            ) : null}
             <li>Run at: {state.at}</li>
           </ul>
         </div>

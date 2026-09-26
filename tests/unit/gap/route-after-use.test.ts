@@ -43,32 +43,67 @@ describe('summarizeUseOutcomes', () => {
   });
 });
 
-describe('routeAfterUse', () => {
-  it('runs the bounded routable scope (never the broad default), applies, and reads THAT run back', async () => {
-    const run = vi.fn(async () => ({ runId: 'run-9', mode: 'shadow', accountsScanned: 7, pairs: 20, decisions: 20, skips: {}, byRule: {}, byAction: {}, dryRun: false })) as any;
-    const listQueue = vi.fn(async () => ({ runId: 'run-9', items: [card('a', 916, 'enroll_gap_sequence', 'enroll')], nextCursor: null })) as any;
-    const r = await routeAfterUse({} as any, { actor: 'casey@freightroll.com', now: NOW, people: PEOPLE.slice(0, 1) }, {
-      resolveScope: async () => ({ hypothesesCount: 21, accountNames: ['PepsiCo', 'Kroger'] }),
-      run,
-      listQueue,
-    });
+describe('summarizeUseOutcomes: failures', () => {
+  it('a person whose account failed is FAILED with the reason carried, while the other account still reports its cards', () => {
+    const people = [
+      { personaId: 916, name: 'p916', accountName: 'PepsiCo' },
+      { personaId: 50, name: 'k50', accountName: 'Kroger' },
+    ];
+    const out = summarizeUseOutcomes('run-1', [card('a', 916, 'enroll_gap_sequence', 'enroll')], people, [{ accountName: 'Kroger', reason: 'account_timeout' }]);
+    expect(out.people.map((p) => [p.personaId, p.lane])).toEqual([[916, 'ready'], [50, 'failed']]);
+    expect(out.counts).toMatchObject({ ready: 1, failed: 1, not_routed: 0 });
+    expect(out.failures).toEqual([{ accountName: 'Kroger', reason: 'account_timeout' }]);
+  });
+});
+
+function personaStore(rows: Array<{ id: number; account_name: string | null }>) {
+  return { persona: { findMany: vi.fn(async ({ where }: any) => rows.filter((r) => where.id.in.includes(r.id))) } } as any;
+}
+
+const REPORT = { runId: 'run-9', mode: 'shadow', accountsScanned: 1, pairs: 1, decisions: 1, skips: {}, byRule: {}, byAction: {}, failed: [], dryRun: false };
+
+describe('routeAfterUse (targeted)', () => {
+  it('routes ONLY the approved people at their own account, applies, and reads THAT run back', async () => {
+    const run = vi.fn(async () => REPORT) as any;
+    const listQueue = vi.fn(async () => ({ runId: 'run-9', asOf: null, items: [card('a', 916, 'enroll_gap_sequence', 'enroll')], nextCursor: null })) as any;
+    const prisma = personaStore([{ id: 916, account_name: 'PepsiCo' }, { id: 50, account_name: 'Kroger' }]);
+    const r = await routeAfterUse(prisma, { actor: 'casey@freightroll.com', now: NOW, people: PEOPLE.slice(0, 1) }, { run, listQueue });
     expect(r).toMatchObject({ ok: true, runId: 'run-9', counts: { ready: 1 } });
-    expect(run.mock.calls[0][1]).toMatchObject({ dryRun: false, accountNames: ['PepsiCo', 'Kroger'], actor: 'casey@freightroll.com' });
+    expect(run).toHaveBeenCalledTimes(1);
+    expect(run.mock.calls[0][1]).toMatchObject({ dryRun: false, accountNames: ['PepsiCo'], personaIds: [916], actor: 'casey@freightroll.com' });
+    expect(run.mock.calls[0][1].accountNames).not.toContain('Kroger');
     expect(listQueue.mock.calls[0][1]).toEqual({ runId: 'run-9', limit: 100 });
   });
 
-  it('a scope over the cap is refused with the reason, and nothing is run', async () => {
-    const run = vi.fn();
-    const r = await routeAfterUse({} as any, { actor: 'c', now: NOW, people: [] }, { resolveScope: async () => ({ tooLarge: true, accountCount: 30, cap: 25 }), run: run as any });
-    expect(r).toEqual({ ok: false, reason: 'routable_scope_too_large', detail: '30 accounts are in use; the interactive cap is 25.' });
-    expect(run).not.toHaveBeenCalled();
+  it('sibling approval routes the selected people only, one run, one account', async () => {
+    const run = vi.fn(async () => REPORT) as any;
+    const listQueue = vi.fn(async () => ({ runId: 'run-9', asOf: null, items: [], nextCursor: null })) as any;
+    const prisma = personaStore(PEOPLE.map((p) => ({ id: p.personaId, account_name: 'PepsiCo' })));
+    await routeAfterUse(prisma, { actor: 'c', now: NOW, people: PEOPLE.slice(0, 3) }, { run, listQueue });
+    expect(run.mock.calls[0][1]).toMatchObject({ accountNames: ['PepsiCo'], personaIds: [916, 928, 976] });
+  });
+
+  it('26+ accounts in use do not matter: approving one account routes one account (the old 25-account scope cap is gone)', async () => {
+    const run = vi.fn(async () => REPORT) as any;
+    const listQueue = vi.fn(async () => ({ runId: 'run-9', asOf: null, items: [], nextCursor: null })) as any;
+    const prisma = personaStore([{ id: 916, account_name: 'PepsiCo' }]);
+    prisma.prospectingHypothesis = { findMany: vi.fn(async () => Array.from({ length: 40 }, (_, i) => ({ account_name: `Acct ${i}` }))) };
+    const r = await routeAfterUse(prisma, { actor: 'c', now: NOW, people: PEOPLE.slice(0, 1) }, { run, listQueue });
+    expect(r.ok).toBe(true);
+    expect(prisma.prospectingHypothesis.findMany).not.toHaveBeenCalled();
+    expect(run.mock.calls[0][1].accountNames).toEqual(['PepsiCo']);
   });
 
   it('a routing crash comes back as a reason to show inline, never a throw', async () => {
-    const r = await routeAfterUse({} as any, { actor: 'c', now: NOW, people: [] }, {
-      resolveScope: async () => ({ hypothesesCount: 1, accountNames: ['PepsiCo'] }),
+    const r = await routeAfterUse(personaStore([{ id: 916, account_name: 'PepsiCo' }]), { actor: 'c', now: NOW, people: PEOPLE.slice(0, 1) }, {
       run: (async () => { throw new Error('hubspot 502'); }) as any,
     });
     expect(r).toEqual({ ok: false, reason: 'routing_failed', detail: 'hubspot 502' });
+  });
+
+  it('nobody to route is a reason, and nothing runs', async () => {
+    const run = vi.fn();
+    expect(await routeAfterUse(personaStore([]), { actor: 'c', now: NOW, people: [] }, { run: run as any })).toEqual({ ok: false, reason: 'no_people' });
+    expect(run).not.toHaveBeenCalled();
   });
 });

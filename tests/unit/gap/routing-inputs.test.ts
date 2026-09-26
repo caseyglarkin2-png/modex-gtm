@@ -1,3 +1,4 @@
+import { createLimiter } from '@/lib/gap/routing/bounded';
 import { describe, expect, it, vi } from 'vitest';
 import { heatScore, tierNumber } from '@/lib/revops/heat/heat-score';
 import { normalizeScore } from '@/lib/pounce/fit';
@@ -772,6 +773,15 @@ describe('suppression input', () => {
     expect(i.comms.inFlight).toBe(false);
   });
 
+  it('the suppression read starts before the DB reads (it is the slow leg), and its verdict still lands (debt burn, 2026-09-26)', async () => {
+    const prisma = makePrisma(fullDb());
+    const read = vi.fn(async () => ({ verdict: 'clear' as const, legs: { [CONTRACT_LEG]: 'clear' as const } }));
+    const r = await assembleRoutingInputs(prisma, { accountName: ACCOUNT, personaId: 42, now: NOW, suppression: { read } });
+    expect(isSkip(r)).toBe(false);
+    expect(read.mock.invocationCallOrder[0]).toBeLessThan(prisma.pounceTrigger.findMany.mock.invocationCallOrder[0]);
+    expect(!isSkip(r) && r.suppression).toEqual({ verdict: 'clear', legs: { [CONTRACT_LEG]: 'clear' } });
+  });
+
   it('a reader that throws is unknown, not a crash', async () => {
     const i = await assemble(fullDb(), { suppression: { read: async () => { throw new Error('boom'); } } });
     expect(i.suppression).toEqual({ verdict: 'unknown', legs: {} });
@@ -983,6 +993,42 @@ describe('assembleForAccount', () => {
     );
     const out = await assembleForAccount(makePrisma(db), { accountName: ACCOUNT, now: NOW, suppression: reader() }, { includePersonaIds: [47, 46, 43] });
     expect(out.map((r) => (isSkip(r) ? r.skip : r.persona.id))).toEqual([43, 42, 47]);
+  });
+
+  it('onlyPersonaIds routes exactly those reachable people, nobody else at the account (targeted APPROVE + USE)', async () => {
+    const db = fullDb();
+    const base = db.personas[0];
+    db.personas.push(
+      { ...base, id: 43, seniority: 'executive', email: 'ceo@acme.example', hubspot_contact_id: '333' },
+      { ...base, id: 47, seniority: 'individual_contributor', email: 'ic@acme.example', hubspot_contact_id: '777' },
+      { ...base, id: 48, seniority: 'director', email: null, phone: null, hubspot_contact_id: '888' },
+    );
+    const out = await assembleForAccount(makePrisma(db), { accountName: ACCOUNT, now: NOW, suppression: reader() }, { onlyPersonaIds: [47, 48, 999], maxPersonas: 5, includePersonaIds: [43] });
+    expect(out.map((r) => (isSkip(r) ? r.skip : r.persona.id))).toEqual([47]);
+  });
+
+  it('assembles people concurrently under the given limiter and keeps seniority order however the reads finish', async () => {
+    const db = fullDb();
+    const base = db.personas[0];
+    db.personas.push(
+      { ...base, id: 43, seniority: 'executive', email: 'ceo@acme.example', hubspot_contact_id: '333' },
+      { ...base, id: 44, seniority: 'director', email: 'dir@acme.example', hubspot_contact_id: '444' },
+      { ...base, id: 47, seniority: 'individual_contributor', email: 'ic@acme.example', hubspot_contact_id: '777' },
+    );
+    let inFlight = 0;
+    let peak = 0;
+    const slow: SuppressionReader = {
+      async read() {
+        inFlight += 1;
+        peak = Math.max(peak, inFlight);
+        await new Promise((r) => setTimeout(r, 5));
+        inFlight -= 1;
+        return { verdict: 'clear', legs: { clawd_contract: 'clear' } };
+      },
+    };
+    const out = await assembleForAccount(makePrisma(db), { accountName: ACCOUNT, now: NOW, suppression: slow }, { maxPersonas: 4, limit: createLimiter(2) });
+    expect(out.map((r) => (isSkip(r) ? r.skip : r.persona.id))).toEqual([43, 42, 44, 47]);
+    expect(peak).toBe(2);
   });
 
   it('skips account_not_found once, and names a failed persona read', async () => {

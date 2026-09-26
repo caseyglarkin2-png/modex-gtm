@@ -114,9 +114,9 @@ async function loadCockpit() {
     next,
     groups: waitingGroups,
     groupedIds: new Set(groups.flatMap((g) => g.members.map((m) => m.id))),
-    latestRunId: queue.runId,
+    queueAsOf: queue.asOf,
     unrouted,
-    routing: { canRun: routableHypotheses > 0 || queue.runId !== null, routableHypotheses, routableAccounts },
+    routing: { canRun: routableHypotheses > 0 || queue.items.length > 0, routableHypotheses, routableAccounts },
   };
 }
 
@@ -197,7 +197,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           ) : lane === 'replies' ? (
             <RepliesTriage inCockpit />
           ) : (
-            <WorkQueue reloadKey={data.latestRunId ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
+            <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
           )}
         </section>
       ) : (

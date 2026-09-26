@@ -1,17 +1,16 @@
 /**
- * Route after USE (weekend reduction pass, 2026-09-26).
+ * Route after USE (weekend reduction pass, 2026-09-26; targeted since the
+ * debt burn the same day).
  *
  * APPROVE + USE already means "I believe this and want GAP to use it", so the
  * approve action routes on its own; Casey never presses a separate ROUTE
  * button for the same rows. This is the one server seam for that, shared by
- * the thesis approve op, the one-off hypothesis PATCH and the diagnostic
- * Run routing button.
+ * the thesis approve op, the one-off hypothesis PATCH and the research
+ * proposal decision.
  *
- * Scope is the existing bounded `routable_hypotheses` scope (distinct accounts
- * with an approved/active hypothesis, capped), NOT just the approved account:
- * the queue shows only the latest routing run, so an account-only run would
- * hide every other account's cards. The outcome is then read back for the
- * people Casey just approved only.
+ * Scope is exactly the people Casey just put in use, at their own accounts.
+ * The queue shows each person's newest applicable card from any run, so this
+ * run replaces only their cards and leaves every other account as it was.
  *
  * Routing writes shadow RoutingDecision rows only. Nothing here drafts,
  * enrolls or sends. Voice: no em dashes.
@@ -20,14 +19,7 @@
 import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from '@/lib/hubspot/client';
 import { sellerLaneOf, type SellerLane } from './card-readiness';
 import { listQueue as defaultListQueue, type QueueItem } from './queue';
-import {
-  DEFAULT_MAX_PAIRS,
-  createHubSpotSnapshotProvider,
-  resolveRoutableHypothesisScope as defaultResolveScope,
-  runRouting as defaultRunRouting,
-  type RunReport,
-  type SnapshotReads,
-} from './run';
+import { DEFAULT_MAX_PAIRS, createHubSpotSnapshotProvider, faultText, runRouting as defaultRunRouting, type RunReport, type SnapshotReads } from './run';
 import { createClawdSuppressionReader } from './suppression-read';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,7 +50,8 @@ export const hubspotReads: SnapshotReads = {
   },
 };
 
-export type OutcomeLane = SellerLane | 'not_routed';
+/** `failed`: routing could not finish this person's account (reason in `failures`). `not_routed`: routing ran and skipped them. */
+export type OutcomeLane = SellerLane | 'not_routed' | 'failed';
 
 export interface PersonOutcome {
   personaId: number;
@@ -71,20 +64,29 @@ export interface UseOutcomes {
   runId: string;
   people: PersonOutcome[];
   counts: Record<OutcomeLane, number>;
+  /** Accounts routing could not finish, with the exact reason. Other accounts' cards are untouched. */
+  failures: RunReport['failed'];
 }
 
 export type RouteAfterUseResult =
   | ({ ok: true } & UseOutcomes)
   | { ok: false; reason: string; detail?: string };
 
-const EMPTY_COUNTS = (): Record<OutcomeLane, number> => ({ review: 0, research: 0, ready: 0, follow_up: 0, later: 0, blocked: 0, not_routed: 0 });
+const EMPTY_COUNTS = (): Record<OutcomeLane, number> => ({ review: 0, research: 0, ready: 0, follow_up: 0, later: 0, blocked: 0, not_routed: 0, failed: 0 });
 
 /**
  * Pure: where each approved person landed in the new run. A person with no
- * card in the run is `not_routed` (the run skipped them), never silently
- * dropped, so Casey is not left with an in-use row and no recommendation.
+ * card in the run is `failed` when their account failed, else `not_routed`
+ * (the run skipped them), never silently dropped, so Casey is not left with
+ * an in-use row and no recommendation.
  */
-export function summarizeUseOutcomes(runId: string, items: readonly QueueItem[], people: ReadonlyArray<{ personaId: number; name: string | null }>): UseOutcomes {
+export function summarizeUseOutcomes(
+  runId: string,
+  items: readonly QueueItem[],
+  people: ReadonlyArray<{ personaId: number; name: string | null; accountName?: string | null }>,
+  failures: RunReport['failed'] = [],
+): UseOutcomes {
+  const failedAccounts = new Set(failures.map((f) => f.accountName));
   const counts = EMPTY_COUNTS();
   const out: PersonOutcome[] = [];
   const seen = new Set<number>();
@@ -92,23 +94,23 @@ export function summarizeUseOutcomes(runId: string, items: readonly QueueItem[],
     if (seen.has(p.personaId)) continue;
     seen.add(p.personaId);
     const item = items.find((i) => i.persona.id === p.personaId);
-    const lane: OutcomeLane = item ? sellerLaneOf(item) : 'not_routed';
+    const lane: OutcomeLane = item ? sellerLaneOf(item) : p.accountName && failedAccounts.has(p.accountName) ? 'failed' : 'not_routed';
     counts[lane] += 1;
     out.push({ personaId: p.personaId, name: item?.persona.displayName ?? p.name, lane, decisionId: item?.id ?? null });
   }
-  return { runId, people: out, counts };
+  return { runId, people: out, counts, failures: [...failures] };
 }
 
 export interface RouteAfterUseDeps {
-  resolveScope?: typeof defaultResolveScope;
   run?: typeof defaultRunRouting;
   listQueue?: typeof defaultListQueue;
 }
 
 /**
- * Run the bounded routing pass (apply, shadow rows only) and report where the
- * given people landed. Every failure is returned as a reason for the caller to
- * show inline; nothing throws past here.
+ * Route exactly these people (apply, shadow rows only) at their own accounts
+ * and report where each landed. A person whose account failed is `failed`
+ * with the account's reason; everyone else still gets their card. Every
+ * failure is returned for the caller to show inline; nothing throws past here.
  */
 export async function routeAfterUse(
   prisma: PrismaLike,
@@ -116,24 +118,27 @@ export async function routeAfterUse(
   deps: RouteAfterUseDeps = {},
 ): Promise<RouteAfterUseResult> {
   try {
-    const scope = await (deps.resolveScope ?? defaultResolveScope)(prisma);
-    if ('tooLarge' in scope) {
-      return { ok: false, reason: 'routable_scope_too_large', detail: `${scope.accountCount} accounts are in use; the interactive cap is ${scope.cap}.` };
-    }
-    if (scope.accountNames.length === 0) return { ok: false, reason: 'no_routable_hypotheses' };
+    const ids = [...new Set(input.people.map((p) => p.personaId))];
+    if (ids.length === 0) return { ok: false, reason: 'no_people' };
+    const rows: Array<{ id: number; account_name: string | null }> = await prisma.persona.findMany({
+      where: { id: { in: ids } },
+      select: { id: true, account_name: true },
+    });
+    const accountOf = new Map(rows.map((r) => [r.id, r.account_name]));
+    const accountNames = [...new Set(rows.map((r) => r.account_name).filter((n): n is string => typeof n === 'string' && n.length > 0))];
+    const people = input.people.map((p) => ({ ...p, accountName: accountOf.get(p.personaId) ?? null }));
+    if (accountNames.length === 0) return { ok: true, ...summarizeUseOutcomes('', [], people) };
     const report: RunReport = await (deps.run ?? defaultRunRouting)(
       prisma,
-      { now: input.now, actor: input.actor, dryRun: false, maxPairs: DEFAULT_MAX_PAIRS, accountNames: scope.accountNames },
+      { now: input.now, actor: input.actor, dryRun: false, maxPairs: DEFAULT_MAX_PAIRS, accountNames, personaIds: ids },
       {
         suppression: createClawdSuppressionReader(),
         hubspotSnapshot: createHubSpotSnapshotProvider(prisma, hubspotReads, { configured: isHubSpotConfigured }),
       },
     );
     const page = await (deps.listQueue ?? defaultListQueue)(prisma, { runId: report.runId, limit: 100 });
-    return { ok: true, ...summarizeUseOutcomes(report.runId, page.items, input.people) };
+    return { ok: true, ...summarizeUseOutcomes(report.runId, page.items, people, report.failed) };
   } catch (error) {
-    // The last line of a driver error is the human part ("Can't reach database server ..."); never a stack.
-    const message = (error instanceof Error ? error.message : String(error)).trim().split('\n').filter((l) => l.trim()).pop() ?? 'unknown error';
-    return { ok: false, reason: 'routing_failed', detail: message.trim().slice(0, 200) };
+    return { ok: false, reason: 'routing_failed', detail: faultText(error) };
   }
 }

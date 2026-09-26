@@ -151,13 +151,6 @@ export interface RoutingInputs {
   freshness: RoutingFreshness;
 }
 
-/**
- * SystemConfig key run.ts advances to a run id only AFTER every row of that
- * run is written. The queue and the enroll-row emitter read it first (N6),
- * so a run that crashed half-way never becomes "the latest run".
- */
-export const LAST_RUN_CONFIG_KEY = 'gap_routing_last_run';
-
 /** Spec section 6: evidence 45 d, hypothesis TTL 45 d, hot trigger 7 d, cooldown 14 d. */
 export const DEFAULT_FRESHNESS: RoutingFreshness = {
   evidenceMaxAgeDays: 45,
