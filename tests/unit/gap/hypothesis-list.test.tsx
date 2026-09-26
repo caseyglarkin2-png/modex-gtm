@@ -62,6 +62,15 @@ describe('<HypothesisList> fast review', () => {
     await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/api/gap/hypotheses/hyp_2', expect.anything()));
   });
 
+  it('the cockpit keeps the list mounted when its last row is decided: the open drawer (and its outcome) survives the list emptying', async () => {
+    const { rerender } = render(<HypothesisList items={[row({ id: 'hyp_1' })]} showFilter={false} emptyNote={null} />);
+    fireEvent.click(screen.getByText('Acme Foods').closest('tr')!);
+    await waitFor(() => expect(screen.getByTestId('hypothesis-review-nav')).toBeInTheDocument());
+    rerender(<HypothesisList items={[]} showFilter={false} emptyNote={null} />);
+    expect(screen.getByTestId('hypothesis-review-nav')).toBeInTheDocument();
+    expect(screen.queryByText(/No hypotheses/)).toBeNull();
+  });
+
   it('Next in the drawer advances to the next row and disables at the last item', async () => {
     render(<HypothesisList items={items} />);
     fireEvent.click(screen.getAllByText('PepsiCo')[0].closest('tr')!);

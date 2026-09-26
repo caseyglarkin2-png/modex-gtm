@@ -133,12 +133,11 @@ async function ReviewLane({ groups, groupedIds }: { groups: LoadedGroup[]; group
         <p className="text-sm italic text-[var(--muted-foreground)]">Nothing waiting for your judgment.</p>
       ) : null}
       <ThesisGroupReview cards={cards} intro={false} />
-      {oneOffs.length ? (
-        <section className="space-y-2">
-          <h3 className="text-sm font-semibold">One-off hypotheses</h3>
-          <HypothesisList items={oneOffs} showFilter={false} />
-        </section>
-      ) : null}
+      {/* Always mounted: approving the last one-off must not unmount the drawer holding its outcome. */}
+      <section className="space-y-2">
+        {oneOffs.length ? <h3 className="text-sm font-semibold">One-off hypotheses</h3> : null}
+        <HypothesisList items={oneOffs} showFilter={false} emptyNote={null} />
+      </section>
     </div>
   );
 }

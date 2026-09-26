@@ -10,6 +10,8 @@
 
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+
+vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 import { DecisionCard, EXPLAIN_LABELS, TARGET_LABEL, type QueueItem } from '@/components/gap/decision-card';
 import { FORBIDDEN_EXPLAIN_PATTERNS } from '@/lib/gap/routing/explain';
 

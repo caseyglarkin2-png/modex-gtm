@@ -23,11 +23,12 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { DecisionCard, type QueueItem } from '@/components/gap/decision-card';
-import { ResearchThis } from '@/components/gap/research-this';
+import { ResearchOutcomeContext, ResearchOutcomeView, ResearchThis, type Decided } from '@/components/gap/research-this';
 import { RESEARCHABLE_RULES, cardReadiness, sellerLaneOf, type SellerLane } from '@/lib/gap/routing/card-readiness';
 
 interface QueueResponse {
-  runId: string | null;
+  /** Newest routing among the current cards; null only when nothing was ever routed. */
+  asOf: string | null;
   items: QueueItem[];
   nextCursor: string | null;
 }
@@ -55,7 +56,7 @@ async function fetchQueue(cursor: string | null): Promise<QueueResponse> {
   if (!res.ok) throw new Error(await readError(res));
   const body = (await res.json()) as Partial<QueueResponse>;
   return {
-    runId: typeof body.runId === 'string' ? body.runId : null,
+    asOf: typeof body.asOf === 'string' ? body.asOf : null,
     items: Array.isArray(body.items) ? body.items : [],
     nextCursor: typeof body.nextCursor === 'string' && body.nextCursor.length > 0 ? body.nextCursor : null,
   };
@@ -114,7 +115,9 @@ export interface WorkQueueProps {
 }
 
 export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPanel = null, closeHref = '/gap' }: WorkQueueProps) {
-  const [runId, setRunId] = useState<string | null>(null);
+  const [asOf, setAsOf] = useState<string | null>(null);
+  const [outcomes, setOutcomes] = useState<Array<{ key: string; decided: Decided }>>([]);
+  const reportOutcome = useCallback((o: { key: string; decided: Decided }) => setOutcomes((cur) => [o, ...cur.filter((x) => x.key !== o.key)]), []);
   const [items, setItems] = useState<QueueItem[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -128,7 +131,7 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
     setError(null);
     try {
       const page = await fetchQueue(null);
-      setRunId(page.runId);
+      setAsOf(page.asOf);
       setItems(page.items);
       setNextCursor(page.nextCursor);
     } catch (caught) {
@@ -205,35 +208,42 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
   );
 
   return (
-    <div className="space-y-4">
-      {error ? (
-        <p role="alert" className="text-sm text-[var(--destructive)]">
-          Could not load the cards: <code className="font-mono">{error}</code>
-        </p>
-      ) : null}
-
-      {loading ? (
-        <p className="text-sm italic text-[var(--muted-foreground)]">Loading...</p>
-      ) : shown.length === 0 ? (
-        <div className="space-y-1">
-          <p className="text-sm italic text-[var(--muted-foreground)]">{runId ? 'Nothing in this lane right now.' : 'No routing run yet.'}</p>
-          <p className="text-xs text-[var(--muted-foreground)]">
-            GAP routes on its own when you approve and use a thesis. Routing creates recommendations only; it does not contact anyone.
+    <ResearchOutcomeContext.Provider value={reportOutcome}>
+      <div className="space-y-4">
+        {outcomes.map((o) => (
+          <div key={o.key} data-testid="research-outcome">
+            <ResearchOutcomeView decided={o.decided} />
+          </div>
+        ))}
+        {error ? (
+          <p role="alert" className="text-sm text-[var(--destructive)]">
+            Could not load the cards: <code className="font-mono">{error}</code>
           </p>
-        </div>
-      ) : sellerLane === 'research' ? (
-        <div className="space-y-3">
-          {groupResearch(shown).map((g) => (g.items.length > 1 ? <ResearchGroup key={g.key} items={g.items} renderCard={renderCard} /> : renderCard(g.items[0])))}
-        </div>
-      ) : (
-        <div className="space-y-3">{shown.map(renderCard)}</div>
-      )}
+        ) : null}
 
-      {nextCursor ? (
-        <Button type="button" variant="outline" size="sm" disabled={loadingMore} onClick={() => void loadMore()}>
-          {loadingMore ? 'Loading...' : 'Load more'}
-        </Button>
-      ) : null}
-    </div>
+        {loading ? (
+          <p className="text-sm italic text-[var(--muted-foreground)]">Loading...</p>
+        ) : shown.length === 0 ? (
+          <div className="space-y-1">
+            <p className="text-sm italic text-[var(--muted-foreground)]">{asOf ? 'Nothing in this lane right now.' : 'No routing run yet.'}</p>
+            <p className="text-xs text-[var(--muted-foreground)]">
+              GAP routes on its own when you approve and use a thesis. Routing creates recommendations only; it does not contact anyone.
+            </p>
+          </div>
+        ) : sellerLane === 'research' ? (
+          <div className="space-y-3">
+            {groupResearch(shown).map((g) => (g.items.length > 1 ? <ResearchGroup key={g.key} items={g.items} renderCard={renderCard} /> : renderCard(g.items[0])))}
+          </div>
+        ) : (
+          <div className="space-y-3">{shown.map(renderCard)}</div>
+        )}
+
+        {nextCursor ? (
+          <Button type="button" variant="outline" size="sm" disabled={loadingMore} onClick={() => void loadMore()}>
+            {loadingMore ? 'Loading...' : 'Load more'}
+          </Button>
+        ) : null}
+      </div>
+    </ResearchOutcomeContext.Provider>
   );
 }

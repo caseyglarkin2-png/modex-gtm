@@ -18,7 +18,7 @@
  *   conflicting          the conflict, and no outreach
  * Nothing here drafts or sends. Voice: no em dashes.
  */
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
@@ -51,9 +51,28 @@ interface Proposal {
   hypothesisIds: string[];
   narrative: Narrative;
 }
-type Decided =
+export type Decided =
   | { kind: 'used'; approved: number; inUse: number; routing: UseOutcomeResponse | null; failures: string[] }
   | { kind: 'rejected'; count: number };
+
+/**
+ * The lane that hosts RESEARCH THIS keeps each decision's outcome on screen:
+ * APPROVE + USE re-routes the people, so their card leaves RESEARCH (and this
+ * component with it) the moment the lane refreshes. Success must never make
+ * the result disappear.
+ */
+export const ResearchOutcomeContext = createContext<((o: { key: string; decided: Decided }) => void) | null>(null);
+
+export function ResearchOutcomeView({ decided }: { decided: Decided }) {
+  return decided.kind === 'used' ? (
+    <>
+      <UseOutcome approved={decided.approved} inUse={decided.inUse} routing={decided.routing} />
+      {decided.failures.length ? <p role="alert" className="text-xs text-[var(--destructive)]">{decided.failures.join('; ')}</p> : null}
+    </>
+  ) : (
+    <p data-testid="proposal-rejected" className="text-xs font-semibold">Rejected. Nothing will be contacted for this thesis.</p>
+  );
+}
 
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 /** Citation tokens are for the validator, not for Casey. */
@@ -127,6 +146,7 @@ export function ProposedThesis({ narrative, links = {} }: { narrative: Narrative
 /** `personaIds` (a RESEARCH group, 2026-09-26): one search, and the proposal covers every person in the group. */
 export function ResearchThis({ decisionId, personaIds }: { decisionId: string; personaIds?: number[] }) {
   const router = useRouter();
+  const report = useContext(ResearchOutcomeContext);
   const [busy, setBusy] = useState<'research' | 'propose' | 'use' | 'reject' | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -186,7 +206,7 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
         setError(r.data.error ?? 'decision_failed');
         return;
       }
-      setDecided(
+      const outcome: Decided =
         decision === 'reject'
           ? { kind: 'rejected', count: rows.filter((x) => x.ok).length }
           : {
@@ -195,8 +215,9 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
               inUse: rows.filter((x) => x.ok && x.to === 'active').length,
               routing: r.data.routing ?? null,
               failures: rows.filter((x) => !x.ok).map((x) => x.detail),
-            },
-      );
+            };
+      setDecided(outcome);
+      report?.({ key: runId, decided: outcome });
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -217,13 +238,10 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
 
       {result?.outcome === 'evidence_found' ? (
         <div data-testid="research-found" className="space-y-3 rounded-md border border-emerald-500/40 bg-emerald-500/5 p-3 text-xs">
-          {decided?.kind === 'used' ? (
-            <>
-              <UseOutcome approved={decided.approved} inUse={decided.inUse} routing={decided.routing} />
-              {decided.failures.length ? <p role="alert" className="text-[var(--destructive)]">{decided.failures.join('; ')}</p> : null}
-            </>
-          ) : decided?.kind === 'rejected' ? (
-            <p data-testid="proposal-rejected" className="font-semibold">Rejected. Nothing will be contacted for this thesis.</p>
+          {decided && !report ? (
+            <ResearchOutcomeView decided={decided} />
+          ) : decided ? (
+            <p className="text-[var(--muted-foreground)]">Decided. The outcome is at the top of this lane.</p>
           ) : proposal ? (
             <>
               <p className="font-semibold">
