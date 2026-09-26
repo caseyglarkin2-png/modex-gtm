@@ -132,6 +132,8 @@ export async function routeAfterUse(
     const page = await (deps.listQueue ?? defaultListQueue)(prisma, { runId: report.runId, limit: 100 });
     return { ok: true, ...summarizeUseOutcomes(report.runId, page.items, input.people) };
   } catch (error) {
-    return { ok: false, reason: 'routing_failed', detail: error instanceof Error ? error.message : String(error) };
+    // The last line of a driver error is the human part ("Can't reach database server ..."); never a stack.
+    const message = (error instanceof Error ? error.message : String(error)).trim().split('\n').filter((l) => l.trim()).pop() ?? 'unknown error';
+    return { ok: false, reason: 'routing_failed', detail: message.trim().slice(0, 200) };
   }
 }

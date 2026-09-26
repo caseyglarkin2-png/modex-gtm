@@ -8,9 +8,14 @@
  * for the clicked reply with its ids prefilled: hypothesisId, personaId,
  * contactEmail, channel `email`, source `{ kind, id }` from the reply. On a
  * 201 the row leaves the undispositioned list.
+ *
+ * In the cockpit REPLIES lane (`inCockpit`, 2026-09-26): the first waiting
+ * reply opens on its own, the state filter is hidden (the lane IS the waiting
+ * list), and a recorded disposition refreshes the page so the counts follow.
  */
 
 import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { defaultGapApiClient, type GapApiClient, type ReplyItem, type RepliesState } from '@/lib/gap/ui/gap-api-client';
 import { DispositionForm } from '@/components/gap/disposition-form';
@@ -18,7 +23,8 @@ import { ReplyList } from '@/components/gap/reply-list';
 
 const SELECT_CLASS = 'h-9 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm shadow-sm';
 
-export function RepliesTriage({ client = defaultGapApiClient }: { client?: GapApiClient }) {
+export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false }: { client?: GapApiClient; inCockpit?: boolean }) {
+  const router = useRouter();
   const [state, setState] = useState<RepliesState>('undispositioned');
   const [items, setItems] = useState<ReplyItem[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
@@ -35,6 +41,7 @@ export function RepliesTriage({ client = defaultGapApiClient }: { client?: GapAp
       if (page.ok) {
         setItems(page.data.items);
         setNextCursor(page.data.nextCursor);
+        if (inCockpit && page.data.items[0]) setExpandedId((current) => current ?? page.data.items[0].id);
       } else {
         setError(page.error);
         setItems([]);
@@ -42,7 +49,7 @@ export function RepliesTriage({ client = defaultGapApiClient }: { client?: GapAp
       }
       setLoading(false);
     },
-    [client],
+    [client, inCockpit],
   );
 
   useEffect(() => {
@@ -67,6 +74,7 @@ export function RepliesTriage({ client = defaultGapApiClient }: { client?: GapAp
 
   return (
     <div className="space-y-4">
+      {inCockpit ? null : (
       <div className="flex flex-wrap items-end gap-3">
         <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
           Show
@@ -79,6 +87,7 @@ export function RepliesTriage({ client = defaultGapApiClient }: { client?: GapAp
           {loading ? 'loading' : `${items.length} loaded${nextCursor ? ', more available' : ''}`}
         </p>
       </div>
+      )}
 
       <ReplyList
         items={items}
@@ -102,9 +111,12 @@ export function RepliesTriage({ client = defaultGapApiClient }: { client?: GapAp
             suggestion={item.suggestion ?? null}
             onSubmitted={() => {
               if (state === 'undispositioned') {
-                setItems((current) => current.filter((row) => row.id !== item.id));
-                setExpandedId(null);
+                const rest = items.filter((row) => row.id !== item.id);
+                setItems(rest);
+                // In the cockpit the next waiting reply opens on its own.
+                setExpandedId(inCockpit && rest[0] ? rest[0].id : null);
               }
+              if (inCockpit) router.refresh();
             }}
           />
         )}

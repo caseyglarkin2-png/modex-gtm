@@ -125,11 +125,13 @@ async function ReviewLane({ groups, groupedIds }: { groups: LoadedGroup[]; group
   // One-off hypotheses (not part of a shared thesis) that still need a decision.
   const { items } = await listHypotheses(prisma, { limit: 50 });
   const oneOffs = items.filter((h: { id: string; status: string }) => WAITING.has(h.status) && !groupedIds.has(h.id));
-  if (cards.length === 0 && oneOffs.length === 0) {
-    return <p className="text-sm italic text-[var(--muted-foreground)]">Nothing waiting for your judgment.</p>;
-  }
+  // ThesisGroupReview stays mounted even when nothing is left: it holds the outcome of the
+  // approval that just emptied the lane (success must never make the result disappear).
   return (
     <div className="space-y-6">
+      {cards.length === 0 && oneOffs.length === 0 ? (
+        <p className="text-sm italic text-[var(--muted-foreground)]">Nothing waiting for your judgment.</p>
+      ) : null}
       <ThesisGroupReview cards={cards} intro={false} />
       {oneOffs.length ? (
         <section className="space-y-2">
@@ -193,7 +195,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           {lane === 'review' ? (
             <ReviewLane groups={data.groups} groupedIds={data.groupedIds} />
           ) : lane === 'replies' ? (
-            <RepliesTriage />
+            <RepliesTriage inCockpit />
           ) : (
             <WorkQueue reloadKey={data.latestRunId ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
           )}
