@@ -231,11 +231,11 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
             <div className="mt-3 flex flex-wrap items-center gap-2">
               {corr?.outcome === 'corroborated' && chosen.size > 0 ? (
                 <Button type="button" size="sm" data-testid="use-evidence-approve" disabled={busy !== null || checked.size === 0} onClick={() => void approve(true, [...chosen])}>
-                  {busy === 'use' ? 'Approving and routing...' : `Use this evidence + approve + use for ${checked.size}`}
+                  {busy === 'use' ? 'Approving and routing (about a minute)...' : `Use this evidence + approve + use for ${checked.size}`}
                 </Button>
               ) : (
                 <Button type="button" size="sm" data-testid="approve-use" disabled={busy !== null || checked.size === 0 || corr?.outcome === 'contradicts'} onClick={() => void approve(true)}>
-                  {busy === 'use' ? 'Approving and routing...' : `Approve + use for ${checked.size}`}
+                  {busy === 'use' ? 'Approving and routing (about a minute)...' : `Approve + use for ${checked.size}`}
                 </Button>
               )}
               <Button type="button" size="sm" variant="ghost" disabled={busy !== null || checked.size === 0} onClick={() => void approve(false)}>

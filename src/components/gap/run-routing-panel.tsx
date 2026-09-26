@@ -16,7 +16,9 @@
  * rows (mode: shadow); it cannot send email or enroll anyone, and this
  * panel says so before and after every run.
  *
- * A client-side 60s AbortController bounds the request: an interactive
+ * A client-side 150s AbortController bounds the request (raised from 60s on
+ * 2026-09-26: a real 7-account run took 63.8s in production, so 60s reported
+ * "too long" on a run that succeeded). An interactive
  * click over a small, capped scope should never need Vercel's full 300s
  * function budget, and Casey should never be left staring at "Running..."
  * indefinitely. On timeout, no automatic retry (that could double-run
@@ -52,7 +54,7 @@ type RunState =
   | { kind: 'error'; message: string }
   | { kind: 'timeout' };
 
-const CLIENT_TIMEOUT_MS = 60_000;
+const CLIENT_TIMEOUT_MS = 150_000;
 
 function summarizeSkips(skips: Record<string, number>): string {
   const entries = Object.entries(skips).sort((a, b) => b[1] - a[1]);
