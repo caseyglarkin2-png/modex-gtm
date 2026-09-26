@@ -140,6 +140,11 @@ Irreducible steps kept on purpose:
 - Approving the last thesis emptied REVIEW and unmounted the outcome.
 - Run routing aborted at 60s; Casey's real 7-account run took 63.8s.
 - REPLIES tile did not refresh after a disposition.
+- Found on the production verification after merge (hotfix PR): routing treats an
+  `approved` (Approve only) hypothesis as routable, so the 5 PepsiCo people Casey
+  had NOT put in use showed as READY, and their send would be refused
+  (`hypothesis_not_active`). `sellerLaneOf` now sends them to REVIEW, where the
+  open decision (use it?) lives. Routing rules unchanged.
 
 ## Surfaces
 

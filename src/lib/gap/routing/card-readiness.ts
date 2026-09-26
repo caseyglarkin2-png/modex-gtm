@@ -244,5 +244,9 @@ export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | nul
   const r = cardReadiness(item);
   if (r.state === 'blocked') return 'blocked';
   if (r.state === 'missing_prerequisite') return 'research';
-  return CONTACT_NOW_ACTIONS.has(item.action) ? 'ready' : 'later';
+  if (!CONTACT_NOW_ACTIONS.has(item.action)) return 'later';
+  // Approve only: routing treats an approved hypothesis as routable, but Casey has not
+  // chosen to USE it and the send gate refuses it. The open decision is USE (REVIEW).
+  if (item.hypothesis?.status === 'approved') return 'review';
+  return 'ready';
 }
