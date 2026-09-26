@@ -26,9 +26,19 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { getHypothesis, transitionHypothesis, updateDraftNarrative } from '@/lib/gap/hypothesis/service';
 import { advanceHypothesis } from '@/lib/gap/hypothesis/thesis-groups';
+import { routeAfterUse, type RouteAfterUseResult } from '@/lib/gap/routing/interactive';
 import { PERSONAS, PROBLEM_FAMILIES, UNMAPPED_FAMILY } from '@/lib/gap/taxonomy';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 300;
+
+/** A hypothesis that just became active is routed at once (shadow recommendations only). */
+async function routeIfNowActive(id: string, to: string | null | undefined, actor: string, now: Date): Promise<RouteAfterUseResult | null> {
+  if (to !== 'active') return null;
+  const row = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: { primary_persona_id: true, primary_persona: { select: { name: true } } } });
+  if (typeof row?.primary_persona_id !== 'number') return null;
+  return routeAfterUse(prisma, { actor, now, people: [{ personaId: row.primary_persona_id, name: row.primary_persona?.name ?? null }] });
+}
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -112,8 +122,10 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     const row = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: { status: true } });
     if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
     const use = parsed.data.advance === 'approve_and_use';
-    const r = await advanceHypothesis(prisma, id, row.status, { use, actor, now: new Date(), reason: use ? 'approve + use in routing' : 'approve only' });
-    return NextResponse.json(r, { status: r.ok ? 200 : 409 });
+    const now = new Date();
+    const r = await advanceHypothesis(prisma, id, row.status, { use, actor, now, reason: use ? 'approve + use in routing' : 'approve only' });
+    const routing = r.ok && r.from !== 'active' ? await routeIfNowActive(id, r.to, actor, now) : null;
+    return NextResponse.json({ ...r, ...(routing ? { routing } : {}) }, { status: r.ok ? 200 : 409 });
   }
 
   if (keys.action !== undefined) {
@@ -121,12 +133,14 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     if (!parsed.success) return invalidBody(firstField(parsed.error));
     const { action, reason, outcome } = parsed.data;
 
-    const result = await transitionHypothesis(prisma, id, action, { now: new Date(), actor, reason, outcome });
+    const now = new Date();
+    const result = await transitionHypothesis(prisma, id, action, { now, actor, reason, outcome });
     if (!result.ok) {
       const status = result.reason === 'not_found' ? 404 : 409;
       return NextResponse.json({ error: result.reason }, { status });
     }
-    return NextResponse.json({ from: result.from, to: result.to, effects: result.effects });
+    const routing = action === 'activate' ? await routeIfNowActive(id, result.to, actor, now) : null;
+    return NextResponse.json({ from: result.from, to: result.to, effects: result.effects, ...(routing ? { routing } : {}) });
   }
 
   if (keys.narrative !== undefined) {

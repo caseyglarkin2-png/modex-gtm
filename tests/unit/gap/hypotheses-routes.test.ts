@@ -15,10 +15,15 @@ const mockedTransition = vi.fn();
 const mockedUpdateNarrative = vi.fn();
 const mockedList = vi.fn();
 const mockedGet = vi.fn();
-const fakePrisma = { __tag: 'fake-prisma' };
+const mockedRouteAfterUse = vi.fn();
+const fakePrisma = {
+  __tag: 'fake-prisma',
+  prospectingHypothesis: { findUnique: vi.fn(async () => ({ primary_persona_id: 916, primary_persona: { name: 'salvador rosas gutierrez' } })) },
+};
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: fakePrisma }));
+vi.mock('@/lib/gap/routing/interactive', () => ({ routeAfterUse: mockedRouteAfterUse }));
 vi.mock('@/lib/gap/hypothesis/service', () => ({
   proposeHypothesis: mockedPropose,
   transitionHypothesis: mockedTransition,
@@ -403,6 +408,23 @@ describe('PATCH /api/gap/hypotheses/[id]', () => {
     expect(ctx.reason).toBe('buyer confirmed');
     expect(ctx.outcome).toBe('confirmed');
     expect(ctx.now).toBeInstanceOf(Date);
+  });
+
+  it('activate (Use in routing) routes at once and returns where the person landed; no separate ROUTE click', async () => {
+    mockedTransition.mockResolvedValue({ ok: true, from: 'approved', to: 'active', effects: [] });
+    mockedRouteAfterUse.mockResolvedValueOnce({ ok: true, runId: 'run-9', people: [{ personaId: 916, name: 'salvador rosas gutierrez', lane: 'ready', decisionId: 'd1' }], counts: { ready: 1 } });
+    const res = await PATCH(jsonRequest(`${BASE}/hyp_1`, 'PATCH', { action: 'activate' }), idParams());
+    expect(res.status).toBe(200);
+    expect((await res.json()).routing).toMatchObject({ ok: true, counts: { ready: 1 } });
+    expect(mockedRouteAfterUse).toHaveBeenCalledWith(fakePrisma, expect.objectContaining({ actor: 'casey@freightroll.com', people: [{ personaId: 916, name: 'salvador rosas gutierrez' }] }));
+  });
+
+  it('a non-activating transition never routes', async () => {
+    mockedRouteAfterUse.mockClear();
+    mockedTransition.mockResolvedValue({ ok: true, from: 'draft', to: 'review_required', effects: [] });
+    const res = await PATCH(jsonRequest(`${BASE}/hyp_1`, 'PATCH', { action: 'submit' }), idParams());
+    expect(res.status).toBe(200);
+    expect(mockedRouteAfterUse).not.toHaveBeenCalled();
   });
 
   it('409 with the exact machine reason on an illegal transition', async () => {
