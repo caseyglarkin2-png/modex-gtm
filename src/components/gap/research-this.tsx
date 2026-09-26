@@ -33,11 +33,13 @@ interface Result {
 
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
-export function ResearchThis({ decisionId }: { decisionId: string }) {
+/** `personaIds` (a RESEARCH group, 2026-09-26): one search, and the proposal covers every person in the group. */
+export function ResearchThis({ decisionId, personaIds }: { decisionId: string; personaIds?: number[] }) {
   const [busy, setBusy] = useState<'research' | 'propose' | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [proposed, setProposed] = useState<{ id: string; existing: boolean } | null>(null);
+  const [proposed, setProposed] = useState<{ id: string; existing: boolean; count: number } | null>(null);
+  const group = personaIds && personaIds.length > 1 ? personaIds : null;
 
   async function research() {
     setBusy('research');
@@ -60,10 +62,14 @@ export function ResearchThis({ decisionId }: { decisionId: string }) {
     setBusy('propose');
     setError(null);
     try {
-      const res = await fetch(`/api/gap/research/${encodeURIComponent(runId)}/propose`, { method: 'POST' });
-      const data = (await res.json().catch(() => ({}))) as { hypothesisId?: string; existing?: boolean; error?: string };
+      const res = await fetch(`/api/gap/research/${encodeURIComponent(runId)}/propose`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(group ? { personaIds: group } : {}),
+      });
+      const data = (await res.json().catch(() => ({}))) as { hypothesisId?: string; hypothesisIds?: string[]; existing?: boolean; error?: string };
       if (!res.ok || !data.hypothesisId) setError(data.error ?? `HTTP ${res.status}`);
-      else setProposed({ id: data.hypothesisId, existing: data.existing === true });
+      else setProposed({ id: data.hypothesisId, existing: data.existing === true, count: data.hypothesisIds?.length ?? 1 });
     } finally {
       setBusy(null);
     }
@@ -92,15 +98,15 @@ export function ResearchThis({ decisionId }: { decisionId: string }) {
           ))}
           {proposed ? (
             <p>
-              {proposed.existing ? 'Draft already proposed.' : 'Draft hypothesis proposed.'}{' '}
-              <a href="/gap/hypotheses?status=draft" className="underline">
-                Review it
+              {proposed.existing ? 'Already proposed.' : proposed.count > 1 ? `Thesis proposed for ${proposed.count} people.` : 'Thesis proposed.'}{' '}
+              <a href="/gap?lane=review" className="underline">
+                Decide in Review
               </a>{' '}
-              (it stays a draft until you approve it).
+              (nothing is contacted until you approve and use it).
             </p>
           ) : (
-            <Button type="button" size="sm" variant="outline" disabled={busy !== null} onClick={() => propose(result.runId)}>
-              {busy === 'propose' ? 'Proposing...' : 'Propose updated hypothesis'}
+            <Button type="button" size="sm" disabled={busy !== null} onClick={() => propose(result.runId)}>
+              {busy === 'propose' ? 'Proposing...' : group ? `Propose this thesis for ${group.length} people` : 'Propose this thesis'}
             </Button>
           )}
         </div>

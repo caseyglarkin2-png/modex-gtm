@@ -142,6 +142,25 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(t.hyps.filter((x) => x.source_ref === `research:${run.runId}`)).toHaveLength(1);
   });
 
+  it('RESEARCH group: ONE run proposes the same draft for every person at the account (one shared thesis); an outsider is skipped', async () => {
+    const { prisma, t } = db();
+    const accounts: Record<number, string> = { 1886: 'Kroger', 1788: 'Kroger', 42: 'PepsiCo' };
+    prisma.persona.findUnique = vi.fn(async ({ where }: any) => (accounts[where.id] ? { id: where.id, account_name: accounts[where.id] } : null));
+    const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary()]), fetchText: async () => PAGE });
+    const p = await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW, personaIds: [1886, 1788, 42, 1788] });
+    expect(p).toMatchObject({ ok: true, existing: false, skipped: [42] });
+    const drafts = t.hyps.filter((x) => String(x.source_ref ?? '').startsWith(`research:${run.runId}`));
+    expect(drafts.map((d) => [d.primary_persona_id, d.source_ref, d.status])).toEqual([
+      [1886, `research:${run.runId}`, 'draft'],
+      [1788, `research:${run.runId}:p1788`, 'draft'],
+    ]);
+    // Identical narrative and evidence: the drafts form one sibling thesis for REVIEW.
+    expect(drafts[0].observation).toBe(drafts[1].observation);
+    expect(p.ok && p.hypothesisIds).toHaveLength(2);
+    const again = await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW, personaIds: [1886, 1788] });
+    expect(again).toMatchObject({ ok: true, existing: true });
+  });
+
   it('refuses with no fresh evidence, and on conflicting evidence', async () => {
     const { prisma } = db();
     const none = await runEvidenceResearch(prisma, input, { ...edgarOnly([]), fetchText: async () => '' });

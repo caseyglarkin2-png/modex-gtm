@@ -62,3 +62,38 @@ describe('<GapCockpit>', () => {
     expect(screen.getByTestId('cockpit-tile-ready')).toHaveAttribute('href', '/gap?lane=ready');
   });
 });
+
+describe('<SendFromYardflow> copy checking is invisible when it passes (weekend reduction, 2026-09-26)', () => {
+  it('REVIEW: the concern shows inline; Approve copy + continue records the approval and goes straight to the final check', async () => {
+    fetchMock.mockResolvedValueOnce(json({ error: 'copy_review_required', approvalRequestId: 'apr-7', failedChecks: ['C15: critic asked for review'] }, 409));
+    render(<SendFromYardflow decisionId="dec-1" mailbox="casey@yardflow.ai" />);
+    fireEvent.click(screen.getByRole('button', { name: 'Send email' }));
+    const review = await screen.findByTestId('send-review');
+    expect(review).toHaveTextContent('Concern: C15: critic asked for review');
+
+    fetchMock.mockResolvedValueOnce(json({ ok: true }));
+    fetchMock.mockResolvedValueOnce(json({ ok: true, preview: PREVIEW }));
+    fireEvent.click(screen.getByRole('button', { name: 'Approve copy + continue' }));
+    await screen.findByTestId('send-confirm');
+    expect((fetchMock.mock.calls[1] as any[])[0]).toBe('/api/revops/send-approvals');
+    expect(JSON.parse(String((fetchMock.mock.calls[1] as any[])[1].body))).toEqual({ id: 'apr-7', action: 'approve' });
+    expect((fetchMock.mock.calls[2] as any[])[0]).toBe('/api/gap/decisions/dec-1/send');
+    // Nothing was sent: the only send-route calls were previews (no confirm body).
+    expect(fetchMock.mock.calls.filter((c: any[]) => String(c[1]?.body ?? '').includes('confirm'))).toHaveLength(0);
+  });
+
+  it('a review already open for this copy shows before the first click', () => {
+    render(<SendFromYardflow decisionId="dec-1" mailbox="casey@yardflow.ai" pendingApproval={{ id: 'apr-9', reason: 'critic_review' }} />);
+    expect(screen.getByTestId('send-review')).toHaveTextContent('Concern: critic_review');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('REJECT: explains that sending is blocked, nothing sent', async () => {
+    fetchMock.mockResolvedValueOnce(json({ error: 'copy_rejected', failedChecks: ['C01: em dash'] }, 409));
+    render(<SendFromYardflow decisionId="dec-1" mailbox="casey@yardflow.ai" />);
+    fireEvent.click(screen.getByRole('button', { name: 'Send email' }));
+    const refused = await screen.findByTestId('send-refused');
+    expect(refused).toHaveTextContent('The compiler rejected this copy. Nothing was sent.');
+    expect(refused).toHaveTextContent('C01: em dash');
+  });
+});

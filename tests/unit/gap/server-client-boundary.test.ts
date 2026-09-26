@@ -57,9 +57,11 @@ describe('server/client boundary in GAP surfaces', () => {
     expect(violations).toEqual([]);
   });
 
-  it('the action pack page is a server component and takes asStringList from the plain module', () => {
+  it('the action pack (page and shared view) are server components; the view takes asStringList from the plain module', () => {
     const page = readFileSync('src/app/gap/preview/[hypothesisId]/page.tsx', 'utf8');
+    const view = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
     expect(isClient(page)).toBe(false);
-    expect(page).toMatch(/import \{ asStringList \} from '@\/lib\/gap\/ui\/format'/);
+    expect(isClient(view)).toBe(false);
+    expect(view).toMatch(/import \{ asStringList \} from '@\/lib\/gap\/ui\/format'/);
   });
 });

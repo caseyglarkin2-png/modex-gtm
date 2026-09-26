@@ -12,6 +12,12 @@
  * falsification) is carried from the card's current hypothesis when there is
  * one, else a short hedged default for Casey to edit. Idempotent per run
  * (source_ref research:<runId>).
+ *
+ * Group research (2026-09-26): with `personaIds`, ONE run proposes the same
+ * draft for every person in the group (each its own row, source_ref
+ * research:<runId>:p<personaId>; the run's own person keeps research:<runId>),
+ * so the drafts form one sibling thesis and Casey decides once in REVIEW.
+ * A person who does not belong to the run's account is skipped, never proposed.
  */
 import { proposeHypothesis } from '../hypothesis/service';
 /**
@@ -31,12 +37,12 @@ export function citedQuote(title: string, excerpt: string, signalId: string): st
 type PrismaLike = any;
 
 export type ProposeFromResearchResult =
-  | { ok: true; hypothesisId: string; existing: boolean }
+  | { ok: true; hypothesisId: string; existing: boolean; hypothesisIds?: string[]; skipped?: number[] }
   | { ok: false; reason: 'run_not_found' | 'no_fresh_evidence' | 'conflicting_evidence' | string };
 
 const asList = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
 
-export async function proposeFromResearch(prisma: PrismaLike, input: { researchRunId: string; actor: string; now: Date }): Promise<ProposeFromResearchResult> {
+export async function proposeFromResearch(prisma: PrismaLike, input: { researchRunId: string; actor: string; now: Date; personaIds?: number[] }): Promise<ProposeFromResearchResult> {
   const run = await prisma.researchRun.findUnique({ where: { id: input.researchRunId }, select: { id: true, account_name: true, persona_id: true, provider_status: true } });
   if (!run) return { ok: false, reason: 'run_not_found' };
   const status = (run.provider_status ?? {}) as { outcome?: string; hypothesisId?: string | null; problemFamily?: string | null };
@@ -57,37 +63,59 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   const base = status.hypothesisId
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: status.hypothesisId } })
     : null;
-  const persona = run.persona_id ? await prisma.persona.findUnique({ where: { id: run.persona_id }, select: { id: true } }) : null;
-
   const observation = quotable.map((s) => citedQuote(s.title, s.evidence_text!, s.id)).join(' ');
   const newest = quotable[0].observed_at.toISOString().slice(0, 10);
 
-  const r = await proposeHypothesis(prisma, {
-    accountName: run.account_name,
-    primaryPersonaId: persona?.id ?? null,
-    persona: base?.persona ?? 'supply_chain',
-    problemFamily: base?.problem_family ?? status.problemFamily ?? 'hidden_capacity',
-    observation,
-    problemHypothesis:
-      base?.problem_hypothesis ??
-      'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.',
-    rootCauseHypotheses: asList(base?.root_cause_hypotheses),
-    impactHypotheses: asList(base?.impact_hypotheses),
-    whyNow: `Public source dated ${newest}.`,
-    falsificationQuestions: asList(base?.falsification_questions).length
-      ? asList(base?.falsification_questions)
-      : ['Did the change above add trailer volume or dwell at the sites that remain?'],
-    whatANoMeans: base?.what_a_no_means ?? null,
-    confidence: Math.min(Number(base?.confidence ?? 40), 60),
-    signalIds: quotable.map((s) => s.id),
-    primarySignalId: quotable[0].id,
-    sourceRef: `research:${run.id}`,
-    metadata: { proposedFrom: 'research_this', researchRunId: run.id, basedOn: base?.id ?? null },
-    createdBy: input.actor,
-  });
-  if (!r.ok) {
-    if (r.reason === 'duplicate_source_ref' && r.existingId) return { ok: true, hypothesisId: r.existingId, existing: true };
+  const proposeFor = async (personaId: number | null, sourceRef: string): Promise<{ ok: true; id: string; existing: boolean } | { ok: false; reason: string }> => {
+    const r = await proposeHypothesis(prisma, {
+      accountName: run.account_name,
+      primaryPersonaId: personaId,
+      persona: base?.persona ?? 'supply_chain',
+      problemFamily: base?.problem_family ?? status.problemFamily ?? 'hidden_capacity',
+      observation,
+      problemHypothesis:
+        base?.problem_hypothesis ??
+        'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.',
+      rootCauseHypotheses: asList(base?.root_cause_hypotheses),
+      impactHypotheses: asList(base?.impact_hypotheses),
+      whyNow: `Public source dated ${newest}.`,
+      falsificationQuestions: asList(base?.falsification_questions).length
+        ? asList(base?.falsification_questions)
+        : ['Did the change above add trailer volume or dwell at the sites that remain?'],
+      whatANoMeans: base?.what_a_no_means ?? null,
+      confidence: Math.min(Number(base?.confidence ?? 40), 60),
+      signalIds: quotable.map((s) => s.id),
+      primarySignalId: quotable[0].id,
+      sourceRef,
+      metadata: { proposedFrom: 'research_this', researchRunId: run.id, basedOn: base?.id ?? null },
+      createdBy: input.actor,
+    });
+    if (r.ok) return { ok: true, id: r.id, existing: false };
+    if (r.reason === 'duplicate_source_ref' && r.existingId) return { ok: true, id: r.existingId, existing: true };
     return { ok: false, reason: r.reason };
+  };
+
+  const group = [...new Set(input.personaIds ?? [])];
+  if (group.length === 0) {
+    const persona = run.persona_id ? await prisma.persona.findUnique({ where: { id: run.persona_id }, select: { id: true } }) : null;
+    const r = await proposeFor(persona?.id ?? null, `research:${run.id}`);
+    return r.ok ? { ok: true, hypothesisId: r.id, existing: r.existing } : { ok: false, reason: r.reason };
   }
-  return { ok: true, hypothesisId: r.id, existing: false };
+
+  const ids: string[] = [];
+  const skipped: number[] = [];
+  let allExisting = true;
+  for (const pid of group) {
+    const persona: { id: number; account_name: string | null } | null = await prisma.persona.findUnique({ where: { id: pid }, select: { id: true, account_name: true } });
+    if (!persona || persona.account_name !== run.account_name) {
+      skipped.push(pid);
+      continue;
+    }
+    const r = await proposeFor(persona.id, pid === run.persona_id ? `research:${run.id}` : `research:${run.id}:p${pid}`);
+    if (!r.ok) return { ok: false, reason: r.reason };
+    ids.push(r.id);
+    allExisting &&= r.existing;
+  }
+  if (ids.length === 0) return { ok: false, reason: 'no_person_in_account' };
+  return { ok: true, hypothesisId: ids[0], existing: allExisting, hypothesisIds: ids, skipped };
 }

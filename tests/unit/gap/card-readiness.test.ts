@@ -84,14 +84,14 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
   it('Joey (enroll, full contact data, active hypothesis): actionable, action pack carries HIS persona id and the decision id', () => {
     const r = cardReadiness(item());
     expect(r.state).toBe('actionable');
-    expect(r.state === 'actionable' && r.primary.href).toBe('/gap/preview/hyp-1?personaId=1886&decisionId=dec-1');
+    expect(r.state === 'actionable' && r.primary.href).toBe('/gap?lane=ready&open=dec-1#card-dec-1');
   });
 
   it('Jason (research_required, no hypothesis): exact prerequisite, never a fabricated email', () => {
     const r = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788, displayName: 'jason gaiser' } }));
     expect(r.state).toBe('missing_prerequisite');
     expect(r.state === 'missing_prerequisite' && r.missing).toContain('No hypothesis covers jason at Kroger');
-    expect(r.state === 'missing_prerequisite' && r.fix.href).toBe('/gap/hypotheses?status=draft');
+    expect(r.state === 'missing_prerequisite' && r.fix.href).toBe('/gap?lane=review');
   });
 
   it('unknown provenance is always a review prerequisite, never an outreach action', () => {
@@ -130,12 +130,12 @@ describe('cardReadiness: sequence cards (last mile)', () => {
 
   it('FOLLOW UP: touch due opens the action pack', () => {
     const r = cardReadiness({ ...base(), touch: { state: 'due', stepIndex: 1, dueAt: '2026-09-30T15:00:00.000Z', sentCount: 1 } });
-    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Follow up: open action pack (touch 2)', href: '/gap/preview/hyp-1?personaId=1886&decisionId=dec-1' });
+    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Follow up: touch 2', href: '/gap?lane=follow_up&open=dec-1#card-dec-1' });
   });
 
   it('REPLIED: sequence stopped, points at logging the reply', () => {
     const r = cardReadiness({ ...base(), touch: { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sentCount: 1 } });
-    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Log the reply', href: '/gap/replies' });
+    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' });
   });
 
   it('unreadable sequence state is a named prerequisite, never an outreach action', () => {

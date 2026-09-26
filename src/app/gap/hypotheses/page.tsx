@@ -1,5 +1,8 @@
 /**
- * /gap/hypotheses (GAP Prospecting OS, Sprint 1, S1-T13).
+ * /gap/hypotheses (GAP Prospecting OS, Sprint 1, S1-T13; demoted 2026-09-26).
+ *
+ * ALL HYPOTHESES: history and diagnosis. Deciding happens in the cockpit REVIEW
+ * lane (/gap?lane=review), which renders the same thesis cards and list.
  *
  * Server page behind GAP_OS_ENABLED + GAP_HYPOTHESIS_ENABLED: a flag that is
  * off means 404, the same answer the API gives. The session is enforced by
@@ -20,7 +23,7 @@ import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
 import { HypothesisList } from './hypothesis-list';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Hypotheses' };
+export const metadata = { title: 'All hypotheses' };
 
 type SearchParams = { status?: string };
 
@@ -45,12 +48,12 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP OS', href: '/gap' }, { label: 'Hypotheses' }]} />
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP', href: '/gap' }, { label: 'All hypotheses' }]} />
       <GapSubnav />
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Hypotheses</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">All hypotheses</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-          Cited facts first in each drawer, seller inference below. Nothing advances without a cited fact.
+          History and every status. To decide what is waiting, use <a className="underline" href="/gap?lane=review">Review</a> in the cockpit.
         </p>
       </div>
       <ThesisGroupReview cards={cards} />

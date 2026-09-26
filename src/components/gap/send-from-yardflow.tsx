@@ -4,7 +4,12 @@
  * SEND EMAIL on the action pack (first-principles pass, 2026-09-25).
  *
  *   Send email       POST /api/gap/decisions/{id}/send (no confirm): the server
- *                    re-runs every gate and returns the FINAL email. Nothing sent.
+ *                    compiles exactly this copy if it was never checked, re-runs
+ *                    every gate and returns the FINAL email. Nothing sent.
+ *                    PASS goes straight to the confirmation (no CHECK COPY step).
+ *                    REVIEW shows the concern inline: Approve copy + continue
+ *                    records the approval and asks for the final email again.
+ *                    REJECT says why sending is blocked.
  *   Confirm + send   POST the same route with the content hash and recipient
  *                    Casey is looking at. The server refuses if either changed.
  *   Back             closes the confirmation; nothing sent.
@@ -31,6 +36,7 @@ interface Preview {
 type State =
   | { kind: 'idle' }
   | { kind: 'confirm'; preview: Preview }
+  | { kind: 'review'; approvalId: string | null; detail: string }
   | { kind: 'sent'; at: string; messageId: string; already: boolean; note?: string }
   | { kind: 'refused'; reason: string; detail: string };
 
@@ -39,7 +45,8 @@ const REASONS: Record<string, string> = {
   recipient_changed_since_review: 'The recipient changed after you reviewed it. Nothing was sent.',
   send_in_progress_or_unknown: 'This email was already started and its outcome is not recorded. Check Gmail Sent before trying again. GAP will not send it twice.',
   send_refused: 'The send was refused before anything left the mailbox.',
-  copy_review_required: 'The copy needs your review first (see below). Nothing was sent.',
+  copy_review_required: 'The copy needs your review first. Nothing was sent.',
+  approval_failed: 'The approval did not save. Nothing was sent.',
   copy_rejected: 'The compiler rejected this copy. Nothing was sent.',
   persona_do_not_contact: 'This person is marked do not contact. Nothing was sent.',
   email_invalid: 'The address is not valid. Nothing was sent.',
@@ -53,10 +60,21 @@ const REASONS: Record<string, string> = {
 
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
-export function SendFromYardflow({ decisionId, stepIndex = 0, mailbox }: { decisionId: string; stepIndex?: number; mailbox: string }) {
+export function SendFromYardflow({
+  decisionId,
+  stepIndex = 0,
+  mailbox,
+  pendingApproval = null,
+}: {
+  decisionId: string;
+  stepIndex?: number;
+  mailbox: string;
+  /** A review already open for exactly this copy: shown before the first click. */
+  pendingApproval?: { id: string; reason: string } | null;
+}) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
-  const [state, setState] = useState<State>({ kind: 'idle' });
+  const [state, setState] = useState<State>(pendingApproval ? { kind: 'review', approvalId: pendingApproval.id, detail: pendingApproval.reason } : { kind: 'idle' });
   const url = `/api/gap/decisions/${encodeURIComponent(decisionId)}/send`;
 
   async function call(body: Record<string, unknown>) {
@@ -75,6 +93,9 @@ export function SendFromYardflow({ decisionId, stepIndex = 0, mailbox }: { decis
           note: data.ledgerError ? `Sent, but the receipt did not save (${data.ledgerError}). GAP will not resend it.` : undefined,
         });
         router.refresh();
+      } else if (data.error === 'copy_review_required') {
+        const checks = Array.isArray(data.failedChecks) ? data.failedChecks : [];
+        setState({ kind: 'review', approvalId: typeof data.approvalRequestId === 'string' ? data.approvalRequestId : null, detail: checks.join(' | ') || String(data.detail ?? '') });
       } else {
         const reason = String(data.error ?? `HTTP ${res.status}`);
         setState({ kind: 'refused', reason, detail: [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ') });
@@ -87,6 +108,47 @@ export function SendFromYardflow({ decisionId, stepIndex = 0, mailbox }: { decis
   }
 
   const step = stepIndex > 0 ? { stepIndex } : {};
+
+  /** Approve THIS copy through the existing approval resolver, then ask for the final email again. */
+  async function approveAndContinue(approvalId: string) {
+    setBusy(true);
+    try {
+      const res = await fetch('/api/revops/send-approvals', {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: approvalId, action: 'approve' }),
+      });
+      if (!res.ok) {
+        setState({ kind: 'refused', reason: 'approval_failed', detail: `HTTP ${res.status}` });
+        setBusy(false);
+        return;
+      }
+    } catch (err) {
+      setState({ kind: 'refused', reason: 'network_error', detail: err instanceof Error ? err.message : String(err) });
+      setBusy(false);
+      return;
+    }
+    await call(step);
+  }
+
+  if (state.kind === 'review') {
+    return (
+      <div data-testid="send-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
+        <p className="font-semibold">The copy check wants your eyes on this email before it goes.</p>
+        {state.detail ? <p className="text-xs text-[var(--muted-foreground)]">Concern: {state.detail}</p> : null}
+        <div className="flex flex-wrap gap-2">
+          {state.approvalId ? (
+            <Button type="button" disabled={busy} onClick={() => void approveAndContinue(state.approvalId!)}>
+              {busy ? 'Approving...' : 'Approve copy + continue'}
+            </Button>
+          ) : (
+            <p className="text-xs">No approval could be opened for this copy. Edit it in a Gmail draft instead.</p>
+          )}
+        </div>
+        <p className="text-[11px] text-[var(--muted-foreground)]">Approving records your review of the copy above. Nothing is sent until you confirm.</p>
+      </div>
+    );
+  }
 
   if (state.kind === 'sent') {
     return (

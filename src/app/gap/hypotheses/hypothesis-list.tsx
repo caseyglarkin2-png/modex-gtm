@@ -28,6 +28,8 @@ import {
 export interface HypothesisListProps {
   items: HypothesisRow[];
   status?: string | null;
+  /** The status filter belongs to the full list (/gap/hypotheses); the cockpit REVIEW lane hides it. */
+  showFilter?: boolean;
 }
 
 async function fetchRow(id: string): Promise<HypothesisRow> {
@@ -45,7 +47,7 @@ async function fetchRow(id: string): Promise<HypothesisRow> {
   return (await res.json()) as HypothesisRow;
 }
 
-export function HypothesisList({ items, status }: HypothesisListProps) {
+export function HypothesisList({ items, status, showFilter = true }: HypothesisListProps) {
   const router = useRouter();
   const [selected, setSelected] = useState<HypothesisRow | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -97,6 +99,7 @@ export function HypothesisList({ items, status }: HypothesisListProps) {
 
   return (
     <div className="space-y-4">
+      {showFilter ? (
       <nav aria-label="Status filter" className="flex flex-wrap items-center gap-2 text-sm">
         <Link
           href="/gap/hypotheses"
@@ -114,6 +117,7 @@ export function HypothesisList({ items, status }: HypothesisListProps) {
           </Link>
         ))}
       </nav>
+      ) : null}
 
       {loadError ? (
         <p role="alert" className="text-sm text-[var(--destructive)]">

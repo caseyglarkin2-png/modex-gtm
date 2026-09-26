@@ -1,13 +1,13 @@
 'use client';
 
 /**
- * Seller Action Center: the draft panel on the action pack (final pass,
- * 2026-09-25). Three buttons, all explicit clicks, none of which sends:
+ * Seller Action Center: the draft panel on the action pack (final pass
+ * 2026-09-25; CHECK COPY removed 2026-09-26). Explicit clicks, none of which sends:
  *
- *   Check copy          POST gmail-draft {checkOnly:true}: compile + gate the
- *                       exact copy; a review opens an approval in /queue
- *   Create Gmail draft  POST gmail-draft: one DRAFT in Casey's Drafts folder
- *                       (shown only when the copy is compiler-cleared)
+ *   Create Gmail draft  POST gmail-draft: the server compiles this exact copy
+ *                       when it was never checked; PASS creates one DRAFT in
+ *                       Casey's Drafts folder, REVIEW shows Approve this copy
+ *                       right here, REJECT says why.
  *   Check if sent       POST gmail-draft/reconcile: read Gmail, record sent /
  *                       discarded / still a draft
  *
@@ -44,7 +44,6 @@ export interface SellerDraftPanelProps {
 
 type Outcome =
   | { kind: 'drafted'; recipient: string; subject: string; at: string; already: boolean; ledgerError?: string }
-  | { kind: 'cleared' }
   | { kind: 'review'; detail: string; approvalId: string | null }
   | { kind: 'refused'; reason: string; detail: string };
 
@@ -71,21 +70,18 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
   const draftsHref = `https://mail.google.com/mail/?authuser=${encodeURIComponent(senderIdentity)}#drafts`;
   const base = `/api/gap/decisions/${encodeURIComponent(decisionId)}/gmail-draft`;
 
-  async function post(checkOnly: boolean) {
-    setBusy(checkOnly ? 'check' : 'draft');
+  async function post() {
+    setBusy('draft');
     setOutcome(null);
     try {
       const res = await fetch(base, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ ...(checkOnly ? { checkOnly: true } : {}), ...(stepIndex > 0 ? { stepIndex } : {}) }),
+        body: JSON.stringify(stepIndex > 0 ? { stepIndex } : {}),
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- untyped route JSON, read field by field
       const data = (await res.json().catch(() => ({}))) as Record<string, any>;
-      if (res.ok && data.checked) {
-        setOutcome({ kind: 'cleared' });
-        router.refresh();
-      } else if (res.ok && data.receipt) {
+      if (res.ok && data.receipt) {
         setOutcome({
           kind: 'drafted',
           recipient: data.receipt.recipient,
@@ -162,19 +158,10 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
 
       {ineligibleReason ? (
         <p data-testid="draft-ineligible" className="text-xs text-[var(--muted-foreground)]">{ineligibleReason}</p>
-      ) : emailReady ? (
-        <Button type="button" size="sm" disabled={busy !== null} onClick={() => post(false)}>
+      ) : (
+        <Button type="button" size="sm" disabled={busy !== null} onClick={() => post()}>
           {busy === 'draft' ? 'Creating draft...' : stepIndex > 0 ? `Create Gmail draft (touch ${stepIndex + 1})` : 'Create Gmail draft'}
         </Button>
-      ) : (
-        <div className="space-y-1">
-          <Button type="button" size="sm" variant="outline" disabled={busy !== null} onClick={() => post(true)}>
-            {busy === 'check' ? 'Checking...' : 'Check copy'}
-          </Button>
-          <p className="text-[11px] text-[var(--muted-foreground)]">
-            Runs the compiler on this exact email. If it needs your review, you approve it here. Nothing is drafted or sent.
-          </p>
-        </div>
       )}
 
       {outcome?.kind === 'drafted' ? (
@@ -189,7 +176,6 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
           </a>
         </div>
       ) : null}
-      {outcome?.kind === 'cleared' ? <p className="text-xs">Copy cleared. You can create the draft now.</p> : null}
       {!emailReady && !ineligibleReason && review ? (
         <div data-testid="draft-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs">
           <p className="font-semibold">This exact email needs your review before it can be drafted.</p>
