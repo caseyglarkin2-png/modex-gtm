@@ -26,7 +26,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
-import { listQueue, type QueueItem } from '@/lib/gap/routing/queue';
+import { listAllCurrent, type QueueItem } from '@/lib/gap/routing/queue';
 import { cockpitOpenHref, sellerLaneOf } from '@/lib/gap/routing/card-readiness';
 import { listHypotheses } from '@/lib/gap/hypothesis/service';
 import { loadThesisGroups, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
@@ -63,7 +63,7 @@ async function loadCockpit() {
   const [hypothesesToReview, routableScope, queue, repliesPage, rawGroups, active] = await Promise.all([
     prisma.prospectingHypothesis.count({ where: { status: { in: ['draft', 'review_required'] } } }),
     resolveRoutableHypothesisScope(prisma),
-    listQueue(prisma, { limit: 100 }),
+    listAllCurrent(prisma),
     listReplies(prisma, { state: 'undispositioned', limit: REPLY_TILE_LIMIT }),
     loadThesisGroups(prisma).catch((): LoadedGroup[] => []),
     prisma.prospectingHypothesis.findMany({ where: { status: 'active', primary_persona_id: { not: null } }, select: { primary_persona_id: true } }),
@@ -77,7 +77,7 @@ async function loadCockpit() {
   const waitingGroups = groups.filter((g) => g.members.some((m) => WAITING.has(m.status)));
 
   // People in use with no current card, or a card from before they were in use.
-  // Only possible for rows activated before APPROVE + USE routed on its own.
+  // Rows activated before APPROVE + USE routed on its own, or whose account's routing failed.
   const cardFor = new Map(queue.items.map((i) => [i.persona.id, i]));
   const unrouted = [...new Set(active.map((a) => a.primary_persona_id as number))].filter((pid) => {
     const card = cardFor.get(pid);
@@ -114,9 +114,9 @@ async function loadCockpit() {
     next,
     groups: waitingGroups,
     groupedIds: new Set(groups.flatMap((g) => g.members.map((m) => m.id))),
-    latestRunId: queue.runId,
+    queueAsOf: queue.asOf,
     unrouted,
-    routing: { canRun: routableHypotheses > 0 || queue.runId !== null, routableHypotheses, routableAccounts },
+    routing: { canRun: routableHypotheses > 0 || queue.items.length > 0, routableHypotheses, routableAccounts },
   };
 }
 
@@ -133,12 +133,11 @@ async function ReviewLane({ groups, groupedIds }: { groups: LoadedGroup[]; group
         <p className="text-sm italic text-[var(--muted-foreground)]">Nothing waiting for your judgment.</p>
       ) : null}
       <ThesisGroupReview cards={cards} intro={false} />
-      {oneOffs.length ? (
-        <section className="space-y-2">
-          <h3 className="text-sm font-semibold">One-off hypotheses</h3>
-          <HypothesisList items={oneOffs} showFilter={false} />
-        </section>
-      ) : null}
+      {/* Always mounted: approving the last one-off must not unmount the drawer holding its outcome. */}
+      <section className="space-y-2">
+        {oneOffs.length ? <h3 className="text-sm font-semibold">One-off hypotheses</h3> : null}
+        <HypothesisList items={oneOffs} showFilter={false} emptyNote={null} />
+      </section>
     </div>
   );
 }
@@ -182,8 +181,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       {data.unrouted > 0 ? (
         <section data-testid="unrouted-notice" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
           <p>
-            {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation (put in use before GAP
-            routed on its own). One routing pass fixes it; it creates cards only and contacts no one.
+            {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation (routing did not
+            finish for them). One routing pass fixes it; it creates cards only and contacts no one.
           </p>
           {routingPanel}
         </section>
@@ -197,7 +196,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           ) : lane === 'replies' ? (
             <RepliesTriage inCockpit />
           ) : (
-            <WorkQueue reloadKey={data.latestRunId ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
+            <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
           )}
         </section>
       ) : (

@@ -30,6 +30,12 @@ export interface HypothesisListProps {
   status?: string | null;
   /** The status filter belongs to the full list (/gap/hypotheses); the cockpit REVIEW lane hides it. */
   showFilter?: boolean;
+  /**
+   * The cockpit keeps the list mounted even when nothing is left (null hides
+   * the empty note): approving the last row must not unmount the drawer that
+   * shows where its people landed.
+   */
+  emptyNote?: string | null;
 }
 
 async function fetchRow(id: string): Promise<HypothesisRow> {
@@ -47,7 +53,7 @@ async function fetchRow(id: string): Promise<HypothesisRow> {
   return (await res.json()) as HypothesisRow;
 }
 
-export function HypothesisList({ items, status, showFilter = true }: HypothesisListProps) {
+export function HypothesisList({ items, status, showFilter = true, emptyNote }: HypothesisListProps) {
   const router = useRouter();
   const [selected, setSelected] = useState<HypothesisRow | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -126,7 +132,9 @@ export function HypothesisList({ items, status, showFilter = true }: HypothesisL
       ) : null}
 
       {items.length === 0 ? (
-        <p className="text-sm italic text-[var(--muted-foreground)]">No hypotheses{status ? ` in ${status.replace(/_/g, ' ')}` : ''}.</p>
+        emptyNote === null ? null : (
+          <p className="text-sm italic text-[var(--muted-foreground)]">{emptyNote ?? `No hypotheses${status ? ` in ${status.replace(/_/g, ' ')}` : ''}.`}</p>
+        )
       ) : (
         <>
           <div className="flex items-center justify-between">

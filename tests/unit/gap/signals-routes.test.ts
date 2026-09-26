@@ -210,7 +210,7 @@ describe('POST /api/gap/signals', () => {
   });
 
   it('PRIVATE_FACT_HOSTS is the exact own-domain list', async () => {
-    const { PRIVATE_FACT_HOSTS } = await import('@/app/api/gap/signals/route');
+    const { PRIVATE_FACT_HOSTS } = await import('@/lib/gap/signals/private-hosts');
     expect([...PRIVATE_FACT_HOSTS]).toEqual(['yardflow.ai', 'freightroll.com', 'hubspot.com', 'app.hubspot.com', 'docs.google.com', 'drive.google.com']);
   });
 

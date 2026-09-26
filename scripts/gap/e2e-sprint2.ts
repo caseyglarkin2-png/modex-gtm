@@ -68,7 +68,7 @@ import {
   SKIP_REASON,
 } from '../../src/lib/gap/routing/enroll-row';
 import { listQueue, recordHumanAction } from '../../src/lib/gap/routing/queue';
-import { LAST_RUN_CONFIG_KEY, runRouting, SHADOW_MODE, type HubSpotSnapshotProvider } from '../../src/lib/gap/routing/run';
+import { runRouting, SHADOW_MODE, type HubSpotSnapshotProvider } from '../../src/lib/gap/routing/run';
 import { staticSuppressionReader } from '../../src/lib/gap/routing/suppression-read';
 import { enrollmentId, READBACK_PROPERTIES, runEnrollmentSync, type ReadContactsDeps } from '../../src/lib/gap/sequence/external-sync';
 import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
@@ -93,7 +93,7 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 /** Older than the 7-day hot window (R14/R15 must not fire) and inside the assembler's 28-day trigger window, the 45-day news TTL and the hypothesize lookback below. */
 const TRIGGER_AGE_DAYS = 10;
 const HYPOTHESIZE_LOOKBACK_DAYS = 12;
-const SYSTEM_CONFIG_KEYS = [LAST_RUN_CONFIG_KEY, WATERMARK_KEY] as const;
+const SYSTEM_CONFIG_KEYS = [WATERMARK_KEY] as const;
 
 function describeDatabase(url: string): string {
   try {
@@ -632,8 +632,9 @@ async function main(): Promise<number> {
     expect('5 routing', !act3.ok && act3.reason === 'not_found', `recordHumanAction on a missing id -> ${JSON.stringify(act3)}, expected not_found`);
     const acted = await prisma.routingDecision.findUnique({ where: { id: execRowA!.id }, select: { human_action: true, human_actor: true } });
     expect('5 routing', acted?.human_action === 'enrolled_by_hand' && acted.human_actor === ACTOR, `stamped ${JSON.stringify(acted)}`);
-    const lastRun = await prisma.systemConfig.findUnique({ where: { key: LAST_RUN_CONFIG_KEY } });
-    expect('5 routing', lastRun?.value === runIdA, `${LAST_RUN_CONFIG_KEY} is ${lastRun?.value}, expected ${runIdA}`);
+    // No run pointer: the default queue is each person's newest applicable card, so run A's rows are current.
+    const currentIds = new Set((await listQueue(prisma, { limit: 100 })).items.map((i) => i.id));
+    expect('5 routing', rowsA.every((r) => currentIds.has(r.id)), `current queue is missing run A rows: ${rowsA.filter((r) => !currentIds.has(r.id)).map((r) => r.id).join(',')}`);
     pass('5 routing', `run A mode shadow: ${runA.decisions} decisions ${JSON.stringify(runA.byRule)}, skips ${JSON.stringify(runA.skips)}; exec persona ${execPersona.id} -> enroll (target modex_queue, hypothesis ${execDraft.id}); do_not_contact persona -> suppressed / do_not_contact / blocked (R2-1); every row carries account + persona; queue ordered by priority; human action ok then already_acted, missing id not_found`);
 
     // 6. Enroll table off run A. SF12 (Opus adversarial review, 2026-09-24):

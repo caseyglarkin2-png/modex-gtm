@@ -137,6 +137,14 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(h.primary_persona_id).toBe(1886);
     expect(h.problem_hypothesis).toContain('My guess is');
     expect(t.events.map((e) => e.to_status)).toEqual(['draft']);
+    // The narrative Casey will approve comes back whole, identical to the stored draft.
+    expect(p.ok && p.narrative).toMatchObject({
+      observation: h.observation,
+      problemHypothesis: h.problem_hypothesis,
+      wouldProveWrong: h.falsification_questions,
+      evidence: [{ signalId: run.facts[0].signalId, title: 'KROGER CO 10-Q (filed 2026-09-18)' }],
+    });
+    expect(p.ok && p.hypothesisIds).toEqual([h.id]);
     const again = await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW });
     expect(again).toMatchObject({ ok: true, existing: true });
     expect(t.hyps.filter((x) => x.source_ref === `research:${run.runId}`)).toHaveLength(1);

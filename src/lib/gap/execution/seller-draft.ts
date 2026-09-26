@@ -83,12 +83,6 @@ export type SellerDraftRefusal =
 export type SellerDraftResult =
   | {
       ok: true;
-      /** checkOnly: the exact copy is compiler-cleared; nothing was drafted. */
-      checked: true;
-      compileId: string;
-    }
-  | {
-      ok: true;
       alreadyDrafted: boolean;
       receipt: DraftedPayload;
       /** Set when Gmail created the draft but the ledger write failed: the draft exists, the receipt did not land. */
@@ -222,7 +216,6 @@ export interface PreparedSellerEmail {
 
 export type PrepareResult =
   | Refusal
-  | { ok: true; checked: true; compileId: string }
   | { ok: true; existingDraft: DraftedPayload }
   | { ok: true; prepared: PreparedSellerEmail };
 
@@ -234,7 +227,7 @@ export type PrepareResult =
  */
 export async function prepareSellerEmail(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean; stepIndex?: number; mode?: 'draft' | 'send' },
+  input: { decisionId: string; actor: string; now: Date; stepIndex?: number; mode?: 'draft' | 'send' },
   deps: SellerDraftDeps = {},
 ): Promise<PrepareResult> {
   const { decisionId, actor, now } = input;
@@ -312,7 +305,7 @@ export async function prepareSellerEmail(
 
   // Idempotency: this exact copy already drafted for this card and still a draft.
   const existing = (await listDraftRecords(prisma, decisionId)).find((d) => d.fate === 'drafted' && d.drafted.contentHash === contentHash);
-  if (existing && !input.checkOnly && mode === 'draft') return { ok: true, existingDraft: existing.drafted };
+  if (existing && mode === 'draft') return { ok: true, existingDraft: existing.drafted };
 
   // Compiler clearance for exactly this marked copy.
   let compileRow = pack.compile;
@@ -388,9 +381,6 @@ export async function prepareSellerEmail(
     });
   }
 
-  // "Check copy": every guard above ran, the copy is cleared, and nothing is drafted.
-  if (input.checkOnly) return { ok: true, checked: true, compileId: compileRow!.id };
-
   let unsubscribeUrl: string;
   try {
     unsubscribeUrl = (deps.unsubscribeUrl ?? defaultUnsubscribeUrl)(email);
@@ -450,13 +440,12 @@ export async function prepareSellerEmail(
 
 export async function createSellerGmailDraft(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; checkOnly?: boolean; stepIndex?: number },
+  input: { decisionId: string; actor: string; now: Date; stepIndex?: number },
   deps: SellerDraftDeps = {},
 ): Promise<SellerDraftResult> {
   const { decisionId, actor, now } = input;
   const prep = await prepareSellerEmail(prisma, { ...input, mode: 'draft' }, deps);
   if (!prep.ok) return prep;
-  if ('checked' in prep) return prep;
   if ('existingDraft' in prep) return { ok: true, alreadyDrafted: true, receipt: prep.existingDraft };
   const p = prep.prepared;
   const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(DRAFT_REFUSED, pr, a, d, r);

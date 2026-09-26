@@ -70,6 +70,9 @@ describe('<ThesisGroupReview>', () => {
     expect(screen.queryByRole('button', { name: /route/i })).toBeNull();
     expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toEqual({ op: 'approve', fingerprint: FP, hypothesisIds: ['h1', 'h2'], use: true });
     expect(refreshMock).toHaveBeenCalled();
+    // No stale decision under the result while the page refreshes (debt burn, 2026-09-26).
+    expect(screen.queryByRole('button', { name: /Approve \+ use/ })).toBeNull();
+    expect(screen.getByTestId('thesis-group-decided')).toHaveTextContent('decided');
   });
 
   it('the outcome stays visible after the card leaves the list (success never makes the result disappear)', async () => {

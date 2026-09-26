@@ -5,8 +5,9 @@
  * production interactive run defaulted to the broad account universe and
  * hung until Vercel's 300s maxDuration killed it).
  *
- * The one button that turns "activate a hypothesis" into "see a
- * recommendation card," without Casey ever touching an API or a cron.
+ * Diagnostic since the debt burn (2026-09-26): APPROVE + USE routes its own
+ * people, so this button is for retrying people whose routing failed and for
+ * a broad refresh. A run replaces only the cards of the people it routes.
  * POSTs /api/gap/routing/run?mode=apply with `{ scope: 'routable_hypotheses' }`
  * from the authenticated browser session (same-origin fetch, cookies carried
  * automatically) -- never a CRON_SECRET in the browser, never a client-
@@ -35,6 +36,8 @@ export interface RunRoutingReport {
   pairs: number;
   decisions: number;
   skips: Record<string, number>;
+  /** Accounts that failed, with the exact reason; every other account's cards landed or stayed. */
+  failed: Array<{ accountName: string; reason: string }>;
 }
 
 export interface RunRoutingPanelProps {
@@ -96,6 +99,7 @@ export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, 
         pairs: Number(payload.pairs ?? 0),
         decisions: Number(payload.decisions ?? 0),
         skips: (payload.skips && typeof payload.skips === 'object' ? (payload.skips as Record<string, number>) : {}),
+        failed: Array.isArray(payload.failed) ? (payload.failed as RunRoutingReport['failed']) : [],
       };
       setState({ kind: 'done', report, at: new Date().toISOString() });
       onComplete?.(report);
@@ -136,6 +140,11 @@ export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, 
             <li>Personas evaluated: {state.report.pairs}</li>
             <li>Decisions created: {state.report.decisions}</li>
             <li>Skipped: {summarizeSkips(state.report.skips)}</li>
+            {state.report.failed.length > 0 ? (
+              <li data-testid="run-routing-failed" className="text-[var(--destructive)]">
+                Failed ({state.report.failed.length}, their earlier cards stay): {state.report.failed.map((f) => `${f.accountName}: ${f.reason}`).join('; ')}
+              </li>
+            ) : null}
             <li>Run at: {state.at}</li>
           </ul>
         </div>

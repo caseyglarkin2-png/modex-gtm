@@ -247,6 +247,9 @@ export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | nul
   if (!CONTACT_NOW_ACTIONS.has(item.action)) return 'later';
   // Approve only: routing treats an approved hypothesis as routable, but Casey has not
   // chosen to USE it and the send gate refuses it. The open decision is USE (REVIEW).
-  if (item.hypothesis?.status === 'approved') return 'review';
+  // The queue hydrates the LIVE status, so a thesis sent back to draft or review since
+  // routing lands here too: only a thesis in use makes a contact card READY.
+  const status = item.hypothesis?.status;
+  if (status && status !== 'active') return 'review';
   return 'ready';
 }

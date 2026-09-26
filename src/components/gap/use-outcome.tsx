@@ -17,6 +17,7 @@ export interface UseOutcomeResponse {
   runId?: string;
   people?: Array<{ personaId: number; name: string | null; lane: string; decisionId: string | null }>;
   counts?: Record<string, number>;
+  failures?: Array<{ accountName: string; reason: string }>;
 }
 
 const LANE_WORDS: Array<[string, string]> = [
@@ -27,11 +28,11 @@ const LANE_WORDS: Array<[string, string]> = [
   ['later', 'on hold'],
   ['blocked', 'blocked'],
   ['not_routed', 'not routed'],
+  ['failed', 'failed'],
 ];
 
 const REASON_WORDS: Record<string, string> = {
-  routable_scope_too_large: 'Too many accounts are in use for one interactive routing pass.',
-  no_routable_hypotheses: 'Nothing is in use, so there was nothing to route.',
+  no_people: 'No person is attached to these hypotheses, so there was nothing to route.',
   routing_failed: 'Routing failed.',
 };
 
@@ -52,6 +53,11 @@ export function UseOutcome({ approved, inUse, routing }: { approved: number; inU
               .map(([k, words]) => `${counts[k]} ${words}`)
               .join(' · ') || 'No cards were created.'}
           </p>
+          {routing.failures?.length ? (
+            <p role="alert" data-testid="use-outcome-failures" className="text-xs text-[var(--destructive)]">
+              Routing failed for {routing.failures.map((f) => `${f.accountName} (${f.reason})`).join(', ')}. Nothing was sent. Run routing on /gap retries them.
+            </p>
+          ) : null}
           <Link href={next.href} className="inline-flex rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90">
             {next.label}
           </Link>

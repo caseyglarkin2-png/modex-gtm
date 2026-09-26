@@ -1,7 +1,7 @@
 /**
  * GET /api/gap/queue/enroll-rows?runId=&format=md|json
  *
- * GAP Prospecting OS, Sprint 2, S2-T8. Renders the latest routing run's
+ * GAP Prospecting OS, Sprint 2, S2-T8. Renders the current decisions'
  * `enroll_gap_sequence` decisions as the Top100 lane's hand-enroll table
  * (scripts/enroll-table.mjs shape). Read-only: nothing here enrolls, writes,
  * or calls HubSpot. A human copies the table and enrolls by hand.

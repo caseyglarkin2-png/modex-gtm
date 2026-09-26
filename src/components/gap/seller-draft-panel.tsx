@@ -97,6 +97,8 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
         const reason = String(data.error ?? `HTTP ${res.status}`);
         const detail = [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ');
         setOutcome({ kind: 'refused', reason, detail });
+        // A rejected copy can never be drafted or sent: the pack re-reads the verdict and drops Send beside this panel too.
+        if (reason === 'copy_rejected') router.refresh();
       }
     } catch (err) {
       setOutcome({ kind: 'refused', reason: 'network_error', detail: err instanceof Error ? err.message : String(err) });
@@ -158,7 +160,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
 
       {ineligibleReason ? (
         <p data-testid="draft-ineligible" className="text-xs text-[var(--muted-foreground)]">{ineligibleReason}</p>
-      ) : (
+      ) : outcome?.kind === 'refused' && outcome.reason === 'copy_rejected' ? null : (
         <Button type="button" size="sm" disabled={busy !== null} onClick={() => post()}>
           {busy === 'draft' ? 'Creating draft...' : stepIndex > 0 ? `Create Gmail draft (touch ${stepIndex + 1})` : 'Create Gmail draft'}
         </Button>

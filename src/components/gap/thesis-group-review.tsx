@@ -72,6 +72,9 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
   const [error, setError] = useState<string | null>(null);
   const [corr, setCorr] = useState<Corroboration | null>(null);
   const [chosen, setChosen] = useState<Set<string>>(new Set());
+  // Decided: the card stops offering the decision at once (the outcome shows above);
+  // the refreshed page drops it. A stale Approve + use must never sit under a result.
+  const [decided, setDecided] = useState(false);
   const nameOf = (id: string) => card.members.find((m) => m.id === id)?.personaName ?? id;
   const title = `${card.accountName} · ${card.problemFamily.replace(/_/g, ' ')}`;
 
@@ -87,6 +90,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
       const approved = rows.filter((x) => x.ok && (x.to === 'approved' || x.to === 'active')).length;
       const inUse = rows.filter((x) => x.ok && x.to === 'active').length;
       onOutcome({ key: `${card.accountName}|${card.problemFamily}`, title, approved, inUse, routing: r.data.routing ?? null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`) });
+      if (approved > 0 && rows.every((x) => x.ok)) setDecided(true);
       router.refresh();
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
   }
@@ -98,6 +102,14 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
       if (!r.ok) setError(r.data.reason ?? r.data.error ?? 'research_failed');
       else { setCorr(r.data); setChosen(new Set(r.data.outcome === 'contradicts' ? [] : r.data.newIndependent.map((f) => f.signalId))); }
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
+  }
+
+  if (decided) {
+    return (
+      <p className="rounded-lg border border-[var(--border)] p-4 text-sm text-[var(--muted-foreground)]" data-testid="thesis-group-decided">
+        {title}: decided. The outcome is above.
+      </p>
+    );
   }
 
   return (

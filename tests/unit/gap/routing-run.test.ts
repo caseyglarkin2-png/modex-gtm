@@ -13,7 +13,7 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 import type { AuditInput } from '@/lib/gap/audit';
-import type { AssembleAccountArgs, AssembleResult } from '@/lib/gap/routing/inputs';
+import type { AssembleAccountArgs, AssembleForAccountOptions, AssembleResult } from '@/lib/gap/routing/inputs';
 import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
 import type { RouteResult, RoutingDecision, RoutingInputs } from '@/lib/gap/routing/types';
 
@@ -35,7 +35,6 @@ vi.mock('@/lib/hubspot/client', () => ({
 const {
   runRouting,
   SHADOW_MODE,
-  LAST_RUN_CONFIG_KEY,
   CONTACT_BATCH_SIZE,
   SNAPSHOT_COMPANY_PROPERTIES,
   SNAPSHOT_CONTACT_PROPERTIES,
@@ -43,7 +42,8 @@ const {
   snapshotFromProperties,
   tamFromProperty,
 } = await import('@/lib/gap/routing/run');
-const { listQueue, recordHumanAction, decodeCursor, encodeCursor } = await import('@/lib/gap/routing/queue');
+const { listAllCurrent, listQueue, recordHumanAction, decodeCursor, encodeCursor } = await import('@/lib/gap/routing/queue');
+const { sellerLaneOf } = await import('@/lib/gap/routing/card-readiness');
 const { POST: runPOST } = await import('@/app/api/gap/routing/run/route');
 const { GET: queueGET } = await import('@/app/api/gap/queue/route');
 const { POST: actPOST } = await import('@/app/api/gap/decisions/[id]/act/route');
@@ -296,7 +296,7 @@ function decisionFor(inputs: RoutingInputs, overrides: Partial<RoutingDecision> 
 
 /** Two personas per account, keyed by account name -> persona ids. */
 function assembler(plan: Record<string, AssembleResult[]>) {
-  return vi.fn(async (_prisma: unknown, args: AssembleAccountArgs) => plan[args.accountName] ?? [{ skip: 'account_not_found' }]);
+  return vi.fn(async (_prisma: unknown, args: AssembleAccountArgs, _opts?: AssembleForAccountOptions) => plan[args.accountName] ?? [{ skip: 'account_not_found' }]);
 }
 
 // ---------------------------------------------------------------------------
@@ -370,11 +370,9 @@ describe('runRouting', () => {
     // Display name comes off the Persona row; a blank name stays null for the emitter's fallback.
     expect(datas.map((d) => (d.inputs_snapshot as Record<string, unknown>).displayName)).toEqual(['Ann Acme', 'Al Acme', 'Bea Beta', null]);
 
-    expect(store.systemConfig.upsert).toHaveBeenCalledWith({
-      where: { key: LAST_RUN_CONFIG_KEY },
-      update: { value: 'run-T' },
-      create: { key: LAST_RUN_CONFIG_KEY, value: 'run-T' },
-    });
+    expect(report.failed).toEqual([]);
+    // No "latest run" pointer: the queue reads each person's newest card from any run.
+    expect(store.systemConfig.upsert).not.toHaveBeenCalled();
 
     await new Promise((r) => setTimeout(r, 0));
     expect(audit).toHaveBeenCalledTimes(1);
@@ -414,7 +412,7 @@ describe('runRouting', () => {
     expect(callRows.map((d) => (d.inputs_snapshot as Record<string, unknown>).target)).toEqual([null, null]);
   });
 
-  it('dryRun counts everything and creates nothing, including the SystemConfig pointer', async () => {
+  it('dryRun counts everything and creates nothing', async () => {
     const route = vi.fn((inputs: RoutingInputs) => decisionFor(inputs));
     const report = await runRouting(store, { now: NOW, runId: 'run-D', actor: 'test', dryRun: true }, { suppression, assemble: assembler(twoByTwo()), route, audit: vi.fn() });
     expect(report).toMatchObject({ dryRun: true, pairs: 4, decisions: 4, byRule: { R12: 4 } });
@@ -428,25 +426,73 @@ describe('runRouting', () => {
     const report = await runRouting(store, { now: NOW, runId: 'run-C', actor: 'test', maxPairs: 3 }, { suppression, assemble: assembler(twoByTwo()), route, audit: vi.fn() });
     expect(report.pairs).toBe(3);
     expect(report.decisions).toBe(3);
-    expect(route).toHaveBeenCalledTimes(3);
+    // Reads run ahead concurrently; the budget is applied when rows are committed, in account order.
     expect(store.routingDecision.create).toHaveBeenCalledTimes(3);
+    expect(store.routingDecision.create.mock.calls.map((c) => c[0].data.persona_id)).toEqual([1, 2, 3]);
     expect(store.account.findMany.mock.calls[0][0]).toMatchObject({ take: 3 });
   });
 
-  it('a real fault mid-run (e.g. the platform killing the request) never advances the last-run pointer, even though earlier accounts already wrote real decisions (dogfood fix, 2026-09-25: this is the invariant that kept the stuck production run from polluting the visible Queue)', async () => {
+  it('a fault on one account is isolated: it is reported with its exact reason and the other account still writes its cards (debt burn, 2026-09-26)', async () => {
     const route = vi.fn((inputs: RoutingInputs) => {
-      if (inputs.account.name === 'Beta Dairy') throw new Error('killed mid-run');
+      if (inputs.account.name === 'Beta Dairy') throw new Error('driver exploded\nCannot reach database server');
       return decisionFor(inputs);
     });
-    await expect(
-      runRouting(store, { now: NOW, runId: 'run-KILLED', actor: 'test' }, { suppression, assemble: assembler(twoByTwo()), route, audit: vi.fn() }),
-    ).rejects.toThrow('killed mid-run');
+    const report = await runRouting(store, { now: NOW, runId: 'run-F', actor: 'test' }, { suppression, assemble: assembler(twoByTwo()), route, audit: vi.fn() });
+    expect(report.failed).toEqual([{ accountName: 'Beta Dairy', reason: 'Cannot reach database server' }]);
+    expect(report.decisions).toBe(2);
+    expect(store.rows.map((r) => [r.account_name, r.persona_id])).toEqual([
+      ['Acme Foods', 1],
+      ['Acme Foods', 2],
+    ]);
+  });
 
-    // Acme Foods (processed first) already wrote its real decisions...
+  it('an account that hangs times out alone: its neighbours land, and its late result never writes a row', async () => {
+    let release: () => void = () => undefined;
+    const hang = new Promise<void>((r) => (release = r));
+    const plan = twoByTwo();
+    const assemble = vi.fn(async (_p: unknown, args: AssembleAccountArgs) => {
+      if (args.accountName === 'Acme Foods') await hang;
+      return plan[args.accountName as keyof typeof plan];
+    });
+    const route = vi.fn((inputs: RoutingInputs) => decisionFor(inputs));
+    const report = await runRouting(store, { now: NOW, runId: 'run-H', actor: 'test' }, { suppression, assemble, route, audit: vi.fn(), accountTimeoutMs: 20 });
+    expect(report.failed).toEqual([{ accountName: 'Acme Foods', reason: 'account_timeout' }]);
+    expect(store.rows.map((r) => r.account_name)).toEqual(['Beta Dairy', 'Beta Dairy']);
+    release();
+    await new Promise((r) => setTimeout(r, 10));
     expect(store.routingDecision.create).toHaveBeenCalledTimes(2);
-    expect(store.rows.every((r) => r.run_id === 'run-KILLED')).toBe(true);
-    // ...but the pointer that makes a run "the latest visible one" was never touched.
-    expect(store.systemConfig.upsert).not.toHaveBeenCalled();
+  });
+
+  it('accounts are read concurrently but never more than the bound, and rows land in account order however the reads finish', async () => {
+    const names = ['A1', 'A2', 'A3', 'A4', 'A5'];
+    store.account.findMany.mockResolvedValue(names.map((name) => ({ name, hubspot_company_id: null })));
+    let inFlight = 0;
+    let peak = 0;
+    // Later accounts finish first: A5 is fastest.
+    const hubspotSnapshot = vi.fn(async (name: string) => {
+      inFlight += 1;
+      peak = Math.max(peak, inFlight);
+      await new Promise((r) => setTimeout(r, 5 * (6 - Number(name.slice(1)))));
+      inFlight -= 1;
+      return null;
+    });
+    const plan = Object.fromEntries(names.map((n, i) => [n, [inputsFor(n, i + 1)]]));
+    const route = vi.fn((inputs: RoutingInputs) => decisionFor(inputs));
+    const report = await runRouting(store, { now: NOW, runId: 'run-P', actor: 'test' }, { suppression, assemble: assembler(plan), route, audit: vi.fn(), hubspotSnapshot, accountConcurrency: 2 });
+    expect(peak).toBe(2);
+    expect(report.decisions).toBe(5);
+    expect(store.rows.map((r) => r.account_name)).toEqual(names);
+    expect(new Set(store.rows.map((r) => `${r.account_name}|${r.persona_id}`)).size).toBe(5);
+  });
+
+  it('personaIds routes exactly those people: the assembler gets onlyPersonaIds and no hypothesis widening', async () => {
+    const assemble = assembler(twoByTwo());
+    const route = vi.fn((inputs: RoutingInputs) => decisionFor(inputs));
+    await runRouting(store, { now: NOW, runId: 'run-X', actor: 'test', accountNames: ['Acme Foods'], personaIds: [2, 2] }, { suppression, assemble, route, audit: vi.fn() });
+    expect(assemble).toHaveBeenCalledTimes(1);
+    expect(assemble.mock.calls[0][2]).toMatchObject({ onlyPersonaIds: [2] });
+    expect(assemble.mock.calls[0][2]).not.toHaveProperty('includePersonaIds');
+    expect(store.prospectingHypothesis.findMany).not.toHaveBeenCalled();
   });
 
   it('default selection drops TAM-out accounts per the snapshot provider; an explicit name goes to the rules', async () => {
@@ -514,16 +560,19 @@ describe('runRouting', () => {
     expect(report.pairs).toBe(2);
     expect(report.decisions).toBe(1);
     expect(store.rows.map((r) => [r.run_id, r.persona_id])).toEqual([['run-L', 2]]);
-    expect(store.systemConfig.upsert).toHaveBeenCalledTimes(1);
+    expect(report.failed).toEqual([]);
   });
 
-  it('any other router error still aborts the run (R2-3 keeps the tripwire narrow)', async () => {
+  it('any other router error is a FAILED account with its reason, never a counted skip (R2-3 keeps the tripwire narrow)', async () => {
     const route = vi.fn(() => {
       throw new Error('router exploded');
     });
-    await expect(
-      runRouting(store, { now: NOW, runId: 'run-X', actor: 'test' }, { suppression, assemble: assembler(twoByTwo()), route }),
-    ).rejects.toThrow('router exploded');
+    const report = await runRouting(store, { now: NOW, runId: 'run-X', actor: 'test' }, { suppression, assemble: assembler(twoByTwo()), route, audit: vi.fn() });
+    expect(report.failed).toEqual([
+      { accountName: 'Acme Foods', reason: 'router exploded' },
+      { accountName: 'Beta Dairy', reason: 'router exploded' },
+    ]);
+    expect(report.skips).toEqual({});
     expect(store.rows).toEqual([]);
   });
 
@@ -661,7 +710,7 @@ describe('listQueue', () => {
   });
 
   it('empty table -> runId null, no items, no cursor', async () => {
-    await expect(listQueue(store)).resolves.toEqual({ runId: null, items: [], nextCursor: null });
+    await expect(listQueue(store)).resolves.toEqual({ runId: null, asOf: null, items: [], nextCursor: null });
   });
 
   it('orders by priority desc then id desc, regardless of insertion time', async () => {
@@ -715,33 +764,121 @@ describe('listQueue', () => {
     expect((await listQueue(store, { runId: 'run-A', action: 'call_now', lane: 'blocked' })).items).toEqual([]);
   });
 
-  it('reads the gap_routing_last_run pointer first: a newer partial run never becomes the queue while the pointer names the completed one (N6)', async () => {
-    await seed(store, { priority: 50, run_id: 'run-A' });
-    await seed(store, { priority: 40, run_id: 'run-A' });
-    // run-B crashed mid-way: rows exist, the pointer was never advanced.
-    await seed(store, { priority: 99, run_id: 'run-B' });
-    store.systemConfig.findUnique.mockResolvedValue({ key: LAST_RUN_CONFIG_KEY, value: 'run-A' });
-    const result = await listQueue(store);
-    expect(result.runId).toBe('run-A');
-    expect(result.items.map((i) => [i.id, i.priority])).toEqual([
-      ['d01', 50],
-      ['d02', 40],
-    ]);
-    expect(store.systemConfig.findUnique).toHaveBeenCalledWith({ where: { key: LAST_RUN_CONFIG_KEY }, select: { value: true } });
-    expect(store.routingDecision.findFirst).not.toHaveBeenCalled();
+  // The current-decision view (debt burn, 2026-09-26). Routing subject = one
+  // person at one account; each subject shows its newest applicable card from ANY run.
+  const person = (id: number, account = 'Acme Foods') => ({
+    account_name: account,
+    persona_id: id,
+    inputs_snapshot: { account: { name: account }, persona: { id, email: `p${id}@acme.example` }, displayName: `P${id}` },
   });
 
-  it('defaults to the latest run by created_at only when the pointer is missing, and scopes items to it', async () => {
-    await seed(store, { priority: 99, run_id: 'run-A' });
-    await seed(store, { priority: 10, run_id: 'run-B' });
-    await seed(store, { priority: 20, run_id: 'run-B' });
+  it('Run B for one person does not hide Run A cards for the other people; the newest decision wins for that person', async () => {
+    await seed(store, { priority: 50, run_id: 'run-A', ...person(1) });
+    await seed(store, { priority: 60, run_id: 'run-A', ...person(2) });
+    await seed(store, { priority: 40, run_id: 'run-A', ...person(3) });
+    await seed(store, { priority: 70, run_id: 'run-B', ...person(2), action: 'call_now' }); // d04
     const result = await listQueue(store);
-    expect(result.runId).toBe('run-B');
-    expect(result.items.map((i) => [i.id, i.priority])).toEqual([
-      ['d03', 20],
-      ['d02', 10],
+    expect(result.runId).toBeNull();
+    expect(result.items.map((i) => [i.id, i.persona.id, i.action])).toEqual([
+      ['d04', 2, 'call_now'],
+      ['d01', 1, 'enroll_gap_sequence'],
+      ['d03', 3, 'enroll_gap_sequence'],
     ]);
-    expect(store.routingDecision.findFirst).toHaveBeenCalledWith({ orderBy: { created_at: 'desc' }, select: { run_id: true } });
+    expect(result.asOf).toBe((store.rows[3].created_at as Date).toISOString());
+  });
+
+  it('a run killed part way (no completion marker) is never current: its people keep their last finished card', async () => {
+    const a1 = await seed(store, { priority: 50, run_id: 'run-done', ...person(1) });
+    await seed(store, { priority: 99, run_id: 'run-killed', ...person(1) });
+    await seed(store, { priority: 99, run_id: 'run-killed', ...person(2) });
+    (store as unknown as Record<string, unknown>).gapAuditEvent = {
+      findMany: vi.fn(async ({ where }: { where: { kind: string; subject_id: { in: string[] } } }) =>
+        where.kind === 'routing.run' ? where.subject_id.in.filter((id) => id === 'run-done').map((subject_id) => ({ subject_id })) : [],
+      ),
+    };
+    expect((await listQueue(store)).items.map((i) => [i.id, i.persona.id])).toEqual([[a1, 1]]);
+    // An audit table on the reader also wakes the lazy touch evaluator import; give it room under suite load.
+  }, 30_000);
+
+  it('runRouting writes its completion marker before it returns, so its cards are current the moment Casey sees the outcome', async () => {
+    const audit = vi.fn(async (_p: unknown, _i: AuditInput) => ({ stored: true, reviewQueued: false }));
+    await runRouting(store, { now: NOW, runId: 'run-M2', actor: 't', accountNames: ['Acme Foods'] }, { suppression: staticSuppressionReader('clear'), assemble: assembler({ 'Acme Foods': [inputsFor('Acme Foods', 1)] }), route: (i) => decisionFor(i), audit });
+    expect(audit).toHaveBeenCalledTimes(1);
+    expect(audit.mock.calls[0][1]).toMatchObject({ kind: 'routing.run', subjectType: 'routing_run', subjectId: 'run-M2' });
+  });
+
+  it('the same person at two accounts is two subjects', async () => {
+    await seed(store, { priority: 50, ...person(1, 'Acme Foods') });
+    await seed(store, { priority: 40, ...person(1, 'Beta Dairy') });
+    expect((await listQueue(store)).items.map((i) => i.id)).toEqual(['d01', 'd02']);
+  });
+
+  it('a card whose thesis ended (rejected, expired) or no longer exists is not current, and never falls back to an older card', async () => {
+    await seed(store, { priority: 50, ...person(1), hypothesis_id: 'hyp-live' });
+    await seed(store, { priority: 50, ...person(2), hypothesis_id: 'hyp-old-ok' });
+    await seed(store, { priority: 60, ...person(2), hypothesis_id: 'hyp-rejected' });
+    await seed(store, { priority: 60, ...person(3), hypothesis_id: 'hyp-expired' });
+    await seed(store, { priority: 60, ...person(4), hypothesis_id: 'hyp-deleted' });
+    store.prospectingHypothesis.findMany.mockResolvedValue([
+      { id: 'hyp-live', status: 'active' },
+      { id: 'hyp-old-ok', status: 'active' },
+      { id: 'hyp-rejected', status: 'rejected' },
+      { id: 'hyp-expired', status: 'expired' },
+    ]);
+    expect((await listQueue(store)).items.map((i) => i.persona.id)).toEqual([1]);
+  });
+
+  it('readiness reads the LIVE thesis status: approved-only stays REVIEW, in use is READY, sent back to draft is REVIEW', async () => {
+    const snap = (hid: string, status: string, pid: number) => ({
+      account: { name: 'Acme Foods', hubspotCompanyId: '111', tam: 'in', tamTier: 'A', heatTier: 2 },
+      persona: { id: pid, personaKey: 'site_ops', email: `p${pid}@acme.example`, hubspotContactId: '9' },
+      hypothesis: { id: hid, status, family: 'hidden_capacity', confidence: 60 },
+      displayName: `P${pid}`,
+    });
+    await seed(store, { priority: 50, ...person(1), hypothesis_id: 'h1', inputs_snapshot: snap('h1', 'approved', 1) });
+    await seed(store, { priority: 50, ...person(2), hypothesis_id: 'h2', inputs_snapshot: snap('h2', 'approved', 2) });
+    await seed(store, { priority: 50, ...person(3), hypothesis_id: 'h3', inputs_snapshot: snap('h3', 'active', 3) });
+    store.prospectingHypothesis.findMany.mockResolvedValue([
+      { id: 'h1', status: 'approved' },
+      { id: 'h2', status: 'active' },
+      { id: 'h3', status: 'draft' },
+    ]);
+    const lanes = Object.fromEntries((await listQueue(store)).items.map((i) => [i.persona.id, [i.hypothesis?.status, sellerLaneOf(i)]]));
+    expect(lanes).toEqual({ 1: ['approved', 'review'], 2: ['active', 'ready'], 3: ['draft', 'review'] });
+  });
+
+  it('newest card semantics keep reply_pending out of READY, blocked blocked, and a due follow-up in FOLLOW UP', async () => {
+    await seed(store, { priority: 50, ...person(1), lane: 'reply_triage', action: 'enroll_gap_sequence', rule_id: 'reply_pending' });
+    await seed(store, { priority: 50, ...person(2), lane: 'blocked', action: 'do_not_contact', rule_id: 'suppressed' });
+    const items = (await listQueue(store)).items;
+    expect(items.map((i) => [i.persona.id, sellerLaneOf(i)])).toEqual([
+      [2, 'blocked'],
+      [1, 'later'],
+    ]);
+    expect(sellerLaneOf({ ...items[1], lane: 'work_queue', touch: { state: 'due', stepIndex: 1, sentCount: 1 } })).toBe('follow_up');
+  });
+
+  it('listAllCurrent reads every page, so the cockpit counts never stop at the first priority page', async () => {
+    for (let i = 1; i <= 130; i += 1) await seed(store, { priority: i % 7, ...person(i) });
+    const all = await listAllCurrent(store);
+    expect(all.items).toHaveLength(130);
+    expect(all.truncated).toBe(false);
+    expect(new Set(all.items.map((i) => i.id)).size).toBe(130);
+  });
+
+  it('a targeted run that fails on one account leaves every current card in place', async () => {
+    const assemble = assembler({ 'Acme Foods': [inputsFor('Acme Foods', 1)], 'Beta Dairy': [inputsFor('Beta Dairy', 3)] });
+    const route = vi.fn((inputs: RoutingInputs) => decisionFor(inputs, { priority: 10 }));
+    await runRouting(store, { now: NOW, runId: 'run-1', actor: 't', accountNames: ['Acme Foods', 'Beta Dairy'] }, { suppression: staticSuppressionReader('clear'), assemble, route, audit: vi.fn() });
+    store.prospectingHypothesis.findMany.mockResolvedValue([{ id: 'hyp-1', status: 'active' }, { id: 'hyp-3', status: 'active' }]);
+    const before = (await listQueue(store)).items.map((i) => i.id);
+    const failing = vi.fn(async () => {
+      throw new Error('clawd 503');
+    });
+    const report = await runRouting(store, { now: NOW, runId: 'run-2', actor: 't', accountNames: ['Beta Dairy'], personaIds: [3] }, { suppression: staticSuppressionReader('clear'), assemble: failing, route, audit: vi.fn() });
+    expect(report.failed).toEqual([{ accountName: 'Beta Dairy', reason: 'clawd 503' }]);
+    expect((await listQueue(store)).items.map((i) => i.id)).toEqual(before);
+    expect(before).toHaveLength(2);
   });
 
   it('clamps limit to 1..100 and projects the item shape off the row and snapshot', async () => {
@@ -990,7 +1127,7 @@ describe('routes', () => {
   });
 
   describe('POST /api/gap/routing/run', () => {
-    it('manual session call defaults to dryRun: no rows, no SystemConfig pointer', async () => {
+    it('manual session call defaults to dryRun: no rows', async () => {
       const res = await runPOST(post(RUN, {}));
       expect(res.status).toBe(200);
       const body = await res.json();
@@ -1001,16 +1138,14 @@ describe('routes', () => {
       expect(mockedGetHubSpotClient).not.toHaveBeenCalled();
     });
 
-    it('?mode=apply writes the run pointer; ?dryRun=1 wins over apply', async () => {
+    it('?mode=apply applies; ?dryRun=1 wins over apply; neither writes a run pointer', async () => {
       const applied = await runPOST(post(`${RUN}?mode=apply`, {}));
       expect(applied.status).toBe(200);
       expect((await applied.json()).dryRun).toBe(false);
-      expect(store.systemConfig.upsert).toHaveBeenCalledTimes(1);
-      expect(store.systemConfig.upsert.mock.calls[0][0]).toMatchObject({ where: { key: LAST_RUN_CONFIG_KEY } });
 
       const forced = await runPOST(post(`${RUN}?mode=apply&dryRun=1`, {}));
       expect((await forced.json()).dryRun).toBe(true);
-      expect(store.systemConfig.upsert).toHaveBeenCalledTimes(1);
+      expect(store.systemConfig.upsert).not.toHaveBeenCalled();
     });
 
     it('body accountNames and maxPairs reach the run; an empty body is fine', async () => {
@@ -1130,14 +1265,14 @@ describe('routes', () => {
       expect(await l.json()).toEqual({ error: 'invalid_query', field: 'lane' });
     });
 
-    it('happy path pages the latest run and honors rule=', async () => {
-      await seed(store, { priority: 30, rule_id: 'R7' });
-      await seed(store, { priority: 60, rule_id: 'R12' });
-      await seed(store, { priority: 50, rule_id: 'R12' });
+    it('happy path pages the current decisions and honors rule=', async () => {
+      await seed(store, { priority: 30, rule_id: 'R7', persona_id: 1 });
+      await seed(store, { priority: 60, rule_id: 'R12', persona_id: 2 });
+      await seed(store, { priority: 50, rule_id: 'R12', persona_id: 3 });
       const res = await queueGET(new NextRequest(`${QUEUE}?limit=1&rule=R12`));
       expect(res.status).toBe(200);
       const body = await res.json();
-      expect(body.runId).toBe('run-A');
+      expect(body.runId).toBeNull();
       expect(body.items.map((i: { id: string }) => i.id)).toEqual(['d02']);
       expect(body.nextCursor).toBe(encodeCursor(60, 'd02'));
       const next = await queueGET(new NextRequest(`${QUEUE}?limit=1&rule=R12&cursor=${encodeURIComponent(body.nextCursor)}`));

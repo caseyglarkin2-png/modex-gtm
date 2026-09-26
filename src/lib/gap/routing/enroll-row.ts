@@ -9,7 +9,7 @@
  *
  * `buildEnrollRows` and the two renderers are pure. `loadDecisions` is the
  * one reader: it takes a Prisma client (type-only import, no runtime
- * dependency) and turns the latest run's decision rows into emitter items.
+ * dependency) and turns the current decisions (or one named run's) into emitter items.
  * RoutingDecision rows are written by S2-T7, which lands after this ticket,
  * so the reader is deliberately tolerant of an empty table and of rows whose
  * `inputs_snapshot` does not yet carry `account` and `persona`.
@@ -53,7 +53,7 @@ import { isApproved } from '../compiler/approval';
 import { TOP100_COMPILE_KEY } from '../import/top100-compile';
 import { checkSuppression, isSuppressed, type SuppressionOptions } from '../sequence/enrollment';
 import type { RoutingAction } from '../taxonomy';
-import { resolveLatestRunId } from './queue';
+import { currentDecisions } from './queue';
 import { resolveEnrollTarget } from './rules';
 import type { EnrollTarget, RoutingDecision, RoutingExplain, RoutingInputs } from './types';
 
@@ -317,7 +317,7 @@ export function renderEnrollTableJson(table: EnrollTable): EnrollTableJson {
 // ---------------------------------------------------------------------------
 
 /** The routing reader plus the two tables the compile gate reads (`gapCompile.findMany`, `sendApprovalRequest.findFirst`) and the unsubscribed table (R3-2). */
-type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'systemConfig' | 'gapCompile' | 'sendApprovalRequest' | 'unsubscribedEmail' | 'persona'>;
+type DecisionReader = Pick<PrismaClient, 'routingDecision' | 'prospectingHypothesis' | 'gapCompile' | 'sendApprovalRequest' | 'unsubscribedEmail' | 'persona'>;
 
 type Obj = Record<string, unknown>;
 
@@ -355,18 +355,18 @@ interface DecisionRow {
 }
 
 /**
- * Read the `enroll_gap_sequence` decisions of one run. When `runId` is
- * omitted the run is the `gap_routing_last_run` pointer, falling back to the
- * newest row only when the pointer is missing (N6), so a partial run never
- * feeds the enroll table. An empty table, or a run with no enroll decisions,
- * yields an empty list, never an error. Rows whose snapshot lacks `account`
+ * Read the `enroll_gap_sequence` decisions of one run, or of the current
+ * decisions (each person's newest applicable card, queue.ts) when `runId` is
+ * omitted. An empty table, or no enroll decisions, yields an empty list,
+ * never an error. Rows whose snapshot lacks `account`
  * or `persona` objects are dropped: the emitter cannot name what it cannot see.
  */
 export async function loadDecisions(prisma: DecisionReader, runId?: string, deps: SuppressionOptions = {}): Promise<EnrollRowItem[]> {
-  const run = runId || (await resolveLatestRunId(prisma));
-  if (!run) return [];
+  const ids = runId ? null : (await currentDecisions(prisma)).ids;
+  if (ids && ids.length === 0) return [];
+  const scope = ids ? { id: { in: ids } } : { run_id: runId };
   const rows = (await prisma.routingDecision.findMany({
-    where: { run_id: run, action: ENROLL_ACTION },
+    where: { ...scope, action: ENROLL_ACTION },
     orderBy: [{ priority: 'desc' }, { id: 'desc' }],
     select: {
       id: true,

@@ -1,8 +1,9 @@
 /**
  * GET /api/gap/queue?runId=&cursor=&limit=&action=&lane=&rule=
  *
- * GAP Prospecting OS, Sprint 2, S2-T7. Pages one routing run's decisions,
- * highest priority first, with a keyset cursor. Read-only, session only:
+ * GAP Prospecting OS, Sprint 2, S2-T7. Pages the current decisions (each
+ * person's newest applicable card from any run; `runId` pages one run
+ * instead), highest priority first, with a keyset cursor. Read-only, session only:
  * this is the operator's work queue, not a cron surface.
  *
  * Gate: `assertGapEnabled('GAP_ROUTING_ENABLED')` first; a flag off answers

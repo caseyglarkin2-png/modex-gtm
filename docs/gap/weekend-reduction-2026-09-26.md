@@ -88,10 +88,11 @@ suggestion" or a class chip -> Record disposition.
   going back to `/gap` after a send.
 - **Stale cards**: an activated hypothesis keeps its "Review hypothesis" card
   until someone routes.
-- **Queue invariant**: the queue shows only the latest routing run. Any
-  single-account run would hide every other account's cards, so "route on
-  approve" must route the whole bounded routable scope (cap 25 accounts) and
-  report outcomes for the people just approved.
+- **Queue invariant** (at the time): the queue showed only the latest routing
+  run, so "route on approve" routed the whole bounded routable scope (cap 25
+  accounts). Superseded the same day by the debt burn: the queue is each
+  person's newest applicable card and approve routes only the approved people
+  (`docs/gap/debt-burn-2026-09-26.md`).
 
 ## AFTER (local walkthrough on the branch, 2026-09-26)
 
@@ -127,8 +128,8 @@ Observed live:
 - 390px: no horizontal overflow on home, review, research, ready, replies.
 
 Irreducible steps kept on purpose:
-- A thesis GAP wrote from scratch (no thesis yet) is a new narrative Casey has
-  never read, so PROPOSE and APPROVE + USE stay two judgments.
+- (Superseded by the debt burn: the proposed narrative is shown inline and
+  decided with one APPROVE + USE.)
 - OPEN on a READY card is navigation, not a decision; CONFIRM + SEND is the
   send safety gate; APPROVE COPY exists only when the copy check asks for it.
 - A reply class that needs the buyer's words (problem confirmed) needs typing.
@@ -186,26 +187,18 @@ about 240. The net growth is the cockpit doing work that used to live on other p
 ## Debt remaining
 
 PRODUCT
-- Research that finds no thesis still needs PROPOSE then APPROVE + USE (two
-  judgments). Why: a brand-new narrative. Next: show the proposed narrative
-  inline with APPROVE + USE in the research result. Monday: no.
-- An open READY card after a REJECT still shows SEND EMAIL until refresh. Why:
-  the pack re-reads the compile only on reload. Next: `router.refresh()` on
-  refusal. Monday: no.
+- PAID (debt burn, 2026-09-26): research proposals are one decision (full
+  narrative inline, APPROVE + USE / REJECT / NEEDS WORK).
+- PAID (debt burn, 2026-09-26): a REJECT removes SEND EMAIL at once.
 
 TECHNICAL
-- Routing is sequential per account (about 9s per account in production), and
-  approve + use waits for it (about a minute for 7 accounts). Next: parallelize
-  account reads inside `runRouting` under the pair cap. Monday: no.
-- The queue shows only the latest run, which is why approve routes the whole
-  routable scope (cap 25 accounts). Past 25 accounts in use, approve returns
-  `routable_scope_too_large` inline. Next: a per-person newest-decision queue
-  read. Monday: no.
-- Local `npm run build` fails type-check on `src/app/api/cron/refresh-intel/route.ts`
-  exporting `shouldNag` (in main since July; Vercel builds pass). Next: move
-  `shouldNag` to a lib module. Monday: no.
-- `checkOnly` on the gmail-draft route has no UI caller now. Kept (route tests
-  pin it). Next: delete with its tests. Monday: no.
+- PAID (debt burn, 2026-09-26): bounded concurrent routing; approve + use
+  routes only the approved people; the queue is each person's newest
+  applicable card, so the 25-account cap no longer touches approvals.
+- PAID (debt burn, 2026-09-26): `shouldNag` moved to `src/lib/intel/refresh-nag.ts`;
+  local `npm run build` passes.
+- PAID (debt burn, 2026-09-26): the gmail-draft `checkOnly` mode is deleted (the
+  route is session-only and no caller sent it).
 
 DATA
 - The ambiguous historical bounce population stays suppressed at send (FedEx x2,

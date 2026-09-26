@@ -9,9 +9,15 @@
  *
  * MODE IS ALWAYS SHADOW IN SPRINT 2. Every row this file writes carries
  * `mode: SHADOW_MODE`. Nothing here enrolls, sends, or calls HubSpot to write;
- * the only side effects are `routing_decisions` rows, one SystemConfig key
- * (`gap_routing_last_run`) and one fire-and-forget audit event. A structural
- * test greps this file to prove the other mode value never appears here.
+ * the only side effects are `routing_decisions` rows and one audit event,
+ * the run's completion marker. A structural test greps this file to prove the other mode value
+ * never appears here.
+ *
+ * There is no "latest run" (debt burn, 2026-09-26): the queue shows each
+ * person's newest applicable decision from any run (queue.ts), so a run may
+ * route one person or one account without hiding anyone else's card. Reads
+ * run concurrently under fixed bounds; writes land in account order; one
+ * account that fails is reported in `failed` and never aborts the others.
  *
  * Everything with a network or a clock is injected through `deps`:
  * - `suppression`: the routing-time suppression read (never the send gate).
@@ -25,13 +31,14 @@
  */
 
 import { audit as auditEvent } from '../audit';
+import { createLimiter, withTimeout } from './bounded';
+import { ROUTING_RUN_DONE } from './queue';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import { EXPLAIN_LEAK_MARKER, isExplainLeakError } from './explain';
 import { assembleForAccount, isSkip } from './inputs';
 import type { AssembleAccountArgs, AssembleForAccountOptions, AssembleResult, HubSpotAccountSnapshot, Top100Context } from './inputs';
 import { routePersona } from './route';
 import type { SuppressionReader } from './suppression-read';
-import { LAST_RUN_CONFIG_KEY } from './types';
 import type { RouteResult, RoutingDecision, RoutingInputs } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,8 +49,6 @@ export const SHADOW_MODE = 'shadow' as const;
 
 export const DEFAULT_MAX_PAIRS = 500;
 export const DEFAULT_MAX_PERSONAS_PER_ACCOUNT = 2;
-/** Defined in types.ts (the queue reads it too); re-exported so callers of the run keep one import. */
-export { LAST_RUN_CONFIG_KEY };
 
 export interface RunRoutingOptions {
   now: Date;
@@ -54,7 +59,13 @@ export interface RunRoutingOptions {
   /** Hard cap on (account, persona) pairs routed in one run. */
   maxPairs?: number;
   maxPersonasPerAccount?: number;
-  /** Count only; no row, no SystemConfig write. */
+  /**
+   * Targeted routing: route exactly these people at `accountNames` and no one
+   * else (APPROVE + USE). Without it each account routes its top personas
+   * plus the people named by its approved/active hypotheses.
+   */
+  personaIds?: number[];
+  /** Count only; no row written. */
   dryRun?: boolean;
   actor: string;
 }
@@ -77,6 +88,10 @@ export interface RunRoutingDeps {
   assemble?: (prisma: PrismaLike, args: AssembleAccountArgs, opts?: AssembleForAccountOptions) => Promise<AssembleResult[]>;
   route?: (inputs: RoutingInputs) => RouteResult;
   audit?: typeof auditEvent;
+  /** Tests only; production uses the constants below. */
+  accountConcurrency?: number;
+  personConcurrency?: number;
+  accountTimeoutMs?: number;
 }
 
 export interface RunReport {
@@ -88,6 +103,8 @@ export interface RunReport {
   skips: Record<string, number>;
   byRule: Record<string, number>;
   byAction: Record<string, number>;
+  /** Accounts that failed (timeout, read or write fault) with the exact reason. Their earlier cards stay current. */
+  failed: Array<{ accountName: string; reason: string }>;
   dryRun: boolean;
 }
 
@@ -407,6 +424,32 @@ async function displayNames(prisma: PrismaLike, ids: number[]): Promise<Map<numb
   return out;
 }
 
+/** Accounts routed at once. Each account then competes for the person slots below. */
+const ACCOUNT_CONCURRENCY = 3;
+/**
+ * People assembled at once across the whole run. Each person costs about a
+ * dozen DB reads plus one Clawd suppression read (about 3s, measured
+ * 2026-09-26; four in parallel take about 4.5s), so this also caps the run's
+ * concurrent Clawd reads.
+ */
+const PERSON_CONCURRENCY = 4;
+/** One account that hangs is reported failed; its unrelated neighbours still land. */
+const ACCOUNT_TIMEOUT_MS = 120_000;
+
+type AccountStep = { assembleSkip: string } | { routeSkip: string } | { inputs: RoutingInputs; decision: RoutingDecision };
+
+type AccountOutcome =
+  | { kind: 'tam_out' }
+  | { kind: 'not_scanned' }
+  | { kind: 'routed'; preferredSender: string | null; steps: AccountStep[] }
+  | { kind: 'failed'; reason: string };
+
+/** The last line of a driver error is the human part ("Can't reach database server ..."); never a stack. */
+export function faultText(error: unknown): string {
+  const text = (error instanceof Error ? error.message : String(error)).trim().split('\n').filter((l) => l.trim()).pop() ?? 'unknown error';
+  return text.trim().slice(0, 200);
+}
+
 export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, deps: RunRoutingDeps): Promise<RunReport> {
   const now = opts.now;
   const runId = opts.runId ?? `run-${now.toISOString()}`;
@@ -426,6 +469,7 @@ export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, de
     skips: {},
     byRule: {},
     byAction: {},
+    failed: [],
     dryRun,
   };
 
@@ -433,11 +477,17 @@ export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, de
   const accounts = explicit
     ? await listNamedAccounts(prisma, opts.accountNames as string[])
     : await listDefaultAccounts(prisma, maxPairs);
+  const only = opts.personaIds ? [...new Set(opts.personaIds)] : null;
 
-  for (const account of accounts) {
-    if (report.pairs >= maxPairs) break;
-    report.accountsScanned += 1;
+  // Reads (HubSpot, DB, Clawd) run concurrently and bounded; nothing is written
+  // until the committer below takes the outcomes back in account order, so the
+  // report and the pair budget are exactly what a one-at-a-time run produces.
+  const personLimit = createLimiter(deps.personConcurrency ?? PERSON_CONCURRENCY);
+  const accountLimit = createLimiter(deps.accountConcurrency ?? ACCOUNT_CONCURRENCY);
+  let budgetSpent = false;
 
+  async function routeAccount(account: AccountRef): Promise<AccountOutcome> {
+    if (budgetSpent) return { kind: 'not_scanned' };
     let snapshot: HubSpotAccountSnapshot | null = null;
     if (deps.hubspotSnapshot) {
       try {
@@ -448,103 +498,132 @@ export async function runRouting(prisma: PrismaLike, opts: RunRoutingOptions, de
     }
     // The default selection is "TAM in or unknown". An explicit name is the
     // operator's choice and goes to the rules, which own the TAM-out verdict.
-    if (!explicit && snapshot?.tam === 'out') {
-      bump(report.skips, 'tam_out');
-      continue;
-    }
-
-    const manifestAccount = manifestAccountFor(deps.top100, account);
-    const preferredSender = manifestAccount?.preferredSender ?? null;
+    if (!explicit && snapshot?.tam === 'out') return { kind: 'tam_out' };
 
     const results = await assemble(
       prisma,
       { accountName: account.name, now, hubspotSnapshot: snapshot, top100: top100ContextFor(deps.top100, account), suppression: deps.suppression },
-      { maxPersonas, includePersonaIds: await hypothesisPersonaIds(prisma, account.name) },
+      only
+        ? { onlyPersonaIds: only, limit: personLimit }
+        : { maxPersonas, includePersonaIds: await hypothesisPersonaIds(prisma, account.name), limit: personLimit },
     );
 
-    const routed: Array<{ inputs: RoutingInputs; decision: RoutingDecision }> = [];
+    const steps: AccountStep[] = [];
     for (const result of results) {
       if (isSkip(result)) {
-        bump(report.skips, result.skip);
+        steps.push({ assembleSkip: result.skip });
         continue;
       }
-      if (report.pairs >= maxPairs) break;
-      report.pairs += 1;
       let outcome: RouteResult;
       try {
         outcome = route(result);
       } catch (err) {
         // The explain tripwire fired on this pair's human text (observation,
-        // sequence block, would-prove-wrong). Count it and keep going so one
-        // forbidden token never leaves a partial run as the newest queue
-        // (R2-3). The tripwire itself stays: nothing leaky is stored. Any
-        // other error is a real fault and still aborts the run.
+        // sequence block, would-prove-wrong). Count it and keep going (R2-3);
+        // the tripwire itself stays: nothing leaky is stored. Any other error
+        // fails this account only.
         if (isExplainLeakError(err)) {
-          bump(report.skips, `${EXPLAIN_LEAK_MARKER}:${err.field}`);
+          steps.push({ routeSkip: `${EXPLAIN_LEAK_MARKER}:${err.field}` });
           continue;
         }
         throw err;
       }
-      if (outcome.kind === 'skip') {
-        bump(report.skips, outcome.reason);
+      steps.push(outcome.kind === 'skip' ? { routeSkip: outcome.reason } : { inputs: result, decision: outcome.decision });
+    }
+    return { kind: 'routed', preferredSender: manifestAccountFor(deps.top100, account)?.preferredSender ?? null, steps };
+  }
+
+  const pending = accounts.map((account) =>
+    accountLimit(() => withTimeout(routeAccount(account), deps.accountTimeoutMs ?? ACCOUNT_TIMEOUT_MS, 'account_timeout')).catch(
+      (error): AccountOutcome => ({ kind: 'failed', reason: faultText(error) }),
+    ),
+  );
+
+  for (let i = 0; i < accounts.length; i += 1) {
+    if (report.pairs >= maxPairs) break;
+    const account = accounts[i];
+    const outcome = await pending[i];
+    if (outcome.kind === 'not_scanned') break;
+    report.accountsScanned += 1;
+    if (outcome.kind === 'tam_out') {
+      bump(report.skips, 'tam_out');
+      continue;
+    }
+    if (outcome.kind === 'failed') {
+      report.failed.push({ accountName: account.name, reason: outcome.reason });
+      continue;
+    }
+
+    const routed: Array<{ inputs: RoutingInputs; decision: RoutingDecision }> = [];
+    for (const step of outcome.steps) {
+      if ('assembleSkip' in step) {
+        bump(report.skips, step.assembleSkip);
         continue;
       }
-      bump(report.byRule, outcome.decision.ruleId);
-      bump(report.byAction, outcome.decision.action);
+      if (report.pairs >= maxPairs) break;
+      report.pairs += 1;
+      if ('routeSkip' in step) {
+        bump(report.skips, step.routeSkip);
+        continue;
+      }
+      bump(report.byRule, step.decision.ruleId);
+      bump(report.byAction, step.decision.action);
       report.decisions += 1;
-      routed.push({ inputs: result, decision: outcome.decision });
+      routed.push(step);
     }
+    if (report.pairs >= maxPairs) budgetSpent = true;
 
     if (dryRun || routed.length === 0) continue;
 
-    const names = await displayNames(
-      prisma,
-      routed.map((r) => r.inputs.persona.id),
-    );
-    for (const { inputs, decision } of routed) {
-      await prisma.routingDecision.create({
-        data: {
-          run_id: runId,
-          mode: SHADOW_MODE,
-          account_name: inputs.account.name,
-          persona_id: inputs.persona.id,
-          hypothesis_id: inputs.hypothesis?.id ?? null,
-          action: decision.action,
-          lane: decision.lane,
-          rule_id: decision.ruleId,
-          priority: decision.priority,
-          explain: decision.explain,
-          inputs_snapshot: buildSnapshot(inputs, decision, names.get(inputs.persona.id) ?? null, preferredSender),
-        },
-        select: { id: true },
-      });
-    }
-  }
-
-  if (!dryRun) {
     try {
-      await prisma.systemConfig.upsert({
-        where: { key: LAST_RUN_CONFIG_KEY },
-        update: { value: runId },
-        create: { key: LAST_RUN_CONFIG_KEY, value: runId },
-      });
-    } catch {
-      // The pointer is a convenience; the rows carry run_id themselves.
+      const names = await displayNames(
+        prisma,
+        routed.map((r) => r.inputs.persona.id),
+      );
+      for (const { inputs, decision } of routed) {
+        await prisma.routingDecision.create({
+          data: {
+            run_id: runId,
+            mode: SHADOW_MODE,
+            account_name: inputs.account.name,
+            persona_id: inputs.persona.id,
+            hypothesis_id: inputs.hypothesis?.id ?? null,
+            action: decision.action,
+            lane: decision.lane,
+            rule_id: decision.ruleId,
+            priority: decision.priority,
+            explain: decision.explain,
+            inputs_snapshot: buildSnapshot(inputs, decision, names.get(inputs.persona.id) ?? null, outcome.preferredSender),
+          },
+          select: { id: true },
+        });
+      }
+    } catch (error) {
+      // Each row is complete on its own: a write that failed part way leaves
+      // the rows already written as those people's newest cards, and the rest
+      // keep their earlier ones.
+      report.failed.push({ accountName: account.name, reason: `write_failed: ${faultText(error)}` });
     }
   }
+  // Anything still queued (past the pair budget) starts as a no-op.
+  budgetSpent = true;
 
-  // Fire-and-forget: the audit ledger never gates the report.
-  void Promise.resolve()
-    .then(() =>
-      audit(prisma, {
-        kind: 'routing.run',
-        actor: opts.actor,
-        subjectType: 'routing_run',
-        subjectId: runId,
-        payload: { ...report },
-      }),
-    )
-    .catch(() => undefined);
+  // The run's completion marker (queue.ts ROUTING_RUN_DONE): written only
+  // after every account was committed, so a run the platform kills half-way
+  // never becomes anyone's current card. Awaited so the rows are current the
+  // moment the report returns; a failed write never fails the report (the
+  // run's rows then stay out of the queue, like a killed run's).
+  try {
+    await audit(prisma, {
+      kind: ROUTING_RUN_DONE,
+      actor: opts.actor,
+      subjectType: 'routing_run',
+      subjectId: runId,
+      payload: { ...report },
+    });
+  } catch {
+    // audit() already swallows its own write failures
+  }
 
   return report;
 }

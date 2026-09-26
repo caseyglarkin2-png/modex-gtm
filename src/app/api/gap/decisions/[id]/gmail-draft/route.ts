@@ -1,5 +1,5 @@
 /**
- * POST /api/gap/decisions/[id]/gmail-draft   create ONE Gmail draft for this card (`{ checkOnly: true }` compiles and gates the copy only)
+ * POST /api/gap/decisions/[id]/gmail-draft   create ONE Gmail draft for this card
  * GET  /api/gap/decisions/[id]/gmail-draft   the drafts GAP made for this card, with their fates
  *
  * Seller Action Center, final pass (2026-09-25). The POST is Casey's click:
@@ -42,25 +42,21 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
   const { id } = await context.params;
   if (!id?.trim()) return NextResponse.json({ error: 'decision_not_found' }, { status: 404 });
 
-  // Optional body `{ checkOnly: true }`: compile and gate the copy, draft nothing.
-  // `{ stepIndex: n }` names the follow-up touch; the service refuses it unless it is due.
-  let checkOnly = false;
+  // Optional body `{ stepIndex: n }` names the follow-up touch; the service refuses it unless it is due.
   let stepIndex = 0;
   try {
-    const raw = (await request.json()) as { checkOnly?: unknown; stepIndex?: unknown } | null;
-    checkOnly = raw?.checkOnly === true;
+    const raw = (await request.json()) as { stepIndex?: unknown } | null;
     stepIndex = typeof raw?.stepIndex === 'number' && Number.isInteger(raw.stepIndex) && raw.stepIndex >= 0 ? raw.stepIndex : 0;
   } catch {
-    checkOnly = false;
+    stepIndex = 0;
   }
 
-  const result = await createSellerGmailDraft(prisma, { decisionId: id.trim(), actor: email, now: new Date(), checkOnly, stepIndex });
+  const result = await createSellerGmailDraft(prisma, { decisionId: id.trim(), actor: email, now: new Date(), stepIndex });
   if (!result.ok) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { ok: _ok, reason, ...rest } = result;
     return NextResponse.json({ error: reason, ...rest }, { status: reason === 'decision_not_found' ? 404 : 409 });
   }
-  if ('checked' in result) return NextResponse.json(result, { status: 200 });
   return NextResponse.json(result, { status: result.alreadyDrafted ? 200 : 201 });
 }
 

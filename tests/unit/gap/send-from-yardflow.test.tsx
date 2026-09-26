@@ -3,7 +3,8 @@ import '@testing-library/jest-dom/vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }), usePathname: () => '/gap' }));
+const refreshMock = vi.fn();
+vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: refreshMock }), usePathname: () => '/gap' }));
 
 import { SendFromYardflow } from '@/components/gap/send-from-yardflow';
 import { GapCockpit } from '@/components/gap/gap-cockpit';
@@ -95,5 +96,36 @@ describe('<SendFromYardflow> copy checking is invisible when it passes (weekend 
     const refused = await screen.findByTestId('send-refused');
     expect(refused).toHaveTextContent('The compiler rejected this copy. Nothing was sent.');
     expect(refused).toHaveTextContent('C01: em dash');
+  });
+});
+
+describe('<SendFromYardflow> a terminal refusal removes Send at once (debt burn, 2026-09-26)', () => {
+  beforeEach(() => refreshMock.mockReset());
+
+  it('REJECT: Send email is gone immediately with the reason inline, and the pack is refreshed; no page reload needed', async () => {
+    fetchMock.mockResolvedValueOnce(json({ error: 'copy_rejected', failedChecks: ['C01: em dash'] }, 409));
+    render(<SendFromYardflow decisionId="dec-1" mailbox="casey@yardflow.ai" />);
+    fireEvent.click(screen.getByRole('button', { name: 'Send email' }));
+    await screen.findByTestId('send-refused');
+    expect(screen.queryByRole('button', { name: /send/i })).toBeNull();
+    expect(screen.getByTestId('send-refused')).toHaveTextContent('C01: em dash');
+    expect(refreshMock).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['persona_do_not_contact', 'hypothesis_not_active', 'decision_superseded', 'first_touch_already_sent', 'send_in_progress_or_unknown'])('%s is terminal: no Send button to press again', async (error) => {
+    fetchMock.mockResolvedValueOnce(json({ error }, 409));
+    render(<SendFromYardflow decisionId="dec-1" mailbox="casey@yardflow.ai" />);
+    fireEvent.click(screen.getByRole('button', { name: 'Send email' }));
+    await screen.findByTestId('send-refused');
+    expect(screen.queryByRole('button', { name: /send/i })).toBeNull();
+  });
+
+  it('a retryable refusal (the copy changed, the network dropped) keeps Send to try again', async () => {
+    fetchMock.mockResolvedValueOnce(json({ error: 'copy_changed_since_review' }, 409));
+    render(<SendFromYardflow decisionId="dec-1" mailbox="casey@yardflow.ai" />);
+    fireEvent.click(screen.getByRole('button', { name: 'Send email' }));
+    await screen.findByTestId('send-refused');
+    expect(screen.getByRole('button', { name: 'Send email' })).toBeInTheDocument();
+    expect(refreshMock).not.toHaveBeenCalled();
   });
 });

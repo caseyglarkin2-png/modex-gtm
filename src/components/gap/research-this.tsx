@@ -1,19 +1,27 @@
 'use client';
 
 /**
- * RESEARCH THIS on a research-required card (last mile, 2026-09-25).
+ * RESEARCH THIS on a research-required card (last mile, 2026-09-25; one
+ * decision since the debt burn, 2026-09-26).
  *
  * One click runs the evidence search for the card (POST /api/gap/research)
  * and shows exactly one result:
- *   facts found          each verified fact, quoted, with source, date and
- *                        freshness; "Propose updated hypothesis" creates a
- *                        DRAFT for Casey to review (never approved or active)
+ *   facts found          GAP proposes a thesis from the fresh verified facts
+ *                        on its own (a DRAFT; the machine proposing is not a
+ *                        Casey judgment) and shows the WHOLE narrative right
+ *                        here: facts, hypothesis, root causes, impacts, what
+ *                        would prove it wrong, evidence. Casey decides once:
+ *                        APPROVE + USE (the audited submit, approve, activate
+ *                        transitions, then routing for these people only),
+ *                        REJECT, or NEEDS WORK (edit it in Review).
  *   nothing defensible   "No defensible outreach trigger found." Hold.
  *   conflicting          the conflict, and no outreach
- * Voice: no em dashes.
+ * Nothing here drafts or sends. Voice: no em dashes.
  */
-import { useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
 
 interface Fact {
   signalId: string;
@@ -30,27 +38,132 @@ interface Result {
   rejected: Array<{ url: string; reason: string }>;
   conflicts: Array<{ site: string; signalIds: string[] }>;
 }
+interface Narrative {
+  observation: string;
+  problemHypothesis: string;
+  rootCauses: string[];
+  impacts: string[];
+  wouldProveWrong: string[];
+  whatANoMeans: string | null;
+  evidence: Array<{ signalId: string; title: string; excerpt: string; observedAt: string }>;
+}
+interface Proposal {
+  hypothesisIds: string[];
+  narrative: Narrative;
+}
+export type Decided =
+  | { kind: 'used'; approved: number; inUse: number; routing: UseOutcomeResponse | null; failures: string[] }
+  | { kind: 'rejected'; count: number };
+
+/**
+ * The lane that hosts RESEARCH THIS keeps each decision's outcome on screen:
+ * APPROVE + USE re-routes the people, so their card leaves RESEARCH (and this
+ * component with it) the moment the lane refreshes. Success must never make
+ * the result disappear.
+ */
+export const ResearchOutcomeContext = createContext<((o: { key: string; decided: Decided }) => void) | null>(null);
+
+export function ResearchOutcomeView({ decided }: { decided: Decided }) {
+  return decided.kind === 'used' ? (
+    <>
+      <UseOutcome approved={decided.approved} inUse={decided.inUse} routing={decided.routing} />
+      {decided.failures.length ? <p role="alert" className="text-xs text-[var(--destructive)]">{decided.failures.join('; ')}</p> : null}
+    </>
+  ) : (
+    <p data-testid="proposal-rejected" className="text-xs font-semibold">Rejected. Nothing will be contacted for this thesis.</p>
+  );
+}
 
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+/** Citation tokens are for the validator, not for Casey. */
+const uncited = (text: string) => text.replace(/\s*\[S:[^\]]+\]/g, '').trim();
+
+async function postJson<T>(url: string, body: unknown): Promise<{ ok: boolean; data: T & { error?: string } }> {
+  const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  return { ok: res.ok, data: (await res.json().catch(() => ({}))) as T & { error?: string } };
+}
+
+function Section({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="space-y-0.5">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
+      {children}
+    </div>
+  );
+}
+
+function List({ items, empty }: { items: string[]; empty: string }) {
+  return items.length ? (
+    <ul className="list-disc space-y-0.5 pl-4">
+      {items.map((t) => (
+        <li key={t}>{t}</li>
+      ))}
+    </ul>
+  ) : (
+    <p className="italic text-[var(--muted-foreground)]">{empty}</p>
+  );
+}
+
+/** The proposed thesis, exactly as it will be approved. */
+function ProposedThesis({ narrative, links = {} }: { narrative: Narrative; links?: Record<string, string> }) {
+  return (
+    <div data-testid="proposed-thesis" className="space-y-2">
+      <Section label="Facts">
+        <p>{uncited(narrative.observation)}</p>
+      </Section>
+      <Section label="Hypothesis">
+        <p>{narrative.problemHypothesis}</p>
+      </Section>
+      <Section label="Root causes">
+        <List items={narrative.rootCauses} empty="None stated. Add them under Needs work if they matter." />
+      </Section>
+      <Section label="Impacts">
+        <List items={narrative.impacts} empty="None stated. Add them under Needs work if they matter." />
+      </Section>
+      <Section label="Would prove it wrong">
+        <List items={[...narrative.wouldProveWrong, ...(narrative.whatANoMeans ? [`A no means: ${narrative.whatANoMeans}`] : [])]} empty="None stated." />
+      </Section>
+      <Section label="Evidence">
+        <ul className="space-y-0.5">
+          {narrative.evidence.map((e) => (
+            <li key={e.signalId}>
+              {links[e.signalId] ? (
+                <a href={links[e.signalId]} target="_blank" rel="noreferrer noopener" className="underline">
+                  {e.title}
+                </a>
+              ) : (
+                e.title
+              )}
+              , {day(e.observedAt)}
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </div>
+  );
+}
 
 /** `personaIds` (a RESEARCH group, 2026-09-26): one search, and the proposal covers every person in the group. */
 export function ResearchThis({ decisionId, personaIds }: { decisionId: string; personaIds?: number[] }) {
-  const [busy, setBusy] = useState<'research' | 'propose' | null>(null);
+  const router = useRouter();
+  const report = useContext(ResearchOutcomeContext);
+  const [busy, setBusy] = useState<'research' | 'propose' | 'use' | 'reject' | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [proposed, setProposed] = useState<{ id: string; existing: boolean; count: number } | null>(null);
+  const [proposal, setProposal] = useState<Proposal | null>(null);
+  const [decided, setDecided] = useState<Decided | null>(null);
   const group = personaIds && personaIds.length > 1 ? personaIds : null;
 
   async function research() {
     setBusy('research');
     setError(null);
     setResult(null);
-    setProposed(null);
+    setProposal(null);
+    setDecided(null);
     try {
-      const res = await fetch('/api/gap/research', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ decisionId }) });
-      const data = (await res.json().catch(() => ({}))) as Result & { error?: string };
-      if (!res.ok) setError(data.error ?? `HTTP ${res.status}`);
-      else setResult(data);
+      const r = await postJson<Result>('/api/gap/research', { decisionId });
+      if (!r.ok) setError(r.data.error ?? 'research_failed');
+      else setResult(r.data);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -58,57 +171,98 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
     }
   }
 
-  async function propose(runId: string) {
+  // Evidence found: the machine proposes on its own. Casey's judgment is the decision below, not this.
+  const runId = result?.outcome === 'evidence_found' ? result.runId : null;
+  useEffect(() => {
+    if (!runId) return;
+    let live = true;
     setBusy('propose');
+    postJson<{ hypothesisIds?: string[]; narrative?: Narrative }>(`/api/gap/research/${encodeURIComponent(runId)}/propose`, group ? { personaIds: group } : {})
+      .then((r) => {
+        if (!live) return;
+        if (!r.ok || !r.data.hypothesisIds?.length || !r.data.narrative) setError(`The thesis could not be proposed: ${r.data.error ?? 'propose_failed'}`);
+        else setProposal({ hypothesisIds: r.data.hypothesisIds, narrative: r.data.narrative });
+      })
+      .catch((err) => live && setError(err instanceof Error ? err.message : String(err)))
+      .finally(() => live && setBusy(null));
+    return () => {
+      live = false;
+    };
+    // group is derived from props and stable for the card's lifetime
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [runId]);
+
+  async function decide(decision: 'approve_and_use' | 'reject') {
+    if (!proposal || !runId) return;
+    setBusy(decision === 'reject' ? 'reject' : 'use');
     setError(null);
     try {
-      const res = await fetch(`/api/gap/research/${encodeURIComponent(runId)}/propose`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(group ? { personaIds: group } : {}),
-      });
-      const data = (await res.json().catch(() => ({}))) as { hypothesisId?: string; hypothesisIds?: string[]; existing?: boolean; error?: string };
-      if (!res.ok || !data.hypothesisId) setError(data.error ?? `HTTP ${res.status}`);
-      else setProposed({ id: data.hypothesisId, existing: data.existing === true, count: data.hypothesisIds?.length ?? 1 });
+      const r = await postJson<{ results?: Array<{ ok: boolean; to: string | null; detail: string }>; routing?: UseOutcomeResponse | null }>(
+        `/api/gap/research/${encodeURIComponent(runId)}/decide`,
+        { hypothesisIds: proposal.hypothesisIds, decision },
+      );
+      const rows = r.data.results ?? [];
+      if (rows.length === 0) {
+        setError(r.data.error ?? 'decision_failed');
+        return;
+      }
+      const outcome: Decided =
+        decision === 'reject'
+          ? { kind: 'rejected', count: rows.filter((x) => x.ok).length }
+          : {
+              kind: 'used',
+              approved: rows.filter((x) => x.ok && (x.to === 'approved' || x.to === 'active')).length,
+              inUse: rows.filter((x) => x.ok && x.to === 'active').length,
+              routing: r.data.routing ?? null,
+              failures: rows.filter((x) => !x.ok).map((x) => x.detail),
+            };
+      setDecided(outcome);
+      report?.({ key: runId, decided: outcome });
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setBusy(null);
     }
   }
 
+  const people = proposal?.hypothesisIds.length ?? 0;
   return (
     <div data-testid="research-this" className="space-y-2">
-      <Button type="button" size="sm" disabled={busy !== null} onClick={research}>
-        {busy === 'research' ? 'Researching public sources...' : result ? 'Research again' : 'Research this'}
-      </Button>
-      {error ? <p role="alert" className="text-xs text-[var(--destructive)]">Research failed: {error}</p> : null}
+      {decided ? null : (
+        <Button type="button" size="sm" disabled={busy !== null} onClick={research}>
+          {busy === 'research' ? 'Researching public sources...' : result ? 'Research again' : 'Research this'}
+        </Button>
+      )}
+      {error ? <p role="alert" className="text-xs text-[var(--destructive)]">{error}</p> : null}
 
       {result?.outcome === 'evidence_found' ? (
-        <div data-testid="research-found" className="space-y-2 rounded-md border border-emerald-500/40 bg-emerald-500/5 p-3 text-xs">
-          <p className="font-semibold">Evidence found</p>
-          {result.facts.map((f) => (
-            <div key={f.signalId} className="space-y-0.5">
-              <p className="italic">&ldquo;{f.excerpt}&rdquo;</p>
-              <p className="text-[var(--muted-foreground)]">
-                <a href={f.url} target="_blank" rel="noreferrer noopener" className="underline">
-                  {f.title}
-                </a>
-                , {day(f.publishedAt)}, {f.fresh ? 'fresh' : 'stale (kept for the record, not a trigger)'}
+        <div data-testid="research-found" className="space-y-3 rounded-md border border-emerald-500/40 bg-emerald-500/5 p-3 text-xs">
+          {decided && !report ? (
+            <ResearchOutcomeView decided={decided} />
+          ) : decided ? (
+            <p className="text-[var(--muted-foreground)]">Decided. The outcome is at the top of this lane.</p>
+          ) : proposal ? (
+            <>
+              <p className="font-semibold">
+                Proposed thesis{people > 1 ? ` for ${people} people` : ''}. Nothing is contacted until you approve and use it.
               </p>
-            </div>
-          ))}
-          {proposed ? (
-            <p>
-              {proposed.existing ? 'Already proposed.' : proposed.count > 1 ? `Thesis proposed for ${proposed.count} people.` : 'Thesis proposed.'}{' '}
-              <a href="/gap?lane=review" className="underline">
-                Decide in Review
-              </a>{' '}
-              (nothing is contacted until you approve and use it).
-            </p>
-          ) : (
-            <Button type="button" size="sm" disabled={busy !== null} onClick={() => propose(result.runId)}>
-              {busy === 'propose' ? 'Proposing...' : group ? `Propose this thesis for ${group.length} people` : 'Propose this thesis'}
-            </Button>
-          )}
+              <ProposedThesis narrative={proposal.narrative} links={Object.fromEntries(result.facts.map((f) => [f.signalId, f.url]))} />
+              <div className="flex flex-wrap items-center gap-2">
+                <Button type="button" size="sm" disabled={busy !== null} onClick={() => void decide('approve_and_use')}>
+                  {busy === 'use' ? 'Approving and routing...' : people > 1 ? `Approve + use for ${people}` : 'Approve + use'}
+                </Button>
+                <Button type="button" size="sm" variant="outline" disabled={busy !== null} onClick={() => void decide('reject')}>
+                  {busy === 'reject' ? 'Rejecting...' : 'Reject'}
+                </Button>
+                <a href="/gap?lane=review" className="underline">
+                  Needs work: edit in Review
+                </a>
+              </div>
+            </>
+          ) : busy === 'propose' ? (
+            <p>Evidence found. Proposing a thesis from it...</p>
+          ) : null}
         </div>
       ) : null}
 

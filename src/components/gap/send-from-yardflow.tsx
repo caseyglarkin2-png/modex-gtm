@@ -14,6 +14,9 @@
  *                    Casey is looking at. The server refuses if either changed.
  *   Back             closes the confirmation; nothing sent.
  *
+ * A refusal no retry can fix (REJECT, do not contact, superseded card...)
+ * removes Send at once and refreshes the pack; no page reload is needed.
+ *
  * One confirmation, no typed phrase. The server is idempotent: a double click
  * or a retry answers "Already sent". Voice: no em dashes.
  */
@@ -58,6 +61,25 @@ const REASONS: Record<string, string> = {
   decision_superseded: 'A newer routing run changed this card. Nothing was sent.',
 };
 
+/**
+ * Refusals that no second click can fix: Send disappears the moment one comes
+ * back and the pack refreshes (it re-reads the compile verdict and the card).
+ * Anything else (the copy or recipient changed, a network drop, a refused
+ * Gmail call) keeps Send so Casey can try again.
+ */
+const TERMINAL: ReadonlySet<string> = new Set([
+  'copy_rejected',
+  'persona_do_not_contact',
+  'email_invalid',
+  'active_opportunity',
+  'first_touch_already_sent',
+  'touch_not_due',
+  'sequence_stopped',
+  'hypothesis_not_active',
+  'decision_superseded',
+  'send_in_progress_or_unknown',
+]);
+
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
 export function SendFromYardflow({
@@ -99,6 +121,7 @@ export function SendFromYardflow({
       } else {
         const reason = String(data.error ?? `HTTP ${res.status}`);
         setState({ kind: 'refused', reason, detail: [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ') });
+        if (TERMINAL.has(reason)) router.refresh();
       }
     } catch (err) {
       setState({ kind: 'refused', reason: 'network_error', detail: err instanceof Error ? err.message : String(err) });
@@ -189,11 +212,14 @@ export function SendFromYardflow({
     );
   }
 
+  const terminal = state.kind === 'refused' && TERMINAL.has(state.reason);
   return (
     <div className="space-y-2">
-      <Button type="button" disabled={busy} onClick={() => void call(step)}>
-        {busy ? 'Checking...' : stepIndex > 0 ? `Send follow-up (touch ${stepIndex + 1})` : 'Send email'}
-      </Button>
+      {terminal ? null : (
+        <Button type="button" disabled={busy} onClick={() => void call(step)}>
+          {busy ? 'Checking...' : stepIndex > 0 ? `Send follow-up (touch ${stepIndex + 1})` : 'Send email'}
+        </Button>
+      )}
       {state.kind === 'refused' ? (
         <div role="alert" data-testid="send-refused" className="space-y-1 text-xs text-[var(--destructive)]">
           <p>{REASONS[state.reason] ?? `Not sent: ${state.reason.replace(/_/g, ' ')}.`}</p>
