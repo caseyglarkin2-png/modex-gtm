@@ -363,17 +363,28 @@ describe('<HypothesisDrawer>', () => {
     expect(screen.queryByTestId('hypothesis-review-nav')).toBeNull();
   });
 
-  it('shows an "approved and in use" banner with a Go to Queue link right after Use in routing succeeds', async () => {
-    fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'approved', to: 'active', effects: ['set_activated'] }, 200));
+  it('Use in routing shows where the person landed (routing ran on its own); no Run routing step', async () => {
+    fetchMock.mockResolvedValueOnce(
+      jsonResponse({ from: 'approved', to: 'active', effects: ['set_activated'], routing: { ok: true, runId: 'run-9', people: [], counts: { ready: 1 } } }, 200),
+    );
     render(<HypothesisDrawer hypothesis={row({ status: 'approved' })} onClose={vi.fn()} onTransition={vi.fn()} />);
 
     expect(screen.queryByTestId('hypothesis-activated-banner')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Use in routing' }));
 
     const banner = await screen.findByTestId('hypothesis-activated-banner');
-    expect(banner).toHaveTextContent('Approved and in use. Run routing and this person gets a recommendation.');
-    const goToQueue = within(banner).getByRole('link', { name: 'Go to Queue' });
-    expect(goToQueue).toHaveAttribute('href', '/gap');
+    expect(banner).toHaveTextContent('1 approved · 1 in use');
+    expect(banner).toHaveTextContent('1 ready to contact');
+    expect(within(banner).getByRole('link', { name: 'Contact them now' })).toHaveAttribute('href', '/gap?lane=ready');
+    expect(banner).not.toHaveTextContent(/run routing/i);
+  });
+
+  it('a routing failure after Use in routing is shown inline with its reason, never silent', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'approved', to: 'active', effects: [], routing: { ok: false, reason: 'routing_failed', detail: 'hubspot 502' } }, 200));
+    render(<HypothesisDrawer hypothesis={row({ status: 'approved' })} onClose={vi.fn()} onTransition={vi.fn()} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Use in routing' }));
+    const banner = await screen.findByTestId('hypothesis-activated-banner');
+    expect(within(banner).getByRole('alert')).toHaveTextContent('In use, but no recommendations yet. Routing failed. hubspot 502 Nothing was sent.');
   });
 
   it('does not show the activation banner for a transition that does not land on active', async () => {

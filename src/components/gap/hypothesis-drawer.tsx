@@ -26,7 +26,6 @@
  */
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -36,6 +35,7 @@ import { LEGAL_TRANSITIONS, isTerminalStatus, type HypothesisAction, type Hypoth
 import { extractCitationIds } from '@/lib/gap/hypothesis/observation';
 import { AddFactForm } from './add-fact-form';
 import { FactBlock, HypothesisBlock, type FactSignal } from './fact-hypothesis-blocks';
+import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
 
 // ---------------------------------------------------------------------------
 // Row shapes (what getHypothesis / listHypotheses return, snake_case columns)
@@ -217,11 +217,13 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
   const [busy, setBusy] = useState<HypothesisAction | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [justActivated, setJustActivated] = useState(false);
+  const [routing, setRouting] = useState<UseOutcomeResponse | null>(null);
 
   // A fresh hypothesis in the drawer (Previous/Next, or opening a new row)
   // never inherits the previous one's "just activated" banner.
   useEffect(() => {
     setJustActivated(false);
+    setRouting(null);
   }, [hypothesis.id]);
 
   const status = hypothesis.status;
@@ -267,6 +269,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
       }
       setReason('');
       setJustActivated(payload.to === 'active');
+      setRouting((payload.routing as UseOutcomeResponse | undefined) ?? null);
       onTransition({
         from: payload.from as HypothesisStatus,
         to: payload.to as HypothesisStatus,
@@ -297,6 +300,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
         return;
       }
       setJustActivated(payload.to === 'active');
+      setRouting((payload.routing as UseOutcomeResponse | undefined) ?? null);
       onTransition({ from: status, to: (payload.to as HypothesisStatus) ?? status, effects: [] });
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'network_error');
@@ -333,11 +337,8 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
         </SheetHeader>
 
         {justActivated ? (
-          <div data-testid="hypothesis-activated-banner" className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-md border border-[var(--border)] bg-[var(--accent)] p-3 text-sm">
-            <p>Approved and in use. Run routing and this person gets a recommendation.</p>
-            <Button asChild type="button" size="sm" variant="outline">
-              <Link href="/gap">Go to Queue</Link>
-            </Button>
+          <div data-testid="hypothesis-activated-banner" className="mt-3">
+            <UseOutcome approved={1} inUse={1} routing={routing} />
           </div>
         ) : null}
 
