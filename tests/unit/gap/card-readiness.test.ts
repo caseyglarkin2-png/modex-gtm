@@ -168,6 +168,10 @@ describe('sellerLaneOf: the /gap work lanes', () => {
     expect(sellerLaneOf({ ...item({ action: 'one_off_email', ruleId: 'reply_pending' }), lane: 'reply_triage' })).toBe('later');
     expect(sellerLaneOf({ ...item({ action: 'one_off_email', ruleId: 'hot' }), lane: 'work_queue' })).toBe('ready');
   });
+  it('Approve only (hypothesis approved, not in use) is never READY: the open decision is USE, which lives in REVIEW', () => {
+    expect(sellerLaneOf(item({ action: 'enroll_gap_sequence', ruleId: 'enroll', hypothesis: { id: 'hyp-1', status: 'approved' } }))).toBe('review');
+    expect(sellerLaneOf(item({ action: 'enroll_gap_sequence', ruleId: 'enroll', hypothesis: { id: 'hyp-1', status: 'active' } }))).toBe('ready');
+  });
   it('missing evidence is RESEARCH; a proposed hypothesis is REVIEW; a system block is blocked; nurture is later', () => {
     expect(sellerLaneOf(item({ action: 'research_required', ruleId: 'evidence_thin' }))).toBe('research');
     expect(sellerLaneOf(item({ action: 'approve_hypothesis', ruleId: 'hyp_proposed' }))).toBe('review');
