@@ -19,6 +19,15 @@ afterEach(() => {
 });
 
 describe('<SellerDraftPanel>', () => {
+  it('REJECT from the draft route removes Create Gmail draft at once and refreshes the pack, so no stale Send email survives beside it (debt burn, 2026-09-26)', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(jsonResponse({ error: 'copy_rejected', failedChecks: ['C01: em dash'] }, 409));
+    render(<SellerDraftPanel {...base} emailReady={false} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Create Gmail draft' }));
+    await screen.findByTestId('draft-refused');
+    expect(screen.queryByRole('button', { name: /create gmail draft/i })).toBeNull();
+    expect(refreshMock).toHaveBeenCalledTimes(1);
+  });
+
   it('offers Create Gmail draft whether or not the copy was checked; there is no CHECK COPY step (the server checks on the click)', () => {
     const { rerender } = render(<SellerDraftPanel {...base} emailReady />);
     expect(screen.getByRole('button', { name: 'Create Gmail draft' })).toBeInTheDocument();
