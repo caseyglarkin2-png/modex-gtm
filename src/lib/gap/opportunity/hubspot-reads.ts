@@ -5,7 +5,7 @@
  */
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/companies/models/Filter';
 import { getHubSpotClient, withHubSpotRetry } from '@/lib/hubspot/client';
-import type { CompanyRef, OpportunityReads } from './active-opportunity';
+import { canonicalDomain, hubspotDomainVariants, type CompanyRef, type OpportunityReads } from './active-opportunity';
 
 /** HubSpot search allows five filter groups (OR) per request. */
 const GROUPS_PER_SEARCH = 5;
@@ -21,10 +21,10 @@ type BatchAssoc = { results?: Array<{ _from?: { id?: string }; to?: Array<{ toOb
 
 type SearchFilter = { propertyName: string; operator: FilterOperatorEnum; value: string };
 
-/** Companies matching any of `values` on `property` (EQ), five OR-groups per search. */
-async function companiesWhere(property: 'domain' | 'name', values: string[]): Promise<{ companies: CompanyRef[]; truncated: boolean }> {
+/** Companies matching any of `values` on `property` (EQ), five OR-groups per search, with the property's stored value. */
+async function companiesWhere(property: 'domain' | 'name', values: string[]): Promise<{ companies: Array<CompanyRef & { stored: string | null }>; truncated: boolean }> {
   const client = getHubSpotClient();
-  const out = new Map<string, CompanyRef>();
+  const out = new Map<string, CompanyRef & { stored: string | null }>();
   let truncated = false;
   for (let i = 0; i < values.length; i += GROUPS_PER_SEARCH) {
     const chunk = values.slice(i, i + GROUPS_PER_SEARCH);
@@ -45,7 +45,7 @@ async function companiesWhere(property: 'domain' | 'name', values: string[]): Pr
           }),
         `gap-opportunity company search by ${property} (${chunk.length})`,
       );
-      for (const r of res.results ?? []) out.set(String(r.id), { id: String(r.id), name: r.properties?.name ?? null });
+      for (const r of res.results ?? []) out.set(String(r.id), { id: String(r.id), name: r.properties?.name ?? null, stored: r.properties?.[property] ?? null });
       const next = res.paging?.next?.after;
       if (!next) break;
       after = next;
@@ -54,13 +54,21 @@ async function companiesWhere(property: 'domain' | 'name', values: string[]): Pr
   return { companies: [...out.values()], truncated };
 }
 
+const ref = ({ id, name }: CompanyRef): CompanyRef => ({ id, name });
+
 export const hubspotOpportunityReads: OpportunityReads = {
-  companiesByDomains: (domains) => companiesWhere('domain', domains),
+  // HubSpot stores `domain` as typed (`www.example.com` happens): ask for both
+  // forms, then keep only a company whose stored domain is canonically one asked for.
+  async companiesByDomains(domains) {
+    const wanted = new Set(domains.map(canonicalDomain).filter((d): d is string => !!d));
+    const r = await companiesWhere('domain', hubspotDomainVariants([...wanted]));
+    return { companies: r.companies.filter((c) => wanted.has(canonicalDomain(c.stored) ?? '')).map(ref), truncated: r.truncated };
+  },
   // Search matches tokens, not whole values: keep only the exact (case-insensitive) name.
   async companiesByNames(names) {
     const r = await companiesWhere('name', names);
     const wanted = new Set(names.map((n) => n.trim().toLowerCase()));
-    return { companies: r.companies.filter((c) => wanted.has(String(c.name ?? '').trim().toLowerCase())), truncated: r.truncated };
+    return { companies: r.companies.filter((c) => wanted.has(String(c.name ?? '').trim().toLowerCase())).map(ref), truncated: r.truncated };
   },
 
   async companiesById(ids) {
