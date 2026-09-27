@@ -96,10 +96,10 @@ describe('GET /api/gap/learning', () => {
     expect(res.status).toBe(200);
     expect(mockedBuild).toHaveBeenCalledWith(
       expect.anything(),
-      { program: 'Inland26', from: new Date('2026-09-01'), to: new Date('2026-09-30') },
+      { program: 'Inland26', from: new Date('2026-09-01'), to: new Date('2026-09-30T23:59:59.999Z') },
     );
     const body = await res.json();
-    expect(body.filters).toEqual({ program: 'Inland26', from: '2026-09-01T00:00:00.000Z', to: '2026-09-30T00:00:00.000Z' });
+    expect(body.filters).toEqual({ program: 'Inland26', from: '2026-09-01T00:00:00.000Z', to: '2026-09-30T23:59:59.999Z' }); // T10 review: a bare 'to' date includes that whole day
     expect(mockedPrograms).toHaveBeenCalledTimes(1);
   });
 

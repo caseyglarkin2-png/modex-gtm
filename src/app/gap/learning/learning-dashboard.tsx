@@ -22,6 +22,13 @@ import type { ExecutionBreakdownRow, ExecutionLearning, ExecutionMetrics } from 
 import type { LearningReport } from '@/lib/gap/learning/query';
 import type { AgreementReport } from '@/lib/gap/routing/agreement';
 
+/** A table cell for a legacy Rate: the percentage only at n >= RELIABLE_N, otherwise k/n marked early. */
+function honestCell(r: { numerator: number; denominator: number }): string {
+  const h = honestRate(r.numerator, r.denominator);
+  if (h.status === 'no_data') return 'no data';
+  return h.status === 'reliable' ? formatPercent(h.value) : `${h.numerator}/${h.denominator} early`;
+}
+
 function formatPercent(value: number | null): string {
   return value === null ? '—' : `${Math.round(value * 100)}%`;
 }
@@ -201,7 +208,7 @@ function AgreementRateTile({ label, rate }: { label: string; rate: { agreements:
   );
 }
 
-const EXECUTION_TILES: Array<{ key: keyof Omit<ExecutionMetrics, 'peopleContacted' | 'sends'>; label: string; help: string }> = [
+const EXECUTION_TILES: Array<{ key: 'replyPerSend' | 'meetingPerSend' | 'truthYield' | 'problemAckPerSend' | 'rootCausePerSend'; label: string; help: string }> = [
   { key: 'replyPerSend', label: 'Reply / send', help: 'People who replied after their first send / people sent to' },
   { key: 'meetingPerSend', label: 'Meeting / send', help: 'People with a confirmed meeting / people sent to' },
   { key: 'truthYield', label: 'Truth yield', help: 'People whose hypothesis reached a human verdict / people sent to' },
@@ -231,8 +238,9 @@ function ExecutionSection({ execution }: { execution: ExecutionLearning }) {
         What happened after we sent
       </h2>
       <p className="text-sm text-[var(--muted-foreground)]">
-        {o.peopleContacted} {o.peopleContacted === 1 ? 'person' : 'people'} sent to ({o.sends} {o.sends === 1 ? 'send' : 'sends'}). Every rate below is per person
-        sent to, from the send record; below n = {RELIABLE_N} a number is an early observation, not a rate.
+        {o.peopleContacted} {o.peopleContacted === 1 ? 'person' : 'people'} sent to ({o.sends} {o.sends === 1 ? 'send' : 'sends'}); {o.peopleMatured} past the{' '}
+        {execution.windowDays}-day outcome window. Every rate below is per person sent to whose window has closed, counting only what they did within
+        it, tied to our own send; below n = {RELIABLE_N} a number is an early observation, not a rate.
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {EXECUTION_TILES.map((t) => (
@@ -347,7 +355,13 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
   return (
     <div className="space-y-8">
       <FilterBar programs={programs} value={filters} onChange={setFilters} />
-      {report.execution ? <ExecutionSection execution={report.execution} /> : null}
+      {report.execution ? (
+        <ExecutionSection execution={report.execution} />
+      ) : report.executionError ? (
+        <p className="text-sm text-[var(--destructive)]" role="alert">
+          Could not load what happened after we sent: {report.executionError}
+        </p>
+      ) : null}
       <section aria-labelledby="hypothesis-funnel-heading" className="space-y-3">
         <h2 id="hypothesis-funnel-heading" className="text-lg font-semibold">
           Hypothesis funnel
@@ -400,7 +414,7 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
                       <TableCell>{row.signalType}</TableCell>
                       <TableCell className="tabular-nums">{row.signalCount}</TableCell>
                       <TableCell className="tabular-nums">{row.hypothesisCount}</TableCell>
-                      <TableCell className="tabular-nums">{formatPercent(row.rate.value)}</TableCell>
+                      <TableCell className="tabular-nums">{honestCell(row.rate)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

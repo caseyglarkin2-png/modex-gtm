@@ -60,6 +60,8 @@ export interface ManualSentPayload {
   gmailSentMessageId: string;
   gmailThreadId: string;
   rfcMessageId: string | null;
+  /** Red team T10 (review S8): sha256 of the matched sent subject + text: the copy version of a manual send. Absent on older rows. */
+  contentHash?: string;
   /** Red team T10: the T6 evidence tier at send time (the gate refuses anything but VERIFIED_FACT). Absent on older rows. */
   evidenceTier?: string;
   sentAt: string;

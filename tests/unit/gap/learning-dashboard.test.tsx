@@ -15,7 +15,7 @@ import type { AgreementReport } from '@/lib/gap/routing/agreement';
 const ZERO_RATE = { value: null, n: 0, numerator: 0, denominator: 0 };
 const FULL_RATE = { value: 1, n: 1, numerator: 1, denominator: 1 };
 const NO_EXEC_RATE = { numerator: 0, denominator: 0, n: 0, value: null, interval: null, status: 'no_data' as const };
-const NO_EXECUTION = { overall: { peopleContacted: 0, sends: 0, replyPerSend: NO_EXEC_RATE, meetingPerSend: NO_EXEC_RATE, truthYield: NO_EXEC_RATE, problemAckPerSend: NO_EXEC_RATE, rootCausePerSend: NO_EXEC_RATE }, bySequenceVersion: [], byCopyVersion: [], bySender: [], byEngine: [], byEvidenceTier: [] };
+const NO_EXECUTION = { windowDays: 30, overall: { peopleContacted: 0, peopleMatured: 0, optOutPerSend: NO_EXEC_RATE, positivePerSend: NO_EXEC_RATE, sends: 0, replyPerSend: NO_EXEC_RATE, meetingPerSend: NO_EXEC_RATE, truthYield: NO_EXEC_RATE, problemAckPerSend: NO_EXEC_RATE, rootCausePerSend: NO_EXEC_RATE }, bySequenceVersion: [], byCopyVersion: [], bySender: [], byEngine: [], byEvidenceTier: [] };
 
 function report(overrides: Partial<LearningReport> = {}): LearningReport {
   return {
@@ -118,15 +118,15 @@ describe('LearningDashboard', () => {
 
   it('red team T10: the execution section leads, per person sent to, with small n suppressed', async () => {
     const small = { numerator: 1, denominator: 3, n: 3, value: null, interval: null, status: 'insufficient' as const };
-    const metrics = { peopleContacted: 3, sends: 4, replyPerSend: small, meetingPerSend: small, truthYield: small, problemAckPerSend: small, rootCausePerSend: small };
+    const metrics = { peopleContacted: 3, peopleMatured: 3, optOutPerSend: small, positivePerSend: small, sends: 4, replyPerSend: small, meetingPerSend: small, truthYield: small, problemAckPerSend: small, rootCausePerSend: small };
     const client = clientWith({
       ok: true,
       status: 200,
-      data: report({ execution: { overall: metrics, bySequenceVersion: [{ key: 'v1', metrics }], byCopyVersion: [], bySender: [], byEngine: [], byEvidenceTier: [] } }),
+      data: report({ execution: { windowDays: 30, overall: metrics, bySequenceVersion: [{ key: 'v1', metrics }], byCopyVersion: [], bySender: [], byEngine: [], byEvidenceTier: [] } }),
     });
     render(<LearningDashboard client={client} />);
     expect(await screen.findByText('What happened after we sent')).toBeInTheDocument();
-    expect(screen.getByText(/3 people sent to \(4 sends\)/)).toBeInTheDocument();
+    expect(screen.getByText(/3 people sent to \(4 sends\); 3 past the\s+30-day outcome window/)).toBeInTheDocument();
     expect(screen.queryByText('33%')).not.toBeInTheDocument();
     expect(screen.getByText('Reply / send by sequence version (first send)')).toBeInTheDocument();
   });
@@ -229,5 +229,15 @@ describe('LearningDashboard', () => {
     render(<LearningDashboard client={client} />);
     expect(await screen.findByText('Hypothesis funnel')).toBeInTheDocument();
     expect(await screen.findByText(/Could not load the agreement report: unauthenticated/)).toBeInTheDocument();
+  });
+});
+
+describe('Release D review B2: signal yield obeys the small-N rule', () => {
+  it('1 signal -> 1 hypothesis renders as an early observation, never 100%', async () => {
+    const client = clientWith({ ok: true, status: 200, data: report({ signalYield: [{ signalType: 'site_expansion', signalCount: 1, hypothesisCount: 1, rate: { value: 1, n: 1, numerator: 1, denominator: 1 } }] }) });
+    render(<LearningDashboard client={client} />);
+    expect(await screen.findByText('site_expansion')).toBeInTheDocument();
+    expect(screen.queryByText('100%')).not.toBeInTheDocument();
+    expect(screen.getByText('1/1 early')).toBeInTheDocument();
   });
 });

@@ -44,7 +44,11 @@ function parseFilters(request: NextRequest): LearningFilters {
     const d = new Date(raw);
     return Number.isNaN(d.getTime()) ? null : d;
   };
-  return { program: program?.trim() || null, from: parseDate('from'), to: parseDate('to') };
+  // Red team T10 review: "to" is inclusive, so a bare date means the END of that day (UTC).
+  const rawTo = params.get('to');
+  const to = parseDate('to');
+  const toInclusive = to && rawTo && /^\d{4}-\d{2}-\d{2}$/.test(rawTo.trim()) ? new Date(to.getTime() + 86_400_000 - 1) : to;
+  return { program: program?.trim() || null, from: parseDate('from'), to: toInclusive };
 }
 
 export async function GET(request: NextRequest) {
