@@ -55,7 +55,7 @@ describe('ops closeout 14: the send gate reads the canonical bounce vocabulary',
 describe('ops closeout 15: a Gmail draft reads the live-conversation guard too', () => {
   it('an active opportunity (open deal, booked meeting, recent positive reply) refuses the DRAFT, not only the send', async () => {
     const d = db();
-    const activeOpportunity = vi.fn(async () => true);
+    const activeOpportunity = vi.fn(async () => ({ status: 'ACTIVE' as const, detail: 'open deal' }));
     const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity });
     expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
     expect(activeOpportunity).toHaveBeenCalledWith(expect.anything(), 'Kroger', JOEY, NOW);
@@ -63,7 +63,7 @@ describe('ops closeout 15: a Gmail draft reads the live-conversation guard too',
 
   it('no live conversation: the draft proceeds', async () => {
     const d = db();
-    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity: async () => false })).toMatchObject({ ok: true });
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity: async () => ({ status: 'CLEAR' as const }) })).toMatchObject({ ok: true });
   });
 });
 

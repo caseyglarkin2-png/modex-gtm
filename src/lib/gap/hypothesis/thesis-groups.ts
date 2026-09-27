@@ -13,6 +13,8 @@
  *
  * House `prisma: any` glue.
  */
+import { factFitsOpener, openerFits } from '../research/opener';
+import { existingRevisionFor } from './current-revision';
 import { linkSignals, proposeHypothesis, transitionHypothesis, updateDraftNarrative } from './service';
 import { groupSiblings, REVIEWABLE_STATUSES, thesisFingerprint, type ThesisGroup, type ThesisRow } from './siblings';
 import { actionabilityOf, EVIDENCE_REFUSALS, outreachReadiness, type ActionSignal, type NextStep, type ReadinessReason } from './actionability';
@@ -301,10 +303,17 @@ export interface EvidenceResult extends SiblingResult {
  *
  * Every chosen fact must itself be a LIVE outreach fact; anything else is
  * refused before any write.
+ *
+ * ONE PRIMARY FACT (final Monday P1): the observation quotes exactly one fact,
+ * `primarySignalId` (default: the first chosen, in research order). Any other
+ * chosen fact is linked as supporting research context and never quoted: a
+ * first touch opens with one verified fact, and every fact joined into the
+ * opener made it longer until it failed at Send. A primary fact longer than a
+ * first touch can quote is refused here, before anything is written.
  */
 export async function useEvidenceForThesis(
   prisma: PrismaLike,
-  input: { fingerprint: string; hypothesisIds: string[]; signalIds: string[]; actor: string; now: Date },
+  input: { fingerprint: string; hypothesisIds: string[]; signalIds: string[]; primarySignalId?: string | null; actor: string; now: Date },
   deps: { propose?: typeof proposeHypothesis; updateNarrative?: typeof updateDraftNarrative } = {},
 ): Promise<{ ok: boolean; reason?: string; observation?: string; results: EvidenceResult[] }> {
   const propose = deps.propose ?? proposeHypothesis;
@@ -329,10 +338,14 @@ export async function useEvidenceForThesis(
     facts.push(s);
   }
   if (facts.length === 0) return { ok: false, reason: 'no_signals', results: [] };
+  const primaryId = input.primarySignalId ?? facts[0].id;
+  const primary = facts.find((f) => f.id === primaryId);
+  if (!primary) return { ok: false, reason: `primary_not_chosen:${primaryId}`, results: [] };
 
-  // The observation is the chosen facts, each quoted whole with its source label and citation.
-  const observation = facts.map((f) => citedQuote(f.title ?? '', f.evidence_text ?? '', f.id, group.accountName)).join(' ');
-  if (sendableEvidence(observation, facts, group.accountName).tier !== 'VERIFIED_FACT') return { ok: false, reason: 'observation_unsupported', results: [] };
+  // The observation is the ONE primary fact, quoted whole with its source label and citation.
+  const observation = citedQuote(primary.title ?? '', primary.evidence_text ?? '', primary.id, group.accountName);
+  if (sendableEvidence(observation, [primary], group.accountName).tier !== 'VERIFIED_FACT') return { ok: false, reason: 'observation_unsupported', results: [] };
+  if (!openerFits(observation)) return { ok: false, reason: `opener_too_long:${primary.id}`, results: [] };
 
   const list = (v: unknown) => (Array.isArray(v) ? v.map(String) : []);
   const results: EvidenceResult[] = [];
@@ -340,7 +353,15 @@ export async function useEvidenceForThesis(
     const m = members.get(id)!;
     const signalIds = [...new Set([...m.signalIds, ...facts.map((f) => f.id)])];
     if (REVIEWABLE_STATUSES.has(m.status)) {
-      const r = await updateNarrative(prisma, id, { observation, signalIds, primarySignalId: facts[0].id }, input.actor);
+      // Final Monday P1: another open revision for this person already exists (e.g. a
+      // RESEARCH THIS draft). Point at it; never a second evidence-backed draft beside it.
+      const row = await prisma.prospectingHypothesis.findUnique({ where: { id } });
+      const other = row ? await existingRevisionFor(prisma, { accountName: row.account_name, personaId: row.primary_persona_id ?? null, problemFamily: row.problem_family, hypothesisId: id }) : null;
+      if (other && other.hypothesisId !== id) {
+        results.push({ hypothesisId: id, ok: true, from: m.status, to: m.status, revisionId: other.hypothesisId, detail: 'revision already exists' });
+        continue;
+      }
+      const r = await updateNarrative(prisma, id, { observation, signalIds, primarySignalId: primary.id }, input.actor);
       results.push(
         r.ok
           ? { hypothesisId: id, ok: true, from: m.status, to: m.status, detail: 'observation rebuilt from the verified evidence; review it, then approve' }
@@ -355,6 +376,13 @@ export async function useEvidenceForThesis(
     const old = await prisma.prospectingHypothesis.findUnique({ where: { id } });
     if (!old) {
       results.push({ hypothesisId: id, ok: false, from: m.status, to: null, detail: 'not found', reason: 'not_found' });
+      continue;
+    }
+    // Final Monday P1: this person already has current work for this thesis (a revision, or
+    // an open draft from RESEARCH THIS). Point at it; never a second equivalent draft.
+    const already = await existingRevisionFor(prisma, { accountName: old.account_name, personaId: old.primary_persona_id ?? null, problemFamily: old.problem_family, hypothesisId: id });
+    if (already) {
+      results.push({ hypothesisId: id, ok: true, from: m.status, to: m.status, revisionId: already.hypothesisId, detail: 'revision already exists' });
       continue;
     }
     // A concurrent click (or research-this) can win the unique source_ref / supersedes_id race:
@@ -383,7 +411,7 @@ export async function useEvidenceForThesis(
       buyingCenter: old.buying_center ?? null,
       confidence: typeof old.confidence === 'number' ? old.confidence : 0,
       signalIds,
-      primarySignalId: facts[0].id,
+      primarySignalId: primary.id,
       sourceRef: `revision:${id}`,
       supersedesId: id,
       // The old narrative is a DRAFT CANDIDATE here, not proven truth: Casey reviews it.
@@ -457,6 +485,14 @@ export interface CorroborationResult {
   research: Pick<ResearchResult, 'runId' | 'outcome' | 'facts' | 'rejected' | 'conflicts' | 'notes'>;
   /** Fresh verified facts whose origin is NOT already behind the thesis. */
   newIndependent: Array<ResearchResult['facts'][number]>;
+  /**
+   * The ONE fact a first touch opens with by default (final Monday P1): the
+   * first of `newIndependent`, in research order, that fits an opener. Casey
+   * may choose another; nothing joins every fact into the opener.
+   */
+  primaryDefault: string | null;
+  /** Facts too long to quote in a first touch: research context only, never an opener. */
+  tooLongToOpen: string[];
   before: EvidenceDepth;
 }
 
@@ -533,6 +569,8 @@ export async function corroborateThesis(
     reused,
     research: { runId: research.runId, outcome: research.outcome, facts: research.facts, rejected: research.rejected, conflicts: research.conflicts, notes: research.notes },
     newIndependent,
+    primaryDefault: newIndependent.find((f) => factFitsOpener(f.excerpt))?.signalId ?? null,
+    tooLongToOpen: newIndependent.filter((f) => !factFitsOpener(f.excerpt)).map((f) => f.signalId),
     before: group.depth,
   };
 }

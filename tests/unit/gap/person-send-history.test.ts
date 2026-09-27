@@ -87,7 +87,7 @@ describe('A. step 0 is refused on a NEWER card when an OLDER card for the same p
     d.audit.push(manualSent('dec-joey-a'));
     const prisma = fullPrisma(d);
     const direct = vi.fn();
-    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey-b', actor: ACTOR, now: NOW, confirm: { contentHash: 'a'.repeat(64), recipient: JOEY } }, { ...baseDeps(d), activeOpportunity: async () => false, directAdapter: direct as any });
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey-b', actor: ACTOR, now: NOW, confirm: { contentHash: 'a'.repeat(64), recipient: JOEY } }, { ...baseDeps(d), activeOpportunity: async () => ({ status: 'CLEAR' as const }), directAdapter: direct as any });
     expect(r).toMatchObject({ ok: false, reason: 'first_touch_already_sent' });
     expect(direct).not.toHaveBeenCalled();
   });

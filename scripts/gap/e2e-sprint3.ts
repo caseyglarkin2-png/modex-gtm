@@ -99,6 +99,7 @@ import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep, sequenceStepIdempotencyKey } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
+import { SCRATCH_NO_DEALS } from './scratch-opportunity';
 
 // ---------------------------------------------------------------------------
 // Rails
@@ -523,7 +524,7 @@ async function main(): Promise<number> {
     const shadow = await enrollFromDecision(
       prisma,
       { hypothesisId, personaId: persona.id, sequenceVersionId: v1.id, compileIds: versionCompileIds, actor: ACTOR, actorKind: 'human', mode: 'shadow', now },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, contract: contractFor(0) },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS, contract: contractFor(0) },
     );
     const afterShadow = await tableCounts();
     expect('7 shadow', shadow.ok && shadow.kind === 'modex_shadow' && shadow.target === 'modex_queue', `shadow -> ${JSON.stringify(shadow).slice(0, 300)}`);
@@ -539,7 +540,7 @@ async function main(): Promise<number> {
     const live = await enrollFromDecision(
       prisma,
       { hypothesisId, personaId: persona.id, sequenceVersionId: v1.id, compileIds: versionCompileIds, actor: ACTOR, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: 'casey@yardflow.ai' },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, contract: contractFor(0) },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS, contract: contractFor(0) },
     );
     expect('8 live', live.ok && live.kind === 'modex_enrolled', `live -> ${JSON.stringify(live).slice(0, 400)}`);
     if (!live.ok || live.kind !== 'modex_enrolled') throw new Error('unreachable');

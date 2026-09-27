@@ -83,7 +83,7 @@ function account(name: string, hubspotCompanyId = '111'): RoutingAccountInput {
     triggerScore: null,
     lastTriggerAt: null,
     outreachStatus: null,
-    pipelineStage: null,
+    opportunity: { status: 'CLEAR', companyIds: [] },
   };
 }
 

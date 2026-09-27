@@ -44,6 +44,7 @@ import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
 import { DEFAULT_FRESHNESS } from './types';
+import type { OpportunityTruth } from '../opportunity/active-opportunity';
 import type {
   RoutingAccountInput,
   RoutingCommsInput,
@@ -75,6 +76,8 @@ export interface HubSpotAccountSnapshot {
   lastTriggerAt?: Date | null;
   /** Per-contact HubSpot properties, keyed by hubspot_contact_id. */
   contacts?: Record<string, HubSpotContactSnapshot>;
+  /** HubSpot active-opportunity truth (opportunity/active-opportunity.ts). Absent is UNKNOWN. */
+  opportunity?: OpportunityTruth;
 }
 
 export interface HubSpotContactSnapshot {
@@ -129,7 +132,6 @@ interface AccountRow {
   name: string;
   hubspot_company_id: string | null;
   outreach_status: string | null;
-  pipeline_stage: string | null;
 }
 
 interface PersonaRow {
@@ -382,7 +384,8 @@ function buildAccount(
     triggerScore,
     lastTriggerAt,
     outreachStatus: row.outreach_status ?? null,
-    pipelineStage: row.pipeline_stage ?? null,
+    // No HubSpot read for this account: UNKNOWN, never clear (fail closed).
+    opportunity: snapshot?.opportunity ?? { status: 'UNKNOWN', reason: snapshot ? 'hubspot_error' : 'hubspot_unconfigured', detail: 'no HubSpot opportunity read for this routing run' },
   };
 }
 

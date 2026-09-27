@@ -179,3 +179,29 @@ describe('sellerLaneOf: the /gap work lanes', () => {
     expect(sellerLaneOf(item({ action: 'nurture', ruleId: 'active_opportunity' }))).toBe('later');
   });
 });
+
+describe('final Monday blocker: an active or unverifiable opportunity is never a READY cold first touch', () => {
+  it('R3b active_opportunity (open HubSpot deal) holds in LATER with the reason, never READY', () => {
+    const it0 = item({ action: 'nurture', ruleId: 'active_opportunity' });
+    const r = cardReadiness(it0);
+    expect(r).toMatchObject({ state: 'actionable', primary: { label: 'Hold: active opportunity', href: null } });
+    expect(JSON.stringify(r)).toContain('Work it from the deal, not a cold first touch');
+    expect(sellerLaneOf(it0)).toBe('later');
+  });
+
+  it("R3c opportunity_unknown asks Casey to check HubSpot, lands in RESEARCH (not researchable), never READY", () => {
+    const it0 = item({ action: 'research_required', ruleId: 'opportunity_unknown' });
+    const r = cardReadiness(it0);
+    expect(r).toMatchObject({ state: 'missing_prerequisite', missing: "Can't verify whether this account already has an active opportunity. Check HubSpot before contacting them." });
+    expect((r as { researchable?: boolean }).researchable).toBeUndefined();
+    expect(sellerLaneOf(it0)).toBe('research');
+  });
+});
+
+describe('an opportunity hold wins over a revised thesis', () => {
+  it.each(['active_opportunity', 'opportunity_unknown'])('%s with hypothesis.revisedBy stays held, not REVIEW', (ruleId) => {
+    const it0 = item({ action: ruleId === 'active_opportunity' ? 'nurture' : 'research_required', ruleId, hypothesis: { id: 'old', status: 'approved', revisedBy: 'rev-1' } });
+    expect(sellerLaneOf(it0)).toBe(ruleId === 'active_opportunity' ? 'later' : 'research');
+    expect(JSON.stringify(cardReadiness(it0))).not.toContain('Review the revised thesis');
+  });
+});

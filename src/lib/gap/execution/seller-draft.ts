@@ -43,8 +43,7 @@ import { makeCriticClient } from '../critic-client';
 import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
 import { appendLedger, DIRECT_REFUSED, DIRECT_RELEASED, DRAFT_REFUSED, DRAFTED, isDefinitelyNotSent, type DraftedPayload } from './draft-ledger';
-import { hasActiveOpportunity } from '../routing/rules';
-import { loadActiveOpportunityInputs } from '../enroll/service';
+import { checkActiveOpportunityNow, type ActionTimeOpportunityCheck } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
 import { computeNextTouch, type NextTouch } from './next-touch';
@@ -96,7 +95,8 @@ export type SellerDraftRefusal =
   | 'copy_review_required'
   | 'unsubscribe_link_unavailable'
   | 'gmail_refused'
-  | 'active_opportunity';
+  | 'active_opportunity'
+  | 'opportunity_unknown';
 
 export type SellerDraftResult =
   | {
@@ -129,8 +129,11 @@ export interface SellerDraftDeps {
   /** The sender's real Gmail signature (null when unreadable: the template sign-off stays). */
   signature?: (sender: GmailSender | undefined) => Promise<string | null>;
   unsubscribeUrl?: (email: string) => string;
-  /** True when someone is already in conversation (draft and send). */
-  activeOpportunity?: (prisma: PrismaLike, accountName: string, email: string, now: Date) => Promise<boolean>;
+  /**
+   * Action-time HubSpot opportunity truth (draft and send). Default: a FRESH
+   * read through the canonical resolver. ACTIVE refuses; UNKNOWN refuses.
+   */
+  activeOpportunity?: ActionTimeOpportunityCheck;
   /**
    * Closeout review: refuse when the GAP mailbox is not configured instead of
    * falling back to the env identity (freightroll.com, which publishes no
@@ -147,10 +150,6 @@ export const FIRST_TOUCH_SENT_LOOKBACK_DAYS = 180;
 function defaultMailboxSentTo(sender: GmailSender | null): SellerDraftDeps['mailboxSentTo'] | null {
   if (!sender) return null;
   return async (recipient, after, before) => (await import('@/lib/email/gmail-inbox')).listSentTo(sender, recipient, after, before);
-}
-
-async function defaultActiveOpportunity(prisma: PrismaLike, accountName: string, email: string, now: Date): Promise<boolean> {
-  return hasActiveOpportunity(await loadActiveOpportunityInputs(prisma, accountName, email, now));
 }
 
 function defaultUnsubscribeUrl(email: string): string {
@@ -385,10 +384,15 @@ export async function prepareSellerEmail(
   }
   // Ops closeout 15: a draft is not harmless (it is stale outbound one click from
   // sending), so draft and send read the same live-conversation guard.
+  // Final Monday blocker: a FRESH HubSpot read at the click, whatever routing
+  // said; UNKNOWN (unreadable, unconfigured, no company identity) refuses too.
   {
-    const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
-    if (opportunity) {
-      return refuse(prisma, actor, decisionId, { ok: false, reason: 'active_opportunity', detail: 'An open deal, a booked meeting or a recent positive reply: someone is already in conversation here.' });
+    const opportunity = await (deps.activeOpportunity ?? checkActiveOpportunityNow)(prisma, pack.hypothesis.account_name, email, now);
+    if (opportunity.status === 'ACTIVE') {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'active_opportunity', detail: opportunity.detail });
+    }
+    if (opportunity.status !== 'CLEAR') {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'opportunity_unknown', detail: opportunity.status === 'UNKNOWN' ? opportunity.detail : undefined });
     }
   }
   if (!pack.version) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_version' });

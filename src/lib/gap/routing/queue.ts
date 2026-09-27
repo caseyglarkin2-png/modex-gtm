@@ -14,6 +14,7 @@
  * `inputs_snapshot` (written by run.ts). Nothing here enrolls or sends.
  */
 
+import { revisedByOf } from '../hypothesis/current-revision';
 import { audit as auditEvent } from '../audit';
 import type { HumanAction } from '../taxonomy';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
@@ -65,7 +66,8 @@ export interface QueueItem {
     phone: string | null;
     linkedinUrl: string | null;
   };
-  hypothesis: { id: string; status: string; family: string; confidence: number } | null;
+  /** `revisedBy`: a newer live thesis supersedes this one (final Monday P1); the card points there, never at RESEARCH THIS. */
+  hypothesis: { id: string; status: string; family: string; confidence: number; revisedBy?: string | null } | null;
   /** Provenance class of the suppression the router saw, re-derived from the frozen snapshot (routing only; the send gate still refuses any hit). */
   suppression: { class: SuppressionClass; hits: string[] };
   /** The multi-touch state, only for cards with a Gmail-proven sent touch. */
@@ -387,6 +389,12 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
       const live = item.hypothesis ? current.hypothesisStatus.get(item.hypothesis.id) : undefined;
       if (item.hypothesis && live) item.hypothesis = { ...item.hypothesis, status: live };
     }
+  }
+  // A thesis already revised (frozen row superseded by a draft revision): the card's current work is that revision.
+  const revisedBy = await revisedByOf(prisma, [...new Set(items.map((i) => i.hypothesis?.id).filter((id): id is string => !!id))]);
+  for (const item of items) {
+    const next = item.hypothesis ? revisedBy.get(item.hypothesis.id) : undefined;
+    if (item.hypothesis && next) item.hypothesis = { ...item.hypothesis, revisedBy: next };
   }
   await attachTouches(prisma, items);
   return { runId, asOf: current?.asOf ?? null, items, nextCursor };

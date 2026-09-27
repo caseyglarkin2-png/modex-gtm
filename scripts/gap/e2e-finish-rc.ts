@@ -90,6 +90,7 @@ import type { SeedFamily } from '../../src/lib/gap/sequences/families';
 import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
+import { SCRATCH_NO_DEALS } from './scratch-opportunity';
 
 // RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
 // (55432/gap_finish_e2e) used when the persistent 5433/gap_dev credentials
@@ -518,7 +519,7 @@ async function main(): Promise<number> {
     const blockedEnroll = await enrollFromDecision(
       prisma,
       { hypothesisId: h2, personaId: personaBlocked.id, sequenceVersionId: version.id, compileIds: h2CompileIds, actor: OWNER, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: OWNER },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS },
     );
     expect('5 active opportunity', !blockedEnroll.ok && blockedEnroll.reason === 'active_opportunity', `enroll on the mid-deal account -> ${JSON.stringify(blockedEnroll)}, expected active_opportunity (B6)`);
     const blockedItemsAfter = await prisma.draftQueueItem.count({ where: { to_email: emails.blocked } });
@@ -530,7 +531,7 @@ async function main(): Promise<number> {
     const suppressedEnroll = await enrollFromDecision(
       prisma,
       { hypothesisId: h1, personaId: personaHappy.id, sequenceVersionId: version.id, compileIds: h1CompileIds, actor: OWNER, actorKind: 'human', mode: 'shadow', now },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS },
     );
     expect('6 suppression', !suppressedEnroll.ok && suppressedEnroll.reason === 'suppressed' && suppressedEnroll.detail === 'modex_do_not_contact', `enroll on a do_not_contact persona -> ${JSON.stringify(suppressedEnroll)}, expected suppressed on leg modex_do_not_contact`);
     await prisma.persona.update({ where: { id: personaHappy.id }, data: { do_not_contact: false } });
@@ -540,7 +541,7 @@ async function main(): Promise<number> {
     const live = await enrollFromDecision(
       prisma,
       { hypothesisId: h1, personaId: personaHappy.id, sequenceVersionId: version.id, compileIds: h1CompileIds, actor: OWNER, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: OWNER },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS },
     );
     expect('7 enroll', live.ok && live.kind === 'modex_enrolled', `live enroll -> ${JSON.stringify(live).slice(0, 300)}`);
     if (!live.ok || live.kind !== 'modex_enrolled') throw new Error('unreachable');

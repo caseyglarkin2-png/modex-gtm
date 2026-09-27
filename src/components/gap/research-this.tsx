@@ -18,7 +18,7 @@
  *   conflicting          the conflict, and no outreach
  * Nothing here drafts or sends. Voice: no em dashes.
  */
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
@@ -38,6 +38,12 @@ interface Result {
   rejected: Array<{ url: string; reason: string }>;
   conflicts: Array<{ site: string; signalIds: string[] }>;
 }
+/** Final Monday P1: the person already has a revision of this thesis; research did not run. */
+interface ExistingRevisionResult {
+  outcome: 'existing_revision';
+  existingRevision: { hypothesisId: string; status: string };
+}
+type ResearchResponse = Result | ExistingRevisionResult;
 interface Narrative {
   observation: string;
   problemHypothesis: string;
@@ -148,25 +154,35 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
   const router = useRouter();
   const report = useContext(ResearchOutcomeContext);
   const [busy, setBusy] = useState<'research' | 'propose' | 'use' | 'reject' | null>(null);
-  const [result, setResult] = useState<Result | null>(null);
+  const [result, setResult] = useState<ResearchResponse | null>(null);
+  // The person's existing revision (from research or from propose): the one place to go next.
+  const [revision, setRevision] = useState<{ hypothesisId: string; status: string } | null>(null);
+  // A double click fires twice before React re-renders `disabled`: one request at a time, always.
+  const inFlight = useRef(false);
   const [error, setError] = useState<string | null>(null);
   const [proposal, setProposal] = useState<Proposal | null>(null);
   const [decided, setDecided] = useState<Decided | null>(null);
   const group = personaIds && personaIds.length > 1 ? personaIds : null;
 
   async function research() {
+    if (inFlight.current) return;
+    inFlight.current = true;
     setBusy('research');
     setError(null);
     setResult(null);
     setProposal(null);
     setDecided(null);
     try {
-      const r = await postJson<Result>('/api/gap/research', { decisionId });
+      const r = await postJson<ResearchResponse>('/api/gap/research', { decisionId });
       if (!r.ok) setError(r.data.error ?? 'research_failed');
-      else setResult(r.data);
+      else {
+        setResult(r.data);
+        if (r.data.outcome === 'existing_revision') setRevision(r.data.existingRevision);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
+      inFlight.current = false;
       setBusy(null);
     }
   }
@@ -177,10 +193,11 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
     if (!runId) return;
     let live = true;
     setBusy('propose');
-    postJson<{ hypothesisIds?: string[]; narrative?: Narrative }>(`/api/gap/research/${encodeURIComponent(runId)}/propose`, group ? { personaIds: group } : {})
+    postJson<{ hypothesisIds?: string[]; narrative?: Narrative; existingRevision?: { hypothesisId: string; status: string } }>(`/api/gap/research/${encodeURIComponent(runId)}/propose`, group ? { personaIds: group } : {})
       .then((r) => {
         if (!live) return;
-        if (!r.ok || !r.data.hypothesisIds?.length || !r.data.narrative) setError(`The thesis could not be proposed: ${r.data.error ?? 'propose_failed'}`);
+        if (r.data.error === 'revision_exists' && r.data.existingRevision) setRevision(r.data.existingRevision);
+        else if (!r.ok || !r.data.hypothesisIds?.length || !r.data.narrative) setError(`The thesis could not be proposed: ${r.data.error ?? 'propose_failed'}`);
         else setProposal({ hypothesisIds: r.data.hypothesisIds, narrative: r.data.narrative });
       })
       .catch((err) => live && setError(err instanceof Error ? err.message : String(err)))
@@ -229,7 +246,16 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
   const people = proposal?.hypothesisIds.length ?? 0;
   return (
     <div data-testid="research-this" className="space-y-2">
-      {decided ? null : (
+      {revision ? (
+        <div data-testid="research-existing-revision" className="space-y-1 rounded-md border border-[var(--border)] p-3 text-xs">
+          <p className="font-semibold">A revised thesis already exists for this person.</p>
+          <p className="text-[var(--muted-foreground)]">Nothing new was created. Review that revision instead.</p>
+          <a href="/gap?lane=review" className="underline">
+            Review the revised thesis
+          </a>
+        </div>
+      ) : null}
+      {decided || revision ? null : (
         <Button type="button" size="sm" disabled={busy !== null} onClick={research}>
           {busy === 'research' ? 'Researching public sources...' : result ? 'Research again' : 'Research this'}
         </Button>

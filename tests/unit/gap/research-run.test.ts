@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { runEvidenceResearch } from '@/lib/gap/research/run';
 import { proposeFromResearch } from '@/lib/gap/research/propose';
 import type { Candidate } from '@/lib/gap/research/providers';
+import { hypothesisFindFirst } from './fixtures/hypothesis-table';
 
 const NOW = new Date('2026-09-25T18:00:00.000Z');
 const Q2 = 'https://www.sec.gov/Archives/edgar/data/56873/000110465926108926/kr-20260815x10q.htm';
@@ -35,7 +36,7 @@ function db() {
     },
     gapAuditEvent: { create: vi.fn(async ({ data }: any) => { t.audit.push(data); return { id: id('a') }; }) },
     prospectingHypothesis: {
-      findFirst: vi.fn(async ({ where }: any) => t.hyps.find((h) => h.source_ref === where.source_ref) ?? null),
+      findFirst: vi.fn(hypothesisFindFirst(() => t.hyps)),
       findUnique: vi.fn(async ({ where }: any) => t.hyps.find((h) => h.id === where.id) ?? null),
       create: vi.fn(async ({ data }: any) => { const h = { id: id('hyp'), ...data }; t.hyps.push(h); return { id: h.id }; }),
       update: vi.fn(), updateMany: vi.fn(),

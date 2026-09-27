@@ -720,6 +720,16 @@ Branch `feat/gap-os-final`. Closes the gap between "GAP produced a recommendatio
 - Copy check is invisible on PASS: SEND EMAIL shows before any compile; the send route compiles on the click. CHECK COPY is gone from the draft panel.
 - `sellerLaneOf` sends an R3 reply_pending card (lane `reply_triage`) to later, never READY.
 
+### GAP FINAL MONDAY BLOCKER: HubSpot opportunity truth, one revision, one primary fact (2026-09-27)
+<!-- verified:2026-09-27 -->
+- BLOCKER, live: the active-opportunity guard (routing R3b and the draft/send/enroll gates) read `accounts.pipeline_stage`, modex's own outreach progression (production: 1660 targeted, 27 contacted, 21 engaged, zero meeting). Every account read "no opportunity" while HubSpot held 16 open deals (Kroger, GXO, Ford, GM, Mondelez ...).
+- `src/lib/gap/opportunity/active-opportunity.ts` is now the ONE resolver: CLEAR / ACTIVE / UNKNOWN. Company identity is a deterministic union (`hubspot_company_id`; HubSpot companies on the verified canonical domain or the people's email domains, consumer mail excluded; HubSpot's exact-name duplicates of those, the Lazerspot pair). Deals from those companies plus the people's HubSpot contacts; open/closed is `hs_is_closed`, never a stage list. Any read failure, timeout, malformed deal, stale or undeterminable company is UNKNOWN.
+- Routing: ACTIVE holds at R3b (nurture, LATER, "Work it from the deal"); UNKNOWN holds at new R3c `opportunity_unknown` (RESEARCH: "Can't verify whether this account already has an active opportunity. Check HubSpot before contacting them."). Action time: draft, direct send and enroll re-read HubSpot at the click (`checkActiveOpportunityNow`); ACTIVE refuses `active_opportunity`, UNKNOWN refuses `opportunity_unknown`.
+- Read-only probe: `npx tsx scripts/gap/opportunity-probe.ts "<account>" ...`. Scratch E2Es inject `scripts/gap/scratch-opportunity.ts` (no HubSpot behind fixture accounts).
+- P1: `hypothesis/current-revision.ts`. The research route answers `existing_revision` before any run, `proposeFromResearch` answers `revision_exists`, `use_evidence` reuses an open revision, and the queue marks a superseded card thesis `revisedBy` ("Review the revised thesis", REVIEW). One revision per frozen thesis; history untouched.
+- P1: exactly ONE primary outreach fact opens a first touch (`use_evidence` `primarySignalId`, corroborate `primaryDefault`, a single choice in the UI); other facts are research context. `research/opener.ts` pins the compiler's `MAX_QUOTED_WORDS`: readiness `opener_too_long`, the machine refuses approve/activate on it.
+- Debt (not a blocker): "Review or create a hypothesis" on a no-hypothesis card links to the cockpit Review lane, which can be empty; there is no account-scoped create path to link instead.
+
 ### GAP MONDAY READINESS: never offer an approval the gate will refuse (2026-09-27)
 <!-- verified:2026-09-27 -->
 - Live defect: five PepsiCo rows approved on a keyword-only observation; the thesis card offered Approve + use from status alone, the server refused `evidence_insufficient`, the result read "0 approved". The evidence gate was right and is unchanged.

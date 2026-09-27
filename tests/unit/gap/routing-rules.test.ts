@@ -28,7 +28,7 @@ function base(): RoutingInputs {
       triggerScore: 5,
       lastTriggerAt: daysAgo(3),
       outreachStatus: 'not_started',
-      pipelineStage: null,
+      opportunity: { status: 'CLEAR', companyIds: ['111'] },
     },
     signals: {
       freshTriggers: [
@@ -134,6 +134,7 @@ describe('RULES ordering', () => {
       'in_flight',
       'reply_pending',
       'active_opportunity',
+      'opportunity_unknown',
       'bounced_or_invalid',
       'disp_wrong_person',
       'disp_timing',
@@ -297,14 +298,29 @@ describe('routePersona, one rule at a time', () => {
    * routed straight to call_now/enroll_gap_sequence for a cold sequence.
    * Mutate the guard away and these three go RED.
    */
-  it('R3b active_opportunity: a meeting-stage account routes nurture, not enroll or hot_call', () => {
-    const i = base();
-    i.account.pipelineStage = 'meeting';
+  it('R3b active_opportunity: an open HubSpot deal on the account routes nurture, not a cold first touch (even hot)', () => {
+    const i = withHotTrigger(base());
+    i.account.opportunity = { status: 'ACTIVE', companyIds: ['111'], deals: [{ id: 'd1', name: 'YardFlow - Acme', stage: 'appointmentscheduled', pipeline: 'default', companyIds: ['111'], contactIds: ['someone-else'] }] };
     const d = decision(routePersona(i));
     expect(d.ruleId).toBe('active_opportunity');
     expect(d.action).toBe('nurture');
     expect(d.blocked).toBe(false);
-    expect(d.reason).toBe('active_opportunity:pipeline');
+    expect(d.reason).toBe('active_opportunity:hubspot_open_deal');
+  });
+
+  it('R3c opportunity_unknown: HubSpot could not answer routes research_required (never a READY contact action)', () => {
+    const i = withHotTrigger(base());
+    i.account.opportunity = { status: 'UNKNOWN', reason: 'hubspot_error', detail: '503' };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('opportunity_unknown');
+    expect(d.action).toBe('research_required');
+    expect(d.reason).toBe('opportunity_unknown:hubspot_error');
+  });
+
+  it('R3c opportunity_unknown: an account whose HubSpot company cannot be determined is held too', () => {
+    const i = base();
+    i.account.opportunity = { status: 'UNKNOWN', reason: 'identity_unresolved' };
+    expect(decision(routePersona(i)).ruleId).toBe('opportunity_unknown');
   });
 
   it('R3b active_opportunity: a booked meeting routes nurture even with a hot trigger and usable phone', () => {
@@ -328,11 +344,12 @@ describe('routePersona, one rule at a time', () => {
     expect(d.ruleId).not.toBe('active_opportunity');
   });
 
-  it('R3b control: an early pipeline stage (targeted/contacted/engaged) does NOT block routing', () => {
+  it('R3b control: HubSpot CLEAR (every deal closed, or none) does NOT block routing', () => {
     const i = base();
-    i.account.pipelineStage = 'contacted';
+    i.account.opportunity = { status: 'CLEAR', companyIds: ['111'] };
     const d = decision(routePersona(i));
     expect(d.ruleId).not.toBe('active_opportunity');
+    expect(d.ruleId).not.toBe('opportunity_unknown');
   });
 
   it('R4 bounced_or_invalid: invalid email and no phone routes research_required contact_invalid', () => {

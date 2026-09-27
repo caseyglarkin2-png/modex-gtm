@@ -13,6 +13,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { runEvidenceResearch } from '@/lib/gap/research/run';
+import { existingRevisionFor } from '@/lib/gap/hypothesis/current-revision';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
@@ -36,6 +37,17 @@ export async function POST(request: NextRequest) {
   const hypothesis = decision.hypothesis_id
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: decision.hypothesis_id }, select: { id: true, problem_family: true } })
     : null;
+
+  // Final Monday P1: this person already has current work for this thesis (a
+  // revision of it, or an open draft). Research never mints a second one; the
+  // seller is sent to the existing revision in REVIEW. No research run, no write.
+  const existing = await existingRevisionFor(prisma, {
+    accountName: decision.account_name,
+    personaId: decision.persona_id,
+    problemFamily: hypothesis?.problem_family ?? null,
+    hypothesisId: hypothesis?.id ?? null,
+  });
+  if (existing) return NextResponse.json({ outcome: 'existing_revision', existingRevision: existing });
 
   const result = await runEvidenceResearch(prisma, {
     accountName: decision.account_name,

@@ -23,6 +23,11 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'The fact behind this thesis is too old to open a conversation with.',
     next: 'Find fresh verified evidence, then approve the revised observation.',
   },
+  opener_too_long: {
+    what: 'Not in use.',
+    why: 'The observation quotes more than one first-touch email can carry, so it would fail at Send.',
+    next: 'Find verified evidence and choose ONE fact to open with.',
+  },
   no_evidence: {
     what: 'Not in use.',
     why: 'Nothing verifiable is linked to this thesis.',
@@ -45,8 +50,13 @@ const COPY: Record<string, RefusalCopy> = {
   },
   active_opportunity: {
     what: 'Nothing was drafted or sent.',
-    why: 'Someone is already in conversation at this account (open deal, meeting or positive reply).',
-    next: 'Work it from the existing conversation, not a cold touch.',
+    why: 'This account already has an active opportunity (an open HubSpot deal, a meeting or a positive reply).',
+    next: 'Work it from the existing deal or conversation, not a cold first touch.',
+  },
+  opportunity_unknown: {
+    what: 'Nothing was drafted or sent.',
+    why: "Can't verify whether this account already has an active opportunity.",
+    next: 'Check HubSpot before contacting them.',
   },
 };
 

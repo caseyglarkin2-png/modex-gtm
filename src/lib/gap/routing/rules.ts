@@ -156,28 +156,31 @@ function lastDisposition(i: RoutingInputs) {
  * B6 (Opus adversarial review, 2026-09-24): protect active commercial
  * motion. An open deal, a booked meeting, or a recent confirmed positive
  * disposition means cold prospecting is inappropriate; a human is already
- * in conversation. `Account.pipeline_stage` is modex's own progression
- * (src/lib/pipeline.ts), largely DERIVED from ordinary outreach activity;
- * `targeted`/`contacted`/`engaged` are what routing itself produces on the
- * way to a real conversation and must not block further routing (R2
- * in_flight and R16 cooldown already govern that). Only `meeting` (a
- * meeting was booked or requested) and later (`proposal`, `closed`) signal
- * genuine commercial momentum worth protecting.
+ * in conversation.
+ *
+ * Final Monday blocker (2026-09-27): the open-deal leg is HubSpot's truth
+ * (`account.opportunity`, opportunity/active-opportunity.ts), account level.
+ * It used to read `accounts.pipeline_stage`, which modex derives from its own
+ * outreach and never syncs from HubSpot deals, so every account read clear
+ * while HubSpot held open deals. UNKNOWN is not clear: R3c holds it.
  */
-const ADVANCED_PIPELINE_STAGES = new Set(['meeting', 'proposal', 'closed']);
 
-/** The minimal slice `hasActiveOpportunity` needs, so enroll/service.ts (B6)
- *  can build one from a fresh targeted read instead of a full RoutingInputs. */
+/** The minimal slice `hasActiveOpportunity` needs, so the action-time gates
+ *  can build one from a fresh HubSpot read instead of a full RoutingInputs. */
 export interface ActiveOpportunityInputs {
-  account: Pick<RoutingInputs['account'], 'pipelineStage'>;
+  account: Pick<RoutingInputs['account'], 'opportunity'>;
   comms: Pick<RoutingInputs['comms'], 'meetingBooked' | 'lastDisposition'>;
   now: Date;
   freshness: Pick<RoutingInputs['freshness'], 'cooldownDays'>;
 }
 
-function hasOpenPipelineStage(i: ActiveOpportunityInputs): boolean {
-  const stage = i.account.pipelineStage;
-  return !!stage && ADVANCED_PIPELINE_STAGES.has(stage);
+function hasOpenDeal(i: ActiveOpportunityInputs): boolean {
+  return i.account.opportunity.status === 'ACTIVE';
+}
+
+/** R3c: HubSpot could not say whether the account has an open deal. Never treated as clear. */
+export function opportunityUnknown(i: Pick<ActiveOpportunityInputs, 'account'>): boolean {
+  return i.account.opportunity.status === 'UNKNOWN';
 }
 
 const POSITIVE_DISPOSITION_CLASSES = new Set<ResponseClass>(['meeting_accepted', 'request_information']);
@@ -193,7 +196,7 @@ function recentPositiveDisposition(i: ActiveOpportunityInputs): RoutingLastDispo
  *  has gone stale (a meeting booked after the decision was made) still
  *  blocks. Same predicate, not a second opportunity model. */
 export function hasActiveOpportunity(i: ActiveOpportunityInputs): boolean {
-  return hasOpenPipelineStage(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
+  return hasOpenDeal(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
 }
 
 /**
@@ -309,16 +312,28 @@ export const RULES: RoutingRule[] = [
     action: 'nurture',
     lane: 'work_queue',
     reason: (i) => {
-      if (hasOpenPipelineStage(i)) return 'active_opportunity:pipeline';
+      if (hasOpenDeal(i)) return 'active_opportunity:hubspot_open_deal';
       if (i.comms.meetingBooked) return 'active_opportunity:meeting_booked';
       return 'active_opportunity:recent_positive_disposition';
     },
     predicate: (i) => {
-      if (hasOpenPipelineStage(i)) return `account has an open pipeline stage (${i.account.pipelineStage})`;
+      if (i.account.opportunity.status === 'ACTIVE') {
+        const n = i.account.opportunity.deals.length;
+        return `the account has ${n} open HubSpot deal${n === 1 ? '' : 's'}; work it from the deal, not a cold first touch`;
+      }
       if (i.comms.meetingBooked) return 'a meeting is booked';
       const d = recentPositiveDisposition(i)!;
       return `a confirmed ${d.responseClass} disposition ${Math.round(ageDays(i.now, d.at))} days ago (within ${i.freshness.cooldownDays})`;
     },
+  },
+  {
+    id: 'opportunity_unknown',
+    label: 'R3c',
+    when: opportunityUnknown,
+    action: 'research_required',
+    lane: 'work_queue',
+    reason: (i) => `opportunity_unknown:${i.account.opportunity.status === 'UNKNOWN' ? i.account.opportunity.reason : 'unknown'}`,
+    predicate: () => "HubSpot could not confirm whether this account has an open deal; check HubSpot before contacting anyone here",
   },
   {
     id: 'bounced_or_invalid',

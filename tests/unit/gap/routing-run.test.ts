@@ -8,6 +8,7 @@
  * and audit ledger are injected through `deps`.
  */
 
+import type { OpportunityTruth } from '@/lib/gap/opportunity/active-opportunity';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -219,7 +220,7 @@ function inputsFor(accountName: string, personaId: number, extra: Partial<Routin
       triggerScore: null,
       lastTriggerAt: null,
       outreachStatus: null,
-      pipelineStage: 'targeted',
+      opportunity: { status: 'CLEAR', companyIds: [] },
     },
     signals: { freshTriggers: [], newestAgeDays: null },
     persona: {
@@ -608,6 +609,8 @@ describe('runRouting', () => {
   });
 
   describe('createHubSpotSnapshotProvider', () => {
+    const OPP_CLEAR = async (): Promise<OpportunityTruth> => ({ status: 'CLEAR', companyIds: ['111'] });
+
     function fakeReads(companyProps: Record<string, string | null> | null = { yardflow_tam: 'in', tam_tier: 'A' }) {
       return {
         readCompany: vi.fn(async (_id: string, _props: readonly string[]) => (companyProps ? { properties: companyProps } : null)),
@@ -629,7 +632,7 @@ describe('runRouting', () => {
     it('reads the company with the six properties and the contact-ready personas with the two contact properties', async () => {
       const reads = fakeReads();
       store.persona.findMany.mockResolvedValue([{ hubspot_contact_id: '9' }, { hubspot_contact_id: '10' }, { hubspot_contact_id: '9' }, { hubspot_contact_id: null }]);
-      const provider = createHubSpotSnapshotProvider(store, reads);
+      const provider = createHubSpotSnapshotProvider(store, reads, { opportunity: OPP_CLEAR });
       const snap = await provider('Acme Foods', '111');
       expect(reads.readCompany).toHaveBeenCalledWith('111', SNAPSHOT_COMPANY_PROPERTIES);
       expect(SNAPSHOT_COMPANY_PROPERTIES).toEqual(['yardflow_tam', 'tam_tier', 'intent_score', 'last_intent_at', 'trigger_score', 'last_trigger_at']);
@@ -643,7 +646,21 @@ describe('runRouting', () => {
       expect(snap).toEqual({
         tam: 'in', tamTier: 'A', intentScore: null, lastIntentAt: null, triggerScore: null, lastTriggerAt: null,
         contacts: { '9': { qualVerdict: 'sql', lastIntentSource: 'reply' }, '10': { qualVerdict: 'none', lastIntentSource: null } },
+        opportunity: { status: 'CLEAR', companyIds: ['111'] },
       });
+    });
+
+    it('carries the HubSpot opportunity truth for every account, ACTIVE included (final Monday blocker)', async () => {
+      const opportunity = vi.fn(async (name: string): Promise<OpportunityTruth> =>
+        name === 'Kroger'
+          ? { status: 'ACTIVE', companyIds: ['8536615981'], deals: [{ id: 'd1', name: 'YardFlow - Kroger', stage: 'appointmentscheduled', pipeline: 'default', companyIds: ['8536615981'], contactIds: [] }] }
+          : { status: 'CLEAR', companyIds: ['1'] },
+      );
+      store.persona.findMany.mockResolvedValue([]);
+      const provider = createHubSpotSnapshotProvider(store, fakeReads(), { opportunity });
+      await expect(provider('Kroger', '8536615981')).resolves.toMatchObject({ opportunity: { status: 'ACTIVE' } });
+      await expect(provider('Beta Dairy', null)).resolves.toMatchObject({ tam: 'unknown', opportunity: { status: 'CLEAR' } });
+      expect(opportunity).toHaveBeenCalledWith('Kroger');
     });
 
     it('no company id -> no company read, contacts still carried with tam unknown', async () => {
@@ -655,11 +672,11 @@ describe('runRouting', () => {
       expect(snap).toMatchObject({ tam: 'unknown', contacts: { '9': { qualVerdict: 'sql', lastIntentSource: 'reply' } } });
     });
 
-    it('no company id and no contacts -> null; no contact ids -> no batch call', async () => {
+    it('no company id and no contacts -> tam unknown carrying the opportunity; no contact ids -> no batch call', async () => {
       const reads = fakeReads();
       store.persona.findMany.mockResolvedValue([]);
-      const provider = createHubSpotSnapshotProvider(store, reads);
-      await expect(provider('Beta Dairy', null)).resolves.toBeNull();
+      const provider = createHubSpotSnapshotProvider(store, reads, { opportunity: OPP_CLEAR });
+      await expect(provider('Beta Dairy', null)).resolves.toEqual({ tam: 'unknown', tamTier: '', opportunity: { status: 'CLEAR', companyIds: ['111'] } });
       expect(reads.readContacts).not.toHaveBeenCalled();
       await expect(provider('Acme Foods', '111')).resolves.toMatchObject({ tam: 'in' });
       expect(reads.readContacts).not.toHaveBeenCalled();
@@ -681,11 +698,16 @@ describe('runRouting', () => {
       reads.readContacts.mockRejectedValueOnce(new Error('batch down'));
       const ids = Array.from({ length: 120 }, (_, i) => ({ hubspot_contact_id: String(i + 1) }));
       store.persona.findMany.mockResolvedValue(ids);
-      const snap = await createHubSpotSnapshotProvider(store, reads)('Acme Foods', '111');
+      const snap = await createHubSpotSnapshotProvider(store, reads, { opportunity: OPP_CLEAR })('Acme Foods', '111');
       expect(snap?.tam).toBe('unknown');
       expect(Object.keys(snap?.contacts ?? {})).toHaveLength(20);
       store.persona.findMany.mockRejectedValue(new Error('db down'));
-      await expect(createHubSpotSnapshotProvider(store, reads)('Acme Foods', '111')).resolves.toBeNull();
+      // The DEFAULT opportunity resolver cannot read modex either: UNKNOWN, never clear (R3c holds it).
+      await expect(createHubSpotSnapshotProvider(store, reads)('Acme Foods', '111')).resolves.toEqual({
+        tam: 'unknown',
+        tamTier: '',
+        opportunity: expect.objectContaining({ status: 'UNKNOWN', reason: 'hubspot_error' }),
+      });
     });
   });
 

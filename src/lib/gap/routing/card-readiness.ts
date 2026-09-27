@@ -39,7 +39,7 @@ export interface ReadinessInput {
     linkedinUrl?: string | null;
     hubspotContactId: string | null;
   };
-  hypothesis: { id: string; status?: string } | null;
+  hypothesis: { id: string; status?: string; revisedBy?: string | null } | null;
   suppression?: { class: SuppressionClass; hits: string[] } | null;
   /** Multi-touch state for a card with a Gmail-proven sent touch (queue.ts TouchSummary). */
   touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
@@ -65,6 +65,9 @@ export type CardReadiness =
 export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin', 'no_hypothesis', 'hyp_stale']);
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
+
+/** R3b / R3c: the account's opportunity state holds the card whatever its thesis is doing. */
+const OPPORTUNITY_HOLDS: ReadonlySet<string> = new Set(['active_opportunity', 'opportunity_unknown']);
 
 /** Where a draft hypothesis for any account is reviewed and approved: the cockpit REVIEW lane. */
 export const HYPOTHESIS_REVIEW_HREF = '/gap?lane=review';
@@ -167,6 +170,17 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     }
   }
 
+  // Final Monday P1: this card's thesis was already revised (verified evidence
+  // chosen, a draft revision created). The current work is that revision in
+  // REVIEW; RESEARCH THIS here would only mint a second equivalent draft.
+  if (item.hypothesis?.revisedBy && !OPPORTUNITY_HOLDS.has(item.ruleId)) {
+    return withWarning({
+      state: 'actionable' as const,
+      primary: { label: 'Review the revised thesis', href: HYPOTHESIS_REVIEW_HREF },
+      secondary: [],
+    });
+  }
+
   switch (item.action) {
     case 'enroll_gap_sequence':
     case 'one_off_email': {
@@ -187,6 +201,15 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     case 'approve_hypothesis':
       return withWarning({ state: 'actionable' as const, primary: { label: 'Review the hypothesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
     case 'nurture':
+      // R3b: an open HubSpot deal (or a meeting / positive reply) at this account. Hold, and say why.
+      if (item.ruleId === 'active_opportunity') {
+        const company = item.account.hubspotCompanyId ? hubspotCompanyUrl(item.account.hubspotCompanyId) : null;
+        return withWarning({
+          state: 'actionable' as const,
+          primary: { label: 'Hold: active opportunity', href: null, note: `${item.account.name} already has an active opportunity (an open HubSpot deal, a meeting or a positive reply). Work it from the deal, not a cold first touch.` },
+          secondary: company ? [{ label: 'Open the account in HubSpot', href: company }] : [],
+        });
+      }
       return withWarning({
         state: 'actionable' as const,
         primary: { label: 'Hold for later', href: null, note: 'No outreach now. The routing details say why.' },
@@ -207,6 +230,8 @@ function readinessOf(item: ReadinessInput): CardReadiness {
           });
         case 'bounced_or_invalid':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable email or phone for ${name}.`, fix: contactFix(item, 'Find a current email or phone') });
+        case 'opportunity_unknown':
+          return withWarning({ state: 'missing_prerequisite' as const, missing: "Can't verify whether this account already has an active opportunity. Check HubSpot before contacting them.", fix: accountFix(item, 'Check HubSpot for open deals') });
         case 'tam_unknown':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `${item.account.name} has no verified TAM status.`, fix: accountFix(item, 'Verify TAM on the account') });
         case 'hyp_stale':
@@ -241,6 +266,7 @@ export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | nul
   // decision lives in REPLIES; a READY card here would offer a cold first email.
   if (item.lane === 'reply_triage') return 'later';
   if (item.action === 'approve_hypothesis') return 'review';
+  if (item.hypothesis?.revisedBy && !item.touch && !OPPORTUNITY_HOLDS.has(item.ruleId)) return 'review';
   const r = cardReadiness(item);
   if (r.state === 'blocked') return 'blocked';
   if (r.state === 'missing_prerequisite') return 'research';

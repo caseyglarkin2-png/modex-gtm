@@ -39,6 +39,7 @@ import { assembleForAccount, isSkip } from './inputs';
 import type { AssembleAccountArgs, AssembleForAccountOptions, AssembleResult, HubSpotAccountSnapshot, Top100Context } from './inputs';
 import { routePersona } from './route';
 import type { SuppressionReader } from './suppression-read';
+import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import type { RouteResult, RoutingDecision, RoutingInputs } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -232,6 +233,12 @@ export function snapshotFromProperties(company: HubSpotProps | null, contacts: H
 export interface SnapshotProviderOptions {
   /** Default: always configured. The route passes `isHubSpotConfigured`. */
   configured?: () => boolean;
+  /**
+   * The account's HubSpot active-opportunity truth. Default: the canonical
+   * resolver (opportunity/active-opportunity.ts) over the live HubSpot reads.
+   * It never throws; any failure is UNKNOWN, which R3c holds.
+   */
+  opportunity?: (accountName: string) => Promise<OpportunityTruth>;
 }
 
 /**
@@ -247,8 +254,10 @@ export function createHubSpotSnapshotProvider(
   opts: SnapshotProviderOptions = {},
 ): HubSpotSnapshotProvider {
   const configured = opts.configured ?? (() => true);
+  const opportunityOf = opts.opportunity ?? ((accountName: string) => resolveAccountOpportunity(prisma, accountName, {}, { configured }));
   return async (accountName, hubspotCompanyId) => {
     if (!configured()) return null;
+    const opportunity = opportunityOf(accountName);
 
     let company: HubSpotProps | null = null;
     if (hubspotCompanyId) {
@@ -280,7 +289,8 @@ export function createHubSpotSnapshotProvider(
       }
     }
 
-    return snapshotFromProperties(company, contacts);
+    const snapshot = snapshotFromProperties(company, contacts) ?? { tam: 'unknown' as const, tamTier: '' as const };
+    return { ...snapshot, opportunity: await opportunity };
   };
 }
 

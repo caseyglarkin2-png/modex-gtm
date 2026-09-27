@@ -33,6 +33,7 @@ import { resolveRoutableHypothesisScope, runRouting, type HubSpotSnapshotProvide
 import { createClawdSuppressionReader } from '../../src/lib/gap/routing/suppression-read';
 import { sellerLaneOf } from '../../src/lib/gap/routing/card-readiness';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
+import { SCRATCH_NO_DEALS_TRUTH } from './scratch-opportunity';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const ACTOR = 'dogfood-debt-burn';
@@ -44,7 +45,7 @@ function check(step: string, ok: boolean, detail: string) {
   console.log(`${ok ? 'PASS' : 'FAIL'} ${step}: ${detail}`);
 }
 
-const tamIn: HubSpotSnapshotProvider = async () => ({ tam: 'in', tamTier: 'A', intentScore: 60, lastIntentAt: new Date(), triggerScore: null, lastTriggerAt: null });
+const tamIn: HubSpotSnapshotProvider = async () => ({ tam: 'in', tamTier: 'A', intentScore: 60, lastIntentAt: new Date(), triggerScore: null, lastTriggerAt: null, opportunity: SCRATCH_NO_DEALS_TRUTH });
 
 async function main() {
   const url = process.env.DATABASE_URL ?? '';
