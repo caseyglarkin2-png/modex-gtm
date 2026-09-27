@@ -45,7 +45,8 @@ export function db(): Db {
         primary_persona_id: 1886,
         problem_family: 'hidden_capacity',
         problem_hypothesis: 'My guess is that physical handoffs constrain production capacity at Kroger.',
-        observation: 'KR 10-Q (2026-06-26) mentions: capital expenditure [S:sig-1].',
+        // Ops closeout 16: an observation is its source label plus a verbatim quote of the fact it cites.
+        observation: 'KROGER CO 10-Q (filed 2026-09-18): "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”)" [S:sig-1].',
         sequence_version_id: null,
         sequence_family_id: null,
         falsification_questions: [],

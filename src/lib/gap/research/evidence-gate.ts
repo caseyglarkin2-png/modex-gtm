@@ -23,6 +23,7 @@
  */
 import { isPhysicalOpsFact } from './facts';
 import { extractCitationIds } from '../hypothesis/observation';
+import { sourceLabelVariants } from './source-label';
 
 export interface GateSignal {
   id: string;
@@ -34,6 +35,8 @@ export interface GateSignal {
   observed_at?: Date | string | null;
   external_ok?: boolean | null;
   metadata?: unknown;
+  /** The source's title; its label is the only prose an observation may add around a quote (ops closeout 16). */
+  title?: string | null;
 }
 
 export type OutreachFactRefusal =
@@ -100,6 +103,61 @@ export function outreachEvidence(signals: readonly GateSignal[], accountName: st
 export interface SendableEvidence extends OutreachEvidence {
   /** Ids the observation cites that are not live outreach facts. Any one makes the hypothesis unsendable. */
   nonFactCitations: string[];
+  /** Ops closeout 16: the observation text its cited facts do not support, or null. Non-null makes it unsendable. */
+  unsupported: string | null;
+}
+
+const TOKEN = /\[S:[A-Za-z0-9_-]+\]/g;
+const norm = (t: string) =>
+  t
+    .replace(TOKEN, ' ')
+    .replace(/[“”]/g, '"')
+    .replace(/[‘’]/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+
+/**
+ * Ops closeout 16: does the observation say only what its cited facts say?
+ * Deterministic, no scoring: an observation is its source label(s) plus
+ * quotes. Every quote must be found, verbatim after whitespace/quote/case
+ * normalization, in the evidence_text of a fact the observation CITES; the
+ * only other words allowed are a cited fact's own source label (its title as
+ * `sourceLabel` names it, or the raw title). Anything else is a claim the
+ * evidence does not make. Returns the first unsupported text, or null.
+ */
+export function observationSupportGap(
+  observation: string | null | undefined,
+  citedFacts: ReadonlyArray<{ id: string; evidence_text?: string | null; title?: string | null }>,
+  accountName: string,
+): string | null {
+  // Quotes are delimited by straight quotes and closed right before a citation
+  // token (citedQuote's shape), so a fact that itself contains quotes
+  // (Kroger: 'Giant Eagle, Inc. (“Giant Eagle”)') stays one quote.
+  const text = observation ?? '';
+  const citedIds = new Set(extractCitationIds(text));
+  const facts = citedFacts.filter((f) => citedIds.has(f.id));
+  if (facts.length === 0) return text.trim() || '(empty)';
+  const evidence = facts.map((f) => norm(f.evidence_text ?? ''));
+
+  let residue = text;
+  for (const m of text.matchAll(/"([\s\S]+?)"(?=\s*\[S:[A-Za-z0-9_-]+\])/g)) {
+    const quote = norm(m[1]).replace(/[.!?,;:]+$/, '');
+    if (!quote || !evidence.some((e) => e.includes(quote))) return m[0];
+    residue = residue.replace(m[0], ' ');
+  }
+  residue = residue.replace(TOKEN, ' ');
+  const labels = facts
+    .flatMap((f) => (f.title ? sourceLabelVariants(f.title, accountName) : []))
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  let rest = residue;
+  for (const label of labels) rest = rest.split(label).join(' ');
+  // Case-insensitive second pass (a label typed with different casing).
+  for (const label of labels) rest = rest.replace(new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), ' ');
+  const left = rest.replace(/[\s.:,;!?'"()-]+/g, ' ').trim();
+  return left.length === 0 ? null : left;
 }
 
 /**
@@ -114,8 +172,12 @@ export function sendableEvidence(observation: string | null | undefined, signals
   const facts = new Set(base.facts);
   const cited = extractCitationIds(observation ?? '');
   const nonFactCitations = cited.filter((id) => !facts.has(id));
-  const ok = base.tier === 'VERIFIED_FACT' && cited.length > 0 && nonFactCitations.length === 0;
-  return { ...base, tier: ok ? 'VERIFIED_FACT' : 'INSUFFICIENT', nonFactCitations };
+  const unsupported =
+    cited.length > 0 && nonFactCitations.length === 0
+      ? observationSupportGap(observation, signals.filter((s) => facts.has(s.id)), accountName)
+      : null;
+  const ok = base.tier === 'VERIFIED_FACT' && cited.length > 0 && nonFactCitations.length === 0 && unsupported === null;
+  return { ...base, tier: ok ? 'VERIFIED_FACT' : 'INSUFFICIENT', nonFactCitations, unsupported };
 }
 
 /** The Prisma select every gate caller needs on a linked ProspectingSignal. */
@@ -129,6 +191,7 @@ export const GATE_SIGNAL_SELECT = {
   observed_at: true,
   external_ok: true,
   metadata: true,
+  title: true,
 } as const;
 
 /**

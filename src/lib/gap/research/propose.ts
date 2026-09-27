@@ -20,6 +20,7 @@
  * so the drafts form one sibling thesis and Casey decides once in REVIEW.
  * A person who does not belong to the run's account is skipped, never proposed.
  */
+import { sourceLabel } from './source-label';
 import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
 /**
@@ -35,34 +36,8 @@ export function citedQuote(title: string, excerpt: string, signalId: string, acc
   return `${sourceLabel(title, accountName)}: "${quote}" ${token}.`;
 }
 
-const FILING_FORM = /\b(10-Q|10-K|8-K|20-F|6-K|S-1|S-4|DEF 14A)\b/;
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const CORPORATE_SUFFIX = /[\s,]+(co|corp|corporation|inc|incorporated|company|ltd|llc|plc|l\.?p)\.?$/i;
-
-function issuerName(raw: string): string {
-  const name = raw.trim().replace(CORPORATE_SUFFIX, '').replace(CORPORATE_SUFFIX, '').trim();
-  // EDGAR shouts company names ("KROGER CO"); a person would write "Kroger".
-  return name === name.toUpperCase() ? name.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : name;
-}
-
-/**
- * Release C review SF4: an EDGAR-style title ("KROGER CO 10-Q (filed
- * 2026-09-18)") reads like a scraper. A filing is named the way a person
- * would say it, "From Kroger's 10-Q filed September 18"; any other title is
- * kept as it is.
- */
-export function sourceLabel(title: string, accountName?: string | null): string {
-  const t = title.trim();
-  const form = FILING_FORM.exec(t);
-  if (!form) return t;
-  const issuer = (accountName ?? '').trim() || issuerName(t.slice(0, form.index));
-  const possessive = /['’]s$/i.test(issuer) ? issuer : `${issuer}${/s$/i.test(issuer) ? "'" : "'s"}`;
-  const owner = issuer ? `${possessive} ` : 'the ';
-  const date = /(\d{4})-(\d{2})-(\d{2})/.exec(t);
-  const month = date ? MONTHS[Number(date[2]) - 1] : undefined;
-  const when = date && month ? ` filed ${month} ${Number(date[3])}` : '';
-  return `From ${owner}${form[1]}${when}`;
-}
+// Moved to ./source-label (ops closeout 16: the evidence gate reads it too).
+export { sourceLabel } from './source-label';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
