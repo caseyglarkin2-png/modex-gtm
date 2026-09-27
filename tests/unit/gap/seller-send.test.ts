@@ -18,7 +18,7 @@ function sendPrisma(d: Db) {
     lock = run.catch(() => undefined);
     return run;
   });
-  p.emailLog = { create: vi.fn(async () => ({ id: 1 })) };
+  p.emailLog = { ...p.emailLog, create: vi.fn(async () => ({ id: 1 })) };
   const acted = new Set<string>();
   p.routingDecision.updateMany = vi.fn(async ({ where, data }: any) => {
     if (acted.has(where.id)) return { count: 0 };

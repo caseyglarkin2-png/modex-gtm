@@ -2,7 +2,7 @@
 import { vi } from 'vitest';
 import { LEGACY_HC } from './legacy-hc';
 import type { CompileResult } from '@/lib/gap/compiler/compile';
-import { findManyFrom } from './where';
+import { findFirstFrom, findManyFrom } from './where';
 
 // The List-Unsubscribe header is always signed by the real code path (red team
 // T5: it targets the API one-click URL, which carries an HMAC token).
@@ -23,6 +23,11 @@ export interface Db {
   audit: any[];
   /** InboundMessage rows (Release C review S5: an account reply blocks a colleague's first touch). */
   inbound?: any[];
+  /** Final red team: what moved since a first-touch card (stale-card.ts). */
+  dispositions?: any[];
+  emailLogs?: any[];
+  enrollments?: any[];
+  draftQueue?: any[];
 }
 
 export function db(): Db {
@@ -92,7 +97,11 @@ export function prismaOf(d: Db) {
     },
     sequenceFamily: { findMany: vi.fn(async ({ where }: any) => d.families.filter((f) => f.problem_family === where.problem_family)) },
     unsubscribedEmail: { findFirst: vi.fn(async () => null) },
-    inboundMessage: { findMany: vi.fn(async (args: any) => findManyFrom(d.inbound ?? [], args)) },
+    inboundMessage: { findMany: vi.fn(async (args: any) => findManyFrom(d.inbound ?? [], args)), findFirst: vi.fn(async (args: any) => findFirstFrom(d.inbound ?? [], args)) },
+    conversationDisposition: { findFirst: vi.fn(async (args: any) => findFirstFrom(d.dispositions ?? [], args)) },
+    emailLog: { findFirst: vi.fn(async (args: any) => findFirstFrom(d.emailLogs ?? [], args)), create: vi.fn(async () => ({ id: 1 })) },
+    sequenceEnrollment: { findFirst: vi.fn(async (args: any) => findFirstFrom(d.enrollments ?? [], args)) },
+    draftQueueItem: { findFirst: vi.fn(async (args: any) => findFirstFrom(d.draftQueue ?? [], args)) },
     gapCompile: {
       findMany: vi.fn(async ({ where }: any) =>
         d.compiles

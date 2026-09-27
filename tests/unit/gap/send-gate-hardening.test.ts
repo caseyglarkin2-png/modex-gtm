@@ -28,7 +28,7 @@ function sendPrisma(d: Db) {
     lock = run.catch(() => undefined);
     return run;
   });
-  p.emailLog = { create: vi.fn(async () => ({ id: 1 })) };
+  p.emailLog = { ...p.emailLog, create: vi.fn(async () => ({ id: 1 })) };
   p.gapAuditEvent.findFirst = vi.fn(async (args: any) => findFirstFrom(d.audit, args));
   return p;
 }
