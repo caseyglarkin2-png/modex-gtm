@@ -25,7 +25,8 @@ import {
   stripCitationMarkers,
   unrenderedPlaceholder,
 } from '@/lib/gap/sequence/render';
-import { renderSeedPlaceholders } from '@/lib/gap/sequences/families';
+import { renderSeedPlaceholders, SEED_PROGRAM } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 import { STATUS } from '@/lib/queue/types';
 import { scheduleNextStep, sequenceStepIdempotencyKey } from '@/lib/queue/sequence-runtime';
 
@@ -731,5 +732,29 @@ describe('scheduleNextStep placeholder rendering (S3-T12)', () => {
 describe('STATUS import sanity', () => {
   it('created rows are approved', () => {
     expect(STATUS.approved).toBe('approved');
+  });
+});
+
+describe('Release C re-review S5: the runtime never schedules retired seed copy', () => {
+  it('a run pinned to a seed-program version whose steps are not the current seed schedules NOTHING (schedule.skipped copy_version_outdated)', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.draftQueueItem.findMany.mockResolvedValue([{ body: 'orig body' }]);
+    const base = enrollmentWithHypothesis();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue({ ...base, version: { ...base.version, family: { name: LEGACY_HC.name, program: SEED_PROGRAM } } });
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }), { now: () => new Date('2026-06-01T15:00:00.000Z') });
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(mockedCompile).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create.mock.calls[0][0].data.payload).toMatchObject({ reason: 'copy_version_outdated', runId: 'run-abc' });
+  });
+
+  it('control: the same version outside the seed program schedules normally', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.draftQueueItem.findMany.mockResolvedValue([{ body: 'orig body' }]);
+    const base = enrollmentWithHypothesis();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue({ ...base, version: { ...base.version, family: { name: 'Operator family', program: 'top100-2026-09-12' } } });
+    expect(await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }), { now: () => new Date('2026-06-01T15:00:00.000Z') })).toBe(201);
   });
 });

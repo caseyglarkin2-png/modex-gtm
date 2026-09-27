@@ -133,6 +133,7 @@ export { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signal
 import { parseSteps } from '@/lib/gap/sequence/steps';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
+import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import type { QueueAddInput } from '@/lib/validations';
@@ -240,6 +241,7 @@ export type EnrollServiceRefusal =
   | 'persona_not_found'
   | 'no_email'
   | 'gap_history_exists'
+  | 'account_replied'
   | 'account_mismatch'
   | 'decision_persona_mismatch'
   | 'active_opportunity'
@@ -684,6 +686,15 @@ export async function enrollFromDecision(
     return refuse('gap_history_exists', {
       detail: `${history.sent.length} sent, ${history.unresolvedClaims.length} open claim(s), ${outstanding} outstanding draft(s) for this person`,
     });
+  }
+
+  // Release C re-review S7: a live enrollment queues a step 0 like the send
+  // gate does, so the same account-reply hold applies (shadow writes nothing).
+  if (input.mode === 'live') {
+    const replied = await accountRepliedRecently(prisma, email, input.now);
+    if (replied) {
+      return refuse('account_replied', { detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}; read and disposition it first` });
+    }
   }
 
   // SHOULD FIX (Opus adversarial review, 2026-09-24): hypothesisId and

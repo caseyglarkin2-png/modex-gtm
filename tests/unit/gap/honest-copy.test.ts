@@ -11,7 +11,7 @@ import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
 import { renderStepCopy } from '@/lib/gap/sequence/render';
 import { citedQuote, sourceLabel } from '@/lib/gap/research/propose';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
-import { outreachEvidence, sendableEvidence } from '@/lib/gap/research/evidence-gate';
+import { hypothesisSendable, outreachEvidence, sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { checkWordCount } from '@/lib/gap/compiler/checks/c07-structure';
 
 const GIANT_EAGLE =
@@ -141,7 +141,8 @@ describe('red team T7: the honest first touch fits the compiler (C07) for every 
     for (const fam of SEED_FAMILIES) {
       const step = fam.steps.steps[0].templates!;
       const r = renderStepCopy({ subject: step.subjectTemplate ?? '', body: step.bodyTemplate ?? '' }, { observation: OBSERVATION, firstName: 'Joey', account: 'Kroger' } as never);
-      const c = checkWordCount({ subject: r.marked.subject, body: r.marked.body } as never, { stepIndex: 0, contract: null, priorStepBodies: [] } as never);
+      const evidence = [{ id: 'sig-ge', title: 'KROGER CO 10-Q (filed 2026-09-18)', url: null, externalOk: true, fresh: true, superseded: false, firstParty: false, excerpt: GIANT_EAGLE }];
+      const c = checkWordCount({ subject: r.marked.subject, body: r.marked.body } as never, { stepIndex: 0, evidence, contract: null, priorStepBodies: [] } as never);
       expect(c.passed, `${fam.key}: ${c.detail}`).toBe(true);
     }
   });
@@ -171,5 +172,22 @@ describe('red team T7: the numbers in a verified quote are covered by C01', () =
       const c = checkObservationUnsupported({ subject: r.marked.subject, body: r.marked.body } as never, { stepIndex: 0, hypothesis: { observation: OBSERVATION, problemHypothesis: 'p', problemFamily: fam.problemFamily }, evidence: refs, contract: null, priorStepBodies: [] });
       expect(c.passed, `${fam.key}: ${c.detail}`).toBe(true);
     }
+  });
+});
+
+describe('Release C re-review S8: an expired fact never opens a call', () => {
+  const sig = { id: 'sig-ge', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: GIANT_EAGLE, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: true, metadata: { verified: 'excerpt_found_at_source' } };
+  const now = new Date('2026-09-27T00:00:00Z');
+  it('the call-pack gate uses live signals only', () => {
+    expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: null } }] }, now)).toBe(true);
+    expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: new Date('2026-12-01T00:00:00Z') } }] }, now)).toBe(true);
+    expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: new Date('2026-09-20T00:00:00Z') } }] }, now)).toBe(false);
+  });
+
+  it('the action pack view builds its call script through that gate', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
+    expect(src).toContain('hypothesisSendable(hypothesis, new Date())');
+    expect(src).not.toMatch(/sendableEvidence\(/);
   });
 });

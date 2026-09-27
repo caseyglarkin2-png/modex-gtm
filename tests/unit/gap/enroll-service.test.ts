@@ -113,7 +113,7 @@ function snapshot(overrides: Record<string, unknown> = {}) {
 }
 
 function makePrisma(
-  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[] } = {},
+  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[]; inbound?: any[]; readInbound?: string[] } = {},
 ) {
   const p = {
     // B6 (Opus adversarial review, 2026-09-24): the active-opportunity guard.
@@ -124,7 +124,10 @@ function makePrisma(
     },
     conversationDisposition: {
       findFirst: asyncSpy(async () => (opts.lastDisposition === undefined ? null : opts.lastDisposition)),
+      // Release C re-review S7: human dispositions on inbound messages clear the account-reply hold.
+      findMany: asyncSpy(async () => (opts.readInbound ?? []).map((source_id) => ({ source_id }))),
     },
+    inboundMessage: { findMany: asyncSpy(async () => opts.inbound ?? []) },
     sequenceVersion: {
       findUnique: asyncSpy(async () =>
         opts.version === undefined ? { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: STEPS } : opts.version,
@@ -1280,5 +1283,32 @@ describe('modex_queue', () => {
     });
     const r = await enrollFromDecision(prisma, input({ mode: 'shadow' }), deps());
     expect(r).toEqual({ ok: false, reason: 'step_has_no_copy:0' });
+  });
+});
+
+describe('Release C re-review S7: the account-reply hold at live enrollment', () => {
+  const colleague = { id: 'in-1', from_email: 'pat.lee@acme-logistics.com', subject: 'Re: gate roles', received_at: new Date(NOW.getTime() - 2 * 86_400_000) };
+
+  it('live enrollment is refused account_replied while a colleague reply is unread; nothing is queued', async () => {
+    const prisma = makePrisma({ inbound: [colleague] });
+    const d = deps();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), d);
+    expect(r).toMatchObject({ ok: false, reason: 'account_replied' });
+    expect(d.addOne).not.toHaveBeenCalled();
+  });
+
+  it('a human disposition on that message clears the hold', async () => {
+    const r = await enrollFromDecision(makePrisma({ inbound: [colleague], readInbound: ['in-1'] }), input({ mode: 'live' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  it('shadow writes nothing and is not held', async () => {
+    const r = await enrollFromDecision(makePrisma({ inbound: [colleague] }), input({ mode: 'shadow' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  it('a localized out-of-office from the account does not hold anyone', async () => {
+    const r = await enrollFromDecision(makePrisma({ inbound: [{ ...colleague, subject: 'Abwesenheitsnotiz: Re: gate roles' }] }), input({ mode: 'live' }), deps());
+    expect(r.ok).toBe(true);
   });
 });

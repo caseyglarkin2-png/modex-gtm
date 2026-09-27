@@ -20,6 +20,7 @@ import { validateClaimsUsed } from '../gap/claims/validate-claims';
 import { compile, type CompileDeps } from '../gap/compiler/compile';
 import { makeCriticClient, type CriticClient } from '../gap/critic-client';
 import { sendableEvidence } from '../gap/research/evidence-gate';
+import { seedCopyOutdated } from '../gap/sequences/seed-drift';
 
 /** GAP OS (S3-T5): the deterministic idempotency key the schema comment on
  *  DraftQueueItem promises (`owner:to_email:run:step`). Used under the flag
@@ -70,6 +71,8 @@ interface RunContext {
   signals: EvidenceSignalRow[];
   /** The pinned version's raw steps (steps.v2), read with the enrollment so no second version read is needed. */
   versionSteps: unknown;
+  /** The pinned version's family, for the retired-seed-copy guard. */
+  versionFamily: { name: string | null; program: string | null } | null;
 }
 
 /** The run's enrollment and its hypothesis (observation, linked signals) for the slot render and the per-item compile. Flag-on only. */
@@ -79,7 +82,7 @@ async function loadRunContext(prisma: any, runId: string | null | undefined): Pr
     where: { id: runId },
     select: {
       hypothesis_id: true,
-      version: { select: { steps: true } },
+      version: { select: { steps: true, family: { select: { name: true, program: true } } } },
       hypothesis: {
         select: {
           account_name: true,
@@ -102,6 +105,7 @@ async function loadRunContext(prisma: any, runId: string | null | undefined): Pr
     problemFamily: typeof h?.problem_family === 'string' ? h.problem_family : 'unmapped',
     signals: links.map((l) => l.signal).filter((x): x is EvidenceSignalRow => !!x),
     versionSteps: row.version?.steps ?? null,
+    versionFamily: row.version?.family ?? null,
   };
 }
 
@@ -276,6 +280,19 @@ export async function scheduleNextStep(prisma: any, item: any, opts: ScheduleOpt
         });
         return null;
       }
+    }
+    // Release C re-review S5: a run pinned to a seed version still carrying the
+    // retired fixture copy schedules nothing (the same rule as the send gate
+    // and enrollment); frozen versions are never rewritten in place.
+    if (run && run.versionSteps !== null && seedCopyOutdated({ steps: run.versionSteps, family: run.versionFamily })) {
+      await audit(prisma, {
+        kind: SCHEDULE_SKIPPED_KIND,
+        actor: RUNTIME_ACTOR,
+        subjectType: 'draft_queue_item',
+        subjectId: String(item.id),
+        payload: { reason: 'copy_version_outdated', runId: item.sequence_run_id ?? null, stepIndex: item.step_index, toEmail: item.to_email },
+      });
+      return null;
     }
     const rendered = renderStepCopy(
       { subject, body },

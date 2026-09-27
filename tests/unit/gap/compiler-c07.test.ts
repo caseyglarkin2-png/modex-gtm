@@ -76,13 +76,26 @@ describe('C07 WORD_COUNT', () => {
 
   it('red team T7: a verbatim quote that is CITED is the source speaking and is not counted; an uncited quote is', () => {
     const prose = bodyOfWords(50);
-    const quote = `"${bodyOfWords(40).replace(/\s+/g, ' ').trim()}"`;
+    const quoteText = bodyOfWords(40).replace(/\s+/g, ' ').trim();
+    const quote = `"${quoteText}"`;
+    const withExcerpt = (excerpt: string): CompileContext => ({ ...ctxAt(0), evidence: [{ id: 'sig_1', title: 't', url: null, externalOk: true, fresh: true, superseded: false, firstParty: false, excerpt }] });
     const cited = `From Acme's 10-Q filed September 18: ${quote} [[SRC:sig_1]].\n\n${prose}`;
-    const r = checkWordCount(draft(cited), ctxAt(0));
+    const r = checkWordCount(draft(cited), withExcerpt(`Earlier text. ${quoteText}. Later text.`));
     expect(r.passed).toBe(true);
     expect(r.detail).toMatch(/^\d+ words \(plus \d+ quoted from a cited source\), within 45\.\.80 for step 0$/);
     const uncited = `From Acme's 10-Q filed September 18: ${quote}.\n\n${prose}`;
-    expect(checkWordCount(draft(uncited), ctxAt(0)).passed).toBe(false);
+    expect(checkWordCount(draft(uncited), withExcerpt(quoteText)).passed).toBe(false);
+    // Release C re-review S6: a cited quote that is NOT the source's excerpt is our prose, and counts.
+    expect(checkWordCount(draft(cited), withExcerpt('Something the filing actually said about a new distribution center.')).passed).toBe(false);
+    expect(checkWordCount(draft(cited), ctxAt(0)).passed).toBe(false);
+  });
+
+  it('re-review S6: at most 60 quoted words are set aside; the rest count', () => {
+    const quoteText = Array.from({ length: 70 }, (_, i) => `word${i}`).join(' ');
+    const ctx: CompileContext = { ...ctxAt(0), evidence: [{ id: 'sig_1', title: 't', url: null, externalOk: true, fresh: true, superseded: false, firstParty: false, excerpt: quoteText }] };
+    const body = `Hi Kara,\n\nFrom the 10-Q: "${quoteText}" [[SRC:sig_1]].\n\n${bodyOfWords(50)}\n\n${SIGN}`;
+    // A single 70-word quote is over the cap, so it is counted in full.
+    expect(checkWordCount(draft(body), ctx).detail).not.toContain('quoted from a cited source');
   });
 
   it('uses 40..100 after step 0: 90 words fails step 0 and passes step 2', () => {
@@ -126,9 +139,12 @@ ${SIGN}`;
     const quote = '"Acme will open a new distribution center in Columbus with 40 dock doors, cutting detention and carrier accessorial charges at the dock."';
     const prose = 'When a network grows by acquisition, each acquired site usually keeps its own gate process, and the network cannot see its yards the same way from one site to the next.';
     const cited = `Hi Kara,\n\nFrom Acme's 8-K filed September 18: ${quote} [[SRC:ev_1]].\n\n${prose}\n\nIs that something your team is working through?\n\n${SIGN}`;
-    expect(checkOneProblem(draft(cited), ctxAt(0)).passed).toBe(true);
+    const ctx: CompileContext = { ...ctxAt(0), evidence: [{ id: 'ev_1', title: '8-K', url: null, externalOk: true, fresh: true, superseded: false, firstParty: false, excerpt: quote.slice(1, -1) }] };
+    expect(checkOneProblem(draft(cited), ctx).passed).toBe(true);
     const uncited = cited.replace(' [[SRC:ev_1]]', '');
-    expect(checkOneProblem(draft(uncited), ctxAt(0)).passed).toBe(false);
+    expect(checkOneProblem(draft(uncited), ctx).passed).toBe(false);
+    // Re-review S6: the same quote cited against a ref whose excerpt differs is judged as our prose.
+    expect(checkOneProblem(draft(cited), ctxAt(0)).passed).toBe(false);
   });
 
   it('passes a single-family body and names the family', () => {

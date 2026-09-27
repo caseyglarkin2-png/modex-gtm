@@ -130,3 +130,18 @@ export const GATE_SIGNAL_SELECT = {
   external_ok: true,
   metadata: true,
 } as const;
+
+/**
+ * The send decision for a loaded hypothesis row (`signals: [{ signal }]`),
+ * with only LIVE signals considered (Release C re-review S8): an expired fact
+ * never makes a hypothesis sendable, and is never read aloud as an opener.
+ */
+export function hypothesisSendable(
+  h: { observation?: string | null; account_name: string; signals?: ReadonlyArray<{ signal?: (GateSignal & { freshness_expires_at?: Date | string | null }) | null }> | null },
+  now: Date,
+): boolean {
+  const live = (h.signals ?? [])
+    .map((l) => l.signal)
+    .filter((s): s is GateSignal & { freshness_expires_at?: Date | string | null } => !!s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > now.getTime()));
+  return sendableEvidence(h.observation, live, h.account_name).tier === 'VERIFIED_FACT';
+}

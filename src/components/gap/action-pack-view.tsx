@@ -28,7 +28,7 @@ import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch
 import { telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
-import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
+import { hypothesisSendable } from '@/lib/gap/research/evidence-gate';
 import { asStringList, humanWhyNow } from '@/lib/gap/ui/format';
 import { Badge } from '@/components/ui/badge';
 import { CopyButton } from './copy-button';
@@ -137,8 +137,9 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
 
   // Red team T6/T7: a call script exists only for a hypothesis resting on a
   // verified outreach fact; a keyword hit is never read aloud as a fact.
-  const gateSignals = Array.isArray(hypothesis.signals) ? hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
-  const verifiedFact = sendableEvidence(hypothesis.observation, gateSignals, hypothesis.account_name).tier === 'VERIFIED_FACT';
+  // Release C re-review S8: only LIVE facts, like every other gate; an expired
+  // fact is never read aloud as a cold opener.
+  const verifiedFact = hypothesisSendable(hypothesis, new Date());
   const callPack =
     persona && renderedEmail && verifiedFact
       ? buildCallPack({
