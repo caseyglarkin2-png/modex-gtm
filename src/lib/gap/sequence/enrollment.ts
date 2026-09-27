@@ -51,6 +51,7 @@ import { freezeVersionForEnrollment } from '@/lib/gap/sequence/version';
 import { LIVE_ENROLLMENT_STATUSES } from '@/lib/gap/sequence/family';
 import { STOP_REASONS, type StopReason } from '@/lib/gap/taxonomy';
 import { stopRun } from '@/lib/queue/sequence-runtime';
+import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
 
 export const TERMINAL_STATUSES = ['stopped', 'completed'] as const;
 export const HYPOTHESIS_READY_STATUSES = ['approved', 'active'] as const;
@@ -81,7 +82,7 @@ export interface SuppressionOptions {
 export type SuppressionCheck = { ok: true } | { ok: false; reason: 'suppressed' | 'suppression_unknown'; leg: SuppressionLeg };
 
 /** The persona email statuses that count as bounced (the same set routing/rules.ts uses for emailUsable). */
-export const BOUNCED_EMAIL_STATUSES: ReadonlySet<string> = new Set(['bounced', 'hard_bounced']);
+export const BOUNCED_EMAIL_STATUSES: ReadonlySet<string> = HARD_BOUNCE_STATUSES;
 
 /** Pure: the first leg that fires, or null. */
 export function suppressionLegFor(input: { unsubscribed: boolean; doNotContact: boolean; emailStatus: string | null | undefined }): SuppressionLeg | null {

@@ -156,3 +156,31 @@ describe('SEND FROM YARDFLOW anchors the multi-touch loop', async () => {
     expect(await computeNextTouch(withDirect({ inbound: 'Re: Doors versus spots' }), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason: 'replied' });
   });
 });
+
+describe('T9: a reply from someone else at the account stops the sequence', () => {
+  it('a colleague writing into the GAP thread (not our mailbox, not auto) stops it', async () => {
+    const p = ledger([0]);
+    const thread = [{ id: 'x', labelIds: ['INBOX'], internalDate: new Date('2026-09-26T10:00:00Z'), to: 'casey@yardflow.ai', from: 'Pat Lee <pat.lee@kroger.com>', subject: 'Re: Doors versus spots' }];
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: async () => thread });
+    expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
+    expect(t.state === 'stopped' && t.detail).toContain('pat.lee@kroger.com');
+  });
+
+  it('our own mailbox and a bounce notice in the thread do not stop it', async () => {
+    const p = ledger([0]);
+    const thread = [
+      { id: 'o', labelIds: ['INBOX'], internalDate: new Date('2026-09-26T10:00:00Z'), to: 'x', from: 'Casey Larkin <casey@yardflow.ai>', subject: 'fwd' },
+      { id: 'd', labelIds: ['INBOX'], internalDate: new Date('2026-09-26T11:00:00Z'), to: 'x', from: 'Mail Delivery Subsystem <mailer-daemon@googlemail.com>', subject: 'Delivery Status Notification (Failure)' },
+    ];
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: async () => thread });
+    expect(t).toMatchObject({ state: 'waiting' });
+  });
+
+  it('a stored human reply from the account domain after the first send stops it; a consumer domain never does', async () => {
+    const p: any = ledger([0]);
+    p.inboundMessage.findFirst = vi.fn(async ({ where }: any) => (where.from_email.endsWith === '@kroger.com' ? { subject: 'Saw your note to Joey', from_email: 'pat.lee@kroger.com' } : null));
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
+    expect(t.state === 'stopped' && t.detail).toContain('kroger.com');
+  });
+});

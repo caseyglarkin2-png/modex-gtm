@@ -15,10 +15,11 @@ export const maxDuration = 300;
 
 const CRON_NAME = 'gap-hubspot-replies';
 const CRON_PATH = '/api/cron/gap-hubspot-replies';
-// Not in vercel.json until the Sprint 2 review. Manual trigger only for any
-// holder of CRON_SECRET; the string mirrors cron-monitor's convention for
-// routes that exist but are not scheduled.
-const CRON_SCHEDULE = 'unregistered (manual only)';
+// Scheduled daily in apply mode since red team T9 (vercel.json carries
+// ?mode=apply). The GAP mailbox intake (/api/cron/gap-mailbox, every 10
+// minutes) is the primary reply path for casey@yardflow.ai; this reads replies
+// HubSpot logged from anywhere else, keyed on hs_createdate.
+const CRON_SCHEDULE = '45 12 * * *';
 
 const MAX_LIMIT = 500;
 

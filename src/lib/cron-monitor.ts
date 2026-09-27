@@ -66,7 +66,10 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   // gap-enrollment-sync: reads HubSpot sequence enrollment truth back into the local enrollment rows (read-only against HubSpot).
   { name: 'gap-enrollment-sync', label: 'GAP Enrollment Sync', path: '/api/cron/gap-enrollment-sync', schedule: 'unregistered (manual only)' },
   // gap-hubspot-replies: polls HubSpot INCOMING_EMAIL engagements into InboundMessage with source hubspot (read-only against HubSpot).
-  { name: 'gap-hubspot-replies', label: 'GAP HubSpot Replies', path: '/api/cron/gap-hubspot-replies', schedule: 'unregistered (manual only)' },
+  // Scheduled since red team T9 (daily, apply; watermark on hs_createdate).
+  { name: 'gap-hubspot-replies', label: 'GAP HubSpot Replies', path: '/api/cron/gap-hubspot-replies', schedule: '45 12 * * *' },
+  // gap-mailbox (red team T9): reads casey@yardflow.ai for replies and bounces to GAP sends (read-only against Gmail).
+  { name: 'gap-mailbox', label: 'GAP Mailbox Intake', path: '/api/cron/gap-mailbox', schedule: '*/10 * * * *' },
 ];
 
 function cronKey(name: string) {

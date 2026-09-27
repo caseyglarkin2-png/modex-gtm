@@ -81,8 +81,15 @@ export interface HubSpotEmailEngagement {
   subject?: string | null;
   text?: string | null;
   html?: string | null;
-  /** hs_timestamp */
+  /** hs_timestamp: when the email happened (the InboundMessage received_at). */
   timestamp: Date;
+  /**
+   * hs_createdate: when HubSpot RECORDED it (red team T9). The watermark keys
+   * on this: a connected inbox can log a reply long after it was sent, and a
+   * watermark on hs_timestamp would have passed it forever. Absent on a row
+   * HubSpot returned without it: the event time stands in.
+   */
+  createdAt?: Date;
 }
 
 export interface PollOptions {
@@ -227,7 +234,8 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
   let newest: Date | null = null;
 
   for (const engagement of engagements) {
-    if (!newest || engagement.timestamp > newest) newest = engagement.timestamp;
+    const recordedAt = engagement.createdAt ?? engagement.timestamp;
+    if (!newest || recordedAt > newest) newest = recordedAt;
 
     const messageId = messageIdFor(engagement.id);
 
@@ -403,8 +411,9 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     const newestMs = newest.getTime();
     let boundary: Date | null = null;
     for (let i = engagements.length - 1; i >= 0; i -= 1) {
-      if (engagements[i].timestamp.getTime() !== newestMs) {
-        boundary = engagements[i].timestamp;
+      const recordedAt = engagements[i].createdAt ?? engagements[i].timestamp;
+      if (recordedAt.getTime() !== newestMs) {
+        boundary = recordedAt;
         break;
       }
     }
@@ -456,6 +465,7 @@ export interface EmailsSearchClient {
 
 const SEARCH_PROPERTIES = [
   'hs_timestamp',
+  'hs_createdate',
   'hs_email_direction',
   'hs_email_from_email',
   'hs_email_sender_email',
@@ -507,12 +517,14 @@ export async function searchIncomingEmailsFromHubSpot(
             {
               filters: [
                 { propertyName: 'hs_email_direction', operator: 'EQ', value: 'INCOMING_EMAIL' },
-                { propertyName: 'hs_timestamp', operator: 'GTE', value: String(args.since.getTime()) },
+                // Red team T9: filter and sort on when HubSpot RECORDED the email, not
+                // when it happened, so a late-logged reply is never below the floor.
+                { propertyName: 'hs_createdate', operator: 'GTE', value: String(args.since.getTime()) },
               ],
             },
           ],
           properties: SEARCH_PROPERTIES,
-          sorts: [{ propertyName: 'hs_timestamp', direction: 'ASCENDING' }],
+          sorts: [{ propertyName: 'hs_createdate', direction: 'ASCENDING' }],
           limit: pageLimit,
           ...(after ? { after } : {}),
         }),
@@ -532,6 +544,7 @@ export async function searchIncomingEmailsFromHubSpot(
         text: props.hs_email_text ?? null,
         html: props.hs_email_html ?? null,
         timestamp,
+        createdAt: parseTimestamp(props.hs_createdate) ?? timestamp,
       });
       if (out.length >= args.limit) break;
     }

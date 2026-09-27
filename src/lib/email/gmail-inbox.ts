@@ -504,3 +504,90 @@ export async function getGmailMessageHeaders(messageId: string, sender?: GmailSe
     return null;
   }
 }
+
+// ---------------------------------------------------------------------------
+// The GAP mailbox (red team T9): read EVERY recent inbox message of one
+// delegated mailbox (casey@yardflow.ai), read or unread, with its labels, its
+// full text and any delivery-status report, so replies AND bounces to GAP
+// sends are consumed as execution feedback. Read-only: nothing is marked,
+// labeled or moved.
+// ---------------------------------------------------------------------------
+
+export interface MailboxMessage {
+  id: string;
+  threadId: string;
+  rfcMessageId: string | null;
+  fromEmail: string;
+  fromName: string;
+  subject: string;
+  snippet: string;
+  /** The plain body with quoted history stripped (what the buyer typed). */
+  bodyText: string;
+  /** The plain body as sent, quoted history included (DSN bodies carry the failed address here). */
+  rawText: string;
+  bodyHtml: string;
+  /** The `message/delivery-status` part of a DSN, decoded, or null. */
+  deliveryStatus: string | null;
+  labelIds: string[];
+  receivedAt: Date;
+  headers: Record<string, string>;
+}
+
+function extractDeliveryStatus(part: GmailMessagePart | undefined): string | null {
+  let found: string | null = null;
+  const walk = (node?: GmailMessagePart) => {
+    if (!node || found !== null) return;
+    const mime = (node.mimeType ?? '').toLowerCase();
+    if (mime === 'message/delivery-status' && node.body?.data) found = decodeBase64Url(node.body.data);
+    node.parts?.forEach(walk);
+  };
+  walk(part);
+  return found;
+}
+
+/**
+ * Inbox messages of `sender`'s mailbox received after `afterEpoch` (seconds),
+ * newest pages first, up to `max`. Throws on a list failure (the caller must
+ * not advance its watermark on an unreadable mailbox).
+ */
+export async function listMailboxMessages(sender: GmailSender, afterEpoch: number, max = 200): Promise<MailboxMessage[]> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const ids: string[] = [];
+  let pageToken: string | undefined;
+  do {
+    const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
+    listUrl.searchParams.set('q', `in:inbox after:${afterEpoch}`);
+    listUrl.searchParams.set('maxResults', String(Math.min(100, max - ids.length)));
+    if (pageToken) listUrl.searchParams.set('pageToken', pageToken);
+    const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+    if (!res.ok) throw new Error(`Gmail mailbox list failed (${res.status})`);
+    const data = (await res.json()) as { messages?: GmailMessage[]; nextPageToken?: string };
+    for (const m of data.messages ?? []) ids.push(m.id);
+    pageToken = data.nextPageToken;
+  } while (pageToken && ids.length < max);
+
+  const out: MailboxMessage[] = [];
+  for (const id of ids) {
+    const detail = await getMessageDetail(accessToken, mailbox, id);
+    const from = getHeader(detail, 'From');
+    const { html, text } = extractBodies(detail.payload);
+    out.push({
+      id: detail.id,
+      threadId: detail.threadId,
+      rfcMessageId: getHeader(detail, 'Message-ID') || null,
+      fromEmail: extractEmail(from),
+      fromName: extractName(from),
+      subject: getHeader(detail, 'Subject'),
+      snippet: detail.snippet || '',
+      bodyText: stripQuotedReply(text),
+      rawText: text,
+      bodyHtml: html,
+      deliveryStatus: extractDeliveryStatus(detail.payload),
+      labelIds: detail.labelIds ?? [],
+      receivedAt: detail.internalDate ? new Date(parseInt(detail.internalDate, 10)) : new Date(),
+      headers: collectHeaders(detail),
+    });
+  }
+  return out;
+}

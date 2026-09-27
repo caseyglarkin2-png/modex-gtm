@@ -15,6 +15,7 @@ import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
 import type { RoutingAction, RoutingLane, ResponseClass } from '../taxonomy';
 import type { EnrollTarget, RoutingInputs, RoutingLastDisposition } from './types';
 import { classifySuppression, type SuppressionClassification } from '../suppression/provenance';
+import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
 
 export interface RoutingRule {
   id: string;
@@ -70,7 +71,8 @@ function withinDays(now: Date, at: Date | null | undefined, days: number): boole
 }
 
 const UNUSABLE_PHONE_STATUSES = new Set(['invalid', 'wrong', 'disconnected']);
-const BOUNCED_EMAIL_STATUSES = new Set(['bounced', 'hard_bounced']);
+// Red team T9: the one canonical set; the webhook and the GAP mailbox write 'hard_bounce'.
+const BOUNCED_EMAIL_STATUSES = HARD_BOUNCE_STATUSES;
 
 export function hasUsablePhone(i: RoutingInputs): boolean {
   const { phone, phoneStatus } = i.persona;

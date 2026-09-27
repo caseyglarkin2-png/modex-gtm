@@ -385,3 +385,54 @@ review, production verification.
   unit suite 460 files green.
 - production mutation: none.
 - next: T9.
+
+### T9 — GAP mailbox reply + bounce intake
+
+- status: IMPLEMENTED (Release C, not yet merged); production proof pending
+  deploy (internal test through casey@yardflow.ai)
+- files: `src/lib/gap/replies/gap-mailbox.ts` (new), `src/lib/gap/replies/domains.ts`
+  (new), `src/lib/email/bounce.ts` (new), `src/app/api/cron/gap-mailbox/route.ts`
+  (new), `src/lib/email/gmail-inbox.ts` (listMailboxMessages),
+  `src/lib/gap/execution/next-touch.ts`, `src/lib/gap/replies/hubspot-poller.ts`,
+  `src/app/api/cron/gap-hubspot-replies/route.ts`, `src/app/api/webhooks/hubspot/route.ts`,
+  `src/lib/gap/routing/rules.ts`, `src/lib/gap/sequence/enrollment.ts`,
+  `src/lib/cron-monitor.ts`, `vercel.json`; tests `gap-mailbox`, `gap-mailbox-route`,
+  `bounce-vocabulary`, `next-touch`, `hubspot-poller`, `schema-sprint2`
+- change:
+  - intake of GAP_GMAIL_USER_EMAIL (casey@yardflow.ai) through the existing
+    delegated Gmail credentials (gap-sender), read-only; cron
+    `/api/cron/gap-mailbox/?mode=apply` every 10 minutes (dry run without
+    the mode). Each inbox message (read or unread) is classified:
+    DSN hard (5.x.x) -> the canonical hard-bounce write; DSN soft ->
+    audited; human reply in a GAP thread or from the account domain after
+    the first send -> InboundMessage + EmailThread + reply notification +
+    ingestReply for the replier AND the GAP-emailed recipient; auto reply /
+    OOO -> audited only; unrelated -> ignored, not stored. Idempotent per
+    Gmail message id; watermark `gap_mailbox_watermark` with a 1h overlap;
+    an unreadable mailbox throws before the watermark moves.
+  - canonical bounce write `recordHardBounce` (hard_bounce + DNC, EmailLog
+    bounced, one notification per event), shared with the HubSpot webhook.
+    Vocabulary normalized: routing R4 and enrollment now recognise
+    `hard_bounce` (they only knew `bounced`/`hard_bounced`; a webhook bounce
+    was caught only via do_not_contact).
+  - next-touch stops on a non-automatic message in the GAP thread from anyone
+    but our own mailbox (a colleague), and on a stored human reply from the
+    account domain after the first send (consumer domains excluded).
+  - HubSpot reply poller: filter, sort and watermark on `hs_createdate`
+    (when HubSpot recorded the email), not `hs_timestamp`, so a late-logged
+    reply is never below the floor; scheduled daily
+    (`/api/cron/gap-hubspot-replies/?mode=apply`, 12:45 UTC), keeping its
+    tested per-day claim. The Gmail intake is the primary reply path.
+- tests: DSN parse (hard, soft, none); hard DSN -> canonical truth, never a
+  reply; OOO audited only; direct reply -> InboundMessage + pause;
+  colleague in thread pauses the emailed person too; account-domain reply
+  attributed; unrelated ignored and not stored; duplicate poll once;
+  watermark + overlap; unreadable mailbox holds the watermark; own copies
+  ignored; consumer domain not attributed; next-touch colleague + domain
+  stops, own mailbox and DSN in thread do not; late-logged HubSpot
+  engagement moves the watermark by record time; route auth / flags /
+  dry-run / apply; bounce vocabulary across readers. Mutations (DSN
+  detection off; domain stop off; watermark back to event time;
+  vocabulary): RED; restored GREEN. Full unit suite 463 files green.
+- production mutation: none yet (schedules take effect on deploy).
+- next: Release C gate.

@@ -42,6 +42,14 @@
     {
       "path": "/api/cron/refresh-intel/",
       "schedule": "0 13 * * 1"
+    },
+    {
+      "path": "/api/cron/gap-mailbox/?mode=apply",
+      "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/cron/gap-hubspot-replies/?mode=apply",
+      "schedule": "45 12 * * *"
     }
   ]
 }
