@@ -3,7 +3,7 @@
  * routing runs on a schedule. A card minted before the person moved must not
  * draft or send a cold first touch that ignores what happened since.
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { createSellerGmailDraft } from '@/lib/gap/execution/seller-draft';
 import { NOW, db, prismaOf, baseDeps, type Db } from './fixtures/seller-db';
 
@@ -49,5 +49,20 @@ describe('ops closeout 14: the send gate reads the canonical bounce vocabulary',
     d.personas.find((p) => p.id === 1886).email_status = status;
     const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
     expect(r).toMatchObject({ ok: false, reason: 'email_bounced' });
+  });
+});
+
+describe('ops closeout 15: a Gmail draft reads the live-conversation guard too', () => {
+  it('an active opportunity (open deal, booked meeting, recent positive reply) refuses the DRAFT, not only the send', async () => {
+    const d = db();
+    const activeOpportunity = vi.fn(async () => true);
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity });
+    expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
+    expect(activeOpportunity).toHaveBeenCalledWith(expect.anything(), 'Kroger', JOEY, NOW);
+  });
+
+  it('no live conversation: the draft proceeds', async () => {
+    const d = db();
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity: async () => false })).toMatchObject({ ok: true });
   });
 });

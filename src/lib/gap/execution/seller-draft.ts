@@ -344,7 +344,9 @@ export async function prepareSellerEmail(
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_stale', detail: `${moved} Wait for the next routing run before a first touch.` });
     }
   }
-  if (mode === 'send') {
+  // Ops closeout 15: a draft is not harmless (it is stale outbound one click from
+  // sending), so draft and send read the same live-conversation guard.
+  {
     const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
     if (opportunity) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'active_opportunity', detail: 'An open deal, a booked meeting or a recent positive reply: someone is already in conversation here.' });
