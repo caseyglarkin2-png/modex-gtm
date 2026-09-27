@@ -611,3 +611,113 @@ until T2, T3, T5 and T9 are complete and verified".
   one active hypothesis, Kroger / Giant Eagle; Joey Maggard's step 0 is
   already sent and is refused again).
 - next: T10 (Release D, branch `feat/gap-redteam-release-d`).
+
+### T10 — honest Learning
+
+- status: IMPLEMENTED (Release D, branch `feat/gap-redteam-release-d`, not yet
+  merged)
+- commits: `5f73e6f8` (execution learning, stats, tier stamp), `f2fba2e9`
+  (agreement + G1), `14d5b48b` (Learning page), `3d7d0b22` (queue sends,
+  enrollment evidence)
+- files: `src/lib/gap/learning/stats.ts` (new), `src/lib/gap/learning/execution.ts`
+  (new), `learning/query.ts`, `learning/metrics.ts`, `routing/agreement.ts`,
+  `routing/agreement-query.ts`, `automation/gates.ts`,
+  `execution/{draft-ledger,seller-send,seller-draft,manual-send}.ts`,
+  `app/gap/learning/{learning-dashboard,page}.tsx`; tests
+  `learning-execution` (new), `routing-agreement`, `routing-agreement-query`,
+  `gates`, `learning-dashboard`, `learning-query`, `seller-send`,
+  `manual-send`; E2E `runtime`, `finish-rc` agreement steps.
+- change:
+  - denominator = people actually sent to: the GAP send ledger
+    (MANUAL_SENT, DIRECT_SENT, DRAFT_SENT) plus the modex queue's sent items
+    of a live, non-test GAP enrollment; one person per address; unsent
+    drafts and internal recipients excluded. Never replies, cards or clicks.
+  - primary metrics, per person sent to: reply / send, meeting / send, truth
+    yield (sent hypothesis reached confirmed, partially confirmed or
+    rejected), problem acknowledgement / send, root cause / send. Each
+    outcome strictly after the person's first send, from confirmed human
+    truth (an unconfirmed AI suggestion is never an outcome; an OOO subject
+    or an earlier message is never a reply; a colleague's reply the GAP
+    mailbox attributed to the person counts).
+  - attribution: each person's FIRST send record (sequence version, copy
+    hash, sender, engine, evidence tier). The send paths now stamp
+    `evidenceTier` (VERIFIED_FACT through the gate; a recorded manual send
+    stamps the hypothesis tier at record time); older rows read
+    `unrecorded`. A person reached through several cards is one person.
+    Date filters select people by first send (a cohort).
+  - agreement: "emailed" agrees only with a send on record for the card or
+    the person between this card and the next; "enrolled_by_hand" with a
+    live, non-test enrollment in that window (or a send); an executed
+    recommendation agrees without a click; a superseded card, or one older
+    than 7 days, with no action is `unacted` and stays in the denominator;
+    only the newest fresh card is pending. Labeled "conformity, not sales
+    quality".
+  - G1: also needs 100 people sent to and a reply / send Wilson lower bound
+    of 2% (session-chosen floors, for the owner to confirm); agreement alone
+    never earns it. evaluateGates has no production caller (no gate is
+    evaluated live; auto-enroll stays off).
+  - statistics: Wilson 95% intervals; below n = 20 a proportion shows as
+    "k/n, early observation" with no percentage (4/5 is not 80%); 0/0 is
+    "no data yet". Applied to every Learning tile and table, legacy funnel
+    included.
+- tests: the six required proofs (direct send on enroll-style card = agreement;
+  emailed without execution = not agreement; 4/5 insufficient; reply/send
+  over actual sends; attribution across cards; no metric improves because
+  cards disappeared, including an execution-learning path that throws if it
+  ever reads a routing decision), plus queue sends, test enrollments, G1 on
+  conformity alone, Wilson values. Mutations (13): unsent draft counted,
+  internal recipient, first-send attribution, reply timing/auto, confirmed
+  dispositions only, email needs execution, unacted counted,
+  supersession/expiry, small-N suppression, G1 outcome, manual tier stamp,
+  test-enrollment skip, enrollment never proves emailed: each RED; restored
+  GREEN.
+- gates so far: full unit suite 466 files / 5042 tests green; typecheck
+  green; local build green; scratch E2Es 10/10;
+  github_actions = unavailable_external_billing.
+- production mutation: none.
+- next: Release D read-only review (data scientist + reliability engineer).
+
+### Release D gate — read-only review (data scientist + reliability engineer)
+
+Mission: make every displayed GAP metric improve while selling quality
+worsens. 2 BLOCKER, 9 SHOULD-FIX, 5 NOTE. All BLOCKER and SHOULD-FIX fixed,
+each mutation-proven (16 mutations, each RED, restored GREEN):
+
+- B1: a reply the GAP mailbox attributed only by ACCOUNT DOMAIN marked every
+  person emailed at that domain "replied". Now only `gap_thread` /
+  `gap_recipient` verdicts count.
+- B2: signal yield showed unsuppressed percentages. Now honest cells.
+- S1: any later inbound from the address counted. A reply must now be in one
+  of the person's GAP threads, a tied mailbox verdict, or their own confirmed
+  email disposition on a hypothesis they were sent.
+- S2: truth counted withdrawals, ignored timing and multiplied one verdict
+  across people. Truth now needs THIS person's own confirmed resolving
+  disposition, inside the window, on a sent hypothesis that reached a buyer
+  verdict; root cause needs their own confirmed BID.
+- S3: meetings counted any meeting-channel row. Only `meeting_accepted` on a
+  sent hypothesis.
+- S4: no outcome window. Outcomes count within 30 days of the first send, and
+  rates are over people whose window has closed (the page says how many).
+- S5: agreement counted cards (run cadence moved it) and credited one send
+  twice; one Gmail message recorded under two cards was two sends.
+  Agreement is now over episodes (consecutive identical recommendations), each
+  send credits one card, sends dedupe on the Gmail message id, and a manual
+  send is recorded once globally.
+- S6: G1 could pass on clicks plus 5/100 replies of any kind. `buildG1Inputs`
+  takes conformity from the ENROLL recommendation only and the outcome from a
+  positive buyer signal (meeting or problem acknowledged, Wilson lower bound
+  >= 2%) with an opt-out ceiling (upper bound <= 5%); missing data fails.
+- S7: an enrollment executed a one-off email card, and HubSpot placeholder
+  enrollment dates counted. Both closed.
+- S8: manual sends are tiered at the Gmail send time and carry a content hash.
+- S9: recipient lookups are chunked `in` lists, no quadratic spreads, and a
+  failure of the execution section no longer breaks the Learning page.
+- NOTE fixes: a bare `to` date is inclusive of the whole day.
+- NOTE residuals (recorded): the legacy funnel is conditional on confirmed
+  dispositions (suppressed and secondary); HubSpot-native GAP sends are not in
+  the denominator (no send record exists for them); a person is keyed by
+  address (splits, never inflates); disposition time is record time.
+
+Found by the final integrated regression, fixed here: a keyword-only
+hypothesis in draft or review routed "approve_hypothesis", a card that could
+only fail at approval. R11 now yields to R12b: such a card is research.
