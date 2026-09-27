@@ -188,11 +188,31 @@ async function main(): Promise<number> {
       },
     });
 
+    // Red team T6 / Release C review: enrollment requires the observation to
+    // cite a live outreach fact (verified, dated, quoted, this account, a
+    // physical-network change), so A rests on one.
+    const factA = await prisma.prospectingSignal.create({
+      data: {
+        account_name: account,
+        source_kind: 'evidence_record',
+        source_id: `${tag}-factA`,
+        type: 'site_expansion',
+        title: `${account} 10-K (filed 2026-09-18)`,
+        source_type: 'public_primary',
+        evidence_url: `https://example.com/${tag}/10k`,
+        evidence_text: `${account} opened a new distribution center in Reno, Nevada with 30 dock doors.`,
+        external_ok: true,
+        observed_at: new Date(NOW.getTime() - 5 * 24 * 60 * 60 * 1000),
+        confidence: 80,
+        metadata: { verified: 'excerpt_found_at_source' },
+        registered_by: 'e2e',
+      },
+    });
     const hypA = await prisma.prospectingHypothesis.create({
       data: {
         account_name: account,
         problem_family: 'hidden_capacity',
-        observation: 'Fact. [S:x]',
+        observation: `From the 10-K: "${account} opened a new distribution center in Reno, Nevada with 30 dock doors" [S:${factA.id}].`,
         problem_hypothesis: 'Maybe.',
         root_cause_hypotheses: ['a'],
         impact_hypotheses: ['b'],
@@ -204,6 +224,7 @@ async function main(): Promise<number> {
       },
     });
     hypAId = hypA.id;
+    await prisma.hypothesisSignal.create({ data: { hypothesis_id: hypAId, signal_id: factA.id } });
 
     const signal = await prisma.prospectingSignal.create({
       data: {
@@ -241,7 +262,7 @@ async function main(): Promise<number> {
 
     pass(
       'seed',
-      `account, persona, family, 2 versions (A stale-compile, C expired-evidence), 2 compiles (A ~40h old, C fresh), 2 hypotheses (A no signals, C linked to an expired signal)`,
+      `account, persona, family, 2 versions (A stale-compile, C expired-evidence), 2 compiles (A ~40h old, C fresh), 2 hypotheses (A citing one verified fact, C linked to an expired signal)`,
     );
 
     const deps = { addOne: async () => ({ ok: true as const, id: 1 }), suppression: staticSuppressionReader('clear') };
@@ -306,10 +327,10 @@ async function cleanup(
   ids: { account: string; familyId: string; hypAId: string; hypCId: string; signalId: string },
 ): Promise<Record<string, number>> {
   const removed: Record<string, number> = {};
-  removed.hypothesis_signals = (await prisma.hypothesisSignal.deleteMany({ where: { hypothesis_id: ids.hypCId } })).count;
+  removed.hypothesis_signals = (await prisma.hypothesisSignal.deleteMany({ where: { hypothesis_id: { in: [ids.hypAId, ids.hypCId] } } })).count;
   removed.gap_compiles = (await prisma.gapCompile.deleteMany({ where: { sequence_version_id: { not: null }, version: { family_id: ids.familyId } } })).count;
   removed.prospecting_hypotheses = (await prisma.prospectingHypothesis.deleteMany({ where: { account_name: ids.account } })).count;
-  removed.prospecting_signals = (await prisma.prospectingSignal.deleteMany({ where: { id: ids.signalId } })).count;
+  removed.prospecting_signals = (await prisma.prospectingSignal.deleteMany({ where: { OR: [{ id: ids.signalId }, { account_name: ids.account }] } })).count;
   removed.sequence_versions = (await prisma.sequenceVersion.deleteMany({ where: { family_id: ids.familyId } })).count;
   removed.sequence_families = (await prisma.sequenceFamily.deleteMany({ where: { id: ids.familyId } })).count;
   removed.personas = (await prisma.persona.deleteMany({ where: { account_name: ids.account } })).count;

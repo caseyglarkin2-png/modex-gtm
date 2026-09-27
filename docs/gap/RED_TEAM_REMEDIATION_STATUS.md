@@ -436,3 +436,73 @@ review, production verification.
   vocabulary): RED; restored GREEN. Full unit suite 463 files green.
 - production mutation: none yet (schedules take effect on deploy).
 - next: Release C gate.
+
+### Release C gate — read-only reviews (methodology + RevOps/deliverability)
+
+Two fresh read-only reviewers (no edits). Every BLOCKER and SHOULD-FIX was
+fixed on the branch, each with a test that goes RED when the fix is mutated
+away, then restored GREEN.
+
+- methodology B1 (T6 bypass): enrollment and the sequence runtime skipped the
+  evidence gate. `enrollFromDecision` and `enroll()` refuse
+  `evidence_insufficient`; the runtime schedules nothing and audits
+  `schedule.skipped` `evidence_insufficient`. (`a9d0f537`)
+- methodology SF1: a fact linked beside a CITED keyword hit made the whole
+  hypothesis sendable. `sendableEvidence`: the observation cites at least
+  one signal and every cited signal is a live outreach fact. Used by
+  approve/activate, routing `evidenceThin`, the send gate, both enroll paths,
+  the runtime and the call pack. (`92d77df5`)
+- methodology B2 (T7 not live until the rewrite runs): `seedCopyOutdated`: a
+  seed-program version whose steps differ from the current seed refuses
+  `copy_version_outdated` at the send gate and the enroll service. (`fe38df2e`)
+- methodology SF2: inline call only on an actionable, non-research card, and
+  recorded against the card's own hypothesis (not whichever one the brief
+  picks). (`96a95add`)
+- methodology SF3/SF4: a cost or quantification question is never the
+  current-state question; filing titles read "From Kroger's 10-Q filed
+  September 18"; "That might not be true at {account}" replaces "That is a
+  pattern, not something I know about"; New Sites copy is plural. (`0c0b536e`)
+- methodology SF5: `isPhysicalOpsFact` false positives/negatives
+  (hypotheticals, contract language, non-physical networks/acquisitions;
+  a named site change is a fact). (`9e33420b`)
+- RevOps B1: a 5.7.x policy block (and a bare 550) wrote DNC. Only 5.1.x
+  (1, 2, 3, 6, 10) or an explicit unknown-user diagnostic is a bad address;
+  5.7/5.4/5.2/5.3/5.6 and 5.1.7/5.1.8 are `mailbox.policy_bounce`, audit only.
+- RevOps N1/N3: a notice with no recipient is an intake error; a bounce acts
+  only on an address GAP sent to (`mailbox.bounce_unattributed` otherwise).
+- RevOps S1: the lister returns the OLDEST of the window (a backlog drains
+  forward); a listing past 5000 ids is flagged and surfaced as an error.
+- RevOps S2: a failing message is retried, then quarantined after 3
+  attempts (`mailbox.quarantined`); any intake error marks the cron run
+  FAILED in cron-monitor.
+- RevOps S3: exact-sender attribution (`gap_recipient`) before the domain.
+- RevOps S4: unrelated mail younger than 24h holds the watermark, so a reply
+  that lands before its send is recorded is re-read, not lost.
+- RevOps S5: a human inbound from the account domain in the last 30 days
+  refuses a cold step 0 to anyone there (`account_replied`).
+- RevOps S6: localized OOO subjects and Exchange NDRs.
+- RevOps S7: `recordHardBounce` updates only the bounced send's EmailLog rows
+  (webhook: its engagement id; DSN: the send's thread ids); no scope, no
+  EmailLog write. (RevOps fixes: `b4d9232f`)
+- T9 production proof: `[gap-intake-canary]` messages from our own domains
+  become an InboundMessage + `mailbox.canary` audit and nothing else (no
+  pause, no bell, never a reply); an outside sender cannot trigger it.
+  (`0dfd4341`)
+- found by the E2E migration (real defects, fixed): with a verbatim 10-Q quote
+  every seed first touch ran 80-95 words against C07's 80 cap, C01 could not
+  see numbers inside the quote (evidence refs never carried the excerpt), two
+  quotes tripped C14 and a filing's own words counted as a second problem
+  family in C08. C07/C08 now judge our prose and skip a CITED verbatim quote;
+  evidence refs carry the quoted text; the builder and research propose quote
+  ONE fact (others stay linked). Every seed family with the real Kroger fact
+  passes C07 and C01. (`f24e410a`, `fe935200`)
+- E2E migration: every scratch script now seeds verified evidence records and
+  a one-fact observation; the multi-touch runtime mechanics (Sprint 3,
+  runtime, finish-rc) run on the pre-T7 four-step fixture since production
+  seeds are single-touch.
+- residual (recorded, not blocking): `other_account` compares the signal's
+  account, not the sentence's subject; the HubSpot `email.bounce` webhook
+  still treats every HubSpot bounce as hard (pre-existing; HubSpot's event
+  carries no status class in our schema); a reply seen by both the Gmail
+  intake and the HubSpot poller is two InboundMessage rows (T10 counts
+  replies by person and thread, not rows).

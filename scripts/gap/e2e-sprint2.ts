@@ -55,6 +55,7 @@ import {
   getHypothesis,
   linkSignals,
   listHypotheses,
+  proposeHypothesis,
   transitionHypothesis,
   unlinkSignal,
   type ServiceDeps,
@@ -73,6 +74,7 @@ import { staticSuppressionReader } from '../../src/lib/gap/routing/suppression-r
 import { enrollmentId, READBACK_PROPERTIES, runEnrollmentSync, type ReadContactsDeps } from '../../src/lib/gap/sequence/external-sync';
 import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { readManifest, readRoster } from '../../src/lib/gap/top100/reader';
 import { cancelDownstream } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
@@ -434,7 +436,49 @@ async function main(): Promise<number> {
     counts.hypothesizeSignalsCreated = run1.signals.created;
     counts.hypothesizeProposed = run1.proposed;
     expect('2 hypothesize', run1.signals.created >= 2, `signals.created=${run1.signals.created}, expected >= 2 (report ${JSON.stringify(run1)})`);
-    expect('2 hypothesize', run1.proposed >= 1, `proposed=${run1.proposed}, expected >= 1 (report ${JSON.stringify(run1)})`);
+    // Red team T6/T7: keyword triggers (nothing quoted) propose nothing; each
+    // persona's draft comes from a VERIFIED, dated, quoted fact instead.
+    expect('2 hypothesize', run1.proposed === 0, `proposed=${run1.proposed}, expected 0 from keyword triggers (report ${JSON.stringify(run1)})`);
+    const proposeFromVerifiedFact = async (personaId: number, persona: string, family: string, key: string, text: string) => {
+      const title = `${accountName} 10-Q (filed ${now.toISOString().slice(0, 10)})`;
+      const sig = await registerSignal(prisma, {
+        accountName,
+        hubspotCompanyId,
+        personaId,
+        sourceKind: 'evidence_record',
+        sourceId: `${tag}:${key}`,
+        type: 'site_expansion',
+        title,
+        sourceType: 'public_primary',
+        evidenceUrl: `https://example.com/${tag}/${key}`,
+        evidenceText: text,
+        externalOk: true,
+        observedAt: now,
+        confidence: 80,
+        metadata: { verified: 'excerpt_found_at_source' },
+        registeredBy: ACTOR,
+      });
+      const r = await proposeHypothesis(prisma, {
+        accountName,
+        primaryPersonaId: personaId,
+        persona,
+        problemFamily: family,
+        observation: citedQuote(title, text, sig.id),
+        problemHypothesis: 'My guess is that the change above moves the constraint to the yards, where trailers wait for a door or a move.',
+        rootCauseHypotheses: ['Trailer location is tracked on paper or radio'],
+        impactHypotheses: ['Doors wait for trailers'],
+        falsificationQuestions: ['When a door frees up, how does the driver find the next trailer?'],
+        whatANoMeans: 'The yards already keep pace by system, so this family is closed.',
+        confidence: 0,
+        signalIds: [sig.id],
+        primarySignalId: sig.id,
+        sourceRef: `${tag}:${key}:hypothesis`,
+        createdBy: ACTOR,
+      });
+      expect('2 hypothesize', r.ok, `propose from the verified fact (${key}) -> ${JSON.stringify(r)}`);
+    };
+    await proposeFromVerifiedFact(opsPersona.id, 'site_ops', 'hidden_capacity', 'ops-fact', `${accountName} opened a second shift and added twelve dock doors at its Ohio plant.`);
+    await proposeFromVerifiedFact(execPersona.id, 'executive_ops', 'network_standardization', 'exec-fact', `${accountName} completed its acquisition of a regional distributor and will consolidate two distribution centers into its Ohio network.`);
     const drafts = (await listHypotheses(prisma, { accountName, status: 'draft' })).items;
     const opsDraft = drafts.find((h) => h.primary_persona_id === opsPersona.id);
     const execDraft = drafts.find((h) => h.primary_persona_id === execPersona.id);

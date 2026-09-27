@@ -53,6 +53,7 @@ import {
 import { applyPlan, createBid, type ApplyDeps } from '../../src/lib/gap/import/apply';
 import { planPicImport, type PicLike } from '../../src/lib/gap/import/pic';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 
 // ---------------------------------------------------------------------------
 // Rails
@@ -281,7 +282,49 @@ async function main(): Promise<number> {
     counts.run1Proposed = run1.proposed;
     counts.run1AccountsScanned = run1.accountsScanned;
     expect('2 hypothesize', run1.signals.created >= 2, `signals.created=${run1.signals.created}, expected >= 2 (report ${JSON.stringify(run1)})`);
-    expect('2 hypothesize', run1.proposed >= 1, `proposed=${run1.proposed}, expected >= 1 (report ${JSON.stringify(run1)})`);
+    // Red team T6/T7: the triggers are keyword hits (nothing quoted). They may
+    // start research; they never become a hypothesis or buyer-facing text.
+    expect('2 hypothesize', run1.proposed === 0, `proposed=${run1.proposed}, expected 0 from keyword triggers (report ${JSON.stringify(run1)})`);
+    const keywordSkips = (run1.buildSkipped as Record<string, number> | undefined)?.keyword_or_non_fact_not_citable ?? 0;
+    expect('2 hypothesize', keywordSkips >= 1, `buildSkipped.keyword_or_non_fact_not_citable=${keywordSkips}, expected >= 1 (report ${JSON.stringify(run1)})`);
+    // The hypothesis comes from a VERIFIED, dated, quoted fact (the research path's shape).
+    const factText = `${accountName} opened a second shift and added twelve dock doors at its Ohio plant in September 2026.`;
+    const factTitle = `${accountName} 10-Q (filed ${now.toISOString().slice(0, 10)})`;
+    const verifiedFact = await registerSignal(prisma, {
+      accountName,
+      hubspotCompanyId,
+      personaId: opsPersona.id,
+      sourceKind: 'evidence_record',
+      sourceId: `${tag}:verified-fact`,
+      type: 'site_expansion',
+      title: factTitle,
+      sourceType: 'public_primary',
+      evidenceUrl: `https://example.com/${tag}/10q`,
+      evidenceText: factText,
+      externalOk: true,
+      observedAt: now,
+      confidence: 80,
+      metadata: { verified: 'excerpt_found_at_source' },
+      registeredBy: ACTOR,
+    });
+    const proposedFromFact = await proposeHypothesis(prisma, {
+      accountName,
+      primaryPersonaId: opsPersona.id,
+      persona: 'site_ops',
+      problemFamily: 'hidden_capacity',
+      observation: citedQuote(factTitle, factText, verifiedFact.id),
+      problemHypothesis: 'My guess is that the added doors move the constraint to the yards, where the right trailer is not staged when a door frees up.',
+      rootCauseHypotheses: ['Trailer location is tracked on paper or radio'],
+      impactHypotheses: ['Doors wait for trailers'],
+      falsificationQuestions: ['When a door frees up, how does the driver find the next trailer?'],
+      whatANoMeans: 'The yards already stage trailers to the doors by system, so this family is closed.',
+      confidence: 0,
+      signalIds: [verifiedFact.id],
+      primarySignalId: verifiedFact.id,
+      sourceRef: `${tag}:verified-fact-hypothesis`,
+      createdBy: ACTOR,
+    });
+    expect('2 hypothesize', proposedFromFact.ok, `propose from the verified fact -> ${JSON.stringify(proposedFromFact)}`);
     const listed = await listHypotheses(prisma, { accountName, status: 'draft' });
     const draft = listed.items.find((h) => h.problem_family === 'hidden_capacity') ?? listed.items[0];
     expect('2 hypothesize', Boolean(draft), `no draft hypothesis listed for ${accountName}`);
@@ -298,9 +341,10 @@ async function main(): Promise<number> {
     const run2 = await runHypothesize(prisma, { now, dryRun: false, lookbackDays: 1, maxAccounts: 5 });
     counts.run2SkippedOpen = run2.skippedOpen;
     counts.run2Proposed = run2.proposed;
-    expect('3 rerun', run2.skippedOpen >= 1, `skippedOpen=${run2.skippedOpen}, expected >= 1 (report ${JSON.stringify(run2)})`);
+    // Idempotent: the triggers are already registered and still propose nothing.
+    expect('3 rerun', run2.signals.existing >= 2 && run2.signals.created === 0, `signals created=${run2.signals.created} existing=${run2.signals.existing}, expected 0 / >= 2 (report ${JSON.stringify(run2)})`);
     expect('3 rerun', run2.proposed === 0, `proposed=${run2.proposed}, expected 0 (report ${JSON.stringify(run2)})`);
-    pass('3 rerun', `skippedOpen=${run2.skippedOpen} proposed=0 signals.existing=${run2.signals.existing}`);
+    pass('3 rerun', `proposed=0 signals.existing=${run2.signals.existing}`);
 
     // 4. Lifecycle.
     const submit = await transitionHypothesis(prisma, draftId, 'submit', { now, actor: ACTOR }, serviceDeps);

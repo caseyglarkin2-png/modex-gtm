@@ -6,21 +6,21 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-sprint1.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-e2e-1790474183239
+- Run tag: gap-e2e-1790482989535
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 1bf8ea34
-- Ran at: 2026-09-27T01:56:23.553Z
+- Git: f24e410a
+- Ran at: 2026-09-27T04:23:09.957Z
 - HUBSPOT_SYNC_ENABLED as resolved by feature-flags: true (the mirror is gated by GAP_HUBSPOT_MIRROR_ENABLED, default off, before it reads this)
 - Credentials scrubbed from the process before the first write: HUBSPOT_ACCESS_TOKEN
 
 ## Steps
 
 - PASS preflight: flags on, credentials scrubbed, 0 foreign live triggers in the 1-day window
-- PASS 1 seed: account, personas 20 (ready) and 21 (suppressed), 2 triggers
-- PASS 2 hypothesize: signals.created=2 proposed=2 draft=cmuj63lry00057kpkqfs0eq94 family=hidden_capacity signals=1 suppressed_hits=0
-- PASS 3 rerun: skippedOpen=2 proposed=0 signals.existing=2
+- PASS 1 seed: account, personas 92 (ready) and 93 (suppressed), 2 triggers
+- PASS 2 hypothesize: signals.created=2 proposed=0 draft=cmujbccv200077kv4zpo6fkug family=hidden_capacity signals=1 suppressed_hits=0
+- PASS 3 rerun: proposed=0 signals.existing=2
 - PASS 4 lifecycle: submit/approve/activate ok, events propose,submit,approve,activate, resolve refused no_confirmed_disposition, DB freeze GAP_HYPOTHESIS_FROZEN, narrative unchanged
-- PASS 5 negative: needsObservation=true, submit refused no_signals, duplicate_source_ref existingId=cmuj63luh000m7kpkjrupf408
+- PASS 5 negative: needsObservation=true, submit refused no_signals, duplicate_source_ref existingId=cmujbccwz000k7kv4wiy3fhx0
 - PASS 6 mirror: skipped/gap_mirror_disabled with HUBSPOT_SYNC_ENABLED resolved true, 0 gap_hubspot_mirror rows
 - PASS 7 pic: first apply created 4 hypotheses, 8 signals, 0 bids; second apply created 0, existing 4, signals.created 0
 
@@ -28,10 +28,10 @@ Written by `scripts/gap/e2e-sprint1.ts`. Rerun it against the scratch database t
 
 - foreignLiveTriggersBefore: 0
 - run1SignalsCreated: 2
-- run1Proposed: 2
+- run1Proposed: 0
 - run1AccountsScanned: 1
 - draftSignals: 1
-- run2SkippedOpen: 2
+- run2SkippedOpen: 0
 - run2Proposed: 0
 - lifecycleEvents: 4
 - mirrorRows: 0

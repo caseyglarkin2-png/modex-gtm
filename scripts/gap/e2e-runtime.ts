@@ -90,8 +90,8 @@ import { staticSuppressionReader } from '../../src/lib/gap/routing/suppression-r
 import { createFamily } from '../../src/lib/gap/sequence/family';
 import { EVIDENCE_SIGNAL_SELECT, renderStepCopy } from '../../src/lib/gap/sequence/render';
 import { createVersion } from '../../src/lib/gap/sequence/version';
-import { seedFamilyByKey, type SeedFamily } from '../../src/lib/gap/sequences/families';
-import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
+import type { SeedFamily } from '../../src/lib/gap/sequences/families';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
@@ -99,7 +99,7 @@ import { STATUS } from '../../src/lib/queue/types';
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'runtime-e2e-latest.md');
 const SEED_EVIDENCE_FIXTURE = path.join('tests', 'fixtures', 'gap', 'seed-evidence.json');
-const SEED_KEY = 'network_standardization';
+const SEED_KEY = 'hidden_capacity';
 const ACTOR = 'e2e-runtime';
 const OWNER = 'casey@freightroll.com';
 const PROGRAM = 'gap-e2e-runtime';
@@ -353,7 +353,9 @@ async function main(): Promise<number> {
     namedPipeline: string[];
     families: Record<string, { hypothesis: { observation: string; problemHypothesis: string; problemFamily: string }; evidence: Array<{ id: string; title: string; url: string; externalOk: boolean; fresh: boolean; superseded: boolean; firstParty: boolean }> }>;
   };
-  const seed = seedFamilyByKey(SEED_KEY) as SeedFamily;
+  // Red team T7: production seeds are single-touch; the runtime's multi-touch
+  // mechanics run on the pre-T7 four-step Hidden Capacity seed kept as a TEST FIXTURE.
+  const seed = JSON.parse(readFileSync(path.join('tests', 'fixtures', 'gap', 'legacy-four-step-hidden-capacity.json'), 'utf8')) as SeedFamily;
   const fx = seedEvidence.families[SEED_KEY];
 
   const prisma = new PrismaClient();
@@ -445,12 +447,19 @@ async function main(): Promise<number> {
     });
     pass('2 seed personas', `account ${accountName} (pipeline_stage=targeted), blocked account ${blockedAccountName} (pipeline_stage=meeting), four personas (happy ${personaHappy.id}, blocked ${personaBlocked.id}, internal ${personaInternal.id}, dnc ${personaDnc.id})`);
 
+    /** Fact id -> its verbatim cited quote: ONE fact opens the first touch (red team T6/T7). */
+    const quotes = new Map<string, string>();
     const registerFacts = async (accName: string, hcid: string, personaId: number, tagSuffix: string) => {
-      const p1 = fromOperatorKnowledge({ accountName: accName, hubspotCompanyId: hcid, personaId, text: 'The plant manager said the annual report lists 41 distribution centers folded in from three regional operators.', at: now, sourceId: `${tag}:${tagSuffix}fact1`, by: 'casey' }, { registeredBy: ACTOR, now });
-      expect('2b facts', p1.ok, `fromOperatorKnowledge (${tagSuffix} fact1) refused: ${p1.ok ? '' : p1.reason}`);
-      if (!p1.ok) throw new Error('unreachable');
-      const f1 = await registerSignal(prisma, p1.signal);
-      const f2 = await registerSignal(prisma, { accountName: accName, hubspotCompanyId: hcid, personaId, sourceKind: 'manual', sourceId: `${tag}:${tagSuffix}url1`, type: 'job_posting', title: `${accName} posts three gate-clerk roles at its Ohio distribution center`, sourceType: 'public_primary', evidenceUrl: `https://example.com/${tag}/${tagSuffix}-jobs`, externalOk: true, observedAt: now, confidence: 80, registeredBy: ACTOR });
+      // Red team T6 / Release C review SF1: the cited fact is an outreach fact
+      // (verified, dated, quoted, this account, a physical-network change).
+      const filed = `(filed ${now.toISOString().slice(0, 10)})`;
+      const verified = (sourceId: string, title: string, text: string, url: string, type: string) =>
+        registerSignal(prisma, { accountName: accName, hubspotCompanyId: hcid, personaId, sourceKind: 'evidence_record', sourceId, type, title, sourceType: 'public_primary', evidenceUrl: url, evidenceText: text, externalOk: true, observedAt: now, confidence: 80, metadata: { verified: 'excerpt_found_at_source' }, registeredBy: ACTOR });
+      const f1Title = `${accName} 10-K ${filed}`;
+      const f1Text = `${accName} completed its acquisition of three regional operators, adding 41 distribution centers to its network.`;
+      const f1 = await verified(`${tag}:${tagSuffix}fact1`, f1Title, f1Text, `https://example.com/${tag}/${tagSuffix}-10k`, 'acquisition');
+      const f2 = await verified(`${tag}:${tagSuffix}url1`, `${accName} 8-K ${filed}`, `${accName} will open a new distribution center in Columbus, Ohio with 40 dock doors and is hiring three gate clerks there.`, `https://example.com/${tag}/${tagSuffix}-jobs`, 'site_expansion');
+      quotes.set(f1.id, citedQuote(f1Title, f1Text, f1.id, accName));
       expect('2b facts', f1.created && f2.created, `${tagSuffix} facts not created: ${JSON.stringify({ f1, f2 })}`);
       return { f1, f2 };
     };
@@ -471,7 +480,7 @@ async function main(): Promise<number> {
         primaryPersonaId: personaId,
         persona: seed.persona,
         problemFamily: seed.problemFamily,
-        observation: `${accName} lists 41 distribution centers from three regional operators [S:${fact1Id}] and posts three gate-clerk roles in Ohio [S:${fact2Id}].`,
+        observation: quotes.get(fact1Id)!,
         problemHypothesis: 'My guess is each acquired site still runs its own gate process, so the network cannot see its yards the same way from one site to the next.',
         rootCauseHypotheses: ['No shared gate standard across the acquired sites'],
         impactHypotheses: ['Detention and clerk headcount rise site by site'],
@@ -480,7 +489,7 @@ async function main(): Promise<number> {
         whatANoMeans: 'The family is wrong for this account.',
         confidence: 60,
         signalIds: [fact1Id, fact2Id, ...extraSignalIds],
-        primarySignalId: fact2Id,
+        primarySignalId: fact1Id,
         createdBy: ACTOR,
       });
       expect('2c hypotheses', proposed.ok, `proposeHypothesis (${label}) refused: ${JSON.stringify(proposed)}`);
@@ -499,8 +508,10 @@ async function main(): Promise<number> {
     realRefsH1 = evidenceRefsFromSignals((h1Row?.signals ?? []).map((l) => l.signal), now);
 
     // 2d. H3: internal-recipient control for B9.
-    const h3Signal = await registerSignal(prisma, (fromOperatorKnowledge({ accountName, hubspotCompanyId, personaId: personaInternal.id, text: 'Internal QA probe: this hypothesis exists only to prove the learning report excludes it.', at: now, sourceId: `${tag}:h3fact1`, by: 'casey' }, { registeredBy: ACTOR, now }) as { ok: true; signal: Parameters<typeof registerSignal>[1] }).signal);
-    const h3Proposed = await proposeHypothesis(prisma, { accountName, primaryPersonaId: personaInternal.id, persona: 'automation', problemFamily: 'automation_readiness', observation: `Internal QA probe at ${accountName} [S:${h3Signal.id}].`, problemHypothesis: 'My guess is this row must never reach a real learning metric.', rootCauseHypotheses: ['n/a'], impactHypotheses: ['n/a'], falsificationQuestions: ['n/a'], whatANoMeans: 'n/a', confidence: 50, signalIds: [h3Signal.id], primarySignalId: h3Signal.id, createdBy: ACTOR });
+    const h3Title = `${accountName} 10-Q (filed ${now.toISOString().slice(0, 10)})`;
+    const h3Text = `${accountName} will open an automated distribution center in Denver with 24 dock doors.`;
+    const h3Signal = await registerSignal(prisma, { accountName, hubspotCompanyId, personaId: personaInternal.id, sourceKind: 'evidence_record', sourceId: `${tag}:h3fact1`, type: 'automation_program', title: h3Title, sourceType: 'public_primary', evidenceUrl: `https://example.com/${tag}/h3`, evidenceText: h3Text, externalOk: true, observedAt: now, confidence: 80, metadata: { verified: 'excerpt_found_at_source' }, registeredBy: ACTOR });
+    const h3Proposed = await proposeHypothesis(prisma, { accountName, primaryPersonaId: personaInternal.id, persona: 'automation', problemFamily: 'automation_readiness', observation: citedQuote(h3Title, h3Text, h3Signal.id, accountName), problemHypothesis: 'My guess is this row must never reach a real learning metric.', rootCauseHypotheses: ['n/a'], impactHypotheses: ['n/a'], falsificationQuestions: ['n/a'], whatANoMeans: 'n/a', confidence: 50, signalIds: [h3Signal.id], primarySignalId: h3Signal.id, createdBy: ACTOR });
     expect('2d internal', h3Proposed.ok, `proposeHypothesis (H3) refused: ${JSON.stringify(h3Proposed)}`);
     if (!h3Proposed.ok) throw new Error('unreachable');
     for (const action of ['submit', 'approve', 'activate'] as const) {
