@@ -10,11 +10,12 @@
  * src/lib/gap/execution/seller-send.ts; the wire re-checks the confirmation.
  *
  * Status: 200 preview / already sent, 201 sent, 409 refused `{ error, detail }`,
- * 404 unknown decision or flag off, 401 no session, 400 bad body.
+ * 404 unknown decision or flag off, 401 no session, 403 not an owner, 400 bad body.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { auth } from '@/lib/auth';
+import { isAdminEmail } from '@/lib/auth-providers';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { sendSellerEmail } from '@/lib/gap/execution/seller-send';
@@ -34,6 +35,8 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
   if (skip) return NextResponse.json(skip, { status: 404 });
   const email = (await auth())?.user?.email;
   if (typeof email !== 'string' || !email.includes('@')) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+  // HUMAN_APPROVED_1TO1 means Casey: another signed-in teammate cannot send from his mailbox.
+  if (!isAdminEmail(email)) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return NextResponse.json({ error: 'invalid_body', field: parsed.error.issues[0]?.path.join('.') || 'body' }, { status: 400 });
   const { id } = await context.params;

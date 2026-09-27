@@ -41,7 +41,14 @@ export const config = {
      * - /_next (Next.js internals)
      * - /api/microsites/roi-lead (public ROI->pipeline ingest; ROI_LEAD_SECRET-gated)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
+     *
+     * Every named exclusion is a WHOLE PATH SEGMENT: it must be followed by
+     * `/` or the end of the path. As bare prefixes, `api/e` (the open pixel)
+     * also exempted /api/email/*, /api/engagement/*, /api/enrich* and
+     * /api/export, and /api/email/send has no auth of its own: an anonymous
+     * POST sent email (red team T1 review, 2026-09-26). Only the file-like
+     * metadata/static names stay prefix matches.
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/intel|api/geocode|api/campaigns|api/e|api/pounce|api/suppression|api/concierge|api/proposal|api/proof|api/for|api/slack|api/outbox|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!(?:login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/intel|api/geocode|api/campaigns|api/e|api/pounce|api/suppression|api/concierge|api/proposal|api/proof|api/for|api/slack|api/outbox|unsubscribe|proposal|for|demo|demo-packs|docs|audio|video|artifacts)(?:/|$)|opengraph-image|twitter-image|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };

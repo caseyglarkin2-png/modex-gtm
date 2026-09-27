@@ -56,7 +56,27 @@ const MUST_STAY_PROTECTED = [
   '/api/contacts',
   '/contacts',
   '/dashboard',
+  // Red team T1 review (2026-09-26): the exclusion `api/e` (the open pixel,
+  // /api/e/open) was an unanchored prefix and exempted every route starting
+  // with those letters. /api/email/send had no auth of its own: an anonymous
+  // POST sent email as the configured Gmail sender.
+  '/api/email/send',
+  '/api/email/send/',
+  '/api/email/send-bulk',
+  '/api/email/send-bulk-async',
+  '/api/email/send-jobs/1/retry-failed',
+  '/api/engagement/thread/1/reply',
+  '/api/enrich',
+  '/api/enrichment/writeback/apply',
+  '/api/export',
+  '/api/revops/send-approvals',
+  '/api/gap/decisions/x/send',
+  '/formulas',
+  '/logins',
 ] as const;
+
+/** Exemptions are whole path segments, not prefixes. */
+const SEGMENT_EXEMPT = ['/api/e/open', '/api/e/open/', '/for/acme', '/for', '/api/for/acme', '/demo/acme', '/login', '/login/'] as const;
 
 describe('middleware matcher', () => {
   it.each(SELF_AUTHENTICATING)('does not wrap %s (%s)', (path) => {
@@ -65,6 +85,10 @@ describe('middleware matcher', () => {
 
   it.each(MUST_STAY_PROTECTED)('still wraps %s', (path) => {
     expect(isWrapped(path)).toBe(true);
+  });
+
+  it.each(SEGMENT_EXEMPT)('still exempts the whole segment %s', (path) => {
+    expect(isWrapped(path)).toBe(false);
   });
 
   it('exempts the suppression leg under BOTH slash forms, because one is a 308 to the other', () => {

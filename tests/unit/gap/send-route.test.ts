@@ -47,6 +47,15 @@ describe('POST /api/gap/decisions/[id]/send: only an authenticated person can se
     expect((send.mock.calls[0] as any[])[1]).toMatchObject({ decisionId: 'dec-1', actor: 'casey@freightroll.com', confirm: { contentHash: HASH, recipient: 'joey.maggard@kroger.com' } });
   });
 
+  it('a signed-in NON-owner cannot send or preview: 403, the service is never reached (T1 review)', async () => {
+    session.value = { user: { email: 'jake@freightroll.com' } };
+    const r = await POST(req({ confirm: { contentHash: HASH, recipient: 'joey.maggard@kroger.com' } }), ctx);
+    expect(r.status).toBe(403);
+    expect(await r.json()).toEqual({ error: 'forbidden' });
+    expect((await POST(req({}), ctx)).status).toBe(403);
+    expect(send).not.toHaveBeenCalled();
+  });
+
   it('extra recipients or unknown fields are rejected (exactly one recipient, strict body)', async () => {
     session.value = { user: { email: 'casey@freightroll.com' } };
     expect((await POST(req({ confirm: { contentHash: HASH, recipient: 'a@b.com', cc: ['x@y.com'] } }), ctx)).status).toBe(400);

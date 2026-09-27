@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
-import Google from 'next-auth/providers/google';
-import Credentials from 'next-auth/providers/credentials';
+import { ADMINS, ALLOWED_EMAILS, authProviders, sessionTokenAllowed } from '@/lib/auth-providers';
 
 type TokenLike = {
   accessToken?: string;
@@ -43,46 +42,15 @@ async function refreshGoogleAccessToken(token: TokenLike): Promise<TokenLike> {
   };
 }
 
-const ALLOWED_EMAILS = [
-  'casey@freightroll.com',
-  'caseyglarkin2@gmail.com',
-  'jake@freightroll.com',
-];
-
-const ADMINS = [
-  'casey@freightroll.com',
-  'caseyglarkin2@gmail.com',
-];
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      authorization: {
-        params: {
-          scope: 'openid email profile https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.insert',
-          access_type: 'offline',
-          prompt: 'consent',
-        },
-      },
-    }),
-    // Dev-only credential login when Google OAuth is not configured
-    Credentials({
-      name: 'Email',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-      },
-      async authorize(credentials) {
-        const email = credentials?.email as string | undefined;
-        if (!email || !ALLOWED_EMAILS.includes(email)) return null;
-        return { id: email, email, name: email.split('@')[0] };
-      },
-    }),
-  ],
+  providers: authProviders(process.env.NODE_ENV),
   callbacks: {
     async jwt({ token, account }) {
       const mutable = token as unknown as TokenLike;
+
+      if (account?.provider) (token as Record<string, unknown>).signInProvider = account.provider;
+      // A token not minted by a Google sign-in ends here (production): see sessionTokenAllowed.
+      if (!sessionTokenAllowed(token as { signInProvider?: unknown }, process.env.NODE_ENV)) return null;
 
       if (account?.provider === 'google') {
         mutable.accessToken = account.access_token ?? undefined;
