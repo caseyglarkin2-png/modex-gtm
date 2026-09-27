@@ -169,6 +169,24 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(again).toMatchObject({ ok: true, existing: true });
   });
 
+  it('Monday readiness: a draft for a person whose current APPROVED row is keyword-only supersedes it (the old row is never written); a ready row is not superseded', async () => {
+    const { prisma, t } = db();
+    const kw = { id: 'kwsig', account_name: 'Kroger', source_kind: 'pounce_trigger', source_type: 'public_secondary', evidence_text: '', evidence_url: 'https://sec.gov/x', observed_at: NOW, external_ok: null, metadata: null, freshness_expires_at: null };
+    const frozen = { id: 'old1', account_name: 'Kroger', primary_persona_id: 1886, status: 'approved', observation: 'KR 10-Q mentions: capital expenditure [S:kwsig].', signals: [{ signal: kw }] };
+    const findFirst = prisma.prospectingHypothesis.findFirst;
+    prisma.prospectingHypothesis.findFirst = vi.fn(async (q: any) => (q.where.status === 'approved' && q.where.primary_persona_id === 1886 && q.where.superseded_by ? frozen : findFirst(q)));
+    const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary()]), fetchText: async () => PAGE });
+    const p = await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW });
+    expect(p).toMatchObject({ ok: true });
+    const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
+    expect(h).toMatchObject({ status: 'draft', supersedes_id: 'old1' });
+    // Same thesis family only: an unrelated family's approved row is never retired.
+    expect(prisma.prospectingHypothesis.findFirst).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ problem_family: h.problem_family, status: 'approved' }) }));
+    expect(frozen).toMatchObject({ status: 'approved', observation: 'KR 10-Q mentions: capital expenditure [S:kwsig].' });
+    expect(prisma.prospectingHypothesis.update).not.toHaveBeenCalled();
+    expect(prisma.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+  });
+
   it('refuses with no fresh evidence, and on conflicting evidence', async () => {
     const { prisma } = db();
     const none = await runEvidenceResearch(prisma, input, { ...edgarOnly([]), fetchText: async () => '' });

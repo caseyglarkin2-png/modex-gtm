@@ -58,15 +58,15 @@ export interface ThesisGroup<T extends ThesisRow = ThesisRow> {
   members: T[];
 }
 
-/** Groups of two or more rows sharing one material thesis. Singletons are not groups. */
-export function groupSiblings<T extends ThesisRow>(rows: readonly T[]): ThesisGroup<T>[] {
+/** Groups of `minSize` (default two) or more rows sharing one material thesis. */
+export function groupSiblings<T extends ThesisRow>(rows: readonly T[], minSize = 2): ThesisGroup<T>[] {
   const by = new Map<string, T[]>();
   for (const r of rows) {
     const fp = thesisFingerprint(r);
     by.set(fp, [...(by.get(fp) ?? []), r]);
   }
   return [...by.entries()]
-    .filter(([, members]) => members.length >= 2)
+    .filter(([, members]) => members.length >= minSize)
     .map(([fingerprint, members]) => ({ fingerprint, accountName: members[0].account_name, problemFamily: members[0].problem_family, members }));
 }
 

@@ -17,6 +17,12 @@
  * close_unresolved) are disabled until a reason is typed. The server still
  * decides; these gates only stop the obvious 409s.
  *
+ * Monday readiness (2026-09-27): the GET route attaches `actionability`,
+ * derived on the server from the canonical evidence gate. When it says the
+ * observation is not ready for outreach, Approve / Approve + use / Use are
+ * NOT offered (the server would refuse them); the drawer says what happened,
+ * why, and to find verified evidence instead.
+ *
  * Facts are registered and linked from the Signals section through
  * <AddFactForm> (S2-T10): POST /api/gap/signals, then POST
  * /api/gap/hypotheses/{id}/signals. After a link the drawer asks its owner
@@ -33,6 +39,8 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LEGAL_TRANSITIONS, isTerminalStatus, type HypothesisAction, type HypothesisStatus, type ResolutionOutcome } from '@/lib/gap/hypothesis/machine';
 import { extractCitationIds } from '@/lib/gap/hypothesis/observation';
+import type { Actionability } from '@/lib/gap/hypothesis/actionability';
+import { refusalCopy, refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { AddFactForm } from './add-fact-form';
 import { FactBlock, HypothesisBlock, type FactSignal } from './fact-hypothesis-blocks';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
@@ -83,6 +91,8 @@ export interface HypothesisRow {
   updated_at?: string | Date;
   signals?: HypothesisSignalLink[];
   events?: HypothesisEventRow[];
+  /** Server-derived (GET /api/gap/hypotheses/[id]); absent on list rows. */
+  actionability?: Actionability;
 }
 
 export interface TransitionResponse {
@@ -185,7 +195,7 @@ const REFUSAL_TEXT: Record<string, string> = {
 };
 
 export function describeRefusal(code: string): string {
-  return REFUSAL_TEXT[code] ?? code;
+  return REFUSAL_TEXT[code] ?? refusalSentence(code) ?? code;
 }
 
 /** The actions the machine table allows from `status`, in display order. */
@@ -235,13 +245,16 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
   const links = hypothesis.signals ?? [];
   const factSignals: FactSignal[] = links.flatMap((link) => (link.signal ? [link.signal] : []));
   const events = hypothesis.events ?? [];
-  const primaryAction = PRIMARY_ACTION[status];
+  // The server knows the observation is not ready for outreach: approve / use would be refused.
+  const blockedByEvidence = hypothesis.actionability ? !hypothesis.actionability.canApprove && !hypothesis.actionability.canUse && (status === 'draft' || status === 'review_required' || status === 'approved') : false;
+  const evidenceCopy = blockedByEvidence ? refusalCopy(hypothesis.actionability?.reason ?? 'evidence_insufficient') : null;
+  const primaryAction = blockedByEvidence ? undefined : PRIMARY_ACTION[status];
   const secondaryActions = actions.filter((action) => action !== primaryAction);
   // When a primary action exists, the sticky decision area above already
   // renders it plus every non-reason secondary action; this lower section
   // then carries only the reason-requiring actions (which need the Reason
   // input right here) so no button renders twice with the same name.
-  const lowerActions = primaryAction ? actions.filter((action) => REASON_ACTIONS.has(action)) : actions;
+  const lowerActions = primaryAction || blockedByEvidence ? actions.filter((action) => REASON_ACTIONS.has(action)) : actions;
   const showFastReview = Boolean(onPrevious || onNext);
 
   async function run(action: HypothesisAction) {
@@ -340,6 +353,21 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
           <div data-testid="hypothesis-activated-banner" className="mt-3">
             <UseOutcome approved={1} inUse={1} routing={routing} />
           </div>
+        ) : null}
+
+        {blockedByEvidence ? (
+          <section data-testid="hypothesis-needs-evidence" className="mt-4 space-y-1 rounded-md border border-amber-500/50 bg-amber-500/10 p-3 text-sm">
+            <p className="text-xs font-semibold uppercase tracking-wide">Not ready for outreach</p>
+            {evidenceCopy ? (
+              <>
+                <p>{evidenceCopy.why}</p>
+                <p className="font-medium">Next: {evidenceCopy.next}</p>
+              </>
+            ) : null}
+            <a href="/gap?lane=research" className="inline-flex rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90">
+              Find verified evidence
+            </a>
+          </section>
         ) : null}
 
         {!terminal && primaryAction ? (

@@ -29,10 +29,11 @@ function card(over: Partial<ThesisCard> = {}): ThesisCard {
     depth: { label: 'SINGLE-SOURCE', independentSources: 1, keywordOnly: 1, origins: [] } as any,
     sources: [],
     members: [
-      { id: 'h1', status: 'approved', personaName: 'salvador rosas gutierrez', personaTitle: 'VP' },
-      { id: 'h2', status: 'draft', personaName: 'michelle schlie', personaTitle: 'VP' },
+      { id: 'h1', status: 'approved', personaName: 'salvador rosas gutierrez', personaTitle: 'VP', next: 'use' },
+      { id: 'h2', status: 'draft', personaName: 'michelle schlie', personaTitle: 'VP', next: 'approve_use' },
     ],
     reviewable: 1,
+    readiness: { ready: true, reason: null },
     ...over,
   };
 }

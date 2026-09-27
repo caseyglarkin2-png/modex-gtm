@@ -6,12 +6,17 @@
  *
  *   ?lane=review     account theses (<ThesisGroupReview>) and one-off
  *                    hypotheses (<HypothesisList>) waiting for his judgment
- *   ?lane=research   cards missing evidence or contact data, grouped when one
- *                    piece of evidence unblocks several people
+ *   ?lane=research   theses not ready for outreach (FIND VERIFIED EVIDENCE),
+ *                    then cards missing evidence or contact data
  *   ?lane=ready      people to contact now; `&open=<decisionId>` renders that
  *                    card's action pack inline (<ActionPackView>)
  *   ?lane=follow_up  sent sequences whose next touch is due, same inline pack
  *   ?lane=replies    buyer replies waiting for a disposition (<RepliesTriage>)
+ *
+ * Monday readiness (2026-09-27): a thesis is REVIEW work only when a decision
+ * on it can succeed (server-derived actionability, hypothesis/actionability.ts).
+ * A thesis the evidence gate rates not ready is RESEARCH work, and NEXT UP
+ * never points at an approval the server will refuse.
  *
  * No lane: NEXT UP, the single best next minute. The Run routing panel is
  * diagnostic now (APPROVE + USE routes on its own); it is promoted only when
@@ -28,8 +33,7 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
 import { listAllCurrent, type QueueItem } from '@/lib/gap/routing/queue';
 import { cockpitOpenHref, sellerLaneOf } from '@/lib/gap/routing/card-readiness';
-import { listHypotheses } from '@/lib/gap/hypothesis/service';
-import { loadThesisGroups, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
+import { loadThesisGroups, splitThesisWork, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
 import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
@@ -46,8 +50,6 @@ export const metadata = { title: 'GAP' };
 
 const REPLY_TILE_LIMIT = 50;
 const LANES: ReadonlySet<string> = new Set(['review', 'research', 'ready', 'follow_up', 'replies']);
-/** Statuses that still need Casey: a decision (draft, review_required) or "use it?" (approved). */
-const WAITING = new Set(['draft', 'review_required', 'approved']);
 
 const LANE_TITLE: Record<CockpitLane, string> = {
   review: 'Review: do I believe this?',
@@ -60,21 +62,21 @@ const LANE_TITLE: Record<CockpitLane, string> = {
 const nameOf = (i: QueueItem) => i.persona.displayName ?? i.persona.email ?? 'someone';
 
 async function loadCockpit() {
-  const [hypothesesToReview, routableScope, queue, repliesPage, rawGroups, active] = await Promise.all([
-    prisma.prospectingHypothesis.count({ where: { status: { in: ['draft', 'review_required'] } } }),
+  const [routableScope, queue, repliesPage, rawGroups, active] = await Promise.all([
     resolveRoutableHypothesisScope(prisma),
     listAllCurrent(prisma),
     listReplies(prisma, { state: 'undispositioned', limit: REPLY_TILE_LIMIT }),
-    loadThesisGroups(prisma).catch((): LoadedGroup[] => []),
+    // Every current thesis, one-person ones included, with server-derived actionability.
+    loadThesisGroups(prisma, {}, { singletons: true }).catch((): LoadedGroup[] => []),
     prisma.prospectingHypothesis.findMany({ where: { status: 'active', primary_persona_id: { not: null } }, select: { primary_persona_id: true } }),
   ]);
   const groups = orderGroupsForReview(rawGroups);
   const lanes = queue.items.map((item) => ({ item, lane: sellerLaneOf(item) }));
   const inLane = (lane: string) => lanes.filter((l) => l.lane === lane).map((l) => l.item);
 
-  // REVIEW counts decisions, not rows: a shared account thesis is ONE review however many people it covers.
-  const grouped = groups.flatMap((g) => g.members.filter((m) => m.status === 'draft' || m.status === 'review_required').map((m) => m.id));
-  const waitingGroups = groups.filter((g) => g.members.some((m) => WAITING.has(m.status)));
+  // REVIEW counts decisions that can succeed, not rows: a shared thesis is ONE review however many
+  // people it covers. A thesis the evidence gate rates not ready is RESEARCH, never fake review work.
+  const { reviewGroups, readyOneOffIds, researchGroups } = splitThesisWork(groups);
 
   // People in use with no current card, or a card from before they were in use.
   // Rows activated before APPROVE + USE routed on its own, or whose account's routing failed.
@@ -88,43 +90,56 @@ async function loadCockpit() {
   const followUp = inLane('follow_up');
   const research = inLane('research');
   const reply = repliesPage.items[0];
-  const thesis = waitingGroups[0];
+  const thesis = reviewGroups[0];
+  const researchThesis = researchGroups[0];
+  const approvedOf = (g: LoadedGroup) => g.members.filter((m) => m.status === 'approved').length;
   const next = pickNextUp({
     replies: reply ? { title: `${reply.contactEmail} replied`, detail: `${reply.accountName}: ${reply.subject ?? reply.snippet.slice(0, 80)}`, href: '/gap?lane=replies' } : null,
     follow_up: followUp[0] ? { title: `Follow up with ${nameOf(followUp[0])}`, detail: `${followUp[0].account.name}. The next touch is due.`, href: cockpitOpenHref('follow_up', followUp[0].id) } : null,
     ready: ready[0] ? { title: `Contact ${nameOf(ready[0])}`, detail: `${ready[0].account.name}${ready[0].persona.title ? `, ${ready[0].persona.title}` : ''}.`, href: cockpitOpenHref('ready', ready[0].id) } : null,
     review: thesis
-      ? { title: `Decide the ${thesis.accountName} thesis`, detail: `${thesis.members.length} people, ${thesis.depth.label.toLowerCase()}.`, href: '/gap?lane=review' }
-      : hypothesesToReview > grouped.length
-        ? { title: 'Decide a hypothesis', detail: `${hypothesesToReview - grouped.length} waiting.`, href: '/gap?lane=review' }
+      ? { title: `Decide the ${thesis.accountName} thesis`, detail: `${thesis.members.length} people, ready for outreach.`, href: '/gap?lane=review' }
+      : readyOneOffIds.length > 0
+        ? { title: 'Decide a hypothesis', detail: `${readyOneOffIds.length} waiting.`, href: '/gap?lane=review' }
         : null,
-    research: research[0] ? { title: `Research ${research[0].account.name}`, detail: `${research.length} card${research.length === 1 ? '' : 's'} missing evidence or contact data.`, href: '/gap?lane=research' } : null,
+    research: researchThesis
+      ? {
+          title: `Find verified evidence for the ${researchThesis.accountName} thesis`,
+          detail: `${researchThesis.members.length === 1 ? '1 person' : `${researchThesis.members.length} people`}${approvedOf(researchThesis) ? `, ${approvedOf(researchThesis)} approved` : ''}, 0 in use. Not ready for outreach yet.`,
+          href: '/gap?lane=research',
+        }
+      : research[0]
+        ? { title: `Research ${research[0].account.name}`, detail: `${research.length} card${research.length === 1 ? '' : 's'} missing evidence or contact data.`, href: '/gap?lane=research' }
+        : null,
   });
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
   const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
   return {
     counts: {
-      review: waitingGroups.length + Math.max(0, hypothesesToReview - grouped.length),
-      research: research.length,
+      review: reviewGroups.length + readyOneOffIds.length,
+      research: research.length + researchGroups.length,
       ready: ready.length,
       followUp: followUp.length,
       replies: { count: repliesPage.items.length, atLeast: repliesPage.nextCursor !== null },
     },
     next,
-    groups: waitingGroups,
-    groupedIds: new Set(groups.flatMap((g) => g.members.map((m) => m.id))),
+    groups: reviewGroups,
+    readyOneOffIds,
+    researchGroups,
     queueAsOf: queue.asOf,
     unrouted,
     routing: { canRun: routableHypotheses > 0 || queue.items.length > 0, routableHypotheses, routableAccounts },
   };
 }
 
-async function ReviewLane({ groups, groupedIds }: { groups: LoadedGroup[]; groupedIds: Set<string> }) {
+async function ReviewLane({ groups, readyOneOffIds }: { groups: LoadedGroup[]; readyOneOffIds: string[] }) {
   const cards = await withRecordedNotes(prisma, groups.map(toThesisCard));
-  // One-off hypotheses (not part of a shared thesis) that still need a decision.
-  const { items } = await listHypotheses(prisma, { limit: 50 });
-  const oneOffs = items.filter((h: { id: string; status: string }) => WAITING.has(h.status) && !groupedIds.has(h.id));
+  // One-off hypotheses (not part of a shared thesis) whose decision can succeed.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows, the shape HypothesisList renders
+  const oneOffs: any[] = readyOneOffIds.length
+    ? await prisma.prospectingHypothesis.findMany({ where: { id: { in: readyOneOffIds } }, orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: 50 })
+    : [];
   // ThesisGroupReview stays mounted even when nothing is left: it holds the outcome of the
   // approval that just emptied the lane (success must never make the result disappear).
   return (
@@ -139,6 +154,19 @@ async function ReviewLane({ groups, groupedIds }: { groups: LoadedGroup[]; group
         <HypothesisList items={oneOffs} showFilter={false} emptyNote={null} />
       </section>
     </div>
+  );
+}
+
+/** Theses the evidence gate rates not ready: FIND VERIFIED EVIDENCE comes first in Research. */
+async function ResearchTheses({ groups }: { groups: LoadedGroup[] }) {
+  const cards = await withRecordedNotes(prisma, groups.map(toThesisCard));
+  // Always mounted (like ReviewLane): using evidence on the last research thesis empties this list,
+  // and the outcome with its "Review the revised thesis" link must survive the refresh.
+  return (
+    <section className="space-y-2" data-testid="research-theses">
+      {cards.length ? <h3 className="text-sm font-semibold">Theses that need verified evidence</h3> : null}
+      <ThesisGroupReview cards={cards} intro={false} />
+    </section>
   );
 }
 
@@ -192,11 +220,14 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
         <section className="space-y-3" aria-label={LANE_TITLE[lane]}>
           <h2 className="text-lg font-semibold">{LANE_TITLE[lane]}</h2>
           {lane === 'review' ? (
-            <ReviewLane groups={data.groups} groupedIds={data.groupedIds} />
+            <ReviewLane groups={data.groups} readyOneOffIds={data.readyOneOffIds} />
           ) : lane === 'replies' ? (
             <RepliesTriage inCockpit />
           ) : (
+            <>
+            {lane === 'research' ? <ResearchTheses groups={data.researchGroups} /> : null}
             <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
+            </>
           )}
         </section>
       ) : (

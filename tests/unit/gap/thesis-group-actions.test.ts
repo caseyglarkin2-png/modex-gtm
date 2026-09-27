@@ -27,6 +27,8 @@ function db(rows: any[]) {
       prospectingHypothesis: { findMany: vi.fn(async () => rows) },
       gapAuditEvent: { create: vi.fn(async ({ data }: any) => { audit.push(data); return { id: 'a' }; }) },
       researchRun: { findMany: vi.fn(async () => runs) },
+      // The research facts as registered signals: verified, dated, public, quoted (the outreach gate reads them).
+      prospectingSignal: { findMany: vi.fn(async ({ where }: any) => where.id.in.map((id: string) => ({ id, account_name: 'PepsiCo', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: 'PepsiCo opened a new distribution center in Texas this summer.', evidence_url: 'https://www.pepsico.com/news/new-dc', observed_at: NOW, external_ok: true, metadata: { verified: 'excerpt_found_at_source' }, title: 'PepsiCo news', freshness_expires_at: null }))) },
     },
   };
 }
@@ -52,7 +54,7 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     expect(r.ok).toBe(false);
     expect(r.results).toEqual([
       { hypothesisId: 'd1', ok: true, from: 'draft', to: 'approved', detail: 'approved' },
-      { hypothesisId: 'd2', ok: false, from: 'draft', to: 'review_required', detail: 'approve refused: unhedged_hypothesis' },
+      { hypothesisId: 'd2', ok: false, from: 'draft', to: 'review_required', detail: 'approve refused: unhedged_hypothesis', reason: 'unhedged_hypothesis' },
       { hypothesisId: 'd3', ok: true, from: 'review_required', to: 'approved', detail: 'approved' },
       { hypothesisId: 'a1', ok: true, from: 'active', to: 'active', detail: 'already active; unchanged' },
     ]);
@@ -70,7 +72,7 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     expect(transition.mock.calls.map((c: any[]) => `${c[1]}:${c[2]}`)).toEqual(['d1:submit', 'd1:approve', 'd1:activate', 'd3:approve', 'd3:activate']);
     expect(r.results).toEqual([
       { hypothesisId: 'd1', ok: true, from: 'draft', to: 'active', detail: 'approved and in use' },
-      { hypothesisId: 'd3', ok: false, from: 'review_required', to: 'approved', detail: 'approved, but not in use: suppressed' },
+      { hypothesisId: 'd3', ok: false, from: 'review_required', to: 'approved', detail: 'approved, but not in use: suppressed', reason: 'suppressed' },
     ]);
     for (const c of transition.mock.calls) expect(c[3].reason).toContain('approve + use selected siblings (2 of 4');
   });

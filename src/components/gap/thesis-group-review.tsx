@@ -3,8 +3,9 @@
 /**
  * Account thesis review (dogfood addendum 2026-09-25; reduced 2026-09-26).
  *
- * One card per account thesis shared by 2+ people. Casey makes ONE decision
- * per thesis; everything after it is system work:
+ * One card per account thesis (shared by 2+ people, or one person in the
+ * Research lane). Casey makes ONE decision per thesis; everything after it is
+ * system work:
  *
  *   APPROVE + USE FOR N           the normal legal transitions per checked row,
  *                                 each audited, then routing runs on its own and
@@ -12,10 +13,18 @@
  *                                 above the list. There is no separate ROUTE.
  *   FIND MORE EVIDENCE            one research run for the whole thesis
  *                                 (POST /api/gap/theses op corroborate).
- *   USE THIS EVIDENCE +           the facts Casey ticks are linked to the checked
- *   APPROVE + USE                 people, then the same approve + use. Nothing
- *                                 is attached that Casey did not choose.
+ *   USE THIS EVIDENCE +           a READY thesis: the facts Casey ticks are
+ *   APPROVE + USE                 linked to the checked people, then the same
+ *                                 approve + use. Nothing he did not choose.
  *   HOLD                          no good evidence is a complete answer.
+ *
+ * Monday readiness (2026-09-27): what the card offers comes from the SERVER
+ * (card.readiness and each member's `next`, derived from the canonical
+ * evidence gate), never from status alone. A thesis that is not ready for
+ * outreach offers FIND VERIFIED EVIDENCE, never an Approve + use the server
+ * will refuse. Choosing verified evidence (op use_evidence) rebuilds an
+ * editable observation, or creates a DRAFT revision of a frozen approved one;
+ * Casey then reads the new observation and approves it explicitly.
  *
  * Evidence depth is shown next to the thesis, never folded into confidence.
  * Routing creates recommendations only: nothing drafts, enrolls or sends.
@@ -26,9 +35,11 @@ import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { ThesisCard } from '@/lib/gap/hypothesis/thesis-groups';
-import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
+import { refusalCopy, refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { UseOutcome, type OutcomeState, type UseOutcomeResponse } from './use-outcome';
 
-interface RowResult { hypothesisId: string; ok: boolean; from: string; to: string | null; detail: string }
+interface RowResult { hypothesisId: string; ok: boolean; from: string; to: string | null; detail: string; reason?: string; revisionId?: string }
+interface Summary extends OutcomeState { approved: number; inUse: number }
 interface Fact { signalId: string; excerpt: string; url: string; title: string; publishedAt: string; fresh: boolean }
 interface Corroboration {
   outcome: 'corroborated' | 'no_second_source' | 'contradicts';
@@ -36,17 +47,51 @@ interface Corroboration {
   research: { runId: string; facts: Fact[]; conflicts: Array<{ site: string; signalIds: string[] }>; notes: string[] };
   newIndependent: Fact[];
 }
-export interface ThesisOutcome { key: string; title: string; approved: number; inUse: number; routing: UseOutcomeResponse | null; failures: string[] }
+export interface ThesisOutcome {
+  key: string;
+  title: string;
+  approved: number;
+  inUse: number;
+  routing: UseOutcomeResponse | null;
+  failures: string[];
+  state?: OutcomeState;
+  /** USE THIS VERIFIED EVIDENCE: revisions created / observations rebuilt. */
+  revised?: { drafts: number; rebuilt: number };
+}
 
-/** Rows APPROVE + USE can still move (approved rows only need "use"). */
-const SELECTABLE = new Set(['draft', 'review_required', 'approved']);
-const STATUS_WORDS: Record<string, string> = { draft: 'needs review', review_required: 'needs review', approved: 'approved, not in use', active: 'in use' };
+/** Server-derived next steps (hypothesis/actionability.ts). */
+const DECIDE = new Set(['approve_use', 'use']);
+const RESEARCH = new Set(['find_evidence', 'revise']);
+const NEXT_WORDS: Record<string, string> = {
+  approve_use: 'needs review',
+  use: 'approved, not in use',
+  find_evidence: 'needs verified evidence',
+  revise: 'approved, needs verified evidence',
+  in_use: 'in use',
+  none: 'closed',
+};
+const READINESS_WORDS: Record<string, string> = {
+  evidence_insufficient: 'no verified fact yet',
+  evidence_expired: 'evidence expired',
+  no_evidence: 'no evidence',
+};
 const DEPTH_TONE: Record<string, string> = {
   INSUFFICIENT: 'border-[var(--destructive)] text-[var(--destructive)]',
   'SINGLE-SOURCE': 'border-amber-500 text-amber-600',
   CORROBORATED: 'border-emerald-600 text-emerald-700',
   'WELL-SUPPORTED': 'border-emerald-600 text-emerald-700',
 };
+/** Plain words for a refused USE THIS EVIDENCE (the raw code stays in parentheses as the detail). */
+function evidenceRefusal(code: string): string {
+  const [head, , why] = code.split(':');
+  if (head === 'not_verified_evidence') {
+    const what = why === 'expired' ? 'is too old to open a conversation with' : why === 'not_a_physical_network_change' ? 'does not state a physical-network change' : 'is not a verified, quoted fact about this account';
+    return `Nothing changed. The fact you chose ${what}. Choose another fact or research again. (${code})`;
+  }
+  if (head === 'observation_unsupported') return `Nothing changed. The chosen fact could not be quoted as a supported observation. Choose another fact. (${code})`;
+  return refusalSentence(code) ?? code;
+}
+
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
 async function post<T>(body: unknown): Promise<{ ok: boolean; data: T & { error?: string; reason?: string } }> {
@@ -57,18 +102,31 @@ async function post<T>(body: unknown): Promise<{ ok: boolean; data: T & { error?
 function DepthBadge({ card }: { card: ThesisCard }) {
   const n = card.depth.independentSources;
   return (
-    <Badge variant="outline" className={DEPTH_TONE[card.depth.label] ?? ''} title="Independent sources: syndicated copies, the same filing, AI summaries and quote-of-quote count once">
-      {card.depth.label} · {n} independent source{n === 1 ? '' : 's'}
+    <Badge variant="outline" className={DEPTH_TONE[card.depth.label] ?? ''} title="Research depth. Independent sources: syndicated copies, the same filing, AI summaries and quote-of-quote count once">
+      Research depth: {card.depth.label} · {n} independent source{n === 1 ? '' : 's'}
       {card.depth.keywordOnly > 0 ? ` · ${card.depth.keywordOnly} keyword hit` : ''}
+    </Badge>
+  );
+}
+
+/** OUTREACH READINESS: a thesis can have a source and still not be ready. */
+function ReadinessBadge({ card }: { card: ThesisCard }) {
+  return card.readiness.ready ? (
+    <Badge variant="outline" className="border-emerald-600 text-emerald-700" data-testid="outreach-readiness">Ready for outreach</Badge>
+  ) : (
+    <Badge variant="outline" className="border-[var(--destructive)] text-[var(--destructive)]" data-testid="outreach-readiness">
+      Not ready for outreach{card.readiness.reason ? `: ${READINESS_WORDS[card.readiness.reason] ?? card.readiness.reason}` : ''}
     </Badge>
   );
 }
 
 function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard; openInitially: boolean; onOutcome: (o: ThesisOutcome) => void }) {
   const router = useRouter();
+  const ready = card.readiness.ready;
+  const actionable = ready ? DECIDE : RESEARCH;
   const [open, setOpen] = useState(openInitially);
-  const [checked, setChecked] = useState<Set<string>>(() => new Set(card.members.filter((m) => SELECTABLE.has(m.status)).map((m) => m.id)));
-  const [busy, setBusy] = useState<'approve' | 'use' | 'corroborate' | null>(null);
+  const [checked, setChecked] = useState<Set<string>>(() => new Set(card.members.filter((m) => actionable.has(m.next)).map((m) => m.id)));
+  const [busy, setBusy] = useState<'approve' | 'use' | 'corroborate' | 'evidence' | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [corr, setCorr] = useState<Corroboration | null>(null);
   const [chosen, setChosen] = useState<Set<string>>(new Set());
@@ -77,20 +135,40 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
   const [decided, setDecided] = useState(false);
   const nameOf = (id: string) => card.members.find((m) => m.id === id)?.personaName ?? id;
   const title = `${card.accountName} · ${card.problemFamily.replace(/_/g, ' ')}`;
+  const key = `${card.accountName}|${card.problemFamily}`;
 
   /** The ONE decision: approve (+ use, which routes), optionally with the evidence Casey ticked. */
   async function approve(use: boolean, signalIds: string[] = []) {
     setBusy(use ? 'use' : 'approve'); setError(null);
     try {
-      const r = await post<{ results: RowResult[]; routing?: UseOutcomeResponse | null }>({
+      const r = await post<{ results: RowResult[]; routing?: UseOutcomeResponse | null; summary?: Summary }>({
         op: 'approve', fingerprint: card.fingerprint, hypothesisIds: [...checked], use, ...(signalIds.length ? { signalIds } : {}),
       });
       const rows = r.data.results ?? [];
       if (!r.ok && rows.length === 0) { setError(r.data.reason ?? r.data.error ?? 'approve_failed'); return; }
-      const approved = rows.filter((x) => x.ok && (x.to === 'approved' || x.to === 'active')).length;
-      const inUse = rows.filter((x) => x.ok && x.to === 'active').length;
-      onOutcome({ key: `${card.accountName}|${card.problemFamily}`, title, approved, inUse, routing: r.data.routing ?? null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`) });
+      // Actual state (already approved rows count): never "0 approved" over approved rows.
+      const summary = r.data.summary;
+      const final = (x: RowResult) => x.to ?? x.from;
+      const approved = summary?.approved ?? rows.filter((x) => final(x) === 'approved' || final(x) === 'active').length;
+      const inUse = summary?.inUse ?? rows.filter((x) => final(x) === 'active').length;
+      onOutcome({ key, title, approved, inUse, routing: r.data.routing ?? null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`), state: summary });
       if (approved > 0 && rows.every((x) => x.ok)) setDecided(true);
+      router.refresh();
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
+  }
+
+  /** USE THIS VERIFIED EVIDENCE: rebuild editable observations, revise frozen ones. Never approves. */
+  async function useEvidence(signalIds: string[]) {
+    setBusy('evidence'); setError(null);
+    try {
+      const r = await post<{ results: RowResult[] }>({ op: 'use_evidence', fingerprint: card.fingerprint, hypothesisIds: [...checked], signalIds });
+      const rows = r.data.results ?? [];
+      if (!r.ok && rows.length === 0) { setError(evidenceRefusal(r.data.reason ?? r.data.error ?? 'evidence_failed')); return; }
+      const drafts = rows.filter((x) => x.ok && x.revisionId).length;
+      const rebuilt = rows.filter((x) => x.ok && !x.revisionId && (x.from === 'draft' || x.from === 'review_required')).length;
+      onOutcome({ key, title, approved: 0, inUse: 0, routing: null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`), revised: { drafts, rebuilt } });
+      setCorr(null); setChosen(new Set());
+      if (rows.length > 0 && rows.every((x) => x.ok)) setDecided(true);
       router.refresh();
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
   }
@@ -112,28 +190,54 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
     );
   }
 
+  const approvedCount = card.members.filter((m) => m.status === 'approved' || m.status === 'active').length;
+  const decideCount = card.members.filter((m) => DECIDE.has(m.next)).length;
+  const researchCount = card.members.filter((m) => RESEARCH.has(m.next)).length;
+  const inUseCount = card.members.filter((m) => m.next === 'in_use').length;
+  const why = ready ? null : refusalCopy(card.readiness.reason);
+
   return (
     <div className="rounded-lg border border-[var(--border)] p-4" data-testid="thesis-group">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <p className="font-semibold">{card.accountName} · {card.problemFamily.replace(/_/g, ' ')}</p>
-          <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-            {card.members.length} people share this thesis · {(() => { const waiting = card.members.filter((m) => SELECTABLE.has(m.status)).length; const inUse = card.members.filter((m) => m.status === 'active').length; return [waiting ? `${waiting} waiting for you` : null, inUse ? `${inUse} in use` : null].filter(Boolean).join(' · '); })()}
+        <div className="min-w-0">
+          <p className="font-semibold">{title}</p>
+          <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="thesis-state">
+            {[
+              card.members.length === 1 ? '1 person' : `${card.members.length} people share this thesis`,
+              approvedCount ? `${approvedCount} approved` : null,
+              `${inUseCount} in use`,
+              decideCount ? `${decideCount} waiting for you` : null,
+              researchCount ? `${researchCount} need verified evidence` : null,
+            ]
+              .filter(Boolean)
+              .join(' · ')}
           </p>
           <p className="mt-1 text-xs text-[var(--muted-foreground)]">
             {card.members.map((m) => m.personaName ?? 'unknown').join(', ')}
           </p>
-          <div className="mt-2"><DepthBadge card={card} /></div>
+          <div className="mt-2 flex flex-wrap gap-2"><ReadinessBadge card={card} /><DepthBadge card={card} /></div>
         </div>
         <Button type="button" size="sm" variant={open ? 'outline' : 'default'} onClick={() => setOpen(!open)}>
-          {open ? 'Close' : 'Decide'}
+          {open ? 'Close' : ready ? 'Decide' : 'Research'}
         </Button>
       </div>
 
       {open ? (
         <div className="mt-4 space-y-4 text-sm">
+          {why ? (
+            <section data-testid="not-ready-why" className="rounded-md border border-amber-500/50 bg-amber-500/10 p-3">
+              <p className="font-medium">Not ready for outreach. {why.why}</p>
+              <p className="mt-1">Next: {why.next}</p>
+              {card.members.some((m) => m.next === 'revise') ? (
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                  Approved versions are frozen: the fact you choose creates a new draft for your review. The approved versions and their history are kept.
+                </p>
+              ) : null}
+            </section>
+          ) : null}
+
           <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Shared thesis</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{card.members.length > 1 ? 'Shared thesis' : 'Thesis'}</h3>
             <p className="mt-1"><span className="text-[var(--muted-foreground)]">Observation:</span> {card.observation}</p>
             <p className="mt-1"><span className="text-[var(--muted-foreground)]">Hypothesis:</span> {card.problemHypothesis}</p>
             {card.rootCauses.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Root causes:</span> {card.rootCauses.join('; ')}</p> : null}
@@ -146,7 +250,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
             <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Evidence</h3>
             <ul className="mt-1 space-y-1">
               {card.sources.map((s) => (
-                <li key={s.id}>
+                <li key={s.id} className="break-words">
                   {s.url ? <a className="underline" href={s.url} target="_blank" rel="noreferrer">{s.title ?? s.url}</a> : (s.title ?? s.id)}
                   {!s.quoted && s.kind !== 'operator_knowledge' ? <span className="ml-2 text-xs text-amber-600">keyword hit, no quoted passage (not counted as a source)</span> : null}
                 </li>
@@ -165,8 +269,8 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
           <section>
             {!corr ? (
               <>
-                <Button type="button" size="sm" variant="outline" disabled={busy !== null} onClick={() => void corroborate()}>
-                  {busy === 'corroborate' ? 'Searching public sources...' : 'Find more evidence'}
+                <Button type="button" size="sm" variant={ready ? 'outline' : 'default'} data-testid="find-evidence" disabled={busy !== null} onClick={() => void corroborate()}>
+                  {busy === 'corroborate' ? 'Searching public sources...' : ready ? 'Find more evidence' : 'Find verified evidence'}
                 </Button>
                 <span className="ml-2 text-xs text-[var(--muted-foreground)]">One search for the whole thesis, not one per person.</span>
               </>
@@ -195,7 +299,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
                               setChosen(next);
                             }}
                           />
-                          <span>
+                          <span className="min-w-0 break-words">
                             <q>{f.excerpt}</q>
                             <span className="ml-1 text-xs text-[var(--muted-foreground)]"><a className="underline" href={f.url} target="_blank" rel="noreferrer">{f.title}</a>, {day(f.publishedAt)}</span>
                           </span>
@@ -203,12 +307,16 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
                       ))}
                     </ul>
                     <p className="mt-2 text-xs text-[var(--muted-foreground)]" data-testid="what-it-changes">
-                      What it changes: {card.depth.independentSources} to {card.depth.independentSources + chosen.size} independent sources for the people you check below.
+                      {ready
+                        ? `What it changes: ${card.depth.independentSources} to ${card.depth.independentSources + chosen.size} independent sources for the people you check below.`
+                        : 'What it changes: the observation is rewritten as the fact you choose, quoted with its source. You review it before anything is approved.'}
                     </p>
                   </>
                 ) : corr.outcome === 'no_second_source' ? (
-                  <p className="mt-1 text-[var(--muted-foreground)]">
-                    Nothing fresh and independent was verified. Holding is a complete answer: close this and research later, or approve on what the thesis has.
+                  <p className="mt-1 text-[var(--muted-foreground)]" data-testid="hold">
+                    {ready
+                      ? 'Nothing fresh and independent was verified. Holding is a complete answer: close this and research later, or approve on what the thesis has.'
+                      : 'No verified fact was found. Holding is a complete answer: this thesis stays in Research and there is nothing to approve yet. Research again later.'}
                   </p>
                 ) : null}
               </div>
@@ -219,7 +327,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
             <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">People</h3>
             <ul className="mt-1 space-y-1">
               {card.members.map((m) => {
-                const editable = SELECTABLE.has(m.status);
+                const editable = actionable.has(m.next);
                 return (
                   <li key={m.id} className="flex flex-wrap items-center gap-2">
                     <input
@@ -235,30 +343,63 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
                     />
                     <span>{m.personaName ?? 'unknown'}</span>
                     <span className="text-xs text-[var(--muted-foreground)]">{m.personaTitle ?? ''}</span>
-                    <Badge variant="outline" className="text-[10px]">{STATUS_WORDS[m.status] ?? m.status.replace(/_/g, ' ')}</Badge>
+                    <Badge variant="outline" className="text-[10px]">{NEXT_WORDS[m.next] ?? m.status.replace(/_/g, ' ')}</Badge>
                   </li>
                 );
               })}
             </ul>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              {corr?.outcome === 'corroborated' && chosen.size > 0 ? (
-                <Button type="button" size="sm" data-testid="use-evidence-approve" disabled={busy !== null || checked.size === 0} onClick={() => void approve(true, [...chosen])}>
-                  {busy === 'use' ? 'Approving and routing (about a minute)...' : `Use this evidence + approve + use for ${checked.size}`}
-                </Button>
-              ) : (
-                <Button type="button" size="sm" data-testid="approve-use" disabled={busy !== null || checked.size === 0 || corr?.outcome === 'contradicts'} onClick={() => void approve(true)}>
-                  {busy === 'use' ? 'Approving and routing (about a minute)...' : `Approve + use for ${checked.size}`}
-                </Button>
-              )}
-              <Button type="button" size="sm" variant="ghost" disabled={busy !== null || checked.size === 0} onClick={() => void approve(false)}>
-                {busy === 'approve' ? 'Approving...' : 'Approve only'}
-              </Button>
-            </div>
-            <p className="mt-1 text-xs text-[var(--muted-foreground)]">Use means GAP routes these people now and recommends who to contact. Nothing is drafted, enrolled or sent.</p>
+            {ready ? (
+              <>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  {corr?.outcome === 'corroborated' && chosen.size > 0 ? (
+                    <Button type="button" size="sm" data-testid="use-evidence-approve" disabled={busy !== null || checked.size === 0} onClick={() => void approve(true, [...chosen])}>
+                      {busy === 'use' ? 'Approving and routing (about a minute)...' : `Use this evidence + approve + use for ${checked.size}`}
+                    </Button>
+                  ) : (
+                    <Button type="button" size="sm" data-testid="approve-use" disabled={busy !== null || checked.size === 0 || corr?.outcome === 'contradicts'} onClick={() => void approve(true)}>
+                      {busy === 'use' ? 'Approving and routing (about a minute)...' : `Approve + use for ${checked.size}`}
+                    </Button>
+                  )}
+                  {card.members.some((m) => m.next === 'approve_use' && checked.has(m.id)) ? (
+                    <Button type="button" size="sm" variant="ghost" disabled={busy !== null || checked.size === 0} onClick={() => void approve(false)}>
+                      {busy === 'approve' ? 'Approving...' : 'Approve only'}
+                    </Button>
+                  ) : null}
+                </div>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">Use means GAP routes these people now and recommends who to contact. Nothing is drafted, enrolled or sent.</p>
+              </>
+            ) : (
+              <div className="mt-3 space-y-1">
+                {corr?.outcome === 'corroborated' && chosen.size > 0 ? (
+                  <Button type="button" size="sm" data-testid="use-verified-evidence" disabled={busy !== null || checked.size === 0} onClick={() => void useEvidence([...chosen])}>
+                    {busy === 'evidence' ? 'Rewriting the observation...' : `Use this evidence for ${checked.size}`}
+                  </Button>
+                ) : null}
+                <p className="text-xs text-[var(--muted-foreground)]">Nothing is approved, used or sent from here. Using evidence rewrites the observation from the fact you choose, for your review.</p>
+              </div>
+            )}
           </section>
           {error ? <p role="alert" className="text-[var(--destructive)]">{error}</p> : null}
         </div>
       ) : null}
+    </div>
+  );
+}
+
+function RevisionOutcome({ revised }: { revised: NonNullable<ThesisOutcome['revised']> }) {
+  return (
+    <div data-testid="revision-outcome" className="space-y-2 rounded-md border border-[var(--border)] p-3 text-sm">
+      <p className="font-semibold uppercase tracking-wide">
+        {revised.drafts > 0
+          ? `${revised.drafts} revised draft${revised.drafts === 1 ? '' : 's'} ready for your review`
+          : `${revised.rebuilt} observation${revised.rebuilt === 1 ? '' : 's'} rewritten from verified evidence`}
+      </p>
+      <p className="text-xs">
+        {revised.drafts > 0 ? 'The approved versions are unchanged and kept in history. ' : ''}Read the new observation, then Approve + use. Nothing is approved, in use or sent yet.
+      </p>
+      <a href="/gap?lane=review" className="inline-flex rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90">
+        Review the revised thesis
+      </a>
     </div>
   );
 }
@@ -279,11 +420,15 @@ export function ThesisGroupReview({ cards, intro = true }: { cards: ThesisCard[]
       {outcomes.map((o) => (
         <div key={o.key} className="space-y-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{o.title}</p>
-          <UseOutcome approved={o.approved} inUse={o.inUse} routing={o.routing} />
+          {o.revised ? <RevisionOutcome revised={o.revised} /> : <UseOutcome approved={o.approved} inUse={o.inUse} routing={o.routing} state={o.state} />}
           {o.failures.length ? (
-            <ul className="space-y-0.5 text-xs text-[var(--destructive)]" data-testid="row-failures">
-              {o.failures.map((f) => <li key={f}>{f}</li>)}
-            </ul>
+            // Per-person machine detail sits under Details; the plain-language outcome above is the primary message.
+            <details className="text-xs" data-testid="row-failures">
+              <summary className="cursor-pointer text-[var(--muted-foreground)]">Details for {o.failures.length} {o.failures.length === 1 ? 'person' : 'people'}</summary>
+              <ul className="mt-1 space-y-0.5 text-[var(--muted-foreground)]">
+                {o.failures.map((f) => <li key={f}>{f}</li>)}
+              </ul>
+            </details>
           ) : null}
         </div>
       ))}
@@ -291,7 +436,7 @@ export function ThesisGroupReview({ cards, intro = true }: { cards: ThesisCard[]
         <ThesisGroupCard
           key={c.fingerprint}
           card={c}
-          openInitially={i === 0 && c.members.some((m) => SELECTABLE.has(m.status))}
+          openInitially={i === 0 && c.members.some((m) => DECIDE.has(m.next) || RESEARCH.has(m.next))}
           onOutcome={(o) => setOutcomes((cur) => [o, ...cur.filter((x) => x.key !== o.key)])}
         />
       ))}

@@ -26,6 +26,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { getHypothesis, transitionHypothesis, updateDraftNarrative } from '@/lib/gap/hypothesis/service';
 import { advanceHypothesis } from '@/lib/gap/hypothesis/thesis-groups';
+import { actionabilityOf } from '@/lib/gap/hypothesis/actionability';
 import { routeAfterUse, type RouteAfterUseResult } from '@/lib/gap/routing/interactive';
 import { PERSONAS, PROBLEM_FAMILIES, UNMAPPED_FAMILY } from '@/lib/gap/taxonomy';
 
@@ -94,7 +95,9 @@ export async function GET(_request: NextRequest, { params }: RouteContext) {
   const { id } = await params;
   const row = await getHypothesis(prisma, id);
   if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
-  return NextResponse.json(row);
+  // What Casey can do now, from the canonical evidence gate (the drawer never re-derives it).
+  const actionability = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, new Date());
+  return NextResponse.json({ ...row, actionability });
 }
 
 export async function PATCH(request: NextRequest, { params }: RouteContext) {
