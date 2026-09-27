@@ -197,3 +197,11 @@ describe('final Monday blocker: an active or unverifiable opportunity is never a
     expect(sellerLaneOf(it0)).toBe('research');
   });
 });
+
+describe('an opportunity hold wins over a revised thesis', () => {
+  it.each(['active_opportunity', 'opportunity_unknown'])('%s with hypothesis.revisedBy stays held, not REVIEW', (ruleId) => {
+    const it0 = item({ action: ruleId === 'active_opportunity' ? 'nurture' : 'research_required', ruleId, hypothesis: { id: 'old', status: 'approved', revisedBy: 'rev-1' } });
+    expect(sellerLaneOf(it0)).toBe(ruleId === 'active_opportunity' ? 'later' : 'research');
+    expect(JSON.stringify(cardReadiness(it0))).not.toContain('Review the revised thesis');
+  });
+});

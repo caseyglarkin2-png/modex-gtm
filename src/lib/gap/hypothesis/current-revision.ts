@@ -13,9 +13,14 @@
  * Current work, for (account, person, family, card thesis):
  *   1. the newest live successor of the card's thesis along supersedes_id
  *      (draft, review_required, approved or active), else
- *   2. an open draft / review_required row for the same person at the same
+ *   2. the card's OWN thesis when it is an open draft / review_required row
+ *      that is already outreach ready (verified evidence was used on it in
+ *      place: RESEARCH THIS again would only propose a second one), else
+ *   3. an open draft / review_required row for the same person at the same
  *      account (same family when the family is known), not itself superseded.
  */
+import { GATE_SIGNAL_SELECT } from '../research/evidence-gate';
+import { outreachReadiness } from './actionability';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -50,6 +55,15 @@ export async function existingRevisionFor(
     }
     if (newest && (LIVE_REVISION_STATUSES as readonly string[]).includes(newest.status)) {
       return { hypothesisId: newest.id, status: newest.status, via: 'supersedes' };
+    }
+  }
+  if (input.hypothesisId) {
+    const own: { id: string; status: string; observation: string | null; account_name: string; signals?: Array<{ signal: unknown }> } | null = await prisma.prospectingHypothesis.findFirst({
+      where: { id: input.hypothesisId, status: { in: [...OPEN_WORK_STATUSES] }, superseded_by: { is: null } },
+      include: { signals: { include: { signal: { select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } } } } },
+    });
+    if (own && outreachReadiness({ observation: own.observation, account_name: own.account_name, signals: (own.signals ?? []).map((l) => l.signal as never) }, new Date()).ready) {
+      return { hypothesisId: own.id, status: own.status, via: 'open_work' };
     }
   }
   if (input.personaId == null) return null;

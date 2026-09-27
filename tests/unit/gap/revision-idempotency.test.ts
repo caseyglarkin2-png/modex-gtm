@@ -187,3 +187,36 @@ describe('13. an existing current revision: RESEARCH THIS leads there instead of
     expect(before).toMatchObject({ state: 'missing_prerequisite', researchable: true });
   });
 });
+
+describe('reviewer B residual: a DRAFT card thesis never gets a second evidence-backed draft beside it', () => {
+  const thinDraft = () => ({ ...frozen('x', 916), status: 'draft', supersedes_id: null });
+  const readyDraft = () => ({ ...thinDraft(), observation: citedQuote(FACT.title, FACT.evidence_text, 'fact', 'PepsiCo'), signals: [{ signal_id: 'fact', signal: FACT }] });
+
+  it('Find verified evidence rebuilt the draft in place (now ready): RESEARCH THIS on its stale card answers existing_revision', async () => {
+    table.hyps = [readyDraft()];
+    table.decisions = [{ id: 'dec-916', account_name: 'PepsiCo', persona_id: 916, hypothesis_id: 'x' }];
+    const res = await researchClick();
+    expect(await res.json()).toEqual({ outcome: 'existing_revision', existingRevision: { hypothesisId: 'x', status: 'draft', via: 'open_work' } });
+    expect(mockedRunResearch).not.toHaveBeenCalled();
+  });
+
+  it('a still-thin draft card keeps RESEARCH THIS (control: nothing usable exists yet)', async () => {
+    table.hyps = [thinDraft()];
+    table.decisions = [{ id: 'dec-916', account_name: 'PepsiCo', persona_id: 916, hypothesis_id: 'x' }];
+    mockedRunResearch.mockResolvedValue({ runId: 'r', outcome: 'insufficient_evidence', facts: [], rejected: [], conflicts: [], notes: [] });
+    await researchClick();
+    expect(mockedRunResearch).toHaveBeenCalledTimes(1);
+  });
+
+  it('Research this first, then Find verified evidence on the thin draft: points at the research draft, rebuilds nothing', async () => {
+    table.hyps = [thinDraft(), { ...readyDraft(), id: 'y', source_ref: 'research:run1', created_at: NOW }];
+    const prisma = thesisPrisma();
+    const groups = await loadThesisGroups(prisma, {}, { now: NOW, singletons: true });
+    const g = groups.find((x) => x.members.some((m) => m.id === 'x'))!;
+    const updateNarrative = vi.fn();
+    const r = await useEvidenceForThesis(prisma, { fingerprint: g.fingerprint, hypothesisIds: ['x'], signalIds: ['fact'], actor: 'c', now: NOW }, { updateNarrative: updateNarrative as any, propose: propose as any });
+    expect(r.results[0]).toMatchObject({ ok: true, revisionId: 'y', detail: 'revision already exists' });
+    expect(updateNarrative).not.toHaveBeenCalled();
+    expect(propose).not.toHaveBeenCalled();
+  });
+});

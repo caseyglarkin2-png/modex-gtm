@@ -353,6 +353,14 @@ export async function useEvidenceForThesis(
     const m = members.get(id)!;
     const signalIds = [...new Set([...m.signalIds, ...facts.map((f) => f.id)])];
     if (REVIEWABLE_STATUSES.has(m.status)) {
+      // Final Monday P1: another open revision for this person already exists (e.g. a
+      // RESEARCH THIS draft). Point at it; never a second evidence-backed draft beside it.
+      const row = await prisma.prospectingHypothesis.findUnique({ where: { id } });
+      const other = row ? await existingRevisionFor(prisma, { accountName: row.account_name, personaId: row.primary_persona_id ?? null, problemFamily: row.problem_family, hypothesisId: id }) : null;
+      if (other && other.hypothesisId !== id) {
+        results.push({ hypothesisId: id, ok: true, from: m.status, to: m.status, revisionId: other.hypothesisId, detail: 'revision already exists' });
+        continue;
+      }
       const r = await updateNarrative(prisma, id, { observation, signalIds, primarySignalId: primary.id }, input.actor);
       results.push(
         r.ok

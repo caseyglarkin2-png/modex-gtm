@@ -66,6 +66,9 @@ export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin',
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
 
+/** R3b / R3c: the account's opportunity state holds the card whatever its thesis is doing. */
+const OPPORTUNITY_HOLDS: ReadonlySet<string> = new Set(['active_opportunity', 'opportunity_unknown']);
+
 /** Where a draft hypothesis for any account is reviewed and approved: the cockpit REVIEW lane. */
 export const HYPOTHESIS_REVIEW_HREF = '/gap?lane=review';
 
@@ -170,7 +173,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
   // Final Monday P1: this card's thesis was already revised (verified evidence
   // chosen, a draft revision created). The current work is that revision in
   // REVIEW; RESEARCH THIS here would only mint a second equivalent draft.
-  if (item.hypothesis?.revisedBy) {
+  if (item.hypothesis?.revisedBy && !OPPORTUNITY_HOLDS.has(item.ruleId)) {
     return withWarning({
       state: 'actionable' as const,
       primary: { label: 'Review the revised thesis', href: HYPOTHESIS_REVIEW_HREF },
@@ -263,7 +266,7 @@ export function sellerLaneOf(item: ReadinessInput & { humanAction?: string | nul
   // decision lives in REPLIES; a READY card here would offer a cold first email.
   if (item.lane === 'reply_triage') return 'later';
   if (item.action === 'approve_hypothesis') return 'review';
-  if (item.hypothesis?.revisedBy && !item.touch) return 'review';
+  if (item.hypothesis?.revisedBy && !item.touch && !OPPORTUNITY_HOLDS.has(item.ruleId)) return 'review';
   const r = cardReadiness(item);
   if (r.state === 'blocked') return 'blocked';
   if (r.state === 'missing_prerequisite') return 'research';
