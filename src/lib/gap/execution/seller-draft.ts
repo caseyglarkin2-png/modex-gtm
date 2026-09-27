@@ -43,6 +43,7 @@ import { loadActiveOpportunityInputs } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
 import { computeNextTouch, type NextTouch } from './next-touch';
+import { personSendHistoryForDecision } from './person-history';
 import { getGmailMessageHeaders } from '@/lib/email/gmail-inbox';
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
@@ -58,6 +59,8 @@ export type SellerDraftRefusal =
   | 'decision_blocked'
   | 'decision_superseded'
   | 'first_touch_already_sent'
+  | 'step_already_sent'
+  | 'send_in_progress_or_unknown'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -260,8 +263,24 @@ export async function prepareSellerEmail(
   // invalid address, meeting booked). Unreadable reply truth prepares nothing.
   const stepIndex = Math.max(0, input.stepIndex ?? 0);
   const touch = await (deps.nextTouch ?? computeNextTouch)(prisma, decisionId, now);
-  if (stepIndex === 0 && touch.state !== 'not_started') {
-    return refuse(prisma, actor, decisionId, { ok: false, reason: 'first_touch_already_sent', detail: touch.state });
+  // The person's execution truth across EVERY routing card (red team T2): a
+  // newer card for the same person never forgets a send, a draft or an
+  // unresolved claim made from an older one.
+  const history = await personSendHistoryForDecision(prisma, decisionId);
+  const priorAtStep = history.sent.find((s) => s.stepIndex === stepIndex);
+  if (stepIndex === 0 && (touch.state !== 'not_started' || priorAtStep)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'first_touch_already_sent', detail: priorAtStep ? `sent ${priorAtStep.sentAt} (${priorAtStep.engine}, card ${priorAtStep.decisionId})` : touch.state });
+  }
+  if (priorAtStep) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'step_already_sent', detail: `touch ${stepIndex + 1} sent ${priorAtStep.sentAt} (${priorAtStep.engine}, card ${priorAtStep.decisionId})` });
+  }
+  const openClaim = history.unresolvedClaims.find((c) => c.stepIndex === null || c.stepIndex === stepIndex);
+  if (openClaim) {
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'send_in_progress_or_unknown',
+      detail: `A send of touch ${stepIndex + 1} to this person was started ${openClaim.claimedAt} and its outcome is not recorded. Check Gmail Sent in casey@yardflow.ai. GAP will not send it twice.`,
+    });
   }
   if (stepIndex > 0) {
     if (touch.state === 'stopped') return refuse(prisma, actor, decisionId, { ok: false, reason: 'sequence_stopped', detail: touch.detail });
@@ -296,10 +315,7 @@ export async function prepareSellerEmail(
   }
   const sentBodies =
     touch.state === 'waiting' || touch.state === 'due'
-      ? (await listDraftRecords(prisma, decisionId))
-          .filter((r) => r.fate === 'sent' && (r.drafted.stepIndex ?? 0) < stepIndex)
-          .sort((a, b) => (a.drafted.stepIndex ?? 0) - (b.drafted.stepIndex ?? 0))
-          .map((r) => r.drafted.bodySnapshot)
+      ? history.sent.filter((s) => s.stepIndex < stepIndex && s.bodySnapshot).map((s) => s.bodySnapshot as string)
       : [];
   const contentHash = pack.contentHash!;
 

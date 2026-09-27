@@ -16,9 +16,11 @@
  *                                  (a changed hash or recipient is a refusal,
  *                                  never a silent resend of different copy)
  *
- * Idempotency: one decision + version + step + recipient + content hash is one
- * key. A step already sent answers ALREADY SENT with its time and message id
- * and never calls Gmail. The key is claimed under a Postgres advisory lock
+ * Idempotency (red team T2): one PERSON + recipient + step is one key, across
+ * every routing card, whatever the copy says. A step already sent on this
+ * card answers ALREADY SENT with its time and message id and never calls
+ * Gmail; a step sent to this person from any other card, by any engine, is
+ * refused. The key is claimed under a Postgres advisory lock on the person
  * BEFORE the Gmail call (draft-ledger.ts DIRECT_*), so a double click, a
  * refresh or a retry that races the first click waits for it and then sees it.
  * If Gmail's answer is lost (crash, network), the claim stays unresolved and
@@ -43,6 +45,7 @@ import {
 } from './draft-ledger';
 import { gmailDirectAdapter, type GmailAdapterDeps, type GmailAdapterInput } from './gmail-adapter';
 import { prepareSellerEmail, type PreparedSellerEmail, type SellerDraftDeps, type SellerDraftRefusal } from './seller-draft';
+import { personSendHistory, personStepKey, type PersonSendHistory } from './person-history';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -94,6 +97,7 @@ export interface SellerSendDeps extends SellerDraftDeps {
 
 type Row = { kind: string; payload: Record<string, unknown> | null; created_at?: Date };
 
+/** This card's DIRECT_* rows (the ALREADY SENT answer for a replayed click on the same card). */
 async function directRows(prisma: PrismaLike, decisionId: string): Promise<Row[]> {
   return prisma.gapAuditEvent.findMany({
     where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: decisionId, kind: { in: [DIRECT_CLAIMED, DIRECT_SENT, DIRECT_RELEASED] } },
@@ -102,30 +106,37 @@ async function directRows(prisma: PrismaLike, decisionId: string): Promise<Row[]
   });
 }
 
-/** The state of one idempotency key from its ledger rows. */
-export function keyState(rows: readonly Row[], key: string): 'free' | 'sent' | 'unresolved' {
-  const mine = rows.filter((r) => r.payload?.idempotencyKey === key);
-  if (mine.some((r) => r.kind === DIRECT_SENT)) return 'sent';
-  const claims = mine.filter((r) => r.kind === DIRECT_CLAIMED).length;
-  const releases = mine.filter((r) => r.kind === DIRECT_RELEASED).length;
-  return claims > releases ? 'unresolved' : 'free';
+/** The state of one person + step from the person's history: sent anywhere, a claim open anywhere, or free. */
+export function personStepState(history: PersonSendHistory, stepIndex: number): 'free' | 'sent' | 'unresolved' {
+  if (history.sent.some((s) => s.stepIndex === stepIndex)) return 'sent';
+  if (history.unresolvedClaims.some((c) => c.stepIndex === null || c.stepIndex === stepIndex)) return 'unresolved';
+  return 'free';
 }
 
 /**
- * Claim `key` for one send, atomically: a transaction-scoped advisory lock on
- * the key serializes concurrent clicks, then the ledger is re-read inside it.
+ * Claim one person + step for one send, atomically (red team T2): a
+ * transaction-scoped advisory lock on the PERSON serializes every send to
+ * them from any card, then their whole history is re-read inside it. The
+ * key is person + recipient + step: no card, no copy hash, no version, so a
+ * newer card or edited copy cannot claim the same touch a second time.
  */
 export async function claimSendKey(
   prisma: PrismaLike,
-  args: { key: string; decisionId: string; actor: string; now: Date },
+  args: { key: string; decisionId: string; personaId: number | null; recipient: string; stepIndex: number; actor: string; now: Date },
 ): Promise<{ claimed: true } | { claimed: false; state: 'sent' | 'unresolved' }> {
   return prisma.$transaction(
     async (tx: PrismaLike) => {
-      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${args.key}))`;
-      const state = keyState(await directRows(tx, args.decisionId), args.key);
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_send_person:${args.personaId ?? args.recipient}`}))`;
+      const state = personStepState(await personSendHistory(tx, args.personaId, args.recipient), args.stepIndex);
       if (state !== 'free') return { claimed: false as const, state };
       await tx.gapAuditEvent.create({
-        data: { kind: DIRECT_CLAIMED, actor: args.actor, subject_type: DRAFT_SUBJECT_TYPE, subject_id: args.decisionId, payload: { idempotencyKey: args.key, claimedAt: args.now.toISOString() } },
+        data: {
+          kind: DIRECT_CLAIMED,
+          actor: args.actor,
+          subject_type: DRAFT_SUBJECT_TYPE,
+          subject_id: args.decisionId,
+          payload: { idempotencyKey: args.key, claimedAt: args.now.toISOString(), personaId: args.personaId, recipient: args.recipient, stepIndex: args.stepIndex },
+        },
       });
       return { claimed: true as const };
     },
@@ -200,13 +211,14 @@ export async function sendSellerEmail(
     return { ok: false, reason: 'recipient_changed_since_review', detail: `The recipient is now ${p.recipient}. Review and confirm again.` };
   }
 
-  const key = `gmail_direct:${decisionId}:${p.sequenceVersionId}:${stepIndex}:${p.recipient}:${p.contentHash}`;
-  const claim = await (deps.claim ?? claimSendKey)(prisma, { key, decisionId, actor, now });
+  const key = personStepKey(p.personaId, p.recipient, stepIndex);
+  const claim = await (deps.claim ?? claimSendKey)(prisma, { key, decisionId, personaId: p.personaId, recipient: p.recipient, stepIndex, actor, now });
   if (!claim.claimed) {
     if (claim.state === 'sent') {
       const again = sentStepRow(await directRows(prisma, decisionId), stepIndex);
       const sp = again?.payload as unknown as DirectSentPayload | undefined;
       if (sp) return { ok: true, alreadySent: true, sent: { sentAt: sp.sentAt, gmailSentMessageId: sp.gmailSentMessageId, gmailThreadId: sp.gmailThreadId, recipient: sp.recipient } };
+      return { ok: false, reason: stepIndex === 0 ? 'first_touch_already_sent' : 'step_already_sent', detail: `Touch ${stepIndex + 1} was already sent to this person from another card. GAP will not send it twice.` };
     }
     return {
       ok: false,

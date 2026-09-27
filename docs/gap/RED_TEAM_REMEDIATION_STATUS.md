@@ -23,7 +23,7 @@ review, production verification.
 
 ### T1 — close passwordless production login
 
-- status: IMPLEMENTED, Release A gate running (not yet merged)
+- status: DONE. Release A merged: PR #268, merge `fc7d20a5`, production READY 2026-09-26
 - commits: `0000ffeb` (T1), `74511dc6` (middleware segment anchoring),
   `feb709aa` (review follow-ups)
 - files: `src/lib/auth-providers.ts` (new), `src/lib/auth.ts`,
@@ -60,9 +60,17 @@ review, production verification.
   send-approval route (session actor, body actor ignored, 401, 403, 409);
   send route 403; middleware matcher RED on 11 bypassed paths then GREEN.
   Mutation: provider gate forced open -> 2 RED, restored GREEN.
-- production mutation: none yet.
-- production verification: pending merge. Must show `GET /api/auth/providers`
-  = google only, and an anonymous GET /api/email/send-jobs/1/ = 401.
+- gates: GAP + auth suite 144 files / 2810 tests green; typecheck green;
+  local build green; Vercel preview READY; read-only security review (1
+  BLOCKER + 3 SHOULD-FIX, all fixed in the PR);
+  github_actions = unavailable_external_billing.
+- production mutation: deploy only (no data writes).
+- production verification (2026-09-26, after `fc7d20a5` READY):
+  `GET /api/auth/providers` = `{"google":...}` only; anonymous
+  `/api/email/send/` = 401 `Authentication required` (the wrapper);
+  `/api/email/send-jobs/1/` = 401; `/api/cron/check-inbox/` = 401
+  `Unauthorized` (its own handler, still reachable); `/api/e/open/`,
+  `/for/pepsico/`, `/demo/pepsico/`, `/unsubscribe/`, `/login/` = 200.
 - known consequence: Playwright specs under `tests/e2e/` that sign in via
   `/api/auth/callback/credentials` against production stop working there by
   design; they still run against local `next dev`.
@@ -70,4 +78,43 @@ review, production verification.
   `PATCH /api/revops/message-evolution` (`reviewed_by`),
   `POST /api/revops/failure-remediation` (`owner`) and
   `revops/playbook-blocks` (`createdBy`) still accept a client-named actor.
-- next: merge Release A, verify production, then T2.
+- next: T2 (Release B, branch `feat/gap-redteam-release-b`).
+
+### T2 — one send history per person
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- commit: see `git log --grep "T2"` on `feat/gap-redteam-release-b`
+- files: `src/lib/gap/execution/person-history.ts` (new),
+  `src/lib/gap/execution/next-touch.ts`, `src/lib/gap/execution/seller-draft.ts`,
+  `src/lib/gap/execution/seller-send.ts`, `src/lib/gap/routing/queue.ts`,
+  `scripts/gap/audit-person-history.ts` (read-only), tests
+  `tests/unit/gap/person-send-history.test.ts`, shared fixture
+  `tests/unit/gap/fixtures/where.ts` (seller-db, next-touch, seller-send
+  fixtures moved onto it; unknown operators throw)
+- change: `personSendHistory(prisma, personaId, recipient)` reads DRAFT_SENT
+  (joined to DRAFTED), MANUAL_SENT, DIRECT_SENT, drafts and unresolved
+  DIRECT_CLAIMED across every routing decision of the person, of any persona
+  row sharing the address, and of any ledger row naming the address. Ordered
+  (step, sentAt, event id), no row cap, no age window. Used by
+  computeNextTouch (so resolveActionPack and the draft/send gates),
+  prepareSellerEmail (step already sent anywhere -> `first_touch_already_sent`
+  / `step_already_sent`; open claim anywhere -> `send_in_progress_or_unknown`),
+  sendSellerEmail (claim key `gmail_direct:person:<id>:<recipient>:step:<n>`,
+  advisory lock on the person, person history re-read inside the lock) and
+  the queue's attachTouches (complete, page-scoped read; the old
+  `take: 500` / 120-day scan is gone; past the evaluation cap or on a read
+  failure a card with history is `unknown`, never a first email). Historical
+  rows untouched; legacy per-card claim keys are parsed for their step.
+- tests: 14 new (A: step 0 on newer card refused, 5 variants incl. duplicate
+  persona and open claim; B: newer card's next touch = waiting; queue: 300-day
+  send behind 600 rows still found, read failure fails closed). RED on the
+  original per-card code: 9 failed. Mutation C (history forced back to
+  decision scope): 8 failed; restored GREEN. GAP folder 141 files / 2771
+  tests green; typecheck green.
+- production mutation: none.
+- production verification (D, READ ONLY, 2026-09-26): persona 1886 has 7
+  cards; step 0 hand-sent 2026-09-25T20:59:19Z on card cmuh66pro…; the
+  newest email card cmuhrmns… now resolves `waiting` for touch 2 due
+  2026-10-01 and step 0 is refused. Receipt:
+  `docs/gap/t2-kroger-1886-person-history.md`.
+- next: T3.
