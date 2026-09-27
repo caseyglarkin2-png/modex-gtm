@@ -754,3 +754,93 @@ only fail at approval. R11 now yields to R12b: such a card is research.
   truth; honest Learning 3 people, 1 reply, 1 truth as early observations;
   zero outbound). Report: `docs/gap/integrated-e2e-latest.md`.
 - next: final five-expert read-only regression.
+
+### Final five-expert read-only regression (2026-09-27)
+
+Lenses: GAP method, skeptical enterprise buyer, RevOps/deliverability,
+security/reliability, learning/data science. Read-only; production touched
+only through READ ONLY transactions and unauthenticated GETs. Every claimed
+P0/P1 below was re-verified by the lead in code and, where it applies,
+against production (read-only) before any fix.
+
+Verdicts per ticket:
+
+| ticket | verdict |
+|---|---|
+| T1 | CLOSED: live providers are `['google']` only; credentials routes 302 to `error=Configuration`; `__Host-`/`__Secure-` HttpOnly SameSite=Lax cookies |
+| T2, T4 | CLOSED: person-level claim with advisory locks; release only on a pre-wire refusal or a Gmail 4xx; 0 stuck claims in production |
+| T3 | CLOSED: R12b before every contact rule |
+| T5 | CLOSED for GAP; app-wide items are P2 debt below |
+| T6 | PARTIAL, root cause now CLOSED by F1 (the fact classifier) |
+| T7 | CLOSED for seeds; P2 residuals below |
+| T8 | CLOSED; P2 residual (brief questions) below |
+| T9 | CLOSED; F4 widens intake beyond the inbox; P2 residuals below |
+| T10 | PARTIAL, now CLOSED by F2 (the episode clock) |
+
+P0 found: none. New P0/P1 introduced by the remediation: none beyond F1-F5.
+
+Confirmed P1s, fixed in one focused PR (branch `fix/gap-final-redteam-p1`):
+
+- **F1 (GAP method): filing boilerplate rated FACT.** 9 of 23 production
+  facts were two PepsiCo 8-K "'Principal Property' means" definitions and
+  seven General Mills transaction-cost lines ("building" matched CHANGE;
+  bare invest/launch passed). Fix `69e7ac9e`: `facts.ts`. Production dry
+  run (read-only): 23 -> 14 facts, exactly those 9 drop, the Kroger /
+  Giant Eagle fact stays. 4 mutation proofs.
+- **F2 (learning): agreement episode stayed "pending" forever.** `open`
+  keyed off the newest card, so a re-minted recommendation never entered the
+  denominator. Fix `1224f69f`: the first card starts the clock. 1 mutation
+  proof.
+- **F3 (RevOps; GAP method rated P2): Copy email bypassed every gate.** It
+  rendered for a compiler REJECT, a do-not-contact person and an
+  INSUFFICIENT hypothesis, and copied a body with no footer. Fix
+  `dfde821b`: renders only when sendable AND the evidence is a live verified
+  fact; copies `draftText` (unsubscribe + postal address). 1 mutation proof.
+- **F4 (RevOps; security rated P3): mailbox intake read `in:inbox` only.**
+  A DSN or new-thread reply archived or spam-filtered before the poll was
+  never read. Fix `b338b925`: `-in:sent -in:drafts -in:chats` +
+  `includeSpamTrash`. 2 mutation proofs.
+- **F5 (buyer): a stale first-touch card could still send.** Fix
+  `7ea0964f`: step 0 refuses `decision_stale` (draft and send) when, after
+  the card, the person has a confirmed substantive disposition, wrote in,
+  was emailed by any path, or a live enrollment / in-flight Outbox draft is
+  working them. 10 tests, 6 mutation proofs.
+
+Named debt (P2 and below, recorded, not absorbed):
+
+- learning: P2-1..P2-5 of the data-science report (small-N display
+  choices, attribution edge cases); revisit when real N exists.
+- mailbox: a `mailbox.quarantined` message is terminal and silent (the cron
+  resets to ok); unknown-outcome sends (open DIRECT_CLAIMED) are invisible
+  to intake and have no reconcile-from-Sent tool; canary accepts any
+  own-domain From (DMARC p=none); per-message token mint and no timeout on
+  `getMessageDetail`; a 404 thread reads as "no reply".
+- HubSpot webhook: 0 `webhook_events` rows ever in production. Signature is
+  computed over the pathname while HubSpot v3 signs the full URI, or the
+  subscription is not configured. Non-GAP bounce truth rides on it.
+- security hardening: send-approvals approve/reject race (use
+  `updateMany where status=pending`); Google `signIn` does not check
+  `email_verified`; message-evolution / failure-remediation /
+  playbook-blocks accept a client-named actor (outside GAP).
+- method/copy: the live Kroger hypothesis still carries pre-T7 observation
+  copy (double EDGAR label, near-duplicate quotes) and is one approval from
+  sending to other Kroger contacts; the gate checks citations, not what the
+  observation claims (API-only path); the compiler quote exclusion trusts any
+  linked excerpt (not reachable today); the pre-call brief shows quantifying
+  questions before acknowledgment and can pick another hypothesis's fact
+  block; the T7 seed rewrite changed version `cmuh640q8`, which Joey
+  Maggard's recorded manual send references (the sent copy survives only in
+  the rewrite audit's `beforeSteps`).
+- RevOps: app-wide List-Unsubscribe header is dead code; Gmail UI header
+  drop unverified; persona 2151 unsubscribe/DNC drift (E2E residue);
+  `bounced` vs `hard_bounce` vocabulary; non-GAP yardflow sends; double
+  InboundMessage rows.
+- buyer: cross-plane dedup; off-brand unsubscribe domain; human-edited
+  observations not re-checked; duplicate identities; draft mode skips
+  active-opportunity; the same fact email for everyone at an account; 5
+  stale PepsiCo enroll cards (REVIEW lane, refused at activation and send)
+  until the next routing run.
+
+Final-fix gates: unit 467 files / 5089 tests green (1 skipped); typecheck
+green; local build green; scratch E2E 11/11 scripts, 131 checks, 0 failed;
+14 mutation proofs across F1-F5. `github_actions = unavailable_external_billing`.
