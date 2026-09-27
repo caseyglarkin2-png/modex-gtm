@@ -90,3 +90,17 @@ describe('ops closeout 19: a first touch reads what already left the GAP mailbox
     expect(r).toMatchObject({ ok: false, reason: 'mailbox_sent_unreadable' });
   });
 });
+
+describe('closeout review: no GAP mailbox, no GAP email (never the undkimmed env identity)', () => {
+  it('when the GAP mailbox is required and not configured, draft and send refuse gap_sender_unconfigured', async () => {
+    const d = db();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), gapSender: () => null, requireGapSender: true });
+    expect(r).toMatchObject({ ok: false, reason: 'gap_sender_unconfigured' });
+  });
+
+  it('configured: it proceeds', async () => {
+    const d = db();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), gapSender: () => ({ userEmail: 'casey@yardflow.ai', serviceAccountJson: '{}' }) as never, requireGapSender: true });
+    expect(r).toMatchObject({ ok: true });
+  });
+});
