@@ -2,14 +2,14 @@
 
 STATUS: PASS
 
-<!-- verified:2026-09-25 -->
+<!-- verified:2026-09-27 -->
 
 Written by `scripts/gap/e2e-runtime.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-rt-1790296190117
+- Run tag: gap-rt-1790472900623
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 7b507dfe
-- Ran at: 2026-09-25T00:29:52.099Z
+- Git: 409dbc2c
+- Ran at: 2026-09-27T01:35:01.415Z
 - Credentials scrubbed from the process before the first import: HUBSPOT_ACCESS_TOKEN,MC_API_TOKEN,GOOGLE_REFRESH_TOKEN,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,CLAWD_CONTROL_PLANE_URL,CLAWD_CONTROL_PLANE_TOKEN
 - No HubSpot, clawd, Gmail or model call is possible in this run: the critic is a stub, the suppression reader is the static one, no credential is present, and the HubSpot/Gmail adapters run against injected fake transports.
 - Proves the full chain: messy company identity -> 6A canonical resolution -> signal -> hypothesis -> routing -> ExecutionIntent -> the full 6B gate chain -> a fake-transport adapter receipt -> 6D reconciliation -> inbound reply -> AI/unconfirmed suggestion -> human confirmation -> BID -> hypothesis resolution -> stop/DNC effect -> operational learning (6E/6F) -> routing-vs-human agreement (R-B) -> Sprint 7 shadow decision -> cap/gate evaluation -> the kill-switch drill -> zero real outbound action.
@@ -17,24 +17,24 @@ Written by `scripts/gap/e2e-runtime.ts`. Rerun it against the scratch database t
 ## Steps
 
 - PASS 0 preflight: flags on, Sprint 7 flags off, credentials scrubbed, seed family present, no stale rows
-- PASS 1a identity precedence: company id wins over a name that exactly matches a different real account (GAP RT Wrong Guess gap-rt-1790296190117); conflict reported: {"via":"normalized","accountName":"GAP RT Wrong Guess gap-rt-1790296190117"}
+- PASS 1a identity precedence: company id wins over a name that exactly matches a different real account (GAP RT Wrong Guess gap-rt-1790472900623); conflict reported: {"via":"normalized","accountName":"GAP RT Wrong Guess gap-rt-1790472900623"}
 - PASS 1b identity ambiguity: two real accounts that normalize identically refuse ambiguous_identity rather than silently picking one
-- PASS 1c messy identity: "GAP RT Co gap-rt-1790296190117, LLC" resolved to the canonical account GAP RT Co gap-rt-1790296190117 through the real hypothesize job (not thrown), and cached as an alias
-- PASS 2 seed personas: account GAP RT Co gap-rt-1790296190117 (pipeline_stage=targeted), blocked account GAP RT Blocked Co gap-rt-1790296190117 (pipeline_stage=meeting), four personas (happy 49, blocked 50, internal 51, dnc 52)
-- PASS 2b facts: H1 facts cmug84lf/cmug84lf, H2 facts cmug84lf/cmug84lf, H4 facts cmug84lf/cmug84lf
-- PASS 2c/2d hypotheses: H1 cmug84lg, H2 cmug84li (blocked), H3 cmug84ll (internal), H4 cmug84lj (dnc target) all active
+- PASS 1c messy identity: "GAP RT Co gap-rt-1790472900623, LLC" resolved to the canonical account GAP RT Co gap-rt-1790472900623 through the real hypothesize job (not thrown), and cached as an alias
+- PASS 2 seed personas: account GAP RT Co gap-rt-1790472900623 (pipeline_stage=targeted), blocked account GAP RT Blocked Co gap-rt-1790472900623 (pipeline_stage=meeting), four personas (happy 8, blocked 9, internal 10, dnc 11)
+- PASS 2b facts: H1 facts cmuj5c43/cmuj5c43, H2 facts cmuj5c43/cmuj5c43, H4 facts cmuj5c43/cmuj5c43
+- PASS 2c/2d hypotheses: H1 cmuj5c43, H2 cmuj5c44 (blocked), H3 cmuj5c45 (internal), H4 cmuj5c45 (dnc target) all active
 - PASS 4 compile: H1 4 steps pass (+1 stale generation for SF14), H2 4 steps pass, H4 4 steps pass; three independent hypothesis-bound compile stacks on one version
 - PASS 4a active opportunity: ExecutionIntent for the mid-deal account refuses active_opportunity through legacyEnrollAdapter; no queue write, no fake transport call
 - PASS 4a suppression: a do_not_contact persona refuses suppressed through the same ExecutionIntent/legacyEnrollAdapter path
 - PASS 4b sf14 compile_stale: a ~40h-old compile refuses compile_stale:0 once maxCompileAgeMs is opted into, through legacyEnrollAdapter
 - PASS 4b sf14 evidence_expired: a hypothesis linked to a real expired signal refuses evidence_expired once checkEvidenceFreshness is opted into
-- PASS 4c enroll: ExecutionIntent for the happy path succeeds through the full 6B gate chain: receipt {"engine":"modex_queue","status":"queued","engineId":"27","createdAt":"2026-09-25T00:29:50.117Z"}, enrollment 3cb2a634-5305-4919-9cff-60cb7440e9bb active
-- PASS 5a hubspot adapter: flag off: zero network calls, provably; flag on with a fake transport: real adapter code runs end to end, engineId hs_enr_gap-rt-1790296190117, no real HTTP call possible
-- PASS 5b gmail adapters: gmail_draft (draft_gap-rt-1790296190117) is distinct from gmail_direct (sent_gap-rt-1790296190117); the sent receipt's supersedesEngineId names the draft, never collapsed into one event; both against a fake transport, zero real Gmail/OAuth calls
-- PASS 6 reconcile: MATCHED (messy raw name -> canonical account -> the real enrollment 3cb2a634-5305-4919-9cff-60cb7440e9bb), then ALREADY_IMPORTED on the same evidence, then IDENTITY_UNRESOLVED for an unknown company (no Account created)
-- PASS 7b ai suggestion: unconfirmed AI suggestion cmug84m6 carries no effects; only a human session can turn it into truth
+- PASS 4c enroll: ExecutionIntent for the happy path succeeds through the full 6B gate chain: receipt {"engine":"modex_queue","status":"queued","engineId":"3","createdAt":"2026-09-27T01:35:00.623Z"}, enrollment f8a44c2c-ea06-4aab-a525-c0c11ddc6d4e active
+- PASS 5a hubspot adapter: flag off: zero network calls, provably; flag on with a fake transport: real adapter code runs end to end, engineId hs_enr_gap-rt-1790472900623, no real HTTP call possible
+- PASS 5b gmail adapters: gmail_draft (draft_gap-rt-1790472900623) is distinct from gmail_direct (sent_gap-rt-1790472900623); the sent receipt's supersedesEngineId names the draft, never collapsed into one event; both against a fake transport, zero real Gmail/OAuth calls
+- PASS 6 reconcile: MATCHED (messy raw name -> canonical account -> the real enrollment f8a44c2c-ea06-4aab-a525-c0c11ddc6d4e), then ALREADY_IMPORTED on the same evidence, then IDENTITY_UNRESOLVED for an unknown company (no Account created)
+- PASS 7b ai suggestion: unconfirmed AI suggestion cmuj5c4d carries no effects; only a human session can turn it into truth
 - PASS 7c human confirm: human confirmation turns the AI suggestion into buyer truth (BuyerInputData, hypothesis resolved confirmed, enrollment stopped replied); an agent cannot overwrite the confirmed BID (correction_requires_human)
-- PASS 7d dnc: do_not_contact disposition unsubscribes morgan+gap-rt-1790296190117@example.com, flags the persona, and stops its enrollment (stop_reason=dnc)
+- PASS 7d dnc: do_not_contact disposition unsubscribes morgan+gap-rt-1790472900623@example.com, flags the persona, and stops its enrollment (stop_reason=dnc)
 - PASS 8a agreement: routing-vs-human-action agreement over real RoutingDecision rows: 1 agreement, 1 disagreement, rate 0.5 (R-B)
 - PASS 8b learning: internal/test traffic excluded (B9); byEngine and bySender breakdowns both present; every rate carries n (denominator 2)
 - PASS 8c learning ra: campaign/program filtering and date filtering both work: program gap-e2e-runtime includes H1, a nonexistent program excludes it, a future date window excludes it
@@ -47,19 +47,19 @@ Written by `scripts/gap/e2e-runtime.ts`. Rerun it against the scratch database t
 
 ## Counts
 
-- gitSha: 7b507dfe
+- gitSha: 409dbc2c
 - databaseHost: 127.0.0.1:55432/gap_finish_e2e
-- runTag: gap-rt-1790296190117
-- dncEnrollmentId: d5b14a18-02f4-4c92-aac4-8599a8a2912b
+- runTag: gap-rt-1790472900623
+- dncEnrollmentId: d3c4e54b-fd12-4fd3-81c4-b718425bd145
 - replyBacklogCount: 0
 - staleHypothesesN: 2
-- h1: cmug84lg0000j7kekrmycoexb
-- h2: cmug84li2000w7kekcd4t5lpx
-- h3: cmug84llf001o7kekwl3hbnrx
-- h4: cmug84ljn00197kekjvn2sw5j
-- familyId: cmug84lmt00217kek2pwajfqc
-- versionId: cmug84ln400237kekcd0gm049
-- enrollmentId: 3cb2a634-5305-4919-9cff-60cb7440e9bb
+- h1: cmuj5c43m000j7klc3vf6tdh9
+- h2: cmuj5c44w000w7klchp2og1he
+- h3: cmuj5c45x001o7klccprrw2ra
+- h4: cmuj5c45g00197klcdtke8ket
+- familyId: cmuj5c46900217klcefohnb86
+- versionId: cmuj5c46h00237klcrtepd63v
+- enrollmentId: f8a44c2c-ea06-4aab-a525-c0c11ddc6d4e
 
 ## Cleanup
 
