@@ -12,6 +12,7 @@ declare global {
 import { computeNextTouch, dueAfter, recipientReplied } from '@/lib/gap/execution/next-touch';
 import { DRAFTED, DRAFT_SENT } from '@/lib/gap/execution/draft-ledger';
 import { LEGACY_HC } from './fixtures/legacy-hc';
+import { GmailThreadMissingError } from '@/lib/email/gmail-inbox';
 import { findFirstFrom, findManyFrom } from './fixtures/where';
 
 const HC = LEGACY_HC; // four steps: the multi-touch mechanics (seeds are single-touch since red team T7)
@@ -187,5 +188,14 @@ describe('T9: a reply from someone else at the account stops the sequence', () =
     const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
     expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
     expect(t.state === 'stopped' && t.detail).toContain('kroger.com');
+  });
+});
+
+describe('ops closeout 13D: a thread Gmail no longer has', () => {
+  it('is UNKNOWN reply truth (nothing prepared), never "no reply" (due)', async () => {
+    const missing = vi.fn(async () => { throw new GmailThreadMissingError('t-0'); });
+    const r = await computeNextTouch(ledger([0]), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: missing });
+    expect(r.state).toBe('unknown');
+    expect((r as { detail: string }).detail).toMatch(/not found/);
   });
 });

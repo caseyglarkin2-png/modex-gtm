@@ -350,8 +350,10 @@ async function getMessageDetail(
   // captured, not just the snippet.
   const url = `${GMAIL_API}/users/${encodeURIComponent(userEmail)}/messages/${messageId}?format=full`;
 
+  // Ops closeout 13C: bounded, so one hung read cannot hold the cron to maxDuration.
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },
+    signal: AbortSignal.timeout(15_000),
   });
 
   if (!res.ok) {
@@ -479,13 +481,24 @@ export interface GmailThreadMessageMeta {
   subject?: string;
 }
 
-/** Message metadata for one thread (To/From/labels/date). A missing thread is an empty list. */
+/**
+ * Ops closeout 13D: Gmail no longer has this thread (deleted, or the wrong
+ * mailbox). That is UNKNOWN reply truth, never "nobody replied".
+ */
+export class GmailThreadMissingError extends Error {
+  constructor(readonly threadId: string) {
+    super(`Gmail thread ${threadId} not found`);
+    this.name = 'GmailThreadMissingError';
+  }
+}
+
+/** Message metadata for one thread (To/From/labels/date). A missing thread throws GmailThreadMissingError. */
 export async function getGmailThreadMessages(threadId: string, sender?: GmailSender): Promise<GmailThreadMessageMeta[]> {
   const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
   const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
   const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From&metadataHeaders=Subject`;
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
-  if (res.status === 404) return [];
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (res.status === 404) throw new GmailThreadMissingError(threadId);
   if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
   const data = (await res.json()) as {
     messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
