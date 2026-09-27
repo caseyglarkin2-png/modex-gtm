@@ -32,6 +32,8 @@
  */
 
 import { createLimiter, type Limiter } from './bounded';
+import { personSendHistory } from '../execution/person-history';
+import { parseSteps } from '../sequence/steps';
 import { normalizeScore } from '../../pounce/fit';
 import { hasRoleGate } from '../../revops/qualification/model';
 import { heatScore, tierNumber } from '../../revops/heat/heat-score';
@@ -590,7 +592,7 @@ async function assembleLoaded(
   }
 
   // Comms: keyed by the persona's lowercased email. No email means nothing outbound can be in flight.
-  const comms = email ? await readComms(prisma, email) : emptyComms();
+  const comms = email ? await readComms(prisma, email, persona.id) : emptyComms();
 
   let suppressionVerdict: RoutingInputs['suppression'] = { verdict: 'unknown', legs: {} };
   if (email && remoteSuppression) {
@@ -632,11 +634,22 @@ function emptyComms(): RoutingCommsInput {
     undispositionedInbound: false,
     lastDisposition: null,
     meetingBooked: false,
+    gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
   };
 }
 
-/** Exported for the GAP next-touch evaluator (same comms truth routing uses). */
-export async function readComms(prisma: PrismaLike, email: string): Promise<RoutingCommsInput> {
+const latest = (...dates: Array<Date | null | undefined>): Date | null =>
+  dates.reduce<Date | null>((m, d) => (d && (!m || d.getTime() > m.getTime()) ? d : m), null);
+
+/**
+ * Exported for the GAP next-touch evaluator (same comms truth routing uses).
+ *
+ * Red team T3: last outbound is the latest of EmailLog, the person's GAP send
+ * history (manual, draft-sent and direct sends on ANY card) and any unresolved
+ * send claim (outcome unknown counts as sent for cooldown). EmailLog is a
+ * best-effort side write, so correctness never depends on it.
+ */
+export async function readComms(prisma: PrismaLike, email: string, personaId: number | null = null): Promise<RoutingCommsInput> {
   const enrollment = await read('sequence_enrollment', () =>
     prisma.sequenceEnrollment.findFirst({
       where: { to_email: email, status: { in: [...IN_FLIGHT_ENROLLMENT_STATUSES] } },
@@ -699,9 +712,31 @@ export async function readComms(prisma: PrismaLike, email: string): Promise<Rout
   const undispositionedInbound =
     lastInboundAt != null && (lastConfirmed == null || lastInboundAt.getTime() > lastConfirmed.created_at.getTime());
 
+  const history = await read('gap_send_history', () => personSendHistory(prisma, personaId, email));
+  const lastGapSend = latest(...history.sent.map((s) => new Date(s.sentAt)), ...history.unresolvedClaims.map((c) => new Date(c.claimedAt)));
+  let gapSequence: NonNullable<RoutingCommsInput['gapSequence']> = { state: 'none', sentSteps: 0, lastSentAt: lastGapSend };
+  if (history.sent.length > 0) {
+    const firstSentAt = new Date(history.sent.reduce((m, s) => (s.sentAt < m ? s.sentAt : m), history.sent[0].sentAt));
+    const lastSend = [...history.sent].sort((a, b) => a.sentAt.localeCompare(b.sentAt)).at(-1)!;
+    const maxStep = Math.max(...history.sent.map((s) => s.stepIndex));
+    let state: 'active' | 'complete' | 'stopped' = 'active';
+    if (lastSubstantive && lastSubstantive.created_at.getTime() > firstSentAt.getTime()) {
+      state = 'stopped';
+    } else if (lastSend.sequenceVersionId) {
+      const version = (await read('gap_sequence_version', () =>
+        prisma.sequenceVersion.findUnique({ where: { id: lastSend.sequenceVersionId }, select: { steps: true } }),
+      )) as { steps: unknown } | null;
+      const parsed = version ? parseSteps(version.steps) : null;
+      const stepCount = parsed && parsed.ok ? parsed.steps.steps.length : null;
+      if (stepCount !== null && maxStep + 1 >= stepCount) state = 'complete';
+    }
+    gapSequence = { state, sentSteps: new Set(history.sent.map((s) => s.stepIndex)).size, lastSentAt: lastGapSend };
+  }
+
   return {
     inFlight: enrollment != null || draft != null,
-    lastOutboundAt: lastOutbound?.sent_at ?? null,
+    lastOutboundAt: latest(lastOutbound?.sent_at, lastGapSend),
+    gapSequence,
     lastInboundAt,
     undispositionedInbound,
     lastDisposition: buildLastDisposition(lastSubstantive),

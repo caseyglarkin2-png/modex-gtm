@@ -118,3 +118,25 @@ review, production verification.
   2026-10-01 and step 0 is refused. Receipt:
   `docs/gap/t2-kroger-1886-person-history.md`.
 - next: T3.
+
+### T3 — routing sees GAP sends
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- files: `src/lib/gap/routing/inputs.ts` (readComms), `src/lib/gap/routing/rules.ts`,
+  `src/lib/gap/routing/types.ts`, tests `routing-inputs.test.ts`, `routing-rules.test.ts`
+- change: `readComms(prisma, email, personaId)` reads the person's GAP send
+  history through the same named, fail-closed `read()` wrapper
+  (`inputs_error:gap_send_history`). `lastOutboundAt` = latest of EmailLog,
+  every GAP send (manual, draft-sent, direct, any card) and every unresolved
+  claim. New `comms.gapSequence` (`none | active | complete | stopped`):
+  complete = every step of the pinned version sent; stopped = a confirmed
+  substantive disposition after the first send. Rule order: R14 hot_call,
+  R14b `sequence_stopped` (nurture), R14c `sequence_complete` (nurture),
+  R16 cooldown, then R15 hot_email. EmailLog stays auxiliary.
+- tests: 9 new (hot + GAP send 3 days ago -> cooldown; manual GAP send with no
+  EmailLog -> lastOutboundAt + cooldown; open claim counts; complete ->
+  sequence_complete; stopped; unreadable history -> inputs_error). RED on
+  the original code: 10 failed (incl. the pinned rule order). GAP folder 141
+  files / 2780 tests green.
+- production mutation: none.
+- next: T4.

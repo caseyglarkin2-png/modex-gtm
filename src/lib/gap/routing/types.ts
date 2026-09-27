@@ -123,6 +123,16 @@ export interface RoutingCommsInput {
   undispositionedInbound: boolean;
   lastDisposition: RoutingLastDisposition | null;
   meetingBooked: boolean;
+  /**
+   * GAP execution truth for this person (red team T3), from the person-level
+   * send history (execution/person-history.ts), never from EmailLog:
+   *   none      nothing GAP-sent
+   *   active    sent, steps remain, no stop
+   *   complete  every step of the pinned version sent
+   *   stopped   a confirmed substantive disposition landed after the first send
+   * Absent only on inputs built before T3 (tests); routing reads absent as none.
+   */
+  gapSequence?: { state: 'none' | 'active' | 'complete' | 'stopped'; sentSteps: number; lastSentAt: Date | null };
 }
 
 export interface RoutingFreshness {

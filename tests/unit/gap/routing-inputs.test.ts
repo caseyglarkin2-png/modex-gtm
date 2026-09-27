@@ -22,6 +22,8 @@ import { routePersona } from '@/lib/gap/routing/route';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
 import type { RoutingInputs } from '@/lib/gap/routing/types';
 import type { Top100Manifest, Top100RosterPerson } from '@/lib/gap/top100/reader';
+import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { findManyFrom } from './fixtures/where';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const NOW = new Date('2026-09-23T12:00:00.000Z');
@@ -44,6 +46,9 @@ interface Db {
   inbound: any[];
   dispositions: any[];
   unsubscribed?: string[];
+  decisions?: any[];
+  audit?: any[];
+  versions?: any[];
 }
 
 function emptyDb(): Db {
@@ -69,9 +74,14 @@ function makePrisma(db: Db) {
     persona: {
       findUnique: vi.fn(async ({ where }: any) => db.personas.find((p) => p.id === where.id) ?? null),
       findMany: vi.fn(async ({ where }: any) =>
-        db.personas.filter((p) => p.account_name === where.account_name && (where.is_contact_ready === undefined || p.is_contact_ready === where.is_contact_ready)),
+        where.email
+          ? findManyFrom(db.personas, { where })
+          : db.personas.filter((p) => p.account_name === where.account_name && (where.is_contact_ready === undefined || p.is_contact_ready === where.is_contact_ready)),
       ),
     },
+    routingDecision: { findMany: vi.fn(async (args: any) => findManyFrom(db.decisions ?? [], args)) },
+    gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(db.audit ?? [], args)) },
+    sequenceVersion: { findUnique: vi.fn(async ({ where }: any) => (db.versions ?? []).find((v) => v.id === where.id) ?? null) },
     unsubscribedEmail: {
       findFirst: vi.fn(async ({ where }: any) =>
         (db.unsubscribed ?? []).includes(String(where.email.equals).toLowerCase()) ? { id: 'u1' } : null,
@@ -435,6 +445,7 @@ describe('assembleRoutingInputs full fixture', () => {
       undispositionedInbound: false,
       lastDisposition: null,
       meetingBooked: false,
+      gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
     });
 
     // suppression from the injected reader
@@ -640,6 +651,61 @@ describe('comms', () => {
 
     db.drafts[0].status = 'sent';
     expect((await assemble(db)).comms.inFlight).toBe(false);
+  });
+
+  const gapSend = (step: number, sentAt: Date, card = 'dec-old') => ({
+    id: `man-${card}-${step}`,
+    kind: 'execution.gmail_manual_sent',
+    subject_type: 'routing_decision',
+    subject_id: card,
+    created_at: sentAt,
+    payload: { engine: 'manual', personaId: 42, recipient: EMAIL_LOWER, sequenceVersionId: 'ver-hc', stepIndex: step, subject: 's', gmailSentMessageId: `m${step}`, gmailThreadId: 't', sentAt: sentAt.toISOString() },
+  });
+  const withGapHistory = (db: Db, rows: any[]) => {
+    db.decisions = [{ id: 'dec-old', persona_id: 42 }];
+    db.audit = rows;
+    db.versions = [{ id: 'ver-hc', steps: SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!.steps }];
+    return db;
+  };
+
+  it('T3: a manual GAP send 3 days ago with NO EmailLog row is the last outbound and routes cooldown, not hot email / enroll', async () => {
+    const db = withGapHistory(fullDb(), [gapSend(0, daysAgo(3))]);
+    const i = await assemble(db);
+    expect(i.comms.lastOutboundAt).toEqual(daysAgo(3));
+    expect(i.comms.gapSequence).toMatchObject({ state: 'active', sentSteps: 1 });
+    expect((routePersona(i) as { decision: { ruleId: string } }).decision.ruleId).toBe('cooldown');
+  });
+
+  it('T3: an unresolved send claim (outcome unknown) counts as outbound for cooldown', async () => {
+    const db = withGapHistory(fullDb(), [
+      { id: 'c', kind: 'execution.gmail_direct_claimed', subject_type: 'routing_decision', subject_id: 'dec-old', created_at: daysAgo(1), payload: { idempotencyKey: 'k', claimedAt: daysAgo(1).toISOString(), stepIndex: 0, recipient: EMAIL_LOWER, personaId: 42 } },
+    ]);
+    const i = await assemble(db);
+    expect(i.comms.lastOutboundAt).toEqual(daysAgo(1));
+    expect((routePersona(i) as { decision: { ruleId: string } }).decision.ruleId).toBe('cooldown');
+  });
+
+  it('T3: every step of the pinned version sent -> complete -> nurture sequence_complete', async () => {
+    const db = withGapHistory(fullDb(), [gapSend(0, daysAgo(60)), gapSend(1, daysAgo(55)), gapSend(2, daysAgo(50)), gapSend(3, daysAgo(44))]);
+    const i = await assemble(db);
+    expect(i.comms.gapSequence).toMatchObject({ state: 'complete', sentSteps: 4 });
+    expect((routePersona(i) as { decision: { ruleId: string } }).decision.ruleId).toBe('sequence_complete');
+  });
+
+  it('T3: a confirmed substantive disposition after the first send -> stopped -> nurture sequence_stopped', async () => {
+    const db = withGapHistory(fullDb(), [gapSend(0, daysAgo(40))]);
+    db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'problem_rejected', created_at: daysAgo(35), human_confirmed: true, confirmed_at: daysAgo(35), ai_suggested: null });
+    const i = await assemble(db);
+    expect(i.comms.gapSequence?.state).toBe('stopped');
+  });
+
+  it('T3: an unreadable GAP history fails the persona closed (named read), never "no outbound"', async () => {
+    const db = withGapHistory(fullDb(), []);
+    const prisma = makePrisma(db);
+    prisma.gapAuditEvent.findMany = vi.fn(async () => {
+      throw new Error('ledger down');
+    });
+    expect(await assembleRoutingInputs(prisma as any, { accountName: ACCOUNT, personaId: 42, now: NOW, hubspotSnapshot: SNAPSHOT, suppression: reader('clear') })).toEqual({ skip: 'inputs_error:gap_send_history' });
   });
 
   it('lastOutboundAt and lastInboundAt are the newest rows, matched case-insensitively', async () => {
