@@ -186,6 +186,8 @@ export const baseDeps = (d: Db, verdict: 'pass' | 'review_required' | 'reject' =
   nextTouch: async () => ({ state: 'not_started' as const }),
   // Ops closeout 15: draft mode reads the live-conversation guard too; default none.
   activeOpportunity: async () => false,
+  // Ops closeout 19: the GAP mailbox Sent folder holds nothing unrecorded for this person.
+  mailboxSentTo: async () => [],
   unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe?email=${encodeURIComponent(e)}&token=t`,
 });
 

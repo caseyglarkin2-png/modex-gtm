@@ -66,3 +66,27 @@ describe('ops closeout 15: a Gmail draft reads the live-conversation guard too',
     expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity: async () => false })).toMatchObject({ ok: true });
   });
 });
+
+describe('ops closeout 19: a first touch reads what already left the GAP mailbox', () => {
+  const sentMsg = { id: 'g-sent-1', threadId: 't', internalDate: new Date(NOW.getTime() - 5 * DAY), to: 'Joey Maggard <joey.maggard@kroger.com>', subject: 'doors versus spots' };
+
+  it('an unrecorded message to this person in casey@yardflow.ai Sent (a manual copy-paste send) refuses step 0', async () => {
+    const d = db();
+    const mailboxSentTo = vi.fn(async () => [sentMsg]);
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), mailboxSentTo });
+    expect(r).toMatchObject({ ok: false, reason: 'emailed_outside_gap' });
+    expect(String((r as { detail?: string }).detail)).toContain('doors versus spots');
+    expect(mailboxSentTo).toHaveBeenCalledWith(JOEY, expect.any(Number), expect.any(Number));
+  });
+
+  it('nothing in Sent: the first touch proceeds', async () => {
+    const d = db();
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), mailboxSentTo: async () => [] })).toMatchObject({ ok: true });
+  });
+
+  it('an unreadable Sent folder is unknown, never "nothing sent": refused', async () => {
+    const d = db();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), mailboxSentTo: async () => { throw new Error('Gmail sent list failed (503)'); } });
+    expect(r).toMatchObject({ ok: false, reason: 'mailbox_sent_unreadable' });
+  });
+});
