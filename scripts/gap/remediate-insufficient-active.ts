@@ -18,7 +18,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { PrismaClient } from '@prisma/client';
-import { GATE_SIGNAL_SELECT, outreachEvidence } from '../../src/lib/gap/research/evidence-gate';
+import { GATE_SIGNAL_SELECT, sendableEvidence } from '../../src/lib/gap/research/evidence-gate';
 import { transitionHypothesis } from '../../src/lib/gap/hypothesis/service';
 
 const ACTOR = 'redteam-t6-remediation';
@@ -44,13 +44,15 @@ async function main() {
     const rows = active.map((h) => {
       const signals = h.signals.map((l) => l.signal).filter(Boolean);
       const live = signals.filter((s) => !s.freshness_expires_at || s.freshness_expires_at.getTime() > now.getTime());
-      const ev = outreachEvidence(live, h.account_name);
+      // The enforced rule (Release C review SF1): the observation cites >= 1
+      // signal and every cited signal is a live outreach fact.
+      const ev = sendableEvidence(h.observation, live, h.account_name);
       return { h, ev, signals };
     });
     const insufficient = rows.filter((r) => r.ev.tier === 'INSUFFICIENT');
     const results: Array<{ id: string; account: string; outcome: string }> = [];
     for (const { h, ev } of insufficient) {
-      const why = ev.refused.map((r) => `${r.id}=${r.reason}`).join(', ') || 'no live linked signal';
+      const why = [...ev.refused.map((r) => `${r.id}=${r.reason}`), ...ev.nonFactCitations.map((id) => `${id}=cited_but_not_a_fact`)].join(', ') || 'no cited live fact';
       const reason = `${REASON_PREFIX} red team T6 (2026-09-26). No verified, dated, quoted fact about a physical-network change at ${h.account_name}; rested on ${why}. Closed without buyer truth: not a resolution.`;
       if (!apply) {
         results.push({ id: h.id, account: h.account_name, outcome: 'would close_unresolved' });
