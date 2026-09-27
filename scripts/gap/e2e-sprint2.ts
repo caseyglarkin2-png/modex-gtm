@@ -191,6 +191,8 @@ interface Created {
   routingRunIds: string[];
   messageIds: string[];
   threadIds: string[];
+  /** unsubscribed_emails rows the seed wrote (the suppressed person's recorded opt-out). */
+  unsubscribedEmails: string[];
   systemConfigBefore: Record<string, string | null>;
 }
 
@@ -267,6 +269,7 @@ async function main(): Promise<number> {
     routingRunIds: [],
     messageIds: [],
     threadIds: [],
+    unsubscribedEmails: [`dnc+${tag}@example.com`],
     systemConfigBefore: {},
   };
 
@@ -354,6 +357,11 @@ async function main(): Promise<number> {
       },
       select: { id: true },
     });
+    // A real do-not-contact has a recorded origin: recordUnsubscribe writes the
+    // persona flag AND an unsubscribed_emails row. A bare flag with no origin is
+    // suppression_review since the provenance taxonomy (2026-09-25), still never
+    // contacted but not the hard R2-1 block this step proves.
+    await prisma.unsubscribedEmail.create({ data: { email: `dnc+${tag}@example.com`, reason: `e2e ${tag}: recipient opt-out` } });
     await prisma.pounceTrigger.createMany({
       data: [
         {
@@ -391,7 +399,11 @@ async function main(): Promise<number> {
         data: { rank: rank++, name: acct.name, vertical: 'top100-fixture', hubspot_company_id: acct.hubspotCompanyId },
       });
     }
-    // A modex sequence run for the ready persona: one approved, one draft, same run.
+    // A modex sequence run for the ready persona, in the one shape production can
+    // hold: step 1 SENT and step 2 APPROVED (scheduleNextStep queues the next step
+    // only after a send). Two active rows for one recipient is what the partial
+    // unique index draft_queue_active_recipient (prisma/sql/2026-06-05-draft-queue.sql)
+    // forbids; seeding that impossible pair is what broke this run.
     const sequence = await prisma.sequence.create({
       data: { name: created.sequenceName, steps: [] },
       select: { id: true },
@@ -404,8 +416,10 @@ async function main(): Promise<number> {
         persona_id: opsPersona.id,
         subject: `${accountName} step ${step + 1}`,
         body: `Step ${step + 1} of the e2e run ${tag}.`,
-        status: step === 0 ? STATUS.approved : STATUS.draft,
-        approved_at: step === 0 ? now : null,
+        status: step === 0 ? STATUS.sent : STATUS.approved,
+        approved_at: now,
+        sent_at: step === 0 ? new Date(now.getTime() - 3 * DAY_MS) : null,
+        provider_message_id: step === 0 ? `${tag}-fixture-sent` : null,
         sequence_id: sequence.id,
         sequence_run_id: created.sequenceRunId,
         step_index: step,
@@ -413,7 +427,7 @@ async function main(): Promise<number> {
         created_by: ACTOR,
       })),
     });
-    pass('1 seed', `account, personas ${opsPersona.id} (ready, director), ${execPersona.id} (ready, vp), ${dncPersona.id} (suppressed), 2 triggers ${TRIGGER_AGE_DAYS} days old, fixture accounts ${fixtureAccountNames.join(' + ')}, sequence ${sequence.id} with 2 draft queue rows (approved + draft) on run ${created.sequenceRunId}`);
+    pass('1 seed', `account, personas ${opsPersona.id} (ready, director), ${execPersona.id} (ready, vp), ${dncPersona.id} (suppressed), 2 triggers ${TRIGGER_AGE_DAYS} days old, fixture accounts ${fixtureAccountNames.join(' + ')}, sequence ${sequence.id} with 2 draft queue rows (step 1 sent, step 2 approved) on run ${created.sequenceRunId}`);
 
     // 2. Hypothesize, then the S2-T10 fact link and unlink refusal, then approve.
     const run1 = await runHypothesize(prisma, { now, dryRun: false, lookbackDays: HYPOTHESIZE_LOOKBACK_DAYS, maxAccounts: 5 });
@@ -464,6 +478,29 @@ async function main(): Promise<number> {
     expect('2 hypothesize', !unlink.ok && unlink.reason === 'signal_cited', `unlinkSignal of cited ${cited[0]} -> ${JSON.stringify(unlink)}, expected signal_cited (N5)`);
     const afterUnlink = await getHypothesis(prisma, opsDraftId);
     expect('2 hypothesize', afterUnlink.signals.length === signalsBefore + 1, `signal count ${afterUnlink.signals.length} after the refused unlink, expected ${signalsBefore + 1}`);
+
+    // The exec draft rests only on the Pounce triggers, and a trigger never
+    // carries a quote (fromPounceTrigger nulls summary and evidence text), so
+    // routing calls it evidence_thin (rules.ts, 2026-09-25). Production reaches
+    // enroll only with a sourced fact on the thesis; the fixture adds one the
+    // same way Casey does (operator knowledge through the registry).
+    const execProjected = fromOperatorKnowledge(
+      {
+        accountName,
+        hubspotCompanyId,
+        personaId: execPersona.id,
+        text: 'The VP of operations said the Ohio dock expansion is funded and the yard team is short two clerks.',
+        at: now,
+        sourceId: `${tag}:fact2`,
+        by: 'casey',
+      },
+      { registeredBy: ACTOR, now },
+    );
+    expect('2 hypothesize', execProjected.ok, `fromOperatorKnowledge (exec) refused: ${execProjected.ok ? '' : execProjected.reason}`);
+    if (!execProjected.ok) throw new Error('unreachable');
+    const execFact = await registerSignal(prisma, execProjected.signal);
+    const execLinked = await linkSignals(prisma, execDraft.id, [execFact.id], ACTOR);
+    expect('2 hypothesize', execFact.created && execLinked.ok && execLinked.linked.includes(execFact.id), `exec fact ${execFact.id} link -> ${JSON.stringify(execLinked)}`);
 
     // Approve every draft of the account so routing sees a live hypothesis per persona.
     let approved = 0;
@@ -664,7 +701,10 @@ async function main(): Promise<number> {
     const runS = await runRouting(
       prisma,
       { now, runId: runIdS, accountNames: [accountName], maxPersonasPerAccount: 3, actor: ACTOR },
-      { ...routingDeps, suppression: staticSuppressionReader('suppressed') },
+      // A real opt-out names its leg (here HubSpot's). A hit with no reason on the
+      // wire is unknown provenance, which routes to suppression_review since the
+      // provenance taxonomy (2026-09-25); this step proves the hard block.
+      { ...routingDeps, suppression: staticSuppressionReader('suppressed', { hubspot_optout: 'hit' }) },
     );
     await settleHooks();
     const rowsS = await prisma.routingDecision.findMany({ where: { run_id: runIdS }, select: { rule_id: true, action: true, lane: true, persona_id: true } });
@@ -697,13 +737,15 @@ async function main(): Promise<number> {
 
     // 8. Stop, do not delete, under the flag; then prove the recipient unlocked.
     const dqBefore = await prisma.draftQueueItem.findMany({ where: { sequence_run_id: created.sequenceRunId }, select: { id: true, status: true, skipped_reason: true } });
-    expect('8 stop', dqBefore.length === 2 && dqBefore.some((r) => r.status === STATUS.approved) && dqBefore.some((r) => r.status === STATUS.draft), `draft queue run before stop ${JSON.stringify(dqBefore)}`);
+    expect('8 stop', dqBefore.length === 2 && dqBefore.some((r) => r.status === STATUS.sent) && dqBefore.some((r) => r.status === STATUS.approved), `draft queue run before stop ${JSON.stringify(dqBefore)}`);
     const stopped = await cancelDownstream(prisma, created.sequenceRunId, 'replied');
     const dqAfter = await prisma.draftQueueItem.findMany({ where: { sequence_run_id: created.sequenceRunId }, select: { id: true, status: true, skipped_reason: true } });
-    expect('8 stop', stopped === 2, `cancelDownstream marked ${stopped} rows, expected 2`);
+    expect('8 stop', stopped === 1, `cancelDownstream marked ${stopped} rows, expected 1 (the approved step; the sent step is history)`);
     expect('8 stop', dqAfter.length === 2, `${dqAfter.length} rows remain after the stop, expected 2 (nothing deleted)`);
     for (const r of dqAfter) {
-      expect('8 stop', r.status === STATUS.skipped && r.skipped_reason === 'sequence_stopped:replied', `row ${r.id} is ${r.status} / ${r.skipped_reason}, expected skipped / sequence_stopped:replied`);
+      const before = dqBefore.find((b) => b.id === r.id)!;
+      const want = before.status === STATUS.sent ? { status: STATUS.sent, skipped_reason: null } : { status: STATUS.skipped, skipped_reason: 'sequence_stopped:replied' };
+      expect('8 stop', r.status === want.status && r.skipped_reason === want.skipped_reason, `row ${r.id} was ${before.status}, is ${r.status} / ${r.skipped_reason}, expected ${want.status} / ${want.skipped_reason}`);
     }
     const stoppedAgain = await cancelDownstream(prisma, created.sequenceRunId, 'replied');
     expect('8 stop', stoppedAgain === 0, `second cancelDownstream marked ${stoppedAgain} rows, expected 0`);
@@ -723,7 +765,7 @@ async function main(): Promise<number> {
     const opsRowB = await prisma.routingDecision.findFirst({ where: { run_id: runIdB, persona_id: opsPersona.id } });
     expect('8 stop', opsRowB?.rule_id === 'reply_pending' && opsRowB.action === 'one_off_email' && opsRowB.lane === 'reply_triage', `ready persona after the stop: rule ${opsRowB?.rule_id} action ${opsRowB?.action} lane ${opsRowB?.lane}, expected reply_pending / one_off_email / reply_triage (the step 4 inbound has no disposition)`);
     expect('8 stop', (opsRowB!.inputs_snapshot as any).comms?.undispositionedInbound === true && (opsRowB!.inputs_snapshot as any).comms?.inFlight === false, `ready persona comms ${JSON.stringify((opsRowB!.inputs_snapshot as any).comms)}`);
-    pass('8 stop', `cancelDownstream(replied) marked ${stopped} rows skipped with sequence_stopped:replied, ${dqAfter.length} rows remain, rerun marks 0; routing run B: ${JSON.stringify(runB.byRule)}, ready persona ${opsPersona.id} -> reply_pending (rule id printed as observed)`);
+    pass('8 stop', `cancelDownstream(replied) marked ${stopped} approved row skipped with sequence_stopped:replied and left the sent step as history, ${dqAfter.length} rows remain, rerun marks 0; routing run B: ${JSON.stringify(runB.byRule)}, ready persona ${opsPersona.id} -> reply_pending (rule id printed as observed)`);
 
     // 9. Mirror gate.
     const opsApproved = await getHypothesis(prisma, opsDraftId);
@@ -895,6 +937,7 @@ async function cleanup(prisma: PrismaClient, c: Created): Promise<Record<string,
       removed.sequences = (await tx.sequence.deleteMany({ where: { name: c.sequenceName } })).count;
       removed.pounce_triggers = (await tx.pounceTrigger.deleteMany({ where: { account_name: { in: accountNames } } })).count;
       removed.personas = (await tx.persona.deleteMany({ where: { account_name: { in: accountNames } } })).count;
+      removed.unsubscribed_emails = (await tx.unsubscribedEmail.deleteMany({ where: { email: { in: c.unsubscribedEmails } } })).count;
       removed.accounts = (await tx.account.deleteMany({ where: { name: { in: accountNames } } })).count;
       let configTouched = 0;
       for (const key of SYSTEM_CONFIG_KEYS) {
