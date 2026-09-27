@@ -132,6 +132,7 @@ import { firstNameOf, renderStepCopy, EVIDENCE_SIGNAL_SELECT, type EvidenceSigna
 export { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
 import { parseSteps } from '@/lib/gap/sequence/steps';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
+import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import type { QueueAddInput } from '@/lib/validations';
@@ -223,6 +224,7 @@ export type EnrollServiceRefusal =
   | 'outreach_paused'
   | 'version_not_found'
   | 'version_retired'
+  | 'copy_version_outdated'
   | `invalid_version_steps:${string}`
   | `compile_not_found:${string}`
   | `compile_wrong_version:${string}`
@@ -584,10 +586,12 @@ export async function enrollFromDecision(
   // 3. The version and its steps.
   const version = await prisma.sequenceVersion.findUnique({
     where: { id: input.sequenceVersionId },
-    select: { id: true, family_id: true, version: true, status: true, steps: true },
+    select: { id: true, family_id: true, version: true, status: true, steps: true, family: { select: { name: true, program: true } } },
   });
   if (!version) return refuse('version_not_found');
   if (version.status === 'retired') return refuse('version_retired');
+  // Release C review B2: never enroll on a seed version still carrying the retired fixture copy.
+  if (seedCopyOutdated(version)) return refuse('copy_version_outdated');
   const parsed = parseSteps(version.steps);
   if (!parsed.ok) return refuse(`invalid_version_steps:${parsed.reason}`);
   const steps = parsed.steps.steps;

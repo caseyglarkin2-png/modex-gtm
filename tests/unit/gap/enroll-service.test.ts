@@ -39,6 +39,8 @@ import {
   type EnrollFromDecisionInput,
 } from '@/lib/gap/enroll/service';
 import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
+import { SEED_PROGRAM } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 
 /** R3-10: the service reads the cross-plane contract before the target; every case injects a CLEAR reader unless it tests the read. */
 const SUPPRESSION_CLEAR = staticSuppressionReader('clear');
@@ -658,6 +660,15 @@ describe('target resolution', () => {
       expect(d.addOne).not.toHaveBeenCalled();
       expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
       expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    }
+  });
+
+  it('Release C review B2: a seed-program version with the retired fixture copy is refused copy_version_outdated before the hypothesis read', async () => {
+    for (const mode of ['shadow', 'live'] as const) {
+      const prisma = makePrisma({ version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: LEGACY_HC.steps, family: { name: LEGACY_HC.name, program: SEED_PROGRAM } } });
+      const r = await enrollFromDecision(prisma, input({ mode }), deps());
+      expect(r).toEqual({ ok: false, reason: 'copy_version_outdated' });
+      expect(prisma.prospectingHypothesis.findUnique).not.toHaveBeenCalled();
     }
   });
 

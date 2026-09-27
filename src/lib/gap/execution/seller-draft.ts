@@ -30,6 +30,7 @@
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { sendableEvidence } from '../research/evidence-gate';
+import { seedCopyOutdated } from '../sequences/seed-drift';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
@@ -79,6 +80,7 @@ export type SellerDraftRefusal =
   | 'email_invalid'
   | 'persona_do_not_contact'
   | 'no_version'
+  | 'copy_version_outdated'
   | 'no_step0_copy'
   | 'unrendered_placeholder'
   | 'copy_rejected'
@@ -326,6 +328,10 @@ export async function prepareSellerEmail(
     }
   }
   if (!pack.version) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_version' });
+  // Release C review B2: a seed version still carrying the old fixture copy never sends.
+  if (seedCopyOutdated(pack.version)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'copy_version_outdated', detail: 'This sequence version still carries the retired seed copy. Run the seed rewrite before any email.' });
+  }
   const step0 = pack.steps[stepIndex];
   if (!pack.rendered || !step0) return refuse(prisma, actor, decisionId, { ok: false, reason: stepIndex === 0 ? 'no_step0_copy' : 'no_step_copy' });
   if (pack.rendered.unrendered) return refuse(prisma, actor, decisionId, { ok: false, reason: 'unrendered_placeholder', detail: pack.rendered.unrendered });

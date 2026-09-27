@@ -73,7 +73,7 @@ export interface PackVersion {
   version: number;
   status: string;
   steps: unknown;
-  family?: { id: string; name: string | null; engine: string } | null;
+  family?: { id: string; name: string | null; engine: string; program?: string | null } | null;
 }
 
 export interface PackCompile {
@@ -131,7 +131,7 @@ const VERSION_SELECT = {
   version: true,
   status: true,
   steps: true,
-  family: { select: { id: true, name: true, engine: true } },
+  family: { select: { id: true, name: true, engine: true, program: true } },
 } as const;
 
 function top100Of(decision: PackDecision | null): RoutingTop100Input | null {
