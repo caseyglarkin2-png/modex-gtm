@@ -23,6 +23,7 @@
 import { sourceLabel } from './source-label';
 import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
+import { actionabilityOf } from '../hypothesis/actionability';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -60,6 +61,25 @@ export interface ProposedNarrative {
 export type ProposeFromResearchResult =
   | { ok: true; hypothesisId: string; existing: boolean; hypothesisIds: string[]; skipped?: number[]; narrative: ProposedNarrative }
   | { ok: false; reason: 'run_not_found' | 'no_fresh_evidence' | 'conflicting_evidence' | string };
+
+/**
+ * Monday readiness: the person's current APPROVED row this proposal replaces,
+ * when that row is frozen and not ready for outreach (a keyword observation).
+ * The new draft points at it with supersedes_id, so the old row leaves current
+ * work instead of lingering in Research beside its replacement. The old row is
+ * never written. A ready or active row is never superseded here.
+ */
+async function frozenToSupersede(prisma: PrismaLike, accountName: string, personaId: number | null, now: Date): Promise<string | null> {
+  if (personaId == null) return null;
+  const row = await prisma.prospectingHypothesis.findFirst({
+    where: { account_name: accountName, primary_persona_id: personaId, status: 'approved', superseded_by: { is: null } },
+    orderBy: { created_at: 'desc' },
+    include: { signals: { include: { signal: { select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } } } } },
+  });
+  if (!row || row.status !== 'approved') return null;
+  const next = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, now).next;
+  return next === 'revise' ? row.id : null;
+}
 
 const asList = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
 
@@ -108,6 +128,7 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   };
 
   const proposeFor = async (personaId: number | null, sourceRef: string): Promise<{ ok: true; id: string; existing: boolean } | { ok: false; reason: string }> => {
+    const supersedesId = await frozenToSupersede(prisma, run.account_name, personaId, input.now);
     const r = await proposeHypothesis(prisma, {
       accountName: run.account_name,
       primaryPersonaId: personaId,
@@ -126,7 +147,8 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
       signalIds: quotable.map((s) => s.id),
       primarySignalId: quotable[0].id,
       sourceRef,
-      metadata: { proposedFrom: 'research_this', researchRunId: run.id, basedOn: base?.id ?? null },
+      ...(supersedesId ? { supersedesId } : {}),
+      metadata: { proposedFrom: 'research_this', researchRunId: run.id, basedOn: base?.id ?? null, ...(supersedesId ? { revisionOf: supersedesId } : {}) },
       createdBy: input.actor,
     });
     if (r.ok) return { ok: true, id: r.id, existing: false };
