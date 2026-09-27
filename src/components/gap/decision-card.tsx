@@ -38,7 +38,8 @@ import {
   sellerActionLabel,
   telHref,
 } from '@/lib/gap/routing/seller-action';
-import { cardReadiness, RESEARCHABLE_RULES } from '@/lib/gap/routing/card-readiness';
+import { cardReadiness, RESEARCHABLE_RULES, reviewWaitsFor, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
+import { ColdOutboundButton } from './cold-outbound-button';
 import { ResearchThis } from './research-this';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge } from './hypothesis-drawer';
@@ -104,6 +105,8 @@ export interface DecisionCardProps {
   expanded?: ReactNode;
   /** Where Close goes when the card is open (the lane without `open`). */
   closeHref?: string;
+  /** What is waiting in the REVIEW lane now: a missing-thesis fix points there only for this card's own thesis. */
+  reviewWaiting?: ReviewWaiting | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -176,7 +179,7 @@ export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
 // Component
 // ---------------------------------------------------------------------------
 
-export function DecisionCard({ item, onAct, acting = false, actError = null, expanded = null, closeHref = '/gap' }: DecisionCardProps) {
+export function DecisionCard({ item, onAct, acting = false, actError = null, expanded = null, closeHref = '/gap', reviewWaiting = null }: DecisionCardProps) {
   const [choosingOther, setChoosingOther] = useState(false);
   const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
   const [callOpen, setCallOpen] = useState(false);
@@ -212,6 +215,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
     hypothesis: item.hypothesis ? { id: item.hypothesis.id, status: item.hypothesis.status } : null,
     suppression: item.suppression ?? null,
     touch: item.touch ?? null,
+    reviewWaiting: reviewWaitsFor(item, reviewWaiting),
   });
   // Release C review SF2: the inline call recorder opens only on an actionable
   // card. A research card (evidence thin, no hypothesis, stale) has no call to
@@ -256,14 +260,16 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
       {!item.blocked ? (
         <div data-testid="contact-buttons" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
           {/* Red team T8: no raw email link. Email goes only through the guarded GAP send path. */}
+          {/* Last mile: no raw tel: or LinkedIn link either. A cold call / message re-reads HubSpot opportunity truth at the click. */}
           {tel ? (
-            <a
-              href={tel}
-              onClick={() => canRecordCall && setCallOpen(true)}
-              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]"
+            <ColdOutboundButton
+              decisionId={item.id}
+              channel="call"
+              onCleared={() => canRecordCall && setCallOpen(true)}
+              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-60"
             >
               <Phone className="h-3 w-3" /> Call
-            </a>
+            </ColdOutboundButton>
           ) : (
             <span className="italic text-[var(--muted-foreground)]">phone unavailable</span>
           )}
@@ -273,14 +279,13 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             </button>
           ) : null}
           {item.persona.linkedinUrl ? (
-            <a
-              href={item.persona.linkedinUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]"
+            <ColdOutboundButton
+              decisionId={item.id}
+              channel="linkedin"
+              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-60"
             >
               <Linkedin className="h-3 w-3" /> LinkedIn
-            </a>
+            </ColdOutboundButton>
           ) : (
             <span className="italic text-[var(--muted-foreground)]">LinkedIn unavailable</span>
           )}
@@ -345,6 +350,15 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             <Link href={closeHref} scroll={false} data-testid="card-close" className="rounded-md border border-[var(--border)] px-3 py-1.5 text-xs hover:bg-[var(--muted)]">
               Close
             </Link>
+          ) : 'cold' in readiness.primary && readiness.primary.cold ? (
+            <ColdOutboundButton
+              decisionId={item.id}
+              channel={readiness.primary.cold}
+              onCleared={() => readiness.primary.href?.startsWith('tel:') && canRecordCall && setCallOpen(true)}
+              className="inline-flex items-center gap-1 rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-60"
+            >
+              {readiness.primary.label}
+            </ColdOutboundButton>
           ) : readiness.primary.href?.startsWith('/gap?') ? (
             <Link
               href={readiness.primary.href}

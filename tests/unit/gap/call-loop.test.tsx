@@ -45,12 +45,16 @@ function item(overrides: Partial<QueueItem> = {}): QueueItem {
 }
 
 describe('T8 inline call outcome', () => {
-  it('clicking Call opens the disposition workflow inline on the card, for that person', () => {
+  it('clicking Call (HubSpot CLEAR at the click) opens the disposition workflow inline on the card, for that person', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, channel: 'call', href: 'tel:5551234567' }), { status: 200 }));
+    const open = vi.spyOn(window, 'open').mockReturnValue(null);
     render(<DecisionCard item={item()} onAct={() => {}} />);
     expect(screen.queryByTestId('inline-call-outcome')).toBeNull();
-    fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('link', { name: /^Call$/ }));
-    expect(screen.getByTestId('inline-call-outcome')).toBeInTheDocument();
+    fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /^Call$/ }));
+    expect(await screen.findByTestId('inline-call-outcome')).toBeInTheDocument();
     expect(screen.getByTestId('call-mode-stub')).toHaveAttribute('data-persona', '41');
+    fetchMock.mockRestore();
+    open.mockRestore();
   });
 
   it('a call dialed elsewhere can still be recorded: Record call outcome opens the same workflow', () => {

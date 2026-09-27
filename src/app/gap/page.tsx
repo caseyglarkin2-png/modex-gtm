@@ -32,7 +32,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
 import { listAllCurrent, type QueueItem } from '@/lib/gap/routing/queue';
-import { cockpitOpenHref, sellerLaneOf } from '@/lib/gap/routing/card-readiness';
+import { cockpitOpenHref, sellerLaneOf, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
 import { loadThesisGroups, splitThesisWork, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
 import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
@@ -77,6 +77,14 @@ async function loadCockpit() {
   // REVIEW counts decisions that can succeed, not rows: a shared thesis is ONE review however many
   // people it covers. A thesis the evidence gate rates not ready is RESEARCH, never fake review work.
   const { reviewGroups, readyOneOffIds, researchGroups } = splitThesisWork(groups);
+  // Last mile: exactly what the REVIEW lane renders, so a card's "missing thesis" fix links there only
+  // when its own thesis is waiting (never to an empty lane).
+  const oneOffIds = new Set(readyOneOffIds);
+  const reviewMembers = groups.flatMap((g) => (reviewGroups.includes(g) ? g.members : g.members.filter((m) => oneOffIds.has(m.id))));
+  const reviewWaiting: ReviewWaiting = {
+    hypothesisIds: reviewMembers.map((m) => m.id),
+    personaIds: reviewMembers.map((m) => m.primary_persona_id).filter((p): p is number => typeof p === 'number'),
+  };
 
   // People in use with no current card, or a card from before they were in use.
   // Rows activated before APPROVE + USE routed on its own, or whose account's routing failed.
@@ -127,6 +135,7 @@ async function loadCockpit() {
     groups: reviewGroups,
     readyOneOffIds,
     researchGroups,
+    reviewWaiting,
     queueAsOf: queue.asOf,
     unrouted,
     routing: { canRun: routableHypotheses > 0 || queue.items.length > 0, routableHypotheses, routableAccounts },
@@ -226,7 +235,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           ) : (
             <>
             {lane === 'research' ? <ResearchTheses groups={data.researchGroups} /> : null}
-            <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} />
+            <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} reviewWaiting={data.reviewWaiting} />
             </>
           )}
         </section>

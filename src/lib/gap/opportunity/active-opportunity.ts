@@ -25,7 +25,8 @@
  *
  * Company identity, deterministic and conservative (a union, never a guess):
  *   - `accounts.hubspot_company_id` when set (HubSpot must still have it);
- *   - HubSpot companies whose `domain` equals the account's verified canonical
+ *   - HubSpot companies whose `domain` is canonically (canonicalDomain: case,
+ *     scheme, path, `www.`, trailing dot) the account's verified canonical
  *     domain (`canonical_account_links` -> `domain:<d>`), or the email domain
  *     of any person GAP holds at the account (consumer mail excluded);
  *   - HubSpot's own duplicates of those companies: every company whose name
@@ -114,17 +115,48 @@ const unknown = (reason: OpportunityUnknownReason, detail?: string): Opportunity
 
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e)).slice(0, 200);
 
-/** Lowercased bare domain, or null for consumer mail, our own domains and junk. */
-export function companyDomain(raw: string | null | undefined): string | null {
+/**
+ * The ONE hostname canonicalizer for company-domain comparison (last mile,
+ * 2026-09-27: HubSpot stores some companies as `www.example.com`). Lowercase,
+ * trim, drop a scheme, user info, port, path, query and fragment, one leading
+ * `www.` and a trailing dot. Exact host otherwise: `sub.example.com`,
+ * `example.co` and `example-logistics.com` stay distinct (no fuzzy matching).
+ * Null for anything that is not a dotted hostname.
+ */
+export function canonicalDomain(raw: string | null | undefined): string | null {
   const d = String(raw ?? '')
     .trim()
     .toLowerCase()
-    .replace(/^https?:\/\//, '')
-    .replace(/^www\./, '')
-    .replace(/[/?#].*$/, '');
+    .replace(/^[a-z][a-z0-9+.-]*:\/\//, '')
+    .replace(/[/?#].*$/, '')
+    .replace(/^[^@]*@/, '')
+    .replace(/:\d*$/, '')
+    .replace(/\.$/, '')
+    .replace(/^www\./, '');
   if (!d || !/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(d)) return null;
-  if (FREEMAIL_DOMAINS.has(d) || OWN_DOMAINS.has(d)) return null;
   return d;
+}
+
+/** Canonical company domain, or null for consumer mail, our own domains and junk. */
+export function companyDomain(raw: string | null | undefined): string | null {
+  const d = canonicalDomain(raw);
+  if (!d || FREEMAIL_DOMAINS.has(d) || OWN_DOMAINS.has(d)) return null;
+  return d;
+}
+
+/**
+ * The stored forms to ask HubSpot for (its search is exact on `domain`): the
+ * bare and the `www.` form of each canonical domain. Nothing broader.
+ */
+export function hubspotDomainVariants(domains: string[]): string[] {
+  const out = new Set<string>();
+  for (const raw of domains) {
+    const d = canonicalDomain(raw);
+    if (!d) continue;
+    out.add(d);
+    out.add(`www.${d}`);
+  }
+  return [...out].sort();
 }
 
 export function emailDomain(email: string | null | undefined): string | null {
@@ -157,7 +189,7 @@ export async function resolveOpportunity(identity: OpportunityIdentity, reads: O
   if (domains.length > 0) {
     let hit: { companies: CompanyRef[]; truncated: boolean };
     try {
-      hit = await reads.companiesByDomains(domains);
+      hit = await reads.companiesByDomains(hubspotDomainVariants(domains));
     } catch (e) {
       return unknown('hubspot_error', `company search: ${errText(e)}`);
     }

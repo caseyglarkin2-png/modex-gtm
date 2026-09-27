@@ -91,7 +91,10 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
     const r = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788, displayName: 'jason gaiser' } }));
     expect(r.state).toBe('missing_prerequisite');
     expect(r.state === 'missing_prerequisite' && r.missing).toContain('No hypothesis covers jason at Kroger');
-    expect(r.state === 'missing_prerequisite' && r.fix.href).toBe('/gap?lane=review');
+    // Last mile: nothing of Jason's waits in REVIEW, so the fix is research on his card, never an empty lane.
+    expect(r.state === 'missing_prerequisite' && r.fix).toMatchObject({ label: 'Research to propose a hypothesis', href: `/gap?lane=research#card-${item().id}` });
+    const waiting = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788 }, reviewWaiting: true }));
+    expect(waiting.state === 'missing_prerequisite' && waiting.fix).toEqual({ label: 'Review the waiting hypothesis', href: '/gap?lane=review' });
   });
 
   it('unknown provenance is always a review prerequisite, never an outreach action', () => {

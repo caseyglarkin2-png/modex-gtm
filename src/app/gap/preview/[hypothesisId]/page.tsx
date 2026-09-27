@@ -25,6 +25,7 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
 import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler/preview-rows';
 import { hubspotCompanyUrl, hubspotContactUrl, telHref } from '@/lib/gap/routing/seller-action';
+import { ColdOutboundButton } from '@/components/gap/cold-outbound-button';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { ActionPackView, resolveActionPack } from '@/components/gap/action-pack-view';
@@ -103,6 +104,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
   const cleared = allStepsCleared(reportSteps);
   const recommends = decision ? RECOMMENDS[decision.action] ?? null : null;
   const tel = persona?.phone ? telHref(persona.phone) : null;
+  // Cold outbound is checked per routing card, and only for the card's own person.
+  const coldDecisionId = decision && pack.personaSource === 'decision' ? decision.id : null;
   const contactUrl = persona?.hubspot_contact_id ? hubspotContactUrl(persona.hubspot_contact_id) : null;
   const companyUrl = account?.hubspot_company_id ? hubspotCompanyUrl(account.hubspot_company_id) : null;
 
@@ -135,17 +138,18 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         <div className="mt-3 space-y-4 text-sm">
           {persona ? (
               <div className="mt-2 flex flex-wrap gap-2 text-xs" data-testid="preview-contact-buttons">
-                {tel ? (
-                  <a href={tel} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                {/* Last mile: cold call / LinkedIn re-read HubSpot opportunity truth at the click; no raw links. */}
+                {tel && coldDecisionId ? (
+                  <ColdOutboundButton decisionId={coldDecisionId} channel="call" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-60">
                     Call
-                  </a>
+                  </ColdOutboundButton>
                 ) : (
-                  <span className="italic text-[var(--muted-foreground)]">phone unavailable</span>
+                  <span className="italic text-[var(--muted-foreground)]">{tel ? 'call from the card' : 'phone unavailable'}</span>
                 )}
-                {persona.linkedin_url ? (
-                  <a href={persona.linkedin_url} target="_blank" rel="noreferrer noopener" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+                {persona.linkedin_url && coldDecisionId ? (
+                  <ColdOutboundButton decisionId={coldDecisionId} channel="linkedin" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-60">
                     LinkedIn
-                  </a>
+                  </ColdOutboundButton>
                 ) : (
                   <span className="italic text-[var(--muted-foreground)]">LinkedIn unavailable</span>
                 )}
