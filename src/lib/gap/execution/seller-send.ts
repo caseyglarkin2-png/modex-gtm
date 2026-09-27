@@ -40,12 +40,13 @@ import {
   DIRECT_RELEASED,
   DIRECT_SENT,
   DRAFT_SUBJECT_TYPE,
+  isDefinitelyNotSent,
   type CrmLogMethod,
   type DirectSentPayload,
 } from './draft-ledger';
 import { gmailDirectAdapter, type GmailAdapterDeps, type GmailAdapterInput } from './gmail-adapter';
 import { prepareSellerEmail, type PreparedSellerEmail, type SellerDraftDeps, type SellerDraftRefusal } from './seller-draft';
-import { personSendHistory, personStepKey, type PersonSendHistory } from './person-history';
+import { claimSendKey, personStepKey } from './person-history';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -106,56 +107,8 @@ async function directRows(prisma: PrismaLike, decisionId: string): Promise<Row[]
   });
 }
 
-/** The state of one person + step from the person's history: sent anywhere, a claim open anywhere, or free. */
-export function personStepState(history: PersonSendHistory, stepIndex: number): 'free' | 'sent' | 'unresolved' {
-  if (history.sent.some((s) => s.stepIndex === stepIndex)) return 'sent';
-  if (history.unresolvedClaims.some((c) => c.stepIndex === null || c.stepIndex === stepIndex)) return 'unresolved';
-  return 'free';
-}
+export { claimSendKey, personStepState } from './person-history';
 
-/**
- * Claim one person + step for one send, atomically (red team T2): a
- * transaction-scoped advisory lock on the PERSON serializes every send to
- * them from any card, then their whole history is re-read inside it. The
- * key is person + recipient + step: no card, no copy hash, no version, so a
- * newer card or edited copy cannot claim the same touch a second time.
- */
-export async function claimSendKey(
-  prisma: PrismaLike,
-  args: { key: string; decisionId: string; personaId: number | null; recipient: string; stepIndex: number; actor: string; now: Date },
-): Promise<{ claimed: true } | { claimed: false; state: 'sent' | 'unresolved' }> {
-  return prisma.$transaction(
-    async (tx: PrismaLike) => {
-      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_send_person:${args.personaId ?? args.recipient}`}))`;
-      const state = personStepState(await personSendHistory(tx, args.personaId, args.recipient), args.stepIndex);
-      if (state !== 'free') return { claimed: false as const, state };
-      await tx.gapAuditEvent.create({
-        data: {
-          kind: DIRECT_CLAIMED,
-          actor: args.actor,
-          subject_type: DRAFT_SUBJECT_TYPE,
-          subject_id: args.decisionId,
-          payload: { idempotencyKey: args.key, claimedAt: args.now.toISOString(), personaId: args.personaId, recipient: args.recipient, stepIndex: args.stepIndex },
-        },
-      });
-      return { claimed: true as const };
-    },
-    { timeout: 15_000 },
-  );
-}
-
-/** Refusals that provably happened before anything left the mailbox (the key may be retried). */
-const DEFINITELY_NOT_SENT = [
-  /^Canonical autonomy refused/,
-  /^HUMAN_APPROVED_1TO1 refused/,
-  /^Cross-plane suppression refused/,
-  /^Daily send ceiling/,
-  // Only a 4xx is a definitive "Gmail did not send" (red team T4). A 5xx, a
-  // timeout or a dropped connection may have sent: the claim stays unresolved.
-  /^Gmail send failed \(4\d\d\)/,
-  /^delegated Gmail/,
-  /^Gmail sender not configured/,
-];
 
 function sentStepRow(rows: readonly Row[], stepIndex: number): Row | undefined {
   return rows.find((r) => r.kind === DIRECT_SENT && Number(r.payload?.stepIndex ?? 0) === stepIndex);
@@ -222,6 +175,9 @@ export async function sendSellerEmail(
       if (sp) return { ok: true, alreadySent: true, sent: { sentAt: sp.sentAt, gmailSentMessageId: sp.gmailSentMessageId, gmailThreadId: sp.gmailThreadId, recipient: sp.recipient } };
       return { ok: false, reason: stepIndex === 0 ? 'first_touch_already_sent' : 'step_already_sent', detail: `Touch ${stepIndex + 1} was already sent to this person from another card. GAP will not send it twice.` };
     }
+    if (claim.state === 'drafted') {
+      return { ok: false, reason: 'draft_outstanding', detail: `A Gmail draft of touch ${stepIndex + 1} to this person exists. Send or delete it in Gmail, then reconcile.` };
+    }
     return {
       ok: false,
       reason: 'send_in_progress_or_unknown',
@@ -259,7 +215,7 @@ export async function sendSellerEmail(
 
   if (receipt.status !== 'sent' || !receipt.engineId) {
     const why = receipt.refusalReason ?? 'no message id';
-    if (receipt.status !== 'sent' && DEFINITELY_NOT_SENT.some((re) => re.test(why))) {
+    if (receipt.status !== 'sent' && isDefinitelyNotSent(why)) {
       await appendLedger(prisma, DIRECT_RELEASED, actor, decisionId, { idempotencyKey: key, reason: why, at: now.toISOString() }).catch(() => undefined);
       return { ok: false, reason: 'send_refused', detail: why };
     }

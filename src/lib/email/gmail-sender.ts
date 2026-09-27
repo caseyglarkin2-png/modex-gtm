@@ -209,11 +209,32 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
 
 /** An access token for this sender: delegated service account, per-user refresh token, or the env identity. */
 export async function accessTokenForSender(sender?: GmailSender): Promise<string> {
-  if (sender && 'serviceAccountJson' in sender) return mintDelegatedAccessToken(sender.serviceAccountJson, sender.userEmail);
-  return getAccessToken(sender?.refreshToken);
+  // Minting a token happens BEFORE any message exists, so every failure here,
+  // including a timeout, is a definitive "nothing was sent" (red team Release
+  // B review): tagged `Gmail token unavailable:` so a send claim is released
+  // instead of blocking the person forever. Configuration errors keep their
+  // own stable prefixes.
+  const timeoutMs = Number(process.env.GMAIL_TOKEN_TIMEOUT_MS) > 0 ? Number(process.env.GMAIL_TOKEN_TIMEOUT_MS) : 10_000;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const deadline = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`no token within ${timeoutMs}ms`)), timeoutMs);
+  });
+  try {
+    const mint =
+      sender && 'serviceAccountJson' in sender
+        ? mintDelegatedAccessToken(sender.serviceAccountJson, sender.userEmail)
+        : getAccessToken(sender?.refreshToken, timeoutMs);
+    return await Promise.race([mint, deadline]);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (/^(Gmail sender not configured|delegated Gmail|Gmail token unavailable)/.test(msg)) throw err;
+    throw new Error(`Gmail token unavailable: ${msg}`);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
 }
 
-async function getAccessToken(overrideRefreshToken?: string): Promise<string> {
+async function getAccessToken(overrideRefreshToken?: string, timeoutMs = 10_000): Promise<string> {
   const cfg = getGmailConfig();
   const clientId = cfg.clientId;
   const clientSecret = cfg.clientSecret;
@@ -233,6 +254,7 @@ async function getAccessToken(overrideRefreshToken?: string): Promise<string> {
       refresh_token: refreshToken,
       grant_type: 'refresh_token',
     }),
+    signal: AbortSignal.timeout(timeoutMs),
   });
 
   const data = (await res.json()) as OAuthTokenResponse;

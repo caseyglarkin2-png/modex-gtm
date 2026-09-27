@@ -29,6 +29,13 @@ export const DRAFTED = 'execution.gmail_drafted' as const;
 export const DRAFT_REFUSED = 'execution.gmail_draft_refused' as const;
 export const DRAFT_SENT = 'execution.gmail_draft_sent' as const;
 export const DRAFT_DISCARDED = 'execution.gmail_draft_discarded' as const;
+/**
+ * The draft was seen GONE from Drafts with no SENT message yet (red team
+ * Release B review). Not a fate: a Gmail undo window or a send still in
+ * flight looks exactly like this, so the draft stays OUTSTANDING and is only
+ * discarded once it has stayed gone past DRAFT_VANISH_GRACE_MS.
+ */
+export const DRAFT_VANISHED = 'execution.gmail_draft_vanished' as const;
 export const DRAFT_SUBJECT_TYPE = 'routing_decision';
 /**
  * A send Casey made BY HAND from Gmail (he copied the action pack's rendered
@@ -74,6 +81,46 @@ export const DIRECT_CLAIMED = 'execution.gmail_direct_claimed' as const;
 export const DIRECT_SENT = 'execution.gmail_direct_sent' as const;
 export const DIRECT_RELEASED = 'execution.gmail_direct_released' as const;
 export const DIRECT_REFUSED = 'execution.gmail_direct_refused' as const;
+/**
+ * CREATE GMAIL DRAFT claims its person + step the same way a direct send does
+ * (red team Release B review): written under the person lock BEFORE the Gmail
+ * draft call, closed by the DRAFTED row carrying the same `claimKey`, or by
+ * DIRECT_RELEASED when Gmail provably created nothing. A claim left open (the
+ * draft was created but the answer or the ledger write was lost) keeps the
+ * person + step blocked: an orphan draft is never invisible.
+ */
+export const DRAFT_CLAIMED = 'execution.gmail_draft_claimed' as const;
+
+/** Refusals that provably happened before anything reached Gmail, so a claim may be released. */
+export const DEFINITELY_NOT_SENT: readonly RegExp[] = [
+  /^Canonical autonomy refused/,
+  /^HUMAN_APPROVED_1TO1 refused/,
+  /^Cross-plane suppression refused/,
+  /^Daily send ceiling/,
+  // Only a 4xx is a definitive "Gmail did not act" (red team T4). A 5xx, a
+  // timeout or a dropped connection may have acted: the claim stays open.
+  /^Gmail send failed \(4\d\d\)/,
+  /^Gmail draft create failed \(4\d\d\)/,
+  /^Gmail token unavailable/,
+
+  /^delegated Gmail/,
+  /^Gmail sender not configured/,
+];
+
+export function isDefinitelyNotSent(reason: string): boolean {
+  return DEFINITELY_NOT_SENT.some((re) => re.test(reason));
+}
+
+/**
+ * Serialize every execution write for one human: advisory locks on the
+ * lowercased address AND the persona id, always taken in the same order.
+ * Person identity is persona OR address (person-history.ts), so two persona
+ * rows sharing one mailbox, or one persona's two addresses, meet on a lock.
+ */
+export async function lockPerson(tx: PrismaLike, personaId: number | null, recipient: string): Promise<void> {
+  const keys = [`gap_send_addr:${recipient.trim().toLowerCase()}`, ...(personaId !== null ? [`gap_send_persona:${personaId}`] : [])].sort();
+  for (const k of keys) await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${k}))`;
+}
 
 export interface DirectSentPayload {
   engine: 'gmail_direct';
@@ -133,6 +180,8 @@ export interface DraftedPayload {
   /** Follow-ups only: the Gmail message this draft replies to (reconciled truth), else null. */
   inReplyToGmailMessageId?: string | null;
   compileId: string;
+  /** The DRAFT_CLAIMED key this draft closes (absent on drafts made before claims). */
+  claimKey?: string;
   gmailDraftId: string;
   gmailDraftMessageId: string | null;
   gmailThreadId: string | null;
@@ -204,11 +253,13 @@ export async function appendLedger(
     | typeof DRAFT_REFUSED
     | typeof DRAFT_SENT
     | typeof DRAFT_DISCARDED
+    | typeof DRAFT_VANISHED
     | typeof MANUAL_SENT
     | typeof DIRECT_CLAIMED
     | typeof DIRECT_SENT
     | typeof DIRECT_RELEASED
-    | typeof DIRECT_REFUSED,
+    | typeof DIRECT_REFUSED
+    | typeof DRAFT_CLAIMED,
   actor: string,
   decisionId: string,
   payload: Record<string, unknown>,

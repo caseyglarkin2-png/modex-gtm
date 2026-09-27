@@ -60,7 +60,10 @@ export function db(): Db {
 export function prismaOf(d: Db) {
   let n = 0;
   const id = (p: string) => `${p}-${++n}`;
-  return {
+  const client: any = {
+    // The person lock (lockPerson) and the claim transaction; single-threaded tests run fn directly.
+    $executeRaw: vi.fn(async () => 1),
+    $transaction: vi.fn(async (fn: (tx: unknown) => Promise<unknown>) => fn(client)),
     routingDecision: {
       findUnique: vi.fn(async ({ where }: any) => d.decisions.find((x) => x.id === where.id) ?? null),
       findFirst: vi.fn(async ({ where }: any) => {
@@ -112,6 +115,7 @@ export function prismaOf(d: Db) {
       findMany: vi.fn(async (args: any) => findManyFrom(d.audit, { orderBy: { created_at: 'desc' }, ...args })),
     },
   };
+  return client;
 }
 
 /** A compile stand-in that records the row the way compile() persists it. */

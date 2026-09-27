@@ -29,10 +29,12 @@ import {
   DIRECT_CLAIMED,
   DIRECT_RELEASED,
   DIRECT_SENT,
+  DRAFT_CLAIMED,
   DRAFT_DISCARDED,
   DRAFT_SENT,
   DRAFT_SUBJECT_TYPE,
   DRAFTED,
+  lockPerson,
   MANUAL_SENT,
   type DraftDiscardedPayload,
   type DraftedPayload,
@@ -43,7 +45,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const EXECUTION_KINDS = [DRAFTED, DRAFT_SENT, DRAFT_DISCARDED, MANUAL_SENT, DIRECT_CLAIMED, DIRECT_SENT, DIRECT_RELEASED] as const;
+export const EXECUTION_KINDS = [DRAFTED, DRAFT_SENT, DRAFT_DISCARDED, MANUAL_SENT, DIRECT_CLAIMED, DIRECT_SENT, DIRECT_RELEASED, DRAFT_CLAIMED] as const;
 
 export type SendEngine = 'gmail_draft' | 'manual' | 'gmail_direct';
 
@@ -75,6 +77,8 @@ export interface PersonDraft {
 
 export interface PersonClaim {
   eventId: string;
+  /** direct = SEND FROM YARDFLOW; draft = CREATE GMAIL DRAFT. */
+  kind: 'direct' | 'draft';
   decisionId: string;
   idempotencyKey: string;
   /** From the payload (current claims) or parsed from a legacy per-decision key; null when neither says. */
@@ -155,7 +159,7 @@ export async function personDecisionIds(prisma: PrismaLike, personaId: number | 
     // Ledger rows name their recipient (lowercased by every writer). A row
     // under a decision this person no longer owns still names them.
     const named: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({
-      where: { subject_type: DRAFT_SUBJECT_TYPE, kind: { in: [DRAFTED, MANUAL_SENT, DIRECT_SENT, DIRECT_CLAIMED] }, payload: { path: ['recipient'], equals: address } },
+      where: { subject_type: DRAFT_SUBJECT_TYPE, kind: { in: [DRAFTED, MANUAL_SENT, DIRECT_SENT, DIRECT_CLAIMED, DRAFT_CLAIMED] }, payload: { path: ['recipient'], equals: address } },
       select: { subject_id: true },
     });
     for (const r of named) ids.add(r.subject_id);
@@ -171,17 +175,23 @@ export function historyFromRows(rows: readonly Row[], personaId: number | null, 
   const claims = new Map<string, { row: Row; payload: Record<string, unknown> }[]>();
   const released = new Map<string, number>();
   const directSentKeys = new Set<string>();
+  const draftedClaimKeys = new Set<string>();
+  const claimKind = new Map<string, 'direct' | 'draft'>();
   const sent: PersonSend[] = [];
 
   for (const r of rows) {
     if (!isObj(r.payload)) continue;
     const p = r.payload;
     const draftId = str(p.gmailDraftId);
-    if (r.kind === DRAFTED && draftId) drafted.set(draftId, { row: r, payload: p as unknown as DraftedPayload });
+    if (r.kind === DRAFTED && draftId) {
+      drafted.set(draftId, { row: r, payload: p as unknown as DraftedPayload });
+      if (str(p.claimKey)) draftedClaimKeys.add(p.claimKey as string);
+    }
     else if (r.kind === DRAFT_SENT && draftId) draftSent.set(draftId, { row: r, payload: p as unknown as DraftSentPayload });
     else if (r.kind === DRAFT_DISCARDED && draftId) discarded.set(draftId, p as unknown as DraftDiscardedPayload);
-    else if (r.kind === DIRECT_CLAIMED && str(p.idempotencyKey)) {
+    else if ((r.kind === DIRECT_CLAIMED || r.kind === DRAFT_CLAIMED) && str(p.idempotencyKey)) {
       const key = p.idempotencyKey as string;
+      claimKind.set(key, r.kind === DRAFT_CLAIMED ? 'draft' : 'direct');
       claims.set(key, [...(claims.get(key) ?? []), { row: r, payload: p }]);
     } else if (r.kind === DIRECT_RELEASED && str(p.idempotencyKey)) {
       const key = p.idempotencyKey as string;
@@ -236,12 +246,13 @@ export function historyFromRows(rows: readonly Row[], personaId: number | null, 
 
   const unresolvedClaims: PersonClaim[] = [];
   for (const [key, list] of claims) {
-    if (directSentKeys.has(key)) continue;
+    if (directSentKeys.has(key) || draftedClaimKeys.has(key)) continue;
     const open = list.length - (released.get(key) ?? 0);
     if (open <= 0) continue;
     const last = list[list.length - 1];
     unresolvedClaims.push({
       eventId: last.row.id,
+      kind: claimKind.get(key) ?? 'direct',
       decisionId: last.row.subject_id,
       idempotencyKey: key,
       stepIndex: claimStep(key, last.payload),
@@ -277,4 +288,48 @@ export async function personSendHistoryForDecision(prisma: PrismaLike, decisionI
   // The card's own rows always count, even if its persona link was edited away.
   const ids = [...history.decisionIds, decisionId].sort();
   return historyFromRows(await rowsFor(prisma, ids), personaId, recipient, ids);
+}
+
+/**
+ * The state of one person + step from the person's history: sent anywhere,
+ * an outstanding Gmail draft of it anywhere, a claim open anywhere, or free.
+ */
+export function personStepState(history: PersonSendHistory, stepIndex: number): 'free' | 'sent' | 'drafted' | 'unresolved' {
+  if (history.sent.some((s) => s.stepIndex === stepIndex)) return 'sent';
+  if (history.drafts.some((d) => d.fate === 'drafted' && (d.drafted.stepIndex ?? 0) === stepIndex)) return 'drafted';
+
+  if (history.unresolvedClaims.some((c) => c.stepIndex === null || c.stepIndex === stepIndex)) return 'unresolved';
+  return 'free';
+}
+
+/**
+ * Claim one person + step for one send or one draft, atomically (red team
+ * T2, hardened after the Release B review): advisory locks on the person's
+ * address AND persona id (lockPerson), then their whole history, drafts
+ * included, is re-read inside them. The key is person + recipient + step: no
+ * card, no copy hash, no version, so a newer card, a duplicate persona row or
+ * edited copy cannot claim the same touch a second time.
+ */
+export async function claimSendKey(
+  prisma: PrismaLike,
+  args: { key: string; decisionId: string; personaId: number | null; recipient: string; stepIndex: number; actor: string; now: Date; kind?: 'direct' | 'draft' },
+): Promise<{ claimed: true } | { claimed: false; state: 'sent' | 'drafted' | 'unresolved' }> {
+  return prisma.$transaction(
+    async (tx: PrismaLike) => {
+      await lockPerson(tx, args.personaId, args.recipient);
+      const state = personStepState(await personSendHistory(tx, args.personaId, args.recipient), args.stepIndex);
+      if (state !== 'free') return { claimed: false as const, state };
+      await tx.gapAuditEvent.create({
+        data: {
+          kind: args.kind === 'draft' ? DRAFT_CLAIMED : DIRECT_CLAIMED,
+          actor: args.actor,
+          subject_type: DRAFT_SUBJECT_TYPE,
+          subject_id: args.decisionId,
+          payload: { idempotencyKey: args.key, claimedAt: args.now.toISOString(), personaId: args.personaId, recipient: args.recipient, stepIndex: args.stepIndex },
+        },
+      });
+      return { claimed: true as const };
+    },
+    { timeout: 15_000 },
+  );
 }

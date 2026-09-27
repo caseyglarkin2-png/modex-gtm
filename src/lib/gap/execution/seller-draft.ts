@@ -37,13 +37,13 @@ import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
 import { makeCriticClient } from '../critic-client';
 import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
-import { appendLedger, DIRECT_REFUSED, DRAFT_REFUSED, DRAFTED, type DraftedPayload } from './draft-ledger';
+import { appendLedger, DIRECT_REFUSED, DIRECT_RELEASED, DRAFT_REFUSED, DRAFTED, isDefinitelyNotSent, type DraftedPayload } from './draft-ledger';
 import { hasActiveOpportunity } from '../routing/rules';
 import { loadActiveOpportunityInputs } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
 import { computeNextTouch, type NextTouch } from './next-touch';
-import { personSendHistoryForDecision } from './person-history';
+import { claimSendKey, personSendHistoryForDecision, personStepKey } from './person-history';
 import { getGmailMessageHeaders } from '@/lib/email/gmail-inbox';
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
@@ -500,6 +500,16 @@ export async function createSellerGmailDraft(
     mode: 'live',
     now,
   };
+  // Claim this person + step under the person lock BEFORE Gmail (red team
+  // Release B review): a double click, a draft on another card or a racing
+  // direct send meets it inside the lock; a lost answer leaves the claim open.
+  const claimKey = `${personStepKey(p.personaId, email, stepIndex)}:draft:${now.toISOString()}`;
+  const claim = await claimSendKey(prisma, { key: claimKey, decisionId, personaId: p.personaId, recipient: email, stepIndex, actor, now, kind: 'draft' });
+  if (!claim.claimed) {
+    const reason: SellerDraftRefusal =
+      claim.state === 'sent' ? (stepIndex === 0 ? 'first_touch_already_sent' : 'step_already_sent') : claim.state === 'drafted' ? 'draft_outstanding' : 'send_in_progress_or_unknown';
+    return refuse(prisma, actor, decisionId, { ok: false, reason, detail: `touch ${stepIndex + 1} to this person is ${claim.state}` });
+  }
   const receipt = await gmailDraftAdapter(
     intent,
     {
@@ -513,7 +523,12 @@ export async function createSellerGmailDraft(
     deps.gmail ?? {},
   );
   if (receipt.status !== 'drafted' || !receipt.engineId) {
-    return refuse(prisma, actor, decisionId, { ok: false, reason: 'gmail_refused', detail: receipt.refusalReason ?? 'no draft id' });
+    const why = receipt.refusalReason ?? 'no draft id';
+    // Release only when Gmail provably created nothing; otherwise the claim stays open (an orphan draft is never invisible).
+    if (isDefinitelyNotSent(why)) {
+      await appendLedger(prisma, DIRECT_RELEASED, actor, decisionId, { idempotencyKey: claimKey, reason: why, at: now.toISOString() }).catch(() => undefined);
+    }
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'gmail_refused', detail: why });
   }
 
   const payload: DraftedPayload = {
@@ -532,6 +547,7 @@ export async function createSellerGmailDraft(
     stepIndex,
     inReplyToGmailMessageId,
     compileId: p.compileId,
+    claimKey,
     gmailDraftId: receipt.engineId,
     gmailDraftMessageId: receipt.draftMessageId ?? null,
     gmailThreadId: receipt.threadId ?? null,
