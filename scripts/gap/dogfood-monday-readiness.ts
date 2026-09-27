@@ -18,6 +18,12 @@
  *               frozen rows (byte-identical, still approved), the revisions
  *               are REVIEW work, explicit APPROVE + USE activates and routes.
  *
+ * `--seed-browser` stops before any decision and leaves the browser states:
+ * Case A drafts in REVIEW; Case B five approved keyword-only rows in RESEARCH
+ * with a reusable (24h) research run that finds one verified fact; Case C one
+ * approved keyword-only row whose research finds nothing. No live provider is
+ * called from the browser: FIND VERIFIED EVIDENCE reuses those runs.
+ *
  * Suppression is a local stub (every address clear), HubSpot a TAM-in stub,
  * people use reserved example.com addresses. Nothing is drafted or sent; the
  * script asserts that. Rows stay (tag `mr-<ts>`) for the browser walkthrough.
@@ -38,6 +44,8 @@ import { VERIFIED_EXCERPT } from '../../src/lib/gap/research/evidence-gate';
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const ACTOR = 'casey@freightroll.com';
 const tag = `mr-${Date.now()}`;
+const SEED = process.argv.includes('--seed-browser');
+let accession = 0;
 const results: Array<{ step: string; ok: boolean; detail: string }> = [];
 function check(step: string, ok: boolean, detail: string) {
   results.push({ step, ok, detail });
@@ -87,7 +95,7 @@ async function main() {
     const verifiedFact = (account: string, key: string, text: string) =>
       registerSignal(prisma, {
         accountName: account, sourceKind: 'evidence_record', sourceId: `${tag}:${key}`, type: 'site_expansion', title: `${account.toUpperCase()} INC 10-Q (filed 2026-07-09)`,
-        sourceType: 'public_primary', evidenceUrl: `https://www.sec.gov/Archives/edgar/data/1/000000000126000001/${key}.htm`, evidenceText: text, externalOk: true,
+        sourceType: 'public_primary', evidenceUrl: `https://www.sec.gov/Archives/edgar/data/1/${String(1000000000 + (accession += 1))}26/${key}.htm`, evidenceText: text, externalOk: true,
         observedAt: new Date('2026-07-09T00:00:00Z'), confidence: 80, metadata: { verified: VERIFIED_EXCERPT }, registeredBy: ACTOR,
       });
     const narrative = {
@@ -111,11 +119,13 @@ async function main() {
     let groups = await loadThesisGroups(prisma, { account_name: acctA }, { singletons: true });
     let split = splitThesisWork(groups);
     check('A review', split.reviewGroups.length === 1 && split.researchGroups.length === 0 && groups[0].readiness.ready, `verified thesis is REVIEW work: ${JSON.stringify(groups[0]?.readiness)} next=${groups[0]?.members.map((m) => m.next)}`);
+    if (!SEED) {
     const useA = await approveSelectedSiblings(prisma, { fingerprint: groups[0].fingerprint, hypothesisIds: groups[0].members.map((m) => m.id), actor: ACTOR, now, use: true });
     const routedA = useA.inUse?.length ? await route(useA.inUse) : null;
     check('A approve + use', useA.ok && useA.summary?.inUse === 2 && useA.summary.newlyApproved === 2, `summary ${JSON.stringify(useA.summary)}`);
     const queueA = (await listQueue(prisma, { limit: 200 })).items.filter((i) => i.account.name === acctA);
     check('A routed READY', routedA?.ok === true && queueA.length === 2 && queueA.every((i) => sellerLaneOf(i) === 'ready'), `routing ${routedA?.ok ? JSON.stringify(routedA.counts) : JSON.stringify(routedA)}; lanes ${queueA.map((i) => sellerLaneOf(i))}`);
+    }
 
     // ---------------- CASE B: insufficient legacy thesis ----------------
     const acctB = `Pepsishape ${tag}`;
@@ -145,6 +155,28 @@ async function main() {
     const g = groups[0];
     check('B initial', groups.length === 1 && g.members.length === 5 && !g.readiness.ready && g.members.every((m) => m.next === 'revise') && split.reviewGroups.length === 0 && split.researchGroups.length === 1,
       `5 approved, 0 active; readiness ${JSON.stringify(g.readiness)}; RESEARCH not REVIEW`);
+    if (SEED) {
+      // A reusable run for this thesis that found ONE verified fact (a distinct filing, so it counts as new).
+      const found = await verifiedFact(acctB, 'b-fact', `${acctB} will close three distribution centers in 2027.`);
+      const hit = { signalId: found.id, excerpt: `${acctB} will close three distribution centers in 2027.`, url: 'https://www.sec.gov/', title: `${acctB.toUpperCase()} INC 10-Q (filed 2026-07-09)`, publishedAt: '2026-07-09T00:00:00.000Z', fresh: true };
+      await prisma.researchRun.create({ data: { account_name: acctB, status: 'succeeded', provider_status: { thesisFingerprint: g.fingerprint, result: { runId: `${tag}-b`, outcome: 'evidence_found', facts: [hit], rejected: [], conflicts: [], notes: [] } } } });
+      // Case C: one approved keyword-only row whose research finds nothing.
+      const acctC = `Holdco ${tag}`;
+      await prisma.account.create({ data: { rank: 9103, name: acctC, vertical: 'cpg' } });
+      const kwC = await registerSignal(prisma, {
+        accountName: acctC, sourceKind: 'pounce_trigger', sourceId: `${tag}:kwc`, type: 'other', title: 'HOLD 10-Q (2026-07-09) mentions: capital expenditure',
+        sourceType: 'public_secondary', evidenceUrl: 'https://www.sec.gov/Archives/edgar/data/2/000000000226000001/hold.htm', evidenceText: null, externalOk: null,
+        observedAt: new Date('2026-07-09T00:00:00Z'), confidence: 30, registeredBy: 'pounce',
+      });
+      const pc = await person(acctC, 1, 'VP Operations');
+      const rc = await proposeHypothesis(prisma, { ...narrative, accountName: acctC, primaryPersonaId: pc.id, observation: `HOLD 10-Q (2026-07-09) mentions: capital expenditure [S:${kwC.id}].`, signalIds: [kwC.id], primarySignalId: kwC.id });
+      if (!rc.ok) throw new Error(`propose C: ${JSON.stringify(rc)}`);
+      await prisma.prospectingHypothesis.update({ where: { id: rc.id }, data: { status: 'approved', reviewed_by: 'casey@freightroll.com', reviewed_at: new Date('2026-09-26T02:47:26Z') } });
+      const gc = (await loadThesisGroups(prisma, { account_name: acctC }, { singletons: true }))[0];
+      await prisma.researchRun.create({ data: { account_name: acctC, status: 'succeeded', provider_status: { thesisFingerprint: gc.fingerprint, result: { runId: `${tag}-c`, outcome: 'no_evidence', facts: [], rejected: [], conflicts: [], notes: ['nothing verified'] } } } });
+      check('seed browser', true, `A=${acctA} (review), B=${acctB} (research, a fact to find), C=${acctC} (research, nothing to find)`);
+      return;
+    }
     const forced = await approveSelectedSiblings(prisma, { fingerprint: g.fingerprint, hypothesisIds: legacyIds, actor: ACTOR, now, use: true });
     check('B old thesis still refuses', !forced.ok && forced.summary?.approved === 5 && forced.summary.inUse === 0 && forced.summary.needsResearch === 5 && forced.summary.reasons.join() === 'evidence_insufficient',
       `a forced Approve + use: ${JSON.stringify(forced.summary)} (reads 5 approved, 0 in use, verified evidence required)`);
