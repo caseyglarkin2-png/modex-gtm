@@ -145,15 +145,26 @@ export function wordRangeFor(ctx: CompileContext): WordRange {
   return ctx.stepIndex === 0 ? STEP0_WORD_RANGE : LATER_WORD_RANGE;
 }
 
+/**
+ * A verbatim source excerpt in straight double quotes, immediately cited
+ * (`"..." [[SRC:id]]` or `[S:id]`). Red team T7 opens the first touch with
+ * the verified fact quoted word for word (research/propose.ts citedQuote);
+ * those are the source's words, not ours, so the brevity limit does not count
+ * them. An uncited quote is ordinary prose and counts.
+ */
+export const CITED_QUOTE_RE = /"[^"\n]*"\s*(?:\[\[SRC:[A-Za-z0-9_-]+\]\]|\[S:[A-Za-z0-9_-]+\])/g;
+
 export const checkWordCount: Check = (draft, ctx) => {
-  const count = wordCount(draft.body);
+  const total = wordCount(draft.body);
+  const count = wordCount(draft.body.replace(CITED_QUOTE_RE, ' '));
+  const quoted = total - count;
   const { min, max } = wordRangeFor(ctx);
   const passed = count >= min && count <= max;
   return {
     code: C07_CODE,
     passed,
     severity: 'reject',
-    detail: `${count} words, ${passed ? 'within' : 'outside'} ${min}..${max} for step ${ctx.stepIndex}`,
+    detail: `${count} words${quoted > 0 ? ` (plus ${quoted} quoted from a cited source)` : ''}, ${passed ? 'within' : 'outside'} ${min}..${max} for step ${ctx.stepIndex}`,
     span: null,
   };
 };

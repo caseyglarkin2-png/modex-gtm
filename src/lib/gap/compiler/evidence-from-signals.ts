@@ -60,10 +60,14 @@ export function evidenceRefsFromSignals(signals: readonly SignalRow[], now: Date
     // names a document; it does not show a fact, so it is never citable.
     const operator = s.source_kind === 'operator_knowledge' || s.source_kind === 'manual';
     const keywordOnly = s.evidence_text !== undefined && !operator && !(s.evidence_text ?? '').trim();
+    // Red team T7: the first touch quotes the fact verbatim, so C01 must see
+    // the quoted text to cover the numbers in it ("On July 1, 2026, ...").
+    const excerpt = (s.evidence_text ?? '').trim();
     out.push({
       id: s.id,
       title: s.title ?? '',
       url: s.evidence_url ?? null,
+      ...(excerpt ? { excerpt } : {}),
       externalOk: s.external_ok === true && !keywordOnly,
       ...(keywordOnly ? { keywordOnly: true } : {}),
       fresh,

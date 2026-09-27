@@ -74,6 +74,17 @@ describe('C07 WORD_COUNT', () => {
     expect(r.detail).toBe('20 words, outside 45..80 for step 0');
   });
 
+  it('red team T7: a verbatim quote that is CITED is the source speaking and is not counted; an uncited quote is', () => {
+    const prose = bodyOfWords(50);
+    const quote = `"${bodyOfWords(40).replace(/\s+/g, ' ').trim()}"`;
+    const cited = `From Acme's 10-Q filed September 18: ${quote} [[SRC:sig_1]].\n\n${prose}`;
+    const r = checkWordCount(draft(cited), ctxAt(0));
+    expect(r.passed).toBe(true);
+    expect(r.detail).toMatch(/^\d+ words \(plus \d+ quoted from a cited source\), within 45\.\.80 for step 0$/);
+    const uncited = `From Acme's 10-Q filed September 18: ${quote}.\n\n${prose}`;
+    expect(checkWordCount(draft(uncited), ctxAt(0)).passed).toBe(false);
+  });
+
   it('uses 40..100 after step 0: 90 words fails step 0 and passes step 2', () => {
     const body = bodyOfWords(90);
     expect(checkWordCount(draft(body), ctxAt(0)).detail).toBe('90 words, outside 45..80 for step 0');

@@ -12,6 +12,7 @@ import { renderStepCopy } from '@/lib/gap/sequence/render';
 import { citedQuote, sourceLabel } from '@/lib/gap/research/propose';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
 import { outreachEvidence, sendableEvidence } from '@/lib/gap/research/evidence-gate';
+import { checkWordCount } from '@/lib/gap/compiler/checks/c07-structure';
 
 const GIANT_EAGLE =
   'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).';
@@ -132,5 +133,43 @@ describe('Release C review SF3/SF4: call questions and source labels', () => {
     expect(sourceLabel('UNITED STATES STEEL CORP 10-Q')).toBe("From United States Steel's 10-Q");
     expect(sourceLabel('GENERAL MILLS INC 10-Q')).toBe("From General Mills' 10-Q");
     expect(sourceLabel('Acme opens Ohio DC (press release)')).toBe('Acme opens Ohio DC (press release)');
+  });
+});
+
+describe('red team T7: the honest first touch fits the compiler (C07) for every seed family', () => {
+  it('with the real Kroger 10-Q quote, every family passes the step 0 word range', () => {
+    for (const fam of SEED_FAMILIES) {
+      const step = fam.steps.steps[0].templates!;
+      const r = renderStepCopy({ subject: step.subjectTemplate ?? '', body: step.bodyTemplate ?? '' }, { observation: OBSERVATION, firstName: 'Joey', account: 'Kroger' } as never);
+      const c = checkWordCount({ subject: r.marked.subject, body: r.marked.body } as never, { stepIndex: 0, contract: null, priorStepBodies: [] } as never);
+      expect(c.passed, `${fam.key}: ${c.detail}`).toBe(true);
+    }
+  });
+});
+
+describe('red team T7: the numbers in a verified quote are covered by C01', () => {
+  it('evidence refs carry the quoted excerpt, and the Kroger first touch passes C01', async () => {
+    const { evidenceRefsFromSignals } = await import('@/lib/gap/compiler/evidence-from-signals');
+    const { checkObservationUnsupported } = await import('@/lib/gap/compiler/checks/c01-evidence');
+    const sig = {
+      id: 'sig-ge',
+      title: 'KROGER CO 10-Q (filed 2026-09-18)',
+      evidence_url: 'https://www.sec.gov/x',
+      external_ok: true,
+      observed_at: new Date('2026-09-18T00:00:00Z'),
+      freshness_expires_at: null,
+      source_type: 'public_primary',
+      metadata: { verified: 'excerpt_found_at_source' },
+      evidence_text: GIANT_EAGLE,
+      source_kind: 'evidence_record',
+    };
+    const refs = evidenceRefsFromSignals([sig], new Date('2026-09-26T00:00:00Z'));
+    expect(refs[0].excerpt).toBe(GIANT_EAGLE);
+    for (const fam of SEED_FAMILIES) {
+      const step = fam.steps.steps[0].templates!;
+      const r = renderStepCopy({ subject: step.subjectTemplate ?? '', body: step.bodyTemplate ?? '' }, { observation: OBSERVATION, firstName: 'Joey', account: 'Kroger' } as never);
+      const c = checkObservationUnsupported({ subject: r.marked.subject, body: r.marked.body } as never, { stepIndex: 0, hypothesis: { observation: OBSERVATION, problemHypothesis: 'p', problemFamily: fam.problemFamily }, evidence: refs, contract: null, priorStepBodies: [] });
+      expect(c.passed, `${fam.key}: ${c.detail}`).toBe(true);
+    }
   });
 });

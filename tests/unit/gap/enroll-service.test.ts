@@ -1162,7 +1162,7 @@ describe('modex_queue', () => {
         problemFamily: 'hidden_capacity',
       },
       evidence: [
-        { id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', externalOk: true, fresh: true, superseded: false, firstParty: false },
+        { id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', excerpt: VERIFIED_FACT.evidence_text, externalOk: true, fresh: true, superseded: false, firstParty: false },
       ],
       stepCount: 2,
       claimsUsed: ['CR-001'],
