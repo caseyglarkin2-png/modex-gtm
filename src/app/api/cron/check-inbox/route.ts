@@ -94,6 +94,20 @@ export async function GET(request: Request) {
         skipped++;
         continue;
       }
+      // Ops closeout 14: one RFC message can arrive under two Gmail ids (a
+      // calendar invite, a list copy). The RFC Message-ID is the idempotency
+      // key: a second copy is labelled processed and changes nothing.
+      if (reply.rfcMessageId) {
+        const sameRfc = await prisma.inboundMessage.findFirst({
+          where: { rfc_message_id: reply.rfcMessageId, id: { not: reply.messageId } },
+          select: { id: true },
+        });
+        if (sameRfc) {
+          skipped++;
+          await markAsProcessed(reply.messageId).catch(() => undefined);
+          continue;
+        }
+      }
 
       // Try to match to a persona by email
       const persona = await prisma.persona.findFirst({

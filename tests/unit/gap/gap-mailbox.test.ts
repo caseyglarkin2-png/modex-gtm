@@ -20,7 +20,6 @@ function msg(over: Partial<MailboxMessage> = {}): MailboxMessage {
   return {
     id: 'm1',
     threadId: 'thr-joey',
-    rfcMessageId: '<x@mail>',
     fromEmail: JOEY,
     fromName: 'Joey Maggard',
     subject: 'Re: doors versus spots',
@@ -33,6 +32,8 @@ function msg(over: Partial<MailboxMessage> = {}): MailboxMessage {
     receivedAt: new Date('2026-09-26T15:00:00Z'),
     headers: {},
     ...over,
+    // Ops closeout 14: one RFC Message-ID per message unless a test says otherwise.
+    rfcMessageId: over.rfcMessageId !== undefined ? over.rfcMessageId : `<${over.id ?? 'm1'}@mail>`,
   };
 }
 
@@ -81,6 +82,7 @@ function world() {
     },
     inboundMessage: {
       findUnique: vi.fn(async ({ where }: any) => t.inbound.find((x) => x.id === where.id) ?? null),
+      findFirst: vi.fn(async (args: any) => findFirstFrom(t.inbound, args)),
       create: vi.fn(async ({ data }: any) => {
         t.inbound.push(data);
         return data;
@@ -522,5 +524,22 @@ describe('re-review S3: only the notice itself can say the recipient does not ex
     const row = t.audit.find((a) => a.kind === 'mailbox.delivery_blocked');
     expect(row).toMatchObject({ subject_type: 'recipient', subject_id: 'nobody.here@kroger.com' });
     expect(t.personas.find((p) => p.id === 77)).toMatchObject({ do_not_contact: false });
+  });
+});
+
+describe('ops closeout 14: inbound idempotency on the RFC Message-ID', () => {
+  it('one RFC message delivered under two Gmail ids (a calendar invite, a list copy) is ONE InboundMessage and ONE bell', async () => {
+    const { t, prisma } = world();
+    const a = msg({ id: 'g-1', rfcMessageId: '<same@mail>' });
+    const b = msg({ id: 'g-2', rfcMessageId: '<same@mail>', receivedAt: new Date('2026-09-26T15:00:01Z') });
+    await poll(prisma, [a, b]);
+    expect(t.inbound.map((x) => x.id)).toEqual(['g-1']);
+    expect(t.notes.filter((n) => n.type === 'reply')).toHaveLength(1);
+  });
+
+  it('two different RFC messages at the same second stay two rows', async () => {
+    const { t, prisma } = world();
+    await poll(prisma, [msg({ id: 'g-1', rfcMessageId: '<a@mail>' }), msg({ id: 'g-2', rfcMessageId: '<b@mail>' })]);
+    expect(t.inbound.map((x) => x.id).sort()).toEqual(['g-1', 'g-2']);
   });
 });

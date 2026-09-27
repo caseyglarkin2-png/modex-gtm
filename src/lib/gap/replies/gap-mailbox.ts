@@ -416,7 +416,13 @@ async function handleBounce(prisma: PrismaLike, m: MailboxMessage, dsn: DsnFindi
   }
 }
 
-async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: MailboxReport): Promise<void> {
+/**
+ * Store the message once; answer the id of the stored row. Ops closeout 14:
+ * one RFC message can arrive under two Gmail ids (a calendar invite, a list
+ * copy); the RFC Message-ID is the idempotency key, so the second copy points
+ * at the first row instead of creating a duplicate.
+ */
+async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: MailboxReport): Promise<string> {
   const from = lower(m.fromEmail);
   await prisma.emailThread.upsert({
     where: { id: m.threadId },
@@ -424,26 +430,30 @@ async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: Mailb
     update: { last_message_at: m.receivedAt },
   });
   const existing = await prisma.inboundMessage.findUnique({ where: { id: m.id }, select: { id: true } });
-  if (!existing) {
+  if (existing) return existing.id;
+  const sameRfc = m.rfcMessageId ? await prisma.inboundMessage.findFirst({ where: { rfc_message_id: m.rfcMessageId }, select: { id: true } }) : null;
+  if (sameRfc) return sameRfc.id;
+  {
     await prisma.inboundMessage.create({
       data: { id: m.id, thread_id: m.threadId, rfc_message_id: m.rfcMessageId, from_email: from, from_name: m.fromName, subject: m.subject, body_html: m.bodyHtml || null, body_text: m.bodyText || null, snippet: m.snippet, received_at: m.receivedAt },
     });
     report.inboundMessagesCreated += 1;
   }
+  return m.id;
 }
 
 async function handleReply(prisma: PrismaLike, m: MailboxMessage, v: Extract<MailboxVerdict, { kind: 'reply' }>, now: Date, actor: string, report: MailboxReport, ingest: typeof ingestReply): Promise<void> {
   const from = lower(m.fromEmail);
-  await storeInbound(prisma, m, report);
-  const bell = await prisma.notification.findFirst({ where: { source_id: m.id, type: 'reply' }, select: { id: true } });
+  const storedId = await storeInbound(prisma, m, report);
+  const bell = await prisma.notification.findFirst({ where: { source_id: storedId, type: 'reply' }, select: { id: true } });
   if (!bell) {
-    await prisma.notification.create({ data: { type: 'reply', persona_email: from, subject: m.subject, preview: m.snippet.slice(0, 200), source_id: m.id, read: false } });
+    await prisma.notification.create({ data: { type: 'reply', persona_email: from, subject: m.subject, preview: m.snippet.slice(0, 200), source_id: storedId, read: false } });
   }
   // Pause the replier's live enrollment and, for a colleague or a thread
   // reply, the GAP-emailed recipient's too.
   const contacts = new Set([from, ...v.attributedTo.map((s) => s.recipient)]);
   for (const contactEmail of contacts) {
-    await ingest(prisma, { contactEmail, source: 'gmail', inboundMessageId: m.id, receivedAt: m.receivedAt, isAutoresponder: false, now });
+    await ingest(prisma, { contactEmail, source: 'gmail', inboundMessageId: storedId, receivedAt: m.receivedAt, isAutoresponder: false, now });
   }
   report.replies += 1;
   await audit(prisma, MAILBOX_KINDS.reply, actor, m.id, {
