@@ -148,4 +148,8 @@ export const EVIDENCE_SIGNAL_SELECT = {
   freshness_expires_at: true,
   source_type: true,
   metadata: true,
+  // Red team T6: the keyword-only rule needs to see what the signal quotes.
+  evidence_text: true,
+  source_kind: true,
+  account_name: true,
 } as const;

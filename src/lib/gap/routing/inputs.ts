@@ -32,6 +32,7 @@
  */
 
 import { createLimiter, type Limiter } from './bounded';
+import { sendableEvidence } from '../research/evidence-gate';
 import { personSendHistory } from '../execution/person-history';
 import { parseSteps } from '../sequence/steps';
 import { normalizeScore } from '../../pounce/fit';
@@ -167,15 +168,18 @@ interface SignalRow {
   freshness_expires_at: Date | null;
   source_kind?: string | null;
   summary?: string | null;
+  // The evidence gate's fields (red team T6); loaded with the full signal row.
+  source_type?: string | null;
+  external_ok?: boolean | null;
+  observed_at?: Date | null;
+  metadata?: unknown;
+  account_name?: string | null;
 }
 
-/** An auto-ingested keyword trigger that quotes nothing (see RoutingHypothesisInput.evidenceThin). */
-function isUnquotedTrigger(s: SignalRow): boolean {
-  return s.source_kind === 'pounce_trigger' && !(s.evidence_text ?? '').trim() && !(s.summary ?? '').trim();
-}
 
 interface HypothesisRow {
   id: string;
+  account_name?: string;
   status: string;
   problem_family: string;
   confidence: number;
@@ -442,7 +446,14 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     family: isProblemFamily(h.problem_family) ? h.problem_family : 'unmapped',
     confidence: h.confidence,
     evidenceFresh,
-    evidenceThin: signals.length > 0 && signals.every(isUnquotedTrigger),
+    // Red team T6: thin = no LIVE outreach fact (research/evidence-gate.ts), the
+    // same rule approval, activation, the compiler and the send gate apply.
+    evidenceThin:
+      sendableEvidence(
+        h.observation,
+        signals.filter((s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime()),
+        h.account_name ?? '',
+      ).tier !== 'VERIFIED_FACT',
     hasNewerVersion,
     expiresAt: h.expires_at ?? null,
     resumeAt: asDate(m.resumeAt),
@@ -635,8 +646,12 @@ function emptyComms(): RoutingCommsInput {
     lastDisposition: null,
     meetingBooked: false,
     gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
+    unansweredCalls: 0,
   };
 }
+
+/** Call-only outcomes that reached no buyer decision (red team T8). */
+export const UNANSWERED_CALL_CLASSES = ['no_answer', 'voicemail', 'gatekeeper'] as const;
 
 const latest = (...dates: Array<Date | null | undefined>): Date | null =>
   dates.reduce<Date | null>((m, d) => (d && (!m || d.getTime() > m.getTime()) ? d : m), null);
@@ -733,10 +748,24 @@ export async function readComms(prisma: PrismaLike, email: string, personaId: nu
     gapSequence = { state, sentSteps: new Set(history.sent.map((s) => s.stepIndex)).size, lastSentAt: lastGapSend };
   }
 
+  // Red team T8: unanswered call attempts since the newest substantive answer.
+  const unansweredCalls = (await read('unanswered_calls', () =>
+    prisma.conversationDisposition.count({
+      where: {
+        contact_email: email,
+        human_confirmed: true,
+        channel: 'call',
+        response_class: { in: [...UNANSWERED_CALL_CLASSES] },
+        ...(lastSubstantive ? { created_at: { gt: lastSubstantive.created_at } } : {}),
+      },
+    }),
+  )) as number;
+
   return {
     inFlight: enrollment != null || draft != null,
     lastOutboundAt: latest(lastOutbound?.sent_at, lastGapSend),
     gapSequence,
+    unansweredCalls,
     lastInboundAt,
     undispositionedInbound,
     lastDisposition: buildLastDisposition(lastSubstantive),

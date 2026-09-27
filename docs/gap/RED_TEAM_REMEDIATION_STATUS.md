@@ -82,7 +82,7 @@ review, production verification.
 
 ### T2 — one send history per person
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - commit: see `git log --grep "T2"` on `feat/gap-redteam-release-b`
 - files: `src/lib/gap/execution/person-history.ts` (new),
   `src/lib/gap/execution/next-touch.ts`, `src/lib/gap/execution/seller-draft.ts`,
@@ -121,7 +121,7 @@ review, production verification.
 
 ### T3 — routing sees GAP sends
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - files: `src/lib/gap/routing/inputs.ts` (readComms), `src/lib/gap/routing/rules.ts`,
   `src/lib/gap/routing/types.ts`, tests `routing-inputs.test.ts`, `routing-rules.test.ts`
 - change: `readComms(prisma, email, personaId)` reads the person's GAP send
@@ -143,7 +143,7 @@ review, production verification.
 
 ### T4 — harden the send gate
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - files: `src/lib/gap/execution/seller-draft.ts`, `src/lib/gap/execution/seller-send.ts`,
   `src/lib/email/gmail-sender.ts`, `src/lib/email/autonomy-gate.ts`,
   `src/lib/email/suppression-gate.ts`; tests `tests/unit/gap/send-gate-hardening.test.ts`,
@@ -173,7 +173,7 @@ review, production verification.
 
 ### T5 — one-click unsubscribe + footer
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - files: `src/lib/email/compliance.ts` (new), `src/app/api/unsubscribe/route.ts`,
   `src/lib/email/templates.ts`, `src/lib/gap/execution/seller-draft.ts`; tests
   `tests/unit/unsubscribe-one-click.test.ts`, `tests/unit/gap/seller-draft.test.ts`
@@ -242,3 +242,308 @@ review, production verification.
   send gates refuse, but Casey could still press Send in Gmail by hand);
   queue display finds history via persona_id only (execution is exact);
   `sequence_stopped` sits after `hot_call` by design (calls stay open).
+
+### Release B receipt
+
+- PR #269, merge `87277798`, production READY 2026-09-26. No schema change.
+- gates: full unit suite 457 files green; typecheck green; local build
+  green; 10/10 scratch e2e scripts (117 checks, 0 failed, zero residue);
+  Vercel preview READY; read-only review (0 BLOCKER, 6 SHOULD-FIX, all
+  fixed); github_actions = unavailable_external_billing.
+- production verification (after READY):
+  - T2 (read-only, `scripts/gap/audit-person-history.ts 1886`): Kroger 1886's
+    newest card `cmuhrmns…` = waiting, touch 2 due 2026-10-01; step 0
+    REFUSED first_touch_already_sent; no open claims.
+  - T5 (live, reserved address gap-t5-oneclick-proof@example.com, no
+    persona): RFC 8058 POST to `/api/unsubscribe/?email&token` with a bad
+    token = 403; with an extra body field = 400; valid = 200 "Successfully
+    unsubscribed"; repeat = 200 "already". Read-only DB check: the
+    unsubscribed_emails row exists (unsubscribed_at 2026-09-27T02:04:16Z).
+- production mutation: one unsubscribed_emails row for the reserved
+  example.com test address (authorized controlled internal test). Nothing else.
+- prospect sends: 0. Prospect drafts: 0.
+- next: T6 (Release C, branch `feat/gap-redteam-release-c`).
+
+### T6 — evidence gate
+
+- status: IMPLEMENTED (Release C, not yet merged); production remediation
+  planned post-deploy (dry run done)
+- commit: `f139aa58` (+ remediation script)
+- files: `src/lib/gap/research/evidence-gate.ts` (new), `research/facts.ts`,
+  `hypothesis/machine.ts`, `hypothesis/service.ts`, `execution/seller-draft.ts`,
+  `compiler/evidence-from-signals.ts`, `compiler/types.ts`, `sequence/render.ts`,
+  `routing/inputs.ts`, `routing/rules.ts`, `app/api/gap/compile/route.ts`,
+  `scripts/gap/audit-evidence-tiers.ts`, `scripts/gap/remediate-insufficient-active.ts`
+- rule (one place): a first touch needs ONE outreach fact = verified
+  (`metadata.verified = excerpt_found_at_source`), dated, quoted, public,
+  external_ok, account-specific statement of a physical-network change
+  (`isPhysicalOpsFact`). Keyword-only, operator hearsay, unverified or
+  irrelevant quotes are INSUFFICIENT: research only.
+- enforced at: approve + activate (`evidence_insufficient`); send gate
+  (prepareSellerEmail `evidence_insufficient`); routing R12b `evidence_thin`
+  (research_required); compiler (a keyword hit's ref is never external_ok,
+  so it cannot satisfy C01); every compiler caller uses EVIDENCE_SIGNAL_SELECT.
+- facts.ts now excludes restructuring charges, risk-factor/forward-looking
+  boilerplate, liquidity/credit facilities/financing and generic capex.
+  Pinned with the three PepsiCo 10-Q (2026-07-09) sentences verbatim (signals
+  cmuhjv71a…, cmuhjv7bq…, cmuhjv7kc…).
+- tests: facts (3 PepsiCo + 4 boilerplate + 2 controls), machine (keyword
+  approve refused, expired fact refused, activate refused), service (operator
+  text refused, verified quote without URL approves, keyword 10-Q refused),
+  send gate (keyword, PepsiCo liquidity, expired fact), C01 via the real
+  projection, routing evidenceThin semantics. Old tests that pinned the weak
+  rule were rewritten to the new rule. Mutations (machine guard off, facts
+  exclusions off, send gate off): 5 / 4 / 3 RED; restored GREEN. Full unit
+  suite 457 files green.
+- production READ (2026-09-26, before remediation): 16 active, 14 at
+  INSUFFICIENT by the old depth label; by the T6 gate 15 INSUFFICIENT (all
+  keyword_only), 1 kept (Kroger cmuhbne1z…, Giant Eagle merger 10-Q quote).
+  5 PepsiCo hypotheses are `approved` (not active): the gate refuses their
+  activation and any send; they are not mutated (withdraw -> `rejected`
+  could be misread as buyer truth).
+- remediation plan (dry run recorded, apply after Release C deploys): the
+  existing audited `close_unresolved` transition for the 15, actor
+  `redteam-t6-remediation`, reason tagged `evidence_insufficient:` (so T10
+  Learning excludes them). No narrative edit, no delete, no email/HubSpot/
+  enrollment change (mirror off in production).
+- next: T7.
+
+### T7 — honest copy
+
+- status: IMPLEMENTED (Release C, not yet merged); live seed rewrite planned
+  post-deploy (dry run done, scratch rehearsal applied + idempotent)
+- files: `src/lib/gap/sequences/families.ts`, `src/lib/gap/sequence/call-pack.ts`,
+  `src/lib/gap/hypothesis/build.ts`, `src/lib/gap/research/propose.ts`,
+  `src/lib/gap/ui/format.ts` (humanWhyNow), `src/components/gap/{action-pack-view,
+  fact-hypothesis-blocks,decision-card,hypothesis-drawer}.tsx`,
+  `scripts/gap/rewrite-seed-versions.ts`, tests `honest-copy.test.ts` (new),
+  `seed-families`, `hypothesis-build`, `decision-card`, `pre-call-brief`,
+  `server-client-boundary`; test-only fixture
+  `tests/fixtures/gap/legacy-four-step-hidden-capacity.json` (+
+  `tests/unit/gap/fixtures/legacy-hc.ts`) for the multi-touch mechanics.
+- change:
+  - seeds: all four families are honest SINGLE-TOUCH. Steps 1-3 (Fontana,
+    Columbus, Bluewater, Reno, "your careers page / investor deck / Q2
+    call") are deleted, not replaced. Step 0 = the verified fact (observation
+    slot) -> a hedged pattern that says it is not a claim about the account ->
+    the hypothesis as a question. No analogy hook, no diagnosis, no cost
+    question.
+  - builder: a keyword hit, a "mentions:" title or a quote that states no
+    network change is never citable (`keyword_or_non_fact_not_citable`); the
+    observation is the verified quote via research's `citedQuote`, never a
+    title; no auto why-now; confidence 0 (unscored).
+  - research propose: quotes only outreach facts (`no_outreach_fact`
+    otherwise); no auto "Public source dated" why-now; confidence 0.
+  - call pack: opener = verified fact + hypothesis as a question; the cost
+    question is `impactIfAcknowledged`, labeled "Only after they say it is
+    real"; voicemail = fact + one question, no diagnosis; the action pack
+    builds a call script only for a hypothesis with a verified outreach fact.
+  - UI: the hypothesis "confidence N%" is no longer displayed; legacy auto
+    why-now text ("Signals observed…", "Public source dated…") renders as
+    none.
+- tests: exact snapshots of a first touch (Kroger / Giant Eagle) and the call
+  opener, voicemail, current-state and post-acknowledgement questions; every
+  family's first touch checked for fact-first, disclaimer, question, and no
+  forbidden text; PepsiCo evidence set (keyword + 3 sentences) INSUFFICIENT.
+  RED on the pre-T7 copy: 5 failed; restored GREEN. Full unit suite 458
+  files green; typecheck green.
+- production (planned post-deploy, `scripts/gap/rewrite-seed-versions.ts
+  --apply`): the four live seeded v1 drafts (cmuh640aa…, cmuh640q8…,
+  cmuh64134…, cmuh641g1…) 4 steps -> 1 through `updateVersionSteps`
+  (drafts only), with a `sequence.version_rewritten` audit event each. No
+  compiles, enrollments or pinned hypotheses reference them.
+- next: T8.
+
+### T8 — delete raw mailto + complete the call loop
+
+- status: IMPLEMENTED (Release C, not yet merged)
+- commits: `dd870fb0` (mailto), + call loop commit
+- change:
+  - raw `mailto:` links deleted from the decision card and the preview page;
+    `mailtoHref` deleted; a source scan pins that no GAP surface renders one.
+  - the card's Call action (and "Record call outcome" for a call dialed
+    elsewhere) opens the EXISTING call workflow (CallMode: brief +
+    DispositionForm) inline. A real conversation records "I called"; no
+    answer / voicemail / gatekeeper records no human action, so the card
+    stays open to retry.
+  - routing: `comms.unansweredCalls` = confirmed call-only outcomes since the
+    newest substantive answer; new rule R13b `call_attempts_exhausted`
+    (before hot_call) holds the person at MAX_UNANSWERED_CALLS = 3.
+  - Learning already treats call-only classes as non-substantive; pinned.
+  - problem_confirmed / partially_confirmed: the server model refuses
+    without buyer words (quote_required); the form's one-click "Confirm"
+    exists only for classes that need nothing typed, so an AI suggestion can
+    never become confirmed truth in one click; pinned. (An exact-match check
+    against the AI's quote was rejected: an AI-extracted quote can be the
+    buyer's verbatim words, and refusing it would push paraphrase.)
+- tests: mailto scan + card; call-loop (inline open, record-outcome, no
+  answer / voicemail keep retry with no human action, conversation =
+  called, not offered when blocked / no hypothesis / acted); routing cap
+  (2 -> hot_call, 3 -> hold; unconfirmed rows ignored; a substantive answer
+  resets); Learning denominators; quote_required; no one-click confirm.
+  Mutations (one-click for any class; cap 99): RED; restored GREEN. Full
+  unit suite 460 files green.
+- production mutation: none.
+- next: T9.
+
+### T9 — GAP mailbox reply + bounce intake
+
+- status: IMPLEMENTED (Release C, not yet merged); production proof pending
+  deploy (internal test through casey@yardflow.ai)
+- files: `src/lib/gap/replies/gap-mailbox.ts` (new), `src/lib/gap/replies/domains.ts`
+  (new), `src/lib/email/bounce.ts` (new), `src/app/api/cron/gap-mailbox/route.ts`
+  (new), `src/lib/email/gmail-inbox.ts` (listMailboxMessages),
+  `src/lib/gap/execution/next-touch.ts`, `src/lib/gap/replies/hubspot-poller.ts`,
+  `src/app/api/cron/gap-hubspot-replies/route.ts`, `src/app/api/webhooks/hubspot/route.ts`,
+  `src/lib/gap/routing/rules.ts`, `src/lib/gap/sequence/enrollment.ts`,
+  `src/lib/cron-monitor.ts`, `vercel.json`; tests `gap-mailbox`, `gap-mailbox-route`,
+  `bounce-vocabulary`, `next-touch`, `hubspot-poller`, `schema-sprint2`
+- change:
+  - intake of GAP_GMAIL_USER_EMAIL (casey@yardflow.ai) through the existing
+    delegated Gmail credentials (gap-sender), read-only; cron
+    `/api/cron/gap-mailbox/?mode=apply` every 10 minutes (dry run without
+    the mode). Each inbox message (read or unread) is classified:
+    DSN hard (5.x.x) -> the canonical hard-bounce write; DSN soft ->
+    audited; human reply in a GAP thread or from the account domain after
+    the first send -> InboundMessage + EmailThread + reply notification +
+    ingestReply for the replier AND the GAP-emailed recipient; auto reply /
+    OOO -> audited only; unrelated -> ignored, not stored. Idempotent per
+    Gmail message id; watermark `gap_mailbox_watermark` with a 1h overlap;
+    an unreadable mailbox throws before the watermark moves.
+  - canonical bounce write `recordHardBounce` (hard_bounce + DNC, EmailLog
+    bounced, one notification per event), shared with the HubSpot webhook.
+    Vocabulary normalized: routing R4 and enrollment now recognise
+    `hard_bounce` (they only knew `bounced`/`hard_bounced`; a webhook bounce
+    was caught only via do_not_contact).
+  - next-touch stops on a non-automatic message in the GAP thread from anyone
+    but our own mailbox (a colleague), and on a stored human reply from the
+    account domain after the first send (consumer domains excluded).
+  - HubSpot reply poller: filter, sort and watermark on `hs_createdate`
+    (when HubSpot recorded the email), not `hs_timestamp`, so a late-logged
+    reply is never below the floor; scheduled daily
+    (`/api/cron/gap-hubspot-replies/?mode=apply`, 12:45 UTC), keeping its
+    tested per-day claim. The Gmail intake is the primary reply path.
+- tests: DSN parse (hard, soft, none); hard DSN -> canonical truth, never a
+  reply; OOO audited only; direct reply -> InboundMessage + pause;
+  colleague in thread pauses the emailed person too; account-domain reply
+  attributed; unrelated ignored and not stored; duplicate poll once;
+  watermark + overlap; unreadable mailbox holds the watermark; own copies
+  ignored; consumer domain not attributed; next-touch colleague + domain
+  stops, own mailbox and DSN in thread do not; late-logged HubSpot
+  engagement moves the watermark by record time; route auth / flags /
+  dry-run / apply; bounce vocabulary across readers. Mutations (DSN
+  detection off; domain stop off; watermark back to event time;
+  vocabulary): RED; restored GREEN. Full unit suite 463 files green.
+- production mutation: none yet (schedules take effect on deploy).
+- next: Release C gate.
+
+### Release C gate — read-only reviews (methodology + RevOps/deliverability)
+
+Two fresh read-only reviewers (no edits). Every BLOCKER and SHOULD-FIX was
+fixed on the branch, each with a test that goes RED when the fix is mutated
+away, then restored GREEN.
+
+- methodology B1 (T6 bypass): enrollment and the sequence runtime skipped the
+  evidence gate. `enrollFromDecision` and `enroll()` refuse
+  `evidence_insufficient`; the runtime schedules nothing and audits
+  `schedule.skipped` `evidence_insufficient`. (`a9d0f537`)
+- methodology SF1: a fact linked beside a CITED keyword hit made the whole
+  hypothesis sendable. `sendableEvidence`: the observation cites at least
+  one signal and every cited signal is a live outreach fact. Used by
+  approve/activate, routing `evidenceThin`, the send gate, both enroll paths,
+  the runtime and the call pack. (`92d77df5`)
+- methodology B2 (T7 not live until the rewrite runs): `seedCopyOutdated`: a
+  seed-program version whose steps differ from the current seed refuses
+  `copy_version_outdated` at the send gate and the enroll service. (`fe38df2e`)
+- methodology SF2: inline call only on an actionable, non-research card, and
+  recorded against the card's own hypothesis (not whichever one the brief
+  picks). (`96a95add`)
+- methodology SF3/SF4: a cost or quantification question is never the
+  current-state question; filing titles read "From Kroger's 10-Q filed
+  September 18"; "That might not be true at {account}" replaces "That is a
+  pattern, not something I know about"; New Sites copy is plural. (`0c0b536e`)
+- methodology SF5: `isPhysicalOpsFact` false positives/negatives
+  (hypotheticals, contract language, non-physical networks/acquisitions;
+  a named site change is a fact). (`9e33420b`)
+- RevOps B1: a 5.7.x policy block (and a bare 550) wrote DNC. Only 5.1.x
+  (1, 2, 3, 6, 10) or an explicit unknown-user diagnostic is a bad address;
+  5.7/5.4/5.2/5.3/5.6 and 5.1.7/5.1.8 are `mailbox.policy_bounce`, audit only.
+- RevOps N1/N3: a notice with no recipient is an intake error; a bounce acts
+  only on an address GAP sent to (`mailbox.bounce_unattributed` otherwise).
+- RevOps S1: the lister returns the OLDEST of the window (a backlog drains
+  forward); a listing past 5000 ids is flagged and surfaced as an error.
+- RevOps S2: a failing message is retried, then quarantined after 3
+  attempts (`mailbox.quarantined`); any intake error marks the cron run
+  FAILED in cron-monitor.
+- RevOps S3: exact-sender attribution (`gap_recipient`) before the domain.
+- RevOps S4: unrelated mail younger than 24h holds the watermark, so a reply
+  that lands before its send is recorded is re-read, not lost.
+- RevOps S5: a human inbound from the account domain in the last 30 days
+  refuses a cold step 0 to anyone there (`account_replied`).
+- RevOps S6: localized OOO subjects and Exchange NDRs.
+- RevOps S7: `recordHardBounce` updates only the bounced send's EmailLog rows
+  (webhook: its engagement id; DSN: the send's thread ids); no scope, no
+  EmailLog write. (RevOps fixes: `b4d9232f`)
+- T9 production proof: `[gap-intake-canary]` messages from our own domains
+  become an InboundMessage + `mailbox.canary` audit and nothing else (no
+  pause, no bell, never a reply); an outside sender cannot trigger it.
+  (`0dfd4341`)
+- found by the E2E migration (real defects, fixed): with a verbatim 10-Q quote
+  every seed first touch ran 80-95 words against C07's 80 cap, C01 could not
+  see numbers inside the quote (evidence refs never carried the excerpt), two
+  quotes tripped C14 and a filing's own words counted as a second problem
+  family in C08. C07/C08 now judge our prose and skip a CITED verbatim quote;
+  evidence refs carry the quoted text; the builder and research propose quote
+  ONE fact (others stay linked). Every seed family with the real Kroger fact
+  passes C07 and C01. (`f24e410a`, `fe935200`)
+- E2E migration: every scratch script now seeds verified evidence records and
+  a one-fact observation; the multi-touch runtime mechanics (Sprint 3,
+  runtime, finish-rc) run on the pre-T7 four-step fixture since production
+  seeds are single-touch.
+- residual (recorded, not blocking): `other_account` compares the signal's
+  account, not the sentence's subject; the HubSpot `email.bounce` webhook
+  still treats every HubSpot bounce as hard (pre-existing; HubSpot's event
+  carries no status class in our schema); a reply seen by both the Gmail
+  intake and the HubSpot poller is two InboundMessage rows (T10 counts
+  replies by person and thread, not rows).
+
+### Release C gate — fresh read-only re-review of the fixes
+
+A second fresh read-only reviewer read `51147dde..HEAD`: 1 BLOCKER, 8
+SHOULD-FIX, 6 NOTE. All BLOCKER and SHOULD-FIX items fixed, each
+mutation-proven (`97677061`, `fae9fade`).
+
+- B1 (intake could stall, or lag ~24h, with no error): every message now gets
+  one verdict row (`mailbox.unrelated` and `mailbox.own` included), a run lists
+  ids, skips handled ones in one read and fetches at most 200 new messages,
+  oldest first; the watermark moves only past processed mail. The 24h hold is
+  gone.
+- S1 (a truncated listing dropped the oldest mail): `listMailboxIds` narrows
+  its `before:` bound until the window is complete; a fully processed narrowed
+  window moves the watermark to its end.
+- S2 (a DSN for a drafted-then-sent address was never attributed): bounce
+  attribution includes DRAFTED recipients, and a late-attribution sweep
+  re-checks the last 24h of `mailbox.unrelated` / `mailbox.bounce_unattributed`
+  verdicts from the database, fetching only those that now attribute.
+- S3 (the quoted original could DNC a good address): unknown-user text counts
+  only in the Diagnostic-Code or the notice's own lines naming the recipient,
+  before the returned original; sender-side wording never counts.
+- S4 (dead-address codes filed as blocks; blocks did nothing): O365 5.4.1
+  "recipient address rejected" and 5.2.1 "disabled" are bad addresses; any
+  other block writes `mailbox.delivery_blocked` per recipient, and next-touch
+  stops `delivery_blocked` for a human. Never do-not-contact.
+- S5: the sequence runtime refuses retired seed copy (`copy_version_outdated`).
+- S6: C07/C08 set a cited quote aside only when its words are the cited ref's
+  excerpt, at most 60 words; a fake quote with a real marker counts as prose.
+- S7: `account_replied` also holds live enrollment and clears once a human
+  dispositions the message; one localized auto-reply pattern everywhere.
+- S8: the call script is gated on live facts only (`hypothesisSendable`).
+- NOTE residuals (recorded, not blocking): a quarantined reply has no
+  automatic re-drive (the InboundMessage usually exists, so next-touch still
+  stops; the cron shows the failure); the canary does not check DMARC (it can
+  only create an InboundMessage row for an own-domain sender, pausing
+  nothing); a multi-recipient DSN classifies every recipient by its first
+  Status line (GAP sends to one recipient); a Final-Recipient alias falls to
+  unattributed (audited); non-GAP modex Gmail sends keep their existing bounce
+  path (the HubSpot webhook); quote-heavy operator copy can now fail C07's
+  minimum (stricter, not a bypass).

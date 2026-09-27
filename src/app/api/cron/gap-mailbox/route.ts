@@ -1,0 +1,103 @@
+import { NextResponse } from 'next/server';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
+import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
+import { assertGapEnabled } from '@/lib/gap/flags';
+import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
+import { classifyMailboxMessage, GAP_MAILBOX_WATERMARK_KEY, loadGapSendContext, MAILBOX_FIRST_LOOKBACK_SECONDS, MAILBOX_OVERLAP_SECONDS, pollGapMailbox } from '@/lib/gap/replies/gap-mailbox';
+import { getMailboxMessage, listMailboxIds } from '@/lib/email/gmail-inbox';
+import { prisma } from '@/lib/prisma';
+
+export const dynamic = 'force-dynamic';
+export const maxDuration = 300;
+
+const CRON_NAME = 'gap-mailbox';
+const CRON_PATH = '/api/cron/gap-mailbox';
+const CRON_SCHEDULE = '*/10 * * * *';
+/** A dry run classifies at most this many unhandled messages. */
+const DRY_RUN_SAMPLE = 50;
+
+/**
+ * GAP mailbox intake cron (red team T9): reads the GAP mailbox
+ * (GAP_GMAIL_USER_EMAIL, casey@yardflow.ai) for replies and delivery-status
+ * notifications to GAP sends. Read-only toward Gmail. See
+ * src/lib/gap/replies/gap-mailbox.ts for what each message becomes.
+ *
+ * - Auth first (Bearer, x-cron-secret, or legacy ?secret=), then the GAP
+ *   flag. Off answers 200 with the skip payload so a schedule never reads as
+ *   an outage. An unconfigured GAP mailbox is a skip, never a silent success.
+ * - N9: a dry run unless ?mode=apply (the schedule carries it). A dry run
+ *   reads and classifies and writes nothing, the watermark included.
+ * - Idempotent per Gmail message id; no daily claim is needed (it sends
+ *   nothing, and every write is keyed on the message).
+ */
+export async function GET(request: Request) {
+  if (!isAuthorizedCronRequest(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  const url = new URL(request.url);
+  const dryRun = url.searchParams.get('dryRun') === '1' || url.searchParams.get('mode') !== 'apply';
+  const mode = dryRun ? 'dryrun' : 'apply';
+  const now = new Date();
+  const startedAt = Date.now();
+  await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
+
+  const skip = assertGapEnabled('GAP_OS_ENABLED');
+  if (skip) {
+    await markCronSkipped(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, reason: skip.reason }).catch(() => undefined);
+    return NextResponse.json(skip);
+  }
+  const sender = gapGmailSender();
+  if (!sender) {
+    const reason = 'gap_mailbox_not_configured';
+    await markCronSkipped(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, reason }).catch(() => undefined);
+    return NextResponse.json({ skipped: true, reason });
+  }
+
+  try {
+    let report: Record<string, unknown>;
+    if (dryRun) {
+      const stored = await prisma.systemConfig.findUnique({ where: { key: GAP_MAILBOX_WATERMARK_KEY } });
+      const parsed = stored?.value ? Number.parseInt(stored.value, 10) : NaN;
+      const since = Number.isFinite(parsed) ? parsed - MAILBOX_OVERLAP_SECONDS : Math.floor(now.getTime() / 1000) - MAILBOX_FIRST_LOOKBACK_SECONDS;
+      const listing = await listMailboxIds(sender, since);
+      const ctx = await loadGapSendContext(prisma);
+      const handled = await prisma.gapAuditEvent.findMany({
+        where: { subject_type: 'gmail_message', subject_id: { in: listing.ids.slice(0, 1000) }, kind: { startsWith: 'mailbox.' } },
+        select: { subject_id: true },
+      });
+      const done = new Set(handled.map((r: { subject_id: string }) => r.subject_id));
+      const pending = listing.ids.filter((id) => !done.has(id));
+      const counts: Record<string, number> = {};
+      for (const id of pending.slice(0, DRY_RUN_SAMPLE)) {
+        const kind = classifyMailboxMessage(await getMailboxMessage(sender, id), ctx, sender.userEmail).kind;
+        counts[kind] = (counts[kind] ?? 0) + 1;
+      }
+      report = { since, seen: listing.ids.length, pending: pending.length, sampled: Math.min(pending.length, DRY_RUN_SAMPLE), counts };
+    } else {
+      report = { ...(await pollGapMailbox(prisma, { now }, { listIds: (after) => listMailboxIds(sender, after), fetch: (id) => getMailboxMessage(sender, id), mailbox: sender.userEmail })) };
+      // Release C review S2: a failed or quarantined message, an unattributable
+      // delivery notice or a truncated listing is never a quiet success.
+      const errors = Array.isArray(report.errors) ? (report.errors as string[]) : [];
+      if (errors.length > 0) {
+        await markCronFailure(CRON_NAME, {
+          path: CRON_PATH,
+          schedule: CRON_SCHEDULE,
+          durationMs: Date.now() - startedAt,
+          error: new Error(`${errors.length} mailbox intake error(s): ${errors.slice(0, 3).join(' | ')}`),
+        }).catch(() => undefined);
+        return NextResponse.json({ ...report, mode, mailbox: sender.userEmail, ok: false });
+      }
+    }
+    await markCronSuccess(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      durationMs: Date.now() - startedAt,
+      message: `${mode}: ${String(report.seen)} inbox messages since ${String(report.since)}`,
+      stats: { mode, ...report },
+    }).catch(() => undefined);
+    return NextResponse.json({ ...report, mode, mailbox: sender.userEmail });
+  } catch (error) {
+    await markCronFailure(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, durationMs: Date.now() - startedAt, error }).catch(() => undefined);
+    return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });
+  }
+}

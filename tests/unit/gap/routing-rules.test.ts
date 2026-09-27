@@ -145,6 +145,7 @@ describe('RULES ordering', () => {
       'hyp_stale',
       'evidence_thin',
       'hyp_resolved',
+      'call_attempts_exhausted',
       'hot_call',
       'sequence_stopped',
       'sequence_complete',
@@ -251,7 +252,7 @@ describe('routePersona, one rule at a time', () => {
     expect(d.ruleId).toBe('evidence_thin');
     expect(d.action).toBe('research_required');
     expect(d.lane).toBe('work_queue');
-    expect(d.explain.whyAction).toContain('keyword');
+    expect(d.explain.whyAction).toContain('no verified, dated, quoted fact');
     const quoted = base();
     quoted.hypothesis!.evidenceThin = false;
     expect(decision(routePersona(quoted)).ruleId).toBe('enroll');
@@ -560,6 +561,18 @@ describe('routePersona, one rule at a time', () => {
     expect(d.ruleId).toBe('hot_email');
     expect(d.action).toBe('one_off_email');
     expect(d.lane).toBe('work_queue');
+  });
+
+  it('T8: three unanswered calls (no answer, voicemail, gatekeeper) hold the person, even when hot with a usable phone', () => {
+    const i = withHotTrigger(base());
+    i.comms.unansweredCalls = 3;
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('call_attempts_exhausted');
+    expect(d.action).toBe('nurture');
+    expect(d.reason).toBe('call_attempts_exhausted');
+    const two = withHotTrigger(base());
+    two.comms.unansweredCalls = 2;
+    expect(decision(routePersona(two)).ruleId).toBe('hot_call');
   });
 
   it('T3: cooldown is evaluated BEFORE hot email: a hot account emailed 3 days ago is nurture cooldown, not one_off_email', () => {

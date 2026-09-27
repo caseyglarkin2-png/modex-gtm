@@ -54,7 +54,7 @@ function fullPrisma(d: Db) {
   const p: any = prismaOf(d);
   p.unsubscribedEmail = { findFirst: vi.fn(async () => null) };
   p.conversationDisposition = { findFirst: vi.fn(async () => null) };
-  p.inboundMessage = { findFirst: vi.fn(async () => null) };
+  p.inboundMessage = { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []) };
   p.emailLog = { create: vi.fn(async () => ({ id: 1 })) };
   p.$executeRaw = vi.fn(async () => 1);
   p.$transaction = vi.fn(async (fn: (tx: unknown) => Promise<unknown>) => fn(p));

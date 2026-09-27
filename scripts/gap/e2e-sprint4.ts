@@ -95,7 +95,7 @@ import { createFamily } from '../../src/lib/gap/sequence/family';
 import { renderStepCopy, EVIDENCE_SIGNAL_SELECT } from '../../src/lib/gap/sequence/render';
 import { createVersion } from '../../src/lib/gap/sequence/version';
 import { SEED_PROGRAM, seedFamilyByKey, type SeedFamily } from '../../src/lib/gap/sequences/families';
-import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { STATUS } from '../../src/lib/queue/types';
 
@@ -332,31 +332,49 @@ async function main(): Promise<number> {
     const p2 = await mkPersona('call', 'Marcus Bell', 'VP Operations', emails.call);
     const p3 = await mkPersona('dnc', 'Dana Ortiz', 'Director of Logistics', emails.dnc);
 
-    const projected = fromOperatorKnowledge(
-      { accountName, hubspotCompanyId, personaId: p1.id, text: 'The plant manager said the annual report lists 41 distribution centers folded in from three regional operators.', at: now, sourceId: `${tag}:fact1`, by: 'casey' },
-      { registeredBy: ACTOR, now },
-    );
-    expect('1 seed', projected.ok, `fromOperatorKnowledge refused: ${projected.ok ? '' : projected.reason}`);
-    if (!projected.ok) throw new Error('unreachable');
-    const fact1 = await registerSignal(prisma, projected.signal);
+    // Red team T6 / Release C review SF1: every cited signal is an outreach
+    // fact (verified, dated, quoted, this account, a physical-network change).
+    // ONE fact is quoted verbatim in the observation (research/propose.ts
+    // citedQuote); the second stays linked as supporting evidence.
+    const fact1Title = `${accountName} 10-K (filed ${now.toISOString().slice(0, 10)})`;
+    const fact1Text = `${accountName} completed its acquisition of three regional operators, adding 41 distribution centers to its network.`;
+    const fact1 = await registerSignal(prisma, {
+      accountName,
+      hubspotCompanyId,
+      personaId: p1.id,
+      sourceKind: 'evidence_record',
+      sourceId: `${tag}:fact1`,
+      type: 'acquisition',
+      title: fact1Title,
+      sourceType: 'public_primary',
+      evidenceUrl: `https://example.com/${tag}/10k`,
+      evidenceText: fact1Text,
+      externalOk: true,
+      observedAt: now,
+      confidence: 80,
+      metadata: { verified: 'excerpt_found_at_source' },
+      registeredBy: ACTOR,
+    });
     const fact2 = await registerSignal(prisma, {
       accountName,
       hubspotCompanyId,
       personaId: p1.id,
-      sourceKind: 'manual',
+      sourceKind: 'evidence_record',
       sourceId: `${tag}:url1`,
-      type: 'job_posting',
-      title: `${accountName} posts three gate-clerk roles at its Ohio distribution center`,
+      type: 'site_expansion',
+      title: `${accountName} 8-K (filed ${now.toISOString().slice(0, 10)})`,
       sourceType: 'public_primary',
       evidenceUrl: `https://example.com/${tag}/jobs`,
+      evidenceText: `${accountName} will open a new distribution center in Columbus, Ohio with 40 dock doors and is hiring three gate clerks there.`,
       externalOk: true,
       observedAt: now,
       confidence: 80,
+      metadata: { verified: 'excerpt_found_at_source' },
       registeredBy: ACTOR,
     });
     expect('1 seed', fact1.created && fact2.created, `facts not created: ${JSON.stringify({ fact1, fact2 })}`);
 
-    const observation = `${accountName} lists 41 distribution centers from three regional operators [S:${fact1.id}] and posts three gate-clerk roles in Ohio [S:${fact2.id}].`;
+    const observation = citedQuote(fact1Title, fact1Text, fact1.id, accountName);
     const activate = async (personaId: number): Promise<string> => {
       const proposed = await proposeHypothesis(prisma, {
         accountName,
@@ -372,7 +390,7 @@ async function main(): Promise<number> {
         whatANoMeans: 'The family is wrong for this account.',
         confidence: 60,
         signalIds: [fact1.id, fact2.id],
-        primarySignalId: fact2.id,
+        primarySignalId: fact1.id,
         createdBy: ACTOR,
       });
       expect('1 seed', proposed.ok, `proposeHypothesis for persona ${personaId} refused: ${JSON.stringify(proposed)}`);
@@ -463,7 +481,7 @@ async function main(): Promise<number> {
     counts.hypotheses = 3;
     counts.compilesPersisted = created.compileIds.length;
     counts.enrollments = 3;
-    pass('1 seed', `account, personas ${p1.id}/${p2.id}/${p3.id} at example.com, facts ${fact1.id.slice(0, 8)} (operator) + ${fact2.id.slice(0, 8)} (public url), hypotheses ${h1.slice(0, 8)}/${h2.slice(0, 8)}/${h3.slice(0, 8)} active citing both facts, family ${family.id.slice(0, 8)} v1 compiled pass (${stepCount} steps x 3 hypotheses, stub critic), three live modex enrollments each with a step-0 draft item`);
+    pass('1 seed', `account, personas ${p1.id}/${p2.id}/${p3.id} at example.com, verified facts ${fact1.id.slice(0, 8)} (quoted) + ${fact2.id.slice(0, 8)} (linked support), hypotheses ${h1.slice(0, 8)}/${h2.slice(0, 8)}/${h3.slice(0, 8)} active quoting one fact with the other linked, family ${family.id.slice(0, 8)} v1 compiled pass (${stepCount} steps x 3 hypotheses, stub critic), three live modex enrollments each with a step-0 draft item`);
 
     // 2. A Gmail-shaped human reply pauses the run, skips the unsent item, audits once; a second ingest is already_paused.
     const threadId = `${tag}-thread-1`;
@@ -745,12 +763,12 @@ async function main(): Promise<number> {
     expect('10 brief', !!brief && brief.persona.id === p1.id && brief.persona.email === emails.reply && brief.persona.doNotContact === false && brief.account.name === accountName, `brief head ${JSON.stringify(brief && { persona: brief.persona, account: brief.account })}`);
     if (!brief) throw new Error('unreachable');
     const signalIds = brief.hypothesis?.signals.map((s) => s.id).sort() ?? [];
-    expect('10 brief', brief.hypothesis?.id === h1 && brief.hypothesis.status === 'confirmed' && brief.hypothesis.observation.includes(`[S:${fact1.id}]`) && brief.hypothesis.observation.includes(`[S:${fact2.id}]`) && JSON.stringify(signalIds) === JSON.stringify([fact1.id, fact2.id].sort()) && brief.hypothesis.signals.some((s) => s.evidence_url === `https://example.com/${tag}/jobs`) && brief.hypothesis.wouldProveWrong.includes('The family is wrong for this account.'), `brief hypothesis ${JSON.stringify(brief.hypothesis && { id: brief.hypothesis.id, status: brief.hypothesis.status, signals: signalIds, proveWrong: brief.hypothesis.wouldProveWrong })}`);
+    expect('10 brief', brief.hypothesis?.id === h1 && brief.hypothesis.status === 'confirmed' && brief.hypothesis.observation.includes(`[S:${fact1.id}]`) && !brief.hypothesis.observation.includes(`[S:${fact2.id}]`) && JSON.stringify(signalIds) === JSON.stringify([fact1.id, fact2.id].sort()) && brief.hypothesis.signals.some((s) => s.evidence_url === `https://example.com/${tag}/jobs`) && brief.hypothesis.wouldProveWrong.includes('The family is wrong for this account.'), `brief hypothesis ${JSON.stringify(brief.hypothesis && { id: brief.hypothesis.id, status: brief.hypothesis.status, signals: signalIds, proveWrong: brief.hypothesis.wouldProveWrong })}`);
     expect('10 brief', brief.lastDispositions.length === 1 && brief.lastDispositions[0].id === aiRowId && brief.lastDispositions[0].humanConfirmed && brief.lastDispositions[0].responseClass === 'problem_confirmed' && brief.lastDispositions[0].buyerLanguage === REPLY_TEXT, `brief dispositions ${JSON.stringify(brief.lastDispositions)}`);
     expect('10 brief', brief.openBids.length === 0 && brief.suggestedQuestions.length === 1 && brief.suggestedQuestions[0] === 'Do the acquired sites share one gate process today?', `brief open BIDs ${JSON.stringify(brief.openBids)} questions ${JSON.stringify(brief.suggestedQuestions)}`);
     const dncBrief = await callBrief(prisma, p3.id);
     expect('10 brief', dncBrief?.persona.doNotContact === true && dncBrief.lastDispositions[0]?.responseClass === 'do_not_contact', `dnc persona brief ${JSON.stringify(dncBrief && { dnc: dncBrief.persona.doNotContact, last: dncBrief.lastDispositions[0]?.responseClass })}`);
-    pass('10 brief', `brief for persona ${p1.id}: FACT block observation cites both facts and the signals list carries both (one with the public url), the confirmed disposition with the buyer's words is the only disposition, zero open BIDs (all confirmed or superseded), the falsification question is the suggested question; the dnc persona's brief says doNotContact`);
+    pass('10 brief', `brief for persona ${p1.id}: FACT block observation quotes one fact and the signals list carries both (one with the public url), the confirmed disposition with the buyer's words is the only disposition, zero open BIDs (all confirmed or superseded), the falsification question is the suggested question; the dnc persona's brief says doNotContact`);
 
     // 11. An agent-created disposition is unconfirmed with no effects.
     // B1+B2 (Opus adversarial review, 2026-09-24): resolveAdoptable now

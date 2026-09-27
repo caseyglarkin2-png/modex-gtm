@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import * as Sentry from '@sentry/nextjs';
 import crypto from 'crypto';
+import { recordHardBounce } from '@/lib/email/bounce';
 
 export const dynamic = 'force-dynamic';
 
@@ -148,25 +149,16 @@ async function processEvent(event: z.infer<typeof eventSchema>) {
       where: { hubspot_engagement_id: event.objectId.toString() },
     });
     if (log) {
-      await prisma.emailLog.updateMany({
-        where: { hubspot_engagement_id: event.objectId.toString() },
-        data: { status: 'bounced', bounce_type: 'hard' },
-      });
-
-      // Hard bounce: mark persona as do_not_contact
-      await prisma.persona.updateMany({
-        where: { email: log.to_email },
-        data: { email_status: 'hard_bounce', do_not_contact: true },
-      });
-
-      await prisma.notification.create({
-        data: {
-          type: 'bounce',
-          account_name: log.account_name,
-          persona_email: log.to_email,
-          subject: `Bounce: ${log.subject}`,
-          source_id: event.eventId.toString(),
-        },
+      // Hard bounce: the one canonical write (src/lib/email/bounce.ts), shared
+      // with the GAP mailbox DSN intake (red team T9). The EmailLog write is
+      // scoped to this engagement; the address's other history is untouched.
+      await recordHardBounce(prisma, {
+        email: log.to_email,
+        source: 'hubspot_webhook',
+        sourceId: event.eventId.toString(),
+        accountName: log.account_name,
+        subject: log.subject,
+        emailLogScope: { engagementId: event.objectId.toString() },
       });
     }
   } else if (type === 'contact.propertyChange' && event.propertyName === 'hs_email_optout') {

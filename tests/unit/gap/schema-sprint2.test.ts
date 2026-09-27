@@ -95,9 +95,25 @@ describe('SF15 (Opus adversarial review, 2026-09-24): the rollback reverts inbou
 });
 
 describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
-  const GAP_CRONS = ['gap-hypothesize', 'gap-enrollment-sync', 'gap-hubspot-replies'] as const;
+  const GAP_CRONS = ['gap-hypothesize', 'gap-enrollment-sync'] as const;
+  /** Scheduled since red team T9: the registry must carry exactly what vercel.json runs. */
+  const SCHEDULED_GAP_CRONS = ['gap-hubspot-replies', 'gap-mailbox'] as const;
 
-  it('lists each GAP cron exactly once, on its /api/cron route, as unregistered', async () => {
+  it('T9: the scheduled GAP crons carry exactly the schedule vercel.json runs, in apply mode', async () => {
+    const { KNOWN_CRONS } = await import('@/lib/cron-monitor');
+    const { readFileSync } = await import('node:fs');
+    const vercel = JSON.parse(readFileSync('vercel.json', 'utf8')) as { crons: Array<{ path: string; schedule: string }> };
+    for (const name of SCHEDULED_GAP_CRONS) {
+      const rows = KNOWN_CRONS.filter((c) => c.name === name);
+      expect(rows, `${name} is registered exactly once`).toHaveLength(1);
+      const job = vercel.crons.find((c) => c.path.startsWith(`/api/cron/${name}/`));
+      expect(job, `${name} is scheduled`).toBeDefined();
+      expect(job!.path, `${name} applies`).toContain('mode=apply');
+      expect(rows[0].schedule).toBe(job!.schedule);
+    }
+  });
+
+  it('lists each unscheduled GAP cron exactly once, on its /api/cron route, as unregistered', async () => {
     const { KNOWN_CRONS } = await import('@/lib/cron-monitor');
     for (const name of GAP_CRONS) {
       const rows = KNOWN_CRONS.filter((c) => c.name === name);
@@ -125,6 +141,8 @@ describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
       'refresh-intel',
       'sync-hubspot',
       'reenrich-contacts',
+      'gap-hubspot-replies',
+      'gap-mailbox',
     ]);
     const names = KNOWN_CRONS.map((c) => c.name);
     expect(new Set(names).size, 'cron names are unique').toBe(names.length);

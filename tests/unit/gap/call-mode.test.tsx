@@ -84,6 +84,14 @@ describe('CallMode', () => {
 
     fireEvent.click(await screen.findByTestId('call-tap-gatekeeper'));
     await waitFor(() => expect(postDisposition).toHaveBeenCalledTimes(1));
-    expect(postDisposition.mock.calls[0][0]).toMatchObject({ responseClass: 'gatekeeper', channel: 'call' });
+    expect(postDisposition.mock.calls[0][0]).toMatchObject({ responseClass: 'gatekeeper', channel: 'call', hypothesisId: 'H1' });
+  });
+
+  it('Release C review SF2: opened from a card, the disposition carries the CARD hypothesis, not the newest one the brief picks', async () => {
+    const postDisposition = vi.fn(async (): Promise<ApiResult<DispositionResult>> => ({ ok: true, status: 201, data: RESULT }));
+    render(<CallMode personaId="7" client={clientWith(postDisposition)} hypothesis={{ id: 'H_CARD', problemFamily: 'new_sites_acquisitions' }} />);
+    fireEvent.click(await screen.findByTestId('call-tap-gatekeeper'));
+    await waitFor(() => expect(postDisposition).toHaveBeenCalledTimes(1));
+    expect(postDisposition.mock.calls[0][0]).toMatchObject({ hypothesisId: 'H_CARD', channel: 'call' });
   });
 });

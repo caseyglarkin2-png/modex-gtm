@@ -25,7 +25,8 @@ import {
   stripCitationMarkers,
   unrenderedPlaceholder,
 } from '@/lib/gap/sequence/render';
-import { renderSeedPlaceholders } from '@/lib/gap/sequences/families';
+import { renderSeedPlaceholders, SEED_PROGRAM } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 import { STATUS } from '@/lib/queue/types';
 import { scheduleNextStep, sequenceStepIdempotencyKey } from '@/lib/queue/sequence-runtime';
 
@@ -456,16 +457,59 @@ const SIG_1 = {
   observed_at: new Date('2026-06-01T00:00:00.000Z'),
   freshness_expires_at: new Date('2027-01-01T00:00:00.000Z'),
   source_type: 'public_primary',
-  metadata: null,
+  // Red team T6: the run's hypothesis rests on a verified outreach fact, or
+  // the runtime schedules nothing (see the evidence gate block below).
+  metadata: { verified: 'excerpt_found_at_source' },
+  evidence_text: 'Acme Logistics opened a new distribution center in Columbus with 40 dock doors.',
+  source_kind: 'evidence_record',
+  account_name: 'Acme Logistics',
 };
 
 function enrollmentWithHypothesis(status = 'active', steps: unknown = V2_SLOTTED, observation: string | null = 'Acme posted three gate-clerk roles [S:sig_1].') {
   return {
     ...enrollment(status, steps),
     hypothesis_id: 'H1',
-    hypothesis: { observation, problem_hypothesis: 'The lot is the constraint.', problem_family: 'hidden_capacity', signals: [{ signal: SIG_1 }] },
+    hypothesis: { account_name: 'Acme Logistics', observation, problem_hypothesis: 'The lot is the constraint.', problem_family: 'hidden_capacity', signals: [{ signal: SIG_1 }] },
   };
 }
+
+describe('scheduleNextStep evidence gate (red team T6, Release C review)', () => {
+  let prisma: ReturnType<typeof makePrismaWithAudit>;
+  beforeEach(() => {
+    process.env.GAP_OS_ENABLED = 'true';
+    prisma = makePrismaWithAudit();
+    prisma.draftQueueItem.findMany.mockResolvedValue([{ body: 'orig body' }]);
+  });
+
+  const withSignal = (signal: Record<string, unknown>) => ({
+    ...enrollmentWithHypothesis(),
+    hypothesis: { ...enrollmentWithHypothesis().hypothesis, signals: [{ signal }] },
+  });
+
+  it.each([
+    ['a keyword hit (nothing quoted)', { ...SIG_1, evidence_text: null, metadata: null, source_kind: 'job_posting' }],
+    ['an unverified quote', { ...SIG_1, metadata: null }],
+    ['operator knowledge', { ...SIG_1, source_kind: 'operator_knowledge' }],
+    ['an expired fact', { ...SIG_1, freshness_expires_at: new Date('2026-05-01T00:00:00.000Z') }],
+    ["another account's fact", { ...SIG_1, account_name: 'Other Co' }],
+  ])('%s schedules NOTHING: audit schedule.skipped evidence_insufficient, no create, no compile', async (_label, signal) => {
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue(withSignal(signal));
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }), { now: () => new Date('2026-06-01T15:00:00.000Z') });
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(mockedCompile).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create).toHaveBeenCalledTimes(1);
+    const row = prisma.gapAuditEvent.create.mock.calls[0][0].data;
+    expect(row).toMatchObject({ subject_type: 'draft_queue_item', subject_id: '100' });
+    expect(row.payload).toMatchObject({ reason: 'evidence_insufficient', hypothesisId: 'H1', runId: 'run-abc', stepIndex: 0 });
+  });
+
+  it('a verified, dated, quoted fact at this account schedules the next step', async () => {
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue(withSignal(SIG_1));
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }), { now: () => new Date('2026-06-01T15:00:00.000Z') });
+    expect(out).toBe(201);
+  });
+});
 
 describe('scheduleNextStep per-item compile (R3-4)', () => {
   let prisma: ReturnType<typeof makePrismaWithAudit>;
@@ -544,8 +588,15 @@ describe('scheduleNextStep per-item compile (R3-4)', () => {
     expect(row.payload).toMatchObject({ itemId: 201, stepIndex: 1, runId: 'run-abc', versionId: 'ver-enr', compileId: 'cmp_bad', verdict, failedChecks: ['C01'] });
   });
 
-  it('a slot with no hypothesis observation schedules NOTHING: audit unrendered_placeholder (observation), no create, no compile', async () => {
+  it('a hypothesis with no observation cites no fact: schedules NOTHING, audit schedule.skipped evidence_insufficient (Release C review SF1)', async () => {
     prisma.sequenceEnrollment.findUnique.mockResolvedValue(enrollmentWithHypothesis('active', V2_SLOTTED, null));
+    expect(await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }))).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create.mock.calls[0][0].data.payload).toMatchObject({ reason: 'evidence_insufficient', hypothesisId: 'H1' });
+  });
+
+  it('a slot on a run with no hypothesis schedules NOTHING: audit unrendered_placeholder (observation), no create, no compile', async () => {
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue({ ...enrollment('active', V2_SLOTTED), hypothesis_id: null, hypothesis: null });
     const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }));
     expect(out).toBeNull();
     expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
@@ -681,5 +732,29 @@ describe('scheduleNextStep placeholder rendering (S3-T12)', () => {
 describe('STATUS import sanity', () => {
   it('created rows are approved', () => {
     expect(STATUS.approved).toBe('approved');
+  });
+});
+
+describe('Release C re-review S5: the runtime never schedules retired seed copy', () => {
+  it('a run pinned to a seed-program version whose steps are not the current seed schedules NOTHING (schedule.skipped copy_version_outdated)', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.draftQueueItem.findMany.mockResolvedValue([{ body: 'orig body' }]);
+    const base = enrollmentWithHypothesis();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue({ ...base, version: { ...base.version, family: { name: LEGACY_HC.name, program: SEED_PROGRAM } } });
+    const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }), { now: () => new Date('2026-06-01T15:00:00.000Z') });
+    expect(out).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(mockedCompile).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create.mock.calls[0][0].data.payload).toMatchObject({ reason: 'copy_version_outdated', runId: 'run-abc' });
+  });
+
+  it('control: the same version outside the seed program schedules normally', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    const prisma = makePrismaWithAudit();
+    prisma.draftQueueItem.findMany.mockResolvedValue([{ body: 'orig body' }]);
+    const base = enrollmentWithHypothesis();
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue({ ...base, version: { ...base.version, family: { name: 'Operator family', program: 'top100-2026-09-12' } } });
+    expect(await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }), { now: () => new Date('2026-06-01T15:00:00.000Z') })).toBe(201);
   });
 });

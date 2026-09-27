@@ -1,6 +1,6 @@
 /** Shared Seller Action Center fixture (seller-draft and seller-send tests). */
 import { vi } from 'vitest';
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './legacy-hc';
 import type { CompileResult } from '@/lib/gap/compiler/compile';
 import { findManyFrom } from './where';
 
@@ -9,7 +9,8 @@ import { findManyFrom } from './where';
 process.env.UNSUBSCRIBE_SECRET ??= 'fixture-unsubscribe-secret';
 
 export const NOW = new Date('2026-09-25T15:00:00.000Z');
-export const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
+/** A four-step family for the multi-touch mechanics (seeds are single-touch since red team T7). */
+export const HC = LEGACY_HC;
 
 export interface Db {
   decisions: any[];
@@ -20,6 +21,8 @@ export interface Db {
   compiles: any[];
   approvals: any[];
   audit: any[];
+  /** InboundMessage rows (Release C review S5: an account reply blocks a colleague's first touch). */
+  inbound?: any[];
 }
 
 export function db(): Db {
@@ -41,7 +44,9 @@ export function db(): Db {
         sequence_version_id: null,
         sequence_family_id: null,
         falsification_questions: [],
-        signals: [{ signal: { id: 'sig-1', title: 'KR 10-Q mentions capital expenditure', evidence_url: 'https://sec.gov/x', external_ok: true, observed_at: NOW, freshness_expires_at: null, source_type: 'filing', metadata: null } }],
+        // Red team T6: a sendable hypothesis rests on an OUTREACH FACT (verified,
+        // dated, quoted, this account, a network change), not a keyword hit.
+        signals: [{ signal: { id: 'sig-1', account_name: 'Kroger', source_kind: 'evidence_record', title: 'KROGER CO 10-Q (filed 2026-09-18)', evidence_text: 'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).', evidence_url: 'https://sec.gov/x', external_ok: true, observed_at: NOW, freshness_expires_at: null, source_type: 'public_primary', metadata: { verified: 'excerpt_found_at_source' } } }],
         events: [],
       },
     ],
@@ -87,6 +92,7 @@ export function prismaOf(d: Db) {
     },
     sequenceFamily: { findMany: vi.fn(async ({ where }: any) => d.families.filter((f) => f.problem_family === where.problem_family)) },
     unsubscribedEmail: { findFirst: vi.fn(async () => null) },
+    inboundMessage: { findMany: vi.fn(async (args: any) => findManyFrom(d.inbound ?? [], args)) },
     gapCompile: {
       findMany: vi.fn(async ({ where }: any) =>
         d.compiles

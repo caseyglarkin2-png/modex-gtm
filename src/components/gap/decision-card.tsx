@@ -24,7 +24,9 @@
 
 import { useState, type ReactNode } from 'react';
 import Link from 'next/link';
-import { ExternalLink, Linkedin, Mail, Phone } from 'lucide-react';
+import { ExternalLink, Linkedin, Phone } from 'lucide-react';
+import { CallMode } from '@/app/gap/call/[personaId]/call-mode';
+import { CALL_ONLY_RESPONSE_CLASSES } from '@/lib/gap/disposition/model';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { EnrollTarget, RoutingExplain } from '@/lib/gap/routing/types';
@@ -33,11 +35,10 @@ import { RECOMMENDED_HUMAN_ACTION } from '@/lib/gap/routing/agreement';
 import {
   hubspotCompanyUrl,
   hubspotContactUrl,
-  mailtoHref,
   sellerActionLabel,
   telHref,
 } from '@/lib/gap/routing/seller-action';
-import { cardReadiness } from '@/lib/gap/routing/card-readiness';
+import { cardReadiness, RESEARCHABLE_RULES } from '@/lib/gap/routing/card-readiness';
 import { ResearchThis } from './research-this';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge } from './hypothesis-drawer';
@@ -178,6 +179,8 @@ export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
 export function DecisionCard({ item, onAct, acting = false, actError = null, expanded = null, closeHref = '/gap' }: DecisionCardProps) {
   const [choosingOther, setChoosingOther] = useState(false);
   const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
+  const [callOpen, setCallOpen] = useState(false);
+  const [retryNote, setRetryNote] = useState<string | null>(null);
 
   const chipClass = ACTION_CHIP_CLASS[item.action] ?? 'border-[var(--border)] text-[var(--foreground)]';
   const acted = typeof item.humanAction === 'string' && item.humanAction.length > 0;
@@ -189,7 +192,6 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
   const recommendedHumanAction = item.action in RECOMMENDED_HUMAN_ACTION ? RECOMMENDED_HUMAN_ACTION[item.action as RoutingAction] : null;
   const otherOptions = HUMAN_ACTIONS.filter((a) => a !== recommendedHumanAction);
   const sellerLabel = sellerActionLabel(item.action, firstName, item.account.name);
-  const mailto = mailtoHref(item.persona.email);
   const tel = telHref(item.persona.phone ?? null);
   const contactUrl = item.persona.hubspotContactId ? hubspotContactUrl(item.persona.hubspotContactId) : null;
   const companyUrl = item.account.hubspotCompanyId ? hubspotCompanyUrl(item.account.hubspotCompanyId) : null;
@@ -211,6 +213,16 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
     suppression: item.suppression ?? null,
     touch: item.touch ?? null,
   });
+  // Release C review SF2: the inline call recorder opens only on an actionable
+  // card. A research card (evidence thin, no hypothesis, stale) has no call to
+  // record: its work is research, and a call logged there is noise.
+  const canRecordCall =
+    !item.blocked &&
+    readiness.state === 'actionable' &&
+    !RESEARCHABLE_RULES.has(item.ruleId) &&
+    typeof item.persona.id === 'number' &&
+    item.hypothesis !== null &&
+    !(typeof item.humanAction === 'string' && item.humanAction.length > 0);
 
   return (
     <article
@@ -243,20 +255,23 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
 
       {!item.blocked ? (
         <div data-testid="contact-buttons" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-          {mailto ? (
-            <a href={mailto} className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-              <Mail className="h-3 w-3" /> Email
-            </a>
-          ) : (
-            <span className="italic text-[var(--muted-foreground)]">email unavailable</span>
-          )}
+          {/* Red team T8: no raw email link. Email goes only through the guarded GAP send path. */}
           {tel ? (
-            <a href={tel} className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+            <a
+              href={tel}
+              onClick={() => canRecordCall && setCallOpen(true)}
+              className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]"
+            >
               <Phone className="h-3 w-3" /> Call
             </a>
           ) : (
             <span className="italic text-[var(--muted-foreground)]">phone unavailable</span>
           )}
+          {canRecordCall && !callOpen ? (
+            <button type="button" data-testid="record-call-outcome" onClick={() => setCallOpen(true)} className="underline">
+              Record call outcome
+            </button>
+          ) : null}
           {item.persona.linkedinUrl ? (
             <a
               href={item.persona.linkedinUrl}
@@ -290,6 +305,31 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             </a>
           ) : null}
         </div>
+      ) : null}
+
+      {canRecordCall && callOpen ? (
+        <section data-testid="inline-call-outcome" className="mt-3 rounded-md border border-[var(--border)] p-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call outcome</p>
+          {retryNote ? (
+            <p data-testid="call-retry-note" className="mt-1 text-xs text-[var(--muted-foreground)]">
+              {retryNote}
+            </p>
+          ) : null}
+          <CallMode
+            personaId={String(item.persona.id)}
+            hypothesis={item.hypothesis ? { id: item.hypothesis.id, problemFamily: item.hypothesis.family } : undefined}
+            onRecorded={(responseClass) => {
+              // Red team T8: a real conversation completes the card; no answer,
+              // voicemail or a gatekeeper keeps it open to retry (routing holds the
+              // person after MAX_UNANSWERED_CALLS). A no-answer is never buyer truth.
+              if ((CALL_ONLY_RESPONSE_CLASSES as readonly string[]).includes(responseClass)) {
+                setRetryNote(`${words(responseClass)} recorded. The card stays open to call again.`);
+              } else {
+                onAct('called');
+              }
+            }}
+          />
+        </section>
       ) : null}
 
       {readiness.state !== 'blocked' && readiness.warning ? (
@@ -378,7 +418,6 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             <>
               <span>{words(item.hypothesis.family)}</span>
               <HypothesisStatusBadge status={item.hypothesis.status} />
-              <span className="text-[var(--muted-foreground)]">confidence {item.hypothesis.confidence}%</span>
             </>
           ) : (
             <span className="italic text-[var(--muted-foreground)]">No hypothesis</span>

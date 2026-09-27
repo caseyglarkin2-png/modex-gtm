@@ -20,6 +20,7 @@
  * snake_case; delegates are the camelCase model names.
  */
 
+import { GATE_SIGNAL_SELECT, outreachFactRefusal } from '../research/evidence-gate';
 import { audit as defaultAudit, recordHypothesisEvent, type GapAuditKind } from '../audit';
 import { mirrorHypothesisEvent as defaultMirror, type MirrorAction } from '../hubspot-mirror';
 import {
@@ -325,7 +326,7 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
       signals: {
         include: {
           signal: {
-            select: { id: true, title: true, evidence_url: true, evidence_text: true, freshness_expires_at: true },
+            select: { ...GATE_SIGNAL_SELECT, title: true, freshness_expires_at: true },
           },
         },
       },
@@ -350,6 +351,8 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
   const linkedSignals: LoadedSignal[] = (row.signals ?? []).map((link: any) => ({
     id: link.signal?.id ?? link.signal_id,
     hasEvidence: Boolean(link.signal?.evidence_url || link.signal?.evidence_text),
+    // Red team T6: the one evidence rule (research/evidence-gate.ts), re-judged at every transition.
+    outreachFact: link.signal ? outreachFactRefusal(link.signal, row.account_name) === null : false,
     expiresAt: link.signal?.freshness_expires_at ?? null,
     title: typeof link.signal?.title === 'string' ? link.signal.title : '',
     evidenceUrl: link.signal?.evidence_url ?? null,

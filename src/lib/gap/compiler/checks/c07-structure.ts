@@ -145,15 +145,51 @@ export function wordRangeFor(ctx: CompileContext): WordRange {
   return ctx.stepIndex === 0 ? STEP0_WORD_RANGE : LATER_WORD_RANGE;
 }
 
+/**
+ * A verbatim source excerpt in straight double quotes, immediately cited
+ * (`"..." [[SRC:id]]` or `[S:id]`). Red team T7 opens the first touch with
+ * the verified fact quoted word for word (research/propose.ts citedQuote);
+ * those are the source's words, not ours, so the brevity limit does not count
+ * them. An uncited quote is ordinary prose and counts.
+ *
+ * Release C re-review S6: the pattern alone is not enough. A quote is the
+ * source speaking only when its words ARE the cited ref's excerpt (markers,
+ * case and punctuation ignored), and at most MAX_QUOTED_WORDS are excluded
+ * per body. A quote that does not match its source, or words past the cap,
+ * count as ours: operator or model copy cannot hide prose inside quote marks.
+ */
+export const CITED_QUOTE_RE = /"([^"\n]*)"\s*(?:\[\[SRC:([A-Za-z0-9_-]+)\]\]|\[S:([A-Za-z0-9_-]+)\])/g;
+/** The most quoted-source words a body may exclude from C07 and C08. */
+export const MAX_QUOTED_WORDS = 60;
+
+const normQuote = (t: string) => stripMarkers(t).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+/** The body with verified cited quotes removed (up to MAX_QUOTED_WORDS), and how many words were removed. */
+export function withoutVerifiedQuotes(body: string, ctx: CompileContext): { text: string; quotedWords: number } {
+  const excerpts = new Map((ctx.evidence ?? []).map((r) => [r.id, normQuote(r.excerpt ?? '')]));
+  let quotedWords = 0;
+  const text = body.replace(CITED_QUOTE_RE, (whole: string, quote: string, srcId?: string, sId?: string) => {
+    const q = normQuote(quote);
+    const excerpt = excerpts.get(srcId ?? sId ?? '') ?? '';
+    const words = wordCount(stripMarkers(quote));
+    if (!q || !excerpt || !` ${excerpt} `.includes(` ${q} `) || quotedWords + words > MAX_QUOTED_WORDS) return whole;
+    quotedWords += words;
+    return ' ';
+  });
+  return { text, quotedWords };
+}
+
 export const checkWordCount: Check = (draft, ctx) => {
-  const count = wordCount(draft.body);
+  const stripped = withoutVerifiedQuotes(draft.body, ctx);
+  const count = wordCount(stripped.text);
+  const quoted = stripped.quotedWords;
   const { min, max } = wordRangeFor(ctx);
   const passed = count >= min && count <= max;
   return {
     code: C07_CODE,
     passed,
     severity: 'reject',
-    detail: `${count} words, ${passed ? 'within' : 'outside'} ${min}..${max} for step ${ctx.stepIndex}`,
+    detail: `${count} words${quoted > 0 ? ` (plus ${quoted} quoted from a cited source)` : ''}, ${passed ? 'within' : 'outside'} ${min}..${max} for step ${ctx.stepIndex}`,
     span: null,
   };
 };
@@ -165,8 +201,11 @@ export const checkWordCount: Check = (draft, ctx) => {
 /** A second family needs at least this many cue hits to count as a second problem. */
 export const ONE_PROBLEM_MIN_HITS = 2;
 
-export const checkOneProblem: Check = (draft) => {
-  const text = stripMarkers(stripGreetingAndSignature(draft.body));
+export const checkOneProblem: Check = (draft, ctx) => {
+  // Red team T7: a cited verbatim quote is the source's words (a filing that
+  // mentions dock doors), not the problem we frame; only our prose is judged.
+  // Re-review S6: only a quote that matches its cited excerpt is set aside.
+  const text = stripMarkers(stripGreetingAndSignature(withoutVerifiedQuotes(draft.body, ctx).text));
   const { primary, hits } = classifyFamilies(text);
   const contenders: ProblemFamily[] = PROBLEM_FAMILIES.filter((f) => hits[f] >= ONE_PROBLEM_MIN_HITS).sort(
     (a, b) => hits[b] - hits[a] || PROBLEM_FAMILIES.indexOf(a) - PROBLEM_FAMILIES.indexOf(b),

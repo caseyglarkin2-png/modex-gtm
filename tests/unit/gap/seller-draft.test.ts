@@ -367,3 +367,59 @@ describe('draft -> sent reconciliation', () => {
     expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED || a.kind === DRAFT_SENT)).toBe(false);
   });
 });
+
+describe('T6: an INSUFFICIENT hypothesis never sends', () => {
+  it('a keyword-only hypothesis (the old "10-Q mentions: capital expenditure" shape) is refused evidence_insufficient', async () => {
+    const d = db();
+    d.hypotheses[0].signals = [{ signal: { id: 'sig-1', account_name: 'Kroger', source_kind: 'pounce_trigger', title: 'KR 10-Q mentions capital expenditure', evidence_text: null, evidence_url: 'https://sec.gov/x', external_ok: null, observed_at: NOW, freshness_expires_at: null, source_type: 'public_secondary', metadata: null } }];
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+  });
+
+  it('a verified quote that is not a network change (PepsiCo liquidity sentence) is refused too', async () => {
+    const d = db();
+    d.hypotheses[0].signals = [{ signal: { id: 'sig-1', account_name: 'Kroger', source_kind: 'evidence_record', title: '10-Q', evidence_text: 'Our Liquidity and Capital Resources We believe that our cash generating capability and financial condition, together with our revolving credit facilities, working capital lines and other available methods of debt financing, such as commercial paper borrowings and long-term debt financing, will be adequate to meet our operating, investing and financing needs, including with respect to our net capital spending plans.', evidence_url: 'https://sec.gov/x', external_ok: true, observed_at: NOW, freshness_expires_at: null, source_type: 'public_primary', metadata: { verified: 'excerpt_found_at_source' } } }];
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+  });
+
+  it('Release C review SF1: a fact linked beside a CITED keyword hit is refused; citing only the fact drafts', async () => {
+    const d = db();
+    d.hypotheses[0].signals.push({ signal: { id: 'sig-kw', account_name: 'Kroger', source_kind: 'pounce_trigger', title: 'KR 10-Q mentions capital expenditure', evidence_text: null, evidence_url: 'https://sec.gov/x', external_ok: null, observed_at: NOW, freshness_expires_at: null, source_type: 'public_secondary', metadata: null } });
+    d.hypotheses[0].observation = 'Kroger will acquire Giant Eagle [S:sig-1]. Capital expenditure is up [S:sig-kw].';
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+
+    const d2 = db();
+    d2.hypotheses[0].signals.push({ signal: { id: 'sig-kw', account_name: 'Kroger', source_kind: 'pounce_trigger', title: 'KR 10-Q mentions capital expenditure', evidence_text: null, evidence_url: 'https://sec.gov/x', external_ok: null, observed_at: NOW, freshness_expires_at: null, source_type: 'public_secondary', metadata: null } });
+    const ok = await createSellerGmailDraft(prismaOf(d2), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d2));
+    expect(ok).toMatchObject({ ok: true });
+  });
+
+  it('an expired outreach fact does not keep a hypothesis sendable', async () => {
+    const d = db();
+    d.hypotheses[0].signals[0].signal.freshness_expires_at = new Date(NOW.getTime() - 1000);
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+  });
+});
+
+describe('Release C review S5: a reply from the account holds first touches to anyone there', () => {
+  it('a human reply from a colleague at the account domain in the last 30 days refuses step 0 account_replied', async () => {
+    const d = db();
+    d.inbound = [{ from_email: 'pat.lee@kroger.com', subject: 'Re: doors versus spots', received_at: new Date(NOW.getTime() - 3 * 86_400_000) }];
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'account_replied' });
+    expect(r.ok ? '' : String(r.detail)).toContain('pat.lee@kroger.com');
+  });
+
+  it.each([
+    ['an out-of-office', { from_email: 'pat.lee@kroger.com', subject: 'Automatic reply: doors versus spots', received_at: new Date(NOW.getTime() - 86_400_000) }],
+    ['an old reply', { from_email: 'pat.lee@kroger.com', subject: 'Re: doors', received_at: new Date(NOW.getTime() - 45 * 86_400_000) }],
+    ['another domain', { from_email: 'pat.lee@albertsons.com', subject: 'Re: doors', received_at: new Date(NOW.getTime() - 86_400_000) }],
+  ])('%s does not hold the first touch', async (_label, row) => {
+    const d = db();
+    d.inbound = [row];
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d))).toMatchObject({ ok: true });
+  });
+});

@@ -86,8 +86,8 @@ import { staticSuppressionReader } from '../../src/lib/gap/routing/suppression-r
 import { EVIDENCE_SIGNAL_SELECT, renderStepCopy } from '../../src/lib/gap/sequence/render';
 import { createFamily } from '../../src/lib/gap/sequence/family';
 import { createVersion } from '../../src/lib/gap/sequence/version';
-import { seedFamilyByKey, type SeedFamily } from '../../src/lib/gap/sequences/families';
-import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
+import type { SeedFamily } from '../../src/lib/gap/sequences/families';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
 
@@ -97,7 +97,7 @@ import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'finish-rc-e2e-latest.md');
 const SEED_EVIDENCE_FIXTURE = path.join('tests', 'fixtures', 'gap', 'seed-evidence.json');
-const SEED_KEY = 'network_standardization';
+const SEED_KEY = 'hidden_capacity';
 const ACTOR = 'e2e-rc';
 const OWNER = 'casey@freightroll.com';
 const SCRUBBED_ENV = ['HUBSPOT_ACCESS_TOKEN', 'MC_API_TOKEN', 'GOOGLE_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'CLAWD_CONTROL_PLANE_URL', 'CLAWD_CONTROL_PLANE_TOKEN'] as const;
@@ -330,7 +330,9 @@ async function main(): Promise<number> {
   };
 
   const seedEvidence = JSON.parse(readFileSync(SEED_EVIDENCE_FIXTURE, 'utf8')) as SeedEvidenceFixture;
-  const seed = seedFamilyByKey(SEED_KEY) as SeedFamily;
+  // Red team T7: production seeds are single-touch; the multi-touch runtime
+  // mechanics run on the pre-T7 four-step Hidden Capacity seed kept as a TEST FIXTURE.
+  const seed = JSON.parse(readFileSync(path.join('tests', 'fixtures', 'gap', 'legacy-four-step-hidden-capacity.json'), 'utf8')) as SeedFamily;
   const fx = seedEvidence.families[SEED_KEY];
 
   const prisma = new PrismaClient();
@@ -374,52 +376,25 @@ async function main(): Promise<number> {
 
     pass('1 seed', `two accounts (${accountName} pipeline_stage=targeted, ${blockedAccountName} pipeline_stage=meeting), three personas (happy ${personaHappy.id}, blocked ${personaBlocked.id}, internal ${personaInternal.id})`);
 
-    // 1b. Register every fact.
-    const projected1 = fromOperatorKnowledge(
-      { accountName, hubspotCompanyId, personaId: personaHappy.id, text: 'The plant manager said the annual report lists 41 distribution centers folded in from three regional operators.', at: now, sourceId: `${tag}:h1fact1`, by: 'casey' },
-      { registeredBy: ACTOR, now },
-    );
-    expect('1b facts', projected1.ok, `fromOperatorKnowledge (H1 fact1) refused: ${projected1.ok ? '' : projected1.reason}`);
-    if (!projected1.ok) throw new Error('unreachable');
-    const h1fact1 = await registerSignal(prisma, projected1.signal);
-    const h1fact2 = await registerSignal(prisma, {
-      accountName,
-      hubspotCompanyId,
-      personaId: personaHappy.id,
-      sourceKind: 'manual',
-      sourceId: `${tag}:h1url1`,
-      type: 'job_posting',
-      title: `${accountName} posts three gate-clerk roles at its Ohio distribution center`,
-      sourceType: 'public_primary',
-      evidenceUrl: `https://example.com/${tag}/jobs`,
-      externalOk: true,
-      observedAt: now,
-      confidence: 80,
-      registeredBy: ACTOR,
-    });
+    // 1b. Register every fact. Red team T6 / Release C review SF1: the cited
+    // fact is an outreach fact (verified, dated, quoted, this account, a
+    // physical-network change); ONE fact is quoted in the observation and the
+    // second stays linked as supporting evidence.
+    const filed = `(filed ${now.toISOString().slice(0, 10)})`;
+    const quotes = new Map<string, string>();
+    const factsFor = async (accName: string, hcid: string, personaId: number, key: string) => {
+      const verified = (sourceId: string, title: string, text: string, url: string, type: string) =>
+        registerSignal(prisma, { accountName: accName, hubspotCompanyId: hcid, personaId, sourceKind: 'evidence_record', sourceId, type, title, sourceType: 'public_primary', evidenceUrl: url, evidenceText: text, externalOk: true, observedAt: now, confidence: 80, metadata: { verified: 'excerpt_found_at_source' }, registeredBy: ACTOR });
+      const f1Title = `${accName} 10-K ${filed}`;
+      const f1Text = `${accName} completed its acquisition of three regional operators, adding 41 distribution centers to its network.`;
+      const f1 = await verified(`${tag}:${key}fact1`, f1Title, f1Text, `https://example.com/${tag}/${key}-10k`, 'acquisition');
+      const f2 = await verified(`${tag}:${key}url1`, `${accName} 8-K ${filed}`, `${accName} will open a new distribution center in Columbus, Ohio with 40 dock doors and is hiring three gate clerks there.`, `https://example.com/${tag}/${key}-jobs`, 'site_expansion');
+      quotes.set(f1.id, citedQuote(f1Title, f1Text, f1.id, accName));
+      return [f1, f2] as const;
+    };
+    const [h1fact1, h1fact2] = await factsFor(accountName, hubspotCompanyId, personaHappy.id, 'h1');
     expect('1b facts', h1fact1.created && h1fact2.created, `H1 facts not created: ${JSON.stringify({ h1fact1, h1fact2 })}`);
-    const projected2 = fromOperatorKnowledge(
-      { accountName: blockedAccountName, hubspotCompanyId: blockedHubspotCompanyId, personaId: personaBlocked.id, text: 'The plant manager said the annual report lists 41 distribution centers folded in from three regional operators.', at: now, sourceId: `${tag}:h2fact1`, by: 'casey' },
-      { registeredBy: ACTOR, now },
-    );
-    expect('1b facts', projected2.ok, `fromOperatorKnowledge (H2 fact1) refused: ${projected2.ok ? '' : projected2.reason}`);
-    if (!projected2.ok) throw new Error('unreachable');
-    const h2fact1 = await registerSignal(prisma, projected2.signal);
-    const h2fact2 = await registerSignal(prisma, {
-      accountName: blockedAccountName,
-      hubspotCompanyId: blockedHubspotCompanyId,
-      personaId: personaBlocked.id,
-      sourceKind: 'manual',
-      sourceId: `${tag}:h2url1`,
-      type: 'job_posting',
-      title: `${blockedAccountName} posts three gate-clerk roles at its Ohio distribution center`,
-      sourceType: 'public_primary',
-      evidenceUrl: `https://example.com/${tag}/blocked-jobs`,
-      externalOk: true,
-      observedAt: now,
-      confidence: 80,
-      registeredBy: ACTOR,
-    });
+    const [h2fact1, h2fact2] = await factsFor(blockedAccountName, blockedHubspotCompanyId, personaBlocked.id, 'h2');
     expect('1b facts', h2fact1.created && h2fact2.created, `H2 facts not created: ${JSON.stringify({ h2fact1, h2fact2 })}`);
     pass('1b facts', `H1 facts ${h1fact1.id}/${h1fact2.id}, H2 facts ${h2fact1.id}/${h2fact2.id}`);
 
@@ -430,7 +405,7 @@ async function main(): Promise<number> {
         primaryPersonaId: personaId,
         persona: seed.persona,
         problemFamily: seed.problemFamily,
-        observation: `${accName} lists 41 distribution centers from three regional operators [S:${fact1Id}] and posts three gate-clerk roles in Ohio [S:${fact2Id}].`,
+        observation: quotes.get(fact1Id)!,
         problemHypothesis: 'My guess is each acquired site still runs its own gate process, so the network cannot see its yards the same way from one site to the next.',
         rootCauseHypotheses: ['No shared gate standard across the acquired sites'],
         impactHypotheses: ['Detention and clerk headcount rise site by site'],
@@ -439,7 +414,7 @@ async function main(): Promise<number> {
         whatANoMeans: 'The family is wrong for this account.',
         confidence: 60,
         signalIds: [fact1Id, fact2Id],
-        primarySignalId: fact2Id,
+        primarySignalId: fact1Id,
         createdBy: ACTOR,
       });
       expect('2 hypotheses', proposed.ok, `proposeHypothesis (${label}) refused: ${JSON.stringify(proposed)}`);
@@ -460,24 +435,18 @@ async function main(): Promise<number> {
     const h2Row = await prisma.prospectingHypothesis.findUnique({ where: { id: h2 }, select: { observation: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } } });
     observationH2 = h2Row?.observation ?? '';
     realRefsH2 = evidenceRefsFromSignals((h2Row?.signals ?? []).map((l) => l.signal), now);
-    pass('2 hypotheses', `H1 ${h1.slice(0, 8)} (${accountName}) and H2 ${h2.slice(0, 8)} (${blockedAccountName}) both active, both citing two real facts`);
+    pass('2 hypotheses', `H1 ${h1.slice(0, 8)} (${accountName}) and H2 ${h2.slice(0, 8)} (${blockedAccountName}) both active, each quoting one verified fact with a second linked`);
 
     // 2c. H3: internal-recipient control for B9. No family, no compile: just a hypothesis to disposition against.
-    const h3Signal = await registerSignal(
-      prisma,
-      (
-        fromOperatorKnowledge(
-          { accountName, hubspotCompanyId, personaId: personaInternal.id, text: 'Internal QA probe: this hypothesis exists only to prove the learning report excludes it.', at: now, sourceId: `${tag}:h3fact1`, by: 'casey' },
-          { registeredBy: ACTOR, now },
-        ) as { ok: true; signal: Parameters<typeof registerSignal>[1] }
-      ).signal,
-    );
+    const h3Title = `${accountName} 10-Q ${filed}`;
+    const h3Text = `${accountName} will open an automated distribution center in Denver with 24 dock doors.`;
+    const h3Signal = await registerSignal(prisma, { accountName, hubspotCompanyId, personaId: personaInternal.id, sourceKind: 'evidence_record', sourceId: `${tag}:h3fact1`, type: 'automation_program', title: h3Title, sourceType: 'public_primary', evidenceUrl: `https://example.com/${tag}/h3`, evidenceText: h3Text, externalOk: true, observedAt: now, confidence: 80, metadata: { verified: 'excerpt_found_at_source' }, registeredBy: ACTOR });
     const h3Proposed = await proposeHypothesis(prisma, {
       accountName,
       primaryPersonaId: personaInternal.id,
       persona: 'automation',
       problemFamily: 'automation_readiness',
-      observation: `Internal QA probe at ${accountName} [S:${h3Signal.id}].`,
+      observation: citedQuote(h3Title, h3Text, h3Signal.id, accountName),
       problemHypothesis: 'My guess is this row must never reach a real learning metric.',
       rootCauseHypotheses: ['n/a'],
       impactHypotheses: ['n/a'],

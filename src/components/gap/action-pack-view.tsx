@@ -28,7 +28,8 @@ import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch
 import { telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
-import { asStringList } from '@/lib/gap/ui/format';
+import { hypothesisSendable } from '@/lib/gap/research/evidence-gate';
+import { asStringList, humanWhyNow } from '@/lib/gap/ui/format';
 import { Badge } from '@/components/ui/badge';
 import { CopyButton } from './copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
@@ -134,8 +135,13 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       }))
     : [];
 
+  // Red team T6/T7: a call script exists only for a hypothesis resting on a
+  // verified outreach fact; a keyword hit is never read aloud as a fact.
+  // Release C re-review S8: only LIVE facts, like every other gate; an expired
+  // fact is never read aloud as a cold opener.
+  const verifiedFact = hypothesisSendable(hypothesis, new Date());
   const callPack =
-    persona && renderedEmail
+    persona && renderedEmail && verifiedFact
       ? buildCallPack({
           firstName: firstNameOf(persona.name),
           senderFirstName: 'Casey',
@@ -146,7 +152,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         })
       : null;
 
-  const whyNow = (hypothesis.why_now as string | null)?.trim() || stripObservationCitations(hypothesis.observation ?? '').trim() || null;
+  const whyNow = humanWhyNow(hypothesis.why_now as string | null) || stripObservationCitations(hypothesis.observation ?? '').trim() || null;
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
   const signals = Array.isArray(hypothesis.signals)
@@ -268,7 +274,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
             <summary className="cursor-pointer text-xs font-semibold text-[var(--muted-foreground)]">Diagnostics and voicemail</summary>
             <div className="mt-2 space-y-2">
               <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Current state: </span>{callPack.diagnostic1}</p>
-              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Business impact: </span>{callPack.diagnostic2}</p>
+              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Only after they say it is real: </span>{callPack.impactIfAcknowledged}</p>
               <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds): </span>{callPack.voicemail}</p>
             </div>
           </details>

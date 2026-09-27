@@ -504,3 +504,118 @@ export async function getGmailMessageHeaders(messageId: string, sender?: GmailSe
     return null;
   }
 }
+
+// ---------------------------------------------------------------------------
+// The GAP mailbox (red team T9): read EVERY recent inbox message of one
+// delegated mailbox (casey@yardflow.ai), read or unread, with its labels, its
+// full text and any delivery-status report, so replies AND bounces to GAP
+// sends are consumed as execution feedback. Read-only: nothing is marked,
+// labeled or moved.
+// ---------------------------------------------------------------------------
+
+export interface MailboxMessage {
+  id: string;
+  threadId: string;
+  rfcMessageId: string | null;
+  fromEmail: string;
+  fromName: string;
+  subject: string;
+  snippet: string;
+  /** The plain body with quoted history stripped (what the buyer typed). */
+  bodyText: string;
+  /** The plain body as sent, quoted history included (DSN bodies carry the failed address here). */
+  rawText: string;
+  bodyHtml: string;
+  /** The `message/delivery-status` part of a DSN, decoded, or null. */
+  deliveryStatus: string | null;
+  labelIds: string[];
+  receivedAt: Date;
+  headers: Record<string, string>;
+}
+
+function extractDeliveryStatus(part: GmailMessagePart | undefined): string | null {
+  let found: string | null = null;
+  const walk = (node?: GmailMessagePart) => {
+    if (!node || found !== null) return;
+    const mime = (node.mimeType ?? '').toLowerCase();
+    if (mime === 'message/delivery-status' && node.body?.data) found = decodeBase64Url(node.body.data);
+    node.parts?.forEach(walk);
+  };
+  walk(part);
+  return found;
+}
+
+/** How many message ids one run may list (ids only; cheap). Past this the listing is truncated. */
+export const MAILBOX_LIST_CAP = 5000;
+
+/**
+ * The ids of `sender`'s inbox messages received after `afterEpoch`
+ * (seconds), OLDEST FIRST, as one COMPLETE window (Release C re-review B1/S1).
+ *
+ * Gmail lists newest first, so a window holding more than MAILBOX_LIST_CAP
+ * ids would silently drop its OLDEST mail. Instead the upper bound (`before:`)
+ * is halved until the window is complete: the result is every id in
+ * [afterEpoch, windowEnd), and the caller drains the rest on later runs.
+ * `windowEnd` is null when the window runs to now. Throws on a list failure
+ * (the caller must not advance its watermark on an unreadable mailbox).
+ */
+export async function listMailboxIds(
+  sender: GmailSender,
+  afterEpoch: number,
+  nowEpoch: number = Math.floor(Date.now() / 1000),
+): Promise<{ ids: string[]; windowEnd: number | null }> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const listWindow = async (before: number | null): Promise<{ ids: string[]; complete: boolean }> => {
+    const listed: string[] = [];
+    let pageToken: string | undefined;
+    do {
+      const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
+      listUrl.searchParams.set('q', `in:inbox after:${afterEpoch}${before !== null ? ` before:${before}` : ''}`);
+      listUrl.searchParams.set('maxResults', '500');
+      if (pageToken) listUrl.searchParams.set('pageToken', pageToken);
+      const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+      if (!res.ok) throw new Error(`Gmail mailbox list failed (${res.status})`);
+      const data = (await res.json()) as { messages?: GmailMessage[]; nextPageToken?: string };
+      for (const m of data.messages ?? []) listed.push(m.id);
+      pageToken = data.nextPageToken;
+    } while (pageToken && listed.length < MAILBOX_LIST_CAP);
+    return { ids: listed, complete: !pageToken };
+  };
+  let before: number | null = null;
+  for (let i = 0; i < 32; i += 1) {
+    const w = await listWindow(before);
+    // Newest first from Gmail: reverse for oldest first.
+    if (w.complete) return { ids: w.ids.reverse(), windowEnd: before };
+    const hi: number = before ?? nowEpoch;
+    const mid: number = afterEpoch + Math.floor((hi - afterEpoch) / 2);
+    if (mid <= afterEpoch) break;
+    before = mid;
+  }
+  throw new Error(`Gmail mailbox window after ${afterEpoch} cannot be narrowed below ${MAILBOX_LIST_CAP} messages`);
+}
+
+/** One inbox message, read in full. */
+export async function getMailboxMessage(sender: GmailSender, id: string): Promise<MailboxMessage> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const detail = await getMessageDetail(accessToken, mailbox, id);
+  const from = getHeader(detail, 'From');
+  const { html, text } = extractBodies(detail.payload);
+  return {
+    id: detail.id,
+    threadId: detail.threadId,
+    rfcMessageId: getHeader(detail, 'Message-ID') || null,
+    fromEmail: extractEmail(from),
+    fromName: extractName(from),
+    subject: getHeader(detail, 'Subject'),
+    snippet: detail.snippet || '',
+    bodyText: stripQuotedReply(text),
+    rawText: text,
+    bodyHtml: html,
+    deliveryStatus: extractDeliveryStatus(detail.payload),
+    labelIds: detail.labelIds ?? [],
+    receivedAt: detail.internalDate ? new Date(parseInt(detail.internalDate, 10)) : new Date(),
+    headers: collectHeaders(detail),
+  };
+}

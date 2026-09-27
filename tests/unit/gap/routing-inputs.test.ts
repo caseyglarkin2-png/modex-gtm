@@ -22,7 +22,7 @@ import { routePersona } from '@/lib/gap/routing/route';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
 import type { RoutingInputs } from '@/lib/gap/routing/types';
 import type { Top100Manifest, Top100RosterPerson } from '@/lib/gap/top100/reader';
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 import { findManyFrom } from './fixtures/where';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -134,6 +134,7 @@ function makePrisma(db: Db) {
       ),
     },
     conversationDisposition: {
+      count: vi.fn(async (args: any) => findManyFrom(db.dispositions, args).length),
       findFirst: vi.fn(async ({ where }: any) =>
         findFirst(
           byDesc(
@@ -155,7 +156,7 @@ const ACCOUNT = 'Acme Foods';
 const EMAIL = 'VP.Ops@Acme.example';
 const EMAIL_LOWER = 'vp.ops@acme.example';
 
-function signal(id: string, overrides: Partial<{ evidence_url: string | null; evidence_text: string | null; freshness_expires_at: Date | null }> = {}) {
+function signal(id: string, overrides: Partial<{ evidence_url: string | null; evidence_text: string | null; freshness_expires_at: Date | null }> & Record<string, unknown> = {}) {
   return { signal: { id, evidence_url: null, evidence_text: null, freshness_expires_at: null, ...overrides } };
 }
 
@@ -246,7 +247,7 @@ function fullDb(): Db {
       status: 'approved',
       problem_family: 'hidden_capacity',
       confidence: 60,
-      observation: 'Acme Foods announced a third Ohio distribution center in August 2026.',
+      observation: 'Acme Foods announced a third Ohio distribution center in August 2026 [S:sig-evidenced].',
       problem_hypothesis: 'My guess is the new site inherits gate waiting from the other two, which caps turns.',
       why_now: 'Site opens in Q4.',
       falsification_questions: ['Does the new site run the same gate process as the other two?'],
@@ -255,7 +256,8 @@ function fullDb(): Db {
       metadata: { resumeAt: '2026-10-01T00:00:00.000Z' },
       created_at: daysAgo(5),
       signals: [
-        signal('sig-evidenced', { evidence_url: 'https://example.com/acme-ohio', freshness_expires_at: daysAhead(20) }),
+        // A live outreach fact (red team T6): verified, dated, quoted, this account, a network change.
+        signal('sig-evidenced', { evidence_url: 'https://example.com/acme-ohio', freshness_expires_at: daysAhead(20), evidence_text: 'Acme Foods opened a third Ohio distribution center in August 2026.', account_name: ACCOUNT, source_kind: 'evidence_record', source_type: 'public_primary', external_ok: true, observed_at: daysAgo(30), metadata: { verified: 'excerpt_found_at_source' } }),
         signal('sig-bare'),
       ],
     },
@@ -428,7 +430,7 @@ describe('assembleRoutingInputs full fixture', () => {
       expiresAt: daysAhead(30),
       resumeAt: new Date('2026-10-01T00:00:00.000Z'),
       version: 1,
-      observation: 'Acme Foods announced a third Ohio distribution center in August 2026.',
+      observation: 'Acme Foods announced a third Ohio distribution center in August 2026 [S:sig-evidenced].',
       problemHypothesis: 'My guess is the new site inherits gate waiting from the other two, which caps turns.',
       whyNow: 'Site opens in Q4.',
       falsificationQuestions: ['Does the new site run the same gate process as the other two?'],
@@ -446,6 +448,7 @@ describe('assembleRoutingInputs full fixture', () => {
       lastDisposition: null,
       meetingBooked: false,
       gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
+      unansweredCalls: 0,
     });
 
     // suppression from the injected reader
@@ -664,7 +667,7 @@ describe('comms', () => {
   const withGapHistory = (db: Db, rows: any[]) => {
     db.decisions = [{ id: 'dec-old', persona_id: 42 }];
     db.audit = rows;
-    db.versions = [{ id: 'ver-hc', steps: SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!.steps }];
+    db.versions = [{ id: 'ver-hc', steps: LEGACY_HC.steps }];
     return db;
   };
 
@@ -697,6 +700,19 @@ describe('comms', () => {
     db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'problem_rejected', created_at: daysAgo(35), human_confirmed: true, confirmed_at: daysAgo(35), ai_suggested: null });
     const i = await assemble(db);
     expect(i.comms.gapSequence?.state).toBe('stopped');
+  });
+
+  it('T8: unansweredCalls counts CONFIRMED call-only outcomes since the last substantive answer; the 3rd holds the person', async () => {
+    const db = fullDb();
+    const call = (cls: string, d: number, confirmed = true) => ({ contact_email: EMAIL_LOWER, channel: 'call', response_class: cls, created_at: daysAgo(d), human_confirmed: confirmed, confirmed_at: daysAgo(d), ai_suggested: null });
+    db.dispositions.push(call('no_answer', 9), call('voicemail', 6), call('no_answer', 3, false));
+    expect((await assemble(db)).comms.unansweredCalls).toBe(2);
+    db.dispositions.push(call('gatekeeper', 2));
+    const i = await assemble(db);
+    expect(i.comms.unansweredCalls).toBe(3);
+    expect((routePersona(i) as { decision: { ruleId: string } }).decision.ruleId).toBe('call_attempts_exhausted');
+    db.dispositions.push({ contact_email: EMAIL_LOWER, channel: 'call', response_class: 'timing', created_at: daysAgo(1), human_confirmed: true, confirmed_at: daysAgo(1), ai_suggested: null });
+    expect((await assemble(db)).comms.unansweredCalls).toBe(0);
   });
 
   it('T3: an unreadable GAP history fails the persona closed (named read), never "no outbound"', async () => {
@@ -795,15 +811,22 @@ describe('comms', () => {
 // ---------------------------------------------------------------------------
 
 describe('hypothesis evidence depth (closeout)', () => {
-  it('evidenceThin is true only when every linked signal is an auto-ingested trigger with no quoted text or summary', async () => {
+  it('T6: evidenceThin is true unless a LIVE outreach fact is linked (keyword hit, unverified financial quote, operator hearsay and nothing at all are all thin)', async () => {
     const { buildHypothesisForTest } = await import('@/lib/gap/routing/inputs');
     const now = new Date('2026-09-25T00:00:00Z');
-    const h = (signals: any[]) => ({ id: 'h', status: 'active', problem_family: 'hidden_capacity', confidence: 42, observation: 'o', problem_hypothesis: 'p', metadata: null, signals: signals.map((signal) => ({ signal })) });
+    const h = (signals: any[]) => ({ id: 'h', status: 'active', problem_family: 'hidden_capacity', confidence: 42, observation: 'o [S:s3].', problem_hypothesis: 'p', metadata: null, signals: signals.map((signal) => ({ signal })) });
     const keyword = { id: 's1', source_kind: 'pounce_trigger', title: 'KR 10-Q (2026-06-26) mentions: capital expenditure', summary: '', evidence_url: 'https://sec.gov/x', evidence_text: '', freshness_expires_at: null };
-    expect(buildHypothesisForTest(h([keyword]) as any, now)!.evidenceThin).toBe(true);
-    expect(buildHypothesisForTest(h([{ ...keyword, evidence_text: 'Capital investments totaled $1.5 billion' }]) as any, now)!.evidenceThin).toBe(false);
-    expect(buildHypothesisForTest(h([keyword, { ...keyword, id: 's2', source_kind: 'operator_knowledge' }]) as any, now)!.evidenceThin).toBe(false);
-    expect(buildHypothesisForTest(h([]) as any, now)!.evidenceThin).toBe(false);
+    const fact = { id: 's3', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', title: 'KROGER CO 10-Q', evidence_url: 'https://sec.gov/y', evidence_text: 'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc.', external_ok: true, observed_at: new Date('2026-09-18T00:00:00Z'), metadata: { verified: 'excerpt_found_at_source' }, freshness_expires_at: null };
+    const hk = (signals: any[]) => ({ ...h(signals), account_name: 'Kroger' });
+    expect(buildHypothesisForTest(hk([keyword]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([{ ...keyword, evidence_text: 'Capital investments totaled $1.5 billion' }]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([keyword, { ...keyword, id: 's2', source_kind: 'operator_knowledge', evidence_text: 'heard at MODEX' }]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([keyword, fact]) as any, now)!.evidenceThin).toBe(false);
+    expect(buildHypothesisForTest(hk([keyword, { ...fact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') }]) as any, now)!.evidenceThin).toBe(true);
+    // Release C review SF1: a fact linked beside a CITED keyword hit is thin; the observation must cite only facts.
+    expect(buildHypothesisForTest({ ...hk([keyword, fact]), observation: 'o [S:s3]. k [S:s1].' } as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest({ ...hk([keyword, fact]), observation: 'o, uncited.' } as any, now)!.evidenceThin).toBe(true);
   });
 });
 

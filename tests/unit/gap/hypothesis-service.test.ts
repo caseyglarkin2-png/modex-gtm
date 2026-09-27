@@ -83,7 +83,8 @@ function row(overrides: Record<string, unknown> = {}) {
     status: 'review_required',
     problem_family: 'hidden_capacity',
     persona: 'site_ops',
-    observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+    // Release C review SF1: the observation cites only the outreach fact; S2 (site hearsay) stays supporting context.
+    observation: 'They opened a second DC in Ohio [S:S1].',
     problem_hypothesis: 'My guess is the new DC is running gate checks on paper.',
     falsification_questions: ['Do drivers check in at a guard shack?'],
     why_now: 'Second DC opened',
@@ -97,10 +98,17 @@ function row(overrides: Record<string, unknown> = {}) {
         signal_id: 'S1',
         role: 'primary',
         signal: {
+          // A real outreach fact (red team T6): verified, dated, quoted, this account, a network change.
           id: 'S1',
           title: 'New Ohio DC',
+          account_name: 'Acme Logistics',
+          source_kind: 'evidence_record',
+          source_type: 'public_primary',
           evidence_url: 'https://x/a',
-          evidence_text: null,
+          evidence_text: 'In August 2026 Acme Logistics opened a second distribution center in Columbus, Ohio.',
+          external_ok: true,
+          observed_at: new Date('2026-08-20T00:00:00Z'),
+          metadata: { verified: 'excerpt_found_at_source' },
           freshness_expires_at: FUTURE_A,
         },
       },
@@ -415,7 +423,7 @@ describe('transitionHypothesis', () => {
         accountName: 'Acme Logistics',
         hubspotCompanyId: '9001',
         problemFamily: 'hidden_capacity',
-        observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+        observation: 'They opened a second DC in Ohio [S:S1].',
         problemHypothesis: 'My guess is the new DC is running gate checks on paper.',
         whyNow: 'Second DC opened',
         falsificationQuestions: ['Do drivers check in at a guard shack?'],
@@ -505,7 +513,7 @@ describe('transitionHypothesis', () => {
     expect(auditSpy).not.toHaveBeenCalled();
   });
 
-  it('approve succeeds when the only evidence is evidence_text', async () => {
+  it('T6: approve is REFUSED when the only evidence is unverified operator text (evidence_insufficient)', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(
       row({
         status: 'review_required',
@@ -527,7 +535,33 @@ describe('transitionHypothesis', () => {
     );
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
     const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
+    expect(out).toEqual({ ok: false, reason: 'evidence_insufficient' });
+    expect(prisma.tx.prospectingHypothesis.updateMany).not.toHaveBeenCalled();
+  });
+
+  it('T6: a verified quoted fact with no URL still approves (the text is the evidence)', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(
+      row({
+        status: 'review_required',
+        observation: 'They opened a second DC in Ohio [S:S1].',
+        signals: [{ signal_id: 'S1', role: 'primary', signal: { id: 'S1', title: 'Ohio DC', account_name: 'Acme Logistics', source_kind: 'evidence_record', source_type: 'public_secondary', evidence_url: null, evidence_text: 'Acme Logistics opened a distribution center in Columbus, Ohio in August 2026.', external_ok: true, observed_at: new Date('2026-08-20T00:00:00Z'), metadata: { verified: 'excerpt_found_at_source' }, freshness_expires_at: FUTURE_A } }],
+      }),
+    );
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
+    const out = await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps);
     expect(out).toEqual({ ok: true, from: 'review_required', to: 'approved', effects: ['set_reviewed'] });
+  });
+
+  it('T6: a keyword-only 10-Q mention cannot be approved', async () => {
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue(
+      row({
+        status: 'review_required',
+        observation: 'PEP 10-Q (2026-07-09) mentions: capital expenditure [S:S1].',
+        signals: [{ signal_id: 'S1', role: 'primary', signal: { id: 'S1', title: 'PEP 10-Q (2026-07-09) mentions: capital expenditure', account_name: 'Acme Logistics', source_kind: 'pounce_trigger', source_type: 'public_secondary', evidence_url: 'https://www.sec.gov/x', evidence_text: null, external_ok: null, observed_at: new Date('2026-07-09T00:00:00Z'), metadata: null, freshness_expires_at: FUTURE_A } }],
+      }),
+    );
+    prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('review_required'));
+    expect(await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps)).toEqual({ ok: false, reason: 'evidence_insufficient' });
   });
 
   it('activate sets activated_at and expires_at to the earliest signal expiry', async () => {

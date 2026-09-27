@@ -331,7 +331,7 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
             {terminal ? <Badge variant="outline">Closed</Badge> : null}
           </div>
           <SheetDescription>
-            {hypothesis.problem_family.replace(/_/g, ' ')} for {hypothesis.persona.replace(/_/g, ' ')}. Confidence {hypothesis.confidence}%.
+            {hypothesis.problem_family.replace(/_/g, ' ')} for {hypothesis.persona.replace(/_/g, ' ')}.
             {hypothesis.updated_at ? ` Updated ${formatWhen(hypothesis.updated_at)}.` : ''}
           </SheetDescription>
         </SheetHeader>

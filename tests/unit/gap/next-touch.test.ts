@@ -11,10 +11,10 @@ declare global {
 
 import { computeNextTouch, dueAfter, recipientReplied } from '@/lib/gap/execution/next-touch';
 import { DRAFTED, DRAFT_SENT } from '@/lib/gap/execution/draft-ledger';
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
-import { findManyFrom } from './fixtures/where';
+import { LEGACY_HC } from './fixtures/legacy-hc';
+import { findFirstFrom, findManyFrom } from './fixtures/where';
 
-const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
+const HC = LEGACY_HC; // four steps: the multi-touch mechanics (seeds are single-touch since red team T7)
 const SENT_AT = new Date('2026-09-24T15:00:00.000Z'); // Thursday
 
 function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
@@ -23,8 +23,12 @@ function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
     audit.push({ id: `d${step}`, kind: DRAFTED, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(SENT_AT.getTime() - 3_600_000 + step), payload: { gmailDraftId: `r${step}`, stepIndex: step, recipient: 'joey.maggard@kroger.com', personaId: 1886, sequenceVersionId: 'v1', subject: step === 0 ? 'Doors versus spots' : 'Re: Doors versus spots', bodySnapshot: `body ${step}`, senderIdentity: 'casey@yardflow.ai', createdAt: SENT_AT.toISOString() } });
     audit.push({ id: `s${step}`, kind: DRAFT_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(SENT_AT.getTime() + step), payload: { gmailDraftId: `r${step}`, gmailSentMessageId: `m${step}`, gmailThreadId: 't1', sentAt: new Date(SENT_AT.getTime() + step * 86_400_000 * 5).toISOString() } });
   }
+  if (extra.blocked) {
+    // Release C re-review S4: a policy DSN recorded for this recipient after the first send.
+    audit.push({ id: 'blk', kind: 'mailbox.delivery_blocked', subject_type: 'recipient', subject_id: 'joey.maggard@kroger.com', created_at: new Date(SENT_AT.getTime() + 3_600_000), payload: { status: '5.7.1' } });
+  }
   return {
-    gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(audit, args)) },
+    gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(audit, args)), findFirst: vi.fn(async (args: any) => findFirstFrom(audit, args)) },
     routingDecision: {
       findUnique: vi.fn(async ({ where }: any) => (where.id === 'dec-1' ? { id: 'dec-1', persona_id: 1886 } : null)),
       findMany: vi.fn(async (args: any) => findManyFrom([{ id: 'dec-1', persona_id: 1886 }], args)),
@@ -81,6 +85,7 @@ describe('computeNextTouch', () => {
     [{ unsub: true }, 'unsubscribed'],
     [{ disposition: 'problem_rejected' }, 'replied'],
     [{ inbound: 'Re: Doors versus spots' }, 'replied'],
+    [{ blocked: true }, 'delivery_blocked'],
   ])('stop rule %j -> %s (no further draft is prepared)', async (extra, reason) => {
     expect(await computeNextTouch(ledger([0], extra), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason });
   });
@@ -154,5 +159,33 @@ describe('SEND FROM YARDFLOW anchors the multi-touch loop', async () => {
   });
   it('a buyer reply stops the remaining touches', async () => {
     expect(await computeNextTouch(withDirect({ inbound: 'Re: Doors versus spots' }), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason: 'replied' });
+  });
+});
+
+describe('T9: a reply from someone else at the account stops the sequence', () => {
+  it('a colleague writing into the GAP thread (not our mailbox, not auto) stops it', async () => {
+    const p = ledger([0]);
+    const thread = [{ id: 'x', labelIds: ['INBOX'], internalDate: new Date('2026-09-26T10:00:00Z'), to: 'casey@yardflow.ai', from: 'Pat Lee <pat.lee@kroger.com>', subject: 'Re: Doors versus spots' }];
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: async () => thread });
+    expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
+    expect(t.state === 'stopped' && t.detail).toContain('pat.lee@kroger.com');
+  });
+
+  it('our own mailbox and a bounce notice in the thread do not stop it', async () => {
+    const p = ledger([0]);
+    const thread = [
+      { id: 'o', labelIds: ['INBOX'], internalDate: new Date('2026-09-26T10:00:00Z'), to: 'x', from: 'Casey Larkin <casey@yardflow.ai>', subject: 'fwd' },
+      { id: 'd', labelIds: ['INBOX'], internalDate: new Date('2026-09-26T11:00:00Z'), to: 'x', from: 'Mail Delivery Subsystem <mailer-daemon@googlemail.com>', subject: 'Delivery Status Notification (Failure)' },
+    ];
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: async () => thread });
+    expect(t).toMatchObject({ state: 'waiting' });
+  });
+
+  it('a stored human reply from the account domain after the first send stops it; a consumer domain never does', async () => {
+    const p: any = ledger([0]);
+    p.inboundMessage.findFirst = vi.fn(async ({ where }: any) => (where.from_email.endsWith === '@kroger.com' ? { subject: 'Saw your note to Joey', from_email: 'pat.lee@kroger.com' } : null));
+    const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
+    expect(t.state === 'stopped' && t.detail).toContain('kroger.com');
   });
 });

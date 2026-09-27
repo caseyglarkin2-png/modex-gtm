@@ -19,6 +19,8 @@ import { audit, type GapAuditKind } from '../gap/audit';
 import { validateClaimsUsed } from '../gap/claims/validate-claims';
 import { compile, type CompileDeps } from '../gap/compiler/compile';
 import { makeCriticClient, type CriticClient } from '../gap/critic-client';
+import { sendableEvidence } from '../gap/research/evidence-gate';
+import { seedCopyOutdated } from '../gap/sequences/seed-drift';
 
 /** GAP OS (S3-T5): the deterministic idempotency key the schema comment on
  *  DraftQueueItem promises (`owner:to_email:run:step`). Used under the flag
@@ -61,12 +63,16 @@ export interface ScheduleOptions {
 
 interface RunContext {
   hypothesisId: string | null;
+  /** The hypothesis's account, which the T6 evidence gate matches each fact against. */
+  accountName: string;
   observation: string | null;
   problemHypothesis: string;
   problemFamily: string;
   signals: EvidenceSignalRow[];
   /** The pinned version's raw steps (steps.v2), read with the enrollment so no second version read is needed. */
   versionSteps: unknown;
+  /** The pinned version's family, for the retired-seed-copy guard. */
+  versionFamily: { name: string | null; program: string | null } | null;
 }
 
 /** The run's enrollment and its hypothesis (observation, linked signals) for the slot render and the per-item compile. Flag-on only. */
@@ -76,9 +82,10 @@ async function loadRunContext(prisma: any, runId: string | null | undefined): Pr
     where: { id: runId },
     select: {
       hypothesis_id: true,
-      version: { select: { steps: true } },
+      version: { select: { steps: true, family: { select: { name: true, program: true } } } },
       hypothesis: {
         select: {
+          account_name: true,
           observation: true,
           problem_hypothesis: true,
           problem_family: true,
@@ -92,11 +99,13 @@ async function loadRunContext(prisma: any, runId: string | null | undefined): Pr
   const links: Array<{ signal: EvidenceSignalRow | null }> = Array.isArray(h?.signals) ? h.signals : [];
   return {
     hypothesisId: typeof row.hypothesis_id === 'string' ? row.hypothesis_id : null,
+    accountName: typeof h?.account_name === 'string' ? h.account_name : '',
     observation: typeof h?.observation === 'string' ? h.observation : null,
     problemHypothesis: typeof h?.problem_hypothesis === 'string' ? h.problem_hypothesis : '',
     problemFamily: typeof h?.problem_family === 'string' ? h.problem_family : 'unmapped',
     signals: links.map((l) => l.signal).filter((x): x is EvidenceSignalRow => !!x),
     versionSteps: row.version?.steps ?? null,
+    versionFamily: row.version?.family ?? null,
   };
 }
 
@@ -255,6 +264,36 @@ export async function scheduleNextStep(prisma: any, item: any, opts: ScheduleOpt
   }
   if (gapEnabled) {
     run = await loadRunContext(prisma, item.sequence_run_id);
+    // Red team T6 (Release C review): a GAP run whose hypothesis no longer
+    // rests on a live outreach fact schedules nothing, the same way the send
+    // gate refuses. Keyword hits and unverified quotes never reach a later step.
+    if (run?.hypothesisId) {
+      const at = (opts.now ?? (() => new Date()))().getTime();
+      const live = run.signals.filter((s) => !s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > at);
+      if (sendableEvidence(run.observation, live, run.accountName || String(item.account_name ?? '')).tier !== 'VERIFIED_FACT') {
+        await audit(prisma, {
+          kind: SCHEDULE_SKIPPED_KIND,
+          actor: RUNTIME_ACTOR,
+          subjectType: 'draft_queue_item',
+          subjectId: String(item.id),
+          payload: { reason: 'evidence_insufficient', hypothesisId: run.hypothesisId, runId: item.sequence_run_id ?? null, stepIndex: item.step_index, toEmail: item.to_email },
+        });
+        return null;
+      }
+    }
+    // Release C re-review S5: a run pinned to a seed version still carrying the
+    // retired fixture copy schedules nothing (the same rule as the send gate
+    // and enrollment); frozen versions are never rewritten in place.
+    if (run && run.versionSteps !== null && seedCopyOutdated({ steps: run.versionSteps, family: run.versionFamily })) {
+      await audit(prisma, {
+        kind: SCHEDULE_SKIPPED_KIND,
+        actor: RUNTIME_ACTOR,
+        subjectType: 'draft_queue_item',
+        subjectId: String(item.id),
+        payload: { reason: 'copy_version_outdated', runId: item.sequence_run_id ?? null, stepIndex: item.step_index, toEmail: item.to_email },
+      });
+      return null;
+    }
     const rendered = renderStepCopy(
       { subject, body },
       { firstName: firstNameOf(await personaNameFor(prisma, item)), account: String(item.account_name ?? ''), observation: run?.observation ?? null },

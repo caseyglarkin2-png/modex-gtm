@@ -6,10 +6,10 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-sprint4.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-e2e4-1790474192374
+- Run tag: gap-e2e4-1790484967054
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 1bf8ea34
-- Ran at: 2026-09-27T01:56:33.185Z
+- Git: fae9fade
+- Ran at: 2026-09-27T04:56:08.072Z
 - Credentials scrubbed from the process before the first import: HUBSPOT_ACCESS_TOKEN,MC_API_TOKEN,GOOGLE_REFRESH_TOKEN,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,CLAWD_CONTROL_PLANE_URL,CLAWD_CONTROL_PLANE_TOKEN
 - No HubSpot, clawd, Gmail or model call is possible in this run: the AI client is a stub, the critic is a stub, the autonomy reader is a stub, the cross-plane suppression reader is a static CLEAR, the disposition mirror answers skipped:gap_mirror_disabled before any call (GAP_HUBSPOT_MIRROR_ENABLED off), recordUnsubscribe finds no HubSpot token, the review-feed poster has no token.
 - The human actor of every disposition is the session email the route would derive; the agent row is written with actorKind agent as a header-token caller would be.
@@ -18,38 +18,38 @@ Written by `scripts/gap/e2e-sprint4.ts`. Rerun it against the scratch database t
 ## Steps
 
 - PASS preflight: flags on (classification on, auto-enroll off, mirror off), credentials scrubbed, 4 seed families present, no stale rows
-- PASS 1 seed: account, personas 26/27/28 at example.com, facts cmuj63sr (operator) + cmuj63sr (public url), hypotheses cmuj63sr/cmuj63st/cmuj63su active citing both facts, family cmuj63su v1 compiled pass (4 steps x 3 hypotheses, stub critic), three live modex enrollments each with a step-0 draft item
-- PASS 2 ingest: enrollment c4774486 paused with the reply_pending marker (inbound gap-e2e4-1790474192374-msg-1), step-0 item skipped sequence_stopped:replied, 1 reply.ingested audit row; second ingest already_paused with no second row; the other two runs still active
-- PASS 3 list: reply gap-e2e4-1790474192374-msg-1 listed: source inbound_message/gap-e2e4-1790474192374-msg-1, persona 26, hypothesis cmuj63sr (network_standardization), enrollment paused, no suggestion, snippet is the plain text with no tag
-- PASS 4 suggest: unconfirmed ai row cmuj63t4 (created_by ai, problem_confirmed, quote verbatim) with the hypothesis still active, the enrollment still paused, no unsubscribe row, no resolution, no BID, and routing inputs still show the reply undispositioned with no lastDisposition; second call idempotent (1 model call); a quote not in the text -> null, quote_not_found:0, reply.suggest_rejected audited, no row
-- PASS 5 disposition: ai row cmuj63t4 became the human's row (confirmed_by casey@freightroll.com, metadata.aiSuggestion matched=true), 2 BIDs confirmed, enrollment stopped (replied), hypothesis cmuj63sr confirmed at 85 (60 email + 15 quote + 10 root cause) citing both BID ids, mirror skipped:gap_mirror_disabled with no mirror row; audit kinds disposition=[reply.suggested, disposition.recorded, disposition.effects], hypothesis has one hypothesis.resolved, enrollment has one enrollment.pause + one enrollment.stop + one enroll.live; resubmit on the resolved hypothesis -> hypothesis_terminal, same source on an active hypothesis -> duplicate_source (existingId); the reply left the undispositioned list, state=all carries dispositionId, and routing inputs now read the reply as dispositioned with lastDisposition problem_confirmed
-- PASS 6 db truth: GAP_DISPOSITION_FROZEN refuses response_class, metadata and a confirmation revert on the confirmed row; GAP_BID_IMMUTABLE refuses a BID delete and a raw-language edit; correctBid inserted cmuj63t7 superseding cmuj63t5 (original untouched), selectConfirmedBids drops the old row and keeps the new plus the root cause; a second correction is already_superseded
-- PASS 7 voicemail: voicemail on marcus+gap-e2e4-1790474192374@example.com recorded confirmed (row cmuj63t7) with no stop, no resolution, no unsubscribe: enrollment 43898ace still active, its draft item still draft, hypothesis still active; the table says keepsSequence; voicemail on channel email is refused call_only_class
-- PASS 8 timing: timing on marcus+gap-e2e4-1790474192374@example.com confirmed with metadata.resumeAt 2026-11-02T14:00:00.000Z; hypothesis cmuj63st still active with no resolution; the run stopped (replied); assembleRoutingInputs for persona 27 reads comms.lastDisposition = timing with that resumeAt
-- PASS 9 dnc: do_not_contact on dana+gap-e2e4-1790474192374@example.com: UnsubscribedEmail row (reason "do_not_contact disposition"), Persona.do_not_contact true (the other two false), run 0626ceb3 stopped (dnc) with its item skipped sequence_stopped:dnc, mirror skipped:gap_mirror_disabled, hypothesis untouched; a shadow enrollFromDecision is refused suppressed on leg unsubscribed (the first leg that hits; the persona flag alone is the modex_do_not_contact leg) and audited enroll.refused
-- PASS 10 brief: brief for persona 26: FACT block observation cites both facts and the signals list carries both (one with the public url), the confirmed disposition with the buyer's words is the only disposition, zero open BIDs (all confirmed or superseded), the falsification question is the suggested question; the dnc persona's brief says doNotContact
-- PASS 11 agent row: agent (cron) problem_rejected on marcus+gap-e2e4-1790474192374@example.com stored unconfirmed with effects none and only disposition.recorded audited; hypothesis cmuj63st still active with no resolution; a human adopting it through aiSuggestionId SUCCEEDS (B1+B2: created_by stays cron, confirmed_by becomes casey@freightroll.com, hypothesis resolves rejected); an agent passing aiSuggestionId is refused agent_cannot_confirm; resubmitting on the now-resolved hypothesis is refused hypothesis_terminal
+- PASS 1 seed: account, personas 118/119/120 at example.com, verified facts cmujciqk (quoted) + cmujciqk (linked support), hypotheses cmujciqk/cmujciqo/cmujciqo active quoting one fact with the other linked, family cmujciqp v1 compiled pass (1 steps x 3 hypotheses, stub critic), three live modex enrollments each with a step-0 draft item
+- PASS 2 ingest: enrollment 3e9cd478 paused with the reply_pending marker (inbound gap-e2e4-1790484967054-msg-1), step-0 item skipped sequence_stopped:replied, 1 reply.ingested audit row; second ingest already_paused with no second row; the other two runs still active
+- PASS 3 list: reply gap-e2e4-1790484967054-msg-1 listed: source inbound_message/gap-e2e4-1790484967054-msg-1, persona 118, hypothesis cmujciqk (network_standardization), enrollment paused, no suggestion, snippet is the plain text with no tag
+- PASS 4 suggest: unconfirmed ai row cmujciqz (created_by ai, problem_confirmed, quote verbatim) with the hypothesis still active, the enrollment still paused, no unsubscribe row, no resolution, no BID, and routing inputs still show the reply undispositioned with no lastDisposition; second call idempotent (1 model call); a quote not in the text -> null, quote_not_found:0, reply.suggest_rejected audited, no row
+- PASS 5 disposition: ai row cmujciqz became the human's row (confirmed_by casey@freightroll.com, metadata.aiSuggestion matched=true), 2 BIDs confirmed, enrollment stopped (replied), hypothesis cmujciqk confirmed at 85 (60 email + 15 quote + 10 root cause) citing both BID ids, mirror skipped:gap_mirror_disabled with no mirror row; audit kinds disposition=[reply.suggested, disposition.recorded, disposition.effects], hypothesis has one hypothesis.resolved, enrollment has one enrollment.pause + one enrollment.stop + one enroll.live; resubmit on the resolved hypothesis -> hypothesis_terminal, same source on an active hypothesis -> duplicate_source (existingId); the reply left the undispositioned list, state=all carries dispositionId, and routing inputs now read the reply as dispositioned with lastDisposition problem_confirmed
+- PASS 6 db truth: GAP_DISPOSITION_FROZEN refuses response_class, metadata and a confirmation revert on the confirmed row; GAP_BID_IMMUTABLE refuses a BID delete and a raw-language edit; correctBid inserted cmujcir4 superseding cmujcir1 (original untouched), selectConfirmedBids drops the old row and keeps the new plus the root cause; a second correction is already_superseded
+- PASS 7 voicemail: voicemail on marcus+gap-e2e4-1790484967054@example.com recorded confirmed (row cmujcir4) with no stop, no resolution, no unsubscribe: enrollment 48d8dd75 still active, its draft item still draft, hypothesis still active; the table says keepsSequence; voicemail on channel email is refused call_only_class
+- PASS 8 timing: timing on marcus+gap-e2e4-1790484967054@example.com confirmed with metadata.resumeAt 2026-11-02T14:00:00.000Z; hypothesis cmujciqo still active with no resolution; the run stopped (replied); assembleRoutingInputs for persona 119 reads comms.lastDisposition = timing with that resumeAt
+- PASS 9 dnc: do_not_contact on dana+gap-e2e4-1790484967054@example.com: UnsubscribedEmail row (reason "do_not_contact disposition"), Persona.do_not_contact true (the other two false), run 71a37892 stopped (dnc) with its item skipped sequence_stopped:dnc, mirror skipped:gap_mirror_disabled, hypothesis untouched; a shadow enrollFromDecision is refused suppressed on leg unsubscribed (the first leg that hits; the persona flag alone is the modex_do_not_contact leg) and audited enroll.refused
+- PASS 10 brief: brief for persona 118: FACT block observation quotes one fact and the signals list carries both (one with the public url), the confirmed disposition with the buyer's words is the only disposition, zero open BIDs (all confirmed or superseded), the falsification question is the suggested question; the dnc persona's brief says doNotContact
+- PASS 11 agent row: agent (cron) problem_rejected on marcus+gap-e2e4-1790484967054@example.com stored unconfirmed with effects none and only disposition.recorded audited; hypothesis cmujciqo still active with no resolution; a human adopting it through aiSuggestionId SUCCEEDS (B1+B2: created_by stays cron, confirmed_by becomes casey@freightroll.com, hypothesis resolves rejected); an agent passing aiSuggestionId is refused agent_cannot_confirm; resubmitting on the now-resolved hypothesis is refused hypothesis_terminal
 - PASS 12 credentials: no credential reappeared; no HubSpot, clawd, Gmail or model call was possible
-- PASS cleanup: every row the run created was deleted ({"gap_audit_events":49,"buyer_input_data":3,"conversation_dispositions":5,"gap_hubspot_mirror":0,"unsubscribed_emails":1,"inbound_messages":2,"email_threads":2,"send_approval_requests":0,"gap_compiles":15,"hypothesis_events":14,"hypothesis_signals":6,"draft_queue_items":3,"sequence_enrollments":3,"prospecting_hypotheses":3,"prospecting_signals":2,"sequences":1,"sequence_versions":1,"sequence_families":1,"personas":3,"accounts":1}); zero leftovers across 15 tables
+- PASS cleanup: every row the run created was deleted ({"gap_audit_events":40,"buyer_input_data":3,"conversation_dispositions":5,"gap_hubspot_mirror":0,"unsubscribed_emails":1,"inbound_messages":2,"email_threads":2,"send_approval_requests":0,"gap_compiles":6,"hypothesis_events":14,"hypothesis_signals":6,"draft_queue_items":3,"sequence_enrollments":3,"prospecting_hypotheses":3,"prospecting_signals":2,"sequences":1,"sequence_versions":1,"sequence_families":1,"personas":3,"accounts":1}); zero leftovers across 15 tables
 
 ## Counts
 
 - seedFamiliesOnScratch: 4
 - hypotheses: 3
-- compilesPersisted: 15
+- compilesPersisted: 6
 - enrollments: 3
-- aiSuggestionRowId: cmuj63t4e002r7kisdrnvxv0q
-- dispositionId: cmuj63t4e002r7kisdrnvxv0q
-- confirmedBidIds: cmuj63t5i002v7kisetw1n7c1,cmuj63t5j002x7kisukcdrm1e
+- aiSuggestionRowId: cmujciqzo00207k68qskx2gco
+- dispositionId: cmujciqzo00207k68qskx2gco
+- confirmedBidIds: cmujcir1800247k68i2u05ozv,cmujcir1900267k68xr2w5llo
 - resolutionConfidence: 85
-- correctedBidId: cmuj63t7500357kistulipjf9
-- timingDispositionId: cmuj63t7e003b7kisx3dk3z3p
-- dncDispositionId: cmuj63t7t003g7kiscpdq9na2
-- agentDispositionId: cmuj63t8i003n7kisf42nmmxm
+- correctedBidId: cmujcir49002e7k68t2yf6rak
+- timingDispositionId: cmujcir4u002k7k68zr0phwux
+- dncDispositionId: cmujcir5i002p7k68eumq1azi
+- agentDispositionId: cmujcir6o002w7k68ceml0nsq
 
 ## Cleanup
 
-- Removed: {"gap_audit_events":49,"buyer_input_data":3,"conversation_dispositions":5,"gap_hubspot_mirror":0,"unsubscribed_emails":1,"inbound_messages":2,"email_threads":2,"send_approval_requests":0,"gap_compiles":15,"hypothesis_events":14,"hypothesis_signals":6,"draft_queue_items":3,"sequence_enrollments":3,"prospecting_hypotheses":3,"prospecting_signals":2,"sequences":1,"sequence_versions":1,"sequence_families":1,"personas":3,"accounts":1}
+- Removed: {"gap_audit_events":40,"buyer_input_data":3,"conversation_dispositions":5,"gap_hubspot_mirror":0,"unsubscribed_emails":1,"inbound_messages":2,"email_threads":2,"send_approval_requests":0,"gap_compiles":6,"hypothesis_events":14,"hypothesis_signals":6,"draft_queue_items":3,"sequence_enrollments":3,"prospecting_hypotheses":3,"prospecting_signals":2,"sequences":1,"sequence_versions":1,"sequence_families":1,"personas":3,"accounts":1}
 - Leftovers after cleanup: {"accounts":0,"personas":0,"prospecting_signals":0,"prospecting_hypotheses":0,"conversation_dispositions":0,"buyer_input_data":0,"unsubscribed_emails":0,"inbound_messages":0,"email_threads":0,"sequence_enrollments":0,"draft_queue_items":0,"sequences":0,"sequence_versions":0,"sequence_families":0,"gap_compiles":0}
 
 Every row the run created was deleted in the finally block (gap_audit_events, buyer_input_data, conversation_dispositions, gap_hubspot_mirror, unsubscribed_emails, inbound_messages, email_threads, send_approval_requests, gap_compiles, hypothesis_events, hypothesis_signals, draft_queue_items, sequence_enrollments, prospecting_hypotheses, prospecting_signals, sequences, sequence_versions, sequence_families, personas, accounts) and the leftover count per table was asserted zero. The four seed families were read, never frozen or changed.

@@ -2,7 +2,6 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   hubspotCompanyUrl,
   hubspotContactUrl,
-  mailtoHref,
   OUTREACH_ROUTING_ACTIONS,
   sellerActionLabel,
   telHref,
@@ -73,8 +72,14 @@ describe('telHref / mailtoHref', () => {
     expect(telHref('123')).toBeNull(); // too short to be usable
   });
 
-  it('builds a mailto: link only when an email exists', () => {
-    expect(mailtoHref('joey@kroger.example')).toBe('mailto:joey@kroger.example');
-    expect(mailtoHref(null)).toBeNull();
+  it('T8: there is no mailto builder, and no GAP surface renders a raw mailto link', async () => {
+    const mod = await import('@/lib/gap/routing/seller-action');
+    expect('mailtoHref' in mod).toBe(false);
+    const { readdirSync, readFileSync, statSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const hits: string[] = [];
+    const walk = (dir: string) => { for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) walk(p); else if (/.(ts|tsx)$/.test(f) && readFileSync(p, 'utf8').includes('mailto:')) hits.push(p); } };
+    for (const d of ['src/components/gap', 'src/app/gap', 'src/lib/gap']) walk(d);
+    expect(hits).toEqual([]);
   });
 });

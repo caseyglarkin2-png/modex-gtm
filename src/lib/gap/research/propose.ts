@@ -21,6 +21,7 @@
  * A person who does not belong to the run's account is skipped, never proposed.
  */
 import { proposeHypothesis } from '../hypothesis/service';
+import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -28,10 +29,39 @@ import { proposeHypothesis } from '../hypothesis/service';
  * a citation token placed right after each such period keeps the quote's
  * words intact (the renderer strips the tokens) and every fragment cited.
  */
-export function citedQuote(title: string, excerpt: string, signalId: string): string {
+export function citedQuote(title: string, excerpt: string, signalId: string, accountName?: string | null): string {
   const token = `[S:${signalId}]`;
   const quote = excerpt.trim().replace(/[.!?]+$/, '').replace(/([.!?])(\s)/g, `$1${token}$2`);
-  return `${title}: "${quote}" ${token}.`;
+  return `${sourceLabel(title, accountName)}: "${quote}" ${token}.`;
+}
+
+const FILING_FORM = /\b(10-Q|10-K|8-K|20-F|6-K|S-1|S-4|DEF 14A)\b/;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const CORPORATE_SUFFIX = /[\s,]+(co|corp|corporation|inc|incorporated|company|ltd|llc|plc|l\.?p)\.?$/i;
+
+function issuerName(raw: string): string {
+  const name = raw.trim().replace(CORPORATE_SUFFIX, '').replace(CORPORATE_SUFFIX, '').trim();
+  // EDGAR shouts company names ("KROGER CO"); a person would write "Kroger".
+  return name === name.toUpperCase() ? name.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : name;
+}
+
+/**
+ * Release C review SF4: an EDGAR-style title ("KROGER CO 10-Q (filed
+ * 2026-09-18)") reads like a scraper. A filing is named the way a person
+ * would say it, "From Kroger's 10-Q filed September 18"; any other title is
+ * kept as it is.
+ */
+export function sourceLabel(title: string, accountName?: string | null): string {
+  const t = title.trim();
+  const form = FILING_FORM.exec(t);
+  if (!form) return t;
+  const issuer = (accountName ?? '').trim() || issuerName(t.slice(0, form.index));
+  const possessive = /['’]s$/i.test(issuer) ? issuer : `${issuer}${/s$/i.test(issuer) ? "'" : "'s"}`;
+  const owner = issuer ? `${possessive} ` : 'the ';
+  const date = /(\d{4})-(\d{2})-(\d{2})/.exec(t);
+  const month = date ? MONTHS[Number(date[2]) - 1] : undefined;
+  const when = date && month ? ` filed ${month} ${Number(date[3])}` : '';
+  return `From ${owner}${form[1]}${when}`;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,22 +95,27 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   if (status.outcome === 'conflicting_evidence') return { ok: false, reason: 'conflicting_evidence' };
 
   const records: Array<{ id: string }> = await prisma.evidenceRecord.findMany({ where: { research_run_id: run.id }, select: { id: true } });
-  const signals: Array<{ id: string; title: string; evidence_text: string | null; observed_at: Date; freshness_expires_at: Date | null }> = records.length
+  const signals: Array<GateSignal & { id: string; title: string; evidence_text: string | null; observed_at: Date; freshness_expires_at: Date | null }> = records.length
     ? await prisma.prospectingSignal.findMany({
         where: { source_kind: 'evidence_record', source_id: { in: records.map((r) => r.id) }, account_name: run.account_name },
-        select: { id: true, title: true, evidence_text: true, observed_at: true, freshness_expires_at: true },
+        select: { ...GATE_SIGNAL_SELECT, title: true, freshness_expires_at: true },
         orderBy: { observed_at: 'desc' },
       })
     : [];
   const fresh = signals.filter((s) => !s.freshness_expires_at || s.freshness_expires_at.getTime() > input.now.getTime());
-  const quotable = fresh.filter((s) => s.evidence_text && s.evidence_text.trim().length > 0).slice(0, 2);
-  if (quotable.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
+  if (fresh.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
+  // Red team T6/T7: the observation is built only from evidence that passes
+  // the SAME gate approval applies. A verified quote that states no network
+  // change (a risk factor, a liquidity paragraph) is not a fact to open with.
+  const quotable = fresh.filter((s) => outreachFactRefusal(s, run.account_name) === null).slice(0, 2);
+  if (quotable.length === 0) return { ok: false, reason: 'no_outreach_fact' };
 
   const base = status.hypothesisId
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: status.hypothesisId } })
     : null;
-  const observation = quotable.map((s) => citedQuote(s.title, s.evidence_text!, s.id)).join(' ');
-  const newest = quotable[0].observed_at.toISOString().slice(0, 10);
+  // One fact opens the first touch (red team T6/T7); a second outreach fact
+  // stays linked as supporting evidence, never a second quote in the email.
+  const observation = citedQuote(quotable[0].title, quotable[0].evidence_text!, quotable[0].id, run.account_name);
   const problemHypothesis =
     base?.problem_hypothesis ??
     'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.';
@@ -107,10 +142,12 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
       problemHypothesis,
       rootCauseHypotheses: narrative.rootCauses,
       impactHypotheses: narrative.impacts,
-      whyNow: `Public source dated ${newest}.`,
+      // Red team T7: no auto "why now = source age" sentence and no auto
+      // confidence number. Why now is Casey's to write; confidence is unscored (0).
+      whyNow: null,
       falsificationQuestions,
       whatANoMeans: narrative.whatANoMeans,
-      confidence: Math.min(Number(base?.confidence ?? 40), 60),
+      confidence: 0,
       signalIds: quotable.map((s) => s.id),
       primarySignalId: quotable[0].id,
       sourceRef,

@@ -39,6 +39,8 @@ import {
   type EnrollFromDecisionInput,
 } from '@/lib/gap/enroll/service';
 import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
+import { SEED_PROGRAM } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 
 /** R3-10: the service reads the cross-plane contract before the target; every case injects a CLEAR reader unless it tests the read. */
 const SUPPRESSION_CLEAR = staticSuppressionReader('clear');
@@ -47,6 +49,14 @@ const CRITIC_STUB = { score: vi.fn(async () => ({ ok: true as const, verdict: 'p
 const ITEM_COMPILE_PASS = { id: 'cmp_item', verdict: 'pass', checks: [], critic: { ok: true, verdict: 'pass', score: 100, findings: [] } };
 
 const NOW = new Date('2026-09-23T15:00:00.000Z');
+/** Red team T6: an outreach fact (verified, dated, quoted, this account, a network change). Every enrollable hypothesis links one. */
+const VERIFIED_FACT = {
+  evidence_text: 'Acme Logistics opened a new distribution center in Columbus with 40 dock doors.',
+  source_kind: 'evidence_record',
+  account_name: 'Acme Logistics',
+  metadata: { verified: 'excerpt_found_at_source' },
+};
+const VERIFIED_SIGNAL = { id: 'sig_v', title: 'Acme Logistics 10-Q', evidence_url: 'https://example.com/10q', external_ok: true, observed_at: new Date('2026-09-20T00:00:00.000Z'), freshness_expires_at: null, source_type: 'public_primary', ...VERIFIED_FACT };
 const WRITE_METHODS = ['create', 'createMany', 'update', 'updateMany', 'upsert', 'delete', 'deleteMany'] as const;
 
 function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
@@ -103,7 +113,7 @@ function snapshot(overrides: Record<string, unknown> = {}) {
 }
 
 function makePrisma(
-  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[] } = {},
+  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[]; inbound?: any[]; readInbound?: string[] } = {},
 ) {
   const p = {
     // B6 (Opus adversarial review, 2026-09-24): the active-opportunity guard.
@@ -114,7 +124,10 @@ function makePrisma(
     },
     conversationDisposition: {
       findFirst: asyncSpy(async () => (opts.lastDisposition === undefined ? null : opts.lastDisposition)),
+      // Release C re-review S7: human dispositions on inbound messages clear the account-reply hold.
+      findMany: asyncSpy(async () => (opts.readInbound ?? []).map((source_id) => ({ source_id }))),
     },
+    inboundMessage: { findMany: asyncSpy(async () => opts.inbound ?? []) },
     sequenceVersion: {
       findUnique: asyncSpy(async () =>
         opts.version === undefined ? { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: STEPS } : opts.version,
@@ -125,7 +138,7 @@ function makePrisma(
     unsubscribedEmail: { findUnique: asyncSpy(async () => null) },
     prospectingHypothesis: {
       findUnique: asyncSpy(async () =>
-        opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics' } : opts.hypothesis,
+        opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics', observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_v].', signals: [{ signal: VERIFIED_SIGNAL }] } : opts.hypothesis,
       ),
     },
     persona: {
@@ -513,7 +526,7 @@ describe('enrollFromDecision guards, in order', () => {
       expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-09-01T00:00:00.000Z' }], NOW)).toBe('evidence_expired');
     });
 
-    it('the enroll service refuses evidence_expired only when deps.checkEvidenceFreshness is true, and never with the default hypothesis fixture (no signals array)', async () => {
+    it('the enroll service refuses evidence_expired only when deps.checkEvidenceFreshness is true, and never with the default hypothesis fixture (a fact with no expiry)', async () => {
       const withoutOptIn = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps());
       expect(withoutOptIn.ok).toBe(true);
 
@@ -521,7 +534,8 @@ describe('enrollFromDecision guards, in order', () => {
         id: 'H1',
         status: 'approved',
         account_name: 'Acme Logistics',
-        signals: [{ signal: { id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z' } }],
+        observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_1].',
+        signals: [{ signal: { ...VERIFIED_SIGNAL, id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z' } }],
       };
       const withOptIn = await enrollFromDecision(
         makePrisma({ hypothesis: expiredHypothesis }),
@@ -532,7 +546,7 @@ describe('enrollFromDecision guards, in order', () => {
       expect(refusedPredicates()).toContain('evidence_expired');
 
       // A fresh signal under the same opt-in still succeeds.
-      const freshHypothesis = { ...expiredHypothesis, signals: [{ signal: { id: 'sig_1', freshness_expires_at: '2026-12-01T00:00:00.000Z' } }] };
+      const freshHypothesis = { ...expiredHypothesis, signals: [{ signal: { ...VERIFIED_SIGNAL, id: 'sig_1', freshness_expires_at: '2026-12-01T00:00:00.000Z' } }] };
       const stillOk = await enrollFromDecision(makePrisma({ hypothesis: freshHypothesis }), input({ mode: 'live' }), deps({ checkEvidenceFreshness: true }));
       expect(stillOk.ok).toBe(true);
     });
@@ -624,6 +638,41 @@ describe('target resolution', () => {
     expect(r).toEqual({ ok: false, reason: 'account_mismatch' });
     expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
     expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+  });
+
+  /**
+   * Red team T6 (Release C review): enrollment is the same send decision as
+   * the action pack. A hypothesis with no live outreach fact is refused
+   * evidence_insufficient in shadow and live, before any row is written.
+   */
+  it.each([
+    ['no linked signal', []],
+    ['a keyword hit', [{ signal: { ...VERIFIED_SIGNAL, evidence_text: null, metadata: null } }]],
+    ['operator knowledge', [{ signal: { ...VERIFIED_SIGNAL, source_kind: 'operator_knowledge' } }]],
+    ['an unverified quote', [{ signal: { ...VERIFIED_SIGNAL, metadata: null } }]],
+    ['an expired fact', [{ signal: { ...VERIFIED_SIGNAL, freshness_expires_at: new Date('2026-09-01T00:00:00.000Z') } }]],
+    ['a financial-statement mention', [{ signal: { ...VERIFIED_SIGNAL, evidence_text: 'Acme Logistics recorded a $12 million impairment on its distribution centers.' } }]],
+  ])('evidence_insufficient with %s, in shadow and live; nothing written', async (_label, signals) => {
+    for (const mode of ['shadow', 'live'] as const) {
+      mockedAudit.mockClear();
+      const prisma = makePrisma({ hypothesis: { id: 'H1', status: 'approved', account_name: 'Acme Logistics', signals } });
+      const d = deps();
+      const r = await enrollFromDecision(prisma, input({ mode }), d);
+      expect(r).toEqual({ ok: false, reason: 'evidence_insufficient', detail: 'No verified, dated, quoted fact about a physical-network change at this account.' });
+      expect(refusedPredicates()).toEqual(['evidence_insufficient']);
+      expect(d.addOne).not.toHaveBeenCalled();
+      expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+      expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    }
+  });
+
+  it('Release C review B2: a seed-program version with the retired fixture copy is refused copy_version_outdated before the hypothesis read', async () => {
+    for (const mode of ['shadow', 'live'] as const) {
+      const prisma = makePrisma({ version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: LEGACY_HC.steps, family: { name: LEGACY_HC.name, program: SEED_PROGRAM } } });
+      const r = await enrollFromDecision(prisma, input({ mode }), deps());
+      expect(r).toEqual({ ok: false, reason: 'copy_version_outdated' });
+      expect(prisma.prospectingHypothesis.findUnique).not.toHaveBeenCalled();
+    }
   });
 
   it('account_mismatch control: the same account on both sides enrolls normally', async () => {
@@ -956,8 +1005,8 @@ describe('modex_queue', () => {
       createdBy: 'casey@freightroll.com',
     });
     expect(compileInput.contract).toMatchObject({
-      hypothesis: { observation: '', problemHypothesis: '', problemFamily: 'unmapped' },
-      evidence: [],
+      hypothesis: { observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_v].', problemHypothesis: '', problemFamily: 'unmapped' },
+      evidence: [{ id: 'sig_v', title: 'Acme Logistics 10-Q', url: 'https://example.com/10q', externalOk: true, fresh: true, superseded: false, firstParty: false }],
       stepCount: 2,
       claimsUsed: [],
     });
@@ -1102,7 +1151,7 @@ describe('modex_queue', () => {
             observed_at: new Date('2026-09-20T00:00:00.000Z'),
             freshness_expires_at: null,
             source_type: 'public_primary',
-            metadata: null,
+            ...VERIFIED_FACT,
           },
         },
       ],
@@ -1116,7 +1165,7 @@ describe('modex_queue', () => {
         problemFamily: 'hidden_capacity',
       },
       evidence: [
-        { id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', externalOk: true, fresh: true, superseded: false, firstParty: false },
+        { id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', excerpt: VERIFIED_FACT.evidence_text, externalOk: true, fresh: true, superseded: false, firstParty: false },
       ],
       stepCount: 2,
       claimsUsed: ['CR-001'],
@@ -1153,7 +1202,7 @@ describe('modex_queue', () => {
       observation: 'Acme posted three gate-clerk roles [S:sig_1].',
       problem_hypothesis: 'The lot is the constraint.',
       problem_family: 'hidden_capacity',
-      signals: [{ signal: { id: 'sig_1', title: 'Three gate-clerk roles posted', evidence_url: 'https://example.com/jobs', external_ok: true, observed_at: new Date('2026-09-20T00:00:00.000Z'), freshness_expires_at: null, source_type: 'public_primary', metadata: null } }],
+      signals: [{ signal: { id: 'sig_1', title: 'Three gate-clerk roles posted', evidence_url: 'https://example.com/jobs', external_ok: true, observed_at: new Date('2026-09-20T00:00:00.000Z'), freshness_expires_at: null, source_type: 'public_primary', ...VERIFIED_FACT } }],
     };
     const d = deps();
     const live = await enrollFromDecision(makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted }, hypothesis }), input({ mode: 'live' }), d);
@@ -1170,18 +1219,24 @@ describe('modex_queue', () => {
     expect((shadow as any).wouldBe.body).toBe(queued);
   });
 
-  it('R3-4: unrendered_placeholder:observation refuses shadow and live when the hypothesis has no observation, before addOne', async () => {
-    const slotted = { ...STEPS, steps: [{ ...STEPS.steps[0], templates: { subjectTemplate: 'S', bodyTemplate: 'Hi {{first_name}},\n{{observation}}\n\nCasey', hubspotTemplateId: null } }, STEPS.steps[1]] };
+  it('R3-4: unrendered_placeholder:<token> refuses shadow and live when a template token has no value, before addOne', async () => {
+    const slotted = { ...STEPS, steps: [{ ...STEPS.steps[0], templates: { subjectTemplate: 'S', bodyTemplate: 'Hi {{first_name}},\n{{observation}} {{company_size}}\n\nCasey', hubspotTemplateId: null } }, STEPS.steps[1]] };
     for (const mode of ['shadow', 'live'] as const) {
       const prisma = makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted } });
       const d = deps();
       const r = await enrollFromDecision(prisma, input({ mode }), d);
-      expect(r).toEqual({ ok: false, reason: 'unrendered_placeholder:observation' });
+      expect(r).toEqual({ ok: false, reason: 'unrendered_placeholder:company_size' });
       expect(d.addOne).not.toHaveBeenCalled();
       expect(mockedMaterialize).not.toHaveBeenCalled();
       expect(writes(prisma)).toEqual([]);
-      expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'unrendered_placeholder:observation', token: 'observation' });
+      expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'unrendered_placeholder:company_size', token: 'company_size' });
     }
+  });
+
+  it('Release C review SF1: a hypothesis with no observation cites no fact and is refused evidence_insufficient before render', async () => {
+    const prisma = makePrisma({ decision: modexDecision(), hypothesis: { id: 'H1', status: 'approved', account_name: 'Acme Logistics', observation: null, signals: [{ signal: VERIFIED_SIGNAL }] } });
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
   });
 
   it('R3-12: an exception after addOne parks the orphan as skipped gap_enroll_error:<name> and rethrows (enroll() throwing)', async () => {
@@ -1228,5 +1283,32 @@ describe('modex_queue', () => {
     });
     const r = await enrollFromDecision(prisma, input({ mode: 'shadow' }), deps());
     expect(r).toEqual({ ok: false, reason: 'step_has_no_copy:0' });
+  });
+});
+
+describe('Release C re-review S7: the account-reply hold at live enrollment', () => {
+  const colleague = { id: 'in-1', from_email: 'pat.lee@acme-logistics.com', subject: 'Re: gate roles', received_at: new Date(NOW.getTime() - 2 * 86_400_000) };
+
+  it('live enrollment is refused account_replied while a colleague reply is unread; nothing is queued', async () => {
+    const prisma = makePrisma({ inbound: [colleague] });
+    const d = deps();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), d);
+    expect(r).toMatchObject({ ok: false, reason: 'account_replied' });
+    expect(d.addOne).not.toHaveBeenCalled();
+  });
+
+  it('a human disposition on that message clears the hold', async () => {
+    const r = await enrollFromDecision(makePrisma({ inbound: [colleague], readInbound: ['in-1'] }), input({ mode: 'live' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  it('shadow writes nothing and is not held', async () => {
+    const r = await enrollFromDecision(makePrisma({ inbound: [colleague] }), input({ mode: 'shadow' }), deps());
+    expect(r.ok).toBe(true);
+  });
+
+  it('a localized out-of-office from the account does not hold anyone', async () => {
+    const r = await enrollFromDecision(makePrisma({ inbound: [{ ...colleague, subject: 'Abwesenheitsnotiz: Re: gate roles' }] }), input({ mode: 'live' }), deps());
+    expect(r.ok).toBe(true);
   });
 });

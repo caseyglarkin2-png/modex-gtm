@@ -85,7 +85,8 @@ describe('<DecisionCard>', () => {
     const hypothesis = screen.getByTestId('hypothesis-line');
     expect(hypothesis).toHaveTextContent('hidden capacity');
     expect(hypothesis).toHaveTextContent('approved');
-    expect(hypothesis).toHaveTextContent('confidence 62%');
+    // Red team T7: no auto confidence number is shown.
+    expect(hypothesis).not.toHaveTextContent(/confidence \d+%/);
   });
 
   it('falls back to the email when the persona has no display name', () => {
@@ -261,7 +262,10 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
       />,
     );
     const buttons = screen.getByTestId('contact-buttons');
-    expect(within(buttons).getByRole('link', { name: /Email/ })).toHaveAttribute('href', 'mailto:jordan@acme.example');
+    // Red team T8: no raw mailto. It bypassed suppression, the compiler, the
+    // execution ledger and CRM logging; email goes through the guarded GAP path.
+    expect(within(buttons).queryByRole('link', { name: /Email/ })).toBeNull();
+    expect(buttons.innerHTML).not.toContain('mailto:');
     expect(within(buttons).getByRole('link', { name: /Call/ })).toHaveAttribute('href', 'tel:5551234567');
     expect(within(buttons).getByRole('link', { name: /LinkedIn/ })).toHaveAttribute('href', 'https://linkedin.com/in/jordanreyes');
     expect(within(buttons).getByRole('link', { name: /HubSpot contact/ })).toHaveAttribute('href', 'https://app.hubspot.com/contacts/3819073/contact/900');
@@ -275,7 +279,6 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
       />,
     );
     const buttons = screen.getByTestId('contact-buttons');
-    expect(within(buttons).getByText('email unavailable')).toBeInTheDocument();
     expect(within(buttons).getByText('phone unavailable')).toBeInTheDocument();
     expect(within(buttons).getByText('LinkedIn unavailable')).toBeInTheDocument();
     expect(within(buttons).queryByRole('link', { name: /HubSpot contact/ })).toBeNull();

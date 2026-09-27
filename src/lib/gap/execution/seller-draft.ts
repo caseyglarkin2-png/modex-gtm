@@ -29,6 +29,9 @@
  */
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
+import { sendableEvidence } from '../research/evidence-gate';
+import { seedCopyOutdated } from '../sequences/seed-drift';
+import { accountRepliedRecently } from '../replies/account-reply';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
@@ -63,6 +66,7 @@ export type SellerDraftRefusal =
   | 'send_in_progress_or_unknown'
   | 'draft_outstanding'
   | 'recipient_unsubscribed'
+  | 'account_replied'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -72,11 +76,13 @@ export type SellerDraftRefusal =
   | 'no_hypothesis'
   | 'hypothesis_not_found'
   | 'hypothesis_not_active'
+  | 'evidence_insufficient'
   | 'persona_not_found'
   | 'no_email'
   | 'email_invalid'
   | 'persona_do_not_contact'
   | 'no_version'
+  | 'copy_version_outdated'
   | 'no_step0_copy'
   | 'unrendered_placeholder'
   | 'copy_rejected'
@@ -295,6 +301,18 @@ export async function prepareSellerEmail(
   const pack = await loadActionPack(prisma, { hypothesisId: decision.hypothesis_id, decisionId, stepIndex });
   if (!pack) return refuse(prisma, actor, decisionId, { ok: false, reason: 'hypothesis_not_found' });
   if (pack.hypothesis.status !== 'active') return refuse(prisma, actor, decisionId, { ok: false, reason: 'hypothesis_not_active', detail: pack.hypothesis.status });
+  // Red team T6: nothing is sent on a hypothesis GAP itself rates INSUFFICIENT.
+  // One live outreach fact (verified, dated, quoted, this account, a network
+  // change) or no email; a keyword hit can only send this card to research.
+  const linked = Array.isArray(pack.hypothesis.signals) ? pack.hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
+  const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => !sig.freshness_expires_at || new Date(sig.freshness_expires_at).getTime() > now.getTime());
+  if (sendableEvidence(pack.hypothesis.observation, live, pack.hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'evidence_insufficient',
+      detail: 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.',
+    });
+  }
   const persona = pack.persona;
   if (!persona || pack.personaSource !== 'decision') return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_not_found', detail: pack.personaRefused ?? undefined });
   const email = (persona.email ?? '').trim().toLowerCase();
@@ -305,6 +323,16 @@ export async function prepareSellerEmail(
   // only its mirror and can lag it (Release B review #5). Read it directly.
   const unsubscribed = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true } });
   if (unsubscribed) return refuse(prisma, actor, decisionId, { ok: false, reason: 'recipient_unsubscribed' });
+  // Release C review S5: someone at this account wrote in recently (a reply to
+  // a colleague's GAP email, an assistant, a forward). A cold first touch to
+  // another person there waits until a human has read it. A shared consumer
+  // domain says nothing about the account.
+  if (stepIndex === 0) {
+    const replied = await accountRepliedRecently(prisma, email, now);
+    if (replied) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
+    }
+  }
   if (mode === 'send') {
     const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
     if (opportunity) {
@@ -312,6 +340,10 @@ export async function prepareSellerEmail(
     }
   }
   if (!pack.version) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_version' });
+  // Release C review B2: a seed version still carrying the old fixture copy never sends.
+  if (seedCopyOutdated(pack.version)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'copy_version_outdated', detail: 'This sequence version still carries the retired seed copy. Run the seed rewrite before any email.' });
+  }
   const step0 = pack.steps[stepIndex];
   if (!pack.rendered || !step0) return refuse(prisma, actor, decisionId, { ok: false, reason: stepIndex === 0 ? 'no_step0_copy' : 'no_step_copy' });
   if (pack.rendered.unrendered) return refuse(prisma, actor, decisionId, { ok: false, reason: 'unrendered_placeholder', detail: pack.rendered.unrendered });

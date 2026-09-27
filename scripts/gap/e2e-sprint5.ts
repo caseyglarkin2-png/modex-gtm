@@ -58,7 +58,7 @@ import { recordDisposition, type RecordDispositionInput } from '../../src/lib/ga
 import { gapFlag } from '../../src/lib/gap/flags';
 import { getHypothesis, proposeHypothesis, transitionHypothesis } from '../../src/lib/gap/hypothesis/service';
 import { buildLearningReport } from '../../src/lib/gap/learning/query';
-import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 
 // RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
@@ -264,20 +264,38 @@ async function main(): Promise<number> {
       select: { id: true },
     });
 
-    const projected = fromOperatorKnowledge(
-      { accountName, hubspotCompanyId, personaId: p1.id, text: 'The plant manager said the Reno yard runs a manual gate log on paper.', at: now, sourceId: `${tag}:fact1`, by: 'casey' },
-      { registeredBy: ACTOR, now },
-    );
-    expectStep('1 seed', projected.ok, `fromOperatorKnowledge refused: ${projected.ok ? '' : projected.reason}`);
-    if (!projected.ok) throw new Error('unreachable');
-    const fact1 = await registerSignal(prisma, projected.signal);
-    const projected2 = fromOperatorKnowledge(
-      { accountName, hubspotCompanyId, personaId: p2.id, text: 'The controller said accessorial charges are booked to freight, not to the facility that caused them.', at: now, sourceId: `${tag}:fact2`, by: 'casey' },
-      { registeredBy: ACTOR, now },
-    );
-    expectStep('1 seed', projected2.ok, `fromOperatorKnowledge refused: ${projected2.ok ? '' : projected2.reason}`);
-    if (!projected2.ok) throw new Error('unreachable');
-    const fact2 = await registerSignal(prisma, projected2.signal);
+    // Red team T6 / Release C review SF1: a hypothesis is activated only on a
+    // cited outreach fact (verified, dated, quoted, this account, a
+    // physical-network change). Operator hearsay informs, never activates.
+    const filed = `(filed ${now.toISOString().slice(0, 10)})`;
+    const facts = {
+      [`${tag}:fact1`]: { personaId: p1.id, title: `${accountName} 10-K ${filed}`, text: `${accountName} opened a new distribution center in Reno, Nevada with 30 dock doors.` },
+      [`${tag}:fact2`]: { personaId: p2.id, title: `${accountName} 10-Q ${filed}`, text: `${accountName} will consolidate three regional distribution centers into its new Dallas facility.` },
+    };
+    const verifiedFact = (sourceId: string) =>
+      registerSignal(prisma, {
+        accountName,
+        hubspotCompanyId,
+        personaId: facts[sourceId].personaId,
+        sourceKind: 'evidence_record',
+        sourceId,
+        type: 'site_expansion',
+        title: facts[sourceId].title,
+        sourceType: 'public_primary',
+        evidenceUrl: `https://example.com/${sourceId}`,
+        evidenceText: facts[sourceId].text,
+        externalOk: true,
+        observedAt: now,
+        confidence: 80,
+        metadata: { verified: 'excerpt_found_at_source' },
+        registeredBy: ACTOR,
+      });
+    const fact1 = await verifiedFact(`${tag}:fact1`);
+    const fact2 = await verifiedFact(`${tag}:fact2`);
+    const quoteOf = (signalId: string) => {
+      const f = signalId === fact1.id ? facts[`${tag}:fact1`] : facts[`${tag}:fact2`];
+      return citedQuote(f.title, f.text, signalId, accountName);
+    };
     expectStep('1 seed', fact1.created && fact2.created, `signals not created: ${JSON.stringify({ fact1, fact2 })}`);
     pass('1 seed', `account ${accountName}, two personas, two registered signals (${fact1.id}, ${fact2.id})`);
 
@@ -288,7 +306,7 @@ async function main(): Promise<number> {
         primaryPersonaId: input.personaId,
         persona: input.persona,
         problemFamily: input.problemFamily,
-        observation: `${accountName} runs a manual process at the ${input.label} site [S:${input.signalId}].`,
+        observation: quoteOf(input.signalId),
         problemHypothesis: `My guess is the ${input.label} team cannot see the true cost of this today.`,
         rootCauseHypotheses: ['No shared standard across sites'],
         impactHypotheses: ['Costs remain hidden inside another line item'],
@@ -392,10 +410,10 @@ async function main(): Promise<number> {
     expectStep('4 learning', !!byFinance && byFinance!.funnel.precision.value === 0, `finance_procurement breakdown ${JSON.stringify(byFinance?.funnel)}`);
     pass('4 learning byPersona', 'site_ops precision 1 (confirmed); finance_procurement precision 0 (rejected)');
 
-    // fromOperatorKnowledge's projected `type` is `manual_research` (its `source_kind`, not its `type`, is `operator_knowledge`).
-    const bySignalHiddenCapacity = report.bySignalType.find((r) => r.key === 'manual_research' && r.funnel.resolutionRate.denominator >= 1);
-    expectStep('4 learning', !!bySignalHiddenCapacity, `expected a manual_research signal-type breakdown row, got ${JSON.stringify(report.bySignalType.map((r) => r.key))}`);
-    pass('4 learning bySignalType', `manual_research signal type present with n=${bySignalHiddenCapacity!.funnel.resolutionRate.n}`);
+    // Both seeded facts are verified evidence records of type site_expansion.
+    const bySignalHiddenCapacity = report.bySignalType.find((r) => r.key === 'site_expansion' && r.funnel.resolutionRate.denominator >= 1);
+    expectStep('4 learning', !!bySignalHiddenCapacity, `expected a site_expansion signal-type breakdown row, got ${JSON.stringify(report.bySignalType.map((r) => r.key))}`);
+    pass('4 learning bySignalType', `site_expansion signal type present with n=${bySignalHiddenCapacity!.funnel.resolutionRate.n}`);
 
     const dispositionCounts = new Map(report.dispositionDistribution.map((r) => [r.responseClass, r.count]));
     expectStep('4 learning', (dispositionCounts.get('problem_confirmed') ?? 0) >= 1 && (dispositionCounts.get('problem_rejected') ?? 0) >= 1, `disposition distribution ${JSON.stringify(report.dispositionDistribution)}`);

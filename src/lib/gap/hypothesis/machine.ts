@@ -22,7 +22,7 @@ import {
   isProblemFamily,
   type HypothesisStatus,
 } from '../taxonomy';
-import { validateObservation } from './observation';
+import { extractCitationIds, validateObservation } from './observation';
 
 export type { HypothesisStatus };
 
@@ -41,6 +41,12 @@ export type ResolutionOutcome = 'confirmed' | 'partially_confirmed' | 'rejected'
 export interface LinkedSignal {
   id: string;
   hasEvidence: boolean;
+  /**
+   * Red team T6: a verified, dated, quoted, account-specific statement of a
+   * physical-network change (research/evidence-gate.ts). Computed by the
+   * snapshot loader; absent reads as false. A keyword hit is never one.
+   */
+  outreachFact?: boolean;
   expiresAt: Date | null;
 }
 
@@ -142,6 +148,22 @@ function evidenceGuard(snapshot: HypothesisSnapshot, now: Date): 'no_evidence' |
   return null;
 }
 
+/**
+ * Red team T6: approval and activation need at least one LIVE outreach fact.
+ * Evidence GAP itself rates INSUFFICIENT (keyword hits, operator hearsay,
+ * unverified or irrelevant sentences) can inform research, never use.
+ */
+function outreachFactGuard(snapshot: HypothesisSnapshot, now: Date): 'evidence_insufficient' | null {
+  const live = (signal: LinkedSignal) => signal.outreachFact === true && !isExpired(signal.expiresAt, now);
+  if (!snapshot.linkedSignals.some(live)) return 'evidence_insufficient';
+  // Release C review SF1: the observation is the sentence the buyer reads.
+  // Every signal it cites must itself be a live outreach fact; a fact linked
+  // beside a cited keyword hit does not make the keyword hit citable.
+  const facts = new Set(snapshot.linkedSignals.filter(live).map((s) => s.id));
+  const cited = extractCitationIds(snapshot.observation ?? '');
+  return cited.length > 0 && cited.every((id) => facts.has(id)) ? null : 'evidence_insufficient';
+}
+
 /** Response classes that resolve a hypothesis, and the status each one resolves to. */
 export const DISPOSITION_OUTCOMES: Readonly<Record<string, ResolutionOutcome>> = {
   problem_confirmed: 'confirmed',
@@ -192,6 +214,8 @@ function activateGuard(snapshot: HypothesisSnapshot, now: Date): string | null {
   if (!nonBlank(snapshot.reviewedBy)) return 'not_reviewed';
   const evidence = evidenceGuard(snapshot, now);
   if (evidence) return evidence;
+  const fact = outreachFactGuard(snapshot, now);
+  if (fact) return fact;
   if (snapshot.primaryPersonaId === null) return 'no_persona';
   if (snapshot.personaSuppressed) return 'suppressed';
   if (snapshot.version) {
@@ -242,6 +266,8 @@ export function transition(
     if (!nonBlank(ctx.actor)) return refuse('no_actor');
     const evidence = evidenceGuard(snapshot, ctx.now);
     if (evidence) return refuse(evidence);
+    const fact = outreachFactGuard(snapshot, ctx.now);
+    if (fact) return refuse(fact);
     return move('approved', ['set_reviewed']);
   }
 

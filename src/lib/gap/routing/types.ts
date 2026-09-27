@@ -133,6 +133,12 @@ export interface RoutingCommsInput {
    * Absent only on inputs built before T3 (tests); routing reads absent as none.
    */
   gapSequence?: { state: 'none' | 'active' | 'complete' | 'stopped'; sentSteps: number; lastSentAt: Date | null };
+  /**
+   * Red team T8: human-confirmed call-only outcomes (no_answer, voicemail,
+   * gatekeeper) since the newest substantive answer. Never buyer truth; at
+   * MAX_UNANSWERED_CALLS the person is held rather than called again.
+   */
+  unansweredCalls?: number;
 }
 
 export interface RoutingFreshness {

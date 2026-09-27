@@ -238,6 +238,14 @@ describe('pollHubSpotReplies: watermark', () => {
     expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(NOW.toISOString());
   });
 
+  it('T9: a reply LOGGED late (old email time, recent record time) advances the watermark by the record time, so nothing older-but-later-logged is skipped', async () => {
+    const prisma = makePrisma();
+    const recordedAt = new Date(NOW.getTime() - 5 * 60 * 1000);
+    const late = engagement({ id: '6001', timestamp: new Date(NOW.getTime() - 10 * 24 * 60 * 60 * 1000), createdAt: recordedAt });
+    await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([late]) });
+    expect(prisma.__store.config.get(WATERMARK_KEY)).toBe(recordedAt.toISOString());
+  });
+
   it('an apply run that sees nothing leaves the watermark where it was', async () => {
     const stored = '2026-09-21T08:00:00.000Z';
     const prisma = makePrisma({ config: { [WATERMARK_KEY]: stored } });
@@ -556,6 +564,7 @@ describe('searchIncomingEmailsFromHubSpot', () => {
             id: '777',
             properties: {
               hs_timestamp: '2026-09-21T10:00:00.000Z',
+              hs_createdate: '2026-09-21T10:05:00.000Z',
               hs_email_direction: 'INCOMING_EMAIL',
               hs_email_from_email: 'Pat@Acme.example',
               hs_email_to_email: 'casey@yardflow.ai',
@@ -576,13 +585,14 @@ describe('searchIncomingEmailsFromHubSpot', () => {
       {
         filters: [
           { propertyName: 'hs_email_direction', operator: 'EQ', value: 'INCOMING_EMAIL' },
-          { propertyName: 'hs_timestamp', operator: 'GTE', value: String(since.getTime()) },
+          // Red team T9: the floor is when HubSpot RECORDED the email, not when it happened.
+          { propertyName: 'hs_createdate', operator: 'GTE', value: String(since.getTime()) },
         ],
       },
     ]);
     // R2-11: the string form leaves the direction to HubSpot's default; the
     // watermark logic needs oldest-first, so the direction is stated.
-    expect(req.sorts).toEqual([{ propertyName: 'hs_timestamp', direction: 'ASCENDING' }]);
+    expect(req.sorts).toEqual([{ propertyName: 'hs_createdate', direction: 'ASCENDING' }]);
     expect(req.limit).toBe(10);
     expect(rows).toEqual([
       {
@@ -593,6 +603,7 @@ describe('searchIncomingEmailsFromHubSpot', () => {
         text: 'yes',
         html: '<p>yes</p>',
         timestamp: new Date('2026-09-21T10:00:00.000Z'),
+        createdAt: new Date('2026-09-21T10:05:00.000Z'),
       },
     ]);
   });

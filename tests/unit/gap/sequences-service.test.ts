@@ -6,11 +6,11 @@
  */
 import { describe, expect, it, vi } from 'vitest';
 
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 import { materializeSequence, sequenceNameFor, verifyStepCompiles } from '@/lib/gap/sequences/service';
 import { toLegacySteps } from '@/lib/gap/sequence/resolve-steps';
 
-const FAM = SEED_FAMILIES[1]; // Hidden Capacity, four steps
+const FAM = LEGACY_HC; // four steps: materialize mechanics (seeds are single-touch since red team T7)
 const VERSION = { id: 'ver_1', version: 1, status: 'draft', steps: FAM.steps, family: { id: 'fam_1', name: FAM.name } };
 
 function compileRow(id: string, stepIndex: number, verdict: string, createdAt: string, versionId = 'ver_1', hypothesisId: string | null = 'H1') {

@@ -15,6 +15,7 @@ import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
 import type { RoutingAction, RoutingLane, ResponseClass } from '../taxonomy';
 import type { EnrollTarget, RoutingInputs, RoutingLastDisposition } from './types';
 import { classifySuppression, type SuppressionClassification } from '../suppression/provenance';
+import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
 
 export interface RoutingRule {
   id: string;
@@ -70,7 +71,8 @@ function withinDays(now: Date, at: Date | null | undefined, days: number): boole
 }
 
 const UNUSABLE_PHONE_STATUSES = new Set(['invalid', 'wrong', 'disconnected']);
-const BOUNCED_EMAIL_STATUSES = new Set(['bounced', 'hard_bounced']);
+// Red team T9: the one canonical set; the webhook and the GAP mailbox write 'hard_bounce'.
+const BOUNCED_EMAIL_STATUSES = HARD_BOUNCE_STATUSES;
 
 export function hasUsablePhone(i: RoutingInputs): boolean {
   const { phone, phoneStatus } = i.persona;
@@ -236,6 +238,9 @@ export function resolveEnrollTarget(i: RoutingInputs): EnrollTarget {
 // ---------------------------------------------------------------------------
 // The ordered rule table (spec section 6, R0 through R19)
 // ---------------------------------------------------------------------------
+
+/** Red team T8: unanswered calls (no answer, voicemail, gatekeeper) before the person is held. */
+export const MAX_UNANSWERED_CALLS = 3;
 
 export const RULES: RoutingRule[] = [
   {
@@ -435,7 +440,7 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: () => 'evidence_thin',
     predicate: (i) =>
-      `hypothesis ${i.hypothesis!.id} rests only on an automated keyword hit with no quoted evidence; add a sourced fact before any outreach`,
+      `hypothesis ${i.hypothesis!.id} has no verified, dated, quoted fact about a physical-network change at this account; research before any outreach`,
   },
   {
     id: 'hyp_resolved',
@@ -450,6 +455,17 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: () => 'loop_closed',
     predicate: (i) => `hypothesis ${i.hypothesis!.id} is ${i.hypothesis!.status}; learning owns the loop now`,
+  },
+  {
+    id: 'call_attempts_exhausted',
+    label: 'R13b',
+    // Red team T8: a no-answer stays retryable, but not forever. After
+    // MAX_UNANSWERED_CALLS confirmed unanswered calls the person is held.
+    when: (i) => (i.comms.unansweredCalls ?? 0) >= MAX_UNANSWERED_CALLS,
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: () => 'call_attempts_exhausted',
+    predicate: (i) => `${i.comms.unansweredCalls} calls went unanswered since the last real conversation; hold, do not call again now`,
   },
   {
     id: 'hot_call',

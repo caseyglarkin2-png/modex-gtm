@@ -51,6 +51,9 @@ import { freezeVersionForEnrollment } from '@/lib/gap/sequence/version';
 import { LIVE_ENROLLMENT_STATUSES } from '@/lib/gap/sequence/family';
 import { STOP_REASONS, type StopReason } from '@/lib/gap/taxonomy';
 import { stopRun } from '@/lib/queue/sequence-runtime';
+import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
+import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
+import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
 
 export const TERMINAL_STATUSES = ['stopped', 'completed'] as const;
 export const HYPOTHESIS_READY_STATUSES = ['approved', 'active'] as const;
@@ -81,7 +84,7 @@ export interface SuppressionOptions {
 export type SuppressionCheck = { ok: true } | { ok: false; reason: 'suppressed' | 'suppression_unknown'; leg: SuppressionLeg };
 
 /** The persona email statuses that count as bounced (the same set routing/rules.ts uses for emailUsable). */
-export const BOUNCED_EMAIL_STATUSES: ReadonlySet<string> = new Set(['bounced', 'hard_bounced']);
+export const BOUNCED_EMAIL_STATUSES: ReadonlySet<string> = HARD_BOUNCE_STATUSES;
 
 /** Pure: the first leg that fires, or null. */
 export function suppressionLegFor(input: { unsubscribed: boolean; doNotContact: boolean; emailStatus: string | null | undefined }): SuppressionLeg | null {
@@ -182,6 +185,7 @@ export type EnrollRefusal =
   | 'already_enrolled'
   | 'hypothesis_not_found'
   | 'hypothesis_not_ready'
+  | 'evidence_insufficient'
   | 'draft_item_not_found';
 
 export type EnrollResult =
@@ -213,11 +217,19 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
   if (input.hypothesisId) {
     const hyp = await prisma.prospectingHypothesis.findUnique({
       where: { id: input.hypothesisId },
-      select: { status: true },
+      select: { status: true, account_name: true, observation: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
     });
     if (!hyp) return { ok: false, reason: 'hypothesis_not_found' };
     if (!(HYPOTHESIS_READY_STATUSES as readonly string[]).includes(hyp.status)) {
       return { ok: false, reason: 'hypothesis_not_ready' };
+    }
+    // Red team T6 (Release C review): a hypothesis-bound enrollment needs a
+    // live outreach fact, the same gate as the action pack and the runtime.
+    const nowMs = Date.now();
+    const links: Array<{ signal: any }> = Array.isArray(hyp.signals) ? hyp.signals : [];
+    const live = links.map((l) => l.signal).filter((s) => s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > nowMs));
+    if (sendableEvidence(hyp.observation, live, String(hyp.account_name ?? '')).tier !== 'VERIFIED_FACT') {
+      return { ok: false, reason: 'evidence_insufficient' };
     }
   }
 

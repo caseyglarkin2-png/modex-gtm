@@ -147,7 +147,7 @@ describe('seed families: shape', () => {
     ]);
   });
 
-  it('every family parses as steps.v2 with four steps at 0/4/5/6 business days and no step-0 proof', () => {
+  it('T7: every family parses as steps.v2 with ONE honest step (the fixture follow-ups citing other companies\' sites are deleted) and no step-0 proof', () => {
     for (const fam of SEED_FAMILIES) {
       const parsed = parseSteps(fam.steps);
       expect(parsed.ok, `${fam.key}: ${parsed.ok ? '' : parsed.reason}`).toBe(true);
@@ -158,13 +158,25 @@ describe('seed families: shape', () => {
         },
       });
       expect(validated.ok, `${fam.key}: ${validated.ok ? '' : validated.reason}`).toBe(true);
-      expect(fam.steps.steps).toHaveLength(4);
-      expect(fam.steps.steps.map((s) => s.delay.value)).toEqual([...SEED_DELAYS_BUSINESS_DAYS]);
-      expect(fam.steps.steps.every((s) => s.delay.unit === 'business_days')).toBe(true);
-      expect(fam.steps.steps.map((s) => s.purpose)).toEqual(['intrigue', 'root_cause', 'value_offer', 'close_loop']);
+      expect(fam.steps.steps).toHaveLength(1);
+      expect(fam.steps.steps[0].delay).toEqual({ value: SEED_DELAYS_BUSINESS_DAYS[0], unit: 'business_days' });
+      expect(fam.steps.steps[0].purpose).toBe('intrigue');
       expect(fam.steps.steps[0].productProofAllowed).toBe(false);
-      expect(fam.evidence).toHaveLength(4);
+      expect(fam.evidence).toEqual([[]]);
       expect(stepsHash(fam.steps)).toMatch(/^[0-9a-f]{64}$/);
+    }
+  });
+
+  it('T7: no seed copy names another company\'s site or a fixture fact, cites a fixture ref, or asks a cost question at step 0', () => {
+    for (const fam of SEED_FAMILIES) {
+      for (const step of fam.steps.steps) {
+        const text = `${step.templates?.subjectTemplate ?? ''}\n${step.templates?.bodyTemplate ?? ''}`;
+        expect(text, fam.key).not.toMatch(/\b(Fontana|Columbus|Bluewater|Reno)\b/);
+        expect(text, fam.key).not.toMatch(/\byour (careers page|investor|Q2 call|integration lead|automation engineer)/i);
+        expect(text, fam.key).not.toContain('[[SRC:');
+        expect(text, fam.key).not.toMatch(/\b(cost|how many|how much|what does it)\b/i);
+        expect(text, fam.key).not.toMatch(/\bmentions:/i);
+      }
     }
   });
 

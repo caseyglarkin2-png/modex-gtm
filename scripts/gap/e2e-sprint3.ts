@@ -94,8 +94,8 @@ import { renderStepCopy, EVIDENCE_SIGNAL_SELECT } from '../../src/lib/gap/sequen
 import { createFamily } from '../../src/lib/gap/sequence/family';
 import { createVersion, updateVersionSteps } from '../../src/lib/gap/sequence/version';
 import { materializeSequence } from '../../src/lib/gap/sequences/service';
-import { SEED_PROGRAM, seedFamilyByKey, type SeedFamily } from '../../src/lib/gap/sequences/families';
-import { fromOperatorKnowledge } from '../../src/lib/gap/signals/projection';
+import { SEED_PROGRAM, type SeedFamily } from '../../src/lib/gap/sequences/families';
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep, sequenceStepIdempotencyKey } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
@@ -112,7 +112,12 @@ const REPORT_PATH = path.join('docs', 'gap', 'sprint3-e2e-latest.md');
 const SEED_EVIDENCE_FIXTURE = path.join('tests', 'fixtures', 'gap', 'seed-evidence.json');
 const COMPILE_FIXTURE_DIR = path.join('tests', 'fixtures', 'gap', 'top100-compile');
 const JOURNAL_FIXTURE_DIR = path.join('tests', 'fixtures', 'gap', 'top100-journal');
-const SEED_KEY = 'network_standardization';
+// Red team T7: production seeds are single-touch. The multi-touch runtime
+// mechanics (step 1 scheduling, cadence, the step 2 reject leg, stop) run on
+// the pre-T7 four-step Hidden Capacity seed kept as a TEST FIXTURE; its step
+// 1-3 fixture refs are handed in as contract evidence, exactly as before.
+const SEED_KEY = 'hidden_capacity';
+const LEGACY_SEED_FIXTURE = path.join('tests', 'fixtures', 'gap', 'legacy-four-step-hidden-capacity.json');
 const ACTOR = 'e2e3';
 const OWNER = 'casey@freightroll.com';
 const SCRUBBED_ENV = ['HUBSPOT_ACCESS_TOKEN', 'MC_API_TOKEN', 'GOOGLE_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'CLAWD_CONTROL_PLANE_URL', 'CLAWD_CONTROL_PLANE_TOKEN'] as const;
@@ -254,7 +259,7 @@ async function main(): Promise<number> {
 
   // Fixtures, read before any write.
   const seedEvidence = JSON.parse(readFileSync(SEED_EVIDENCE_FIXTURE, 'utf8')) as SeedEvidenceFixture;
-  const seed = seedFamilyByKey(SEED_KEY) as SeedFamily;
+  const seed = JSON.parse(readFileSync(LEGACY_SEED_FIXTURE, 'utf8')) as SeedFamily;
   const fx = seedEvidence.families[SEED_KEY];
   const laneSequence = JSON.parse(readFileSync(path.join(COMPILE_FIXTURE_DIR, 'sequences', 'acme-example-com.json'), 'utf8')) as LaneSequenceFile;
   const laneResearch = JSON.parse(readFileSync(path.join(COMPILE_FIXTURE_DIR, 'research', 'acme-example-com.json'), 'utf8')) as LaneResearchFile;
@@ -327,26 +332,46 @@ async function main(): Promise<number> {
       },
       select: { id: true },
     });
-    const projected = fromOperatorKnowledge(
-      { accountName, hubspotCompanyId, personaId: persona.id, text: 'The plant manager said the annual report lists 41 distribution centers folded in from three regional operators.', at: now, sourceId: `${tag}:fact1`, by: 'casey' },
-      { registeredBy: ACTOR, now },
-    );
-    expect('1 seed', projected.ok, `fromOperatorKnowledge refused: ${projected.ok ? '' : projected.reason}`);
-    if (!projected.ok) throw new Error('unreachable');
-    const fact1 = await registerSignal(prisma, projected.signal);
+    // Red team T6 / Release C review SF1: every signal the observation cites
+    // must be an outreach fact (verified, dated, quoted, this account, a
+    // physical-network change). Operator knowledge and an unquoted posting
+    // inform research but can never be cited in outbound copy.
+    const fact1Title = `${accountName} 10-K (filed ${now.toISOString().slice(0, 10)})`;
+    const fact1Text = `${accountName} completed its acquisition of three regional operators, adding 41 distribution centers to its network.`;
+    const fact2Title = `${accountName} 8-K (filed ${now.toISOString().slice(0, 10)})`;
+    const fact2Text = `${accountName} will open a new distribution center in Columbus, Ohio with 40 dock doors and is hiring three gate clerks there.`;
+    const fact1 = await registerSignal(prisma, {
+      accountName,
+      hubspotCompanyId,
+      personaId: persona.id,
+      sourceKind: 'evidence_record',
+      sourceId: `${tag}:fact1`,
+      type: 'acquisition',
+      title: fact1Title,
+      sourceType: 'public_primary',
+      evidenceUrl: `https://example.com/${tag}/10k`,
+      evidenceText: fact1Text,
+      externalOk: true,
+      observedAt: now,
+      confidence: 80,
+      metadata: { verified: 'excerpt_found_at_source' },
+      registeredBy: ACTOR,
+    });
     const fact2 = await registerSignal(prisma, {
       accountName,
       hubspotCompanyId,
       personaId: persona.id,
-      sourceKind: 'manual',
+      sourceKind: 'evidence_record',
       sourceId: `${tag}:url1`,
-      type: 'job_posting',
-      title: `${accountName} posts three gate-clerk roles at its Ohio distribution center`,
+      type: 'site_expansion',
+      title: fact2Title,
       sourceType: 'public_primary',
       evidenceUrl: `https://example.com/${tag}/jobs`,
+      evidenceText: fact2Text,
       externalOk: true,
       observedAt: now,
       confidence: 80,
+      metadata: { verified: 'excerpt_found_at_source' },
       registeredBy: ACTOR,
     });
     expect('1 seed', fact1.created && fact2.created, `facts not created: ${JSON.stringify({ fact1, fact2 })}`);
@@ -355,7 +380,10 @@ async function main(): Promise<number> {
       primaryPersonaId: persona.id,
       persona: seed.persona,
       problemFamily: seed.problemFamily,
-      observation: `${accountName} lists 41 distribution centers from three regional operators [S:${fact1.id}] and posts three gate-clerk roles in Ohio [S:${fact2.id}].`,
+      // The production shape (research/propose.ts citedQuote): ONE fact quoted
+      // verbatim, labeled and cited opens the first touch; the second outreach
+      // fact stays linked as supporting evidence (red team T6/T7).
+      observation: citedQuote(fact1Title, fact1Text, fact1.id, accountName),
       problemHypothesis: 'My guess is each acquired site still runs its own gate process, so the network cannot see its yards the same way from one site to the next.',
       rootCauseHypotheses: ['No shared gate standard across the acquired sites'],
       impactHypotheses: ['Detention and clerk headcount rise site by site'],
@@ -364,7 +392,7 @@ async function main(): Promise<number> {
       whatANoMeans: 'The family is wrong for this account.',
       confidence: 60,
       signalIds: [fact1.id, fact2.id],
-      primarySignalId: fact2.id,
+      primarySignalId: fact1.id,
       createdBy: ACTOR,
     });
     expect('1 seed', proposed.ok, `proposeHypothesis refused: ${JSON.stringify(proposed)}`);
@@ -380,8 +408,8 @@ async function main(): Promise<number> {
     const hypRow = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesisId }, select: { observation: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } } });
     observation = hypRow?.observation ?? '';
     realRefs = evidenceRefsFromSignals((hypRow?.signals ?? []).map((l) => l.signal), now);
-    expect('1 seed', observation.includes(`[S:${fact1.id}]`) && observation.includes(`[S:${fact2.id}]`) && realRefs.length === 2 && realRefs.every((r) => r.fresh), `observation "${observation.slice(0, 80)}" refs ${JSON.stringify(realRefs.map((r) => [r.id, r.fresh, r.externalOk, r.firstParty]))}`);
-    pass('1 seed', `account, persona ${persona.id} (${personaEmail}), facts ${fact1.id} (operator) + ${fact2.id} (public url), hypothesis ${hypothesisId} active (${seed.problemFamily} / ${seed.persona}), observation cites both facts with [S:id] tokens`);
+    expect('1 seed', observation.includes(`[S:${fact1.id}]`) && !observation.includes(`[S:${fact2.id}]`) && realRefs.length === 2 && realRefs.every((r) => r.fresh), `observation "${observation.slice(0, 80)}" refs ${JSON.stringify(realRefs.map((r) => [r.id, r.fresh, r.externalOk, r.firstParty]))}`);
+    pass('1 seed', `account, persona ${persona.id} (${personaEmail}), verified facts ${fact1.id} (10-K acquisition) + ${fact2.id} (new Ohio DC), hypothesis ${hypothesisId} active (${seed.problemFamily} / ${seed.persona}), observation quotes fact ${fact1.id.slice(0, 8)} verbatim and cites it; ${fact2.id.slice(0, 8)} is linked support`);
 
     // 2. Family and version from the seed, then the twin refusal.
     const family = await createFamily(prisma, {
@@ -410,7 +438,7 @@ async function main(): Promise<number> {
     const storedStep0 = seed.steps.steps[0].templates?.bodyTemplate ?? '';
     expect('3 compile', storedStep0.includes('{{observation}}') && !storedStep0.includes('[[SRC:'), `stored step 0 should carry the slot and no marker: ${storedStep0.slice(0, 120)}`);
     const marked0 = stepCopy(0).body;
-    expect('3 compile', marked0.includes(`[[SRC:${fact1.id}]]`) && marked0.includes(`[[SRC:${fact2.id}]]`) && !marked0.includes('{{observation}}'), `rendered step 0 should carry the fact markers: ${marked0.slice(0, 200)}`);
+    expect('3 compile', marked0.includes(`[[SRC:${fact1.id}]]`) && !marked0.includes('{{observation}}'), `rendered step 0 should carry the fact markers: ${marked0.slice(0, 200)}`);
     const versionCompileIds: string[] = [];
     const priorBodies: string[] = [];
     let versionCheckCount = 0;
@@ -430,7 +458,7 @@ async function main(): Promise<number> {
     expect('3 compile', persisted === stepCount, `${persisted} pass rows persisted for version ${v1.id}, expected ${stepCount}`);
     counts.versionStepsCompiled = stepCount;
     counts.versionChecksRun = versionCheckCount;
-    pass('3 compile', `${stepCount} steps pass through ${versionCheckCount} checks with the stub critic (step 0 = slot render citing facts ${fact1.id.slice(0, 8)} and ${fact2.id.slice(0, 8)}), ${persisted} GapCompile rows persisted (${versionCompileIds.map((id) => id.slice(0, 8)).join(', ')})`);
+    pass('3 compile', `${stepCount} steps pass through ${versionCheckCount} checks with the stub critic (step 0 = slot render quoting fact ${fact1.id.slice(0, 8)}), ${persisted} GapCompile rows persisted (${versionCompileIds.map((id) => id.slice(0, 8)).join(', ')})`);
 
     // 4. A meeting ask at step 0 is rejected by C09.
     const step0 = stepCopy(0);
@@ -462,8 +490,11 @@ async function main(): Promise<number> {
     // 6. materializeSequence: refused, created, idempotent.
     const noIds = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: [] }, ACTOR);
     expect('6 materialize', !noIds.ok && noIds.reason === 'no_compile_ids', `materialize with no ids -> ${JSON.stringify(noIds)}`);
-    const partial = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds.slice(0, 2) }, ACTOR);
-    expect('6 materialize', !partial.ok && partial.reason === 'step_not_compiled:2', `materialize with 2 of ${stepCount} ids -> ${JSON.stringify(partial)}, expected step_not_compiled:2`);
+    // Seeds are single-touch since red team T7: a partial set is only possible with more than one step.
+    if (stepCount > 1) {
+      const partial = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds.slice(0, stepCount - 1) }, ACTOR);
+      expect('6 materialize', !partial.ok && partial.reason === `step_not_compiled:${stepCount - 1}`, `materialize with ${stepCount - 1} of ${stepCount} ids -> ${JSON.stringify(partial)}`);
+    }
     // R3-3: the same rows are refused for another hypothesis.
     const wrongHyp = await materializeSequence(prisma, { versionId: v1.id, hypothesisId: `${hypothesisId}-other`, compileIds: versionCompileIds }, ACTOR);
     expect('6 materialize', !wrongHyp.ok && wrongHyp.reason === `compile_wrong_hypothesis:${versionCompileIds[0]}`, `materialize for another hypothesis -> ${JSON.stringify(wrongHyp)}, expected compile_wrong_hypothesis:${versionCompileIds[0]}`);
@@ -474,12 +505,12 @@ async function main(): Promise<number> {
     const mat2 = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
     expect('6 materialize', mat2.ok && mat2.existing && mat2.sequenceId === mat1.sequenceId, `second materialize -> ${JSON.stringify(mat2)}`);
     // S11: a same-named Sequence whose steps drifted is a collision, never reused.
-    await prisma.sequence.update({ where: { id: mat1.sequenceId }, data: { steps: mat1.steps.map((s, i) => (i === 1 ? { ...s, delayDays: 9 } : s)) as object[] } });
+    await prisma.sequence.update({ where: { id: mat1.sequenceId }, data: { steps: mat1.steps.map((s, i) => (i === mat1.steps.length - 1 ? { ...s, delayDays: 9 } : s)) as object[] } });
     const collision = await materializeSequence(prisma, { versionId: v1.id, hypothesisId, compileIds: versionCompileIds }, ACTOR, { owner: OWNER, now: () => now });
     expect('6 materialize', !collision.ok && collision.reason === 'sequence_name_collision', `materialize over drifted steps -> ${JSON.stringify(collision)}, expected sequence_name_collision`);
     await prisma.sequence.update({ where: { id: mat1.sequenceId }, data: { steps: mat1.steps as object[] } });
     counts.sequenceId = mat1.sequenceId;
-    pass('6 materialize', `no_compile_ids, step_not_compiled:2, compile_wrong_hypothesis for another hypothesis, then Sequence ${mat1.sequenceId} "${mat1.name}" with ${mat1.steps.length} steps, second call existing, drifted steps under the same name refused sequence_name_collision`);
+    pass('6 materialize', `no_compile_ids, ${stepCount > 1 ? `step_not_compiled:${stepCount - 1}, ` : 'no partial set (single-touch seed), '}compile_wrong_hypothesis for another hypothesis, then Sequence ${mat1.sequenceId} "${mat1.name}" with ${mat1.steps.length} steps, second call existing, drifted steps under the same name refused sequence_name_collision`);
 
     // 7. enrollFromDecision shadow: zero writes.
     const tableCounts = async () => ({
@@ -498,7 +529,7 @@ async function main(): Promise<number> {
     expect('7 shadow', shadow.ok && shadow.kind === 'modex_shadow' && shadow.target === 'modex_queue', `shadow -> ${JSON.stringify(shadow).slice(0, 300)}`);
     if (!shadow.ok || shadow.kind !== 'modex_shadow') throw new Error('unreachable');
     expect('7 shadow', shadow.wouldBe.toEmail === personaEmail && shadow.wouldBe.body.startsWith('Hi Priya,') && !shadow.wouldBe.body.includes('{{'), `would-be item ${JSON.stringify({ to: shadow.wouldBe.toEmail, subject: shadow.wouldBe.subject, head: shadow.wouldBe.body.slice(0, 40) })}`);
-    expect('7 shadow', !shadow.wouldBe.body.includes('[[') && !shadow.wouldBe.body.includes('[S:') && shadow.wouldBe.body.includes('lists 41 distribution centers from three regional operators and posts three gate-clerk roles in Ohio.'), `would-be body should carry the observation stripped of markers: ${shadow.wouldBe.body.slice(0, 260)}`);
+    expect('7 shadow', !shadow.wouldBe.body.includes('[[') && !shadow.wouldBe.body.includes('[S:') && shadow.wouldBe.body.includes('adding 41 distribution centers to its network'), `would-be body should carry the observation stripped of markers: ${shadow.wouldBe.body.slice(0, 260)}`);
     expect('7 shadow', JSON.stringify(before) === JSON.stringify(afterShadow), `shadow wrote rows: before ${JSON.stringify(before)} after ${JSON.stringify(afterShadow)}`);
     const shadowAudit = await prisma.gapAuditEvent.count({ where: { kind: 'enroll.shadow', actor: ACTOR, subject_id: hypothesisId, created_at: { gte: runStart } } });
     expect('7 shadow', shadowAudit === 1, `${shadowAudit} enroll.shadow audit rows, expected 1`);
@@ -530,8 +561,8 @@ async function main(): Promise<number> {
     // R3-4: the compiler judged the MARKED copy; the queue holds the STRIPPED copy.
     const judgedBody = String((itemCompile!.inputs_snapshot as { body?: unknown } | null)?.body ?? '');
     const usedIds = Array.isArray(itemCompile!.evidence_ids_used) ? (itemCompile!.evidence_ids_used as string[]) : [];
-    expect('8 live', judgedBody.includes(`[[SRC:${fact1.id}]]`) && judgedBody.includes(`[[SRC:${fact2.id}]]`) && usedIds.includes(fact1.id) && usedIds.includes(fact2.id), `item compile should have judged the marked copy: body ${judgedBody.slice(0, 200)} ids ${JSON.stringify(usedIds)}`);
-    expect('8 live', !item!.body.includes('[[') && !item!.body.includes('[S:') && item!.body.includes('posts three gate-clerk roles in Ohio.'), `queued body should carry no marker: ${item!.body.slice(0, 260)}`);
+    expect('8 live', judgedBody.includes(`[[SRC:${fact1.id}]]`) && usedIds.includes(fact1.id) && !usedIds.includes(fact2.id), `item compile should have judged the marked copy: body ${judgedBody.slice(0, 200)} ids ${JSON.stringify(usedIds)}`);
+    expect('8 live', !item!.body.includes('[[') && !item!.body.includes('[S:') && item!.body.includes('adding 41 distribution centers to its network'), `queued body should carry no marker: ${item!.body.slice(0, 260)}`);
     const liveAudit = await prisma.gapAuditEvent.count({ where: { kind: 'enroll.live', subject_id: enrollmentId, created_at: { gte: runStart } } });
     expect('8 live', liveAudit === 1, `${liveAudit} enroll.live audit rows for ${enrollmentId}, expected exactly 1 (enroll() writes it; the service adds none)`);
     counts.enrollmentId = enrollmentId;
@@ -606,7 +637,7 @@ async function main(): Promise<number> {
     const step1Compile = await prisma.gapCompile.findFirst({ where: { draft_queue_item_id: nextId as number }, orderBy: { created_at: 'desc' }, select: { id: true, verdict: true, created_by: true, hypothesis_id: true, sequence_version_id: true, step_index: true, inputs_snapshot: true } });
     if (step1Compile) created.compileIds.push(step1Compile.id);
     const step1Judged = String((step1Compile?.inputs_snapshot as { body?: unknown } | null)?.body ?? '');
-    expect('10 schedule', step1Compile?.verdict === 'pass' && step1Compile.created_by === RUNTIME_ACTOR && step1Compile.hypothesis_id === hypothesisId && step1Compile.sequence_version_id === v1.id && step1Compile.step_index === 1 && step1Judged.includes('[[SRC:ns_ev_2]]'), `step 1 item-level compile ${JSON.stringify(step1Compile && { id: step1Compile.id, verdict: step1Compile.verdict, by: step1Compile.created_by, step: step1Compile.step_index, marked: step1Judged.includes('[[SRC:ns_ev_2]]') })}`);
+    expect('10 schedule', step1Compile?.verdict === 'pass' && step1Compile.created_by === RUNTIME_ACTOR && step1Compile.hypothesis_id === hypothesisId && step1Compile.sequence_version_id === v1.id && step1Compile.step_index === 1 && step1Judged.includes('[[SRC:hc_ev_2]]'), `step 1 item-level compile ${JSON.stringify(step1Compile && { id: step1Compile.id, verdict: step1Compile.verdict, by: step1Compile.created_by, step: step1Compile.step_index, marked: step1Judged.includes('[[SRC:hc_ev_2]]') })}`);
     expect('10 schedule', nextItem!.status === STATUS.approved && !!nextItem!.approved_at, `step 1 item should be approved by its own pass, got ${nextItem!.status}`);
     const step1NotPassed = await prisma.gapAuditEvent.count({ where: { kind: 'schedule.compile_not_passed', subject_id: String(nextId), created_at: { gte: runStart } } });
     expect('10 schedule', step1NotPassed === 0, `${step1NotPassed} schedule.compile_not_passed rows for the passing step 1, expected 0`);
@@ -615,7 +646,7 @@ async function main(): Promise<number> {
     const again = await scheduleNextStep(prisma, sentItem, { critic: criticPass, contract: { evidence: [...realRefs, ...fx.evidence] }, now: () => now });
     const step1Compiles = await prisma.gapCompile.count({ where: { draft_queue_item_id: nextId as number } });
     expect('10 schedule', again === nextId && step1Compiles === 1, `a second scheduleNextStep returned ${String(again)} with ${step1Compiles} compile rows, expected the same id ${nextId} (deterministic key) and 1 row (no recompile)`);
-    // The reject leg: step 2 scheduled with ONLY the hypothesis signals as evidence. Its fixture marker [[SRC:ns_ev_3]] does not resolve, C01 rejects, the row stays draft and the runtime audits it.
+    // The reject leg: step 2 scheduled with ONLY the hypothesis signals as evidence. Its fixture marker [[SRC:hc_ev_3]] does not resolve, C01 rejects, the row stays draft and the runtime audits it.
     const step1SentAt = new Date('2026-10-01T14:00:00.000Z');
     await prisma.draftQueueItem.update({ where: { id: nextId as number }, data: { status: STATUS.sent, sent_at: step1SentAt } });
     const step1Sent = await prisma.draftQueueItem.findUnique({ where: { id: nextId as number } });
@@ -633,7 +664,7 @@ async function main(): Promise<number> {
     expect('10 schedule', !(await guardWouldApprove(step2Id as number)), `the approveBatch guard contract would approve the rejected step 2 item ${step2Id}`);
     counts.step1ItemId = nextId as number;
     counts.step2ItemId = step2Id as number;
-    pass('10 schedule', `step 1 item ${nextId} from the pinned version, placeholders rendered, no marker queued, key ${expectedKey}, scheduled 2026-10-01T14:00Z (Friday + 4 business days), created draft then APPROVED by its own item-level compile ${step1Compile!.id} (pass, by ${RUNTIME_ACTOR}), rerun returns the same id with no recompile; step 2 item ${step2Id} created draft and LEFT draft: compile ${step2Compile!.id} reject on C01 (fixture marker ns_ev_3 unresolved against the hypothesis signals), schedule.compile_not_passed audited, guard refuses it`);
+    pass('10 schedule', `step 1 item ${nextId} from the pinned version, placeholders rendered, no marker queued, key ${expectedKey}, scheduled 2026-10-01T14:00Z (Friday + 4 business days), created draft then APPROVED by its own item-level compile ${step1Compile!.id} (pass, by ${RUNTIME_ACTOR}), rerun returns the same id with no recompile; step 2 item ${step2Id} created draft and LEFT draft: compile ${step2Compile!.id} reject on C01 (fixture marker hc_ev_3 unresolved against the hypothesis signals), schedule.compile_not_passed audited, guard refuses it`);
 
     // 11. The frozen version refuses edits: the service, then the database trigger.
     const edited = { ...seed.steps, steps: seed.steps.steps.map((s, i) => (i === 1 ? { ...s, delay: { value: 9, unit: 'business_days' as const } } : s)) };
