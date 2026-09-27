@@ -2,8 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { CampaignGenerationContractSchema } from '@/lib/validations';
 import { evaluateCampaignGenerationContract } from '@/lib/revops/campaign-generation-contract';
+import { sessionActorEmail } from '@/lib/auth-actor';
 
 export async function POST(req: NextRequest) {
+  const actor = await sessionActorEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   let body: unknown;
   try {
     body = await req.json();
@@ -35,7 +38,7 @@ export async function POST(req: NextRequest) {
       metric: payload.metric,
       quality_score: evaluation.score,
       is_complete: evaluation.isComplete,
-      created_by: payload.createdBy ?? 'Casey',
+      created_by: actor,
     },
     create: {
       campaign_id: payload.campaignId,
@@ -47,7 +50,7 @@ export async function POST(req: NextRequest) {
       metric: payload.metric,
       quality_score: evaluation.score,
       is_complete: evaluation.isComplete,
-      created_by: payload.createdBy ?? 'Casey',
+      created_by: actor,
     },
     select: {
       id: true,

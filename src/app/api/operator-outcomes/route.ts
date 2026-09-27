@@ -3,6 +3,7 @@ import { OperatorOutcomeSchema } from '@/lib/validations';
 import { buildOutcomeFollowUpRecommendation, parseOperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
 import { buildSignalToContentMapping, computeLearningReviewSlaDueAt } from '@/lib/revops/engagement-learning';
 import { buildInfographicEvent, mapOutcomeToNextInfographic, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
+import { sessionActorEmail } from '@/lib/auth-actor';
 
 function stringifySourceMetadata(sourceMetadata: Record<string, unknown> | null | undefined) {
   if (!sourceMetadata || Object.keys(sourceMetadata).length === 0) return null;
@@ -37,6 +38,8 @@ function buildOutcomeActivityNote(args: {
 }
 
 export async function POST(req: NextRequest) {
+  const actor = await sessionActorEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   let body: unknown;
   try {
     body = await req.json();
@@ -100,7 +103,7 @@ export async function POST(req: NextRequest) {
       source_kind: payload.sourceKind,
       source_id: payload.sourceId,
       notes: payload.notes?.trim() ? payload.notes : null,
-      created_by: payload.createdBy ?? null,
+      created_by: actor,
     },
     select: { id: true },
   });
@@ -109,7 +112,7 @@ export async function POST(req: NextRequest) {
     data: {
       account_name: payload.accountName,
       activity_type: 'Outcome',
-      owner: payload.createdBy ?? 'Casey',
+      owner: actor,
       outcome: `Operator outcome logged: ${outcomeLabel}`,
       next_step: outcomeLabel === 'positive' || outcomeLabel === 'closed-won'
         ? 'Advance sequence and propose next milestone'
@@ -181,7 +184,7 @@ export async function POST(req: NextRequest) {
           account_name: generated?.account_name ?? payload.accountName,
           campaign_id: generated?.campaign_id ?? payload.campaignId ?? null,
           activity_type: 'Infographic Bundle',
-          owner: payload.createdBy ?? 'Casey',
+          owner: actor,
           outcome: `Bundle engaged (${metadata.bundleId})`,
           notes: JSON.stringify(buildInfographicEvent('bundle_engaged', {
             accountName: generated?.account_name ?? payload.accountName,
@@ -203,7 +206,7 @@ export async function POST(req: NextRequest) {
         account_name: payload.accountName,
         campaign_id: payload.campaignId ?? null,
         activity_type: 'Follow-up',
-        owner: payload.createdBy ?? 'Casey',
+        owner: actor,
         outcome: `Content revision required from ${outcomeLabel}`,
         next_step: 'Regenerate from signal and review diff before publish.',
         next_step_due: computeLearningReviewSlaDueAt(new Date(), 'proposed'),
@@ -241,7 +244,7 @@ export async function POST(req: NextRequest) {
       account_name: payload.accountName,
       campaign_id: payload.campaignId ?? null,
       activity_type: 'Infographic Journey',
-      owner: payload.createdBy ?? 'Casey',
+      owner: actor,
       outcome: `${inferredStage} -> ${nextInfographic.nextStage}`,
       next_step: `Generate ${nextInfographic.nextType} for ${nextInfographic.nextStage}`,
       notes: `reason:${nextInfographic.reasonCode};source:${payload.sourceKind}:${payload.sourceId}`,

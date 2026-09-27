@@ -39,6 +39,8 @@ const mockedEnforceOneAccountInvariant = vi.fn(async ({ cc }: { cc?: string[] })
   normalizedCc: cc ?? [],
 }));
 
+const authMock = vi.fn();
+vi.mock('@/lib/auth', () => ({ auth: () => authMock() }));
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
 vi.mock('@/lib/rate-limit', () => ({ rateLimit: mockedRateLimit }));
 vi.mock('@/lib/revops/generated-content-approval', () => ({ requiresApprovalForSend: mockedRequiresApprovalForSend }));
@@ -48,6 +50,7 @@ const { POST } = await import('@/app/api/email/send-bulk-async/route');
 
 beforeEach(() => {
   vi.clearAllMocks();
+  authMock.mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
   mockedRateLimit.mockReturnValue({ ok: true });
   mockedRequiresApprovalForSend.mockResolvedValue({ approved: true, status: 'approved', reviewId: 'mer_1' });
   mockedEnforceOneAccountInvariant.mockResolvedValue({
@@ -172,6 +175,8 @@ describe('email send-bulk-async route', () => {
 
     expect(res.status).toBe(200);
     expect(payload.success).toBe(true);
+    // ops closeout: a body requestedBy is ignored; the requester is the session
+    expect(mockedPrisma.sendJob.create.mock.calls[0][0].data.requested_by).toBe('casey@freightroll.com');
     expect(mockedPrisma.sendJob.create).toHaveBeenCalledWith({
       data: expect.objectContaining({
         total_recipients: 1,
@@ -416,5 +421,15 @@ describe('email send-bulk-async route', () => {
         },
       }),
     }));
+  });
+});
+
+describe('ops closeout: the requester is the session, never the client', () => {
+  it('no session is 401 before any read or write', async () => {
+    authMock.mockResolvedValue(null);
+    const res = await POST(new NextRequest('http://localhost/api/email/send-bulk-async', { method: 'POST', body: JSON.stringify({ requestedBy: 'Casey', items: [] }) }));
+    expect(res.status).toBe(401);
+    expect(mockedPrisma.sendJob.create).not.toHaveBeenCalled();
+    expect(mockedPrisma.generatedContent.findMany).not.toHaveBeenCalled();
   });
 });

@@ -13,6 +13,8 @@ const mockedPrisma = {
   signalContentLink: { upsert: vi.fn() },
 };
 
+const authMock = vi.fn();
+vi.mock('@/lib/auth', () => ({ auth: () => authMock() }));
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
 
 const { POST } = await import('@/app/api/operator-outcomes/route');
@@ -20,6 +22,7 @@ const { POST } = await import('@/app/api/operator-outcomes/route');
 describe('operator outcomes route', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    authMock.mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
     mockedPrisma.account.findUnique.mockResolvedValue({ name: 'General Mills' });
     mockedPrisma.operatorOutcome.findUnique.mockResolvedValue(null);
     mockedPrisma.operatorOutcome.create.mockResolvedValue({ id: 'out_1' });
@@ -57,7 +60,7 @@ describe('operator outcomes route', () => {
             state: 'promoted',
           },
         },
-        createdBy: 'Casey',
+        createdBy: 'someone-else',
       }),
     });
 
@@ -66,6 +69,9 @@ describe('operator outcomes route', () => {
     expect(res.status).toBe(200);
     expect(payload.success).toBe(true);
     expect(payload.deduped).toBe(false);
+    // ops closeout: the body createdBy is ignored; the actor is the session
+    expect(mockedPrisma.operatorOutcome.create.mock.calls[0][0].data.created_by).toBe('casey@freightroll.com');
+    expect(mockedPrisma.activity.create.mock.calls[0][0].data.owner).toBe('casey@freightroll.com');
     expect(payload.nextAction).toMatchObject({
       label: 'Convert the warm response into a meeting',
       route: '#history',
@@ -83,7 +89,7 @@ describe('operator outcomes route', () => {
         source_kind: 'queue-item',
         source_id: 'activity-1',
         notes: null,
-        created_by: 'Casey',
+        created_by: 'casey@freightroll.com',
       },
       select: { id: true },
     });
@@ -121,5 +127,16 @@ describe('operator outcomes route', () => {
     expect(payload.deduped).toBe(true);
     expect(payload.nextAction).toBeTruthy();
     expect(mockedPrisma.operatorOutcome.create).not.toHaveBeenCalled();
+  });
+});
+
+describe('ops closeout: operator outcomes need a session', () => {
+  it('no session is 401 and nothing is written', async () => {
+    vi.clearAllMocks();
+    authMock.mockResolvedValue(null);
+    const res = await POST(new NextRequest('http://localhost/api/operator-outcomes', { method: 'POST', body: JSON.stringify({ accountName: 'General Mills', outcomeLabel: 'positive', sourceKind: 'queue-item', sourceId: 'activity-1' }) }));
+    expect(res.status).toBe(401);
+    expect(mockedPrisma.operatorOutcome.create).not.toHaveBeenCalled();
+    expect(mockedPrisma.activity.create).not.toHaveBeenCalled();
   });
 });
