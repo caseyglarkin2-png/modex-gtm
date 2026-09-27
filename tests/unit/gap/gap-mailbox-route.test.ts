@@ -8,7 +8,9 @@ const sender = { value: { userEmail: 'casey@yardflow.ai', serviceAccountJson: '{
 vi.mock('@/lib/prisma', () => ({ prisma: { systemConfig: { findUnique: vi.fn(async () => null) }, gapAuditEvent: { findMany: vi.fn(async () => []) } } }));
 vi.mock('@/lib/cron-monitor', () => ({ markCronStarted: vi.fn(async () => undefined), markCronSkipped: vi.fn(async () => undefined), markCronSuccess: vi.fn(async () => undefined), markCronFailure: vi.fn(async () => undefined) }));
 vi.mock('@/lib/gap/execution/gap-sender', () => ({ gapGmailSender: () => sender.value }));
-vi.mock('@/lib/email/gmail-inbox', () => ({ listMailboxIds: (...a: unknown[]) => (list as any)(...a), getMailboxMessage: (...a: unknown[]) => (fetchOne as any)(...a) }));
+const reconcile = vi.fn(async () => ({ checked: 1, reconciled: 0, stillUnknown: [{ idempotencyKey: 'k', recipient: 'joey.maggard@kroger.com', claimedAt: '2026-09-27T00:00:00.000Z', reason: 'not_in_sent' }] }));
+vi.mock('@/lib/email/gmail-inbox', () => ({ listMailboxIds: (...a: unknown[]) => (list as any)(...a), getMailboxMessage: (...a: unknown[]) => (fetchOne as any)(...a), listSentTo: vi.fn() }));
+vi.mock('@/lib/gap/execution/unknown-send-reconcile', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/execution/unknown-send-reconcile')>()), reconcileUnknownSends: (...a: unknown[]) => (reconcile as any)(...a) }));
 vi.mock('@/lib/gap/replies/gap-mailbox', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/replies/gap-mailbox')>()), pollGapMailbox: (...a: unknown[]) => (poll as any)(...a) }));
 
 import { GET } from '@/app/api/cron/gap-mailbox/route';
@@ -56,8 +58,10 @@ describe('GET /api/cron/gap-mailbox', () => {
 
   it('?mode=apply runs the intake against the GAP mailbox', async () => {
     const res = await GET(req('http://localhost/api/cron/gap-mailbox/?mode=apply', { authorization: 'Bearer shh' }));
-    expect(await res.json()).toMatchObject({ mode: 'apply', mailbox: 'casey@yardflow.ai', replies: 1 });
+    expect(await res.json()).toMatchObject({ mode: 'apply', mailbox: 'casey@yardflow.ai', replies: 1, unknownSends: { stillUnknown: [{ reason: 'not_in_sent' }] } });
     expect(poll).toHaveBeenCalledTimes(1);
+    // Ops closeout 13B: the unknown-outcome send is named in the cron status, not hidden.
+    expect(vi.mocked(markCronSuccess).mock.calls[0][1]).toMatchObject({ message: expect.stringContaining('1 unknown-outcome send(s)') });
     expect((poll.mock.calls[0] as any[])[2].mailbox).toBe('casey@yardflow.ai');
     expect(markCronSuccess).toHaveBeenCalledTimes(1);
     expect(markCronFailure).not.toHaveBeenCalled();

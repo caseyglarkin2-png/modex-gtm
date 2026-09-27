@@ -5,7 +5,7 @@
  * unrelated inbox mail, and a bounce that is never a reply.
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { classifyMailboxMessage, loadGapSendContext, parseDsn, pollGapMailbox, GAP_MAILBOX_WATERMARK_KEY, MAILBOX_OVERLAP_SECONDS } from '@/lib/gap/replies/gap-mailbox';
+import { classifyMailboxMessage, loadGapSendContext, parseDsn, pollGapMailbox, resolveQuarantine, GAP_MAILBOX_WATERMARK_KEY, MAILBOX_OVERLAP_SECONDS } from '@/lib/gap/replies/gap-mailbox';
 import { recordHardBounce } from '@/lib/email/bounce';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
 import { MANUAL_SENT } from '@/lib/gap/execution/draft-ledger';
@@ -20,7 +20,6 @@ function msg(over: Partial<MailboxMessage> = {}): MailboxMessage {
   return {
     id: 'm1',
     threadId: 'thr-joey',
-    rfcMessageId: '<x@mail>',
     fromEmail: JOEY,
     fromName: 'Joey Maggard',
     subject: 'Re: doors versus spots',
@@ -33,6 +32,8 @@ function msg(over: Partial<MailboxMessage> = {}): MailboxMessage {
     receivedAt: new Date('2026-09-26T15:00:00Z'),
     headers: {},
     ...over,
+    // Ops closeout 14: one RFC Message-ID per message unless a test says otherwise.
+    rfcMessageId: over.rfcMessageId !== undefined ? over.rfcMessageId : `<${over.id ?? 'm1'}@mail>`,
   };
 }
 
@@ -81,6 +82,7 @@ function world() {
     },
     inboundMessage: {
       findUnique: vi.fn(async ({ where }: any) => t.inbound.find((x) => x.id === where.id) ?? null),
+      findFirst: vi.fn(async (args: any) => findFirstFrom(t.inbound, args)),
       create: vi.fn(async ({ data }: any) => {
         t.inbound.push(data);
         return data;
@@ -375,11 +377,31 @@ describe('S2: a poison message never halts intake silently', () => {
     expect(r3.quarantined).toBe(1);
     expect(t.audit.filter((a) => a.kind === 'mailbox.quarantined').map((a) => a.subject_id)).toEqual(['p1']);
     expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(Math.floor(poison.receivedAt.getTime() / 1000));
-    // Quarantined is a verdict: the next run passes it without fetching it.
+    // Ops closeout 13A: quarantined is a verdict for the LISTING (intake moves on,
+    // the watermark passes it) but it is never silent: every run retries it and
+    // reports it unresolved, so the cron stays in error, until it is processed.
     const g = gmail([poison]);
     const r4 = await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: boom as never });
-    expect(r4).toMatchObject({ alreadyHandled: 1, fetched: 0, errors: [] });
-    expect(g.fetch).not.toHaveBeenCalled();
+    expect(r4).toMatchObject({ alreadyHandled: 1, unresolvedQuarantine: ['p1'] });
+    expect(r4.errors.join(' ')).toMatch(/1 quarantined mailbox message\(s\) unresolved.*p1/);
+    // Once it can be processed, the retry resolves it and the run is clean again.
+    const r5 = await pollGapMailbox(prisma, { now: NOW }, { ...gmail([poison]), mailbox: MAILBOX, ingest: ingest as never });
+    expect(r5).toMatchObject({ unresolvedQuarantine: [], errors: [] });
+    expect(t.audit.filter((x) => x.kind === 'mailbox.quarantine_resolved').map((x) => [x.subject_id, x.payload.by])).toEqual([['p1', 'retry']]);
+  });
+
+  it('ops closeout 13A: an operator can resolve a message that will never process; then it stops being reported', async () => {
+    const { t, prisma } = world();
+    const poison = msg({ id: 'p2', receivedAt: new Date('2026-09-26T14:00:00Z') });
+    const boom = vi.fn(async () => { throw new Error('NUL byte in body'); });
+    for (let i = 0; i < 3; i += 1) await poll(prisma, [poison], { ingest: boom as never });
+    const before = await poll(prisma, [poison], { ingest: boom as never });
+    expect(before.unresolvedQuarantine).toEqual(['p2']);
+    await resolveQuarantine(prisma, 'p2', 'casey@freightroll.com', 'read in Gmail: a newsletter');
+    const g = gmail([poison]);
+    const after = await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: boom as never });
+    expect(after).toMatchObject({ unresolvedQuarantine: [], errors: [], fetched: 0 });
+    expect(t.audit.find((x) => x.kind === 'mailbox.quarantine_resolved')?.payload).toMatchObject({ by: 'operator', note: 'read in Gmail: a newsletter' });
   });
 });
 
@@ -502,5 +524,22 @@ describe('re-review S3: only the notice itself can say the recipient does not ex
     const row = t.audit.find((a) => a.kind === 'mailbox.delivery_blocked');
     expect(row).toMatchObject({ subject_type: 'recipient', subject_id: 'nobody.here@kroger.com' });
     expect(t.personas.find((p) => p.id === 77)).toMatchObject({ do_not_contact: false });
+  });
+});
+
+describe('ops closeout 14: inbound idempotency on the RFC Message-ID', () => {
+  it('one RFC message delivered under two Gmail ids (a calendar invite, a list copy) is ONE InboundMessage and ONE bell', async () => {
+    const { t, prisma } = world();
+    const a = msg({ id: 'g-1', rfcMessageId: '<same@mail>' });
+    const b = msg({ id: 'g-2', rfcMessageId: '<same@mail>', receivedAt: new Date('2026-09-26T15:00:01Z') });
+    await poll(prisma, [a, b]);
+    expect(t.inbound.map((x) => x.id)).toEqual(['g-1']);
+    expect(t.notes.filter((n) => n.type === 'reply')).toHaveLength(1);
+  });
+
+  it('two different RFC messages at the same second stay two rows', async () => {
+    const { t, prisma } = world();
+    await poll(prisma, [msg({ id: 'g-1', rfcMessageId: '<a@mail>' }), msg({ id: 'g-2', rfcMessageId: '<b@mail>' })]);
+    expect(t.inbound.map((x) => x.id).sort()).toEqual(['g-1', 'g-2']);
   });
 });

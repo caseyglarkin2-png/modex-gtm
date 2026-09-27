@@ -32,7 +32,7 @@ vi.mock('@/lib/prisma', () => ({
 import { POST } from '@/app/api/unsubscribe/route';
 import { generateToken } from '@/lib/email/unsubscribe-token';
 import { listUnsubscribeHeaders } from '@/lib/email/templates';
-import { COMPANY_POSTAL_ADDRESS } from '@/lib/email/compliance';
+import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { computeNextTouch } from '@/lib/gap/execution/next-touch';
 import { prepareSellerEmail } from '@/lib/gap/execution/seller-draft';
 import { MANUAL_SENT } from '@/lib/gap/execution/draft-ledger';
@@ -121,7 +121,7 @@ describe('RFC 8058 one-click POST', () => {
 describe('the advertised header targets the one-click endpoint', () => {
   it('app templates: List-Unsubscribe is the API URL with the signed identity in its query', () => {
     const h = listUnsubscribeHeaders(JOEY);
-    expect(h['List-Unsubscribe']).toBe(`<https://modex-gtm.vercel.app/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}>`);
+    expect(h['List-Unsubscribe']).toBe(`<https://yardflow.ai/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}>`);
     expect(h['List-Unsubscribe-Post']).toBe('List-Unsubscribe=One-Click');
   });
 
@@ -132,7 +132,7 @@ describe('the advertised header targets the one-click endpoint', () => {
     delete deps.unsubscribeUrl;
     const r = await prepareSellerEmail(p, { decisionId: 'dec-joey', actor: 'casey@freightroll.com', now: NOW, stepIndex: 0 }, deps);
     if (!r.ok || !('prepared' in r)) throw new Error(JSON.stringify(r));
-    expect(r.prepared.headers['List-Unsubscribe']).toBe(`<https://modex-gtm.vercel.app/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}>`);
+    expect(r.prepared.headers['List-Unsubscribe']).toBe(`<https://yardflow.ai/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}>`);
     expect(r.prepared.headers['List-Unsubscribe-Post']).toBe('List-Unsubscribe=One-Click');
     expect(r.prepared.html).toContain(COMPANY_POSTAL_ADDRESS.replace(/&/g, '&amp;'));
     expect(r.prepared.text).toContain(COMPANY_POSTAL_ADDRESS);
@@ -186,5 +186,22 @@ describe('Release B review: RFC 8058 multipart/form-data one-click', () => {
     const res = await POST(multipart({ 'List-Unsubscribe': 'One-Click', email: 'jason.gaiser@kroger.com' }));
     expect(res.status).toBe(400);
     expect(d.unsub).toHaveLength(0);
+  });
+});
+
+describe('ops closeout 4: the branded unsubscribe path', () => {
+  it('links and the RFC 8058 header name yardflow.ai by default (the rewrite there terminates at this app)', () => {
+    delete process.env.UNSUBSCRIBE_BASE_URL;
+    expect(oneClickUnsubscribeUrl(JOEY)).toBe(`https://yardflow.ai/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}`);
+    expect(unsubscribePageUrl(JOEY, 42)).toBe(`https://yardflow.ai/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}&id=42`);
+  });
+
+  it('UNSUBSCRIBE_BASE_URL overrides it (a rollback needs no deploy of copy)', () => {
+    process.env.UNSUBSCRIBE_BASE_URL = 'https://modex-gtm.vercel.app/';
+    try {
+      expect(oneClickUnsubscribeUrl(JOEY).startsWith('https://modex-gtm.vercel.app/api/unsubscribe/?')).toBe(true);
+    } finally {
+      delete process.env.UNSUBSCRIBE_BASE_URL;
+    }
   });
 });

@@ -138,7 +138,7 @@ function makePrisma(
     unsubscribedEmail: { findUnique: asyncSpy(async () => null) },
     prospectingHypothesis: {
       findUnique: asyncSpy(async () =>
-        opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics', observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_v].', signals: [{ signal: VERIFIED_SIGNAL }] } : opts.hypothesis,
+        opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics', observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_v].', signals: [{ signal: VERIFIED_SIGNAL }] } : opts.hypothesis,
       ),
     },
     persona: {
@@ -534,7 +534,7 @@ describe('enrollFromDecision guards, in order', () => {
         id: 'H1',
         status: 'approved',
         account_name: 'Acme Logistics',
-        observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_1].',
+        observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].',
         signals: [{ signal: { ...VERIFIED_SIGNAL, id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z' } }],
       };
       const withOptIn = await enrollFromDecision(
@@ -1005,7 +1005,7 @@ describe('modex_queue', () => {
       createdBy: 'casey@freightroll.com',
     });
     expect(compileInput.contract).toMatchObject({
-      hypothesis: { observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_v].', problemHypothesis: '', problemFamily: 'unmapped' },
+      hypothesis: { observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_v].', problemHypothesis: '', problemFamily: 'unmapped' },
       evidence: [{ id: 'sig_v', title: 'Acme Logistics 10-Q', url: 'https://example.com/10q', externalOk: true, fresh: true, superseded: false, firstParty: false }],
       stepCount: 2,
       claimsUsed: [],
@@ -1138,7 +1138,7 @@ describe('modex_queue', () => {
       id: 'H1',
       status: 'approved',
       account_name: 'Acme Logistics',
-      observation: 'Acme posted three gate-clerk roles [S:sig_1].',
+      observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].',
       problem_hypothesis: 'Clerks exist because the dock and the lot disagree.',
       problem_family: 'hidden_capacity',
       signals: [
@@ -1160,7 +1160,7 @@ describe('modex_queue', () => {
     const contract = mockedCompile.mock.calls[0][0].contract;
     expect(contract).toEqual({
       hypothesis: {
-        observation: 'Acme posted three gate-clerk roles [S:sig_1].',
+        observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].',
         problemHypothesis: 'Clerks exist because the dock and the lot disagree.',
         problemFamily: 'hidden_capacity',
       },
@@ -1199,7 +1199,7 @@ describe('modex_queue', () => {
       id: 'H1',
       status: 'approved',
       account_name: 'Acme Logistics',
-      observation: 'Acme posted three gate-clerk roles [S:sig_1].',
+      observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].',
       problem_hypothesis: 'The lot is the constraint.',
       problem_family: 'hidden_capacity',
       signals: [{ signal: { id: 'sig_1', title: 'Three gate-clerk roles posted', evidence_url: 'https://example.com/jobs', external_ok: true, observed_at: new Date('2026-09-20T00:00:00.000Z'), freshness_expires_at: null, source_type: 'public_primary', ...VERIFIED_FACT } }],
@@ -1208,10 +1208,10 @@ describe('modex_queue', () => {
     const live = await enrollFromDecision(makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted }, hypothesis }), input({ mode: 'live' }), d);
     expect(live.ok).toBe(true);
     const queued = d.addOne.mock.calls[0][0].body;
-    expect(queued).toBe('Hi Jane,\nAcme posted three gate-clerk roles.\n\nMy guess is the lot.\n\nCasey');
+    expect(queued).toBe('Hi Jane,\n"Acme Logistics opened a new distribution center in Columbus with 40 dock doors".\n\nMy guess is the lot.\n\nCasey');
     expect(queued).not.toContain('[[');
     const compiledBody = mockedCompile.mock.calls[0][0].body;
-    expect(compiledBody).toBe('Hi Jane,\nAcme posted three gate-clerk roles [[SRC:sig_1]].\n\nMy guess is the lot.\n\nCasey');
+    expect(compiledBody).toBe('Hi Jane,\n"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [[SRC:sig_1]].\n\nMy guess is the lot.\n\nCasey');
     expect(mockedCompile.mock.calls[0][0].contract.evidence[0]).toMatchObject({ id: 'sig_1', fresh: true, externalOk: true });
 
     const shadow = await enrollFromDecision(makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted }, hypothesis }), input({ mode: 'shadow' }), deps());

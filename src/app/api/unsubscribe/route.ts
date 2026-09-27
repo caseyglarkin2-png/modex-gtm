@@ -41,9 +41,12 @@ export async function POST(req: NextRequest) {
     const origin = req.headers.get('origin');
     const referer = req.headers.get('referer');
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
+    // Ops closeout 4: yardflow.ai proxies /unsubscribe and /api/unsubscribe to
+    // this app, so the branded page is the same site. Exact origins only.
+    const siteOrigins = [new URL(appUrl).origin, 'https://yardflow.ai', 'https://www.yardflow.ai'];
     const isSameOrigin =
-      (origin && appUrl.startsWith(origin)) ||
-      (referer && referer.startsWith(appUrl));
+      (origin !== null && siteOrigins.includes(origin)) ||
+      (referer !== null && siteOrigins.some((o) => referer === o || referer.startsWith(`${o}/`)));
 
     // Allow List-Unsubscribe-Post (RFC 8058) — comes without Origin header
     // RFC 8058 section 3.1: the one-click POST body SHOULD be multipart/form-data;

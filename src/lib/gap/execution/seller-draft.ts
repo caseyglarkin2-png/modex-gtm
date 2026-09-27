@@ -35,6 +35,7 @@ import { accountRepliedRecently } from '../replies/account-reply';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { personMovedSince } from './stale-card';
+import { isHardBounceStatus } from '@/lib/email/bounce';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
 import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
@@ -69,6 +70,9 @@ export type SellerDraftRefusal =
   | 'recipient_unsubscribed'
   | 'account_replied'
   | 'decision_stale'
+  | 'email_bounced'
+  | 'emailed_outside_gap'
+  | 'mailbox_sent_unreadable'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -124,8 +128,18 @@ export interface SellerDraftDeps {
   /** The sender's real Gmail signature (null when unreadable: the template sign-off stays). */
   signature?: (sender: GmailSender | undefined) => Promise<string | null>;
   unsubscribeUrl?: (email: string) => string;
-  /** True when someone is already in conversation (send only). */
+  /** True when someone is already in conversation (draft and send). */
   activeOpportunity?: (prisma: PrismaLike, accountName: string, email: string, now: Date) => Promise<boolean>;
+  /** Ops closeout 19: messages in the GAP mailbox's Sent to this recipient in a window (listSentTo). */
+  mailboxSentTo?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; internalDate: Date; subject: string }>>;
+}
+
+/** How far back a first touch reads the GAP mailbox's Sent folder for an unrecorded send. */
+export const FIRST_TOUCH_SENT_LOOKBACK_DAYS = 180;
+
+function defaultMailboxSentTo(sender: GmailSender | null): SellerDraftDeps['mailboxSentTo'] | null {
+  if (!sender) return null;
+  return async (recipient, after, before) => (await import('@/lib/email/gmail-inbox')).listSentTo(sender, recipient, after, before);
 }
 
 async function defaultActiveOpportunity(prisma: PrismaLike, accountName: string, email: string, now: Date): Promise<boolean> {
@@ -321,6 +335,8 @@ export async function prepareSellerEmail(
   if (!email) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_email' });
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
+  // Ops closeout 14: the one bounce vocabulary (a historical `bounced` is a bounce too).
+  if (isHardBounceStatus(persona.email_status)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_bounced', detail: `email_status ${persona.email_status}` });
   // The unsubscribe table is the recipient's own decision; do_not_contact is
   // only its mirror and can lag it (Release B review #5). Read it directly.
   const unsubscribed = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true } });
@@ -339,8 +355,27 @@ export async function prepareSellerEmail(
     if (moved) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_stale', detail: `${moved} Wait for the next routing run before a first touch.` });
     }
+    // Ops closeout 19: the GAP mailbox's Sent folder is the ground truth for
+    // what left casey@yardflow.ai. A message to this person there that GAP did
+    // not record (a copy-paste manual send, another client on the mailbox)
+    // makes this a second first touch. Unreadable is unknown, never "nothing".
+    const sentTo = deps.mailboxSentTo ?? defaultMailboxSentTo((deps.gapSender ?? gapGmailSender)());
+    if (sentTo) {
+      let prior: Array<{ id: string; internalDate: Date; subject: string }>;
+      try {
+        prior = await sentTo(email, Math.floor(now.getTime() / 1000) - FIRST_TOUCH_SENT_LOOKBACK_DAYS * 86_400, Math.ceil(now.getTime() / 1000) + 86_400);
+      } catch (e) {
+        return refuse(prisma, actor, decisionId, { ok: false, reason: 'mailbox_sent_unreadable', detail: `Could not read the GAP mailbox's Sent folder (${e instanceof Error ? e.message : String(e)}). Nothing goes out until it can be read.` });
+      }
+      if (prior.length > 0) {
+        const p = prior[0];
+        return refuse(prisma, actor, decisionId, { ok: false, reason: 'emailed_outside_gap', detail: `casey@yardflow.ai already emailed this person on ${p.internalDate.toISOString().slice(0, 10)} ("${p.subject}"), and GAP has no record of it. Record it as a manual send before anything else goes out.` });
+      }
+    }
   }
-  if (mode === 'send') {
+  // Ops closeout 15: a draft is not harmless (it is stale outbound one click from
+  // sending), so draft and send read the same live-conversation guard.
+  {
     const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
     if (opportunity) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'active_opportunity', detail: 'An open deal, a booked meeting or a recent positive reply: someone is already in conversation here.' });

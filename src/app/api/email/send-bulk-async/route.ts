@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sessionActorEmail } from '@/lib/auth-actor';
 import { randomUUID } from 'node:crypto';
 import { BulkSendAsyncSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rate-limit';
@@ -40,6 +41,8 @@ function resolveVariantSubject(subject: string, accountName: string): string {
 }
 
 export async function POST(req: NextRequest) {
+  const actor = await sessionActorEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
   const { ok } = rateLimit(`bulk-email-async:${ip}`);
   if (!ok) {
@@ -334,7 +337,7 @@ export async function POST(req: NextRequest) {
   const sendJob = await prisma.sendJob.create({
     data: {
       status: 'pending',
-      requested_by: payload.requestedBy ?? null,
+      requested_by: actor,
       experiment_id: experimentRow?.id ?? null,
       primary_metric: experimentRow?.primary_metric ?? null,
       send_strategy: persistedStrategy,
@@ -405,7 +408,7 @@ export async function POST(req: NextRequest) {
           account_name: group.accountName,
           campaign_id: group.campaignId,
           activity_type: 'Infographic Bundle',
-          owner: payload.requestedBy ?? 'Casey',
+          owner: actor,
           outcome: `Bundle sent (${bundleId})`,
           notes: JSON.stringify({
             ...buildInfographicEvent('bundle_sent', {

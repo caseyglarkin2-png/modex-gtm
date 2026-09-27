@@ -6,7 +6,7 @@
  * GET /api/auth/providers on production listing google only.
  */
 import { describe, expect, it } from 'vitest';
-import { authProviders } from '@/lib/auth-providers';
+import { authProviders, signInAllowed } from '@/lib/auth-providers';
 
 function ids(nodeEnv: string | undefined): string[] {
   return authProviders(nodeEnv).map((p) => (typeof p === 'function' ? p() : p).id).sort();
@@ -68,5 +68,27 @@ describe('sessions minted before the fix end (T1 review)', () => {
     expect(isAdminEmail('Casey@FreightRoll.com')).toBe(true);
     expect(isAdminEmail('jake@freightroll.com')).toBe(false);
     expect(isAdminEmail(null)).toBe(false);
+  });
+});
+
+describe('ops closeout: a Google sign-in needs a verified email', () => {
+  it.each<[string, Parameters<typeof signInAllowed>[0], boolean]>([
+    ['allowlisted + Google email_verified true', { email: 'casey@freightroll.com', provider: 'google', profile: { email_verified: true } }, true],
+    ['allowlisted but Google email_verified false', { email: 'casey@freightroll.com', provider: 'google', profile: { email_verified: false } }, false],
+    ['allowlisted but Google says nothing about verification', { email: 'casey@freightroll.com', provider: 'google', profile: {} }, false],
+    ['allowlisted, verified as the STRING "true" (not the boolean)', { email: 'casey@freightroll.com', provider: 'google', profile: { email_verified: 'true' } }, false],
+    ['verified but not allowlisted', { email: 'stranger@example.com', provider: 'google', profile: { email_verified: true } }, false],
+    ['no email', { email: null, provider: 'google', profile: { email_verified: true } }, false],
+    ['development credentials (no Google profile) on the allowlist', { email: 'casey@freightroll.com', provider: 'credentials', profile: undefined }, true],
+  ])('%s', (_label, input, expected) => {
+    expect(signInAllowed(input)).toBe(expected);
+  });
+});
+
+describe('ops closeout: the NextAuth signIn callback is signInAllowed', () => {
+  it('auth.ts passes the provider and the Google profile, not just the email', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/lib/auth.ts', 'utf8');
+    expect(src).toMatch(/async signIn\(\{ user, account, profile \}\) \{\s*return signInAllowed\(\{ email: user\.email, provider: account\?\.provider, profile:/);
   });
 });

@@ -51,7 +51,7 @@ import { freezeVersionForEnrollment } from '@/lib/gap/sequence/version';
 import { LIVE_ENROLLMENT_STATUSES } from '@/lib/gap/sequence/family';
 import { STOP_REASONS, type StopReason } from '@/lib/gap/taxonomy';
 import { stopRun } from '@/lib/queue/sequence-runtime';
-import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
+import { HARD_BOUNCE_STATUSES, isHardBounceStatus } from '../../email/bounce';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
 
@@ -90,7 +90,7 @@ export const BOUNCED_EMAIL_STATUSES: ReadonlySet<string> = HARD_BOUNCE_STATUSES;
 export function suppressionLegFor(input: { unsubscribed: boolean; doNotContact: boolean; emailStatus: string | null | undefined }): SuppressionLeg | null {
   if (input.unsubscribed) return 'unsubscribed';
   if (input.doNotContact) return 'modex_do_not_contact';
-  if (input.emailStatus != null && BOUNCED_EMAIL_STATUSES.has(input.emailStatus)) return 'bounced';
+  if (isHardBounceStatus(input.emailStatus)) return 'bounced';
   return null;
 }
 

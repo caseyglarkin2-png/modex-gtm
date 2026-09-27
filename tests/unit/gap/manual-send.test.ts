@@ -91,7 +91,7 @@ describe('Release D review S5/S8: one Gmail message is one send, fingerprinted a
   it('the evidence tier is judged at the Gmail send time, not when the send is recorded', async () => {
     const { prisma, audit } = db();
     const fact = { id: 's1', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: 'Kroger will acquire Giant Eagle and consolidate two distribution centers.', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: true, metadata: { verified: 'excerpt_found_at_source' }, freshness_expires_at: new Date(new Date(MSG.sentAt).getTime() + 86_400_000) };
-    (prisma as any).prospectingHypothesis = { findUnique: vi.fn(async () => ({ id: 'hyp-kr', account_name: 'Kroger', observation: 'Kroger will acquire Giant Eagle [S:s1].', signals: [{ signal: fact }], events: [] })) };
+    (prisma as any).prospectingHypothesis = { findUnique: vi.fn(async () => ({ id: 'hyp-kr', account_name: 'Kroger', observation: '"Kroger will acquire Giant Eagle and consolidate two distribution centers" [S:s1].', signals: [{ signal: fact }], events: [] })) };
     // Recorded long after the fact expired; it was live when the email went out.
     await recordManualSend(prisma, { ...input(null), now: new Date(new Date(MSG.sentAt).getTime() + 10 * 86_400_000) });
     expect(audit.find((a: any) => a.kind === MANUAL_SENT).payload.evidenceTier).toBe('VERIFIED_FACT');

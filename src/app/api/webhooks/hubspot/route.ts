@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import * as Sentry from '@sentry/nextjs';
-import crypto from 'crypto';
+import { hubspotSignatureUri, validHubSpotSignatureV3 } from '@/lib/hubspot/webhook-signature';
 import { recordHardBounce } from '@/lib/email/bounce';
 
 export const dynamic = 'force-dynamic';
@@ -19,37 +19,6 @@ const eventSchema = z.object({
 
 const webhookBodySchema = z.array(eventSchema);
 
-/**
- * Validate HubSpot v3 signature.
- * v3: HMAC-SHA256(clientSecret, requestMethod + requestUri + requestBody + timestamp)
- */
-function validateSignatureV3(
-  signature: string | null,
-  timestamp: string | null,
-  requestMethod: string,
-  requestUri: string,
-  body: string,
-): boolean {
-  const secret = process.env.HUBSPOT_WEBHOOK_SECRET;
-  if (!secret || !signature || !timestamp) return false;
-
-  // Reject requests older than 5 minutes
-  const ts = parseInt(timestamp, 10);
-  if (isNaN(ts) || Math.abs(Date.now() - ts) > 5 * 60 * 1000) return false;
-
-  const sourceString = requestMethod + requestUri + body + timestamp;
-  const hash = crypto
-    .createHmac('sha256', secret)
-    .update(sourceString)
-    .digest('base64');
-
-  try {
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(hash));
-  } catch {
-    return false;
-  }
-}
-
 export async function POST(request: Request) {
   const rawBody = await request.text();
   const url = new URL(request.url);
@@ -58,7 +27,8 @@ export async function POST(request: Request) {
   const signature = request.headers.get('x-hubspot-signature-v3');
   const timestamp = request.headers.get('x-hubspot-request-timestamp');
 
-  if (!validateSignatureV3(signature, timestamp, 'POST', url.pathname, rawBody)) {
+  // Ops closeout: HubSpot signs the FULL URL it posted to, not the pathname (every real delivery used to 403).
+  if (!validHubSpotSignatureV3({ secret: process.env.HUBSPOT_WEBHOOK_SECRET, signature, timestamp, method: 'POST', uri: hubspotSignatureUri(url), body: rawBody, now: new Date() })) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 403 });
   }
 

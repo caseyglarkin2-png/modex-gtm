@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { allGatesEarned, buildG1Inputs, evaluateGates, type GateInputs } from '@/lib/gap/automation/gates';
+import { allGatesEarned, buildG1Inputs, evaluateGates, G1_POLICY, type GateInputs } from '@/lib/gap/automation/gates';
 
 /** Every threshold met. Each test below mutates ONE field below its threshold. */
 function earnedInputs(): GateInputs {
@@ -10,6 +10,8 @@ function earnedInputs(): GateInputs {
     peopleSentTo: 150,
     positiveOutcomeLowerBound: 0.05,
     optOutUpperBound: 0.02,
+    executionInputsReadable: true,
+    openP0P1Findings: 0,
     compilerRejectViolations: 0,
     compilerAuditSampleSize: 100,
     suppressionUnknownVerdicts7d: 0,
@@ -176,5 +178,34 @@ describe('Release D review S6: G1 inputs are built in one place', () => {
 
   it('too many opt-outs fail G1 even with conformity and positive outcomes', () => {
     expect(evaluateGates({ ...earnedInputs(), optOutUpperBound: 0.09 }).find((r) => r.gate === 'G1')!.passed).toBe(false);
+  });
+});
+
+describe('ops closeout 5: G1 floors are provisional safety defaults, not tuned at tiny N', () => {
+  const g1 = (over: Partial<GateInputs>) => evaluateGates({ ...earnedInputs(), ...over }).find((r) => r.gate === 'G1')!;
+
+  it('the accepted conservative defaults, pinned so any change is deliberate', () => {
+    expect(G1_POLICY).toEqual({ minPeopleSentTo: 100, minPositiveOutcomeLowerBound: 0.02, maxOptOutUpperBound: 0.05, provisional: true, revisitOnlyAfterRealN: 100, unlocksAutonomousSend: false });
+  });
+
+  it('an unreadable execution input fails G1 whatever else passes', () => {
+    expect(g1({ executionInputsReadable: false }).passed).toBe(false);
+  });
+
+  it('an open P0/P1 red-team finding fails G1', () => {
+    expect(g1({ openP0P1Findings: 1 }).passed).toBe(false);
+    expect(g1({ openP0P1Findings: 0 }).passed).toBe(true);
+  });
+
+  it('buildG1Inputs marks execution readable only when the report and both intervals exist', () => {
+    const rate = (low: number, high: number) => ({ interval: { low, high } });
+    const agreement = { byAction: [{ key: 'enroll_gap_sequence', rate: { rate: 0.9, n: 300 } }] };
+    expect(buildG1Inputs({ agreement, execution: null, weeksOfData: 6 }).executionInputsReadable).toBe(false);
+    expect(buildG1Inputs({ agreement, execution: { overall: { peopleMatured: 150, positivePerSend: { interval: null }, optOutPerSend: rate(0, 0.02) } }, weeksOfData: 6 }).executionInputsReadable).toBe(false);
+    expect(buildG1Inputs({ agreement, execution: { overall: { peopleMatured: 150, positivePerSend: rate(0.05, 0.1), optOutPerSend: rate(0, 0.02) } }, weeksOfData: 6 }).executionInputsReadable).toBe(true);
+  });
+
+  it('the detail says a pass implies no autonomous-send permission', () => {
+    expect(g1({}).detail).toMatch(/does not enable autonomous sending/);
   });
 });

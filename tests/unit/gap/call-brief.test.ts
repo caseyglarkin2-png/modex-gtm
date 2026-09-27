@@ -10,7 +10,7 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { asQuestion, callBrief, catalogQuestions, questionsFromCatalog, suggestedQuestionsFor } from '@/lib/gap/replies/brief';
+import { afterAcknowledgementQuestionsFor, asQuestion, callBrief, catalogQuestions, questionsFromCatalog, suggestedQuestionsFor } from '@/lib/gap/replies/brief';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
@@ -157,5 +157,49 @@ describe('callBrief', () => {
     prisma.prospectingHypothesis.findMany.mockResolvedValueOnce([hyp({ id: 'H2', status: 'draft', created_at: T(3) }), hyp({ id: 'H1', status: 'approved' })]);
     const brief = await callBrief(prisma, 7);
     expect(brief!.hypothesis!.id).toBe('H2');
+  });
+});
+
+describe('ops closeout 17: verified fact -> hypothesis as a question -> acknowledgement -> THEN quantify', () => {
+  const KROGER_FQ = ['How many trailers are waiting at the gate at your busiest hour?', 'Do drivers check in at a guard shack?', 'What does a late load cost you?'];
+
+  it('quantifying questions are never suggested before the buyer acknowledges the problem', () => {
+    expect(suggestedQuestionsFor({ problemFamily: 'hidden_capacity', falsificationQuestions: KROGER_FQ })).toEqual(['Do drivers check in at a guard shack?']);
+  });
+
+  it('they are kept, separately, for after acknowledgement', () => {
+    expect(afterAcknowledgementQuestionsFor({ problemFamily: 'hidden_capacity', falsificationQuestions: KROGER_FQ })).toEqual([
+      'How many trailers are waiting at the gate at your busiest hour?',
+      'What does a late load cost you?',
+    ]);
+    expect(afterAcknowledgementQuestionsFor(null)).toEqual([]);
+  });
+
+  it('when every falsification line quantifies, the suggestions fall back to the catalog (which asks, never measures)', () => {
+    const q = suggestedQuestionsFor({ problemFamily: 'hidden_capacity', falsificationQuestions: ['How many trailers wait?', 'How long is dwell?'] });
+    expect(q[0]).toMatch(/^Does this describe your yards today: /);
+  });
+
+  it('the brief carries both lists', async () => {
+    prisma.prospectingHypothesis.findMany.mockResolvedValue([hyp({ falsification_questions: KROGER_FQ })]);
+    const brief = await callBrief(prisma, 7);
+    expect(brief!.suggestedQuestions).toEqual(['Do drivers check in at a guard shack?']);
+    expect(brief!.afterAcknowledgementQuestions).toHaveLength(2);
+  });
+});
+
+describe('ops closeout 17: the brief shows the CARD’s hypothesis, never another one', () => {
+  it('with the card’s hypothesis id, that hypothesis is used even when the persona has a different active one', async () => {
+    prisma.prospectingHypothesis.findFirst.mockImplementation(async ({ where }: any) => (where.id === 'H-card' && where.account_name === 'Acme Logistics' ? hyp({ id: 'H-card', status: 'approved' }) : null));
+    const brief = await callBrief(prisma, 7, { hypothesisId: 'H-card' });
+    expect(brief!.hypothesis!.id).toBe('H-card');
+    expect(prisma.prospectingHypothesis.findMany).not.toHaveBeenCalled();
+  });
+
+  it('a hypothesis id from another account shows NO fact block, not a substitute', async () => {
+    prisma.prospectingHypothesis.findFirst.mockImplementation(async () => null);
+    const brief = await callBrief(prisma, 7, { hypothesisId: 'H-other-account' });
+    expect(brief!.hypothesis).toBeNull();
+    expect(prisma.prospectingHypothesis.findMany).not.toHaveBeenCalled();
   });
 });

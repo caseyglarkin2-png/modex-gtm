@@ -3,7 +3,7 @@
  * routing runs on a schedule. A card minted before the person moved must not
  * draft or send a cold first touch that ignores what happened since.
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { createSellerGmailDraft } from '@/lib/gap/execution/seller-draft';
 import { NOW, db, prismaOf, baseDeps, type Db } from './fixtures/seller-db';
 
@@ -40,5 +40,53 @@ describe('final regression: a stale first-touch card refuses decision_stale', ()
     ["someone else's history", { emailLogs: [{ to_email: 'jason.gaiser@kroger.com', sent_at: after(3) }], draftQueue: [{ to_email: 'jason.gaiser@kroger.com', status: 'draft' }] }],
   ])('not stale: %s', async (_label, extra) => {
     expect(await draft(staleDb(extra))).toMatchObject({ ok: true });
+  });
+});
+
+describe('ops closeout 14: the send gate reads the canonical bounce vocabulary', () => {
+  it.each(['bounced', 'hard_bounce', 'hard_bounced', 'Hard_Bounce'])('a persona whose email_status is %s is refused email_bounced (even without do_not_contact)', async (status) => {
+    const d = db();
+    d.personas.find((p) => p.id === 1886).email_status = status;
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'email_bounced' });
+  });
+});
+
+describe('ops closeout 15: a Gmail draft reads the live-conversation guard too', () => {
+  it('an active opportunity (open deal, booked meeting, recent positive reply) refuses the DRAFT, not only the send', async () => {
+    const d = db();
+    const activeOpportunity = vi.fn(async () => true);
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity });
+    expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
+    expect(activeOpportunity).toHaveBeenCalledWith(expect.anything(), 'Kroger', JOEY, NOW);
+  });
+
+  it('no live conversation: the draft proceeds', async () => {
+    const d = db();
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), activeOpportunity: async () => false })).toMatchObject({ ok: true });
+  });
+});
+
+describe('ops closeout 19: a first touch reads what already left the GAP mailbox', () => {
+  const sentMsg = { id: 'g-sent-1', threadId: 't', internalDate: new Date(NOW.getTime() - 5 * DAY), to: 'Joey Maggard <joey.maggard@kroger.com>', subject: 'doors versus spots' };
+
+  it('an unrecorded message to this person in casey@yardflow.ai Sent (a manual copy-paste send) refuses step 0', async () => {
+    const d = db();
+    const mailboxSentTo = vi.fn(async () => [sentMsg]);
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), mailboxSentTo });
+    expect(r).toMatchObject({ ok: false, reason: 'emailed_outside_gap' });
+    expect(String((r as { detail?: string }).detail)).toContain('doors versus spots');
+    expect(mailboxSentTo).toHaveBeenCalledWith(JOEY, expect.any(Number), expect.any(Number));
+  });
+
+  it('nothing in Sent: the first touch proceeds', async () => {
+    const d = db();
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), mailboxSentTo: async () => [] })).toMatchObject({ ok: true });
+  });
+
+  it('an unreadable Sent folder is unknown, never "nothing sent": refused', async () => {
+    const d = db();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d), mailboxSentTo: async () => { throw new Error('Gmail sent list failed (503)'); } });
+    expect(r).toMatchObject({ ok: false, reason: 'mailbox_sent_unreadable' });
   });
 });

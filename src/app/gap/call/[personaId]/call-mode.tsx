@@ -54,11 +54,12 @@ export function CallMode({
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
-    const answer = await client.getCallBrief(personaIdParam(personaId));
+    // Ops closeout 17: the brief of the CARD's hypothesis (the one this call records against).
+    const answer = hypothesis?.id ? await client.getCallBrief(personaIdParam(personaId), hypothesis.id) : await client.getCallBrief(personaIdParam(personaId));
     if (answer.ok) setBrief(answer.data);
     else setError(answer.error);
     setLoading(false);
-  }, [client, personaId]);
+  }, [client, personaId, hypothesis?.id]);
 
   useEffect(() => {
     void load();

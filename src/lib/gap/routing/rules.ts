@@ -15,7 +15,8 @@ import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
 import type { RoutingAction, RoutingLane, ResponseClass } from '../taxonomy';
 import type { EnrollTarget, RoutingInputs, RoutingLastDisposition } from './types';
 import { classifySuppression, type SuppressionClassification } from '../suppression/provenance';
-import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
+// Red team T9 / ops closeout 14: the one canonical bounce reader (the webhook and the GAP mailbox write 'hard_bounce').
+import { isHardBounceStatus } from '../../email/bounce';
 
 export interface RoutingRule {
   id: string;
@@ -71,8 +72,6 @@ function withinDays(now: Date, at: Date | null | undefined, days: number): boole
 }
 
 const UNUSABLE_PHONE_STATUSES = new Set(['invalid', 'wrong', 'disconnected']);
-// Red team T9: the one canonical set; the webhook and the GAP mailbox write 'hard_bounce'.
-const BOUNCED_EMAIL_STATUSES = HARD_BOUNCE_STATUSES;
 
 export function hasUsablePhone(i: RoutingInputs): boolean {
   const { phone, phoneStatus } = i.persona;
@@ -83,7 +82,7 @@ export function hasUsablePhone(i: RoutingInputs): boolean {
 export function emailUsable(i: RoutingInputs): boolean {
   const { emailValid, emailStatus } = i.persona;
   if (!emailValid) return false;
-  if (emailStatus != null && BOUNCED_EMAIL_STATUSES.has(emailStatus)) return false;
+  if (isHardBounceStatus(emailStatus)) return false;
   // A suppressed address is never an email target, whatever its class: the
   // send gate refuses it, so routing must not recommend an email action.
   // Phone and LinkedIn stay open for the soft and invalid-address classes.

@@ -28,6 +28,7 @@ import {
 import { expiresAtFor, type LinkedSignal } from './machine';
 import { validateObservation } from './observation';
 import { citedQuote } from '../research/propose';
+import { observationTitle } from '../research/source-label';
 import { isPhysicalOpsFact } from '../research/facts';
 
 // ---------------------------------------------------------------------------
@@ -229,33 +230,11 @@ const DAY_MS = 24 * 60 * 60 * 1000;
  * other citable signals stay linked as supporting evidence.
  */
 const OBSERVATION_MAX_SIGNALS = 1;
-const TITLE_CLIP = 160;
 const DEFAULT_MAX_PER_PERSONA = 2;
 
 /** Collapse whitespace so a title is one line. */
 function normalizeTitle(title: string): string {
   return title.replace(/\s+/g, ' ').trim();
-}
-
-/**
- * Clip a title to `max` characters on a word boundary with no ellipsis, so
- * every remaining word is still a verbatim word of the title.
- */
-function clip(title: string, max: number): string {
-  if (title.length <= max) return title;
-  const head = title.slice(0, max);
-  const cut = head.lastIndexOf(' ');
-  return (cut > 0 ? head.slice(0, cut) : head).trim();
-}
-
-/**
- * A title as one observation sentence. Sentence terminators inside the title
- * (`Inc. expands`) would split the observation and leave a fragment uncited,
- * so terminators followed by whitespace or end of text are removed. Words are
- * untouched, only punctuation; the token-subset property still holds.
- */
-function sentenceSafe(title: string): string {
-  return title.replace(/[.!?]+(?=\s|$)/g, '').replace(/\s+/g, ' ').trim();
 }
 
 function daysBetween(later: Date, earlier: Date): number {
@@ -361,7 +340,7 @@ function secondaryFamilies(primary: ProblemFamily, hits: Record<string, number>)
 function buildObservation(citable: ClassifiedSignal[], accountName: string): string {
   return citable
     .slice(0, OBSERVATION_MAX_SIGNALS)
-    .map((member) => citedQuote(sentenceSafe(clip(member.title, TITLE_CLIP)), member.signal.evidenceText ?? '', member.signal.id, accountName))
+    .map((member) => citedQuote(observationTitle(member.title), member.signal.evidenceText ?? '', member.signal.id, accountName))
     .join(' ');
 }
 

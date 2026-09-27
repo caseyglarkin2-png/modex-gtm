@@ -51,28 +51,32 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'not_pending', status: existing.status }, { status: 409 });
   }
 
-  const nextStatus = payload.action === 'approve'
-    ? 'approved'
-    : payload.action === 'reject'
-      ? 'rejected'
-      : existing.status;
-  const updated = await prisma.sendApprovalRequest.update({
-    where: { id: payload.id },
+  const select = { id: true, status: true, approved_by: true, comment: true, resolved_at: true, updated_at: true } as const;
+  if (payload.action === 'comment') {
+    const updated = await prisma.sendApprovalRequest.update({
+      where: { id: payload.id },
+      data: { comment: payload.comment ?? undefined },
+      select,
+    });
+    return NextResponse.json({ success: true, approval: updated });
+  }
+
+  // Ops closeout: the pending check above is a read, so two concurrent
+  // approve/reject calls could both pass it. The transition itself is
+  // constrained on status = pending: exactly one caller moves the row.
+  const moved = await prisma.sendApprovalRequest.updateMany({
+    where: { id: payload.id, status: 'pending' },
     data: {
-      status: nextStatus,
+      status: payload.action === 'approve' ? 'approved' : 'rejected',
       approved_by: payload.action === 'approve' ? actor : undefined,
       comment: payload.comment ?? undefined,
-      resolved_at: payload.action === 'comment' ? undefined : new Date(),
-    },
-    select: {
-      id: true,
-      status: true,
-      approved_by: true,
-      comment: true,
-      resolved_at: true,
-      updated_at: true,
+      resolved_at: new Date(),
     },
   });
-
+  if (moved.count !== 1) {
+    const now = await prisma.sendApprovalRequest.findUnique({ where: { id: payload.id }, select: { status: true } });
+    return NextResponse.json({ error: 'not_pending', status: now?.status ?? null }, { status: 409 });
+  }
+  const updated = await prisma.sendApprovalRequest.findUnique({ where: { id: payload.id }, select });
   return NextResponse.json({ success: true, approval: updated });
 }

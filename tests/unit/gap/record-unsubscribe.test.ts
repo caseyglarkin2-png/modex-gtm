@@ -43,6 +43,9 @@ const create = vi.fn(async (args: unknown) => ({ id: 'ue_1', ...(args as { data:
 const updateMany = vi.fn(async (_args: unknown) => ({ count: 1 }));
 const findFirst = vi.fn(async (_args: unknown): Promise<unknown> => ({ id: 7, hubspot_contact_id: 'hs_123' }));
 const upsertContact = vi.fn(async (_args: unknown): Promise<string | null> => 'hs_123');
+/** Ops closeout: the unsubscribe also invalidates outstanding GAP drafts (unsubscribe-drafts.ts). */
+const NO_DRAFTS = { found: 0, deleted: 0, pending: 0 };
+const invalidateGapDraftsFor = vi.fn(async (_prisma: unknown, _email: string) => NO_DRAFTS);
 
 const prismaMock = {
   unsubscribedEmail: {
@@ -57,6 +60,12 @@ const prismaMock = {
 
 vi.mock('@/lib/prisma', () => ({ prisma: prismaMock }));
 vi.mock('@/lib/hubspot/contacts', () => ({ upsertContact: recorded('hubspot.upsertContact', upsertContact) }));
+vi.mock('@/lib/gap/execution/unsubscribe-drafts', () => ({
+  invalidateGapDraftsFor: (prisma: unknown, email: string) => {
+    calls.push(['gap.invalidateDrafts', email]);
+    return invalidateGapDraftsFor(prisma, email);
+  },
+}));
 
 const { POST } = await import('@/app/api/unsubscribe/route');
 const { generateToken } = await import('@/lib/email/unsubscribe-token');
@@ -80,6 +89,8 @@ const ROUTE_FRESH_SEQUENCE: Call[] = [
   ['persona.updateMany', { where: { email: { equals: FRESH, mode: 'insensitive' } }, data: { do_not_contact: true } }],
   ['persona.findFirst', { where: { email: { equals: FRESH, mode: 'insensitive' } } }],
   ['hubspot.upsertContact', { email: FRESH, hs_email_optout: 'true' }],
+  // Ops closeout: after every consent write, the GAP drafts to this recipient are invalidated.
+  ['gap.invalidateDrafts', FRESH],
 ];
 
 /** Captured against the pre-refactor route. Email already in the table: one read, nothing else. */
@@ -89,6 +100,7 @@ const ROUTE_FRESH_SEQUENCE: Call[] = [
 const ROUTE_ALREADY_SEQUENCE: Call[] = [
   ['unsubscribedEmail.findUnique', { where: { email: FRESH } }],
   ['persona.updateMany', { where: { email: { equals: FRESH, mode: 'insensitive' }, do_not_contact: false }, data: { do_not_contact: true } }],
+  ['gap.invalidateDrafts', FRESH],
 ];
 
 beforeEach(() => {
@@ -125,6 +137,7 @@ describe('POST /api/unsubscribe call-shape snapshot (pre-refactor contract)', ()
       'unsubscribedEmail.create',
       'persona.updateMany',
       'persona.findFirst',
+      'gap.invalidateDrafts',
     ]);
     expect(upsertContact).not.toHaveBeenCalled();
   });
@@ -170,6 +183,25 @@ describe('POST /api/unsubscribe call-shape snapshot (pre-refactor contract)', ()
     expect(await res.json()).toStrictEqual({ error: 'Forbidden: cross-origin request' });
     expect(calls).toStrictEqual([]);
   });
+
+  it.each(['https://yardflow.ai', 'https://www.yardflow.ai'])('ops closeout 4: the branded page at %s (proxied to this app) is same-site', async (origin) => {
+    const req = new NextRequest(`${APP_URL}/api/unsubscribe`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', origin },
+      body: JSON.stringify({ email: FRESH, token: generateToken(FRESH) }),
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(200);
+  });
+
+  it.each(['https://yardflow.ai.evil.example', 'https://evilyardflow.ai', 'http://yardflow.ai'])('ops closeout 4: a look-alike origin %s is still cross-origin', async (origin) => {
+    const req = new NextRequest(`${APP_URL}/api/unsubscribe`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', origin },
+      body: JSON.stringify({ email: FRESH, token: generateToken(FRESH) }),
+    });
+    expect((await POST(req)).status).toBe(403);
+  });
 });
 
 describe('recordUnsubscribe helper', () => {
@@ -184,7 +216,7 @@ describe('recordUnsubscribe helper', () => {
       now: new Date('2026-09-23T12:00:00Z'),
     });
     expect(calls).toStrictEqual(ROUTE_FRESH_SEQUENCE);
-    expect(result).toStrictEqual({ ok: true, created: true, personaUpdated: 1, hubspot: 'written' });
+    expect(result).toStrictEqual({ ok: true, created: true, personaUpdated: 1, hubspot: 'written', gapDrafts: NO_DRAFTS });
   });
 
   it('second call for the same email: created false, no new row, zero HubSpot calls; the DNC mirror is re-applied (Release B review #5)', async () => {
@@ -194,7 +226,7 @@ describe('recordUnsubscribe helper', () => {
     expect(create).not.toHaveBeenCalled();
     expect(updateMany).toHaveBeenCalledTimes(1);
     expect(upsertContact).not.toHaveBeenCalled();
-    expect(result).toStrictEqual({ ok: true, created: false, personaUpdated: 1, hubspot: 'skipped:already_unsubscribed' });
+    expect(result).toStrictEqual({ ok: true, created: false, personaUpdated: 1, hubspot: 'skipped:already_unsubscribed', gapDrafts: NO_DRAFTS });
   });
 
   it('HubSpot throwing: rows still written, result carries failed:<message>, nothing thrown', async () => {
@@ -205,7 +237,7 @@ describe('recordUnsubscribe helper', () => {
       where: { email: { equals: FRESH, mode: 'insensitive' } },
       data: { do_not_contact: true },
     });
-    expect(result).toStrictEqual({ ok: true, created: true, personaUpdated: 1, hubspot: 'failed:hubspot down' });
+    expect(result).toStrictEqual({ ok: true, created: true, personaUpdated: 1, hubspot: 'failed:hubspot down', gapDrafts: NO_DRAFTS });
   });
 
   it('persona lookup throwing is also fail-open (the route wraps the findFirst in the same try)', async () => {
@@ -231,7 +263,7 @@ describe('recordUnsubscribe helper', () => {
 
   it('hubspot.enabled false: rows written, no persona lookup, no upsert, skipped:disabled', async () => {
     const result = await recordUnsubscribe(prismaMock, { email: FRESH, source: 'gap_disposition', hubspot: { enabled: false } });
-    expect(calls.map((c) => c[0])).toStrictEqual(['unsubscribedEmail.findUnique', 'unsubscribedEmail.create', 'persona.updateMany']);
+    expect(calls.map((c) => c[0])).toStrictEqual(['unsubscribedEmail.findUnique', 'unsubscribedEmail.create', 'persona.updateMany', 'gap.invalidateDrafts']);
     expect(result.hubspot).toBe('skipped:disabled');
   });
 
@@ -261,6 +293,7 @@ describe('recordUnsubscribe helper', () => {
       ['persona.updateMany', { where: { email: { equals: FRESH, mode: 'insensitive' } }, data: { do_not_contact: true } }],
       ['persona.findFirst', { where: { email: { equals: FRESH, mode: 'insensitive' } } }],
       ['hubspot.upsertContact', { email: FRESH, hs_email_optout: 'true' }],
+      ['gap.invalidateDrafts', FRESH],
     ]);
   });
 
@@ -268,6 +301,21 @@ describe('recordUnsubscribe helper', () => {
     create.mockRejectedValueOnce(new Error('db down'));
     await expect(recordUnsubscribe(prismaMock, { email: FRESH, source: 'gap_disposition' })).rejects.toThrow('db down');
     expect(upsertContact).not.toHaveBeenCalled();
+    expect(invalidateGapDraftsFor).not.toHaveBeenCalled();
+  });
+
+  it('ops closeout: GAP draft cleanup throwing never fails the unsubscribe: consent written, result carries failed:<message>', async () => {
+    invalidateGapDraftsFor.mockRejectedValueOnce(new Error('gmail down'));
+    const result = await recordUnsubscribe(prismaMock, { email: FRESH, source: 'unsubscribe_link' });
+    expect(create).toHaveBeenCalledTimes(1);
+    expect(updateMany).toHaveBeenCalledTimes(1);
+    expect(result).toMatchObject({ ok: true, created: true, gapDrafts: 'failed:gmail down' });
+  });
+
+  it('ops closeout: gapDrafts.enabled false skips the cleanup', async () => {
+    const result = await recordUnsubscribe(prismaMock, { email: FRESH, source: 'manual', gapDrafts: { enabled: false } });
+    expect(invalidateGapDraftsFor).not.toHaveBeenCalled();
+    expect(result.gapDrafts).toBe('skipped:disabled');
   });
 });
 

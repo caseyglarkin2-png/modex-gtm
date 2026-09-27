@@ -350,8 +350,10 @@ async function getMessageDetail(
   // captured, not just the snippet.
   const url = `${GMAIL_API}/users/${encodeURIComponent(userEmail)}/messages/${messageId}?format=full`;
 
+  // Ops closeout 13C: bounded, so one hung read cannot hold the cron to maxDuration.
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },
+    signal: AbortSignal.timeout(15_000),
   });
 
   if (!res.ok) {
@@ -455,6 +457,21 @@ export async function getGmailDraftState(draftId: string, sender?: GmailSender):
   return { exists: true, messageId: data.message?.id ?? null };
 }
 
+/**
+ * Delete one draft (ops closeout: an unsubscribe invalidates GAP drafts).
+ * 'not_found' means Gmail no longer has it, which may mean it was SENT, so the
+ * caller must not read it as discarded. Any other failure throws. Bounded.
+ */
+export async function deleteGmailDraft(draftId: string, sender?: GmailSender): Promise<'deleted' | 'not_found'> {
+  const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/drafts/${encodeURIComponent(draftId)}`;
+  const res = await fetch(url, { method: 'DELETE', headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(10_000) });
+  if (res.status === 404) return 'not_found';
+  if (!res.ok) throw new Error(`Gmail drafts.delete failed (${res.status})`);
+  return 'deleted';
+}
+
 export interface GmailThreadMessageMeta {
   id: string;
   labelIds: string[];
@@ -464,13 +481,24 @@ export interface GmailThreadMessageMeta {
   subject?: string;
 }
 
-/** Message metadata for one thread (To/From/labels/date). A missing thread is an empty list. */
+/**
+ * Ops closeout 13D: Gmail no longer has this thread (deleted, or the wrong
+ * mailbox). That is UNKNOWN reply truth, never "nobody replied".
+ */
+export class GmailThreadMissingError extends Error {
+  constructor(readonly threadId: string) {
+    super(`Gmail thread ${threadId} not found`);
+    this.name = 'GmailThreadMissingError';
+  }
+}
+
+/** Message metadata for one thread (To/From/labels/date). A missing thread throws GmailThreadMissingError. */
 export async function getGmailThreadMessages(threadId: string, sender?: GmailSender): Promise<GmailThreadMessageMeta[]> {
   const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
   const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
   const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/threads/${encodeURIComponent(threadId)}?format=metadata&metadataHeaders=To&metadataHeaders=From&metadataHeaders=Subject`;
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
-  if (res.status === 404) return [];
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (res.status === 404) throw new GmailThreadMissingError(threadId);
   if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
   const data = (await res.json()) as {
     messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
@@ -596,6 +624,37 @@ export async function listMailboxIds(
     before = mid;
   }
   throw new Error(`Gmail mailbox window after ${afterEpoch} cannot be narrowed below ${MAILBOX_LIST_CAP} messages`);
+}
+
+/**
+ * Ops closeout 13B: messages in this mailbox's Sent addressed to `recipient`
+ * between two epochs (at most 10, metadata only). Used to reconcile a direct
+ * send whose Gmail answer was lost. Throws on any read failure.
+ */
+export async function listSentTo(
+  sender: GmailSender,
+  recipient: string,
+  afterEpoch: number,
+  beforeEpoch: number,
+): Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
+  listUrl.searchParams.set('q', `in:sent to:${recipient} after:${afterEpoch} before:${beforeEpoch}`);
+  listUrl.searchParams.set('maxResults', '10');
+  const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (!res.ok) throw new Error(`Gmail sent list failed (${res.status})`);
+  const data = (await res.json()) as { messages?: Array<{ id: string }> };
+  const out: Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }> = [];
+  for (const { id } of data.messages ?? []) {
+    const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages/${encodeURIComponent(id)}?format=metadata&metadataHeaders=To&metadataHeaders=Subject`;
+    const m = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+    if (!m.ok) throw new Error(`Gmail sent get failed (${m.status})`);
+    const d = (await m.json()) as { id: string; threadId?: string; internalDate?: string; payload?: { headers?: Array<{ name: string; value: string }> } };
+    const header = (n: string) => d.payload?.headers?.find((h) => h.name.toLowerCase() === n)?.value ?? '';
+    out.push({ id: d.id, threadId: d.threadId ?? null, internalDate: new Date(Number(d.internalDate ?? 0)), to: header('to'), subject: header('subject') });
+  }
+  return out;
 }
 
 /** One inbox message, read in full. */

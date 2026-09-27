@@ -301,6 +301,8 @@ export interface CallBrief {
   lastDispositions: BriefDisposition[];
   openBids: BriefBid[];
   suggestedQuestions: string[];
+  /** Ops closeout 17: quantifying questions, for after the buyer acknowledges the problem. */
+  afterAcknowledgementQuestions: string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -375,8 +377,9 @@ export function repliesUrl(params: ListRepliesParams = {}): string {
   return `/api/gap/replies?${query.toString()}`;
 }
 
-export function callBriefUrl(personaId: number | string): string {
-  return `/api/gap/call/${encodeURIComponent(String(personaId))}`;
+export function callBriefUrl(personaId: number | string, hypothesisId?: string | null): string {
+  const base = `/api/gap/call/${encodeURIComponent(String(personaId))}`;
+  return hypothesisId ? `${base}?hypothesisId=${encodeURIComponent(hypothesisId)}` : base;
 }
 
 export function suggestUrl(replyId: string): string {
@@ -399,8 +402,8 @@ export async function listReplies(params: ListRepliesParams = {}, opts: ClientOp
   };
 }
 
-export function getCallBrief(personaId: number | string, opts: ClientOptions = {}): Promise<ApiResult<CallBrief>> {
-  return request<CallBrief>(callBriefUrl(personaId), { method: 'GET' }, opts);
+export function getCallBrief(personaId: number | string, opts: ClientOptions = {}, hypothesisId?: string | null): Promise<ApiResult<CallBrief>> {
+  return request<CallBrief>(callBriefUrl(personaId, hypothesisId), { method: 'GET' }, opts);
 }
 
 export function postDisposition(body: DispositionBody, opts: ClientOptions = {}): Promise<ApiResult<DispositionResult>> {
@@ -469,7 +472,7 @@ export function getRoutingAgreement(
 
 export interface GapApiClient {
   listReplies(params?: ListRepliesParams): Promise<ApiResult<RepliesPage>>;
-  getCallBrief(personaId: number | string): Promise<ApiResult<CallBrief>>;
+  getCallBrief(personaId: number | string, hypothesisId?: string | null): Promise<ApiResult<CallBrief>>;
   postDisposition(body: DispositionBody): Promise<ApiResult<DispositionResult>>;
   postBid(body: BidBody): Promise<ApiResult<BidResult>>;
   suggestReply(replyId: string): Promise<ApiResult<SuggestResult>>;
@@ -480,7 +483,7 @@ export interface GapApiClient {
 export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
   return {
     listReplies: (params) => listReplies(params, opts),
-    getCallBrief: (personaId) => getCallBrief(personaId, opts),
+    getCallBrief: (personaId, hypothesisId) => getCallBrief(personaId, opts, hypothesisId),
     postDisposition: (body) => postDisposition(body, opts),
     postBid: (body) => postBid(body, opts),
     suggestReply: (replyId) => suggestReply(replyId, opts),

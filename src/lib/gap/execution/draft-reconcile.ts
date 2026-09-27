@@ -25,6 +25,7 @@
 import {
   getGmailDraftState as defaultGetDraftState,
   getGmailThreadMessages as defaultGetThread,
+  GmailThreadMissingError,
   type GmailDraftState,
   type GmailThreadMessageMeta,
 } from '@/lib/email/gmail-inbox';
@@ -121,7 +122,14 @@ export async function reconcileDraft(
   let obs: DraftObservation;
   try {
     const state = await (deps.getDraftState ?? defaultGetDraftState)(input.gmailDraftId, sender);
-    const thread = state.exists || !record.drafted.gmailThreadId ? [] : await (deps.getThread ?? defaultGetThread)(record.drafted.gmailThreadId, sender);
+    // A deleted first-touch draft takes its one-message thread with it: a missing
+    // thread here is an empty one (the draft is gone and nothing was sent in it).
+    const thread = state.exists || !record.drafted.gmailThreadId
+      ? []
+      : await (deps.getThread ?? defaultGetThread)(record.drafted.gmailThreadId, sender).catch((e: unknown) => {
+          if (e instanceof GmailThreadMissingError) return [];
+          throw e;
+        });
     obs = observeDraft(record.drafted, state, thread);
   } catch (err) {
     // Unreadable is not "discarded": write nothing, say so.

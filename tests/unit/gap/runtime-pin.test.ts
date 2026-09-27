@@ -465,7 +465,7 @@ const SIG_1 = {
   account_name: 'Acme Logistics',
 };
 
-function enrollmentWithHypothesis(status = 'active', steps: unknown = V2_SLOTTED, observation: string | null = 'Acme posted three gate-clerk roles [S:sig_1].') {
+function enrollmentWithHypothesis(status = 'active', steps: unknown = V2_SLOTTED, observation: string | null = '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].') {
   return {
     ...enrollment(status, steps),
     hypothesis_id: 'H1',
@@ -527,7 +527,7 @@ describe('scheduleNextStep per-item compile (R3-4)', () => {
     const data = prisma.draftQueueItem.create.mock.calls[0][0].data;
     expect(data.status).toBe(STATUS.draft);
     expect('approved_at' in data).toBe(false);
-    expect(data.body).toBe('Hi Kara,\nAcme posted three gate-clerk roles.\n\nMy guess is the lot is the constraint.\n\nWorth the short version?\n\nCasey');
+    expect(data.body).toBe('Hi Kara,\n"Acme Logistics opened a new distribution center in Columbus with 40 dock doors".\n\nMy guess is the lot is the constraint.\n\nWorth the short version?\n\nCasey');
     expect(data.body).not.toContain('[[');
     expect(data.body).not.toContain('[S:');
     expect(data.subject).toBe('Re: Acme Logistics');
@@ -545,7 +545,7 @@ describe('scheduleNextStep per-item compile (R3-4)', () => {
     });
     expect(input.body).toContain('[[SRC:sig_1]]');
     expect(input.contract).toMatchObject({
-      hypothesis: { observation: 'Acme posted three gate-clerk roles [S:sig_1].', problemHypothesis: 'The lot is the constraint.', problemFamily: 'hidden_capacity' },
+      hypothesis: { observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].', problemHypothesis: 'The lot is the constraint.', problemFamily: 'hidden_capacity' },
       evidence: [{ id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', externalOk: true, fresh: true, superseded: false, firstParty: false }],
       stepCount: 2,
       claimsUsed: [],

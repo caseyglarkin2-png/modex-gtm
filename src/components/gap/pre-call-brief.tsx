@@ -21,6 +21,7 @@ export const BRIEF_LABELS = {
   lastDispositions: 'Last dispositions',
   openBids: 'Open BIDs',
   suggestedQuestions: 'Suggested questions',
+  afterAcknowledgement: 'After they acknowledge the problem',
 } as const;
 
 function words(value: string): string {
@@ -43,6 +44,7 @@ export function PreCallBrief({ brief }: PreCallBriefProps) {
   const { persona, account, hypothesis } = brief;
   const personaName = persona?.name?.trim() || persona?.email?.trim() || `persona ${String(persona?.id ?? '')}`;
   const questions = strings(brief.suggestedQuestions);
+  const afterAck = strings(brief.afterAcknowledgementQuestions);
   const proveWrong = strings(hypothesis?.wouldProveWrong);
   const dispositions = Array.isArray(brief.lastDispositions) ? brief.lastDispositions : [];
   const bids = Array.isArray(brief.openBids) ? brief.openBids : [];
@@ -167,6 +169,17 @@ export function PreCallBrief({ brief }: PreCallBriefProps) {
           <p className="mt-2 italic text-[var(--muted-foreground)]">No questions suggested</p>
         )}
       </div>
+
+      {afterAck.length > 0 ? (
+        <div data-testid="brief-after-acknowledgement" className="rounded-md border border-dashed border-[var(--border)] p-3">
+          <Heading>{BRIEF_LABELS.afterAcknowledgement}</Heading>
+          <ol className="mt-2 list-decimal space-y-1 pl-5">
+            {afterAck.map((question, index) => (
+              <li key={index}>{question}</li>
+            ))}
+          </ol>
+        </div>
+      ) : null}
     </section>
   );
 }

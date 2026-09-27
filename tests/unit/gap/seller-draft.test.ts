@@ -29,7 +29,7 @@ describe('createSellerGmailDraft', () => {
     expect(payload.text).not.toMatch(/\[\[SRC:|\[S:|\{\{/);
     expect(payload.html).toContain('Unsubscribe');
     // RFC 8058 (red team T5): the header targets the API one-click route, not the page.
-    expect(payload.headers['List-Unsubscribe']).toMatch(/^<https:\/\/modex-gtm\.vercel\.app\/api\/unsubscribe\/\?email=joey\.maggard%40kroger\.com&token=[0-9a-f]{64}>$/);
+    expect(payload.headers['List-Unsubscribe']).toMatch(/^<https:\/\/yardflow\.ai\/api\/unsubscribe\/\?email=joey\.maggard%40kroger\.com&token=[0-9a-f]{64}>$/);
     expect(payload.headers['List-Unsubscribe-Post']).toBe('List-Unsubscribe=One-Click');
 
     expect(r.receipt).toMatchObject({

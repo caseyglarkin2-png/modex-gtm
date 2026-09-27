@@ -8,7 +8,9 @@ const mockedPrisma = {
 };
 const mockedRankPlaybookBlocks = vi.fn();
 
+const authMock = vi.fn();
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
+vi.mock('@/lib/auth', () => ({ auth: () => authMock() }));
 vi.mock('@/lib/revops/playbook-library', async () => {
   const actual = await vi.importActual<typeof import('@/lib/revops/playbook-library')>('@/lib/revops/playbook-library');
   return {
@@ -21,6 +23,7 @@ const { GET, POST } = await import('@/app/api/revops/playbook-blocks/route');
 
 beforeEach(() => {
   vi.clearAllMocks();
+  authMock.mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
 });
 
 describe('playbook blocks route', () => {
@@ -70,5 +73,19 @@ describe('playbook blocks route', () => {
     expect(res.status).toBe(201);
     expect(json.success).toBe(true);
     expect(mockedPrisma.playbookBlock.create).toHaveBeenCalled();
+  });
+
+  it('ops closeout: a body createdBy is ignored; created_by is the signed-in email', async () => {
+    mockedPrisma.playbookBlock.create.mockResolvedValue({ id: 'pb3', title: 'x', block_type: 'cta', tags: [], created_at: new Date() });
+    const res = await POST(new NextRequest('http://localhost/api/revops/playbook-blocks', { method: 'POST', body: JSON.stringify({ title: 'CTA block', body: 'Use this CTA when buyer engagement is medium and timing is known.', createdBy: 'someone-else' }) }));
+    expect(res.status).toBe(201);
+    expect(mockedPrisma.playbookBlock.create.mock.calls[0][0].data.created_by).toBe('casey@freightroll.com');
+  });
+
+  it('ops closeout: no session is 401 and nothing is written', async () => {
+    authMock.mockResolvedValue(null);
+    const res = await POST(new NextRequest('http://localhost/api/revops/playbook-blocks', { method: 'POST', body: JSON.stringify({ title: 'CTA block', body: 'Use this CTA when buyer engagement is medium and timing is known.' }) }));
+    expect(res.status).toBe(401);
+    expect(mockedPrisma.playbookBlock.create).not.toHaveBeenCalled();
   });
 });

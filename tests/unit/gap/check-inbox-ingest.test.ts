@@ -127,6 +127,8 @@ function req() {
 const ONE_HUMAN_REPLY_CALLS = [
   'systemConfig.findUnique',
   'notification.findFirst',
+  // Ops closeout 14: the RFC Message-ID idempotency read.
+  'inboundMessage.findFirst',
   'persona.findFirst',
   'notification.create',
   'emailThread.upsert',
@@ -154,6 +156,7 @@ beforeEach(() => {
   for (const k of Object.keys(answers)) delete answers[k];
   answers['systemConfig.findUnique'] = () => null;
   answers['notification.findFirst'] = () => null;
+  answers['inboundMessage.findFirst'] = () => null;
   answers['persona.findFirst'] = () => PERSONA;
   answers['notification.create'] = ({ data }: any) => ({ id: 1, ...data });
   mockedIngest.mockReset();
@@ -168,6 +171,18 @@ afterEach(() => {
     if (v === undefined) delete process.env[k];
     else process.env[k] = v;
   }
+});
+
+describe('ops closeout 14: one RFC message under a second Gmail id', () => {
+  it('is skipped before any side effect (no bell, no thread, no CRM write) and labelled processed', async () => {
+    answers['inboundMessage.findFirst'] = ({ where }: any) => (where.rfc_message_id === '<abc@acme.example>' ? { id: 'gm-msg-0' } : null);
+    const body = await (await GET(req())).json();
+    expect(body).toMatchObject({ skipped: 1, notifications_created: 0 });
+    expect(calls).not.toContain('notification.create');
+    expect(calls).not.toContain('inboundMessage.upsert');
+    expect(calls).not.toContain('persona.update');
+    expect(mockedMarkAsProcessed).toHaveBeenCalledWith('gm-msg-1');
+  });
 });
 
 describe('check-inbox: flag off (pin)', () => {

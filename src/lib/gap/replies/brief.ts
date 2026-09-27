@@ -20,6 +20,7 @@
  * House convention for DB glue is `prisma: any`. Voice: no em dashes.
  */
 
+import { QUANTIFYING } from '../sequence/call-pack';
 import { supersededIds } from '../bid/select';
 import { PROBLEM_FAMILY_CATALOG, isProblemFamily } from '../taxonomy';
 
@@ -94,7 +95,10 @@ export interface CallBrief {
   hypothesis: BriefHypothesis | null;
   lastDispositions: BriefDisposition[];
   openBids: BriefBid[];
+  /** Asked BEFORE the buyer acknowledges the problem: never a measurement (ops closeout 17). */
   suggestedQuestions: string[];
+  /** The quantifying falsification questions, for AFTER the buyer acknowledges the problem. */
+  afterAcknowledgementQuestions: string[];
 }
 
 export const LAST_DISPOSITIONS = 3;
@@ -130,13 +134,25 @@ export function questionsFromCatalog(problemFamily: string): string[] {
   return out;
 }
 
+/**
+ * Ops closeout 17: the call runs VERIFIED FACT -> HYPOTHESIS AS A QUESTION ->
+ * the buyer acknowledges the problem -> THEN quantify the impact. A question
+ * that measures (the call pack's QUANTIFYING rule: how many, how long, cost,
+ * a number) is never suggested before acknowledgement; it is kept for after.
+ */
 export function suggestedQuestionsFor(hypothesis: { problemFamily: string; falsificationQuestions: string[] } | null): string[] {
   if (!hypothesis) return [];
-  const fromCatalog = catalogQuestions(hypothesis.problemFamily);
+  const fromCatalog = catalogQuestions(hypothesis.problemFamily).filter((q) => !QUANTIFYING.test(q));
   if (fromCatalog.length > 0) return fromCatalog.map(asQuestion);
-  const fromFalsification = hypothesis.falsificationQuestions.map(asQuestion);
+  const fromFalsification = hypothesis.falsificationQuestions.filter((q) => !QUANTIFYING.test(q)).map(asQuestion);
   if (fromFalsification.length > 0) return fromFalsification;
-  return questionsFromCatalog(hypothesis.problemFamily);
+  return questionsFromCatalog(hypothesis.problemFamily).filter((q) => !QUANTIFYING.test(q));
+}
+
+/** The quantifying questions, held until the buyer has acknowledged the problem. */
+export function afterAcknowledgementQuestionsFor(hypothesis: { problemFamily: string; falsificationQuestions: string[] } | null): string[] {
+  if (!hypothesis) return [];
+  return [...catalogQuestions(hypothesis.problemFamily), ...hypothesis.falsificationQuestions].filter((q) => QUANTIFYING.test(q)).map(asQuestion);
 }
 
 const HYPOTHESIS_SELECT = {
@@ -195,8 +211,16 @@ function toBriefHypothesis(row: any): BriefHypothesis {
   };
 }
 
-/** The persona's active hypothesis, else its newest, else the account's active one. */
-async function pickHypothesis(prisma: any, personaId: number, accountName: string): Promise<any | null> {
+/**
+ * The hypothesis the brief shows. With the card's hypothesis id (ops closeout
+ * 17: an inline call records against its card), exactly that one, and only if
+ * it belongs to this persona's account; never a substitute. Without one, the
+ * persona's active hypothesis, else its newest, else the account's active one.
+ */
+async function pickHypothesis(prisma: any, personaId: number, accountName: string, hypothesisId?: string | null): Promise<any | null> {
+  if (hypothesisId) {
+    return prisma.prospectingHypothesis.findFirst({ where: { id: hypothesisId, account_name: accountName }, select: HYPOTHESIS_SELECT });
+  }
   const own: any[] = await prisma.prospectingHypothesis.findMany({
     where: { primary_persona_id: personaId },
     select: HYPOTHESIS_SELECT,
@@ -212,7 +236,7 @@ async function pickHypothesis(prisma: any, personaId: number, accountName: strin
   });
 }
 
-export async function callBrief(prisma: any, personaId: number): Promise<CallBrief | null> {
+export async function callBrief(prisma: any, personaId: number, opts: { hypothesisId?: string | null } = {}): Promise<CallBrief | null> {
   const persona: any | null = await prisma.persona.findUnique({
     where: { id: personaId },
     select: {
@@ -231,7 +255,7 @@ export async function callBrief(prisma: any, personaId: number): Promise<CallBri
   if (!persona) return null;
 
   const email = typeof persona.email === 'string' ? persona.email.trim().toLowerCase() : '';
-  const hypothesisRow = await pickHypothesis(prisma, persona.id, persona.account_name);
+  const hypothesisRow = await pickHypothesis(prisma, persona.id, persona.account_name, opts.hypothesisId);
   const hypothesis = hypothesisRow ? toBriefHypothesis(hypothesisRow) : null;
 
   const dispositionRows: any[] = await prisma.conversationDisposition.findMany({
@@ -289,5 +313,6 @@ export async function callBrief(prisma: any, personaId: number): Promise<CallBri
     lastDispositions,
     openBids,
     suggestedQuestions: suggestedQuestionsFor(hypothesis),
+    afterAcknowledgementQuestions: afterAcknowledgementQuestionsFor(hypothesis),
   };
 }

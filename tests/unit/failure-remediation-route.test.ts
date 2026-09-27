@@ -20,12 +20,15 @@ const mockedPrisma = {
   },
 };
 
+const authMock = vi.fn();
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
+vi.mock('@/lib/auth', () => ({ auth: () => authMock() }));
 
 const { POST } = await import('@/app/api/revops/failure-remediation/route');
 
 beforeEach(() => {
   vi.clearAllMocks();
+  authMock.mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
   mockedPrisma.sendJobRecipient.updateMany.mockResolvedValue({ count: 1 });
   mockedPrisma.sendJob.updateMany.mockResolvedValue({ count: 1 });
   mockedPrisma.persona.updateMany.mockResolvedValue({ count: 1 });
@@ -116,5 +119,20 @@ describe('failure remediation route', () => {
         outcome: 'Persona switch requested from failure remediation',
       }),
     }));
+  });
+
+  it('ops closeout: a body actor is ignored; the activity owner is the signed-in email', async () => {
+    mockedPrisma.sendJobRecipient.findMany.mockResolvedValue([{ id: 14, send_job_id: 102, to_email: 'ops@acme.com', account_name: 'Acme', campaign_id: 7, status: 'failed' }]);
+    const res = await POST(new NextRequest('http://localhost/api/revops/failure-remediation', { method: 'POST', body: JSON.stringify({ action: 'switch-persona', recipientIds: [14], actor: 'someone-else' }) }));
+    expect(res.status).toBe(200);
+    expect(mockedPrisma.activity.create.mock.calls[0][0].data.owner).toBe('casey@freightroll.com');
+  });
+
+  it('ops closeout: no session is 401 and nothing is read or written', async () => {
+    authMock.mockResolvedValue(null);
+    const res = await POST(new NextRequest('http://localhost/api/revops/failure-remediation', { method: 'POST', body: JSON.stringify({ action: 'suppress-recipient', recipientIds: [14] }) }));
+    expect(res.status).toBe(401);
+    expect(mockedPrisma.sendJobRecipient.findMany).not.toHaveBeenCalled();
+    expect(mockedPrisma.unsubscribedEmail.upsert).not.toHaveBeenCalled();
   });
 });

@@ -100,7 +100,8 @@ describe('Release C review SF1: sendableEvidence', () => {
   const keyword = { id: 'k', account_name: 'Kroger', source_kind: 'pounce_trigger', source_type: 'public_secondary', evidence_text: null, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: null, metadata: null };
 
   it('is VERIFIED_FACT only when the observation cites at least one signal and every cited signal is an outreach fact', () => {
-    expect(sendableEvidence('Giant Eagle [S:f].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'VERIFIED_FACT', nonFactCitations: [] });
+    // Ops closeout 16: the supported shape is a verbatim quote of the cited fact (bare prose is refused: observation-support.test.ts).
+    expect(sendableEvidence('"Giant Eagle" [S:f].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'VERIFIED_FACT', nonFactCitations: [], unsupported: null });
     expect(sendableEvidence('Giant Eagle [S:f]. Capex [S:k].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: ['k'] });
     expect(sendableEvidence('Giant Eagle [S:f]. Ghost [S:gone].', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: ['gone'] });
     expect(sendableEvidence('Giant Eagle, uncited.', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: [] });
@@ -176,7 +177,7 @@ describe('red team T7: the numbers in a verified quote are covered by C01', () =
 });
 
 describe('Release C re-review S8: an expired fact never opens a call', () => {
-  const sig = { id: 'sig-ge', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: GIANT_EAGLE, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: true, metadata: { verified: 'excerpt_found_at_source' } };
+  const sig = { id: 'sig-ge', title: 'KROGER CO 10-Q (filed 2026-09-18)', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: GIANT_EAGLE, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: true, metadata: { verified: 'excerpt_found_at_source' } };
   const now = new Date('2026-09-27T00:00:00Z');
   it('the call-pack gate uses live signals only', () => {
     expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: null } }] }, now)).toBe(true);

@@ -64,6 +64,19 @@ export function isAdminEmail(email: string | null | undefined): boolean {
  * full lifetime after that provider is removed; this ends every such session
  * on the next request.
  */
+/**
+ * Whether a sign-in may proceed. The email must be allowlisted and, for a
+ * Google sign-in, Google must assert `email_verified === true` in the ID
+ * token profile (ops closeout): an unverified or absent claim is refused.
+ * Credentials exists only in development and test (authProviders), where
+ * there is no Google profile to check.
+ */
+export function signInAllowed(input: { email: string | null | undefined; provider: string | null | undefined; profile: Record<string, unknown> | null | undefined }): boolean {
+  if (!input.email || !ALLOWED_EMAILS.includes(input.email)) return false;
+  if (input.provider === 'google') return input.profile?.email_verified === true;
+  return true;
+}
+
 export function sessionTokenAllowed(token: { signInProvider?: unknown } | null | undefined, nodeEnv: string | undefined): boolean {
   if (nodeEnv === 'development' || nodeEnv === 'test') return true;
   return token?.signInProvider === 'google';

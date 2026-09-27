@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
+import { sessionActorEmail } from '@/lib/auth-actor';
 
 const FailureRemediationSchema = z.object({
   action: z.enum(['retry-later', 'switch-persona', 'mark-bad-address', 'suppress-recipient']),
   recipientIds: z.array(z.number().int().positive()).min(1),
-  actor: z.string().optional().default('Casey'),
 });
 
 export async function POST(req: NextRequest) {
+  const actor = await sessionActorEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   let body: unknown;
   try {
     body = await req.json();
@@ -89,7 +91,7 @@ export async function POST(req: NextRequest) {
         account_name: row.account_name,
         campaign_id: row.campaign_id,
         activity_type: 'Follow-up',
-        owner: payload.actor,
+        owner: actor,
         outcome: 'Persona switch requested from failure remediation',
         next_step: `Select alternate persona for ${row.to_email} and regenerate content.`,
         notes: `failure-remediation:switch-persona:${row.id}`,
