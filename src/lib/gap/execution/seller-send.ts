@@ -241,6 +241,8 @@ export async function sendSellerEmail(
     sequenceVersionId: p.sequenceVersionId,
     stepIndex,
     compileId: p.compileId,
+    // prepareSellerEmail refuses anything below a verified outreach fact (T6).
+    evidenceTier: 'VERIFIED_FACT',
     gmailSentMessageId: receipt.engineId,
     gmailThreadId: receipt.threadId ?? null,
     inReplyToGmailMessageId: p.inReplyToGmailMessageId,

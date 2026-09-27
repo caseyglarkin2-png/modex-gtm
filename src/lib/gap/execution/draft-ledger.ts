@@ -60,6 +60,8 @@ export interface ManualSentPayload {
   gmailSentMessageId: string;
   gmailThreadId: string;
   rfcMessageId: string | null;
+  /** Red team T10: the T6 evidence tier at send time (the gate refuses anything but VERIFIED_FACT). Absent on older rows. */
+  evidenceTier?: string;
   sentAt: string;
   matchedOn: string[];
   recordedAt: string;
@@ -139,6 +141,8 @@ export interface DirectSentPayload {
   sequenceVersionId: string;
   stepIndex: number;
   compileId: string;
+  /** Red team T10: the T6 evidence tier at send time (the gate refuses anything but VERIFIED_FACT). Absent on older rows. */
+  evidenceTier?: string;
   gmailSentMessageId: string;
   gmailThreadId: string | null;
   inReplyToGmailMessageId: string | null;
@@ -177,6 +181,8 @@ export interface DraftedPayload {
   sequenceVersionId: string;
   /** Which step of the pinned version this draft is (absent on pre-sequence rows = 0). */
   stepIndex?: number;
+  /** Red team T10: the T6 evidence tier at send time (the gate refuses anything but VERIFIED_FACT). Absent on older rows. */
+  evidenceTier?: string;
   /** Follow-ups only: the Gmail message this draft replies to (reconciled truth), else null. */
   inReplyToGmailMessageId?: string | null;
   compileId: string;

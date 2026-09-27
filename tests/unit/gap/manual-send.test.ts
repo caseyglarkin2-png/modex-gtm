@@ -61,4 +61,15 @@ describe('Release B review: a manual send records the BARE recipient address', (
     await recordManualSend(prisma, { ...input(null), match: { kind: 'match' as const, message: { ...MSG, to: '"Joey Maggard" <Joey.Maggard@Kroger.com>' }, matchedOn: ['recipient'] } });
     expect(audit.find((a) => a.kind === MANUAL_SENT).payload.recipient).toBe('joey.maggard@kroger.com');
   });
+
+  it('red team T10: the send record carries the evidence tier at record time (unrecorded when the hypothesis cannot be read)', async () => {
+    const a = db();
+    await recordManualSend(a.prisma, input(null));
+    expect(a.audit.find((x: any) => x.kind === MANUAL_SENT).payload.evidenceTier).toBe('unrecorded');
+    const b = db();
+    const keyword = { id: 's1', account_name: 'Kroger', source_kind: 'pounce_trigger', source_type: 'public_secondary', evidence_text: null, observed_at: new Date('2026-09-01T00:00:00Z'), external_ok: null, metadata: null, freshness_expires_at: null };
+    (b.prisma as any).prospectingHypothesis = { findUnique: vi.fn(async () => ({ id: 'hyp-kr', account_name: 'Kroger', observation: 'KR 10-Q mentions capex [S:s1].', signals: [{ signal: keyword }], events: [] })) };
+    await recordManualSend(b.prisma, input(null));
+    expect(b.audit.find((x: any) => x.kind === MANUAL_SENT).payload.evidenceTier).toBe('INSUFFICIENT');
+  });
 });

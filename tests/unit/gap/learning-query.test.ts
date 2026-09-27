@@ -26,6 +26,7 @@ function makePrisma(overrides: {
   enrollments?: any[];
   inboundMessages?: any[];
   gapHubSpotMirrors?: any[];
+  ledger?: any[];
 } = {}) {
   return {
     prospectingHypothesis: { findMany: asyncSpy(async () => overrides.hypotheses ?? []) },
@@ -37,6 +38,9 @@ function makePrisma(overrides: {
     // assert on it, are unaffected.
     inboundMessage: { findMany: asyncSpy(async () => overrides.inboundMessages ?? []) },
     gapHubSpotMirror: { findMany: asyncSpy(async () => overrides.gapHubSpotMirrors ?? []) },
+    // Red team T10: the send ledger (execution learning). Empty by default: no sends.
+    gapAuditEvent: { findMany: asyncSpy(async () => overrides.ledger ?? []) },
+    sequenceVersion: { findMany: asyncSpy(async () => []) },
   };
 }
 

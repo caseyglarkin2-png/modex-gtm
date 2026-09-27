@@ -17,6 +17,8 @@
  */
 import { recordHumanAction } from '../routing/queue';
 import { appendLedger, MANUAL_SENT, type ManualSentPayload } from './draft-ledger';
+import { getHypothesis } from '../hypothesis/service';
+import { hypothesisSendable } from '../research/evidence-gate';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -51,6 +53,13 @@ export function matchManualSend(rendered: { recipient: string; subject: string; 
   if (hits.length === 1) return { kind: 'match', message: hits[0], matchedOn: ['recipient', 'subject (case-insensitive)', `all ${lines.length} rendered body lines`] };
   if (hits.length > 1) return { kind: 'ambiguous', candidates: hits };
   return { kind: 'none', candidates: [...candidates] };
+}
+
+/** Red team T10: the T6 tier of the hypothesis when the send is recorded. */
+async function evidenceTierAt(prisma: PrismaLike, hypothesisId: string, now: Date): Promise<string> {
+  const h = prisma.prospectingHypothesis?.findUnique ? await getHypothesis(prisma, hypothesisId) : null;
+  if (!h) return 'unrecorded';
+  return hypothesisSendable(h, now) ? 'VERIFIED_FACT' : 'INSUFFICIENT';
 }
 
 export async function recordManualSend(
@@ -92,6 +101,7 @@ export async function recordManualSend(
     gmailSentMessageId: input.match.message.id,
     gmailThreadId: input.match.message.threadId,
     rfcMessageId: input.match.message.rfcMessageId,
+    evidenceTier: await evidenceTierAt(prisma, input.hypothesisId, input.now),
     sentAt: input.match.message.sentAt,
     matchedOn: input.match.matchedOn,
     recordedAt: input.now.toISOString(),
