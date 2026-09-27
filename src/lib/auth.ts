@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import { ADMINS, ALLOWED_EMAILS, authProviders, sessionTokenAllowed } from '@/lib/auth-providers';
+import { ADMINS, authProviders, sessionTokenAllowed, signInAllowed } from '@/lib/auth-providers';
 
 type TokenLike = {
   accessToken?: string;
@@ -92,8 +92,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return token;
     },
-    async signIn({ user }) {
-      return !!user.email && ALLOWED_EMAILS.includes(user.email);
+    async signIn({ user, account, profile }) {
+      return signInAllowed({ email: user.email, provider: account?.provider, profile: profile as Record<string, unknown> | undefined });
     },
     async session({ session, token }) {
       if (session.user?.email) {
