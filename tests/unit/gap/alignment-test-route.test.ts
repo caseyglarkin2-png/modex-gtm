@@ -21,7 +21,8 @@ vi.mock('@/lib/prisma', () => ({
 vi.mock('@/lib/email/gmail-sender', () => ({ sendViaGmail: (...a: unknown[]) => (send as any)(...a) }));
 vi.mock('@/lib/gap/execution/gap-sender', () => ({ gapGmailSender: () => sender.value }));
 
-import { GET, ALIGNMENT_TEST_RECIPIENT } from '@/app/api/cron/gap-alignment-test/route';
+import { GET } from '@/app/api/cron/gap-alignment-test/route';
+import { ALIGNMENT_TEST_RECIPIENT } from '@/lib/gap/replies/alignment-test';
 
 const req = (url = 'http://localhost/api/cron/gap-alignment-test/', headers: Record<string, string> = { authorization: 'Bearer shh' }) => new Request(url, { headers });
 

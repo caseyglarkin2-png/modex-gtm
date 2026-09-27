@@ -30,6 +30,7 @@
  * Writes docs/gap/6b-e2e-latest.md (no em dashes, no secrets) on every run,
  * PASS or FAIL, before cleanup.
  */
+import { citedQuote } from '../../src/lib/gap/research/propose';
 import { execSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -212,7 +213,8 @@ async function main(): Promise<number> {
       data: {
         account_name: account,
         problem_family: 'hidden_capacity',
-        observation: `From the 10-K: "${account} opened a new distribution center in Reno, Nevada with 30 dock doors" [S:${factA.id}].`,
+        // Ops closeout 16: the observation is the fact's own label plus a verbatim quote (what GAP builds).
+        observation: citedQuote(`${account} 10-K (filed 2026-09-18)`, `${account} opened a new distribution center in Reno, Nevada with 30 dock doors.`, factA.id, account),
         problem_hypothesis: 'Maybe.',
         root_cause_hypotheses: ['a'],
         impact_hypotheses: ['b'],

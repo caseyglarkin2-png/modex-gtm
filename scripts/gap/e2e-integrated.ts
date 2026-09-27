@@ -112,6 +112,8 @@ function sellerDeps(tag: string, threadFor: (to: string) => string): SellerSendD
     senderAddress: () => MAILBOX,
     signature: async () => null,
     activeOpportunity: async () => false,
+    // Ops closeout 19: the scratch run has no real mailbox; nothing unrecorded sits in Sent.
+    mailboxSentTo: async () => [],
     unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe/?email=${encodeURIComponent(e)}&token=e2e`,
     getMessageHeaders: async () => null,
     nextTouch: (p, d, now) => computeNextTouch(p, d, now, { gapSender, getThread: async () => [] }),

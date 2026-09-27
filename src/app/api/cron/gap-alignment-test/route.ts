@@ -17,10 +17,10 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { sendViaGmail } from '@/lib/email/gmail-sender';
 import { prisma } from '@/lib/prisma';
+import { ALIGNMENT_TEST_RECIPIENT } from '@/lib/gap/replies/alignment-test';
 
 export const dynamic = 'force-dynamic';
 
-export const ALIGNMENT_TEST_RECIPIENT = 'casey@freightroll.com';
 const KIND = 'ops.alignment_test_sent';
 
 export async function GET(request: Request) {
