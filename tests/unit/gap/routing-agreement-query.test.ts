@@ -87,6 +87,13 @@ describe('loadAgreementReport', () => {
     expect(r.pending).toBe(0);
   });
 
+  it('final regression: a recommendation re-minted every 5 days for 60 days with no action is unacted, not pending forever', async () => {
+    const reminted = Array.from({ length: 13 }, (_, i) => row({ id: `e${i}`, action: 'enroll_gap_sequence', human_action: null, created_at: daysAgo(60 - i * 5) }));
+    const r = await loadAgreementReport(makePrisma(reminted), { now: NOW });
+    expect(r.overall).toMatchObject({ unacted: 1, n: 1 });
+    expect(r.pending).toBe(0);
+  });
+
   it('a run filter never makes a superseded card look open: supersession reads every card of the person', async () => {
     const rows = [row({ id: 'old', run_id: 'run_1', action: 'enroll_gap_sequence', human_action: null, created_at: daysAgo(3) }), row({ id: 'new', run_id: 'run_2', human_action: null, created_at: daysAgo(1) })];
     const r = await loadAgreementReport(makePrisma(rows), { runId: 'run_1', now: NOW });
