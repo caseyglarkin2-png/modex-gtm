@@ -113,8 +113,20 @@ export function hasSpecificSiteChange(sentence: string): boolean {
   return SPECIFIC_SITE_CHANGE.test(sentence);
 }
 
+/**
+ * Closeout review: a negation states that NO change happens ("we do not plan
+ * to close the Memphis DC"), and habitual boilerplate states no particular
+ * change ("from time to time we open, close or consolidate facilities"). Both
+ * name a site and a change verb, so they are refused before the site match.
+ */
+// The negation must GOVERN the change verb (within three words before it):
+// "we have closed X because they have not been meeting expectations" is a fact.
+const NEGATION = /(?:\bnot|n['’]t|\bnever|\bno longer|\bno plans? to)\s+(?:[\w-]+\s+){0,3}?(?:open|clos|consolidat|expan|build|built|construct|automat|relocat|acquir|launch|add|exit)/i;
+const HABITUAL = /\b(?:from time to time|ordinary course|normal course|periodically|regularly|continues? to|evaluat(?:e|es|ing))\b/i;
+
 /** Does this sentence state a physical-operations or network change (and is not a financial-statement mention)? */
 export function isPhysicalOpsFact(sentence: string): boolean {
+  if (NEGATION.test(sentence) || HABITUAL.test(sentence)) return false;
   if (HYPOTHETICAL.test(sentence)) return false;
   if (CONTRACT_CONTEXT.test(sentence)) return false;
   if (hasSpecificSiteChange(sentence)) return true;

@@ -178,3 +178,31 @@ describe('final regression: filing boilerplate is not a fact', () => {
     expect(isPhysicalOpsFact(sentence)).toBe(true);
   });
 });
+
+/**
+ * Closeout review (GAP method P2-1): a negation or a habitual/boilerplate
+ * statement states no change to the network, even when it names a site and a
+ * change verb.
+ */
+describe('closeout review: negations and habitual boilerplate are not facts', () => {
+  it.each([
+    'We do not plan to close the Memphis distribution center.',
+    'The Company will not open a new distribution center in 2027.',
+    'We have no plans to relocate the Reno fulfillment center.',
+    'We never automated the Columbus warehouse.',
+    'From time to time, we open, close or consolidate facilities in the ordinary course of business.',
+    'We continue to invest in automation across our distribution network.',
+    'We periodically evaluate whether to close or consolidate distribution centers.',
+    'We regularly open new distribution centers as our business grows.',
+  ])('not a fact: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(false);
+  });
+
+  it.each([
+    'Kroger will close the Memphis distribution center in March.',
+    'The company opened a new automated distribution center in Texas in August 2026.',
+    'Kroger has identified opportunities to optimize its fulfillment network by closing facilities in Pleasant Prairie, Wisconsin; Frederick, Maryland; and Groveland, Florida, while monitoring performance at the remaining facilities.',
+  ])('still a fact: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(true);
+  });
+});
