@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
+import { sessionActorEmail } from '@/lib/auth-actor';
 import { buildPlaybookTags, rankPlaybookBlocks } from '@/lib/revops/playbook-library';
 
 const CreatePlaybookBlockSchema = z.object({
@@ -14,7 +15,6 @@ const CreatePlaybookBlockSchema = z.object({
   persona: z.string().optional().nullable(),
   stage: z.string().optional().nullable(),
   motion: z.string().optional().nullable(),
-  createdBy: z.string().optional().nullable(),
 });
 
 export async function GET(req: NextRequest) {
@@ -52,6 +52,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const actor = await sessionActorEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   let body: unknown;
   try {
     body = await req.json();
@@ -84,7 +86,7 @@ export async function POST(req: NextRequest) {
       stage: payload.stage?.trim() || null,
       motion: payload.motion?.trim() || null,
       tags,
-      created_by: payload.createdBy ?? 'Casey',
+      created_by: actor,
     },
     select: {
       id: true,

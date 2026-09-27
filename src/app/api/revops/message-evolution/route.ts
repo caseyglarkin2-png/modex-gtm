@@ -6,8 +6,11 @@ import {
   type LearningReviewStatus,
 } from '@/lib/revops/engagement-learning';
 import { prisma } from '@/lib/prisma';
+import { sessionActorEmail } from '@/lib/auth-actor';
 
 export async function PATCH(req: NextRequest) {
+  const actor = await sessionActorEmail();
+  if (!actor) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   let body: unknown;
   try {
     body = await req.json();
@@ -46,7 +49,7 @@ export async function PATCH(req: NextRequest) {
     where: { id: existing.id },
     data: {
       status: nextStatus,
-      reviewed_by: payload.actor ?? 'Casey',
+      reviewed_by: actor,
       reviewed_at: ['approved', 'rejected', 'in-review'].includes(nextStatus) ? now : undefined,
       deployed_at: nextStatus === 'deployed' ? now : undefined,
       rollback_link:
