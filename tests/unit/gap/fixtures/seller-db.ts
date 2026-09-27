@@ -129,6 +129,7 @@ export function prismaOf(d: Db) {
         return { id: row.id };
       }),
       findMany: vi.fn(async (args: any) => findManyFrom(d.audit, { orderBy: { created_at: 'desc' }, ...args })),
+      findFirst: vi.fn(async (args: any) => findFirstFrom(d.audit, args)),
     },
   };
   return client;

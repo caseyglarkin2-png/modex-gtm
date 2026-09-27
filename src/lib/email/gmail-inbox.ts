@@ -626,6 +626,37 @@ export async function listMailboxIds(
   throw new Error(`Gmail mailbox window after ${afterEpoch} cannot be narrowed below ${MAILBOX_LIST_CAP} messages`);
 }
 
+/**
+ * Ops closeout 13B: messages in this mailbox's Sent addressed to `recipient`
+ * between two epochs (at most 10, metadata only). Used to reconcile a direct
+ * send whose Gmail answer was lost. Throws on any read failure.
+ */
+export async function listSentTo(
+  sender: GmailSender,
+  recipient: string,
+  afterEpoch: number,
+  beforeEpoch: number,
+): Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
+  listUrl.searchParams.set('q', `in:sent to:${recipient} after:${afterEpoch} before:${beforeEpoch}`);
+  listUrl.searchParams.set('maxResults', '10');
+  const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (!res.ok) throw new Error(`Gmail sent list failed (${res.status})`);
+  const data = (await res.json()) as { messages?: Array<{ id: string }> };
+  const out: Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }> = [];
+  for (const { id } of data.messages ?? []) {
+    const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages/${encodeURIComponent(id)}?format=metadata&metadataHeaders=To&metadataHeaders=Subject`;
+    const m = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+    if (!m.ok) throw new Error(`Gmail sent get failed (${m.status})`);
+    const d = (await m.json()) as { id: string; threadId?: string; internalDate?: string; payload?: { headers?: Array<{ name: string; value: string }> } };
+    const header = (n: string) => d.payload?.headers?.find((h) => h.name.toLowerCase() === n)?.value ?? '';
+    out.push({ id: d.id, threadId: d.threadId ?? null, internalDate: new Date(Number(d.internalDate ?? 0)), to: header('to'), subject: header('subject') });
+  }
+  return out;
+}
+
 /** One inbox message, read in full. */
 export async function getMailboxMessage(sender: GmailSender, id: string): Promise<MailboxMessage> {
   const accessToken = await accessTokenForSender(sender);

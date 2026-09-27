@@ -4,7 +4,8 @@ import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } fr
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { classifyMailboxMessage, GAP_MAILBOX_WATERMARK_KEY, loadGapSendContext, MAILBOX_FIRST_LOOKBACK_SECONDS, MAILBOX_OVERLAP_SECONDS, pollGapMailbox } from '@/lib/gap/replies/gap-mailbox';
-import { getMailboxMessage, listMailboxIds } from '@/lib/email/gmail-inbox';
+import { getMailboxMessage, listMailboxIds, listSentTo } from '@/lib/email/gmail-inbox';
+import { reconcileUnknownSends } from '@/lib/gap/execution/unknown-send-reconcile';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -75,6 +76,9 @@ export async function GET(request: Request) {
       report = { since, seen: listing.ids.length, pending: pending.length, sampled: Math.min(pending.length, DRY_RUN_SAMPLE), counts };
     } else {
       report = { ...(await pollGapMailbox(prisma, { now }, { listIds: (after) => listMailboxIds(sender, after), fetch: (id) => getMailboxMessage(sender, id), mailbox: sender.userEmail })) };
+      // Ops closeout 13B: direct sends whose Gmail answer was lost, reconciled against Sent.
+      // Still-unknown ones stay visible in the report; they are never read as not sent.
+      report.unknownSends = await reconcileUnknownSends(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), mailbox: sender.userEmail });
       // Release C review S2: a failed or quarantined message, an unattributable
       // delivery notice or a truncated listing is never a quiet success.
       const errors = Array.isArray(report.errors) ? (report.errors as string[]) : [];
@@ -92,7 +96,7 @@ export async function GET(request: Request) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `${mode}: ${String(report.seen)} inbox messages since ${String(report.since)}`,
+      message: `${mode}: ${String(report.seen)} inbox messages since ${String(report.since)}${(report.unknownSends as { stillUnknown?: unknown[] } | undefined)?.stillUnknown?.length ? `; ${(report.unknownSends as { stillUnknown: unknown[] }).stillUnknown.length} unknown-outcome send(s)` : ''}`,
       stats: { mode, ...report },
     }).catch(() => undefined);
     return NextResponse.json({ ...report, mode, mailbox: sender.userEmail });

@@ -63,6 +63,7 @@ import { ingestReply } from './ingest';
 import { AUTO_REPLY_SUBJECT, DELIVERY_BLOCKED_KIND, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
 export { DELIVERY_BLOCKED_KIND } from './domains';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
+import { openDirectClaims } from '../execution/unknown-send-reconcile';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -275,6 +276,14 @@ export async function loadGapSendContext(prisma: PrismaLike): Promise<GapSendCon
     if (dom && !FREEMAIL_DOMAINS.has(dom) && !OWN_DOMAINS.has(dom)) push(ctx.domains, dom, ref);
   }
   for (const d of drafted.values()) if (d.recipient.includes('@')) push(ctx.bounceRecipients, d.recipient, d);
+  // Ops closeout 13B: a direct send whose Gmail answer was lost may have been
+  // delivered. Until it reconciles, its bounce or reply is still about an
+  // address GAP emailed (exact address only: no thread is known).
+  for (const c of await openDirectClaims(prisma)) {
+    const ref: SentRef = { personaId: c.personaId, recipient: c.recipient, threadId: null, sentAt: c.claimedAt };
+    push(ctx.recipients, c.recipient, ref);
+    push(ctx.bounceRecipients, c.recipient, ref);
+  }
   return ctx;
 }
 
