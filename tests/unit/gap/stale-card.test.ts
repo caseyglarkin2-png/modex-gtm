@@ -42,3 +42,12 @@ describe('final regression: a stale first-touch card refuses decision_stale', ()
     expect(await draft(staleDb(extra))).toMatchObject({ ok: true });
   });
 });
+
+describe('ops closeout 14: the send gate reads the canonical bounce vocabulary', () => {
+  it.each(['bounced', 'hard_bounce', 'hard_bounced', 'Hard_Bounce'])('a persona whose email_status is %s is refused email_bounced (even without do_not_contact)', async (status) => {
+    const d = db();
+    d.personas.find((p) => p.id === 1886).email_status = status;
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'email_bounced' });
+  });
+});

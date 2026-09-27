@@ -199,3 +199,15 @@ describe('ops closeout 13D: a thread Gmail no longer has', () => {
     expect((r as { detail: string }).detail).toMatch(/not found/);
   });
 });
+
+describe('ops closeout 14: one bounce vocabulary for every execution plane', () => {
+  it.each(['bounced', 'hard_bounce', 'hard_bounced', 'HARD_BOUNCE', 'invalid'])('email_status %s stops the sequence even without do_not_contact', async (status) => {
+    const r = await computeNextTouch(ledger([0], { persona: { email_status: status } }), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(r).toMatchObject({ state: 'stopped', reason: 'invalid_address' });
+  });
+
+  it.each(['unverified', 'verified', 'replied'])('email_status %s does not', async (status) => {
+    const r = await computeNextTouch(ledger([0], { persona: { email_status: status } }), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(r.state).not.toBe('stopped');
+  });
+});

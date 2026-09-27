@@ -7,7 +7,7 @@
 import { describe, expect, it } from 'vitest';
 import { emailUsable } from '@/lib/gap/routing/rules';
 import { suppressionLegFor } from '@/lib/gap/sequence/enrollment';
-import { HARD_BOUNCE_STATUSES } from '@/lib/email/bounce';
+import { HARD_BOUNCE_STATUSES, isHardBounceStatus } from '@/lib/email/bounce';
 import { HARD_INVALID_STATUSES } from '@/lib/gap/suppression/provenance';
 
 describe('every hard-bounce spelling is recognised by every reader', () => {
@@ -24,5 +24,17 @@ describe('every hard-bounce spelling is recognised by every reader', () => {
       expect(HARD_BOUNCE_STATUSES.has(s)).toBe(true);
       expect(HARD_INVALID_STATUSES.has(s)).toBe(true);
     }
+  });
+});
+
+describe('ops closeout 14: one predicate, case-insensitive, on every plane', () => {
+  it.each(['Bounced', 'HARD_BOUNCE', ' hard_bounced '])('%s: routing and enrollment read it as a bounce too', (status) => {
+    expect(isHardBounceStatus(status)).toBe(true);
+    expect(emailUsable({ persona: { emailValid: true, emailStatus: status } } as never)).toBe(false);
+    expect(suppressionLegFor({ unsubscribed: false, doNotContact: false, emailStatus: status })).toBe('bounced');
+  });
+
+  it.each([null, undefined, '', 'unverified', 'verified', 'replied', 'blocked'])('%s is not a bounce', (status) => {
+    expect(isHardBounceStatus(status as string | null | undefined)).toBe(false);
   });
 });

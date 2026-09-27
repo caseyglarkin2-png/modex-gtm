@@ -35,6 +35,7 @@ import { accountRepliedRecently } from '../replies/account-reply';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { personMovedSince } from './stale-card';
+import { isHardBounceStatus } from '@/lib/email/bounce';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
 import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
@@ -69,6 +70,7 @@ export type SellerDraftRefusal =
   | 'recipient_unsubscribed'
   | 'account_replied'
   | 'decision_stale'
+  | 'email_bounced'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -321,6 +323,8 @@ export async function prepareSellerEmail(
   if (!email) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_email' });
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
+  // Ops closeout 14: the one bounce vocabulary (a historical `bounced` is a bounce too).
+  if (isHardBounceStatus(persona.email_status)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_bounced', detail: `email_status ${persona.email_status}` });
   // The unsubscribe table is the recipient's own decision; do_not_contact is
   // only its mirror and can lag it (Release B review #5). Read it directly.
   const unsubscribed = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true } });

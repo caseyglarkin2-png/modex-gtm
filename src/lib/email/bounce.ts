@@ -23,6 +23,16 @@
 /** Every email_status spelling that means the address permanently bounced. */
 export const HARD_BOUNCE_STATUSES: ReadonlySet<string> = new Set(['bounced', 'hard_bounce', 'hard_bounced']);
 
+/**
+ * Ops closeout 14: THE reader for every execution plane (routing, enrollment,
+ * next-touch, the seller send gate). Case- and whitespace-insensitive, so a
+ * historical `bounced` row and today's `hard_bounce` mean the same thing.
+ * Historical rows are read, never rewritten.
+ */
+export function isHardBounceStatus(status: string | null | undefined): boolean {
+  return status != null && HARD_BOUNCE_STATUSES.has(status.trim().toLowerCase());
+}
+
 export interface HardBounceInput {
   email: string;
   /** Where it was observed: 'hubspot_webhook' | 'gap_mailbox_dsn'. */

@@ -28,6 +28,7 @@ import { getGmailThreadMessages as defaultGetThread, type GmailThreadMessageMeta
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import { readComms } from '../routing/inputs';
 import { HARD_INVALID_STATUSES } from '../suppression/provenance';
+import { isHardBounceStatus } from '@/lib/email/bounce';
 import { addBusinessDays } from '../sequence/business-days';
 import { parseSteps } from '../sequence/steps';
 import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
@@ -118,7 +119,7 @@ export async function computeNextTouch(prisma: PrismaLike, decisionId: string, n
   // Stop rules that need no Gmail read.
   const persona = anchorPersona !== null ? await prisma.persona.findUnique({ where: { id: anchorPersona }, select: { do_not_contact: true, email_status: true } }) : null;
   if (persona?.do_not_contact) return { state: 'stopped', reason: 'do_not_contact', detail: 'This person is marked do not contact.', sent };
-  if (persona && HARD_INVALID_STATUSES.has(String(persona.email_status ?? '').toLowerCase())) {
+  if (persona && (isHardBounceStatus(persona.email_status) || HARD_INVALID_STATUSES.has(String(persona.email_status ?? '').trim().toLowerCase()))) {
     return { state: 'stopped', reason: 'invalid_address', detail: 'The address is marked invalid.', sent };
   }
   const unsub = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: recipient, mode: 'insensitive' } }, select: { id: true } });
