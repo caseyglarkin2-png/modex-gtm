@@ -7,7 +7,9 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const account = searchParams.get('account');
 
-  if (!account) {
+  // Closeout review (security): __system__ rows (dead letters, and formerly a
+  // plaintext refresh token) are never content history.
+  if (!account || account.trim().toLowerCase() === '__system__') {
     return NextResponse.json({ history: [] });
   }
 
