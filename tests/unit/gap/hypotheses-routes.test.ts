@@ -344,11 +344,14 @@ describe('GET /api/gap/hypotheses/[id]', () => {
     expect(mockedGet).toHaveBeenCalledWith(fakePrisma, 'hyp_missing');
   });
 
-  it('200 with the row', async () => {
-    mockedGet.mockResolvedValue({ id: 'hyp_1', status: 'draft', signals: [], events: [] });
+  it('200 with the row and the server-derived actionability (no evidence: find evidence, no approve)', async () => {
+    mockedGet.mockResolvedValue({ id: 'hyp_1', status: 'draft', account_name: 'Acme', observation: 'x [S:s].', signals: [], events: [] });
     const res = await oneGET(new NextRequest(`${BASE}/hyp_1`), idParams());
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ id: 'hyp_1', status: 'draft', signals: [], events: [] });
+    expect(await res.json()).toEqual({
+      id: 'hyp_1', status: 'draft', account_name: 'Acme', observation: 'x [S:s].', signals: [], events: [],
+      actionability: { outreachReady: false, reason: 'no_evidence', canApprove: false, canUse: false, next: 'find_evidence' },
+    });
   });
 });
 

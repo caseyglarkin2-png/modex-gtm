@@ -245,6 +245,21 @@ describe('proposeHypothesis', () => {
     expect(prisma.prospectingHypothesis.create).not.toHaveBeenCalled();
   });
 
+  it('a REVISION carries supersedes_id on the new DRAFT row and in the propose event (the old row is never written)', async () => {
+    const out = await proposeHypothesis(prisma, proposeInput({ sourceRef: 'revision:H_old', supersedesId: 'H_old' }));
+    expect(out).toEqual({ ok: true, id: 'H_new', status: 'draft' });
+    const create = prisma.tx.prospectingHypothesis.create.mock.calls[0][0];
+    expect(create.data).toMatchObject({ status: 'draft', supersedes_id: 'H_old', source_ref: 'revision:H_old' });
+    expect(prisma.tx.hypothesisEvent.create.mock.calls[0][0].data.payload).toMatchObject({ supersedesId: 'H_old' });
+    expect(prisma.prospectingHypothesis.update).not.toHaveBeenCalled();
+    expect(prisma.tx.prospectingHypothesis.update ?? vi.fn()).not.toHaveBeenCalled();
+  });
+
+  it('a plain proposal writes no supersedes_id', async () => {
+    await proposeHypothesis(prisma, proposeInput({}));
+    expect(prisma.tx.prospectingHypothesis.create.mock.calls[0][0].data).not.toHaveProperty('supersedes_id');
+  });
+
   it('happy path: draft row, N join rows with the primary role on the right id, one event inside tx', async () => {
     const out = await proposeHypothesis(prisma, proposeInput({ sourceRef: 'pic:acme#3' }));
     expect(out).toEqual({ ok: true, id: 'H_new', status: 'draft' });

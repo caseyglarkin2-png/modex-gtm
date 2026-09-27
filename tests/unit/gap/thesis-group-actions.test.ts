@@ -52,7 +52,7 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     expect(r.ok).toBe(false);
     expect(r.results).toEqual([
       { hypothesisId: 'd1', ok: true, from: 'draft', to: 'approved', detail: 'approved' },
-      { hypothesisId: 'd2', ok: false, from: 'draft', to: 'review_required', detail: 'approve refused: unhedged_hypothesis' },
+      { hypothesisId: 'd2', ok: false, from: 'draft', to: 'review_required', detail: 'approve refused: unhedged_hypothesis', reason: 'unhedged_hypothesis' },
       { hypothesisId: 'd3', ok: true, from: 'review_required', to: 'approved', detail: 'approved' },
       { hypothesisId: 'a1', ok: true, from: 'active', to: 'active', detail: 'already active; unchanged' },
     ]);
@@ -70,7 +70,7 @@ describe('APPROVE SELECTED SIBLINGS', () => {
     expect(transition.mock.calls.map((c: any[]) => `${c[1]}:${c[2]}`)).toEqual(['d1:submit', 'd1:approve', 'd1:activate', 'd3:approve', 'd3:activate']);
     expect(r.results).toEqual([
       { hypothesisId: 'd1', ok: true, from: 'draft', to: 'active', detail: 'approved and in use' },
-      { hypothesisId: 'd3', ok: false, from: 'review_required', to: 'approved', detail: 'approved, but not in use: suppressed' },
+      { hypothesisId: 'd3', ok: false, from: 'review_required', to: 'approved', detail: 'approved, but not in use: suppressed', reason: 'suppressed' },
     ]);
     for (const c of transition.mock.calls) expect(c[3].reason).toContain('approve + use selected siblings (2 of 4');
   });

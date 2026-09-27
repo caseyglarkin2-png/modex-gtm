@@ -16,6 +16,13 @@
  *                   no_second_source or contradicts. Links nothing.
  *   op attach       `{signalIds}`      link chosen verified facts to every
  *                   editable sibling; frozen siblings are reported, not changed.
+ *   op use_evidence `{hypothesisIds, signalIds}`  USE THIS VERIFIED EVIDENCE:
+ *                   rebuild the observation of each selected editable row from
+ *                   the chosen facts (one audited edit), and REVISE each
+ *                   selected approved-but-not-ready row (a new draft with
+ *                   supersedes_id; the frozen row is never edited). Every fact
+ *                   must be a live outreach fact (422 otherwise). Never
+ *                   approves, activates, routes, drafts or sends.
  *
  * Session only; gated like every hypothesis route (GAP_HYPOTHESIS_ENABLED).
  */
@@ -25,7 +32,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { routeAfterUse } from '@/lib/gap/routing/interactive';
-import { approveSelectedSiblings, attachEvidenceToThesis, corroborateThesis, loadThesisGroups, orderGroupsForReview } from '@/lib/gap/hypothesis/thesis-groups';
+import { approveSelectedSiblings, attachEvidenceToThesis, corroborateThesis, loadThesisGroups, orderGroupsForReview, useEvidenceForThesis } from '@/lib/gap/hypothesis/thesis-groups';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -35,6 +42,7 @@ const Body = z.discriminatedUnion('op', [
   z.object({ op: z.literal('approve'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50), use: z.boolean().optional(), signalIds: z.array(z.string().min(1)).min(1).max(20).optional() }).strict(),
   z.object({ op: z.literal('corroborate'), fingerprint: Fp, force: z.boolean().optional() }).strict(),
   z.object({ op: z.literal('attach'), fingerprint: Fp, signalIds: z.array(z.string().min(1)).min(1).max(20) }).strict(),
+  z.object({ op: z.literal('use_evidence'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50), signalIds: z.array(z.string().min(1)).min(1).max(20) }).strict(),
 ]);
 
 async function sessionEmail(): Promise<string | null> {
@@ -69,6 +77,11 @@ export async function POST(request: NextRequest) {
   if (b.op === 'corroborate') {
     const r = await corroborateThesis(prisma, { fingerprint: b.fingerprint, actor, now, force: b.force });
     return NextResponse.json(r, { status: r.ok ? 200 : 404 });
+  }
+  if (b.op === 'use_evidence') {
+    const r = await useEvidenceForThesis(prisma, { fingerprint: b.fingerprint, hypothesisIds: b.hypothesisIds, signalIds: b.signalIds, actor, now });
+    const status = r.reason === 'group_not_found' ? 404 : r.reason?.startsWith('not_in_group') ? 409 : r.reason ? 422 : 200;
+    return NextResponse.json(r, { status });
   }
   const r = await attachEvidenceToThesis(prisma, { fingerprint: b.fingerprint, signalIds: b.signalIds, actor });
   return NextResponse.json(r, { status: r.reason === 'group_not_found' ? 404 : 200 });

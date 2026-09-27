@@ -59,6 +59,8 @@ export interface ProposeInput {
   signalIds: string[];
   primarySignalId?: string | null;
   sourceRef?: string | null;
+  /** A REVISION of a frozen row (Monday readiness): the old row is never edited; this one points at it. */
+  supersedesId?: string | null;
   metadata?: unknown;
   createdBy: string;
 }
@@ -285,6 +287,7 @@ export async function proposeHypothesis(prisma: any, input: ProposeInput): Promi
     source_ref: input.sourceRef ?? null,
     created_by: input.createdBy,
   };
+  if (input.supersedesId) data.supersedes_id = input.supersedesId;
   const metadata = hasObservation ? input.metadata : withNeedsObservation(input.metadata);
   if (metadata !== undefined) data.metadata = metadata;
 
@@ -301,7 +304,7 @@ export async function proposeHypothesis(prisma: any, input: ProposeInput): Promi
       toStatus: 'draft',
       action: 'propose',
       actor: input.createdBy,
-      payload: { signalIds: input.signalIds, primarySignalId: input.primarySignalId ?? null },
+      payload: { signalIds: input.signalIds, primarySignalId: input.primarySignalId ?? null, ...(input.supersedesId ? { supersedesId: input.supersedesId } : {}) },
     });
     return created.id;
   });
