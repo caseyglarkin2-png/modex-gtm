@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+const EMAIL_SIGN_IN = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -64,30 +66,36 @@ export default function LoginPage() {
             Sign in with Google
           </Button>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-[var(--border)]" /></div>
-            <div className="relative flex justify-center text-xs"><span className="bg-[var(--card)] px-2 text-[var(--muted-foreground)]">or</span></div>
-          </div>
+          {/* Email-only sign-in proves nothing about who is typing: it exists in
+              local development only, matching src/lib/auth-providers.ts. */}
+          {EMAIL_SIGN_IN && (
+            <>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-[var(--border)]" /></div>
+                <div className="relative flex justify-center text-xs"><span className="bg-[var(--card)] px-2 text-[var(--muted-foreground)]">or</span></div>
+              </div>
 
-          <form onSubmit={handleCredentials} className="space-y-3">
-            <div>
-              <Label>Email</Label>
-              <Input
-                type="email"
-                placeholder="casey@freightroll.com"
-                className="mt-1"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            {error && (
-              <p className="text-sm text-red-500">{error}</p>
-            )}
-            <Button type="submit" className="w-full" disabled={loading || !email}>
-              {loading ? 'Signing in...' : 'Sign in with Email'}
-            </Button>
-          </form>
+              <form onSubmit={handleCredentials} className="space-y-3">
+                <div>
+                  <Label>Email</Label>
+                  <Input
+                    type="email"
+                    placeholder="casey@freightroll.com"
+                    className="mt-1"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                {error && (
+                  <p className="text-sm text-red-500">{error}</p>
+                )}
+                <Button type="submit" className="w-full" disabled={loading || !email}>
+                  {loading ? 'Signing in...' : 'Sign in with Email'}
+                </Button>
+              </form>
+            </>
+          )}
 
           <p className="text-center text-xs text-[var(--muted-foreground)]">
             Authorized team members only

@@ -192,7 +192,6 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
         body: JSON.stringify({
           id: approvalId,
           action,
-          actor: 'Casey',
           comment: `${action} from Work Queue`,
         }),
       });
