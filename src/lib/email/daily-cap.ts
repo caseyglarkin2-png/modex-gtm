@@ -6,7 +6,7 @@
  * and none of them counted a thing: perform-send (manual /discovery + the
  * clawd-driven draft queue), send-bulk (whose recipients array had .min(1) and
  * no .max()), process-send-jobs, monday-bump, the engagement thread reply, the
- * daily digest, and the admin gmail-token probe.
+ * and the daily digest. (The admin gmail-token probe that also sent was deleted, ops closeout 2026-09-27.)
  *
  * A `daily_cap` already existed and was DEAD CODE at send time - defined in
  * src/lib/revops/send-strategy.ts, validated as form input, persisted onto

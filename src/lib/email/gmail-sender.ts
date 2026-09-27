@@ -274,7 +274,7 @@ export async function sendViaGmail(
   // send: perform-send (manual /discovery + the clawd-driven draft queue),
   // send-bulk (whose recipients array has .min(1) and no .max()),
   // process-send-jobs, monday-bump, the engagement thread reply, the daily
-  // digest, and the admin gmail-token probe - which imports this function
+  // digest, and (until its deletion, ops closeout 2026-09-27) an admin probe that imported this function
   // directly and so bypasses client.sendEmail entirely. Gating any subset of
   // those routes would have left the others open, and more routes will be
   // added. This is the one place every app send must pass.
