@@ -1,7 +1,7 @@
 # GAP red team remediation: status ledger
 
 STATUS: ACTIVE
-<!-- verified:2026-09-26 -->
+<!-- verified:2026-09-27 -->
 
 Program: close accepted red-team findings T1-T10 in four release trains
 (A: T1 · B: T2-T5 · C: T6-T9 · D: T10). One implementation owner, read-only
@@ -266,8 +266,8 @@ review, production verification.
 
 ### T6 — evidence gate
 
-- status: IMPLEMENTED (Release C, not yet merged); production remediation
-  planned post-deploy (dry run done)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`, production READY 2026-09-27);
+  production remediation applied (see Release C receipt)
 - commit: `f139aa58` (+ remediation script)
 - files: `src/lib/gap/research/evidence-gate.ts` (new), `research/facts.ts`,
   `hypothesis/machine.ts`, `hypothesis/service.ts`, `execution/seller-draft.ts`,
@@ -310,8 +310,8 @@ review, production verification.
 
 ### T7 — honest copy
 
-- status: IMPLEMENTED (Release C, not yet merged); live seed rewrite planned
-  post-deploy (dry run done, scratch rehearsal applied + idempotent)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`); live seed rewrite applied
+  2026-09-27 (see Release C receipt)
 - files: `src/lib/gap/sequences/families.ts`, `src/lib/gap/sequence/call-pack.ts`,
   `src/lib/gap/hypothesis/build.ts`, `src/lib/gap/research/propose.ts`,
   `src/lib/gap/ui/format.ts` (humanWhyNow), `src/components/gap/{action-pack-view,
@@ -356,7 +356,7 @@ review, production verification.
 
 ### T8 — delete raw mailto + complete the call loop
 
-- status: IMPLEMENTED (Release C, not yet merged)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`)
 - commits: `dd870fb0` (mailto), + call loop commit
 - change:
   - raw `mailto:` links deleted from the decision card and the preview page;
@@ -388,8 +388,8 @@ review, production verification.
 
 ### T9 — GAP mailbox reply + bounce intake
 
-- status: IMPLEMENTED (Release C, not yet merged); production proof pending
-  deploy (internal test through casey@yardflow.ai)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`); production proof by
+  internal canary 2026-09-27 (see Release C receipt)
 - files: `src/lib/gap/replies/gap-mailbox.ts` (new), `src/lib/gap/replies/domains.ts`
   (new), `src/lib/email/bounce.ts` (new), `src/app/api/cron/gap-mailbox/route.ts`
   (new), `src/lib/email/gmail-inbox.ts` (listMailboxMessages),
@@ -547,3 +547,67 @@ mutation-proven (`97677061`, `fae9fade`).
   unattributed (audited); non-GAP modex Gmail sends keep their existing bounce
   path (the HubSpot webhook); quote-heavy operator copy can now fail C07's
   minimum (stricter, not a bypass).
+
+### Release C receipt
+
+- PR #270, merge `65f9a9a6`, production READY 2026-09-27 (preview READY before
+  merge). No schema change.
+- gates: full unit suite 465 files / 5017 tests green; typecheck green; local
+  build green; 10/10 scratch e2e scripts (117 checks, 0 failed, zero residue)
+  on the final code; Vercel preview READY; three read-only reviews
+  (methodology, RevOps/deliverability, fresh re-review of the fixes): every
+  BLOCKER and SHOULD-FIX fixed and mutation-proven;
+  github_actions = unavailable_external_billing.
+- production mutations (2026-09-27, each through an existing audited service):
+  - T7: `scripts/gap/rewrite-seed-versions.ts --apply`: the four live seed v1
+    drafts (cmuh640aa…, cmuh640q8…, cmuh64134…, cmuh641g1…) 4 steps -> 1,
+    one `sequence.version_rewritten` audit each. Receipt:
+    `docs/gap/t7-seed-rewrite.md`.
+  - T6: `scripts/gap/remediate-insufficient-active.ts --apply`: 15 ACTIVE
+    hypotheses at INSUFFICIENT (all keyword_only) -> `unresolved` through
+    `close_unresolved`, actor `redteam-t6-remediation`, reason tagged
+    `evidence_insufficient:`. Kept: cmuhbne1z… (Kroger, Giant Eagle facts).
+    Receipt: `docs/gap/t6-insufficient-remediation.md`.
+  - T9: one internal message casey@freightroll.com -> casey@yardflow.ai
+    (`[gap-intake-canary] Release C intake proof 2026-09-27`).
+- production verification (read-only reads):
+  - T6: rerun dry: active 1, INSUFFICIENT 0.
+  - T9 cron: first scheduled run 2026-09-27T05:10:55Z `ok`, apply, 15 inbox
+    messages, 14 `mailbox.unrelated`, 1 `mailbox.bounce_unattributed` (a 5.1.1
+    for one ingredion.com address that GAP never sent to and no persona
+    carries: correctly NOT written), 0 errors, no backlog.
+  - T9 canary: run 2026-09-27T05:20:51Z processed Gmail message
+    1a0e14630eede7dc: InboundMessage created by the intake, `mailbox.canary`
+    audit, 0 notifications for it, no enrollment touched, 0 errors.
+  - The HubSpot reply poller is scheduled daily at 12:45 UTC (keyed on
+    `hs_createdate`).
+- prospect sends: 0. Prospect drafts: 0.
+
+### Cold first-touch gate (T2 + T3 + T5 + T9)
+
+The standing constraint was "no cold first touches from casey@yardflow.ai
+until T2, T3, T5 and T9 are complete and verified".
+
+- T2 person-level send history: PASS (Release B, production-verified on
+  Kroger 1886).
+- T3 routing sees GAP sends: PASS (Release B).
+- T5 one-click unsubscribe + footer: PASS (Release B, live RFC 8058 proof).
+- T9 mailbox reply + bounce intake: PASS (Release C, live cron + canary).
+- sender authentication (public DNS, 2026-09-27): SPF
+  `v=spf1 include:_spf.google.com ~all`; Google DKIM key published at
+  `google._domainkey.yardflow.ai`; DMARC `p=none` with aggregate reports to
+  dmarc.rua@freightroll.com. Alignment on an actual outbound message was not
+  observed here (the GAP mailbox credentials are Vercel-only).
+- bounces: GAP send ledger holds 1 send (Joey Maggard, manual) and 0 GAP
+  bounces. The mailbox's 3-day lookback held one 5.1.1 for a non-GAP manual
+  send. A per-mailbox bounce RATE is not measurable from here (sent volume of
+  casey@yardflow.ai outside GAP is not in the app).
+- complaints: no feedback loop is wired for Gmail consumer recipients;
+  complaint data would come from Google Postmaster Tools, which needs the
+  domain verified there (not verifiable from here).
+- verdict: the four gating tickets pass. Resuming cold first touches is
+  Casey's decision (CASEY ACTION REQUIRED), and the evidence gate now allows
+  a first touch only on a hypothesis citing a verified outreach fact (today:
+  one active hypothesis, Kroger / Giant Eagle; Joey Maggard's step 0 is
+  already sent and is refused again).
+- next: T10 (Release D, branch `feat/gap-redteam-release-d`).
