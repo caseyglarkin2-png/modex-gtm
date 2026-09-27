@@ -82,7 +82,7 @@ review, production verification.
 
 ### T2 — one send history per person
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - commit: see `git log --grep "T2"` on `feat/gap-redteam-release-b`
 - files: `src/lib/gap/execution/person-history.ts` (new),
   `src/lib/gap/execution/next-touch.ts`, `src/lib/gap/execution/seller-draft.ts`,
@@ -121,7 +121,7 @@ review, production verification.
 
 ### T3 — routing sees GAP sends
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - files: `src/lib/gap/routing/inputs.ts` (readComms), `src/lib/gap/routing/rules.ts`,
   `src/lib/gap/routing/types.ts`, tests `routing-inputs.test.ts`, `routing-rules.test.ts`
 - change: `readComms(prisma, email, personaId)` reads the person's GAP send
@@ -143,7 +143,7 @@ review, production verification.
 
 ### T4 — harden the send gate
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - files: `src/lib/gap/execution/seller-draft.ts`, `src/lib/gap/execution/seller-send.ts`,
   `src/lib/email/gmail-sender.ts`, `src/lib/email/autonomy-gate.ts`,
   `src/lib/email/suppression-gate.ts`; tests `tests/unit/gap/send-gate-hardening.test.ts`,
@@ -173,7 +173,7 @@ review, production verification.
 
 ### T5 — one-click unsubscribe + footer
 
-- status: IMPLEMENTED (Release B, not yet merged)
+- status: DONE (Release B: PR #269, merge `87277798`, production READY 2026-09-26)
 - files: `src/lib/email/compliance.ts` (new), `src/app/api/unsubscribe/route.ts`,
   `src/lib/email/templates.ts`, `src/lib/gap/execution/seller-draft.ts`; tests
   `tests/unit/unsubscribe-one-click.test.ts`, `tests/unit/gap/seller-draft.test.ts`
@@ -242,3 +242,24 @@ review, production verification.
   send gates refuse, but Casey could still press Send in Gmail by hand);
   queue display finds history via persona_id only (execution is exact);
   `sequence_stopped` sits after `hot_call` by design (calls stay open).
+
+### Release B receipt
+
+- PR #269, merge `87277798`, production READY 2026-09-26. No schema change.
+- gates: full unit suite 457 files green; typecheck green; local build
+  green; 10/10 scratch e2e scripts (117 checks, 0 failed, zero residue);
+  Vercel preview READY; read-only review (0 BLOCKER, 6 SHOULD-FIX, all
+  fixed); github_actions = unavailable_external_billing.
+- production verification (after READY):
+  - T2 (read-only, `scripts/gap/audit-person-history.ts 1886`): Kroger 1886's
+    newest card `cmuhrmns…` = waiting, touch 2 due 2026-10-01; step 0
+    REFUSED first_touch_already_sent; no open claims.
+  - T5 (live, reserved address gap-t5-oneclick-proof@example.com, no
+    persona): RFC 8058 POST to `/api/unsubscribe/?email&token` with a bad
+    token = 403; with an extra body field = 400; valid = 200 "Successfully
+    unsubscribed"; repeat = 200 "already". Read-only DB check: the
+    unsubscribed_emails row exists (unsubscribed_at 2026-09-27T02:04:16Z).
+- production mutation: one unsubscribed_emails row for the reserved
+  example.com test address (authorized controlled internal test). Nothing else.
+- prospect sends: 0. Prospect drafts: 0.
+- next: T6 (Release C, branch `feat/gap-redteam-release-c`).
