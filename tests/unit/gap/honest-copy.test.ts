@@ -101,7 +101,7 @@ describe('Release C review SF1: sendableEvidence', () => {
 
   it('is VERIFIED_FACT only when the observation cites at least one signal and every cited signal is an outreach fact', () => {
     // Ops closeout 16: the supported shape is a verbatim quote of the cited fact (bare prose is refused: observation-support.test.ts).
-    expect(sendableEvidence('"Giant Eagle" [S:f].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'VERIFIED_FACT', nonFactCitations: [], unsupported: null });
+    expect(sendableEvidence(`"${GIANT_EAGLE.replace(/\.$/, '')}" [S:f].`, [fact, keyword], 'Kroger')).toMatchObject({ tier: 'VERIFIED_FACT', nonFactCitations: [], unsupported: null });
     expect(sendableEvidence('Giant Eagle [S:f]. Capex [S:k].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: ['k'] });
     expect(sendableEvidence('Giant Eagle [S:f]. Ghost [S:gone].', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: ['gone'] });
     expect(sendableEvidence('Giant Eagle, uncited.', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: [] });

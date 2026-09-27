@@ -29,7 +29,7 @@ describe('observationSupportGap', () => {
   });
 
   it('the legacy EDGAR-title label is still a label (historical observations stay readable)', () => {
-    expect(observationSupportGap(`${TITLE}: "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger" [S:sig-f].`, [FACT], 'Kroger')).toBeNull();
+    expect(observationSupportGap(`${TITLE}: "${FACT_TEXT.replace(/\.$/, '')}" [S:sig-f].`, [FACT], 'Kroger')).toBeNull();
   });
 
   it.each([
@@ -68,5 +68,30 @@ describe('what GAP itself builds always passes (no false refusals)', () => {
     const signal = { ...FACT, title: longTitle };
     expect(observationTitle(longTitle).length).toBeLessThanOrEqual(160);
     expect(observationSupportGap(citedQuote(observationTitle(longTitle), FACT_TEXT, 'sig-f', 'Kroger'), [signal], 'Kroger')).toBeNull();
+  });
+});
+
+/**
+ * Closeout review (GAP method P2-2): substring matching let a quote drop a
+ * negation or stitch fragments. A quote must be a WHOLE sentence of a fact it
+ * cites (or the whole excerpt), which is exactly what citedQuote produces.
+ */
+describe('closeout review: a quote is a whole sentence of its fact, never a fragment', () => {
+  const NEG: GateSignal & { title: string } = { ...FACT, id: 'n1', evidence_text: 'We do not plan to close the Memphis distribution center. We opened a cross-dock in Reno in August.', title: 'Acme 10-K (filed 2026-09-18)' };
+
+  it.each([
+    ['a truncation that drops the negation', '"close the Memphis distribution center" [S:n1].'],
+    ['a mosaic of fragments', '"We do" [S:n1] "close the Memphis distribution center" [S:n1].'],
+    ['a one-word quote', '"close" [S:n1].'],
+  ])('refused: %s', (_label, observation) => {
+    expect(observationSupportGap(observation, [NEG], 'Acme')).not.toBeNull();
+  });
+
+  it('one whole sentence of a multi-sentence fact is supported', () => {
+    expect(observationSupportGap('"We opened a cross-dock in Reno in August" [S:n1].', [NEG], 'Acme')).toBeNull();
+  });
+
+  it('the whole excerpt, as citedQuote builds it (tokens after inner sentences), is supported', () => {
+    expect(observationSupportGap(citedQuote(NEG.title, NEG.evidence_text!, 'n1', 'Acme'), [NEG], 'Acme')).toBeNull();
   });
 });
