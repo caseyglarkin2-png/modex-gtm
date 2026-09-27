@@ -145,3 +145,36 @@ describe('Release C review: specific site changes pass; hypotheticals and non-ph
     expect(isPhysicalOpsFact(sentence)).toBe(true);
   });
 });
+
+/**
+ * Final red-team regression (GAP method P1-1): verbatim production signals the
+ * live gate rated FACT although they state no change to the network. Pinned
+ * with the exact production sentences (PepsiCo 8-K 2026-05-22 indenture
+ * definition; General Mills transaction-cost lines) plus the reviewer's probes.
+ */
+describe('final regression: filing boilerplate is not a fact', () => {
+  it.each([
+    '“ Principal Property ” means any single manufacturing or processing plant, office building, warehouse or portion thereof owned or leased by the Company or a Restricted Subsidiary other than a plant, office building, warehouse or portion thereof which, in the reasonable opinion of the Company’s Board',
+    '“Principal property” means any single manufacturing or processing plant, office building or warehouse owned or leased by us or any of our restricted subsidiaries other than a plant, warehouse, office building or portion thereof which, in the opinion of our Board of Directors, is not of material importance',
+    'In fiscal 2026 , we also recorded $31 million of transaction costs, primarily related to the Divestitures and the definitive agreement to sell our Brazil business , compared to $49 million of transaction costs related to the Divestitures and the Acquisition last year.',
+    'Transaction costs Fiscal 2027 transaction costs primarily related to the definitive agreement to sell our Brazil business.',
+    'We also recorded $ 14.8 million of transaction costs, primarily related to the definitive agreement to sell our Brazil business.',
+    'We continue to invest in our supply chain network to support long-term growth.',
+    'We launched a new marketing campaign across our retail network.',
+    'The office building next to the warehouse was repainted.',
+    '“Facility Closure” means the permanent closing of any distribution center or plant owned by the Company.',
+  ])('not a fact: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(false);
+  });
+
+  it.each([
+    'General Mills is closing three manufacturing plants in Missouri as the cereal and snacks company aims to make its supply chain more competitive.',
+    'General Mills will redesign the plant and warehouse network behind Cheerios, Blue Buffalo and Pillsbury, as part of a plan to cut $3 billion in costs by fiscal 2030.',
+    'On Dec. 11, the office of Kentucky Governor Andy Beshear announced that the grocery giant plans to open a new $391 million distribution center in Simpson County.',
+    'Kroger has identified opportunities to optimize its fulfillment network by closing facilities in Pleasant Prairie, Wisconsin; Frederick, Maryland; and Groveland, Florida, while monitoring performance at the remaining facilities.',
+    'The company launched a new automated distribution center in Texas.',
+    'The company is building a new warehouse in Reno.',
+  ])('still a fact: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(true);
+  });
+});
