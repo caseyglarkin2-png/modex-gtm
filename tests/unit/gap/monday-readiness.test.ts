@@ -12,6 +12,7 @@
  * Approve + use; the result reports actual state; chosen verified evidence
  * rebuilds an editable observation and REVISES (never edits) a frozen one.
  */
+import { hypothesisFindFirst } from './fixtures/hypothesis-table';
 import { describe, expect, it, vi } from 'vitest';
 import { actionabilityOf, outreachReadiness } from '@/lib/gap/hypothesis/actionability';
 import { approveSelectedSiblings, corroborateThesis, isResearchWork, isReviewWork, loadThesisGroups, splitThesisWork, summarizeApproval, toThesisCard, useEvidenceForThesis } from '@/lib/gap/hypothesis/thesis-groups';
@@ -58,6 +59,7 @@ function db(rows: any[], signals: any[] = [KW, IRRELEVANT, FACT]) {
         return q?.where?.superseded_by ? rows.filter((r) => !superseded.has(r.id)) : rows;
       }),
       findUnique: vi.fn(async ({ where }: any) => rows.find((r) => r.id === where.id) ?? null),
+      findFirst: vi.fn(hypothesisFindFirst(() => rows)),
     },
     prospectingSignal: { findMany: vi.fn(async ({ where }: any) => signals.filter((s) => where.id.in.includes(s.id))) },
     gapAuditEvent: { create: vi.fn(async () => ({ id: 'e' })) },

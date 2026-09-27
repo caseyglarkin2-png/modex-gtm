@@ -24,6 +24,7 @@ import { sourceLabel } from './source-label';
 import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
 import { actionabilityOf } from '../hypothesis/actionability';
+import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -59,7 +60,18 @@ export interface ProposedNarrative {
 }
 
 export type ProposeFromResearchResult =
-  | { ok: true; hypothesisId: string; existing: boolean; hypothesisIds: string[]; skipped?: number[]; narrative: ProposedNarrative }
+  | {
+      ok: true;
+      hypothesisId: string;
+      existing: boolean;
+      hypothesisIds: string[];
+      skipped?: number[];
+      /** Group members who already have current thesis work: nothing new was proposed for them (final Monday P1). */
+      alreadyRevised?: Array<{ personaId: number; revision: ExistingRevision }>;
+      narrative: ProposedNarrative;
+    }
+  /** Final Monday P1: the person already has a revision of this thesis; nothing new was created. */
+  | { ok: false; reason: 'revision_exists'; existingRevision: ExistingRevision }
   | { ok: false; reason: 'run_not_found' | 'no_fresh_evidence' | 'conflicting_evidence' | string };
 
 /**
@@ -128,8 +140,29 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
     evidence: quotable.map((s) => ({ signalId: s.id, title: s.title, excerpt: s.evidence_text!, observedAt: s.observed_at.toISOString() })),
   };
 
-  const proposeFor = async (personaId: number | null, sourceRef: string): Promise<{ ok: true; id: string; existing: boolean } | { ok: false; reason: string }> => {
-    const supersedesId = await frozenToSupersede(prisma, run.account_name, personaId, base?.problem_family ?? status.problemFamily ?? 'hidden_capacity', input.now);
+  const family = base?.problem_family ?? status.problemFamily ?? 'hidden_capacity';
+  type ProposeOne = { ok: true; id: string; existing: boolean } | { ok: false; reason: 'revision_exists'; revision: ExistingRevision } | { ok: false; reason: string };
+  // The card thesis's own revision chain counts only for the person it belongs to.
+  const chainFor = (personaId: number | null) => (base && (base.primary_persona_id == null || base.primary_persona_id === personaId) ? base.id : null);
+  const current = (personaId: number | null) => existingRevisionFor(prisma, { accountName: run.account_name, personaId, problemFamily: family, hypothesisId: chainFor(personaId) });
+  const proposeFor = async (personaId: number | null, sourceRef: string): Promise<ProposeOne> => {
+    // This run already proposed for this person (a retry or a second click): the same draft, idempotent.
+    const mine: { id: string } | null = await prisma.prospectingHypothesis.findFirst({ where: { source_ref: sourceRef }, select: { id: true } });
+    if (mine) return { ok: true, id: mine.id, existing: true };
+    // Final Monday P1: the person already has current work for this thesis (a revision
+    // created from verified evidence, or an open draft). Never a second equivalent draft.
+    const already = await current(personaId);
+    if (already) return { ok: false, reason: 'revision_exists', revision: already };
+    const supersedesId = await frozenToSupersede(prisma, run.account_name, personaId, family, input.now);
+    const raced = async (e: unknown) => {
+      // A concurrent click won the unique supersedes_id / source_ref race: that is the existing revision.
+      if ((e as { code?: string })?.code !== 'P2002') throw e;
+      const won = (await prisma.prospectingHypothesis.findFirst({ where: { source_ref: sourceRef }, select: { id: true } })) as { id: string } | null;
+      if (won) return { ok: false as const, reason: 'duplicate_source_ref', existingId: won.id };
+      const revision = await current(personaId);
+      if (!revision) throw e;
+      return { ok: false as const, reason: 'revision_exists', existingId: revision.hypothesisId, revision };
+    };
     const r = await proposeHypothesis(prisma, {
       accountName: run.account_name,
       primaryPersonaId: personaId,
@@ -151,8 +184,9 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
       ...(supersedesId ? { supersedesId } : {}),
       metadata: { proposedFrom: 'research_this', researchRunId: run.id, basedOn: base?.id ?? null, ...(supersedesId ? { revisionOf: supersedesId } : {}) },
       createdBy: input.actor,
-    });
+    }).catch(raced);
     if (r.ok) return { ok: true, id: r.id, existing: false };
+    if ('revision' in r && r.revision) return { ok: false, reason: 'revision_exists', revision: r.revision };
     if (r.reason === 'duplicate_source_ref' && r.existingId) return { ok: true, id: r.existingId, existing: true };
     return { ok: false, reason: r.reason };
   };
@@ -161,11 +195,14 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   if (group.length === 0) {
     const persona = run.persona_id ? await prisma.persona.findUnique({ where: { id: run.persona_id }, select: { id: true } }) : null;
     const r = await proposeFor(persona?.id ?? null, `research:${run.id}`);
-    return r.ok ? { ok: true, hypothesisId: r.id, existing: r.existing, hypothesisIds: [r.id], narrative } : { ok: false, reason: r.reason };
+    if (r.ok) return { ok: true, hypothesisId: r.id, existing: r.existing, hypothesisIds: [r.id], narrative };
+    if ('revision' in r) return { ok: false, reason: 'revision_exists', existingRevision: r.revision };
+    return { ok: false, reason: r.reason };
   }
 
   const ids: string[] = [];
   const skipped: number[] = [];
+  const alreadyRevised: Array<{ personaId: number; revision: ExistingRevision }> = [];
   let allExisting = true;
   for (const pid of group) {
     const persona: { id: number; account_name: string | null } | null = await prisma.persona.findUnique({ where: { id: pid }, select: { id: true, account_name: true } });
@@ -174,10 +211,15 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
       continue;
     }
     const r = await proposeFor(persona.id, pid === run.persona_id ? `research:${run.id}` : `research:${run.id}:p${pid}`);
+    if (!r.ok && 'revision' in r) {
+      alreadyRevised.push({ personaId: persona.id, revision: r.revision });
+      continue;
+    }
     if (!r.ok) return { ok: false, reason: r.reason };
     ids.push(r.id);
     allExisting &&= r.existing;
   }
+  if (ids.length === 0 && alreadyRevised.length > 0) return { ok: false, reason: 'revision_exists', existingRevision: alreadyRevised[0].revision };
   if (ids.length === 0) return { ok: false, reason: 'no_person_in_account' };
-  return { ok: true, hypothesisId: ids[0], existing: allExisting, hypothesisIds: ids, skipped, narrative };
+  return { ok: true, hypothesisId: ids[0], existing: allExisting, hypothesisIds: ids, skipped, ...(alreadyRevised.length ? { alreadyRevised } : {}), narrative };
 }

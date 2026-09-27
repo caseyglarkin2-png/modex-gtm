@@ -13,6 +13,7 @@
  *
  * House `prisma: any` glue.
  */
+import { existingRevisionFor } from './current-revision';
 import { linkSignals, proposeHypothesis, transitionHypothesis, updateDraftNarrative } from './service';
 import { groupSiblings, REVIEWABLE_STATUSES, thesisFingerprint, type ThesisGroup, type ThesisRow } from './siblings';
 import { actionabilityOf, EVIDENCE_REFUSALS, outreachReadiness, type ActionSignal, type NextStep, type ReadinessReason } from './actionability';
@@ -355,6 +356,13 @@ export async function useEvidenceForThesis(
     const old = await prisma.prospectingHypothesis.findUnique({ where: { id } });
     if (!old) {
       results.push({ hypothesisId: id, ok: false, from: m.status, to: null, detail: 'not found', reason: 'not_found' });
+      continue;
+    }
+    // Final Monday P1: this person already has current work for this thesis (a revision, or
+    // an open draft from RESEARCH THIS). Point at it; never a second equivalent draft.
+    const already = await existingRevisionFor(prisma, { accountName: old.account_name, personaId: old.primary_persona_id ?? null, problemFamily: old.problem_family, hypothesisId: id });
+    if (already) {
+      results.push({ hypothesisId: id, ok: true, from: m.status, to: m.status, revisionId: already.hypothesisId, detail: 'revision already exists' });
       continue;
     }
     // A concurrent click (or research-this) can win the unique source_ref / supersedes_id race:

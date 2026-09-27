@@ -26,6 +26,7 @@ export async function POST(request: NextRequest, context: { params: Promise<{ ru
   const body = (await request.json().catch(() => ({}))) as { personaIds?: unknown };
   const personaIds = Array.isArray(body?.personaIds) ? body.personaIds.filter((x): x is number => Number.isInteger(x)).slice(0, 25) : undefined;
   const r = await proposeFromResearch(prisma, { researchRunId: runId.trim(), actor: email, now: new Date(), ...(personaIds?.length ? { personaIds } : {}) });
+  if (!r.ok && 'existingRevision' in r) return NextResponse.json({ error: r.reason, existingRevision: r.existingRevision }, { status: 409 });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: r.reason === 'run_not_found' ? 404 : 409 });
   return NextResponse.json(r, { status: r.existing ? 200 : 201 });
 }
