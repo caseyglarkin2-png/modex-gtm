@@ -506,3 +506,44 @@ away, then restored GREEN.
   carries no status class in our schema); a reply seen by both the Gmail
   intake and the HubSpot poller is two InboundMessage rows (T10 counts
   replies by person and thread, not rows).
+
+### Release C gate — fresh read-only re-review of the fixes
+
+A second fresh read-only reviewer read `51147dde..HEAD`: 1 BLOCKER, 8
+SHOULD-FIX, 6 NOTE. All BLOCKER and SHOULD-FIX items fixed, each
+mutation-proven (`97677061`, `fae9fade`).
+
+- B1 (intake could stall, or lag ~24h, with no error): every message now gets
+  one verdict row (`mailbox.unrelated` and `mailbox.own` included), a run lists
+  ids, skips handled ones in one read and fetches at most 200 new messages,
+  oldest first; the watermark moves only past processed mail. The 24h hold is
+  gone.
+- S1 (a truncated listing dropped the oldest mail): `listMailboxIds` narrows
+  its `before:` bound until the window is complete; a fully processed narrowed
+  window moves the watermark to its end.
+- S2 (a DSN for a drafted-then-sent address was never attributed): bounce
+  attribution includes DRAFTED recipients, and a late-attribution sweep
+  re-checks the last 24h of `mailbox.unrelated` / `mailbox.bounce_unattributed`
+  verdicts from the database, fetching only those that now attribute.
+- S3 (the quoted original could DNC a good address): unknown-user text counts
+  only in the Diagnostic-Code or the notice's own lines naming the recipient,
+  before the returned original; sender-side wording never counts.
+- S4 (dead-address codes filed as blocks; blocks did nothing): O365 5.4.1
+  "recipient address rejected" and 5.2.1 "disabled" are bad addresses; any
+  other block writes `mailbox.delivery_blocked` per recipient, and next-touch
+  stops `delivery_blocked` for a human. Never do-not-contact.
+- S5: the sequence runtime refuses retired seed copy (`copy_version_outdated`).
+- S6: C07/C08 set a cited quote aside only when its words are the cited ref's
+  excerpt, at most 60 words; a fake quote with a real marker counts as prose.
+- S7: `account_replied` also holds live enrollment and clears once a human
+  dispositions the message; one localized auto-reply pattern everywhere.
+- S8: the call script is gated on live facts only (`hypothesisSendable`).
+- NOTE residuals (recorded, not blocking): a quarantined reply has no
+  automatic re-drive (the InboundMessage usually exists, so next-touch still
+  stops; the cron shows the failure); the canary does not check DMARC (it can
+  only create an InboundMessage row for an own-domain sender, pausing
+  nothing); a multi-recipient DSN classifies every recipient by its first
+  Status line (GAP sends to one recipient); a Final-Recipient alias falls to
+  unattributed (audited); non-GAP modex Gmail sends keep their existing bounce
+  path (the HubSpot webhook); quote-heavy operator copy can now fail C07's
+  minimum (stricter, not a bypass).

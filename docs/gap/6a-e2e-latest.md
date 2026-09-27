@@ -6,17 +6,17 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-6a.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap6a-1790483010174
+- Run tag: gap6a-1790484980232
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: fe935200
-- Ran at: 2026-09-27T04:23:30.368Z
+- Git: fae9fade
+- Ran at: 2026-09-27T04:56:20.449Z
 
 ## Steps
 
-- PASS seed.accounts: created GAP E2E Niagara Bottling gap6a-1790483010174, GAP E2E Real Account gap6a-1790483010174 (hubspot_company_id=hs-gap6a-1790483010174), GAP E2E Wrong Guess Co gap6a-1790483010174
-- PASS seed.triggers: niagara="GAP E2E Niagara Bottling gap6a-1790483010174, LLC" unknown="Totally Unknown Company gap6a-1790483010174" conflict=(name="GAP E2E Wrong Guess Co gap6a-1790483010174", hubspot_company_id=hs-gap6a-1790483010174)
+- PASS seed.accounts: created GAP E2E Niagara Bottling gap6a-1790484980232, GAP E2E Real Account gap6a-1790484980232 (hubspot_company_id=hs-gap6a-1790484980232), GAP E2E Wrong Guess Co gap6a-1790484980232
+- PASS seed.triggers: niagara="GAP E2E Niagara Bottling gap6a-1790484980232, LLC" unknown="Totally Unknown Company gap6a-1790484980232" conflict=(name="GAP E2E Wrong Guess Co gap6a-1790484980232", hubspot_company_id=hs-gap6a-1790484980232)
 - PASS run.hypothesize: identity={"resolved":2,"aliasesRegistered":1,"conflicts":1,"refused":{"unresolved_company":1}}
-- PASS assert.conflict: resolved=GAP E2E Real Account gap6a-1790483010174 conflict=GAP E2E Wrong Guess Co gap6a-1790483010174 audited=true
+- PASS assert.conflict: resolved=GAP E2E Real Account gap6a-1790484980232 conflict=GAP E2E Wrong Guess Co gap6a-1790484980232 audited=true
 - PASS assert.alias_speeds_up_next_lookup: via=alias confidence=90
 
 ## Counts
