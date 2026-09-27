@@ -549,56 +549,73 @@ function extractDeliveryStatus(part: GmailMessagePart | undefined): string | nul
 export const MAILBOX_LIST_CAP = 5000;
 
 /**
- * Inbox messages of `sender`'s mailbox received after `afterEpoch` (seconds):
- * the OLDEST `max` of the window, oldest first (Release C review S1). Gmail
- * lists newest first, so every id in the window is listed, then the oldest
- * are fetched; a backlog larger than one run drains forward as the caller's
- * watermark advances. `truncated` is set when even the id listing hit
- * MAILBOX_LIST_CAP. Throws on a list failure (the caller must not advance
- * its watermark on an unreadable mailbox).
+ * The ids of `sender`'s inbox messages received after `afterEpoch`
+ * (seconds), OLDEST FIRST, as one COMPLETE window (Release C re-review B1/S1).
+ *
+ * Gmail lists newest first, so a window holding more than MAILBOX_LIST_CAP
+ * ids would silently drop its OLDEST mail. Instead the upper bound (`before:`)
+ * is halved until the window is complete: the result is every id in
+ * [afterEpoch, windowEnd), and the caller drains the rest on later runs.
+ * `windowEnd` is null when the window runs to now. Throws on a list failure
+ * (the caller must not advance its watermark on an unreadable mailbox).
  */
-export async function listMailboxMessages(sender: GmailSender, afterEpoch: number, max = 200): Promise<MailboxMessage[] & { truncated?: boolean }> {
+export async function listMailboxIds(
+  sender: GmailSender,
+  afterEpoch: number,
+  nowEpoch: number = Math.floor(Date.now() / 1000),
+): Promise<{ ids: string[]; windowEnd: number | null }> {
   const accessToken = await accessTokenForSender(sender);
   const mailbox = sender.userEmail.toLowerCase();
-  const listed: string[] = [];
-  let pageToken: string | undefined;
-  do {
-    const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
-    listUrl.searchParams.set('q', `in:inbox after:${afterEpoch}`);
-    listUrl.searchParams.set('maxResults', '500');
-    if (pageToken) listUrl.searchParams.set('pageToken', pageToken);
-    const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
-    if (!res.ok) throw new Error(`Gmail mailbox list failed (${res.status})`);
-    const data = (await res.json()) as { messages?: GmailMessage[]; nextPageToken?: string };
-    for (const m of data.messages ?? []) listed.push(m.id);
-    pageToken = data.nextPageToken;
-  } while (pageToken && listed.length < MAILBOX_LIST_CAP);
-  const truncated = Boolean(pageToken);
-  // Newest first from Gmail: the oldest `max` are the tail.
-  const ids = listed.slice(-max).reverse();
-
-  const out: MailboxMessage[] & { truncated?: boolean } = [];
-  if (truncated) out.truncated = true;
-  for (const id of ids) {
-    const detail = await getMessageDetail(accessToken, mailbox, id);
-    const from = getHeader(detail, 'From');
-    const { html, text } = extractBodies(detail.payload);
-    out.push({
-      id: detail.id,
-      threadId: detail.threadId,
-      rfcMessageId: getHeader(detail, 'Message-ID') || null,
-      fromEmail: extractEmail(from),
-      fromName: extractName(from),
-      subject: getHeader(detail, 'Subject'),
-      snippet: detail.snippet || '',
-      bodyText: stripQuotedReply(text),
-      rawText: text,
-      bodyHtml: html,
-      deliveryStatus: extractDeliveryStatus(detail.payload),
-      labelIds: detail.labelIds ?? [],
-      receivedAt: detail.internalDate ? new Date(parseInt(detail.internalDate, 10)) : new Date(),
-      headers: collectHeaders(detail),
-    });
+  const listWindow = async (before: number | null): Promise<{ ids: string[]; complete: boolean }> => {
+    const listed: string[] = [];
+    let pageToken: string | undefined;
+    do {
+      const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
+      listUrl.searchParams.set('q', `in:inbox after:${afterEpoch}${before !== null ? ` before:${before}` : ''}`);
+      listUrl.searchParams.set('maxResults', '500');
+      if (pageToken) listUrl.searchParams.set('pageToken', pageToken);
+      const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+      if (!res.ok) throw new Error(`Gmail mailbox list failed (${res.status})`);
+      const data = (await res.json()) as { messages?: GmailMessage[]; nextPageToken?: string };
+      for (const m of data.messages ?? []) listed.push(m.id);
+      pageToken = data.nextPageToken;
+    } while (pageToken && listed.length < MAILBOX_LIST_CAP);
+    return { ids: listed, complete: !pageToken };
+  };
+  let before: number | null = null;
+  for (let i = 0; i < 32; i += 1) {
+    const w = await listWindow(before);
+    // Newest first from Gmail: reverse for oldest first.
+    if (w.complete) return { ids: w.ids.reverse(), windowEnd: before };
+    const hi: number = before ?? nowEpoch;
+    const mid: number = afterEpoch + Math.floor((hi - afterEpoch) / 2);
+    if (mid <= afterEpoch) break;
+    before = mid;
   }
-  return out;
+  throw new Error(`Gmail mailbox window after ${afterEpoch} cannot be narrowed below ${MAILBOX_LIST_CAP} messages`);
+}
+
+/** One inbox message, read in full. */
+export async function getMailboxMessage(sender: GmailSender, id: string): Promise<MailboxMessage> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const detail = await getMessageDetail(accessToken, mailbox, id);
+  const from = getHeader(detail, 'From');
+  const { html, text } = extractBodies(detail.payload);
+  return {
+    id: detail.id,
+    threadId: detail.threadId,
+    rfcMessageId: getHeader(detail, 'Message-ID') || null,
+    fromEmail: extractEmail(from),
+    fromName: extractName(from),
+    subject: getHeader(detail, 'Subject'),
+    snippet: detail.snippet || '',
+    bodyText: stripQuotedReply(text),
+    rawText: text,
+    bodyHtml: html,
+    deliveryStatus: extractDeliveryStatus(detail.payload),
+    labelIds: detail.labelIds ?? [],
+    receivedAt: detail.internalDate ? new Date(parseInt(detail.internalDate, 10)) : new Date(),
+    headers: collectHeaders(detail),
+  };
 }

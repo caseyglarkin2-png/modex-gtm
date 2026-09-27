@@ -33,15 +33,14 @@ import { parseSteps } from '../sequence/steps';
 import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
 import { personSendHistoryForDecision } from './person-history';
 import { gapGmailSender } from './gap-sender';
-import { FREEMAIL_DOMAINS } from '../replies/domains';
+import { AUTO_REPLY_SUBJECT, DELIVERY_BLOCKED_KIND, FREEMAIL_DOMAINS } from '../replies/domains';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const AUTO_REPLY_SUBJECT = /^\s*(automatic reply|auto[- ]?reply|autoreply|out of (the )?office|ooo\b|auto:)/i;
 
-export type StopReason = 'replied' | 'unsubscribed' | 'do_not_contact' | 'invalid_address' | 'meeting_booked';
+export type StopReason = 'replied' | 'unsubscribed' | 'do_not_contact' | 'invalid_address' | 'delivery_blocked' | 'meeting_booked';
 
 export interface SentTouch {
   stepIndex: number;
@@ -126,6 +125,20 @@ export async function computeNextTouch(prisma: PrismaLike, decisionId: string, n
   if (unsub) return { state: 'stopped', reason: 'unsubscribed', detail: 'The recipient unsubscribed.', sent };
 
   const firstSentAt = new Date(first.sentAt);
+  // Release C re-review S4: the recipient's server refused a GAP email for
+  // policy (5.7.x and similar). The address may be fine, so nothing is marked
+  // do-not-contact, but the next touch waits for a human instead of hitting
+  // the same wall.
+  const blocked = prisma.gapAuditEvent?.findFirst
+    ? await prisma.gapAuditEvent.findFirst({
+        where: { subject_type: 'recipient', subject_id: recipient, kind: DELIVERY_BLOCKED_KIND, created_at: { gt: firstSentAt } },
+        select: { payload: true },
+      })
+    : null;
+  if (blocked) {
+    const status = (blocked.payload as { status?: unknown } | null)?.status;
+    return { state: 'stopped', reason: 'delivery_blocked', detail: `The recipient's server refused an earlier email${typeof status === 'string' ? ` (${status})` : ''}. Check the address and the block before anything else goes out.`, sent };
+  }
   const disposition = await prisma.conversationDisposition.findFirst({
     where: { contact_email: recipient, created_at: { gt: firstSentAt }, response_class: { notIn: [...NON_STOPPING_RESPONSE_CLASSES] } },
     select: { response_class: true },

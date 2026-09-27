@@ -1,9 +1,9 @@
 /**
  * Release C review (RevOps) S1 and S7.
  *
- * S1: Gmail lists a mailbox newest first. A window holding more mail than one
- * run reads must drain OLDEST first, or the oldest messages (the ones most
- * likely to be a reply to a GAP send) are skipped as the watermark passes them.
+ * S1 (re-review B1/S1): Gmail lists a mailbox newest first. The lister must
+ * return one COMPLETE window, oldest first, narrowing its upper bound rather
+ * than silently dropping the oldest ids past the listing cap.
  *
  * S7: a hard bounce is about ONE send. It marks that send's EmailLog rows
  * bounced, never the address's whole history.
@@ -15,25 +15,30 @@ vi.mock('@/lib/email/gmail-sender', async (orig) => ({
   accessTokenForSender: vi.fn(async () => 'tok'),
 }));
 
-import { listMailboxMessages, MAILBOX_LIST_CAP } from '@/lib/email/gmail-inbox';
+import { getMailboxMessage, listMailboxIds, MAILBOX_LIST_CAP } from '@/lib/email/gmail-inbox';
 import { recordHardBounce } from '@/lib/email/bounce';
 
 const SENDER = { userEmail: 'casey@yardflow.ai', serviceAccountJson: '{}' } as never;
 
-/** Gmail's list: newest first. id n was received at minute n. */
+/** Gmail's list over `after:` / `before:` (epoch seconds): newest first. id n was received at BASE + 60n seconds. */
+const BASE = Math.floor(Date.UTC(2026, 8, 27) / 1000);
 function gmailFetch(total: number) {
   return vi.fn(async (url: string) => {
     const u = new URL(url);
     if (u.pathname.endsWith('/messages')) {
+      const q = u.searchParams.get('q') ?? '';
+      const after = Number(/after:(\d+)/.exec(q)?.[1] ?? '0');
+      const before = Number(/before:(\d+)/.exec(q)?.[1] ?? String(Number.MAX_SAFE_INTEGER));
+      const all = Array.from({ length: total }, (_, n) => n).filter((n) => BASE + 60 * n > after && BASE + 60 * n < before).reverse();
       const size = Number(u.searchParams.get('maxResults'));
       const start = Number(u.searchParams.get('pageToken') ?? '0');
-      const ids = Array.from({ length: Math.min(size, total - start) }, (_, i) => ({ id: String(total - 1 - (start + i)) }));
-      const next = start + ids.length < total ? String(start + ids.length) : undefined;
-      return new Response(JSON.stringify({ messages: ids, nextPageToken: next }), { status: 200 });
+      const page = all.slice(start, start + size).map((n) => ({ id: String(n) }));
+      const next = start + page.length < all.length ? String(start + page.length) : undefined;
+      return new Response(JSON.stringify({ messages: page, nextPageToken: next }), { status: 200 });
     }
     const id = u.pathname.split('/').pop()!;
     return new Response(
-      JSON.stringify({ id, threadId: `t${id}`, internalDate: String(Date.UTC(2026, 8, 27, 0, Number(id))), snippet: '', labelIds: ['INBOX'], payload: { headers: [{ name: 'From', value: 'a@b.com' }, { name: 'Subject', value: 's' }], mimeType: 'text/plain', body: { data: '' } } }),
+      JSON.stringify({ id, threadId: `t${id}`, internalDate: String((BASE + 60 * Number(id)) * 1000), snippet: '', labelIds: ['INBOX'], payload: { headers: [{ name: 'From', value: 'a@b.com' }, { name: 'Subject', value: 's' }], mimeType: 'text/plain', body: { data: '' } } }),
       { status: 200 },
     );
   });
@@ -41,23 +46,31 @@ function gmailFetch(total: number) {
 
 afterEach(() => vi.unstubAllGlobals());
 
-describe('S1: the lister drains a backlog oldest first', () => {
-  it('with 450 messages in the window and max 200, it returns the OLDEST 200, oldest first', async () => {
+describe('re-review B1/S1: the lister returns one COMPLETE window, oldest first', () => {
+  it('a window under the cap: every id, oldest first, running to now', async () => {
     vi.stubGlobal('fetch', gmailFetch(450));
-    const out = await listMailboxMessages(SENDER, 0, 200);
-    expect(out.map((m) => m.id)).toEqual(Array.from({ length: 200 }, (_, i) => String(i)));
-    expect(out.truncated).toBeUndefined();
+    const out = await listMailboxIds(SENDER, BASE - 1, BASE + 60 * 1000);
+    expect(out.windowEnd).toBeNull();
+    expect(out.ids).toEqual(Array.from({ length: 450 }, (_, i) => String(i)));
   });
 
-  it('a window under max returns every message, oldest first', async () => {
+  it('past the listing cap it narrows the upper bound: the OLDEST mail is never dropped', async () => {
+    const total = MAILBOX_LIST_CAP + 10;
+    vi.stubGlobal('fetch', gmailFetch(total));
+    const out = await listMailboxIds(SENDER, BASE - 1, BASE + 60 * total);
+    expect(out.windowEnd).not.toBeNull();
+    expect(out.ids[0]).toBe('0');
+    expect(out.ids.length).toBeLessThanOrEqual(MAILBOX_LIST_CAP);
+    // Complete: every message received before windowEnd is listed, in order.
+    const expected = Array.from({ length: total }, (_, n) => n).filter((n) => BASE + 60 * n < out.windowEnd!).map(String);
+    expect(out.ids).toEqual(expected);
+  });
+
+  it('getMailboxMessage reads one message in full', async () => {
     vi.stubGlobal('fetch', gmailFetch(3));
-    expect((await listMailboxMessages(SENDER, 0, 200)).map((m) => m.id)).toEqual(['0', '1', '2']);
-  });
-
-  it('a window past the listing cap is flagged truncated', async () => {
-    vi.stubGlobal('fetch', gmailFetch(MAILBOX_LIST_CAP + 10));
-    const out = await listMailboxMessages(SENDER, 0, 5);
-    expect(out.truncated).toBe(true);
+    const m = await getMailboxMessage(SENDER, '2');
+    expect(m).toMatchObject({ id: '2', threadId: 't2', fromEmail: 'a@b.com' });
+    expect(m.receivedAt.getTime()).toBe((BASE + 120) * 1000);
   });
 });
 

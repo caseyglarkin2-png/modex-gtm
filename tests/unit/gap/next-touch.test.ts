@@ -12,7 +12,7 @@ declare global {
 import { computeNextTouch, dueAfter, recipientReplied } from '@/lib/gap/execution/next-touch';
 import { DRAFTED, DRAFT_SENT } from '@/lib/gap/execution/draft-ledger';
 import { LEGACY_HC } from './fixtures/legacy-hc';
-import { findManyFrom } from './fixtures/where';
+import { findFirstFrom, findManyFrom } from './fixtures/where';
 
 const HC = LEGACY_HC; // four steps: the multi-touch mechanics (seeds are single-touch since red team T7)
 const SENT_AT = new Date('2026-09-24T15:00:00.000Z'); // Thursday
@@ -23,8 +23,12 @@ function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
     audit.push({ id: `d${step}`, kind: DRAFTED, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(SENT_AT.getTime() - 3_600_000 + step), payload: { gmailDraftId: `r${step}`, stepIndex: step, recipient: 'joey.maggard@kroger.com', personaId: 1886, sequenceVersionId: 'v1', subject: step === 0 ? 'Doors versus spots' : 'Re: Doors versus spots', bodySnapshot: `body ${step}`, senderIdentity: 'casey@yardflow.ai', createdAt: SENT_AT.toISOString() } });
     audit.push({ id: `s${step}`, kind: DRAFT_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(SENT_AT.getTime() + step), payload: { gmailDraftId: `r${step}`, gmailSentMessageId: `m${step}`, gmailThreadId: 't1', sentAt: new Date(SENT_AT.getTime() + step * 86_400_000 * 5).toISOString() } });
   }
+  if (extra.blocked) {
+    // Release C re-review S4: a policy DSN recorded for this recipient after the first send.
+    audit.push({ id: 'blk', kind: 'mailbox.delivery_blocked', subject_type: 'recipient', subject_id: 'joey.maggard@kroger.com', created_at: new Date(SENT_AT.getTime() + 3_600_000), payload: { status: '5.7.1' } });
+  }
   return {
-    gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(audit, args)) },
+    gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(audit, args)), findFirst: vi.fn(async (args: any) => findFirstFrom(audit, args)) },
     routingDecision: {
       findUnique: vi.fn(async ({ where }: any) => (where.id === 'dec-1' ? { id: 'dec-1', persona_id: 1886 } : null)),
       findMany: vi.fn(async (args: any) => findManyFrom([{ id: 'dec-1', persona_id: 1886 }], args)),
@@ -81,6 +85,7 @@ describe('computeNextTouch', () => {
     [{ unsub: true }, 'unsubscribed'],
     [{ disposition: 'problem_rejected' }, 'replied'],
     [{ inbound: 'Re: Doors versus spots' }, 'replied'],
+    [{ blocked: true }, 'delivery_blocked'],
   ])('stop rule %j -> %s (no further draft is prepared)', async (extra, reason) => {
     expect(await computeNextTouch(ledger([0], extra), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason });
   });

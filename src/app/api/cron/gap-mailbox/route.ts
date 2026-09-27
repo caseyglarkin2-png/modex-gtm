@@ -4,7 +4,7 @@ import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } fr
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { classifyMailboxMessage, GAP_MAILBOX_WATERMARK_KEY, loadGapSendContext, MAILBOX_FIRST_LOOKBACK_SECONDS, MAILBOX_OVERLAP_SECONDS, pollGapMailbox } from '@/lib/gap/replies/gap-mailbox';
-import { listMailboxMessages } from '@/lib/email/gmail-inbox';
+import { getMailboxMessage, listMailboxIds } from '@/lib/email/gmail-inbox';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -13,6 +13,8 @@ export const maxDuration = 300;
 const CRON_NAME = 'gap-mailbox';
 const CRON_PATH = '/api/cron/gap-mailbox';
 const CRON_SCHEDULE = '*/10 * * * *';
+/** A dry run classifies at most this many unhandled messages. */
+const DRY_RUN_SAMPLE = 50;
 
 /**
  * GAP mailbox intake cron (red team T9): reads the GAP mailbox
@@ -57,16 +59,22 @@ export async function GET(request: Request) {
       const stored = await prisma.systemConfig.findUnique({ where: { key: GAP_MAILBOX_WATERMARK_KEY } });
       const parsed = stored?.value ? Number.parseInt(stored.value, 10) : NaN;
       const since = Number.isFinite(parsed) ? parsed - MAILBOX_OVERLAP_SECONDS : Math.floor(now.getTime() / 1000) - MAILBOX_FIRST_LOOKBACK_SECONDS;
-      const messages = await listMailboxMessages(sender, since);
+      const listing = await listMailboxIds(sender, since);
       const ctx = await loadGapSendContext(prisma);
+      const handled = await prisma.gapAuditEvent.findMany({
+        where: { subject_type: 'gmail_message', subject_id: { in: listing.ids.slice(0, 1000) }, kind: { startsWith: 'mailbox.' } },
+        select: { subject_id: true },
+      });
+      const done = new Set(handled.map((r: { subject_id: string }) => r.subject_id));
+      const pending = listing.ids.filter((id) => !done.has(id));
       const counts: Record<string, number> = {};
-      for (const m of messages) {
-        const kind = classifyMailboxMessage(m, ctx, sender.userEmail).kind;
+      for (const id of pending.slice(0, DRY_RUN_SAMPLE)) {
+        const kind = classifyMailboxMessage(await getMailboxMessage(sender, id), ctx, sender.userEmail).kind;
         counts[kind] = (counts[kind] ?? 0) + 1;
       }
-      report = { since, seen: messages.length, counts };
+      report = { since, seen: listing.ids.length, pending: pending.length, sampled: Math.min(pending.length, DRY_RUN_SAMPLE), counts };
     } else {
-      report = { ...(await pollGapMailbox(prisma, { now }, { list: (after) => listMailboxMessages(sender, after), mailbox: sender.userEmail })) };
+      report = { ...(await pollGapMailbox(prisma, { now }, { listIds: (after) => listMailboxIds(sender, after), fetch: (id) => getMailboxMessage(sender, id), mailbox: sender.userEmail })) };
       // Release C review S2: a failed or quarantined message, an unattributable
       // delivery notice or a truncated listing is never a quiet success.
       const errors = Array.isArray(report.errors) ? (report.errors as string[]) : [];

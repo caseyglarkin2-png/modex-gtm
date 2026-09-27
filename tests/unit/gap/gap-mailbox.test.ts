@@ -123,8 +123,17 @@ function world() {
 const ingest = vi.fn(async () => ({ action: 'paused' }) as never);
 beforeEach(() => ingest.mockClear());
 
-const poll = (prisma: any, messages: MailboxMessage[]) =>
-  pollGapMailbox(prisma, { now: NOW }, { list: async () => messages, mailbox: MAILBOX, ingest: ingest as never, bounce: recordHardBounce });
+/** The Gmail side of a run: an oldest-first id listing plus a per-id fetch over the same messages. */
+const gmail = (messages: MailboxMessage[], windowEnd: number | null = null) => ({
+  listIds: vi.fn(async () => ({ ids: [...messages].sort((a, b) => a.receivedAt.getTime() - b.receivedAt.getTime()).map((m) => m.id), windowEnd })),
+  fetch: vi.fn(async (id: string) => {
+    const m = messages.find((x) => x.id === id);
+    if (!m) throw new Error(`no message ${id}`);
+    return m;
+  }),
+});
+const poll = (prisma: any, messages: MailboxMessage[], extra: Record<string, unknown> = {}) =>
+  pollGapMailbox(prisma, { now: NOW }, { ...gmail(messages), mailbox: MAILBOX, ingest: ingest as never, bounce: recordHardBounce, ...extra });
 
 describe('parseDsn', () => {
   it('a Gmail hard bounce: failed, 5.1.1, the failed recipient', () => {
@@ -186,12 +195,14 @@ describe('pollGapMailbox', () => {
     expect(t.audit.find((a) => a.kind === 'mailbox.reply')!.payload).toMatchObject({ attribution: 'account_domain' });
   });
 
-  it('unrelated inbox mail (not a GAP thread, not an emailed account) is ignored and not stored', async () => {
+  it('unrelated inbox mail (not a GAP thread, not an emailed account) is not stored; its verdict row records only sender, thread and time', async () => {
     const { t, prisma } = world();
     const r = await poll(prisma, [msg({ id: 'u1', threadId: 'thr-other', fromEmail: 'newsletter@vendor.example', subject: 'Webinar' })]);
     expect(r).toMatchObject({ unrelated: 1, replies: 0, inboundMessagesCreated: 0 });
     expect(t.inbound).toHaveLength(0);
-    expect(t.audit.filter((a) => String(a.kind).startsWith('mailbox.'))).toHaveLength(0);
+    const rows = t.audit.filter((a) => String(a.kind).startsWith('mailbox.'));
+    expect(rows.map((a) => a.kind)).toEqual(['mailbox.unrelated']);
+    expect(Object.keys(rows[0].payload).sort()).toEqual(['from', 'receivedAt', 'threadId']);
   });
 
   it('a duplicate poll (overlapping window) handles each message once', async () => {
@@ -208,14 +219,14 @@ describe('pollGapMailbox', () => {
     await poll(prisma, [msg()]);
     const wm = Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value);
     expect(wm).toBe(Math.floor(new Date('2026-09-26T15:00:00Z').getTime() / 1000));
-    const list = vi.fn(async () => [] as MailboxMessage[]);
-    await pollGapMailbox(prisma, { now: NOW }, { list, mailbox: MAILBOX, ingest: ingest as never });
-    expect(list).toHaveBeenCalledWith(wm - MAILBOX_OVERLAP_SECONDS);
+    const g = gmail([]);
+    await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: ingest as never });
+    expect(g.listIds).toHaveBeenCalledWith(wm - MAILBOX_OVERLAP_SECONDS);
   });
 
   it('an unreadable mailbox throws and the watermark does not move', async () => {
     const { t, prisma } = world();
-    await expect(pollGapMailbox(prisma, { now: NOW }, { list: async () => { throw new Error('Gmail mailbox list failed (503)'); }, mailbox: MAILBOX })).rejects.toThrow('503');
+    await expect(pollGapMailbox(prisma, { now: NOW }, { listIds: async () => { throw new Error('Gmail mailbox list failed (503)'); }, fetch: async () => { throw new Error('unreachable'); }, mailbox: MAILBOX })).rejects.toThrow('503');
     expect(t.config).toHaveLength(0);
   });
 
@@ -261,8 +272,14 @@ describe('B1: only a bad ADDRESS writes do-not-contact', () => {
     ['5.7.26', '550 5.7.26 Unauthenticated email is not accepted from this domain', 'policy'],
     // A relay or policy denial phrased like a missing user is still a block about us, never a bad address.
     ['5.7.1', '550 5.7.1 Unrouteable address: user does not exist on this relay', 'policy'],
-    ['5.4.1', '550 5.4.1 Recipient address rejected: user unknown in relay recipient table', 'policy'],
-    ['5.4.1', '550 5.4.1 Recipient address rejected: Access denied', 'policy'],
+    // Re-review S4: Office 365 directory-based edge blocking and Gmail's disabled account ARE dead addresses.
+    ['5.4.1', '550 5.4.1 Recipient address rejected: user unknown in relay recipient table', 'hard'],
+    ['5.4.1', '550 5.4.1 Recipient address rejected: Access denied. AS(201806281)', 'hard'],
+    ['5.4.1', '550 5.4.1 Relay access denied', 'policy'],
+    ['5.2.1', '550 5.2.1 The email account that you tried to reach is disabled', 'hard'],
+    ['5.2.1', '550 5.2.1 Mailbox temporarily unavailable', 'policy'],
+    // Re-review S3: sender-side wording is never about the recipient.
+    ['5.0.0', '550 5.0.0 Sender address does not exist', 'policy'],
     ['5.2.2', '552 5.2.2 The email account that you tried to reach is over quota', 'policy'],
     ['5.1.8', '553 5.1.8 Sender address rejected', 'policy'],
     ['5.0.0', '550 Rejected', 'policy'],
@@ -347,7 +364,7 @@ describe('S2: a poison message never halts intake silently', () => {
     const boom = vi.fn(async () => {
       throw new Error('db timeout');
     });
-    const run = () => pollGapMailbox(prisma, { now: NOW }, { list: async () => [poison], mailbox: MAILBOX, ingest: boom as never });
+    const run = () => poll(prisma, [poison], { ingest: boom as never });
     const r1 = await run();
     expect(r1.errors[0]).toContain('p1: db timeout');
     expect(r1.quarantined).toBe(0);
@@ -358,33 +375,77 @@ describe('S2: a poison message never halts intake silently', () => {
     expect(r3.quarantined).toBe(1);
     expect(t.audit.filter((a) => a.kind === 'mailbox.quarantined').map((a) => a.subject_id)).toEqual(['p1']);
     expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(Math.floor(poison.receivedAt.getTime() / 1000));
-    // Quarantined is handled: the next run passes it without retrying.
-    const r4 = await run();
-    expect(r4).toMatchObject({ alreadyHandled: 1, errors: [] });
+    // Quarantined is a verdict: the next run passes it without fetching it.
+    const g = gmail([poison]);
+    const r4 = await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: boom as never });
+    expect(r4).toMatchObject({ alreadyHandled: 1, fetched: 0, errors: [] });
+    expect(g.fetch).not.toHaveBeenCalled();
   });
 });
 
-describe('S4: a reply that arrives before its send is recorded is not lost', () => {
-  it('young unrelated mail holds the watermark; once the send lands it is re-read and becomes a reply', async () => {
-    const { t, prisma } = world();
-    const early = msg({ id: 'early1', threadId: 'thr-late', fromEmail: 'sam.ng@acme-foods.com', receivedAt: new Date('2026-09-27T09:00:00Z') });
-    const later = msg({ id: 'later1', threadId: 'thr-other', fromEmail: 'newsletter@vendor.example', receivedAt: new Date('2026-09-27T11:00:00Z') });
-    const r1 = await poll(prisma, [early, later]);
-    expect(r1).toMatchObject({ unrelated: 2, held: 2 });
-    const wm = Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value);
-    expect(wm).toBeLessThan(Math.floor(early.receivedAt.getTime() / 1000));
-    // The send is recorded late.
-    t.audit.push({ id: 'late', kind: MANUAL_SENT, subject_type: 'routing_decision', subject_id: 'dec-c', created_at: NOW, payload: { personaId: 5, recipient: 'sam.ng@acme-foods.com', gmailThreadId: 'thr-late', sentAt: '2026-09-27T08:00:00Z' } });
-    const list = vi.fn(async () => [early, later]);
-    const r2 = await pollGapMailbox(prisma, { now: NOW }, { list, mailbox: MAILBOX, ingest: ingest as never });
-    expect(list).toHaveBeenCalledWith(wm - MAILBOX_OVERLAP_SECONDS);
-    expect(r2.replies).toBe(1);
+describe('re-review B1: intake never stalls on a dense window', () => {
+  it('handled mail is skipped by id in one read and never fetched again; only new mail is fetched', async () => {
+    const { prisma } = world();
+    const old = Array.from({ length: 5 }, (_, i) => msg({ id: `n${i}`, threadId: 'thr-other', fromEmail: 'newsletter@vendor.example', receivedAt: new Date(Date.UTC(2026, 8, 26, 10, i)) }));
+    await poll(prisma, old);
+    const fresh = msg({ id: 'fresh', receivedAt: new Date('2026-09-27T11:00:00Z') });
+    const g = gmail([...old, fresh]);
+    const r = await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: ingest as never });
+    expect(r).toMatchObject({ alreadyHandled: 5, fetched: 1, replies: 1, backlog: 0 });
+    expect(g.fetch.mock.calls.map((c) => c[0])).toEqual(['fresh']);
   });
 
-  it('old unrelated mail does not hold the watermark', async () => {
+  it('over the run budget: the OLDEST new messages are processed, the rest is backlog, and the watermark moves only past what was processed', async () => {
     const { t, prisma } = world();
-    await poll(prisma, [msg({ id: 'u-old', threadId: 'thr-other', fromEmail: 'newsletter@vendor.example', receivedAt: new Date('2026-09-25T09:00:00Z') })]);
-    expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(Math.floor(new Date('2026-09-25T09:00:00Z').getTime() / 1000));
+    const mail = Array.from({ length: 5 }, (_, i) => msg({ id: `b${i}`, threadId: 'thr-other', fromEmail: 'newsletter@vendor.example', receivedAt: new Date(Date.UTC(2026, 8, 26, 10, i)) }));
+    const r1 = await poll(prisma, mail, { budget: 2 });
+    expect(r1).toMatchObject({ fetched: 2, backlog: 3 });
+    expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(Math.floor(mail[1].receivedAt.getTime() / 1000));
+    const r2 = await poll(prisma, mail, { budget: 2 });
+    expect(r2).toMatchObject({ alreadyHandled: 2, fetched: 2, backlog: 1 });
+    const r3 = await poll(prisma, mail, { budget: 2 });
+    expect(r3).toMatchObject({ alreadyHandled: 4, fetched: 1, backlog: 0 });
+  });
+
+  it('a narrowed window processed in full moves the watermark to its end', async () => {
+    const { t, prisma } = world();
+    const end = Math.floor(new Date('2026-09-26T20:00:00Z').getTime() / 1000);
+    const g = gmail([msg({ id: 'w1', threadId: 'thr-other', fromEmail: 'newsletter@vendor.example', receivedAt: new Date('2026-09-26T10:00:00Z') })], end);
+    await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: ingest as never });
+    expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(end - 1);
+  });
+});
+
+describe('S4 / re-review S2: a reply or bounce that lands before its send is recorded is not lost', () => {
+  it('an unrelated verdict is re-checked from the database; once the send lands it is fetched and becomes a reply', async () => {
+    const { t, prisma } = world();
+    const early = msg({ id: 'early1', threadId: 'thr-late', fromEmail: 'sam.ng@acme-foods.com', receivedAt: new Date('2026-09-27T09:00:00Z') });
+    const r1 = await poll(prisma, [early]);
+    expect(r1).toMatchObject({ unrelated: 1, replies: 0 });
+    // The watermark is not held back by it.
+    expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(Math.floor(early.receivedAt.getTime() / 1000));
+    // The send is recorded late; the next run's window no longer lists the message.
+    t.audit.push({ id: 'late', kind: MANUAL_SENT, subject_type: 'routing_decision', subject_id: 'dec-c', created_at: NOW, payload: { personaId: 5, recipient: 'sam.ng@acme-foods.com', gmailThreadId: 'thr-late', sentAt: '2026-09-27T08:00:00Z' } });
+    const g = gmail([]);
+    g.fetch.mockImplementation(async (id: string) => (id === 'early1' ? early : Promise.reject(new Error('no'))));
+    const r2 = await pollGapMailbox(prisma, { now: NOW }, { ...g, mailbox: MAILBOX, ingest: ingest as never });
+    expect(r2).toMatchObject({ reattributed: 1, replies: 1 });
+    expect(t.inbound.map((m) => m.id)).toEqual(['early1']);
+    // Settled: a third run re-checks nothing.
+    const g3 = gmail([]);
+    const r3 = await pollGapMailbox(prisma, { now: NOW }, { ...g3, mailbox: MAILBOX, ingest: ingest as never });
+    expect(r3.reattributed).toBe(0);
+    expect(g3.fetch).not.toHaveBeenCalled();
+  });
+
+  it('a hard DSN for a DRAFTED address (sent from Gmail, not yet recorded) is attributed and writes the bad-address truth', async () => {
+    const { t, prisma } = world();
+    t.audit.push({ id: 'dr', kind: 'execution.gmail_drafted', subject_type: 'routing_decision', subject_id: 'dec-d', created_at: SENT_AT, payload: { gmailDraftId: 'dr-1', personaId: 91, recipient: 'gone@kroger.com', gmailThreadId: 'thr-gone' } });
+    t.personas.push({ id: 91, email: 'gone@kroger.com', email_status: 'unverified', do_not_contact: false });
+    const dsn = msg({ id: 'dsn-dr', threadId: 'thr-gone', fromEmail: 'mailer-daemon@googlemail.com', subject: 'Delivery Status Notification (Failure)', deliveryStatus: 'Final-Recipient: rfc822; gone@kroger.com\nAction: failed\nStatus: 5.1.1', rawText: '', snippet: '', bodyText: '' });
+    const r = await poll(prisma, [dsn]);
+    expect(r).toMatchObject({ hardBounces: 1, unattributedBounces: 0 });
+    expect(t.personas.find((p) => p.id === 91)).toMatchObject({ email_status: 'hard_bounce', do_not_contact: true });
   });
 });
 
@@ -407,5 +468,39 @@ describe('the intake canary (production proof without a prospect thread)', () =>
     const r = await poll(prisma, [msg({ id: 'fake1', threadId: 'thr-other', fromEmail: 'someone@vendor.example', subject: '[gap-intake-canary] hi' })]);
     expect(r).toMatchObject({ canaries: 0, unrelated: 1 });
     expect(t.inbound).toHaveLength(0);
+  });
+});
+
+describe('re-review S3: only the notice itself can say the recipient does not exist', () => {
+  it('a mailbox-full notice with no status that QUOTES our email saying "doesn\'t exist" is a policy block, never DNC', async () => {
+    const { t, prisma } = world();
+    const notice = msg({
+      id: 'q1',
+      threadId: 'thr-nobody',
+      fromEmail: 'postmaster@kroger.com',
+      subject: 'Undeliverable: Doors versus spots',
+      headers: { 'X-Failed-Recipients': 'nobody.here@kroger.com' },
+      deliveryStatus: null,
+      rawText: 'Delivery to nobody.here@kroger.com failed: mailbox full.\n\n----- Original message -----\nTo: nobody.here@kroger.com\nHi Joey, if that pattern doesn\'t exist at Kroger, tell me.',
+      snippet: 'Delivery to nobody.here@kroger.com failed: mailbox full.',
+      bodyText: '',
+    });
+    expect(parseDsn(notice)!.dsnClass).toBe('policy');
+    const r = await poll(prisma, [notice]);
+    expect(r).toMatchObject({ hardBounces: 0, policyBounces: 1 });
+    expect(t.personas.find((p) => p.id === 77)).toMatchObject({ do_not_contact: false });
+  });
+
+  it('the same notice naming the recipient as unknown IS a bad address', () => {
+    const notice = msg({ id: 'q2', fromEmail: 'postmaster@kroger.com', subject: 'Undeliverable: x', headers: { 'X-Failed-Recipients': 'nobody.here@kroger.com' }, deliveryStatus: null, rawText: 'nobody.here@kroger.com: user unknown\n\n----- Original message -----\n...', snippet: '', bodyText: '' });
+    expect(parseDsn(notice)!.dsnClass).toBe('hard');
+  });
+
+  it('a policy block holds the next touch (delivery_blocked row per recipient), without DNC', async () => {
+    const { t, prisma } = world();
+    await poll(prisma, [msg({ id: 'pb1', threadId: 'thr-nobody', fromEmail: 'mailer-daemon@googlemail.com', subject: 'Delivery Status Notification (Failure)', headers: { 'Content-Type': 'multipart/report; report-type=delivery-status' }, deliveryStatus: 'Final-Recipient: rfc822; nobody.here@kroger.com\nAction: failed\nStatus: 5.7.1\nDiagnostic-Code: smtp; 550 5.7.1 rejected by policy', rawText: '', snippet: '', bodyText: '' })]);
+    const row = t.audit.find((a) => a.kind === 'mailbox.delivery_blocked');
+    expect(row).toMatchObject({ subject_type: 'recipient', subject_id: 'nobody.here@kroger.com' });
+    expect(t.personas.find((p) => p.id === 77)).toMatchObject({ do_not_contact: false });
   });
 });

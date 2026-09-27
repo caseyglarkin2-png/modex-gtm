@@ -2,12 +2,13 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const poll = vi.fn(async () => ({ since: 1, seen: 2, replies: 1 }));
-const list = vi.fn(async () => [] as unknown[]);
+const list = vi.fn(async () => ({ ids: [] as string[], windowEnd: null }));
+const fetchOne = vi.fn(async () => { throw new Error('unexpected fetch'); });
 const sender = { value: { userEmail: 'casey@yardflow.ai', serviceAccountJson: '{}' } as null | { userEmail: string; serviceAccountJson: string } };
 vi.mock('@/lib/prisma', () => ({ prisma: { systemConfig: { findUnique: vi.fn(async () => null) }, gapAuditEvent: { findMany: vi.fn(async () => []) } } }));
 vi.mock('@/lib/cron-monitor', () => ({ markCronStarted: vi.fn(async () => undefined), markCronSkipped: vi.fn(async () => undefined), markCronSuccess: vi.fn(async () => undefined), markCronFailure: vi.fn(async () => undefined) }));
 vi.mock('@/lib/gap/execution/gap-sender', () => ({ gapGmailSender: () => sender.value }));
-vi.mock('@/lib/email/gmail-inbox', () => ({ listMailboxMessages: (...a: unknown[]) => (list as any)(...a) }));
+vi.mock('@/lib/email/gmail-inbox', () => ({ listMailboxIds: (...a: unknown[]) => (list as any)(...a), getMailboxMessage: (...a: unknown[]) => (fetchOne as any)(...a) }));
 vi.mock('@/lib/gap/replies/gap-mailbox', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/replies/gap-mailbox')>()), pollGapMailbox: (...a: unknown[]) => (poll as any)(...a) }));
 
 import { GET } from '@/app/api/cron/gap-mailbox/route';
