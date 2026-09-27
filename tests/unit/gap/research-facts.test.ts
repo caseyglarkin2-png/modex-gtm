@@ -118,3 +118,30 @@ describe('T6: false-positive contexts are not physical-network facts', () => {
     expect(isPhysicalOpsFact('In August 2026 the company opened a 1.1 million square foot distribution center in Ohio.')).toBe(true);
   });
 });
+
+/**
+ * Release C review (methodology): the filter must key on a SPECIFIC,
+ * NON-HYPOTHETICAL change to a named kind of site. Pinned with the reviewer's
+ * sentences.
+ */
+describe('Release C review: specific site changes pass; hypotheticals and non-physical changes do not', () => {
+  it.each([
+    'We may close additional manufacturing plants in the future if demand declines.',
+    'We continue to invest in our digital network and loyalty programs to drive engagement.',
+    'The Company launched a new retail media network for its suppliers.',
+    'The Company completed its acquisition of an e-commerce analytics software company.',
+    'The Company consolidated its gate security vendor contracts.',
+    'We might build additional warehouses as volume grows.',
+  ])('not a fact: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(false);
+  });
+
+  it.each([
+    'The Company plans capital investments of $1.2 billion to build a new automated distribution center in Georgia.',
+    'We will close the Memphis distribution center in March and expect severance of $4 million.',
+    'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).',
+    'In August 2026 the company opened a 1.1 million square foot distribution center in Ohio.',
+  ])('a fact: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(true);
+  });
+});

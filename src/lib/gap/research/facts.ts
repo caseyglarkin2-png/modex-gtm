@@ -81,11 +81,45 @@ export function isAcquisitionFact(sentence: string): boolean {
   return DEFINITIVE_ACQUISITION.test(sentence);
 }
 
+/**
+ * Release C review: a hypothetical is not a fact. "We may close additional
+ * plants", "we might build warehouses", "could result in investments in
+ * facilities" state nothing that happened or is scheduled.
+ */
+const HYPOTHETICAL = /\b(?:may|might|could|would)\b/i;
+
+/** A "network" that is not a physical one (the retail-media, loyalty or IT kind). */
+const NON_PHYSICAL_NETWORK = /\b(?:digital|media|social|payments?|loyalty|advertising|data|computer|telecom|wireless|dealer|franchise)\s+networks?\b/gi;
+
+/** An acquisition of a company that is not physical network (software, data, media). */
+const NON_PHYSICAL_ACQUISITION = /\b(?:software|analytics|technology|tech|apps?|platform|digital|saas|data|media|marketing|fintech|e-commerce)\b/i;
+
+/** Vendor and service contracts are paperwork, not a site change. */
+const CONTRACT_CONTEXT = /\b(?:vendor|supplier|service|security)\s+contracts?\b|\bcontracts?\s+with\b|\bagreements?\s+with\b/i;
+
+/**
+ * A change verb that directly governs a named kind of site: "build a new
+ * automated distribution center", "close the Memphis distribution center",
+ * "opened two cross-docks". When a sentence says THIS, it is a fact even if it
+ * also mentions the money (capital investments, severance) behind it.
+ */
+const SPECIFIC_SITE_CHANGE =
+  /\b(?:open(?:ed|s|ing)?|clos(?:e|ed|es|ing)|build(?:s|ing)?|built|construct(?:s|ed|ing)?|consolidat(?:e|ed|es|ing)|relocat(?:e|ed|es|ing)|automat(?:e|ed|es|ing)|expand(?:s|ed|ing)?|launch(?:ed|es|ing)?|add(?:s|ed|ing)?)\s+(?:(?:a|an|the|its|our|their|two|three|four|five|six|\d+)\s+)?(?:new\s+)?(?:[A-Z][\w.-]*\s+){0,3}(?:(?:automated|regional|temperature[- ]controlled|cold[- ]storage)\s+)?(?:distribution cent(?:er|re)|fulfil?lment cent(?:er|re)|warehouse|manufacturing plant|production plant|plant|facility|DC|cross[- ]dock|yard)s?\b/;
+
+export function hasSpecificSiteChange(sentence: string): boolean {
+  return SPECIFIC_SITE_CHANGE.test(sentence);
+}
+
 /** Does this sentence state a physical-operations or network change (and is not a financial-statement mention)? */
 export function isPhysicalOpsFact(sentence: string): boolean {
+  if (HYPOTHETICAL.test(sentence)) return false;
+  if (CONTRACT_CONTEXT.test(sentence)) return false;
+  if (hasSpecificSiteChange(sentence)) return true;
   if (isFinancialStatementMention(sentence)) return false;
   if (isNonOperationalContext(sentence)) return false;
-  return (FACILITY.test(sentence) && CHANGE.test(sentence)) || isAcquisitionFact(sentence);
+  if (isAcquisitionFact(sentence)) return !NON_PHYSICAL_ACQUISITION.test(sentence);
+  const physical = sentence.replace(NON_PHYSICAL_NETWORK, ' ');
+  return FACILITY.test(physical) && CHANGE.test(physical);
 }
 
 const ABBREVIATION_END = /\b(?:Co|Inc|Corp|Ltd|Cos|L\.P|U\.S|No|Nos|Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|approx|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.$/;
