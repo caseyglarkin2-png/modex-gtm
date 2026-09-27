@@ -183,6 +183,25 @@ describe('POST /api/unsubscribe call-shape snapshot (pre-refactor contract)', ()
     expect(await res.json()).toStrictEqual({ error: 'Forbidden: cross-origin request' });
     expect(calls).toStrictEqual([]);
   });
+
+  it.each(['https://yardflow.ai', 'https://www.yardflow.ai'])('ops closeout 4: the branded page at %s (proxied to this app) is same-site', async (origin) => {
+    const req = new NextRequest(`${APP_URL}/api/unsubscribe`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', origin },
+      body: JSON.stringify({ email: FRESH, token: generateToken(FRESH) }),
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(200);
+  });
+
+  it.each(['https://yardflow.ai.evil.example', 'https://evilyardflow.ai', 'http://yardflow.ai'])('ops closeout 4: a look-alike origin %s is still cross-origin', async (origin) => {
+    const req = new NextRequest(`${APP_URL}/api/unsubscribe`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', origin },
+      body: JSON.stringify({ email: FRESH, token: generateToken(FRESH) }),
+    });
+    expect((await POST(req)).status).toBe(403);
+  });
 });
 
 describe('recordUnsubscribe helper', () => {
