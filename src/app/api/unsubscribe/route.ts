@@ -14,6 +14,27 @@ const UnsubscribeSchema = z.object({
 // Backward-compat cutoff: unsigned links accepted until this date (60 days from deploy)
 const UNSIGNED_CUTOFF = new Date('2026-07-01T00:00:00Z');
 
+/**
+ * RFC 8058 one-click (red team T5). A mailbox provider POSTs to the exact
+ * List-Unsubscribe URL, whose query carries the signed identity
+ * (`email` + `token`), with a form body of ONLY `List-Unsubscribe=One-Click`
+ * and no Origin. Identity never comes from the body: a body that carries
+ * anything else is refused, so a crafted request cannot swap the address.
+ */
+function oneClickBody(req: NextRequest, form: URLSearchParams): Record<string, string> | { error: string } {
+  const keys = [...new Set(form.keys())];
+  if (form.get('List-Unsubscribe') !== 'One-Click' || keys.length !== 1) {
+    return { error: 'One-click body must be exactly List-Unsubscribe=One-Click' };
+  }
+  const q = req.nextUrl.searchParams;
+  const body: Record<string, string> = {};
+  for (const k of ['email', 'token']) {
+    const v = q.get(k);
+    if (v) body[k] = v;
+  }
+  return body;
+}
+
 export async function POST(req: NextRequest) {
   try {
     // CSRF check: reject requests without a same-origin Origin or Referer header
@@ -34,9 +55,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = isOneClick
-      ? Object.fromEntries(new URLSearchParams(await req.text()))
-      : await req.json();
+    let body: unknown;
+    if (isOneClick) {
+      const oc = oneClickBody(req, new URLSearchParams(await req.text()));
+      if ('error' in oc) return NextResponse.json({ error: oc.error }, { status: 400 });
+      // One-click carries no human to re-confirm, so it is signed or nothing.
+      if (!oc.token) return NextResponse.json({ error: 'Unsubscribe token required' }, { status: 403 });
+      body = oc;
+    } else {
+      body = await req.json();
+    }
     const parsed = UnsubscribeSchema.safeParse(body);
 
     if (!parsed.success) {

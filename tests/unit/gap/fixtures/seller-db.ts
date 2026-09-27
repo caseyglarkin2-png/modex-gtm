@@ -4,6 +4,10 @@ import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
 import type { CompileResult } from '@/lib/gap/compiler/compile';
 import { findManyFrom } from './where';
 
+// The List-Unsubscribe header is always signed by the real code path (red team
+// T5: it targets the API one-click URL, which carries an HMAC token).
+process.env.UNSUBSCRIBE_SECRET ??= 'fixture-unsubscribe-secret';
+
 export const NOW = new Date('2026-09-25T15:00:00.000Z');
 export const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
 

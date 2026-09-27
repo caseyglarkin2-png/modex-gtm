@@ -170,3 +170,38 @@ review, production verification.
   GAP + email suites 148 files / 2862 tests green; typecheck green.
 - production mutation: none.
 - next: T5.
+
+### T5 — one-click unsubscribe + footer
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- files: `src/lib/email/compliance.ts` (new), `src/app/api/unsubscribe/route.ts`,
+  `src/lib/email/templates.ts`, `src/lib/gap/execution/seller-draft.ts`; tests
+  `tests/unit/unsubscribe-one-click.test.ts`, `tests/unit/gap/seller-draft.test.ts`
+  (the old assertion pinned the header at the PAGE, i.e. the defect),
+  `tests/unit/gap/fixtures/seller-db.ts` (test signing secret)
+- change:
+  - List-Unsubscribe (GAP seller email and app templates) =
+    `<https://modex-gtm.vercel.app/api/unsubscribe/?email=…&token=…>` +
+    `List-Unsubscribe-Post: List-Unsubscribe=One-Click`. The trailing slash is
+    load-bearing: measured 2026-09-26, POST /api/unsubscribe?… answers 308
+    (trailingSlash: true), and a provider need not follow a redirect on POST.
+  - POST /api/unsubscribe, form-encoded: identity and token come ONLY from the
+    URL query; the body must be exactly `List-Unsubscribe=One-Click` (anything
+    else 400); a token is required (403 without / invalid); no Origin needed.
+    Then the existing canonical `recordUnsubscribe` (unsubscribed_emails row,
+    Persona.do_not_contact case-insensitively, HubSpot opt-out mirror).
+  - Footer: the physical address the app footer already carried
+    (`FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104`, now one
+    constant) on the GAP seller email, HTML and text parts.
+  - Branded path: NOT moved. yardflow.ai has no /unsubscribe proxy
+    (`GET https://yardflow.ai/unsubscribe/` = 404); branding it needs a
+    Flow-State- rewrite in another repo. Recorded as follow-up; the visible
+    link stays on the app origin, which is correct and working.
+- tests: exact RFC 8058 POST -> unsubscribed_emails row, persona DNC, next
+  touch stopped, next send refused (`persona_do_not_contact`); no Origin ok;
+  bad token 403 writes nothing; extra body field 400; header targets (app +
+  GAP) and postal address. RED first: 6/6 failed. Mutation (header target
+  back to the page): 2 failed; restored GREEN. GAP + unsubscribe + email
+  suites 146 files / 2840 tests green; typecheck green.
+- production mutation: none.
+- next: Release B gate.

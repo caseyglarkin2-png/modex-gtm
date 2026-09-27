@@ -5,6 +5,7 @@
  */
 
 import { generateToken } from './unsubscribe-token';
+import { COMPANY_POSTAL_ADDRESS } from './compliance';
 import { generateOpenToken } from './open-token';
 import { getSiteUrl } from '@/lib/site-url';
 import { resolveSenderIdentity, type SenderIdentity } from './sender-identity';
@@ -31,16 +32,8 @@ export function buildOpenPixel(trackingId: string): string {
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
-/** Build RFC 8058 List-Unsubscribe headers for one-click unsubscribe (Gmail/Yahoo mandate) */
-export function listUnsubscribeHeaders(recipientEmail: string): Record<string, string> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
-  const token = generateToken(recipientEmail);
-  const url = `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}&token=${token}`;
-  return {
-    'List-Unsubscribe': `<${url}>`,
-    'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
-  };
-}
+/** RFC 8058 List-Unsubscribe headers: the API one-click URL, never the page (red team T5). */
+export { listUnsubscribeHeaders } from './compliance';
 
 /** Strip HTML to plain text for multipart/alternative */
 export function htmlToPlainText(html: string): string {
@@ -134,7 +127,7 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
     <tr>
       <td style="padding:0 24px 24px; border-top:1px solid #f0f0f0;">
         <p style="margin:8px 0 0; font-size:10px; color:#9ca3af; line-height:1.5;">
-          FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104<br/>
+          ${COMPANY_POSTAL_ADDRESS}<br/>
           <a href="${unsubscribeUrl}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
         </p>
       </td>

@@ -30,7 +30,7 @@
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
-import { generateToken } from '@/lib/email/unsubscribe-token';
+import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
 import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
@@ -124,8 +124,7 @@ async function defaultActiveOpportunity(prisma: PrismaLike, accountName: string,
 }
 
 function defaultUnsubscribeUrl(email: string): string {
-  const base = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
-  return `${base}/unsubscribe?email=${encodeURIComponent(email)}&token=${generateToken(email)}`;
+  return unsubscribePageUrl(email);
 }
 
 function escapeHtml(text: string): string {
@@ -168,12 +167,12 @@ export function draftHtml(body: string, unsubscribeUrl: string, signatureHtml: s
     .map((p) => `<p style="margin:0 0 14px 0;">${escapeHtml(p).replace(/\n/g, '<br />')}</p>`)
     .join('\n');
   const signature = signatureHtml ? `\n<div class="gmail_signature">${signatureHtml}</div>` : '';
-  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}${signature}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.</p>\n</div>`;
+  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}${signature}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.<br />${escapeHtml(COMPANY_POSTAL_ADDRESS)}</p>\n</div>`;
 }
 
 export function draftText(body: string, unsubscribeUrl: string, signatureHtml: string | null = null): string {
   const text = signatureHtml ? `${withoutTemplateSignoff(body)}\n\n${signatureText(signatureHtml)}` : body;
-  return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
+  return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}\n${COMPANY_POSTAL_ADDRESS}`;
 }
 
 type Refusal = Extract<SellerDraftResult, { ok: false }>;
@@ -411,8 +410,12 @@ export async function prepareSellerEmail(
   }
 
   let unsubscribeUrl: string;
+  let oneClickUrl: string;
   try {
     unsubscribeUrl = (deps.unsubscribeUrl ?? defaultUnsubscribeUrl)(email);
+    // RFC 8058 (red team T5): the header targets the API route that honors the
+    // one-click POST; the visible link is the human page.
+    oneClickUrl = oneClickUnsubscribeUrl(email);
   } catch (err) {
     return refuse(prisma, actor, decisionId, { ok: false, reason: 'unsubscribe_link_unavailable', detail: err instanceof Error ? err.message : String(err) });
   }
@@ -460,7 +463,7 @@ export async function prepareSellerEmail(
       compileId: compileRow!.id,
       html: draftHtml(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
       text: draftText(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
-      headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
+      headers: { 'List-Unsubscribe': `<${oneClickUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
       threadContext,
       inReplyToGmailMessageId,
     },
