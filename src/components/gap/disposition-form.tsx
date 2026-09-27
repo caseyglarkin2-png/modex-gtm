@@ -299,7 +299,8 @@ export interface DispositionFormProps {
   prefill: DispositionPrefill;
   suggestion?: ReplySuggestion | null;
   client?: GapApiClient;
-  onSubmitted?: (result: DispositionResult) => void;
+  /** The recorded response class rides along so a caller can tell a real conversation from a no-answer (red team T8). */
+  onSubmitted?: (result: DispositionResult, responseClass: string) => void;
   onCleared?: () => void;
   autoFocus?: boolean;
 }
@@ -374,7 +375,7 @@ export function DispositionForm({
         const answer = await client.postDisposition(buildDispositionBody({ ...prefill, channel }, candidate));
         if (answer.ok) {
           setResult(answer.data);
-          onSubmitted?.(answer.data);
+          onSubmitted?.(answer.data, String(candidate.responseClass));
         } else {
           setServerError(describeRefusal(answer));
         }

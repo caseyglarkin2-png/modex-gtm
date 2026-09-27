@@ -353,3 +353,35 @@ review, production verification.
   (drafts only), with a `sequence.version_rewritten` audit event each. No
   compiles, enrollments or pinned hypotheses reference them.
 - next: T8.
+
+### T8 — delete raw mailto + complete the call loop
+
+- status: IMPLEMENTED (Release C, not yet merged)
+- commits: `dd870fb0` (mailto), + call loop commit
+- change:
+  - raw `mailto:` links deleted from the decision card and the preview page;
+    `mailtoHref` deleted; a source scan pins that no GAP surface renders one.
+  - the card's Call action (and "Record call outcome" for a call dialed
+    elsewhere) opens the EXISTING call workflow (CallMode: brief +
+    DispositionForm) inline. A real conversation records "I called"; no
+    answer / voicemail / gatekeeper records no human action, so the card
+    stays open to retry.
+  - routing: `comms.unansweredCalls` = confirmed call-only outcomes since the
+    newest substantive answer; new rule R13b `call_attempts_exhausted`
+    (before hot_call) holds the person at MAX_UNANSWERED_CALLS = 3.
+  - Learning already treats call-only classes as non-substantive; pinned.
+  - problem_confirmed / partially_confirmed: the server model refuses
+    without buyer words (quote_required); the form's one-click "Confirm"
+    exists only for classes that need nothing typed, so an AI suggestion can
+    never become confirmed truth in one click; pinned. (An exact-match check
+    against the AI's quote was rejected: an AI-extracted quote can be the
+    buyer's verbatim words, and refusing it would push paraphrase.)
+- tests: mailto scan + card; call-loop (inline open, record-outcome, no
+  answer / voicemail keep retry with no human action, conversation =
+  called, not offered when blocked / no hypothesis / acted); routing cap
+  (2 -> hot_call, 3 -> hold; unconfirmed rows ignored; a substantive answer
+  resets); Learning denominators; quote_required; no one-click confirm.
+  Mutations (one-click for any class; cap 99): RED; restored GREEN. Full
+  unit suite 460 files green.
+- production mutation: none.
+- next: T9.

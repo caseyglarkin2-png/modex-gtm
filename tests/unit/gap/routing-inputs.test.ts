@@ -134,6 +134,7 @@ function makePrisma(db: Db) {
       ),
     },
     conversationDisposition: {
+      count: vi.fn(async (args: any) => findManyFrom(db.dispositions, args).length),
       findFirst: vi.fn(async ({ where }: any) =>
         findFirst(
           byDesc(
@@ -447,6 +448,7 @@ describe('assembleRoutingInputs full fixture', () => {
       lastDisposition: null,
       meetingBooked: false,
       gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
+      unansweredCalls: 0,
     });
 
     // suppression from the injected reader
@@ -698,6 +700,19 @@ describe('comms', () => {
     db.dispositions.push({ contact_email: EMAIL_LOWER, response_class: 'problem_rejected', created_at: daysAgo(35), human_confirmed: true, confirmed_at: daysAgo(35), ai_suggested: null });
     const i = await assemble(db);
     expect(i.comms.gapSequence?.state).toBe('stopped');
+  });
+
+  it('T8: unansweredCalls counts CONFIRMED call-only outcomes since the last substantive answer; the 3rd holds the person', async () => {
+    const db = fullDb();
+    const call = (cls: string, d: number, confirmed = true) => ({ contact_email: EMAIL_LOWER, channel: 'call', response_class: cls, created_at: daysAgo(d), human_confirmed: confirmed, confirmed_at: daysAgo(d), ai_suggested: null });
+    db.dispositions.push(call('no_answer', 9), call('voicemail', 6), call('no_answer', 3, false));
+    expect((await assemble(db)).comms.unansweredCalls).toBe(2);
+    db.dispositions.push(call('gatekeeper', 2));
+    const i = await assemble(db);
+    expect(i.comms.unansweredCalls).toBe(3);
+    expect((routePersona(i) as { decision: { ruleId: string } }).decision.ruleId).toBe('call_attempts_exhausted');
+    db.dispositions.push({ contact_email: EMAIL_LOWER, channel: 'call', response_class: 'timing', created_at: daysAgo(1), human_confirmed: true, confirmed_at: daysAgo(1), ai_suggested: null });
+    expect((await assemble(db)).comms.unansweredCalls).toBe(0);
   });
 
   it('T3: an unreadable GAP history fails the persona closed (named read), never "no outbound"', async () => {

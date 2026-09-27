@@ -251,7 +251,8 @@ describe('<DispositionForm mode="reply">', () => {
       source: { kind: 'inbound_message', id: 'gm_18f2' },
       bids: [{ type: 'business_problem', rawBuyerLanguage: 'Trucks sit at the gate for an hour every morning.' }],
     });
-    expect(onSubmitted).toHaveBeenCalledWith(CREATED);
+    // Red team T8: the recorded class rides along so an inline caller can keep a no-answer retryable.
+    expect(onSubmitted).toHaveBeenCalledWith(CREATED, 'problem_confirmed');
     expect(screen.getByTestId('effect-stopped')).toHaveTextContent('Stopped 2 enrollments');
     expect(screen.getByTestId('effect-unsubscribed')).toHaveTextContent('Unsubscribed: no');
     expect(screen.getByTestId('effect-resolution')).toHaveTextContent('Resolution: confirmed, confidence 85%');

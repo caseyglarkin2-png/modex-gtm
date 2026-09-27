@@ -237,6 +237,9 @@ export function resolveEnrollTarget(i: RoutingInputs): EnrollTarget {
 // The ordered rule table (spec section 6, R0 through R19)
 // ---------------------------------------------------------------------------
 
+/** Red team T8: unanswered calls (no answer, voicemail, gatekeeper) before the person is held. */
+export const MAX_UNANSWERED_CALLS = 3;
+
 export const RULES: RoutingRule[] = [
   {
     id: 'suppressed',
@@ -450,6 +453,17 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: () => 'loop_closed',
     predicate: (i) => `hypothesis ${i.hypothesis!.id} is ${i.hypothesis!.status}; learning owns the loop now`,
+  },
+  {
+    id: 'call_attempts_exhausted',
+    label: 'R13b',
+    // Red team T8: a no-answer stays retryable, but not forever. After
+    // MAX_UNANSWERED_CALLS confirmed unanswered calls the person is held.
+    when: (i) => (i.comms.unansweredCalls ?? 0) >= MAX_UNANSWERED_CALLS,
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: () => 'call_attempts_exhausted',
+    predicate: (i) => `${i.comms.unansweredCalls} calls went unanswered since the last real conversation; hold, do not call again now`,
   },
   {
     id: 'hot_call',

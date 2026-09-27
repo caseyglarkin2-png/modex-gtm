@@ -29,7 +29,16 @@ export function personaIdParam(raw: string): number | string {
   return /^\d+$/.test(raw) ? Number(raw) : raw;
 }
 
-export function CallMode({ personaId, client = defaultGapApiClient }: { personaId: string; client?: GapApiClient }) {
+export function CallMode({
+  personaId,
+  client = defaultGapApiClient,
+  onRecorded,
+}: {
+  personaId: string;
+  client?: GapApiClient;
+  /** Red team T8: the class just recorded, so an inline caller can keep a no-answer card retryable. */
+  onRecorded?: (responseClass: string) => void;
+}) {
   const [brief, setBrief] = useState<CallBrief | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -75,7 +84,7 @@ export function CallMode({ personaId, client = defaultGapApiClient }: { personaI
             source: { kind: 'call', id: sourceId },
             problemFamily: brief.hypothesis.problemFamily,
           }}
-          onSubmitted={() => {
+          onSubmitted={(_result, responseClass) => {
             // SHOULD FIX (Opus adversarial review, 2026-09-24): a submit
             // alone never cleared the form (that only happens on Escape or
             // an explicit reset), so `sourceId` survived a successful post
@@ -85,6 +94,7 @@ export function CallMode({ personaId, client = defaultGapApiClient }: { personaI
             // promised was handled ("a new id is issued after every
             // recorded disposition"), but the code never did it.
             setSourceId(callSourceId(personaId));
+            onRecorded?.(responseClass);
             void load();
           }}
           onCleared={() => setSourceId(callSourceId(personaId))}

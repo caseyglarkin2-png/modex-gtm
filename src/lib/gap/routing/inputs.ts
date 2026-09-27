@@ -645,8 +645,12 @@ function emptyComms(): RoutingCommsInput {
     lastDisposition: null,
     meetingBooked: false,
     gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
+    unansweredCalls: 0,
   };
 }
+
+/** Call-only outcomes that reached no buyer decision (red team T8). */
+export const UNANSWERED_CALL_CLASSES = ['no_answer', 'voicemail', 'gatekeeper'] as const;
 
 const latest = (...dates: Array<Date | null | undefined>): Date | null =>
   dates.reduce<Date | null>((m, d) => (d && (!m || d.getTime() > m.getTime()) ? d : m), null);
@@ -743,10 +747,24 @@ export async function readComms(prisma: PrismaLike, email: string, personaId: nu
     gapSequence = { state, sentSteps: new Set(history.sent.map((s) => s.stepIndex)).size, lastSentAt: lastGapSend };
   }
 
+  // Red team T8: unanswered call attempts since the newest substantive answer.
+  const unansweredCalls = (await read('unanswered_calls', () =>
+    prisma.conversationDisposition.count({
+      where: {
+        contact_email: email,
+        human_confirmed: true,
+        channel: 'call',
+        response_class: { in: [...UNANSWERED_CALL_CLASSES] },
+        ...(lastSubstantive ? { created_at: { gt: lastSubstantive.created_at } } : {}),
+      },
+    }),
+  )) as number;
+
   return {
     inFlight: enrollment != null || draft != null,
     lastOutboundAt: latest(lastOutbound?.sent_at, lastGapSend),
     gapSequence,
+    unansweredCalls,
     lastInboundAt,
     undispositionedInbound,
     lastDisposition: buildLastDisposition(lastSubstantive),
