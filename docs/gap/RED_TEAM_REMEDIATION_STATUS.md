@@ -263,3 +263,47 @@ review, production verification.
   example.com test address (authorized controlled internal test). Nothing else.
 - prospect sends: 0. Prospect drafts: 0.
 - next: T6 (Release C, branch `feat/gap-redteam-release-c`).
+
+### T6 — evidence gate
+
+- status: IMPLEMENTED (Release C, not yet merged); production remediation
+  planned post-deploy (dry run done)
+- commit: `f139aa58` (+ remediation script)
+- files: `src/lib/gap/research/evidence-gate.ts` (new), `research/facts.ts`,
+  `hypothesis/machine.ts`, `hypothesis/service.ts`, `execution/seller-draft.ts`,
+  `compiler/evidence-from-signals.ts`, `compiler/types.ts`, `sequence/render.ts`,
+  `routing/inputs.ts`, `routing/rules.ts`, `app/api/gap/compile/route.ts`,
+  `scripts/gap/audit-evidence-tiers.ts`, `scripts/gap/remediate-insufficient-active.ts`
+- rule (one place): a first touch needs ONE outreach fact = verified
+  (`metadata.verified = excerpt_found_at_source`), dated, quoted, public,
+  external_ok, account-specific statement of a physical-network change
+  (`isPhysicalOpsFact`). Keyword-only, operator hearsay, unverified or
+  irrelevant quotes are INSUFFICIENT: research only.
+- enforced at: approve + activate (`evidence_insufficient`); send gate
+  (prepareSellerEmail `evidence_insufficient`); routing R12b `evidence_thin`
+  (research_required); compiler (a keyword hit's ref is never external_ok,
+  so it cannot satisfy C01); every compiler caller uses EVIDENCE_SIGNAL_SELECT.
+- facts.ts now excludes restructuring charges, risk-factor/forward-looking
+  boilerplate, liquidity/credit facilities/financing and generic capex.
+  Pinned with the three PepsiCo 10-Q (2026-07-09) sentences verbatim (signals
+  cmuhjv71a…, cmuhjv7bq…, cmuhjv7kc…).
+- tests: facts (3 PepsiCo + 4 boilerplate + 2 controls), machine (keyword
+  approve refused, expired fact refused, activate refused), service (operator
+  text refused, verified quote without URL approves, keyword 10-Q refused),
+  send gate (keyword, PepsiCo liquidity, expired fact), C01 via the real
+  projection, routing evidenceThin semantics. Old tests that pinned the weak
+  rule were rewritten to the new rule. Mutations (machine guard off, facts
+  exclusions off, send gate off): 5 / 4 / 3 RED; restored GREEN. Full unit
+  suite 457 files green.
+- production READ (2026-09-26, before remediation): 16 active, 14 at
+  INSUFFICIENT by the old depth label; by the T6 gate 15 INSUFFICIENT (all
+  keyword_only), 1 kept (Kroger cmuhbne1z…, Giant Eagle merger 10-Q quote).
+  5 PepsiCo hypotheses are `approved` (not active): the gate refuses their
+  activation and any send; they are not mutated (withdraw -> `rejected`
+  could be misread as buyer truth).
+- remediation plan (dry run recorded, apply after Release C deploys): the
+  existing audited `close_unresolved` transition for the 15, actor
+  `redteam-t6-remediation`, reason tagged `evidence_insufficient:` (so T10
+  Learning excludes them). No narrative edit, no delete, no email/HubSpot/
+  enrollment change (mirror off in production).
+- next: T7.
