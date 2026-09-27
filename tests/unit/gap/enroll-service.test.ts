@@ -103,7 +103,7 @@ function snapshot(overrides: Record<string, unknown> = {}) {
 }
 
 function makePrisma(
-  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any } = {},
+  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[] } = {},
 ) {
   const p = {
     // B6 (Opus adversarial review, 2026-09-24): the active-opportunity guard.
@@ -142,8 +142,11 @@ function makePrisma(
             }
           : opts.persona,
       ),
+      // Person-level GAP send history (Release B review #4): no other persona shares the address by default.
+      findMany: asyncSpy(async () => []),
     },
     routingDecision: {
+      findMany: asyncSpy(async () => [{ id: 'dec_old', persona_id: 7 }]),
       findUnique: asyncSpy(async () => (opts.decision === undefined ? decisionRow() : opts.decision)),
       findFirst: asyncSpy(async () => (opts.decision === undefined ? decisionRow() : opts.decision)),
       create: asyncSpy(),
@@ -151,7 +154,10 @@ function makePrisma(
     },
     draftQueueItem: { create: asyncSpy(), updateMany: asyncSpy(async () => ({ count: 1 })) },
     sequenceEnrollment: { create: asyncSpy(), updateMany: asyncSpy() },
-    gapAuditEvent: { create: asyncSpy() },
+    gapAuditEvent: {
+      create: asyncSpy(),
+      findMany: asyncSpy(async (args: any) => (args?.where?.subject_id ? (opts.gapLedger ?? []).filter((r) => args.where.subject_id.in.includes(r.subject_id)) : [])),
+    },
     $transaction: vi.fn(),
   };
   return p;
@@ -249,6 +255,24 @@ afterEach(() => {
 // ---------------------------------------------------------------------------
 // Guard order
 // ---------------------------------------------------------------------------
+
+describe('Release B review #4: a person GAP already emailed is never enrolled at step 0', () => {
+  const sent = { id: 'm0', subject_id: 'dec_old', kind: 'execution.gmail_manual_sent', created_at: new Date('2026-09-25T20:59:19Z'), payload: { engine: 'manual', stepIndex: 0, personaId: 7, recipient: 'jane.doe@acme-logistics.com', gmailSentMessageId: 'g', sentAt: '2026-09-25T20:59:19.000Z' } };
+
+  it('a human live enroll for a person with a GAP send on another card is refused gap_history_exists, nothing written', async () => {
+    const prisma = makePrisma({ gapLedger: [sent] });
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(r).toMatchObject({ ok: false, reason: 'gap_history_exists' });
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+  });
+
+  it('an open send claim counts as history too', async () => {
+    const claim = { id: 'c0', subject_id: 'dec_old', kind: 'execution.gmail_direct_claimed', created_at: new Date(), payload: { idempotencyKey: 'k', stepIndex: 0, personaId: 7, recipient: 'jane.doe@acme-logistics.com', claimedAt: new Date().toISOString() } };
+    const r = await enrollFromDecision(makePrisma({ gapLedger: [claim] }), input({ mode: 'live' }), deps());
+    expect(r).toMatchObject({ ok: false, reason: 'gap_history_exists' });
+  });
+});
 
 describe('enrollFromDecision guards, in order', () => {
   it('gap_disabled when GAP_OS_ENABLED is off, before any read', async () => {

@@ -150,3 +150,41 @@ describe('Release B review #5: the idempotent path re-applies do_not_contact', (
     expect(d.personas.find((x) => x.id === 1886).do_not_contact).toBe(true);
   });
 });
+
+/** A multipart/form-data one-click exactly as a mailbox provider sends it (explicit boundary, no Origin). */
+function multipart(fields: Record<string, string>) {
+  const b = '----gap-one-click-boundary';
+  const CRLF = String.fromCharCode(13, 10);
+  const body =
+    Object.entries(fields)
+      .map(([k, v]) => `--${b}${CRLF}Content-Disposition: form-data; name="${k}"${CRLF}${CRLF}${v}${CRLF}`)
+      .join('') + `--${b}--${CRLF}`;
+  return new NextRequest(`https://modex-gtm.vercel.app/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}`, {
+    method: 'POST',
+    headers: { 'content-type': `multipart/form-data; boundary=${b}` },
+    body,
+  });
+}
+
+describe('Release B review: RFC 8058 multipart/form-data one-click', () => {
+  it('a multipart one-click POST (the RFC SHOULD) with no Origin unsubscribes', async () => {
+    const { d } = world();
+    const res = await POST(multipart({ 'List-Unsubscribe': 'One-Click' }));
+    expect(res.status).toBe(200);
+    expect(d.unsub.map((u) => u.email)).toEqual([JOEY]);
+  });
+
+  it('a malformed multipart body is a 400, never a 500, and writes nothing', async () => {
+    const { d } = world();
+    const res = await POST(new NextRequest(`https://modex-gtm.vercel.app/api/unsubscribe/?email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}`, { method: 'POST', headers: { 'content-type': 'multipart/form-data; boundary=x' }, body: 'not multipart' }));
+    expect(res.status).toBe(400);
+    expect(d.unsub).toHaveLength(0);
+  });
+
+  it('a multipart body carrying an extra field is refused', async () => {
+    const { d } = world();
+    const res = await POST(multipart({ 'List-Unsubscribe': 'One-Click', email: 'jason.gaiser@kroger.com' }));
+    expect(res.status).toBe(400);
+    expect(d.unsub).toHaveLength(0);
+  });
+});

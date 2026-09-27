@@ -82,7 +82,9 @@ export async function recordManualSend(
     hypothesisId: input.hypothesisId,
     personaId: input.personaId,
     accountName: input.accountName,
-    recipient: input.match.message.to.toLowerCase(),
+    // The bare address, not the raw To header ("Name" <addr>): person
+    // history matches ledger rows by address (Release B review).
+    recipient: (input.match.message.to.match(/[^\s<>,;"']+@[^\s<>,;"']+/)?.[0] ?? input.match.message.to).trim().toLowerCase(),
     senderIdentity: input.senderIdentity,
     subject: input.match.message.subject,
     sequenceVersionId: input.sequenceVersionId,

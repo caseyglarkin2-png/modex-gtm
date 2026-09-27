@@ -104,6 +104,7 @@
  * House conventions: `prisma: any` glue, refusal objects `{ok:false, reason}`,
  * no network here except the injected autonomy reader. Voice: no em dashes.
  */
+import { personSendHistory } from '../execution/person-history';
 import { autonomyHalted } from '@/lib/email/autonomy-gate';
 import { isOutreachPaused } from '@/lib/feature-flags';
 import { audit } from '@/lib/gap/audit';
@@ -234,6 +235,7 @@ export type EnrollServiceRefusal =
   | 'hypothesis_not_found'
   | 'persona_not_found'
   | 'no_email'
+  | 'gap_history_exists'
   | 'account_mismatch'
   | 'decision_persona_mismatch'
   | 'active_opportunity'
@@ -655,6 +657,18 @@ export async function enrollFromDecision(
   if (!persona) return refuse('persona_not_found');
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
+
+  // Red team Release B review #4: an enrollment starts at step 0. A person
+  // GAP already emailed (any card, any engine), or with a send whose outcome
+  // is unknown, or with a Gmail draft outstanding, is never enrolled again:
+  // their sequence continues through the action pack, one touch at a time.
+  const history = await personSendHistory(prisma, persona.id, email);
+  const outstanding = history.drafts.filter((d) => d.fate === 'drafted').length;
+  if (history.sent.length > 0 || history.unresolvedClaims.length > 0 || outstanding > 0) {
+    return refuse('gap_history_exists', {
+      detail: `${history.sent.length} sent, ${history.unresolvedClaims.length} open claim(s), ${outstanding} outstanding draft(s) for this person`,
+    });
+  }
 
   // SHOULD FIX (Opus adversarial review, 2026-09-24): hypothesisId and
   // personaId are two independent caller-supplied ids with no relation

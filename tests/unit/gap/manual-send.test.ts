@@ -50,3 +50,15 @@ describe('recordManualSend', () => {
     expect(h[0].payload).toMatchObject({ action: 'emailed', source: 'owner_statement', statement: expect.stringContaining('manually sent') });
   });
 });
+
+describe('Release B review: a manual send records the BARE recipient address', () => {
+  it('a display-name To header is stored as the address, so person history can match it', async () => {
+    const audit: any[] = [];
+    const prisma: any = {
+      gapAuditEvent: { findFirst: vi.fn(async () => null), create: vi.fn(async ({ data }: any) => { audit.push(data); return { id: 'a1' }; }) },
+      routingDecision: { updateMany: vi.fn(async () => ({ count: 1 })), findUnique: vi.fn(async () => ({ id: 'dec' })) },
+    };
+    await recordManualSend(prisma, { ...input(null), match: { kind: 'match' as const, message: { ...MSG, to: '"Joey Maggard" <Joey.Maggard@Kroger.com>' }, matchedOn: ['recipient'] } });
+    expect(audit.find((a) => a.kind === MANUAL_SENT).payload.recipient).toBe('joey.maggard@kroger.com');
+  });
+});
