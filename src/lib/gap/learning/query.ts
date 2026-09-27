@@ -37,6 +37,7 @@ import {
   type Rate,
 } from './metrics';
 import { OPEN_HYPOTHESIS_STATUSES } from '../hypothesis/hypothesize';
+import { buildExecutionLearning, type ExecutionLearning } from './execution';
 
 export interface LearningHypothesisRow extends FunnelHypothesis {
   accountName: string;
@@ -246,6 +247,14 @@ export async function loadLearningInputs(prisma: any, filters: LearningFilters =
 }
 
 export interface LearningReport {
+  /**
+   * Red team T10: THE primary metrics, over people actually sent to (the send
+   * ledger), attributed to each person's first send. Everything below is the
+   * conversation-level detail, secondary to this.
+   */
+  execution: ExecutionLearning | null;
+  /** Set when the execution section could not be computed; the rest of the report still renders (review S9). */
+  executionError?: string;
   funnel: LearningFunnel;
   byProblemFamily: Array<{ key: string; funnel: LearningFunnel }>;
   byPersona: Array<{ key: string; funnel: LearningFunnel }>;
@@ -278,9 +287,22 @@ export async function buildLearningReport(prisma: any, filters: LearningFilters 
   );
 
   const signalCountRows = await prisma.prospectingSignal.groupBy({ by: ['type'], _count: { _all: true } });
+  const program = filters.program?.trim() || null;
+  const programVersionIds = program
+    ? new Set<string>(((await prisma.sequenceVersion.findMany({ where: { family: { program } }, select: { id: true } })) as Array<{ id: string }>).map((v) => v.id))
+    : null;
+  let execution: ExecutionLearning | null = null;
+  let executionError: string | undefined;
+  try {
+    execution = await buildExecutionLearning(prisma, { from: filters.from ?? null, to: filters.to ?? null, sequenceVersionIds: programVersionIds, now });
+  } catch (err) {
+    executionError = err instanceof Error ? err.message : String(err);
+  }
   const signalCounts = new Map<string, number>((signalCountRows as any[]).map((r) => [r.type, r._count._all as number]));
 
   return {
+    execution,
+    ...(executionError ? { executionError } : {}),
     funnel: computeFunnel(hypotheses, conversations),
     byProblemFamily: breakdownByHypothesisDimension(hypotheses, conversations, (h) => h.problemFamily),
     byPersona: breakdownByHypothesisDimension(hypotheses, conversations, (h) => h.persona),

@@ -1049,3 +1049,14 @@ describe('determinism', () => {
     ]);
   });
 });
+
+describe('red team T6 (final integrated regression): a thin-evidence proposal is research, never an approve card', () => {
+  it.each(['draft', 'review_required'] as const)('a %s hypothesis resting only on a keyword hit routes evidence_thin (research_required)', (status) => {
+    const i = base();
+    i.hypothesis!.status = status;
+    i.hypothesis!.evidenceThin = true;
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('evidence_thin');
+    expect(d.action).toBe('research_required');
+  });
+});

@@ -32,7 +32,8 @@ export default async function GapLearningPage() {
         <h1 className="text-2xl font-semibold tracking-tight">What did the system learn</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
           Where the prospecting hypothesis is working or failing: targeting, the hypothesis, the message, the ask, and
-          discovery. Every rate carries its sample size; a small n is shown, never hidden.
+          discovery, measured per person actually sent to. Every rate carries its sample size; below 20 a number is an
+          early observation, never a percentage.
         </p>
       </div>
       <LearningDashboard />

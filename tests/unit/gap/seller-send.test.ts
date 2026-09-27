@@ -83,7 +83,7 @@ describe('SEND FROM YARDFLOW: preview and confirmation', () => {
     expect(wire.cc).toBeUndefined();
     expect(wire.html).toContain('Founding AE');
     const sent = d.audit.find((a) => a.kind === DIRECT_SENT)!;
-    expect(sent.payload).toMatchObject({ engine: 'gmail_direct', gmailSentMessageId: 'msg-1', gmailThreadId: 'thr-1', recipient: 'joey.maggard@kroger.com', senderIdentity: 'casey@yardflow.ai', contentHash: pv.contentHash, sequenceVersionId: 'ver-hc', stepIndex: 0, routingDecisionId: 'dec-joey', hypothesisId: 'hyp-kr', confirmedBy: ACTOR });
+    expect(sent.payload).toMatchObject({ engine: 'gmail_direct', gmailSentMessageId: 'msg-1', gmailThreadId: 'thr-1', recipient: 'joey.maggard@kroger.com', senderIdentity: 'casey@yardflow.ai', contentHash: pv.contentHash, sequenceVersionId: 'ver-hc', stepIndex: 0, routingDecisionId: 'dec-joey', hypothesisId: 'hyp-kr', confirmedBy: ACTOR, evidenceTier: 'VERIFIED_FACT' });
     expect(d.decisions.find((x) => x.id === 'dec-joey').human_action).toBe('emailed');
     expect(d.audit.find((a) => a.kind === 'decision.human_action')!.payload).toMatchObject({ action: 'emailed', source: 'confirmed_direct_send', gmailSentMessageId: 'msg-1' });
     expect(prisma.emailLog.create).toHaveBeenCalledTimes(1);

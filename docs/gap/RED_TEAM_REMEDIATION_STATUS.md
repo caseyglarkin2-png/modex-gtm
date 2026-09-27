@@ -1,7 +1,7 @@
 # GAP red team remediation: status ledger
 
 STATUS: ACTIVE
-<!-- verified:2026-09-26 -->
+<!-- verified:2026-09-27 -->
 
 Program: close accepted red-team findings T1-T10 in four release trains
 (A: T1 · B: T2-T5 · C: T6-T9 · D: T10). One implementation owner, read-only
@@ -266,8 +266,8 @@ review, production verification.
 
 ### T6 — evidence gate
 
-- status: IMPLEMENTED (Release C, not yet merged); production remediation
-  planned post-deploy (dry run done)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`, production READY 2026-09-27);
+  production remediation applied (see Release C receipt)
 - commit: `f139aa58` (+ remediation script)
 - files: `src/lib/gap/research/evidence-gate.ts` (new), `research/facts.ts`,
   `hypothesis/machine.ts`, `hypothesis/service.ts`, `execution/seller-draft.ts`,
@@ -310,8 +310,8 @@ review, production verification.
 
 ### T7 — honest copy
 
-- status: IMPLEMENTED (Release C, not yet merged); live seed rewrite planned
-  post-deploy (dry run done, scratch rehearsal applied + idempotent)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`); live seed rewrite applied
+  2026-09-27 (see Release C receipt)
 - files: `src/lib/gap/sequences/families.ts`, `src/lib/gap/sequence/call-pack.ts`,
   `src/lib/gap/hypothesis/build.ts`, `src/lib/gap/research/propose.ts`,
   `src/lib/gap/ui/format.ts` (humanWhyNow), `src/components/gap/{action-pack-view,
@@ -356,7 +356,7 @@ review, production verification.
 
 ### T8 — delete raw mailto + complete the call loop
 
-- status: IMPLEMENTED (Release C, not yet merged)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`)
 - commits: `dd870fb0` (mailto), + call loop commit
 - change:
   - raw `mailto:` links deleted from the decision card and the preview page;
@@ -388,8 +388,8 @@ review, production verification.
 
 ### T9 — GAP mailbox reply + bounce intake
 
-- status: IMPLEMENTED (Release C, not yet merged); production proof pending
-  deploy (internal test through casey@yardflow.ai)
+- status: DONE (Release C: PR #270, merge `65f9a9a6`); production proof by
+  internal canary 2026-09-27 (see Release C receipt)
 - files: `src/lib/gap/replies/gap-mailbox.ts` (new), `src/lib/gap/replies/domains.ts`
   (new), `src/lib/email/bounce.ts` (new), `src/app/api/cron/gap-mailbox/route.ts`
   (new), `src/lib/email/gmail-inbox.ts` (listMailboxMessages),
@@ -547,3 +547,177 @@ mutation-proven (`97677061`, `fae9fade`).
   unattributed (audited); non-GAP modex Gmail sends keep their existing bounce
   path (the HubSpot webhook); quote-heavy operator copy can now fail C07's
   minimum (stricter, not a bypass).
+
+### Release C receipt
+
+- PR #270, merge `65f9a9a6`, production READY 2026-09-27 (preview READY before
+  merge). No schema change.
+- gates: full unit suite 465 files / 5017 tests green; typecheck green; local
+  build green; 10/10 scratch e2e scripts (117 checks, 0 failed, zero residue)
+  on the final code; Vercel preview READY; three read-only reviews
+  (methodology, RevOps/deliverability, fresh re-review of the fixes): every
+  BLOCKER and SHOULD-FIX fixed and mutation-proven;
+  github_actions = unavailable_external_billing.
+- production mutations (2026-09-27, each through an existing audited service):
+  - T7: `scripts/gap/rewrite-seed-versions.ts --apply`: the four live seed v1
+    drafts (cmuh640aa…, cmuh640q8…, cmuh64134…, cmuh641g1…) 4 steps -> 1,
+    one `sequence.version_rewritten` audit each. Receipt:
+    `docs/gap/t7-seed-rewrite.md`.
+  - T6: `scripts/gap/remediate-insufficient-active.ts --apply`: 15 ACTIVE
+    hypotheses at INSUFFICIENT (all keyword_only) -> `unresolved` through
+    `close_unresolved`, actor `redteam-t6-remediation`, reason tagged
+    `evidence_insufficient:`. Kept: cmuhbne1z… (Kroger, Giant Eagle facts).
+    Receipt: `docs/gap/t6-insufficient-remediation.md`.
+  - T9: one internal message casey@freightroll.com -> casey@yardflow.ai
+    (`[gap-intake-canary] Release C intake proof 2026-09-27`).
+- production verification (read-only reads):
+  - T6: rerun dry: active 1, INSUFFICIENT 0.
+  - T9 cron: first scheduled run 2026-09-27T05:10:55Z `ok`, apply, 15 inbox
+    messages, 14 `mailbox.unrelated`, 1 `mailbox.bounce_unattributed` (a 5.1.1
+    for one ingredion.com address that GAP never sent to and no persona
+    carries: correctly NOT written), 0 errors, no backlog.
+  - T9 canary: run 2026-09-27T05:20:51Z processed Gmail message
+    1a0e14630eede7dc: InboundMessage created by the intake, `mailbox.canary`
+    audit, 0 notifications for it, no enrollment touched, 0 errors.
+  - The HubSpot reply poller is scheduled daily at 12:45 UTC (keyed on
+    `hs_createdate`).
+- prospect sends: 0. Prospect drafts: 0.
+
+### Cold first-touch gate (T2 + T3 + T5 + T9)
+
+The standing constraint was "no cold first touches from casey@yardflow.ai
+until T2, T3, T5 and T9 are complete and verified".
+
+- T2 person-level send history: PASS (Release B, production-verified on
+  Kroger 1886).
+- T3 routing sees GAP sends: PASS (Release B).
+- T5 one-click unsubscribe + footer: PASS (Release B, live RFC 8058 proof).
+- T9 mailbox reply + bounce intake: PASS (Release C, live cron + canary).
+- sender authentication (public DNS, 2026-09-27): SPF
+  `v=spf1 include:_spf.google.com ~all`; Google DKIM key published at
+  `google._domainkey.yardflow.ai`; DMARC `p=none` with aggregate reports to
+  dmarc.rua@freightroll.com. Alignment on an actual outbound message was not
+  observed here (the GAP mailbox credentials are Vercel-only).
+- bounces: GAP send ledger holds 1 send (Joey Maggard, manual) and 0 GAP
+  bounces. The mailbox's 3-day lookback held one 5.1.1 for a non-GAP manual
+  send. A per-mailbox bounce RATE is not measurable from here (sent volume of
+  casey@yardflow.ai outside GAP is not in the app).
+- complaints: no feedback loop is wired for Gmail consumer recipients;
+  complaint data would come from Google Postmaster Tools, which needs the
+  domain verified there (not verifiable from here).
+- verdict: the four gating tickets pass. Resuming cold first touches is
+  Casey's decision (CASEY ACTION REQUIRED), and the evidence gate now allows
+  a first touch only on a hypothesis citing a verified outreach fact (today:
+  one active hypothesis, Kroger / Giant Eagle; Joey Maggard's step 0 is
+  already sent and is refused again).
+- next: T10 (Release D, branch `feat/gap-redteam-release-d`).
+
+### T10 — honest Learning
+
+- status: IMPLEMENTED (Release D, branch `feat/gap-redteam-release-d`, not yet
+  merged)
+- commits: `5f73e6f8` (execution learning, stats, tier stamp), `f2fba2e9`
+  (agreement + G1), `14d5b48b` (Learning page), `3d7d0b22` (queue sends,
+  enrollment evidence)
+- files: `src/lib/gap/learning/stats.ts` (new), `src/lib/gap/learning/execution.ts`
+  (new), `learning/query.ts`, `learning/metrics.ts`, `routing/agreement.ts`,
+  `routing/agreement-query.ts`, `automation/gates.ts`,
+  `execution/{draft-ledger,seller-send,seller-draft,manual-send}.ts`,
+  `app/gap/learning/{learning-dashboard,page}.tsx`; tests
+  `learning-execution` (new), `routing-agreement`, `routing-agreement-query`,
+  `gates`, `learning-dashboard`, `learning-query`, `seller-send`,
+  `manual-send`; E2E `runtime`, `finish-rc` agreement steps.
+- change:
+  - denominator = people actually sent to: the GAP send ledger
+    (MANUAL_SENT, DIRECT_SENT, DRAFT_SENT) plus the modex queue's sent items
+    of a live, non-test GAP enrollment; one person per address; unsent
+    drafts and internal recipients excluded. Never replies, cards or clicks.
+  - primary metrics, per person sent to: reply / send, meeting / send, truth
+    yield (sent hypothesis reached confirmed, partially confirmed or
+    rejected), problem acknowledgement / send, root cause / send. Each
+    outcome strictly after the person's first send, from confirmed human
+    truth (an unconfirmed AI suggestion is never an outcome; an OOO subject
+    or an earlier message is never a reply; a colleague's reply the GAP
+    mailbox attributed to the person counts).
+  - attribution: each person's FIRST send record (sequence version, copy
+    hash, sender, engine, evidence tier). The send paths now stamp
+    `evidenceTier` (VERIFIED_FACT through the gate; a recorded manual send
+    stamps the hypothesis tier at record time); older rows read
+    `unrecorded`. A person reached through several cards is one person.
+    Date filters select people by first send (a cohort).
+  - agreement: "emailed" agrees only with a send on record for the card or
+    the person between this card and the next; "enrolled_by_hand" with a
+    live, non-test enrollment in that window (or a send); an executed
+    recommendation agrees without a click; a superseded card, or one older
+    than 7 days, with no action is `unacted` and stays in the denominator;
+    only the newest fresh card is pending. Labeled "conformity, not sales
+    quality".
+  - G1: also needs 100 people sent to and a reply / send Wilson lower bound
+    of 2% (session-chosen floors, for the owner to confirm); agreement alone
+    never earns it. evaluateGates has no production caller (no gate is
+    evaluated live; auto-enroll stays off).
+  - statistics: Wilson 95% intervals; below n = 20 a proportion shows as
+    "k/n, early observation" with no percentage (4/5 is not 80%); 0/0 is
+    "no data yet". Applied to every Learning tile and table, legacy funnel
+    included.
+- tests: the six required proofs (direct send on enroll-style card = agreement;
+  emailed without execution = not agreement; 4/5 insufficient; reply/send
+  over actual sends; attribution across cards; no metric improves because
+  cards disappeared, including an execution-learning path that throws if it
+  ever reads a routing decision), plus queue sends, test enrollments, G1 on
+  conformity alone, Wilson values. Mutations (13): unsent draft counted,
+  internal recipient, first-send attribution, reply timing/auto, confirmed
+  dispositions only, email needs execution, unacted counted,
+  supersession/expiry, small-N suppression, G1 outcome, manual tier stamp,
+  test-enrollment skip, enrollment never proves emailed: each RED; restored
+  GREEN.
+- gates so far: full unit suite 466 files / 5042 tests green; typecheck
+  green; local build green; scratch E2Es 10/10;
+  github_actions = unavailable_external_billing.
+- production mutation: none.
+- next: Release D read-only review (data scientist + reliability engineer).
+
+### Release D gate — read-only review (data scientist + reliability engineer)
+
+Mission: make every displayed GAP metric improve while selling quality
+worsens. 2 BLOCKER, 9 SHOULD-FIX, 5 NOTE. All BLOCKER and SHOULD-FIX fixed,
+each mutation-proven (16 mutations, each RED, restored GREEN):
+
+- B1: a reply the GAP mailbox attributed only by ACCOUNT DOMAIN marked every
+  person emailed at that domain "replied". Now only `gap_thread` /
+  `gap_recipient` verdicts count.
+- B2: signal yield showed unsuppressed percentages. Now honest cells.
+- S1: any later inbound from the address counted. A reply must now be in one
+  of the person's GAP threads, a tied mailbox verdict, or their own confirmed
+  email disposition on a hypothesis they were sent.
+- S2: truth counted withdrawals, ignored timing and multiplied one verdict
+  across people. Truth now needs THIS person's own confirmed resolving
+  disposition, inside the window, on a sent hypothesis that reached a buyer
+  verdict; root cause needs their own confirmed BID.
+- S3: meetings counted any meeting-channel row. Only `meeting_accepted` on a
+  sent hypothesis.
+- S4: no outcome window. Outcomes count within 30 days of the first send, and
+  rates are over people whose window has closed (the page says how many).
+- S5: agreement counted cards (run cadence moved it) and credited one send
+  twice; one Gmail message recorded under two cards was two sends.
+  Agreement is now over episodes (consecutive identical recommendations), each
+  send credits one card, sends dedupe on the Gmail message id, and a manual
+  send is recorded once globally.
+- S6: G1 could pass on clicks plus 5/100 replies of any kind. `buildG1Inputs`
+  takes conformity from the ENROLL recommendation only and the outcome from a
+  positive buyer signal (meeting or problem acknowledged, Wilson lower bound
+  >= 2%) with an opt-out ceiling (upper bound <= 5%); missing data fails.
+- S7: an enrollment executed a one-off email card, and HubSpot placeholder
+  enrollment dates counted. Both closed.
+- S8: manual sends are tiered at the Gmail send time and carry a content hash.
+- S9: recipient lookups are chunked `in` lists, no quadratic spreads, and a
+  failure of the execution section no longer breaks the Learning page.
+- NOTE fixes: a bare `to` date is inclusive of the whole day.
+- NOTE residuals (recorded): the legacy funnel is conditional on confirmed
+  dispositions (suppressed and secondary); HubSpot-native GAP sends are not in
+  the denominator (no send record exists for them); a person is keyed by
+  address (splits, never inflates); disposition time is record time.
+
+Found by the final integrated regression, fixed here: a keyword-only
+hypothesis in draft or review routed "approve_hypothesis", a card that could
+only fail at approval. R11 now yields to R12b: such a card is research.

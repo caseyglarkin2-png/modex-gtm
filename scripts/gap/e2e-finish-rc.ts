@@ -586,8 +586,9 @@ async function main(): Promise<number> {
     const act2 = await recordHumanAction(prisma, disagreeDecision.id, 'called', OWNER, { now: () => now });
     expect('9 agreement', act1.ok && act2.ok, `recordHumanAction -> ${JSON.stringify({ act1, act2 })}`);
     const agreementReport = await loadAgreementReport(prisma, { runId });
-    expect('9 agreement', agreementReport.overall.n === 2 && agreementReport.overall.agreements === 1 && agreementReport.overall.disagreements === 1 && agreementReport.overall.rate === 0.5, `agreement report ${JSON.stringify(agreementReport.overall)}, expected n=2, 1 agreement (enroll_gap_sequence/enrolled_by_hand), 1 disagreement (nurture/called), rate 0.5`);
-    pass('9 agreement', `real RoutingDecision rows stamped by the real recordHumanAction, read back through loadAgreementReport: 1 agreement, 1 disagreement, rate 0.5 (R-B)`);
+    // Red team T10: the enrolled_by_hand click on a card created AFTER the enrollment has no execution after it: unverified, never agreement.
+    expect('9 agreement', agreementReport.overall.n === 2 && agreementReport.overall.agreements === 0 && agreementReport.overall.unverified === 1 && agreementReport.overall.honest.status === 'insufficient', `agreement report ${JSON.stringify(agreementReport.overall)}, expected n=2, 0 agreements, 1 unverified (enrolled_by_hand with no execution after the card), 1 disagreement (nurture/called)`);
+    pass('9 agreement', `real RoutingDecision rows stamped by the real recordHumanAction, judged against execution (T10): 0 agreements of n=2, 1 unverified click, suppressed as an early observation`);
 
     // 10. Human-confirmed disposition + BID + hypothesis resolution for H1 (the happy path), and the B9 internal-recipient control on H3.
     const confirmed = await recordDisposition(prisma, {

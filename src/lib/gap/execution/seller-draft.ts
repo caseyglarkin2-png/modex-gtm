@@ -584,6 +584,8 @@ export async function createSellerGmailDraft(
     stepIndex,
     inReplyToGmailMessageId,
     compileId: p.compileId,
+    // prepareSellerEmail refuses anything below a verified outreach fact (T6).
+    evidenceTier: 'VERIFIED_FACT',
     claimKey,
     gmailDraftId: receipt.engineId,
     gmailDraftMessageId: receipt.draftMessageId ?? null,

@@ -6,21 +6,21 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-sprint1.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-e2e-1790484956253
+- Run tag: gap-e2e-1790489338191
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: fae9fade
-- Ran at: 2026-09-27T04:55:56.665Z
+- Git: 3d7d0b22
+- Ran at: 2026-09-27T06:08:58.581Z
 - HUBSPOT_SYNC_ENABLED as resolved by feature-flags: true (the mirror is gated by GAP_HUBSPOT_MIRROR_ENABLED, default off, before it reads this)
 - Credentials scrubbed from the process before the first write: HUBSPOT_ACCESS_TOKEN
 
 ## Steps
 
 - PASS preflight: flags on, credentials scrubbed, 0 foreign live triggers in the 1-day window
-- PASS 1 seed: account, personas 112 (ready) and 113 (suppressed), 2 triggers
-- PASS 2 hypothesize: signals.created=2 proposed=0 draft=cmujciicy00077k28e3hfldkm family=hidden_capacity signals=1 suppressed_hits=0
+- PASS 1 seed: account, personas 192 (ready) and 193 (suppressed), 2 triggers
+- PASS 2 hypothesize: signals.created=2 proposed=0 draft=cmujf4fi400077ku8rlavhadt family=hidden_capacity signals=1 suppressed_hits=0
 - PASS 3 rerun: proposed=0 signals.existing=2
 - PASS 4 lifecycle: submit/approve/activate ok, events propose,submit,approve,activate, resolve refused no_confirmed_disposition, DB freeze GAP_HYPOTHESIS_FROZEN, narrative unchanged
-- PASS 5 negative: needsObservation=true, submit refused no_signals, duplicate_source_ref existingId=cmujciifj000k7k28enzdoaj2
+- PASS 5 negative: needsObservation=true, submit refused no_signals, duplicate_source_ref existingId=cmujf4fjo000k7ku8af9dg2b5
 - PASS 6 mirror: skipped/gap_mirror_disabled with HUBSPOT_SYNC_ENABLED resolved true, 0 gap_hubspot_mirror rows
 - PASS 7 pic: first apply created 4 hypotheses, 8 signals, 0 bids; second apply created 0, existing 4, signals.created 0
 

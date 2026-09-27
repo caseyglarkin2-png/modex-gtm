@@ -4,16 +4,30 @@
  * recommended) and `RoutingDecision.human_action` (what the operator actually
  * did, write-once, stamped by `recordHumanAction` in ./queue.ts).
  *
- * This is the gate G1 evaluator's data source (spec section 10): before any
- * routing rule earns canary eligibility, its shadow-mode recommendations must
- * demonstrably agree with what humans did on their own. Nothing here writes
- * anything or infers agreement when `human_action` is absent -- a decision
- * with no human action yet is simply not comparable, not a silent disagreement.
+ * Red team T10 (2026-09-27): agreement is judged against EXECUTION, not
+ * clicks, and nothing leaves the denominator by going quiet.
+ *
+ *   - "emailed" agrees only when a send is on record for that card or person
+ *     (executedEmail); "enrolled_by_hand" only when a live, non-test GAP
+ *     enrollment of the person exists (executedEnroll) or a send is on record.
+ *     A recorded click without execution is unverified: counted, never an
+ *     agreement.
+ *   - An executed email recommendation (a ledger send) agrees even with no
+ *     button pressed: the send IS the action.
+ *   - A card with no action and no execution is pending only while it is
+ *     open (the newest card for the person, still fresh). Once superseded or
+ *     stale it is unacted: counted, never an agreement, so no rate improves
+ *     because unanswered cards expired.
+ *
+ * Agreement measures seller CONFORMITY with the router, not sales quality.
+ * It is never, alone, permission for autonomous sending (automation/gates.ts
+ * G1 also requires real sends and their outcomes).
  *
  * Pure: no Prisma, no fetch, no clock.
  */
 
 import { ROUTING_ACTIONS, type HumanAction, type RoutingAction } from '../taxonomy';
+import { honestRate, type HonestRate } from '../learning/stats';
 
 /**
  * Each human action maps to the routing action(s) it counts as agreeing
@@ -86,61 +100,125 @@ export function everyRoutingActionHasAnAgreeingHumanAction(): boolean {
 
 export interface AgreementRate {
   agreements: number;
+  /** Every counted non-agreement: a different action, an unverified email click, or an unacted card. */
   disagreements: number;
-  /** agreements / (agreements + disagreements). Null when there is nothing comparable. */
+  /** An email-type action recorded with no send in the ledger. Included in disagreements. */
+  unverified: number;
+  /** A superseded or stale card nobody acted on. Included in disagreements. */
+  unacted: number;
+  /** agreements / n. Null when there is nothing comparable. Prefer `honest` for display. */
   rate: number | null;
   n: number;
+  /** The same proportion as an HonestRate (suppressed below RELIABLE_N, Wilson above). */
+  honest: HonestRate;
 }
 
 export interface AgreementDecision {
   id: string;
   action: RoutingAction;
   ruleId: string;
-  /** Null = no human action recorded yet. Never counted as a disagreement. */
+  /** Null = no human action recorded. */
   humanAction: HumanAction | null;
+  /** The send ledger proves an email went out for this card or this person after it. */
+  executedEmail: boolean;
+  /** A live (non-test) GAP enrollment of this person started after this card: the enroll action was executed. */
+  executedEnroll: boolean;
+  /** The newest card for its person and still fresh: a missing action is pending, not unacted. */
+  open: boolean;
 }
 
 export interface AgreementReport {
   overall: AgreementRate;
   byRuleId: Array<{ key: string; rate: AgreementRate }>;
   byAction: Array<{ key: RoutingAction; rate: AgreementRate }>;
-  /** Total decisions handed in, comparable or not (for context; not a rate denominator). */
+  /** Total decisions handed in (for context; not a rate denominator). */
   totalDecisions: number;
+  /** Open cards with no action yet: the only decisions left out of the rates. */
+  pending: number;
 }
 
-function emptyRate(): AgreementRate {
-  return { agreements: 0, disagreements: 0, rate: null, n: 0 };
+/** Human actions that claim an email went out. */
+export const EMAIL_HUMAN_ACTIONS: ReadonlySet<HumanAction> = new Set<HumanAction>(['emailed', 'enrolled_by_hand']);
+/** Recommendations to email. */
+export const EMAIL_ROUTING_ACTIONS: ReadonlySet<RoutingAction> = new Set<RoutingAction>(['enroll_gap_sequence', 'one_off_email']);
+
+export type AgreementVerdict = 'agree' | 'disagree' | 'unverified' | 'unacted' | 'pending';
+
+/** How one decision counts. Pure. */
+export function verdictOf(d: AgreementDecision): AgreementVerdict {
+  if (d.humanAction === null) {
+    // The execution is the action: an executed email or enroll recommendation agrees.
+    if (d.executedEmail && EMAIL_ROUTING_ACTIONS.has(d.action)) return 'agree';
+    if (d.executedEnroll && d.action === 'enroll_gap_sequence') return 'agree';
+    return d.open ? 'pending' : 'unacted';
+  }
+  if (EMAIL_HUMAN_ACTIONS.has(d.humanAction)) {
+    // "emailed" needs a send on record; "enrolled_by_hand" needs a send, or the
+    // enrollment on an ENROLL recommendation (a one-off email needs a send; review S7).
+    const executed = d.executedEmail || (d.humanAction === 'enrolled_by_hand' && d.action === 'enroll_gap_sequence' && d.executedEnroll);
+    if (!executed) return 'unverified';
+    // A proven email on an email recommendation agrees (enroll and one-off both mean "email this person").
+    return EMAIL_ROUTING_ACTIONS.has(d.action) ? 'agree' : 'disagree';
+  }
+  return agrees(d.action, d.humanAction) ? 'agree' : 'disagree';
 }
 
-function tally(rate: AgreementRate, agree: boolean): AgreementRate {
-  const agreements = rate.agreements + (agree ? 1 : 0);
-  const disagreements = rate.disagreements + (agree ? 0 : 1);
-  const n = agreements + disagreements;
-  return { agreements, disagreements, n, rate: n > 0 ? agreements / n : null };
+interface Tally {
+  agreements: number;
+  disagreements: number;
+  unverified: number;
+  unacted: number;
+}
+
+function emptyTally(): Tally {
+  return { agreements: 0, disagreements: 0, unverified: 0, unacted: 0 };
+}
+
+function finish(t: Tally): AgreementRate {
+  const n = t.agreements + t.disagreements;
+  return { ...t, n, rate: n > 0 ? t.agreements / n : null, honest: honestRate(t.agreements, n) };
+}
+
+function add(t: Tally, v: Exclude<AgreementVerdict, 'pending'>): void {
+  if (v === 'agree') {
+    t.agreements += 1;
+    return;
+  }
+  t.disagreements += 1;
+  if (v === 'unverified') t.unverified += 1;
+  if (v === 'unacted') t.unacted += 1;
 }
 
 /**
- * Only decisions with a non-null `humanAction` are comparable and feed the
- * rates; a decision with no human action yet is counted in `totalDecisions`
- * only. Never infers agreement from silence.
+ * Every decision counts except an OPEN card with no action yet. Silence on a
+ * superseded or stale card is `unacted` (a non-agreement), never dropped.
  */
 export function computeAgreement(decisions: readonly AgreementDecision[]): AgreementReport {
-  let overall = emptyRate();
-  const byRuleId = new Map<string, AgreementRate>();
-  const byAction = new Map<RoutingAction, AgreementRate>();
+  const overall = emptyTally();
+  const byRuleId = new Map<string, Tally>();
+  const byAction = new Map<RoutingAction, Tally>();
+  let pending = 0;
 
   for (const d of decisions) {
-    if (d.humanAction === null) continue;
-    const agree = agrees(d.action, d.humanAction);
-    overall = tally(overall, agree);
-    byRuleId.set(d.ruleId, tally(byRuleId.get(d.ruleId) ?? emptyRate(), agree));
-    byAction.set(d.action, tally(byAction.get(d.action) ?? emptyRate(), agree));
+    const v = verdictOf(d);
+    if (v === 'pending') {
+      pending += 1;
+      continue;
+    }
+    add(overall, v);
+    const r = byRuleId.get(d.ruleId) ?? emptyTally();
+    add(r, v);
+    byRuleId.set(d.ruleId, r);
+    const a = byAction.get(d.action) ?? emptyTally();
+    add(a, v);
+    byAction.set(d.action, a);
   }
 
   return {
-    overall,
-    byRuleId: [...byRuleId.entries()].map(([key, rate]) => ({ key, rate })).sort((a, b) => a.key.localeCompare(b.key)),
-    byAction: [...byAction.entries()].map(([key, rate]) => ({ key, rate })).sort((a, b) => a.key.localeCompare(b.key)),
+    overall: finish(overall),
+    byRuleId: [...byRuleId.entries()].map(([key, t]) => ({ key, rate: finish(t) })).sort((a, b) => a.key.localeCompare(b.key)),
+    byAction: [...byAction.entries()].map(([key, t]) => ({ key, rate: finish(t) })).sort((a, b) => a.key.localeCompare(b.key)),
     totalDecisions: decisions.length,
+    pending,
   };
 }

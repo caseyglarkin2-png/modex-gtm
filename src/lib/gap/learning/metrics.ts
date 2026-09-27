@@ -19,6 +19,7 @@
  */
 
 import type { ResponseClass } from '../taxonomy';
+import { RELIABLE_N } from './stats';
 
 // ---------------------------------------------------------------------------
 // Rate
@@ -37,8 +38,12 @@ export function rate(numerator: number, denominator: number): Rate {
   return { value: denominator > 0 ? numerator / denominator : null, n: denominator, numerator, denominator };
 }
 
-/** Below this n, a UI shows the number with a low-sample flag, never suppresses it. */
-export const MIN_RELIABLE_SAMPLE = 5;
+/**
+ * Red team T10: below this n a proportion is an early observation, not a rate;
+ * the UI shows k/n labeled as such and never a percentage (learning/stats.ts
+ * RELIABLE_N is the same number).
+ */
+export const MIN_RELIABLE_SAMPLE = RELIABLE_N;
 
 export function isLowSample(r: Rate): boolean {
   return r.denominator > 0 && r.denominator < MIN_RELIABLE_SAMPLE;

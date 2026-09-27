@@ -26,10 +26,24 @@ export interface GateResult {
 }
 
 export interface GateInputs {
-  /** G1: shadow routing-agreement rate for enroll_gap_sequence, decision count, weeks of data. */
+  /**
+   * G1: routing-agreement rate for enroll_gap_sequence (execution-verified,
+   * routing/agreement.ts), decision count, weeks of data.
+   */
   shadowAgreementRate: number;
   shadowDecisionCount: number;
   shadowWeeksOfData: number;
+  /**
+   * G1 (red team T10): seller conformity is not sales quality. Agreement alone
+   * never earns G1; it also needs real execution and a POSITIVE outcome:
+   * people sent to whose outcome window closed (learning/execution.ts), the
+   * LOWER 95% Wilson bound of a positive buyer outcome (meeting or problem
+   * acknowledged) per person, and the UPPER bound of opt-outs under a
+   * ceiling. Build these with buildG1Inputs, never by hand.
+   */
+  peopleSentTo: number;
+  positiveOutcomeLowerBound: number;
+  optOutUpperBound: number;
   /** G2: post-hoc reject-class violations found in the audit sample, and the sample size. */
   compilerRejectViolations: number;
   compilerAuditSampleSize: number;
@@ -56,6 +70,10 @@ export interface GateInputs {
 const G1_MIN_DECISIONS = 200;
 const G1_MIN_WEEKS = 4;
 const G1_MIN_AGREEMENT = 0.8;
+/** Session-chosen floors (red team T10), for the owner to confirm: enough real sends, positive outcomes clearly above zero, opt-outs clearly low. */
+const G1_MIN_PEOPLE_SENT = 100;
+const G1_MIN_POSITIVE_LOWER_BOUND = 0.02;
+const G1_MAX_OPT_OUT_UPPER_BOUND = 0.05;
 const G2_MAX_SAMPLE_VIOLATIONS = 0;
 const G2_MIN_SAMPLE = 100;
 const G3_MAX_UNKNOWN_7D = 0;
@@ -79,12 +97,17 @@ function evaluateG0(inputs: GateInputs): GateResult {
 }
 
 function evaluateG1(inputs: GateInputs): GateResult {
-  const passed =
+  const conforms =
     inputs.shadowDecisionCount >= G1_MIN_DECISIONS && inputs.shadowWeeksOfData >= G1_MIN_WEEKS && inputs.shadowAgreementRate >= G1_MIN_AGREEMENT;
+  // Red team T10: conformity is necessary, never sufficient.
+  const outcome =
+    inputs.peopleSentTo >= G1_MIN_PEOPLE_SENT &&
+    inputs.positiveOutcomeLowerBound >= G1_MIN_POSITIVE_LOWER_BOUND &&
+    inputs.optOutUpperBound <= G1_MAX_OPT_OUT_UPPER_BOUND;
   return {
     gate: 'G1',
-    passed,
-    detail: `n=${inputs.shadowDecisionCount} (need ${G1_MIN_DECISIONS}), weeks=${inputs.shadowWeeksOfData} (need ${G1_MIN_WEEKS}), agreement=${(inputs.shadowAgreementRate * 100).toFixed(1)}% (need ${(G1_MIN_AGREEMENT * 100).toFixed(0)}%)`,
+    passed: conforms && outcome,
+    detail: `n=${inputs.shadowDecisionCount} (need ${G1_MIN_DECISIONS}), weeks=${inputs.shadowWeeksOfData} (need ${G1_MIN_WEEKS}), agreement=${(inputs.shadowAgreementRate * 100).toFixed(1)}% (need ${(G1_MIN_AGREEMENT * 100).toFixed(0)}%), people sent to=${inputs.peopleSentTo} (need ${G1_MIN_PEOPLE_SENT}), positive outcome lower bound=${(inputs.positiveOutcomeLowerBound * 100).toFixed(1)}% (need ${(G1_MIN_POSITIVE_LOWER_BOUND * 100).toFixed(0)}%), opt-out upper bound=${(inputs.optOutUpperBound * 100).toFixed(1)}% (max ${(G1_MAX_OPT_OUT_UPPER_BOUND * 100).toFixed(0)}%)`,
   };
 }
 
@@ -136,6 +159,30 @@ function evaluateG6(inputs: GateInputs): GateResult {
     gate: 'G6',
     passed,
     detail: `allowlist=${inputs.canaryAllowlistSize} (max ${G6_MAX_ALLOWLIST}), dailyCap=${inputs.canaryDailyCap} (max ${G6_MAX_DAILY_CAP}), weeks=${inputs.canaryWeeksRun} (need ${G6_MIN_WEEKS}), incidents=${inputs.canaryIncidents} (need 0), drillLogged=${inputs.killSwitchDrillLogged}`,
+  };
+}
+
+/**
+ * The G1 inputs, from ONE agreement report and ONE execution report over the
+ * same window (Release D review S6): conformity is the ENROLL recommendation's
+ * execution-verified agreement only (a click on a nurture or call card can
+ * never count), and the outcome is positive buyer truth per person sent to.
+ * Anything missing reads as failing.
+ */
+export function buildG1Inputs(input: {
+  agreement: { byAction: Array<{ key: string; rate: { rate: number | null; n: number } }> };
+  execution: { overall: { peopleMatured: number; positivePerSend: { interval: { low: number; high: number } | null }; optOutPerSend: { interval: { low: number; high: number } | null } } } | null;
+  weeksOfData: number;
+}): Pick<GateInputs, 'shadowAgreementRate' | 'shadowDecisionCount' | 'shadowWeeksOfData' | 'peopleSentTo' | 'positiveOutcomeLowerBound' | 'optOutUpperBound'> {
+  const enroll = input.agreement.byAction.find((r) => r.key === 'enroll_gap_sequence')?.rate;
+  const o = input.execution?.overall;
+  return {
+    shadowAgreementRate: enroll?.rate ?? 0,
+    shadowDecisionCount: enroll?.n ?? 0,
+    shadowWeeksOfData: input.weeksOfData,
+    peopleSentTo: o?.peopleMatured ?? 0,
+    positiveOutcomeLowerBound: o?.positivePerSend.interval?.low ?? 0,
+    optOutUpperBound: o?.optOutPerSend.interval?.high ?? 1,
   };
 }
 

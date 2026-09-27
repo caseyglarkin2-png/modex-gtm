@@ -16,7 +16,10 @@
  * execution truth, not Casey's routing feedback.
  */
 import { recordHumanAction } from '../routing/queue';
+import { createHash } from 'node:crypto';
 import { appendLedger, MANUAL_SENT, type ManualSentPayload } from './draft-ledger';
+import { getHypothesis } from '../hypothesis/service';
+import { hypothesisSendable } from '../research/evidence-gate';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -53,6 +56,13 @@ export function matchManualSend(rendered: { recipient: string; subject: string; 
   return { kind: 'none', candidates: [...candidates] };
 }
 
+/** Red team T10: the T6 tier of the hypothesis when the send is recorded. */
+async function evidenceTierAt(prisma: PrismaLike, hypothesisId: string, now: Date): Promise<string> {
+  const h = prisma.prospectingHypothesis?.findUnique ? await getHypothesis(prisma, hypothesisId) : null;
+  if (!h) return 'unrecorded';
+  return hypothesisSendable(h, now) ? 'VERIFIED_FACT' : 'INSUFFICIENT';
+}
+
 export async function recordManualSend(
   prisma: PrismaLike,
   input: {
@@ -71,7 +81,8 @@ export async function recordManualSend(
   },
 ): Promise<{ ledgerId: string; humanAction: 'recorded' | 'already_acted' | 'not_recorded' }> {
   const existing = await prisma.gapAuditEvent.findFirst({
-    where: { subject_type: 'routing_decision', subject_id: input.decisionId, kind: MANUAL_SENT, payload: { path: ['gmailSentMessageId'], equals: input.match.message.id } },
+    // Release D review S5: one Gmail message is one send, whichever card it is recorded under.
+    where: { subject_type: 'routing_decision', kind: MANUAL_SENT, payload: { path: ['gmailSentMessageId'], equals: input.match.message.id } },
     select: { id: true },
   });
   const payload: ManualSentPayload = {
@@ -92,6 +103,9 @@ export async function recordManualSend(
     gmailSentMessageId: input.match.message.id,
     gmailThreadId: input.match.message.threadId,
     rfcMessageId: input.match.message.rfcMessageId,
+    // Release D review S8: the tier when the email actually went out, and a fingerprint of the copy that went out.
+    evidenceTier: await evidenceTierAt(prisma, input.hypothesisId, new Date(input.match.message.sentAt)),
+    contentHash: createHash('sha256').update(`${input.match.message.subject}\n\u0000\n${input.match.message.text}`).digest('hex'),
     sentAt: input.match.message.sentAt,
     matchedOn: input.match.matchedOn,
     recordedAt: input.now.toISOString(),

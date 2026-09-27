@@ -729,8 +729,9 @@ async function main(): Promise<number> {
     await recordHumanAction(prisma, agreeDecision.id, 'enrolled_by_hand', OWNER, { now: () => now });
     await recordHumanAction(prisma, disagreeDecision.id, 'called', OWNER, { now: () => now });
     const agreementReport = await loadAgreementReport(prisma, { runId });
-    expect('8a agreement', agreementReport.overall.n === 2 && agreementReport.overall.agreements === 1 && agreementReport.overall.rate === 0.5, `agreement report ${JSON.stringify(agreementReport.overall)}`);
-    pass('8a agreement', `routing-vs-human-action agreement over real RoutingDecision rows: 1 agreement, 1 disagreement, rate 0.5 (R-B)`);
+    // Red team T10: the enrolled_by_hand click on a card created AFTER the enrollment has no execution after it: unverified, never agreement.
+    expect('8a agreement', agreementReport.overall.n === 2 && agreementReport.overall.agreements === 0 && agreementReport.overall.unverified === 1 && agreementReport.overall.honest.status === 'insufficient', `agreement report ${JSON.stringify(agreementReport.overall)}`);
+    pass('8a agreement', `agreement judged against execution (T10): an enrolled_by_hand click with no enrollment or send after its card is unverified, 0 agreements of n=2, suppressed as an early observation`);
 
     // H3 internal disposition, for B9.
     await recordDisposition(prisma, { hypothesisId: h3, personaId: personaInternal.id, contactEmail: emails.internal, channel: 'email', responseClass: 'problem_confirmed', buyerLanguage: 'Internal QA confirms the probe fired.', source: { kind: 'manual', id: `${tag}:internal1` }, actor: OWNER, actorKind: 'human', now } satisfies RecordDispositionInput);
@@ -765,7 +766,7 @@ async function main(): Promise<number> {
     pass('9a canary', `checkCanaryCaps allows the allowlisted account and fails closed for one not on it`);
 
     const gateInputs: GateInputs = {
-      shadowAgreementRate: agreementReport.overall.rate, shadowDecisionCount: agreementReport.overall.n, shadowWeeksOfData: 0,
+      shadowAgreementRate: agreementReport.overall.rate, shadowDecisionCount: agreementReport.overall.n, shadowWeeksOfData: 0, peopleSentTo: 0, positiveOutcomeLowerBound: 0, optOutUpperBound: 1,
       compilerRejectViolations: 0, compilerAuditSampleSize: h1CompileIds.length + h2CompileIds.length + h4CompileIds.length,
       suppressionUnknownVerdicts7d: 0, suppressionDncViolationsEver: 0,
       replyClassificationAgreementRate: 1, replyClassificationSampleSize: 1,

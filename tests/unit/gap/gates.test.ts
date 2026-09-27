@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { allGatesEarned, evaluateGates, type GateInputs } from '@/lib/gap/automation/gates';
+import { allGatesEarned, buildG1Inputs, evaluateGates, type GateInputs } from '@/lib/gap/automation/gates';
 
 /** Every threshold met. Each test below mutates ONE field below its threshold. */
 function earnedInputs(): GateInputs {
@@ -7,6 +7,9 @@ function earnedInputs(): GateInputs {
     shadowAgreementRate: 0.85,
     shadowDecisionCount: 250,
     shadowWeeksOfData: 5,
+    peopleSentTo: 150,
+    positiveOutcomeLowerBound: 0.05,
+    optOutUpperBound: 0.02,
     compilerRejectViolations: 0,
     compilerAuditSampleSize: 100,
     suppressionUnknownVerdicts7d: 0,
@@ -132,5 +135,46 @@ describe('allGatesEarned', () => {
   it('is false if even one gate among seven fails', () => {
     const results = evaluateGates({ ...earnedInputs(), suppressionDncViolationsEver: 1 });
     expect(allGatesEarned(results)).toBe(false);
+  });
+});
+
+describe('red team T10: G1 never unlocks on conformity alone', () => {
+  const g1 = (over: Partial<GateInputs>) => evaluateGates({ ...earnedInputs(), ...over }).find((r) => r.gate === 'G1')!;
+
+  it('PROOF: 100% agreement over 1000 decisions and many weeks, with no real sends, does NOT earn G1', () => {
+    const r = g1({ shadowAgreementRate: 1, shadowDecisionCount: 1000, shadowWeeksOfData: 20, peopleSentTo: 0, positiveOutcomeLowerBound: 0 });
+    expect(r.passed).toBe(false);
+    expect(r.detail).toContain('people sent to=0 (need 100)');
+  });
+
+  it('perfect conformity with sends that draw no replies does not earn G1', () => {
+    expect(g1({ shadowAgreementRate: 1, peopleSentTo: 500, positiveOutcomeLowerBound: 0 }).passed).toBe(false);
+  });
+
+  it('real sends with replies still need the agreement bar', () => {
+    expect(g1({ shadowAgreementRate: 0.5 }).passed).toBe(false);
+    expect(g1({}).passed).toBe(true);
+  });
+});
+
+describe('Release D review S6: G1 inputs are built in one place', () => {
+  const rate = (low: number, high: number) => ({ interval: { low, high } });
+  it('conformity is the ENROLL recommendation only; clicks on other cards never count', () => {
+    const g = buildG1Inputs({
+      agreement: { byAction: [{ key: 'nurture', rate: { rate: 1, n: 900 } }, { key: 'enroll_gap_sequence', rate: { rate: 0.4, n: 50 } }] },
+      execution: { overall: { peopleMatured: 150, positivePerSend: rate(0.05, 0.12), optOutPerSend: rate(0, 0.02) } },
+      weeksOfData: 6,
+    });
+    expect(g).toMatchObject({ shadowAgreementRate: 0.4, shadowDecisionCount: 50, peopleSentTo: 150, positiveOutcomeLowerBound: 0.05, optOutUpperBound: 0.02 });
+    expect(evaluateGates({ ...earnedInputs(), ...g }).find((r) => r.gate === 'G1')!.passed).toBe(false);
+  });
+
+  it('missing data reads as failing, never passing', () => {
+    const g = buildG1Inputs({ agreement: { byAction: [] }, execution: null, weeksOfData: 0 });
+    expect(g).toMatchObject({ shadowAgreementRate: 0, shadowDecisionCount: 0, peopleSentTo: 0, positiveOutcomeLowerBound: 0, optOutUpperBound: 1 });
+  });
+
+  it('too many opt-outs fail G1 even with conformity and positive outcomes', () => {
+    expect(evaluateGates({ ...earnedInputs(), optOutUpperBound: 0.09 }).find((r) => r.gate === 'G1')!.passed).toBe(false);
   });
 });

@@ -6,10 +6,10 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-sprint5.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-e2e5-1790484970290
+- Run tag: gap-e2e5-1790489350556
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: fae9fade
-- Ran at: 2026-09-27T04:56:10.902Z
+- Git: 3d7d0b22
+- Ran at: 2026-09-27T06:09:11.040Z
 - Credentials scrubbed from the process before the first import: HUBSPOT_ACCESS_TOKEN,MC_API_TOKEN,GOOGLE_REFRESH_TOKEN,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,CLAWD_CONTROL_PLANE_URL,CLAWD_CONTROL_PLANE_TOKEN
 - No HubSpot, clawd, Gmail or model call is possible in this run: no HubSpot token is present, so the disposition mirror answers skipped:gap_mirror_disabled (GAP_HUBSPOT_MIRROR_ENABLED off) before any call.
 - This proves the loop end to end: signal -> hypothesis -> interaction (disposition) -> confirmed BID -> resolved hypothesis -> learning query receives the correct metric with n, over the SAME tables Sprints 1 and 4 already ship (Sprint 5 adds no schema).
@@ -17,9 +17,9 @@ Written by `scripts/gap/e2e-sprint5.ts`. Rerun it against the scratch database t
 ## Steps
 
 - PASS preflight: GAP_OS_ENABLED on, GAP_HUBSPOT_MIRROR_ENABLED off, credentials scrubbed, no stale rows
-- PASS 1 seed: account GAP Sprint Five Co mujciszg, two personas, two registered signals (cmujcit6100017kbw763entuw, cmujcit6600037kbwwfrr8bsd)
-- PASS 2 hypotheses: H1 cmujcit6 (hidden_capacity, site_ops) and H2 cmujcita (cost_to_ship, finance_procurement) both active
-- PASS 3 disposition: H1 resolved confirmed (resolution {"notes":"disposition:cmujcitb8000v7kbw8w5ndvu3","quote":true,"bidIds":["cmujcitb9000x7kbwyp37inwb","cmujcitbb000z7kbw608awthx","cmujcitbc00117kbw8p6qvjv8"],"impact":"quantified","problem":"confirmed","reasons":["impact:quantified:cmujcitbc00117kbw8p6qvjv8","base:70:call","quote:+15:cmujcitb9000x7kbwyp37inwb","root_cause:+10:cmujcitbb000z7kbw608awthx"],"scoredBy":"cmujcitb8000v7kbw8w5ndvu3","rootCause":"confirmed","confidence":95,"quantified":{"unit":"minutes/shift","value":40,"bidIds":["cmujcitbc00117kbw8p6qvjv8"]},"dispositionIds":["cmujcitb8000v7kbw8w5ndvu3"]}); H2 resolved rejected
+- PASS 1 seed: account GAP Sprint Five Co mujfeoti, two personas, two registered signals (cmujf4oyj00017ky4j3tu9owx, cmujf4oyo00037ky49iugokpi)
+- PASS 2 hypotheses: H1 cmujf4oy (hidden_capacity, site_ops) and H2 cmujf4p1 (cost_to_ship, finance_procurement) both active
+- PASS 3 disposition: H1 resolved confirmed (resolution {"notes":"disposition:cmujf4p1p000v7ky4fby3rg2y","quote":true,"bidIds":["cmujf4p1q000x7ky4mssra8eo","cmujf4p1s000z7ky4tqidgnua","cmujf4p1t00117ky40d1qovtr"],"impact":"quantified","problem":"confirmed","reasons":["impact:quantified:cmujf4p1t00117ky40d1qovtr","base:70:call","quote:+15:cmujf4p1q000x7ky4mssra8eo","root_cause:+10:cmujf4p1s000z7ky4tqidgnua"],"scoredBy":"cmujf4p1p000v7ky4fby3rg2y","rootCause":"confirmed","confidence":95,"quantified":{"unit":"minutes/shift","value":40,"bidIds":["cmujf4p1t00117ky40d1qovtr"]},"dispositionIds":["cmujf4p1p000v7ky4fby3rg2y"]}); H2 resolved rejected
 - PASS 4 learning byProblemFamily: hidden_capacity resolutionRate 1 precision 1 (confirmed); cost_to_ship resolutionRate 1 precision 0 (rejected): no cross-family leakage
 - PASS 4 learning byPersona: site_ops precision 1 (confirmed); finance_procurement precision 0 (rejected)
 - PASS 4 learning bySignalType: site_expansion signal type present with n=2
@@ -29,11 +29,11 @@ Written by `scripts/gap/e2e-sprint5.ts`. Rerun it against the scratch database t
 
 ## Counts
 
-- gitSha: fae9fade
+- gitSha: 3d7d0b22
 - databaseHost: 127.0.0.1:55432/gap_finish_e2e
-- runTag: gap-e2e5-1790484970290
-- hypothesisConfirmed: cmujcit6900057kbwrmh6t5l9
-- hypothesisRejected: cmujcitag000i7kbwbbcv3ava
+- runTag: gap-e2e5-1790489350556
+- hypothesisConfirmed: cmujf4oys00057ky4fiqen7y5
+- hypothesisRejected: cmujf4p11000i7ky4af0k3ags
 - learningFunnel: {"resolutionRate":{"value":1,"n":2,"numerator":2,"denominator":2},"precision":{"value":0.5,"n":2,"numerator":1,"denominator":2},"problemResonanceRate":{"value":0.5,"n":2,"numerator":1,"denominator":2},"rootCauseConfirmationRate":{"value":1,"n":1,"numerator":1,"denominator":1},"impactAcknowledgmentRate":{"value":1,"n":1,"numerator":1,"denominator":1},"impactQuantificationRate":{"value":1,"n":1,"numerator":1,"denominator":1}}
 
 ## Cleanup
