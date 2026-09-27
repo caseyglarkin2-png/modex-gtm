@@ -21,6 +21,8 @@ export interface Db {
   compiles: any[];
   approvals: any[];
   audit: any[];
+  /** InboundMessage rows (Release C review S5: an account reply blocks a colleague's first touch). */
+  inbound?: any[];
 }
 
 export function db(): Db {
@@ -90,6 +92,7 @@ export function prismaOf(d: Db) {
     },
     sequenceFamily: { findMany: vi.fn(async ({ where }: any) => d.families.filter((f) => f.problem_family === where.problem_family)) },
     unsubscribedEmail: { findFirst: vi.fn(async () => null) },
+    inboundMessage: { findMany: vi.fn(async (args: any) => findManyFrom(d.inbound ?? [], args)) },
     gapCompile: {
       findMany: vi.fn(async ({ where }: any) =>
         d.compiles

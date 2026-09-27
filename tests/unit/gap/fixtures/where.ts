@@ -9,7 +9,7 @@
  */
 type Row = Record<string, any>;
 
-const OPS = new Set(['in', 'notIn', 'gt', 'gte', 'lt', 'lte', 'equals', 'mode', 'path', 'not', 'has', 'contains']);
+const OPS = new Set(['in', 'notIn', 'gt', 'gte', 'lt', 'lte', 'equals', 'mode', 'path', 'not', 'has', 'contains', 'endsWith']);
 
 const norm = (v: unknown, insensitive: boolean) => (insensitive && typeof v === 'string' ? v.toLowerCase() : v instanceof Date ? v.getTime() : v);
 
@@ -33,6 +33,7 @@ function cond(value: unknown, c: unknown): boolean {
   if ('not' in o && cond(v, o.not)) return false;
   if ('has' in o && !(Array.isArray(v) && v.includes(o.has))) return false;
   if ('contains' in o && !(typeof v === 'string' && (norm(v, ci) as string).includes(norm(o.contains, ci) as string))) return false;
+  if ('endsWith' in o && !(typeof v === 'string' && (norm(v, ci) as string).endsWith(norm(o.endsWith, ci) as string))) return false;
   return true;
 }
 

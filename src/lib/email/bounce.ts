@@ -6,7 +6,10 @@
  *
  *   Persona.email_status = 'hard_bounce', Persona.do_not_contact = true
  *     (case-insensitive on the address: Persona.email is stored as imported)
- *   EmailLog rows to that address -> status 'bounced', bounce_type 'hard'
+ *   EmailLog rows for THAT send -> status 'bounced', bounce_type 'hard'
+ *     (Release C review S7: scoped to the bounced message, by the HubSpot
+ *     engagement id or the Gmail thread ids of the send; an address's other
+ *     history is never rewritten, and with no scope no EmailLog row moves)
  *   one `bounce` Notification per source event (deduped on source_id)
  *
  * The vocabulary is `hard_bounce` (what the webhook always wrote). Every
@@ -28,6 +31,8 @@ export interface HardBounceInput {
   sourceId: string;
   accountName?: string | null;
   subject?: string | null;
+  /** Which EmailLog rows are the bounced send. Absent: none are touched. */
+  emailLogScope?: { engagementId?: string; threadIds?: string[] };
 }
 
 export interface HardBounceResult {
@@ -45,10 +50,14 @@ export async function recordHardBounce(prisma: any, input: HardBounceInput): Pro
     where: { email: { equals: email, mode: 'insensitive' } },
     data: { email_status: 'hard_bounce', do_not_contact: true },
   });
-  const logs = await prisma.emailLog.updateMany({
-    where: { to_email: { equals: email, mode: 'insensitive' }, status: { not: 'bounced' } },
-    data: { status: 'bounced', bounce_type: 'hard' },
-  });
+  const scope = input.emailLogScope;
+  const threadIds = (scope?.threadIds ?? []).filter((t) => typeof t === 'string' && t.length > 0);
+  const logWhere = scope?.engagementId
+    ? { hubspot_engagement_id: scope.engagementId, status: { not: 'bounced' } }
+    : threadIds.length > 0
+      ? { to_email: { equals: email, mode: 'insensitive' }, thread_id: { in: threadIds }, status: { not: 'bounced' } }
+      : null;
+  const logs = logWhere ? await prisma.emailLog.updateMany({ where: logWhere, data: { status: 'bounced', bounce_type: 'hard' } }) : { count: 0 };
   let notified = false;
   const already = await prisma.notification.findFirst({ where: { source_id: input.sourceId, type: 'bounce' }, select: { id: true } });
   if (!already) {

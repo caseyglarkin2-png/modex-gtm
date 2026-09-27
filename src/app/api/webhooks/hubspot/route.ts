@@ -149,19 +149,16 @@ async function processEvent(event: z.infer<typeof eventSchema>) {
       where: { hubspot_engagement_id: event.objectId.toString() },
     });
     if (log) {
-      await prisma.emailLog.updateMany({
-        where: { hubspot_engagement_id: event.objectId.toString() },
-        data: { status: 'bounced', bounce_type: 'hard' },
-      });
-
       // Hard bounce: the one canonical write (src/lib/email/bounce.ts), shared
-      // with the GAP mailbox DSN intake (red team T9).
+      // with the GAP mailbox DSN intake (red team T9). The EmailLog write is
+      // scoped to this engagement; the address's other history is untouched.
       await recordHardBounce(prisma, {
         email: log.to_email,
         source: 'hubspot_webhook',
         sourceId: event.eventId.toString(),
         accountName: log.account_name,
         subject: log.subject,
+        emailLogScope: { engagementId: event.objectId.toString() },
       });
     }
   } else if (type === 'contact.propertyChange' && event.propertyName === 'hs_email_optout') {

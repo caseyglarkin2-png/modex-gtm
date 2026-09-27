@@ -545,29 +545,40 @@ function extractDeliveryStatus(part: GmailMessagePart | undefined): string | nul
   return found;
 }
 
+/** How many message ids one run may list (ids only; cheap). Past this the listing is truncated. */
+export const MAILBOX_LIST_CAP = 5000;
+
 /**
- * Inbox messages of `sender`'s mailbox received after `afterEpoch` (seconds),
- * newest pages first, up to `max`. Throws on a list failure (the caller must
- * not advance its watermark on an unreadable mailbox).
+ * Inbox messages of `sender`'s mailbox received after `afterEpoch` (seconds):
+ * the OLDEST `max` of the window, oldest first (Release C review S1). Gmail
+ * lists newest first, so every id in the window is listed, then the oldest
+ * are fetched; a backlog larger than one run drains forward as the caller's
+ * watermark advances. `truncated` is set when even the id listing hit
+ * MAILBOX_LIST_CAP. Throws on a list failure (the caller must not advance
+ * its watermark on an unreadable mailbox).
  */
-export async function listMailboxMessages(sender: GmailSender, afterEpoch: number, max = 200): Promise<MailboxMessage[]> {
+export async function listMailboxMessages(sender: GmailSender, afterEpoch: number, max = 200): Promise<MailboxMessage[] & { truncated?: boolean }> {
   const accessToken = await accessTokenForSender(sender);
   const mailbox = sender.userEmail.toLowerCase();
-  const ids: string[] = [];
+  const listed: string[] = [];
   let pageToken: string | undefined;
   do {
     const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
     listUrl.searchParams.set('q', `in:inbox after:${afterEpoch}`);
-    listUrl.searchParams.set('maxResults', String(Math.min(100, max - ids.length)));
+    listUrl.searchParams.set('maxResults', '500');
     if (pageToken) listUrl.searchParams.set('pageToken', pageToken);
     const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
     if (!res.ok) throw new Error(`Gmail mailbox list failed (${res.status})`);
     const data = (await res.json()) as { messages?: GmailMessage[]; nextPageToken?: string };
-    for (const m of data.messages ?? []) ids.push(m.id);
+    for (const m of data.messages ?? []) listed.push(m.id);
     pageToken = data.nextPageToken;
-  } while (pageToken && ids.length < max);
+  } while (pageToken && listed.length < MAILBOX_LIST_CAP);
+  const truncated = Boolean(pageToken);
+  // Newest first from Gmail: the oldest `max` are the tail.
+  const ids = listed.slice(-max).reverse();
 
-  const out: MailboxMessage[] = [];
+  const out: MailboxMessage[] & { truncated?: boolean } = [];
+  if (truncated) out.truncated = true;
   for (const id of ids) {
     const detail = await getMessageDetail(accessToken, mailbox, id);
     const from = getHeader(detail, 'From');

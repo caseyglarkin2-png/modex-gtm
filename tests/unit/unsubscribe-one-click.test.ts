@@ -59,7 +59,7 @@ function world() {
   });
   p.persona.findFirst = vi.fn(async (args: any) => findFirstFrom(d.personas, args));
   p.conversationDisposition = { findFirst: vi.fn(async () => null) };
-  p.inboundMessage = { findFirst: vi.fn(async () => null) };
+  p.inboundMessage = { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []) };
   d.audit.push({ id: 'm0', kind: MANUAL_SENT, subject_type: 'routing_decision', subject_id: 'dec-joey', created_at: new Date('2026-09-25T20:59:19Z'), payload: { engine: 'manual', stepIndex: 0, recipient: JOEY, personaId: 1886, sequenceVersionId: 'ver-hc', subject: 's', gmailSentMessageId: 'g', gmailThreadId: 't', sentAt: '2026-09-25T20:59:19.000Z' } });
   store.prisma = p;
   return { d, p };

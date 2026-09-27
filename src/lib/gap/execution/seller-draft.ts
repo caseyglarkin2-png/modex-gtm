@@ -31,6 +31,7 @@
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { sendableEvidence } from '../research/evidence-gate';
 import { seedCopyOutdated } from '../sequences/seed-drift';
+import { accountRepliedRecently } from '../replies/account-reply';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
@@ -65,6 +66,7 @@ export type SellerDraftRefusal =
   | 'send_in_progress_or_unknown'
   | 'draft_outstanding'
   | 'recipient_unsubscribed'
+  | 'account_replied'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -321,6 +323,16 @@ export async function prepareSellerEmail(
   // only its mirror and can lag it (Release B review #5). Read it directly.
   const unsubscribed = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true } });
   if (unsubscribed) return refuse(prisma, actor, decisionId, { ok: false, reason: 'recipient_unsubscribed' });
+  // Release C review S5: someone at this account wrote in recently (a reply to
+  // a colleague's GAP email, an assistant, a forward). A cold first touch to
+  // another person there waits until a human has read it. A shared consumer
+  // domain says nothing about the account.
+  if (stepIndex === 0) {
+    const replied = await accountRepliedRecently(prisma, email, now);
+    if (replied) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
+    }
+  }
   if (mode === 'send') {
     const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
     if (opportunity) {

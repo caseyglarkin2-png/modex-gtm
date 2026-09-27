@@ -11,10 +11,13 @@ vi.mock('@/lib/email/gmail-inbox', () => ({ listMailboxMessages: (...a: unknown[
 vi.mock('@/lib/gap/replies/gap-mailbox', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/replies/gap-mailbox')>()), pollGapMailbox: (...a: unknown[]) => (poll as any)(...a) }));
 
 import { GET } from '@/app/api/cron/gap-mailbox/route';
+import { markCronFailure, markCronSuccess } from '@/lib/cron-monitor';
 
 const req = (url: string, headers: Record<string, string> = {}) => new Request(url, { headers });
 
 beforeEach(() => {
+  vi.mocked(markCronFailure).mockClear();
+  vi.mocked(markCronSuccess).mockClear();
   poll.mockClear();
   list.mockClear();
   sender.value = { userEmail: 'casey@yardflow.ai', serviceAccountJson: '{}' };
@@ -55,5 +58,16 @@ describe('GET /api/cron/gap-mailbox', () => {
     expect(await res.json()).toMatchObject({ mode: 'apply', mailbox: 'casey@yardflow.ai', replies: 1 });
     expect(poll).toHaveBeenCalledTimes(1);
     expect((poll.mock.calls[0] as any[])[2].mailbox).toBe('casey@yardflow.ai');
+    expect(markCronSuccess).toHaveBeenCalledTimes(1);
+    expect(markCronFailure).not.toHaveBeenCalled();
+  });
+
+  it('Release C review S2: intake errors mark the cron run FAILED, never a quiet success', async () => {
+    poll.mockResolvedValueOnce({ since: 1, seen: 3, replies: 0, errors: ['p1: db timeout'] } as never);
+    const res = await GET(req('http://localhost/api/cron/gap-mailbox/?mode=apply', { authorization: 'Bearer shh' }));
+    expect(await res.json()).toMatchObject({ ok: false, errors: ['p1: db timeout'] });
+    expect(markCronFailure).toHaveBeenCalledTimes(1);
+    expect(String((vi.mocked(markCronFailure).mock.calls[0] as any[])[1].error.message)).toContain('p1: db timeout');
+    expect(markCronSuccess).not.toHaveBeenCalled();
   });
 });

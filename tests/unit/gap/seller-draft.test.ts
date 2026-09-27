@@ -403,3 +403,23 @@ describe('T6: an INSUFFICIENT hypothesis never sends', () => {
     expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
   });
 });
+
+describe('Release C review S5: a reply from the account holds first touches to anyone there', () => {
+  it('a human reply from a colleague at the account domain in the last 30 days refuses step 0 account_replied', async () => {
+    const d = db();
+    d.inbound = [{ from_email: 'pat.lee@kroger.com', subject: 'Re: doors versus spots', received_at: new Date(NOW.getTime() - 3 * 86_400_000) }];
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'account_replied' });
+    expect(r.ok ? '' : String(r.detail)).toContain('pat.lee@kroger.com');
+  });
+
+  it.each([
+    ['an out-of-office', { from_email: 'pat.lee@kroger.com', subject: 'Automatic reply: doors versus spots', received_at: new Date(NOW.getTime() - 86_400_000) }],
+    ['an old reply', { from_email: 'pat.lee@kroger.com', subject: 'Re: doors', received_at: new Date(NOW.getTime() - 45 * 86_400_000) }],
+    ['another domain', { from_email: 'pat.lee@albertsons.com', subject: 'Re: doors', received_at: new Date(NOW.getTime() - 86_400_000) }],
+  ])('%s does not hold the first touch', async (_label, row) => {
+    const d = db();
+    d.inbound = [row];
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d))).toMatchObject({ ok: true });
+  });
+});

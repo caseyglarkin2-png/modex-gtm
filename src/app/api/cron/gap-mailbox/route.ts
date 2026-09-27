@@ -67,6 +67,18 @@ export async function GET(request: Request) {
       report = { since, seen: messages.length, counts };
     } else {
       report = { ...(await pollGapMailbox(prisma, { now }, { list: (after) => listMailboxMessages(sender, after), mailbox: sender.userEmail })) };
+      // Release C review S2: a failed or quarantined message, an unattributable
+      // delivery notice or a truncated listing is never a quiet success.
+      const errors = Array.isArray(report.errors) ? (report.errors as string[]) : [];
+      if (errors.length > 0) {
+        await markCronFailure(CRON_NAME, {
+          path: CRON_PATH,
+          schedule: CRON_SCHEDULE,
+          durationMs: Date.now() - startedAt,
+          error: new Error(`${errors.length} mailbox intake error(s): ${errors.slice(0, 3).join(' | ')}`),
+        }).catch(() => undefined);
+        return NextResponse.json({ ...report, mode, mailbox: sender.userEmail, ok: false });
+      }
     }
     await markCronSuccess(CRON_NAME, {
       path: CRON_PATH,
