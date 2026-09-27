@@ -26,6 +26,11 @@
  *                       (next-touch.ts). Its CONTENT is not buyer truth until
  *                       a human records a disposition.
  *   auto reply / OOO    audited only; never a stop, never buyer truth
+ *   intake canary       from one of OUR domains with a subject starting
+ *                       CANARY_SUBJECT_PREFIX: stored as an InboundMessage and
+ *                       audited `mailbox.canary`, so production can prove the
+ *                       intake end to end without any prospect's thread. It
+ *                       pauses nothing, rings no bell and is never a reply.
  *   anything else       ignored (not stored: unrelated mail stays in Gmail)
  *
  * Idempotent per Gmail message id (a `mailbox.*` GapAuditEvent per handled
@@ -70,6 +75,7 @@ export const MAILBOX_KINDS = {
   softBounce: 'mailbox.soft_bounce',
   unattributedBounce: 'mailbox.bounce_unattributed',
   autoReply: 'mailbox.auto_reply',
+  canary: 'mailbox.canary',
   quarantined: 'mailbox.quarantined',
   error: 'mailbox.error',
 } as const;
@@ -78,6 +84,9 @@ const HANDLED_KINDS = Object.values(MAILBOX_KINDS).filter((k) => k !== MAILBOX_K
 const SUBJECT_TYPE = 'gmail_message';
 
 export { FREEMAIL_DOMAINS } from './domains';
+
+/** The subject prefix of an operator's intake canary (sent from one of our own domains). */
+export const CANARY_SUBJECT_PREFIX = '[gap-intake-canary]';
 
 export type DsnClass = 'hard' | 'policy' | 'soft';
 
@@ -218,6 +227,7 @@ export type ReplyAttribution = 'gap_thread' | 'gap_recipient' | 'account_domain'
 
 export type MailboxVerdict =
   | { kind: 'own' }
+  | { kind: 'canary' }
   | { kind: 'bounce'; dsn: DsnFinding }
   | { kind: 'auto_reply'; reason: string; attributedTo: SentRef[] }
   | { kind: 'reply'; attribution: ReplyAttribution; attributedTo: SentRef[] }
@@ -227,6 +237,7 @@ export type MailboxVerdict =
 export function classifyMailboxMessage(m: MailboxMessage, ctx: GapSendContext, mailbox: string): MailboxVerdict {
   const from = lower(m.fromEmail);
   if (from === lower(mailbox)) return { kind: 'own' };
+  if (OWN_DOMAINS.has(domainOf(from)) && lower(m.subject ?? '').startsWith(CANARY_SUBJECT_PREFIX)) return { kind: 'canary' };
   const dsn = parseDsn(m);
   if (dsn) return { kind: 'bounce', dsn };
 
@@ -262,6 +273,7 @@ export interface MailboxReport {
   /** Unrelated messages young enough to hold the watermark (S4). */
   held: number;
   own: number;
+  canaries: number;
   alreadyHandled: number;
   quarantined: number;
   inboundMessagesCreated: number;
@@ -354,6 +366,25 @@ async function handleReply(prisma: PrismaLike, m: MailboxMessage, v: Extract<Mai
   });
 }
 
+/** The intake proof: the same InboundMessage write a reply gets, and nothing else. */
+async function handleCanary(prisma: PrismaLike, m: MailboxMessage, actor: string, report: MailboxReport): Promise<void> {
+  const from = lower(m.fromEmail);
+  await prisma.emailThread.upsert({
+    where: { id: m.threadId },
+    create: { id: m.threadId, persona_email: from, subject: m.subject, last_message_at: m.receivedAt },
+    update: { last_message_at: m.receivedAt },
+  });
+  const existing = await prisma.inboundMessage.findUnique({ where: { id: m.id }, select: { id: true } });
+  if (!existing) {
+    await prisma.inboundMessage.create({
+      data: { id: m.id, thread_id: m.threadId, rfc_message_id: m.rfcMessageId, from_email: from, from_name: m.fromName, subject: m.subject, body_html: m.bodyHtml || null, body_text: m.bodyText || null, snippet: m.snippet, received_at: m.receivedAt },
+    });
+    report.inboundMessagesCreated += 1;
+  }
+  report.canaries += 1;
+  await audit(prisma, MAILBOX_KINDS.canary, actor, m.id, { from, subject: m.subject, threadId: m.threadId, receivedAt: m.receivedAt.toISOString(), inboundMessageId: m.id });
+}
+
 export async function pollGapMailbox(prisma: PrismaLike, input: { now: Date; actor?: string }, deps: MailboxDeps): Promise<MailboxReport> {
   const actor = input.actor ?? 'cron:gap-mailbox';
   const nowS = Math.floor(input.now.getTime() / 1000);
@@ -367,7 +398,7 @@ export async function pollGapMailbox(prisma: PrismaLike, input: { now: Date; act
   const ingest = deps.ingest ?? ingestReply;
   const bounce = deps.bounce ?? recordHardBounce;
   const report: MailboxReport = {
-    since, seen: messages.length, replies: 0, hardBounces: 0, policyBounces: 0, softBounces: 0, unattributedBounces: 0, autoReplies: 0, unrelated: 0, held: 0, own: 0,
+    since, seen: messages.length, replies: 0, hardBounces: 0, policyBounces: 0, softBounces: 0, unattributedBounces: 0, autoReplies: 0, unrelated: 0, held: 0, own: 0, canaries: 0,
     alreadyHandled: 0, quarantined: 0, inboundMessagesCreated: 0, bouncedAddresses: [], errors: [], watermark: null,
   };
   if (messages.truncated) report.errors.push(`listing truncated: more mail since ${since} than one run reads; the backlog drains oldest first`);
@@ -384,6 +415,7 @@ export async function pollGapMailbox(prisma: PrismaLike, input: { now: Date; act
       } else {
         const v = classifyMailboxMessage(m, ctx, deps.mailbox);
         if (v.kind === 'own') report.own += 1;
+        else if (v.kind === 'canary') await handleCanary(prisma, m, actor, report);
         else if (v.kind === 'unrelated') {
           report.unrelated += 1;
           if (nowS - receivedS < MAILBOX_UNRELATED_HOLD_SECONDS) {

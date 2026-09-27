@@ -387,3 +387,25 @@ describe('S4: a reply that arrives before its send is recorded is not lost', () 
     expect(Number(t.config.find((c) => c.key === GAP_MAILBOX_WATERMARK_KEY)!.value)).toBe(Math.floor(new Date('2026-09-25T09:00:00Z').getTime() / 1000));
   });
 });
+
+describe('the intake canary (production proof without a prospect thread)', () => {
+  it('a [gap-intake-canary] message from our own domain becomes an InboundMessage and a mailbox.canary audit, and nothing else', async () => {
+    const { t, prisma } = world();
+    const canary = msg({ id: 'can1', threadId: 'thr-can', fromEmail: 'casey@freightroll.com', fromName: 'Casey', subject: '[gap-intake-canary] 2026-09-27 proof', bodyText: 'internal intake proof' });
+    const r = await poll(prisma, [canary]);
+    expect(r).toMatchObject({ canaries: 1, replies: 0, inboundMessagesCreated: 1 });
+    expect(t.inbound).toEqual([expect.objectContaining({ id: 'can1', from_email: 'casey@freightroll.com' })]);
+    expect(t.audit.find((a) => a.kind === 'mailbox.canary')!.payload).toMatchObject({ from: 'casey@freightroll.com', inboundMessageId: 'can1' });
+    expect(ingest).not.toHaveBeenCalled();
+    expect(t.notes).toHaveLength(0);
+    expect(t.personas.every((p) => p.do_not_contact === false)).toBe(true);
+    expect((await poll(prisma, [canary])).alreadyHandled).toBe(1);
+  });
+
+  it('the prefix from an outside domain is not a canary (a prospect cannot trigger it)', async () => {
+    const { t, prisma } = world();
+    const r = await poll(prisma, [msg({ id: 'fake1', threadId: 'thr-other', fromEmail: 'someone@vendor.example', subject: '[gap-intake-canary] hi' })]);
+    expect(r).toMatchObject({ canaries: 0, unrelated: 1 });
+    expect(t.inbound).toHaveLength(0);
+  });
+});
