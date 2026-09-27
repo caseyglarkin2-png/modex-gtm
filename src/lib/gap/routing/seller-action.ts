@@ -66,6 +66,3 @@ export function telHref(phone: string | null): string | null {
   return digits.length >= 7 ? `tel:${digits}` : null;
 }
 
-export function mailtoHref(email: string | null): string | null {
-  return email ? `mailto:${email}` : null;
-}

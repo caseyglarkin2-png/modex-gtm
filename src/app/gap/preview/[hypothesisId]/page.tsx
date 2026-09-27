@@ -24,7 +24,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
 import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler/preview-rows';
-import { hubspotCompanyUrl, hubspotContactUrl, mailtoHref, telHref } from '@/lib/gap/routing/seller-action';
+import { hubspotCompanyUrl, hubspotContactUrl, telHref } from '@/lib/gap/routing/seller-action';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { ActionPackView, resolveActionPack } from '@/components/gap/action-pack-view';
@@ -102,7 +102,6 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
   }
   const cleared = allStepsCleared(reportSteps);
   const recommends = decision ? RECOMMENDS[decision.action] ?? null : null;
-  const mailto = persona?.email ? mailtoHref(persona.email) : null;
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const contactUrl = persona?.hubspot_contact_id ? hubspotContactUrl(persona.hubspot_contact_id) : null;
   const companyUrl = account?.hubspot_company_id ? hubspotCompanyUrl(account.hubspot_company_id) : null;
@@ -136,13 +135,6 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
         <div className="mt-3 space-y-4 text-sm">
           {persona ? (
               <div className="mt-2 flex flex-wrap gap-2 text-xs" data-testid="preview-contact-buttons">
-                {mailto ? (
-                  <a href={mailto} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-                    Email
-                  </a>
-                ) : (
-                  <span className="italic text-[var(--muted-foreground)]">email unavailable</span>
-                )}
                 {tel ? (
                   <a href={tel} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
                     Call

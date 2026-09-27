@@ -24,7 +24,7 @@
 
 import { useState, type ReactNode } from 'react';
 import Link from 'next/link';
-import { ExternalLink, Linkedin, Mail, Phone } from 'lucide-react';
+import { ExternalLink, Linkedin, Phone } from 'lucide-react';
 import { Badge, type BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { EnrollTarget, RoutingExplain } from '@/lib/gap/routing/types';
@@ -33,7 +33,6 @@ import { RECOMMENDED_HUMAN_ACTION } from '@/lib/gap/routing/agreement';
 import {
   hubspotCompanyUrl,
   hubspotContactUrl,
-  mailtoHref,
   sellerActionLabel,
   telHref,
 } from '@/lib/gap/routing/seller-action';
@@ -189,7 +188,6 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
   const recommendedHumanAction = item.action in RECOMMENDED_HUMAN_ACTION ? RECOMMENDED_HUMAN_ACTION[item.action as RoutingAction] : null;
   const otherOptions = HUMAN_ACTIONS.filter((a) => a !== recommendedHumanAction);
   const sellerLabel = sellerActionLabel(item.action, firstName, item.account.name);
-  const mailto = mailtoHref(item.persona.email);
   const tel = telHref(item.persona.phone ?? null);
   const contactUrl = item.persona.hubspotContactId ? hubspotContactUrl(item.persona.hubspotContactId) : null;
   const companyUrl = item.account.hubspotCompanyId ? hubspotCompanyUrl(item.account.hubspotCompanyId) : null;
@@ -243,13 +241,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
 
       {!item.blocked ? (
         <div data-testid="contact-buttons" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-          {mailto ? (
-            <a href={mailto} className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-              <Mail className="h-3 w-3" /> Email
-            </a>
-          ) : (
-            <span className="italic text-[var(--muted-foreground)]">email unavailable</span>
-          )}
+          {/* Red team T8: no raw email link. Email goes only through the guarded GAP send path. */}
           {tel ? (
             <a href={tel} className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
               <Phone className="h-3 w-3" /> Call
