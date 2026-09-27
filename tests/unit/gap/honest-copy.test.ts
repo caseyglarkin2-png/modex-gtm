@@ -191,3 +191,21 @@ describe('Release C re-review S8: an expired fact never opens a call', () => {
     expect(src).not.toMatch(/sendableEvidence\(/);
   });
 });
+
+/**
+ * Final red-team regression (RevOps P1): "Copy email" was the one path around
+ * every gate. It rendered for a compiler REJECT, a do-not-contact person and an
+ * INSUFFICIENT hypothesis, and copied a body with no unsubscribe footer. A
+ * paste into Gmail plus "record manual send" is how the only production GAP
+ * send happened.
+ */
+describe('final regression: Copy email is gated like SEND', () => {
+  it('the copy buttons render only when the email is sendable AND the evidence is a verified fact, and the copied text carries the footer', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
+    expect(src).toContain('const copyable = sendable && verifiedFact && persona?.email');
+    expect(src).toMatch(/\{copyable \? \(/);
+    expect(src).toContain('draftText(renderedEmail.queued.body, unsubscribePageUrl(copyable))');
+    expect(src).not.toMatch(/<CopyButton text=\{renderedEmail\.queued\.body\}/);
+  });
+});
