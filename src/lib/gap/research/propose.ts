@@ -25,6 +25,7 @@ import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
 import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
+import { factFitsOpener } from './opener';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -115,8 +116,13 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   // Red team T6/T7: the observation is built only from evidence that passes
   // the SAME gate approval applies. A verified quote that states no network
   // change (a risk factor, a liquidity paragraph) is not a fact to open with.
-  const quotable = fresh.filter((s) => outreachFactRefusal(s, run.account_name) === null).slice(0, 2);
-  if (quotable.length === 0) return { ok: false, reason: 'no_outreach_fact' };
+  const eligible = fresh.filter((s) => outreachFactRefusal(s, run.account_name) === null);
+  if (eligible.length === 0) return { ok: false, reason: 'no_outreach_fact' };
+  // Final Monday P1: ONE primary fact opens the first touch, the first in research order that a
+  // first touch can quote whole. A longer fact is research context, never the opener.
+  const primary = eligible.find((s) => factFitsOpener(s.evidence_text));
+  if (!primary) return { ok: false, reason: 'opener_too_long' };
+  const quotable = [primary, ...eligible.filter((s) => s.id !== primary.id)].slice(0, 2);
 
   const base = status.hypothesisId
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: status.hypothesisId } })

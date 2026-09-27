@@ -42,7 +42,7 @@ const Body = z.discriminatedUnion('op', [
   z.object({ op: z.literal('approve'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50), use: z.boolean().optional(), signalIds: z.array(z.string().min(1)).min(1).max(20).optional() }).strict(),
   z.object({ op: z.literal('corroborate'), fingerprint: Fp, force: z.boolean().optional() }).strict(),
   z.object({ op: z.literal('attach'), fingerprint: Fp, signalIds: z.array(z.string().min(1)).min(1).max(20) }).strict(),
-  z.object({ op: z.literal('use_evidence'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50), signalIds: z.array(z.string().min(1)).min(1).max(20) }).strict(),
+  z.object({ op: z.literal('use_evidence'), fingerprint: Fp, hypothesisIds: z.array(z.string().min(1)).min(1).max(50), signalIds: z.array(z.string().min(1)).min(1).max(20), primarySignalId: z.string().min(1).optional() }).strict(),
 ]);
 
 async function sessionEmail(): Promise<string | null> {
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(r, { status: r.ok ? 200 : 404 });
   }
   if (b.op === 'use_evidence') {
-    const r = await useEvidenceForThesis(prisma, { fingerprint: b.fingerprint, hypothesisIds: b.hypothesisIds, signalIds: b.signalIds, actor, now });
+    const r = await useEvidenceForThesis(prisma, { fingerprint: b.fingerprint, hypothesisIds: b.hypothesisIds, signalIds: b.signalIds, primarySignalId: b.primarySignalId ?? null, actor, now });
     const status = r.reason === 'group_not_found' ? 404 : r.reason?.startsWith('not_in_group') ? 409 : r.reason ? 422 : 200;
     return NextResponse.json(r, { status });
   }

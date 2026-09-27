@@ -79,6 +79,8 @@ describe('insufficient legacy thesis (production-shaped)', () => {
         json({
           ok: true, outcome: 'corroborated', reused: false, research: { runId: 'r1', facts: [], conflicts: [], notes: [] },
           newIndependent: [{ signalId: 'fact', excerpt: 'PepsiCo will close three distribution centers in 2027.', url: 'https://sec.example/1', title: 'PEPSICO INC 10-Q', publishedAt: '2026-07-09', fresh: true }],
+          primaryDefault: 'fact',
+          tooLongToOpen: [],
         }),
       )
       .mockResolvedValueOnce(json({ ok: true, observation: 'x', results: NAMES.map((_, i) => ({ hypothesisId: `a${i + 1}`, ok: true, from: 'approved', to: 'approved', revisionId: `rev${i}`, detail: 'new draft revision created' })) }));
@@ -88,12 +90,63 @@ describe('insufficient legacy thesis (production-shaped)', () => {
     expect(screen.queryByTestId('use-evidence-approve')).toBeNull();
     fireEvent.click(screen.getByTestId('use-verified-evidence'));
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
-    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toEqual({ op: 'use_evidence', fingerprint: FP, hypothesisIds: ['a1', 'a2', 'a3', 'a4', 'a5'], signalIds: ['fact'] });
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toEqual({ op: 'use_evidence', fingerprint: FP, hypothesisIds: ['a1', 'a2', 'a3', 'a4', 'a5'], signalIds: ['fact'], primarySignalId: 'fact' });
     const out = await screen.findByTestId('revision-outcome');
     expect(out).toHaveTextContent('5 revised drafts ready for your review');
     expect(out).toHaveTextContent('The approved versions are unchanged');
     expect(out).toHaveTextContent('Nothing is approved, in use or sent yet');
     expect(within(out).getByRole('link', { name: 'Review the revised thesis' })).toHaveAttribute('href', '/gap?lane=review');
+  });
+});
+
+describe('final Monday P1: ONE primary outreach fact opens the first touch', () => {
+  const fetchMock = vi.fn();
+  beforeEach(() => { fetchMock.mockReset(); vi.stubGlobal('fetch', fetchMock); });
+  afterEach(() => vi.unstubAllGlobals());
+  const fact = (signalId: string, excerpt: string) => ({ signalId, excerpt, url: `https://sec.example/${signalId}`, title: `10-Q ${signalId}`, publishedAt: '2026-07-09', fresh: true });
+  const LONG = Array.from({ length: 70 }, (_, i) => `word${i}`).join(' ');
+  const three = () =>
+    json({
+      ok: true, outcome: 'corroborated', reused: false, research: { runId: 'r1', facts: [], conflicts: [], notes: [] },
+      newIndependent: [fact('long', LONG), fact('f1', 'PepsiCo will close three distribution centers in 2027.'), fact('f2', 'PepsiCo opened a new distribution center in Texas.')],
+      primaryDefault: 'f1',
+      tooLongToOpen: ['long'],
+    });
+  const revised = () => json({ ok: true, observation: 'x', results: [{ hypothesisId: 'a1', ok: true, from: 'approved', to: 'approved', revisionId: 'rev0', detail: 'new draft revision created' }] });
+
+  it('14/16. three facts found: exactly ONE is selected by default (the first that fits an opener); a too-long fact cannot be the opener', async () => {
+    fetchMock.mockResolvedValueOnce(three()).mockResolvedValueOnce(revised());
+    render(<ThesisGroupReview cards={[pepsico()]} intro={false} />);
+    fireEvent.click(screen.getByTestId('find-evidence'));
+    await screen.findByText('FOUND EVIDENCE');
+    const radios = screen.getAllByTestId('primary-fact') as HTMLInputElement[];
+    expect(radios).toHaveLength(3);
+    expect(radios.filter((r) => r.checked).map((r) => r.getAttribute('aria-label'))).toEqual(['Open with 10-Q f1']);
+    expect(radios[0]).toBeDisabled();
+    expect(screen.getByText(/Too long to open a first email; research context only/)).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('use-verified-evidence'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    // Only the primary goes to the opener; the other facts stay research context.
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toMatchObject({ op: 'use_evidence', signalIds: ['f1'], primarySignalId: 'f1' });
+  });
+
+  it('15. Casey chooses a different fact: the revision opens with that one only', async () => {
+    fetchMock.mockResolvedValueOnce(three()).mockResolvedValueOnce(revised());
+    render(<ThesisGroupReview cards={[pepsico()]} intro={false} />);
+    fireEvent.click(screen.getByTestId('find-evidence'));
+    await screen.findByText('FOUND EVIDENCE');
+    fireEvent.click(screen.getByRole('radio', { name: 'Open with 10-Q f2' }));
+    fireEvent.click(screen.getByTestId('use-verified-evidence'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toMatchObject({ signalIds: ['f2'], primarySignalId: 'f2' });
+  });
+
+  it('17. every fact found is too long to open with: nothing to use, a plain hold', async () => {
+    fetchMock.mockResolvedValueOnce(json({ ok: true, outcome: 'corroborated', reused: false, research: { runId: 'r1', facts: [], conflicts: [], notes: [] }, newIndependent: [fact('long', LONG)], primaryDefault: null, tooLongToOpen: ['long'] }));
+    render(<ThesisGroupReview cards={[pepsico()]} intro={false} />);
+    fireEvent.click(screen.getByTestId('find-evidence'));
+    expect(await screen.findByTestId('no-openable-fact')).toHaveTextContent('too long to open a first email');
+    expect(screen.queryByTestId('use-verified-evidence')).toBeNull();
   });
 });
 
@@ -103,7 +156,7 @@ describe('use_evidence refusal is plain language', () => {
   afterEach(() => vi.unstubAllGlobals());
   it('an expired fact reads as what happened + what to do, not a code', async () => {
     fetchMock
-      .mockResolvedValueOnce(json({ ok: true, outcome: 'corroborated', reused: false, research: { runId: 'r', facts: [], conflicts: [], notes: [] }, newIndependent: [{ signalId: 'f', excerpt: 'x', url: 'https://a', title: 't', publishedAt: '2026-07-09', fresh: true }] }))
+      .mockResolvedValueOnce(json({ ok: true, outcome: 'corroborated', reused: false, research: { runId: 'r', facts: [], conflicts: [], notes: [] }, newIndependent: [{ signalId: 'f', excerpt: 'x', url: 'https://a', title: 't', publishedAt: '2026-07-09', fresh: true }], primaryDefault: 'f', tooLongToOpen: [] }))
       .mockResolvedValueOnce(json({ ok: false, reason: 'not_verified_evidence:f:expired', results: [] }, 422));
     render(<ThesisGroupReview cards={[pepsico()]} intro={false} />);
     fireEvent.click(screen.getByTestId('find-evidence'));

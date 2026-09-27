@@ -23,6 +23,7 @@ import {
   type HypothesisStatus,
 } from '../taxonomy';
 import { extractCitationIds, validateObservation } from './observation';
+import { openerFits } from '../research/opener';
 
 export type { HypothesisStatus };
 
@@ -153,7 +154,10 @@ function evidenceGuard(snapshot: HypothesisSnapshot, now: Date): 'no_evidence' |
  * Evidence GAP itself rates INSUFFICIENT (keyword hits, operator hearsay,
  * unverified or irrelevant sentences) can inform research, never use.
  */
-function outreachFactGuard(snapshot: HypothesisSnapshot, now: Date): 'evidence_insufficient' | null {
+function outreachFactGuard(snapshot: HypothesisSnapshot, now: Date): 'evidence_insufficient' | 'opener_too_long' | null {
+  // Final Monday P1: an opener quoting more than the compiler lets one first
+  // touch carry can never pass Send. It is never approved or put in use.
+  if (!openerFits(snapshot.observation)) return 'opener_too_long';
   const live = (signal: LinkedSignal) => signal.outreachFact === true && !isExpired(signal.expiresAt, now);
   if (!snapshot.linkedSignals.some(live)) return 'evidence_insufficient';
   // Release C review SF1: the observation is the sentence the buyer reads.

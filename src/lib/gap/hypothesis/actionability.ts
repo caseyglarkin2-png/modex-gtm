@@ -18,8 +18,9 @@
  * a verified, cited fact. A thesis can have a source and still be not ready.
  */
 import { sendableEvidence, type GateSignal } from '../research/evidence-gate';
+import { openerFits } from '../research/opener';
 
-export type ReadinessReason = 'no_evidence' | 'evidence_expired' | 'evidence_insufficient';
+export type ReadinessReason = 'no_evidence' | 'evidence_expired' | 'evidence_insufficient' | 'opener_too_long';
 
 /**
  * The next useful step for one row:
@@ -56,7 +57,10 @@ const live = (s: ActionSignal, now: Date) => !s.freshness_expires_at || new Date
 /** Outreach readiness of the observation + linked signals, and why not. */
 export function outreachReadiness(input: Omit<ActionabilityInput, 'status'>, now: Date): { ready: boolean; reason: ReadinessReason | null } {
   const signals = input.signals.filter((s): s is ActionSignal => !!s && typeof s.id === 'string');
-  if (sendableEvidence(input.observation, signals.filter((s) => live(s, now)), input.account_name).tier === 'VERIFIED_FACT') return { ready: true, reason: null };
+  if (sendableEvidence(input.observation, signals.filter((s) => live(s, now)), input.account_name).tier === 'VERIFIED_FACT') {
+    // Final Monday P1: verified, but quoting more than one first touch can carry. It would only fail at Send.
+    return openerFits(input.observation) ? { ready: true, reason: null } : { ready: false, reason: 'opener_too_long' };
+  }
   const evidenced = signals.filter((s) => (s.evidence_text ?? '').trim() || (s.evidence_url ?? '').trim());
   if (evidenced.length === 0) return { ready: false, reason: 'no_evidence' };
   // It would be sendable but for the clock: the facts behind it expired.
@@ -79,4 +83,4 @@ export const REVIEW_STEPS: ReadonlySet<NextStep> = new Set(['approve_use', 'use'
 export const RESEARCH_STEPS: ReadonlySet<NextStep> = new Set(['find_evidence', 'revise']);
 
 /** Machine refusal reasons that mean "find verified evidence", not "blocked". */
-export const EVIDENCE_REFUSALS: ReadonlySet<string> = new Set(['evidence_insufficient', 'evidence_expired', 'no_evidence', 'no_signals']);
+export const EVIDENCE_REFUSALS: ReadonlySet<string> = new Set(['evidence_insufficient', 'evidence_expired', 'no_evidence', 'no_signals', 'opener_too_long']);

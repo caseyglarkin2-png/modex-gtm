@@ -46,6 +46,10 @@ interface Corroboration {
   reused: boolean;
   research: { runId: string; facts: Fact[]; conflicts: Array<{ site: string; signalIds: string[] }>; notes: string[] };
   newIndependent: Fact[];
+  /** The ONE fact a first touch opens with by default (server-chosen, research order). */
+  primaryDefault?: string | null;
+  /** Facts too long to open a first touch with: research context only. */
+  tooLongToOpen?: string[];
 }
 export interface ThesisOutcome {
   key: string;
@@ -74,6 +78,7 @@ const READINESS_WORDS: Record<string, string> = {
   evidence_insufficient: 'no verified fact yet',
   evidence_expired: 'evidence expired',
   no_evidence: 'no evidence',
+  opener_too_long: 'opener too long',
 };
 const DEPTH_TONE: Record<string, string> = {
   INSUFFICIENT: 'border-[var(--destructive)] text-[var(--destructive)]',
@@ -130,6 +135,8 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
   const [error, setError] = useState<string | null>(null);
   const [corr, setCorr] = useState<Corroboration | null>(null);
   const [chosen, setChosen] = useState<Set<string>>(new Set());
+  // Not ready: exactly ONE primary outreach fact opens the first touch (final Monday P1).
+  const [primary, setPrimary] = useState<string | null>(null);
   // Decided: the card stops offering the decision at once (the outcome shows above);
   // the refreshed page drops it. A stale Approve + use must never sit under a result.
   const [decided, setDecided] = useState(false);
@@ -158,16 +165,16 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
   }
 
   /** USE THIS VERIFIED EVIDENCE: rebuild editable observations, revise frozen ones. Never approves. */
-  async function useEvidence(signalIds: string[]) {
+  async function useEvidence(primarySignalId: string) {
     setBusy('evidence'); setError(null);
     try {
-      const r = await post<{ results: RowResult[] }>({ op: 'use_evidence', fingerprint: card.fingerprint, hypothesisIds: [...checked], signalIds });
+      const r = await post<{ results: RowResult[] }>({ op: 'use_evidence', fingerprint: card.fingerprint, hypothesisIds: [...checked], signalIds: [primarySignalId], primarySignalId });
       const rows = r.data.results ?? [];
       if (!r.ok && rows.length === 0) { setError(evidenceRefusal(r.data.reason ?? r.data.error ?? 'evidence_failed')); return; }
       const drafts = rows.filter((x) => x.ok && x.revisionId).length;
       const rebuilt = rows.filter((x) => x.ok && !x.revisionId && (x.from === 'draft' || x.from === 'review_required')).length;
       onOutcome({ key, title, approved: 0, inUse: 0, routing: null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`), revised: { drafts, rebuilt } });
-      setCorr(null); setChosen(new Set());
+      setCorr(null); setChosen(new Set()); setPrimary(null);
       if (rows.length > 0 && rows.every((x) => x.ok)) setDecided(true);
       router.refresh();
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
@@ -178,7 +185,11 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
     try {
       const r = await post<Corroboration>({ op: 'corroborate', fingerprint: card.fingerprint });
       if (!r.ok) setError(r.data.reason ?? r.data.error ?? 'research_failed');
-      else { setCorr(r.data); setChosen(new Set(r.data.outcome === 'contradicts' ? [] : r.data.newIndependent.map((f) => f.signalId))); }
+      else {
+        setCorr(r.data);
+        setChosen(new Set(r.data.outcome === 'contradicts' ? [] : r.data.newIndependent.map((f) => f.signalId)));
+        setPrimary(r.data.outcome === 'contradicts' ? null : (r.data.primaryDefault ?? null));
+      }
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
   }
 
@@ -286,30 +297,47 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
                 {corr.outcome === 'corroborated' ? (
                   <>
                     <ul className="mt-2 space-y-2">
-                      {corr.newIndependent.map((f) => (
-                        <li key={f.signalId} className="flex items-start gap-2">
-                          <input
-                            type="checkbox"
-                            className="mt-1"
-                            aria-label={`Use ${f.title}`}
-                            checked={chosen.has(f.signalId)}
-                            onChange={(e) => {
-                              const next = new Set(chosen);
-                              if (e.target.checked) next.add(f.signalId); else next.delete(f.signalId);
-                              setChosen(next);
-                            }}
-                          />
-                          <span className="min-w-0 break-words">
-                            <q>{f.excerpt}</q>
-                            <span className="ml-1 text-xs text-[var(--muted-foreground)]"><a className="underline" href={f.url} target="_blank" rel="noreferrer">{f.title}</a>, {day(f.publishedAt)}</span>
-                          </span>
-                        </li>
-                      ))}
+                      {corr.newIndependent.map((f) => {
+                        const tooLong = (corr.tooLongToOpen ?? []).includes(f.signalId);
+                        return (
+                          <li key={f.signalId} className="flex items-start gap-2">
+                            {ready ? (
+                              <input
+                                type="checkbox"
+                                className="mt-1"
+                                aria-label={`Use ${f.title}`}
+                                checked={chosen.has(f.signalId)}
+                                onChange={(e) => {
+                                  const next = new Set(chosen);
+                                  if (e.target.checked) next.add(f.signalId); else next.delete(f.signalId);
+                                  setChosen(next);
+                                }}
+                              />
+                            ) : (
+                              <input
+                                type="radio"
+                                className="mt-1"
+                                name={`primary-${card.fingerprint}`}
+                                aria-label={`Open with ${f.title}`}
+                                data-testid="primary-fact"
+                                disabled={tooLong}
+                                checked={primary === f.signalId}
+                                onChange={() => setPrimary(f.signalId)}
+                              />
+                            )}
+                            <span className="min-w-0 break-words">
+                              <q>{f.excerpt}</q>
+                              <span className="ml-1 text-xs text-[var(--muted-foreground)]"><a className="underline" href={f.url} target="_blank" rel="noreferrer">{f.title}</a>, {day(f.publishedAt)}</span>
+                              {!ready && tooLong ? <span className="ml-1 text-xs text-[var(--muted-foreground)]">Too long to open a first email; research context only.</span> : null}
+                            </span>
+                          </li>
+                        );
+                      })}
                     </ul>
                     <p className="mt-2 text-xs text-[var(--muted-foreground)]" data-testid="what-it-changes">
                       {ready
                         ? `What it changes: ${card.depth.independentSources} to ${card.depth.independentSources + chosen.size} independent sources for the people you check below.`
-                        : 'What it changes: the observation is rewritten as the fact you choose, quoted with its source. You review it before anything is approved.'}
+                        : 'What it changes: the observation is rewritten as the ONE fact you choose to open with, quoted with its source. The other facts stay research context. You review it before anything is approved.'}
                     </p>
                   </>
                 ) : corr.outcome === 'no_second_source' ? (
@@ -370,10 +398,12 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
               </>
             ) : (
               <div className="mt-3 space-y-1">
-                {corr?.outcome === 'corroborated' && chosen.size > 0 ? (
-                  <Button type="button" size="sm" data-testid="use-verified-evidence" disabled={busy !== null || checked.size === 0} onClick={() => void useEvidence([...chosen])}>
-                    {busy === 'evidence' ? 'Rewriting the observation...' : `Use this evidence for ${checked.size}`}
+                {corr?.outcome === 'corroborated' && primary ? (
+                  <Button type="button" size="sm" data-testid="use-verified-evidence" disabled={busy !== null || checked.size === 0} onClick={() => void useEvidence(primary)}>
+                    {busy === 'evidence' ? 'Rewriting the observation...' : `Open with this fact for ${checked.size}`}
                   </Button>
+                ) : corr?.outcome === 'corroborated' ? (
+                  <p className="text-xs text-[var(--muted-foreground)]" data-testid="no-openable-fact">Every fact found is too long to open a first email with. Hold, or research again later.</p>
                 ) : null}
                 <p className="text-xs text-[var(--muted-foreground)]">Nothing is approved, used or sent from here. Using evidence rewrites the observation from the fact you choose, for your review.</p>
               </div>
