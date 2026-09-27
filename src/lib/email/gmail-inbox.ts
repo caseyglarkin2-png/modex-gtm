@@ -641,6 +641,8 @@ export async function listSentTo(
   const mailbox = sender.userEmail.toLowerCase();
   const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
   listUrl.searchParams.set('q', `in:sent to:${recipient} after:${afterEpoch} before:${beforeEpoch}`);
+  // Closeout review: a first touch sent and then trashed is still a first touch.
+  listUrl.searchParams.set('includeSpamTrash', 'true');
   listUrl.searchParams.set('maxResults', '10');
   const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
   if (!res.ok) throw new Error(`Gmail sent list failed (${res.status})`);

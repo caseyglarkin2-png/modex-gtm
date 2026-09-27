@@ -9,7 +9,7 @@ vi.mock('@/lib/email/gmail-sender', async (orig) => ({
   accessTokenForSender: vi.fn(async () => 'token'),
 }));
 
-import { GmailThreadMissingError, getGmailThreadMessages, getMailboxMessage } from '@/lib/email/gmail-inbox';
+import { GmailThreadMissingError, getGmailThreadMessages, getMailboxMessage, listSentTo } from '@/lib/email/gmail-inbox';
 import { DRAFTED, DRAFT_VANISHED } from '@/lib/gap/execution/draft-ledger';
 import { reconcileDraft } from '@/lib/gap/execution/draft-reconcile';
 import { findManyFrom } from './fixtures/where';
@@ -64,5 +64,16 @@ describe('13D: reconciliation keeps its meaning', () => {
     });
     expect(r.ok).toBe(true);
     expect(audit.some((e) => e.kind === DRAFT_VANISHED)).toBe(true);
+  });
+});
+
+describe('closeout review: the Sent-folder read sees trashed mail too', () => {
+  it('listSentTo includes spam and trash (a first touch sent then trashed is still a first touch)', async () => {
+    const fetchMock = vi.fn(async (_url: string, _init?: RequestInit) => new Response(JSON.stringify({ messages: [] }), { status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
+    await listSentTo(SENDER, 'joey.maggard@kroger.com', 1, 2);
+    const u = new URL(String(fetchMock.mock.calls[0][0]));
+    expect(u.searchParams.get('includeSpamTrash')).toBe('true');
+    expect(u.searchParams.get('q')).toContain('in:sent to:joey.maggard@kroger.com');
   });
 });
