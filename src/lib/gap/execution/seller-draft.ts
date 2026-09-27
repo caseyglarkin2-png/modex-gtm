@@ -37,7 +37,7 @@ import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
 import { makeCriticClient } from '../critic-client';
 import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
-import { appendLedger, DIRECT_REFUSED, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
+import { appendLedger, DIRECT_REFUSED, DRAFT_REFUSED, DRAFTED, type DraftedPayload } from './draft-ledger';
 import { hasActiveOpportunity } from '../routing/rules';
 import { loadActiveOpportunityInputs } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
@@ -61,6 +61,7 @@ export type SellerDraftRefusal =
   | 'first_touch_already_sent'
   | 'step_already_sent'
   | 'send_in_progress_or_unknown'
+  | 'draft_outstanding'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -319,9 +320,21 @@ export async function prepareSellerEmail(
       : [];
   const contentHash = pack.contentHash!;
 
-  // Idempotency: this exact copy already drafted for this card and still a draft.
-  const existing = (await listDraftRecords(prisma, decisionId)).find((d) => d.fate === 'drafted' && d.drafted.contentHash === contentHash);
-  if (existing && mode === 'draft') return { ok: true, existingDraft: existing.drafted };
+  // An unresolved Gmail draft for this person + step (red team T4, on any
+  // card): Casey may still press Send in Gmail, so neither a direct send nor
+  // a second draft of other copy may exist beside it. The same copy on the
+  // same card is the idempotent case and returns that draft.
+  const outstanding = history.drafts.filter((d) => d.fate === 'drafted' && (d.drafted.stepIndex ?? 0) === stepIndex);
+  if (outstanding.length > 0) {
+    const same = outstanding.find((d) => d.decisionId === decisionId && d.drafted.contentHash === contentHash);
+    if (mode === 'draft' && same) return { ok: true, existingDraft: same.drafted };
+    const d0 = outstanding[0];
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'draft_outstanding',
+      detail: `A Gmail draft of touch ${stepIndex + 1} to this person already exists (card ${d0.decisionId}, created ${d0.drafted.createdAt}). Send or delete it in Gmail, then reconcile, before anything else goes out.`,
+    });
+  }
 
   // Compiler clearance for exactly this marked copy.
   let compileRow = pack.compile;

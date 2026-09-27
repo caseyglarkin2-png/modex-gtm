@@ -150,7 +150,9 @@ const DEFINITELY_NOT_SENT = [
   /^HUMAN_APPROVED_1TO1 refused/,
   /^Cross-plane suppression refused/,
   /^Daily send ceiling/,
-  /^Gmail send failed \(\d+\)/,
+  // Only a 4xx is a definitive "Gmail did not send" (red team T4). A 5xx, a
+  // timeout or a dropped connection may have sent: the claim stays unresolved.
+  /^Gmail send failed \(4\d\d\)/,
   /^delegated Gmail/,
   /^Gmail sender not configured/,
 ];

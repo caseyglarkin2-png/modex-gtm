@@ -140,3 +140,33 @@ review, production verification.
   files / 2780 tests green.
 - production mutation: none.
 - next: T4.
+
+### T4 — harden the send gate
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- files: `src/lib/gap/execution/seller-draft.ts`, `src/lib/gap/execution/seller-send.ts`,
+  `src/lib/email/gmail-sender.ts`, `src/lib/email/autonomy-gate.ts`,
+  `src/lib/email/suppression-gate.ts`; tests `tests/unit/gap/send-gate-hardening.test.ts`,
+  `tests/unit/email-send-timeouts.test.ts`
+- change:
+  - `draft_outstanding`: an unresolved GAP Gmail draft for the person + step
+    (any card) refuses a direct send and any second draft of other copy; the
+    same copy on the same card returns the existing draft (idempotent). A
+    discarded draft does not block.
+  - any unresolved claim for person + step blocks every content hash (the T2
+    claim key carries no hash).
+  - AbortSignal timeouts: autonomy read (AUTONOMY_READ_TIMEOUT_MS, 5000) and
+    suppression read (SUPPRESSION_READ_TIMEOUT_MS, 5000) fail closed before
+    the wire; Gmail send (GMAIL_SEND_TIMEOUT_MS, 25000) -> "Gmail send outcome
+    unknown" on timeout, network error or an unreadable 2xx body.
+  - claim release only on a definitive Gmail 4xx
+    (`/^Gmail send failed \(4\d\d\)/`); 5xx, timeout, unknown -> unresolved.
+- tests: 8 gate tests (draft on same/other card, second draft refused,
+  discarded draft ok, H1 lost -> H2 refused with Gmail called once, 503
+  unresolved + retry no call, timeout unresolved, 400 released + one retry);
+  3 timeout tests (signals present; hung authority refuses before the wire;
+  Gmail timeout = outcome unknown). RED first: 4 + 3 failed. Mutation (4xx
+  regex widened back to any status): the 503 test failed; restored GREEN.
+  GAP + email suites 148 files / 2862 tests green; typecheck green.
+- production mutation: none.
+- next: T5.

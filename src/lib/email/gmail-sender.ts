@@ -301,24 +301,46 @@ export async function sendViaGmail(
   const accessToken = await accessTokenForSender(payload.sender);
   const raw = base64Url(buildMimeMessage(payload));
 
-  const res = await fetch(
-    `https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/messages/send`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload.threadId ? { raw, threadId: payload.threadId } : { raw }),
-    }
-  );
+  // Bounded (red team T4). Once the request is on the wire, a timeout or a
+  // dropped connection does NOT mean Gmail did not send: those surface as
+  // "Gmail send outcome unknown", which no caller may treat as a definitive
+  // failure. Only an HTTP answer (`Gmail send failed (NNN)`) is definitive,
+  // and callers release a send claim only on a 4xx.
+  const timeoutMs = Number(process.env.GMAIL_SEND_TIMEOUT_MS) > 0 ? Number(process.env.GMAIL_SEND_TIMEOUT_MS) : 25_000;
+  let res: Response;
+  try {
+    res = await fetch(
+      `https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/messages/send`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload.threadId ? { raw, threadId: payload.threadId } : { raw }),
+        signal: AbortSignal.timeout(timeoutMs),
+      }
+    );
+  } catch (err) {
+    const timedOut = err instanceof Error && (err.name === 'TimeoutError' || err.name === 'AbortError');
+    throw new Error(
+      timedOut
+        ? `Gmail send outcome unknown: no answer within ${timeoutMs}ms`
+        : `Gmail send outcome unknown: ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
 
   if (!res.ok) {
-    const errBody = await res.text();
+    const errBody = await res.text().catch(() => '');
     throw new Error(`Gmail send failed (${res.status}): ${errBody.slice(0, 200)}`);
   }
 
-  const result = (await res.json()) as { id?: string; threadId?: string };
+  let result: { id?: string; threadId?: string };
+  try {
+    result = (await res.json()) as { id?: string; threadId?: string };
+  } catch (err) {
+    throw new Error(`Gmail send outcome unknown: unreadable answer (${err instanceof Error ? err.message : String(err)})`);
+  }
   return { provider: 'gmail', id: result.id ?? null, threadId: result.threadId ?? null };
 }
 

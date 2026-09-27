@@ -136,6 +136,8 @@ async function readContract(emails: string[]): Promise<SuppressionVerdict> {
       // reading this call tells you which branch it takes.
       body: JSON.stringify({ emails, automated: true }),
       cache: 'no-store',
+      // Bounded (red team T4): a hung authority is UNREADABLE (catch below).
+      signal: AbortSignal.timeout(Number(process.env.SUPPRESSION_READ_TIMEOUT_MS) > 0 ? Number(process.env.SUPPRESSION_READ_TIMEOUT_MS) : 5000),
     });
   } catch (err) {
     return UNREADABLE(
