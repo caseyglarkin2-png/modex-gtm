@@ -38,6 +38,7 @@ import { PrismaClient } from '@prisma/client';
 import { legacyEnrollAdapter } from '../../src/lib/gap/execution/legacy-enroll-adapter';
 import type { ExecutionIntent } from '../../src/lib/gap/execution/contract';
 import { staticSuppressionReader } from '../../src/lib/gap/routing/suppression-read';
+import { SCRATCH_NO_DEALS } from './scratch-opportunity';
 
 // ---------------------------------------------------------------------------
 // Rails
@@ -267,7 +268,7 @@ async function main(): Promise<number> {
       `account, persona, family, 2 versions (A stale-compile, C expired-evidence), 2 compiles (A ~40h old, C fresh), 2 hypotheses (A citing one verified fact, C linked to an expired signal)`,
     );
 
-    const deps = { addOne: async () => ({ ok: true as const, id: 1 }), suppression: staticSuppressionReader('clear') };
+    const deps = { addOne: async () => ({ ok: true as const, id: 1 }), suppression: staticSuppressionReader('clear'), opportunity: SCRATCH_NO_DEALS };
 
     // 1. Plain shadow, no SF14 opt-in: succeeds despite the ~40h-old compile.
     const intentA: ExecutionIntent = {

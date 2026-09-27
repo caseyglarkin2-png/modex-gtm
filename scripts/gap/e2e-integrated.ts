@@ -52,6 +52,7 @@ import { loadAgreementReport } from '../../src/lib/gap/routing/agreement-query';
 import type { ExecutionReceipt } from '../../src/lib/gap/execution/contract';
 import { DIRECT_SENT } from '../../src/lib/gap/execution/draft-ledger';
 import type { CriticClient } from '../../src/lib/gap/critic-client';
+import { SCRATCH_NO_DEALS, SCRATCH_NO_DEALS_TRUTH } from './scratch-opportunity';
 
 // ---------------------------------------------------------------------------
 // Rails
@@ -111,7 +112,7 @@ function sellerDeps(tag: string, threadFor: (to: string) => string): SellerSendD
     gapSender,
     senderAddress: () => MAILBOX,
     signature: async () => null,
-    activeOpportunity: async () => false,
+    activeOpportunity: SCRATCH_NO_DEALS,
     // Ops closeout 19: the scratch run has no real mailbox; nothing unrecorded sits in Sent.
     mailboxSentTo: async () => [],
     unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe/?email=${encodeURIComponent(e)}&token=e2e`,
@@ -263,7 +264,7 @@ async function main(): Promise<number> {
     await transitionHypothesis(prisma, kwHyp.id, 'submit', { now, actor: ACTOR });
     const kwApprove = await transitionHypothesis(prisma, kwHyp.id, 'approve', { now, actor: ACTOR });
     expect('3 keyword only', !kwApprove.ok && why(kwApprove) === 'evidence_insufficient', `approve keyword-only -> ${JSON.stringify(kwApprove)}, expected evidence_insufficient`);
-    const kwInputs = await assembleRoutingInputs(prisma, { accountName: keywordAccount, personaId: persona.kai, now, suppression: staticSuppressionReader('clear'), hubspotSnapshot: { tam: 'in', tamTier: 'A', contacts: { [`${tag}-kai`]: { qualVerdict: 'qualified' } } } });
+    const kwInputs = await assembleRoutingInputs(prisma, { accountName: keywordAccount, personaId: persona.kai, now, suppression: staticSuppressionReader('clear'), hubspotSnapshot: { tam: 'in', tamTier: 'A', contacts: { [`${tag}-kai`]: { qualVerdict: 'qualified' } }, opportunity: SCRATCH_NO_DEALS_TRUTH } });
     expect('3 keyword only', !isSkip(kwInputs), `keyword inputs skipped: ${JSON.stringify(kwInputs)}`);
     if (isSkip(kwInputs)) throw new Error('unreachable');
     const kwRoute = routePersona(kwInputs);
@@ -272,7 +273,7 @@ async function main(): Promise<number> {
     pass('3 keyword only', `approve refused evidence_insufficient; the person routes ${kwAction} (${kwRoute.kind === 'decision' ? kwRoute.decision.ruleId : ''}), never an email`);
 
     // 4. APPROVED VALID HYPOTHESIS -> route.
-    const snapshot: HubSpotSnapshotProvider = async () => ({ tam: 'in', tamTier: 'A', contacts: Object.fromEntries(people.map((w) => [`${tag}-${w}`, { qualVerdict: 'qualified' }])) });
+    const snapshot: HubSpotSnapshotProvider = async () => ({ tam: 'in', tamTier: 'A', contacts: Object.fromEntries(people.map((w) => [`${tag}-${w}`, { qualVerdict: 'qualified' }])), opportunity: SCRATCH_NO_DEALS_TRUTH });
     const runId = `${tag}-run-1`;
     created.runIds.push(runId);
     const run1 = await runRouting(prisma, { now, runId, accountNames: [accountName], personaIds: [persona.sam], actor: ACTOR }, { suppression: staticSuppressionReader('clear'), hubspotSnapshot: snapshot, top100: null });

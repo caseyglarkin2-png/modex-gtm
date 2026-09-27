@@ -45,8 +45,13 @@ const COPY: Record<string, RefusalCopy> = {
   },
   active_opportunity: {
     what: 'Nothing was drafted or sent.',
-    why: 'Someone is already in conversation at this account (open deal, meeting or positive reply).',
-    next: 'Work it from the existing conversation, not a cold touch.',
+    why: 'This account already has an active opportunity (an open HubSpot deal, a meeting or a positive reply).',
+    next: 'Work it from the existing deal or conversation, not a cold first touch.',
+  },
+  opportunity_unknown: {
+    what: 'Nothing was drafted or sent.',
+    why: "Can't verify whether this account already has an active opportunity.",
+    next: 'Check HubSpot before contacting them.',
   },
 };
 

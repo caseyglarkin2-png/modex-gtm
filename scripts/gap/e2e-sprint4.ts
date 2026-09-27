@@ -98,6 +98,7 @@ import { SEED_PROGRAM, seedFamilyByKey, type SeedFamily } from '../../src/lib/ga
 import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { STATUS } from '../../src/lib/queue/types';
+import { SCRATCH_NO_DEALS } from './scratch-opportunity';
 
 // ---------------------------------------------------------------------------
 // Rails
@@ -463,7 +464,7 @@ async function main(): Promise<number> {
       const live = await enrollFromDecision(
         prisma,
         { hypothesisId, personaId, sequenceVersionId: v1.id, compileIds: compiles[hypothesisId], actor: ACTOR, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: 'casey@yardflow.ai' },
-        { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, contract: contractFor(0) },
+        { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS, contract: contractFor(0) },
       );
       expect('1 seed', live.ok && live.kind === 'modex_enrolled', `live enroll ${hypothesisId} -> ${JSON.stringify(live).slice(0, 400)}`);
       if (!live.ok || live.kind !== 'modex_enrolled') throw new Error('unreachable');
@@ -747,7 +748,7 @@ async function main(): Promise<number> {
     const shadow = await enrollFromDecision(
       prisma,
       { hypothesisId: h3, personaId: p3.id, sequenceVersionId: v1.id, compileIds: compiles[h3], actor: ACTOR, actorKind: 'human', mode: 'shadow', now },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, contract: contractFor(0) },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS, contract: contractFor(0) },
     );
     const shadowRefused = await prisma.gapAuditEvent.findFirst({ where: { kind: 'enroll.refused', subject_id: h3, created_at: { gte: runStart } }, orderBy: { created_at: 'desc' }, select: { payload: true } });
     const shadowPayload = (shadowRefused?.payload ?? {}) as { predicate?: string; leg?: string };

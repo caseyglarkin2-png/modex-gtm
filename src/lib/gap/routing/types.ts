@@ -14,6 +14,7 @@ import type {
   RoutingAction,
   RoutingLane,
 } from '../taxonomy';
+import type { OpportunityTruth } from '../opportunity/active-opportunity';
 
 export type SuppressionVerdict = 'clear' | 'suppressed' | 'unknown';
 
@@ -32,7 +33,12 @@ export interface RoutingAccountInput {
   triggerScore: number | null;
   lastTriggerAt: Date | null;
   outreachStatus: string | null;
-  pipelineStage: string | null;
+  /**
+   * HubSpot active-opportunity truth for the account (opportunity/
+   * active-opportunity.ts). Required: an account routed without a HubSpot read
+   * is UNKNOWN, never clear. `accounts.pipeline_stage` is not this.
+   */
+  opportunity: OpportunityTruth;
 }
 
 export interface RoutingSignalInput {

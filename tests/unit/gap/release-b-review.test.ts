@@ -84,7 +84,7 @@ describe('#3 drafts are claimed under the person lock', () => {
     expect(again).toMatchObject({ ok: false, reason: 'send_in_progress_or_unknown' });
 
     const direct = vi.fn();
-    const send = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW }, { ...baseDeps(d), activeOpportunity: async () => false, directAdapter: direct as any });
+    const send = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW }, { ...baseDeps(d), activeOpportunity: async () => ({ status: 'CLEAR' as const }), directAdapter: direct as any });
     expect(send).toMatchObject({ ok: false, reason: 'send_in_progress_or_unknown' });
     expect(direct).not.toHaveBeenCalled();
   });
@@ -115,7 +115,7 @@ describe('#6 a token failure is definitive: nothing was sent', () => {
   it('a send refused with a token failure releases the claim, and a later retry sends once', async () => {
     const d = db();
     const prisma = prismaOf(d);
-    const deps = (adapter: any) => ({ ...baseDeps(d), activeOpportunity: async () => false, directAdapter: adapter });
+    const deps = (adapter: any) => ({ ...baseDeps(d), activeOpportunity: async () => ({ status: 'CLEAR' as const }), directAdapter: adapter });
     const pv = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW }, deps(vi.fn()));
     if (!pv.ok || !('preview' in pv)) throw new Error(JSON.stringify(pv));
     const confirm = { contentHash: pv.preview.contentHash, recipient: JOEY };

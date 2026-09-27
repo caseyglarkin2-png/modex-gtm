@@ -290,6 +290,7 @@ const SNAPSHOT: HubSpotAccountSnapshot = {
   triggerScore: 33,
   lastTriggerAt: daysAgo(3),
   contacts: { '222': { qualVerdict: 'sql', lastIntentSource: 'for_page' } },
+  opportunity: { status: 'CLEAR', companyIds: ['111'] },
 };
 
 function reader(verdict: 'clear' | 'suppressed' | 'unknown' = 'clear'): SuppressionReader {
@@ -368,7 +369,7 @@ describe('assembleRoutingInputs full fixture', () => {
       triggerScore: 33,
       lastTriggerAt: daysAgo(3),
       outreachStatus: 'Not started',
-      pipelineStage: 'targeted',
+      opportunity: { status: 'CLEAR', companyIds: ['111'] },
     });
     expect(i.account.heatTier).toBe(1); // fresh trigger + live intent = tier1 per classifyTier
     expect(i.account.heat).toBeGreaterThan(0);
@@ -1170,8 +1171,13 @@ describe('routePersona over assembled inputs', () => {
     expect(u.kind === 'decision' && u.decision.ruleId).toBe('suppression_unknown');
   });
 
-  it('no snapshot routes to R9 tam_unknown; an active enrollment skips at R2', async () => {
-    const t = routePersona(await assemble(fullDb(), { hubspotSnapshot: null }));
+  it('no snapshot is UNKNOWN opportunity (R3c, fail closed); a clear opportunity with unknown TAM routes R9; an active enrollment skips at R2', async () => {
+    const none = await assemble(fullDb(), { hubspotSnapshot: null });
+    expect(none.account.opportunity).toMatchObject({ status: 'UNKNOWN', reason: 'hubspot_unconfigured' });
+    const n = routePersona(none);
+    expect(n.kind === 'decision' && n.decision.ruleId).toBe('opportunity_unknown');
+
+    const t = routePersona(await assemble(fullDb(), { hubspotSnapshot: { tam: 'unknown', tamTier: '', opportunity: { status: 'CLEAR', companyIds: ['111'] } } }));
     expect(t.kind === 'decision' && t.decision.ruleId).toBe('tam_unknown');
 
     const db = fullDb();

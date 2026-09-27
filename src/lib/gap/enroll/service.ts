@@ -119,7 +119,8 @@ import {
   type EnrollRowItem,
   type EnrollTableJson,
 } from '@/lib/gap/routing/enroll-row';
-import { hasActiveOpportunity, resolveEnrollTarget, type ActiveOpportunityInputs } from '@/lib/gap/routing/rules';
+import { hasActiveOpportunity, opportunityUnknown, resolveEnrollTarget, type ActiveOpportunityInputs } from '@/lib/gap/routing/rules';
+import { OPPORTUNITY_UNKNOWN_COPY, opportunitySentence, resolveAccountOpportunity, type ResolveForAccountDeps } from '@/lib/gap/opportunity/active-opportunity';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
 import { isResponseClass } from '@/lib/gap/taxonomy';
@@ -217,6 +218,8 @@ export interface EnrollDeps {
   maxCompileAgeMs?: number;
   /** SF14 (6B-T2), opt-in: recheck every cited signal's freshness at enroll time. Default false (unchanged behavior). */
   checkEvidenceFreshness?: boolean;
+  /** Action-time HubSpot opportunity truth (the canonical resolver). Default: a fresh live read. */
+  opportunity?: ActionTimeOpportunityCheck;
 }
 
 export type EnrollServiceRefusal =
@@ -245,6 +248,7 @@ export type EnrollServiceRefusal =
   | 'account_mismatch'
   | 'decision_persona_mismatch'
   | 'active_opportunity'
+  | 'opportunity_unknown'
   | 'build_required'
   | 'step_has_no_copy:0'
   | `unrendered_placeholder:${string}`
@@ -487,15 +491,23 @@ function preferredSenderOf(decision: DecisionRow | null): string | null {
 /**
  * B6 (Opus adversarial review, 2026-09-24): a fresh read, not the routing
  * decision's snapshot, because the decision can be stale (a meeting booked,
- * or a deal opened, after routing ran but before enroll executes). Reuses
- * routing/rules.ts's hasActiveOpportunity so this is the same predicate
- * R3b applies, not a second opportunity model.
+ * or a deal opened, after routing ran but before the click). Reuses
+ * routing/rules.ts's hasActiveOpportunity so this is the same predicate R3b
+ * applies, not a second opportunity model.
+ *
+ * Final Monday blocker (2026-09-27): the open-deal leg is a FRESH HubSpot read
+ * through the canonical resolver (opportunity/active-opportunity.ts), with the
+ * recipient added to the account's identity. `accounts.pipeline_stage` is not
+ * read: it is modex's own outreach progression, never HubSpot deal truth.
  */
-export async function loadActiveOpportunityInputs(prisma: any, accountName: string, email: string, now: Date): Promise<ActiveOpportunityInputs> {
-  const account: { pipeline_stage: string | null } | null = await prisma.account.findUnique({
-    where: { name: accountName },
-    select: { pipeline_stage: true },
-  });
+export async function loadActiveOpportunityInputs(
+  prisma: any,
+  accountName: string,
+  email: string,
+  now: Date,
+  deps: ResolveForAccountDeps = {},
+): Promise<ActiveOpportunityInputs> {
+  const opportunity = await resolveAccountOpportunity(prisma, accountName, { email }, deps);
   const lastConfirmed: { response_class: string; created_at: Date } | null = await prisma.conversationDisposition.findFirst({
     where: { contact_email: email, human_confirmed: true },
     orderBy: { created_at: 'desc' },
@@ -506,7 +518,7 @@ export async function loadActiveOpportunityInputs(prisma: any, accountName: stri
       ? { responseClass: lastConfirmed.response_class, at: lastConfirmed.created_at }
       : null;
   return {
-    account: { pipelineStage: account?.pipeline_stage ?? null },
+    account: { opportunity },
     comms: {
       meetingBooked: lastConfirmed?.response_class === 'meeting_accepted',
       lastDisposition,
@@ -515,6 +527,34 @@ export async function loadActiveOpportunityInputs(prisma: any, accountName: stri
     freshness: { cooldownDays: DEFAULT_FRESHNESS.cooldownDays },
   };
 }
+
+/** The action-time verdict every GAP outbound gate (draft, send, enroll) reads. UNKNOWN never permits outbound. */
+export type ActionTimeOpportunity =
+  | { status: 'CLEAR' }
+  | { status: 'ACTIVE'; detail: string }
+  | { status: 'UNKNOWN'; detail: string };
+
+export type ActionTimeOpportunityCheck = (prisma: any, accountName: string, email: string, now: Date) => Promise<ActionTimeOpportunity>;
+
+/** Re-read at the click: routing state may be stale; this wins. Never throws (a throw is UNKNOWN). */
+export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = {}): ActionTimeOpportunityCheck => async (prisma, accountName, email, now) => {
+  let inputs: ActiveOpportunityInputs;
+  try {
+    inputs = await loadActiveOpportunityInputs(prisma, accountName, email, now, resolveDeps);
+  } catch (e) {
+    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY} (${e instanceof Error ? e.message : String(e)})` };
+  }
+  if (inputs.account.opportunity.status === 'ACTIVE') return { status: 'ACTIVE', detail: opportunitySentence(inputs.account.opportunity) };
+  if (hasActiveOpportunity(inputs)) return { status: 'ACTIVE', detail: 'A booked meeting or a recent positive reply: someone is already in conversation here.' };
+  if (opportunityUnknown(inputs)) {
+    const o = inputs.account.opportunity;
+    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY}${o.status === 'UNKNOWN' ? ` (${o.reason})` : ''}` };
+  }
+  return { status: 'CLEAR' };
+};
+
+/** The production action-time check: a live HubSpot read. */
+export const checkActiveOpportunityNow: ActionTimeOpportunityCheck = makeActiveOpportunityCheck();
 
 interface PersonaRow {
   id: number;
@@ -750,8 +790,9 @@ export async function enrollFromDecision(
   // that is the exact failure the routing R3b rule exists to prevent; enroll
   // refuses the same predicate against a fresh read, since a routing
   // decision consumed here can be older than the opportunity that opened.
-  const opportunity = await loadActiveOpportunityInputs(prisma, accountName, email, input.now);
-  if (hasActiveOpportunity(opportunity)) return refuse('active_opportunity');
+  const opportunity = await (deps.opportunity ?? checkActiveOpportunityNow)(prisma, accountName, email, input.now);
+  if (opportunity.status === 'ACTIVE') return refuse('active_opportunity', { detail: opportunity.detail });
+  if (opportunity.status !== 'CLEAR') return refuse('opportunity_unknown', { detail: opportunity.status === 'UNKNOWN' ? opportunity.detail : OPPORTUNITY_UNKNOWN_COPY });
 
   if (target === 'build_required') return refuse('build_required', { target });
 

@@ -95,6 +95,7 @@ import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
+import { SCRATCH_NO_DEALS } from './scratch-opportunity';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'runtime-e2e-latest.md');
@@ -562,7 +563,7 @@ async function main(): Promise<number> {
 
     // 4a. EXECUTION INTENT -> the full 6B gate chain, through legacyEnrollAdapter.
     const addOneSpy = { calls: 0, fn: async (input: Parameters<typeof addOne>[0], owner: string) => { addOneSpy.calls += 1; return addOne(input, owner); } };
-    const baseDeps: EnrollDeps = { addOne: addOneSpy.fn, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear };
+    const baseDeps: EnrollDeps = { addOne: addOneSpy.fn, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS };
     const intentFor = (hypothesisId: string, personaId: number, compileIds: string[], mode: 'shadow' | 'live'): ExecutionIntent => ({
       engine: 'modex_queue', personaId, hypothesisId, sequenceVersionId: version.id, stepIndex: 0, compileIds, senderIdentity: OWNER, idempotencyKey: `${tag}-${hypothesisId}-${mode}`, actor: OWNER, actorKind: 'human', mode, now,
     });
@@ -790,7 +791,7 @@ async function main(): Promise<number> {
     pass('9c shadow decision', `recordShadowDecision writes one enroll.shadow audit row with acted_by_system_at explicitly null; GAP_AUTO_ENROLL_SHADOW restored to off after`);
 
     // Kill-switch drill, reusing this run's own real compile stack (H1, fresh generation).
-    const drillDeps = { addOne: addOneSpy.fn, suppression: suppressionClear };
+    const drillDeps = { addOne: addOneSpy.fn, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS };
     const notHaltedResult = await enrollFromDecision(prisma, { hypothesisId: h1, personaId: personaHappy.id, sequenceVersionId: version.id, compileIds: h1CompileIds, actor: OWNER, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: OWNER }, { ...drillDeps, autonomy: async () => ({ halted: false }) });
     const haltedResult = await enrollFromDecision(prisma, { hypothesisId: h1, personaId: personaHappy.id, sequenceVersionId: version.id, compileIds: h1CompileIds, actor: OWNER, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: OWNER }, { ...drillDeps, autonomy: async () => ({ halted: true, reason: 'drill' }) });
     expect('9d kill-switch drill', haltedResult.reason === 'autonomy_halted', `halted result -> ${JSON.stringify(haltedResult)}`);

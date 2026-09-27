@@ -41,7 +41,7 @@ const deps = (d: Db, direct = adapter(), extra: Record<string, unknown> = {}) =>
   ...baseDeps(d, 'pass'),
   gapSender: () => YF,
   signature: async () => SIG,
-  activeOpportunity: async () => false,
+  activeOpportunity: async () => ({ status: 'CLEAR' as const }),
   directAdapter: direct as any,
   ...extra,
 });
@@ -194,7 +194,7 @@ describe('click-time gates are re-run (never trust the rendered card)', () => {
     const d = db();
     const { prisma, confirm } = await confirmFor(d);
     const direct = adapter();
-    expect(await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm }, deps(d, direct, { activeOpportunity: async () => true }))).toMatchObject({ ok: false, reason: 'active_opportunity' });
+    expect(await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm }, deps(d, direct, { activeOpportunity: async () => ({ status: 'ACTIVE' as const, detail: 'open deal' }) }))).toMatchObject({ ok: false, reason: 'active_opportunity' });
     expect(direct).not.toHaveBeenCalled();
   });
 

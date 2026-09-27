@@ -78,6 +78,7 @@ import { citedQuote } from '../../src/lib/gap/research/propose';
 import { readManifest, readRoster } from '../../src/lib/gap/top100/reader';
 import { cancelDownstream } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
+import { SCRATCH_NO_DEALS_TRUTH } from './scratch-opportunity';
 
 // ---------------------------------------------------------------------------
 // Rails
@@ -661,6 +662,7 @@ async function main(): Promise<number> {
           [opsContactId]: { qualVerdict: 'qualified' },
           [execContactId]: { qualVerdict: 'qualified' },
         },
+        opportunity: SCRATCH_NO_DEALS_TRUTH,
       };
     };
     const routingDeps = {

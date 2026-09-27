@@ -34,6 +34,7 @@ import {
   checkEvidenceFreshness,
   enrollFromDecision,
   evidenceRefsFromSignals,
+  makeActiveOpportunityCheck,
   verifyCompiles,
   type EnrollDeps,
   type EnrollFromDecisionInput,
@@ -41,6 +42,11 @@ import {
 import { staticSuppressionReader } from '@/lib/gap/routing/suppression-read';
 import { SEED_PROGRAM } from '@/lib/gap/sequences/families';
 import { LEGACY_HC } from './fixtures/legacy-hc';
+import { fakeHubSpot } from './fixtures/fake-hubspot-opportunity';
+
+/** HubSpot for the account's company '111': no deals unless a test says otherwise. */
+const HUBSPOT_NO_DEALS = fakeHubSpot({ companyDeals: { '111': [] } });
+const opportunityVia = (reads: ReturnType<typeof fakeHubSpot>, configured = true) => makeActiveOpportunityCheck({ reads, configured: () => configured });
 
 /** R3-10: the service reads the cross-plane contract before the target; every case injects a CLEAR reader unless it tests the read. */
 const SUPPRESSION_CLEAR = staticSuppressionReader('clear');
@@ -120,8 +126,9 @@ function makePrisma(
     // Defaults to "nothing active" so every existing test is unaffected;
     // opts.account / opts.lastDisposition let a test assert the refusal.
     account: {
-      findUnique: asyncSpy(async () => (opts.account === undefined ? { pipeline_stage: null } : opts.account)),
+      findUnique: asyncSpy(async () => (opts.account === undefined ? { hubspot_company_id: '111' } : opts.account)),
     },
+    canonicalAccountLink: { findMany: asyncSpy(async () => []) },
     conversationDisposition: {
       findFirst: asyncSpy(async () => (opts.lastDisposition === undefined ? null : opts.lastDisposition)),
       // Release C re-review S7: human dispositions on inbound messages clear the account-reply hold.
@@ -225,6 +232,7 @@ function deps(overrides: Partial<EnrollDeps> = {}): EnrollDeps & { addOne: Retur
     addOne: asyncSpy(async () => ({ ok: true, id: 4242 })),
     critic: CRITIC_STUB,
     suppression: SUPPRESSION_CLEAR,
+    opportunity: opportunityVia(HUBSPOT_NO_DEALS),
     ...overrides,
   } as any;
 }
@@ -367,23 +375,38 @@ describe('enrollFromDecision guards, in order', () => {
    * acted on predates the opportunity opening. Mutate the guard away and
    * these go RED.
    */
-  it('active_opportunity refuses enrollment when the account is at the meeting pipeline stage', async () => {
-    const prisma = makePrisma({ account: { pipeline_stage: 'meeting' } });
-    const r = await enrollFromDecision(prisma, input(), deps());
-    expect(r).toEqual({ ok: false, reason: 'active_opportunity' });
+  it('active_opportunity refuses enrollment when HubSpot has an open deal on the account company (a FRESH read)', async () => {
+    const prisma = makePrisma();
+    const hs = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'false', name: 'YardFlow - Acme' }] });
+    const r = await enrollFromDecision(prisma, input(), deps({ opportunity: opportunityVia(hs) }));
+    expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
     expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
     expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+  });
+
+  it('opportunity_unknown refuses enrollment when HubSpot cannot be read (fail closed)', async () => {
+    const prisma = makePrisma();
+    const hs = fakeHubSpot({ companyDeals: { '111': [] }, fail: { companyAssoc: new Error('HubSpot 503') } });
+    const r = await enrollFromDecision(prisma, input(), deps({ opportunity: opportunityVia(hs) }));
+    expect(r).toMatchObject({ ok: false, reason: 'opportunity_unknown' });
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+  });
+
+  it('opportunity_unknown refuses enrollment when HubSpot is not configured', async () => {
+    const r = await enrollFromDecision(makePrisma(), input(), deps({ opportunity: opportunityVia(HUBSPOT_NO_DEALS, false) }));
+    expect(r).toMatchObject({ ok: false, reason: 'opportunity_unknown' });
   });
 
   it('active_opportunity refuses enrollment on a confirmed meeting_accepted disposition within cooldown', async () => {
     const prisma = makePrisma({ lastDisposition: { response_class: 'meeting_accepted', created_at: NOW } });
     const r = await enrollFromDecision(prisma, input(), deps());
-    expect(r).toEqual({ ok: false, reason: 'active_opportunity' });
+    expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
   });
 
-  it('active_opportunity control: an early pipeline stage and no positive disposition still enroll normally', async () => {
-    const prisma = makePrisma({ account: { pipeline_stage: 'contacted' } });
-    const r = await enrollFromDecision(prisma, input(), deps());
+  it('active_opportunity control: a closed HubSpot deal and no positive disposition still enroll normally', async () => {
+    const prisma = makePrisma();
+    const hs = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'true' }] });
+    const r = await enrollFromDecision(prisma, input(), deps({ opportunity: opportunityVia(hs) }));
     expect(r.ok).toBe(true);
   });
 

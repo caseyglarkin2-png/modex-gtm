@@ -187,6 +187,15 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     case 'approve_hypothesis':
       return withWarning({ state: 'actionable' as const, primary: { label: 'Review the hypothesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
     case 'nurture':
+      // R3b: an open HubSpot deal (or a meeting / positive reply) at this account. Hold, and say why.
+      if (item.ruleId === 'active_opportunity') {
+        const company = item.account.hubspotCompanyId ? hubspotCompanyUrl(item.account.hubspotCompanyId) : null;
+        return withWarning({
+          state: 'actionable' as const,
+          primary: { label: 'Hold: active opportunity', href: null, note: `${item.account.name} already has an active opportunity (an open HubSpot deal, a meeting or a positive reply). Work it from the deal, not a cold first touch.` },
+          secondary: company ? [{ label: 'Open the account in HubSpot', href: company }] : [],
+        });
+      }
       return withWarning({
         state: 'actionable' as const,
         primary: { label: 'Hold for later', href: null, note: 'No outreach now. The routing details say why.' },
@@ -207,6 +216,8 @@ function readinessOf(item: ReadinessInput): CardReadiness {
           });
         case 'bounced_or_invalid':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable email or phone for ${name}.`, fix: contactFix(item, 'Find a current email or phone') });
+        case 'opportunity_unknown':
+          return withWarning({ state: 'missing_prerequisite' as const, missing: "Can't verify whether this account already has an active opportunity. Check HubSpot before contacting them.", fix: accountFix(item, 'Check HubSpot for open deals') });
         case 'tam_unknown':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `${item.account.name} has no verified TAM status.`, fix: accountFix(item, 'Verify TAM on the account') });
         case 'hyp_stale':

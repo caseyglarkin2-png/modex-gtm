@@ -38,7 +38,7 @@ const refusedWith = (reason: string) =>
 const sends = () =>
   vi.fn(async (intent: any): Promise<ExecutionReceipt> => ({ engine: 'gmail_direct', status: 'sent', engineId: 'msg-1', threadId: 'thr-1', createdAt: intent.now, sentAt: intent.now }));
 
-const deps = (d: Db, direct: any, extra: Record<string, unknown> = {}) => ({ ...baseDeps(d), activeOpportunity: async () => false, directAdapter: direct, ...extra });
+const deps = (d: Db, direct: any, extra: Record<string, unknown> = {}) => ({ ...baseDeps(d), activeOpportunity: async () => ({ status: 'CLEAR' as const }), directAdapter: direct, ...extra });
 
 async function previewHash(prisma: any, d: Db, extra: Record<string, unknown> = {}) {
   const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW }, deps(d, sends(), extra));
