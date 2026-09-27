@@ -52,7 +52,7 @@ import { LIVE_ENROLLMENT_STATUSES } from '@/lib/gap/sequence/family';
 import { STOP_REASONS, type StopReason } from '@/lib/gap/taxonomy';
 import { stopRun } from '@/lib/queue/sequence-runtime';
 import { HARD_BOUNCE_STATUSES } from '../../email/bounce';
-import { outreachEvidence } from '@/lib/gap/research/evidence-gate';
+import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
 
 export const TERMINAL_STATUSES = ['stopped', 'completed'] as const;
@@ -217,7 +217,7 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
   if (input.hypothesisId) {
     const hyp = await prisma.prospectingHypothesis.findUnique({
       where: { id: input.hypothesisId },
-      select: { status: true, account_name: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
+      select: { status: true, account_name: true, observation: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
     });
     if (!hyp) return { ok: false, reason: 'hypothesis_not_found' };
     if (!(HYPOTHESIS_READY_STATUSES as readonly string[]).includes(hyp.status)) {
@@ -228,7 +228,7 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
     const nowMs = Date.now();
     const links: Array<{ signal: any }> = Array.isArray(hyp.signals) ? hyp.signals : [];
     const live = links.map((l) => l.signal).filter((s) => s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > nowMs));
-    if (outreachEvidence(live, String(hyp.account_name ?? '')).tier !== 'VERIFIED_FACT') {
+    if (sendableEvidence(hyp.observation, live, String(hyp.account_name ?? '')).tier !== 'VERIFIED_FACT') {
       return { ok: false, reason: 'evidence_insufficient' };
     }
   }

@@ -32,7 +32,7 @@
  */
 
 import { createLimiter, type Limiter } from './bounded';
-import { outreachEvidence } from '../research/evidence-gate';
+import { sendableEvidence } from '../research/evidence-gate';
 import { personSendHistory } from '../execution/person-history';
 import { parseSteps } from '../sequence/steps';
 import { normalizeScore } from '../../pounce/fit';
@@ -449,7 +449,8 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     // Red team T6: thin = no LIVE outreach fact (research/evidence-gate.ts), the
     // same rule approval, activation, the compiler and the send gate apply.
     evidenceThin:
-      outreachEvidence(
+      sendableEvidence(
+        h.observation,
         signals.filter((s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime()),
         h.account_name ?? '',
       ).tier !== 'VERIFIED_FACT',

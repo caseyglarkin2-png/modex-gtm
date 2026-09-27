@@ -131,7 +131,7 @@ import { firstNameOf, renderStepCopy, EVIDENCE_SIGNAL_SELECT, type EvidenceSigna
 /** Re-exported: the projection now lives with the compiler it serves (R3-3); callers of the old service export keep working. */
 export { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
 import { parseSteps } from '@/lib/gap/sequence/steps';
-import { outreachEvidence } from '@/lib/gap/research/evidence-gate';
+import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import type { QueueAddInput } from '@/lib/validations';
@@ -658,7 +658,7 @@ export async function enrollFromDecision(
   const liveSignals = (hypothesis.signals ?? [])
     .map((link) => link.signal)
     .filter((s): s is EvidenceSignalRow => s !== null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime()));
-  if (outreachEvidence(liveSignals, hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+  if (sendableEvidence(hypothesis.observation, liveSignals, hypothesis.account_name).tier !== 'VERIFIED_FACT') {
     return refuse('evidence_insufficient', { detail: 'No verified, dated, quoted fact about a physical-network change at this account.' });
   }
 

@@ -40,7 +40,8 @@ function snapshot(overrides: Partial<HypothesisSnapshot> = {}): HypothesisSnapsh
     falsificationQuestions: ['Do drivers check in at a guard shack?'],
     linkedSignals: [
       { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: FUTURE },
-      { id: 'sig_b', hasEvidence: false, expiresAt: null },
+      // Release C review SF1: every signal the observation cites is itself an outreach fact.
+      { id: 'sig_b', hasEvidence: true, outreachFact: true, expiresAt: null },
     ],
     reviewedBy: null,
     primaryPersonaId: null,
@@ -213,6 +214,18 @@ describe('review_required + approve', () => {
         reviewCtx,
       ),
     ).toEqual({ ok: false, reason: 'evidence_insufficient' });
+  });
+
+  it.each(['approve', 'activate'] as const)('Release C review SF1: %s refuses evidence_insufficient when the observation also cites a keyword hit beside a fact', (action) => {
+    const linkedSignals = [
+      { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: FUTURE },
+      { id: 'sig_b', hasEvidence: true, outreachFact: false, expiresAt: FUTURE },
+    ];
+    const status = action === 'approve' ? 'review_required' : 'approved';
+    const extra = action === 'activate' ? { reviewedBy: 'casey@yardflow.ai', primaryPersonaId: 7 } : {};
+    expect(transition(snapshot({ status, linkedSignals, ...extra }), action, reviewCtx)).toEqual({ ok: false, reason: 'evidence_insufficient' });
+    // Control: the same snapshot citing only the fact moves.
+    expect(transition(snapshot({ status, linkedSignals, observation: OBSERVATION_ONLY_A, ...extra }), action, reviewCtx).ok).toBe(true);
   });
 
   it('T6: an outreach fact that has expired does not satisfy the gate', () => {

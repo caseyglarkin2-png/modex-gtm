@@ -247,7 +247,7 @@ function fullDb(): Db {
       status: 'approved',
       problem_family: 'hidden_capacity',
       confidence: 60,
-      observation: 'Acme Foods announced a third Ohio distribution center in August 2026.',
+      observation: 'Acme Foods announced a third Ohio distribution center in August 2026 [S:sig-evidenced].',
       problem_hypothesis: 'My guess is the new site inherits gate waiting from the other two, which caps turns.',
       why_now: 'Site opens in Q4.',
       falsification_questions: ['Does the new site run the same gate process as the other two?'],
@@ -430,7 +430,7 @@ describe('assembleRoutingInputs full fixture', () => {
       expiresAt: daysAhead(30),
       resumeAt: new Date('2026-10-01T00:00:00.000Z'),
       version: 1,
-      observation: 'Acme Foods announced a third Ohio distribution center in August 2026.',
+      observation: 'Acme Foods announced a third Ohio distribution center in August 2026 [S:sig-evidenced].',
       problemHypothesis: 'My guess is the new site inherits gate waiting from the other two, which caps turns.',
       whyNow: 'Site opens in Q4.',
       falsificationQuestions: ['Does the new site run the same gate process as the other two?'],
@@ -814,7 +814,7 @@ describe('hypothesis evidence depth (closeout)', () => {
   it('T6: evidenceThin is true unless a LIVE outreach fact is linked (keyword hit, unverified financial quote, operator hearsay and nothing at all are all thin)', async () => {
     const { buildHypothesisForTest } = await import('@/lib/gap/routing/inputs');
     const now = new Date('2026-09-25T00:00:00Z');
-    const h = (signals: any[]) => ({ id: 'h', status: 'active', problem_family: 'hidden_capacity', confidence: 42, observation: 'o', problem_hypothesis: 'p', metadata: null, signals: signals.map((signal) => ({ signal })) });
+    const h = (signals: any[]) => ({ id: 'h', status: 'active', problem_family: 'hidden_capacity', confidence: 42, observation: 'o [S:s3].', problem_hypothesis: 'p', metadata: null, signals: signals.map((signal) => ({ signal })) });
     const keyword = { id: 's1', source_kind: 'pounce_trigger', title: 'KR 10-Q (2026-06-26) mentions: capital expenditure', summary: '', evidence_url: 'https://sec.gov/x', evidence_text: '', freshness_expires_at: null };
     const fact = { id: 's3', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', title: 'KROGER CO 10-Q', evidence_url: 'https://sec.gov/y', evidence_text: 'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc.', external_ok: true, observed_at: new Date('2026-09-18T00:00:00Z'), metadata: { verified: 'excerpt_found_at_source' }, freshness_expires_at: null };
     const hk = (signals: any[]) => ({ ...h(signals), account_name: 'Kroger' });
@@ -824,6 +824,9 @@ describe('hypothesis evidence depth (closeout)', () => {
     expect(buildHypothesisForTest(hk([]) as any, now)!.evidenceThin).toBe(true);
     expect(buildHypothesisForTest(hk([keyword, fact]) as any, now)!.evidenceThin).toBe(false);
     expect(buildHypothesisForTest(hk([keyword, { ...fact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') }]) as any, now)!.evidenceThin).toBe(true);
+    // Release C review SF1: a fact linked beside a CITED keyword hit is thin; the observation must cite only facts.
+    expect(buildHypothesisForTest({ ...hk([keyword, fact]), observation: 'o [S:s3]. k [S:s1].' } as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest({ ...hk([keyword, fact]), observation: 'o, uncited.' } as any, now)!.evidenceThin).toBe(true);
   });
 });
 

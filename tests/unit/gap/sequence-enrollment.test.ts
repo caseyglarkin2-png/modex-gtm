@@ -78,7 +78,7 @@ function makePrisma() {
       findMany: asyncSpy(async () => []),
       updateMany: asyncSpy(async () => ({ count: 1 })),
     },
-    prospectingHypothesis: { findUnique: asyncSpy(async () => ({ status: 'approved', account_name: 'Acme', signals: [{ signal: VERIFIED_SIGNAL }] })) },
+    prospectingHypothesis: { findUnique: asyncSpy(async () => ({ status: 'approved', account_name: 'Acme', observation: 'Acme opened a new distribution center [S:sig_v].', signals: [{ signal: VERIFIED_SIGNAL }] })) },
     $transaction: vi.fn(async (fn: (client: typeof tx) => Promise<unknown>) => fn(tx)),
     tx,
   };
@@ -231,7 +231,7 @@ describe('enroll refusals, in guard order', () => {
     ["another account's fact", [{ signal: { ...VERIFIED_SIGNAL, account_name: 'Other Co' } }]],
   ])('red team T6: evidence_insufficient on a ready hypothesis with %s; nothing written', async (_label, signals) => {
     const prisma = makePrisma();
-    prisma.prospectingHypothesis.findUnique.mockResolvedValue({ status: 'active', account_name: 'Acme', signals });
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue({ status: 'active', account_name: 'Acme', observation: 'Acme opened a new distribution center [S:sig_v].', signals });
     expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'evidence_insufficient' });
     expect(prisma.$transaction).not.toHaveBeenCalled();
   });

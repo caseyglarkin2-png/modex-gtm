@@ -22,6 +22,7 @@
  * not a public, verifiable fact, so it cannot be the first-touch fact either.
  */
 import { isPhysicalOpsFact } from './facts';
+import { extractCitationIds } from '../hypothesis/observation';
 
 export interface GateSignal {
   id: string;
@@ -94,6 +95,27 @@ export function outreachEvidence(signals: readonly GateSignal[], accountName: st
     }
   }
   return { tier: facts.length > 0 ? 'VERIFIED_FACT' : 'INSUFFICIENT', facts, keywordOnly, refused };
+}
+
+export interface SendableEvidence extends OutreachEvidence {
+  /** Ids the observation cites that are not live outreach facts. Any one makes the hypothesis unsendable. */
+  nonFactCitations: string[];
+}
+
+/**
+ * The send decision (Release C review SF1). A linked fact is not enough when
+ * the sentence that reaches the buyer cites something else: the observation
+ * must cite at least one signal, and every signal it cites must itself be a
+ * live outreach fact. Pass only live (unexpired) signals, so a cited expired
+ * fact counts as a non-fact citation.
+ */
+export function sendableEvidence(observation: string | null | undefined, signals: readonly GateSignal[], accountName: string): SendableEvidence {
+  const base = outreachEvidence(signals, accountName);
+  const facts = new Set(base.facts);
+  const cited = extractCitationIds(observation ?? '');
+  const nonFactCitations = cited.filter((id) => !facts.has(id));
+  const ok = base.tier === 'VERIFIED_FACT' && cited.length > 0 && nonFactCitations.length === 0;
+  return { ...base, tier: ok ? 'VERIFIED_FACT' : 'INSUFFICIENT', nonFactCitations };
 }
 
 /** The Prisma select every gate caller needs on a linked ProspectingSignal. */

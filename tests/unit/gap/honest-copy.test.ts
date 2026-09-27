@@ -11,7 +11,7 @@ import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
 import { renderStepCopy } from '@/lib/gap/sequence/render';
 import { citedQuote } from '@/lib/gap/research/propose';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
-import { outreachEvidence } from '@/lib/gap/research/evidence-gate';
+import { outreachEvidence, sendableEvidence } from '@/lib/gap/research/evidence-gate';
 
 const GIANT_EAGLE =
   'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).';
@@ -91,5 +91,19 @@ describe('T7 call opener (real fact + hypothesis as a question; impact only afte
       expect(text).not.toMatch(/\bcost\b/i);
       expect(text).not.toMatch(/\bmentions:/i);
     }
+  });
+});
+
+describe('Release C review SF1: sendableEvidence', () => {
+  const fact = { id: 'f', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: GIANT_EAGLE, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: true, metadata: { verified: 'excerpt_found_at_source' } };
+  const keyword = { id: 'k', account_name: 'Kroger', source_kind: 'pounce_trigger', source_type: 'public_secondary', evidence_text: null, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: null, metadata: null };
+
+  it('is VERIFIED_FACT only when the observation cites at least one signal and every cited signal is an outreach fact', () => {
+    expect(sendableEvidence('Giant Eagle [S:f].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'VERIFIED_FACT', nonFactCitations: [] });
+    expect(sendableEvidence('Giant Eagle [S:f]. Capex [S:k].', [fact, keyword], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: ['k'] });
+    expect(sendableEvidence('Giant Eagle [S:f]. Ghost [S:gone].', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: ['gone'] });
+    expect(sendableEvidence('Giant Eagle, uncited.', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: [] });
+    expect(sendableEvidence(null, [fact], 'Kroger').tier).toBe('INSUFFICIENT');
+    expect(sendableEvidence('Capex [S:k].', [keyword], 'Kroger').tier).toBe('INSUFFICIENT');
   });
 });

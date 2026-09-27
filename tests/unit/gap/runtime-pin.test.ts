@@ -587,8 +587,15 @@ describe('scheduleNextStep per-item compile (R3-4)', () => {
     expect(row.payload).toMatchObject({ itemId: 201, stepIndex: 1, runId: 'run-abc', versionId: 'ver-enr', compileId: 'cmp_bad', verdict, failedChecks: ['C01'] });
   });
 
-  it('a slot with no hypothesis observation schedules NOTHING: audit unrendered_placeholder (observation), no create, no compile', async () => {
+  it('a hypothesis with no observation cites no fact: schedules NOTHING, audit schedule.skipped evidence_insufficient (Release C review SF1)', async () => {
     prisma.sequenceEnrollment.findUnique.mockResolvedValue(enrollmentWithHypothesis('active', V2_SLOTTED, null));
+    expect(await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }))).toBeNull();
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.gapAuditEvent.create.mock.calls[0][0].data.payload).toMatchObject({ reason: 'evidence_insufficient', hypothesisId: 'H1' });
+  });
+
+  it('a slot on a run with no hypothesis schedules NOTHING: audit unrendered_placeholder (observation), no create, no compile', async () => {
+    prisma.sequenceEnrollment.findUnique.mockResolvedValue({ ...enrollment('active', V2_SLOTTED), hypothesis_id: null, hypothesis: null });
     const out = await scheduleNextStep(prisma, step0Item({ persona_name: 'Kara Jones' }));
     expect(out).toBeNull();
     expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();

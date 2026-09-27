@@ -29,7 +29,7 @@
  */
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
-import { outreachEvidence } from '../research/evidence-gate';
+import { sendableEvidence } from '../research/evidence-gate';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
@@ -302,11 +302,11 @@ export async function prepareSellerEmail(
   // change) or no email; a keyword hit can only send this card to research.
   const linked = Array.isArray(pack.hypothesis.signals) ? pack.hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
   const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => !sig.freshness_expires_at || new Date(sig.freshness_expires_at).getTime() > now.getTime());
-  if (outreachEvidence(live, pack.hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+  if (sendableEvidence(pack.hypothesis.observation, live, pack.hypothesis.account_name).tier !== 'VERIFIED_FACT') {
     return refuse(prisma, actor, decisionId, {
       ok: false,
       reason: 'evidence_insufficient',
-      detail: 'This hypothesis has no verified, dated, quoted fact about a physical-network change at this account. Research it before any email.',
+      detail: 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.',
     });
   }
   const persona = pack.persona;

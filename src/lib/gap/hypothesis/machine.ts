@@ -22,7 +22,7 @@ import {
   isProblemFamily,
   type HypothesisStatus,
 } from '../taxonomy';
-import { validateObservation } from './observation';
+import { extractCitationIds, validateObservation } from './observation';
 
 export type { HypothesisStatus };
 
@@ -154,7 +154,14 @@ function evidenceGuard(snapshot: HypothesisSnapshot, now: Date): 'no_evidence' |
  * unverified or irrelevant sentences) can inform research, never use.
  */
 function outreachFactGuard(snapshot: HypothesisSnapshot, now: Date): 'evidence_insufficient' | null {
-  return snapshot.linkedSignals.some((signal) => signal.outreachFact === true && !isExpired(signal.expiresAt, now)) ? null : 'evidence_insufficient';
+  const live = (signal: LinkedSignal) => signal.outreachFact === true && !isExpired(signal.expiresAt, now);
+  if (!snapshot.linkedSignals.some(live)) return 'evidence_insufficient';
+  // Release C review SF1: the observation is the sentence the buyer reads.
+  // Every signal it cites must itself be a live outreach fact; a fact linked
+  // beside a cited keyword hit does not make the keyword hit citable.
+  const facts = new Set(snapshot.linkedSignals.filter(live).map((s) => s.id));
+  const cited = extractCitationIds(snapshot.observation ?? '');
+  return cited.length > 0 && cited.every((id) => facts.has(id)) ? null : 'evidence_insufficient';
 }
 
 /** Response classes that resolve a hypothesis, and the status each one resolves to. */

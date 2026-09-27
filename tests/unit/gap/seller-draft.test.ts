@@ -383,6 +383,19 @@ describe('T6: an INSUFFICIENT hypothesis never sends', () => {
     expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
   });
 
+  it('Release C review SF1: a fact linked beside a CITED keyword hit is refused; citing only the fact drafts', async () => {
+    const d = db();
+    d.hypotheses[0].signals.push({ signal: { id: 'sig-kw', account_name: 'Kroger', source_kind: 'pounce_trigger', title: 'KR 10-Q mentions capital expenditure', evidence_text: null, evidence_url: 'https://sec.gov/x', external_ok: null, observed_at: NOW, freshness_expires_at: null, source_type: 'public_secondary', metadata: null } });
+    d.hypotheses[0].observation = 'Kroger will acquire Giant Eagle [S:sig-1]. Capital expenditure is up [S:sig-kw].';
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+
+    const d2 = db();
+    d2.hypotheses[0].signals.push({ signal: { id: 'sig-kw', account_name: 'Kroger', source_kind: 'pounce_trigger', title: 'KR 10-Q mentions capital expenditure', evidence_text: null, evidence_url: 'https://sec.gov/x', external_ok: null, observed_at: NOW, freshness_expires_at: null, source_type: 'public_secondary', metadata: null } });
+    const ok = await createSellerGmailDraft(prismaOf(d2), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d2));
+    expect(ok).toMatchObject({ ok: true });
+  });
+
   it('an expired outreach fact does not keep a hypothesis sendable', async () => {
     const d = db();
     d.hypotheses[0].signals[0].signal.freshness_expires_at = new Date(NOW.getTime() - 1000);

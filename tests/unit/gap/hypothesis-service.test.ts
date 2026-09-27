@@ -83,7 +83,8 @@ function row(overrides: Record<string, unknown> = {}) {
     status: 'review_required',
     problem_family: 'hidden_capacity',
     persona: 'site_ops',
-    observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+    // Release C review SF1: the observation cites only the outreach fact; S2 (site hearsay) stays supporting context.
+    observation: 'They opened a second DC in Ohio [S:S1].',
     problem_hypothesis: 'My guess is the new DC is running gate checks on paper.',
     falsification_questions: ['Do drivers check in at a guard shack?'],
     why_now: 'Second DC opened',
@@ -422,7 +423,7 @@ describe('transitionHypothesis', () => {
         accountName: 'Acme Logistics',
         hubspotCompanyId: '9001',
         problemFamily: 'hidden_capacity',
-        observation: 'They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].',
+        observation: 'They opened a second DC in Ohio [S:S1].',
         problemHypothesis: 'My guess is the new DC is running gate checks on paper.',
         whyNow: 'Second DC opened',
         falsificationQuestions: ['Do drivers check in at a guard shack?'],

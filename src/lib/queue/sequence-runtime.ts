@@ -19,7 +19,7 @@ import { audit, type GapAuditKind } from '../gap/audit';
 import { validateClaimsUsed } from '../gap/claims/validate-claims';
 import { compile, type CompileDeps } from '../gap/compiler/compile';
 import { makeCriticClient, type CriticClient } from '../gap/critic-client';
-import { outreachEvidence } from '../gap/research/evidence-gate';
+import { sendableEvidence } from '../gap/research/evidence-gate';
 
 /** GAP OS (S3-T5): the deterministic idempotency key the schema comment on
  *  DraftQueueItem promises (`owner:to_email:run:step`). Used under the flag
@@ -266,7 +266,7 @@ export async function scheduleNextStep(prisma: any, item: any, opts: ScheduleOpt
     if (run?.hypothesisId) {
       const at = (opts.now ?? (() => new Date()))().getTime();
       const live = run.signals.filter((s) => !s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > at);
-      if (outreachEvidence(live, run.accountName || String(item.account_name ?? '')).tier !== 'VERIFIED_FACT') {
+      if (sendableEvidence(run.observation, live, run.accountName || String(item.account_name ?? '')).tier !== 'VERIFIED_FACT') {
         await audit(prisma, {
           kind: SCHEDULE_SKIPPED_KIND,
           actor: RUNTIME_ACTOR,

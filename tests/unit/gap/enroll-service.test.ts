@@ -133,7 +133,7 @@ function makePrisma(
     unsubscribedEmail: { findUnique: asyncSpy(async () => null) },
     prospectingHypothesis: {
       findUnique: asyncSpy(async () =>
-        opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics', signals: [{ signal: VERIFIED_SIGNAL }] } : opts.hypothesis,
+        opts.hypothesis === undefined ? { id: 'H1', status: 'approved', account_name: 'Acme Logistics', observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_v].', signals: [{ signal: VERIFIED_SIGNAL }] } : opts.hypothesis,
       ),
     },
     persona: {
@@ -529,6 +529,7 @@ describe('enrollFromDecision guards, in order', () => {
         id: 'H1',
         status: 'approved',
         account_name: 'Acme Logistics',
+        observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_1].',
         signals: [{ signal: { ...VERIFIED_SIGNAL, id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z' } }],
       };
       const withOptIn = await enrollFromDecision(
@@ -990,7 +991,7 @@ describe('modex_queue', () => {
       createdBy: 'casey@freightroll.com',
     });
     expect(compileInput.contract).toMatchObject({
-      hypothesis: { observation: '', problemHypothesis: '', problemFamily: 'unmapped' },
+      hypothesis: { observation: 'Acme Logistics opened a new distribution center in Columbus [S:sig_v].', problemHypothesis: '', problemFamily: 'unmapped' },
       evidence: [{ id: 'sig_v', title: 'Acme Logistics 10-Q', url: 'https://example.com/10q', externalOk: true, fresh: true, superseded: false, firstParty: false }],
       stepCount: 2,
       claimsUsed: [],
@@ -1204,18 +1205,24 @@ describe('modex_queue', () => {
     expect((shadow as any).wouldBe.body).toBe(queued);
   });
 
-  it('R3-4: unrendered_placeholder:observation refuses shadow and live when the hypothesis has no observation, before addOne', async () => {
-    const slotted = { ...STEPS, steps: [{ ...STEPS.steps[0], templates: { subjectTemplate: 'S', bodyTemplate: 'Hi {{first_name}},\n{{observation}}\n\nCasey', hubspotTemplateId: null } }, STEPS.steps[1]] };
+  it('R3-4: unrendered_placeholder:<token> refuses shadow and live when a template token has no value, before addOne', async () => {
+    const slotted = { ...STEPS, steps: [{ ...STEPS.steps[0], templates: { subjectTemplate: 'S', bodyTemplate: 'Hi {{first_name}},\n{{observation}} {{company_size}}\n\nCasey', hubspotTemplateId: null } }, STEPS.steps[1]] };
     for (const mode of ['shadow', 'live'] as const) {
       const prisma = makePrisma({ decision: modexDecision(), version: { id: 'v1', family_id: 'fam_1', version: 1, status: 'draft', steps: slotted } });
       const d = deps();
       const r = await enrollFromDecision(prisma, input({ mode }), d);
-      expect(r).toEqual({ ok: false, reason: 'unrendered_placeholder:observation' });
+      expect(r).toEqual({ ok: false, reason: 'unrendered_placeholder:company_size' });
       expect(d.addOne).not.toHaveBeenCalled();
       expect(mockedMaterialize).not.toHaveBeenCalled();
       expect(writes(prisma)).toEqual([]);
-      expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'unrendered_placeholder:observation', token: 'observation' });
+      expect(mockedAudit.mock.calls.at(-1)?.[1].payload).toMatchObject({ predicate: 'unrendered_placeholder:company_size', token: 'company_size' });
     }
+  });
+
+  it('Release C review SF1: a hypothesis with no observation cites no fact and is refused evidence_insufficient before render', async () => {
+    const prisma = makePrisma({ decision: modexDecision(), hypothesis: { id: 'H1', status: 'approved', account_name: 'Acme Logistics', observation: null, signals: [{ signal: VERIFIED_SIGNAL }] } });
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), deps());
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
   });
 
   it('R3-12: an exception after addOne parks the orphan as skipped gap_enroll_error:<name> and rethrows (enroll() throwing)', async () => {
