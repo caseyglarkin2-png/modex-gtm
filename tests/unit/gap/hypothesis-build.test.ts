@@ -28,6 +28,8 @@ const FORBIDDEN_TEXT = new RegExp(
 
 const S1_TITLE = 'Honda adds a second shift at Anna Engine Plant with 110 dock doors';
 const S2_TITLE = 'Honda retools Ohio plants for mixed hybrid and ICE production on the same lines';
+const S1_QUOTE = 'Honda opened a second shift at Anna Engine Plant and expanded the site to 110 dock doors.';
+const S2_QUOTE = 'Honda retooled its Ohio plants and expanded the lines to add dock doors and trailer spots.';
 
 const PERSONAS: BuildPersona[] = [
   { id: 1, personaKey: 'site_ops', name: 'Plant Logistics Manager', doNotContact: false, emailValid: true },
@@ -44,6 +46,8 @@ const S1: BuildSignal = {
   freshnessExpiresAt: daysAhead(30),
   externalOk: true,
   pounceCategories: ['network_capex'],
+  // Red team T7: only a quoted network-change fact may reach the observation.
+  evidenceText: S1_QUOTE,
 };
 
 const S2: BuildSignal = {
@@ -56,6 +60,7 @@ const S2: BuildSignal = {
   confidence: 70,
   freshnessExpiresAt: daysAhead(10),
   externalOk: true,
+  evidenceText: S2_QUOTE,
 };
 
 const S3_UNTITLED: BuildSignal = {
@@ -195,6 +200,7 @@ describe('buildCandidates: personas', () => {
           id: 'S6',
           type: 'job_posting',
           title: 'Honda hires gate guards and adds a driver check-in lane at Marysville',
+          evidenceText: 'Honda opened a driver check-in lane and added gate staff at its Marysville plant.',
           observedAt: daysAgo(4),
           confidence: 65,
           freshnessExpiresAt: daysAhead(20),
@@ -220,9 +226,9 @@ describe('buildCandidates: observation', () => {
     expect(validateObservation(candidate.observation, candidate.signalIds)).toMatchObject({ ok: true });
   });
 
-  it('contains only words from the cited signal titles (no paraphrase)', () => {
+  it('T7: contains only words from the cited titles and their VERIFIED QUOTES (no paraphrase, no keyword label)', () => {
     const candidate = siteOpsHiddenCapacity();
-    const titleWords = new Set(tokens(`${S1_TITLE} ${S2_TITLE}`));
+    const titleWords = new Set(tokens(`${S1_TITLE} ${S2_TITLE} ${S1_QUOTE} ${S2_QUOTE}`));
     const observationWords = tokens(candidate.observation);
     expect(observationWords.length).toBeGreaterThan(0);
     const foreign = observationWords.filter((word) => !titleWords.has(word));
@@ -244,7 +250,7 @@ describe('buildCandidates: observation', () => {
     expect(candidate).toBeDefined();
     expect(candidate!.observation).not.toContain('[S:S7]');
     expect(candidate!.observation).not.toContain('session');
-    expect(candidate!.whyNow).not.toContain('session');
+    expect(candidate!.whyNow).toBeNull();
     expect(candidate!.signalIds).toContain('S7');
     expect(candidate!.primarySignalId).toBe('S1');
     expect(skipped).toContainEqual({ signalId: 'S7', reason: 'first_party_omitted_from_observation' });
@@ -295,10 +301,27 @@ describe('buildCandidates: hypothesis text', () => {
     expect(candidate.impactHypotheses).toEqual(['Fewer turns', 'Lost production capacity', 'Overtime']);
   });
 
-  it('whyNow states the observed window and the titles, with no forbidden tokens', () => {
-    const candidate = siteOpsHiddenCapacity();
-    expect(candidate.whyNow).toBe(`Signals observed 3 to 20 days ago: ${S1_TITLE}; ${S2_TITLE}`);
-    expect(candidate.whyNow).not.toMatch(FORBIDDEN_TEXT);
+  it('T7: no auto "why now = signal age" sentence (why now is Casey\'s to write)', () => {
+    expect(siteOpsHiddenCapacity().whyNow).toBeNull();
+  });
+
+  it('T7: a keyword-only signal ("mentions: capital expenditure", nothing quoted) never reaches the observation', () => {
+    const keyword: BuildSignal = {
+      id: 'S9',
+      type: 'site_expansion',
+      title: 'HMC 10-Q (2026-07-09) mentions: dock doors capacity expansion',
+      observedAt: daysAgo(2),
+      confidence: 95,
+      freshnessExpiresAt: daysAhead(30),
+      externalOk: true,
+      pounceCategories: ['network_capex'],
+    };
+    const { candidates, skipped } = buildCandidates({ ...INPUT, signals: [keyword] });
+    expect(candidates).toEqual([]);
+    expect(skipped).toContainEqual({ signalId: 'S9', reason: 'keyword_or_non_fact_not_citable' });
+    const mixed = buildCandidates({ ...INPUT, signals: [S1, keyword] }).candidates.find((c) => c.personaId === 1)!;
+    expect(mixed.observation).not.toMatch(/mentions:/);
+    expect(mixed.observation).not.toContain('[S:S9]');
   });
 
   it('no generated text contains forbidden tokens', () => {
@@ -325,23 +348,8 @@ describe('buildCandidates: hypothesis text', () => {
 });
 
 describe('buildCandidates: scoring and expiry', () => {
-  it('confidence is 30 + round(avg/5) + 5 for two signals, clamped to 50', () => {
-    // avg(90, 70) = 80 -> 16; 30 + 16 + 5 = 51 -> clamped to 50
-    expect(siteOpsHiddenCapacity().confidence).toBe(50);
-  });
-
-  it('confidence for a single signal omits the multi-signal bonus', () => {
-    // avg(70) = 70 -> 14; 30 + 14 + 0 = 44
-    const { candidates } = buildCandidates({ ...INPUT, signals: [S2] });
-    const candidate = candidates.find((c) => c.personaId === 1 && c.problemFamily === 'hidden_capacity');
-    expect(candidate?.confidence).toBe(44);
-  });
-
-  it('confidence never leaves 30..50', () => {
-    const low: BuildSignal = { ...S2, id: 'S8', confidence: 0 };
-    const { candidates } = buildCandidates({ ...INPUT, signals: [low] });
-    const candidate = candidates.find((c) => c.personaId === 1);
-    expect(candidate?.confidence).toBe(30);
+  it('T7: confidence is not auto-scored (0 = unscored) for every candidate', () => {
+    for (const c of result().candidates) expect(c.confidence).toBe(0);
   });
 
   it('expiresAt equals the earliest linked signal expiry', () => {

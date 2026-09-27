@@ -22,7 +22,7 @@ import { routePersona } from '@/lib/gap/routing/route';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
 import type { RoutingInputs } from '@/lib/gap/routing/types';
 import type { Top100Manifest, Top100RosterPerson } from '@/lib/gap/top100/reader';
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 import { findManyFrom } from './fixtures/where';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -665,7 +665,7 @@ describe('comms', () => {
   const withGapHistory = (db: Db, rows: any[]) => {
     db.decisions = [{ id: 'dec-old', persona_id: 42 }];
     db.audit = rows;
-    db.versions = [{ id: 'ver-hc', steps: SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!.steps }];
+    db.versions = [{ id: 'ver-hc', steps: LEGACY_HC.steps }];
     return db;
   };
 

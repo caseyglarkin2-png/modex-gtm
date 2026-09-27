@@ -307,3 +307,49 @@ review, production verification.
   Learning excludes them). No narrative edit, no delete, no email/HubSpot/
   enrollment change (mirror off in production).
 - next: T7.
+
+### T7 — honest copy
+
+- status: IMPLEMENTED (Release C, not yet merged); live seed rewrite planned
+  post-deploy (dry run done, scratch rehearsal applied + idempotent)
+- files: `src/lib/gap/sequences/families.ts`, `src/lib/gap/sequence/call-pack.ts`,
+  `src/lib/gap/hypothesis/build.ts`, `src/lib/gap/research/propose.ts`,
+  `src/lib/gap/ui/format.ts` (humanWhyNow), `src/components/gap/{action-pack-view,
+  fact-hypothesis-blocks,decision-card,hypothesis-drawer}.tsx`,
+  `scripts/gap/rewrite-seed-versions.ts`, tests `honest-copy.test.ts` (new),
+  `seed-families`, `hypothesis-build`, `decision-card`, `pre-call-brief`,
+  `server-client-boundary`; test-only fixture
+  `tests/fixtures/gap/legacy-four-step-hidden-capacity.json` (+
+  `tests/unit/gap/fixtures/legacy-hc.ts`) for the multi-touch mechanics.
+- change:
+  - seeds: all four families are honest SINGLE-TOUCH. Steps 1-3 (Fontana,
+    Columbus, Bluewater, Reno, "your careers page / investor deck / Q2
+    call") are deleted, not replaced. Step 0 = the verified fact (observation
+    slot) -> a hedged pattern that says it is not a claim about the account ->
+    the hypothesis as a question. No analogy hook, no diagnosis, no cost
+    question.
+  - builder: a keyword hit, a "mentions:" title or a quote that states no
+    network change is never citable (`keyword_or_non_fact_not_citable`); the
+    observation is the verified quote via research's `citedQuote`, never a
+    title; no auto why-now; confidence 0 (unscored).
+  - research propose: quotes only outreach facts (`no_outreach_fact`
+    otherwise); no auto "Public source dated" why-now; confidence 0.
+  - call pack: opener = verified fact + hypothesis as a question; the cost
+    question is `impactIfAcknowledged`, labeled "Only after they say it is
+    real"; voicemail = fact + one question, no diagnosis; the action pack
+    builds a call script only for a hypothesis with a verified outreach fact.
+  - UI: the hypothesis "confidence N%" is no longer displayed; legacy auto
+    why-now text ("Signals observed…", "Public source dated…") renders as
+    none.
+- tests: exact snapshots of a first touch (Kroger / Giant Eagle) and the call
+  opener, voicemail, current-state and post-acknowledgement questions; every
+  family's first touch checked for fact-first, disclaimer, question, and no
+  forbidden text; PepsiCo evidence set (keyword + 3 sentences) INSUFFICIENT.
+  RED on the pre-T7 copy: 5 failed; restored GREEN. Full unit suite 458
+  files green; typecheck green.
+- production (planned post-deploy, `scripts/gap/rewrite-seed-versions.ts
+  --apply`): the four live seeded v1 drafts (cmuh640aa…, cmuh640q8…,
+  cmuh64134…, cmuh641g1…) 4 steps -> 1 through `updateVersionSteps`
+  (drafts only), with a `sequence.version_rewritten` audit event each. No
+  compiles, enrollments or pinned hypotheses reference them.
+- next: T8.

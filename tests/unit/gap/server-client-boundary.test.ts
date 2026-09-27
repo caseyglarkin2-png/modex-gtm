@@ -62,6 +62,6 @@ describe('server/client boundary in GAP surfaces', () => {
     const view = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
     expect(isClient(page)).toBe(false);
     expect(isClient(view)).toBe(false);
-    expect(view).toMatch(/import \{ asStringList \} from '@\/lib\/gap\/ui\/format'/);
+    expect(view).toMatch(/import \{[^}]*\basStringList\b[^}]*\} from '@\/lib\/gap\/ui\/format'/);
   });
 });

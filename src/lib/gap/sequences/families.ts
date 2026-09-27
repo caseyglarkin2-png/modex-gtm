@@ -2,15 +2,19 @@
  * S3-T11: the four seed sequence families as data. Spec section 4.5 (shape),
  * section 8 (every step passes the compiler) and the S3-T11 row.
  *
- * Each family is one steps.v2 shape (src/lib/gap/sequence/steps.ts): four
- * steps at 0/4/5/6 business days like the Top100 lane, observation-first cold
- * open, purposes intrigue -> root_cause -> value_offer -> close_loop, product
- * proof never on step 0. Copy is copy-voice with jake-voice stacked: a warm
- * hook from outside logistics fused to the cited observation, a hedged
- * hypothesis paragraph, one CTA from the cold-outbound policy family for the
- * stage (a gap question on step 0, an asset offer or a gap question after),
- * no meeting ask, no product in step 0, no em dashes, "yards" plural, no
- * "throughput", no "standardize paper".
+ * Each family is one steps.v2 shape (src/lib/gap/sequence/steps.ts) with ONE
+ * step (red team T7, 2026-09-26). Steps 1 to 3 cited fixture facts about other
+ * companies' sites (Fontana, Columbus, Bluewater, Reno, "your careers page",
+ * "your Q2 call") that no prospect ever said; they are deleted, not replaced
+ * with filler. A sequence is honest single-touch until real per-prospect
+ * follow-ups are written by a human.
+ *
+ * Step 0 posture: the VERIFIED FACT (the approved evidence, through the
+ * `{{observation}}` slot) -> a hedged pattern, explicitly not a claim about
+ * this account -> the hypothesis as a question. No analogy hook, no
+ * diagnosis, no business-impact or cost question before the buyer has said
+ * the problem exists, no meeting ask, no product, no em dashes, "yards"
+ * plural, no "throughput", no "standardize paper".
  *
  * Placeholders: `{{first_name}}` and `{{account}}` are rendered per person;
  * the compiler treats them as text. Step 0 carries NO prospect fact of its
@@ -20,12 +24,6 @@
  * C01 resolves the cited fact against the hypothesis's own signals. The
  * stored step-0 body therefore carries no `[[SRC:` marker at all, and a
  * template with the slot left unfilled is refused `unrendered_placeholder`.
- * Steps 1 to 3 still carry a `[[SRC:<id>]]` marker naming a fixture ref in
- * tests/fixtures/gap/seed-evidence.json: those refs exist so the shape
- * compiles as written, and a fixture marker can never pass C01 against live
- * evidence by accident (an unresolved marker rejects), which is what leaves
- * a later step in `draft` under the per-item compile until real per-prospect
- * copy replaces it.
  *
  * Proof appears only from the canon (src/lib/gap/compiler/canon.ts) with its
  * required phrasing: 48 to 24 minutes measured, about 5% observed, 24 sites
@@ -114,52 +112,16 @@ function family(
 
 const NETWORK_STANDARDIZATION: SeedStepCopy[] = [
   {
-    subject: 'Every region, one number',
+    subject: 'One question on the network',
     paragraphs: [
-      'Nobody thinks about the wiring until the lights flicker in one room and not the others. {{observation}}',
-      'My guess is each region still runs its own version of the same shift, so one trailer event gets counted more than one way across sites before it reaches you.',
-      'Which region do you trust least when the numbers disagree?',
+      '{{observation}}',
+      'When a network grows like that, the yards usually keep each site\'s own habits for a while, so one trailer event gets counted one way at one site and another way at the next. That might not be true at {{account}}.',
+      'Is that something your team is working through, or do the sites already run the gate and dock one way?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['acquisition', 'site_expansion'],
     claimsUsed: [],
     evidence: [],
-  },
-  {
-    subject: 'The analyst who reconciles',
-    paragraphs: [
-      'Your careers page is hiring a regional analyst whose first listed duty is reconciling DC scorecards by hand [[SRC:ns_ev_2]].',
-      'That role usually exists when the definitions differ, not the people. One region clocks a turn at the fence line, another at the dock, and the report reads like two operators disagreeing when it is two stopwatches.',
-      'Worth sending over the short version of how peers pinned one definition across sites before touching a system?',
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['job_posting'],
-    claimsUsed: [],
-    evidence: ['ns_ev_2'],
-  },
-  {
-    subject: 'One model, three fence lines',
-    paragraphs: [
-      'Your investor day deck names one operating model as a 2026 priority and puts the integration owner in the COO office [[SRC:ns_ev_3]].',
-      'If the model stops at the warehouse door, the yards likely keep three vocabularies. Primo Brands started at the fence instead: 24 sites live on one protocol, same driver journey, same clocks, before any system consolidation.',
-      'If useful, I can send the 1-page scorecard peers use to grade one definition across facilities.',
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: ['CR-002'],
-    evidence: ['ns_ev_3'],
-  },
-  {
-    subject: 'Three truths, one logo',
-    paragraphs: [
-      'Your Q2 call set an integration target for the acquired network and tied it to shared systems by year end [[SRC:ns_ev_4]].',
-      'Systems usually inherit whatever the sites already count. If three regions clock a trailer three ways, the consolidated stack reports three truths with one logo on top.',
-      'How does each region define a completed turn, and which definition wins in the consolidated report?',
-    ],
-    askType: 'question',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: [],
-    evidence: ['ns_ev_4'],
   },
 ];
 
@@ -171,50 +133,14 @@ const HIDDEN_CAPACITY: SeedStepCopy[] = [
   {
     subject: 'Doors versus spots',
     paragraphs: [
-      'Airports do not pour runways when the taxiway is the problem. {{observation}}',
-      'My guess is the doors are no longer the constraint. The spots are, and the tractor hunting for the right trailer is where the new capacity waits.',
-      'How many doors sit empty on a normal Tuesday because nobody can say where the trailer is?',
+      '{{observation}}',
+      'When volume moves like that, the yards usually become the constraint before the doors do: a tractor hunting for the right trailer while a door waits. That is a pattern, not something I know about {{account}}.',
+      'Is that showing up for your team, or are the yards keeping pace?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['site_expansion'],
     claimsUsed: [],
     evidence: [],
-  },
-  {
-    subject: 'Weekend overtime on the lot',
-    paragraphs: [
-      'Your careers page lists two second-shift spotter openings at Fontana with mandatory weekend overtime [[SRC:hc_ev_2]].',
-      'Overtime on the lot usually means the moves are reactive: a door opens, someone radios, a tractor hunts. The doors could be turning faster than the lot can feed them, which is the definition of hidden capacity.',
-      'Worth sending over the short version of how a peer measured the gap between door speed and lot speed?',
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['job_posting'],
-    claimsUsed: [],
-    evidence: ['hc_ev_2'],
-  },
-  {
-    subject: 'Near capacity, or near the ceiling',
-    paragraphs: [
-      'Your Q2 call described Fontana as shipping near capacity, with the next wave of volume routed there anyway [[SRC:hc_ev_3]].',
-      'If the doors are near capacity but the lot is not, the ceiling might be softer than it looks. Primo Brands shipped about 5% more volume, observed, from the driver-journey layer alone, on the same dock-office staff, with no new doors.',
-      'Which number do your Fontana leads quote first when they say full: door turns or lot moves?',
-    ],
-    askType: 'question',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: ['CR-004'],
-    evidence: ['hc_ev_3'],
-  },
-  {
-    subject: 'Peak and the lot',
-    paragraphs: [
-      'Your investor deck names Fontana the highest-volume DC in the network for the coming peak [[SRC:hc_ev_4]].',
-      'Peak is when reactive moves get expensive: a late trailer at one door starves the line behind it, and the fix is usually more people on the lot for six weeks. The alternative is a clean handoff, knowing where every trailer is before the door asks.',
-      'If useful, I can send the 1-page scorecard peers use to find the gap between door speed and lot speed.',
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: [],
-    evidence: ['hc_ev_4'],
   },
 ];
 
@@ -224,107 +150,35 @@ const HIDDEN_CAPACITY: SeedStepCopy[] = [
 
 const AUTOMATION_READINESS: SeedStepCopy[] = [
   {
-    subject: 'Road markings before the truck',
+    subject: 'Before the robots',
     paragraphs: [
-      'A self-driving car is only as calm as the road markings it reads. {{observation}}',
-      'My guess is the truck will be fine. The open point is whether the moves it gets handed are deterministic yet, or whether a radio call still decides which trailer goes where.',
-      "What share of the moves there start from a written rule versus a spotter's judgment?",
+      '{{observation}}',
+      'Automation plans usually assume the trailer is at the door when the schedule says it will be, and the yards tend to decide whether that holds. That might not be true at {{account}}.',
+      'Is trailer timing something your automation team is planning around, or is it already handled?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['automation_program'],
     claimsUsed: [],
     evidence: [],
   },
-  {
-    subject: 'The exception list at Columbus',
-    paragraphs: [
-      'Your automation engineer posting for Columbus lists exception handling for lot robotics as the first responsibility [[SRC:ar_ev_2]].',
-      'Exceptions are usually where these programs stall: not the software, the undocumented ones. A trailer with a broken door latch, a tractor parked in the wrong row, a dock that went down at two in the afternoon. Each one becomes a manual fallback until someone writes the rule.',
-      'Worth sending over the short version of how peers sized their exception list before the robots arrived?',
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['job_posting'],
-    claimsUsed: [],
-    evidence: ['ar_ev_2'],
-  },
-  {
-    subject: 'Clean events before robots',
-    paragraphs: [
-      'Your investor presentation frames the capex program as automation first, with Columbus as the proving ground [[SRC:ar_ev_3]].',
-      'Automation compounds whatever it lands on. If the arrival, dock and status events are already clean, the robots inherit a clean lot; if they are not, the program usually spends its first year documenting exceptions. Primo Brands cut drop-and-hook turn time from 48 to 24 minutes, measured in a side-by-side pilot, before any automated move.',
-      'Which of those three events does Columbus trust least: arrival, dock or status?',
-    ],
-    askType: 'question',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: ['CR-001', 'GAP-007'],
-    evidence: ['ar_ev_3'],
-  },
-  {
-    subject: 'A playbook that travels',
-    paragraphs: [
-      'Trade coverage of the Columbus automation program says the playbook is meant to travel to the other plants [[SRC:ar_ev_4]].',
-      'A playbook travels only if the inputs are the same at every plant. My guess is Columbus will run clean and the second site will surface a different set of exceptions, because the trailer events were never standard to begin with.',
-      "If useful, I can send the 1-page scorecard that grades a site's readiness before the robots are ordered.",
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: [],
-    evidence: ['ar_ev_4'],
-  },
 ];
 
 // ---------------------------------------------------------------------------
-// New Sites and Acquisitions (supply_chain; problem family network_standardization)
+// New Sites and Acquisitions (supply_chain)
 // ---------------------------------------------------------------------------
 
 const NEW_SITES_ACQUISITIONS: SeedStepCopy[] = [
   {
-    subject: 'New plants and the forks',
+    subject: 'The new site',
     paragraphs: [
-      'Two families moving into one house argue about the forks long before they argue about money. {{observation}}',
-      'My guess is the day-one plan covers the ERP and the brand, and the yards sit on a list called later. That is usually where two operating vocabularies collide first, at the fence.',
-      'Which of the acquired plants takes its first truck from your existing lanes?',
+      '{{observation}}',
+      'A new or acquired site usually brings its own habits at the gate and in the yards, and they tend to stay until someone decides how the yards should run. That is a pattern, not something I know about {{account}}.',
+      'Has your team settled how the new site will run its yards, or is that still open?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['acquisition'],
     claimsUsed: [],
     evidence: [],
-  },
-  {
-    subject: 'Harmonizing at the fence',
-    paragraphs: [
-      'Your integration lead posting for the Bluewater deal lists harmonizing site processes as the first deliverable [[SRC:na_ev_2]].',
-      'Harmonizing tends to start with the systems and end with the people, and the trailer events in between stay local. Six plants with six check-in habits look integrated in the ERP and act acquired at the fence for years.',
-      'Worth sending over the short version of how a peer ran the acquired sites on one protocol in the first ninety days?',
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['job_posting'],
-    claimsUsed: [],
-    evidence: ['na_ev_2'],
-  },
-  {
-    subject: 'Shared lanes, different clocks',
-    paragraphs: [
-      'Your Q2 call tied the Bluewater cost target to shared logistics, with the plants moving onto the {{account}} network within a year [[SRC:na_ev_3]].',
-      'Shared logistics is likely to expose the yards first: same lanes, different clocks at the fence. Primo Brands committed its entire network, 260 sites under contract, with 24 live on one protocol and the rest rolling out.',
-      'Do the six Bluewater plants get one fence-line protocol on day one, or does each keep its own until the systems catch up?',
-    ],
-    askType: 'question',
-    requiredEvidenceTypes: ['news'],
-    claimsUsed: ['CR-007', 'CR-002'],
-    evidence: ['na_ev_3'],
-  },
-  {
-    subject: 'Reno as the template',
-    paragraphs: [
-      'The Reno DC opening next year gives the network its first site that was never anyone else\'s legacy [[SRC:na_ev_4]].',
-      'A greenfield site is the one place the fence-line protocol can be right from day one, and it usually becomes the template the acquired plants get graded against. If Reno opens on the same paper and radio habits, the network gains a seventh vocabulary instead of a first standard.',
-      "Reply and I'll send the short version.",
-    ],
-    askType: 'asset_offer',
-    requiredEvidenceTypes: ['new_site'],
-    claimsUsed: [],
-    evidence: ['na_ev_4'],
   },
 ];
 

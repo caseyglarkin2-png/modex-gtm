@@ -74,7 +74,8 @@ describe('<PreCallBrief>', () => {
     expect(hypothesis).toHaveAttribute('data-block', 'hypothesis');
     expect(within(hypothesis).getByText('HYPOTHESIS')).toBeInTheDocument();
     expect(within(hypothesis).getByText('Seller inference, unproven')).toBeInTheDocument();
-    expect(within(hypothesis).getByText('confidence 62%')).toBeInTheDocument();
+    // Red team T7: no auto confidence number is shown.
+    expect(within(hypothesis).queryByText(/confidence \d+%/)).toBeNull();
     expect(within(hypothesis).getByText('Gate waiting')).toBeInTheDocument();
     expect(within(hypothesis).getByText('Does Reno run its own gate with no dwell problem?')).toBeInTheDocument();
   });

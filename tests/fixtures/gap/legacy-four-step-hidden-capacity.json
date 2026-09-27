@@ -1,0 +1,110 @@
+{
+  "note": "TEST FIXTURE ONLY. The pre-red-team-T7 Hidden Capacity seed (four steps; steps 1-3 cite fixture facts about other companies, e.g. Fontana). Kept to exercise the multi-touch cadence and the foreign-citation refusal. Never seeded, never sent.",
+  "key": "hidden_capacity",
+  "name": "Hidden Capacity",
+  "problemFamily": "hidden_capacity",
+  "persona": "distribution",
+  "evidence": [
+    [],
+    [
+      "hc_ev_2"
+    ],
+    [
+      "hc_ev_3"
+    ],
+    [
+      "hc_ev_4"
+    ]
+  ],
+  "steps": {
+    "schema": "steps.v2",
+    "steps": [
+      {
+        "index": 0,
+        "delay": {
+          "value": 0,
+          "unit": "business_days"
+        },
+        "purpose": "intrigue",
+        "sourcePurpose": "earn_reply",
+        "condition": null,
+        "askType": "question",
+        "productProofAllowed": false,
+        "requiredEvidenceTypes": [
+          "site_expansion"
+        ],
+        "claimsUsed": [],
+        "templates": {
+          "subjectTemplate": "Doors versus spots",
+          "bodyTemplate": "Hi {{first_name}},\nAirports do not pour runways when the taxiway is the problem. {{observation}}\n\nMy guess is the doors are no longer the constraint. The spots are, and the tractor hunting for the right trailer is where the new capacity waits.\n\nHow many doors sit empty on a normal Tuesday because nobody can say where the trailer is?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "hubspotTemplateId": null
+        }
+      },
+      {
+        "index": 1,
+        "delay": {
+          "value": 4,
+          "unit": "business_days"
+        },
+        "purpose": "root_cause",
+        "sourcePurpose": "clarify_consequence",
+        "condition": null,
+        "askType": "asset_offer",
+        "productProofAllowed": true,
+        "requiredEvidenceTypes": [
+          "job_posting"
+        ],
+        "claimsUsed": [],
+        "templates": {
+          "subjectTemplate": "Weekend overtime on the lot",
+          "bodyTemplate": "Hi {{first_name}},\nYour careers page lists two second-shift spotter openings at Fontana with mandatory weekend overtime [[SRC:hc_ev_2]].\n\nOvertime on the lot usually means the moves are reactive: a door opens, someone radios, a tractor hunts. The doors could be turning faster than the lot can feed them, which is the definition of hidden capacity.\n\nWorth sending over the short version of how a peer measured the gap between door speed and lot speed?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "hubspotTemplateId": null
+        }
+      },
+      {
+        "index": 2,
+        "delay": {
+          "value": 5,
+          "unit": "business_days"
+        },
+        "purpose": "value_offer",
+        "sourcePurpose": "address_obstacle",
+        "condition": null,
+        "askType": "question",
+        "productProofAllowed": true,
+        "requiredEvidenceTypes": [
+          "news"
+        ],
+        "claimsUsed": [
+          "CR-004"
+        ],
+        "templates": {
+          "subjectTemplate": "Near capacity, or near the ceiling",
+          "bodyTemplate": "Hi {{first_name}},\nYour Q2 call described Fontana as shipping near capacity, with the next wave of volume routed there anyway [[SRC:hc_ev_3]].\n\nIf the doors are near capacity but the lot is not, the ceiling might be softer than it looks. Primo Brands shipped about 5% more volume, observed, from the driver-journey layer alone, on the same dock-office staff, with no new doors.\n\nWhich number do your Fontana leads quote first when they say full: door turns or lot moves?\n\nCasey Larkin, YardFlow by FreightRoll",
+          "hubspotTemplateId": null
+        }
+      },
+      {
+        "index": 3,
+        "delay": {
+          "value": 6,
+          "unit": "business_days"
+        },
+        "purpose": "close_loop",
+        "sourcePurpose": "next_step_or_close",
+        "condition": null,
+        "askType": "asset_offer",
+        "productProofAllowed": true,
+        "requiredEvidenceTypes": [
+          "news"
+        ],
+        "claimsUsed": [],
+        "templates": {
+          "subjectTemplate": "Peak and the lot",
+          "bodyTemplate": "Hi {{first_name}},\nYour investor deck names Fontana the highest-volume DC in the network for the coming peak [[SRC:hc_ev_4]].\n\nPeak is when reactive moves get expensive: a late trailer at one door starves the line behind it, and the fix is usually more people on the lot for six weeks. The alternative is a clean handoff, knowing where every trailer is before the door asks.\n\nIf useful, I can send the 1-page scorecard peers use to find the gap between door speed and lot speed.\n\nCasey Larkin, YardFlow by FreightRoll",
+          "hubspotTemplateId": null
+        }
+      }
+    ]
+  }
+}

@@ -11,10 +11,10 @@ declare global {
 
 import { computeNextTouch, dueAfter, recipientReplied } from '@/lib/gap/execution/next-touch';
 import { DRAFTED, DRAFT_SENT } from '@/lib/gap/execution/draft-ledger';
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './fixtures/legacy-hc';
 import { findManyFrom } from './fixtures/where';
 
-const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
+const HC = LEGACY_HC; // four steps: the multi-touch mechanics (seeds are single-touch since red team T7)
 const SENT_AT = new Date('2026-09-24T15:00:00.000Z'); // Thursday
 
 function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {

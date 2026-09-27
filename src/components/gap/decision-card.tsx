@@ -378,7 +378,6 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             <>
               <span>{words(item.hypothesis.family)}</span>
               <HypothesisStatusBadge status={item.hypothesis.status} />
-              <span className="text-[var(--muted-foreground)]">confidence {item.hypothesis.confidence}%</span>
             </>
           ) : (
             <span className="italic text-[var(--muted-foreground)]">No hypothesis</span>

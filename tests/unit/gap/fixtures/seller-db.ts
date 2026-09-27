@@ -1,6 +1,6 @@
 /** Shared Seller Action Center fixture (seller-draft and seller-send tests). */
 import { vi } from 'vitest';
-import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { LEGACY_HC } from './legacy-hc';
 import type { CompileResult } from '@/lib/gap/compiler/compile';
 import { findManyFrom } from './where';
 
@@ -9,7 +9,8 @@ import { findManyFrom } from './where';
 process.env.UNSUBSCRIBE_SECRET ??= 'fixture-unsubscribe-secret';
 
 export const NOW = new Date('2026-09-25T15:00:00.000Z');
-export const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
+/** A four-step family for the multi-touch mechanics (seeds are single-touch since red team T7). */
+export const HC = LEGACY_HC;
 
 export interface Db {
   decisions: any[];

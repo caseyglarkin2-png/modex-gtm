@@ -27,6 +27,8 @@ import {
 } from '../taxonomy';
 import { expiresAtFor, type LinkedSignal } from './machine';
 import { validateObservation } from './observation';
+import { citedQuote } from '../research/propose';
+import { isPhysicalOpsFact } from '../research/facts';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -78,7 +80,7 @@ export interface BuildCandidate {
   problemHypothesis: string;
   rootCauseHypotheses: string[];
   impactHypotheses: string[];
-  whyNow: string;
+  whyNow: string | null;
   falsificationQuestions: string[];
   whatANoMeans: string;
   signalIds: string[];
@@ -94,6 +96,7 @@ export type BuildSkipReason =
   | 'unmapped_signal'
   | 'first_party_omitted_from_observation'
   | 'title_omitted_forbidden_language'
+  | 'keyword_or_non_fact_not_citable'
   | 'persona_suppressed'
   | 'persona_email_invalid'
   | 'persona_not_relevant'
@@ -345,27 +348,20 @@ function secondaryFamilies(primary: ProblemFamily, hits: Record<string, number>)
   );
 }
 
+/**
+ * Red team T7: the observation is the VERIFIED QUOTE itself (the same
+ * formatter research uses, research/propose.ts citedQuote), never a signal
+ * title. The buyer reads a fact, not "10-Q mentions: <keyword>".
+ */
 function buildObservation(citable: ClassifiedSignal[]): string {
   return citable
     .slice(0, OBSERVATION_MAX_SIGNALS)
-    .map((member) => `${sentenceSafe(clip(member.title, TITLE_CLIP))} [S:${member.signal.id}].`)
+    .map((member) => citedQuote(sentenceSafe(clip(member.title, TITLE_CLIP)), member.signal.evidenceText ?? '', member.signal.id))
     .join(' ');
 }
 
-function buildWhyNow(citable: ClassifiedSignal[], now: Date): string {
-  const ages = citable.map((member) => daysBetween(now, member.signal.observedAt));
-  const newest = Math.min(...ages);
-  const oldest = Math.max(...ages);
-  const window = newest === oldest ? `${newest} days ago` : `${newest} to ${oldest} days ago`;
-  const titles = citable.map((member) => member.title).join('; ');
-  return `Signals observed ${window}: ${titles}`;
-}
-
-function scoreConfidence(members: ClassifiedSignal[]): number {
-  const avg = members.reduce((sum, member) => sum + member.signal.confidence, 0) / members.length;
-  const bonus = members.length >= 2 ? 5 : 0;
-  return clamp(30 + Math.round(avg / 5) + bonus, 30, 50);
-}
+/** A signal title that only reports a keyword match in a document. */
+const KEYWORD_TITLE = /\bmentions:/i;
 
 function toLinkedSignals(members: ClassifiedSignal[]): LinkedSignal[] {
   return members.map((member) => ({
@@ -407,6 +403,12 @@ export function buildCandidates(input: BuildInput): BuildResult {
     } else if (FORBIDDEN_TEXT.test(entry.title)) {
       entry.citable = false;
       skipped.push({ signalId: signal.id, reason: 'title_omitted_forbidden_language' });
+    } else if (!(signal.evidenceText ?? '').trim() || KEYWORD_TITLE.test(entry.title) || !isPhysicalOpsFact(signal.evidenceText ?? '')) {
+      // Red team T7: a keyword hit ("KR 10-Q mentions: capital expenditure")
+      // or a quote that states no network change never becomes buyer-facing
+      // text. It may still support classification and trigger research.
+      entry.citable = false;
+      skipped.push({ signalId: signal.id, reason: 'keyword_or_non_fact_not_citable' });
     }
     classified.push(entry);
   }
@@ -488,12 +490,14 @@ export function buildCandidates(input: BuildInput): BuildResult {
         problemHypothesis,
         rootCauseHypotheses: catalog.likelyCauses.slice(0, 3),
         impactHypotheses: catalog.impacts.slice(0, 3),
-        whyNow: buildWhyNow(group.citable, now),
+        // Red team T7: no auto 'why now = signal age' sentence; Casey writes why now.
+        whyNow: null,
         falsificationQuestions: [...FALSIFICATION_QUESTIONS[group.family]],
         whatANoMeans: WHAT_A_NO_MEANS[group.family],
         signalIds,
         primarySignalId: group.citable[0].signal.id,
-        confidence: scoreConfidence(group.members),
+        // Red team T7: no auto confidence number (the column is required; 0 = unscored).
+        confidence: 0,
         expiresAt: expiresAtFor(toLinkedSignals(group.members), now),
         provenance: { builder: BUILDER_ID, familyHits },
       });

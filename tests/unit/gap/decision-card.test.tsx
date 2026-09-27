@@ -85,7 +85,8 @@ describe('<DecisionCard>', () => {
     const hypothesis = screen.getByTestId('hypothesis-line');
     expect(hypothesis).toHaveTextContent('hidden capacity');
     expect(hypothesis).toHaveTextContent('approved');
-    expect(hypothesis).toHaveTextContent('confidence 62%');
+    // Red team T7: no auto confidence number is shown.
+    expect(hypothesis).not.toHaveTextContent(/confidence \d+%/);
   });
 
   it('falls back to the email when the persona has no display name', () => {

@@ -21,6 +21,7 @@
  * A person who does not belong to the run's account is skipped, never proposed.
  */
 import { proposeHypothesis } from '../hypothesis/service';
+import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -65,22 +66,25 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   if (status.outcome === 'conflicting_evidence') return { ok: false, reason: 'conflicting_evidence' };
 
   const records: Array<{ id: string }> = await prisma.evidenceRecord.findMany({ where: { research_run_id: run.id }, select: { id: true } });
-  const signals: Array<{ id: string; title: string; evidence_text: string | null; observed_at: Date; freshness_expires_at: Date | null }> = records.length
+  const signals: Array<GateSignal & { id: string; title: string; evidence_text: string | null; observed_at: Date; freshness_expires_at: Date | null }> = records.length
     ? await prisma.prospectingSignal.findMany({
         where: { source_kind: 'evidence_record', source_id: { in: records.map((r) => r.id) }, account_name: run.account_name },
-        select: { id: true, title: true, evidence_text: true, observed_at: true, freshness_expires_at: true },
+        select: { ...GATE_SIGNAL_SELECT, title: true, freshness_expires_at: true },
         orderBy: { observed_at: 'desc' },
       })
     : [];
   const fresh = signals.filter((s) => !s.freshness_expires_at || s.freshness_expires_at.getTime() > input.now.getTime());
-  const quotable = fresh.filter((s) => s.evidence_text && s.evidence_text.trim().length > 0).slice(0, 2);
-  if (quotable.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
+  if (fresh.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
+  // Red team T6/T7: the observation is built only from evidence that passes
+  // the SAME gate approval applies. A verified quote that states no network
+  // change (a risk factor, a liquidity paragraph) is not a fact to open with.
+  const quotable = fresh.filter((s) => outreachFactRefusal(s, run.account_name) === null).slice(0, 2);
+  if (quotable.length === 0) return { ok: false, reason: 'no_outreach_fact' };
 
   const base = status.hypothesisId
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: status.hypothesisId } })
     : null;
   const observation = quotable.map((s) => citedQuote(s.title, s.evidence_text!, s.id)).join(' ');
-  const newest = quotable[0].observed_at.toISOString().slice(0, 10);
   const problemHypothesis =
     base?.problem_hypothesis ??
     'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.';
@@ -107,10 +111,12 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
       problemHypothesis,
       rootCauseHypotheses: narrative.rootCauses,
       impactHypotheses: narrative.impacts,
-      whyNow: `Public source dated ${newest}.`,
+      // Red team T7: no auto "why now = source age" sentence and no auto
+      // confidence number. Why now is Casey's to write; confidence is unscored (0).
+      whyNow: null,
       falsificationQuestions,
       whatANoMeans: narrative.whatANoMeans,
-      confidence: Math.min(Number(base?.confidence ?? 40), 60),
+      confidence: 0,
       signalIds: quotable.map((s) => s.id),
       primarySignalId: quotable[0].id,
       sourceRef,

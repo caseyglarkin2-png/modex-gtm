@@ -15,6 +15,7 @@
 
 import type { ReactNode } from 'react';
 import { extractCitationIds, splitSentences, stripCitations } from '@/lib/gap/hypothesis/observation';
+import { humanWhyNow } from '@/lib/gap/ui/format';
 
 export interface FactSignal {
   id: string;
@@ -102,7 +103,8 @@ export interface HypothesisBlockProps {
   whyNow: string | null | undefined;
   falsificationQuestions: readonly string[];
   whatANoMeans: string | null | undefined;
-  confidence: number;
+  /** Accepted for compatibility; not displayed (red team T7: no auto confidence number). */
+  confidence?: number;
 }
 
 /**
@@ -140,7 +142,6 @@ export function HypothesisBlock({
   whyNow,
   falsificationQuestions,
   whatANoMeans,
-  confidence,
 }: HypothesisBlockProps) {
   return (
     <section
@@ -150,7 +151,6 @@ export function HypothesisBlock({
     >
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="text-xs font-bold tracking-[0.2em] text-amber-700 dark:text-amber-400">HYPOTHESIS</h3>
-        <span className="text-xs text-[var(--muted-foreground)]">confidence {confidence}%</span>
       </div>
       <Caption>Seller inference, unproven</Caption>
       <p className="mt-3 italic leading-6">{problemHypothesis}</p>
@@ -162,8 +162,8 @@ export function HypothesisBlock({
         <BulletList items={impactHypotheses} empty="No impact proposed" />
       </SubSection>
       <SubSection title="Why now" kind="fact-derived">
-        {whyNow && whyNow.trim().length > 0 ? (
-          <p>{whyNow}</p>
+        {humanWhyNow(whyNow) ? (
+          <p>{humanWhyNow(whyNow)}</p>
         ) : (
           <p className="italic text-[var(--muted-foreground)]">No trigger named</p>
         )}
