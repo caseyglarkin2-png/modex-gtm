@@ -134,7 +134,7 @@ const HIDDEN_CAPACITY: SeedStepCopy[] = [
     subject: 'Doors versus spots',
     paragraphs: [
       '{{observation}}',
-      'When volume moves like that, the yards usually become the constraint before the doors do: a tractor hunting for the right trailer while a door waits. That is a pattern, not something I know about {{account}}.',
+      'When volume moves like that, the yards usually become the constraint before the doors do: a tractor hunting for the right trailer while a door waits. That might not be true at {{account}}.',
       'Is that showing up for your team, or are the yards keeping pace?',
     ],
     askType: 'question',
@@ -169,11 +169,11 @@ const AUTOMATION_READINESS: SeedStepCopy[] = [
 
 const NEW_SITES_ACQUISITIONS: SeedStepCopy[] = [
   {
-    subject: 'The new site',
+    subject: 'The new sites',
     paragraphs: [
       '{{observation}}',
-      'A new or acquired site usually brings its own habits at the gate and in the yards, and they tend to stay until someone decides how the yards should run. That is a pattern, not something I know about {{account}}.',
-      'Has your team settled how the new site will run its yards, or is that still open?',
+      'New or acquired sites usually bring their own habits at the gate and in the yards, and they tend to stay until someone decides how the yards should run. That might not be true at {{account}}.',
+      'Has your team settled how the new sites will run their yards, or is that still open?',
     ],
     askType: 'question',
     requiredEvidenceTypes: ['acquisition'],

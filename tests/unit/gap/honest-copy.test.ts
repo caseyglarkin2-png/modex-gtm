@@ -9,13 +9,13 @@
 import { describe, expect, it } from 'vitest';
 import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
 import { renderStepCopy } from '@/lib/gap/sequence/render';
-import { citedQuote } from '@/lib/gap/research/propose';
+import { citedQuote, sourceLabel } from '@/lib/gap/research/propose';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
 import { outreachEvidence, sendableEvidence } from '@/lib/gap/research/evidence-gate';
 
 const GIANT_EAGLE =
   'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).';
-const OBSERVATION = citedQuote('KROGER CO 10-Q (filed 2026-09-18)', GIANT_EAGLE, 'sig-ge');
+const OBSERVATION = citedQuote('KROGER CO 10-Q (filed 2026-09-18)', GIANT_EAGLE, 'sig-ge', 'Kroger');
 
 const FORBIDDEN = [/\bmentions:/i, /\b(Fontana|Columbus|Bluewater|Reno)\b/, /\bcost\b/i, /\bhow many\b/i, /\bmy guess is the doors\b/i, /Signals observed/];
 
@@ -25,15 +25,15 @@ describe('T7 first touch (verified fact -> hypothesis as a question)', () => {
     const step = fam.steps.steps[0].templates!;
     const r = renderStepCopy({ subject: step.subjectTemplate ?? '', body: step.bodyTemplate ?? '' }, { observation: OBSERVATION, firstName: 'Joey', account: 'Kroger' } as never);
     expect(r.unrendered).toBeNull();
-    expect(r.queued.subject).toBe('The new site');
+    expect(r.queued.subject).toBe('The new sites');
     expect(r.queued.body).toBe(
       [
         'Hi Joey,',
-        'KROGER CO 10-Q (filed 2026-09-18): "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”)".',
+        `From Kroger's 10-Q filed September 18: "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”)".`,
         '',
-        'A new or acquired site usually brings its own habits at the gate and in the yards, and they tend to stay until someone decides how the yards should run. That is a pattern, not something I know about Kroger.',
+        'New or acquired sites usually bring their own habits at the gate and in the yards, and they tend to stay until someone decides how the yards should run. That might not be true at Kroger.',
         '',
-        'Has your team settled how the new site will run its yards, or is that still open?',
+        'Has your team settled how the new sites will run their yards, or is that still open?',
         '',
         'Casey Larkin, YardFlow by FreightRoll',
       ].join('\n'),
@@ -46,7 +46,7 @@ describe('T7 first touch (verified fact -> hypothesis as a question)', () => {
       const r = renderStepCopy({ subject: step.subjectTemplate ?? '', body: step.bodyTemplate ?? '' }, { observation: OBSERVATION, firstName: 'Joey', account: 'Kroger' } as never);
       const paragraphs = r.queued.body.split('\n\n');
       expect(paragraphs[0], fam.key).toContain('Giant Eagle');
-      expect(r.queued.body, fam.key).toMatch(/(not something I know about Kroger|might not be true at Kroger)/);
+      expect(r.queued.body, fam.key).toMatch(/might not be true at Kroger/);
       expect(paragraphs[paragraphs.length - 2].trim().endsWith('?'), fam.key).toBe(true);
       for (const f of FORBIDDEN) expect(r.queued.body, `${fam.key} ${f}`).not.toMatch(f);
     }
@@ -82,7 +82,7 @@ describe('T7 call opener (real fact + hypothesis as a question; impact only afte
       problemHypothesis: 'unused by the opener',
       diagnosticQuestion: 'Does the Giant Eagle network run its own gate process today?',
     });
-    const fact = 'KROGER CO 10-Q (filed 2026-09-18): "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”)".';
+    const fact = `From Kroger's 10-Q filed September 18: "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”)".`;
     expect(pack.opener).toBe(`Joey, Casey with YardFlow. You weren't expecting me, so tell me if this is off. ${fact} When that happens, the yards are often the part that has to catch up. Is that true at Kroger, or am I off?`);
     expect(pack.diagnostic1).toBe('Does the Giant Eagle network run its own gate process today?');
     expect(pack.impactIfAcknowledged).toBe('If they said it is real: when it happens, what does it cost you, in hours or in trucks waiting?');
@@ -105,5 +105,32 @@ describe('Release C review SF1: sendableEvidence', () => {
     expect(sendableEvidence('Giant Eagle, uncited.', [fact], 'Kroger')).toMatchObject({ tier: 'INSUFFICIENT', nonFactCitations: [] });
     expect(sendableEvidence(null, [fact], 'Kroger').tier).toBe('INSUFFICIENT');
     expect(sendableEvidence('Capex [S:k].', [keyword], 'Kroger').tier).toBe('INSUFFICIENT');
+  });
+});
+
+describe('Release C review SF3/SF4: call questions and source labels', () => {
+  const base = { firstName: 'Joey', senderFirstName: 'Casey', accountName: 'Kroger', observationPlain: 'A fact.', problemHypothesis: 'p' };
+
+  it.each([
+    'What does it cost you when a trailer waits?',
+    'How many trailers wait on a typical day?',
+    'How long does a driver wait at the gate?',
+    'Roughly what percent of loads are late?',
+    'Is it more than $10k a month?',
+  ])('a quantifying diagnostic (%s) is never the current-state question', (q) => {
+    expect(buildCallPack({ ...base, diagnosticQuestion: q }).diagnostic1).toBe('How does that work at Kroger today?');
+  });
+
+  it('a current-state diagnostic is kept', () => {
+    expect(buildCallPack({ ...base, diagnosticQuestion: 'Do drivers check in at a guard shack?' }).diagnostic1).toBe('Do drivers check in at a guard shack?');
+  });
+
+  it('a filing title reads the way a person would say it; any other title is kept', () => {
+    expect(sourceLabel('KROGER CO 10-Q (filed 2026-09-18)')).toBe("From Kroger's 10-Q filed September 18");
+    expect(sourceLabel('PEPSICO INC 10-K (2026-02-03)', 'PepsiCo')).toBe("From PepsiCo's 10-K filed February 3");
+    expect(sourceLabel('THE HERSHEY CO 8-K', "Hershey's")).toBe("From Hershey's 8-K");
+    expect(sourceLabel('UNITED STATES STEEL CORP 10-Q')).toBe("From United States Steel's 10-Q");
+    expect(sourceLabel('GENERAL MILLS INC 10-Q')).toBe("From General Mills' 10-Q");
+    expect(sourceLabel('Acme opens Ohio DC (press release)')).toBe('Acme opens Ohio DC (press release)');
   });
 });

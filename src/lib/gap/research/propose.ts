@@ -29,10 +29,39 @@ import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evid
  * a citation token placed right after each such period keeps the quote's
  * words intact (the renderer strips the tokens) and every fragment cited.
  */
-export function citedQuote(title: string, excerpt: string, signalId: string): string {
+export function citedQuote(title: string, excerpt: string, signalId: string, accountName?: string | null): string {
   const token = `[S:${signalId}]`;
   const quote = excerpt.trim().replace(/[.!?]+$/, '').replace(/([.!?])(\s)/g, `$1${token}$2`);
-  return `${title}: "${quote}" ${token}.`;
+  return `${sourceLabel(title, accountName)}: "${quote}" ${token}.`;
+}
+
+const FILING_FORM = /\b(10-Q|10-K|8-K|20-F|6-K|S-1|S-4|DEF 14A)\b/;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const CORPORATE_SUFFIX = /[\s,]+(co|corp|corporation|inc|incorporated|company|ltd|llc|plc|l\.?p)\.?$/i;
+
+function issuerName(raw: string): string {
+  const name = raw.trim().replace(CORPORATE_SUFFIX, '').replace(CORPORATE_SUFFIX, '').trim();
+  // EDGAR shouts company names ("KROGER CO"); a person would write "Kroger".
+  return name === name.toUpperCase() ? name.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : name;
+}
+
+/**
+ * Release C review SF4: an EDGAR-style title ("KROGER CO 10-Q (filed
+ * 2026-09-18)") reads like a scraper. A filing is named the way a person
+ * would say it, "From Kroger's 10-Q filed September 18"; any other title is
+ * kept as it is.
+ */
+export function sourceLabel(title: string, accountName?: string | null): string {
+  const t = title.trim();
+  const form = FILING_FORM.exec(t);
+  if (!form) return t;
+  const issuer = (accountName ?? '').trim() || issuerName(t.slice(0, form.index));
+  const possessive = /['’]s$/i.test(issuer) ? issuer : `${issuer}${/s$/i.test(issuer) ? "'" : "'s"}`;
+  const owner = issuer ? `${possessive} ` : 'the ';
+  const date = /(\d{4})-(\d{2})-(\d{2})/.exec(t);
+  const month = date ? MONTHS[Number(date[2]) - 1] : undefined;
+  const when = date && month ? ` filed ${month} ${Number(date[3])}` : '';
+  return `From ${owner}${form[1]}${when}`;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,7 +113,7 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   const base = status.hypothesisId
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: status.hypothesisId } })
     : null;
-  const observation = quotable.map((s) => citedQuote(s.title, s.evidence_text!, s.id)).join(' ');
+  const observation = quotable.map((s) => citedQuote(s.title, s.evidence_text!, s.id, run.account_name)).join(' ');
   const problemHypothesis =
     base?.problem_hypothesis ??
     'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.';

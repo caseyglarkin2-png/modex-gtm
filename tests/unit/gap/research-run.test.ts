@@ -133,7 +133,7 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(p).toMatchObject({ ok: true, existing: false });
     const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
     expect(h.status).toBe('draft');
-    expect(h.observation).toBe(`KROGER CO 10-Q (filed 2026-09-18): "${FACT.replace(/\.$/, '')}" [S:${run.facts[0].signalId}].`);
+    expect(h.observation).toBe(`From Kroger's 10-Q filed September 18: "${FACT.replace(/\.$/, '')}" [S:${run.facts[0].signalId}].`);
     expect(h.primary_persona_id).toBe(1886);
     expect(h.problem_hypothesis).toContain('My guess is');
     expect(t.events.map((e) => e.to_status)).toEqual(['draft']);

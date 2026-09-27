@@ -43,11 +43,18 @@ export function stripObservationCitations(observation: string): string {
   return observation.replace(/\s*\[S:[A-Za-z0-9_-]+\]/g, '').trim();
 }
 
+/** A question that asks for a cost, a count or a size: the impact question, never the current-state one. */
+export const QUANTIFYING = /\b(cost|costs|costing|spend|how many|how much|how long|how often|dollars?|hours?|minutes?|percent|per (day|week|month|year))\b|[$%]/i;
+
 export function buildCallPack(input: CallPackInput): CallPack {
   const fact = input.observationPlain.trim();
   const hypothesisQuestion = `When that happens, the yards are often the part that has to catch up. Is that true at ${input.accountName}, or am I off?`;
   const opener = `${input.firstName}, ${input.senderFirstName} with YardFlow. You weren't expecting me, so tell me if this is off. ${fact} ${hypothesisQuestion}`;
-  const diagnostic1 = input.diagnosticQuestion ?? `How does that work at ${input.accountName} today?`;
+  // Release C review SF3: the current-state question asks how it works today.
+  // A cost or quantification question is the impact question, which waits
+  // until the buyer has said the problem is real.
+  const diagnostic = input.diagnosticQuestion?.trim();
+  const diagnostic1 = diagnostic && !QUANTIFYING.test(diagnostic) ? diagnostic : `How does that work at ${input.accountName} today?`;
   const impactIfAcknowledged = `If they said it is real: when it happens, what does it cost you, in hours or in trucks waiting?`;
   const voicemail = `${input.firstName}, ${input.senderFirstName} with YardFlow. ${fact} I have one question about how the yards are handling it, not a pitch. Call me back if it is worth two minutes.`;
   return { opener, diagnostic1, impactIfAcknowledged, voicemail };

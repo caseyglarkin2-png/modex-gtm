@@ -353,10 +353,10 @@ function secondaryFamilies(primary: ProblemFamily, hits: Record<string, number>)
  * formatter research uses, research/propose.ts citedQuote), never a signal
  * title. The buyer reads a fact, not "10-Q mentions: <keyword>".
  */
-function buildObservation(citable: ClassifiedSignal[]): string {
+function buildObservation(citable: ClassifiedSignal[], accountName: string): string {
   return citable
     .slice(0, OBSERVATION_MAX_SIGNALS)
-    .map((member) => citedQuote(sentenceSafe(clip(member.title, TITLE_CLIP)), member.signal.evidenceText ?? '', member.signal.id))
+    .map((member) => citedQuote(sentenceSafe(clip(member.title, TITLE_CLIP)), member.signal.evidenceText ?? '', member.signal.id, accountName))
     .join(' ');
 }
 
@@ -464,7 +464,7 @@ export function buildCandidates(input: BuildInput): BuildResult {
       const signalIds = group.members.map((member) => member.signal.id);
 
       // 5: observation from verbatim titles, validated against the linked ids.
-      const observation = buildObservation(group.citable);
+      const observation = buildObservation(group.citable, accountName);
       const validation = validateObservation(observation, signalIds);
       if (!validation.ok) {
         skipped.push({ personaId: persona.id, signalId: group.citable[0].signal.id, reason: 'observation_invalid' });
