@@ -26,10 +26,21 @@ export interface GateResult {
 }
 
 export interface GateInputs {
-  /** G1: shadow routing-agreement rate for enroll_gap_sequence, decision count, weeks of data. */
+  /**
+   * G1: routing-agreement rate for enroll_gap_sequence (execution-verified,
+   * routing/agreement.ts), decision count, weeks of data.
+   */
   shadowAgreementRate: number;
   shadowDecisionCount: number;
   shadowWeeksOfData: number;
+  /**
+   * G1 (red team T10): seller conformity is not sales quality. Agreement alone
+   * never earns G1; it also needs real execution and its outcome: people
+   * actually sent to (learning/execution.ts), and the LOWER 95% Wilson bound
+   * of reply per person sent to.
+   */
+  peopleSentTo: number;
+  replyPerSendLowerBound: number;
   /** G2: post-hoc reject-class violations found in the audit sample, and the sample size. */
   compilerRejectViolations: number;
   compilerAuditSampleSize: number;
@@ -56,6 +67,9 @@ export interface GateInputs {
 const G1_MIN_DECISIONS = 200;
 const G1_MIN_WEEKS = 4;
 const G1_MIN_AGREEMENT = 0.8;
+/** Session-chosen floors (red team T10), for the owner to confirm: enough real sends, and replies clearly above zero. */
+const G1_MIN_PEOPLE_SENT = 100;
+const G1_MIN_REPLY_LOWER_BOUND = 0.02;
 const G2_MAX_SAMPLE_VIOLATIONS = 0;
 const G2_MIN_SAMPLE = 100;
 const G3_MAX_UNKNOWN_7D = 0;
@@ -79,12 +93,14 @@ function evaluateG0(inputs: GateInputs): GateResult {
 }
 
 function evaluateG1(inputs: GateInputs): GateResult {
-  const passed =
+  const conforms =
     inputs.shadowDecisionCount >= G1_MIN_DECISIONS && inputs.shadowWeeksOfData >= G1_MIN_WEEKS && inputs.shadowAgreementRate >= G1_MIN_AGREEMENT;
+  // Red team T10: conformity is necessary, never sufficient.
+  const outcome = inputs.peopleSentTo >= G1_MIN_PEOPLE_SENT && inputs.replyPerSendLowerBound >= G1_MIN_REPLY_LOWER_BOUND;
   return {
     gate: 'G1',
-    passed,
-    detail: `n=${inputs.shadowDecisionCount} (need ${G1_MIN_DECISIONS}), weeks=${inputs.shadowWeeksOfData} (need ${G1_MIN_WEEKS}), agreement=${(inputs.shadowAgreementRate * 100).toFixed(1)}% (need ${(G1_MIN_AGREEMENT * 100).toFixed(0)}%)`,
+    passed: conforms && outcome,
+    detail: `n=${inputs.shadowDecisionCount} (need ${G1_MIN_DECISIONS}), weeks=${inputs.shadowWeeksOfData} (need ${G1_MIN_WEEKS}), agreement=${(inputs.shadowAgreementRate * 100).toFixed(1)}% (need ${(G1_MIN_AGREEMENT * 100).toFixed(0)}%), people sent to=${inputs.peopleSentTo} (need ${G1_MIN_PEOPLE_SENT}), reply/send lower bound=${(inputs.replyPerSendLowerBound * 100).toFixed(1)}% (need ${(G1_MIN_REPLY_LOWER_BOUND * 100).toFixed(0)}%)`,
   };
 }
 

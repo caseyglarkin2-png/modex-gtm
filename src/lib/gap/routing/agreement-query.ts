@@ -3,14 +3,27 @@
  * ./agreement.ts. Reads every RoutingDecision (comparable or not; the pure
  * layer decides what counts) and hands the shape `computeAgreement` needs.
  *
+ * Red team T10 (2026-09-27): each decision also carries
+ *   executedEmail  the send ledger (learning/execution.ts loadSendRecords, the
+ *                  same rows person-level send history reads) holds a send for
+ *                  this card, or for this person after this card and before
+ *                  their next card
+ *   open           this is the person's newest card and it is younger than
+ *                  AGREEMENT_OPEN_DAYS; only an open card with no action is
+ *                  left out of the rates (pending)
+ *
  * House convention for DB glue is `prisma: any`.
  */
 
 import { HUMAN_ACTIONS, ROUTING_ACTIONS, type HumanAction, type RoutingAction } from '../taxonomy';
 import { computeAgreement, type AgreementDecision, type AgreementReport } from './agreement';
+import { loadSendRecords } from '../learning/execution';
 
 const ROUTING_ACTION_SET = new Set<string>(ROUTING_ACTIONS);
 const HUMAN_ACTION_SET = new Set<string>(HUMAN_ACTIONS);
+
+/** A card nobody acted on stays pending this long, then counts as unacted. */
+export const AGREEMENT_OPEN_DAYS = 7;
 
 function isRoutingAction(v: unknown): v is RoutingAction {
   return typeof v === 'string' && ROUTING_ACTION_SET.has(v);
@@ -22,42 +35,66 @@ function isHumanAction(v: unknown): v is HumanAction {
 
 export interface AgreementFilters {
   runId?: string | null;
+  now?: Date;
+}
+
+interface DecisionRow {
+  id: string;
+  action: string;
+  rule_id: string;
+  human_action: string | null;
+  lane: string;
+  persona_id: number | null;
+  created_at: Date;
 }
 
 /**
  * A row whose `action` is not a known RoutingAction, or whose `human_action`
- * is set but not a known HumanAction, is dropped rather than mis-tallied:
- * both columns are free `String` at the DB layer (HUMAN_ACTIONS is enforced
- * in application code, not a Postgres CHECK), so a stale or hand-edited row
- * fails closed here instead of silently joining the wrong bucket.
+ * is set but not a known HumanAction, is dropped rather than mis-tallied
+ * (both columns are free `String` at the DB layer). A `lane: 'blocked'` row
+ * is a system safety refusal, never a recommendation, and is excluded.
  *
- * A `lane: 'blocked'` row (dogfood fix, 2026-09-25) is a system safety
- * refusal (suppressed, suppression_unknown), never a real operator
- * recommendation -- it is excluded entirely, even if it somehow carries a
- * `human_action` (the UI no longer offers one for a blocked card, but this
- * query does not trust the UI to have been the only writer). Silence
- * (`humanAction: null` on a real, non-blocked decision) already only
- * lowers `totalDecisions`, never the comparable denominator; this drops the
- * row before it reaches `totalDecisions` at all.
+ * Supersession and the "next card" bound are computed over EVERY decision
+ * of the person, not only the filtered run, so a run filter can never make a
+ * superseded card look open.
  */
 export async function loadAgreementReport(prisma: any, filters: AgreementFilters = {}): Promise<AgreementReport> {
-  const where: Record<string, unknown> = {};
-  if (filters.runId) where.run_id = filters.runId;
+  const now = filters.now ?? new Date();
+  const select = { id: true, action: true, rule_id: true, human_action: true, lane: true, persona_id: true, created_at: true };
+  const scoped: DecisionRow[] = await prisma.routingDecision.findMany({ where: filters.runId ? { run_id: filters.runId } : {}, select });
+  const all: DecisionRow[] = filters.runId ? await prisma.routingDecision.findMany({ select }) : scoped;
+  const sends = await loadSendRecords(prisma);
 
-  const rows: Array<{ id: string; action: string; rule_id: string; human_action: string | null; lane: string }> =
-    await prisma.routingDecision.findMany({
-      where,
-      select: { id: true, action: true, rule_id: true, human_action: true, lane: true },
-    });
+  // Every card per person, oldest first: bounds "after this card, before the next".
+  const cardsByPersona = new Map<number, DecisionRow[]>();
+  for (const d of all) {
+    if (d.persona_id === null || d.lane === 'blocked') continue;
+    cardsByPersona.set(d.persona_id, [...(cardsByPersona.get(d.persona_id) ?? []), d]);
+  }
+  for (const list of cardsByPersona.values()) list.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
 
-  const decisions: AgreementDecision[] = rows
+  const sentDecisionIds = new Set(sends.map((s) => s.decisionId));
+  const sendTimesByPersona = new Map<number, number[]>();
+  for (const s of sends) if (s.personaId !== null) sendTimesByPersona.set(s.personaId, [...(sendTimesByPersona.get(s.personaId) ?? []), s.sentAt.getTime()]);
+
+  const openCutoff = now.getTime() - AGREEMENT_OPEN_DAYS * 86_400_000;
+  const decisions: AgreementDecision[] = scoped
     .filter((r) => isRoutingAction(r.action) && r.lane !== 'blocked')
-    .map((r) => ({
-      id: r.id,
-      action: r.action as RoutingAction,
-      ruleId: r.rule_id,
-      humanAction: isHumanAction(r.human_action) ? r.human_action : null,
-    }));
+    .map((r) => {
+      const created = new Date(r.created_at).getTime();
+      const cards = r.persona_id !== null ? cardsByPersona.get(r.persona_id) ?? [] : [];
+      const next = cards.find((c) => new Date(c.created_at).getTime() > created);
+      const nextAt = next ? new Date(next.created_at).getTime() : Infinity;
+      const personSent = r.persona_id !== null && (sendTimesByPersona.get(r.persona_id) ?? []).some((t) => t >= created && t < nextAt);
+      return {
+        id: r.id,
+        action: r.action as RoutingAction,
+        ruleId: r.rule_id,
+        humanAction: isHumanAction(r.human_action) ? r.human_action : null,
+        executedEmail: sentDecisionIds.has(r.id) || personSent,
+        open: !next && created >= openCutoff,
+      };
+    });
 
   return computeAgreement(decisions);
 }

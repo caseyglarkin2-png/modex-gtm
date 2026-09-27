@@ -7,6 +7,8 @@ function earnedInputs(): GateInputs {
     shadowAgreementRate: 0.85,
     shadowDecisionCount: 250,
     shadowWeeksOfData: 5,
+    peopleSentTo: 150,
+    replyPerSendLowerBound: 0.05,
     compilerRejectViolations: 0,
     compilerAuditSampleSize: 100,
     suppressionUnknownVerdicts7d: 0,
@@ -132,5 +134,24 @@ describe('allGatesEarned', () => {
   it('is false if even one gate among seven fails', () => {
     const results = evaluateGates({ ...earnedInputs(), suppressionDncViolationsEver: 1 });
     expect(allGatesEarned(results)).toBe(false);
+  });
+});
+
+describe('red team T10: G1 never unlocks on conformity alone', () => {
+  const g1 = (over: Partial<GateInputs>) => evaluateGates({ ...earnedInputs(), ...over }).find((r) => r.gate === 'G1')!;
+
+  it('PROOF: 100% agreement over 1000 decisions and many weeks, with no real sends, does NOT earn G1', () => {
+    const r = g1({ shadowAgreementRate: 1, shadowDecisionCount: 1000, shadowWeeksOfData: 20, peopleSentTo: 0, replyPerSendLowerBound: 0 });
+    expect(r.passed).toBe(false);
+    expect(r.detail).toContain('people sent to=0 (need 100)');
+  });
+
+  it('perfect conformity with sends that draw no replies does not earn G1', () => {
+    expect(g1({ shadowAgreementRate: 1, peopleSentTo: 500, replyPerSendLowerBound: 0 }).passed).toBe(false);
+  });
+
+  it('real sends with replies still need the agreement bar', () => {
+    expect(g1({ shadowAgreementRate: 0.5 }).passed).toBe(false);
+    expect(g1({}).passed).toBe(true);
   });
 });
