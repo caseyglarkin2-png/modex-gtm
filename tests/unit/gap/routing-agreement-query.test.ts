@@ -37,13 +37,12 @@ function sent(decisionId: string, at: Date, personaId = 7) {
 }
 
 describe('loadAgreementReport', () => {
-  it('scopes to one run when runId is given, and reads every decision otherwise', async () => {
-    const prisma = makePrisma([row()]);
-    await loadAgreementReport(prisma, { runId: 'run_1', now: NOW });
-    expect(prisma.routingDecision.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: { run_id: 'run_1' } }));
-    const prisma2 = makePrisma([row()]);
-    await loadAgreementReport(prisma2, { now: NOW });
-    expect(prisma2.routingDecision.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: {} }));
+  it('reads every card (the whole history decides episodes and credit) and REPORTS only the run asked for', async () => {
+    const rows = [row({ id: 'r1', persona_id: 7 }), row({ id: 'r2', run_id: 'run_2', persona_id: 8 })];
+    const prisma = makePrisma(rows);
+    const r = await loadAgreementReport(prisma, { runId: 'run_1', now: NOW });
+    expect(prisma.routingDecision.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: {} }));
+    expect(r.totalDecisions).toBe(1);
   });
 
   it('PROOF: "emailed" with a ledger send on THAT card agrees; the same click with no send does not', async () => {
@@ -72,10 +71,10 @@ describe('loadAgreementReport', () => {
     expect(test.overall).toMatchObject({ agreements: 0, unverified: 1, n: 1 });
   });
 
-  it('PROOF: a superseded card with no action is unacted (counted); the newest fresh card is pending', async () => {
+  it('PROOF: a superseded recommendation with no action is unacted (counted); the newest fresh one is pending', async () => {
     const rows = [
       row({ id: 'old', action: 'enroll_gap_sequence', human_action: null, created_at: daysAgo(3) }),
-      row({ id: 'new', action: 'enroll_gap_sequence', human_action: null, created_at: daysAgo(1) }),
+      row({ id: 'new', action: 'call_now', human_action: null, created_at: daysAgo(1) }),
     ];
     const r = await loadAgreementReport(makePrisma(rows), { now: NOW });
     expect(r.overall).toMatchObject({ agreements: 0, unacted: 1, n: 1 });
@@ -89,7 +88,7 @@ describe('loadAgreementReport', () => {
   });
 
   it('a run filter never makes a superseded card look open: supersession reads every card of the person', async () => {
-    const rows = [row({ id: 'old', run_id: 'run_1', human_action: null, created_at: daysAgo(3) }), row({ id: 'new', run_id: 'run_2', human_action: null, created_at: daysAgo(1) })];
+    const rows = [row({ id: 'old', run_id: 'run_1', action: 'enroll_gap_sequence', human_action: null, created_at: daysAgo(3) }), row({ id: 'new', run_id: 'run_2', human_action: null, created_at: daysAgo(1) })];
     const r = await loadAgreementReport(makePrisma(rows), { runId: 'run_1', now: NOW });
     expect(r.overall).toMatchObject({ unacted: 1, n: 1 });
     expect(r.pending).toBe(0);
@@ -116,5 +115,35 @@ describe('loadAgreementReport', () => {
     );
     expect(report.totalDecisions).toBe(1);
     expect(report.overall).toMatchObject({ agreements: 1, disagreements: 0, n: 1 });
+  });
+
+  it('Release D review S5: re-running the router cannot move the rate: identical consecutive cards are ONE decision', async () => {
+    const daily = [0, 1, 2, 3, 4, 5, 6].map((d) => row({ id: `c${d}`, action: 'nurture', human_action: d === 6 ? 'deferred' : null, created_at: daysAgo(10 - d) }));
+    const weekly = [daily[6]];
+    const a = await loadAgreementReport(makePrisma(daily), { now: NOW });
+    const b = await loadAgreementReport(makePrisma(weekly), { now: NOW });
+    expect(a.overall).toMatchObject({ agreements: 1, n: 1 });
+    expect(b.overall).toMatchObject({ agreements: 1, n: 1 });
+  });
+
+  it('Release D review S5: one send is credited to ONE card (the card it was filed under), never also to a newer card', async () => {
+    const rows = [
+      row({ id: 'old', action: 'enroll_gap_sequence', human_action: 'emailed', created_at: daysAgo(10) }),
+      row({ id: 'new', action: 'one_off_email', human_action: 'emailed', created_at: daysAgo(5) }),
+    ];
+    const r = await loadAgreementReport(makePrisma(rows, [sent('old', daysAgo(2))]), { now: NOW });
+    expect(r.overall).toMatchObject({ agreements: 1, unverified: 1, n: 2 });
+  });
+
+  it('Release D review S7: an enrollment never executes a ONE-OFF email recommendation', async () => {
+    const rows = [row({ action: 'one_off_email', human_action: 'enrolled_by_hand', created_at: daysAgo(2) })];
+    const r = await loadAgreementReport(makePrisma(rows, [], [{ persona_id: 7, enrolled_at: daysAgo(1), is_test: false }]), { now: NOW });
+    expect(r.overall).toMatchObject({ agreements: 0, unverified: 1 });
+  });
+
+  it('Release D review S7: an enrollment whose start date is a sync placeholder is no evidence', async () => {
+    const rows = [row({ action: 'enroll_gap_sequence', human_action: 'enrolled_by_hand', created_at: daysAgo(2) })];
+    const r = await loadAgreementReport(makePrisma(rows, [], [{ persona_id: 7, enrolled_at: daysAgo(1), is_test: false, external_state: { enrolled_at_unknown: true } }]), { now: NOW });
+    expect(r.overall).toMatchObject({ agreements: 0, unverified: 1 });
   });
 });

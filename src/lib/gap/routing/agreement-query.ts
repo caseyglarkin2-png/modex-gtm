@@ -1,18 +1,27 @@
 /**
  * R-B (owner-confirmed finish requirement, 2026-09-24): Prisma glue for
- * ./agreement.ts. Reads every RoutingDecision (comparable or not; the pure
- * layer decides what counts) and hands the shape `computeAgreement` needs.
+ * ./agreement.ts.
  *
- * Red team T10 (2026-09-27): each decision also carries
- *   executedEmail  the send records (learning/execution.ts loadSendRecords:
- *                  the GAP ledger and the modex queue's GAP sends) hold a send
- *                  for this card, or for this person after this card and
- *                  before their next card
- *   executedEnroll a live, non-test GAP enrollment of this person started in
- *                  that same window
- *   open           this is the person's newest card and it is younger than
- *                  AGREEMENT_OPEN_DAYS; only an open card with no action is
- *                  left out of the rates (pending)
+ * Red team T10 (2026-09-27, Release D review S5, S7): agreement is counted
+ * over EPISODES, not cards, and every execution is credited once.
+ *
+ *   episode         consecutive cards for one person with the SAME
+ *                   recommendation collapse into one decision: re-running
+ *                   the router (daily or weekly) cannot move the rate by
+ *                   minting more identical cards. The episode's action is
+ *                   the last human action recorded on any of its cards.
+ *   one credit      each send (learning/execution.ts loadSendRecords: the
+ *                   GAP ledger, one row per Gmail message, and the GAP queue)
+ *                   is credited to exactly one card: the card it was filed
+ *                   under, otherwise the person's newest card at the time it
+ *                   went out. Each enrollment start likewise.
+ *   open            an episode with no action is pending only while it is
+ *                   the person's latest and its newest card is younger than
+ *                   AGREEMENT_OPEN_DAYS; otherwise it is unacted and counted.
+ *
+ * A row whose `action` is not a known RoutingAction is dropped; a
+ * `human_action` that is not a known HumanAction reads as no action. A
+ * `lane: 'blocked'` row is a system safety refusal and is excluded.
  *
  * House convention for DB glue is `prisma: any`.
  */
@@ -42,6 +51,7 @@ export interface AgreementFilters {
 
 interface DecisionRow {
   id: string;
+  run_id?: string;
   action: string;
   rule_id: string;
   human_action: string | null;
@@ -50,55 +60,81 @@ interface DecisionRow {
   created_at: Date;
 }
 
-/**
- * A row whose `action` is not a known RoutingAction, or whose `human_action`
- * is set but not a known HumanAction, is dropped rather than mis-tallied
- * (both columns are free `String` at the DB layer). A `lane: 'blocked'` row
- * is a system safety refusal, never a recommendation, and is excluded.
- *
- * Supersession and the "next card" bound are computed over EVERY decision
- * of the person, not only the filtered run, so a run filter can never make a
- * superseded card look open.
- */
+/** The person's card that owns an event at time t: the newest card created at or before t. */
+function owningCard(cards: readonly DecisionRow[], t: number): DecisionRow | null {
+  let owner: DecisionRow | null = null;
+  for (const c of cards) {
+    if (new Date(c.created_at).getTime() <= t) owner = c;
+    else break;
+  }
+  return owner;
+}
+
 export async function loadAgreementReport(prisma: any, filters: AgreementFilters = {}): Promise<AgreementReport> {
   const now = filters.now ?? new Date();
-  const select = { id: true, action: true, rule_id: true, human_action: true, lane: true, persona_id: true, created_at: true };
-  const scoped: DecisionRow[] = await prisma.routingDecision.findMany({ where: filters.runId ? { run_id: filters.runId } : {}, select });
-  const all: DecisionRow[] = filters.runId ? await prisma.routingDecision.findMany({ select }) : scoped;
+  const select = { id: true, run_id: true, action: true, rule_id: true, human_action: true, lane: true, persona_id: true, created_at: true };
+  // Every card (supersession and crediting read the person's whole history); the run filter scopes what is REPORTED.
+  const rows: DecisionRow[] = await prisma.routingDecision.findMany({ where: {}, select });
+  const all = rows.filter((r) => isRoutingAction(r.action) && r.lane !== 'blocked');
+  const inScope = (r: DecisionRow) => !filters.runId || r.run_id === filters.runId;
   const sends = await loadSendRecords(prisma);
   const enrollStarts = await loadEnrollmentStarts(prisma);
 
-  // Every card per person, oldest first: bounds "after this card, before the next".
   const cardsByPersona = new Map<number, DecisionRow[]>();
+  const byId = new Map<string, DecisionRow>();
   for (const d of all) {
-    if (d.persona_id === null || d.lane === 'blocked') continue;
-    cardsByPersona.set(d.persona_id, [...(cardsByPersona.get(d.persona_id) ?? []), d]);
+    byId.set(d.id, d);
+    if (d.persona_id === null) continue;
+    const list = cardsByPersona.get(d.persona_id);
+    if (list) list.push(d);
+    else cardsByPersona.set(d.persona_id, [d]);
   }
   for (const list of cardsByPersona.values()) list.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
 
-  const sentDecisionIds = new Set(sends.map((s) => s.decisionId));
-  const sendTimesByPersona = new Map<number, number[]>();
-  for (const s of sends) if (s.personaId !== null) sendTimesByPersona.set(s.personaId, [...(sendTimesByPersona.get(s.personaId) ?? []), s.sentAt.getTime()]);
+  // One credit per execution.
+  const emailed = new Set<string>();
+  for (const s of sends) {
+    const filed = byId.get(s.decisionId);
+    const owner = filed ?? (s.personaId !== null ? owningCard(cardsByPersona.get(s.personaId) ?? [], s.sentAt.getTime()) : null);
+    if (owner) emailed.add(owner.id);
+  }
+  const enrolled = new Set<string>();
+  for (const [personaId, starts] of enrollStarts) {
+    for (const t of starts) {
+      const owner = owningCard(cardsByPersona.get(personaId) ?? [], t);
+      if (owner) enrolled.add(owner.id);
+    }
+  }
 
+  // Episodes: consecutive identical recommendations for one person.
+  const decisions: AgreementDecision[] = [];
   const openCutoff = now.getTime() - AGREEMENT_OPEN_DAYS * 86_400_000;
-  const decisions: AgreementDecision[] = scoped
-    .filter((r) => isRoutingAction(r.action) && r.lane !== 'blocked')
-    .map((r) => {
-      const created = new Date(r.created_at).getTime();
-      const cards = r.persona_id !== null ? cardsByPersona.get(r.persona_id) ?? [] : [];
-      const next = cards.find((c) => new Date(c.created_at).getTime() > created);
-      const nextAt = next ? new Date(next.created_at).getTime() : Infinity;
-      const personSent = r.persona_id !== null && (sendTimesByPersona.get(r.persona_id) ?? []).some((t) => t >= created && t < nextAt);
-      return {
-        id: r.id,
-        action: r.action as RoutingAction,
-        ruleId: r.rule_id,
-        humanAction: isHumanAction(r.human_action) ? r.human_action : null,
-        executedEmail: sentDecisionIds.has(r.id) || personSent,
-        executedEnroll: r.persona_id !== null && (enrollStarts.get(r.persona_id) ?? []).some((t) => t >= created && t < nextAt),
-        open: !next && created >= openCutoff,
-      };
+  const emit = (cards: DecisionRow[], isLatest: boolean) => {
+    if (!cards.some(inScope)) return;
+    const last = cards[cards.length - 1];
+    const acted = [...cards].reverse().find((c) => isHumanAction(c.human_action));
+    decisions.push({
+      id: cards[0].id,
+      action: last.action as RoutingAction,
+      ruleId: last.rule_id,
+      humanAction: acted ? (acted.human_action as HumanAction) : null,
+      executedEmail: cards.some((c) => emailed.has(c.id)),
+      executedEnroll: cards.some((c) => enrolled.has(c.id)),
+      open: isLatest && new Date(last.created_at).getTime() >= openCutoff,
     });
+  };
+  for (const cards of cardsByPersona.values()) {
+    let episode: DecisionRow[] = [];
+    for (const c of cards) {
+      if (episode.length && episode[episode.length - 1].action !== c.action) {
+        emit(episode, false);
+        episode = [];
+      }
+      episode.push(c);
+    }
+    if (episode.length) emit(episode, true);
+  }
+  for (const d of all) if (d.persona_id === null) emit([d], true);
 
   return computeAgreement(decisions);
 }

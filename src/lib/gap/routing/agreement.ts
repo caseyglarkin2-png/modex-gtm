@@ -153,8 +153,9 @@ export function verdictOf(d: AgreementDecision): AgreementVerdict {
     return d.open ? 'pending' : 'unacted';
   }
   if (EMAIL_HUMAN_ACTIONS.has(d.humanAction)) {
-    // "emailed" needs a send on record; "enrolled_by_hand" needs the enrollment (or a send).
-    const executed = d.executedEmail || (d.humanAction === 'enrolled_by_hand' && d.executedEnroll);
+    // "emailed" needs a send on record; "enrolled_by_hand" needs a send, or the
+    // enrollment on an ENROLL recommendation (a one-off email needs a send; review S7).
+    const executed = d.executedEmail || (d.humanAction === 'enrolled_by_hand' && d.action === 'enroll_gap_sequence' && d.executedEnroll);
     if (!executed) return 'unverified';
     // A proven email on an email recommendation agrees (enroll and one-off both mean "email this person").
     return EMAIL_ROUTING_ACTIONS.has(d.action) ? 'agree' : 'disagree';

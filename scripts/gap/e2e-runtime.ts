@@ -766,7 +766,7 @@ async function main(): Promise<number> {
     pass('9a canary', `checkCanaryCaps allows the allowlisted account and fails closed for one not on it`);
 
     const gateInputs: GateInputs = {
-      shadowAgreementRate: agreementReport.overall.rate, shadowDecisionCount: agreementReport.overall.n, shadowWeeksOfData: 0, peopleSentTo: 0, replyPerSendLowerBound: 0,
+      shadowAgreementRate: agreementReport.overall.rate, shadowDecisionCount: agreementReport.overall.n, shadowWeeksOfData: 0, peopleSentTo: 0, positiveOutcomeLowerBound: 0, optOutUpperBound: 1,
       compilerRejectViolations: 0, compilerAuditSampleSize: h1CompileIds.length + h2CompileIds.length + h4CompileIds.length,
       suppressionUnknownVerdicts7d: 0, suppressionDncViolationsEver: 0,
       replyClassificationAgreementRate: 1, replyClassificationSampleSize: 1,
