@@ -90,6 +90,8 @@ export const MAILBOX_KINDS = {
   own: 'mailbox.own',
   unrelated: 'mailbox.unrelated',
   quarantined: 'mailbox.quarantined',
+  /** Ops closeout 13A: a quarantined message processed on retry, or read and closed by an operator. */
+  quarantineResolved: 'mailbox.quarantine_resolved',
   error: 'mailbox.error',
 } as const;
 /** Kinds that mean "this message has a verdict". `mailbox.error` is an attempt, not a verdict. */
@@ -336,6 +338,8 @@ export interface MailboxReport {
   /** Provisional verdicts that attributed once the send was recorded. */
   reattributed: number;
   quarantined: number;
+  /** Ops closeout 13A: quarantined messages still unresolved after this run's retry. Non-empty is an error. */
+  unresolvedQuarantine: string[];
   inboundMessagesCreated: number;
   bouncedAddresses: string[];
   /** Any entry marks the cron run failed. */
@@ -465,6 +469,25 @@ async function processMessage(prisma: PrismaLike, m: MailboxMessage, ctx: GapSen
   } else await handleReply(prisma, m, v, now, actor, report, deps.ingest ?? ingestReply);
 }
 
+/** Quarantined messages with no resolution row: the ones a human has not seen processed. */
+async function unresolvedQuarantines(prisma: PrismaLike): Promise<string[]> {
+  const q: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { subject_type: SUBJECT_TYPE, kind: MAILBOX_KINDS.quarantined }, select: { subject_id: true } });
+  const ids = [...new Set(q.map((r) => r.subject_id))];
+  if (ids.length === 0) return [];
+  const done: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { subject_type: SUBJECT_TYPE, kind: MAILBOX_KINDS.quarantineResolved, subject_id: { in: ids } }, select: { subject_id: true } });
+  const resolved = new Set(done.map((r) => r.subject_id));
+  return ids.filter((id) => !resolved.has(id)).sort();
+}
+
+/**
+ * Ops closeout 13A: an operator read a quarantined message in Gmail and acted
+ * on it (or it needs nothing). Only this, or a successful retry, stops it
+ * being reported: the cron stays in error until then.
+ */
+export async function resolveQuarantine(prisma: PrismaLike, gmailMessageId: string, actor: string, note: string): Promise<void> {
+  await audit(prisma, MAILBOX_KINDS.quarantineResolved, actor, gmailMessageId, { by: 'operator', note });
+}
+
 /** Record a failed attempt; true when the message is now quarantined (a verdict). */
 async function recordFailure(prisma: PrismaLike, id: string, message: string, actor: string, report: MailboxReport): Promise<boolean> {
   try {
@@ -523,7 +546,7 @@ export async function pollGapMailbox(prisma: PrismaLike, input: { now: Date; act
   const ctx = await loadGapSendContext(prisma);
   const report: MailboxReport = {
     since, seen: listing.ids.length, fetched: 0, backlog: 0, replies: 0, hardBounces: 0, policyBounces: 0, softBounces: 0, unattributedBounces: 0,
-    autoReplies: 0, unrelated: 0, own: 0, canaries: 0, alreadyHandled: 0, reattributed: 0, quarantined: 0, inboundMessagesCreated: 0,
+    autoReplies: 0, unrelated: 0, own: 0, canaries: 0, alreadyHandled: 0, reattributed: 0, quarantined: 0, unresolvedQuarantine: [], inboundMessagesCreated: 0,
     bouncedAddresses: [], errors: [], watermark: null,
   };
 
@@ -586,6 +609,28 @@ export async function pollGapMailbox(prisma: PrismaLike, input: { now: Date; act
         await recordFailure(prisma, id, message, actor, report);
       }
     }
+  }
+
+  // Ops closeout 13A: a quarantine is never silent. Each run retries the
+  // unresolved ones within the budget; what still fails is reported, so the
+  // cron stays in error until a retry succeeds or an operator resolves it.
+  const quarantined = await unresolvedQuarantines(prisma);
+  for (const id of quarantined) {
+    if (stopped || report.fetched >= budget) {
+      report.unresolvedQuarantine.push(id);
+      continue;
+    }
+    try {
+      const m = await deps.fetch(id);
+      report.fetched += 1;
+      await processMessage(prisma, m, ctx, deps, input.now, actor, report);
+      await audit(prisma, MAILBOX_KINDS.quarantineResolved, actor, id, { by: 'retry' });
+    } catch {
+      report.unresolvedQuarantine.push(id);
+    }
+  }
+  if (report.unresolvedQuarantine.length > 0) {
+    report.errors.push(`${report.unresolvedQuarantine.length} quarantined mailbox message(s) unresolved (read them in Gmail, then resolve): ${report.unresolvedQuarantine.join(', ')}`);
   }
 
   if (newest !== null && newest !== (Number.isFinite(parsed) ? parsed : null)) {
