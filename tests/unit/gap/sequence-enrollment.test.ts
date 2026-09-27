@@ -40,6 +40,20 @@ const CLEAR: SuppressionReader = staticSuppressionReader('clear');
 const OPTS = { suppression: CLEAR };
 
 const NOW = new Date('2026-09-23T15:00:00.000Z');
+/** Red team T6: an outreach fact (verified, dated, quoted, this account, a network change). */
+const VERIFIED_SIGNAL = {
+  id: 'sig_v',
+  title: 'Acme 10-Q',
+  evidence_url: 'https://example.com/10q',
+  external_ok: true,
+  observed_at: new Date('2026-09-20T00:00:00.000Z'),
+  freshness_expires_at: null,
+  source_type: 'public_primary',
+  evidence_text: 'Acme opened a new distribution center in Columbus with 40 dock doors.',
+  source_kind: 'evidence_record',
+  account_name: 'Acme',
+  metadata: { verified: 'excerpt_found_at_source' },
+};
 
 function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
   return impl ? vi.fn<(...args: any[]) => Promise<any>>(impl) : vi.fn<(...args: any[]) => Promise<any>>();
@@ -64,7 +78,7 @@ function makePrisma() {
       findMany: asyncSpy(async () => []),
       updateMany: asyncSpy(async () => ({ count: 1 })),
     },
-    prospectingHypothesis: { findUnique: asyncSpy(async () => ({ status: 'approved' })) },
+    prospectingHypothesis: { findUnique: asyncSpy(async () => ({ status: 'approved', account_name: 'Acme', signals: [{ signal: VERIFIED_SIGNAL }] })) },
     $transaction: vi.fn(async (fn: (client: typeof tx) => Promise<unknown>) => fn(tx)),
     tx,
   };
@@ -207,6 +221,19 @@ describe('enroll refusals, in guard order', () => {
       expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'hypothesis_not_ready' });
       expect(prisma.$transaction).not.toHaveBeenCalled();
     }
+  });
+
+  it.each([
+    ['no linked signal', []],
+    ['a keyword hit', [{ signal: { ...VERIFIED_SIGNAL, evidence_text: null, metadata: null } }]],
+    ['an unverified quote', [{ signal: { ...VERIFIED_SIGNAL, metadata: null } }]],
+    ['an expired fact', [{ signal: { ...VERIFIED_SIGNAL, freshness_expires_at: new Date('2020-01-01T00:00:00.000Z') } }]],
+    ["another account's fact", [{ signal: { ...VERIFIED_SIGNAL, account_name: 'Other Co' } }]],
+  ])('red team T6: evidence_insufficient on a ready hypothesis with %s; nothing written', async (_label, signals) => {
+    const prisma = makePrisma();
+    prisma.prospectingHypothesis.findUnique.mockResolvedValue({ status: 'active', account_name: 'Acme', signals });
+    expect(await enroll(prisma, enrollInput(), OPTS)).toEqual({ ok: false, reason: 'evidence_insufficient' });
+    expect(prisma.$transaction).not.toHaveBeenCalled();
   });
 
   it('hypothesis_not_found when the id does not resolve; no check without a hypothesis', async () => {

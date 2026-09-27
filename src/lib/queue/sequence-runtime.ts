@@ -19,6 +19,7 @@ import { audit, type GapAuditKind } from '../gap/audit';
 import { validateClaimsUsed } from '../gap/claims/validate-claims';
 import { compile, type CompileDeps } from '../gap/compiler/compile';
 import { makeCriticClient, type CriticClient } from '../gap/critic-client';
+import { outreachEvidence } from '../gap/research/evidence-gate';
 
 /** GAP OS (S3-T5): the deterministic idempotency key the schema comment on
  *  DraftQueueItem promises (`owner:to_email:run:step`). Used under the flag
@@ -61,6 +62,8 @@ export interface ScheduleOptions {
 
 interface RunContext {
   hypothesisId: string | null;
+  /** The hypothesis's account, which the T6 evidence gate matches each fact against. */
+  accountName: string;
   observation: string | null;
   problemHypothesis: string;
   problemFamily: string;
@@ -79,6 +82,7 @@ async function loadRunContext(prisma: any, runId: string | null | undefined): Pr
       version: { select: { steps: true } },
       hypothesis: {
         select: {
+          account_name: true,
           observation: true,
           problem_hypothesis: true,
           problem_family: true,
@@ -92,6 +96,7 @@ async function loadRunContext(prisma: any, runId: string | null | undefined): Pr
   const links: Array<{ signal: EvidenceSignalRow | null }> = Array.isArray(h?.signals) ? h.signals : [];
   return {
     hypothesisId: typeof row.hypothesis_id === 'string' ? row.hypothesis_id : null,
+    accountName: typeof h?.account_name === 'string' ? h.account_name : '',
     observation: typeof h?.observation === 'string' ? h.observation : null,
     problemHypothesis: typeof h?.problem_hypothesis === 'string' ? h.problem_hypothesis : '',
     problemFamily: typeof h?.problem_family === 'string' ? h.problem_family : 'unmapped',
@@ -255,6 +260,23 @@ export async function scheduleNextStep(prisma: any, item: any, opts: ScheduleOpt
   }
   if (gapEnabled) {
     run = await loadRunContext(prisma, item.sequence_run_id);
+    // Red team T6 (Release C review): a GAP run whose hypothesis no longer
+    // rests on a live outreach fact schedules nothing, the same way the send
+    // gate refuses. Keyword hits and unverified quotes never reach a later step.
+    if (run?.hypothesisId) {
+      const at = (opts.now ?? (() => new Date()))().getTime();
+      const live = run.signals.filter((s) => !s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > at);
+      if (outreachEvidence(live, run.accountName || String(item.account_name ?? '')).tier !== 'VERIFIED_FACT') {
+        await audit(prisma, {
+          kind: SCHEDULE_SKIPPED_KIND,
+          actor: RUNTIME_ACTOR,
+          subjectType: 'draft_queue_item',
+          subjectId: String(item.id),
+          payload: { reason: 'evidence_insufficient', hypothesisId: run.hypothesisId, runId: item.sequence_run_id ?? null, stepIndex: item.step_index, toEmail: item.to_email },
+        });
+        return null;
+      }
+    }
     const rendered = renderStepCopy(
       { subject, body },
       { firstName: firstNameOf(await personaNameFor(prisma, item)), account: String(item.account_name ?? ''), observation: run?.observation ?? null },

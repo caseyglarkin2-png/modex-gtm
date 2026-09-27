@@ -131,6 +131,7 @@ import { firstNameOf, renderStepCopy, EVIDENCE_SIGNAL_SELECT, type EvidenceSigna
 /** Re-exported: the projection now lives with the compiler it serves (R3-3); callers of the old service export keep working. */
 export { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
 import { parseSteps } from '@/lib/gap/sequence/steps';
+import { outreachEvidence } from '@/lib/gap/research/evidence-gate';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import type { QueueAddInput } from '@/lib/validations';
@@ -230,6 +231,7 @@ export type EnrollServiceRefusal =
   | `compile_not_passed:${number}`
   | `compile_stale:${number}`
   | 'evidence_expired'
+  | 'evidence_insufficient'
   | 'compiler_disabled'
   | 'autonomy_halted'
   | 'hypothesis_not_found'
@@ -648,6 +650,16 @@ export async function enrollFromDecision(
     const linkedSignals = (hypothesis.signals ?? []).map((link) => link.signal).filter((s): s is EvidenceSignalRow => s !== null);
     const stale = checkEvidenceFreshness(linkedSignals, input.now);
     if (stale) return refuse(stale);
+  }
+
+  // Red team T6 (Release C review): enrollment is the same send decision as
+  // the action pack. No live outreach fact (verified, dated, quoted, this
+  // account, a physical-network change) means no sequence at all.
+  const liveSignals = (hypothesis.signals ?? [])
+    .map((link) => link.signal)
+    .filter((s): s is EvidenceSignalRow => s !== null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime()));
+  if (outreachEvidence(liveSignals, hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+    return refuse('evidence_insufficient', { detail: 'No verified, dated, quoted fact about a physical-network change at this account.' });
   }
 
   const persona: PersonaRow | null = await prisma.persona.findUnique({
