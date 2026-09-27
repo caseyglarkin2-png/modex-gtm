@@ -23,28 +23,51 @@ review, production verification.
 
 ### T1 — close passwordless production login
 
-- status: IMPLEMENTED (Release A, not yet merged)
-- commit: see `git log --grep "T1"` on `feat/gap-redteam-remediation`
+- status: IMPLEMENTED, Release A gate running (not yet merged)
+- commits: `0000ffeb` (T1), `74511dc6` (middleware segment anchoring),
+  `feb709aa` (review follow-ups)
 - files: `src/lib/auth-providers.ts` (new), `src/lib/auth.ts`,
-  `src/app/login/page.tsx`, `src/app/api/revops/send-approvals/route.ts`,
-  `src/app/queue/work-queue-client.tsx`, `tests/unit/auth/production-providers.test.ts`,
-  `tests/unit/send-approvals-route.test.ts`
-- change: Credentials provider registered only when NODE_ENV is `development`
-  or `test` (unset fails closed to Google only); the email form on /login
-  renders only there. PATCH /api/revops/send-approvals takes the approver from
-  the session (401 without one) and strips any body `actor`.
+  `src/app/login/page.tsx`, `middleware.ts`,
+  `src/app/api/revops/send-approvals/route.ts`,
+  `src/app/api/gap/decisions/[id]/send/route.ts`,
+  `src/app/queue/work-queue-client.tsx`, tests under `tests/unit/auth/`,
+  `tests/unit/send-approvals-route.test.ts`, `tests/unit/gap/send-route.test.ts`,
+  `tests/unit/middleware-matcher.test.ts`
+- change:
+  - Credentials provider registered only when NODE_ENV is `development` or
+    `test` (unset fails closed); the /login email form renders only there.
+  - Production session tokens must carry `signInProvider: 'google'` (stamped
+    in the jwt callback at sign-in). Tokens minted before the fix, including
+    any forged through the email-only provider, are dropped on the next
+    request. Consequence: every existing session, Casey's included, signs in
+    once more with Google after deploy.
+  - PATCH /api/revops/send-approvals: approver = session email (401 without
+    one), owners only (403), only a `pending` request can be approved or
+    rejected (409 `not_pending`). A body `actor` is stripped.
+  - POST /api/gap/decisions/[id]/send: owners only (403). HUMAN_APPROVED_1TO1
+    means Casey, not any allowlisted account.
+  - middleware matcher: every named exemption is a whole path segment. The
+    bare prefix `api/e` (open pixel) had exempted /api/email/*,
+    /api/engagement/*, /api/enrich*, /api/enrichment/*, /api/export; an
+    anonymous POST /api/email/send could send email (reviewer BLOCKER,
+    confirmed live read-only: GET /api/email/send-jobs/999999999/ answered
+    the handler's 404, not the wrapper's 401).
 - audit of other GAP mutation routes: every `/api/gap/**` mutation already
   derives `actor` from `auth()` or, for the agent token, writes as `cron` /
-  `actorKind: 'agent'` (unconfirmed rows only). No other client-supplied actor
-  reaches a GAP gate.
-- tests: 4 provider tests + source pin; 4 send-approval route tests; mutation
-  (gate forced open) proved 2 RED, restored GREEN.
-- production mutation: none.
-- production verification: pending merge (`GET /api/auth/providers` must list google only).
-- known consequence: the Playwright specs under `tests/e2e/` that sign in via
+  `actorKind: 'agent'` (unconfirmed rows only; no agent path approves or
+  sends HUMAN_APPROVED_1TO1).
+- tests: provider/env tests + source pins, token-provider gate, owner list;
+  send-approval route (session actor, body actor ignored, 401, 403, 409);
+  send route 403; middleware matcher RED on 11 bypassed paths then GREEN.
+  Mutation: provider gate forced open -> 2 RED, restored GREEN.
+- production mutation: none yet.
+- production verification: pending merge. Must show `GET /api/auth/providers`
+  = google only, and an anonymous GET /api/email/send-jobs/1/ = 401.
+- known consequence: Playwright specs under `tests/e2e/` that sign in via
   `/api/auth/callback/credentials` against production stop working there by
   design; they still run against local `next dev`.
 - named debt (outside GAP, not consumed by any GAP gate):
-  `PATCH /api/revops/message-evolution` (`reviewed_by`) and
-  `POST /api/revops/failure-remediation` (`owner`) still accept a client actor.
-- next: Release A gate (security reviewer), PR, merge, verify providers.
+  `PATCH /api/revops/message-evolution` (`reviewed_by`),
+  `POST /api/revops/failure-remediation` (`owner`) and
+  `revops/playbook-blocks` (`createdBy`) still accept a client-named actor.
+- next: merge Release A, verify production, then T2.
