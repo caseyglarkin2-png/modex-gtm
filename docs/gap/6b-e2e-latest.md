@@ -6,17 +6,17 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-6b.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap6b-1790484981756
+- Run tag: gap6b-1790487730934
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: fae9fade
-- Ran at: 2026-09-27T04:56:22.080Z
+- Git: 14d5b48b
+- Ran at: 2026-09-27T05:42:11.144Z
 
 ## Steps
 
 - PASS seed: account, persona, family, 2 versions (A stale-compile, C expired-evidence), 2 compiles (A ~40h old, C fresh), 2 hypotheses (A citing one verified fact, C linked to an expired signal)
-- PASS plain_shadow: {"engine":"modex_queue","status":"shadow","engineId":null,"createdAt":"2026-09-27T04:56:21.804Z"}
-- PASS compile_stale: {"engine":"modex_queue","status":"refused","engineId":null,"createdAt":"2026-09-27T04:56:21.804Z","refusalReason":"compile_stale:0"}
-- PASS evidence_expired: {"engine":"modex_queue","status":"refused","engineId":null,"createdAt":"2026-09-27T04:56:21.804Z","refusalReason":"evidence_expired"}
+- PASS plain_shadow: {"engine":"modex_queue","status":"shadow","engineId":null,"createdAt":"2026-09-27T05:42:10.977Z"}
+- PASS compile_stale: {"engine":"modex_queue","status":"refused","engineId":null,"createdAt":"2026-09-27T05:42:10.977Z","refusalReason":"compile_stale:0"}
+- PASS evidence_expired: {"engine":"modex_queue","status":"refused","engineId":null,"createdAt":"2026-09-27T05:42:10.977Z","refusalReason":"evidence_expired"}
 
 ## Counts
 

@@ -7,10 +7,11 @@
  * Red team T10 (2026-09-27): agreement is judged against EXECUTION, not
  * clicks, and nothing leaves the denominator by going quiet.
  *
- *   - An email-type human action (emailed, enrolled_by_hand) agrees only when
- *     the send ledger proves an email went out for that card or person
- *     (executedEmail). A recorded click without a send is unverified:
- *     counted, never an agreement.
+ *   - "emailed" agrees only when a send is on record for that card or person
+ *     (executedEmail); "enrolled_by_hand" only when a live, non-test GAP
+ *     enrollment of the person exists (executedEnroll) or a send is on record.
+ *     A recorded click without execution is unverified: counted, never an
+ *     agreement.
  *   - An executed email recommendation (a ledger send) agrees even with no
  *     button pressed: the send IS the action.
  *   - A card with no action and no execution is pending only while it is
@@ -120,6 +121,8 @@ export interface AgreementDecision {
   humanAction: HumanAction | null;
   /** The send ledger proves an email went out for this card or this person after it. */
   executedEmail: boolean;
+  /** A live (non-test) GAP enrollment of this person started after this card: the enroll action was executed. */
+  executedEnroll: boolean;
   /** The newest card for its person and still fresh: a missing action is pending, not unacted. */
   open: boolean;
 }
@@ -144,12 +147,15 @@ export type AgreementVerdict = 'agree' | 'disagree' | 'unverified' | 'unacted' |
 /** How one decision counts. Pure. */
 export function verdictOf(d: AgreementDecision): AgreementVerdict {
   if (d.humanAction === null) {
-    // The send is the action: an executed email recommendation agrees.
+    // The execution is the action: an executed email or enroll recommendation agrees.
     if (d.executedEmail && EMAIL_ROUTING_ACTIONS.has(d.action)) return 'agree';
+    if (d.executedEnroll && d.action === 'enroll_gap_sequence') return 'agree';
     return d.open ? 'pending' : 'unacted';
   }
   if (EMAIL_HUMAN_ACTIONS.has(d.humanAction)) {
-    if (!d.executedEmail) return 'unverified';
+    // "emailed" needs a send on record; "enrolled_by_hand" needs the enrollment (or a send).
+    const executed = d.executedEmail || (d.humanAction === 'enrolled_by_hand' && d.executedEnroll);
+    if (!executed) return 'unverified';
     // A proven email on an email recommendation agrees (enroll and one-off both mean "email this person").
     return EMAIL_ROUTING_ACTIONS.has(d.action) ? 'agree' : 'disagree';
   }

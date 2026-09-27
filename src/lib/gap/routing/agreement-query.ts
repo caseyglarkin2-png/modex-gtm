@@ -4,10 +4,12 @@
  * layer decides what counts) and hands the shape `computeAgreement` needs.
  *
  * Red team T10 (2026-09-27): each decision also carries
- *   executedEmail  the send ledger (learning/execution.ts loadSendRecords, the
- *                  same rows person-level send history reads) holds a send for
- *                  this card, or for this person after this card and before
- *                  their next card
+ *   executedEmail  the send records (learning/execution.ts loadSendRecords:
+ *                  the GAP ledger and the modex queue's GAP sends) hold a send
+ *                  for this card, or for this person after this card and
+ *                  before their next card
+ *   executedEnroll a live, non-test GAP enrollment of this person started in
+ *                  that same window
  *   open           this is the person's newest card and it is younger than
  *                  AGREEMENT_OPEN_DAYS; only an open card with no action is
  *                  left out of the rates (pending)
@@ -17,7 +19,7 @@
 
 import { HUMAN_ACTIONS, ROUTING_ACTIONS, type HumanAction, type RoutingAction } from '../taxonomy';
 import { computeAgreement, type AgreementDecision, type AgreementReport } from './agreement';
-import { loadSendRecords } from '../learning/execution';
+import { loadEnrollmentStarts, loadSendRecords } from '../learning/execution';
 
 const ROUTING_ACTION_SET = new Set<string>(ROUTING_ACTIONS);
 const HUMAN_ACTION_SET = new Set<string>(HUMAN_ACTIONS);
@@ -64,6 +66,7 @@ export async function loadAgreementReport(prisma: any, filters: AgreementFilters
   const scoped: DecisionRow[] = await prisma.routingDecision.findMany({ where: filters.runId ? { run_id: filters.runId } : {}, select });
   const all: DecisionRow[] = filters.runId ? await prisma.routingDecision.findMany({ select }) : scoped;
   const sends = await loadSendRecords(prisma);
+  const enrollStarts = await loadEnrollmentStarts(prisma);
 
   // Every card per person, oldest first: bounds "after this card, before the next".
   const cardsByPersona = new Map<number, DecisionRow[]>();
@@ -92,6 +95,7 @@ export async function loadAgreementReport(prisma: any, filters: AgreementFilters
         ruleId: r.rule_id,
         humanAction: isHumanAction(r.human_action) ? r.human_action : null,
         executedEmail: sentDecisionIds.has(r.id) || personSent,
+        executedEnroll: r.persona_id !== null && (enrollStarts.get(r.persona_id) ?? []).some((t) => t >= created && t < nextAt),
         open: !next && created >= openCutoff,
       };
     });

@@ -140,3 +140,31 @@ describe('execution learning (red team T10)', () => {
     expect(l.overall.replyPerSend.status).toBe('no_data');
   });
 });
+
+describe('queue sends of a GAP enrollment are sends (red team T10)', () => {
+  it('a sent modex queue item of a live enrollment adds a person (engine modex_queue); a test enrollment or an unsent item does not', async () => {
+    const items = [
+      { status: 'sent', to_email: 'q@queue.example', persona_id: 9, owner: 'casey@yardflow.ai', sequence_run_id: 'run-live', sequence_version_id: 'v9', step_index: 0, sent_at: T0, subject: 'S', body: 'B' },
+      { status: 'sent', to_email: 't@queue.example', persona_id: 10, owner: 'casey@yardflow.ai', sequence_run_id: 'run-test', sequence_version_id: 'v9', step_index: 0, sent_at: T0, subject: 'S', body: 'B' },
+      { status: 'approved', to_email: 'u@queue.example', persona_id: 11, owner: 'casey@yardflow.ai', sequence_run_id: 'run-live2', sequence_version_id: 'v9', step_index: 0, sent_at: null, subject: 'S', body: 'B' },
+    ];
+    const runs = [
+      { id: 'run-live', hypothesis_id: 'hQ', is_test: false, sender: 'casey@yardflow.ai' },
+      { id: 'run-test', hypothesis_id: 'hQ', is_test: true, sender: 'casey@yardflow.ai' },
+      { id: 'run-live2', hypothesis_id: 'hQ', is_test: false, sender: 'casey@yardflow.ai' },
+    ];
+    const prisma = {
+      gapAuditEvent: { findMany: vi.fn(async () => []) },
+      draftQueueItem: { findMany: vi.fn(async (args: any) => findManyFrom(items, args)) },
+      sequenceEnrollment: { findMany: vi.fn(async (args: any) => findManyFrom(runs, args)) },
+      inboundMessage: { findMany: vi.fn(async () => []) },
+      conversationDisposition: { findMany: vi.fn(async () => []) },
+      prospectingHypothesis: { findMany: vi.fn(async () => []) },
+      buyerInputData: { findMany: vi.fn(async () => []) },
+    };
+    const l = await buildExecutionLearning(prisma);
+    expect(l.overall.peopleContacted).toBe(1);
+    expect(l.byEngine.map((r) => r.key)).toEqual(['modex_queue']);
+    expect(l.bySequenceVersion.map((r) => r.key)).toEqual(['v9']);
+  });
+});

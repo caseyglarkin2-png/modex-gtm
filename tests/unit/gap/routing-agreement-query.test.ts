@@ -13,8 +13,9 @@ import { findManyFrom } from './fixtures/where';
 const NOW = new Date('2026-09-27T12:00:00Z');
 const daysAgo = (d: number) => new Date(NOW.getTime() - d * 86_400_000);
 
-function makePrisma(rows: any[], sends: any[] = []) {
+function makePrisma(rows: any[], sends: any[] = [], enrollments: any[] = []) {
   return {
+    sequenceEnrollment: { findMany: vi.fn(async (args: any) => findManyFrom(enrollments, args)) },
     routingDecision: { findMany: vi.fn(async (args: any) => (args?.where?.run_id ? rows.filter((r) => r.run_id === args.where.run_id) : rows)) },
     gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(sends, args)) },
   };
@@ -61,6 +62,14 @@ describe('loadAgreementReport', () => {
     expect(before.overall).toMatchObject({ agreements: 2, n: 2 });
     const after = await loadAgreementReport(makePrisma(rows, [sent('elsewhere', daysAgo(2))]), { now: NOW });
     expect(after.overall).toMatchObject({ agreements: 1, unverified: 1, n: 2 });
+  });
+
+  it('enrolled_by_hand agrees when a live, non-test enrollment of the person started after the card; a test enrollment is no evidence', async () => {
+    const rows = [row({ action: 'enroll_gap_sequence', human_action: 'enrolled_by_hand', created_at: daysAgo(2) })];
+    const live = await loadAgreementReport(makePrisma(rows, [], [{ persona_id: 7, enrolled_at: daysAgo(1), is_test: false }]), { now: NOW });
+    expect(live.overall).toMatchObject({ agreements: 1, n: 1 });
+    const test = await loadAgreementReport(makePrisma(rows, [], [{ persona_id: 7, enrolled_at: daysAgo(1), is_test: true }]), { now: NOW });
+    expect(test.overall).toMatchObject({ agreements: 0, unverified: 1, n: 1 });
   });
 
   it('PROOF: a superseded card with no action is unacted (counted); the newest fresh card is pending', async () => {

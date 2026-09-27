@@ -21,7 +21,7 @@ import {
 import { HUMAN_ACTIONS, ROUTING_ACTIONS } from '@/lib/gap/taxonomy';
 
 function decision(over: Partial<AgreementDecision> = {}): AgreementDecision {
-  return { id: 'd1', action: 'call_now', ruleId: 'hot_call', humanAction: 'called', executedEmail: false, open: false, ...over };
+  return { id: 'd1', action: 'call_now', ruleId: 'hot_call', humanAction: 'called', executedEmail: false, executedEnroll: false, open: false, ...over };
 }
 
 describe('HUMAN_ACTION_AGREEMENT + agrees', () => {
@@ -118,6 +118,13 @@ describe('computeAgreement (red team T10)', () => {
       const r = computeAgreement([decision({ action: 'enroll_gap_sequence', humanAction, executedEmail: false })]);
       expect(r.overall).toMatchObject({ agreements: 0, disagreements: 1, unverified: 1, n: 1 });
     }
+  });
+
+  it('an enrollment proves enrolled_by_hand (and an unclicked enroll recommendation), never emailed', () => {
+    expect(verdictOf(decision({ action: 'enroll_gap_sequence', humanAction: 'enrolled_by_hand', executedEnroll: true }))).toBe('agree');
+    expect(verdictOf(decision({ action: 'enroll_gap_sequence', humanAction: null, executedEnroll: true, open: false }))).toBe('agree');
+    expect(verdictOf(decision({ action: 'enroll_gap_sequence', humanAction: 'emailed', executedEnroll: true }))).toBe('unverified');
+    expect(verdictOf(decision({ action: 'one_off_email', humanAction: null, executedEnroll: true, open: false }))).toBe('unacted');
   });
 
   it('PROOF: an expired or superseded card nobody acted on stays in the denominator as unacted', () => {

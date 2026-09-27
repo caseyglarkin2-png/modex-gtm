@@ -3,10 +3,10 @@
  *
  * The primary Learning metrics, measured against what was actually SENT:
  *
- *   denominator   people actually sent to (person-level send history: the
- *                 GAP send ledger's MANUAL_SENT, DIRECT_SENT and DRAFT_SENT
- *                 rows, one person per recipient address, internal
- *                 recipients excluded). Never replied conversations, never
+ *   denominator   people actually sent to: the GAP send ledger's MANUAL_SENT,
+ *                 DIRECT_SENT and DRAFT_SENT rows plus the modex queue's sent
+ *                 items for a live, non-test GAP enrollment; one person per
+ *                 recipient address, internal recipients excluded. Never replied conversations, never
  *                 routing decisions, never cards Casey clicked.
  *   reply / send          people with a human reply after their first send
  *   meeting / send        people with a confirmed meeting after their first send
@@ -25,6 +25,7 @@
  * Every rate is an HonestRate (stats.ts): suppressed below RELIABLE_N, with a
  * Wilson interval above it.
  */
+import { createHash } from 'node:crypto';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
 import { isInternalRecipient } from '../sequence/internal-recipient';
 import { selectConfirmedBids } from '../bid/select';
@@ -96,6 +97,50 @@ export async function loadSendRecords(prisma: PrismaLike): Promise<SendRecord[]>
       evidenceTier: str(base.evidenceTier),
     });
   }
+  // Sends the modex queue made for a GAP enrollment (a live, non-test
+  // SequenceEnrollment): real GAP sends that never pass through the ledger.
+  if (prisma.draftQueueItem?.findMany && prisma.sequenceEnrollment?.findMany) {
+    const items: Array<{ to_email: string; persona_id: number | null; owner: string; sequence_run_id: string; sequence_version_id: string; step_index: number | null; sent_at: Date | null; subject: string; body: string }> =
+      await prisma.draftQueueItem.findMany({
+        where: { status: 'sent', sequence_run_id: { not: null }, sequence_version_id: { not: null } },
+        select: { to_email: true, persona_id: true, owner: true, sequence_run_id: true, sequence_version_id: true, step_index: true, sent_at: true, subject: true, body: true },
+      });
+    const runIds = [...new Set(items.map((i) => i.sequence_run_id))];
+    const runs: Array<{ id: string; hypothesis_id: string | null; is_test: boolean; sender: string }> = runIds.length
+      ? await prisma.sequenceEnrollment.findMany({ where: { id: { in: runIds } }, select: { id: true, hypothesis_id: true, is_test: true, sender: true } })
+      : [];
+    const runById = new Map(runs.map((r) => [r.id, r]));
+    for (const i of items) {
+      const run = runById.get(i.sequence_run_id);
+      const recipient = lower(i.to_email);
+      if (!run || run.is_test || !i.sent_at || !recipient.includes('@') || isInternalRecipient(recipient)) continue;
+      out.push({
+        decisionId: `enrollment:${run.id}`,
+        personaId: i.persona_id,
+        recipient,
+        hypothesisId: run.hypothesis_id,
+        stepIndex: i.step_index ?? 0,
+        sentAt: new Date(i.sent_at),
+        engine: 'modex_queue',
+        sender: str(run.sender || i.owner),
+        sequenceVersionId: i.sequence_version_id,
+        copyVersion: createHash('sha256').update(`${i.subject}\n${i.body}`).digest('hex').slice(0, 12),
+        evidenceTier: UNRECORDED,
+      });
+    }
+  }
+  return out;
+}
+
+/** Live, non-test GAP enrollments per persona (when each started): execution evidence for "enrolled". */
+export async function loadEnrollmentStarts(prisma: PrismaLike): Promise<Map<number, number[]>> {
+  const out = new Map<number, number[]>();
+  if (!prisma.sequenceEnrollment?.findMany) return out;
+  const rows: Array<{ persona_id: number | null; enrolled_at: Date }> = await prisma.sequenceEnrollment.findMany({
+    where: { is_test: false, persona_id: { not: null } },
+    select: { persona_id: true, enrolled_at: true },
+  });
+  for (const r of rows) if (r.persona_id !== null) out.set(r.persona_id, [...(out.get(r.persona_id) ?? []), new Date(r.enrolled_at).getTime()]);
   return out;
 }
 
