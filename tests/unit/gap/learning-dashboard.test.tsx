@@ -14,9 +14,12 @@ import type { AgreementReport } from '@/lib/gap/routing/agreement';
 
 const ZERO_RATE = { value: null, n: 0, numerator: 0, denominator: 0 };
 const FULL_RATE = { value: 1, n: 1, numerator: 1, denominator: 1 };
+const NO_EXEC_RATE = { numerator: 0, denominator: 0, n: 0, value: null, interval: null, status: 'no_data' as const };
+const NO_EXECUTION = { overall: { peopleContacted: 0, sends: 0, replyPerSend: NO_EXEC_RATE, meetingPerSend: NO_EXEC_RATE, truthYield: NO_EXEC_RATE, problemAckPerSend: NO_EXEC_RATE, rootCausePerSend: NO_EXEC_RATE }, bySequenceVersion: [], byCopyVersion: [], bySender: [], byEngine: [], byEvidenceTier: [] };
 
 function report(overrides: Partial<LearningReport> = {}): LearningReport {
   return {
+    execution: NO_EXECUTION,
     funnel: {
       resolutionRate: ZERO_RATE,
       precision: ZERO_RATE,
@@ -45,10 +48,11 @@ function report(overrides: Partial<LearningReport> = {}): LearningReport {
 }
 
 const NO_AGREEMENT: AgreementReport = {
-  overall: { agreements: 0, disagreements: 0, rate: null, n: 0 },
+  overall: { agreements: 0, disagreements: 0, unverified: 0, unacted: 0, rate: null, n: 0, honest: { numerator: 0, denominator: 0, n: 0, value: null, interval: null, status: 'no_data' } },
   byRuleId: [],
   byAction: [],
   totalDecisions: 0,
+  pending: 0,
 };
 
 function clientWith(result: ApiResult<LearningReport>): GapApiClient {
@@ -79,24 +83,52 @@ function spyClient(data: LearningReportResponse): { client: GapApiClient; getLea
 }
 
 describe('LearningDashboard', () => {
-  it('shows insufficient data rather than a fabricated 0% when the denominator is zero', async () => {
+  it('shows "no data yet" rather than a fabricated 0% when the denominator is zero', async () => {
     const client = clientWith({ ok: true, status: 200, data: report() });
     render(<LearningDashboard client={client} />);
     expect(await screen.findByText('Hypothesis funnel')).toBeInTheDocument();
-    expect(screen.getAllByText('insufficient data').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('no data yet').length).toBeGreaterThan(0);
     expect(screen.queryByText('0%')).not.toBeInTheDocument();
   });
 
-  it('flags a low-sample rate without hiding its value', async () => {
+  it('red team T10 PROOF: 4/5 renders as an early observation, never as 80%', async () => {
     const client = clientWith({
       ok: true,
       status: 200,
-      data: report({ funnel: { ...report().funnel, resolutionRate: FULL_RATE } }),
+      data: report({ funnel: { ...report().funnel, resolutionRate: { value: 0.8, n: 5, numerator: 4, denominator: 5 } } }),
     });
     render(<LearningDashboard client={client} />);
     await screen.findByText('Hypothesis funnel');
-    expect(screen.getByText('100%')).toBeInTheDocument();
-    expect(screen.getByText(/low sample, n=1/)).toBeInTheDocument();
+    expect(screen.queryByText('80%')).not.toBeInTheDocument();
+    expect(screen.getAllByText(/early observation, n < 20/).length).toBeGreaterThan(0);
+    expect(screen.getByText('4/5')).toBeInTheDocument();
+  });
+
+  it('a rate at n >= 20 shows its percentage and a 95% interval', async () => {
+    const client = clientWith({
+      ok: true,
+      status: 200,
+      data: report({ funnel: { ...report().funnel, resolutionRate: { value: 0.5, n: 40, numerator: 20, denominator: 40 } } }),
+    });
+    render(<LearningDashboard client={client} />);
+    await screen.findByText('Hypothesis funnel');
+    expect(screen.getByText('50%')).toBeInTheDocument();
+    expect(screen.getByText(/50% \(20\/40, 95% CI 35%-65%\)/)).toBeInTheDocument();
+  });
+
+  it('red team T10: the execution section leads, per person sent to, with small n suppressed', async () => {
+    const small = { numerator: 1, denominator: 3, n: 3, value: null, interval: null, status: 'insufficient' as const };
+    const metrics = { peopleContacted: 3, sends: 4, replyPerSend: small, meetingPerSend: small, truthYield: small, problemAckPerSend: small, rootCausePerSend: small };
+    const client = clientWith({
+      ok: true,
+      status: 200,
+      data: report({ execution: { overall: metrics, bySequenceVersion: [{ key: 'v1', metrics }], byCopyVersion: [], bySender: [], byEngine: [], byEvidenceTier: [] } }),
+    });
+    render(<LearningDashboard client={client} />);
+    expect(await screen.findByText('What happened after we sent')).toBeInTheDocument();
+    expect(screen.getByText(/3 people sent to \(4 sends\)/)).toBeInTheDocument();
+    expect(screen.queryByText('33%')).not.toBeInTheDocument();
+    expect(screen.getByText('Reply / send by sequence version (first send)')).toBeInTheDocument();
   });
 
   it('renders an error state and never a stale report on failure', async () => {
@@ -176,17 +208,19 @@ describe('LearningDashboard', () => {
       ok: true,
       status: 200,
       data: {
-        overall: { agreements: 3, disagreements: 1, rate: 0.75, n: 4 },
-        byRuleId: [{ key: 'hot_call', rate: { agreements: 2, disagreements: 0, rate: 1, n: 2 } }],
-        byAction: [{ key: 'call_now', rate: { agreements: 2, disagreements: 0, rate: 1, n: 2 } }],
-        totalDecisions: 6,
+        overall: { agreements: 18, disagreements: 6, unverified: 2, unacted: 3, rate: 0.75, n: 24 },
+        byRuleId: [{ key: 'hot_call', rate: { agreements: 2, disagreements: 0, unverified: 0, unacted: 0, rate: 1, n: 2 } }],
+        byAction: [{ key: 'call_now', rate: { agreements: 2, disagreements: 0, unverified: 0, unacted: 0, rate: 1, n: 2 } }],
+        totalDecisions: 30,
+        pending: 6,
       },
     });
     render(<LearningDashboard client={client} />);
-    expect(await screen.findByText('Routing vs human action (shadow-mode gate G1)')).toBeInTheDocument();
+    expect(await screen.findByText('Routing vs what was actually done (conformity, not sales quality)')).toBeInTheDocument();
     expect(await screen.findByText('75%')).toBeInTheDocument();
     expect(screen.getByText('hot_call')).toBeInTheDocument();
-    expect(screen.getByText(/6 routing decisions total; 4 comparable/)).toBeInTheDocument();
+    expect(screen.getByText(/30 routing decisions total; 24 counted; 6 still open/)).toBeInTheDocument();
+    expect(screen.getByText(/2 "emailed" with no send on record, 3 cards expired or superseded/)).toBeInTheDocument();
   });
 
   it('R-B: a failed agreement fetch shows its own error, without blocking the funnel above it', async () => {

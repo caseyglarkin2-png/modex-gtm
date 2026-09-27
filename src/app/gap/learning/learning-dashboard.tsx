@@ -16,7 +16,9 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { defaultGapApiClient, type GapApiClient, type LearningReportParams } from '@/lib/gap/ui/gap-api-client';
-import { isLowSample, type Rate } from '@/lib/gap/learning/metrics';
+import { type Rate } from '@/lib/gap/learning/metrics';
+import { describeRate, honestRate, RELIABLE_N, type HonestRate } from '@/lib/gap/learning/stats';
+import type { ExecutionBreakdownRow, ExecutionLearning, ExecutionMetrics } from '@/lib/gap/learning/execution';
 import type { LearningReport } from '@/lib/gap/learning/query';
 import type { AgreementReport } from '@/lib/gap/routing/agreement';
 
@@ -24,30 +26,42 @@ function formatPercent(value: number | null): string {
   return value === null ? '—' : `${Math.round(value * 100)}%`;
 }
 
-/** One rate as a tile: the percentage, its fraction, and a low-sample flag that never hides the number. */
-function RateTile({ label, r, help }: { label: string; r: { value: number | null; n: number; numerator: number; denominator: number }; help?: string }) {
-  const insufficient = r.denominator === 0;
+/**
+ * Red team T10: one rate as a tile. Below n = RELIABLE_N the percentage is
+ * never shown (4/5 is not "80%"): the raw k/n is labeled an early
+ * observation. At or above it the percentage carries its 95% Wilson interval.
+ */
+function HonestTile({ label, h, help }: { label: string; h: HonestRate; help?: string }) {
+  const shown = h.status === 'reliable' ? formatPercent(h.value) : '—';
   return (
     <Card>
       <CardHeader className="space-y-1 pb-2">
         <CardTitle className="text-sm font-medium text-[var(--muted-foreground)]">{label}</CardTitle>
         {help ? <CardDescription>{help}</CardDescription> : null}
       </CardHeader>
-      <CardContent className="flex items-baseline gap-2">
-        <span className="text-3xl font-semibold tabular-nums" aria-label={`${label}: ${formatPercent(r.value)}`}>
-          {formatPercent(r.value)}
-        </span>
-        <span className="text-sm text-[var(--muted-foreground)] tabular-nums">
-          {r.numerator}/{r.denominator}
-        </span>
-        {insufficient ? (
-          <Badge variant="outline">insufficient data</Badge>
-        ) : isLowSample(r) ? (
-          <Badge variant="warning">low sample, n={r.n}</Badge>
-        ) : null}
+      <CardContent className="space-y-1">
+        <div className="flex items-baseline gap-2">
+          <span className="text-3xl font-semibold tabular-nums" aria-label={`${label}: ${shown}`}>
+            {shown}
+          </span>
+          <span className="text-sm text-[var(--muted-foreground)] tabular-nums">
+            {h.numerator}/{h.denominator}
+          </span>
+          {h.status === 'no_data' ? (
+            <Badge variant="outline">no data yet</Badge>
+          ) : h.status === 'insufficient' ? (
+            <Badge variant="warning">early observation, n &lt; {RELIABLE_N}</Badge>
+          ) : null}
+        </div>
+        <p className="text-xs text-[var(--muted-foreground)] tabular-nums">{describeRate(h)}</p>
       </CardContent>
     </Card>
   );
+}
+
+/** A legacy funnel Rate, rendered by the same honest rules. */
+function RateTile({ label, r, help }: { label: string; r: { numerator: number; denominator: number }; help?: string }) {
+  return <HonestTile label={label} h={honestRate(r.numerator, r.denominator)} help={help} />;
 }
 
 function BreakdownTable<K extends string, F>({
@@ -86,15 +100,16 @@ function BreakdownTable<K extends string, F>({
           <TableBody>
             {rows.map((row) => {
               const r = rateOf(row.funnel);
+              const h = honestRate(r.numerator, r.denominator);
               return (
                 <TableRow key={row.key}>
                   <TableCell>{row.key}</TableCell>
-                  <TableCell className="tabular-nums">{formatPercent(r.value)}</TableCell>
+                  <TableCell className="tabular-nums">{h.status === 'reliable' ? formatPercent(h.value) : '—'}</TableCell>
                   <TableCell className="tabular-nums">
-                    {r.n}
-                    {isLowSample(r) ? (
+                    {h.numerator}/{h.denominator}
+                    {h.status === 'insufficient' ? (
                       <Badge variant="warning" className="ml-2">
-                        low sample
+                        early, n &lt; {RELIABLE_N}
                       </Badge>
                     ) : null}
                   </TableCell>
@@ -174,26 +189,64 @@ function FilterBar({
   );
 }
 
-/** R-B: an AgreementRate tile, same visual language as RateTile but over {agreements, disagreements, rate, n}. */
-function AgreementRateTile({ label, rate }: { label: string; rate: { agreements: number; disagreements: number; rate: number | null; n: number } }) {
-  const insufficient = rate.n === 0;
+/** R-B / red team T10: agreement as an honest tile, with what it is NOT counted from. */
+function AgreementRateTile({ label, rate }: { label: string; rate: { agreements: number; n: number; unverified: number; unacted: number } }) {
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-[var(--muted-foreground)]">{label}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex items-baseline gap-2">
-        <span className="text-3xl font-semibold tabular-nums">{formatPercent(rate.rate)}</span>
-        <span className="text-sm text-[var(--muted-foreground)] tabular-nums">
-          {rate.agreements}/{rate.n}
-        </span>
-        {insufficient ? (
-          <Badge variant="outline">no comparable decisions</Badge>
-        ) : isLowSample({ value: rate.rate, n: rate.n, numerator: rate.agreements, denominator: rate.n }) ? (
-          <Badge variant="warning">low sample, n={rate.n}</Badge>
-        ) : null}
-      </CardContent>
-    </Card>
+    <div className="space-y-1">
+      <HonestTile label={label} h={honestRate(rate.agreements, rate.n)} help="Seller conformity with the router, not sales quality" />
+      <p className="text-xs text-[var(--muted-foreground)]">
+        Counted against agreement: {rate.unverified} &quot;emailed&quot; with no send on record, {rate.unacted} cards expired or superseded with no action.
+      </p>
+    </div>
+  );
+}
+
+const EXECUTION_TILES: Array<{ key: keyof Omit<ExecutionMetrics, 'peopleContacted' | 'sends'>; label: string; help: string }> = [
+  { key: 'replyPerSend', label: 'Reply / send', help: 'People who replied after their first send / people sent to' },
+  { key: 'meetingPerSend', label: 'Meeting / send', help: 'People with a confirmed meeting / people sent to' },
+  { key: 'truthYield', label: 'Truth yield', help: 'People whose hypothesis reached a human verdict / people sent to' },
+  { key: 'problemAckPerSend', label: 'Problem acknowledged / send', help: 'Confirmed or partly confirmed problem / people sent to' },
+  { key: 'rootCausePerSend', label: 'Root cause / send', help: 'Confirmed root cause on the sent hypothesis / people sent to' },
+];
+
+function AttributionTable({ title, rows }: { title: string; rows: ExecutionBreakdownRow[] }) {
+  return (
+    <BreakdownTable
+      title={title}
+      rows={rows.map((r) => ({ key: r.key, funnel: r.metrics }))}
+      rateOf={(m) => ({ value: m.replyPerSend.value, n: m.replyPerSend.n, numerator: m.replyPerSend.numerator, denominator: m.replyPerSend.denominator })}
+    />
+  );
+}
+
+/**
+ * Red team T10: the primary metrics. The denominator is people actually sent
+ * to (the send ledger); each person is attributed to their first send.
+ */
+function ExecutionSection({ execution }: { execution: ExecutionLearning }) {
+  const o = execution.overall;
+  return (
+    <section aria-labelledby="execution-heading" className="space-y-3">
+      <h2 id="execution-heading" className="text-lg font-semibold">
+        What happened after we sent
+      </h2>
+      <p className="text-sm text-[var(--muted-foreground)]">
+        {o.peopleContacted} {o.peopleContacted === 1 ? 'person' : 'people'} sent to ({o.sends} {o.sends === 1 ? 'send' : 'sends'}). Every rate below is per person
+        sent to, from the send record; below n = {RELIABLE_N} a number is an early observation, not a rate.
+      </p>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {EXECUTION_TILES.map((t) => (
+          <HonestTile key={t.key} label={t.label} h={o[t.key]} help={t.help} />
+        ))}
+      </div>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <AttributionTable title="Reply / send by sequence version (first send)" rows={execution.bySequenceVersion} />
+        <AttributionTable title="Reply / send by copy version (first send)" rows={execution.byCopyVersion} />
+        <AttributionTable title="Reply / send by sender" rows={execution.bySender} />
+        <AttributionTable title="Reply / send by engine" rows={execution.byEngine} />
+        <AttributionTable title="Reply / send by evidence tier at send" rows={execution.byEvidenceTier} />
+      </div>
+    </section>
   );
 }
 
@@ -224,7 +277,7 @@ function RoutingAgreementSection({ client }: { client: GapApiClient }) {
   return (
     <section aria-labelledby="agreement-heading" className="space-y-3">
       <h2 id="agreement-heading" className="text-lg font-semibold">
-        Routing vs human action (shadow-mode gate G1)
+        Routing vs what was actually done (conformity, not sales quality)
       </h2>
       {error ? (
         <p className="text-sm text-[var(--destructive)]" role="alert">
@@ -250,7 +303,8 @@ function RoutingAgreementSection({ client }: { client: GapApiClient }) {
             />
           </div>
           <p className="text-xs text-[var(--muted-foreground)]">
-            {report.totalDecisions} routing decisions total; {report.overall.n} comparable (a human action was recorded).
+            {report.totalDecisions} routing decisions total; {report.overall.n} counted; {report.pending} still open with no action. An email counts as done only
+            when the send is on record. Agreement alone never unlocks automation.
           </p>
         </>
       )}
@@ -293,6 +347,7 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
   return (
     <div className="space-y-8">
       <FilterBar programs={programs} value={filters} onChange={setFilters} />
+      {report.execution ? <ExecutionSection execution={report.execution} /> : null}
       <section aria-labelledby="hypothesis-funnel-heading" className="space-y-3">
         <h2 id="hypothesis-funnel-heading" className="text-lg font-semibold">
           Hypothesis funnel
