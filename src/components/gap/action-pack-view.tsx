@@ -21,7 +21,8 @@
 import { prisma } from '@/lib/prisma';
 import { loadActionPack } from '@/lib/gap/execution/action-pack';
 import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
-import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
+import { EMAIL_ACTIONS, draftText } from '@/lib/gap/execution/seller-draft';
+import { unsubscribePageUrl } from '@/lib/email/compliance';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch';
@@ -140,6 +141,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Release C re-review S8: only LIVE facts, like every other gate; an expired
   // fact is never read aloud as a cold opener.
   const verifiedFact = hypothesisSendable(hypothesis, new Date());
+  // Final red team: copying is sending by another route, so it is gated like SEND and carries the footer.
+  const copyable = sendable && verifiedFact && persona?.email ? persona.email : null;
   const callPack =
     persona && renderedEmail && verifiedFact
       ? buildCallPack({
@@ -219,10 +222,12 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           ) : !sendable && blockedReason ? (
             <p data-testid="send-unavailable" className="text-xs text-[var(--muted-foreground)]">{blockedReason}</p>
           ) : null}
-          <div className="flex flex-wrap gap-2">
-            {pack.unresolvedCitations.length === 0 ? <CopyButton text={renderedEmail.queued.body} label="Copy email" /> : null}
-            {persona?.email ? <CopyButton text={persona.email} label="Copy email address" /> : null}
-          </div>
+          {copyable ? (
+            <div className="flex flex-wrap gap-2">
+              <CopyButton text={draftText(renderedEmail.queued.body, unsubscribePageUrl(copyable))} label="Copy email" />
+              <CopyButton text={copyable} label="Copy email address" />
+            </div>
+          ) : null}
         </section>
       ) : (
         <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">

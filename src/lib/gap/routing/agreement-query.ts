@@ -120,7 +120,8 @@ export async function loadAgreementReport(prisma: any, filters: AgreementFilters
       humanAction: acted ? (acted.human_action as HumanAction) : null,
       executedEmail: cards.some((c) => emailed.has(c.id)),
       executedEnroll: cards.some((c) => enrolled.has(c.id)),
-      open: isLatest && new Date(last.created_at).getTime() >= openCutoff,
+      // Final red team: the episode's FIRST card starts the clock, so re-minting cannot keep an ignored recommendation pending forever.
+      open: isLatest && new Date(cards[0].created_at).getTime() >= openCutoff,
     });
   };
   for (const cards of cardsByPersona.values()) {

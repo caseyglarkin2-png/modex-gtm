@@ -55,7 +55,7 @@ function fullPrisma(d: Db) {
   p.unsubscribedEmail = { findFirst: vi.fn(async () => null) };
   p.conversationDisposition = { findFirst: vi.fn(async () => null) };
   p.inboundMessage = { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []) };
-  p.emailLog = { create: vi.fn(async () => ({ id: 1 })) };
+  p.emailLog = { ...p.emailLog, create: vi.fn(async () => ({ id: 1 })) };
   p.$executeRaw = vi.fn(async () => 1);
   p.$transaction = vi.fn(async (fn: (tx: unknown) => Promise<unknown>) => fn(p));
   p.gapAuditEvent.findFirst = vi.fn(async (args: any) => findFirstFrom(d.audit, args));

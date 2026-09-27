@@ -54,6 +54,19 @@ describe('re-review B1/S1: the lister returns one COMPLETE window, oldest first'
     expect(out.ids).toEqual(Array.from({ length: 450 }, (_, i) => String(i)));
   });
 
+  it('final regression: it reads every received message (archived, filtered, spam), never only the inbox, and never our own sent mail or drafts', async () => {
+    const fetchMock = gmailFetch(3);
+    vi.stubGlobal('fetch', fetchMock);
+    await listMailboxIds(SENDER, BASE - 1, BASE + 600);
+    const u = new URL(fetchMock.mock.calls[0][0] as string);
+    const q = u.searchParams.get('q') ?? '';
+    expect(q).not.toMatch(/in:inbox/);
+    expect(q).toMatch(/-in:sent/);
+    expect(q).toMatch(/-in:drafts/);
+    expect(q).toMatch(/-in:chats/);
+    expect(u.searchParams.get('includeSpamTrash')).toBe('true');
+  });
+
   it('past the listing cap it narrows the upper bound: the OLDEST mail is never dropped', async () => {
     const total = MAILBOX_LIST_CAP + 10;
     vi.stubGlobal('fetch', gmailFetch(total));

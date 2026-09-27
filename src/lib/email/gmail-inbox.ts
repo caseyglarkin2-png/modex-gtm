@@ -571,7 +571,10 @@ export async function listMailboxIds(
     let pageToken: string | undefined;
     do {
       const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
-      listUrl.searchParams.set('q', `in:inbox after:${afterEpoch}${before !== null ? ` before:${before}` : ''}`);
+      // Final red team: every RECEIVED message, not only the inbox. A bounce or reply that a
+      // filter archived or Gmail sent to spam before the poll is still a bounce or a reply.
+      listUrl.searchParams.set('q', `-in:sent -in:drafts -in:chats after:${afterEpoch}${before !== null ? ` before:${before}` : ''}`);
+      listUrl.searchParams.set('includeSpamTrash', 'true');
       listUrl.searchParams.set('maxResults', '500');
       if (pageToken) listUrl.searchParams.set('pageToken', pageToken);
       const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });

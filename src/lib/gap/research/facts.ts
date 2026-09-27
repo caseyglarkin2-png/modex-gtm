@@ -14,7 +14,7 @@
 import type { SignalType } from '../taxonomy';
 
 const FACILITY = /\b(distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
-const CHANGE = /\b(open(?:ed|ing|s)?|clos(?:e|ed|es|ing|ure|ures)|exit(?:ed|ing|s)?|consolidat(?:e|ed|es|ing|ion)|expan(?:d|ded|ding|sion)|buil(?:d|t|ding)|construct(?:ed|ing|ion)?|automat(?:e|ed|es|ing|ion)|robot(?:ic|ics)?|acquir(?:e|ed|es|ing)|acquisition|relocat(?:e|ed|ing|ion)|launch(?:ed|es|ing)?|invest(?:ed|ing|ment|ments)?|redesign(?:ed)?|add(?:ed|ing)? capacity)\b/i;
+const CHANGE = /\b(open(?:ed|ing|s)?|clos(?:e|ed|es|ing|ure|ures)|exit(?:ed|ing|s)?|consolidat(?:e|ed|es|ing|ion)|expan(?:d|ded|ding|sion)|build(?:s)?|built|construct(?:ed|ing|ion)?|automat(?:e|ed|es|ing|ion)|robot(?:ic|ics)?|acquir(?:e|ed|es|ing)|acquisition|relocat(?:e|ed|ing|ion)|redesign(?:ed)?|add(?:ed|ing)? capacity)\b/i;
 
 export type FactChange = 'opening' | 'closure' | 'expansion' | 'automation' | 'acquisition' | 'relocation' | 'investment';
 
@@ -60,6 +60,9 @@ const NON_OPERATIONAL_CONTEXT = new RegExp(
     String.raw`\bliquidity\b`, String.raw`\bcredit facilit(?:y|ies)\b`, String.raw`\bworking capital\b`, String.raw`\bdebt financing\b`, String.raw`\bcommercial paper\b`, String.raw`\bborrowings?\b`,
     // generic capital spending
     String.raw`\bcapital (?:expenditures?|spending|investments?)\b`,
+    // final red-team regression: deal accounting and legal definitions (General
+    // Mills transaction-cost lines; the PepsiCo 8-K "'Principal Property' means")
+    String.raw`\btransaction costs?\b`, String.raw`["”]\s*means\b`,
   ].join('|'),
   'i',
 );

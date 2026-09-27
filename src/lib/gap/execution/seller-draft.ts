@@ -34,6 +34,7 @@ import { seedCopyOutdated } from '../sequences/seed-drift';
 import { accountRepliedRecently } from '../replies/account-reply';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
+import { personMovedSince } from './stale-card';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
 import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
@@ -67,6 +68,7 @@ export type SellerDraftRefusal =
   | 'draft_outstanding'
   | 'recipient_unsubscribed'
   | 'account_replied'
+  | 'decision_stale'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -331,6 +333,11 @@ export async function prepareSellerEmail(
     const replied = await accountRepliedRecently(prisma, email, now);
     if (replied) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
+    }
+    // Final red team: the card is a snapshot; a cold first touch never ignores what moved since it was minted.
+    const moved = await personMovedSince(prisma, { email, personaId: persona.id ?? null, since: new Date(decision.created_at) });
+    if (moved) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_stale', detail: `${moved} Wait for the next routing run before a first touch.` });
     }
   }
   if (mode === 'send') {
