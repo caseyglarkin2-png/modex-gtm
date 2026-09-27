@@ -46,11 +46,39 @@ describe('send approvals route', () => {
   });
 
   it('ignores an actor supplied in the body: the approver is the session, never the client', async () => {
-    authMock.mockResolvedValue({ user: { email: 'jake@freightroll.com' } });
+    authMock.mockResolvedValue({ user: { email: 'caseyglarkin2@gmail.com' } });
     const res = await patch({ id: 'sar_1', action: 'approve', actor: 'casey@freightroll.com' });
 
     expect(res.status).toBe(200);
-    expect(mockedPrisma.sendApprovalRequest.update.mock.calls[0][0].data.approved_by).toBe('jake@freightroll.com');
+    expect(mockedPrisma.sendApprovalRequest.update.mock.calls[0][0].data.approved_by).toBe('caseyglarkin2@gmail.com');
+  });
+
+  it('a signed-in non-owner cannot approve (HUMAN_APPROVED_1TO1 means Casey)', async () => {
+    authMock.mockResolvedValue({ user: { email: 'jake@freightroll.com' } });
+    const res = await patch({ id: 'sar_1', action: 'approve', actor: 'casey@freightroll.com' });
+
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: 'forbidden' });
+    expect(mockedPrisma.sendApprovalRequest.update).not.toHaveBeenCalled();
+  });
+
+  it.each(['rejected', 'approved'])('a %s request cannot be approved or rejected again', async (status) => {
+    authMock.mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
+    mockedPrisma.sendApprovalRequest.findUnique.mockResolvedValue({ id: 'sar_1', status });
+    for (const action of ['approve', 'reject']) {
+      const res = await patch({ id: 'sar_1', action });
+      expect(res.status).toBe(409);
+      expect(await res.json()).toEqual({ error: 'not_pending', status });
+    }
+    expect(mockedPrisma.sendApprovalRequest.update).not.toHaveBeenCalled();
+  });
+
+  it('a comment on a resolved request leaves its status alone', async () => {
+    authMock.mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
+    mockedPrisma.sendApprovalRequest.findUnique.mockResolvedValue({ id: 'sar_1', status: 'rejected' });
+    const res = await patch({ id: 'sar_1', action: 'comment', comment: 'note' });
+    expect(res.status).toBe(200);
+    expect(mockedPrisma.sendApprovalRequest.update.mock.calls[0][0].data.status).toBe('rejected');
   });
 
   it('refuses an unauthenticated request before reading or writing anything', async () => {

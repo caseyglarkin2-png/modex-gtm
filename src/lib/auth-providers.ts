@@ -45,3 +45,26 @@ export function authProviders(nodeEnv: string | undefined): Provider[] {
     }),
   ];
 }
+
+/** Owners: the only people who may approve a send or press CONFIRM + SEND (HUMAN_APPROVED_1TO1 means Casey). */
+export const ADMINS = [
+  'casey@freightroll.com',
+  'caseyglarkin2@gmail.com',
+];
+
+export function isAdminEmail(email: string | null | undefined): boolean {
+  return typeof email === 'string' && ADMINS.includes(email.trim().toLowerCase());
+}
+
+/**
+ * Whether a decoded session token may stay a session. Outside development and
+ * test, only a token minted by a Google sign-in (stamped `signInProvider` in
+ * the jwt callback) is honored. A token minted by the old email-only provider
+ * is signed with the same AUTH_SECRET and would otherwise stay valid for its
+ * full lifetime after that provider is removed; this ends every such session
+ * on the next request.
+ */
+export function sessionTokenAllowed(token: { signInProvider?: unknown } | null | undefined, nodeEnv: string | undefined): boolean {
+  if (nodeEnv === 'development' || nodeEnv === 'test') return true;
+  return token?.signInProvider === 'google';
+}

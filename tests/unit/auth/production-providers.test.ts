@@ -39,3 +39,34 @@ describe('src/lib/auth.ts registers exactly authProviders(NODE_ENV)', () => {
     expect(src).not.toMatch(/Credentials\(/);
   });
 });
+
+describe('sessions minted before the fix end (T1 review)', () => {
+  it('production honors only a token stamped by a Google sign-in', async () => {
+    const { sessionTokenAllowed } = await import('@/lib/auth-providers');
+    expect(sessionTokenAllowed({ signInProvider: 'google' }, 'production')).toBe(true);
+    expect(sessionTokenAllowed({ signInProvider: 'credentials' }, 'production')).toBe(false);
+    expect(sessionTokenAllowed({}, 'production')).toBe(false);
+    expect(sessionTokenAllowed(null, 'production')).toBe(false);
+    expect(sessionTokenAllowed({}, undefined)).toBe(false);
+    expect(sessionTokenAllowed({}, 'development')).toBe(true);
+  });
+
+  it('auth.ts stamps the sign-in provider and drops a disallowed token before any other work', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/lib/auth.ts', 'utf8');
+    const stamp = src.indexOf('signInProvider = account.provider');
+    const gate = src.indexOf('if (!sessionTokenAllowed(token as { signInProvider?: unknown }, process.env.NODE_ENV)) return null;');
+    const refresh = src.indexOf("if (account?.provider === 'google')");
+    expect(stamp).toBeGreaterThan(-1);
+    expect(gate).toBeGreaterThan(stamp);
+    expect(refresh).toBeGreaterThan(gate);
+  });
+
+  it('only the owners are admins', async () => {
+    const { isAdminEmail } = await import('@/lib/auth-providers');
+    expect(isAdminEmail('casey@freightroll.com')).toBe(true);
+    expect(isAdminEmail('Casey@FreightRoll.com')).toBe(true);
+    expect(isAdminEmail('jake@freightroll.com')).toBe(false);
+    expect(isAdminEmail(null)).toBe(false);
+  });
+});

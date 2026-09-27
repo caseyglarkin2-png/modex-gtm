@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import { ALLOWED_EMAILS, authProviders } from '@/lib/auth-providers';
+import { ADMINS, ALLOWED_EMAILS, authProviders, sessionTokenAllowed } from '@/lib/auth-providers';
 
 type TokenLike = {
   accessToken?: string;
@@ -42,16 +42,15 @@ async function refreshGoogleAccessToken(token: TokenLike): Promise<TokenLike> {
   };
 }
 
-const ADMINS = [
-  'casey@freightroll.com',
-  'caseyglarkin2@gmail.com',
-];
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: authProviders(process.env.NODE_ENV),
   callbacks: {
     async jwt({ token, account }) {
       const mutable = token as unknown as TokenLike;
+
+      if (account?.provider) (token as Record<string, unknown>).signInProvider = account.provider;
+      // A token not minted by a Google sign-in ends here (production): see sessionTokenAllowed.
+      if (!sessionTokenAllowed(token as { signInProvider?: unknown }, process.env.NODE_ENV)) return null;
 
       if (account?.provider === 'google') {
         mutable.accessToken = account.access_token ?? undefined;
