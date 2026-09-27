@@ -266,8 +266,11 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     // execution ledger and CRM logging; email goes through the guarded GAP path.
     expect(within(buttons).queryByRole('link', { name: /Email/ })).toBeNull();
     expect(buttons.innerHTML).not.toContain('mailto:');
-    expect(within(buttons).getByRole('link', { name: /Call/ })).toHaveAttribute('href', 'tel:5551234567');
-    expect(within(buttons).getByRole('link', { name: /LinkedIn/ })).toHaveAttribute('href', 'https://linkedin.com/in/jordanreyes');
+    // Last mile: Call and LinkedIn are cold outbound. They are buttons that re-read HubSpot at the click, never raw links.
+    expect(within(buttons).getByRole('button', { name: /Call/ })).toBeInTheDocument();
+    expect(within(buttons).getByRole('button', { name: /LinkedIn/ })).toBeInTheDocument();
+    expect(buttons.innerHTML).not.toContain('tel:');
+    expect(buttons.innerHTML).not.toContain('linkedin.com/in/');
     expect(within(buttons).getByRole('link', { name: /HubSpot contact/ })).toHaveAttribute('href', 'https://app.hubspot.com/contacts/3819073/contact/900');
   });
 
@@ -289,10 +292,11 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     expect(screen.getByRole('link', { name: /Open email and call script/ })).toHaveAttribute('href', '/gap?lane=ready&open=dec_1#card-dec_1');
   });
 
-  it('call_now leads with the tel: link and offers the action pack (call pack) as the secondary link (final pass)', () => {
+  it('call_now leads with the (checked) Call action and offers the action pack (call pack) as the secondary link (final pass)', () => {
     render(<DecisionCard item={item({ action: 'call_now', persona: { ...item().persona, phone: '(555) 123-4567' } })} onAct={() => {}} />);
     const actionable = screen.getByTestId('readiness-actionable');
-    expect(within(actionable).getByRole('link', { name: /^Call / })).toHaveAttribute('href', 'tel:5551234567');
+    expect(within(actionable).getByRole('button', { name: /^Call Jordan/ })).toBeInTheDocument();
+    expect(actionable.innerHTML).not.toContain('tel:');
     expect(within(actionable).getByRole('link', { name: /Open email and call script/ })).toBeInTheDocument();
   });
 
@@ -313,7 +317,9 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     const panel = screen.getByTestId('missing-prerequisite');
     expect(panel).toHaveTextContent('Missing prerequisite');
     expect(panel).toHaveTextContent('No hypothesis covers Jordan at Acme Foods');
-    expect(within(panel).getByRole('link', { name: /Review or create a hypothesis/ })).toHaveAttribute('href', '/gap?lane=review');
+    // Last mile: nothing of this card's is waiting in REVIEW, so the fix is research on this card, not an empty lane.
+    expect(within(panel).queryByRole('link', { name: /Review/ })).toBeNull();
+    expect(within(panel).getByRole('link', { name: /Research to propose a hypothesis/ })).toHaveAttribute('href', '/gap?lane=research#card-dec_1');
     expect(screen.queryByRole('link', { name: /Open email and call script/ })).toBeNull();
     expect(screen.queryByTestId('rendered-email')).toBeNull();
   });
@@ -387,5 +393,103 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
     expect(within(screen.getByTestId('card-expanded')).getByText('PACK BODY')).toBeInTheDocument();
     expect(screen.getByTestId('card-close')).toHaveAttribute('href', '/gap?lane=ready');
     expect(screen.queryByRole('link', { name: /Open email and call script/ })).toBeNull();
+  });
+
+  describe('last mile: empty REVIEW lane never gets the hypothesis link', () => {
+    it('evidence_thin with nothing waiting in review links to research on this card, label and destination agree', () => {
+      render(<DecisionCard item={item({ action: 'research_required', ruleId: 'evidence_thin' })} onAct={() => {}} />);
+      const panel = screen.getByTestId('missing-prerequisite');
+      expect(within(panel).getByRole('link', { name: /Find verified evidence/ })).toHaveAttribute('href', '/gap?lane=research#card-dec_1');
+      expect(panel.innerHTML).not.toContain('lane=review');
+    });
+
+    it("links to REVIEW only when this card's thesis is actually waiting there", () => {
+      render(<DecisionCard item={item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null })} reviewWaiting={{ hypothesisIds: [], personaIds: [41] }} onAct={() => {}} />);
+      const panel = screen.getByTestId('missing-prerequisite');
+      expect(within(panel).getByRole('link', { name: /Review the waiting hypothesis/ })).toHaveAttribute('href', '/gap?lane=review');
+    });
+
+    it('something unrelated waiting in review does not send this card there', () => {
+      render(<DecisionCard item={item({ action: 'research_required', ruleId: 'hyp_stale' })} reviewWaiting={{ hypothesisIds: ['hyp_other'], personaIds: [99] }} onAct={() => {}} />);
+      expect(within(screen.getByTestId('missing-prerequisite')).getByRole('link', { name: /Find verified evidence/ })).toHaveAttribute('href', '/gap?lane=research#card-dec_1');
+    });
+  });
+
+  describe('last mile: cold CALL / LINKEDIN re-read HubSpot at the click', () => {
+    const withContact = (action = 'call_now') =>
+      item({ action, persona: { ...item().persona, phone: '(555) 123-4567', linkedinUrl: 'https://linkedin.com/in/jordanreyes' } });
+
+    it('ACTIVE: the call is refused with the work-the-deal copy and nothing is dialed', async () => {
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+        new Response(JSON.stringify({ ok: false, reason: 'active_opportunity', message: 'Work this account from the existing deal or opportunity, not a cold call.' }), { status: 409 }),
+      );
+      const open = vi.spyOn(window, 'open').mockReturnValue(null);
+      render(<DecisionCard item={withContact()} onAct={() => {}} />);
+      fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /Call/ }));
+      expect(await screen.findByTestId('cold-refused')).toHaveTextContent('Work this account from the existing deal');
+      expect(fetchMock).toHaveBeenCalledWith('/api/gap/decisions/dec_1/outbound-check', expect.objectContaining({ method: 'POST', body: JSON.stringify({ channel: 'call' }) }));
+      expect(open).not.toHaveBeenCalled();
+      expect(screen.queryByTestId('inline-call-outcome')).toBeNull();
+      fetchMock.mockRestore();
+      open.mockRestore();
+    });
+
+    it('UNKNOWN or a network failure fails closed on LinkedIn: check HubSpot copy, nothing opened', async () => {
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'));
+      const open = vi.spyOn(window, 'open').mockReturnValue(null);
+      render(<DecisionCard item={withContact('linkedin_manual_task')} onAct={() => {}} />);
+      fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /LinkedIn/ }));
+      expect(await screen.findByTestId('cold-refused')).toHaveTextContent('Check HubSpot before contacting');
+      expect(open).not.toHaveBeenCalled();
+      fetchMock.mockRestore();
+      open.mockRestore();
+    });
+
+    it.each([
+      ['a 500 with no body', new Response('{}', { status: 500 })],
+      ['a 200 that is not ok', new Response(JSON.stringify({ ok: false }), { status: 200 })],
+      ['a 200 ok with no usable link', new Response(JSON.stringify({ ok: true, href: 'javascript:alert(1)' }), { status: 200 })],
+    ])('%s fails closed: check HubSpot copy, nothing dialed', async (_label, response) => {
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(response);
+      const open = vi.spyOn(window, 'open').mockReturnValue(null);
+      render(<DecisionCard item={withContact()} onAct={() => {}} />);
+      fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /Call/ }));
+      expect(await screen.findByTestId('cold-refused')).toHaveTextContent('Check HubSpot before contacting');
+      expect(open).not.toHaveBeenCalled();
+      fetchMock.mockRestore();
+      open.mockRestore();
+    });
+
+    it('CLEAR: the call dials the server-released tel: link and opens the call recorder', async () => {
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, channel: 'call', href: 'tel:5551234567' }), { status: 200 }));
+      const open = vi.spyOn(window, 'open').mockReturnValue(null);
+      render(<DecisionCard item={withContact()} onAct={() => {}} />);
+      fireEvent.click(within(screen.getByTestId('readiness-actionable')).getByRole('button', { name: /^Call Jordan/ }));
+      expect(await screen.findByTestId('inline-call-outcome')).toBeInTheDocument();
+      expect(open).toHaveBeenCalledWith('tel:5551234567', '_self');
+      expect(screen.queryByTestId('cold-refused')).toBeNull();
+      fetchMock.mockRestore();
+      open.mockRestore();
+    });
+
+    it('CLEAR: LinkedIn opens the profile in a new tab', async () => {
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, channel: 'linkedin', href: 'https://linkedin.com/in/jordanreyes' }), { status: 200 }));
+      const open = vi.spyOn(window, 'open').mockReturnValue(null);
+      render(<DecisionCard item={withContact('linkedin_manual_task')} onAct={() => {}} />);
+      fireEvent.click(within(screen.getByTestId('readiness-actionable')).getByRole('button', { name: /Message Jordan on LinkedIn/ }));
+      expect(await screen.findByTestId('cold-cleared')).toBeInTheDocument();
+      expect(open).toHaveBeenCalledWith('https://linkedin.com/in/jordanreyes', '_blank', 'noopener,noreferrer');
+      fetchMock.mockRestore();
+      open.mockRestore();
+    });
+
+    it('recording an already-completed or inbound call is never gated', () => {
+      const fetchMock = vi.spyOn(globalThis, 'fetch');
+      render(<DecisionCard item={withContact()} onAct={() => {}} />);
+      fireEvent.click(screen.getByTestId('record-call-outcome'));
+      expect(screen.getByTestId('inline-call-outcome')).toBeInTheDocument();
+      expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('outbound-check'), expect.anything());
+      fetchMock.mockRestore();
+    });
   });
 });

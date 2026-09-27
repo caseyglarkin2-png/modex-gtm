@@ -32,6 +32,7 @@ import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/cal
 import { hypothesisSendable } from '@/lib/gap/research/evidence-gate';
 import { asStringList, humanWhyNow } from '@/lib/gap/ui/format';
 import { Badge } from '@/components/ui/badge';
+import { ColdOutboundButton } from './cold-outbound-button';
 import { CopyButton } from './copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
 import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
@@ -263,10 +264,13 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
-            {tel ? (
-              <a href={tel} className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)]">
+            {/* Last mile: a cold call re-reads HubSpot opportunity truth at the click; no raw tel: link. */}
+            {tel && decision && pack.personaSource === 'decision' ? (
+              <ColdOutboundButton decisionId={decision.id} channel="call" className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60">
                 Call {persona?.phone}
-              </a>
+              </ColdOutboundButton>
+            ) : tel ? (
+              <span className="text-xs text-[var(--muted-foreground)]">Call from the card (GAP checks HubSpot first)</span>
             ) : (
               <span className="text-xs italic text-[var(--muted-foreground)]">no phone on file</span>
             )}

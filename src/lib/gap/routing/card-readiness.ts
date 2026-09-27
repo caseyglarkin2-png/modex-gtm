@@ -41,6 +41,12 @@ export interface ReadinessInput {
   };
   hypothesis: { id: string; status?: string; revisedBy?: string | null } | null;
   suppression?: { class: SuppressionClass; hits: string[] } | null;
+  /**
+   * Last mile: this card's thesis (its hypothesis, or one covering its person)
+   * is waiting in the REVIEW lane right now. Only then does a missing-thesis
+   * fix point at REVIEW; otherwise REVIEW may be empty and the work is research.
+   */
+  reviewWaiting?: boolean;
   /** Multi-touch state for a card with a Gmail-proven sent touch (queue.ts TouchSummary). */
   touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
 }
@@ -48,6 +54,8 @@ export interface ReadinessInput {
 export interface Link {
   label: string;
   href: string;
+  /** A cold outbound link (dial / LinkedIn profile): the card re-reads HubSpot opportunity truth at the click. */
+  cold?: 'call' | 'linkedin';
 }
 
 export type CardReadiness =
@@ -102,8 +110,30 @@ function accountFix(item: ReadinessInput, label: string): Link {
   return contactFix(item, label);
 }
 
-function hypothesisFix(): Link {
-  return { label: 'Review or create a hypothesis', href: HYPOTHESIS_REVIEW_HREF };
+/** The keys of what is waiting in the REVIEW lane (the cockpit's review split). */
+export interface ReviewWaiting {
+  hypothesisIds: readonly string[];
+  personaIds: readonly (number | string)[];
+}
+
+/** Is THIS card's thesis (its hypothesis, or one covering its person) waiting in REVIEW? */
+export function reviewWaitsFor(item: { hypothesis: { id: string } | null; persona: { id: number | string | null } }, waiting: ReviewWaiting | null | undefined): boolean {
+  if (!waiting) return false;
+  if (item.hypothesis && waiting.hypothesisIds.includes(item.hypothesis.id)) return true;
+  const pid = item.persona.id;
+  return pid !== null && pid !== undefined && waiting.personaIds.some((p) => String(p) === String(pid));
+}
+
+/**
+ * Last mile: the fix for a missing or unready thesis goes where the work is.
+ * REVIEW only when this card's thesis is actually waiting there; otherwise the
+ * card's own research (RESEARCH THIS proposes a thesis from verified facts), so
+ * Casey is never sent to an empty REVIEW lane. Label and destination agree.
+ */
+function hypothesisFix(item: ReadinessInput): Link {
+  if (item.reviewWaiting) return { label: 'Review the waiting hypothesis', href: HYPOTHESIS_REVIEW_HREF };
+  const href = `/gap?lane=research#card-${encodeURIComponent(item.id)}`;
+  return item.hypothesis ? { label: 'Find verified evidence', href } : { label: 'Research to propose a hypothesis', href };
 }
 
 export function cardReadiness(item: ReadinessInput): CardReadiness {
@@ -166,7 +196,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
       case 'complete':
         return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: packLink ? [packLink] : [] };
       case 'unknown':
-        return { state: 'missing_prerequisite', missing: `Sequence status could not be read (${t.detail ?? 'Gmail unreadable'}). Nothing is prepared until it can be.`, fix: packLink ?? hypothesisFix() };
+        return { state: 'missing_prerequisite', missing: `Sequence status could not be read (${t.detail ?? 'Gmail unreadable'}). Nothing is prepared until it can be.`, fix: packLink ?? hypothesisFix(item) };
     }
   }
 
@@ -184,19 +214,19 @@ function readinessOf(item: ReadinessInput): CardReadiness {
   switch (item.action) {
     case 'enroll_gap_sequence':
     case 'one_off_email': {
-      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix() });
+      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix(item) });
       if (!item.persona.email) return withWarning({ state: 'missing_prerequisite' as const, missing: `No email address on file for ${name}.`, fix: contactFix(item, 'Add an email in HubSpot') });
       return withWarning({ state: 'actionable' as const, primary: openPack!, secondary: [] });
     }
     case 'call_now': {
       const tel = telHref(item.persona.phone ?? null);
       if (!tel) return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable phone number for ${name}.`, fix: contactFix(item, 'Add a phone in HubSpot') });
-      return withWarning({ state: 'actionable' as const, primary: { label: `Call ${name}`, href: tel }, secondary: openPack ? [openPack] : [] });
+      return withWarning({ state: 'actionable' as const, primary: { label: `Call ${name}`, href: tel, cold: 'call' as const }, secondary: openPack ? [openPack] : [] });
     }
     case 'linkedin_manual_task': {
       const li = item.persona.linkedinUrl?.trim();
       if (!li) return withWarning({ state: 'missing_prerequisite' as const, missing: `No LinkedIn profile on file for ${name}.`, fix: contactFix(item, 'Add a LinkedIn URL in HubSpot') });
-      return withWarning({ state: 'actionable' as const, primary: { label: `Message ${name} on LinkedIn`, href: li }, secondary: openPack ? [openPack] : [] });
+      return withWarning({ state: 'actionable' as const, primary: { label: `Message ${name} on LinkedIn`, href: li, cold: 'linkedin' as const }, secondary: openPack ? [openPack] : [] });
     }
     case 'approve_hypothesis':
       return withWarning({ state: 'actionable' as const, primary: { label: 'Review the hypothesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
@@ -221,12 +251,12 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'no_hypothesis':
           // The router looks for this person's own hypothesis, then an account-level one; the account may
           // still have hypotheses written for OTHER people (Kroger does), so never claim it has none.
-          return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix() });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix(item) });
         case 'evidence_thin':
           return withWarning({
             state: 'missing_prerequisite' as const,
             missing: `The hypothesis for ${item.account.name} rests only on an automated keyword hit (a filing that "mentions capital expenditure"), which is not a reason to contact ${name}. Add one sourced, quoted fact about a distribution center, dock, yard or site change (a DC opening, expansion, consolidation or automation program, or a yard, gate or dock job posting) and link it to the hypothesis.`,
-            fix: hypothesisFix(),
+            fix: hypothesisFix(item),
           });
         case 'bounced_or_invalid':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `No usable email or phone for ${name}.`, fix: contactFix(item, 'Find a current email or phone') });
@@ -235,7 +265,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'tam_unknown':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `${item.account.name} has no verified TAM status.`, fix: accountFix(item, 'Verify TAM on the account') });
         case 'hyp_stale':
-          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The hypothesis rests on stale or expired evidence.', fix: hypothesisFix() });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The hypothesis rests on stale or expired evidence.', fix: hypothesisFix(item) });
         case 'disp_wrong_person':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `The last reply said ${name} is the wrong person. Find the right contact.`, fix: accountFix(item, 'Find the right person') });
         default:

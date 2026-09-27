@@ -24,7 +24,7 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { DecisionCard, type QueueItem } from '@/components/gap/decision-card';
 import { ResearchOutcomeContext, ResearchOutcomeView, ResearchThis, type Decided } from '@/components/gap/research-this';
-import { RESEARCHABLE_RULES, cardReadiness, sellerLaneOf, type SellerLane } from '@/lib/gap/routing/card-readiness';
+import { RESEARCHABLE_RULES, cardReadiness, sellerLaneOf, type ReviewWaiting, type SellerLane } from '@/lib/gap/routing/card-readiness';
 
 interface QueueResponse {
   /** Newest routing among the current cards; null only when nothing was ever routed. */
@@ -115,9 +115,11 @@ export interface WorkQueueProps {
   openId?: string | null;
   openPanel?: ReactNode;
   closeHref?: string;
+  /** What is waiting in the REVIEW lane (the cockpit's review split), for each card's missing-thesis link. */
+  reviewWaiting?: ReviewWaiting | null;
 }
 
-export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPanel = null, closeHref = '/gap' }: WorkQueueProps) {
+export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPanel = null, closeHref = '/gap', reviewWaiting = null }: WorkQueueProps) {
   const [asOf, setAsOf] = useState<string | null>(null);
   const [outcomes, setOutcomes] = useState<Array<{ key: string; decided: Decided }>>([]);
   const reportOutcome = useCallback((o: { key: string; decided: Decided }) => setOutcomes((cur) => [o, ...cur.filter((x) => x.key !== o.key)]), []);
@@ -212,6 +214,7 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
       onAct={(humanAction) => void act(item, humanAction)}
       expanded={item.id === openId ? openPanel : null}
       closeHref={closeHref}
+      reviewWaiting={reviewWaiting}
     />
   );
 
