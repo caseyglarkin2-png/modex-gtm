@@ -33,6 +33,7 @@
  * the route writes), so they are not persisted here.
  */
 import { upsertContact as defaultUpsertContact } from '@/lib/hubspot/contacts';
+import type { GapDraftInvalidation } from '@/lib/gap/execution/unsubscribe-drafts';
 
 export type UnsubscribeSource = 'unsubscribe_link' | 'gap_disposition' | 'manual';
 
@@ -55,6 +56,12 @@ export type RecordUnsubscribeInput = {
   hubspot?: { enabled: boolean; client?: UnsubscribeHubSpotClient };
   /** Reserved for callers; the row's unsubscribed_at keeps the DB default like the route. */
   now?: Date;
+  /**
+   * Ops closeout: invalidate the GAP-created Gmail drafts to this recipient
+   * (src/lib/gap/execution/unsubscribe-drafts.ts). Default: enabled. Runs
+   * after the consent writes and never fails them.
+   */
+  gapDrafts?: { enabled?: boolean; invalidate?: (prisma: any, email: string) => Promise<GapDraftInvalidation> };
 };
 
 export type RecordUnsubscribeHubSpotOutcome =
@@ -72,7 +79,19 @@ export type RecordUnsubscribeResult = {
   /** Persona.updateMany count; 0 when created is false. */
   personaUpdated: number;
   hubspot: RecordUnsubscribeHubSpotOutcome;
+  /** Outstanding GAP drafts to this recipient: found, deleted, left pending reconciliation. */
+  gapDrafts: GapDraftInvalidation | 'skipped:disabled' | `failed:${string}`;
 };
+
+async function invalidateGapDrafts(prisma: any, email: string, opt: RecordUnsubscribeInput['gapDrafts']): Promise<RecordUnsubscribeResult['gapDrafts']> {
+  if (opt?.enabled === false) return 'skipped:disabled';
+  try {
+    const invalidate = opt?.invalidate ?? (await import('@/lib/gap/execution/unsubscribe-drafts')).invalidateGapDraftsFor;
+    return await invalidate(prisma, email);
+  } catch (error) {
+    return `failed:${error instanceof Error ? error.message : String(error)}`;
+  }
+}
 
 export function normalizeUnsubscribeEmail(email: string): string {
   return email.trim().toLowerCase();
@@ -94,7 +113,8 @@ export async function recordUnsubscribe(
       where: { email: { equals: email, mode: 'insensitive' }, do_not_contact: false },
       data: { do_not_contact: true },
     });
-    return { ok: true, created: false, personaUpdated: typeof repaired?.count === 'number' ? repaired.count : 0, hubspot: 'skipped:already_unsubscribed' };
+    const gapDrafts = await invalidateGapDrafts(prisma, email, input.gapDrafts);
+    return { ok: true, created: false, personaUpdated: typeof repaired?.count === 'number' ? repaired.count : 0, hubspot: 'skipped:already_unsubscribed', gapDrafts };
   }
 
   await prisma.unsubscribedEmail.create({
@@ -116,7 +136,7 @@ export async function recordUnsubscribe(
 
   const hubspotEnabled = input.hubspot?.enabled ?? true;
   if (!hubspotEnabled) {
-    return { ok: true, created: true, personaUpdated, hubspot: 'skipped:disabled' };
+    return { ok: true, created: true, personaUpdated, hubspot: 'skipped:disabled', gapDrafts: await invalidateGapDrafts(prisma, email, input.gapDrafts) };
   }
 
   let hubspot: RecordUnsubscribeHubSpotOutcome;
@@ -133,5 +153,5 @@ export async function recordUnsubscribe(
     hubspot = `failed:${error instanceof Error ? error.message : String(error)}`;
   }
 
-  return { ok: true, created: true, personaUpdated, hubspot };
+  return { ok: true, created: true, personaUpdated, hubspot, gapDrafts: await invalidateGapDrafts(prisma, email, input.gapDrafts) };
 }

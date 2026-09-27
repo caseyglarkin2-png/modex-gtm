@@ -455,6 +455,21 @@ export async function getGmailDraftState(draftId: string, sender?: GmailSender):
   return { exists: true, messageId: data.message?.id ?? null };
 }
 
+/**
+ * Delete one draft (ops closeout: an unsubscribe invalidates GAP drafts).
+ * 'not_found' means Gmail no longer has it, which may mean it was SENT, so the
+ * caller must not read it as discarded. Any other failure throws. Bounded.
+ */
+export async function deleteGmailDraft(draftId: string, sender?: GmailSender): Promise<'deleted' | 'not_found'> {
+  const mailbox = sender?.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = sender ? await accessTokenForSender(sender) : await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/drafts/${encodeURIComponent(draftId)}`;
+  const res = await fetch(url, { method: 'DELETE', headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(10_000) });
+  if (res.status === 404) return 'not_found';
+  if (!res.ok) throw new Error(`Gmail drafts.delete failed (${res.status})`);
+  return 'deleted';
+}
+
 export interface GmailThreadMessageMeta {
   id: string;
   labelIds: string[];
