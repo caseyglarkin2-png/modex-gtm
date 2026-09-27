@@ -122,6 +122,15 @@ ${SIGN}`;
     expect(r.detail).toBe('two problem families in one body: cost_to_ship (6 hits) and hidden_capacity (4 hits)');
   });
 
+  it('red team T7: problem cues inside a CITED verbatim quote are the source speaking and are not counted', () => {
+    const quote = '"Acme will open a new distribution center in Columbus with 40 dock doors, cutting detention and carrier accessorial charges at the dock."';
+    const prose = 'When a network grows by acquisition, each acquired site usually keeps its own gate process, and the network cannot see its yards the same way from one site to the next.';
+    const cited = `Hi Kara,\n\nFrom Acme's 8-K filed September 18: ${quote} [[SRC:ev_1]].\n\n${prose}\n\nIs that something your team is working through?\n\n${SIGN}`;
+    expect(checkOneProblem(draft(cited), ctxAt(0)).passed).toBe(true);
+    const uncited = cited.replace(' [[SRC:ev_1]]', '');
+    expect(checkOneProblem(draft(uncited), ctxAt(0)).passed).toBe(false);
+  });
+
   it('passes a single-family body and names the family', () => {
     const r = checkOneProblem(draft(STEP0), ctxAt(0));
     expect(r.passed).toBe(true);

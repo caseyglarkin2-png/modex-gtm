@@ -177,7 +177,9 @@ export const checkWordCount: Check = (draft, ctx) => {
 export const ONE_PROBLEM_MIN_HITS = 2;
 
 export const checkOneProblem: Check = (draft) => {
-  const text = stripMarkers(stripGreetingAndSignature(draft.body));
+  // Red team T7: a cited verbatim quote is the source's words (a filing that
+  // mentions dock doors), not the problem we frame; only our prose is judged.
+  const text = stripMarkers(stripGreetingAndSignature(draft.body.replace(CITED_QUOTE_RE, ' ')));
   const { primary, hits } = classifyFamilies(text);
   const contenders: ProblemFamily[] = PROBLEM_FAMILIES.filter((f) => hits[f] >= ONE_PROBLEM_MIN_HITS).sort(
     (a, b) => hits[b] - hits[a] || PROBLEM_FAMILIES.indexOf(a) - PROBLEM_FAMILIES.indexOf(b),

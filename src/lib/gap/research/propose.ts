@@ -113,7 +113,9 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   const base = status.hypothesisId
     ? await prisma.prospectingHypothesis.findUnique({ where: { id: status.hypothesisId } })
     : null;
-  const observation = quotable.map((s) => citedQuote(s.title, s.evidence_text!, s.id, run.account_name)).join(' ');
+  // One fact opens the first touch (red team T6/T7); a second outreach fact
+  // stays linked as supporting evidence, never a second quote in the email.
+  const observation = citedQuote(quotable[0].title, quotable[0].evidence_text!, quotable[0].id, run.account_name);
   const problemHypothesis =
     base?.problem_hypothesis ??
     'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.';

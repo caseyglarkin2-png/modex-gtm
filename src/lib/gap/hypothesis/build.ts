@@ -223,7 +223,12 @@ export const FORBIDDEN_TEXT = new RegExp(
 // ---------------------------------------------------------------------------
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const OBSERVATION_MAX_SIGNALS = 3;
+/**
+ * Red team T6/T7: a first touch opens with ONE verified fact. More quotes make
+ * the email longer than its own compiler allows and read as a dossier; the
+ * other citable signals stay linked as supporting evidence.
+ */
+const OBSERVATION_MAX_SIGNALS = 1;
 const TITLE_CLIP = 160;
 const DEFAULT_MAX_PER_PERSONA = 2;
 

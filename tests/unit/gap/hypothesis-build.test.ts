@@ -222,7 +222,9 @@ describe('buildCandidates: observation', () => {
   it('cites S1 and passes validateObservation against its own signal ids', () => {
     const candidate = siteOpsHiddenCapacity();
     expect(candidate.observation).toContain('[S:S1]');
-    expect(candidate.observation).toContain('[S:S2]');
+    // Red team T6/T7: ONE fact opens the first touch; S2 stays linked as support.
+    expect(candidate.observation).not.toContain('[S:S2]');
+    expect(candidate.signalIds).toContain('S2');
     expect(validateObservation(candidate.observation, candidate.signalIds)).toMatchObject({ ok: true });
   });
 
