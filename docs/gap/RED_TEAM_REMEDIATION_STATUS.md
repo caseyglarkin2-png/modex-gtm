@@ -844,3 +844,41 @@ Named debt (P2 and below, recorded, not absorbed):
 Final-fix gates: unit 467 files / 5089 tests green (1 skipped); typecheck
 green; local build green; scratch E2E 11/11 scripts, 131 checks, 0 failed;
 14 mutation proofs across F1-F5. `github_actions = unavailable_external_billing`.
+
+## GAP operational closeout (2026-09-27)
+<!-- verified:2026-09-27 -->
+
+PRs: modex-gtm #273 (merged `95d7a1cc`) + the closeout-review fix PR;
+Flow-State- #83 (merged `5eadb53e`). No schema change. No prospect sends or
+drafts. `github_actions = unavailable_external_billing`.
+
+### Cold first-touch readiness receipt
+
+| check | result |
+|---|---|
+| SPF | PASS, `smtp.mailfrom=casey@yardflow.ai` (received copy of one internal alignment test through the exact GAP sender path, 2026-09-27T14:53Z) |
+| DKIM | PASS, `d=yardflow.ai`, `s=google` |
+| DMARC | PASS, aligned `header.from=yardflow.ai` (`p=none`) |
+| Postmaster | configured; data insufficient at current volume (spam, FBL, auth, encryption, delivery errors: "No data" last 7 days; compliance status all Compliant, last updated Aug 16; deliverability "Not enough outgoing email") |
+| unsubscribe | branded `https://yardflow.ai/api/unsubscribe/` one-click POST live: 200, canonical row, idempotent (controlled internal address); page 200 |
+| reply / bounce intake | gap-mailbox cron ok on the new code (all received mail incl. spam/trash, RFC idempotency, quarantine visible, bounded reads) |
+| duplicate-send protection | person-level claims + step-0 GAP-mailbox Sent read (180 d, incl. trash) + EmailLog/enrollment/Outbox reads |
+| stale-card protection | decision_stale at step 0 (F5) + draft-mode active-opportunity guard |
+| unknown-outcome reconciliation | from Gmail Sent; unknown never becomes "not sent" |
+| HubSpot webhook | NON-GAP operational debt: the only subscription (private app "GTM engine" 34782087; contact/company/deal, active) targets a Railway FastAPI service `web-production-a6ccf.up.railway.app`, not modex; modex has no `HUBSPOT_WEBHOOK_SECRET`. GAP bounce truth comes from the GAP mailbox DSN intake, not HubSpot. Verifier fixed and pinned to HubSpot's official v3 example. |
+
+### Live data actions (production)
+- Kroger hypothesis `cmuhbne1z` retired active -> unresolved (`close_unresolved`, `scripts/gap/retire-hypothesis.ts`); narrative, signals and send records untouched.
+- Persona 2151 (E2E fixture account) DNC mirror repaired through `recordUnsubscribe`'s existing repair branch; unsubscribe/DNC drift now 0.
+- Routing re-run for PepsiCo + Kroger (`run-2026-09-27T14:56:38Z`): 5 PepsiCo evidence_thin -> research; Kroger research/nurture. No email/enroll card sits on an insufficient or closed hypothesis.
+- Left for human truth: Dawn Foods reply_triage card; the historical duplicate calendar InboundMessage pair.
+
+### Named debt (recorded, not absorbed)
+- DMARC aggregate reports land in `dmarc.rua@freightroll.com` (a separate mailbox this environment cannot read; `casey@freightroll.com` holds none). EasyDMARC weekly summaries reach casey@freightroll.com but show "No email activity" because `rua` does not point at EasyDMARC. Options, both outside this pass: read access (Workspace delegation of `gmail.readonly` on that mailbox to a GAP service account), or add EasyDMARC's collector to `rua` (a DNS change).
+- HubSpot webhook: repoint or retire the modex route only with the Railway consumer's owner.
+- Pending draft invalidations (`execution.gmail_draft_invalidation_pending`) have no consumer; unknown-send reconcile checks oldest-first (can starve past 10); alignment-test hourly limit is check-then-send (internal-only); `isAuthorizedCronRequest` still accepts `?secret=`.
+- List-Unsubscribe header survival on a Gmail-UI-sent GAP draft not yet proven with a real draft.
+- HubSpot `hs_email_optout` mirror outcome not audited.
+- Active-opportunity guard's deal leg has no live data (`engaged` accounts pass); pre-call brief on the unlinked /gap/call page labels an INSUFFICIENT observation "FACT"; approval does not run the observation-support rule (send refuses it); a source title containing straight quotes is falsely refused; Clawd and direct freightroll.com Gmail sends are not read by the step-0 duplicate check.
+- HubSpot reply poller rows carry no RFC id (a reply seen by both planes can be two rows).
+- The deleted plaintext refresh-token row: see the closeout-review PR receipt.

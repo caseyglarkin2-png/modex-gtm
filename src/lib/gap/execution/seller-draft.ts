@@ -72,6 +72,7 @@ export type SellerDraftRefusal =
   | 'decision_stale'
   | 'email_bounced'
   | 'emailed_outside_gap'
+  | 'gap_sender_unconfigured'
   | 'mailbox_sent_unreadable'
   | 'touch_not_due'
   | 'sequence_stopped'
@@ -130,6 +131,12 @@ export interface SellerDraftDeps {
   unsubscribeUrl?: (email: string) => string;
   /** True when someone is already in conversation (draft and send). */
   activeOpportunity?: (prisma: PrismaLike, accountName: string, email: string, now: Date) => Promise<boolean>;
+  /**
+   * Closeout review: refuse when the GAP mailbox is not configured instead of
+   * falling back to the env identity (freightroll.com, which publishes no
+   * DKIM). Default: on in production.
+   */
+  requireGapSender?: boolean;
   /** Ops closeout 19: messages in the GAP mailbox's Sent to this recipient in a window (listSentTo). */
   mailboxSentTo?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; internalDate: Date; subject: string }>>;
 }
@@ -280,6 +287,9 @@ export async function prepareSellerEmail(
   if (decision.lane === 'blocked' || decision.action === 'do_not_contact') return refuse(prisma, actor, decisionId, { ok: false, reason: 'decision_blocked' });
   if (!EMAIL_ACTIONS.has(decision.action)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'not_an_email_action', detail: decision.action });
   if (!decision.hypothesis_id) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_hypothesis' });
+  if ((deps.requireGapSender ?? process.env.NODE_ENV === 'production') && !(deps.gapSender ?? gapGmailSender)()) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'gap_sender_unconfigured', detail: 'The GAP mailbox (GAP_GMAIL_USER_EMAIL + credentials) is not configured. GAP email never falls back to another identity.' });
+  }
 
   // Which touch. Step 0 only before anything was sent; a later step only when
   // next-touch says it is due and no stop rule fired (reply, DNC, unsubscribe,

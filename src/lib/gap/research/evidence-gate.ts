@@ -21,7 +21,7 @@
  * hypothesis sendable. Casey's own operator knowledge informs a thesis but is
  * not a public, verifiable fact, so it cannot be the first-touch fact either.
  */
-import { isPhysicalOpsFact } from './facts';
+import { isPhysicalOpsFact, splitSentencesAware } from './facts';
 import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
 
@@ -138,12 +138,20 @@ export function observationSupportGap(
   const citedIds = new Set(extractCitationIds(text));
   const facts = citedFacts.filter((f) => citedIds.has(f.id));
   if (facts.length === 0) return text.trim() || '(empty)';
-  const evidence = facts.map((f) => norm(f.evidence_text ?? ''));
+  // Closeout review: a quote must be a WHOLE sentence of a cited fact, or the
+  // whole excerpt (citedQuote's shape); a fragment can drop a negation.
+  const strip = (t: string) => t.replace(/[.!?,;:]+$/, '').trim();
+  const whole = new Set(
+    facts.flatMap((f) => {
+      const text = f.evidence_text ?? '';
+      return [text, ...splitSentencesAware(text)].map((t) => strip(norm(t))).filter(Boolean);
+    }),
+  );
 
   let residue = text;
   for (const m of text.matchAll(/"([\s\S]+?)"(?=\s*\[S:[A-Za-z0-9_-]+\])/g)) {
     const quote = norm(m[1]).replace(/[.!?,;:]+$/, '');
-    if (!quote || !evidence.some((e) => e.includes(quote))) return m[0];
+    if (!quote || !whole.has(quote)) return m[0];
     residue = residue.replace(m[0], ' ');
   }
   residue = residue.replace(TOKEN, ' ');

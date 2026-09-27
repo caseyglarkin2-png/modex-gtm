@@ -57,19 +57,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         mutable.accessTokenExpires = account.expires_at ? account.expires_at * 1000 : undefined;
         mutable.refreshToken = account.refresh_token ?? mutable.refreshToken;
 
-        // Persist refresh token to DB so we can bootstrap GOOGLE_REFRESH_TOKEN
+        // Closeout review (security): the plaintext `__system__` copy of the
+        // refresh token (a one-time bootstrap for GOOGLE_REFRESH_TOKEN, read
+        // only by the deleted /api/admin/gmail-token) is no longer written.
         if (account.refresh_token) {
           try {
             const { prisma } = await import('@/lib/prisma');
-            // Delete old then insert — simpler than upsert with autoincrement
-            await prisma.generatedContent.deleteMany({
-              where: { account_name: '__system__', content_type: 'google_refresh_token' },
-            });
-            await prisma.generatedContent.create({
-              data: { account_name: '__system__', content_type: 'google_refresh_token', content: account.refresh_token, tone: 'system' },
-            });
-
-            // Also store this user's refresh token under their own identity
+            // Store this user's refresh token under their own identity
             // (encrypted) so they can send as themselves. Falls back gracefully
             // (no-op) when TOKEN_ENCRYPTION_KEY is unset — never blocks sign-in.
             const signingInEmail = token.email as string | undefined;
