@@ -168,3 +168,11 @@ describe('createGapApiClient and request', () => {
     }
   });
 });
+
+describe('ops closeout 17: getCallBrief carries the card hypothesis', () => {
+  it('adds ?hypothesisId= when given, and only then', async () => {
+    const { fetchImpl } = stub({ persona: {}, account: {}, hypothesis: null, lastDispositions: [], openBids: [], suggestedQuestions: [], afterAcknowledgementQuestions: [] });
+    await getCallBrief(41, { fetchImpl }, 'H 1');
+    expect(fetchImpl.mock.calls[0][0]).toBe('/api/gap/call/41?hypothesisId=H%201');
+  });
+});

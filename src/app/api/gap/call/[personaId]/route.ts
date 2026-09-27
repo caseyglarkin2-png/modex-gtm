@@ -47,7 +47,9 @@ export async function GET(request: NextRequest, context: { params: Promise<{ per
   const raw = decodeURIComponent(personaId ?? '').trim();
   if (!/^\d+$/.test(raw)) return NextResponse.json({ error: 'invalid_query', field: 'personaId' }, { status: 400 });
 
-  const brief = await callBrief(prisma, Number(raw));
+  // Ops closeout 17: an inline call asks for its CARD's hypothesis; the brief never substitutes another.
+  const hypothesisId = request.nextUrl.searchParams.get('hypothesisId')?.trim() || null;
+  const brief = await callBrief(prisma, Number(raw), { hypothesisId });
   if (!brief) return NextResponse.json({ error: 'not_found' }, { status: 404 });
   return NextResponse.json(brief);
 }

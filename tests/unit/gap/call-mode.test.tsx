@@ -95,3 +95,12 @@ describe('CallMode', () => {
     expect(postDisposition.mock.calls[0][0]).toMatchObject({ hypothesisId: 'H_CARD', channel: 'call' });
   });
 });
+
+describe('ops closeout 17: call mode opened from a card', () => {
+  it('asks for the brief of the CARD hypothesis', async () => {
+    const client = clientWith(vi.fn());
+    render(<CallMode personaId="7" client={client} hypothesis={{ id: 'H_CARD', problemFamily: 'new_sites_acquisitions' }} />);
+    await screen.findByTestId('call-tap-gatekeeper');
+    expect(client.getCallBrief).toHaveBeenCalledWith(7, 'H_CARD');
+  });
+});

@@ -141,3 +141,18 @@ describe('<PreCallBrief>', () => {
     expect(screen.getByTestId('brief-persona')).toHaveTextContent('ops@acme.example');
   });
 });
+
+describe('ops closeout 17: quantify only after the buyer acknowledges the problem', () => {
+  it('shows the quantifying questions in their own section, labelled for after acknowledgement', () => {
+    render(<PreCallBrief brief={brief({ afterAcknowledgementQuestions: ['How many trailers wait at the gate?'] })} />);
+    const section = screen.getByTestId('brief-after-acknowledgement');
+    expect(within(section).getByText(BRIEF_LABELS.afterAcknowledgement)).toBeInTheDocument();
+    expect(within(section).getByText('How many trailers wait at the gate?')).toBeInTheDocument();
+    expect(within(screen.getByTestId('brief-questions')).queryByText('How many trailers wait at the gate?')).toBeNull();
+  });
+
+  it('no section when there is nothing to quantify', () => {
+    render(<PreCallBrief brief={brief({ afterAcknowledgementQuestions: [] })} />);
+    expect(screen.queryByTestId('brief-after-acknowledgement')).toBeNull();
+  });
+});

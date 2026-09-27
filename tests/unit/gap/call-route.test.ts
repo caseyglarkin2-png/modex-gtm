@@ -65,7 +65,7 @@ describe('GET /api/gap/call/[personaId]', () => {
     let res = await call('7');
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual(BRIEF);
-    expect(mockedBrief).toHaveBeenCalledWith({ __tag: 'fake-prisma' }, 7);
+    expect(mockedBrief).toHaveBeenCalledWith({ __tag: 'fake-prisma' }, 7, { hypothesisId: null });
     mockedAuth.mockResolvedValue(null);
     res = await call('7', { headers: { 'x-gap-token': 'cron-secret-value' } });
     expect(res.status).toBe(200);
@@ -80,5 +80,13 @@ describe('GET /api/gap/call/[personaId]', () => {
     res = await call('404');
     expect(res.status).toBe(404);
     expect(await res.json()).toEqual({ error: 'not_found' });
+  });
+});
+
+describe('ops closeout 17: the card hypothesis reaches the brief', () => {
+  it('?hypothesisId= is passed through; the brief shows that hypothesis, never a substitute', async () => {
+    const res = await call('7', { url: 'http://localhost/api/gap/call/7?hypothesisId=H_CARD' });
+    expect(res.status).toBe(200);
+    expect(mockedBrief).toHaveBeenLastCalledWith({ __tag: 'fake-prisma' }, 7, { hypothesisId: 'H_CARD' });
   });
 });
