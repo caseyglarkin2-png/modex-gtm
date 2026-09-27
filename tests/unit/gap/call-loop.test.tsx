@@ -13,8 +13,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 vi.mock('@/app/gap/call/[personaId]/call-mode', () => ({
-  CallMode: ({ personaId, onRecorded }: { personaId: string; onRecorded?: (c: string) => void }) => (
-    <div data-testid="call-mode-stub" data-persona={personaId}>
+  CallMode: ({ personaId, onRecorded, hypothesis }: { personaId: string; onRecorded?: (c: string) => void; hypothesis?: { id: string; problemFamily: string } }) => (
+    <div data-testid="call-mode-stub" data-persona={personaId} data-hypothesis={hypothesis?.id ?? ''} data-family={hypothesis?.problemFamily ?? ''}>
       <button type="button" onClick={() => onRecorded?.('no_answer')}>record no answer</button>
       <button type="button" onClick={() => onRecorded?.('voicemail')}>record voicemail</button>
       <button type="button" onClick={() => onRecorded?.('problem_confirmed')}>record conversation</button>
@@ -83,5 +83,19 @@ describe('T8 inline call outcome', () => {
       expect(screen.queryByTestId('record-call-outcome')).toBeNull();
       unmount();
     }
+  });
+
+  it.each(['evidence_thin', 'no_hypothesis', 'hyp_stale'])('Release C review SF2: no inline call recording on a research card (%s)', (ruleId) => {
+    render(<DecisionCard item={item({ ruleId, action: 'research_required' } as Partial<QueueItem>)} onAct={() => {}} />);
+    expect(screen.queryByTestId('record-call-outcome')).toBeNull();
+    expect(screen.queryByTestId('inline-call-outcome')).toBeNull();
+  });
+
+  it('Release C review SF2: the call records against the CARD hypothesis, not whichever one the brief picks', () => {
+    render(<DecisionCard item={item({ hypothesis: { id: 'hyp_card', status: 'active', family: 'new_sites_acquisitions', confidence: 0 } } as Partial<QueueItem>)} onAct={() => {}} />);
+    fireEvent.click(screen.getByTestId('record-call-outcome'));
+    const stub = screen.getByTestId('call-mode-stub');
+    expect(stub).toHaveAttribute('data-hypothesis', 'hyp_card');
+    expect(stub).toHaveAttribute('data-family', 'new_sites_acquisitions');
   });
 });

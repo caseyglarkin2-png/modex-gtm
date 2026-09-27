@@ -38,7 +38,7 @@ import {
   sellerActionLabel,
   telHref,
 } from '@/lib/gap/routing/seller-action';
-import { cardReadiness } from '@/lib/gap/routing/card-readiness';
+import { cardReadiness, RESEARCHABLE_RULES } from '@/lib/gap/routing/card-readiness';
 import { ResearchThis } from './research-this';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge } from './hypothesis-drawer';
@@ -181,7 +181,6 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
   const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
   const [callOpen, setCallOpen] = useState(false);
   const [retryNote, setRetryNote] = useState<string | null>(null);
-  const canRecordCall = !item.blocked && typeof item.persona.id === 'number' && item.hypothesis !== null && !(typeof item.humanAction === 'string' && item.humanAction.length > 0);
 
   const chipClass = ACTION_CHIP_CLASS[item.action] ?? 'border-[var(--border)] text-[var(--foreground)]';
   const acted = typeof item.humanAction === 'string' && item.humanAction.length > 0;
@@ -214,6 +213,16 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
     suppression: item.suppression ?? null,
     touch: item.touch ?? null,
   });
+  // Release C review SF2: the inline call recorder opens only on an actionable
+  // card. A research card (evidence thin, no hypothesis, stale) has no call to
+  // record: its work is research, and a call logged there is noise.
+  const canRecordCall =
+    !item.blocked &&
+    readiness.state === 'actionable' &&
+    !RESEARCHABLE_RULES.has(item.ruleId) &&
+    typeof item.persona.id === 'number' &&
+    item.hypothesis !== null &&
+    !(typeof item.humanAction === 'string' && item.humanAction.length > 0);
 
   return (
     <article
@@ -308,6 +317,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
           ) : null}
           <CallMode
             personaId={String(item.persona.id)}
+            hypothesis={item.hypothesis ? { id: item.hypothesis.id, problemFamily: item.hypothesis.family } : undefined}
             onRecorded={(responseClass) => {
               // Red team T8: a real conversation completes the card; no answer,
               // voicemail or a gatekeeper keeps it open to retry (routing holds the

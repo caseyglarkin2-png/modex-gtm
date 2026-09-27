@@ -33,9 +33,16 @@ export function CallMode({
   personaId,
   client = defaultGapApiClient,
   onRecorded,
+  hypothesis,
 }: {
   personaId: string;
   client?: GapApiClient;
+  /**
+   * Release C review SF2: the card's own hypothesis. The brief picks the
+   * persona's newest hypothesis, which can be a different card's; an inline
+   * call records against the card it was opened from.
+   */
+  hypothesis?: { id: string; problemFamily: string };
   /** Red team T8: the class just recorded, so an inline caller can keep a no-answer card retryable. */
   onRecorded?: (responseClass: string) => void;
 }) {
@@ -71,18 +78,18 @@ export function CallMode({
   return (
     <div className="space-y-6">
       <PreCallBrief brief={brief} />
-      {brief.hypothesis && contactEmail ? (
+      {(hypothesis ?? brief.hypothesis) && contactEmail ? (
         <DispositionForm
           key={sourceId}
           mode="call"
           client={client}
           prefill={{
-            hypothesisId: brief.hypothesis.id,
+            hypothesisId: (hypothesis ?? brief.hypothesis)!.id,
             personaId: brief.persona.id,
             contactEmail,
             channel: 'call',
             source: { kind: 'call', id: sourceId },
-            problemFamily: brief.hypothesis.problemFamily,
+            problemFamily: (hypothesis ?? brief.hypothesis)!.problemFamily,
           }}
           onSubmitted={(_result, responseClass) => {
             // SHOULD FIX (Opus adversarial review, 2026-09-24): a submit
