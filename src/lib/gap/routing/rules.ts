@@ -411,7 +411,10 @@ export const RULES: RoutingRule[] = [
   {
     id: 'hyp_proposed',
     label: 'R11',
-    when: (i) => i.hypothesis?.status === 'draft' || i.hypothesis?.status === 'review_required',
+    // Red team T6 (final integrated regression): approval refuses a hypothesis
+    // with no cited outreach fact, so such a card is research (R12b), never an
+    // "approve" card that can only fail.
+    when: (i) => (i.hypothesis?.status === 'draft' || i.hypothesis?.status === 'review_required') && i.hypothesis.evidenceThin !== true,
     action: 'approve_hypothesis',
     lane: 'work_queue',
     reason: (i) => i.hypothesis!.status,
@@ -435,7 +438,8 @@ export const RULES: RoutingRule[] = [
     // Closeout 2026-09-25: Joey Maggard's card recommended an email on a
     // hypothesis whose only evidence was "KR 10-Q mentions: capital
     // expenditure". A keyword hit is not a reason to contact someone.
-    when: (i) => hypothesisLive(i) && i.hypothesis!.evidenceThin === true,
+    when: (i) =>
+      (hypothesisLive(i) || i.hypothesis?.status === 'draft' || i.hypothesis?.status === 'review_required') && i.hypothesis!.evidenceThin === true,
     action: 'research_required',
     lane: 'work_queue',
     reason: () => 'evidence_thin',
