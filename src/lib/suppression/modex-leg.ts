@@ -95,8 +95,17 @@ export async function findSuppressedPersonas(
     select: { email: true },
   });
 
+  // The recipient's own unsubscribe is a decision not to contact too (red
+  // team Release B review): a row here with no persona flag (a partial write,
+  // a persona imported after the unsubscribe) must still suppress. Same
+  // domain-scoped read, same coarse key; a store failure throws like the one above.
+  const unsubscribed = await prisma.unsubscribedEmail.findMany({
+    where: { OR: domains.map((d) => ({ email: { endsWith: `@${d}`, mode: 'insensitive' as const } })) },
+    select: { email: true },
+  });
+
   const suppressedKeys = new Set<string>();
-  for (const row of rows) {
+  for (const row of [...rows, ...unsubscribed]) {
     const k = blockKey(row.email ?? '');
     if (k) suppressedKeys.add(k);
   }

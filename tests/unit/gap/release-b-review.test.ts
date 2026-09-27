@@ -126,3 +126,14 @@ describe('#6 a token failure is definitive: nothing was sent', () => {
     expect(ok).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('#5 an unsubscribed address is refused at step 0 even without do_not_contact', () => {
+  it('prepareSellerEmail reads unsubscribed_emails: refused recipient_unsubscribed', async () => {
+    const { prepareSellerEmail } = await import('@/lib/gap/execution/seller-draft');
+    const d = db();
+    const prisma: any = prismaOf(d);
+    prisma.unsubscribedEmail = { findFirst: vi.fn(async ({ where }: any) => (String(where.email.equals).toLowerCase() === JOEY ? { id: 'u1' } : null)) };
+    const r = await prepareSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, stepIndex: 0 }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'recipient_unsubscribed' });
+  });
+});

@@ -62,6 +62,7 @@ export type SellerDraftRefusal =
   | 'step_already_sent'
   | 'send_in_progress_or_unknown'
   | 'draft_outstanding'
+  | 'recipient_unsubscribed'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -300,6 +301,10 @@ export async function prepareSellerEmail(
   if (!email) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_email' });
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
+  // The unsubscribe table is the recipient's own decision; do_not_contact is
+  // only its mirror and can lag it (Release B review #5). Read it directly.
+  const unsubscribed = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true } });
+  if (unsubscribed) return refuse(prisma, actor, decisionId, { ok: false, reason: 'recipient_unsubscribed' });
   if (mode === 'send') {
     const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
     if (opportunity) {

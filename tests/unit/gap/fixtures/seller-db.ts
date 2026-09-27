@@ -86,6 +86,7 @@ export function prismaOf(d: Db) {
       findFirst: vi.fn(async ({ where }: any) => d.versions.find((x) => x.family_id === where.family_id) ?? null),
     },
     sequenceFamily: { findMany: vi.fn(async ({ where }: any) => d.families.filter((f) => f.problem_family === where.problem_family)) },
+    unsubscribedEmail: { findFirst: vi.fn(async () => null) },
     gapCompile: {
       findMany: vi.fn(async ({ where }: any) =>
         d.compiles

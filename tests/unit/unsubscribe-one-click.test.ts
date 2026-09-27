@@ -139,3 +139,14 @@ describe('the advertised header targets the one-click endpoint', () => {
     expect(COMPANY_POSTAL_ADDRESS).toBe('FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104');
   });
 });
+
+describe('Release B review #5: the idempotent path re-applies do_not_contact', () => {
+  it('an existing unsubscribe row with a persona still contactable (a prior partial failure) is repaired on retry', async () => {
+    const { d } = world();
+    d.unsub.push({ email: JOEY });
+    expect(d.personas.find((x) => x.id === 1886).do_not_contact).toBe(false);
+    const res = await oneClick(`email=${encodeURIComponent(JOEY)}&token=${generateToken(JOEY)}`);
+    expect(res.status).toBe(200);
+    expect(d.personas.find((x) => x.id === 1886).do_not_contact).toBe(true);
+  });
+});

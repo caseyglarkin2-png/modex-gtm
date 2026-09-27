@@ -14,9 +14,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const mockedFindMany = vi.fn();
+const mockedUnsubFindMany = vi.fn(async () => [] as Array<{ email: string }>);
 
 vi.mock('@/lib/prisma', () => ({
-  prisma: { persona: { findMany: (...a: unknown[]) => mockedFindMany(...a) } },
+  prisma: {
+    persona: { findMany: (...a: unknown[]) => mockedFindMany(...a) },
+    unsubscribedEmail: { findMany: (...a: unknown[]) => (mockedUnsubFindMany as any)(...a) },
+  },
 }));
 
 import { findSuppressedPersonas } from '@/lib/suppression/modex-leg';
@@ -34,10 +38,25 @@ function post(body: unknown, token: string | null = TOKEN) {
 
 beforeEach(() => {
   mockedFindMany.mockReset();
+  mockedUnsubFindMany.mockReset();
+  mockedUnsubFindMany.mockResolvedValue([]);
   process.env.POUNCE_INGEST_TOKEN = TOKEN;
 });
 
 describe('findSuppressedPersonas', () => {
+  it('Release B review #5: an UNSUBSCRIBED address is suppressed even when no persona row carries do_not_contact', async () => {
+    mockedFindMany.mockResolvedValue([]);
+    mockedUnsubFindMany.mockResolvedValue([{ email: 'joey.maggard@kroger.com' }]);
+    const r = await findSuppressedPersonas(['Joey.Maggard@Kroger.com']);
+    expect(r.suppressed).toEqual(['Joey.Maggard@Kroger.com']);
+  });
+
+  it('Release B review #5: an unreadable unsubscribe table THROWS (the route answers 503), never reads as clear', async () => {
+    mockedFindMany.mockResolvedValue([]);
+    mockedUnsubFindMany.mockRejectedValue(new Error('db down'));
+    await expect(findSuppressedPersonas(['joey.maggard@kroger.com'])).rejects.toThrow('db down');
+  });
+
   it('S1: blocks the EXACT address a decision was recorded against', async () => {
     // seannewtz@dswinc.com is do_not_contact in modex AND appears in clawd's
     // outreach_sends at that exact address. Not an alias miss: a straight
