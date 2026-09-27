@@ -32,6 +32,7 @@
  */
 
 import { createLimiter, type Limiter } from './bounded';
+import { outreachEvidence } from '../research/evidence-gate';
 import { personSendHistory } from '../execution/person-history';
 import { parseSteps } from '../sequence/steps';
 import { normalizeScore } from '../../pounce/fit';
@@ -167,15 +168,18 @@ interface SignalRow {
   freshness_expires_at: Date | null;
   source_kind?: string | null;
   summary?: string | null;
+  // The evidence gate's fields (red team T6); loaded with the full signal row.
+  source_type?: string | null;
+  external_ok?: boolean | null;
+  observed_at?: Date | null;
+  metadata?: unknown;
+  account_name?: string | null;
 }
 
-/** An auto-ingested keyword trigger that quotes nothing (see RoutingHypothesisInput.evidenceThin). */
-function isUnquotedTrigger(s: SignalRow): boolean {
-  return s.source_kind === 'pounce_trigger' && !(s.evidence_text ?? '').trim() && !(s.summary ?? '').trim();
-}
 
 interface HypothesisRow {
   id: string;
+  account_name?: string;
   status: string;
   problem_family: string;
   confidence: number;
@@ -442,7 +446,13 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     family: isProblemFamily(h.problem_family) ? h.problem_family : 'unmapped',
     confidence: h.confidence,
     evidenceFresh,
-    evidenceThin: signals.length > 0 && signals.every(isUnquotedTrigger),
+    // Red team T6: thin = no LIVE outreach fact (research/evidence-gate.ts), the
+    // same rule approval, activation, the compiler and the send gate apply.
+    evidenceThin:
+      outreachEvidence(
+        signals.filter((s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime()),
+        h.account_name ?? '',
+      ).tier !== 'VERIFIED_FACT',
     hasNewerVersion,
     expiresAt: h.expires_at ?? null,
     resumeAt: asDate(m.resumeAt),

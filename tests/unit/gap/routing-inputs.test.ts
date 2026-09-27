@@ -155,7 +155,7 @@ const ACCOUNT = 'Acme Foods';
 const EMAIL = 'VP.Ops@Acme.example';
 const EMAIL_LOWER = 'vp.ops@acme.example';
 
-function signal(id: string, overrides: Partial<{ evidence_url: string | null; evidence_text: string | null; freshness_expires_at: Date | null }> = {}) {
+function signal(id: string, overrides: Partial<{ evidence_url: string | null; evidence_text: string | null; freshness_expires_at: Date | null }> & Record<string, unknown> = {}) {
   return { signal: { id, evidence_url: null, evidence_text: null, freshness_expires_at: null, ...overrides } };
 }
 
@@ -255,7 +255,8 @@ function fullDb(): Db {
       metadata: { resumeAt: '2026-10-01T00:00:00.000Z' },
       created_at: daysAgo(5),
       signals: [
-        signal('sig-evidenced', { evidence_url: 'https://example.com/acme-ohio', freshness_expires_at: daysAhead(20) }),
+        // A live outreach fact (red team T6): verified, dated, quoted, this account, a network change.
+        signal('sig-evidenced', { evidence_url: 'https://example.com/acme-ohio', freshness_expires_at: daysAhead(20), evidence_text: 'Acme Foods opened a third Ohio distribution center in August 2026.', account_name: ACCOUNT, source_kind: 'evidence_record', source_type: 'public_primary', external_ok: true, observed_at: daysAgo(30), metadata: { verified: 'excerpt_found_at_source' } }),
         signal('sig-bare'),
       ],
     },
@@ -795,15 +796,19 @@ describe('comms', () => {
 // ---------------------------------------------------------------------------
 
 describe('hypothesis evidence depth (closeout)', () => {
-  it('evidenceThin is true only when every linked signal is an auto-ingested trigger with no quoted text or summary', async () => {
+  it('T6: evidenceThin is true unless a LIVE outreach fact is linked (keyword hit, unverified financial quote, operator hearsay and nothing at all are all thin)', async () => {
     const { buildHypothesisForTest } = await import('@/lib/gap/routing/inputs');
     const now = new Date('2026-09-25T00:00:00Z');
     const h = (signals: any[]) => ({ id: 'h', status: 'active', problem_family: 'hidden_capacity', confidence: 42, observation: 'o', problem_hypothesis: 'p', metadata: null, signals: signals.map((signal) => ({ signal })) });
     const keyword = { id: 's1', source_kind: 'pounce_trigger', title: 'KR 10-Q (2026-06-26) mentions: capital expenditure', summary: '', evidence_url: 'https://sec.gov/x', evidence_text: '', freshness_expires_at: null };
-    expect(buildHypothesisForTest(h([keyword]) as any, now)!.evidenceThin).toBe(true);
-    expect(buildHypothesisForTest(h([{ ...keyword, evidence_text: 'Capital investments totaled $1.5 billion' }]) as any, now)!.evidenceThin).toBe(false);
-    expect(buildHypothesisForTest(h([keyword, { ...keyword, id: 's2', source_kind: 'operator_knowledge' }]) as any, now)!.evidenceThin).toBe(false);
-    expect(buildHypothesisForTest(h([]) as any, now)!.evidenceThin).toBe(false);
+    const fact = { id: 's3', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', title: 'KROGER CO 10-Q', evidence_url: 'https://sec.gov/y', evidence_text: 'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc.', external_ok: true, observed_at: new Date('2026-09-18T00:00:00Z'), metadata: { verified: 'excerpt_found_at_source' }, freshness_expires_at: null };
+    const hk = (signals: any[]) => ({ ...h(signals), account_name: 'Kroger' });
+    expect(buildHypothesisForTest(hk([keyword]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([{ ...keyword, evidence_text: 'Capital investments totaled $1.5 billion' }]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([keyword, { ...keyword, id: 's2', source_kind: 'operator_knowledge', evidence_text: 'heard at MODEX' }]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([]) as any, now)!.evidenceThin).toBe(true);
+    expect(buildHypothesisForTest(hk([keyword, fact]) as any, now)!.evidenceThin).toBe(false);
+    expect(buildHypothesisForTest(hk([keyword, { ...fact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') }]) as any, now)!.evidenceThin).toBe(true);
   });
 });
 

@@ -82,3 +82,39 @@ describe('acquisition facts and abbreviation-aware quoting (live Kroger 8-K, 202
     expect(validateObservation(obs, ['sig1'])).toMatchObject({ ok: true });
   });
 });
+
+/**
+ * Red team T6: the three PepsiCo 10-Q (2026-07-09) sentences GAP verified,
+ * attached as evidence and let approve a thesis. Each is a real, verbatim
+ * sentence; none is a fact about a physical-network change. Pinned verbatim.
+ */
+const PEP_RESTRUCTURING =
+  'These pre-tax charges are expected to consist of approximately 50 % of severance and other employee-related costs, 15 % for asset impairments (all non-cash) resulting from plant closures and related actions, and 35 % for other costs associated with the implementation of our initiatives.';
+const PEP_RISK_FACTOR =
+  'These new or increased legal or regulatory requirements, along with initiatives to meet our sustainability goals, could result in significant increased costs and additional investments in facilities and equipment.';
+const PEP_LIQUIDITY =
+  'Our Liquidity and Capital Resources We believe that our cash generating capability and financial condition, together with our revolving credit facilities, working capital lines and other available methods of debt financing, such as commercial paper borrowings and long-term debt financing, will be adequate to meet our operating, investing and financing needs, including with respect to our net capital spending plans.';
+
+describe('T6: false-positive contexts are not physical-network facts', () => {
+  it.each([
+    ['restructuring-charge breakdown', PEP_RESTRUCTURING],
+    ['risk-factor boilerplate', PEP_RISK_FACTOR],
+    ['liquidity / credit facility', PEP_LIQUIDITY],
+  ])('PepsiCo %s does not qualify', (_label, sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(false);
+  });
+
+  it.each([
+    'Our revolving credit facility provides for borrowings of up to $5 billion.',
+    'We may be unable to open new distribution centers on schedule, which could adversely affect our results.',
+    'Capital expenditures for the quarter were $1.2 billion, primarily for facilities and technology.',
+    'Risks related to our facilities include natural disasters and labor disruptions.',
+  ])('generic boilerplate does not qualify: %s', (sentence) => {
+    expect(isPhysicalOpsFact(sentence)).toBe(false);
+  });
+
+  it('a real, dated network change still qualifies (Kroger / Giant Eagle; a DC opening)', () => {
+    expect(isPhysicalOpsFact('On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).')).toBe(true);
+    expect(isPhysicalOpsFact('In August 2026 the company opened a 1.1 million square foot distribution center in Ohio.')).toBe(true);
+  });
+});

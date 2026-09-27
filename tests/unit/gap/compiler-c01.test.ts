@@ -516,3 +516,16 @@ describe('GROUP_A_CHECKS', () => {
     expect(codes).toEqual(['C01', 'C05', 'C10']);
   });
 });
+
+describe('T6: a keyword-only signal cannot satisfy C01', () => {
+  it('a body citing a keyword hit (projected from the real signal row) is observation_unsupported', async () => {
+    const { evidenceRefsFromSignals } = await import('@/lib/gap/compiler/evidence-from-signals');
+    const now = new Date('2026-09-26T12:00:00Z');
+    const evidence = evidenceRefsFromSignals(
+      [{ id: 'ev_1', title: 'PEP 10-Q (2026-07-09) mentions: capital expenditure', evidence_url: 'https://www.sec.gov/x', external_ok: true, observed_at: new Date('2026-09-20T00:00:00Z'), freshness_expires_at: null, source_type: 'public_secondary', metadata: null, evidence_text: null, source_kind: 'pounce_trigger' }],
+      now,
+    );
+    const r = checkObservationUnsupported(draft(body(OBS, HYP)), ctx({ evidence }));
+    expect(r.passed).toBe(false);
+  });
+});

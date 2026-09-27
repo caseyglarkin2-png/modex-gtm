@@ -367,3 +367,26 @@ describe('draft -> sent reconciliation', () => {
     expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED || a.kind === DRAFT_SENT)).toBe(false);
   });
 });
+
+describe('T6: an INSUFFICIENT hypothesis never sends', () => {
+  it('a keyword-only hypothesis (the old "10-Q mentions: capital expenditure" shape) is refused evidence_insufficient', async () => {
+    const d = db();
+    d.hypotheses[0].signals = [{ signal: { id: 'sig-1', account_name: 'Kroger', source_kind: 'pounce_trigger', title: 'KR 10-Q mentions capital expenditure', evidence_text: null, evidence_url: 'https://sec.gov/x', external_ok: null, observed_at: NOW, freshness_expires_at: null, source_type: 'public_secondary', metadata: null } }];
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+  });
+
+  it('a verified quote that is not a network change (PepsiCo liquidity sentence) is refused too', async () => {
+    const d = db();
+    d.hypotheses[0].signals = [{ signal: { id: 'sig-1', account_name: 'Kroger', source_kind: 'evidence_record', title: '10-Q', evidence_text: 'Our Liquidity and Capital Resources We believe that our cash generating capability and financial condition, together with our revolving credit facilities, working capital lines and other available methods of debt financing, such as commercial paper borrowings and long-term debt financing, will be adequate to meet our operating, investing and financing needs, including with respect to our net capital spending plans.', evidence_url: 'https://sec.gov/x', external_ok: true, observed_at: NOW, freshness_expires_at: null, source_type: 'public_primary', metadata: { verified: 'excerpt_found_at_source' } } }];
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+  });
+
+  it('an expired outreach fact does not keep a hypothesis sendable', async () => {
+    const d = db();
+    d.hypotheses[0].signals[0].signal.freshness_expires_at = new Date(NOW.getTime() - 1000);
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+  });
+});

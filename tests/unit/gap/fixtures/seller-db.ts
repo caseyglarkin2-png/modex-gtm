@@ -41,7 +41,9 @@ export function db(): Db {
         sequence_version_id: null,
         sequence_family_id: null,
         falsification_questions: [],
-        signals: [{ signal: { id: 'sig-1', title: 'KR 10-Q mentions capital expenditure', evidence_url: 'https://sec.gov/x', external_ok: true, observed_at: NOW, freshness_expires_at: null, source_type: 'filing', metadata: null } }],
+        // Red team T6: a sendable hypothesis rests on an OUTREACH FACT (verified,
+        // dated, quoted, this account, a network change), not a keyword hit.
+        signals: [{ signal: { id: 'sig-1', account_name: 'Kroger', source_kind: 'evidence_record', title: 'KROGER CO 10-Q (filed 2026-09-18)', evidence_text: 'On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”).', evidence_url: 'https://sec.gov/x', external_ok: true, observed_at: NOW, freshness_expires_at: null, source_type: 'public_primary', metadata: { verified: 'excerpt_found_at_source' } } }],
         events: [],
       },
     ],

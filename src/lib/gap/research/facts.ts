@@ -37,6 +37,38 @@ export function isFinancialStatementMention(sentence: string): boolean {
 }
 
 /**
+ * Red team T6: verbatim filing sentences that name a facility word and a
+ * change word but state no change to the account's network. Pinned by the
+ * three PepsiCo 10-Q (2026-07-09) sentences GAP verified, attached and used to
+ * approve a thesis (tests/unit/gap/research-facts.test.ts):
+ *   - restructuring-charge breakdowns ("pre-tax charges ... asset impairments
+ *     resulting from plant closures"): an accounting split, not a closure
+ *   - risk-factor / forward-looking boilerplate ("could result in ...
+ *     additional investments in facilities"): a hypothetical
+ *   - liquidity and financing ("revolving credit facilities", "working
+ *     capital", "debt financing"): a "facility" that is a loan
+ *   - generic capital spending ("capital expenditures ... for facilities"):
+ *     a budget line, not a named site change
+ */
+const NON_OPERATIONAL_CONTEXT = new RegExp(
+  [
+    // restructuring and impairment accounting
+    String.raw`\bpre-tax charges?\b`, String.raw`\basset impairments?\b`, String.raw`\bimpairment charges?\b`, String.raw`\brestructuring (?:charges?|costs?)\b`, String.raw`\bseverance\b`,
+    // risk factors and forward-looking hedges
+    String.raw`\bcould (?:result|adversely|negatively|materially|harm|affect|impact)\b`, String.raw`\bmay (?:be unable|not be able|adversely|negatively|materially)\b`, String.raw`\brisks? (?:related|relating|associated) to\b`, String.raw`\badversely affect\b`, String.raw`\bno assurance\b`,
+    // liquidity, credit and financing
+    String.raw`\bliquidity\b`, String.raw`\bcredit facilit(?:y|ies)\b`, String.raw`\bworking capital\b`, String.raw`\bdebt financing\b`, String.raw`\bcommercial paper\b`, String.raw`\bborrowings?\b`,
+    // generic capital spending
+    String.raw`\bcapital (?:expenditures?|spending|investments?)\b`,
+  ].join('|'),
+  'i',
+);
+
+export function isNonOperationalContext(sentence: string): boolean {
+  return NON_OPERATIONAL_CONTEXT.test(sentence);
+}
+
+/**
  * A definitive acquisition or merger by the account: a network-integration
  * event (the brief's "acquisition / network integration" fact type), even
  * without a facility noun. Verified live: Kroger's 8-K of 2026-07-01
@@ -52,6 +84,7 @@ export function isAcquisitionFact(sentence: string): boolean {
 /** Does this sentence state a physical-operations or network change (and is not a financial-statement mention)? */
 export function isPhysicalOpsFact(sentence: string): boolean {
   if (isFinancialStatementMention(sentence)) return false;
+  if (isNonOperationalContext(sentence)) return false;
   return (FACILITY.test(sentence) && CHANGE.test(sentence)) || isAcquisitionFact(sentence);
 }
 

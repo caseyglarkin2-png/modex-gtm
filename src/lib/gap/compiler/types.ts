@@ -37,6 +37,11 @@ export interface CompileEvidenceRef {
   firstParty: boolean;
   /** The source excerpt when the ledger carries one; C01 counts its numbers as cited (S3-T13). */
   excerpt?: string | null;
+  /**
+   * Red team T6: the signal quotes nothing (an auto-ingested keyword hit). It
+   * may trigger research, never be cited: externalOk is forced false.
+   */
+  keywordOnly?: boolean;
 }
 
 export interface CompileContext {

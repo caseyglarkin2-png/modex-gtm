@@ -91,3 +91,21 @@ describe('evidenceRefsFromSignals', () => {
     expect(JSON.stringify(evidenceRefsFromSignals(rows, NOW))).toBe(JSON.stringify(fromService(rows, NOW)));
   });
 });
+
+describe('T6: a keyword-only signal can never be cited in outbound copy', () => {
+  it('a loaded signal that quotes nothing is not external_ok, even when its flag says true', () => {
+    const [ref] = evidenceRefsFromSignals([signal({ evidence_text: null, source_kind: 'pounce_trigger', title: 'PEP 10-Q (2026-07-09) mentions: capital expenditure' })], NOW);
+    expect(ref).toMatchObject({ externalOk: false, keywordOnly: true });
+  });
+
+  it('a quoted signal keeps its external_ok', () => {
+    const [ref] = evidenceRefsFromSignals([signal({ evidence_text: 'Acme opened a DC in Columbus, Ohio in August 2026.', source_kind: 'evidence_record' })], NOW);
+    expect(ref).toMatchObject({ externalOk: true });
+    expect(ref.keywordOnly).toBeFalsy();
+  });
+
+  it('every production loader selects the fields the rule needs', async () => {
+    const { EVIDENCE_SIGNAL_SELECT } = await import('@/lib/gap/sequence/render');
+    expect(EVIDENCE_SIGNAL_SELECT).toMatchObject({ evidence_text: true, source_kind: true });
+  });
+});

@@ -72,6 +72,7 @@
  * shape, allowlist, resolution or copy-loading refusals naming the field.
  */
 
+import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { auth } from '@/lib/auth';
@@ -305,18 +306,8 @@ export async function POST(request: NextRequest) {
         sequence_version_id: true,
         signals: {
           select: {
-            signal: {
-              select: {
-                id: true,
-                title: true,
-                evidence_url: true,
-                external_ok: true,
-                observed_at: true,
-                freshness_expires_at: true,
-                source_type: true,
-                metadata: true,
-              },
-            },
+            // The shared select carries evidence_text + source_kind: a keyword hit is never citable (red team T6).
+            signal: { select: EVIDENCE_SIGNAL_SELECT },
           },
         },
       },

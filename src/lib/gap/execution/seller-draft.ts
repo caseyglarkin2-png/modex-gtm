@@ -29,6 +29,7 @@
  */
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
+import { outreachEvidence } from '../research/evidence-gate';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
@@ -72,6 +73,7 @@ export type SellerDraftRefusal =
   | 'no_hypothesis'
   | 'hypothesis_not_found'
   | 'hypothesis_not_active'
+  | 'evidence_insufficient'
   | 'persona_not_found'
   | 'no_email'
   | 'email_invalid'
@@ -295,6 +297,18 @@ export async function prepareSellerEmail(
   const pack = await loadActionPack(prisma, { hypothesisId: decision.hypothesis_id, decisionId, stepIndex });
   if (!pack) return refuse(prisma, actor, decisionId, { ok: false, reason: 'hypothesis_not_found' });
   if (pack.hypothesis.status !== 'active') return refuse(prisma, actor, decisionId, { ok: false, reason: 'hypothesis_not_active', detail: pack.hypothesis.status });
+  // Red team T6: nothing is sent on a hypothesis GAP itself rates INSUFFICIENT.
+  // One live outreach fact (verified, dated, quoted, this account, a network
+  // change) or no email; a keyword hit can only send this card to research.
+  const linked = Array.isArray(pack.hypothesis.signals) ? pack.hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
+  const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => !sig.freshness_expires_at || new Date(sig.freshness_expires_at).getTime() > now.getTime());
+  if (outreachEvidence(live, pack.hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'evidence_insufficient',
+      detail: 'This hypothesis has no verified, dated, quoted fact about a physical-network change at this account. Research it before any email.',
+    });
+  }
   const persona = pack.persona;
   if (!persona || pack.personaSource !== 'decision') return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_not_found', detail: pack.personaRefused ?? undefined });
   const email = (persona.email ?? '').trim().toLowerCase();

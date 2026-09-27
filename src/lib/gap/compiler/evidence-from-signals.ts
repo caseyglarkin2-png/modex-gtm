@@ -28,6 +28,9 @@ export interface SignalRow {
   freshness_expires_at: Date | string | null;
   source_type: string | null;
   metadata?: unknown;
+  /** Loaded by EVIDENCE_SIGNAL_SELECT; a loaded blank is a keyword hit (red team T6). */
+  evidence_text?: string | null;
+  source_kind?: string | null;
 }
 
 function isObj(v: unknown): v is Record<string, unknown> {
@@ -53,11 +56,16 @@ export function evidenceRefsFromSignals(signals: readonly SignalRow[], now: Date
       ? expires.getTime() > now.getTime()
       : !Number.isNaN(observed.getTime()) && now.getTime() - observed.getTime() <= EVIDENCE_MAX_AGE_DAYS * DAY_MS;
     const superseded = isObj(s.metadata) && s.metadata.superseded === true;
+    // Red team T6: a loaded signal that quotes nothing is a keyword hit. It
+    // names a document; it does not show a fact, so it is never citable.
+    const operator = s.source_kind === 'operator_knowledge' || s.source_kind === 'manual';
+    const keywordOnly = s.evidence_text !== undefined && !operator && !(s.evidence_text ?? '').trim();
     out.push({
       id: s.id,
       title: s.title ?? '',
       url: s.evidence_url ?? null,
-      externalOk: s.external_ok === true,
+      externalOk: s.external_ok === true && !keywordOnly,
+      ...(keywordOnly ? { keywordOnly: true } : {}),
       fresh,
       superseded,
       firstParty: isFirstParty(s.source_type ?? ''),

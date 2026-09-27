@@ -251,7 +251,7 @@ describe('routePersona, one rule at a time', () => {
     expect(d.ruleId).toBe('evidence_thin');
     expect(d.action).toBe('research_required');
     expect(d.lane).toBe('work_queue');
-    expect(d.explain.whyAction).toContain('keyword');
+    expect(d.explain.whyAction).toContain('no verified, dated, quoted fact');
     const quoted = base();
     quoted.hypothesis!.evidenceThin = false;
     expect(decision(routePersona(quoted)).ruleId).toBe('enroll');

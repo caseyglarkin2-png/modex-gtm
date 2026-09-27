@@ -435,7 +435,7 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: () => 'evidence_thin',
     predicate: (i) =>
-      `hypothesis ${i.hypothesis!.id} rests only on an automated keyword hit with no quoted evidence; add a sourced fact before any outreach`,
+      `hypothesis ${i.hypothesis!.id} has no verified, dated, quoted fact about a physical-network change at this account; research before any outreach`,
   },
   {
     id: 'hyp_resolved',

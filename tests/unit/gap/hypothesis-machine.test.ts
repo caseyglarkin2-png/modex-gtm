@@ -39,7 +39,7 @@ function snapshot(overrides: Partial<HypothesisSnapshot> = {}): HypothesisSnapsh
     problemHypothesis: 'My guess is the new DC is running gate checks on paper.',
     falsificationQuestions: ['Do drivers check in at a guard shack?'],
     linkedSignals: [
-      { id: 'sig_a', hasEvidence: true, expiresAt: FUTURE },
+      { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: FUTURE },
       { id: 'sig_b', hasEvidence: false, expiresAt: null },
     ],
     reviewedBy: null,
@@ -201,6 +201,36 @@ describe('review_required + approve', () => {
     });
   });
 
+  it('T6: refuses evidence_insufficient when the only evidence is a keyword hit (no verified, quoted fact)', () => {
+    expect(
+      transition(
+        snapshot({
+          status: 'review_required',
+          observation: OBSERVATION_ONLY_A,
+          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: false, expiresAt: FUTURE }],
+        }),
+        'approve',
+        reviewCtx,
+      ),
+    ).toEqual({ ok: false, reason: 'evidence_insufficient' });
+  });
+
+  it('T6: an outreach fact that has expired does not satisfy the gate', () => {
+    expect(
+      transition(
+        snapshot({
+          status: 'review_required',
+          linkedSignals: [
+            { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
+            { id: 'sig_b', hasEvidence: true, outreachFact: false, expiresAt: FUTURE },
+          ],
+        }),
+        'approve',
+        reviewCtx,
+      ),
+    ).toEqual({ ok: false, reason: 'evidence_insufficient' });
+  });
+
   it('refuses no_evidence when no linked signal carries evidence', () => {
     expect(
       transition(
@@ -221,7 +251,7 @@ describe('review_required + approve', () => {
         snapshot({
           status: 'review_required',
           linkedSignals: [
-            { id: 'sig_a', hasEvidence: true, expiresAt: PAST },
+            { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
             { id: 'sig_b', hasEvidence: false, expiresAt: FUTURE },
           ],
         }),
@@ -237,7 +267,7 @@ describe('review_required + approve', () => {
         snapshot({
           status: 'review_required',
           observation: OBSERVATION_ONLY_A,
-          linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: null }],
+          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: null }],
         }),
         'approve',
         reviewCtx,
@@ -251,7 +281,7 @@ describe('review_required + approve', () => {
         snapshot({
           status: 'review_required',
           observation: OBSERVATION_ONLY_A,
-          linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: new Date(NOW) }],
+          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: new Date(NOW) }],
         }),
         'approve',
         reviewCtx,
@@ -334,6 +364,16 @@ describe('approved + activate', () => {
     });
   });
 
+  it('T6: an approved hypothesis with no outreach fact cannot be activated (evidence_insufficient)', () => {
+    expect(
+      transition(
+        { ...activatable(), linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: false, expiresAt: FUTURE }, { id: 'sig_b', hasEvidence: false, expiresAt: null }] },
+        'activate',
+        ctx,
+      ),
+    ).toEqual({ ok: false, reason: 'evidence_insufficient' });
+  });
+
   it('activates with no version attached', () => {
     expect(transition({ ...activatable(), version: null }, 'activate', ctx)).toEqual({
       ok: true,
@@ -376,7 +416,7 @@ describe('approved + activate', () => {
         {
           ...activatable(),
           observation: OBSERVATION_ONLY_A,
-          linkedSignals: [{ id: 'sig_a', hasEvidence: true, expiresAt: PAST }],
+          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST }],
         },
         'activate',
         ctx,
@@ -617,7 +657,7 @@ describe('expire', () => {
             status,
             expiresAt: null,
             linkedSignals: [
-              { id: 'sig_a', hasEvidence: true, expiresAt: PAST },
+              { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
               { id: 'sig_b', hasEvidence: false, expiresAt: new Date(NOW) },
             ],
           }),
@@ -634,7 +674,7 @@ describe('expire', () => {
             status,
             expiresAt: FUTURE,
             linkedSignals: [
-              { id: 'sig_a', hasEvidence: true, expiresAt: PAST },
+              { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
               { id: 'sig_b', hasEvidence: false, expiresAt: FUTURE },
             ],
           }),
@@ -651,7 +691,7 @@ describe('expire', () => {
             status,
             expiresAt: null,
             linkedSignals: [
-              { id: 'sig_a', hasEvidence: true, expiresAt: PAST },
+              { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
               { id: 'sig_b', hasEvidence: false, expiresAt: null },
             ],
           }),
