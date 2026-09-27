@@ -614,8 +614,7 @@ until T2, T3, T5 and T9 are complete and verified".
 
 ### T10 — honest Learning
 
-- status: IMPLEMENTED (Release D, branch `feat/gap-redteam-release-d`, not yet
-  merged)
+- status: DONE (Release D: PR #271, merge `65bed5b9`, production READY 2026-09-27)
 - commits: `5f73e6f8` (execution learning, stats, tier stamp), `f2fba2e9`
   (agreement + G1), `14d5b48b` (Learning page), `3d7d0b22` (queue sends,
   enrollment evidence)
@@ -721,3 +720,37 @@ each mutation-proven (16 mutations, each RED, restored GREEN):
 Found by the final integrated regression, fixed here: a keyword-only
 hypothesis in draft or review routed "approve_hypothesis", a card that could
 only fail at approval. R11 now yields to R12b: such a card is research.
+
+### Release D receipt
+
+- PR #271, merge `65bed5b9`, production READY 2026-09-27 (preview READY before
+  merge). No schema change.
+- gates: full unit suite 466 files / 5061 tests green; typecheck green; local
+  build green; scratch E2Es 10/10 (117 checks) + final integrated regression
+  (14 checks), 0 failed, zero residue; read-only review (data scientist +
+  reliability engineer): 2 BLOCKER + 9 SHOULD-FIX, all fixed, 16 mutation
+  proofs; github_actions = unavailable_external_billing.
+- production verification (read-only, 2026-09-27, the merged code over live
+  data): 1 GAP send on record (Joey Maggard, manual, recorded before the tier
+  stamp existed: tier `unrecorded`), 1 person, 0 past the 30-day window, so
+  every rate is `no_data` (no signal implied); agreement 1 agree / 5 counted
+  (4 unacted), shown as an early observation, 59 open cards pending; G1 NOT
+  earned (n=1 of 200 enroll decisions, 0 of 100 matured people, no positive
+  outcome, opt-out bound unknown). `GET /api/gap/learning/` = 401 without a
+  session.
+- production mutation: none.
+- prospect sends: 0. Prospect drafts: 0.
+
+### Final integrated regression
+
+- `scripts/gap/e2e-integrated.ts` on scratch against the merged code:
+  14/14 PASS (verified fact eligible; keyword only research, approval
+  refused; approved hypothesis routes an email; real send -> ledger ->
+  routing sequence_complete -> Learning denominator; prior step 0 refused on
+  a new card; outstanding draft refuses the direct send; unsubscribe -> DNC ->
+  send refused; hard bounce -> hard_bounce + DNC -> next touch stopped; buyer
+  reply -> InboundMessage, sequence held, reply_triage until a human
+  disposition resolves it; no-answer x3 -> call_attempts_exhausted, no buyer
+  truth; honest Learning 3 people, 1 reply, 1 truth as early observations;
+  zero outbound). Report: `docs/gap/integrated-e2e-latest.md`.
+- next: final five-expert read-only regression.
