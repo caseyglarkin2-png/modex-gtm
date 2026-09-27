@@ -23,7 +23,7 @@ review, production verification.
 
 ### T1 — close passwordless production login
 
-- status: IMPLEMENTED, Release A gate running (not yet merged)
+- status: DONE. Release A merged: PR #268, merge `fc7d20a5`, production READY 2026-09-26
 - commits: `0000ffeb` (T1), `74511dc6` (middleware segment anchoring),
   `feb709aa` (review follow-ups)
 - files: `src/lib/auth-providers.ts` (new), `src/lib/auth.ts`,
@@ -60,9 +60,17 @@ review, production verification.
   send-approval route (session actor, body actor ignored, 401, 403, 409);
   send route 403; middleware matcher RED on 11 bypassed paths then GREEN.
   Mutation: provider gate forced open -> 2 RED, restored GREEN.
-- production mutation: none yet.
-- production verification: pending merge. Must show `GET /api/auth/providers`
-  = google only, and an anonymous GET /api/email/send-jobs/1/ = 401.
+- gates: GAP + auth suite 144 files / 2810 tests green; typecheck green;
+  local build green; Vercel preview READY; read-only security review (1
+  BLOCKER + 3 SHOULD-FIX, all fixed in the PR);
+  github_actions = unavailable_external_billing.
+- production mutation: deploy only (no data writes).
+- production verification (2026-09-26, after `fc7d20a5` READY):
+  `GET /api/auth/providers` = `{"google":...}` only; anonymous
+  `/api/email/send/` = 401 `Authentication required` (the wrapper);
+  `/api/email/send-jobs/1/` = 401; `/api/cron/check-inbox/` = 401
+  `Unauthorized` (its own handler, still reachable); `/api/e/open/`,
+  `/for/pepsico/`, `/demo/pepsico/`, `/unsubscribe/`, `/login/` = 200.
 - known consequence: Playwright specs under `tests/e2e/` that sign in via
   `/api/auth/callback/credentials` against production stop working there by
   design; they still run against local `next dev`.
@@ -70,4 +78,167 @@ review, production verification.
   `PATCH /api/revops/message-evolution` (`reviewed_by`),
   `POST /api/revops/failure-remediation` (`owner`) and
   `revops/playbook-blocks` (`createdBy`) still accept a client-named actor.
-- next: merge Release A, verify production, then T2.
+- next: T2 (Release B, branch `feat/gap-redteam-release-b`).
+
+### T2 — one send history per person
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- commit: see `git log --grep "T2"` on `feat/gap-redteam-release-b`
+- files: `src/lib/gap/execution/person-history.ts` (new),
+  `src/lib/gap/execution/next-touch.ts`, `src/lib/gap/execution/seller-draft.ts`,
+  `src/lib/gap/execution/seller-send.ts`, `src/lib/gap/routing/queue.ts`,
+  `scripts/gap/audit-person-history.ts` (read-only), tests
+  `tests/unit/gap/person-send-history.test.ts`, shared fixture
+  `tests/unit/gap/fixtures/where.ts` (seller-db, next-touch, seller-send
+  fixtures moved onto it; unknown operators throw)
+- change: `personSendHistory(prisma, personaId, recipient)` reads DRAFT_SENT
+  (joined to DRAFTED), MANUAL_SENT, DIRECT_SENT, drafts and unresolved
+  DIRECT_CLAIMED across every routing decision of the person, of any persona
+  row sharing the address, and of any ledger row naming the address. Ordered
+  (step, sentAt, event id), no row cap, no age window. Used by
+  computeNextTouch (so resolveActionPack and the draft/send gates),
+  prepareSellerEmail (step already sent anywhere -> `first_touch_already_sent`
+  / `step_already_sent`; open claim anywhere -> `send_in_progress_or_unknown`),
+  sendSellerEmail (claim key `gmail_direct:person:<id>:<recipient>:step:<n>`,
+  advisory lock on the person, person history re-read inside the lock) and
+  the queue's attachTouches (complete, page-scoped read; the old
+  `take: 500` / 120-day scan is gone; past the evaluation cap or on a read
+  failure a card with history is `unknown`, never a first email). Historical
+  rows untouched; legacy per-card claim keys are parsed for their step.
+- tests: 14 new (A: step 0 on newer card refused, 5 variants incl. duplicate
+  persona and open claim; B: newer card's next touch = waiting; queue: 300-day
+  send behind 600 rows still found, read failure fails closed). RED on the
+  original per-card code: 9 failed. Mutation C (history forced back to
+  decision scope): 8 failed; restored GREEN. GAP folder 141 files / 2771
+  tests green; typecheck green.
+- production mutation: none.
+- production verification (D, READ ONLY, 2026-09-26): persona 1886 has 7
+  cards; step 0 hand-sent 2026-09-25T20:59:19Z on card cmuh66pro…; the
+  newest email card cmuhrmns… now resolves `waiting` for touch 2 due
+  2026-10-01 and step 0 is refused. Receipt:
+  `docs/gap/t2-kroger-1886-person-history.md`.
+- next: T3.
+
+### T3 — routing sees GAP sends
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- files: `src/lib/gap/routing/inputs.ts` (readComms), `src/lib/gap/routing/rules.ts`,
+  `src/lib/gap/routing/types.ts`, tests `routing-inputs.test.ts`, `routing-rules.test.ts`
+- change: `readComms(prisma, email, personaId)` reads the person's GAP send
+  history through the same named, fail-closed `read()` wrapper
+  (`inputs_error:gap_send_history`). `lastOutboundAt` = latest of EmailLog,
+  every GAP send (manual, draft-sent, direct, any card) and every unresolved
+  claim. New `comms.gapSequence` (`none | active | complete | stopped`):
+  complete = every step of the pinned version sent; stopped = a confirmed
+  substantive disposition after the first send. Rule order: R14 hot_call,
+  R14b `sequence_stopped` (nurture), R14c `sequence_complete` (nurture),
+  R16 cooldown, then R15 hot_email. EmailLog stays auxiliary.
+- tests: 9 new (hot + GAP send 3 days ago -> cooldown; manual GAP send with no
+  EmailLog -> lastOutboundAt + cooldown; open claim counts; complete ->
+  sequence_complete; stopped; unreadable history -> inputs_error). RED on
+  the original code: 10 failed (incl. the pinned rule order). GAP folder 141
+  files / 2780 tests green.
+- production mutation: none.
+- next: T4.
+
+### T4 — harden the send gate
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- files: `src/lib/gap/execution/seller-draft.ts`, `src/lib/gap/execution/seller-send.ts`,
+  `src/lib/email/gmail-sender.ts`, `src/lib/email/autonomy-gate.ts`,
+  `src/lib/email/suppression-gate.ts`; tests `tests/unit/gap/send-gate-hardening.test.ts`,
+  `tests/unit/email-send-timeouts.test.ts`
+- change:
+  - `draft_outstanding`: an unresolved GAP Gmail draft for the person + step
+    (any card) refuses a direct send and any second draft of other copy; the
+    same copy on the same card returns the existing draft (idempotent). A
+    discarded draft does not block.
+  - any unresolved claim for person + step blocks every content hash (the T2
+    claim key carries no hash).
+  - AbortSignal timeouts: autonomy read (AUTONOMY_READ_TIMEOUT_MS, 5000) and
+    suppression read (SUPPRESSION_READ_TIMEOUT_MS, 5000) fail closed before
+    the wire; Gmail send (GMAIL_SEND_TIMEOUT_MS, 25000) -> "Gmail send outcome
+    unknown" on timeout, network error or an unreadable 2xx body.
+  - claim release only on a definitive Gmail 4xx
+    (`/^Gmail send failed \(4\d\d\)/`); 5xx, timeout, unknown -> unresolved.
+- tests: 8 gate tests (draft on same/other card, second draft refused,
+  discarded draft ok, H1 lost -> H2 refused with Gmail called once, 503
+  unresolved + retry no call, timeout unresolved, 400 released + one retry);
+  3 timeout tests (signals present; hung authority refuses before the wire;
+  Gmail timeout = outcome unknown). RED first: 4 + 3 failed. Mutation (4xx
+  regex widened back to any status): the 503 test failed; restored GREEN.
+  GAP + email suites 148 files / 2862 tests green; typecheck green.
+- production mutation: none.
+- next: T5.
+
+### T5 — one-click unsubscribe + footer
+
+- status: IMPLEMENTED (Release B, not yet merged)
+- files: `src/lib/email/compliance.ts` (new), `src/app/api/unsubscribe/route.ts`,
+  `src/lib/email/templates.ts`, `src/lib/gap/execution/seller-draft.ts`; tests
+  `tests/unit/unsubscribe-one-click.test.ts`, `tests/unit/gap/seller-draft.test.ts`
+  (the old assertion pinned the header at the PAGE, i.e. the defect),
+  `tests/unit/gap/fixtures/seller-db.ts` (test signing secret)
+- change:
+  - List-Unsubscribe (GAP seller email and app templates) =
+    `<https://modex-gtm.vercel.app/api/unsubscribe/?email=…&token=…>` +
+    `List-Unsubscribe-Post: List-Unsubscribe=One-Click`. The trailing slash is
+    load-bearing: measured 2026-09-26, POST /api/unsubscribe?… answers 308
+    (trailingSlash: true), and a provider need not follow a redirect on POST.
+  - POST /api/unsubscribe, form-encoded: identity and token come ONLY from the
+    URL query; the body must be exactly `List-Unsubscribe=One-Click` (anything
+    else 400); a token is required (403 without / invalid); no Origin needed.
+    Then the existing canonical `recordUnsubscribe` (unsubscribed_emails row,
+    Persona.do_not_contact case-insensitively, HubSpot opt-out mirror).
+  - Footer: the physical address the app footer already carried
+    (`FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104`, now one
+    constant) on the GAP seller email, HTML and text parts.
+  - Branded path: NOT moved. yardflow.ai has no /unsubscribe proxy
+    (`GET https://yardflow.ai/unsubscribe/` = 404); branding it needs a
+    Flow-State- rewrite in another repo. Recorded as follow-up; the visible
+    link stays on the app origin, which is correct and working.
+- tests: exact RFC 8058 POST -> unsubscribed_emails row, persona DNC, next
+  touch stopped, next send refused (`persona_do_not_contact`); no Origin ok;
+  bad token 403 writes nothing; extra body field 400; header targets (app +
+  GAP) and postal address. RED first: 6/6 failed. Mutation (header target
+  back to the page): 2 failed; restored GREEN. GAP + unsubscribe + email
+  suites 146 files / 2840 tests green; typecheck green.
+- production mutation: none.
+- next: Release B gate.
+
+### Release B gate — read-only review (RevOps + deliverability + reliability)
+
+- reviewer verdict: no strict BLOCKER; 6 SHOULD-FIX, all on the release's
+  own mission (same step twice / after unsubscribe). All fixed in this PR:
+  - #1 reconcile read a SCHEDULED or undo-window send as `discarded`, which
+    released `draft_outstanding`. Now `scheduled` stays outstanding; a draft
+    gone with no SENT is recorded `execution.gmail_draft_vanished` and
+    discards only after `DRAFT_VANISH_GRACE_MS` (2h). (`7693c8e3`)
+  - #2 the advisory lock was keyed on persona id only. `lockPerson` now locks
+    the lowercased address AND the persona id, sorted. (`7693c8e3`)
+  - #3 drafts were checked outside the lock and CREATE GMAIL DRAFT took no
+    lock. Drafts now claim person + step (`execution.gmail_draft_claimed`,
+    closed by DRAFTED `claimKey` or a release); outstanding drafts are
+    checked inside the lock; a lost draft answer leaves an open claim.
+    (`7693c8e3`)
+  - #4 enrolment ignored GAP history. `enrollFromDecision` refuses
+    `gap_history_exists` for any send, open claim or outstanding draft.
+    (`1bf8ea34`)
+  - #5 a first touch did not read `unsubscribed_emails`. prepareSellerEmail
+    refuses `recipient_unsubscribed`; the modex suppression leg (read by
+    clawd and the wire) reports unsubscribed addresses; the idempotent
+    unsubscribe path re-applies do_not_contact. (`9eb74a8a`)
+  - #6 token failures never released a claim and were unbounded. Token
+    acquisition is bounded (GMAIL_TOKEN_TIMEOUT_MS, 10000) and tagged
+    `Gmail token unavailable:` (definitive, pre-wire). (`7693c8e3`)
+  - RFC 8058 multipart/form-data accepted; malformed body 400. Manual sends
+    record the bare recipient address. (`1bf8ea34`)
+- mutation proofs: persona-only lock, no draft check in lock, draft path
+  without claim, token not definitive -> each RED; restored GREEN.
+- residual (recorded, not blocking): emails already sent with the old
+  header point at the `/unsubscribe` page, where a one-click POST does not
+  land (production GAP sends so far were manual, so no old-header GAP email
+  is known); an outstanding Gmail draft is not deleted on unsubscribe (the
+  send gates refuse, but Casey could still press Send in Gmail by hand);
+  queue display finds history via persona_id only (execution is exact);
+  `sequence_stopped` sits after `hot_call` by design (calls stay open).

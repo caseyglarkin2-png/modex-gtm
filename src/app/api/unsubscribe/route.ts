@@ -14,6 +14,27 @@ const UnsubscribeSchema = z.object({
 // Backward-compat cutoff: unsigned links accepted until this date (60 days from deploy)
 const UNSIGNED_CUTOFF = new Date('2026-07-01T00:00:00Z');
 
+/**
+ * RFC 8058 one-click (red team T5). A mailbox provider POSTs to the exact
+ * List-Unsubscribe URL, whose query carries the signed identity
+ * (`email` + `token`), with a form body of ONLY `List-Unsubscribe=One-Click`
+ * and no Origin. Identity never comes from the body: a body that carries
+ * anything else is refused, so a crafted request cannot swap the address.
+ */
+function oneClickBody(req: NextRequest, form: URLSearchParams): Record<string, string> | { error: string } {
+  const keys = [...new Set(form.keys())];
+  if (form.get('List-Unsubscribe') !== 'One-Click' || keys.length !== 1) {
+    return { error: 'One-click body must be exactly List-Unsubscribe=One-Click' };
+  }
+  const q = req.nextUrl.searchParams;
+  const body: Record<string, string> = {};
+  for (const k of ['email', 'token']) {
+    const v = q.get(k);
+    if (v) body[k] = v;
+  }
+  return body;
+}
+
 export async function POST(req: NextRequest) {
   try {
     // CSRF check: reject requests without a same-origin Origin or Referer header
@@ -25,7 +46,11 @@ export async function POST(req: NextRequest) {
       (referer && referer.startsWith(appUrl));
 
     // Allow List-Unsubscribe-Post (RFC 8058) — comes without Origin header
-    const isOneClick = req.headers.get('content-type')?.includes('application/x-www-form-urlencoded');
+    // RFC 8058 section 3.1: the one-click POST body SHOULD be multipart/form-data;
+    // application/x-www-form-urlencoded is also sent in practice. Both are one-click.
+    const contentType = req.headers.get('content-type') ?? '';
+    const isMultipart = contentType.includes('multipart/form-data');
+    const isOneClick = contentType.includes('application/x-www-form-urlencoded') || isMultipart;
 
     if (!isSameOrigin && !isOneClick) {
       return NextResponse.json(
@@ -34,9 +59,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = isOneClick
-      ? Object.fromEntries(new URLSearchParams(await req.text()))
-      : await req.json();
+    let body: unknown;
+    if (isOneClick) {
+      let form: URLSearchParams;
+      if (isMultipart) {
+        form = new URLSearchParams();
+        let fd: FormData;
+        try {
+          fd = await req.formData();
+        } catch {
+          return NextResponse.json({ error: 'Malformed one-click body' }, { status: 400 });
+        }
+        for (const [k, v] of fd.entries()) {
+          // A file part is never part of a one-click body.
+          if (typeof v !== 'string') return NextResponse.json({ error: 'One-click body must be exactly List-Unsubscribe=One-Click' }, { status: 400 });
+          form.append(k, v);
+        }
+      } else {
+        form = new URLSearchParams(await req.text());
+      }
+      const oc = oneClickBody(req, form);
+      if ('error' in oc) return NextResponse.json({ error: oc.error }, { status: 400 });
+      // One-click carries no human to re-confirm, so it is signed or nothing.
+      if (!oc.token) return NextResponse.json({ error: 'Unsubscribe token required' }, { status: 403 });
+      body = oc;
+    } else {
+      body = await req.json();
+    }
     const parsed = UnsubscribeSchema.safeParse(body);
 
     if (!parsed.success) {

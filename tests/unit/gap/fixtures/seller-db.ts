@@ -2,6 +2,11 @@
 import { vi } from 'vitest';
 import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
 import type { CompileResult } from '@/lib/gap/compiler/compile';
+import { findManyFrom } from './where';
+
+// The List-Unsubscribe header is always signed by the real code path (red team
+// T5: it targets the API one-click URL, which carries an HMAC token).
+process.env.UNSUBSCRIBE_SECRET ??= 'fixture-unsubscribe-secret';
 
 export const NOW = new Date('2026-09-25T15:00:00.000Z');
 export const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
@@ -55,7 +60,10 @@ export function db(): Db {
 export function prismaOf(d: Db) {
   let n = 0;
   const id = (p: string) => `${p}-${++n}`;
-  return {
+  const client: any = {
+    // The person lock (lockPerson) and the claim transaction; single-threaded tests run fn directly.
+    $executeRaw: vi.fn(async () => 1),
+    $transaction: vi.fn(async (fn: (tx: unknown) => Promise<unknown>) => fn(client)),
     routingDecision: {
       findUnique: vi.fn(async ({ where }: any) => d.decisions.find((x) => x.id === where.id) ?? null),
       findFirst: vi.fn(async ({ where }: any) => {
@@ -64,16 +72,21 @@ export function prismaOf(d: Db) {
         }
         return d.decisions.find((x) => x.hypothesis_id === where.hypothesis_id && x.action === where.action) ?? null;
       }),
+      findMany: vi.fn(async (args: any) => findManyFrom(d.decisions, args)),
       updateMany: vi.fn(async () => ({ count: 0 })),
       update: vi.fn(),
     },
     prospectingHypothesis: { findUnique: vi.fn(async ({ where }: any) => d.hypotheses.find((x) => x.id === where.id) ?? null) },
-    persona: { findUnique: vi.fn(async ({ where }: any) => d.personas.find((x) => x.id === where.id) ?? null) },
+    persona: {
+      findUnique: vi.fn(async ({ where }: any) => d.personas.find((x) => x.id === where.id) ?? null),
+      findMany: vi.fn(async (args: any) => findManyFrom(d.personas, args)),
+    },
     sequenceVersion: {
       findUnique: vi.fn(async ({ where }: any) => d.versions.find((x) => x.id === where.id) ?? null),
       findFirst: vi.fn(async ({ where }: any) => d.versions.find((x) => x.family_id === where.family_id) ?? null),
     },
     sequenceFamily: { findMany: vi.fn(async ({ where }: any) => d.families.filter((f) => f.problem_family === where.problem_family)) },
+    unsubscribedEmail: { findFirst: vi.fn(async () => null) },
     gapCompile: {
       findMany: vi.fn(async ({ where }: any) =>
         d.compiles
@@ -100,13 +113,10 @@ export function prismaOf(d: Db) {
         d.audit.push(row);
         return { id: row.id };
       }),
-      findMany: vi.fn(async ({ where }: any) =>
-        d.audit
-          .filter((a) => a.subject_type === where.subject_type && a.subject_id === where.subject_id && where.kind.in.includes(a.kind))
-          .sort((a, b) => b.created_at - a.created_at),
-      ),
+      findMany: vi.fn(async (args: any) => findManyFrom(d.audit, { orderBy: { created_at: 'desc' }, ...args })),
     },
   };
+  return client;
 }
 
 /** A compile stand-in that records the row the way compile() persists it. */

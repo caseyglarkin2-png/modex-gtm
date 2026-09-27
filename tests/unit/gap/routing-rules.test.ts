@@ -146,8 +146,10 @@ describe('RULES ordering', () => {
       'evidence_thin',
       'hyp_resolved',
       'hot_call',
-      'hot_email',
+      'sequence_stopped',
+      'sequence_complete',
       'cooldown',
+      'hot_email',
       'enroll',
       'linkedin',
       'default',
@@ -558,6 +560,43 @@ describe('routePersona, one rule at a time', () => {
     expect(d.ruleId).toBe('hot_email');
     expect(d.action).toBe('one_off_email');
     expect(d.lane).toBe('work_queue');
+  });
+
+  it('T3: cooldown is evaluated BEFORE hot email: a hot account emailed 3 days ago is nurture cooldown, not one_off_email', () => {
+    const i = withHotTrigger(base());
+    i.persona.phoneStatus = 'wrong';
+    i.comms.lastOutboundAt = daysAgo(3);
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('cooldown');
+    expect(d.action).toBe('nurture');
+  });
+
+  it('T3: a COMPLETE GAP sequence is nurture sequence_complete, never a new touch 1, even hot and past cooldown', () => {
+    const i = withHotTrigger(base());
+    i.persona.phoneStatus = 'wrong';
+    i.comms.gapSequence = { state: 'complete', sentSteps: 4, lastSentAt: daysAgo(40) };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('sequence_complete');
+    expect(d.action).toBe('nurture');
+    expect(d.reason).toBe('sequence_complete');
+    const cold = base();
+    cold.comms.gapSequence = { state: 'complete', sentSteps: 4, lastSentAt: daysAgo(40) };
+    expect(decision(routePersona(cold)).ruleId).toBe('sequence_complete');
+  });
+
+  it('T3: a STOPPED GAP sequence is nurture sequence_stopped, never a new touch 1', () => {
+    const i = base();
+    i.comms.gapSequence = { state: 'stopped', sentSteps: 1, lastSentAt: daysAgo(30) };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('sequence_stopped');
+    expect(d.action).toBe('nurture');
+  });
+
+  it('T3: an ACTIVE GAP sequence past cooldown still routes an email card (the pack renders the due follow-up)', () => {
+    const i = base();
+    i.comms.gapSequence = { state: 'active', sentSteps: 1, lastSentAt: daysAgo(20) };
+    i.comms.lastOutboundAt = daysAgo(20);
+    expect(decision(routePersona(i)).ruleId).toBe('enroll');
   });
 
   it('R16 cooldown: outbound within 14 days and no reply since routes nurture cooldown; a later inbound clears it', () => {

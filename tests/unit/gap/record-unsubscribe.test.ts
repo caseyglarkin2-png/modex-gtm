@@ -83,8 +83,12 @@ const ROUTE_FRESH_SEQUENCE: Call[] = [
 ];
 
 /** Captured against the pre-refactor route. Email already in the table: one read, nothing else. */
+// Red team Release B review #5: the already-unsubscribed path re-applies the
+// do_not_contact mirror (guarded to rows still contactable). No new
+// unsubscribe row, no HubSpot call.
 const ROUTE_ALREADY_SEQUENCE: Call[] = [
   ['unsubscribedEmail.findUnique', { where: { email: FRESH } }],
+  ['persona.updateMany', { where: { email: { equals: FRESH, mode: 'insensitive' }, do_not_contact: false }, data: { do_not_contact: true } }],
 ];
 
 beforeEach(() => {
@@ -104,7 +108,7 @@ describe('POST /api/unsubscribe call-shape snapshot (pre-refactor contract)', ()
     expect(calls).toStrictEqual(ROUTE_FRESH_SEQUENCE);
   });
 
-  it('already unsubscribed: one findUnique, no writes, no HubSpot, same 200 body', async () => {
+  it('already unsubscribed: one findUnique, the DNC mirror re-applied, no new row, no HubSpot, same 200 body', async () => {
     findUnique.mockResolvedValueOnce({ id: 'ue_0', email: FRESH });
     const res = await POST(postJson({ email: FRESH, token: generateToken(FRESH) }));
     expect(res.status).toBe(200);
@@ -183,14 +187,14 @@ describe('recordUnsubscribe helper', () => {
     expect(result).toStrictEqual({ ok: true, created: true, personaUpdated: 1, hubspot: 'written' });
   });
 
-  it('second call for the same email: created false, no writes, zero HubSpot calls (matches the route early return)', async () => {
+  it('second call for the same email: created false, no new row, zero HubSpot calls; the DNC mirror is re-applied (Release B review #5)', async () => {
     findUnique.mockResolvedValueOnce({ id: 'ue_0', email: FRESH });
     const result = await recordUnsubscribe(prismaMock, { email: FRESH, source: 'gap_disposition' });
     expect(calls).toStrictEqual(ROUTE_ALREADY_SEQUENCE);
     expect(create).not.toHaveBeenCalled();
-    expect(updateMany).not.toHaveBeenCalled();
+    expect(updateMany).toHaveBeenCalledTimes(1);
     expect(upsertContact).not.toHaveBeenCalled();
-    expect(result).toStrictEqual({ ok: true, created: false, personaUpdated: 0, hubspot: 'skipped:already_unsubscribed' });
+    expect(result).toStrictEqual({ ok: true, created: false, personaUpdated: 1, hubspot: 'skipped:already_unsubscribed' });
   });
 
   it('HubSpot throwing: rows still written, result carries failed:<message>, nothing thrown', async () => {

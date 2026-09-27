@@ -155,6 +155,11 @@ export function __resetAutonomyGate(): void {
   inFlight = null;
 }
 
+/** Autonomy read budget, ms (AUTONOMY_READ_TIMEOUT_MS overrides; default 5000). */
+export function autonomyReadTimeoutMs(): number {
+  return Number(process.env.AUTONOMY_READ_TIMEOUT_MS) > 0 ? Number(process.env.AUTONOMY_READ_TIMEOUT_MS) : 5000;
+}
+
 async function readAutonomyState(): Promise<AutonomyState> {
   const base = process.env.CLAWD_CONTROL_PLANE_URL?.trim();
   const token = process.env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
@@ -166,6 +171,9 @@ async function readAutonomyState(): Promise<AutonomyState> {
     const res = await fetch(`${base.replace(/\/+$/, '')}/api/autonomy/state`, {
       headers: { authorization: `Bearer ${token}` },
       cache: 'no-store',
+      // Bounded (red team T4): a hung authority is UNREADABLE, never a wait
+      // that outlives the function. The catch below makes it OFFLINE.
+      signal: AbortSignal.timeout(autonomyReadTimeoutMs()),
     });
     // clawd answers 503 when its own state store is unreadable, deliberately
     // rather than a 200 carrying a cheerful payload. Honour that.

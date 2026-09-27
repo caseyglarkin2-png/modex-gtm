@@ -33,6 +33,8 @@ import { gapGmailSender } from './gap-sender';
 import {
   appendLedger,
   DRAFT_DISCARDED,
+  DRAFT_SUBJECT_TYPE,
+  DRAFT_VANISHED,
   DRAFT_SENT,
   listDraftRecords,
   type DraftedPayload,
@@ -46,10 +48,19 @@ type PrismaLike = any;
 /** Clock skew allowance between our `createdAt` and Gmail's internalDate. */
 const SKEW_MS = 2 * 60 * 1000;
 
+/**
+ * What Gmail shows for one draft. `gone` is NOT a fate: a draft leaves Drafts
+ * the moment Casey presses Send (undo window) or schedules it. Only
+ * reconcileDraft turns a sustained `gone` into `discarded`.
+ */
 export type DraftObservation =
   | { fate: 'drafted' }
   | { fate: 'sent'; sentMessageId: string; sentAt: Date }
-  | { fate: 'discarded' };
+  | { fate: 'scheduled' }
+  | { fate: 'gone' };
+
+/** How long a draft must stay gone, with no SENT or SCHEDULED message, before it reads as discarded. */
+export const DRAFT_VANISH_GRACE_MS = 2 * 60 * 60 * 1000;
 
 function addresses(header: string): string[] {
   return (header.match(/[^\s<>,;"']+@[^\s<>,;"']+/g) ?? []).map((a) => a.toLowerCase());
@@ -70,7 +81,10 @@ export function observeDraft(
     .filter((m) => addresses(m.to).includes(recipient))
     .sort((a, b) => a.internalDate.getTime() - b.internalDate.getTime())[0];
   if (sent && sent.id) return { fate: 'sent', sentMessageId: sent.id, sentAt: sent.internalDate };
-  return { fate: 'discarded' };
+  // Gmail "Schedule send": out of Drafts, labelled SCHEDULED, not sent yet. It WILL send.
+  const scheduled = threadMessages.some((m) => m.labelIds.includes('SCHEDULED') && addresses(m.to).includes(recipient));
+  if (scheduled) return { fate: 'scheduled' };
+  return { fate: 'gone' };
 }
 
 export interface ReconcileDraftDeps {
@@ -114,7 +128,8 @@ export async function reconcileDraft(
     return { ok: false, reason: 'gmail_unreadable', detail: err instanceof Error ? err.message : String(err) };
   }
 
-  if (obs.fate === 'drafted') return { ok: true, gmailDraftId: input.gmailDraftId, fate: 'drafted', changed: false };
+  // Still a draft, or scheduled to send: outstanding either way; nothing to write.
+  if (obs.fate === 'drafted' || obs.fate === 'scheduled') return { ok: true, gmailDraftId: input.gmailDraftId, fate: 'drafted', changed: false };
   if (obs.fate === 'sent') {
     const sent: DraftSentPayload = {
       engine: 'gmail_direct',
@@ -128,6 +143,28 @@ export async function reconcileDraft(
     };
     await appendLedger(prisma, DRAFT_SENT, input.actor, input.decisionId, sent as unknown as Record<string, unknown>);
     return { ok: true, gmailDraftId: input.gmailDraftId, fate: 'sent', changed: true, sent };
+  }
+  // Gone with no SENT and no SCHEDULED: maybe deleted, maybe mid-send (undo
+  // window). First sighting records the vanish and keeps the draft
+  // outstanding; only a vanish older than the grace window discards.
+  const vanished = ((await prisma.gapAuditEvent.findMany({
+    where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: input.decisionId, kind: DRAFT_VANISHED },
+    select: { payload: true, created_at: true },
+    orderBy: { created_at: 'asc' },
+  })) as Array<{ payload: unknown; created_at: Date }>).filter(
+    (r) => (r.payload as { gmailDraftId?: unknown } | null)?.gmailDraftId === input.gmailDraftId,
+  );
+  if (vanished.length === 0) {
+    await appendLedger(prisma, DRAFT_VANISHED, input.actor, input.decisionId, {
+      gmailDraftId: input.gmailDraftId,
+      routingDecisionId: input.decisionId,
+      observedAt: input.now.toISOString(),
+    });
+    return { ok: true, gmailDraftId: input.gmailDraftId, fate: 'drafted', changed: false };
+  }
+  const firstSeen = new Date(String((vanished[0].payload as { observedAt?: unknown }).observedAt ?? vanished[0].created_at.toISOString()));
+  if (input.now.getTime() - firstSeen.getTime() < DRAFT_VANISH_GRACE_MS) {
+    return { ok: true, gmailDraftId: input.gmailDraftId, fate: 'drafted', changed: false };
   }
   await appendLedger(prisma, DRAFT_DISCARDED, input.actor, input.decisionId, {
     status: 'discarded',

@@ -13,8 +13,9 @@
  *                 invalid address, meeting booked); nothing more is prepared
  *   unknown       reply truth could not be read; fail closed, prepare nothing
  *
- * Truth sources, all existing: the draft ledger (execution.gmail_draft_sent
- * rows carry the Gmail-proven send time), the pinned SequenceVersion's step
+ * Truth sources, all existing: the PERSON's send history across every routing
+ * card (person-history.ts; execution.gmail_draft_sent / manual / direct rows
+ * carry the Gmail-proven send time), the pinned SequenceVersion's step
  * delays (business or calendar days after the PRIOR send, the seed cadence
  * 0/4/5/6), the Gmail thread of the sent message in the SAME mailbox it was
  * sent from (a reply there from the recipient), InboundMessage and
@@ -30,7 +31,7 @@ import { HARD_INVALID_STATUSES } from '../suppression/provenance';
 import { addBusinessDays } from '../sequence/business-days';
 import { parseSteps } from '../sequence/steps';
 import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
-import { DRAFT_SUBJECT_TYPE, DIRECT_SENT, listDraftRecords, MANUAL_SENT, type DraftRecord, type ManualSentPayload } from './draft-ledger';
+import { personSendHistoryForDecision } from './person-history';
 import { gapGmailSender } from './gap-sender';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,46 +86,21 @@ export function recipientReplied(thread: readonly GmailThreadMessageMeta[], reci
   );
 }
 
-function sentTouches(records: DraftRecord[]): SentTouch[] {
-  return records
-    .filter((r) => r.fate === 'sent' && r.sent)
-    .map((r) => ({
-      stepIndex: typeof r.drafted.stepIndex === 'number' ? r.drafted.stepIndex : 0,
-      sentAt: r.sent!.sentAt,
-      subject: r.drafted.subject,
-      gmailSentMessageId: r.sent!.gmailSentMessageId,
-      gmailThreadId: r.sent!.gmailThreadId,
-    }))
-    .sort((a, b) => a.stepIndex - b.stepIndex || a.sentAt.localeCompare(b.sentAt));
-}
-
-/** Sends recorded without a draft: by hand (MANUAL_SENT) or by SEND FROM YARDFLOW (DIRECT_SENT), as touches. */
-async function manualTouches(prisma: PrismaLike, decisionId: string): Promise<Array<{ touch: SentTouch; payload: ManualSentPayload }>> {
-  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
-  const rows: Array<{ payload: unknown }> = await prisma.gapAuditEvent.findMany({
-    where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: decisionId, kind: { in: [MANUAL_SENT, DIRECT_SENT] } },
-    select: { payload: true },
-  });
-  return rows
-    .map((r) => r.payload as ManualSentPayload)
-    .filter((p) => p && typeof p.gmailSentMessageId === 'string')
-    .map((p) => ({ payload: p, touch: { stepIndex: p.stepIndex ?? 0, sentAt: p.sentAt, subject: p.subject, gmailSentMessageId: p.gmailSentMessageId, gmailThreadId: p.gmailThreadId ?? null } }));
-}
-
 export async function computeNextTouch(prisma: PrismaLike, decisionId: string, now: Date, deps: NextTouchDeps = {}): Promise<NextTouch> {
-  const records = await listDraftRecords(prisma, decisionId);
-  const manual = await manualTouches(prisma, decisionId);
-  const sent = [...sentTouches(records), ...manual.map((m) => m.touch)].sort((a, b) => a.stepIndex - b.stepIndex || a.sentAt.localeCompare(b.sentAt));
+  // The PERSON's history across every routing card (red team T2), never this card's alone.
+  const history = await personSendHistoryForDecision(prisma, decisionId);
+  const sent: SentTouch[] = history.sent.map((s) => ({ stepIndex: s.stepIndex, sentAt: s.sentAt, subject: s.subject, gmailSentMessageId: s.gmailSentMessageId, gmailThreadId: s.gmailThreadId }));
   if (sent.length === 0) return { state: 'not_started' };
 
   const first = sent[0];
   const last = sent[sent.length - 1];
-  const draftAnchor = records.find((r) => r.fate === 'sent')?.drafted;
-  const anchor = draftAnchor ?? { recipient: manual[0].payload.recipient, personaId: manual[0].payload.personaId, sequenceVersionId: manual[0].payload.sequenceVersionId };
-  const recipient = anchor.recipient.toLowerCase();
+  const lastSend = history.sent[history.sent.length - 1];
+  const anchorPersona = history.personaId ?? history.sent.find((s) => s.personaId !== null)?.personaId ?? null;
+  const recipient = (history.recipient || history.sent[0].recipient).toLowerCase();
+  const sequenceVersionId = lastSend.sequenceVersionId ?? history.sent.find((s) => s.sequenceVersionId)?.sequenceVersionId ?? null;
 
   // Stop rules that need no Gmail read.
-  const persona = await prisma.persona.findUnique({ where: { id: anchor.personaId }, select: { do_not_contact: true, email_status: true } });
+  const persona = anchorPersona !== null ? await prisma.persona.findUnique({ where: { id: anchorPersona }, select: { do_not_contact: true, email_status: true } }) : null;
   if (persona?.do_not_contact) return { state: 'stopped', reason: 'do_not_contact', detail: 'This person is marked do not contact.', sent };
   if (persona && HARD_INVALID_STATUSES.has(String(persona.email_status ?? '').toLowerCase())) {
     return { state: 'stopped', reason: 'invalid_address', detail: 'The address is marked invalid.', sent };
@@ -160,14 +136,14 @@ export async function computeNextTouch(prisma: PrismaLike, decisionId: string, n
     if (reply) return { state: 'stopped', reason: 'replied', detail: 'Buyer replied in the Gmail thread.', sent };
   }
 
-  const version = await prisma.sequenceVersion.findUnique({ where: { id: anchor.sequenceVersionId }, select: { steps: true } });
+  const version = sequenceVersionId ? await prisma.sequenceVersion.findUnique({ where: { id: sequenceVersionId }, select: { steps: true } }) : null;
   const parsed = version ? parseSteps(version.steps) : null;
   const steps = parsed && parsed.ok ? parsed.steps.steps : [];
   const next = last.stepIndex + 1;
   if (next >= steps.length) return { state: 'complete', sent };
 
   const dueAt = dueAfter(new Date(last.sentAt), steps[next].delay);
-  const pending = records.find((r) => r.fate === 'drafted' && (r.drafted.stepIndex ?? 0) === next);
+  const pending = history.drafts.find((r) => r.fate === 'drafted' && (r.drafted.stepIndex ?? 0) === next);
   return {
     state: now.getTime() >= dueAt.getTime() ? 'due' : 'waiting',
     stepIndex: next,

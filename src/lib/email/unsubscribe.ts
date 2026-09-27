@@ -87,7 +87,14 @@ export async function recordUnsubscribe(
 
   const existing = await prisma.unsubscribedEmail.findUnique({ where: { email } });
   if (existing) {
-    return { ok: true, created: false, personaUpdated: 0, hubspot: 'skipped:already_unsubscribed' };
+    // Idempotent AND repairing (red team Release B review #5): the row may
+    // have landed while the persona write failed, or the persona may have
+    // been imported after the unsubscribe. Re-apply the mirror every time.
+    const repaired = await prisma.persona.updateMany({
+      where: { email: { equals: email, mode: 'insensitive' }, do_not_contact: false },
+      data: { do_not_contact: true },
+    });
+    return { ok: true, created: false, personaUpdated: typeof repaired?.count === 'number' ? repaired.count : 0, hubspot: 'skipped:already_unsubscribed' };
   }
 
   await prisma.unsubscribedEmail.create({

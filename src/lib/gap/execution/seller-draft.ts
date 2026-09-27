@@ -30,19 +30,20 @@
 
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
-import { generateToken } from '@/lib/email/unsubscribe-token';
+import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
 import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
 import { makeCriticClient } from '../critic-client';
 import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
-import { appendLedger, DIRECT_REFUSED, DRAFT_REFUSED, DRAFTED, listDraftRecords, type DraftedPayload } from './draft-ledger';
+import { appendLedger, DIRECT_REFUSED, DIRECT_RELEASED, DRAFT_REFUSED, DRAFTED, isDefinitelyNotSent, type DraftedPayload } from './draft-ledger';
 import { hasActiveOpportunity } from '../routing/rules';
 import { loadActiveOpportunityInputs } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
 import { computeNextTouch, type NextTouch } from './next-touch';
+import { claimSendKey, personSendHistoryForDecision, personStepKey } from './person-history';
 import { getGmailMessageHeaders } from '@/lib/email/gmail-inbox';
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
@@ -58,6 +59,10 @@ export type SellerDraftRefusal =
   | 'decision_blocked'
   | 'decision_superseded'
   | 'first_touch_already_sent'
+  | 'step_already_sent'
+  | 'send_in_progress_or_unknown'
+  | 'draft_outstanding'
+  | 'recipient_unsubscribed'
   | 'touch_not_due'
   | 'sequence_stopped'
   | 'reply_truth_unavailable'
@@ -120,8 +125,7 @@ async function defaultActiveOpportunity(prisma: PrismaLike, accountName: string,
 }
 
 function defaultUnsubscribeUrl(email: string): string {
-  const base = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
-  return `${base}/unsubscribe?email=${encodeURIComponent(email)}&token=${generateToken(email)}`;
+  return unsubscribePageUrl(email);
 }
 
 function escapeHtml(text: string): string {
@@ -164,12 +168,12 @@ export function draftHtml(body: string, unsubscribeUrl: string, signatureHtml: s
     .map((p) => `<p style="margin:0 0 14px 0;">${escapeHtml(p).replace(/\n/g, '<br />')}</p>`)
     .join('\n');
   const signature = signatureHtml ? `\n<div class="gmail_signature">${signatureHtml}</div>` : '';
-  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}${signature}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.</p>\n</div>`;
+  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;">\n${paragraphs}${signature}\n<p style="margin:18px 0 0 0;font-size:11px;color:#9ca3af;">Not relevant? <a href="${escapeHtml(unsubscribeUrl)}" style="color:#9ca3af;">Unsubscribe</a>.<br />${escapeHtml(COMPANY_POSTAL_ADDRESS)}</p>\n</div>`;
 }
 
 export function draftText(body: string, unsubscribeUrl: string, signatureHtml: string | null = null): string {
   const text = signatureHtml ? `${withoutTemplateSignoff(body)}\n\n${signatureText(signatureHtml)}` : body;
-  return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}`;
+  return `${text}\n\nNot relevant? Unsubscribe: ${unsubscribeUrl}\n${COMPANY_POSTAL_ADDRESS}`;
 }
 
 type Refusal = Extract<SellerDraftResult, { ok: false }>;
@@ -260,8 +264,24 @@ export async function prepareSellerEmail(
   // invalid address, meeting booked). Unreadable reply truth prepares nothing.
   const stepIndex = Math.max(0, input.stepIndex ?? 0);
   const touch = await (deps.nextTouch ?? computeNextTouch)(prisma, decisionId, now);
-  if (stepIndex === 0 && touch.state !== 'not_started') {
-    return refuse(prisma, actor, decisionId, { ok: false, reason: 'first_touch_already_sent', detail: touch.state });
+  // The person's execution truth across EVERY routing card (red team T2): a
+  // newer card for the same person never forgets a send, a draft or an
+  // unresolved claim made from an older one.
+  const history = await personSendHistoryForDecision(prisma, decisionId);
+  const priorAtStep = history.sent.find((s) => s.stepIndex === stepIndex);
+  if (stepIndex === 0 && (touch.state !== 'not_started' || priorAtStep)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'first_touch_already_sent', detail: priorAtStep ? `sent ${priorAtStep.sentAt} (${priorAtStep.engine}, card ${priorAtStep.decisionId})` : touch.state });
+  }
+  if (priorAtStep) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'step_already_sent', detail: `touch ${stepIndex + 1} sent ${priorAtStep.sentAt} (${priorAtStep.engine}, card ${priorAtStep.decisionId})` });
+  }
+  const openClaim = history.unresolvedClaims.find((c) => c.stepIndex === null || c.stepIndex === stepIndex);
+  if (openClaim) {
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'send_in_progress_or_unknown',
+      detail: `A send of touch ${stepIndex + 1} to this person was started ${openClaim.claimedAt} and its outcome is not recorded. Check Gmail Sent in casey@yardflow.ai. GAP will not send it twice.`,
+    });
   }
   if (stepIndex > 0) {
     if (touch.state === 'stopped') return refuse(prisma, actor, decisionId, { ok: false, reason: 'sequence_stopped', detail: touch.detail });
@@ -281,6 +301,10 @@ export async function prepareSellerEmail(
   if (!email) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_email' });
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
+  // The unsubscribe table is the recipient's own decision; do_not_contact is
+  // only its mirror and can lag it (Release B review #5). Read it directly.
+  const unsubscribed = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true } });
+  if (unsubscribed) return refuse(prisma, actor, decisionId, { ok: false, reason: 'recipient_unsubscribed' });
   if (mode === 'send') {
     const opportunity = await (deps.activeOpportunity ?? defaultActiveOpportunity)(prisma, pack.hypothesis.account_name, email, now);
     if (opportunity) {
@@ -296,16 +320,25 @@ export async function prepareSellerEmail(
   }
   const sentBodies =
     touch.state === 'waiting' || touch.state === 'due'
-      ? (await listDraftRecords(prisma, decisionId))
-          .filter((r) => r.fate === 'sent' && (r.drafted.stepIndex ?? 0) < stepIndex)
-          .sort((a, b) => (a.drafted.stepIndex ?? 0) - (b.drafted.stepIndex ?? 0))
-          .map((r) => r.drafted.bodySnapshot)
+      ? history.sent.filter((s) => s.stepIndex < stepIndex && s.bodySnapshot).map((s) => s.bodySnapshot as string)
       : [];
   const contentHash = pack.contentHash!;
 
-  // Idempotency: this exact copy already drafted for this card and still a draft.
-  const existing = (await listDraftRecords(prisma, decisionId)).find((d) => d.fate === 'drafted' && d.drafted.contentHash === contentHash);
-  if (existing && mode === 'draft') return { ok: true, existingDraft: existing.drafted };
+  // An unresolved Gmail draft for this person + step (red team T4, on any
+  // card): Casey may still press Send in Gmail, so neither a direct send nor
+  // a second draft of other copy may exist beside it. The same copy on the
+  // same card is the idempotent case and returns that draft.
+  const outstanding = history.drafts.filter((d) => d.fate === 'drafted' && (d.drafted.stepIndex ?? 0) === stepIndex);
+  if (outstanding.length > 0) {
+    const same = outstanding.find((d) => d.decisionId === decisionId && d.drafted.contentHash === contentHash);
+    if (mode === 'draft' && same) return { ok: true, existingDraft: same.drafted };
+    const d0 = outstanding[0];
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'draft_outstanding',
+      detail: `A Gmail draft of touch ${stepIndex + 1} to this person already exists (card ${d0.decisionId}, created ${d0.drafted.createdAt}). Send or delete it in Gmail, then reconcile, before anything else goes out.`,
+    });
+  }
 
   // Compiler clearance for exactly this marked copy.
   let compileRow = pack.compile;
@@ -382,8 +415,12 @@ export async function prepareSellerEmail(
   }
 
   let unsubscribeUrl: string;
+  let oneClickUrl: string;
   try {
     unsubscribeUrl = (deps.unsubscribeUrl ?? defaultUnsubscribeUrl)(email);
+    // RFC 8058 (red team T5): the header targets the API route that honors the
+    // one-click POST; the visible link is the human page.
+    oneClickUrl = oneClickUnsubscribeUrl(email);
   } catch (err) {
     return refuse(prisma, actor, decisionId, { ok: false, reason: 'unsubscribe_link_unavailable', detail: err instanceof Error ? err.message : String(err) });
   }
@@ -431,7 +468,7 @@ export async function prepareSellerEmail(
       compileId: compileRow!.id,
       html: draftHtml(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
       text: draftText(pack.rendered.queued.body, unsubscribeUrl, signatureHtml),
-      headers: { 'List-Unsubscribe': `<${unsubscribeUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
+      headers: { 'List-Unsubscribe': `<${oneClickUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
       threadContext,
       inReplyToGmailMessageId,
     },
@@ -468,6 +505,16 @@ export async function createSellerGmailDraft(
     mode: 'live',
     now,
   };
+  // Claim this person + step under the person lock BEFORE Gmail (red team
+  // Release B review): a double click, a draft on another card or a racing
+  // direct send meets it inside the lock; a lost answer leaves the claim open.
+  const claimKey = `${personStepKey(p.personaId, email, stepIndex)}:draft:${now.toISOString()}`;
+  const claim = await claimSendKey(prisma, { key: claimKey, decisionId, personaId: p.personaId, recipient: email, stepIndex, actor, now, kind: 'draft' });
+  if (!claim.claimed) {
+    const reason: SellerDraftRefusal =
+      claim.state === 'sent' ? (stepIndex === 0 ? 'first_touch_already_sent' : 'step_already_sent') : claim.state === 'drafted' ? 'draft_outstanding' : 'send_in_progress_or_unknown';
+    return refuse(prisma, actor, decisionId, { ok: false, reason, detail: `touch ${stepIndex + 1} to this person is ${claim.state}` });
+  }
   const receipt = await gmailDraftAdapter(
     intent,
     {
@@ -481,7 +528,12 @@ export async function createSellerGmailDraft(
     deps.gmail ?? {},
   );
   if (receipt.status !== 'drafted' || !receipt.engineId) {
-    return refuse(prisma, actor, decisionId, { ok: false, reason: 'gmail_refused', detail: receipt.refusalReason ?? 'no draft id' });
+    const why = receipt.refusalReason ?? 'no draft id';
+    // Release only when Gmail provably created nothing; otherwise the claim stays open (an orphan draft is never invisible).
+    if (isDefinitelyNotSent(why)) {
+      await appendLedger(prisma, DIRECT_RELEASED, actor, decisionId, { idempotencyKey: claimKey, reason: why, at: now.toISOString() }).catch(() => undefined);
+    }
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'gmail_refused', detail: why });
   }
 
   const payload: DraftedPayload = {
@@ -500,6 +552,7 @@ export async function createSellerGmailDraft(
     stepIndex,
     inReplyToGmailMessageId,
     compileId: p.compileId,
+    claimKey,
     gmailDraftId: receipt.engineId,
     gmailDraftMessageId: receipt.draftMessageId ?? null,
     gmailThreadId: receipt.threadId ?? null,

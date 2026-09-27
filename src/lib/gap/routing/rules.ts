@@ -462,6 +462,39 @@ export const RULES: RoutingRule[] = [
     predicate: () => 'hypothesis is approved, the account is hot, the phone is usable and the role gate passed',
   },
   {
+    id: 'sequence_stopped',
+    label: 'R14b',
+    // Red team T3: a GAP sequence the buyer answered (a confirmed substantive
+    // disposition after the first send) never restarts at touch 1.
+    when: (i) => i.comms.gapSequence?.state === 'stopped',
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: () => 'sequence_stopped',
+    predicate: () => 'a GAP email sequence to this person was answered; it is stopped, not restarted',
+  },
+  {
+    id: 'sequence_complete',
+    label: 'R14c',
+    // Red team T3: every touch sent; hold, never a new touch 1.
+    when: (i) => i.comms.gapSequence?.state === 'complete',
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: () => 'sequence_complete',
+    predicate: (i) => `every touch of the GAP email sequence to this person was sent (${i.comms.gapSequence!.sentSteps})`,
+  },
+  {
+    id: 'cooldown',
+    label: 'R16',
+    // Red team T3: evaluated BEFORE R15. A person GAP emailed three days ago
+    // is not a hot-email target again because a trigger fired since.
+    when: (i) => inCooldown(i),
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: () => 'cooldown',
+    predicate: (i) =>
+      `outbound ${Math.round(ageDays(i.now, i.comms.lastOutboundAt!))} days ago (within ${i.freshness.cooldownDays}) with no reply since`,
+  },
+  {
     id: 'hot_email',
     label: 'R15',
     // emailUsable, not emailValid (R2-8): a bounced address is never a send target.
@@ -471,16 +504,6 @@ export const RULES: RoutingRule[] = [
     bonus: ACTION_BONUS.one_off_email,
     reason: () => 'hot',
     predicate: () => 'hypothesis is approved, the account is hot, no usable phone, email is usable',
-  },
-  {
-    id: 'cooldown',
-    label: 'R16',
-    when: (i) => inCooldown(i),
-    action: 'nurture',
-    lane: 'work_queue',
-    reason: () => 'cooldown',
-    predicate: (i) =>
-      `outbound ${Math.round(ageDays(i.now, i.comms.lastOutboundAt!))} days ago (within ${i.freshness.cooldownDays}) with no reply since`,
   },
   {
     id: 'enroll',

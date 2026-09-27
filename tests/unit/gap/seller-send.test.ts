@@ -3,6 +3,7 @@ import { sendSellerEmail } from '@/lib/gap/execution/seller-send';
 import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED } from '@/lib/gap/execution/draft-ledger';
 import type { ExecutionReceipt } from '@/lib/gap/execution/contract';
 import { NOW, baseDeps, db, prismaOf, type Db } from './fixtures/seller-db';
+import { findManyFrom } from './fixtures/where';
 
 const YF = { serviceAccountJson: '{}', userEmail: 'casey@yardflow.ai', displayName: 'Casey Larkin' };
 const SIG = '<div>Casey Larkin · <b>Founding AE</b>, YardFlow by FreightRoll</div>';
@@ -25,9 +26,7 @@ function sendPrisma(d: Db) {
     d.decisions.find((x) => x.id === where.id).human_action = data.human_action;
     return { count: 1 };
   });
-  p.gapAuditEvent.findMany = vi.fn(async ({ where }: any) =>
-    d.audit.filter((a) => a.subject_type === where.subject_type && a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind))),
-  );
+  p.gapAuditEvent.findMany = vi.fn(async (args: any) => findManyFrom(d.audit, args));
   return p;
 }
 

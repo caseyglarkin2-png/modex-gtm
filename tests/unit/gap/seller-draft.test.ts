@@ -28,7 +28,9 @@ describe('createSellerGmailDraft', () => {
     expect(payload.text).toMatch(/^Hi Joey,/);
     expect(payload.text).not.toMatch(/\[\[SRC:|\[S:|\{\{/);
     expect(payload.html).toContain('Unsubscribe');
-    expect(payload.headers['List-Unsubscribe']).toContain('/unsubscribe?email=joey.maggard%40kroger.com');
+    // RFC 8058 (red team T5): the header targets the API one-click route, not the page.
+    expect(payload.headers['List-Unsubscribe']).toMatch(/^<https:\/\/modex-gtm\.vercel\.app\/api\/unsubscribe\/\?email=joey\.maggard%40kroger\.com&token=[0-9a-f]{64}>$/);
+    expect(payload.headers['List-Unsubscribe-Post']).toBe('List-Unsubscribe=One-Click');
 
     expect(r.receipt).toMatchObject({
       engine: 'gmail_draft',
@@ -283,12 +285,57 @@ describe('draft -> sent reconciliation', () => {
     ...over,
   });
 
-  it('observeDraft: existing draft is still drafted; gone + SENT to the recipient is sent; gone + nothing is discarded', () => {
+  it('observeDraft: existing draft is still drafted; gone + SENT to the recipient is sent; gone + SCHEDULED is scheduled; gone + nothing is only GONE (not yet discarded)', () => {
     expect(observeDraft(drafted, { exists: true, messageId: 'm' }, [msg({})])).toEqual({ fate: 'drafted' });
     expect(observeDraft(drafted, { exists: false }, [msg({})])).toMatchObject({ fate: 'sent', sentMessageId: 'm-sent-9' });
-    expect(observeDraft(drafted, { exists: false }, [msg({ labelIds: ['INBOX'] })])).toEqual({ fate: 'discarded' });
-    expect(observeDraft(drafted, { exists: false }, [msg({ to: 'someone@else.com' })])).toEqual({ fate: 'discarded' });
-    expect(observeDraft(drafted, { exists: false }, [msg({ internalDate: new Date(NOW.getTime() - 3_600_000) })])).toEqual({ fate: 'discarded' });
+    // Red team Release B review: Gmail "Schedule send" moves the draft out of Drafts with no SENT yet.
+    expect(observeDraft(drafted, { exists: false }, [msg({ labelIds: ['SCHEDULED'] })])).toEqual({ fate: 'scheduled' });
+    expect(observeDraft(drafted, { exists: false }, [msg({ labelIds: ['INBOX'] })])).toEqual({ fate: 'gone' });
+    expect(observeDraft(drafted, { exists: false }, [msg({ to: 'someone@else.com' })])).toEqual({ fate: 'gone' });
+    expect(observeDraft(drafted, { exists: false }, [msg({ internalDate: new Date(NOW.getTime() - 3_600_000) })])).toEqual({ fate: 'gone' });
+  });
+
+  it('a SCHEDULED send is never discarded: the draft stays outstanding and nothing is written', async () => {
+    const d = db();
+    const prisma = prismaOf(d);
+    await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    const deps = { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState: async () => ({ exists: false as const }), getThread: async () => [msg({ labelIds: ['SCHEDULED'] })] };
+    for (const later of [120_000, 3 * 3_600_000, 5 * 86_400_000]) {
+      const r = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'cron', now: new Date(NOW.getTime() + later) }, deps);
+      expect(r).toMatchObject({ ok: true, fate: 'drafted', changed: false });
+    }
+    expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED)).toBe(false);
+    expect((await listDraftRecords(prisma, 'dec-joey'))[0].fate).toBe('drafted');
+  });
+
+  it('a draft that just vanished (undo window, a send in flight) is NOT discarded on first sight; only after it stays gone past the grace window', async () => {
+    const d = db();
+    const prisma = prismaOf(d);
+    await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    const deps = { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState: async () => ({ exists: false as const }), getThread: async () => [] };
+    const first = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'cron', now: new Date(NOW.getTime() + 60_000) }, deps);
+    expect(first).toMatchObject({ ok: true, fate: 'drafted' });
+    expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED)).toBe(false);
+    expect((await listDraftRecords(prisma, 'dec-joey'))[0].fate).toBe('drafted');
+
+    const soon = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'cron', now: new Date(NOW.getTime() + 30 * 60_000) }, deps);
+    expect(soon).toMatchObject({ ok: true, fate: 'drafted' });
+    expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED)).toBe(false);
+
+    const later = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'cron', now: new Date(NOW.getTime() + 3 * 3_600_000) }, deps);
+    expect(later).toMatchObject({ ok: true, fate: 'discarded', changed: true });
+    expect(d.audit.filter((a) => a.kind === DRAFT_DISCARDED)).toHaveLength(1);
+  });
+
+  it('a vanished draft that later shows SENT is recorded as sent, not discarded', async () => {
+    const d = db();
+    const prisma = prismaOf(d);
+    await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    const base = { gapSender: () => null, envMailbox: () => 'casey@freightroll.com', getDraftState: async () => ({ exists: false as const }) };
+    await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'cron', now: new Date(NOW.getTime() + 60_000) }, { ...base, getThread: async () => [] });
+    const r = await reconcileDraft(prisma, { decisionId: 'dec-joey', gmailDraftId: 'r-draft-1', actor: 'cron', now: new Date(NOW.getTime() + 3 * 3_600_000) }, { ...base, getThread: async () => [msg({})] });
+    expect(r).toMatchObject({ ok: true, fate: 'sent' });
+    expect(d.audit.some((a) => a.kind === DRAFT_DISCARDED)).toBe(false);
   });
 
   it('reconcileDraft records the SENT fate with a NEW message id, keeps the draft id, and touches no human action', async () => {

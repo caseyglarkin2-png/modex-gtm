@@ -416,60 +416,92 @@ export async function listAllCurrent(prisma: PrismaLike): Promise<{ asOf: string
 }
 
 /**
- * Next-touch state for cards that have a Gmail-proven sent touch (last mile).
- * One indexed ledger read for the page, then at most MAX_TOUCH_EVALUATIONS
- * evaluations. Never breaks the queue: any failure leaves `touch` unset.
+ * Next-touch state for cards whose PERSON has GAP execution history (red team
+ * T2): a Gmail-proven send, or an unresolved send claim, on ANY routing card
+ * for this person or any persona row sharing their address. The history read
+ * is complete for the page's people (no row cap, no age window): a person
+ * sent 200 days ago, or behind 500 newer rows, is still not a fresh step 0.
+ * At most MAX_TOUCH_EVALUATIONS cards per page are evaluated in full (each
+ * may read one Gmail thread); a card past that cap with history is marked
+ * `unknown`, never left looking like a first email. A failed read marks the
+ * card `unknown` too: fail closed, never quiet.
  */
-async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Promise<void> {
+export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Promise<void> {
   if (items.length === 0 || typeof prisma?.gapAuditEvent?.findMany !== 'function') return;
+  const unevaluated = (item: QueueItem, detail: string) => {
+    item.touch = { state: 'unknown', sentCount: 0, detail };
+  };
+  let withHistory: QueueItem[] = [];
   try {
     // Lazy: the queue module must not load the execution layer (Gmail, ledger) at import time.
-    const { DIRECT_SENT, DRAFT_SENT, DRAFTED, MANUAL_SENT } = await import('../execution/draft-ledger');
-    const { computeNextTouch } = await import('../execution/next-touch');
-    // A sequence belongs to the PERSON: a send recorded on an earlier card for
-    // this person (e.g. Joey's hand-sent email) still drives today's card.
-    const since = new Date(Date.now() - 120 * 24 * 60 * 60 * 1000);
-    const sentRows = (await prisma.gapAuditEvent.findMany({
-      where: { subject_type: 'routing_decision', kind: { in: [DRAFT_SENT, MANUAL_SENT, DIRECT_SENT] }, created_at: { gte: since } },
-      select: { subject_id: true, kind: true, payload: true },
-      take: 500,
-    })) as Array<{ subject_id: string; kind: string; payload: unknown }>;
-    const draftedRows = (await prisma.gapAuditEvent.findMany({
-      where: { subject_type: 'routing_decision', kind: DRAFTED, subject_id: { in: [...new Set(sentRows.map((r) => r.subject_id))] } },
-      select: { subject_id: true, payload: true },
-    })) as Array<{ subject_id: string; payload: unknown }>;
-    const personaOf = new Map<string, number>();
-    for (const r of [...sentRows, ...draftedRows]) {
-      const pid = (r.payload as { personaId?: unknown } | null)?.personaId;
-      if (typeof pid === 'number') personaOf.set(r.subject_id, pid);
+    const { DIRECT_CLAIMED, DIRECT_SENT, DRAFT_SENT, MANUAL_SENT } = await import('../execution/draft-ledger');
+    const pageIds = [...new Set(items.map((i) => i.persona.id).filter((x): x is number => typeof x === 'number'))];
+    const pageEmails = [...new Set(items.map((i) => (i.persona.email ?? '').trim().toLowerCase()).filter(Boolean))];
+    if (pageIds.length === 0 && pageEmails.length === 0) return;
+    const sharing = pageEmails.length
+      ? ((await prisma.persona.findMany({ where: { email: { in: pageEmails, mode: 'insensitive' } }, select: { id: true, email: true } })) as Array<{ id: number; email: string | null }>)
+      : [];
+    const emailOf = new Map<number, string>();
+    for (const p of sharing) if (p.email) emailOf.set(p.id, p.email.trim().toLowerCase());
+    const allPersonaIds = [...new Set([...pageIds, ...sharing.map((p) => p.id)])];
+    const decisions = allPersonaIds.length
+      ? ((await prisma.routingDecision.findMany({ where: { persona_id: { in: allPersonaIds } }, select: { id: true, persona_id: true } })) as Array<{ id: string; persona_id: number | null }>)
+      : [];
+    const personaOfDecision = new Map(decisions.map((d) => [d.id, d.persona_id] as const));
+    const executed = new Set<string>();
+    const ids = [...personaOfDecision.keys()];
+    for (let i = 0; i < ids.length; i += 500) {
+      const rows = (await prisma.gapAuditEvent.findMany({
+        where: { subject_type: 'routing_decision', subject_id: { in: ids.slice(i, i + 500) }, kind: { in: [DRAFT_SENT, MANUAL_SENT, DIRECT_SENT, DIRECT_CLAIMED] } },
+        select: { subject_id: true },
+      })) as Array<{ subject_id: string }>;
+      for (const r of rows) executed.add(r.subject_id);
     }
-    const decisionForPersona = new Map<number, string>();
-    for (const r of sentRows) {
-      const pid = personaOf.get(r.subject_id);
-      if (pid !== undefined && !decisionForPersona.has(pid)) decisionForPersona.set(pid, r.subject_id);
+    const personaWithHistory = new Set<number>();
+    const emailWithHistory = new Set<string>();
+    for (const id of executed) {
+      const pid = personaOfDecision.get(id);
+      if (typeof pid !== 'number') continue;
+      personaWithHistory.add(pid);
+      const e = emailOf.get(pid);
+      if (e) emailWithHistory.add(e);
     }
-    const pairs = items
-      .map((i) => [i, typeof i.persona.id === 'number' ? decisionForPersona.get(i.persona.id) : undefined] as const)
-      .filter((p): p is readonly [QueueItem, string] => typeof p[1] === 'string')
-      .slice(0, MAX_TOUCH_EVALUATIONS);
-    const now = new Date();
-    for (const [item, id] of pairs) {
-      try {
-        const t = await computeNextTouch(prisma, id, now);
-        if (t.state === 'not_started') continue;
-        item.touch = {
-          state: t.state,
-          sentCount: t.sent.length,
-          ...(t.state === 'waiting' || t.state === 'due' ? { stepIndex: t.stepIndex, dueAt: t.dueAt } : {}),
-          ...(t.state === 'stopped' ? { reason: t.reason, detail: t.detail } : {}),
-          ...(t.state === 'unknown' ? { detail: t.detail } : {}),
-        };
-      } catch {
-        // leave touch unset
-      }
-    }
+    withHistory = items.filter(
+      (i) =>
+        (typeof i.persona.id === 'number' && personaWithHistory.has(i.persona.id)) ||
+        emailWithHistory.has((i.persona.email ?? '').trim().toLowerCase()),
+    );
   } catch {
-    // leave every touch unset
+    // The history itself could not be read: no card on this page may look like a first email.
+    for (const item of items) unevaluated(item, 'Send history could not be read.');
+    return;
+  }
+  const { computeNextTouch } = await import('../execution/next-touch');
+  const now = new Date();
+  for (const [n, item] of withHistory.entries()) {
+    if (n >= MAX_TOUCH_EVALUATIONS) {
+      unevaluated(item, 'This person has send history; open the card to evaluate the next touch.');
+      continue;
+    }
+    try {
+      const t = await computeNextTouch(prisma, item.id, now);
+      if (t.state === 'not_started') {
+        // No proven send. An open claim is an unknown outcome; a released one is nothing.
+        const { personSendHistoryForDecision } = await import('../execution/person-history');
+        const h = await personSendHistoryForDecision(prisma, item.id);
+        if (h.unresolvedClaims.length > 0) unevaluated(item, 'A send to this person was started and its outcome is not recorded. Check Gmail Sent.');
+        continue;
+      }
+      item.touch = {
+        state: t.state,
+        sentCount: t.sent.length,
+        ...(t.state === 'waiting' || t.state === 'due' ? { stepIndex: t.stepIndex, dueAt: t.dueAt } : {}),
+        ...(t.state === 'stopped' ? { reason: t.reason, detail: t.detail } : {}),
+        ...(t.state === 'unknown' ? { detail: t.detail } : {}),
+      };
+    } catch {
+      unevaluated(item, 'Sequence could not be evaluated.');
+    }
   }
 }
 

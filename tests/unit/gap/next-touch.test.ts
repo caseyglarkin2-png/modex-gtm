@@ -12,6 +12,7 @@ declare global {
 import { computeNextTouch, dueAfter, recipientReplied } from '@/lib/gap/execution/next-touch';
 import { DRAFTED, DRAFT_SENT } from '@/lib/gap/execution/draft-ledger';
 import { SEED_FAMILIES } from '@/lib/gap/sequences/families';
+import { findManyFrom } from './fixtures/where';
 
 const HC = SEED_FAMILIES.find((f) => f.key === 'hidden_capacity')!;
 const SENT_AT = new Date('2026-09-24T15:00:00.000Z'); // Thursday
@@ -23,8 +24,15 @@ function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
     audit.push({ id: `s${step}`, kind: DRAFT_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(SENT_AT.getTime() + step), payload: { gmailDraftId: `r${step}`, gmailSentMessageId: `m${step}`, gmailThreadId: 't1', sentAt: new Date(SENT_AT.getTime() + step * 86_400_000 * 5).toISOString() } });
   }
   return {
-    gapAuditEvent: { findMany: vi.fn(async ({ where }: any) => audit.filter((a) => a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind))).sort((a, b) => b.created_at - a.created_at)) },
-    persona: { findUnique: vi.fn(async () => ({ do_not_contact: false, email_status: 'unverified', ...(extra.persona as object) })) },
+    gapAuditEvent: { findMany: vi.fn(async (args: any) => findManyFrom(audit, args)) },
+    routingDecision: {
+      findUnique: vi.fn(async ({ where }: any) => (where.id === 'dec-1' ? { id: 'dec-1', persona_id: 1886 } : null)),
+      findMany: vi.fn(async (args: any) => findManyFrom([{ id: 'dec-1', persona_id: 1886 }], args)),
+    },
+    persona: {
+      findUnique: vi.fn(async () => ({ email: 'joey.maggard@kroger.com', do_not_contact: false, email_status: 'unverified', ...(extra.persona as object) })),
+      findMany: vi.fn(async (args: any) => findManyFrom([{ id: 1886, email: 'joey.maggard@kroger.com' }], args)),
+    },
     unsubscribedEmail: { findFirst: vi.fn(async () => (extra.unsub ? { id: 'u' } : null)) },
     conversationDisposition: { findFirst: vi.fn(async ({ where }: any) => (extra.disposition && !where.response_class.notIn.includes(extra.disposition) ? { response_class: extra.disposition } : null)) },
     inboundMessage: { findFirst: vi.fn(async () => (extra.inbound ? { subject: extra.inbound } : null)) },
@@ -124,7 +132,7 @@ describe('manual send (Joey Maggard, sent by hand from casey@yardflow.ai)', asyn
   it('a manual send anchors the next touch on the REAL sent time with no draft record (Fri Sep 25 -> Thu Oct 1)', async () => {
     const audit = [{ id: 'm', kind: MANUAL_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(), payload: { engine: 'manual', stepIndex: 0, recipient: 'joey.maggard@kroger.com', personaId: 1886, sequenceVersionId: 'v1', subject: 'doors versus spots', gmailSentMessageId: real.id, gmailThreadId: real.threadId, sentAt: real.sentAt } }];
     const p = ledger([]);
-    p.gapAuditEvent.findMany = vi.fn(async ({ where }: any) => audit.filter((a) => a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind)))) as any;
+    p.gapAuditEvent.findMany = vi.fn(async (args: any) => findManyFrom(audit, args)) as any;
     const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
     expect(t).toMatchObject({ state: 'waiting', stepIndex: 1, threadFrom: { gmailSentMessageId: '1a0da5d97f8142c0', gmailThreadId: '1a0da5c10f51fe73' } });
     expect(t.state === 'waiting' && t.dueAt.slice(0, 10)).toBe('2026-10-01');
@@ -137,7 +145,7 @@ describe('SEND FROM YARDFLOW anchors the multi-touch loop', async () => {
   const row = { id: 'x', kind: DIRECT_SENT, subject_type: 'routing_decision', subject_id: 'dec-1', created_at: new Date(), payload: { engine: 'gmail_direct', stepIndex: 0, recipient: 'joey.maggard@kroger.com', personaId: 1886, sequenceVersionId: 'v1', subject: 'Doors versus spots', gmailSentMessageId: 'msg-1', gmailThreadId: 'thr-1', sentAt: SENT_AT.toISOString() } };
   const withDirect = (extra: Record<string, unknown> = {}) => {
     const p = ledger([], extra);
-    p.gapAuditEvent.findMany = vi.fn(async ({ where }: any) => [row].filter((a) => a.subject_id === where.subject_id && (typeof where.kind === 'string' ? a.kind === where.kind : where.kind.in.includes(a.kind)))) as any;
+    p.gapAuditEvent.findMany = vi.fn(async (args: any) => findManyFrom([row], args)) as any;
     return p;
   };
   it('touch 2 waits on the real sent time; nothing is auto-sent', async () => {
