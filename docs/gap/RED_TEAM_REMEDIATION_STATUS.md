@@ -205,3 +205,40 @@ review, production verification.
   suites 146 files / 2840 tests green; typecheck green.
 - production mutation: none.
 - next: Release B gate.
+
+### Release B gate — read-only review (RevOps + deliverability + reliability)
+
+- reviewer verdict: no strict BLOCKER; 6 SHOULD-FIX, all on the release's
+  own mission (same step twice / after unsubscribe). All fixed in this PR:
+  - #1 reconcile read a SCHEDULED or undo-window send as `discarded`, which
+    released `draft_outstanding`. Now `scheduled` stays outstanding; a draft
+    gone with no SENT is recorded `execution.gmail_draft_vanished` and
+    discards only after `DRAFT_VANISH_GRACE_MS` (2h). (`7693c8e3`)
+  - #2 the advisory lock was keyed on persona id only. `lockPerson` now locks
+    the lowercased address AND the persona id, sorted. (`7693c8e3`)
+  - #3 drafts were checked outside the lock and CREATE GMAIL DRAFT took no
+    lock. Drafts now claim person + step (`execution.gmail_draft_claimed`,
+    closed by DRAFTED `claimKey` or a release); outstanding drafts are
+    checked inside the lock; a lost draft answer leaves an open claim.
+    (`7693c8e3`)
+  - #4 enrolment ignored GAP history. `enrollFromDecision` refuses
+    `gap_history_exists` for any send, open claim or outstanding draft.
+    (`1bf8ea34`)
+  - #5 a first touch did not read `unsubscribed_emails`. prepareSellerEmail
+    refuses `recipient_unsubscribed`; the modex suppression leg (read by
+    clawd and the wire) reports unsubscribed addresses; the idempotent
+    unsubscribe path re-applies do_not_contact. (`9eb74a8a`)
+  - #6 token failures never released a claim and were unbounded. Token
+    acquisition is bounded (GMAIL_TOKEN_TIMEOUT_MS, 10000) and tagged
+    `Gmail token unavailable:` (definitive, pre-wire). (`7693c8e3`)
+  - RFC 8058 multipart/form-data accepted; malformed body 400. Manual sends
+    record the bare recipient address. (`1bf8ea34`)
+- mutation proofs: persona-only lock, no draft check in lock, draft path
+  without claim, token not definitive -> each RED; restored GREEN.
+- residual (recorded, not blocking): emails already sent with the old
+  header point at the `/unsubscribe` page, where a one-click POST does not
+  land (production GAP sends so far were manual, so no old-header GAP email
+  is known); an outstanding Gmail draft is not deleted on unsubscribe (the
+  send gates refuse, but Casey could still press Send in Gmail by hand);
+  queue display finds history via persona_id only (execution is exact);
+  `sequence_stopped` sits after `hot_call` by design (calls stay open).
