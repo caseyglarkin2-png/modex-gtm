@@ -44,6 +44,10 @@ export interface GateInputs {
   peopleSentTo: number;
   positiveOutcomeLowerBound: number;
   optOutUpperBound: number;
+  /** G1 (ops closeout 5): every execution input above was actually read (buildG1Inputs sets it). */
+  executionInputsReadable: boolean;
+  /** G1 (ops closeout 5): open P0/P1 red-team findings. Any one fails G1. */
+  openP0P1Findings: number;
   /** G2: post-hoc reject-class violations found in the audit sample, and the sample size. */
   compilerRejectViolations: number;
   compilerAuditSampleSize: number;
@@ -71,9 +75,25 @@ const G1_MIN_DECISIONS = 200;
 const G1_MIN_WEEKS = 4;
 const G1_MIN_AGREEMENT = 0.8;
 /** Session-chosen floors (red team T10), for the owner to confirm: enough real sends, positive outcomes clearly above zero, opt-outs clearly low. */
-const G1_MIN_PEOPLE_SENT = 100;
-const G1_MIN_POSITIVE_LOWER_BOUND = 0.02;
-const G1_MAX_OPT_OUT_UPPER_BOUND = 0.05;
+/**
+ * Ops closeout 5: G1's outcome floors are PROVISIONAL, conservative safety
+ * defaults accepted by the owner, not tuned numbers. With today's N (one GAP
+ * send) nothing can be tuned: REVISIT ONLY AFTER REAL N >= 100 people sent
+ * to, and not before. G1 is also never an unlock by itself: passing it
+ * enables no autonomous sending (GAP_AUTO_ENROLL_ENABLED stays off, G0 is the
+ * owner's own halt reversal, and nothing calls evaluateGates in production).
+ */
+export const G1_POLICY = {
+  minPeopleSentTo: 100,
+  minPositiveOutcomeLowerBound: 0.02,
+  maxOptOutUpperBound: 0.05,
+  provisional: true,
+  revisitOnlyAfterRealN: 100,
+  unlocksAutonomousSend: false,
+} as const;
+const G1_MIN_PEOPLE_SENT = G1_POLICY.minPeopleSentTo;
+const G1_MIN_POSITIVE_LOWER_BOUND = G1_POLICY.minPositiveOutcomeLowerBound;
+const G1_MAX_OPT_OUT_UPPER_BOUND = G1_POLICY.maxOptOutUpperBound;
 const G2_MAX_SAMPLE_VIOLATIONS = 0;
 const G2_MIN_SAMPLE = 100;
 const G3_MAX_UNKNOWN_7D = 0;
@@ -103,11 +123,13 @@ function evaluateG1(inputs: GateInputs): GateResult {
   const outcome =
     inputs.peopleSentTo >= G1_MIN_PEOPLE_SENT &&
     inputs.positiveOutcomeLowerBound >= G1_MIN_POSITIVE_LOWER_BOUND &&
-    inputs.optOutUpperBound <= G1_MAX_OPT_OUT_UPPER_BOUND;
+    inputs.optOutUpperBound <= G1_MAX_OPT_OUT_UPPER_BOUND &&
+    inputs.executionInputsReadable === true &&
+    inputs.openP0P1Findings === 0;
   return {
     gate: 'G1',
     passed: conforms && outcome,
-    detail: `n=${inputs.shadowDecisionCount} (need ${G1_MIN_DECISIONS}), weeks=${inputs.shadowWeeksOfData} (need ${G1_MIN_WEEKS}), agreement=${(inputs.shadowAgreementRate * 100).toFixed(1)}% (need ${(G1_MIN_AGREEMENT * 100).toFixed(0)}%), people sent to=${inputs.peopleSentTo} (need ${G1_MIN_PEOPLE_SENT}), positive outcome lower bound=${(inputs.positiveOutcomeLowerBound * 100).toFixed(1)}% (need ${(G1_MIN_POSITIVE_LOWER_BOUND * 100).toFixed(0)}%), opt-out upper bound=${(inputs.optOutUpperBound * 100).toFixed(1)}% (max ${(G1_MAX_OPT_OUT_UPPER_BOUND * 100).toFixed(0)}%)`,
+    detail: `n=${inputs.shadowDecisionCount} (need ${G1_MIN_DECISIONS}), weeks=${inputs.shadowWeeksOfData} (need ${G1_MIN_WEEKS}), agreement=${(inputs.shadowAgreementRate * 100).toFixed(1)}% (need ${(G1_MIN_AGREEMENT * 100).toFixed(0)}%), people sent to=${inputs.peopleSentTo} (need ${G1_MIN_PEOPLE_SENT}), positive outcome lower bound=${(inputs.positiveOutcomeLowerBound * 100).toFixed(1)}% (need ${(G1_MIN_POSITIVE_LOWER_BOUND * 100).toFixed(0)}%), opt-out upper bound=${(inputs.optOutUpperBound * 100).toFixed(1)}% (max ${(G1_MAX_OPT_OUT_UPPER_BOUND * 100).toFixed(0)}%), execution inputs readable=${inputs.executionInputsReadable}, open P0/P1=${inputs.openP0P1Findings} (need 0). Provisional floors (revisit only after real N >= ${G1_POLICY.revisitOnlyAfterRealN}); a pass does not enable autonomous sending`,
   };
 }
 
@@ -173,7 +195,7 @@ export function buildG1Inputs(input: {
   agreement: { byAction: Array<{ key: string; rate: { rate: number | null; n: number } }> };
   execution: { overall: { peopleMatured: number; positivePerSend: { interval: { low: number; high: number } | null }; optOutPerSend: { interval: { low: number; high: number } | null } } } | null;
   weeksOfData: number;
-}): Pick<GateInputs, 'shadowAgreementRate' | 'shadowDecisionCount' | 'shadowWeeksOfData' | 'peopleSentTo' | 'positiveOutcomeLowerBound' | 'optOutUpperBound'> {
+}): Pick<GateInputs, 'shadowAgreementRate' | 'shadowDecisionCount' | 'shadowWeeksOfData' | 'peopleSentTo' | 'positiveOutcomeLowerBound' | 'optOutUpperBound' | 'executionInputsReadable'> {
   const enroll = input.agreement.byAction.find((r) => r.key === 'enroll_gap_sequence')?.rate;
   const o = input.execution?.overall;
   return {
@@ -183,6 +205,7 @@ export function buildG1Inputs(input: {
     peopleSentTo: o?.peopleMatured ?? 0,
     positiveOutcomeLowerBound: o?.positivePerSend.interval?.low ?? 0,
     optOutUpperBound: o?.optOutPerSend.interval?.high ?? 1,
+    executionInputsReadable: Boolean(o && o.positivePerSend.interval && o.optOutPerSend.interval),
   };
 }
 
