@@ -35,7 +35,7 @@ import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { ThesisCard } from '@/lib/gap/hypothesis/thesis-groups';
-import { refusalCopy } from '@/lib/gap/ui/refusal-copy';
+import { refusalCopy, refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { UseOutcome, type OutcomeState, type UseOutcomeResponse } from './use-outcome';
 
 interface RowResult { hypothesisId: string; ok: boolean; from: string; to: string | null; detail: string; reason?: string; revisionId?: string }
@@ -81,6 +81,17 @@ const DEPTH_TONE: Record<string, string> = {
   CORROBORATED: 'border-emerald-600 text-emerald-700',
   'WELL-SUPPORTED': 'border-emerald-600 text-emerald-700',
 };
+/** Plain words for a refused USE THIS EVIDENCE (the raw code stays in parentheses as the detail). */
+function evidenceRefusal(code: string): string {
+  const [head, , why] = code.split(':');
+  if (head === 'not_verified_evidence') {
+    const what = why === 'expired' ? 'is too old to open a conversation with' : why === 'not_a_physical_network_change' ? 'does not state a physical-network change' : 'is not a verified, quoted fact about this account';
+    return `Nothing changed. The fact you chose ${what}. Choose another fact or research again. (${code})`;
+  }
+  if (head === 'observation_unsupported') return `Nothing changed. The chosen fact could not be quoted as a supported observation. Choose another fact. (${code})`;
+  return refusalSentence(code) ?? code;
+}
+
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
 async function post<T>(body: unknown): Promise<{ ok: boolean; data: T & { error?: string; reason?: string } }> {
@@ -152,7 +163,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
     try {
       const r = await post<{ results: RowResult[] }>({ op: 'use_evidence', fingerprint: card.fingerprint, hypothesisIds: [...checked], signalIds });
       const rows = r.data.results ?? [];
-      if (!r.ok && rows.length === 0) { setError(r.data.reason ?? r.data.error ?? 'evidence_failed'); return; }
+      if (!r.ok && rows.length === 0) { setError(evidenceRefusal(r.data.reason ?? r.data.error ?? 'evidence_failed')); return; }
       const drafts = rows.filter((x) => x.ok && x.revisionId).length;
       const rebuilt = rows.filter((x) => x.ok && !x.revisionId && (x.from === 'draft' || x.from === 'review_required')).length;
       onOutcome({ key, title, approved: 0, inUse: 0, routing: null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`), revised: { drafts, rebuilt } });

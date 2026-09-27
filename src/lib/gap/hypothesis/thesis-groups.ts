@@ -357,6 +357,14 @@ export async function useEvidenceForThesis(
       results.push({ hypothesisId: id, ok: false, from: m.status, to: null, detail: 'not found', reason: 'not_found' });
       continue;
     }
+    // A concurrent click (or research-this) can win the unique source_ref / supersedes_id race:
+    // that is "revision already exists", never a 500.
+    const raced = async (e: unknown) => {
+      if ((e as { code?: string })?.code !== 'P2002') throw e;
+      const existing = await prisma.prospectingHypothesis.findFirst({ where: { supersedes_id: id }, select: { id: true } });
+      if (!existing) throw e;
+      return { ok: false as const, reason: 'duplicate_source_ref', existingId: existing.id as string };
+    };
     const created = await propose(prisma, {
       accountName: old.account_name,
       primaryPersonaId: old.primary_persona_id ?? null,
@@ -381,7 +389,7 @@ export async function useEvidenceForThesis(
       // The old narrative is a DRAFT CANDIDATE here, not proven truth: Casey reviews it.
       metadata: { revisionOf: id, revisionBasis: 'verified_evidence', narrativeIsDraftCandidate: true },
       createdBy: input.actor,
-    });
+    }).catch(raced);
     if (!created.ok && !(created.reason === 'duplicate_source_ref' && created.existingId)) {
       results.push({ hypothesisId: id, ok: false, from: m.status, to: m.status, detail: `revision not created: ${created.reason}`, reason: created.reason });
       continue;
@@ -503,7 +511,21 @@ export async function corroborateThesis(
   }
 
   const existingOrigins = new Set(group.depth.origins.map((o) => o.key));
-  const newIndependent = research.facts.filter((f) => f.fresh && !existingOrigins.has(originKeyOf({ id: f.signalId, source_kind: 'evidence_record', evidence_url: f.url, evidence_text: f.excerpt }) ?? ''));
+  let newIndependent: ResearchResult['facts'];
+  if (group.readiness.ready) {
+    // A ready thesis is corroborated only by a NEW origin (depth, not repetition).
+    newIndependent = research.facts.filter((f) => f.fresh && !existingOrigins.has(originKeyOf({ id: f.signalId, source_kind: 'evidence_record', evidence_url: f.url, evidence_text: f.excerpt }) ?? ''));
+  } else {
+    // Monday readiness: a NOT-ready thesis needs one outreach fact, wherever it comes from. A relevant
+    // sentence in the same 10-Q its irrelevant legacy excerpts came from is exactly the repair; filtering
+    // it as a repeated origin would report "no verified fact" when one was found. Offer every fresh,
+    // not-yet-linked fact that passes the outreach gate (the only facts use_evidence accepts).
+    const linked = new Set(group.members.flatMap((m) => m.signalIds));
+    const candidates = research.facts.filter((f) => f.fresh && !linked.has(f.signalId));
+    const rows: any[] = candidates.length ? await prisma.prospectingSignal.findMany({ where: { id: { in: candidates.map((f) => f.signalId) } }, select: SIGNAL_SELECT }) : [];
+    const gate = new Map(rows.map((s) => [s.id, outreachFactRefusal(s, group.accountName) === null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime())]));
+    newIndependent = candidates.filter((f) => gate.get(f.signalId) === true);
+  }
   const outcome: CorroborationOutcome = research.conflicts.length > 0 ? 'contradicts' : newIndependent.length > 0 ? 'corroborated' : 'no_second_source';
   return {
     ok: true,

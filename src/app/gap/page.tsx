@@ -159,11 +159,12 @@ async function ReviewLane({ groups, readyOneOffIds }: { groups: LoadedGroup[]; r
 
 /** Theses the evidence gate rates not ready: FIND VERIFIED EVIDENCE comes first in Research. */
 async function ResearchTheses({ groups }: { groups: LoadedGroup[] }) {
-  if (groups.length === 0) return null;
   const cards = await withRecordedNotes(prisma, groups.map(toThesisCard));
+  // Always mounted (like ReviewLane): using evidence on the last research thesis empties this list,
+  // and the outcome with its "Review the revised thesis" link must survive the refresh.
   return (
     <section className="space-y-2" data-testid="research-theses">
-      <h3 className="text-sm font-semibold">Theses that need verified evidence</h3>
+      {cards.length ? <h3 className="text-sm font-semibold">Theses that need verified evidence</h3> : null}
       <ThesisGroupReview cards={cards} intro={false} />
     </section>
   );

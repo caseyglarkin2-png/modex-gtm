@@ -97,6 +97,22 @@ describe('insufficient legacy thesis (production-shaped)', () => {
   });
 });
 
+describe('use_evidence refusal is plain language', () => {
+  const fetchMock = vi.fn();
+  beforeEach(() => { fetchMock.mockReset(); vi.stubGlobal('fetch', fetchMock); });
+  afterEach(() => vi.unstubAllGlobals());
+  it('an expired fact reads as what happened + what to do, not a code', async () => {
+    fetchMock
+      .mockResolvedValueOnce(json({ ok: true, outcome: 'corroborated', reused: false, research: { runId: 'r', facts: [], conflicts: [], notes: [] }, newIndependent: [{ signalId: 'f', excerpt: 'x', url: 'https://a', title: 't', publishedAt: '2026-07-09', fresh: true }] }))
+      .mockResolvedValueOnce(json({ ok: false, reason: 'not_verified_evidence:f:expired', results: [] }, 422));
+    render(<ThesisGroupReview cards={[pepsico()]} intro={false} />);
+    fireEvent.click(screen.getByTestId('find-evidence'));
+    await screen.findByText('FOUND EVIDENCE');
+    fireEvent.click(screen.getByTestId('use-verified-evidence'));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Nothing changed. The fact you chose is too old to open a conversation with.');
+  });
+});
+
 describe('1. <UseOutcome> reports actual state', () => {
   it('five already-approved rows refused activation: 5 approved · 0 in use · verified evidence required, not green, plain-language next step', () => {
     render(

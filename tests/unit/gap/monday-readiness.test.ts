@@ -14,7 +14,7 @@
  */
 import { describe, expect, it, vi } from 'vitest';
 import { actionabilityOf, outreachReadiness } from '@/lib/gap/hypothesis/actionability';
-import { approveSelectedSiblings, isResearchWork, isReviewWork, loadThesisGroups, splitThesisWork, summarizeApproval, toThesisCard, useEvidenceForThesis } from '@/lib/gap/hypothesis/thesis-groups';
+import { approveSelectedSiblings, corroborateThesis, isResearchWork, isReviewWork, loadThesisGroups, splitThesisWork, summarizeApproval, toThesisCard, useEvidenceForThesis } from '@/lib/gap/hypothesis/thesis-groups';
 import { transition, type HypothesisSnapshot } from '@/lib/gap/hypothesis/machine';
 import { VERIFIED_EXCERPT } from '@/lib/gap/research/evidence-gate';
 import { citedQuote } from '@/lib/gap/research/propose';
@@ -199,6 +199,15 @@ describe('5-7, 9. USE THIS VERIFIED EVIDENCE', () => {
     expect(r.results[0]).toMatchObject({ ok: true, revisionId: 'rev-old', detail: 'revision already exists' });
   });
 
+  it('a lost unique-constraint race (P2002) reads as the existing revision, not a 500', async () => {
+    const prisma: any = db(PEP5());
+    prisma.prospectingHypothesis.findFirst = vi.fn(async () => ({ id: 'rev-winner' }));
+    const fp = (await loadThesisGroups(prisma, {}, { now: NOW }))[0].fingerprint;
+    const propose = vi.fn(async () => { throw Object.assign(new Error('unique'), { code: 'P2002' }); });
+    const r = await useEvidenceForThesis(prisma, { fingerprint: fp, hypothesisIds: ['a1'], signalIds: ['fact'], actor: 'c', now: NOW }, { propose: propose as any });
+    expect(r.results[0]).toMatchObject({ ok: true, revisionId: 'rev-winner', detail: 'revision already exists' });
+  });
+
   it.each([
     ['keyword hit', 'kw', 'not_verified_evidence:kw:keyword_only'],
     ['verified but not a physical-network change', 'irr', 'not_verified_evidence:irr:not_a_physical_network_change'],
@@ -216,6 +225,31 @@ describe('5-7, 9. USE THIS VERIFIED EVIDENCE', () => {
     const fp = (await loadThesisGroups(prisma, {}, { now: NOW }))[0].fingerprint;
     const r = await useEvidenceForThesis(prisma, { fingerprint: fp, hypothesisIds: ['a1'], signalIds: ['fact'], actor: 'c', now: NOW }, { propose: vi.fn() as any });
     expect(r.reason).toBe('not_verified_evidence:fact:expired');
+  });
+});
+
+describe('FIND VERIFIED EVIDENCE on a not-ready thesis (final review blocker 2)', () => {
+  const research = (facts: any[]) => async () => ({ runId: 'r', outcome: 'evidence_found', facts, rejected: [], conflicts: [], notes: [] }) as any;
+  const asFact = (s: any) => ({ signalId: s.id, excerpt: s.evidence_text, url: s.evidence_url, title: s.title, publishedAt: '2026-07-09', fresh: true });
+
+  it('offers a relevant fact from the SAME filing its irrelevant legacy excerpt came from (not "nothing found")', async () => {
+    // Same accession as IRRELEVANT: an origin the thesis already has.
+    const sameFiling = { ...FACT, id: 'same', evidence_url: IRRELEVANT.evidence_url };
+    const prisma = db(PEP5(), [KW, IRRELEVANT, sameFiling]);
+    const fp = (await loadThesisGroups(prisma, {}, { now: NOW }))[0].fingerprint;
+    const r = await corroborateThesis(prisma, { fingerprint: fp, actor: 'c', now: NOW, force: true }, { run: research([asFact(sameFiling)]) });
+    expect(r.ok && r.outcome).toBe('corroborated');
+    expect(r.ok && r.newIndependent.map((f) => f.signalId)).toEqual(['same']);
+  });
+
+  it('never offers a fact use_evidence would refuse (not a physical-network change) or one already linked', async () => {
+    const prisma = db(PEP5(), [KW, IRRELEVANT]);
+    const fp = (await loadThesisGroups(prisma, {}, { now: NOW }))[0].fingerprint;
+    const other = { ...IRRELEVANT, id: 'irr2' };
+    const prisma2 = db(PEP5(), [KW, IRRELEVANT, other]);
+    const r = await corroborateThesis(prisma2, { fingerprint: fp, actor: 'c', now: NOW, force: true }, { run: research([asFact(other), asFact(IRRELEVANT)]) });
+    expect(r.ok && r.outcome).toBe('no_second_source');
+    void prisma;
   });
 });
 

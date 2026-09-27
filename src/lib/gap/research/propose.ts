@@ -69,10 +69,11 @@ export type ProposeFromResearchResult =
  * work instead of lingering in Research beside its replacement. The old row is
  * never written. A ready or active row is never superseded here.
  */
-async function frozenToSupersede(prisma: PrismaLike, accountName: string, personaId: number | null, now: Date): Promise<string | null> {
+async function frozenToSupersede(prisma: PrismaLike, accountName: string, personaId: number | null, problemFamily: string, now: Date): Promise<string | null> {
   if (personaId == null) return null;
+  // Same thesis family only: a draft for family X never retires an unrelated family Y thesis.
   const row = await prisma.prospectingHypothesis.findFirst({
-    where: { account_name: accountName, primary_persona_id: personaId, status: 'approved', superseded_by: { is: null } },
+    where: { account_name: accountName, primary_persona_id: personaId, problem_family: problemFamily, status: 'approved', superseded_by: { is: null } },
     orderBy: { created_at: 'desc' },
     include: { signals: { include: { signal: { select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } } } } },
   });
@@ -128,7 +129,7 @@ export async function proposeFromResearch(prisma: PrismaLike, input: { researchR
   };
 
   const proposeFor = async (personaId: number | null, sourceRef: string): Promise<{ ok: true; id: string; existing: boolean } | { ok: false; reason: string }> => {
-    const supersedesId = await frozenToSupersede(prisma, run.account_name, personaId, input.now);
+    const supersedesId = await frozenToSupersede(prisma, run.account_name, personaId, base?.problem_family ?? status.problemFamily ?? 'hidden_capacity', input.now);
     const r = await proposeHypothesis(prisma, {
       accountName: run.account_name,
       primaryPersonaId: personaId,

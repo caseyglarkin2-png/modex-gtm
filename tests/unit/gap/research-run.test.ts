@@ -180,6 +180,8 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(p).toMatchObject({ ok: true });
     const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
     expect(h).toMatchObject({ status: 'draft', supersedes_id: 'old1' });
+    // Same thesis family only: an unrelated family's approved row is never retired.
+    expect(prisma.prospectingHypothesis.findFirst).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ problem_family: h.problem_family, status: 'approved' }) }));
     expect(frozen).toMatchObject({ status: 'approved', observation: 'KR 10-Q mentions: capital expenditure [S:kwsig].' });
     expect(prisma.prospectingHypothesis.update).not.toHaveBeenCalled();
     expect(prisma.prospectingHypothesis.updateMany).not.toHaveBeenCalled();

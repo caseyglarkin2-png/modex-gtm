@@ -27,6 +27,8 @@ function db(rows: any[]) {
       prospectingHypothesis: { findMany: vi.fn(async () => rows) },
       gapAuditEvent: { create: vi.fn(async ({ data }: any) => { audit.push(data); return { id: 'a' }; }) },
       researchRun: { findMany: vi.fn(async () => runs) },
+      // The research facts as registered signals: verified, dated, public, quoted (the outreach gate reads them).
+      prospectingSignal: { findMany: vi.fn(async ({ where }: any) => where.id.in.map((id: string) => ({ id, account_name: 'PepsiCo', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: 'PepsiCo opened a new distribution center in Texas this summer.', evidence_url: 'https://www.pepsico.com/news/new-dc', observed_at: NOW, external_ok: true, metadata: { verified: 'excerpt_found_at_source' }, title: 'PepsiCo news', freshness_expires_at: null }))) },
     },
   };
 }
