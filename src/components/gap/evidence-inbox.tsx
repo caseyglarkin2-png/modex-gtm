@@ -74,11 +74,14 @@ export function EvidenceInbox({ accounts, now }: { accounts: InboxAccount[]; now
             {a.ready.length ? <ul className="space-y-2">{a.ready.map((f) => <Fact key={f.signalId} f={f} a={a} />)}</ul> : null}
             {a.contradictions.map((c) => (
               <div key={c.site} data-testid="evidence-contradiction" className="rounded-md border border-amber-500/40 bg-amber-500/10 p-2 text-xs">
-                <p className="font-semibold">Contradiction at {c.site}: sources describe it moving both ways. Resolve before using either.</p>
-                <ul className="mt-1 list-disc pl-4">
+                <p className="font-semibold">Contradiction at {c.site}: sources describe it moving both ways. Neither side can be used until you ignore the one you do not believe.</p>
+                <ul className="mt-1 space-y-2">
                   {c.facts.map((f) => (
-                    <li key={f.signalId}>
-                      &ldquo;{f.quote}&rdquo; ({f.sourceTitle}, {f.publishedAt.slice(0, 10)})
+                    <li key={f.signalId} className="space-y-1">
+                      <p>
+                        &ldquo;{f.quote}&rdquo; ({f.sourceTitle}, {f.publishedAt.slice(0, 10)})
+                      </p>
+                      <EvidenceActions signalId={f.signalId} sourceUrl={f.sourceUrl} theses={a.theses} runId={f.runId} contradicted />
                     </li>
                   ))}
                 </ul>

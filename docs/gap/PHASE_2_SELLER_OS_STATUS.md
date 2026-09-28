@@ -142,10 +142,23 @@ release, merged and production-verified before the next starts.
   trigger > expiring evidence; then people unblocked, trigger freshness,
   soonest expiry, tier, oldest work, name.
 
+### Release B review fixes (verified P1s, fixed before merge)
+- A contradicted fact was also listed as "ready" with a working USE. Now both
+  sides show only under the contradiction ("Ignore this side" / Open source);
+  ignoring one side makes the other ready.
+- "Draft a thesis from this fact" sent no fact, so propose used whichever fact
+  the run listed first (and a later run re-finding facts moved the records,
+  giving `no_fresh_evidence`). `proposeFromResearch` now takes `signalIds`
+  (same account, same outreach gate, the chosen fact first) and the inbox sends
+  the clicked fact.
+- Background start budget lowered to 120s so one slow account cannot push a
+  run past the 300s function limit (non-blocking reviewer note).
+
 ### Release B validation
 - Mutations proven RED then restored: background links evidence to a
   hypothesis; cooldown ignored; cap not enforced; vendor noise researched;
   ignored candidates resurface; contradictions filtered.
+- Review-fix mutations RED then restored: contradicted facts ready again; propose ignores the chosen fact; client sends no fact.
 - `scripts/gap/e2e-phase2.ts` G1 on scratch Postgres: research work (3 people)
   outranked the trigger; 11 protected counts identical before/after; all
   hypotheses still draft; inbox shows the verified fact with USE on the thesis.

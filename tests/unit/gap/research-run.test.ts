@@ -32,7 +32,7 @@ function db() {
     prospectingSignal: {
       findUnique: vi.fn(async ({ where }: any) => t.signals.find((s) => s.source_kind === where.source_kind_source_id.source_kind && s.source_id === where.source_kind_source_id.source_id) ?? null),
       create: vi.fn(async ({ data }: any) => { const s = { id: id('sig'), ...data }; t.signals.push(s); return s; }),
-      findMany: vi.fn(async ({ where }: any) => t.signals.filter((s) => (where.id ? where.id.in.includes(s.id) : where.source_id.in.includes(s.source_id)))),
+      findMany: vi.fn(async ({ where }: any) => t.signals.filter((s) => (where.id ? where.id.in.includes(s.id) : where.source_id.in.includes(s.source_id)) && (!where.account_name || s.account_name === where.account_name) && (!where.source_kind || s.source_kind === where.source_kind))),
     },
     gapAuditEvent: { create: vi.fn(async ({ data }: any) => { t.audit.push(data); return { id: id('a') }; }) },
     prospectingHypothesis: {
@@ -127,6 +127,28 @@ describe('RESEARCH THIS', () => {
 });
 
 describe('PROPOSE UPDATED HYPOTHESIS', () => {
+  it('Phase 2 B2: signalIds makes the CHOSEN fact the opener, even when the run lists another fact first, and even if the run no longer owns its record', async () => {
+    const { prisma, t } = db();
+    const OTHER = 'The company will open a new automated distribution center in Ohio to add capacity for the region next year.';
+    const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary(), primary({ excerpt: OTHER, url: `${Q2}#2` })]), fetchText: async () => `${PAGE} ${OTHER}` });
+    const chosen = run.facts.find((f) => f.excerpt === OTHER)!;
+    // A later run re-found the facts: the run no longer owns any record.
+    for (const r of t.records) r.research_run_id = 'run-later';
+    const p = await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW, signalIds: [chosen.signalId] });
+    expect(p).toMatchObject({ ok: true });
+    const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
+    expect(h.observation).toContain('Ohio');
+    expect(h.observation).toContain(`[S:${chosen.signalId}]`);
+  });
+
+  it('Phase 2 B2: a chosen fact from another account is never used', async () => {
+    const { prisma, t } = db();
+    const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary()]), fetchText: async () => PAGE });
+    t.signals.push({ id: 'sig-foreign', account_name: 'Other Co', source_kind: 'evidence_record', evidence_text: 'x', title: 'x', observed_at: NOW, metadata: {} });
+    const p = await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW, signalIds: ['sig-foreign'] });
+    expect(p).toMatchObject({ ok: false, reason: 'no_fresh_evidence' });
+  });
+
   it('creates a DRAFT whose observation quotes the verified fact with a citation; never submits or activates; idempotent', async () => {
     const { prisma, t } = db();
     const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary()]), fetchText: async () => PAGE });

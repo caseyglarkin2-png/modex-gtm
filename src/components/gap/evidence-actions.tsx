@@ -26,7 +26,20 @@ async function json(res: Response): Promise<Record<string, unknown>> {
   return ((await res.json().catch(() => ({}))) ?? {}) as Record<string, unknown>;
 }
 
-export function EvidenceActions({ signalId, sourceUrl, theses, runId }: { signalId: string; sourceUrl: string | null; theses: InboxThesis[]; runId: string | null }) {
+export function EvidenceActions({
+  signalId,
+  sourceUrl,
+  theses,
+  runId,
+  contradicted = false,
+}: {
+  signalId: string;
+  sourceUrl: string | null;
+  theses: InboxThesis[];
+  runId: string | null;
+  /** One side of a detected contradiction: it cannot be used until the other side is resolved (ignored). */
+  contradicted?: boolean;
+}) {
   const router = useRouter();
   const usable = theses.filter((t) => t.usableIds.length > 0);
   const [fingerprint, setFingerprint] = useState(usable[0]?.fingerprint ?? '');
@@ -59,7 +72,8 @@ export function EvidenceActions({ signalId, sourceUrl, theses, runId }: { signal
     if (!runId) return;
     setState({ kind: 'busy' });
     try {
-      const res = await fetch(`/api/gap/research/${encodeURIComponent(runId)}/propose`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+      // This exact fact is the opener (review B2: never whichever fact the run happens to list first).
+      const res = await fetch(`/api/gap/research/${encodeURIComponent(runId)}/propose`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ signalIds: [signalId] }) });
       const body = await json(res);
       if (!res.ok) {
         setState({ kind: 'error', text: String(body.error ?? `HTTP ${res.status}`) });
@@ -92,7 +106,9 @@ export function EvidenceActions({ signalId, sourceUrl, theses, runId }: { signal
   return (
     <div className="space-y-1" data-testid="evidence-actions">
       <div className="flex flex-wrap items-center gap-2">
-        {usable.length > 0 ? (
+        {contradicted ? (
+          <span className="text-xs text-amber-700">Contradicted: ignore the side you do not believe, then use the other.</span>
+        ) : usable.length > 0 ? (
           <>
             {usable.length > 1 ? (
               <select aria-label="Use in which thesis" value={fingerprint} onChange={(e) => setFingerprint(e.target.value)} className="h-7 max-w-[16rem] rounded-md border border-[var(--border)] bg-transparent px-1 text-xs">
@@ -115,7 +131,7 @@ export function EvidenceActions({ signalId, sourceUrl, theses, runId }: { signal
           <span className="text-xs text-[var(--muted-foreground)]">Every thesis here is already in use.</span>
         )}
         <button type="button" data-testid="evidence-ignore" disabled={busy} onClick={() => void ignore()} className={btn}>
-          Ignore
+          {contradicted ? 'Ignore this side' : 'Ignore'}
         </button>
         {sourceUrl ? (
           <a href={sourceUrl} target="_blank" rel="noreferrer noopener" className={btn}>

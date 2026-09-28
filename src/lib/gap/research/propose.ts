@@ -97,20 +97,46 @@ async function frozenToSupersede(prisma: PrismaLike, accountName: string, person
 
 const asList = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
 
-export async function proposeFromResearch(prisma: PrismaLike, input: { researchRunId: string; actor: string; now: Date; personaIds?: number[] }): Promise<ProposeFromResearchResult> {
+export async function proposeFromResearch(
+  prisma: PrismaLike,
+  input: {
+    researchRunId: string;
+    actor: string;
+    now: Date;
+    personaIds?: number[];
+    /**
+     * Phase 2 B2: the exact verified fact(s) Casey chose in the Evidence Inbox, the first
+     * one the opener. Used instead of the run's evidence records (a later run re-finding
+     * the same fact moves its record to the newer run). Same account, same gate.
+     */
+    signalIds?: string[];
+  },
+): Promise<ProposeFromResearchResult> {
   const run = await prisma.researchRun.findUnique({ where: { id: input.researchRunId }, select: { id: true, account_name: true, persona_id: true, provider_status: true } });
   if (!run) return { ok: false, reason: 'run_not_found' };
   const status = (run.provider_status ?? {}) as { outcome?: string; hypothesisId?: string | null; problemFamily?: string | null };
   if (status.outcome === 'conflicting_evidence') return { ok: false, reason: 'conflicting_evidence' };
 
-  const records: Array<{ id: string }> = await prisma.evidenceRecord.findMany({ where: { research_run_id: run.id }, select: { id: true } });
-  const signals: Array<GateSignal & { id: string; title: string; evidence_text: string | null; observed_at: Date; freshness_expires_at: Date | null }> = records.length
-    ? await prisma.prospectingSignal.findMany({
-        where: { source_kind: 'evidence_record', source_id: { in: records.map((r) => r.id) }, account_name: run.account_name },
-        select: { ...GATE_SIGNAL_SELECT, title: true, freshness_expires_at: true },
-        orderBy: { observed_at: 'desc' },
-      })
-    : [];
+  type FactRow = GateSignal & { id: string; title: string; evidence_text: string | null; observed_at: Date; freshness_expires_at: Date | null };
+  const chosen = [...new Set(input.signalIds ?? [])];
+  let signals: FactRow[];
+  if (chosen.length) {
+    const rows: FactRow[] = await prisma.prospectingSignal.findMany({
+      where: { id: { in: chosen }, source_kind: 'evidence_record', account_name: run.account_name },
+      select: { ...GATE_SIGNAL_SELECT, title: true, freshness_expires_at: true },
+    });
+    // In the order Casey chose them: the first is the opener candidate.
+    signals = chosen.map((id) => rows.find((r) => r.id === id)).filter((r): r is FactRow => !!r);
+  } else {
+    const records: Array<{ id: string }> = await prisma.evidenceRecord.findMany({ where: { research_run_id: run.id }, select: { id: true } });
+    signals = records.length
+      ? await prisma.prospectingSignal.findMany({
+          where: { source_kind: 'evidence_record', source_id: { in: records.map((r) => r.id) }, account_name: run.account_name },
+          select: { ...GATE_SIGNAL_SELECT, title: true, freshness_expires_at: true },
+          orderBy: { observed_at: 'desc' },
+        })
+      : [];
+  }
   const fresh = signals.filter((s) => !s.freshness_expires_at || s.freshness_expires_at.getTime() > input.now.getTime());
   if (fresh.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
   // Red team T6/T7: the observation is built only from evidence that passes

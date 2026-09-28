@@ -137,9 +137,12 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   }
   for (const [name, facts] of factsByAccount) {
     const a = acct(name);
-    a.ready = facts.filter((f) => !f.onThesis);
     const conflicts = detectConflicts(facts.map((f) => ({ id: f.signalId, excerpt: f.quote, change: classifyFact(f.quote).change })));
     a.contradictions = conflicts.map((c) => ({ site: c.site, facts: facts.filter((f) => c.ids.includes(f.signalId)) }));
+    // Review B2: a contradicted fact is never "ready". It shows under its contradiction,
+    // where Casey ignores the side he does not believe; the other side then becomes ready.
+    const contradicted = new Set(conflicts.flatMap((c) => c.ids));
+    a.ready = facts.filter((f) => !f.onThesis && !contradicted.has(f.signalId));
   }
 
   for (const r of runs as Array<{ id: string; account_name: string; created_at: Date; provider_status: unknown }>) {

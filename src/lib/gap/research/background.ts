@@ -46,8 +46,8 @@ export const BACKGROUND_COOLDOWN_MS = 3 * 86_400_000;
 export const TRIGGER_FRESH_MS = 14 * 86_400_000;
 /** An outreach fact expiring within this is "nearing expiry". */
 export const EXPIRY_HORIZON_MS = 21 * 86_400_000;
-/** Stop starting new accounts after this much of the function budget. */
-export const BACKGROUND_TIME_BUDGET_MS = 200_000;
+/** Stop starting new accounts after this much of the 300s function budget (one slow account can still run ~150s: EDGAR fetches time out at 15s each). */
+export const BACKGROUND_TIME_BUDGET_MS = 120_000;
 
 export type TargetReason = 'research_work' | 'fresh_trigger' | 'expiring_evidence';
 const REASON_RANK: Record<TargetReason, number> = { research_work: 1, fresh_trigger: 2, expiring_evidence: 3 };

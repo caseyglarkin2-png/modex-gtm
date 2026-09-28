@@ -85,6 +85,9 @@ describe('loadEvidenceInbox', () => {
     const [a] = await loadEvidenceInbox(p, NOW);
     expect(a.contradictions).toHaveLength(1);
     expect(a.contradictions[0].site).toBe('Dallas');
+    // Review B2: neither side of a contradiction is ready to USE.
+    expect(a.ready).toEqual([]);
+    expect(a.contradictions[0].facts.map((f) => f.signalId).sort()).toEqual(['s-close', 's-open']);
     expect(a.rejected).toEqual([{ url: 'https://x.test/a', reason: 'excerpt_not_found_at_source', at: '2026-09-28T10:41:00.000Z' }]);
     expect(a.lastRun).toMatchObject({ outcome: 'conflicting_evidence', background: true });
   });
@@ -126,7 +129,16 @@ describe('<EvidenceInbox> / <EvidenceActions>', () => {
     fireEvent.click(screen.getByTestId('evidence-draft'));
     await waitFor(() => expect(screen.getByTestId('evidence-done')).toHaveTextContent('Nothing is approved'));
     expect((f.mock.calls[0] as [string])[0]).toBe('/api/gap/research/run-bg/propose');
+    // Review B2: the clicked fact is the opener, never whichever fact the run lists first.
+    expect(JSON.parse(String((f.mock.calls[0] as [string, RequestInit])[1].body))).toEqual({ signalIds: ['s1'] });
     f.mockRestore();
+  });
+
+  it('a contradicted fact offers no USE and no draft: only ignore this side or open the source', () => {
+    render(<EvidenceActions signalId="s1" sourceUrl="https://x.test" runId="run-bg" theses={[{ fingerprint: 'a'.repeat(64), problemFamily: 'hidden_capacity', summary: '', people: 1, usableIds: ['h2'] }]} contradicted />);
+    expect(screen.queryByTestId('evidence-use')).toBeNull();
+    expect(screen.queryByTestId('evidence-draft')).toBeNull();
+    expect(screen.getByTestId('evidence-ignore')).toHaveTextContent('Ignore this side');
   });
 
   it('IGNORE records the ignore and hides the candidate', async () => {
