@@ -22,6 +22,7 @@
  * is a separate human click (propose.ts).
  */
 import { createHash } from 'node:crypto';
+import { classifyContinuity } from './continuity';
 import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/evidence';
 import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
@@ -202,7 +203,7 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
   if (!isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
   // Quality review: a past-year event restated in a newer source is not dated by the source.
-  if (describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
   if (!ctx.pages.has(c.url)) {
     try { ctx.pages.set(c.url, await ctx.fetchText(c.url)); } catch (err) { ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
   }

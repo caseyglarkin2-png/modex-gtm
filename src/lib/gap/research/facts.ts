@@ -177,10 +177,25 @@ export function hasSpecificSiteChange(sentence: string): boolean {
 const NEGATION = /(?:\bnot|n['’]t|\bnever|\bno longer|\bno plans? to)\s+(?:[\w-]+\s+){0,3}?(?:open|clos|consolidat|expan|build|built|construct|automat|relocat|acquir|launch|add|exit)/i;
 const HABITUAL = /\b(?:from time to time|ordinary course|normal course|periodically|regularly|continues? to|evaluat(?:e|es|ing))\b/i;
 
+/**
+ * Evidence continuity (2026-09-28): a TRANSPORTATION-network deployment is a physical-network change too
+ * ("a multi-year strategic partnership to bring autonomous freight into PepsiCo's supply chain", "Gatik moves
+ * freight for PepsiCo across roughly 250 retail locations"). A funding round, a stock story or an analyst's
+ * view that mentions the same words is not.
+ */
+const TRANSPORT = /\b(?:(?:autonomous|driverless|self-driving)\s+(?:freight|trucks?|trucking|delivery|vehicles?)|moves? freight|(?:private|dedicated) fleets?|linehaul|middle[- ]mile|transportation networks?|regional (?:transportation )?networks?)\b/i;
+const TRANSPORT_ACTION = /\b(?:deploy\w*|operat\w*|moves? freight|serv(?:e|es|ing)|runs|running|launch\w*|bring|brings|partnership|roll(?:ing)? out|rollout|expan\w*|convert\w*)\b/i;
+const FUNDING_OR_MARKET = /\b(?:raises?|raised|funding|series [a-f]\b|valuation|shares|stock|analysts?|investors?|price target)\b/i;
+
+export function isTransportNetworkFact(sentence: string): boolean {
+  return TRANSPORT.test(sentence) && TRANSPORT_ACTION.test(sentence) && !FUNDING_OR_MARKET.test(sentence);
+}
+
 /** Does this sentence state a physical-operations or network change (and is not a financial-statement mention)? */
 export function isPhysicalOpsFact(sentence: string): boolean {
   if (NEGATION.test(sentence) || HABITUAL.test(sentence)) return false;
   if (isBoilerplate(sentence) || isRunOnOrNavigation(sentence)) return false;
+  if (isTransportNetworkFact(sentence)) return true;
   if (HYPOTHETICAL.test(sentence)) return false;
   if (CONTRACT_CONTEXT.test(sentence)) return false;
   if (hasSpecificSiteChange(sentence)) return true;
