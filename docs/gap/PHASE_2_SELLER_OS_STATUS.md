@@ -26,8 +26,8 @@ release, merged and production-verified before the next starts.
 | C | Account motion v0 | feat/gap-phase2-c-account-motion | #280 | ded3ac0b | READY; cockpit NEXT UP v2 verified in prod |
 | D | Mobile buyer truth capture v0 | feat/gap-phase2-d-buyer-truth | #281 | c15aa366 | READY; /gap/capture checked at phone width |
 | E | Seller action pack v2 | feat/gap-phase2-e-action-pack | #282 | 455be384 | READY; brief on a prod PepsiCo card at phone width, no horizontal scroll, KNOW refuses the 10-Q keyword hit |
-| F | In Deals + Deal Brief v0 | feat/gap-phase2-f-in-deals | | | |
-| G | Integrated seller-OS acceptance | | | | |
+| F | In Deals + Deal Brief v0 | feat/gap-phase2-f-in-deals | #283 | b55b7b2b | READY; prod In Deals lists Kroger ("YardFlow - Kroger", Appointment scheduled); its brief shows 6 UNKNOWN + 4 deal contacts, no horizontal scroll |
+| G | Integrated seller-OS acceptance | feat/gap-phase2-g-acceptance | | | |
 
 ## Release A: truth infrastructure + health
 
@@ -431,6 +431,22 @@ release, merged and production-verified before the next starts.
   not be checked, shows no open deal, or is not a GAP account.
 - Suggestion copy uses "yards" plural; the lane says the tile and the live read
   can differ. Mutations RED then restored for all three fixes.
+
+## Release G: integrated seller-OS acceptance
+
+`scripts/gap/e2e-phase2.ts` (scratch only; report `docs/gap/phase2-e2e-latest.md`),
+23 PASS, alongside integrated 14, sprint2 10, sprint3 16, sprint4 14:
+
+| Journey | What it proves |
+|---|---|
+| G1 | Background research prepared a verified fact before Casey arrived; no protected state changed; nothing approved |
+| G2 | USE rebuilt the thesis from the one fact; review; APPROVE + USE; exactly ONE email READY per account; a second first touch refused |
+| G3 | A colleague reply pauses the whole account; it is triaged as account-level; the hold clears only on Casey's disposition |
+| G4 | A conference note becomes verbatim candidates; only the two Casey confirmed are BIDs |
+| G5 | An open deal: every card routes to nurture, none READY, a send refused; In Deals lists it; the Deal Brief shows confirmed truth, unknowns and Casey's objective |
+| G6 | The READY person's six-line brief from real rows; the send preview runs every gate; nothing sent |
+| G7 | HubSpot unavailable + mailbox stale + suppression unavailable: health BLOCKED (HubSpot, suppression) / DEGRADED (mailbox); the send refuses on opportunity_unknown; the wire suppression gate refuses; nothing sent |
+| LEARNING | The first touch carries its attribution (fact id and kind, opener, persona, account); both BIDs carry source, verbatim quote, confirmer, timestamps, thesis, person and capture note |
 
 ## Debt recorded (not fixed in this program unless it blocks)
 

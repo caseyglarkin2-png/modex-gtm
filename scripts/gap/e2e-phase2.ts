@@ -22,6 +22,12 @@
  *      to the deal (no cold action, a send is refused) -> In Deals lists it
  *      -> the Deal Brief shows only confirmed truth, the unknowns, and
  *      Casey's learning objective
+ *   G7 failure modes: HubSpot unavailable, mailbox intake stale and the
+ *      suppression authority unavailable -> health DEGRADED/BLOCKED, and
+ *      outbound fails closed (the send is refused; the wire gate refuses)
+ *   LEARNING the first touch carries its attribution (fact, persona, account,
+ *      opener) and every confirmed BID carries source, verbatim quote,
+ *      confirmer, timestamp and its thesis / person / capture relations
  *   G6 action pack: the READY person's six-line brief (KNOW verified, THINK
  *      inference, WHY YOU Casey's angle, HISTORY current, WRONG IF) -> the send
  *      preview runs every gate -> STOP before any send
@@ -67,6 +73,10 @@ import { DIRECT_SENT } from '../../src/lib/gap/execution/draft-ledger';
 import { heldDealAccounts, loadInDeals } from '../../src/lib/gap/deals/in-deals';
 import { loadDealBrief, setLearningObjective } from '../../src/lib/gap/deals/deal-brief';
 import type { OpportunityTruth } from '../../src/lib/gap/opportunity/active-opportunity';
+import { loadHealthInputs } from '../../src/lib/gap/health/load';
+import { evaluateHealth } from '../../src/lib/gap/health/health';
+import { suppressionRefuses } from '../../src/lib/email/suppression-gate';
+import { sendAttributionOf } from '../../src/lib/gap/execution/send-attribution';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'phase2-e2e-latest.md');
@@ -406,6 +416,39 @@ async function main(): Promise<number> {
     pass('G6 brief', `KNOW "${FACT.slice(0, 50)}..." (verified) · THINK labelled inference · LEARN "${brief.learn}" · WHY YOU Casey's angle · HISTORY ${brief.history.join(' | ')} · WRONG IF "${brief.wrongIf}"`);
     pass('G6 preview', 'the send preview ran every gate and returned the final email; nothing was sent (STOP before confirm)');
 
+    // ---- G7: dependencies fail. Health says so; outbound fails closed; nothing is sent.
+    const cronKey = 'cron:gap-mailbox';
+    const priorCron = await prisma.systemConfig.findUnique({ where: { key: cronKey } });
+    try {
+      await prisma.systemConfig.upsert({
+        where: { key: cronKey },
+        create: { key: cronKey, value: JSON.stringify({ lastSuccessAt: new Date(Date.now() - 60 * 60_000).toISOString(), consecutiveFailures: 0 }) },
+        update: { value: JSON.stringify({ lastSuccessAt: new Date(Date.now() - 60 * 60_000).toISOString(), consecutiveFailures: 0 }) },
+      });
+      const inputs = await loadHealthInputs(prisma, {
+        env: { HUBSPOT_ACCESS_TOKEN: 'e2e', CLAWD_CONTROL_PLANE_URL: 'http://127.0.0.1:9', CLAWD_CONTROL_PLANE_TOKEN: 'e2e', GAP_GMAIL_USER_EMAIL: MAILBOX, GAP_GOOGLE_DWD_SA_JSON: '{}' },
+        hubspotPing: async () => {
+          throw new Error('HubSpot 503 (simulated)');
+        },
+        suppressionRead: async () => ({ verdict: 'unknown' as const }),
+      });
+      const report = evaluateHealth(inputs, new Date());
+      const st = Object.fromEntries(report.components.map((c) => [c.key, c.state]));
+      expect('G7 health', report.overall === 'BLOCKED' && st.hubspot === 'BLOCKED' && st.suppression === 'BLOCKED' && st.mailbox === 'DEGRADED', `health -> ${JSON.stringify({ overall: report.overall, st })}`);
+      pass('G7 health', `overall ${report.overall}: "${report.headline}" (HubSpot ${st.hubspot}, suppression ${st.suppression}, mailbox ${st.mailbox}); a failed dependency is never reported green`);
+    } finally {
+      if (priorCron) await prisma.systemConfig.update({ where: { key: cronKey }, data: { value: priorCron.value } });
+      else await prisma.systemConfig.deleteMany({ where: { key: cronKey } });
+    }
+    const sentBefore7 = await prisma.gapAuditEvent.count({ where: { kind: DIRECT_SENT } });
+    const outbox7 = outbox.length;
+    const hsDown = await sendSellerEmail(prisma, { decisionId: readyEmail[0].id, actor: ACTOR, now }, { ...sellerDeps(tag, threadFor), activeOpportunity: async () => ({ status: 'UNKNOWN' as const, detail: 'HubSpot 503 (simulated)' }) });
+    expect('G7 fail closed', !hsDown.ok, `HubSpot unknown did not refuse -> ${JSON.stringify(hsDown)}`);
+    const wire = await suppressionRefuses([String(readyEmail[0].persona.email)]);
+    expect('G7 fail closed', wire.refused && wire.unreadable, `suppression authority unavailable did not refuse -> ${JSON.stringify(wire)}`);
+    expect('G7 fail closed', (await prisma.gapAuditEvent.count({ where: { kind: DIRECT_SENT } })) === sentBefore7 && outbox.length === outbox7, 'something was sent while a dependency was down');
+    pass('G7 fail closed', `HubSpot unknown: the send is refused (${(hsDown as { reason?: string }).reason}); suppression authority unreachable: the wire gate refuses (${wire.reason}); nothing sent`);
+
     const primarySend = await send(readyEmail[0].id);
     expect('G2 second motion refused', primarySend.ok && 'sent' in primarySend, `primary send -> ${JSON.stringify(primarySend)}`);
     const secondCard = emailCards.find((i) => i.id !== readyEmail[0].id)!;
@@ -497,7 +540,7 @@ async function main(): Promise<number> {
     expect('G5 no cold action', cards5.length > 0 && cards5.every((i) => i.ruleId === 'active_opportunity' && !coldActions.has(i.action)), `cards -> ${JSON.stringify(cards5.map((i) => [i.persona.title, i.action, i.ruleId]))}`);
     const motion5 = await loadCockpitMotions(prisma, q5.items, dealNow);
     expect('G5 no cold action', !cards5.some((i) => laneWithMotion(i, new Set(motion5.heldCardIds)) === 'ready'), 'a card at an account in a deal is READY');
-    const dealSend = await sendSellerEmail(prisma, { decisionId: cards5[0].id, actor: ACTOR, now: dealNow }, { ...sellerDeps(tag, threadFor), activeOpportunity: async () => dealTruth } as never);
+    const dealSend = await sendSellerEmail(prisma, { decisionId: cards5[0].id, actor: ACTOR, now: dealNow }, { ...sellerDeps(tag, threadFor), activeOpportunity: async () => ({ status: 'ACTIVE' as const, detail: `"YardFlow - ${account}"` }) });
     expect('G5 no cold action', !dealSend.ok, `a first touch at an account in a deal was allowed -> ${JSON.stringify(dealSend)}`);
     pass('G5 no cold action', `${cards5.length} cards all route to ${cards5[0].action} (active_opportunity); none READY; a send attempt is refused (${(dealSend as { reason?: string }).reason})`);
 
@@ -515,6 +558,18 @@ async function main(): Promise<number> {
     expect('G5 brief', !briefQuotes.includes(c3.quote), 'the rejected candidate appears in the Deal Brief');
     expect('G5 brief', dealBrief.unknowns.length === 4 && dealBrief.known === 2, `unknowns -> ${JSON.stringify(dealBrief.unknowns)}`);
     expect('G5 brief', dealBrief.objective.owned === true && dealBrief.objective.text === 'Who owns the yard budget at the Texas DC?', `objective -> ${JSON.stringify(dealBrief.objective)}`);
+    // ---- LEARNING: the data the learning loop needs is on the rows, not inferred later.
+    const sentRow = await prisma.gapAuditEvent.findFirst({ where: { kind: DIRECT_SENT, subject_id: readyEmail[0].id }, select: { payload: true } });
+    const attr = sendAttributionOf(sentRow?.payload);
+    expect('LEARNING send', !('unrecorded' in attr) && attr.primaryFactId === factId && attr.accountName === account && attr.openerApproach === 'verified_fact_observation' && !!attr.personaTitle, `attribution -> ${JSON.stringify(attr)}`);
+    pass('LEARNING send', `first touch attribution: fact ${!('unrecorded' in attr) ? attr.primaryFactId : ''} (${!('unrecorded' in attr) ? attr.signalSourceKind : ''}), opener ${!('unrecorded' in attr) ? attr.openerApproach : ''}, persona "${!('unrecorded' in attr) ? attr.personaTitle : ''}", account ${account}, captured at send`);
+    const bidRows = await prisma.buyerInputData.findMany({ where: { account_name: account }, select: { source: true, raw_buyer_language: true, confirmed_by: true, confirmed_at: true, captured_at: true, hypothesis_id: true, persona_id: true, contact_email: true, metadata: true } });
+    expect(
+      'LEARNING bid',
+      bidRows.length === 2 && bidRows.every((b) => b.source === 'meeting' && quoteInSource(b.raw_buyer_language, note) && b.confirmed_by === ACTOR && !!b.confirmed_at && !!b.captured_at && b.hypothesis_id === hypothesisIds[0] && !!b.contact_email && (b.metadata as { captureId?: string } | null)?.captureId === cap.capture.id),
+      `BID attribution -> ${JSON.stringify(bidRows)}`,
+    );
+    pass('LEARNING bid', `both BIDs carry source meeting, the verbatim quote, confirmer ${ACTOR}, captured/confirmed timestamps, the thesis, the person (${bidRows[0].contact_email}) and the capture note they came from`);
     pass('G5 brief', `Deal Brief shows only the 2 confirmed quotes (the rejected one absent), ${dealBrief.known} of 6 known, UNKNOWN: ${dealBrief.unknowns.join(', ')}; objective set by Casey: "${dealBrief.objective.text}"; nothing written to HubSpot`);
   } catch (err) {
     if (err instanceof StepFailure) failure = err;
