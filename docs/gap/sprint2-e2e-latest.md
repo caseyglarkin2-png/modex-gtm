@@ -6,10 +6,10 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-sprint2.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-e2e2-1790565874000
+- Run tag: gap-e2e2-1790567559182
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: ac0fb878
-- Ran at: 2026-09-28T03:24:34.555Z
+- Git: dfc4cd37
+- Ran at: 2026-09-28T03:52:39.632Z
 - HUBSPOT_SYNC_ENABLED as resolved by feature-flags: true (the mirror is gated by GAP_HUBSPOT_MIRROR_ENABLED, default off, before it reads this)
 - Credentials scrubbed from the process before the first write: none
 - No HubSpot call is possible in this run: static suppression reader, stub snapshot provider, fixture enrollment readback, fixture reply search, review-feed poster stubbed.
@@ -17,14 +17,14 @@ Written by `scripts/gap/e2e-sprint2.ts`. Rerun it against the scratch database t
 ## Steps
 
 - PASS preflight: flags on, credentials scrubbed, no stale fixture rows, 0 foreign live triggers in the 12-day window
-- PASS 1 seed: account, personas 72 (ready, director), 73 (ready, vp), 74 (suppressed), 2 triggers 10 days old, fixture accounts Dell + J.B. Hunt, sequence 10 with 2 draft queue rows (step 1 sent, step 2 approved) on run gap-e2e2-1790565874000-run
-- PASS 2 hypothesize: signals.created=2 proposed=0 opsDraft=cmukoouvs00087kson5a1o5lv (hidden_capacity) execDraft=cmukoouw0000e7ksokkoyf2sp (network_standardization); fact cmukoouw6000i7ksoqw8zvqa6 linked (1 -> 2), relink already, unlink of cited cmukoouvp00067ksobn1isgyg refused signal_cited; 2 drafts submitted and approved
+- PASS 1 seed: account, personas 104 (ready, director), 105 (ready, vp), 106 (suppressed), 2 triggers 10 days old, fixture accounts Dell + J.B. Hunt, sequence 13 with 2 draft queue rows (step 1 sent, step 2 approved) on run gap-e2e2-1790567559182-run
+- PASS 2 hypothesize: signals.created=2 proposed=0 opsDraft=cmukpoz3j00087kooexrr8odr (hidden_capacity) execDraft=cmukpoz3r000e7koonio6f3we (network_standardization); fact cmukpoz3x000i7koogaznajjj linked (1 -> 2), relink already, unlink of cited cmukpoz3f00067koovbb2bsl3 refused signal_cited; 2 drafts submitted and approved
 - PASS 3 sync: families created 2 (311420117, 311420229), enrollments created 1 (d7602d6d-8fd6-5825-a209-25ebf5c23513, legacy, version still draft per R2-5), rosters missing ["jbhunt-com"], reported {"other_sequence":0,"not_enrolled":6,"no_email":0,"no_contact_id":0}; second run created 0 / existing 2 / unchanged 1; 2 readback calls
-- PASS 4 replies: first poll created 1 filtered {auto_reply_subject: 1}, inbound hs:gap-e2e2-1790565874000-e1 on hs-thread:gap-e2e2-1790565874000-c1, notifications reply + filtered_inbound; second poll created 0 existing 2; watermark advanced; 2 fixture searches
-- PASS 5 routing: run A mode shadow: 2 decisions {"enroll":1,"suppressed":1}, skips {"in_flight":1}; exec persona 73 -> enroll (target modex_queue, hypothesis cmukoouw0000e7ksokkoyf2sp); do_not_contact persona -> suppressed / do_not_contact / blocked (R2-1); every row carries account + persona; queue ordered by priority; human action ok then already_acted, missing id not_found
-- PASS 6 enroll rows: header + 1 row for GAP E2E Co gap-e2e2-1790565874000: sequence NOT BUILT, 0 contacts, 1 skip (E2E Exec gap-e2e2-1790565874000: modex_queue (no native sequence; secondary lane))
+- PASS 4 replies: first poll created 1 filtered {auto_reply_subject: 1}, inbound hs:gap-e2e2-1790567559182-e1 on hs-thread:gap-e2e2-1790567559182-c1, notifications reply + filtered_inbound; second poll created 0 existing 2; watermark advanced; 2 fixture searches
+- PASS 5 routing: run A mode shadow: 2 decisions {"enroll":1,"suppressed":1}, skips {"in_flight":1}; exec persona 105 -> enroll (target modex_queue, hypothesis cmukpoz3r000e7koonio6f3we); do_not_contact persona -> suppressed / do_not_contact / blocked (R2-1); every row carries account + persona; queue ordered by priority; human action ok then already_acted, missing id not_found
+- PASS 6 enroll rows: header + 1 row for GAP E2E Co gap-e2e2-1790567559182: sequence NOT BUILT, 0 contacts, 1 skip (E2E Exec gap-e2e2-1790567559182: modex_queue (no native sequence; secondary lane))
 - PASS 7 suppression: suppressed -> 3 x do_not_contact/blocked (rule suppressed); unknown -> 3 rows: dnc persona suppressed (local column outranks unknown, R2-1), others research_required/blocked (rule suppression_unknown); queue lane=blocked filter returns 3
-- PASS 8 stop: cancelDownstream(replied) marked 1 approved row skipped with sequence_stopped:replied and left the sent step as history, 2 rows remain, rerun marks 0; routing run B: {"enroll":1,"suppressed":1,"reply_pending":1}, ready persona 72 -> reply_pending (rule id printed as observed)
+- PASS 8 stop: cancelDownstream(replied) marked 1 approved row skipped with sequence_stopped:replied and left the sent step as history, 2 rows remain, rerun marks 0; routing run B: {"enroll":1,"suppressed":1,"reply_pending":1}, ready persona 104 -> reply_pending (rule id printed as observed)
 - PASS 9 mirror: skipped/gap_mirror_disabled with HUBSPOT_SYNC_ENABLED resolved true, 0 gap_hubspot_mirror rows, credentials still absent
 
 ## Counts

@@ -6,10 +6,10 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-sprint3.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap-e2e3-1790565876917
+- Run tag: gap-e2e3-1790567562007
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: ac0fb878
-- Ran at: 2026-09-28T03:24:38.304Z
+- Git: dfc4cd37
+- Ran at: 2026-09-28T03:52:43.561Z
 - Credentials scrubbed from the process before the first write: HUBSPOT_ACCESS_TOKEN,MC_API_TOKEN,GOOGLE_REFRESH_TOKEN,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,CLAWD_CONTROL_PLANE_URL,CLAWD_CONTROL_PLANE_TOKEN
 - No HubSpot, clawd or Gmail call is possible in this run: stub critic, stub autonomy reader, static CLEAR suppression reader (the default clawd reader answers unknown without config and refuses), Gmail credentials absent for the queue dedup thread check, review-feed poster without a token.
 - R3-4: step 0 is the observation slot; the compiler judges the marked copy, the queue holds the stripped copy; later steps are created draft and earn approved from their own per-item compile (step 1 with the fixture refs handed in; step 2 with the hypothesis signals only stays draft, rejected on C01).
@@ -18,16 +18,16 @@ Written by `scripts/gap/e2e-sprint3.ts`. Rerun it against the scratch database t
 ## Steps
 
 - PASS preflight: flags on (auto-enroll off), credentials scrubbed, 4 seed families present, no stale rows
-- PASS 1 seed: account, persona 75 (priya+gap-e2e3-1790565876917@example.com), verified facts cmukoox0b00017k7048n3rmad (10-K acquisition) + cmukoox0e00037k70h977do36 (new Ohio DC), hypothesis cmukoox0h00057k70bbwxzamv active (hidden_capacity / distribution), observation quotes fact cmukoox0 verbatim and cites it; cmukoox0 is linked support
-- PASS 2 version: family cmukoox2g000i7k70lfnd9j8l, version cmukoox2o000k7k70gsy3m1ol v1 draft (hash b9114d93996e), identical steps refused identical_to_version:1
-- PASS 3 compile: 4 steps pass through 64 checks with the stub critic (step 0 = slot render quoting fact cmukoox0), 4 GapCompile rows persisted (cmukoox3, cmukoox3, cmukoox3, cmukoox3)
+- PASS 1 seed: account, persona 107 (priya+gap-e2e3-1790567562007@example.com), verified facts cmukpp18j00017ktgxai8dsdl (10-K acquisition) + cmukpp18m00037ktgz3n4aa8i (new Ohio DC), hypothesis cmukpp18p00057ktgjdprjoyz active (hidden_capacity / distribution), observation quotes fact cmukpp18 verbatim and cites it; cmukpp18 is linked support
+- PASS 2 version: family cmukpp1aw000i7ktg1zzbngh2, version cmukpp1b3000k7ktg7nnprbtq v1 draft (hash b9114d93996e), identical steps refused identical_to_version:1
+- PASS 3 compile: 4 steps pass through 64 checks with the stub critic (step 0 = slot render quoting fact cmukpp18), 4 GapCompile rows persisted (cmukpp1b, cmukpp1b, cmukpp1b, cmukpp1c)
 - PASS 4 meeting ask: reject, C09 CTA family meeting_request is disallowed before a meeting (step 0, sequence_step_1): "Open to a quick call on it?"
-- PASS 5 approval: review_required compile cmukoox3n00117k70z71etuzh, one pending gap_compile request cmukoox3r00147k70pn6tc74e (risk 30), second call existing
-- PASS 6 materialize: no_compile_ids, step_not_compiled:3, compile_wrong_hypothesis for another hypothesis, then Sequence 11 "GAP E2E3 Hidden Capacity gap-e2e3-1790565876917 v1" with 4 steps, second call existing, drifted steps under the same name refused sequence_name_collision
-- PASS 7 shadow: modex_shadow for priya+gap-e2e3-1790565876917@example.com: subject "Doors versus spots", body rendered (Hi Priya, observation in the slot, no marker), zero writes ({"items":0,"enrollments":0,"compiles":6,"sequences":1}), 1 enroll.shadow audit row
-- PASS 8 live: enrollment f668361a-e49c-4023-8ee1-e3384e179155 active on v1, version FROZEN by the trigger (frozen_by_enrollment_id matches), draft item 33 stamped (run, step 0, version, sequence_id 11 from the idempotent materialize), item-level GapCompile cmukoox6o00187k70fh9qza82 pass judged the MARKED copy (evidence_ids_used = both facts) while the queued body carries no marker, 1 enroll.live audit row
-- PASS 9 approve guard: item 33 passes the guard contract (newest item-level compile is pass); orphan item 34 refused with a rejecting row and refused again after that row is deleted (no template-level row for its step)
-- PASS 10 schedule: step 1 item 35 from the pinned version, placeholders rendered, no marker queued, key casey@yardflow.ai:priya+gap-e2e3-1790565876917@example.com:f668361a-e49c-4023-8ee1-e3384e179155:1, scheduled 2026-10-01T14:00Z (Friday + 4 business days), created draft then APPROVED by its own item-level compile cmukoox7m001f7k70612z1egd (pass, by sequence-runtime), rerun returns the same id with no recompile; step 2 item 37 created draft and LEFT draft: compile cmukoox8b001i7k7072z4yhsw reject on C01 (fixture marker hc_ev_3 unresolved against the hypothesis signals), schedule.compile_not_passed audited, guard refuses it
+- PASS 5 approval: review_required compile cmukpp1c800117ktgddaut7rh, one pending gap_compile request cmukpp1cd00147ktgkue2dwvs (risk 30), second call existing
+- PASS 6 materialize: no_compile_ids, step_not_compiled:3, compile_wrong_hypothesis for another hypothesis, then Sequence 14 "GAP E2E3 Hidden Capacity gap-e2e3-1790567562007 v1" with 4 steps, second call existing, drifted steps under the same name refused sequence_name_collision
+- PASS 7 shadow: modex_shadow for priya+gap-e2e3-1790567562007@example.com: subject "Doors versus spots", body rendered (Hi Priya, observation in the slot, no marker), zero writes ({"items":0,"enrollments":0,"compiles":6,"sequences":1}), 1 enroll.shadow audit row
+- PASS 8 live: enrollment f870d4ec-d3b0-498d-9b70-f1081eb4a319 active on v1, version FROZEN by the trigger (frozen_by_enrollment_id matches), draft item 43 stamped (run, step 0, version, sequence_id 14 from the idempotent materialize), item-level GapCompile cmukpp1iq00187ktghb8fz7xr pass judged the MARKED copy (evidence_ids_used = both facts) while the queued body carries no marker, 1 enroll.live audit row
+- PASS 9 approve guard: item 43 passes the guard contract (newest item-level compile is pass); orphan item 44 refused with a rejecting row and refused again after that row is deleted (no template-level row for its step)
+- PASS 10 schedule: step 1 item 45 from the pinned version, placeholders rendered, no marker queued, key casey@yardflow.ai:priya+gap-e2e3-1790567562007@example.com:f870d4ec-d3b0-498d-9b70-f1081eb4a319:1, scheduled 2026-10-01T14:00Z (Friday + 4 business days), created draft then APPROVED by its own item-level compile cmukpp1jr001f7ktgtgv0gm51 (pass, by sequence-runtime), rerun returns the same id with no recompile; step 2 item 47 created draft and LEFT draft: compile cmukpp1kg001i7ktgpv1b1vmx reject on C01 (fixture marker hc_ev_3 unresolved against the hypothesis signals), schedule.compile_not_passed audited, guard refuses it
 - PASS 11 frozen: service refuses version_frozen; the database trigger refuses a raw update with GAP_VERSION_FROZEN
 - PASS 12 stop: stop(replied) skipped 2 rows (the failed step 1 and the draft step 2, both sequence_stopped:replied), the sent step 0 untouched, enrollment stopped by e2e3, second stop terminal
 - PASS 13 journal: dry run over tests\fixtures\gap\top100-journal: {"rows":11,"families_new":3,"families_existing":0,"families_manifest_only":1,"versions_new":5,"versions_existing":0,"copy_events_journal":6,"copy_events_new":6,"copy_events_existing":0,"enrollments_pending":0,"enrollments_attributed":0,"enrollments_unattributed":0,"ignored_ops":2}, 4 warnings, nothing written
@@ -40,11 +40,11 @@ Written by `scripts/gap/e2e-sprint3.ts`. Rerun it against the scratch database t
 - hypothesisSignals: 2
 - versionStepsCompiled: 4
 - versionChecksRun: 64
-- sequenceId: 11
-- enrollmentId: f668361a-e49c-4023-8ee1-e3384e179155
-- draftItemId: 33
-- step1ItemId: 35
-- step2ItemId: 37
+- sequenceId: 14
+- enrollmentId: f870d4ec-d3b0-498d-9b70-f1081eb4a319
+- draftItemId: 43
+- step1ItemId: 45
+- step2ItemId: 47
 - journalRows: 11
 - journalFamiliesNew: 3
 - journalVersionsNew: 5
