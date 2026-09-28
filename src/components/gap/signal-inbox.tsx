@@ -17,7 +17,7 @@ const TONE: Record<string, string> = {
   'Fact ready': 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300',
   Researching: 'bg-sky-500/15 text-sky-800 dark:text-sky-300',
 };
-const btn = 'rounded-md border border-[var(--border)] px-3 py-2 text-sm hover:bg-[var(--muted)] disabled:opacity-50';
+const btn = 'min-h-[44px] rounded-md border border-[var(--border)] px-3 py-2 text-sm hover:bg-[var(--muted)] disabled:opacity-50';
 const day = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : null);
 
 function SignalRow({ s }: { s: SignalView }) {

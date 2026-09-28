@@ -73,7 +73,7 @@ export function SignalShare({ initialUrl = '', initialAccount = '', initialNote 
     const s = saved.signal;
     return (
       <section data-testid="signal-saved" className="space-y-3 rounded-md border border-[var(--border)] p-4">
-        <p className="text-base font-semibold">{saved.created ? 'Saved. GAP will follow it up.' : 'Already in GAP. Your note was added.'}</p>
+        <p className="text-base font-semibold">{saved.created ? 'Saved. GAP will follow it up.' : 'Already in GAP. GAP remembered that you shared it.'}</p>
         <p className="break-words text-sm">{s.title ?? s.url ?? s.note}</p>
         <p className={`text-sm font-medium ${STATUS_TONE[s.status] ?? ''}`} data-testid="signal-saved-status">
           {s.status}: {s.statusDetail}
@@ -103,10 +103,10 @@ export function SignalShare({ initialUrl = '', initialAccount = '', initialNote 
   return (
     <section data-testid="signal-share" className="space-y-3 rounded-md border border-[var(--border)] p-4">
       <div className="flex gap-2 text-sm" role="tablist">
-        <button type="button" role="tab" aria-selected={mode === 'link'} onClick={() => setMode('link')} className={`rounded-md px-3 py-2 ${mode === 'link' ? 'bg-[var(--muted)] font-semibold' : ''}`}>
+        <button type="button" role="tab" aria-selected={mode === 'link'} onClick={() => setMode('link')} className={`min-h-[44px] rounded-md px-3 py-2 ${mode === 'link' ? 'bg-[var(--muted)] font-semibold' : ''}`}>
           Link
         </button>
-        <button type="button" role="tab" aria-selected={mode === 'conference'} data-testid="signal-mode-conference" onClick={() => setMode('conference')} className={`rounded-md px-3 py-2 ${mode === 'conference' ? 'bg-[var(--muted)] font-semibold' : ''}`}>
+        <button type="button" role="tab" aria-selected={mode === 'conference'} data-testid="signal-mode-conference" onClick={() => setMode('conference')} className={`min-h-[44px] rounded-md px-3 py-2 ${mode === 'conference' ? 'bg-[var(--muted)] font-semibold' : ''}`}>
           Heard it (no link)
         </button>
       </div>

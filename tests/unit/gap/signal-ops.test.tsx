@@ -53,7 +53,8 @@ describe('applySignalOp', () => {
     const rows = [{ ...base, id: 's1', research_status: 'queued' }];
     const p = db(rows);
     await applySignalOp(p, { id: 's1', actor: 'casey', now: NOW, op: 'feedback', value: 'wrong_account' });
-    expect(rows[0]).toMatchObject({ account_name: null, resolution: 'needs_account', research_status: 'none', feedback: 'wrong_account' });
+    // Review A P1: it comes BACK to Casey (Needs you, still listed), never hidden.
+    expect(rows[0]).toMatchObject({ account_name: null, resolution: 'needs_account', research_status: 'none', feedback: null });
     await applySignalOp(p, { id: 's1', actor: 'casey', now: NOW, op: 'ignore' });
     expect(p.prospectingHypothesis.update).not.toHaveBeenCalled();
     expect(p.hypothesisSignal.create).not.toHaveBeenCalled();
@@ -75,6 +76,12 @@ describe('the inbox: one row per event, Casey-shared first, sources never lost',
     expect(items.find((i) => i.id === 's1')!.alsoCoveredBy).toBe(1);
   });
 
+  it('good context stays listed; ignored and irrelevant do not (the query says so)', async () => {
+    const p = db([]);
+    await listSignals(p);
+    expect(p.gapSignal.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ OR: [{ feedback: null }, { feedback: { in: ['good_context', 'use'] } }] }) }));
+  });
+
   it('a view never exposes Pounce diagnostics and says why it may matter', () => {
     const v = toView({ ...base, id: 's1' });
     expect(v.why).toBe('It may describe a physical-network change GAP can verify at the source. Themes: autonomy.');
@@ -89,6 +96,7 @@ describe('share surfaces', () => {
     expect(sharedUrlOf({ url: 'https://a.com/x' })).toBe('https://a.com/x');
     expect(sharedUrlOf({ title: 'PepsiCo news', text: 'Look at this https://b.com/y?z=1 wow' })).toBe('https://b.com/y?z=1');
     expect(sharedUrlOf({})).toBe('');
+    expect(sharedUrlOf({ text: 'Read this (https://c.com/z).' })).toBe('https://c.com/z');
   });
 
   it('the link alone is enough to Share to GAP; the result says what GAP will do', async () => {

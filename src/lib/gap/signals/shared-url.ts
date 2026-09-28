@@ -6,5 +6,5 @@ export function sharedUrlOf(p: SharedParams): string {
   const direct = (p.url ?? '').trim();
   if (direct) return direct.slice(0, 2_000);
   const m = /(https?:\/\/[^\s]+)/i.exec(`${p.text ?? ''} ${p.title ?? ''}`);
-  return m ? m[1].slice(0, 2_000) : '';
+  return m ? m[1].replace(/[)\].,;:!?'"]+$/, '').slice(0, 2_000) : '';
 }

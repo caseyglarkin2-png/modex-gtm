@@ -6,7 +6,7 @@
  * no HubSpot, no Slack).
  */
 import { describe, expect, it, vi } from 'vitest';
-import { captureSignal, classifySignal, normalizeSignalUrl, parseSignalMeta, resolveSignalAccount, signalStatus, sourceClassOf } from '@/lib/gap/signals/intake';
+import { captureSignal, classifySignal, makeFetchHtml, normalizeSignalUrl, resolvesToPrivate, parseSignalMeta, resolveSignalAccount, signalStatus, sourceClassOf } from '@/lib/gap/signals/intake';
 
 const NOW = new Date('2026-09-28T15:00:00.000Z');
 
@@ -174,3 +174,56 @@ describe('relevance is a label, and status tells Casey what GAP did', () => {
     expect(s({ feedback: 'irrelevant' })).toBe('Ignored');
   });
 });
+
+describe('review A hardening', () => {
+  it('the metadata fetch never follows a redirect into a private host', async () => {
+    const f = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(null, { status: 302, headers: { location: 'http://169.254.169.254/latest/meta-data/' } }));
+    await expect(makeFetchHtml({ lookup: async () => ['93.184.216.34'] })('https://public.example.com/story')).rejects.toThrow('private host');
+    expect(f).toHaveBeenCalledTimes(1);
+    f.mockRestore();
+  });
+
+  it('two captures of the same link at once: the unique key lets one win and the other returns it', async () => {
+    const { prisma } = fakeDb();
+    prisma.gapSignal.findUnique = vi.fn().mockResolvedValueOnce(null).mockResolvedValueOnce({ id: 'winner' });
+    prisma.gapSignal.create = vi.fn(async () => {
+      throw Object.assign(new Error('unique'), { code: 'P2002' });
+    });
+    expect(await captureSignal(prisma, { url: 'https://example.com/story', origin: 'discovery', actor: 'gap', now: NOW, title: 'x' }, { fetchHtml: null })).toEqual({ ok: true, signal: { id: 'winner', created: false } });
+  });
+});
+
+describe('review A P1s', () => {
+  it('a public name that resolves to a private address is never fetched (DNS rebinding); a lookup failure fails closed', async () => {
+    expect(await resolvesToPrivate('x.127.0.0.1.nip.io', async () => ['127.0.0.1'])).toBe(true);
+    expect(await resolvesToPrivate('cgnat.example', async () => ['100.64.1.2'])).toBe(true);
+    expect(await resolvesToPrivate('nx.example', async () => { throw new Error('ENOTFOUND'); })).toBe(true);
+    expect(await resolvesToPrivate('news.example', async () => ['93.184.216.34'])).toBe(false);
+    const f = vi.spyOn(globalThis, 'fetch');
+    await expect(makeFetchHtml({ lookup: async () => ['10.0.0.7'] })('https://rebind.example.com/a')).rejects.toThrow('private host');
+    expect(f).not.toHaveBeenCalled();
+    f.mockRestore();
+  });
+
+  it('a partial hint resolves only as a 5+ letter prefix of one name; "Dana" is shown to Casey, never attached', async () => {
+    const { prisma } = fakeDb({ accounts: [{ name: 'Danaher' }, { name: 'PepsiCo' }] });
+    expect(await resolveSignalAccount(prisma, { accountHint: 'Pepsi' })).toMatchObject({ resolution: 'resolved', accountName: 'PepsiCo', basis: 'hint_prefix' });
+    expect(await resolveSignalAccount(prisma, { accountHint: 'Dana' })).toMatchObject({ resolution: 'ambiguous', accountName: null, candidates: [{ name: 'Danaher' }] });
+    expect(await resolveSignalAccount(prisma, { accountHint: 'aher' })).toMatchObject({ resolution: 'ambiguous', accountName: null });
+  });
+
+  it('short or everyday account names never match a headline', async () => {
+    const { prisma } = fakeDb({ accounts: [{ name: 'Ford' }, { name: 'Mars' }, { name: 'Dover' }, { name: 'Hormel Foods' }] });
+    expect((await resolveSignalAccount(prisma, { title: 'Harrison Ford visits a Mars mission warehouse in Dover' })).resolution).toBe('needs_account');
+    expect(await resolveSignalAccount(prisma, { title: 'Hormel Foods consolidates two plants' })).toMatchObject({ resolution: 'resolved', accountName: 'Hormel Foods' });
+  });
+
+  it('a re-share that names the account resolves a row that still needed one, and follows it up', async () => {
+    const { prisma, rows } = fakeDb();
+    await captureSignal(prisma, { url: 'https://example.com/story-x', origin: 'discovery', actor: 'gap', now: NOW }, { fetchHtml: async () => '<title>Quiet news day</title>' });
+    expect(rows[0].resolution).toBe('needs_account');
+    await captureSignal(prisma, { url: 'https://example.com/story-x', accountHint: 'PepsiCo', origin: 'casey_share', actor: 'casey', now: NOW }, { fetchHtml: null });
+    expect(rows[0]).toMatchObject({ account_name: 'PepsiCo', resolution: 'resolved', research_status: 'queued', origin: 'casey_share' });
+  });
+});
+

@@ -136,3 +136,23 @@ event. Nothing else is added.
   the title, tracking params kept, private host accepted, shared link not
   followed up, wrong account kept, route without a session.
 - Scratch E2E `scripts/gap/e2e-signals.ts` S1-S4 PASS (real Postgres).
+
+### Release A review (verified P1s fixed before merge)
+- SSRF: the metadata fetch followed redirects and never checked DNS. Now every
+  redirect hop is re-checked, every host's resolved addresses must be public
+  (a lookup failure fails closed; CGNAT, benchmarking and multicast ranges
+  included), only HTML/XML/text is read, and the body is read to 400KB at most.
+- A partial account hint ("Dana") resolved to the only contains-match
+  (Danaher) and auto-queued research. Now only a 5+ letter PREFIX of exactly
+  one account resolves (`hint_prefix`); anything else is shown to Casey.
+- Short or everyday single-word account names (Ford, Mars, Dover, ...) matched
+  headlines. Single words must be 5+ letters and off a stoplist.
+- WRONG ACCOUNT hid the signal. It now returns to Casey as Needs you (the
+  label stays in the audit row); GOOD CONTEXT / USE stay listed.
+- P2s fixed: a concurrent capture of the same link returns the winner (no
+  500); a re-share that names the account resolves an unresolved row; only
+  unambiguous tracking params are stripped (`s`, `cid`, `src`, `source` are
+  kept, `amp` is stripped); the account universe is cached per process for 5
+  minutes; trailing punctuation is not part of a shared URL; 44px tap targets.
+- Mutations RED then restored for each.
+

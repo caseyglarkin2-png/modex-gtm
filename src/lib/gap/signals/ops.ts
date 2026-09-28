@@ -101,7 +101,10 @@ export function inboxRank(v: SignalView): number {
 
 export async function listSignals(prisma: PrismaLike, opts: { limit?: number; mine?: string | null; includeIgnored?: boolean } = {}): Promise<SignalView[]> {
   const rows: Row[] = await prisma.gapSignal.findMany({
-    where: { ...(opts.includeIgnored ? {} : { feedback: null, resolution: { not: 'rejected' } }), ...(opts.mine ? { submitted_by: opts.mine } : {}) },
+    where: {
+      ...(opts.includeIgnored ? {} : { OR: [{ feedback: null }, { feedback: { in: ['good_context', 'use'] } }], resolution: { not: 'rejected' } }),
+      ...(opts.mine ? { submitted_by: opts.mine } : {}),
+    },
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
     take: Math.min(opts.limit ?? 60, 300) * 3,
   });
@@ -167,13 +170,12 @@ export async function applySignalOp(prisma: PrismaLike, input: { id: string; act
       break;
     case 'feedback':
       if (!(SIGNAL_FEEDBACK as readonly string[]).includes(input.value)) return { ok: false, reason: 'bad_feedback' };
-      data = {
-        feedback: input.value,
-        feedback_by: input.actor,
-        feedback_at: input.now,
-        // WRONG ACCOUNT: the resolution was wrong; it goes back to Casey to name the right one.
-        ...(input.value === 'wrong_account' ? { account_name: null, resolution: 'needs_account', resolution_basis: null, research_status: r.research_status === 'queued' ? 'none' : r.research_status } : {}),
-      };
+      // WRONG ACCOUNT: the resolution was wrong. The signal goes BACK to Casey (Needs you, still in the
+      // inbox) to name the right one; the label itself is kept in the audit row, not as a hiding feedback.
+      data =
+        input.value === 'wrong_account'
+          ? { account_name: null, resolution: 'needs_account', resolution_basis: null, candidates: undefined, research_status: r.research_status === 'queued' || r.research_status === 'researching' ? 'none' : r.research_status, feedback: null, feedback_by: null, feedback_at: null }
+          : { feedback: input.value, feedback_by: input.actor, feedback_at: input.now };
       break;
   }
   await prisma.gapSignal.update({ where: { id: r.id }, data });
