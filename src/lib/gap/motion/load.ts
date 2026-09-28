@@ -62,38 +62,46 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   const decisions: Array<{ id: string; account_name: string }> = await prisma.routingDecision.findMany({ where: { account_name: { in: [...accountNames] } }, select: { id: true, account_name: true } });
   if (decisions.length === 0) return out;
   const accountOf = new Map(decisions.map((d) => [d.id, d.account_name]));
+  // No created_at window here (review C P1): a draft made weeks ago can be sent from Gmail today,
+  // and an outstanding one holds for as long as it is outstanding. The window applies to send times below.
   const rows: Array<{ kind: string; subject_id: string; payload: Record<string, unknown>; created_at: Date }> = await prisma.gapAuditEvent.findMany({
     where: {
       subject_type: DRAFT_SUBJECT_TYPE,
       subject_id: { in: decisions.map((d) => d.id) },
       kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFTED, DRAFT_SENT, DRAFT_DISCARDED] },
-      created_at: { gte: new Date(now.getTime() - FIRST_TOUCH_LOOKBACK_MS) },
     },
     select: { kind: true, subject_id: true, payload: true, created_at: true },
   });
+  const since = now.getTime() - FIRST_TOUCH_LOOKBACK_MS;
   const drafted = new Map<string, { row: (typeof rows)[number] }>();
-  const fates = new Map<string, string>();
+  const sentOf = new Map<string, string>();
+  const discarded = new Set<string>();
   for (const r of rows) {
     const draftId = String(r.payload?.gmailDraftId ?? '');
-    if (r.kind === DRAFTED && draftId) drafted.set(draftId, { row: r });
-    if ((r.kind === DRAFT_SENT || r.kind === DRAFT_DISCARDED) && draftId) fates.set(draftId, r.kind);
+    if (!draftId) continue;
+    if (r.kind === DRAFTED) drafted.set(draftId, { row: r });
+    // A proven send wins over a discard (the same rule as listDraftRecords).
+    if (r.kind === DRAFT_SENT) sentOf.set(draftId, String(r.payload?.sentAt ?? new Date(r.created_at).toISOString()));
+    if (r.kind === DRAFT_DISCARDED) discarded.add(draftId);
   }
   const touches: Array<FirstTouch & { account: string }> = [];
-  const push = (r: (typeof rows)[number], sentAt: string) => {
+  const push = (r: (typeof rows)[number], sentAt: string, outstanding: boolean) => {
     const account = String(r.payload?.accountName ?? accountOf.get(r.subject_id) ?? '');
     if (!account) return;
     if (Number(r.payload?.stepIndex ?? 0) !== 0) return;
+    if (!outstanding && new Date(sentAt).getTime() < since) return;
     const pid = Number(r.payload?.personaId);
-    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient: String(r.payload?.recipient ?? '').toLowerCase(), sentAt, released: false });
+    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient: String(r.payload?.recipient ?? '').toLowerCase(), sentAt, released: false, ...(outstanding ? { outstanding: true } : {}) });
   };
   for (const r of rows) {
-    if (r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) push(r, String(r.payload?.sentAt ?? new Date(r.created_at).toISOString()));
+    if (r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) push(r, String(r.payload?.sentAt ?? new Date(r.created_at).toISOString()), false);
   }
   for (const [draftId, d] of drafted) {
-    const fate = fates.get(draftId);
-    if (fate === DRAFT_DISCARDED) continue;
-    // A draft proven sent, or one still outstanding (a first touch in flight).
-    push(d.row, String(d.row.payload?.createdAt ?? new Date(d.row.created_at).toISOString()));
+    const sentAt = sentOf.get(draftId);
+    // Review C P1: a draft proven sent is dated by its real Gmail send; one still outstanding holds
+    // the account until it is sent or deleted (Casey can press Send in Gmail at any time).
+    if (sentAt) push(d.row, sentAt, false);
+    else if (!discarded.has(draftId)) push(d.row, String(d.row.payload?.createdAt ?? new Date(d.row.created_at).toISOString()), true);
   }
   // Released when the address has since failed.
   const pids = [...new Set(touches.map((t) => t.personaId).filter((x): x is number => x !== null))];
@@ -105,7 +113,7 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   for (const t of touches) {
     t.released = (t.personaId !== null && failed.has(t.personaId)) || unsubscribed.has(t.recipient);
     const list = out.get(t.account) ?? [];
-    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released });
+    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}) });
     out.set(t.account, list);
   }
   return out;
@@ -136,6 +144,8 @@ export async function accountMotionRefusal(
   for (const t of touches.sort((a, b) => b.sentAt.localeCompare(a.sentAt))) {
     if (t.released) continue;
     if ((t.personaId !== null && t.personaId === input.personaId) || t.recipient === email) continue;
+    // An outstanding draft holds until it is sent or deleted; its unlock date is not yet known.
+    if (t.outstanding) return { owner: t.recipient || `person ${t.personaId}`, sentAt: t.sentAt, unlockAt: 'after that draft is sent or deleted' };
     const unlockAt = addBusinessDays(new Date(t.sentAt), MOTION_UNLOCK_BUSINESS_DAYS);
     if (input.now.getTime() < unlockAt.getTime()) return { owner: t.recipient || `person ${t.personaId}`, sentAt: t.sentAt, unlockAt: unlockAt.toISOString() };
   }

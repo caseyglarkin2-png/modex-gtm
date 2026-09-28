@@ -6,7 +6,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { computeAccountMotion, rankCandidates, titleSeniority, type MotionCard } from '@/lib/gap/motion/account-motion';
 import { accountMotionRefusal, loadAccountFirstTouches } from '@/lib/gap/motion/load';
-import { DIRECT_SENT, DRAFTED, DRAFT_DISCARDED } from '@/lib/gap/execution/draft-ledger';
+import { DIRECT_SENT, DRAFTED, DRAFT_DISCARDED, DRAFT_SENT } from '@/lib/gap/execution/draft-ledger';
 import { addBusinessDays } from '@/lib/gap/sequence/business-days';
 
 const NOW = new Date('2026-09-30T15:00:00.000Z'); // a Wednesday
@@ -42,6 +42,16 @@ describe('computeAccountMotion', () => {
     expect(m.next).toMatchObject({ personaId: 3 });
     expect(m.next!.unlock).toContain('5 business days with no response');
     expect(m.headline).toBe('Suggested primary: VP Person.');
+    // Review C P1: nobody held is invisible. The third person is listed and choosable.
+    expect(m.alsoWaiting.map((p) => p.personaId)).toEqual([2]);
+  });
+
+  it('an outstanding first-touch draft holds the account until it is sent or deleted, however old', () => {
+    const m = computeAccountMotion({ ...base, readyEmailCards: [dir, mgr], firstTouches: [{ personaId: 1, recipient: 'vp@pepsico.com', sentAt: '2026-08-01T12:00:00.000Z', released: false, outstanding: true }] });
+    expect(m.state).toBe('in_motion');
+    expect(m.headline).toContain('first-touch draft to vp@pepsico.com is outstanding');
+    expect(m.next!.unlock).toContain('is sent (then 5 business days) or deleted');
+    expect(m.heldCardIds.sort()).toEqual(['dir', 'mgr']);
   });
 
   it("Casey's choice wins over the suggestion", () => {
@@ -115,6 +125,20 @@ describe('accountMotionRefusal (send gate, step 0)', () => {
     expect(await ask(ledgerDb([sent(9)], [{ id: 1 }]))).toBeNull();
     expect(await ask(ledgerDb([sent(1)], [{ id: 1, email_status: 'hard_bounce' }]))).toBeNull();
     expect(await ask(ledgerDb([sent(1)], [{ id: 1, do_not_contact: true }]))).toBeNull();
+  });
+
+  it('review C P1: a draft sent from Gmail is dated by its real send, not by when it was drafted', async () => {
+    const drafted = { kind: DRAFTED, subject_id: 'dec-vp', payload: { accountName: 'PepsiCo', personaId: 1, recipient: 'vp@pepsico.com', stepIndex: 0, gmailDraftId: 'd1', createdAt: new Date(NOW.getTime() - 20 * 86_400_000).toISOString() }, created_at: new Date(NOW.getTime() - 20 * 86_400_000) };
+    const sentYesterday = { kind: DRAFT_SENT, subject_id: 'dec-vp', payload: { gmailDraftId: 'd1', sentAt: new Date(NOW.getTime() - 86_400_000).toISOString() } };
+    const r = await ask(ledgerDb([drafted, sentYesterday], [{ id: 1 }]));
+    expect(r).not.toBeNull();
+    expect(r!.sentAt.slice(0, 10)).toBe(new Date(NOW.getTime() - 86_400_000).toISOString().slice(0, 10));
+  });
+
+  it('review C P1: an outstanding draft keeps holding past 5 business days and past 30 days', async () => {
+    const old = { kind: DRAFTED, subject_id: 'dec-vp', payload: { accountName: 'PepsiCo', personaId: 1, recipient: 'vp@pepsico.com', stepIndex: 0, gmailDraftId: 'd1', createdAt: new Date(NOW.getTime() - 45 * 86_400_000).toISOString() }, created_at: new Date(NOW.getTime() - 45 * 86_400_000) };
+    const r = await ask(ledgerDb([old], [{ id: 1 }]));
+    expect(r).toMatchObject({ unlockAt: 'after that draft is sent or deleted' });
   });
 
   it('an outstanding first-touch DRAFT is a motion in flight; a discarded one is not', async () => {

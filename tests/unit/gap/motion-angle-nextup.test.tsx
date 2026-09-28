@@ -152,7 +152,8 @@ describe('<AccountMotionPanel>', () => {
     state: 'ready',
     primary: { personaId: 1, name: 'Jordan VP', title: 'VP Supply Chain', cardId: 'e1', factors: ['VP (VP Supply Chain)', 'matches the thesis role (supply chain)', 'email and phone'], chosen: false },
     next: { personaId: 2, name: 'Sam Mgr', title: 'Manager', cardId: 'e2', factors: ['manager'], unlock: 'after 5 business days with no response to Jordan VP, or at once if that address fails', unlockAt: null },
-    heldCardIds: ['e2'],
+    alsoWaiting: [{ personaId: 3, name: 'Dana Dir', title: 'Director', cardId: 'e3', factors: ['director'] }],
+    heldCardIds: ['e2', 'e3'],
     headline: 'Suggested primary: Jordan VP.',
     angles: { '1': { personaId: 1, angle: null, suggested: 'Owns the PepsiCo supply chain network.' }, '2': { personaId: 2, angle: { personaId: 2, text: 'Works the DC.', source: 'human', by: 'casey', at: '' }, suggested: null } },
   };
@@ -163,6 +164,17 @@ describe('<AccountMotionPanel>', () => {
     expect(screen.getByTestId('angle-suggested')).toHaveTextContent('Suggested why: Owns the PepsiCo supply chain network.');
     expect(screen.getByTestId('angle-current')).toHaveTextContent('Why this person: Works the DC.');
     expect(screen.getByTestId('motion-unlock')).toHaveTextContent('Unlocks after 5 business days with no response');
+    // Review C P1: everyone else waiting is visible and can be made the primary.
+    expect(screen.getByTestId('motion-also-waiting')).toHaveTextContent('Dana Dir');
+  });
+
+  it('any waiting person can be made the primary (the current primary becomes next)', async () => {
+    const f = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{}', { status: 201 }));
+    render(<AccountMotionPanel motion={motion} />);
+    fireEvent.click(screen.getByTestId('motion-make-primary'));
+    await waitFor(() => expect(f).toHaveBeenCalledTimes(1));
+    expect(JSON.parse(String((f.mock.calls[0] as [string, RequestInit])[1].body))).toEqual({ accountName: 'PepsiCo', primaryPersonaId: 3, nextPersonaId: 1 });
+    f.mockRestore();
   });
 
   it('accepting a suggested angle records it as accepted_suggestion; swapping records the new primary', async () => {

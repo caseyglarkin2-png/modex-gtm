@@ -212,6 +212,17 @@ release, merged and production-verified before the next starts.
   per account; never an account with an open deal or unknown opportunity truth;
   never an item marked failing its gate.
 
+### Release C review fixes (verified P1s, fixed before merge)
+- A first touch sent from a Gmail draft was dated by the draft's creation, and
+  the ledger read had a 30-day created_at window: a draft made Monday and sent
+  the next Tuesday let a second person through the same day. Now a draft is
+  dated by its DRAFT_SENT `sentAt`; an outstanding first-touch draft holds the
+  account until it is sent or deleted, however old ("unlocks after that draft is
+  sent or deleted").
+- With 3+ email-ready people only the primary and one NEXT were visible; the
+  rest were in no lane. Now `alsoWaiting` lists everyone else, each with their
+  angle and "Make X the primary instead".
+
 ### Release C validation
 - Mutations RED then restored: send gate removed; two email cards READY at one
   account; bounced owner still holds; reply pause ignored; Casey's choice
@@ -241,3 +252,8 @@ release, merged and production-verified before the next starts.
   AI-powered supply chain and procurement planning platform" as a network
   fact. The evidence gate is out of scope for this program; recorded for a
   future gate review.
+- Release C review (non-blocking): an unresolved DIRECT_CLAIMED /
+  DRAFT_CLAIMED (send outcome unknown) is not counted as an account first touch
+  by the motion gate (the per-person gate still treats it as sent); NEXT UP v2
+  skips a buyer reply at an account held by an open deal or unknown opportunity
+  truth, per the Phase 2 hard constraint (the Replies lane still shows it).

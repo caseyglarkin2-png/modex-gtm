@@ -105,6 +105,23 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
     router.refresh();
   }
 
+  async function makePrimary(personaId: number) {
+    if (!motion.primary) return;
+    setBusy(true);
+    setError(null);
+    const res = await fetch('/api/gap/accounts/motion', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accountName: motion.accountName, primaryPersonaId: personaId, nextPersonaId: motion.primary.personaId > 0 && motion.primary.personaId !== personaId ? motion.primary.personaId : null }),
+    });
+    setBusy(false);
+    if (!res.ok) {
+      setError(((await res.json().catch(() => ({}))) as { error?: string }).error ?? `HTTP ${res.status}`);
+      return;
+    }
+    router.refresh();
+  }
+
   async function confirm() {
     if (!motion.primary) return;
     setBusy(true);
@@ -152,6 +169,27 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
               Make {motion.next.name} the primary instead
             </button>
           ) : null}
+        </div>
+      ) : null}
+      {motion.alsoWaiting.length ? (
+        <div data-testid="motion-also-waiting" className="border-t border-[var(--border)] pt-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Also waiting (after the next person)</p>
+          <ul className="mt-1 space-y-2">
+            {motion.alsoWaiting.map((p) => (
+              <li key={p.personaId} data-testid="motion-waiting-person">
+                <p>
+                  {p.name}
+                  <span className="ml-1 text-xs text-[var(--muted-foreground)]">({p.factors.join(' · ')})</span>
+                </p>
+                <AngleLine a={motion.angles[String(p.personaId)]} personaId={p.personaId} />
+                {motion.state === 'ready' && motion.primary ? (
+                  <button type="button" data-testid="motion-make-primary" disabled={busy} onClick={() => void makePrimary(p.personaId)} className="mt-1 text-xs underline">
+                    Make {p.name} the primary instead
+                  </button>
+                ) : null}
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
       {error ? <p role="alert" className="text-xs text-[var(--destructive)]">{error}</p> : null}

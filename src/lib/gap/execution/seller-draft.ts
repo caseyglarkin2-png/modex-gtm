@@ -366,7 +366,8 @@ export async function prepareSellerEmail(
     // GAP first touch inside the unlock window: this person waits (a bounce releases it).
     const motion = await accountMotionRefusal(prisma, { accountName: pack.hypothesis.account_name, personaId: persona.id ?? null, email, now });
     if (motion) {
-      return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_motion_active', detail: `${motion.owner} at this account got a first touch on ${motion.sentAt.slice(0, 10)}. One cold email motion at a time: the next person unlocks on ${motion.unlockAt.slice(0, 10)} with no response, or at once if that address fails.` });
+      const unlock = /^\d{4}-\d{2}-\d{2}T/.test(motion.unlockAt) ? `on ${motion.unlockAt.slice(0, 10)} with no response` : motion.unlockAt;
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_motion_active', detail: `${motion.owner} at this account has a first touch from ${motion.sentAt.slice(0, 10)}. One cold email motion at a time: the next person unlocks ${unlock}, or at once if that address fails.` });
     }
     // Final red team: the card is a snapshot; a cold first touch never ignores what moved since it was minted.
     const moved = await personMovedSince(prisma, { email, personaId: persona.id ?? null, since: new Date(decision.created_at) });

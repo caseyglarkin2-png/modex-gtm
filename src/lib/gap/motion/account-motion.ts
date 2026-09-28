@@ -49,6 +49,8 @@ export interface FirstTouch {
   sentAt: string;
   /** The address failed afterwards (hard bounce, invalid, DNC): the motion released. */
   released: boolean;
+  /** A first-touch Gmail draft not yet sent or deleted: it holds the account until it is (review C P1). */
+  outstanding?: boolean;
 }
 
 export interface MotionPerson {
@@ -66,6 +68,8 @@ export interface AccountMotion {
   state: MotionState;
   primary: (MotionPerson & { chosen: boolean }) | null;
   next: (MotionPerson & { unlock: string; unlockAt: string | null }) | null;
+  /** Everyone else waiting at the account (review C P1: no held person is ever invisible). */
+  alsoWaiting: MotionPerson[];
   /** Email cards that are NOT the account's motion right now: never READY. */
   heldCardIds: string[];
   /** One plain line for the seller. */
@@ -134,6 +138,7 @@ export function computeAccountMotion(input: {
       state: 'paused_reply',
       primary: null,
       next: ranked[0] ? { ...person(ranked[0].card, ranked[0].factors), unlock: `after ${r.from}'s reply is triaged in Replies`, unlockAt: null } : null,
+      alsoWaiting: ranked.slice(1).map((x) => person(x.card, x.factors)),
       heldCardIds: allIds,
       headline: `Paused: ${r.from} at ${accountName} wrote in on ${r.receivedAt.slice(0, 10)}. Triage it in Replies before anyone there gets a cold email.`,
       pausedBy: r,
@@ -141,9 +146,10 @@ export function computeAccountMotion(input: {
   }
 
   // The newest live first touch at the account owns the motion.
-  const live = input.firstTouches.filter((t) => !t.released).sort((a, b) => b.sentAt.localeCompare(a.sentAt))[0];
+  // An outstanding first-touch draft outranks sent touches: it holds until it is sent or deleted.
+  const live = input.firstTouches.filter((t) => !t.released).sort((a, b) => Number(!!b.outstanding) - Number(!!a.outstanding) || b.sentAt.localeCompare(a.sentAt))[0];
   if (live) {
-    const unlockAt = addBusinessDays(new Date(live.sentAt), MOTION_UNLOCK_BUSINESS_DAYS);
+    const unlockAt = live.outstanding ? new Date(8.64e15) : addBusinessDays(new Date(live.sentAt), MOTION_UNLOCK_BUSINESS_DAYS);
     const owner = cards.find((c) => c.persona.id === live.personaId) ?? null;
     const waiting = ranked.filter((r) => r.card.persona.id !== live.personaId);
     const nextPick = (choice?.nextPersonaId ? waiting.find((r) => r.card.persona.id === choice.nextPersonaId) : null) ?? waiting[0] ?? null;
@@ -152,9 +158,20 @@ export function computeAccountMotion(input: {
         accountName,
         state: 'in_motion',
         primary: owner ? { ...person(owner, ['first touch sent ' + live.sentAt.slice(0, 10)]), chosen: true } : { personaId: live.personaId ?? -1, name: live.recipient, title: null, cardId: null, factors: ['first touch sent ' + live.sentAt.slice(0, 10)], chosen: true },
-        next: nextPick ? { ...person(nextPick.card, nextPick.factors), unlock: `after ${day(unlockAt)} with no response (${MOTION_UNLOCK_BUSINESS_DAYS} business days), or at once if ${owner ? nameOf(owner) : live.recipient}'s address fails`, unlockAt: unlockAt.toISOString() } : null,
+        next: nextPick
+          ? {
+              ...person(nextPick.card, nextPick.factors),
+              unlock: live.outstanding
+                ? `after the outstanding first-touch draft to ${owner ? nameOf(owner) : live.recipient} is sent (then ${MOTION_UNLOCK_BUSINESS_DAYS} business days) or deleted`
+                : `after ${day(unlockAt)} with no response (${MOTION_UNLOCK_BUSINESS_DAYS} business days), or at once if ${owner ? nameOf(owner) : live.recipient}'s address fails`,
+              unlockAt: live.outstanding ? null : unlockAt.toISOString(),
+            }
+          : null,
+        alsoWaiting: waiting.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
         heldCardIds: allIds,
-        headline: `In motion: ${owner ? nameOf(owner) : live.recipient} got a first touch on ${live.sentAt.slice(0, 10)}. One cold email motion at a time.`,
+        headline: live.outstanding
+          ? `In motion: a first-touch draft to ${owner ? nameOf(owner) : live.recipient} is outstanding. One cold email motion at a time.`
+          : `In motion: ${owner ? nameOf(owner) : live.recipient} got a first touch on ${live.sentAt.slice(0, 10)}. One cold email motion at a time.`,
       };
     }
     // Unlock window passed with no response: the next person becomes the primary.
@@ -164,13 +181,14 @@ export function computeAccountMotion(input: {
         state: 'ready',
         primary: { ...person(nextPick.card, [...nextPick.factors, `unlocked: no response since ${live.sentAt.slice(0, 10)}`]), chosen: choice?.nextPersonaId === nextPick.card.persona.id },
         next: null,
+        alsoWaiting: waiting.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
         heldCardIds: allIds.filter((id) => id !== nextPick.card.id),
         headline: `Next person unlocked: no response to the first touch on ${live.sentAt.slice(0, 10)}.`,
       };
     }
   }
 
-  if (ranked.length === 0) return { accountName, state: 'idle', primary: null, next: null, heldCardIds: [], headline: 'Nobody to email here right now.' };
+  if (ranked.length === 0) return { accountName, state: 'idle', primary: null, next: null, alsoWaiting: [], heldCardIds: [], headline: 'Nobody to email here right now.' };
 
   const chosen = choice ? ranked.find((r) => r.card.persona.id === choice.primaryPersonaId) ?? null : null;
   const primary = chosen ?? ranked[0];
@@ -182,6 +200,7 @@ export function computeAccountMotion(input: {
     state: 'ready',
     primary: { ...person(primary.card, primary.factors), chosen: !!chosen },
     next: nextPick ? { ...person(nextPick.card, nextPick.factors), unlock: `after ${MOTION_UNLOCK_BUSINESS_DAYS} business days with no response to ${nameOf(primary.card)}, or at once if that address fails`, unlockAt: null } : null,
+    alsoWaiting: rest.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
     heldCardIds: allIds.filter((id) => id !== primary.card.id),
     headline: chosen ? `Primary: ${nameOf(primary.card)} (your choice).` : `Suggested primary: ${nameOf(primary.card)}.${released ? ' An earlier address failed, so the motion moved on.' : ''}`,
   };

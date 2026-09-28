@@ -740,7 +740,7 @@ export async function enrollFromDecision(
     // Phase 2 C3: one cold email motion per account, as at the send gate.
     const motion = await accountMotionRefusal(prisma, { accountName: hypothesis.account_name || persona.account_name, personaId: input.personaId ?? null, email, now: input.now });
     if (motion) {
-      return refuse('account_motion_active', { detail: `${motion.owner} got a first touch on ${motion.sentAt.slice(0, 10)}; the next person unlocks on ${motion.unlockAt.slice(0, 10)} with no response` });
+      return refuse('account_motion_active', { detail: `${motion.owner} has a first touch from ${motion.sentAt.slice(0, 10)}; the next person unlocks ${/^\d{4}-\d{2}-\d{2}T/.test(motion.unlockAt) ? `on ${motion.unlockAt.slice(0, 10)} with no response` : motion.unlockAt}` });
     }
   }
 
