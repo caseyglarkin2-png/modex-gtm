@@ -41,7 +41,9 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
   // A message a human has already read and dispositioned no longer holds anyone.
   const read: Array<{ source_id: string }> = prisma.conversationDisposition?.findMany
     ? await prisma.conversationDisposition.findMany({
-        where: { source_kind: 'inbound_message', source_id: { in: human.map((r) => r.id) }, human_confirmed: true },
+        // Phase 2 D6: a reply that arrived through HubSpot is dispositioned as source_kind
+        // hubspot_engagement (same inbound id); either kind of human disposition clears the hold.
+        where: { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: { in: human.map((r) => r.id) }, human_confirmed: true },
         select: { source_id: true },
       })
     : [];
