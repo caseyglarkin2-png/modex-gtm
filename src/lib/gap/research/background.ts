@@ -1,0 +1,242 @@
+/**
+ * BACKGROUND EVIDENCE RESEARCH (Phase 2 B1, 2026-09-28).
+ *
+ * Casey should not wait for research. A bounded job runs the SAME evidence
+ * research RESEARCH THIS runs (research/run.ts runEvidenceResearch: fetch,
+ * re-fetch the canonical source, verify the quote verbatim, date it, classify
+ * physical-network relevance, detect contradictions, set freshness, reject
+ * with a reason) for the accounts where evidence would unblock the most work,
+ * BEFORE he opens the app. Its output is an inbox (research/inbox.ts).
+ *
+ * It NEVER creates, submits, approves or activates a hypothesis, never links
+ * evidence to one, never picks a problem family as buyer truth, never routes,
+ * drafts, enrolls or sends. runEvidenceResearch writes only ResearchRun,
+ * EvidenceRecord, ProspectingSignal and its audit row; this module adds only a
+ * summary audit row. Pinned by tests/unit/gap/background-research.test.ts.
+ *
+ * Deterministic priority, no score (selectBackgroundTargets):
+ *   1. a research thesis / research card blocking the most people
+ *   2. a fresh Pounce trigger (newest first)
+ *   3. an in-use or approved outreach fact nearing expiry (soonest first)
+ *   then account tier, then the oldest unresolved research work, then name.
+ *
+ * Bounded (hard cap per run, a time budget), idempotent (an account researched
+ * within the cooldown is skipped unless a newer trigger arrived), retry-safe
+ * (each account independent; a failure is recorded, the next account runs),
+ * cost-aware (one EDGAR + one web search per account), observable (cron state
+ * + a `research.background_run` audit row naming every target and outcome).
+ */
+import { listAllCurrent } from '../routing/queue';
+import { RESEARCHABLE_RULES, sellerLaneOf } from '../routing/card-readiness';
+import { loadThesisGroups, splitThesisWork } from '../hypothesis/thesis-groups';
+import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from './run';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PrismaLike = any;
+
+export const BACKGROUND_ACTOR = 'gap-background-research';
+export const BACKGROUND_AUDIT = 'research.background_run' as const;
+export const BACKGROUND_PURPOSE = 'gap_background_research';
+/** Hard cap per run: each account costs one EDGAR pass, one web search and a handful of source fetches. */
+export const BACKGROUND_DEFAULT_CAP = 3;
+export const BACKGROUND_MAX_CAP = 10;
+/** An account researched this recently is skipped unless a newer trigger arrived. */
+export const BACKGROUND_COOLDOWN_MS = 3 * 86_400_000;
+/** Triggers newer than this are "fresh". */
+export const TRIGGER_FRESH_MS = 14 * 86_400_000;
+/** An outreach fact expiring within this is "nearing expiry". */
+export const EXPIRY_HORIZON_MS = 21 * 86_400_000;
+/** Stop starting new accounts after this much of the 300s function budget (one slow account can still run ~150s: EDGAR fetches time out at 15s each). */
+export const BACKGROUND_TIME_BUDGET_MS = 120_000;
+
+export type TargetReason = 'research_work' | 'fresh_trigger' | 'expiring_evidence';
+const REASON_RANK: Record<TargetReason, number> = { research_work: 1, fresh_trigger: 2, expiring_evidence: 3 };
+
+export interface BackgroundTarget {
+  accountName: string;
+  reason: TargetReason;
+  peopleBlocked: number;
+  triggerAt: string | null;
+  triggerTitle: string | null;
+  expiresAt: string | null;
+  tier: string | null;
+  oldestWorkAt: string | null;
+  problemFamily: string | null;
+}
+
+export function tierRank(tier: string | null | undefined): number {
+  const m = String(tier ?? '').match(/(\d+)/);
+  return m ? Number(m[1]) : 9;
+}
+
+/** Deterministic order: reason, then people unblocked, trigger freshness, expiry, tier, oldest work, name. */
+export function compareTargets(a: BackgroundTarget, b: BackgroundTarget): number {
+  const t = (s: string | null, dflt: number) => (s ? new Date(s).getTime() : dflt);
+  return (
+    REASON_RANK[a.reason] - REASON_RANK[b.reason] ||
+    b.peopleBlocked - a.peopleBlocked ||
+    t(b.triggerAt, 0) - t(a.triggerAt, 0) ||
+    t(a.expiresAt, Number.MAX_SAFE_INTEGER) - t(b.expiresAt, Number.MAX_SAFE_INTEGER) ||
+    tierRank(a.tier) - tierRank(b.tier) ||
+    t(a.oldestWorkAt, Number.MAX_SAFE_INTEGER) - t(b.oldestWorkAt, Number.MAX_SAFE_INTEGER) ||
+    a.accountName.localeCompare(b.accountName)
+  );
+}
+
+function merge(map: Map<string, BackgroundTarget>, t: BackgroundTarget) {
+  const cur = map.get(t.accountName);
+  if (!cur) {
+    map.set(t.accountName, t);
+    return;
+  }
+  const better = REASON_RANK[t.reason] < REASON_RANK[cur.reason] ? t : cur;
+  const later = (x: string | null, y: string | null) => (!x ? y : !y ? x : x > y ? x : y);
+  const earlier = (x: string | null, y: string | null) => (!x ? y : !y ? x : x < y ? x : y);
+  map.set(t.accountName, {
+    ...better,
+    peopleBlocked: Math.max(cur.peopleBlocked, t.peopleBlocked),
+    triggerAt: later(cur.triggerAt, t.triggerAt),
+    triggerTitle: later(cur.triggerAt, t.triggerAt) === t.triggerAt ? t.triggerTitle ?? cur.triggerTitle : cur.triggerTitle ?? t.triggerTitle,
+    expiresAt: earlier(cur.expiresAt, t.expiresAt),
+    oldestWorkAt: earlier(cur.oldestWorkAt, t.oldestWorkAt),
+    problemFamily: cur.problemFamily ?? t.problemFamily,
+  });
+}
+
+export interface SelectDeps {
+  loadGroups?: typeof loadThesisGroups;
+  listQueue?: typeof listAllCurrent;
+}
+
+export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, deps: SelectDeps = {}): Promise<BackgroundTarget[]> {
+  const byAccount = new Map<string, BackgroundTarget>();
+  const base = (accountName: string, reason: TargetReason): BackgroundTarget => ({ accountName, reason, peopleBlocked: 0, triggerAt: null, triggerTitle: null, expiresAt: null, tier: null, oldestWorkAt: null, problemFamily: null });
+
+  // 1. Research work: theses the evidence gate rates not ready, and research cards whose missing piece is evidence.
+  const groups = await (deps.loadGroups ?? loadThesisGroups)(prisma, {}, { singletons: true, now });
+  for (const g of splitThesisWork(groups).researchGroups) {
+    const blocked = g.members.filter((m) => m.next === 'find_evidence' || m.next === 'revise');
+    // Thesis rows carry no creation time here; the research cards below supply the oldest-work tiebreak.
+    merge(byAccount, { ...base(g.accountName, 'research_work'), peopleBlocked: blocked.length, problemFamily: g.members[0]?.problem_family ?? null });
+  }
+  const queue = await (deps.listQueue ?? listAllCurrent)(prisma);
+  const cardsByAccount = new Map<string, { n: number; oldest: string }>();
+  for (const item of queue.items) {
+    if (sellerLaneOf(item) !== 'research' || !RESEARCHABLE_RULES.has(item.ruleId)) continue;
+    const cur = cardsByAccount.get(item.account.name);
+    const created = new Date(item.createdAt).toISOString();
+    cardsByAccount.set(item.account.name, { n: (cur?.n ?? 0) + 1, oldest: cur && cur.oldest < created ? cur.oldest : created });
+  }
+  for (const [accountName, c] of cardsByAccount) merge(byAccount, { ...base(accountName, 'research_work'), peopleBlocked: c.n, oldestWorkAt: c.oldest });
+
+  // 2. Fresh Pounce triggers on accounts modex actually has (vendor and competitor noise has no account).
+  const triggers: Array<{ account_name: string; title: string; first_seen_at: Date; published_at: Date | null }> = await prisma.pounceTrigger.findMany({
+    where: { dismissed: false, first_seen_at: { gte: new Date(now.getTime() - TRIGGER_FRESH_MS) } },
+    orderBy: [{ first_seen_at: 'desc' }, { id: 'desc' }],
+    take: 200,
+    select: { account_name: true, title: true, first_seen_at: true, published_at: true },
+  });
+  for (const t of triggers) {
+    const account = await prisma.account.findFirst({ where: { name: { equals: t.account_name, mode: 'insensitive' } }, select: { name: true } });
+    if (!account) continue;
+    merge(byAccount, { ...base(account.name, 'fresh_trigger'), triggerAt: new Date(t.published_at ?? t.first_seen_at).toISOString(), triggerTitle: t.title });
+  }
+
+  // 3. Outreach facts on approved / in-use hypotheses nearing expiry.
+  const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: { freshness_expires_at: Date | null } | null }> }> = await prisma.prospectingHypothesis.findMany({
+    where: { status: { in: ['approved', 'active'] } },
+    select: { account_name: true, problem_family: true, signals: { where: { role: 'primary' }, select: { signal: { select: { freshness_expires_at: true } } } } },
+    take: 500,
+  });
+  for (const h of expiring) {
+    const exp = h.signals.map((s) => s.signal?.freshness_expires_at).filter((d): d is Date => !!d).map((d) => new Date(d));
+    const soon = exp.find((d) => d.getTime() > now.getTime() && d.getTime() - now.getTime() <= EXPIRY_HORIZON_MS);
+    if (soon) merge(byAccount, { ...base(h.account_name, 'expiring_evidence'), expiresAt: soon.toISOString(), problemFamily: h.problem_family });
+  }
+
+  // Tier for every candidate (one read).
+  const names = [...byAccount.keys()];
+  const accounts: Array<{ name: string; tier: string | null }> = names.length ? await prisma.account.findMany({ where: { name: { in: names } }, select: { name: true, tier: true } }) : [];
+  for (const a of accounts) byAccount.get(a.name)!.tier = a.tier;
+  return [...byAccount.values()].sort(compareTargets);
+}
+
+export interface BackgroundRunResult {
+  runTag: string;
+  considered: number;
+  researched: Array<{ accountName: string; reason: TargetReason; runId: string; outcome: ResearchResult['outcome']; facts: number; freshFacts: number; rejected: number; conflicts: number }>;
+  skipped: Array<{ accountName: string; reason: string }>;
+  failed: Array<{ accountName: string; error: string }>;
+}
+
+/** The newest research run for an account (any GAP research purpose). */
+async function lastResearchAt(prisma: PrismaLike, accountName: string): Promise<Date | null> {
+  const r = await prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true } });
+  return r?.created_at ? new Date(r.created_at) : null;
+}
+
+export async function runBackgroundResearch(
+  prisma: PrismaLike,
+  opts: { now: Date; cap?: number; clock?: () => number; timeBudgetMs?: number },
+  deps: ResearchDeps & SelectDeps & { research?: typeof runEvidenceResearch } = {},
+): Promise<BackgroundRunResult> {
+  const cap = Math.max(1, Math.min(BACKGROUND_MAX_CAP, Math.floor(opts.cap ?? BACKGROUND_DEFAULT_CAP)));
+  const clock = opts.clock ?? Date.now;
+  const started = clock();
+  const budget = opts.timeBudgetMs ?? BACKGROUND_TIME_BUDGET_MS;
+  const research = deps.research ?? runEvidenceResearch;
+  const runTag = `bg-${opts.now.toISOString()}`;
+  const targets = await selectBackgroundTargets(prisma, opts.now, deps);
+  const result: BackgroundRunResult = { runTag, considered: targets.length, researched: [], skipped: [], failed: [] };
+
+  for (const t of targets) {
+    if (result.researched.length + result.failed.length >= cap) {
+      result.skipped.push({ accountName: t.accountName, reason: 'cap_reached' });
+      continue;
+    }
+    if (clock() - started > budget) {
+      result.skipped.push({ accountName: t.accountName, reason: 'time_budget' });
+      continue;
+    }
+    const last = await lastResearchAt(prisma, t.accountName);
+    const newerTrigger = t.triggerAt && last && new Date(t.triggerAt) > last;
+    if (last && opts.now.getTime() - last.getTime() < BACKGROUND_COOLDOWN_MS && !newerTrigger) {
+      result.skipped.push({ accountName: t.accountName, reason: `researched_recently:${last.toISOString()}` });
+      continue;
+    }
+    try {
+      const r = await research(
+        prisma,
+        {
+          accountName: t.accountName,
+          personaId: null,
+          hypothesisId: null,
+          problemFamily: t.problemFamily,
+          decisionId: null,
+          actor: BACKGROUND_ACTOR,
+          now: opts.now,
+          focus: t.triggerTitle ? `Recent news to check: "${t.triggerTitle}".` : undefined,
+          context: { purpose: BACKGROUND_PURPOSE, backgroundRunTag: runTag, targetReason: t.reason, triggerTitle: t.triggerTitle, peopleBlocked: t.peopleBlocked },
+        },
+        deps,
+      );
+      result.researched.push({
+        accountName: t.accountName,
+        reason: t.reason,
+        runId: r.runId,
+        outcome: r.outcome,
+        facts: r.facts.length,
+        freshFacts: r.facts.filter((f) => f.fresh).length,
+        rejected: r.rejected.length,
+        conflicts: r.conflicts.length,
+      });
+    } catch (e) {
+      result.failed.push({ accountName: t.accountName, error: (e instanceof Error ? e.message : String(e)).slice(0, 200) });
+    }
+  }
+
+  await prisma.gapAuditEvent
+    .create({ data: { kind: BACKGROUND_AUDIT, actor: BACKGROUND_ACTOR, subject_type: 'background_research', subject_id: runTag, payload: JSON.parse(JSON.stringify(result)) } })
+    .catch(() => undefined);
+  return result;
+}

@@ -48,6 +48,10 @@
       "schedule": "*/10 * * * *"
     },
     {
+      "path": "/api/cron/gap-background-research/",
+      "schedule": "40 10 * * *"
+    },
+    {
       "path": "/api/cron/gap-hubspot-replies/?mode=apply",
       "schedule": "45 12 * * *"
     }

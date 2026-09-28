@@ -45,6 +45,8 @@ import { HypothesisList } from './hypotheses/hypothesis-list';
 import { RepliesTriage } from './replies/replies-triage';
 import { WorkQueue } from './work-queue';
 import { HealthStrip } from '@/components/gap/health-strip';
+import { EvidenceInbox } from '@/components/gap/evidence-inbox';
+import { loadEvidenceInbox } from '@/lib/gap/research/inbox';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -237,6 +239,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
             <RepliesTriage inCockpit />
           ) : (
             <>
+            {lane === 'research' ? <EvidenceInbox accounts={await loadEvidenceInbox(prisma, new Date()).catch(() => [])} now={new Date()} /> : null}
             {lane === 'research' ? <ResearchTheses groups={data.researchGroups} /> : null}
             <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} reviewWaiting={data.reviewWaiting} />
             </>

@@ -67,6 +67,8 @@ export interface ResearchInput {
   now: Date;
   /** Extra run context kept on the ResearchRun (e.g. the sibling thesis fingerprint). */
   context?: Record<string, unknown>;
+  /** Extra search focus for the web provider (Phase 2 B1: the fresh trigger headline). Candidates are still verified at their own source. */
+  focus?: string;
 }
 
 export interface ResearchDeps {
@@ -83,7 +85,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const candidates: Candidate[] = [];
   for (const [name, run] of [
     ['edgar', () => (deps.edgar ?? ((a, n) => edgarCandidates(a, n)))(input.accountName, input.now)],
-    ['web', () => (deps.web ?? webCandidates)(input.accountName, input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '')],
+    ['web', () => (deps.web ?? webCandidates)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '))],
   ] as const) {
     try {
       const r = await run();
