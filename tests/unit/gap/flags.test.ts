@@ -17,6 +17,7 @@ const FLAG_NAMES = [
   'GAP_AUTO_ENROLL_ENABLED',
   'GAP_AUTO_ENROLL_SHADOW',
   'GAP_HUBSPOT_MIRROR_ENABLED',
+  'GAP_BACKGROUND_RESEARCH_ENABLED',
 ] as const;
 
 let savedEnv: NodeJS.ProcessEnv;
@@ -38,13 +39,13 @@ afterEach(() => {
 });
 
 describe('GAP_FLAGS', () => {
-  it('has exactly nine entries in the documented order', () => {
-    expect(GAP_FLAGS).toHaveLength(9);
+  it('has exactly ten entries in the documented order', () => {
+    expect(GAP_FLAGS).toHaveLength(10);
     expect([...GAP_FLAGS]).toEqual([...FLAG_NAMES]);
   });
 
-  it('lists GAP_HUBSPOT_MIRROR_ENABLED last', () => {
-    expect(GAP_FLAGS[GAP_FLAGS.length - 1]).toBe('GAP_HUBSPOT_MIRROR_ENABLED');
+  it('lists GAP_BACKGROUND_RESEARCH_ENABLED last (Phase 2 B1)', () => {
+    expect(GAP_FLAGS[GAP_FLAGS.length - 1]).toBe('GAP_BACKGROUND_RESEARCH_ENABLED');
   });
 });
 

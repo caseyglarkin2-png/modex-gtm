@@ -28,6 +28,8 @@ export const GAP_FLAGS = [
   'GAP_AUTO_ENROLL_ENABLED',
   'GAP_AUTO_ENROLL_SHADOW',
   'GAP_HUBSPOT_MIRROR_ENABLED',
+  // Phase 2 B1: the scheduled background evidence research (research only; never promotes, routes or sends).
+  'GAP_BACKGROUND_RESEARCH_ENABLED',
 ] as const;
 
 export type GapFlagName = (typeof GAP_FLAGS)[number];

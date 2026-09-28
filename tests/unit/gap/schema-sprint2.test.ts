@@ -113,6 +113,16 @@ describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
     }
   });
 
+  it('Phase 2 B1: background evidence research is registered once with exactly the schedule vercel.json runs', async () => {
+    const { KNOWN_CRONS } = await import('@/lib/cron-monitor');
+    const { readFileSync } = await import('node:fs');
+    const vercel = JSON.parse(readFileSync('vercel.json', 'utf8')) as { crons: Array<{ path: string; schedule: string }> };
+    const rows = KNOWN_CRONS.filter((c) => c.name === 'gap-background-research');
+    expect(rows).toHaveLength(1);
+    const job = vercel.crons.find((c) => c.path.startsWith('/api/cron/gap-background-research/'));
+    expect(job?.schedule).toBe(rows[0].schedule);
+  });
+
   it('lists each unscheduled GAP cron exactly once, on its /api/cron route, as unregistered', async () => {
     const { KNOWN_CRONS } = await import('@/lib/cron-monitor');
     for (const name of GAP_CRONS) {
@@ -143,6 +153,7 @@ describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
       'reenrich-contacts',
       'gap-hubspot-replies',
       'gap-mailbox',
+      'gap-background-research',
     ]);
     const names = KNOWN_CRONS.map((c) => c.name);
     expect(new Set(names).size, 'cron names are unique').toBe(names.length);
