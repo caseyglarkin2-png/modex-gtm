@@ -21,7 +21,7 @@
  */
 import type { Candidate } from '../research/providers';
 import type { ResearchResult } from '../research/run';
-import { extractFactSentences, htmlToText } from '../research/facts';
+import { classifyFact, extractFactSentences, htmlToText } from '../research/facts';
 import { defaultFetchHtml, normalizeSignalUrl, type FetchHtml } from './intake';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,15 +98,29 @@ export function storyTokens(text: string, accountName: string): Set<string> {
   );
 }
 
-/** A fact is about the signal's story when it came from the signal's page, or shares 3+ of its specific words. */
+/** Words every physical-network story shares: they never make two stories the same one (review B P1). */
+const GENERIC_OPS = new Set(['distribution', 'center', 'centers', 'facility', 'facilities', 'million', 'billion', 'warehouse', 'warehouses', 'square', 'feet', 'foot', 'plant', 'plants', 'supply', 'chain', 'network', 'logistics', 'investment', 'invest', 'invests', 'expansion', 'expand', 'expands', 'expanding', 'operations', 'operation', 'company', 'jobs', 'site', 'sites', 'announced', 'announce', 'announces', 'opens', 'open', 'opening', 'build', 'building', 'new', 'year', 'years', 'state', 'county', 'city']);
+
+/**
+ * A fact is about the signal's story when it came from the signal's own page, or when it describes the SAME
+ * direction of change (a closure never matches an opening or investment) AND shares 2+ of the story's specific words (a place,
+ * a partner, a program), generic operations vocabulary excluded (review B P1: "invests in a new distribution
+ * center" and "closes its Memphis distribution center" are different stories).
+ */
 export function factMatchesSignal(fact: { url: string; excerpt: string; title?: string }, signal: ResearchableSignal, accountName: string): boolean {
   if (signal.url && normalizeSignalUrl(fact.url) && normalizeSignalUrl(fact.url) === normalizeSignalUrl(signal.url)) return true;
   if (!signal.title) return false;
-  const want = storyTokens(signal.title, accountName);
-  const got = storyTokens(`${fact.excerpt} ${fact.title ?? ''}`, accountName);
+  // Same DIRECTION of change: a closure is never the same story as an opening, expansion or investment.
+  const dir = (c: string | null | undefined) => (!c ? null : c === 'closure' ? 'shrink' : 'grow');
+  const want = dir(classifyFact(signal.title).change);
+  const got = dir(classifyFact(fact.excerpt).change);
+  if (!want || !got || want !== got) return false;
+  const specific = (t: string) => new Set([...storyTokens(t, accountName)].filter((w) => !GENERIC_OPS.has(w)));
+  const a = specific(signal.title);
+  const b = specific(`${fact.excerpt} ${fact.title ?? ''}`);
   let shared = 0;
-  for (const w of want) if (got.has(w)) shared += 1;
-  return shared >= 3;
+  for (const w of a) if (b.has(w)) shared += 1;
+  return shared >= 2;
 }
 
 export type SettledStatus = 'fact_found' | 'contradiction' | 'no_usable_fact';
@@ -119,7 +133,9 @@ export async function settleSignals(
   const out: Array<{ id: string; status: SettledStatus; matched: string[] }> = [];
   const conflicted = new Set(input.result.conflicts.flatMap((c) => c.signalIds));
   for (const s of input.signals) {
-    const matched = input.result.facts.filter((f) => factMatchesSignal(f, s, input.accountName));
+    // Review B P1: only a FRESH verified fact makes a signal fact-ready (a stale one is kept for the record, never a trigger).
+    const matchedAll = input.result.facts.filter((f) => factMatchesSignal(f, s, input.accountName));
+    const matched = matchedAll.filter((f) => f.fresh);
     const status: SettledStatus = matched.some((f) => conflicted.has(f.signalId)) ? 'contradiction' : matched.length ? 'fact_found' : 'no_usable_fact';
     const row: { metadata: Record<string, unknown> | null } | null = await prisma.gapSignal.findUnique({ where: { id: s.id }, select: { metadata: true } });
     await prisma.gapSignal.update({
@@ -134,6 +150,7 @@ export async function settleSignals(
             at: input.now.toISOString(),
             outcome: input.result.outcome,
             matchedFactSignalIds: matched.map((f) => f.signalId),
+            staleMatches: matchedAll.length - matched.length,
             otherVerifiedFacts: input.result.facts.length - matched.length,
             rejectedFromThisPage: input.result.rejected.filter((r) => s.url && r.url === s.url).map((r) => r.reason).slice(0, 8),
           },

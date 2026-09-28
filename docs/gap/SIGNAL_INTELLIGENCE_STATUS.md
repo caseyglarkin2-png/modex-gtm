@@ -212,3 +212,21 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
 - The E2E found a real defect before merge: a Prisma JSON-path NOT filter
   drops rows where the key is absent, so new sources were never clustered.
 
+### Release B review (verified P1s fixed before merge)
+- A STALE verified fact (an old story, stored for the record) could settle a
+  signal FACT READY and promote it to Pounce as a fresh trigger. Only a FRESH
+  matched fact counts now (stale matches are recorded as `staleMatches`).
+- Three generic shared words ("million", "distribution", "center") credited an
+  unrelated fact to the signal and promoted the headline. A fact now matches
+  only from the signal's own page, or with the same DIRECTION of change (a
+  closure never matches an opening or investment) plus 2+ specific words
+  (generic operations vocabulary excluded).
+- P2s fixed: only an article publication date is read (no generic `date` meta,
+  no stray `<time>`); one event is promoted once whichever source verified;
+  clustering reads newest first so a full window cannot starve new sources;
+  capped retries and already-promoted rows are filtered before the limit; a
+  run that dies mid-flight returns its signals to the queue, counting as an
+  attempt (settled after 3). Cluster peers exclude ignored and unresolved rows.
+- Mutations RED then restored for each (two initially SURVIVED because one
+  negative case tripped both checks; isolating tests added).
+

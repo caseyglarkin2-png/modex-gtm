@@ -106,7 +106,7 @@ describe('the processing pass', () => {
     const stuck = { id: 's1', url: 'https://supplychaindive.com/news/x', title: null, origin: 'casey_share', account_hint: null, metadata: { metaAttempts: 1, metaError: 'private host' } };
     const update = vi.fn(async () => ({}));
     const prisma = {
-      gapSignal: { findMany: vi.fn().mockResolvedValueOnce([stuck]).mockResolvedValueOnce([]).mockResolvedValueOnce([]), update },
+      gapSignal: { findMany: vi.fn(async ({ where }: { where: Record<string, unknown> }) => (where.resolution === 'needs_account' ? [stuck] : [])), update },
       account: { findMany: vi.fn(async () => [{ name: 'General Mills' }]) },
       gapAccountAlias: { findMany: vi.fn(async () => []) },
       canonicalAccountLink: { findMany: vi.fn(async () => []) },
@@ -127,6 +127,7 @@ describe('the processing pass', () => {
         findMany: vi.fn(async ({ where }: { where: Record<string, unknown> }) => ('resolution' in where && where.resolution === 'needs_account' ? [] : 'research_status' in where ? [] : 'account_name' in where && typeof where.account_name === 'string' ? rows.filter((r) => r.id === 'b') : rows)),
         findUnique: vi.fn(async ({ where }: { where: { id: string } }) => rows.find((r) => r.id === where.id)),
         update,
+        updateMany: vi.fn(async () => ({ count: 0 })),
       },
     };
     const r = await processSignals(prisma, { now: NOW });
@@ -135,10 +136,24 @@ describe('the processing pass', () => {
   });
 
   it('gives up on a page after 3 attempts', async () => {
-    const prisma = { gapSignal: { findMany: vi.fn().mockResolvedValueOnce([{ id: 's1', url: 'https://x.com/a', title: null, origin: 'casey_share', account_hint: null, metadata: { metaAttempts: 3 } }]).mockResolvedValue([]), update: vi.fn() } };
+    const update = vi.fn(async () => ({}));
+    const stale = [{ id: 'r1', metadata: {} }, { id: 'r2', metadata: { researchAttempts: 2 } }];
+    const prisma = {
+      gapSignal: {
+        findMany: vi.fn(async ({ where }: { where: Record<string, unknown> }) =>
+          where.resolution === 'needs_account' ? [{ id: 's1', url: 'https://x.com/a', title: null, origin: 'casey_share', account_hint: null, metadata: { metaAttempts: 3 } }] : where.research_status === 'researching' ? stale : [],
+        ),
+        update,
+      },
+    };
     const fetchHtml = vi.fn();
-    expect((await processSignals(prisma, { now: NOW }, { fetchHtml })).retried).toBe(0);
+    const r = await processSignals(prisma, { now: NOW }, { fetchHtml });
+    expect(r.retried).toBe(0);
     expect(fetchHtml).not.toHaveBeenCalled();
+    // A run that died mid-flight never leaves a signal "researching"; each requeue counts, the third settles it.
+    expect(r.requeued).toBe(2);
+    expect(update).toHaveBeenCalledWith({ where: { id: 'r1' }, data: { research_status: 'queued', metadata: { researchAttempts: 1, researchError: 'research run did not finish (timed out)' } } });
+    expect(update).toHaveBeenCalledWith({ where: { id: 'r2' }, data: { research_status: 'no_usable_fact', metadata: { researchAttempts: 3, researchError: 'research run did not finish (timed out)' } } });
   });
 });
 
@@ -184,3 +199,40 @@ describe('background research follows up queued signals', () => {
     expect(prisma.gapSignal.update).toHaveBeenCalledWith({ where: { id: 's1' }, data: { research_status: 'no_usable_fact', metadata: { researchAttempts: 3, researchError: 'gemini 503' } } });
   });
 });
+
+describe('review B P1s', () => {
+  const sig = { id: 's1', url: 'https://news.example/acme-invests', title: 'Acme invests $50 million in new distribution center in Reno', published_at: NOW, source_class: 'news', resolution_basis: null, event_id: 's1' };
+
+  it('an unrelated fact sharing only generic words (or a different kind of change) never marks the signal', () => {
+    expect(factMatchesSignal({ url: 'https://x.com/1', excerpt: 'Acme will close its Memphis distribution center, a $20 million facility.' }, sig, 'Acme')).toBe(false);
+    expect(factMatchesSignal({ url: 'https://x.com/2', excerpt: 'Acme opened a new distribution center in Reno, Nevada, a $50 million investment.' }, sig, 'Acme')).toBe(true);
+  });
+
+  it('same direction but only generic words shared: not the same story', () => {
+    expect(factMatchesSignal({ url: 'https://x.com/3', excerpt: 'Acme will open a new $30 million distribution center in Ohio.' }, sig, 'Acme')).toBe(false);
+  });
+
+  it('opposite direction at the same place: not the same story', () => {
+    const opening = { ...sig, title: 'Acme opens Reno Nevada distribution center' };
+    expect(factMatchesSignal({ url: 'https://x.com/4', excerpt: 'Acme will close its Reno, Nevada distribution center next year.' }, opening, 'Acme')).toBe(false);
+    expect(factMatchesSignal({ url: 'https://x.com/5', excerpt: 'Acme will open its Reno, Nevada distribution center next year.' }, opening, 'Acme')).toBe(true);
+  });
+
+  it('a stale verified fact is never FACT READY (so it can never be promoted as a fresh trigger)', async () => {
+    const rows: Record<string, Record<string, unknown>> = { s1: { metadata: {} } };
+    const prisma = { gapSignal: { findUnique: vi.fn(async () => rows.s1), update: vi.fn(async ({ data }: { data: Record<string, unknown> }) => Object.assign(rows.s1, data)) } };
+    const stale = { signalId: 'f1', evidenceRecordId: 'e1', excerpt: 'x', url: sig.url, title: 't', publishedAt: '2023-01-01', retrievedAt: '', provider: 'signal' as const, type: 'news' as never, change: 'opening' as never, fresh: false };
+    const out = await settleSignals(prisma, { signals: [sig], accountName: 'Acme', result: { runId: 'r', outcome: 'insufficient_evidence', facts: [stale], rejected: [], conflicts: [], notes: [] }, now: NOW });
+    expect(out[0].status).toBe('no_usable_fact');
+    expect((rows.s1.metadata as { research: { staleMatches: number } }).research.staleMatches).toBe(1);
+  });
+
+  it('one event is promoted once, whichever source verified', async () => {
+    const r = { id: 's2', url: 'https://b.com/x', title: 'Acme opens Reno distribution center', account_name: 'Acme', resolution: 'resolved', research_status: 'fact_found', promoted_trigger_id: null, feedback: null, published_at: NOW, event_id: 'e1' };
+    const ingest = vi.fn();
+    const prisma = { gapSignal: { findUnique: vi.fn(async () => r), findFirst: vi.fn(async () => ({ id: 's1' })), update: vi.fn() }, pounceTrigger: { findUnique: vi.fn() } };
+    expect(await promoteSignal(prisma, 's2', { ingest })).toEqual({ ok: false, reason: 'already_promoted' });
+    expect(ingest).not.toHaveBeenCalled();
+  });
+});
+

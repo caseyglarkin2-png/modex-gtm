@@ -68,7 +68,13 @@ export async function clusterSignal(prisma: PrismaLike, id: string): Promise<str
   if (!row?.account_name) return null;
   const t = when(row);
   const peers: ClusterRow[] = await prisma.gapSignal.findMany({
-    where: { account_name: row.account_name, id: { not: row.id }, created_at: { gte: new Date(Math.min(t, Date.now()) - 45 * 86_400_000) } },
+    where: {
+      account_name: row.account_name,
+      id: { not: row.id },
+      resolution: 'resolved',
+      OR: [{ feedback: null }, { feedback: { in: ['use', 'good_context'] } }],
+      created_at: { gte: new Date(Math.min(t, Date.now()) - 45 * 86_400_000) },
+    },
     select: { id: true, url: true, title: true, account_name: true, published_at: true, created_at: true, event_id: true },
     orderBy: [{ created_at: 'asc' }, { id: 'asc' }],
     take: 300,

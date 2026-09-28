@@ -37,6 +37,11 @@ export async function promoteSignal(
   if (s.resolution !== 'resolved' || !s.account_name) return { ok: false, reason: 'not_resolved' };
   if (s.research_status !== 'fact_found') return { ok: false, reason: 'not_verified' };
   if (!s.url) return { ok: false, reason: 'no_link' };
+  // Review B P2: ONE event enters the spine once, whichever of its sources verified first.
+  if (s.event_id) {
+    const sibling: { id: string } | null = await prisma.gapSignal.findFirst({ where: { event_id: s.event_id, id: { not: id }, promoted_trigger_id: { not: null } }, select: { id: true } });
+    if (sibling) return { ok: false, reason: 'already_promoted' };
+  }
   const accountName = String(s.account_name);
   const title = String(s.title ?? s.url);
   const { score, categories } = scoreTrigger(title, accountName);
@@ -52,6 +57,6 @@ export async function promoteSignal(
   };
   const r = await (deps.ingest ?? ingestTriggers)([raw]);
   const trigger: { id: number } | null = await prisma.pounceTrigger.findUnique({ where: { url_hash: hashUrl(raw.url) }, select: { id: true } });
-  await prisma.gapSignal.update({ where: { id }, data: { promoted_trigger_id: trigger?.id ?? null } });
+  await prisma.gapSignal.update({ where: { id }, data: { promoted_trigger_id: trigger?.id ?? null, metadata: { ...((s.metadata ?? {}) as Record<string, unknown>), promotedAt: new Date().toISOString(), promotion: { created: r.created, duplicate: r.duplicate, pinged: r.pinged, stamped: r.stamped } } } });
   return { ok: true, triggerId: trigger?.id ?? null, created: r.created > 0 };
 }
