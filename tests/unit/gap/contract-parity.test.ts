@@ -300,6 +300,8 @@ function listPrisma(dispositions: any[]) {
 /** Every key of the client's ReplyItem and the runtime check each must pass. Adding a key to the client type without a route field fails here. */
 const REPLY_ITEM_CHECKS: Record<keyof ClientReplyItem, (v: unknown) => boolean> = {
   id: (v) => typeof v === 'string',
+  // Phase 2 D5: present (true) only on account-level / colleague replies.
+  accountLevel: (v) => v === undefined || typeof v === 'boolean',
   source: (v) => typeof v === 'object' && v !== null && ['inbound_message', 'hubspot_engagement'].includes((v as any).kind) && typeof (v as any).id === 'string',
   contactEmail: (v) => typeof v === 'string',
   personaId: (v) => v === null || typeof v === 'number',

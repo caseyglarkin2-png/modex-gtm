@@ -23,8 +23,8 @@ release, merged and production-verified before the next starts.
 |---|---|---|---|---|---|
 | A | Truth infrastructure + health | feat/gap-phase2-a-truth-health | #278 | 6df1938f | READY, health endpoint HEALTHY in prod |
 | B | Verified evidence inbox | feat/gap-phase2-b-evidence-inbox | #279 | 6d34cd6a | READY; one prod background run, protected diff identical |
-| C | Account motion v0 | feat/gap-phase2-c-account-motion | | | |
-| D | Mobile buyer truth capture v0 | | | | |
+| C | Account motion v0 | feat/gap-phase2-c-account-motion | #280 | ded3ac0b | READY; cockpit NEXT UP v2 verified in prod |
+| D | Mobile buyer truth capture v0 | feat/gap-phase2-d-buyer-truth | | | |
 | E | Seller action pack v2 | | | | |
 | F | In Deals + Deal Brief v0 | | | | |
 | G | Integrated seller-OS acceptance | | | | |
@@ -236,6 +236,73 @@ release, merged and production-verified before the next starts.
   pause (colleague reply: no READY email card, `account_replied` refusal,
   primary follow-ups stop). Triage visibility of that colleague reply is
   Release D (D5).
+
+### Release C production verification (2026-09-28)
+- Merge ded3ac0b served (dpl_fTvC3xdiJCGBnpxSpwJM5VfhvBmD). Signed-in /gap:
+  NEXT UP v2 reads "Find verified evidence for the PepsiCo thesis · 5 people
+  waiting", then General Mills, FedEx, The Home Depot (one per account). READY
+  is 0 in production today, so no motion panel shows yet; the scratch E2E
+  (G2/G3) is the motion proof.
+
+## Release D: mobile buyer truth capture v0
+
+### D1. Quick capture (`/gap/capture`, phone first; "Capture" tab)
+- Search an account or person (plain contains, Casey picks), choose the
+  conversation (meeting, call, conference, email, LinkedIn), paste notes or a
+  transcript or dictate with the keyboard mic, Save. The raw note is kept
+  exactly as written (append-only `capture.note`). An unknown account stays
+  UNLINKED with Casey's hint; nothing can be confirmed until he links it
+  (`capture.linked`). Recent notes list unlinked first; `/gap/capture/[id]`
+  reopens one.
+
+### D2. Candidate BID extraction
+- `capture/extract.ts`: deterministic. Sentences cut verbatim from the note
+  (never paraphrased), seller lines ("Casey:", "Me:", ...) never proposed, a
+  proposed BID type from visible cue words (shown). A candidate is not truth.
+- CONFIRM = the existing BID service as a HUMAN (`recordBid`, actorKind human),
+  exact quote re-checked verbatim against the note, optional relabel or a
+  shortened quote that is still verbatim, a thesis at the note's account and
+  the person who said it (never guessed). REJECT is recorded. Each candidate is
+  decided once (`capture.candidate`). Unconfirmed candidates write no BID and
+  no disposition (zero Learning / CRM effect). No AI summary is produced.
+
+### D3. Truth types
+- Existing taxonomy only: BID types (current_state, business_problem,
+  root_cause, impact, metric, future_state, priority, constraint, objection)
+  plus the meeting outcomes below; no new categories.
+
+### D4. Meeting outcome
+- `recordMeetingOutcome`: qualified problem (needs the buyer's own words from
+  the note, verbatim) -> problem_confirmed; disqualified -> problem_rejected;
+  more discovery / no decision -> no_signal; next meeting -> meeting_accepted.
+  A human-confirmed disposition on channel `meeting` (what
+  meetingToQualifiedProblemRate reads), plus the five-way outcome and an
+  optional next learning objective (`capture.meeting`).
+
+### D5. Colleague replies in triage
+- `listReplies` adds replies from someone at a GAP account's domain who is not
+  a known GAP recipient, labelled ACCOUNT-LEVEL / COLLEAGUE REPLY, with their
+  own address as the contact and no persona (their words are never assigned to
+  the person GAP emailed). First page, 60-day window, auto-replies excluded.
+  Account motion stays paused until one is dispositioned.
+
+### D6. Hold clearing
+- The account-reply hold now clears on a human disposition of either source
+  kind (`inbound_message` or `hubspot_engagement`); a HubSpot-sourced reply no
+  longer holds the domain forever.
+
+### Release D validation
+- Mutations RED then restored: a non-verbatim quote confirmable; candidates
+  auto-confirmed at capture; a confirm recorded as an agent; seller lines
+  proposed (first survived: the fixture had no cue words in seller lines; a
+  seller claim with "2 hours per shift" was added, then RED); an unlinked note
+  confirmable; a qualified meeting without buyer words; colleague replies
+  dropped; colleague words assigned to the emailed person; HubSpot disposition
+  not clearing the hold.
+- `e2e-phase2.ts` G3 triage (colleague reply listed as account-level with its
+  own sender; a human referral disposition clears the hold) and G4 (conference
+  note -> 4 verbatim candidates, zero BIDs before confirmation -> confirm 2,
+  reject 1 -> exactly 2 human-confirmed BIDs with the exact quotes).
 
 ## Debt recorded (not fixed in this program unless it blocks)
 

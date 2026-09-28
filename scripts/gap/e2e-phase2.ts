@@ -14,7 +14,10 @@
  *      account motion: exactly ONE email READY; a second first touch refused
  *   G3 account reply: primary contacted (in-process fake Gmail) -> a
  *      colleague replies -> the whole account email motion pauses -> nobody
- *      else can get a cold email -> a human disposition is required
+ *      else can get a cold email -> the reply is in triage as an ACCOUNT-LEVEL
+ *      reply with its own sender -> a human disposition clears the pause
+ *   G4 conference capture: a pasted note -> candidate BIDs with verbatim
+ *      quotes -> confirm two, reject one -> only the two are buyer truth
  *
  * Rails: scratch database only (exit 2 otherwise); every credential scrubbed;
  * research providers are in-process stubs (no network); every person is a
@@ -45,6 +48,11 @@ import { computeNextTouch } from '../../src/lib/gap/execution/next-touch';
 import type { ExecutionReceipt } from '../../src/lib/gap/execution/contract';
 import type { CriticClient } from '../../src/lib/gap/critic-client';
 import { SCRATCH_NO_DEALS, SCRATCH_NO_DEALS_TRUTH } from './scratch-opportunity';
+import { listReplies } from '../../src/lib/gap/replies/list';
+import { accountRepliedRecently } from '../../src/lib/gap/replies/account-reply';
+import { recordDisposition } from '../../src/lib/gap/disposition/service';
+import { createCapture, decideCandidate } from '../../src/lib/gap/capture/store';
+import { quoteInSource } from '../../src/lib/gap/capture/extract';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'phase2-e2e-latest.md');
@@ -143,7 +151,7 @@ const DELETE_GUARDS: Array<[string, string]> = [
   ['buyer_input_data', 'gap_bid_guard_del'],
 ];
 
-async function cleanup(prisma: PrismaClient, c: { accountNames: string[]; emails: string[]; triggerHashes: string[]; runStart: Date; familyIds: string[]; threadIds: string[]; runIds: string[] }): Promise<Record<string, number>> {
+async function cleanup(prisma: PrismaClient, c: { accountNames: string[]; emails: string[]; triggerHashes: string[]; runStart: Date; familyIds: string[]; threadIds: string[]; runIds: string[]; captureIds: string[] }): Promise<Record<string, number>> {
   return prisma.$transaction(async (tx) => {
     const removed: Record<string, number> = {};
     const hypothesisIds = (await tx.prospectingHypothesis.findMany({ where: { account_name: { in: c.accountNames } }, select: { id: true } })).map((h) => h.id);
@@ -153,7 +161,7 @@ async function cleanup(prisma: PrismaClient, c: { accountNames: string[]; emails
     try {
       const decisionIds = (await tx.routingDecision.findMany({ where: { account_name: { in: c.accountNames } }, select: { id: true } })).map((d) => d.id);
       const dispositionIds = (await tx.conversationDisposition.findMany({ where: { account_name: { in: c.accountNames } }, select: { id: true } })).map((d) => d.id);
-      removed.gap_audit_events = (await tx.gapAuditEvent.deleteMany({ where: { created_at: { gte: c.runStart }, OR: [{ subject_id: { in: [...hypothesisIds, ...runIds, ...signalIds, ...decisionIds, ...dispositionIds, ...c.accountNames, ...c.emails, ...c.runIds] } }, { kind: 'research.background_run' }] } })).count;
+      removed.gap_audit_events = (await tx.gapAuditEvent.deleteMany({ where: { created_at: { gte: c.runStart }, OR: [{ subject_id: { in: [...hypothesisIds, ...runIds, ...signalIds, ...decisionIds, ...dispositionIds, ...c.accountNames, ...c.emails, ...c.runIds, ...c.captureIds] } }, { kind: 'research.background_run' }] } })).count;
       removed.buyer_input_data = (await tx.buyerInputData.deleteMany({ where: { account_name: { in: c.accountNames } } })).count;
       removed.conversation_dispositions = (await tx.conversationDisposition.deleteMany({ where: { id: { in: dispositionIds } } })).count;
       removed.notifications = (await tx.notification.deleteMany({ where: { persona_email: { in: c.emails } } })).count;
@@ -214,7 +222,7 @@ async function main(): Promise<number> {
   const email = (who: string) => `${who}+${tag}@example.com`;
   const people = ['vp1', 'vp2', 'dir'] as const;
   const colleague = email('assistant');
-  const created = { accountNames: [account], emails: [...people.map(email), colleague], triggerHashes: [] as string[], familyIds: [] as string[], threadIds: [] as string[], runIds: [] as string[] };
+  const created = { accountNames: [account], emails: [...people.map(email), colleague], triggerHashes: [] as string[], familyIds: [] as string[], threadIds: [] as string[], runIds: [] as string[], captureIds: [] as string[] };
   const threadFor = (to: string) => {
     const t = `${tag}-thr-${to.split('+')[0]}`;
     if (!created.threadIds.includes(t)) created.threadIds.push(t);
@@ -388,6 +396,56 @@ async function main(): Promise<number> {
     const follow = await computeNextTouch(prisma, readyEmail[0].id, new Date(later.getTime() + 30 * 86_400_000), { gapSender, getThread: async () => [] });
     expect('G3 pause', follow.state === 'stopped', `primary's next touch -> ${JSON.stringify(follow)}`);
     pass('G3 pause', `a colleague (${colleague}) replied: no email card at the account is READY; a first touch to anyone else is refused (account_replied); the primary's follow-ups stop (${(follow as { detail?: string }).detail}); a human disposition is required to clear the hold`);
+
+    const triage = await listReplies(prisma, { state: 'undispositioned', limit: 50 });
+    const colleagueItem = triage.items.find((i) => i.id === `${tag}-in-1`);
+    expect('G3 triage', !!colleagueItem && colleagueItem.accountLevel === true && colleagueItem.contactEmail === colleague && colleagueItem.personaId === null && colleagueItem.accountName === account, `triage item -> ${JSON.stringify(colleagueItem)}`);
+    pass('G3 triage', `the colleague reply is in REPLIES labelled ACCOUNT-LEVEL / COLLEAGUE, sender ${colleague}, no persona: its words are never assigned to the person GAP emailed`);
+    const dispo = await recordDisposition(prisma, {
+      hypothesisId: colleagueItem!.hypothesisId,
+      personaId: null,
+      contactEmail: colleague,
+      channel: 'email',
+      responseClass: 'referral',
+      referral: { name: 'DC team' },
+      source: { kind: 'inbound_message', id: colleagueItem!.id },
+      actor: ACTOR,
+      actorKind: 'human',
+      now: new Date(later.getTime() + 60_000),
+    });
+    expect('G3 triage', dispo.ok, `disposition -> ${JSON.stringify(dispo)}`);
+    const holdAfter = await accountRepliedRecently(prisma, email('vp2'), new Date(later.getTime() + 120_000));
+    expect('G3 triage', holdAfter === null, `hold after the human disposition -> ${JSON.stringify(holdAfter)}`);
+    pass('G3 triage', 'Casey dispositioned it (referral); the account hold cleared on his human decision, nothing inferred');
+
+    // ---- G4: conference capture (the note is pasted/dictated on a phone).
+    const note = [
+      'Casey: How are trailers found at your Texas DC?',
+      'Priya (VP1): Right now we walk the yard with a clipboard to find trailers.',
+      'Priya: We lose about 3 hours per shift hunting for trailers.',
+      'Priya: The detention charges from carriers are killing us.',
+      'Priya: Ideally we want the yard to tell the dock what is next.',
+    ].join('\n');
+    const bidsBefore = await prisma.buyerInputData.count({ where: { account_name: account } });
+    const cap = await createCapture(prisma, { accountName: account, personaId: personaIds[0], context: 'conference', rawText: note, actor: ACTOR, now: new Date(later.getTime() + 180_000) });
+    expect('G4 capture', cap.ok && cap.capture.candidates.length >= 3, `capture -> ${JSON.stringify(cap)}`);
+    if (!cap.ok) throw new Error('unreachable');
+    created.captureIds.push(cap.capture.id);
+    expect('G4 capture', cap.capture.candidates.every((c) => quoteInSource(c.quote, note) && !/^Casey/.test(c.quote)), 'a candidate quote is not verbatim, or a seller line was proposed');
+    expect('G4 capture', (await prisma.buyerInputData.count({ where: { account_name: account } })) === bidsBefore, 'candidates became BIDs before any confirmation');
+    pass('G4 capture', `saved the conference note; ${cap.capture.candidates.length} candidates, every quote verbatim, none from the seller, zero BIDs before confirmation`);
+    const [c1, c2, c3] = cap.capture.candidates;
+    const conf1 = await decideCandidate(prisma, { captureId: cap.capture.id, candidateId: c1.id, decision: 'confirm', hypothesisId: hypothesisIds[0], actor: ACTOR, now: new Date(later.getTime() + 200_000) });
+    const conf2 = await decideCandidate(prisma, { captureId: cap.capture.id, candidateId: c2.id, decision: 'confirm', type: 'impact', hypothesisId: hypothesisIds[0], actor: ACTOR, now: new Date(later.getTime() + 210_000) });
+    const rej = await decideCandidate(prisma, { captureId: cap.capture.id, candidateId: c3.id, decision: 'reject', actor: ACTOR, now: new Date(later.getTime() + 220_000) });
+    expect('G4 confirm', conf1.ok && conf2.ok && rej.ok, `decisions -> ${JSON.stringify({ conf1, conf2, rej })}`);
+    const bids = await prisma.buyerInputData.findMany({ where: { account_name: account }, select: { raw_buyer_language: true, human_confirmed: true, type: true, source: true, captured_by: true } });
+    expect('G4 confirm', bids.length === bidsBefore + 2, `BIDs at the account: ${bids.length} (expected ${bidsBefore + 2})`);
+    expect('G4 confirm', bids.every((b) => b.human_confirmed && b.captured_by === ACTOR && b.source === 'meeting'), `BID rows -> ${JSON.stringify(bids)}`);
+    expect('G4 confirm', bids.map((b) => b.raw_buyer_language).sort().join('|') === [c1.quote, c2.quote].sort().join('|'), 'confirmed BIDs do not carry the exact quotes');
+    expect('G4 confirm', !bids.some((b) => b.raw_buyer_language === c3.quote), 'the rejected candidate became a BID');
+    pass('G4 confirm', `confirmed 2 (one relabelled impact), rejected 1: exactly 2 human-confirmed BIDs with the exact quotes (source meeting, captured by ${ACTOR}); the rejected one is not buyer truth`);
+    counts.bidsConfirmed = 2;
   } catch (err) {
     if (err instanceof StepFailure) failure = err;
     else {

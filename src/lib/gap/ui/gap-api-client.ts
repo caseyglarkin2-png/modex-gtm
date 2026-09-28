@@ -206,6 +206,8 @@ export interface ReplyItem {
   suggestion?: ReplySuggestion | null;
   /** The confirmed disposition id; present only when `state=all` returns a dispositioned reply. */
   dispositionId?: string | null;
+  /** Phase 2 D5: an account-level / colleague reply (the sender is not a known GAP recipient). */
+  accountLevel?: boolean;
 }
 
 export interface RepliesPage {

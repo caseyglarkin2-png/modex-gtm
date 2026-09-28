@@ -29,6 +29,7 @@
  */
 
 import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
+import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
 
 export const SNIPPET_LENGTH = 280;
 export const DEFAULT_LIMIT = 50;
@@ -69,6 +70,12 @@ export interface ReplyItem {
   suggestion?: StoredSuggestion | null;
   /** The confirmed disposition, when state=all returns a dispositioned reply. */
   dispositionId?: string | null;
+  /**
+   * Phase 2 D5: an ACCOUNT-LEVEL / COLLEAGUE reply: from someone at a GAP account's
+   * domain who is not a known GAP recipient. Its words belong to its sender
+   * (`contactEmail`, no persona), never to the colleague GAP emailed.
+   */
+  accountLevel?: boolean;
 }
 
 export interface ListRepliesInput {
@@ -305,11 +312,84 @@ interface DispositionJoinRow {
   ai_suggested: unknown;
 }
 
+/** How far back an account-level (colleague) reply is surfaced in triage. */
+export const COLLEAGUE_REPLY_WINDOW_DAYS = 60;
+const COLLEAGUE_MAX_DOMAINS = 200;
+
+/**
+ * Phase 2 D5: replies from someone at a GAP account's domain who is NOT a known
+ * GAP recipient (an assistant, a colleague the email was forwarded to). The
+ * account and thesis come from the known recipient at that domain; the words
+ * stay the sender's. First page only; newest first; auto-replies excluded.
+ */
+export async function loadColleagueReplies(prisma: any, known: Map<string, KnownAddress>, state: ReplyState, now: Date = new Date()): Promise<ReplyItem[]> {
+  const byDomain = new Map<string, KnownAddress>();
+  for (const k of known.values()) {
+    const d = (k.email.split('@')[1] ?? '').toLowerCase();
+    if (!d || FREEMAIL_DOMAINS.has(d) || OWN_DOMAINS.has(d)) continue;
+    const cur = byDomain.get(d);
+    if (!cur || (!cur.hypothesisId && k.hypothesisId)) byDomain.set(d, k);
+  }
+  const domains = [...byDomain.keys()].slice(0, COLLEAGUE_MAX_DOMAINS);
+  if (domains.length === 0) return [];
+  const rows: InboundRow[] = await prisma.inboundMessage.findMany({
+    where: {
+      OR: domains.map((d) => ({ from_email: { endsWith: `@${d}`, mode: 'insensitive' } })),
+      received_at: { gte: new Date(now.getTime() - COLLEAGUE_REPLY_WINDOW_DAYS * 86_400_000) },
+    },
+    orderBy: [{ received_at: 'desc' }, { id: 'desc' }],
+    take: 100,
+    select: { id: true, source: true, from_email: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
+  });
+  const colleague = rows.filter((r) => !known.has(normalizeEmail(r.from_email)) && !AUTO_REPLY_SUBJECT.test(r.subject ?? ''));
+  if (colleague.length === 0) return [];
+  const joined: DispositionJoinRow[] = await prisma.conversationDisposition.findMany({
+    where: { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: { in: colleague.map((r) => r.id) } },
+    select: { id: true, source_kind: true, source_id: true, human_confirmed: true, created_by: true, ai_suggested: true },
+  });
+  const confirmed = new Map<string, string>();
+  const suggestion = new Map<string, StoredSuggestion>();
+  for (const d of joined) {
+    if (d.human_confirmed) confirmed.set(d.source_id, d.id);
+    else {
+      const s = suggestionFromRow(d);
+      if (s) suggestion.set(d.source_id, s);
+    }
+  }
+  const out: ReplyItem[] = [];
+  for (const r of colleague) {
+    const dispositionId = confirmed.get(r.id) ?? null;
+    if (state === 'undispositioned' && dispositionId) continue;
+    const via = byDomain.get((normalizeEmail(r.from_email).split('@')[1] ?? '').toLowerCase());
+    if (!via?.accountName || !via.hypothesisId) continue;
+    const item: ReplyItem = {
+      id: r.id,
+      source: sourceOfInbound(r),
+      contactEmail: normalizeEmail(r.from_email),
+      personaId: null,
+      accountName: via.accountName,
+      hypothesisId: via.hypothesisId,
+      hypothesisTitle: via.hypothesisTitle,
+      subject: r.subject ?? null,
+      snippet: snippetOf(r),
+      receivedAt: r.received_at.toISOString(),
+      enrollmentId: null,
+      enrollmentStatus: null,
+      suggestion: suggestion.get(r.id) ?? null,
+      accountLevel: true,
+    };
+    if (state === 'all') item.dispositionId = dispositionId;
+    out.push(item);
+  }
+  return out;
+}
+
 export async function listReplies(prisma: any, input: ListRepliesInput = {}): Promise<RepliesPage> {
   const state: ReplyState = input.state ?? 'undispositioned';
   const limit = Math.min(Math.max(input.limit ?? DEFAULT_LIMIT, 1), MAX_LIMIT);
   const known = await loadKnownAddresses(prisma);
   if (known.size === 0) return { items: [], nextCursor: null };
+
   const emails = Array.from(known.keys());
 
   const items: ReplyItem[] = [];
@@ -372,6 +452,7 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
         enrollmentId: address.enrollmentId,
         enrollmentStatus: address.enrollmentStatus,
         suggestion: suggestionBySource.get(row.id) ?? null,
+        accountLevel: false,
       };
       if (state === 'all') item.dispositionId = dispositionId;
       items.push(item);
@@ -393,5 +474,9 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
     nextCursor = last.id;
   }
 
-  return { items, nextCursor };
+  // Phase 2 D5: colleague replies join the first page, never lost because a different person was emailed.
+  const colleagues = input.cursor ? [] : await loadColleagueReplies(prisma, known, state).catch(() => [] as ReplyItem[]);
+  if (colleagues.length === 0) return { items, nextCursor };
+  const merged = [...items, ...colleagues].sort((a, b) => b.receivedAt.localeCompare(a.receivedAt) || b.id.localeCompare(a.id));
+  return { items: merged, nextCursor };
 }
