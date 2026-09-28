@@ -1,6 +1,6 @@
 # GAP OS Phase 2: Seller OS (status ledger)
 
-STATUS: ACTIVE
+STATUS: SHIPPED 2026-09-28 (Releases A-G merged; final review fixes on fix/gap-phase2-final-review)
 
 <!-- verified:2026-09-28 -->
 
@@ -27,7 +27,8 @@ release, merged and production-verified before the next starts.
 | D | Mobile buyer truth capture v0 | feat/gap-phase2-d-buyer-truth | #281 | c15aa366 | READY; /gap/capture checked at phone width |
 | E | Seller action pack v2 | feat/gap-phase2-e-action-pack | #282 | 455be384 | READY; brief on a prod PepsiCo card at phone width, no horizontal scroll, KNOW refuses the 10-Q keyword hit |
 | F | In Deals + Deal Brief v0 | feat/gap-phase2-f-in-deals | #283 | b55b7b2b | READY; prod In Deals lists Kroger ("YardFlow - Kroger", Appointment scheduled); its brief shows 6 UNKNOWN + 4 deal contacts, no horizontal scroll |
-| G | Integrated seller-OS acceptance | feat/gap-phase2-g-acceptance | | | |
+| G | Integrated seller-OS acceptance | feat/gap-phase2-g-acceptance | #284 | 14d1f565 | READY; scratch acceptance only (no product code) |
+| Final | Final expert review fixes (verified P1s) | fix/gap-phase2-final-review | | | |
 
 ## Release A: truth infrastructure + health
 
@@ -448,6 +449,27 @@ release, merged and production-verified before the next starts.
 | G7 | HubSpot unavailable + mailbox stale + suppression unavailable: health BLOCKED (HubSpot, suppression) / DEGRADED (mailbox); the send refuses on opportunity_unknown; the wire suppression gate refuses; nothing sent |
 | LEARNING | The first touch carries its attribution (fact id and kind, opener, persona, account); both BIDs carry source, verbatim quote, confirmer, timestamps, thesis, person and capture note |
 
+## Final expert review (four read-only lenses, after G)
+
+No lens found a P0. The lead read the code for every P1 claim; all eight were
+real and are fixed on `fix/gap-phase2-final-review`, each with tests and a
+mutation proven RED then restored:
+
+| # | Lens | Verified P1 | Fix |
+|---|---|---|---|
+| 1 | Practitioner, buyer | After a buyer ANSWERED (not priority, a meeting, a rejection), a human disposition cleared the hold and a colleague unlocked for a cold first touch "with no response" | A confirmed buyer answer at the account (`CONVERSATION_RESPONSE_CLASSES`, 90 days) puts the account in a conversation: the send gate refuses a colleague's first touch and the cockpit shows `in_conversation`, all email cards held. Referral, voicemail, no answer, gatekeeper, out of office, bounce and no signal do not hold |
+| 2 | Buyer, reliability | The account-reply pause was keyed on the recipient's email domain (a multi-domain account such as pepsico.com / fritolay.com leaked) | `accountRepliedRecently` checks every company domain GAP holds at the account (send gate, enroll, brief, cockpit) |
+| 3 | Reliability | Two first touches at one account in the same second could both pass the one-motion check | `claimSendKey` takes an account advisory lock for step 0 and re-runs the motion check inside it |
+| 4 | Reliability | A send whose outcome was unrecorded (claimed, not reconciled) or a live enrollment did not hold the account | Unresolved DIRECT/DRAFT claims count as outstanding first touches; enrollments in the lookback count as first touches |
+| 5 | Practitioner | A meeting "qualified problem" accepted a line Casey said, and skipped the who-said-it guard | The quote must sit inside one buyer sentence (seller-labelled lines never qualify); with two buyer speakers Casey names who said it |
+| 6 | Practitioner | KNOW and the send path quoted a fact another verified fact contradicts | `research/conflicts.ts contradictedFactIds`: KNOW refuses it (and says so when the check cannot run); the send gate refuses `fact_contradicted` until Casey ignores one side |
+| 7 | UX | Phone capture froze on "Saving..." with no connection and a reload lost the note | Every capture call catches a network failure, says "no connection", re-enables; the unsaved note is kept on the phone and restored |
+| 8 | UX | "Do this next" landed at the top of the lane, not on the opened card | The lane scrolls to the opened card once its cards have loaded |
+
+Validation on the fix branch: GAP suite 187 files / 3468 tests, full suite
+504 files / 5560 tests, typecheck, build, scratch E2E integrated 14, sprint2
+10, sprint3 16, sprint4 14, phase2 23, all PASS.
+
 ## Debt recorded (not fixed in this program unless it blocks)
 
 - Release A review (non-blocking): `verifyPublicFact` reports `created: true`
@@ -473,3 +495,35 @@ release, merged and production-verified before the next starts.
   accounts); the resolver timeout races but does not abort, so real HubSpot
   concurrency can briefly exceed 5; each objective save refreshes the whole
   lane. The objective route accepts any Account row (audit only).
+- Final review P2/P3 (recorded, not blocking):
+  - Deal Brief: a confirmed problem outcome's buyer quote is not shown under
+    PROBLEM (only BIDs fill sections).
+  - WRONG IF can fall back to a question.
+  - HISTORY does not turn caution on a last response of not_priority /
+    problem_rejected (the conversation gate now refuses the colleague send).
+  - Two dispositions with no thesis could pair as a contradiction.
+  - The capture extractor can propose continuation lines or Otter-style
+    transcripts (speaker header on its own line) as buyer candidates. A human
+    still confirms each one.
+  - Account motion also has these gaps:
+    - enroll's motion check is not under the account lock;
+    - an unsubscribe with no disposition releases the account at once;
+    - the owner's follow-ups continue while a colleague's motion starts after
+      the 5-day unlock.
+  - Old first-touch Gmail drafts stay live after a later hold (pre-Phase 2).
+  - Health:
+    - the HubSpot probe reads companies only, not deals scope;
+    - a gap-mailbox dryrun advances lastSuccessAt.
+  - Deal observation skips a deal with an unreadable createdate.
+  - The meeting outcome is not under the capture lock.
+  - Concurrent background runs can repeat research (cost only).
+  - UX:
+    - evidence USE / Draft success messages unmount with the fact;
+    - "System details on the full action pack" copy points at a link removed
+      in E;
+    - silent failures in motion / angle / link actions;
+    - the meeting outcome preselects "Qualified problem";
+    - an unconfirmable candidate gives no reason;
+    - tap targets are under 44px;
+    - iOS zooms small inputs;
+    - suggested angles say "yard".
