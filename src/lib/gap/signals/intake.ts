@@ -148,12 +148,28 @@ export async function resolvesToPrivate(host: string, lookup: (h: string) => Pro
   } catch {
     return true;
   }
-  return addrs.length === 0 || addrs.some((a) => isNetworkPrivateHost(a) || isReservedV4(a));
+  return addrs.length === 0 || addrs.some((a) => isPrivateAddress(a));
 }
 
 async function defaultLookup(host: string): Promise<string[]> {
   const { lookup } = await import('node:dns/promises');
   return (await lookup(host, { all: true })).map((r) => r.address);
+}
+
+/**
+ * A RESOLVED address (dogfood fix, 2026-09-28): IPv4 private/reserved ranges, and for IPv6 loopback, unspecified,
+ * unique-local fc00::/7, link-local fe80::/10, multicast ff00::/8 and IPv4-mapped private. A public IPv6 address is
+ * public (Vercel resolves most publishers to IPv6; treating every IPv6 answer as private refused them all).
+ */
+export function isPrivateAddress(addr: string): boolean {
+  const a = addr.trim().toLowerCase();
+  if (!a.includes(':')) return isNetworkPrivateHost(a) || isReservedV4(a);
+  if (a === '::' || a === '::1') return true;
+  const mapped = /^::ffff:(\d+\.\d+\.\d+\.\d+)$/.exec(a);
+  if (mapped) return isNetworkPrivateHost(mapped[1]) || isReservedV4(mapped[1]);
+  const first = parseInt(a.split(':')[0] || '0', 16);
+  if (Number.isNaN(first)) return true;
+  return (first & 0xfe00) === 0xfc00 || (first & 0xffc0) === 0xfe80 || (first & 0xff00) === 0xff00;
 }
 
 /** CGNAT 100.64/10, benchmarking 198.18/15, multicast and reserved (review A P1). */
@@ -418,7 +434,14 @@ export async function resolveSignalAccount(prisma: PrismaLike, input: ResolveInp
       },
       select: { account_name: true },
     });
-    for (const l of links) if (!found.has(l.account_name)) found.set(l.account_name, `the source is on ${host}, the company's own domain`);
+    // A domain shared by several accounts (a parent's domain linked to its brands) says nothing on its own.
+    const owners = [...new Set(links.map((l) => l.account_name))];
+    if (owners.length === 1 && !found.has(owners[0])) found.set(owners[0], `the source is on ${host}, the company's own domain`);
+    // The company's own newsroom (dogfood fix): the page is published on a host named for exactly one
+    // named account (pepsico.com and "PepsiCo"): that account is the publisher, whoever else is named.
+    const label = host.split('.').slice(-2, -1)[0] ?? '';
+    const publisher = [...found.keys()].filter((name) => label.length >= 4 && norm(name).replace(CORP_SUFFIX, ' ').replace(/\s+/g, '') === label);
+    if (found.size > 1 && publisher.length === 1) return { resolution: 'resolved', accountName: publisher[0], basis: 'company_newsroom', candidates: [...found.entries()].map(([name, why]) => ({ name, why })) };
   }
   const candidates = [...found.entries()].map(([name, why]) => ({ name, why }));
   if (candidates.length === 1)

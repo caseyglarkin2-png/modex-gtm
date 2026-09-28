@@ -90,7 +90,7 @@ event. Nothing else is added.
 
 | Release | Scope | Branch | PR | Merge | Production |
 |---|---|---|---|---|---|
-| A | Signal intake + Share to GAP | feat/gap-signal-a-intake | | | |
+| A | Signal intake + Share to GAP | feat/gap-signal-a-intake | #287 | 8a9cc4c7 | READY; 6 real shares through the prod UI at 390px, 0.9-1.5s each, no horizontal scroll |
 | B | Resolution, clustering, promotion, signal research | | | | |
 | C | Account watches + scheduled discovery | | | | |
 | D | Research aperture | | | | |
@@ -155,4 +155,19 @@ event. Nothing else is added.
   kept, `amp` is stripped); the account universe is cached per process for 5
   minutes; trailing punctuation is not part of a shared URL; 44px tap targets.
 - Mutations RED then restored for each.
+
+### Release A production dogfood (2026-09-28) and hotfix
+Six real links shared through the production UI (`/gap/signals/new?url=`, 390px,
+the signed-in rig): each saved in 0.9-1.5s after page load, no horizontal scroll.
+The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
+- Every metadata fetch from Vercel failed "private host": Vercel resolves most
+  publishers to IPv6 and the DNS check treated every IPv6 answer as private.
+  Now a resolved IPv6 address is private only in loopback, unspecified,
+  fc00::/7, fe80::/10, ff00::/8 or IPv4-mapped private ranges.
+- The PepsiCo newsroom release ("PepsiCo and Gatik announce...") went
+  AMBIGUOUS: the vendor is named too, and pepsico.com is linked to two brands.
+  A domain shared by several accounts is no longer identity evidence, and a page
+  on a host named for exactly one of the named accounts resolves to that
+  publisher (`company_newsroom`). Off the newsroom, two named companies stay
+  ambiguous.
 
