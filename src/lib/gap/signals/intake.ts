@@ -204,9 +204,10 @@ function metaContent(html: string, keys: string[]): string | null {
 export function parseSignalMeta(html: string): SignalMeta {
   const title = metaContent(html, ['og:title', 'twitter:title']) ?? (/<title[^>]*>([\s\S]*?)<\/title>/i.exec(html)?.[1] ? decode(/<title[^>]*>([\s\S]*?)<\/title>/i.exec(html)![1]) : null);
   const rawDate =
-    metaContent(html, ['article:published_time', 'og:article:published_time', 'datePublished', 'pubdate', 'publish-date', 'date', 'dc.date', 'parsely-pub-date']) ??
+    // Review B P2: only an ARTICLE publication date. A generic `date` meta or the first <time> on a page is often
+    // a sidebar item or the modified date and could make an old story look fresh.
+    metaContent(html, ['article:published_time', 'og:article:published_time', 'datePublished', 'pubdate', 'publish-date', 'parsely-pub-date']) ??
     /"datePublished"\s*:\s*"([^"]+)"/i.exec(html)?.[1] ??
-    /<time[^>]+datetime=["']([^"']+)["']/i.exec(html)?.[1] ??
     null;
   const d = rawDate ? new Date(rawDate) : null;
   return {

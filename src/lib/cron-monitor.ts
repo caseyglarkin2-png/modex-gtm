@@ -72,6 +72,8 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   { name: 'gap-mailbox', label: 'GAP Mailbox Intake', path: '/api/cron/gap-mailbox', schedule: '*/10 * * * *' },
   // gap-background-research (Phase 2 B1): prepares the Verified Evidence Inbox; research only, never promotes or sends.
   { name: 'gap-background-research', label: 'GAP Background Evidence Research', path: '/api/cron/gap-background-research', schedule: '40 10 * * *' },
+  // gap-signal-process (Signal Intelligence B): retry unreadable signal pages, cluster one event's sources, promote verified signals to Pounce.
+  { name: 'gap-signal-process', label: 'GAP Signal Processing', path: '/api/cron/gap-signal-process', schedule: '*/30 * * * *' },
 ];
 
 function cronKey(name: string) {

@@ -16,7 +16,8 @@ import { extractFactSentences, htmlToText } from './facts';
 
 export interface Candidate {
   /** `manual`: a public URL + sentence Casey typed, verified by the same contract (research/run.ts verifyCandidate). */
-  provider: 'edgar' | 'web' | 'manual';
+  /** `signal`: a sentence from the page of a signal Casey shared or GAP discovered (Signal Intelligence), verified by the same contract. */
+  provider: 'edgar' | 'web' | 'manual' | 'signal';
   url: string;
   title: string;
   publishedAt: Date | null;

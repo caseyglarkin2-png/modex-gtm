@@ -246,3 +246,10 @@ describe('production dogfood fixes', () => {
   });
 });
 
+describe('review B P2: only an article publication date', () => {
+  it('a generic date meta or a stray <time> is not the publication date', () => {
+    expect(parseSignalMeta('<title>x</title><meta name="date" content="2026-09-27"><time datetime="2026-09-27">today</time>').publishedAt).toBeNull();
+    expect(parseSignalMeta('<script type="application/ld+json">{"datePublished":"2024-03-01T00:00:00Z"}</script>').publishedAt).toEqual(new Date('2024-03-01T00:00:00Z'));
+  });
+});
+

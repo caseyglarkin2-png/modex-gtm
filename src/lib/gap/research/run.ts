@@ -75,6 +75,11 @@ export interface ResearchDeps {
   edgar?: (accountName: string, now: Date) => Promise<{ candidates: Candidate[]; note: string }>;
   web?: (accountName: string, focus: string) => Promise<{ candidates: Candidate[]; note: string }>;
   fetchText?: FetchText;
+  /**
+   * Signal Intelligence B: extra candidates from the pages of the signals being followed up, with the page text
+   * this run fetched (SSRF-safe). They pass the SAME verifyCandidate contract as every other candidate.
+   */
+  extra?: () => Promise<{ candidates: Candidate[]; note: string; pages?: Map<string, string> }>;
 }
 
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');
@@ -83,13 +88,17 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const notes: string[] = [];
   const providerErrors: Record<string, string> = {};
   const candidates: Candidate[] = [];
-  for (const [name, run] of [
+  const seededPages = new Map<string, string>();
+  const providers: Array<readonly [string, () => Promise<{ candidates: Candidate[]; note: string; pages?: Map<string, string> }>]> = [
     ['edgar', () => (deps.edgar ?? ((a, n) => edgarCandidates(a, n)))(input.accountName, input.now)],
     ['web', () => (deps.web ?? webCandidates)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '))],
-  ] as const) {
+    ...(deps.extra ? [['signal', deps.extra] as const] : []),
+  ];
+  for (const [name, run] of providers) {
     try {
       const r = await run();
       candidates.push(...r.candidates);
+      for (const [u, t] of r.pages ?? []) seededPages.set(u, t);
       notes.push(`${name}: ${r.note}`);
     } catch (err) {
       providerErrors[name] = err instanceof Error ? err.message : String(err);
@@ -99,6 +108,8 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
 
   // Verify every candidate at its own source (the ONE verification contract, verifyCandidate).
   const ctx = verificationContext(input.accountName, deps.fetchText);
+  // The signal page text this run already fetched safely is the source it is verified against.
+  for (const [u, t] of seededPages) ctx.pages.set(u, t);
   const accepted: Array<Candidate & { publishedAt: Date }> = [];
   const rejected: Array<{ url: string; reason: string }> = [];
   const seen = new Set<string>();
@@ -115,7 +126,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const run = await createResearchRun(prisma, {
     accountName: input.accountName,
     personaId: input.personaId,
-    status: Object.keys(providerErrors).length === 2 ? 'failed' : Object.keys(providerErrors).length ? 'partial' : 'succeeded',
+    status: Object.keys(providerErrors).length >= 2 && Object.keys(providerErrors).length === providers.length ? 'failed' : Object.keys(providerErrors).length ? 'partial' : 'succeeded',
     runKey: `gap_research:${input.accountName}:${input.personaId ?? 'account'}:${input.now.toISOString()}`,
     providerStatus: { purpose: 'gap_research_this', hypothesisId: input.hypothesisId, decisionId: input.decisionId, problemFamily: input.problemFamily, notes },
     errorMap: providerErrors,

@@ -11,6 +11,11 @@
  *   S3 a parent + subsidiary story is AMBIGUOUS, never silently assigned; Casey
  *      assigns it; WRONG ACCOUNT un-resolves it
  *   S4 a conference note is operator context (no link, no research, no evidence)
+ *   S5 a queued shared signal is followed up by REAL background research: the
+ *      sentence on its own page is verified verbatim, dated, stored as a
+ *      verified fact; the signal settles fact_found; no hypothesis or link moves
+ *   S6 the verified signal is promoted through the Pounce spine; a raw one is not
+ *   S7 two outlets carrying the same story cluster into ONE event, both kept
  * Every row it creates is removed in a finally block. Report:
  * docs/gap/signals-e2e-latest.md (no secrets).
  */
@@ -19,6 +24,9 @@ import { execSync } from 'node:child_process';
 import { PrismaClient } from '@prisma/client';
 import { captureSignal } from '../../src/lib/gap/signals/intake';
 import { applySignalOp, listSignals } from '../../src/lib/gap/signals/ops';
+import { processSignals } from '../../src/lib/gap/signals/process';
+import { runBackgroundResearch } from '../../src/lib/gap/research/background';
+import { hashUrl } from '../../src/lib/pounce/ingest';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const ACTOR = 'casey@freightroll.com';
@@ -57,6 +65,8 @@ async function main(): Promise<number> {
   const pages: Record<string, string> = {
     [`https://news.example.com/${tag}/network`]: `<meta property="og:title" content="${parent} opens new distribution center with automated yard"><meta property="article:published_time" content="2026-09-20T12:00:00Z">`,
     [`https://news.example.com/${tag}/both`]: `<title>${parent} and ${child} expand Texas network</title>`,
+    [`https://outlet-a.example.com/news/${tag}-opens-dallas-distribution-center-with-automated-yard/1`]: `<meta property="og:title" content="${parent} opens Dallas distribution center with automated yard"><meta property="article:published_time" content="2026-09-21T12:00:00Z">`,
+    [`https://outlet-b.example.com/wire/${tag}-opens-dallas-distribution-center-with-automated-yard/99`]: `<meta property="og:title" content="${parent} opens Dallas distribution center with automated yard (syndicated)"><meta property="article:published_time" content="2026-09-22T08:00:00Z">`,
   };
   const fetchHtml = async (url: string) => {
     const bare = url.replace('://www.', '://');
@@ -111,6 +121,58 @@ async function main(): Promise<number> {
     expect('S4 conference', !research.ok && research.reason === 'no_link', 'a conference note was queued for public research');
     expect('S4 conference', JSON.stringify(await counts()) === JSON.stringify(before), 'a signal became evidence or a hypothesis');
     pass('S4 conference', 'a no-link conference note is kept as Casey\'s context on the account; it cannot be researched as public evidence and wrote no evidence, BID or hypothesis');
+
+    // S5: real research follows up the queued shared signal (s1). Its page states a verifiable fact.
+    const factSentence = `${parent} will open a new distribution center in Dallas, Texas in 2027 with an automated yard.`;
+    pages[`https://news.example.com/${tag}/network`] += `<p>${factSentence}</p>`;
+    const links0 = await prisma.hypothesisSignal.count();
+    const bg = await runBackgroundResearch(
+      prisma,
+      { now: new Date(), cap: 1 },
+      {
+        loadGroups: async () => [],
+        listQueue: async () => ({ asOf: null, items: [], truncated: false }),
+        edgar: async () => ({ candidates: [], note: 'edgar skipped (scratch)' }),
+        web: async () => ({ candidates: [], note: 'web skipped (scratch)' }),
+        fetchText: async () => { throw new Error('no network in scratch'); },
+        fetchHtml,
+      },
+    );
+    const row5 = await prisma.gapSignal.findUniqueOrThrow({ where: { id: s1.signal.id } });
+    expect('S5 research', bg.researched.length === 1 && bg.researched[0].accountName === parent && row5.research_status === 'fact_found', `research -> ${JSON.stringify({ bg: bg.researched, failed: bg.failed, skipped: bg.skipped, status: row5.research_status, meta: row5.metadata })}`);
+    const fact = await prisma.prospectingSignal.findFirst({ where: { account_name: parent, source_kind: 'evidence_record' }, select: { evidence_text: true, metadata: true, evidence_url: true } });
+    expect('S5 research', fact?.evidence_text === factSentence && (fact?.metadata as { verified?: string } | null)?.verified === 'excerpt_found_at_source', `fact -> ${JSON.stringify(fact)}`);
+    expect('S5 research', (await prisma.hypothesisSignal.count()) === links0 && (await prisma.prospectingHypothesis.count()) === before.hypotheses, 'research linked evidence or touched a hypothesis');
+    pass('S5 research', `real background research followed up the shared link: the sentence on its own page was verified verbatim and dated, stored as a verified fact ("${factSentence.slice(0, 60)}..."); the signal settled FACT READY; no hypothesis, no evidence link`);
+
+    // S6: promotion through the spine (a scratch spine: the fake ingest writes the trigger row the real one would).
+    const ingested: string[] = [];
+    const fakeIngest = async (raw: Array<{ url: string; accountSlug: string; accountName: string; title: string; score: number; categories: string[] }>) => {
+      for (const t of raw) {
+        ingested.push(t.url);
+        await prisma.pounceTrigger.create({ data: { url_hash: hashUrl(t.url), account_slug: t.accountSlug, account_name: t.accountName, title: t.title, url: t.url, source: 'web', score: t.score, categories: t.categories } });
+      }
+      return { received: raw.length, created: raw.length, duplicate: 0, pinged: 0, stamped: 0 };
+    };
+    const proc = await processSignals(prisma, { now: new Date() }, { fetchHtml, ingest: fakeIngest as never });
+    const row6 = await prisma.gapSignal.findUniqueOrThrow({ where: { id: s1.signal.id } });
+    expect('S6 promotion', proc.promoted === 1 && row6.promoted_trigger_id !== null && ingested.length === 1 && ingested[0].includes('/network'), `promotion -> ${JSON.stringify({ proc, promoted: row6.promoted_trigger_id, ingested })}`);
+    const raw4 = await prisma.gapSignal.findUniqueOrThrow({ where: { id: s4.signal.id } });
+    expect('S6 promotion', raw4.promoted_trigger_id === null, 'an unverified signal was promoted');
+    pass('S6 promotion', `only the VERIFIED signal entered the Pounce spine (trigger ${row6.promoted_trigger_id}); raw, ambiguous and conference signals did not`);
+
+    // S7: two outlets, one story.
+    const a = await captureSignal(prisma, { url: `https://outlet-a.example.com/news/${tag}-opens-dallas-distribution-center-with-automated-yard/1`, origin: 'discovery', actor: 'gap-discovery', now: new Date() }, { fetchHtml });
+    const b = await captureSignal(prisma, { url: `https://outlet-b.example.com/wire/${tag}-opens-dallas-distribution-center-with-automated-yard/99`, origin: 'discovery', actor: 'gap-discovery', now: new Date() }, { fetchHtml });
+    if (!a.ok || !b.ok) throw new Error('capture failed');
+    created.push(a.signal.id, b.signal.id);
+    await processSignals(prisma, { now: new Date() }, { fetchHtml, ingest: fakeIngest as never });
+    const [ra, rb] = await Promise.all([prisma.gapSignal.findUniqueOrThrow({ where: { id: a.signal.id } }), prisma.gapSignal.findUniqueOrThrow({ where: { id: b.signal.id } })]);
+    expect('S7 cluster', ra.event_id !== null && ra.event_id === rb.event_id, `events -> ${JSON.stringify({ a: ra.event_id, b: rb.event_id })}`);
+    const inbox7 = await listSignals(prisma, { limit: 50 });
+    const lead = inbox7.find((v) => v.eventId === ra.event_id);
+    expect('S7 cluster', !!lead && lead.alsoCoveredBy >= 1 && inbox7.filter((v) => v.eventId === ra.event_id).length === 1, 'the inbox shows the event more than once, or lost a source');
+    pass('S7 cluster', `two outlets carrying the same story are ONE event (${ra.event_id}) with both sources kept; the inbox shows it once, "+${lead!.alsoCoveredBy} more source"`);
   } catch (err) {
     if (err instanceof StepFailure) failure = err;
     else {
@@ -120,10 +182,16 @@ async function main(): Promise<number> {
     }
   } finally {
     const sigs = await prisma.gapSignal.deleteMany({ where: { OR: [{ id: { in: created } }, { account_name: { in: accounts } }, { url: { contains: tag } }] } });
+    const trig = await prisma.pounceTrigger.deleteMany({ where: { account_name: { in: accounts } } });
+    const runIds = (await prisma.researchRun.findMany({ where: { account_name: { in: accounts } }, select: { id: true } })).map((r) => r.id);
+    const facts = await prisma.prospectingSignal.deleteMany({ where: { account_name: { in: accounts } } });
+    await prisma.evidenceRecord.deleteMany({ where: { account_name: { in: accounts } } });
+    await prisma.researchRun.deleteMany({ where: { id: { in: runIds } } });
+    pass('cleanup-research', `removed ${trig.count} triggers, ${facts.count} facts, ${runIds.length} research runs`);
     const audits = await prisma.$transaction(async (tx) => {
       await tx.$executeRawUnsafe('ALTER TABLE gap_audit_events DISABLE TRIGGER gap_append_only_audit_events');
       try {
-        return await tx.gapAuditEvent.deleteMany({ where: { subject_type: 'gap_signal', subject_id: { in: created } } });
+        return await tx.gapAuditEvent.deleteMany({ where: { OR: [{ subject_type: 'gap_signal', subject_id: { in: created } }, { kind: { in: ['research.completed', 'research.background_run'] }, created_at: { gte: new Date(Date.now() - 3_600_000) } }] } });
       } finally {
         await tx.$executeRawUnsafe('ALTER TABLE gap_audit_events ENABLE TRIGGER gap_append_only_audit_events');
       }

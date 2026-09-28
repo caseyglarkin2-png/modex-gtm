@@ -52,6 +52,10 @@
       "schedule": "40 10 * * *"
     },
     {
+      "path": "/api/cron/gap-signal-process/",
+      "schedule": "*/30 * * * *"
+    },
+    {
       "path": "/api/cron/gap-hubspot-replies/?mode=apply",
       "schedule": "45 12 * * *"
     }
