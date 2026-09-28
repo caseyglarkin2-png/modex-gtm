@@ -15,6 +15,8 @@ import { cn } from '@/lib/utils';
 const TABS = [
   { label: 'Cockpit', href: '/gap' },
   // Phase 2 D1: capture buyer truth right after a conversation (phone first).
+  // Signal Intelligence: share a link or a conference note; the Signal Inbox.
+  { label: 'Signals', href: '/gap/signals' },
   { label: 'Capture', href: '/gap/capture' },
   { label: 'All hypotheses', href: '/gap/hypotheses' },
   { label: 'Learning', href: '/gap/learning' },

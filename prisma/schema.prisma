@@ -1360,6 +1360,68 @@ model ProspectingSignal {
   @@map("prospecting_signals")
 }
 
+/// GAP SIGNAL INTELLIGENCE (2026-09-28): one SOURCE DOCUMENT that may matter,
+/// captured BEFORE we know whose it is or whether it is true. A signal is not a
+/// fact: nothing here is buyer truth or outreach evidence. PounceTrigger needs a
+/// resolved account + score and fires Slack/HubSpot side effects; ProspectingSignal
+/// needs an Account row. This holds what precedes both: Casey's shared link, a
+/// conference note, a discovered story. Rows sharing `event_id` are ONE event
+/// covered by several sources (story clustering; every source is kept).
+/// Casey's `note` is operator context, never evidence. Promotion to the Pounce
+/// spine (`promoted_trigger_id`) happens only once the account is resolved.
+model GapSignal {
+  id                  String    @id @default(cuid())
+  /// null for a conference note with no link
+  url                 String?
+  /// sha256 of the normalized URL (tracking params, fragments, www stripped); dedupe key
+  url_hash            String?   @unique
+  title               String?
+  /// source host (e.g. reuters.com) or 'conference'
+  source_name         String?
+  published_at        DateTime?
+  /// casey_share | conference_note | discovery | pounce_scan
+  origin              String
+  /// news | press_release | sec_filing | job_posting | procurement | vendor | social | company_site | other
+  source_class        String    @default("other")
+  /// Casey's own words, verbatim; operator context, NEVER evidence
+  note                String?
+  account_hint        String?
+  /// the resolved account (null until resolution)
+  account_name        String?
+  /// [{name, why}] when resolution found more than one plausible account
+  candidates          Json?
+  /// needs_account | ambiguous | resolved | rejected
+  resolution          String    @default("needs_account")
+  /// explicit_account | named_in_source | alias | domain | discovery_query | human
+  resolution_basis    String?
+  /// none | queued | researching | fact_found | no_usable_fact | contradiction
+  research_status     String    @default("none")
+  research_run_id     String?
+  /// outreach_evidence_candidate | account_context | leadership | deal_context | risk | research_lead
+  relevance           String    @default("research_lead")
+  /// taxonomy keys from the Pounce scorer (AUTONOMY, YARD, CAPEX, ...), deterministic
+  categories          String[]  @default([])
+  score               Int?
+  /// the canonical event this source belongs to (the event's first source id)
+  event_id            String?
+  promoted_trigger_id Int?
+  /// human choice: ignored | irrelevant | wrong_account | already_knew | good_context | not_sayable | use
+  feedback            String?
+  feedback_by         String?
+  feedback_at         DateTime?
+  submitted_by        String
+  metadata            Json?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+
+  @@index([account_name, created_at])
+  @@index([resolution])
+  @@index([research_status])
+  @@index([event_id])
+  @@index([origin, created_at])
+  @@map("gap_signals")
+}
+
 /// GAP Prospecting OS (Sprint 6A): an explicitly registered alias for an
 /// account -- a name a real source emitted that a human or the hypothesize
 /// job confirmed maps to this account. `normalized_alias` is
