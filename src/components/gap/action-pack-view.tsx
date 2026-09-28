@@ -30,9 +30,12 @@ import { telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
 import { hypothesisSendable } from '@/lib/gap/research/evidence-gate';
-import { asStringList, humanWhyNow } from '@/lib/gap/ui/format';
+import { asStringList } from '@/lib/gap/ui/format';
 import { Badge } from '@/components/ui/badge';
 import { ColdOutboundButton } from './cold-outbound-button';
+import { SixLineBriefView } from './six-line-brief';
+import { buildBrief, loadBriefHistory } from '@/lib/gap/execution/six-line-brief';
+import { loadAngles, suggestAngle } from '@/lib/gap/motion/persona-angle';
 import { CopyButton } from './copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
 import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
@@ -156,12 +159,70 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         })
       : null;
 
-  const whyNow = humanWhyNow(hypothesis.why_now as string | null) || stripObservationCitations(hypothesis.observation ?? '').trim() || null;
+  // Phase 2 E1: the six-line brief leads (KNOW / THINK / LEARN / WHY YOU / HISTORY / WRONG IF);
+  // it replaces the separate "Why now" block (why now stays in the collapsed evidence below).
+  const briefPersonaId = typeof persona?.id === 'number' && pack.personaSource !== 'none' ? persona.id : null;
+  const [angles, briefHistory] = await Promise.all([
+    briefPersonaId ? loadAngles(prisma, [briefPersonaId]).catch(() => new Map()) : Promise.resolve(new Map()),
+    loadBriefHistory(prisma, {
+      accountName: hypothesis.account_name,
+      personaId: briefPersonaId,
+      email: persona?.email ?? null,
+      sent: touch && 'sent' in touch ? touch.sent.map((t) => ({ sentAt: t.sentAt })) : [],
+      now: new Date(),
+    }),
+  ]);
+  const brief = buildBrief({
+    hypothesis,
+    firstName: firstNameOf(persona?.name ?? null),
+    angle: briefPersonaId ? (angles.get(briefPersonaId)?.text ?? null) : null,
+    suggestedAngle: persona ? suggestAngle({ title: persona.title ?? null, personaKey: null, accountName: hypothesis.account_name }) : null,
+    history: briefHistory,
+  });
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
   const signals = Array.isArray(hypothesis.signals)
     ? hypothesis.signals.map((link: { signal?: unknown }) => link.signal).filter((s: unknown): s is Obj => isObj(s))
     : [];
+
+  // Phase 2 E2: one primary action per channel. A call card leads with the call; an embedded pack does
+  // not repeat the card's Call button (the number is shown, the card's Call checks HubSpot first).
+  const callFirst = decision?.action === 'call_now';
+  const callSection = callPack ? (
+      <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
+            {/* Last mile: a cold call re-reads HubSpot opportunity truth at the click; no raw tel: link. */}
+            {embedded ? (
+              <span className="text-xs text-[var(--muted-foreground)]">{persona?.phone ?? ''}</span>
+            ) : tel && decision && pack.personaSource === 'decision' ? (
+              <ColdOutboundButton decisionId={decision.id} channel="call" className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60">
+                Call {persona?.phone}
+              </ColdOutboundButton>
+            ) : tel ? (
+              <span className="text-xs text-[var(--muted-foreground)]">Call from the card (GAP checks HubSpot first)</span>
+            ) : (
+              <span className="text-xs italic text-[var(--muted-foreground)]">no phone on file</span>
+            )}
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Opener</p>
+            <p className="mt-1 text-sm" data-testid="call-opener">{callPack.opener}</p>
+          </div>
+          <details className="text-sm">
+            <summary className="cursor-pointer text-xs font-semibold text-[var(--muted-foreground)]">Diagnostics and voicemail</summary>
+            <div className="mt-2 space-y-2">
+              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Current state: </span>{callPack.diagnostic1}</p>
+              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Only after they say it is real: </span>{callPack.impactIfAcknowledged}</p>
+              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds): </span>{callPack.voicemail}</p>
+            </div>
+          </details>
+          <div className="flex flex-wrap gap-2">
+            <CopyButton text={callPack.opener} label="Copy call opener" />
+            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
+          </div>
+        </section>
+  ) : null;
 
   return (
     <div className="space-y-4" data-testid="action-pack" data-embedded={embedded ? 'true' : undefined}>
@@ -170,12 +231,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           The person requested for this action pack does not belong to {hypothesis.account_name} ({pack.personaRefused.replace(/_/g, ' ')}). Nothing is rendered for them.
         </p>
       ) : null}
-      {whyNow ? (
-        <section data-testid="why-now" className="rounded-md border border-[var(--border)] p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Why now</p>
-          <p className="mt-1">{whyNow}</p>
-        </section>
-      ) : null}
+      <SixLineBriefView brief={brief} personaId={briefPersonaId} accountName={hypothesis.account_name} />
+      {callFirst ? callSection : null}
 
       {touch && touch.state !== 'not_started' ? (
         <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
@@ -260,39 +317,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </details>
       ) : null}
 
-      {callPack ? (
-        <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
-            {/* Last mile: a cold call re-reads HubSpot opportunity truth at the click; no raw tel: link. */}
-            {tel && decision && pack.personaSource === 'decision' ? (
-              <ColdOutboundButton decisionId={decision.id} channel="call" className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60">
-                Call {persona?.phone}
-              </ColdOutboundButton>
-            ) : tel ? (
-              <span className="text-xs text-[var(--muted-foreground)]">Call from the card (GAP checks HubSpot first)</span>
-            ) : (
-              <span className="text-xs italic text-[var(--muted-foreground)]">no phone on file</span>
-            )}
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-[var(--muted-foreground)]">Opener</p>
-            <p className="mt-1 text-sm" data-testid="call-opener">{callPack.opener}</p>
-          </div>
-          <details className="text-sm">
-            <summary className="cursor-pointer text-xs font-semibold text-[var(--muted-foreground)]">Diagnostics and voicemail</summary>
-            <div className="mt-2 space-y-2">
-              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Current state: </span>{callPack.diagnostic1}</p>
-              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Only after they say it is real: </span>{callPack.impactIfAcknowledged}</p>
-              <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds): </span>{callPack.voicemail}</p>
-            </div>
-          </details>
-          <div className="flex flex-wrap gap-2">
-            <CopyButton text={callPack.opener} label="Copy call opener" />
-            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
-          </div>
-        </section>
-      ) : null}
+      {callFirst ? null : callSection}
 
       <details className="rounded-md border border-[var(--border)] p-3" data-testid="why-gap">
         <summary className="cursor-pointer text-sm font-medium">Why GAP thinks this (evidence, and what would prove us wrong)</summary>

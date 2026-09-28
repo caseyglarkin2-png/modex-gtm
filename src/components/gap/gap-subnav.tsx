@@ -27,7 +27,7 @@ function isActive(pathname: string, href: string): boolean {
 export function GapSubnav() {
   const pathname = usePathname();
   return (
-    <nav aria-label="GAP OS" data-testid="gap-subnav" className="flex items-center gap-1 border-b border-[var(--border)]">
+    <nav aria-label="GAP OS" data-testid="gap-subnav" className="flex flex-wrap items-center gap-x-1 border-b border-[var(--border)]">
       {TABS.map((tab) => {
         const active = isActive(pathname, tab.href);
         return (

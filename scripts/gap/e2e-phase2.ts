@@ -18,6 +18,9 @@
  *      reply with its own sender -> a human disposition clears the pause
  *   G4 conference capture: a pasted note -> candidate BIDs with verbatim
  *      quotes -> confirm two, reject one -> only the two are buyer truth
+ *   G6 action pack: the READY person's six-line brief (KNOW verified, THINK
+ *      inference, WHY YOU Casey's angle, HISTORY current, WRONG IF) -> the send
+ *      preview runs every gate -> STOP before any send
  *
  * Rails: scratch database only (exit 2 otherwise); every credential scrubbed;
  * research providers are in-process stubs (no network); every person is a
@@ -53,6 +56,10 @@ import { accountRepliedRecently } from '../../src/lib/gap/replies/account-reply'
 import { recordDisposition } from '../../src/lib/gap/disposition/service';
 import { createCapture, decideCandidate } from '../../src/lib/gap/capture/store';
 import { quoteInSource } from '../../src/lib/gap/capture/extract';
+import { buildBrief, loadBriefHistory } from '../../src/lib/gap/execution/six-line-brief';
+import { setAngle } from '../../src/lib/gap/motion/persona-angle';
+import { getHypothesis } from '../../src/lib/gap/hypothesis/service';
+import { DIRECT_SENT } from '../../src/lib/gap/execution/draft-ledger';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'phase2-e2e-latest.md');
@@ -373,6 +380,25 @@ async function main(): Promise<number> {
       if (!preview.ok || !('preview' in preview)) return preview;
       return sendSellerEmail(prisma, { decisionId, actor: ACTOR, now, confirm: { contentHash: preview.preview.contentHash, recipient: preview.preview.to } }, deps);
     };
+    // ---- G6: the READY person's action pack leads with the six-line brief; preview reachable; STOP before sending.
+    const primaryPid = readyEmail[0].persona.id as number;
+    created.captureIds.push(String(primaryPid)); // the angle's audit rows are keyed on the persona id
+    await setAngle(prisma, { personaId: primaryPid, text: 'Owns the Texas DC network where autonomous linehaul terminates.', source: 'human', actor: ACTOR });
+    const briefHyp = await getHypothesis(prisma, readyEmail[0].hypothesis!.id);
+    const briefHistory = await loadBriefHistory(prisma, { accountName: account, personaId: primaryPid, email: readyEmail[0].persona.email, sent: [], now }, { opportunity: async () => SCRATCH_NO_DEALS_TRUTH });
+    const angleRows = await prisma.gapAuditEvent.findMany({ where: { kind: 'persona.angle', subject_id: String(primaryPid) }, orderBy: { created_at: 'desc' }, take: 1, select: { payload: true } });
+    const brief = buildBrief({ hypothesis: briefHyp, firstName: 'VP1', angle: String((angleRows[0]?.payload as { text?: string } | undefined)?.text ?? '') || null, suggestedAngle: null, history: briefHistory });
+    expect('G6 brief', brief.know.fact !== null && brief.know.fact.quote === FACT, `KNOW -> ${JSON.stringify(brief.know)}`);
+    expect('G6 brief', !!brief.think && !!brief.learn && !!brief.wrongIf, `THINK/LEARN/WRONG IF -> ${JSON.stringify({ think: brief.think, learn: brief.learn, wrongIf: brief.wrongIf })}`);
+    expect('G6 brief', brief.whyYou?.owned === true && brief.whyYou.text.startsWith('Owns the Texas DC network'), `WHY YOU -> ${JSON.stringify(brief.whyYou)}`);
+    expect('G6 brief', brief.history.some((l) => l === 'HubSpot opportunity CLEAR, checked moments ago') && brief.history[0] === 'No GAP touches to VP1 yet', `HISTORY -> ${JSON.stringify(brief.history)}`);
+    const sentBefore = await prisma.gapAuditEvent.count({ where: { kind: DIRECT_SENT } });
+    const preview = await sendSellerEmail(prisma, { decisionId: readyEmail[0].id, actor: ACTOR, now }, sellerDeps(tag, threadFor));
+    expect('G6 preview', preview.ok && 'preview' in preview, `preview -> ${JSON.stringify(preview)}`);
+    expect('G6 preview', (await prisma.gapAuditEvent.count({ where: { kind: DIRECT_SENT } })) === sentBefore && outbox.length === 0, 'the preview sent something');
+    pass('G6 brief', `KNOW "${FACT.slice(0, 50)}..." (verified) · THINK labelled inference · LEARN "${brief.learn}" · WHY YOU Casey's angle · HISTORY ${brief.history.join(' | ')} · WRONG IF "${brief.wrongIf}"`);
+    pass('G6 preview', 'the send preview ran every gate and returned the final email; nothing was sent (STOP before confirm)');
+
     const primarySend = await send(readyEmail[0].id);
     expect('G2 second motion refused', primarySend.ok && 'sent' in primarySend, `primary send -> ${JSON.stringify(primarySend)}`);
     const secondCard = emailCards.find((i) => i.id !== readyEmail[0].id)!;

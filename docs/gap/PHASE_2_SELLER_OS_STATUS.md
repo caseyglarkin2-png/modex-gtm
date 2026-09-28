@@ -24,8 +24,8 @@ release, merged and production-verified before the next starts.
 | A | Truth infrastructure + health | feat/gap-phase2-a-truth-health | #278 | 6df1938f | READY, health endpoint HEALTHY in prod |
 | B | Verified evidence inbox | feat/gap-phase2-b-evidence-inbox | #279 | 6d34cd6a | READY; one prod background run, protected diff identical |
 | C | Account motion v0 | feat/gap-phase2-c-account-motion | #280 | ded3ac0b | READY; cockpit NEXT UP v2 verified in prod |
-| D | Mobile buyer truth capture v0 | feat/gap-phase2-d-buyer-truth | | | |
-| E | Seller action pack v2 | | | | |
+| D | Mobile buyer truth capture v0 | feat/gap-phase2-d-buyer-truth | #281 | c15aa366 | READY; /gap/capture checked at phone width |
+| E | Seller action pack v2 | feat/gap-phase2-e-action-pack | | | |
 | F | In Deals + Deal Brief v0 | | | | |
 | G | Integrated seller-OS acceptance | | | | |
 
@@ -319,6 +319,52 @@ release, merged and production-verified before the next starts.
   own sender; a human referral disposition clears the hold) and G4 (conference
   note -> 4 verbatim candidates, zero BIDs before confirmation -> confirm 2,
   reject 1 -> exactly 2 human-confirmed BIDs with the exact quotes).
+
+### Release D production verification (2026-09-28)
+- Merge c15aa366 served (dpl_RuMZZk82MBSq2tZVqEXesj3g7Y6f). `/gap/capture` in a
+  signed-in rig tab at phone width: renders (Who / conversation / note / Save),
+  no horizontal page scroll. Found: the GAP sub-nav clipped its 4th tab on a
+  phone after "Capture" was added; fixed in Release E (sub-nav wraps). Nothing
+  was saved in production.
+
+## Release E: seller action pack v2
+
+### E1. Six-line brief (top of every action pack)
+- `execution/six-line-brief.ts` + `components/gap/six-line-brief.tsx`:
+  KNOW = the primary verified outreach fact only (title, date, "✓ verified",
+  the quote; a keyword hit is "No verified fact"); THINK = problem hypothesis
+  labelled "Hypothesis (inference)"; LEARN = the first falsification question;
+  WHY YOU = Casey's PersonaAngle (edit in place) or a suggestion labelled "not
+  yours yet"; HISTORY = this person's GAP touches, colleagues in motion,
+  an untriaged account reply, the last buyer response, and HubSpot opportunity
+  truth read at render (bounded, UNKNOWN on failure), coloured clear / caution
+  / blocked; WRONG IF = what_a_no_means (else the second falsification
+  question). History that cannot be read says so. It replaces the separate
+  "Why now" block (why now stays in the collapsed evidence). No gate changed.
+
+### E2. Clutter removed (data kept)
+- A call_now card offers Call once (its primary); a LinkedIn card offers
+  LinkedIn once; an email card keeps Call / LinkedIn as secondary channels.
+- The embedded action pack no longer repeats the card's Call button (shows the
+  number); a call card's pack leads with the call script.
+- No "Action pack (history)" link on live cards (waiting / replied / complete).
+- Routing internals (rule id, priority, lane, target chip, evidence counts)
+  stay under a collapsed "System details (routing)" disclosure.
+- Inbox copy: a generic network fact reads "a change to the physical network"
+  (was "a network investment", shown on a divestiture in production).
+
+### E3. Mobile
+- The brief is one column below `sm` (label column from `sm`), words break;
+  the GAP sub-nav wraps instead of clipping.
+
+### Release E validation
+- Mutations RED then restored: KNOW shows an unverified fact; a suggested angle
+  shown as owned; an open deal not flagged in HISTORY; unreadable history shown
+  as clear; a duplicate Call on call cards.
+- `e2e-phase2.ts` G6: the READY primary's brief from real rows (KNOW the
+  verified fact, THINK inference, LEARN, WHY YOU Casey's angle, HISTORY "No GAP
+  touches ... HubSpot opportunity CLEAR, checked moments ago", WRONG IF); the
+  send preview ran every gate and nothing was sent.
 
 ## Debt recorded (not fixed in this program unless it blocks)
 

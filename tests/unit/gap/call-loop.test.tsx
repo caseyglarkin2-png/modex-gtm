@@ -50,7 +50,7 @@ describe('T8 inline call outcome', () => {
     const open = vi.spyOn(window, 'open').mockReturnValue(null);
     render(<DecisionCard item={item()} onAct={() => {}} />);
     expect(screen.queryByTestId('inline-call-outcome')).toBeNull();
-    fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /^Call$/ }));
+    fireEvent.click(screen.getByTestId('cold-call'));
     expect(await screen.findByTestId('inline-call-outcome')).toBeInTheDocument();
     expect(screen.getByTestId('call-mode-stub')).toHaveAttribute('data-persona', '41');
     fetchMock.mockRestore();
