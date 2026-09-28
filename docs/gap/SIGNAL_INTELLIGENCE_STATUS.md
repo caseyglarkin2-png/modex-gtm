@@ -91,8 +91,8 @@ event. Nothing else is added.
 | Release | Scope | Branch | PR | Merge | Production |
 |---|---|---|---|---|---|
 | A | Signal intake + Share to GAP | feat/gap-signal-a-intake | #287 | 8a9cc4c7 | READY; 6 real shares through the prod UI at 390px, 0.9-1.5s each, no horizontal scroll |
-| B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | | | |
-| C | Account watches + scheduled discovery | | | | |
+| B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | #289 | 5b936236 | READY (processing cron first tick pending at merge) |
+| C | Account watches + scheduled discovery | feat/gap-signal-c-discovery | | | |
 | D | Research aperture | | | | |
 | E | Inbox polish, dogfood, coverage, quality | | | | |
 
@@ -229,4 +229,40 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
   attempt (settled after 3). Cluster peers exclude ignored and unresolved rows.
 - Mutations RED then restored for each (two initially SURVIVED because one
   negative case tripped both checks; isolating tests added).
+
+## Release C: account watches + scheduled discovery
+
+- WATCH PROFILES (`signals/watch.ts`), generated, never configured: Account
+  rows in priority band A-C or Tier 1-2, every account with a GAP thesis, every
+  audited /for + demo-pack account, and every account where GAP holds a
+  buying committee (5+ people); E2E fixtures, "Unknown" and domain-named
+  placeholder rows excluded. Production: 74 accounts (16 priority, 7 thesis,
+  36 /for, plus buying committees; 47 with a canonical domain, 21 with a
+  ticker, 10 with aliases). Aliases from registered aliases and the parent
+  brand; Casey can add or remove one (`POST /api/gap/signal-watch`, a
+  "Watching N accounts" panel on /gap/signals). Themes: thesis problem
+  families first, then eight physical-network questions.
+- DISCOVERY (`signals/discovery.ts`, cron `gap-signal-discovery` every 2 hours):
+  the 10 least recently asked watched accounts per run, 2 themes each rotated
+  by day (every theme comes round in 4 days), Google News RSS (zero cost, the
+  Pounce news source), a politeness gap, a 200s budget. Kept only if the
+  headline names the account (or an alias), is under 21 days old and hits the
+  physical-network / risk / leadership taxonomy (finance noise dropped).
+  Captured through the one intake path (resolved by construction, basis
+  `discovery_query`, the page is not fetched). A strong operational story
+  (score >= 8) is queued for research as a `discovered_signal`.
+- Coverage: ~120 account-asks per day over 74 accounts (every account daily,
+  two themes each). Source classes: NEWS via Google News (links are Google
+  redirects: dedupe by article link, clustering by title; research finds the
+  primary source). SEC filings are covered by research (EDGAR), not discovery.
+  Jobs, procurement/government, vendor case studies and social are NOT
+  discovered automatically; Casey-shared links cover them.
+
+### Release C validation
+- Unit `signal-discovery` 7. Mutations RED then restored: headline need not
+  name the account (initially SURVIVED; an isolating item added), finance noise
+  kept, old stories kept, no rotation, strong story not queued, fixtures
+  watched, buying committee ignored, alias correction ignored.
+- Scratch E2E S8: two bounded questions; of three stories only the one naming
+  the account on the taxonomy was captured and queued; no trigger written.
 

@@ -16,6 +16,8 @@
  *      verified fact; the signal settles fact_found; no hypothesis or link moves
  *   S6 the verified signal is promoted through the Pounce spine; a raw one is not
  *   S7 two outlets carrying the same story cluster into ONE event, both kept
+ *   S8 scheduled discovery asks a watched account bounded questions and captures
+ *      only headlines that name it and hit the taxonomy; the strong one is queued
  * Every row it creates is removed in a finally block. Report:
  * docs/gap/signals-e2e-latest.md (no secrets).
  */
@@ -27,6 +29,8 @@ import { applySignalOp, listSignals } from '../../src/lib/gap/signals/ops';
 import { processSignals } from '../../src/lib/gap/signals/process';
 import { runBackgroundResearch } from '../../src/lib/gap/research/background';
 import { hashUrl } from '../../src/lib/pounce/ingest';
+import { runDiscovery } from '../../src/lib/gap/signals/discovery';
+import { DEFAULT_THEMES } from '../../src/lib/gap/signals/watch';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const ACTOR = 'casey@freightroll.com';
@@ -173,6 +177,24 @@ async function main(): Promise<number> {
     const lead = inbox7.find((v) => v.eventId === ra.event_id);
     expect('S7 cluster', !!lead && lead.alsoCoveredBy >= 1 && inbox7.filter((v) => v.eventId === ra.event_id).length === 1, 'the inbox shows the event more than once, or lost a source');
     pass('S7 cluster', `two outlets carrying the same story are ONE event (${ra.event_id}) with both sources kept; the inbox shows it once, "+${lead!.alsoCoveredBy} more source"`);
+
+    // S8: discovery (a fake news feed; real intake, real Postgres).
+    const feed = [
+      { title: `${child} deploys autonomous trucks and yard automation at new distribution center - FreightWaves`, url: `https://news.google.com/rss/articles/${tag}-K1`, source: 'FreightWaves', publishedAt: new Date(Date.now() - 2 * 86_400_000) },
+      { title: `${child} stock price target raised by analysts - MarketBeat`, url: `https://news.google.com/rss/articles/${tag}-K2`, source: 'MarketBeat', publishedAt: new Date(Date.now() - 2 * 86_400_000) },
+      { title: `Rival grocer opens distribution center in Ohio - Food Dive`, url: `https://news.google.com/rss/articles/${tag}-K3`, source: 'Food Dive', publishedAt: new Date(Date.now() - 2 * 86_400_000) },
+    ];
+    const asked: string[] = [];
+    const disc = await runDiscovery(
+      prisma,
+      { now: new Date(), accounts: 1, queriesPerAccount: 2 },
+      { news: async (q) => (asked.push(q), feed), profiles: async () => [{ accountName: child, aliases: [], domains: [], ticker: null, themes: [...DEFAULT_THEMES], tier: 'Tier 2', band: 'B', reasons: ['priority'] }], sleep: async () => undefined },
+    );
+    const found = await prisma.gapSignal.findMany({ where: { account_name: child, origin: 'discovery' }, select: { id: true, title: true, research_status: true, resolution_basis: true } });
+    created.push(...found.map((f) => f.id));
+    expect('S8 discovery', asked.length === 2 && asked.every((q) => q.startsWith(`"${child}" (`)) && found.length === 1 && found[0].research_status === 'queued' && found[0].resolution_basis === 'discovery_query', `discovery -> ${JSON.stringify({ asked, found, disc: disc.accounts })}`);
+    expect('S8 discovery', (await prisma.pounceTrigger.count({ where: { account_name: child } })) === 0, 'discovery wrote a Pounce trigger');
+    pass('S8 discovery', `2 bounded questions about ${child}; of 3 stories only the one naming it on the physical-network taxonomy was captured (finance noise and a rival's story dropped), queued for research as a discovered signal; no trigger written`);
   } catch (err) {
     if (err instanceof StepFailure) failure = err;
     else {
@@ -183,6 +205,14 @@ async function main(): Promise<number> {
   } finally {
     const sigs = await prisma.gapSignal.deleteMany({ where: { OR: [{ id: { in: created } }, { account_name: { in: accounts } }, { url: { contains: tag } }] } });
     const trig = await prisma.pounceTrigger.deleteMany({ where: { account_name: { in: accounts } } });
+    await prisma.$transaction(async (tx) => {
+      await tx.$executeRawUnsafe('ALTER TABLE gap_audit_events DISABLE TRIGGER gap_append_only_audit_events');
+      try {
+        await tx.gapAuditEvent.deleteMany({ where: { kind: 'signal.discovery', subject_id: { in: accounts } } });
+      } finally {
+        await tx.$executeRawUnsafe('ALTER TABLE gap_audit_events ENABLE TRIGGER gap_append_only_audit_events');
+      }
+    });
     const runIds = (await prisma.researchRun.findMany({ where: { account_name: { in: accounts } }, select: { id: true } })).map((r) => r.id);
     const facts = await prisma.prospectingSignal.deleteMany({ where: { account_name: { in: accounts } } });
     await prisma.evidenceRecord.deleteMany({ where: { account_name: { in: accounts } } });

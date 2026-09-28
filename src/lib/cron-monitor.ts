@@ -74,6 +74,8 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   { name: 'gap-background-research', label: 'GAP Background Evidence Research', path: '/api/cron/gap-background-research', schedule: '40 10 * * *' },
   // gap-signal-process (Signal Intelligence B): retry unreadable signal pages, cluster one event's sources, promote verified signals to Pounce.
   { name: 'gap-signal-process', label: 'GAP Signal Processing', path: '/api/cron/gap-signal-process', schedule: '*/30 * * * *' },
+  // gap-signal-discovery (Signal Intelligence C): rotating Google News questions over the watched priority accounts; captures signals only.
+  { name: 'gap-signal-discovery', label: 'GAP Signal Discovery', path: '/api/cron/gap-signal-discovery', schedule: '15 */2 * * *' },
 ];
 
 function cronKey(name: string) {
