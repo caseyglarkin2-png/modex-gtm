@@ -107,3 +107,41 @@ describe('<SixLineBriefView>', () => {
     expect(screen.getByTestId('brief-know').className).toContain('sm:grid-cols-[6rem_1fr]');
   });
 });
+
+describe('review E P1: the brief never overstates what it knows', () => {
+  it('an EXPIRED verified fact is not known; the brief says when it expired', () => {
+    const expired = { ...verifiedFact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') };
+    expect(knowOf(hypothesis([{ role: 'primary', signal: expired }]), NOW)).toEqual({ fact: null, reason: 'The verified fact expired on 2026-09-01: it cannot be quoted to a buyer. Find fresh evidence.' });
+    const fresh = { ...verifiedFact, freshness_expires_at: new Date('2026-12-01T00:00:00Z') };
+    expect(knowOf(hypothesis([{ role: 'primary', signal: fresh }]), NOW).fact).not.toBeNull();
+  });
+
+  const base = {
+    routingDecision: { findMany: vi.fn(async () => []) },
+    gapAuditEvent: { findMany: vi.fn(async () => []) },
+    unsubscribedEmail: { findMany: vi.fn(async () => []) },
+    conversationDisposition: { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []) },
+  };
+  const clear = { opportunity: async () => ({ status: 'CLEAR' as const, companyIds: ['c'] }) };
+
+  it('no company address at the account: reply status is UNKNOWN (caution), never "no reply waiting"', async () => {
+    const prisma = { ...base, persona: { findMany: vi.fn(async () => [{ email: 'someone@gmail.com' }]) }, inboundMessage: { findMany: vi.fn(async () => []) } };
+    const h = await loadBriefHistory(prisma, { accountName: 'PepsiCo', personaId: 3, email: null, sent: [], now: NOW }, clear);
+    expect(h?.accountReply).toBe('unknown');
+    const lines = historyLines('Sam', 'PepsiCo', h!);
+    expect(lines.lines[2]).toBe('Account reply status unknown (no company email at PepsiCo to check)');
+    expect(lines.state).toBe('caution');
+  });
+
+  it('a call-only person: the account reply check uses a colleague company address and finds the untriaged reply', async () => {
+    const prisma = {
+      ...base,
+      persona: { findMany: vi.fn(async () => [{ email: 'vp@pepsico.com' }]) },
+      inboundMessage: { findMany: vi.fn(async () => [{ id: 'm1', from_email: 'assistant@pepsico.com', subject: 'Re: yards', received_at: new Date('2026-09-27T12:00:00Z') }]) },
+    };
+    const h = await loadBriefHistory(prisma, { accountName: 'PepsiCo', personaId: 3, email: null, sent: [], now: NOW }, clear);
+    expect(h?.accountReply).toMatchObject({ from: 'assistant@pepsico.com' });
+    expect(historyLines('Sam', 'PepsiCo', h!).state).toBe('blocked');
+  });
+});
+

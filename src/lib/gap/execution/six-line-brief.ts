@@ -17,6 +17,7 @@
 import { outreachFactRefusal } from '../research/evidence-gate';
 import { loadAccountFirstTouches } from '../motion/load';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,7 +33,8 @@ export interface BriefFact {
 export interface BriefHistory {
   personTouches: { count: number; lastAt: string | null };
   colleagueTouches: Array<{ recipient: string; sentAt: string; outstanding: boolean }>;
-  accountReply: { from: string; receivedAt: string } | null;
+  /** 'unknown' when no company address at the account could be checked (never "none waiting" by default). */
+  accountReply: { from: string; receivedAt: string } | null | 'unknown';
   lastResponse: { responseClass: string; at: string } | null;
   opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; checkedAt: string };
 }
@@ -51,11 +53,18 @@ const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is st
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- the getHypothesis row (house glue)
-export function knowOf(hypothesis: any): SixLineBrief['know'] {
+export function knowOf(hypothesis: any, now: Date = new Date()): SixLineBrief['know'] {
   const links: Array<{ role?: string | null; signal?: Record<string, unknown> | null }> = Array.isArray(hypothesis?.signals) ? hypothesis.signals : [];
-  const verified = links.filter((l) => l.signal && outreachFactRefusal(l.signal as never, String(hypothesis.account_name ?? '')) === null);
+  const expired = (sig: Record<string, unknown>) => !!sig.freshness_expires_at && new Date(String(sig.freshness_expires_at)).getTime() <= now.getTime();
+  const verifiedAny = links.filter((l) => l.signal && outreachFactRefusal(l.signal as never, String(hypothesis.account_name ?? '')) === null);
+  // Review E P1: an expired fact is not known (every send gate drops it too).
+  const verified = verifiedAny.filter((l) => !expired(l.signal!));
   const primary = verified.find((l) => l.role === 'primary') ?? verified[0];
-  if (!primary?.signal) return { fact: null, reason: links.length ? 'No verified fact: what is linked is a keyword hit or unverified context.' : 'No fact is linked to this thesis.' };
+  if (!primary?.signal) {
+    const stale = verifiedAny.find((l) => l.role === 'primary') ?? verifiedAny[0];
+    if (stale?.signal) return { fact: null, reason: `The verified fact expired on ${new Date(String(stale.signal.freshness_expires_at)).toISOString().slice(0, 10)}: it cannot be quoted to a buyer. Find fresh evidence.` };
+    return { fact: null, reason: links.length ? 'No verified fact: what is linked is a keyword hit or unverified context.' : 'No fact is linked to this thesis.' };
+  }
   const s = primary.signal;
   const observed = s.observed_at ? new Date(String(s.observed_at)).toISOString() : null;
   return {
@@ -74,10 +83,17 @@ export function historyLines(firstName: string, accountName: string, h: BriefHis
       ? `No one else at ${accountName} contacted in 30 days`
       : others.map((o) => (o.outstanding ? `a first-touch draft to ${o.recipient} is outstanding` : `${o.recipient} got a first touch ${day(o.sentAt)}`)).join('; '),
   );
-  lines.push(h.accountReply ? `${h.accountReply.from} replied ${day(h.accountReply.receivedAt)}, not triaged yet` : 'No account reply waiting');
+  lines.push(
+    h.accountReply === 'unknown'
+      ? `Account reply status unknown (no company email at ${accountName} to check)`
+      : h.accountReply
+        ? `${h.accountReply.from} replied ${day(h.accountReply.receivedAt)}, not triaged yet`
+        : 'No account reply waiting',
+  );
   if (h.lastResponse) lines.push(`Last buyer response: ${h.lastResponse.responseClass.replace(/_/g, ' ')} (${day(h.lastResponse.at)})`);
   lines.push(`HubSpot opportunity ${h.opportunity.status}${h.opportunity.detail ? `: ${h.opportunity.detail}` : ''}, checked moments ago`);
-  const state: SixLineBrief['historyState'] = h.opportunity.status !== 'CLEAR' || h.accountReply ? 'blocked' : others.length ? 'caution' : 'clear';
+  const state: SixLineBrief['historyState'] =
+    h.opportunity.status !== 'CLEAR' || (h.accountReply && h.accountReply !== 'unknown') ? 'blocked' : others.length || h.accountReply === 'unknown' ? 'caution' : 'clear';
   return { lines, state };
 }
 
@@ -88,12 +104,13 @@ export function buildBrief(input: {
   angle: string | null;
   suggestedAngle: string | null;
   history: BriefHistory | null;
+  now?: Date;
 }): SixLineBrief {
   const h = input.hypothesis;
   const falsify = list(h?.falsification_questions);
   const hist = input.history ? historyLines(input.firstName, String(h?.account_name ?? ''), input.history) : { lines: ['History could not be read. Every send still checks it at the click.'], state: 'caution' as const };
   return {
-    know: knowOf(h),
+    know: knowOf(h, input.now ?? new Date()),
     think: typeof h?.problem_hypothesis === 'string' && h.problem_hypothesis.trim() ? h.problem_hypothesis.trim() : null,
     learn: falsify[0] ?? null,
     whyYou: input.angle ? { text: input.angle, owned: true } : input.suggestedAngle ? { text: input.suggestedAngle, owned: false } : null,
@@ -118,9 +135,20 @@ export async function loadBriefHistory(
 ): Promise<BriefHistory | null> {
   try {
     const email = (input.email ?? '').trim().toLowerCase();
+    // Review E P1: the account reply check needs a COMPANY address at the account. This person's, else any
+    // person GAP holds there; with none, the status is unknown (never "none waiting").
+    const isCompany = (e: string) => {
+      const d = (e.split('@')[1] ?? '').toLowerCase();
+      return !!d && !FREEMAIL_DOMAINS.has(d) && !OWN_DOMAINS.has(d);
+    };
+    const replyAddress = email && isCompany(email)
+      ? email
+      : ((await prisma.persona.findMany({ where: { account_name: input.accountName, email: { not: null } }, select: { email: true }, take: 50 })) as Array<{ email: string | null }>)
+          .map((p) => String(p.email ?? '').toLowerCase())
+          .find(isCompany) ?? null;
     const [touches, reply, last, opp] = await Promise.all([
       loadAccountFirstTouches(prisma, [input.accountName], input.now),
-      email ? accountRepliedRecently(prisma, email, input.now) : Promise.resolve(null),
+      replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now) : Promise.resolve('unknown' as const),
       email
         ? prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true }, orderBy: { created_at: 'desc' }, select: { response_class: true, created_at: true } })
         : Promise.resolve(null),
@@ -131,7 +159,7 @@ export async function loadBriefHistory(
     return {
       personTouches: { count: input.sent.length, lastAt },
       colleagueTouches: others.map((o) => ({ recipient: o.recipient, sentAt: o.sentAt, outstanding: !!o.outstanding })),
-      accountReply: reply ? { from: reply.from_email, receivedAt: new Date(reply.received_at).toISOString() } : null,
+      accountReply: reply === 'unknown' ? 'unknown' : reply ? { from: reply.from_email, receivedAt: new Date(reply.received_at).toISOString() } : null,
       lastResponse: last ? { responseClass: String(last.response_class), at: new Date(last.created_at).toISOString() } : null,
       opportunity: opportunityLine(opp),
     };

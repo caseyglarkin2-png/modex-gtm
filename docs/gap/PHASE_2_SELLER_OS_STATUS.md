@@ -357,6 +357,16 @@ release, merged and production-verified before the next starts.
 - The brief is one column below `sm` (label column from `sm`), words break;
   the GAP sub-nav wraps instead of clipping.
 
+### Release E review fixes (verified P1s, fixed before merge)
+- KNOW showed an EXPIRED verified fact as "✓ verified" (the outreach-fact check
+  does not test freshness; every send gate drops expired facts). Expired facts
+  are now excluded and the brief says "The verified fact expired on <date>: it
+  cannot be quoted to a buyer."
+- HISTORY printed "No account reply waiting" when it had not checked (a person
+  with no email, or a consumer address). The reply check now uses the person's
+  company address or any company address GAP holds at the account; with none
+  it says "Account reply status unknown" and marks caution.
+
 ### Release E validation
 - Mutations RED then restored: KNOW shows an unverified fact; a suggested angle
   shown as owned; an open deal not flagged in HISTORY; unreadable history shown

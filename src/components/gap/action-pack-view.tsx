@@ -178,6 +178,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
     angle: briefPersonaId ? (angles.get(briefPersonaId)?.text ?? null) : null,
     suggestedAngle: persona ? suggestAngle({ title: persona.title ?? null, personaKey: null, accountName: hypothesis.account_name }) : null,
     history: briefHistory,
+    now: new Date(),
   });
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
