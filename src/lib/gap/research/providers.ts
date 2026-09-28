@@ -103,6 +103,40 @@ export async function edgarCandidates(
   return { candidates, note: `${company.title}: ${docs.size} filing hits, ${newestFirst.length} read` };
 }
 
+const DATELINE_MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+
+/**
+ * A press release's own dateline ("June 8, 2026 PepsiCo and Gatik announced ..."), for a page with no article
+ * meta date. Accepted only when the date is immediately followed by the account's name (a sidebar or footer
+ * date is not), and never in the future.
+ */
+export function datelineDate(text: string, accountName: string, now: Date = new Date()): Date | null {
+  const key = normalizeCompany(accountName);
+  if (!key) return null;
+  const re = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(\d{4})\b/g;
+  for (const m of text.slice(0, 6000).matchAll(re)) {
+    const after = ` ${text.slice((m.index ?? 0) + m[0].length, (m.index ?? 0) + m[0].length + 60).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()} `;
+    // the account's name immediately after the date, allowing only a wire tag ("/PRNewswire/ --")
+    if (!after.replace(/^ (?:prnewswire|businesswire|business wire|globenewswire|globe newswire|newswire) /, ' ').startsWith(` ${key} `)) continue;
+    const d = new Date(Date.UTC(Number(m[3]), DATELINE_MONTHS.indexOf(m[1].toLowerCase()), Number(m[2])));
+    if (Number.isNaN(d.getTime()) || d.getTime() > now.getTime() + 86_400_000) continue;
+    return d;
+  }
+  return null;
+}
+
+/** Is this URL on the account's own domain ("pepsico.com" for PepsiCo, "generalmills.com" for General Mills)? */
+export function hostBelongsToAccount(url: string, accountName: string): boolean {
+  const key = normalizeCompany(accountName).replace(/ /g, '');
+  if (key.length < 4) return false;
+  try {
+    const labels = new URL(url).hostname.toLowerCase().replace(/^www\./, '').split('.');
+    return labels.slice(0, -1).some((l) => l.replace(/-/g, '') === key);
+  } catch {
+    return false;
+  }
+}
+
 /** Parse the model's JSON array of candidate facts; anything malformed is dropped. */
 export function parseWebCandidates(text: string): Array<{ url: string; title: string; date: string | null; excerpt: string }> {
   const fenced = /```(?:json)?\s*([\s\S]*?)```/i.exec(text);

@@ -19,10 +19,10 @@
  * Research never links evidence to a hypothesis, never changes a hypothesis,
  * never drafts, enrolls or sends. Settling writes the GapSignal row only.
  */
-import type { Candidate } from '../research/providers';
+import { datelineDate, hostBelongsToAccount, type Candidate } from '../research/providers';
 import type { ResearchResult } from '../research/run';
 import { classifyFact, extractFactSentences, htmlToText } from '../research/facts';
-import { defaultFetchHtml, normalizeSignalUrl, type FetchHtml } from './intake';
+import { defaultFetchHtml, normalizeSignalUrl, parseSignalMeta, type FetchHtml } from './intake';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -44,7 +44,7 @@ const PRIMARY_BASIS = new Set(['company_newsroom', 'domain']);
 export const SIGNAL_PAGES_PER_RUN = 3;
 export const SIGNAL_PAGES_BUDGET_MS = 25_000;
 
-export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml; clock?: () => number } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string> }> {
+export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml; clock?: () => number; accountName?: string } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string> }> {
   const fetchHtml = deps.fetchHtml ?? defaultFetchHtml;
   const clock = deps.clock ?? Date.now;
   const started = clock();
@@ -60,14 +60,18 @@ export async function signalCandidates(signals: readonly ResearchableSignal[], d
     }
     read += 1;
     let text: string;
+    let html: string;
     try {
-      text = htmlToText(await fetchHtml(s.url));
+      html = await fetchHtml(s.url);
+      text = htmlToText(html);
     } catch (e) {
       notes.push(`${s.id}: page unreadable (${(e instanceof Error ? e.message : String(e)).slice(0, 60)})`);
       continue;
     }
     pages.set(s.url, text);
-    const published = s.published_at ? new Date(s.published_at) : null;
+    // Evidence continuity: an undated signal still has the page's own article date, or a press-release dateline
+    // that names the account ("June 8, 2026 PepsiCo and Gatik announced ...").
+    const published = s.published_at ? new Date(s.published_at) : (parseSignalMeta(html).publishedAt ?? (deps.accountName ? datelineDate(text, deps.accountName) : null));
     const sentences = extractFactSentences(text, 8);
     notes.push(`${s.id}: ${sentences.length} candidate sentence(s)${published ? '' : ', page undated'}`);
     for (const excerpt of sentences) {
@@ -77,7 +81,7 @@ export async function signalCandidates(signals: readonly ResearchableSignal[], d
         title: s.title ?? s.url,
         publishedAt: published,
         excerpt,
-        sourceType: PRIMARY_CLASSES.has(s.source_class) || PRIMARY_BASIS.has(s.resolution_basis ?? '') ? 'public_primary' : 'public_secondary',
+        sourceType: PRIMARY_CLASSES.has(s.source_class) || PRIMARY_BASIS.has(s.resolution_basis ?? '') || (deps.accountName && hostBelongsToAccount(s.url, deps.accountName)) ? 'public_primary' : 'public_secondary',
       });
     }
   }

@@ -80,6 +80,8 @@ function recordingDb(opts: { triggers?: any[]; accounts?: string[]; lastRunAt?: 
     prospectingSignal: handler('prospectingSignal', {
       findUnique: async ({ where }: any) => signals.find((s) => s.source_kind === where.source_kind_source_id.source_kind && s.source_id === where.source_kind_source_id.source_id) ?? null,
       create: async ({ data }: any) => { const s = { id: id('sig'), ...data }; signals.push(s); return s; },
+      // evidence continuity reads the account's facts (a read, not a write)
+      findMany: async ({ where }: any) => signals.filter((s) => s.account_name === where.account_name && s.source_kind === where.source_kind),
     }),
     gapAuditEvent: handler('gapAuditEvent', { create: async () => ({ id: id('a') }) }),
     // Anything else touched at all is a failure (hypotheses written, routing, drafts, enrollment, sends).
