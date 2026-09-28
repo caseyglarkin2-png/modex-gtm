@@ -82,6 +82,7 @@ const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object
 export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { accounts?: string[] } = {}): Promise<InboxAccount[]> {
   const since = new Date(now.getTime() - INBOX_WINDOW_MS);
   const accountFilter = opts.accounts?.length ? { account_name: { in: opts.accounts } } : {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
   const signals: Array<Record<string, any>> = await prisma.prospectingSignal.findMany({
     where: { ...accountFilter, source_kind: 'evidence_record', ingested_at: { gte: since }, metadata: { path: ['verified'], equals: 'excerpt_found_at_source' } },
     select: { id: true, account_name: true, source_kind: true, source_type: true, title: true, evidence_text: true, evidence_url: true, external_ok: true, observed_at: true, freshness_expires_at: true, metadata: true },

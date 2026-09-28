@@ -25,6 +25,8 @@ import { Button } from '@/components/ui/button';
 import { DecisionCard, type QueueItem } from '@/components/gap/decision-card';
 import { ResearchOutcomeContext, ResearchOutcomeView, ResearchThis, type Decided } from '@/components/gap/research-this';
 import { RESEARCHABLE_RULES, cardReadiness, sellerLaneOf, type ReviewWaiting, type SellerLane } from '@/lib/gap/routing/card-readiness';
+import type { CockpitMotions } from '@/lib/gap/motion/cockpit';
+import { AccountMotionPanel } from '@/components/gap/account-motion-panel';
 
 interface QueueResponse {
   /** Newest routing among the current cards; null only when nothing was ever routed. */
@@ -117,9 +119,11 @@ export interface WorkQueueProps {
   closeHref?: string;
   /** What is waiting in the REVIEW lane (the cockpit's review split), for each card's missing-thesis link. */
   reviewWaiting?: ReviewWaiting | null;
+  /** Phase 2 C: account motion. Held email cards are never READY; each account's motion shows above its cards. */
+  motion?: CockpitMotions | null;
 }
 
-export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPanel = null, closeHref = '/gap', reviewWaiting = null }: WorkQueueProps) {
+export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPanel = null, closeHref = '/gap', reviewWaiting = null, motion = null }: WorkQueueProps) {
   const [asOf, setAsOf] = useState<string | null>(null);
   const [outcomes, setOutcomes] = useState<Array<{ key: string; decided: Decided }>>([]);
   const reportOutcome = useCallback((o: { key: string; decided: Decided }) => setOutcomes((cur) => [o, ...cur.filter((x) => x.key !== o.key)]), []);
@@ -204,7 +208,14 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
   }
 
   // The open card stays visible even after acting on it moves it to another lane (success never hides the result).
-  const shown = sellerLane ? items.filter((item) => sellerLaneOf(item) === sellerLane || item.id === openId) : items;
+  const held = new Set(motion?.heldCardIds ?? []);
+  const laneOf = (item: QueueItem) => {
+    const lane = sellerLaneOf(item);
+    return lane === 'ready' && held.has(item.id) ? 'later' : lane;
+  };
+  const shown = sellerLane ? items.filter((item) => laneOf(item) === sellerLane || item.id === openId) : items;
+  const motions = sellerLane === 'ready' ? (motion?.motions ?? []) : [];
+  const motionFor = new Map(motions.map((m) => [m.accountName, m]));
   const renderCard = (item: QueueItem) => (
     <DecisionCard
       key={item.id}
@@ -234,7 +245,7 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
 
         {loading ? (
           <p className="text-sm italic text-[var(--muted-foreground)]">Loading...</p>
-        ) : shown.length === 0 ? (
+        ) : shown.length === 0 && motions.length === 0 ? (
           <div className="space-y-1">
             <p className="text-sm italic text-[var(--muted-foreground)]">{asOf ? 'Nothing in this lane right now.' : 'No routing run yet.'}</p>
             <p className="text-xs text-[var(--muted-foreground)]">
@@ -244,6 +255,16 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
         ) : sellerLane === 'research' ? (
           <div className="space-y-3">
             {groupResearch(shown).map((g) => (g.items.length > 1 ? <ResearchGroup key={g.key} items={g.items} renderCard={renderCard} /> : renderCard(g.items[0])))}
+          </div>
+        ) : sellerLane === 'ready' ? (
+          <div className="space-y-3">
+            {/* Phase 2 C: each account once: its motion (primary, next, why), then its READY card. */}
+            {[...new Set([...shown.map((i) => i.account.name), ...motions.map((m) => m.accountName)])].map((account) => (
+              <div key={account} className="space-y-2" data-testid="ready-account">
+                {motionFor.get(account) ? <AccountMotionPanel motion={motionFor.get(account)!} /> : null}
+                {shown.filter((i) => i.account.name === account).map(renderCard)}
+              </div>
+            ))}
           </div>
         ) : (
           <div className="space-y-3">{shown.map(renderCard)}</div>

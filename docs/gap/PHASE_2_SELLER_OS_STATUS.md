@@ -22,8 +22,8 @@ release, merged and production-verified before the next starts.
 | Release | Scope | Branch | PR | Merge | Production |
 |---|---|---|---|---|---|
 | A | Truth infrastructure + health | feat/gap-phase2-a-truth-health | #278 | 6df1938f | READY, health endpoint HEALTHY in prod |
-| B | Verified evidence inbox | feat/gap-phase2-b-evidence-inbox | | | |
-| C | Account motion v0 | | | | |
+| B | Verified evidence inbox | feat/gap-phase2-b-evidence-inbox | #279 | 6d34cd6a | READY; one prod background run, protected diff identical |
+| C | Account motion v0 | feat/gap-phase2-c-account-motion | | | |
 | D | Mobile buyer truth capture v0 | | | | |
 | E | Seller action pack v2 | | | | |
 | F | In Deals + Deal Brief v0 | | | | |
@@ -163,6 +163,69 @@ release, merged and production-verified before the next starts.
   outranked the trigger; 11 protected counts identical before/after; all
   hypotheses still draft; inbox shows the verified fact with USE on the thesis.
 
+### Release B production verification (2026-09-28)
+- Merge 6d34cd6a served (dpl_45AmtXp9Yti1U97fjCo4XSUz9z9h).
+  `GAP_BACKGROUND_RESEARCH_ENABLED=true` set in Vercel production (plain,
+  production only) so the 10:40 UTC cron runs.
+- One background run against production (the shipped code, cap 3): targets in
+  order PepsiCo (research work, 5 people), General Mills (2), UNFI (research
+  work + the "Consolidates Midwest Distribution" trigger), Kroger. PepsiCo,
+  General Mills and Kroger were skipped by the 3-day cooldown (researched
+  2026-09-25; PepsiCo is eligible on the next scheduled run). UNFI: 1 verified
+  fact, 3 rejected sources with reasons. Protected-table diff (hypotheses,
+  events, links, routing, enrollments, email logs, draft queue, execution
+  ledger, BIDs, dispositions, status counts): identical.
+- Inbox in production: General Mills 4 ready, Kroger 1, UNFI 1 (3 rejected),
+  PepsiCo 0 ready with 4 rejected sources (explicit answer).
+
+## Release C: account motion v0
+
+### C1. PersonaAngle (human-owned "why this person")
+- `motion/persona-angle.ts`: one line per person, stored as append-only
+  `persona.angle` audit rows (newest wins; keyed on the person, so it survives
+  hypothesis revision). `suggestAngle` drafts from the title only (labelled
+  "Suggested why", never authoritative, nothing inferred beyond the role, no
+  LinkedIn); Casey accepts (source `accepted_suggestion`) or writes/edits it
+  (source `human`). `POST /api/gap/personas/[id]/angle`.
+
+### C2-C4. Account motion (one cold email motion per account)
+- `motion/account-motion.ts computeAccountMotion` (pure), states:
+  `paused_reply` (someone at the account wrote in and it is untriaged: no email
+  card READY), `in_motion` (a GAP first touch at the account inside 5 business
+  days holds everyone else; a failed address releases it at once),
+  `ready` (one PRIMARY: Casey's recorded choice, else a suggestion ranked by
+  visible factors: thesis-role relevance, seniority from title, reachability;
+  every other email card is NEXT with its unlock condition), `idle`.
+- Choice: `POST /api/gap/accounts/motion` (append-only `account.motion` row).
+- Enforced at the send gate too (`account_motion_active`, step 0, seller
+  draft/send and live enroll), not only in the UI. Calls and LinkedIn are
+  human judgment and never held.
+- C4 builds on the existing account-reply hold (first touches refused until
+  the reply is dispositioned) and the colleague-reply follow-up stop; the
+  motion now shows the pause instead of a READY card that would be refused.
+
+### C5. NEXT UP v2
+- `routing/next-up.ts`: replies oldest first, due follow-ups most overdue,
+  READY primaries by soonest primary-fact expiry then tier then oldest, review
+  by people unlocked then tier, research (inbox facts, research theses,
+  research cards) by people unlocked, trigger freshness, tier. At most one item
+  per account; never an account with an open deal or unknown opportunity truth;
+  never an item marked failing its gate.
+
+### Release C validation
+- Mutations RED then restored: send gate removed; two email cards READY at one
+  account; bounced owner still holds; reply pause ignored; Casey's choice
+  ignored; held account picked by NEXT UP; two NEXT UP items per account; an
+  accepted suggestion saved as human-owned.
+- Review catch during RED: thesis-role relevance was first measured against
+  the candidates' own roles (everyone matched); it now uses the hypothesis
+  persona key.
+- `e2e-phase2.ts` G2 (USE -> review -> approve + use -> routing -> exactly one
+  email READY of 3; second first touch refused `account_motion_active`) and G3
+  pause (colleague reply: no READY email card, `account_replied` refusal,
+  primary follow-ups stop). Triage visibility of that colleague reply is
+  Release D (D5).
+
 ## Debt recorded (not fixed in this program unless it blocks)
 
 - Release A review (non-blocking): `verifyPublicFact` reports `created: true`
@@ -173,3 +236,8 @@ release, merged and production-verified before the next starts.
   redirects (hostname private-host check only, authenticated callers only;
   same fetcher research already uses); a future-dated mailbox `lastSuccessAt`
   would read as healthy.
+- Release B production observation: the existing physical-network classifier
+  (`research/facts.ts isPhysicalOpsFact`) accepted UNFI's "rollout of an
+  AI-powered supply chain and procurement planning platform" as a network
+  fact. The evidence gate is out of scope for this program; recorded for a
+  future gate review.

@@ -104,6 +104,7 @@
  * House conventions: `prisma: any` glue, refusal objects `{ok:false, reason}`,
  * no network here except the injected autonomy reader. Voice: no em dashes.
  */
+import { accountMotionRefusal } from '@/lib/gap/motion/load';
 import { personSendHistory } from '../execution/person-history';
 import { autonomyHalted } from '@/lib/email/autonomy-gate';
 import { isOutreachPaused } from '@/lib/feature-flags';
@@ -245,6 +246,7 @@ export type EnrollServiceRefusal =
   | 'no_email'
   | 'gap_history_exists'
   | 'account_replied'
+  | 'account_motion_active'
   | 'account_mismatch'
   | 'decision_persona_mismatch'
   | 'active_opportunity'
@@ -734,6 +736,11 @@ export async function enrollFromDecision(
     const replied = await accountRepliedRecently(prisma, email, input.now);
     if (replied) {
       return refuse('account_replied', { detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}; read and disposition it first` });
+    }
+    // Phase 2 C3: one cold email motion per account, as at the send gate.
+    const motion = await accountMotionRefusal(prisma, { accountName: hypothesis.account_name || persona.account_name, personaId: input.personaId ?? null, email, now: input.now });
+    if (motion) {
+      return refuse('account_motion_active', { detail: `${motion.owner} got a first touch on ${motion.sentAt.slice(0, 10)}; the next person unlocks on ${motion.unlockAt.slice(0, 10)} with no response` });
     }
   }
 
