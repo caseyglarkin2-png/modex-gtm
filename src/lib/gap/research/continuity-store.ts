@@ -23,6 +23,7 @@ import type { SignalType } from '../taxonomy';
 import { classifyContinuity, corroboratesCurrentness, outreachCurrentUntil, programKeys, sellerRelevance, supersedes, CORROBORATION_CHECK_AFTER_MS } from './continuity';
 import { registerSignal } from '../signals/registry';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
 interface FactRow {
@@ -38,10 +39,12 @@ interface FactRow {
   observed_at: Date;
   freshness_expires_at: Date | null;
   confidence: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- stored JSON, read defensively
   metadata: Record<string, any> | null;
 }
 
 export const CONTINUITY_PREFIX = 'continuity:';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isObj = (v: unknown): v is Record<string, any> => !!v && typeof v === 'object' && !Array.isArray(v);
 const day = (d: Date) => d.toISOString().slice(0, 10);
 

@@ -19,6 +19,8 @@
  * is never deleted). Nothing here creates, approves or activates anything.
  */
 import { outreachFactRefusal } from './evidence-gate';
+import { sellerRelevance, type SellerRelevance } from './continuity';
+import { hostBelongsToAccount } from './providers';
 import { classifyFact, detectConflicts } from './facts';
 import { loadThesisGroups } from '../hypothesis/thesis-groups';
 
@@ -42,7 +44,31 @@ export interface InboxFact {
   daysLeft: number | null;
   runId: string | null;
   onThesis: boolean;
+  /** Where the fact comes from and why it is current: the source, and the newer source that confirmed it still holds. */
+  chain: SourceChain;
+  /** Seller usefulness for a first touch (NOT truth: every fact here is equally verified). */
+  relevance: SellerRelevance;
 }
+
+export interface ChainLink {
+  label: string;
+  url: string | null;
+  date: string;
+}
+
+export interface SourceChain {
+  /** PRIMARY SOURCE (the company's own page or filing) or SOURCE (a report). */
+  kind: 'primary' | 'secondary';
+  source: ChainLink;
+  /** A newer, independent source confirming the ongoing program still operates. */
+  currentness: ChainLink | null;
+  others: ChainLink[];
+  /** 'ongoing_state' facts are current until the corroborated clock; others until their own. */
+  basis: 'publication' | 'corroborated';
+}
+
+/** The button a USE on this thesis would be, named by what the server will do. */
+export type UseLabel = 'USE IN DRAFT' | 'USE & CREATE REVISION' | 'USE FOR THIS THESIS';
 
 export interface InboxThesis {
   fingerprint: string;
@@ -51,6 +77,8 @@ export interface InboxThesis {
   people: number;
   /** Rows USE would touch: editable drafts and approved rows that need a revision. */
   usableIds: string[];
+  /** Server-derived: what USE does here. Null when no row can take evidence (all approved and ready, or in use). */
+  useLabel: UseLabel | null;
 }
 
 export interface InboxAccount {
@@ -60,6 +88,10 @@ export interface InboxAccount {
   rejected: Array<{ url: string; reason: string; at: string }>;
   lastRun: { at: string; outcome: string; runId: string; background: boolean; notes: string[] } | null;
   theses: InboxThesis[];
+  /** The fact most worth Casey's judgment first (seller relevance), or null when only context remains. */
+  bestSignalId: string | null;
+  /** One deterministic next step for this account. */
+  next: string;
 }
 
 const CHANGE_WORD: Record<string, string> = {
@@ -78,6 +110,64 @@ function whyItQualifies(excerpt: string, retrievedAt: string | null): string {
 }
 
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+/** A source named compactly: the account itself for its own domain, otherwise the publisher's host. */
+export function sourceName(url: string | null, accountName: string): string {
+  if (!url) return 'source';
+  if (hostBelongsToAccount(url, accountName)) return accountName;
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'source';
+  }
+}
+
+function linkOf(v: unknown, accountName: string): ChainLink | null {
+  if (!isObj(v)) return null;
+  const url = typeof v.url === 'string' ? v.url : null;
+  const date = typeof v.publishedAt === 'string' ? v.publishedAt : null;
+  return date ? { label: sourceName(url, accountName), url, date } : null;
+}
+
+/** Which verbs USE will run, from the rows it would touch (group members are current work only). */
+export function labelForUse(statuses: string[]): UseLabel | null {
+  if (statuses.length === 0) return null;
+  const drafts = statuses.filter((s) => s === 'draft' || s === 'review_required').length;
+  if (drafts === statuses.length) return 'USE IN DRAFT';
+  if (drafts === 0) return 'USE & CREATE REVISION';
+  return 'USE FOR THIS THESIS';
+}
+
+/**
+ * The Research lane, account by account: each account's evidence with ONLY that account's thesis cards.
+ * Accounts with evidence first (inbox order), then accounts that only have theses waiting (by name).
+ */
+export function researchSections<C extends { accountName: string }>(inbox: InboxAccount[], cards: C[]): Array<{ account: InboxAccount; cards: C[] }> {
+  const byAccount = new Map<string, C[]>();
+  for (const c of cards) byAccount.set(c.accountName, [...(byAccount.get(c.accountName) ?? []), c]);
+  const known = new Set(inbox.map((a) => a.accountName));
+  const thesisOnly = [...byAccount.keys()]
+    .filter((n) => !known.has(n))
+    .sort((x, y) => x.localeCompare(y))
+    .map((n): InboxAccount => ({ accountName: n, ready: [], contradictions: [], rejected: [], lastRun: null, theses: [], bestSignalId: null, next: NO_FACT_YET }));
+  return [...inbox, ...thesisOnly].map((account) => ({ account, cards: byAccount.get(account.accountName) ?? [] }));
+}
+
+export const NO_FACT_YET = 'No verified fact to use yet. Research keeps looking; nothing to do here now.';
+
+export function nextActionFor(a: Pick<InboxAccount, 'ready' | 'contradictions' | 'theses' | 'bestSignalId' | 'lastRun'>): string {
+  if (a.contradictions.length) return 'Resolve the contradiction first: ignore the side you do not believe.';
+  const usable = a.theses.filter((t) => t.useLabel);
+  if (a.ready.length) {
+    const which = a.bestSignalId ? 'the best fact' : 'the verified context';
+    if (usable.length === 1) return `Judge ${which}. If it holds, ${usable[0].useLabel}, then review the draft. Nothing is approved for you.`;
+    if (usable.length > 1) return `Judge ${which}. If it holds, pick the thesis it supports and use it there, then review the draft.`;
+    if (a.theses.length === 0) return `Judge ${which}. If it holds, DRAFT THESIS FROM THIS FACT.`;
+    return `Judge ${which}. Every thesis here is approved and in use; a new thesis would start from this fact.`;
+  }
+  if (a.theses.some((t) => t.useLabel)) return NO_FACT_YET;
+  return a.lastRun ? 'Nothing to judge. The last research answer is below.' : 'Nothing to judge.';
+}
 
 export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { accounts?: string[] } = {}): Promise<InboxAccount[]> {
   const since = new Date(now.getTime() - INBOX_WINDOW_MS);
@@ -107,20 +197,52 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   const acct = (name: string) => {
     let a = accounts.get(name);
     if (!a) {
-      a = { accountName: name, ready: [], contradictions: [], rejected: [], lastRun: null, theses: [] };
+      a = { accountName: name, ready: [], contradictions: [], rejected: [], lastRun: null, theses: [], bestSignalId: null, next: '' };
       accounts.set(name, a);
     }
     return a;
   };
 
   const factsByAccount = new Map<string, InboxFact[]>();
+  // Evidence continuity: a live continuation shows ONE fact with its chain; the rows it folds in (the
+  // original, other copies of the same story, the corroborating report) are shown inside that chain.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
+  const live = (s: Record<string, any>) => !ignored.has(s.id) && !(s.freshness_expires_at && new Date(s.freshness_expires_at).getTime() <= now.getTime()) && !outreachFactRefusal(s as never, s.account_name);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
+  const newestContinuation = new Map<string, Record<string, any>>();
   for (const s of signals) {
-    if (ignored.has(s.id)) continue;
+    const k = isObj(s.metadata) && isObj(s.metadata.continuity) ? s.metadata.continuity : null;
+    if (!k || k.kind !== 'ongoing_state' || !isObj(k.primary) || !live(s)) continue;
+    const pid = String(k.primary.signalId);
+    const prev = newestContinuation.get(pid);
+    if (!prev || new Date(s.freshness_expires_at).getTime() > new Date(prev.freshness_expires_at).getTime()) newestContinuation.set(pid, s);
+  }
+  const folded = new Set<string>();
+  for (const [pid, c] of newestContinuation) {
+    folded.add(pid);
+    const k = c.metadata.continuity;
+    if (isObj(k.currentness) && k.currentness.signalId) folded.add(String(k.currentness.signalId));
+    for (const o of Array.isArray(k.otherSources) ? k.otherSources : []) if (isObj(o) && o.signalId) folded.add(String(o.signalId));
+  }
+  for (const s of signals) {
+    const k = isObj(s.metadata) && isObj(s.metadata.continuity) ? s.metadata.continuity : null;
+    if (k && k.kind === 'ongoing_state' && isObj(k.primary) && newestContinuation.get(String(k.primary.signalId))?.id !== s.id) folded.add(s.id);
+  }
+  for (const s of signals) {
+    if (ignored.has(s.id) || folded.has(s.id)) continue;
     const exp = s.freshness_expires_at ? new Date(s.freshness_expires_at) : null;
     if (exp && exp.getTime() <= now.getTime()) continue;
     if (outreachFactRefusal(s as never, s.account_name)) continue;
     const meta = isObj(s.metadata) ? s.metadata : {};
     const retrievedAt = typeof meta.retrievedAt === 'string' ? meta.retrievedAt : null;
+    const k = isObj(meta.continuity) && meta.continuity.kind === 'ongoing_state' ? meta.continuity : null;
+    const chain: SourceChain = {
+      kind: s.source_type === 'public_primary' ? 'primary' : 'secondary',
+      source: { label: sourceName(s.evidence_url ?? null, s.account_name), url: s.evidence_url ?? null, date: new Date(s.observed_at).toISOString() },
+      currentness: k ? linkOf(k.currentness, s.account_name) : null,
+      others: k && Array.isArray(k.otherSources) ? k.otherSources.map((o: unknown) => linkOf(o, s.account_name)).filter((x: ChainLink | null): x is ChainLink => !!x && x.url !== s.evidence_url) : [],
+      basis: k ? 'corroborated' : 'publication',
+    };
     const f: InboxFact = {
       signalId: s.id,
       quote: String(s.evidence_text ?? ''),
@@ -133,6 +255,8 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
       daysLeft: exp ? Math.ceil((exp.getTime() - now.getTime()) / DAY) : null,
       runId: typeof meta.researchRunId === 'string' ? meta.researchRunId : null,
       onThesis: linked.has(s.id),
+      chain,
+      relevance: sellerRelevance(String(s.evidence_text ?? '')),
     };
     factsByAccount.set(s.account_name, [...(factsByAccount.get(s.account_name) ?? []), f]);
   }
@@ -143,7 +267,11 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
     // Review B2: a contradicted fact is never "ready". It shows under its contradiction,
     // where Casey ignores the side he does not believe; the other side then becomes ready.
     const contradicted = new Set(conflicts.flatMap((c) => c.ids));
-    a.ready = facts.filter((f) => !f.onThesis && !contradicted.has(f.signalId));
+    // Truth is not usefulness: every ready fact is equally verified; the most seller-relevant comes first.
+    a.ready = facts
+      .filter((f) => !f.onThesis && !contradicted.has(f.signalId))
+      .sort((x, y) => x.relevance.rank - y.relevance.rank || y.publishedAt.localeCompare(x.publishedAt) || x.signalId.localeCompare(y.signalId));
+    a.bestSignalId = a.ready[0]?.relevance.bucket === 'best' ? a.ready[0].signalId : null;
   }
 
   for (const r of runs as Array<{ id: string; account_name: string; created_at: Date; provider_status: unknown }>) {
@@ -180,9 +308,11 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
         summary: String(g.members[0]?.problem_hypothesis ?? '').slice(0, 160),
         people: g.members.length,
         usableIds: usable.map((m) => m.id),
+        useLabel: labelForUse(usable.map((m) => m.status)),
       });
     }
   }
+  for (const a of accounts.values()) a.next = nextActionFor(a);
 
   // Accounts with something to judge first: ready facts, then contradictions, then explicit research answers.
   return [...accounts.values()]

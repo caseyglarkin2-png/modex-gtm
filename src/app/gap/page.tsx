@@ -49,8 +49,8 @@ import { HypothesisList } from './hypotheses/hypothesis-list';
 import { RepliesTriage } from './replies/replies-triage';
 import { WorkQueue } from './work-queue';
 import { HealthStrip } from '@/components/gap/health-strip';
-import { EvidenceInbox } from '@/components/gap/evidence-inbox';
-import { loadEvidenceInbox } from '@/lib/gap/research/inbox';
+import { EvidenceAccount } from '@/components/gap/evidence-inbox';
+import { loadEvidenceInbox, researchSections, type InboxAccount } from '@/lib/gap/research/inbox';
 import { heldDealAccounts, loadInDeals } from '@/lib/gap/deals/in-deals';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
@@ -197,15 +197,34 @@ async function ReviewLane({ groups, readyOneOffIds }: { groups: LoadedGroup[]; r
   );
 }
 
-/** Theses the evidence gate rates not ready: FIND VERIFIED EVIDENCE comes first in Research. */
-async function ResearchTheses({ groups }: { groups: LoadedGroup[] }) {
+/**
+ * RESEARCH, account-centric (2026-09-28): ONE section per account holding that account's verified evidence,
+ * its next step, and the theses at that account that need verified evidence. Nothing from one account is
+ * rendered inside another's section (a General Mills fact never sits above a PepsiCo thesis). Accounts with
+ * evidence come first (the inbox order), then accounts that only have theses waiting.
+ */
+async function ResearchByAccount({ inbox, groups, now }: { inbox: InboxAccount[]; groups: LoadedGroup[]; now: Date }) {
   const cards = await withRecordedNotes(prisma, groups.map(toThesisCard));
-  // Always mounted (like ReviewLane): using evidence on the last research thesis empties this list,
-  // and the outcome with its "Review the revised thesis" link must survive the refresh.
+  const sections = researchSections(inbox, cards);
   return (
-    <section className="space-y-2" data-testid="research-theses">
-      {cards.length ? <h3 className="text-sm font-semibold">Theses that need verified evidence</h3> : null}
-      <ThesisGroupReview cards={cards} intro={false} />
+    <section data-testid="research-accounts" className="space-y-3">
+      <div>
+        <h3 className="text-sm font-semibold">Research, by account</h3>
+        <p className="text-xs text-[var(--muted-foreground)]">Verified at the source before you got here, one account at a time. You decide what it means; nothing is approved for you.</p>
+      </div>
+      {sections.length === 0 ? <p className="text-sm italic text-[var(--muted-foreground)]">Nothing new from research.</p> : null}
+      {sections.map(({ account: a, cards: own }) => {
+        return (
+          <EvidenceAccount key={a.accountName} a={a} now={now} thesesNeedingEvidence={own.length}>
+            {/* Always mounted per account (like ReviewLane): using evidence on this account's last research thesis
+                empties this list, and the outcome with its review link must survive the refresh. */}
+            <div className="space-y-2" data-testid="research-theses" data-account={a.accountName}>
+              {own.length ? <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{a.accountName} theses that need verified evidence</p> : null}
+              <ThesisGroupReview cards={own} intro={false} />
+            </div>
+          </EvidenceAccount>
+        );
+      })}
     </section>
   );
 }
@@ -342,8 +361,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
             <InDealsLane accounts={data.gapAccounts} open={params.account?.trim() || null} />
           ) : (
             <>
-            {lane === 'research' ? <EvidenceInbox accounts={data.inbox} now={new Date()} /> : null}
-            {lane === 'research' ? <ResearchTheses groups={data.researchGroups} /> : null}
+            {lane === 'research' ? <ResearchByAccount inbox={data.inbox} groups={data.researchGroups} now={new Date()} /> : null}
             <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} reviewWaiting={data.reviewWaiting} motion={data.motion} />
             </>
           )}

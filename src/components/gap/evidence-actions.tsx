@@ -4,11 +4,13 @@
  * USE / IGNORE / OPEN SOURCE on one verified candidate fact in the Verified
  * Evidence Inbox (Phase 2 B2).
  *
- *   USE      the existing audited use_evidence operation (POST /api/gap/theses):
+ *   USE      the existing audited use_evidence operation (POST /api/gap/theses),
+ *            labelled by what the server will do (InboxThesis.useLabel):
+ *            USE IN DRAFT, USE & CREATE REVISION, or USE FOR THIS THESIS (both);
  *            an editable row gets its observation rebuilt from this fact; a
  *            frozen approved row gets a new draft revision. Nothing is
  *            approved: the result goes to REVIEW for Casey.
- *            No thesis at the account yet: "Draft a thesis from this fact"
+ *            No thesis at the account yet: DRAFT THESIS FROM THIS FACT
  *            (the existing POST /api/gap/research/{runId}/propose: a DRAFT).
  *   IGNORE   POST /api/gap/evidence/ignore: this exact fact stops being
  *            surfaced; research history is kept.
@@ -120,12 +122,12 @@ export function EvidenceActions({
               </select>
             ) : null}
             <button type="button" data-testid="evidence-use" disabled={busy} onClick={() => void use()} className={`${btn} bg-[var(--primary)] font-medium text-[var(--primary-foreground)]`}>
-              {busy ? 'Working...' : 'Use'}
+              {busy ? 'Working...' : (usable.find((x) => x.fingerprint === fingerprint) ?? usable[0]).useLabel ?? 'USE FOR THIS THESIS'}
             </button>
           </>
         ) : theses.length === 0 && runId ? (
           <button type="button" data-testid="evidence-draft" disabled={busy} onClick={() => void draft()} className={`${btn} bg-[var(--primary)] font-medium text-[var(--primary-foreground)]`}>
-            {busy ? 'Working...' : 'Draft a thesis from this fact'}
+            {busy ? 'Working...' : 'DRAFT THESIS FROM THIS FACT'}
           </button>
         ) : (
           <span className="text-xs text-[var(--muted-foreground)]">Every thesis here is already in use.</span>
