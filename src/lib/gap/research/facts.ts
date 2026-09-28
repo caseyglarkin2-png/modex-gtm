@@ -133,8 +133,13 @@ export function isBoilerplate(sentence: string): boolean {
 export function isRunOnOrNavigation(sentence: string): boolean {
   if (sentence.trim().split(/\s+/).length > 70) return true;
   if (/\bAn article from\b/.test(sentence)) return true;
+  const t = sentence.trim();
+  // A page control run into the text ("Learn more News & Media ..."): navigation, not a sentence.
+  if (/^(?:Learn more|Read more|Skip to|Back to|See all|View all|Share this)\b/i.test(t)) return true;
   // Six or more capitalized words in a row before any verb-like lowercase word: a menu, not a sentence.
-  return /^(?:[A-Z][\w&.-]*\s+){6,}/.test(sentence.trim());
+  if (/^(?:[A-Z][\w&.-]*\s+){6,}/.test(t)) return true;
+  // The same menu run ANYWHERE, counting "&" as a menu joiner ("News & Media Innovation & Tech PepsiCo").
+  return /(?:^|\s)(?:(?:[A-Z][\w.'’-]*|&)\s+){5,}(?:[A-Z][\w.'’-]*|&)(?=\s)/.test(t) && /&/.test(t);
 }
 
 /**
