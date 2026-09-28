@@ -31,6 +31,11 @@ const NOT_FACTS: Array<[string, string]> = [
   ['PepsiCo newsroom breadcrumb', 'Learn more News & Media Innovation & Tech PepsiCo and Gatik announce multi-year agreement to deploy autonomous freight in North America This deployment will bring autonomous trucks into one of the world’s largest food and beverage supply chains.'],
   ['a page control run into a sentence', 'Read more PepsiCo will open a new distribution center in Dallas next year.'],
   ['an ampersand menu run mid-text', 'Home News & Media Innovation & Tech PepsiCo will open a new distribution center in Dallas next year.'],
+  // evidence integrity review 2026-09-28: accounting policy and a software rollout are not physical-network facts
+  ['KDP depreciation policy', 'Property, plant and equipment is depreciated on a straight-line basis over the estimated useful lives of the assets, except land and assets under construction which are not depreciated.'],
+  ['UNFI software platform rollout', 'The company also completed the rollout of an AI-powered supply chain and procurement planning platform across its distribution network and expanded Lean Daily Management practices to 44 distribution centers.'],
+  ['depreciation language alone', 'The new distribution center in Ohio will be depreciated over forty years once construction is complete.'],
+  ['a planning platform alone', 'Kroger will expand its procurement planning platform to every distribution center in Ohio this year.'],
   ['PepsiCo page menu', 'Regulation Technology Labor Operations Equipment M&A An article from Dive Brief PepsiCo expanding autonomous truck use in its supply chain The multiyear deal with Gatik will help the food and beverage giant increase capacity.'],
 ];
 
