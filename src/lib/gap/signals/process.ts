@@ -125,7 +125,11 @@ export async function processSignals(
   // Promoted once: a promotion whose trigger row could not be found is not re-sent every pass (filtered before the limit).
   for (const v of verified.filter((x) => !(x as { metadata?: { promotedAt?: string } | null }).metadata?.promotedAt).slice(0, opts.promoteLimit ?? 10)) {
     try {
-      const r = await promoteSignal(prisma, v.id, { ingest: deps.ingest });
+      const r = await promoteSignal(prisma, v.id, { ingest: deps.ingest, now: opts.now });
+      // Old or undated verified stories stay evidence; they are marked so the pass never retries them.
+      if (!r.ok && (r.reason === 'not_recent' || r.reason === 'undated')) {
+        await prisma.gapSignal.update({ where: { id: v.id }, data: { metadata: { ...(((v as { metadata?: Record<string, unknown> | null }).metadata ?? {}) as Record<string, unknown>), promotedAt: opts.now.toISOString(), promotion: { skipped: r.reason } } } });
+      }
       if (r.ok) res.promoted += 1;
     } catch (e) {
       res.errors.push(`promote ${v.id}: ${(e instanceof Error ? e.message : String(e)).slice(0, 80)}`);

@@ -81,7 +81,7 @@ describe('promotion: only a verified, resolved signal, only through the canonica
   const base = { id: 's1', url: 'https://pepsico.com/newsroom/gatik', title: 'PepsiCo and Gatik expand autonomous freight', account_name: 'PepsiCo', resolution: 'resolved', research_status: 'fact_found', promoted_trigger_id: null, feedback: null, published_at: new Date('2026-06-08T00:00:00Z') };
   const db = (o: Record<string, unknown>) => {
     const r = { ...base, ...o };
-    return { r, prisma: { gapSignal: { findUnique: vi.fn(async () => r), update: vi.fn(async ({ data }: { data: Record<string, unknown> }) => Object.assign(r, data)) }, pounceTrigger: { findUnique: vi.fn(async () => ({ id: 77 })) } } };
+    return { r, prisma: { gapSignal: { findUnique: vi.fn(async () => r), update: vi.fn(async ({ data }: { data: Record<string, unknown> }) => Object.assign(r, data)) }, pounceTrigger: { findUnique: vi.fn(async () => ({ id: 77 })), findMany: vi.fn(async () => [] as unknown[]) } } };
   };
 
   it('a raw (unverified), ambiguous or ignored signal is never promoted and never touches the spine', async () => {
@@ -96,9 +96,32 @@ describe('promotion: only a verified, resolved signal, only through the canonica
   it('a verified signal enters ingestTriggers with honestly derived fields and records its trigger', async () => {
     const ingest = vi.fn(async () => ({ received: 1, created: 1, duplicate: 0, pinged: 0, stamped: 0 }));
     const { prisma, r } = db({});
-    expect(await promoteSignal(prisma, 's1', { ingest })).toEqual({ ok: true, triggerId: 77, created: true });
+    expect(await promoteSignal(prisma, 's1', { ingest, now: new Date('2026-06-10T00:00:00Z') })).toEqual({ ok: true, triggerId: 77, created: true });
     expect(ingest).toHaveBeenCalledWith([expect.objectContaining({ accountName: 'PepsiCo', url: base.url, title: base.title, source: 'web', categories: expect.arrayContaining(['autonomy']), publishedAt: '2026-06-08T00:00:00.000Z' })]);
     expect(r.promoted_trigger_id).toBe(77);
+  });
+});
+
+describe('dogfood fix: an old story is never a new trigger; the same story links to its trigger', () => {
+  const base = { id: 's1', url: 'https://supplychaindive.com/x', title: 'PepsiCo expanding autonomous truck use in its supply chain', account_name: 'PepsiCo', resolution: 'resolved', research_status: 'fact_found', promoted_trigger_id: null, feedback: null, event_id: null, published_at: new Date('2026-06-11T00:00:00Z'), metadata: {} };
+  const mk = (triggers: unknown[]) => {
+    const r = { ...base };
+    return { r, prisma: { gapSignal: { findUnique: vi.fn(async () => r), update: vi.fn(async ({ data }: { data: Record<string, unknown> }) => Object.assign(r, data)) }, pounceTrigger: { findUnique: vi.fn(), findMany: vi.fn(async () => triggers) } } };
+  };
+
+  it('a verified story from June is not promoted in September (it stays verified evidence)', async () => {
+    const ingest = vi.fn();
+    const { prisma } = mk([]);
+    expect(await promoteSignal(prisma, 's1', { ingest, now: new Date('2026-09-28T00:00:00Z') })).toEqual({ ok: false, reason: 'not_recent' });
+    expect(ingest).not.toHaveBeenCalled();
+  });
+
+  it('a story already a trigger on the account (another outlet) links to it: no second Slack ping, no second HubSpot note', async () => {
+    const ingest = vi.fn();
+    const { prisma, r } = mk([{ id: 16, title: 'PepsiCo expanding autonomous truck use across its supply chain with Gatik', published_at: new Date('2026-06-09T00:00:00Z'), first_seen_at: new Date('2026-07-03T00:00:00Z') }]);
+    expect(await promoteSignal(prisma, 's1', { ingest, now: new Date('2026-06-12T00:00:00Z') })).toEqual({ ok: true, triggerId: 16, created: false });
+    expect(ingest).not.toHaveBeenCalled();
+    expect(r.promoted_trigger_id).toBe(16);
   });
 });
 

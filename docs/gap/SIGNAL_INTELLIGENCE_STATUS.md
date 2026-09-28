@@ -377,6 +377,8 @@ and a mutation proven RED then restored (12 mutations):
 | 7 | P1 (reliability) | Discovery's leading-word key attributed other companies' and places' stories (Hyundai Mobis, Toyota Industries, WestRock, Georgia) | Discovery matches the full name or Casey's aliases only |
 | 8 | observed in dogfood | One research call hit the 300s function limit (signal pages were read without a bound) | At most 3 signal pages per run within a 25s budget |
 
+| 9 | P1 (production dogfood quality review) | The PepsiCo/Gatik story published 2026-06-08 (already Pounce trigger 16 in July) was promoted today from two Casey-shared links as NEW triggers 86 and 87: two #yardflow-intent Slack pings and two HubSpot notes plus a trigger-heat stamp on the PepsiCo company, for a three-month-old story | A signal becomes a trigger only if its story was published within 21 days; a story already a trigger on the account (published within 7 days, same story words) is LINKED to that trigger, never a second ping; old or undated verified stories stay verified evidence and are not retried |
+
 Also fixed: ignored signals are never researched; the research claim is
 conditional on `queued` and the account; IPv4-literal reserved ranges refused.
 
@@ -404,4 +406,15 @@ conditional on `queued` and the account; IPv4-literal reserved ranges refused.
   there); the saved panel has no account picker; no USE button (`use` is a
   valid label); `deal_context` is never assigned; labor / security words
   (union, Teamsters, security) are not in the risk vocabulary.
+
+### Production side effects to correct (Casey's call; not changed by the agent)
+The dogfood's promotion of the June PepsiCo/Gatik story (row 9 above) wrote,
+through the canonical Pounce path, on 2026-09-28 at 13:00 UTC:
+- Pounce triggers 86 (supplychaindive) and 87 (pepsico.com newsroom), both
+  `source web`; marked `dismissed` by the agent so ranked lists ignore them.
+- Two Slack messages in #yardflow-intent (cannot be unsent).
+- Two HubSpot timeline Notes on the PepsiCo company (id 56630459299) and the
+  trigger-heat properties overwritten (`last_trigger_at` 2026-09-28). The
+  agent did not delete CRM records; delete the two notes and restore the
+  trigger properties from trigger 16 if you want them gone.
 
