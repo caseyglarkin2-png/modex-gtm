@@ -24,6 +24,23 @@ describe('story clustering', () => {
     expect(sameEvent(a, row({ id: 'c', title: 'PepsiCo to close Frito-Lay plant in Ohio' }))).toBe(false);
   });
 
+  it('quality review: six outlets rewriting one story are one event; a different story that week is not', () => {
+    const titles = [
+      'Amazon Picks U.S. Site for New Plant Producing Robotics Components',
+      'Amazon Plans $100M Indiana Manufacturing Plant to Support Robotics Network',
+      'Amazon’s New Indiana Facility Will Manufacture Robotics for Fulfillment Centers Nationwide',
+      'Amazon invests over $100 million in high-tech manufacturing plant in Greenwood to double robotics capacity',
+      'Amazon to invest more than $100M in robotics manufacturing facility',
+      'Amazon Robotics Plant Coming to Greenwood, Indiana',
+    ].map((title, i) => row({ id: `a${i}`, title, account_name: 'Amazon' }));
+    const pairs = titles.flatMap((a, i) => titles.slice(i + 1).map((b) => sameEvent(a, b)));
+    // Five of the six connect (transitively one event). "Picks U.S. Site for New Plant Producing Robotics
+    // Components" shares one specific word with the rest: conservative clustering leaves it apart.
+    expect(titles.slice(1).every((a) => titles.slice(1).some((b) => a !== b && sameEvent(a, b)))).toBe(true);
+    expect(pairs.filter(Boolean).length).toBeGreaterThanOrEqual(5);
+    expect(sameEvent(titles[0], row({ id: 'x', title: 'Amazon closes Port St. Lucie fulfillment center today, hundreds impacted by layoffs', account_name: 'Amazon' }))).toBe(false);
+  });
+
   it('never across accounts or far-apart dates', () => {
     const a = row({ id: 'a', title: 'opens new distribution center in Dallas Texas region' });
     expect(sameEvent(a, row({ id: 'b', account_name: 'General Mills', title: 'opens new distribution center in Dallas Texas region' }))).toBe(false);

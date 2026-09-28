@@ -94,8 +94,59 @@ const HYPOTHETICAL = /\b(?:may|might|could|would)\b/i;
 /** A "network" that is not a physical one (the retail-media, loyalty or IT kind). */
 const NON_PHYSICAL_NETWORK = /\b(?:digital|media|social|payments?|loyalty|advertising|data|computer|telecom|wireless|dealer|franchise)\s+networks?\b/gi;
 
-/** An acquisition of a company that is not physical network (software, data, media). */
-const NON_PHYSICAL_ACQUISITION = /\b(?:software|analytics|technology|tech|apps?|platform|digital|saas|data|media|marketing|fintech|e-commerce)\b/i;
+/** An acquisition of a company that is not physical network (software, data, media), or of paper and stock, not sites. */
+const NON_PHYSICAL_ACQUISITION = /\b(?:software|analytics|technology|tech|apps?|platform|digital|saas|data|media|marketing|fintech|e-commerce|inventory|receivables|securities|shares|stock|notes)\b/i;
+
+/**
+ * Signal Intelligence quality review (2026-09-28, the production dogfood's verified facts): filing and legal
+ * boilerplate that names a facility word and a change word but states no change to the physical network. Each
+ * pattern is from a sentence research verified verbatim and GAP must not treat as a fact:
+ *   credit agreements ("the Facility ... Maturity Date", lenders, covenants, leverage ratios), presentation and
+ *   accounting notes ("reclassified to conform", segment methodology, equity method, held for sale, fair value,
+ *   goodwill), filing headers ("Item 1.01 Entry into a Material Definitive Agreement"), cost lines ("facility
+ *   closing costs", "costs related to ... acquisitions") and synthetic leases.
+ */
+const BOILERPLATE = new RegExp(
+  [
+    String.raw`\bmaturity date\b`, String.raw`\blenders?\b`, String.raw`\bcovenants?\b`, String.raw`\bleverage ratio\b`, String.raw`\brevolving\b`, String.raw`\bclosing date\b`,
+    String.raw`\breclassified\b`, String.raw`\bconform (?:to|with) the\b`, String.raw`\bmethodology\b`, String.raw`\bsegment (?:net )?assets\b`, String.raw`\bequity method\b`, String.raw`\bheld for sale\b`,
+    String.raw`\bfair value\b`, String.raw`\bgoodwill\b`, String.raw`\bintangible assets?\b`, String.raw`\bitem \d\.\d\d\b`, String.raw`\bentry into a material definitive agreement\b`,
+    String.raw`\bsynthetic lease\b`, String.raw`\bnon-?cancell?able\b`, String.raw`\bclosing costs?\b`, String.raw`\bcosts? (?:related|relating|associated) (?:to|with)\b`, String.raw`\bprofessional fees\b`,
+    String.raw`\bterms? (?:and conditions )?(?:of|in effect)\b`, String.raw`\bselects? third-party\b`,
+  ].join('|'),
+  'i',
+);
+
+/** The sentence reports an event (it happened, is under way, or is scheduled), not a description. */
+const EVENT_MARKER = /\b(?:will|plans? to|planning to|announced|announces|expects? to|expected to|is expected|are expected|opened|closed|completed|began|begins|broke ground|breaks ground|shutter(?:s|ed|ing)?|agreed to|has (?:opened|closed|begun|started)|have (?:opened|closed)|to (?:open|close|build|expand|consolidate|relocate|shutter|exit)|under construction|construction of the new|recently (?:opened|closed|expanded|completed)|by (?:closing|opening|consolidating|relocating|expanding|building)|(?:closing|opening|consolidating|relocating|shuttering) (?:facilities|plants|its|the|two|three|four|several))\b/i;
+
+/** A payment, proceeds or entitlement around a "definitive agreement" is money, not a site. */
+const PAYMENT_CONTEXT = /\b(?:cash payment|entitled to|net proceeds|proceeds from|received in)\b/i;
+
+export function isBoilerplate(sentence: string): boolean {
+  return BOILERPLATE.test(sentence);
+}
+
+/** A run-on of page navigation ("Regulation Technology Labor Operations Equipment M&A An article from...") or a paragraph is not one statement. */
+export function isRunOnOrNavigation(sentence: string): boolean {
+  if (sentence.trim().split(/\s+/).length > 70) return true;
+  if (/\bAn article from\b/.test(sentence)) return true;
+  // Six or more capitalized words in a row before any verb-like lowercase word: a menu, not a sentence.
+  return /^(?:[A-Z][\w&.-]*\s+){6,}/.test(sentence.trim());
+}
+
+/**
+ * A sentence that dates its event to an EARLIER year than the source is a past event restated ("On March 12,
+ * 2024, we completed the acquisition of Sovos Brands" in a 2026 filing): true, but not something happening now.
+ * January and February sources may describe the prior year's December.
+ */
+export function describesPastEvent(sentence: string, publishedAt: Date): boolean {
+  const years = [...sentence.matchAll(/\b(19[5-9]\d|20\d\d)\b/g)].map((m) => Number(m[1]));
+  if (!years.length) return false;
+  const pubYear = publishedAt.getUTCFullYear();
+  const floor = publishedAt.getUTCMonth() <= 1 ? pubYear - 1 : pubYear;
+  return Math.max(...years) < floor;
+}
 
 /** Vendor and service contracts are paperwork, not a site change. */
 const CONTRACT_CONTEXT = /\b(?:vendor|supplier|service|security)\s+contracts?\b|\bcontracts?\s+with\b|\bagreements?\s+with\b/i;
@@ -127,14 +178,18 @@ const HABITUAL = /\b(?:from time to time|ordinary course|normal course|periodica
 /** Does this sentence state a physical-operations or network change (and is not a financial-statement mention)? */
 export function isPhysicalOpsFact(sentence: string): boolean {
   if (NEGATION.test(sentence) || HABITUAL.test(sentence)) return false;
+  if (isBoilerplate(sentence) || isRunOnOrNavigation(sentence)) return false;
   if (HYPOTHETICAL.test(sentence)) return false;
   if (CONTRACT_CONTEXT.test(sentence)) return false;
   if (hasSpecificSiteChange(sentence)) return true;
   if (isFinancialStatementMention(sentence)) return false;
   if (isNonOperationalContext(sentence)) return false;
-  if (isAcquisitionFact(sentence)) return !NON_PHYSICAL_ACQUISITION.test(sentence);
+  if (isAcquisitionFact(sentence)) return !NON_PHYSICAL_ACQUISITION.test(sentence) && !PAYMENT_CONTEXT.test(sentence);
   const physical = sentence.replace(NON_PHYSICAL_NETWORK, ' ');
-  return FACILITY.test(physical) && CHANGE.test(physical);
+  // Quality review: a facility word and a change word are not an EVENT. "Our parts distribution centers are
+  // involved in storage", "operating a network of 26 distribution centers" and "a supply chain built for the
+  // future" describe; a fact states that something happened, is happening, or is scheduled.
+  return FACILITY.test(physical) && CHANGE.test(physical) && EVENT_MARKER.test(sentence);
 }
 
 const ABBREVIATION_END = /\b(?:Co|Inc|Corp|Ltd|Cos|L\.P|U\.S|No|Nos|Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|approx|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.$/;

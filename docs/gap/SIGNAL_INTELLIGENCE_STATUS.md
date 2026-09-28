@@ -94,7 +94,7 @@ event. Nothing else is added.
 | B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | #289 | 5b936236 | READY (processing cron first tick pending at merge) |
 | C | Account watches + scheduled discovery | feat/gap-signal-c-discovery | #290 | 526d50d8 | READY; 3 production discovery batches asked all 74 watched accounts |
 | D | Research aperture (shipped with C) | feat/gap-signal-c-discovery | #290 | 526d50d8 | READY; production research batches covered ~70 distinct accounts |
-| E | Final review fixes, dogfood, coverage, quality | fix/gap-signal-final-review | | | |
+| E | Final review fixes, dogfood, coverage, quality | fix/gap-signal-final-review, fix/gap-signal-fact-quality | #291 | e73d8bc4 | READY; processing pass promoted nothing old; research held by the cooldown (universe covered) |
 
 ## Release A: signal intake + Share to GAP
 
@@ -417,4 +417,42 @@ through the canonical Pounce path, on 2026-09-28 at 13:00 UTC:
   trigger-heat properties overwritten (`last_trigger_at` 2026-09-28). The
   agent did not delete CRM records; delete the two notes and restore the
   trigger properties from trigger 16 if you want them gone.
+
+## Quality review (production dogfood sample) and the fixes it forced
+
+Sample: the 157 facts production research verified on 2026-09-28 (one per
+account read in full), every promoted signal, every no-usable-fact outcome,
+every ambiguous signal, and the 27 discovered stories.
+
+Verified facts, verbatim at their source but NOT physical-network facts:
+filing boilerplate (Caterpillar segment methodology; Newell and Mondelez
+credit-facility language where "Facility" is a loan; GXO's leverage covenant;
+Primo's reclassification note; Sysco's "Item 1.01" header; PFG cost lines),
+business descriptions with no event ("Caterpillar's parts distribution centers
+are involved in..."; "operating a network of 26 distribution centers"; a
+PepsiCo executive quote), money around a definitive agreement (Mondelez cash
+payment), past-year events dated by the filing (Campbell's 2024 Sovos
+acquisition, FedEx's 2024 merger, Flowers' 2025 closure, Boeing's 2025 Spirit
+acquisition, Bosch's 2025 HVAC deal), and page-navigation run-ons.
+
+Fixed on `fix/gap-signal-fact-quality` (the verification contract only gets
+stricter; nothing about a real change was lost):
+- `isPhysicalOpsFact` refuses filing and legal boilerplate and navigation
+  run-ons; the loose facility-plus-change branch now needs an EVENT marker
+  (will, plans to, announced, opened, closed, completed, broke ground, by
+  closing ...); a payment or proceeds sentence is not an acquisition fact.
+- `verifyCandidate` refuses a sentence that dates its event to an earlier year
+  than its source (`describes_past_event`).
+- `scripts/gap/recheck-verified-facts.ts` re-applies the current rules to
+  stored facts; a failing fact keeps its row and text, and only its
+  `metadata.verified` stamp moves to `failed_recheck` (reason and previous
+  value kept), so every gate that needs the stamp refuses it.
+- Clustering compares the story's specific words against the SHORTER
+  headline (half, and 2+ shared): the six rewrites of the Amazon Greenwood
+  robotics plant story are now one event (five of six; the sixth shares one
+  word and stays apart).
+- The real facts in the sample still pass: General Mills' network redesign,
+  Georgia-Pacific's 400,000 sq ft warehouse, H-E-B's refrigerated facility, the
+  Frito-Lay plant closure, KDP's Allentown facility sale, Kroger's pinned
+  facility closures.
 

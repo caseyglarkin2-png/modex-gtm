@@ -26,7 +26,7 @@ import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/ev
 import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
 import type { SignalType } from '../taxonomy';
-import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, type FactChange } from './facts';
+import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, type FactChange, describesPastEvent } from './facts';
 import { defaultFetchText, edgarCandidates, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -201,6 +201,8 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };
   if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
   if (!isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
+  // Quality review: a past-year event restated in a newer source is not dated by the source.
+  if (describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
   if (!ctx.pages.has(c.url)) {
     try { ctx.pages.set(c.url, await ctx.fetchText(c.url)); } catch (err) { ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
   }
