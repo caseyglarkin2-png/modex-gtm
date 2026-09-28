@@ -34,6 +34,7 @@ import {
   DRAFT_SENT,
   DRAFT_SUBJECT_TYPE,
   DRAFTED,
+  lockAccount,
   lockPerson,
   MANUAL_SENT,
   type DraftDiscardedPayload,
@@ -312,13 +313,21 @@ export function personStepState(history: PersonSendHistory, stepIndex: number): 
  */
 export async function claimSendKey(
   prisma: PrismaLike,
-  args: { key: string; decisionId: string; personaId: number | null; recipient: string; stepIndex: number; actor: string; now: Date; kind?: 'direct' | 'draft' },
-): Promise<{ claimed: true } | { claimed: false; state: 'sent' | 'drafted' | 'unresolved' }> {
+  args: { key: string; decisionId: string; personaId: number | null; recipient: string; stepIndex: number; actor: string; now: Date; kind?: 'direct' | 'draft'; accountName?: string | null },
+): Promise<{ claimed: true } | { claimed: false; state: 'sent' | 'drafted' | 'unresolved' | 'account_motion'; detail?: string }> {
   return prisma.$transaction(
     async (tx: PrismaLike) => {
       await lockPerson(tx, args.personaId, args.recipient);
       const state = personStepState(await personSendHistory(tx, args.personaId, args.recipient), args.stepIndex);
       if (state !== 'free') return { claimed: false as const, state };
+      // Final review P1: a first touch re-checks the account's one motion under an account lock,
+      // so a concurrent first touch to a colleague (whose claim now counts) is seen here.
+      if (args.stepIndex === 0 && args.accountName) {
+        await lockAccount(tx, args.accountName);
+        const { accountMotionRefusal } = await import('../motion/load');
+        const motion = await accountMotionRefusal(tx, { accountName: args.accountName, personaId: args.personaId, email: args.recipient, now: args.now });
+        if (motion) return { claimed: false as const, state: 'account_motion' as const, detail: motion.detail };
+      }
       await tx.gapAuditEvent.create({
         data: {
           kind: args.kind === 'draft' ? DRAFT_CLAIMED : DIRECT_CLAIMED,

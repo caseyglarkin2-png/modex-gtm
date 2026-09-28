@@ -148,7 +148,7 @@ export async function loadBriefHistory(
           .find(isCompany) ?? null;
     const [touches, reply, last, opp] = await Promise.all([
       loadAccountFirstTouches(prisma, [input.accountName], input.now),
-      replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now) : Promise.resolve('unknown' as const),
+      replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now, { accountName: input.accountName }) : Promise.resolve('unknown' as const),
       email
         ? prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true }, orderBy: { created_at: 'desc' }, select: { response_class: true, created_at: true } })
         : Promise.resolve(null),

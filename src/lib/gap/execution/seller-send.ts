@@ -168,8 +168,9 @@ export async function sendSellerEmail(
   }
 
   const key = personStepKey(p.personaId, p.recipient, stepIndex);
-  const claim = await (deps.claim ?? claimSendKey)(prisma, { key, decisionId, personaId: p.personaId, recipient: p.recipient, stepIndex, actor, now });
+  const claim = await (deps.claim ?? claimSendKey)(prisma, { key, decisionId, personaId: p.personaId, recipient: p.recipient, stepIndex, actor, now, accountName: p.accountName });
   if (!claim.claimed) {
+    if (claim.state === 'account_motion') return { ok: false, reason: 'account_motion_active', detail: claim.detail ?? 'Another first touch at this account started first.' };
     if (claim.state === 'sent') {
       const again = sentStepRow(await directRows(prisma, decisionId), stepIndex);
       const sp = again?.payload as unknown as DirectSentPayload | undefined;
