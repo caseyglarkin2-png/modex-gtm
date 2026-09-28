@@ -44,6 +44,7 @@ import { RunRoutingPanel } from '@/components/gap/run-routing-panel';
 import { HypothesisList } from './hypotheses/hypothesis-list';
 import { RepliesTriage } from './replies/replies-triage';
 import { WorkQueue } from './work-queue';
+import { HealthStrip } from '@/components/gap/health-strip';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -213,6 +214,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">Decide what you believe, contact who GAP marks ready, log what buyers tell you.</p>
       </div>
       <GapSubnav />
+      {/* Phase 2 A3: can the cockpit be trusted right now (mailbox, HubSpot, suppression, sender, routing). */}
+      <HealthStrip />
       <GapCockpit data={{ ...data.counts, active: lane }} />
 
       {data.unrouted > 0 ? (

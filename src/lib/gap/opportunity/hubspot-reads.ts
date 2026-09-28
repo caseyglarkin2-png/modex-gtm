@@ -14,7 +14,8 @@ const SEARCH_LIMIT = 100;
 const SEARCH_PAGES = 3;
 const BATCH = 100;
 
-const DEAL_PROPERTIES = ['dealname', 'dealstage', 'pipeline', 'hs_is_closed'];
+// createdate: read-only deal observation (learning/deal-observation.ts) only; the resolver ignores it.
+const DEAL_PROPERTIES = ['dealname', 'dealstage', 'pipeline', 'hs_is_closed', 'createdate'];
 
 type AssocPage = { results: Array<{ toObjectId: string | number }>; paging?: { next?: { after?: string } } };
 type BatchAssoc = { results?: Array<{ _from?: { id?: string }; to?: Array<{ toObjectId: string | number }>; paging?: { next?: { after?: string } } }> };

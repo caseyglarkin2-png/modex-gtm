@@ -17,6 +17,7 @@
  * wire and are not touched; at most MAX_PER_RUN claims per run. Nothing here
  * ever releases a claim.
  */
+import { captureSendAttribution } from './send-attribution';
 import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFT_SUBJECT_TYPE, appendLedger } from './draft-ledger';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -142,6 +143,7 @@ export async function reconcileUnknownSends(
       sentAt: m.internalDate.toISOString(),
       reconciledFromSent: true,
       reconciledAt: input.now.toISOString(),
+      attribution: await captureSendAttribution(prisma, { hypothesisId: decision?.hypothesis_id ?? null, personaId: c.personaId, accountName: decision?.account_name ?? '', stepIndex: c.stepIndex, sequenceVersionId: null, at: m.internalDate }),
     });
     report.reconciled += 1;
   }

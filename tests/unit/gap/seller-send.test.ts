@@ -69,6 +69,32 @@ describe('SEND FROM YARDFLOW: preview and confirmation', () => {
     expect(d.audit.some((a) => a.kind === DIRECT_CLAIMED)).toBe(false);
   });
 
+  it('Phase 2 A2: a real send stamps the primary fact, opener, persona, account tier and problem family on the ledger row', async () => {
+    const d = db();
+    Object.assign(d.hypotheses[0].signals[0], { role: 'primary', signal_id: 'sig-1' });
+    d.hypotheses[0].persona = 'supply_chain';
+    const prisma = sendPrisma(d);
+    prisma.account = { findUnique: vi.fn(async () => ({ tier: 'Tier 1', hubspot_company_id: '8536615981' })) };
+    prisma.canonicalAccountLink = { findUnique: vi.fn(async () => ({ canonical_company_id: 'domain:kroger.com', status: 'resolved' })) };
+    const direct = adapter();
+    const pv = await preview(prisma, d, deps(d, direct));
+    await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: pv.to } }, deps(d, direct));
+    const sent = d.audit.find((a) => a.kind === DIRECT_SENT)!;
+    expect((sent.payload as { attribution: unknown }).attribution).toMatchObject({
+      version: 1,
+      primaryFactId: 'sig-1',
+      signalSourceKind: 'evidence_record',
+      openerApproach: 'verified_fact_observation',
+      personaTitle: 'corporate supply chain planning manager',
+      personaKey: 'supply_chain',
+      accountName: 'Kroger',
+      accountTier: 'Tier 1',
+      hubspotCompanyId: '8536615981',
+      canonicalCompanyId: 'domain:kroger.com',
+      problemFamily: 'hidden_capacity',
+    });
+  });
+
   it('CONFIRM + SEND sends ONE email as HUMAN_APPROVED_1TO1 bound to the confirmed recipient and content; records truth and human_action=emailed', async () => {
     const d = db();
     const prisma = sendPrisma(d);
@@ -86,6 +112,8 @@ describe('SEND FROM YARDFLOW: preview and confirmation', () => {
     expect(sent.payload).toMatchObject({ engine: 'gmail_direct', gmailSentMessageId: 'msg-1', gmailThreadId: 'thr-1', recipient: 'joey.maggard@kroger.com', senderIdentity: 'casey@yardflow.ai', contentHash: pv.contentHash, sequenceVersionId: 'ver-hc', stepIndex: 0, routingDecisionId: 'dec-joey', hypothesisId: 'hyp-kr', confirmedBy: ACTOR, evidenceTier: 'VERIFIED_FACT' });
     expect(d.decisions.find((x) => x.id === 'dec-joey').human_action).toBe('emailed');
     expect(d.audit.find((a) => a.kind === 'decision.human_action')!.payload).toMatchObject({ action: 'emailed', source: 'confirmed_direct_send', gmailSentMessageId: 'msg-1' });
+    // Phase 2 A2: the send row carries immutable send-time attribution (account read fails in this fixture: honestly unrecorded, never guessed).
+    expect((sent.payload as { attribution?: { version: number } }).attribution).toMatchObject({ version: 1 });
     expect(prisma.emailLog.create).toHaveBeenCalledTimes(1);
     expect(d.audit.some((a) => a.kind === DRAFTED)).toBe(false);
   });

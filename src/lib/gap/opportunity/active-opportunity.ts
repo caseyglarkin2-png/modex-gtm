@@ -169,8 +169,25 @@ export function emailDomain(email: string | null | undefined): string | null {
  * Every throw, truncation or malformed field is UNKNOWN, never CLEAR.
  */
 export async function resolveOpportunity(identity: OpportunityIdentity, reads: OpportunityReads): Promise<OpportunityTruth> {
+  const resolved = await resolveCompanyIdentity(identity, reads);
+  if (!resolved.ok) return resolved.truth;
+  const companyIds = resolved.companyIds;
+  return resolveDealsFor(identity, companyIds, reads);
+}
+
+/**
+ * The account's HubSpot company identity: the union described above (company
+ * id, verified and email domains, exact-name duplicates). Shared by the
+ * opportunity resolver and the read-only deal observation (Phase 2 A2), so
+ * there is ONE identity rule. UNKNOWN on anything it cannot determine.
+ */
+export async function resolveCompanyIdentity(
+  identity: OpportunityIdentity,
+  reads: OpportunityReads,
+): Promise<{ ok: true; companyIds: string[] } | { ok: false; truth: OpportunityTruth }> {
+  const fail = (t: OpportunityTruth) => ({ ok: false as const, truth: t });
   const domains = [...new Set(identity.domains.map(companyDomain).filter((d): d is string => !!d))].sort();
-  if (domains.length > MAX_IDENTITY_DOMAINS) return unknown('identity_ambiguous', `${domains.length} company domains at ${identity.accountName}`);
+  if (domains.length > MAX_IDENTITY_DOMAINS) return fail(unknown('identity_ambiguous', `${domains.length} company domains at ${identity.accountName}`));
 
   const companies = new Map<string, string | null>();
   const hsId = String(identity.hubspotCompanyId ?? '').trim();
@@ -179,11 +196,11 @@ export async function resolveOpportunity(identity: OpportunityIdentity, reads: O
     try {
       known = await reads.companiesById([hsId]);
     } catch (e) {
-      return unknown('hubspot_error', `company read: ${errText(e)}`);
+      return fail(unknown('hubspot_error', `company read: ${errText(e)}`));
     }
-    if (!known || !Array.isArray(known.companies) || !Array.isArray(known.missing)) return unknown('malformed_response', 'company read');
+    if (!known || !Array.isArray(known.companies) || !Array.isArray(known.missing)) return fail(unknown('malformed_response', 'company read'));
     // A company id HubSpot no longer has (merged or deleted) is not a determined identity.
-    if (known.missing.length > 0 || !known.companies.some((c) => String(c.id) === hsId)) return unknown('identity_unresolved', `HubSpot company ${hsId} not found`);
+    if (known.missing.length > 0 || !known.companies.some((c) => String(c.id) === hsId)) return fail(unknown('identity_unresolved', `HubSpot company ${hsId} not found`));
     for (const c of known.companies) companies.set(String(c.id), c.name ?? null);
   }
   if (domains.length > 0) {
@@ -191,14 +208,14 @@ export async function resolveOpportunity(identity: OpportunityIdentity, reads: O
     try {
       hit = await reads.companiesByDomains(hubspotDomainVariants(domains));
     } catch (e) {
-      return unknown('hubspot_error', `company search: ${errText(e)}`);
+      return fail(unknown('hubspot_error', `company search: ${errText(e)}`));
     }
-    if (!hit || !Array.isArray(hit.companies)) return unknown('malformed_response', 'company search');
-    if (hit.truncated) return unknown('identity_ambiguous', `more companies match ${domains.join(', ')} than one read returns`);
+    if (!hit || !Array.isArray(hit.companies)) return fail(unknown('malformed_response', 'company search'));
+    if (hit.truncated) return fail(unknown('identity_ambiguous', `more companies match ${domains.join(', ')} than one read returns`));
     for (const c of hit.companies) if (String(c.id).trim()) companies.set(String(c.id).trim(), c.name ?? null);
   }
   if (companies.size === 0) {
-    return unknown('identity_unresolved', `no HubSpot company for ${identity.accountName}${domains.length ? ` (${domains.join(', ')})` : ' (no company id or domain on file)'}`);
+    return fail(unknown('identity_unresolved', `no HubSpot company for ${identity.accountName}${domains.length ? ` (${domains.join(', ')})` : ' (no company id or domain on file)'}`));
   }
   // HubSpot's own duplicate records of the same company (exact name).
   const names = [...new Set([...companies.values()].map((n) => String(n ?? '').trim()).filter(Boolean))].sort();
@@ -207,14 +224,19 @@ export async function resolveOpportunity(identity: OpportunityIdentity, reads: O
     try {
       dup = await reads.companiesByNames(names);
     } catch (e) {
-      return unknown('hubspot_error', `company name search: ${errText(e)}`);
+      return fail(unknown('hubspot_error', `company name search: ${errText(e)}`));
     }
-    if (!dup || !Array.isArray(dup.companies)) return unknown('malformed_response', 'company name search');
-    if (dup.truncated) return unknown('identity_ambiguous', `more companies are named ${names.join(', ')} than one read returns`);
+    if (!dup || !Array.isArray(dup.companies)) return fail(unknown('malformed_response', 'company name search'));
+    if (dup.truncated) return fail(unknown('identity_ambiguous', `more companies are named ${names.join(', ')} than one read returns`));
     for (const c of dup.companies) if (String(c.id).trim()) companies.set(String(c.id).trim(), c.name ?? null);
   }
-  if (companies.size > MAX_IDENTITY_COMPANIES) return unknown('identity_ambiguous', `${companies.size} HubSpot companies for ${identity.accountName}`);
-  const companyIds = [...companies.keys()].sort();
+  if (companies.size > MAX_IDENTITY_COMPANIES) return fail(unknown('identity_ambiguous', `${companies.size} HubSpot companies for ${identity.accountName}`));
+  return { ok: true, companyIds: [...companies.keys()].sort() };
+}
+
+/** Deals on the resolved companies (required) and on the people GAP holds there (extra protection). */
+async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string[], reads: OpportunityReads): Promise<OpportunityTruth> {
+
 
   // Deals on the companies (required) and on the people GAP holds there (extra protection).
   const dealCompanies = new Map<string, Set<string>>();
@@ -302,6 +324,14 @@ export async function loadOpportunityIdentity(
     select: { email: true, hubspot_contact_id: true },
   });
   const domains = new Set<string>();
+  // Phase 2 A4 (identity status audit, 2026-09-28): deliberately EVERY link
+  // status, including `conflict`. The identity resolver (identity/service.ts)
+  // matches only `resolved` links, because it answers "which account is this
+  // company"; this answers "could this account have an open deal", where a
+  // conflicting domain may only ADD companies to check. Filtering to resolved
+  // here would drop PepsiCo's and Dannon's domains (both `conflict` in
+  // production) and weaken active-opportunity protection. Pinned by
+  // tests/unit/gap/identity-status.test.ts.
   for (const l of links) {
     const id = String(l.canonical_company_id ?? '');
     if (id.startsWith('domain:')) {

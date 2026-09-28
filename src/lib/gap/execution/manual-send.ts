@@ -15,6 +15,7 @@
  * when the caller passes Casey's explicit statement; Gmail proving a send is
  * execution truth, not Casey's routing feedback.
  */
+import { captureSendAttribution } from './send-attribution';
 import { recordHumanAction } from '../routing/queue';
 import { createHash } from 'node:crypto';
 import { appendLedger, MANUAL_SENT, type ManualSentPayload } from './draft-ledger';
@@ -109,6 +110,7 @@ export async function recordManualSend(
     sentAt: input.match.message.sentAt,
     matchedOn: input.match.matchedOn,
     recordedAt: input.now.toISOString(),
+    attribution: await captureSendAttribution(prisma, { hypothesisId: input.hypothesisId, personaId: input.personaId, accountName: input.accountName, stepIndex: input.stepIndex, sequenceVersionId: input.sequenceVersionId, at: new Date(input.match.message.sentAt) }),
   };
   const ledgerId = existing ? String(existing.id) : (await appendLedger(prisma, MANUAL_SENT, input.actor, input.decisionId, payload as unknown as Record<string, unknown>));
   if (!input.ownerStatement) return { ledgerId, humanAction: 'not_recorded' };
