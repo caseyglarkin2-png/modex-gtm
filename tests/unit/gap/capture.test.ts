@@ -31,7 +31,10 @@ function db() {
       findMany: vi.fn(async ({ where }: any) => audit.filter((r) => r.subject_type === where.subject_type && (where.subject_id ? r.subject_id === where.subject_id : true) && (where.kind ? r.kind === where.kind : true))),
     },
     account: { findUnique: vi.fn(async ({ where }: any) => (['PepsiCo', 'Kroger'].includes(where.name) ? { name: where.name } : null)) },
-    persona: { findUnique: vi.fn(async ({ where }: any) => (where.id === 7 ? { id: 7, account_name: 'PepsiCo', email: 'maria@pepsico.com' } : where.id === 9 ? { id: 9, account_name: 'Kroger', email: 'k@kroger.com' } : null)) },
+    persona: {
+      findUnique: vi.fn(async ({ where }: any) => (where.id === 7 ? { id: 7, account_name: 'PepsiCo', email: 'maria@pepsico.com' } : where.id === 8 ? { id: 8, account_name: 'PepsiCo', email: 'bob@pepsico.com' } : where.id === 9 ? { id: 9, account_name: 'Kroger', email: 'k@kroger.com' } : null)),
+      findFirst: vi.fn(async ({ where }: any) => (({ 'maria@pepsico.com': 'PepsiCo', 'bob@pepsico.com': 'PepsiCo', 'k@kroger.com': 'Kroger' } as Record<string, string>)[where.email.equals] === where.account_name ? { id: 1 } : null)),
+    },
     prospectingHypothesis: { findUnique: vi.fn(async ({ where }: any) => (where.id === 'h-pep' ? { id: 'h-pep', account_name: 'PepsiCo' } : where.id === 'h-kr' ? { id: 'h-kr', account_name: 'Kroger' } : null)) },
   };
   return { prisma, audit };
@@ -163,3 +166,44 @@ describe('recordMeetingOutcome (D4)', () => {
     expect(recordDisposition.mock.calls[0][1]).toMatchObject({ responseClass: 'no_signal', channel: 'meeting' });
   });
 });
+
+describe('review D P1: speakers and edited quotes', () => {
+  const MULTI = ['Casey Larkin: Most yards we see lose 2 hours per shift to trailer hunting.', 'Jane Doe: We walk the yard with a clipboard to find trailers.', 'Bob Smith: The detention charges from carriers are killing us.'].join('\n');
+
+  it('a full-name seller label is a seller line; each candidate keeps its speaker label', () => {
+    const c = extractCandidates(MULTI);
+    expect(c.map((x) => [x.speaker, x.quote])).toEqual([
+      ['Jane Doe', 'We walk the yard with a clipboard to find trailers.'],
+      ['Bob Smith', 'The detention charges from carriers are killing us.'],
+    ]);
+  });
+
+  it('on a multi-speaker note the note person is never assumed: confirm needs an explicit speaker per line', async () => {
+    const t = db();
+    const r = await createCapture(t.prisma, { accountName: 'PepsiCo', personaId: 7, context: 'meeting', rawText: MULTI, actor: 'casey', now: NOW });
+    if (!r.ok) throw new Error('seed');
+    expect(await decideCandidate(t.prisma, { captureId: r.capture.id, candidateId: 'c2', decision: 'confirm', hypothesisId: 'h-pep', actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'speaker_required' });
+    expect(recordBid).not.toHaveBeenCalled();
+    expect(await decideCandidate(t.prisma, { captureId: r.capture.id, candidateId: 'c2', decision: 'confirm', hypothesisId: 'h-pep', personaId: 8, actor: 'casey', now: NOW })).toMatchObject({ ok: true });
+    expect(recordBid.mock.calls[0][1]).toMatchObject({ contactEmail: 'bob@pepsico.com' });
+  });
+
+  it('an explicit contact email must be a person at this account', async () => {
+    const t = db();
+    const r = await createCapture(t.prisma, { accountName: 'PepsiCo', context: 'meeting', rawText: NOTE, actor: 'casey', now: NOW });
+    if (!r.ok) throw new Error('seed');
+    expect(await decideCandidate(t.prisma, { captureId: r.capture.id, candidateId: 'c1', decision: 'confirm', hypothesisId: 'h-pep', contactEmail: 'k@kroger.com', actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'contact_not_at_account' });
+    expect(recordBid).not.toHaveBeenCalled();
+  });
+
+  it('an edited quote must stay inside its own sentence and keep four words', async () => {
+    const t = db();
+    const r = await createCapture(t.prisma, { accountName: 'PepsiCo', personaId: 7, context: 'meeting', rawText: NOTE, actor: 'casey', now: NOW });
+    if (!r.ok) throw new Error('seed');
+    const c2 = r.capture.candidates[1];
+    expect(await decideCandidate(t.prisma, { captureId: r.capture.id, candidateId: c2.id, decision: 'confirm', quote: 'The detention charges from carriers are killing us.', hypothesisId: 'h-pep', actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'quote_not_in_source' });
+    expect(await decideCandidate(t.prisma, { captureId: r.capture.id, candidateId: c2.id, decision: 'confirm', quote: '3 hours', hypothesisId: 'h-pep', actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'quote_not_in_source' });
+    expect(await decideCandidate(t.prisma, { captureId: r.capture.id, candidateId: c2.id, decision: 'confirm', quote: 'We lose about 3 hours per shift', hypothesisId: 'h-pep', actor: 'casey', now: NOW })).toMatchObject({ ok: true });
+  });
+});
+

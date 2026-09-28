@@ -22,7 +22,7 @@ import { randomUUID } from 'node:crypto';
 import { recordBid } from '../bid/service';
 import { recordDisposition } from '../disposition/service';
 import { BID_TYPES, type BidType } from '../taxonomy';
-import { extractCandidates, quoteInSource, type CandidateBid } from './extract';
+import { buyerSpeakers, extractCandidates, quoteInSource, quoteWithinSentence, type CandidateBid } from './extract';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -79,7 +79,9 @@ export type CaptureRefusal =
   | 'hypothesis_not_at_account'
   | 'no_contact'
   | 'bad_outcome'
-  | 'quote_required';
+  | 'quote_required'
+  | 'speaker_required'
+  | 'contact_not_at_account';
 
 type Ok<T> = { ok: true } & T;
 type Refused = { ok: false; reason: CaptureRefusal; detail?: string };
@@ -177,9 +179,13 @@ export async function linkCapture(prisma: PrismaLike, input: { captureId: string
   return { ok: true, capture: (await loadCapture(prisma, input.captureId))! };
 }
 
-async function contactFor(prisma: PrismaLike, accountName: string, personaId: number | null, explicit: string | null | undefined): Promise<{ email: string; personaId: number | null } | null> {
+async function contactFor(prisma: PrismaLike, accountName: string, personaId: number | null, explicit: string | null | undefined): Promise<{ email: string; personaId: number | null } | 'not_at_account' | null> {
   const e = (explicit ?? '').trim().toLowerCase();
-  if (e) return { email: e, personaId };
+  if (e) {
+    // Review D: an explicit address must be a person GAP holds at THIS account (never another company's).
+    const p = await prisma.persona.findFirst({ where: { email: { equals: e, mode: 'insensitive' }, account_name: accountName }, select: { id: true } });
+    return p ? { email: e, personaId: p.id } : 'not_at_account';
+  }
   if (personaId == null) return null;
   const p = await prisma.persona.findUnique({ where: { id: personaId }, select: { email: true, account_name: true } });
   if (!p || p.account_name !== accountName || !p.email) return null;
@@ -192,7 +198,16 @@ async function contactFor(prisma: PrismaLike, accountName: string, personaId: nu
  * exact quote, optionally relabelled or with an edited quote that is STILL
  * verbatim in the note. REJECT records the rejection. Either way, once.
  */
-export async function decideCandidate(
+export async function decideCandidate(prisma: PrismaLike, input: Parameters<typeof decideCandidateUnlocked>[1]): ReturnType<typeof decideCandidateUnlocked> {
+  // Review D: one decision per candidate even under a double tap: serialize on the capture.
+  if (typeof prisma.$transaction !== 'function' || typeof prisma.$executeRaw !== 'function') return decideCandidateUnlocked(prisma, input);
+  return prisma.$transaction(async (tx: PrismaLike) => {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_capture:${input.captureId}`}))`;
+    return decideCandidateUnlocked(tx, input);
+  });
+}
+
+async function decideCandidateUnlocked(
   prisma: PrismaLike,
   input: {
     captureId: string;
@@ -219,12 +234,20 @@ export async function decideCandidate(
   }
   const quote = (input.quote ?? cand.quote).trim();
   if (!quoteInSource(quote, view.rawText)) return { ok: false, reason: 'quote_not_in_source' };
+  // Review D: a shortened quote stays inside its own sentence (never a fragment of a seller line or a
+  // neighbouring sentence) and keeps at least four words.
+  if (input.quote && !quoteWithinSentence(quote, cand.quote)) return { ok: false, reason: 'quote_not_in_source', detail: 'An edited quote must stay inside its own sentence and keep at least four words.' };
   const type = (input.type ?? cand.type) as BidType;
   if (!(BID_TYPES as readonly string[]).includes(type)) return { ok: false, reason: 'bad_bid_type' };
   if (!view.accountName) return { ok: false, reason: 'capture_unlinked' };
   const hyp = input.hypothesisId ? await prisma.prospectingHypothesis.findUnique({ where: { id: input.hypothesisId }, select: { id: true, account_name: true } }) : null;
   if (!hyp || hyp.account_name !== view.accountName) return { ok: false, reason: 'hypothesis_not_at_account' };
-  const contact = await contactFor(prisma, view.accountName, input.personaId ?? view.personaId, input.contactEmail);
+  // Review D P1: on a note with more than one buyer speaker, WHO said it is Casey's explicit choice
+  // for this candidate; the note's person is never assumed for every line.
+  const multiSpeaker = buyerSpeakers(view.rawText).length > 1;
+  if (multiSpeaker && input.personaId == null && !input.contactEmail) return { ok: false, reason: 'speaker_required', detail: `This note has more than one speaker${cand.speaker ? ` (this line: ${cand.speaker})` : ''}. Choose who said it.` };
+  const contact = await contactFor(prisma, view.accountName, multiSpeaker ? (input.personaId ?? null) : (input.personaId ?? view.personaId), input.contactEmail);
+  if (contact === 'not_at_account') return { ok: false, reason: 'contact_not_at_account' };
   if (!contact) return { ok: false, reason: 'no_contact', detail: 'Choose who said it (a person at the account) so the words are never assigned to the wrong contact.' };
   const r = await recordBid(prisma, {
     hypothesisId: hyp.id,
@@ -262,6 +285,7 @@ export async function recordMeetingOutcome(
   const hyp = await prisma.prospectingHypothesis.findUnique({ where: { id: input.hypothesisId }, select: { id: true, account_name: true } });
   if (!hyp || hyp.account_name !== view.accountName) return { ok: false, reason: 'hypothesis_not_at_account' };
   const contact = await contactFor(prisma, view.accountName, input.personaId ?? view.personaId, input.contactEmail);
+  if (contact === 'not_at_account') return { ok: false, reason: 'contact_not_at_account' };
   if (!contact) return { ok: false, reason: 'no_contact' };
   const quote = (input.buyerQuote ?? '').trim();
   if (outcome === 'qualified_problem') {

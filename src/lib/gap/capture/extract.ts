@@ -14,13 +14,16 @@ import type { BidType } from '../taxonomy';
 export interface CandidateBid {
   id: string;
   quote: string;
+  /** The speaker label the line carried in the note ("Maria (VP DC Ops)"), or null (dictation, plain notes). */
+  speaker: string | null;
   type: BidType;
   /** The cue words that suggested the type (shown to Casey; not a score). */
   cues: string[];
 }
 
-const SELLER_SPEAKER = /^\s*(casey|me|i|yardflow|freightroll|seller|ae|rep)\s*[:\-]/i;
-const SPEAKER = /^\s*[A-Z][\w .'(),&/-]{0,60}:\s*/;
+/** Seller labels, including a full name ("Casey Larkin:", "Casey L.:") (review D P1). */
+const SELLER_SPEAKER = /^\s*(casey\b[\w .'-]{0,40}|me|i|yardflow[\w .'-]{0,40}|freightroll[\w .'-]{0,40}|seller|ae|rep)\s*[:\-]/i;
+const SPEAKER = /^\s*([A-Z][\w .'(),&/-]{0,60}):\s*/;
 
 /** Ordered: the first matching rule labels the sentence. */
 const RULES: Array<{ type: BidType; cues: RegExp }> = [
@@ -35,19 +38,32 @@ const RULES: Array<{ type: BidType; cues: RegExp }> = [
   { type: 'current_state', cues: /\b(today we|right now|currently|we use|we track|we run|our process|the way we)\b/i },
 ];
 
-/** Split into sentences, keeping each one EXACTLY as it appears in the text. */
-export function sentencesOf(text: string): string[] {
-  const out: string[] = [];
+/** Split into sentences, keeping each one EXACTLY as it appears in the text, with the line's speaker label. */
+export function sentencesWithSpeaker(text: string): Array<{ sentence: string; speaker: string | null }> {
+  const out: Array<{ sentence: string; speaker: string | null }> = [];
   for (const rawLine of text.split(/\r?\n/)) {
     if (!rawLine.trim() || SELLER_SPEAKER.test(rawLine)) continue;
-    const line = rawLine.replace(SPEAKER, '');
+    const m = SPEAKER.exec(rawLine);
+    const speaker = m ? m[1].trim() : null;
+    const line = m ? rawLine.slice(m[0].length) : rawLine;
     const parts = line.match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g) ?? [];
     for (const p of parts) {
       const s = p.trim();
-      if (s.split(/\s+/).length >= 4) out.push(s);
+      if (s.split(/\s+/).length >= 4) out.push({ sentence: s, speaker });
     }
   }
   return out;
+}
+
+export function sentencesOf(text: string): string[] {
+  return sentencesWithSpeaker(text).map((x) => x.sentence);
+}
+
+/** Distinct first names of the non-seller speaker labels ("Maria (VP)" and "Maria" are one speaker). */
+export function buyerSpeakers(text: string): string[] {
+  const names = new Set<string>();
+  for (const { speaker } of sentencesWithSpeaker(text)) if (speaker) names.add(speaker.split(/[\s(]/)[0].toLowerCase());
+  return [...names];
 }
 
 const norm = (s: string) =>
@@ -64,19 +80,24 @@ export function quoteInSource(quote: string, source: string): boolean {
   return q.length > 0 && norm(source).includes(q);
 }
 
+/** Review D: an edited quote must stay inside its own candidate sentence and keep at least 4 words. */
+export function quoteWithinSentence(quote: string, sentence: string): boolean {
+  return quote.trim().split(/\s+/).length >= 4 && quoteInSource(quote, sentence);
+}
+
 export const MAX_CANDIDATES = 8;
 
 export function extractCandidates(text: string): CandidateBid[] {
   const out: CandidateBid[] = [];
   const seen = new Set<string>();
-  for (const sentence of sentencesOf(text)) {
+  for (const { sentence, speaker } of sentencesWithSpeaker(text)) {
     const key = norm(sentence);
     if (seen.has(key)) continue;
     const rule = RULES.find((r) => r.cues.test(sentence));
     if (!rule) continue;
     seen.add(key);
     const cues = [...new Set((sentence.match(new RegExp(rule.cues.source, 'gi')) ?? []).map((c) => c.toLowerCase()))].slice(0, 3);
-    out.push({ id: `c${out.length + 1}`, quote: sentence, type: rule.type, cues });
+    out.push({ id: `c${out.length + 1}`, quote: sentence, speaker, type: rule.type, cues });
     if (out.length >= MAX_CANDIDATES) break;
   }
   return out;

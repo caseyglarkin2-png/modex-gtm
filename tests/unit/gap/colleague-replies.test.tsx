@@ -102,4 +102,30 @@ describe('<CaptureFlow> (phone capture)', () => {
     expect(screen.getByTestId('capture-unlinked')).toHaveTextContent('Not linked to an account yet');
     expect(screen.getByTestId('candidate-confirm')).toBeDisabled();
   });
+
+  it('review D P1: a multi-speaker note pre-selects nobody; Confirm waits for Casey to choose who said the line', async () => {
+    const view = { id: 'cap3', accountName: 'PepsiCo', accountHint: null, personaId: 7, context: 'meeting', rawText: ['Jane Doe: We lose trailers every day in the yard.', 'Bob Smith: The detention charges are killing us.'].join('\n'), createdAt: '', createdBy: 'c', candidates: [{ id: 'c1', quote: 'We lose trailers every day in the yard.', speaker: 'Jane Doe', type: 'business_problem', cues: [], decision: null }], meetings: [] };
+    const f = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(JSON.stringify({ people: [{ id: 7, name: 'Jane' }, { id: 8, name: 'Bob' }], hypotheses: [{ id: 'h-pep', status: 'active', problem_family: 'hidden_capacity', primary_persona_id: 7 }] })));
+    render(<CaptureFlow initial={view as never} />);
+    await waitFor(() => expect(screen.getByTestId('candidate-speaker')).toBeInTheDocument());
+    expect(screen.getByTestId('candidate-speaker')).toHaveValue('');
+    expect(screen.getByTestId('candidate-confirm')).toBeDisabled();
+    expect(screen.getByText('In the note: Jane Doe')).toBeInTheDocument();
+    fireEvent.change(screen.getByTestId('candidate-speaker'), { target: { value: '7' } });
+    expect(screen.getByTestId('candidate-confirm')).not.toBeDisabled();
+    f.mockRestore();
+  });
+
+  it('review D P1: with two current theses the meeting form makes Casey choose which one the meeting tested', async () => {
+    const view = { id: 'cap4', accountName: 'PepsiCo', accountHint: null, personaId: 7, context: 'meeting', rawText: 'x', createdAt: '', createdBy: 'c', candidates: [], meetings: [] };
+    const f = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(JSON.stringify({ people: [{ id: 7, name: 'Jane' }], hypotheses: [{ id: 'h1', status: 'active', problem_family: 'hidden_capacity', primary_persona_id: 7 }, { id: 'h2', status: 'draft', problem_family: 'yard_state_integrity', primary_persona_id: 7 }] })));
+    render(<CaptureFlow initial={view as never} />);
+    await waitFor(() => expect(screen.getByTestId('meeting-thesis')).toBeInTheDocument());
+    expect(screen.getByTestId('meeting-thesis')).toHaveValue('');
+    fireEvent.click(screen.getByTestId('meeting-record'));
+    expect(await screen.findByText('Choose the thesis this meeting tested.')).toBeInTheDocument();
+    expect(f.mock.calls.some((c) => String(c[0]).startsWith('/api/gap/captures/'))).toBe(false);
+    f.mockRestore();
+  });
 });
+

@@ -291,6 +291,22 @@ release, merged and production-verified before the next starts.
   kind (`inbound_message` or `hubspot_engagement`); a HubSpot-sourced reply no
   longer holds the domain forever.
 
+### Release D review fixes (verified P1s, fixed before merge)
+- "Who said it" defaulted to the note's person for every candidate, and a
+  full-name seller label ("Casey Larkin:") was not recognized: on a
+  multi-speaker transcript one press could put Casey's or Bob's words on Jane.
+  Now each candidate keeps its speaker label ("In the note: Jane Doe"), any
+  "Casey ..." label is a seller line, and on a note with more than one buyer
+  speaker the server refuses a confirm without an explicit speaker
+  (`speaker_required`) and the UI pre-selects nobody.
+- The meeting form silently chose a thesis (a qualified / disqualified outcome
+  resolves it). Now Casey chooses the thesis the meeting tested (pre-chosen
+  only when exactly one exists) and the form says what it will resolve.
+- Also closed (review P2, same truth surface): an explicit contact email must
+  be a person at the account (`contact_not_at_account`); an edited quote must
+  stay inside its own candidate sentence with at least four words; decisions
+  on one capture are serialized by an advisory lock (no double confirm).
+
 ### Release D validation
 - Mutations RED then restored: a non-verbatim quote confirmable; candidates
   auto-confirmed at capture; a confirm recorded as an agent; seller lines

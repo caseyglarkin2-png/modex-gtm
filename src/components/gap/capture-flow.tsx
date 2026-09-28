@@ -15,6 +15,7 @@
 import { useEffect, useState } from 'react';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
 import type { CaptureView } from '@/lib/gap/capture/store';
+import { buyerSpeakers } from '@/lib/gap/capture/extract';
 
 type Person = { id: number; name: string | null; title: string | null; email?: string | null; account_name?: string };
 type Hyp = { id: string; status: string; problem_family: string; primary_persona_id: number | null };
@@ -66,13 +67,16 @@ function useAccountContext(account: string | null): Context | null {
 
 function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c: CaptureView) => void }) {
   const ctx = useAccountContext(capture.accountName);
-  const defaultHyp = ctx?.hypotheses.find((h) => h.primary_persona_id === capture.personaId) ?? ctx?.hypotheses[0] ?? null;
+  // Review D P1: nothing is pre-chosen for Casey unless there is exactly one option.
+  const onlyHyp = ctx && ctx.hypotheses.length === 1 ? ctx.hypotheses[0].id : '';
   const [hypothesisId, setHypothesisId] = useState<string>('');
-  const [personaId, setPersonaId] = useState<number | null>(capture.personaId);
+  const multiSpeaker = buyerSpeakers(capture.rawText).length > 1;
+  const [speakerOf, setSpeakerOf] = useState<Record<string, number | null>>({});
   const [types, setTypes] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState<string | null>(null);
-  const hyp = hypothesisId || defaultHyp?.id || '';
+  const hyp = hypothesisId || onlyHyp;
+  const personaFor = (cid: string) => (cid in speakerOf ? speakerOf[cid] : multiSpeaker ? null : capture.personaId);
 
   async function decide(candidateId: string, decision: 'confirm' | 'reject') {
     setBusy(candidateId);
@@ -83,7 +87,7 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
       body: JSON.stringify(
         decision === 'reject'
           ? { op: 'decide', candidateId, decision }
-          : { op: 'decide', candidateId, decision, type: types[candidateId], hypothesisId: hyp || undefined, personaId: personaId ?? undefined },
+          : { op: 'decide', candidateId, decision, type: types[candidateId], hypothesisId: hyp || undefined, personaId: personaFor(candidateId) ?? undefined },
       ),
     });
     const body = await json<{ ok?: boolean; capture?: CaptureView; error?: string; detail?: string }>(res);
@@ -104,7 +108,7 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
           <label className="text-xs">
             Thesis it bears on
             <select aria-label="Thesis" className={input} value={hyp} onChange={(e) => setHypothesisId(e.target.value)}>
-              {ctx.hypotheses.length === 0 ? <option value="">No current thesis at this account</option> : null}
+              <option value="">{ctx.hypotheses.length === 0 ? 'No current thesis at this account' : 'Choose the thesis'}</option>
               {ctx.hypotheses.map((h) => (
                 <option key={h.id} value={h.id}>
                   {words(h.problem_family)} ({h.status})
@@ -112,23 +116,15 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
               ))}
             </select>
           </label>
-          <label className="text-xs">
-            Who said it
-            <select aria-label="Who said it" className={input} value={personaId ?? ''} onChange={(e) => setPersonaId(e.target.value ? Number(e.target.value) : null)}>
-              <option value="">Choose the person</option>
-              {ctx.people.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name ?? p.email ?? `person ${p.id}`}
-                  {p.title ? `, ${p.title}` : ''}
-                </option>
-              ))}
-            </select>
-          </label>
+          {multiSpeaker ? (
+            <p className="text-xs text-amber-700">This note has more than one speaker: choose who said each line.</p>
+          ) : null}
         </div>
       ) : null}
       {capture.candidates.map((c) => (
         <article key={c.id} data-testid="capture-candidate" data-state={c.decision?.kind ?? 'candidate'} className="space-y-2 rounded-md border border-[var(--border)] p-3">
           <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">&ldquo;{c.quote}&rdquo;</blockquote>
+          {c.speaker ? <p className="text-xs text-[var(--muted-foreground)]">In the note: {c.speaker}</p> : null}
           {c.decision?.kind === 'confirmed' ? (
             <p className="text-xs font-medium text-emerald-700">Confirmed as {words(c.decision.type)}. Recorded as buyer truth.</p>
           ) : c.decision?.kind === 'rejected' ? (
@@ -145,8 +141,19 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
                   ))}
                 </select>
               </div>
+              {ctx ? (
+                <select aria-label="Who said it" data-testid="candidate-speaker" className={input} value={personaFor(c.id) ?? ''} onChange={(e) => setSpeakerOf((m) => ({ ...m, [c.id]: e.target.value ? Number(e.target.value) : null }))}>
+                  <option value="">Who said it?</option>
+                  {ctx.people.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name ?? p.email ?? `person ${p.id}`}
+                      {p.title ? `, ${p.title}` : ''}
+                    </option>
+                  ))}
+                </select>
+              ) : null}
               <div className="flex flex-wrap gap-2">
-                <button type="button" data-testid="candidate-confirm" disabled={busy === c.id || !capture.accountName} onClick={() => void decide(c.id, 'confirm')} className={primary}>
+                <button type="button" data-testid="candidate-confirm" disabled={busy === c.id || !capture.accountName || !hyp || personaFor(c.id) == null} onClick={() => void decide(c.id, 'confirm')} className={primary}>
                   ✓ Confirm
                 </button>
                 <button type="button" data-testid="candidate-reject" disabled={busy === c.id} onClick={() => void decide(c.id, 'reject')} className={btn}>
@@ -173,14 +180,18 @@ function MeetingOutcomeForm({ capture, onChange }: { capture: CaptureView; onCha
   const [objective, setObjective] = useState('');
   const [personaId, setPersonaId] = useState<number | null>(capture.personaId);
   const [error, setError] = useState<string | null>(null);
-  const hyp = ctx?.hypotheses.find((h) => h.primary_persona_id === (personaId ?? capture.personaId)) ?? ctx?.hypotheses[0] ?? null;
+  // Review D P1: the thesis a meeting tested is Casey's explicit choice (a qualified or disqualified
+  // outcome resolves it); only a single current thesis is pre-chosen.
+  const [chosenHyp, setChosenHyp] = useState<string>('');
+  const hypId = chosenHyp || (ctx && ctx.hypotheses.length === 1 ? ctx.hypotheses[0].id : '');
+  const hyp = ctx?.hypotheses.find((h) => h.id === hypId) ?? null;
   if (!capture.accountName || (capture.context !== 'meeting' && capture.context !== 'conference')) return null;
   if (capture.meetings.length) return <p data-testid="meeting-recorded" className="text-sm">Meeting outcome recorded: {words(capture.meetings[0].outcome)}.</p>;
 
   async function record() {
     setError(null);
     if (!hyp) {
-      setError('There is no current thesis at this account to record the meeting against.');
+      setError(ctx?.hypotheses.length ? 'Choose the thesis this meeting tested.' : 'There is no current thesis at this account to record the meeting against.');
       return;
     }
     const res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, {
@@ -206,6 +217,17 @@ function MeetingOutcomeForm({ capture, onChange }: { capture: CaptureView; onCha
           </option>
         ))}
       </select>
+      <select aria-label="Thesis tested" data-testid="meeting-thesis" className={input} value={hypId} onChange={(e) => setChosenHyp(e.target.value)}>
+        <option value="">Choose the thesis this meeting tested</option>
+        {(ctx?.hypotheses ?? []).map((h) => (
+          <option key={h.id} value={h.id}>
+            {words(h.problem_family)} ({h.status})
+          </option>
+        ))}
+      </select>
+      {hyp && (outcome === 'qualified_problem' || outcome === 'disqualified_problem') ? (
+        <p className="text-xs text-amber-700">This resolves the {words(hyp.problem_family)} thesis as {outcome === 'qualified_problem' ? 'confirmed' : 'rejected'}.</p>
+      ) : null}
       <select aria-label="Main attendee" className={input} value={personaId ?? ''} onChange={(e) => setPersonaId(e.target.value ? Number(e.target.value) : null)}>
         <option value="">Choose the main attendee</option>
         {(ctx?.people ?? []).map((p) => (
