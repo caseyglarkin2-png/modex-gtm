@@ -115,6 +115,8 @@ const BOILERPLATE = new RegExp(
     String.raw`\bterms? (?:and conditions )?(?:of|in effect)\b`, String.raw`\bselects? third-party\b`,
     // second pass over the production sample: accounting lines that slipped the first list
     String.raw`\bpretax\b`, String.raw`\bcapitaliz(?:e|es|ed|ation of) interest\b`, String.raw`\bsame[- ](?:warehouse|store)\b`, String.raw`\bpopulation\b`, String.raw`\brestructuring-related\b`, String.raw`\bnet proceeds\b`, String.raw`\bescrow\b`, String.raw`\bnotes due\b`,
+    // evidence integrity review (2026-09-28): accounting policy, and software or management practice (a technology signal, not a physical-network change)
+    String.raw`\bdepreciat\w*\b`, String.raw`\buseful lives?\b`, String.raw`\b(?:planning|procurement|analytics|software) platform\b`, String.raw`\bmanagement practices\b`,
   ].join('|'),
   'i',
 );
@@ -227,8 +229,33 @@ export function splitSentencesAware(text: string): string[] {
   return out;
 }
 
+const NAMED_SITE = /\b(?:distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|warehouses?|plants?|facilit(?:y|ies)|yards?|DCs?|hubs?)\b/i;
+const MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+
+/**
+ * Evidence integrity review (2026-09-28): a filing restates an earlier event ("On July 1, 2026, we announced
+ * ..." in a September 10-Q). The source date is when it was PUBLISHED; the evidence clock runs from the event
+ * date the sentence itself states, when that is more than a week earlier. A future date (a plan) or the
+ * source's own dateline never counts.
+ */
+export function statedEventDate(sentence: string, publishedAt: Date): Date | null {
+  const re = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(\d{4})\b/gi;
+  let latest: Date | null = null;
+  for (const m of sentence.matchAll(re)) {
+    const d = new Date(Date.UTC(Number(m[3]), MONTH_NAMES.indexOf(m[1].toLowerCase()), Number(m[2])));
+    if (Number.isNaN(d.getTime()) || d.getTime() > publishedAt.getTime()) continue;
+    if (!latest || d > latest) latest = d;
+  }
+  return latest && publishedAt.getTime() - latest.getTime() > 7 * 86_400_000 ? latest : null;
+}
+
 export function classifyFact(sentence: string): FactClassification {
   const s = sentence.toLowerCase();
+  // A transportation-network deployment with no named site is not a site opening ("builds on ... private
+  // fleets and brings Gatik's autonomous freight ..." once read as `build` = opening).
+  if (isTransportNetworkFact(sentence) && !NAMED_SITE.test(sentence)) {
+    return /autonom|driverless|self-driving/.test(s) ? { type: 'automation_program', change: 'automation' } : { type: 'site_expansion', change: 'investment' };
+  }
   // A change of status (closed, acquired, opened, moved) outranks a mention of
   // automation in the same sentence ("opened ... with automated check-in").
   if (/clos|exit|consolidat/.test(s)) return { type: 'site_expansion', change: 'closure' };

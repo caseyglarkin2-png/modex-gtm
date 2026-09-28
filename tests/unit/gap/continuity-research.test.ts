@@ -174,3 +174,35 @@ describe('source dating and the company primary source', () => {
     expect(r.candidates[0].publishedAt?.toISOString().slice(0, 10)).toBe('2026-06-08');
   });
 });
+
+describe('evidence integrity review findings (2026-09-28)', () => {
+  it('a transport-network deployment is labelled as what it is, never a site opening', async () => {
+    const { classifyFact } = await import('@/lib/gap/research/facts');
+    expect(classifyFact('This agreement builds on PepsiCo’s experience running one of North America’s largest private fleets and brings Gatik’s autonomous freight capabilities into real, day-to-day supply chain operations.')).toEqual({ type: 'automation_program', change: 'automation' });
+    expect(classifyFact(AUG)).toEqual({ type: 'site_expansion', change: 'investment' });
+    // a site change in the same sentence still wins
+    expect(classifyFact('Acme will open a new distribution center in Reno operating driverless trucks.').change).toBe('opening');
+  });
+
+  it('the evidence clock runs from an event date the sentence states, not from a later filing date', async () => {
+    const { statedEventDate } = await import('@/lib/gap/research/facts');
+    const q = new Date('2026-09-18T00:00:00Z');
+    expect(statedEventDate('On July 1, 2026, we announced that we had entered into an agreement and plan of merger to acquire Giant Eagle.', q)?.toISOString().slice(0, 10)).toBe('2026-07-01');
+    expect(statedEventDate(PRIMARY, new Date('2026-06-08T00:00:00Z'))).toBeNull(); // the dateline is the publication itself
+    expect(statedEventDate('Acme will open a distribution center on December 1, 2026.', q)).toBeNull(); // a future date is not the event's past
+    expect(statedEventDate('On July 1, 2026, Acme said it will open the distribution center on December 1, 2026.', q)?.toISOString().slice(0, 10)).toBe('2026-07-01');
+  });
+
+  it('stored: a September filing restating a July 1 event is current only from July 1', async () => {
+    const { prisma, t } = db();
+    const KR = 'On July 1, 2026, PepsiCo announced it will acquire a regional distribution company with five distribution centers in Ohio.';
+    const url = 'https://www.sec.gov/pep-10q.htm';
+    PAGES[url] = `10-Q ${KR}`;
+    await runEvidenceResearch(prisma, input(), { ...noProviders, web: async () => ({ candidates: [], note: 'off' }), extra: async () => ({ candidates: [cand(url, KR, '2026-09-18', 'public_primary')], note: 'p' }) });
+    const s = t.signals.find((x) => x.evidence_text === KR);
+    expect(s.observed_at.toISOString().slice(0, 10)).toBe('2026-09-18'); // the source's own date is kept
+    expect(s.freshness_expires_at.toISOString().slice(0, 10)).toBe('2026-12-28'); // acquisition window from July 1
+    expect(s.metadata.eventDate).toBe('2026-07-01');
+    delete PAGES[url];
+  });
+});

@@ -28,7 +28,7 @@ import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/ev
 import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
 import type { SignalType } from '../taxonomy';
-import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, type FactChange, describesPastEvent } from './facts';
+import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, statedEventDate, type FactChange, describesPastEvent } from './facts';
 import { defaultFetchText, edgarCandidates, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -270,7 +270,9 @@ export async function storeVerifiedFact(
     where: { account_name_claim_hash_source_url_observed_at: { account_name: input.accountName, claim_hash: claimHash, source_url: a.url, observed_at: a.publishedAt } },
     select: { id: true },
   });
-  const expires = freshnessExpiresAt(cls.type, a.publishedAt);
+  // The evidence clock runs from the event the sentence states when a later source restates it.
+  const eventDate = statedEventDate(a.excerpt, a.publishedAt);
+  const expires = freshnessExpiresAt(cls.type, eventDate ?? a.publishedAt);
   const signal = await registerSignal(prisma, {
     accountName: input.accountName,
     personaId: input.personaId,
@@ -286,7 +288,7 @@ export async function storeVerifiedFact(
     observedAt: a.publishedAt,
     confidence: a.sourceType === 'public_primary' ? 80 : 60,
     freshnessExpiresAt: expires,
-    metadata: { researchRunId: input.runId, retrievedAt: input.now.toISOString(), provider: a.provider, change: cls.change, verified: 'excerpt_found_at_source' },
+    metadata: { researchRunId: input.runId, retrievedAt: input.now.toISOString(), provider: a.provider, change: cls.change, verified: 'excerpt_found_at_source', ...(eventDate ? { eventDate: eventDate.toISOString().slice(0, 10) } : {}) },
     registeredBy: input.actor,
   });
   return {

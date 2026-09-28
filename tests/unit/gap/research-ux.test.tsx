@@ -149,3 +149,31 @@ describe('account-centric sections', () => {
     expect(sections.find((s) => s.account.accountName === 'Kroger')!.account.next).toMatch(/No verified fact to use yet/);
   });
 });
+
+describe('production dogfood findings (2026-09-28)', () => {
+  const ceoQuote = sig('p-ceo', 'PepsiCo', '“Driverless trucks deployed in commercial capacity, driving across highways and surface streets, that’s what we’re doing with PepsiCo,” said the Gatik CEO.', FW_JUN, '2026-06-09', '2026-10-07');
+
+  it('among equally relevant facts the corroborated company-source fact is best, not a newer secondary quote', async () => {
+    const [pep] = (await loadEvidenceInbox(inboxDb([ceoQuote, pepCont, pepPrimary, pepFwJun, pepAug]), NOW)).filter((a) => a.accountName === 'PepsiCo');
+    expect(pep.bestSignalId).toBe('p-cont');
+    expect(pep.ready.map((f) => f.signalId)).toContain('p-ceo'); // still shown as context
+  });
+
+  it('confirmed current beats merely newer, even when both come from the company', async () => {
+    const newerPrimary = sig('p-new', 'PepsiCo', 'PepsiCo will deploy autonomous freight across its regional transportation network in Texas this year.', 'https://www.pepsico.com/en/newsroom/other', '2026-06-20', '2026-10-18', { source_type: 'public_primary' });
+    const [pep] = (await loadEvidenceInbox(inboxDb([newerPrimary, pepCont, pepPrimary, pepFwJun, pepAug]), NOW)).filter((a) => a.accountName === 'PepsiCo');
+    expect(pep.bestSignalId).toBe('p-cont');
+  });
+
+  it('the same verified sentence stored twice is shown once', async () => {
+    const dup = { ...gmNetwork, id: 'g-net-2', evidence_url: 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/abc' };
+    const [gm] = (await loadEvidenceInbox(inboxDb([gmNetwork, dup, gmBrazil]), NOW)).filter((a) => a.accountName === 'General Mills');
+    expect(gm.ready.filter((f) => f.quote === GM_NETWORK)).toHaveLength(1);
+  });
+
+  it('a search-grounding redirect link is named as one, never as a publisher', async () => {
+    const redirected = { ...gmNetwork, source_type: 'public_secondary', evidence_url: 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/abc' };
+    const [gm] = (await loadEvidenceInbox(inboxDb([redirected]), NOW)).filter((a) => a.accountName === 'General Mills');
+    expect(gm.ready[0].chain.source.label).toBe('search redirect link');
+  });
+});
