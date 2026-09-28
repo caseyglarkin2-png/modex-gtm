@@ -44,3 +44,18 @@ export function isPrivateHost(hostname: string): boolean {
   if (PRIVATE_SUFFIXES.some((suffix) => host.endsWith(suffix))) return true;
   return PRIVATE_FACT_HOSTS.some((entry) => host === entry || host.endsWith(`.${entry}`));
 }
+
+/**
+ * Network-private only (signal intake, 2026-09-28): a host the server must
+ * never fetch (loopback, private/link-local IPv4, local suffixes, any IPv6
+ * literal). Unlike isPrivateHost it does NOT include the own-domain fact list:
+ * a hubspot.com link may be CAPTURED as a signal (never fetched, never evidence).
+ */
+export function isNetworkPrivateHost(hostname: string): boolean {
+  let host = hostname.trim().toLowerCase();
+  if (host.endsWith('.')) host = host.slice(0, -1);
+  if (!host || host.startsWith('[') || host.includes(':')) return true;
+  if (host === 'localhost' || host === '0.0.0.0' || /^0\./.test(host)) return true;
+  if (isPrivateIpv4(host)) return true;
+  return PRIVATE_SUFFIXES.some((suffix) => host.endsWith(suffix));
+}
