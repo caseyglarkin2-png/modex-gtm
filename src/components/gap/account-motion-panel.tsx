@@ -12,7 +12,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { CockpitAngle, CockpitMotion } from '@/lib/gap/motion/cockpit';
 
-function AngleLine({ a, personaId }: { a: CockpitAngle | undefined; personaId: number }) {
+/** One person's angle: owned (edit), suggested (accept / edit) or missing (write). `bare` omits the label (the brief supplies it). */
+export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | undefined; personaId: number; bare?: boolean }) {
   const router = useRouter();
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(a?.angle?.text ?? a?.suggested ?? '');
@@ -52,7 +53,7 @@ function AngleLine({ a, personaId }: { a: CockpitAngle | undefined; personaId: n
   if (current) {
     return (
       <p className="mt-1 text-xs" data-testid="angle-current">
-        <span className="font-semibold">Why this person:</span> {current}{' '}
+        {bare ? null : <span className="font-semibold">Why this person: </span>}{current}{' '}
         <button type="button" onClick={() => setEditing(true)} className="underline">
           edit
         </button>
@@ -62,7 +63,7 @@ function AngleLine({ a, personaId }: { a: CockpitAngle | undefined; personaId: n
   if (a?.suggested) {
     return (
       <p className="mt-1 text-xs" data-testid="angle-suggested">
-        <span className="font-semibold">Suggested why:</span> <span className="italic">{a.suggested}</span>{' '}
+        <span className="font-semibold">{bare ? 'Suggested (not yours yet):' : 'Suggested why:'}</span> <span className="italic">{a.suggested}</span>{' '}
         <button type="button" data-testid="angle-accept" onClick={() => void save('accepted_suggestion', a.suggested!)} className="underline">
           accept
         </button>{' '}

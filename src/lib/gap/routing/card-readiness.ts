@@ -182,7 +182,8 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     const day = t.dueAt ? new Date(t.dueAt).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : '';
     switch (t.state) {
       case 'waiting':
-        return { state: 'actionable', primary: { label: `Waiting: touch ${nth} due ${day}`, href: null, note: `Touch ${t.sentCount} sent. Nothing to do until then.` }, secondary: packLink ? [packLink] : [] };
+        // Phase 2 E2: no "Action pack (history)" link on a live card (history lives on the preview page).
+        return { state: 'actionable', primary: { label: `Waiting: touch ${nth} due ${day}`, href: null, note: `Touch ${t.sentCount} sent. Nothing to do until then.` }, secondary: [] };
       case 'due':
         return {
           state: 'actionable',
@@ -191,10 +192,10 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         };
       case 'stopped':
         return t.reason === 'replied'
-          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' }, secondary: packLink ? [packLink] : [] }
+          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' }, secondary: [] }
           : { state: 'actionable', primary: { label: `Sequence stopped`, href: null, note: t.detail ?? 'A stop rule fired.' }, secondary: [] };
       case 'complete':
-        return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: packLink ? [packLink] : [] };
+        return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: [] };
       case 'unknown':
         return { state: 'missing_prerequisite', missing: `Sequence status could not be read (${t.detail ?? 'Gmail unreadable'}). Nothing is prepared until it can be.`, fix: packLink ?? hypothesisFix(item) };
     }

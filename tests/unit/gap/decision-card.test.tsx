@@ -248,6 +248,8 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     render(
       <DecisionCard
         item={item({
+          // An email card: Call and LinkedIn are the secondary channels.
+          action: 'enroll_gap_sequence',
           persona: {
             id: 41,
             personaKey: 'vp_operations',
@@ -425,7 +427,7 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
       );
       const open = vi.spyOn(window, 'open').mockReturnValue(null);
       render(<DecisionCard item={withContact()} onAct={() => {}} />);
-      fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /Call/ }));
+      fireEvent.click(screen.getByTestId('cold-call'));
       expect(await screen.findByTestId('cold-refused')).toHaveTextContent('Work this account from the existing deal');
       expect(fetchMock).toHaveBeenCalledWith('/api/gap/decisions/dec_1/outbound-check', expect.objectContaining({ method: 'POST', body: JSON.stringify({ channel: 'call' }) }));
       expect(open).not.toHaveBeenCalled();
@@ -438,7 +440,7 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
       const fetchMock = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'));
       const open = vi.spyOn(window, 'open').mockReturnValue(null);
       render(<DecisionCard item={withContact('linkedin_manual_task')} onAct={() => {}} />);
-      fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /LinkedIn/ }));
+      fireEvent.click(screen.getByTestId('cold-linkedin'));
       expect(await screen.findByTestId('cold-refused')).toHaveTextContent('Check HubSpot before contacting');
       expect(open).not.toHaveBeenCalled();
       fetchMock.mockRestore();
@@ -453,7 +455,7 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
       const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(response);
       const open = vi.spyOn(window, 'open').mockReturnValue(null);
       render(<DecisionCard item={withContact()} onAct={() => {}} />);
-      fireEvent.click(within(screen.getByTestId('contact-buttons')).getByRole('button', { name: /Call/ }));
+      fireEvent.click(screen.getByTestId('cold-call'));
       expect(await screen.findByTestId('cold-refused')).toHaveTextContent('Check HubSpot before contacting');
       expect(open).not.toHaveBeenCalled();
       fetchMock.mockRestore();
@@ -492,4 +494,23 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
       fetchMock.mockRestore();
     });
   });
+
+  describe('Phase 2 E2: one primary action per channel', () => {
+    it('a call_now card offers Call exactly once (the primary), a LinkedIn card offers LinkedIn exactly once', () => {
+      const withBoth = { ...item().persona, phone: '(555) 123-4567', linkedinUrl: 'https://linkedin.com/in/j' };
+      const { unmount } = render(<DecisionCard item={item({ action: 'call_now', persona: withBoth })} onAct={() => {}} />);
+      expect(screen.getAllByTestId('cold-call')).toHaveLength(1);
+      expect(within(screen.getByTestId('readiness-actionable')).getByTestId('cold-call')).toBeInTheDocument();
+      unmount();
+      render(<DecisionCard item={item({ action: 'linkedin_manual_task', persona: withBoth })} onAct={() => {}} />);
+      expect(screen.getAllByTestId('cold-linkedin')).toHaveLength(1);
+    });
+
+    it('routing internals sit under a collapsed System details disclosure', () => {
+      render(<DecisionCard item={item()} onAct={() => {}} />);
+      expect(screen.getByTestId('routing-details')).not.toHaveAttribute('open');
+      expect(screen.getByTestId('routing-details')).toHaveTextContent('System details (routing)');
+    });
+  });
 });
+

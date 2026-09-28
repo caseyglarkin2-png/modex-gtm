@@ -217,6 +217,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
     touch: item.touch ?? null,
     reviewWaiting: reviewWaitsFor(item, reviewWaiting),
   });
+  const primaryCold = readiness.state === 'actionable' && 'cold' in readiness.primary ? readiness.primary.cold : undefined;
   // Release C review SF2: the inline call recorder opens only on an actionable
   // card. A research card (evidence thin, no hypothesis, stale) has no call to
   // record: its work is research, and a call logged there is noise.
@@ -261,7 +262,8 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
         <div data-testid="contact-buttons" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
           {/* Red team T8: no raw email link. Email goes only through the guarded GAP send path. */}
           {/* Last mile: no raw tel: or LinkedIn link either. A cold call / message re-reads HubSpot opportunity truth at the click. */}
-          {tel ? (
+          {/* Phase 2 E2: one primary action per channel: no second Call / LinkedIn when it is already the card's primary. */}
+          {tel && primaryCold === 'call' ? null : tel ? (
             <ColdOutboundButton
               decisionId={item.id}
               channel="call"
@@ -278,7 +280,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
               Record call outcome
             </button>
           ) : null}
-          {item.persona.linkedinUrl ? (
+          {item.persona.linkedinUrl && primaryCold === 'linkedin' ? null : item.persona.linkedinUrl ? (
             <ColdOutboundButton
               decisionId={item.id}
               channel="linkedin"
@@ -410,7 +412,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
 
       <details className="mt-3 text-xs" data-testid="routing-details">
         <summary className="cursor-pointer select-none font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
-          Routing details
+          System details (routing)
         </summary>
         <header className="mt-2 flex flex-wrap items-center gap-2">
           <Badge data-testid="action-chip" className={chipClass}>

@@ -69,7 +69,7 @@ const CHANGE_WORD: Record<string, string> = {
   automation: 'an automation program',
   acquisition: 'an acquisition',
   relocation: 'a relocation',
-  investment: 'a network investment',
+  investment: 'a change to the physical network',
 };
 
 function whyItQualifies(excerpt: string, retrievedAt: string | null): string {
