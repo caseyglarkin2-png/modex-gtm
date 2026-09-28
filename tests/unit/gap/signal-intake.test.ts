@@ -6,7 +6,7 @@
  * no HubSpot, no Slack).
  */
 import { describe, expect, it, vi } from 'vitest';
-import { captureSignal, classifySignal, makeFetchHtml, normalizeSignalUrl, resolvesToPrivate, parseSignalMeta, resolveSignalAccount, signalStatus, sourceClassOf } from '@/lib/gap/signals/intake';
+import { captureSignal, classifySignal, isPrivateAddress, makeFetchHtml, normalizeSignalUrl, resolvesToPrivate, parseSignalMeta, resolveSignalAccount, signalStatus, sourceClassOf } from '@/lib/gap/signals/intake';
 
 const NOW = new Date('2026-09-28T15:00:00.000Z');
 
@@ -224,6 +224,25 @@ describe('review A P1s', () => {
     expect(rows[0].resolution).toBe('needs_account');
     await captureSignal(prisma, { url: 'https://example.com/story-x', accountHint: 'PepsiCo', origin: 'casey_share', actor: 'casey', now: NOW }, { fetchHtml: null });
     expect(rows[0]).toMatchObject({ account_name: 'PepsiCo', resolution: 'resolved', research_status: 'queued', origin: 'casey_share' });
+  });
+});
+
+describe('production dogfood fixes', () => {
+  it('a public IPv6 answer is public; private IPv6 ranges are not', async () => {
+    expect(await resolvesToPrivate('supplychaindive.com', async () => ['2606:4700:10::6816:1234', '104.18.1.1'])).toBe(false);
+    for (const a of ['::1', '::', 'fd12:3456::1', 'fe80::1', 'ff02::1', '::ffff:10.0.0.1', '::ffff:127.0.0.1']) expect(isPrivateAddress(a)).toBe(true);
+    for (const a of ['2606:4700:10::6816:1234', '2a00:1450:4001::200e', '::ffff:93.184.216.34', '93.184.216.34']) expect(isPrivateAddress(a)).toBe(false);
+  });
+
+  it('the company newsroom resolves to its publisher, even when a vendor is named and the domain is shared by brands', async () => {
+    const { prisma } = fakeDb({
+      accounts: [{ name: 'PepsiCo' }, { name: 'Gatik' }, { name: 'Frito-Lay' }, { name: 'Gatorade' }],
+      links: [{ canonical_company_id: 'domain:pepsico.com', account_name: 'Frito-Lay' }, { canonical_company_id: 'domain:pepsico.com', account_name: 'Gatorade' }],
+    });
+    expect(await resolveSignalAccount(prisma, { title: 'PepsiCo and Gatik announce multi-year agreement to deploy autonomous freight', url: 'https://www.pepsico.com/en/newsroom/press-releases/2026/x' })).toMatchObject({ resolution: 'resolved', accountName: 'PepsiCo', basis: 'company_newsroom' });
+    // Off the newsroom, two named companies stay ambiguous; a shared domain alone resolves nothing.
+    expect((await resolveSignalAccount(prisma, { title: 'PepsiCo and Gatik announce multi-year agreement', url: 'https://freightwaves.com/x' })).resolution).toBe('ambiguous');
+    expect((await resolveSignalAccount(prisma, { title: 'Quarterly update', url: 'https://pepsico.com/y' })).resolution).toBe('needs_account');
   });
 });
 
