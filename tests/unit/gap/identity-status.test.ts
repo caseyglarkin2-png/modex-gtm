@@ -19,6 +19,6 @@ describe('opportunity identity keeps conflict links (over-protects on purpose)',
     const id = await loadOpportunityIdentity(p, 'PepsiCo');
     expect(id.domains).toEqual(['pepsico.com']);
     // The loader asks for every link, not only resolved ones.
-    expect(JSON.stringify(p.canonicalAccountLink.findMany.mock.calls[0][0])).not.toContain('resolved');
+    expect(JSON.stringify((p.canonicalAccountLink.findMany.mock.calls[0] as unknown[])[0])).not.toContain('resolved');
   });
 });
