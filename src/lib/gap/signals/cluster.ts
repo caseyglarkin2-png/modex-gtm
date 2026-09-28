@@ -11,7 +11,7 @@
  * The event's primary source (press release, filing, the company's newsroom)
  * is preferred for verification.
  */
-import { storyTokens } from './research';
+import { specificTokens, storyTokens } from './research';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -57,9 +57,14 @@ export function sameEvent(a: ClusterRow, b: ClusterRow): boolean {
   const sb = slugTokens(b.url);
   if (sa.size >= 4 && sb.size >= 4 && jaccard(sa, sb) >= 0.8) return true;
   if (!a.title || !b.title) return false;
-  const ta = storyTokens(a.title, a.account_name);
-  const tb = storyTokens(b.title, b.account_name);
-  return Math.min(ta.size, tb.size) >= 3 && jaccard(ta, tb) >= CLUSTER_MIN_OVERLAP;
+  // Quality review: six outlets rewrote the Amazon Greenwood robotics plant headline six ways; Jaccard missed them.
+  // The story's SPECIFIC words (generic operations vocabulary removed) must overlap by half of the SHORTER
+  // headline, with at least two shared (a place, a program, an amount), on the same account within 4 days.
+  const ta = specificTokens(a.title, a.account_name);
+  const tb = specificTokens(b.title, b.account_name);
+  let shared = 0;
+  for (const x of ta) if (tb.has(x)) shared += 1;
+  return Math.min(ta.size, tb.size) >= 2 && shared >= 2 && shared / Math.min(ta.size, tb.size) >= CLUSTER_MIN_OVERLAP;
 }
 
 /** Attach one resolved source to an existing event at its account, if one matches. Returns the event id. */

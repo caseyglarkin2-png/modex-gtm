@@ -113,6 +113,11 @@ export function storyTokens(text: string, accountName: string): Set<string> {
 /** Words every physical-network story shares: they never make two stories the same one (review B P1). */
 const GENERIC_OPS = new Set(['distribution', 'center', 'centers', 'facility', 'facilities', 'million', 'billion', 'warehouse', 'warehouses', 'square', 'feet', 'foot', 'plant', 'plants', 'supply', 'chain', 'network', 'logistics', 'investment', 'invest', 'invests', 'expansion', 'expand', 'expands', 'expanding', 'operations', 'operation', 'company', 'jobs', 'site', 'sites', 'announced', 'announce', 'announces', 'opens', 'open', 'opening', 'build', 'building', 'new', 'year', 'years', 'state', 'county', 'city']);
 
+/** A headline's specific words: story words minus the generic operations vocabulary every story shares. */
+export function specificTokens(text: string, accountName: string): Set<string> {
+  return new Set([...storyTokens(text, accountName)].filter((w) => !GENERIC_OPS.has(w) && !/^(?:to|plans?|plan|new|us)$/.test(w)));
+}
+
 /**
  * A fact is about the signal's story when it came from the signal's own page, or when it describes the SAME
  * direction of change (a closure never matches an opening or investment) AND shares 2+ of the story's specific words (a place,
@@ -127,7 +132,7 @@ export function factMatchesSignal(fact: { url: string; excerpt: string; title?: 
   const want = dir(classifyFact(signal.title).change);
   const got = dir(classifyFact(fact.excerpt).change);
   if (!want || !got || want !== got) return false;
-  const specific = (t: string) => new Set([...storyTokens(t, accountName)].filter((w) => !GENERIC_OPS.has(w)));
+  const specific = (t: string) => specificTokens(t, accountName);
   const a = specific(signal.title);
   // Only the verified excerpt counts (final review P1): a provider-supplied title is unverified and can echo the headline.
   const b = specific(fact.excerpt);
