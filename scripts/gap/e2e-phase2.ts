@@ -18,6 +18,10 @@
  *      reply with its own sender -> a human disposition clears the pause
  *   G4 conference capture: a pasted note -> candidate BIDs with verbatim
  *      quotes -> confirm two, reject one -> only the two are buyer truth
+ *   G5 in deals: the account gets an open HubSpot deal -> every card routes
+ *      to the deal (no cold action, a send is refused) -> In Deals lists it
+ *      -> the Deal Brief shows only confirmed truth, the unknowns, and
+ *      Casey's learning objective
  *   G6 action pack: the READY person's six-line brief (KNOW verified, THINK
  *      inference, WHY YOU Casey's angle, HISTORY current, WRONG IF) -> the send
  *      preview runs every gate -> STOP before any send
@@ -60,6 +64,9 @@ import { buildBrief, loadBriefHistory } from '../../src/lib/gap/execution/six-li
 import { setAngle } from '../../src/lib/gap/motion/persona-angle';
 import { getHypothesis } from '../../src/lib/gap/hypothesis/service';
 import { DIRECT_SENT } from '../../src/lib/gap/execution/draft-ledger';
+import { heldDealAccounts, loadInDeals } from '../../src/lib/gap/deals/in-deals';
+import { loadDealBrief, setLearningObjective } from '../../src/lib/gap/deals/deal-brief';
+import type { OpportunityTruth } from '../../src/lib/gap/opportunity/active-opportunity';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'phase2-e2e-latest.md');
@@ -472,6 +479,43 @@ async function main(): Promise<number> {
     expect('G4 confirm', !bids.some((b) => b.raw_buyer_language === c3.quote), 'the rejected candidate became a BID');
     pass('G4 confirm', `confirmed 2 (one relabelled impact), rejected 1: exactly 2 human-confirmed BIDs with the exact quotes (source meeting, captured by ${ACTOR}); the rejected one is not buyer truth`);
     counts.bidsConfirmed = 2;
+
+    // ---- G5: the account now has an open HubSpot deal (Kroger-like). No cold action; In Deals + Deal Brief instead.
+    const dealTruth: OpportunityTruth = {
+      status: 'ACTIVE',
+      companyIds: ['c-scratch'],
+      deals: [{ id: 'd-scratch', name: `YardFlow - ${account}`, stage: 'appointmentscheduled', pipeline: 'default', companyIds: ['c-scratch'], contactIds: ['k-1', 'k-2'], lastActivityAt: now.toISOString() }],
+    };
+    const dealRunId = `${tag}-run-deal`;
+    created.runIds.push(dealRunId);
+    const dealSnapshot: HubSpotSnapshotProvider = async () => ({ tam: 'in', tamTier: 'A', contacts: Object.fromEntries(people.map((w) => [`${tag}-${w}`, { qualVerdict: 'qualified' }])), opportunity: dealTruth });
+    const dealNow = new Date(later.getTime() + 300_000);
+    await runRouting(prisma, { now: dealNow, runId: dealRunId, accountNames: [account], personaIds, actor: ACTOR }, { suppression: staticSuppressionReader('clear'), hubspotSnapshot: dealSnapshot, top100: null });
+    const q5 = await listAllCurrent(prisma);
+    const cards5 = q5.items.filter((i) => i.account.name === account);
+    const coldActions = new Set(['enroll_gap_sequence', 'one_off_email', 'call_now', 'linkedin_touch']);
+    expect('G5 no cold action', cards5.length > 0 && cards5.every((i) => i.ruleId === 'active_opportunity' && !coldActions.has(i.action)), `cards -> ${JSON.stringify(cards5.map((i) => [i.persona.title, i.action, i.ruleId]))}`);
+    const motion5 = await loadCockpitMotions(prisma, q5.items, dealNow);
+    expect('G5 no cold action', !cards5.some((i) => laneWithMotion(i, new Set(motion5.heldCardIds)) === 'ready'), 'a card at an account in a deal is READY');
+    const dealSend = await sendSellerEmail(prisma, { decisionId: cards5[0].id, actor: ACTOR, now: dealNow }, { ...sellerDeps(tag, threadFor), activeOpportunity: async () => dealTruth } as never);
+    expect('G5 no cold action', !dealSend.ok, `a first touch at an account in a deal was allowed -> ${JSON.stringify(dealSend)}`);
+    pass('G5 no cold action', `${cards5.length} cards all route to ${cards5[0].action} (active_opportunity); none READY; a send attempt is refused (${(dealSend as { reason?: string }).reason})`);
+
+    expect('G5 In Deals', heldDealAccounts(q5.items).includes(account), 'the In Deals tile does not count the account');
+    const inDeals = await loadInDeals(prisma, [account], { resolve: async () => dealTruth });
+    const row = inDeals.inDeals.find((a) => a.accountName === account);
+    expect('G5 In Deals', !!row && row.deals[0].stage === 'Appointment scheduled' && row.dealContacts === 2 && row.known === 2 && row.people.length >= 3, `In Deals -> ${JSON.stringify(inDeals)}`);
+    pass('G5 In Deals', `${account} is counted on the In Deals tile and listed live: "${row!.deals[0].name}" · ${row!.deals[0].stage} · ${row!.people.length} people GAP holds · ${row!.dealContacts} on the deal · ${row!.known} of 6 known`);
+
+    const obj = await setLearningObjective(prisma, { accountName: account, text: 'Who owns the yard budget at the Texas DC?', actor: ACTOR });
+    expect('G5 brief', obj.ok, `objective -> ${JSON.stringify(obj)}`);
+    const dealBrief = await loadDealBrief(prisma, account, { now: dealNow, dealContacts: row!.dealContacts, conflicts: async () => [] });
+    const briefQuotes = Object.values(dealBrief.sections).flat().map((e) => e.quote).sort();
+    expect('G5 brief', briefQuotes.join('|') === [c1.quote, c2.quote].sort().join('|'), `brief quotes -> ${JSON.stringify(briefQuotes)}`);
+    expect('G5 brief', !briefQuotes.includes(c3.quote), 'the rejected candidate appears in the Deal Brief');
+    expect('G5 brief', dealBrief.unknowns.length === 4 && dealBrief.known === 2, `unknowns -> ${JSON.stringify(dealBrief.unknowns)}`);
+    expect('G5 brief', dealBrief.objective.owned === true && dealBrief.objective.text === 'Who owns the yard budget at the Texas DC?', `objective -> ${JSON.stringify(dealBrief.objective)}`);
+    pass('G5 brief', `Deal Brief shows only the 2 confirmed quotes (the rejected one absent), ${dealBrief.known} of 6 known, UNKNOWN: ${dealBrief.unknowns.join(', ')}; objective set by Casey: "${dealBrief.objective.text}"; nothing written to HubSpot`);
   } catch (err) {
     if (err instanceof StepFailure) failure = err;
     else {

@@ -12,6 +12,8 @@
  *                    card's action pack inline (<ActionPackView>)
  *   ?lane=follow_up  sent sequences whose next touch is due, same inline pack
  *   ?lane=replies    buyer replies waiting for a disposition (<RepliesTriage>)
+ *   ?lane=deals      accounts with an open HubSpot deal (live truth, UNKNOWN listed
+ *                    apart); `&account=<name>` opens its read-only Deal Brief (Phase 2 F)
  *
  * Monday readiness (2026-09-27): a thesis is REVIEW work only when a decision
  * on it can succeed (server-derived actionability, hypothesis/actionability.ts).
@@ -49,12 +51,15 @@ import { WorkQueue } from './work-queue';
 import { HealthStrip } from '@/components/gap/health-strip';
 import { EvidenceInbox } from '@/components/gap/evidence-inbox';
 import { loadEvidenceInbox } from '@/lib/gap/research/inbox';
+import { heldDealAccounts, loadInDeals } from '@/lib/gap/deals/in-deals';
+import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
+import { DealBriefView } from '@/components/gap/deal-brief';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
 
 const REPLY_TILE_LIMIT = 50;
-const LANES: ReadonlySet<string> = new Set(['review', 'research', 'ready', 'follow_up', 'replies']);
+const LANES: ReadonlySet<string> = new Set(['review', 'research', 'ready', 'follow_up', 'replies', 'deals']);
 
 const LANE_TITLE: Record<CockpitLane, string> = {
   review: 'Review: do I believe this?',
@@ -62,6 +67,7 @@ const LANE_TITLE: Record<CockpitLane, string> = {
   ready: 'Ready: contact now',
   follow_up: 'Follow up: next touch due',
   replies: 'Replies: what did the buyer tell you?',
+  deals: 'In deals: learn, do not prospect',
 };
 
 async function loadCockpit() {
@@ -140,6 +146,7 @@ async function loadCockpit() {
     heldAccountsOf(queue.items),
   );
 
+  const heldDeals = heldDealAccounts(queue.items);
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
   const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
   return {
@@ -149,7 +156,10 @@ async function loadCockpit() {
       ready: ready.length,
       followUp: followUp.length,
       replies: { count: repliesPage.items.length, atLeast: repliesPage.nextCursor !== null },
+      deals: heldDeals.length,
     },
+    // Held accounts first, so the lane's account cap never drops one routing already holds.
+    gapAccounts: [...heldDeals, ...accountsSeen.filter((a) => !heldDeals.includes(a))],
     next,
     groups: reviewGroups,
     readyOneOffIds,
@@ -200,7 +210,74 @@ async function ResearchTheses({ groups }: { groups: LoadedGroup[] }) {
   );
 }
 
-export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string }> }) {
+/**
+ * Phase 2 F1: accounts HubSpot says are in an open deal, read live (bounded). GAP stops cold outreach
+ * there; this is where it stays useful. An account whose truth cannot be read is listed apart.
+ */
+async function InDealsLane({ accounts, open }: { accounts: string[]; open: string | null }) {
+  const now = new Date();
+  const { inDeals, couldNotVerify } = await loadInDeals(prisma, accounts);
+  const opened = open ? inDeals.find((a) => a.accountName === open) ?? null : null;
+  const brief = opened ? await loadDealBrief(prisma, opened.accountName, { now, dealContacts: opened.dealContacts }) : null;
+  return (
+    <div className="space-y-4" data-testid="in-deals">
+      <p className="text-sm text-[var(--muted-foreground)]">
+        Read from HubSpot just now. No cold first touch goes to these accounts; work them from the deal and learn what is still unknown.
+      </p>
+      {open && !opened ? (
+        <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">No open deal was verified for {open} just now, so there is no Deal Brief to show.</p>
+      ) : null}
+      {inDeals.length === 0 ? <p className="text-sm italic text-[var(--muted-foreground)]">No GAP account has an open HubSpot deal right now.</p> : null}
+      <ul className="space-y-3">
+        {inDeals.map((a) => (
+          <li key={a.accountName} className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid={`in-deal-${a.accountName}`}>
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <p className="font-semibold">{a.accountName}</p>
+              <p className="text-xs text-[var(--muted-foreground)]">{a.known} of 6 known</p>
+            </div>
+            <ul className="text-sm">
+              {a.deals.map((d, i) => (
+                <li key={i} className="break-words">
+                  {d.name ? `"${d.name}"` : 'Unnamed deal'} · {d.stage}
+                  {d.lastActivityAt ? ` · last activity ${new Date(d.lastActivityAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}` : ''}
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs text-[var(--muted-foreground)]">
+              {a.people.length ? `GAP knows ${a.people.slice(0, 3).map((p) => p.name).join(', ')}${a.people.length > 3 ? ` and ${a.people.length - 3} more` : ''}` : 'GAP holds no one here'}
+              {a.dealContacts ? ` · ${a.dealContacts} on the deal` : ''}
+            </p>
+            {opened?.accountName === a.accountName && brief ? (
+              <>
+                <DealBriefView brief={brief} deals={a.deals} editable />
+                <a href="/gap?lane=deals" className="text-xs underline">Close the brief</a>
+              </>
+            ) : (
+              <a href={`/gap?lane=deals&account=${encodeURIComponent(a.accountName)}`} data-testid="open-deal-brief" className="inline-flex rounded-md border border-[var(--border)] px-3 py-1.5 text-sm hover:bg-[var(--muted)]">
+                Deal brief
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+      {couldNotVerify.length ? (
+        <section data-testid="in-deals-unknown" className="space-y-1 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
+          <p className="font-semibold">Could not verify ({couldNotVerify.length})</p>
+          <p className="text-xs">HubSpot did not answer for these accounts. Check HubSpot before contacting them; every send re-checks at the click.</p>
+          <ul className="text-xs">
+            {couldNotVerify.map((u) => (
+              <li key={u.accountName}>
+                {u.accountName} <span className="text-[var(--muted-foreground)]">({u.reason.replace(/_/g, ' ')})</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+    </div>
+  );
+}
+
+export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
 
   const session = await auth();
@@ -255,6 +332,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
             <ReviewLane groups={data.groups} readyOneOffIds={data.readyOneOffIds} />
           ) : lane === 'replies' ? (
             <RepliesTriage inCockpit />
+          ) : lane === 'deals' ? (
+            <InDealsLane accounts={data.gapAccounts} open={params.account?.trim() || null} />
           ) : (
             <>
             {lane === 'research' ? <EvidenceInbox accounts={data.inbox} now={new Date()} /> : null}

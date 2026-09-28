@@ -16,7 +16,7 @@
  */
 import type { CockpitLane, NextUpItem } from '@/components/gap/gap-cockpit';
 
-export const LANE_RANK: Record<CockpitLane, number> = { replies: 0, follow_up: 1, ready: 2, review: 3, research: 4 };
+export const LANE_RANK: Record<CockpitLane, number> = { replies: 0, follow_up: 1, ready: 2, review: 3, research: 4, deals: 5 };
 
 export interface NextCandidate extends NextUpItem {
   /** Null for work not tied to one account (never deduped away). */

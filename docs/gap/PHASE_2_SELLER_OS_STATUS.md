@@ -25,8 +25,8 @@ release, merged and production-verified before the next starts.
 | B | Verified evidence inbox | feat/gap-phase2-b-evidence-inbox | #279 | 6d34cd6a | READY; one prod background run, protected diff identical |
 | C | Account motion v0 | feat/gap-phase2-c-account-motion | #280 | ded3ac0b | READY; cockpit NEXT UP v2 verified in prod |
 | D | Mobile buyer truth capture v0 | feat/gap-phase2-d-buyer-truth | #281 | c15aa366 | READY; /gap/capture checked at phone width |
-| E | Seller action pack v2 | feat/gap-phase2-e-action-pack | | | |
-| F | In Deals + Deal Brief v0 | | | | |
+| E | Seller action pack v2 | feat/gap-phase2-e-action-pack | #282 | 455be384 | READY; brief on a prod PepsiCo card at phone width, no horizontal scroll, KNOW refuses the 10-Q keyword hit |
+| F | In Deals + Deal Brief v0 | feat/gap-phase2-f-in-deals | | | |
 | G | Integrated seller-OS acceptance | | | | |
 
 ## Release A: truth infrastructure + health
@@ -375,6 +375,52 @@ release, merged and production-verified before the next starts.
   verified fact, THINK inference, LEARN, WHY YOU Casey's angle, HISTORY "No GAP
   touches ... HubSpot opportunity CLEAR, checked moments ago", WRONG IF); the
   send preview ran every gate and nothing was sent.
+
+## Release F: In Deals + Deal Brief v0
+
+### F1. In Deals
+- Cockpit tile "In deals" counts accounts the current routing cards hold for an
+  open deal (`deals/in-deals.ts heldDealAccounts`, rule `active_opportunity`;
+  no HubSpot call per cockpit load).
+- `?lane=deals` reads LIVE opportunity truth per GAP account (held accounts
+  first, max 40, five at a time, 8s each): open deals with name, stage in words
+  (a custom stage says so), last activity (`notes_last_updated`, else
+  `hs_lastmodifieddate`, display only; never changes ACTIVE), the people GAP
+  holds, contacts on the deal, and "N of 6 known". UNKNOWN truth (or a thrown
+  read) is listed apart as "Could not verify"; CLEAR is omitted.
+- Cold prospecting stays stopped by the existing rule and send gates (G5: every
+  card routes to nurture, none READY, a send attempt is refused).
+
+### F2. Deal Brief v0 (read-only)
+- `deals/deal-brief.ts`: sections from human-confirmed, uncorrected BIDs only
+  (CURRENT STATE, PROBLEM, ROOT CAUSE, BUSINESS IMPACT = impact/metric/priority,
+  DESIRED FUTURE STATE, SOLUTION REQUIREMENTS = constraint), each with the quote,
+  who said it, source and who confirmed it; STAKEHOLDERS = BID speakers plus
+  the deal contact count; BUYER COMMITMENTS = confirmed meeting_accepted
+  outcomes; CONTRADICTIONS = a confirmed vs a rejected problem, objection BIDs,
+  and contradicting public facts (evidence inbox); UNKNOWNS = every empty truth
+  section, rendered UNKNOWN. An AI-extracted or unconfirmed row never appears.
+
+### F3. Next learning objective
+- Casey's: newest `deal.learning_objective` audit row on the account
+  (`POST /api/gap/deals/objective`), else the objective he typed when recording
+  a meeting (`capture.meeting`), else a deterministic suggestion aimed at the
+  first unknown, shown as "Suggested (not yours yet)".
+
+### F4. No HubSpot writes
+- Pinned by a source scan: the deals modules, route and view import no HubSpot
+  client or write helper.
+
+### Release F validation
+- `tests/unit/gap/deal-brief.test.tsx` 17 tests. Mutations RED then restored:
+  unconfirmed BID shown, empty section not UNKNOWN, suggestion shown as owned,
+  unconfirmed commitment counted, UNKNOWN truth dropped, unbounded concurrency,
+  a throw treated as clear, tile counting unknown accounts.
+- `e2e-phase2.ts` G5 (scratch): the account gets an open deal; 3 cards route to
+  nurture, none READY, a send is refused; In Deals lists it (2 on the deal,
+  2 of 6 known); the Deal Brief shows only the 2 confirmed quotes, 4 UNKNOWN,
+  and Casey's objective. Scratch E2E: integrated 14, sprint2 10, sprint3 16,
+  sprint4 14, phase2 19, all PASS.
 
 ## Debt recorded (not fixed in this program unless it blocks)
 

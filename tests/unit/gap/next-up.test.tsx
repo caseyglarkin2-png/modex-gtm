@@ -36,9 +36,9 @@ describe('<NextUp>', () => {
 
 describe('<GapCockpit>', () => {
   it('every lane tile stays on /gap (no link out to /gap/hypotheses or /gap/replies)', () => {
-    render(<GapCockpit data={{ review: 1, research: 2, ready: 3, followUp: 0, replies: { count: 1, atLeast: false }, active: 'review' }} />);
+    render(<GapCockpit data={{ review: 1, research: 2, ready: 3, followUp: 0, replies: { count: 1, atLeast: false }, deals: 1, active: 'review' }} />);
     const hrefs = screen.getAllByRole('link').map((a) => a.getAttribute('href'));
-    expect(hrefs).toEqual(['/gap?lane=review', '/gap?lane=research', '/gap?lane=ready', '/gap?lane=follow_up', '/gap?lane=replies']);
+    expect(hrefs).toEqual(['/gap?lane=review', '/gap?lane=research', '/gap?lane=ready', '/gap?lane=follow_up', '/gap?lane=replies', '/gap?lane=deals']);
     expect(screen.getByTestId('cockpit-tile-review')).toHaveAttribute('aria-current', 'page');
   });
 });
