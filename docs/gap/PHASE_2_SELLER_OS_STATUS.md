@@ -1,6 +1,6 @@
 # GAP OS Phase 2: Seller OS (status ledger)
 
-STATUS: SHIPPED 2026-09-28 (Releases A-G merged; final review fixes on fix/gap-phase2-final-review)
+STATUS: SHIPPED 2026-09-28 (Releases A-G and the final review fixes merged and production-verified)
 
 <!-- verified:2026-09-28 -->
 
@@ -28,7 +28,7 @@ release, merged and production-verified before the next starts.
 | E | Seller action pack v2 | feat/gap-phase2-e-action-pack | #282 | 455be384 | READY; brief on a prod PepsiCo card at phone width, no horizontal scroll, KNOW refuses the 10-Q keyword hit |
 | F | In Deals + Deal Brief v0 | feat/gap-phase2-f-in-deals | #283 | b55b7b2b | READY; prod In Deals lists Kroger ("YardFlow - Kroger", Appointment scheduled); its brief shows 6 UNKNOWN + 4 deal contacts, no horizontal scroll |
 | G | Integrated seller-OS acceptance | feat/gap-phase2-g-acceptance | #284 | 14d1f565 | READY; scratch acceptance only (no product code) |
-| Final | Final expert review fixes (verified P1s) | fix/gap-phase2-final-review | | | |
+| Final | Final expert review fixes (verified P1s) | fix/gap-phase2-final-review | #285 | e20da6a6 | READY; prod health HEALTHY (5/5), /gap, In Deals (Kroger) and /gap/capture at 390px with no horizontal scroll |
 
 ## Release A: truth infrastructure + health
 
