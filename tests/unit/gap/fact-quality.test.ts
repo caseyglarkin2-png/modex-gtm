@@ -23,6 +23,10 @@ const NOT_FACTS: Array<[string, string]> = [
   ['Coca-Cola tax credits', 'During the six months ended July 3, 2026, the Company invested $ 75 million in limited partnerships that receive tax credits and other tax benefits by constructing, owning and operating alternative energy facilities.'],
   ['Mondelez cash payment', 'As a result of that definitive agreement, we became entitled to a cash payment of 145 million from JAB Holding Company that we received in 2025.'],
   ['Lineage services', 'As part of our warehouse services, we offer receipt, handling, case-picking, retrieval of products from storage, building customized pallets and repackaging, order assembly and load consolidation.'],
+  ['Tyson pretax charges', 'The estimated pretax charges decreased $ 23 million in the third quarter of fiscal 2026, due to an estimated gain on the sale of assets expected to close in the fourth quarter related to network changes.'],
+  ['Constellation interest capitalization', 'We cease the capitalization of interest when construction activities are substantially completed and the facility and related assets are available for their intended use.'],
+  ['Lineage same-warehouse definition', 'Acquired properties will be included in the same warehouse population if owned or leased by us as of the first business day of the prior calendar year.'],
+  ['PFG notes proceeds', 'However, since there was no requirement to hold the funds in escrow until the Cheney Brothers Acquisition closed, the net proceeds for the Notes due 2032 were initially used to repay borrowings.'],
   ['PepsiCo page menu', 'Regulation Technology Labor Operations Equipment M&A An article from Dive Brief PepsiCo expanding autonomous truck use in its supply chain The multiyear deal with Gatik will help the food and beverage giant increase capacity.'],
 ];
 

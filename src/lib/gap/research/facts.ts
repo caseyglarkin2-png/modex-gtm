@@ -113,6 +113,8 @@ const BOILERPLATE = new RegExp(
     String.raw`\bfair value\b`, String.raw`\bgoodwill\b`, String.raw`\bintangible assets?\b`, String.raw`\bitem \d\.\d\d\b`, String.raw`\bentry into a material definitive agreement\b`,
     String.raw`\bsynthetic lease\b`, String.raw`\bnon-?cancell?able\b`, String.raw`\bclosing costs?\b`, String.raw`\bcosts? (?:related|relating|associated) (?:to|with)\b`, String.raw`\bprofessional fees\b`,
     String.raw`\bterms? (?:and conditions )?(?:of|in effect)\b`, String.raw`\bselects? third-party\b`,
+    // second pass over the production sample: accounting lines that slipped the first list
+    String.raw`\bpretax\b`, String.raw`\bcapitaliz(?:e|es|ed|ation of) interest\b`, String.raw`\bsame[- ](?:warehouse|store)\b`, String.raw`\bpopulation\b`, String.raw`\brestructuring-related\b`, String.raw`\bnet proceeds\b`, String.raw`\bescrow\b`, String.raw`\bnotes due\b`,
   ].join('|'),
   'i',
 );
