@@ -21,7 +21,7 @@
 import { outreachFactRefusal } from './evidence-gate';
 import { sellerRelevance, type SellerRelevance } from './continuity';
 import { hostBelongsToAccount } from './providers';
-import { classifyFact, detectConflicts } from './facts';
+import { classifyFact, detectConflicts, normalizeForMatch } from './facts';
 import { loadThesisGroups } from '../hypothesis/thesis-groups';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,10 +111,20 @@ function whyItQualifies(excerpt: string, retrievedAt: string | null): string {
 
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).hostname.toLowerCase();
+  } catch {
+    return '';
+  }
+};
+
 /** A source named compactly: the account itself for its own domain, otherwise the publisher's host. */
 export function sourceName(url: string | null, accountName: string): string {
   if (!url) return 'source';
   if (hostBelongsToAccount(url, accountName)) return accountName;
+  // A search-grounding redirect is a link, not a publisher: never present it as one.
+  if (/(^|\.)vertexaisearch\.cloud\.google\.com$/.test(hostOf(url))) return 'search redirect link';
   try {
     return new URL(url).hostname.replace(/^www\./, '');
   } catch {
@@ -268,9 +278,25 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
     // where Casey ignores the side he does not believe; the other side then becomes ready.
     const contradicted = new Set(conflicts.flatMap((c) => c.ids));
     // Truth is not usefulness: every ready fact is equally verified; the most seller-relevant comes first.
+    // Among equally relevant facts: confirmed current by a newer source first, then the company's own
+    // source, then the newest. The same sentence stored twice (two links to one story) is shown once.
+    const seenQuote = new Set<string>();
     a.ready = facts
       .filter((f) => !f.onThesis && !contradicted.has(f.signalId))
-      .sort((x, y) => x.relevance.rank - y.relevance.rank || y.publishedAt.localeCompare(x.publishedAt) || x.signalId.localeCompare(y.signalId));
+      .sort(
+        (x, y) =>
+          x.relevance.rank - y.relevance.rank ||
+          Number(y.chain.basis === 'corroborated') - Number(x.chain.basis === 'corroborated') ||
+          Number(y.chain.kind === 'primary') - Number(x.chain.kind === 'primary') ||
+          y.publishedAt.localeCompare(x.publishedAt) ||
+          x.signalId.localeCompare(y.signalId),
+      )
+      .filter((f) => {
+        const k = normalizeForMatch(f.quote);
+        if (seenQuote.has(k)) return false;
+        seenQuote.add(k);
+        return true;
+      });
     a.bestSignalId = a.ready[0]?.relevance.bucket === 'best' ? a.ready[0].signalId : null;
   }
 
