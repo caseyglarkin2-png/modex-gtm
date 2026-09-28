@@ -207,3 +207,21 @@ describe('review D P1: speakers and edited quotes', () => {
   });
 });
 
+
+describe('final review P1: a qualified problem is the BUYER’s words', () => {
+  it('a line the seller said never qualifies a problem, even though it is in the note', async () => {
+    const t = db();
+    const r = await createCapture(t.prisma, { accountName: 'PepsiCo', personaId: 7, context: 'meeting', rawText: 'Casey: So dwell time is really what is hurting you here.\nMaria: We walk the yard with a clipboard every morning.', actor: 'casey', now: NOW });
+    if (!r.ok) throw new Error('seed');
+    expect(await recordMeetingOutcome(t.prisma, { captureId: r.capture.id, outcome: 'qualified_problem', hypothesisId: 'h-pep', buyerQuote: 'So dwell time is really what is hurting you here.', actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'quote_not_in_source' });
+  });
+
+  it('with two buyer speakers, Casey says who said it', async () => {
+    const t = db();
+    const note = 'Maria: The detention charges from carriers are killing us.\nBo: Our gate backs up every single Monday morning.';
+    const r = await createCapture(t.prisma, { accountName: 'PepsiCo', personaId: 7, context: 'meeting', rawText: note, actor: 'casey', now: NOW });
+    if (!r.ok) throw new Error('seed');
+    expect(await recordMeetingOutcome(t.prisma, { captureId: r.capture.id, outcome: 'qualified_problem', hypothesisId: 'h-pep', buyerQuote: 'Our gate backs up every single Monday morning.', actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'speaker_required' });
+    expect(await recordMeetingOutcome(t.prisma, { captureId: r.capture.id, outcome: 'qualified_problem', hypothesisId: 'h-pep', personaId: 7, buyerQuote: 'The detention charges from carriers are killing us.', actor: 'casey', now: NOW })).toMatchObject({ ok: true });
+  });
+});
