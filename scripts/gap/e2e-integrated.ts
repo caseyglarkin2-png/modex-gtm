@@ -169,6 +169,12 @@ async function main(): Promise<number> {
     }
   })();
   const accountName = `GAP Integrated Co ${tag.slice(-8)}`;
+  // Phase 2 C3: one cold email motion per account. Dana (outstanding draft), Bo (hard bounce) and
+  // Rita (buyer reply) each get a first touch in this run, so each is at an account of their own;
+  // at Sam's account a second first touch would (correctly) be refused as account_motion_active.
+  const OWN_ACCOUNT = new Set(['dana', 'bo', 'rita']);
+  const acctOf = (who: string) => (OWN_ACCOUNT.has(who) ? `${accountName} ${who}` : accountName);
+  const allAccounts = [accountName, ...[...OWN_ACCOUNT].map((w) => `${accountName} ${w}`)];
   const keywordAccount = `GAP Integrated Keyword Co ${tag.slice(-8)}`;
   const companyId = `${tag}-co`;
   const keywordCompanyId = `${tag}-kco`;
@@ -190,11 +196,12 @@ async function main(): Promise<number> {
 
     // 1. Seed: two accounts, seven reserved example.com people, one family and version.
     await prisma.account.create({ data: { rank: 9993, name: accountName, vertical: 'cpg', hubspot_company_id: companyId, tier: 'Tier 1' } });
+    for (const [i, w] of [...OWN_ACCOUNT].entries()) await prisma.account.create({ data: { rank: 9995 + i, name: acctOf(w), vertical: 'cpg', hubspot_company_id: `${companyId}-${w}`, tier: 'Tier 1' } });
     await prisma.account.create({ data: { rank: 9994, name: keywordAccount, vertical: 'cpg', hubspot_company_id: keywordCompanyId, tier: 'Tier 1' } });
     const persona: Record<string, number> = {};
     for (const who of [...people, 'kai'] as const) {
       const row = await prisma.persona.create({
-        data: { persona_id: `${tag}-${who}`, account_name: who === 'kai' ? keywordAccount : accountName, priority: 'P1', name: `${who[0].toUpperCase()}${who.slice(1)} Tester`, title: 'VP Distribution', seniority: 'vp', email: email(who), email_valid: true, is_contact_ready: true, do_not_contact: false, hubspot_contact_id: `${tag}-${who}` },
+        data: { persona_id: `${tag}-${who}`, account_name: who === 'kai' ? keywordAccount : acctOf(who), priority: 'P1', name: `${who[0].toUpperCase()}${who.slice(1)} Tester`, title: 'VP Distribution', seniority: 'vp', email: email(who), email_valid: true, is_contact_ready: true, do_not_contact: false, hubspot_contact_id: `${tag}-${who}` },
         select: { id: true },
       });
       persona[who] = row.id;
@@ -210,17 +217,17 @@ async function main(): Promise<number> {
 
     // 2. VERIFIED FACT -> hypothesis eligible.
     const filed = `(filed ${now.toISOString().slice(0, 10)})`;
-    const factText = `${accountName} will open a new distribution center in Columbus, Ohio with 40 dock doors.`;
-    const factTitle = `${accountName} 10-Q ${filed}`;
     const hypothesis: Record<string, string> = {};
     for (const who of people) {
-      const sig = await registerSignal(prisma, { accountName, hubspotCompanyId: companyId, personaId: persona[who], sourceKind: 'evidence_record', sourceId: `${tag}:fact:${who}`, type: 'site_expansion', title: factTitle, sourceType: 'public_primary', evidenceUrl: `https://example.com/${tag}/10q`, evidenceText: factText, externalOk: true, observedAt: now, confidence: 80, metadata: { verified: 'excerpt_found_at_source' }, registeredBy: ACTOR });
+      const factText = `${acctOf(who)} will open a new distribution center in Columbus, Ohio with 40 dock doors.`;
+      const factTitle = `${acctOf(who)} 10-Q ${filed}`;
+      const sig = await registerSignal(prisma, { accountName: acctOf(who), hubspotCompanyId: companyId, personaId: persona[who], sourceKind: 'evidence_record', sourceId: `${tag}:fact:${who}`, type: 'site_expansion', title: factTitle, sourceType: 'public_primary', evidenceUrl: `https://example.com/${tag}/10q`, evidenceText: factText, externalOk: true, observedAt: now, confidence: 80, metadata: { verified: 'excerpt_found_at_source' }, registeredBy: ACTOR });
       const proposed = await proposeHypothesis(prisma, {
-        accountName,
+        accountName: acctOf(who),
         primaryPersonaId: persona[who],
         persona: seed.persona,
         problemFamily: seed.problemFamily,
-        observation: citedQuote(factTitle, factText, sig.id, accountName),
+        observation: citedQuote(factTitle, factText, sig.id, acctOf(who)),
         problemHypothesis: 'My guess is the new site moves the constraint to the yards, where trailers wait for a door.',
         rootCauseHypotheses: ['Trailer location is tracked on paper or radio'],
         impactHypotheses: ['Doors wait for trailers'],
@@ -311,7 +318,7 @@ async function main(): Promise<number> {
     // Cards for everyone else (the router's email recommendation, recorded directly).
     const card: Record<string, string> = {};
     for (const who of ['dana', 'uma', 'bo', 'rita'] as const) {
-      const c = await prisma.routingDecision.create({ data: { run_id: `${tag}-run-2`, mode: 'shadow', account_name: accountName, persona_id: persona[who], hypothesis_id: hypothesis[who], action: 'enroll_gap_sequence', lane: 'work_queue', rule_id: 'enroll', priority: 0, explain: {}, inputs_snapshot: { target: 'modex_queue' } }, select: { id: true } });
+      const c = await prisma.routingDecision.create({ data: { run_id: `${tag}-run-2`, mode: 'shadow', account_name: acctOf(who), persona_id: persona[who], hypothesis_id: hypothesis[who], action: 'enroll_gap_sequence', lane: 'work_queue', rule_id: 'enroll', priority: 0, explain: {}, inputs_snapshot: { target: 'modex_queue' } }, select: { id: true } });
       card[who] = c.id;
       created.decisionIds.push(c.id);
     }
@@ -355,7 +362,7 @@ async function main(): Promise<number> {
     // 10. BUYER REPLY -> sequence held -> human disposition required.
     const ritaNext = await computeNextTouch(prisma, card.rita, new Date(now.getTime() + 10 * 86_400_000), { gapSender, getThread: async () => [] });
     const ritaHyp = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesis.rita }, select: { status: true } });
-    const ritaInputs = await assembleRoutingInputs(prisma, { accountName, personaId: persona.rita, now: new Date(now.getTime() + 180_000), suppression: staticSuppressionReader('clear'), hubspotSnapshot: await snapshot(accountName, companyId) });
+    const ritaInputs = await assembleRoutingInputs(prisma, { accountName: acctOf('rita'), personaId: persona.rita, now: new Date(now.getTime() + 180_000), suppression: staticSuppressionReader('clear'), hubspotSnapshot: await snapshot(accountName, companyId) });
     expect('10 buyer reply', intake.replies === 1 && intake.inboundMessagesCreated === 1 && ritaNext.state === 'stopped' && ritaHyp?.status === 'active' && !isSkip(ritaInputs) && ritaInputs.comms.undispositionedInbound === true, `intake ${JSON.stringify(intake)}, next ${JSON.stringify(ritaNext)}, hypothesis ${JSON.stringify(ritaHyp)}, comms ${JSON.stringify(isSkip(ritaInputs) ? ritaInputs : ritaInputs.comms)}`);
     const ritaRoute = !isSkip(ritaInputs) ? routePersona(ritaInputs) : null;
     expect('10 buyer reply', !!ritaRoute && ritaRoute.kind === 'decision' && ritaRoute.decision.ruleId === 'reply_pending' && ritaRoute.decision.lane === 'reply_triage', `rita routed ${JSON.stringify(ritaRoute && ritaRoute.kind === 'decision' ? { rule: ritaRoute.decision.ruleId, lane: ritaRoute.decision.lane } : ritaRoute)}, expected reply_pending in the reply_triage lane`);
@@ -409,9 +416,9 @@ async function main(): Promise<number> {
     }
   } finally {
     try {
-      const removed = await cleanup(prisma, { accountNames: [accountName, keywordAccount], emails: created.emails, familyId: created.familyId, decisionIds: created.decisionIds, messageIds: created.messageIds, threadIds: created.threadIds, runIds: created.runIds, runStart, watermark: created.watermark });
+      const removed = await cleanup(prisma, { accountNames: [...allAccounts, keywordAccount], emails: created.emails, familyId: created.familyId, decisionIds: created.decisionIds, messageIds: created.messageIds, threadIds: created.threadIds, runIds: created.runIds, runStart, watermark: created.watermark });
       for (const [k, v] of Object.entries(removed)) counts[`cleanup.${k}`] = v;
-      const leftover = (await prisma.account.count({ where: { name: { in: [accountName, keywordAccount] } } })) + (await prisma.persona.count({ where: { email: { in: created.emails } } }));
+      const leftover = (await prisma.account.count({ where: { name: { in: [...allAccounts, keywordAccount] } } })) + (await prisma.persona.count({ where: { email: { in: created.emails } } }));
       if (leftover !== 0) {
         lines.push({ step: 'cleanup', status: 'FAIL', detail: `leftover rows ${leftover}` });
         failure = failure ?? new StepFailure('cleanup', `leftover rows ${leftover}`);
