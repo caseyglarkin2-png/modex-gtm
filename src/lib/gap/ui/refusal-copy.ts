@@ -48,6 +48,11 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'A Gmail draft of this touch already exists.',
     next: 'Send or delete it in Gmail, then press Reconcile.',
   },
+  account_motion_active: {
+    what: 'Nothing was drafted or sent.',
+    why: 'Someone else at this account is already in a cold email motion. One motion at a time keeps the account from being carpet-bombed.',
+    next: 'Wait for the unlock date, or work this person by phone or LinkedIn if you judge it right.',
+  },
   active_opportunity: {
     what: 'Nothing was drafted or sent.',
     why: 'This account already has an active opportunity (an open HubSpot deal, a meeting or a positive reply).',

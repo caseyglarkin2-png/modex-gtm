@@ -97,7 +97,7 @@ export function prismaOf(d: Db) {
       findFirst: vi.fn(async ({ where }: any) => d.versions.find((x) => x.family_id === where.family_id) ?? null),
     },
     sequenceFamily: { findMany: vi.fn(async ({ where }: any) => d.families.filter((f) => f.problem_family === where.problem_family)) },
-    unsubscribedEmail: { findFirst: vi.fn(async () => null) },
+    unsubscribedEmail: { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []) },
     inboundMessage: { findMany: vi.fn(async (args: any) => findManyFrom(d.inbound ?? [], args)), findFirst: vi.fn(async (args: any) => findFirstFrom(d.inbound ?? [], args)) },
     conversationDisposition: { findFirst: vi.fn(async (args: any) => findFirstFrom(d.dispositions ?? [], args)) },
     emailLog: { findFirst: vi.fn(async (args: any) => findFirstFrom(d.emailLogs ?? [], args)), create: vi.fn(async () => ({ id: 1 })) },

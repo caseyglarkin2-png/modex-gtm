@@ -6,17 +6,17 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-integrated.ts` against the scratch database. Reserved example.com recipients only; every Gmail call went to an in-process fake.
 
-- Run tag: gapint-1790563908229
+- Run tag: gapint-1790565870389
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 94d98be2
-- Ran at: 2026-09-28T02:51:49.300Z
+- Git: ac0fb878
+- Ran at: 2026-09-28T03:24:31.550Z
 
 ## Steps
 
-- PASS 1 seed: accounts GAP Integrated Co 63908229 and GAP Integrated Keyword Co 63908229, people sam, dana, uma, bo, rita, cal, kai at example.com, family cmuknipyz00017kcwz68l5mtr (single-touch Hidden Capacity seed copy)
+- PASS 1 seed: accounts GAP Integrated Co 65870389 and GAP Integrated Keyword Co 65870389, people sam, dana, uma, bo, rita, cal, kai at example.com, family cmukoos2900017kmgxauizs6y (single-touch Hidden Capacity seed copy)
 - PASS 2 verified fact: 6 hypotheses citing one verified, dated, quoted fact each: submitted, approved and activated
 - PASS 3 keyword only: approve refused evidence_insufficient; the person routes research_required (evidence_thin), never an email
-- PASS 4 route: sam's approved hypothesis routes enroll_gap_sequence (enroll) in shadow routing run gapint-1790563908229-run-1
+- PASS 4 route: sam's approved hypothesis routes enroll_gap_sequence (enroll) in shadow routing run gapint-1790565870389-run-1
 - PASS 5 real send: one DIRECT_SENT ledger row (evidence tier VERIFIED_FACT), the fake Gmail transport the only recipient; routing now reads lastOutboundAt and routes nurture (sequence_complete), never a second email
 - PASS 6 prior step 0: a new card for the same person refuses step 0: first_touch_already_sent
 - PASS 7 outstanding draft: a Gmail draft is outstanding for dana; the direct send is refused draft_outstanding
@@ -26,7 +26,7 @@ Written by `scripts/gap/e2e-integrated.ts` against the scratch database. Reserve
 - PASS 11 no answer: rules after each no-answer: enroll -> enroll -> call_attempts_exhausted; the hypothesis stays active with no buyer truth (0 BIDs)
 - PASS 12 learning: people sent to (this run) = 3 of 7 created; reply/send 1/3 and truth yield 1/3, both shown as early observations (n < 20); sam's card agrees because the send is on record
 - PASS 13 zero outbound: 3 direct sends and 1 draft handed to the in-process fake, all to reserved example.com addresses; no credential present
-- PASS cleanup: every row the run created was deleted ({"gap_audit_events":45,"buyer_input_data":0,"conversation_dispositions":4,"notifications":2,"unsubscribed_emails":1,"inbound_messages":1,"email_threads":1,"email_logs":3,"send_approval_requests":0,"gap_compiles":4,"routing_decisions":6,"hypothesis_events":27,"hypothesis_signals":7,"prospecting_hypotheses":7,"prospecting_signals":7,"sequence_versions":1,"sequence_families":1,"personas":7,"accounts":2})
+- PASS cleanup: every row the run created was deleted ({"gap_audit_events":45,"buyer_input_data":0,"conversation_dispositions":4,"notifications":2,"unsubscribed_emails":1,"inbound_messages":1,"email_threads":1,"email_logs":3,"send_approval_requests":0,"gap_compiles":4,"routing_decisions":6,"hypothesis_events":27,"hypothesis_signals":7,"prospecting_hypotheses":7,"prospecting_signals":7,"sequence_versions":1,"sequence_families":1,"personas":7,"accounts":5})
 
 ## Counts
 
@@ -51,4 +51,4 @@ Written by `scripts/gap/e2e-integrated.ts` against the scratch database. Reserve
 - cleanup.sequence_versions: 1
 - cleanup.sequence_families: 1
 - cleanup.personas: 7
-- cleanup.accounts: 2
+- cleanup.accounts: 5

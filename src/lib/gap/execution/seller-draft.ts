@@ -28,6 +28,7 @@
  * `human_action`.
  */
 
+import { accountMotionRefusal } from '../motion/load';
 import { captureSendAttribution } from './send-attribution';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { sendableEvidence } from '../research/evidence-gate';
@@ -69,6 +70,7 @@ export type SellerDraftRefusal =
   | 'draft_outstanding'
   | 'recipient_unsubscribed'
   | 'account_replied'
+  | 'account_motion_active'
   | 'decision_stale'
   | 'email_bounced'
   | 'emailed_outside_gap'
@@ -359,6 +361,13 @@ export async function prepareSellerEmail(
     const replied = await accountRepliedRecently(prisma, email, now);
     if (replied) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
+    }
+    // Phase 2 C3: ONE cold email motion per account. Another person there holds a live
+    // GAP first touch inside the unlock window: this person waits (a bounce releases it).
+    const motion = await accountMotionRefusal(prisma, { accountName: pack.hypothesis.account_name, personaId: persona.id ?? null, email, now });
+    if (motion) {
+      const unlock = /^\d{4}-\d{2}-\d{2}T/.test(motion.unlockAt) ? `on ${motion.unlockAt.slice(0, 10)} with no response` : motion.unlockAt;
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_motion_active', detail: `${motion.owner} at this account has a first touch from ${motion.sentAt.slice(0, 10)}. One cold email motion at a time: the next person unlocks ${unlock}, or at once if that address fails.` });
     }
     // Final red team: the card is a snapshot; a cold first touch never ignores what moved since it was minted.
     const moved = await personMovedSince(prisma, { email, personaId: persona.id ?? null, since: new Date(decision.created_at) });

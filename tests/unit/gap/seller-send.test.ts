@@ -69,6 +69,17 @@ describe('SEND FROM YARDFLOW: preview and confirmation', () => {
     expect(d.audit.some((a) => a.kind === DIRECT_CLAIMED)).toBe(false);
   });
 
+  it('Phase 2 C3: one cold email motion per account: a colleague first touch yesterday refuses this first touch (nothing reaches Gmail)', async () => {
+    const d = db();
+    d.audit.push({ kind: DIRECT_SENT, actor: ACTOR, subject_type: 'routing_decision', subject_id: 'dec-jason', payload: { accountName: 'Kroger', personaId: 1788, recipient: 'jason.gaiser@kroger.com', stepIndex: 0, sentAt: new Date(NOW.getTime() - 86_400_000).toISOString() }, created_at: new Date(NOW.getTime() - 86_400_000) });
+    const prisma = sendPrisma(d);
+    const direct = adapter();
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW }, deps(d, direct));
+    expect(r).toMatchObject({ ok: false, reason: 'account_motion_active' });
+    expect(String((r as { detail?: string }).detail)).toContain('jason.gaiser@kroger.com');
+    expect(direct).not.toHaveBeenCalled();
+  });
+
   it('Phase 2 A2: a real send stamps the primary fact, opener, persona, account tier and problem family on the ledger row', async () => {
     const d = db();
     Object.assign(d.hypotheses[0].signals[0], { role: 'primary', signal_id: 'sig-1' });

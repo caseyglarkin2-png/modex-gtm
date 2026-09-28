@@ -31,13 +31,15 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listReplies } from '@/lib/gap/replies/list';
-import { listAllCurrent, type QueueItem } from '@/lib/gap/routing/queue';
-import { cockpitOpenHref, sellerLaneOf, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
+import { listAllCurrent } from '@/lib/gap/routing/queue';
+import { cockpitOpenHref, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
 import { loadThesisGroups, splitThesisWork, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
 import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
-import { GapCockpit, NextUp, pickNextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
+import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
+import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
+import { laneWithMotion, loadCockpitMotions, type CockpitMotions } from '@/lib/gap/motion/cockpit';
 import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
 import { ActionPackView } from '@/components/gap/action-pack-view';
 import { RunRoutingPanel } from '@/components/gap/run-routing-panel';
@@ -62,8 +64,6 @@ const LANE_TITLE: Record<CockpitLane, string> = {
   replies: 'Replies: what did the buyer tell you?',
 };
 
-const nameOf = (i: QueueItem) => i.persona.displayName ?? i.persona.email ?? 'someone';
-
 async function loadCockpit() {
   const [routableScope, queue, repliesPage, rawGroups, active] = await Promise.all([
     resolveRoutableHypothesisScope(prisma),
@@ -74,7 +74,12 @@ async function loadCockpit() {
     prisma.prospectingHypothesis.findMany({ where: { status: 'active', primary_persona_id: { not: null } }, select: { primary_persona_id: true } }),
   ]);
   const groups = orderGroupsForReview(rawGroups);
-  const lanes = queue.items.map((item) => ({ item, lane: sellerLaneOf(item) }));
+  const now = new Date();
+  // Phase 2 C: one cold email motion per account. A held email card is never READY; it waits as NEXT.
+  // A failed motion read shows every card (every send gate still enforces one motion per account).
+  const motion: CockpitMotions = await loadCockpitMotions(prisma, queue.items, now).catch(() => ({ motions: [], heldCardIds: [] }));
+  const held = new Set(motion.heldCardIds);
+  const lanes = queue.items.map((item) => ({ item, lane: laneWithMotion(item, held) }));
   const inLane = (lane: string) => lanes.filter((l) => l.lane === lane).map((l) => l.item);
 
   // REVIEW counts decisions that can succeed, not rows: a shared thesis is ONE review however many
@@ -100,29 +105,40 @@ async function loadCockpit() {
   const ready = inLane('ready');
   const followUp = inLane('follow_up');
   const research = inLane('research');
-  const reply = repliesPage.items[0];
-  const thesis = reviewGroups[0];
-  const researchThesis = researchGroups[0];
-  const approvedOf = (g: LoadedGroup) => g.members.filter((m) => m.status === 'approved').length;
-  const next = pickNextUp({
-    replies: reply ? { title: `${reply.contactEmail} replied`, detail: `${reply.accountName}: ${reply.subject ?? reply.snippet.slice(0, 80)}`, href: '/gap?lane=replies' } : null,
-    follow_up: followUp[0] ? { title: `Follow up with ${nameOf(followUp[0])}`, detail: `${followUp[0].account.name}. The next touch is due.`, href: cockpitOpenHref('follow_up', followUp[0].id) } : null,
-    ready: ready[0] ? { title: `Contact ${nameOf(ready[0])}`, detail: `${ready[0].account.name}${ready[0].persona.title ? `, ${ready[0].persona.title}` : ''}.`, href: cockpitOpenHref('ready', ready[0].id) } : null,
-    review: thesis
-      ? { title: `Decide the ${thesis.accountName} thesis`, detail: `${thesis.members.length} people, ready for outreach.`, href: '/gap?lane=review' }
-      : readyOneOffIds.length > 0
-        ? { title: 'Decide a hypothesis', detail: `${readyOneOffIds.length} waiting.`, href: '/gap?lane=review' }
-        : null,
-    research: researchThesis
-      ? {
-          title: `Find verified evidence for the ${researchThesis.accountName} thesis`,
-          detail: `${researchThesis.members.length === 1 ? '1 person' : `${researchThesis.members.length} people`}${approvedOf(researchThesis) ? `, ${approvedOf(researchThesis)} approved` : ''}, 0 in use. Not ready for outreach yet.`,
-          href: '/gap?lane=research',
-        }
-      : research[0]
-        ? { title: `Research ${research[0].account.name}`, detail: `${research.length} card${research.length === 1 ? '' : 's'} missing evidence or contact data.`, href: '/gap?lane=research' }
-        : null,
-  });
+
+  // Phase 2 C5: NEXT UP v2, deterministic rules (lib/gap/routing/next-up.ts), one item per account,
+  // never an account held by an open deal or unknown opportunity truth.
+  const inbox = await loadEvidenceInbox(prisma, now).catch(() => []);
+  const accountsSeen = [...new Set([...queue.items.map((i) => i.account.name), ...groups.map((g) => g.accountName), ...inbox.map((a) => a.accountName)])];
+  const [tierRows, expiryRows] = await Promise.all([
+    accountsSeen.length ? prisma.account.findMany({ where: { name: { in: accountsSeen } }, select: { name: true, tier: true } }).catch(() => []) : [],
+    ready.length
+      ? prisma.hypothesisSignal
+          .findMany({ where: { hypothesis_id: { in: ready.map((r) => r.hypothesis?.id).filter((x): x is string => !!x) }, role: 'primary' }, select: { hypothesis_id: true, signal: { select: { freshness_expires_at: true } } } })
+          .catch(() => [])
+      : [],
+  ]);
+  const tiers = new Map((tierRows as Array<{ name: string; tier: string | null }>).map((t) => [t.name, t.tier]));
+  const primaryExpiry = new Map(
+    (expiryRows as Array<{ hypothesis_id: string; signal: { freshness_expires_at: Date | null } | null }>).map((r) => [r.hypothesis_id, r.signal?.freshness_expires_at ? new Date(r.signal.freshness_expires_at).toISOString() : null]),
+  );
+  const oneOffAccount = new Map(groups.flatMap((g) => g.members.map((m) => [m.id, g.accountName] as const)));
+  const next = pickNextUpV2(
+    buildNextUpCandidates({
+      replies: repliesPage.items,
+      followUps: followUp,
+      ready,
+      primaryExpiry,
+      reviewGroups: reviewGroups.map((g) => ({ accountName: g.accountName, people: g.members.length })),
+      readyOneOffs: readyOneOffIds.map((id) => ({ accountName: oneOffAccount.get(id) ?? '' })),
+      researchGroups: researchGroups.map((g) => ({ accountName: g.accountName, people: g.members.filter((m) => m.next === 'find_evidence' || m.next === 'revise').length })),
+      researchCards: research,
+      inbox: inbox.map((a) => ({ accountName: a.accountName, ready: a.ready.length, people: Math.max(0, ...a.theses.map((t) => t.people)) })),
+      tiers,
+      openHref: cockpitOpenHref,
+    }),
+    heldAccountsOf(queue.items),
+  );
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
   const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
@@ -139,6 +155,8 @@ async function loadCockpit() {
     readyOneOffIds,
     researchGroups,
     reviewWaiting,
+    motion,
+    inbox,
     queueAsOf: queue.asOf,
     unrouted,
     routing: { canRun: routableHypotheses > 0 || queue.items.length > 0, routableHypotheses, routableAccounts },
@@ -239,9 +257,9 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
             <RepliesTriage inCockpit />
           ) : (
             <>
-            {lane === 'research' ? <EvidenceInbox accounts={await loadEvidenceInbox(prisma, new Date()).catch(() => [])} now={new Date()} /> : null}
+            {lane === 'research' ? <EvidenceInbox accounts={data.inbox} now={new Date()} /> : null}
             {lane === 'research' ? <ResearchTheses groups={data.researchGroups} /> : null}
-            <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} reviewWaiting={data.reviewWaiting} />
+            <WorkQueue reloadKey={data.queueAsOf ?? undefined} sellerLane={lane} openId={openId} openPanel={openPanel} closeHref={`/gap?lane=${lane}`} reviewWaiting={data.reviewWaiting} motion={data.motion} />
             </>
           )}
         </section>
