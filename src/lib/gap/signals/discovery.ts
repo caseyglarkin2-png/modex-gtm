@@ -17,7 +17,7 @@
  * verification, and never touches Pounce, HubSpot or Slack here.
  */
 import { fetchAccountNewsDetailed, type NewsItem } from '@/lib/pounce/news';
-import { captureSignal, classifySignal, nameKeys, norm, resolveSignalAccount } from './intake';
+import { captureSignal, classifySignal, norm } from './intake';
 import { loadWatchProfiles, type WatchProfile } from './watch';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,7 +42,7 @@ export function cleanHeadline(title: string, source: string): string {
 }
 
 /** Words that make the named account a bystander, not the subject ("Walmart supplier Acme opens..."). */
-const RELATIONAL = new Set(['supplier', 'suppliers', 'vendor', 'vendors', 'partner', 'partners', 'customer', 'customers', 'rival', 'rivals', 'competitor', 'competitors', 'former', 'ex', 'spinoff', 'spin', 'owned', 'backed', 'veteran', 'alum', 'alumni', 'exec', 'executive']);
+const RELATIONAL = new Set(['supplier', 'suppliers', 'vendor', 'vendors', 'partner', 'partners', 'customer', 'customers', 'rival', 'rivals', 'competitor', 'competitors', 'former', 'ex', 'spinoff', 'spin', 'owned', 'backed', 'veteran', 'alum', 'alumni', 'exec', 'executive', 'bottler', 'bottlers', 'distributor', 'distributors', 'franchisee', 'franchisees', 'dealer', 'dealers', 'licensee']);
 
 /**
  * Is the headline ABOUT the account (review C P1: a mention is not the subject)? It must OPEN with the account's
@@ -50,13 +50,34 @@ const RELATIONAL = new Set(['supplier', 'suppliers', 'vendor', 'vendors', 'partn
  * single words), optionally possessive, and the next word must not make it a bystander ("supplier", "rival").
  */
 export function headlineNames(headline: string, profile: Pick<WatchProfile, 'accountName' | 'aliases'>): boolean {
+  return headlineMatch(headline, profile) !== null;
+}
+
+const SUFFIX = /\b(inc|incorporated|corp|corporation|co|company|llc|ltd|plc|holdings|group|the)\b/g;
+/**
+ * Discovery's name keys (review D P1): the query already quoted the name and the headline must OPEN with it, so
+ * short and everyday names (Ford, UNFI, Target) are allowed here; the account's leading word also counts when it
+ * is distinctive (5+ letters, not an everyday word): "Hormel to close" for Hormel Foods.
+ */
+function discoveryKeys(name: string): string[] {
+  const n = norm(name).replace(SUFFIX, ' ').replace(/\s+/g, ' ').trim();
+  const first = n.split(' ')[0] ?? '';
+  const everyday = /^(general|united|american|national|first|global|home|best|great|new|north|south|east|west|the)$/;
+  return [...new Set([n, ...(n.includes(' ') && first.length >= 5 && !everyday.test(first) ? [first] : [])].filter((k) => k.length >= 2))];
+}
+
+/** Which key the headline opens with (and whether it was an alias), or null when the account is not the subject. */
+export function headlineMatch(headline: string, profile: Pick<WatchProfile, 'accountName' | 'aliases'>): { key: string; viaAlias: boolean } | null {
   const h = norm(headline).replace(/^the /, '');
-  const keys = [profile.accountName, ...profile.aliases].flatMap((n) => nameKeys(n)).map((k) => k.replace(/^the /, ''));
-  return keys.some((k) => {
-    if (!(h === k || h.startsWith(`${k} `))) return false;
-    const next = h.slice(k.length).trim().split(' ')[0] === 's' ? h.slice(k.length).trim().split(' ')[1] : h.slice(k.length).trim().split(' ')[0];
-    return !RELATIONAL.has(next ?? '');
-  });
+  const candidates = [...discoveryKeys(profile.accountName).map((key) => ({ key, viaAlias: false })), ...profile.aliases.flatMap((a) => discoveryKeys(a).map((key) => ({ key, viaAlias: true })))];
+  for (const c of candidates.sort((a, b) => b.key.length - a.key.length)) {
+    if (!(h === c.key || h.startsWith(`${c.key} `))) continue;
+    const rest = h.slice(c.key.length).trim().split(' ');
+    const next = rest[0] === 's' ? rest[1] : rest[0];
+    if (RELATIONAL.has(next ?? '')) return null;
+    return c;
+  }
+  return null;
 }
 
 /**
@@ -87,6 +108,16 @@ export interface DiscoveryResult {
   universe: number;
   accounts: DiscoveryAccountResult[];
   skipped: string[];
+}
+
+const otherAccountCache = new Map<string, boolean>();
+async function accountNamed(prisma: PrismaLike, key: string, self: string): Promise<boolean> {
+  const k = `${key}|${self}`;
+  if (otherAccountCache.has(k)) return otherAccountCache.get(k)!;
+  const rows: Array<{ name: string }> = await prisma.account.findMany({ where: { name: { equals: key, mode: 'insensitive' } }, select: { name: true }, take: 3 }).catch(() => []);
+  const hit = rows.some((r) => r.name.toLowerCase() !== self.toLowerCase());
+  otherAccountCache.set(k, hit);
+  return hit;
 }
 
 export async function runDiscovery(
@@ -137,10 +168,11 @@ export async function runDiscovery(
         seen.add(it.url);
         if (opts.now.getTime() - it.publishedAt.getTime() > DISCOVERY_MAX_AGE_MS) continue;
         const headline = cleanHeadline(it.title, it.source);
-        if (!headlineNames(headline, p)) continue;
-        // A headline the resolver attributes to a DIFFERENT account is that account's story (left for its own ask).
-        const res = await resolveSignalAccount(prisma, { title: headline });
-        if (res.resolution === 'resolved' && res.accountName !== p.accountName) {
+        const match = headlineMatch(headline, p);
+        if (!match) continue;
+        // An alias that is itself ANOTHER account's name (a parent, a sister brand) is that account's story,
+        // left for its own ask (review C P1). Casey's own aliases for the account are trusted.
+        if (match.viaAlias && (await accountNamed(prisma, match.key, p.accountName))) {
           out.otherAccount += 1;
           continue;
         }

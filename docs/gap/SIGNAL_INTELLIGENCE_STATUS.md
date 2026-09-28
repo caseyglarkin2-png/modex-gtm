@@ -295,10 +295,12 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
   account not researched in 7 days; never researched first, then the oldest,
   tier first).
 - Cadence: background research moves from once a day to HOURLY (`40 * * * *`),
-  3 accounts per run, a 120s budget, a 3-day account cooldown: at most 72
-  account slots a day, bounded in practice by the cooldown to about a third of
-  the universe a day (about 25 distinct accounts/day at 74). Each run is
-  independent (failure isolation, idempotent cooldown).
+  3 accounts per run, a 120s budget, a 3-day account cooldown and a 3-day
+  backlog staleness: at most 72 account slots a day; in steady state the
+  backlog covers the 74 watched accounts about every 3 days (~25 distinct
+  accounts a day, ~25 Gemini searches + EDGAR passes). Day one can use up to
+  72 runs while never-researched accounts drain. Each run is independent
+  (failure isolation, idempotent cooldown).
 - The cooldown bypass is Casey's alone: a story he shared is followed up at
   once; a discovered story waits out the cooldown unless it was published after
   the last research.
@@ -309,4 +311,26 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
   not first, backlog outranking shared signals, discovered stories bypassing
   the cooldown, Casey's share waiting on the cooldown (initially SURVIVED; the
   test's timestamps fixed).
+
+### Release C+D review (verified P1 fixed before merge)
+- The stricter name rule made short or everyday account names (Ford, UNFI,
+  Target) impossible to discover, and an alias could not fix it. Discovery now
+  has its own name keys: the query quoted the name and the headline must OPEN
+  with it, so short names are allowed; a multi-word account's distinctive
+  leading word counts ("Hormel to close" for Hormel Foods); an alias that is
+  itself another account's name is left for that account, while Casey's own
+  aliases are trusted.
+- P2/P3 fixed: the backlog also skips accounts whose deal state is UNKNOWN; a
+  backlog entry never overwrites a real target's tiebreak; backlog staleness
+  3 days (the stated daily target); an alias correction clears the profile
+  cache; franchise words (bottler, distributor, franchisee, dealer) make the
+  named brand a bystander (from a live dry run: "Coca-Cola bottler boosts San
+  Antonio capacity" is the franchise bottler's story).
+- Live dry run before merge (no writes): 8 watched accounts x 2 questions,
+  255 stories seen, 76 about the account, 12 kept (a Coca-Cola DC in Idaho
+  Falls, a $42M San Antonio plant expansion, a Teamsters strike as risk,
+  PepsiCo plant layoffs).
+- Coverage telemetry: `scripts/gap/signal-coverage.ts` (read-only), report in
+  `docs/gap/signal-coverage-latest.md`. BEFORE dogfood: 2/74 watched accounts
+  with a signal in 7 days, 4/74 with a live verified fact, 70 never researched.
 

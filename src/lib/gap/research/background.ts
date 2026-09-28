@@ -64,7 +64,9 @@ const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_sig
  * in this long is researched proactively, never-researched first, then the oldest. An account routing holds for
  * an open HubSpot deal is left out (its evidence would not be used for cold outreach).
  */
-export const BACKLOG_STALE_MS = 7 * 86_400_000;
+// 3 days (review D): with the 3-day account cooldown the watched universe (74) is covered about every 3 days,
+// ~25 distinct accounts a day, the program's target. Day one can take up to 72 runs while never-researched accounts drain.
+export const BACKLOG_STALE_MS = 3 * 86_400_000;
 /** A queued signal whose research failed this many times is settled no_usable_fact (with the reason). */
 export const SIGNAL_RESEARCH_MAX_ATTEMPTS = 3;
 
@@ -200,7 +202,8 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
   // 5. Proactive backlog over the watched priority universe (never researched first, then the oldest).
   const profiles = await (deps.watch ?? loadWatchProfiles)(prisma).catch(() => [] as Array<{ accountName: string }>);
   if (profiles.length) {
-    const inDeal = new Set(heldDealAccounts(queue.items));
+    // Open deal, or deal state UNKNOWN on a current card: not proactive research (review D P2).
+    const inDeal = new Set([...heldDealAccounts(queue.items), ...queue.items.filter((i) => i.ruleId === 'opportunity_unknown').map((i) => i.account.name)]);
     const watched = profiles.map((p) => p.accountName).filter((n) => !inDeal.has(n));
     const lastRuns: Array<{ account_name: string; _max: { created_at: Date | null } }> = watched.length
       ? await prisma.researchRun.groupBy({ by: ['account_name'], where: { account_name: { in: watched }, run_key: { startsWith: 'gap_research:' } }, _max: { created_at: true } }).catch(() => [])
@@ -209,7 +212,9 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
     for (const name of watched) {
       const last = lastOf.get(name) ?? null;
       if (last && now.getTime() - last.getTime() < BACKLOG_STALE_MS) continue;
-      merge(byAccount, { ...base(name, 'priority_backlog'), oldestWorkAt: last ? last.toISOString() : '1970-01-01T00:00:00.000Z' });
+      // Only an account with no other research reason gets a backlog entry (it never overwrites a real target's tiebreak).
+      if (byAccount.has(name)) continue;
+      byAccount.set(name, { ...base(name, 'priority_backlog'), oldestWorkAt: last ? last.toISOString() : '1970-01-01T00:00:00.000Z' });
     }
   }
 

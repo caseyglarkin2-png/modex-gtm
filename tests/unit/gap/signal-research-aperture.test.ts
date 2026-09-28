@@ -41,6 +41,15 @@ describe('proactive backlog', () => {
     ]);
   });
 
+  it('deal state UNKNOWN is excluded too; a backlog entry never overwrites a real target', async () => {
+    const t = await selectBackgroundTargets(
+      db({ signals: [{ id: 's1', account_name: 'Never Co', origin: 'casey_share', title: 'x', created_at: NOW, published_at: null }] }),
+      NOW,
+      { loadGroups: async () => [], listQueue: async () => ({ asOf: null, items: [queueItem('Unknown Co', 'opportunity_unknown')], truncated: false }), watch: async () => [{ accountName: 'Never Co' }, { accountName: 'Unknown Co' }] } as never,
+    );
+    expect(t.map((x) => [x.accountName, x.reason, x.oldestWorkAt])).toEqual([['Never Co', 'shared_signal', null]]);
+  });
+
   it('the backlog ranks after every other kind of research work', async () => {
     const t = await selectBackgroundTargets(db({ signals: [{ id: 's1', account_name: 'Shared Co', origin: 'casey_share', title: 'x', created_at: NOW, published_at: null }] }), NOW, { ...deps, watch: async () => [{ accountName: 'Never Co' }] } as never);
     expect(t.map((x) => x.reason)).toEqual(['shared_signal', 'priority_backlog']);

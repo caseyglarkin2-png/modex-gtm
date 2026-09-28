@@ -3,7 +3,7 @@
  * and bounded rotating discovery that captures SIGNALS only.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { cleanHeadline, headlineNames, runDiscovery, themesForRun } from '@/lib/gap/signals/discovery';
+import { cleanHeadline, headlineMatch, headlineNames, runDiscovery, themesForRun } from '@/lib/gap/signals/discovery';
 import { correctWatch, loadWatchProfiles, DEFAULT_THEMES, WATCH_AUDIT } from '@/lib/gap/signals/watch';
 
 const NOW = new Date('2026-09-28T15:00:00.000Z');
@@ -155,6 +155,9 @@ describe('review C P1s: attribution', () => {
     expect(headlineNames("Walmart's new automated DC opens in Texas", w)).toBe(true);
     expect(headlineNames('Walmart supplier Acme opens automated distribution center', w)).toBe(false);
     expect(headlineNames('Autonomous trucks now run Walmart routes', w)).toBe(false);
+    // Production dogfood: a franchise bottler is not the brand owner.
+    expect(headlineNames('Coca-Cola bottler boosts San Antonio capacity with $42M expansion', { accountName: 'Coca-Cola', aliases: [] })).toBe(false);
+    expect(headlineNames('Coca-Cola building new distribution center in Idaho Falls', { accountName: 'Coca-Cola', aliases: [] })).toBe(true);
     expect(headlineNames('SpaceX expands Mars rocket factory', { accountName: 'Mars', aliases: [] })).toBe(false);
   });
 
@@ -171,6 +174,36 @@ describe('review C P1s: attribution', () => {
     const r = await runDiscovery(prisma, { now: NOW, accounts: 1 }, { news: async () => ({ items: [], error: 'news 429' }), profiles: async () => [profile('Kroger')], sleep: async () => undefined });
     expect(r.accounts[0].errors).toEqual(['news 429', 'news 429']);
     expect(prisma.gapAuditEvent.create).not.toHaveBeenCalled();
+  });
+});
+
+describe('review D P1: discovery can find short and everyday names, as the subject', () => {
+  it('Ford, UNFI and Target open their own headlines; a mid-sentence mention still does not count', () => {
+    expect(headlineNames('Ford to close Louisville truck plant', { accountName: 'Ford', aliases: [] })).toBe(true);
+    expect(headlineNames('UNFI opens automated distribution center in Florida', { accountName: 'UNFI', aliases: [] })).toBe(true);
+    expect(headlineNames('Target to build new distribution center in Texas', { accountName: 'Target', aliases: [] })).toBe(true);
+    expect(headlineNames('Retailers target faster dock turns', { accountName: 'Target', aliases: [] })).toBe(false);
+  });
+
+  it('a distinctive leading word counts ("Hormel to close" for Hormel Foods); an everyday one does not', () => {
+    expect(headlineNames('Hormel to close Iowa plant', { accountName: 'Hormel Foods', aliases: [] })).toBe(true);
+    expect(headlineNames('General consolidation hits freight', { accountName: 'General Mills', aliases: [] })).toBe(false);
+  });
+
+  it("Casey's own alias is trusted; an alias that is ANOTHER account's name is that account's story", async () => {
+    expect(headlineMatch('Hormel to buy a plant', { accountName: 'Hormel Foods', aliases: ['Hormel'] })).toEqual({ key: 'hormel', viaAlias: false });
+    expect(headlineMatch('PBNA opens Texas DC', { accountName: 'PepsiCo', aliases: ['PBNA'] })).toEqual({ key: 'pbna', viaAlias: true });
+    const rows: Array<Record<string, unknown>> = [];
+    const prisma = {
+      gapAuditEvent: { findMany: vi.fn(async () => []), create: vi.fn(async () => ({})) },
+      gapSignal: { findUnique: vi.fn(async () => null), create: vi.fn(async ({ data }: { data: Record<string, unknown> }) => (rows.push({ id: 'x', ...data }), { id: 'x' })), update: vi.fn(async () => ({})) },
+      account: { findMany: vi.fn(async ({ where }: { where?: { name?: { equals?: string } } } = {}) => (where?.name?.equals?.toLowerCase() === 'pbna' ? [] : [])) },
+      gapAccountAlias: { findMany: vi.fn(async () => []) },
+      canonicalAccountLink: { findMany: vi.fn(async () => []) },
+    };
+    const news = async () => ({ error: null, items: [{ title: 'PBNA opens automated distribution center in Texas - FreightWaves', url: 'https://news.google.com/rss/articles/PB1', source: 'FreightWaves', publishedAt: new Date('2026-09-26T00:00:00Z') }] });
+    await runDiscovery(prisma, { now: NOW, accounts: 1, queriesPerAccount: 1 }, { news, profiles: async () => [{ ...profile('PepsiCo'), aliases: ['PBNA'] }], sleep: async () => undefined });
+    expect(rows).toHaveLength(1);
   });
 });
 

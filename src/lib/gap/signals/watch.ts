@@ -165,5 +165,6 @@ export async function correctWatch(prisma: PrismaLike, input: { accountName: str
   const nextAdd = [...prevAdd.filter((x) => !lower(remove).has(x.toLowerCase())), ...add];
   const nextRemove = [...prevRemove.filter((x) => !lower(add).has(x.toLowerCase())), ...remove];
   await prisma.gapAuditEvent.create({ data: { kind: WATCH_AUDIT, actor: input.actor, subject_type: 'account', subject_id: acct.name, payload: { addAliases: [...new Set(nextAdd)], removeAliases: [...new Set(nextRemove)] } } });
+  if (prisma && typeof prisma === 'object') profileCache.delete(prisma);
   return { ok: true };
 }
