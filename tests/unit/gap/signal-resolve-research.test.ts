@@ -64,13 +64,14 @@ describe('signal -> research', () => {
   });
 
   it('settles each signal honestly: fact_found, contradiction, or no_usable_fact', async () => {
-    const rows: Record<string, Record<string, unknown>> = { s1: { metadata: {} }, s2: { metadata: {} } };
+    const rows: Record<string, Record<string, unknown>> = { s1: { metadata: {}, account_name: 'PepsiCo', research_status: 'researching' }, s2: { metadata: {}, account_name: 'PepsiCo', research_status: 'researching' } };
     const prisma = { gapSignal: { findUnique: vi.fn(async ({ where }: { where: { id: string } }) => rows[where.id]), update: vi.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => Object.assign(rows[where.id], data)) } };
     const result = { runId: 'run-1', outcome: 'evidence_found' as const, facts: [{ signalId: 'f1', evidenceRecordId: 'e1', excerpt: 'x', url: sig.url, title: 't', publishedAt: '', retrievedAt: '', provider: 'signal' as const, type: 'news' as never, change: 'expansion' as never, fresh: true }], rejected: [], conflicts: [], notes: [] };
     const other = { ...sig, id: 's2', url: 'https://x.com/other', title: 'PepsiCo appoints new CFO' };
     const out = await settleSignals(prisma, { signals: [sig, other], accountName: 'PepsiCo', result, now: NOW });
     expect(out).toEqual([{ id: 's1', status: 'fact_found', matched: ['f1'] }, { id: 's2', status: 'no_usable_fact', matched: [] }]);
     expect((rows.s2.metadata as { research: { otherVerifiedFacts: number } }).research.otherVerifiedFacts).toBe(1);
+    rows.s1.research_status = 'researching';
     const conflicted = await settleSignals(prisma, { signals: [sig], accountName: 'PepsiCo', result: { ...result, conflicts: [{ site: 'Dallas', signalIds: ['f1'] }] }, now: NOW });
     expect(conflicted[0].status).toBe('contradiction');
   });
@@ -106,14 +107,15 @@ describe('the processing pass', () => {
     const stuck = { id: 's1', url: 'https://supplychaindive.com/news/x', title: null, origin: 'casey_share', account_hint: null, metadata: { metaAttempts: 1, metaError: 'private host' } };
     const update = vi.fn(async () => ({}));
     const prisma = {
-      gapSignal: { findMany: vi.fn(async ({ where }: { where: Record<string, unknown> }) => (where.resolution === 'needs_account' ? [stuck] : [])), update },
+      gapSignal: { findMany: vi.fn(async ({ where }: { where: Record<string, unknown> }) => (where.resolution === 'needs_account' ? [stuck] : [])), update, updateMany: update },
       account: { findMany: vi.fn(async () => [{ name: 'General Mills' }]) },
       gapAccountAlias: { findMany: vi.fn(async () => []) },
       canonicalAccountLink: { findMany: vi.fn(async () => []) },
     };
     const r = await processSignals(prisma, { now: NOW }, { fetchHtml: async () => '<meta property="og:title" content="General Mills plans supply chain revamp"><meta property="article:published_time" content="2026-07-02">' });
     expect(r).toMatchObject({ retried: 1, resolvedOnRetry: 1 });
-    expect(update).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ account_name: 'General Mills', resolution: 'resolved', research_status: 'queued', title: 'General Mills plans supply chain revamp' }) }));
+    // Conditional: only a row still needing an account is overwritten (Casey's own assignment wins).
+    expect(update).toHaveBeenCalledWith(expect.objectContaining({ where: { id: 's1', resolution: 'needs_account' }, data: expect.objectContaining({ account_name: 'General Mills', resolution: 'resolved', research_status: 'queued', title: 'General Mills plans supply chain revamp' }) }));
   });
 
   it('a new source with no metadata key yet IS clustered (regression: a JSON-path NOT filter skipped it)', async () => {
@@ -187,7 +189,7 @@ describe('background research follows up queued signals', () => {
     });
     const r = await runBackgroundResearch(prisma, { now: NOW }, { ...emptyDeps, research: research as never });
     expect(r.researched).toHaveLength(1);
-    expect(prisma.gapSignal.updateMany).toHaveBeenCalledWith({ where: { id: { in: ['s1'] } }, data: { research_status: 'researching' } });
+    expect(prisma.gapSignal.updateMany).toHaveBeenCalledWith({ where: { id: { in: ['s1'] }, research_status: 'queued', account_name: 'PepsiCo' }, data: { research_status: 'researching' } });
     expect(prisma.gapSignal.update).toHaveBeenCalledWith(expect.objectContaining({ where: { id: 's1' }, data: expect.objectContaining({ research_status: 'no_usable_fact', research_run_id: 'r1' }) }));
   });
 
@@ -233,6 +235,31 @@ describe('review B P1s', () => {
     const prisma = { gapSignal: { findUnique: vi.fn(async () => r), findFirst: vi.fn(async () => ({ id: 's1' })), update: vi.fn() }, pounceTrigger: { findUnique: vi.fn() } };
     expect(await promoteSignal(prisma, 's2', { ingest })).toEqual({ ok: false, reason: 'already_promoted' });
     expect(ingest).not.toHaveBeenCalled();
+  });
+});
+
+describe('final review P0/P1s', () => {
+  it('a settle never lands on a signal reassigned (or un-resolved) while research ran', async () => {
+    const rows: Record<string, Record<string, unknown>> = { s1: { metadata: {}, account_name: 'Frito-Lay', research_status: 'researching' } };
+    const prisma = { gapSignal: { findUnique: vi.fn(async () => rows.s1), update: vi.fn() } };
+    const sig = { id: 's1', url: 'https://x.com/a', title: 'PepsiCo opens Reno Nevada DC', published_at: NOW, source_class: 'news', resolution_basis: null, event_id: 's1' };
+    const fact = { signalId: 'f1', evidenceRecordId: 'e1', excerpt: 'x', url: 'https://x.com/a', title: 't', publishedAt: '', retrievedAt: '', provider: 'signal' as const, type: 'news' as never, change: 'opening' as never, fresh: true };
+    const out = await settleSignals(prisma, { signals: [sig], accountName: 'PepsiCo', result: { runId: 'r', outcome: 'evidence_found', facts: [fact], rejected: [], conflicts: [], notes: [] }, now: NOW });
+    expect(out[0].status).toBe('no_usable_fact');
+    expect(prisma.gapSignal.update).not.toHaveBeenCalled();
+  });
+
+  it('only the verified excerpt credits a fact: an echoed provider title never does', () => {
+    const sig = { id: 's1', url: 'https://x.com/a', title: 'Acme to build automated cold storage DC in Fort Worth', published_at: NOW, source_class: 'news', resolution_basis: null, event_id: 's1' };
+    expect(factMatchesSignal({ url: 'https://y.com/b', excerpt: 'Acme opened a new distribution center in Reno.', title: 'Acme to build automated cold storage DC in Fort Worth' }, sig, 'Acme')).toBe(false);
+  });
+
+  it('signal pages are read within a budget (a run never reads unbounded pages)', async () => {
+    const sigs = [1, 2, 3, 4, 5].map((i) => ({ id: `s${i}`, url: `https://x.com/${i}`, title: 't', published_at: NOW, source_class: 'news', resolution_basis: null, event_id: `s${i}` }));
+    const fetchHtml = vi.fn(async () => '<p>Acme will open a new distribution center in Reno.</p>');
+    const r = await signalCandidates(sigs, { fetchHtml });
+    expect(fetchHtml).toHaveBeenCalledTimes(3);
+    expect(r.note).toMatch(/page budget/);
   });
 });
 

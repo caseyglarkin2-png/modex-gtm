@@ -92,9 +92,9 @@ event. Nothing else is added.
 |---|---|---|---|---|---|
 | A | Signal intake + Share to GAP | feat/gap-signal-a-intake | #287 | 8a9cc4c7 | READY; 6 real shares through the prod UI at 390px, 0.9-1.5s each, no horizontal scroll |
 | B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | #289 | 5b936236 | READY (processing cron first tick pending at merge) |
-| C | Account watches + scheduled discovery | feat/gap-signal-c-discovery | | | |
-| D | Research aperture (shipped with C) | feat/gap-signal-c-discovery | | | |
-| E | Inbox polish, dogfood, coverage, quality | | | | |
+| C | Account watches + scheduled discovery | feat/gap-signal-c-discovery | #290 | 526d50d8 | READY; 3 production discovery batches asked all 74 watched accounts |
+| D | Research aperture (shipped with C) | feat/gap-signal-c-discovery | #290 | 526d50d8 | READY; production research batches covered ~70 distinct accounts |
+| E | Final review fixes, dogfood, coverage, quality | fix/gap-signal-final-review | | | |
 
 ## Release A: signal intake + Share to GAP
 
@@ -333,4 +333,75 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
 - Coverage telemetry: `scripts/gap/signal-coverage.ts` (read-only), report in
   `docs/gap/signal-coverage-latest.md`. BEFORE dogfood: 2/74 watched accounts
   with a signal in 7 days, 4/74 with a live verified fact, 70 never researched.
+
+## Share to GAP from an iPhone (one-time setup, about 2 minutes)
+
+iOS Safari does not support the Web Share Target, so an iOS Shortcut opens the
+pre-filled page. It uses Safari's own signed-in session (no token, no
+unauthenticated write: nothing saves until you press Share to GAP).
+
+1. Open **Shortcuts**, tap **+**, name it **Share to GAP**.
+2. Tap the (i) details button and turn on **Show in Share Sheet**. Set the
+   accepted types to **URLs** and **Safari web pages** (and **Text** if you want
+   to share from apps that send text).
+3. Add **Get URLs from Input** (input: Shortcut Input).
+4. Add **Get Item from List** set to **First Item**.
+5. Add **URL Encode** with the item from the list.
+6. Add **Text**: `https://modex-gtm.vercel.app/gap/signals/new?url=` followed
+   by the **URL Encoded Text** variable.
+7. Add **Open URLs** with that text.
+
+Use: in Safari, LinkedIn, X, Mail or Slack tap **Share, Share to GAP**. The
+page opens with the link filled in; add an account or a one-line note if you
+want and tap **Share to GAP**. Keep modex-gtm signed in once in Safari. On
+Android or desktop Chrome, install the app (Add to Home screen) and it appears
+in the share sheet directly (the Web Share Target in `public/manifest.json`).
+Desktop: open `/gap/signals` or bookmark
+`javascript:location='https://modex-gtm.vercel.app/gap/signals/new?url='+encodeURIComponent(location.href)`.
+
+## Final expert review (three read-only lenses)
+
+Lenses: enterprise seller / signal usefulness; research / evidence integrity;
+reliability / identity / duplicates. The lead read the code for every P0/P1;
+all were real and are fixed on `fix/gap-signal-final-review`, each with tests
+and a mutation proven RED then restored (12 mutations):
+
+| # | Severity (lenses) | Verified defect | Fix |
+|---|---|---|---|
+| 1 | P0 (all three) | Reassigning an account kept `fact_found`, the research run, the event and the promotion state; the next pass could promote the old account's verified fact under the new account (Slack, HubSpot heat) | Assign to a different account and WRONG ACCOUNT reset research, event (re-clustered) and promotion; a shared link is followed up again for the new account; a settle lands only on a row still researching for the account researched |
+| 2 | P1 (seller) | Most discovered stories were never followed up (queue needed score 8) yet read "Waiting for research" | Every discovered outreach candidate is queued (name + one operational theme, score >= 6); a discovered risk / leadership / context story reads "Context kept" with a Research button |
+| 3 | P1 (seller) | A share that still needs Casey fell out of the inbox window after a few days | Unresolved Casey shares are always listed; settled shares take their normal place |
+| 4 | P1 (evidence) | A fact could be credited to a signal through its unverified provider title (Gemini can echo the headline) | Matching uses the verified excerpt only |
+| 5 | P1 (evidence) | "Page names the account" used the FIRST TOKEN as a substring ("general" for General Mills matched a General Motors page; "home", "h", "ford" inside "affordable"); a competitor's sentence on a shared page verified as the account's fact | The verification contract is stricter for every provider: the account's FULL normalized name as whole words; a sentence from a signal's page must itself name the account |
+| 6 | P1 (reliability) | The metadata-retry pass could overwrite an account Casey assigned while it fetched | Conditional update (only a row still needing an account) |
+| 7 | P1 (reliability) | Discovery's leading-word key attributed other companies' and places' stories (Hyundai Mobis, Toyota Industries, WestRock, Georgia) | Discovery matches the full name or Casey's aliases only |
+| 8 | observed in dogfood | One research call hit the 300s function limit (signal pages were read without a bound) | At most 3 signal pages per run within a 25s budget |
+
+Also fixed: ignored signals are never researched; the research claim is
+conditional on `queued` and the account; IPv4-literal reserved ranges refused.
+
+## Debt recorded (not fixed in this program)
+
+- Dates: a web candidate's date is the provider's; a signal page's date
+  applies to every sentence on it (an old event restated on a new page reads
+  fresh); a 10-K restating last year's closure uses the filing date.
+- Promotion sends the signal's headline (not the verified sentence) to Slack
+  and HubSpot trigger heat, scored on the headline.
+- An unverified provider title is stored as the evidence title (the quote is
+  verified; the title is not).
+- Discovered signals carry Google News redirect links: they never dedupe
+  against Casey's share of the publisher link and their own page is not read.
+- Clustering is not transitive (a chain A-B-C can split into two events, two
+  promotions); theme rotation counts asks in a 5,000-row window (freezes after
+  about 6 weeks); a re-share naming a different account for a resolved row
+  only records the hint; the DNS check is separate from the fetch (a rebinding
+  window); `account_name` has no foreign key (a renamed account's queued
+  signals research the old name); research selection does up to 200
+  sequential account lookups per run.
+- Facts verified in the production dogfood BEFORE the stricter naming rule
+  merged were verified under the old first-token rule (see the quality review).
+- Seller P2/P3: the inbox's typed Assign needs an exact name (no lookup list
+  there); the saved panel has no account picker; no USE button (`use` is a
+  valid label); `deal_context` is never assigned; labor / security words
+  (union, Teamsters, security) are not in the risk vocabulary.
 

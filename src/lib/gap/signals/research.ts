@@ -40,13 +40,25 @@ export interface ResearchableSignal {
 const PRIMARY_CLASSES = new Set(['press_release', 'sec_filing']);
 const PRIMARY_BASIS = new Set(['company_newsroom', 'domain']);
 
-export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string> }> {
+/** At most this many signal pages per research run, and this much time reading them (final review: a run hit the 300s limit). */
+export const SIGNAL_PAGES_PER_RUN = 3;
+export const SIGNAL_PAGES_BUDGET_MS = 25_000;
+
+export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml; clock?: () => number } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string> }> {
   const fetchHtml = deps.fetchHtml ?? defaultFetchHtml;
+  const clock = deps.clock ?? Date.now;
+  const started = clock();
   const candidates: Candidate[] = [];
   const pages = new Map<string, string>();
   const notes: string[] = [];
+  let read = 0;
   for (const s of signals) {
     if (!s.url) continue;
+    if (read >= SIGNAL_PAGES_PER_RUN || clock() - started > SIGNAL_PAGES_BUDGET_MS) {
+      notes.push(`${s.id}: page not read this run (page budget)`);
+      continue;
+    }
+    read += 1;
     let text: string;
     try {
       text = htmlToText(await fetchHtml(s.url));
@@ -117,7 +129,8 @@ export function factMatchesSignal(fact: { url: string; excerpt: string; title?: 
   if (!want || !got || want !== got) return false;
   const specific = (t: string) => new Set([...storyTokens(t, accountName)].filter((w) => !GENERIC_OPS.has(w)));
   const a = specific(signal.title);
-  const b = specific(`${fact.excerpt} ${fact.title ?? ''}`);
+  // Only the verified excerpt counts (final review P1): a provider-supplied title is unverified and can echo the headline.
+  const b = specific(fact.excerpt);
   let shared = 0;
   for (const w of a) if (b.has(w)) shared += 1;
   return shared >= 2;
@@ -137,7 +150,13 @@ export async function settleSignals(
     const matchedAll = input.result.facts.filter((f) => factMatchesSignal(f, s, input.accountName));
     const matched = matchedAll.filter((f) => f.fresh);
     const status: SettledStatus = matched.some((f) => conflicted.has(f.signalId)) ? 'contradiction' : matched.length ? 'fact_found' : 'no_usable_fact';
-    const row: { metadata: Record<string, unknown> | null } | null = await prisma.gapSignal.findUnique({ where: { id: s.id }, select: { metadata: true } });
+    const row: { metadata: Record<string, unknown> | null; account_name?: string | null; research_status?: string } | null = await prisma.gapSignal.findUnique({ where: { id: s.id }, select: { metadata: true, account_name: true, research_status: true } });
+    // Final review P0: Casey may have reassigned (or un-resolved) the signal while research ran; the result
+    // belongs to the account it was researched for and never lands on a different one.
+    if (!row || (row.account_name !== undefined && row.account_name !== input.accountName) || (row.research_status !== undefined && row.research_status !== 'researching')) {
+      out.push({ id: s.id, status: 'no_usable_fact', matched: [] });
+      continue;
+    }
     await prisma.gapSignal.update({
       where: { id: s.id },
       data: {

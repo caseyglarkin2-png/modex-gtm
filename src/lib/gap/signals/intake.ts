@@ -141,7 +141,7 @@ async function readBounded(res: Response, max: number): Promise<string> {
 
 /** True when any address the host resolves to is network-private (fail closed on a lookup error). */
 export async function resolvesToPrivate(host: string, lookup: (h: string) => Promise<string[]> = defaultLookup): Promise<boolean> {
-  if (/^[\d.]+$/.test(host)) return isNetworkPrivateHost(host);
+  if (/^[\d.]+$/.test(host)) return isNetworkPrivateHost(host) || isReservedV4(host);
   let addrs: string[];
   try {
     addrs = await lookup(host);
@@ -693,6 +693,8 @@ export interface StatusInput {
   resolution: string;
   research_status: string;
   feedback: string | null;
+  origin?: string;
+  relevance?: string;
 }
 
 /** One word for Casey: did GAP do anything with that link? */
@@ -737,9 +739,9 @@ export function signalStatus(s: StatusInput): {
         detail: 'Researched: no fact GAP could verify at the source.',
       };
     default:
-      return {
-        status: 'Captured',
-        detail: 'Account known. Waiting for research.',
-      };
+      // Final review P1: say what GAP will actually do. A discovered story that is not a candidate for a sayable
+      // fact (risk, leadership, context) is kept as context and is not researched unless Casey asks.
+      if (s.origin === 'discovery' && s.relevance && s.relevance !== 'outreach_evidence_candidate') return { status: 'Context kept', detail: 'Kept as account context. Press Research if you want GAP to verify it.' };
+      return { status: 'Captured', detail: 'Account known. Waiting for research.' };
   }
 }

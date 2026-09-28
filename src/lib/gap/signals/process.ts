@@ -57,8 +57,9 @@ export async function processSignals(
       const m = parseSignalMeta(await fetchHtml(s.url));
       const r = await resolveSignalAccount(prisma, { accountHint: s.account_hint, title: m.title, url: s.url });
       const cls = classifySignal(m.title ?? '', r.accountName);
-      await prisma.gapSignal.update({
-        where: { id: s.id },
+      // Conditional (final review P1): if Casey named the account while this page was being fetched, his wins.
+      await prisma.gapSignal.updateMany({
+        where: { id: s.id, resolution: 'needs_account' },
         data: {
           title: m.title,
           published_at: m.publishedAt,

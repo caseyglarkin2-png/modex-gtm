@@ -177,7 +177,16 @@ export interface VerificationContext {
 }
 
 export function verificationContext(accountName: string, fetchText?: FetchText): VerificationContext {
-  return { accountKey: normalizeCompany(accountName).split(' ')[0], fetchText: fetchText ?? defaultFetchText, pages: new Map() };
+  // Signal Intelligence final review P1: the FULL normalized name, matched as whole words. The first token
+  // ("general" for General Mills, "home" for The Home Depot, "h" for H-E-B) matched other companies' pages.
+  return { accountKey: normalizeCompany(accountName), fetchText: fetchText ?? defaultFetchText, pages: new Map() };
+}
+
+/** Does this text name the account (its full normalized name as whole words)? */
+export function textNamesAccount(text: string, accountKey: string): boolean {
+  if (!accountKey) return false;
+  const t = ` ${text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()} `;
+  return t.includes(` ${accountKey} `);
 }
 
 /**
@@ -198,7 +207,10 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   const page = ctx.pages.get(c.url)!;
   if (page instanceof Error) return { ok: false, reason: `source_unreadable:${page.message}` };
   if (!excerptFoundIn(c.excerpt, page)) return { ok: false, reason: 'excerpt_not_found_at_source' };
-  if (c.provider !== 'edgar' && !normalizeForMatch(page).includes(ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
+  if (c.provider !== 'edgar' && !textNamesAccount(page, ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
+  // A sentence taken from a signal's own page must itself name the account (a competitor's paragraph on the
+  // same page is not this account's fact).
+  if (c.provider === 'signal' && !textNamesAccount(c.excerpt, ctx.accountKey)) return { ok: false, reason: 'sentence_does_not_name_account' };
   return { ok: true, publishedAt: c.publishedAt };
 }
 
