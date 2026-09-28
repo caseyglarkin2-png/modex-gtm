@@ -46,7 +46,8 @@ function accountQuery(name: string): string {
  * older, smaller memo set — pepsico, walmart, costco etc. are pack-only).
  * Union of both, pack displayName preferred.
  */
-async function buildWatchlist(): Promise<{ slug: string; name: string }[]> {
+/** Exported for Signal Intelligence account watches (the audited /for + demo-pack universe). */
+export async function buildWatchlist(): Promise<{ slug: string; name: string }[]> {
   const byKey = new Map<string, { slug: string; name: string }>();
   for (const a of getAllAccountMicrositeData()) {
     byKey.set(a.slug, { slug: a.slug, name: a.accountName });

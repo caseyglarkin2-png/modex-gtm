@@ -49,11 +49,15 @@
     },
     {
       "path": "/api/cron/gap-background-research/",
-      "schedule": "40 10 * * *"
+      "schedule": "40 * * * *"
     },
     {
       "path": "/api/cron/gap-signal-process/",
       "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/cron/gap-signal-discovery/",
+      "schedule": "15 */2 * * *"
     },
     {
       "path": "/api/cron/gap-hubspot-replies/?mode=apply",

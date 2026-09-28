@@ -231,7 +231,7 @@ export interface Resolution {
   candidates: AccountCandidate[];
 }
 
-const norm = (s: string) =>
+export const norm = (s: string) =>
   s
     .toLowerCase()
     .normalize('NFKD')
@@ -305,7 +305,7 @@ const GENERIC = new Set([
 
 const CORP_SUFFIX = /\b(inc|incorporated|corp|corporation|co|company|llc|ltd|plc|holdings|group|international|the)\b/g;
 
-function nameKeys(name: string): string[] {
+export function nameKeys(name: string): string[] {
   const n = norm(name);
   const core = n.replace(CORP_SUFFIX, ' ').replace(/\s+/g, ' ').trim();
   // A single word must be 5+ letters to be read out of a headline; a multi-word name 4+.

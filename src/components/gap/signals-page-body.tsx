@@ -11,13 +11,15 @@ import { sharedUrlOf, type SharedParams } from '@/lib/gap/signals/shared-url';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { SignalShare } from '@/components/gap/signal-share';
 import { SignalInbox } from '@/components/gap/signal-inbox';
+import { SignalWatch } from '@/components/gap/signal-watch';
+import { loadWatchProfilesCached } from '@/lib/gap/signals/watch';
 
 export async function SignalsPageBody({ searchParams }: { searchParams?: Promise<SharedParams> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
   const p = (await searchParams) ?? {};
-  const items = await listSignals(prisma, { limit: 60 }).catch(() => []);
+  const [items, profiles] = await Promise.all([listSignals(prisma, { limit: 60 }).catch(() => []), loadWatchProfilesCached(prisma).catch(() => [])]);
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       <GapSubnav />
@@ -30,6 +32,7 @@ export async function SignalsPageBody({ searchParams }: { searchParams?: Promise
         <h2 className="text-sm font-semibold">Signal inbox</h2>
         <SignalInbox items={items} />
       </section>
+      <SignalWatch profiles={profiles.map((p) => ({ accountName: p.accountName, aliases: p.aliases, reasons: p.reasons }))} />
     </div>
   );
 }

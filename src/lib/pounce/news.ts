@@ -35,6 +35,32 @@ function tag(block: string, name: string): string {
   return m ? decodeEntities(m[1]) : '';
 }
 
+/** Like fetchAccountNews, but a failed fetch (429, timeout, non-OK) is reported, not an empty result (Signal Intelligence C). */
+export async function fetchAccountNewsDetailed(query: string): Promise<{ items: NewsItem[]; error: string | null }> {
+  const url = `${RSS_BASE}?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
+  try {
+    const res = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (compatible; YardFlowPounce/1.0)' }, signal: AbortSignal.timeout(15_000) });
+    if (!res.ok) return { items: [], error: `news ${res.status}` };
+    return { items: parseNewsXml(await res.text()), error: null };
+  } catch (e) {
+    return { items: [], error: (e instanceof Error ? e.message : String(e)).slice(0, 80) };
+  }
+}
+
+export function parseNewsXml(xml: string): NewsItem[] {
+  const items: NewsItem[] = [];
+  for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
+    const block = m[1];
+    const title = tag(block, 'title');
+    const link = tag(block, 'link');
+    const publishedAt = new Date(tag(block, 'pubDate'));
+    const source = tag(block, 'source');
+    if (!title || !link || Number.isNaN(publishedAt.getTime())) continue;
+    items.push({ title, url: link, source: source || 'unknown', publishedAt });
+  }
+  return items;
+}
+
 export async function fetchAccountNews(query: string): Promise<NewsItem[]> {
   const url = `${RSS_BASE}?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
   try {
