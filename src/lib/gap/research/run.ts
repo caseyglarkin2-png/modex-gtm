@@ -95,27 +95,18 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     }
   }
 
-  // Verify every candidate at its own source.
-  const fetchText = deps.fetchText ?? defaultFetchText;
-  const pages = new Map<string, string | Error>();
-  const accountKey = normalizeCompany(input.accountName).split(' ')[0];
-  const accepted: Array<Candidate & { publishedAt: Date; retrievedAt: Date }> = [];
+  // Verify every candidate at its own source (the ONE verification contract, verifyCandidate).
+  const ctx = verificationContext(input.accountName, deps.fetchText);
+  const accepted: Array<Candidate & { publishedAt: Date }> = [];
   const rejected: Array<{ url: string; reason: string }> = [];
   const seen = new Set<string>();
   for (const c of candidates) {
     const key = normalizeForMatch(c.excerpt);
     if (seen.has(key)) continue;
-    if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) { rejected.push({ url: c.url, reason: 'no_publication_date' }); continue; }
-    if (!isPhysicalOpsFact(c.excerpt)) { rejected.push({ url: c.url, reason: 'not_a_physical_operations_fact' }); continue; }
-    if (!pages.has(c.url)) {
-      try { pages.set(c.url, await fetchText(c.url)); } catch (err) { pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
-    }
-    const page = pages.get(c.url)!;
-    if (page instanceof Error) { rejected.push({ url: c.url, reason: `source_unreadable:${page.message}` }); continue; }
-    if (!excerptFoundIn(c.excerpt, page)) { rejected.push({ url: c.url, reason: 'excerpt_not_found_at_source' }); continue; }
-    if (c.provider === 'web' && !normalizeForMatch(page).includes(accountKey)) { rejected.push({ url: c.url, reason: 'page_does_not_name_account' }); continue; }
+    const v = await verifyCandidate(c, ctx);
+    if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }
     seen.add(key);
-    accepted.push({ ...c, publishedAt: c.publishedAt, retrievedAt: input.now });
+    accepted.push({ ...c, publishedAt: v.publishedAt });
   }
 
   // Store: ResearchRun + EvidenceRecord + ProspectingSignal (existing stores).
@@ -132,57 +123,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
 
   const facts: ResearchFact[] = [];
   for (const a of accepted) {
-    const cls = classifyFact(a.excerpt);
-    const claimHash = hash(normalizeForMatch(a.excerpt));
-    await upsertEvidenceRecords(prisma, run.id, [{
-      accountName: input.accountName,
-      personaId: input.personaId,
-      claim: a.excerpt,
-      claimHash,
-      sourceUrl: a.url,
-      sourceTitle: a.title,
-      sourceType: a.sourceType,
-      provider: `gap_research:${a.provider}`,
-      observedAt: a.publishedAt,
-      deterministicKey: `gap_research:${input.accountName}:${claimHash.slice(0, 16)}`,
-      metadata: { retrievedAt: a.retrievedAt.toISOString(), excerpt: a.excerpt, change: cls.change, signalType: cls.type, verified: 'excerpt_found_at_source' },
-    }]);
-    const record = await prisma.evidenceRecord.findUnique({
-      where: { account_name_claim_hash_source_url_observed_at: { account_name: input.accountName, claim_hash: claimHash, source_url: a.url, observed_at: a.publishedAt } },
-      select: { id: true },
-    });
-    const expires = freshnessExpiresAt(cls.type, a.publishedAt);
-    const signal = await registerSignal(prisma, {
-      accountName: input.accountName,
-      personaId: input.personaId,
-      sourceKind: 'evidence_record',
-      sourceId: record.id,
-      type: cls.type,
-      title: a.title,
-      summary: null,
-      sourceType: a.sourceType,
-      evidenceUrl: a.url,
-      evidenceText: a.excerpt,
-      externalOk: true,
-      observedAt: a.publishedAt,
-      confidence: a.sourceType === 'public_primary' ? 80 : 60,
-      freshnessExpiresAt: expires,
-      metadata: { researchRunId: run.id, retrievedAt: a.retrievedAt.toISOString(), provider: a.provider, change: cls.change, verified: 'excerpt_found_at_source' },
-      registeredBy: input.actor,
-    });
-    facts.push({
-      signalId: signal.id,
-      evidenceRecordId: record.id,
-      excerpt: a.excerpt,
-      url: a.url,
-      title: a.title,
-      publishedAt: a.publishedAt.toISOString(),
-      retrievedAt: a.retrievedAt.toISOString(),
-      provider: a.provider,
-      type: cls.type,
-      change: cls.change,
-      fresh: expires.getTime() > input.now.getTime(),
-    });
+    facts.push(await storeVerifiedFact(prisma, { runId: run.id, accountName: input.accountName, personaId: input.personaId, candidate: a, actor: input.actor, now: input.now }));
   }
 
   const conflicts = detectConflicts(facts.map((f) => ({ id: f.signalId, excerpt: f.excerpt, change: f.change }))).map((c) => ({ site: c.site, signalIds: c.ids }));
@@ -213,4 +154,96 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   });
 
   return { runId: run.id, outcome, facts, rejected, conflicts, notes };
+}
+
+export interface VerificationContext {
+  accountKey: string;
+  fetchText: FetchText;
+  /** One fetch per URL per run. */
+  pages: Map<string, string | Error>;
+}
+
+export function verificationContext(accountName: string, fetchText?: FetchText): VerificationContext {
+  return { accountKey: normalizeCompany(accountName).split(' ')[0], fetchText: fetchText ?? defaultFetchText, pages: new Map() };
+}
+
+/**
+ * THE verification contract for a public fact, whoever proposed it (EDGAR,
+ * web research, or Casey typing a URL and a sentence). Accepted only if it is
+ * dated, states a physical-operations change, and its excerpt is found
+ * verbatim at its own URL; a non-EDGAR page must also name the account.
+ * Nothing else mints the `excerpt_found_at_source` stamp: storeVerifiedFact
+ * is only ever called with a candidate that passed here.
+ */
+export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date } | { ok: false; reason: string }> {
+  if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };
+  if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
+  if (!isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
+  if (!ctx.pages.has(c.url)) {
+    try { ctx.pages.set(c.url, await ctx.fetchText(c.url)); } catch (err) { ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
+  }
+  const page = ctx.pages.get(c.url)!;
+  if (page instanceof Error) return { ok: false, reason: `source_unreadable:${page.message}` };
+  if (!excerptFoundIn(c.excerpt, page)) return { ok: false, reason: 'excerpt_not_found_at_source' };
+  if (c.provider !== 'edgar' && !normalizeForMatch(page).includes(ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
+  return { ok: true, publishedAt: c.publishedAt };
+}
+
+/** Store one VERIFIED candidate through the existing stores: EvidenceRecord + an evidence_record ProspectingSignal. */
+export async function storeVerifiedFact(
+  prisma: PrismaLike,
+  input: { runId: string; accountName: string; personaId: number | null; candidate: Candidate & { publishedAt: Date }; actor: string; now: Date },
+): Promise<ResearchFact> {
+  const a = input.candidate;
+  const cls = classifyFact(a.excerpt);
+  const claimHash = hash(normalizeForMatch(a.excerpt));
+  await upsertEvidenceRecords(prisma, input.runId, [{
+    accountName: input.accountName,
+    personaId: input.personaId,
+    claim: a.excerpt,
+    claimHash,
+    sourceUrl: a.url,
+    sourceTitle: a.title,
+    sourceType: a.sourceType,
+    provider: `gap_research:${a.provider}`,
+    observedAt: a.publishedAt,
+    deterministicKey: `gap_research:${input.accountName}:${claimHash.slice(0, 16)}`,
+    metadata: { retrievedAt: input.now.toISOString(), excerpt: a.excerpt, change: cls.change, signalType: cls.type, verified: 'excerpt_found_at_source' },
+  }]);
+  const record = await prisma.evidenceRecord.findUnique({
+    where: { account_name_claim_hash_source_url_observed_at: { account_name: input.accountName, claim_hash: claimHash, source_url: a.url, observed_at: a.publishedAt } },
+    select: { id: true },
+  });
+  const expires = freshnessExpiresAt(cls.type, a.publishedAt);
+  const signal = await registerSignal(prisma, {
+    accountName: input.accountName,
+    personaId: input.personaId,
+    sourceKind: 'evidence_record',
+    sourceId: record.id,
+    type: cls.type,
+    title: a.title,
+    summary: null,
+    sourceType: a.sourceType,
+    evidenceUrl: a.url,
+    evidenceText: a.excerpt,
+    externalOk: true,
+    observedAt: a.publishedAt,
+    confidence: a.sourceType === 'public_primary' ? 80 : 60,
+    freshnessExpiresAt: expires,
+    metadata: { researchRunId: input.runId, retrievedAt: input.now.toISOString(), provider: a.provider, change: cls.change, verified: 'excerpt_found_at_source' },
+    registeredBy: input.actor,
+  });
+  return {
+    signalId: signal.id,
+    evidenceRecordId: record.id,
+    excerpt: a.excerpt,
+    url: a.url,
+    title: a.title,
+    publishedAt: a.publishedAt.toISOString(),
+    retrievedAt: input.now.toISOString(),
+    provider: a.provider,
+    type: cls.type,
+    change: cls.change,
+    fresh: expires.getTime() > input.now.getTime(),
+  };
 }

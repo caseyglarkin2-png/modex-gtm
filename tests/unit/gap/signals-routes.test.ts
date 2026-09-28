@@ -18,12 +18,22 @@ const mockedRegister = vi.fn();
 const mockedLink = vi.fn();
 const mockedUnlink = vi.fn();
 const mockedAccountFind = vi.fn();
-const fakePrisma = { __tag: 'fake-prisma', account: { findUnique: mockedAccountFind } };
+const mockedFetchText = vi.fn();
+const fakePrisma: any = {
+  __tag: 'fake-prisma',
+  account: { findUnique: mockedAccountFind },
+  // Phase 2 A1: a public fact is verified through the research contract, which records a run and an audit row.
+  researchRun: { create: vi.fn(async () => ({ id: 'run_1' })), update: vi.fn(async () => ({})) },
+  gapAuditEvent: { create: vi.fn(async () => ({ id: 'a_1' })) },
+  evidenceRecord: { upsert: vi.fn(async ({ create }: any) => ({ id: 'ev_1', ...create })), findUnique: vi.fn(async () => ({ id: 'ev_1' })) },
+};
 
 vi.mock('@/lib/auth', () => ({ auth: mockedAuth }));
 vi.mock('@/lib/prisma', () => ({ prisma: fakePrisma }));
 vi.mock('@/lib/gap/signals/registry', () => ({ registerSignal: mockedRegister }));
 vi.mock('@/lib/gap/hypothesis/service', () => ({ linkSignals: mockedLink, unlinkSignal: mockedUnlink }));
+// No network in unit tests: the source re-fetch is stubbed (default: unreadable).
+vi.mock('@/lib/gap/research/providers', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/research/providers')>()), defaultFetchText: (url: string) => mockedFetchText(url) }));
 
 const { POST: registerPOST } = await import('@/app/api/gap/signals/route');
 const { POST: linkPOST, DELETE: unlinkDELETE } = await import('@/app/api/gap/hypotheses/[id]/signals/route');
@@ -60,6 +70,7 @@ beforeEach(() => {
   mockedAuth.mockResolvedValue(SESSION);
   mockedAccountFind.mockResolvedValue({ name: 'Acme Foods' });
   mockedRegister.mockResolvedValue({ id: 'sig_new', created: true });
+  mockedFetchText.mockRejectedValue(new Error('offline'));
 });
 
 afterEach(() => {
@@ -318,7 +329,8 @@ describe('POST /api/gap/signals', () => {
       }),
     );
     expect(res.status).toBe(201);
-    expect(await res.json()).toEqual({ id: 'sig_old', created: false });
+    // Phase 2 A1: "site opened" names no DC, plant, yard or dock, so it is CONTEXT only (never quotable) and says why.
+    expect(await res.json()).toEqual({ id: 'sig_old', created: false, verified: false, reason: 'not_a_physical_operations_fact' });
 
     const [, input] = mockedRegister.mock.calls[0] as [unknown, Record<string, unknown>];
     expect(input).toMatchObject({
@@ -348,6 +360,41 @@ describe('POST /api/gap/signals', () => {
     const observedAt = input.observedAt as Date;
     expect(observedAt.getTime()).toBeGreaterThanOrEqual(before);
     expect(observedAt.getTime()).toBeLessThanOrEqual(Date.now());
+  });
+});
+
+describe('POST /api/gap/signals public fact verification (Phase 2 A1)', () => {
+  const QUOTE = 'Acme Foods opened a new 400,000 square foot distribution center in Reno in August.';
+
+  it('a quote found verbatim at a dated public source is VERIFIED: registered as an evidence_record fact, not a manual one', async () => {
+    mockedFetchText.mockResolvedValue(`Acme Foods news. ${QUOTE} Then more.`);
+    const res = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url: 'https://news.test/acme-reno', excerpt: QUOTE, observedAt: '2026-08-15T00:00:00.000Z' }));
+    expect(res.status).toBe(201);
+    expect(await res.json()).toMatchObject({ verified: true, reason: null });
+    const [, input] = mockedRegister.mock.calls[0] as [unknown, Record<string, unknown>];
+    expect(input).toMatchObject({ sourceKind: 'evidence_record', evidenceText: QUOTE, metadata: expect.objectContaining({ verified: 'excerpt_found_at_source' }) });
+  });
+
+  it('no publication date: never verified (a missing date is not today), kept as context', async () => {
+    mockedFetchText.mockResolvedValue(`Acme Foods news. ${QUOTE}`);
+    const res = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url: 'https://news.test/acme-reno', excerpt: QUOTE }));
+    expect(await res.json()).toMatchObject({ verified: false, reason: 'no_publication_date' });
+    expect(mockedRegister.mock.calls.every(([, i]: any) => i.sourceKind === 'manual' && !i.metadata?.verified)).toBe(true);
+  });
+
+  it('a body cannot inject the verified stamp: extra fields are ignored and the fact stays context', async () => {
+    const res = await registerPOST(
+      jsonRequest(SIGNALS, 'POST', { accountName: 'Acme Foods', kind: 'public', url: 'https://news.test/x', excerpt: QUOTE, observedAt: '2026-08-15', metadata: { verified: 'excerpt_found_at_source' }, sourceKind: 'evidence_record' }),
+    );
+    expect(await res.json()).toMatchObject({ verified: false });
+    expect(mockedRegister.mock.calls.every(([, i]: any) => i.sourceKind === 'manual' && !i.metadata?.verified)).toBe(true);
+  });
+
+  it('an unknown account is 404 before any fetch', async () => {
+    mockedAccountFind.mockResolvedValue(null);
+    const res = await registerPOST(jsonRequest(SIGNALS, 'POST', { accountName: 'Nope', kind: 'public', url: 'https://news.test/x', excerpt: QUOTE, observedAt: '2026-08-15' }));
+    expect(res.status).toBe(404);
+    expect(mockedFetchText).not.toHaveBeenCalled();
   });
 });
 

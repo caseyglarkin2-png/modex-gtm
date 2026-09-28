@@ -17,13 +17,20 @@
  *                        url) on a PUBLIC host: loopback, private ranges,
  *                        `.local`/`.internal` and `PRIVATE_FACT_HOSTS` answer
  *                        422 `private_host`; `type` intent or website_behavior
- *                        answers 422 `private_type` (R2-10). Registered as sourceKind `manual` with
- *                        sourceId `manual:<sha1(accountName + "\n" + url)>`
- *                        (R2-9: keyed on the account too), `externalOk` true.
+ *                        answers 422 `private_type` (R2-10).
+ *                        Phase 2 A1: then VERIFIED by the one research contract
+ *                        (research/manual-fact.ts verifyPublicFact: re-fetch,
+ *                        exact quote, dated, physical-network change, page names
+ *                        the account). Verified -> an evidence_record signal that
+ *                        may satisfy the evidence gate. Not verified -> the
+ *                        context signal (sourceKind `manual`, sourceId
+ *                        `manual:<sha1(accountName + "\n" + url)>`, R2-9), which
+ *                        is never quotable, plus the reason.
  *
- * The account must exist (404 account_not_found). 201 `{id, created}`;
- * `created` is false when the same source was already registered, because
- * a signal is a frozen fact and re-registration returns the existing row.
+ * The account must exist (404 account_not_found). 201 `{id, created}` for
+ * operator knowledge; 201 `{id, created, verified, reason}` for a public fact
+ * (`reason` null when verified). `created` is false when the same source was
+ * already registered: a signal is a frozen fact.
  */
 
 import { createHash } from 'node:crypto';
@@ -32,16 +39,13 @@ import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { freshnessExpiresAt } from '@/lib/gap/signals/freshness';
-import { clip, fromOperatorKnowledge, type ProspectingSignalInput } from '@/lib/gap/signals/projection';
+import { fromOperatorKnowledge, type ProspectingSignalInput } from '@/lib/gap/signals/projection';
 import { registerSignal } from '@/lib/gap/signals/registry';
+import { verifyPublicFact } from '@/lib/gap/research/manual-fact';
 import { SIGNAL_TYPES, type SignalType } from '@/lib/gap/taxonomy';
 import { isPrivateHost } from '@/lib/gap/signals/private-hosts';
 
 export const dynamic = 'force-dynamic';
-
-const PUBLIC_CONFIDENCE = 60;
-const TITLE_MAX = 120;
 
 const BodySchema = z.object({
   accountName: z.string().min(1),
@@ -109,34 +113,6 @@ function observedAtFrom(raw: string | undefined, now: Date): Date | null {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
-/** A public fact typed by an operator: a URL the compiler may cite in outbound copy. */
-function publicFactInput(body: Body, url: string, observedAt: Date, registeredBy: string): ProspectingSignalInput {
-  const type: SignalType = body.type ?? 'manual_research';
-  return {
-    accountName: body.accountName.trim(),
-    hubspotCompanyId: trimOrNull(body.hubspotCompanyId),
-    personaId: body.personaId ?? null,
-    sourceKind: 'manual',
-    // Keyed on account + url, as the operator branch is (R2-9): one story
-    // cited for two accounts is two facts, so the second account can never
-    // link (and freeze) the first account's signal id.
-    sourceId: `manual:${sha1(`${body.accountName.trim()}\n${url}`)}`,
-    type,
-    title: trimOrNull(body.title) ?? clip(url, TITLE_MAX),
-    summary: null,
-    sourceType: 'public_secondary',
-    evidenceUrl: url,
-    evidenceText: trimOrNull(body.excerpt),
-    claimClass: null,
-    externalOk: true,
-    observedAt,
-    confidence: PUBLIC_CONFIDENCE,
-    freshnessExpiresAt: freshnessExpiresAt(type, observedAt),
-    metadata: { by: registeredBy },
-    registeredBy,
-  };
-}
-
 export async function POST(request: NextRequest) {
   const skip = assertGapEnabled('GAP_HYPOTHESIS_ENABLED');
   if (skip) return NextResponse.json(skip, { status: 404 });
@@ -166,7 +142,22 @@ export async function POST(request: NextRequest) {
       return invalidBody('url');
     }
     if (body.type && PRIVATE_FACT_TYPES.has(body.type)) return NextResponse.json({ error: 'private_type' }, { status: 422 });
-    input = publicFactInput(body, checked.url, observedAt, email);
+    const account = await prisma.account.findUnique({ where: { name: body.accountName.trim() }, select: { name: true } });
+    if (!account) return NextResponse.json({ error: 'account_not_found' }, { status: 404 });
+    // A missing date is not "today": only an explicit publication date can be verified.
+    const r = await verifyPublicFact(prisma, {
+      accountName: body.accountName.trim(),
+      personaId: body.personaId ?? null,
+      hubspotCompanyId: body.hubspotCompanyId ?? null,
+      url: checked.url,
+      title: body.title ?? null,
+      excerpt: body.excerpt ?? null,
+      publishedAt: body.observedAt?.trim() ? observedAt : null,
+      type: body.type,
+      actor: email,
+      now,
+    });
+    return NextResponse.json({ id: r.signalId, created: r.created, verified: r.verified, reason: r.verified ? null : r.reason }, { status: 201 });
   } else {
     const text = body.text ?? '';
     const projected = fromOperatorKnowledge(

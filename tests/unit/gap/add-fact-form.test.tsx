@@ -60,9 +60,14 @@ describe('<AddFactForm>', () => {
 
     fireEvent.change(kind, { target: { value: 'public' } });
     expect(screen.getByLabelText('URL')).toBeInTheDocument();
-    expect(screen.getByLabelText('Excerpt')).toBeInTheDocument();
+    expect(screen.getByLabelText('Exact sentence')).toBeInTheDocument();
     expect(screen.queryByLabelText('What you know')).toBeNull();
     expect(screen.queryByTestId('add-fact-operator-label')).toBeNull();
+    // Phase 2 A1: a public fact is never promised as quotable before the server verified it.
+    expect(screen.getByTestId('add-fact-public-label')).toHaveTextContent('Only a verified sentence can be quoted');
+    expect(screen.getByTestId('add-fact-form')).not.toHaveTextContent(/Quotable/);
+    // The publication date is never defaulted to today.
+    expect((screen.getByLabelText('Published on') as HTMLInputElement).value).toBe('');
   });
 
   it('operator mode: submit is disabled with the hint until text is present', () => {
@@ -132,22 +137,40 @@ describe('<AddFactForm>', () => {
     expect((screen.getByLabelText('What you know') as HTMLTextAreaElement).value).toBe('');
   });
 
-  it('public submit: the body carries url and excerpt, no text', async () => {
+  it('public submit: the body carries url and excerpt, no text, no invented date; an unverified fact says why', async () => {
     fetchMock
-      .mockResolvedValueOnce(jsonResponse({ id: 'sig_old', created: false }, 201))
+      .mockResolvedValueOnce(jsonResponse({ id: 'sig_old', created: false, verified: false, reason: 'excerpt_not_found_at_source' }, 201))
       .mockResolvedValueOnce(jsonResponse({ linked: ['sig_old'], already: [] }, 200));
     const onLinked = renderForm();
 
     fireEvent.change(screen.getByLabelText('Add a fact'), { target: { value: 'public' } });
     fireEvent.change(screen.getByLabelText('URL'), { target: { value: 'https://news.test/reno' } });
-    fireEvent.change(screen.getByLabelText('Excerpt'), { target: { value: 'The site opened in August.' } });
+    fireEvent.change(screen.getByLabelText('Exact sentence'), { target: { value: 'The site opened in August.' } });
     fireEvent.click(screen.getByRole('button', { name: 'Add fact' }));
 
     await waitFor(() => expect(onLinked).toHaveBeenCalledTimes(1));
     const body = JSON.parse(String((fetchMock.mock.calls[0] as [string, RequestInit])[1].body));
     expect(body).toMatchObject({ accountName: 'Acme Foods', kind: 'public', url: 'https://news.test/reno', excerpt: 'The site opened in August.' });
     expect(body.text).toBeUndefined();
+    expect(body.observedAt).toBeUndefined();
+    expect(screen.getByTestId('add-fact-notice')).toHaveTextContent('could not find that sentence word for word');
     expect(screen.getByTestId('add-fact-notice')).toHaveTextContent('Linked an existing fact');
+  });
+
+  it('public submit with a date: a verified fact says it can be quoted', async () => {
+    fetchMock
+      .mockResolvedValueOnce(jsonResponse({ id: 'sig_v', created: true, verified: true, reason: null }, 201))
+      .mockResolvedValueOnce(jsonResponse({ linked: ['sig_v'], already: [] }, 200));
+    const onLinked = renderForm();
+    fireEvent.change(screen.getByLabelText('Add a fact'), { target: { value: 'public' } });
+    fireEvent.change(screen.getByLabelText('URL'), { target: { value: 'https://news.test/reno' } });
+    fireEvent.change(screen.getByLabelText('Exact sentence'), { target: { value: 'Acme opened a new distribution center in Reno.' } });
+    fireEvent.change(screen.getByLabelText('Published on'), { target: { value: '2026-08-15' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add fact' }));
+    await waitFor(() => expect(onLinked).toHaveBeenCalledTimes(1));
+    const body = JSON.parse(String((fetchMock.mock.calls[0] as [string, RequestInit])[1].body));
+    expect(body.observedAt).toBe('2026-08-15');
+    expect(screen.getByTestId('add-fact-notice')).toHaveTextContent('Verified at the source');
   });
 
   it('a refused register (422 no_evidence_text) renders the reason verbatim, never links, never refetches', async () => {

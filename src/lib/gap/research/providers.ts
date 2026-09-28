@@ -15,7 +15,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { extractFactSentences, htmlToText } from './facts';
 
 export interface Candidate {
-  provider: 'edgar' | 'web';
+  /** `manual`: a public URL + sentence Casey typed, verified by the same contract (research/run.ts verifyCandidate). */
+  provider: 'edgar' | 'web' | 'manual';
   url: string;
   title: string;
   publishedAt: Date | null;

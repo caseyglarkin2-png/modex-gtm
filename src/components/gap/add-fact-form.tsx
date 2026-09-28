@@ -10,8 +10,12 @@
  *                        optional. The server hard-wires `externalOk: false`:
  *                        first-party, never quotable as public evidence, and
  *                        the form says so.
- *   Public fact          a URL (required, http(s) only), an optional title
- *                        and an optional excerpt. Quotable.
+ *   Public fact          a URL (required, http(s) only), an optional title,
+ *                        the exact sentence and its publication date. NOT
+ *                        quotable on entry: the server re-reads the page with
+ *                        the research verification contract (Phase 2 A1) and
+ *                        only a verified sentence can be quoted to a buyer.
+ *                        The form says which it became and why.
  *
  * Both modes POST /api/gap/signals with the hypothesis's account, then POST
  * the returned id to /api/gap/hypotheses/{id}/signals, then call `onLinked`
@@ -26,6 +30,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { HypothesisStatus } from '@/lib/gap/hypothesis/machine';
+import { MANUAL_FACT_VERIFIED_COPY, PUBLIC_FACT_LABEL, manualFactRefusalCopy } from '@/lib/gap/research/manual-fact-copy';
 
 export type FactKind = 'operator_knowledge' | 'public';
 
@@ -80,6 +85,8 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
   const [title, setTitle] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [observedAt, setObservedAt] = useState(todayIso);
+  // A public fact's publication date is never defaulted to today: an undated source cannot be verified.
+  const [publishedAt, setPublishedAt] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -104,6 +111,7 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
     setTitle('');
     setExcerpt('');
     setObservedAt(todayIso());
+    setPublishedAt('');
   }
 
   async function submit() {
@@ -111,7 +119,9 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
     setBusy(true);
     setError(null);
     setNotice(null);
-    const body: Record<string, unknown> = { accountName, kind, observedAt };
+    const body: Record<string, unknown> = { accountName, kind };
+    if (kind === 'operator_knowledge') body.observedAt = observedAt;
+    else if (publishedAt) body.observedAt = publishedAt;
     const trimmedTitle = title.trim();
     if (trimmedTitle) body.title = trimmedTitle;
     if (kind === 'operator_knowledge') {
@@ -156,7 +166,9 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
           ? `; siblings: ${sibPayload.reason === 'no_siblings' ? 'none share this thesis' : errorOf(sibPayload, sib)}`
           : `; siblings: ${rows.filter((r) => r.ok && r.detail.startsWith('note linked')).length} linked, ${rows.filter((r) => r.detail.includes('frozen')).length} frozen (recorded, not merged), ${rows.filter((r) => !r.ok).length} failed`;
       }
-      setNotice((already ? 'Already linked' : registeredPayload.created === false ? 'Linked an existing fact' : 'Fact linked') + siblingNote);
+      const verification =
+        kind !== 'public' ? '' : registeredPayload.verified === true ? `${MANUAL_FACT_VERIFIED_COPY} ` : `${manualFactRefusalCopy(String(registeredPayload.reason ?? 'not_verified'))} `;
+      setNotice(verification + (already ? 'Already linked' : registeredPayload.created === false ? 'Linked an existing fact' : 'Fact linked') + siblingNote);
       reset();
       onLinked();
     } catch (caught) {
@@ -198,7 +210,11 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
           <span data-testid="add-fact-operator-label" className="text-xs text-[var(--muted-foreground)]">
             {OPERATOR_FACT_LABEL}
           </span>
-        ) : null}
+        ) : (
+          <span data-testid="add-fact-public-label" className="text-xs text-[var(--muted-foreground)]">
+            {PUBLIC_FACT_LABEL}
+          </span>
+        )}
       </div>
 
       {frozen ? (
@@ -258,32 +274,48 @@ export function AddFactForm({ hypothesisId, accountName, status, onLinked }: Add
             className="mt-1"
           />
         </div>
-        <div>
-          <label htmlFor="add-fact-date" className="text-xs text-[var(--muted-foreground)]">
-            Observed on
-          </label>
-          <Input
-            id="add-fact-date"
-            type="date"
-            value={observedAt}
-            disabled={frozen || busy}
-            onChange={(event) => setObservedAt(event.target.value)}
-            className="mt-1"
-          />
-        </div>
+        {kind === 'operator_knowledge' ? (
+          <div>
+            <label htmlFor="add-fact-date" className="text-xs text-[var(--muted-foreground)]">
+              Observed on
+            </label>
+            <Input
+              id="add-fact-date"
+              type="date"
+              value={observedAt}
+              disabled={frozen || busy}
+              onChange={(event) => setObservedAt(event.target.value)}
+              className="mt-1"
+            />
+          </div>
+        ) : (
+          <div>
+            <label htmlFor="add-fact-published" className="text-xs text-[var(--muted-foreground)]">
+              Published on
+            </label>
+            <Input
+              id="add-fact-published"
+              type="date"
+              value={publishedAt}
+              disabled={frozen || busy}
+              onChange={(event) => setPublishedAt(event.target.value)}
+              className="mt-1"
+            />
+          </div>
+        )}
       </div>
 
       {kind === 'public' ? (
         <div>
           <label htmlFor="add-fact-excerpt" className="text-xs text-[var(--muted-foreground)]">
-            Excerpt
+            Exact sentence
           </label>
           <Textarea
             id="add-fact-excerpt"
             value={excerpt}
             disabled={frozen || busy}
             onChange={(event) => setExcerpt(event.target.value)}
-            placeholder="The sentence that carries the fact (optional)"
+            placeholder="Copy the sentence exactly as the source says it"
             className="mt-1"
           />
         </div>
