@@ -66,6 +66,8 @@ export interface OpenDeal {
   companyIds: string[];
   /** HubSpot contacts on the deal, where HubSpot returned them. */
   contactIds: string[];
+  /** Phase 2 F1: last activity (notes_last_updated, else hs_lastmodifieddate), when HubSpot returned one. Display only. */
+  lastActivityAt?: string | null;
 }
 
 export type OpportunityTruth =
@@ -235,6 +237,15 @@ export async function resolveCompanyIdentity(
 }
 
 /** Deals on the resolved companies (required) and on the people GAP holds there (extra protection). */
+/** Display-only last activity; absent when HubSpot returned no readable date (never affects ACTIVE). */
+function lastActivityOf(p: Record<string, string | null | undefined>): { lastActivityAt?: string } {
+  for (const raw of [p.notes_last_updated, p.hs_lastmodifieddate]) {
+    const t = raw ? new Date(String(raw)).getTime() : NaN;
+    if (Number.isFinite(t)) return { lastActivityAt: new Date(t).toISOString() };
+  }
+  return {};
+}
+
 async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string[], reads: OpportunityReads): Promise<OpportunityTruth> {
 
 
@@ -286,6 +297,7 @@ async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string
       pipeline: r.properties.pipeline ?? null,
       companyIds: [...(dealCompanies.get(id) ?? [])].sort(),
       contactIds: [],
+      ...lastActivityOf(r.properties),
     });
   }
   if (open.length === 0) return { status: 'CLEAR', companyIds };

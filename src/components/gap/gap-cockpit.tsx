@@ -8,6 +8,7 @@
  *   READY      people to contact now (email, call, LinkedIn)
  *   FOLLOW UP  sent sequences whose next touch is due
  *   REPLIES    buyer replies waiting for his confirmation
+ *   IN DEALS   accounts with an open HubSpot deal: no cold outreach, a Deal Brief instead
  *
  * NEXT UP, shown when no lane is open, names the single best use of Casey's
  * next minute in operator priority (reply, follow up, ready, review,
@@ -20,7 +21,7 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-export type CockpitLane = 'review' | 'research' | 'ready' | 'follow_up' | 'replies';
+export type CockpitLane = 'review' | 'research' | 'ready' | 'follow_up' | 'replies' | 'deals';
 
 export interface GapCockpitData {
   review: number;
@@ -28,6 +29,8 @@ export interface GapCockpitData {
   ready: number;
   followUp: number;
   replies: { count: number; atLeast: boolean };
+  /** Accounts routing holds for an open HubSpot deal (Phase 2 F1). */
+  deals: number;
   /** The lane open below, if any. */
   active: CockpitLane | null;
 }
@@ -59,12 +62,13 @@ function Tile({ href, label, value, hint, active }: { href: string; label: strin
 
 export function GapCockpit({ data }: { data: GapCockpitData }) {
   return (
-    <section data-testid="gap-cockpit" className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5">
+    <section data-testid="gap-cockpit" className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-6">
       <Tile href="/gap?lane=review" label="Review" value={data.review} hint="Theses waiting for you" active={data.active === 'review'} />
       <Tile href="/gap?lane=research" label="Research" value={data.research} hint="Find evidence or contact data" active={data.active === 'research'} />
       <Tile href="/gap?lane=ready" label="Ready" value={data.ready} hint="Contact now" active={data.active === 'ready'} />
       <Tile href="/gap?lane=follow_up" label="Follow up" value={data.followUp} hint="Next touch due" active={data.active === 'follow_up'} />
       <Tile href="/gap?lane=replies" label="Replies" value={`${data.replies.count}${data.replies.atLeast ? '+' : ''}`} hint="Buyer replied" active={data.active === 'replies'} />
+      <Tile href="/gap?lane=deals" label="In deals" value={data.deals} hint="Open deal: learn, don't prospect" active={data.active === 'deals'} />
     </section>
   );
 }
@@ -75,6 +79,7 @@ const LANE_LABEL: Record<CockpitLane, string> = {
   ready: 'Ready to contact',
   review: 'Thesis to decide',
   research: 'Needs research',
+  deals: 'In a deal',
 };
 
 export function NextUp({ items }: { items: NextUpItem[] }) {
