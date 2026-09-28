@@ -6,16 +6,16 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-phase2.ts` against the scratch database. Research providers are in-process stubs; reserved example.com people only; nothing can leave the machine.
 
-- Run tag: gapp2-1790563753491
+- Run tag: gapp2-1790563921078
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 6df1938f
-- Ran at: 2026-09-28T02:49:13.913Z
+- Git: 94d98be2
+- Ran at: 2026-09-28T02:52:01.488Z
 
 ## Steps
 
-- PASS seed: GAP P2 Pep 63753491: 3 people, 3 draft hypotheses resting on one keyword hit (research work), 1 fresh Pounce trigger (upper-case name, like production)
+- PASS seed: GAP P2 Pep 63921078: 3 people, 3 draft hypotheses resting on one keyword hit (research work), 1 fresh Pounce trigger (upper-case name, like production)
 - PASS G1 no state change: background research ran for 1 account(s); 11 protected counts identical (hypotheses, events, links, routing decisions, enrollments, email logs, draft queue, execution ledger, BIDs, dispositions); all 3 hypotheses still draft on the keyword hit
-- PASS G1 inbox: RESEARCH shows GAP P2 Pep 63753491: 1 verified fact ready ("GAP P2 Pep 63753491 will expand its autonomous freight progr..."), why: States an expansion; the quote was found word for word at the source on 2026-09-28. USE would update the one thesis (3 people); nothing was approved
+- PASS G1 inbox: RESEARCH shows GAP P2 Pep 63921078: 1 verified fact ready ("GAP P2 Pep 63921078 will expand its autonomous freight progr..."), why: States an expansion; the quote was found word for word at the source on 2026-09-28. USE would update the one thesis (3 people); nothing was approved
 - PASS cleanup: every row the run created was deleted ({"gap_audit_events":2,"hypothesis_events":3,"hypothesis_signals":3,"prospecting_hypotheses":3,"prospecting_signals":2,"evidence_records":1,"research_runs":1,"pounce_triggers":1,"personas":3,"accounts":1})
 
 ## Counts
