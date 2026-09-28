@@ -6,6 +6,9 @@
  * Casey's recorded primary/next choice, the account's recent GAP first
  * touches, and any account reply still waiting for triage.
  *
+ *   in_conversation  a buyer at the account ANSWERED (a confirmed disposition,
+ *                 final review P1): no cold first touch to anyone else there;
+ *                 Casey works it from the conversation
  *   paused_reply  someone at the account wrote in and nobody has triaged it:
  *                 no cold email to anyone there (the send gate refuses too)
  *   in_motion     someone at the account got a GAP first touch in the last
@@ -61,7 +64,7 @@ export interface MotionPerson {
   factors: string[];
 }
 
-export type MotionState = 'paused_reply' | 'in_motion' | 'ready' | 'idle';
+export type MotionState = 'in_conversation' | 'paused_reply' | 'in_motion' | 'ready' | 'idle';
 
 export interface AccountMotion {
   accountName: string;
@@ -122,6 +125,8 @@ export function computeAccountMotion(input: {
   choice: MotionChoice | null;
   firstTouches: readonly FirstTouch[];
   replyHold: { from: string; receivedAt: string } | null;
+  /** The newest buyer answer at the account (motion/load.ts loadAccountConversations). */
+  conversation?: { who: string; responseClass: string; at: string } | null;
   now: Date;
 }): AccountMotion {
   const { accountName, readyEmailCards, choice, now } = input;
@@ -130,6 +135,19 @@ export function computeAccountMotion(input: {
   const thesisKeys = new Set(cards.map((c) => c.hypothesis?.persona).filter((k): k is string => !!k));
   const ranked = rankCandidates(cards, thesisKeys);
   const allIds = cards.map((c) => c.id);
+
+  if (input.conversation) {
+    const c = input.conversation;
+    return {
+      accountName,
+      state: 'in_conversation',
+      primary: null,
+      next: null,
+      alsoWaiting: ranked.map((x) => person(x.card, x.factors)),
+      heldCardIds: allIds,
+      headline: `In a conversation: ${c.who} answered (${c.responseClass.replace(/_/g, ' ')}, ${c.at.slice(0, 10)}). No cold email to anyone else at ${accountName}; work it from that conversation.`,
+    };
+  }
 
   if (input.replyHold) {
     const r = input.replyHold;

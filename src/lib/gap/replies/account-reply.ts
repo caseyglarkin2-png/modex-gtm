@@ -23,13 +23,33 @@ export interface AccountReply {
   received_at: Date;
 }
 
-/** The newest human inbound message from the recipient's account domain in the window, or null. */
-export async function accountRepliedRecently(prisma: PrismaLike, recipient: string, now: Date): Promise<AccountReply | null> {
-  const domain = (recipient.split('@')[1] ?? '').trim().toLowerCase();
-  if (!domain || FREEMAIL_DOMAINS.has(domain) || OWN_DOMAINS.has(domain)) return null;
+/** A company domain (not a shared consumer domain, not ours) of an address, or null. */
+function companyDomainOf(email: string | null | undefined): string | null {
+  const d = (String(email ?? '').split('@')[1] ?? '').trim().toLowerCase();
+  return d && !FREEMAIL_DOMAINS.has(d) && !OWN_DOMAINS.has(d) ? d : null;
+}
+
+/**
+ * The newest human inbound message from the account in the window, or null.
+ * Final review P1 (buyer + reliability lenses): with `accountName`, EVERY
+ * company domain GAP holds at the account counts (an account's people can span
+ * pepsico.com and fritolay.com), not only the recipient's.
+ */
+export async function accountRepliedRecently(prisma: PrismaLike, recipient: string, now: Date, opts: { accountName?: string | null } = {}): Promise<AccountReply | null> {
+  const domains = new Set<string>();
+  const own = companyDomainOf(recipient);
+  if (own) domains.add(own);
+  if (opts.accountName && prisma.persona?.findMany) {
+    const people: Array<{ email: string | null }> = await prisma.persona.findMany({ where: { account_name: opts.accountName, email: { not: null } }, select: { email: true }, take: 200 });
+    for (const p of people) {
+      const d = companyDomainOf(p.email);
+      if (d) domains.add(d);
+    }
+  }
+  if (domains.size === 0) return null;
   const rows: AccountReply[] = await prisma.inboundMessage.findMany({
     where: {
-      from_email: { endsWith: `@${domain}`, mode: 'insensitive' },
+      OR: [...domains].sort().map((d) => ({ from_email: { endsWith: `@${d}`, mode: 'insensitive' } })),
       received_at: { gte: new Date(now.getTime() - ACCOUNT_REPLY_WINDOW_DAYS * 86_400_000) },
     },
     select: { id: true, from_email: true, subject: true, received_at: true },

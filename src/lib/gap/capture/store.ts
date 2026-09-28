@@ -22,7 +22,7 @@ import { randomUUID } from 'node:crypto';
 import { recordBid } from '../bid/service';
 import { recordDisposition } from '../disposition/service';
 import { BID_TYPES, type BidType } from '../taxonomy';
-import { buyerSpeakers, extractCandidates, quoteInSource, quoteWithinSentence, type CandidateBid } from './extract';
+import { buyerSpeakers, extractCandidates, quoteInSource, quoteWithinSentence, sentencesWithSpeaker, type CandidateBid } from './extract';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -291,6 +291,15 @@ export async function recordMeetingOutcome(
   if (outcome === 'qualified_problem') {
     if (!quote) return { ok: false, reason: 'quote_required', detail: 'A qualified problem needs the buyer’s own words from the note.' };
     if (!quoteInSource(quote, view.rawText)) return { ok: false, reason: 'quote_not_in_source' };
+    // Final review P1 (practitioner lens): the BUYER's words. A line labelled as the seller never
+    // qualifies a problem, and the quote must sit inside one buyer sentence (as confirmed BIDs must).
+    if (!sentencesWithSpeaker(view.rawText).some((x) => quoteWithinSentence(quote, x.sentence))) {
+      return { ok: false, reason: 'quote_not_in_source', detail: 'The quote must be the buyer’s own words from one sentence of the note, never a line you said.' };
+    }
+    // Review D P1, carried over: with more than one buyer speaker, Casey says who said it.
+    if (buyerSpeakers(view.rawText).length > 1 && input.personaId == null && !input.contactEmail) {
+      return { ok: false, reason: 'speaker_required', detail: 'This note has more than one speaker. Choose who said it.' };
+    }
   }
   const d = await recordDisposition(prisma, {
     hypothesisId: hyp.id,

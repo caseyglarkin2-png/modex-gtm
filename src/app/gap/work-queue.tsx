@@ -20,7 +20,7 @@
  * stays for agents) and the action/lane enum filters.
  */
 
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { DecisionCard, type QueueItem } from '@/components/gap/decision-card';
 import { ResearchOutcomeContext, ResearchOutcomeView, ResearchThis, type Decided } from '@/components/gap/research-this';
@@ -156,6 +156,18 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
       setLoading(false);
     }
   }, []);
+
+  // Final review P1 (UX lens): "Do this next" lands ON the opened card. The cards render only after
+  // the client fetch, so the browser's own #card- jump finds nothing; scroll once they exist.
+  const scrolledTo = useRef<string | null>(null);
+  useEffect(() => {
+    if (loading || !openId || scrolledTo.current === openId) return;
+    const el = typeof document !== 'undefined' ? document.getElementById(`card-${openId}`) : null;
+    if (el && typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ block: 'start' });
+      scrolledTo.current = openId;
+    }
+  }, [loading, openId, items]);
 
   useEffect(() => {
     void loadFirst();

@@ -61,9 +61,15 @@ describe('<WorkQueue> empty states and reload', () => {
         ],
       }),
     );
+    // Final review P1 (UX lens): "Do this next" lands on the opened card once the lane has loaded.
+    const scrolled: string[] = [];
+    Element.prototype.scrollIntoView = vi.fn(function (this: Element) {
+      scrolled.push(this.id);
+    });
     render(<WorkQueue sellerLane="ready" openId="d1" openPanel={<p>PACK</p>} closeHref="/gap?lane=ready" />);
     await screen.findByText('PACK');
     expect(screen.getAllByTestId('decision-card')).toHaveLength(1);
+    await waitFor(() => expect(scrolled).toEqual(['card-d1']));
   });
 
   it('RESEARCH: people at one account missing the same evidence collapse into ONE group with one research action', async () => {

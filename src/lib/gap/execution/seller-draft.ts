@@ -28,6 +28,7 @@
  * `human_action`.
  */
 
+import { contradictedFactIds } from '../research/conflicts';
 import { accountMotionRefusal } from '../motion/load';
 import { captureSendAttribution } from './send-attribution';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
@@ -71,6 +72,7 @@ export type SellerDraftRefusal =
   | 'recipient_unsubscribed'
   | 'account_replied'
   | 'account_motion_active'
+  | 'fact_contradicted'
   | 'decision_stale'
   | 'email_bounced'
   | 'emailed_outside_gap'
@@ -341,6 +343,16 @@ export async function prepareSellerEmail(
       detail: 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.',
     });
   }
+  // Final review P1: a linked fact that another verified fact at the account contradicts is never quoted.
+  const contradicted = await contradictedFactIds(prisma, pack.hypothesis.account_name, now);
+  const clash = live.find((sig: { id?: string }) => sig.id && contradicted.has(sig.id)) as { id: string } | undefined;
+  if (clash) {
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'fact_contradicted',
+      detail: `Another verified fact about ${contradicted.get(clash.id)} says the opposite. Ignore the side you do not believe in Research before any email.`,
+    });
+  }
   const persona = pack.persona;
   if (!persona || pack.personaSource !== 'decision') return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_not_found', detail: pack.personaRefused ?? undefined });
   const email = (persona.email ?? '').trim().toLowerCase();
@@ -358,17 +370,14 @@ export async function prepareSellerEmail(
   // another person there waits until a human has read it. A shared consumer
   // domain says nothing about the account.
   if (stepIndex === 0) {
-    const replied = await accountRepliedRecently(prisma, email, now);
+    const replied = await accountRepliedRecently(prisma, email, now, { accountName: pack.hypothesis.account_name });
     if (replied) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
     }
     // Phase 2 C3: ONE cold email motion per account. Another person there holds a live
     // GAP first touch inside the unlock window: this person waits (a bounce releases it).
     const motion = await accountMotionRefusal(prisma, { accountName: pack.hypothesis.account_name, personaId: persona.id ?? null, email, now });
-    if (motion) {
-      const unlock = /^\d{4}-\d{2}-\d{2}T/.test(motion.unlockAt) ? `on ${motion.unlockAt.slice(0, 10)} with no response` : motion.unlockAt;
-      return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_motion_active', detail: `${motion.owner} at this account has a first touch from ${motion.sentAt.slice(0, 10)}. One cold email motion at a time: the next person unlocks ${unlock}, or at once if that address fails.` });
-    }
+    if (motion) return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_motion_active', detail: motion.detail });
     // Final red team: the card is a snapshot; a cold first touch never ignores what moved since it was minted.
     const moved = await personMovedSince(prisma, { email, personaId: persona.id ?? null, since: new Date(decision.created_at) });
     if (moved) {
@@ -607,8 +616,9 @@ export async function createSellerGmailDraft(
   // Release B review): a double click, a draft on another card or a racing
   // direct send meets it inside the lock; a lost answer leaves the claim open.
   const claimKey = `${personStepKey(p.personaId, email, stepIndex)}:draft:${now.toISOString()}`;
-  const claim = await claimSendKey(prisma, { key: claimKey, decisionId, personaId: p.personaId, recipient: email, stepIndex, actor, now, kind: 'draft' });
+  const claim = await claimSendKey(prisma, { key: claimKey, decisionId, personaId: p.personaId, recipient: email, stepIndex, actor, now, kind: 'draft', accountName: p.accountName });
   if (!claim.claimed) {
+    if (claim.state === 'account_motion') return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_motion_active', detail: claim.detail ?? 'Another first touch at this account started first.' });
     const reason: SellerDraftRefusal =
       claim.state === 'sent' ? (stepIndex === 0 ? 'first_touch_already_sent' : 'step_already_sent') : claim.state === 'drafted' ? 'draft_outstanding' : 'send_in_progress_or_unknown';
     return refuse(prisma, actor, decisionId, { ok: false, reason, detail: `touch ${stepIndex + 1} to this person is ${claim.state}` });

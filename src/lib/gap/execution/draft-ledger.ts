@@ -130,6 +130,16 @@ export async function lockPerson(tx: PrismaLike, personaId: number | null, recip
   for (const k of keys) await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${k}))`;
 }
 
+/**
+ * Final review P1 (reliability lens): serialize FIRST TOUCHES at one account, so
+ * two people there cannot both pass the one-motion check at the same moment.
+ * Taken after lockPerson, always in that order.
+ */
+export async function lockAccount(tx: PrismaLike, accountName: string): Promise<void> {
+  const k = `gap_send_account:${accountName.trim().toLowerCase()}`;
+  await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${k}))`;
+}
+
 export interface DirectSentPayload {
   engine: 'gmail_direct';
   channel: 'gmail';

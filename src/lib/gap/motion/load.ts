@@ -4,7 +4,8 @@
  * append-only send ledger), and an account reply still waiting for triage.
  * Read only, except `recordMotionChoice` (one append-only audit row).
  */
-import { DIRECT_SENT, DRAFTED, DRAFT_DISCARDED, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
+import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED, DRAFT_CLAIMED, DRAFT_DISCARDED, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
+import { historyFromRows } from '../execution/person-history';
 import { isHardBounceStatus } from '../../email/bounce';
 import { accountRepliedRecently } from '../replies/account-reply';
 import { ACCOUNT_MOTION, MOTION_UNLOCK_BUSINESS_DAYS, type FirstTouch, type MotionChoice } from './account-motion';
@@ -14,6 +15,58 @@ type PrismaLike = any;
 
 /** First touches older than this can no longer hold a motion (the unlock window is far shorter). */
 const FIRST_TOUCH_LOOKBACK_MS = 30 * 86_400_000;
+
+/**
+ * Final review P1 (practitioner + buyer lenses): once a buyer at the account has
+ * RESPONDED (a human-confirmed disposition that is a real answer: a problem
+ * confirmed or rejected, not a priority, a meeting, a request, an objection, do
+ * not contact), the account is in a conversation. The motion never unlocks a
+ * colleague for a cold first touch "with no response" after that: going around
+ * a buyer's answer is Casey's call, never the queue's. Not a response: a call
+ * nobody answered, a voicemail, a gatekeeper, an out of office, a bounce, no
+ * signal, wrong person, and a referral (the buyer pointed at a colleague).
+ */
+export const CONVERSATION_RESPONSE_CLASSES: ReadonlySet<string> = new Set([
+  'problem_confirmed',
+  'problem_partially_confirmed',
+  'problem_rejected',
+  'not_priority',
+  'timing',
+  'existing_solution',
+  'request_information',
+  'meeting_accepted',
+  'meeting_declined',
+  'do_not_contact',
+]);
+export const ACCOUNT_CONVERSATION_DAYS = 90;
+
+export interface AccountConversation {
+  who: string;
+  responseClass: string;
+  at: string;
+}
+
+/** The newest buyer response at each account in the window (human-confirmed only). */
+export async function loadAccountConversations(prisma: PrismaLike, accountNames: readonly string[], now: Date): Promise<Map<string, AccountConversation>> {
+  const out = new Map<string, AccountConversation>();
+  if (accountNames.length === 0 || !prisma.conversationDisposition?.findMany) return out;
+  const rows: Array<{ account_name: string; contact_email: string; response_class: string; created_at: Date }> = await prisma.conversationDisposition.findMany({
+    where: {
+      account_name: { in: [...accountNames] },
+      human_confirmed: true,
+      response_class: { in: [...CONVERSATION_RESPONSE_CLASSES] },
+      created_at: { gte: new Date(now.getTime() - ACCOUNT_CONVERSATION_DAYS * 86_400_000) },
+    },
+    select: { account_name: true, contact_email: true, response_class: true, created_at: true },
+    orderBy: { created_at: 'desc' },
+  });
+  for (const r of rows) {
+    // Belt and braces over the query: only a real answer with a real date counts.
+    if (!CONVERSATION_RESPONSE_CLASSES.has(r.response_class) || !r.created_at || Number.isNaN(new Date(r.created_at).getTime())) continue;
+    if (!out.has(r.account_name)) out.set(r.account_name, { who: String(r.contact_email).toLowerCase(), responseClass: r.response_class, at: new Date(r.created_at).toISOString() });
+  }
+  return out;
+}
 
 export async function loadMotionChoices(prisma: PrismaLike, accountNames: readonly string[]): Promise<Map<string, MotionChoice>> {
   const out = new Map<string, MotionChoice>();
@@ -68,9 +121,9 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
     where: {
       subject_type: DRAFT_SUBJECT_TYPE,
       subject_id: { in: decisions.map((d) => d.id) },
-      kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFTED, DRAFT_SENT, DRAFT_DISCARDED] },
+      kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFTED, DRAFT_SENT, DRAFT_DISCARDED, DIRECT_CLAIMED, DRAFT_CLAIMED, DIRECT_RELEASED] },
     },
-    select: { kind: true, subject_id: true, payload: true, created_at: true },
+    select: { id: true, kind: true, subject_id: true, payload: true, created_at: true },
   });
   const since = now.getTime() - FIRST_TOUCH_LOOKBACK_MS;
   const drafted = new Map<string, { row: (typeof rows)[number] }>();
@@ -95,6 +148,30 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   };
   for (const r of rows) {
     if (r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) push(r, String(r.payload?.sentAt ?? new Date(r.created_at).toISOString()), false);
+  }
+  // Final review P1 (reliability lens): a first touch whose outcome is not recorded (Gmail may have sent it,
+  // or a draft may exist) holds the account exactly like an outstanding draft, until it is reconciled.
+  const unresolved = historyFromRows(rows as never, null, '', [...accountOf.keys()]).unresolvedClaims.filter((c) => c.stepIndex === null || c.stepIndex === 0);
+  const claimRow = new Map(rows.map((r) => [String((r as { id?: string }).id ?? ''), r]));
+  for (const c of unresolved) {
+    const account = accountOf.get(c.decisionId);
+    if (!account) continue;
+    // The claim row names its person; the key is only the fallback (older keys carry no person).
+    const payload = claimRow.get(c.eventId)?.payload ?? {};
+    const m = /^gmail_direct:person:([^:]+):(.+):step:\d+/.exec(c.idempotencyKey);
+    const pid = Number(payload.personaId ?? (m ? m[1] : NaN));
+    const recipient = String(payload.recipient ?? m?.[2] ?? '').toLowerCase();
+    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient, sentAt: c.claimedAt, released: false, outstanding: true });
+  }
+  // A live GAP enrollment (the modex queue or a HubSpot sequence row) queued this person's first touch.
+  const enrollments: unknown[] = prisma.sequenceEnrollment?.findMany
+    ? await prisma.sequenceEnrollment.findMany({
+        where: { account_name: { in: [...accountNames] }, created_at: { gte: new Date(since) }, is_test: false, legacy: false },
+        select: { account_name: true, persona_id: true, to_email: true, created_at: true },
+      })
+    : [];
+  for (const e of enrollments as Array<{ account_name: string; persona_id: number | null; to_email?: string | null; created_at: Date }>) {
+    touches.push({ account: e.account_name, personaId: e.persona_id ?? null, recipient: String(e.to_email ?? '').toLowerCase(), sentAt: new Date(e.created_at).toISOString(), released: false });
   }
   for (const [draftId, d] of drafted) {
     const sentAt = sentOf.get(draftId);
@@ -123,7 +200,8 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
 export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: ReadonlyMap<string, string>, now: Date): Promise<Map<string, { from: string; receivedAt: string }>> {
   const out = new Map<string, { from: string; receivedAt: string }>();
   for (const [account, email] of emailsByAccount) {
-    const r = await accountRepliedRecently(prisma, email, now);
+    // Final review P1: every company domain at the account, not only this card's.
+    const r = await accountRepliedRecently(prisma, email, now, { accountName: account });
     if (r) out.set(account, { from: r.from_email, receivedAt: new Date(r.received_at).toISOString() });
   }
   return out;
@@ -137,17 +215,29 @@ export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: Readon
 export async function accountMotionRefusal(
   prisma: PrismaLike,
   input: { accountName: string; personaId: number | null; email: string; now: Date },
-): Promise<{ owner: string; sentAt: string; unlockAt: string } | null> {
+): Promise<{ owner: string; sentAt: string; unlockAt: string; detail: string } | null> {
   const { addBusinessDays } = await import('../sequence/business-days');
-  const touches = (await loadAccountFirstTouches(prisma, [input.accountName], input.now)).get(input.accountName) ?? [];
   const email = input.email.trim().toLowerCase();
+  const conversation = (await loadAccountConversations(prisma, [input.accountName], input.now)).get(input.accountName);
+  if (conversation && conversation.who !== email) {
+    return {
+      owner: conversation.who,
+      sentAt: conversation.at,
+      unlockAt: 'never automatically',
+      detail: `${conversation.who} at this account answered (${conversation.responseClass.replace(/_/g, ' ')}, ${conversation.at.slice(0, 10)}). The account is in a conversation: a cold first touch to anyone else there is your call, not the queue's.`,
+    };
+  }
+  const touches = (await loadAccountFirstTouches(prisma, [input.accountName], input.now)).get(input.accountName) ?? [];
+  const describe = (owner: string, sentAt: string, unlock: string) =>
+    `${owner} at this account has a first touch from ${sentAt.slice(0, 10)}. One cold email motion at a time: the next person unlocks ${unlock}, or at once if that address fails.`;
   for (const t of touches.sort((a, b) => b.sentAt.localeCompare(a.sentAt))) {
     if (t.released) continue;
     if ((t.personaId !== null && t.personaId === input.personaId) || t.recipient === email) continue;
     // An outstanding draft holds until it is sent or deleted; its unlock date is not yet known.
-    if (t.outstanding) return { owner: t.recipient || `person ${t.personaId}`, sentAt: t.sentAt, unlockAt: 'after that draft is sent or deleted' };
+    const owner = t.recipient || `person ${t.personaId}`;
+    if (t.outstanding) return { owner, sentAt: t.sentAt, unlockAt: 'after that draft is sent or deleted', detail: describe(owner, t.sentAt, 'after that draft is sent or deleted (or the unrecorded send is reconciled)') };
     const unlockAt = addBusinessDays(new Date(t.sentAt), MOTION_UNLOCK_BUSINESS_DAYS);
-    if (input.now.getTime() < unlockAt.getTime()) return { owner: t.recipient || `person ${t.personaId}`, sentAt: t.sentAt, unlockAt: unlockAt.toISOString() };
+    if (input.now.getTime() < unlockAt.getTime()) return { owner, sentAt: t.sentAt, unlockAt: unlockAt.toISOString(), detail: describe(owner, t.sentAt, `on ${unlockAt.toISOString().slice(0, 10)} with no response`) };
   }
   return null;
 }

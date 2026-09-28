@@ -48,6 +48,11 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'A Gmail draft of this touch already exists.',
     next: 'Send or delete it in Gmail, then press Reconcile.',
   },
+  fact_contradicted: {
+    what: 'Nothing was drafted or sent.',
+    why: 'Another verified fact about the same site says the opposite, so this fact cannot be quoted to a buyer.',
+    next: 'Open Research, ignore the side you do not believe, then try again.',
+  },
   account_motion_active: {
     what: 'Nothing was drafted or sent.',
     why: 'Someone else at this account is already in a cold email motion. One motion at a time keeps the account from being carpet-bombed.',

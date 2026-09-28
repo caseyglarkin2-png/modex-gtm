@@ -733,14 +733,14 @@ export async function enrollFromDecision(
   // Release C re-review S7: a live enrollment queues a step 0 like the send
   // gate does, so the same account-reply hold applies (shadow writes nothing).
   if (input.mode === 'live') {
-    const replied = await accountRepliedRecently(prisma, email, input.now);
+    const replied = await accountRepliedRecently(prisma, email, input.now, { accountName: hypothesis.account_name || persona.account_name });
     if (replied) {
       return refuse('account_replied', { detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}; read and disposition it first` });
     }
     // Phase 2 C3: one cold email motion per account, as at the send gate.
     const motion = await accountMotionRefusal(prisma, { accountName: hypothesis.account_name || persona.account_name, personaId: input.personaId ?? null, email, now: input.now });
     if (motion) {
-      return refuse('account_motion_active', { detail: `${motion.owner} has a first touch from ${motion.sentAt.slice(0, 10)}; the next person unlocks ${/^\d{4}-\d{2}-\d{2}T/.test(motion.unlockAt) ? `on ${motion.unlockAt.slice(0, 10)} with no response` : motion.unlockAt}` });
+      return refuse('account_motion_active', { detail: motion.detail });
     }
   }
 

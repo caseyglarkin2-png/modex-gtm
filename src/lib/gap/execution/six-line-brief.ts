@@ -53,14 +53,18 @@ const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is st
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- the getHypothesis row (house glue)
-export function knowOf(hypothesis: any, now: Date = new Date()): SixLineBrief['know'] {
+export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: ReadonlyMap<string, string> = new Map()): SixLineBrief['know'] {
   const links: Array<{ role?: string | null; signal?: Record<string, unknown> | null }> = Array.isArray(hypothesis?.signals) ? hypothesis.signals : [];
   const expired = (sig: Record<string, unknown>) => !!sig.freshness_expires_at && new Date(String(sig.freshness_expires_at)).getTime() <= now.getTime();
   const verifiedAny = links.filter((l) => l.signal && outreachFactRefusal(l.signal as never, String(hypothesis.account_name ?? '')) === null);
   // Review E P1: an expired fact is not known (every send gate drops it too).
-  const verified = verifiedAny.filter((l) => !expired(l.signal!));
+  const fresh = verifiedAny.filter((l) => !expired(l.signal!));
+  // Final review P1: a fact another verified fact contradicts is not known (the send gate refuses it too).
+  const verified = fresh.filter((l) => !contradicted.has(String(l.signal!.id ?? '')));
   const primary = verified.find((l) => l.role === 'primary') ?? verified[0];
   if (!primary?.signal) {
+    const clash = fresh.find((l) => contradicted.has(String(l.signal!.id ?? '')));
+    if (clash?.signal) return { fact: null, reason: `Verified facts about ${contradicted.get(String(clash.signal.id))} contradict each other: neither can be quoted. Ignore the side you do not believe in Research.` };
     const stale = verifiedAny.find((l) => l.role === 'primary') ?? verifiedAny[0];
     if (stale?.signal) return { fact: null, reason: `The verified fact expired on ${new Date(String(stale.signal.freshness_expires_at)).toISOString().slice(0, 10)}: it cannot be quoted to a buyer. Find fresh evidence.` };
     return { fact: null, reason: links.length ? 'No verified fact: what is linked is a keyword hit or unverified context.' : 'No fact is linked to this thesis.' };
@@ -105,12 +109,18 @@ export function buildBrief(input: {
   suggestedAngle: string | null;
   history: BriefHistory | null;
   now?: Date;
+  /** Contradicted fact ids (research/conflicts.ts) -> the site. */
+  contradicted?: ReadonlyMap<string, string> | null;
 }): SixLineBrief {
   const h = input.hypothesis;
   const falsify = list(h?.falsification_questions);
   const hist = input.history ? historyLines(input.firstName, String(h?.account_name ?? ''), input.history) : { lines: ['History could not be read. Every send still checks it at the click.'], state: 'caution' as const };
   return {
-    know: knowOf(h, input.now ?? new Date()),
+    // A contradiction check that could not run never lets a fact read as known.
+    know:
+      input.contradicted === null
+        ? { fact: null, reason: 'Could not check this fact against the other evidence just now. Every send re-checks before anything goes out.' }
+        : knowOf(h, input.now ?? new Date(), input.contradicted ?? new Map()),
     think: typeof h?.problem_hypothesis === 'string' && h.problem_hypothesis.trim() ? h.problem_hypothesis.trim() : null,
     learn: falsify[0] ?? null,
     whyYou: input.angle ? { text: input.angle, owned: true } : input.suggestedAngle ? { text: input.suggestedAngle, owned: false } : null,
@@ -148,7 +158,7 @@ export async function loadBriefHistory(
           .find(isCompany) ?? null;
     const [touches, reply, last, opp] = await Promise.all([
       loadAccountFirstTouches(prisma, [input.accountName], input.now),
-      replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now) : Promise.resolve('unknown' as const),
+      replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now, { accountName: input.accountName }) : Promise.resolve('unknown' as const),
       email
         ? prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true }, orderBy: { created_at: 'desc' }, select: { response_class: true, created_at: true } })
         : Promise.resolve(null),

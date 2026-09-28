@@ -6,7 +6,7 @@
 import type { QueueItem } from '../routing/queue';
 import { sellerLaneOf } from '../routing/card-readiness';
 import { computeAccountMotion, EMAIL_ACTIONS, type AccountMotion } from './account-motion';
-import { loadAccountFirstTouches, loadMotionChoices, loadReplyHolds } from './load';
+import { loadAccountConversations, loadAccountFirstTouches, loadMotionChoices, loadReplyHolds } from './load';
 import { loadAngles, suggestAngle, type PersonaAngle } from './persona-angle';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,7 +40,12 @@ export async function loadCockpitMotions(prisma: PrismaLike, items: readonly Que
     const e = cards.map((c) => c.persona.email).find((x): x is string => !!x);
     if (e) emails.set(a, e);
   }
-  const [choices, touches, holds] = await Promise.all([loadMotionChoices(prisma, accounts), loadAccountFirstTouches(prisma, accounts, now), loadReplyHolds(prisma, emails, now)]);
+  const [choices, touches, holds, conversations] = await Promise.all([
+    loadMotionChoices(prisma, accounts),
+    loadAccountFirstTouches(prisma, accounts, now),
+    loadReplyHolds(prisma, emails, now),
+    loadAccountConversations(prisma, accounts, now),
+  ]);
   const angles = await loadAngles(prisma, readyEmail.map((c) => c.persona.id as number));
   const hypIds = [...new Set(readyEmail.map((c) => c.hypothesis?.id).filter((x): x is string => !!x))];
   const thesisRole = new Map<string, string | null>(
@@ -57,6 +62,7 @@ export async function loadCockpitMotions(prisma: PrismaLike, items: readonly Que
       choice: choices.get(account) ?? null,
       firstTouches: touches.get(account) ?? [],
       replyHold: holds.get(account) ?? null,
+      conversation: conversations.get(account) ?? null,
       now,
     });
     held.push(...m.heldCardIds);
@@ -66,7 +72,7 @@ export async function loadCockpitMotions(prisma: PrismaLike, items: readonly Que
       a[String(pid)] = { personaId: pid, angle: angles.get(pid) ?? null, suggested: angles.has(pid) ? null : suggestAngle({ title: c.persona.title, personaKey: c.persona.personaKey, accountName: account }) };
     }
     // Only accounts where the motion changes what Casey sees (more than one person, a pause, or a live motion).
-    if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_motion') motions.push({ ...m, angles: a });
+    if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_conversation' || m.state === 'in_motion') motions.push({ ...m, angles: a });
   }
   return { motions, heldCardIds: held };
 }
