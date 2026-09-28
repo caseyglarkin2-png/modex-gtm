@@ -28,6 +28,7 @@
  * `human_action`.
  */
 
+import { contradictedFactIds } from '../research/conflicts';
 import { accountMotionRefusal } from '../motion/load';
 import { captureSendAttribution } from './send-attribution';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
@@ -71,6 +72,7 @@ export type SellerDraftRefusal =
   | 'recipient_unsubscribed'
   | 'account_replied'
   | 'account_motion_active'
+  | 'fact_contradicted'
   | 'decision_stale'
   | 'email_bounced'
   | 'emailed_outside_gap'
@@ -339,6 +341,16 @@ export async function prepareSellerEmail(
       ok: false,
       reason: 'evidence_insufficient',
       detail: 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.',
+    });
+  }
+  // Final review P1: a linked fact that another verified fact at the account contradicts is never quoted.
+  const contradicted = await contradictedFactIds(prisma, pack.hypothesis.account_name, now);
+  const clash = live.find((sig: { id?: string }) => sig.id && contradicted.has(sig.id)) as { id: string } | undefined;
+  if (clash) {
+    return refuse(prisma, actor, decisionId, {
+      ok: false,
+      reason: 'fact_contradicted',
+      detail: `Another verified fact about ${contradicted.get(clash.id)} says the opposite. Ignore the side you do not believe in Research before any email.`,
     });
   }
   const persona = pack.persona;

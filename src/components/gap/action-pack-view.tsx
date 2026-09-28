@@ -34,6 +34,7 @@ import { asStringList } from '@/lib/gap/ui/format';
 import { Badge } from '@/components/ui/badge';
 import { ColdOutboundButton } from './cold-outbound-button';
 import { SixLineBriefView } from './six-line-brief';
+import { contradictedFactIds } from '@/lib/gap/research/conflicts';
 import { buildBrief, loadBriefHistory } from '@/lib/gap/execution/six-line-brief';
 import { loadAngles, suggestAngle } from '@/lib/gap/motion/persona-angle';
 import { CopyButton } from './copy-button';
@@ -162,7 +163,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Phase 2 E1: the six-line brief leads (KNOW / THINK / LEARN / WHY YOU / HISTORY / WRONG IF);
   // it replaces the separate "Why now" block (why now stays in the collapsed evidence below).
   const briefPersonaId = typeof persona?.id === 'number' && pack.personaSource !== 'none' ? persona.id : null;
-  const [angles, briefHistory] = await Promise.all([
+  const [angles, briefHistory, contradicted] = await Promise.all([
     briefPersonaId ? loadAngles(prisma, [briefPersonaId]).catch(() => new Map()) : Promise.resolve(new Map()),
     loadBriefHistory(prisma, {
       accountName: hypothesis.account_name,
@@ -171,6 +172,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       sent: touch && 'sent' in touch ? touch.sent.map((t) => ({ sentAt: t.sentAt })) : [],
       now: new Date(),
     }),
+    contradictedFactIds(prisma, hypothesis.account_name, new Date()).catch(() => null),
   ]);
   const brief = buildBrief({
     hypothesis,
@@ -179,6 +181,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
     suggestedAngle: persona ? suggestAngle({ title: persona.title ?? null, personaKey: null, accountName: hypothesis.account_name }) : null,
     history: briefHistory,
     now: new Date(),
+    contradicted,
   });
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
