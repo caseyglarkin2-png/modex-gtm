@@ -9,9 +9,10 @@
  *              Pounce watchlist), and every account where GAP holds a buying
  *              committee (5+ people). E2E fixtures, "Unknown" and
  *              domain-named placeholder rows (gmail.com) are excluded.
- *   aliases    registered GapAccountAlias rows, the account's parent brand, the
- *              microsite registry display name; Casey may add or remove one
- *              (`signal.watch` audit row, newest wins).
+ *   aliases    registered GapAccountAlias rows; Casey may add or remove one
+ *              (`signal.watch` audit row, newest wins). The PARENT brand is
+ *              never an alias (review C P1: a parent's story is not the
+ *              subsidiary's).
  *   domains    the account's canonical company domains (resolved links).
  *   ticker     from the Pounce ticker map.
  *   themes     what to ask about, ordered by the account's open thesis
@@ -59,6 +60,17 @@ export interface WatchProfile {
 
 export const COMMITTEE_MIN_PEOPLE = 5;
 const isFixture = (name: string) => /^(the )?e2e /i.test(name) || /^unknown$/i.test(name.trim()) || /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(name.trim());
+
+const profileCache = new WeakMap<object, { at: number; profiles: WatchProfile[] }>();
+
+/** Cached per process for 5 minutes (review C P3: the Signals page renders it on every load). */
+export async function loadWatchProfilesCached(prisma: PrismaLike): Promise<WatchProfile[]> {
+  const hit = prisma && typeof prisma === 'object' ? profileCache.get(prisma) : undefined;
+  if (hit && Date.now() - hit.at < 300_000) return hit.profiles;
+  const profiles = await loadWatchProfiles(prisma);
+  if (prisma && typeof prisma === 'object') profileCache.set(prisma, { at: Date.now(), profiles });
+  return profiles;
+}
 
 export async function loadWatchProfiles(prisma: PrismaLike, deps: { watchlist?: () => Promise<Array<{ slug: string; name: string }>> } = {}): Promise<WatchProfile[]> {
   const [prio, hyps, watch, committees] = await Promise.all([
@@ -117,7 +129,6 @@ export async function loadWatchProfiles(prisma: PrismaLike, deps: { watchlist?: 
       ...new Set(
         [
           ...(aliasRows as Array<{ alias: string; account_name: string }>).filter((a) => a.account_name === name).map((a) => a.alias),
-          ...(r?.parent_brand && r.parent_brand.toLowerCase() !== name.toLowerCase() ? [r.parent_brand] : []),
           ...fix.add,
         ].map((x) => x.trim()),
       ),

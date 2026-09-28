@@ -58,6 +58,32 @@ describe('watch profiles are generated, not configured', () => {
   });
 });
 
+const profile = (name: string) => ({ accountName: name, aliases: [], domains: [], ticker: null, themes: [...DEFAULT_THEMES], tier: null, band: null, reasons: ['priority'] });
+
+function discoveryDb() {
+  const rows: Array<Record<string, unknown>> = [];
+  return {
+    rows,
+    prisma: {
+      gapAuditEvent: { findMany: vi.fn(async () => [{ subject_id: 'Kroger', created_at: new Date('2026-09-27T00:00:00Z') }]), create: vi.fn(async () => ({})) },
+      gapSignal: {
+        findUnique: vi.fn(async ({ where }: { where: { url_hash: string } }) => rows.find((r) => r.url_hash === where.url_hash) ?? null),
+        create: vi.fn(async ({ data }: { data: Record<string, unknown> }) => {
+          const r = { id: `s${rows.length + 1}`, ...data };
+          rows.push(r);
+          return { id: r.id };
+        }),
+        update: vi.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => Object.assign(rows.find((r) => r.id === where.id)!, data)),
+      },
+      pounceTrigger: { create: vi.fn() },
+      prospectingSignal: { create: vi.fn(), upsert: vi.fn() },
+      account: { findMany: vi.fn(async () => [{ name: 'General Mills' }, { name: 'Kroger' }, { name: 'Post Holdings' }, { name: 'PepsiCo' }, { name: 'Frito-Lay' }, { name: 'Walmart' }]) },
+      gapAccountAlias: { findMany: vi.fn(async () => []) },
+      canonicalAccountLink: { findMany: vi.fn(async () => []) },
+    },
+  };
+}
+
 describe('discovery', () => {
   it('headlines: publisher suffix removed; the account (or an alias) must be named', () => {
     expect(cleanHeadline('PepsiCo opens Texas DC - Supply Chain Dive', 'Supply Chain Dive')).toBe('PepsiCo opens Texas DC');
@@ -70,37 +96,17 @@ describe('discovery', () => {
   it('themes rotate by day so every theme comes round', () => {
     const p = { themes: ['a', 'b', 'c', 'd', 'e'] };
     const seen = new Set<string>();
-    for (let d = 0; d < 5; d += 1) for (const t of themesForRun(p, new Date(NOW.getTime() + d * 86_400_000), 2)) seen.add(t);
+    for (let ask = 0; ask < 3; ask += 1) for (const t of themesForRun(p, ask, 2)) seen.add(t);
     expect(seen.size).toBe(5);
+    // Two asks never repeat a question.
+    expect(themesForRun(p, 0, 2)).not.toEqual(themesForRun(p, 1, 2));
   });
-
-  const profile = (name: string) => ({ accountName: name, aliases: [], domains: [], ticker: null, themes: [...DEFAULT_THEMES], tier: null, band: null, reasons: ['priority'] });
-
-  function discoveryDb() {
-    const rows: Array<Record<string, unknown>> = [];
-    return {
-      rows,
-      prisma: {
-        gapAuditEvent: { findMany: vi.fn(async () => [{ subject_id: 'Kroger', created_at: new Date('2026-09-27T00:00:00Z') }]), create: vi.fn(async () => ({})) },
-        gapSignal: {
-          findUnique: vi.fn(async ({ where }: { where: { url_hash: string } }) => rows.find((r) => r.url_hash === where.url_hash) ?? null),
-          create: vi.fn(async ({ data }: { data: Record<string, unknown> }) => {
-            const r = { id: `s${rows.length + 1}`, ...data };
-            rows.push(r);
-            return { id: r.id };
-          }),
-          update: vi.fn(async ({ where, data }: { where: { id: string }; data: Record<string, unknown> }) => Object.assign(rows.find((r) => r.id === where.id)!, data)),
-        },
-        pounceTrigger: { create: vi.fn() },
-        prospectingSignal: { create: vi.fn(), upsert: vi.fn() },
-      },
-    };
-  }
 
   it('asks the least recently asked accounts first, captures only headlines that name the account and hit the taxonomy, queues the strong ones; nothing else is written', async () => {
     const { prisma, rows } = discoveryDb();
-    const news = vi.fn(async (q: string) =>
-      q.includes('"General Mills"')
+    const news = vi.fn(async (q: string) => ({
+      error: null,
+      items: q.includes('"General Mills"')
         ? [
             { title: 'General Mills to close two plants and consolidate distribution - Food Dive', url: 'https://news.google.com/rss/articles/A1', source: 'Food Dive', publishedAt: new Date('2026-09-25T00:00:00Z') },
             { title: 'General Mills stock price target raised - MarketBeat', url: 'https://news.google.com/rss/articles/A2', source: 'MarketBeat', publishedAt: new Date('2026-09-25T00:00:00Z') },
@@ -109,7 +115,7 @@ describe('discovery', () => {
             { title: 'General Mills opens new distribution center - Old News', url: 'https://news.google.com/rss/articles/A4', source: 'Old News', publishedAt: new Date('2026-07-01T00:00:00Z') },
           ]
         : [],
-    );
+    }));
     const r = await runDiscovery(prisma, { now: NOW, accounts: 1 }, { news, profiles: async () => [profile('Kroger'), profile('General Mills')], sleep: async () => undefined });
     expect(r.accounts.map((a) => a.accountName)).toEqual(['General Mills']);
     expect(news).toHaveBeenCalledTimes(2);
@@ -125,7 +131,7 @@ describe('discovery', () => {
   it('a strong operational story is queued for research; a repeat is a duplicate, not a new signal', async () => {
     const { prisma, rows } = discoveryDb();
     const item = { title: 'Kroger deploys autonomous trucks and yard automation at new distribution center - FreightWaves', url: 'https://news.google.com/rss/articles/K1', source: 'FreightWaves', publishedAt: new Date('2026-09-26T00:00:00Z') };
-    const news = vi.fn(async () => [item]);
+    const news = vi.fn(async () => ({ items: [item], error: null }));
     const r1 = await runDiscovery(prisma, { now: NOW, accounts: 1, queriesPerAccount: 1 }, { news, profiles: async () => [profile('Kroger')], sleep: async () => undefined });
     expect(r1.accounts[0]).toMatchObject({ captured: 1, queued: 1 });
     expect(rows[0].research_status).toBe('queued');
@@ -137,7 +143,34 @@ describe('discovery', () => {
   it('stops starting accounts past the time budget', async () => {
     const { prisma } = discoveryDb();
     let t = 0;
-    const r = await runDiscovery(prisma, { now: NOW, accounts: 3, timeBudgetMs: 10, clock: () => (t += 20) }, { news: async () => [], profiles: async () => [profile('A Co'), profile('B Co'), profile('C Co')], sleep: async () => undefined });
+    const r = await runDiscovery(prisma, { now: NOW, accounts: 3, timeBudgetMs: 10, clock: () => (t += 20) }, { news: async () => ({ items: [], error: null }), profiles: async () => [profile('A Co'), profile('B Co'), profile('C Co')], sleep: async () => undefined });
     expect(r.skipped.length).toBeGreaterThan(0);
   });
 });
+
+describe('review C P1s: attribution', () => {
+  it('a headline must be ABOUT the account: it opens with its name; a supplier or rival mention is not the subject', () => {
+    const w = { accountName: 'Walmart', aliases: [] };
+    expect(headlineNames('Walmart opens automated distribution center in Texas', w)).toBe(true);
+    expect(headlineNames("Walmart's new automated DC opens in Texas", w)).toBe(true);
+    expect(headlineNames('Walmart supplier Acme opens automated distribution center', w)).toBe(false);
+    expect(headlineNames('Autonomous trucks now run Walmart routes', w)).toBe(false);
+    expect(headlineNames('SpaceX expands Mars rocket factory', { accountName: 'Mars', aliases: [] })).toBe(false);
+  });
+
+  it("a story the resolver attributes to another account is left for that account (a parent story is not the subsidiary's)", async () => {
+    const { prisma, rows } = discoveryDb();
+    const news = vi.fn(async () => ({ error: null, items: [{ title: 'PepsiCo breaks ground on automated plant - Food Dive', url: 'https://news.google.com/rss/articles/P1', source: 'Food Dive', publishedAt: new Date('2026-09-26T00:00:00Z') }] }));
+    const r = await runDiscovery(prisma, { now: NOW, accounts: 1, queriesPerAccount: 1 }, { news, profiles: async () => [{ ...profile('Frito-Lay'), aliases: ['PepsiCo'] }], sleep: async () => undefined });
+    expect(rows).toHaveLength(0);
+    expect(r.accounts[0].otherAccount).toBe(1);
+  });
+
+  it("a rate-limited ask is reported and does not use up the account's turn", async () => {
+    const { prisma } = discoveryDb();
+    const r = await runDiscovery(prisma, { now: NOW, accounts: 1 }, { news: async () => ({ items: [], error: 'news 429' }), profiles: async () => [profile('Kroger')], sleep: async () => undefined });
+    expect(r.accounts[0].errors).toEqual(['news 429', 'news 429']);
+    expect(prisma.gapAuditEvent.create).not.toHaveBeenCalled();
+  });
+});
+

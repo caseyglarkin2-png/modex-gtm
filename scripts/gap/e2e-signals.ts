@@ -188,7 +188,7 @@ async function main(): Promise<number> {
     const disc = await runDiscovery(
       prisma,
       { now: new Date(), accounts: 1, queriesPerAccount: 2 },
-      { news: async (q) => (asked.push(q), feed), profiles: async () => [{ accountName: child, aliases: [], domains: [], ticker: null, themes: [...DEFAULT_THEMES], tier: 'Tier 2', band: 'B', reasons: ['priority'] }], sleep: async () => undefined },
+      { news: async (q) => (asked.push(q), { items: feed, error: null }), profiles: async () => [{ accountName: child, aliases: [], domains: [], ticker: null, themes: [...DEFAULT_THEMES], tier: 'Tier 2', band: 'B', reasons: ['priority'] }], sleep: async () => undefined },
     );
     const found = await prisma.gapSignal.findMany({ where: { account_name: child, origin: 'discovery' }, select: { id: true, title: true, research_status: true, resolution_basis: true } });
     created.push(...found.map((f) => f.id));

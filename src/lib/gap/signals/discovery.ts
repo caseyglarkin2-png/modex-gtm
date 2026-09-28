@@ -16,8 +16,8 @@
  * Inbox. A discovered signal is never a fact, never promoted without
  * verification, and never touches Pounce, HubSpot or Slack here.
  */
-import { fetchAccountNews, type NewsItem } from '@/lib/pounce/news';
-import { captureSignal, classifySignal } from './intake';
+import { fetchAccountNewsDetailed, type NewsItem } from '@/lib/pounce/news';
+import { captureSignal, classifySignal, nameKeys, norm, resolveSignalAccount } from './intake';
 import { loadWatchProfiles, type WatchProfile } from './watch';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,14 +33,6 @@ export const DISCOVERY_MAX_AGE_MS = 21 * 86_400_000;
 export const DISCOVERY_RESEARCH_SCORE = 8;
 export const DISCOVERY_TIME_BUDGET_MS = 200_000;
 
-const norm = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
 
 /** "Headline - Publisher" (the Google News title shape) to the headline. */
 export function cleanHeadline(title: string, source: string): string {
@@ -49,21 +41,32 @@ export function cleanHeadline(title: string, source: string): string {
   return source && t.endsWith(suffix) ? t.slice(0, -suffix.length).trim() : t.replace(/\s+-\s+[^-]{2,60}$/, '').trim();
 }
 
-/** Does the headline name the account (its name or one of its watch aliases)? */
+/** Words that make the named account a bystander, not the subject ("Walmart supplier Acme opens..."). */
+const RELATIONAL = new Set(['supplier', 'suppliers', 'vendor', 'vendors', 'partner', 'partners', 'customer', 'customers', 'rival', 'rivals', 'competitor', 'competitors', 'former', 'ex', 'spinoff', 'spin', 'owned', 'backed', 'veteran', 'alum', 'alumni', 'exec', 'executive']);
+
+/**
+ * Is the headline ABOUT the account (review C P1: a mention is not the subject)? It must OPEN with the account's
+ * name or one of its aliases (one definition of a name key: intake.ts nameKeys, which drops generic and short
+ * single words), optionally possessive, and the next word must not make it a bystander ("supplier", "rival").
+ */
 export function headlineNames(headline: string, profile: Pick<WatchProfile, 'accountName' | 'aliases'>): boolean {
-  const h = ` ${norm(headline)} `;
-  const keys = [profile.accountName, ...profile.aliases]
-    .map((n) => norm(n).replace(/\b(inc|corp|corporation|company|co|llc|ltd|plc|the)\b/g, ' ').replace(/\s+/g, ' ').trim())
-    .filter((k) => k.length >= 4);
-  return keys.some((k) => h.includes(` ${k} `));
+  const h = norm(headline).replace(/^the /, '');
+  const keys = [profile.accountName, ...profile.aliases].flatMap((n) => nameKeys(n)).map((k) => k.replace(/^the /, ''));
+  return keys.some((k) => {
+    if (!(h === k || h.startsWith(`${k} `))) return false;
+    const next = h.slice(k.length).trim().split(' ')[0] === 's' ? h.slice(k.length).trim().split(' ')[1] : h.slice(k.length).trim().split(' ')[0];
+    return !RELATIONAL.has(next ?? '');
+  });
 }
 
-/** Which themes this run asks: `count` of the profile's themes, rotated by day so every theme comes round. */
-export function themesForRun(profile: Pick<WatchProfile, 'themes'>, now: Date, count = DISCOVERY_QUERIES_PER_ACCOUNT): string[] {
-  const day = Math.floor(now.getTime() / 86_400_000);
+/**
+ * Which themes this ask covers: the next `count` of the profile's themes after the ones already asked (review C
+ * P2: rotating by ask, not by day, so two asks in a day never repeat a question and every theme comes round).
+ */
+export function themesForRun(profile: Pick<WatchProfile, 'themes'>, asksSoFar: number, count = DISCOVERY_QUERIES_PER_ACCOUNT): string[] {
   const n = profile.themes.length;
   if (!n) return [];
-  return Array.from({ length: Math.min(count, n) }, (_, i) => profile.themes[(day * count + i) % n]);
+  return Array.from({ length: Math.min(count, n) }, (_, i) => profile.themes[(asksSoFar * count + i) % n]);
 }
 
 export interface DiscoveryAccountResult {
@@ -74,6 +77,10 @@ export interface DiscoveryAccountResult {
   captured: number;
   duplicates: number;
   queued: number;
+  /** Fetch failures (a 429 or a timeout is reported, never an empty "nothing happened"). */
+  errors: string[];
+  /** Headlines about another account than the one asked (left for that account's own ask). */
+  otherAccount: number;
 }
 
 export interface DiscoveryResult {
@@ -85,11 +92,11 @@ export interface DiscoveryResult {
 export async function runDiscovery(
   prisma: PrismaLike,
   opts: { now: Date; accounts?: number; queriesPerAccount?: number; timeBudgetMs?: number; clock?: () => number },
-  deps: { news?: (query: string) => Promise<NewsItem[]>; profiles?: () => Promise<WatchProfile[]>; sleep?: (ms: number) => Promise<void> } = {},
+  deps: { news?: (query: string) => Promise<{ items: NewsItem[]; error: string | null }>; profiles?: () => Promise<WatchProfile[]>; sleep?: (ms: number) => Promise<void> } = {},
 ): Promise<DiscoveryResult> {
   const clock = opts.clock ?? Date.now;
   const started = clock();
-  const news = deps.news ?? fetchAccountNews;
+  const news = deps.news ?? fetchAccountNewsDetailed;
   const sleep = deps.sleep ?? ((ms: number) => new Promise((r) => setTimeout(r, ms)));
   const profiles = await (deps.profiles ?? (() => loadWatchProfiles(prisma)))();
   const result: DiscoveryResult = { universe: profiles.length, accounts: [], skipped: [] };
@@ -103,7 +110,11 @@ export async function runDiscovery(
     take: 5_000,
   });
   const lastAt = new Map<string, number>();
-  for (const r of last) if (!lastAt.has(r.subject_id)) lastAt.set(r.subject_id, new Date(r.created_at).getTime());
+  const asks = new Map<string, number>();
+  for (const r of last) {
+    if (!lastAt.has(r.subject_id)) lastAt.set(r.subject_id, new Date(r.created_at).getTime());
+    asks.set(r.subject_id, (asks.get(r.subject_id) ?? 0) + 1);
+  }
   const order = [...profiles].sort((a, b) => (lastAt.get(a.accountName) ?? 0) - (lastAt.get(b.accountName) ?? 0) || a.accountName.localeCompare(b.accountName));
   const take = order.slice(0, Math.max(1, Math.min(opts.accounts ?? DISCOVERY_ACCOUNTS_PER_RUN, 40)));
 
@@ -112,12 +123,14 @@ export async function runDiscovery(
       result.skipped.push(p.accountName);
       continue;
     }
-    const themes = themesForRun(p, opts.now, opts.queriesPerAccount ?? DISCOVERY_QUERIES_PER_ACCOUNT);
+    const themes = themesForRun(p, asks.get(p.accountName) ?? 0, opts.queriesPerAccount ?? DISCOVERY_QUERIES_PER_ACCOUNT);
     const queries = themes.map((t) => `"${p.accountName}" (${t}) when:14d`);
-    const out: DiscoveryAccountResult = { accountName: p.accountName, queries, items: 0, kept: 0, captured: 0, duplicates: 0, queued: 0 };
+    const out: DiscoveryAccountResult = { accountName: p.accountName, queries, items: 0, kept: 0, captured: 0, duplicates: 0, queued: 0, errors: [], otherAccount: 0 };
     const seen = new Set<string>();
     for (const q of queries) {
-      const items = await news(q).catch(() => [] as NewsItem[]);
+      const got = await news(q).catch((e: unknown) => ({ items: [] as NewsItem[], error: e instanceof Error ? e.message : String(e) }));
+      if (got.error) out.errors.push(got.error);
+      const items = got.items;
       out.items += items.length;
       for (const it of items) {
         if (seen.has(it.url)) continue;
@@ -125,6 +138,12 @@ export async function runDiscovery(
         if (opts.now.getTime() - it.publishedAt.getTime() > DISCOVERY_MAX_AGE_MS) continue;
         const headline = cleanHeadline(it.title, it.source);
         if (!headlineNames(headline, p)) continue;
+        // A headline the resolver attributes to a DIFFERENT account is that account's story (left for its own ask).
+        const res = await resolveSignalAccount(prisma, { title: headline });
+        if (res.resolution === 'resolved' && res.accountName !== p.accountName) {
+          out.otherAccount += 1;
+          continue;
+        }
         const cls = classifySignal(headline, p.accountName);
         // The physical-network taxonomy or a risk/leadership story; finance noise and unclassified chatter are dropped.
         if (cls.relevance === 'research_lead' || cls.relevance === 'account_context' || cls.score < 2) continue;
@@ -147,7 +166,10 @@ export async function runDiscovery(
       }
       await sleep(400);
     }
-    await prisma.gapAuditEvent.create({ data: { kind: DISCOVERY_AUDIT, actor: DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, payload: JSON.parse(JSON.stringify(out)) } }).catch(() => undefined);
+    // A turn in which every question failed is not a turn: no rotation row, so the account is asked again next run.
+    if (out.errors.length < queries.length) {
+      await prisma.gapAuditEvent.create({ data: { kind: DISCOVERY_AUDIT, actor: DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, payload: JSON.parse(JSON.stringify(out)) } }).catch(() => undefined);
+    }
     result.accounts.push(out);
   }
   return result;

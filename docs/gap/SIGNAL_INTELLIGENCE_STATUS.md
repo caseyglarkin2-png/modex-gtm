@@ -93,7 +93,7 @@ event. Nothing else is added.
 | A | Signal intake + Share to GAP | feat/gap-signal-a-intake | #287 | 8a9cc4c7 | READY; 6 real shares through the prod UI at 390px, 0.9-1.5s each, no horizontal scroll |
 | B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | #289 | 5b936236 | READY (processing cron first tick pending at merge) |
 | C | Account watches + scheduled discovery | feat/gap-signal-c-discovery | | | |
-| D | Research aperture | | | | |
+| D | Research aperture (shipped with C) | feat/gap-signal-c-discovery | | | |
 | E | Inbox polish, dogfood, coverage, quality | | | | |
 
 ## Release A: signal intake + Share to GAP
@@ -265,4 +265,48 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
   watched, buying committee ignored, alias correction ignored.
 - Scratch E2E S8: two bounded questions; of three stories only the one naming
   the account on the taxonomy was captured and queued; no trigger written.
+
+### Release C review (verified P1s fixed before merge)
+- A parent-brand alias pinned a parent's story on a subsidiary ("PepsiCo breaks
+  ground..." captured as Frito-Lay). The parent brand is no longer a search
+  alias, and a headline the resolver attributes to a DIFFERENT account is left
+  for that account's own ask (`otherAccount`).
+- A mention was treated as the subject ("Walmart supplier Acme opens a DC"
+  captured as Walmart). A discovered headline must now OPEN with the account's
+  name or alias (optionally possessive) and the next word must not make it a
+  bystander (supplier, vendor, partner, customer, rival, former ...). Name keys
+  are intake's one definition (generic and short single words never match).
+- P2s fixed: a failed news fetch (429, timeout) is reported and a turn where
+  every question failed does not consume the account's rotation; themes rotate
+  per ask (two asks in a day never repeat a question); profiles are cached per
+  process for 5 minutes on the Signals page.
+- Known limits (recorded): Google News links are Google redirects, so a
+  discovered signal's own page is not read; research finds the primary source
+  through web search and EDGAR. Account names shorter than 4 letters (3M, GE,
+  UPS) are not discovered automatically; Casey can share them.
+
+## Release D: research aperture (shipped in the same PR as C)
+
+- Eligible universe: the watched priority accounts (74 in production),
+  minus accounts routing holds for an open HubSpot deal.
+- Priority (deterministic): research blocking people, then Casey-shared
+  signals, then fresh discovered signals / Pounce triggers, then evidence
+  nearing expiry, then the proactive backlog (`priority_backlog`: a watched
+  account not researched in 7 days; never researched first, then the oldest,
+  tier first).
+- Cadence: background research moves from once a day to HOURLY (`40 * * * *`),
+  3 accounts per run, a 120s budget, a 3-day account cooldown: at most 72
+  account slots a day, bounded in practice by the cooldown to about a third of
+  the universe a day (about 25 distinct accounts/day at 74). Each run is
+  independent (failure isolation, idempotent cooldown).
+- The cooldown bypass is Casey's alone: a story he shared is followed up at
+  once; a discovered story waits out the cooldown unless it was published after
+  the last research.
+
+### Release D validation
+- Unit `signal-research-aperture` 4. Mutations RED then restored: open-deal
+  accounts in the backlog, recently researched in the backlog, never-researched
+  not first, backlog outranking shared signals, discovered stories bypassing
+  the cooldown, Casey's share waiting on the cooldown (initially SURVIVED; the
+  test's timestamps fixed).
 

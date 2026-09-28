@@ -10,7 +10,8 @@ export const maxDuration = 300;
 
 const CRON_NAME = 'gap-background-research';
 const CRON_PATH = '/api/cron/gap-background-research';
-const CRON_SCHEDULE = '40 10 * * *';
+// Signal Intelligence D: hourly, a few accounts each run (the per-run cap and 120s budget are unchanged).
+const CRON_SCHEDULE = '40 * * * *';
 
 /**
  * GET /api/cron/gap-background-research   (Phase 2 B1)

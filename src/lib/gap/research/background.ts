@@ -31,6 +31,8 @@ import { RESEARCHABLE_RULES, sellerLaneOf } from '../routing/card-readiness';
 import { loadThesisGroups, splitThesisWork } from '../hypothesis/thesis-groups';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from './run';
 import { settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
+import { loadWatchProfiles } from '../signals/watch';
+import { heldDealAccounts } from '../deals/in-deals';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -55,8 +57,14 @@ export const BACKGROUND_TIME_BUDGET_MS = 120_000;
  * (he said "follow this up"; it does not make it true), (3) a strong fresh discovered signal or Pounce trigger,
  * (4) evidence nearing expiry.
  */
-export type TargetReason = 'research_work' | 'shared_signal' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence';
-const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4 };
+export type TargetReason = 'research_work' | 'shared_signal' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence' | 'priority_backlog';
+const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4, priority_backlog: 5 };
+/**
+ * Signal Intelligence D: the proactive backlog. A watched priority account (signals/watch.ts) not researched
+ * in this long is researched proactively, never-researched first, then the oldest. An account routing holds for
+ * an open HubSpot deal is left out (its evidence would not be used for cold outreach).
+ */
+export const BACKLOG_STALE_MS = 7 * 86_400_000;
 /** A queued signal whose research failed this many times is settled no_usable_fact (with the reason). */
 export const SIGNAL_RESEARCH_MAX_ATTEMPTS = 3;
 
@@ -72,6 +80,8 @@ export interface BackgroundTarget {
   problemFamily: string | null;
   /** Signals (GapSignal ids) this research follows up. */
   signalIds?: string[];
+  /** A signal Casey himself shared is among them: his "follow this up" is not held back by the account cooldown. */
+  sharedByCasey?: boolean;
 }
 
 export function tierRank(tier: string | null | undefined): number {
@@ -111,12 +121,15 @@ function merge(map: Map<string, BackgroundTarget>, t: BackgroundTarget) {
     oldestWorkAt: earlier(cur.oldestWorkAt, t.oldestWorkAt),
     problemFamily: cur.problemFamily ?? t.problemFamily,
     signalIds: [...new Set([...(cur.signalIds ?? []), ...(t.signalIds ?? [])])],
+    sharedByCasey: !!(cur.sharedByCasey || t.sharedByCasey),
   });
 }
 
 export interface SelectDeps {
   loadGroups?: typeof loadThesisGroups;
   listQueue?: typeof listAllCurrent;
+  /** The watched priority universe (default: signals/watch.ts loadWatchProfiles). */
+  watch?: (prisma: PrismaLike) => Promise<Array<{ accountName: string }>>;
 }
 
 export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, deps: SelectDeps = {}): Promise<BackgroundTarget[]> {
@@ -168,6 +181,7 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
       triggerAt: new Date(q.published_at ?? q.created_at).toISOString(),
       triggerTitle: q.title,
       signalIds: [q.id],
+      sharedByCasey: q.origin === 'casey_share' || q.origin === 'conference_note',
     });
   }
 
@@ -181,6 +195,22 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
     const exp = h.signals.map((s) => s.signal?.freshness_expires_at).filter((d): d is Date => !!d).map((d) => new Date(d));
     const soon = exp.find((d) => d.getTime() > now.getTime() && d.getTime() - now.getTime() <= EXPIRY_HORIZON_MS);
     if (soon) merge(byAccount, { ...base(h.account_name, 'expiring_evidence'), expiresAt: soon.toISOString(), problemFamily: h.problem_family });
+  }
+
+  // 5. Proactive backlog over the watched priority universe (never researched first, then the oldest).
+  const profiles = await (deps.watch ?? loadWatchProfiles)(prisma).catch(() => [] as Array<{ accountName: string }>);
+  if (profiles.length) {
+    const inDeal = new Set(heldDealAccounts(queue.items));
+    const watched = profiles.map((p) => p.accountName).filter((n) => !inDeal.has(n));
+    const lastRuns: Array<{ account_name: string; _max: { created_at: Date | null } }> = watched.length
+      ? await prisma.researchRun.groupBy({ by: ['account_name'], where: { account_name: { in: watched }, run_key: { startsWith: 'gap_research:' } }, _max: { created_at: true } }).catch(() => [])
+      : [];
+    const lastOf = new Map(lastRuns.map((r) => [r.account_name, r._max.created_at ? new Date(r._max.created_at) : null]));
+    for (const name of watched) {
+      const last = lastOf.get(name) ?? null;
+      if (last && now.getTime() - last.getTime() < BACKLOG_STALE_MS) continue;
+      merge(byAccount, { ...base(name, 'priority_backlog'), oldestWorkAt: last ? last.toISOString() : '1970-01-01T00:00:00.000Z' });
+    }
   }
 
   // Tier for every candidate (one read).
@@ -229,9 +259,10 @@ export async function runBackgroundResearch(
     }
     const last = await lastResearchAt(prisma, t.accountName);
     const newerTrigger = t.triggerAt && last && new Date(t.triggerAt) > last;
-    // A queued signal is a specific story to follow up: the account cooldown does not hold it back.
+    // A story CASEY shared is followed up despite the account cooldown; discovered stories respect it
+    // (unless published after the last research, like any newer trigger).
     const followUp = (t.signalIds ?? []).length > 0;
-    if (last && opts.now.getTime() - last.getTime() < BACKGROUND_COOLDOWN_MS && !newerTrigger && !followUp) {
+    if (last && opts.now.getTime() - last.getTime() < BACKGROUND_COOLDOWN_MS && !newerTrigger && !t.sharedByCasey) {
       result.skipped.push({ accountName: t.accountName, reason: `researched_recently:${last.toISOString()}` });
       continue;
     }

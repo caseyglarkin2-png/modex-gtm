@@ -71,7 +71,7 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   // gap-mailbox (red team T9): reads casey@yardflow.ai for replies and bounces to GAP sends (read-only against Gmail).
   { name: 'gap-mailbox', label: 'GAP Mailbox Intake', path: '/api/cron/gap-mailbox', schedule: '*/10 * * * *' },
   // gap-background-research (Phase 2 B1): prepares the Verified Evidence Inbox; research only, never promotes or sends.
-  { name: 'gap-background-research', label: 'GAP Background Evidence Research', path: '/api/cron/gap-background-research', schedule: '40 10 * * *' },
+  { name: 'gap-background-research', label: 'GAP Background Evidence Research', path: '/api/cron/gap-background-research', schedule: '40 * * * *' },
   // gap-signal-process (Signal Intelligence B): retry unreadable signal pages, cluster one event's sources, promote verified signals to Pounce.
   { name: 'gap-signal-process', label: 'GAP Signal Processing', path: '/api/cron/gap-signal-process', schedule: '*/30 * * * *' },
   // gap-signal-discovery (Signal Intelligence C): rotating Google News questions over the watched priority accounts; captures signals only.

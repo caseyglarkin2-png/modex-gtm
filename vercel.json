@@ -49,7 +49,7 @@
     },
     {
       "path": "/api/cron/gap-background-research/",
-      "schedule": "40 10 * * *"
+      "schedule": "40 * * * *"
     },
     {
       "path": "/api/cron/gap-signal-process/",
