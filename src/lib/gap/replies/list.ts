@@ -322,6 +322,7 @@ const COLLEAGUE_MAX_DOMAINS = 200;
  * account and thesis come from the known recipient at that domain; the words
  * stay the sender's. First page only; newest first; auto-replies excluded.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- house convention for DB glue
 export async function loadColleagueReplies(prisma: any, known: Map<string, KnownAddress>, state: ReplyState, now: Date = new Date()): Promise<ReplyItem[]> {
   const byDomain = new Map<string, KnownAddress>();
   for (const k of known.values()) {
