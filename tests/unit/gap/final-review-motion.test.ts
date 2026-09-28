@@ -11,7 +11,7 @@ import { accountMotionRefusal, loadAccountFirstTouches, CONVERSATION_RESPONSE_CL
 import { computeAccountMotion } from '@/lib/gap/motion/account-motion';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
 import { claimSendKey, personStepKey } from '@/lib/gap/execution/person-history';
-import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFT_SUBJECT_TYPE } from '@/lib/gap/execution/draft-ledger';
+import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT } from '@/lib/gap/execution/draft-ledger';
 
 const NOW = new Date('2026-09-28T15:00:00.000Z');
 const ACCOUNT = 'PepsiCo';

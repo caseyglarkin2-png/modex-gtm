@@ -17,6 +17,9 @@ import { BID_TYPES } from '@/lib/gap/taxonomy';
 import type { CaptureView } from '@/lib/gap/capture/store';
 import { buyerSpeakers } from '@/lib/gap/capture/extract';
 
+const OFFLINE = 'no connection. Try again when you have signal.';
+const NOTE_DRAFT_KEY = 'gap-capture-unsaved-note';
+
 type Person = { id: number; name: string | null; title: string | null; email?: string | null; account_name?: string };
 type Hyp = { id: string; status: string; problem_family: string; primary_persona_id: number | null };
 type Context = { people: Person[]; hypotheses: Hyp[] };
@@ -81,15 +84,23 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
   async function decide(candidateId: string, decision: 'confirm' | 'reject') {
     setBusy(candidateId);
     setErrors((e) => ({ ...e, [candidateId]: '' }));
-    const res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        decision === 'reject'
-          ? { op: 'decide', candidateId, decision }
-          : { op: 'decide', candidateId, decision, type: types[candidateId], hypothesisId: hyp || undefined, personaId: personaFor(candidateId) ?? undefined },
-      ),
-    });
+    let res: Response;
+    try {
+      res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(
+          decision === 'reject'
+            ? { op: 'decide', candidateId, decision }
+            : { op: 'decide', candidateId, decision, type: types[candidateId], hypothesisId: hyp || undefined, personaId: personaFor(candidateId) ?? undefined },
+        ),
+      });
+    } catch {
+      // Final review P1 (UX lens): a dropped connection never leaves the buttons stuck or silent.
+      setBusy(null);
+      setErrors((e) => ({ ...e, [candidateId]: OFFLINE }));
+      return;
+    }
     const body = await json<{ ok?: boolean; capture?: CaptureView; error?: string; detail?: string }>(res);
     setBusy(null);
     if (!res.ok || !body.capture) {
@@ -194,11 +205,17 @@ function MeetingOutcomeForm({ capture, onChange }: { capture: CaptureView; onCha
       setError(ctx?.hypotheses.length ? 'Choose the thesis this meeting tested.' : 'There is no current thesis at this account to record the meeting against.');
       return;
     }
-    const res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, {
+    let res: Response;
+    try {
+      res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ op: 'meeting', outcome, hypothesisId: hyp.id, personaId: personaId ?? undefined, buyerQuote: quote || undefined, nextLearningObjective: objective || undefined }),
-    });
+      });
+    } catch {
+      setError(`Not recorded: ${OFFLINE}`);
+      return;
+    }
     const body = await json<{ capture?: CaptureView; error?: string; detail?: string }>(res);
     if (!res.ok || !body.capture) {
       setError(body.detail ?? body.error ?? `HTTP ${res.status}`);
@@ -315,19 +332,48 @@ export function CaptureFlow({ initial = null }: { initial?: CaptureView | null }
     return () => clearTimeout(t);
   }, [q, account]);
 
+  // Final review P1 (UX lens): the unsaved note survives a dropped connection and a reload on this phone.
+  useEffect(() => {
+    try {
+      const kept = window.localStorage.getItem(NOTE_DRAFT_KEY);
+      if (kept) setText((t) => t || kept);
+    } catch {
+      // Storage unavailable (private mode): the note stays in the page only.
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      if (text) window.localStorage.setItem(NOTE_DRAFT_KEY, text);
+    } catch {
+      // ignore
+    }
+  }, [text]);
+
   async function save() {
     setSaving(true);
     setError(null);
-    const res = await fetch('/api/gap/captures', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText: text }),
-    });
+    let res: Response;
+    try {
+      res = await fetch('/api/gap/captures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText: text }),
+      });
+    } catch {
+      setSaving(false);
+      setError('no connection. Your note is kept on this phone; press Save again when you have signal.');
+      return;
+    }
     const body = await json<CaptureView & { error?: string }>(res);
     setSaving(false);
     if (!res.ok || !body.id) {
       setError(body.error ?? `HTTP ${res.status}`);
       return;
+    }
+    try {
+      window.localStorage.removeItem(NOTE_DRAFT_KEY);
+    } catch {
+      // ignore
     }
     setCapture(body);
   }
