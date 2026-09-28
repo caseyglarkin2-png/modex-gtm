@@ -138,8 +138,8 @@ describe('the next learning objective is Casey’s', () => {
   });
 
   it('otherwise a machine suggestion, labelled as one, aimed at the first unknown', () => {
-    expect(buildDealBrief(base).objective).toEqual({ text: 'Learn the problem in their words: what breaks in the yard, and how often?', owned: false });
-    expect(buildDealBrief({ ...base, bids: [bid({})] }).objective).toEqual({ text: 'Learn how the yard runs today: how trailers are checked in, found and moved.', owned: false });
+    expect(buildDealBrief(base).objective).toEqual({ text: 'Learn the problem in their words: what breaks in their yards, and how often?', owned: false });
+    expect(buildDealBrief({ ...base, bids: [bid({})] }).objective).toEqual({ text: 'Learn how their yards run today: how trailers are checked in, found and moved.', owned: false });
   });
 
   it('setLearningObjective appends an audit row on the account; empty, too long or unknown account is refused', async () => {
@@ -266,5 +266,26 @@ describe('<DealBriefView>', () => {
     for (const s of ['current_state', 'root_cause', 'business_impact', 'future_state', 'requirements']) expect(screen.getByTestId(`deal-brief-${s}`)).toHaveTextContent('UNKNOWN');
     expect(screen.getByTestId('deal-brief-objective')).toHaveTextContent('Suggested (not yours yet)');
     expect(screen.getByTestId('deal-brief-known')).toHaveTextContent('1 of 6 known');
+  });
+});
+
+describe('review F fixes', () => {
+  it('a confirmed problem on one thesis and a rejected problem on another is NOT a contradiction', () => {
+    const b = buildDealBrief({ ...base, dispositions: [disp({ response_class: 'problem_confirmed', hypothesis_id: 'h1' }), disp({ id: 'd2', response_class: 'problem_rejected', hypothesis_id: 'h2' })] });
+    expect(b.contradictions).toEqual([]);
+  });
+
+  it('a newer meeting objective beats an older one Casey set', () => {
+    const b = buildDealBrief({ ...base, objective: { text: 'Old', by: 'c@x', at: '2026-09-01T00:00:00.000Z' }, meetingObjective: { text: 'Walk the yard', by: 'c@x', at: '2026-09-28T00:00:00.000Z' } });
+    expect(b.objective).toMatchObject({ text: 'Walk the yard', from: 'meeting' });
+  });
+
+  it('accounts past the cap are listed as not checked, never dropped', async () => {
+    const names = Array.from({ length: 42 }, (_, i) => `A${i}`);
+    const r = await loadInDeals({ persona: { findMany: vi.fn(async () => []) }, buyerInputData: { findMany: vi.fn(async () => []) } }, names, { resolve: async () => ({ status: 'CLEAR', companyIds: [] }) });
+    expect(r.couldNotVerify).toEqual([
+      { accountName: 'A40', reason: 'not_checked_account_limit' },
+      { accountName: 'A41', reason: 'not_checked_account_limit' },
+    ]);
   });
 });

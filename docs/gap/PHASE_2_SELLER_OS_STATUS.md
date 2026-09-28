@@ -422,6 +422,16 @@ release, merged and production-verified before the next starts.
   and Casey's objective. Scratch E2E: integrated 14, sprint2 10, sprint3 16,
   sprint4 14, phase2 19, all PASS.
 
+### Release F review (no P0/P1; verified P2s fixed before merge)
+- A confirmed problem on one thesis and a rejected problem on another was shown
+  as a contradiction; now only the same thesis confirmed and rejected is.
+- An older set objective beat a newer meeting objective; now the newest wins.
+- Accounts past the 40-account cap vanished; they are now listed under "could
+  not verify" (not checked), and an opened account says whether HubSpot could
+  not be checked, shows no open deal, or is not a GAP account.
+- Suggestion copy uses "yards" plural; the lane says the tile and the live read
+  can differ. Mutations RED then restored for all three fixes.
+
 ## Debt recorded (not fixed in this program unless it blocks)
 
 - Release A review (non-blocking): `verifyPublicFact` reports `created: true`
@@ -442,3 +452,8 @@ release, merged and production-verified before the next starts.
   by the motion gate (the per-person gate still treats it as sent); NEXT UP v2
   skips a buyer reply at an account held by an open deal or unknown opportunity
   truth, per the Phase 2 hard constraint (the Replies lane still shows it).
+- Release F review (non-blocking): the In Deals lane awaits its live HubSpot
+  fan-out inside the page render (worst case about 8 waves of 8s at 40
+  accounts); the resolver timeout races but does not abort, so real HubSpot
+  concurrency can briefly exceed 5; each objective save refreshes the whole
+  lane. The objective route accepts any Account row (audit only).

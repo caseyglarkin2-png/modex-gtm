@@ -74,7 +74,8 @@ export async function loadInDeals(
   accountNames: readonly string[],
   deps: { resolve?: (accountName: string) => Promise<OpportunityTruth> } = {},
 ): Promise<InDeals> {
-  const names = [...new Set(accountNames)].slice(0, IN_DEALS_MAX_ACCOUNTS);
+  const all = [...new Set(accountNames)];
+  const names = all.slice(0, IN_DEALS_MAX_ACCOUNTS);
   const resolve = deps.resolve ?? ((a: string) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: IN_DEALS_TIMEOUT_MS }));
   const truths = await mapLimit(names, IN_DEALS_CONCURRENCY, async (name): Promise<OpportunityTruth> => {
     try {
@@ -84,13 +85,16 @@ export async function loadInDeals(
     }
   });
 
+  // Review F: an account past the cap is listed as not checked, never silently dropped.
   const couldNotVerify: InDeals['couldNotVerify'] = [];
+  const overCap = all.slice(IN_DEALS_MAX_ACCOUNTS).map((accountName) => ({ accountName, reason: 'not_checked_account_limit' }));
   const active: Array<{ accountName: string; truth: Extract<OpportunityTruth, { status: 'ACTIVE' }> }> = [];
   names.forEach((accountName, i) => {
     const t = truths[i];
     if (t.status === 'ACTIVE') active.push({ accountName, truth: t });
     else if (t.status === 'UNKNOWN') couldNotVerify.push({ accountName, reason: t.reason });
   });
+  couldNotVerify.push(...overCap);
   if (active.length === 0) return { inDeals: [], couldNotVerify };
 
   const activeNames = active.map((a) => a.accountName);

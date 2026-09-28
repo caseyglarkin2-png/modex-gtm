@@ -222,10 +222,16 @@ async function InDealsLane({ accounts, open }: { accounts: string[]; open: strin
   return (
     <div className="space-y-4" data-testid="in-deals">
       <p className="text-sm text-[var(--muted-foreground)]">
-        Read from HubSpot just now. No cold first touch goes to these accounts; work them from the deal and learn what is still unknown.
+        Read from HubSpot just now (the tile counts what the last routing run held, so the two can differ). No cold first touch goes to these accounts; work them from the deal and learn what is still unknown.
       </p>
       {open && !opened ? (
-        <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">No open deal was verified for {open} just now, so there is no Deal Brief to show.</p>
+        <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
+          {couldNotVerify.some((u) => u.accountName === open)
+            ? `HubSpot could not be checked for ${open} just now, so there is no Deal Brief to show. Check HubSpot directly.`
+            : accounts.includes(open)
+              ? `HubSpot shows no open deal for ${open} right now, so there is no Deal Brief to show.`
+              : 'That account is not one GAP works, so there is no Deal Brief to show.'}
+        </p>
       ) : null}
       {inDeals.length === 0 ? <p className="text-sm italic text-[var(--muted-foreground)]">No GAP account has an open HubSpot deal right now.</p> : null}
       <ul className="space-y-3">

@@ -53,8 +53,8 @@ const SECTION_OF_BID: Record<string, TruthSection> = {
 /** The suggestion for each unknown, in the order a discovery conversation needs them. */
 const SUGGESTION_ORDER: TruthSection[] = ['problem', 'current_state', 'root_cause', 'business_impact', 'future_state', 'requirements'];
 const SUGGESTION: Record<TruthSection, string> = {
-  problem: 'Learn the problem in their words: what breaks in the yard, and how often?',
-  current_state: 'Learn how the yard runs today: how trailers are checked in, found and moved.',
+  problem: 'Learn the problem in their words: what breaks in their yards, and how often?',
+  current_state: 'Learn how their yards run today: how trailers are checked in, found and moved.',
   root_cause: 'Learn why it happens: what causes the waiting, in their words.',
   business_impact: 'Learn what it costs them: dwell hours, detention, or production capacity lost.',
   future_state: 'Learn what good looks like to them, and by when.',
@@ -78,6 +78,8 @@ export interface BriefBidRow {
 
 export interface BriefDispositionRow {
   id: string;
+  /** The thesis the outcome was about: a contradiction needs the SAME problem confirmed and rejected. */
+  hypothesis_id?: string | null;
   response_class: string;
   contact_email: string;
   buyer_language: string | null;
@@ -151,15 +153,21 @@ export function buildDealBrief(input: {
     .map((d) => ({ what: 'Agreed to a meeting', who: whoOf(d.contact_email), at: iso(d.confirmed_at ?? d.created_at), confirmedBy: d.confirmed_by ?? null, next: d.next_best_action?.trim() || null }));
 
   const contradictions: string[] = [];
-  const yes = confirmed.find((d) => PROBLEM_YES.has(d.response_class));
-  const no = confirmed.find((d) => d.response_class === 'problem_rejected');
-  if (yes && no) contradictions.push(`${whoOf(yes.contact_email)} confirmed the problem (${day(yes.confirmed_at ?? yes.created_at)}); ${whoOf(no.contact_email)} rejected it (${day(no.confirmed_at ?? no.created_at)}).`);
+  // Review F: only the SAME thesis confirmed and rejected is a contradiction (two different problems are not).
+  for (const yes of confirmed.filter((d) => PROBLEM_YES.has(d.response_class))) {
+    const no = confirmed.find((d) => d.response_class === 'problem_rejected' && (d.hypothesis_id ?? null) === (yes.hypothesis_id ?? null));
+    if (!no) continue;
+    const line = `${whoOf(yes.contact_email)} confirmed the problem (${day(yes.confirmed_at ?? yes.created_at)}); ${whoOf(no.contact_email)} rejected it (${day(no.confirmed_at ?? no.created_at)}).`;
+    if (!contradictions.includes(line)) contradictions.push(line);
+  }
   for (const b of truth) if (b.type === 'objection') contradictions.push(`Objection from ${whoOf(b.contact_email)}: "${b.raw_buyer_language}"`);
   for (const c of input.evidenceConflicts) contradictions.push(`Public facts disagree about ${c.site}.`);
 
   const unknowns = TRUTH_SECTIONS.filter((s) => sections[s].length === 0);
   const firstUnknown = SUGGESTION_ORDER.find((s) => unknowns.includes(s));
-  const objective: DealBrief['objective'] = input.objective
+  // Review F: the NEWEST of Casey's objective and his latest meeting objective wins.
+  const setWins = !!input.objective && (!input.meetingObjective || input.objective.at >= input.meetingObjective.at);
+  const objective: DealBrief['objective'] = input.objective && setWins
     ? { ...input.objective, owned: true, from: 'set' }
     : input.meetingObjective
       ? { ...input.meetingObjective, owned: true, from: 'meeting' }
@@ -212,7 +220,7 @@ export async function loadDealBrief(
     prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: BRIEF_BID_SELECT, orderBy: [{ captured_at: 'asc' }, { id: 'asc' }] }),
     prisma.conversationDisposition.findMany({
       where: { account_name: accountName, human_confirmed: true },
-      select: { id: true, response_class: true, contact_email: true, buyer_language: true, next_best_action: true, human_confirmed: true, confirmed_by: true, confirmed_at: true, created_at: true },
+      select: { id: true, hypothesis_id: true, response_class: true, contact_email: true, buyer_language: true, next_best_action: true, human_confirmed: true, confirmed_by: true, confirmed_at: true, created_at: true },
       orderBy: [{ created_at: 'asc' }, { id: 'asc' }],
     }),
     prisma.persona.findMany({ where: { account_name: accountName }, select: { email: true, name: true, title: true } }),
