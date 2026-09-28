@@ -47,7 +47,9 @@ export type OutreachFactRefusal =
   | 'not_external'
   | 'undated'
   | 'other_account'
-  | 'not_a_physical_network_change';
+  | 'not_a_physical_network_change'
+  /** Evidence continuity: a newer source says this program ended. */
+  | 'superseded';
 
 /** The verification stamp research writes when the excerpt was found in the fetched source (research/run.ts). */
 export const VERIFIED_EXCERPT = 'excerpt_found_at_source';
@@ -72,6 +74,8 @@ export function outreachFactRefusal(s: GateSignal, accountName: string): Outreac
   if (!observed || Number.isNaN(observed.getTime())) return 'undated';
   if (s.account_name != null && s.account_name.trim().toLowerCase() !== accountName.trim().toLowerCase()) return 'other_account';
   if (!isPhysicalOpsFact(text)) return 'not_a_physical_network_change';
+  const continuity = isObj(s.metadata) && isObj(s.metadata.continuity) ? s.metadata.continuity : null;
+  if (continuity && continuity.kind === 'ended') return 'superseded';
   return null;
 }
 

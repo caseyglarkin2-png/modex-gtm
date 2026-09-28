@@ -32,7 +32,8 @@ function db() {
     prospectingSignal: {
       findUnique: vi.fn(async ({ where }: any) => t.signals.find((s) => s.source_kind === where.source_kind_source_id.source_kind && s.source_id === where.source_kind_source_id.source_id) ?? null),
       create: vi.fn(async ({ data }: any) => { const s = { id: id('sig'), ...data }; t.signals.push(s); return s; }),
-      findMany: vi.fn(async ({ where }: any) => t.signals.filter((s) => (where.id ? where.id.in.includes(s.id) : where.source_id.in.includes(s.source_id)) && (!where.account_name || s.account_name === where.account_name) && (!where.source_kind || s.source_kind === where.source_kind))),
+      update: vi.fn(async ({ where, data }: any) => Object.assign(t.signals.find((s) => s.id === where.id), data)),
+      findMany: vi.fn(async ({ where }: any) => t.signals.filter((s) => (where.id ? where.id.in.includes(s.id) : where.source_id ? where.source_id.in.includes(s.source_id) : true) && (!where.account_name || s.account_name === where.account_name) && (!where.source_kind || s.source_kind === where.source_kind))),
     },
     gapAuditEvent: { create: vi.fn(async ({ data }: any) => { t.audit.push(data); return { id: id('a') }; }) },
     prospectingHypothesis: {

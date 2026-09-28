@@ -6,17 +6,17 @@ STATUS: PASS
 
 Written by `scripts/gap/e2e-integrated.ts` against the scratch database. Reserved example.com recipients only; every Gmail call went to an in-process fake.
 
-- Run tag: gapint-1790572611138
+- Run tag: gapint-1790618532895
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 07337608
-- Ran at: 2026-09-28T05:16:52.129Z
+- Git: 82555ca1
+- Ran at: 2026-09-28T18:02:13.820Z
 
 ## Steps
 
-- PASS 1 seed: accounts GAP Integrated Co 72611138 and GAP Integrated Keyword Co 72611138, people sam, dana, uma, bo, rita, cal, kai at example.com, family cmuksp96400017k4w6ynl31v1 (single-touch Hidden Capacity seed copy)
+- PASS 1 seed: accounts GAP Integrated Co 18532895 and GAP Integrated Keyword Co 18532895, people sam, dana, uma, bo, rita, cal, kai at example.com, family cmulk1imd00017kag093ucxpp (single-touch Hidden Capacity seed copy)
 - PASS 2 verified fact: 6 hypotheses citing one verified, dated, quoted fact each: submitted, approved and activated
 - PASS 3 keyword only: approve refused evidence_insufficient; the person routes research_required (evidence_thin), never an email
-- PASS 4 route: sam's approved hypothesis routes enroll_gap_sequence (enroll) in shadow routing run gapint-1790572611138-run-1
+- PASS 4 route: sam's approved hypothesis routes enroll_gap_sequence (enroll) in shadow routing run gapint-1790618532895-run-1
 - PASS 5 real send: one DIRECT_SENT ledger row (evidence tier VERIFIED_FACT), the fake Gmail transport the only recipient; routing now reads lastOutboundAt and routes nurture (sequence_complete), never a second email
 - PASS 6 prior step 0: a new card for the same person refuses step 0: first_touch_already_sent
 - PASS 7 outstanding draft: a Gmail draft is outstanding for dana; the direct send is refused draft_outstanding

@@ -22,6 +22,8 @@
  * is a separate human click (propose.ts).
  */
 import { createHash } from 'node:crypto';
+import { classifyContinuity } from './continuity';
+import { establishContinuity, currentnessFocus, type ContinuityOutcome } from './continuity-store';
 import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/evidence';
 import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
@@ -55,6 +57,8 @@ export interface ResearchResult {
   rejected: Array<{ url: string; reason: string }>;
   conflicts: Array<{ site: string; signalIds: string[] }>;
   notes: string[];
+  /** Evidence continuity over the account's verified facts after this run (corroborated, superseded, still seeking). */
+  continuity?: ContinuityOutcome;
 }
 
 export interface ResearchInput {
@@ -69,6 +73,8 @@ export interface ResearchInput {
   context?: Record<string, unknown>;
   /** Extra search focus for the web provider (Phase 2 B1: the fresh trigger headline). Candidates are still verified at their own source. */
   focus?: string;
+  /** Evidence continuity case H: when an ongoing fact nears its own clock uncorroborated, make ONE focused web call. Default on. */
+  seekCurrentness?: boolean;
 }
 
 export interface ResearchDeps {
@@ -139,6 +145,28 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     facts.push(await storeVerifiedFact(prisma, { runId: run.id, accountName: input.accountName, personaId: input.personaId, candidate: a, actor: input.actor, now: input.now }));
   }
 
+  // EVIDENCE CONTINUITY over the account's verified facts (this run's and earlier runs').
+  let continuity = await establishContinuity(prisma, { accountName: input.accountName, actor: input.actor, now: input.now });
+  if (continuity.seeking.length > 0 && input.seekCurrentness !== false) {
+    // Case H: an ongoing fact is never called fresh on its own wording; look ONCE for newer corroboration.
+    const focus = currentnessFocus(input.accountName, continuity.seeking, input.now);
+    try {
+      const r = await (deps.web ?? webCandidates)(input.accountName, focus);
+      notes.push(`currentness: ${r.note}`);
+      for (const c of r.candidates) {
+        const key = normalizeForMatch(c.excerpt);
+        if (seen.has(key)) continue;
+        const v = await verifyCandidate(c, ctx);
+        if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }
+        seen.add(key);
+        facts.push(await storeVerifiedFact(prisma, { runId: run.id, accountName: input.accountName, personaId: input.personaId, candidate: { ...c, publishedAt: v.publishedAt }, actor: input.actor, now: input.now }));
+      }
+      continuity = await establishContinuity(prisma, { accountName: input.accountName, actor: input.actor, now: input.now });
+    } catch (err) {
+      notes.push(`currentness: unavailable (${err instanceof Error ? err.message : String(err)})`);
+    }
+  }
+
   const conflicts = detectConflicts(facts.map((f) => ({ id: f.signalId, excerpt: f.excerpt, change: f.change }))).map((c) => ({ site: c.site, signalIds: c.ids }));
   const outcome: ResearchOutcome = conflicts.length > 0 ? 'conflicting_evidence' : facts.some((f) => f.fresh) ? 'evidence_found' : 'insufficient_evidence';
 
@@ -157,8 +185,9 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
         freshFacts: facts.filter((f) => f.fresh).length,
         rejected: rejected.length,
         conflicts,
+        continuity: JSON.parse(JSON.stringify(continuity)),
         // The full result, so a thesis research run is reused instead of repeated.
-        result: JSON.parse(JSON.stringify({ runId: run.id, outcome, facts, rejected, conflicts, notes })),
+        result: JSON.parse(JSON.stringify({ runId: run.id, outcome, facts, rejected, conflicts, notes, continuity })),
       },
     },
   });
@@ -166,7 +195,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     data: { kind: 'research.completed', actor: input.actor, subject_type: 'research_run', subject_id: run.id, payload: { outcome, accountName: input.accountName, personaId: input.personaId, hypothesisId: input.hypothesisId, facts: facts.length, rejected: rejected.length } },
   });
 
-  return { runId: run.id, outcome, facts, rejected, conflicts, notes };
+  return { runId: run.id, outcome, facts, rejected, conflicts, notes, continuity };
 }
 
 export interface VerificationContext {
@@ -202,7 +231,7 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
   if (!isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
   // Quality review: a past-year event restated in a newer source is not dated by the source.
-  if (describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
   if (!ctx.pages.has(c.url)) {
     try { ctx.pages.set(c.url, await ctx.fetchText(c.url)); } catch (err) { ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
   }

@@ -27,6 +27,10 @@ const NOT_FACTS: Array<[string, string]> = [
   ['Constellation interest capitalization', 'We cease the capitalization of interest when construction activities are substantially completed and the facility and related assets are available for their intended use.'],
   ['Lineage same-warehouse definition', 'Acquired properties will be included in the same warehouse population if owned or leased by us as of the first business day of the prior calendar year.'],
   ['PFG notes proceeds', 'However, since there was no requirement to hold the funds in escrow until the Cheney Brothers Acquisition closed, the net proceeds for the Notes due 2032 were initially used to repay borrowings.'],
+  // continuity dogfood 2026-09-28: the newsroom breadcrumb run into the page headline
+  ['PepsiCo newsroom breadcrumb', 'Learn more News & Media Innovation & Tech PepsiCo and Gatik announce multi-year agreement to deploy autonomous freight in North America This deployment will bring autonomous trucks into one of the world’s largest food and beverage supply chains.'],
+  ['a page control run into a sentence', 'Read more PepsiCo will open a new distribution center in Dallas next year.'],
+  ['an ampersand menu run mid-text', 'Home News & Media Innovation & Tech PepsiCo will open a new distribution center in Dallas next year.'],
   ['PepsiCo page menu', 'Regulation Technology Labor Operations Equipment M&A An article from Dive Brief PepsiCo expanding autonomous truck use in its supply chain The multiyear deal with Gatik will help the food and beverage giant increase capacity.'],
 ];
 

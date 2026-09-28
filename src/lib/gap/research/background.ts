@@ -289,7 +289,7 @@ export async function runBackgroundResearch(
           focus: signals.length ? signalFocus(signals) : t.triggerTitle ? `Recent news to check: "${t.triggerTitle}".` : undefined,
           context: { purpose: BACKGROUND_PURPOSE, backgroundRunTag: runTag, targetReason: t.reason, triggerTitle: t.triggerTitle, peopleBlocked: t.peopleBlocked },
         },
-        signals.length ? { ...deps, extra: () => signalCandidates(signals, { fetchHtml: deps.fetchHtml }) } : deps,
+        signals.length ? { ...deps, extra: () => signalCandidates(signals, { fetchHtml: deps.fetchHtml, accountName: t.accountName }) } : deps,
       );
       if (signals.length) await settleSignals(prisma, { signals, accountName: t.accountName, result: r, now: opts.now });
       result.researched.push({
