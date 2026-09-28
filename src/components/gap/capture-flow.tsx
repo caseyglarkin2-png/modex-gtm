@@ -344,6 +344,7 @@ export function CaptureFlow({ initial = null }: { initial?: CaptureView | null }
   useEffect(() => {
     try {
       if (text) window.localStorage.setItem(NOTE_DRAFT_KEY, text);
+      else window.localStorage.removeItem(NOTE_DRAFT_KEY);
     } catch {
       // ignore
     }

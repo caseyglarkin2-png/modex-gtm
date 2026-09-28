@@ -80,8 +80,16 @@ describe('an unrecorded send or a live enrollment holds the account', () => {
   });
 
   it('a live enrollment queued in the lookback is a first touch', async () => {
-    const t = await loadAccountFirstTouches(prismaWith({ enrollments: [{ account_name: ACCOUNT, persona_id: 1, created_at: new Date('2026-09-26T12:00:00Z') }] }), [ACCOUNT], NOW);
-    expect(t.get(ACCOUNT)).toEqual([{ personaId: 1, recipient: '', sentAt: '2026-09-26T12:00:00.000Z', released: false }]);
+    const p = prismaWith({ enrollments: [{ account_name: ACCOUNT, persona_id: 1, to_email: 'VP@pepsico.com', created_at: new Date('2026-09-26T12:00:00Z') }] });
+    const t = await loadAccountFirstTouches(p, [ACCOUNT], NOW);
+    expect(t.get(ACCOUNT)).toEqual([{ personaId: 1, recipient: 'vp@pepsico.com', sentAt: '2026-09-26T12:00:00.000Z', released: false }]);
+    expect(p.sequenceEnrollment.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ is_test: false, legacy: false }) }));
+  });
+
+  it('an unresolved claim is attributed from its own row, not only its key', async () => {
+    const legacy = { id: 'cl-old', kind: DIRECT_CLAIMED, subject_id: 'dec-a', payload: { idempotencyKey: 'gmail_direct:dec-a:v1:0:abc', claimedAt: '2026-09-27T12:00:00.000Z', personaId: 1, recipient: 'VP@pepsico.com', stepIndex: 0 }, created_at: new Date('2026-09-27T12:00:00Z') };
+    const t = await loadAccountFirstTouches(prismaWith({ ledger: [legacy] }), [ACCOUNT], NOW);
+    expect(t.get(ACCOUNT)).toEqual([{ personaId: 1, recipient: 'vp@pepsico.com', sentAt: '2026-09-27T12:00:00.000Z', released: false, outstanding: true }]);
   });
 });
 

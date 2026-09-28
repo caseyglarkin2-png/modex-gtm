@@ -152,18 +152,27 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   // Final review P1 (reliability lens): a first touch whose outcome is not recorded (Gmail may have sent it,
   // or a draft may exist) holds the account exactly like an outstanding draft, until it is reconciled.
   const unresolved = historyFromRows(rows as never, null, '', [...accountOf.keys()]).unresolvedClaims.filter((c) => c.stepIndex === null || c.stepIndex === 0);
+  const claimRow = new Map(rows.map((r) => [String((r as { id?: string }).id ?? ''), r]));
   for (const c of unresolved) {
-    const m = /^gmail_direct:person:([^:]+):(.+):step:\d+/.exec(c.idempotencyKey);
     const account = accountOf.get(c.decisionId);
     if (!account) continue;
-    const pid = m ? Number(m[1]) : NaN;
-    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient: (m?.[2] ?? '').toLowerCase(), sentAt: c.claimedAt, released: false, outstanding: true });
+    // The claim row names its person; the key is only the fallback (older keys carry no person).
+    const payload = claimRow.get(c.eventId)?.payload ?? {};
+    const m = /^gmail_direct:person:([^:]+):(.+):step:\d+/.exec(c.idempotencyKey);
+    const pid = Number(payload.personaId ?? (m ? m[1] : NaN));
+    const recipient = String(payload.recipient ?? m?.[2] ?? '').toLowerCase();
+    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient, sentAt: c.claimedAt, released: false, outstanding: true });
   }
   // A live GAP enrollment (the modex queue or a HubSpot sequence row) queued this person's first touch.
-  const enrollments: Array<{ account_name: string; persona_id: number | null; created_at: Date }> = prisma.sequenceEnrollment?.findMany
-    ? await prisma.sequenceEnrollment.findMany({ where: { account_name: { in: [...accountNames] }, created_at: { gte: new Date(since) } }, select: { account_name: true, persona_id: true, created_at: true } })
+  const enrollments: unknown[] = prisma.sequenceEnrollment?.findMany
+    ? await prisma.sequenceEnrollment.findMany({
+        where: { account_name: { in: [...accountNames] }, created_at: { gte: new Date(since) }, is_test: false, legacy: false },
+        select: { account_name: true, persona_id: true, to_email: true, created_at: true },
+      })
     : [];
-  for (const e of enrollments) touches.push({ account: e.account_name, personaId: e.persona_id ?? null, recipient: '', sentAt: new Date(e.created_at).toISOString(), released: false });
+  for (const e of enrollments as Array<{ account_name: string; persona_id: number | null; to_email?: string | null; created_at: Date }>) {
+    touches.push({ account: e.account_name, personaId: e.persona_id ?? null, recipient: String(e.to_email ?? '').toLowerCase(), sentAt: new Date(e.created_at).toISOString(), released: false });
+  }
   for (const [draftId, d] of drafted) {
     const sentAt = sentOf.get(draftId);
     // Review C P1: a draft proven sent is dated by its real Gmail send; one still outstanding holds

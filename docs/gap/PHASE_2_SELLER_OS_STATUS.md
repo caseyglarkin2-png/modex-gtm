@@ -466,6 +466,14 @@ mutation proven RED then restored:
 | 7 | UX | Phone capture froze on "Saving..." with no connection and a reload lost the note | Every capture call catches a network failure, says "no connection", re-enables; the unsaved note is kept on the phone and restored |
 | 8 | UX | "Do this next" landed at the top of the lane, not on the opened card | The lane scrolls to the opened card once its cards have loaded |
 
+A fresh read-only review of the fix branch found no P0/P1. Three of its P2s
+were fixed before merge:
+- an unresolved claim is attributed from its own row, not only its key;
+- enrollments exclude test and legacy rows and carry their address;
+- clearing the capture text clears the kept note.
+
+The rest are recorded below.
+
 Validation on the fix branch: GAP suite 187 files / 3468 tests, full suite
 504 files / 5560 tests, typecheck, build, scratch E2E integrated 14, sprint2
 10, sprint3 16, sprint4 14, phase2 23, all PASS.
@@ -527,3 +535,19 @@ Validation on the fix branch: GAP suite 187 files / 3468 tests, full suite
     - tap targets are under 44px;
     - iOS zooms small inputs;
     - suggested angles say "yard".
+- Final fix review P2/P3 (recorded):
+  - An unresolved claim holds the account until it is reconciled (no
+    expiry). A human reconciles; the mailbox cron repairs unknown sends.
+  - `detectConflicts` flags every fact at a contradicted site, and its site
+    regex is coarse, so a neutral fact there is also refused until one side
+    is ignored.
+  - The meeting "who said it" guard is satisfied by the pre-filled main
+    attendee.
+  - A persona filed under the account with an outside domain widens the
+    reply hold.
+  - The kept capture note is one key per device.
+  - An `in_conversation` account holds the answering buyer's own email card
+    in the cockpit (the send gate allows it).
+  - Live enroll's motion check is not under the account lock (auto-enroll is
+    OFF).
+  - The cockpit reply-hold read is one query per account.
