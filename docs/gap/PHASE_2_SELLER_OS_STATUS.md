@@ -50,6 +50,49 @@ release, merged and production-verified before the next starts.
   defaulted); the notice says verified or exactly why not.
 - Operator knowledge is unchanged: first-party, never quotable.
 
+### A2. Send-time attribution + read-only deal observation
+- `execution/send-attribution.ts captureSendAttribution`: stamped INTO every
+  Gmail-proven send ledger row (DIRECT_SENT, DRAFTED, DRAFT_SENT, MANUAL_SENT,
+  unknown-send reconcile): primary outreach fact id, signal type / source kind /
+  source type, opener approach (`verified_fact_observation` for step 0,
+  `follow_up:<purpose>` after), persona title / seniority / role in deal /
+  persona key, account name / tier / HubSpot company / canonical company (only
+  a `resolved` link), problem family. Version and evidence tier were already
+  on the rows. Never throws, never blocks a send; failures and all older rows
+  read `unrecorded` (`sendAttributionOf`). No backfill. Learning UI unchanged.
+- `learning/deal-observation.ts`: read only. First Gmail-proven GAP send per
+  account, then HubSpot deals (createdate) on the SAME company identity the
+  opportunity resolver uses (`resolveCompanyIdentity`, extracted, behavior
+  unchanged). 60 / 120 day windows reported open until elapsed; unreadable is
+  `unknown`, never "no deal"; deals created before the first touch are context.
+  Script: `scripts/gap/deal-observation.ts`. No HubSpot writes, no causality.
+
+### A3. Health strip
+- `health/health.ts evaluateHealth` (pure) over five dependencies: mailbox
+  intake (cron `gap-mailbox` state), HubSpot reads (bounded ping), suppression
+  authority (bounded contract read of a reserved probe address), GAP sender
+  config, last completed routing run. Overall = worst; never green because
+  another dependency works. `GET /api/gap/health` (session, no-store) and
+  `<HealthStrip>` at the top of /gap, loaded after the page, details under a
+  disclosure, "could not be checked" when it cannot load.
+- Thresholds: mailbox healthy <=30m, degraded <=3h, blocked after; HubSpot
+  degraded >5s, blocked on error; routing degraded >24h (click-time gates keep
+  stale cards safe, so old routing is never "blocked").
+
+### A4. Identity status audit
+- Opportunity identity deliberately reads EVERY canonical link status
+  (PepsiCo and Dannon are `conflict` in production): a conflicting domain can
+  only add companies to the open-deal check. Identity resolution and send
+  attribution use only `resolved`. Kept the union, documented it in
+  `loadOpportunityIdentity`, pinned it (tests/unit/gap/identity-status.test.ts).
+  No identity layer.
+
+### Release A validation
+- Mutations proven RED then restored: unverified manual fact stored as
+  verified; verifier skips the verbatim check; attribution dropped from a
+  direct send; health overall ignores a blocked dependency; opportunity
+  identity filtered to resolved links.
+
 ## Debt recorded (not fixed in this program unless it blocks)
 
 (none yet)

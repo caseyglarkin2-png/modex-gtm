@@ -324,6 +324,14 @@ export async function loadOpportunityIdentity(
     select: { email: true, hubspot_contact_id: true },
   });
   const domains = new Set<string>();
+  // Phase 2 A4 (identity status audit, 2026-09-28): deliberately EVERY link
+  // status, including `conflict`. The identity resolver (identity/service.ts)
+  // matches only `resolved` links, because it answers "which account is this
+  // company"; this answers "could this account have an open deal", where a
+  // conflicting domain may only ADD companies to check. Filtering to resolved
+  // here would drop PepsiCo's and Dannon's domains (both `conflict` in
+  // production) and weaken active-opportunity protection. Pinned by
+  // tests/unit/gap/identity-status.test.ts.
   for (const l of links) {
     const id = String(l.canonical_company_id ?? '');
     if (id.startsWith('domain:')) {
