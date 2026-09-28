@@ -455,4 +455,36 @@ stricter; nothing about a real change was lost):
   Georgia-Pacific's 400,000 sq ft warehouse, H-E-B's refrigerated facility, the
   Frito-Lay plant closure, KDP's Allentown facility sale, Kroger's pinned
   facility closures.
+- Second pass over the surviving sample (`fix/gap-signal-fact-quality-2`):
+  accounting lines that slipped the first list (Tyson "pretax charges",
+  Constellation "capitalization of interest", Lineage "same warehouse
+  population", Newell "restructuring-related costs", PFG "net proceeds ...
+  escrow ... Notes due 2032") are refused too.
+
+## Quality judgment (small N, the lead's reading of the production sample)
+
+- Signals (35 sources, 29 events after clustering): RELEVANT 23 (all 7
+  Casey-shared links except one old story, and 16 discovered: Amazon's Port
+  St. Lucie closure, Crown Point warehouse and Greenwood robotics plant;
+  Coca-Cola's Idaho Falls DC and the Teamsters strike; Georgia-Pacific's
+  autonomous drones; UNFI's consolidation; PepsiCo's Cheverly layoffs;
+  Kenco's orchestration lab), MAYBE 11 (non-US sites: CEVA Spain, Honda India;
+  a franchise bottler's expansion credited to Coca-Cola; FedEx real-estate
+  stories; Boeing and Diageo strikes; Amazon ending a delivery partner; the
+  Casey-shared Food Dive General Mills Michigan DC link, which is an old
+  story), IRRELEVANT 1 (a Coca-Cola runoff lawsuit).
+- Verified facts, first-pass sample of 31 (one per account): GOOD/SAYABLE 6
+  (General Mills network redesign, H-E-B refrigerated facility, KDP Allentown
+  sale, FedEx Memphis hub expansion, Kraft Heinz facility construction, the
+  PepsiCo Gatik expansion on its own page), TRUE BUT NOT USEFUL 20 (filing
+  boilerplate, descriptions, past events, expired but genuine site changes:
+  Georgia-Pacific, Danone Minster, Frito-Lay, Hormel, Smucker), WRONG 5 (a
+  Mondelez filing sentence about Keurig Dr Pepper's deal; navigation
+  run-ons; a supplier's inventory read as an acquisition). The two quality
+  passes refuse the boilerplate, description, past-event and run-on classes
+  from now on and re-checked the stored facts: of 185 verified that day, 42
+  remain verified after the first pass and fewer after the second.
+- Recorded debt: an EDGAR sentence that describes ANOTHER company's deal
+  inside the account's own filing (the Mondelez / KDP case) still passes;
+  EDGAR sentences are not required to name the account (filings say "we").
 
