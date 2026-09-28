@@ -154,6 +154,7 @@ describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
       'gap-hubspot-replies',
       'gap-mailbox',
       'gap-background-research',
+      'gap-signal-process',
     ]);
     const names = KNOWN_CRONS.map((c) => c.name);
     expect(new Set(names).size, 'cron names are unique').toBe(names.length);

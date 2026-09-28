@@ -30,6 +30,7 @@ import { listAllCurrent } from '../routing/queue';
 import { RESEARCHABLE_RULES, sellerLaneOf } from '../routing/card-readiness';
 import { loadThesisGroups, splitThesisWork } from '../hypothesis/thesis-groups';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from './run';
+import { settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -49,8 +50,15 @@ export const EXPIRY_HORIZON_MS = 21 * 86_400_000;
 /** Stop starting new accounts after this much of the 300s function budget (one slow account can still run ~150s: EDGAR fetches time out at 15s each). */
 export const BACKGROUND_TIME_BUDGET_MS = 120_000;
 
-export type TargetReason = 'research_work' | 'fresh_trigger' | 'expiring_evidence';
-const REASON_RANK: Record<TargetReason, number> = { research_work: 1, fresh_trigger: 2, expiring_evidence: 3 };
+/**
+ * Signal Intelligence B: research priority is (1) research work blocking people, (2) a signal Casey SHARED
+ * (he said "follow this up"; it does not make it true), (3) a strong fresh discovered signal or Pounce trigger,
+ * (4) evidence nearing expiry.
+ */
+export type TargetReason = 'research_work' | 'shared_signal' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence';
+const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4 };
+/** A queued signal whose research failed this many times is settled no_usable_fact (with the reason). */
+export const SIGNAL_RESEARCH_MAX_ATTEMPTS = 3;
 
 export interface BackgroundTarget {
   accountName: string;
@@ -62,6 +70,8 @@ export interface BackgroundTarget {
   tier: string | null;
   oldestWorkAt: string | null;
   problemFamily: string | null;
+  /** Signals (GapSignal ids) this research follows up. */
+  signalIds?: string[];
 }
 
 export function tierRank(tier: string | null | undefined): number {
@@ -100,6 +110,7 @@ function merge(map: Map<string, BackgroundTarget>, t: BackgroundTarget) {
     expiresAt: earlier(cur.expiresAt, t.expiresAt),
     oldestWorkAt: earlier(cur.oldestWorkAt, t.oldestWorkAt),
     problemFamily: cur.problemFamily ?? t.problemFamily,
+    signalIds: [...new Set([...(cur.signalIds ?? []), ...(t.signalIds ?? [])])],
   });
 }
 
@@ -142,6 +153,24 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
     merge(byAccount, { ...base(account.name, 'fresh_trigger'), triggerAt: new Date(t.published_at ?? t.first_seen_at).toISOString(), triggerTitle: t.title });
   }
 
+  // 2b. Signals queued for research (Casey-shared first; strong discovered ones). Resolved + a link only.
+  const queued: Array<{ id: string; account_name: string; origin: string; title: string | null; created_at: Date; published_at: Date | null }> = prisma.gapSignal?.findMany
+    ? await prisma.gapSignal.findMany({
+        where: { research_status: 'queued', resolution: 'resolved', account_name: { not: null }, url: { not: null } },
+        select: { id: true, account_name: true, origin: true, title: true, created_at: true, published_at: true },
+        orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
+        take: 300,
+      })
+    : [];
+  for (const q of queued) {
+    merge(byAccount, {
+      ...base(q.account_name, q.origin === 'casey_share' || q.origin === 'conference_note' ? 'shared_signal' : 'discovered_signal'),
+      triggerAt: new Date(q.published_at ?? q.created_at).toISOString(),
+      triggerTitle: q.title,
+      signalIds: [q.id],
+    });
+  }
+
   // 3. Outreach facts on approved / in-use hypotheses nearing expiry.
   const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: { freshness_expires_at: Date | null } | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { status: { in: ['approved', 'active'] } },
@@ -178,7 +207,7 @@ async function lastResearchAt(prisma: PrismaLike, accountName: string): Promise<
 export async function runBackgroundResearch(
   prisma: PrismaLike,
   opts: { now: Date; cap?: number; clock?: () => number; timeBudgetMs?: number },
-  deps: ResearchDeps & SelectDeps & { research?: typeof runEvidenceResearch } = {},
+  deps: ResearchDeps & SelectDeps & { research?: typeof runEvidenceResearch; fetchHtml?: import('../signals/intake').FetchHtml } = {},
 ): Promise<BackgroundRunResult> {
   const cap = Math.max(1, Math.min(BACKGROUND_MAX_CAP, Math.floor(opts.cap ?? BACKGROUND_DEFAULT_CAP)));
   const clock = opts.clock ?? Date.now;
@@ -200,10 +229,16 @@ export async function runBackgroundResearch(
     }
     const last = await lastResearchAt(prisma, t.accountName);
     const newerTrigger = t.triggerAt && last && new Date(t.triggerAt) > last;
-    if (last && opts.now.getTime() - last.getTime() < BACKGROUND_COOLDOWN_MS && !newerTrigger) {
+    // A queued signal is a specific story to follow up: the account cooldown does not hold it back.
+    const followUp = (t.signalIds ?? []).length > 0;
+    if (last && opts.now.getTime() - last.getTime() < BACKGROUND_COOLDOWN_MS && !newerTrigger && !followUp) {
       result.skipped.push({ accountName: t.accountName, reason: `researched_recently:${last.toISOString()}` });
       continue;
     }
+    const signals: ResearchableSignal[] = followUp
+      ? await prisma.gapSignal.findMany({ where: { id: { in: t.signalIds }, research_status: 'queued' }, select: { id: true, url: true, title: true, published_at: true, source_class: true, resolution_basis: true, event_id: true, metadata: true } })
+      : [];
+    if (signals.length) await prisma.gapSignal.updateMany({ where: { id: { in: signals.map((x) => x.id) } }, data: { research_status: 'researching' } });
     try {
       const r = await research(
         prisma,
@@ -215,11 +250,12 @@ export async function runBackgroundResearch(
           decisionId: null,
           actor: BACKGROUND_ACTOR,
           now: opts.now,
-          focus: t.triggerTitle ? `Recent news to check: "${t.triggerTitle}".` : undefined,
+          focus: signals.length ? signalFocus(signals) : t.triggerTitle ? `Recent news to check: "${t.triggerTitle}".` : undefined,
           context: { purpose: BACKGROUND_PURPOSE, backgroundRunTag: runTag, targetReason: t.reason, triggerTitle: t.triggerTitle, peopleBlocked: t.peopleBlocked },
         },
-        deps,
+        signals.length ? { ...deps, extra: () => signalCandidates(signals, { fetchHtml: deps.fetchHtml }) } : deps,
       );
+      if (signals.length) await settleSignals(prisma, { signals, accountName: t.accountName, result: r, now: opts.now });
       result.researched.push({
         accountName: t.accountName,
         reason: t.reason,
@@ -231,7 +267,16 @@ export async function runBackgroundResearch(
         conflicts: r.conflicts.length,
       });
     } catch (e) {
-      result.failed.push({ accountName: t.accountName, error: (e instanceof Error ? e.message : String(e)).slice(0, 200) });
+      const error = (e instanceof Error ? e.message : String(e)).slice(0, 200);
+      result.failed.push({ accountName: t.accountName, error });
+      // A signal never sticks in "researching": back to the queue, or settled no_usable_fact after repeated failures.
+      for (const sg of signals) {
+        const meta = ((sg as { metadata?: Record<string, unknown> | null }).metadata ?? {}) as Record<string, unknown>;
+        const attempts = Number(meta.researchAttempts ?? 0) + 1;
+        await prisma.gapSignal
+          .update({ where: { id: sg.id }, data: { research_status: attempts >= SIGNAL_RESEARCH_MAX_ATTEMPTS ? 'no_usable_fact' : 'queued', metadata: { ...meta, researchAttempts: attempts, researchError: error } } })
+          .catch(() => undefined);
+      }
     }
   }
 

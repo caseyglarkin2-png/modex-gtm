@@ -46,7 +46,8 @@ function normalizeUrl(url: string): string {
   return url.replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
 }
 
-function hashUrl(url: string): string {
+/** Exported for Signal Intelligence promotion (find the trigger a promoted signal became). */
+export function hashUrl(url: string): string {
   return createHash('sha256').update(normalizeUrl(url)).digest('hex');
 }
 

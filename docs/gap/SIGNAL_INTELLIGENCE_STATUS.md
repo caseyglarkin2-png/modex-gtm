@@ -91,7 +91,7 @@ event. Nothing else is added.
 | Release | Scope | Branch | PR | Merge | Production |
 |---|---|---|---|---|---|
 | A | Signal intake + Share to GAP | feat/gap-signal-a-intake | #287 | 8a9cc4c7 | READY; 6 real shares through the prod UI at 390px, 0.9-1.5s each, no horizontal scroll |
-| B | Resolution, clustering, promotion, signal research | | | | |
+| B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | | | |
 | C | Account watches + scheduled discovery | | | | |
 | D | Research aperture | | | | |
 | E | Inbox polish, dogfood, coverage, quality | | | | |
@@ -170,4 +170,45 @@ The dogfood found two defects, fixed on `fix/gap-signal-a-ipv6-newsroom`:
   on a host named for exactly one of the named accounts resolves to that
   publisher (`company_newsroom`). Off the newsroom, two named companies stay
   ambiguous.
+
+## Release B: resolution, clustering, promotion, signal research
+
+- RESOLVING (`signals/process.ts`, cron `gap-signal-process` every 30 min):
+  a link whose page could not be read at capture is retried up to 3 times;
+  the title it yields can resolve the account (and queue a shared link).
+- CLUSTERING (`signals/cluster.ts`): same resolved account, within 4 days,
+  and the same URL slug (>= 0.8 overlap) or the same story words (title
+  overlap >= 0.5, account name removed). Different events at one account stay
+  apart; never across accounts. Every source keeps its row (`event_id`).
+- SIGNAL -> RESEARCH (`signals/research.ts`, `research/background.ts`):
+  a queued signal is a `shared_signal` (Casey) or `discovered_signal` target.
+  Priority: research blocking people, then Casey-shared, then fresh
+  discovered / Pounce trigger, then expiring evidence. A queued signal is
+  followed up despite the account cooldown. Research gets the signal's OWN
+  page (fetched SSRF-safe, dated by the page) as an extra candidate source;
+  every candidate passes the SAME `verifyCandidate` contract. The web search
+  is told to find the story's primary source.
+- HONEST SETTLING: a signal is FACT READY only when a verified fact came from
+  its own page or shares 3+ of its story's specific words; a contradiction
+  among those facts is CONTRADICTION; otherwise NOTHING USABLE (other verified
+  facts about the account are counted, not credited). A failed run returns
+  the signal to the queue; after 3 failures it settles with the reason.
+- PROMOTION (`signals/promote.ts`): only a resolved signal whose story was
+  VERIFIED enters the canonical `ingestTriggers` path (source `web`, the
+  deterministic Pounce score and categories, the publication date). The spine
+  decides Slack/HubSpot (score >= 8) and dedupe. A raw, ambiguous, ignored or
+  conference signal never reaches it.
+
+### Release B validation
+- Unit `signal-resolve-research` 16. Mutations RED then restored: promote
+  unverified, promote unresolved, unrelated fact marks fact ready,
+  contradiction ignored, cross-account cluster, different events cluster,
+  shared signal ranked below triggers, signal stuck researching, no signal
+  candidates, new rows never clustered.
+- Scratch E2E S5-S7: REAL background research verified the sentence on the
+  signal's own page (stored as a verified fact, signal FACT READY, no
+  hypothesis or link touched); only the verified signal was promoted; two
+  outlets carrying one story became one event with both sources kept.
+- The E2E found a real defect before merge: a Prisma JSON-path NOT filter
+  drops rows where the key is absent, so new sources were never clustered.
 
