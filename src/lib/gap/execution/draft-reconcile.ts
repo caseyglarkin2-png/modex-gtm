@@ -22,6 +22,7 @@
  * Casey's own statement, and the sent row is the evidence beside it.
  */
 
+import { captureSendAttribution } from './send-attribution';
 import {
   getGmailDraftState as defaultGetDraftState,
   getGmailThreadMessages as defaultGetThread,
@@ -148,6 +149,14 @@ export async function reconcileDraft(
       gmailThreadId: record.drafted.gmailThreadId,
       sentAt: obs.sentAt.toISOString(),
       reconciledAt: input.now.toISOString(),
+      attribution: await captureSendAttribution(prisma, {
+        hypothesisId: record.drafted.hypothesisId ?? null,
+        personaId: record.drafted.personaId ?? null,
+        accountName: record.drafted.accountName,
+        stepIndex: record.drafted.stepIndex ?? 0,
+        sequenceVersionId: record.drafted.sequenceVersionId ?? null,
+        at: obs.sentAt,
+      }),
     };
     await appendLedger(prisma, DRAFT_SENT, input.actor, input.decisionId, sent as unknown as Record<string, unknown>);
     return { ok: true, gmailDraftId: input.gmailDraftId, fate: 'sent', changed: true, sent };

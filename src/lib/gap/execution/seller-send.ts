@@ -31,6 +31,7 @@
  * row (the mailbox daily cap counts it), and human_action = emailed through
  * the existing recordHumanAction contract, because Casey pressed the button.
  */
+import { captureSendAttribution } from './send-attribution';
 import type { HumanConfirmation } from '@/lib/email/autonomy-gate';
 import { recordHumanAction } from '../routing/queue';
 import type { ExecutionIntent, ExecutionReceipt } from './contract';
@@ -252,6 +253,8 @@ export async function sendSellerEmail(
     crmLogMethod: crmLogMethodFor(p.hubspotContactId),
     crmLogStatus: crmLogMethodFor(p.hubspotContactId) === 'none' ? 'none' : 'expected',
     hubspotContactId: p.hubspotContactId,
+    // Phase 2 A2: immutable send-time attribution (never blocks: a failed read is `unrecorded`).
+    attribution: await captureSendAttribution(prisma, { hypothesisId: p.hypothesisId, personaId: p.personaId, accountName: p.accountName, stepIndex, sequenceVersionId: p.sequenceVersionId, at: new Date(sentAt) }),
   };
   let ledgerError: string | undefined;
   try {

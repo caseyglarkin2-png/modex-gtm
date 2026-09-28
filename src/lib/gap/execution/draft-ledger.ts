@@ -22,6 +22,8 @@
  * human action.
  */
 
+import type { SendAttributionField } from './send-attribution';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
@@ -67,6 +69,8 @@ export interface ManualSentPayload {
   sentAt: string;
   matchedOn: string[];
   recordedAt: string;
+  /** Phase 2 A2: immutable send-time attribution. Absent on older rows (read as unrecorded). */
+  attribution?: SendAttributionField;
 }
 
 /**
@@ -156,6 +160,8 @@ export interface DirectSentPayload {
   /** 'expected' = the proven mechanism applies but this activity was not read back; 'none' = not logged. */
   crmLogStatus: 'expected' | 'none';
   hubspotContactId: string | null;
+  /** Phase 2 A2: immutable send-time attribution. Absent on older rows (read as unrecorded). */
+  attribution?: SendAttributionField;
 }
 
 /**
@@ -194,6 +200,8 @@ export interface DraftedPayload {
   gmailDraftMessageId: string | null;
   gmailThreadId: string | null;
   createdAt: string;
+  /** Phase 2 A2: attribution at draft time; the DRAFT_SENT fate carries its own, taken when the send is proven. */
+  attribution?: SendAttributionField;
 }
 
 export interface DraftSentPayload {
@@ -206,6 +214,8 @@ export interface DraftSentPayload {
   gmailThreadId: string | null;
   sentAt: string;
   reconciledAt: string;
+  /** Phase 2 A2: immutable send-time attribution, captured when the draft's send was proven. Absent on older rows. */
+  attribution?: SendAttributionField;
 }
 
 export interface DraftDiscardedPayload {

@@ -28,6 +28,7 @@
  * `human_action`.
  */
 
+import { captureSendAttribution } from './send-attribution';
 import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { sendableEvidence } from '../research/evidence-gate';
 import { seedCopyOutdated } from '../sequences/seed-drift';
@@ -647,6 +648,7 @@ export async function createSellerGmailDraft(
     gmailDraftMessageId: receipt.draftMessageId ?? null,
     gmailThreadId: receipt.threadId ?? null,
     createdAt: now.toISOString(),
+    attribution: await captureSendAttribution(prisma, { hypothesisId: p.hypothesisId, personaId: p.personaId, accountName: p.accountName, stepIndex, sequenceVersionId: p.sequenceVersionId, at: now }),
   };
   try {
     await appendLedger(prisma, DRAFTED, actor, decisionId, payload as unknown as Record<string, unknown>);

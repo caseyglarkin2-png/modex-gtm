@@ -1,7 +1,7 @@
 /** A tiny in-memory HubSpot for the active-opportunity resolver (src/lib/gap/opportunity). */
 import type { OpportunityReads } from '@/lib/gap/opportunity/active-opportunity';
 
-type Deal = { id: string; closed: string | undefined; name?: string; stage?: string; contacts?: string[] };
+type Deal = { id: string; closed: string | undefined; name?: string; stage?: string; contacts?: string[]; created?: string };
 
 /** A tiny in-memory HubSpot: companies by domain, company->deals, contact->deals, deals. */
 export function fakeHubSpot(world: {
@@ -53,7 +53,7 @@ export function fakeHubSpot(world: {
       if (world.fail?.deals) throw world.fail.deals;
       return ids.filter((id) => deals.has(id)).map((id) => {
         const d = deals.get(id)!;
-        return { id, properties: { dealname: d.name ?? null, dealstage: d.stage ?? 'appointmentscheduled', pipeline: 'default', hs_is_closed: d.closed } };
+        return { id, properties: { dealname: d.name ?? null, dealstage: d.stage ?? 'appointmentscheduled', pipeline: 'default', hs_is_closed: d.closed, createdate: d.created } };
       });
     },
   };
