@@ -177,3 +177,14 @@ describe('production dogfood findings (2026-09-28)', () => {
     expect(gm.ready[0].chain.source.label).toBe('search redirect link');
   });
 });
+
+describe('account summary copy', () => {
+  it('one thesis needs evidence; two theses need evidence', async () => {
+    const [pep] = (await loadEvidenceInbox(inboxDb([pepPrimary]), NOW)).filter((a) => a.accountName === 'PepsiCo');
+    const { unmount } = render(<EvidenceAccount a={pep} now={NOW} thesesNeedingEvidence={1} />);
+    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('1 thesis needs evidence');
+    unmount();
+    render(<EvidenceAccount a={pep} now={NOW} thesesNeedingEvidence={2} />);
+    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('2 theses need evidence');
+  });
+});

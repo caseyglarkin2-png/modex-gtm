@@ -123,7 +123,7 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
         <p data-testid="evidence-account-summary" className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
           {[
             plural(a.ready.length, 'verified fact') + ' ready',
-            thesesNeedingEvidence ? `${plural(thesesNeedingEvidence, 'thesis', 'theses')} need evidence` : null,
+            thesesNeedingEvidence ? `${plural(thesesNeedingEvidence, 'thesis', 'theses')} ${thesesNeedingEvidence === 1 ? 'needs' : 'need'} evidence` : null,
             a.contradictions.length ? plural(a.contradictions.length, 'contradiction') : null,
             a.rejected.length ? plural(a.rejected.length, 'rejected source') : null,
           ]
