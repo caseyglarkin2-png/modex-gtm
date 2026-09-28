@@ -1,6 +1,6 @@
 # GAP Signal Intelligence (status ledger)
 
-STATUS: ACTIVE
+STATUS: SHIPPED 2026-09-28 (Releases A-E, final review and two quality passes merged; production-verified)
 
 <!-- verified:2026-09-28 -->
 
@@ -94,7 +94,7 @@ event. Nothing else is added.
 | B | Resolution, clustering, promotion, signal research | feat/gap-signal-b-resolve-research | #289 | 5b936236 | READY (processing cron first tick pending at merge) |
 | C | Account watches + scheduled discovery | feat/gap-signal-c-discovery | #290 | 526d50d8 | READY; 3 production discovery batches asked all 74 watched accounts |
 | D | Research aperture (shipped with C) | feat/gap-signal-c-discovery | #290 | 526d50d8 | READY; production research batches covered ~70 distinct accounts |
-| E | Final review fixes, dogfood, coverage, quality | fix/gap-signal-final-review, fix/gap-signal-fact-quality | #291 | e73d8bc4 | READY; processing pass promoted nothing old; research held by the cooldown (universe covered) |
+| E | Final review fixes, dogfood, coverage, quality | fix/gap-signal-final-review, fix/gap-signal-fact-quality(-2) | #291, #292, #293 | e73d8bc4, 3c788d5b, ce88f417 | READY; processing pass promoted nothing old; research held by the cooldown (universe covered) |
 
 ## Release A: signal intake + Share to GAP
 
@@ -487,4 +487,14 @@ stricter; nothing about a real change was lost):
 - Recorded debt: an EDGAR sentence that describes ANOTHER company's deal
   inside the account's own filing (the Mondelez / KDP case) still passes;
   EDGAR sentences are not required to name the account (filings say "we").
+
+## AFTER (production, 2026-09-28 13:49 UTC; `docs/gap/signal-coverage-latest.md`)
+- 74 watched priority accounts: 74 researched this week (0 never researched,
+  was 70); 12 with a signal in 7 days (was 2); 7 with a live verified fact
+  (was 4) after the stricter rules re-checked everything.
+- 35 signal sources, 29 events (6 duplicates clustered); 1,024 stories seen
+  across 74 discovery asks; 34 of 35 resolved to an account (1 needs Casey).
+- 37 verified facts on 18 accounts after both quality passes, 15 sayable now;
+  128 facts verified that day were refused on re-check (stamp moved, text kept).
+- Casey-shared turnaround (capture to research outcome): median 1.2 h (n=6).
 
