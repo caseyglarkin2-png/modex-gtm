@@ -30,7 +30,8 @@ export const DISCOVERY_QUERIES_PER_ACCOUNT = 2;
 /** Stories older than this are not signals of anything happening now. */
 export const DISCOVERY_MAX_AGE_MS = 21 * 86_400_000;
 /** A discovered story this strong goes to research on its own (Casey-shared ones always do). */
-export const DISCOVERY_RESEARCH_SCORE = 8;
+// Name in the headline (+2) plus one operational category (4): every discovered outreach candidate is followed up.
+export const DISCOVERY_RESEARCH_SCORE = 6;
 export const DISCOVERY_TIME_BUDGET_MS = 200_000;
 
 
@@ -60,10 +61,10 @@ const SUFFIX = /\b(inc|incorporated|corp|corporation|co|company|llc|ltd|plc|hold
  * is distinctive (5+ letters, not an everyday word): "Hormel to close" for Hormel Foods.
  */
 function discoveryKeys(name: string): string[] {
+  // The FULL name only (final review P1: a leading word alone, "Hyundai", "Toyota", "WestRock", "Georgia",
+  // named other companies and places). A short form Casey uses is added as his alias.
   const n = norm(name).replace(SUFFIX, ' ').replace(/\s+/g, ' ').trim();
-  const first = n.split(' ')[0] ?? '';
-  const everyday = /^(general|united|american|national|first|global|home|best|great|new|north|south|east|west|the)$/;
-  return [...new Set([n, ...(n.includes(' ') && first.length >= 5 && !everyday.test(first) ? [first] : [])].filter((k) => k.length >= 2))];
+  return n.length >= 2 ? [n] : [];
 }
 
 /** Which key the headline opens with (and whether it was an alias), or null when the account is not the subject. */

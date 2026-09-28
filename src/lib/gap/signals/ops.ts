@@ -61,7 +61,7 @@ const RELEVANCE_WHY: Record<string, string> = {
 };
 
 export function toView(r: Row, clusterSize = 1): SignalView {
-  const st = signalStatus({ url: r.url ?? null, resolution: r.resolution, research_status: r.research_status, feedback: r.feedback ?? null });
+  const st = signalStatus({ url: r.url ?? null, resolution: r.resolution, research_status: r.research_status, feedback: r.feedback ?? null, origin: r.origin, relevance: r.relevance });
   const cats: string[] = Array.isArray(r.categories) ? r.categories : [];
   return {
     id: r.id,
@@ -93,21 +93,21 @@ export function toView(r: Row, clusterSize = 1): SignalView {
 /** Inbox order: Casey-shared first, then needs-you (account), contradictions, fresh resolved, the rest. One row per event. */
 export function inboxRank(v: SignalView): number {
   if (v.status === 'Ignored') return 9;
-  if (v.caseyShared) return 0;
-  if (v.status === 'Needs you') return 1;
+  if (v.status === 'Needs you') return v.caseyShared ? 0 : 1;
+  // A Casey share stays on top while GAP is still working on it; a settled one takes its normal place.
+  if (v.caseyShared && (v.status === 'Captured' || v.status === 'Researching' || v.status === 'Fact ready')) return 0;
   if (v.relevance === 'outreach_evidence_candidate' || v.relevance === 'risk' || v.relevance === 'leadership') return 2;
   return 3;
 }
 
 export async function listSignals(prisma: PrismaLike, opts: { limit?: number; mine?: string | null; includeIgnored?: boolean } = {}): Promise<SignalView[]> {
-  const rows: Row[] = await prisma.gapSignal.findMany({
-    where: {
-      ...(opts.includeIgnored ? {} : { OR: [{ feedback: null }, { feedback: { in: ['good_context', 'use'] } }], resolution: { not: 'rejected' } }),
-      ...(opts.mine ? { submitted_by: opts.mine } : {}),
-    },
-    orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
-    take: Math.min(opts.limit ?? 60, 300) * 3,
-  });
+  const visible = opts.includeIgnored ? {} : { OR: [{ feedback: null }, { feedback: { in: ['good_context', 'use'] } }], resolution: { not: 'rejected' } };
+  const [recent, waiting]: [Row[], Row[]] = await Promise.all([
+    prisma.gapSignal.findMany({ where: { ...visible, ...(opts.mine ? { submitted_by: opts.mine } : {}) }, orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: Math.min(opts.limit ?? 60, 300) * 3 }),
+    // Final review P1: a share that still needs Casey never falls out of the inbox window, however old.
+    prisma.gapSignal.findMany({ where: { ...visible, origin: { in: ['casey_share', 'conference_note'] }, resolution: { in: ['needs_account', 'ambiguous'] } }, orderBy: [{ created_at: 'desc' }], take: 100 }),
+  ]);
+  const rows: Row[] = [...new Map([...recent, ...waiting].map((r) => [r.id, r])).values()];
   // One row per event: the event's first source leads; the others are counted, never lost.
   const byEvent = new Map<string, Row[]>();
   for (const r of rows) {
@@ -149,13 +149,18 @@ export async function applySignalOp(prisma: PrismaLike, input: { id: string; act
       const acct: { name: string } | null = await prisma.account.findFirst({ where: { name: { equals: input.accountName.trim(), mode: 'insensitive' } }, select: { name: true } });
       if (!acct) return { ok: false, reason: 'account_not_found' };
       const cls = r.url ? classifySignal(r.title ?? '', acct.name) : null;
+      const changed = r.account_name !== acct.name;
+      // Final review P0: research, event and promotion state belong to the account they were done for. A new
+      // account starts over: its own research, its own event (re-clustered), never the old account's verified fact.
+      const reset = changed ? { research_run_id: null, event_id: r.id, metadata: { ...((r.metadata ?? {}) as Record<string, unknown>), clustered: false, research: null, promotedAt: null, reassignedFrom: r.account_name ?? null } } : {};
+      const followUp = r.url && r.origin === 'casey_share' && (changed || r.research_status === 'none');
       data = {
         account_name: acct.name,
         resolution: 'resolved',
         resolution_basis: 'human',
         ...(cls ? { relevance: cls.relevance, categories: cls.categories, score: cls.score } : {}),
-        // A link Casey shared is followed up once he names the account.
-        ...(r.url && r.research_status === 'none' && r.origin === 'casey_share' ? { research_status: 'queued' } : {}),
+        ...reset,
+        ...(changed ? { research_status: followUp ? 'queued' : 'none', promoted_trigger_id: null } : followUp ? { research_status: 'queued' } : {}),
         ...(r.feedback === 'wrong_account' ? { feedback: null, feedback_by: null, feedback_at: null } : {}),
       };
       break;
@@ -174,7 +179,7 @@ export async function applySignalOp(prisma: PrismaLike, input: { id: string; act
       // inbox) to name the right one; the label itself is kept in the audit row, not as a hiding feedback.
       data =
         input.value === 'wrong_account'
-          ? { account_name: null, resolution: 'needs_account', resolution_basis: null, candidates: undefined, research_status: r.research_status === 'queued' || r.research_status === 'researching' ? 'none' : r.research_status, feedback: null, feedback_by: null, feedback_at: null }
+          ? { account_name: null, resolution: 'needs_account', resolution_basis: null, candidates: undefined, research_status: 'none', research_run_id: null, event_id: r.id, promoted_trigger_id: null, metadata: { ...((r.metadata ?? {}) as Record<string, unknown>), clustered: false, research: null, promotedAt: null, reassignedFrom: r.account_name ?? null }, feedback: null, feedback_by: null, feedback_at: null }
           : { feedback: input.value, feedback_by: input.actor, feedback_at: input.now };
       break;
   }

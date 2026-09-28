@@ -14,11 +14,31 @@
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { hashUrl, ingestTriggers, type RawTrigger } from '@/lib/pounce/ingest';
 import { scoreTrigger } from '@/lib/pounce/score';
+import { storyTokens } from './research';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type PromoteRefusal = 'not_found' | 'not_resolved' | 'not_verified' | 'no_link' | 'already_promoted' | 'ignored';
+export type PromoteRefusal = 'not_found' | 'not_resolved' | 'not_verified' | 'no_link' | 'already_promoted' | 'ignored' | 'not_recent' | 'undated';
+
+/**
+ * Production dogfood fix (2026-09-28): a trigger is something happening NOW. A verified story published more than
+ * this long ago stays verified evidence but never enters the spine as a new trigger (it pinged Slack and stamped
+ * HubSpot heat for a June story in September).
+ */
+export const PROMOTE_MAX_AGE_MS = 21 * 86_400_000;
+/** A Pounce trigger already on the account for the same story (published within this window) is that story. */
+export const SAME_STORY_WINDOW_MS = 7 * 86_400_000;
+
+/** Two headlines about one account tell the same story when they share half their specific words (account name removed). */
+export function sameStory(a: string, b: string, accountName: string): boolean {
+  const ta = storyTokens(a, accountName);
+  const tb = storyTokens(b, accountName);
+  if (Math.min(ta.size, tb.size) < 2) return false;
+  let inter = 0;
+  for (const x of ta) if (tb.has(x)) inter += 1;
+  return inter / Math.min(ta.size, tb.size) >= 0.5;
+}
 
 export function accountSlugFor(accountName: string): string {
   const reg = getAllAccountMicrositeData().find((a) => a.accountName.toLowerCase() === accountName.toLowerCase());
@@ -28,8 +48,9 @@ export function accountSlugFor(accountName: string): string {
 export async function promoteSignal(
   prisma: PrismaLike,
   id: string,
-  deps: { ingest?: typeof ingestTriggers } = {},
+  deps: { ingest?: typeof ingestTriggers; now?: Date } = {},
 ): Promise<{ ok: true; triggerId: number | null; created: boolean } | { ok: false; reason: PromoteRefusal }> {
+  const now = deps.now ?? new Date();
   const s: Record<string, unknown> | null = await prisma.gapSignal.findUnique({ where: { id } });
   if (!s) return { ok: false, reason: 'not_found' };
   if (s.promoted_trigger_id) return { ok: false, reason: 'already_promoted' };
@@ -42,8 +63,22 @@ export async function promoteSignal(
     const sibling: { id: string } | null = await prisma.gapSignal.findFirst({ where: { event_id: s.event_id, id: { not: id }, promoted_trigger_id: { not: null } }, select: { id: true } });
     if (sibling) return { ok: false, reason: 'already_promoted' };
   }
+  if (!s.published_at) return { ok: false, reason: 'undated' };
+  const published = new Date(String(s.published_at));
+  if (now.getTime() - published.getTime() > PROMOTE_MAX_AGE_MS) return { ok: false, reason: 'not_recent' };
   const accountName = String(s.account_name);
   const title = String(s.title ?? s.url);
+  // The same story may already be a trigger (another outlet, another producer): link to it, never a second ping.
+  const nearby: Array<{ id: number; title: string; published_at: Date | null; first_seen_at: Date }> = await prisma.pounceTrigger.findMany({
+    where: { account_name: { equals: accountName, mode: 'insensitive' }, OR: [{ published_at: { gte: new Date(published.getTime() - SAME_STORY_WINDOW_MS), lte: new Date(published.getTime() + SAME_STORY_WINDOW_MS) } }, { published_at: null, first_seen_at: { gte: new Date(published.getTime() - SAME_STORY_WINDOW_MS) } }] },
+    select: { id: true, title: true, published_at: true, first_seen_at: true },
+    take: 50,
+  });
+  const same = nearby.find((t) => sameStory(t.title, title, accountName));
+  if (same) {
+    await prisma.gapSignal.update({ where: { id }, data: { promoted_trigger_id: same.id, metadata: { ...((s.metadata ?? {}) as Record<string, unknown>), promotedAt: now.toISOString(), promotion: { linkedToExisting: same.id } } } });
+    return { ok: true, triggerId: same.id, created: false };
+  }
   const { score, categories } = scoreTrigger(title, accountName);
   const raw: RawTrigger = {
     accountSlug: accountSlugFor(accountName),

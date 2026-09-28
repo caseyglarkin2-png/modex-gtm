@@ -171,7 +171,7 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
   // 2b. Signals queued for research (Casey-shared first; strong discovered ones). Resolved + a link only.
   const queued: Array<{ id: string; account_name: string; origin: string; title: string | null; created_at: Date; published_at: Date | null }> = prisma.gapSignal?.findMany
     ? await prisma.gapSignal.findMany({
-        where: { research_status: 'queued', resolution: 'resolved', account_name: { not: null }, url: { not: null } },
+        where: { research_status: 'queued', resolution: 'resolved', account_name: { not: null }, url: { not: null }, OR: [{ feedback: null }, { feedback: { in: ['use', 'good_context'] } }] },
         select: { id: true, account_name: true, origin: true, title: true, created_at: true, published_at: true },
         orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
         take: 300,
@@ -274,7 +274,7 @@ export async function runBackgroundResearch(
     const signals: ResearchableSignal[] = followUp
       ? await prisma.gapSignal.findMany({ where: { id: { in: t.signalIds }, research_status: 'queued' }, select: { id: true, url: true, title: true, published_at: true, source_class: true, resolution_basis: true, event_id: true, metadata: true } })
       : [];
-    if (signals.length) await prisma.gapSignal.updateMany({ where: { id: { in: signals.map((x) => x.id) } }, data: { research_status: 'researching' } });
+    if (signals.length) await prisma.gapSignal.updateMany({ where: { id: { in: signals.map((x) => x.id) }, research_status: 'queued', account_name: t.accountName }, data: { research_status: 'researching' } });
     try {
       const r = await research(
         prisma,

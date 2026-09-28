@@ -185,13 +185,15 @@ describe('review D P1: discovery can find short and everyday names, as the subje
     expect(headlineNames('Retailers target faster dock turns', { accountName: 'Target', aliases: [] })).toBe(false);
   });
 
-  it('a distinctive leading word counts ("Hormel to close" for Hormel Foods); an everyday one does not', () => {
-    expect(headlineNames('Hormel to close Iowa plant', { accountName: 'Hormel Foods', aliases: [] })).toBe(true);
+  it('a leading word alone never names the account (final review: Hyundai Mobis, WestRock, Georgia); Casey adds the short form as an alias', () => {
+    expect(headlineNames('Hormel to close Iowa plant', { accountName: 'Hormel Foods', aliases: [] })).toBe(false);
+    expect(headlineNames('Hormel to close Iowa plant', { accountName: 'Hormel Foods', aliases: ['Hormel'] })).toBe(true);
+    expect(headlineNames('Hyundai Mobis opens a plant', { accountName: 'Hyundai Motor America', aliases: [] })).toBe(false);
     expect(headlineNames('General consolidation hits freight', { accountName: 'General Mills', aliases: [] })).toBe(false);
   });
 
   it("Casey's own alias is trusted; an alias that is ANOTHER account's name is that account's story", async () => {
-    expect(headlineMatch('Hormel to buy a plant', { accountName: 'Hormel Foods', aliases: ['Hormel'] })).toEqual({ key: 'hormel', viaAlias: false });
+    expect(headlineMatch('Hormel to buy a plant', { accountName: 'Hormel Foods', aliases: ['Hormel'] })).toEqual({ key: 'hormel', viaAlias: true });
     expect(headlineMatch('PBNA opens Texas DC', { accountName: 'PepsiCo', aliases: ['PBNA'] })).toEqual({ key: 'pbna', viaAlias: true });
     const rows: Array<Record<string, unknown>> = [];
     const prisma = {
