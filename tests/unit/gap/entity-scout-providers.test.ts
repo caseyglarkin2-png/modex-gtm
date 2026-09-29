@@ -5,7 +5,7 @@
  * provider chain, and a failed pass is never stored as a verdict.
  */
 import { beforeEach, describe, expect, it } from 'vitest';
-import { _resetCooldowns, askGrounded, classifyProviderError, groundedOnly, urlsIn, type ProviderAnswer, type ScoutProvider } from '@/lib/gap/entity/providers';
+import { _resetCooldowns, askGrounded, classifyProviderError, groundedOnly, urlsIn, withModelFallback, type ProviderAnswer, type ScoutProvider } from '@/lib/gap/entity/providers';
 import { scoutCompany } from '@/lib/gap/entity/scout';
 import { scoutCandidate } from '@/lib/gap/entity/candidates';
 
@@ -116,6 +116,16 @@ describe('the provider chain', () => {
   it('the gateway search sources in provider_metadata are citations; its routing block is not', () => {
     expect(urlsIn({ perplexity: { citations: ['https://kenco.example/locations'], search_results: [{ url: 'https://kenco.example/fleet', title: 't' }] } })).toEqual(['https://kenco.example/locations', 'https://kenco.example/fleet']);
     expect(urlsIn('not a url')).toEqual([]);
+  });
+
+  it('the paid "new user" Gemini key: a model-gone 404 moves to the -latest alias; a quota error does not', async () => {
+    const tried: string[] = [];
+    const gone = new Error('[404 Not Found] This model models/gemini-2.5-flash is no longer available to new users.');
+    expect(await withModelFallback(['gemini-2.5-flash', 'gemini-flash-latest'], async (m) => { tried.push(m); if (m === 'gemini-2.5-flash') throw gone; return m; })).toBe('gemini-flash-latest');
+    expect(tried).toEqual(['gemini-2.5-flash', 'gemini-flash-latest']);
+    const calls: string[] = [];
+    await expect(withModelFallback(['gemini-2.5-flash', 'gemini-flash-latest'], async (m) => { calls.push(m); throw quota; })).rejects.toBe(quota);
+    expect(calls).toEqual(['gemini-2.5-flash']);
   });
 
   it('groundedOnly matches host and path, ignoring www, query, fragment and a trailing slash', () => {
