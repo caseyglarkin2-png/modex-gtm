@@ -84,7 +84,7 @@ export async function loadAccountInputs(
     prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null),
     prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed'] } },
-      select: { id: true, status: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
     }).catch(() => []),
@@ -93,6 +93,11 @@ export async function loadAccountInputs(
     prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true }, take: 30 }).catch(() => []),
     prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
   ]);
+  // "I reviewed it" after a THESIS NEEDS REVIEW flag (Casey's click, an audit row): the newest per thesis.
+  const hypIds = (hyps as Row[]).map((h) => h.id as string);
+  const ackRows: Row[] = hypIds.length && prisma.gapAuditEvent?.findMany ? await prisma.gapAuditEvent.findMany({ where: { kind: 'thesis.review_ack', subject_type: 'hypothesis', subject_id: { in: hypIds } }, select: { subject_id: true, created_at: true }, orderBy: { created_at: 'desc' } }).catch(() => []) : [];
+  const acks = new Map<string, Date>();
+  for (const r of ackRows) if (!acks.has(r.subject_id)) acks.set(r.subject_id, new Date(r.created_at));
   const aliasList = (aliases as Array<{ alias: string }>).map((a) => a.alias);
   const domains: string[] = [];
   if (link?.status === 'resolved') {
@@ -163,6 +168,8 @@ export async function loadAccountInputs(
       falsification: Array.isArray(h.falsification_questions) ? h.falsification_questions.map(String) : [],
       whatANoMeans: h.what_a_no_means ?? null,
       primarySignalId: h.signals?.[0]?.signal_id ?? null,
+      // The last time Casey looked: approval, activation, or an explicit "reviewed" after a flag.
+      reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
     })),
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
     personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null })),
@@ -193,4 +200,10 @@ export async function loadAccountBrief(prisma: PrismaLike, slug: string, now: Da
   if (!name) return names.length > 1 ? { collision: names } : null;
   const inputs = await loadAccountInputs(prisma, name, now, opts);
   return inputs ? buildAccountBrief(inputs, now) : null;
+}
+
+/** The last time Casey looked at a thesis: approval, activation, or an explicit review after a flag. */
+function lastReview(h: Row, ack: Date | undefined): string {
+  const times = [h.reviewed_at, h.activated_at, ack].filter(Boolean).map((d) => new Date(d).getTime());
+  return new Date(Math.max(...times)).toISOString();
 }
