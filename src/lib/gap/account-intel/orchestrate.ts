@@ -59,6 +59,7 @@ const ORDER: Array<{ section: SectionKey; why: string }> = [
 const DAY = 86_400_000;
 
 const IN_FLIGHT_MS = 5 * 60_000;
+const HOUR = 3_600_000;
 
 export function planResearch(brief: AccountIntelligenceBrief, history: readonly ResearchHistory[], now: Date): ResearchPlan {
   const tasks: ResearchTask[] = [];
@@ -81,6 +82,12 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     for (const { section } of ORDER) skipped.push({ section, reason: 'In a deal: learn from the buyer, not the web.' });
     return { tasks, skipped };
   }
+  // The account motion decides what research is for. A live conversation is learned from, not researched around.
+  if (brief.motion.type === 'FOLLOW_UP') {
+    tasks.push({ section: 'commercial', depth: 'DEEPEN', provider: 'human', focus: `Continue the conversation with ${brief.motion.who ?? 'the buyer'} and log what they say as buyer input.`, why: brief.motion.why });
+    for (const { section } of ORDER) skipped.push({ section, reason: 'A live conversation: learn from the buyer, not the web.' });
+    return { tasks, skipped };
+  }
   // What the company IS and what it operates decides whether any of the rest matters (entity type != fit):
   // an account whose fit is unknown gets an identity Scout first (Scout's own cooldown bounds it).
   if (brief.fit.fit === 'UNKNOWN' || !brief.fit.entityType) {
@@ -88,6 +95,18 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     const scouted = brief.fit.scoutedAt && now.getTime() - new Date(brief.fit.scoutedAt).getTime() < 14 * DAY ? brief.fit.scoutedAt : null;
     if (scouted) skipped.push({ section: 'identity', reason: `Scouted on ${scouted.slice(0, 10)}; its answer stands for 14 days (ask what it runs if it is still unclear).` });
     else tasks.push({ section: 'identity', depth: 'SCOUT', provider: 'research', focus: 'What the company is, and which facilities, yards, terminals or fleets it runs (Scout, cited).', why: 'YardFlow fit is unknown: what it operates decides whether anything else is worth researching.' });
+  }
+  // A first touch is ready on a verified fact: the next move is Casey's review, not more research (it would only
+  // delay a ready touch). Research resumes on what the buyer says. An unknown fit is still Scouted first (above):
+  // a touch to a company whose fit is unknown waits for what it runs.
+  if (brief.motion.type === 'FACT_LED') {
+    tasks.push({ section: 'commercial', depth: 'BRIEF', provider: 'human', focus: `Review the thesis and the first touch to ${brief.motion.who ?? 'the primary person'} (every gate runs at the click).`, why: brief.motion.why });
+    for (const { section } of ORDER) skipped.push({ section, reason: 'A first touch is ready: review it before researching more.' });
+    return { tasks, skipped };
+  }
+  // Relationship-led: the ask comes first; research is context for that conversation, never a cold opener.
+  if (brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED') {
+    tasks.push({ section: 'relationships', depth: 'BRIEF', provider: 'human', focus: `Ask ${brief.motion.who ?? 'the person Casey knows here'} for their perspective (no draft, no cold opener).`, why: brief.motion.why });
   }
   for (const { section, why } of ORDER) {
     const s = brief.sections[section];
@@ -102,11 +121,16 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     const focus = (DEEPEN_FOCUS as Record<string, string>)[section];
     if (focus) {
       const mine = history.filter((h) => h.section === section);
-      const running = mine.find((h) => h.outcome === 'running' && now.getTime() - new Date(h.at).getTime() < IN_FLIGHT_MS);
-      const recent = mine.find((h) => h.outcome !== 'running' && now.getTime() - new Date(h.at).getTime() < DAY);
-      const empty = mine.find((h) => h.outcome === 'insufficient_evidence' && now.getTime() - new Date(h.at).getTime() < 14 * DAY);
+      const age = (h: ResearchHistory) => now.getTime() - new Date(h.at).getTime();
+      const running = mine.find((h) => h.outcome === 'running' && age(h) < IN_FLIGHT_MS);
+      // A pass the web provider could not run learned nothing about the company: retry after an hour, never 14 days.
+      const down = mine.find((h) => h.outcome === 'provider_unavailable' && age(h) < HOUR);
+      const recent = mine.find((h) => h.outcome !== 'running' && h.outcome !== 'provider_unavailable' && age(h) < DAY);
+      // Empty FOR THIS SECTION: the run found nothing at all, or found facts that landed in other sections.
+      const empty = mine.find((h) => (h.outcome === 'insufficient_evidence' || h.outcome === 'nothing_for_section') && age(h) < 14 * DAY);
       if (running) skipped.push({ section, reason: `A run on this section started at ${running.at.slice(11, 16)} UTC and has not finished.` });
-      else if (empty) skipped.push({ section, reason: `The same focus came back empty on ${empty.at.slice(0, 10)}; not repeated for 14 days.` });
+      else if (down) skipped.push({ section, reason: `The web search was unavailable at ${down.at.slice(11, 16)} UTC; retry after an hour (nothing was learned).` });
+      else if (empty) skipped.push({ section, reason: `The same focus came back empty for this section on ${empty.at.slice(0, 10)}; not repeated for 14 days.` });
       else if (recent) skipped.push({ section, reason: `Researched on ${recent.at.slice(0, 10)}; once a day per section.` });
       else tasks.push({ section, depth: 'DEEPEN', provider: 'research', focus, why: s.status === 'STALE' ? `Stale: ${why}` : why });
     } else if (HUMAN[section]) {
@@ -129,5 +153,6 @@ export async function loadResearchHistory(prisma: any, accountName: string, now:
   return rows
     .filter((r) => r.provider_status?.orchestrator === 'deepen' && typeof r.provider_status.section === 'string')
     // A run with no outcome yet is still running (or died mid-run: it counts as in flight for a few minutes).
-    .map((r) => ({ section: String(r.provider_status!.section), outcome: String(r.provider_status!.outcome ?? 'running'), at: new Date(r.created_at).toISOString() }));
+    // The section's own outcome (recorded by the deepen route) wins over the run's account-wide one.
+    .map((r) => ({ section: String(r.provider_status!.section), outcome: String(r.provider_status!.sectionOutcome ?? r.provider_status!.outcome ?? 'running'), at: new Date(r.created_at).toISOString() }));
 }

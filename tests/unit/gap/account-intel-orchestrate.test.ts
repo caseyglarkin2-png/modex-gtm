@@ -35,7 +35,7 @@ describe('planResearch', () => {
     const history = [{ section: 'technology', outcome: 'insufficient_evidence', at: '2026-09-25T00:00:00Z' }];
     const p = planResearch(buildAccountBrief(inputs({ facts: [fact] }), NOW), history, NOW);
     expect(p.tasks.some((t) => t.section === 'technology' && t.provider === 'research')).toBe(false);
-    expect(p.skipped).toContainEqual(expect.objectContaining({ section: 'technology', reason: expect.stringMatching(/came back empty on 2026-09-25/) }));
+    expect(p.skipped).toContainEqual(expect.objectContaining({ section: 'technology', reason: expect.stringMatching(/came back empty for this section on 2026-09-25/) }));
   });
 
   it('what research cannot answer becomes a discovery question for a human, not a web call', () => {
@@ -87,5 +87,39 @@ describe('Release J: when YardFlow fit is unknown, the first task is an identity
   });
   it('a known shipper does not spend a Scout on identity', () => {
     expect(planResearch(buildAccountBrief(inputs(), NOW), [], NOW).tasks.some((t) => t.section === 'identity')).toBe(false);
+  });
+});
+
+describe('Release M: section outcomes and account motion', () => {
+  const brief = () => buildAccountBrief(inputs({ facts: [fact] }), NOW);
+  it('a pass the web could not run is retried after an hour, never held for 14 days', () => {
+    const recent = planResearch(brief(), [{ section: 'technology', outcome: 'provider_unavailable', at: new Date(NOW.getTime() - 20 * 60_000).toISOString() }], NOW);
+    expect(recent.skipped).toContainEqual(expect.objectContaining({ section: 'technology', reason: expect.stringMatching(/web search was unavailable/) }));
+    const later = planResearch(brief(), [{ section: 'technology', outcome: 'provider_unavailable', at: new Date(NOW.getTime() - 2 * 3_600_000).toISOString() }], NOW);
+    expect(later.tasks.some((t) => t.section === 'technology' && t.provider === 'research')).toBe(true);
+  });
+  it('a run whose facts landed elsewhere is empty FOR THIS SECTION', () => {
+    const p = planResearch(brief(), [{ section: 'technology', outcome: 'nothing_for_section', at: '2026-09-25T00:00:00Z' }], NOW);
+    expect(p.tasks.some((t) => t.section === 'technology' && t.provider === 'research')).toBe(false);
+  });
+  it('a live conversation holds web research; the next task is the conversation', () => {
+    const p = planResearch({ ...brief(), motion: { type: 'FOLLOW_UP', who: 'Dana Ops', why: 'A live conversation.' } }, [], NOW);
+    expect(p.tasks).toEqual([expect.objectContaining({ provider: 'human', focus: expect.stringMatching(/Continue the conversation with Dana Ops/) })]);
+    expect(p.skipped.every((s) => /live conversation/.test(s.reason))).toBe(true);
+  });
+  it('a ready first touch is reviewed before any more research', () => {
+    const p = planResearch({ ...brief(), motion: { type: 'FACT_LED', who: 'Angi Acosta', why: 'A verified fact and a thesis.' } }, [], NOW);
+    expect(p.tasks).toEqual([expect.objectContaining({ provider: 'human', focus: expect.stringMatching(/first touch to Angi Acosta/) })]);
+  });
+  it('a ready first touch on a company whose fit is unknown is Scouted first (review K/M: never cold to an unknown fit)', () => {
+    const b = brief();
+    const p = planResearch({ ...b, fit: { ...b.fit, fit: 'UNKNOWN', entityType: null, scoutedAt: null }, motion: { type: 'FACT_LED', who: 'Angi Acosta', why: 'x' } }, [], NOW);
+    expect(p.tasks.map((t) => [t.section, t.provider])).toEqual([['identity', 'research'], ['commercial', 'human']]);
+  });
+
+  it('relationship-led: the ask is first; research stays as context', () => {
+    const p = planResearch({ ...brief(), motion: { type: 'RELATIONSHIP_LED', who: 'Pat Lee', why: 'Met at MODEX.' } }, [], NOW);
+    expect(p.tasks[0]).toMatchObject({ provider: 'human', section: 'relationships', focus: expect.stringMatching(/Ask Pat Lee/) });
+    expect(p.tasks.some((t) => t.provider === 'research')).toBe(true);
   });
 });

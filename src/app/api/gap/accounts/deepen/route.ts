@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { loadAccountInputs } from '@/lib/gap/account-intel/load';
-import { buildAccountBrief } from '@/lib/gap/account-intel/build';
+import { buildAccountBrief, type SectionKey } from '@/lib/gap/account-intel/build';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { runEvidenceResearch } from '@/lib/gap/research/run';
 import { scoutCandidate } from '@/lib/gap/entity/candidates';
@@ -45,6 +45,17 @@ export async function POST(request: NextRequest) {
     if ('refused' in r) return NextResponse.json({ error: r.refused, reason: r.why ?? 'Scout could not run now; nothing was saved.' }, { status: scoutRefusalStatus(r.refused) });
     return NextResponse.json({ section, outcome: 'scouted', fit: r.verdict, entityType: r.entityType, facts: r.network.length + r.freight.length, rejected: 0, notes: [r.why] });
   }
+  const before = buildAccountBrief(inputs, now).sections[section as SectionKey]?.statements.length ?? 0;
   const result = await runEvidenceResearch(prisma, { accountName: name, personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: g.email, now, focus: task.focus, context: { orchestrator: 'deepen', section }, seekCurrentness: false });
-  return NextResponse.json({ section, outcome: result.outcome, facts: result.facts.length, rejected: result.rejected.length, notes: result.notes });
+  // The section's own outcome: did this section gain anything? A web pass that could not run learned nothing.
+  const webDown = result.notes.some((n) => /^web: unavailable/.test(n)) && !result.facts.length;
+  const after = webDown ? before : await loadAccountInputs(prisma, name, new Date()).then((i) => (i ? buildAccountBrief(i, new Date()).sections[section as SectionKey]?.statements.length ?? 0 : before)).catch(() => before);
+  const sectionOutcome = webDown ? 'provider_unavailable' : after > before ? 'section_filled' : 'nothing_for_section';
+  try {
+    const run = await prisma.researchRun.findUnique({ where: { id: result.runId }, select: { provider_status: true } });
+    if (run) await prisma.researchRun.update({ where: { id: result.runId }, data: { provider_status: { ...((run.provider_status as object) ?? {}), sectionOutcome } } });
+  } catch {
+    // The run's own outcome still stands; the planner reads it when the section outcome could not be saved.
+  }
+  return NextResponse.json({ section, outcome: result.outcome, sectionOutcome, facts: result.facts.length, rejected: result.rejected.length, notes: result.notes });
 }

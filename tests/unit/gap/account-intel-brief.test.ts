@@ -368,3 +368,26 @@ describe('review J: vertical words and ambiguous Scouts', () => {
     expect(b.fit).toMatchObject({ entityType: null, fit: 'UNKNOWN' });
   });
 });
+
+describe('first-party freshness (Release M): real record dates, or undated, never invented', () => {
+  it('carries the CRM contact, relationship, staged candidate, alias and record timestamps', () => {
+    const b = buildAccountBrief(base({
+      account: { ...base().account, recordUpdatedAt: '2026-08-01T00:00:00.000Z' },
+      aliasesAddedAt: '2026-07-15T00:00:00.000Z',
+      personas: [{ id: 1, name: 'Angi Acosta', title: 'VP Distribution', doNotContact: false, hasEmail: true, emailStatus: 'valid', updatedAt: '2026-09-01T00:00:00.000Z' }],
+      candidates: [{ id: 7, name: 'Lee Park', title: 'DC Manager', state: 'staged', seenAt: '2026-09-20T00:00:00.000Z' }],
+      memberships: [{ sourceName: 'MMYQB subscribers', sourceType: 'list', relationshipContext: 'Met at MODEX', personName: 'Angi Acosta', addedAt: '2026-09-15T00:00:00.000Z' }],
+    }), NOW);
+    const at = (sec: keyof typeof b.sections, text: RegExp) => b.sections[sec].statements.find((s) => text.test(s.text))?.sources[0].at;
+    expect(at('org', /^Angi Acosta, VP Distribution/)).toBe('2026-09-01T00:00:00.000Z');
+    expect(at('org', /^Lee Park/)).toBe('2026-09-20T00:00:00.000Z');
+    expect(at('relationships', /Met at MODEX/)).toBe('2026-09-15T00:00:00.000Z');
+    expect(at('identity', /^Also known as/)).toBe('2026-07-15T00:00:00.000Z');
+    expect(at('identity', /^Acme Foods, cpg/)).toBe('2026-08-01T00:00:00.000Z');
+  });
+  it('no timestamp stays null (the view says undated); nothing defaults to now', () => {
+    const b = buildAccountBrief(base(), NOW);
+    expect(b.sections.org.statements.find((s) => /^Angi Acosta, VP/.test(s.text))?.sources[0].at).toBeNull();
+    expect(b.sections.identity.statements.find((s) => /^Acme Foods, cpg/.test(s.text))?.sources[0].at).toBeNull();
+  });
+});

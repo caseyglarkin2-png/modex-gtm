@@ -27,20 +27,41 @@ type PrismaLike = any;
 type Row = Record<string, any>;
 
 
-/** Accounts whose names start like this name or slug (a narrowed read, never the whole table). */
-async function namesStartingLike(prisma: PrismaLike, firstToken: string): Promise<string[]> {
-  if (!firstToken) return [];
-  const rows: Array<{ name: string }> = await prisma.account.findMany({ where: { name: { startsWith: firstToken, mode: 'insensitive' } }, select: { name: true }, orderBy: { name: 'asc' }, take: 500 });
+/** Accents folded to their base letter ("Nestlé" reads "Nestle"), the same fold as normalizeCompanyName. */
+export const foldAccents = (s: string) => s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+// Postgres translate() pairs for the same fold, upper case too (lower() of an accented capital depends on the
+// database collation). Built from one map so the two strings always line up.
+const FOLD: Record<string, string> = { a: 'áàâäãåā', c: 'çćč', e: 'éèêëēę', i: 'íìîïī', n: 'ñń', o: 'óòôöõō', s: 'šś', u: 'úùûüū', y: 'ýÿ', z: 'žźż' };
+export const FOLD_FROM = Object.values(FOLD).map((f) => f + f.toUpperCase()).join('');
+export const FOLD_TO = Object.entries(FOLD).map(([to, from]) => to.repeat([...from].length * 2)).join('');
+
+/**
+ * Accounts whose (accent-folded) names start like this ASCII token: a narrowed read, never the whole table.
+ * "Nestle" finds "Nestlé USA" and "Élan" finds "Elan Foods" and "Élan Foods".
+ */
+async function namesStartingLike(prisma: PrismaLike, name: string): Promise<string[]> {
+  const token = foldAccents(name).trim().toLowerCase().split(/[^a-z0-9]/)[0] ?? '';
+  if (!token) return [];
+  if (typeof prisma.$queryRaw === 'function') {
+    const rows: Array<{ name: string }> = await prisma.$queryRaw`SELECT name FROM accounts WHERE translate(lower(name), ${FOLD_FROM}, ${FOLD_TO}) LIKE ${`${token}%`} ORDER BY name LIMIT 500`;
+    return rows.map((r) => r.name);
+  }
+  const rows: Array<{ name: string }> = await prisma.account.findMany({ where: { name: { startsWith: token, mode: 'insensitive' } }, select: { name: true }, orderBy: { name: 'asc' }, take: 500 });
   return rows.map((r) => r.name);
 }
 
 /**
  * Every account whose slug this is (the app-wide scheme has no slug column: resolve by name). More than one
- * means a collision ("P&G" and "P-G"): the page asks which, never picks.
+ * means a collision ("P&G" and "P-G"): the page asks which, never picks. The slug drops accented letters
+ * ("Élan Foods" is "lan-foods"), so the match runs the slug rule itself in SQL, never a name prefix.
  */
 export async function accountNamesForSlug(prisma: PrismaLike, slug: string): Promise<string[]> {
-  const first = slug.split('-')[0] ?? '';
-  return (await namesStartingLike(prisma, first)).filter((n) => accountSlug(n) === slug);
+  if (!slug) return [];
+  if (typeof prisma.$queryRaw === 'function') {
+    const rows: Array<{ name: string }> = await prisma.$queryRaw`SELECT name FROM accounts WHERE trim(both '-' from regexp_replace(lower(name), '[^a-z0-9]+', '-', 'g')) = ${slug} ORDER BY name LIMIT 20`;
+    return rows.map((r) => r.name).filter((n) => accountSlug(n) === slug);
+  }
+  return (await namesStartingLike(prisma, slug.split('-')[0] ?? '')).filter((n) => accountSlug(n) === slug);
 }
 
 export async function accountNameForSlug(prisma: PrismaLike, slug: string): Promise<string | null> {
@@ -79,12 +100,12 @@ export async function loadAccountInputs(
   now: Date,
   opts: { live?: boolean; deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth> } } = {},
 ): Promise<AccountInputs | null> {
-  const account = await prisma.account.findUnique({ where: { name: accountName }, select: { name: true, tier: true, priority_band: true, vertical: true, parent_brand: true, hubspot_company_id: true } });
+  const account = await prisma.account.findUnique({ where: { name: accountName }, select: { name: true, tier: true, priority_band: true, vertical: true, parent_brand: true, hubspot_company_id: true, updated_at: true } });
   if (!account) return null;
   const [aliases, link, allNames, profiles, signalRows, factRows, lastRun, hyps, bidRows, personas, candidates, members] = await Promise.all([
-    prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true } }).catch(() => []),
+    prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true, created_at: true } }).catch(() => []),
     prisma.canonicalAccountLink.findUnique({ where: { account_name: accountName }, select: { canonical_company_id: true, status: true } }).catch(() => null),
-    namesStartingLike(prisma, accountName.trim().split(/[^A-Za-z0-9]/)[0] ?? ''),
+    namesStartingLike(prisma, accountName),
     loadWatchProfilesCached(prisma).catch(() => []),
     prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
@@ -96,9 +117,9 @@ export async function loadAccountInputs(
       take: 10,
     }).catch(() => []),
     prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }).catch(() => []),
-    prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true }, take: 60 }),
-    prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true }, take: 30 }).catch(() => []),
-    prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
+    prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true }, take: 60 }),
+    prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []),
+    prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
   ]);
   // "I reviewed it" after a THESIS NEEDS REVIEW flag (Casey's click, an audit row): the newest per thesis.
   const hypIds = (hyps as Row[]).map((h) => h.id as string);
@@ -120,6 +141,9 @@ export async function loadAccountInputs(
     return { parentName: f.parentName, members: f.members, related, separate, hold };
   })();
   const aliasList = (aliases as Array<{ alias: string }>).map((a) => a.alias);
+  // First-party freshness: the record's own timestamp, or none (shown undated). Never a made-up date.
+  const iso = (d: unknown): string | null => (d instanceof Date || typeof d === 'string' ? (Number.isNaN(new Date(d).getTime()) ? null : new Date(d).toISOString()) : null);
+  const aliasesAddedAt = (aliases as Row[]).map((a) => iso(a.created_at)).filter((d): d is string => !!d).sort().pop() ?? null;
   const domains: string[] = [];
   if (link?.status === 'resolved') {
     const cc = await prisma.canonicalCompany.findUnique({ where: { id: link.canonical_company_id }, select: { domain: true } }).catch(() => null);
@@ -174,8 +198,9 @@ export async function loadAccountInputs(
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
 
   return {
-    account: { name: account.name, tier: account.tier ?? null, priorityBand: account.priority_band ?? null, vertical: account.vertical ?? null, parentBrand: account.parent_brand ?? null, hubspotCompanyId: account.hubspot_company_id ?? null },
+    account: { name: account.name, tier: account.tier ?? null, priorityBand: account.priority_band ?? null, vertical: account.vertical ?? null, parentBrand: account.parent_brand ?? null, hubspotCompanyId: account.hubspot_company_id ?? null, recordUpdatedAt: iso(account.updated_at) },
     aliases: aliasList,
+    aliasesAddedAt,
     domains,
     siblings,
     watched: !!profile,
@@ -198,10 +223,10 @@ export async function loadAccountInputs(
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
     })),
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
-    personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null })),
-    candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state })),
+    personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at) })),
+    candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),
     // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).
-    memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),
+    memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, addedAt: iso(m.ingested_at), doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),
     firstTouches: ((touches as Map<string, Array<{ recipient: string; sentAt: string; released: boolean; outstanding?: boolean }>>).get(accountName) ?? []).map((t) => ({ recipient: t.recipient, sentAt: t.sentAt, state: t.outstanding ? 'draft outstanding' : t.released ? 'released' : 'sent' })),
     conversation: conv ? { who: conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
     opportunity,

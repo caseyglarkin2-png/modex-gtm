@@ -67,6 +67,8 @@ export interface PersonaInput {
   doNotContact: boolean;
   hasEmail: boolean;
   emailStatus: string | null;
+  /** The CRM contact's last update (first-party freshness); null shows undated. */
+  updatedAt?: string | null;
 }
 
 interface PackSite {
@@ -93,8 +95,10 @@ export interface MicrositeInput {
 }
 
 export interface AccountInputs {
-  account: { name: string; tier: string | null; priorityBand: string | null; vertical: string | null; parentBrand: string | null; hubspotCompanyId: string | null };
+  account: { name: string; tier: string | null; priorityBand: string | null; vertical: string | null; parentBrand: string | null; hubspotCompanyId: string | null; recordUpdatedAt?: string | null };
   aliases: string[];
+  /** When the newest alias was recorded (null: undated). */
+  aliasesAddedAt?: string | null;
   domains: string[];
   /** Other account rows whose name normalizes the same (duplicate CRM shells). */
   siblings: string[];
@@ -107,8 +111,8 @@ export interface AccountInputs {
   /** Human-confirmed, unsuperseded BIDs only. */
   bids: BidInput[];
   personas: PersonaInput[];
-  candidates: Array<{ id: number; name: string; title: string | null; state: string }>;
-  memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null; doNotContact?: boolean }>;
+  candidates: Array<{ id: number; name: string; title: string | null; state: string; seenAt?: string | null }>;
+  memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null; doNotContact?: boolean; addedAt?: string | null }>;
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
@@ -327,11 +331,11 @@ const splitCite = ({ cite, ...rest }: ReturnType<typeof auditTruth>) => ({ cite,
 
 function identitySection(i: AccountInputs, now: Date): Section {
   const a = i.account;
-  const rec: Source = { kind: 'account', ref: a.name, label: 'GAP account record', url: null, at: null };
+  const rec: Source = { kind: 'account', ref: a.name, label: a.recordUpdatedAt ? 'GAP account record, last updated' : 'GAP account record', url: null, at: a.recordUpdatedAt ?? null };
   const st: Statement[] = [
     { text: `${a.name}${a.vertical ? `, ${a.vertical}` : ''}${a.tier ? `, ${a.tier}` : ''}${a.priorityBand ? ` / band ${a.priorityBand}` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [rec] },
   ];
-  if (i.aliases.length) st.push({ text: `Also known as: ${i.aliases.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
+  if (i.aliases.length) st.push({ text: `Also known as: ${i.aliases.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'account', ref: 'aliases', label: 'GAP curated aliases', url: null, at: i.aliasesAddedAt ?? null }] });
   if (i.domains.length) st.push({ text: `Domains: ${i.domains.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId ?? 'crm-identity', label: 'CRM identity', url: null, at: null }] });
   if (a.hubspotCompanyId) st.push({ text: `HubSpot company ${a.hubspotCompanyId}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId, label: 'HubSpot', url: null, at: null }] });
   if (a.parentBrand) st.push({ text: `Parent brand: ${a.parentBrand}`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
@@ -572,10 +576,10 @@ function orgSection(i: AccountInputs, now: Date): Section {
   for (const p of i.personas) {
     const why = suggestAngle({ title: p.title, personaKey: null, accountName: i.account.name });
     const reach = p.doNotContact ? 'do not contact' : !p.hasEmail ? 'no email on record' : p.emailStatus && /bounce|invalid/.test(p.emailStatus) ? `email ${p.emailStatus}` : 'reachable';
-    st.push({ text: `${p.name}${p.title ? `, ${p.title}` : ''} (${reach})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'persona', ref: String(p.id), label: 'CRM contact', url: null, at: null }] });
+    st.push({ text: `${p.name}${p.title ? `, ${p.title}` : ''} (${reach})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'persona', ref: String(p.id), label: 'CRM contact, last updated', url: null, at: p.updatedAt ?? null }] });
     if (why) st.push({ text: `${p.name}: LIKELY ${why}`, truth: 'INFERENCE', sources: [{ kind: 'gap', ref: 'persona-angle', label: 'GAP title reading', url: null, at: null }], falsifiableBy: 'They say their role is different.' });
   }
-  for (const c of i.candidates.filter((x) => x.state === 'staged')) st.push({ text: `${c.name}${c.title ? `, ${c.title}` : ''} (staged from a list, not yet vetted)`, truth: 'INFERENCE', sources: [{ kind: 'work_source', ref: String(c.id), label: 'staged candidate', url: null, at: null }], falsifiableBy: 'Review finds they are not at this account.' });
+  for (const c of i.candidates.filter((x) => x.state === 'staged')) st.push({ text: `${c.name}${c.title ? `, ${c.title}` : ''} (staged from a list, not yet vetted)`, truth: 'INFERENCE', sources: [{ kind: 'work_source', ref: String(c.id), label: 'staged candidate, last seen', url: null, at: c.seenAt ?? null }], falsifiableBy: 'Review finds they are not at this account.' });
   return section('org', st, ['Who owns yard performance (never assumed from a title)', 'Who signs for yard technology'], now);
 }
 
@@ -583,7 +587,8 @@ function relationshipSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = i.memberships.map((m) => ({
     text: `${m.relationshipContext ?? `From ${m.sourceName}`}${m.personName ? ` (${m.personName})` : ''}. Context, never evidence or consent.`,
     truth: 'VERIFIED_PUBLIC' as const,
-    sources: [{ kind: 'work_source' as const, ref: m.sourceName, label: m.sourceName, url: null, at: null }],
+    // The date the relationship was recorded (shown); a relationship does not go stale on that date.
+    sources: [{ kind: 'work_source' as const, ref: m.sourceName, label: `${m.sourceName}, recorded`, url: null, at: m.addedAt ?? null }],
   }));
   return section('relationships', st, i.memberships.length ? [] : ['How Casey knows anyone here'], now);
 }
