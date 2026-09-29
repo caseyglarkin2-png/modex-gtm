@@ -88,8 +88,17 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     for (const { section } of ORDER) skipped.push({ section, reason: 'A live conversation: learn from the buyer, not the web.' });
     return { tasks, skipped };
   }
+  // What the company IS and what it operates decides whether any of the rest matters (entity type != fit):
+  // an account whose fit is unknown gets an identity Scout first (Scout's own cooldown bounds it).
+  if (brief.fit.fit === 'UNKNOWN' || !brief.fit.entityType) {
+    // One identity Scout answers for 14 days: an operator still UNKNOWN after it needs a human, not a re-run.
+    const scouted = brief.fit.scoutedAt && now.getTime() - new Date(brief.fit.scoutedAt).getTime() < 14 * DAY ? brief.fit.scoutedAt : null;
+    if (scouted) skipped.push({ section: 'identity', reason: `Scouted on ${scouted.slice(0, 10)}; its answer stands for 14 days (ask what it runs if it is still unclear).` });
+    else tasks.push({ section: 'identity', depth: 'SCOUT', provider: 'research', focus: 'What the company is, and which facilities, yards, terminals or fleets it runs (Scout, cited).', why: 'YardFlow fit is unknown: what it operates decides whether anything else is worth researching.' });
+  }
   // A first touch is ready on a verified fact: the next move is Casey's review, not more research (it would only
-  // delay a ready touch). Research resumes on what the buyer says.
+  // delay a ready touch). Research resumes on what the buyer says. An unknown fit is still Scouted first (above):
+  // a touch to a company whose fit is unknown waits for what it runs.
   if (brief.motion.type === 'FACT_LED') {
     tasks.push({ section: 'commercial', depth: 'BRIEF', provider: 'human', focus: `Review the thesis and the first touch to ${brief.motion.who ?? 'the primary person'} (every gate runs at the click).`, why: brief.motion.why });
     for (const { section } of ORDER) skipped.push({ section, reason: 'A first touch is ready: review it before researching more.' });
@@ -98,14 +107,6 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
   // Relationship-led: the ask comes first; research is context for that conversation, never a cold opener.
   if (brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED') {
     tasks.push({ section: 'relationships', depth: 'BRIEF', provider: 'human', focus: `Ask ${brief.motion.who ?? 'the person Casey knows here'} for their perspective (no draft, no cold opener).`, why: brief.motion.why });
-  }
-  // What the company IS and what it operates decides whether any of the rest matters (entity type != fit):
-  // an account whose fit is unknown gets an identity Scout first (Scout's own cooldown bounds it).
-  if (brief.fit.fit === 'UNKNOWN' || !brief.fit.entityType) {
-    // One identity Scout answers for 14 days: an operator still UNKNOWN after it needs a human, not a re-run.
-    const scouted = brief.fit.scoutedAt && now.getTime() - new Date(brief.fit.scoutedAt).getTime() < 14 * DAY ? brief.fit.scoutedAt : null;
-    if (scouted) skipped.push({ section: 'identity', reason: `Scouted on ${scouted.slice(0, 10)}; its answer stands for 14 days (ask what it runs if it is still unclear).` });
-    else tasks.push({ section: 'identity', depth: 'SCOUT', provider: 'research', focus: 'What the company is, and which facilities, yards, terminals or fleets it runs (Scout, cited).', why: 'YardFlow fit is unknown: what it operates decides whether anything else is worth researching.' });
   }
   for (const { section, why } of ORDER) {
     const s = brief.sections[section];

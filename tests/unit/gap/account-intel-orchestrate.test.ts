@@ -111,6 +111,12 @@ describe('Release M: section outcomes and account motion', () => {
     const p = planResearch({ ...brief(), motion: { type: 'FACT_LED', who: 'Angi Acosta', why: 'A verified fact and a thesis.' } }, [], NOW);
     expect(p.tasks).toEqual([expect.objectContaining({ provider: 'human', focus: expect.stringMatching(/first touch to Angi Acosta/) })]);
   });
+  it('a ready first touch on a company whose fit is unknown is Scouted first (review K/M: never cold to an unknown fit)', () => {
+    const b = brief();
+    const p = planResearch({ ...b, fit: { ...b.fit, fit: 'UNKNOWN', entityType: null, scoutedAt: null }, motion: { type: 'FACT_LED', who: 'Angi Acosta', why: 'x' } }, [], NOW);
+    expect(p.tasks.map((t) => [t.section, t.provider])).toEqual([['identity', 'research'], ['commercial', 'human']]);
+  });
+
   it('relationship-led: the ask is first; research stays as context', () => {
     const p = planResearch({ ...brief(), motion: { type: 'RELATIONSHIP_LED', who: 'Pat Lee', why: 'Met at MODEX.' } }, [], NOW);
     expect(p.tasks[0]).toMatchObject({ provider: 'human', section: 'relationships', focus: expect.stringMatching(/Ask Pat Lee/) });

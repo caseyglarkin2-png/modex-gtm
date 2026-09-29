@@ -576,7 +576,7 @@ function orgSection(i: AccountInputs, now: Date): Section {
   for (const p of i.personas) {
     const why = suggestAngle({ title: p.title, personaKey: null, accountName: i.account.name });
     const reach = p.doNotContact ? 'do not contact' : !p.hasEmail ? 'no email on record' : p.emailStatus && /bounce|invalid/.test(p.emailStatus) ? `email ${p.emailStatus}` : 'reachable';
-    st.push({ text: `${p.name}${p.title ? `, ${p.title}` : ''} (${reach})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'persona', ref: String(p.id), label: 'CRM contact, last updated', url: null, at: p.updatedAt ?? null }], ...(p.updatedAt ? { asOf: p.updatedAt } : {}) });
+    st.push({ text: `${p.name}${p.title ? `, ${p.title}` : ''} (${reach})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'persona', ref: String(p.id), label: 'CRM contact, last updated', url: null, at: p.updatedAt ?? null }] });
     if (why) st.push({ text: `${p.name}: LIKELY ${why}`, truth: 'INFERENCE', sources: [{ kind: 'gap', ref: 'persona-angle', label: 'GAP title reading', url: null, at: null }], falsifiableBy: 'They say their role is different.' });
   }
   for (const c of i.candidates.filter((x) => x.state === 'staged')) st.push({ text: `${c.name}${c.title ? `, ${c.title}` : ''} (staged from a list, not yet vetted)`, truth: 'INFERENCE', sources: [{ kind: 'work_source', ref: String(c.id), label: 'staged candidate, last seen', url: null, at: c.seenAt ?? null }], falsifiableBy: 'Review finds they are not at this account.' });
@@ -587,8 +587,8 @@ function relationshipSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = i.memberships.map((m) => ({
     text: `${m.relationshipContext ?? `From ${m.sourceName}`}${m.personName ? ` (${m.personName})` : ''}. Context, never evidence or consent.`,
     truth: 'VERIFIED_PUBLIC' as const,
-    sources: [{ kind: 'work_source' as const, ref: m.sourceName, label: m.sourceName, url: null, at: m.addedAt ?? null }],
-    ...(m.addedAt ? { asOf: m.addedAt } : {}),
+    // The date the relationship was recorded (shown); a relationship does not go stale on that date.
+    sources: [{ kind: 'work_source' as const, ref: m.sourceName, label: `${m.sourceName}, recorded`, url: null, at: m.addedAt ?? null }],
   }));
   return section('relationships', st, i.memberships.length ? [] : ['How Casey knows anyone here'], now);
 }
