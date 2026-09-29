@@ -23,6 +23,8 @@ export interface ProviderAnswer {
   citations: string[];
   /** Sites the search cited when the provider gives only the site, not the page (Gemini): a claim must be on one. */
   citedHosts?: string[];
+  /** Why an answer has no citations, when the provider's response says (recorded in the audit). */
+  note?: string;
 }
 export interface ScoutProvider {
   name: ProviderName;
@@ -43,7 +45,8 @@ export function classifyProviderError(e: unknown): { kind: 'quota' | 'transient'
   const msg = e instanceof Error ? e.message : String(e);
   const status = (e as { status?: number })?.status;
   if (status === 429 || /\b429\b|quota|rate.?limit|resource.?exhausted|too many requests/i.test(msg)) {
-    const daily = /per.?day|daily|PerDay/i.test(msg);
+    // A per-day limit, or an account with no credits left, will not clear in a minute.
+    const daily = /per.?day|daily|PerDay|no credits|insufficient_quota|billing/i.test(msg);
     const retry = /retry in (\d+(?:\.\d+)?)s/i.exec(msg);
     return { kind: 'quota', coolMs: daily ? 3_600_000 : retry ? Math.ceil(Number(retry[1]) * 1000) + 1000 : 60_000, detail: msg.slice(0, 160) };
   }
@@ -104,7 +107,7 @@ export async function askGrounded<T>(
       try {
         const a = await bounded((signal) => p.ask(prompt, signal), Math.min(opts.timeoutMs ?? 45_000, deadline - Date.now()));
         if (!a.citations.length && !a.citedHosts?.length) {
-          attempts.push({ provider: p.name, outcome: 'no_citations', detail: 'the answer cited no sources: not grounded, not used' });
+          attempts.push({ provider: p.name, outcome: 'no_citations', detail: `the answer cited no sources: not grounded, not used${a.note ? ` (${a.note})` : ''}` });
           break;
         }
         const v = parse(a);
@@ -177,11 +180,14 @@ const gemini: ScoutProvider = {
     const { GoogleGenerativeAI } = await import('@google/generative-ai');
     const model = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!).getGenerativeModel({ model: 'gemini-2.5-flash', tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never });
     const res = await model.generateContent(prompt, { signal });
-    // Search is a tool Gemini may skip: only an answer with grounding chunks searched. Its chunk links are
-    // redirects, so the sites it read come from the chunk titles (a domain); a claim must be on one of them.
-    const meta = (res.response.candidates?.[0] as { groundingMetadata?: { groundingChunks?: Array<{ web?: { title?: string } }> } } | undefined)?.groundingMetadata;
-    const citedHosts = (meta?.groundingChunks ?? []).map((c) => (c.web?.title ?? '').trim().toLowerCase()).filter((t) => /^[a-z0-9.-]+\.[a-z]{2,}$/.test(t));
-    return { text: res.response.text(), citations: [], citedHosts };
+    // Search is a tool Gemini may skip: only an answer with grounding chunks searched. A claim must cite one of
+    // those chunks (its link is a Google grounding redirect to the page read) or a page on a site it read (the
+    // chunk title is that site's domain).
+    const meta = (res.response.candidates?.[0] as { groundingMetadata?: { groundingChunks?: Array<{ web?: { uri?: string; title?: string } }> } } | undefined)?.groundingMetadata;
+    const chunks = meta?.groundingChunks ?? [];
+    const citations = chunks.map((c) => c.web?.uri ?? '').filter((u) => /^https?:\/\//.test(u));
+    const citedHosts = chunks.map((c) => (c.web?.title ?? '').trim().toLowerCase()).filter((t) => /^[a-z0-9.-]+\.[a-z]{2,}$/.test(t));
+    return { text: res.response.text(), citations, citedHosts, note: chunks.length ? undefined : 'Gemini did not search' };
   },
 };
 
@@ -216,8 +222,8 @@ const gatewayWeb: ScoutProvider = {
     };
     const msg = res.choices?.[0]?.message;
     const citations = [...(res.citations ?? []), ...((msg?.annotations ?? []).filter((a) => a.type === 'url_citation' && a.url_citation?.url).map((a) => a.url_citation!.url))];
-    // No citations back from the gateway: not grounded (askGrounded refuses it).
-    return { text: msg?.content ?? '', citations };
+    // No citations back from the gateway: not grounded (askGrounded refuses it). Say which fields it did return.
+    return { text: msg?.content ?? '', citations, note: citations.length ? undefined : `response fields: ${Object.keys(res ?? {}).join(',')}; message fields: ${Object.keys(msg ?? {}).join(',')}` };
   },
 };
 

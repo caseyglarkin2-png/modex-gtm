@@ -72,6 +72,7 @@ describe('the provider chain', () => {
   it('classifies quota vs transient vs other, with a cooldown from the provider hint', () => {
     expect(classifyProviderError(quota)).toMatchObject({ kind: 'quota', coolMs: 3_600_000 });
     expect(classifyProviderError(new Error('429 rate limit. Please retry in 12.5s'))).toMatchObject({ kind: 'quota', coolMs: 13_500 });
+    expect(classifyProviderError(Object.assign(new Error('429 You have no credits remaining. Add credits to continue'), { status: 429 }))).toMatchObject({ kind: 'quota', coolMs: 3_600_000 });
     expect(classifyProviderError(new Error('fetch failed'))).toMatchObject({ kind: 'transient' });
     expect(classifyProviderError(new Error('invalid model'))).toMatchObject({ kind: 'error' });
   });
@@ -92,6 +93,10 @@ describe('the provider chain', () => {
     expect(r.provider).toBe('gemini');
     expect(r.network.map((c) => c.url)).toEqual(['https://kenco.example/locations']);
     expect(r.freight).toHaveLength(1);
+    // a claim citing one of the grounding chunk links (a Google redirect to the page read) is cited
+    const redirect = 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQ1';
+    const viaChunk = await scoutCompany('Kenco Logistics', { providers: [prov('gemini', async () => ({ text: SCOUT_JSON.replace('https://made-up.example/yard', redirect), citations: [redirect], citedHosts: [] }))] });
+    expect(viaChunk.network.map((c) => c.url)).toEqual([redirect]);
   });
 
   it('a hung provider is aborted at its bound, not retried, and the chain moves on inside one deadline', async () => {
