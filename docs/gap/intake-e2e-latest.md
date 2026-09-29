@@ -3,7 +3,7 @@
 STATUS: PASS
 
 - PASS W1 preview: 3 subscribers read (name_headline): 1 known, 1 new at a known account, 1 needs identity; nothing written
-- PASS W1 commit: 3 members with what was supplied (degree kept raw), the new person staged as candidate 2; Personas 1 and Accounts 2 unchanged
+- PASS W1 commit: 3 members with what was supplied (degree kept raw), the new person staged as candidate 3; Personas 1 and Accounts 2 unchanged
 - PASS W2 idempotent: the same paste again: 0 created, 3 already in the source
 - PASS W3 database: rewriting supplied provenance refused (GAP_WORK_MEMBER_FROZEN); an invented qualification refused (CHECK)
 - PASS W4 conference: a person added on the phone lands in the current conference source; the same Persona now has two provenance edges (MMYQB + Inland26), shown as "also from"; the note offers Buyer Truth Capture
