@@ -105,7 +105,7 @@ export interface RelatedActivity {
 }
 
 export interface ActivityDeps {
-  opportunity?: (prisma: PrismaLike, accountName: string) => Promise<{ status: 'ACTIVE' | 'CLEAR' | 'UNKNOWN'; deals?: Array<{ name: string | null; stage: string | null }> }>;
+  opportunity?: (prisma: PrismaLike, accountName: string) => Promise<{ status: 'ACTIVE' | 'CLEAR' | 'UNKNOWN'; deals?: Array<{ name: string | null; stage: string | null }>; noHubspotCompany?: boolean }>;
 }
 
 /** What is live at each related account (reads only). */
@@ -123,7 +123,7 @@ export async function loadRelatedActivity(prisma: PrismaLike, family: CorporateF
     (async (p: PrismaLike, a: string) => {
       const { resolveAccountOpportunity } = await import('../opportunity/active-opportunity');
       const o = await resolveAccountOpportunity(p, a, {}, { timeoutMs: 8_000 });
-      return o.status === 'ACTIVE' ? { status: 'ACTIVE' as const, deals: o.deals.map((d) => ({ name: d.name, stage: d.stage })) } : { status: o.status };
+      return o.status === 'ACTIVE' ? { status: 'ACTIVE' as const, deals: o.deals.map((d) => ({ name: d.name, stage: d.stage })) } : { status: o.status, noHubspotCompany: o.status === 'UNKNOWN' && o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') };
     });
   // Every related account's deal read at once, under one shared deadline (the click has a time limit).
   const deadline = <T,>(p: Promise<T>, fallback: T) => {
@@ -136,7 +136,10 @@ export async function loadRelatedActivity(prisma: PrismaLike, family: CorporateF
   const out: RelatedActivity[] = [];
   for (const [idx, m] of family.members.entries()) {
     const activity: string[] = [];
-    const o = opps[idx] as { status: 'ACTIVE' | 'CLEAR' | 'UNKNOWN'; deals?: Array<{ name: string | null; stage: string | null }> };
+    const o = opps[idx] as { status: 'ACTIVE' | 'CLEAR' | 'UNKNOWN'; deals?: Array<{ name: string | null; stage: string | null }>; noHubspotCompany?: boolean };
+    // A duplicate GAP record of THIS company with no HubSpot company of its own has no separate deal to read: the
+    // account's own action-time HubSpot check covers the company. Its GAP activity below still holds.
+    const dealUnknown = o.status === 'UNKNOWN' && !(m.relation === 'same_company' && o.noHubspotCompany);
     if (o.status === 'ACTIVE') activity.push(`active opportunity${o.deals?.length ? `: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : ''}`);
     const c = (conversations as Map<string, { who: string; responseClass: string; at: string }>).get(m.accountName);
     if (c) activity.push(`a buyer conversation (${c.responseClass.replace(/_/g, ' ')}, ${c.at.slice(0, 10)})`);
@@ -145,7 +148,7 @@ export async function loadRelatedActivity(prisma: PrismaLike, family: CorporateF
     const reply = replies[idx];
     if (reply && reply !== 'unreadable') activity.push('an untriaged reply');
     if ((enrollments as Array<{ account_name: string }>).some((e) => e.account_name === m.accountName)) activity.push('a live sequence enrollment');
-    out.push({ accountName: m.accountName, relation: m.relation, activity, unknown: o.status === 'UNKNOWN' || reply === 'unreadable' });
+    out.push({ accountName: m.accountName, relation: m.relation, activity, unknown: dealUnknown || reply === 'unreadable' });
   }
   return out;
 }

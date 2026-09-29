@@ -123,6 +123,13 @@ describe('red team (RevOps): identity-aware family, fail-closed reads', () => {
     const activity = await loadRelatedActivity(fake(book), f, NOW, { opportunity: async () => ({ status: 'ACTIVE', deals: [{ name: 'Kenco pilot', stage: 'discovery' }] }) });
     expect(relatedHold(f, activity, null)?.detail).toMatch(/Kenco \(another GAP record of the same company\): active opportunity/);
   });
+  it('a duplicate shell with no HubSpot company of its own is not unknown (the own check covers the company); a parent with none still is', async () => {
+    const dup = { accountName: 'FedEx', parentName: null, members: [{ accountName: 'FedEx Logistics', relation: 'same_company' as const, source: 'parent_brand' as const }] };
+    const none = async () => ({ status: 'UNKNOWN' as const, noHubspotCompany: true });
+    expect((await loadRelatedActivity(fake(book), dup, NOW, { opportunity: none }))[0].unknown).toBe(false);
+    const parent = { accountName: 'Frito-Lay', parentName: 'PepsiCo', members: [{ accountName: 'PepsiCo', relation: 'parent' as const, source: 'parent_brand' as const }] };
+    expect((await loadRelatedActivity(fake(book), parent, NOW, { opportunity: none }))[0].unknown).toBe(true);
+  });
   it('siblings known only through HubSpot (the parent is not a GAP account) are found', async () => {
     const f = await loadCorporateFamily(fake([...book, { name: 'Tropicana', parent_brand: null, hubspot_company_id: '333' }]), 'Gatorade', { hubspot: async () => ({ parentId: '999', childIds: [], siblingIds: ['333', '222'] }) });
     expect(f.members).toEqual([{ accountName: 'Tropicana', relation: 'sibling', source: 'hubspot' }]);
