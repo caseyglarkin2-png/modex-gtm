@@ -201,11 +201,11 @@ describe('review fixes: no duplicate slips past the check', () => {
 });
 
 describe('a failed web pass stores nothing (Release G: the quota and cut-off answers)', () => {
-  it('returns web_failed and leaves no candidate row or audit', async () => {
+  it('returns web_failed and leaves no candidate row and no verdict audit (Release L audits the failure itself)', async () => {
     const p = fakePrisma();
     const scout = async () => ({ company: 'AkzoNobel', verdict: 'UNKNOWN' as const, entityType: null, domain: null, what: null, why: 'The web pass failed (429).', network: [], freight: [], unknowns: [], basis: 'web' as const, failed: true });
     expect(await scoutCandidate(p, { company: 'AkzoNobel', actor: 'x', now: NOW }, { scout })).toMatchObject({ refused: 'web_failed' });
     expect(p.candidates).toHaveLength(0);
-    expect(p.audits).toHaveLength(0);
+    expect(p.audits.map((a) => a.kind)).toEqual(['entity.scout_started', 'entity.scout_failed']);
   });
 });

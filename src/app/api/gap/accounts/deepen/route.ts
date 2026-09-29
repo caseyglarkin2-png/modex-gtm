@@ -13,6 +13,7 @@ import { buildAccountBrief } from '@/lib/gap/account-intel/build';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { runEvidenceResearch } from '@/lib/gap/research/run';
 import { scoutCandidate } from '@/lib/gap/entity/candidates';
+import { scoutRefusalStatus } from '@/lib/gap/entity/providers';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 
 export const dynamic = 'force-dynamic';
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
     // SCOUT depth: what the company is and what it operates (the same Scout as candidates; nothing is created).
     const r = await scoutCandidate(prisma, { company: name, actor: g.email, now });
     await prisma.gapAuditEvent.create({ data: { kind: 'research.completed', actor: g.email, subject_type: 'account', subject_id: name, payload: { orchestrator: 'deepen', section, outcome: 'refused' in r ? r.refused : r.verdict } } }).catch(() => null);
-    if ('refused' in r) return NextResponse.json({ error: r.refused, reason: r.why ?? 'Scout could not run now; nothing was saved.' }, { status: r.refused === 'web_failed' ? 502 : 429 });
+    if ('refused' in r) return NextResponse.json({ error: r.refused, reason: r.why ?? 'Scout could not run now; nothing was saved.' }, { status: scoutRefusalStatus(r.refused) });
     return NextResponse.json({ section, outcome: 'scouted', fit: r.verdict, entityType: r.entityType, facts: r.network.length + r.freight.length, rejected: 0, notes: [r.why] });
   }
   const result = await runEvidenceResearch(prisma, { accountName: name, personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: g.email, now, focus: task.focus, context: { orchestrator: 'deepen', section }, seekCurrentness: false });

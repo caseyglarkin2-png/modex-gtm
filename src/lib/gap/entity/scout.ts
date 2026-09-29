@@ -11,6 +11,7 @@
  * claims are cited, not verified at source: the account brief treats them as leads, never VERIFIED_PUBLIC.
  */
 import { deriveFit, ENTITY_TYPES, fitFromName, operatingClaims, type EntityType, type YardFlowFit } from './fit';
+import { askGrounded, defaultProviders, groundedOnly, type Attempt, type ProviderName, type ScoutProvider } from './providers';
 
 export type { EntityType, YardFlowFit } from './fit';
 /** The stored verdict IS the YardFlow fit. */
@@ -34,6 +35,9 @@ export interface ScoutResult {
   basis: 'name_rules' | 'web';
   /** The web pass itself failed (quota, network, a cut-off answer): nothing was learned, so nothing is stored. */
   failed?: boolean;
+  /** Which grounded provider answered, and every attempt in the chain (recorded in the audit). */
+  provider?: ProviderName;
+  attempts?: Attempt[];
 }
 
 /** Kept for callers: the name rule as a Scout-shaped answer (fit settled only when final). */
@@ -99,29 +103,29 @@ Return ONLY JSON:
  "unknowns": ["what you could not find"]}
 "shipper" owns the goods it ships. A 3PL, carrier or terminal operator that RUNS facilities or fleets still gets its network and freight claims: report them. A "broker" arranges freight without running it. Every claim needs the URL of a page that states it. If you cannot find something, leave it out and list it in unknowns. Never guess.`;
 
-export async function scoutCompany(company: string, deps: { ask?: (prompt: string) => Promise<string>; hint?: string } = {}): Promise<ScoutResult> {
+/**
+ * groundedCompanyScout: the name rule first (free), then the provider chain (entity/providers.ts). Whichever
+ * provider answers, the result is the same typed Scout evidence; a claim the search did not cite is dropped.
+ */
+export async function scoutCompany(company: string, deps: { ask?: (prompt: string) => Promise<string>; providers?: ScoutProvider[]; hint?: string } = {}): Promise<ScoutResult> {
   const base = { company, domain: null, what: null, network: [], freight: [], unknowns: [] as string[] };
   const rule = fitFromName(company);
   // Only a genuinely obvious name settles fit for free; a logistics or carrier name still gets checked.
   if (rule.final) return { ...base, verdict: rule.fit, entityType: rule.entityType, why: rule.why, basis: 'name_rules' };
-  const ask = deps.ask ?? defaultAsk;
-  let text: string;
-  try {
-    text = await ask(SCOUT_PROMPT(company, deps.hint ?? ''));
-  } catch (e) {
-    return { ...base, verdict: 'UNKNOWN', entityType: null, why: `The web pass failed (${e instanceof Error ? e.message.slice(0, 120) : 'error'}); nothing is known yet.`, basis: 'web', failed: true };
+  const providers: ScoutProvider[] = deps.providers ?? (deps.ask ? [{ name: 'gemini', available: () => true, ask: async (q) => ({ text: await deps.ask!(q), citations: null }) }] : defaultProviders());
+  const r = await askGrounded(SCOUT_PROMPT(company, deps.hint ?? ''), (a) => {
+    const p = parseScout(a.text);
+    if (!p) return null;
+    const net = groundedOnly(p.network, a.citations);
+    const fr = groundedOnly(p.freight, a.citations);
+    const dropped = [...net.dropped, ...fr.dropped].map((c) => `Not cited by the search (dropped): ${c.claim}`);
+    return { ...p, network: net.kept, freight: fr.kept, unknowns: [...p.unknowns, ...dropped] };
+  }, providers);
+  if (!r.ok) {
+    const how = r.attempts.map((a) => `${a.provider} ${a.outcome.replace(/_/g, ' ')}`).join('; ') || 'no provider configured';
+    return { ...base, verdict: 'UNKNOWN', entityType: null, why: `The web pass failed (${how}); nothing is known yet. Retry later.`, basis: 'web', failed: true, attempts: r.attempts };
   }
-  const p = parseScout(text);
-  if (!p) return { ...base, verdict: 'UNKNOWN', entityType: null, why: 'The web pass returned nothing usable.', basis: 'web', failed: true };
+  const p = r.value;
   const f = deriveFit({ entityType: p.entityType, operating: operatingClaims([...p.network, ...p.freight]).length, ambiguous: p.ambiguous, what: p.what });
-  return { company, verdict: f.fit, entityType: p.entityType, ambiguous: p.ambiguous || undefined, domain: p.domain, what: p.what, why: f.why, network: p.network, freight: p.freight, unknowns: p.unknowns, basis: 'web' };
-}
-
-async function defaultAsk(prompt: string): Promise<string> {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error('web search not configured');
-  const { GoogleGenerativeAI } = await import('@google/generative-ai');
-  const model = new GoogleGenerativeAI(key).getGenerativeModel({ model: 'gemini-2.5-flash', tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never });
-  const res = await model.generateContent(prompt);
-  return res.response.text();
+  return { company, verdict: f.fit, entityType: p.entityType, ambiguous: p.ambiguous || undefined, domain: p.domain, what: p.what, why: f.why, network: p.network, freight: p.freight, unknowns: p.unknowns, basis: 'web', provider: r.provider, attempts: r.attempts };
 }

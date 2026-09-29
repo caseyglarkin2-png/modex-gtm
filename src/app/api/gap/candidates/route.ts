@@ -14,6 +14,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { accountCreationCheck, createGapAccount, decideCandidate, loadCandidateQueue, mapCandidateToAccount, replanSourcesFor, scoutCandidate } from '@/lib/gap/entity/candidates';
+import { scoutRefusalStatus } from '@/lib/gap/entity/providers';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 
 export const dynamic = 'force-dynamic';
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
   const now = new Date();
   if (b.op === 'scout') {
     const r = await scoutCandidate(prisma, { company: b.company, hint: b.hint, force: b.force, actor: g.email, now });
-    if ('refused' in r) return NextResponse.json({ error: r.refused, scoutedAt: r.scoutedAt ?? null, reason: r.why ?? null }, { status: r.refused === 'web_failed' ? 502 : 429 });
+    if ('refused' in r) return NextResponse.json({ error: r.refused, scoutedAt: r.scoutedAt ?? null, reason: r.why ?? null }, { status: scoutRefusalStatus(r.refused) });
     return NextResponse.json(r);
   }
   if (b.op === 'check') return NextResponse.json(await accountCreationCheck(prisma, { name: b.name, domain: b.domain }));

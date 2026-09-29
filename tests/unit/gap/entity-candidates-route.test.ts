@@ -32,6 +32,17 @@ describe('/api/gap/candidates', () => {
     expect(svc.decideCandidate).not.toHaveBeenCalled();
   });
 
+  it('Scout refusals: providers down is 503 with the attempt chain, a running Scout is 409, a cap is 429', async () => {
+    svc.scoutCandidate.mockResolvedValueOnce({ refused: 'web_failed', why: 'The web pass failed (gemini quota; openai_web ok).', retryable: true });
+    const r = await POST(req({ op: 'scout', company: 'Crowley' }));
+    expect(r.status).toBe(503);
+    expect(await r.json()).toMatchObject({ error: 'web_failed', reason: 'The web pass failed (gemini quota; openai_web ok).' });
+    svc.scoutCandidate.mockResolvedValueOnce({ refused: 'in_flight' });
+    expect((await POST(req({ op: 'scout', company: 'Crowley' }))).status).toBe(409);
+    svc.scoutCandidate.mockResolvedValueOnce({ refused: 'attempt_cap' });
+    expect((await POST(req({ op: 'scout', company: 'Crowley' }))).status).toBe(429);
+  });
+
   it('an add refused as a possible duplicate is 409 with the matches, and nothing is re-planned', async () => {
     svc.createGapAccount.mockResolvedValue({ ok: false, reason: 'possible_duplicate', matches: ['Costa Farms, LLC'] });
     const r = await POST(req({ op: 'add', company: 'Costa Farms', name: 'Costa Farms', vertical: 'agriculture', reason: 'Inland26' }));
