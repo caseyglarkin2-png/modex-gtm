@@ -1,4 +1,4 @@
-# Account Intelligence dogfood (Release H)
+# Account Intelligence dogfood (Releases H, J-M)
 
 STATUS: SHIPPED 2026-09-29
 
@@ -9,6 +9,40 @@ This was a read-only run against production using `scripts/gap/dogfood-intel.ts`
 - **BEFORE** is what GAP showed before this program (or earlier in it).
 - **AFTER** is the brief on the final code.
 - **DECISION CHANGE** is what Casey would now do differently.
+
+## Final closeout dogfood (Releases J-M + red team, production)
+
+Read-only, production `/gap/accounts/*` through the rig session, plus the candidate queue. No sends, no drafts, no
+account created, no HubSpot writes. Candidate verdicts are Scout research rows (company level).
+
+| | Account | Entity type | YardFlow fit | Physical network | Corporate family | Commercial conflict | Research state | Next human action |
+|---|---|---|---|---|---|---|---|---|
+| A | General Mills | manufacturer | Direct buyer | 28 US plants (FY2025 10-K) | None known | None (no open deal) | First touch ready: research held | Review the thesis and the first touch to the primary person |
+| B | Crowley | Type unknown | Direct buyer (8 audited self-operated sites) | 8 sites audited | None known | Open deals (Pilot, Network) | In a deal: no cold research | Work the deal: the Deal brief objective |
+| B | Lineage Logistics (MMYQB) | 3PL | Direct buyer (Scout, grounded) | cited cold-storage warehouses | n/a (candidate) | none | Scouted | ADD / MAP on /gap/candidates |
+| C | FreightWaves | vendor | Partner / channel | none | n/a | none | Scouted | Partner conversation or ignore |
+| C | American Logistics, Inc. | freight broker | Not a fit (no cited physical operation) | none | n/a | none | Scouted (gateway) | Ignore |
+| D | Frito-Lay | manufacturer | Direct buyer | 28 sites audited | Parent: PepsiCo · No related GAP activity | none live in the family | Catalysts research offered | Deepen catalysts |
+| D | PepsiCo | Type unknown | Direct buyer (30 self-operated sites) | 30 sites audited | Subsidiaries: Frito-Lay · No related GAP activity | none | Identity Scout offered (type only) | Draft and review a grounded thesis |
+| E | Lineage Logistics / FedEx Supply Chain / DTX Trans | 3PL / 3PL / carrier | Direct buyer | cited | n/a | none | Scouted | Casey's ADD / MAP |
+| F | Kroger | Type unknown | Direct buyer (62 facilities, 10-K) | 62 facilities | None known | Open deal: YardFlow - Kroger | In a deal: no cold research | Work the deal |
+
+BEFORE J-M:
+- Crowley, PepsiCo and Kroger read "Fit unknown" because the vertical is Unknown.
+- Logistics / carrier names were rejected by name (Lineage Logistics, FedEx Supply Chain).
+- Gemini quota stopped Scout.
+
+AFTER:
+- Fit comes from operations; the type stays descriptive.
+- Every logistics name is checked.
+- Scout fails over to the AI Gateway Perplexity search tool. Lineage Logistics came back DIRECT via Gemini; Schneider and 14 more came back via the gateway while Gemini and OpenAI were cooling.
+
+The family hold was proven by unit and route tests:
+- PepsiCo active opportunity → Frito-Lay held.
+- Separate buying motion scoped with a snapshot.
+- A new deal re-holds.
+
+In production, no PepsiCo-family account has live activity today, so the page correctly shows "No related GAP activity" (no hold). FedEx exposed one more case, fixed in PR #322: duplicate CRM shells with no HubSpot company read as unreadable.
 
 ## PepsiCo
 
@@ -76,13 +110,15 @@ This was a read-only run against production using `scripts/gap/dogfood-intel.ts`
 
 **DECISION CHANGE:** Do not contact yet. Run DEEPEN on catalysts first.
 
-## FedEx (should be rejected as a shipper prospect)
+## FedEx (a 3PL that runs its own yards)
 
-**BEFORE:** The record (vertical "3PL / Logistics") would have been treated like any watched account, with a wedge and a fact-led motion on a Memphis hub investment.
+SUPERSEDED BY Release J (entity type != fit). The Release H reading ("not a shipper prospect: work it as a partner")
+was the defect this closeout fixed.
 
-**AFTER:** *Not a shipper prospect: a logistics provider runs yards for its customers. Work it as a partner or channel, never with a shipper pitch.* This appears in both the motion and why-not-pursue.
+**AFTER (J-M):** 3PL / contract logistics · Direct buyer (29 audited self-operated sites). Its duplicate GAP records
+(FedEx Services, FedEx Logistics, FedEx Corporation) are held together as the same company, never merged.
 
-**DECISION CHANGE:** No shipper outreach. If it is worked at all, it is a partner conversation.
+**DECISION CHANGE:** A yard pitch to FedEx's own network, not a partner conversation.
 
 ## Harbor Foods Group (MMYQB new shipper)
 
