@@ -57,8 +57,10 @@ export const BACKGROUND_TIME_BUDGET_MS = 120_000;
  * (he said "follow this up"; it does not make it true), (3) a strong fresh discovered signal or Pounce trigger,
  * (4) evidence nearing expiry.
  */
-export type TargetReason = 'research_work' | 'shared_signal' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence' | 'priority_backlog';
-const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4, priority_backlog: 5 };
+export type TargetReason = 'research_work' | 'shared_signal' | 'requested_research' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence' | 'work_source' | 'priority_backlog';
+// Universal Work Intake: Casey pressing RESEARCH MORE on a source member ranks with a story he shared; an account
+// a work source brought in (planned `research`) ranks after fresh triggers. Research is per ACCOUNT, never per row.
+const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, requested_research: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4, work_source: 4, priority_backlog: 5 };
 /**
  * Signal Intelligence D: the proactive backlog. A watched priority account (signals/watch.ts) not researched
  * in this long is researched proactively, never-researched first, then the oldest. An account routing holds for
@@ -84,6 +86,8 @@ export interface BackgroundTarget {
   signalIds?: string[];
   /** A signal Casey himself shared is among them: his "follow this up" is not held back by the account cooldown. */
   sharedByCasey?: boolean;
+  /** Casey pressed RESEARCH MORE on a work-source member here: served (cleared) by this account's next attempt, whatever its reason. */
+  workSourceRequested?: boolean;
 }
 
 export function tierRank(tier: string | null | undefined): number {
@@ -124,6 +128,7 @@ function merge(map: Map<string, BackgroundTarget>, t: BackgroundTarget) {
     problemFamily: cur.problemFamily ?? t.problemFamily,
     signalIds: [...new Set([...(cur.signalIds ?? []), ...(t.signalIds ?? [])])],
     sharedByCasey: !!(cur.sharedByCasey || t.sharedByCasey),
+    workSourceRequested: !!(cur.workSourceRequested || t.workSourceRequested),
   });
 }
 
@@ -187,6 +192,35 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
     });
   }
 
+  // 2c. Accounts a work source brought in that the cohort planner marked `research` (a WATCH source never spends
+  // research). People waiting at the account order them; Casey's explicit RESEARCH MORE is followed up like a share.
+  // Casey's explicit RESEARCH MORE is honored for any member of any active source (even with evidence already,
+  // even in a WATCH source), except at an open deal or for someone who must not be contacted.
+  const hasMembers = !!prisma.gapWorkSourceMember?.findMany;
+  const wsMembers: Array<{ account_name: string | null; status: string; kind: string }> = hasMembers
+    ? await prisma.gapWorkSourceMember.findMany({
+        where: { qualification: 'research', status: 'active', account_name: { not: null }, work_source: { status: 'active', intent: { not: 'watch' } } },
+        select: { account_name: true, status: true, kind: true },
+        take: 5_000,
+      })
+    : [];
+  const requested: Array<{ account_name: string | null; status: string; kind: string }> = hasMembers
+    ? await prisma.gapWorkSourceMember.findMany({
+        where: { status: 'research_requested', qualification: { notIn: ['in_deal', 'do_not_contact'] }, account_name: { not: null }, work_source: { status: 'active' } },
+        select: { account_name: true, status: true, kind: true },
+        take: 1_000,
+      })
+    : [];
+  const wsByAccount = new Map<string, { people: number; requested: boolean }>();
+  for (const w of [...wsMembers, ...requested]) {
+    if (!w.account_name) continue;
+    const cur = wsByAccount.get(w.account_name) ?? { people: 0, requested: false };
+    wsByAccount.set(w.account_name, { people: cur.people + (w.kind === 'person' ? 1 : 0), requested: cur.requested || w.status === 'research_requested' });
+  }
+  for (const [accountName, w] of wsByAccount) {
+    merge(byAccount, { ...base(accountName, w.requested ? 'requested_research' : 'work_source'), peopleBlocked: w.people, sharedByCasey: w.requested, workSourceRequested: w.requested });
+  }
+
   // 3. Outreach facts on approved / in-use hypotheses nearing expiry.
   const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: { freshness_expires_at: Date | null } | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { status: { in: ['approved', 'active'] } },
@@ -231,6 +265,12 @@ export interface BackgroundRunResult {
   researched: Array<{ accountName: string; reason: TargetReason; runId: string; outcome: ResearchResult['outcome']; facts: number; freshFacts: number; rejected: number; conflicts: number }>;
   skipped: Array<{ accountName: string; reason: string }>;
   failed: Array<{ accountName: string; error: string }>;
+}
+
+/** Casey's RESEARCH MORE at this account is served by an attempt (success or failure): back to active. */
+async function serveWorkSourceRequest(prisma: PrismaLike, t: BackgroundTarget): Promise<void> {
+  if (!t.workSourceRequested || !prisma.gapWorkSourceMember?.updateMany) return;
+  await prisma.gapWorkSourceMember.updateMany({ where: { account_name: t.accountName, status: 'research_requested' }, data: { status: 'active' } });
 }
 
 /** The newest research run for an account (any GAP research purpose). */
@@ -292,6 +332,7 @@ export async function runBackgroundResearch(
         signals.length ? { ...deps, extra: () => signalCandidates(signals, { fetchHtml: deps.fetchHtml, accountName: t.accountName }) } : deps,
       );
       if (signals.length) await settleSignals(prisma, { signals, accountName: t.accountName, result: r, now: opts.now });
+      await serveWorkSourceRequest(prisma, t);
       result.researched.push({
         accountName: t.accountName,
         reason: t.reason,
@@ -305,6 +346,8 @@ export async function runBackgroundResearch(
     } catch (e) {
       const error = (e instanceof Error ? e.message : String(e)).slice(0, 200);
       result.failed.push({ accountName: t.accountName, error });
+      // A failed attempt still serves the request (Casey can ask again); never an hourly retry forever.
+      await serveWorkSourceRequest(prisma, t).catch(() => undefined);
       // A signal never sticks in "researching": back to the queue, or settled no_usable_fact after repeated failures.
       for (const sg of signals) {
         const meta = ((sg as { metadata?: Record<string, unknown> | null }).metadata ?? {}) as Record<string, unknown>;

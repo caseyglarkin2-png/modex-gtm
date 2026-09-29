@@ -41,6 +41,7 @@ import { CopyButton } from './copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
 import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
 import { SendFromYardflow } from './send-from-yardflow';
+import { loadRelationshipContext } from '@/lib/gap/intake/context';
 
 type Obj = Record<string, unknown>;
 function isObj(v: unknown): v is Obj {
@@ -163,7 +164,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Phase 2 E1: the six-line brief leads (KNOW / THINK / LEARN / WHY YOU / HISTORY / WRONG IF);
   // it replaces the separate "Why now" block (why now stays in the collapsed evidence below).
   const briefPersonaId = typeof persona?.id === 'number' && pack.personaSource !== 'none' ? persona.id : null;
-  const [angles, briefHistory, contradicted] = await Promise.all([
+  const [angles, briefHistory, contradicted, relationshipContext] = await Promise.all([
     briefPersonaId ? loadAngles(prisma, [briefPersonaId]).catch(() => new Map()) : Promise.resolve(new Map()),
     loadBriefHistory(prisma, {
       accountName: hypothesis.account_name,
@@ -173,6 +174,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       now: new Date(),
     }),
     contradictedFactIds(prisma, hypothesis.account_name, new Date()).catch(() => null),
+    // Universal Work Intake: how Casey knows this person (his context, never evidence).
+    loadRelationshipContext(prisma, { personaId: briefPersonaId, accountName: hypothesis.account_name }).catch(() => []),
   ]);
   const brief = buildBrief({
     hypothesis,
@@ -182,6 +185,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
     history: briefHistory,
     now: new Date(),
     contradicted,
+    context: relationshipContext,
   });
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();

@@ -47,6 +47,7 @@ describe('captureSendAttribution', () => {
       hubspotCompanyId: '8536615981',
       canonicalCompanyId: 'domain:kroger.com',
       problemFamily: 'hidden_capacity',
+      workSources: [], // Universal Work Intake: no source memberships for this person
       capturedAt: AT.toISOString(),
     });
   });

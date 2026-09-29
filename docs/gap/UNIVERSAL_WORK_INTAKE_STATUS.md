@@ -89,3 +89,17 @@ shows 391). GAP itself never touches LinkedIn: the product path is paste
 reads as name + headline pairs. 136 of 390 headlines name a company ("Title at
 Company"); the rest are slogans or credentials and start as NEEDS IDENTITY
 rather than a guessed company.
+
+## Release A: the model and the front door (SHIPPED 2026-09-28, PR #298, merge 379a52bb)
+
+- `GapWorkSource` + `GapWorkSourceMember` (hand SQL `2026-09-28-gap-work-intake.sql`: 7 CHECKs, `GAP_WORK_MEMBER_FROZEN`); applied to production as purely additive DDL before merge.
+- One parser (CSV, pasted tables, line lists, the copied LinkedIn subscriber dialog anchored on connection-degree lines); conservative identity (resolved / new_candidate staged / ambiguous / unresolved; never a Persona or an Account); idempotent import; conference mode (the current source).
+- `/gap/add` (ADD TO GAP), `/gap/sources`, `/gap/sources/:id`. A link delegates to Share to GAP, a conversation to Buyer Truth Capture.
+- A read-only review found 5 P1s (positional LinkedIn parsing, invented employers, credentials as companies, collapsed people, shared candidate source ids) and 8 P2s; all fixed and pinned before merge.
+
+## Release B: cohort intelligence (research per account, proposals, context, attribution)
+
+- `intake/plan.ts` qualifies ACCOUNTS once (watched universe, HubSpot deal truth only for watched accounts, live evidence, theses, last research) and gives every person the account's state; person stops win (do not contact, ambiguous, no identity). Transparent states with reasons, no score. Runs in the background cron (bounded) and on "Qualify accounts now".
+- The ONE research worker (`research/background.ts`) gains two reasons: `work_source` (accounts the planner marked research; after fresh triggers) and `requested_research` (Casey's RESEARCH MORE; ranks with a shared story, served then cleared). A WATCH source never spends research.
+- `intake/opportunities.ts`: people worth attention, never emails. Fact-led (verified fact, normal gates), relationship-led / referral-led (no fact: GAP never drafts a first touch; the evidence gate is unchanged), follow-up (a conversation exists).
+- `intake/context.ts`: relationship context reaches the six-line brief as CONTEXT ("yours, not evidence") and every first touch's immutable send attribution carries `workSources` (association, not causation).
