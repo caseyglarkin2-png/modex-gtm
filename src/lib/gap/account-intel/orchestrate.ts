@@ -94,7 +94,7 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     // One identity Scout answers for 14 days: an operator still UNKNOWN after it needs a human, not a re-run.
     const scouted = brief.fit.scoutedAt && now.getTime() - new Date(brief.fit.scoutedAt).getTime() < 14 * DAY ? brief.fit.scoutedAt : null;
     if (scouted) skipped.push({ section: 'identity', reason: `Scouted on ${scouted.slice(0, 10)}; its answer stands for 14 days (ask what it runs if it is still unclear).` });
-    else tasks.push({ section: 'identity', depth: 'SCOUT', provider: 'research', focus: 'What the company is, and which facilities, yards, terminals or fleets it runs (Scout, cited).', why: 'YardFlow fit is unknown: what it operates decides whether anything else is worth researching.' });
+    else tasks.push({ section: 'identity', depth: 'SCOUT', provider: 'research', focus: 'What the company is, and which facilities, yards, terminals or fleets it runs (Scout, cited).', why: brief.fit.fit === 'UNKNOWN' ? 'YardFlow fit is unknown: what it operates decides whether anything else is worth researching.' : `What kind of company it is is not established (fit reads ${brief.fit.fit === 'DIRECT_BUYER' ? 'direct buyer' : brief.fit.fit.toLowerCase().replace(/_/g, ' ')} from its operations).` });
   }
   // A first touch is ready on a verified fact: the next move is Casey's review, not more research (it would only
   // delay a ready touch). Research resumes on what the buyer says. An unknown fit is still Scouted first (above):

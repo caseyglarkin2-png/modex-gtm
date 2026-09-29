@@ -818,14 +818,16 @@ export function typeFromVertical(v: string | null): EntityType | null {
   // ("Food Distribution" is a distributor before it is food).
   const s = v ?? '';
   const has = (re: string) => new RegExp(`\\b(${re})\\w*`, 'i').test(s);
-  if (has('port|terminal|marine')) return 'port_terminal';
+  // A technology or software vertical is a vendor even when it names what it serves ("Logistics Technology").
+  if (has('software|technolog|saas')) return 'vendor';
+  if (has('port|terminal') || /\bmarine terminal/i.test(s)) return 'port_terminal';
   if (has('broker')) return 'broker';
   if (has('3pl|logistic|warehous|contract logistic|fulfil')) return '3pl';
   if (has('carrier|trucking|transport|freight|rail|drayage')) return 'carrier';
   if (has('retail|grocer|e-?commerce|supermarket')) return 'retailer';
   if (has('distribut|wholesale|foodservice')) return 'distributor';
   if (has('food|beverage|cpg|consumer|manufactur|chemical|automo|auto|industrial|paper|packag|pharma|agri|building|dairy|bottl|brew|steel|metal')) return 'manufacturer';
-  if (has('software|technolog|saas|consult')) return 'vendor';
+  if (has('consult')) return 'vendor';
   return null;
 }
 
