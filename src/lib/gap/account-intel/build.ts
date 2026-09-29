@@ -117,6 +117,17 @@ export interface AccountInputs {
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
   roi: { hardSavingsAnnual: number; totalValueAnnual: number; facilities: number; calculatorVersion: string | null; assumptions: string[] } | null;
+  /**
+   * The corporate family (family/family.ts): related accounts, never merged. `related` is what is live at them
+   * (null when not read, e.g. outside the live page); `hold` is the RELATED ACCOUNT ACTIVITY hold, if any.
+   */
+  family?: {
+    parentName: string | null;
+    members: Array<{ accountName: string; relation: 'parent' | 'subsidiary' | 'sibling'; source: string }>;
+    related: Array<{ accountName: string; relation: string; activity: string[]; unknown: boolean }> | null;
+    separate: { relatedAccounts: string[]; reason: string; actor: string; at: string; expiresAt: string } | null;
+    hold: { detail: string; accounts: string[]; unknown: boolean } | null;
+  } | null;
   /** What Scout found when this company was a candidate: cited, never verified at source (leads, not facts). */
   scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null; basis?: 'web' | 'name_rules' | null; ambiguous?: boolean } | null;
 }
@@ -210,6 +221,8 @@ export interface Glance {
   motion: string;
   /** "3PL / contract logistics · Direct buyer" (entity type, then YardFlow fit). */
   fit: string;
+  /** "Parent: PepsiCo · Related GAP activity: PepsiCo, active opportunity" (compact), or "None known". */
+  family: string;
 }
 
 export type MotionType = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'REFERRAL_LED' | 'RELATIONSHIP_LED' | 'FACT_LED';
@@ -230,6 +243,8 @@ export interface AccountIntelligenceBrief {
   wedge: Wedge;
   glance: Glance;
   motion: Motion;
+  /** The corporate family as the page needs it (never merged intelligence). */
+  family: { parentName: string | null; members: Array<{ accountName: string; relation: string; source: string }>; hold: { detail: string; accounts: string[]; unknown: boolean } | null; separate: { relatedAccounts: string[]; reason: string; actor: string; at: string; expiresAt: string } | null } | null;
   /** What the company is (descriptive) and whether it could buy YardFlow (from operations), with the evidence. */
   fit: { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[]; scoutedAt: string | null };
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
@@ -324,6 +339,14 @@ function identitySection(i: AccountInputs, now: Date): Section {
     const t = i.pack.account.archetype;
     st.push({ text: `Company type (audit classification): ${t}`, truth: 'INFERENCE', sources: [auditSrc('demo pack', i.pack.builtAt)], falsifiableBy: 'Its filings or site describe a different operating model.' });
   }
+  for (const m of i.family?.members ?? []) {
+    const text = `${m.relation === 'parent' ? 'Parent' : m.relation === 'subsidiary' ? 'Subsidiary' : 'Same corporate group'}: ${m.accountName} (a separate GAP account: its intelligence and buyer truth stay its own)`;
+    // HubSpot's parent link and a parent_brand naming the account are records; a sibling is inferred from a shared parent.
+    if (m.source === 'hubspot') st.push({ text, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'hs_parent_company_id', label: 'HubSpot parent company', url: null, at: null }] });
+    else if (m.relation === 'sibling') st.push({ text, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'The two companies are not in the same group, or the parent brand on record is wrong.' });
+    else st.push({ text, truth: 'VERIFIED_PUBLIC', sources: [rec] });
+  }
+  if (i.family?.parentName && !(i.family.members ?? []).some((m) => m.relation === 'parent')) st.push({ text: `Parent brand on record: ${i.family.parentName} (not a GAP account)`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
   const fit = accountFit(i, now);
   st.push({ text: `${fit.entityType ? ENTITY_LABEL[fit.entityType] : 'Company type unknown'}; YardFlow fit: ${FIT_LABEL[fit.fit]}. ${fit.why}${fit.evidence.length ? ` Evidence: ${fit.evidence.join('; ')}.` : ''}`, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'Its own sites and operations say otherwise (who runs the facilities, yards and fleet).' });
   if (i.siblings.length) st.push({ text: `Duplicate account rows share this name: ${i.siblings.join(', ')}. People and facts may be split across them until they are merged.`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
@@ -759,6 +782,7 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
       return live.length && live.every((f) => sensitivityOf(f.quote)) ? sensitivityOf(live[0].quote) : null;
     })(),
     fit: accountFit(i, now),
+    relatedHold: i.family?.hold?.detail ?? null,
   });
   const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0])?.name ?? null : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
   return { type: a.kind, who, why: a.why };
@@ -769,6 +793,19 @@ const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ??
 /** Titles that plausibly touch the yard; still LIKELY, never ownership. */
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
 const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern)\b/i;
+
+/** The compact CORPORATE FAMILY line for the 30-second view. */
+function familyLine(i: AccountInputs): string {
+  const f = i.family;
+  if (!f || (!f.parentName && !f.members.length)) return 'None known';
+  const parent = f.members.find((m) => m.relation === 'parent')?.accountName ?? f.parentName;
+  const kids = f.members.filter((m) => m.relation === 'subsidiary').map((m) => m.accountName);
+  const sibs = f.members.filter((m) => m.relation === 'sibling').map((m) => m.accountName);
+  const shape = [parent ? `Parent: ${parent}` : null, kids.length ? `Subsidiaries: ${kids.join(', ')}` : null, sibs.length ? `Same group: ${sibs.join(', ')}` : null].filter(Boolean).join(' · ');
+  const live = (f.related ?? []).filter((r) => r.activity.length || r.unknown).map((r) => `${r.accountName}, ${r.activity.length ? r.activity.join(', ') : 'deal state unreadable'}`);
+  const activity = f.related === null ? 'related activity not read here' : live.length ? `Related GAP activity: ${live.join('; ')}` : 'No related GAP activity';
+  return `${shape} · ${activity}${f.separate ? ` · Separate buying motion confirmed by ${f.separate.actor} until ${f.separate.expiresAt.slice(0, 10)}` : ''}`;
+}
 
 /** What the account record's vertical says the company is (descriptive only; never the fit). */
 export function typeFromVertical(v: string | null): EntityType | null {
@@ -842,6 +879,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   if (i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)))) whyNot.push('The buyer confirmed an incumbent system: a displacement story needs its own evidence.');
   const aud = auditedSites(i.pack);
   if (aud.kept.length && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
+  if (i.family?.hold) whyNot.push(i.family.hold.detail);
   const fit = accountFit(i, now);
   if (fit.fit === 'PARTNER' || fit.fit === 'NOT_FIT' || fit.fit === 'UNKNOWN') whyNot.push(`${FIT_LABEL[fit.fit]}: ${fit.why}`);
   const sensitive = live[0] ? sensitivityOf(live[0].quote) : null;
@@ -890,7 +928,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     nextAction: nextAction(i, motion, now),
     motion: motionLine(motion),
     fit: `${fit.entityType ? ENTITY_LABEL[fit.entityType] : 'Type unknown'} · ${FIT_LABEL[fit.fit]}`,
+    family: familyLine(i),
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion };
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, family: i.family ? { parentName: i.family.parentName, members: i.family.members, hold: i.family.hold, separate: i.family.separate } : null, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion };
 }

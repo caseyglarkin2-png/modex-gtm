@@ -13,6 +13,7 @@ import { loadAccountBrief } from '@/lib/gap/account-intel/load';
 import { AccountBriefView } from '@/components/gap/account-brief';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { ResearchPlanView } from '@/components/gap/research-plan';
+import { SeparateMotion } from '@/components/gap/separate-motion';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
@@ -65,6 +66,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         brief={brief}
         afterGlance={
           <>
+            {brief.family?.hold ? <SeparateMotion accountName={brief.accountName} detail={brief.family.hold.detail} relatedAccounts={brief.family.hold.accounts} /> : null}
             {/* In a deal: the same account, learned from the buyer (the Deal Brief: buyer truth, unknowns, stakeholders, next learning objective; no scoring). */}
             {brief.dealState === 'ACTIVE' ? (
               dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>
