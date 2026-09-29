@@ -6,7 +6,7 @@
  * provenance edges on ONE Persona.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { createWorkSource, previewIntake, commitIntake, addPerson, setMemberStatus, currentWorkSource, setCurrentWorkSource } from '@/lib/gap/intake/service';
+import { createWorkSource, previewIntake, commitIntake, addPerson, setMemberStatus, currentWorkSource, setCurrentWorkSource, mapCompanyToAccount } from '@/lib/gap/intake/service';
 
 const NOW = new Date('2026-09-28T15:00:00Z');
 const ACTOR = 'casey@freightroll.com';
@@ -201,5 +201,33 @@ describe('Release A review fixes', () => {
     const p = await previewIntake(prisma, { text: 'Name,Email\nAngi Acosta,angi@acmefoods.com\nA. Acosta,angi@acmefoods.com', kind: 'people' });
     expect(p.counts.rows).toBe(1);
     expect(p.parse.skipped.duplicate).toBe(1);
+  });
+});
+
+describe('NEEDS IDENTITY is actionable: Casey says which account a company is', () => {
+  it('registers a curated alias, re-resolves the source, and people there become known at the account', async () => {
+    const { prisma, t } = db();
+    prisma.gapAccountAlias.findUnique = vi.fn(async () => null);
+    prisma.gapAccountAlias.create = vi.fn(async ({ data }: any) => ({ id: 'al1', ...data }));
+    prisma.account.findUnique = vi.fn(async ({ where }: any) => t.accounts.find((a) => a.name === where.name) ?? null);
+    const src = (await createWorkSource(prisma, { name: 'MMYQB', sourceType: 'newsletter', relationshipContext: 'MMYQB subscriber', actor: ACTOR })) as any;
+    await commitIntake(prisma, { workSourceId: src.id, text: 'Name,Title,Company\nHana Lee,Senior Director Supply Chain,Harbor Foods Group', kind: 'people', actor: ACTOR, now: NOW });
+    expect(t.members[0].resolution).toBe('unresolved');
+    t.accounts.push({ name: 'Harbor Foods', hubspot_company_id: null });
+    const plan = vi.fn(async () => ({ members: 1, accounts: 1, deferredAccounts: 0, changed: 1, reresolved: 1, byState: {}, researchAccounts: [] }));
+    const r = await mapCompanyToAccount(prisma, { workSourceId: src.id, company: 'Harbor Foods Group', accountName: 'Harbor Foods', actor: ACTOR, now: NOW }, { plan });
+    expect(r).toMatchObject({ ok: true, alias: 'CREATED', reresolved: 1 });
+    expect(prisma.gapAccountAlias.create).toHaveBeenCalledWith({ data: expect.objectContaining({ alias: 'Harbor Foods Group', account_name: 'Harbor Foods', source: 'manual', created_by: ACTOR }) });
+    expect(plan).toHaveBeenCalledWith(prisma, expect.objectContaining({ workSourceId: src.id }));
+    expect(t.audit.at(-1)).toMatchObject({ kind: 'work_source.company_mapped' });
+  });
+
+  it('refuses an account GAP does not have (never creates one) and reports an alias already pointing elsewhere', async () => {
+    const { prisma } = db();
+    prisma.account.findUnique = vi.fn(async () => null);
+    expect(await mapCompanyToAccount(prisma, { workSourceId: 's', company: 'Costa Farms', accountName: 'Costa Farms', actor: ACTOR, now: NOW }, { plan: vi.fn() as never })).toEqual({ ok: false, reason: 'account_not_found' });
+    prisma.account.findUnique = vi.fn(async () => ({ name: 'Harbor Foods' }));
+    prisma.gapAccountAlias.findUnique = vi.fn(async () => ({ id: 'x', account_name: 'Oak Harbor Freight Lines' }));
+    expect(await mapCompanyToAccount(prisma, { workSourceId: 's', company: 'Harbor Foods Group', accountName: 'Harbor Foods', actor: ACTOR, now: NOW }, { plan: vi.fn() as never })).toEqual({ ok: false, reason: 'alias_conflict:Oak Harbor Freight Lines' });
   });
 });

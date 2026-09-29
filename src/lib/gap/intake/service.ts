@@ -281,3 +281,26 @@ export async function setMemberStatus(prisma: PrismaLike, input: { memberId: str
   await prisma.gapAuditEvent.create({ data: { kind: 'work_source.member_status', actor: input.actor, subject_type: 'work_source_member', subject_id: m.id, payload: { from: m.status, to: input.status } } });
   return { ok: true };
 }
+
+/**
+ * NEEDS IDENTITY, made actionable: Casey says which EXISTING account a company is ("Harbor Foods Group" is
+ * Harbor Foods). The existing curated alias mechanism records it (source `manual`), then the source is
+ * re-resolved and re-qualified. GAP never creates an account: an unknown account name is refused.
+ */
+export async function mapCompanyToAccount(
+  prisma: PrismaLike,
+  input: { workSourceId: string; company: string; accountName: string; actor: string; now: Date },
+  deps: { plan?: (p: PrismaLike, i: { now: Date; actor: string; workSourceId: string; maxAccounts: number; timeBudgetMs: number }) => Promise<{ reresolved: number; accounts: number }> } = {},
+): Promise<{ ok: true; alias: 'CREATED' | 'ALREADY_MATCHED'; reresolved: number; accounts: number } | { ok: false; reason: string }> {
+  const company = input.company?.trim();
+  if (!company) return { ok: false, reason: 'company_required' };
+  const account = await prisma.account.findUnique({ where: { name: input.accountName }, select: { name: true } });
+  if (!account) return { ok: false, reason: 'account_not_found' };
+  const { registerAlias } = await import('../identity/service');
+  const alias = await registerAlias(prisma, { alias: company, accountName: account.name, source: 'manual', createdBy: input.actor });
+  if (alias.status === 'CONFLICT') return { ok: false, reason: `alias_conflict:${alias.existingAccountName}` };
+  const plan = deps.plan ?? (await import('./plan')).planWorkSources;
+  const r = await plan(prisma, { now: input.now, actor: input.actor, workSourceId: input.workSourceId, maxAccounts: 25, timeBudgetMs: 45_000 });
+  await prisma.gapAuditEvent.create({ data: { kind: 'work_source.company_mapped', actor: input.actor, subject_type: 'work_source', subject_id: input.workSourceId, payload: { company, accountName: account.name, alias: alias.status, reresolved: r.reresolved } } });
+  return { ok: true, alias: alias.status, reresolved: r.reresolved, accounts: r.accounts };
+}

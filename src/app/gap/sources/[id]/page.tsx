@@ -7,17 +7,18 @@ import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { loadSource, MEMBER_FILTERS, type MemberView } from '@/lib/gap/intake/views';
+import { loadSource, loadUnknownCompanies, MEMBER_FILTERS, type MemberView } from '@/lib/gap/intake/views';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { SourceMemberActions } from '@/components/gap/source-member-actions';
 import { SourceOpportunities } from '@/components/gap/source-opportunities';
 import { SourcePlanButton } from '@/components/gap/source-plan-button';
 import { loadOpportunities } from '@/lib/gap/intake/opportunities';
+import { UnknownCompanies } from '@/components/gap/unknown-companies';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP source' };
 
-const RESOLUTION_LABEL: Record<string, string> = { resolved: 'Known in GAP', new_candidate: 'New at a known account', ambiguous: 'Ambiguous', unresolved: 'Need identity' };
+const RESOLUTION_LABEL: Record<string, string> = { resolved: 'Known in GAP', new_candidate: 'New at a known account', ambiguous: 'Ambiguous', unresolved: 'Unresolved' };
 const QUALIFICATION_LABEL: Record<string, string> = {
   research: 'Need research',
   evidence_ready: 'Evidence ready',
@@ -80,7 +81,7 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
   const { id } = await params;
   const q = (await searchParams) ?? {};
   const filter = q.field && q.value && (MEMBER_FILTERS as readonly string[]).includes(q.field) ? { field: q.field as (typeof MEMBER_FILTERS)[number], value: q.value } : null;
-  const [data, opportunities] = await Promise.all([loadSource(prisma, id, { filter }), loadOpportunities(prisma, id, new Date()).catch(() => [])]);
+  const [data, opportunities, unknown] = await Promise.all([loadSource(prisma, id, { filter }), loadOpportunities(prisma, id, new Date()).catch(() => []), loadUnknownCompanies(prisma, id).catch(() => [])]);
   if (!data) notFound();
   const { source: s, members, total } = data;
   return (
@@ -108,6 +109,7 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
         <h2 className="text-sm font-semibold">Opportunities worth your attention</h2>
         <SourceOpportunities items={opportunities} />
       </section>
+      <UnknownCompanies workSourceId={s.id} items={unknown} />
       <section className="space-y-1">
         <h2 className="text-sm font-semibold">Everyone in this source</h2>
         <p className="text-xs text-[var(--muted-foreground)]">

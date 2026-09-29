@@ -147,3 +147,33 @@ export async function loadSource(prisma: PrismaLike, id: string, opts: { filter?
   });
   return { source, members, total };
 }
+
+export interface UnknownCompany {
+  company: string;
+  people: number;
+  titles: string[];
+  ambiguous: boolean;
+}
+
+/**
+ * Companies in this source GAP could not place (not a GAP account, or ambiguous), most people first. Casey can
+ * say which existing account one is (a curated alias) or leave it: GAP never creates an account from a list.
+ */
+export async function loadUnknownCompanies(prisma: PrismaLike, workSourceId: string, opts: { limit?: number } = {}): Promise<UnknownCompany[]> {
+  const { cleanCompanyName } = await import('./parse');
+  const rows: Array<{ company: string | null; title: string | null; resolution: string }> = await prisma.gapWorkSourceMember.findMany({
+    where: { work_source_id: workSourceId, status: { not: 'ignored' }, resolution: { in: ['unresolved', 'ambiguous'] }, company: { not: null } },
+    select: { company: true, title: true, resolution: true },
+    take: 5_000,
+  });
+  const by = new Map<string, UnknownCompany>();
+  for (const r of rows) {
+    const name = cleanCompanyName(r.company!);
+    const cur = by.get(name.toLowerCase()) ?? { company: name, people: 0, titles: [], ambiguous: false };
+    cur.people += 1;
+    if (r.title && cur.titles.length < 3) cur.titles.push(r.title);
+    cur.ambiguous = cur.ambiguous || r.resolution === 'ambiguous';
+    by.set(name.toLowerCase(), cur);
+  }
+  return [...by.values()].sort((a, b) => b.people - a.people || a.company.localeCompare(b.company)).slice(0, opts.limit ?? 60);
+}

@@ -16,7 +16,7 @@
  */
 import { resolveIdentity, normalizeDomain, type IdentityContext } from '../identity/resolve';
 import { normalizeCompanyName } from '../identity/normalize';
-import { CREDENTIAL, type IntakeRow } from './parse';
+import { CREDENTIAL, cleanCompanyName, type IntakeRow } from './parse';
 
 export type IntakeResolution = 'resolved' | 'new_candidate' | 'ambiguous' | 'unresolved';
 
@@ -84,7 +84,8 @@ function resolveCompany(ctx: IntakeContext, row: IntakeRow): { accountName: stri
   // A stated company is resolved on its own words (an email's domain is the EMAIL's evidence, used only when no company is given).
   const domain = row.companyDomain ?? (row.company ? null : emailDomain(row.email)) ?? null;
   if (!row.company && !domain) return { accountName: null, basis: 'no_company', ambiguous: false };
-  const r = resolveIdentity(ctx.identity, { rawName: row.company ?? null, domain });
+  // The company NAME inside what was written ("Petsmart with expertise in ..."); what was supplied stays frozen as supplied.
+  const r = resolveIdentity(ctx.identity, { rawName: row.company ? cleanCompanyName(row.company) : null, domain });
   if (r.ok) return { accountName: r.accountName, basis: `company:${r.via}`, ambiguous: false };
   if (r.reason === 'ambiguous_identity') return { accountName: null, basis: 'company_ambiguous', ambiguous: true };
   return { accountName: null, basis: row.company ? 'company_not_in_gap' : 'no_company', ambiguous: false };
