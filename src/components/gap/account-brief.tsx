@@ -143,7 +143,7 @@ const GLANCE_ROWS: Array<[keyof AccountIntelligenceBrief['glance'], string]> = [
   ['nextQuestion', 'Next question'],
 ];
 
-export function AccountBriefView({ brief }: { brief: AccountIntelligenceBrief }) {
+export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelligenceBrief; afterGlance?: React.ReactNode }) {
   const g = brief.glance;
   const t = brief.thesis;
   return (
@@ -170,6 +170,8 @@ export function AccountBriefView({ brief }: { brief: AccountIntelligenceBrief })
           ))}
         </div>
       </section>
+
+      {afterGlance}
 
       <section className="space-y-2" data-testid="brief-thesis">
         <h2 className="text-sm font-semibold">Account thesis</h2>

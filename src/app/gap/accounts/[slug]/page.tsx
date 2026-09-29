@@ -12,6 +12,8 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadAccountBrief } from '@/lib/gap/account-intel/load';
 import { AccountBriefView } from '@/components/gap/account-brief';
 import { GapSubnav } from '@/components/gap/gap-subnav';
+import { ResearchPlanView } from '@/components/gap/research-plan';
+import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP account' };
@@ -22,7 +24,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   if (!session?.user?.email) redirect('/login');
   const { slug } = await params;
   const q = (await searchParams) ?? {};
-  const brief = await loadAccountBrief(prisma, slug, new Date(), { live: true, name: q.name });
+  const now = new Date();
+  const brief = await loadAccountBrief(prisma, slug, now, { live: true, name: q.name });
   if (!brief) notFound();
   if ('collision' in brief) {
     return (
@@ -51,7 +54,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           Built live from what GAP holds, {brief.generatedAt.slice(0, 10)}. Every line says whether the buyer confirmed it, a source verified it, GAP modeled it or GAP inferred it.
         </p>
       </div>
-      <AccountBriefView brief={brief} />
+      <AccountBriefView brief={brief} afterGlance={<ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, await loadResearchHistory(prisma, brief.accountName, now).catch(() => []), now)} />} />
     </div>
   );
 }

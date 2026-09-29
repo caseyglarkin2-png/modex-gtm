@@ -203,6 +203,8 @@ export interface AccountIntelligenceBrief {
   thesis: Thesis;
   wedge: Wedge;
   glance: Glance;
+  /** The HubSpot deal state as data (plans and gates read this, never the display text). */
+  dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
 }
 
 // ---------------------------------------------------------------- helpers
@@ -650,5 +652,6 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     nextQuestion: discovery[0]?.question ?? null,
     nextAction: nextAction(i, hypotheses, now, discovery),
   };
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance };
+  const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, dealState };
 }
