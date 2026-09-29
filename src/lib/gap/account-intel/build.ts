@@ -853,7 +853,9 @@ export function accountFit(i: AccountInputs, now: Date): { entityType: EntityTyp
   if (i.facilityFact?.status === 'verified') counted('sourced facility count', i.facilityFact.facilityCount);
   else if (i.pack?.account.networkCount && i.pack.account.networkCountSource) counted(`network count (${i.pack.account.networkCountSource})`, i.pack.account.networkCount);
   for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${f.quote.slice(0, 90)}`);
-  for (const c of operatingClaims([...(scout?.network ?? []), ...(scout?.freight ?? [])])) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
+  // Scout leads: page-matched claims each count; site-only ones (Gemini) count once at most.
+  const leads = operatingClaims([...(scout?.network ?? []), ...(scout?.freight ?? [])] as Array<{ claim: string; url: string; siteOnly?: boolean }>);
+  for (const c of [...leads.filter((x) => !x.siteOnly), ...leads.filter((x) => x.siteOnly).slice(0, 1)]) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
   // Each verified self-operated site is its own piece of operating evidence.
   const f = deriveFit({ entityType, operating: evidence.length + Math.max(own.length - 1, 0), ambiguous: false, what: scout?.what ?? null });
   return { entityType, fit: f.fit, why: f.why, evidence: evidence.filter((e) => !/ names \d+ facilities$/.test(e)).slice(0, 4), scoutedAt: i.scout?.basis === 'web' ? i.scout.at : null };

@@ -82,6 +82,11 @@ describe('Release M: the deepen outcome is the SECTION outcome', () => {
     deps.runEvidenceResearch.mockResolvedValue({ runId: 'r1', outcome: 'insufficient_evidence', facts: [], rejected: [], notes: ['edgar: 0 filings', 'web: unavailable (429 quota)'] });
     expect(await (await POST(req({ accountName: 'Acme Foods', section: 'catalysts' }))).json()).toMatchObject({ outcome: 'insufficient_evidence', sectionOutcome: 'provider_unavailable' });
   });
+  it('the web down while EDGAR found a fact for ANOTHER section is still provider_unavailable (red team)', async () => {
+    deps.loadAccountInputs.mockResolvedValue(inputs());
+    deps.runEvidenceResearch.mockResolvedValue({ runId: 'r1', outcome: 'evidence_found', facts: [{}], rejected: [], notes: ['edgar: 1 filing', 'web: unavailable (no grounded web search)'] });
+    expect(await (await POST(req({ accountName: 'Acme Foods', section: 'catalysts' }))).json()).toMatchObject({ sectionOutcome: 'provider_unavailable' });
+  });
   it('a fact that lands in the section is section_filled; facts elsewhere are nothing_for_section', async () => {
     deps.loadAccountInputs.mockResolvedValueOnce(inputs()).mockResolvedValueOnce(inputs([reno]));
     deps.runEvidenceResearch.mockResolvedValue({ runId: 'r1', outcome: 'evidence_found', facts: [{}], rejected: [], notes: ['web: 3 candidates'] });

@@ -33,7 +33,7 @@ interface Fact {
 }
 interface Result {
   runId: string;
-  outcome: 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence';
+  outcome: 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence' | 'provider_unavailable';
   facts: Fact[];
   rejected: Array<{ url: string; reason: string }>;
   conflicts: Array<{ site: string; signalIds: string[] }>;
@@ -289,6 +289,13 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
           ) : busy === 'propose' ? (
             <p>Evidence found. Proposing a thesis from it...</p>
           ) : null}
+        </div>
+      ) : null}
+
+      {result?.outcome === 'provider_unavailable' ? (
+        <div data-testid="research-unavailable" className="space-y-1 rounded-md border border-[var(--border)] p-3 text-xs">
+          <p className="font-semibold">The web search could not run right now.</p>
+          <p className="text-[var(--muted-foreground)]">Nothing was learned, so nothing is concluded. Try again in an hour.</p>
         </div>
       ) : null}
 

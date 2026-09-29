@@ -41,6 +41,7 @@ function outcomeCopy(outcome: string): string {
   if (outcome === 'evidence_found') return 'verified evidence found';
   if (outcome === 'insufficient_evidence') return 'no verifiable physical-network fact found';
   if (outcome === 'conflicting_evidence') return 'conflicting evidence found';
+  if (outcome === 'provider_unavailable') return 'the web search could not run (retry later; nothing concluded)';
   return outcome.replace(/_/g, ' ');
 }
 
