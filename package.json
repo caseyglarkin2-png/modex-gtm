@@ -54,6 +54,7 @@
     "@types/topojson-client": "^3.1.5",
     "@vercel/blob": "^2.4.0",
     "@vercel/edge-config": "^1.4.3",
+    "ai": "^7.0.122",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

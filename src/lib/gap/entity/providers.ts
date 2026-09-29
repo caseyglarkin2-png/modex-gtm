@@ -4,7 +4,7 @@
  *
  *   gemini       Gemini 2.5 Flash with Google Search grounding (GEMINI_API_KEY)
  *   openai_web   OpenAI Responses API with the web_search tool (OPENAI_API_KEY); returns url_citation annotations
- *   gateway_web  Vercel AI Gateway, a search model (AI_GATEWAY_API_KEY); used only when it returns citations
+ *   gateway_web  Vercel AI Gateway with its Perplexity search tool (AI_GATEWAY_API_KEY); citations are the pages it returned
  *
  * Rules:
  *   - A provider that cannot ground (no search tool, no citations) is never used: model memory is never evidence.
@@ -214,19 +214,21 @@ const gatewayWeb: ScoutProvider = {
   name: 'gateway_web',
   available: () => !!process.env.AI_GATEWAY_API_KEY,
   ask: async (prompt, signal) => {
-    const { default: OpenAI } = await import('openai');
-    const client = new OpenAI({ apiKey: process.env.AI_GATEWAY_API_KEY, baseURL: process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1', maxRetries: 0 });
-    const res = (await client.chat.completions.create({ model: process.env.SCOUT_GATEWAY_MODEL || 'perplexity/sonar', messages: [{ role: 'user', content: prompt }] }, { signal })) as unknown as {
-      choices: Array<{ message: { content: string | null; annotations?: Array<{ type: string; url_citation?: { url: string } }>; provider_metadata?: Record<string, unknown> } }>;
-      citations?: string[];
-    };
-    const msg = res.choices?.[0]?.message;
-    // The search provider's own sources ride in provider_metadata (keyed by provider); the gateway's routing block
-    // is not a source.
-    const reported = Object.entries(msg?.provider_metadata ?? {}).filter(([k]) => k !== 'gateway').flatMap(([, v]) => urlsIn(v));
-    const citations = [...new Set([...(res.citations ?? []), ...((msg?.annotations ?? []).filter((a) => a.type === 'url_citation' && a.url_citation?.url).map((a) => a.url_citation!.url)), ...reported])];
-    // No citations back from the gateway: not grounded (askGrounded refuses it). Say which fields it did return.
-    return { text: msg?.content ?? '', citations, note: citations.length ? undefined : `response fields: ${Object.keys(res ?? {}).join(',')}; message fields: ${Object.keys(msg ?? {}).join(',')}; provider_metadata: ${Object.keys(msg?.provider_metadata ?? {}).join(',')}` };
+    // The AI Gateway's Perplexity search tool (billed on the gateway, not a model key). The URLs its search
+    // returned are the citations; the chat-completions path carries no sources, so it is not used.
+    const { gateway, generateText, stepCountIs } = await import('ai');
+    const r = await generateText({
+      model: process.env.SCOUT_GATEWAY_MODEL || 'openai/gpt-5.4-nano',
+      prompt,
+      tools: { perplexity_search: gateway.tools.perplexitySearch({ maxResults: 10, searchLanguageFilter: ['en'] }) },
+      stopWhen: stepCountIs(4),
+      maxRetries: 0,
+      abortSignal: signal,
+    });
+    const searched = r.steps.flatMap((st) => st.toolResults ?? []).flatMap((t) => urlsIn((t as { output?: unknown }).output));
+    const sourced = (r.sources ?? []).flatMap((x) => ('url' in x && typeof x.url === 'string' ? [x.url] : []));
+    const citations = [...new Set([...searched, ...sourced])];
+    return { text: r.text, citations, note: citations.length ? undefined : `the search returned no pages (${r.steps.length} steps)` };
   },
 };
 
