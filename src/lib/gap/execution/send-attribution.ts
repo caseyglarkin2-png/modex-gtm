@@ -18,6 +18,7 @@
  * unrecorded (nothing is backfilled or invented).
  */
 import { parseSteps } from '../sequence/steps';
+import { workSourcesFor, type AttributedWorkSource } from '../intake/context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -40,6 +41,8 @@ export interface SendAttribution {
   hubspotCompanyId: string | null;
   canonicalCompanyId: string | null;
   problemFamily: string | null;
+  /** Universal Work Intake: every work source this person (or account) came from, at send time. Context, not cause. */
+  workSources?: AttributedWorkSource[];
   capturedAt: string;
 }
 
@@ -63,7 +66,7 @@ export function openerApproachFor(stepIndex: number, steps: unknown): string {
 
 export async function captureSendAttribution(prisma: PrismaLike, input: AttributionInput): Promise<SendAttributionField> {
   try {
-    const [hyp, persona, account, link, version] = await Promise.all([
+    const [hyp, persona, account, link, version, workSources] = await Promise.all([
       input.hypothesisId
         ? prisma.prospectingHypothesis.findUnique({
             where: { id: input.hypothesisId },
@@ -74,6 +77,7 @@ export async function captureSendAttribution(prisma: PrismaLike, input: Attribut
       prisma.account.findUnique({ where: { name: input.accountName }, select: { tier: true, hubspot_company_id: true } }),
       prisma.canonicalAccountLink.findUnique({ where: { account_name: input.accountName }, select: { canonical_company_id: true, status: true } }),
       input.sequenceVersionId && input.stepIndex > 0 ? prisma.sequenceVersion.findUnique({ where: { id: input.sequenceVersionId }, select: { steps: true } }) : null,
+      workSourcesFor(prisma, { personaId: input.personaId, accountName: input.accountName }),
     ]);
     const links: Array<{ role: string | null; signal_id: string; signal?: { id: string; type: string | null; source_kind: string | null; source_type: string | null } | null }> = hyp?.signals ?? [];
     const primary = links.find((l) => l.role === 'primary') ?? null;
@@ -93,6 +97,7 @@ export async function captureSendAttribution(prisma: PrismaLike, input: Attribut
       hubspotCompanyId: account?.hubspot_company_id ?? null,
       canonicalCompanyId: link?.status === 'resolved' ? link.canonical_company_id : null,
       problemFamily: hyp?.problem_family ?? null,
+      workSources,
       capturedAt: input.at.toISOString(),
     };
   } catch (e) {

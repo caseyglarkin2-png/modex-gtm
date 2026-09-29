@@ -47,6 +47,8 @@ export interface SixLineBrief {
   history: string[];
   historyState: 'clear' | 'caution' | 'blocked';
   wrongIf: string | null;
+  /** How Casey knows this person (work sources): HIS context, never evidence, never sent by GAP. */
+  context: string[];
 }
 
 const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x.trim().length > 0) : []);
@@ -111,6 +113,8 @@ export function buildBrief(input: {
   now?: Date;
   /** Contradicted fact ids (research/conflicts.ts) -> the site. */
   contradicted?: ReadonlyMap<string, string> | null;
+  /** Relationship context lines (intake/context.ts loadRelationshipContext). */
+  context?: string[] | null;
 }): SixLineBrief {
   const h = input.hypothesis;
   const falsify = list(h?.falsification_questions);
@@ -127,6 +131,7 @@ export function buildBrief(input: {
     history: hist.lines,
     historyState: hist.state,
     wrongIf: (typeof h?.what_a_no_means === 'string' && h.what_a_no_means.trim()) || falsify[1] || null,
+    context: (input.context ?? []).filter((l) => typeof l === 'string' && l.trim()),
   };
 }
 

@@ -57,8 +57,10 @@ export const BACKGROUND_TIME_BUDGET_MS = 120_000;
  * (he said "follow this up"; it does not make it true), (3) a strong fresh discovered signal or Pounce trigger,
  * (4) evidence nearing expiry.
  */
-export type TargetReason = 'research_work' | 'shared_signal' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence' | 'priority_backlog';
-const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4, priority_backlog: 5 };
+export type TargetReason = 'research_work' | 'shared_signal' | 'requested_research' | 'fresh_trigger' | 'discovered_signal' | 'expiring_evidence' | 'work_source' | 'priority_backlog';
+// Universal Work Intake: Casey pressing RESEARCH MORE on a source member ranks with a story he shared; an account
+// a work source brought in (planned `research`) ranks after fresh triggers. Research is per ACCOUNT, never per row.
+const REASON_RANK: Record<TargetReason, number> = { research_work: 1, shared_signal: 2, requested_research: 2, fresh_trigger: 3, discovered_signal: 3, expiring_evidence: 4, work_source: 4, priority_backlog: 5 };
 /**
  * Signal Intelligence D: the proactive backlog. A watched priority account (signals/watch.ts) not researched
  * in this long is researched proactively, never-researched first, then the oldest. An account routing holds for
@@ -187,6 +189,25 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
     });
   }
 
+  // 2c. Accounts a work source brought in that the cohort planner marked `research` (a WATCH source never spends
+  // research). People waiting at the account order them; Casey's explicit RESEARCH MORE is followed up like a share.
+  const wsMembers: Array<{ account_name: string | null; status: string; kind: string }> = prisma.gapWorkSourceMember?.findMany
+    ? await prisma.gapWorkSourceMember.findMany({
+        where: { qualification: 'research', status: { in: ['active', 'research_requested'] }, account_name: { not: null }, work_source: { status: 'active', intent: { not: 'watch' } } },
+        select: { account_name: true, status: true, kind: true },
+        take: 5_000,
+      })
+    : [];
+  const wsByAccount = new Map<string, { people: number; requested: boolean }>();
+  for (const w of wsMembers) {
+    if (!w.account_name) continue;
+    const cur = wsByAccount.get(w.account_name) ?? { people: 0, requested: false };
+    wsByAccount.set(w.account_name, { people: cur.people + (w.kind === 'person' ? 1 : 0), requested: cur.requested || w.status === 'research_requested' });
+  }
+  for (const [accountName, w] of wsByAccount) {
+    merge(byAccount, { ...base(accountName, w.requested ? 'requested_research' : 'work_source'), peopleBlocked: w.people, sharedByCasey: w.requested });
+  }
+
   // 3. Outreach facts on approved / in-use hypotheses nearing expiry.
   const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: { freshness_expires_at: Date | null } | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { status: { in: ['approved', 'active'] } },
@@ -292,6 +313,10 @@ export async function runBackgroundResearch(
         signals.length ? { ...deps, extra: () => signalCandidates(signals, { fetchHtml: deps.fetchHtml, accountName: t.accountName }) } : deps,
       );
       if (signals.length) await settleSignals(prisma, { signals, accountName: t.accountName, result: r, now: opts.now });
+      // Casey's RESEARCH MORE is served by this run: back to active (the cohort planner re-qualifies next run).
+      if (t.reason === 'requested_research' && prisma.gapWorkSourceMember?.updateMany) {
+        await prisma.gapWorkSourceMember.updateMany({ where: { account_name: t.accountName, status: 'research_requested' }, data: { status: 'active' } });
+      }
       result.researched.push({
         accountName: t.accountName,
         reason: t.reason,

@@ -3,6 +3,7 @@ import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { BACKGROUND_DEFAULT_CAP, runBackgroundResearch } from '@/lib/gap/research/background';
+import { planWorkSources } from '@/lib/gap/intake/plan';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -41,7 +42,10 @@ export async function GET(request: Request) {
   const capParam = Number(new URL(request.url).searchParams.get('cap'));
   const cap = Number.isInteger(capParam) && capParam > 0 ? capParam : BACKGROUND_DEFAULT_CAP;
   try {
-    const report = await runBackgroundResearch(prisma, { now: new Date(), cap });
+    // Universal Work Intake: qualify the accounts work sources brought in (account by account, bounded), so the
+    // research below can pick the ones that need it. Planning failure never blocks research.
+    const plan = await planWorkSources(prisma, { now: new Date(), actor: 'gap-background-plan', maxAccounts: 40, timeBudgetMs: 60_000 }).catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) }));
+    const report = { ...(await runBackgroundResearch(prisma, { now: new Date(), cap })), plan };
     await markCronSuccess(CRON_NAME, {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,

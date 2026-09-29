@@ -10,6 +10,9 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadSource, MEMBER_FILTERS, type MemberView } from '@/lib/gap/intake/views';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { SourceMemberActions } from '@/components/gap/source-member-actions';
+import { SourceOpportunities } from '@/components/gap/source-opportunities';
+import { SourcePlanButton } from '@/components/gap/source-plan-button';
+import { loadOpportunities } from '@/lib/gap/intake/opportunities';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP source' };
@@ -77,7 +80,7 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
   const { id } = await params;
   const q = (await searchParams) ?? {};
   const filter = q.field && q.value && (MEMBER_FILTERS as readonly string[]).includes(q.field) ? { field: q.field as (typeof MEMBER_FILTERS)[number], value: q.value } : null;
-  const data = await loadSource(prisma, id, { filter });
+  const [data, opportunities] = await Promise.all([loadSource(prisma, id, { filter }), loadOpportunities(prisma, id, new Date()).catch(() => [])]);
   if (!data) notFound();
   const { source: s, members, total } = data;
   return (
@@ -100,7 +103,13 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
         <Counts id={s.id} field="qualification" counts={s.byQualification} labels={QUALIFICATION_LABEL} active={filter} />
         <Counts id={s.id} field="status" counts={s.byStatus} labels={STATUS_LABEL} active={filter} />
       </section>
+      <SourcePlanButton workSourceId={s.id} />
+      <section className="space-y-2" data-testid="source-opportunities">
+        <h2 className="text-sm font-semibold">Opportunities worth your attention</h2>
+        <SourceOpportunities items={opportunities} />
+      </section>
       <section className="space-y-1">
+        <h2 className="text-sm font-semibold">Everyone in this source</h2>
         <p className="text-xs text-[var(--muted-foreground)]">
           Showing {members.length} of {total}
           {filter ? ` (${filter.field}: ${filter.value.replace(/_/g, ' ')})` : ''}.

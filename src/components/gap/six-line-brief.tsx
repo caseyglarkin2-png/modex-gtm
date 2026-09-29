@@ -69,6 +69,16 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
             ))}
           </ul>
         </Row>
+        {brief.context?.length ? (
+          <Row label="Context" testId="brief-context">
+            <ul className="space-y-0.5">
+              {brief.context.map((l) => (
+                <li key={l}>{l}</li>
+              ))}
+            </ul>
+            <p className="text-xs text-[var(--muted-foreground)]">Yours, not evidence. Mention it only if it would feel natural.</p>
+          </Row>
+        ) : null}
         <Row label="Wrong if" testId="brief-wrong-if">
           {brief.wrongIf ?? <span className="italic text-[var(--muted-foreground)]">No falsification condition written.</span>}
         </Row>
