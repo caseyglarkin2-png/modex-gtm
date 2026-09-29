@@ -12,7 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { commitIntake, mapCompanyToAccount, previewIntake, setCurrentWorkSource } from '@/lib/gap/intake/service';
+import { clearCurrentWorkSource, commitIntake, mapCompanyToAccount, previewIntake, setCurrentWorkSource } from '@/lib/gap/intake/service';
 import { planWorkSources } from '@/lib/gap/intake/plan';
 import { loadSource, MEMBER_FILTERS } from '@/lib/gap/intake/views';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
@@ -25,6 +25,7 @@ const Body = z.discriminatedUnion('op', [
   z.object({ op: z.literal('preview'), kind: z.enum(['people', 'accounts']), text: z.string().min(1).max(TEXT_MAX) }).strict(),
   z.object({ op: z.literal('commit'), kind: z.enum(['people', 'accounts']), text: z.string().min(1).max(TEXT_MAX) }).strict(),
   z.object({ op: z.literal('current') }).strict(),
+  z.object({ op: z.literal('clear_current') }).strict(),
   z.object({ op: z.literal('plan') }).strict(),
   z.object({ op: z.literal('map_company'), company: z.string().min(1).max(300), accountName: z.string().min(1).max(300) }).strict(),
 ]);
@@ -56,6 +57,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const r = await planWorkSources(prisma, { now: new Date(), actor: g.email, workSourceId: id, maxAccounts: 25, timeBudgetMs: 60_000 });
     return NextResponse.json(r);
   }
+  if (b.op === 'clear_current') return NextResponse.json(await clearCurrentWorkSource(prisma, { actor: g.email }));
   if (b.op === 'current') {
     const r = await setCurrentWorkSource(prisma, { workSourceId: id, actor: g.email, now: new Date() });
     return r.ok ? NextResponse.json({ ok: true }) : NextResponse.json({ error: r.reason }, { status: 404 });

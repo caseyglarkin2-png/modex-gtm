@@ -28,6 +28,33 @@ type PrismaLike = any;
 
 export const SOURCE_TYPES = ['newsletter', 'conference', 'crm_list', 'referral', 'relationship', 'target_list', 'content', 'inbound', 'other'] as const;
 export type SourceType = (typeof SOURCE_TYPES)[number];
+/**
+ * What a source TYPE means downstream, in ONE place (configuration, not architecture). A new source type is a
+ * row here (plus the SQL CHECK vocabulary):
+ *   engaged     Casey met or was introduced to these people: their accounts are in scope by his own act
+ *   relational  the relationship is real context, so a no-fact person can still be worth a relationship-led touch
+ *   approach    the no-fact approach (referral-led for a referral), else relationship-led
+ *   opener      'author': Casey may say he writes it (a newsletter), never that they subscribe
+ */
+export interface SourceTypeTraits {
+  engaged: boolean;
+  relational: boolean;
+  approach?: 'referral_led';
+  opener?: 'author';
+}
+export const SOURCE_TYPE_TRAITS: Record<SourceType, SourceTypeTraits> = {
+  newsletter: { engaged: false, relational: true, opener: 'author' },
+  conference: { engaged: true, relational: true },
+  crm_list: { engaged: false, relational: false },
+  referral: { engaged: true, relational: true, approach: 'referral_led' },
+  relationship: { engaged: true, relational: true },
+  target_list: { engaged: false, relational: false },
+  content: { engaged: false, relational: true, opener: 'author' },
+  inbound: { engaged: false, relational: true },
+  other: { engaged: false, relational: false },
+};
+export const traitsOf = (sourceType: string | null | undefined): SourceTypeTraits => SOURCE_TYPE_TRAITS[sourceType as SourceType] ?? SOURCE_TYPE_TRAITS.other;
+
 export const INTENTS = ['research', 'find_people', 'prepare_outreach', 'follow_up', 'watch'] as const;
 export type Intent = (typeof INTENTS)[number];
 export const MEMBER_STATUSES = ['active', 'ignored', 'not_now', 'research_requested'] as const;
@@ -210,6 +237,26 @@ async function writeMembers(prisma: PrismaLike, source: { id: string; source_typ
   return { created, existing, staged, ids };
 }
 
+/**
+ * The structured entry point for an ADAPTER (a HubSpot list, a badge-scan export): rows already mapped to
+ * IntakeRow go through the same identity, staging, idempotency and audit as a paste. No text round trip.
+ */
+export async function commitRows(
+  prisma: PrismaLike,
+  input: { workSourceId: string; rows: IntakeRow[]; actor: string; now: Date; format?: string },
+): Promise<{ ok: true; created: number; existing: number; staged: number; counts: IntakePreview['counts'] } | { ok: false; reason: string }> {
+  const source = await prisma.gapWorkSource.findUnique({ where: { id: input.workSourceId } });
+  if (!source) return { ok: false, reason: 'source_not_found' };
+  if (source.status !== 'active') return { ok: false, reason: 'source_archived' };
+  const parsed: ParseResult = { format: 'csv', rows: input.rows, unmappedColumns: [], skipped: { blank: 0, duplicate: 0 } };
+  const rows = resolveAll(await loadIntakeContext(prisma), parsed);
+  if (rows.length === 0) return { ok: false, reason: 'nothing_to_import' };
+  const w = await writeMembers(prisma, source, rows, input.actor);
+  const counts = countOf(rows);
+  await prisma.gapAuditEvent.create({ data: { kind: 'work_source.imported', actor: input.actor, subject_type: 'work_source', subject_id: source.id, payload: { kind: 'rows', format: input.format ?? 'adapter', counts, created: w.created, existing: w.existing, staged: w.staged, skipped: parsed.skipped } } });
+  return { ok: true, created: w.created, existing: w.existing, staged: w.staged, counts };
+}
+
 export async function commitIntake(
   prisma: PrismaLike,
   input: { workSourceId: string; text: string; kind: IntakeKind; actor: string; now: Date },
@@ -230,6 +277,13 @@ export async function commitIntake(
 /** The current source (conference mode): the active source most recently made current. */
 export async function currentWorkSource(prisma: PrismaLike): Promise<{ id: string; name: string; relationship_context: string | null } | null> {
   return prisma.gapWorkSource.findFirst({ where: { status: 'active', current_at: { not: null } }, orderBy: { current_at: 'desc' } });
+}
+
+/** Back to "People I met": no source is current. */
+export async function clearCurrentWorkSource(prisma: PrismaLike, input: { actor: string }): Promise<{ ok: true }> {
+  await prisma.gapWorkSource.updateMany({ where: { current_at: { not: null } }, data: { current_at: null } });
+  await prisma.gapAuditEvent.create({ data: { kind: 'work_source.current_cleared', actor: input.actor, subject_type: 'work_source', subject_id: 'current', payload: {} } });
+  return { ok: true };
 }
 
 export async function setCurrentWorkSource(prisma: PrismaLike, input: { workSourceId: string; actor: string; now: Date }): Promise<{ ok: boolean; reason?: string }> {

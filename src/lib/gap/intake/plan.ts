@@ -20,7 +20,7 @@
 import { loadWatchProfilesCached } from '../signals/watch';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { loadEvidenceInbox, type InboxAccount } from '../research/inbox';
-import { isIdentityImprovement, loadIntakeContext, stageCandidate } from './service';
+import { isIdentityImprovement, loadIntakeContext, stageCandidate, traitsOf } from './service';
 import { memberKey } from './resolve';
 import { resolveIntakeRow } from './resolve';
 
@@ -56,8 +56,7 @@ export function qualifyAccount(f: AccountFacts, _now: Date): { state: Qualificat
   return { state: 'research', reason: `no live verified fact; ${f.lastResearchAt ? `last researched ${f.lastResearchAt.toISOString().slice(0, 10)}` : 'never researched'}${scope}` };
 }
 
-/** Sources where Casey met or was introduced to people: personal engagement (a newsletter or a list is not). */
-const ENGAGED_TYPES = new Set(['conference', 'referral', 'relationship']);
+
 
 export interface PlanDeps {
   watch?: (prisma: PrismaLike) => Promise<Array<{ accountName: string }>>;
@@ -78,6 +77,7 @@ interface PlanMember {
   qualification: string | null;
   qualification_reason: string | null;
   qualified_at?: Date | null;
+  candidate_id?: number | null;
   name?: string | null;
   title?: string | null;
   company?: string | null;
@@ -99,19 +99,41 @@ export interface PlanResult {
 }
 
 /** Identity improves over time (an account added, an alias registered): re-resolve the members still open. */
-async function reresolveMembers(prisma: PrismaLike, members: PlanMember[]): Promise<number> {
-  // Bounded: at most 300 open members per run (identity improves slowly; the next runs continue).
-  const open = members.filter((m) => m.resolution === 'unresolved' || m.resolution === 'new_candidate').slice(0, 300);
-  if (!open.length) return 0;
-  const ctx = await loadIntakeContext(prisma);
+export async function reresolveMembers(prisma: PrismaLike, members: PlanMember[], deps: { context?: typeof loadIntakeContext } = {}): Promise<number> {
   let changed = 0;
+  // A staged person Casey PROMOTED: follow the promotion (never wait for a name re-match).
+  const staged = members.filter((m) => m.resolution === 'new_candidate' && m.candidate_id && !m.persona_id);
+  if (staged.length && prisma.accountContactCandidate?.findMany) {
+    const promoted: Array<{ id: number; promoted_persona_id: number | null }> = await prisma.accountContactCandidate.findMany({ where: { id: { in: staged.map((m) => m.candidate_id) }, promoted_persona_id: { not: null } }, select: { id: true, promoted_persona_id: true } });
+    const personaOf = new Map(promoted.map((c) => [c.id, c.promoted_persona_id]));
+    for (const m of staged) {
+      const pid = personaOf.get(m.candidate_id!);
+      if (!pid) continue;
+      await prisma.gapWorkSourceMember.update({ where: { id: m.id }, data: { resolution: 'resolved', resolution_basis: 'promoted_candidate', persona_id: pid } });
+      Object.assign(m, { resolution: 'resolved', persona_id: pid });
+      changed += 1;
+    }
+  }
+  // Bounded: at most 300 open members per run. A row with nothing to resolve on (no company, email, profile or
+  // domain) can never improve, so it never takes a slot from one that can.
+  const open = members
+    .filter((m) => (m.resolution === 'unresolved' || m.resolution === 'new_candidate') && (m.company || m.email || m.linkedin_url || m.company_domain))
+    .slice(0, 300);
+  if (!open.length) return changed;
+  const ctx = await (deps.context ?? loadIntakeContext)(prisma);
+  const typeOf = new Map<string, string>();
   for (const m of open) {
     const r = resolveIntakeRow(ctx, { kind: m.kind === 'account' ? 'account' : 'person', raw: {}, ...(m.name ? { name: m.name } : {}), ...(m.title ? { title: m.title } : {}), ...(m.company ? { company: m.company } : {}), ...(m.email ? { email: m.email } : {}), ...(m.linkedin_url ? { linkedinUrl: m.linkedin_url } : {}), ...(m.company_domain ? { companyDomain: m.company_domain } : {}) });
     // Only an improvement moves: unresolved -> anything known, new_candidate -> resolved (the Persona now exists).
     if (!isIdentityImprovement(m, r)) continue;
-    const row = { kind: (m.kind === 'account' ? 'account' : 'person') as 'account' | 'person', raw: {}, ...(m.name ? { name: m.name } : {}), ...(m.title ? { title: m.title } : {}), ...(m.company ? { company: m.company } : {}), ...(m.email ? { email: m.email } : {}) };
+    const row = { kind: (m.kind === 'account' ? 'account' : 'person') as 'account' | 'person', raw: (m.raw && typeof m.raw === 'object' ? m.raw : {}) as Record<string, string>, ...(m.name ? { name: m.name } : {}), ...(m.title ? { title: m.title } : {}), ...(m.company ? { company: m.company } : {}), ...(m.email ? { email: m.email } : {}), ...(m.linkedin_url ? { linkedinUrl: m.linkedin_url } : {}), ...(m.company_domain ? { companyDomain: m.company_domain } : {}) };
     // A person newly placed at a known account is staged, the same as at import (never a dead-end row).
-    const candidateId = row.kind === 'person' && r.resolution === 'new_candidate' ? await stageCandidate(prisma, { row, key: memberKey(row), resolved: r }, { id: m.work_source_id, source_type: 'reresolve' }) : null;
+    if (!typeOf.has(m.work_source_id)) {
+      const src = await prisma.gapWorkSource.findUnique({ where: { id: m.work_source_id }, select: { source_type: true } }).catch(() => null);
+      typeOf.set(m.work_source_id, src?.source_type ?? 'other');
+    }
+    const sourceType = typeOf.get(m.work_source_id)!;
+    const candidateId = row.kind === 'person' && r.resolution === 'new_candidate' ? await stageCandidate(prisma, { row, key: memberKey(row), resolved: r }, { id: m.work_source_id, source_type: sourceType }) : null;
     await prisma.gapWorkSourceMember.update({ where: { id: m.id }, data: { resolution: r.resolution, resolution_basis: r.basis, account_name: r.accountName, persona_id: r.personaId, resolution_candidates: r.candidates.length ? r.candidates : undefined, ...(candidateId ? { candidate_id: candidateId } : {}) } });
     Object.assign(m, { resolution: r.resolution, account_name: r.accountName, persona_id: r.personaId });
     changed += 1;
@@ -127,7 +149,7 @@ export async function planWorkSources(
   const clock = input.clock ?? Date.now;
   const started = clock();
   const sources: Array<{ id: string; intent: string; source_type?: string; name?: string }> = await prisma.gapWorkSource.findMany({ where: { status: 'active', ...(input.workSourceId ? { id: input.workSourceId } : {}) }, select: { id: true, intent: true, source_type: true, name: true } });
-  const engagedSource = new Map(sources.filter((s) => ENGAGED_TYPES.has(String(s.source_type ?? ''))).map((s) => [s.id, String(s.name ?? 'a source')]));
+  const engagedSource = new Map(sources.filter((s) => traitsOf(s.source_type).engaged).map((s) => [s.id, String(s.name ?? 'a source')]));
   const sourceIds = sources.map((s) => s.id);
   const members: PlanMember[] = sourceIds.length
     ? await prisma.gapWorkSourceMember.findMany({ where: { work_source_id: { in: sourceIds }, status: { in: ['active', 'research_requested'] } }, orderBy: [{ ingested_at: 'asc' }] })

@@ -74,14 +74,14 @@ function Member({ m }: { m: MemberView }) {
   );
 }
 
-export default async function SourcePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ field?: string; value?: string }> }) {
+export default async function SourcePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ field?: string; value?: string; all?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
   const { id } = await params;
   const q = (await searchParams) ?? {};
   const filter = q.field && q.value && (MEMBER_FILTERS as readonly string[]).includes(q.field) ? { field: q.field as (typeof MEMBER_FILTERS)[number], value: q.value } : null;
-  const [data, opportunities, unknown] = await Promise.all([loadSource(prisma, id, { filter }), loadOpportunities(prisma, id, new Date()).catch(() => []), loadUnknownCompanies(prisma, id).catch(() => [])]);
+  const [data, opportunities, unknown] = await Promise.all([loadSource(prisma, id, { filter, limit: q.all ? 1000 : 150 }), loadOpportunities(prisma, id, new Date()).catch(() => []), loadUnknownCompanies(prisma, id).catch(() => [])]);
   if (!data) notFound();
   const { source: s, members, total } = data;
   return (
@@ -102,14 +102,14 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
         </p>
         <Counts id={s.id} field="resolution" counts={s.byResolution} labels={RESOLUTION_LABEL} active={filter} />
         <Counts id={s.id} field="qualification" counts={s.byQualification} labels={QUALIFICATION_LABEL} active={filter} />
-        <Counts id={s.id} field="status" counts={s.byStatus} labels={STATUS_LABEL} active={filter} />
+        {Object.keys(s.byStatus).some((k) => k !== 'active') ? <Counts id={s.id} field="status" counts={s.byStatus} labels={STATUS_LABEL} active={filter} /> : null}
       </section>
       <SourcePlanButton workSourceId={s.id} />
       <section className="space-y-2" data-testid="source-opportunities">
         <h2 className="text-sm font-semibold">Opportunities worth your attention</h2>
         <SourceOpportunities items={opportunities} />
       </section>
-      <UnknownCompanies workSourceId={s.id} items={unknown} />
+      <UnknownCompanies workSourceId={s.id} items={unknown} total={(unknown as { total?: number }).total} />
       <section className="space-y-1">
         <h2 className="text-sm font-semibold">Everyone in this source</h2>
         <p className="text-xs text-[var(--muted-foreground)]">
