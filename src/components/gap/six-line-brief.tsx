@@ -69,6 +69,15 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
             ))}
           </ul>
         </Row>
+        {brief.account ? (
+          <Row label="Account" testId="brief-account">
+            <p>{brief.account.motion}</p>
+            {brief.account.caution ? <p className="font-medium text-amber-700">{brief.account.caution}</p> : null}
+            <a href={brief.account.href} className="text-xs underline">
+              Everything GAP knows about this account
+            </a>
+          </Row>
+        ) : null}
         {brief.context?.length ? (
           <Row label="Context" testId="brief-context">
             <ul className="space-y-0.5">

@@ -94,3 +94,15 @@ describe('final review fixes', () => {
     expect(proposeOpportunity(base({ fact: null, member: { ...base().member, qualification: 'research' } })).thesis).toBeNull();
   });
 });
+
+describe('one approach decision (review E): the card never contradicts the account page', () => {
+  it('a buyer who said no or asked not to be contacted is a hold, never a follow-up', () => {
+    const o = proposeOpportunity(base({ conversation: { who: 'dana@acme.example', responseClass: 'do_not_contact', at: '2026-09-20T00:00:00Z' } }));
+    expect(o.approach).toBe('hold');
+    expect(o.suggestedApproach).toMatch(/^Not now\. Do not contact yet: dana@acme.example answered "do not contact"/);
+    expect(o.safety.state).toBe('caution');
+  });
+  it('a contradicted thesis holds the card even with a verified fact', () => {
+    expect(proposeOpportunity(base({ contradicted: true })).approach).toBe('hold');
+  });
+});

@@ -10,6 +10,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { QueueItem } from '@/lib/gap/entity/candidates';
+import { AccountLink } from './account-link';
 
 const VERDICT_LABEL: Record<string, string> = { LIKELY_ICP: 'Likely ICP', MAYBE_ICP: 'Maybe ICP', NOT_ICP: 'Not ICP', AMBIGUOUS: 'Ambiguous', INSUFFICIENT: 'Not enough to say' };
 const VERDICT_TONE: Record<string, string> = {
@@ -64,7 +65,7 @@ function Claims({ label, items }: { label: string; items: Array<{ claim: string;
   );
 }
 
-function AddForm({ c, onDone }: { c: QueueItem; onDone: (msg: string) => void }) {
+function AddForm({ c, onDone }: { c: QueueItem; onDone: (msg: string, added?: string) => void }) {
   const router = useRouter();
   const [name, setName] = useState(c.company);
   const [vertical, setVertical] = useState('');
@@ -83,7 +84,7 @@ function AddForm({ c, onDone }: { c: QueueItem; onDone: (msg: string) => void })
     const r = await post({ op: 'add', company: c.company, name: name.trim(), vertical: vertical.trim(), reason: reason.trim(), ...(domain.trim() ? { domain: domain.trim() } : {}) });
     setBusy(false);
     if (!r.ok) return setCheck({ ok: false, reason: r.body.error, matches: r.body.matches ?? [] });
-    onDone(`Added ${name.trim()}. It is in the watched band and can be researched; ${((r.body.replan as { reresolved?: number })?.reresolved ?? 0)} people were placed there.`);
+    onDone(`Added ${name.trim()}. It is in the watched band and can be researched; ${((r.body.replan as { reresolved?: number })?.reresolved ?? 0)} people were placed there.`, name.trim());
     router.refresh();
   }
   const refused = check && check.ok === false;
@@ -180,6 +181,7 @@ function Candidate({ c }: { c: QueueItem }) {
   const [mode, setMode] = useState<'none' | 'add' | 'map'>('none');
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [added, setAdded] = useState<string | null>(null);
   async function act(op: 'scout' | 'research_more' | 'ignore') {
     setBusy(op);
     const r = await post({ op, company: c.company, ...(op === 'scout' && c.titles.length ? { hint: `people there: ${c.titles.join(', ')}` } : {}), ...(op === 'scout' && c.scouted ? { force: true } : {}) });
@@ -241,9 +243,10 @@ function Candidate({ c }: { c: QueueItem }) {
           Ignore
         </button>
       </div>
-      {mode === 'add' ? <AddForm c={c} onDone={(m) => { setMsg(m); setMode('none'); }} /> : null}
+      {mode === 'add' ? <AddForm c={c} onDone={(m, name) => { setMsg(m); setAdded(name ?? null); setMode('none'); }} /> : null}
       {mode === 'map' ? <MapForm c={c} onDone={(m) => { setMsg(m); setMode('none'); }} /> : null}
       {msg ? <p className="text-xs" data-testid="candidate-result">{msg}</p> : null}
+      {added ? <AccountLink name={added} className="text-xs">Open {added}</AccountLink> : null}
     </li>
   );
 }

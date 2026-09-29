@@ -42,6 +42,8 @@ const safeUrl = (u: string | null) => {
     return null;
   }
 };
+/** A glance line never shows a raw URL (the deep view links the source). */
+const glanceText = (s: string) => s.replace(/\s*https?:\/\/[^\s)]+/g, '').replace(/\s*\(\s*\)/g, '').replace(/\s+([).,;])/g, '$1').trim();
 const clip = (s: string, n = 220) => (s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s);
 const money = (n: number) => (n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `$${Math.round(n / 1e3)}K` : `$${Math.round(n)}`);
 
@@ -129,6 +131,7 @@ function SectionBlock({ s }: { s: Section }) {
 }
 
 const GLANCE_ROWS: Array<[keyof AccountIntelligenceBrief['glance'], string]> = [
+  ['motion', 'Motion'],
   ['icpState', 'ICP / state'],
   ['whyNow', 'Why now'],
   ['network', 'Network'],
@@ -157,7 +160,7 @@ export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelli
           {GLANCE_ROWS.map(([k, label]) => (
             <div key={k} className="contents" data-testid={`glance-${k}`}>
               <dt className="text-xs font-semibold text-[var(--muted-foreground)] sm:pt-0.5">{label}</dt>
-              <dd className="min-w-0 break-words">{clip(g[k] ?? 'None yet')}</dd>
+              <dd className="min-w-0 break-words">{clip(glanceText(g[k] ?? 'None yet'))}</dd>
             </div>
           ))}
         </dl>

@@ -10,7 +10,7 @@ import Link from 'next/link';
 import type { Opportunity } from '@/lib/gap/intake/opportunities';
 import { SourceMemberActions } from './source-member-actions';
 
-const APPROACH_LABEL: Record<Opportunity['approach'], string> = { fact_led: 'Fact-led', relationship_led: 'Relationship-led', referral_led: 'Referral-led', follow_up: 'Follow-up' };
+const APPROACH_LABEL: Record<Opportunity['approach'], string> = { fact_led: 'Fact-led', relationship_led: 'Relationship-led', referral_led: 'Referral-led', follow_up: 'Follow-up', hold: 'Not now' };
 
 function Line({ label, children, testId }: { label: string; children: React.ReactNode; testId?: string }) {
   return (
