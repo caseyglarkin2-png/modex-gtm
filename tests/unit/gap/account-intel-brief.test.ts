@@ -246,3 +246,15 @@ describe('review fixes (Release A reviewer)', () => {
     expect(b.sections.economics.refused[0]).toMatch(/^modeled_point_estimate: /);
   });
 });
+
+describe('a network count that is our own estimate is never VERIFIED (PepsiCo dogfood)', () => {
+  it('an estimate or extrapolation source is INFERENCE; a named filing with a URL is VERIFIED and linked', () => {
+    const p = base().pack!;
+    const est = buildAccountBrief(base({ pack: { ...p, account: { ...p.account, networkCount: 105, networkCountSource: "YardFlow estimate of Acme's footprint, extrapolated from the 30 sites we satellite-mapped" } } as never }), NOW);
+    expect(est.sections.footprint.statements.find((s) => /105 facilities/.test(s.text))?.truth).toBe('INFERENCE');
+    const filed = buildAccountBrief(base({ pack: { ...p, account: { ...p.account, networkCount: 28, networkCountSource: 'FY2025 Form 10-K, Item 2 Properties. https://sec.example/10k' } } as never }), NOW);
+    const s = filed.sections.footprint.statements.find((x) => /28 facilities/.test(x.text));
+    expect(s?.truth).toBe('VERIFIED_PUBLIC');
+    expect(s?.sources[0].url).toBe('https://sec.example/10k');
+  });
+});

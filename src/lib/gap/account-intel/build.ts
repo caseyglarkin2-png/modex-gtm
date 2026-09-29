@@ -289,7 +289,12 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   const unknowns: string[] = [];
   const p = i.pack;
   if (p?.account.networkCount) {
-    if (p.account.networkCountSource) st.push({ text: `${p.account.networkCount} facilities (${p.account.networkCountSource})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: p.account.networkCountSource, label: p.account.networkCountSource, url: /^https?:\/\//.test(p.account.networkCountSource) ? p.account.networkCountSource : null, at: p.account.networkCountAsOf ?? p.builtAt }], asOf: p.account.networkCountAsOf ?? p.builtAt });
+    const src = p.account.networkCountSource;
+    // Our own estimate is never a verified count, however it is worded; a named filing is, and its URL is the link.
+    if (src && !/\b(estimat\w*|extrapolat\w*|approximat\w*|modeled|our (count|model))\b|~/i.test(src)) {
+      const url = /https?:\/\/[^\s)]+/.exec(src)?.[0]?.replace(/[.,;]+$/, '') ?? null;
+      st.push({ text: `${p.account.networkCount} facilities (${src})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: src, label: src.replace(/\s*https?:\/\/\S+/g, '').trim() || src, url, at: p.account.networkCountAsOf ?? p.builtAt }], asOf: p.account.networkCountAsOf ?? p.builtAt });
+    } else if (src) st.push({ text: `About ${p.account.networkCount} facilities (${src})`, truth: 'INFERENCE', sources: [auditSrc('demo pack', p.builtAt)], falsifiableBy: 'A filing or company source gives a different count.' });
     else st.push({ text: `About ${p.account.networkCount} facilities (audit estimate, no cited source)`, truth: 'INFERENCE', sources: [auditSrc('demo pack', p.builtAt)], falsifiableBy: 'A filing or company source gives a different count.' });
   }
   const a = auditedSites(p);
