@@ -12,8 +12,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { SignalView } from '@/lib/gap/signals/ops';
+import { BUYER_WORDS } from '@/lib/gap/capture/buyer-words';
 
-const BUYER_WORDS = /\b(said|says|told me|told us|mentioned|according to|quote|“|")/i;
 const input = 'w-full min-w-0 rounded-md border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-base';
 
 const STATUS_TONE: Record<string, string> = {
