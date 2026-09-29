@@ -32,6 +32,8 @@ export type Qualification = 'research' | 'evidence_ready' | 'already_covered' | 
 export interface AccountFacts {
   accountName: string;
   watched: boolean;
+  /** Casey met people here (a conference, referral or relationship source): in scope by his own act, said so. */
+  engagedVia?: string | null;
   opportunity: OpportunityTruth['status'] | null;
   liveFacts: number;
   bestFactReason: string | null;
@@ -43,15 +45,19 @@ const HARD_INVALID = new Set(['hard_bounce', 'hard_bounced', 'invalid']);
 const plural = (n: number, one: string) => `${n} ${one}${n === 1 ? '' : 's'}`;
 
 export function qualifyAccount(f: AccountFacts, _now: Date): { state: Qualification; reason: string } {
-  if (!f.watched) return { state: 'not_icp', reason: 'not in the watched universe (tier / priority band / thesis / watchlist)' };
+  if (!f.watched && !f.engagedVia) return { state: 'not_icp', reason: 'not in the watched universe (tier / priority band / thesis / watchlist)' };
+  const scope = !f.watched && f.engagedVia ? ` (in scope: you met people here via ${f.engagedVia})` : '';
   if (f.opportunity === 'ACTIVE') return { state: 'in_deal', reason: 'open HubSpot deal: work it from the deal' };
   if (f.opportunity === 'UNKNOWN') return { state: 'opportunity_unknown', reason: 'deal status could not be read: held, never cold' };
   if (f.liveFacts > 0) {
-    if (f.theses.length > 0 && f.theses.every((t) => !t.useLabel)) return { state: 'already_covered', reason: 'verified evidence and every thesis there is approved and in use' };
-    return { state: 'evidence_ready', reason: `${plural(f.liveFacts, 'verified fact')}${f.bestFactReason ? `; best: ${f.bestFactReason}` : ''}` };
+    if (f.theses.length > 0 && f.theses.every((t) => !t.useLabel)) return { state: 'already_covered', reason: `verified evidence and every thesis there is approved and in use${scope}` };
+    return { state: 'evidence_ready', reason: `${plural(f.liveFacts, 'verified fact')}${f.bestFactReason ? `; best: ${f.bestFactReason}` : ''}${scope}` };
   }
-  return { state: 'research', reason: `no live verified fact; ${f.lastResearchAt ? `last researched ${f.lastResearchAt.toISOString().slice(0, 10)}` : 'never researched'}` };
+  return { state: 'research', reason: `no live verified fact; ${f.lastResearchAt ? `last researched ${f.lastResearchAt.toISOString().slice(0, 10)}` : 'never researched'}${scope}` };
 }
+
+/** Sources where Casey met or was introduced to people: personal engagement (a newsletter or a list is not). */
+const ENGAGED_TYPES = new Set(['conference', 'referral', 'relationship']);
 
 export interface PlanDeps {
   watch?: (prisma: PrismaLike) => Promise<Array<{ accountName: string }>>;
@@ -120,7 +126,8 @@ export async function planWorkSources(
 ): Promise<PlanResult> {
   const clock = input.clock ?? Date.now;
   const started = clock();
-  const sources: Array<{ id: string; intent: string }> = await prisma.gapWorkSource.findMany({ where: { status: 'active', ...(input.workSourceId ? { id: input.workSourceId } : {}) }, select: { id: true, intent: true } });
+  const sources: Array<{ id: string; intent: string; source_type?: string; name?: string }> = await prisma.gapWorkSource.findMany({ where: { status: 'active', ...(input.workSourceId ? { id: input.workSourceId } : {}) }, select: { id: true, intent: true, source_type: true, name: true } });
+  const engagedSource = new Map(sources.filter((s) => ENGAGED_TYPES.has(String(s.source_type ?? ''))).map((s) => [s.id, String(s.name ?? 'a source')]));
   const sourceIds = sources.map((s) => s.id);
   const members: PlanMember[] = sourceIds.length
     ? await prisma.gapWorkSourceMember.findMany({ where: { work_source_id: { in: sourceIds }, status: { in: ['active', 'research_requested'] } }, orderBy: [{ ingested_at: 'asc' }] })
@@ -155,6 +162,9 @@ export async function planWorkSources(
     : [];
   const lastOf = new Map(lastRuns.map((r) => [r.account_name, r._max.created_at ? new Date(r._max.created_at) : null]));
 
+  // Personal engagement per account (a conference / referral / relationship member there).
+  const engagedVia = new Map<string, string>();
+  for (const m of live) if (m.account_name && engagedSource.has(m.work_source_id) && !engagedVia.has(m.account_name)) engagedVia.set(m.account_name, engagedSource.get(m.work_source_id)!);
   const stateOf = new Map<string, { state: Qualification; reason: string }>();
   let deferred = 0;
   for (const name of accountOrder) {
@@ -163,9 +173,10 @@ export async function planWorkSources(
       continue;
     }
     const isWatched = watched.has(name);
-    const opp = isWatched ? await (deps.opportunity ?? ((p, a) => resolveAccountOpportunity(p, a)))(prisma, name) : null;
+    const engaged = engagedVia.get(name) ?? null;
+    const opp = isWatched || engaged ? await (deps.opportunity ?? ((p, a) => resolveAccountOpportunity(p, a)))(prisma, name) : null;
     const box = inbox.get(name);
-    stateOf.set(name, qualifyAccount({ accountName: name, watched: isWatched, opportunity: opp?.status ?? null, liveFacts: box?.ready.length ?? 0, bestFactReason: box?.ready[0]?.relevance?.reason ?? null, theses: box?.theses ?? [], lastResearchAt: lastOf.get(name) ?? null }, input.now));
+    stateOf.set(name, qualifyAccount({ accountName: name, watched: isWatched, engagedVia: engaged, opportunity: opp?.status ?? null, liveFacts: box?.ready.length ?? 0, bestFactReason: box?.ready[0]?.relevance?.reason ?? null, theses: box?.theses ?? [], lastResearchAt: lastOf.get(name) ?? null }, input.now));
   }
 
   let changed = 0;

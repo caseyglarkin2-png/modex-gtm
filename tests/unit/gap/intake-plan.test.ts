@@ -124,3 +124,20 @@ describe('Release B review fixes: the planner rotates', () => {
     expect(r.accounts).toBe(0);
   });
 });
+
+describe('personal engagement puts an account in scope (a transparent rule, not a score)', () => {
+  it('an account where Casey met people (a conference / referral / relationship source) is in scope even outside the watched universe', () => {
+    expect(qualifyAccount(fact({ watched: false, engagedVia: 'Inland26 · Chicago', liveFacts: 1, bestFactReason: 'a distribution, warehouse, plant or yard change' }), NOW)).toEqual({ state: 'evidence_ready', reason: '1 verified fact; best: a distribution, warehouse, plant or yard change (in scope: you met people here via Inland26 · Chicago)' });
+    expect(qualifyAccount(fact({ watched: false, engagedVia: null }), NOW).state).toBe('not_icp');
+  });
+
+  it('the planner derives engagement from the source type (a newsletter is not personal engagement)', async () => {
+    const members = [m('conf', { account_name: 'Walmart Inc.', work_source_id: 'c1' }), m('news', { account_name: 'Landstar', work_source_id: 'n1' })];
+    const { prisma } = db(members);
+    prisma.gapWorkSource.findMany = vi.fn(async () => [{ id: 'c1', intent: 'find_people', status: 'active', source_type: 'conference', name: 'Inland26 · Chicago' }, { id: 'n1', intent: 'research', status: 'active', source_type: 'newsletter', name: 'MMYQB' }]);
+    const opportunity = vi.fn(async () => ({ status: 'CLEAR' as const, companyIds: [] }));
+    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    expect(members.map((x) => [x.account_name, x.qualification])).toEqual([['Walmart Inc.', 'research'], ['Landstar', 'not_icp']]);
+    expect(opportunity).toHaveBeenCalledTimes(1); // the deal truth is read for the engaged account only
+  });
+});
