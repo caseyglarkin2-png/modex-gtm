@@ -60,7 +60,9 @@ const OPERATORS = new Set<EntityType>(['3pl', 'carrier', 'port_terminal']);
 export function deriveFit(x: { entityType: EntityType | null; operating: number; ambiguous: boolean; what: string | null }): { fit: YardFlowFit; why: string } {
   const n = `${x.operating} cited operating ${x.operating === 1 ? 'claim' : 'claims'}`;
   if (x.ambiguous) return { fit: 'UNKNOWN', why: 'The name could be several companies: say which one before judging fit.' };
-  if (!x.entityType) return { fit: 'UNKNOWN', why: 'What the company is could not be established.' };
+  // Fit comes from what it operates, not from its label: corroborated operations make a direct buyer even while
+  // the kind of company is still unestablished.
+  if (!x.entityType) return x.operating >= 2 ? { fit: 'DIRECT_BUYER', why: `Runs its own facilities (${n}); what kind of company it is is not established yet.` } : x.operating === 1 ? { fit: 'POTENTIAL_DIRECT_BUYER', why: 'One piece of operating evidence; what kind of company it is is not established yet: confirm its facilities.' } : { fit: 'UNKNOWN', why: 'What the company is, and what it operates, could not be established.' };
   const label = ENTITY_LABEL[x.entityType];
   if (OWNERS.has(x.entityType)) return x.operating ? { fit: 'DIRECT_BUYER', why: `A ${label} that runs freight facilities (${n}).` } : { fit: 'POTENTIAL_DIRECT_BUYER', why: `A ${label}; no cited operating evidence yet (check its plants and DCs).` };
   // An operator needs corroboration (two cited operating claims) before it reads as a direct buyer.

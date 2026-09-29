@@ -844,12 +844,19 @@ export function accountFit(i: AccountInputs, now: Date): { entityType: EntityTyp
   // site says little about what this company runs).
   const own = a.self.filter((s) => s.verification?.verdict === 'confirmed' || s.verification?.verdict === 'probable');
   if (own.length) evidence.push(`${plural(own.length, 'verified self-operated site')} with yards`);
-  if (i.facilityFact?.status === 'verified') evidence.push(`sourced facility count: ${i.facilityFact.facilityCount}`);
+  // A sourced count of several facilities is corroborated operations by itself (a filing or registry names them).
+  const counted = (label: string, raw: unknown) => {
+    const n = Number(String(raw ?? '').replace(/,/g, '').match(/\d+/)?.[0] ?? 0);
+    if (n >= 1) evidence.push(`${label}: ${raw}`);
+    if (n >= 2) evidence.push(`${label} names ${n} facilities`);
+  };
+  if (i.facilityFact?.status === 'verified') counted('sourced facility count', i.facilityFact.facilityCount);
+  else if (i.pack?.account.networkCount && i.pack.account.networkCountSource) counted(`network count (${i.pack.account.networkCountSource})`, i.pack.account.networkCount);
   for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${f.quote.slice(0, 90)}`);
   for (const c of operatingClaims([...(scout?.network ?? []), ...(scout?.freight ?? [])])) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
   // Each verified self-operated site is its own piece of operating evidence.
   const f = deriveFit({ entityType, operating: evidence.length + Math.max(own.length - 1, 0), ambiguous: false, what: scout?.what ?? null });
-  return { entityType, fit: f.fit, why: f.why, evidence: evidence.slice(0, 4), scoutedAt: i.scout?.basis === 'web' ? i.scout.at : null };
+  return { entityType, fit: f.fit, why: f.why, evidence: evidence.filter((e) => !/ names \d+ facilities$/.test(e)).slice(0, 4), scoutedAt: i.scout?.basis === 'web' ? i.scout.at : null };
 }
 
 // ---------------------------------------------------------------- the build
