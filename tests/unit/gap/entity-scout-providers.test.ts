@@ -5,7 +5,7 @@
  * provider chain, and a failed pass is never stored as a verdict.
  */
 import { beforeEach, describe, expect, it } from 'vitest';
-import { _resetCooldowns, askGrounded, classifyProviderError, groundedOnly, type ProviderAnswer, type ScoutProvider } from '@/lib/gap/entity/providers';
+import { _resetCooldowns, askGrounded, classifyProviderError, groundedOnly, urlsIn, type ProviderAnswer, type ScoutProvider } from '@/lib/gap/entity/providers';
 import { scoutCompany } from '@/lib/gap/entity/scout';
 import { scoutCandidate } from '@/lib/gap/entity/candidates';
 
@@ -111,6 +111,11 @@ describe('the provider chain', () => {
     expect(r).toMatchObject({ ok: true, provider: 'openai_web', attempts: [{ provider: 'gemini', outcome: 'error' }, { provider: 'openai_web', outcome: 'ok' }] });
     const late = await askGrounded('q', (a) => a.text, [ok], { budgetMs: 1_000 });
     expect(late).toMatchObject({ ok: false, attempts: [{ provider: 'openai_web', outcome: 'error', detail: 'no time left in this pass' }] });
+  });
+
+  it('the gateway search sources in provider_metadata are citations; its routing block is not', () => {
+    expect(urlsIn({ perplexity: { citations: ['https://kenco.example/locations'], search_results: [{ url: 'https://kenco.example/fleet', title: 't' }] } })).toEqual(['https://kenco.example/locations', 'https://kenco.example/fleet']);
+    expect(urlsIn('not a url')).toEqual([]);
   });
 
   it('groundedOnly matches host and path, ignoring www, query, fragment and a trailing slash', () => {
