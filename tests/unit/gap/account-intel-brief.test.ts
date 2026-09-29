@@ -334,3 +334,10 @@ describe('red team fixes (Release I)', () => {
   });
 });
 
+
+describe('dogfood: a quoted vendor statement is still vendor marketing', () => {
+  it('a fact that opens with a quotation mark and a vendor name never leads', () => {
+    const vendor = { ...base().facts[0], id: 'v2', quote: '“Gatik is already operating inside our networks and brings the scale we need,” said Acme Foods.', publishedAt: '2026-09-25T00:00:00Z' };
+    expect(buildAccountBrief(base({ facts: [vendor, base().facts[0]] }), NOW).glance.bestFact).toMatch(/^Acme Foods will open/);
+  });
+});

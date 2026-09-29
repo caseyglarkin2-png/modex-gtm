@@ -661,7 +661,7 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge):
 
 const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;
 /** A vendor's own marketing names the vendor first ("Gatik moves freight for ..."): context, never the opener. */
-const VENDOR_LEAD = /^(PINC|Kaleris|Terminal Industries|FourKites|project44|Blue Yonder|Manhattan Associates|Descartes|Samsara|Motive|Trimble|Uber Freight|Gatik|Aurora|Kodiak|Outrider)\b/;
+const VENDOR_LEAD = /^[\s"'“‘]*(PINC|Kaleris|Terminal Industries|FourKites|project44|Blue Yonder|Manhattan Associates|Descartes|Samsara|Motive|Trimble|Uber Freight|Gatik|Aurora|Kodiak|Outrider)\b/;
 const stateOf = (name: string) => /\b([A-Z]{2})(?:\s*\(|\s*$)/.exec(name)?.[1] ?? null;
 
 function siteWedge(i: AccountInputs): Wedge {

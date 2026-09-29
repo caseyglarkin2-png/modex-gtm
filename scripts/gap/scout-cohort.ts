@@ -8,6 +8,7 @@
  * Without --apply it lists what it WOULD scout (no web calls, no writes). With --apply it runs Scout on the
  * open, unscouted companies (name-rule NOT ICP skipped: a 3PL or carrier by name costs nothing), most people
  * first, within Scout's own daily cap, then writes the report: companies and counts only, never people.
+ * --report without --apply writes the report from what is already known (read only).
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -49,12 +50,13 @@ async function main() {
     const before = await loadCandidateQueue(prisma, { workSourceId: sourceId, limit: 500 });
     const toScout = before.filter((c) => (!c.scouted || (process.argv.includes('--retry-empty') && c.verdict === 'INSUFFICIENT')) && !(c.verdict === 'NOT_ICP' && !c.scouted)).sort((a, b) => b.people - a.people).slice(0, limit);
     console.log(`${before.length} open companies; ${before.filter((c) => c.verdict === 'NOT_ICP' && !c.scouted).length} NOT ICP by name (free); ${toScout.length} to scout${apply ? '' : ' (dry run: nothing called or written)'}`);
-    if (!apply) {
+    let done = 0;
+    if (!apply && !reportPath) {
       for (const c of toScout) console.log(`  would scout: ${c.company} (${c.people})`);
       return;
     }
-    let done = 0;
-    for (const c of toScout) {
+    // With --report and no --apply: report what is already known (no web calls, no candidate writes).
+    for (const c of apply ? toScout : []) {
       const r = await scoutCandidate(prisma, { company: c.company, actor: 'gap-cohort-scout', now: new Date(), force: c.scouted, hint: c.titles.length ? `people there: ${c.titles.join(', ')}` : undefined });
       if ('refused' in r) {
         console.log(`  ${r.refused}: ${c.company}${r.why ? ` (${r.why})` : ''}`);
