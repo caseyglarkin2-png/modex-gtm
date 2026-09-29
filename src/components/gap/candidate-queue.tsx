@@ -2,7 +2,7 @@
 
 /**
  * CANDIDATE ACCOUNTS (Entity Expansion B): companies GAP met in a work source but could not place. For each:
- * COMPANY, WHY ICP (Scout's verdict, derived from cited evidence), NETWORK and FREIGHT EVIDENCE (links),
+ * COMPANY, WHY A FIT (Scout's verdict, derived from cited evidence), NETWORK and FREIGHT EVIDENCE (links),
  * RELATIONSHIP SOURCE (context, never evidence or consent), WHAT WE DON'T KNOW, and Casey's four choices:
  * ADD ACCOUNT (the creation check runs first and shows what it found), MAP TO EXISTING, RESEARCH MORE, IGNORE.
  * GAP never creates an account on its own. Voice: no em dashes.
