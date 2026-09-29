@@ -539,7 +539,7 @@ export type ActionTimeOpportunity =
 export type ActionTimeOpportunityCheck = (prisma: any, accountName: string, email: string, now: Date) => Promise<ActionTimeOpportunity>;
 
 /** Re-read at the click: routing state may be stale; this wins. Never throws (a throw is UNKNOWN). */
-export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = {}): ActionTimeOpportunityCheck => async (prisma, accountName, email, now) => {
+export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = {}, familyDeps: { hold?: (prisma: any, accountName: string, now: Date) => Promise<{ detail: string; unknown: boolean } | null> } = {}): ActionTimeOpportunityCheck => async (prisma, accountName, email, now) => {
   let inputs: ActiveOpportunityInputs;
   try {
     inputs = await loadActiveOpportunityInputs(prisma, accountName, email, now, resolveDeps);
@@ -551,6 +551,15 @@ export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = 
   if (opportunityUnknown(inputs)) {
     const o = inputs.account.opportunity;
     return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY}${o.status === 'UNKNOWN' ? ` (${o.reason})` : ''}` };
+  }
+  // Corporate family (family/family.ts): a live deal, conversation, first touch, reply or enrollment at a parent,
+  // subsidiary or sibling holds a cold motion here too, through the SAME refusal paths (ACTIVE / UNKNOWN), until
+  // Casey records a separate buying motion. A family read that fails is UNKNOWN (fail closed).
+  try {
+    const hold = await (familyDeps.hold ?? (async (p: any, a: string, n: Date) => (await import('../family/family')).familyHoldNow(p, a, n)))(prisma, accountName, now);
+    if (hold) return hold.unknown ? { status: 'UNKNOWN', detail: hold.detail } : { status: 'ACTIVE', detail: hold.detail };
+  } catch (e) {
+    return { status: 'UNKNOWN', detail: `Could not read the related accounts in this corporate family (${e instanceof Error ? e.message : String(e)}). ${OPPORTUNITY_UNKNOWN_COPY}` };
   }
   return { status: 'CLEAR' };
 };

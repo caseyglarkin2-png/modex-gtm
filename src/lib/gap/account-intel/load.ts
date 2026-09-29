@@ -109,6 +109,16 @@ export async function loadAccountInputs(
   const rejectedIds = (hyps as Row[]).filter((h) => h.status === 'rejected').map((h) => h.id as string);
   const buyerNo: Row[] = rejectedIds.length && prisma.conversationDisposition?.findMany ? await prisma.conversationDisposition.findMany({ where: { hypothesis_id: { in: rejectedIds }, response_class: 'problem_rejected', human_confirmed: true }, select: { hypothesis_id: true } }).catch(() => []) : [];
   const buyerRejected = new Set(buyerNo.map((r) => r.hypothesis_id as string));
+  // The corporate family: related accounts (never merged). What is live at them is read only on the live page.
+  const family = await (async () => {
+    const fam = await import('../family/family');
+    const f = await fam.loadCorporateFamily(prisma, accountName, opts.live ? { hubspot: fam.hubspotFamily } : {}).catch(() => null);
+    if (!f || (!f.parentName && !f.members.length)) return f ? { parentName: f.parentName, members: [], related: [], separate: null, hold: null } : null;
+    if (!opts.live || !f.members.length) return { parentName: f.parentName, members: f.members, related: null, separate: null, hold: null };
+    const [related, separate] = await Promise.all([fam.loadRelatedActivity(prisma, f, now).catch(() => null), fam.loadSeparateMotion(prisma, accountName, now).catch(() => null)]);
+    const hold = related ? fam.relatedHold(f, related, separate) : { detail: `Related account activity could not be read for ${f.members.map((m) => m.accountName).join(', ')}.`, accounts: f.members.map((m) => m.accountName), unknown: true };
+    return { parentName: f.parentName, members: f.members, related, separate, hold };
+  })();
   const aliasList = (aliases as Array<{ alias: string }>).map((a) => a.alias);
   const domains: string[] = [];
   if (link?.status === 'resolved') {
@@ -200,6 +210,7 @@ export async function loadAccountInputs(
     facilityFact: fact ? { facilityCount: String(fact.facilityCount), status: fact.status === 'verified' ? 'verified' : 'provisional', summary: fact.summary, updatedAt: fact.updatedAt, sources: fact.sources } : null,
     roi,
     scout: scoutOf(candidate),
+    family,
   };
 }
 

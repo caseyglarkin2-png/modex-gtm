@@ -42,6 +42,8 @@ export interface ApproachInput {
    * hold (never a direct-buyer pitch); DIRECT_BUYER, POTENTIAL_DIRECT_BUYER and UNKNOWN go on to the other rules.
    */
   fit?: { fit: string; why: string };
+  /** RELATED ACCOUNT ACTIVITY in the corporate family (family/family.ts relatedHold), else null. */
+  relatedHold?: string | null;
 }
 
 export interface Approach {
@@ -55,6 +57,7 @@ export function decideApproach(x: ApproachInput): Approach {
   if (x.deal === 'ACTIVE') return { kind: 'IN_DEAL', why: 'An open HubSpot deal: work it from the deal, never cold.' };
   if (x.deal === 'UNKNOWN') return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the HubSpot deal state could not be read.' };
   if (x.deal === 'NOT_READ') return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the HubSpot deal state was not read here.' };
+  if (x.relatedHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.relatedHold}` };
   if (x.conversation && STOP_CLASSES.has(x.conversation.responseClass)) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.conversation.who} answered "${cls(x.conversation.responseClass)}" (${x.conversation.at.slice(0, 10)}). No new outreach; learn from that conversation.` };
   if (x.contradicted) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the buyer contradicted the current story. Learn what is true first.' };
   if (x.conversation) return { kind: 'FOLLOW_UP', why: `A live conversation with ${x.conversation.who} (${cls(x.conversation.responseClass)}, ${x.conversation.at.slice(0, 10)}): continue that thread, never a cold first touch.` };

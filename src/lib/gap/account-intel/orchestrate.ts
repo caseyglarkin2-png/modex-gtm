@@ -69,6 +69,13 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     for (const { section } of ORDER) skipped.push({ section, reason: 'Held: the HubSpot deal state is not known yet.' });
     return { tasks, skipped };
   }
+  // A related account in the corporate family is live: the next decision is Casey's (a separate buying motion or
+  // not), never more research on an account that may already be in play through its parent or subsidiary.
+  if (brief.family?.hold) {
+    tasks.push({ section: 'commercial', depth: 'BRIEF', provider: 'human', focus: 'Confirm whether this is a separate buying motion from the related account (Separate buying motion on this page).', why: brief.family.hold.detail });
+    for (const { section } of ORDER) skipped.push({ section, reason: 'Held: related account activity in the corporate family.' });
+    return { tasks, skipped };
+  }
   if (brief.dealState === 'ACTIVE') {
     tasks.push({ section: 'commercial', depth: 'DEEPEN', provider: 'human', focus: 'The Deal brief next learning objective (one objective per deal, in GAP order).', why: 'An open deal is worked from the deal: learn from the buyer, never cold research.' });
     for (const { section } of ORDER) skipped.push({ section, reason: 'In a deal: learn from the buyer, not the web.' });
