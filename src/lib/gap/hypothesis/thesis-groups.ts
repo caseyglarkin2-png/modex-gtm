@@ -477,7 +477,7 @@ export async function applyNoteToSiblings(
   return { ok: true, results };
 }
 
-export type CorroborationOutcome = 'corroborated' | 'no_second_source' | 'contradicts';
+export type CorroborationOutcome = 'corroborated' | 'no_second_source' | 'contradicts' | 'search_unavailable';
 
 export interface CorroborationResult {
   outcome: CorroborationOutcome;
@@ -523,7 +523,8 @@ export async function corroborateThesis(
       select: { id: true, provider_status: true },
       take: 20,
     });
-    const hit = recent.find((r) => r.provider_status?.thesisFingerprint === input.fingerprint && r.provider_status?.result);
+    // A run the web search could not do is not reused (it learned nothing).
+    const hit = recent.find((r) => r.provider_status?.thesisFingerprint === input.fingerprint && r.provider_status?.result && r.provider_status?.outcome !== 'provider_unavailable');
     if (hit) {
       research = hit.provider_status.result as ResearchResult;
       reused = true;
@@ -562,7 +563,7 @@ export async function corroborateThesis(
     const gate = new Map(rows.map((s) => [s.id, outreachFactRefusal(s, group.accountName) === null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime())]));
     newIndependent = candidates.filter((f) => gate.get(f.signalId) === true);
   }
-  const outcome: CorroborationOutcome = research.conflicts.length > 0 ? 'contradicts' : newIndependent.length > 0 ? 'corroborated' : 'no_second_source';
+  const outcome: CorroborationOutcome = research.conflicts.length > 0 ? 'contradicts' : newIndependent.length > 0 ? 'corroborated' : research.outcome === 'provider_unavailable' ? 'search_unavailable' : 'no_second_source';
   return {
     ok: true,
     outcome,

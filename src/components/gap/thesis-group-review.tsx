@@ -42,7 +42,7 @@ interface RowResult { hypothesisId: string; ok: boolean; from: string; to: strin
 interface Summary extends OutcomeState { approved: number; inUse: number }
 interface Fact { signalId: string; excerpt: string; url: string; title: string; publishedAt: string; fresh: boolean }
 interface Corroboration {
-  outcome: 'corroborated' | 'no_second_source' | 'contradicts';
+  outcome: 'corroborated' | 'no_second_source' | 'contradicts' | 'search_unavailable';
   reused: boolean;
   research: { runId: string; facts: Fact[]; conflicts: Array<{ site: string; signalIds: string[] }>; notes: string[] };
   newIndependent: Fact[];
@@ -340,6 +340,10 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
                         : 'What it changes: the observation is rewritten as the ONE fact you choose to open with, quoted with its source. The other facts stay research context. You review it before anything is approved.'}
                     </p>
                   </>
+                ) : corr.outcome === 'search_unavailable' ? (
+                  <p className="mt-1 text-[var(--muted-foreground)]" data-testid="search-unavailable">
+                    The web search could not run right now. Nothing was learned, so nothing is concluded: try again in an hour.
+                  </p>
                 ) : corr.outcome === 'no_second_source' ? (
                   <p className="mt-1 text-[var(--muted-foreground)]" data-testid="hold">
                     {ready

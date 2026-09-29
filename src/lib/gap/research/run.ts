@@ -34,7 +34,8 @@ import { defaultFetchText, edgarCandidates, normalizeCompany, webCandidates, typ
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type ResearchOutcome = 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence';
+/** provider_unavailable: the web search could not run and nothing fresh was found. Retryable, never an answer. */
+export type ResearchOutcome = 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence' | 'provider_unavailable';
 
 export interface ResearchFact {
   signalId: string;
@@ -168,7 +169,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   }
 
   const conflicts = detectConflicts(facts.map((f) => ({ id: f.signalId, excerpt: f.excerpt, change: f.change }))).map((c) => ({ site: c.site, signalIds: c.ids }));
-  const outcome: ResearchOutcome = conflicts.length > 0 ? 'conflicting_evidence' : facts.some((f) => f.fresh) ? 'evidence_found' : 'insufficient_evidence';
+  const outcome: ResearchOutcome = conflicts.length > 0 ? 'conflicting_evidence' : facts.some((f) => f.fresh) ? 'evidence_found' : providerErrors.web ? 'provider_unavailable' : 'insufficient_evidence';
 
   await prisma.researchRun.update({
     where: { id: run.id },

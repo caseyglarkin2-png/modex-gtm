@@ -332,7 +332,7 @@ export async function runBackgroundResearch(
         signals.length ? { ...deps, extra: () => signalCandidates(signals, { fetchHtml: deps.fetchHtml, accountName: t.accountName }) } : deps,
       );
       if (signals.length) await settleSignals(prisma, { signals, accountName: t.accountName, result: r, now: opts.now });
-      await serveWorkSourceRequest(prisma, t);
+      if (r.outcome !== 'provider_unavailable') await serveWorkSourceRequest(prisma, t);
       result.researched.push({
         accountName: t.accountName,
         reason: t.reason,

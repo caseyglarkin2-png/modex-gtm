@@ -65,6 +65,16 @@ export function operatingClaims<T extends { claim: string }>(claims: readonly T[
   });
 }
 
+/**
+ * How many operating claims count toward fit. A claim matched only to a SITE the search read (not the page) is a
+ * weaker lead: at most one of those counts, so site-only claims alone never corroborate a direct buyer.
+ */
+export function operatingCount(claims: ReadonlyArray<{ claim: string; siteOnly?: boolean }>): number {
+  const ops = operatingClaims(claims);
+  const page = ops.filter((c) => !c.siteOnly).length;
+  return page + Math.min(ops.length - page, 1);
+}
+
 const OWNERS = new Set<EntityType>(['shipper', 'retailer', 'distributor', 'manufacturer']);
 const OPERATORS = new Set<EntityType>(['3pl', 'carrier', 'port_terminal']);
 

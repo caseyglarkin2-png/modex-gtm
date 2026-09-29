@@ -11,8 +11,8 @@
  *           (src/lib/discovery/research.ts uses the same model and tool).
  *           Its excerpts are PROPOSALS; unverifiable ones are dropped.
  */
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { extractFactSentences, htmlToText } from './facts';
+import { askGrounded, defaultProviders, type ScoutProvider } from '../entity/providers';
 
 export interface Candidate {
   /** `manual`: a public URL + sentence Casey typed, verified by the same contract (research/run.ts verifyCandidate). */
@@ -155,15 +155,33 @@ export function parseWebCandidates(text: string): Array<{ url: string; title: st
   }
 }
 
-export async function webCandidates(accountName: string, focus: string): Promise<{ candidates: Candidate[]; note: string }> {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) return { candidates: [], note: 'web search not configured' };
-  const model = new GoogleGenerativeAI(key).getGenerativeModel({ model: 'gemini-2.5-flash', tools: [{ googleSearch: {} } as unknown as never] });
+/** The model's answer holds a JSON array (possibly empty): an answer. No array at all: not an answer. */
+const hasJsonArray = (text: string) => {
+  const fenced = /```(?:json)?\s*([\s\S]*?)```/i.exec(text);
+  const body = fenced ? fenced[1] : text;
+  const start = body.indexOf('[');
+  const end = body.lastIndexOf(']');
+  if (start < 0 || end <= start) return false;
+  try {
+    return Array.isArray(JSON.parse(body.slice(start, end + 1)));
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Web proposals through the same grounded provider chain as Scout (entity/providers.ts): Gemini, then the
+ * configured fallbacks. Every proposal is still verified at its own page before it becomes a fact. When no
+ * provider can run (quota, no key, no grounding, a cut-off answer) this THROWS: an outage is infrastructure
+ * state, never "nothing found".
+ */
+export async function webCandidates(accountName: string, focus: string, deps: { providers?: ScoutProvider[] } = {}): Promise<{ candidates: Candidate[]; note: string }> {
   const prompt = `Find up to 5 PUBLIC, dated facts from the last 12 months about ${accountName}'s physical operations: distribution or fulfillment centers, warehouses, plants, yards, docks or transportation network (openings, closures, consolidations, expansions, automation, acquisitions, relocations). ${focus}
 Return ONLY a JSON array: [{"url": "...", "title": "...", "date": "YYYY-MM-DD", "excerpt": "one sentence copied VERBATIM from that page"}].
 Every excerpt must be copied exactly from the page at that url. If you cannot find such facts, return [].`;
-  const result = await model.generateContent(prompt);
-  const parsed = parseWebCandidates(result.response.text());
+  const r = await askGrounded(prompt, (a) => (hasJsonArray(a.text) ? parseWebCandidates(a.text) : null), deps.providers ?? defaultProviders());
+  if (!r.ok) throw new Error(`no grounded web search (${r.attempts.map((x) => `${x.provider} ${x.outcome.replace(/_/g, ' ')}`).join('; ') || 'no provider configured'})`);
+  const parsed = r.value;
   return {
     candidates: parsed.map((p) => ({
       provider: 'web' as const,
@@ -173,6 +191,6 @@ Every excerpt must be copied exactly from the page at that url. If you cannot fi
       excerpt: p.excerpt,
       sourceType: 'public_secondary' as const,
     })),
-    note: `${parsed.length} web proposals`,
+    note: `${parsed.length} web proposals via ${r.provider}`,
   };
 }

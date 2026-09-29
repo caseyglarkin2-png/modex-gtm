@@ -10,7 +10,7 @@
  * pure broker is not. A claim without an http(s) URL is never evidence (it is listed as an uncited claim). Scout
  * claims are cited, not verified at source: the account brief treats them as leads, never VERIFIED_PUBLIC.
  */
-import { deriveFit, ENTITY_TYPES, fitFromName, operatingClaims, type EntityType, type YardFlowFit } from './fit';
+import { deriveFit, ENTITY_TYPES, fitFromName, operatingClaims, operatingCount, type EntityType, type YardFlowFit } from './fit';
 import { askGrounded, defaultProviders, groundedOnly, type Attempt, type ProviderName, type ScoutProvider } from './providers';
 
 export type { EntityType, YardFlowFit } from './fit';
@@ -116,8 +116,13 @@ export async function scoutCompany(company: string, deps: { providers?: ScoutPro
   const r = await askGrounded(SCOUT_PROMPT(company, deps.hint ?? ''), (a) => {
     const p = parseScout(a.text);
     if (!p) return null;
-    const net = groundedOnly(p.network, a.citations, a.citedHosts);
-    const fr = groundedOnly(p.freight, a.citations, a.citedHosts);
+    // Matched by page, or only by site (Gemini names the sites it read): a site-only match is a weaker lead.
+    const page = (cs: typeof p.network) => new Set(groundedOnly(cs, a.citations).kept);
+    const mark = <C extends { claim: string; url: string }>(kept: C[], exact: Set<C>) => kept.map((c) => (exact.has(c) ? c : { ...c, siteOnly: true }));
+    const netAll = groundedOnly(p.network, a.citations, a.citedHosts);
+    const frAll = groundedOnly(p.freight, a.citations, a.citedHosts);
+    const net = { kept: mark(netAll.kept, page(p.network)), dropped: netAll.dropped };
+    const fr = { kept: mark(frAll.kept, page(p.freight)), dropped: frAll.dropped };
     const lost = [...net.dropped, ...fr.dropped];
     // Every claim lost to the citation check: the answer is not grounded, so no fit is read from it (next provider).
     if (lost.length && !net.kept.length && !fr.kept.length) return null;
@@ -128,6 +133,6 @@ export async function scoutCompany(company: string, deps: { providers?: ScoutPro
     return { ...base, verdict: 'UNKNOWN', entityType: null, why: `The web pass failed (${how}); nothing is known yet. Retry later.`, basis: 'web', failed: true, attempts: r.attempts };
   }
   const p = r.value;
-  const f = deriveFit({ entityType: p.entityType, operating: operatingClaims([...p.network, ...p.freight]).length, ambiguous: p.ambiguous, what: p.what });
+  const f = deriveFit({ entityType: p.entityType, operating: operatingCount([...p.network, ...p.freight]), ambiguous: p.ambiguous, what: p.what });
   return { company, verdict: f.fit, entityType: p.entityType, ambiguous: p.ambiguous || undefined, domain: p.domain, what: p.what, why: f.why, network: p.network, freight: p.freight, unknowns: p.unknowns, basis: 'web', provider: r.provider, attempts: r.attempts };
 }

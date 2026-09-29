@@ -48,9 +48,10 @@ export async function POST(request: NextRequest) {
   const before = buildAccountBrief(inputs, now).sections[section as SectionKey]?.statements.length ?? 0;
   const result = await runEvidenceResearch(prisma, { accountName: name, personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: g.email, now, focus: task.focus, context: { orchestrator: 'deepen', section }, seekCurrentness: false });
   // The section's own outcome: did this section gain anything? A web pass that could not run learned nothing.
-  const webDown = result.notes.some((n) => /^web: unavailable/.test(n)) && !result.facts.length;
-  const after = webDown ? before : await loadAccountInputs(prisma, name, new Date()).then((i) => (i ? buildAccountBrief(i, new Date()).sections[section as SectionKey]?.statements.length ?? 0 : before)).catch(() => before);
-  const sectionOutcome = webDown ? 'provider_unavailable' : after > before ? 'section_filled' : 'nothing_for_section';
+  const webDown = result.notes.some((n) => /^web: unavailable/.test(n));
+  const after = !result.facts.length ? before : await loadAccountInputs(prisma, name, new Date()).then((i) => (i ? buildAccountBrief(i, new Date()).sections[section as SectionKey]?.statements.length ?? 0 : before)).catch(() => before);
+  // Filled beats everything; otherwise a web outage (even with an EDGAR fact elsewhere) is retryable, not empty.
+  const sectionOutcome = after > before ? 'section_filled' : webDown ? 'provider_unavailable' : 'nothing_for_section';
   try {
     const run = await prisma.researchRun.findUnique({ where: { id: result.runId }, select: { provider_status: true } });
     if (run) await prisma.researchRun.update({ where: { id: result.runId }, data: { provider_status: { ...((run.provider_status as object) ?? {}), sectionOutcome } } });
