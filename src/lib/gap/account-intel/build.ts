@@ -15,6 +15,7 @@ import { orderStatements, sectionStatus, statementProblems, type SectionStatus, 
 import { suggestAngle } from '../motion/persona-angle';
 import { sellerRelevance } from '../research/continuity';
 import { traitsOf } from '../intake/traits';
+import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { computeAccountMotion } from '../motion/account-motion';
 
@@ -655,7 +656,7 @@ function nextAction(i: AccountInputs, hyps: HypothesisView[], now: Date, discove
   if (hyps.some((h) => h.truth === 'CONTRADICTED')) return 'Stop the current story: the buyer rejected or contradicted it. Learn what is true instead.';
   const reachable = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
   if (i.personas.length && !reachable.length) return 'Do not contact yet: no reachable person (do not contact, or no email).';
-  if (!liveFacts(i, now).length) return `Do not contact yet: no live verified fact. Research first (${discovery[0]?.type.replace(/_/g, ' ').toLowerCase() ?? 'catalysts'}).`;
+  if (!liveFacts(i, now).length) return 'Do not contact yet: no live verified fact. Research first (Deepen catalysts on this page).';
   if (i.conversation) return `Follow up with ${i.conversation.who} in the existing thread.`;
   if (!hyps.some((h) => h.grounded)) return 'Draft a thesis from the best verified fact (Research), then review it.';
   return 'Review the thesis, then use the verified fact in a first touch to the primary person (every gate runs at the click).';
@@ -736,6 +737,9 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   if (i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)))) whyNot.push('The buyer confirmed an incumbent system: a displacement story needs its own evidence.');
   const aud = auditedSites(i.pack);
   if (aud.kept.length && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
+  if (/\b(3pl|logistics|carrier|freight|trucking|broker)\b/i.test(i.account.vertical ?? '')) whyNot.push(`The account record says ${i.account.vertical}: a logistics provider runs yards for its customers, so the decision may sit with the shipper. Treat it as a partner or channel, not a shipper prospect.`);
+  const sensitive = live[0] ? sensitivityOf(live[0].quote) : null;
+  if (sensitive) whyNot.push(`The best fact is sensitive (${sensitive}): reference the network change, never the people affected, or choose a different opener.`);
 
   const econ = sections.economics.statements.find((s) => s.truth === 'MODELED_ESTIMATE' || s.truth === 'BUYER_CONFIRMED');
   // An approved thesis the world moved under: flagged, never rewritten.
@@ -743,7 +747,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const thesis: Thesis = {
     status: stale ? `THESIS NEEDS REVIEW: ${stale.needsReview.join(' ')}` : 'INFERENCE, for your review (never approved by GAP)',
     whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.map((r) => WATCH_REASON[r] ?? r.replace(/_/g, ' ')).join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),
-    whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})` : 'No current, verified catalyst.',
+    whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})${sensitive ? ` SENSITIVE (${sensitive}): never the hook; reference the network change only.` : ''}` : 'No current, verified catalyst.',
     whatMayBeBroken: top ? top.problem : `Unknown: ${noHypothesis}`,
     whyItMayMatter: econ ? econ.text : 'Unknown: no economics yet.',
     whereYardFlowMayFit: wedge.archetype ? `${wedge.archetype}${wedge.candidates[0] ? `; start at ${wedge.candidates[0].name}` : ''}` : 'Unknown: no audited site data.',

@@ -269,3 +269,19 @@ describe('Scout leads carry into the brief as INFERENCE, never verified (B + A: 
     expect(b.sections.identity.statements.find((s) => /^Scout:/.test(s.text))?.text).toBe('Scout: a shipper; Foodservice distributor (harborfoods.com)');
   });
 });
+
+describe('dogfood fixes (Release H)', () => {
+  it('a sensitive best fact is flagged in why now and in why not pursue (Tyson: a plant closure, jobs lost)', () => {
+    const quote = 'Acme Foods announced the closure of its plant in Joslin, throwing more than 2,500 workers out of work.';
+    const b = buildAccountBrief(base({ facts: [{ ...base().facts[0], quote }] }), NOW);
+    expect(b.thesis.whyNow).toMatch(/SENSITIVE \(people lost their jobs\): never the hook/);
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/The best fact is sensitive/);
+  });
+  it('an account whose record says 3PL is named as a partner or channel, not a shipper prospect', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: '3PL / Logistics' } }), NOW);
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/The account record says 3PL \/ Logistics/);
+  });
+  it('with no live fact, "research first" points at catalysts on the account page', () => {
+    expect(buildAccountBrief(base({ facts: [] }), NOW).glance.nextAction).toBe('Do not contact yet: no live verified fact. Research first (Deepen catalysts on this page).');
+  });
+});

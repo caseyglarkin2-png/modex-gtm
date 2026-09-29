@@ -23,6 +23,7 @@ import { loadAccountConversations } from '../motion/load';
 import { suggestAngle } from '../motion/persona-angle';
 import { traitsOf } from './traits';
 import { decideApproach } from '../motion/approach';
+import { sensitivityOf } from '../research/sensitivity';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -63,18 +64,7 @@ export interface Opportunity {
 const GATES = 'Every send still runs the normal gates at the click: suppression, deal truth, duplicate send, account motion.';
 const BLIND_SPOT = 'GAP only sees its own sends: check whether you already wrote to them before anything new goes out.';
 
-/** A fact about people harmed (jobs lost, bankruptcy, deaths, a recall, a strike) is never a cold opener's hook. */
-const SENSITIVE: Array<[RegExp, string]> = [
-  [/\b(?:layoffs?|laid off|job cuts|jobs? (?:cut|lost)|out of work|lose their jobs|furlough\w*|workforce reduction)\b/i, 'people lost their jobs'],
-  [/\b(?:bankrupt\w*|chapter 11|insolven\w*)\b/i, 'a bankruptcy'],
-  [/\b(?:fatal\w*|died|deaths?|killed)\b/i, 'people died'],
-  [/\brecall(?:s|ed)?\b/i, 'a product recall'],
-  [/\bstrikes?\b|\bwalkout\b/i, 'a labor dispute'],
-];
-export function sensitivityOf(quote: string): string | null {
-  for (const [re, what] of SENSITIVE) if (re.test(quote)) return what;
-  return null;
-}
+export { sensitivityOf };
 
 export function proposeOpportunity(i: OpportunityInput): Opportunity {
   const m = i.member;
