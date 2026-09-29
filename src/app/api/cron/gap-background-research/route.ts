@@ -44,8 +44,11 @@ export async function GET(request: Request) {
   try {
     // Universal Work Intake: qualify the accounts work sources brought in (account by account, bounded), so the
     // research below can pick the ones that need it. Planning failure never blocks research.
-    const plan = await planWorkSources(prisma, { now: new Date(), actor: 'gap-background-plan', maxAccounts: 40, timeBudgetMs: 60_000 }).catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) }));
-    const report = { ...(await runBackgroundResearch(prisma, { now: new Date(), cap })), plan };
+    // An account qualified in the last 20 hours waits (no repeated HubSpot reads); the oldest go first.
+    const plan = await planWorkSources(prisma, { now: new Date(), actor: 'gap-background-plan', maxAccounts: 40, timeBudgetMs: 60_000, skipQualifiedWithinMs: 20 * 3_600_000 }).catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) }));
+    // The function has 300s: research gets what planning left (a slow account can overrun its budget by ~30s).
+    const researchBudgetMs = Math.max(30_000, Math.min(120_000, 230_000 - (Date.now() - startedAt)));
+    const report = { ...(await runBackgroundResearch(prisma, { now: new Date(), cap, timeBudgetMs: researchBudgetMs })), plan };
     await markCronSuccess(CRON_NAME, {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,

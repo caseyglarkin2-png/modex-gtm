@@ -101,3 +101,26 @@ describe('planWorkSources', () => {
     expect(members.filter((x) => x.qualification).length).toBe(1);
   });
 });
+
+describe('Release B review fixes: the planner rotates', () => {
+  it('never-qualified and oldest-qualified accounts go first, so a big source is covered over runs', async () => {
+    const old = new Date('2026-09-20T00:00:00Z');
+    const recent = new Date('2026-09-28T14:00:00Z');
+    const members = [m('a', { account_name: 'Fresh Co', qualification: 'research', qualified_at: recent }), m('b', { account_name: 'Old Co', qualification: 'research', qualified_at: old }), m('c', { account_name: 'Never Co' })];
+    const { prisma } = db(members);
+    const seen: string[] = [];
+    const opportunity = vi.fn(async (_p: unknown, a: string) => { seen.push(a); return { status: 'CLEAR' as const, companyIds: [] }; });
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', maxAccounts: 2 }, { watch: async () => [{ accountName: 'Fresh Co' }, { accountName: 'Old Co' }, { accountName: 'Never Co' }], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    expect(seen).toEqual(['Never Co', 'Old Co']);
+    expect(r.deferredAccounts).toBe(1);
+  });
+
+  it('with a freshness window, an account qualified moments ago is skipped (no repeat HubSpot reads)', async () => {
+    const members = [m('a', { account_name: 'Fresh Co', qualification: 'research', qualified_at: new Date('2026-09-28T14:00:00Z') })];
+    const { prisma } = db(members);
+    const opportunity = vi.fn(async () => ({ status: 'CLEAR' as const, companyIds: [] }));
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', skipQualifiedWithinMs: 12 * 3_600_000 }, { watch: async () => [{ accountName: 'Fresh Co' }], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    expect(opportunity).not.toHaveBeenCalled();
+    expect(r.accounts).toBe(0);
+  });
+});

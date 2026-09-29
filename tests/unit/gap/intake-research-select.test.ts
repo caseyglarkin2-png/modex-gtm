@@ -20,7 +20,14 @@ function db(members: Array<{ account_name: string; status: string; kind: string;
     prospectingHypothesis: { findMany: vi.fn(async () => []) },
     // The where clause is honored: only research members of non-watch active sources.
     gapWorkSourceMember: {
-      findMany: vi.fn(async ({ where }: any) => members.filter((m) => m.status !== 'ignored' && (m.intent ?? 'research') !== where.work_source.intent.not)),
+      findMany: vi.fn(async ({ where }: any) =>
+        members.filter((m: any) => {
+          const q = m.qualification ?? 'research';
+          const statusOk = typeof where.status === 'string' ? m.status === where.status : where.status.in.includes(m.status);
+          const qualOk = typeof where.qualification === 'string' ? q === where.qualification : !where.qualification.notIn.includes(q);
+          const intentOk = !where.work_source.intent || (m.intent ?? 'research') !== where.work_source.intent.not;
+          return statusOk && qualOk && intentOk;
+        })),
       updateMany: vi.fn(async () => ({ count: 1 })),
     },
     researchRun: { groupBy: vi.fn(async () => []), findFirst: vi.fn(async () => ({ created_at: new Date('2026-09-28T10:00:00Z') })) },
@@ -67,5 +74,33 @@ describe('work-source accounts in the research selector', () => {
     const r = await runBackgroundResearch(prisma, { now: NOW, cap: 1 }, { ...deps, research: research as never });
     expect(research).not.toHaveBeenCalled();
     expect(r.skipped[0].reason).toMatch(/^researched_recently:/);
+  });
+});
+
+describe('Release B review fixes', () => {
+  it('a request at an account that ALSO has a higher-ranked reason is still served (never an hourly cooldown bypass)', async () => {
+    const prisma = db([{ account_name: 'Acme Foods', status: 'research_requested', kind: 'person' }]);
+    prisma.pounceTrigger.findMany = vi.fn(async () => []);
+    const research = vi.fn(async () => ({ runId: 'r1', outcome: 'insufficient_evidence', facts: [], rejected: [], conflicts: [], notes: [] }));
+    const groups = async () => [{ fingerprint: 'f', accountName: 'Acme Foods', problemFamily: 'hidden_capacity', members: [{ id: 'h', status: 'draft', next: 'find_evidence' }] }] as never;
+    const r = await runBackgroundResearch(prisma, { now: NOW, cap: 1 }, { ...deps, loadGroups: groups, research: research as never });
+    expect(r.researched[0].reason).toBe('research_work');
+    expect(prisma.gapWorkSourceMember.updateMany).toHaveBeenCalledWith({ where: { account_name: 'Acme Foods', status: 'research_requested' }, data: { status: 'active' } });
+  });
+
+  it('a request whose research FAILS is served too (Casey can ask again; no hourly retry forever)', async () => {
+    const prisma = db([{ account_name: 'Acme Foods', status: 'research_requested', kind: 'person' }]);
+    prisma.pounceTrigger.findMany = vi.fn(async () => []);
+    const research = vi.fn(async () => { throw new Error('provider down'); });
+    const r = await runBackgroundResearch(prisma, { now: NOW, cap: 1 }, { ...deps, research: research as never });
+    expect(r.failed).toHaveLength(1);
+    expect(prisma.gapWorkSourceMember.updateMany).toHaveBeenCalledWith({ where: { account_name: 'Acme Foods', status: 'research_requested' }, data: { status: 'active' } });
+  });
+
+  it('RESEARCH MORE on an evidence-ready person is honored (Casey asked), except at a deal or do-not-contact', async () => {
+    const prisma = db([{ account_name: 'Acme Foods', status: 'research_requested', kind: 'person' }]);
+    await selectBackgroundTargets(prisma, NOW, deps);
+    const where = prisma.gapWorkSourceMember.findMany.mock.calls.map((c: any) => c[0].where);
+    expect(where).toContainEqual(expect.objectContaining({ status: 'research_requested', qualification: { notIn: ['in_deal', 'do_not_contact'] } }));
   });
 });

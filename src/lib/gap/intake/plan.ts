@@ -71,6 +71,7 @@ interface PlanMember {
   persona_id: number | null;
   qualification: string | null;
   qualification_reason: string | null;
+  qualified_at?: Date | null;
   name?: string | null;
   title?: string | null;
   company?: string | null;
@@ -93,7 +94,8 @@ export interface PlanResult {
 
 /** Identity improves over time (an account added, an alias registered): re-resolve the members still open. */
 async function reresolveMembers(prisma: PrismaLike, members: PlanMember[]): Promise<number> {
-  const open = members.filter((m) => m.resolution === 'unresolved' || m.resolution === 'new_candidate');
+  // Bounded: at most 300 open members per run (identity improves slowly; the next runs continue).
+  const open = members.filter((m) => m.resolution === 'unresolved' || m.resolution === 'new_candidate').slice(0, 300);
   if (!open.length) return 0;
   const ctx = await loadIntakeContext(prisma);
   let changed = 0;
@@ -113,7 +115,7 @@ async function reresolveMembers(prisma: PrismaLike, members: PlanMember[]): Prom
 
 export async function planWorkSources(
   prisma: PrismaLike,
-  input: { now: Date; actor: string; workSourceId?: string; maxAccounts?: number; timeBudgetMs?: number; clock?: () => number },
+  input: { now: Date; actor: string; workSourceId?: string; maxAccounts?: number; timeBudgetMs?: number; clock?: () => number; skipQualifiedWithinMs?: number },
   deps: PlanDeps = {},
 ): Promise<PlanResult> {
   const clock = input.clock ?? Date.now;
@@ -131,8 +133,19 @@ export async function planWorkSources(
   const personas: Array<{ id: number; do_not_contact: boolean; email_status: string | null }> = personaIds.length ? await prisma.persona.findMany({ where: { id: { in: personaIds } }, select: { id: true, do_not_contact: true, email_status: true } }) : [];
   const stop = new Map(personas.filter((p) => p.do_not_contact || HARD_INVALID.has(String(p.email_status ?? ''))).map((p) => [p.id, p.do_not_contact ? 'marked do not contact' : `email ${p.email_status}`]));
 
-  // Accounts, once each, in the order their members arrived; budgeted.
-  const accountOrder = [...new Set(live.filter((m) => m.account_name && (m.resolution === 'resolved' || m.resolution === 'new_candidate')).map((m) => m.account_name as string))];
+  // Accounts, once each. Rotation: never-qualified first, then the longest since last qualified, so a big source is
+  // covered over runs (never the same first N forever); with a freshness window, recently qualified accounts wait.
+  const lastQualified = new Map<string, number>();
+  for (const m of live) {
+    if (!m.account_name || !(m.resolution === 'resolved' || m.resolution === 'new_candidate')) continue;
+    const at = m.qualified_at ? new Date(m.qualified_at).getTime() : 0;
+    const cur = lastQualified.get(m.account_name);
+    lastQualified.set(m.account_name, cur === undefined ? at : Math.min(cur, at));
+  }
+  const accountOrder = [...lastQualified.entries()]
+    .filter(([, at]) => !input.skipQualifiedWithinMs || at === 0 || input.now.getTime() - at >= input.skipQualifiedWithinMs)
+    .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+    .map(([name]) => name);
   const maxAccounts = input.maxAccounts ?? 60;
   const budget = input.timeBudgetMs ?? 90_000;
   const watched = new Set((await (deps.watch ?? loadWatchProfilesCached)(prisma).catch(() => [])).map((p) => p.accountName));

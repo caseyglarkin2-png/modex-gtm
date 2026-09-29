@@ -28,7 +28,7 @@ type PrismaLike = any;
 export type Approach = 'fact_led' | 'relationship_led' | 'referral_led' | 'follow_up';
 
 export interface OpportunityInput {
-  member: { id: string; name: string | null; title: string | null; accountName: string; personaId: number | null; candidateId: number | null; relationshipContext: string | null; note: string | null; qualification: string | null; alsoFrom: string[] };
+  member: { id: string; name: string | null; title: string | null; accountName: string; personaId: number | null; candidateId: number | null; relationshipContext: string | null; note: string | null; qualification: string | null; alsoFrom: string[]; status?: string };
   source: { name: string; sourceType: string };
   fact: { signalId: string; quote: string; reason: string; chain: string } | null;
   thesis: { summary: string; useLabel: string | null; learn: string | null; wrongIf: string | null } | null;
@@ -38,6 +38,8 @@ export interface OpportunityInput {
 
 export interface Opportunity {
   memberId: string;
+  /** active, or research_requested (Casey asked for more research; the card stays, with Undo). */
+  status: string;
   account: string;
   person: { name: string | null; title: string | null; personaId: number | null; staged: boolean };
   source: { name: string; relationshipContext: string | null; alsoFrom: string[]; note: string | null };
@@ -87,6 +89,7 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
 
   return {
     memberId: m.id,
+    status: m.status ?? 'active',
     account: m.accountName,
     person: { name: m.name, title: m.title, personaId: m.personaId, staged: !m.personaId },
     source: { name: i.source.name, relationshipContext: ctx, alsoFrom: m.alsoFrom, note: m.note },
@@ -115,7 +118,7 @@ export async function loadOpportunities(prisma: PrismaLike, workSourceId: string
   const relational = RELATIONSHIP_TYPES.has(source.source_type);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
   const members: Array<Record<string, any>> = await prisma.gapWorkSourceMember.findMany({
-    where: { work_source_id: workSourceId, kind: 'person', status: 'active', account_name: { not: null }, resolution: { in: ['resolved', 'new_candidate'] }, qualification: { in: relational ? ['evidence_ready', 'research'] : ['evidence_ready'] } },
+    where: { work_source_id: workSourceId, kind: 'person', status: { in: ['active', 'research_requested'] }, account_name: { not: null }, resolution: { in: ['resolved', 'new_candidate'] }, qualification: { in: relational ? ['evidence_ready', 'research'] : ['evidence_ready'] } },
     orderBy: [{ qualification: 'asc' }, { account_name: 'asc' }, { name: 'asc' }],
     take: Math.min(opts.limit ?? 60, 200),
   });
@@ -136,7 +139,8 @@ export async function loadOpportunities(prisma: PrismaLike, workSourceId: string
   const out: Opportunity[] = [];
   for (const m of members) {
     const a = box.get(m.account_name);
-    const best = a?.ready.find((f) => f.signalId === a.bestSignalId) ?? null;
+    // The best fact, else the first verified context fact (still verified; Casey judges its usefulness).
+    const best = a?.ready.find((f) => f.signalId === a.bestSignalId) ?? a?.ready[0] ?? null;
     // A research-state person is an opportunity only with real relationship context (never "research needed" alone).
     if (!best && !m.relationship_context && !m.note) continue;
     const h = hypOf.get(m.account_name);
@@ -145,7 +149,7 @@ export async function loadOpportunities(prisma: PrismaLike, workSourceId: string
     const conv = (conversations as Map<string, { who: string; responseClass: string; at: string }>).get(m.account_name) ?? null;
     out.push(
       proposeOpportunity({
-        member: { id: m.id, name: m.name, title, accountName: m.account_name, personaId: m.persona_id, candidateId: m.candidate_id, relationshipContext: m.relationship_context, note: m.note, qualification: m.qualification, alsoFrom: [] },
+        member: { id: m.id, name: m.name, title, accountName: m.account_name, personaId: m.persona_id, candidateId: m.candidate_id, relationshipContext: m.relationship_context, note: m.note, qualification: m.qualification, alsoFrom: [], status: m.status },
         source: { name: source.name, sourceType: source.source_type },
         fact: best ? { signalId: best.signalId, quote: best.quote, reason: best.relevance.reason, chain: `${best.chain.kind === 'primary' ? 'PRIMARY SOURCE' : 'SOURCE'} ${best.chain.source.label} · ${best.chain.source.date.slice(0, 10)}${best.chain.currentness ? ` / CURRENTNESS CONFIRMED ${best.chain.currentness.label} · ${best.chain.currentness.date.slice(0, 10)}` : ''}` } : null,
         thesis: h ? { summary: String(h.problem_hypothesis ?? '').slice(0, 200), useLabel: a?.theses[0]?.useLabel ?? null, learn: falsify[0] ?? null, wrongIf: (typeof h.what_a_no_means === 'string' && h.what_a_no_means.trim()) || falsify[1] || null } : null,
