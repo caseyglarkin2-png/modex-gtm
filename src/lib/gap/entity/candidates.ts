@@ -110,7 +110,7 @@ export async function scoutCandidate(
   prisma: PrismaLike,
   input: { company: string; actor: string; now: Date; hint?: string; force?: boolean },
   deps: { scout?: (company: string, opts: { hint?: string }) => Promise<ScoutResult> } = {},
-): Promise<ScoutResult | { refused: 'recently_scouted' | 'daily_cap'; scoutedAt?: string }> {
+): Promise<ScoutResult | { refused: 'recently_scouted' | 'daily_cap' | 'web_failed'; scoutedAt?: string; why?: string }> {
   const company_key = normalizeCompanyName(input.company);
   const prior = await prisma.gapAccountCandidate.findUnique({ where: { company_key } });
   if (!input.force && prior?.scouted_at && input.now.getTime() - new Date(prior.scouted_at).getTime() < SCOUT_COOLDOWN_MS) return { refused: 'recently_scouted', scoutedAt: new Date(prior.scouted_at).toISOString() };
@@ -118,6 +118,8 @@ export async function scoutCandidate(
   if (today >= SCOUT_DAILY_CAP) return { refused: 'daily_cap' };
   const scout = deps.scout ?? ((c: string, o: { hint?: string }) => scoutCompany(c, { hint: o.hint }));
   const r = await scout(input.company.trim(), { hint: input.hint });
+  // A failed web pass learned nothing: never stored as a verdict (it would block a retry for a day).
+  if (r.failed) return { refused: 'web_failed', why: r.why };
   await upsertCandidate(prisma, input.company, input.actor, { verdict: r.verdict, entity_type: r.entityType, domain: r.domain, scout: r as unknown as object, scouted_at: input.now });
   await prisma.gapAuditEvent.create({ data: { kind: 'entity.scouted', actor: input.actor, subject_type: 'account_candidate', subject_id: company_key, payload: { company: input.company, verdict: r.verdict, entityType: r.entityType, basis: r.basis } } });
   return r;

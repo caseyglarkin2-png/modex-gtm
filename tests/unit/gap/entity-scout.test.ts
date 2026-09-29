@@ -46,6 +46,7 @@ describe('parse: a claim without a URL is never evidence', () => {
     expect(p.freight).toHaveLength(1);
     expect(p.unknowns).toContain('Uncited claim (not evidence): Has a big private fleet.');
     expect(p.domain).toBe('harborfoods.com');
+    expect(parseScout('{"entityType":"shipper","domain":"https://www.akzonobel.com/en","network":[],"freight":[],"unknowns":[]}')!.domain).toBe('akzonobel.com');
   });
   it('refuses a non-http URL (javascript:) as evidence', () => {
     const p = parseScout('{"entityType":"shipper","network":[{"claim":"x sites","url":"javascript:alert(1)"}],"freight":[],"unknowns":[]}')!;
@@ -74,5 +75,17 @@ describe('scoutCompany', () => {
     const r = await scoutCompany('Harbor Foods Group', { ask: async () => { throw new Error('quota'); } });
     expect(r.verdict).toBe('INSUFFICIENT');
     expect(r.why).toMatch(/web pass failed/);
+  });
+});
+
+describe('Release G: more free name rules, never a shipper', () => {
+  it('our own company, media, finance, healthcare, education and public sector are NOT ICP by name', () => {
+    for (const n of ['FreightRoll', 'Transport Topics', 'Blackstone', 'Balyasny Asset Mangement', 'Pacific Dental Services', 'Bates College', 'Motorcycle Section Suffolk County Sheriffs Office', 'Forward Air', 'Gnosis Freight', 'Escutia express', 'Logistic Group of America', 'Freight Buyers Club']) {
+      expect(classifyByName(n).verdict, n).toBe('NOT_ICP');
+    }
+    expect(classifyByName('FreightRoll').why).toMatch(/our own company/);
+  });
+  it('shipper-looking names are left for Scout (never judged NOT ICP by name)', () => {
+    for (const n of ['Harbor Foods Group', 'Costa Farms', 'AkzoNobel', 'Nestlé', 'Nike SA E2E Supply Chain Optimization Expert', 'Industrial Electric Mfg. (IEM)']) expect(classifyByName(n).verdict, n).toBe('INSUFFICIENT');
   });
 });

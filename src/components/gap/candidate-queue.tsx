@@ -186,6 +186,7 @@ function Candidate({ c }: { c: QueueItem }) {
     setBusy(op);
     const r = await post({ op, company: c.company, ...(op === 'scout' && c.titles.length ? { hint: `people there: ${c.titles.join(', ')}` } : {}), ...(op === 'scout' && c.scouted ? { force: true } : {}) });
     setBusy(null);
+    if (r.status === 502) return setMsg('The web pass failed (nothing was saved); try again in a minute.');
     if (r.status === 429) return setMsg(r.body.error === 'daily_cap' ? 'Scout has done its passes for today; try again tomorrow.' : 'Scouted within the last day already.');
     if (!r.ok) return setMsg(`Not saved: ${String(r.body.error ?? r.status)}`);
     setMsg(op === 'scout' ? `Scouted: ${VERDICT_LABEL[String(r.body.verdict)] ?? r.body.verdict}.` : op === 'ignore' ? 'Ignored.' : 'Marked for more research.');
