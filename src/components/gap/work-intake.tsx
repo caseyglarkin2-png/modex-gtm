@@ -236,6 +236,58 @@ function ListImport({ kind, sources }: { kind: 'people' | 'accounts'; sources: I
   );
 }
 
+/** Conference mode in one step: name a conference (or any source), it becomes the current source for quick adds. */
+function StartSource() {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [f, setF] = useState({ name: '', sourceType: 'conference', relationshipContext: '' });
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  async function start() {
+    setBusy(true);
+    setError(null);
+    const r = await post('/api/gap/sources', { name: f.name, sourceType: f.sourceType, relationshipContext: f.relationshipContext || null, intent: 'find_people' });
+    if (!r.ok) {
+      setBusy(false);
+      return setError(String(r.data.error ?? r.data.field ?? r.status));
+    }
+    await post(`/api/gap/sources/${encodeURIComponent(String(r.data.id))}`, { op: 'current' });
+    setBusy(false);
+    setOpen(false);
+    setF({ name: '', sourceType: 'conference', relationshipContext: '' });
+    router.refresh();
+  }
+  if (!open) {
+    return (
+      <button type="button" data-testid="intake-start-source" className={`${btn} w-full sm:w-auto`} onClick={() => setOpen(true)}>
+        Start a conference or new source
+      </button>
+    );
+  }
+  return (
+    <div className="space-y-2 rounded-md bg-[var(--muted)] p-3" data-testid="intake-start-source-form">
+      <input aria-label="Conference or source name" data-testid="intake-start-name" className={input} placeholder="e.g. Inland26 · Chicago" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} />
+      <select aria-label="Source type" className={input} value={f.sourceType} onChange={(e) => setF({ ...f, sourceType: e.target.value })}>
+        {Object.entries(SOURCE_TYPE_LABEL).map(([v, l]) => (
+          <option key={v} value={v}>
+            {l}
+          </option>
+        ))}
+      </select>
+      <input aria-label="How you know them" data-testid="intake-start-context" className={input} placeholder="How you know them (e.g. Met at Inland26)" value={f.relationshipContext} onChange={(e) => setF({ ...f, relationshipContext: e.target.value })} />
+      <div className="flex flex-wrap gap-2">
+        <button type="button" data-testid="intake-start-save" className={primary} disabled={busy || !f.name.trim()} onClick={() => void start()}>
+          {busy ? 'Starting...' : 'Start and make current'}
+        </button>
+        <button type="button" className={btn} onClick={() => setOpen(false)}>
+          Cancel
+        </button>
+      </div>
+      {error ? <p role="alert" className="text-sm text-[var(--destructive)]">Not started: {error}</p> : null}
+    </div>
+  );
+}
+
 export function WorkIntake({ sources, initialMode }: { sources: IntakeSourceOption[]; initialMode?: Mode }) {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>(initialMode ?? 'person');
@@ -277,6 +329,7 @@ export function WorkIntake({ sources, initialMode }: { sources: IntakeSourceOpti
               </select>
             </label>
           ) : null}
+          <StartSource />
           <PersonForm current={current} />
         </>
       ) : (

@@ -44,3 +44,20 @@ describe('<WorkIntake>', () => {
     expect(screen.getByTestId('intake-preview')).not.toBeDisabled();
   });
 });
+
+describe('conference mode in one step', () => {
+  it('Start a conference creates the source and makes it current (two calls, nothing else)', async () => {
+    const f = vi.spyOn(globalThis, 'fetch').mockImplementation(async (url) => new Response(JSON.stringify(String(url) === '/api/gap/sources' ? { id: 'src9' } : { ok: true }), { status: String(url) === '/api/gap/sources' ? 201 : 200 }));
+    render(<WorkIntake sources={[]} />);
+    fireEvent.click(screen.getByTestId('intake-start-source'));
+    fireEvent.change(screen.getByTestId('intake-start-name'), { target: { value: 'Inland26 · Chicago' } });
+    fireEvent.change(screen.getByTestId('intake-start-context'), { target: { value: 'Met at Inland26' } });
+    fireEvent.click(screen.getByTestId('intake-start-save'));
+    await waitFor(() => expect(f).toHaveBeenCalledTimes(2));
+    expect(f.mock.calls[0][0]).toBe('/api/gap/sources');
+    expect(JSON.parse(String((f.mock.calls[0][1] as RequestInit).body))).toMatchObject({ name: 'Inland26 · Chicago', sourceType: 'conference', relationshipContext: 'Met at Inland26' });
+    expect(f.mock.calls[1][0]).toBe('/api/gap/sources/src9');
+    expect(JSON.parse(String((f.mock.calls[1][1] as RequestInit).body))).toEqual({ op: 'current' });
+    f.mockRestore();
+  });
+});
