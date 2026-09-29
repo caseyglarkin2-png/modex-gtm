@@ -14,6 +14,7 @@ import { SourceOpportunities } from '@/components/gap/source-opportunities';
 import { SourcePlanButton } from '@/components/gap/source-plan-button';
 import { loadOpportunities } from '@/lib/gap/intake/opportunities';
 import { UnknownCompanies } from '@/components/gap/unknown-companies';
+import { AccountLink } from '@/components/gap/account-link';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP source' };
@@ -58,7 +59,7 @@ function Member({ m }: { m: MemberView }) {
           <span className="font-medium">{m.kind === 'person' ? m.name ?? m.email ?? '(no name)' : m.company ?? m.accountName}</span>
           {m.kind === 'person' && (m.title || m.company) ? <span className="text-[var(--muted-foreground)]"> · {[m.title, m.company].filter(Boolean).join(' · ')}</span> : null}
         </p>
-        <span className="text-xs text-[var(--muted-foreground)]">{RESOLUTION_LABEL[m.resolution] ?? m.resolution}{m.accountName ? `: ${m.accountName}` : ''}</span>
+        <span className="text-xs text-[var(--muted-foreground)]">{RESOLUTION_LABEL[m.resolution] ?? m.resolution}{m.accountName ? <>: <AccountLink name={m.accountName} /></> : ''}</span>
       </div>
       {m.qualification ? (
         <p className="text-xs">

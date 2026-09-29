@@ -1,9 +1,9 @@
 import './print.css';
 import { notFound } from 'next/navigation';
-import { promises as fs, existsSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import type { Metadata } from 'next';
-import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
+import type { DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
 import IndustryFlickBar from '@/components/demo/industry-flick-bar';
 import { MicrositeViewEvent } from '@/components/demo/microsite-view-event';
@@ -13,7 +13,7 @@ import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import MicrositePostHogBeacon from '@/components/microsites/microsite-posthog-beacon';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
-import { getRemoteDemoPack } from '@/lib/demo/remote-pack';
+import { loadDemoPack } from '@/lib/demo/load-pack';
 
 /**
  * D2.1 — The canonical demo route: `/demo/<account>`.
@@ -49,19 +49,7 @@ interface SearchParams {
 }
 
 async function loadPack(slug: string): Promise<DemoPack | null> {
-  try {
-    const file = path.join(process.cwd(), 'public', 'demo-packs', `${slug}.json`);
-    const raw = await fs.readFile(file, 'utf8');
-    return DemoPackSchema.parse(JSON.parse(raw));
-  } catch {
-    // Not on disk — try the runtime store (no-deploy demos).
-    try {
-      const remote = await getRemoteDemoPack(slug);
-      return remote ? DemoPackSchema.parse(remote) : null;
-    } catch {
-      return null;
-    }
-  }
+  return loadDemoPack(slug);
 }
 
 /** First sentence of a blob, for social descriptions (I.T1). */

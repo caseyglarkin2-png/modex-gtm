@@ -11,6 +11,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { SignalView } from '@/lib/gap/signals/ops';
+import { AccountLink } from './account-link';
 
 const TONE: Record<string, string> = {
   'Needs you': 'bg-amber-500/15 text-amber-800 dark:text-amber-300',
@@ -49,7 +50,7 @@ function SignalRow({ s }: { s: SignalView }) {
         <span className={`rounded px-2 py-0.5 font-semibold ${TONE[s.status] ?? 'bg-[var(--muted)]'}`} data-testid="signal-status">
           {s.status}
         </span>
-        <span className="font-semibold">{s.accountName ?? (s.accountHint ? `"${s.accountHint}"?` : 'Account unknown')}</span>
+        <span className="font-semibold">{s.accountName ? <AccountLink name={s.accountName} /> : s.accountHint ? `"${s.accountHint}"?` : 'Account unknown'}</span>
         {s.caseyShared ? <span className="text-[var(--muted-foreground)]">you shared</span> : null}
         <span className="text-[var(--muted-foreground)]">{s.sourceName ?? s.sourceClass}{s.publishedAt ? ` · ${day(s.publishedAt)}` : ` · captured ${day(s.capturedAt)}`}</span>
         {s.alsoCoveredBy ? <span className="text-[var(--muted-foreground)]">+{s.alsoCoveredBy} more source{s.alsoCoveredBy === 1 ? '' : 's'}</span> : null}

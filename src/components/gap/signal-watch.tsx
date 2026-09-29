@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { WatchProfile } from '@/lib/gap/signals/watch';
+import { AccountLink } from './account-link';
 
 const REASON: Record<string, string> = { priority: 'priority', gap_thesis: 'GAP thesis', audited_for_page: '/for page', buying_committee: 'buying committee' };
 const input = 'min-w-0 rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-2 text-base sm:text-sm';
@@ -44,7 +45,7 @@ export function SignalWatch({ profiles }: { profiles: Array<Pick<WatchProfile, '
       <ul className="mt-2 max-h-64 space-y-1 overflow-y-auto text-xs">
         {profiles.map((p) => (
           <li key={p.accountName} className="break-words">
-            <span className="font-medium">{p.accountName}</span>
+            <span className="font-medium"><AccountLink name={p.accountName} /></span>
             <span className="text-[var(--muted-foreground)]"> · {p.reasons.map((r) => REASON[r] ?? r).join(', ')}{p.aliases.length ? ` · also: ${p.aliases.join(', ')}` : ''}</span>
           </li>
         ))}

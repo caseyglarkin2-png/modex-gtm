@@ -32,6 +32,7 @@ import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
+import { AccountLink } from '@/components/gap/account-link';
 import { listReplies } from '@/lib/gap/replies/list';
 import { listAllCurrent } from '@/lib/gap/routing/queue';
 import { cockpitOpenHref, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
@@ -257,7 +258,7 @@ async function InDealsLane({ accounts, open }: { accounts: string[]; open: strin
         {inDeals.map((a) => (
           <li key={a.accountName} className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid={`in-deal-${a.accountName}`}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="font-semibold">{a.accountName}</p>
+              <p className="font-semibold"><AccountLink name={a.accountName} /></p>
               <p className="text-xs text-[var(--muted-foreground)]">{a.known} of 6 known</p>
             </div>
             <ul className="text-sm">

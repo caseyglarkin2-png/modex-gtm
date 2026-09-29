@@ -11,6 +11,7 @@
 import type { ReactNode } from 'react';
 import type { ChainLink, InboxAccount, InboxFact } from '@/lib/gap/research/inbox';
 import { EvidenceActions } from './evidence-actions';
+import { AccountLink } from './account-link';
 
 const MAX_ACCOUNTS = 15;
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -119,7 +120,7 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
   return (
     <article data-testid="evidence-account" data-account={a.accountName} className="min-w-0 space-y-3 rounded-md border border-[var(--border)] bg-[var(--background)] p-3 shadow-sm sm:p-4">
       <header className="space-y-1">
-        <p className="text-base font-semibold">{a.accountName}</p>
+        <p className="text-base font-semibold"><AccountLink name={a.accountName} /></p>
         <p data-testid="evidence-account-summary" className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
           {[
             plural(a.ready.length, 'verified fact') + ' ready',
