@@ -302,7 +302,7 @@ export async function loadCandidateQueue(prisma: PrismaLike, opts: { workSourceI
   }
   const out = [...by.values()]
     .filter((i) => opts.includeDecided || i.decision === 'open' || i.decision === 'research_more')
-    .sort((a, b) => ORDER[a.verdict ?? ''] - ORDER[b.verdict ?? ''] || b.people - a.people || a.company.localeCompare(b.company));
+    .sort((a, b) => (ORDER[a.verdict ?? ''] ?? 3) - (ORDER[b.verdict ?? ''] ?? 3) || b.people - a.people || a.company.localeCompare(b.company));
   return out.slice(0, opts.limit ?? 100);
 }
 

@@ -31,7 +31,11 @@ async function main() {
       let entity: string | null = r.entity_type;
       let newWhy: string;
       let reopen = false;
-      if (failed || !r.scouted_at) {
+      if (!r.scouted_at && !failed) {
+        // Never scouted (a decision without a Scout): nothing to re-derive.
+        tally.untouched = (tally.untouched ?? 0) + 1;
+        continue;
+      } else if (failed) {
         to = null;
         entity = null;
         newWhy = 'A failed web pass: nothing was learned; retry.';

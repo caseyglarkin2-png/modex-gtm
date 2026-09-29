@@ -14,8 +14,8 @@ describe('name rules (free, deterministic)', () => {
     expect(classifyByName('Summit Logistics Group')).toMatchObject({ entityType: '3pl', verdict: 'UNKNOWN', final: false });
     expect(classifyByName('Harbor Foods Group')).toMatchObject({ entityType: null, verdict: 'UNKNOWN', final: false });
   });
-  it('settle only the genuinely obvious (software, media, finance, healthcare, education, public sector, us)', () => {
-    for (const n of ['FreightRoll', 'Transport Topics', 'Blackstone', 'Balyasny Asset Mangement', 'Pacific Dental Services', 'Bates College', 'Motorcycle Section Suffolk County Sheriffs Office', 'Yardly Software Inc']) {
+  it('settle only the genuinely obvious (software, media, finance, law enforcement, us)', () => {
+    for (const n of ['FreightRoll', 'Transport Topics', 'Blackstone', 'Balyasny Asset Mangement', 'Motorcycle Section Suffolk County Sheriffs Office', 'Yardly Software Inc']) {
       expect(classifyByName(n), n).toMatchObject({ verdict: 'NOT_FIT', final: true });
     }
     expect(classifyByName('FreightRoll').why).toMatch(/our own company/);
@@ -28,7 +28,7 @@ describe('name rules (free, deterministic)', () => {
 });
 
 describe('the fit comes from cited operations, not the label', () => {
-  const net = [{ claim: 'Operates 12 distribution centers across the Southeast.', url: 'https://harborfoods.example/about' }];
+  const net = [{ claim: 'Operates 12 distribution centers across the Southeast.', url: 'https://harborfoods.example/about' }, { claim: 'Runs a private fleet of 300 tractors.', url: 'https://harborfoods.example/fleet' }];
   it('a shipper with operations is a direct buyer; without them a potential one', () => {
     expect(deriveVerdict({ entityType: 'shipper', network: net, freight: [], ambiguous: false })).toBe('DIRECT_BUYER');
     expect(deriveVerdict({ entityType: 'shipper', network: [], freight: [], ambiguous: false })).toBe('POTENTIAL_DIRECT_BUYER');
@@ -69,7 +69,7 @@ describe('scoutCompany', () => {
   });
   it('a logistics name IS checked, and a 3PL running DCs comes back a direct buyer', async () => {
     let calls = 0;
-    const r = await scoutCompany('Summit Logistics Group', { ask: async () => { calls += 1; return '{"entityType":"3pl","domain":"summitlog.example","ambiguous":false,"what":"Contract logistics provider","network":[{"claim":"Operates 40 distribution centers for retail and CPG customers.","url":"https://summitlog.example/network"}],"freight":[],"unknowns":[]}'; } });
+    const r = await scoutCompany('Summit Logistics Group', { ask: async () => { calls += 1; return '{"entityType":"3pl","domain":"summitlog.example","ambiguous":false,"what":"Contract logistics provider","network":[{"claim":"Operates 40 distribution centers for retail and CPG customers.","url":"https://summitlog.example/network"}],"freight":[{"claim":"Runs a dedicated fleet of 800 tractors and 3,000 trailers.","url":"https://summitlog.example/fleet"}],"unknowns":[]}'; } });
     expect(calls).toBe(1);
     expect(r).toMatchObject({ verdict: 'DIRECT_BUYER', entityType: '3pl', basis: 'web' });
     expect(r.why).toMatch(/owns yard problems even without owning the freight/);

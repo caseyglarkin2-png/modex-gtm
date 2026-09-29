@@ -40,12 +40,18 @@ export const FIT_LABEL: Record<YardFlowFit, string> = {
   UNKNOWN: 'Fit unknown',
 };
 
-/** A claim about physical freight operations (facilities, yards, fleets, trailer pools, gates, terminals). */
-const OPERATING = /\b(distribution (cent(er|re)s?|network)|DCs?|warehous\w*|plants?|terminals?|yards?|trailers?|fleets?|tractors?|trucks?|hostlers?|gates?|cross[- ]?docks?|facilit(y|ies)|ports?|rail(yard|road)?|intermodal|chassis|containers?|depots?|hubs?|fulfil+ment (cent(er|re)s?|network)|service cent(er|re)s?|cold storage|drayage)\b/i;
+/**
+ * A claim that the company RUNS physical freight operations: an operating verb AND a facility, yard or fleet term.
+ * "Serves customers at 500 facilities", "access to 40,000 trucks through our network", "closed two plants" and
+ * "manufactures plastic containers" are not operations.
+ */
+const OPERATING_TERM = /\b(distribution (cent(er|re)s?|network)|DCs?|warehouses?|plants?|terminals?|yards?|trailers?|fleets?|tractors?|trucks?|hostlers?|cross[- ]?docks?|facilit(y|ies)|rail ?yards?|depots?|hubs?|fulfil+ment (cent(er|re)s?|network)|service cent(er|re)s?|cold storage|ports?)\b/i;
+const OPERATING_VERB = /\b(operat\w*|runs?|running|owns?|owned|manag\w*|maintain\w*|staff\w*|our|its|with (a|an) (private|dedicated) fleet|network of \d)/i;
+const NOT_OPERATING = /\b(clos(e|ed|es|ing|ure)|sold|divest\w*|serves? customers|access to|through (our|its) (carrier|partner) network|customers?' (sites|facilities))\b/i;
 const LOGISTICS_SERVICE = /\b(logistic|freight|transport|supply chain|shipping|fleet|yard|warehouse|trucking|carrier|3pl|dock|trailer|visibility|tms|wms)\w*/i;
 
 export function operatingClaims<T extends { claim: string }>(claims: readonly T[]): T[] {
-  return claims.filter((c) => OPERATING.test(c.claim));
+  return claims.filter((c) => OPERATING_TERM.test(c.claim) && OPERATING_VERB.test(c.claim) && !NOT_OPERATING.test(c.claim));
 }
 
 const OWNERS = new Set<EntityType>(['shipper', 'retailer', 'distributor', 'manufacturer']);
@@ -57,8 +63,9 @@ export function deriveFit(x: { entityType: EntityType | null; operating: number;
   if (!x.entityType) return { fit: 'UNKNOWN', why: 'What the company is could not be established.' };
   const label = ENTITY_LABEL[x.entityType];
   if (OWNERS.has(x.entityType)) return x.operating ? { fit: 'DIRECT_BUYER', why: `A ${label} that runs freight facilities (${n}).` } : { fit: 'POTENTIAL_DIRECT_BUYER', why: `A ${label}; no cited operating evidence yet (check its plants and DCs).` };
-  if (OPERATORS.has(x.entityType)) return x.operating ? { fit: 'DIRECT_BUYER', why: `A ${label} that runs its own facilities or fleet (${n}): it owns yard problems even without owning the freight.` } : { fit: 'UNKNOWN', why: `A ${label}; fit depends on whether it runs facilities, yards or a fleet: needs an operating-network check.` };
-  if (x.entityType === 'broker') return x.operating ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `A broker with physical operations (${n}): asset-based, check which facilities it runs.` } : { fit: 'NOT_FIT', why: 'A freight broker with no cited physical operation: it does not run yards.' };
+  // An operator needs corroboration (two cited operating claims) before it reads as a direct buyer.
+  if (OPERATORS.has(x.entityType)) return x.operating >= 2 ? { fit: 'DIRECT_BUYER', why: `A ${label} that runs its own facilities or fleet (${n}): it owns yard problems even without owning the freight.` } : x.operating === 1 ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `A ${label} with one cited operating claim: confirm its facilities, yards or fleet.` } : { fit: 'UNKNOWN', why: `A ${label}; fit depends on whether it runs facilities, yards or a fleet: needs an operating-network check.` };
+  if (x.entityType === 'broker') return x.operating >= 2 ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `A broker with physical operations (${n}): asset-based, check which facilities it runs.` } : x.operating === 1 ? { fit: 'UNKNOWN', why: 'A broker with one cited operating claim: check whether it runs facilities or only arranges freight.' } : { fit: 'NOT_FIT', why: 'A freight broker with no cited physical operation: it does not run yards.' };
   if (x.entityType === 'vendor' || x.entityType === 'consultant') return x.what && LOGISTICS_SERVICE.test(x.what) ? { fit: 'PARTNER', why: `A ${label} serving logistics: a partner or channel, never a direct buyer.` } : { fit: 'NOT_FIT', why: `A ${label} outside freight operations.` };
   return x.operating ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `Unclassified, but runs freight facilities (${n}).` } : { fit: 'NOT_FIT', why: 'No physical freight operation found.' };
 }
@@ -71,7 +78,7 @@ export function deriveFit(x: { entityType: EntityType | null; operating: number;
 const FINAL: Array<[EntityType, RegExp, string]> = [
   ['other', /\b(freightroll|yardflow)\b/i, 'our own company'],
   ['other', /\b(capital|ventures|asset man\w*|investments?|bank|blackstone|private equity)\b/i, 'a finance firm'],
-  ['other', /\b(health|dental|medical|clinic|hospital|college|university|school|academy|sheriff'?s?|police|county|department of|city of)\b/i, 'healthcare, education or public sector'],
+  ['other', /\b(sheriff'?s?|police)\b/i, 'a law-enforcement office'],
   ['vendor', /\b(topics|news|media|magazine|publishing|podcast|productions?)\b/i, 'a media company'],
   ['vendor', /\b(software|recruit(ing|ers)|staffing|insurance|eap)\b/i, 'a software or staffing firm'],
 ];
@@ -83,6 +90,9 @@ const GUESS: Array<[EntityType, RegExp]> = [
   ['3pl', /\b(logistics?|3pl|fulfil+ment|warehousing|supply chain solutions|distribution services)\b/i],
   ['broker', /\bfreight\b/i],
   ['vendor', /\b(technolog(y|ies)|systems|solutions|consult(ing|ants?)|advisors?|advisory|agency|audit)\b/i],
+  // Healthcare, education and public bodies can run DCs and ports (Cardinal Health, Academy Sports, a port
+  // authority): a guess to check, never settled by name.
+  ['other', /\b(health|dental|medical|clinic|hospital|college|university|school|academy|county|department of|city of|authority)\b/i],
 ];
 
 export function fitFromName(company: string): { entityType: EntityType | null; fit: YardFlowFit; final: boolean; why: string } {

@@ -351,3 +351,20 @@ describe('dogfood: a quoted vendor statement is still vendor marketing', () => {
     expect(buildAccountBrief(base({ facts: [vendor, base().facts[0]] }), NOW).glance.bestFact).toMatch(/^Acme Foods will open/);
   });
 });
+
+describe('review J: vertical words and ambiguous Scouts', () => {
+  it('real vertical words map to a type (stems match their endings; distribution before food)', async () => {
+    const { typeFromVertical } = await import('@/lib/gap/account-intel/build');
+    expect(typeFromVertical('Manufacturing')).toBe('manufacturer');
+    expect(typeFromVertical('Automotive')).toBe('manufacturer');
+    expect(typeFromVertical('Food Distribution')).toBe('distributor');
+    expect(typeFromVertical('Warehousing')).toBe('3pl');
+    expect(typeFromVertical('Transportation')).toBe('carrier');
+    expect(typeFromVertical('Consulting')).toBe('vendor');
+    expect(typeFromVertical('Unknown')).toBeNull();
+  });
+  it('an ambiguous Scout (a name shared by several companies) never counts as the account evidence or type', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Unknown' }, pack: null, facts: [], scout: { domain: null, what: 'A different company', entityType: 'carrier', network: [{ claim: 'Operates 30 terminals.', url: 'https://x.example' }], freight: [{ claim: 'Runs a fleet of 2,000 tractors.', url: 'https://x.example/f' }], at: '2026-09-29T00:00:00Z', basis: 'web', ambiguous: true } }), NOW);
+    expect(b.fit).toMatchObject({ entityType: null, fit: 'UNKNOWN' });
+  });
+});

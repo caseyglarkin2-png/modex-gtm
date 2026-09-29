@@ -206,7 +206,7 @@ export async function loadAccountInputs(
 function scoutOf(c: Row | null): AccountInputs['scout'] {
   if (!c) return null;
   const s = (c.scout ?? {}) as Row;
-  return { domain: c.domain ?? null, what: s.what ?? null, entityType: c.entity_type ?? null, network: Array.isArray(s.network) ? s.network : [], freight: Array.isArray(s.freight) ? s.freight : [], at: c.scouted_at ? new Date(c.scouted_at).toISOString() : null };
+  return { domain: c.domain ?? null, what: s.what ?? null, entityType: c.entity_type ?? null, network: Array.isArray(s.network) ? s.network : [], freight: Array.isArray(s.freight) ? s.freight : [], at: c.scouted_at ? new Date(c.scouted_at).toISOString() : null, basis: s.basis === 'name_rules' ? 'name_rules' : 'web', ambiguous: s.ambiguous === true };
 }
 
 /** The canonical brief for one account (live projection). Null when the slug names no account. */

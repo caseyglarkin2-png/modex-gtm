@@ -118,7 +118,7 @@ export interface AccountInputs {
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
   roi: { hardSavingsAnnual: number; totalValueAnnual: number; facilities: number; calculatorVersion: string | null; assumptions: string[] } | null;
   /** What Scout found when this company was a candidate: cited, never verified at source (leads, not facts). */
-  scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null } | null;
+  scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null; basis?: 'web' | 'name_rules' | null; ambiguous?: boolean } | null;
 }
 
 // ---------------------------------------------------------------- the brief
@@ -231,7 +231,7 @@ export interface AccountIntelligenceBrief {
   glance: Glance;
   motion: Motion;
   /** What the company is (descriptive) and whether it could buy YardFlow (from operations), with the evidence. */
-  fit: { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[] };
+  fit: { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[]; scoutedAt: string | null };
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
   /** The open deals when dealState is ACTIVE (name and stage as HubSpot said them moments ago). */
@@ -771,16 +771,19 @@ const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|wareh
 const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern)\b/i;
 
 /** What the account record's vertical says the company is (descriptive only; never the fit). */
-function typeFromVertical(v: string | null): EntityType | null {
+export function typeFromVertical(v: string | null): EntityType | null {
+  // Stems match whole words and their endings ("Manufacturing", "Automotive", "Warehousing"); order matters
+  // ("Food Distribution" is a distributor before it is food).
   const s = v ?? '';
-  if (/\b(port|terminal|marine)\b/i.test(s)) return 'port_terminal';
-  if (/\bbroker/i.test(s)) return 'broker';
-  if (/\b(3pl|logistics|warehous|contract logistics)\b/i.test(s)) return '3pl';
-  if (/\b(carrier|trucking|transport|freight|rail)\b/i.test(s)) return 'carrier';
-  if (/\b(retail|grocery|e-?commerce)\b/i.test(s)) return 'retailer';
-  if (/\b(distribut|wholesale|foodservice)\b/i.test(s)) return 'distributor';
-  if (/\b(food|beverage|cpg|consumer|manufactur|chemical|auto|industrial|paper|packag|pharma|agri|building)\b/i.test(s)) return 'manufacturer';
-  if (/\b(software|technology|saas|consult)\b/i.test(s)) return 'vendor';
+  const has = (re: string) => new RegExp(`\\b(${re})\\w*`, 'i').test(s);
+  if (has('port|terminal|marine')) return 'port_terminal';
+  if (has('broker')) return 'broker';
+  if (has('3pl|logistic|warehous|contract logistic|fulfil')) return '3pl';
+  if (has('carrier|trucking|transport|freight|rail|drayage')) return 'carrier';
+  if (has('retail|grocer|e-?commerce|supermarket')) return 'retailer';
+  if (has('distribut|wholesale|foodservice')) return 'distributor';
+  if (has('food|beverage|cpg|consumer|manufactur|chemical|automo|auto|industrial|paper|packag|pharma|agri|building|dairy|bottl|brew|steel|metal')) return 'manufacturer';
+  if (has('software|technolog|saas|consult')) return 'vendor';
   return null;
 }
 
@@ -789,16 +792,22 @@ function typeFromVertical(v: string | null): EntityType | null {
  * OPERATING evidence GAP holds (audited sites, a sourced facility count, live facts and Scout claims about
  * facilities, yards, fleets). A 3PL or carrier that runs sites is a direct buyer, never a "partner" by label.
  */
-export function accountFit(i: AccountInputs, now: Date): { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[] } {
-  const entityType = (i.scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
+export function accountFit(i: AccountInputs, now: Date): { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[]; scoutedAt: string | null } {
+  // Scout counts only from a web pass on the RIGHT company (never a name rule, never an ambiguous identity).
+  const scout = i.scout && i.scout.basis !== 'name_rules' && !i.scout.ambiguous ? i.scout : null;
+  const entityType = (scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
   const a = auditedSites(i.pack);
   const evidence: string[] = [];
-  if (a.kept.length) evidence.push(`${plural(a.kept.length, 'audited site')} with yards (${a.self.length} self-operated)`);
+  // Only sites the audit verified as self-operated are the company's own operations (a 3PL-run or unverified
+  // site says little about what this company runs).
+  const own = a.self.filter((s) => s.verification?.verdict === 'confirmed' || s.verification?.verdict === 'probable');
+  if (own.length) evidence.push(`${plural(own.length, 'verified self-operated site')} with yards`);
   if (i.facilityFact?.status === 'verified') evidence.push(`sourced facility count: ${i.facilityFact.facilityCount}`);
   for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${f.quote.slice(0, 90)}`);
-  for (const c of operatingClaims([...(i.scout?.network ?? []), ...(i.scout?.freight ?? [])])) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
-  const f = deriveFit({ entityType, operating: evidence.length, ambiguous: false, what: i.scout?.what ?? null });
-  return { entityType, fit: f.fit, why: f.why, evidence: evidence.slice(0, 4) };
+  for (const c of operatingClaims([...(scout?.network ?? []), ...(scout?.freight ?? [])])) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
+  // Each verified self-operated site is its own piece of operating evidence.
+  const f = deriveFit({ entityType, operating: evidence.length + Math.max(own.length - 1, 0), ambiguous: false, what: scout?.what ?? null });
+  return { entityType, fit: f.fit, why: f.why, evidence: evidence.slice(0, 4), scoutedAt: i.scout?.basis === 'web' ? i.scout.at : null };
 }
 
 // ---------------------------------------------------------------- the build
