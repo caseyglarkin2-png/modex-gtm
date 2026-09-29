@@ -99,3 +99,18 @@ describe('member keys (one row per person per source; re-imports never duplicate
     expect(memberKey({ kind: 'account', companyDomain: 'WWW.Acme.com', raw: {} })).toBe('domain:acme.com');
   });
 });
+
+describe('final review: a duplicate-account shell never stages a duplicate human', () => {
+  const dup: IntakeContext = {
+    identity: { accountsByHubspotCompanyId: new Map(), verifiedDomainToAccounts: new Map(), aliasToAccounts: new Map(), accountNames: ['RXO', 'RXO, Inc.'] },
+    personas: [{ id: 50, name: 'Colin Wright', account_name: 'RXO, Inc.', email: null, linkedin_url: null }],
+  };
+  it('the person already exists on the sibling account: RESOLVED there', () => {
+    expect(resolveIntakeRow(dup, person({ name: 'Colin Wright', company: 'RXO' }))).toMatchObject({ resolution: 'resolved', personaId: 50, accountName: 'RXO, Inc.', basis: 'name_at_sibling_account' });
+  });
+  it('a new person at a company with duplicate accounts: AMBIGUOUS (never staged into a shell)', () => {
+    const r = resolveIntakeRow(dup, person({ name: 'New Person', company: 'RXO' }));
+    expect(r).toMatchObject({ resolution: 'ambiguous', basis: 'company_duplicate_accounts', accountName: null });
+    expect(r.candidates.map((c) => c.accountName).sort()).toEqual(['RXO', 'RXO, Inc.']);
+  });
+});

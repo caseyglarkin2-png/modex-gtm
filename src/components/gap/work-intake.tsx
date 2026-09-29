@@ -292,8 +292,15 @@ export function WorkIntake({ sources, initialMode }: { sources: IntakeSourceOpti
   const router = useRouter();
   const [mode, setMode] = useState<Mode>(initialMode ?? 'person');
   const current = sources.find((s) => s.current) ?? null;
+  const [switching, setSwitching] = useState(false);
+  const [switchError, setSwitchError] = useState<string | null>(null);
+  /** '' = back to People I met (no current source). */
   async function makeCurrent(id: string) {
-    await post(`/api/gap/sources/${encodeURIComponent(id)}`, { op: 'current' });
+    setSwitching(true);
+    setSwitchError(null);
+    const r = id ? await post(`/api/gap/sources/${encodeURIComponent(id)}`, { op: 'current' }) : await post(`/api/gap/sources/${encodeURIComponent(current?.id ?? 'none')}`, { op: 'clear_current' });
+    setSwitching(false);
+    if (!r.ok) return setSwitchError(String(r.data.error ?? r.status));
     router.refresh();
   }
   const choice = (m: Mode, label: string) => (
@@ -319,7 +326,7 @@ export function WorkIntake({ sources, initialMode }: { sources: IntakeSourceOpti
           {sources.length ? (
             <label className="block space-y-1 text-sm">
               <span className="font-medium">Current source</span>
-              <select data-testid="intake-current" className={input} value={current?.id ?? ''} onChange={(e) => e.target.value && void makeCurrent(e.target.value)}>
+              <select data-testid="intake-current" className={input} disabled={switching} value={current?.id ?? ''} onChange={(e) => void makeCurrent(e.target.value)}>
                 <option value="">People I met (default)</option>
                 {sources.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -327,6 +334,7 @@ export function WorkIntake({ sources, initialMode }: { sources: IntakeSourceOpti
                   </option>
                 ))}
               </select>
+              {switchError ? <span role="alert" className="text-xs text-[var(--destructive)]">Not switched: {switchError}</span> : null}
             </label>
           ) : null}
           <StartSource />

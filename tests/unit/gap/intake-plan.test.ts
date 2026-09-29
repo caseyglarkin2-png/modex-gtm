@@ -141,3 +141,35 @@ describe('personal engagement puts an account in scope (a transparent rule, not 
     expect(opportunity).toHaveBeenCalledTimes(1); // the deal truth is read for the engaged account only
   });
 });
+
+describe('final review fixes: identity follows promotion; dead rows do not starve the window', () => {
+  it('a member whose staged candidate was promoted takes the promoted Persona (never waits for a name re-match)', async () => {
+    const { reresolveMembers } = await import('@/lib/gap/intake/plan');
+    const members = [m('staged', { resolution: 'new_candidate', candidate_id: 5, persona_id: null, name: 'Hana Lee', company: 'Acme Foods' })];
+    const { prisma, updates } = db(members);
+    prisma.accountContactCandidate = { findMany: vi.fn(async () => [{ id: 5, promoted_persona_id: 77 }]) };
+    const n = await reresolveMembers(prisma, members as never, { context: async () => ({ identity: { accountsByHubspotCompanyId: new Map(), verifiedDomainToAccounts: new Map(), aliasToAccounts: new Map(), accountNames: [] }, personas: [] }) });
+    expect(n).toBe(1);
+    expect(updates[0]).toMatchObject({ id: 'staged', resolution: 'resolved', resolution_basis: 'promoted_candidate', persona_id: 77 });
+  });
+
+  it('an unresolved row with nothing to resolve on (no company, email, profile or domain) is never re-scanned', async () => {
+    const { reresolveMembers } = await import('@/lib/gap/intake/plan');
+    const members = [m('slogan', { resolution: 'unresolved', account_name: null, name: 'Pat', title: 'Dog Dad' })];
+    const { prisma } = db(members);
+    prisma.accountContactCandidate = { findMany: vi.fn(async () => []) };
+    const context = vi.fn();
+    expect(await reresolveMembers(prisma, members as never, { context: context as never })).toBe(0);
+    expect(context).not.toHaveBeenCalled();
+  });
+});
+
+describe('one source-type traits map', () => {
+  it('engaged, relational and approach come from one place', async () => {
+    const { SOURCE_TYPE_TRAITS } = await import('@/lib/gap/intake/service');
+    expect(SOURCE_TYPE_TRAITS.conference).toMatchObject({ engaged: true, relational: true });
+    expect(SOURCE_TYPE_TRAITS.newsletter).toMatchObject({ engaged: false, relational: true, opener: 'author' });
+    expect(SOURCE_TYPE_TRAITS.referral).toMatchObject({ engaged: true, approach: 'referral_led' });
+    expect(SOURCE_TYPE_TRAITS.target_list).toMatchObject({ engaged: false, relational: false });
+  });
+});

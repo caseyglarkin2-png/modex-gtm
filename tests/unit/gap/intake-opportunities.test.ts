@@ -28,7 +28,7 @@ describe('proposeOpportunity', () => {
     expect(o.approach).toBe('fact_led');
     expect(o.whyAccount).toBe('Acme Foods will open a new distribution center in Reno.');
     expect(o.suggestedApproach).toMatch(/^Fact-led: open with the verified fact/);
-    expect(o.suggestedApproach).toMatch(/you may mention MMYQB subscriber if it would feel natural/);
+    expect(o.suggestedApproach).toMatch(/you may say you write MMYQB LinkedIn subscribers; never that they subscribe/);
     expect(o.suggestedApproach).not.toMatch(/subscribe[sd]? so/i);
     expect(o.learn).toBe('How are inbound trailers staged at the new DC?');
     expect(o.safety).toEqual({ state: 'ok', lines: ['Every send still runs the normal gates at the click: suppression, deal truth, duplicate send, account motion.'] });
@@ -65,5 +65,32 @@ describe('proposeOpportunity', () => {
     expect(o.thesis).toBeNull();
     expect(o.learn).toBe('No thesis yet: draft one from this fact in Research, then set what to learn.');
     expect(o.wrongIf).toBeNull();
+  });
+});
+
+describe('final review fixes', () => {
+  it('a person Casey met (conference / referral / relationship) is a fact-led FOLLOW-UP in the copy, with the blind spot said', () => {
+    const o = proposeOpportunity(base({ source: { name: 'Inland26 · Chicago', sourceType: 'conference' }, member: { ...base().member, relationshipContext: 'Inland26 contact (field guide note, Sep 24)' } }));
+    expect(o.approach).toBe('fact_led');
+    expect(o.suggestedApproach).toMatch(/^Fact-led follow-up: you already know them/);
+    expect(o.suggestedApproach).toMatch(/never a second cold first touch/);
+    expect(o.safety.lines).toContain('GAP only sees its own sends: check whether you already wrote to them before anything new goes out.');
+  });
+
+  it('a newsletter: Casey may say he writes it, never that they subscribe', () => {
+    const o = proposeOpportunity(base({ source: { name: 'MMYQB LinkedIn subscribers', sourceType: 'newsletter' } }));
+    expect(o.suggestedApproach).toMatch(/you may say you write MMYQB LinkedIn subscribers; never that they subscribe/);
+    expect(o.suggestedApproach).not.toMatch(/mention MMYQB subscriber/);
+  });
+
+  it('a sensitive fact (layoffs, closure harm, bankruptcy, recall) is flagged: reference the network change, never the people affected', () => {
+    const o = proposeOpportunity(base({ fact: { signalId: 'f', quote: 'Tyson Foods announced the closure of its beef plant, throwing more than 2,500 union workers out of work.', reason: 'a physical network transformation', chain: 'SOURCE x' } }));
+    expect(o.safety.state).toBe('caution');
+    expect(o.safety.lines[0]).toBe('Sensitive fact (people lost their jobs): reference the network change, never the people affected, or choose a different opener.');
+  });
+
+  it('a follow-up names who the conversation is with; a no-fact card shows no thesis', () => {
+    expect(proposeOpportunity(base({ conversation: { who: 'dana@acmefoods.com', responseClass: 'interested', at: '2026-09-20T12:00:00Z' } })).suggestedApproach).toMatch(/with dana@acmefoods\.com/);
+    expect(proposeOpportunity(base({ fact: null, member: { ...base().member, qualification: 'research' } })).thesis).toBeNull();
   });
 });

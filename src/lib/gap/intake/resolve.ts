@@ -119,6 +119,15 @@ export function resolveIntakeRow(ctx: IntakeContext, row: IntakeRow): ResolvedRo
 
   if (!company.accountName) return none(company.ambiguous ? 'ambiguous' : 'unresolved', company.basis);
   const key = row.name ? personKey(row.name) : '';
+  // A CRM with two account rows for one company ("RXO" and "RXO, Inc."): the resolver picks one; the person may
+  // live on the other. Look across every normalized-equal sibling; never stage a new person into one of them.
+  const norm = normalizeCompanyName(company.accountName);
+  const siblings = ctx.identity.accountNames.filter((n) => n !== company.accountName && normalizeCompanyName(n) === norm);
+  if (siblings.length) {
+    const across = key ? ctx.personas.filter((p) => (p.account_name === company.accountName || siblings.includes(p.account_name)) && personKey(p.name) === key) : [];
+    if (across.length === 1) return { resolution: 'resolved', basis: across[0].account_name === company.accountName ? 'name_at_account' : 'name_at_sibling_account', accountName: across[0].account_name, personaId: across[0].id, candidates: [] };
+    return { ...none('ambiguous', 'company_duplicate_accounts'), candidates: [company.accountName, ...siblings].map((a) => ({ personaId: null, accountName: a, why: 'duplicate account rows' })) };
+  }
   const sameName = key ? ctx.personas.filter((p) => p.account_name === company.accountName && personKey(p.name) === key) : [];
   if (sameName.length === 1) return { resolution: 'resolved', basis: 'name_at_account', accountName: company.accountName, personaId: sameName[0].id, candidates: [] };
   if (sameName.length > 1) return { ...none('ambiguous', 'name_multiple', company.accountName), candidates: sameName.map((p) => ({ personaId: p.id, accountName: p.account_name, why: 'same name' })) };

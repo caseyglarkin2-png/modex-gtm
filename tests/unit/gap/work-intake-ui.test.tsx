@@ -61,3 +61,15 @@ describe('conference mode in one step', () => {
     f.mockRestore();
   });
 });
+
+describe('back to People I met', () => {
+  it('choosing the default clears the current source (it never silently snaps back)', async () => {
+    const f = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    render(<WorkIntake sources={SOURCES} />);
+    fireEvent.change(screen.getByTestId('intake-current'), { target: { value: '' } });
+    await waitFor(() => expect(f).toHaveBeenCalledTimes(1));
+    expect(f.mock.calls[0][0]).toBe('/api/gap/sources/src1');
+    expect(JSON.parse(String((f.mock.calls[0][1] as RequestInit).body))).toEqual({ op: 'clear_current' });
+    f.mockRestore();
+  });
+});

@@ -59,17 +59,20 @@ function Row({ workSourceId, c }: { workSourceId: string; c: UnknownCompany }) {
   );
 }
 
-export function UnknownCompanies({ workSourceId, items }: { workSourceId: string; items: UnknownCompany[] }) {
+export function UnknownCompanies({ workSourceId, items, total }: { workSourceId: string; items: UnknownCompany[]; total?: number }) {
   if (!items.length) return null;
+  // Collapsed by default: on a phone a long list would bury everything below it.
   return (
-    <section className="space-y-1" data-testid="unknown-companies">
-      <h2 className="text-sm font-semibold">Companies GAP does not know yet</h2>
+    <details className="space-y-1 rounded-md border border-[var(--border)] p-3" data-testid="unknown-companies">
+      <summary className="cursor-pointer text-sm font-semibold">
+        Companies GAP does not know yet ({total ?? items.length}){total && total > items.length ? `, top ${items.length} shown` : ''}
+      </summary>
       <p className="text-xs text-[var(--muted-foreground)]">If one is an account GAP already has under another name, say which; the people there are placed and qualified. Otherwise leave it: GAP never creates an account from a list.</p>
       <ul>
         {items.map((c) => (
           <Row key={c.company} workSourceId={workSourceId} c={c} />
         ))}
       </ul>
-    </section>
+    </details>
   );
 }

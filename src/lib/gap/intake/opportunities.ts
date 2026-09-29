@@ -21,6 +21,7 @@
 import { loadEvidenceInbox } from '../research/inbox';
 import { loadAccountConversations } from '../motion/load';
 import { suggestAngle } from '../motion/persona-angle';
+import { traitsOf } from './service';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -56,19 +57,38 @@ export interface Opportunity {
 }
 
 const GATES = 'Every send still runs the normal gates at the click: suppression, deal truth, duplicate send, account motion.';
+const BLIND_SPOT = 'GAP only sees its own sends: check whether you already wrote to them before anything new goes out.';
+
+/** A fact about people harmed (jobs lost, bankruptcy, deaths, a recall, a strike) is never a cold opener's hook. */
+const SENSITIVE: Array<[RegExp, string]> = [
+  [/\b(?:layoffs?|laid off|job cuts|jobs? (?:cut|lost)|out of work|lose their jobs|furlough\w*|workforce reduction)\b/i, 'people lost their jobs'],
+  [/\b(?:bankrupt\w*|chapter 11|insolven\w*)\b/i, 'a bankruptcy'],
+  [/\b(?:fatal\w*|died|deaths?|killed)\b/i, 'people died'],
+  [/\brecall(?:s|ed)?\b/i, 'a product recall'],
+  [/\bstrikes?\b|\bwalkout\b/i, 'a labor dispute'],
+];
+export function sensitivityOf(quote: string): string | null {
+  for (const [re, what] of SENSITIVE) if (re.test(quote)) return what;
+  return null;
+}
 
 export function proposeOpportunity(i: OpportunityInput): Opportunity {
   const m = i.member;
   const ctx = m.relationshipContext;
+  const traits = traitsOf(i.source.sourceType);
   let approach: Approach;
   let suggested: string;
   if (i.conversation) {
     approach = 'follow_up';
-    suggested = `Follow-up: there is a conversation at ${m.accountName} (${i.conversation.responseClass.replace(/_/g, ' ')}). Continue it in the thread; this is not a cold first touch.`;
+    suggested = `Follow-up: there is a conversation at ${m.accountName} with ${i.conversation.who} (${i.conversation.responseClass.replace(/_/g, ' ')}). Continue it in that thread; this is not a cold first touch.`;
+  } else if (i.fact && traits.engaged) {
+    approach = 'fact_led';
+    suggested = `Fact-led follow-up: you already know them (${ctx ?? i.source.name}). If you have written to them, continue that thread and bring the verified fact; never a second cold first touch.`;
   } else if (i.fact) {
     approach = 'fact_led';
-    suggested = `Fact-led: open with the verified fact, bridge to one question about how it lands on their yards, then a small ask.${ctx ? ` Optional: you may mention ${ctx} if it would feel natural; never as the reason.` : ''}`;
-  } else if (i.source.sourceType === 'referral') {
+    const optional = traits.opener === 'author' ? ` Optional: you may say you write ${i.source.name}; never that they subscribe.` : ctx ? ` Optional: you may mention ${ctx} if it would feel natural; never as the reason.` : '';
+    suggested = `Fact-led: open with the verified fact, bridge to one question about how it lands on their yards, then a small ask.${optional}`;
+  } else if (traits.approach === 'referral_led') {
     approach = 'referral_led';
     suggested = `Referral-led: name the introduction (${ctx ?? i.source.name}) and ask for their perspective on how their network handles yard handoffs. No problem is claimed.`;
   } else {
@@ -77,6 +97,11 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   }
 
   const safety: Opportunity['safety'] = { state: 'ok', lines: [] };
+  const sensitive = i.fact ? sensitivityOf(i.fact.quote) : null;
+  if (sensitive) {
+    safety.state = 'caution';
+    safety.lines.push(`Sensitive fact (${sensitive}): reference the network change, never the people affected, or choose a different opener.`);
+  }
   if (approach === 'relationship_led' || approach === 'referral_led') {
     safety.state = 'caution';
     safety.lines.push(`No verified fact at ${m.accountName}: GAP will not draft a first touch. If you reach out, it is your own note.`);
@@ -85,6 +110,7 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
     safety.state = 'caution';
     safety.lines.push('Staged, not yet a contact: review and promote the person before GAP can prepare outreach.');
   }
+  if (approach === 'fact_led' && traits.engaged) safety.lines.push(BLIND_SPOT);
   if (approach === 'fact_led' || approach === 'follow_up') safety.lines.push(GATES);
 
   return {
@@ -95,7 +121,8 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
     source: { name: i.source.name, relationshipContext: ctx, alsoFrom: m.alsoFrom, note: m.note },
     whyAccount: i.fact?.quote ?? null,
     fact: i.fact,
-    thesis: i.thesis,
+    // A no-fact card shows no thesis: it would invite leading with inference.
+    thesis: i.fact ? i.thesis : null,
     whyPerson: i.suggestedAngle,
     approach,
     suggestedApproach: suggested,
@@ -106,7 +133,6 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   };
 }
 
-const RELATIONSHIP_TYPES = new Set(['referral', 'relationship', 'conference', 'newsletter', 'content', 'inbound']);
 
 /**
  * The opportunities in one source: people at EVIDENCE READY accounts (fact-led), and people with a real
@@ -115,7 +141,7 @@ const RELATIONSHIP_TYPES = new Set(['referral', 'relationship', 'conference', 'n
 export async function loadOpportunities(prisma: PrismaLike, workSourceId: string, now: Date, opts: { limit?: number } = {}): Promise<Opportunity[]> {
   const source = await prisma.gapWorkSource.findUnique({ where: { id: workSourceId }, select: { name: true, source_type: true } });
   if (!source) return [];
-  const relational = RELATIONSHIP_TYPES.has(source.source_type);
+  const relational = traitsOf(source.source_type).relational;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
   const members: Array<Record<string, any>> = await prisma.gapWorkSourceMember.findMany({
     where: { work_source_id: workSourceId, kind: 'person', status: { in: ['active', 'research_requested'] }, account_name: { not: null }, resolution: { in: ['resolved', 'new_candidate'] }, qualification: { in: relational ? ['evidence_ready', 'research'] : ['evidence_ready'] } },
