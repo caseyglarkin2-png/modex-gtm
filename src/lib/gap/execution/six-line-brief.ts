@@ -19,6 +19,7 @@ import { loadAccountFirstTouches } from '../motion/load';
 import { accountRepliedRecently } from '../replies/account-reply';
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
+import { accountHref } from '../account-intel/href';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -49,6 +50,19 @@ export interface SixLineBrief {
   wrongIf: string | null;
   /** How Casey knows this person (work sources): HIS context, never evidence, never sent by GAP. */
   context: string[];
+  /**
+   * The canonical account intelligence (account-intel/build.ts), one line: the motion, and a caution when the
+   * account says "not now". It informs; every send still runs its own gates at the click.
+   */
+  account: { motion: string; caution: string | null; href: string } | null;
+}
+
+/** What the six-line brief takes from the canonical account brief (never recomputed here). */
+export interface BriefAccountIntel {
+  accountName: string;
+  motion: { type: string; who: string | null; why: string };
+  motionLine: string;
+  firstDiscoveryQuestion: string | null;
 }
 
 const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x.trim().length > 0) : []);
@@ -115,6 +129,8 @@ export function buildBrief(input: {
   contradicted?: ReadonlyMap<string, string> | null;
   /** Relationship context lines (intake/context.ts loadRelationshipContext). */
   context?: string[] | null;
+  /** The canonical account intelligence for this account (null when it could not be read). */
+  account?: BriefAccountIntel | null;
 }): SixLineBrief {
   const h = input.hypothesis;
   const falsify = list(h?.falsification_questions);
@@ -126,12 +142,20 @@ export function buildBrief(input: {
         ? { fact: null, reason: 'Could not check this fact against the other evidence just now. Every send re-checks before anything goes out.' }
         : knowOf(h, input.now ?? new Date(), input.contradicted ?? new Map()),
     think: typeof h?.problem_hypothesis === 'string' && h.problem_hypothesis.trim() ? h.problem_hypothesis.trim() : null,
-    learn: falsify[0] ?? null,
+    // The thesis's own question first; else the account's discovery plan (the same plan the account page shows).
+    learn: falsify[0] ?? input.account?.firstDiscoveryQuestion ?? null,
     whyYou: input.angle ? { text: input.angle, owned: true } : input.suggestedAngle ? { text: input.suggestedAngle, owned: false } : null,
     history: hist.lines,
     historyState: hist.state,
     wrongIf: (typeof h?.what_a_no_means === 'string' && h.what_a_no_means.trim()) || falsify[1] || null,
     context: (input.context ?? []).filter((l) => typeof l === 'string' && l.trim()),
+    account: input.account
+      ? {
+          motion: input.account.motionLine,
+          caution: input.account.motion.type === 'NO_GOOD_MOTION' || input.account.motion.type === 'IN_DEAL' ? input.account.motion.why : null,
+          href: accountHref(input.account.accountName),
+        }
+      : null,
   };
 }
 

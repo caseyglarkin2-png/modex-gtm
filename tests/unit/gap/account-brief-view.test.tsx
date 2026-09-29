@@ -41,7 +41,7 @@ describe('account intelligence view', () => {
   it('leads with the next action and the 14-field glance', () => {
     render(<AccountBriefView brief={buildAccountBrief(inputs(), NOW)} />);
     expect(within(screen.getByTestId('brief-next-action')).getByText(/Review the thesis/)).toBeTruthy();
-    for (const k of ['icpState', 'whyNow', 'network', 'freight', 'bestFact', 'topHypothesis', 'currentTech', 'likelyOwner', 'relationship', 'commercialState', 'biggestUnknown', 'nextQuestion']) expect(screen.getByTestId(`glance-${k}`)).toBeTruthy();
+    for (const k of ['motion', 'icpState', 'whyNow', 'network', 'freight', 'bestFact', 'topHypothesis', 'currentTech', 'likelyOwner', 'relationship', 'commercialState', 'biggestUnknown', 'nextQuestion']) expect(screen.getByTestId(`glance-${k}`)).toBeTruthy();
     expect(screen.getByTestId('glance-likelyOwner').textContent).toMatch(/Dana Ops, VP Distribution \(LIKELY/);
   });
 
@@ -95,5 +95,16 @@ describe('review fixes: safe links, refused statements said', () => {
     const b = buildAccountBrief(inputs({ roi: { hardSavingsAnnual: 1_000_000, totalValueAnnual: 1_000_000, facilities: 3, calculatorVersion: null, assumptions: ['x'] } }), NOW);
     render(<AccountBriefView brief={b} />);
     expect(screen.getByTestId('brief-refused-economics').textContent).toMatch(/1 statement was withheld .*modeled point estimate/);
+  });
+});
+
+describe('glance polish (Release D)', () => {
+  it('watch reasons read as words and a glance line never shows a raw URL', () => {
+    const b = buildAccountBrief(inputs({ watchReasons: ['audited_for_page', 'gap_thesis'], pack: null }), NOW);
+    b.glance.network = '28 facilities (FY2025 Form 10-K, Item 2 Properties. https://www.sec.gov/Archives/edgar/data/40704/x.htm)';
+    render(<AccountBriefView brief={b} />);
+    expect(screen.getByTestId('glance-icpState').textContent).toMatch(/Watched: audited for a \/for page, has a GAP thesis/);
+    expect(screen.getByTestId('glance-network').textContent).not.toMatch(/https?:/);
+    expect(screen.getByTestId('glance-network').textContent).toMatch(/Item 2 Properties\.\)$/);
   });
 });

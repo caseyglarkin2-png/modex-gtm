@@ -20,6 +20,7 @@
 import { loadWatchProfilesCached } from '../signals/watch';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { loadEvidenceInbox, type InboxAccount } from '../research/inbox';
+import { loadAccountConversations, loadAccountFirstTouches } from '../motion/load';
 import { isIdentityImprovement, loadIntakeContext, stageCandidate, traitsOf } from './service';
 import { memberKey } from './resolve';
 import { resolveIntakeRow } from './resolve';
@@ -39,6 +40,8 @@ export interface AccountFacts {
   bestFactReason: string | null;
   theses: Array<{ useLabel: string | null }>;
   lastResearchAt: Date | null;
+  /** The account is already in motion: a live conversation, or a first touch sent or outstanding (30 days). */
+  motion?: { kind: 'conversation' | 'touched'; detail: string } | null;
 }
 
 const HARD_INVALID = new Set(['hard_bounce', 'hard_bounced', 'invalid']);
@@ -49,6 +52,9 @@ export function qualifyAccount(f: AccountFacts, _now: Date): { state: Qualificat
   const scope = !f.watched && f.engagedVia ? ` (in scope: you met people here via ${f.engagedVia})` : '';
   if (f.opportunity === 'ACTIVE') return { state: 'in_deal', reason: 'open HubSpot deal: work it from the deal' };
   if (f.opportunity === 'UNKNOWN') return { state: 'opportunity_unknown', reason: 'deal status could not be read: held, never cold' };
+  // Already in motion: follow the thread, never stack a second cold touch from a list.
+  if (f.motion?.kind === 'conversation') return { state: 'already_covered', reason: `in a live conversation (${f.motion.detail}): follow up in the thread${scope}` };
+  if (f.motion?.kind === 'touched') return { state: 'already_covered', reason: `${f.motion.detail}: wait for it, do not stack another${scope}` };
   if (f.liveFacts > 0) {
     if (f.theses.length > 0 && f.theses.every((t) => !t.useLabel)) return { state: 'already_covered', reason: `verified evidence and every thesis there is approved and in use${scope}` };
     return { state: 'evidence_ready', reason: `${plural(f.liveFacts, 'verified fact')}${f.bestFactReason ? `; best: ${f.bestFactReason}` : ''}${scope}` };
@@ -64,6 +70,8 @@ export interface PlanDeps {
   inbox?: (prisma: PrismaLike, now: Date, opts: { accounts: string[] }) => Promise<InboxAccount[]>;
   /** Re-resolve members whose identity may have improved; returns how many changed. */
   reresolve?: (prisma: PrismaLike, members: PlanMember[]) => Promise<number>;
+  conversations?: (prisma: PrismaLike, accounts: readonly string[], now: Date) => Promise<Map<string, unknown>>;
+  touches?: (prisma: PrismaLike, accounts: readonly string[], now: Date) => Promise<Map<string, unknown>>;
 }
 
 interface PlanMember {
@@ -183,6 +191,18 @@ export async function planWorkSources(
     ? await prisma.researchRun.groupBy({ by: ['account_name'], where: { account_name: { in: accountOrder }, run_key: { startsWith: 'gap_research:' } }, _max: { created_at: true } }).catch(() => [])
     : [];
   const lastOf = new Map(lastRuns.map((r) => [r.account_name, r._max.created_at ? new Date(r._max.created_at) : null]));
+  // Account motion (a conversation, a first touch): one read each for the whole run; unreadable means unknown, never "clear".
+  const [conversations, touches] = await Promise.all([
+    (deps.conversations ?? loadAccountConversations)(prisma, accountOrder, input.now).catch(() => new Map()),
+    (deps.touches ?? loadAccountFirstTouches)(prisma, accountOrder, input.now).catch(() => new Map()),
+  ]);
+  const motionOf = (name: string): AccountFacts['motion'] => {
+    const c = conversations.get(name) as { who: string; responseClass: string } | undefined;
+    if (c) return { kind: 'conversation', detail: `${c.who}, ${c.responseClass.replace(/_/g, ' ')}` };
+    const t = ((touches.get(name) ?? []) as Array<{ recipient: string; sentAt: string; released: boolean; outstanding?: boolean }>).find((x) => !x.released);
+    if (t) return { kind: 'touched', detail: t.outstanding ? `a first-touch draft to ${t.recipient} is outstanding` : `a first touch to ${t.recipient} went out ${t.sentAt.slice(0, 10)}` };
+    return null;
+  };
 
   // Personal engagement per account (a conference / referral / relationship member there).
   const engagedVia = new Map<string, string>();
@@ -198,7 +218,7 @@ export async function planWorkSources(
     const engaged = engagedVia.get(name) ?? null;
     const opp = isWatched || engaged ? await (deps.opportunity ?? ((p, a) => resolveAccountOpportunity(p, a)))(prisma, name) : null;
     const box = inbox.get(name);
-    stateOf.set(name, qualifyAccount({ accountName: name, watched: isWatched, engagedVia: engaged, opportunity: opp?.status ?? null, liveFacts: box?.ready.length ?? 0, bestFactReason: box?.ready[0]?.relevance?.reason ?? null, theses: box?.theses ?? [], lastResearchAt: lastOf.get(name) ?? null }, input.now));
+    stateOf.set(name, qualifyAccount({ accountName: name, watched: isWatched, engagedVia: engaged, opportunity: opp?.status ?? null, liveFacts: box?.ready.length ?? 0, bestFactReason: box?.ready[0]?.relevance?.reason ?? null, theses: box?.theses ?? [], lastResearchAt: lastOf.get(name) ?? null, motion: motionOf(name) }, input.now));
   }
 
   let changed = 0;

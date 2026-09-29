@@ -14,6 +14,7 @@
 import { orderStatements, sectionStatus, statementProblems, type SectionStatus, type Source, type Statement, type TruthClass } from './truth';
 import { suggestAngle } from '../motion/persona-angle';
 import { sellerRelevance } from '../research/continuity';
+import { traitsOf } from '../intake/service';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
 
@@ -192,6 +193,16 @@ export interface Glance {
   biggestUnknown: string;
   nextQuestion: string | null;
   nextAction: string;
+  /** The motion, in one line ("Fact-led: Dana Ops, on the verified fact." / "No good motion yet: ..."). */
+  motion: string;
+}
+
+export type MotionType = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'REFERRAL_LED' | 'RELATIONSHIP_LED' | 'FACT_LED';
+/** How to approach this account, gates first. Never overrides a gate: every send still runs its own checks. */
+export interface Motion {
+  type: MotionType;
+  who: string | null;
+  why: string;
 }
 
 export interface AccountIntelligenceBrief {
@@ -203,6 +214,7 @@ export interface AccountIntelligenceBrief {
   thesis: Thesis;
   wedge: Wedge;
   glance: Glance;
+  motion: Motion;
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
 }
@@ -579,6 +591,39 @@ function nextAction(i: AccountInputs, hyps: HypothesisView[], now: Date, discove
   return 'Review the thesis, then use the verified fact in a first touch to the primary person (every gate runs at the click).';
 }
 
+const WATCH_REASON: Record<string, string> = { priority: 'priority account', gap_thesis: 'has a GAP thesis', buying_committee: 'buying committee mapped', audited_for_page: 'audited for a /for page' };
+
+const MOTION_LABEL: Record<MotionType, string> = { IN_DEAL: 'In a deal', NO_GOOD_MOTION: 'No good motion yet', FOLLOW_UP: 'Follow-up', REFERRAL_LED: 'Referral-led', RELATIONSHIP_LED: 'Relationship-led', FACT_LED: 'Fact-led' };
+
+/**
+ * The account motion, gates first: an open deal, then anything that says "not now" (an unreadable deal state,
+ * a contradicted story, nobody reachable), then the strongest honest way in: a live conversation, a referral,
+ * someone Casey met, a verified fact with a hypothesis grounded in it. A newsletter subscription is context,
+ * not a way in. With none of these the answer is "do not contact yet".
+ */
+function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, primary: PersonaInput | undefined): Motion {
+  if (i.opportunity?.status === 'ACTIVE') return { type: 'IN_DEAL', who: null, why: 'An open HubSpot deal: work it from the deal, never cold.' };
+  if (i.opportunity?.status === 'UNKNOWN') return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: the HubSpot deal state could not be read.' };
+  if (hyps.some((h) => h.truth === 'CONTRADICTED')) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: the buyer contradicted the current story. Learn what is true first.' };
+  if (i.conversation) return { type: 'FOLLOW_UP', who: i.conversation.who, why: `A live conversation (${i.conversation.responseClass.replace(/_/g, ' ')}, ${day(i.conversation.at)}): continue that thread, never a cold first touch.` };
+  const reachable = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
+  // The same source traits as the cohort opportunities (intake/opportunities.ts): one motion system.
+  const engaged = i.memberships.filter((m) => traitsOf(m.sourceType).engaged);
+  const grounded = liveFacts(i, now).length > 0 && hyps.some((h) => h.grounded && h.truth !== 'CONTRADICTED');
+  const who = primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0];
+  // A verified fact leads; a relationship is an optional opener, never the reason.
+  if (grounded && who) return { type: 'FACT_LED', who: who.name, why: `A live verified fact and a hypothesis grounded in it.${engaged[0] ? ` Optional opener: ${engaged[0].relationshipContext ?? engaged[0].sourceName}.` : ''}` };
+  const referral = engaged.find((m) => traitsOf(m.sourceType).approach === 'referral_led');
+  if (referral) return { type: 'REFERRAL_LED', who: referral.personName, why: `${referral.relationshipContext ?? `Referred through ${referral.sourceName}`}: name the introduction and ask for their perspective. No problem is claimed; GAP will not draft a first touch without a verified fact.` };
+  if (engaged[0]) return { type: 'RELATIONSHIP_LED', who: engaged[0].personName, why: `${engaged[0].relationshipContext ?? `You know them through ${engaged[0].sourceName}`}: ask for their perspective. No problem is claimed; GAP will not draft a first touch without a verified fact.` };
+  if (i.personas.length && !reachable.length) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: nobody reachable here (do not contact, or no email).' };
+  if (!liveFacts(i, now).length) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: no live verified fact and no relationship to open with.' };
+  if (!who) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: nobody at this account yet (find people first).' };
+  return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: a verified fact, but no hypothesis grounded in it. Draft and review one first.' };
+}
+
+const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who}, on the verified fact.` : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
+
 /** Titles that plausibly touch the yard; still LIKELY, never ownership. */
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
 
@@ -634,11 +679,12 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const dealStatement = sections.commercial.statements.find((s) => s.sources.some((x) => x.ref === 'deal-truth') || (s.truth === 'UNKNOWN' && /deal state/.test(s.text)));
   const reach = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
   const persona = reach.find((p) => OWNER_TITLE.test(p.title ?? '')) ?? i.personas.find((p) => OWNER_TITLE.test(p.title ?? '')) ?? reach[0] ?? i.personas[0];
+  const motion = accountMotion(i, hypotheses, now, persona);
   const owner = persona ? `${persona.name}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)` : 'Unknown: no person at this account yet.';
   const biggestUnknown = discovery[0] ? `${discovery[0].type.replace(/_/g, ' ').toLowerCase()}: ${discovery[0].why}` : 'None open.';
   const glance: Glance = {
     account: i.account.name,
-    icpState: i.opportunity?.status === 'ACTIVE' ? 'In a deal' : i.watched ? `Watched (${i.watchReasons.join(', ') || 'priority'})` : 'Not in the watched universe',
+    icpState: i.opportunity?.status === 'ACTIVE' ? 'In a deal' : i.watched ? `Watched: ${i.watchReasons.map((r) => WATCH_REASON[r] ?? r.replace(/_/g, ' ')).join(', ') || 'priority account'}` : 'Not in the watched universe',
     whyNow: thesis.whyNow,
     network: sections.footprint.statements[0]?.text ?? 'Unknown',
     freight: sections.freight.statements[0]?.text ?? 'Unknown',
@@ -651,7 +697,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     biggestUnknown,
     nextQuestion: discovery[0]?.question ?? null,
     nextAction: nextAction(i, hypotheses, now, discovery),
+    motion: motionLine(motion),
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, dealState };
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, dealState, motion };
 }
