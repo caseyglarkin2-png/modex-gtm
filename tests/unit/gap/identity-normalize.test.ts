@@ -21,7 +21,7 @@ describe('normalizeCompanyName', () => {
 
   it('strips a leading "The" and collapses whitespace/punctuation', () => {
     expect(normalizeCompanyName('The   Acme   Company')).toBe('acme');
-    expect(normalizeCompanyName("O'Malley's Freight, Inc.")).toBe('o malley s freight');
+    expect(normalizeCompanyName("O'Malley's Freight, Inc.")).toBe('omalleys freight'); // an apostrophe stays inside its word (2026-09-29)
   });
 
   it('folds an ampersand to "and"', () => {
@@ -41,5 +41,17 @@ describe('normalizeCompanyName', () => {
     const a = normalizeCompanyName('Niagara Bottling, Llc');
     const b = normalizeCompanyName('Niagara Bottling, Llc');
     expect(a).toBe(b);
+  });
+
+  it('folds accents instead of dropping the letter (B4): Nestlé is Nestle, not "nestl"', () => {
+    expect(normalizeCompanyName('Nestlé USA')).toBe('nestle usa');
+    expect(normalizeCompanyName('Nestlé USA')).toBe(normalizeCompanyName('Nestle USA'));
+    expect(normalizeCompanyName('Café Três Corações')).toBe('cafe tres coracoes');
+    expect(normalizeCompanyName('Ferrero Rocher S.p.A.')).toBe('ferrero rocher s p a');
+  });
+
+  it('treats an apostrophe as part of the word (Kelloggs), straight or curly', () => {
+    expect(normalizeCompanyName("Kellogg's")).toBe('kelloggs');
+    expect(normalizeCompanyName('Kellogg’s')).toBe('kelloggs');
   });
 });

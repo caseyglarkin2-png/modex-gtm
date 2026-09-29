@@ -21,7 +21,7 @@ import { personKey } from './resolve';
 import { loadIdentityContext } from '../identity/service';
 import { soundsLikeBuyerWords } from '../capture/buyer-words';
 import { parseIntake, type IntakeKind, type IntakeRow, type ParseResult } from './parse';
-import { memberKey, resolveIntakeRow, type IntakeContext, type ResolvedRow } from './resolve';
+import { legacyMemberKey, memberKey, resolveIntakeRow, type IntakeContext, type ResolvedRow } from './resolve';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -115,7 +115,9 @@ function resolveAll(ctx: IntakeContext, parsed: ParseResult): PreviewRow[] {
 }
 
 /** Identity only ever improves on a re-import or a re-resolve: never demoted, never moved to another account. */
-export function isIdentityImprovement(from: { resolution: string; account_name: string | null }, to: { resolution: string; accountName: string | null }): boolean {
+export function isIdentityImprovement(from: { resolution: string; account_name: string | null; resolution_basis?: string | null }, to: { resolution: string; accountName: string | null }): boolean {
+  // Casey decided where this person belongs (entity/people.ts): nothing automatic moves it.
+  if (from.resolution_basis?.startsWith('casey_')) return false;
   if (from.account_name && to.accountName && from.account_name !== to.accountName) return false;
   if (from.resolution === 'unresolved') return to.resolution !== 'unresolved';
   if (from.resolution === 'new_candidate') return to.resolution === 'resolved';
@@ -187,12 +189,13 @@ async function writeMembers(prisma: PrismaLike, source: { id: string; source_typ
   let staged = 0;
   const ids: string[] = [];
   // One read for the members this source already has (a 2,000 row list is not 2,000 lookups).
-  const keys = rows.map((p) => p.key);
+  const keys = rows.flatMap((p) => [p.key, legacyMemberKey(p.row)].filter((k): k is string => !!k));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
   const prior: Array<Record<string, any>> = await prisma.gapWorkSourceMember.findMany({ where: { work_source_id: source.id, member_key: { in: keys } } });
   const byKey = new Map(prior.filter((m) => m.work_source_id === source.id).map((m) => [m.member_key as string, m]));
   for (const p of rows) {
-    const found = byKey.get(p.key) ?? null;
+    const old = legacyMemberKey(p.row);
+    const found = byKey.get(p.key) ?? (old ? byKey.get(old) : undefined) ?? null;
     if (found) {
       existing += 1;
       ids.push(found.id);

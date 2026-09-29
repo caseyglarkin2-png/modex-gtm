@@ -7,13 +7,15 @@ import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { loadSource, loadUnknownCompanies, MEMBER_FILTERS, type MemberView } from '@/lib/gap/intake/views';
+import { loadSource, MEMBER_FILTERS, type MemberView } from '@/lib/gap/intake/views';
+import { loadCandidateQueue } from '@/lib/gap/entity/candidates';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { SourceMemberActions } from '@/components/gap/source-member-actions';
 import { SourceOpportunities } from '@/components/gap/source-opportunities';
 import { SourcePlanButton } from '@/components/gap/source-plan-button';
 import { loadOpportunities } from '@/lib/gap/intake/opportunities';
-import { UnknownCompanies } from '@/components/gap/unknown-companies';
+import { CandidateQueue } from '@/components/gap/candidate-queue';
+import { PersonResolve } from '@/components/gap/person-resolve';
 import { AccountLink } from '@/components/gap/account-link';
 
 export const dynamic = 'force-dynamic';
@@ -67,7 +69,8 @@ function Member({ m }: { m: MemberView }) {
           {m.qualificationReason ? `: ${m.qualificationReason}` : ''}
         </p>
       ) : null}
-      {m.resolution === 'ambiguous' && m.candidates.length ? <p className="text-xs text-[var(--muted-foreground)]">Could be: {m.candidates.map((c) => `${c.accountName} (${c.why})`).join(', ')}</p> : null}
+      {m.resolution === 'ambiguous' && m.candidates.length ? <p className="text-xs text-[var(--muted-foreground)]">Could be: {m.candidates.map((c) => `${c.name ? `${c.name} at ` : ''}${c.accountName} (${c.why})`).join(', ')}</p> : null}
+      {m.kind === 'person' && m.resolution === 'ambiguous' && m.resolutionBasis !== 'casey_left_unresolved' && m.status === 'active' ? <PersonResolve member={m} /> : null}
       {m.note ? <p className="text-xs">Your note: {m.note}</p> : null}
       {m.alsoFrom.length ? <p className="text-xs text-[var(--muted-foreground)]">Also from: {m.alsoFrom.join(', ')}</p> : null}
       <SourceMemberActions memberId={m.id} status={m.status} canResearch={!!m.accountName} />
@@ -82,7 +85,7 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
   const { id } = await params;
   const q = (await searchParams) ?? {};
   const filter = q.field && q.value && (MEMBER_FILTERS as readonly string[]).includes(q.field) ? { field: q.field as (typeof MEMBER_FILTERS)[number], value: q.value } : null;
-  const [data, opportunities, unknown] = await Promise.all([loadSource(prisma, id, { filter, limit: q.all ? 1000 : 150 }), loadOpportunities(prisma, id, new Date()).catch(() => []), loadUnknownCompanies(prisma, id).catch(() => [])]);
+  const [data, opportunities, unknown] = await Promise.all([loadSource(prisma, id, { filter, limit: q.all ? 1000 : 150 }), loadOpportunities(prisma, id, new Date()).catch(() => []), loadCandidateQueue(prisma, { workSourceId: id, limit: 60 }).catch(() => [])]);
   if (!data) notFound();
   const { source: s, members, total } = data;
   return (
@@ -110,7 +113,7 @@ export default async function SourcePage({ params, searchParams }: { params: Pro
         <h2 className="text-sm font-semibold">Opportunities worth your attention</h2>
         <SourceOpportunities items={opportunities} />
       </section>
-      <UnknownCompanies workSourceId={s.id} items={unknown} total={(unknown as { total?: number }).total} />
+      <CandidateQueue items={unknown} title={`Companies GAP does not know yet (${unknown.length}${unknown.length >= 60 ? '+' : ''})`} collapsed />
       <section className="space-y-1">
         <h2 className="text-sm font-semibold">Everyone in this source</h2>
         <p className="text-xs text-[var(--muted-foreground)]">

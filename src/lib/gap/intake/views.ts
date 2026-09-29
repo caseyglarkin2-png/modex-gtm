@@ -38,7 +38,8 @@ export interface MemberView {
   note: string | null;
   resolution: string;
   resolutionBasis: string | null;
-  candidates: Array<{ personaId: number | null; accountName: string; why: string }>;
+  /** An ambiguous member's possible matches; a Persona match carries who it is, so Casey can say which. */
+  candidates: Array<{ personaId: number | null; accountName: string; why: string; name?: string | null; title?: string | null }>;
   accountName: string | null;
   personaId: number | null;
   candidateId: number | null;
@@ -119,6 +120,10 @@ export async function loadSource(prisma: PrismaLike, id: string, opts: { filter?
   const otherIds = [...new Set(edges.map((e) => e.work_source_id))];
   const others: Array<{ id: string; name: string }> = otherIds.length ? await prisma.gapWorkSource.findMany({ where: { id: { in: otherIds } }, select: { id: true, name: true } }) : [];
   const nameOf = new Map(others.map((s) => [s.id, s.name]));
+  // Who each ambiguous candidate Persona is (one read), so the choice is a name, not an id.
+  const candPersonaIds = [...new Set(rows.flatMap((r: { resolution_candidates: unknown }) => (Array.isArray(r.resolution_candidates) ? r.resolution_candidates : []).map((c: { personaId?: number | null }) => c.personaId).filter((x: unknown): x is number => typeof x === 'number')))];
+  const candPeople: Array<{ id: number; name: string | null; title: string | null }> = candPersonaIds.length ? await prisma.persona.findMany({ where: { id: { in: candPersonaIds } }, select: { id: true, name: true, title: true } }).catch(() => []) : [];
+  const personOf = new Map(candPeople.map((x) => [x.id, x]));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
   const members: MemberView[] = rows.map((r: Record<string, any>) => {
     const also = edges.filter((e) => (r.persona_id && e.persona_id === r.persona_id) || (r.candidate_id && e.candidate_id === r.candidate_id) || (r.kind === 'account' && e.kind === 'account' && e.account_name === r.account_name));
@@ -134,7 +139,7 @@ export async function loadSource(prisma: PrismaLike, id: string, opts: { filter?
       note: r.note ?? null,
       resolution: r.resolution,
       resolutionBasis: r.resolution_basis ?? null,
-      candidates: Array.isArray(r.resolution_candidates) ? r.resolution_candidates : [],
+      candidates: (Array.isArray(r.resolution_candidates) ? r.resolution_candidates : []).map((c: { personaId: number | null; accountName: string; why: string }) => ({ ...c, name: c.personaId ? personOf.get(c.personaId)?.name ?? null : null, title: c.personaId ? personOf.get(c.personaId)?.title ?? null : null })),
       accountName: r.account_name ?? null,
       personaId: r.persona_id ?? null,
       candidateId: r.candidate_id ?? null,
@@ -146,37 +151,4 @@ export async function loadSource(prisma: PrismaLike, id: string, opts: { filter?
     };
   });
   return { source, members, total };
-}
-
-export interface UnknownCompany {
-  company: string;
-  people: number;
-  titles: string[];
-  ambiguous: boolean;
-}
-
-/**
- * Companies in this source GAP could not place (not a GAP account, or ambiguous), most people first. Casey can
- * say which existing account one is (a curated alias) or leave it: GAP never creates an account from a list.
- */
-export async function loadUnknownCompanies(prisma: PrismaLike, workSourceId: string, opts: { limit?: number } = {}): Promise<UnknownCompany[] & { total?: number }> {
-  const { cleanCompanyName } = await import('./parse');
-  const rows: Array<{ company: string | null; title: string | null; resolution: string }> = await prisma.gapWorkSourceMember.findMany({
-    where: { work_source_id: workSourceId, status: { not: 'ignored' }, resolution: { in: ['unresolved', 'ambiguous'] }, company: { not: null } },
-    select: { company: true, title: true, resolution: true },
-    take: 5_000,
-  });
-  const by = new Map<string, UnknownCompany>();
-  for (const r of rows) {
-    const name = cleanCompanyName(r.company!);
-    const cur = by.get(name.toLowerCase()) ?? { company: name, people: 0, titles: [], ambiguous: false };
-    cur.people += 1;
-    if (r.title && cur.titles.length < 3) cur.titles.push(r.title);
-    cur.ambiguous = cur.ambiguous || r.resolution === 'ambiguous';
-    by.set(name.toLowerCase(), cur);
-  }
-  const all = [...by.values()].sort((a, b) => b.people - a.people || a.company.localeCompare(b.company));
-  const out = all.slice(0, opts.limit ?? 60) as UnknownCompany[] & { total?: number };
-  out.total = all.length;
-  return out;
 }

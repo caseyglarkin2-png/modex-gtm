@@ -24,6 +24,9 @@ export default async function SourcesPage() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Sources</h1>
           <p className="mt-1 text-sm text-[var(--muted-foreground)]">Where your people and accounts came from, and what GAP did with each.</p>
+          <Link href="/gap/candidates" className="mt-1 inline-block text-sm underline" data-testid="candidates-link">
+            New companies across every source
+          </Link>
         </div>
         <Link href="/gap/add" className="min-h-[44px] rounded-md bg-[var(--primary)] px-3 py-2 text-sm font-medium text-[var(--primary-foreground)]">
           Add to GAP

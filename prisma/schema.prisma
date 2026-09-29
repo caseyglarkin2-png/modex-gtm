@@ -1449,6 +1449,36 @@ model GapAccountAlias {
   @@map("gap_account_aliases")
 }
 
+/// GAP Entity Expansion (2026-09-29): a company GAP met in a work source but does not know yet. Scouted on
+/// Casey's click (a cheap web pass whose verdict is derived from cited evidence), decided only by Casey:
+/// added (the one account creation contract), mapped (a curated alias), research_more, ignored. GAP never
+/// creates an account from a candidate on its own. docs/gap/ACCOUNT_INTELLIGENCE_STATUS.md
+model GapAccountCandidate {
+  id           String    @id @default(cuid())
+  company      String
+  /// normalizeCompanyName(company): one candidate per company however it was spelled
+  company_key  String    @unique
+  domain       String?
+  /// LIKELY_ICP | MAYBE_ICP | NOT_ICP | AMBIGUOUS | INSUFFICIENT (null until scouted)
+  verdict      String?
+  /// shipper | 3pl | carrier | broker | vendor | other
+  entity_type  String?
+  /// The ScoutResult (what, why, cited network / freight claims, unknowns, basis)
+  scout        Json?
+  scouted_at   DateTime?
+  /// open | added | mapped | research_more | ignored
+  decision     String    @default("open")
+  account_name String?
+  decided_by   String?
+  decided_at   DateTime?
+  created_by   String
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+
+  @@index([decision])
+  @@map("gap_account_candidates")
+}
+
 /// GAP Universal Work Intake (2026-09-28): a named SOURCE of work (a
 /// newsletter's subscribers, a conference, a CRM list, referrals, a target
 /// list). Source provenance is CONTEXT: not evidence, not buyer truth, not
