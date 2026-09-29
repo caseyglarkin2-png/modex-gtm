@@ -130,6 +130,8 @@ export async function loadAccountInputs(
   const pack = await loadDemoPack(micro?.slug ?? accountSlug(accountName));
   const roi = roiFrom(micro?.roiModel) ?? (pack ? roiFrom(buildAccountRoiModel(pack)) : null);
   const fact = getFacilityFact(accountName);
+  // What Scout found while this was a candidate (added or mapped here): leads, never verified facts.
+  const candidate: Row | null = prisma.gapAccountCandidate?.findFirst ? await prisma.gapAccountCandidate.findFirst({ where: { account_name: accountName, decision: { in: ['added', 'mapped'] }, scouted_at: { not: null } }, orderBy: { scouted_at: 'desc' } }).catch(() => null) : null;
   const [touches, convs] = await Promise.all([
     loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()),
     loadAccountConversations(prisma, [accountName], now).catch(() => new Map()),
@@ -173,7 +175,14 @@ export async function loadAccountInputs(
     microsite: micro ? { network: micro.network, freight: micro.freight, sections: micro.sections } : null,
     facilityFact: fact ? { facilityCount: String(fact.facilityCount), status: fact.status === 'verified' ? 'verified' : 'provisional', summary: fact.summary, updatedAt: fact.updatedAt, sources: fact.sources } : null,
     roi,
+    scout: scoutOf(candidate),
   };
+}
+
+function scoutOf(c: Row | null): AccountInputs['scout'] {
+  if (!c) return null;
+  const s = (c.scout ?? {}) as Row;
+  return { domain: c.domain ?? null, what: s.what ?? null, entityType: c.entity_type ?? null, network: Array.isArray(s.network) ? s.network : [], freight: Array.isArray(s.freight) ? s.freight : [], at: c.scouted_at ? new Date(c.scouted_at).toISOString() : null };
 }
 
 /** The canonical brief for one account (live projection). Null when the slug names no account. */

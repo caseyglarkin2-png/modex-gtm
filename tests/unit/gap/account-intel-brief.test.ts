@@ -258,3 +258,14 @@ describe('a network count that is our own estimate is never VERIFIED (PepsiCo do
     expect(s?.sources[0].url).toBe('https://sec.example/10k');
   });
 });
+
+describe('Scout leads carry into the brief as INFERENCE, never verified (B + A: one intelligence)', () => {
+  it('an added account keeps what Scout found, labelled a lead with its link', () => {
+    const b = buildAccountBrief(base({ scout: { domain: 'harborfoods.com', what: 'Foodservice distributor', entityType: 'shipper', network: [{ claim: 'Operates 12 distribution centers.', url: 'https://harborfoods.example/about' }], freight: [{ claim: 'Runs a private fleet.', url: 'https://news.example/fleet' }], at: '2026-09-29T00:00:00Z' } }), NOW);
+    const net = b.sections.footprint.statements.find((s) => /12 distribution centers/.test(s.text));
+    expect(net).toMatchObject({ truth: 'INFERENCE', text: 'Operates 12 distribution centers. (Scout lead, not yet verified at source)' });
+    expect(net?.sources[0].url).toBe('https://harborfoods.example/about');
+    expect(b.sections.freight.statements.find((s) => /private fleet/.test(s.text))?.truth).toBe('INFERENCE');
+    expect(b.sections.identity.statements.find((s) => /^Scout:/.test(s.text))?.text).toBe('Scout: a shipper; Foodservice distributor (harborfoods.com)');
+  });
+});

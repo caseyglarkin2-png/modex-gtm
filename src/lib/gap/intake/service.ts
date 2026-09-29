@@ -115,7 +115,9 @@ function resolveAll(ctx: IntakeContext, parsed: ParseResult): PreviewRow[] {
 }
 
 /** Identity only ever improves on a re-import or a re-resolve: never demoted, never moved to another account. */
-export function isIdentityImprovement(from: { resolution: string; account_name: string | null }, to: { resolution: string; accountName: string | null }): boolean {
+export function isIdentityImprovement(from: { resolution: string; account_name: string | null; resolution_basis?: string | null }, to: { resolution: string; accountName: string | null }): boolean {
+  // Casey decided where this person belongs (entity/people.ts): nothing automatic moves it.
+  if (from.resolution_basis?.startsWith('casey_')) return false;
   if (from.account_name && to.accountName && from.account_name !== to.accountName) return false;
   if (from.resolution === 'unresolved') return to.resolution !== 'unresolved';
   if (from.resolution === 'new_candidate') return to.resolution === 'resolved';

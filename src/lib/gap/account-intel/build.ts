@@ -108,6 +108,8 @@ export interface AccountInputs {
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
   roi: { hardSavingsAnnual: number; totalValueAnnual: number; facilities: number; calculatorVersion: string | null; assumptions: string[] } | null;
+  /** What Scout found when this company was a candidate: cited, never verified at source (leads, not facts). */
+  scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null } | null;
 }
 
 // ---------------------------------------------------------------- the brief
@@ -225,6 +227,7 @@ const money = (n: number) => `$${(n / 1_000_000).toFixed(1)}M`;
 
 const ev = (f: FactInput): Source => ({ kind: 'evidence', ref: f.id, label: f.title, url: f.url, at: f.publishedAt });
 const bidSrc = (b: BidInput): Source => ({ kind: 'bid', ref: b.id, label: `${b.who ?? 'buyer'}, confirmed`, url: null, at: b.at });
+const SCOUT = (at: string | null): Source => ({ kind: 'signal', ref: 'scout', label: 'Scout (cited web pass, not verified at source)', url: null, at });
 const MICROSITE: Source = { kind: 'microsite', ref: null, label: 'Hand-authored microsite (undated)', url: null, at: null };
 
 function section(key: SectionKey, statements: Statement[], unknowns: string[], now: Date): Section {
@@ -280,7 +283,9 @@ function identitySection(i: AccountInputs, now: Date): Section {
     st.push({ text: `Company type (audit classification): ${t}`, truth: 'INFERENCE', sources: [auditSrc('demo pack', i.pack.builtAt)], falsifiableBy: 'Its filings or site describe a different operating model.' });
   }
   if (i.siblings.length) st.push({ text: `Duplicate account rows share this name: ${i.siblings.join(', ')}. People and facts may be split across them until they are merged.`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
-  const unknowns = [...(i.domains.length ? [] : ['Company domain']), ...(a.parentBrand ? [] : ['Parent / subsidiary structure'])];
+  const sc = i.scout;
+  if (sc?.what || sc?.entityType) st.push({ text: `Scout: ${[sc.entityType ? `a ${sc.entityType === '3pl' ? '3PL' : sc.entityType}` : null, sc.what].filter(Boolean).join('; ')}${sc.domain ? ` (${sc.domain})` : ''}`, truth: 'INFERENCE', sources: [SCOUT(sc.at)], falsifiableBy: 'Their own site or filings describe a different business.' });
+  const unknowns = [...(i.domains.length || sc?.domain ? [] : ['Company domain']), ...(a.parentBrand ? [] : ['Parent / subsidiary structure'])];
   return section('identity', st, unknowns, now);
 }
 
@@ -321,6 +326,7 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   for (const f of liveFacts(i, now).filter((x) => /\b(distribution cent|fulfil|warehouse|plant|facilit|DC\b|site)/i.test(x.quote))) {
     st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   }
+  for (const c of i.scout?.network ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
   if (!p?.account.networkCount && !i.facilityFact) unknowns.push('Total facility count (sourced)');
   return section('footprint', st, unknowns, now);
 }
@@ -336,6 +342,7 @@ function freightSection(i: AccountInputs, now: Date): Section {
     const { cite, rest } = splitCite(auditTruth(i, 'A site visit or the railroad shows different service.'));
     st.push({ text: `${rail} of ${plural(a.kept.length, 'audited site')} rail-served`, ...rest, sources: [auditSrc('satellite audit', i.pack!.builtAt, cite)], asOf: i.pack!.builtAt });
   }
+  for (const c of i.scout?.freight ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
   const fr = i.microsite?.freight;
   if (fr?.primaryModes?.length) st.push({ text: `Modes: ${fr.primaryModes.join(', ')}${i.microsite?.network?.fleet ? `; fleet: ${i.microsite.network.fleet}` : ''} (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'Their transportation team describes a different mix.' });
   const unknowns = ['Private fleet vs dedicated vs common carrier mix', 'Drop vs live share by site type', 'Inbound pattern (supplier, plant-to-DC)'];
