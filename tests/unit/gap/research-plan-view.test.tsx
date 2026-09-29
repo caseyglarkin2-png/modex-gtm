@@ -37,6 +37,11 @@ describe('ResearchPlanView', () => {
 });
 
 describe('loadResearchHistory', () => {
+  it('a deepen run with no outcome yet reads as running', async () => {
+    const prisma = { researchRun: { findMany: async () => [{ created_at: new Date('2026-09-29T00:00:00Z'), provider_status: { orchestrator: 'deepen', section: 'freight' } }] } };
+    expect(await loadResearchHistory(prisma, 'Acme Foods', new Date('2026-09-29T00:01:00Z'))).toEqual([{ section: 'freight', outcome: 'running', at: '2026-09-29T00:00:00.000Z' }]);
+  });
+
   it('keeps only DEEPEN runs, with their section and outcome', async () => {
     const prisma = { researchRun: { findMany: async () => [
       { created_at: new Date('2026-09-25T00:00:00Z'), provider_status: { orchestrator: 'deepen', section: 'technology', outcome: 'insufficient_evidence' } },

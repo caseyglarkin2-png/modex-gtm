@@ -54,7 +54,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           Built live from what GAP holds, {brief.generatedAt.slice(0, 10)}. Every line says whether the buyer confirmed it, a source verified it, GAP modeled it or GAP inferred it.
         </p>
       </div>
-      <AccountBriefView brief={brief} afterGlance={<ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, await loadResearchHistory(prisma, brief.accountName, now), now)} />} />
+      <AccountBriefView brief={brief} afterGlance={<ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, await loadResearchHistory(prisma, brief.accountName, now).catch(() => []), now)} />} />
     </div>
   );
 }

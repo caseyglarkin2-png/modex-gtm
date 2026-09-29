@@ -47,6 +47,21 @@ describe('POST /api/gap/accounts/deepen', () => {
     expect(await r.json()).toMatchObject({ error: 'not_in_plan', reason: expect.stringMatching(/Known and fresh/) });
     expect(deps.runEvidenceResearch).not.toHaveBeenCalled();
   });
+  it('fails closed when the history cannot be read (503), and runs nothing', async () => {
+    deps.loadAccountInputs.mockResolvedValue(inputs());
+    deps.loadResearchHistory.mockRejectedValue(new Error('db down'));
+    const r = await POST(req({ accountName: 'Acme Foods', section: 'catalysts' }));
+    expect(r.status).toBe(503);
+    expect(deps.runEvidenceResearch).not.toHaveBeenCalled();
+  });
+
+  it('runs under the resolved account name, with no currentness side trip', async () => {
+    deps.loadAccountInputs.mockResolvedValue(inputs());
+    deps.runEvidenceResearch.mockResolvedValue({ outcome: 'insufficient_evidence', facts: [], rejected: [], notes: [] });
+    await POST(req({ accountName: 'acme foods', section: 'catalysts' }));
+    expect(deps.runEvidenceResearch.mock.calls[0][1]).toMatchObject({ accountName: 'Acme Foods', seekCurrentness: false });
+  });
+
   it('a section only a human can answer is not a web call (400 at the schema)', async () => {
     expect((await POST(req({ accountName: 'Acme Foods', section: 'org' }))).status).toBe(400);
   });

@@ -57,8 +57,25 @@ describe('planResearch', () => {
     expect(p.tasks.some((t) => t.section === 'catalysts')).toBe(false);
   });
 
-  it('an unreadable deal state is re-read before anything else', () => {
-    const p = planResearch(buildAccountBrief(inputs({ opportunity: { status: 'UNKNOWN', detail: 'timeout', deals: [] } }), NOW), [], NOW);
-    expect(p.tasks[0]).toMatchObject({ section: 'commercial', provider: 'hubspot' });
+  it('an unreadable or unread deal state is re-read first and NOTHING is researched until then (review C P0)', () => {
+    for (const opportunity of [{ status: 'UNKNOWN' as const, detail: 'timeout', deals: [] }, null]) {
+      const p = planResearch(buildAccountBrief(inputs({ opportunity }), NOW), [], NOW);
+      expect(p.tasks).toEqual([expect.objectContaining({ section: 'commercial', provider: 'hubspot' })]);
+      expect(p.tasks.some((t) => t.provider === 'research')).toBe(false);
+    }
+  });
+
+  it('an open deal gets no research at all, only the next thing to learn from the buyer', () => {
+    const p = planResearch(buildAccountBrief(inputs({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'x', stage: 'y' }] } }), NOW), [], NOW);
+    expect(p.tasks.every((t) => t.provider === 'human')).toBe(true);
+  });
+
+  it('a section researched in the last day waits; a run still in flight blocks a second one', () => {
+    const b = buildAccountBrief(inputs({ facts: [fact] }), NOW);
+    const done = planResearch(b, [{ section: 'footprint', outcome: 'evidence_found', at: '2026-09-29T02:00:00Z' }], NOW);
+    expect(done.skipped).toContainEqual({ section: 'footprint', reason: 'Researched on 2026-09-29; once a day per section.' });
+    const running = planResearch(b, [{ section: 'footprint', outcome: 'running', at: '2026-09-29T11:58:00Z' }], NOW);
+    expect(running.skipped).toContainEqual({ section: 'footprint', reason: expect.stringMatching(/has not finished/) });
+    expect(running.tasks.some((t) => t.section === 'footprint')).toBe(false);
   });
 });

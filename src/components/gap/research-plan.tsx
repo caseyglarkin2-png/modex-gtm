@@ -20,9 +20,17 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
   async function deepen(section: string) {
     setBusy(section);
     setMsg(null);
-    const res = await fetch('/api/gap/accounts/deepen', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accountName, section }) });
-    const body = ((await res.json().catch(() => ({}))) ?? {}) as { outcome?: string; facts?: number; error?: string; reason?: string };
-    setBusy(null);
+    let res: Response;
+    let body: { outcome?: string; facts?: number; error?: string; reason?: string } = {};
+    try {
+      res = await fetch('/api/gap/accounts/deepen', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accountName, section }) });
+      body = ((await res.json().catch(() => ({}))) ?? {}) as typeof body;
+    } catch {
+      return setMsg('The request did not complete. The run may have started; reopen the page before trying again.');
+    } finally {
+      setBusy(null);
+    }
+    if (res.status === 504) return setMsg('The run took too long to answer; it may have partly run. Reopen the page to see what it found.');
     if (!res.ok) return setMsg(body.reason ?? `Not run: ${body.error ?? res.status}`);
     setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.outcome ?? ''] ?? body.outcome}${body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : ''}.`);
     router.refresh();

@@ -28,9 +28,14 @@ export async function POST(request: NextRequest) {
   const now = new Date();
   const inputs = await loadAccountInputs(prisma, accountName, now, { live: true });
   if (!inputs) return NextResponse.json({ error: 'account_not_found' }, { status: 404 });
-  const plan = planResearch(buildAccountBrief(inputs, now), await loadResearchHistory(prisma, accountName, now), now);
+  const name = inputs.account.name;
+  // Fails closed: without the history GAP cannot know what already ran.
+  const history = await loadResearchHistory(prisma, name, now).catch(() => null);
+  if (!history) return NextResponse.json({ error: 'history_unavailable', reason: 'Could not read what already ran on this account; nothing was started.' }, { status: 503 });
+  const plan = planResearch(buildAccountBrief(inputs, now), history, now);
   const task = plan.tasks.find((t) => t.section === section && t.provider === 'research');
   if (!task) return NextResponse.json({ error: 'not_in_plan', reason: plan.skipped.find((s) => s.section === section)?.reason ?? 'The plan does not ask for this section now.' }, { status: 409 });
-  const result = await runEvidenceResearch(prisma, { accountName, personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: g.email, now, focus: task.focus, context: { orchestrator: 'deepen', section } });
+  // One focused run; no side trip for currentness on unrelated facts (it would blur this section's outcome).
+  const result = await runEvidenceResearch(prisma, { accountName: name, personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: g.email, now, focus: task.focus, context: { orchestrator: 'deepen', section }, seekCurrentness: false });
   return NextResponse.json({ section, outcome: result.outcome, facts: result.facts.length, rejected: result.rejected.length, notes: result.notes });
 }

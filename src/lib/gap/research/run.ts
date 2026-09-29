@@ -134,7 +134,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     personaId: input.personaId,
     status: Object.keys(providerErrors).length >= 2 && Object.keys(providerErrors).length === providers.length ? 'failed' : Object.keys(providerErrors).length ? 'partial' : 'succeeded',
     runKey: `gap_research:${input.accountName}:${input.personaId ?? 'account'}:${input.now.toISOString()}`,
-    providerStatus: { purpose: 'gap_research_this', hypothesisId: input.hypothesisId, decisionId: input.decisionId, problemFamily: input.problemFamily, notes },
+    providerStatus: { purpose: 'gap_research_this', hypothesisId: input.hypothesisId, decisionId: input.decisionId, problemFamily: input.problemFamily, ...(input.context ?? {}), notes },
     errorMap: providerErrors,
     startedAt: input.now,
     completedAt: new Date(),
