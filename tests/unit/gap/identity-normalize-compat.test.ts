@@ -51,4 +51,18 @@ describe('legacy keys', () => {
     expect(legacyMemberKey({ kind: 'account' as const, company: 'Harbor Foods', raw: {} })).toBeNull();
     expect(legacyMemberKey({ kind: 'person' as const, name: 'Ana', company: "Kellogg's", title: 'VP', raw: {} })).toMatch(/kellogg s/);
   });
+
+  it('the PLAIN spelling finds an accented alias stored under its legacy key (no second row)', async () => {
+    const create = fn(async () => ({ id: 'new' }));
+    const prisma = {
+      gapAccountAlias: {
+        findUnique: fn(async () => null),
+        findMany: fn(async () => [{ id: 'old', alias: 'Nestlé USA', account_name: 'Nestle USA' }]),
+        create,
+      },
+    };
+    expect(await registerAlias(prisma, { alias: 'Nestle USA', accountName: 'Nestle USA', source: 'manual', createdBy: 'x' })).toMatchObject({ status: 'ALREADY_MATCHED', id: 'old' });
+    expect(await registerAlias(prisma, { alias: 'Nestle USA', accountName: 'Other', source: 'manual', createdBy: 'x' })).toMatchObject({ status: 'CONFLICT' });
+    expect(create).not.toHaveBeenCalled();
+  });
 });

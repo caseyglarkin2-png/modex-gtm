@@ -20,9 +20,14 @@ export async function resolvePersonMember(
   const m = await prisma.gapWorkSourceMember.findUnique({ where: { id: input.memberId } });
   if (!m) return { ok: false, reason: 'member_not_found' };
   if (m.kind !== 'person') return { ok: false, reason: 'not_a_person' };
+  // Only an ambiguity is Casey's to settle here; a placed or unplaced member has its own actions.
+  if (m.resolution !== 'ambiguous') return { ok: false, reason: 'not_ambiguous' };
+  const offered = (Array.isArray(m.resolution_candidates) ? m.resolution_candidates : []) as Array<{ personaId?: number | null; accountName?: string }>;
   let data: Record<string, unknown>;
   if (input.choice === 'existing') {
-    const persona = typeof input.personaId === 'number' ? await prisma.persona.findUnique({ where: { id: input.personaId }, select: { id: true, account_name: true, name: true } }) : null;
+    // THIS IS <one of the people GAP offered>: never an arbitrary Persona id.
+    if (typeof input.personaId !== 'number' || !offered.some((c) => c.personaId === input.personaId)) return { ok: false, reason: 'persona_not_offered' };
+    const persona = await prisma.persona.findUnique({ where: { id: input.personaId }, select: { id: true, account_name: true, name: true } });
     if (!persona) return { ok: false, reason: 'persona_not_found' };
     data = { resolution: 'resolved', resolution_basis: 'casey_existing_person', persona_id: persona.id, account_name: persona.account_name };
   } else if (input.choice === 'new_at_account') {
@@ -36,6 +41,8 @@ export async function resolvePersonMember(
     data = { resolution: 'new_candidate', resolution_basis: 'casey_new_person', persona_id: null, account_name: account.name, candidate_id: candidateId };
   } else if (input.choice === 'wrong_company') {
     data = { resolution: 'unresolved', resolution_basis: 'casey_wrong_company', persona_id: null, account_name: null };
+    // A candidate staged at the wrong account is deferred, so it can never be promoted there.
+    if (m.candidate_id) await prisma.accountContactCandidate.update({ where: { id: m.candidate_id }, data: { state: 'deferred', deferred_reason: 'Casey: wrong company (GAP work source)' } }).catch(() => null);
   } else if (input.choice === 'leave') {
     data = { resolution_basis: 'casey_left_unresolved' };
   } else return { ok: false, reason: 'invalid_choice' };

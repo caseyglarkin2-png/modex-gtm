@@ -24,6 +24,8 @@ const REFUSAL: Record<string, string> = {
   possible_duplicate: 'An account with the same name (spelled differently) already exists:',
   alias_of: 'This name is already an alias of:',
   domain_of: 'This domain already belongs to:',
+  hubspot_of: 'This HubSpot company is already linked to:',
+  already_decided: 'This company was already added or mapped to:',
   name_required: 'A name is required.',
 };
 
@@ -180,8 +182,9 @@ function Candidate({ c }: { c: QueueItem }) {
   const [msg, setMsg] = useState<string | null>(null);
   async function act(op: 'scout' | 'research_more' | 'ignore') {
     setBusy(op);
-    const r = await post({ op, company: c.company, ...(op === 'scout' && c.titles.length ? { hint: `people there: ${c.titles.join(', ')}` } : {}) });
+    const r = await post({ op, company: c.company, ...(op === 'scout' && c.titles.length ? { hint: `people there: ${c.titles.join(', ')}` } : {}), ...(op === 'scout' && c.scouted ? { force: true } : {}) });
     setBusy(null);
+    if (r.status === 429) return setMsg(r.body.error === 'daily_cap' ? 'Scout has done its passes for today; try again tomorrow.' : 'Scouted within the last day already.');
     if (!r.ok) return setMsg(`Not saved: ${String(r.body.error ?? r.status)}`);
     setMsg(op === 'scout' ? `Scouted: ${VERDICT_LABEL[String(r.body.verdict)] ?? r.body.verdict}.` : op === 'ignore' ? 'Ignored.' : 'Marked for more research.');
     router.refresh();
@@ -203,7 +206,7 @@ function Candidate({ c }: { c: QueueItem }) {
       </p>
       {c.why ? (
         <p className="text-xs">
-          <span className="font-semibold">Why ICP: </span>
+          <span className="font-semibold">{c.verdict === 'LIKELY_ICP' || c.verdict === 'MAYBE_ICP' ? 'Why ICP: ' : 'Why: '}</span>
           {c.why}
           {c.what ? ` ${c.what}` : ''}
           {c.domain ? ` (${c.domain})` : ''}

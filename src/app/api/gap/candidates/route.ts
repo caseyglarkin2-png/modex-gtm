@@ -1,7 +1,7 @@
 /**
  * GET  /api/gap/candidates[?source=<id>&all=1]   companies GAP met but could not place, with what Scout found
  * POST /api/gap/candidates
- *   `{ op: 'scout', company, hint? }`                        one cheap web pass; stores the verdict on the candidate
+ *   `{ op: 'scout', company, hint?, force? }`                one cheap web pass; stores the verdict (once a day per company unless forced; a daily cap across GAP)
  *   `{ op: 'add', company, name, vertical, reason, domain? }` THE account creation contract (checks first; refuses a duplicate)
  *   `{ op: 'check', name, domain? }`                         the creation check alone (read-only)
  *   `{ op: 'map', company, accountName }`                    this company IS that existing account (a curated alias)
@@ -21,7 +21,7 @@ export const maxDuration = 120;
 
 const company = z.string().trim().min(1).max(300);
 const Body = z.discriminatedUnion('op', [
-  z.object({ op: z.literal('scout'), company, hint: z.string().max(300).optional() }).strict(),
+  z.object({ op: z.literal('scout'), company, hint: z.string().max(300).optional(), force: z.boolean().optional() }).strict(),
   z.object({ op: z.literal('check'), name: company, domain: z.string().max(200).optional() }).strict(),
   z.object({ op: z.literal('add'), company, name: company, vertical: z.string().trim().min(1).max(80), reason: z.string().trim().min(1).max(500), domain: z.string().max(200).optional() }).strict(),
   z.object({ op: z.literal('map'), company, accountName: company }).strict(),
@@ -44,7 +44,10 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return badBody(parsed.error.issues);
   const b = parsed.data;
   const now = new Date();
-  if (b.op === 'scout') return NextResponse.json(await scoutCandidate(prisma, { company: b.company, hint: b.hint, actor: g.email, now }));
+  if (b.op === 'scout') {
+    const r = await scoutCandidate(prisma, { company: b.company, hint: b.hint, force: b.force, actor: g.email, now });
+    return 'refused' in r ? NextResponse.json({ error: r.refused, scoutedAt: r.scoutedAt ?? null }, { status: 429 }) : NextResponse.json(r);
+  }
   if (b.op === 'check') return NextResponse.json(await accountCreationCheck(prisma, { name: b.name, domain: b.domain }));
   if (b.op === 'add') {
     const r = await createGapAccount(prisma, { name: b.name, company: b.company, vertical: b.vertical, reason: b.reason, domain: b.domain, actor: g.email, now });

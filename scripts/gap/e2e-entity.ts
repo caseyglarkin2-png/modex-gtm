@@ -10,7 +10,8 @@
  *   E3 ADD refuses a normalized duplicate and an alias; a clean add creates exactly one account, records the
  *      spelling as an alias, re-plans the source, and the people there are placed
  *   E4 the new account's brief carries Scout's leads as INFERENCE, never verified
- *   E5 an ambiguous person: Casey says "wrong company"; a re-plan never puts them back
+ *   E5 an ambiguous person (the email is a known Persona, the stated company is not): Casey says "this is that
+ *      person"; only a Persona GAP offered is accepted, and a re-plan never moves the decision
  *   E6 IGNORE drops a company from the queue
  *
  * Rails: scratch database only (exit 2 otherwise); synthetic example.com people only; HubSpot is stubbed (never
@@ -74,6 +75,7 @@ async function main(): Promise<number> {
   let failure: StepFailure | null = null;
   try {
     await prisma.account.create({ data: { rank: 9983, name: EXISTING, vertical: 'agriculture', tier: 'Tier 3' } });
+    const dana = await prisma.persona.create({ data: { persona_id: `${tag}-dana`, account_name: EXISTING, priority: 'P2', name: 'Dana Grower', title: 'VP Operations', email: `dana.${tag}@example.com` }, select: { id: true } });
     const src = await createWorkSource(prisma, { name: `Entity e2e ${tag}`, sourceType: 'newsletter', relationshipContext: 'newsletter subscriber', actor: ACTOR });
     expect('E1 source', src.ok, JSON.stringify(src));
     const srcId = (src as { id: string }).id;
@@ -83,6 +85,7 @@ async function main(): Promise<number> {
       `Ana Buyer,VP Supply Chain,${NEWCO},ana.${tag}@example.com`,
       `Ben Buyer,Director Logistics,"${NEWCO}, Inc.",ben.${tag}@example.com`,
       `Cal Carrier,CEO,${LOGI},cal.${tag}@example.com`,
+      `Dana Grower,VP Operations,${LOGI},dana.${tag}@example.com`,
     ].join('\n');
     const accountsBefore = await prisma.account.count();
     const c = await commitIntake(prisma, { workSourceId: srcId, text: csv, kind: 'people', actor: ACTOR, now: NOW });
@@ -125,12 +128,14 @@ async function main(): Promise<number> {
     pass('E4 brief', `the new account's brief shows "${lead!.text}" as INFERENCE with its link; nothing Scout said is VERIFIED`);
 
     // ---- E5
-    const cal = await prisma.gapWorkSourceMember.findFirst({ where: { work_source_id: srcId, email: `cal.${tag}@example.com` } });
-    const r5 = await resolvePersonMember(prisma, { memberId: cal!.id, choice: 'wrong_company', actor: ACTOR, now: NOW });
+    const cal = await prisma.gapWorkSourceMember.findFirst({ where: { work_source_id: srcId, email: `dana.${tag}@example.com` } });
+    expect('E5 ambiguous', cal?.resolution === 'ambiguous', `resolution ${cal?.resolution} basis ${cal?.resolution_basis}`);
+    const notOffered = await resolvePersonMember(prisma, { memberId: cal!.id, choice: 'existing', personaId: dana.id + 999_999, actor: ACTOR, now: NOW });
+    const r5 = await resolvePersonMember(prisma, { memberId: cal!.id, choice: 'existing', personaId: dana.id, actor: ACTOR, now: NOW });
     await planWorkSources(prisma, { now: NOW, actor: ACTOR, workSourceId: srcId, skipQualifiedWithinMs: 0 }, { opportunity: async () => SCRATCH_NO_DEALS_TRUTH }).catch(() => null);
     const cal2 = await prisma.gapWorkSourceMember.findUnique({ where: { id: cal!.id } });
-    expect('E5 person', r5.ok && cal2?.resolution_basis === 'casey_wrong_company' && cal2.account_name === null, JSON.stringify({ r5, basis: cal2?.resolution_basis, acct: cal2?.account_name }));
-    pass('E5 person', 'Casey marked a person "wrong company"; a re-plan left the decision alone');
+    expect('E5 person', !notOffered.ok && r5.ok && cal2?.resolution_basis === 'casey_existing_person' && cal2.persona_id === dana.id && cal2.account_name === EXISTING, JSON.stringify({ notOffered, r5, basis: cal2?.resolution_basis, acct: cal2?.account_name }));
+    pass('E5 person', `an email match with a different stated company is ambiguous; a Persona GAP did not offer is refused; "this is Dana" places the member at ${EXISTING}, and a re-plan left it alone`);
 
     // ---- E6
     await decideCandidate(prisma, { company: LOGI, decision: 'ignored', actor: ACTOR, now: NOW });
@@ -152,6 +157,7 @@ async function main(): Promise<number> {
     await prisma.accountContactCandidate.deleteMany({ where: { account_name: { in: accounts } } }).catch(() => null);
     await prisma.gapWorkSource.deleteMany({ where: { id: { in: sourceIds } } }).catch(() => null);
     await prisma.gapAccountAlias.deleteMany({ where: { account_name: { in: accounts } } }).catch(() => null);
+    await prisma.persona.deleteMany({ where: { persona_id: `${tag}-dana` } }).catch(() => null);
     await prisma.account.deleteMany({ where: { name: { in: accounts } } }).catch(() => null);
     await prisma.$disconnect();
   }

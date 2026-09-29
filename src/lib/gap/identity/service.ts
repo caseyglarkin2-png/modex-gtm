@@ -118,7 +118,11 @@ export async function registerAlias(prisma: any, input: RegisterAliasInput): Pro
   // A row stored under the old key (before accents were folded) is the same alias: never a second row.
   const existing =
     (await prisma.gapAccountAlias.findUnique({ where: { normalized_alias }, select: { id: true, account_name: true } })) ??
-    (legacy !== normalized_alias ? await prisma.gapAccountAlias.findUnique({ where: { normalized_alias: legacy }, select: { id: true, account_name: true } }) : null);
+    (legacy !== normalized_alias ? await prisma.gapAccountAlias.findUnique({ where: { normalized_alias: legacy }, select: { id: true, account_name: true } }) : null) ??
+    // An accented alias stored under its old key ("nestl usa") is today's "nestle usa": found from the plain spelling too.
+    (prisma.gapAccountAlias.findMany
+      ? ((await prisma.gapAccountAlias.findMany({ select: { id: true, alias: true, account_name: true } })) as Array<{ id: string; alias: string; account_name: string }>).find((a) => !!a.alias && normalizeCompanyName(a.alias) === normalized_alias) ?? null
+      : null);
   if (existing) {
     if (existing.account_name === input.accountName) {
       return { status: 'ALREADY_MATCHED', id: existing.id, created: false };

@@ -30,6 +30,7 @@ function fakePrisma(seed: { accounts?: string[]; aliases?: Array<{ alias: string
     account: {
       findUnique: async ({ where }: { where: Rec }) => accounts.find((a) => a.name === where.name) ?? null,
       findMany: async ({ where }: { where?: Rec } = {}) => accounts.filter((a) => match(a, where)),
+      findFirst: async ({ where }: { where: Rec }) => accounts.find((a) => match(a, where)) ?? null,
       create: async ({ data }: { data: Rec }) => {
         if (accounts.some((a) => a.name === data.name)) throw new Error('unique');
         accounts.push(data);
@@ -111,8 +112,10 @@ describe('candidate decisions', () => {
     const p = fakePrisma();
     const scout = async () => ({ company: 'Harbor Foods Group', verdict: 'LIKELY_ICP' as const, entityType: 'shipper' as const, domain: 'harborfoods.com', what: 'Foodservice distributor', why: 'A shipper with cited network evidence (1 claim).', network: [{ claim: '12 DCs', url: 'https://harborfoods.example' }], freight: [], unknowns: [], basis: 'web' as const });
     const r = await scoutCandidate(p, { company: 'Harbor Foods Group', actor: 'casey@freightroll.com', now: NOW }, { scout });
-    expect(r.verdict).toBe('LIKELY_ICP');
-    await scoutCandidate(p, { company: 'Harbor Foods Group, Inc.', actor: 'casey@freightroll.com', now: NOW }, { scout });
+    expect('verdict' in r && r.verdict).toBe('LIKELY_ICP');
+    // the same company again within a day is not a second web pass (cost control); force overrides
+    expect(await scoutCandidate(p, { company: 'Harbor Foods Group, Inc.', actor: 'casey@freightroll.com', now: NOW }, { scout })).toMatchObject({ refused: 'recently_scouted' });
+    await scoutCandidate(p, { company: 'Harbor Foods Group, Inc.', actor: 'casey@freightroll.com', now: NOW, force: true }, { scout });
     expect(p.candidates).toHaveLength(1);
     expect(p.candidates[0]).toMatchObject({ verdict: 'LIKELY_ICP', entity_type: 'shipper', domain: 'harborfoods.com', decision: 'open' });
   });
@@ -152,5 +155,46 @@ describe('the candidate queue', () => {
     // unscouted: the free name rule already says what it can
     expect(q[2]).toMatchObject({ verdict: 'NOT_ICP', scouted: false, why: expect.stringMatching(/3PL/) });
     expect(q[1]).toMatchObject({ verdict: null, scouted: false });
+  });
+});
+
+describe('review fixes: no duplicate slips past the check', () => {
+  it('accents, apostrophes and "&" in the first letters are compared normalized, never by a raw prefix', async () => {
+    const p = fakePrisma({ accounts: ["L'Oréal USA", 'Häagen-Dazs', 'P&G'] });
+    expect(await accountCreationCheck(p, { name: 'LOreal USA' }, noHubspot)).toMatchObject({ ok: false, reason: 'possible_duplicate', matches: ["L'Oréal USA"] });
+    expect(await accountCreationCheck(p, { name: 'Haagen Dazs' }, noHubspot)).toMatchObject({ ok: false, reason: 'possible_duplicate' });
+    expect(await accountCreationCheck(p, { name: 'P and G' }, noHubspot)).toMatchObject({ ok: false, reason: 'possible_duplicate', matches: ['P&G'] });
+  });
+
+  it('an alias stored under the legacy key is found from the PLAIN spelling too', async () => {
+    const p = fakePrisma({ accounts: ['Nestle Holdings'], aliases: [{ alias: 'Nestlé USA', normalized_alias: 'nestl usa', account_name: 'Nestle Holdings' }] });
+    expect(await accountCreationCheck(p, { name: 'Nestle USA' }, noHubspot)).toMatchObject({ ok: false, reason: 'alias_of', matches: ['Nestle Holdings'] });
+  });
+
+  it('the company spelling is checked too: already mapped, or an alias of another account, refuses BEFORE anything is created', async () => {
+    const p = fakePrisma({ accounts: ['Acme Foods'], aliases: [{ alias: 'Acme Intl', normalized_alias: 'acme intl', account_name: 'Acme Foods' }] });
+    const r = await createGapAccount(p, { name: 'Acme International', company: 'Acme Intl', vertical: 'cpg', reason: 'x', actor: 'casey@freightroll.com', now: NOW }, noHubspot);
+    expect(r).toMatchObject({ ok: false, reason: 'alias_of', matches: ['Acme Foods'] });
+    expect(p.accounts).toHaveLength(1);
+  });
+
+  it('a HubSpot company already linked to a GAP account refuses as that account', async () => {
+    const p = fakePrisma({ accounts: ['PepsiCo'] });
+    (p.accounts[0] as Record<string, unknown>).hubspot_company_id = '111';
+    const r = await accountCreationCheck(p, { name: 'Frito-Lay North America', domain: 'pepsico.com' }, { hubspotByDomain: async () => ({ id: '111', name: 'PepsiCo' }), hubspotByName: async () => null });
+    expect(r).toMatchObject({ ok: false, reason: 'hubspot_of', matches: ['PepsiCo'] });
+  });
+
+  it('HubSpot not configured or failing is said, never reported as "not found"', async () => {
+    const p = fakePrisma();
+    expect(await accountCreationCheck(p, { name: 'New Co' }, { ...noHubspot, configured: () => false })).toMatchObject({ ok: true, notes: ['HubSpot was not checked (not configured here).'] });
+    const r = await accountCreationCheck(p, { name: 'New Co' }, { hubspotByDomain: async () => null, hubspotByName: async () => { throw new Error('429'); } });
+    expect(r).toMatchObject({ ok: true, hubspotCompanyId: null, notes: [expect.stringMatching(/could not be checked \(429\)/)] });
+  });
+
+  it('a decided candidate cannot be ignored afterwards', async () => {
+    const p = fakePrisma();
+    await createGapAccount(p, { name: 'Brand New Co', vertical: 'cpg', reason: 'x', actor: 'casey@freightroll.com', now: NOW }, noHubspot);
+    expect(await decideCandidate(p, { company: 'Brand New Co', decision: 'ignored', actor: 'x', now: NOW })).toMatchObject({ ok: false, reason: 'already_decided' });
   });
 });

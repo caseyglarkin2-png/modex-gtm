@@ -27,7 +27,11 @@ function fake(member: Rec) {
     persona: { findUnique: async ({ where }: { where: { id: number } }) => (where.id === 7 || where.id === 9 ? { id: where.id, account_name: where.id === 9 ? 'Other Co' : 'Harbor Foods', name: 'Dana Ops' } : null) },
     account: { findUnique: async ({ where }: { where: { name: string } }) => (['Harbor Foods', 'Harbor Foods Group'].includes(where.name) ? { name: where.name } : null) },
     gapWorkSource: { findUnique: async () => ({ id: 's1', source_type: 'newsletter' }) },
-    accountContactCandidate: { upsert: async ({ create }: { create: Rec }) => (staged.push(create), { id: 55 }) },
+    deferred: [] as Rec[],
+    accountContactCandidate: {
+      upsert: async ({ create }: { create: Rec }) => (staged.push(create), { id: 55 }),
+      update: async ({ where, data }: { where: { id: number }; data: Rec }) => (p.deferred.push({ id: where.id, state: data.state }), {}),
+    },
     gapAuditEvent: { create: async ({ data }: { data: Rec }) => (audits.push(data), data) },
   };
   return p;
@@ -42,8 +46,15 @@ describe('resolving an ambiguous person', () => {
     expect(p.audits[0]).toMatchObject({ kind: 'work_source.person_resolved', actor });
   });
 
-  it('refuses a Persona that does not exist', async () => {
-    expect(await resolvePersonMember(fake({}), { memberId: 'm1', choice: 'existing', personaId: 404, actor, now: NOW })).toMatchObject({ ok: false, reason: 'persona_not_found' });
+  it('refuses a Persona GAP did not offer (never an arbitrary id), and a member that is not ambiguous', async () => {
+    expect(await resolvePersonMember(fake({}), { memberId: 'm1', choice: 'existing', personaId: 9, actor, now: NOW })).toMatchObject({ ok: false, reason: 'persona_not_offered' });
+    expect(await resolvePersonMember(fake({ resolution: 'resolved' }), { memberId: 'm1', choice: 'leave', actor, now: NOW })).toMatchObject({ ok: false, reason: 'not_ambiguous' });
+  });
+
+  it('WRONG COMPANY defers a candidate staged at that account, so it can never be promoted there', async () => {
+    const p = fake({ candidate_id: 55 });
+    await resolvePersonMember(p, { memberId: 'm1', choice: 'wrong_company', actor, now: NOW });
+    expect(p.deferred).toEqual([{ id: 55, state: 'deferred' }]);
   });
 
   it('NEW PERSON AT THIS ACCOUNT stages a candidate (never a Persona) at an account that exists', async () => {

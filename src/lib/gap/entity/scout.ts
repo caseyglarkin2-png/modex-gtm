@@ -121,7 +121,7 @@ export async function scoutCompany(company: string, deps: { ask?: (prompt: strin
   const why =
     verdict === 'LIKELY_ICP' ? `A shipper with cited network evidence (${p.network.length} ${p.network.length === 1 ? 'claim' : 'claims'}).`
     : verdict === 'MAYBE_ICP' ? 'A shipper, but no cited network evidence yet.'
-    : verdict === 'NOT_ICP' ? `Reads as a ${p.entityType === '3pl' ? '3PL' : p.entityType}, not a shipper that owns yards.`
+    : verdict === 'NOT_ICP' ? `Reads as a ${p.entityType === '3pl' ? '3PL' : p.entityType}, not a shipper that owns yards${p.network.length || p.freight.length ? '' : ' (the web pass cited nothing for this; check before ignoring)'}.`
     : verdict === 'AMBIGUOUS' ? 'The name could be several companies: say which one before anything else.'
     : 'The company type could not be established.';
   return { company, verdict, entityType: p.entityType, domain: p.domain, what: p.what, why, network: p.network, freight: p.freight, unknowns: p.unknowns, basis: 'web' };
