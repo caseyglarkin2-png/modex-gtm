@@ -60,22 +60,24 @@ describe('parse: a claim without a URL is never evidence', () => {
   });
 });
 
+const web = (answer: () => Promise<string>, citations: string[] = []) => [{ name: 'openai_web' as const, available: () => true, ask: async () => ({ text: await answer(), citations }) }];
+
 describe('scoutCompany', () => {
   it('a genuinely obvious name never spends a web call', async () => {
     let calls = 0;
-    const r = await scoutCompany('Acme Staffing', { ask: async () => { calls += 1; return ''; } });
+    const r = await scoutCompany('Acme Staffing', { providers: web(async () => { calls += 1; return ''; }) });
     expect(calls).toBe(0);
     expect(r).toMatchObject({ verdict: 'NOT_FIT', basis: 'name_rules' });
   });
   it('a logistics name IS checked, and a 3PL running DCs comes back a direct buyer', async () => {
     let calls = 0;
-    const r = await scoutCompany('Summit Logistics Group', { ask: async () => { calls += 1; return '{"entityType":"3pl","domain":"summitlog.example","ambiguous":false,"what":"Contract logistics provider","network":[{"claim":"Operates 40 distribution centers for retail and CPG customers.","url":"https://summitlog.example/network"}],"freight":[{"claim":"Runs a dedicated fleet of 800 tractors and 3,000 trailers.","url":"https://summitlog.example/fleet"}],"unknowns":[]}'; } });
+    const r = await scoutCompany('Summit Logistics Group', { providers: web(async () => { calls += 1; return '{"entityType":"3pl","domain":"summitlog.example","ambiguous":false,"what":"Contract logistics provider","network":[{"claim":"Operates 40 distribution centers for retail and CPG customers.","url":"https://summitlog.example/network"}],"freight":[{"claim":"Runs a dedicated fleet of 800 tractors and 3,000 trailers.","url":"https://summitlog.example/fleet"}],"unknowns":[]}'; }, ['https://summitlog.example/network', 'https://summitlog.example/fleet']) });
     expect(calls).toBe(1);
     expect(r).toMatchObject({ verdict: 'DIRECT_BUYER', entityType: '3pl', basis: 'web' });
     expect(r.why).toMatch(/owns yard problems even without owning the freight/);
   });
   it('a failed call is a failure (never a verdict), said plainly', async () => {
-    const r = await scoutCompany('Harbor Foods Group', { ask: async () => { throw new Error('quota'); } });
+    const r = await scoutCompany('Harbor Foods Group', { providers: web(async () => { throw new Error('quota'); }) });
     expect(r.failed).toBe(true);
     expect(r.why).toMatch(/web pass failed/);
   });
