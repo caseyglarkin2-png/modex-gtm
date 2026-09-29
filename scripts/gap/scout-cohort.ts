@@ -61,7 +61,7 @@ async function main() {
       const r = await scoutCandidate(prisma, { company: c.company, actor: 'gap-cohort-scout', now: new Date(), force: c.scouted, hint: c.titles.length ? `people there: ${c.titles.join(', ')}` : undefined });
       if ('refused' in r) {
         console.log(`  ${r.refused}: ${c.company}${r.why ? ` (${r.why})` : ''}`);
-        if (r.refused === 'daily_cap') break;
+        if (r.refused === 'daily_cap' || r.refused === 'attempt_cap') break;
         // The web quota is per minute: wait it out and move on (this company stays unscouted).
         if (r.refused === 'web_failed') await new Promise((ok) => setTimeout(ok, 30_000));
         continue;

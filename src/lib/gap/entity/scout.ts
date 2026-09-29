@@ -107,19 +107,21 @@ Return ONLY JSON:
  * groundedCompanyScout: the name rule first (free), then the provider chain (entity/providers.ts). Whichever
  * provider answers, the result is the same typed Scout evidence; a claim the search did not cite is dropped.
  */
-export async function scoutCompany(company: string, deps: { ask?: (prompt: string) => Promise<string>; providers?: ScoutProvider[]; hint?: string } = {}): Promise<ScoutResult> {
+export async function scoutCompany(company: string, deps: { providers?: ScoutProvider[]; hint?: string } = {}): Promise<ScoutResult> {
   const base = { company, domain: null, what: null, network: [], freight: [], unknowns: [] as string[] };
   const rule = fitFromName(company);
   // Only a genuinely obvious name settles fit for free; a logistics or carrier name still gets checked.
   if (rule.final) return { ...base, verdict: rule.fit, entityType: rule.entityType, why: rule.why, basis: 'name_rules' };
-  const providers: ScoutProvider[] = deps.providers ?? (deps.ask ? [{ name: 'gemini', available: () => true, ask: async (q) => ({ text: await deps.ask!(q), citations: null }) }] : defaultProviders());
+  const providers: ScoutProvider[] = deps.providers ?? defaultProviders();
   const r = await askGrounded(SCOUT_PROMPT(company, deps.hint ?? ''), (a) => {
     const p = parseScout(a.text);
     if (!p) return null;
-    const net = groundedOnly(p.network, a.citations);
-    const fr = groundedOnly(p.freight, a.citations);
-    const dropped = [...net.dropped, ...fr.dropped].map((c) => `Not cited by the search (dropped): ${c.claim}`);
-    return { ...p, network: net.kept, freight: fr.kept, unknowns: [...p.unknowns, ...dropped] };
+    const net = groundedOnly(p.network, a.citations, a.citedHosts);
+    const fr = groundedOnly(p.freight, a.citations, a.citedHosts);
+    const lost = [...net.dropped, ...fr.dropped];
+    // Every claim lost to the citation check: the answer is not grounded, so no fit is read from it (next provider).
+    if (lost.length && !net.kept.length && !fr.kept.length) return null;
+    return { ...p, network: net.kept, freight: fr.kept, unknowns: [...p.unknowns, ...lost.map((c) => `Not cited by the search (dropped): ${c.claim}`)] };
   }, providers);
   if (!r.ok) {
     const how = r.attempts.map((a) => `${a.provider} ${a.outcome.replace(/_/g, ' ')}`).join('; ') || 'no provider configured';

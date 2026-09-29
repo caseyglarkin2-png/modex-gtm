@@ -105,7 +105,7 @@ const SCOUT_DAILY_CAP = 60;
 const SCOUT_ATTEMPT_CAP = 150;
 /** A pass older than this with no recorded end is treated as dead (the provider chain is bounded well inside it). */
 const SCOUT_IN_FLIGHT_MS = 5 * 60_000;
-const SCOUT_EVENTS = ['entity.scout_started', 'entity.scouted', 'entity.scout_failed'];
+const SCOUT_EVENTS = ['entity.scout_started', 'entity.scouted', 'entity.scout_failed', 'entity.scout_superseded'];
 
 type AuditRow = { id: string; kind: string; created_at: Date | string; payload?: unknown };
 /** The started passes for this company that have no end recorded (an end names its start). */
@@ -132,7 +132,8 @@ export async function scoutCandidate(
   const dayAgo = new Date(input.now.getTime() - 86_400_000);
   const count = (where: Record<string, unknown>): Promise<number> => (prisma.gapAuditEvent.count ? prisma.gapAuditEvent.count({ where }).catch(() => 0) : Promise.resolve(0));
   if ((await count({ kind: 'entity.scouted', created_at: { gte: dayAgo }, payload: { path: ['ok'], equals: true } })) >= SCOUT_DAILY_CAP) return { refused: 'daily_cap' };
-  if ((await count({ kind: { in: ['entity.scouted', 'entity.scout_failed'] }, created_at: { gte: dayAgo } })) >= SCOUT_ATTEMPT_CAP) return { refused: 'attempt_cap' };
+  // Every claimed pass counts, including one the platform killed before it could record an end.
+  if ((await count({ kind: 'entity.scout_started', created_at: { gte: dayAgo } })) >= SCOUT_ATTEMPT_CAP) return { refused: 'attempt_cap' };
   const recent = async (): Promise<AuditRow[]> =>
     prisma.gapAuditEvent.findMany ? prisma.gapAuditEvent.findMany({ where: { subject_type: 'account_candidate', subject_id: company_key, kind: { in: SCOUT_EVENTS }, created_at: { gte: new Date(input.now.getTime() - SCOUT_IN_FLIGHT_MS) } } }) : [];
   const inFlight = { refused: 'in_flight' as const, why: 'A Scout of this company is already running; its result will show here.' };
@@ -142,7 +143,7 @@ export async function scoutCandidate(
   const end = (kind: string, payload: Record<string, unknown>) => prisma.gapAuditEvent.create({ data: { kind, actor: input.actor, subject_type: 'account_candidate', subject_id: company_key, payload: { company: input.company, startedId: started?.id ?? null, ...payload } } });
   const open = openPasses(await recent());
   if (started?.id && open.length && open[0].id !== started.id) {
-    await end('entity.scout_failed', { ok: false, outcome: 'in_flight' });
+    await end('entity.scout_superseded', { ok: false });
     return inFlight;
   }
   const scout = deps.scout ?? ((c: string, o: { hint?: string }) => scoutCompany(c, { hint: o.hint }));

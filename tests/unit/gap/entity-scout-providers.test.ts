@@ -29,6 +29,10 @@ const noSleep = async () => {};
 beforeEach(() => _resetCooldowns());
 
 describe('the provider chain', () => {
+  it('(sanity) the fixture is grounded on the pages it cites', () => {
+    expect(groundedOnly(JSON.parse(SCOUT_JSON).network, ['https://kenco.example/locations']).kept).toHaveLength(1);
+  });
+
   it('a Gemini quota error is not evidence: it cools Gemini down and the next grounded provider answers', async () => {
     const gemini = prov('gemini', async () => { throw quota; });
     const openai = prov('openai_web', async () => ({ text: SCOUT_JSON, citations: ['https://kenco.example/locations', 'https://www.kenco.example/fleet'] }));
@@ -70,6 +74,38 @@ describe('the provider chain', () => {
     expect(classifyProviderError(new Error('429 rate limit. Please retry in 12.5s'))).toMatchObject({ kind: 'quota', coolMs: 13_500 });
     expect(classifyProviderError(new Error('fetch failed'))).toMatchObject({ kind: 'transient' });
     expect(classifyProviderError(new Error('invalid model'))).toMatchObject({ kind: 'error' });
+  });
+
+  it('every claim failing the citation check is not grounded: no fit is read from it, the next provider answers', async () => {
+    const miss = prov('openai_web', async () => ({ text: SCOUT_JSON, citations: ['https://other.example/page'] }));
+    const gw = prov('gateway_web', async () => ({ text: SCOUT_JSON, citations: ['https://kenco.example/locations'] }));
+    const r = await scoutCompany('Kenco Logistics', { providers: [miss, gw] });
+    expect(r.attempts?.map((a) => [a.provider, a.outcome])).toEqual([['openai_web', 'unparsable'], ['gateway_web', 'ok']]);
+    const none = await scoutCompany('Kenco Logistics', { providers: [prov('openai_web', async () => ({ text: SCOUT_JSON, citations: ['https://other.example/page'] }))] });
+    expect(none.failed).toBe(true);
+  });
+
+  it('Gemini: an answer with no grounding (no sites read) is model memory; with sites read, a claim must be on one', async () => {
+    const memory = await askGrounded('q', (a) => a.text, [prov('gemini', async () => ({ text: SCOUT_JSON, citations: [], citedHosts: [] }))]);
+    expect(memory).toMatchObject({ ok: false, attempts: [{ provider: 'gemini', outcome: 'no_citations' }] });
+    const r = await scoutCompany('Kenco Logistics', { providers: [prov('gemini', async () => ({ text: SCOUT_JSON, citations: [], citedHosts: ['kenco.example'] }))] });
+    expect(r.provider).toBe('gemini');
+    expect(r.network.map((c) => c.url)).toEqual(['https://kenco.example/locations']);
+    expect(r.freight).toHaveLength(1);
+  });
+
+  it('a hung provider is aborted at its bound, not retried, and the chain moves on inside one deadline', async () => {
+    let aborted = false;
+    let hungCalls = 0;
+    const hung = prov('gemini', () => new Promise<ProviderAnswer>(() => {}));
+    hung.ask = (q: string, signal: AbortSignal) => (signal.addEventListener('abort', () => (aborted = true)), new Promise<ProviderAnswer>(() => { hungCalls++; }));
+    const ok = prov('openai_web', async () => ({ text: 'x', citations: ['https://a.example/'] }));
+    const r = await askGrounded('q', (a) => a.text, [hung, ok], { timeoutMs: 20, sleep: noSleep });
+    expect(aborted).toBe(true);
+    expect(hungCalls).toBe(1);
+    expect(r).toMatchObject({ ok: true, provider: 'openai_web', attempts: [{ provider: 'gemini', outcome: 'error' }, { provider: 'openai_web', outcome: 'ok' }] });
+    const late = await askGrounded('q', (a) => a.text, [ok], { budgetMs: 1_000 });
+    expect(late).toMatchObject({ ok: false, attempts: [{ provider: 'openai_web', outcome: 'error', detail: 'no time left in this pass' }] });
   });
 
   it('groundedOnly matches host and path, ignoring www, query, fragment and a trailing slash', () => {
@@ -154,7 +190,8 @@ describe('scoutCandidate: one Scout at a time, every pass audited', () => {
 
   it('bounds the attempts a day, failed passes included (cost)', async () => {
     const p = fakePrisma();
-    for (let i = 0; i < 150; i++) p.audits.push({ id: `f${i}`, kind: 'entity.scout_failed', subject_id: `c${i}`, created_at: NOW, payload: { ok: false } });
+    // passes the platform killed mid-run never recorded an end: their claims still count
+    for (let i = 0; i < 150; i++) p.audits.push({ id: `f${i}`, kind: 'entity.scout_started', subject_id: `c${i}`, created_at: NOW, payload: {} });
     expect(await scoutCandidate(p as never, { company: 'Kenco', actor: 'x', now: NOW }, { scout: okScout })).toMatchObject({ refused: 'attempt_cap' });
   });
 });
