@@ -15,7 +15,7 @@
  * verified domain, alias, normalized name; no fuzzy match). Pure.
  */
 import { resolveIdentity, normalizeDomain, type IdentityContext } from '../identity/resolve';
-import { normalizeCompanyName } from '../identity/normalize';
+import { legacyNormalizeCompanyName, normalizeCompanyName } from '../identity/normalize';
 import { CREDENTIAL, cleanCompanyName, type IntakeRow } from './parse';
 
 export type IntakeResolution = 'resolved' | 'new_candidate' | 'ambiguous' | 'unresolved';
@@ -65,9 +65,9 @@ function emailDomain(email: string | undefined): string | null {
 }
 
 /** The one key that makes a member unique within its source (a re-import never duplicates). */
-export function memberKey(row: IntakeRow): string {
+export function memberKey(row: IntakeRow, norm: (s: string) => string = normalizeCompanyName): string {
   if (row.kind === 'account') {
-    if (row.company) return `account:${normalizeCompanyName(row.company)}`;
+    if (row.company) return `account:${norm(row.company)}`;
     return `domain:${normalizeDomain(row.companyDomain ?? '')}`;
   }
   if (row.email) return `email:${row.email.trim().toLowerCase()}`;
@@ -76,8 +76,14 @@ export function memberKey(row: IntakeRow): string {
   if (row.sourceId) return `source:${row.sourceId.trim().toLowerCase()}`;
   // Name + company + title: two different people with one name at one company stay two members.
   const title = textKey(row.title ?? '');
-  const where = row.company ? `${normalizeCompanyName(row.company)}${title ? `|${title}` : ''}` : title;
+  const where = row.company ? `${norm(row.company)}${title ? `|${title}` : ''}` : title;
   return `name:${personKey(row.name ?? '')}|${where}`;
+}
+
+/** The key this row had before accents were folded (2026-09-29), when it differs: a re-import still finds its member. */
+export function legacyMemberKey(row: IntakeRow): string | null {
+  const old = memberKey(row, legacyNormalizeCompanyName);
+  return old === memberKey(row) ? null : old;
 }
 
 function resolveCompany(ctx: IntakeContext, row: IntakeRow): { accountName: string | null; basis: string; ambiguous: boolean } {
