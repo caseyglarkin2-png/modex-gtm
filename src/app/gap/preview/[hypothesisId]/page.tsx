@@ -27,6 +27,7 @@ import { hypothesisCompileWhere, templateCompileWhere } from '@/lib/gap/compiler
 import { hubspotCompanyUrl, hubspotContactUrl, telHref } from '@/lib/gap/routing/seller-action';
 import { ColdOutboundButton } from '@/components/gap/cold-outbound-button';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { AccountLink } from '@/components/gap/account-link';
 import { Badge } from '@/components/ui/badge';
 import { ActionPackView, resolveActionPack } from '@/components/gap/action-pack-view';
 import {
@@ -114,7 +115,7 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
       <Breadcrumb items={[{ label: 'GAP', href: '/gap' }, { label: hypothesis.account_name }]} />
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{hypothesis.account_name}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight"><AccountLink name={hypothesis.account_name} /></h1>
           <p className="mt-1 text-sm" data-testid="pack-person">
             {persona ? (
               <>

@@ -15,7 +15,10 @@ import { buildAccountRoiModel } from '@/lib/demo/roi-model';
 import { loadDemoPack } from '@/lib/demo/load-pack';
 import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import type { AccountMicrositeData, AccountROIModel } from '@/lib/microsites/schema';
-import type { AccountInputs, FactInput, PackInput } from './build';
+import { buildAccountBrief, type AccountInputs, type AccountIntelligenceBrief, type FactInput, type PackInput } from './build';
+import { accountSlug } from './href';
+
+export { accountSlug };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -23,13 +26,26 @@ type PrismaLike = any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Row = Record<string, any>;
 
-/** The same rule as src/lib/data.ts slugify (the app-wide account slug). */
-export const accountSlug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-/** The account whose slug this is (the app-wide scheme has no slug column: resolve by name). */
+/** Accounts whose names start like this name or slug (a narrowed read, never the whole table). */
+async function namesStartingLike(prisma: PrismaLike, firstToken: string): Promise<string[]> {
+  if (!firstToken) return [];
+  const rows: Array<{ name: string }> = await prisma.account.findMany({ where: { name: { startsWith: firstToken, mode: 'insensitive' } }, select: { name: true }, orderBy: { name: 'asc' }, take: 500 });
+  return rows.map((r) => r.name);
+}
+
+/**
+ * Every account whose slug this is (the app-wide scheme has no slug column: resolve by name). More than one
+ * means a collision ("P&G" and "P-G"): the page asks which, never picks.
+ */
+export async function accountNamesForSlug(prisma: PrismaLike, slug: string): Promise<string[]> {
+  const first = slug.split('-')[0] ?? '';
+  return (await namesStartingLike(prisma, first)).filter((n) => accountSlug(n) === slug);
+}
+
 export async function accountNameForSlug(prisma: PrismaLike, slug: string): Promise<string | null> {
-  const rows: Array<{ name: string }> = await prisma.account.findMany({ select: { name: true } });
-  return rows.find((r) => accountSlug(r.name) === slug)?.name ?? null;
+  const names = await accountNamesForSlug(prisma, slug);
+  return names.length === 1 ? names[0] : null;
 }
 
 function micrositeFor(name: string, aliases: string[]): AccountMicrositeData | null {
@@ -61,18 +77,18 @@ export async function loadAccountInputs(
   const [aliases, link, allNames, profiles, signalRows, factRows, lastRun, hyps, bidRows, personas, candidates, members] = await Promise.all([
     prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true } }).catch(() => []),
     prisma.canonicalAccountLink.findUnique({ where: { account_name: accountName }, select: { canonical_company_id: true, status: true } }).catch(() => null),
-    prisma.account.findMany({ select: { name: true } }),
+    namesStartingLike(prisma, accountName.trim().split(/[^A-Za-z0-9]/)[0] ?? ''),
     loadWatchProfilesCached(prisma).catch(() => []),
     prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
     prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null),
     prisma.prospectingHypothesis.findMany({
-      where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
+      where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed'] } },
       select: { id: true, status: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
     }).catch(() => []),
-    prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true } }).catch(() => []),
+    prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }).catch(() => []),
     prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true }, take: 60 }),
     prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true }, take: 30 }).catch(() => []),
     prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { not: 'ignored' } }, select: { name: true, kind: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
@@ -84,7 +100,7 @@ export async function loadAccountInputs(
     if (cc?.domain) domains.push(cc.domain);
   }
   const key = normalizeCompanyName(accountName);
-  const siblings = (allNames as Array<{ name: string }>).map((r) => r.name).filter((n) => n !== accountName && normalizeCompanyName(n) === key);
+  const siblings = (allNames as string[]).filter((n) => n !== accountName && normalizeCompanyName(n) === key);
   const profile = (profiles as Array<{ accountName: string; reasons?: string[] }>).find((p) => p.accountName === accountName);
 
   // Verified research facts; a continuation row carries its chain (one fact per quote, newest clock).
@@ -146,7 +162,7 @@ export async function loadAccountInputs(
       whatANoMeans: h.what_a_no_means ?? null,
       primarySignalId: h.signals?.[0]?.signal_id ?? null,
     })),
-    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString() })),
+    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
     personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null })),
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state })),
     memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null })),
@@ -158,4 +174,13 @@ export async function loadAccountInputs(
     facilityFact: fact ? { facilityCount: String(fact.facilityCount), status: fact.status === 'verified' ? 'verified' : 'provisional', summary: fact.summary, updatedAt: fact.updatedAt, sources: fact.sources } : null,
     roi,
   };
+}
+
+/** The canonical brief for one account (live projection). Null when the slug names no account. */
+export async function loadAccountBrief(prisma: PrismaLike, slug: string, now: Date, opts: Parameters<typeof loadAccountInputs>[3] & { name?: string } = {}): Promise<AccountIntelligenceBrief | { collision: string[] } | null> {
+  const names = await accountNamesForSlug(prisma, slug);
+  const name = opts.name && names.includes(opts.name) ? opts.name : names.length === 1 ? names[0] : null;
+  if (!name) return names.length > 1 ? { collision: names } : null;
+  const inputs = await loadAccountInputs(prisma, name, now, opts);
+  return inputs ? buildAccountBrief(inputs, now) : null;
 }

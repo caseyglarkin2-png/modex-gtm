@@ -64,3 +64,11 @@ describe('precedence: buyer truth outranks public inference, contradictions stay
     expect(orderStatements(s).map((x) => x.text)).toEqual(['b', 'c', 'v', 'i', 'u']);
   });
 });
+
+describe('an audit backs VERIFIED only through a cited URL', () => {
+  it('refuses an uncited audit label; accepts a cited one', () => {
+    const audit = (url: string | null) => ({ kind: 'audit' as const, ref: 'satellite audit', label: 'satellite audit', url, at: '2026-06-01' });
+    expect(statementProblems({ text: 'x', truth: 'VERIFIED_PUBLIC', sources: [audit(null)] })).toEqual(['verified_public_without_source']);
+    expect(statementProblems({ text: 'x', truth: 'VERIFIED_PUBLIC', sources: [audit('https://acme.example/dc')] })).toEqual([]);
+  });
+});

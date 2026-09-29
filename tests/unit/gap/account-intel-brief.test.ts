@@ -79,14 +79,14 @@ describe('volume: modeled ranges, never fake precision', () => {
 
 describe('buyer truth outranks public inference', () => {
   it('a confirmed BID about the stack is BUYER_CONFIRMED and listed first in technology', () => {
-    const b = buildAccountBrief(base({ bids: [{ id: 'b1', type: 'current_state', summary: 'We use PINC at all 12 plants.', quote: 'We use PINC at all 12 plants.', who: 'VP Distribution', at: '2026-09-25T00:00:00Z' }] }), NOW);
+    const b = buildAccountBrief(base({ bids: [{ id: 'b1', type: 'current_state', summary: 'We use PINC at all 12 plants.', quote: 'We use PINC at all 12 plants.', who: 'VP Distribution', at: '2026-09-25T00:00:00Z', hypothesisId: 'h1' }] }), NOW);
     const t = b.sections.technology.statements;
     expect(t[0]).toMatchObject({ truth: 'BUYER_CONFIRMED' });
     expect(t[0].text).toMatch(/PINC/);
     expect(t.find((s) => /Blue Yonder/.test(s.text))?.truth).toBe('INFERENCE');
   });
   it('a buyer objection keeps the contradiction visible and stops the story', () => {
-    const b = buildAccountBrief(base({ bids: [{ id: 'b2', type: 'objection', summary: 'Our gates are not a problem.', quote: 'Our gates are not a problem.', who: 'VP Distribution', at: '2026-09-25T00:00:00Z' }] }), NOW);
+    const b = buildAccountBrief(base({ bids: [{ id: 'b2', type: 'objection', summary: 'Our gates are not a problem.', quote: 'Our gates are not a problem.', who: 'VP Distribution', at: '2026-09-25T00:00:00Z', hypothesisId: 'h1' }] }), NOW);
     expect(b.hypotheses[0].truth).toBe('CONTRADICTED');
     expect(b.glance.nextAction).toMatch(/^Stop the current story/);
   });
@@ -120,7 +120,7 @@ describe('discovery: 3 to 7 questions from the real unknowns', () => {
     expect(q.map((x) => x.type)).toContain('CURRENT_PROCESS');
   });
   it('a question already answered by the buyer is not asked again', () => {
-    const q = buildAccountBrief(base({ bids: [{ id: 'b3', type: 'impact', summary: 'We pay $40k a month in detention.', quote: 'x', who: 'VP', at: '2026-09-25T00:00:00Z' }] }), NOW).discovery;
+    const q = buildAccountBrief(base({ bids: [{ id: 'b3', type: 'impact', summary: 'We pay $40k a month in detention.', quote: 'x', who: 'VP', at: '2026-09-25T00:00:00Z', hypothesisId: 'h1' }] }), NOW).discovery;
     expect(q.map((x) => x.type)).not.toContain('IMPACT');
   });
 });
@@ -188,5 +188,61 @@ describe('real-data fixes (PepsiCo / General Mills / Kroger dogfood)', () => {
   it('an open deal: "Work the deal" with the next learning as its own question', () => {
     const b = buildAccountBrief(base({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'Acme pilot', stage: 'discovery' }] } }), NOW);
     expect(b.glance.nextAction).toBe('Work the deal (In Deals), never cold. Next learning: the question below.');
+  });
+});
+
+describe('review fixes (Release A reviewer)', () => {
+  const h1 = (over: Record<string, unknown> = {}) => ({ ...base().hypotheses[0], ...over });
+  const bidOf = (over: Record<string, unknown>) => ({ id: 'b1', type: 'business_problem', summary: 'Trucks wait two hours at the gate.', quote: 'Trucks wait two hours at the gate.', who: 'ops@acme.example', at: '2026-09-20T00:00:00Z', hypothesisId: 'h1', ...over });
+
+  it('a BID confirms or contradicts only ITS hypothesis, never every hypothesis on the account', () => {
+    const other = h1({ id: 'h2', primarySignalId: null, problem: 'My guess is that detention is high.' });
+    const b = buildAccountBrief(base({ hypotheses: [h1(), other], bids: [bidOf({ type: 'objection', hypothesisId: 'h2' })] }), NOW);
+    expect(b.hypotheses.find((h) => h.id === 'h1')?.truth).toBe('INFERENCE');
+    expect(b.hypotheses.find((h) => h.id === 'h2')?.truth).toBe('CONTRADICTED');
+    const c = buildAccountBrief(base({ hypotheses: [h1(), other], bids: [bidOf({ hypothesisId: 'h1' })] }), NOW);
+    expect(c.hypotheses.find((h) => h.id === 'h2')?.truth).toBe('INFERENCE');
+    expect(c.hypotheses.find((h) => h.id === 'h1')?.truth).toBe('BUYER_CONFIRMED');
+  });
+
+  it('a draft Casey withdrew is not a buyer rejection and never leads', () => {
+    const b = buildAccountBrief(base({ hypotheses: [h1({ status: 'rejected' })] }), NOW);
+    expect(b.hypotheses).toEqual([]);
+    expect(b.glance.nextAction).not.toMatch(/Stop the current story/);
+  });
+
+  it('a site without verification is not self-operated; unknown operators are counted, not dropped', () => {
+    const p = base().pack!;
+    const sites = [site('01-a'), site('02-b', { verification: undefined }), site('03-c', { verification: { ...site('x').verification, operator: 'unknown' } })];
+    const f = buildAccountBrief(base({ pack: { ...p, network: { ...p.network, sites } } as never }), NOW).sections.footprint;
+    expect(f.statements.map((s) => s.text).join('\n')).toMatch(/3 sites audited: 1 self-operated, 0 3PL-operated \(not counted as owned\), 1 operator unknown, 1 not yet verified; 0 rejected/);
+  });
+
+  it('uncited audit data is INFERENCE, not Verified (rail, yard features, trailers)', () => {
+    const p = base().pack!;
+    const probable = (id: string) => site(id, { verification: { ...site('x').verification, verdict: 'probable', citations: [] } });
+    const b = buildAccountBrief(base({ pack: { ...p, network: { ...p.network, sites: [probable('01-a'), probable('02-b')] } } as never }), NOW);
+    expect(b.sections.freight.statements.find((s) => /rail-served/.test(s.text))?.truth).toBe('INFERENCE');
+    expect(b.sections.yard.statements.find((s) => /drop yard/.test(s.text))?.truth).toBe('INFERENCE');
+    expect(b.sections.volume.statements.find((s) => /trailers visible/.test(s.text))?.truth).toBe('INFERENCE');
+  });
+
+  it('a place name is not a vendor, and "pilot plant" is not a pilot', () => {
+    const fact = (quote: string) => ({ ...base().facts[0], id: quote.slice(0, 8), quote });
+    const b = buildAccountBrief(base({ facts: [fact('Acme Foods opened a distribution center in Aurora, Illinois and a pilot plant in Manhattan, Kansas.'), fact('Acme Foods uses Oracle for planning.')] }), NOW);
+    const text = b.sections.technology.statements.map((s) => s.text).join('\n');
+    expect(text).not.toMatch(/^Aurora|^Manhattan/m);
+    expect(text).toMatch(/^Oracle \(ERP \/ supply chain software; PUBLIC MENTION/m);
+    expect(b.glance.currentTech).toMatch(/^Public mention only: Oracle/);
+  });
+
+  it('the glance commercial state is the deal truth, never a BID or a touch', () => {
+    const b = buildAccountBrief(base({ opportunity: { status: 'UNKNOWN', detail: 'timeout', deals: [] }, bids: [bidOf({ type: 'objection', hypothesisId: 'hx' })] }), NOW);
+    expect(b.glance.commercialState).toMatch(/^HubSpot deal state could not be read/);
+  });
+
+  it('a refused statement is said, not silently dropped (a point-estimate ROI)', () => {
+    const b = buildAccountBrief(base({ roi: { hardSavingsAnnual: 1_000_000, totalValueAnnual: 1_000_000, facilities: 3, calculatorVersion: null, assumptions: ['x'] } }), NOW);
+    expect(b.sections.economics.refused[0]).toMatch(/^modeled_point_estimate: /);
   });
 });

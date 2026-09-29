@@ -47,6 +47,8 @@ export interface BidInput {
   quote: string;
   who: string | null;
   at: string;
+  /** The hypothesis this BID was captured against (every BID has one). */
+  hypothesisId: string | null;
 }
 
 export interface PersonaInput {
@@ -208,7 +210,7 @@ const TITLES: Record<SectionKey, string> = {
   identity: 'Identity',
   footprint: 'Facility and network footprint',
   freight: 'Freight operating model',
-  volume: 'Volume and throughput',
+  volume: 'Volume and production capacity',
   yard: 'Physical execution and yard model',
   technology: 'Current technology and incumbents',
   catalysts: 'Catalysts',
@@ -242,15 +244,24 @@ function auditedSites(pack: PackInput | null) {
   return {
     all: sites,
     kept,
-    self: kept.filter((s) => (s.verification?.operator ?? 'self') === 'self'),
+    // never assume ownership: a site with no verification is unverified, not self-operated
+    self: kept.filter((s) => s.verification?.operator === 'self'),
     threePl: kept.filter((s) => s.verification?.operator === '3PL'),
     jv: kept.filter((s) => s.verification?.operator === 'JV'),
+    unknownOperator: kept.filter((s) => !!s.verification && !['self', '3PL', 'JV'].includes(s.verification.operator)),
+    unverified: kept.filter((s) => !s.verification),
     rejected: sites.filter((s) => s.verification?.verdict === 'rejected'),
   };
 }
 
 const citedAudit = (s: PackSite) => !!s.verification && s.verification.verdict === 'confirmed' && s.verification.citations.some((c) => c.url && c.date);
 const auditSrc = (label: string, at: string | null, url: string | null = null): Source => ({ kind: 'audit', ref: label, label, url, at });
+/** Audit-derived counts are VERIFIED only when at least one kept site carries a cited, confirmed verification. */
+function auditTruth(i: AccountInputs, falsifiableBy: string): Pick<Statement, 'truth' | 'falsifiableBy'> & { cite: string | null } {
+  const cited = auditedSites(i.pack).kept.filter(citedAudit);
+  return cited.length ? { truth: 'VERIFIED_PUBLIC', cite: cited[0].verification!.citations.find((c) => c.url)?.url ?? null } : { truth: 'INFERENCE', falsifiableBy, cite: null };
+}
+const splitCite = ({ cite, ...rest }: ReturnType<typeof auditTruth>) => ({ cite, rest });
 
 // ---------------------------------------------------------------- sections
 
@@ -278,21 +289,21 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   const unknowns: string[] = [];
   const p = i.pack;
   if (p?.account.networkCount) {
-    if (p.account.networkCountSource) st.push({ text: `${p.account.networkCount} facilities (${p.account.networkCountSource})`, truth: 'VERIFIED_PUBLIC', sources: [auditSrc(p.account.networkCountSource, p.account.networkCountAsOf ?? p.builtAt)], asOf: p.account.networkCountAsOf ?? p.builtAt });
+    if (p.account.networkCountSource) st.push({ text: `${p.account.networkCount} facilities (${p.account.networkCountSource})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: p.account.networkCountSource, label: p.account.networkCountSource, url: /^https?:\/\//.test(p.account.networkCountSource) ? p.account.networkCountSource : null, at: p.account.networkCountAsOf ?? p.builtAt }], asOf: p.account.networkCountAsOf ?? p.builtAt });
     else st.push({ text: `About ${p.account.networkCount} facilities (audit estimate, no cited source)`, truth: 'INFERENCE', sources: [auditSrc('demo pack', p.builtAt)], falsifiableBy: 'A filing or company source gives a different count.' });
   }
   const a = auditedSites(p);
   if (a.all.length) {
     const cited = a.kept.filter(citedAudit);
     st.push({
-      text: `${plural(a.all.length, 'site')} audited: ${a.self.length} self-operated, ${a.threePl.length} 3PL-operated (not counted as owned)${a.jv.length ? `, ${a.jv.length} joint venture` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
+      text: `${plural(a.all.length, 'site')} audited: ${a.self.length} self-operated, ${a.threePl.length} 3PL-operated (not counted as owned)${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
       truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE',
       sources: [auditSrc('satellite + source audit', p!.builtAt, cited[0]?.verification?.citations[0]?.url ?? null)],
       asOf: cited[0]?.verification?.verifiedAt ?? p!.builtAt,
       ...(cited.length ? {} : { falsifiableBy: 'A site verification finds a different operator or status.' }),
     });
     const types = [...new Set(a.self.map((s) => s.type))];
-    if (types.length) st.push({ text: `Self-operated site types audited: ${types.join(', ')}`, truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE', sources: [auditSrc('audit', p!.builtAt)], asOf: p!.builtAt, ...(cited.length ? {} : { falsifiableBy: 'Verification changes the type.' }) });
+    if (types.length) st.push({ text: `Self-operated site types audited: ${types.join(', ')}`, truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE', sources: [auditSrc('audit', p!.builtAt, cited[0]?.verification?.citations.find((c) => c.url)?.url ?? null)], asOf: p!.builtAt, ...(cited.length ? {} : { falsifiableBy: 'Verification changes the type.' }) });
   } else unknowns.push('Audited sites (ownership, types, locations)');
   if (i.facilityFact) {
     const f = i.facilityFact;
@@ -316,7 +327,10 @@ function freightSection(i: AccountInputs, now: Date): Section {
   for (const f of liveFacts(i, now).filter((x) => FREIGHT_WORDS.test(x.quote))) st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   const a = auditedSites(i.pack);
   const rail = a.kept.filter((s) => s.yardMetrics.railServed).length;
-  if (a.kept.length) st.push({ text: `${rail} of ${plural(a.kept.length, 'audited site')} rail-served`, truth: 'VERIFIED_PUBLIC', sources: [auditSrc('satellite audit', i.pack!.builtAt)], asOf: i.pack!.builtAt });
+  if (a.kept.length) {
+    const { cite, rest } = splitCite(auditTruth(i, 'A site visit or the railroad shows different service.'));
+    st.push({ text: `${rail} of ${plural(a.kept.length, 'audited site')} rail-served`, ...rest, sources: [auditSrc('satellite audit', i.pack!.builtAt, cite)], asOf: i.pack!.builtAt });
+  }
   const fr = i.microsite?.freight;
   if (fr?.primaryModes?.length) st.push({ text: `Modes: ${fr.primaryModes.join(', ')}${i.microsite?.network?.fleet ? `; fleet: ${i.microsite.network.fleet}` : ''} (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'Their transportation team describes a different mix.' });
   const unknowns = ['Private fleet vs dedicated vs common carrier mix', 'Drop vs live share by site type', 'Inbound pattern (supplier, plant-to-DC)'];
@@ -335,7 +349,10 @@ function volumeSection(i: AccountInputs, now: Date): Section {
       model: { inputs: { auditedDockDoors: doors, auditedSites: a.kept.length }, formula: 'audited dock doors x 1 to 3 trailer turns per door per day', range: [doors, doors * 3], unit: 'trailer moves/day across audited sites', assumptions: ['1 to 3 turns per door per day (not measured)', 'Audited sites only; the rest of the network is not counted'] },
     });
     const trailers = a.kept.reduce((n, s) => n + (s.yardMetrics.trailersVisible ?? 0), 0);
-    if (trailers) st.push({ text: `${trailers} trailers visible across audited sites on the imagery date`, truth: 'VERIFIED_PUBLIC', sources: [auditSrc('satellite imagery count', i.pack!.builtAt)], asOf: i.pack!.builtAt });
+    if (trailers) {
+      const { cite, rest } = splitCite(auditTruth(i, 'Newer imagery or the sites show a different count.'));
+      st.push({ text: `${trailers} trailers visible across audited sites on the imagery date`, ...rest, sources: [auditSrc('satellite imagery count', i.pack!.builtAt, cite)], asOf: i.pack!.builtAt });
+    }
   }
   if (i.microsite?.network?.dailyTrailerMoves) st.push({ text: `${i.microsite.network.dailyTrailerMoves} daily trailer moves (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'Their yard or TMS data shows a different volume.' });
   return section('volume', st, ['Measured shipments per day', 'Peak season multiplier'], now);
@@ -346,10 +363,11 @@ function yardSection(i: AccountInputs, now: Date): Section {
   const a = auditedSites(i.pack);
   if (a.kept.length) {
     const c = (f: (s: PackSite) => boolean) => a.kept.filter(f).length;
+    const { cite, rest } = splitCite(auditTruth(i, 'A site visit shows different yard features.'));
     st.push({
       text: `Across ${plural(a.kept.length, 'audited site')}: ${c((s) => s.classification.dropYard)} with a drop yard, ${c((s) => s.classification.guardShack)} with a guard shack, ${c((s) => s.classification.truckGate)} with a truck gate, ${c((s) => s.classification.preGateStaging)} with pre-gate staging`,
-      truth: 'VERIFIED_PUBLIC',
-      sources: [auditSrc('satellite audit', i.pack!.builtAt)],
+      ...rest,
+      sources: [auditSrc('satellite audit', i.pack!.builtAt, cite)],
       asOf: i.pack!.builtAt,
     });
   }
@@ -358,13 +376,21 @@ function yardSection(i: AccountInputs, now: Date): Section {
   return section('yard', st, unknowns, now);
 }
 
-const VENDORS = ['PINC', 'Kaleris', 'Terminal Industries', 'FourKites', 'project44', 'Blue Yonder', 'Manhattan Associates', 'Manhattan', 'SAP', 'Oracle', 'o9', 'Kinaxis', 'Descartes', 'C3 Solutions', 'Yard Management Solutions', 'Samsara', 'Motive', 'Trimble', 'Omnitracs', 'Transplace', 'Uber Freight', 'Gatik', 'Aurora', 'Kodiak', 'Outrider'];
+const VENDORS = ['PINC', 'Kaleris', 'Terminal Industries', 'FourKites', 'project44', 'Blue Yonder', 'Manhattan Associates', 'SAP', 'Oracle', 'o9', 'Kinaxis', 'Descartes', 'C3 Solutions', 'Yard Management Solutions', 'Samsara', 'Motive', 'Trimble', 'Omnitracs', 'Transplace', 'Uber Freight', 'Gatik', 'Aurora', 'Kodiak', 'Outrider'];
+/** Vendor names that are also places or words: only counted with a company qualifier next to them. */
+const QUALIFIED: Record<string, RegExp> = {
+  Aurora: /\bAurora (Innovation|Driver|autonomous|trucks?)\b/,
+  Motive: /\bMotive (Technologies|fleet|telematics|ELD|dashcams?|AI)\b|\bgomotive\b/,
+  Kodiak: /\bKodiak (Robotics|autonomous|trucks?)\b/,
+  Trimble: /\bTrimble\b(?!,? (county|street|road|avenue|park))/,
+  Oracle: /\bOracle\b(?! (Park|Arena|Road))/,
+};
 /** What each vendor does, so an autonomous-freight partner is never read as a yard system. */
 const VENDOR_FUNCTION: Record<string, string> = { PINC: 'yard management', Kaleris: 'yard management', 'Terminal Industries': 'yard automation', FourKites: 'freight visibility', project44: 'freight visibility', 'Blue Yonder': 'supply chain software', 'Manhattan Associates': 'supply chain software', Manhattan: 'supply chain software', SAP: 'ERP / supply chain software', Oracle: 'ERP / supply chain software', o9: 'supply chain planning', Kinaxis: 'supply chain planning', Descartes: 'logistics software', 'C3 Solutions': 'dock scheduling / yard', 'Yard Management Solutions': 'yard management', Samsara: 'fleet telematics', Motive: 'fleet telematics', Trimble: 'fleet / transportation software', Omnitracs: 'fleet telematics', Transplace: 'managed transportation', 'Uber Freight': 'freight brokerage / managed transportation', Gatik: 'autonomous freight', Aurora: 'autonomous freight', Kodiak: 'autonomous freight', Outrider: 'autonomous yard trucks' };
-const vendorRe = (v: string) => new RegExp(`\\b${v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, v === 'SAP' || v === 'PINC' || v === 'o9' ? '' : 'i');
+const vendorRe = (v: string) => QUALIFIED[v] ?? new RegExp(`\\b${v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, v === 'SAP' || v === 'PINC' || v === 'o9' ? '' : 'i');
 
 function vendorStatus(text: string): string {
-  if (/\bpilot\w*\b/i.test(text)) return 'PILOT';
+  if (/\bpilot(s|ed|ing)?\b(?! plants?\b| lines?\b| facilit)/i.test(text)) return 'PILOT';
   if (/\b(previously|formerly|replaced|former)\b/i.test(text)) return 'HISTORICAL';
   return 'PUBLIC MENTION';
 }
@@ -419,7 +445,7 @@ function economicsSection(i: AccountInputs, now: Date): Section {
       text: `${money(i.roi.hardSavingsAnnual)} to ${money(i.roi.totalValueAnnual)} a year across ${plural(i.roi.facilities, 'facility', 'facilities')} (modeled, not observed pain)`,
       truth: 'MODELED_ESTIMATE',
       sources: [{ kind: 'roi', ref: i.roi.calculatorVersion, label: 'shared ROI engine', url: null, at: null }],
-      model: { inputs: { facilities: i.roi.facilities, calculator: i.roi.calculatorVersion ?? 'shared engine' }, formula: 'shared ROI engine (src/lib/microsites/roi.ts) over the facility mix: hard savings (labor, detention, paper) to total value (plus modeled throughput and standardization)', range: [i.roi.hardSavingsAnnual, i.roi.totalValueAnnual], unit: 'USD per year', assumptions: i.roi.assumptions.length ? i.roi.assumptions : ['Engine defaults'] },
+      model: { inputs: { facilities: i.roi.facilities, calculator: i.roi.calculatorVersion ?? 'shared engine' }, formula: 'shared ROI engine (src/lib/microsites/roi.ts) over the facility mix: hard savings (labor, detention, paper) to total value (plus modeled production capacity and standardization)', range: [i.roi.hardSavingsAnnual, i.roi.totalValueAnnual], unit: 'USD per year', assumptions: i.roi.assumptions.length ? i.roi.assumptions : ['Engine defaults'] },
     });
   }
   const impacts = i.bids.filter((b) => b.type === 'impact' || b.type === 'metric');
@@ -468,10 +494,10 @@ const stripGuess = (s: string) => s.replace(/^my guess is (that )?/i, '').replac
 
 function hypothesisViews(i: AccountInputs, now: Date): HypothesisView[] {
   const verified = new Set(liveFacts(i, now).map((f) => f.id));
-  const objection = i.bids.find((b) => b.type === 'objection');
-  const confirmed = i.bids.find((b) => b.type === 'business_problem');
-  return i.hypotheses.slice(0, 3).map((h) => {
-    const truth: TruthClass = h.status === 'rejected' || objection ? 'CONTRADICTED' : h.status === 'confirmed' || confirmed ? 'BUYER_CONFIRMED' : 'INFERENCE';
+  // A BID speaks only to the hypothesis it was captured against. A withdrawn (rejected) draft is Casey's call, not the buyer's: it is not shown.
+  return i.hypotheses.filter((h) => h.status !== 'rejected').slice(0, 3).map((h) => {
+    const mine = i.bids.filter((b) => b.hypothesisId === h.id);
+    const truth: TruthClass = mine.some((b) => b.type === 'objection') ? 'CONTRADICTED' : h.status === 'confirmed' || mine.some((b) => b.type === 'business_problem') ? 'BUYER_CONFIRMED' : 'INFERENCE';
     const obsVerified = !!h.primarySignalId && verified.has(h.primarySignalId);
     return {
     id: h.id,
@@ -495,12 +521,12 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], wedge: Wedge): 
   const out: DiscoveryQuestion[] = [];
   if (top && !has('business_problem')) out.push({ type: 'VERIFY_PROBLEM', question: top.discoveryQuestion ?? `Does ${top.problem} happen at ${where}?`, why: 'The problem is still our inference; a yes or no changes whether to pursue.' });
   if (top?.rootCause && !has('root_cause')) out.push({ type: 'ROOT_CAUSE', question: `When it happens, is it ${top.rootCause.charAt(0).toLowerCase()}${top.rootCause.slice(1).replace(/\.$/, '')}, or something else?`, why: 'The root cause decides whether yard visibility is the fix.' });
-  if (!has('impact') && !has('metric')) out.push({ type: 'IMPACT', question: 'When the yard backs up, where does it show: detention, overtime, or missed shipments?', why: 'Without an observed cost, the economics stay modeled.' });
+  if (!has('impact') && !has('metric')) out.push({ type: 'IMPACT', question: 'When the yards back up, where does it show: detention, overtime, or missed shipments?', why: 'Without an observed cost, the economics stay modeled.' });
   if (!has('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do trailers get checked in and found at ${where} today?`, why: 'The current process is unknown; it sets the pilot scope.' });
   const techKnown = i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)));
-  if (!techKnown) out.push({ type: 'CURRENT_STACK', question: 'What system, if any, tracks trailers in the yard today?', why: 'An incumbent changes the wedge; never assumed from a mention.' });
+  if (!techKnown) out.push({ type: 'CURRENT_STACK', question: 'What system, if any, tracks trailers in your yards today?', why: 'An incumbent changes the wedge; never assumed from a mention.' });
   out.push({ type: 'OWNERSHIP', question: 'Who owns yard performance across the plants and DCs?', why: 'Ownership is never guessed from a title.' });
-  if (!has('future_state')) out.push({ type: 'DESIRED_FUTURE', question: 'What would a good yard look like a year from now?', why: 'The desired future frames any proposal.' });
+  if (!has('future_state')) out.push({ type: 'DESIRED_FUTURE', question: 'What would good yards look like a year from now?', why: 'The desired future frames any proposal.' });
   if (!has('constraint')) out.push({ type: 'CHANGE_REQUIREMENT', question: 'What would a change have to clear: IT, security, the sites themselves?', why: 'Requirements decide whether a pilot can start.' });
   return out.slice(0, 7);
 }
@@ -521,7 +547,7 @@ function siteWedge(i: AccountInputs): Wedge {
     whatWeKnow: [`Audit verdict ${s.verification?.verdict}${s.verification?.citations.length ? ` with ${plural(s.verification.citations.length, 'citation')}` : ''}`, `Operator: ${s.verification?.operator ?? 'self'}; tenancy: ${s.verification?.tenancy ?? 'unknown'}`, ...(s.verification?.imageryDate ? [`Imagery ${s.verification.imageryDate}`] : [])],
     whatWeModel: s.yardMetrics.dockDoorCount ? [`${s.yardMetrics.dockDoorCount}-${s.yardMetrics.dockDoorCount * 3} trailer moves a day (1 to 3 turns per door; not measured)`] : [],
     whyPilot: `A self-operated ${s.archetypeName.toLowerCase()} with ${features(s).slice(0, 2).join(' and ') || 'visible yard activity'}: a contained place to prove value (inference).`,
-    mustVerify: ['The current yard process (gate, check-in, trailer checks)', 'The system in use, if any', 'Who owns the site yard', ...(s.verification?.tenancy === 'unknown' ? ['Tenancy'] : []), ...(s.verification?.verdict === 'probable' ? ['That the site is theirs and active (verification is probable)'] : [])],
+    mustVerify: ['The current yard process (gate, check-in, trailer checks)', 'The system in use, if any', 'Who runs yard operations at this site', ...(s.verification?.tenancy === 'unknown' ? ['Tenancy'] : []), ...(s.verification?.verdict === 'probable' ? ['That the site is theirs and active (verification is probable)'] : [])],
   }));
   const expansion = group.length >= 2 ? ['PILOT: one candidate site', 'PROOF: measured before/after at that site', `REGIONAL: the other ${plural(group.length - 1, `${archetype.toLowerCase()} site`)} audited`, ...(i.pack?.account.networkCount ? [`NETWORK: up to ${i.pack.account.networkCount} facilities (only after proof)`] : [])] : ['PILOT: one candidate site', 'PROOF: measured before/after at that site'];
   return { archetype: `${archetype} (${plural(group.length, 'self-operated site')} audited)`, note: 'Inference from audited sites; nothing about site-level conditions is assumed.', candidates, expansion };
@@ -587,7 +613,11 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     whyNotPursue: whyNot,
   };
 
-  const tech = sections.technology.statements[0];
+  // Current tech is what the BUYER said; a public mention is labelled as only that, never adoption.
+  const techBuyer = sections.technology.statements.find((s) => s.truth === 'BUYER_CONFIRMED');
+  const techPublic = sections.technology.statements.find((s) => s.truth === 'VERIFIED_PUBLIC');
+  const currentTech = techBuyer ? techBuyer.text : techPublic ? `Public mention only: ${techPublic.text}` : 'Unknown';
+  const dealStatement = sections.commercial.statements.find((s) => s.sources.some((x) => x.ref === 'deal-truth') || (s.truth === 'UNKNOWN' && /deal state/.test(s.text)));
   const reach = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
   const persona = reach.find((p) => OWNER_TITLE.test(p.title ?? '')) ?? i.personas.find((p) => OWNER_TITLE.test(p.title ?? '')) ?? reach[0] ?? i.personas[0];
   const owner = persona ? `${persona.name}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)` : 'Unknown: no person at this account yet.';
@@ -600,10 +630,10 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     freight: sections.freight.statements[0]?.text ?? 'Unknown',
     bestFact: live[0]?.quote ?? null,
     topHypothesis: top ? top.problem : noHypothesis,
-    currentTech: tech ? tech.text : 'Unknown',
+    currentTech,
     likelyOwner: owner,
     relationship: sections.relationships.statements[0]?.text ?? 'None recorded',
-    commercialState: sections.commercial.statements[0]?.text ?? 'Unknown',
+    commercialState: dealStatement?.text ?? 'HubSpot deal state not read',
     biggestUnknown,
     nextQuestion: discovery[0]?.question ?? null,
     nextAction: nextAction(i, hypotheses, now, discovery),

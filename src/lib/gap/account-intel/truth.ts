@@ -52,7 +52,8 @@ const PUBLIC_BACKING = new Set<Source['kind']>(['evidence', 'audit', 'persona', 
 
 export function statementProblems(s: Statement): string[] {
   const out: string[] = [];
-  if (s.truth === 'VERIFIED_PUBLIC' && !s.sources.some((x) => PUBLIC_BACKING.has(x.kind) && (x.url || x.ref))) out.push('verified_public_without_source');
+  // An audit backs a VERIFIED statement only through a cited URL; every other first-party record needs a ref or URL.
+  if (s.truth === 'VERIFIED_PUBLIC' && !s.sources.some((x) => PUBLIC_BACKING.has(x.kind) && (x.kind === 'audit' ? !!x.url : !!(x.url || x.ref)))) out.push('verified_public_without_source');
   if (s.truth === 'BUYER_CONFIRMED' && !s.sources.some((x) => x.kind === 'bid')) out.push('buyer_confirmed_without_bid');
   if (s.truth === 'MODELED_ESTIMATE') {
     const m = s.model;
