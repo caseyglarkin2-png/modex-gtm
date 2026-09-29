@@ -15,6 +15,7 @@ import { orderStatements, sectionStatus, statementProblems, type SectionStatus, 
 import { suggestAngle } from '../motion/persona-angle';
 import { sellerRelevance } from '../research/continuity';
 import { traitsOf } from '../intake/traits';
+import { deriveFit, ENTITY_LABEL, FIT_LABEL, operatingClaims, type EntityType, type YardFlowFit } from '../entity/fit';
 import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { computeAccountMotion, titleSeniority } from '../motion/account-motion';
@@ -207,6 +208,8 @@ export interface Glance {
   nextAction: string;
   /** The motion, in one line ("Fact-led: Dana Ops, on the verified fact." / "No good motion yet: ..."). */
   motion: string;
+  /** "3PL / contract logistics · Direct buyer" (entity type, then YardFlow fit). */
+  fit: string;
 }
 
 export type MotionType = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'REFERRAL_LED' | 'RELATIONSHIP_LED' | 'FACT_LED';
@@ -227,6 +230,8 @@ export interface AccountIntelligenceBrief {
   wedge: Wedge;
   glance: Glance;
   motion: Motion;
+  /** What the company is (descriptive) and whether it could buy YardFlow (from operations), with the evidence. */
+  fit: { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[] };
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
   /** The open deals when dealState is ACTIVE (name and stage as HubSpot said them moments ago). */
@@ -319,6 +324,8 @@ function identitySection(i: AccountInputs, now: Date): Section {
     const t = i.pack.account.archetype;
     st.push({ text: `Company type (audit classification): ${t}`, truth: 'INFERENCE', sources: [auditSrc('demo pack', i.pack.builtAt)], falsifiableBy: 'Its filings or site describe a different operating model.' });
   }
+  const fit = accountFit(i, now);
+  st.push({ text: `${fit.entityType ? ENTITY_LABEL[fit.entityType] : 'Company type unknown'}; YardFlow fit: ${FIT_LABEL[fit.fit]}. ${fit.why}${fit.evidence.length ? ` Evidence: ${fit.evidence.join('; ')}.` : ''}`, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'Its own sites and operations say otherwise (who runs the facilities, yards and fleet).' });
   if (i.siblings.length) st.push({ text: `Duplicate account rows share this name: ${i.siblings.join(', ')}. People and facts may be split across them until they are merged.`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
   const sc = i.scout;
   if (sc?.what || sc?.entityType) st.push({ text: `Scout: ${[sc.entityType ? `a ${sc.entityType === '3pl' ? '3PL' : sc.entityType}` : null, sc.what].filter(Boolean).join('; ')}${sc.domain ? ` (${sc.domain})` : ''}`, truth: 'INFERENCE', sources: [SCOUT(sc.at)], falsifiableBy: 'Their own site or filings describe a different business.' });
@@ -751,7 +758,7 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
       const live = liveFacts(i, now);
       return live.length && live.every((f) => sensitivityOf(f.quote)) ? sensitivityOf(live[0].quote) : null;
     })(),
-    partner: isPartner(i),
+    fit: accountFit(i, now),
   });
   const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0])?.name ?? null : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
   return { type: a.kind, who, why: a.why };
@@ -763,9 +770,35 @@ const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ??
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
 const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern)\b/i;
 
-/** A logistics provider (3PL, carrier, broker) by its record or by Scout: a partner or channel, not a shipper prospect. */
-function isPartner(i: AccountInputs): boolean {
-  return PARTNER_VERTICAL.test(i.account.vertical ?? '') || ['3pl', 'carrier', 'broker'].includes(i.scout?.entityType ?? '');
+/** What the account record's vertical says the company is (descriptive only; never the fit). */
+function typeFromVertical(v: string | null): EntityType | null {
+  const s = v ?? '';
+  if (/\b(port|terminal|marine)\b/i.test(s)) return 'port_terminal';
+  if (/\bbroker/i.test(s)) return 'broker';
+  if (/\b(3pl|logistics|warehous|contract logistics)\b/i.test(s)) return '3pl';
+  if (/\b(carrier|trucking|transport|freight|rail)\b/i.test(s)) return 'carrier';
+  if (/\b(retail|grocery|e-?commerce)\b/i.test(s)) return 'retailer';
+  if (/\b(distribut|wholesale|foodservice)\b/i.test(s)) return 'distributor';
+  if (/\b(food|beverage|cpg|consumer|manufactur|chemical|auto|industrial|paper|packag|pharma|agri|building)\b/i.test(s)) return 'manufacturer';
+  if (/\b(software|technology|saas|consult)\b/i.test(s)) return 'vendor';
+  return null;
+}
+
+/**
+ * The account's YardFlow fit: entity type from Scout, else the record's vertical (descriptive); fit from the
+ * OPERATING evidence GAP holds (audited sites, a sourced facility count, live facts and Scout claims about
+ * facilities, yards, fleets). A 3PL or carrier that runs sites is a direct buyer, never a "partner" by label.
+ */
+export function accountFit(i: AccountInputs, now: Date): { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[] } {
+  const entityType = (i.scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
+  const a = auditedSites(i.pack);
+  const evidence: string[] = [];
+  if (a.kept.length) evidence.push(`${plural(a.kept.length, 'audited site')} with yards (${a.self.length} self-operated)`);
+  if (i.facilityFact?.status === 'verified') evidence.push(`sourced facility count: ${i.facilityFact.facilityCount}`);
+  for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${f.quote.slice(0, 90)}`);
+  for (const c of operatingClaims([...(i.scout?.network ?? []), ...(i.scout?.freight ?? [])])) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
+  const f = deriveFit({ entityType, operating: evidence.length, ambiguous: false, what: i.scout?.what ?? null });
+  return { entityType, fit: f.fit, why: f.why, evidence: evidence.slice(0, 4) };
 }
 
 // ---------------------------------------------------------------- the build
@@ -800,7 +833,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   if (i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)))) whyNot.push('The buyer confirmed an incumbent system: a displacement story needs its own evidence.');
   const aud = auditedSites(i.pack);
   if (aud.kept.length && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
-  if (/\b(3pl|logistics|carrier|freight|trucking|broker)\b/i.test(i.account.vertical ?? '')) whyNot.push(`The account record says ${i.account.vertical}: a logistics provider runs yards for its customers, so the decision may sit with the shipper. Treat it as a partner or channel, not a shipper prospect.`);
+  const fit = accountFit(i, now);
+  if (fit.fit === 'PARTNER' || fit.fit === 'NOT_FIT' || fit.fit === 'UNKNOWN') whyNot.push(`${FIT_LABEL[fit.fit]}: ${fit.why}`);
   const sensitive = live[0] ? sensitivityOf(live[0].quote) : null;
   if (sensitive) whyNot.push(`The best fact is sensitive (${sensitive}): reference the network change, never the people affected, or choose a different opener.`);
 
@@ -846,7 +880,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     nextQuestion: discovery[0]?.question ?? null,
     nextAction: nextAction(i, motion, now),
     motion: motionLine(motion),
+    fit: `${fit.entityType ? ENTITY_LABEL[fit.entityType] : 'Type unknown'} · ${FIT_LABEL[fit.fit]}`,
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion };
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion };
 }

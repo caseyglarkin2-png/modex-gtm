@@ -1,40 +1,43 @@
 /**
- * Release B1: SCOUT, the cheap first pass on a company GAP does not know. The
- * verdict is DERIVED from cited evidence, never taken from the model's opinion:
- * a shipper with cited network evidence is LIKELY ICP, a shipper without it is
- * MAYBE, a 3PL / carrier / broker / vendor is NOT ICP, a name that could be
- * several companies is AMBIGUOUS, and nothing usable is INSUFFICIENT. A claim
- * without a URL is never evidence.
+ * SCOUT (Releases B1 and J). ENTITY TYPE is descriptive; the stored verdict is the YARDFLOW FIT, derived from
+ * cited operating evidence (entity/fit.ts), never from the label: a 3PL, carrier or terminal that runs
+ * facilities is a direct buyer. Name rules settle only the genuinely obvious. A claim without a URL is never
+ * evidence; a failed web pass stores nothing.
  */
 import { describe, expect, it } from 'vitest';
 import { classifyByName, deriveVerdict, parseScout, scoutCompany } from '@/lib/gap/entity/scout';
 
 describe('name rules (free, deterministic)', () => {
-  it('flags carriers, brokers, 3PLs and vendors by name; says nothing about a plain name', () => {
-    expect(classifyByName('Werner Enterprises Trucking').entityType).toBe('carrier');
-    expect(classifyByName('Acme Freight Brokerage LLC').entityType).toBe('broker');
-    expect(classifyByName('Summit Logistics Group').entityType).toBe('3pl');
-    expect(classifyByName('Yardly Software Inc').entityType).toBe('vendor');
-    expect(classifyByName('Harbor Foods Group').entityType).toBeNull();
-    expect(classifyByName('Costa Farms').entityType).toBeNull();
+  it('guess the type of a carrier, broker, 3PL or terminal, and leave the fit open', () => {
+    expect(classifyByName('Werner Enterprises Trucking')).toMatchObject({ entityType: 'carrier', verdict: 'UNKNOWN', final: false });
+    expect(classifyByName('Acme Freight Brokerage LLC')).toMatchObject({ entityType: 'broker', verdict: 'UNKNOWN', final: false });
+    expect(classifyByName('Summit Logistics Group')).toMatchObject({ entityType: '3pl', verdict: 'UNKNOWN', final: false });
+    expect(classifyByName('Harbor Foods Group')).toMatchObject({ entityType: null, verdict: 'UNKNOWN', final: false });
   });
-
-  it('a name rule alone never says LIKELY ICP', () => {
-    expect(classifyByName('Harbor Foods Group').verdict).toBe('INSUFFICIENT');
-    expect(classifyByName('Summit Logistics Group').verdict).toBe('NOT_ICP');
+  it('settle only the genuinely obvious (software, media, finance, healthcare, education, public sector, us)', () => {
+    for (const n of ['FreightRoll', 'Transport Topics', 'Blackstone', 'Balyasny Asset Mangement', 'Pacific Dental Services', 'Bates College', 'Motorcycle Section Suffolk County Sheriffs Office', 'Yardly Software Inc']) {
+      expect(classifyByName(n), n).toMatchObject({ verdict: 'NOT_FIT', final: true });
+    }
+    expect(classifyByName('FreightRoll').why).toMatch(/our own company/);
+  });
+  it('REGRESSION: a logistics, transportation, distribution-services, carrier or broker name is never rejected by name', () => {
+    for (const n of ['Forward Air', 'Gnosis Freight', 'Escutia express', 'Logistic Group of America', 'ABC Transportation', 'ABC Distribution Services', 'Freight Buyers Club', 'Nike SA E2E Supply Chain Optimization Expert', 'AkzoNobel', 'Costa Farms']) {
+      expect(classifyByName(n).final, n).toBe(false);
+    }
   });
 });
 
-describe('verdict is derived from cited evidence', () => {
+describe('the fit comes from cited operations, not the label', () => {
   const net = [{ claim: 'Operates 12 distribution centers across the Southeast.', url: 'https://harborfoods.example/about' }];
-  it('shipper + cited network evidence is LIKELY ICP; without it MAYBE', () => {
-    expect(deriveVerdict({ entityType: 'shipper', network: net, freight: [], ambiguous: false })).toBe('LIKELY_ICP');
-    expect(deriveVerdict({ entityType: 'shipper', network: [], freight: [], ambiguous: false })).toBe('MAYBE_ICP');
+  it('a shipper with operations is a direct buyer; without them a potential one', () => {
+    expect(deriveVerdict({ entityType: 'shipper', network: net, freight: [], ambiguous: false })).toBe('DIRECT_BUYER');
+    expect(deriveVerdict({ entityType: 'shipper', network: [], freight: [], ambiguous: false })).toBe('POTENTIAL_DIRECT_BUYER');
   });
-  it('3PL, carrier, broker, vendor are NOT ICP; ambiguous identity wins; unknown type is INSUFFICIENT', () => {
-    for (const t of ['3pl', 'carrier', 'broker', 'vendor'] as const) expect(deriveVerdict({ entityType: t, network: net, freight: [], ambiguous: false })).toBe('NOT_ICP');
-    expect(deriveVerdict({ entityType: 'shipper', network: net, freight: [], ambiguous: true })).toBe('AMBIGUOUS');
-    expect(deriveVerdict({ entityType: null, network: [], freight: [], ambiguous: false })).toBe('INSUFFICIENT');
+  it('a 3PL, carrier or terminal operator with operations is a direct buyer; a pure broker is not; a vendor never is', () => {
+    for (const t of ['3pl', 'carrier', 'port_terminal'] as const) expect(deriveVerdict({ entityType: t, network: net, freight: [], ambiguous: false })).toBe('DIRECT_BUYER');
+    expect(deriveVerdict({ entityType: 'broker', network: [], freight: [], ambiguous: false })).toBe('NOT_FIT');
+    expect(deriveVerdict({ entityType: 'vendor', network: net, freight: [], ambiguous: false, what: 'Yard management software.' })).toBe('PARTNER');
+    expect(deriveVerdict({ entityType: 'shipper', network: net, freight: [], ambiguous: true })).toBe('UNKNOWN');
   });
 });
 
@@ -58,34 +61,22 @@ describe('parse: a claim without a URL is never evidence', () => {
 });
 
 describe('scoutCompany', () => {
-  it('a name-rule NOT ICP never spends a web call', async () => {
+  it('a genuinely obvious name never spends a web call', async () => {
     let calls = 0;
-    const r = await scoutCompany('Summit Logistics Group', { ask: async () => { calls += 1; return ''; } });
+    const r = await scoutCompany('Acme Staffing', { ask: async () => { calls += 1; return ''; } });
     expect(calls).toBe(0);
-    expect(r.verdict).toBe('NOT_ICP');
-    expect(r.basis).toBe('name_rules');
+    expect(r).toMatchObject({ verdict: 'NOT_FIT', basis: 'name_rules' });
   });
-  it('runs the web pass and derives the verdict from its citations', async () => {
-    const r = await scoutCompany('Harbor Foods Group', { ask: async () => '{"entityType":"shipper","domain":"harborfoods.com","ambiguous":false,"what":"Foodservice distributor","network":[{"claim":"Operates 12 distribution centers.","url":"https://harborfoods.example/about"}],"freight":[],"unknowns":[]}' });
-    expect(r.verdict).toBe('LIKELY_ICP');
-    expect(r.basis).toBe('web');
-    expect(r.why).toMatch(/shipper with cited network evidence/);
+  it('a logistics name IS checked, and a 3PL running DCs comes back a direct buyer', async () => {
+    let calls = 0;
+    const r = await scoutCompany('Summit Logistics Group', { ask: async () => { calls += 1; return '{"entityType":"3pl","domain":"summitlog.example","ambiguous":false,"what":"Contract logistics provider","network":[{"claim":"Operates 40 distribution centers for retail and CPG customers.","url":"https://summitlog.example/network"}],"freight":[],"unknowns":[]}'; } });
+    expect(calls).toBe(1);
+    expect(r).toMatchObject({ verdict: 'DIRECT_BUYER', entityType: '3pl', basis: 'web' });
+    expect(r.why).toMatch(/owns yard problems even without owning the freight/);
   });
-  it('no web search configured or a failed call is INSUFFICIENT, said plainly', async () => {
+  it('a failed call is a failure (never a verdict), said plainly', async () => {
     const r = await scoutCompany('Harbor Foods Group', { ask: async () => { throw new Error('quota'); } });
-    expect(r.verdict).toBe('INSUFFICIENT');
+    expect(r.failed).toBe(true);
     expect(r.why).toMatch(/web pass failed/);
-  });
-});
-
-describe('Release G: more free name rules, never a shipper', () => {
-  it('our own company, media, finance, healthcare, education and public sector are NOT ICP by name', () => {
-    for (const n of ['FreightRoll', 'Transport Topics', 'Blackstone', 'Balyasny Asset Mangement', 'Pacific Dental Services', 'Bates College', 'Motorcycle Section Suffolk County Sheriffs Office', 'Forward Air', 'Gnosis Freight', 'Escutia express', 'Logistic Group of America', 'Freight Buyers Club']) {
-      expect(classifyByName(n).verdict, n).toBe('NOT_ICP');
-    }
-    expect(classifyByName('FreightRoll').why).toMatch(/our own company/);
-  });
-  it('shipper-looking names are left for Scout (never judged NOT ICP by name)', () => {
-    for (const n of ['Harbor Foods Group', 'Costa Farms', 'AkzoNobel', 'Nestlé', 'Nike SA E2E Supply Chain Optimization Expert', 'Industrial Electric Mfg. (IEM)']) expect(classifyByName(n).verdict, n).toBe('INSUFFICIENT');
   });
 });

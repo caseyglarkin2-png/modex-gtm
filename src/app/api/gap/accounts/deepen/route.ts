@@ -12,12 +12,13 @@ import { loadAccountInputs } from '@/lib/gap/account-intel/load';
 import { buildAccountBrief } from '@/lib/gap/account-intel/build';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { runEvidenceResearch } from '@/lib/gap/research/run';
+import { scoutCandidate } from '@/lib/gap/entity/candidates';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
 
-const Body = z.object({ accountName: z.string().trim().min(1).max(300), section: z.enum(['catalysts', 'footprint', 'technology', 'freight']) }).strict();
+const Body = z.object({ accountName: z.string().trim().min(1).max(300), section: z.enum(['identity', 'catalysts', 'footprint', 'technology', 'freight']) }).strict();
 
 export async function POST(request: NextRequest) {
   const g = await intakeGuard();
@@ -36,6 +37,13 @@ export async function POST(request: NextRequest) {
   const task = plan.tasks.find((t) => t.section === section && t.provider === 'research');
   if (!task) return NextResponse.json({ error: 'not_in_plan', reason: plan.skipped.find((s) => s.section === section)?.reason ?? 'The plan does not ask for this section now.' }, { status: 409 });
   // One focused run; no side trip for currentness on unrelated facts (it would blur this section's outcome).
+  if (section === 'identity') {
+    // SCOUT depth: what the company is and what it operates (the same Scout as candidates; nothing is created).
+    const r = await scoutCandidate(prisma, { company: name, actor: g.email, now });
+    await prisma.gapAuditEvent.create({ data: { kind: 'research.completed', actor: g.email, subject_type: 'account', subject_id: name, payload: { orchestrator: 'deepen', section, outcome: 'refused' in r ? r.refused : r.verdict } } }).catch(() => null);
+    if ('refused' in r) return NextResponse.json({ error: r.refused, reason: r.why ?? 'Scout could not run now; nothing was saved.' }, { status: r.refused === 'web_failed' ? 502 : 429 });
+    return NextResponse.json({ section, outcome: 'scouted', fit: r.verdict, entityType: r.entityType, facts: r.network.length + r.freight.length, rejected: 0, notes: [r.why] });
+  }
   const result = await runEvidenceResearch(prisma, { accountName: name, personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: g.email, now, focus: task.focus, context: { orchestrator: 'deepen', section }, seekCurrentness: false });
   return NextResponse.json({ section, outcome: result.outcome, facts: result.facts.length, rejected: result.rejected.length, notes: result.notes });
 }

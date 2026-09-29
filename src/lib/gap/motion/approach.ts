@@ -37,8 +37,11 @@ export interface ApproachInput {
   sensitiveOnly?: string | null;
   /** The approved thesis needs review before it is used. */
   staleThesis?: boolean;
-  /** The account is a logistics provider (3PL, carrier, broker): a partner or channel, not a shipper prospect. */
-  partner?: boolean;
+  /**
+   * YardFlow fit (entity/fit.ts): what the company is never decides this; its operations do. PARTNER and NOT_FIT
+   * hold (never a direct-buyer pitch); DIRECT_BUYER, POTENTIAL_DIRECT_BUYER and UNKNOWN go on to the other rules.
+   */
+  fit?: { fit: string; why: string };
 }
 
 export interface Approach {
@@ -57,7 +60,8 @@ export function decideApproach(x: ApproachInput): Approach {
   if (x.conversation) return { kind: 'FOLLOW_UP', why: `A live conversation with ${x.conversation.who} (${cls(x.conversation.responseClass)}, ${x.conversation.at.slice(0, 10)}): continue that thread, never a cold first touch.` };
   if (x.touchHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.touchHold}` };
   if (!x.reachable) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: nobody reachable here (do not contact, or no email).' };
-  if (x.partner) return { kind: 'NO_GOOD_MOTION', why: 'Not a shipper prospect: a logistics provider runs yards for its customers. Work it as a partner or channel, never with a shipper pitch.' };
+  if (x.fit?.fit === 'PARTNER') return { kind: 'NO_GOOD_MOTION', why: `Not a direct buyer: ${x.fit.why} Work it as a partnership, never with a buyer pitch.` };
+  if (x.fit?.fit === 'NOT_FIT') return { kind: 'NO_GOOD_MOTION', why: `Not a YardFlow fit on the evidence: ${x.fit.why}` };
   const t = x.source ? traitsOf(x.source.sourceType) : null;
   const known = x.source && t && (t.engaged || t.relational) ? x.source.context ?? x.source.name : null;
   // Fact-led means problem-led: a usable verified fact AND a thesis grounded in it that Casey can stand behind.

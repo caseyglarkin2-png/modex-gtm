@@ -1459,9 +1459,9 @@ model GapAccountCandidate {
   /// normalizeCompanyName(company): one candidate per company however it was spelled
   company_key  String    @unique
   domain       String?
-  /// LIKELY_ICP | MAYBE_ICP | NOT_ICP | AMBIGUOUS | INSUFFICIENT (null until scouted)
+  /// The YardFlow fit (entity/fit.ts): DIRECT_BUYER | POTENTIAL_DIRECT_BUYER | PARTNER | NOT_FIT | UNKNOWN (null until judged)
   verdict      String?
-  /// shipper | 3pl | carrier | broker | vendor | other
+  /// Descriptive only: shipper | retailer | distributor | manufacturer | 3pl | carrier | port_terminal | broker | vendor | consultant | other
   entity_type  String?
   /// The ScoutResult (what, why, cited network / freight claims, unknowns, basis)
   scout        Json?

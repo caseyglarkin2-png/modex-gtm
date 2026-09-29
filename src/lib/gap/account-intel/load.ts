@@ -147,7 +147,11 @@ export async function loadAccountInputs(
   const roi = roiFrom(micro?.roiModel) ?? (pack ? roiFrom(buildAccountRoiModel(pack)) : null);
   const fact = getFacilityFact(accountName);
   // What Scout found while this was a candidate (added or mapped here): leads, never verified facts.
-  const candidate: Row | null = prisma.gapAccountCandidate?.findFirst ? await prisma.gapAccountCandidate.findFirst({ where: { account_name: accountName, decision: { in: ['added', 'mapped'] }, scouted_at: { not: null } }, orderBy: { scouted_at: 'desc' } }).catch(() => null) : null;
+  // What Scout found: while this was a candidate (added or mapped here), or an identity Scout run on the account
+  // itself (the same normalized company key). Leads, never verified facts.
+  const candidate: Row | null = prisma.gapAccountCandidate?.findFirst
+    ? await prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
+    : null;
   const [touches, convs] = await Promise.all([
     loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()),
     loadAccountConversations(prisma, [accountName], now).catch(() => new Map()),

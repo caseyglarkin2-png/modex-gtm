@@ -1,29 +1,30 @@
 /**
  * ENTITY EXPANSION B1: SCOUT, the cheap first pass on a company GAP does not know.
  *
- *   1. Name rules (free): an obvious carrier, broker, 3PL or vendor is NOT ICP without a web call.
+ *   1. Name rules (free, entity/fit.ts): they may GUESS the entity type; they settle YardFlow fit only when it is
+ *      genuinely obvious (our own company, finance, healthcare, education, public sector, media, software).
  *   2. One grounded web pass: what the company is, its domain, and CITED network / freight claims.
  *
- * The verdict is DERIVED from cited evidence, never the model's opinion:
- *   LIKELY_ICP    a shipper (BCO) with at least one cited network claim
- *   MAYBE_ICP     a shipper with no cited network claim yet
- *   NOT_ICP       a 3PL, carrier, broker or vendor
- *   AMBIGUOUS     the name could be several companies
- *   INSUFFICIENT  nothing usable (no web pass, a failed pass, or an unknown type)
- * A claim without an http(s) URL is never evidence (it is listed as an uncited claim). Scout claims are
- * cited, not verified at source: the account brief treats them as leads, never VERIFIED_PUBLIC.
+ * ENTITY TYPE is descriptive; YARDFLOW FIT (the stored verdict) is DERIVED from cited operating evidence
+ * (entity/fit.ts), never the model's opinion and never the label alone: a 3PL running DCs is a direct buyer, a
+ * pure broker is not. A claim without an http(s) URL is never evidence (it is listed as an uncited claim). Scout
+ * claims are cited, not verified at source: the account brief treats them as leads, never VERIFIED_PUBLIC.
  */
+import { deriveFit, ENTITY_TYPES, fitFromName, operatingClaims, type EntityType, type YardFlowFit } from './fit';
 
-export type ScoutVerdict = 'LIKELY_ICP' | 'MAYBE_ICP' | 'NOT_ICP' | 'AMBIGUOUS' | 'INSUFFICIENT';
-export type EntityType = 'shipper' | '3pl' | 'carrier' | 'broker' | 'vendor' | 'other';
+export type { EntityType, YardFlowFit } from './fit';
+/** The stored verdict IS the YardFlow fit. */
+export type ScoutVerdict = YardFlowFit;
 export interface ScoutClaim {
   claim: string;
   url: string;
 }
 export interface ScoutResult {
   company: string;
-  verdict: ScoutVerdict;
+  verdict: YardFlowFit;
   entityType: EntityType | null;
+  /** The name could be several companies (identity, separate from fit). */
+  ambiguous?: boolean;
   domain: string | null;
   what: string | null;
   why: string;
@@ -35,34 +36,17 @@ export interface ScoutResult {
   failed?: boolean;
 }
 
-/**
- * Free name rules, checked in order. Each names what the company reads as; a wrong call costs nothing because
- * Casey can still map or add it. Nothing here ever says LIKELY ICP: a shipper cannot be told from its name.
- */
-const NAME_RULES: Array<[EntityType, RegExp, string]> = [
-  ['other', /\b(freightroll|yardflow)\b/i, 'our own company'],
-  ['carrier', /\b(fedex|ups|dhl|xpo|j\.?\s?b\.? hunt|schneider|werner|knight[- ]swift|old dominion|saia|estes|forward air|ryder|penske|landstar|yellow corp)\b/i, 'a carrier or logistics provider (a known brand)'],
-  ['broker', /\b(brokerage|brokers?|freight(?! buyers)|freight buyers)\b/i, 'a freight broker or freight community'],
-  ['carrier', /\b(trucking|truck lines|freight lines|motor freight|carriers?|express|transport(ation)?|trans inc|haul\w*|expedite\w*|drop (and|&) hook)\b/i, 'a carrier'],
-  ['3pl', /\b(logistics?|3pl|fulfil+ment|warehousing|supply chain solutions|distribution services)\b/i, 'a 3PL or logistics provider'],
-  ['vendor', /\b(software|technolog(y|ies)|systems|solutions|consult(ing|ants?)|advisors?|advisory|agency|audit|productions?|media|topics|news|publishing|podcast|associat(ion|es)|insurance|recruit(ing|ers)|staffing|eap)\b/i, 'a vendor, media or services firm'],
-  ['other', /\b(capital|ventures|asset man\w*|investments?|bank|blackstone|private equity|partners)\b/i, 'a finance firm'],
-  ['other', /\b(health|dental|medical|clinic|hospital|care|college|university|school|academy|sheriff'?s?|police|county|department of|city of)\b/i, 'healthcare, education or public sector'],
-];
-
-export function classifyByName(company: string): { entityType: EntityType | null; verdict: ScoutVerdict; why: string } {
-  for (const [t, re, label] of NAME_RULES) if (re.test(company)) return { entityType: t, verdict: 'NOT_ICP', why: `The name reads as ${label} (name rule only; map or add it if that is wrong).` };
-  return { entityType: null, verdict: 'INSUFFICIENT', why: 'The name alone says nothing about what the company is.' };
+/** Kept for callers: the name rule as a Scout-shaped answer (fit settled only when final). */
+export function classifyByName(company: string): { entityType: EntityType | null; verdict: YardFlowFit; final: boolean; why: string } {
+  const r = fitFromName(company);
+  return { entityType: r.entityType, verdict: r.fit, final: r.final, why: r.why };
 }
 
-export function deriveVerdict(p: { entityType: EntityType | null; network: ScoutClaim[]; freight: ScoutClaim[]; ambiguous: boolean }): ScoutVerdict {
-  if (p.ambiguous) return 'AMBIGUOUS';
-  if (p.entityType === '3pl' || p.entityType === 'carrier' || p.entityType === 'broker' || p.entityType === 'vendor') return 'NOT_ICP';
-  if (p.entityType === 'shipper') return p.network.length ? 'LIKELY_ICP' : 'MAYBE_ICP';
-  return 'INSUFFICIENT';
+export function deriveVerdict(p: { entityType: EntityType | null; network: ScoutClaim[]; freight: ScoutClaim[]; ambiguous: boolean; what?: string | null }): YardFlowFit {
+  return deriveFit({ entityType: p.entityType, operating: operatingClaims([...p.network, ...p.freight]).length, ambiguous: p.ambiguous, what: p.what ?? null }).fit;
 }
 
-const TYPES = new Set<EntityType>(['shipper', '3pl', 'carrier', 'broker', 'vendor', 'other']);
+const TYPES = new Set<EntityType>(ENTITY_TYPES);
 const httpUrl = (u: unknown) => typeof u === 'string' && /^https?:\/\/[^\s]+$/i.test(u.trim());
 
 export function parseScout(text: string): { entityType: EntityType | null; domain: string | null; ambiguous: boolean; what: string | null; network: ScoutClaim[]; freight: ScoutClaim[]; unknowns: string[] } | null {
@@ -106,36 +90,31 @@ export function parseScout(text: string): { entityType: EntityType | null; domai
 
 export const SCOUT_PROMPT = (company: string, hint: string) => `Identify the company "${company}"${hint ? ` (${hint})` : ''} for a yard-management sales team.
 Return ONLY JSON:
-{"entityType": "shipper" | "3pl" | "carrier" | "broker" | "vendor" | "other",
+{"entityType": "shipper" | "retailer" | "distributor" | "manufacturer" | "3pl" | "carrier" | "port_terminal" | "broker" | "vendor" | "consultant" | "other",
  "ambiguous": true if the name could be several different companies,
  "domain": "their corporate web domain",
- "what": "one sentence: what they make or sell",
- "network": [{"claim": "a fact about their plants, DCs, warehouses or yards", "url": "the page that says it"}],
- "freight": [{"claim": "a fact about their trucking, fleet, rail or inbound/outbound freight", "url": "the page that says it"}],
+ "what": "one sentence: what they do",
+ "network": [{"claim": "a fact about facilities they OPERATE: plants, DCs, warehouses, terminals, yards, cross-docks, ports", "url": "the page that says it"}],
+ "freight": [{"claim": "a fact about fleets, tractors, trailer pools, gates, hostlers, rail, drayage or the freight they move", "url": "the page that says it"}],
  "unknowns": ["what you could not find"]}
-"shipper" means a company that owns the goods it ships (a manufacturer, grower, distributor or retailer). Every claim needs the URL of a page that states it. If you cannot find something, leave it out and list it in unknowns. Never guess.`;
+"shipper" owns the goods it ships. A 3PL, carrier or terminal operator that RUNS facilities or fleets still gets its network and freight claims: report them. A "broker" arranges freight without running it. Every claim needs the URL of a page that states it. If you cannot find something, leave it out and list it in unknowns. Never guess.`;
 
 export async function scoutCompany(company: string, deps: { ask?: (prompt: string) => Promise<string>; hint?: string } = {}): Promise<ScoutResult> {
   const base = { company, domain: null, what: null, network: [], freight: [], unknowns: [] as string[] };
-  const rule = classifyByName(company);
-  if (rule.verdict === 'NOT_ICP') return { ...base, verdict: 'NOT_ICP', entityType: rule.entityType, why: rule.why, basis: 'name_rules' };
+  const rule = fitFromName(company);
+  // Only a genuinely obvious name settles fit for free; a logistics or carrier name still gets checked.
+  if (rule.final) return { ...base, verdict: rule.fit, entityType: rule.entityType, why: rule.why, basis: 'name_rules' };
   const ask = deps.ask ?? defaultAsk;
   let text: string;
   try {
     text = await ask(SCOUT_PROMPT(company, deps.hint ?? ''));
   } catch (e) {
-    return { ...base, verdict: 'INSUFFICIENT', entityType: null, why: `The web pass failed (${e instanceof Error ? e.message.slice(0, 120) : 'error'}); nothing is known yet.`, basis: 'web', failed: true };
+    return { ...base, verdict: 'UNKNOWN', entityType: null, why: `The web pass failed (${e instanceof Error ? e.message.slice(0, 120) : 'error'}); nothing is known yet.`, basis: 'web', failed: true };
   }
   const p = parseScout(text);
-  if (!p) return { ...base, verdict: 'INSUFFICIENT', entityType: null, why: 'The web pass returned nothing usable.', basis: 'web', failed: true };
-  const verdict = deriveVerdict(p);
-  const why =
-    verdict === 'LIKELY_ICP' ? `A shipper with cited network evidence (${p.network.length} ${p.network.length === 1 ? 'claim' : 'claims'}).`
-    : verdict === 'MAYBE_ICP' ? 'A shipper, but no cited network evidence yet.'
-    : verdict === 'NOT_ICP' ? `Reads as a ${p.entityType === '3pl' ? '3PL' : p.entityType}, not a shipper that owns yards${p.network.length || p.freight.length ? '' : ' (the web pass cited nothing for this; check before ignoring)'}.`
-    : verdict === 'AMBIGUOUS' ? 'The name could be several companies: say which one before anything else.'
-    : 'The company type could not be established.';
-  return { company, verdict, entityType: p.entityType, domain: p.domain, what: p.what, why, network: p.network, freight: p.freight, unknowns: p.unknowns, basis: 'web' };
+  if (!p) return { ...base, verdict: 'UNKNOWN', entityType: null, why: 'The web pass returned nothing usable.', basis: 'web', failed: true };
+  const f = deriveFit({ entityType: p.entityType, operating: operatingClaims([...p.network, ...p.freight]).length, ambiguous: p.ambiguous, what: p.what });
+  return { company, verdict: f.fit, entityType: p.entityType, ambiguous: p.ambiguous || undefined, domain: p.domain, what: p.what, why: f.why, network: p.network, freight: p.freight, unknowns: p.unknowns, basis: 'web' };
 }
 
 async function defaultAsk(prompt: string): Promise<string> {

@@ -224,8 +224,11 @@ export interface QueueItem {
   sources: string[];
   sourceIds: string[];
   relationship: string[];
+  /** The YardFlow fit (DIRECT_BUYER, POTENTIAL_DIRECT_BUYER, PARTNER, NOT_FIT, UNKNOWN); null until judged. */
   verdict: string | null;
   entityType: string | null;
+  /** The name could be several companies (identity, separate from fit). */
+  ambiguous: boolean;
   scouted: boolean;
   scoutedAt: string | null;
   domain: string | null;
@@ -237,7 +240,8 @@ export interface QueueItem {
   decision: CandidateDecision;
 }
 
-const ORDER: Record<string, number> = { LIKELY_ICP: 0, MAYBE_ICP: 1, AMBIGUOUS: 2, '': 3, INSUFFICIENT: 4, NOT_ICP: 5 };
+// Direct buyers first, then the ones worth a check, partners, and the settled not-fits last. No score.
+const ORDER: Record<string, number> = { DIRECT_BUYER: 0, POTENTIAL_DIRECT_BUYER: 1, UNKNOWN: 2, '': 3, PARTNER: 4, NOT_FIT: 5 };
 
 /**
  * Companies GAP met in work sources but could not place, one row per company however it was spelled, with
@@ -259,7 +263,7 @@ export async function loadCandidateQueue(prisma: PrismaLike, opts: { workSourceI
     const company = cleanCompanyName(r.company!);
     const key = normalizeCompanyName(company);
     if (!key) continue;
-    const cur = by.get(key) ?? { company, companyKey: key, people: 0, titles: [], sources: [], sourceIds: [], relationship: [], verdict: null, entityType: null, scouted: false, scoutedAt: null, domain: null, what: null, why: null, network: [], freight: [], unknowns: [], decision: 'open' as CandidateDecision };
+    const cur = by.get(key) ?? { company, companyKey: key, people: 0, titles: [], sources: [], sourceIds: [], relationship: [], verdict: null, entityType: null, ambiguous: false, scouted: false, scoutedAt: null, domain: null, what: null, why: null, network: [], freight: [], unknowns: [], decision: 'open' as CandidateDecision };
     cur.people += 1;
     if (r.title && cur.titles.length < 3 && !cur.titles.includes(r.title)) cur.titles.push(r.title);
     if (r.work_source && !cur.sourceIds.includes(r.work_source.id)) {
@@ -277,6 +281,7 @@ export async function loadCandidateQueue(prisma: PrismaLike, opts: { workSourceI
     const s = (c.scout ?? {}) as Partial<ScoutResult>;
     Object.assign(item, {
       verdict: (c.verdict as string) ?? null,
+      ambiguous: !!s.ambiguous,
       entityType: (c.entity_type as string) ?? null,
       scouted: !!c.scouted_at,
       scoutedAt: c.scouted_at ? new Date(c.scouted_at as string).toISOString() : null,
@@ -291,8 +296,9 @@ export async function loadCandidateQueue(prisma: PrismaLike, opts: { workSourceI
   }
   for (const item of by.values()) {
     if (item.scouted || item.verdict) continue;
+    // A free name rule only settles the genuinely obvious; a logistics or carrier name is a type guess to check.
     const rule = classifyByName(item.company);
-    if (rule.verdict === 'NOT_ICP') Object.assign(item, { verdict: 'NOT_ICP', entityType: rule.entityType, why: rule.why });
+    Object.assign(item, rule.final ? { verdict: rule.verdict, entityType: rule.entityType, why: rule.why } : { entityType: rule.entityType, why: rule.entityType ? rule.why : null });
   }
   const out = [...by.values()]
     .filter((i) => opts.includeDecided || i.decision === 'open' || i.decision === 'research_more')

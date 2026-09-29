@@ -110,14 +110,14 @@ describe('createGapAccount: the one creation contract', () => {
 describe('candidate decisions', () => {
   it('scouting stores the verdict and evidence on one candidate row per company', async () => {
     const p = fakePrisma();
-    const scout = async () => ({ company: 'Harbor Foods Group', verdict: 'LIKELY_ICP' as const, entityType: 'shipper' as const, domain: 'harborfoods.com', what: 'Foodservice distributor', why: 'A shipper with cited network evidence (1 claim).', network: [{ claim: '12 DCs', url: 'https://harborfoods.example' }], freight: [], unknowns: [], basis: 'web' as const });
+    const scout = async () => ({ company: 'Harbor Foods Group', verdict: 'DIRECT_BUYER' as const, entityType: 'shipper' as const, domain: 'harborfoods.com', what: 'Foodservice distributor', why: 'A shipper with cited network evidence (1 claim).', network: [{ claim: '12 DCs', url: 'https://harborfoods.example' }], freight: [], unknowns: [], basis: 'web' as const });
     const r = await scoutCandidate(p, { company: 'Harbor Foods Group', actor: 'casey@freightroll.com', now: NOW }, { scout });
-    expect('verdict' in r && r.verdict).toBe('LIKELY_ICP');
+    expect('verdict' in r && r.verdict).toBe('DIRECT_BUYER');
     // the same company again within a day is not a second web pass (cost control); force overrides
     expect(await scoutCandidate(p, { company: 'Harbor Foods Group, Inc.', actor: 'casey@freightroll.com', now: NOW }, { scout })).toMatchObject({ refused: 'recently_scouted' });
     await scoutCandidate(p, { company: 'Harbor Foods Group, Inc.', actor: 'casey@freightroll.com', now: NOW, force: true }, { scout });
     expect(p.candidates).toHaveLength(1);
-    expect(p.candidates[0]).toMatchObject({ verdict: 'LIKELY_ICP', entity_type: 'shipper', domain: 'harborfoods.com', decision: 'open' });
+    expect(p.candidates[0]).toMatchObject({ verdict: 'DIRECT_BUYER', entity_type: 'shipper', domain: 'harborfoods.com', decision: 'open' });
   });
 
   it('IGNORE and RESEARCH MORE are recorded with who decided; an unknown decision is refused', async () => {
@@ -137,7 +137,7 @@ describe('the candidate queue', () => {
     { company: 'Ignored Co', title: 'x', relationship_context: null, work_source: { id: 's2', name: 'Inland26' } },
   ];
   const candidates = [
-    { company: 'Harbor Foods Group', company_key: 'harbor foods group', verdict: 'LIKELY_ICP', entity_type: 'shipper', domain: 'harborfoods.com', scout: { why: 'A shipper with cited network evidence (1 claim).', what: 'Foodservice distributor', network: [{ claim: '12 DCs', url: 'https://h.example' }], freight: [], unknowns: ['Who runs yard operations'] }, decision: 'open', scouted_at: new Date('2026-09-29') },
+    { company: 'Harbor Foods Group', company_key: 'harbor foods group', verdict: 'DIRECT_BUYER', entity_type: 'shipper', domain: 'harborfoods.com', scout: { why: 'A shipper with cited network evidence (1 claim).', what: 'Foodservice distributor', network: [{ claim: '12 DCs', url: 'https://h.example' }], freight: [], unknowns: ['Who runs yard operations'] }, decision: 'open', scouted_at: new Date('2026-09-29') },
     { company: 'Ignored Co', company_key: 'ignored', verdict: null, decision: 'ignored' },
   ];
   const prisma = {
@@ -145,15 +145,16 @@ describe('the candidate queue', () => {
     gapAccountCandidate: { findMany: async () => candidates },
   };
 
-  it('groups spellings, carries why / evidence / relationship source / unknowns, orders LIKELY first and NOT ICP last, hides decided', async () => {
+  it('groups spellings, carries why / evidence / relationship source / unknowns, orders direct buyers first, never rejects a logistics name, hides decided', async () => {
     const { loadCandidateQueue } = await import('@/lib/gap/entity/candidates');
     const q = await loadCandidateQueue(prisma, {});
     expect(q.map((c) => c.company)).toEqual(['Harbor Foods Group', 'Costa Farms', 'Summit Logistics Group']);
     const h = q[0];
-    expect(h).toMatchObject({ people: 2, verdict: 'LIKELY_ICP', why: 'A shipper with cited network evidence (1 claim).', sources: ['MMYQB'], relationship: ['MMYQB subscriber'], unknowns: ['Who runs yard operations'] });
+    expect(h).toMatchObject({ people: 2, verdict: 'DIRECT_BUYER', why: 'A shipper with cited network evidence (1 claim).', sources: ['MMYQB'], relationship: ['MMYQB subscriber'], unknowns: ['Who runs yard operations'] });
     expect(h.network).toEqual([{ claim: '12 DCs', url: 'https://h.example' }]);
     // unscouted: the free name rule already says what it can
-    expect(q[2]).toMatchObject({ verdict: 'NOT_ICP', scouted: false, why: expect.stringMatching(/3PL/) });
+    // REGRESSION (Release J): a logistics name is a type guess, never a rejection; it stays open for an operating check
+    expect(q[2]).toMatchObject({ verdict: null, entityType: '3pl', scouted: false, why: expect.stringMatching(/needs an operating-network check/) });
     expect(q[1]).toMatchObject({ verdict: null, scouted: false });
   });
 });
@@ -202,7 +203,7 @@ describe('review fixes: no duplicate slips past the check', () => {
 describe('a failed web pass stores nothing (Release G: the quota and cut-off answers)', () => {
   it('returns web_failed and leaves no candidate row or audit', async () => {
     const p = fakePrisma();
-    const scout = async () => ({ company: 'AkzoNobel', verdict: 'INSUFFICIENT' as const, entityType: null, domain: null, what: null, why: 'The web pass failed (429).', network: [], freight: [], unknowns: [], basis: 'web' as const, failed: true });
+    const scout = async () => ({ company: 'AkzoNobel', verdict: 'UNKNOWN' as const, entityType: null, domain: null, what: null, why: 'The web pass failed (429).', network: [], freight: [], unknowns: [], basis: 'web' as const, failed: true });
     expect(await scoutCandidate(p, { company: 'AkzoNobel', actor: 'x', now: NOW }, { scout })).toMatchObject({ refused: 'web_failed' });
     expect(p.candidates).toHaveLength(0);
     expect(p.audits).toHaveLength(0);

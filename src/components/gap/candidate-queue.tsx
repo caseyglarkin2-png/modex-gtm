@@ -10,15 +10,16 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { QueueItem } from '@/lib/gap/entity/candidates';
+import { ENTITY_LABEL, FIT_LABEL, type EntityType } from '@/lib/gap/entity/fit';
 import { AccountLink } from './account-link';
 
-const VERDICT_LABEL: Record<string, string> = { LIKELY_ICP: 'Likely ICP', MAYBE_ICP: 'Maybe ICP', NOT_ICP: 'Not ICP', AMBIGUOUS: 'Ambiguous', INSUFFICIENT: 'Not enough to say' };
+const VERDICT_LABEL: Record<string, string> = FIT_LABEL;
 const VERDICT_TONE: Record<string, string> = {
-  LIKELY_ICP: 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
-  MAYBE_ICP: 'border-sky-600 text-sky-700 dark:text-sky-400',
-  AMBIGUOUS: 'border-amber-600 text-amber-700 dark:text-amber-400',
-  NOT_ICP: 'border-[var(--border)] text-[var(--muted-foreground)]',
-  INSUFFICIENT: 'border-[var(--border)] text-[var(--muted-foreground)]',
+  DIRECT_BUYER: 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
+  POTENTIAL_DIRECT_BUYER: 'border-sky-600 text-sky-700 dark:text-sky-400',
+  UNKNOWN: 'border-amber-600 text-amber-700 dark:text-amber-400',
+  PARTNER: 'border-violet-600 text-violet-700 dark:text-violet-400',
+  NOT_FIT: 'border-[var(--border)] text-[var(--muted-foreground)]',
 };
 const REFUSAL: Record<string, string> = {
   exists: 'An account with exactly this name already exists.',
@@ -201,6 +202,8 @@ function Candidate({ c }: { c: QueueItem }) {
           {c.verdict ? VERDICT_LABEL[c.verdict] : 'Not scouted'}
           {c.verdict && !c.scouted ? ' (name only)' : ''}
         </span>
+        {c.entityType ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="candidate-entity">{ENTITY_LABEL[c.entityType as EntityType] ?? c.entityType}{c.scouted ? '' : ' (from the name)'}</span> : null}
+        {c.ambiguous ? <span className="text-xs text-amber-700">ambiguous identity</span> : null}
         {c.decision === 'research_more' ? <span className="text-xs text-[var(--muted-foreground)]">research more</span> : null}
       </div>
       <p className="text-xs text-[var(--muted-foreground)]">
@@ -209,7 +212,7 @@ function Candidate({ c }: { c: QueueItem }) {
       </p>
       {c.why ? (
         <p className="text-xs">
-          <span className="font-semibold">{c.verdict === 'LIKELY_ICP' || c.verdict === 'MAYBE_ICP' ? 'Why ICP: ' : 'Why: '}</span>
+          <span className="font-semibold">{c.verdict === 'DIRECT_BUYER' || c.verdict === 'POTENTIAL_DIRECT_BUYER' ? 'Why a fit: ' : 'Why: '}</span>
           {c.why}
           {c.what ? ` ${c.what}` : ''}
           {c.domain ? ` (${c.domain})` : ''}
@@ -256,7 +259,7 @@ export function CandidateQueue({ items, title, collapsed = false }: { items: Que
   if (!items.length) return null;
   const body = (
     <>
-      <p className="text-xs text-[var(--muted-foreground)]">Scout is one cheap web pass; its verdict comes from cited evidence, never a guess. Nothing becomes an account until you add it, and adding checks for duplicates first.</p>
+      <p className="text-xs text-[var(--muted-foreground)]">Scout is one cheap web pass. What a company is and whether it could buy YardFlow are separate: fit comes from cited operations, never the label. Nothing becomes an account until you add it, and adding checks for duplicates first.</p>
       <ul data-testid="candidate-list">
         {items.map((c) => (
           <Candidate key={c.companyKey} c={c} />

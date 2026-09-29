@@ -23,7 +23,7 @@ export default async function CandidatesPage() {
       <GapSubnav />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">New companies</h1>
-        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Companies your sources brought in that GAP does not know yet. Likely shippers first, 3PLs, carriers and vendors last.</p>
+        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Companies your sources brought in that GAP does not know yet. Direct buyers first (anyone who runs freight facilities, yards or fleets: shippers, 3PLs, carriers, terminals), then the ones to check, partners, and not-fits last.</p>
       </div>
       {items.length ? <CandidateQueue items={items} title={`${items.length}${items.length >= 150 ? '+' : ''} companies`} /> : <p className="text-sm italic text-[var(--muted-foreground)]">Every company in your sources is placed, decided or ignored.</p>}
     </div>
