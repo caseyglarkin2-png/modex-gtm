@@ -41,6 +41,8 @@ export interface HypothesisInput {
   falsification: string[];
   whatANoMeans: string | null;
   primarySignalId: string | null;
+  /** When Casey approved it (reviewed_at on an approved or active thesis); null for a draft. */
+  reviewedAt?: string | null;
 }
 
 export interface BidInput {
@@ -142,6 +144,11 @@ export interface HypothesisView {
   discoveryQuestion: string | null;
   /** Its observation is a live verified fact, or the buyer confirmed it. An ungrounded draft never leads. */
   grounded: boolean;
+  /**
+   * What changed since Casey approved it (THESIS NEEDS REVIEW). Never a rewrite: the thesis stays as approved and
+   * this says why to look again. Empty for a draft, or when nothing material changed.
+   */
+  needsReview: string[];
 }
 
 export type QuestionType = 'VERIFY_PROBLEM' | 'ROOT_CAUSE' | 'IMPACT' | 'CURRENT_PROCESS' | 'CURRENT_STACK' | 'OWNERSHIP' | 'DESIRED_FUTURE' | 'CHANGE_REQUIREMENT';
@@ -219,6 +226,8 @@ export interface AccountIntelligenceBrief {
   motion: Motion;
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
+  /** The open deals when dealState is ACTIVE (name and stage as HubSpot said them moments ago). */
+  deals: Array<{ name: string | null; stage: string | null }>;
 }
 
 // ---------------------------------------------------------------- helpers
@@ -432,11 +441,20 @@ function technologySection(i: AccountInputs, now: Date): Section {
       st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; BUYER CONFIRMED): ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
     }
   }
+  // Buyer truth outranks public: once the buyer names their yard system, a public mention of a DIFFERENT yard
+  // system is contradicted by the buyer (visible until Casey resolves it), never silently kept as current.
+  const isYard = (v: string) => /yard/.test(VENDOR_FUNCTION[v] ?? '');
+  const buyerYard = i.bids.flatMap((b) => VENDORS.filter((v) => isYard(v) && vendorRe(v).test(b.summary)).map((v) => ({ v, b })));
   for (const f of liveFacts(i, now)) {
     for (const v of VENDORS) if (vendorRe(v).test(f.quote) && !seen.has(`f:${v}`)) {
       seen.add(`f:${v}`);
       const host = (() => { try { return new URL(f.url ?? '').hostname; } catch { return ''; } })();
       const partner = host && host.toLowerCase().includes(v.toLowerCase().split(' ')[0]);
+      const overruled = isYard(v) ? buyerYard.find((x) => x.v !== v) : undefined;
+      if (overruled) {
+        st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; ${partner ? 'PARTNER CLAIM' : vendorStatus(f.quote)}, ${day(f.publishedAt)}): ${f.quote} The buyer says they use ${overruled.v}.`, truth: 'CONTRADICTED', sources: [ev(f)], contradictedBy: [bidSrc(overruled.b)], asOf: f.publishedAt });
+        continue;
+      }
       st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; ${partner ? 'PARTNER CLAIM' : vendorStatus(f.quote)}, ${day(f.publishedAt)}): ${f.quote}`, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
     }
   }
@@ -538,8 +556,28 @@ function hypothesisViews(i: AccountInputs, now: Date): HypothesisView[] {
     impact: h.impacts[0] ?? null,
     wrongIf: h.whatANoMeans ?? h.falsification[1] ?? null,
     discoveryQuestion: h.falsification[0] ?? null,
+    needsReview: reviewReasons(i, h, now, verified, truth),
     };
   });
+}
+
+const monthDay = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+
+/** THESIS NEEDS REVIEW: material changes since Casey approved this thesis. Only an approved or active thesis can go stale on him. */
+function reviewReasons(i: AccountInputs, h: HypothesisInput, now: Date, verified: ReadonlySet<string>, truth: TruthClass): string[] {
+  if (!(h.status === 'approved' || h.status === 'active') || !h.reviewedAt) return [];
+  const since = new Date(h.reviewedAt).getTime();
+  const out: string[] = [];
+  if (truth === 'CONTRADICTED') out.push('The buyer contradicted it.');
+  const newBid = i.bids.filter((b) => new Date(b.at).getTime() > since).sort((a, b) => b.at.localeCompare(a.at))[0];
+  if (newBid) out.push(`The buyer said something after you approved it (${newBid.type.replace(/_/g, ' ')}, ${monthDay(newBid.at)}).`);
+  if (h.primarySignalId && !verified.has(h.primarySignalId)) out.push('Its fact is no longer live: the thesis rests on nothing current.');
+  const primary = i.facts.find((f) => f.id === h.primarySignalId);
+  const primaryRank = primary && verified.has(primary.id) ? sellerRelevance(primary.quote).rank : Number.POSITIVE_INFINITY;
+  const better = rankedFacts(i, now).find((f) => f.id !== h.primarySignalId && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank < primaryRank);
+  if (better) out.push(`A newer fact (${sellerRelevance(better.quote).reason}, ${monthDay(better.publishedAt)}) may change the story.`);
+  if (i.opportunity?.status === 'ACTIVE') out.push('A deal opened: work the thesis from the deal.');
+  return out;
 }
 
 function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], wedge: Wedge): DiscoveryQuestion[] {
@@ -670,8 +708,10 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   if (aud.kept.length && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
 
   const econ = sections.economics.statements.find((s) => s.truth === 'MODELED_ESTIMATE' || s.truth === 'BUYER_CONFIRMED');
+  // An approved thesis the world moved under: flagged, never rewritten.
+  const stale = hypotheses.find((h) => h.needsReview.length > 0);
   const thesis: Thesis = {
-    status: 'INFERENCE, for your review (never approved by GAP)',
+    status: stale ? `THESIS NEEDS REVIEW: ${stale.needsReview.join(' ')}` : 'INFERENCE, for your review (never approved by GAP)',
     whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),
     whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})` : 'No current, verified catalyst.',
     whatMayBeBroken: top ? top.problem : `Unknown: ${noHypothesis}`,
@@ -709,5 +749,5 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     motion: motionLine(motion),
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, dealState, motion };
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion };
 }

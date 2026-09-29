@@ -108,3 +108,13 @@ describe('glance polish (Release D)', () => {
     expect(screen.getByTestId('glance-network').textContent).toMatch(/Item 2 Properties\.\)$/);
   });
 });
+
+describe('continuous memory in the view (Release F)', () => {
+  it('an approved thesis the world moved under says Needs review, and the thesis status says so', () => {
+    const h = { ...inputs().hypotheses[0], status: 'approved', reviewedAt: '2026-09-05T00:00:00Z' };
+    const b = buildAccountBrief(inputs({ hypotheses: [h], bids: [{ id: 'b1', type: 'current_state', summary: 'Paper check-in at every plant.', quote: 'x', who: 'dana', at: '2026-09-20T00:00:00Z', hypothesisId: 'h1' }] }), NOW);
+    render(<AccountBriefView brief={b} />);
+    expect(screen.getByTestId('brief-needs-review').textContent).toMatch(/^Needs review \(nothing was rewritten\): The buyer said something after you approved it/);
+    expect(screen.getByTestId('brief-thesis').textContent).toMatch(/THESIS NEEDS REVIEW/);
+  });
+});
