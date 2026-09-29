@@ -66,7 +66,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         brief={brief}
         afterGlance={
           <>
-            {brief.family?.hold ? <SeparateMotion accountName={brief.accountName} detail={brief.family.hold.detail} relatedAccounts={brief.family.hold.accounts} /> : null}
+            {brief.family?.hold ? <SeparateMotion accountName={brief.accountName} detail={brief.family.hold.detail} relatedAccounts={brief.family.hold.accounts.filter((a) => !brief.family?.members.some((m) => m.accountName === a && m.relation === 'same_company'))} /> : null}
             {/* In a deal: the same account, learned from the buyer (the Deal Brief: buyer truth, unknowns, stakeholders, next learning objective; no scoring). */}
             {brief.dealState === 'ACTIVE' ? (
               dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>

@@ -264,6 +264,29 @@ function skipCell(s: SkipRow): string {
 }
 
 /** Exactly the lane's table: header, divider, one line per account. */
+/**
+ * The action-time family check on the hand-enroll table: a row whose account has related account activity (or
+ * whose family could not be read) moves every contact to the skips with the reason. Nothing is enrolled here.
+ */
+export async function holdRelatedAccountRows(table: EnrollTable, hold: (account: string) => Promise<{ detail: string; unknown: boolean } | null>): Promise<EnrollTable> {
+  // Five accounts at a time: each family read may call HubSpot, which rate-limits bursts.
+  const verdicts: Array<{ detail: string; unknown: boolean } | null> = [];
+  for (let i = 0; i < table.rows.length; i += 5) {
+    verdicts.push(...(await Promise.all(table.rows.slice(i, i + 5).map((r) => hold(r.account).catch(() => ({ detail: 'Could not read the related accounts in this corporate family.', unknown: true }))))));
+  }
+  const rows: EnrollRow[] = [];
+  const skipped = [...table.skipped];
+  table.rows.forEach((row, i) => {
+    const h = verdicts[i];
+    if (!h) return void rows.push(row);
+    const reason = h.unknown ? `related_account_unreadable: ${h.detail}` : `related_account_activity: ${h.detail}`;
+    const held = row.contacts.map((c) => ({ account: row.account, personaId: c.personaId, name: c.name, email: c.email, reason }));
+    skipped.push(...held);
+    rows.push({ ...row, contacts: [], skips: [...row.skips, ...held] });
+  });
+  return { ...table, rows, skipped };
+}
+
 export function renderEnrollTableMarkdown(table: EnrollTable): string {
   const lines = [ENROLL_TABLE_HEADER, ENROLL_TABLE_DIVIDER];
   for (const row of table.rows) {
