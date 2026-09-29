@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import type { ResearchPlan } from '@/lib/gap/account-intel/orchestrate';
 
 const SECTION_LABEL: Record<string, string> = { identity: 'Company and operations', catalysts: 'Catalysts', footprint: 'Footprint', technology: 'Technology', freight: 'Freight', org: 'Who owns it', economics: 'Economics', yard: 'Yard process', commercial: 'Commercial' };
-const OUTCOME: Record<string, string> = { scouted: 'Scout judged what it is and what it runs', evidence_found: 'found verified evidence', insufficient_evidence: 'found nothing it could verify (an honest answer)', conflicting_evidence: 'found sources that disagree' };
+const OUTCOME: Record<string, string> = { scouted: 'Scout judged what it is and what it runs', evidence_found: 'found verified evidence', insufficient_evidence: 'found nothing it could verify (an honest answer)', conflicting_evidence: 'found sources that disagree', section_filled: 'added to this section', nothing_for_section: 'found nothing new for this section', provider_unavailable: 'could not search the web right now (retry later; nothing was learned)' };
 
 export function ResearchPlanView({ accountName, plan }: { accountName: string; plan: ResearchPlan }) {
   const router = useRouter();
@@ -21,7 +21,7 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
     setBusy(section);
     setMsg(null);
     let res: Response;
-    let body: { outcome?: string; facts?: number; error?: string; reason?: string } = {};
+    let body: { outcome?: string; sectionOutcome?: string; facts?: number; error?: string; reason?: string } = {};
     try {
       res = await fetch('/api/gap/accounts/deepen', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accountName, section }) });
       body = ((await res.json().catch(() => ({}))) ?? {}) as typeof body;
@@ -32,7 +32,7 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
     }
     if (res.status === 504) return setMsg('The run took too long to answer; it may have partly run. Reopen the page to see what it found.');
     if (!res.ok) return setMsg(body.reason ?? `Not run: ${body.error ?? res.status}`);
-    setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.outcome ?? ''] ?? body.outcome}${body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : ''}.`);
+    setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.sectionOutcome ?? body.outcome ?? ''] ?? body.outcome}${body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : ''}.`);
     router.refresh();
   }
   if (!plan.tasks.length && !plan.skipped.length) return null;

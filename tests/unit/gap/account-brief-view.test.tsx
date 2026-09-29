@@ -120,3 +120,12 @@ describe('continuous memory in the view (Release F)', () => {
     expect(screen.getByTestId('brief-thesis').textContent).toMatch(/THESIS NEEDS REVIEW/);
   });
 });
+
+describe('first-party dates in the view (Release M)', () => {
+  it('a dated record shows its date; an undated record says undated; a GAP computation does not', () => {
+    render(<AccountBriefView brief={buildAccountBrief(inputs({ personas: [{ id: 'p1', name: 'Dana Ops', title: 'VP Distribution', doNotContact: false, hasEmail: true, emailStatus: 'valid', updatedAt: '2026-09-01T00:00:00.000Z' }] as never }), NOW)} />);
+    expect(screen.getAllByText(/CRM contact, last updated \(2026-09-01\)/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/GAP account record \(undated\)/).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/GAP title reading \(undated\)/)).toBeNull();
+  });
+});

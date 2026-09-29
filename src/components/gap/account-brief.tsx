@@ -5,7 +5,7 @@
  * assumptions. Section status is a chip, never a score. Server-renderable.
  */
 import type { AccountIntelligenceBrief, Section } from '@/lib/gap/account-intel/build';
-import type { SectionStatus, Statement, TruthClass } from '@/lib/gap/account-intel/truth';
+import type { SectionStatus, Source, Statement, TruthClass } from '@/lib/gap/account-intel/truth';
 import { ThesisReviewedButton } from './thesis-reviewed-button';
 
 const TRUTH_LABEL: Record<TruthClass, string> = {
@@ -34,6 +34,8 @@ const STATUS_TONE: Record<SectionStatus, string> = {
 };
 
 /** Only http(s) sources become links; anything else renders as text. */
+/** A record with no date of its own says so; GAP's own computations (title reading, ROI) are not records. */
+const undatedRecord = (s: Source) => !['gap', 'roi', 'microsite'].includes(s.kind) && !/undated/i.test(s.label);
 const safeUrl = (u: string | null) => {
   if (!u) return null;
   try {
@@ -90,7 +92,7 @@ function StatementRow({ s }: { s: Statement }) {
               ) : (
                 src.label
               )}
-              {src.at ? ` (${src.at.slice(0, 10)})` : ''}
+              {src.at ? ` (${src.at.slice(0, 10)})` : undatedRecord(src) ? ' (undated)' : ''}
             </span>
           ))}
         </p>

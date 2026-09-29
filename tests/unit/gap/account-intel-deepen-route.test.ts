@@ -74,3 +74,20 @@ describe('POST /api/gap/accounts/deepen', () => {
     expect(deps.runEvidenceResearch).not.toHaveBeenCalled();
   });
 });
+
+describe('Release M: the deepen outcome is the SECTION outcome', () => {
+  const reno = { id: 'f1', quote: 'Acme Foods will open a new distribution center in Reno.', url: 'https://n.example', title: 't', publishedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 90 * 86_400_000).toISOString(), continuity: 'event', currentness: null };
+  it('the web search down is provider_unavailable (retryable), not an empty answer', async () => {
+    deps.loadAccountInputs.mockResolvedValue(inputs());
+    deps.runEvidenceResearch.mockResolvedValue({ runId: 'r1', outcome: 'insufficient_evidence', facts: [], rejected: [], notes: ['edgar: 0 filings', 'web: unavailable (429 quota)'] });
+    expect(await (await POST(req({ accountName: 'Acme Foods', section: 'catalysts' }))).json()).toMatchObject({ outcome: 'insufficient_evidence', sectionOutcome: 'provider_unavailable' });
+  });
+  it('a fact that lands in the section is section_filled; facts elsewhere are nothing_for_section', async () => {
+    deps.loadAccountInputs.mockResolvedValueOnce(inputs()).mockResolvedValueOnce(inputs([reno]));
+    deps.runEvidenceResearch.mockResolvedValue({ runId: 'r1', outcome: 'evidence_found', facts: [{}], rejected: [], notes: ['web: 3 candidates'] });
+    expect(await (await POST(req({ accountName: 'Acme Foods', section: 'catalysts' }))).json()).toMatchObject({ sectionOutcome: 'section_filled' });
+    deps.loadAccountInputs.mockReset();
+    deps.loadAccountInputs.mockResolvedValue(inputs());
+    expect(await (await POST(req({ accountName: 'Acme Foods', section: 'catalysts' }))).json()).toMatchObject({ outcome: 'evidence_found', sectionOutcome: 'nothing_for_section' });
+  });
+});
