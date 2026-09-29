@@ -57,9 +57,10 @@ describe('footprint: ownership is never inflated', () => {
   it('3PL-operated sites are not counted as owned; rejected sites are excluded and said so', () => {
     const f = buildAccountBrief(base(), NOW).sections.footprint;
     const text = f.statements.map((s) => s.text).join('\n');
-    expect(text).toMatch(/2 self-operated, 1 3PL-operated \(not counted as owned\)/);
+    expect(text).toMatch(/2 self-operated, 1 run by a 3PL \(not counted as theirs to decide\)/);
     expect(text).toMatch(/1 rejected by verification \(excluded\)/);
-    expect(f.statements.find((s) => /38 facilities/.test(s.text))?.truth).toBe('VERIFIED_PUBLIC');
+    // a named filing without a link is a lead, said so (red team: never VERIFIED without the source)
+    expect(f.statements.find((s) => /38 facilities/.test(s.text))).toMatchObject({ truth: 'INFERENCE', text: 'About 38 facilities (per FY25 10-K Item 2, not linked)' });
   });
   it('hand-authored microsite copy is INFERENCE, never current truth', () => {
     const f = buildAccountBrief(base(), NOW).sections.footprint;
@@ -72,7 +73,7 @@ describe('footprint: ownership is never inflated', () => {
 describe('volume: modeled ranges, never fake precision', () => {
   it('daily trailer moves are a range from audited dock doors, with inputs, formula and assumptions', () => {
     const v = buildAccountBrief(base(), NOW).sections.volume.statements.find((s) => s.truth === 'MODELED_ESTIMATE');
-    expect(v?.model).toMatchObject({ inputs: { auditedDockDoors: 180, auditedSites: 3 }, unit: 'trailer moves/day across audited sites' });
+    expect(v?.model).toMatchObject({ inputs: { auditedDockDoors: 120, auditedSites: 2 }, unit: 'door turns/day across self-operated audited sites' });
     expect(v!.model!.range[0]).toBeLessThan(v!.model!.range[1]);
   });
 });
@@ -88,7 +89,7 @@ describe('buyer truth outranks public inference', () => {
   it('a buyer objection keeps the contradiction visible and stops the story', () => {
     const b = buildAccountBrief(base({ bids: [{ id: 'b2', type: 'objection', summary: 'Our gates are not a problem.', quote: 'Our gates are not a problem.', who: 'VP Distribution', at: '2026-09-25T00:00:00Z', hypothesisId: 'h1' }] }), NOW);
     expect(b.hypotheses[0].truth).toBe('CONTRADICTED');
-    expect(b.glance.nextAction).toMatch(/^Stop the current story/);
+    expect(b.glance.nextAction).toMatch(/^Do not contact yet: the buyer contradicted the current story/);
   });
 });
 
@@ -112,12 +113,20 @@ describe('honest answers are first-class', () => {
 });
 
 describe('discovery: 3 to 7 questions from the real unknowns', () => {
-  it('asks to verify the problem first, then the unknown stack and process; never a generic dump', () => {
+  it('GAP order (red team): current state first, then verify the problem, root cause, impact; never a generic dump', () => {
     const q = buildAccountBrief(base(), NOW).discovery;
     expect(q.length).toBeGreaterThanOrEqual(3);
     expect(q.length).toBeLessThanOrEqual(7);
-    expect(q[0]).toMatchObject({ type: 'VERIFY_PROBLEM', question: 'How are inbound trailers staged at the new DC?' });
-    expect(q.map((x) => x.type)).toContain('CURRENT_PROCESS');
+    expect(q.slice(0, 4).map((x) => x.type)).toEqual(['CURRENT_PROCESS', 'VERIFY_PROBLEM', 'ROOT_CAUSE', 'IMPACT']);
+    expect(q[1].question).toBe('How are inbound trailers staged at the new DC?');
+    // never a satellite-found site name put to the buyer, and the impact question presumes nothing
+    expect(q[0].question).toBe('How do trailers get checked in and found at your plants and DCs today?');
+    expect(q[3].question).toMatch(/^Is yard time something you measure today\?/);
+  });
+
+  it('with no grounded thesis, the problem question is open: the buyer names the problem', () => {
+    const q = buildAccountBrief(base({ hypotheses: [] }), NOW).discovery;
+    expect(q[1]).toMatchObject({ type: 'VERIFY_PROBLEM', question: 'What slows trucks and trailers down at your plants and DCs, if anything?' });
   });
   it('a question already answered by the buyer is not asked again', () => {
     const q = buildAccountBrief(base({ bids: [{ id: 'b3', type: 'impact', summary: 'We pay $40k a month in detention.', quote: 'x', who: 'VP', at: '2026-09-25T00:00:00Z', hypothesisId: 'h1' }] }), NOW).discovery;
@@ -187,7 +196,7 @@ describe('real-data fixes (PepsiCo / General Mills / Kroger dogfood)', () => {
 
   it('an open deal: "Work the deal" with the next learning as its own question', () => {
     const b = buildAccountBrief(base({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'Acme pilot', stage: 'discovery' }] } }), NOW);
-    expect(b.glance.nextAction).toBe('Work the deal (In Deals), never cold. Next learning: the question below.');
+    expect(b.glance.nextAction).toBe('Work the deal (In Deals), never cold. Next learning: the Deal brief objective.');
   });
 });
 
@@ -215,7 +224,7 @@ describe('review fixes (Release A reviewer)', () => {
     const p = base().pack!;
     const sites = [site('01-a'), site('02-b', { verification: undefined }), site('03-c', { verification: { ...site('x').verification, operator: 'unknown' } })];
     const f = buildAccountBrief(base({ pack: { ...p, network: { ...p.network, sites } } as never }), NOW).sections.footprint;
-    expect(f.statements.map((s) => s.text).join('\n')).toMatch(/3 sites audited: 1 self-operated, 0 3PL-operated \(not counted as owned\), 1 operator unknown, 1 not yet verified; 0 rejected/);
+    expect(f.statements.map((s) => s.text).join('\n')).toMatch(/3 sites audited: 1 self-operated, 0 run by a 3PL \(not counted as theirs to decide\), 1 operator unknown, 1 not yet verified; 0 rejected/);
   });
 
   it('uncited audit data is INFERENCE, not Verified (rail, yard features, trailers)', () => {
@@ -267,5 +276,68 @@ describe('Scout leads carry into the brief as INFERENCE, never verified (B + A: 
     expect(net?.sources[0].url).toBe('https://harborfoods.example/about');
     expect(b.sections.freight.statements.find((s) => /private fleet/.test(s.text))?.truth).toBe('INFERENCE');
     expect(b.sections.identity.statements.find((s) => /^Scout:/.test(s.text))?.text).toBe('Scout: a shipper; Foodservice distributor (harborfoods.com)');
+  });
+});
+
+describe('dogfood fixes (Release H)', () => {
+  it('a sensitive best fact is flagged in why now and in why not pursue (Tyson: a plant closure, jobs lost)', () => {
+    const quote = 'Acme Foods announced the closure of its plant in Joslin, throwing more than 2,500 workers out of work.';
+    const b = buildAccountBrief(base({ facts: [{ ...base().facts[0], quote }] }), NOW);
+    expect(b.thesis.whyNow).toMatch(/SENSITIVE \(people lost their jobs\): never the hook/);
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/The best fact is sensitive/);
+  });
+  it('an account whose record says 3PL is named as a partner or channel, not a shipper prospect', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: '3PL / Logistics' } }), NOW);
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/The account record says 3PL \/ Logistics/);
+  });
+  it('with no live fact, "research first" points at catalysts on the account page', () => {
+    expect(buildAccountBrief(base({ facts: [] }), NOW).glance.nextAction).toBe('Do not contact yet: no verified fact and no relationship to open with. Research first (Deepen catalysts on this page).');
+  });
+});
+
+describe('red team fixes (Release I)', () => {
+  it('a buyer-rejected thesis shows as contradicted (never vanishes); a withdrawn draft stays hidden', () => {
+    const h = { ...base().hypotheses[0], status: 'rejected', buyerRejected: true };
+    const b = buildAccountBrief(base({ hypotheses: [h] }), NOW);
+    expect(b.hypotheses[0].truth).toBe('CONTRADICTED');
+    expect(b.motion.type).toBe('NO_GOOD_MOTION');
+    expect(buildAccountBrief(base({ hypotheses: [{ ...h, buyerRejected: false }] }), NOW).hypotheses).toEqual([]);
+  });
+  it('a status of confirmed without a live BID is not buyer truth', () => {
+    const b = buildAccountBrief(base({ hypotheses: [{ ...base().hypotheses[0], status: 'confirmed' }] }), NOW);
+    expect(b.hypotheses[0].truth).toBe('INFERENCE');
+  });
+  it('an inference keeps its label in the glance and the thesis', () => {
+    const b = buildAccountBrief(base(), NOW);
+    expect(b.glance.topHypothesis).toMatch(/^Inference: /);
+    expect(b.thesis.whatMayBeBroken).toMatch(/^Inference: /);
+  });
+  it('a vendor marketing fact never leads when an account fact exists', () => {
+    const vendor = { ...base().facts[0], id: 'v1', quote: 'Gatik moves freight for Acme Foods across 250 stores and a new distribution center network.', publishedAt: '2026-09-20T00:00:00Z' };
+    expect(buildAccountBrief(base({ facts: [vendor, base().facts[0]] }), NOW).glance.bestFact).toMatch(/^Acme Foods will open/);
+  });
+  it('sourcing, procurement and planning titles are never "who probably owns it"; the most senior operations title is', () => {
+    const personas = [
+      { id: 1, name: 'Sam Sourcing', title: 'Enterprise Sourcing Category Manager - Ground Transportation', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
+      { id: 2, name: 'Mia Manager', title: 'Distribution Manager', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
+      { id: 3, name: 'Val VP', title: 'VP Supply Chain Operations', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
+    ];
+    expect(buildAccountBrief(base({ personas }), NOW).glance.likelyOwner).toMatch(/^Val VP/);
+  });
+  it('a logistics provider is a partner: no shipper motion', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: '3PL / Logistics' } }), NOW);
+    expect(b.motion).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/Not a shipper prospect/) });
+  });
+  it('no wedge expansion inside a deal; NETWORK only on a cited count', () => {
+    expect(buildAccountBrief(base({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'x', stage: 'y' }] } }), NOW).wedge.expansion).toEqual([]);
+    expect(buildAccountBrief(base(), NOW).wedge.expansion.join(' ')).not.toMatch(/NETWORK/);
+  });
+});
+
+
+describe('dogfood: a quoted vendor statement is still vendor marketing', () => {
+  it('a fact that opens with a quotation mark and a vendor name never leads', () => {
+    const vendor = { ...base().facts[0], id: 'v2', quote: '“Gatik is already operating inside our networks and brings the scale we need,” said Acme Foods.', publishedAt: '2026-09-25T00:00:00Z' };
+    expect(buildAccountBrief(base({ facts: [vendor, base().facts[0]] }), NOW).glance.bestFact).toMatch(/^Acme Foods will open/);
   });
 });

@@ -45,7 +45,7 @@ describe('account motion', () => {
     expect(motion({ conversation: { who: 'dana@acme.example', responseClass: 'positive_interest', at: '2026-09-20T00:00:00Z' } })).toMatchObject({ type: 'FOLLOW_UP', who: 'dana@acme.example' });
   });
   it('without a verified fact: a referral is REFERRAL_LED, a conference meeting or a newsletter subscriber is RELATIONSHIP_LED (the cohort rules), a CRM list is nothing', () => {
-    expect(motion({ facts: [], memberships: [{ sourceName: 'Referrals', sourceType: 'referral', relationshipContext: 'Referred by Pat at Kroger', personName: 'Dana Ops' }] })).toMatchObject({ type: 'REFERRAL_LED', who: 'Dana Ops', why: expect.stringMatching(/Referred by Pat.*GAP drafts nothing without a verified fact/) });
+    expect(motion({ facts: [], memberships: [{ sourceName: 'Referrals', sourceType: 'referral', relationshipContext: 'Referred by Pat at Kroger', personName: 'Dana Ops' }] })).toMatchObject({ type: 'REFERRAL_LED', who: 'Dana Ops', why: expect.stringMatching(/Referred by Pat.*GAP drafts nothing until a usable fact and a grounded thesis exist/) });
     expect(motion({ facts: [], memberships: [{ sourceName: 'Inland26', sourceType: 'conference', relationshipContext: 'Met at Inland26', personName: 'Dana Ops' }] })).toMatchObject({ type: 'RELATIONSHIP_LED' });
     expect(motion({ facts: [], memberships: [{ sourceName: 'MMYQB', sourceType: 'newsletter', relationshipContext: 'MMYQB subscriber', personName: 'Dana Ops' }] })).toMatchObject({ type: 'RELATIONSHIP_LED' });
     expect(motion({ facts: [], memberships: [{ sourceName: 'HubSpot list', sourceType: 'crm_list', relationshipContext: null, personName: 'Dana Ops' }] })).toMatchObject({ type: 'NO_GOOD_MOTION' });

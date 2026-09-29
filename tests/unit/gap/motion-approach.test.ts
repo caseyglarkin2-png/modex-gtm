@@ -29,7 +29,7 @@ describe('decideApproach', () => {
   });
   it('a verified fact leads; the relationship is an optional opener', () => {
     const a = decideApproach({ ...base, source: { sourceType: 'conference', context: 'Met at Inland26', name: 'Inland26' } });
-    expect(a).toEqual({ kind: 'FACT_LED', why: 'A verified fact to open with. Optional opener: Met at Inland26.' });
+    expect(a).toEqual({ kind: 'FACT_LED', why: 'A verified fact and a thesis grounded in it. Optional opener: Met at Inland26.' });
   });
   it('no fact: referral, then any real relationship (met or a relational source such as a newsletter), else hold', () => {
     expect(kind({ verifiedFact: false, source: { sourceType: 'referral', context: 'Pat introduced us', name: 'Referrals' } })).toBe('REFERRAL_LED');
@@ -39,3 +39,17 @@ describe('decideApproach', () => {
     expect(kind({ verifiedFact: false })).toBe('NO_GOOD_MOTION');
   });
 });
+
+describe('red team: fact-led is problem-led', () => {
+  it('a fact without a grounded thesis, a sensitive-only fact, a stale thesis, or a logistics provider is never fact-led', () => {
+    expect(decideApproach({ ...base, groundedThesis: false }).why).toMatch(/no thesis grounded in it yet/);
+    expect(decideApproach({ ...base, sensitiveOnly: 'people lost their jobs' }).why).toMatch(/only live fact is sensitive \(people lost their jobs\)/);
+    expect(decideApproach({ ...base, staleThesis: true }).why).toMatch(/needs review/);
+    expect(decideApproach({ ...base, partner: true }).why).toMatch(/Not a shipper prospect/);
+    for (const x of [{ groundedThesis: false }, { sensitiveOnly: 'x' }, { staleThesis: true }, { partner: true }]) expect(kind(x)).toBe('NO_GOOD_MOTION');
+  });
+  it('with an unusable fact, a real relationship still allows asking for perspective', () => {
+    expect(kind({ groundedThesis: false, source: { sourceType: 'conference', context: 'Met at Inland26', name: 'Inland26' } })).toBe('RELATIONSHIP_LED');
+  });
+});
+

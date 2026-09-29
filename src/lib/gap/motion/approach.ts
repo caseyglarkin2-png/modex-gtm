@@ -31,6 +31,14 @@ export interface ApproachInput {
   reachable: boolean;
   /** How Casey knows them (the strongest work source), if at all. */
   source: { sourceType: string; context: string | null; name: string } | null;
+  /** A thesis grounded in a live verified fact exists (red team: fact-led is problem-led, never fact-only). Default true. */
+  groundedThesis?: boolean;
+  /** Every live fact is sensitive (people harmed): the label, else null. */
+  sensitiveOnly?: string | null;
+  /** The approved thesis needs review before it is used. */
+  staleThesis?: boolean;
+  /** The account is a logistics provider (3PL, carrier, broker): a partner or channel, not a shipper prospect. */
+  partner?: boolean;
 }
 
 export interface Approach {
@@ -49,10 +57,14 @@ export function decideApproach(x: ApproachInput): Approach {
   if (x.conversation) return { kind: 'FOLLOW_UP', why: `A live conversation with ${x.conversation.who} (${cls(x.conversation.responseClass)}, ${x.conversation.at.slice(0, 10)}): continue that thread, never a cold first touch.` };
   if (x.touchHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.touchHold}` };
   if (!x.reachable) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: nobody reachable here (do not contact, or no email).' };
+  if (x.partner) return { kind: 'NO_GOOD_MOTION', why: 'Not a shipper prospect: a logistics provider runs yards for its customers. Work it as a partner or channel, never with a shipper pitch.' };
   const t = x.source ? traitsOf(x.source.sourceType) : null;
   const known = x.source && t && (t.engaged || t.relational) ? x.source.context ?? x.source.name : null;
-  if (x.verifiedFact) return { kind: 'FACT_LED', why: `A verified fact to open with.${known ? ` Optional opener: ${known}.` : ''}` };
-  if (x.source && t?.approach === 'referral_led') return { kind: 'REFERRAL_LED', why: `${known}: name the introduction and ask for their perspective. No problem is claimed; GAP drafts nothing without a verified fact.` };
-  if (known) return { kind: 'RELATIONSHIP_LED', why: `${known}: ask for their perspective. No problem is claimed; GAP drafts nothing without a verified fact.` };
-  return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: no verified fact and no relationship to open with.' };
+  // Fact-led means problem-led: a usable verified fact AND a thesis grounded in it that Casey can stand behind.
+  const factBlock = !x.verifiedFact ? 'no verified fact' : x.sensitiveOnly ? `the only live fact is sensitive (${x.sensitiveOnly}) and is never the hook` : x.groundedThesis === false ? 'a verified fact, but no thesis grounded in it yet (draft and review one first)' : x.staleThesis ? 'the approved thesis needs review before it is used' : null;
+  if (!factBlock) return { kind: 'FACT_LED', why: `A verified fact and a thesis grounded in it.${known ? ` Optional opener: ${known}.` : ''}` };
+  const noDraft = 'No problem is claimed; GAP drafts nothing until a usable fact and a grounded thesis exist.';
+  if (x.source && t?.approach === 'referral_led') return { kind: 'REFERRAL_LED', why: `${known}: name the introduction and ask for their perspective. ${noDraft}` };
+  if (known) return { kind: 'RELATIONSHIP_LED', why: `${known}: ask for their perspective. ${noDraft}` };
+  return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${factBlock}${x.verifiedFact ? '' : ' and no relationship to open with'}.` };
 }

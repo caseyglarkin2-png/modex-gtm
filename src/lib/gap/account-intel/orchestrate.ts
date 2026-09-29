@@ -70,7 +70,7 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     return { tasks, skipped };
   }
   if (brief.dealState === 'ACTIVE') {
-    tasks.push({ section: 'commercial', depth: 'DEEPEN', provider: 'human', focus: brief.discovery.find((q) => q.type !== 'VERIFY_PROBLEM')?.question ?? 'The next unknown in the deal.', why: 'An open deal is worked from the deal: learn from the buyer, never cold research.' });
+    tasks.push({ section: 'commercial', depth: 'DEEPEN', provider: 'human', focus: 'The Deal brief next learning objective (one objective per deal, in GAP order).', why: 'An open deal is worked from the deal: learn from the buyer, never cold research.' });
     for (const { section } of ORDER) skipped.push({ section, reason: 'In a deal: learn from the buyer, not the web.' });
     return { tasks, skipped };
   }

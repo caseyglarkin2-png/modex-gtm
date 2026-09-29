@@ -23,6 +23,7 @@ import { loadAccountConversations } from '../motion/load';
 import { suggestAngle } from '../motion/persona-angle';
 import { traitsOf } from './traits';
 import { decideApproach } from '../motion/approach';
+import { sensitivityOf } from '../research/sensitivity';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -63,18 +64,7 @@ export interface Opportunity {
 const GATES = 'Every send still runs the normal gates at the click: suppression, deal truth, duplicate send, account motion.';
 const BLIND_SPOT = 'GAP only sees its own sends: check whether you already wrote to them before anything new goes out.';
 
-/** A fact about people harmed (jobs lost, bankruptcy, deaths, a recall, a strike) is never a cold opener's hook. */
-const SENSITIVE: Array<[RegExp, string]> = [
-  [/\b(?:layoffs?|laid off|job cuts|jobs? (?:cut|lost)|out of work|lose their jobs|furlough\w*|workforce reduction)\b/i, 'people lost their jobs'],
-  [/\b(?:bankrupt\w*|chapter 11|insolven\w*)\b/i, 'a bankruptcy'],
-  [/\b(?:fatal\w*|died|deaths?|killed)\b/i, 'people died'],
-  [/\brecall(?:s|ed)?\b/i, 'a product recall'],
-  [/\bstrikes?\b|\bwalkout\b/i, 'a labor dispute'],
-];
-export function sensitivityOf(quote: string): string | null {
-  for (const [re, what] of SENSITIVE) if (re.test(quote)) return what;
-  return null;
-}
+export { sensitivityOf };
 
 export function proposeOpportunity(i: OpportunityInput): Opportunity {
   const m = i.member;
@@ -83,21 +73,21 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   let approach: Approach;
   let suggested: string;
   // ONE decision (motion/approach.ts); the card only words it for this person and source.
-  const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name } });
+  const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name }, groundedThesis: !!i.thesis, sensitiveOnly: i.fact ? sensitivityOf(i.fact.quote) : null });
   if (decided.kind === 'NO_GOOD_MOTION' || decided.kind === 'IN_DEAL') {
     approach = 'hold';
     suggested = `Not now. ${decided.why}`;
-  } else if (i.conversation) {
+  } else if (decided.kind === 'FOLLOW_UP' && i.conversation) {
     approach = 'follow_up';
     suggested = `Follow-up: there is a conversation at ${m.accountName} with ${i.conversation.who} (${i.conversation.responseClass.replace(/_/g, ' ')}). Continue it in that thread; this is not a cold first touch.`;
-  } else if (i.fact && traits.engaged) {
+  } else if (decided.kind === 'FACT_LED' && traits.engaged) {
     approach = 'fact_led';
     suggested = `Fact-led follow-up: you already know them (${ctx ?? i.source.name}). If you have written to them, continue that thread and bring the verified fact; never a second cold first touch.`;
-  } else if (i.fact) {
+  } else if (decided.kind === 'FACT_LED') {
     approach = 'fact_led';
     const optional = traits.opener === 'author' ? ` Optional: you may say you write ${i.source.name}; never that they subscribe.` : ctx ? ` Optional: you may mention ${ctx} if it would feel natural; never as the reason.` : '';
     suggested = `Fact-led: open with the verified fact, bridge to one question about how it lands on their yards, then a small ask.${optional}`;
-  } else if (traits.approach === 'referral_led') {
+  } else if (decided.kind === 'REFERRAL_LED') {
     approach = 'referral_led';
     suggested = `Referral-led: name the introduction (${ctx ?? i.source.name}) and ask for their perspective on how their network handles yard handoffs. No problem is claimed.`;
   } else {
