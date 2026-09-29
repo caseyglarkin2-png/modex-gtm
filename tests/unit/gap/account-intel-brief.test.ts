@@ -391,3 +391,20 @@ describe('first-party freshness (Release M): real record dates, or undated, neve
     expect(b.sections.identity.statements.find((s) => /^Acme Foods, cpg/.test(s.text))?.sources[0].at).toBeNull();
   });
 });
+
+describe('fit comes from operations, not the label (final dogfood: Crowley, PepsiCo, Kroger showed "Fit unknown")', () => {
+  it('type unknown + verified self-operated sites is a direct buyer; the type stays unknown', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Unknown' }, facts: [] }), NOW);
+    expect(b.fit).toMatchObject({ entityType: null, fit: 'DIRECT_BUYER' });
+    expect(b.fit.why).toMatch(/what kind of company it is is not established yet/);
+  });
+  it('type unknown + a sourced count of many facilities (a 10-K) is a direct buyer', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Unknown' }, facts: [], pack: { ...(base().pack as object), network: { totals: {}, sites: [] } } as never }), NOW);
+    expect(b.fit.fit).toBe('DIRECT_BUYER');
+    expect(b.fit.evidence[0]).toMatch(/network count \(FY25 10-K Item 2\): 38/);
+  });
+  it('type unknown and nothing it operates stays unknown', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Unknown' }, facts: [], pack: null }), NOW);
+    expect(b.fit).toMatchObject({ entityType: null, fit: 'UNKNOWN' });
+  });
+});
