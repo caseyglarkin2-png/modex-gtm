@@ -6,6 +6,7 @@
  */
 import type { AccountIntelligenceBrief, Section } from '@/lib/gap/account-intel/build';
 import type { SectionStatus, Statement, TruthClass } from '@/lib/gap/account-intel/truth';
+import { ThesisReviewedButton } from './thesis-reviewed-button';
 
 const TRUTH_LABEL: Record<TruthClass, string> = {
   BUYER_CONFIRMED: 'Buyer confirmed',
@@ -207,7 +208,7 @@ export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelli
               <li key={h.id} className="rounded-md border border-[var(--border)] px-3 py-2 text-sm" data-testid="brief-hypothesis" data-grounded={h.grounded} data-needs-review={h.needsReview.length > 0}>
                 {h.needsReview.length ? (
                   <p className="mb-1 text-xs font-semibold text-amber-700 dark:text-amber-400" data-testid="brief-needs-review">
-                    Needs review (nothing was rewritten): {h.needsReview.join(' ')}
+                    Needs review (nothing was rewritten): {h.needsReview.join(' ')} <ThesisReviewedButton hypothesisId={h.id} />
                   </p>
                 ) : null}
                 <div className="flex items-start gap-2">

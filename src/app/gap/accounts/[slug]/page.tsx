@@ -47,6 +47,11 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       </div>
     );
   }
+  // One round of reads for the extras (the deal brief only when in a deal); both fail soft (display only).
+  const [history, dealBrief] = await Promise.all([
+    loadResearchHistory(prisma, brief.accountName, now).catch(() => []),
+    brief.dealState === 'ACTIVE' ? loadDealBrief(prisma, brief.accountName, { now }).catch(() => null) : Promise.resolve(null),
+  ]);
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       <GapSubnav />
@@ -62,9 +67,9 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           <>
             {/* In a deal: the same account, learned from the buyer (the Deal Brief: buyer truth, unknowns, stakeholders, next learning objective; no scoring). */}
             {brief.dealState === 'ACTIVE' ? (
-              (await loadDealBrief(prisma, brief.accountName, { now }).then((d) => <DealBriefView brief={d} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'unknown', lastActivityAt: null }))} />).catch(() => <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>))
+              dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>
             ) : null}
-            <ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, await loadResearchHistory(prisma, brief.accountName, now).catch(() => []), now)} />
+            <ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, history, now)} />
           </>
         }
       />

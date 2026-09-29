@@ -426,6 +426,27 @@ const QUALIFIED: Record<string, RegExp> = {
 const VENDOR_FUNCTION: Record<string, string> = { PINC: 'yard management', Kaleris: 'yard management', 'Terminal Industries': 'yard automation', FourKites: 'freight visibility', project44: 'freight visibility', 'Blue Yonder': 'supply chain software', 'Manhattan Associates': 'supply chain software', Manhattan: 'supply chain software', SAP: 'ERP / supply chain software', Oracle: 'ERP / supply chain software', o9: 'supply chain planning', Kinaxis: 'supply chain planning', Descartes: 'logistics software', 'C3 Solutions': 'dock scheduling / yard', 'Yard Management Solutions': 'yard management', Samsara: 'fleet telematics', Motive: 'fleet telematics', Trimble: 'fleet / transportation software', Omnitracs: 'fleet telematics', Transplace: 'managed transportation', 'Uber Freight': 'freight brokerage / managed transportation', Gatik: 'autonomous freight', Aurora: 'autonomous freight', Kodiak: 'autonomous freight', Outrider: 'autonomous yard trucks' };
 const vendorRe = (v: string) => QUALIFIED[v] ?? new RegExp(`\\b${v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, v === 'SAP' || v === 'PINC' || v === 'o9' ? '' : 'i');
 
+/** Yard management systems (an explicit set: a yard truck or a dock scheduler is not a YMS). */
+const YMS = new Set(['PINC', 'Kaleris', 'Terminal Industries', 'Yard Management Solutions']);
+
+/**
+ * What the buyer said about one vendor: current ("we use PINC"), former ("we replaced Kaleris with PINC", "we
+ * used to run Kaleris") or not in use ("we don't use PINC"). Only a CURRENT buyer mention overrules the public
+ * record; a former or negated one contradicts a public claim that they use it.
+ */
+function buyerVendorStatus(summary: string, v: string): 'current' | 'former' | 'not_in_use' {
+  const at = summary.search(vendorRe(v));
+  const before = at >= 0 ? summary.slice(Math.max(0, at - 60), at) : '';
+  const clause = before.split(/[.;]|\bbut\b/i).pop() ?? '';
+  // The verb must govern THIS vendor (right before its name): in "we replaced Kaleris with PINC" only Kaleris is former.
+  if (/\b(?:(?:don'?t|do not|doesn'?t|does not|never|aren'?t|no longer)\s+(?:use|using|run|running|have|had|used)|not using)\s+(?:any\s+|the\s+|a\s+)?$/i.test(clause)) return 'not_in_use';
+  if (/\b(?:replaced|moved off(?: of)?|switched (?:away )?from|got rid of|dropped|used to (?:use|run|have)|formerly (?:used|ran)?|previously (?:used|ran)?)\s+(?:the\s+|our\s+)?$/i.test(clause)) return 'former';
+  const after = at >= 0 ? summary.slice(at, at + 60) : '';
+  if (new RegExp(`^${v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s+(was|were|has been|got)\\s+(replaced|removed|dropped)`, 'i').test(after)) return 'former';
+  return 'current';
+}
+const BUYER_LABEL = { current: 'BUYER CONFIRMED', former: 'BUYER: no longer in use', not_in_use: 'BUYER: not in use' } as const;
+
 function vendorStatus(text: string): string {
   if (/\bpilot(s|ed|ing)?\b(?! plants?\b| lines?\b| facilit)/i.test(text)) return 'PILOT';
   if (/\b(previously|formerly|replaced|former)\b/i.test(text)) return 'HISTORICAL';
@@ -438,21 +459,24 @@ function technologySection(i: AccountInputs, now: Date): Section {
   for (const b of i.bids) {
     for (const v of VENDORS) if (vendorRe(v).test(b.summary) && !seen.has(`b:${v}`)) {
       seen.add(`b:${v}`);
-      st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; BUYER CONFIRMED): ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
+      st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; ${BUYER_LABEL[buyerVendorStatus(b.summary, v)]}): ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
     }
   }
   // Buyer truth outranks public: once the buyer names their yard system, a public mention of a DIFFERENT yard
   // system is contradicted by the buyer (visible until Casey resolves it), never silently kept as current.
-  const isYard = (v: string) => /yard/.test(VENDOR_FUNCTION[v] ?? '');
-  const buyerYard = i.bids.flatMap((b) => VENDORS.filter((v) => isYard(v) && vendorRe(v).test(b.summary)).map((v) => ({ v, b })));
+  const said = i.bids.flatMap((b) => VENDORS.filter((v) => vendorRe(v).test(b.summary)).map((v) => ({ v, b, status: buyerVendorStatus(b.summary, v) })));
   for (const f of liveFacts(i, now)) {
     for (const v of VENDORS) if (vendorRe(v).test(f.quote) && !seen.has(`f:${v}`)) {
       seen.add(`f:${v}`);
       const host = (() => { try { return new URL(f.url ?? '').hostname; } catch { return ''; } })();
       const partner = host && host.toLowerCase().includes(v.toLowerCase().split(' ')[0]);
-      const overruled = isYard(v) ? buyerYard.find((x) => x.v !== v) : undefined;
-      if (overruled) {
-        st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; ${partner ? 'PARTNER CLAIM' : vendorStatus(f.quote)}, ${day(f.publishedAt)}): ${f.quote} The buyer says they use ${overruled.v}.`, truth: 'CONTRADICTED', sources: [ev(f)], contradictedBy: [bidSrc(overruled.b)], asOf: f.publishedAt });
+      // A public HISTORICAL mention agrees with a buyer who moved on: never overruled.
+      const historical = vendorStatus(f.quote) === 'HISTORICAL';
+      const denied = said.find((x) => x.v === v && x.status !== 'current');
+      const otherYms = YMS.has(v) ? said.find((x) => YMS.has(x.v) && x.v !== v && x.status === 'current') : undefined;
+      if (!historical && (denied || otherYms)) {
+        const why = denied ? `The buyer says they ${denied.status === 'former' ? 'no longer use' : 'do not use'} ${v}.` : `The buyer says they use ${otherYms!.v}.`;
+        st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; ${partner ? 'PARTNER CLAIM' : vendorStatus(f.quote)}, ${day(f.publishedAt)}): ${f.quote} ${why}`, truth: 'CONTRADICTED', sources: [ev(f)], contradictedBy: [bidSrc((denied ?? otherYms)!.b)], asOf: f.publishedAt });
         continue;
       }
       st.push({ text: `${v} (${VENDOR_FUNCTION[v]}; ${partner ? 'PARTNER CLAIM' : vendorStatus(f.quote)}, ${day(f.publishedAt)}): ${f.quote}`, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
@@ -569,14 +593,20 @@ function reviewReasons(i: AccountInputs, h: HypothesisInput, now: Date, verified
   const since = new Date(h.reviewedAt).getTime();
   const out: string[] = [];
   if (truth === 'CONTRADICTED') out.push('The buyer contradicted it.');
-  const newBid = i.bids.filter((b) => new Date(b.at).getTime() > since).sort((a, b) => b.at.localeCompare(a.at))[0];
+  // Buyer truth on THIS thesis (or on none), after Casey last reviewed it; the buyer confirming the problem is not a reason to look again.
+  const newBid = i.bids
+    .filter((b) => (b.hypothesisId === h.id || b.hypothesisId == null) && b.type !== 'business_problem' && new Date(b.at).getTime() > since)
+    .sort((a, b) => b.at.localeCompare(a.at))[0];
   if (newBid) out.push(`The buyer said something after you approved it (${newBid.type.replace(/_/g, ' ')}, ${monthDay(newBid.at)}).`);
   if (h.primarySignalId && !verified.has(h.primarySignalId)) out.push('Its fact is no longer live: the thesis rests on nothing current.');
+  // A newer fact matters only when it is a strong seller fact (a network, site or automation change) that beats a
+  // live primary fact; a missing or stale primary is already said above.
   const primary = i.facts.find((f) => f.id === h.primarySignalId);
-  const primaryRank = primary && verified.has(primary.id) ? sellerRelevance(primary.quote).rank : Number.POSITIVE_INFINITY;
-  const better = rankedFacts(i, now).find((f) => f.id !== h.primarySignalId && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank < primaryRank);
-  if (better) out.push(`A newer fact (${sellerRelevance(better.quote).reason}, ${monthDay(better.publishedAt)}) may change the story.`);
-  if (i.opportunity?.status === 'ACTIVE') out.push('A deal opened: work the thesis from the deal.');
+  if (primary && verified.has(primary.id)) {
+    const primaryRank = sellerRelevance(primary.quote).rank;
+    const better = rankedFacts(i, now).find((f) => f.id !== primary.id && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank <= 3 && sellerRelevance(f.quote).rank < primaryRank);
+    if (better) out.push(`A newer fact (${sellerRelevance(better.quote).reason}, ${monthDay(better.publishedAt)}) may change the story.`);
+  }
   return out;
 }
 
@@ -709,7 +739,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
 
   const econ = sections.economics.statements.find((s) => s.truth === 'MODELED_ESTIMATE' || s.truth === 'BUYER_CONFIRMED');
   // An approved thesis the world moved under: flagged, never rewritten.
-  const stale = hypotheses.find((h) => h.needsReview.length > 0);
+  const stale = top?.needsReview.length ? top : hypotheses.find((h) => h.needsReview.length > 0);
   const thesis: Thesis = {
     status: stale ? `THESIS NEEDS REVIEW: ${stale.needsReview.join(' ')}` : 'INFERENCE, for your review (never approved by GAP)',
     whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),

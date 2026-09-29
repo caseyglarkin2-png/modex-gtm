@@ -5,7 +5,9 @@
  * ungrounded draft hypothesis is labelled as unable to lead.
  */
 import { render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+
+vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 import { buildAccountBrief, type AccountInputs } from '@/lib/gap/account-intel/build';
 import { AccountBriefView } from '@/components/gap/account-brief';
 import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
