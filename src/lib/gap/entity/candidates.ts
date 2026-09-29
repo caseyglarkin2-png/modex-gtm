@@ -104,7 +104,8 @@ const SCOUT_DAILY_CAP = 60;
 
 /**
  * Scout one company and keep what it found on its one candidate row. One web pass at most, and never twice in a
- * day for the same company unless forced; at most SCOUT_DAILY_CAP passes a day across GAP (cost control).
+ * day for the same company unless forced; at most SCOUT_DAILY_CAP passes that learned something a day across GAP
+ * (cost control; a failed pass is neither stored nor counted).
  */
 export async function scoutCandidate(
   prisma: PrismaLike,
@@ -114,14 +115,14 @@ export async function scoutCandidate(
   const company_key = normalizeCompanyName(input.company);
   const prior = await prisma.gapAccountCandidate.findUnique({ where: { company_key } });
   if (!input.force && prior?.scouted_at && input.now.getTime() - new Date(prior.scouted_at).getTime() < SCOUT_COOLDOWN_MS) return { refused: 'recently_scouted', scoutedAt: new Date(prior.scouted_at).toISOString() };
-  const today: number = prisma.gapAuditEvent.count ? await prisma.gapAuditEvent.count({ where: { kind: 'entity.scouted', created_at: { gte: new Date(input.now.getTime() - 86_400_000) } } }).catch(() => 0) : 0;
+  const today: number = prisma.gapAuditEvent.count ? await prisma.gapAuditEvent.count({ where: { kind: 'entity.scouted', created_at: { gte: new Date(input.now.getTime() - 86_400_000) }, payload: { path: ['ok'], equals: true } } }).catch(() => 0) : 0;
   if (today >= SCOUT_DAILY_CAP) return { refused: 'daily_cap' };
   const scout = deps.scout ?? ((c: string, o: { hint?: string }) => scoutCompany(c, { hint: o.hint }));
   const r = await scout(input.company.trim(), { hint: input.hint });
   // A failed web pass learned nothing: never stored as a verdict (it would block a retry for a day).
   if (r.failed) return { refused: 'web_failed', why: r.why };
   await upsertCandidate(prisma, input.company, input.actor, { verdict: r.verdict, entity_type: r.entityType, domain: r.domain, scout: r as unknown as object, scouted_at: input.now });
-  await prisma.gapAuditEvent.create({ data: { kind: 'entity.scouted', actor: input.actor, subject_type: 'account_candidate', subject_id: company_key, payload: { company: input.company, verdict: r.verdict, entityType: r.entityType, basis: r.basis } } });
+  await prisma.gapAuditEvent.create({ data: { kind: 'entity.scouted', actor: input.actor, subject_type: 'account_candidate', subject_id: company_key, payload: { company: input.company, verdict: r.verdict, entityType: r.entityType, basis: r.basis, ok: true } } });
   return r;
 }
 
