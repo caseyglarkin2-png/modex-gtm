@@ -26,6 +26,7 @@ import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evid
 import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 import { factFitsOpener } from './opener';
+import { sellerRelevance } from './continuity';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -144,9 +145,18 @@ export async function proposeFromResearch(
   // change (a risk factor, a liquidity paragraph) is not a fact to open with.
   const eligible = fresh.filter((s) => outreachFactRefusal(s, run.account_name) === null);
   if (eligible.length === 0) return { ok: false, reason: 'no_outreach_fact' };
-  // Final Monday P1: ONE primary fact opens the first touch, the first in research order that a
-  // first touch can quote whole. A longer fact is research context, never the opener.
-  const primary = eligible.find((s) => factFitsOpener(s.evidence_text));
+  // Final Monday P1: ONE primary fact opens the first touch, one a first touch can quote whole. A longer fact is
+  // research context, never the opener. Scale dogfood: when GAP picks (Casey chose none), the most seller-relevant
+  // fact opens (a network change beats a foreign divestiture), and a sale abroad or a divestiture never opens.
+  const openers = chosen.length
+    ? eligible
+    : eligible
+        .map((s, idx) => ({ s, idx, rank: sellerRelevance(s.evidence_text ?? '').rank }))
+        .filter((x) => x.rank < 7)
+        .sort((a, b) => a.rank - b.rank || a.idx - b.idx)
+        .map((x) => x.s);
+  if (!openers.length) return { ok: false, reason: 'no_outreach_fact' };
+  const primary = openers.find((s) => factFitsOpener(s.evidence_text));
   if (!primary) return { ok: false, reason: 'opener_too_long' };
   const quotable = [primary, ...eligible.filter((s) => s.id !== primary.id)].slice(0, 2);
 
