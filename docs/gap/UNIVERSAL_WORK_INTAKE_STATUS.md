@@ -1,0 +1,91 @@
+# GAP Universal Work Intake + Cohort Intelligence (status ledger)
+
+STATUS: ACTIVE (Release 0 decision recorded 2026-09-28)
+
+<!-- verified:2026-09-28 -->
+
+Give GAP something worth working; GAP does the mechanical work of turning it
+into a justified human sales decision. Many reasons to look at a person or an
+account, ONE downstream system:
+
+SOURCE -> RESOLVE -> QUALIFY -> RESEARCH -> ACCOUNT THESIS -> PERSON ANGLE ->
+PROPOSED MOTION -> HUMAN DECISION -> ACTION -> BUYER TRUTH -> LEARNING
+
+Source provenance is CONTEXT. It is not evidence, not buyer truth, not consent.
+
+Baseline: `origin/main` 5ef95058 (Evidence Continuity shipped).
+
+## Release 0: reconnaissance (read from code, file:line in the session record)
+
+What exists and is reused:
+
+| Concern | Existing owner |
+| --- | --- |
+| Company to Account | `gap/identity/resolve.ts resolveIdentity` (hubspot id 100, domain 95, alias 90, normalized name 70; no fuzzy), `identity/service.ts loadIdentityContext / resolveAccountName` |
+| Person to Persona | email only today (`capture/store.ts`, `bid/service.ts`, `person-history.ts`); `Persona @@unique([account_name, email])` |
+| New person, not yet safe | `AccountContactCandidate` staged (`account-contact-candidates.ts`; states staged / promoted / replaced / deferred; promotion is a human action) |
+| Watched universe (ICP-in) | `signals/watch.ts loadWatchProfiles` (band A-C or Tier 1-2, a thesis, the Pounce watchlist, 5+ personas; fixtures out) |
+| Open opportunity | `opportunity/active-opportunity.ts resolveAccountOpportunity` (CLEAR / ACTIVE / UNKNOWN; never throws) |
+| Suppression | `Persona.do_not_contact`, hard-invalid email statuses; the send gate re-reads the suppression service at send |
+| Conversation | `motion/load.ts loadAccountConversations` (human-confirmed dispositions, 90 days) |
+| Evidence | `research/inbox.ts loadEvidenceInbox` (best fact, context, theses, next) |
+| Research worker | `research/background.ts runBackgroundResearch` (targets ranked by reason; 3-day cooldown; capped) |
+| Draft thesis | `research/propose.ts proposeFromResearch` (draft only) |
+| Person angle | `motion/persona-angle.ts setAngle / suggestAngle` |
+| Brief | `execution/six-line-brief.ts` (KNOW / THINK / LEARN / WHY YOU / HISTORY / WRONG IF) |
+| Send attribution | `execution/send-attribution.ts captureSendAttribution` (immutable, in the send ledger payload) |
+| Signals | Signal Intelligence (`/gap/signals/new`, `GapSignal`) |
+| Conversations | Buyer Truth Capture (`/gap/capture`, audit-ledger captures, BIDs) |
+
+What does not exist: a way to say "these people / accounts arrived from THIS
+source, for THIS reason"; person membership in any cohort; relationship
+context anywhere GAP reads; an account-level research request other than a
+shared signal; HubSpot list reads (no code, and `crm.lists.read` is not a
+documented scope).
+
+## Release 0: the model decision
+
+**Campaign is NOT reused.** `Campaign` is the outbound-generation container
+(GeneratedContent, SendJobRecipient, EmailLog, GenerationJob, generation
+contracts, playbook blocks, drip). Its only membership is `OutreachWave`,
+which is account-level (no person), and GAP never reads it. Putting "MMYQB
+subscribers" or "Inland26 attendees" into it would put them one join away from
+generation and send machinery and imply everyone should receive outreach,
+which is the opposite of provenance-as-context.
+
+**One new abstraction, two tables:**
+
+- `GapWorkSource`: a named source of work: name, source type, source
+  reference, intent, default relationship context, notes, status, owner.
+  Source types are configuration, not architecture: newsletter, conference,
+  crm_list, referral, relationship, target_list, content, inbound, other.
+- `GapWorkSourceMember`: one row per (source, person-or-account): exactly
+  what was supplied (raw + the mapped fields), the resolved identity
+  (account, persona, staged candidate), resolution state and basis,
+  relationship context, the qualification the planner derived, and status.
+  One person in three sources = three member rows pointing at the same
+  Persona. Provenance edges are many; the person is one.
+
+Nothing else is new: no per-intake table (no NewsletterSubscriber,
+ConferenceAttendee, Referral or TargetListMember), no second person store (a
+new person is a staged `AccountContactCandidate`, never an auto-created
+Persona), no second research engine (the planner feeds the existing
+background worker), no second evidence, hypothesis, routing, execution or
+buyer-truth system.
+
+Identity is conservative: resolved, new_candidate (known account, new person,
+staged), ambiguous (never merged), unresolved. GAP still never creates an
+Account.
+
+## MMYQB data source
+
+LinkedIn offers newsletter authors analytics (title, company size,
+seniority) but no subscriber export or API. The author CAN see the
+subscriber list (newsletter page, "N subscribers"). On 2026-09-28, at Casey's
+direction, the list was read once from Casey's own signed-in session, human
+paced, into a local scratch file (never committed): 390 subscribers (LinkedIn
+shows 391). GAP itself never touches LinkedIn: the product path is paste
+(select the subscriber dialog, copy, paste into ADD TO GAP), which the parser
+reads as name + headline pairs. 136 of 390 headlines name a company ("Title at
+Company"); the rest are slogans or credentials and start as NEEDS IDENTITY
+rather than a guessed company.

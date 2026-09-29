@@ -14,6 +14,9 @@ import { cn } from '@/lib/utils';
 
 const TABS = [
   { label: 'Cockpit', href: '/gap' },
+  // Universal Work Intake: the one front door (a link, a person, a list, a conversation) and what GAP did with each source.
+  { label: 'Add to GAP', href: '/gap/add' },
+  { label: 'Sources', href: '/gap/sources' },
   // Phase 2 D1: capture buyer truth right after a conversation (phone first).
   // Signal Intelligence: share a link or a conference note; the Signal Inbox.
   { label: 'Signals', href: '/gap/signals' },

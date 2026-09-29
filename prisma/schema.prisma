@@ -67,6 +67,7 @@ model Account {
   sequence_families     SequenceFamily[]
   sequence_enrollments  SequenceEnrollment[]
   routing_decisions     RoutingDecision[]
+  work_source_members   GapWorkSourceMember[]
   gap_account_aliases   GapAccountAlias[]
 
   @@map("accounts")
@@ -129,6 +130,7 @@ model Persona {
   buyer_input_data    BuyerInputData[]
   sequence_enrollments SequenceEnrollment[]
   routing_decisions   RoutingDecision[]
+  work_source_members GapWorkSourceMember[]
 
   @@unique([account_name, email])
   @@index([account_name])
@@ -1445,6 +1447,89 @@ model GapAccountAlias {
   @@unique([normalized_alias])
   @@index([account_name])
   @@map("gap_account_aliases")
+}
+
+/// GAP Universal Work Intake (2026-09-28): a named SOURCE of work (a
+/// newsletter's subscribers, a conference, a CRM list, referrals, a target
+/// list). Source provenance is CONTEXT: not evidence, not buyer truth, not
+/// consent. One abstraction for every intake type; the source type is
+/// configuration. docs/gap/UNIVERSAL_WORK_INTAKE_STATUS.md
+model GapWorkSource {
+  id                   String    @id @default(cuid())
+  name                 String
+  /// newsletter | conference | crm_list | referral | relationship | target_list | content | inbound | other (CHECK in hand SQL)
+  source_type          String
+  /// Where it came from: a newsletter URL, a conference name, a CRM list id.
+  source_ref           String?
+  /// Casey's intent: research | find_people | prepare_outreach | follow_up | watch (default research)
+  intent               String    @default("research")
+  /// The relationship context members inherit ("MMYQB subscriber", "Met at Inland26").
+  relationship_context String?
+  notes                String?
+  /// active | archived
+  status               String    @default("active")
+  /// The newest current_at is the CURRENT source: quick adds on a phone default to it (conference mode).
+  current_at           DateTime?
+  created_by           String
+  created_at           DateTime  @default(now())
+  updated_at           DateTime  @updatedAt
+
+  members GapWorkSourceMember[]
+
+  @@index([status, current_at])
+  @@map("gap_work_sources")
+}
+
+/// One person or account that arrived from a work source. Exactly what Casey
+/// supplied is kept (raw + mapped fields, frozen after insert); identity and
+/// qualification are derived and may move. The same person in three sources
+/// is three member rows pointing at ONE Persona.
+model GapWorkSourceMember {
+  id                    String    @id @default(cuid())
+  work_source_id        String
+  /// person | account
+  kind                  String
+  /// Idempotency within a source (a re-import never duplicates).
+  member_key            String
+  /// Exactly what was supplied for this row.
+  raw                   Json
+  name                  String?
+  title                 String?
+  company               String?
+  email                 String?
+  linkedin_url          String?
+  company_domain        String?
+  /// An identifier the source itself supplied (a CRM record id).
+  source_identifier     String?
+  relationship_context  String?
+  note                  String?
+  /// resolved | new_candidate | ambiguous | unresolved
+  resolution            String    @default("unresolved")
+  resolution_basis      String?
+  resolution_candidates Json?
+  account_name          String?
+  persona_id            Int?
+  /// The staged AccountContactCandidate for a new person at a known account.
+  candidate_id          Int?
+  /// Planner state (transparent, no score): research | evidence_ready | already_covered | in_deal | opportunity_unknown | not_icp | needs_identity | do_not_contact | human_review
+  qualification         String?
+  qualification_reason  String?
+  qualified_at          DateTime?
+  /// active | ignored | not_now | research_requested
+  status                String    @default("active")
+  ingested_at           DateTime  @default(now())
+  created_by            String
+  updated_at            DateTime  @updatedAt
+
+  work_source GapWorkSource @relation(fields: [work_source_id], references: [id])
+  account     Account?      @relation(fields: [account_name], references: [name])
+  persona     Persona?      @relation(fields: [persona_id], references: [id])
+
+  @@unique([work_source_id, member_key])
+  @@index([account_name])
+  @@index([persona_id])
+  @@index([work_source_id, qualification])
+  @@map("gap_work_source_members")
 }
 
 /// A seller INFERENCE about one account (and usually one persona): what we
