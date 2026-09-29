@@ -17,7 +17,7 @@ function fake(accounts: Acct[]) {
       findUnique: async ({ where }: { where: { name: string } }) => accounts.find((a) => a.name === where.name) ?? null,
       findMany: async ({ where }: { where: Record<string, unknown> }) => {
         if ('parent_brand' in where) return accounts.filter((a) => a.parent_brand);
-        if ('name' in where) return accounts.filter((a) => a.name.toLowerCase() === String((where.name as { equals: string }).equals).toLowerCase());
+        if ('name' in where) return accounts.filter((a) => a.name.toLowerCase().startsWith(String((where.name as { startsWith: string }).startsWith).toLowerCase()));
         if ('hubspot_company_id' in where) return accounts.filter((a) => a.hubspot_company_id && ((where.hubspot_company_id as { in: string[] }).in).includes(a.hubspot_company_id));
         return [];
       },
@@ -52,7 +52,19 @@ describe('the family is derived, never a merge', () => {
     expect(sameCompany('Kenco Logistics Services', 'Kenco')).toBe(true);
     expect(sameCompany('JM Smucker', 'The J.M. Smucker Company')).toBe(true);
     expect(sameCompany('Frito-Lay', 'PepsiCo')).toBe(false);
+    // review K: a different company that starts with the parent's name is family, not identity
+    expect(sameCompany('Coca-Cola Bottling Co', 'Coca-Cola')).toBe(false);
+    expect(sameCompany('Nestle Purina', 'Nestle')).toBe(false);
+    expect(sameCompany('Kraft Heinz', 'Kraft')).toBe(false);
     expect((await loadCorporateFamily(fake(book), 'Kenco Logistics Services')).members).toEqual([]);
+  });
+  it('a parent recorded with a legal suffix still finds the parent account (normalized)', async () => {
+    const f = await loadCorporateFamily(fake([...book, { name: 'Tostitos Co', parent_brand: 'PepsiCo, Inc.', hubspot_company_id: null }]), 'Tostitos Co');
+    expect(f.members.find((m) => m.relation === 'parent')?.accountName).toBe('PepsiCo');
+  });
+  it('HubSpot unreadable is said (the action-time hold fails closed)', async () => {
+    const f = await loadCorporateFamily(fake(book), 'Gatorade', { hubspot: async () => 'unreadable' });
+    expect(f.hubspotUnreadable).toBe(true);
   });
   it('a HubSpot parent company link adds the relation', async () => {
     const f = await loadCorporateFamily(fake(book), 'Gatorade', { hubspot: async () => ({ parentId: '111', childIds: [] }) });

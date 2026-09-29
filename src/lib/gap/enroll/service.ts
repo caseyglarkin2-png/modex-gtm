@@ -539,8 +539,11 @@ export type ActionTimeOpportunity =
 export type ActionTimeOpportunityCheck = (prisma: any, accountName: string, email: string, now: Date) => Promise<ActionTimeOpportunity>;
 
 /** Re-read at the click: routing state may be stale; this wins. Never throws (a throw is UNKNOWN). */
-export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = {}, familyDeps: { hold?: (prisma: any, accountName: string, now: Date) => Promise<{ detail: string; unknown: boolean } | null> } = {}): ActionTimeOpportunityCheck => async (prisma, accountName, email, now) => {
+export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = {}, familyDeps: { hold?: (prisma: Parameters<ActionTimeOpportunityCheck>[0], accountName: string, now: Date) => Promise<{ detail: string; unknown: boolean } | null> } = {}): ActionTimeOpportunityCheck => async (prisma, accountName, email, now) => {
   let inputs: ActiveOpportunityInputs;
+  // Corporate family (family/family.ts), read alongside the account's own deal state (the click has a time limit).
+  const familyHold = (async () => (familyDeps.hold ?? (async (p: Parameters<ActionTimeOpportunityCheck>[0], a: string, n: Date) => (await import('../family/family')).familyHoldNow(p, a, n)))(prisma, accountName, now))();
+  familyHold.catch(() => null);
   try {
     inputs = await loadActiveOpportunityInputs(prisma, accountName, email, now, resolveDeps);
   } catch (e) {
@@ -556,7 +559,7 @@ export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = 
   // subsidiary or sibling holds a cold motion here too, through the SAME refusal paths (ACTIVE / UNKNOWN), until
   // Casey records a separate buying motion. A family read that fails is UNKNOWN (fail closed).
   try {
-    const hold = await (familyDeps.hold ?? (async (p: any, a: string, n: Date) => (await import('../family/family')).familyHoldNow(p, a, n)))(prisma, accountName, now);
+    const hold = await familyHold;
     if (hold) return hold.unknown ? { status: 'UNKNOWN', detail: hold.detail } : { status: 'ACTIVE', detail: hold.detail };
   } catch (e) {
     return { status: 'UNKNOWN', detail: `Could not read the related accounts in this corporate family (${e instanceof Error ? e.message : String(e)}). ${OPPORTUNITY_UNKNOWN_COPY}` };

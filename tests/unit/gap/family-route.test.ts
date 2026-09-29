@@ -2,7 +2,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
-const { session, fam } = vi.hoisted(() => ({ session: { value: null as null | { user: { email: string } } }, fam: { loadCorporateFamily: vi.fn(), recordSeparateMotion: vi.fn() } }));
+const { session, fam } = vi.hoisted(() => ({ session: { value: null as null | { user: { email: string } } }, fam: { loadCorporateFamily: vi.fn(), recordSeparateMotion: vi.fn(), hubspotFamily: vi.fn() } }));
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => session.value) }));
 vi.mock('@/lib/prisma', () => ({ prisma: {} }));
 vi.mock('@/lib/gap/flags', () => ({ assertGapEnabled: () => null }));

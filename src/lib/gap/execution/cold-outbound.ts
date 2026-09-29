@@ -74,7 +74,8 @@ export async function checkColdOutbound(
   if (verdict?.status === 'ACTIVE') return { ok: false, reason: 'active_opportunity', message: `${WORK_THE_DEAL[input.channel]} ${verdict.detail}` };
   if (verdict?.status !== 'CLEAR') {
     const detail = verdict?.status === 'UNKNOWN' ? String(verdict.detail ?? '') : '';
-    return { ok: false, reason: 'opportunity_unknown', message: detail.startsWith(OPPORTUNITY_UNKNOWN_COPY) ? detail : OPPORTUNITY_UNKNOWN_COPY };
+    // The family reason ("Could not read the related accounts...", "Related account activity...") is kept too.
+    return { ok: false, reason: 'opportunity_unknown', message: detail.startsWith(OPPORTUNITY_UNKNOWN_COPY) || /corporate family|related account|parent and child companies/i.test(detail) ? detail : OPPORTUNITY_UNKNOWN_COPY };
   }
   return { ok: true, channel: input.channel, href };
 }

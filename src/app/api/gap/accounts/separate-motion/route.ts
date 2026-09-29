@@ -7,7 +7,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { loadCorporateFamily, recordSeparateMotion } from '@/lib/gap/family/family';
+import { hubspotFamily, loadCorporateFamily, recordSeparateMotion } from '@/lib/gap/family/family';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 
 export const dynamic = 'force-dynamic';
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return badBody(parsed.error.issues);
   const b = parsed.data;
-  const family = await loadCorporateFamily(prisma, b.accountName);
+  const family = await loadCorporateFamily(prisma, b.accountName, { hubspot: hubspotFamily });
   const known = new Set(family.members.map((m) => m.accountName));
   const stray = b.relatedAccounts.filter((a) => !known.has(a));
   if (!family.members.length || stray.length) return NextResponse.json({ error: 'not_in_family', reason: stray.length ? `Not in this account's corporate family: ${stray.join(', ')}.` : 'This account has no related accounts in GAP.' }, { status: 409 });

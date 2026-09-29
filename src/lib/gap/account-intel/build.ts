@@ -339,7 +339,13 @@ function identitySection(i: AccountInputs, now: Date): Section {
     const t = i.pack.account.archetype;
     st.push({ text: `Company type (audit classification): ${t}`, truth: 'INFERENCE', sources: [auditSrc('demo pack', i.pack.builtAt)], falsifiableBy: 'Its filings or site describe a different operating model.' });
   }
-  for (const m of i.family?.members ?? []) st.push({ text: `${m.relation === 'parent' ? 'Parent' : m.relation === 'subsidiary' ? 'Subsidiary' : 'Same corporate group'}: ${m.accountName} (a separate GAP account: its intelligence and buyer truth stay its own)`, truth: 'VERIFIED_PUBLIC', sources: [m.source === 'hubspot' ? { kind: 'hubspot', ref: 'hs_parent_company_id', label: 'HubSpot parent company', url: null, at: null } : rec] });
+  for (const m of i.family?.members ?? []) {
+    const text = `${m.relation === 'parent' ? 'Parent' : m.relation === 'subsidiary' ? 'Subsidiary' : 'Same corporate group'}: ${m.accountName} (a separate GAP account: its intelligence and buyer truth stay its own)`;
+    // HubSpot's parent link and a parent_brand naming the account are records; a sibling is inferred from a shared parent.
+    if (m.source === 'hubspot') st.push({ text, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'hs_parent_company_id', label: 'HubSpot parent company', url: null, at: null }] });
+    else if (m.relation === 'sibling') st.push({ text, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'The two companies are not in the same group, or the parent brand on record is wrong.' });
+    else st.push({ text, truth: 'VERIFIED_PUBLIC', sources: [rec] });
+  }
   if (i.family?.parentName && !(i.family.members ?? []).some((m) => m.relation === 'parent')) st.push({ text: `Parent brand on record: ${i.family.parentName} (not a GAP account)`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
   const fit = accountFit(i, now);
   st.push({ text: `${fit.entityType ? ENTITY_LABEL[fit.entityType] : 'Company type unknown'}; YardFlow fit: ${FIT_LABEL[fit.fit]}. ${fit.why}${fit.evidence.length ? ` Evidence: ${fit.evidence.join('; ')}.` : ''}`, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'Its own sites and operations say otherwise (who runs the facilities, yards and fleet).' });
