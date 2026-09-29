@@ -127,7 +127,7 @@ export interface AccountInputs {
    */
   family?: {
     parentName: string | null;
-    members: Array<{ accountName: string; relation: 'parent' | 'subsidiary' | 'sibling'; source: string }>;
+    members: Array<{ accountName: string; relation: 'parent' | 'subsidiary' | 'sibling' | 'same_company'; source: string }>;
     related: Array<{ accountName: string; relation: string; activity: string[]; unknown: boolean }> | null;
     separate: { relatedAccounts: string[]; reason: string; actor: string; at: string; expiresAt: string } | null;
     hold: { detail: string; accounts: string[]; unknown: boolean } | null;
@@ -344,10 +344,10 @@ function identitySection(i: AccountInputs, now: Date): Section {
     st.push({ text: `Company type (audit classification): ${t}`, truth: 'INFERENCE', sources: [auditSrc('demo pack', i.pack.builtAt)], falsifiableBy: 'Its filings or site describe a different operating model.' });
   }
   for (const m of i.family?.members ?? []) {
-    const text = `${m.relation === 'parent' ? 'Parent' : m.relation === 'subsidiary' ? 'Subsidiary' : 'Same corporate group'}: ${m.accountName} (a separate GAP account: its intelligence and buyer truth stay its own)`;
+    const text = m.relation === 'same_company' ? `Another GAP record of the same company: ${m.accountName} (not merged; a live deal there holds cold outreach here)` : `${m.relation === 'parent' ? 'Parent' : m.relation === 'subsidiary' ? 'Subsidiary' : 'Same corporate group'}: ${m.accountName} (a separate GAP account: its intelligence and buyer truth stay its own)`;
     // HubSpot's parent link and a parent_brand naming the account are records; a sibling is inferred from a shared parent.
     if (m.source === 'hubspot') st.push({ text, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'hs_parent_company_id', label: 'HubSpot parent company', url: null, at: null }] });
-    else if (m.relation === 'sibling') st.push({ text, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'The two companies are not in the same group, or the parent brand on record is wrong.' });
+    else if (m.relation === 'sibling' || m.relation === 'same_company') st.push({ text, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'The two companies are not in the same group, or the parent brand on record is wrong.' });
     else st.push({ text, truth: 'VERIFIED_PUBLIC', sources: [rec] });
   }
   if (i.family?.parentName && !(i.family.members ?? []).some((m) => m.relation === 'parent')) st.push({ text: `Parent brand on record: ${i.family.parentName} (not a GAP account)`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
@@ -806,8 +806,9 @@ function familyLine(i: AccountInputs): string {
   const parent = f.members.find((m) => m.relation === 'parent')?.accountName ?? f.parentName;
   const kids = f.members.filter((m) => m.relation === 'subsidiary').map((m) => m.accountName);
   const sibs = f.members.filter((m) => m.relation === 'sibling').map((m) => m.accountName);
-  const shape = [parent ? `Parent: ${parent}` : null, kids.length ? `Subsidiaries: ${kids.join(', ')}` : null, sibs.length ? `Same group: ${sibs.join(', ')}` : null].filter(Boolean).join(' · ');
-  const live = (f.related ?? []).filter((r) => r.activity.length || r.unknown).map((r) => `${r.accountName}, ${r.activity.length ? r.activity.join(', ') : 'deal state unreadable'}`);
+  const dups = f.members.filter((m) => m.relation === 'same_company').map((m) => m.accountName);
+  const shape = [parent ? `Parent: ${parent}` : null, kids.length ? `Subsidiaries: ${kids.join(', ')}` : null, sibs.length ? `Same group: ${sibs.join(', ')}` : null, dups.length ? `Also recorded as: ${dups.join(', ')}` : null].filter(Boolean).join(' · ');
+  const live = (f.related ?? []).filter((r) => r.activity.length || r.unknown).map((r) => `${r.accountName}, ${r.activity.length ? r.activity.join(', ') : 'activity unreadable'}`);
   const activity = f.related === null ? 'related activity not read here' : live.length ? `Related GAP activity: ${live.join('; ')}` : 'No related GAP activity';
   return `${shape} · ${activity}${f.separate ? ` · Separate buying motion confirmed by ${f.separate.actor} until ${f.separate.expiresAt.slice(0, 10)}` : ''}`;
 }

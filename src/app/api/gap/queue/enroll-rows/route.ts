@@ -17,6 +17,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import {
   buildEnrollRows,
+  holdRelatedAccountRows,
   loadDecisions,
   renderEnrollTableJson,
   renderEnrollTableMarkdown,
@@ -45,7 +46,10 @@ export async function GET(request: NextRequest) {
   const runId = runIdParam ? runIdParam : undefined;
 
   const items = await loadDecisions(prisma, runId);
-  const table = buildEnrollRows(items);
+  // The family check at read time: a sibling or parent in motion holds the row (the table is copied by hand).
+  const { familyHoldNow } = await import('@/lib/gap/family/family');
+  const now = new Date();
+  const table = await holdRelatedAccountRows(buildEnrollRows(items), (account) => familyHoldNow(prisma, account, now));
 
   if (format === 'json') {
     return NextResponse.json({ runId: runId ?? null, ...renderEnrollTableJson(table) });

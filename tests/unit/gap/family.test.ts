@@ -93,7 +93,7 @@ describe('separate buying motion: audited, expiring, scoped', () => {
   it('needs a reason; covers only the named related accounts; expires', async () => {
     const p = fake(book);
     expect(await recordSeparateMotion(p, { accountName: 'Frito-Lay', relatedAccounts: ['PepsiCo'], reason: '', actor: 'casey@freightroll.com', now: NOW })).toMatchObject({ ok: false, reason: 'reason_required' });
-    const r = await recordSeparateMotion(p, { accountName: 'Frito-Lay', relatedAccounts: ['PepsiCo'], reason: 'Frito-Lay DC ops buys on its own; confirmed with the PepsiCo AE.', actor: 'casey@freightroll.com', now: NOW, days: 30 });
+    const r = await recordSeparateMotion(p, { accountName: 'Frito-Lay', relatedAccounts: ['PepsiCo'], reason: 'Frito-Lay DC ops buys on its own; confirmed with the PepsiCo AE.', actor: 'casey@freightroll.com', now: NOW, days: 30, snapshot: { PepsiCo: ['active opportunity: YardFlow - PepsiCo (discovery)'] } });
     expect(r).toMatchObject({ ok: true, expiresAt: '2026-10-29T12:00:00.000Z' });
     expect(p.audits[0]).toMatchObject({ kind: 'account.separate_motion', actor: 'casey@freightroll.com', subject_id: 'Frito-Lay' });
     const s = await loadSeparateMotion(p, 'Frito-Lay', NOW);
@@ -101,5 +101,39 @@ describe('separate buying motion: audited, expiring, scoped', () => {
     const activity = [{ accountName: 'PepsiCo', relation: 'parent' as const, activity: ['active opportunity'], unknown: false }, { accountName: 'Quaker Foods', relation: 'sibling' as const, activity: ['a buyer conversation'], unknown: false }];
     expect(relatedHold(family, activity, s)?.accounts).toEqual(['Quaker Foods']);
     expect(await loadSeparateMotion(p, 'Frito-Lay', new Date('2026-11-30T00:00:00Z'))).toBeNull();
+  });
+  it('covers only what was live when Casey decided: a new kind of activity there, or an unreadable account, holds again', () => {
+    const family = { accountName: 'Frito-Lay', parentName: 'PepsiCo', members: [{ accountName: 'PepsiCo', relation: 'parent' as const, source: 'parent_brand' as const }] };
+    const s = { accountName: 'Frito-Lay', relatedAccounts: ['PepsiCo'], reason: 'r', actor: 'c', at: NOW.toISOString(), expiresAt: '2026-12-01T00:00:00Z', snapshot: { PepsiCo: ['a first touch in motion (x)'] } };
+    expect(relatedHold(family, [{ accountName: 'PepsiCo', relation: 'parent', activity: ['a first touch in motion (y)'], unknown: false }], s)).toBeNull();
+    expect(relatedHold(family, [{ accountName: 'PepsiCo', relation: 'parent', activity: ['a first touch in motion (y)', 'active opportunity: YardFlow - PepsiCo (discovery)'], unknown: false }], s)?.accounts).toEqual(['PepsiCo']);
+    expect(relatedHold(family, [{ accountName: 'PepsiCo', relation: 'parent', activity: [], unknown: true }], s)?.unknown).toBe(true);
+  });
+});
+
+describe('red team (RevOps): identity-aware family, fail-closed reads', () => {
+  it('a parent spelled differently is still the parent ("Pepsi Co")', async () => {
+    const f = await loadCorporateFamily(fake([...book, { name: 'Mountain Dew Co', parent_brand: 'Pepsi Co', hubspot_company_id: null }]), 'Mountain Dew Co');
+    expect(f.members.find((m) => m.relation === 'parent')?.accountName).toBe('PepsiCo');
+    expect(f.members.map((m) => m.accountName)).toEqual(expect.arrayContaining(['Frito-Lay', 'Quaker Foods']));
+  });
+  it('another account row for the SAME company is a hold member, never merged', async () => {
+    const f = await loadCorporateFamily(fake([...book, { name: 'Kenco', parent_brand: null, hubspot_company_id: null }]), 'Kenco Logistics Services');
+    expect(f.members).toEqual([{ accountName: 'Kenco', relation: 'same_company', source: 'parent_brand' }]);
+    const activity = await loadRelatedActivity(fake(book), f, NOW, { opportunity: async () => ({ status: 'ACTIVE', deals: [{ name: 'Kenco pilot', stage: 'discovery' }] }) });
+    expect(relatedHold(f, activity, null)?.detail).toMatch(/Kenco \(another GAP record of the same company\): active opportunity/);
+  });
+  it('siblings known only through HubSpot (the parent is not a GAP account) are found', async () => {
+    const f = await loadCorporateFamily(fake([...book, { name: 'Tropicana', parent_brand: null, hubspot_company_id: '333' }]), 'Gatorade', { hubspot: async () => ({ parentId: '999', childIds: [], siblingIds: ['333', '222'] }) });
+    expect(f.members).toEqual([{ accountName: 'Tropicana', relation: 'sibling', source: 'hubspot' }]);
+  });
+  it('a reply read that fails is unknown activity (fail closed), not "no reply"', async () => {
+    const family = { accountName: 'Frito-Lay', parentName: 'PepsiCo', members: [{ accountName: 'PepsiCo', relation: 'parent' as const, source: 'parent_brand' as const }] };
+    const p = fake(book) as Record<string, unknown>;
+    const boom = { findFirst: async () => { throw new Error('db timeout'); }, findMany: async () => { throw new Error('db timeout'); } };
+    p.inboundMessage = boom;
+    p.persona = boom;
+    const activity = await loadRelatedActivity(p, family, NOW, { opportunity: async () => ({ status: 'CLEAR' }) });
+    expect(activity[0].unknown).toBe(true);
   });
 });

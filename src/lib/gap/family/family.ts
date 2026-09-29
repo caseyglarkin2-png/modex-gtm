@@ -18,7 +18,8 @@ import { normalizeCompanyName } from '../identity/normalize';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type Relation = 'parent' | 'subsidiary' | 'sibling';
+/** same_company: another GAP account row for the SAME company (a duplicate record, never merged): it holds too. */
+export type Relation = 'parent' | 'subsidiary' | 'sibling' | 'same_company';
 export interface FamilyMember {
   accountName: string;
   relation: Relation;
@@ -41,7 +42,9 @@ const DESCRIPTOR = new Set(['logistics', 'services', 'service', 'group', 'holdin
  * adds only descriptor words. "Coca-Cola Bottling Co", "Nestle Purina" and "Kraft Heinz" are NOT their parents.
  */
 export function sameCompany(a: string, b: string): boolean {
-  if (squash(a) === squash(b)) return true;
+  // Letters only, before legal suffixes are stripped too: "Pepsi Co" is "PepsiCo" (its "Co" is part of the name).
+  const letters = (v: string) => v.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (squash(a) === squash(b) || letters(a) === letters(b)) return true;
   const x = normalizeCompanyName(a).split(' ');
   const y = normalizeCompanyName(b).split(' ');
   const [short, long] = x.length <= y.length ? [x, y] : [y, x];
@@ -50,7 +53,7 @@ export function sameCompany(a: string, b: string): boolean {
 
 export interface FamilyDeps {
   /** HubSpot parent / children of a company id (read only); 'unreadable' when HubSpot answered badly (fail closed). */
-  hubspot?: (companyId: string) => Promise<{ parentId: string | null; childIds: string[] } | 'unreadable' | null>;
+  hubspot?: (companyId: string) => Promise<{ parentId: string | null; childIds: string[]; siblingIds?: string[] } | 'unreadable' | null>;
 }
 
 export async function loadCorporateFamily(prisma: PrismaLike, accountName: string, deps: FamilyDeps = {}): Promise<CorporateFamily> {
@@ -60,27 +63,33 @@ export async function loadCorporateFamily(prisma: PrismaLike, accountName: strin
   const members = new Map<string, FamilyMember>();
   // A HubSpot-declared relation is never name-filtered (HubSpot says they are different companies).
   const add = (m: FamilyMember) => {
-    if (m.accountName !== me.name && (m.source === 'hubspot' || !sameCompany(m.accountName, me.name)) && !members.has(m.accountName)) members.set(m.accountName, m);
+    if (m.accountName !== me.name && (m.source === 'hubspot' || m.relation === 'same_company' || !sameCompany(m.accountName, me.name)) && !members.has(m.accountName)) members.set(m.accountName, m);
   };
+  // Another account row for the SAME company ("Nestle" and "Nestle USA"): never merged, but a live deal there
+  // is this company's live deal, so it holds a cold motion here.
+  const myStem = normalizeCompanyName(me.name).split(' ')[0] ?? '';
+  const namesake: Array<{ name: string }> = myStem ? await prisma.account.findMany({ where: { name: { startsWith: myStem, mode: 'insensitive' } }, select: { name: true } }) : [];
+  for (const n of namesake) if (n.name !== me.name && sameCompany(n.name, me.name)) add({ accountName: n.name, relation: 'same_company', source: 'parent_brand' });
   const withParent: Array<{ name: string; parent_brand: string | null; hubspot_company_id: string | null }> = await prisma.account.findMany({ where: { parent_brand: { not: null } }, select: { name: true, parent_brand: true, hubspot_company_id: true } });
   if (parentName) {
     const pk = normalizeCompanyName(parentName);
     // The parent by normalized name ("PepsiCo, Inc." is the account "PepsiCo").
     const stem = pk.split(' ')[0] ?? '';
     const near: Array<{ name: string }> = stem ? await prisma.account.findMany({ where: { name: { startsWith: stem, mode: 'insensitive' } }, select: { name: true } }) : [];
-    for (const p of near) if (normalizeCompanyName(p.name) === pk) add({ accountName: p.name, relation: 'parent', source: 'parent_brand' });
-    for (const s of withParent) if (s.parent_brand && normalizeCompanyName(s.parent_brand) === pk && !sameCompany(s.parent_brand, s.name)) add({ accountName: s.name, relation: 'sibling', source: 'parent_brand' });
+    // Spellings of the parent are the parent ("Pepsi Co", "PepsiCo, Inc."): the identity rule, not string equality.
+    for (const p of near) if (sameCompany(p.name, parentName)) add({ accountName: p.name, relation: 'parent', source: 'parent_brand' });
+    for (const s of withParent) if (s.parent_brand && sameCompany(s.parent_brand, parentName) && !sameCompany(s.parent_brand, s.name)) add({ accountName: s.name, relation: 'sibling', source: 'parent_brand' });
   }
-  const mk = normalizeCompanyName(me.name);
-  for (const c of withParent) if (c.parent_brand && normalizeCompanyName(c.parent_brand) === mk && !sameCompany(c.parent_brand, c.name)) add({ accountName: c.name, relation: 'subsidiary', source: 'parent_brand' });
+  for (const c of withParent) if (c.parent_brand && sameCompany(c.parent_brand, me.name) && !sameCompany(c.parent_brand, c.name)) add({ accountName: c.name, relation: 'subsidiary', source: 'parent_brand' });
   let hubspotUnreadable = false;
   if (me.hubspot_company_id && deps.hubspot) {
     const hs = await deps.hubspot(me.hubspot_company_id).catch(() => 'unreadable' as const);
     if (hs === 'unreadable') hubspotUnreadable = true;
     else if (hs) {
-      const ids = [...(hs.parentId ? [hs.parentId] : []), ...hs.childIds];
+      const siblings = (hs.siblingIds ?? []).filter((id) => id !== me.hubspot_company_id);
+      const ids = [...(hs.parentId ? [hs.parentId] : []), ...hs.childIds, ...siblings];
       const mapped: Array<{ name: string; hubspot_company_id: string }> = ids.length ? await prisma.account.findMany({ where: { hubspot_company_id: { in: ids } }, select: { name: true, hubspot_company_id: true } }) : [];
-      for (const a of mapped) add({ accountName: a.name, relation: a.hubspot_company_id === hs.parentId ? 'parent' : 'subsidiary', source: 'hubspot' });
+      for (const a of mapped) add({ accountName: a.name, relation: a.hubspot_company_id === hs.parentId ? 'parent' : hs.childIds.includes(a.hubspot_company_id) ? 'subsidiary' : 'sibling', source: 'hubspot' });
     }
   }
   return { accountName: me.name, parentName, members: [...members.values()], ...(hubspotUnreadable ? { hubspotUnreadable } : {}) };
@@ -122,7 +131,8 @@ export async function loadRelatedActivity(prisma: PrismaLike, family: CorporateF
     return Promise.race([p.catch(() => fallback), new Promise<T>((r) => { t = setTimeout(() => r(fallback), 9_000); })]).finally(() => clearTimeout(t));
   };
   const opps = await Promise.all(family.members.map((m) => deadline(opportunity(prisma, m.accountName), { status: 'UNKNOWN' as const })));
-  const replies = await Promise.all(family.members.map((m) => deadline(accountRepliedRecently(prisma, '', now, { accountName: m.accountName }), null)));
+  // A reply read that failed is not "no reply": that member's activity is unknown (fail closed).
+  const replies = await Promise.all(family.members.map((m) => deadline(accountRepliedRecently(prisma, '', now, { accountName: m.accountName }) as Promise<unknown>, 'unreadable' as const)));
   const out: RelatedActivity[] = [];
   for (const [idx, m] of family.members.entries()) {
     const activity: string[] = [];
@@ -133,9 +143,9 @@ export async function loadRelatedActivity(prisma: PrismaLike, family: CorporateF
     const gate = computeAccountMotion({ accountName: m.accountName, readyEmailCards: [], choice: null, firstTouches: ((touches as Map<string, never[]>).get(m.accountName) ?? []) as never[], replyHold: null, conversation: null, now });
     if (gate.state === 'in_motion') activity.push(`a first touch in motion (${gate.headline.replace(/^In motion: /, '').replace(/\. One cold email motion at a time\.$/, '')})`);
     const reply = replies[idx];
-    if (reply) activity.push(`an untriaged reply from ${reply.from_email}`);
+    if (reply && reply !== 'unreadable') activity.push('an untriaged reply');
     if ((enrollments as Array<{ account_name: string }>).some((e) => e.account_name === m.accountName)) activity.push('a live sequence enrollment');
-    out.push({ accountName: m.accountName, relation: m.relation, activity, unknown: o.status === 'UNKNOWN' });
+    out.push({ accountName: m.accountName, relation: m.relation, activity, unknown: o.status === 'UNKNOWN' || reply === 'unreadable' });
   }
   return out;
 }
@@ -147,18 +157,20 @@ export interface SeparateMotion {
   actor: string;
   at: string;
   expiresAt: string;
+  /** What was live at each named account when Casey decided (only that is covered; anything new holds again). */
+  snapshot?: Record<string, string[]>;
 }
 
 export const SEPARATE_MOTION = 'account.separate_motion' as const;
 const DAY = 86_400_000;
 
 /** Casey's audited decision that this account is a SEPARATE buying motion from named related accounts. Expires. */
-export async function recordSeparateMotion(prisma: PrismaLike, input: { accountName: string; relatedAccounts: string[]; reason: string; actor: string; now: Date; days?: number }): Promise<{ ok: true; expiresAt: string } | { ok: false; reason: string }> {
+export async function recordSeparateMotion(prisma: PrismaLike, input: { accountName: string; relatedAccounts: string[]; reason: string; actor: string; now: Date; days?: number; snapshot?: Record<string, string[]> }): Promise<{ ok: true; expiresAt: string } | { ok: false; reason: string }> {
   if (!input.reason?.trim()) return { ok: false, reason: 'reason_required' };
   if (!input.relatedAccounts.length) return { ok: false, reason: 'related_required' };
   const days = Math.min(Math.max(input.days ?? 90, 1), 180);
   const expiresAt = new Date(input.now.getTime() + days * DAY).toISOString();
-  await prisma.gapAuditEvent.create({ data: { kind: SEPARATE_MOTION, actor: input.actor, subject_type: 'account', subject_id: input.accountName, payload: { relatedAccounts: input.relatedAccounts, reason: input.reason.trim(), expiresAt } } });
+  await prisma.gapAuditEvent.create({ data: { kind: SEPARATE_MOTION, actor: input.actor, subject_type: 'account', subject_id: input.accountName, payload: { relatedAccounts: input.relatedAccounts, reason: input.reason.trim(), expiresAt, snapshot: input.snapshot ?? {} } } });
   return { ok: true, expiresAt };
 }
 
@@ -167,7 +179,7 @@ export async function loadSeparateMotion(prisma: PrismaLike, accountName: string
   if (!row) return null;
   const expiresAt = String(row.payload?.expiresAt ?? '');
   if (!expiresAt || new Date(expiresAt).getTime() <= now.getTime()) return null;
-  return { accountName, relatedAccounts: Array.isArray(row.payload.relatedAccounts) ? (row.payload.relatedAccounts as string[]) : [], reason: String(row.payload.reason ?? ''), actor: row.actor, at: new Date(row.created_at).toISOString(), expiresAt };
+  return { accountName, relatedAccounts: Array.isArray(row.payload.relatedAccounts) ? (row.payload.relatedAccounts as string[]) : [], reason: String(row.payload.reason ?? ''), actor: row.actor, at: new Date(row.created_at).toISOString(), expiresAt, snapshot: (row.payload.snapshot as Record<string, string[]> | undefined) ?? {} };
 }
 
 /**
@@ -176,11 +188,17 @@ export async function loadSeparateMotion(prisma: PrismaLike, accountName: string
  * A related deal state that could not be read holds too (fail closed), said as such.
  */
 export function relatedHold(family: CorporateFamily, activity: RelatedActivity[], separate: SeparateMotion | null): { detail: string; accounts: string[]; unknown: boolean } | null {
-  const covered = new Set(separate?.relatedAccounts ?? []);
-  const live = activity.filter((a) => (a.activity.length || a.unknown) && !covered.has(a.accountName));
+  // A separate-motion decision covers only what was live at the named account when Casey decided: a new kind of
+  // activity there (a deal opening above all), an unreadable account, or a duplicate record of THIS company holds.
+  const covers = (a: RelatedActivity) => {
+    if (a.unknown || a.relation === 'same_company' || !separate?.relatedAccounts.includes(a.accountName)) return false;
+    const then = new Set((separate.snapshot?.[a.accountName] ?? []).map(activityKind));
+    return a.activity.every((x) => then.has(activityKind(x)));
+  };
+  const live = activity.filter((a) => (a.activity.length || a.unknown) && !covers(a));
   if (!live.length) return null;
-  const rel = (r: Relation) => (r === 'parent' ? 'its parent' : r === 'subsidiary' ? 'its subsidiary' : 'a sibling in the same group');
-  const parts = live.map((a) => `${a.accountName} (${rel(a.relation)}): ${a.activity.length ? a.activity.join(', ') : 'the deal state could not be read'}`);
+  const rel = (r: Relation) => (r === 'parent' ? 'its parent' : r === 'subsidiary' ? 'its subsidiary' : r === 'same_company' ? 'another GAP record of the same company' : 'a sibling in the same group');
+  const parts = live.map((a) => `${a.accountName} (${rel(a.relation)}): ${a.activity.length ? a.activity.join(', ') : 'its activity could not be read'}`);
   return {
     detail: `Related account activity. ${family.accountName} is part of ${family.parentName ?? 'a corporate family'} in GAP. ${parts.join('; ')}. Confirm this is a separate buying motion before any cold outreach.`,
     accounts: live.map((a) => a.accountName),
@@ -188,11 +206,14 @@ export function relatedHold(family: CorporateFamily, activity: RelatedActivity[]
   };
 }
 
+/** The kind of a related-activity line ("active opportunity: X (stage)" is "active opportunity"). */
+export const activityKind = (line: string) => line.split(/[:(]/)[0].trim();
+
 /**
  * HubSpot's parent company and child companies of one company (read only, bounded). Null when HubSpot is not
  * configured or the read fails: the parent_brand family still applies.
  */
-export async function hubspotFamily(companyId: string): Promise<{ parentId: string | null; childIds: string[] } | 'unreadable' | null> {
+export async function hubspotFamily(companyId: string): Promise<{ parentId: string | null; childIds: string[]; siblingIds: string[] } | 'unreadable' | null> {
   const { isHubSpotConfigured, getHubSpotClient } = await import('@/lib/hubspot/client');
   if (!isHubSpotConfigured()) return null;
   const client = getHubSpotClient();
@@ -205,7 +226,10 @@ export async function hubspotFamily(companyId: string): Promise<{ parentId: stri
       bounded(client.crm.companies.basicApi.getById(companyId, ['hs_parent_company_id'])),
       bounded(client.crm.companies.searchApi.doSearch({ filterGroups: [{ filters: [{ propertyName: 'hs_parent_company_id', operator: 'EQ' as never, value: companyId }] }], properties: ['name'], limit: 50, after: '0', sorts: [] })),
     ]);
-    return { parentId: (me.properties?.hs_parent_company_id as string | undefined) || null, childIds: kids.results.map((r) => r.id) };
+    const parentId = (me.properties?.hs_parent_company_id as string | undefined) || null;
+    // Siblings known only through HubSpot: the parent's other children.
+    const sibs = parentId ? await bounded(client.crm.companies.searchApi.doSearch({ filterGroups: [{ filters: [{ propertyName: 'hs_parent_company_id', operator: 'EQ' as never, value: parentId }] }], properties: ['name'], limit: 50, after: '0', sorts: [] })) : null;
+    return { parentId, childIds: kids.results.map((r) => r.id), siblingIds: (sibs?.results ?? []).map((r) => r.id).filter((id) => id !== companyId) };
   } catch {
     // HubSpot answered badly: the family may be incomplete, so the action-time hold fails closed.
     return 'unreadable';
