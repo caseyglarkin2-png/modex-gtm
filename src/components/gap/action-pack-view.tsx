@@ -166,7 +166,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Phase 2 E1: the six-line brief leads (KNOW / THINK / LEARN / WHY YOU / HISTORY / WRONG IF);
   // it replaces the separate "Why now" block (why now stays in the collapsed evidence below).
   const briefPersonaId = typeof persona?.id === 'number' && pack.personaSource !== 'none' ? persona.id : null;
-  const [angles, briefHistory, contradicted, relationshipContext] = await Promise.all([
+  const [angles, briefHistory, contradicted, relationshipContext, accountInputs] = await Promise.all([
     briefPersonaId ? loadAngles(prisma, [briefPersonaId]).catch(() => new Map()) : Promise.resolve(new Map()),
     loadBriefHistory(prisma, {
       accountName: hypothesis.account_name,
@@ -178,15 +178,16 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
     contradictedFactIds(prisma, hypothesis.account_name, new Date()).catch(() => null),
     // Universal Work Intake: how Casey knows this person (his context, never evidence).
     loadRelationshipContext(prisma, { personaId: briefPersonaId, accountName: hypothesis.account_name }).catch(() => []),
+    // The canonical account intelligence, bounded: a slow read is no ACCOUNT line, never a slow action pack.
+    Promise.race([loadAccountInputs(prisma, hypothesis.account_name, new Date()), new Promise<null>((r) => setTimeout(() => r(null), 6_000))]).catch(() => null),
   ]);
-  // The canonical account intelligence (not live: HISTORY already carries the HubSpot read moments ago).
-  const accountIntel = await loadAccountInputs(prisma, hypothesis.account_name, new Date())
-    .then((i) => {
-      if (!i) return null;
-      const b = buildAccountBrief(i, new Date());
-      return { accountName: b.accountName, motion: b.motion, motionLine: b.glance.motion, firstDiscoveryQuestion: b.discovery[0]?.question ?? null };
-    })
-    .catch(() => null);
+  // Its motion sees the SAME HubSpot read HISTORY shows (moments ago); unread means "not read", never clear.
+  const accountIntel = accountInputs
+    ? (() => {
+        const b = buildAccountBrief({ ...accountInputs, opportunity: briefHistory ? { status: briefHistory.opportunity.status, detail: briefHistory.opportunity.detail, deals: [] } : null }, new Date());
+        return { accountName: b.accountName, motion: b.motion, motionLine: b.glance.motion, firstDiscoveryQuestion: b.discovery[0]?.question ?? null };
+      })()
+    : null;
   const brief = buildBrief({
     hypothesis,
     firstName: firstNameOf(persona?.name ?? null),

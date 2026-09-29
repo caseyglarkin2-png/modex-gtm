@@ -21,12 +21,14 @@
 import { loadEvidenceInbox } from '../research/inbox';
 import { loadAccountConversations } from '../motion/load';
 import { suggestAngle } from '../motion/persona-angle';
-import { traitsOf } from './service';
+import { traitsOf } from './traits';
+import { decideApproach } from '../motion/approach';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type Approach = 'fact_led' | 'relationship_led' | 'referral_led' | 'follow_up';
+/** The card's approach: motion/approach.ts decides it (one decision for the account page, the cards and the brief). */
+export type Approach = 'fact_led' | 'relationship_led' | 'referral_led' | 'follow_up' | 'hold';
 
 export interface OpportunityInput {
   member: { id: string; name: string | null; title: string | null; accountName: string; personaId: number | null; candidateId: number | null; relationshipContext: string | null; note: string | null; qualification: string | null; alsoFrom: string[]; status?: string };
@@ -35,6 +37,8 @@ export interface OpportunityInput {
   thesis: { summary: string; useLabel: string | null; learn: string | null; wrongIf: string | null } | null;
   conversation: { who: string; responseClass: string; at: string } | null;
   suggestedAngle: string | null;
+  /** The buyer contradicted the account's current thesis (an objection BID). */
+  contradicted?: boolean;
 }
 
 export interface Opportunity {
@@ -78,7 +82,12 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   const traits = traitsOf(i.source.sourceType);
   let approach: Approach;
   let suggested: string;
-  if (i.conversation) {
+  // ONE decision (motion/approach.ts); the card only words it for this person and source.
+  const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name } });
+  if (decided.kind === 'NO_GOOD_MOTION' || decided.kind === 'IN_DEAL') {
+    approach = 'hold';
+    suggested = `Not now. ${decided.why}`;
+  } else if (i.conversation) {
     approach = 'follow_up';
     suggested = `Follow-up: there is a conversation at ${m.accountName} with ${i.conversation.who} (${i.conversation.responseClass.replace(/_/g, ' ')}). Continue it in that thread; this is not a cold first touch.`;
   } else if (i.fact && traits.engaged) {
@@ -102,6 +111,7 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
     safety.state = 'caution';
     safety.lines.push(`Sensitive fact (${sensitive}): reference the network change, never the people affected, or choose a different opener.`);
   }
+  if (approach === 'hold') safety.state = 'caution';
   if (approach === 'relationship_led' || approach === 'referral_led') {
     safety.state = 'caution';
     safety.lines.push(`No verified fact at ${m.accountName}: GAP will not draft a first touch. If you reach out, it is your own note.`);
@@ -150,12 +160,15 @@ export async function loadOpportunities(prisma: PrismaLike, workSourceId: string
   });
   if (!members.length) return [];
   const accounts = [...new Set(members.map((m) => m.account_name as string))];
-  const [inbox, conversations, hyps, personas] = await Promise.all([
+  const [inbox, conversations, hyps, personas, objections] = await Promise.all([
     loadEvidenceInbox(prisma, now, { accounts }).catch(() => []),
     loadAccountConversations(prisma, accounts, now).catch(() => new Map()),
     prisma.prospectingHypothesis.findMany({ where: { account_name: { in: accounts }, status: { in: ['draft', 'review_required', 'approved', 'active'] }, superseded_by: { is: null } }, select: { account_name: true, problem_hypothesis: true, falsification_questions: true, what_a_no_means: true }, orderBy: { created_at: 'desc' } }).catch(() => []),
     prisma.persona.findMany({ where: { id: { in: members.map((m) => m.persona_id).filter(Boolean) } }, select: { id: true, title: true } }).catch(() => []),
+    // A buyer objection on a thesis contradicts it: the card holds instead of leading with it.
+    prisma.buyerInputData.findMany({ where: { account_name: { in: accounts }, type: 'objection', human_confirmed: true }, select: { account_name: true } }).catch(() => []),
   ]);
+  const contradictedAt = new Set((objections as Array<{ account_name: string }>).map((o) => o.account_name));
   const box = new Map(inbox.map((a) => [a.accountName, a]));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
   const hypOf = new Map<string, Record<string, any>>();
@@ -181,10 +194,11 @@ export async function loadOpportunities(prisma: PrismaLike, workSourceId: string
         thesis: h ? { summary: String(h.problem_hypothesis ?? '').slice(0, 200), useLabel: a?.theses[0]?.useLabel ?? null, learn: falsify[0] ?? null, wrongIf: (typeof h.what_a_no_means === 'string' && h.what_a_no_means.trim()) || falsify[1] || null } : null,
         conversation: conv ? { who: conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
         suggestedAngle: suggestAngle({ title, personaKey: null, accountName: m.account_name }),
+        contradicted: contradictedAt.has(m.account_name),
       }),
     );
   }
   // Fact-led first (the ready ones), then follow-ups, then relationship- and referral-led.
-  const order: Record<Approach, number> = { fact_led: 0, follow_up: 1, referral_led: 2, relationship_led: 3 };
+  const order: Record<Approach, number> = { fact_led: 0, follow_up: 1, referral_led: 2, relationship_led: 3, hold: 4 };
   return out.sort((x, y) => order[x.approach] - order[y.approach] || x.account.localeCompare(y.account));
 }

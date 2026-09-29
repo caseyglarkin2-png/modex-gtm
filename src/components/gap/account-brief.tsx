@@ -43,7 +43,7 @@ const safeUrl = (u: string | null) => {
   }
 };
 /** A glance line never shows a raw URL (the deep view links the source). */
-const glanceText = (s: string) => s.replace(/\s*https?:\/\/[^\s)]+/g, '').replace(/\s+([).,;])/g, '$1').trim();
+const glanceText = (s: string) => s.replace(/\s*https?:\/\/[^\s)]+/g, '').replace(/\s*\(\s*\)/g, '').replace(/\s+([).,;])/g, '$1').trim();
 const clip = (s: string, n = 220) => (s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s);
 const money = (n: number) => (n >= 1e6 ? `$${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `$${Math.round(n / 1e3)}K` : `$${Math.round(n)}`);
 

@@ -21,6 +21,7 @@ import { loadWatchProfilesCached } from '../signals/watch';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { loadEvidenceInbox, type InboxAccount } from '../research/inbox';
 import { loadAccountConversations, loadAccountFirstTouches } from '../motion/load';
+import { computeAccountMotion, type FirstTouch } from '../motion/account-motion';
 import { isIdentityImprovement, loadIntakeContext, stageCandidate, traitsOf } from './service';
 import { memberKey } from './resolve';
 import { resolveIntakeRow } from './resolve';
@@ -41,7 +42,7 @@ export interface AccountFacts {
   theses: Array<{ useLabel: string | null }>;
   lastResearchAt: Date | null;
   /** The account is already in motion: a live conversation, or a first touch sent or outstanding (30 days). */
-  motion?: { kind: 'conversation' | 'touched'; detail: string } | null;
+  motion?: { kind: 'conversation' | 'touched' | 'unknown'; detail: string } | null;
 }
 
 const HARD_INVALID = new Set(['hard_bounce', 'hard_bounced', 'invalid']);
@@ -53,6 +54,7 @@ export function qualifyAccount(f: AccountFacts, _now: Date): { state: Qualificat
   if (f.opportunity === 'ACTIVE') return { state: 'in_deal', reason: 'open HubSpot deal: work it from the deal' };
   if (f.opportunity === 'UNKNOWN') return { state: 'opportunity_unknown', reason: 'deal status could not be read: held, never cold' };
   // Already in motion: follow the thread, never stack a second cold touch from a list.
+  if (f.motion?.kind === 'unknown') return { state: 'human_review', reason: `account motion could not be read (${f.motion.detail}): held, never cold${scope}` };
   if (f.motion?.kind === 'conversation') return { state: 'already_covered', reason: `in a live conversation (${f.motion.detail}): follow up in the thread${scope}` };
   if (f.motion?.kind === 'touched') return { state: 'already_covered', reason: `${f.motion.detail}: wait for it, do not stack another${scope}` };
   if (f.liveFacts > 0) {
@@ -193,14 +195,16 @@ export async function planWorkSources(
   const lastOf = new Map(lastRuns.map((r) => [r.account_name, r._max.created_at ? new Date(r._max.created_at) : null]));
   // Account motion (a conversation, a first touch): one read each for the whole run; unreadable means unknown, never "clear".
   const [conversations, touches] = await Promise.all([
-    (deps.conversations ?? loadAccountConversations)(prisma, accountOrder, input.now).catch(() => new Map()),
-    (deps.touches ?? loadAccountFirstTouches)(prisma, accountOrder, input.now).catch(() => new Map()),
+    (deps.conversations ?? loadAccountConversations)(prisma, accountOrder, input.now).catch(() => null),
+    (deps.touches ?? loadAccountFirstTouches)(prisma, accountOrder, input.now).catch(() => null),
   ]);
   const motionOf = (name: string): AccountFacts['motion'] => {
+    if (!conversations || !touches) return { kind: 'unknown', detail: 'the conversation or send ledger could not be read' };
     const c = conversations.get(name) as { who: string; responseClass: string } | undefined;
     if (c) return { kind: 'conversation', detail: `${c.who}, ${c.responseClass.replace(/_/g, ' ')}` };
-    const t = ((touches.get(name) ?? []) as Array<{ recipient: string; sentAt: string; released: boolean; outstanding?: boolean }>).find((x) => !x.released);
-    if (t) return { kind: 'touched', detail: t.outstanding ? `a first-touch draft to ${t.recipient} is outstanding` : `a first touch to ${t.recipient} went out ${t.sentAt.slice(0, 10)}` };
+    // The account motion gate's own reading: held only until its unlock (5 business days, or while a draft is outstanding).
+    const gate = computeAccountMotion({ accountName: name, readyEmailCards: [], choice: null, firstTouches: (touches.get(name) ?? []) as FirstTouch[], replyHold: null, conversation: null, now: input.now });
+    if (gate.state === 'in_motion') return { kind: 'touched', detail: gate.headline.replace(/^In motion: /, '').replace(/\. One cold email motion at a time\.$/, '') };
     return null;
   };
 

@@ -14,7 +14,9 @@
 import { orderStatements, sectionStatus, statementProblems, type SectionStatus, type Source, type Statement, type TruthClass } from './truth';
 import { suggestAngle } from '../motion/persona-angle';
 import { sellerRelevance } from '../research/continuity';
-import { traitsOf } from '../intake/service';
+import { traitsOf } from '../intake/traits';
+import { decideApproach } from '../motion/approach';
+import { computeAccountMotion } from '../motion/account-motion';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
 
@@ -100,7 +102,7 @@ export interface AccountInputs {
   bids: BidInput[];
   personas: PersonaInput[];
   candidates: Array<{ id: number; name: string; title: string | null; state: string }>;
-  memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null }>;
+  memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null; doNotContact?: boolean }>;
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
@@ -602,27 +604,34 @@ const MOTION_LABEL: Record<MotionType, string> = { IN_DEAL: 'In a deal', NO_GOOD
  * not a way in. With none of these the answer is "do not contact yet".
  */
 function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, primary: PersonaInput | undefined): Motion {
-  if (i.opportunity?.status === 'ACTIVE') return { type: 'IN_DEAL', who: null, why: 'An open HubSpot deal: work it from the deal, never cold.' };
-  if (i.opportunity?.status === 'UNKNOWN') return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: the HubSpot deal state could not be read.' };
-  if (hyps.some((h) => h.truth === 'CONTRADICTED')) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: the buyer contradicted the current story. Learn what is true first.' };
-  if (i.conversation) return { type: 'FOLLOW_UP', who: i.conversation.who, why: `A live conversation (${i.conversation.responseClass.replace(/_/g, ' ')}, ${day(i.conversation.at)}): continue that thread, never a cold first touch.` };
   const reachable = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
-  // The same source traits as the cohort opportunities (intake/opportunities.ts): one motion system.
-  const engaged = i.memberships.filter((m) => traitsOf(m.sourceType).engaged);
-  const grounded = liveFacts(i, now).length > 0 && hyps.some((h) => h.grounded && h.truth !== 'CONTRADICTED');
-  const who = primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0];
-  // A verified fact leads; a relationship is an optional opener, never the reason.
-  if (grounded && who) return { type: 'FACT_LED', who: who.name, why: `A live verified fact and a hypothesis grounded in it.${engaged[0] ? ` Optional opener: ${engaged[0].relationshipContext ?? engaged[0].sourceName}.` : ''}` };
-  const referral = engaged.find((m) => traitsOf(m.sourceType).approach === 'referral_led');
-  if (referral) return { type: 'REFERRAL_LED', who: referral.personName, why: `${referral.relationshipContext ?? `Referred through ${referral.sourceName}`}: name the introduction and ask for their perspective. No problem is claimed; GAP will not draft a first touch without a verified fact.` };
-  if (engaged[0]) return { type: 'RELATIONSHIP_LED', who: engaged[0].personName, why: `${engaged[0].relationshipContext ?? `You know them through ${engaged[0].sourceName}`}: ask for their perspective. No problem is claimed; GAP will not draft a first touch without a verified fact.` };
-  if (i.personas.length && !reachable.length) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: nobody reachable here (do not contact, or no email).' };
-  if (!liveFacts(i, now).length) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: no live verified fact and no relationship to open with.' };
-  if (!who) return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: nobody at this account yet (find people first).' };
-  return { type: 'NO_GOOD_MOTION', who: null, why: 'Do not contact yet: a verified fact, but no hypothesis grounded in it. Draft and review one first.' };
+  // How Casey knows someone here: engaged sources first (met, referred), then relational ones; never a do-not-contact person.
+  const members = i.memberships.filter((m) => !m.doNotContact && (traitsOf(m.sourceType).engaged || traitsOf(m.sourceType).relational));
+  const known = members.find((m) => traitsOf(m.sourceType).engaged) ?? members[0] ?? null;
+  // The account motion gate's own reading of first touches (one cold email motion at a time).
+  const gate = computeAccountMotion({
+    accountName: i.account.name,
+    readyEmailCards: [],
+    choice: null,
+    firstTouches: i.firstTouches.map((t) => ({ personaId: null, recipient: t.recipient, sentAt: t.sentAt ?? now.toISOString(), released: t.state === 'released', ...(t.state === 'draft outstanding' ? { outstanding: true } : {}) })),
+    replyHold: null,
+    conversation: null,
+    now,
+  });
+  const a = decideApproach({
+    deal: i.opportunity ? i.opportunity.status : 'NOT_READ',
+    contradicted: hyps.some((h) => h.truth === 'CONTRADICTED'),
+    conversation: i.conversation,
+    touchHold: gate.state === 'in_motion' ? gate.headline : null,
+    verifiedFact: liveFacts(i, now).length > 0,
+    reachable: reachable.length > 0 || (!i.personas.length && !!known?.personName),
+    source: known ? { sourceType: known.sourceType, context: known.relationshipContext, name: known.sourceName } : null,
+  });
+  const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0])?.name ?? null : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
+  return { type: a.kind, who, why: a.why };
 }
 
-const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who}, on the verified fact.` : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
+const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ?? 'the primary person'}, on the verified fact.` : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
 
 /** Titles that plausibly touch the yard; still LIKELY, never ownership. */
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;

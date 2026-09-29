@@ -44,15 +44,30 @@ describe('account motion', () => {
   it('a live conversation is FOLLOW_UP', () => {
     expect(motion({ conversation: { who: 'dana@acme.example', responseClass: 'positive_interest', at: '2026-09-20T00:00:00Z' } })).toMatchObject({ type: 'FOLLOW_UP', who: 'dana@acme.example' });
   });
-  it('without a verified fact: a referral is REFERRAL_LED, a conference meeting is RELATIONSHIP_LED, a newsletter subscription is not a motion', () => {
-    expect(motion({ facts: [], memberships: [{ sourceName: 'Referrals', sourceType: 'referral', relationshipContext: 'Referred by Pat at Kroger', personName: 'Dana Ops' }] })).toMatchObject({ type: 'REFERRAL_LED', who: 'Dana Ops', why: expect.stringMatching(/Referred by Pat.*GAP will not draft a first touch/) });
+  it('without a verified fact: a referral is REFERRAL_LED, a conference meeting or a newsletter subscriber is RELATIONSHIP_LED (the cohort rules), a CRM list is nothing', () => {
+    expect(motion({ facts: [], memberships: [{ sourceName: 'Referrals', sourceType: 'referral', relationshipContext: 'Referred by Pat at Kroger', personName: 'Dana Ops' }] })).toMatchObject({ type: 'REFERRAL_LED', who: 'Dana Ops', why: expect.stringMatching(/Referred by Pat.*GAP drafts nothing without a verified fact/) });
     expect(motion({ facts: [], memberships: [{ sourceName: 'Inland26', sourceType: 'conference', relationshipContext: 'Met at Inland26', personName: 'Dana Ops' }] })).toMatchObject({ type: 'RELATIONSHIP_LED' });
-    expect(motion({ facts: [], memberships: [{ sourceName: 'MMYQB', sourceType: 'newsletter', relationshipContext: 'MMYQB subscriber', personName: 'Dana Ops' }] })).toMatchObject({ type: 'NO_GOOD_MOTION' });
+    expect(motion({ facts: [], memberships: [{ sourceName: 'MMYQB', sourceType: 'newsletter', relationshipContext: 'MMYQB subscriber', personName: 'Dana Ops' }] })).toMatchObject({ type: 'RELATIONSHIP_LED' });
+    expect(motion({ facts: [], memberships: [{ sourceName: 'HubSpot list', sourceType: 'crm_list', relationshipContext: null, personName: 'Dana Ops' }] })).toMatchObject({ type: 'NO_GOOD_MOTION' });
+    // a do-not-contact person is never the way in, however Casey knows them
+    expect(motion({ facts: [], memberships: [{ sourceName: 'Inland26', sourceType: 'conference', relationshipContext: 'Met at Inland26', personName: 'Dana Ops', doNotContact: true }] })).toMatchObject({ type: 'NO_GOOD_MOTION' });
   });
   it('no live fact and no relationship is NO_GOOD_MOTION: do not contact yet', () => {
     expect(motion({ facts: [] })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/Do not contact yet/) });
   });
   it('the glance names the motion', () => {
     expect(buildAccountBrief(inputs(), NOW).glance.motion).toBe('Fact-led: Dana Ops, on the verified fact.');
+  });
+});
+
+describe('review E fixes', () => {
+  it('a buyer who said no is never a follow-up', () => {
+    expect(motion({ conversation: { who: 'dana@acme.example', responseClass: 'do_not_contact', at: '2026-09-20T00:00:00Z' } })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/No new outreach/) });
+  });
+  it('a first touch already out holds the account (the motion gate own reading)', () => {
+    expect(motion({ firstTouches: [{ recipient: 'bob@acme.example', sentAt: '2026-09-28T00:00:00Z', state: 'sent' }] })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/bob@acme.example got a first touch/) });
+  });
+  it('a deal state that was not read is not a green light', () => {
+    expect(motion({ opportunity: null })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/was not read here/) });
   });
 });

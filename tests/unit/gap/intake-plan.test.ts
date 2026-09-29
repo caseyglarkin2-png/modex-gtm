@@ -8,6 +8,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { planWorkSources, qualifyAccount, type AccountFacts } from '@/lib/gap/intake/plan';
 
 const NOW = new Date('2026-09-28T15:00:00Z');
+/** No conversation and no first touch at any account (the motion loaders, read explicitly: they fail closed). */
+const NO_MOTION = { conversations: async () => new Map(), touches: async () => new Map() };
 const fact = (over: Partial<AccountFacts> = {}): AccountFacts => ({ accountName: 'Acme Foods', watched: true, opportunity: 'CLEAR', liveFacts: 0, bestFactReason: null, theses: [], lastResearchAt: null, ...over });
 
 describe('qualifyAccount: one transparent state per account', () => {
@@ -52,7 +54,7 @@ describe('planWorkSources', () => {
     const members = [m('a', {}), m('b', {}), m('c', {}), m('d', { account_name: 'Globex' }), m('e', { account_name: 'Globex' })];
     const { prisma } = db(members);
     const opportunity = vi.fn(async () => ({ status: 'CLEAR' as const, companyIds: [] }));
-    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }, { accountName: 'Globex' }], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }, { accountName: 'Globex' }], opportunity, inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(opportunity).toHaveBeenCalledTimes(2);
     expect(r.accounts).toBe(2);
     expect(members.map((x) => x.qualification)).toEqual(['research', 'research', 'research', 'research', 'research']);
@@ -62,7 +64,7 @@ describe('planWorkSources', () => {
   it('person-level stops win: do not contact, ambiguous identity (human review), unresolved (needs identity)', async () => {
     const members = [m('dnc', { persona_id: 7 }), m('amb', { resolution: 'ambiguous', account_name: null }), m('unr', { resolution: 'unresolved', account_name: null })];
     const { prisma } = db(members, [{ id: 7, do_not_contact: true, email_status: 'valid' }]);
-    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox: async () => [], reresolve: async () => 0 });
+    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(members.map((x) => [x.id, x.qualification])).toEqual([['dnc', 'do_not_contact'], ['amb', 'human_review'], ['unr', 'needs_identity']]);
   });
 
@@ -70,7 +72,7 @@ describe('planWorkSources', () => {
     const members = [m('a', { account_name: 'Tiny Co' })];
     const { prisma } = db(members);
     const opportunity = vi.fn(async () => ({ status: 'CLEAR' as const, companyIds: [] }));
-    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [], opportunity, inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(opportunity).not.toHaveBeenCalled();
     expect(members[0].qualification).toBe('not_icp');
   });
@@ -78,7 +80,7 @@ describe('planWorkSources', () => {
   it('ignored and not-now members are left alone; unchanged states are not rewritten', async () => {
     const members = [m('ig', { status: 'ignored' }), m('same', { qualification: 'research', qualification_reason: 'no live verified fact; never researched' })];
     const { prisma, updates } = db(members);
-    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox: async () => [], reresolve: async () => 0 });
+    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(members[0].qualification).toBeNull();
     expect(updates).toEqual([]);
   });
@@ -87,7 +89,7 @@ describe('planWorkSources', () => {
     const members = [m('a', {})];
     const { prisma } = db(members);
     const inbox = async () => [{ accountName: 'Acme Foods', ready: [{ relevance: { reason: 'a distribution, warehouse, plant or yard change' } }, {}], bestSignalId: 'x', theses: [] }] as never;
-    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox, reresolve: async () => 0 });
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [{ accountName: 'Acme Foods' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox, reresolve: async () => 0, ...NO_MOTION });
     expect(members[0]).toMatchObject({ qualification: 'evidence_ready', qualification_reason: '2 verified facts; best: a distribution, warehouse, plant or yard change' });
     expect(r.researchAccounts).toEqual([]);
   });
@@ -95,7 +97,7 @@ describe('planWorkSources', () => {
   it('respects the account budget: accounts past it stay unplanned this run (never guessed)', async () => {
     const members = [m('a', {}), m('b', { account_name: 'Globex' })];
     const { prisma } = db(members);
-    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', maxAccounts: 1 }, { watch: async () => [{ accountName: 'Acme Foods' }, { accountName: 'Globex' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox: async () => [], reresolve: async () => 0 });
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', maxAccounts: 1 }, { watch: async () => [{ accountName: 'Acme Foods' }, { accountName: 'Globex' }], opportunity: async () => ({ status: 'CLEAR' as const, companyIds: [] }), inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(r.accounts).toBe(1);
     expect(r.deferredAccounts).toBe(1);
     expect(members.filter((x) => x.qualification).length).toBe(1);
@@ -110,7 +112,7 @@ describe('Release B review fixes: the planner rotates', () => {
     const { prisma } = db(members);
     const seen: string[] = [];
     const opportunity = vi.fn(async (_p: unknown, a: string) => { seen.push(a); return { status: 'CLEAR' as const, companyIds: [] }; });
-    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', maxAccounts: 2 }, { watch: async () => [{ accountName: 'Fresh Co' }, { accountName: 'Old Co' }, { accountName: 'Never Co' }], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', maxAccounts: 2 }, { watch: async () => [{ accountName: 'Fresh Co' }, { accountName: 'Old Co' }, { accountName: 'Never Co' }], opportunity, inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(seen).toEqual(['Never Co', 'Old Co']);
     expect(r.deferredAccounts).toBe(1);
   });
@@ -119,7 +121,7 @@ describe('Release B review fixes: the planner rotates', () => {
     const members = [m('a', { account_name: 'Fresh Co', qualification: 'research', qualified_at: new Date('2026-09-28T14:00:00Z') })];
     const { prisma } = db(members);
     const opportunity = vi.fn(async () => ({ status: 'CLEAR' as const, companyIds: [] }));
-    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', skipQualifiedWithinMs: 12 * 3_600_000 }, { watch: async () => [{ accountName: 'Fresh Co' }], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    const r = await planWorkSources(prisma, { now: NOW, actor: 'gap-plan', skipQualifiedWithinMs: 12 * 3_600_000 }, { watch: async () => [{ accountName: 'Fresh Co' }], opportunity, inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(opportunity).not.toHaveBeenCalled();
     expect(r.accounts).toBe(0);
   });
@@ -136,7 +138,7 @@ describe('personal engagement puts an account in scope (a transparent rule, not 
     const { prisma } = db(members);
     prisma.gapWorkSource.findMany = vi.fn(async () => [{ id: 'c1', intent: 'find_people', status: 'active', source_type: 'conference', name: 'Inland26 · Chicago' }, { id: 'n1', intent: 'research', status: 'active', source_type: 'newsletter', name: 'MMYQB' }]);
     const opportunity = vi.fn(async () => ({ status: 'CLEAR' as const, companyIds: [] }));
-    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [], opportunity, inbox: async () => [], reresolve: async () => 0 });
+    await planWorkSources(prisma, { now: NOW, actor: 'gap-plan' }, { watch: async () => [], opportunity, inbox: async () => [], reresolve: async () => 0, ...NO_MOTION });
     expect(members.map((x) => [x.account_name, x.qualification])).toEqual([['Walmart Inc.', 'research'], ['Landstar', 'not_icp']]);
     expect(opportunity).toHaveBeenCalledTimes(1); // the deal truth is read for the engaged account only
   });
@@ -171,5 +173,12 @@ describe('one source-type traits map', () => {
     expect(SOURCE_TYPE_TRAITS.newsletter).toMatchObject({ engaged: false, relational: true, opener: 'author' });
     expect(SOURCE_TYPE_TRAITS.referral).toMatchObject({ engaged: true, approach: 'referral_led' });
     expect(SOURCE_TYPE_TRAITS.target_list).toMatchObject({ engaged: false, relational: false });
+  });
+});
+
+describe('account motion in the planner fails closed (review E)', () => {
+  it('an unreadable conversation or send ledger holds the account for a human, never "evidence ready"', async () => {
+    const { qualifyAccount } = await import('@/lib/gap/intake/plan');
+    expect(qualifyAccount({ accountName: 'Acme Foods', watched: true, opportunity: 'CLEAR', liveFacts: 2, bestFactReason: null, theses: [], lastResearchAt: null, motion: { kind: 'unknown', detail: 'the conversation or send ledger could not be read' } }, NOW)).toMatchObject({ state: 'human_review', reason: expect.stringMatching(/could not be read.*held, never cold/) });
   });
 });

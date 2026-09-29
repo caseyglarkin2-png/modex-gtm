@@ -91,7 +91,7 @@ export async function loadAccountInputs(
     prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }).catch(() => []),
     prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true }, take: 60 }),
     prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true }, take: 30 }).catch(() => []),
-    prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { not: 'ignored' } }, select: { name: true, kind: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
+    prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
   ]);
   const aliasList = (aliases as Array<{ alias: string }>).map((a) => a.alias);
   const domains: string[] = [];
@@ -167,7 +167,8 @@ export async function loadAccountInputs(
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
     personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null })),
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state })),
-    memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null })),
+    // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).
+    memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),
     firstTouches: ((touches as Map<string, Array<{ recipient: string; sentAt: string; released: boolean; outstanding?: boolean }>>).get(accountName) ?? []).map((t) => ({ recipient: t.recipient, sentAt: t.sentAt, state: t.outstanding ? 'draft outstanding' : t.released ? 'released' : 'sent' })),
     conversation: conv ? { who: conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
     opportunity,
