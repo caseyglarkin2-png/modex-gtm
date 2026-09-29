@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { ResearchPlan } from '@/lib/gap/account-intel/orchestrate';
 
-const SECTION_LABEL: Record<string, string> = { catalysts: 'Catalysts', footprint: 'Footprint', technology: 'Technology', freight: 'Freight', org: 'Who owns it', economics: 'Economics', yard: 'Yard process', commercial: 'Commercial' };
-const OUTCOME: Record<string, string> = { evidence_found: 'found verified evidence', insufficient_evidence: 'found nothing it could verify (an honest answer)', conflicting_evidence: 'found sources that disagree' };
+const SECTION_LABEL: Record<string, string> = { identity: 'Company and operations', catalysts: 'Catalysts', footprint: 'Footprint', technology: 'Technology', freight: 'Freight', org: 'Who owns it', economics: 'Economics', yard: 'Yard process', commercial: 'Commercial' };
+const OUTCOME: Record<string, string> = { scouted: 'Scout judged what it is and what it runs', evidence_found: 'found verified evidence', insufficient_evidence: 'found nothing it could verify (an honest answer)', conflicting_evidence: 'found sources that disagree' };
 
 export function ResearchPlanView({ accountName, plan }: { accountName: string; plan: ResearchPlan }) {
   const router = useRouter();

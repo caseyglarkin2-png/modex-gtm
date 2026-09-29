@@ -41,12 +41,15 @@ describe('decideApproach', () => {
 });
 
 describe('red team: fact-led is problem-led', () => {
-  it('a fact without a grounded thesis, a sensitive-only fact, a stale thesis, or a logistics provider is never fact-led', () => {
+  it('a fact without a grounded thesis, a sensitive-only fact, a stale thesis, a partner or a not-fit is never fact-led', () => {
     expect(decideApproach({ ...base, groundedThesis: false }).why).toMatch(/no thesis grounded in it yet/);
     expect(decideApproach({ ...base, sensitiveOnly: 'people lost their jobs' }).why).toMatch(/only live fact is sensitive \(people lost their jobs\)/);
     expect(decideApproach({ ...base, staleThesis: true }).why).toMatch(/needs review/);
-    expect(decideApproach({ ...base, partner: true }).why).toMatch(/Not a shipper prospect/);
-    for (const x of [{ groundedThesis: false }, { sensitiveOnly: 'x' }, { staleThesis: true }, { partner: true }]) expect(kind(x)).toBe('NO_GOOD_MOTION');
+    expect(decideApproach({ ...base, fit: { fit: 'PARTNER', why: 'A vendor serving logistics.' } }).why).toMatch(/^Not a direct buyer/);
+    expect(decideApproach({ ...base, fit: { fit: 'NOT_FIT', why: 'A pure broker.' } }).why).toMatch(/^Not a YardFlow fit/);
+    // a 3PL or carrier that runs sites is a direct buyer: no hold
+    expect(kind({ fit: { fit: 'DIRECT_BUYER', why: 'x' } })).toBe('FACT_LED');
+    for (const x of [{ groundedThesis: false }, { sensitiveOnly: 'x' }, { staleThesis: true }, { fit: { fit: 'NOT_FIT', why: 'x' } }]) expect(kind(x)).toBe('NO_GOOD_MOTION');
   });
   it('with an unusable fact, a real relationship still allows asking for perspective', () => {
     expect(kind({ groundedThesis: false, source: { sourceType: 'conference', context: 'Met at Inland26', name: 'Inland26' } })).toBe('RELATIONSHIP_LED');

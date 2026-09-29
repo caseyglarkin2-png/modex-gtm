@@ -74,6 +74,14 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     for (const { section } of ORDER) skipped.push({ section, reason: 'In a deal: learn from the buyer, not the web.' });
     return { tasks, skipped };
   }
+  // What the company IS and what it operates decides whether any of the rest matters (entity type != fit):
+  // an account whose fit is unknown gets an identity Scout first (Scout's own cooldown bounds it).
+  if (brief.fit.fit === 'UNKNOWN' || !brief.fit.entityType) {
+    // One identity Scout answers for 14 days: an operator still UNKNOWN after it needs a human, not a re-run.
+    const scouted = brief.fit.scoutedAt && now.getTime() - new Date(brief.fit.scoutedAt).getTime() < 14 * DAY ? brief.fit.scoutedAt : null;
+    if (scouted) skipped.push({ section: 'identity', reason: `Scouted on ${scouted.slice(0, 10)}; its answer stands for 14 days (ask what it runs if it is still unclear).` });
+    else tasks.push({ section: 'identity', depth: 'SCOUT', provider: 'research', focus: 'What the company is, and which facilities, yards, terminals or fleets it runs (Scout, cited).', why: 'YardFlow fit is unknown: what it operates decides whether anything else is worth researching.' });
+  }
   for (const { section, why } of ORDER) {
     const s = brief.sections[section];
     if (s.status === 'KNOWN') {

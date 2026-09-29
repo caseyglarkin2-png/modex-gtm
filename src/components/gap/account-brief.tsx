@@ -133,6 +133,7 @@ function SectionBlock({ s }: { s: Section }) {
 
 const GLANCE_ROWS: Array<[keyof AccountIntelligenceBrief['glance'], string]> = [
   ['motion', 'Motion'],
+  ['fit', 'Company / fit'],
   ['icpState', 'ICP / state'],
   ['whyNow', 'Why now'],
   ['network', 'Network'],

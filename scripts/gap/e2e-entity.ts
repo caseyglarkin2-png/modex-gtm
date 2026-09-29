@@ -93,18 +93,18 @@ async function main(): Promise<number> {
     const q1 = await loadCandidateQueue(prisma, { workSourceId: srcId });
     const newco = q1.find((i) => i.companyKey === normalizeCompanyName(NEWCO));
     const logi = q1.find((i) => i.companyKey === normalizeCompanyName(LOGI));
-    expect('E1 queue', !!newco && newco.people === 2 && !!logi && logi.verdict === 'NOT_ICP' && q1.indexOf(logi) > q1.indexOf(newco) && (await prisma.account.count()) === accountsBefore, JSON.stringify(q1.map((i) => [i.company, i.people, i.verdict])));
-    pass('E1 queue', `2 spellings of ${NEWCO} are one candidate (2 people); ${LOGI} is NOT ICP by name rule and sorts last; no account created by reading`);
+    expect('E1 queue', !!newco && newco.people === 2 && !!logi && logi.verdict === null && logi.entityType === '3pl' && q1.indexOf(logi) > q1.indexOf(newco) && (await prisma.account.count()) === accountsBefore, JSON.stringify(q1.map((i) => [i.company, i.people, i.verdict])));
+    pass('E1 queue', `2 spellings of ${NEWCO} are one candidate (2 people); ${LOGI} is a 3PL guess by name with its fit left open (never rejected by name); no account created by reading`);
 
     // ---- E2
-    const scout = async () => ({ company: NEWCO, verdict: 'LIKELY_ICP' as const, entityType: 'shipper' as const, domain: `${tag}.example.com`, what: 'Regional food distributor', why: 'A shipper with cited network evidence (1 claim).', network: [{ claim: 'Operates 6 distribution centers.', url: `https://${tag}.example.com/about` }], freight: [], unknowns: ['Who runs yard operations'], basis: 'web' as const });
+    const scout = async () => ({ company: NEWCO, verdict: 'DIRECT_BUYER' as const, entityType: 'shipper' as const, domain: `${tag}.example.com`, what: 'Regional food distributor', why: 'A shipper with cited network evidence (1 claim).', network: [{ claim: 'Operates 6 distribution centers.', url: `https://${tag}.example.com/about` }], freight: [], unknowns: ['Who runs yard operations'], basis: 'web' as const });
     const s = await scoutCandidate(prisma, { company: `${NEWCO}, Inc.`, actor: ACTOR, now: NOW }, { scout });
     const rows = await prisma.gapAccountCandidate.findMany({ where: { company_key: normalizeCompanyName(NEWCO) } });
-    expect('E2 scout', s.verdict === 'LIKELY_ICP' && rows.length === 1 && rows[0].verdict === 'LIKELY_ICP', JSON.stringify(rows));
-    const badVerdict = await refused(prisma.gapAccountCandidate.update({ where: { id: rows[0].id }, data: { verdict: 'VERY_LIKELY' } }));
+    expect('E2 scout', 'verdict' in s && s.verdict === 'DIRECT_BUYER' && rows.length === 1 && rows[0].verdict === 'DIRECT_BUYER', JSON.stringify(rows));
+    const badVerdict = await refused(prisma.gapAccountCandidate.update({ where: { id: rows[0].id }, data: { verdict: 'LIKELY_ICP' } }));
     const noDecider = await refused(prisma.gapAccountCandidate.update({ where: { id: rows[0].id }, data: { decision: 'ignored' } }));
     expect('E2 db', !!badVerdict?.includes('gap_ck_gap_account_candidates_verdict') && !!noDecider?.includes('gap_ck_gap_account_candidates_decided'), `${badVerdict?.slice(0, 120)} | ${noDecider?.slice(0, 120)}`);
-    pass('E2 scout', 'one candidate row for both spellings, verdict LIKELY_ICP from cited evidence; the database refuses VERY_LIKELY and an undecided "ignored"');
+    pass('E2 scout', 'one candidate row for both spellings, fit DIRECT_BUYER from cited operations; the database refuses the retired LIKELY_ICP vocabulary and an undecided "ignored"');
 
     // ---- E3
     const dup = await createGapAccount(prisma, { name: `Costa Growers ${tag}`, company: `Costa Growers ${tag}`, vertical: 'agriculture', reason: 'e2e', actor: ACTOR, now: NOW }, hubspot);

@@ -286,9 +286,12 @@ describe('dogfood fixes (Release H)', () => {
     expect(b.thesis.whyNow).toMatch(/SENSITIVE \(people lost their jobs\): never the hook/);
     expect(b.thesis.whyNotPursue.join(' ')).toMatch(/The best fact is sensitive/);
   });
-  it('an account whose record says 3PL is named as a partner or channel, not a shipper prospect', () => {
+  it('REGRESSION (Release J): a 3PL that runs audited sites is a DIRECT BUYER, never a "partner" by label', () => {
     const b = buildAccountBrief(base({ account: { ...base().account, vertical: '3PL / Logistics' } }), NOW);
-    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/The account record says 3PL \/ Logistics/);
+    expect(b.fit).toMatchObject({ entityType: '3pl', fit: 'DIRECT_BUYER' });
+    expect(b.glance.fit).toBe('3PL / contract logistics · Direct buyer');
+    expect(b.motion.type).toBe('FACT_LED');
+    expect(b.thesis.whyNotPursue.join(' ')).not.toMatch(/partner|shipper prospect/i);
   });
   it('with no live fact, "research first" points at catalysts on the account page', () => {
     expect(buildAccountBrief(base({ facts: [] }), NOW).glance.nextAction).toBe('Do not contact yet: no verified fact and no relationship to open with. Research first (Deepen catalysts on this page).');
@@ -324,9 +327,16 @@ describe('red team fixes (Release I)', () => {
     ];
     expect(buildAccountBrief(base({ personas }), NOW).glance.likelyOwner).toMatch(/^Val VP/);
   });
-  it('a logistics provider is a partner: no shipper motion', () => {
-    const b = buildAccountBrief(base({ account: { ...base().account, vertical: '3PL / Logistics' } }), NOW);
-    expect(b.motion).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/Not a shipper prospect/) });
+  it('a software vendor record is never a direct buyer: a partner when it serves logistics, else not a fit', () => {
+    const vendor = base({ account: { ...base().account, vertical: 'Software' }, pack: null, facts: [], scout: { domain: null, what: 'Yard management software', entityType: 'vendor', network: [], freight: [], at: null } });
+    const b = buildAccountBrief(vendor, NOW);
+    expect(b.fit.fit).toBe('PARTNER');
+    expect(b.motion).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/^Not a direct buyer/) });
+  });
+  it('a carrier record with no operating evidence is UNKNOWN (check its network), never rejected', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Trucking' }, pack: null, facts: [], microsite: null }), NOW);
+    expect(b.fit).toMatchObject({ entityType: 'carrier', fit: 'UNKNOWN' });
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/Fit unknown: A carrier; fit depends on whether it runs facilities/);
   });
   it('no wedge expansion inside a deal; NETWORK only on a cited count', () => {
     expect(buildAccountBrief(base({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'x', stage: 'y' }] } }), NOW).wedge.expansion).toEqual([]);
@@ -339,5 +349,22 @@ describe('dogfood: a quoted vendor statement is still vendor marketing', () => {
   it('a fact that opens with a quotation mark and a vendor name never leads', () => {
     const vendor = { ...base().facts[0], id: 'v2', quote: '“Gatik is already operating inside our networks and brings the scale we need,” said Acme Foods.', publishedAt: '2026-09-25T00:00:00Z' };
     expect(buildAccountBrief(base({ facts: [vendor, base().facts[0]] }), NOW).glance.bestFact).toMatch(/^Acme Foods will open/);
+  });
+});
+
+describe('review J: vertical words and ambiguous Scouts', () => {
+  it('real vertical words map to a type (stems match their endings; distribution before food)', async () => {
+    const { typeFromVertical } = await import('@/lib/gap/account-intel/build');
+    expect(typeFromVertical('Manufacturing')).toBe('manufacturer');
+    expect(typeFromVertical('Automotive')).toBe('manufacturer');
+    expect(typeFromVertical('Food Distribution')).toBe('distributor');
+    expect(typeFromVertical('Warehousing')).toBe('3pl');
+    expect(typeFromVertical('Transportation')).toBe('carrier');
+    expect(typeFromVertical('Consulting')).toBe('vendor');
+    expect(typeFromVertical('Unknown')).toBeNull();
+  });
+  it('an ambiguous Scout (a name shared by several companies) never counts as the account evidence or type', () => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Unknown' }, pack: null, facts: [], scout: { domain: null, what: 'A different company', entityType: 'carrier', network: [{ claim: 'Operates 30 terminals.', url: 'https://x.example' }], freight: [{ claim: 'Runs a fleet of 2,000 tractors.', url: 'https://x.example/f' }], at: '2026-09-29T00:00:00Z', basis: 'web', ambiguous: true } }), NOW);
+    expect(b.fit).toMatchObject({ entityType: null, fit: 'UNKNOWN' });
   });
 });

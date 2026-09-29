@@ -4,13 +4,14 @@ import { NextRequest } from 'next/server';
 
 const { session, deps } = vi.hoisted(() => ({
   session: { value: null as null | { user: { email: string } } },
-  deps: { loadAccountInputs: vi.fn(), runEvidenceResearch: vi.fn(), loadResearchHistory: vi.fn() },
+  deps: { loadAccountInputs: vi.fn(), runEvidenceResearch: vi.fn(), loadResearchHistory: vi.fn(), scoutCandidate: vi.fn() },
 }));
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => session.value) }));
-vi.mock('@/lib/prisma', () => ({ prisma: {} }));
 vi.mock('@/lib/gap/flags', () => ({ assertGapEnabled: () => null }));
 vi.mock('@/lib/gap/account-intel/load', () => ({ loadAccountInputs: deps.loadAccountInputs }));
 vi.mock('@/lib/gap/research/run', () => ({ runEvidenceResearch: deps.runEvidenceResearch }));
+vi.mock('@/lib/gap/entity/candidates', () => ({ scoutCandidate: deps.scoutCandidate }));
+vi.mock('@/lib/prisma', () => ({ prisma: { gapAuditEvent: { create: async () => ({}) } } }));
 vi.mock('@/lib/gap/account-intel/orchestrate', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/account-intel/orchestrate')>()), loadResearchHistory: deps.loadResearchHistory }));
 
 import { POST } from '@/app/api/gap/accounts/deepen/route';
@@ -64,5 +65,12 @@ describe('POST /api/gap/accounts/deepen', () => {
 
   it('a section only a human can answer is not a web call (400 at the schema)', async () => {
     expect((await POST(req({ accountName: 'Acme Foods', section: 'org' }))).status).toBe(400);
+  });
+  it('identity: an account of unknown type runs Scout (nothing created) and returns the fit', async () => {
+    deps.loadAccountInputs.mockResolvedValue({ ...inputs(), account: { ...inputs().account, vertical: 'Unknown' } });
+    deps.scoutCandidate.mockResolvedValue({ company: 'Acme Foods', verdict: 'DIRECT_BUYER', entityType: 'carrier', network: [{ claim: 'x', url: 'https://x' }], freight: [], why: 'A carrier that runs terminals.', basis: 'web' });
+    const r = await POST(req({ accountName: 'Acme Foods', section: 'identity' }));
+    expect(await r.json()).toMatchObject({ section: 'identity', fit: 'DIRECT_BUYER', entityType: 'carrier' });
+    expect(deps.runEvidenceResearch).not.toHaveBeenCalled();
   });
 });

@@ -79,3 +79,13 @@ describe('planResearch', () => {
     expect(running.tasks.some((t) => t.section === 'footprint')).toBe(false);
   });
 });
+
+describe('Release J: when YardFlow fit is unknown, the first task is an identity Scout', () => {
+  it('an account of unknown type gets "what is it and what does it run" before anything else', () => {
+    const p = planResearch(buildAccountBrief(inputs({ account: { ...inputs().account, vertical: 'Unknown' } }), NOW), [], NOW);
+    expect(p.tasks[0]).toMatchObject({ section: 'identity', depth: 'SCOUT', provider: 'research' });
+  });
+  it('a known shipper does not spend a Scout on identity', () => {
+    expect(planResearch(buildAccountBrief(inputs(), NOW), [], NOW).tasks.some((t) => t.section === 'identity')).toBe(false);
+  });
+});
