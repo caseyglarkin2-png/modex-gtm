@@ -173,13 +173,34 @@ export const scoutRefusalStatus = (refused: string) => (refused === 'web_failed'
 
 // ---------------------------------------------------------------- the configured providers
 
+/**
+ * The paid yardflow-llm Gemini key (Flow-State concierge) is a "new user" to Google: pinned ids such as
+ * gemini-2.5-flash answer 404 "no longer available to new users" for it, while an older key still serves them.
+ * Try the configured model, then the -latest alias, moving on ONLY for a model-gone 404 (quota and other errors
+ * go to the chain as they are).
+ */
+export const GEMINI_MODELS = () => [...new Set([process.env.SCOUT_GEMINI_MODEL || 'gemini-2.5-flash', 'gemini-flash-latest'])];
+export const modelGone = (e: unknown) => /404|not found|no longer available/i.test(e instanceof Error ? e.message : String(e));
+export async function withModelFallback<T>(models: readonly string[], run: (model: string) => Promise<T>): Promise<T> {
+  let last: unknown;
+  for (const m of models) {
+    try {
+      return await run(m);
+    } catch (e) {
+      if (!modelGone(e)) throw e;
+      last = e;
+    }
+  }
+  throw last;
+}
+
 const gemini: ScoutProvider = {
   name: 'gemini',
   available: () => !!process.env.GEMINI_API_KEY,
   ask: async (prompt, signal) => {
     const { GoogleGenerativeAI } = await import('@google/generative-ai');
-    const model = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!).getGenerativeModel({ model: 'gemini-2.5-flash', tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never });
-    const res = await model.generateContent(prompt, { signal });
+    const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    const res = await withModelFallback(GEMINI_MODELS(), (name) => client.getGenerativeModel({ model: name, tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never }).generateContent(prompt, { signal }));
     // Search is a tool Gemini may skip: only an answer with grounding chunks searched. A claim must cite one of
     // those chunks (its link is a Google grounding redirect to the page read) or a page on a site it read (the
     // chunk title is that site's domain).
