@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
   const now = new Date();
   if (b.op === 'scout') {
     const r = await scoutCandidate(prisma, { company: b.company, hint: b.hint, force: b.force, actor: g.email, now });
-    return 'refused' in r ? NextResponse.json({ error: r.refused, scoutedAt: r.scoutedAt ?? null }, { status: 429 }) : NextResponse.json(r);
+    if ('refused' in r) return NextResponse.json({ error: r.refused, scoutedAt: r.scoutedAt ?? null, reason: r.why ?? null }, { status: r.refused === 'web_failed' ? 502 : 429 });
+    return NextResponse.json(r);
   }
   if (b.op === 'check') return NextResponse.json(await accountCreationCheck(prisma, { name: b.name, domain: b.domain }));
   if (b.op === 'add') {

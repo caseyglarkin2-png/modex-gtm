@@ -742,7 +742,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const stale = top?.needsReview.length ? top : hypotheses.find((h) => h.needsReview.length > 0);
   const thesis: Thesis = {
     status: stale ? `THESIS NEEDS REVIEW: ${stale.needsReview.join(' ')}` : 'INFERENCE, for your review (never approved by GAP)',
-    whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),
+    whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.map((r) => WATCH_REASON[r] ?? r.replace(/_/g, ' ')).join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),
     whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})` : 'No current, verified catalyst.',
     whatMayBeBroken: top ? top.problem : `Unknown: ${noHypothesis}`,
     whyItMayMatter: econ ? econ.text : 'Unknown: no economics yet.',

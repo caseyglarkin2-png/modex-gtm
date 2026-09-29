@@ -31,17 +31,27 @@ export interface ScoutResult {
   freight: ScoutClaim[];
   unknowns: string[];
   basis: 'name_rules' | 'web';
+  /** The web pass itself failed (quota, network, a cut-off answer): nothing was learned, so nothing is stored. */
+  failed?: boolean;
 }
 
-const NAME_RULES: Array<[EntityType, RegExp]> = [
-  ['broker', /\b(brokerage|brokers?)\b/i],
-  ['carrier', /\b(trucking|truck lines|freight lines|motor freight|carriers?|express lines|transport(ation)? (inc|llc|co)|haulers?)\b/i],
-  ['3pl', /\b(logistics|3pl|fulfil+ment services|warehousing|supply chain solutions|distribution services)\b/i],
-  ['vendor', /\b(software|technolog(y|ies)|systems|consult(ing|ants?)|capital|ventures|partners|advisors|media|associat(ion|es)|university|bank|insurance|recruit(ing|ers)|staffing)\b/i],
+/**
+ * Free name rules, checked in order. Each names what the company reads as; a wrong call costs nothing because
+ * Casey can still map or add it. Nothing here ever says LIKELY ICP: a shipper cannot be told from its name.
+ */
+const NAME_RULES: Array<[EntityType, RegExp, string]> = [
+  ['other', /\b(freightroll|yardflow)\b/i, 'our own company'],
+  ['carrier', /\b(fedex|ups|dhl|xpo|j\.?\s?b\.? hunt|schneider|werner|knight[- ]swift|old dominion|saia|estes|forward air|ryder|penske|landstar|yellow corp)\b/i, 'a carrier or logistics provider (a known brand)'],
+  ['broker', /\b(brokerage|brokers?|freight(?! buyers)|freight buyers)\b/i, 'a freight broker or freight community'],
+  ['carrier', /\b(trucking|truck lines|freight lines|motor freight|carriers?|express|transport(ation)?|trans inc|haul\w*|expedite\w*|drop (and|&) hook)\b/i, 'a carrier'],
+  ['3pl', /\b(logistics?|3pl|fulfil+ment|warehousing|supply chain solutions|distribution services)\b/i, 'a 3PL or logistics provider'],
+  ['vendor', /\b(software|technolog(y|ies)|systems|solutions|consult(ing|ants?)|advisors?|advisory|agency|audit|productions?|media|topics|news|publishing|podcast|associat(ion|es)|insurance|recruit(ing|ers)|staffing|eap)\b/i, 'a vendor, media or services firm'],
+  ['other', /\b(capital|ventures|asset man\w*|investments?|bank|blackstone|private equity|partners)\b/i, 'a finance firm'],
+  ['other', /\b(health|dental|medical|clinic|hospital|care|college|university|school|academy|sheriff'?s?|police|county|department of|city of)\b/i, 'healthcare, education or public sector'],
 ];
 
 export function classifyByName(company: string): { entityType: EntityType | null; verdict: ScoutVerdict; why: string } {
-  for (const [t, re] of NAME_RULES) if (re.test(company)) return { entityType: t, verdict: 'NOT_ICP', why: `The name reads as a ${t === '3pl' ? '3PL' : t} (name rule only; map it to a shipper account if that is wrong).` };
+  for (const [t, re, label] of NAME_RULES) if (re.test(company)) return { entityType: t, verdict: 'NOT_ICP', why: `The name reads as ${label} (name rule only; map or add it if that is wrong).` };
   return { entityType: null, verdict: 'INSUFFICIENT', why: 'The name alone says nothing about what the company is.' };
 }
 
@@ -81,7 +91,8 @@ export function parseScout(text: string): { entityType: EntityType | null; domai
     return out.slice(0, 5);
   };
   const t = typeof o.entityType === 'string' ? (o.entityType.toLowerCase() as EntityType) : null;
-  const domain = typeof o.domain === 'string' && /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(o.domain.trim()) ? o.domain.trim().toLowerCase() : null;
+  const rawDomain = typeof o.domain === 'string' ? o.domain.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '') : '';
+  const domain = /^[a-z0-9.-]+\.[a-z]{2,}$/.test(rawDomain) ? rawDomain : null;
   return {
     entityType: t && TYPES.has(t) ? t : null,
     domain,
@@ -113,10 +124,10 @@ export async function scoutCompany(company: string, deps: { ask?: (prompt: strin
   try {
     text = await ask(SCOUT_PROMPT(company, deps.hint ?? ''));
   } catch (e) {
-    return { ...base, verdict: 'INSUFFICIENT', entityType: null, why: `The web pass failed (${e instanceof Error ? e.message : 'error'}); nothing is known yet.`, basis: 'web' };
+    return { ...base, verdict: 'INSUFFICIENT', entityType: null, why: `The web pass failed (${e instanceof Error ? e.message.slice(0, 120) : 'error'}); nothing is known yet.`, basis: 'web', failed: true };
   }
   const p = parseScout(text);
-  if (!p) return { ...base, verdict: 'INSUFFICIENT', entityType: null, why: 'The web pass returned nothing usable.', basis: 'web' };
+  if (!p) return { ...base, verdict: 'INSUFFICIENT', entityType: null, why: 'The web pass returned nothing usable.', basis: 'web', failed: true };
   const verdict = deriveVerdict(p);
   const why =
     verdict === 'LIKELY_ICP' ? `A shipper with cited network evidence (${p.network.length} ${p.network.length === 1 ? 'claim' : 'claims'}).`
@@ -131,7 +142,7 @@ async function defaultAsk(prompt: string): Promise<string> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error('web search not configured');
   const { GoogleGenerativeAI } = await import('@google/generative-ai');
-  const model = new GoogleGenerativeAI(key).getGenerativeModel({ model: 'gemini-2.5-flash', tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 1200 } });
+  const model = new GoogleGenerativeAI(key).getGenerativeModel({ model: 'gemini-2.5-flash', tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never });
   const res = await model.generateContent(prompt);
   return res.response.text();
 }
