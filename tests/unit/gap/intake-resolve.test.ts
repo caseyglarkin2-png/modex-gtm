@@ -48,6 +48,10 @@ describe('people', () => {
     expect(r.candidates.map((c) => c.personaId).sort()).toEqual([3, 4]);
   });
 
+  it('the company NAME inside what was written resolves ("Globex - Dad of 3" is Globex)', () => {
+    expect(resolveIntakeRow(ctx, person({ name: 'Dan New', company: 'Globex - Dad of 3' }))).toMatchObject({ resolution: 'new_candidate', accountName: 'Globex' });
+  });
+
   it('a company GAP does not know: UNRESOLVED (no Account is created)', () => {
     expect(resolveIntakeRow(ctx, person({ name: 'Eve Unknown', company: 'Brown Dog Carriers' }))).toMatchObject({ resolution: 'unresolved', basis: 'company_not_in_gap', accountName: null });
   });

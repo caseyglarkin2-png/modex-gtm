@@ -5,13 +5,14 @@
  *   `{ op: 'commit',  kind, text }`   idempotent import (members + staged candidates + audit)
  *   `{ op: 'current' }`               make this the current source (quick adds default to it)
  *   `{ op: 'plan' }`                  qualify this source now, account by account (bounded; research runs in the background)
+ *   `{ op: 'map_company', company, accountName }`  this company IS that existing account (a curated alias); never creates an account
  *
  * Never creates a Persona or an Account; never routes, drafts, sends or enrolls.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { commitIntake, previewIntake, setCurrentWorkSource } from '@/lib/gap/intake/service';
+import { commitIntake, mapCompanyToAccount, previewIntake, setCurrentWorkSource } from '@/lib/gap/intake/service';
 import { planWorkSources } from '@/lib/gap/intake/plan';
 import { loadSource, MEMBER_FILTERS } from '@/lib/gap/intake/views';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
@@ -25,6 +26,7 @@ const Body = z.discriminatedUnion('op', [
   z.object({ op: z.literal('commit'), kind: z.enum(['people', 'accounts']), text: z.string().min(1).max(TEXT_MAX) }).strict(),
   z.object({ op: z.literal('current') }).strict(),
   z.object({ op: z.literal('plan') }).strict(),
+  z.object({ op: z.literal('map_company'), company: z.string().min(1).max(300), accountName: z.string().min(1).max(300) }).strict(),
 ]);
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -46,6 +48,10 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return badBody(parsed.error.issues);
   const b = parsed.data;
+  if (b.op === 'map_company') {
+    const r = await mapCompanyToAccount(prisma, { workSourceId: id, company: b.company, accountName: b.accountName, actor: g.email, now: new Date() });
+    return r.ok ? NextResponse.json(r) : NextResponse.json({ error: r.reason }, { status: r.reason === 'account_not_found' ? 404 : 409 });
+  }
   if (b.op === 'plan') {
     const r = await planWorkSources(prisma, { now: new Date(), actor: g.email, workSourceId: id, maxAccounts: 25, timeBudgetMs: 60_000 });
     return NextResponse.json(r);

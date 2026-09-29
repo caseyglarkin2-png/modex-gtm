@@ -79,11 +79,35 @@ export const CREDENTIAL = /^(?:mba|phd|ph\.d\.?|md|jd|cpa|pmp|cscp|cltd|cpim|cps
 /** A title part that describes a PAST or wished-for role: "at X" is then not a current employer. */
 const NOT_CURRENT = /^(?:ex[-\s]|former\b|formerly\b|previously\b|retired\b|past\b|looking\b|seeking\b|open to\b|aspiring\b)/i;
 
+const LEGAL_ABBREV = /^(?:inc|co|corp|ltd|llc|lp|plc|bros|intl)$/i;
+const TAIL_PHRASE = /\s+(?:with|helping|where|who|driving|building|focused|specializing|passionate|changing|making)\s+[a-z].*$/;
+
+/**
+ * The company NAME inside what a person wrote ("Petsmart with expertise in logistics management.",
+ * "BWS Logistics - Father - Husband", "Chunker. 2x Inc 5000"): cut at a sentence end, a dash or bar
+ * aside, an emoji, or a lowercase continuation phrase. Used for resolution; what was supplied stays as supplied.
+ */
+export function cleanCompanyName(raw: string): string {
+  let s = raw.replace(/\s+/g, ' ').trim();
+  s = s.split(/\s+[-–—|·•]\s+/)[0];
+  s = s.replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}].*$/u, '').trim();
+  s = s.replace(TAIL_PHRASE, '');
+  // A sentence end: ". " before a capital or digit, unless the word is an initial ("A.N.") or a legal suffix (kept).
+  const re = /(\S+)\.\s+(?=[A-Z0-9])/g;
+  for (let m = re.exec(s); m; m = re.exec(s)) {
+    const word = m[1].replace(/^.*[\s,]/, '');
+    if (/^(?:[A-Z]\.)*[A-Z]$/.test(word)) continue;
+    s = LEGAL_ABBREV.test(word) ? s.slice(0, m.index + m[1].length + 1) : s.slice(0, m.index + m[1].length);
+    break;
+  }
+  return s.replace(/[.\s]+$/, (t) => (/\b(?:inc|co|corp|ltd|llc)\.$/i.test(s) ? '.' : '')).replace(/\s+$/, '').trim() || raw.trim();
+}
+
 /** "VP Distribution at Acme Foods" -> title + company; anything else stays a title only (no company invented). */
 export function splitHeadline(headline: string): { title?: string; company?: string } {
   const h = headline.replace(/\s+/g, ' ').trim();
   const m = /^([^|·•]{2,100}?)\s+(?:at|@)\s+([^|·•]+?)\s*(?:[|·•].*)?$/i.exec(h);
-  if (m && !/\|/.test(m[1]) && !NOT_CURRENT.test(m[1].trim()) && /^[A-Z0-9]/.test(m[2].trim())) return { title: clean(m[1]), company: clean(m[2]) };
+  if (m && !/\|/.test(m[1]) && !NOT_CURRENT.test(m[1].trim()) && /^[A-Z0-9]/.test(m[2].trim())) return { title: clean(m[1]), company: clean(cleanCompanyName(m[2])) };
   return { title: clean(h) };
 }
 
