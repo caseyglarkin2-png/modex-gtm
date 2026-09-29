@@ -17,6 +17,7 @@
  *             mode), or "People I met" when none is current
  */
 import { normalizeName, normalizeTitle } from '@/lib/contact-standard';
+import { personKey } from './resolve';
 import { loadIdentityContext } from '../identity/service';
 import { soundsLikeBuyerWords } from '../capture/buyer-words';
 import { parseIntake, type IntakeKind, type IntakeRow, type ParseResult } from './parse';
@@ -75,11 +76,23 @@ function resolveAll(ctx: IntakeContext, parsed: ParseResult): PreviewRow[] {
   const out: PreviewRow[] = [];
   for (const row of parsed.rows) {
     const key = memberKey(row);
-    if (seen.has(key)) continue; // the same person twice in one paste is one member
+    // The same person twice in one paste (same email, profile or name + company + title) is one member: counted.
+    if (seen.has(key)) {
+      parsed.skipped.duplicate += 1;
+      continue;
+    }
     seen.add(key);
     out.push({ row, key, resolved: resolveIntakeRow(ctx, row) });
   }
   return out;
+}
+
+/** Identity only ever improves on a re-import or a re-resolve: never demoted, never moved to another account. */
+export function isIdentityImprovement(from: { resolution: string; account_name: string | null }, to: { resolution: string; accountName: string | null }): boolean {
+  if (from.account_name && to.accountName && from.account_name !== to.accountName) return false;
+  if (from.resolution === 'unresolved') return to.resolution !== 'unresolved';
+  if (from.resolution === 'new_candidate') return to.resolution === 'resolved';
+  return false;
 }
 
 const countOf = (rows: PreviewRow[]) => ({
@@ -99,11 +112,13 @@ export async function previewIntake(prisma: PrismaLike, input: { text: string; k
   return { parse, rows, counts: countOf(rows) };
 }
 
-async function stageCandidate(prisma: PrismaLike, p: PreviewRow, source: { id: string; source_type: string }): Promise<number | null> {
+export async function stageCandidate(prisma: PrismaLike, p: PreviewRow, source: { id: string; source_type: string }): Promise<number | null> {
   const r = p.row;
   if (!p.resolved.accountName || !r.name) return null;
-  // The existing candidate key rule (account-contact-candidates.ts); an existing candidate keeps its state.
-  const candidateKey = [r.email?.toLowerCase() || normalizeName(r.name), normalizeTitle(r.title ?? '')].filter(Boolean).join('::');
+  // The candidate-key shape of account-contact-candidates.ts (email, else the name, then the title), with a
+  // Unicode-safe name key and the member key as a last resort (a name in any script never becomes empty).
+  // An existing candidate keeps its state (a deferred one is never un-deferred by a list).
+  const candidateKey = [r.email?.toLowerCase() || personKey(r.name) || p.key, normalizeTitle(r.title ?? '')].filter(Boolean).join('::');
   const c = await prisma.accountContactCandidate.upsert({
     where: { account_name_candidate_key: { account_name: p.resolved.accountName, candidate_key: candidateKey } },
     update: {},
@@ -120,7 +135,8 @@ async function stageCandidate(prisma: PrismaLike, p: PreviewRow, source: { id: s
       source: 'gap_work_source',
       source_action: 'gap_work_intake',
       source_provider: source.source_type,
-      source_contact_id: `work_source:${source.id}`,
+      // Unique per person per source: promotion builds persona_id from it (manual-<id>), which must not collide.
+      source_contact_id: `work_source:${source.id}:${p.key}`,
       source_payload: r.raw,
       recommendation_reason: 'Arrived through a GAP work source; review before promoting.',
       state: 'staged',
@@ -143,19 +159,26 @@ async function writeMembers(prisma: PrismaLike, source: { id: string; source_typ
   let existing = 0;
   let staged = 0;
   const ids: string[] = [];
+  // One read for the members this source already has (a 2,000 row list is not 2,000 lookups).
+  const keys = rows.map((p) => p.key);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
+  const prior: Array<Record<string, any>> = await prisma.gapWorkSourceMember.findMany({ where: { work_source_id: source.id, member_key: { in: keys } } });
+  const byKey = new Map(prior.filter((m) => m.work_source_id === source.id).map((m) => [m.member_key as string, m]));
   for (const p of rows) {
-    const found = await prisma.gapWorkSourceMember.findUnique({ where: { work_source_id_member_key: { work_source_id: source.id, member_key: p.key } } });
-    const candidateId = p.row.kind === 'person' && p.resolved.resolution === 'new_candidate' ? await stageCandidate(prisma, p, source) : null;
-    if (candidateId) staged += 1;
+    const found = byKey.get(p.key) ?? null;
     if (found) {
       existing += 1;
       ids.push(found.id);
-      // Only the derived identity moves; what Casey supplied is frozen.
-      if (found.resolution !== p.resolved.resolution || found.account_name !== p.resolved.accountName || found.persona_id !== p.resolved.personaId) {
+      // Only the derived identity moves, and only for the better; what Casey supplied is frozen.
+      if (isIdentityImprovement(found as { resolution: string; account_name: string | null }, p.resolved)) {
+        const candidateId = p.row.kind === 'person' && p.resolved.resolution === 'new_candidate' ? await stageCandidate(prisma, p, source) : null;
+        if (candidateId) staged += 1;
         await prisma.gapWorkSourceMember.update({ where: { id: found.id }, data: { ...identityData(p), candidate_id: candidateId ?? found.candidate_id ?? null } });
       }
       continue;
     }
+    const candidateId = p.row.kind === 'person' && p.resolved.resolution === 'new_candidate' ? await stageCandidate(prisma, p, source) : null;
+    if (candidateId) staged += 1;
     const r = p.row;
     const m = await prisma.gapWorkSourceMember.create({
       data: {
@@ -176,6 +199,10 @@ async function writeMembers(prisma: PrismaLike, source: { id: string; source_typ
         candidate_id: candidateId,
         created_by: actor,
       },
+    }).catch(async (e: unknown) => {
+      // A concurrent import of the same list won the unique (source, key): that row is simply already there.
+      if ((e as { code?: string })?.code !== 'P2002') throw e;
+      return prisma.gapWorkSourceMember.findUnique({ where: { work_source_id_member_key: { work_source_id: source.id, member_key: p.key } } });
     });
     created += 1;
     ids.push(m.id);
@@ -236,6 +263,12 @@ export async function addPerson(
   const ctx = await loadIntakeContext(prisma);
   const p: PreviewRow = { row, key: memberKey(row), resolved: resolveIntakeRow(ctx, row) };
   const w = await writeMembers(prisma, source, [p], input.actor);
+  // Meeting someone again: the new note is kept (appended; the note is Casey's, not frozen provenance).
+  const note = input.note?.trim();
+  if (note && w.existing) {
+    const m = await prisma.gapWorkSourceMember.findUnique({ where: { id: w.ids[0] } });
+    if (m && !(m.note ?? '').split('\n').includes(note)) await prisma.gapWorkSourceMember.update({ where: { id: m.id }, data: { note: m.note ? `${m.note}\n${note}` : note } });
+  }
   await prisma.gapAuditEvent.create({ data: { kind: 'work_source.person_added', actor: input.actor, subject_type: 'work_source', subject_id: source.id, payload: { memberId: w.ids[0], resolution: p.resolved.resolution, accountName: p.resolved.accountName } } });
   return { ok: true, workSourceId: source.id, memberId: w.ids[0], resolution: p.resolved.resolution, accountName: p.resolved.accountName, buyerWords: soundsLikeBuyerWords(input.note) };
 }

@@ -169,3 +169,37 @@ describe('member decisions', () => {
     expect(t.audit.at(-1)).toMatchObject({ kind: 'work_source.member_status' });
   });
 });
+
+describe('Release A review fixes', () => {
+  it('two new people at one account get distinct candidate source ids (both can be promoted)', async () => {
+    const { prisma, t } = db();
+    const src = (await createWorkSource(prisma, { name: 'List', sourceType: 'target_list', actor: ACTOR })) as any;
+    await commitIntake(prisma, { workSourceId: src.id, text: 'Name,Company\nDana Lee,Acme\nEli Moss,Acme', kind: 'people', actor: ACTOR, now: NOW });
+    expect(t.candidates).toHaveLength(2);
+    expect(new Set(t.candidates.map((c) => c.source_contact_id)).size).toBe(2);
+  });
+
+  it('a re-import never regresses or moves identity (a conflicting later row cannot demote a resolved member)', async () => {
+    const { prisma, t } = db();
+    const src = (await createWorkSource(prisma, { name: 'List', sourceType: 'crm_list', actor: ACTOR })) as any;
+    await commitIntake(prisma, { workSourceId: src.id, text: 'Name,Email\nAngi Acosta,angi@acmefoods.com', kind: 'people', actor: ACTOR, now: NOW });
+    await commitIntake(prisma, { workSourceId: src.id, text: 'Name,Email,Company\nAngi Acosta,angi@acmefoods.com,Globex', kind: 'people', actor: ACTOR, now: NOW });
+    expect(t.members).toHaveLength(1);
+    expect(t.members[0]).toMatchObject({ resolution: 'resolved', persona_id: 1, account_name: 'Acme Foods' });
+  });
+
+  it('adding a known person again keeps the new note (appended, never lost)', async () => {
+    const { prisma, t } = db();
+    await addPerson(prisma, { name: 'Angi Acosta', company: 'Acme Foods', note: 'Met at the booth', actor: ACTOR, now: NOW });
+    await addPerson(prisma, { name: 'Angi Acosta', company: 'Acme Foods', note: 'Asked about gate flow', actor: ACTOR, now: NOW });
+    expect(t.members).toHaveLength(1);
+    expect(t.members[0].note).toBe('Met at the booth\nAsked about gate flow');
+  });
+
+  it('two rows that are the same person in one paste are counted as a duplicate, never silently merged', async () => {
+    const { prisma } = db();
+    const p = await previewIntake(prisma, { text: 'Name,Email\nAngi Acosta,angi@acmefoods.com\nA. Acosta,angi@acmefoods.com', kind: 'people' });
+    expect(p.counts.rows).toBe(1);
+    expect(p.parse.skipped.duplicate).toBe(1);
+  });
+});

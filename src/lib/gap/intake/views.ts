@@ -56,8 +56,9 @@ const tally = (rows: Array<{ key: string | null; n: number }>) => {
   return out;
 };
 
-export async function listSources(prisma: PrismaLike, opts: { includeArchived?: boolean } = {}): Promise<SourceSummary[]> {
-  const sources = await prisma.gapWorkSource.findMany({ where: opts.includeArchived ? {} : { status: 'active' }, orderBy: [{ created_at: 'desc' }], take: 200 });
+export async function listSources(prisma: PrismaLike, opts: { includeArchived?: boolean; ids?: string[] } = {}): Promise<SourceSummary[]> {
+  const where = { ...(opts.includeArchived ? {} : { status: 'active' }), ...(opts.ids ? { id: { in: opts.ids } } : {}) };
+  const sources = await prisma.gapWorkSource.findMany({ where, orderBy: [{ created_at: 'desc' }], take: 200 });
   if (!sources.length) return [];
   const ids = sources.map((s: { id: string }) => s.id);
   const members: Array<{ work_source_id: string; resolution: string; qualification: string | null; status: string; account_name: string | null }> = await prisma.gapWorkSourceMember.findMany({
@@ -92,9 +93,11 @@ export const MEMBER_FILTERS = ['resolution', 'qualification', 'status'] as const
 export type MemberFilter = { field: (typeof MEMBER_FILTERS)[number]; value: string } | null;
 
 export async function loadSource(prisma: PrismaLike, id: string, opts: { filter?: MemberFilter; limit?: number } = {}): Promise<{ source: SourceSummary; members: MemberView[]; total: number } | null> {
-  const all = await listSources(prisma, { includeArchived: true });
-  const source = all.find((s) => s.id === id);
+  // This one source, by id (never "the newest 200"); the current flag is computed over the active sources.
+  const [source] = await listSources(prisma, { includeArchived: true, ids: [id] });
   if (!source) return null;
+  const current = await prisma.gapWorkSource.findFirst({ where: { status: 'active', current_at: { not: null } }, orderBy: { current_at: 'desc' }, select: { id: true } }).catch(() => null);
+  source.current = current?.id === id;
   const f = opts.filter;
   const where: Record<string, unknown> = { work_source_id: id };
   if (f) where[f.field] = f.value === 'unplanned' && f.field === 'qualification' ? null : f.value;
@@ -113,7 +116,9 @@ export async function loadSource(prisma: PrismaLike, id: string, opts: { filter?
           select: { work_source_id: true, persona_id: true, candidate_id: true, account_name: true, kind: true },
         })
       : [];
-  const nameOf = new Map(all.map((s) => [s.id, s.name]));
+  const otherIds = [...new Set(edges.map((e) => e.work_source_id))];
+  const others: Array<{ id: string; name: string }> = otherIds.length ? await prisma.gapWorkSource.findMany({ where: { id: { in: otherIds } }, select: { id: true, name: true } }) : [];
+  const nameOf = new Map(others.map((s) => [s.id, s.name]));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows
   const members: MemberView[] = rows.map((r: Record<string, any>) => {
     const also = edges.filter((e) => (r.persona_id && e.persona_id === r.persona_id) || (r.candidate_id && e.candidate_id === r.candidate_id) || (r.kind === 'account' && e.kind === 'account' && e.account_name === r.account_name));

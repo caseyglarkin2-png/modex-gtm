@@ -74,7 +74,9 @@ describe('a LinkedIn-style list paste (name line, then headline line)', () => {
       '· 3rd+',
       'Supply chain leader | Speaker | Dad',
       'Dana Lee',
+      '· 1st',
       'Director of Transportation @ Globex',
+      'Lone Name Without A Degree Line',
     ].join('\n');
     const r = parseIntake(paste, 'people');
     expect(r.format).toBe('name_headline');
@@ -83,6 +85,7 @@ describe('a LinkedIn-style list paste (name line, then headline line)', () => {
       ['Bart Smith', 'Supply chain leader | Speaker | Dad', null],
       ['Dana Lee', 'Director of Transportation', 'Globex'],
     ]);
+    expect(r.skipped.unparsed).toBe(1); // a line the list could not place is counted, never guessed
   });
 });
 

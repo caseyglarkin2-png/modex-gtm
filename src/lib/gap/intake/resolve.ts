@@ -14,10 +14,9 @@
  * Company resolution is the canonical gap/identity resolver (hubspot id,
  * verified domain, alias, normalized name; no fuzzy match). Pure.
  */
-import { normalizeName } from '@/lib/contact-standard';
 import { resolveIdentity, normalizeDomain, type IdentityContext } from '../identity/resolve';
 import { normalizeCompanyName } from '../identity/normalize';
-import type { IntakeRow } from './parse';
+import { CREDENTIAL, type IntakeRow } from './parse';
 
 export type IntakeResolution = 'resolved' | 'new_candidate' | 'ambiguous' | 'unresolved';
 
@@ -42,11 +41,16 @@ export interface ResolvedRow {
   candidates: Array<{ personaId: number | null; accountName: string; why: string }>;
 }
 
-const FREE_MAIL = new Set(['gmail.com', 'googlemail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 'msn.com', 'icloud.com', 'me.com', 'aol.com', 'proton.me', 'protonmail.com', 'comcast.net', 'att.net', 'verizon.net', 'ymail.com']);
+const FREE_MAIL = new Set(['gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.uk', 'yahoo.ca', 'ymail.com', 'rocketmail.com', 'hotmail.com', 'hotmail.co.uk', 'outlook.com', 'live.com', 'msn.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'proton.me', 'protonmail.com', 'gmx.com', 'gmx.net', 'gmx.de', 'mail.com', 'zoho.com', 'yandex.com', 'qq.com', '163.com', '126.com', 'comcast.net', 'att.net', 'sbcglobal.net', 'bellsouth.net', 'verizon.net', 'cox.net', 'charter.net', 'earthlink.net', 'optonline.net', 'frontier.com', 'windstream.net', 'fastmail.com', 'hey.com']);
 
-/** A person's name for matching: lower case, letters only, credentials after a comma dropped ("Lee Placeholder, MBA"). */
+/** Letters and digits in any script, lower case (a non-Latin name never becomes an empty key). */
+const textKey = (s: string) => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, ' ').replace(/\s+/g, ' ').trim();
+
+/** A person's name for matching: credentials after a comma dropped ("Lee Placeholder, MBA"); "Doe, Jane" stays that person. */
 export function personKey(name: string): string {
-  return normalizeName(name.split(',')[0]);
+  const parts = name.split(',').map((p) => p.trim()).filter(Boolean);
+  while (parts.length > 1 && CREDENTIAL.test(parts[parts.length - 1])) parts.pop();
+  return textKey(parts.join(' '));
 }
 
 /** The /in/<slug> of a LinkedIn profile URL, or null. */
@@ -70,7 +74,9 @@ export function memberKey(row: IntakeRow): string {
   const slug = linkedinSlug(row.linkedinUrl);
   if (slug) return `linkedin:${slug}`;
   if (row.sourceId) return `source:${row.sourceId.trim().toLowerCase()}`;
-  const where = row.company ? normalizeCompanyName(row.company) : normalizeName(row.title ?? '');
+  // Name + company + title: two different people with one name at one company stay two members.
+  const title = textKey(row.title ?? '');
+  const where = row.company ? `${normalizeCompanyName(row.company)}${title ? `|${title}` : ''}` : title;
   return `name:${personKey(row.name ?? '')}|${where}`;
 }
 
@@ -102,9 +108,10 @@ export function resolveIntakeRow(ctx: IntakeContext, row: IntakeRow): ResolvedRo
   if (direct) {
     if (direct.hits.length > 1) return { ...none('ambiguous', `${direct.via}_multiple`), candidates: direct.hits.map((p) => ({ personaId: p.id, accountName: p.account_name, why: direct.via })) };
     const p = direct.hits[0];
-    // The person may have moved: a stated company that resolves elsewhere is for Casey to judge.
-    if (row.company && company.accountName && company.accountName !== p.account_name) {
-      return { ...none('ambiguous', `${direct.via}_company_conflict`), candidates: [{ personaId: p.id, accountName: p.account_name, why: direct.via }, { personaId: null, accountName: company.accountName, why: 'stated company' }] };
+    // The person may have moved: a stated company that resolves elsewhere, or that GAP does not know, is for Casey to judge.
+    if (row.company && company.accountName !== p.account_name) {
+      const stated = company.accountName ?? `${row.company} (not in GAP)`;
+      return { ...none('ambiguous', `${direct.via}_company_conflict`), candidates: [{ personaId: p.id, accountName: p.account_name, why: direct.via }, { personaId: null, accountName: stated, why: 'stated company' }] };
     }
     return { resolution: 'resolved', basis: direct.via, accountName: p.account_name, personaId: p.id, candidates: [] };
   }
