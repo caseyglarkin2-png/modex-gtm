@@ -47,7 +47,8 @@ export function normalizeCompanyName(raw: string): string {
   while (tokens.length > 1 && LEGAL_SUFFIX_TOKENS.has(tokens[tokens.length - 1])) {
     tokens.pop();
   }
-  return tokens.join(' ');
+  // A name in another script (no Latin letters or digits) keeps its own letters: never an empty key that collides.
+  return tokens.join(' ') || raw.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 }
 
 /**

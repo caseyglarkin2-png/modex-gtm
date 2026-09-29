@@ -106,3 +106,12 @@ describe('one approach decision (review E): the card never contradicts the accou
     expect(proposeOpportunity(base({ contradicted: true })).approach).toBe('hold');
   });
 });
+
+describe('red team: the card and the account page agree on fact-led', () => {
+  it('a fact with no thesis, or a sensitive-only fact, is never fact-led on the card either (the relationship may still ask for perspective)', () => {
+    for (const o of [proposeOpportunity(base({ thesis: null })), proposeOpportunity(base({ fact: { signalId: 's', quote: 'Acme closed a plant and 900 workers lost their jobs.', reason: 'x', chain: 'x' } }))]) {
+      expect(o.approach).not.toBe('fact_led');
+      expect(['relationship_led', 'referral_led', 'hold']).toContain(o.approach);
+    }
+  });
+});

@@ -49,8 +49,15 @@ export async function accountNameForSlug(prisma: PrismaLike, slug: string): Prom
 }
 
 function micrositeFor(name: string, aliases: string[]): AccountMicrositeData | null {
-  const keys = new Set([name, ...aliases].map(normalizeCompanyName));
-  return getAllAccountMicrositeData().find((m) => keys.has(normalizeCompanyName(m.accountName)) || (m.hubspotName && keys.has(normalizeCompanyName(m.hubspotName)))) ?? null;
+  // The account's own name first; an alias only when exactly one microsite answers to it (a parent's or a sibling's
+  // microsite must never become this account's audit).
+  const all = getAllAccountMicrositeData();
+  const is = (m: AccountMicrositeData, k: string) => normalizeCompanyName(m.accountName) === k || (!!m.hubspotName && normalizeCompanyName(m.hubspotName) === k);
+  const own = all.filter((m) => is(m, normalizeCompanyName(name)));
+  if (own.length === 1) return own[0];
+  if (own.length > 1) return null;
+  const viaAlias = all.filter((m) => aliases.some((a) => is(m, normalizeCompanyName(a))));
+  return viaAlias.length === 1 ? viaAlias[0] : null;
 }
 
 function roiFrom(model: AccountROIModel | undefined): AccountInputs['roi'] {
@@ -83,7 +90,7 @@ export async function loadAccountInputs(
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
     prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null),
     prisma.prospectingHypothesis.findMany({
-      where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed'] } },
+      where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
       select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
@@ -98,6 +105,10 @@ export async function loadAccountInputs(
   const ackRows: Row[] = hypIds.length && prisma.gapAuditEvent?.findMany ? await prisma.gapAuditEvent.findMany({ where: { kind: 'thesis.review_ack', subject_type: 'hypothesis', subject_id: { in: hypIds } }, select: { subject_id: true, created_at: true }, orderBy: { created_at: 'desc' } }).catch(() => []) : [];
   const acks = new Map<string, Date>();
   for (const r of ackRows) if (!acks.has(r.subject_id)) acks.set(r.subject_id, new Date(r.created_at));
+  // A thesis the BUYER rejected (a human-confirmed problem_rejected disposition) shows as contradicted; a draft Casey withdrew does not.
+  const rejectedIds = (hyps as Row[]).filter((h) => h.status === 'rejected').map((h) => h.id as string);
+  const buyerNo: Row[] = rejectedIds.length && prisma.conversationDisposition?.findMany ? await prisma.conversationDisposition.findMany({ where: { hypothesis_id: { in: rejectedIds }, response_class: 'problem_rejected', human_confirmed: true }, select: { hypothesis_id: true } }).catch(() => []) : [];
+  const buyerRejected = new Set(buyerNo.map((r) => r.hypothesis_id as string));
   const aliasList = (aliases as Array<{ alias: string }>).map((a) => a.alias);
   const domains: string[] = [];
   if (link?.status === 'resolved') {
@@ -168,6 +179,7 @@ export async function loadAccountInputs(
       falsification: Array.isArray(h.falsification_questions) ? h.falsification_questions.map(String) : [],
       whatANoMeans: h.what_a_no_means ?? null,
       primarySignalId: h.signals?.[0]?.signal_id ?? null,
+      buyerRejected: buyerRejected.has(h.id),
       // The last time Casey looked: approval, activation, or an explicit "reviewed" after a flag.
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
     })),

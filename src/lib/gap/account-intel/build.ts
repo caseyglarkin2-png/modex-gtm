@@ -17,7 +17,7 @@ import { sellerRelevance } from '../research/continuity';
 import { traitsOf } from '../intake/traits';
 import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
-import { computeAccountMotion } from '../motion/account-motion';
+import { computeAccountMotion, titleSeniority } from '../motion/account-motion';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
 
@@ -44,6 +44,8 @@ export interface HypothesisInput {
   primarySignalId: string | null;
   /** When Casey approved it (reviewed_at on an approved or active thesis); null for a draft. */
   reviewedAt?: string | null;
+  /** The buyer rejected the problem (a human-confirmed problem_rejected disposition on it), not Casey withdrawing it. */
+  buyerRejected?: boolean;
 }
 
 export interface BidInput {
@@ -264,7 +266,9 @@ function section(key: SectionKey, statements: Statement[], unknowns: string[], n
 
 const liveFacts = (i: AccountInputs, now: Date) => i.facts.filter((f) => f.continuity !== 'ended' && (!f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime()));
 /** Seller relevance first (a network change beats a foreign divestiture), then newest. */
-const rankedFacts = (i: AccountInputs, now: Date) => liveFacts(i, now).sort((x, y) => sellerRelevance(x.quote).rank - sellerRelevance(y.quote).rank || y.publishedAt.localeCompare(x.publishedAt));
+// A sensitive fact (people harmed) or a vendor's own marketing ("Gatik moves freight for ...") never leads.
+const demoted = (q: string) => (sensitivityOf(q) ? 2 : 0) + (VENDOR_LEAD.test(q) ? 1 : 0);
+const rankedFacts = (i: AccountInputs, now: Date) => liveFacts(i, now).sort((x, y) => demoted(x.quote) - demoted(y.quote) || sellerRelevance(x.quote).rank - sellerRelevance(y.quote).rank || y.publishedAt.localeCompare(x.publishedAt));
 
 /** Sites the audit did not reject, split by who operates them. */
 function auditedSites(pack: PackInput | null) {
@@ -287,9 +291,16 @@ const citedAudit = (s: PackSite) => !!s.verification && s.verification.verdict =
 const auditSrc = (label: string, at: string | null, url: string | null = null): Source => ({ kind: 'audit', ref: label, label, url, at });
 /** Audit-derived counts are VERIFIED only when at least one kept site carries a cited, confirmed verification. */
 function auditTruth(i: AccountInputs, falsifiableBy: string): Pick<Statement, 'truth' | 'falsifiableBy'> & { cite: string | null } {
-  const cited = auditedSites(i.pack).kept.filter(citedAudit);
-  return cited.length ? { truth: 'VERIFIED_PUBLIC', cite: cited[0].verification!.citations.find((c) => c.url)?.url ?? null } : { truth: 'INFERENCE', falsifiableBy, cite: null };
+  // A count over the audited sites is VERIFIED only when EVERY counted site carries a cited, confirmed verification.
+  const kept = auditedSites(i.pack).kept;
+  const cited = kept.filter(citedAudit);
+  return kept.length && cited.length === kept.length ? { truth: 'VERIFIED_PUBLIC', cite: cited[0].verification!.citations.find((c) => c.url)?.url ?? null } : { truth: 'INFERENCE', falsifiableBy, cite: null };
 }
+/** When the audit saw it: the OLDEST imagery (or verification) date among the audited sites, never the pack build date. */
+const auditAsOf = (i: AccountInputs) => {
+  const dates = auditedSites(i.pack).kept.map((s) => s.verification?.imageryDate ?? s.verification?.verifiedAt ?? null).filter((d): d is string => !!d).sort();
+  return dates[0] ?? i.pack?.builtAt ?? null;
+};
 const splitCite = ({ cite, ...rest }: ReturnType<typeof auditTruth>) => ({ cite, rest });
 
 // ---------------------------------------------------------------- sections
@@ -322,17 +333,18 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   if (p?.account.networkCount) {
     const src = p.account.networkCountSource;
     // Our own estimate is never a verified count, however it is worded; a named filing is, and its URL is the link.
-    if (src && !/\b(estimat\w*|extrapolat\w*|approximat\w*|modeled|our (count|model))\b|~/i.test(src)) {
-      const url = /https?:\/\/[^\s)]+/.exec(src)?.[0]?.replace(/[.,;]+$/, '') ?? null;
+    const url = src ? /https?:\/\/[^\s)]+/.exec(src)?.[0]?.replace(/[.,;]+$/, '') ?? null : null;
+    // VERIFIED only with a link to the named source; a named source without one is a lead (said so).
+    if (src && url && !/\b(estimat\w*|extrapolat\w*|approximat\w*|roughly|est\.|modeled|our (count|model))\b|~/i.test(src)) {
       st.push({ text: `${p.account.networkCount} facilities (${src})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: src, label: src.replace(/\s*https?:\/\/\S+/g, '').trim() || src, url, at: p.account.networkCountAsOf ?? p.builtAt }], asOf: p.account.networkCountAsOf ?? p.builtAt });
-    } else if (src) st.push({ text: `About ${p.account.networkCount} facilities (${src})`, truth: 'INFERENCE', sources: [auditSrc('demo pack', p.builtAt)], falsifiableBy: 'A filing or company source gives a different count.' });
+    } else if (src) st.push({ text: `About ${p.account.networkCount} facilities (per ${src}${url ? '' : ', not linked'})`, truth: 'INFERENCE', sources: [auditSrc('demo pack', p.builtAt)], falsifiableBy: 'A filing or company source gives a different count.' });
     else st.push({ text: `About ${p.account.networkCount} facilities (audit estimate, no cited source)`, truth: 'INFERENCE', sources: [auditSrc('demo pack', p.builtAt)], falsifiableBy: 'A filing or company source gives a different count.' });
   }
   const a = auditedSites(p);
   if (a.all.length) {
     const cited = a.kept.filter(citedAudit);
     st.push({
-      text: `${plural(a.all.length, 'site')} audited: ${a.self.length} self-operated, ${a.threePl.length} 3PL-operated (not counted as owned)${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
+      text: `${plural(a.all.length, 'site')} audited: ${a.self.length} self-operated, ${a.threePl.length} run by a 3PL (not counted as theirs to decide)${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
       truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE',
       sources: [auditSrc('satellite + source audit', p!.builtAt, cited[0]?.verification?.citations[0]?.url ?? null)],
       asOf: cited[0]?.verification?.verifiedAt ?? p!.builtAt,
@@ -366,7 +378,7 @@ function freightSection(i: AccountInputs, now: Date): Section {
   const rail = a.kept.filter((s) => s.yardMetrics.railServed).length;
   if (a.kept.length) {
     const { cite, rest } = splitCite(auditTruth(i, 'A site visit or the railroad shows different service.'));
-    st.push({ text: `${rail} of ${plural(a.kept.length, 'audited site')} rail-served`, ...rest, sources: [auditSrc('satellite audit', i.pack!.builtAt, cite)], asOf: i.pack!.builtAt });
+    st.push({ text: `${rail} of ${plural(a.kept.length, 'audited site')} rail-served`, ...rest, sources: [auditSrc('satellite audit', auditAsOf(i), cite)], asOf: auditAsOf(i) });
   }
   for (const c of i.scout?.freight ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
   const fr = i.microsite?.freight;
@@ -378,18 +390,18 @@ function freightSection(i: AccountInputs, now: Date): Section {
 function volumeSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [];
   const a = auditedSites(i.pack);
-  const doors = a.self.reduce((n, s) => n + (s.yardMetrics.dockDoorCount ?? 0), 0) + a.threePl.reduce((n, s) => n + (s.yardMetrics.dockDoorCount ?? 0), 0);
+  const doors = a.self.reduce((n, s) => n + (s.yardMetrics.dockDoorCount ?? 0), 0);
   if (doors > 0) {
     st.push({
-      text: `Roughly ${doors}-${doors * 3} trailer moves a day across the ${plural(a.kept.length, 'audited site')}`,
+      text: `Roughly ${doors}-${doors * 3} door turns a day across the ${plural(a.self.length, 'self-operated audited site')}`,
       truth: 'MODELED_ESTIMATE',
       sources: [auditSrc('satellite audit dock counts', i.pack!.builtAt)],
-      model: { inputs: { auditedDockDoors: doors, auditedSites: a.kept.length }, formula: 'audited dock doors x 1 to 3 trailer turns per door per day', range: [doors, doors * 3], unit: 'trailer moves/day across audited sites', assumptions: ['1 to 3 turns per door per day (not measured)', 'Audited sites only; the rest of the network is not counted'] },
+      model: { inputs: { auditedDockDoors: doors, auditedSites: a.self.length }, formula: 'audited dock doors at self-operated sites x 1 to 3 turns per door per day', range: [doors, doors * 3], unit: 'door turns/day across self-operated audited sites', assumptions: ['1 to 3 turns per door per day (not measured)', 'Each turn is at least two yard moves (in and out)', 'Self-operated audited sites only; 3PL-run sites and the rest of the network are not counted'] },
     });
     const trailers = a.kept.reduce((n, s) => n + (s.yardMetrics.trailersVisible ?? 0), 0);
     if (trailers) {
       const { cite, rest } = splitCite(auditTruth(i, 'Newer imagery or the sites show a different count.'));
-      st.push({ text: `${trailers} trailers visible across audited sites on the imagery date`, ...rest, sources: [auditSrc('satellite imagery count', i.pack!.builtAt, cite)], asOf: i.pack!.builtAt });
+      st.push({ text: `${trailers} trailers visible across audited sites on the imagery date`, ...rest, sources: [auditSrc('satellite imagery count', auditAsOf(i), cite)], asOf: auditAsOf(i) });
     }
   }
   if (i.microsite?.network?.dailyTrailerMoves) st.push({ text: `${i.microsite.network.dailyTrailerMoves} daily trailer moves (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'Their yard or TMS data shows a different volume.' });
@@ -530,9 +542,10 @@ function orgSection(i: AccountInputs, now: Date): Section {
   for (const p of i.personas) {
     const why = suggestAngle({ title: p.title, personaKey: null, accountName: i.account.name });
     const reach = p.doNotContact ? 'do not contact' : !p.hasEmail ? 'no email on record' : p.emailStatus && /bounce|invalid/.test(p.emailStatus) ? `email ${p.emailStatus}` : 'reachable';
-    st.push({ text: `${p.name}${p.title ? `, ${p.title}` : ''} (${reach})${why ? `. LIKELY: ${why}` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'persona', ref: String(p.id), label: 'CRM contact', url: null, at: null }] });
+    st.push({ text: `${p.name}${p.title ? `, ${p.title}` : ''} (${reach})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'persona', ref: String(p.id), label: 'CRM contact', url: null, at: null }] });
+    if (why) st.push({ text: `${p.name}: LIKELY ${why}`, truth: 'INFERENCE', sources: [{ kind: 'gap', ref: 'persona-angle', label: 'GAP title reading', url: null, at: null }], falsifiableBy: 'They say their role is different.' });
   }
-  for (const c of i.candidates.filter((x) => x.state === 'staged')) st.push({ text: `${c.name}${c.title ? `, ${c.title}` : ''} (staged, not yet a contact)`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'work_source', ref: String(c.id), label: 'staged candidate', url: null, at: null }] });
+  for (const c of i.candidates.filter((x) => x.state === 'staged')) st.push({ text: `${c.name}${c.title ? `, ${c.title}` : ''} (staged from a list, not yet vetted)`, truth: 'INFERENCE', sources: [{ kind: 'work_source', ref: String(c.id), label: 'staged candidate', url: null, at: null }], falsifiableBy: 'Review finds they are not at this account.' });
   return section('org', st, ['Who owns yard performance (never assumed from a title)', 'Who signs for yard technology'], now);
 }
 
@@ -561,14 +574,17 @@ function commercialSection(i: AccountInputs, now: Date): Section {
 
 // ---------------------------------------------------------------- synthesis
 
+/** An inference keeps its label wherever it is shown; only the buyer's words drop it. */
+const hedge = (h: HypothesisView) => (h.truth === 'BUYER_CONFIRMED' ? h.problem : `Inference: ${h.problem}`);
 const stripGuess = (s: string) => s.replace(/^my guess is (that )?/i, '').replace(/\.$/, '');
 
 function hypothesisViews(i: AccountInputs, now: Date): HypothesisView[] {
   const verified = new Set(liveFacts(i, now).map((f) => f.id));
   // A BID speaks only to the hypothesis it was captured against. A withdrawn (rejected) draft is Casey's call, not the buyer's: it is not shown.
-  return i.hypotheses.filter((h) => h.status !== 'rejected').slice(0, 3).map((h) => {
+  return i.hypotheses.filter((h) => h.status !== 'rejected' || h.buyerRejected).slice(0, 3).map((h) => {
     const mine = i.bids.filter((b) => b.hypothesisId === h.id);
-    const truth: TruthClass = mine.some((b) => b.type === 'objection') ? 'CONTRADICTED' : h.status === 'confirmed' || mine.some((b) => b.type === 'business_problem') ? 'BUYER_CONFIRMED' : 'INFERENCE';
+    // Buyer truth only from a live (confirmed, unsuperseded) BID on THIS thesis; a status alone never makes it buyer truth.
+    const truth: TruthClass = h.buyerRejected || mine.some((b) => b.type === 'objection') ? 'CONTRADICTED' : mine.some((b) => b.type === 'business_problem') ? 'BUYER_CONFIRMED' : 'INFERENCE';
     const obsVerified = !!h.primarySignalId && verified.has(h.primarySignalId);
     return {
     id: h.id,
@@ -611,22 +627,42 @@ function reviewReasons(i: AccountInputs, h: HypothesisInput, now: Date, verified
   return out;
 }
 
-function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], wedge: Wedge): DiscoveryQuestion[] {
-  const has = (t: string) => i.bids.some((b) => b.type === t);
+function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge): DiscoveryQuestion[] {
   const top = hyps.find((h) => h.truth !== 'CONTRADICTED' && h.grounded);
-  const where = wedge.candidates[0]?.name ?? (wedge.archetype ? `your ${wedge.archetype} sites` : 'your plants and DCs');
+  // Problem-scoped buyer truth belongs to the thesis it was captured on; the current state is account-wide.
+  const onTop = (t: string) => i.bids.some((b) => b.type === t && (!top || b.hypothesisId === top.id || b.hypothesisId == null));
+  const any = (t: string) => i.bids.some((b) => b.type === t);
+  // Never name a site the buyer has not named (a satellite-found site in a first question reads as surveillance).
+  const where = PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your sites' : 'your plants and DCs';
   const out: DiscoveryQuestion[] = [];
-  if (top && !has('business_problem')) out.push({ type: 'VERIFY_PROBLEM', question: top.discoveryQuestion ?? `Does ${top.problem} happen at ${where}?`, why: 'The problem is still our inference; a yes or no changes whether to pursue.' });
-  if (top?.rootCause && !has('root_cause')) out.push({ type: 'ROOT_CAUSE', question: `When it happens, is it ${top.rootCause.charAt(0).toLowerCase()}${top.rootCause.slice(1).replace(/\.$/, '')}, or something else?`, why: 'The root cause decides whether yard visibility is the fix.' });
-  if (!has('impact') && !has('metric')) out.push({ type: 'IMPACT', question: 'When the yards back up, where does it show: detention, overtime, or missed shipments?', why: 'Without an observed cost, the economics stay modeled.' });
-  if (!has('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do trailers get checked in and found at ${where} today?`, why: 'The current process is unknown; it sets the pilot scope.' });
+  if (!any('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do trailers get checked in and found at ${where} today?`, why: 'Current state first: it is non-leading and sets the pilot scope.' });
+  if (!onTop('business_problem')) {
+    out.push(
+      top
+        ? { type: 'VERIFY_PROBLEM', question: top.discoveryQuestion ?? `Is this true at ${where}: ${top.problem}?`, why: 'The problem is still our inference; a yes or no changes whether to pursue.' }
+        : { type: 'VERIFY_PROBLEM', question: `What slows trucks and trailers down at ${where}, if anything?`, why: 'No thesis yet: let the buyer name the problem, never presume one.' },
+    );
+  }
+  if (top?.rootCause && !onTop('root_cause')) out.push({ type: 'ROOT_CAUSE', question: `When it happens, is it ${top.rootCause.charAt(0).toLowerCase()}${top.rootCause.slice(1).replace(/\.$/, '')}, or something else?`, why: 'The root cause decides whether yard visibility is the fix.' });
+  if (!onTop('impact') && !onTop('metric')) {
+    out.push(
+      onTop('business_problem')
+        ? { type: 'IMPACT', question: 'When it happens, what does it cost you: detention, overtime, missed shipments, or nothing much?', why: 'The buyer named the problem; its cost decides whether it is worth fixing.' }
+        : { type: 'IMPACT', question: 'Is yard time something you measure today? When it runs long, what does it cost you, if anything?', why: 'Without an observed cost, the economics stay modeled.' },
+    );
+  }
   const techKnown = i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)));
   if (!techKnown) out.push({ type: 'CURRENT_STACK', question: 'What system, if any, tracks trailers in your yards today?', why: 'An incumbent changes the wedge; never assumed from a mention.' });
-  out.push({ type: 'OWNERSHIP', question: 'Who owns yard performance across the plants and DCs?', why: 'Ownership is never guessed from a title.' });
-  if (!has('future_state')) out.push({ type: 'DESIRED_FUTURE', question: 'What would good yards look like a year from now?', why: 'The desired future frames any proposal.' });
-  if (!has('constraint')) out.push({ type: 'CHANGE_REQUIREMENT', question: 'What would a change have to clear: IT, security, the sites themselves?', why: 'Requirements decide whether a pilot can start.' });
+  out.push({ type: 'OWNERSHIP', question: `Who owns yard performance across ${where}?`, why: 'Ownership is never guessed from a title.' });
+  if (!any('future_state')) out.push({ type: 'DESIRED_FUTURE', question: 'What would good yards look like a year from now?', why: 'The desired future frames any proposal.' });
+  if (!any('constraint')) out.push({ type: 'CHANGE_REQUIREMENT', question: 'What would a change have to clear: IT, security, the sites themselves?', why: 'Requirements decide whether a pilot can start.' });
   return out.slice(0, 7);
 }
+
+const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;
+/** A vendor's own marketing names the vendor first ("Gatik moves freight for ..."): context, never the opener. */
+const VENDOR_LEAD = /^(PINC|Kaleris|Terminal Industries|FourKites|project44|Blue Yonder|Manhattan Associates|Descartes|Samsara|Motive|Trimble|Uber Freight|Gatik|Aurora|Kodiak|Outrider)\b/;
+const stateOf = (name: string) => /\b([A-Z]{2})(?:\s*\(|\s*$)/.exec(name)?.[1] ?? null;
 
 function siteWedge(i: AccountInputs): Wedge {
   const a = auditedSites(i.pack);
@@ -635,31 +671,45 @@ function siteWedge(i: AccountInputs): Wedge {
   const byArch = new Map<string, PackSite[]>();
   for (const s of eligible) byArch.set(s.archetypeName, [...(byArch.get(s.archetypeName) ?? []), s]);
   const [archetype, group] = [...byArch.entries()].sort((x, y) => y[1].length - x[1].length || x[0].localeCompare(y[0]))[0];
-  const features = (s: PackSite) => [s.classification.dropYard ? 'drop yard' : null, s.classification.guardShack ? 'guard shack' : null, s.classification.preGateStaging ? 'pre-gate staging' : null, s.classification.fastLaneOpportunity ? 'fast-lane opportunity' : null, s.yardMetrics.dockDoorCount ? `${s.yardMetrics.dockDoorCount} dock doors` : null].filter((x): x is string => !!x);
-  const ranked = [...eligible].sort((x, y) => features(y).length - features(x).length || (y.yardMetrics.dockDoorCount ?? 0) - (x.yardMetrics.dockDoorCount ?? 0) || x.id.localeCompare(y.id)).slice(0, 3);
+  const features = (s: PackSite) => [s.classification.dropYard ? 'drop yard' : null, s.classification.guardShack ? 'guard shack' : null, s.classification.preGateStaging ? 'room to stage trucks before the gate' : null, s.classification.fastLaneOpportunity ? 'a possible fast lane at the gate' : null, s.yardMetrics.dockDoorCount ? `${s.yardMetrics.dockDoorCount} dock doors` : null].filter((x): x is string => !!x);
+  // Candidates come from the chosen kind of site only; the start site is a typical one (median size), not the biggest.
+  const median = [...group].map((s) => s.yardMetrics.dockDoorCount ?? 0).sort((x, y) => x - y)[Math.floor(group.length / 2)] ?? 0;
+  const ranked = [...group].sort((x, y) => Math.abs((x.yardMetrics.dockDoorCount ?? 0) - median) - Math.abs((y.yardMetrics.dockDoorCount ?? 0) - median) || features(y).length - features(x).length || x.id.localeCompare(y.id)).slice(0, 3);
   const candidates: WedgeCandidate[] = ranked.map((s) => ({
     siteId: s.id,
     name: s.name,
     whyThisSite: features(s),
     whatWeKnow: [`Audit verdict ${s.verification?.verdict}${s.verification?.citations.length ? ` with ${plural(s.verification.citations.length, 'citation')}` : ''}`, `Operator: ${s.verification?.operator ?? 'self'}; tenancy: ${s.verification?.tenancy ?? 'unknown'}`, ...(s.verification?.imageryDate ? [`Imagery ${s.verification.imageryDate}`] : [])],
     whatWeModel: s.yardMetrics.dockDoorCount ? [`${s.yardMetrics.dockDoorCount}-${s.yardMetrics.dockDoorCount * 3} trailer moves a day (1 to 3 turns per door; not measured)`] : [],
-    whyPilot: `A self-operated ${s.archetypeName.toLowerCase()} with ${features(s).slice(0, 2).join(' and ') || 'visible yard activity'}: a contained place to prove value (inference).`,
+    whyPilot: `A typical self-operated site of this kind (${s.archetypeName}), with ${features(s).slice(0, 2).join(' and ') || 'visible yard activity'}: results there would say something about the others (inference; a willing site leader matters more than any feature).`,
     mustVerify: ['The current yard process (gate, check-in, trailer checks)', 'The system in use, if any', 'Who runs yard operations at this site', ...(s.verification?.tenancy === 'unknown' ? ['Tenancy'] : []), ...(s.verification?.verdict === 'probable' ? ['That the site is theirs and active (verification is probable)'] : [])],
   }));
-  const expansion = group.length >= 2 ? ['PILOT: one candidate site', 'PROOF: measured before/after at that site', `REGIONAL: the other ${plural(group.length - 1, `${archetype.toLowerCase()} site`)} audited`, ...(i.pack?.account.networkCount ? [`NETWORK: up to ${i.pack.account.networkCount} facilities (only after proof)`] : [])] : ['PILOT: one candidate site', 'PROOF: measured before/after at that site'];
-  return { archetype: `${archetype} (${plural(group.length, 'self-operated site')} audited)`, note: 'Inference from audited sites; nothing about site-level conditions is assumed.', candidates, expansion };
+  // Expansion only where warranted: never inside a deal (the deal sets scope), REGIONAL only for audited sites of the
+  // same kind in the start site's state, NETWORK only on a cited facility count.
+  const startState = ranked[0] ? stateOf(ranked[0].name) : null;
+  const nearby = startState ? group.filter((s) => s !== ranked[0] && stateOf(s.name) === startState) : [];
+  const citedCount = i.pack?.account.networkCount && /https?:\/\//.test(i.pack.account.networkCountSource ?? '') ? i.pack.account.networkCount : null;
+  const expansion = i.opportunity?.status === 'ACTIVE'
+    ? []
+    : ['PILOT: one candidate site', 'PROOF: measured before/after at that site', ...(nearby.length ? [`REGIONAL: ${plural(nearby.length, 'other audited site')} of this kind in ${startState}`] : []), ...(citedCount ? [`NETWORK: up to ${citedCount} facilities (cited count; only after proof)`] : [])];
+  return { archetype: `${archetype} (${plural(group.length, 'self-operated site')} audited)`, note: 'Inference from audited sites; nothing about site-level conditions is assumed. Site names are for you, never for the first conversation.', candidates, expansion };
 }
 
-function nextAction(i: AccountInputs, hyps: HypothesisView[], now: Date, discovery: DiscoveryQuestion[]): string {
-  if (i.opportunity?.status === 'ACTIVE') return 'Work the deal (In Deals), never cold. Next learning: the question below.';
-  if (i.opportunity?.status === 'UNKNOWN') return 'Do not contact yet: HubSpot deal state could not be read.';
-  if (hyps.some((h) => h.truth === 'CONTRADICTED')) return 'Stop the current story: the buyer rejected or contradicted it. Learn what is true instead.';
-  const reachable = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
-  if (i.personas.length && !reachable.length) return 'Do not contact yet: no reachable person (do not contact, or no email).';
-  if (!liveFacts(i, now).length) return 'Do not contact yet: no live verified fact. Research first (Deepen catalysts on this page).';
-  if (i.conversation) return `Follow up with ${i.conversation.who} in the existing thread.`;
-  if (!hyps.some((h) => h.grounded)) return 'Draft a thesis from the best verified fact (Research), then review it.';
-  return 'Review the thesis, then use the verified fact in a first touch to the primary person (every gate runs at the click).';
+/** The next action, read off the ONE motion decision (never a second decision tree). */
+function nextAction(i: AccountInputs, m: Motion, now: Date): string {
+  switch (m.type) {
+    case 'IN_DEAL':
+      return 'Work the deal (In Deals), never cold. Next learning: the Deal brief objective.';
+    case 'FOLLOW_UP':
+      return `Follow up with ${m.who ?? 'them'} in the existing thread.`;
+    case 'FACT_LED':
+      return `Review the thesis, then use the verified fact in a first touch to ${m.who ?? 'the primary person'} (every gate runs at the click).`;
+    case 'REFERRAL_LED':
+    case 'RELATIONSHIP_LED':
+      return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
+    default:
+      return liveFacts(i, now).length || /Not a shipper prospect/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
+  }
 }
 
 const WATCH_REASON: Record<string, string> = { priority: 'priority account', gap_thesis: 'has a GAP thesis', buying_committee: 'buying committee mapped', audited_for_page: 'audited for a /for page' };
@@ -695,6 +745,13 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
     verifiedFact: liveFacts(i, now).length > 0,
     reachable: reachable.length > 0 || (!i.personas.length && !!known?.personName),
     source: known ? { sourceType: known.sourceType, context: known.relationshipContext, name: known.sourceName } : null,
+    groundedThesis: hyps.some((h) => h.grounded && h.truth !== 'CONTRADICTED'),
+    staleThesis: !hyps.some((h) => h.grounded && h.truth !== 'CONTRADICTED' && h.needsReview.length === 0) && hyps.some((h) => h.grounded && h.needsReview.length > 0),
+    sensitiveOnly: (() => {
+      const live = liveFacts(i, now);
+      return live.length && live.every((f) => sensitivityOf(f.quote)) ? sensitivityOf(live[0].quote) : null;
+    })(),
+    partner: isPartner(i),
   });
   const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0])?.name ?? null : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
   return { type: a.kind, who, why: a.why };
@@ -704,6 +761,12 @@ const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ??
 
 /** Titles that plausibly touch the yard; still LIKELY, never ownership. */
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
+const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern)\b/i;
+
+/** A logistics provider (3PL, carrier, broker) by its record or by Scout: a partner or channel, not a shipper prospect. */
+function isPartner(i: AccountInputs): boolean {
+  return PARTNER_VERTICAL.test(i.account.vertical ?? '') || ['3pl', 'carrier', 'broker'].includes(i.scout?.entityType ?? '');
+}
 
 // ---------------------------------------------------------------- the build
 
@@ -748,7 +811,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     status: stale ? `THESIS NEEDS REVIEW: ${stale.needsReview.join(' ')}` : 'INFERENCE, for your review (never approved by GAP)',
     whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.map((r) => WATCH_REASON[r] ?? r.replace(/_/g, ' ')).join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),
     whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})${sensitive ? ` SENSITIVE (${sensitive}): never the hook; reference the network change only.` : ''}` : 'No current, verified catalyst.',
-    whatMayBeBroken: top ? top.problem : `Unknown: ${noHypothesis}`,
+    whatMayBeBroken: top ? hedge(top) : `Unknown: ${noHypothesis}`,
     whyItMayMatter: econ ? econ.text : 'Unknown: no economics yet.',
     whereYardFlowMayFit: wedge.archetype ? `${wedge.archetype}${wedge.candidates[0] ? `; start at ${wedge.candidates[0].name}` : ''}` : 'Unknown: no audited site data.',
     wrongIf: top?.wrongIf ?? null,
@@ -761,7 +824,9 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const currentTech = techBuyer ? techBuyer.text : techPublic ? `Public mention only: ${techPublic.text}` : 'Unknown';
   const dealStatement = sections.commercial.statements.find((s) => s.sources.some((x) => x.ref === 'deal-truth') || (s.truth === 'UNKNOWN' && /deal state/.test(s.text)));
   const reach = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
-  const persona = reach.find((p) => OWNER_TITLE.test(p.title ?? '')) ?? i.personas.find((p) => OWNER_TITLE.test(p.title ?? '')) ?? reach[0] ?? i.personas[0];
+  // Who probably owns it: operations titles only (never sourcing, procurement, category, planning or analyst), most senior first.
+  const owners = (list: PersonaInput[]) => list.filter((p) => OWNER_TITLE.test(p.title ?? '') && !NOT_OWNER_TITLE.test(p.title ?? '')).sort((x, y) => titleSeniority(y.title) - titleSeniority(x.title));
+  const persona = owners(reach)[0] ?? owners(i.personas)[0] ?? reach[0] ?? i.personas[0];
   const motion = accountMotion(i, hypotheses, now, persona);
   const owner = persona ? `${persona.name}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)` : 'Unknown: no person at this account yet.';
   const biggestUnknown = discovery[0] ? `${discovery[0].type.replace(/_/g, ' ').toLowerCase()}: ${discovery[0].why}` : 'None open.';
@@ -772,14 +837,14 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     network: sections.footprint.statements[0]?.text ?? 'Unknown',
     freight: sections.freight.statements[0]?.text ?? 'Unknown',
     bestFact: live[0]?.quote ?? null,
-    topHypothesis: top ? top.problem : noHypothesis,
+    topHypothesis: top ? hedge(top) : noHypothesis,
     currentTech,
     likelyOwner: owner,
     relationship: sections.relationships.statements[0]?.text ?? 'None recorded',
     commercialState: dealStatement?.text ?? 'HubSpot deal state not read',
     biggestUnknown,
     nextQuestion: discovery[0]?.question ?? null,
-    nextAction: nextAction(i, hypotheses, now, discovery),
+    nextAction: nextAction(i, motion, now),
     motion: motionLine(motion),
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
