@@ -29,7 +29,7 @@ import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
 import type { SignalType } from '../taxonomy';
 import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, pageSentenceFor, statedEventDate, type FactChange, describesPastEvent } from './facts';
-import { defaultFetchText, edgarCandidates, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
+import { defaultFetchText, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -372,7 +372,9 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   // same page is not this account's fact).
   // Every sentence GAP did not take from the account's own filing must be ABOUT the account: named as the subject
   // (a verbatim roundup sentence or a cited page can hold a competitor's or supplier's fact).
-  if ((c.provider === 'signal' || c.provider === 'web') && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
+  // On the account's OWN site, "We ...", "Our ..." and "The company ..." are the account speaking about itself.
+  const selfSubject = hostBelongsToAccount(c.url, ctx.accountKey) && /^(?:we|our|the company)\b/i.test(excerpt.trim());
+  if ((c.provider === 'signal' || c.provider === 'web') && !selfSubject && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
   return { ok: true, publishedAt: c.publishedAt, excerpt };
 }
 
