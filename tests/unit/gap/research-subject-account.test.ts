@@ -42,3 +42,14 @@ describe('dateline strip and conditionals', () => {
     expect(isPhysicalOpsFact('Kroger said it would build a new distribution center in Ohio in 2026 if approved.')).toBe(false);
   });
 });
+
+describe('the account\'s own site speaks as "we"', () => {
+  it('a "We ..." sentence on the account\'s own domain is its fact; on another domain it is not', async () => {
+    const excerpt = 'We will open a new distribution center in Memphis, Tennessee in 2027 to add capacity for the region.';
+    const page = `FedEx newsroom. ${excerpt} Other text.`;
+    const ok = await verifyCandidate({ provider: 'signal', url: 'https://newsroom.fedex.com/newsroom/a', title: 'n', publishedAt: new Date('2026-09-01'), excerpt, sourceType: 'public_primary' }, verificationContext('FedEx', async () => page));
+    expect(ok.ok).toBe(true);
+    const other = await verifyCandidate({ provider: 'signal', url: 'https://news.example/a', title: 'n', publishedAt: new Date('2026-09-01'), excerpt, sourceType: 'public_secondary' }, verificationContext('FedEx', async () => page));
+    expect(other).toMatchObject({ ok: false, reason: 'sentence_does_not_name_account' });
+  });
+});
