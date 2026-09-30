@@ -56,9 +56,12 @@ const NOT_OPERATING = /\b(sold|divest\w*|serves? customers|access to|through (ou
 const CLOSURE = /\b(closed|closes|closing|closure)\b/i;
 const LOGISTICS_SERVICE = /\b(logistic|freight|transport|supply chain|shipping|fleet|yard|warehouse|trucking|carrier|3pl|dock|trailer|visibility|tms|wms)\w*/i;
 
+/** "does not operate warehouses", "doesn't run", "no longer operates": a claim that it does NOT operate. */
+const NEGATED_OPERATION = /(?:\bnot|n['’]t|\bnever|\bno longer)\s+(?:\w+\s+){0,2}?(?:operat|run|own|manag)/i;
+
 export function operatingClaims<T extends { claim: string }>(claims: readonly T[]): T[] {
   return claims.filter((c) => {
-    if (NOT_OPERATING.test(c.claim)) return false;
+    if (NOT_OPERATING.test(c.claim) || NEGATED_OPERATION.test(c.claim)) return false;
     const verb = OPERATING_TERM.test(c.claim) && OPERATING_VERB.test(c.claim);
     if (CLOSURE.test(c.claim) && !verb) return false;
     return verb || OPERATING_COUNT.test(c.claim);
@@ -91,7 +94,8 @@ export function deriveFit(x: { entityType: EntityType | null; operating: number;
   if (x.entityType === 'broker') return x.operating >= 2 ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `A broker with physical operations (${n}): asset-based, check which facilities it runs.` } : x.operating === 1 ? { fit: 'UNKNOWN', why: 'A broker with one cited operating claim: check whether it runs facilities or only arranges freight.' } : { fit: 'NOT_FIT', why: 'A freight broker with no cited physical operation: it does not run yards.' };
   if (x.entityType === 'vendor' || x.entityType === 'consultant') return x.what && LOGISTICS_SERVICE.test(x.what) ? { fit: 'PARTNER', why: `A ${label} serving logistics: a partner or channel, never a direct buyer.` } : { fit: 'NOT_FIT', why: `A ${label} outside freight operations.` };
   // "Other" with nothing cited is not established either way (a negative verdict needs evidence too).
-  return x.operating ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `Unclassified, but runs freight facilities (${n}).` } : { fit: 'UNKNOWN', why: 'No cited freight operation found; what it runs is not established.' };
+  // One claim for an unclassified organization (a college's maintenance center) needs corroboration, like an operator.
+  return x.operating >= 2 ? { fit: 'POTENTIAL_DIRECT_BUYER', why: `Unclassified, but runs freight facilities (${n}).` } : x.operating === 1 ? { fit: 'UNKNOWN', why: 'Unclassified, with one cited operating claim: confirm it runs freight facilities before judging fit.' } : { fit: 'UNKNOWN', why: 'No cited freight operation found; what it runs is not established.' };
 }
 
 /**
