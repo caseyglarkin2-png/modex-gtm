@@ -165,3 +165,58 @@ was the defect this closeout fixed.
 - Read-only creation check: clear in GAP. HubSpot already has "Harbor Foods" (54048857649), so ADD would link it rather than create a second company.
 
 **DECISION CHANGE:** Add it as an account (Casey's click on /gap/candidates) and it lands linked to the existing HubSpot company. Nothing was created during dogfood.
+
+## Conference closeout (2026-09-30)
+
+<!-- verified:2026-09-30 -->
+
+Production main 8c0a58b3. The final 31-account dogfood ran `scripts/gap/dogfood-scale.ts` on origin/main against the
+production database, after three read-only final reviewers (seller/GAP method, supply-chain operator, research
+integrity) and the fixes below.
+
+**Research yield.** The baseline was 0 verified out of 34 proposals. A production research batch over 25 accounts
+verified 32 facts. The top rejects were WRONG_ACCOUNT 42, NOT_PHYSICAL_OPERATIONS 33, REANCHOR_TOO_WEAK 33 and
+STALE_EVENT 27. The standard was tightened, never weakened: #334 retired 8 of 39 live facts that today's rules
+refuse, and #340 retired a stored vendor quote.
+
+**Fixes from the final review, all merged and verified in production:**
+
+| PR | Fix |
+|---|---|
+| #334 | Research integrity (descriptions, risk factors, exhibits, third-party quotes, re-gate on read) |
+| #335 | Brief honesty (NETWORK is a count, FREIGHT is a model, unknown is never zero, Older not Recent, too-wide economics) |
+| #336 | Motion (fit-unknown holds, not-a-fit first, honest OWNER and WHY YOU) |
+| #337 | An unsettled identity holds the motion |
+| #338 | Scout fit (negated claims, "other" needs two claims, verdicts re-derived) |
+| #339 | Only judged Scout rows are re-derived |
+| #340 | A stored third-party quote is not the account's fact |
+
+**Final 31: 11 decision-grade, 20 honestly thin, 0 noisy, 0 wrong.**
+
+- **Decision-grade:**
+  - General Mills: review the legacy Brazil thesis on the network-redesign fact.
+  - KDP and PepsiCo: a verified fact, so draft a thesis.
+  - Walmart and Tyson: an Inland26 contact plus a real fact.
+  - Frito-Lay: the sensitive fact holds it.
+  - Kroger, Kenco, GXO and Crowley: in a deal.
+  - RXO: held until the HubSpot company is linked.
+- **Thin, no current verified catalyst after research:** Campbell's, Flowers, Hormel, Honda, Sysco, Unfi and PFG.
+- **Thin, the only way in is a newsletter subscriber:** Caterpillar, Home Depot, XPO, NFI and ShipBob. NFI's own site blocks fetches.
+- **Thin, the only fact is the international air network:** FedEx.
+- **Thin, never researched:** Flexport.
+- **Thin, held for a HubSpot link with identity not researched:** Marten, Port of LA, Paper Transport, MTA and Transport for Wales.
+- **Thin, no freight operation found:** CHG Healthcare, a staffing firm. Disqualifying it is Casey's call.
+
+**MMYQB.** 390 people. 12 companies resolved to GAP accounts. The other 100 companies are all judged: 12 direct buyer,
+10 potential, 17 partner, 17 not fit and 44 unknown.
+
+**Residual P2/P3:**
+
+- The General Mills catalysts section still shows the legacy Brazil divestiture with stripped accents.
+- Internal CRM data is labelled VERIFIED_PUBLIC.
+- First-call discovery is shown on in-deal accounts.
+- LEARN can be a leading question.
+- A job title is captured as a company ("Nike SA E2E Supply Chain Optimization Expert").
+- Candidate cards do not pass fit to the approach.
+- Routing is refreshed on demand only (the cockpit shows stale lanes until it runs).
+- Account verticals FedEx "3PL / Logistics" and PFG "Logistics" are wrong on the record. A Scout now overrides them.
