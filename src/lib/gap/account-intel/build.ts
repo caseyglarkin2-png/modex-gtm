@@ -377,15 +377,17 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   const a = auditedSites(p);
   if (a.all.length) {
     const cited = a.kept.filter(citedAudit);
+    // VERIFIED only when every counted site carries a cited, confirmed verification (one cited site is not enough).
+    const allCited = a.kept.length > 0 && cited.length === a.kept.length;
     st.push({
       text: `${plural(a.all.length, 'site')} audited: ${entityTypeOf(i) === '3pl' ? `${a.self.length + a.threePl.length} operated by ${i.account.name} (a 3PL: its own sites)` : `${a.self.length} self-operated, ${a.threePl.length} run by a 3PL (not counted as theirs to decide)`}${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
-      truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE',
+      truth: allCited ? 'VERIFIED_PUBLIC' : 'INFERENCE',
       sources: [auditSrc('satellite + source audit', p!.builtAt, cited[0]?.verification?.citations[0]?.url ?? null)],
       asOf: cited[0]?.verification?.verifiedAt ?? p!.builtAt,
-      ...(cited.length ? {} : { falsifiableBy: 'A site verification finds a different operator or status.' }),
+      ...(allCited ? {} : { falsifiableBy: 'A site verification finds a different operator or status.' }),
     });
     const types = [...new Set(a.self.map((s) => s.type))];
-    if (types.length) st.push({ text: `Self-operated site types audited: ${types.join(', ')}`, truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE', sources: [auditSrc('audit', p!.builtAt, cited[0]?.verification?.citations.find((c) => c.url)?.url ?? null)], asOf: p!.builtAt, ...(cited.length ? {} : { falsifiableBy: 'Verification changes the type.' }) });
+    if (types.length) st.push({ text: `Self-operated site types audited: ${types.join(', ')}`, truth: allCited ? 'VERIFIED_PUBLIC' : 'INFERENCE', sources: [auditSrc('audit', p!.builtAt, cited[0]?.verification?.citations.find((c) => c.url)?.url ?? null)], asOf: p!.builtAt, ...(allCited ? {} : { falsifiableBy: 'Verification changes the type.' }) });
   } else unknowns.push('Audited sites (ownership, types, locations)');
   if (i.facilityFact) {
     const f = i.facilityFact;
@@ -395,7 +397,8 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   }
   const n = i.microsite?.network;
   if (n?.facilityCount) st.push({ text: `${n.facilityCount}${n.facilityTypes?.length ? ` (${n.facilityTypes.join(', ')})` : ''}${n.geographicSpread ? `, ${n.geographicSpread}` : ''} (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'A current filing or site count differs.' });
-  for (const f of liveFacts(i, now).filter((x) => /\b(distribution cent|fulfil|warehouse|plant|facilit|DC\b|site)/i.test(x.quote))) {
+  // A site fact about the network; never a fact about people harmed or a vendor's own marketing (those are catalysts).
+  for (const f of liveFacts(i, now).filter((x) => /\b(distribution cent|fulfil|warehouse|plant|facilit|DC\b|site)/i.test(x.quote) && !sensitivityOf(x.quote) && !VENDOR_LEAD.test(x.quote))) {
     st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   }
   for (const c of i.scout?.network ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
@@ -403,21 +406,25 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   return section('footprint', st, unknowns, now);
 }
 
-const FREIGHT_WORDS = /\b(fleet|trucks?|truckload|intermodal|rail|drayage|carriers?|freight|linehaul|middle[- ]mile|DSD|direct store delivery|drop[- ]and[- ]hook|shuttle)\b/i;
+const FREIGHT_WORDS = /\b(fleets?|trucks?|tractors?|trailers?|truckload|LTL|intermodal|rail|drayage|for-hire|common carriers?|linehaul|middle[- ]mile|DSD|direct store delivery|drop[- ]and[- ]hook|shuttle)\b/i;
+/** Freight that never touches a yard (air, ocean): not the freight operating model YardFlow sells into. */
+const NOT_GROUND_FREIGHT = /\b(air network|aircraft|air cargo|airline|ocean|vessels?)\b/i;
 
 function freightSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [];
-  for (const f of liveFacts(i, now).filter((x) => FREIGHT_WORDS.test(x.quote))) st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
+  for (const f of liveFacts(i, now).filter((x) => FREIGHT_WORDS.test(x.quote) && !NOT_GROUND_FREIGHT.test(x.quote) && !VENDOR_LEAD.test(x.quote) && !sensitivityOf(x.quote))) st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   const a = auditedSites(i.pack);
-  const rail = a.kept.filter((s) => s.yardMetrics.railServed).length;
-  if (a.kept.length) {
+  const unknowns = ['Private fleet vs dedicated vs common carrier mix', 'Drop vs live share by site type', 'Inbound pattern (supplier, plant-to-DC)'];
+  // Rail over the sites the audit actually recorded it for; none recorded is unknown, never "0 rail-served".
+  const railKnown = a.kept.filter((s) => s.yardMetrics.railServed !== null && s.yardMetrics.railServed !== undefined);
+  if (railKnown.length) {
+    const rail = railKnown.filter((s) => s.yardMetrics.railServed).length;
     const { cite, rest } = splitCite(auditTruth(i, 'A site visit or the railroad shows different service.'));
-    st.push({ text: `${rail} of ${plural(a.kept.length, 'audited site')} rail-served`, ...rest, sources: [auditSrc('satellite audit', auditAsOf(i), cite)], asOf: auditAsOf(i) });
-  }
+    st.push({ text: `${rail} of ${plural(railKnown.length, 'audited site')} rail-served`, ...rest, sources: [auditSrc('satellite audit', auditAsOf(i), cite)], asOf: auditAsOf(i) });
+  } else if (a.kept.length) unknowns.push('Rail service (not recorded by the audit)');
   for (const c of i.scout?.freight ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
   const fr = i.microsite?.freight;
   if (fr?.primaryModes?.length) st.push({ text: `Modes: ${fr.primaryModes.join(', ')}${i.microsite?.network?.fleet ? `; fleet: ${i.microsite.network.fleet}` : ''} (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'Their transportation team describes a different mix.' });
-  const unknowns = ['Private fleet vs dedicated vs common carrier mix', 'Drop vs live share by site type', 'Inbound pattern (supplier, plant-to-DC)'];
   return section('freight', st, unknowns, now);
 }
 
@@ -445,7 +452,11 @@ function volumeSection(i: AccountInputs, now: Date): Section {
 function yardSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [];
   const a = auditedSites(i.pack);
-  if (a.kept.length) {
+  const unknowns: string[] = [];
+  // A site the audit recorded nothing for (no dock count, no trailers, no feature) says nothing: unknown, not zero.
+  const recorded = a.kept.filter((s) => s.yardMetrics.dockDoorCount != null || s.yardMetrics.trailersVisible != null || s.classification.dropYard || s.classification.guardShack || s.classification.truckGate || s.classification.preGateStaging);
+  if (a.kept.length && !recorded.length) unknowns.push(`Yard features: the audit recorded none for these ${plural(a.kept.length, 'site')} (unknown, not zero)`);
+  else if (a.kept.length) {
     const c = (f: (s: PackSite) => boolean) => a.kept.filter(f).length;
     const { cite, rest } = splitCite(auditTruth(i, 'A site visit shows different yard features.'));
     st.push({
@@ -456,7 +467,7 @@ function yardSection(i: AccountInputs, now: Date): Section {
     });
   }
   for (const b of i.bids.filter((x) => x.type === 'current_state')) st.push({ text: b.summary, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
-  const unknowns = [...(i.bids.some((x) => x.type === 'current_state') ? [] : ['Current yard process (gate, check-in, trailer checks)']), 'Appointment scheduling in use', 'Spotter / hostler model'];
+  unknowns.push(...(i.bids.some((x) => x.type === 'current_state') ? [] : ['Current yard process (gate, check-in, trailer checks)']), 'Appointment scheduling in use', 'Spotter / hostler model');
   return section('yard', st, unknowns, now);
 }
 
@@ -558,8 +569,13 @@ function catalystSection(i: AccountInputs, now: Date): Section {
 function economicsSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [];
   if (i.roi) {
+    const spread = i.roi.hardSavingsAnnual > 0 ? i.roi.totalValueAnnual / i.roi.hardSavingsAnnual : Infinity;
+    const counted = i.pack?.account.networkCount;
+    const base = counted && counted !== i.roi.facilities ? `; the footprint counts ${counted}` : '';
     st.push({
-      text: `${money(i.roi.hardSavingsAnnual)} to ${money(i.roi.totalValueAnnual)} a year across ${plural(i.roi.facilities, 'facility', 'facilities')} (modeled, not observed pain)`,
+      text: spread > 10
+        ? `Too uncertain to use: the model spans ${money(i.roi.hardSavingsAnnual)} to ${money(i.roi.totalValueAnnual)} a year (${Number.isFinite(spread) ? `${Math.round(spread)}x` : 'no floor'}) across ${plural(i.roi.facilities, 'facility', 'facilities')}${base}. Only the buyer's own cost settles it.`
+        : `${money(i.roi.hardSavingsAnnual)} to ${money(i.roi.totalValueAnnual)} a year across ${plural(i.roi.facilities, 'facility', 'facilities')} (modeled, not observed pain${base})`,
       truth: 'MODELED_ESTIMATE',
       sources: [{ kind: 'roi', ref: i.roi.calculatorVersion, label: 'shared ROI engine', url: null, at: null }],
       model: { inputs: { facilities: i.roi.facilities, calculator: i.roi.calculatorVersion ?? 'shared engine' }, formula: 'shared ROI engine (src/lib/microsites/roi.ts) over the facility mix: hard savings (labor, detention, paper) to total value (plus modeled production capacity and standardization)', range: [i.roi.hardSavingsAnnual, i.roi.totalValueAnnual], unit: 'USD per year', assumptions: i.roi.assumptions.length ? i.roi.assumptions : ['Engine defaults'] },
@@ -764,7 +780,7 @@ function inferiorOpener(i: AccountInputs, now: Date): { reason: string; opener: 
 function nextAction(i: AccountInputs, m: Motion, now: Date): string {
   switch (m.type) {
     case 'IN_DEAL':
-      return 'Work the deal (In Deals), never cold. Next learning: the Deal brief objective.';
+      return `Work the deal from In Deals (${(i.opportunity?.deals ?? []).map((d) => `${d.name ?? 'deal'}${d.stage ? `, ${d.stage}` : ''}`).join('; ') || 'open deal'}), never cold. Its deal brief sets what to learn next.`;
     case 'FOLLOW_UP':
       return `Follow up with ${m.who ?? 'them'} in the existing thread.`;
     case 'FACT_LED': {
@@ -835,6 +851,21 @@ const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ??
 /** Titles that plausibly touch the yard; still LIKELY, never ownership. */
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
 const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern)\b/i;
+
+/** NETWORK in the 30-second view: a count (filing, registry, audit estimate, microsite), never a news sentence. */
+function networkHeadline(i: AccountInputs, footprint: Section): string {
+  const facts = new Set(i.facts.map((f) => f.id));
+  const fromFact = (s: Statement) => s.sources.some((x) => x.kind === 'evidence' && facts.has(x.ref ?? ''));
+  const count = footprint.statements.find((s) => !fromFact(s) && !/ audited[: ]/.test(s.text) && /\d/.test(s.text));
+  return count?.text ?? footprint.statements.find((s) => !fromFact(s))?.text ?? 'Unknown: no network count on record';
+}
+
+/** FREIGHT in the 30-second view: the freight model when anything states one, else said as not established. */
+function freightHeadline(freight: Section): string {
+  const rail = freight.statements.find((s) => s.sources.some((x) => x.kind === 'audit'));
+  const model = freight.statements.find((s) => s !== rail);
+  return model?.text ?? `Not established from public data${rail ? ` (rail: ${rail.text})` : ''}`;
+}
 
 /** The compact CORPORATE FAMILY line for the 30-second view. */
 function familyLine(i: AccountInputs): string {
@@ -958,7 +989,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const thesis: Thesis = {
     status: stale ? `THESIS NEEDS REVIEW: ${stale.needsReview.join(' ')}` : 'INFERENCE, for your review (never approved by GAP)',
     whyThisAccount: [i.watched ? `Watched: ${i.watchReasons.map((r) => WATCH_REASON[r] ?? r.replace(/_/g, ' ')).join(', ') || 'priority account'}` : 'Not watched', live[0] ? `best fact: ${live[0].quote}` : 'no verified fact yet'].join('; '),
-    whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})${sensitive ? ` SENSITIVE (${sensitive}): never the hook; reference the network change only.` : ''}` : 'No current, verified catalyst.',
+    whyNow: live[0] ? `${live[0].continuity === 'ongoing_state' ? 'Ongoing' : (now.getTime() - new Date(live[0].currentness?.publishedAt ?? live[0].publishedAt).getTime()) / 86_400_000 > FRESHNESS.catalysts ? `Older (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)}, past the ${FRESHNESS.catalysts}-day catalyst window)` : 'Recent'}: ${live[0].quote} (${day(live[0].currentness?.publishedAt ?? live[0].publishedAt)})${sensitive ? ` SENSITIVE (${sensitive}): never the hook; reference the network change only.` : ''}` : 'No current, verified catalyst.',
     whatMayBeBroken: top ? hedge(top) : `Unknown: ${noHypothesis}`,
     whyItMayMatter: econ ? econ.text : 'Unknown: no economics yet.',
     whereYardFlowMayFit: wedge.archetype ? `${wedge.archetype}${wedge.candidates[0] ? `; start at ${wedge.candidates[0].name}` : ''}` : 'Unknown: no audited site data.',
@@ -982,8 +1013,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     account: i.account.name,
     icpState: i.opportunity?.status === 'ACTIVE' ? 'In a deal' : i.watched ? `Watched: ${i.watchReasons.map((r) => WATCH_REASON[r] ?? r.replace(/_/g, ' ')).join(', ') || 'priority account'}` : 'Not in the watched universe',
     whyNow: thesis.whyNow,
-    network: sections.footprint.statements[0]?.text ?? 'Unknown',
-    freight: sections.freight.statements[0]?.text ?? 'Unknown',
+    network: networkHeadline(i, sections.footprint),
+    freight: freightHeadline(sections.freight),
     bestFact: live[0]?.quote ?? null,
     topHypothesis: top ? hedge(top) : noHypothesis,
     currentTech,

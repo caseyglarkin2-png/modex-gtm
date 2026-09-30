@@ -196,7 +196,7 @@ describe('real-data fixes (PepsiCo / General Mills / Kroger dogfood)', () => {
 
   it('an open deal: "Work the deal" with the next learning as its own question', () => {
     const b = buildAccountBrief(base({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'Acme pilot', stage: 'discovery' }] } }), NOW);
-    expect(b.glance.nextAction).toBe('Work the deal (In Deals), never cold. Next learning: the Deal brief objective.');
+    expect(b.glance.nextAction).toBe('Work the deal from In Deals (Acme pilot, discovery), never cold. Its deal brief sets what to learn next.');
   });
 });
 
@@ -466,5 +466,58 @@ describe('closeout: General Mills and RXO', () => {
     expect(bare.glance.nextAction).toMatch(/not linked to a HubSpot company/);
     const other = buildAccountBrief(base({ opportunity: { status: 'UNKNOWN', detail: 'timeout', deals: [] } }), NOW);
     expect(other.motion.why).toBe('Do not contact yet: the HubSpot deal state could not be read.');
+  });
+});
+
+describe('final review (2026-09-30): the headline lines say what is known', () => {
+  const tyson = { id: 'lay', quote: 'Acme Foods has announced the sudden closure of its beef plant in Joslin, Illinois, throwing more than 2,500 union workers out of work.', url: 'https://news.example/j', title: 'n', publishedAt: '2026-09-15T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+  const air = { id: 'air', quote: 'With Tricolor, we are redesigning our international air network by deploying our aircraft and linehaul flights strategically to grow in the premium global freight market.', url: 'https://sec.example/a', title: '10-K', publishedAt: '2026-09-15T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+  const gatik = { id: 'gat', quote: 'Gatik moves freight for Acme Foods across roughly 250 retail locations in Texas.', url: 'https://gatik.ai/n', title: 'n', publishedAt: '2026-09-15T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+  const fleet = { id: 'flt', quote: 'Acme Foods will add 200 tractors to its private fleet serving its distribution centers in 2027.', url: 'https://news.example/f', title: 'n', publishedAt: '2026-09-15T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+
+  it('NETWORK is a count, never a news quote; a sensitive or vendor fact is not a footprint statement', () => {
+    const b = buildAccountBrief(base({ facts: [tyson, gatik] }), NOW);
+    expect(b.glance.network).not.toMatch(/Joslin|Gatik/);
+    expect(b.glance.network).toMatch(/38 facilities/);
+    expect(b.sections.footprint.statements.map((s) => s.text).join('\n')).not.toMatch(/union workers|Gatik/);
+  });
+  it('FREIGHT is a freight model: air network and vendor marketing are not it; a private fleet is', () => {
+    const b = buildAccountBrief(base({ facts: [air, gatik, fleet], microsite: null }), NOW);
+    const text = b.sections.freight.statements.map((s) => s.text).join('\n');
+    expect(text).not.toMatch(/air network|Gatik/);
+    expect(b.glance.freight).toMatch(/private fleet/);
+    const bare = buildAccountBrief(base({ facts: [air], microsite: null }), NOW);
+    expect(bare.glance.freight).toMatch(/^Not established from public data \(rail: 0 of 3 audited sites rail-served\)/);
+  });
+  it('an audit that recorded no yard features says unknown, never zero', () => {
+    const blank = (id: string) => site(id, { yardMetrics: { dockDoorCount: null, trailersVisible: null, trailerParkingCapacity: null, truckGateCount: null, buildingCount: null, siteAreaAcres: null, railServed: null }, classification: { dropYard: false, guardShack: false, truckGate: false, preGateStaging: false, fastLaneOpportunity: false, dockDoors: 'unknown', dropArea: 'unknown' } });
+    const pack = { ...(base().pack as object), network: { totals: { dockDoors: 0, trailerCapacity: 0, gates: 0, railServed: 0, acres: 0 }, sites: [blank('t1'), blank('t2')] } } as never;
+    const b = buildAccountBrief(base({ pack }), NOW);
+    expect(b.sections.yard.statements.map((s) => s.text).join('\n')).not.toMatch(/0 with a drop yard/);
+    expect(b.sections.yard.unknowns.join('\n')).toMatch(/Yard features: the audit recorded none for these 2 sites \(unknown, not zero\)/);
+    expect(b.sections.freight.statements.map((s) => s.text).join('\n')).not.toMatch(/rail-served/);
+    expect(b.sections.freight.unknowns.join('\n')).toMatch(/Rail service \(not recorded by the audit\)/);
+  });
+  it('the audited-sites line is VERIFIED only when every counted site is cited (one cited site is not enough)', () => {
+    const uncited = site('u1', { verification: { ...site('x').verification, citations: [] } });
+    const pack = { ...(base().pack as object), network: { totals: { dockDoors: 0, trailerCapacity: 0, gates: 0, railServed: 0, acres: 0 }, sites: [site('c1'), uncited] } } as never;
+    const f = buildAccountBrief(base({ pack }), NOW).sections.footprint.statements.find((s) => /sites audited/.test(s.text));
+    expect(f?.truth).toBe('INFERENCE');
+  });
+  it('WHY NOW never calls a fact past the catalyst window "Recent"', () => {
+    const old = { ...fleet, publishedAt: '2026-06-01T00:00:00Z' };
+    const b = buildAccountBrief(base({ facts: [old] }), NOW);
+    expect(b.thesis.whyNow).toMatch(/^Older \(2026-06-01, past the 45-day catalyst window\):/);
+    expect(buildAccountBrief(base(), NOW).thesis.whyNow).toMatch(/^Recent:/);
+  });
+  it('a modeled range too wide to act on is said as such', () => {
+    const b = buildAccountBrief(base({ roi: { hardSavingsAnnual: 67_900_000, totalValueAnnual: 2_565_600_000, facilities: 500, calculatorVersion: 'v3', assumptions: [] } }), NOW);
+    expect(b.sections.economics.statements[0].text).toMatch(/^Too uncertain to use: the model spans \$67\.9M to \$2565\.6M a year \(38x\) across 500 facilities/);
+    expect(b.sections.economics.statements[0].text).toMatch(/the footprint counts 38/);
+  });
+  it('in a deal, the next action names the deal, not a placeholder', () => {
+    const b = buildAccountBrief(base({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ id: 'd1', name: 'Acme pilot', stage: 'Discovery' }] as never } }), NOW);
+    expect(b.glance.nextAction).not.toMatch(/Next learning: the Deal brief objective/);
+    expect(b.glance.nextAction).toMatch(/^Work the deal from In Deals \(Acme pilot, Discovery\), never cold/);
   });
 });
