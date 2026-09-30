@@ -320,7 +320,7 @@ export async function loadCandidateQueue(prisma: PrismaLike, opts: { workSourceI
     const s = (c.scout ?? {}) as Partial<ScoutResult>;
     // A web Scout's verdict is re-derived from its stored claims under today's rules (a rule fixed after the
     // pass reaches the queue); name rules and hand decisions keep what was stored.
-    const today = s.basis === 'web' && !s.failed ? deriveFit({ entityType: (c.entity_type as EntityType | null) ?? null, operating: operatingCount([...(s.network ?? []), ...(s.freight ?? [])]), ambiguous: !!s.ambiguous, what: s.what ?? null }) : null;
+    const today = s.basis === 'web' && !s.failed && c.scouted_at && c.verdict ? deriveFit({ entityType: (c.entity_type as EntityType | null) ?? null, operating: operatingCount([...(s.network ?? []), ...(s.freight ?? [])]), ambiguous: !!s.ambiguous, what: s.what ?? null }) : null;
     Object.assign(item, {
       verdict: today?.fit ?? (c.verdict as string) ?? null,
       ambiguous: !!s.ambiguous,
