@@ -280,11 +280,7 @@ export function verificationContext(accountName: string, fetchText?: FetchText):
 export function textNamesAccount(text: string, accountKey: string): boolean {
   if (!accountKey) return false;
   const t = ` ${text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()} `;
-  if (t.includes(` ${accountKey} `)) return true;
-  // A page often drops a trailing descriptor ("Lineage" for Lineage Logistics, "Marten" for Marten Transport);
-  // only when what remains is still distinctive (6+ characters), never a short or generic stem ("NFI", "General").
-  const core = accountKey.replace(/(?: (?:logistics|transport|transportation|industries|foods|food|brands|group|holdings|international|usa|us|north america|global|services|solutions|distribution|trucking))+$/, '').trim();
-  return core !== accountKey && core.length >= 6 && !/^(general|united|national|american|global|first|premier|standard)$/.test(core) && t.includes(` ${core} `);
+  return t.includes(` ${accountKey} `);
 }
 
 /**
@@ -320,6 +316,8 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
     const own = c.provider === 'web' ? pageSentenceFor(excerpt, page) : null;
     // A web proposal the page does not state closely enough (or states differently) is a weak reanchor.
     if (!own) return { ok: false, reason: !web ? 'excerpt_not_found_at_source' : isPhysicalOpsFact(c.excerpt) ? 'reanchor_too_weak' : 'not_a_physical_operations_fact' };
+    // The page's sentence must be about THIS account (a roundup page can hold a competitor's sentence).
+    if (!textNamesAccount(own, ctx.accountKey)) return { ok: false, reason: 'sentence_does_not_name_account' };
     excerpt = own;
   }
   // The stored sentence itself must be a physical-operations fact that is current for its source date.

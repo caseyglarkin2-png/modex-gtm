@@ -13,7 +13,7 @@
  */
 import type { SignalType } from '../taxonomy';
 
-const FACILITY = /\b((?:terminal|yard|electric) tractors?|hostlers?|spotter trucks?|linear feet of (?:rail )?track|rail (?:yards?|spurs?|infrastructure)|(?:container|marine|intermodal) terminals?|pallet positions?|square feet of (?:[a-z-]+ ){0,2}space|(?<!web )sites?|distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
+const FACILITY = /\b((?:terminal|yard|electric) tractors?|hostlers?|spotter trucks?|linear feet of (?:rail )?track|rail (?:yards?|spurs?|infrastructure)|(?:container|marine|intermodal) terminals?|pallet positions?|square feet of (?:(?:new|additional|temperature-controlled|refrigerated|frozen) )?(?:warehouse|distribution|manufacturing|industrial|cold[- ]storage|production|fulfil?lment|freezer|cooler) space|(?:manufacturing|production|distribution|warehouse|plant|industrial|fulfil?lment|cold[- ]storage|existing [A-Z][a-z]+) sites?|distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
 // Scale dogfood (paid research): real operations verbs the gate missed: "ceased manufacturing and warehouse
 // operations", "shut down its warehouse", "idled five facilities", "the groundbreaking of our newest facility".
 const CHANGE = /\b(grow(?:s|ing)? (?:the |its )?(?:facility['’]s |site['’]s )?(?:electric )?fleet|add(?:s|ed|ing)? (?:approximately |about |over |more than |nearly |roughly |some |an additional )?[\d,.]+(?:\s|-)(?:square|sq|pallet|dock|doors?|acres?|jobs|positions|bays|linear)|replac(?:e|es|ed|ing) (?:the |its |an? )?(?:former|existing|older|old|previous)|operational since|reopen(?:ed|ing|s)?|demoli(?:sh|shed|shing|tion)|discontinu(?:e|ed|es|ing)|deploy(?:s|ed|ing|ment)?|ceas(?:e|ed|es|ing)|shut(?:s|ting)? down|shutdown|idl(?:e|ed|es|ing)|mothball(?:s|ed|ing)?|groundbreaking|grand opening|wind(?:s|ing)? down|went live|goes live|commenc(?:e|ed|es|ing)|open(?:ed|ing|s)?|clos(?:e|ed|es|ing|ure|ures)|exit(?:ed|ing|s)?|consolidat(?:e|ed|es|ing|ion)|expan(?:d|ded|ding|sion)|build(?:s)?|built|construct(?:ed|ing|ion)?|automat(?:e|ed|es|ing|ion)|robot(?:ic|ics)?|acquir(?:e|ed|es|ing)|acquisition|relocat(?:e|ed|ing|ion)|redesign(?:ed)?|add(?:ed|ing)? capacity)\b/i;
@@ -92,7 +92,7 @@ export function isAcquisitionFact(sentence: string): boolean {
  * facilities" state nothing that happened or is scheduled.
  */
 // The month "May" ("On May 9, 2026", "In May 2026") is a date, not the modal "may".
-const HYPOTHETICAL = /\b(?:might|could)\b|\bwould\b(?<!\b(?:said|announced|confirmed|stated|reported|disclosed|told)\s+(?:that\s+)?(?:it|they|the company|[A-Z][\w-]*)\s+would)|\bmay\b(?!\s+\d)(?<!\b(?:in|on|of|since|until|by|through|from|early|late|mid|during)\s+may)/i;
+const HYPOTHETICAL = /\b(?:might|could)\b|\bwould\b(?<!\b(?:said|announced|confirmed|stated|disclosed)\s+(?:that\s+)?(?:it|the company)\s+would)|\bmay\b(?!\s+\d)(?<!\b(?:in|on|of|since|until|by|through|from|early|late|mid|during)\s+may)/i;
 
 /** A "network" that is not a physical one (the retail-media, loyalty or IT kind). */
 const NON_PHYSICAL_NETWORK = /\b(?:digital|media|social|payments?|loyalty|advertising|data|computer|telecom|wireless|dealer|franchise)\s+networks?\b/gi;
@@ -313,12 +313,16 @@ export function htmlToText(html: string): string {
     // unknown named entity is dropped, never turned into a space inside a word.
     .replace(/&#(\d+);/g, (_, n) => safeChar(Number(n)))
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => safeChar(parseInt(h, 16)))
-    .replace(/&([a-z]+[0-9]?);/gi, (m, name) => NAMED_ENTITY[name] ?? (/^(amp|lt|gt|quot|apos)$/i.test(name) ? m : ''))
+    .replace(/&([a-z]+[0-9]?);/gi, (m, name) => (Object.hasOwn(NAMED_ENTITY, name) ? NAMED_ENTITY[name] : /^(amp|lt|gt|quot|apos)$/i.test(name) ? m : ''))
     .replace(/&amp;/g, '&')
     .replace(/\s+/g, ' ');
 }
 
-const safeChar = (n: number) => (Number.isFinite(n) && n > 31 && n < 0x10ffff ? String.fromCodePoint(n) : ' ');
+// Printable characters only: no controls, lone surrogates, zero-width or bidi overrides, line separators or BOM.
+const safeChar = (n: number) =>
+  Number.isFinite(n) && n > 31 && n < 0x10ffff && !(n >= 0x7f && n <= 0x9f) && !(n >= 0xd800 && n <= 0xdfff) && !(n >= 0x200b && n <= 0x200f) && !(n >= 0x2028 && n <= 0x202e) && !(n >= 0x2066 && n <= 0x2069) && n !== 0xfeff
+    ? String.fromCodePoint(n)
+    : ' ';
 const NAMED_ENTITY: Record<string, string> = {
   eacute: 'é', Eacute: 'É', egrave: 'è', Egrave: 'È', ecirc: 'ê', aacute: 'á', agrave: 'à', acirc: 'â', auml: 'ä', Auml: 'Ä',
   ccedil: 'ç', Ccedil: 'Ç', iacute: 'í', ntilde: 'ñ', oacute: 'ó', ocirc: 'ô', ouml: 'ö', Ouml: 'Ö', uacute: 'ú', uuml: 'ü', Uuml: 'Ü',
@@ -434,7 +438,7 @@ export function pageSentenceFor(excerpt: string, pageText: string): string | nul
     if (!sameAssertion(excerpt, s)) continue;
     // Every place or party the sentence names is one the proposal names (Fresno is not Stockton).
     const allowed = allNames(excerpt);
-    if (![...properNames(s)].every((n) => allowed.has(n))) continue;
+    if (![...allNames(s)].every((n) => allowed.has(n) || /^(the|this|that|these|its|our|in|on|at|by|for|and|with|from|new|as|after|following|during)$/.test(n))) continue;
     if (names.length && ![...properNames(s)].some((n) => names.includes(n)) && !names.some((n) => normalizeForMatch(s).toLowerCase().includes(n))) continue;
     const score = inProposal + contained;
     if (!best || score > best.score) best = { s, score };

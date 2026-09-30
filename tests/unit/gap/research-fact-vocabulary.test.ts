@@ -57,12 +57,29 @@ describe('html entities decode to characters (no mangled names)', () => {
   });
 });
 
-describe('the page names the account', () => {
-  it('without a trailing descriptor only when what remains is distinctive', async () => {
+describe('review P1: the page names the account exactly (no common-word fallback)', () => {
+  it('a descriptor-less or common word is not the account', async () => {
     const { textNamesAccount } = await import('@/lib/gap/research/run');
-    expect(textNamesAccount('Lineage celebrated the groundbreaking in Hutchins.', 'lineage logistics')).toBe(true);
-    expect(textNamesAccount('Marten reorganized its operating centers.', 'marten transport')).toBe(true);
-    expect(textNamesAccount('NFI opened a site.', 'nfi industries')).toBe(false);
-    expect(textNamesAccount('General opened a plant.', 'general mills')).toBe(false);
+    expect(textNamesAccount('The Lineage of the family business is long.', 'lineage logistics')).toBe(false);
+    expect(textNamesAccount('Penske Automotive opened a dealership.', 'penske logistics')).toBe(false);
+    expect(textNamesAccount('Lineage Logistics opened a warehouse.', 'lineage logistics')).toBe(true);
+  });
+});
+
+describe('review P1: non-facility sites and speculation stay out', () => {
+  it.each([
+    'Our site has been redesigned and will launch a new privacy policy.',
+    'The company announced it will open a new job site portal for drivers in 2026.',
+    'The company added 20,000 square feet of office space at its headquarters.',
+    'Acme announced it will deploy a new website across all its sites.',
+    'Analysts said Acme would close the Memphis plant.',
+  ])('%s', (s) => expect(isPhysicalOpsFact(s)).toBe(false));
+});
+
+describe('review P2: entities decode safely', () => {
+  it('no prototype names, controls, surrogates or bidi overrides', async () => {
+    const { htmlToText } = await import('@/lib/gap/research/facts');
+    expect(htmlToText('a&constructor;b').trim()).toBe('ab');
+    expect(htmlToText('x&#8238;y&#xD800;z&#127;w').trim()).toBe('x y z w');
   });
 });

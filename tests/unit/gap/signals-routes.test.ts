@@ -330,7 +330,7 @@ describe('POST /api/gap/signals', () => {
     );
     expect(res.status).toBe(201);
     // Phase 2 A1: "site opened" names no DC, plant, yard or dock, so it is CONTEXT only (never quotable) and says why.
-    expect(await res.json()).toEqual({ id: 'sig_old', created: false, verified: false, reason: 'source_unreadable:offline' });
+    expect(await res.json()).toEqual({ id: 'sig_old', created: false, verified: false, reason: 'not_a_physical_operations_fact' });
 
     const [, input] = mockedRegister.mock.calls[0] as [unknown, Record<string, unknown>];
     expect(input).toMatchObject({

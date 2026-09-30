@@ -22,6 +22,14 @@ describe('re-anchoring a paraphrase to the page sentence', () => {
     const summary = 'Lineage broke ground on a new automated cold storage facility in Hutchins, Texas, located at Prime Pointe Park adjacent to the Union Pacific Dallas Intermodal Terminal, with operations expected in late 2027.';
     expect(pageSentenceFor(summary, page)).toBe('Lineage celebrated the groundbreaking of its new automated cold storage facility in Hutchins, Texas, alongside city officials.');
   });
+  it('review P0: a competitor\'s sentence on a roundup page is never stored for the account', async () => {
+    const page = 'Distribution roundup. Sysco opened a new distribution center in Houston, Texas, adding 250 jobs to the region in 2026. Walmart will close its Memphis distribution center in May.';
+    expect(pageSentenceFor('US Foods opened a new distribution center in Houston, Texas, adding 250 jobs in 2026.', page)).toBeNull();
+    expect(pageSentenceFor('Kroger will close its Memphis distribution center in May.', page)).toBeNull();
+    const v = await verifyCandidate(cand({ excerpt: 'Kroger will close its Memphis distribution center in May.', url: 'https://news.example/roundup' }), verificationContext('Kroger', async () => `Kroger news roundup. ${page}`));
+    expect(v.ok).toBe(false);
+  });
+
   it('semantic flips are rejected: negation, open vs close, buy vs sell, planned vs done, another place', () => {
     const page = 'Acme will not open the planned distribution center in Reno, Nevada this year. Acme closed its distribution center in Fresno, California in March 2026. Acme sold its Tulare, California warehouse to a local buyer in 2026.';
     expect(pageSentenceFor('Acme will open a new distribution center in Reno, Nevada this year.', page)).toBeNull();
