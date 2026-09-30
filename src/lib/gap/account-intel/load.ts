@@ -43,8 +43,9 @@ async function namesStartingLike(prisma: PrismaLike, name: string): Promise<stri
   const token = foldAccents(name).trim().toLowerCase().split(/[^a-z0-9]/)[0] ?? '';
   if (!token) return [];
   if (typeof prisma.$queryRaw === 'function') {
-    const rows: Array<{ name: string }> = await prisma.$queryRaw`SELECT name FROM accounts WHERE translate(lower(name), ${FOLD_FROM}, ${FOLD_TO}) LIKE ${`${token}%`} ORDER BY name LIMIT 500`;
-    return rows.map((r) => r.name);
+    // A database that cannot encode the fold characters (a WIN1252 scratch database) falls back to the plain read.
+    const rows: Array<{ name: string }> | null = await prisma.$queryRaw`SELECT name FROM accounts WHERE translate(lower(name), ${FOLD_FROM}, ${FOLD_TO}) LIKE ${`${token}%`} ORDER BY name LIMIT 500`.catch(() => null);
+    if (rows) return rows.map((r) => r.name);
   }
   const rows: Array<{ name: string }> = await prisma.account.findMany({ where: { name: { startsWith: token, mode: 'insensitive' } }, select: { name: true }, orderBy: { name: 'asc' }, take: 500 });
   return rows.map((r) => r.name);

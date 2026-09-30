@@ -43,6 +43,16 @@ describe('accented account names', () => {
     expect((await loadAccountInputs(p, 'Élan Foods', now))?.siblings).toEqual(['Elan Foods']);
   });
 
+  it('a database that cannot run the fold (WIN1252) falls back to the plain read instead of failing the brief', async () => {
+    const p = sqlFake(BOOK) as Record<string, unknown>;
+    p.$queryRaw = async () => { throw new Error('22P05 character has no equivalent in encoding WIN1252'); };
+    p.account = { ...(p.account as object), findMany: async ({ where }: { where: { name: { startsWith: string } } }) => BOOK.filter((n) => n.toLowerCase().startsWith(where.name.startsWith)).map((name) => ({ name })) };
+    const i = await loadAccountInputs(p as never, 'Nestle USA', new Date('2026-09-29T12:00:00Z'));
+    expect(i).not.toBeNull();
+    // the plain read cannot fold accents, so the accented shell is missed: degraded, never a failed page
+    expect(i?.siblings).toEqual([]);
+  });
+
   it('the translate() pairs line up one to one', () => {
     expect([...FOLD_FROM].length).toBe(FOLD_TO.length);
     expect(foldAccents(FOLD_FROM).toLowerCase()).toBe(FOLD_TO);

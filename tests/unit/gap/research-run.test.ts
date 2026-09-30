@@ -142,6 +142,37 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(h.observation).toContain(`[S:${chosen.signalId}]`);
   });
 
+  it('scale dogfood: GAP opens on the most seller-relevant fact, never a sale abroad (General Mills opened on its Brazil sale)', async () => {
+    const { prisma, t } = db();
+    const BRAZIL = 'We entered into a definitive agreement to sell our business in Brazil, including its two distribution centers and plant.';
+    const OHIO = 'The company will open a new automated distribution center in Ohio to add capacity for the region next year.';
+    const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary({ excerpt: BRAZIL, url: `${Q2}#b` }), primary({ excerpt: OHIO, url: `${Q2}#o` })]), fetchText: async () => `${PAGE} ${BRAZIL} ${OHIO}` });
+    expect(run.facts.map((f) => f.excerpt)).toEqual(expect.arrayContaining([BRAZIL, OHIO]));
+    expect(await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW })).toMatchObject({ ok: true });
+    const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
+    expect(h.observation).toContain('Ohio');
+    expect(h.observation).not.toContain('Brazil');
+  });
+
+  it('scale dogfood: a 3PL draft speaks to the yards it runs, and every GAP draft says what would close it', async () => {
+    const { prisma, t } = db();
+    prisma.account = { findUnique: async () => ({ vertical: '3PL / Logistics' }) };
+    t.hyps.length = 0; // no approved base thesis: GAP writes the draft itself
+    const run = await runEvidenceResearch(prisma, { ...input, personaId: null, hypothesisId: null, decisionId: null }, { ...edgarOnly([primary()]), fetchText: async () => PAGE });
+    expect(await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW })).toMatchObject({ ok: true });
+    const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
+    expect(h.problem_hypothesis).toMatch(/gates, yards and docks you run/);
+    expect(h.problem_hypothesis).not.toMatch(/production capacity/);
+    expect(h.what_a_no_means).toMatch(/^If trailers do not wait longer at the sites you run/);
+  });
+
+  it('scale dogfood: a run whose only facts are a sale abroad proposes nothing', async () => {
+    const { prisma } = db();
+    const BRAZIL = 'We entered into a definitive agreement to sell our business in Brazil, including its two distribution centers and plant.';
+    const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary({ excerpt: BRAZIL, url: `${Q2}#b` })]), fetchText: async () => `${PAGE} ${BRAZIL}` });
+    expect(await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW })).toMatchObject({ ok: false, reason: 'no_outreach_fact' });
+  });
+
   it('Phase 2 B2: a chosen fact from another account is never used', async () => {
     const { prisma, t } = db();
     const run = await runEvidenceResearch(prisma, input, { ...edgarOnly([primary()]), fetchText: async () => PAGE });

@@ -378,7 +378,7 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   if (a.all.length) {
     const cited = a.kept.filter(citedAudit);
     st.push({
-      text: `${plural(a.all.length, 'site')} audited: ${a.self.length} self-operated, ${a.threePl.length} run by a 3PL (not counted as theirs to decide)${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
+      text: `${plural(a.all.length, 'site')} audited: ${entityTypeOf(i) === '3pl' ? `${a.self.length + a.threePl.length} operated by ${i.account.name} (a 3PL: its own sites)` : `${a.self.length} self-operated, ${a.threePl.length} run by a 3PL (not counted as theirs to decide)`}${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
       truth: cited.length ? 'VERIFIED_PUBLIC' : 'INFERENCE',
       sources: [auditSrc('satellite + source audit', p!.builtAt, cited[0]?.verification?.citations[0]?.url ?? null)],
       asOf: cited[0]?.verification?.verifiedAt ?? p!.builtAt,
@@ -668,7 +668,7 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge):
   const onTop = (t: string) => i.bids.some((b) => b.type === t && (!top || b.hypothesisId === top.id || b.hypothesisId == null));
   const any = (t: string) => i.bids.some((b) => b.type === t);
   // Never name a site the buyer has not named (a satellite-found site in a first question reads as surveillance).
-  const where = PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your sites' : 'your plants and DCs';
+  const where = siteWords(i);
   const out: DiscoveryQuestion[] = [];
   if (!any('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do trailers get checked in and found at ${where} today?`, why: 'Current state first: it is non-leading and sets the pilot scope.' });
   if (!onTop('business_problem')) {
@@ -692,6 +692,16 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge):
   if (!any('future_state')) out.push({ type: 'DESIRED_FUTURE', question: 'What would good yards look like a year from now?', why: 'The desired future frames any proposal.' });
   if (!any('constraint')) out.push({ type: 'CHANGE_REQUIREMENT', question: 'What would a change have to clear: IT, security, the sites themselves?', why: 'Requirements decide whether a pilot can start.' });
   return out.slice(0, 7);
+}
+
+/** How to name the sites in a question, by what the company is (a 3PL runs customers' warehouses, a carrier terminals). */
+function siteWords(i: AccountInputs): string {
+  const t = entityTypeOf(i);
+  if (t === '3pl') return 'the warehouses and customer sites you run';
+  if (t === 'carrier') return 'your terminals and yards';
+  if (t === 'port_terminal') return 'your terminals';
+  if (t === 'retailer' || t === 'distributor') return 'your DCs';
+  return PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your sites' : 'your plants and DCs';
 }
 
 const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;
@@ -837,15 +847,26 @@ export function typeFromVertical(v: string | null): EntityType | null {
  * OPERATING evidence GAP holds (audited sites, a sourced facility count, live facts and Scout claims about
  * facilities, yards, fleets). A 3PL or carrier that runs sites is a direct buyer, never a "partner" by label.
  */
+/** What the company is: Scout's web reading of the RIGHT company, else the account record's vertical. */
+export function entityTypeOf(i: Pick<AccountInputs, 'scout' | 'account'>): EntityType | null {
+  const scout = i.scout && i.scout.basis !== 'name_rules' && !i.scout.ambiguous ? i.scout : null;
+  return (scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
+}
+
+/** The audited sites this company itself runs. For a 3PL, a site the audit calls "3PL-operated" is its own. */
+function ownSites(i: AccountInputs, a: ReturnType<typeof auditedSites>) {
+  return entityTypeOf(i) === '3pl' ? [...a.self, ...a.threePl] : a.self;
+}
+
 export function accountFit(i: AccountInputs, now: Date): { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[]; scoutedAt: string | null } {
   // Scout counts only from a web pass on the RIGHT company (never a name rule, never an ambiguous identity).
   const scout = i.scout && i.scout.basis !== 'name_rules' && !i.scout.ambiguous ? i.scout : null;
-  const entityType = (scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
+  const entityType = entityTypeOf(i);
   const a = auditedSites(i.pack);
   const evidence: string[] = [];
-  // Only sites the audit verified as self-operated are the company's own operations (a 3PL-run or unverified
-  // site says little about what this company runs).
-  const own = a.self.filter((s) => s.verification?.verdict === 'confirmed' || s.verification?.verdict === 'probable');
+  // Only sites the audit verified as the company's own operations count (self-operated, or 3PL-operated when the
+  // company IS the 3PL); a site run by someone else or unverified says little about what this company runs.
+  const own = ownSites(i, a).filter((s) => s.verification?.verdict === 'confirmed' || s.verification?.verdict === 'probable');
   if (own.length) evidence.push(`${plural(own.length, 'verified self-operated site')} with yards`);
   // A sourced count of several facilities is corroborated operations by itself (a filing or registry names them).
   const counted = (label: string, raw: unknown) => {
@@ -895,7 +916,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   if (hypotheses.some((h) => h.truth === 'CONTRADICTED')) whyNot.push('The buyer rejected or contradicted the current story.');
   if (i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)))) whyNot.push('The buyer confirmed an incumbent system: a displacement story needs its own evidence.');
   const aud = auditedSites(i.pack);
-  if (aud.kept.length && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
+  // A 3PL's own sites are "3PL-operated": the decision sits with this account, not elsewhere.
+  if (aud.kept.length && entityTypeOf(i) !== '3pl' && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
   if (i.family?.hold) whyNot.push(i.family.hold.detail);
   const fit = accountFit(i, now);
   if (fit.fit === 'PARTNER' || fit.fit === 'NOT_FIT' || fit.fit === 'UNKNOWN') whyNot.push(`${FIT_LABEL[fit.fit]}: ${fit.why}`);

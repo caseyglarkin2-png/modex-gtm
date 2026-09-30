@@ -408,3 +408,25 @@ describe('fit comes from operations, not the label (final dogfood: Crowley, Peps
     expect(b.fit).toMatchObject({ entityType: null, fit: 'UNKNOWN' });
   });
 });
+
+describe('scale dogfood reasoning fixes', () => {
+  const brazil = { id: 'fb', quote: 'We entered into a definitive agreement to sell our business in Brazil, including its two distribution centers.', url: 'https://sec.example/q', title: '10-Q', publishedAt: '2026-09-23T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+  it('a draft Casey built on a fact he chose stays grounded (the brief never overrides his choice; review P1-B)', () => {
+    const h = { ...base().hypotheses[0], id: 'hb', status: 'draft', observation: brazil.quote, primarySignalId: 'fb' };
+    expect(buildAccountBrief(base({ facts: [brazil], hypotheses: [h] }), NOW).hypotheses[0].grounded).toBe(true);
+  });
+  it('a 3PL\'s "3PL-operated" audited sites are its own: no "decision sits with the 3PL", and they count as operations', () => {
+    const pack = base().pack as { network: { sites: unknown[] } };
+    const threePl = (id: string) => ({ ...(pack.network.sites[0] as object), id, verification: { ...(pack.network.sites[0] as { verification: object }).verification, operator: '3PL' } });
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: '3PL / Logistics' }, facts: [], pack: { ...(base().pack as object), network: { totals: {}, sites: [threePl('a'), threePl('b'), threePl('c')] } } as never }), NOW);
+    expect(b.thesis.whyNotPursue.join(' ')).not.toMatch(/decision may sit with the 3PL/);
+    expect(b.fit).toMatchObject({ entityType: '3pl', fit: 'DIRECT_BUYER' });
+  });
+});
+
+describe('scale dogfood: operators are asked about the sites they run', () => {
+  it.each([['3PL / Logistics', 'the warehouses and customer sites you run'], ['Trucking', 'your terminals and yards'], ['Marine Terminal', 'your terminals'], ['Grocery Retail', 'your DCs'], ['Food & Beverage', 'your plants and DCs']])('%s -> "%s"', (vertical, words) => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical }, bids: [] }), NOW);
+    expect(b.discovery.find((q) => q.type === 'CURRENT_PROCESS')?.question).toBe(`How do trailers get checked in and found at ${words} today?`);
+  });
+});
