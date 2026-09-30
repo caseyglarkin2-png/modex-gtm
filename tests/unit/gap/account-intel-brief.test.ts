@@ -425,8 +425,18 @@ describe('scale dogfood reasoning fixes', () => {
 });
 
 describe('scale dogfood: operators are asked about the sites they run', () => {
-  it.each([['3PL / Logistics', 'the warehouses and customer sites you run'], ['Trucking', 'your terminals and yards'], ['Marine Terminal', 'your terminals'], ['Grocery Retail', 'your DCs'], ['Food & Beverage', 'your plants and DCs']])('%s -> "%s"', (vertical, words) => {
+  it.each([['3PL / Logistics', 'the warehouses and customer sites you run'], ['Trucking', 'your terminals and yards'], ['Marine Terminal', 'your terminals'], ['Grocery Retail', 'your DCs'], ['Food & Beverage', 'your plants and DCs'], ['Unknown', 'your sites']])('%s -> "%s"', (vertical, words) => {
     const b = buildAccountBrief(base({ account: { ...base().account, vertical }, bids: [] }), NOW);
     expect(b.discovery.find((q) => q.type === 'CURRENT_PROCESS')?.question).toBe(`How do trailers get checked in and found at ${words} today?`);
+  });
+});
+
+describe('scale dogfood: an unknown type is never assumed', () => {
+  it('3PL-marked sites on an account of unknown type: settle identity, never "the decision sits with the 3PL"', () => {
+    const pack = base().pack as { network: { sites: unknown[] } };
+    const threePl = (id: string) => ({ ...(pack.network.sites[0] as object), id, verification: { ...(pack.network.sites[0] as { verification: object }).verification, operator: '3PL' } });
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical: 'Unknown' }, facts: [], pack: { ...(base().pack as object), network: { totals: {}, sites: [threePl('a'), threePl('b')] } } as never }), NOW);
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/it may BE the 3PL/);
+    expect(b.thesis.whyNotPursue.join(' ')).not.toMatch(/decision may sit with the 3PL/);
   });
 });
