@@ -459,6 +459,11 @@ describe('closeout: General Mills and RXO', () => {
     expect(b.motion.type).toBe('NO_GOOD_MOTION');
     expect(b.motion.why).toBe('Do not contact yet: this GAP account is not linked to a HubSpot company, so the opportunity state cannot be verified (link it in HubSpot, or confirm there is none).');
     expect(b.sections.commercial.statements[0].text).toMatch(/^Cannot verify opportunity state because this GAP account is not linked to a HubSpot company/);
+    // the glance and the next action say the same blocker (no "not read", no "research first")
+    const bare = buildAccountBrief(base({ facts: [], opportunity: { status: 'UNKNOWN', detail: 'identity_unresolved', deals: [], unlinked: true } }), NOW);
+    expect(bare.glance.commercialState).toMatch(/^Cannot verify opportunity state because this GAP account is not linked/);
+    expect(bare.glance.nextAction).not.toMatch(/Research first/);
+    expect(bare.glance.nextAction).toMatch(/not linked to a HubSpot company/);
     const other = buildAccountBrief(base({ opportunity: { status: 'UNKNOWN', detail: 'timeout', deals: [] } }), NOW);
     expect(other.motion.why).toBe('Do not contact yet: the HubSpot deal state could not be read.');
   });
