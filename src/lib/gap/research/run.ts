@@ -107,7 +107,11 @@ export interface ResearchInput {
 
 export interface ResearchDeps {
   edgar?: (accountName: string, now: Date) => Promise<{ candidates: Candidate[]; note: string }>;
-  web?: (accountName: string, focus: string) => Promise<{ candidates: Candidate[]; note: string }>;
+  web?: (accountName: string, focus: string) => Promise<{ candidates: Candidate[]; note: string; sources?: string[] }>;
+  /** The SSRF-safe page reader for the pages the web search cited (signals/intake makeFetchHtml by default). */
+  fetchHtml?: (url: string) => Promise<string>;
+  /** Read the pages the web search cited and propose their own verbatim sentences (default on). */
+  sourcePages?: boolean;
   fetchText?: FetchText;
   /**
    * Signal Intelligence B: extra candidates from the pages of the signals being followed up, with the page text
@@ -123,9 +127,23 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const providerErrors: Record<string, string> = {};
   const candidates: Candidate[] = [];
   const seededPages = new Map<string, string>();
+  let webSources: string[] = [];
   const providers: Array<readonly [string, () => Promise<{ candidates: Candidate[]; note: string; pages?: Map<string, string> }>]> = [
     ['edgar', () => (deps.edgar ?? ((a, n) => edgarCandidates(a, n)))(input.accountName, input.now)],
-    ['web', () => (deps.web ?? webCandidates)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '))],
+    ['web', async () => {
+      const r = await (deps.web ?? webCandidates)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '));
+      webSources = r.sources ?? [];
+      return r;
+    }],
+    // The search only LOCATES pages: GAP reads the cited pages itself and proposes their own verbatim sentences
+    // that name the account (dated by the page's article date), through the same verification contract.
+    ['sources', async () => {
+      const pages = webSources.filter((u) => !WEAK_SOURCE.test(u)).slice(0, 6);
+      if (deps.sourcePages === false || !pages.length) return { candidates: [], note: 'no cited pages to read' };
+      const { signalCandidates } = await import('../signals/research');
+      const r = await signalCandidates(pages.map((url, i) => ({ id: `cited${i + 1}`, url, title: null, published_at: null, source_class: '', resolution_basis: null, event_id: null })), { fetchHtml: deps.fetchHtml, accountName: input.accountName });
+      return { ...r, note: `${r.candidates.length} sentences from ${pages.length} cited pages` };
+    }],
     ...(deps.extra ? [['signal', deps.extra] as const] : []),
   ];
   for (const [name, run] of providers) {

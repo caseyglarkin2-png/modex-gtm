@@ -83,3 +83,19 @@ describe('review P2: entities decode safely', () => {
     expect(htmlToText('x&#8238;y&#xD800;z&#127;w').trim()).toBe('x y z w');
   });
 });
+
+describe('cited-page reading: page chrome is never a quote', () => {
+  it.each([
+    'Focus mode Show Search Search Query Submit Search Advertisement Business Frito-Lay to close San Bernardino plant and lay off workers.',
+    'Set us as preferred p]:text-cms-story-body-color-text" data-subscriber-content> Frito-Lay, the snack maker, will close its plant.',
+    'XPO opens North Carolina facility, featuring 300-plus doors | Trucking Dive Skip to main content.',
+    'Combination To Deliver More Value, Choice And Convenience To Customers And Communities Across The Nation Today.',
+    'Accept Customize Decline Search magnifying-glass Log in SUBSCRIBE Home Logistics About General Mills to redesign its plant and distribution network.',
+    'Combination to Deliver More Value, Choice, and Convenience to Customers More Value : By opening 125+ new Jetro warehouses, the combination grows.',
+  ])('%s', (s) => expect(isPhysicalOpsFact(s)).toBe(false));
+  it('a wire dateline is stripped, the fact after it kept', async () => {
+    const { extractFactSentences } = await import('@/lib/gap/research/facts');
+    const out = extractFactSentences('HOUSTON, March 30, 2026 (GLOBE NEWSWIRE) -- Sysco will open a new distribution center in Katy, Texas, adding 300 jobs in 2027. More text here about other things entirely.');
+    expect(out[0]).toBe('Sysco will open a new distribution center in Katy, Texas, adding 300 jobs in 2027.');
+  });
+});

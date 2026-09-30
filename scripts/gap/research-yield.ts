@@ -58,6 +58,18 @@ async function main() {
       }
     }
     if (blocked.length) console.log(`- alternate source: ${alt} of ${Math.min(blocked.length, 2)} blocked found elsewhere`);
+    // The run's cited-page step: GAP reads the pages the search cited and proposes their own sentences.
+    const { signalCandidates } = await import('../../src/lib/gap/signals/research');
+    const pages = ((w as { sources?: string[] }).sources ?? []).slice(0, 6);
+    const sc = pages.length ? await signalCandidates(pages.map((url, i) => ({ id: `cited${i + 1}`, url, title: null, published_at: null, source_class: '', resolution_basis: null, event_id: null })), { accountName: acct }) : { candidates: [], note: 'no cited pages', pages: new Map<string, string>() };
+    for (const [u, t] of sc.pages) ctx.pages.set(u, t);
+    let fromPages = 0;
+    for (const c of sc.candidates) {
+      const v = await verifyCandidate(c, ctx);
+      if (v.ok) { fromPages++; kept.push(`[cited page] ${v.excerpt.slice(0, 260)} <${new URL(c.url).hostname.replace(/^www\./, '')}>`); }
+    }
+    console.log(`- cited pages read ${pages.length}: ${sc.candidates.length} sentences, ${fromPages} verified`);
+    total.proposals += sc.candidates.length;
     total.proposals += w.candidates.length;
     total.verified += kept.length;
     console.log(`\n## ${acct} (${section}, ${Date.now() - t}ms)`);

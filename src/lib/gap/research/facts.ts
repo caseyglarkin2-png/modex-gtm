@@ -137,6 +137,17 @@ export function isBoilerplate(sentence: string): boolean {
 /** A run-on of page navigation ("Regulation Technology Labor Operations Equipment M&A An article from...") or a paragraph is not one statement. */
 export function isRunOnOrNavigation(sentence: string): boolean {
   if (sentence.trim().split(/\s+/).length > 70) return true;
+  // Page chrome glued to a fact (cited-page reading): markup residue, UI controls, a title separator.
+  if (/\]:|\bdata-[a-z-]+|="|">|<\/?[a-z]|[{}]|\btext-[a-z]+-[a-z]+/i.test(sentence)) return true;
+  if (/\b(?:Skip to (?:main )?content|Search Query|Submit Search|Focus mode|Show Search|Advertisement|Set us as preferred|Subscribe (?:now|to)|Sign up for|Share (?:on|this)|Follow us|Accept (?:all )?cookies|Newsletter)\b/i.test(sentence)) return true;
+  if (/\s\|\s/.test(sentence)) return true;
+  // A headline glued to its body ("More Value : By opening ...") or a cookie / menu bar before the text.
+  if (/\s:\s/.test(sentence)) return true;
+  const ui = sentence.match(/\b(?:Accept|Customize|Decline|Log in|Sign in|SUBSCRIBE|Subscribe|Menu|Home|About|Contact|magnifying-glass|Search)\b/g) ?? [];
+  if (new Set(ui).size >= 3) return true;
+  // Headline case: most words capitalized is a title or a menu, not a sentence.
+  const words = sentence.split(/\s+/).filter((w) => /^[A-Za-z]{3,}/.test(w));
+  if (words.length >= 10 && words.filter((w) => /^[A-Z]/.test(w)).length / words.length > 0.7) return true;
   if (/\bAn article from\b/.test(sentence)) return true;
   const t = sentence.trim();
   // A page control run into the text ("Learn more News & Media ..."): navigation, not a sentence.
@@ -275,7 +286,8 @@ export function extractFactSentences(text: string, max = 12): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
   for (const raw of splitSentencesAware(text)) {
-    const s = raw.replace(/\s+/g, ' ').trim();
+    // A wire-service dateline says where the release was filed; the fact is the text after it (still verbatim).
+    const s = raw.replace(/\s+/g, ' ').trim().replace(/^.{0,160}?\((?:GLOBE NEWSWIRE|BUSINESS WIRE|PR ?Newswire|PRNewswire|ACCESSWIRE|Canada NewsWire)\)\s*(?:--|[-\u2013\u2014])\s*/i, '');
     if (s.length < 60 || s.length > 500) continue;
     if (!isPhysicalOpsFact(s)) continue;
     const key = normalizeForMatch(s);
