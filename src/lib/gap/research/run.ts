@@ -49,6 +49,7 @@ export function failureClass(reason: string): FailureClass {
     reanchor_too_weak: 'REANCHOR_TOO_WEAK',
     page_does_not_name_account: 'WRONG_ACCOUNT',
     sentence_does_not_name_account: 'WRONG_ACCOUNT',
+    quoted_third_party: 'WRONG_ACCOUNT',
     not_a_physical_operations_fact: 'NOT_PHYSICAL_OPERATIONS',
     describes_past_event: 'STALE_EVENT',
     no_publication_date: 'UNDATED',
@@ -374,8 +375,18 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   // (a verbatim roundup sentence or a cited page can hold a competitor's or supplier's fact).
   // On the account's OWN site, "We ...", "Our ..." and "The company ..." are the account speaking about itself.
   const selfSubject = hostBelongsToAccount(c.url, ctx.accountKey) && /^(?:we|our|the company)\b/i.test(excerpt.trim());
-  if ((c.provider === 'signal' || c.provider === 'web') && !selfSubject && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
+  // Somebody quoted: the fact is the speaker's organization's ("... that's what we're doing with PepsiCo," said the
+  // CEO of Gatik). The account's own executive quoted is the account speaking.
+  const speaker = speakerOrg(excerpt);
+  if (speaker && !textNamesAccount(speaker, ctx.accountKey)) return { ok: false, reason: 'quoted_third_party' };
+  if ((c.provider === 'signal' || c.provider === 'web') && !selfSubject && !speaker && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
   return { ok: true, publishedAt: c.publishedAt, excerpt };
+}
+
+/** The organization a quoted sentence is attributed to ("..., said Jane Doe, CEO of Gatik"), else null. */
+export function speakerOrg(sentence: string): string | null {
+  const m = /\bsaid\b[^."“”;]{0,80}?\b(?:of|at|from)\s+([A-Z][\w&.'’-]*(?:\s+[A-Z][\w&.'’-]*){0,3})/.exec(sentence);
+  return m ? m[1] : null;
 }
 
 /** Store one VERIFIED candidate through the existing stores: EvidenceRecord + an evidence_record ProspectingSignal. */
