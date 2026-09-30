@@ -427,3 +427,10 @@ describe('scale dogfood reasoning fixes', () => {
     expect(b.fit).toMatchObject({ entityType: '3pl', fit: 'DIRECT_BUYER' });
   });
 });
+
+describe('scale dogfood: operators are asked about the sites they run', () => {
+  it.each([['3PL / Logistics', 'the warehouses and customer sites you run'], ['Trucking', 'your terminals and yards'], ['Marine Terminal', 'your terminals'], ['Grocery Retail', 'your DCs'], ['Food & Beverage', 'your plants and DCs']])('%s -> "%s"', (vertical, words) => {
+    const b = buildAccountBrief(base({ account: { ...base().account, vertical }, bids: [] }), NOW);
+    expect(b.discovery.find((q) => q.type === 'CURRENT_PROCESS')?.question).toBe(`How do trailers get checked in and found at ${words} today?`);
+  });
+});

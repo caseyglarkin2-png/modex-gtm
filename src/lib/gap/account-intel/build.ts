@@ -672,7 +672,7 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge):
   const onTop = (t: string) => i.bids.some((b) => b.type === t && (!top || b.hypothesisId === top.id || b.hypothesisId == null));
   const any = (t: string) => i.bids.some((b) => b.type === t);
   // Never name a site the buyer has not named (a satellite-found site in a first question reads as surveillance).
-  const where = PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your sites' : 'your plants and DCs';
+  const where = siteWords(i);
   const out: DiscoveryQuestion[] = [];
   if (!any('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do trailers get checked in and found at ${where} today?`, why: 'Current state first: it is non-leading and sets the pilot scope.' });
   if (!onTop('business_problem')) {
@@ -696,6 +696,16 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge):
   if (!any('future_state')) out.push({ type: 'DESIRED_FUTURE', question: 'What would good yards look like a year from now?', why: 'The desired future frames any proposal.' });
   if (!any('constraint')) out.push({ type: 'CHANGE_REQUIREMENT', question: 'What would a change have to clear: IT, security, the sites themselves?', why: 'Requirements decide whether a pilot can start.' });
   return out.slice(0, 7);
+}
+
+/** How to name the sites in a question, by what the company is (a 3PL runs customers' warehouses, a carrier terminals). */
+function siteWords(i: AccountInputs): string {
+  const t = entityTypeOf(i);
+  if (t === '3pl') return 'the warehouses and customer sites you run';
+  if (t === 'carrier') return 'your terminals and yards';
+  if (t === 'port_terminal') return 'your terminals';
+  if (t === 'retailer' || t === 'distributor') return 'your DCs';
+  return PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your sites' : 'your plants and DCs';
 }
 
 const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;

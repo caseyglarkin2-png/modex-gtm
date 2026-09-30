@@ -27,6 +27,7 @@ import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 import { factFitsOpener } from './opener';
 import { sellerRelevance } from './continuity';
+import { typeFromVertical } from '../account-intel/build';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -166,9 +167,14 @@ export async function proposeFromResearch(
   // One fact opens the first touch (red team T6/T7); a second outreach fact
   // stays linked as supporting evidence, never a second quote in the email.
   const observation = citedQuote(quotable[0].title, quotable[0].evidence_text!, quotable[0].id, run.account_name);
+  // A 3PL, carrier or terminal runs the sites: its thesis speaks to the yards it runs, not a shipper's production.
+  const acct: { vertical: string | null } | null = prisma.account?.findUnique ? await prisma.account.findUnique({ where: { name: run.account_name }, select: { vertical: true } }).catch(() => null) : null;
+  const operator = ['3pl', 'carrier', 'port_terminal'].includes(typeFromVertical(acct?.vertical ?? null) ?? '');
   const problemHypothesis =
     base?.problem_hypothesis ??
-    'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.';
+    (operator
+      ? 'My guess is that the change above moves load onto the gates, yards and docks you run, and that is where site capacity is won or lost.'
+      : 'My guess is that the network change above moves load onto the physical handoffs that remain, and that is where production capacity is won or lost.');
   const falsificationQuestions = asList(base?.falsification_questions).length
     ? asList(base?.falsification_questions)
     : ['Did the change above add trailer volume or dwell at the sites that remain?'];
@@ -178,7 +184,8 @@ export async function proposeFromResearch(
     rootCauses: asList(base?.root_cause_hypotheses),
     impacts: asList(base?.impact_hypotheses),
     wouldProveWrong: falsificationQuestions,
-    whatANoMeans: base?.what_a_no_means ?? null,
+    // A thesis GAP proposes always says what would close it (WRONG IF is never blank).
+    whatANoMeans: base?.what_a_no_means ?? (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yard: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard: this thesis is closed for this account.'),
     evidence: quotable.map((s) => ({ signalId: s.id, title: s.title, excerpt: s.evidence_text!, observedAt: s.observed_at.toISOString() })),
   };
 

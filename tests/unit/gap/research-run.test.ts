@@ -154,6 +154,18 @@ describe('PROPOSE UPDATED HYPOTHESIS', () => {
     expect(h.observation).not.toContain('Brazil');
   });
 
+  it('scale dogfood: a 3PL draft speaks to the yards it runs, and every GAP draft says what would close it', async () => {
+    const { prisma, t } = db();
+    prisma.account = { findUnique: async () => ({ vertical: '3PL / Logistics' }) };
+    t.hyps.length = 0; // no approved base thesis: GAP writes the draft itself
+    const run = await runEvidenceResearch(prisma, { ...input, personaId: null, hypothesisId: null, decisionId: null }, { ...edgarOnly([primary()]), fetchText: async () => PAGE });
+    expect(await proposeFromResearch(prisma, { researchRunId: run.runId, actor: 'casey', now: NOW })).toMatchObject({ ok: true });
+    const h = t.hyps.find((x) => x.source_ref === `research:${run.runId}`);
+    expect(h.problem_hypothesis).toMatch(/gates, yards and docks you run/);
+    expect(h.problem_hypothesis).not.toMatch(/production capacity/);
+    expect(h.what_a_no_means).toMatch(/^If trailers do not wait longer at the sites you run/);
+  });
+
   it('scale dogfood: a run whose only facts are a sale abroad proposes nothing', async () => {
     const { prisma } = db();
     const BRAZIL = 'We entered into a definitive agreement to sell our business in Brazil, including its two distribution centers and plant.';
