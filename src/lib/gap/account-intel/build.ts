@@ -778,7 +778,8 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
     case 'RELATIONSHIP_LED':
       return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
     default:
-      return liveFacts(i, now).length || /Not a shipper prospect/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
+      // A hold on the HubSpot link is cleared in HubSpot, not by research (the plan holds research until then).
+      return liveFacts(i, now).length || /Not a shipper prospect|not linked to a HubSpot company|deal state could not be read/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
   }
 }
 
@@ -969,7 +970,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const techBuyer = sections.technology.statements.find((s) => s.truth === 'BUYER_CONFIRMED');
   const techPublic = sections.technology.statements.find((s) => s.truth === 'VERIFIED_PUBLIC');
   const currentTech = techBuyer ? techBuyer.text : techPublic ? `Public mention only: ${techPublic.text}` : 'Unknown';
-  const dealStatement = sections.commercial.statements.find((s) => s.sources.some((x) => x.ref === 'deal-truth') || (s.truth === 'UNKNOWN' && /deal state/.test(s.text)));
+  const dealStatement = sections.commercial.statements.find((s) => s.sources.some((x) => x.ref === 'deal-truth') || (s.truth === 'UNKNOWN' && /deal state|opportunity state/.test(s.text)));
   const reach = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
   // Who probably owns it: operations titles only (never sourcing, procurement, category, planning or analyst), most senior first.
   const owners = (list: PersonaInput[]) => list.filter((p) => OWNER_TITLE.test(p.title ?? '') && !NOT_OWNER_TITLE.test(p.title ?? '')).sort((x, y) => titleSeniority(y.title) - titleSeniority(x.title));
