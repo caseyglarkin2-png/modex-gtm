@@ -194,21 +194,82 @@ export async function withModelFallback<T>(models: readonly string[], run: (mode
   throw last;
 }
 
+type GeminiCall = (prompt: string, search: boolean) => Promise<{ text: string; chunks: Array<{ uri?: string; title?: string }>; supports?: Array<{ text: string; chunks: number[] }> }>;
+
+/**
+ * Gemini in two steps. Newer Gemini models (the paid yardflow-llm key resolves gemini-flash-latest to 3.x) do not
+ * search when the prompt asks for JSON output, so an answer would be model memory. Step A researches the request
+ * in plain language WITH Google Search; step B formats those findings into the requested answer WITHOUT tools,
+ * told to use only them. Citations are step A's grounding chunks only, so every claim must still match a page or
+ * a site the search returned. No chunks in step A: nothing was searched, and the answer is not used.
+ */
+/** A Google grounding redirect resolved to the page it points at (one bounded HEAD, no body read); null if not. */
+async function resolveGroundingLink(uri: string): Promise<string | null> {
+  if (!/^https:\/\/vertexaisearch\.cloud\.google\.com\//.test(uri)) return uri;
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 4_000);
+  try {
+    const r = await fetch(uri, { method: 'HEAD', redirect: 'manual', signal: ctl.signal });
+    const loc = r.headers.get('location');
+    return loc && /^https?:\/\//.test(loc) ? loc : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+export async function geminiTwoStep(prompt: string, call: GeminiCall, resolve: (uri: string) => Promise<string | null> = resolveGroundingLink): Promise<ProviderAnswer> {
+  // The request without its output-format lines: any "return JSON" wording makes newer Gemini skip the search.
+  const request = prompt
+    .split('\n')
+    .filter((l) => !/\bjson\b|return only|^\s*[[{"]|"url"|copied verbatim|if you cannot find/i.test(l))
+    .join('\n')
+    .trim();
+  const research = await call(
+    `Research the request below with Google Search. Write your findings as plain sentences, each with the web page it came from. Leave out anything the search did not show.\n\nREQUEST:\n${request}`,
+    true,
+  );
+  const chunks = research.chunks;
+  if (!chunks.length) return { text: research.text, citations: [], citedHosts: [], note: 'Gemini did not search' };
+  // The pages the search actually read: each grounding redirect resolved to its page (falls back to the link).
+  const raw = chunks.map((c) => c.uri ?? '').filter((u) => /^https?:\/\//.test(u));
+  const pages = await Promise.all(raw.map((u) => resolve(u).catch(() => null)));
+  const links = raw.map((u, i) => pages[i] ?? u);
+  const citations = [...new Set([...links, ...raw])];
+  const citedHosts = chunks.map((c) => (c.title ?? '').trim().toLowerCase()).filter((t) => /^[a-z0-9.-]+\.[a-z]{2,}$/.test(t));
+  const sources = links.map((u, i) => `- ${chunks[i]?.title ?? 'source'}: ${u}`).join('\n');
+  // Each statement the search supports, with the page(s) it came from (Gemini's grounding supports), so the answer
+  // can cite the exact page. Without supports, the plain findings.
+  const supported = (research.supports ?? [])
+    .map((sp) => ({ text: sp.text.trim(), urls: [...new Set(sp.chunks.map((i) => links[i]).filter(Boolean))] }))
+    .filter((sp) => sp.text && sp.urls.length);
+  const findings = supported.length ? supported.map((sp) => `- ${sp.text} [source: ${sp.urls.join(' ; ')}]`).join('\n') : research.text;
+  const formatted = await call(
+    `${prompt}\n\nAnswer using ONLY the research findings below. Every url you give must be EXACTLY one of the source links below (copy it as written); leave out anything the findings do not support.\n\nFINDINGS (each with its source page):\n${findings}\n\nSOURCE LINKS THE SEARCH RETURNED:\n${sources}`,
+    false,
+  );
+  return { text: formatted.text, citations, citedHosts };
+}
+
 const gemini: ScoutProvider = {
   name: 'gemini',
   available: () => !!process.env.GEMINI_API_KEY,
   ask: async (prompt, signal) => {
     const { GoogleGenerativeAI } = await import('@google/generative-ai');
     const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    const res = await withModelFallback(GEMINI_MODELS(), (name) => client.getGenerativeModel({ model: name, tools: [{ googleSearch: {} } as unknown as never], generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never }).generateContent(prompt, { signal }));
-    // Search is a tool Gemini may skip: only an answer with grounding chunks searched. A claim must cite one of
-    // those chunks (its link is a Google grounding redirect to the page read) or a page on a site it read (the
-    // chunk title is that site's domain).
-    const meta = (res.response.candidates?.[0] as { groundingMetadata?: { groundingChunks?: Array<{ web?: { uri?: string; title?: string } }> } } | undefined)?.groundingMetadata;
-    const chunks = meta?.groundingChunks ?? [];
-    const citations = chunks.map((c) => c.web?.uri ?? '').filter((u) => /^https?:\/\//.test(u));
-    const citedHosts = chunks.map((c) => (c.web?.title ?? '').trim().toLowerCase()).filter((t) => /^[a-z0-9.-]+\.[a-z]{2,}$/.test(t));
-    return { text: res.response.text(), citations, citedHosts, note: chunks.length ? undefined : 'Gemini did not search' };
+    const call: GeminiCall = async (text, search) => {
+      const res = await withModelFallback(GEMINI_MODELS(), (name) =>
+        client.getGenerativeModel({ model: name, ...(search ? { tools: [{ googleSearch: {} } as unknown as never] } : {}), generationConfig: { temperature: 0, maxOutputTokens: 4096, thinkingConfig: { thinkingBudget: 512 } } as never }).generateContent(text, { signal }),
+      );
+      const meta = (res.response.candidates?.[0] as { groundingMetadata?: { groundingChunks?: Array<{ web?: { uri?: string; title?: string } }>; groundingSupports?: Array<{ segment?: { text?: string }; groundingChunkIndices?: number[] }> } } | undefined)?.groundingMetadata;
+      return {
+        text: res.response.text(),
+        chunks: (meta?.groundingChunks ?? []).map((c) => ({ uri: c.web?.uri, title: c.web?.title })),
+        supports: (meta?.groundingSupports ?? []).map((sp) => ({ text: sp.segment?.text ?? '', chunks: sp.groundingChunkIndices ?? [] })),
+      };
+    };
+    return geminiTwoStep(prompt, call);
   },
 };
 
