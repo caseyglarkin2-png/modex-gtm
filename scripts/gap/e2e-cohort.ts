@@ -8,9 +8,10 @@
  *      person-level stops win
  *   K2 the ONE research worker picks each research account once (people
  *      counted), never one job per person
- *   K3 a verified fact at one account: that account is EVIDENCE READY and its
- *      person a FACT-LED opportunity; the other account's person (relationship
- *      context, no fact) is RELATIONSHIP-LED and GAP will not draft for them
+ *   K3 a verified fact at one account, no thesis grounded in it yet: its person
+ *      is shown the fact but is RELATIONSHIP-LED (fact-led is problem-led and
+ *      needs a grounded thesis, motion/approach.ts); the other account's person
+ *      (relationship context, no fact) is RELATIONSHIP-LED; GAP drafts for neither
  *   K4 the relationship context reaches the brief loader and the send
  *      attribution (every source recorded)
  *   K5 nothing drafted, sent or enrolled: no hypothesis, no execution row
@@ -110,8 +111,8 @@ async function main(): Promise<number> {
     const opps = await loadOpportunities(prisma, src.id, NOW);
     const oa = opps.find((o) => o.person.name === 'Ana Alpha');
     const ob = opps.find((o) => o.person.name === 'Bo Beta');
-    expect('K3 opportunities', oa?.approach === 'fact_led' && oa.whyAccount === fact && ob?.approach === 'relationship_led' && ob.safety.state === 'caution' && !opps.some((o) => o.person.name === 'Dee Nocontact'), JSON.stringify(opps.map((o) => [o.person.name, o.approach, o.safety.state])));
-    pass('K3 opportunities', `Ana Alpha fact-led on the verified fact; Bo Beta relationship-led (no fact: GAP will not draft); the do-not-contact person is not an opportunity`);
+    expect('K3 opportunities', oa?.approach === 'relationship_led' && oa.whyAccount === fact && ob?.approach === 'relationship_led' && ob.safety.state === 'caution' && !opps.some((o) => o.person.name === 'Dee Nocontact'), JSON.stringify(opps.map((o) => [o.person.name, o.approach, o.safety.state])));
+    pass('K3 opportunities', `Ana Alpha shown the verified fact but relationship-led (no thesis grounded in it yet); Bo Beta relationship-led (no fact); GAP drafts for neither; the do-not-contact person is not an opportunity`);
 
     // ---- K4
     const ctx = await loadRelationshipContext(prisma, { personaId: pa.id, accountName: A });
