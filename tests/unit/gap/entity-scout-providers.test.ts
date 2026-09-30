@@ -5,7 +5,7 @@
  * provider chain, and a failed pass is never stored as a verdict.
  */
 import { beforeEach, describe, expect, it } from 'vitest';
-import { _resetCooldowns, askGrounded, classifyProviderError, groundedOnly, urlsIn, withModelFallback, type ProviderAnswer, type ScoutProvider } from '@/lib/gap/entity/providers';
+import { _resetCooldowns, askGrounded, classifyProviderError, geminiTwoStep, groundedOnly, urlsIn, withModelFallback, type ProviderAnswer, type ScoutProvider } from '@/lib/gap/entity/providers';
 import { scoutCompany } from '@/lib/gap/entity/scout';
 import { scoutCandidate } from '@/lib/gap/entity/candidates';
 
@@ -126,6 +126,38 @@ describe('the provider chain', () => {
     const calls: string[] = [];
     await expect(withModelFallback(['gemini-2.5-flash', 'gemini-flash-latest'], async (m) => { calls.push(m); throw quota; })).rejects.toBe(quota);
     expect(calls).toEqual(['gemini-2.5-flash']);
+  });
+
+  it('Gemini researches with search, then formats without tools; citations are the research chunks only (paid key: JSON prompts skip search)', async () => {
+    const calls: Array<{ text: string; search: boolean }> = [];
+    const redirect = (id: string) => `https://vertexaisearch.cloud.google.com/grounding-api-redirect/${id}`;
+    const ans = await geminiTwoStep(
+      'Identify Kenco. Return ONLY JSON.',
+      async (text, search) => {
+        calls.push({ text, search });
+        return search
+          ? { text: 'Kenco operates 100 distribution centers.', chunks: [{ uri: redirect('A'), title: 'kenco.example' }, { uri: redirect('B'), title: 'kenco.example' }], supports: [{ text: 'Kenco operates 100 distribution centers.', chunks: [0] }] }
+          : { text: SCOUT_JSON, chunks: [] };
+      },
+      async (u) => (u === redirect('A') ? 'https://kenco.example/locations' : u === redirect('B') ? 'https://kenco.example/fleet/' : null),
+    );
+    expect(calls.map((c) => c.search)).toEqual([true, false]);
+    expect(calls[0].text).toMatch(/^Research the request below with Google Search\. Do NOT answer in JSON/);
+    expect(calls[1].text).toMatch(/- Kenco operates 100 distribution centers\. \[source: https:\/\/kenco\.example\/locations\]/);
+    expect(calls[1].text).toMatch(/- kenco\.example: https:\/\/kenco\.example\/locations/);
+    expect(ans.citations).toEqual(['https://kenco.example/locations', 'https://kenco.example/fleet/', redirect('A'), redirect('B')]);
+    // claims on the resolved PAGES match page for page (they corroborate); a claim elsewhere is dropped
+    const r = await scoutCompany('Kenco Logistics', { providers: [prov('gemini', async () => ans)] });
+    expect(r.network.map((c) => c.url)).toEqual(['https://kenco.example/locations']);
+    expect(r.freight.map((c) => (c as { siteOnly?: boolean }).siteOnly)).toEqual([undefined]);
+    expect(r.verdict).toBe('DIRECT_BUYER');
+  });
+
+  it('Gemini that did not search in the research step is not used, and no format call is made', async () => {
+    let n = 0;
+    const ans = await geminiTwoStep('q', async () => (n++, { text: 'from memory', chunks: [] }));
+    expect(n).toBe(1);
+    expect(ans).toMatchObject({ citations: [], citedHosts: [], note: 'Gemini did not search' });
   });
 
   it('groundedOnly matches host and path, ignoring www, query, fragment and a trailing slash', () => {
