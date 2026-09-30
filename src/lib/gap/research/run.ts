@@ -302,6 +302,32 @@ export function textNamesAccount(text: string, accountKey: string): boolean {
 }
 
 /**
+ * The account is the SUBJECT of the sentence, not a party mentioned around someone else's fact: it is named
+ * near the start (after an optional "The", a date or a dateline), never after "unlike", "than", "with", "to" or
+ * "a/an", and never as "<account> rival / supplier / customer / partner". "Walmart, a Kroger rival, opened ...",
+ * "Kroger supplier Acme opened ..." and "Unlike Kroger, Albertsons ..." are not Kroger's facts.
+ */
+export function accountIsSubject(sentence: string, accountKey: string): boolean {
+  if (!accountKey) return false;
+  const words = sentence.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim().split(' ');
+  const key = accountKey.split(' ');
+  let at = -1;
+  for (let i = 0; i + key.length <= words.length; i++) if (key.every((k, j) => words[i + j] === k)) { at = i; break; }
+  if (at < 0) return false;
+  // "<partner> moves freight for <account>": the account's own operation, run by a partner ("Gatik moves freight
+  // for PepsiCo across 250 retail locations"). Only "for" right before the account; rivals and suppliers stay out.
+  if (words[at - 1] === 'for' && at <= 15) return !/\b(rival|competitor|supplier|unlike|competes)\b/.test(words.slice(0, at).join(' '));
+  if (at > 8) return false;
+  const before = words.slice(Math.max(0, at - 2), at);
+  if (before.some((w) => /^(unlike|than|with|to|a|an|like|versus|vs|from|by|against|beat|beats)$/.test(w))) return false;
+  const after = words.slice(at + key.length, at + key.length + 2).join(' ');
+  if (/^(s )?(rival|rivals|competitor|competitors|supplier|suppliers|customer|customers|partner|partners|vendor|vendors|client|clients)\b/.test(after)) return false;
+  // Everything before the account is a date or an opener, never another company's clause.
+  const lead = words.slice(0, at).join(' ');
+  return !lead || /^(?:the|on|in|as of|by|during|after|following|earlier|today|this|last|(?:january|february|march|april|may|june|july|august|september|october|november|december)|\d{1,4}|[a-z]+ \d{1,2}|,| )+$/.test(lead + ' ') || /^(on|in) /.test(lead);
+}
+
+/**
  * THE verification contract for a public fact, whoever proposed it (EDGAR,
  * web research, or Casey typing a URL and a sentence). Accepted only if it is
  * dated, states a physical-operations change, and its excerpt is found
@@ -344,7 +370,9 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   if (c.provider !== 'edgar' && !textNamesAccount(page, ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
   // A sentence taken from a signal's own page must itself name the account (a competitor's paragraph on the
   // same page is not this account's fact).
-  if (c.provider === 'signal' && !textNamesAccount(c.excerpt, ctx.accountKey)) return { ok: false, reason: 'sentence_does_not_name_account' };
+  // Every sentence GAP did not take from the account's own filing must be ABOUT the account: named as the subject
+  // (a verbatim roundup sentence or a cited page can hold a competitor's or supplier's fact).
+  if ((c.provider === 'signal' || c.provider === 'web') && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
   return { ok: true, publishedAt: c.publishedAt, excerpt };
 }
 

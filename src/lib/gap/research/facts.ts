@@ -92,7 +92,7 @@ export function isAcquisitionFact(sentence: string): boolean {
  * facilities" state nothing that happened or is scheduled.
  */
 // The month "May" ("On May 9, 2026", "In May 2026") is a date, not the modal "may".
-const HYPOTHETICAL = /\b(?:might|could)\b|\bwould\b(?<!\b(?:said|announced|confirmed|stated|disclosed)\s+(?:that\s+)?(?:it|the company)\s+would)|\bmay\b(?!\s+\d)(?<!\b(?:in|on|of|since|until|by|through|from|early|late|mid|during)\s+may)/i;
+const HYPOTHETICAL = /\b(?:might|could)\b|\bif (?:approved|finalized|completed|granted|successful|funded)\b|\bpending (?:approval|regulatory|review)\b|\bsubject to (?:(?:regulatory|shareholder|stockholder|board|zoning|city|county|state|federal) )?(?:approvals?|permits?|financing)\b|\bwould\b(?<!\b(?:said|announced|confirmed|stated|disclosed)\s+(?:that\s+)?(?:it|the company)\s+would)|\bmay\b(?!\s+\d)(?<!\b(?:in|on|of|since|until|by|through|from|early|late|mid|during)\s+may)/i;
 
 /** A "network" that is not a physical one (the retail-media, loyalty or IT kind). */
 const NON_PHYSICAL_NETWORK = /\b(?:digital|media|social|payments?|loyalty|advertising|data|computer|telecom|wireless|dealer|franchise)\s+networks?\b/gi;
@@ -287,7 +287,8 @@ export function extractFactSentences(text: string, max = 12): string[] {
   const out: string[] = [];
   for (const raw of splitSentencesAware(text)) {
     // A wire-service dateline says where the release was filed; the fact is the text after it (still verbatim).
-    const s = raw.replace(/\s+/g, ' ').trim().replace(/^.{0,160}?\((?:GLOBE NEWSWIRE|BUSINESS WIRE|PR ?Newswire|PRNewswire|ACCESSWIRE|Canada NewsWire)\)\s*(?:--|[-\u2013\u2014])\s*/i, '');
+    // Only a real dateline ("HOUSTON and WHITESTONE, N.Y., March 30, 2026 (GLOBE NEWSWIRE) --"), never a clause.
+    const s = raw.replace(/\s+/g, ' ').trim().replace(/^(?:[A-Z][A-Za-z.'-]*(?: [A-Z][A-Za-z.'-]*)*,? (?:and [A-Z][A-Za-z.'-]*(?: [A-Z][A-Za-z.'-]*)*,? )?(?:[A-Z]{2}\.?|[A-Z]\.[A-Z]\.|[A-Z][a-z]+\.?)?,? ?)?(?:[A-Z][a-z]{2,8}\.? \d{1,2}, \d{4} )?\((?:GLOBE NEWSWIRE|BUSINESS WIRE|PR ?Newswire|PRNewswire|ACCESSWIRE|Canada NewsWire)\) ?(?:--|\u2013|\u2014) ?/, '');
     if (s.length < 60 || s.length > 500) continue;
     if (!isPhysicalOpsFact(s)) continue;
     const key = normalizeForMatch(s);
