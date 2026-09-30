@@ -744,6 +744,22 @@ function siteWedge(i: AccountInputs): Wedge {
 /** The actual blocker when the account has no HubSpot company: said as such, never as a failed deal read. */
 const UNLINKED = 'Cannot verify opportunity state because this GAP account is not linked to a HubSpot company: held, never cold. Link the HubSpot company (or confirm there is none) to clear it.';
 
+/**
+ * The lead grounded thesis opens on context (a sale abroad or a divestiture, seller relevance 7+) while a more
+ * seller-relevant live fact exists: the thesis needs review on that fact. Null otherwise.
+ */
+function inferiorOpener(i: AccountInputs, now: Date): { reason: string; opener: string; best: string } | null {
+  const top = hypothesisViews(i, now).find((h) => h.grounded && h.truth !== 'CONTRADICTED');
+  const hyp = top ? i.hypotheses.find((h) => h.id === top.id) : null;
+  const opener = hyp ? i.facts.find((f) => f.id === hyp.primarySignalId) : null;
+  const best = rankedFacts(i, now)[0];
+  if (!opener || !best || best.id === opener.id) return null;
+  const o = sellerRelevance(opener.quote);
+  if (o.rank < 7 || sellerRelevance(best.quote).rank >= o.rank) return null;
+  const clip = (t: string) => (t.length > 110 ? `${t.slice(0, 107)}...` : t);
+  return { reason: o.reason, opener: clip(opener.quote), best: clip(best.quote) };
+}
+
 /** The next action, read off the ONE motion decision (never a second decision tree). */
 function nextAction(i: AccountInputs, m: Motion, now: Date): string {
   switch (m.type) {
@@ -751,8 +767,13 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       return 'Work the deal (In Deals), never cold. Next learning: the Deal brief objective.';
     case 'FOLLOW_UP':
       return `Follow up with ${m.who ?? 'them'} in the existing thread.`;
-    case 'FACT_LED':
+    case 'FACT_LED': {
+      // A lead thesis that opens on context (a sale abroad, a divestiture) while a better current fact exists is
+      // not what Casey should work from: review it on the better fact first. Nothing is rewritten.
+      const weak = inferiorOpener(i, now);
+      if (weak) return `Review the thesis before any first touch: it opens on ${weak.reason} ("${weak.opener}"), but the best current fact is "${weak.best}". Revise it on that fact (Research: use this fact), or reject it.`;
       return `Review the thesis, then use the verified fact in a first touch to ${m.who ?? 'the primary person'} (every gate runs at the click).`;
+    }
     case 'REFERRAL_LED':
     case 'RELATIONSHIP_LED':
       return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
