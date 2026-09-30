@@ -121,7 +121,7 @@ describe('runBackgroundResearch', () => {
     const r = await runBackgroundResearch(db.prisma, { now: NOW }, { ...research([{ ...webFact(), excerpt: 'PepsiCo will open a brand new distribution center in Ohio next spring.' }]), loadGroups: noGroups, listQueue: noQueue });
     expect(r.researched[0]).toMatchObject({ outcome: 'insufficient_evidence', facts: 0, rejected: 1 });
     expect(db.writes.every((w) => /^(researchRun|evidenceRecord|prospectingSignal|gapAuditEvent)\./.test(w))).toBe(true);
-    expect(db.runs[0].provider_status.result.rejected[0]).toMatchObject({ reason: 'excerpt_not_found_at_source' });
+    expect(db.runs[0].provider_status.result.rejected[0]).toMatchObject({ reason: 'reanchor_too_weak' });
   });
 
   it('idempotent: an account researched within the cooldown is skipped unless a newer trigger arrived', async () => {

@@ -13,8 +13,10 @@
  */
 import type { SignalType } from '../taxonomy';
 
-const FACILITY = /\b(distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
-const CHANGE = /\b(open(?:ed|ing|s)?|clos(?:e|ed|es|ing|ure|ures)|exit(?:ed|ing|s)?|consolidat(?:e|ed|es|ing|ion)|expan(?:d|ded|ding|sion)|build(?:s)?|built|construct(?:ed|ing|ion)?|automat(?:e|ed|es|ing|ion)|robot(?:ic|ics)?|acquir(?:e|ed|es|ing)|acquisition|relocat(?:e|ed|ing|ion)|redesign(?:ed)?|add(?:ed|ing)? capacity)\b/i;
+const FACILITY = /\b((?:terminal|yard|electric) tractors?|hostlers?|spotter trucks?|linear feet of (?:rail )?track|rail (?:yards?|spurs?|infrastructure)|(?:container|marine|intermodal) terminals?|pallet positions?|square feet of (?:(?:new|additional|temperature-controlled|refrigerated|frozen) )?(?:warehouse|distribution|manufacturing|industrial|cold[- ]storage|production|fulfil?lment|freezer|cooler) space|(?:manufacturing|production|distribution|warehouse|plant|industrial|fulfil?lment|cold[- ]storage|existing [A-Z][a-z]+) sites?|distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
+// Scale dogfood (paid research): real operations verbs the gate missed: "ceased manufacturing and warehouse
+// operations", "shut down its warehouse", "idled five facilities", "the groundbreaking of our newest facility".
+const CHANGE = /\b(grow(?:s|ing)? (?:the |its )?(?:facility['’]s |site['’]s )?(?:electric )?fleet|add(?:s|ed|ing)? (?:approximately |about |over |more than |nearly |roughly |some |an additional )?[\d,.]+(?:\s|-)(?:square|sq|pallet|dock|doors?|acres?|jobs|positions|bays|linear)|replac(?:e|es|ed|ing) (?:the |its |an? )?(?:former|existing|older|old|previous)|operational since|reopen(?:ed|ing|s)?|demoli(?:sh|shed|shing|tion)|discontinu(?:e|ed|es|ing)|deploy(?:s|ed|ing|ment)?|ceas(?:e|ed|es|ing)|shut(?:s|ting)? down|shutdown|idl(?:e|ed|es|ing)|mothball(?:s|ed|ing)?|groundbreaking|grand opening|wind(?:s|ing)? down|went live|goes live|commenc(?:e|ed|es|ing)|open(?:ed|ing|s)?|clos(?:e|ed|es|ing|ure|ures)|exit(?:ed|ing|s)?|consolidat(?:e|ed|es|ing|ion)|expan(?:d|ded|ding|sion)|build(?:s)?|built|construct(?:ed|ing|ion)?|automat(?:e|ed|es|ing|ion)|robot(?:ic|ics)?|acquir(?:e|ed|es|ing)|acquisition|relocat(?:e|ed|ing|ion)|redesign(?:ed)?|add(?:ed|ing)? capacity)\b/i;
 
 export type FactChange = 'opening' | 'closure' | 'expansion' | 'automation' | 'acquisition' | 'relocation' | 'investment';
 
@@ -89,7 +91,8 @@ export function isAcquisitionFact(sentence: string): boolean {
  * plants", "we might build warehouses", "could result in investments in
  * facilities" state nothing that happened or is scheduled.
  */
-const HYPOTHETICAL = /\b(?:may|might|could|would)\b/i;
+// The month "May" ("On May 9, 2026", "In May 2026") is a date, not the modal "may".
+const HYPOTHETICAL = /\b(?:might|could)\b|\bif (?:approved|finalized|completed|granted|successful|funded)\b|\bpending (?:approval|regulatory|review)\b|\bsubject to (?:(?:regulatory|shareholder|stockholder|board|zoning|city|county|state|federal) )?(?:approvals?|permits?|financing)\b|\bwould\b(?<!\b(?:said|announced|confirmed|stated|disclosed)\s+(?:that\s+)?(?:it|the company)\s+would)|\bmay\b(?!\s+\d)(?<!\b(?:in|on|of|since|until|by|through|from|early|late|mid|during)\s+may)/i;
 
 /** A "network" that is not a physical one (the retail-media, loyalty or IT kind). */
 const NON_PHYSICAL_NETWORK = /\b(?:digital|media|social|payments?|loyalty|advertising|data|computer|telecom|wireless|dealer|franchise)\s+networks?\b/gi;
@@ -122,7 +125,7 @@ const BOILERPLATE = new RegExp(
 );
 
 /** The sentence reports an event (it happened, is under way, or is scheduled), not a description. */
-const EVENT_MARKER = /\b(?:will|plans? to|planning to|announced|announces|expects? to|expected to|is expected|are expected|opened|closed|completed|began|begins|broke ground|breaks ground|shutter(?:s|ed|ing)?|agreed to|has (?:opened|closed|begun|started)|have (?:opened|closed)|to (?:open|close|build|expand|consolidate|relocate|shutter|exit)|under construction|construction of the new|recently (?:opened|closed|expanded|completed)|by (?:closing|opening|consolidating|relocating|expanding|building)|(?:closing|opening|consolidating|relocating|shuttering) (?:facilities|plants|its|the|two|three|four|several))\b/i;
+const EVENT_MARKER = /\b(?:contracted with [^.]{0,60}? for \d|added|adds|replaces the|replaced the|operational since|reopened|reopens|demolition|would discontinue|will discontinue|discontinued|deploying|deployed|deploys|is (?:actively )?(?:consolidating|closing|opening|building|expanding)|are (?:consolidating|closing|opening|building|expanding)|ceased|shut down|shuts down|idled|celebrated|groundbreaking|grand opening|went live|commenced|began operations|officially (?:opened|closed|shut|launched)|completed (?:an|the|its) expansion|announcement|will|plans? to|planning to|announced|announces|expects? to|expected to|is expected|are expected|opened|closed|completed|began|begins|broke ground|breaks ground|shutter(?:s|ed|ing)?|agreed to|has (?:opened|closed|begun|started)|have (?:opened|closed)|to (?:open|close|build|expand|consolidate|relocate|shutter|exit)|under construction|construction of the new|recently (?:opened|closed|expanded|completed)|by (?:closing|opening|consolidating|relocating|expanding|building)|(?:closing|opening|consolidating|relocating|shuttering) (?:facilities|plants|its|the|two|three|four|several))\b/i;
 
 /** A payment, proceeds or entitlement around a "definitive agreement" is money, not a site. */
 const PAYMENT_CONTEXT = /\b(?:cash payment|entitled to|net proceeds|proceeds from|received in)\b/i;
@@ -134,6 +137,17 @@ export function isBoilerplate(sentence: string): boolean {
 /** A run-on of page navigation ("Regulation Technology Labor Operations Equipment M&A An article from...") or a paragraph is not one statement. */
 export function isRunOnOrNavigation(sentence: string): boolean {
   if (sentence.trim().split(/\s+/).length > 70) return true;
+  // Page chrome glued to a fact (cited-page reading): markup residue, UI controls, a title separator.
+  if (/\]:|\bdata-[a-z-]+|="|">|<\/?[a-z]|[{}]|\btext-[a-z]+-[a-z]+/i.test(sentence)) return true;
+  if (/\b(?:Skip to (?:main )?content|Search Query|Submit Search|Focus mode|Show Search|Advertisement|Set us as preferred|Subscribe (?:now|to)|Sign up for|Share (?:on|this)|Follow us|Accept (?:all )?cookies|Newsletter)\b/i.test(sentence)) return true;
+  if (/\s\|\s/.test(sentence)) return true;
+  // A headline glued to its body ("More Value : By opening ...") or a cookie / menu bar before the text.
+  if (/\s:\s/.test(sentence)) return true;
+  const ui = sentence.match(/\b(?:Accept|Customize|Decline|Log in|Sign in|SUBSCRIBE|Subscribe|Menu|Home|About|Contact|magnifying-glass|Search)\b/g) ?? [];
+  if (new Set(ui).size >= 3) return true;
+  // Headline case: most words capitalized is a title or a menu, not a sentence.
+  const words = sentence.split(/\s+/).filter((w) => /^[A-Za-z]{3,}/.test(w));
+  if (words.length >= 10 && words.filter((w) => /^[A-Z]/.test(w)).length / words.length > 0.7) return true;
   if (/\bAn article from\b/.test(sentence)) return true;
   const t = sentence.trim();
   // A page control run into the text ("Learn more News & Media ..."): navigation, not a sentence.
@@ -272,7 +286,9 @@ export function extractFactSentences(text: string, max = 12): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
   for (const raw of splitSentencesAware(text)) {
-    const s = raw.replace(/\s+/g, ' ').trim();
+    // A wire-service dateline says where the release was filed; the fact is the text after it (still verbatim).
+    // Only a real dateline ("HOUSTON and WHITESTONE, N.Y., March 30, 2026 (GLOBE NEWSWIRE) --"), never a clause.
+    const s = raw.replace(/\s+/g, ' ').trim().replace(/^(?:[A-Z][A-Za-z.'-]*(?: [A-Z][A-Za-z.'-]*)*,? (?:and [A-Z][A-Za-z.'-]*(?: [A-Z][A-Za-z.'-]*)*,? )?(?:[A-Z]{2}\.?|[A-Z]\.[A-Z]\.|[A-Z][a-z]+\.?)?,? ?)?(?:[A-Z][a-z]{2,8}\.? \d{1,2}, \d{4} )?\((?:GLOBE NEWSWIRE|BUSINESS WIRE|PR ?Newswire|PRNewswire|ACCESSWIRE|Canada NewsWire)\) ?(?:--|\u2013|\u2014) ?/, '');
     if (s.length < 60 || s.length > 500) continue;
     if (!isPhysicalOpsFact(s)) continue;
     const key = normalizeForMatch(s);
@@ -306,10 +322,26 @@ export function htmlToText(html: string): string {
     .replace(/&#8216;|&lsquo;/g, '‘')
     .replace(/&#8220;|&ldquo;/g, '“')
     .replace(/&#8221;|&rdquo;/g, '”')
+    // Every other entity decodes to its character ("Caf&#233;" is "Café", "15,000 m&sup2;" is "15,000 m²"); an
+    // unknown named entity is dropped, never turned into a space inside a word.
+    .replace(/&#(\d+);/g, (_, n) => safeChar(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => safeChar(parseInt(h, 16)))
+    .replace(/&([a-z]+[0-9]?);/gi, (m, name) => (Object.hasOwn(NAMED_ENTITY, name) ? NAMED_ENTITY[name] : /^(amp|lt|gt|quot|apos)$/i.test(name) ? m : ''))
     .replace(/&amp;/g, '&')
-    .replace(/&#[0-9]+;/g, ' ')
     .replace(/\s+/g, ' ');
 }
+
+// Printable characters only: no controls, lone surrogates, zero-width or bidi overrides, line separators or BOM.
+const safeChar = (n: number) =>
+  Number.isFinite(n) && n > 31 && n < 0x10ffff && !(n >= 0x7f && n <= 0x9f) && !(n >= 0xd800 && n <= 0xdfff) && !(n >= 0x200b && n <= 0x200f) && !(n >= 0x2028 && n <= 0x202e) && !(n >= 0x2066 && n <= 0x2069) && n !== 0xfeff
+    ? String.fromCodePoint(n)
+    : ' ';
+const NAMED_ENTITY: Record<string, string> = {
+  eacute: 'é', Eacute: 'É', egrave: 'è', Egrave: 'È', ecirc: 'ê', aacute: 'á', agrave: 'à', acirc: 'â', auml: 'ä', Auml: 'Ä',
+  ccedil: 'ç', Ccedil: 'Ç', iacute: 'í', ntilde: 'ñ', oacute: 'ó', ocirc: 'ô', ouml: 'ö', Ouml: 'Ö', uacute: 'ú', uuml: 'ü', Uuml: 'Ü',
+  atilde: 'ã', otilde: 'õ', szlig: 'ß', sup2: '²', sup3: '³', deg: '°', ndash: '–', mdash: '—', hellip: '…', reg: '®', trade: '™', copy: '©',
+  quot: '"', apos: "'", lt: '<', gt: '>', middot: '·', bull: '•', frac12: '½', times: '×',
+};
 
 /** The anti-fabrication rule: the excerpt must appear at its own source. */
 export function excerptFoundIn(excerpt: string, pageText: string): boolean {
@@ -327,17 +359,102 @@ const numbersIn = (t: string) => new Set((normalizeForMatch(t).match(/\d[\d,.]*/
  * number the proposal states; the stored quote is then the page's verbatim sentence, never the paraphrase.
  * Null when no sentence qualifies (the proposal is rejected as not found at the source).
  */
+/**
+ * What a sentence ASSERTS, beyond its words: a re-anchored page sentence must assert the same thing. Negation,
+ * direction (open vs close), acquisition side (buy vs sell), plan vs done, and every named place or party.
+ */
+const NEG = /\b(not|no|never|without|won'?t|isn'?t|didn'?t|doesn'?t|cancel\w*|halt\w*|suspend\w*|scrap\w*|abandon\w*|delay\w*)\b/i;
+const FEATURES: Array<[string, RegExp]> = [
+  ['open', /\b(open\w*|launch\w*|expand\w*|build\w*|construct\w*|add(s|ed|ing)?|new)\b/i],
+  ['close', /\b(clos\w*|shut\w*|consolidat\w*|exit\w*|reduc\w*|cut\w*|wind\w* down)\b/i],
+  ['buy', /\b(acquir\w*|purchas\w*|buy\w*|bought)\b/i],
+  ['sell', /\b(sell\w*|sold|divest\w*|sale)\b/i],
+  ['plan', /\b(will|plans?|planned|planning|expects?|expected|propos\w*|intends?|to (open|build|close|begin))\b/i],
+  ['done', /\b(opened|completed|finished|began|launched|closed|has (opened|closed|completed|begun))\b/i],
+];
+const asserts = (t: string) => new Set([...(NEG.test(t) ? ['neg'] : []), ...FEATURES.filter(([, re]) => re.test(t)).map(([k]) => k)]);
+/** Proper names in the proposal (places, parties): capitalized words past the first, each must be on the sentence. */
+const properNames = (t: string) =>
+  new Set(
+    t.replace(/\s+/g, ' ').trim()
+      .split(/\s+/)
+      .slice(1)
+      .map((w) => w.replace(/[^A-Za-z]/g, ''))
+      .filter((w) => w.length >= 3 && /^[A-Z]/.test(w) && !/^(The|This|That|These|Its|Our|In|On|At|By|For|And|With|From|New)$/.test(w))
+      .map((w) => w.toLowerCase()),
+  );
+/** Every capitalized name in a text, its first word included (the account name usually leads). */
+const allNames = (t: string) =>
+  new Set(
+    t.replace(/\s+/g, ' ').trim()
+      .split(/\s+/)
+      .map((w) => w.replace(/[^A-Za-z]/g, ''))
+      .filter((w) => w.length >= 3 && /^[A-Z]/.test(w))
+      .map((w) => w.toLowerCase()),
+  );
+
+/** Same claim, not just similar words: every assertion and named place/party of the proposal is on the sentence. */
+/** Number + the unit word after it ("250 jobs", "84,000 square", "12 plants"). */
+const unitNumbers = (t: string) => {
+  const out = new Map<string, Set<string>>();
+  for (const m of normalizeForMatch(t).toLowerCase().matchAll(/(\d[\d,.]*)\s*(?:-|\s)?\s*([a-z]+)/g)) {
+    const n = m[1].replace(/[,.]+$/, '').replace(/,/g, '');
+    const u = m[2].replace(/s$/, '');
+    if (!out.has(u)) out.set(u, new Set());
+    out.get(u)!.add(n);
+  }
+  return out;
+};
+/** Where the proposal and the sentence both count the same unit, the counts agree ("250 jobs" vs "900 jobs" is a different fact). */
+function sameNumbers(proposal: string, sentence: string): boolean {
+  const a = unitNumbers(proposal);
+  const b = unitNumbers(sentence);
+  for (const [u, ns] of b) {
+    const theirs = a.get(u);
+    if (theirs && ![...ns].some((n) => theirs.has(n))) return false;
+  }
+  return true;
+}
+
+/**
+ * The page sentence asserts nothing the proposal does not: no negation the proposal lacks (or the reverse), no
+ * direction the proposal lacks (open vs close, buy vs sell), never done-vs-planned opposite. The sentence may state
+ * LESS than the proposal (a proposal summarizes several sentences); it may never state something different.
+ */
+export function sameAssertion(proposal: string, sentence: string): boolean {
+  const a = asserts(proposal);
+  const b = asserts(sentence);
+  if (a.has('neg') !== b.has('neg')) return false;
+  for (const k of ['open', 'close', 'buy', 'sell']) if (b.has(k) && !a.has(k)) return false;
+  if ((a.has('plan') && !a.has('done') && b.has('done') && !b.has('plan')) || (a.has('done') && !a.has('plan') && b.has('plan') && !b.has('done'))) return false;
+  return true;
+}
+
+/**
+ * The page's OWN sentence for a proposal (a search model restates and summarizes what it read). A page fact
+ * sentence qualifies only when it is CONTAINED in the proposal's claim: at least 60% of the sentence's content
+ * words (and at least 5) are in the proposal, every number the sentence states is in the proposal, it asserts
+ * nothing different (sameAssertion), and it names one of the proposal's places or parties when the proposal names
+ * any. The stored quote is always the page's verbatim sentence; null rejects the proposal.
+ */
 export function pageSentenceFor(excerpt: string, pageText: string): string | null {
   const want = contentWords(excerpt);
-  const nums = numbersIn(excerpt);
+  const names = [...properNames(excerpt)];
   if (want.size < 4) return null;
   let best: { s: string; score: number } | null = null;
   for (const s of extractFactSentences(pageText, 400)) {
     const have = contentWords(s);
-    const shared = [...want].filter((w) => have.has(w)).length / want.size;
-    const sNums = numbersIn(s);
-    if (shared < 0.7 || [...nums].some((n) => !sNums.has(n))) continue;
-    if (!best || shared > best.score) best = { s, score: shared };
+    const inProposal = [...have].filter((w) => want.has(w)).length;
+    const contained = have.size ? inProposal / have.size : 0;
+    if (inProposal < 5 || contained < 0.5) continue;
+    if (!sameNumbers(excerpt, s)) continue;
+    if (!sameAssertion(excerpt, s)) continue;
+    // Every place or party the sentence names is one the proposal names (Fresno is not Stockton).
+    const allowed = allNames(excerpt);
+    if (![...allNames(s)].every((n) => allowed.has(n) || /^(the|this|that|these|its|our|in|on|at|by|for|and|with|from|new|as|after|following|during)$/.test(n))) continue;
+    if (names.length && ![...properNames(s)].some((n) => names.includes(n)) && !names.some((n) => normalizeForMatch(s).toLowerCase().includes(n))) continue;
+    const score = inProposal + contained;
+    if (!best || score > best.score) best = { s, score };
   }
   return best?.s ?? null;
 }

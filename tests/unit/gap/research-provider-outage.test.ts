@@ -59,3 +59,32 @@ describe('Scout claims matched only by site are a weaker lead', () => {
     expect(operatingCount([{ claim: 'Operates 40 distribution centers' }, { claim: 'Runs a fleet of 800 tractors', siteOnly: true }])).toBe(2);
   });
 });
+
+describe('cited pages: the search locates pages, GAP reads them itself', () => {
+  it('a cited page\'s own dated sentence naming the account becomes a verified fact; another company\'s does not', async () => {
+    const runs: Array<Record<string, unknown>> = [];
+    const stored: Array<Record<string, unknown>> = [];
+    const prisma = {
+      researchRun: {
+        create: async ({ data }: { data: Record<string, unknown> }) => (runs.push({ id: 'run0', ...data }), { id: 'run0' }),
+        update: async ({ data }: { data: Record<string, unknown> }) => Object.assign(runs[0], data),
+      },
+      evidenceRecord: {
+        upsert: async ({ create }: { create: Record<string, unknown> }) => (stored.push(create), { id: `ev${stored.length}` }),
+        findUnique: async () => ({ id: `ev${stored.length}` }),
+        findMany: async () => [],
+      },
+      prospectingSignal: { findUnique: async () => null, create: async ({ data }: { data: Record<string, unknown> }) => ({ id: 'sig1', ...data }), update: async () => ({}), findMany: async () => [] },
+      gapAuditEvent: { create: async () => ({}) },
+    };
+    const html = '<html><head><meta property="article:published_time" content="2026-09-10T00:00:00Z"></head><body><p>Kroger will open a new automated distribution center in Wyomissing, Pennsylvania in 2027, adding 250 jobs.</p><p>Walmart opened a new distribution center in Reno, Nevada last month.</p></body></html>';
+    const r = await runEvidenceResearch(prisma as never, input, {
+      edgar: async () => ({ candidates: [], note: '0' }),
+      web: async () => ({ candidates: [], note: '0 web proposals via gemini', sources: ['https://news.example/kroger-dc'] }),
+      fetchHtml: async () => html,
+      fetchText: async () => { throw new Error('should read the seeded page'); },
+    });
+    expect(r.facts.map((f) => f.excerpt)).toEqual(['Kroger will open a new automated distribution center in Wyomissing, Pennsylvania in 2027, adding 250 jobs.']);
+    expect(r.notes.join(' ')).toMatch(/sentences from 1 cited pages/);
+  });
+});
