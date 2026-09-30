@@ -34,6 +34,33 @@ import { defaultFetchText, edgarCandidates, normalizeCompany, webCandidates, typ
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
+/**
+ * Why a proposal did not become a verified fact, as a class a person can act on: the internet has no good fact
+ * (UNDATED, NOT_PHYSICAL_OPERATIONS, STALE_EVENT, WRONG_ACCOUNT) versus search chose badly (SOURCE_TOO_WEAK,
+ * SOURCE_FETCH_BLOCKED, EXCERPT_NOT_FOUND, REANCHOR_TOO_WEAK) versus infrastructure (PROVIDER_UNAVAILABLE).
+ */
+export type FailureClass = 'SOURCE_FETCH_BLOCKED' | 'SOURCE_NOT_FOUND' | 'EXCERPT_NOT_FOUND' | 'REANCHOR_TOO_WEAK' | 'WRONG_ACCOUNT' | 'NOT_PHYSICAL_OPERATIONS' | 'STALE_EVENT' | 'BOILERPLATE' | 'CONTRADICTED' | 'UNDATED' | 'SOURCE_TOO_WEAK' | 'PROVIDER_UNAVAILABLE' | 'OTHER';
+export function failureClass(reason: string): FailureClass {
+  if (/^source_unreadable:fetch (401|403|429|451)\b/.test(reason)) return 'SOURCE_FETCH_BLOCKED';
+  if (/^source_unreadable:(?:fetch (?:404|410)\b|no_readable_text)/.test(reason)) return 'SOURCE_NOT_FOUND';
+  if (reason.startsWith('source_unreadable')) return 'SOURCE_FETCH_BLOCKED';
+  const map: Record<string, FailureClass> = {
+    excerpt_not_found_at_source: 'EXCERPT_NOT_FOUND',
+    reanchor_too_weak: 'REANCHOR_TOO_WEAK',
+    page_does_not_name_account: 'WRONG_ACCOUNT',
+    sentence_does_not_name_account: 'WRONG_ACCOUNT',
+    not_a_physical_operations_fact: 'NOT_PHYSICAL_OPERATIONS',
+    describes_past_event: 'STALE_EVENT',
+    no_publication_date: 'UNDATED',
+    source_too_weak: 'SOURCE_TOO_WEAK',
+    boilerplate: 'BOILERPLATE',
+  };
+  return map[reason] ?? 'OTHER';
+}
+
+/** Search redirects, snippets, aggregators and mirrors: never a source a fact can be verified at. */
+const WEAK_SOURCE = /^https?:\/\/(?:[^/]*\.)?(?:vertexaisearch\.cloud\.google\.com|google\.[a-z.]+\/(?:search|url)|news\.google\.com|bing\.com|duckduckgo\.com|news\.yahoo\.com|msn\.com|newsbreak\.com|ground\.news|flipboard\.com|scribd\.com|pdfcoffee\.com|dokumen\.pub|studocu\.com|coursehero\.com)\b/i;
+
 /** provider_unavailable: the web search could not run and nothing fresh was found. Retryable, never an answer. */
 export type ResearchOutcome = 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence' | 'provider_unavailable';
 
@@ -120,15 +147,44 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const accepted: Array<Candidate & { publishedAt: Date }> = [];
   const rejected: Array<{ url: string; reason: string }> = [];
   const seen = new Set<string>();
+  const unreachable: Candidate[] = [];
   for (const c of candidates) {
     const key = normalizeForMatch(c.excerpt);
     if (seen.has(key)) continue;
     const v = await verifyCandidate(c, ctx);
-    if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }
+    if (!v.ok) {
+      rejected.push({ url: c.url, reason: v.reason });
+      const k = failureClass(v.reason);
+      if (c.provider === 'web' && (k === 'SOURCE_FETCH_BLOCKED' || k === 'SOURCE_NOT_FOUND')) unreachable.push(c);
+      continue;
+    }
     seen.add(key);
     seen.add(normalizeForMatch(v.excerpt));
     accepted.push({ ...c, excerpt: v.excerpt, publishedAt: v.publishedAt });
   }
+  // A blocked or unreadable page is an inaccessible SOURCE, not a false fact: one focused search for another
+  // accessible page stating the same event (at most two per run), and it must still pass the same verification.
+  let alternates = 0;
+  for (const c of unreachable.slice(0, 2)) {
+    let host = '';
+    try { host = new URL(c.url).hostname.replace(/^www\./, ''); } catch { /* keep empty */ }
+    try {
+      const r = await (deps.web ?? webCandidates)(input.accountName, `Find ONE other accessible source (${input.accountName}'s own announcement, a filing, a government release or a credible publication) that states this event: "${c.excerpt}". Do not use ${host || 'the same site'}.`);
+      for (const alt of r.candidates.filter((a) => { try { return new URL(a.url).hostname.replace(/^www\./, '') !== host; } catch { return false; } }).slice(0, 2)) {
+        const v = await verifyCandidate(alt, ctx);
+        if (!v.ok) { rejected.push({ url: alt.url, reason: v.reason }); continue; }
+        const k2 = normalizeForMatch(v.excerpt);
+        if (seen.has(k2)) continue;
+        seen.add(k2);
+        accepted.push({ ...alt, excerpt: v.excerpt, publishedAt: v.publishedAt });
+        alternates += 1;
+        break;
+      }
+    } catch (err) {
+      notes.push(`alternate source: unavailable (${err instanceof Error ? err.message : String(err)})`);
+    }
+  }
+  if (unreachable.length) notes.push(`alternate source: ${alternates} of ${Math.min(unreachable.length, 2)} blocked facts found elsewhere`);
 
   // Store: ResearchRun + EvidenceRecord + ProspectingSignal (existing stores).
   const run = await createResearchRun(prisma, {
@@ -187,6 +243,12 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
         facts: facts.length,
         freshFacts: facts.filter((f) => f.fresh).length,
         rejected: rejected.length,
+        // Why the rest failed, as classes and by source site (the yield diagnosis).
+        rejectionClasses: rejected.reduce<Record<string, number>>((m, r) => ((m[failureClass(r.reason)] = (m[failureClass(r.reason)] ?? 0) + 1), m), {}),
+        rejectionDomains: rejected.reduce<Record<string, number>>((m, r) => {
+          const d = (() => { try { return new URL(r.url).hostname.replace(/^www\./, ''); } catch { return 'invalid'; } })();
+          return ((m[d] = (m[d] ?? 0) + 1), m);
+        }, {}),
         conflicts,
         continuity: JSON.parse(JSON.stringify(continuity)),
         // The full result, so a thesis research run is reused instead of repeated.
@@ -218,7 +280,11 @@ export function verificationContext(accountName: string, fetchText?: FetchText):
 export function textNamesAccount(text: string, accountKey: string): boolean {
   if (!accountKey) return false;
   const t = ` ${text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()} `;
-  return t.includes(` ${accountKey} `);
+  if (t.includes(` ${accountKey} `)) return true;
+  // A page often drops a trailing descriptor ("Lineage" for Lineage Logistics, "Marten" for Marten Transport);
+  // only when what remains is still distinctive (6+ characters), never a short or generic stem ("NFI", "General").
+  const core = accountKey.replace(/(?: (?:logistics|transport|transportation|industries|foods|food|brands|group|holdings|international|usa|us|north america|global|services|solutions|distribution|trucking))+$/, '').trim();
+  return core !== accountKey && core.length >= 6 && !/^(general|united|national|american|global|first|premier|standard)$/.test(core) && t.includes(` ${core} `);
 }
 
 /**
@@ -232,9 +298,13 @@ export function textNamesAccount(text: string, accountKey: string): boolean {
 export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date; excerpt: string } | { ok: false; reason: string }> {
   if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };
   if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
-  if (!isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
+  // A web search model's proposal is a summary; the gates run on what is STORED (the page's own sentence) below.
+  // Every other proposer's excerpt is already the text that would be stored.
+  const web = c.provider === 'web';
+  if (!web && !isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
   // Quality review: a past-year event restated in a newer source is not dated by the source.
-  if (classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (!web && classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (WEAK_SOURCE.test(c.url)) return { ok: false, reason: 'source_too_weak' };
   if (!ctx.pages.has(c.url)) {
     try { ctx.pages.set(c.url, await ctx.fetchText(c.url)); } catch (err) { ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
   }
@@ -245,11 +315,16 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   // strictly verbatim.
   let excerpt = c.excerpt;
   if (!excerptFoundIn(excerpt, page)) {
+    // A script-rendered or empty page has no readable text to verify against (a source problem, not a false fact).
+    if (page.replace(/\s+/g, ' ').trim().length < 25) return { ok: false, reason: 'source_unreadable:no_readable_text' };
     const own = c.provider === 'web' ? pageSentenceFor(excerpt, page) : null;
-    if (!own) return { ok: false, reason: 'excerpt_not_found_at_source' };
-    if (classifyContinuity(own) === 'event' && describesPastEvent(own, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+    // A web proposal the page does not state closely enough (or states differently) is a weak reanchor.
+    if (!own) return { ok: false, reason: !web ? 'excerpt_not_found_at_source' : isPhysicalOpsFact(c.excerpt) ? 'reanchor_too_weak' : 'not_a_physical_operations_fact' };
     excerpt = own;
   }
+  // The stored sentence itself must be a physical-operations fact that is current for its source date.
+  if (web && !isPhysicalOpsFact(excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
+  if (web && classifyContinuity(excerpt) === 'event' && describesPastEvent(excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
   if (c.provider !== 'edgar' && !textNamesAccount(page, ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
   // A sentence taken from a signal's own page must itself name the account (a competitor's paragraph on the
   // same page is not this account's fact).

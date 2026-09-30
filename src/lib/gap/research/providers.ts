@@ -31,7 +31,11 @@ const SEC_UA = 'YardFlow GAP research casey@yardflow.ai';
 
 export const defaultFetchText: FetchText = async (url) => {
   const res = await fetch(url, {
-    headers: { 'User-Agent': url.includes('sec.gov') ? SEC_UA : 'Mozilla/5.0 (compatible; YardFlowResearch/1.0)' },
+    headers: {
+      'User-Agent': url.includes('sec.gov') ? SEC_UA : 'Mozilla/5.0 (compatible; YardFlowResearch/1.0)',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,application/pdf;q=0.8,*/*;q=0.7',
+      'Accept-Language': 'en-US,en;q=0.9',
+    },
     redirect: 'follow',
     signal: AbortSignal.timeout(15_000),
   });
@@ -177,6 +181,7 @@ const hasJsonArray = (text: string) => {
  */
 export async function webCandidates(accountName: string, focus: string, deps: { providers?: ScoutProvider[] } = {}): Promise<{ candidates: Candidate[]; note: string }> {
   const prompt = `Find up to 5 PUBLIC, dated facts from the last 12 months about ${accountName}'s physical operations: distribution or fulfillment centers, warehouses, plants, yards, docks or transportation network (openings, closures, consolidations, expansions, automation, acquisitions, relocations). ${focus}
+Sources, best first: ${accountName}'s own newsroom, investor or official operations page; an SEC filing; a government, economic-development or permit release; a credible trade or business publication; a vendor case study that names ${accountName}. When a story reports a fact, cite ${accountName}'s own announcement of it if one exists. Never cite a search-result redirect, an aggregator or syndicated copy, a snippet-only page or a paywalled page.
 Return ONLY a JSON array: [{"url": "...", "title": "...", "date": "YYYY-MM-DD", "excerpt": "one sentence copied VERBATIM from that page"}].
 Every excerpt must be copied exactly from the page at that url. If you cannot find such facts, return [].`;
   const r = await askGrounded(prompt, (a) => (hasJsonArray(a.text) ? parseWebCandidates(a.text) : null), deps.providers ?? defaultProviders());

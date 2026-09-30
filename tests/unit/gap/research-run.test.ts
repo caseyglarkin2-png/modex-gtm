@@ -95,7 +95,7 @@ describe('RESEARCH THIS', () => {
     );
     expect(r.outcome).toBe('insufficient_evidence');
     expect(r.facts).toEqual([]);
-    expect(r.rejected.map((x) => x.reason)).toEqual(['excerpt_not_found_at_source', 'no_publication_date', 'not_a_physical_operations_fact', 'page_does_not_name_account']);
+    expect(r.rejected.map((x) => x.reason)).toEqual(['reanchor_too_weak', 'no_publication_date', 'not_a_physical_operations_fact', 'page_does_not_name_account']);
     expect(t.signals).toEqual([]);
   });
 
