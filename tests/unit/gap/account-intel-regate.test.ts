@@ -28,3 +28,15 @@ describe('stored facts are re-gated on read', () => {
     expect(i?.facts.map((f) => f.id)).toEqual(['dc']);
   });
 });
+
+describe('final dogfood: a stored third-party quote is not the account\'s fact', () => {
+  it('PepsiCo: the Gatik CEO quote stored before #334 is not live; PepsiCo\'s own executive quoted is', async () => {
+    const gatik = '“Driverless trucks deployed in commercial capacity, driving across highways and surface streets — that’s what we’re doing with PepsiCo,” said Gautam Narang, CEO and co-founder of Gatik.';
+    const own = '"We will open two new automated distribution centers in Texas in 2027," said Jane Doe, chief supply chain officer of PepsiCo.';
+    const p = fake([row('gatik', gatik), row('own', own)]) as unknown as Record<string, unknown>;
+    p.account = { findUnique: async () => ({ name: 'PepsiCo', tier: null, priority_band: null, vertical: null, parent_brand: null, hubspot_company_id: null }), findMany: async () => [] };
+    p.$queryRaw = async () => [{ name: 'PepsiCo' }];
+    const i = await loadAccountInputs(p as never, 'PepsiCo', NOW);
+    expect(i?.facts.map((f) => f.id)).toEqual(['own']);
+  });
+});
