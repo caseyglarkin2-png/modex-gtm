@@ -701,7 +701,8 @@ function siteWords(i: AccountInputs): string {
   if (t === 'carrier') return 'your terminals and yards';
   if (t === 'port_terminal') return 'your terminals';
   if (t === 'retailer' || t === 'distributor') return 'your DCs';
-  return PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your sites' : 'your plants and DCs';
+  // Plants and DCs only for a company known to make or own goods; an unknown type is never assumed a shipper.
+  return t && ['shipper', 'manufacturer'].includes(t) && !PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your plants and DCs' : 'your sites';
 }
 
 const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;
@@ -917,7 +918,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   if (i.bids.some((b) => VENDORS.some((v) => vendorRe(v).test(b.summary)))) whyNot.push('The buyer confirmed an incumbent system: a displacement story needs its own evidence.');
   const aud = auditedSites(i.pack);
   // A 3PL's own sites are "3PL-operated": the decision sits with this account, not elsewhere.
-  if (aud.kept.length && entityTypeOf(i) !== '3pl' && aud.threePl.length > aud.self.length) whyNot.push('Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.');
+  if (aud.kept.length && entityTypeOf(i) !== '3pl' && aud.threePl.length > aud.self.length)
+    whyNot.push(entityTypeOf(i) ? 'Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.' : 'Most audited sites are marked 3PL-operated, and what this company is is not established: it may BE the 3PL (then they are its own sites) or use one. Settle its identity first.');
   if (i.family?.hold) whyNot.push(i.family.hold.detail);
   const fit = accountFit(i, now);
   if (fit.fit === 'PARTNER' || fit.fit === 'NOT_FIT' || fit.fit === 'UNKNOWN') whyNot.push(`${FIT_LABEL[fit.fit]}: ${fit.why}`);
