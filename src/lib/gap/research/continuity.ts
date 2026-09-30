@@ -100,11 +100,13 @@ export interface ContinuityRecord {
 
 // ---------------------------------------------------------------- seller relevance (not truth)
 
-const INTERNATIONAL = /\b(?:india|china|brazil|(?<!new )mexico|europe|european|uk|united kingdom|england|scotland|spain|germany|france|italy|africa|african|asia|asian|japan|australia|indonesia|philippines|vietnam|bengaluru|karnataka|iberia)\b/i;
-// A US site named in the same fact keeps it a US fact ("a Laredo DC that serves Mexico").
-const US_ANCHOR = /\b(?:u\.s\.|united states|texas|laredo|el paso|arizona|california|new mexico|illinois|ohio|georgia|pennsylvania|tennessee|kentucky|indiana|north carolina|south carolina|florida|nevada|utah|washington|oregon|new jersey|new york|virginia|michigan|wisconsin|minnesota|missouri|iowa|kansas|oklahoma|arkansas|alabama|mississippi|louisiana|colorado|idaho|nebraska)\b/i;
+const INTERNATIONAL = /\b(?:india|china|brazil|(?<!new )mexico|europe|european|uk|united kingdom|england|scotland|spain|germany|france|italy|africa|african|asia|asian|japan|australia|indonesia|philippines|vietnam|bengaluru|karnataka|iberia|canada|canadian)\b/i;
+const US_PLACES = String.raw`u\.s\.|united states|texas|laredo|el paso|arizona|california|new mexico|illinois|ohio|georgia|pennsylvania|tennessee|kentucky|indiana|north carolina|south carolina|florida|nevada|utah|washington|oregon|new jersey|new york|virginia|michigan|wisconsin|minnesota|missouri|iowa|kansas|oklahoma|arkansas|alabama|mississippi|louisiana|colorado|idaho|nebraska`;
+// A US site in the fact keeps it a US fact: "in Laredo, Texas", "at its Ohio DC", "its new Laredo, Texas distribution
+// center". A dateline or a listing ("U.S.-listed") is not a site.
+const US_ANCHOR = new RegExp(`\\b(?:in|at|near|across|throughout) (?:the )?(?:[A-Z][\\w.]+,? )?(?:${US_PLACES})\\b|\\b(?:${US_PLACES})\\b(?:,? [\\w.]+){0,2} (?:distribution cent|warehouse|plant|dcs?\\b|facilit|fulfil|cross[- ]?dock|yard)`, 'i');
 // A sale OF a business or assets, not a company that sells products ("sells through 40 DCs", "disposable").
-const DIVEST = /\b(?:sold (?:its|the|our)\b|sale of (?:its|the|our)\b|to sell (?:its|the|our)\b|sell (?:its|the|our)(?: [\w-]+){0,3} (?:business|businesses|operations|stake|unit|division|segment|brands?)|divest\w*|disposition of|spin[- ]?off)/i;
+const DIVEST = /\b(?:sold (?:its|the|our)\b|sale of (?:its|the|our)\b|to sell (?:its|the|our)\b|sells? (?:its|the|our)(?: [\w-]+){0,3} (?:business|businesses|operations|stake|unit|division|segment|brands?)|sale of(?: [\w-]+){1,4} (?:business|businesses|unit|division|segment|brands?)|divest\w*|disposition of|spin[- ]?off)/i;
 const LEGAL = /\b(?:definitive agreement|plan of merger|agreement and plan|merger agreement)\b/i;
 const BROAD = /\b(?:restructuring|cost savings|workforce reduction|layoffs?)\b/i;
 const NETWORK = /\b(?:network|transportation|autonomous|driverless|fleet|linehaul|routes?|middle[- ]mile|moves? freight)\b/i;
@@ -123,7 +125,9 @@ export interface SellerRelevance {
  * warehouse / plant / yard change (2), an automation program (3). CONTEXT (still verified, never hidden): a
  * divestiture, legal transaction text, activity outside the US, a broad restructuring.
  */
-export function sellerRelevance(excerpt: string): SellerRelevance {
+export function sellerRelevance(raw: string): SellerRelevance {
+  // A press-release dateline ("NEW YORK--(BUSINESS WIRE)--") says where the wire filed, not where the site is.
+  const excerpt = raw.replace(/^\s*[A-Z][A-Z .,'-]{2,40}(?:--|\s[-\u2014]\s?)(?:\(\s*[\w ]+\s*\)\s*-*)?\s*/, '');
   if (INTERNATIONAL.test(excerpt) && !US_ANCHOR.test(excerpt)) return { bucket: 'context', rank: 8, reason: 'activity outside the US network' };
   if (DIVEST.test(excerpt)) return { bucket: 'context', rank: 7, reason: 'a divestiture or sale' };
   if (LEGAL.test(excerpt) && !NETWORK.test(excerpt)) return { bucket: 'context', rank: 6, reason: 'legal transaction text' };

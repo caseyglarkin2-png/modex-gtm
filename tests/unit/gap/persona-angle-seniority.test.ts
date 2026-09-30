@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { suggestAngle } from '@/lib/gap/motion/persona-angle';
 
 describe('suggested angle respects seniority', () => {
-  it.each(['Senior Supply Chain Specialist', 'Transportation Analyst', 'Logistics Coordinator', 'Distribution Planner'])('%s is close to the work, not its owner', (title) => {
+  it.each(['Senior Supply Chain Specialist', 'Transportation Analyst', 'Logistics Coordinator', 'Distribution Planner', 'Lead Transportation Analyst'])('%s is close to the work, not its owner', (title) => {
     const a = suggestAngle({ title, personaKey: null, accountName: 'PepsiCo' })!;
     expect(a).toMatch(/^Close to the day-to-day/);
     expect(a).not.toMatch(/\b(Owns|Runs|Executive owner)\b/);

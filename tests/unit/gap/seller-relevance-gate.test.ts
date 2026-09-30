@@ -7,6 +7,9 @@ describe('sale abroad / divestiture never opens; US facts are not caught', () =>
     'We entered into a definitive agreement to sell our business in Brazil to a local buyer.',
     'The company sold its European snacks division and two plants.',
     'Acme will divest its canned vegetables business, including three plants.',
+    'Acme sells its Canadian business to a regional buyer, including two plants.',
+    'Acme completes sale of Frozen Foods business, including four plants.',
+    'NEW YORK--(BUSINESS WIRE)-- Acme opens a new plant in Mexico to serve Latin America.',
   ])('context: %s', (q) => expect(sellerRelevance(q).rank).toBeGreaterThanOrEqual(7));
   it.each([
     'Opened a 600,000 square foot distribution center in Santa Teresa, New Mexico.',
