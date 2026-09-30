@@ -13,7 +13,7 @@
  */
 import type { SignalType } from '../taxonomy';
 
-const FACILITY = /\b((?:terminal|yard|electric) tractors?|hostlers?|spotter trucks?|linear feet of (?:rail )?track|rail (?:yards?|spurs?|infrastructure)|(?:container|marine|intermodal) terminals?|pallet positions?|square feet of (?:(?:new|additional|temperature-controlled|refrigerated|frozen) )?(?:warehouse|distribution|manufacturing|industrial|cold[- ]storage|production|fulfil?lment|freezer|cooler) space|(?:manufacturing|production|distribution|warehouse|plant|industrial|fulfil?lment|cold[- ]storage|existing [A-Z][a-z]+) sites?|distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
+const FACILITY = /\b((?:terminal|yard|electric) tractors?|(?:LTL )?service cent(?:er|re)s?|cross-?docks?|truck terminals?|freight terminals?|hostlers?|spotter trucks?|linear feet of (?:rail )?track|rail (?:yards?|spurs?|infrastructure)|(?:container|marine|intermodal) terminals?|pallet positions?|square feet of (?:(?:new|additional|temperature-controlled|refrigerated|frozen) )?(?:warehouse|distribution|manufacturing|industrial|cold[- ]storage|production|fulfil?lment|freezer|cooler) space|(?:manufacturing|production|distribution|warehouse|plant|industrial|fulfil?lment|cold[- ]storage|existing [A-Z][a-z]+) sites?|distribution cent(?:er|re)s?|fulfil?lment cent(?:er|re)s?|distribution facilit(?:y|ies)|warehouses?|cross[- ]docks?|food production plants?|manufacturing plants?|plants?|facilit(?:y|ies)|yards?|docks?|gates?|DCs?|network)\b/i;
 // Scale dogfood (paid research): real operations verbs the gate missed: "ceased manufacturing and warehouse
 // operations", "shut down its warehouse", "idled five facilities", "the groundbreaking of our newest facility".
 const CHANGE = /\b(grow(?:s|ing)? (?:the |its )?(?:facility['’]s |site['’]s )?(?:electric )?fleet|add(?:s|ed|ing)? (?:approximately |about |over |more than |nearly |roughly |some |an additional )?[\d,.]+(?:\s|-)(?:square|sq|pallet|dock|doors?|acres?|jobs|positions|bays|linear)|replac(?:e|es|ed|ing) (?:the |its |an? )?(?:former|existing|older|old|previous)|operational since|reopen(?:ed|ing|s)?|demoli(?:sh|shed|shing|tion)|discontinu(?:e|ed|es|ing)|deploy(?:s|ed|ing|ment)?|ceas(?:e|ed|es|ing)|shut(?:s|ting)? down|shutdown|idl(?:e|ed|es|ing)|mothball(?:s|ed|ing)?|groundbreaking|grand opening|wind(?:s|ing)? down|went live|goes live|commenc(?:e|ed|es|ing)|open(?:ed|ing|s)?|clos(?:e|ed|es|ing|ure|ures)|exit(?:ed|ing|s)?|consolidat(?:e|ed|es|ing|ion)|expan(?:d|ded|ding|sion)|build(?:s)?|built|construct(?:ed|ing|ion)?|automat(?:e|ed|es|ing|ion)|robot(?:ic|ics)?|acquir(?:e|ed|es|ing)|acquisition|relocat(?:e|ed|ing|ion)|redesign(?:ed)?|add(?:ed|ing)? capacity)\b/i;
@@ -120,6 +120,12 @@ const BOILERPLATE = new RegExp(
     String.raw`\bpretax\b`, String.raw`\bcapitaliz(?:e|es|ed|ation of) interest\b`, String.raw`\bsame[- ](?:warehouse|store)\b`, String.raw`\bpopulation\b`, String.raw`\brestructuring-related\b`, String.raw`\bnet proceeds\b`, String.raw`\bescrow\b`, String.raw`\bnotes due\b`,
     // evidence integrity review (2026-09-28): accounting policy, and software or management practice (a technology signal, not a physical-network change)
     String.raw`\bdepreciat\w*\b`, String.raw`\buseful lives?\b`, String.raw`\b(?:planning|procurement|analytics|software) platform\b`, String.raw`\bmanagement practices\b`,
+    // final research-integrity review (2026-09-30): descriptions, risk factors, regulation and an acquired company's auditor exhibit
+    String.raw`\bcosts? relate to\b`, String.raw`\bmission[- ]critical\b`, String.raw`\b(?:critical|essential|integral|key) to our success\b`, String.raw`\bcompetitive advantage\b`,
+    String.raw`\bdrive profitab\w*\b`, String.raw`\bmaximi[sz]e efficiency\b`, String.raw`\bpivotal time\b`, String.raw`\bshareholder value\b`,
+    String.raw`\bsubject to (?:various|numerous|extensive)\b`, String.raw`\bregistration requirements\b`,
+    String.raw`\bemphasis of matter\b`, String.raw`\bas disclosed in note\b`, String.raw`\bthe group (?:announced|has|had|will|is|was|completed|entered|closed|opened|decided)\b`,
+    String.raw`\b(?:independent )?small businesses to conduct\b`,
   ].join('|'),
   'i',
 );
@@ -149,6 +155,10 @@ export function isRunOnOrNavigation(sentence: string): boolean {
   const words = sentence.split(/\s+/).filter((w) => /^[A-Za-z]{3,}/.test(w));
   if (words.length >= 10 && words.filter((w) => /^[A-Z]/.test(w)).length / words.length > 0.7) return true;
   if (/\bAn article from\b/.test(sentence)) return true;
+  // A section heading glued to a dated sentence ("GMS Acquisition On June 29, 2025, we ..."): a heading, then a restatement.
+  if (/^(?:[A-Z][\w&.'-]*\s+){1,5}(?:On|As of|During)\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}/.test(sentence.trim())) return true;
+  // Page chrome in another language ("Terug naar selectie"): navigation glued between a headline and its body.
+  if (/\b(?:Terug naar|Zur(?:ü|u)ck zu|Retour (?:à|a) la|Volver a|Torna a)\b/i.test(sentence)) return true;
   const t = sentence.trim();
   // A page control run into the text ("Learn more News & Media ..."): navigation, not a sentence.
   if (/^(?:Learn more|Read more|Skip to|Back to|See all|View all|Share this)\b/i.test(t)) return true;
@@ -205,7 +215,7 @@ const HABITUAL = /\b(?:from time to time|ordinary course|normal course|periodica
  * view that mentions the same words is not.
  */
 const TRANSPORT = /\b(?:(?:autonomous|driverless|self-driving)\s+(?:freight|trucks?|trucking|delivery|vehicles?)|moves? freight|(?:private|dedicated) fleets?|linehaul|middle[- ]mile|transportation networks?|regional (?:transportation )?networks?)\b/i;
-const TRANSPORT_ACTION = /\b(?:deploy\w*|operat\w*|moves? freight|serv(?:e|es|ing)|runs|running|launch\w*|bring|brings|partnership|roll(?:ing)? out|rollout|expan\w*|convert\w*)\b/i;
+const TRANSPORT_ACTION = /\b(?:deploy\w*|operat(?:e|es|ed|ing)\b|moves? freight|serv(?:e|es|ing)|runs|running|launch\w*|bring|brings|partnership|roll(?:ing)? out|rollout|expan\w*|convert\w*)\b/i;
 const FUNDING_OR_MARKET = /\b(?:raises?|raised|funding|series [a-f]\b|valuation|shares|stock|analysts?|investors?|price target)\b/i;
 
 export function isTransportNetworkFact(sentence: string): boolean {
@@ -216,8 +226,8 @@ export function isTransportNetworkFact(sentence: string): boolean {
 export function isPhysicalOpsFact(sentence: string): boolean {
   if (NEGATION.test(sentence) || HABITUAL.test(sentence)) return false;
   if (isBoilerplate(sentence) || isRunOnOrNavigation(sentence)) return false;
-  if (isTransportNetworkFact(sentence)) return true;
   if (HYPOTHETICAL.test(sentence)) return false;
+  if (isTransportNetworkFact(sentence)) return true;
   if (CONTRACT_CONTEXT.test(sentence)) return false;
   if (hasSpecificSiteChange(sentence)) return true;
   if (isFinancialStatementMention(sentence)) return false;

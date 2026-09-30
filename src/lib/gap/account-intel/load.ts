@@ -8,6 +8,7 @@ import { loadWatchProfilesCached } from '../signals/watch';
 import { loadAccountConversations, loadAccountFirstTouches } from '../motion/load';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { classifyContinuity } from '../research/continuity';
+import { isPhysicalOpsFact } from '../research/facts';
 import { selectConfirmedBids } from '../bid/select';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildROIEngineInputs, computeROIModel } from '@/lib/microsites/roi';
@@ -159,6 +160,9 @@ export async function loadAccountInputs(
   for (const r of factRows as Row[]) {
     const meta = (r.metadata ?? {}) as Row;
     if (meta.verified !== 'excerpt_found_at_source' || !r.evidence_text) continue;
+    // Re-gated on read: a fact stored before a rule tightened (a software rollout, a 10-K description, an acquired
+    // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
+    if (!isPhysicalOpsFact(r.evidence_text)) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,
