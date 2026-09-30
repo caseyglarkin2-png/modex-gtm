@@ -76,3 +76,31 @@ describe('OWNER: never a board member, a former executive, a non-operations titl
     expect(b.glance.likelyOwner).toBe('Poorman S (name incomplete in the CRM), VP Integrated Logistics (LIKELY; ownership never assumed)');
   });
 });
+
+describe('production verify (2026-09-30): one next step, and an unsettled identity holds', () => {
+  const now = new Date('2026-09-30T12:00:00Z');
+  const person = { id: 1, name: 'Sandra Richards', title: 'VP Operations', doNotContact: false, hasEmail: true, emailStatus: 'valid' };
+  const member = { sourceName: 'MMYQB', sourceType: 'newsletter', relationshipContext: 'MMYQB subscriber', personName: 'Sandra Richards', doNotContact: false, addedAt: '2026-09-20T00:00:00Z' };
+  const inputs = (over: Partial<AccountInputs>): AccountInputs => ({
+    account: { name: 'NFI Industries', tier: null, priorityBand: null, vertical: null, parentBrand: null, hubspotCompanyId: '42' },
+    aliases: [], domains: [], siblings: [], watched: true, watchReasons: [], facts: [], signals: [], lastResearch: null, hypotheses: [], bids: [],
+    personas: [person], candidates: [], memberships: [member] as never, firstTouches: [], conversation: null, opportunity: { status: 'CLEAR', detail: '', deals: [] }, pack: null, microsite: null, facilityFact: null, roi: null,
+    ...over,
+  });
+  it('XPO: "Scout it first" is the one next step, never also "Research first"', () => {
+    const b = buildAccountBrief(inputs({ account: { name: 'XPO', tier: null, priorityBand: null, vertical: null, parentBrand: null, hubspotCompanyId: '42' } }), now);
+    expect(b.glance.nextAction).toMatch(/Scout it first\.$/);
+    expect(b.glance.nextAction).not.toMatch(/Research first/);
+  });
+  it('NFI: most audited sites 3PL-run and the type unknown holds on identity, as WHY NOT says', () => {
+    const s = (id: string) => ({ id, name: `Site ${id}`, type: 'Warehouse', archetype: '#3', archetypeName: 'DC', confidence: 'high',
+      yardMetrics: { dockDoorCount: 40, trailersVisible: 50, trailerParkingCapacity: 80, truckGateCount: 1, buildingCount: 1, siteAreaAcres: 20, railServed: false },
+      classification: { dropYard: true, guardShack: true, truckGate: true, preGateStaging: false, fastLaneOpportunity: false, dockDoors: 'medium', dropArea: 'medium' },
+      verification: { verdict: 'confirmed', operator: '3PL', tenancy: 'leased', citations: [{ tier: 1, url: 'https://nfi.example/a', date: '2026-05-01', type: 'company', claim: 'x' }], imageryDate: '2026-04-01', checkedDivestiture: true, rationale: 'x', verifiedBy: 'agent', verifiedAt: '2026-06-01' } });
+    const pack = { builtAt: '2026-06-01T00:00:00Z', account: { archetype: null, siteCount: 3, networkCount: 300, networkCountSource: 'NFI locations page https://nfiindustries.com/locations', networkCountAsOf: '2026-06-01', coverageNote: null }, network: { totals: { dockDoors: 0, trailerCapacity: 0, gates: 0, railServed: 0, acres: 0 }, sites: [s('a'), s('b'), s('c')] } } as never;
+    const b = buildAccountBrief(inputs({ pack }), now);
+    expect(b.thesis.whyNotPursue.join(' ')).toMatch(/Settle its identity first/);
+    expect(b.motion.type).toBe('NO_GOOD_MOTION');
+    expect(b.glance.nextAction).toMatch(/^Do not contact yet: what this company operates is not established/);
+  });
+});
