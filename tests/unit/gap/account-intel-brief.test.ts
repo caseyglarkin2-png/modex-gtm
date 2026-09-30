@@ -440,3 +440,26 @@ describe('scale dogfood: an unknown type is never assumed', () => {
     expect(b.thesis.whyNotPursue.join(' ')).not.toMatch(/decision may sit with the 3PL/);
   });
 });
+
+describe('closeout: General Mills and RXO', () => {
+  it('General Mills: a lead thesis opening on a foreign divestiture routes Casey to review it on the better fact', () => {
+    const brazil = { id: 'fb', quote: 'During the fourth quarter of fiscal 2026, we entered into a definitive agreement to sell our business in Brazil to a local buyer.', url: 'https://sec.example/q', title: '10-Q', publishedAt: '2026-09-23T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+    const redesign = { id: 'fr', quote: 'General Mills will redesign the plant and warehouse network behind Cheerios, Blue Buffalo and Pillsbury, as part of a plan to cut $3 billion in costs.', url: 'https://news.example/gm', title: 'news', publishedAt: '2026-07-02T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
+    const h = { ...base().hypotheses[0], id: 'hb', status: 'draft', observation: brazil.quote, primarySignalId: 'fb' };
+    const b = buildAccountBrief(base({ facts: [brazil, redesign], hypotheses: [h] }), NOW);
+    expect(b.motion.type).toBe('FACT_LED');
+    expect(b.glance.nextAction).toMatch(/^Review the thesis before any first touch: it opens on activity outside the US network/);
+    expect(b.glance.nextAction).toMatch(/the best current fact is "General Mills will redesign the plant and warehouse network/);
+    // a thesis on the best fact keeps the ordinary next action
+    const good = buildAccountBrief(base({ facts: [brazil, redesign], hypotheses: [{ ...h, observation: redesign.quote, primarySignalId: 'fr' }] }), NOW);
+    expect(good.glance.nextAction).toMatch(/^Review the thesis, then use the verified fact/);
+  });
+  it('RXO: no HubSpot company link is said as the blocker, not a failed deal read', () => {
+    const b = buildAccountBrief(base({ opportunity: { status: 'UNKNOWN', detail: 'identity_unresolved', deals: [], unlinked: true } }), NOW);
+    expect(b.motion.type).toBe('NO_GOOD_MOTION');
+    expect(b.motion.why).toBe('Do not contact yet: this GAP account is not linked to a HubSpot company, so the opportunity state cannot be verified (link it in HubSpot, or confirm there is none).');
+    expect(b.sections.commercial.statements[0].text).toMatch(/^Cannot verify opportunity state because this GAP account is not linked to a HubSpot company/);
+    const other = buildAccountBrief(base({ opportunity: { status: 'UNKNOWN', detail: 'timeout', deals: [] } }), NOW);
+    expect(other.motion.why).toBe('Do not contact yet: the HubSpot deal state could not be read.');
+  });
+});

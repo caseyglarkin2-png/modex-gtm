@@ -21,6 +21,8 @@ export const STOP_CLASSES: ReadonlySet<string> = new Set(['do_not_contact', 'mee
 
 export interface ApproachInput {
   deal: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
+  /** Why the deal state is unknown, when the cause is specific (an account with no HubSpot company link). */
+  dealUnknownWhy?: string;
   /** The buyer contradicted the current story (an objection BID on the thesis). */
   contradicted: boolean;
   conversation: { who: string; responseClass: string; at: string } | null;
@@ -55,7 +57,7 @@ const cls = (c: string) => c.replace(/_/g, ' ');
 
 export function decideApproach(x: ApproachInput): Approach {
   if (x.deal === 'ACTIVE') return { kind: 'IN_DEAL', why: 'An open HubSpot deal: work it from the deal, never cold.' };
-  if (x.deal === 'UNKNOWN') return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the HubSpot deal state could not be read.' };
+  if (x.deal === 'UNKNOWN') return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.dealUnknownWhy ?? 'the HubSpot deal state could not be read.'}` };
   if (x.deal === 'NOT_READ') return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the HubSpot deal state was not read here.' };
   if (x.relatedHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.relatedHold}` };
   if (x.conversation && STOP_CLASSES.has(x.conversation.responseClass)) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.conversation.who} answered "${cls(x.conversation.responseClass)}" (${x.conversation.at.slice(0, 10)}). No new outreach; learn from that conversation.` };

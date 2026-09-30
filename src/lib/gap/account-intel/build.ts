@@ -116,7 +116,7 @@ export interface AccountInputs {
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
-  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null }> } | null;
+  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null }>; unlinked?: boolean } | null;
   pack: PackInput | null;
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
@@ -598,7 +598,7 @@ function commercialSection(i: AccountInputs, now: Date): Section {
   const unknowns: string[] = [];
   const o = i.opportunity;
   if (!o) unknowns.push('HubSpot deal state (not read this time)');
-  else if (o.status === 'UNKNOWN') st.push({ text: `HubSpot deal state could not be read (${o.detail || 'unknown'}): held, never cold`, truth: 'UNKNOWN', sources: [] });
+  else if (o.status === 'UNKNOWN') st.push({ text: o.unlinked ? UNLINKED : `HubSpot deal state could not be read (${o.detail || 'unknown'}): held, never cold`, truth: 'UNKNOWN', sources: [] });
   else st.push({ text: o.status === 'ACTIVE' ? `Open deal: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : 'No open HubSpot deal', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'deal-truth', label: 'HubSpot, read now', url: null, at: now.toISOString() }], asOf: now.toISOString() });
   for (const t of i.firstTouches) st.push({ text: `GAP first touch to ${t.recipient}${t.sentAt ? ` on ${day(t.sentAt)}` : ''} (${t.state})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: t.recipient, label: 'GAP send ledger', url: null, at: t.sentAt }], asOf: t.sentAt });
   if (i.conversation) st.push({ text: `Conversation with ${i.conversation.who}: ${i.conversation.responseClass.replace(/_/g, ' ')} (${day(i.conversation.at)})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: i.conversation.who, label: 'human-confirmed disposition', url: null, at: i.conversation.at }], asOf: i.conversation.at });
@@ -741,6 +741,25 @@ function siteWedge(i: AccountInputs): Wedge {
   return { archetype: `${archetype} (${plural(group.length, 'self-operated site')} audited)`, note: 'Inference from audited sites; nothing about site-level conditions is assumed. Site names are for you, never for the first conversation.', candidates, expansion };
 }
 
+/** The actual blocker when the account has no HubSpot company: said as such, never as a failed deal read. */
+const UNLINKED = 'Cannot verify opportunity state because this GAP account is not linked to a HubSpot company: held, never cold. Link the HubSpot company (or confirm there is none) to clear it.';
+
+/**
+ * The lead grounded thesis opens on context (a sale abroad or a divestiture, seller relevance 7+) while a more
+ * seller-relevant live fact exists: the thesis needs review on that fact. Null otherwise.
+ */
+function inferiorOpener(i: AccountInputs, now: Date): { reason: string; opener: string; best: string } | null {
+  const top = hypothesisViews(i, now).find((h) => h.grounded && h.truth !== 'CONTRADICTED');
+  const hyp = top ? i.hypotheses.find((h) => h.id === top.id) : null;
+  const opener = hyp ? i.facts.find((f) => f.id === hyp.primarySignalId) : null;
+  const best = rankedFacts(i, now)[0];
+  if (!opener || !best || best.id === opener.id) return null;
+  const o = sellerRelevance(opener.quote);
+  if (o.rank < 7 || sellerRelevance(best.quote).rank >= o.rank) return null;
+  const clip = (t: string) => (t.length > 110 ? `${t.slice(0, 107)}...` : t);
+  return { reason: o.reason, opener: clip(opener.quote), best: clip(best.quote) };
+}
+
 /** The next action, read off the ONE motion decision (never a second decision tree). */
 function nextAction(i: AccountInputs, m: Motion, now: Date): string {
   switch (m.type) {
@@ -748,8 +767,13 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       return 'Work the deal (In Deals), never cold. Next learning: the Deal brief objective.';
     case 'FOLLOW_UP':
       return `Follow up with ${m.who ?? 'them'} in the existing thread.`;
-    case 'FACT_LED':
+    case 'FACT_LED': {
+      // A lead thesis that opens on context (a sale abroad, a divestiture) while a better current fact exists is
+      // not what Casey should work from: review it on the better fact first. Nothing is rewritten.
+      const weak = inferiorOpener(i, now);
+      if (weak) return `Review the thesis before any first touch: it opens on ${weak.reason} ("${weak.opener}"), but the best current fact is "${weak.best}". Revise it on that fact (Research: use this fact), or reject it.`;
       return `Review the thesis, then use the verified fact in a first touch to ${m.who ?? 'the primary person'} (every gate runs at the click).`;
+    }
     case 'REFERRAL_LED':
     case 'RELATIONSHIP_LED':
       return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
@@ -785,6 +809,7 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   });
   const a = decideApproach({
     deal: i.opportunity ? i.opportunity.status : 'NOT_READ',
+    dealUnknownWhy: i.opportunity?.status === 'UNKNOWN' && i.opportunity.unlinked ? 'this GAP account is not linked to a HubSpot company, so the opportunity state cannot be verified (link it in HubSpot, or confirm there is none).' : undefined,
     contradicted: hyps.some((h) => h.truth === 'CONTRADICTED'),
     conversation: i.conversation,
     touchHold: gate.state === 'in_motion' ? gate.headline : null,
