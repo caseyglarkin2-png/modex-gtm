@@ -621,14 +621,10 @@ function hypothesisViews(i: AccountInputs, now: Date): HypothesisView[] {
     // Buyer truth only from a live (confirmed, unsuperseded) BID on THIS thesis; a status alone never makes it buyer truth.
     const truth: TruthClass = h.buyerRejected || mine.some((b) => b.type === 'objection') ? 'CONTRADICTED' : mine.some((b) => b.type === 'business_problem') ? 'BUYER_CONFIRMED' : 'INFERENCE';
     const obsVerified = !!h.primarySignalId && verified.has(h.primarySignalId);
-    // A DRAFT that opens on context (a sale abroad, a divestiture) is not a trigger for a US yard conversation:
-    // it does not make the account fact-led. Casey's approved theses are his call and stay as they are.
-    const primary = i.facts.find((f) => f.id === h.primarySignalId);
-    const contextOnly = h.status === 'draft' && !!primary && sellerRelevance(primary.quote).rank >= 7;
     return {
     id: h.id,
     truth,
-    grounded: (obsVerified && !contextOnly) || truth === 'BUYER_CONFIRMED',
+    grounded: obsVerified || truth === 'BUYER_CONFIRMED',
     observation: { text: h.observation, verified: obsVerified },
     inference: stripGuess(h.problem),
     problem: stripGuess(h.problem),
@@ -852,7 +848,7 @@ export function typeFromVertical(v: string | null): EntityType | null {
  * facilities, yards, fleets). A 3PL or carrier that runs sites is a direct buyer, never a "partner" by label.
  */
 /** What the company is: Scout's web reading of the RIGHT company, else the account record's vertical. */
-function entityTypeOf(i: AccountInputs): EntityType | null {
+export function entityTypeOf(i: Pick<AccountInputs, 'scout' | 'account'>): EntityType | null {
   const scout = i.scout && i.scout.basis !== 'name_rules' && !i.scout.ambiguous ? i.scout : null;
   return (scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
 }

@@ -411,13 +411,9 @@ describe('fit comes from operations, not the label (final dogfood: Crowley, Peps
 
 describe('scale dogfood reasoning fixes', () => {
   const brazil = { id: 'fb', quote: 'We entered into a definitive agreement to sell our business in Brazil, including its two distribution centers.', url: 'https://sec.example/q', title: '10-Q', publishedAt: '2026-09-23T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
-  it('a DRAFT opening on a sale abroad does not make the account fact-led; an approved one is Casey\'s call', () => {
+  it('a draft Casey built on a fact he chose stays grounded (the brief never overrides his choice; review P1-B)', () => {
     const h = { ...base().hypotheses[0], id: 'hb', status: 'draft', observation: brazil.quote, primarySignalId: 'fb' };
-    const draft = buildAccountBrief(base({ facts: [brazil], hypotheses: [h] }), NOW);
-    expect(draft.hypotheses[0].grounded).toBe(false);
-    expect(draft.motion.type).not.toBe('FACT_LED');
-    const approved = buildAccountBrief(base({ facts: [brazil], hypotheses: [{ ...h, status: 'approved' }] }), NOW);
-    expect(approved.hypotheses[0].grounded).toBe(true);
+    expect(buildAccountBrief(base({ facts: [brazil], hypotheses: [h] }), NOW).hypotheses[0].grounded).toBe(true);
   });
   it('a 3PL\'s "3PL-operated" audited sites are its own: no "decision sits with the 3PL", and they count as operations', () => {
     const pack = base().pack as { network: { sites: unknown[] } };

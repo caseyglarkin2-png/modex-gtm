@@ -27,7 +27,7 @@ import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 import { factFitsOpener } from './opener';
 import { sellerRelevance } from './continuity';
-import { typeFromVertical } from '../account-intel/build';
+import { entityTypeOf, type AccountInputs } from '../account-intel/build';
 /**
  * Quote a verbatim excerpt as ONE cited observation sentence. An internal
  * period followed by a space (e.g. "The Kroger Co. (the Company)") would be a
@@ -169,7 +169,8 @@ export async function proposeFromResearch(
   const observation = citedQuote(quotable[0].title, quotable[0].evidence_text!, quotable[0].id, run.account_name);
   // A 3PL, carrier or terminal runs the sites: its thesis speaks to the yards it runs, not a shipper's production.
   const acct: { vertical: string | null } | null = prisma.account?.findUnique ? await prisma.account.findUnique({ where: { name: run.account_name }, select: { vertical: true } }).catch(() => null) : null;
-  const operator = ['3pl', 'carrier', 'port_terminal'].includes(typeFromVertical(acct?.vertical ?? null) ?? '');
+  const scouted: { scout: unknown } | null = prisma.gapAccountCandidate?.findFirst ? await prisma.gapAccountCandidate.findFirst({ where: { account_name: run.account_name, scouted_at: { not: null } }, select: { scout: true } }).catch(() => null) : null;
+  const operator = ['3pl', 'carrier', 'port_terminal'].includes(entityTypeOf({ account: { vertical: acct?.vertical ?? null } as AccountInputs['account'], scout: (scouted?.scout ?? null) as AccountInputs['scout'] }) ?? '');
   const problemHypothesis =
     base?.problem_hypothesis ??
     (operator
@@ -185,7 +186,7 @@ export async function proposeFromResearch(
     impacts: asList(base?.impact_hypotheses),
     wouldProveWrong: falsificationQuestions,
     // A thesis GAP proposes always says what would close it (WRONG IF is never blank).
-    whatANoMeans: base?.what_a_no_means ?? (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yard: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard: this thesis is closed for this account.'),
+    whatANoMeans: base ? (base.what_a_no_means ?? null) : (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yard: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard: this thesis is closed for this account.'),
     evidence: quotable.map((s) => ({ signalId: s.id, title: s.title, excerpt: s.evidence_text!, observedAt: s.observed_at.toISOString() })),
   };
 

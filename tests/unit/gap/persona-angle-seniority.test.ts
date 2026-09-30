@@ -8,6 +8,9 @@ describe('suggested angle respects seniority', () => {
     expect(a).toMatch(/^Close to the day-to-day/);
     expect(a).not.toMatch(/\b(Owns|Runs|Executive owner)\b/);
   });
+  it.each(['Associate Vice President, Supply Chain', 'Assistant Vice President Logistics', 'Senior Associate Director, Distribution'])('%s is senior: never "close to the work"', (title) => {
+    expect(suggestAngle({ title, personaKey: null, accountName: 'PepsiCo' })).not.toMatch(/^Close to the day-to-day/);
+  });
   it('owners and yard-floor roles keep their angles', () => {
     expect(suggestAngle({ title: 'VP Supply Chain', personaKey: null, accountName: 'PepsiCo' })).toMatch(/^Owns the PepsiCo supply chain network/);
     expect(suggestAngle({ title: 'Yard Coordinator', personaKey: null, accountName: 'PepsiCo' })).toMatch(/^Works the yard and dock/);
