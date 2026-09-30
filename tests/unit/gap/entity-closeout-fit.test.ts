@@ -33,3 +33,14 @@ describe('stored web Scout verdicts are re-derived on read', () => {
     expect(q[0]).toMatchObject({ verdict: 'UNKNOWN', why: 'No cited freight operation found; what it runs is not established.' });
   });
 });
+
+describe('production verify: an unjudged row stays unjudged', () => {
+  it('a legacy failed pass (no verdict, never scouted) is not re-derived into UNKNOWN', async () => {
+    const prisma = {
+      gapWorkSourceMember: { findMany: async () => [{ company: 'ShipNova', title: 'CEO', relationship_context: 'MMYQB subscriber', work_source: { id: 's1', name: 'MMYQB' } }] },
+      gapAccountCandidate: { findMany: async () => [{ company: 'ShipNova', company_key: 'shipnova', verdict: null, entity_type: null, domain: null, scout: { basis: 'web', why: 'The web pass failed (429 quota); nothing is known yet. Retry later.', network: [], freight: [], unknowns: [] }, decision: 'open', scouted_at: null }] },
+    };
+    const q = await loadCandidateQueue(prisma, {});
+    expect(q[0]).toMatchObject({ verdict: null, scouted: false });
+  });
+});
