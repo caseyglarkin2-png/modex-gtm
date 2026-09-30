@@ -57,6 +57,9 @@ const cls = (c: string) => c.replace(/_/g, ' ');
 
 export function decideApproach(x: ApproachInput): Approach {
   if (x.deal === 'ACTIVE') return { kind: 'IN_DEAL', why: 'An open HubSpot deal: work it from the deal, never cold.' };
+  // Not a fit (or a partner) is the answer before any HubSpot-link or deal-read hold: nothing to link for.
+  if (x.fit?.fit === 'PARTNER') return { kind: 'NO_GOOD_MOTION', why: `Not a direct buyer: ${x.fit.why} Work it as a partnership, never with a buyer pitch.` };
+  if (x.fit?.fit === 'NOT_FIT') return { kind: 'NO_GOOD_MOTION', why: `Not a YardFlow fit on the evidence: ${x.fit.why}` };
   if (x.deal === 'UNKNOWN') return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.dealUnknownWhy ?? 'the HubSpot deal state could not be read.'}` };
   if (x.deal === 'NOT_READ') return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the HubSpot deal state was not read here.' };
   if (x.relatedHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.relatedHold}` };
@@ -65,15 +68,16 @@ export function decideApproach(x: ApproachInput): Approach {
   if (x.conversation) return { kind: 'FOLLOW_UP', why: `A live conversation with ${x.conversation.who} (${cls(x.conversation.responseClass)}, ${x.conversation.at.slice(0, 10)}): continue that thread, never a cold first touch.` };
   if (x.touchHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.touchHold}` };
   if (!x.reachable) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: nobody reachable here (do not contact, or no email).' };
-  if (x.fit?.fit === 'PARTNER') return { kind: 'NO_GOOD_MOTION', why: `Not a direct buyer: ${x.fit.why} Work it as a partnership, never with a buyer pitch.` };
-  if (x.fit?.fit === 'NOT_FIT') return { kind: 'NO_GOOD_MOTION', why: `Not a YardFlow fit on the evidence: ${x.fit.why}` };
   const t = x.source ? traitsOf(x.source.sourceType) : null;
   const known = x.source && t && (t.engaged || t.relational) ? x.source.context ?? x.source.name : null;
   // Fact-led means problem-led: a usable verified fact AND a thesis grounded in it that Casey can stand behind.
   const factBlock = !x.verifiedFact ? 'no verified fact' : x.sensitiveOnly ? `the only live fact is sensitive (${x.sensitiveOnly}) and is never the hook` : x.groundedThesis === false ? 'a verified fact, but no thesis grounded in it yet (draft and review one first)' : x.staleThesis ? 'the approved thesis needs review before it is used' : null;
   if (!factBlock) return { kind: 'FACT_LED', why: `A verified fact and a thesis grounded in it.${known ? ` Optional opener: ${known}.` : ''}` };
   const noDraft = 'No problem is claimed; GAP drafts nothing until a usable fact and a grounded thesis exist.';
+  // A subscription or an inbound is context; with what the company operates unknown it is no reason to reach out.
+  // Someone Casey met or was introduced to stays a way in (his own act put the account in scope).
+  if (known && !t?.engaged && x.fit?.fit === 'UNKNOWN') return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: what this company operates is not established (fit unknown), and "${known}" is context, not a reason to reach out. Scout it first.` };
   if (x.source && t?.approach === 'referral_led') return { kind: 'REFERRAL_LED', why: `${known}: name the introduction and ask for their perspective. ${noDraft}` };
-  if (known) return { kind: 'RELATIONSHIP_LED', why: `${known}: ask for their perspective. ${noDraft}` };
+  if (known) return { kind: 'RELATIONSHIP_LED', why: `${known}: ask for their perspective${t?.opener === 'author' ? ` (you write ${x.source!.name}; never say they subscribe)` : ''}. ${noDraft}` };
   return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${factBlock}${x.verifiedFact ? '' : ' and no relationship to open with'}.` };
 }

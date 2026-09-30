@@ -788,7 +788,7 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       // not what Casey should work from: review it on the better fact first. Nothing is rewritten.
       const weak = inferiorOpener(i, now);
       if (weak) return `Review the thesis before any first touch: it opens on ${weak.reason} ("${weak.opener}"), but the best current fact is "${weak.best}". Revise it on that fact (Research: use this fact), or reject it.`;
-      return `Review the thesis, then use the verified fact in a first touch to ${m.who ?? 'the primary person'} (every gate runs at the click).`;
+      return m.who ? `Review the thesis, then use the verified fact in a first touch to ${m.who} (every gate runs at the click).` : 'Review the thesis, then find the operations owner first: nobody reachable on record has an operations title.';
     }
     case 'REFERRAL_LED':
     case 'RELATIONSHIP_LED':
@@ -842,7 +842,8 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
     fit: accountFit(i, now),
     relatedHold: i.family?.hold?.detail ?? null,
   });
-  const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary : reachable[0])?.name ?? null : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
+  // Fact-led goes to the likely operations owner only; never to whoever happens to be first on record.
+  const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary.name : null) : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
   return { type: a.kind, who, why: a.why };
 }
 
@@ -850,7 +851,9 @@ const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ??
 
 /** Titles that plausibly touch the yard; still LIKELY, never ownership. */
 const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
-const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern)\b/i;
+// Never the owner: buying, planning and support roles, and anyone not in the operating line (a board seat, a former
+// executive, business development, the CEO's office).
+const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern|former|retired|board|advisor|investor|business development|project manager|ceo office|office of the ceo|chief of staff)\b/i;
 
 /** NETWORK in the 30-second view: a count (filing, registry, audit estimate, microsite), never a news sentence. */
 function networkHeadline(i: AccountInputs, footprint: Section): string {
@@ -1005,9 +1008,13 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const reach = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
   // Who probably owns it: operations titles only (never sourcing, procurement, category, planning or analyst), most senior first.
   const owners = (list: PersonaInput[]) => list.filter((p) => OWNER_TITLE.test(p.title ?? '') && !NOT_OWNER_TITLE.test(p.title ?? '')).sort((x, y) => titleSeniority(y.title) - titleSeniority(x.title));
-  const persona = owners(reach)[0] ?? owners(i.personas)[0] ?? reach[0] ?? i.personas[0];
+  // Nobody with an operations title is Unknown, never "the first contact on record".
+  const persona = owners(reach)[0] ?? owners(i.personas)[0];
   const motion = accountMotion(i, hypotheses, now, persona);
-  const owner = persona ? `${persona.name}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)` : 'Unknown: no person at this account yet.';
+  const fragment = persona && /^\S+$|\s\S\.?$/.test(persona.name.trim()) ? ' (name incomplete in the CRM)' : '';
+  const owner = persona
+    ? `${persona.name}${fragment}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)${persona.doNotContact ? ' (do not contact)' : ''}`
+    : i.personas.length ? `Unknown: nobody on record has an operations title (${plural(i.personas.length, 'person', 'people')} on record).` : 'Unknown: no person at this account yet.';
   const biggestUnknown = discovery[0] ? `${discovery[0].type.replace(/_/g, ' ').toLowerCase()}: ${discovery[0].why}` : 'None open.';
   const glance: Glance = {
     account: i.account.name,
