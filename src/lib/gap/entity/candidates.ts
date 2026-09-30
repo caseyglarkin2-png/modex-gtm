@@ -12,6 +12,8 @@
  */
 import { legacyNormalizeCompanyName, normalizeCompanyName } from '../identity/normalize';
 import { scoutCompany, type ScoutResult } from './scout';
+import { deriveFit, operatingCount, type EntityType } from './fit';
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -316,15 +318,18 @@ export async function loadCandidateQueue(prisma: PrismaLike, opts: { workSourceI
     const item = by.get(c.company_key as string);
     if (!item) continue;
     const s = (c.scout ?? {}) as Partial<ScoutResult>;
+    // A web Scout's verdict is re-derived from its stored claims under today's rules (a rule fixed after the
+    // pass reaches the queue); name rules and hand decisions keep what was stored.
+    const today = s.basis === 'web' && !s.failed ? deriveFit({ entityType: (c.entity_type as EntityType | null) ?? null, operating: operatingCount([...(s.network ?? []), ...(s.freight ?? [])]), ambiguous: !!s.ambiguous, what: s.what ?? null }) : null;
     Object.assign(item, {
-      verdict: (c.verdict as string) ?? null,
+      verdict: today?.fit ?? (c.verdict as string) ?? null,
       ambiguous: !!s.ambiguous,
       entityType: (c.entity_type as string) ?? null,
       scouted: !!c.scouted_at,
       scoutedAt: c.scouted_at ? new Date(c.scouted_at as string).toISOString() : null,
       domain: (c.domain as string) ?? null,
       what: s.what ?? null,
-      why: s.why ?? null,
+      why: today?.why ?? s.why ?? null,
       network: s.network ?? [],
       freight: s.freight ?? [],
       unknowns: s.unknowns ?? [],
