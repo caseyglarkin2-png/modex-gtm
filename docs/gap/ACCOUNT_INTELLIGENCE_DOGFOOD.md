@@ -10,6 +10,42 @@ This was a read-only run against production using `scripts/gap/dogfood-intel.ts`
 - **AFTER** is the brief on the final code.
 - **DECISION CHANGE** is what Casey would now do differently.
 
+## Scale dogfood (2026-09-29, production main 1fe558f1)
+
+<!-- verified:2026-09-29 -->
+
+Read-only, run with `scripts/gap/dogfood-scale.ts` across 28 production accounts:
+- shippers: General Mills, Campbell's, Flowers Foods, Keurig Dr Pepper, Hormel, Frito-Lay;
+- non-BCO operators: FedEx, Kenco, Performance Food Group, Marten, Port of Los Angeles, NFI, XPO, Crowley;
+- relationship-led: Tyson, Walmart, RXO, The Home Depot, ShipBob;
+- signal-led: Sysco, Unfi;
+- ongoing evidence: PepsiCo (Gatik);
+- active deal: Kroger;
+- reject or defer: CHG Healthcare, MTA, Transport for Wales, Flexport, Paper Transport.
+
+Nothing was drafted, sent, created or approved.
+
+Usefulness (final state):
+- **Decision-grade: 4.** Kenco, Crowley, Kroger, Walmart.
+- **Useful but thin: 22.** 10 of these are identity-empty: type unknown and no Scout yet (Marten, Port of LA, XPO, ShipBob, Sysco, and the five correct defers).
+- **Noisy: 2.**
+  - General Mills still leads with a legacy draft that opens on its Brazil sale. It needs Casey's review.
+  - RXO is held as "deal state could not be read", when the real cause is that no HubSpot company is linked.
+- **Wrong: 0 after fixes.** Before the fixes, 4 were wrong or misleading:
+  - General Mills' opener;
+  - Kenco's and NFI's "the decision sits with the 3PL";
+  - PepsiCo's WHY YOU for a specialist.
+
+Fixed (PRs #326, #327):
+- openers are ranked by seller relevance, and a sale abroad or divestiture never auto-opens;
+- operators are asked about the sites they run;
+- an unknown type is never assumed to be a shipper;
+- a 3PL's sites are its own;
+- WHY YOU respects seniority;
+- GAP-written drafts carry a WRONG IF.
+
+Top gap: identity and research coverage. 10 of the 28 accounts have no entity type and no footprint until an identity Scout runs, and Scout is capped at 60 successful passes a day.
+
 ## Final closeout dogfood (Releases J-M + red team, production)
 
 Read-only, production `/gap/accounts/*` through the rig session, plus the candidate queue. No sends, no drafts, no
