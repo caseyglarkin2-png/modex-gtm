@@ -9,6 +9,8 @@ import { loadAccountConversations, loadAccountFirstTouches } from '../motion/loa
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { classifyContinuity } from '../research/continuity';
 import { isPhysicalOpsFact } from '../research/facts';
+import { speakerOrg, textNamesAccount } from '../research/run';
+import { normalizeCompany } from '../research/providers';
 import { selectConfirmedBids } from '../bid/select';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildROIEngineInputs, computeROIModel } from '@/lib/microsites/roi';
@@ -163,6 +165,9 @@ export async function loadAccountInputs(
     // Re-gated on read: a fact stored before a rule tightened (a software rollout, a 10-K description, an acquired
     // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
     if (!isPhysicalOpsFact(r.evidence_text)) continue;
+    // A quote attributed to another organization (a vendor's CEO about this account) is that organization's fact.
+    const speaker = speakerOrg(r.evidence_text);
+    if (speaker && !textNamesAccount(speaker, normalizeCompany(accountName))) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,
