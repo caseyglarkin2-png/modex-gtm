@@ -132,7 +132,7 @@ describe('the provider chain', () => {
     const calls: Array<{ text: string; search: boolean }> = [];
     const redirect = (id: string) => `https://vertexaisearch.cloud.google.com/grounding-api-redirect/${id}`;
     const ans = await geminiTwoStep(
-      'Identify Kenco. Return ONLY JSON.',
+      'Identify Kenco and the facilities it runs.\nReturn ONLY JSON:\n{"entityType": "..."}',
       async (text, search) => {
         calls.push({ text, search });
         return search
@@ -142,7 +142,10 @@ describe('the provider chain', () => {
       async (u) => (u === redirect('A') ? 'https://kenco.example/locations' : u === redirect('B') ? 'https://kenco.example/fleet/' : null),
     );
     expect(calls.map((c) => c.search)).toEqual([true, false]);
-    expect(calls[0].text).toMatch(/^Research the request below with Google Search\. Do NOT answer in JSON/);
+    expect(calls[0].text).toMatch(/^Research the request below with Google Search\./);
+    // the output-format lines never reach the search step (they make newer Gemini skip the search)
+    expect(calls[0].text).toContain('Identify Kenco and the facilities it runs.');
+    expect(calls[0].text).not.toMatch(/json|entityType/i);
     expect(calls[1].text).toMatch(/- Kenco operates 100 distribution centers\. \[source: https:\/\/kenco\.example\/locations\]/);
     expect(calls[1].text).toMatch(/- kenco\.example: https:\/\/kenco\.example\/locations/);
     expect(ans.citations).toEqual(['https://kenco.example/locations', 'https://kenco.example/fleet/', redirect('A'), redirect('B')]);

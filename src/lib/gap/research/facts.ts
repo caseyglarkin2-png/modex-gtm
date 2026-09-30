@@ -317,6 +317,31 @@ export function excerptFoundIn(excerpt: string, pageText: string): boolean {
   return e.length >= 40 && normalizeForMatch(pageText).includes(e);
 }
 
+const STOP = new Set(['the', 'and', 'for', 'with', 'that', 'this', 'from', 'will', 'its', 'their', 'has', 'have', 'was', 'were', 'are', 'into', 'over', 'which', 'about', 'also', 'more', 'than', 'company', 'said']);
+const contentWords = (t: string) => new Set(normalizeForMatch(t).toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 4 && !STOP.has(w)));
+const numbersIn = (t: string) => new Set((normalizeForMatch(t).match(/\d[\d,.]*/g) ?? []).map((n) => n.replace(/[,.]+$/, '').replace(/,/g, '')));
+
+/**
+ * The page's OWN sentence for a paraphrased proposal (a search model restates what it read). Accepted only when
+ * one physical-operations sentence on the page carries at least 70% of the proposal's content words AND every
+ * number the proposal states; the stored quote is then the page's verbatim sentence, never the paraphrase.
+ * Null when no sentence qualifies (the proposal is rejected as not found at the source).
+ */
+export function pageSentenceFor(excerpt: string, pageText: string): string | null {
+  const want = contentWords(excerpt);
+  const nums = numbersIn(excerpt);
+  if (want.size < 4) return null;
+  let best: { s: string; score: number } | null = null;
+  for (const s of extractFactSentences(pageText, 400)) {
+    const have = contentWords(s);
+    const shared = [...want].filter((w) => have.has(w)).length / want.size;
+    const sNums = numbersIn(s);
+    if (shared < 0.7 || [...nums].some((n) => !sNums.has(n))) continue;
+    if (!best || shared > best.score) best = { s, score: shared };
+  }
+  return best?.s ?? null;
+}
+
 /** A single quotable sentence (no internal sentence break), safe to cite as one observation sentence. */
 export function isSingleSentence(excerpt: string): boolean {
   return !/[.!?]\s+\S/.test(excerpt.trim().replace(/[.!?]["')\]]*$/, ''));

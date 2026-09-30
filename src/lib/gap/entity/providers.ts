@@ -220,8 +220,14 @@ async function resolveGroundingLink(uri: string): Promise<string | null> {
 }
 
 export async function geminiTwoStep(prompt: string, call: GeminiCall, resolve: (uri: string) => Promise<string | null> = resolveGroundingLink): Promise<ProviderAnswer> {
+  // The request without its output-format lines: any "return JSON" wording makes newer Gemini skip the search.
+  const request = prompt
+    .split('\n')
+    .filter((l) => !/\bjson\b|return only|^\s*[[{"]|"url"|copied verbatim|if you cannot find/i.test(l))
+    .join('\n')
+    .trim();
   const research = await call(
-    `Research the request below with Google Search. Do NOT answer in JSON: write your findings as plain sentences, each with the web page it came from. Leave out anything the search did not show.\n\nREQUEST:\n${prompt}`,
+    `Research the request below with Google Search. Write your findings as plain sentences, each with the web page it came from. Leave out anything the search did not show.\n\nREQUEST:\n${request}`,
     true,
   );
   const chunks = research.chunks;

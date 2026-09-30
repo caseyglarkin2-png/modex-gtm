@@ -28,7 +28,7 @@ import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/ev
 import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
 import type { SignalType } from '../taxonomy';
-import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, statedEventDate, type FactChange, describesPastEvent } from './facts';
+import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, pageSentenceFor, statedEventDate, type FactChange, describesPastEvent } from './facts';
 import { defaultFetchText, edgarCandidates, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -126,7 +126,8 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     const v = await verifyCandidate(c, ctx);
     if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }
     seen.add(key);
-    accepted.push({ ...c, publishedAt: v.publishedAt });
+    seen.add(normalizeForMatch(v.excerpt));
+    accepted.push({ ...c, excerpt: v.excerpt, publishedAt: v.publishedAt });
   }
 
   // Store: ResearchRun + EvidenceRecord + ProspectingSignal (existing stores).
@@ -160,7 +161,8 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
         const v = await verifyCandidate(c, ctx);
         if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }
         seen.add(key);
-        facts.push(await storeVerifiedFact(prisma, { runId: run.id, accountName: input.accountName, personaId: input.personaId, candidate: { ...c, publishedAt: v.publishedAt }, actor: input.actor, now: input.now }));
+        seen.add(normalizeForMatch(v.excerpt));
+        facts.push(await storeVerifiedFact(prisma, { runId: run.id, accountName: input.accountName, personaId: input.personaId, candidate: { ...c, excerpt: v.excerpt, publishedAt: v.publishedAt }, actor: input.actor, now: input.now }));
       }
       continuity = await establishContinuity(prisma, { accountName: input.accountName, actor: input.actor, now: input.now });
     } catch (err) {
@@ -227,7 +229,7 @@ export function textNamesAccount(text: string, accountKey: string): boolean {
  * Nothing else mints the `excerpt_found_at_source` stamp: storeVerifiedFact
  * is only ever called with a candidate that passed here.
  */
-export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date } | { ok: false; reason: string }> {
+export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date; excerpt: string } | { ok: false; reason: string }> {
   if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };
   if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
   if (!isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
@@ -238,12 +240,21 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   }
   const page = ctx.pages.get(c.url)!;
   if (page instanceof Error) return { ok: false, reason: `source_unreadable:${page.message}` };
-  if (!excerptFoundIn(c.excerpt, page)) return { ok: false, reason: 'excerpt_not_found_at_source' };
+  // A web search model restates what it read: its proposal may be re-anchored to the page's OWN sentence (same
+  // facts, same numbers), and that verbatim sentence is what is stored. EDGAR, signal and hand-typed facts stay
+  // strictly verbatim.
+  let excerpt = c.excerpt;
+  if (!excerptFoundIn(excerpt, page)) {
+    const own = c.provider === 'web' ? pageSentenceFor(excerpt, page) : null;
+    if (!own) return { ok: false, reason: 'excerpt_not_found_at_source' };
+    if (classifyContinuity(own) === 'event' && describesPastEvent(own, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+    excerpt = own;
+  }
   if (c.provider !== 'edgar' && !textNamesAccount(page, ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
   // A sentence taken from a signal's own page must itself name the account (a competitor's paragraph on the
   // same page is not this account's fact).
   if (c.provider === 'signal' && !textNamesAccount(c.excerpt, ctx.accountKey)) return { ok: false, reason: 'sentence_does_not_name_account' };
-  return { ok: true, publishedAt: c.publishedAt };
+  return { ok: true, publishedAt: c.publishedAt, excerpt };
 }
 
 /** Store one VERIFIED candidate through the existing stores: EvidenceRecord + an evidence_record ProspectingSignal. */
