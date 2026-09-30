@@ -32,11 +32,12 @@ export interface ResearchHistory {
 }
 
 /** The web focus for each section a research run can answer. */
+// Each focus names the decision it fills and the searches most likely to find a verifiable source for it.
 export const DEEPEN_FOCUS = {
-  catalysts: 'Recent changes to plants, distribution centers, warehouses or the transportation network (openings, closures, consolidations, expansions, automation).',
-  footprint: 'How many plants, distribution centers and warehouses the company operates, and where (annual report properties section, company site).',
-  technology: 'Yard management, dock scheduling, gate automation or trailer tracking systems the company uses (press releases, vendor case studies).',
-  freight: 'Private fleet, dedicated carriers, intermodal or rail use, and how freight moves between plants and distribution centers.',
+  catalysts: 'Recent changes to plants, distribution centers, warehouses or the transportation network (openings, closures, consolidations, expansions, automation). Useful searches: "<company> new distribution center", "<company> plant closure", "<company> warehouse expansion", "<company> logistics facility", "<company> warehouse automation".',
+  footprint: 'How many plants, distribution centers and warehouses the company operates, and where (annual report properties section, company site). Useful searches: "<company> 10-K properties", "<company> distribution network", "<company> facilities locations".',
+  technology: 'Yard management, dock scheduling, gate automation or trailer tracking systems the company uses (press releases, vendor case studies naming it). Useful searches: "<company> yard management", "<company> YMS", "<company> Kaleris PINC", "<company> TMS implementation", "<company> warehouse management case study".',
+  freight: 'Private fleet, dedicated carriers, intermodal or rail use, and how freight moves between plants and distribution centers. Useful searches: "<company> private fleet", "<company> dedicated fleet", "<company> intermodal", "<company> drop and hook", "<company> transportation network".',
 } as const;
 
 const HUMAN: Partial<Record<SectionKey, string>> = {
