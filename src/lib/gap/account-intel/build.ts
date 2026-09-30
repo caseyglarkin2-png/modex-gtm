@@ -795,7 +795,7 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
     default:
       // A hold on the HubSpot link is cleared in HubSpot, not by research (the plan holds research until then).
-      return liveFacts(i, now).length || /Not a shipper prospect|not linked to a HubSpot company|deal state could not be read/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
+      return liveFacts(i, now).length || /Not a shipper prospect|not linked to a HubSpot company|deal state could not be read|Scout it first/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
   }
 }
 
@@ -839,7 +839,9 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
       const live = liveFacts(i, now);
       return live.length && live.every((f) => sensitivityOf(f.quote)) ? sensitivityOf(live[0].quote) : null;
     })(),
-    fit: accountFit(i, now),
+    // WHY NOT's "settle its identity first" (type unknown, most audited sites 3PL-run) is the motion's answer too:
+    // the fit is not established until what the company IS is.
+    fit: identityUnsettled(i) ? { fit: 'UNKNOWN', why: 'What this company is (a 3PL, or a shipper using one) is not established.' } : accountFit(i, now),
     relatedHold: i.family?.hold?.detail ?? null,
   });
   // Fact-led goes to the likely operations owner only; never to whoever happens to be first on record.
@@ -914,6 +916,12 @@ export function entityTypeOf(i: Pick<AccountInputs, 'scout' | 'account'>): Entit
   return (scout?.entityType as EntityType | undefined) ?? typeFromVertical(i.account.vertical);
 }
 
+/** The company type is unknown and most audited sites are marked 3PL-run: it may BE the 3PL or use one. */
+function identityUnsettled(i: AccountInputs): boolean {
+  const a = auditedSites(i.pack);
+  return !entityTypeOf(i) && a.kept.length > 0 && a.threePl.length > a.self.length;
+}
+
 /** The audited sites this company itself runs. For a 3PL, a site the audit calls "3PL-operated" is its own. */
 function ownSites(i: AccountInputs, a: ReturnType<typeof auditedSites>) {
   return entityTypeOf(i) === '3pl' ? [...a.self, ...a.threePl] : a.self;
@@ -979,7 +987,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const aud = auditedSites(i.pack);
   // A 3PL's own sites are "3PL-operated": the decision sits with this account, not elsewhere.
   if (aud.kept.length && entityTypeOf(i) !== '3pl' && aud.threePl.length > aud.self.length)
-    whyNot.push(entityTypeOf(i) ? 'Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.' : 'Most audited sites are marked 3PL-operated, and what this company is is not established: it may BE the 3PL (then they are its own sites) or use one. Settle its identity first.');
+    whyNot.push(!identityUnsettled(i) ? 'Most audited sites are 3PL-operated: the yard decision may sit with the 3PL.' : 'Most audited sites are marked 3PL-operated, and what this company is is not established: it may BE the 3PL (then they are its own sites) or use one. Settle its identity first.');
   if (i.family?.hold) whyNot.push(i.family.hold.detail);
   const fit = accountFit(i, now);
   if (fit.fit === 'PARTNER' || fit.fit === 'NOT_FIT' || fit.fit === 'UNKNOWN') whyNot.push(`${FIT_LABEL[fit.fit]}: ${fit.why}`);
