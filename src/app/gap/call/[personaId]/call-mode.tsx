@@ -34,8 +34,11 @@ export function CallMode({
   client = defaultGapApiClient,
   onRecorded,
   hypothesis,
+  hideContact = false,
 }: {
   personaId: string;
+  /** Execution acceptance: hide the prospect's email and phone in the brief (see PreCallBrief). */
+  hideContact?: boolean;
   client?: GapApiClient;
   /**
    * Release C review SF2: the card's own hypothesis. The brief picks the
@@ -78,7 +81,7 @@ export function CallMode({
 
   return (
     <div className="space-y-6">
-      <PreCallBrief brief={brief} />
+      <PreCallBrief brief={brief} hideContact={hideContact} />
       {(hypothesis ?? brief.hypothesis) && contactEmail ? (
         <DispositionForm
           key={sourceId}

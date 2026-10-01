@@ -220,7 +220,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Phase 2 E2: one primary action per channel. A call card leads with the call; an embedded pack does
   // not repeat the card's Call button (the number is shown, the card's Call checks HubSpot first).
   const callFirst = decision?.action === 'call_now';
-  const callSection = callPack && !thesisHold ? (
+  // A call script reads the thesis aloud: only an ACTIVE (approved and in use) thesis that is current.
+  const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (
       <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
@@ -260,7 +261,6 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           The person requested for this action pack does not belong to {hypothesis.account_name} ({pack.personaRefused.replace(/_/g, ' ')}). Nothing is rendered for them.
         </p>
       ) : null}
-      <SixLineBriefView brief={brief} personaId={briefPersonaId} accountName={hypothesis.account_name} />
       {thesisHold ? (
         <section data-testid="thesis-needs-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
           <p className="text-xs font-semibold uppercase tracking-wide">Thesis needs review</p>
@@ -271,15 +271,22 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
             <p data-testid="thesis-legacy"><span className="font-semibold">This thesis opens on: </span>{thesisState.opener}</p>
           ) : null}
           <p className="text-[var(--muted-foreground)]">{thesisState.reason}</p>
-          <p>
-            <span className="font-semibold">Action: </span>revise the thesis on the current fact (or reject it) and approve the revision. Email, draft, copy and
-            cold call stay off for this thesis until then; history is kept.
-          </p>
+          {thesisState.current === false ? (
+            <p>
+              <span className="font-semibold">Action: </span>revise the thesis on the current fact (or reject it) and approve the revision. Email, draft, copy and
+              cold call stay off for this thesis until then; history is kept.
+            </p>
+          ) : (
+            <p>
+              <span className="font-semibold">Action: </span>reload in a moment. Email, draft, copy and cold call stay off until GAP can confirm the thesis is current.
+            </p>
+          )}
           <a href={accountHref(hypothesis.account_name)} className="inline-flex rounded-md border border-[var(--border)] px-3 py-1.5 text-xs hover:bg-[var(--muted)]">
             Review {hypothesis.account_name}
           </a>
         </section>
       ) : null}
+      <SixLineBriefView brief={brief} personaId={briefPersonaId} accountName={hypothesis.account_name} />
       {callFirst ? callSection : null}
 
       {touch && touch.state !== 'not_started' ? (

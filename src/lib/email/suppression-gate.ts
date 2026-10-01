@@ -302,5 +302,8 @@ export async function probeSuppressionContract(
 ): Promise<{ verdict: 'clear' | 'suppressed' | 'unknown'; error: string | null }> {
   const v = await readContract(normalize([email]), env);
   if (v.unreadable) return { verdict: 'unknown', error: v.reason };
+  // clawd answers 200 with blocked `unknown_<leg>` when a leg could not be read: every click refuses then, so
+  // health must too (the same reading suppressionRefusalKind gives a click's refusal).
+  if (v.refused && /^(unknown_|malformed_verdict)/.test(v.reason)) return { verdict: 'unknown', error: v.reason };
   return v.refused ? { verdict: 'suppressed', error: null } : { verdict: 'clear', error: null };
 }

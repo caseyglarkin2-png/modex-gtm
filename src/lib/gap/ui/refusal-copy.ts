@@ -75,7 +75,7 @@ const COPY: Record<string, RefusalCopy> = {
   },
   thesis_needs_review: {
     what: 'Nothing was drafted, sent or released.',
-    why: 'This thesis needs review before anyone is contacted on it: a better current fact exists, or it was revised.',
+    why: 'This thesis needs review before anyone is contacted on it: a better current fact exists, it was revised, its fact is no longer live, or the buyer contradicted it.',
     next: 'Open the account, revise the thesis on the current best fact (or reject it), and approve the revision.',
   },
   thesis_currentness_unknown: {

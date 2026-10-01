@@ -51,7 +51,7 @@ type Outcome =
 const REASON_COPY: Record<string, string> = {
   copy_review_required: 'The copy needs your approval first. Approve it right here.',
   copy_rejected: 'The compiler rejected this copy. Nothing was drafted.',
-  gmail_refused: 'Gmail refused the draft. Nothing was drafted.',
+  gmail_refused: 'Gmail did not confirm the draft. Check Gmail Drafts before trying again.',
   decision_blocked: 'This card is a system block. Nothing can be drafted.',
   persona_do_not_contact: 'This person is marked do not contact. Nothing was drafted.',
   hypothesis_not_active: 'The hypothesis is no longer active. Nothing was drafted.',

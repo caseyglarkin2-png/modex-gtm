@@ -56,15 +56,23 @@ export const QUANTIFYING = /\b(cost|costs|costing|spend|how many|how much|how lo
 const EXECUTIVE = /\b(chief|cxo|ceo|coo|cso|csco|president|svp|evp|vice president|vp|head of)\b/i;
 const FRONT_LINE = /\b(supervisor|coordinator|specialist|analyst|associate|lead|clerk|planner|dispatcher|operator|foreman)\b/i;
 
-/** The approved hypothesis spoken: "My guess is that ...", read from the email side ("above" dropped). */
+/**
+ * The approved hypothesis spoken: "My guess is that ...". Read from the email side, so its hedge ("My guess is",
+ * "I suspect", "I think") is not doubled, and the email-only clause that points at the evidence list (", and the
+ * signals above are where that shows first") is dropped: on a call Casey has said one fact, not a list.
+ */
 function spokenHypothesis(problem: string): string | null {
   const core = problem
     .trim()
-    .replace(/^my guess is (that )?/i, '')
-    .replace(/\s+above\b/gi, '')
-    .replace(/[.\s]+$/, '');
+    .replace(/^(?:my guess is|i suspect|i think|i would guess|my hunch is)(?: that)?\s+/i, '')
+    .replace(/,?\s*and the (?:signals?|facts?|evidence) above (?:is|are) where[^.?!]*/i, '')
+    // "the network change above" points back at the email's fact list; spoken, it is just "the network change"
+    .replace(/\b(the (?:[a-z-]+ ){0,2}(?:change|changes|news|fact|announcement|move|shift|expansion|closure|redesign))\s+above\b/gi, '$1')
+    .replace(/[.?!\s]+$/, '');
   if (!core) return null;
-  return `My guess is that ${core.charAt(0).toLowerCase()}${core.slice(1)}.`;
+  // Lowercase only a leading article or pronoun; a name stays as written ("General Mills ...").
+  const first = /^(The|A|An|Their|Its|This|That|These|Those|There|Our)\b/.test(core) ? `${core.charAt(0).toLowerCase()}${core.slice(1)}` : core;
+  return `My guess is that ${first}.`;
 }
 
 function question(title: string | null | undefined): string {

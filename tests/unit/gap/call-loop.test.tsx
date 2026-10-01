@@ -13,8 +13,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 vi.mock('@/app/gap/call/[personaId]/call-mode', () => ({
-  CallMode: ({ personaId, onRecorded, hypothesis }: { personaId: string; onRecorded?: (c: string) => void; hypothesis?: { id: string; problemFamily: string } }) => (
-    <div data-testid="call-mode-stub" data-persona={personaId} data-hypothesis={hypothesis?.id ?? ''} data-family={hypothesis?.problemFamily ?? ''}>
+  CallMode: ({ personaId, onRecorded, hypothesis, hideContact }: { personaId: string; onRecorded?: (c: string) => void; hypothesis?: { id: string; problemFamily: string }; hideContact?: boolean }) => (
+    <div data-testid="call-mode-stub" data-persona={personaId} data-hypothesis={hypothesis?.id ?? ''} data-family={hypothesis?.problemFamily ?? ''} data-hide-contact={hideContact ? 'true' : 'false'}>
       <button type="button" onClick={() => onRecorded?.('no_answer')}>record no answer</button>
       <button type="button" onClick={() => onRecorded?.('voicemail')}>record voicemail</button>
       <button type="button" onClick={() => onRecorded?.('problem_confirmed')}>record conversation</button>
@@ -53,6 +53,8 @@ describe('T8 inline call outcome', () => {
     fireEvent.click(screen.getByTestId('cold-call'));
     expect(await screen.findByTestId('inline-call-outcome')).toBeInTheDocument();
     expect(screen.getByTestId('call-mode-stub')).toHaveAttribute('data-persona', '41');
+    // the governed Call cleared on this card: the recorder may show the contact
+    expect(screen.getByTestId('call-mode-stub')).toHaveAttribute('data-hide-contact', 'false');
     fetchMock.mockRestore();
     open.mockRestore();
   });
@@ -61,6 +63,8 @@ describe('T8 inline call outcome', () => {
     render(<DecisionCard item={item()} onAct={() => {}} />);
     fireEvent.click(screen.getByTestId('record-call-outcome'));
     expect(screen.getByTestId('inline-call-outcome')).toBeInTheDocument();
+    // execution acceptance: without a cleared Call, the recorder never shows the prospect's phone or email
+    expect(screen.getByTestId('call-mode-stub')).toHaveAttribute('data-hide-contact', 'true');
   });
 
   it.each(['no answer', 'voicemail'])('%s keeps the card open to retry and records NO human action', (label) => {

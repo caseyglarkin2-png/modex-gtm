@@ -214,7 +214,7 @@ describe('the action pack renders from the same rule (an old deep link to a stal
     const src = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
     expect(src).toContain('thesisCurrentness(accountInputs, hypothesis.id, new Date())');
     expect(src).toContain("const thesisHold = thesisState.current !== true;");
-    expect(src).toContain('const callSection = callPack && !thesisHold ? (');
+    expect(src).toContain("const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (");
     expect(src).toContain('{renderedEmail && thesisHold ? null : renderedEmail ? (');
     expect(src).toContain('!blockedReason && !rejected && !thesisHold ? (');
     expect(src).toContain('data-testid="thesis-needs-review"');
@@ -244,5 +244,55 @@ describe('the same fact stored once per person is ONE live fact (E2E found it: a
     const inputs = await loadAccountInputs(prisma as never, 'General Mills', T);
     expect(inputs?.facts).toHaveLength(1);
     expect([inputs!.facts[0].id, ...((inputs!.facts[0] as { sameQuoteIds?: string[] }).sameQuoteIds ?? [])].sort()).toEqual(['a', 'b']);
+  });
+});
+
+describe('real hypothesis templates read cleanly aloud (reviewer: "My guess is that i suspect ... the signals")', () => {
+  const base = { firstName: 'Ryan', senderFirstName: 'Casey', accountName: 'General Mills', observationPlain: REDESIGN.quote, diagnosticQuestion: null, title: null };
+  it('"I suspect ..." with the email-only "signals above" clause', () => {
+    const p = buildCallPack({ ...base, problemHypothesis: 'I suspect operators cannot continuously trust yard state at General Mills, and the signals above are where that shows up first.' });
+    expect(p.opener).toContain('My guess is that operators cannot continuously trust yard state at General Mills. Is that actually an issue for you, or am I off?');
+    expect(p.opener).not.toMatch(/i suspect|signals/i);
+  });
+  it('a name stays capitalized; a trailing question mark does not double up', () => {
+    const p = buildCallPack({ ...base, problemHypothesis: 'My guess is General Mills is carrying more yard variation into this phase?' });
+    expect(p.opener).toContain('My guess is that General Mills is carrying more yard variation into this phase. Is that');
+  });
+});
+
+describe('PreCallBrief hides contact when asked', () => {
+  it('source: the recorder brief renders contact only when not hidden', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/components/gap/pre-call-brief.tsx', 'utf8');
+    expect(src).toMatch(/hideContact \? \(\s*<span data-testid="brief-contact-hidden">/);
+    const view = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
+    expect(view).toContain("const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (");
+  });
+});
+
+describe('reliability review P1s', () => {
+  it('health: an unreadable clawd leg (HTTP 200, blocked unknown_<leg>) is UNKNOWN, never "suppressed" and never HEALTHY', async () => {
+    const { probeSuppressionContract } = await import('@/lib/email/suppression-gate');
+    const env = { CLAWD_CONTROL_PLANE_URL: 'https://clawd.example', CLAWD_CONTROL_PLANE_TOKEN: 't' };
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, results: [{ email: 'gap-health-probe@yardflow.ai', blocked: true, reason: 'unknown_sendgrid', keys: [], unknown_legs: ['sendgrid'] }] }), { status: 200 }));
+    expect(await probeSuppressionContract('gap-health-probe@yardflow.ai', env)).toMatchObject({ verdict: 'unknown' });
+    fetchMock.mockResolvedValueOnce(new Response(JSON.stringify({ ok: true, results: [{ email: 'gap-health-probe@yardflow.ai', blocked: true, reason: 'hubspot_optout', keys: [], unknown_legs: [] }] }), { status: 200 }));
+    expect(await probeSuppressionContract('gap-health-probe@yardflow.ai', env)).toMatchObject({ verdict: 'suppressed' });
+    fetchMock.mockRestore();
+  });
+  it('the click-time thesis load always includes the target thesis, even past the 10 most recent', async () => {
+    const { loadAccountInputs } = await import('@/lib/gap/account-intel/load');
+    const h = (id: string) => ({ id, status: 'draft', reviewed_at: null, activated_at: null, observation: 'o', problem_hypothesis: 'p', root_cause_hypotheses: [], impact_hypotheses: [], falsification_questions: [], what_a_no_means: null, signals: [] });
+    const recent = Array.from({ length: 10 }, (_, k) => h(`recent-${k}`));
+    const target = { ...h('target'), status: 'active', reviewed_at: new Date('2026-09-20') };
+    const empty = { findMany: async () => [], findUnique: async () => null, findFirst: async () => null, count: async () => 0 };
+    const own = {
+      $queryRaw: async () => [{ name: 'General Mills' }],
+      account: { findUnique: async () => ({ name: 'General Mills', tier: null, priority_band: null, vertical: null, parent_brand: null, hubspot_company_id: null }), findMany: async () => [] },
+      prospectingHypothesis: { ...empty, findMany: async ({ where }: { where: { id?: string } }) => (where.id === 'target' ? [target] : recent) },
+    };
+    const prisma = new Proxy(own, { get: (t, k) => (k in t ? t[k as keyof typeof t] : typeof k === 'string' && !k.startsWith('$') && k !== 'then' ? empty : undefined) });
+    const inputs = await loadAccountInputs(prisma as never, 'General Mills', new Date('2026-10-01T12:00:00Z'), { hypothesisId: 'target' });
+    expect(inputs?.hypotheses.map((x) => x.id)).toContain('target');
   });
 });
