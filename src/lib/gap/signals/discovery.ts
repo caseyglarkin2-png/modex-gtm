@@ -27,8 +27,16 @@ export const DISCOVERY_AUDIT = 'signal.discovery' as const;
 export const DISCOVERY_ACTOR = 'gap-signal-discovery';
 export const DISCOVERY_ACCOUNTS_PER_RUN = 10;
 export const DISCOVERY_QUERIES_PER_ACCOUNT = 2;
-/** Stories older than this are not signals of anything happening now. */
+/**
+ * Stories older than this are not FRESH triggers: still captured (age is metadata, labelled NOT A FRESH TRIGGER on
+ * the source card), never queued for research on their own.
+ */
 export const DISCOVERY_MAX_AGE_MS = 21 * 86_400_000;
+/**
+ * Research aperture: the ONLY headlines discovery drops as spam are machine-generated market chatter (fund holdings
+ * filings, price targets, analyst rating changes). A content type, never a judgment of whether a story matters.
+ */
+export const MARKET_CHATTER = /\b(?:shares? (?:sold|bought|purchased|acquired) by|(?:stake|position|holdings?) in|price target|stock (?:price|rating)|(?:upgraded|downgraded|reiterated) (?:to|at|by)|(?:buy|sell|hold|outperform) rating|short interest|options? (?:activity|trading)|dividend (?:of|declared))\b/i;
 /** A discovered story this strong goes to research on its own (Casey-shared ones always do). */
 // Name in the headline (+2) plus one operational category (4): every discovered outreach candidate is followed up.
 export const DISCOVERY_RESEARCH_SCORE = 6;
@@ -97,6 +105,8 @@ export interface DiscoveryAccountResult {
   items: number;
   kept: number;
   captured: number;
+  /** Machine-generated market chatter dropped as spam (MARKET_CHATTER). */
+  spam?: number;
   duplicates: number;
   queued: number;
   /** Fetch failures (a 429 or a timeout is reported, never an empty "nothing happened"). */
@@ -157,7 +167,7 @@ export async function runDiscovery(
     }
     const themes = themesForRun(p, asks.get(p.accountName) ?? 0, opts.queriesPerAccount ?? DISCOVERY_QUERIES_PER_ACCOUNT);
     const queries = themes.map((t) => `"${p.accountName}" (${t}) when:14d`);
-    const out: DiscoveryAccountResult = { accountName: p.accountName, queries, items: 0, kept: 0, captured: 0, duplicates: 0, queued: 0, errors: [], otherAccount: 0 };
+    const out: DiscoveryAccountResult = { accountName: p.accountName, queries, items: 0, kept: 0, captured: 0, spam: 0, duplicates: 0, queued: 0, errors: [], otherAccount: 0 };
     const seen = new Set<string>();
     for (const q of queries) {
       const got = await news(q).catch((e: unknown) => ({ items: [] as NewsItem[], error: e instanceof Error ? e.message : String(e) }));
@@ -167,7 +177,7 @@ export async function runDiscovery(
       for (const it of items) {
         if (seen.has(it.url)) continue;
         seen.add(it.url);
-        if (opts.now.getTime() - it.publishedAt.getTime() > DISCOVERY_MAX_AGE_MS) continue;
+        const fresh = opts.now.getTime() - it.publishedAt.getTime() <= DISCOVERY_MAX_AGE_MS;
         const headline = cleanHeadline(it.title, it.source);
         const match = headlineMatch(headline, p);
         if (!match) continue;
@@ -177,9 +187,13 @@ export async function runDiscovery(
           out.otherAccount += 1;
           continue;
         }
+        if (MARKET_CHATTER.test(headline)) {
+          out.spam = (out.spam ?? 0) + 1;
+          continue;
+        }
+        // Research aperture: a headline that names the account is a source Casey sees, whatever the classifier
+        // makes of it. The classification only decides whether research is queued on its own.
         const cls = classifySignal(headline, p.accountName);
-        // The physical-network taxonomy or a risk/leadership story; finance noise and unclassified chatter are dropped.
-        if (cls.relevance === 'research_lead' || cls.relevance === 'account_context' || cls.score < 2) continue;
         out.kept += 1;
         const r = await captureSignal(
           prisma,
@@ -192,7 +206,7 @@ export async function runDiscovery(
           continue;
         }
         out.captured += 1;
-        if (cls.relevance === 'outreach_evidence_candidate' && cls.score >= DISCOVERY_RESEARCH_SCORE) {
+        if (fresh && cls.relevance === 'outreach_evidence_candidate' && cls.score >= DISCOVERY_RESEARCH_SCORE) {
           await prisma.gapSignal.update({ where: { id: r.signal.id }, data: { research_status: 'queued' } });
           out.queued += 1;
         }

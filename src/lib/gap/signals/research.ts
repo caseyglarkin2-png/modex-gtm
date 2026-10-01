@@ -44,18 +44,30 @@ const PRIMARY_BASIS = new Set(['company_newsroom', 'domain']);
 export const SIGNAL_PAGES_PER_RUN = 3;
 export const SIGNAL_PAGES_BUDGET_MS = 25_000;
 
-export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml; clock?: () => number; accountName?: string } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string> }> {
+/** What happened to each page a run was asked to read: read (with how many candidate sentences), unreadable, or not read. */
+export interface PageResult {
+  url: string;
+  title: string | null;
+  publishedAt: Date | null;
+  outcome: 'read' | 'unreadable' | 'not_read';
+  sentences: number;
+  error?: string;
+}
+
+export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml; clock?: () => number; accountName?: string } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string>; pageResults: PageResult[] }> {
   const fetchHtml = deps.fetchHtml ?? defaultFetchHtml;
   const clock = deps.clock ?? Date.now;
   const started = clock();
   const candidates: Candidate[] = [];
   const pages = new Map<string, string>();
   const notes: string[] = [];
+  const pageResults: PageResult[] = [];
   let read = 0;
   for (const s of signals) {
     if (!s.url) continue;
     if (read >= SIGNAL_PAGES_PER_RUN || clock() - started > SIGNAL_PAGES_BUDGET_MS) {
       notes.push(`${s.id}: page not read this run (page budget)`);
+      pageResults.push({ url: s.url, title: s.title, publishedAt: s.published_at ? new Date(s.published_at) : null, outcome: 'not_read', sentences: 0 });
       continue;
     }
     read += 1;
@@ -66,6 +78,7 @@ export async function signalCandidates(signals: readonly ResearchableSignal[], d
       text = htmlToText(html);
     } catch (e) {
       notes.push(`${s.id}: page unreadable (${(e instanceof Error ? e.message : String(e)).slice(0, 60)})`);
+      pageResults.push({ url: s.url, title: s.title, publishedAt: s.published_at ? new Date(s.published_at) : null, outcome: 'unreadable', sentences: 0, error: (e instanceof Error ? e.message : String(e)).slice(0, 120) });
       continue;
     }
     pages.set(s.url, text);
@@ -74,18 +87,19 @@ export async function signalCandidates(signals: readonly ResearchableSignal[], d
     const published = s.published_at ? new Date(s.published_at) : (parseSignalMeta(html).publishedAt ?? (deps.accountName ? datelineDate(text, deps.accountName) : null));
     const sentences = extractFactSentences(text, 8);
     notes.push(`${s.id}: ${sentences.length} candidate sentence(s)${published ? '' : ', page undated'}`);
+    pageResults.push({ url: s.url, title: s.title ?? (parseSignalMeta(html).title ?? null), publishedAt: published, outcome: 'read', sentences: sentences.length });
     for (const excerpt of sentences) {
       candidates.push({
         provider: 'signal',
         url: s.url,
-        title: s.title ?? s.url,
+        title: s.title ?? parseSignalMeta(html).title ?? s.url,
         publishedAt: published,
         excerpt,
         sourceType: PRIMARY_CLASSES.has(s.source_class) || PRIMARY_BASIS.has(s.resolution_basis ?? '') || (deps.accountName && hostBelongsToAccount(s.url, deps.accountName)) ? 'public_primary' : 'public_secondary',
       });
     }
   }
-  return { candidates, note: notes.join('; ') || 'no signal pages', pages };
+  return { candidates, note: notes.join('; ') || 'no signal pages', pages, pageResults };
 }
 
 export function signalFocus(signals: readonly ResearchableSignal[]): string | undefined {

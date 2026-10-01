@@ -36,6 +36,8 @@ interface Result {
   outcome: 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence' | 'provider_unavailable';
   facts: Fact[];
   rejected: Array<{ url: string; reason: string }>;
+  /** Every page the run looked at (research aperture). */
+  sources?: Array<{ url: string; status: string }>;
   conflicts: Array<{ site: string; signalIds: string[] }>;
 }
 /** Final Monday P1: the person already has a revision of this thesis; research did not run. */
@@ -305,7 +307,11 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
           <p className="text-[var(--muted-foreground)]">
             Recommendation: hold and research later.{' '}
             {result.facts.length > 0 ? `${result.facts.length} older fact(s) were found but are stale. ` : ''}
-            {result.rejected.length > 0 ? `${result.rejected.length} candidate(s) rejected (not verifiable at the source, undated, or not about physical operations).` : ''}
+            {result.sources?.length
+              ? `Sources found: ${result.sources.length} · outreach facts verified: ${result.facts.length}. No verified outreach fact is not "nothing found": every source is on the account page under Sources / signals, with the reason.`
+              : result.rejected.length > 0
+                ? `${result.rejected.length} candidate(s) did not qualify as outreach facts (not verifiable at the source, undated, or not about physical operations); they are on the account page under Sources / signals.`
+                : ''}
           </p>
         </div>
       ) : null}

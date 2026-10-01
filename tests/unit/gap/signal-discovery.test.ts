@@ -102,7 +102,7 @@ describe('discovery', () => {
     expect(themesForRun(p, 0, 2)).not.toEqual(themesForRun(p, 1, 2));
   });
 
-  it('asks the least recently asked accounts first, captures only headlines that name the account and hit the taxonomy, queues the strong ones; nothing else is written', async () => {
+  it('asks the least recently asked accounts first, captures every headline about the account (old ones as context), drops market chatter, queues only fresh strong ones; nothing else is written', async () => {
     const { prisma, rows } = discoveryDb();
     const news = vi.fn(async (q: string) => ({
       error: null,
@@ -113,6 +113,7 @@ describe('discovery', () => {
             { title: 'Cereal makers face slower demand - Reuters', url: 'https://news.google.com/rss/articles/A3', source: 'Reuters', publishedAt: new Date('2026-09-25T00:00:00Z') },
             { title: 'Post Holdings opens new distribution center in Ohio - Food Dive', url: 'https://news.google.com/rss/articles/A5', source: 'Food Dive', publishedAt: new Date('2026-09-25T00:00:00Z') },
             { title: 'General Mills opens new distribution center - Old News', url: 'https://news.google.com/rss/articles/A4', source: 'Old News', publishedAt: new Date('2026-07-01T00:00:00Z') },
+            { title: 'General Mills hosts investor day in Minneapolis - Star Tribune', url: 'https://news.google.com/rss/articles/A6', source: 'Star Tribune', publishedAt: new Date('2026-09-24T00:00:00Z') },
           ]
         : [],
     }));
@@ -120,9 +121,14 @@ describe('discovery', () => {
     expect(r.accounts.map((a) => a.accountName)).toEqual(['General Mills']);
     expect(news).toHaveBeenCalledTimes(2);
     expect(String(news.mock.calls[0][0])).toMatch(/^"General Mills" \(.+\) when:14d$/);
-    expect(rows).toHaveLength(1);
+    // Research aperture: the old story and the unclassified one are captured (Casey decides what matters); the
+    // MarketBeat price-target chatter is spam; the rival's story is not this account's.
+    expect(rows.map((x) => x.title).sort()).toEqual(['General Mills hosts investor day in Minneapolis', 'General Mills opens new distribution center', 'General Mills to close two plants and consolidate distribution']);
     expect(rows[0]).toMatchObject({ title: 'General Mills to close two plants and consolidate distribution', account_name: 'General Mills', resolution: 'resolved', resolution_basis: 'discovery_query', origin: 'discovery', source_name: 'Food Dive' });
-    expect(r.accounts[0]).toMatchObject({ items: 10, kept: 1, captured: 1 });
+    expect(r.accounts[0]).toMatchObject({ items: 12, kept: 3, captured: 3, spam: 1 });
+    // Only a FRESH strong story is queued; the 86-day-old one is context, never a trigger on its own.
+    expect(rows.find((x) => x.title === 'General Mills opens new distribution center')?.research_status ?? 'none').not.toBe('queued');
+    expect(rows.find((x) => x.title === 'General Mills hosts investor day in Minneapolis')?.research_status ?? 'none').not.toBe('queued');
     expect(prisma.pounceTrigger.create).not.toHaveBeenCalled();
     expect(prisma.prospectingSignal.create).not.toHaveBeenCalled();
     expect(prisma.gapAuditEvent.create).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ kind: 'signal.discovery', subject_id: 'General Mills' }) }));

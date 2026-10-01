@@ -18,6 +18,7 @@
  * approves). IGNORE appends an `evidence.ignored` audit row (research history
  * is never deleted). Nothing here creates, approves or activates anything.
  */
+import { DROP_REASONS, SEARCH_REDIRECT } from '../sources/source-copy';
 import { outreachFactRefusal } from './evidence-gate';
 import { sellerRelevance, type SellerRelevance } from './continuity';
 import { hostBelongsToAccount } from './providers';
@@ -85,7 +86,12 @@ export interface InboxAccount {
   accountName: string;
   ready: InboxFact[];
   contradictions: Array<{ site: string; facts: InboxFact[] }>;
-  rejected: Array<{ url: string; reason: string; at: string }>;
+  /**
+   * Research aperture: every source research looked at that is NOT an outreach fact, with its provenance and the
+   * factual reason (shown, never discarded). Only search redirects, broken links and pages proven not to name the
+   * account are left out.
+   */
+  rejected: Array<{ url: string; reason: string; at: string; title?: string | null; publishedAt?: string | null }>;
   lastRun: { at: string; outcome: string; runId: string; background: boolean; notes: string[] } | null;
   theses: InboxThesis[];
   /** The fact most worth Casey's judgment first (seller relevance), or null when only context remains. */
@@ -303,7 +309,17 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   for (const r of runs as Array<{ id: string; account_name: string; created_at: Date; provider_status: unknown }>) {
     const ps = isObj(r.provider_status) ? r.provider_status : {};
     const result = isObj(ps.result) ? ps.result : {};
-    const rejected = Array.isArray(result.rejected) ? (result.rejected as Array<{ url?: unknown; reason?: unknown }>) : [];
+    // Rich source records (2026-10-01 on); older runs keep url + reason.
+    const rejected = (
+      Array.isArray(result.sources)
+        ? (result.sources as Array<{ url?: unknown; reason?: unknown; status?: unknown; title?: unknown; publishedAt?: unknown }>).filter((x) => x.status !== 'verified')
+        : Array.isArray(result.rejected)
+          ? (result.rejected as Array<{ url?: unknown; reason?: unknown; title?: unknown; publishedAt?: unknown }>)
+          : []
+    ).filter((x) => {
+      const url = String(x.url ?? '');
+      return /^https?:\/\/[^/\s]+\.[^/\s]+/.test(url) && !SEARCH_REDIRECT.test(url) && !DROP_REASONS.has(String(x.reason ?? ''));
+    });
     const a = acct(r.account_name);
     if (!a.lastRun) {
       a.lastRun = {
@@ -317,7 +333,12 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
     for (const x of rejected) {
       const url = String(x.url ?? '');
       if (!url || a.rejected.some((y) => y.url === url)) continue;
-      a.rejected.push({ url, reason: String(x.reason ?? 'rejected'), at: new Date(r.created_at).toISOString() });
+      a.rejected.push({
+        url,
+        reason: String(x.reason ?? 'not_checked'),
+        at: new Date(r.created_at).toISOString(),
+        ...(typeof x.title === 'string' || typeof x.publishedAt === 'string' ? { title: typeof x.title === 'string' ? x.title : null, publishedAt: typeof x.publishedAt === 'string' ? x.publishedAt : null } : {}),
+      });
     }
   }
 

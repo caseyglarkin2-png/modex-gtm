@@ -30,6 +30,7 @@ import { freshnessExpiresAt } from '../signals/freshness';
 import type { SignalType } from '../taxonomy';
 import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, pageSentenceFor, statedEventDate, type FactChange, describesPastEvent } from './facts';
 import { defaultFetchText, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
+import type { PageResult } from '../signals/research';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -79,11 +80,52 @@ export interface ResearchFact {
   fresh: boolean;
 }
 
+/**
+ * Research aperture: every page a run looked at, kept with its provenance whether or not it yielded an outreach
+ * fact. A source is what GAP found; a verified fact is what Casey may state. Failing the evidence contract never
+ * makes a source disappear: it is recorded with the factual reason.
+ */
+export interface SourceRecord {
+  url: string;
+  title: string | null;
+  publishedAt: string | null;
+  /** verbatim: the page's own sentence; search_summary: a search model's paraphrase that did not verify; typed: Casey's own words. */
+  excerpt: string | null;
+  excerptKind: 'verbatim' | 'search_summary' | 'typed' | null;
+  provider: string;
+  status: 'verified' | 'not_verified' | 'could_not_verify';
+  /** The raw verification reason (failureClass vocabulary), or no_fact_sentence / not_read_budget. */
+  reason: string | null;
+}
+
+const RANK: Record<SourceRecord['status'], number> = { verified: 3, not_verified: 2, could_not_verify: 1 };
+
+export function recordSource(map: Map<string, SourceRecord>, r: SourceRecord): void {
+  const cur = map.get(r.url);
+  if (!cur || RANK[r.status] > RANK[cur.status] || (RANK[r.status] === RANK[cur.status] && !cur.excerpt && r.excerpt)) map.set(r.url, { ...r, title: r.title ?? cur?.title ?? null, publishedAt: r.publishedAt ?? cur?.publishedAt ?? null });
+}
+
+function sourceFromCandidate(c: Candidate, v: { ok: true; excerpt: string } | { ok: false; reason: string }): SourceRecord {
+  const could = !v.ok && v.reason.startsWith('source_unreadable');
+  return {
+    url: c.url,
+    title: c.title && c.title !== c.url ? c.title.slice(0, 300) : null,
+    publishedAt: c.publishedAt && !Number.isNaN(c.publishedAt.getTime()) ? c.publishedAt.toISOString() : null,
+    excerpt: (v.ok ? v.excerpt : c.excerpt)?.slice(0, 600) || null,
+    excerptKind: v.ok ? 'verbatim' : c.provider === 'web' ? 'search_summary' : c.provider === 'manual' ? 'typed' : 'verbatim',
+    provider: c.provider,
+    status: v.ok ? 'verified' : could ? 'could_not_verify' : 'not_verified',
+    reason: v.ok ? null : v.reason,
+  };
+}
+
 export interface ResearchResult {
   runId: string;
   outcome: ResearchOutcome;
   facts: ResearchFact[];
   rejected: Array<{ url: string; reason: string }>;
+  /** Every page this run looked at, with provenance and its evidence status (research aperture). */
+  sources?: SourceRecord[];
   conflicts: Array<{ site: string; signalIds: string[] }>;
   notes: string[];
   /** Evidence continuity over the account's verified facts after this run (corroborated, superseded, still seeking). */
@@ -128,8 +170,9 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const providerErrors: Record<string, string> = {};
   const candidates: Candidate[] = [];
   const seededPages = new Map<string, string>();
+  const pageResults: PageResult[] = [];
   let webSources: string[] = [];
-  const providers: Array<readonly [string, () => Promise<{ candidates: Candidate[]; note: string; pages?: Map<string, string> }>]> = [
+  const providers: Array<readonly [string, () => Promise<{ candidates: Candidate[]; note: string; pages?: Map<string, string>; pageResults?: PageResult[] }>]> = [
     ['edgar', () => (deps.edgar ?? ((a, n) => edgarCandidates(a, n)))(input.accountName, input.now)],
     ['web', async () => {
       const r = await (deps.web ?? webCandidates)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '));
@@ -139,7 +182,10 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     // The search only LOCATES pages: GAP reads the cited pages itself and proposes their own verbatim sentences
     // that name the account (dated by the page's article date), through the same verification contract.
     ['sources', async () => {
-      const pages = webSources.filter((u) => !WEAK_SOURCE.test(u)).slice(0, 6);
+      const readable = webSources.filter((u) => !WEAK_SOURCE.test(u));
+      const pages = readable.slice(0, 6);
+      // A cited page past the read budget is still a source GAP found (not read this run).
+      for (const url of readable.slice(6)) pageResults.push({ url, title: null, publishedAt: null, outcome: 'not_read', sentences: 0 });
       if (deps.sourcePages === false || !pages.length) return { candidates: [], note: 'no cited pages to read' };
       const { signalCandidates } = await import('../signals/research');
       const r = await signalCandidates(pages.map((url, i) => ({ id: `cited${i + 1}`, url, title: null, published_at: null, source_class: '', resolution_basis: null, event_id: null })), { fetchHtml: deps.fetchHtml, accountName: input.accountName });
@@ -152,6 +198,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
       const r = await run();
       candidates.push(...r.candidates);
       for (const [u, t] of r.pages ?? []) seededPages.set(u, t);
+      pageResults.push(...(r.pageResults ?? []));
       notes.push(`${name}: ${r.note}`);
     } catch (err) {
       providerErrors[name] = err instanceof Error ? err.message : String(err);
@@ -165,12 +212,28 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   for (const [u, t] of seededPages) ctx.pages.set(u, t);
   const accepted: Array<Candidate & { publishedAt: Date }> = [];
   const rejected: Array<{ url: string; reason: string }> = [];
+  const sources = new Map<string, SourceRecord>();
+  // Pages read with no candidate sentence, unreadable, or not read: sources all the same, with the reason.
+  for (const p of pageResults) {
+    if (p.outcome === 'read' && p.sentences > 0) continue;
+    recordSource(sources, {
+      url: p.url,
+      title: p.title,
+      publishedAt: p.publishedAt && !Number.isNaN(p.publishedAt.getTime()) ? p.publishedAt.toISOString() : null,
+      excerpt: null,
+      excerptKind: null,
+      provider: 'page',
+      status: p.outcome === 'read' ? 'not_verified' : 'could_not_verify',
+      reason: p.outcome === 'read' ? 'no_fact_sentence' : p.outcome === 'not_read' ? 'not_read_budget' : `source_unreadable:${p.error ?? 'fetch failed'}`,
+    });
+  }
   const seen = new Set<string>();
   const unreachable: Candidate[] = [];
   for (const c of candidates) {
     const key = normalizeForMatch(c.excerpt);
     if (seen.has(key)) continue;
     const v = await verifyCandidate(c, ctx);
+    recordSource(sources, sourceFromCandidate(c, v));
     if (!v.ok) {
       rejected.push({ url: c.url, reason: v.reason });
       const k = failureClass(v.reason);
@@ -191,6 +254,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
       const r = await (deps.web ?? webCandidates)(input.accountName, `Find ONE other accessible source (${input.accountName}'s own announcement, a filing, a government release or a credible publication) that states this event: "${c.excerpt}". Do not use ${host || 'the same site'}.`);
       for (const alt of r.candidates.filter((a) => { try { return new URL(a.url).hostname.replace(/^www\./, '') !== host; } catch { return false; } }).slice(0, 2)) {
         const v = await verifyCandidate(alt, ctx);
+        recordSource(sources, sourceFromCandidate(alt, v));
         if (!v.ok) { rejected.push({ url: alt.url, reason: v.reason }); continue; }
         const k2 = normalizeForMatch(v.excerpt);
         if (seen.has(k2)) continue;
@@ -234,6 +298,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
         const key = normalizeForMatch(c.excerpt);
         if (seen.has(key)) continue;
         const v = await verifyCandidate(c, ctx);
+        recordSource(sources, sourceFromCandidate(c, v));
         if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }
         seen.add(key);
         seen.add(normalizeForMatch(v.excerpt));
@@ -271,7 +336,8 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
         conflicts,
         continuity: JSON.parse(JSON.stringify(continuity)),
         // The full result, so a thesis research run is reused instead of repeated.
-        result: JSON.parse(JSON.stringify({ runId: run.id, outcome, facts, rejected, conflicts, notes, continuity })),
+        sources: sources.size,
+        result: JSON.parse(JSON.stringify({ runId: run.id, outcome, facts, rejected, sources: [...sources.values()], conflicts, notes, continuity })),
       },
     },
   });
@@ -279,7 +345,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     data: { kind: 'research.completed', actor: input.actor, subject_type: 'research_run', subject_id: run.id, payload: { outcome, accountName: input.accountName, personaId: input.personaId, hypothesisId: input.hypothesisId, facts: facts.length, rejected: rejected.length } },
   });
 
-  return { runId: run.id, outcome, facts, rejected, conflicts, notes, continuity };
+  return { runId: run.id, outcome, facts, rejected, sources: [...sources.values()], conflicts, notes, continuity };
 }
 
 export interface VerificationContext {
@@ -387,6 +453,17 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
 export function speakerOrg(sentence: string): string | null {
   const m = /\bsaid\b[^."“”;]{0,80}?\b(?:of|at|from)\s+([A-Z][\w&.'’-]*(?:\s+[A-Z][\w&.'’-]*){0,3})/.exec(sentence);
   return m ? m[1] : null;
+}
+
+/**
+ * Why a STORED fact no longer passes the evidence rules on read (rules tightened since it was stored), else null.
+ * The one re-gate the account brief and the source view share; the row is never deleted.
+ */
+export function liveFactFailure(text: string, accountName: string): 'not_a_physical_operations_fact' | 'quoted_third_party' | null {
+  if (!isPhysicalOpsFact(text)) return 'not_a_physical_operations_fact';
+  const speaker = speakerOrg(text);
+  if (speaker && !textNamesAccount(speaker, normalizeCompany(accountName))) return 'quoted_third_party';
+  return null;
 }
 
 /** Store one VERIFIED candidate through the existing stores: EvidenceRecord + an evidence_record ProspectingSignal. */

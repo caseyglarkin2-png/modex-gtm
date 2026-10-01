@@ -262,7 +262,7 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
 export interface BackgroundRunResult {
   runTag: string;
   considered: number;
-  researched: Array<{ accountName: string; reason: TargetReason; runId: string; outcome: ResearchResult['outcome']; facts: number; freshFacts: number; rejected: number; conflicts: number }>;
+  researched: Array<{ accountName: string; reason: TargetReason; runId: string; outcome: ResearchResult['outcome']; facts: number; freshFacts: number; rejected: number; conflicts: number; sources: number }>;
   skipped: Array<{ accountName: string; reason: string }>;
   failed: Array<{ accountName: string; error: string }>;
 }
@@ -342,6 +342,8 @@ export async function runBackgroundResearch(
         freshFacts: r.facts.filter((f) => f.fresh).length,
         rejected: r.rejected.length,
         conflicts: r.conflicts.length,
+        // Research aperture: every page the run looked at, apart from the facts that verified.
+        sources: r.sources?.length ?? 0,
       });
     } catch (e) {
       const error = (e instanceof Error ? e.message : String(e)).slice(0, 200);

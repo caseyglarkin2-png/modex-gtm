@@ -17,6 +17,8 @@ import { SeparateMotion } from '@/components/gap/separate-motion';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
+import { loadAccountSources } from '@/lib/gap/sources/account-sources';
+import { AccountSourcesSection } from '@/components/gap/account-sources';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP account' };
@@ -49,8 +51,10 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     );
   }
   // One round of reads for the extras (the deal brief only when in a deal); both fail soft (display only).
-  const [history, dealBrief] = await Promise.all([
+  const [history, sources, dealBrief] = await Promise.all([
     loadResearchHistory(prisma, brief.accountName, now).catch(() => []),
+    // Research aperture: every source found, apart from what is verified for outreach (display only; fails soft).
+    loadAccountSources(prisma, brief.accountName, { now }).catch(() => null),
     brief.dealState === 'ACTIVE' ? loadDealBrief(prisma, brief.accountName, { now }).catch(() => null) : Promise.resolve(null),
   ]);
   return (
@@ -71,6 +75,11 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
             {brief.dealState === 'ACTIVE' ? (
               dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>
             ) : null}
+            {sources ? (
+              <AccountSourcesSection sources={sources} limit={5} viewAllHref={`/gap/accounts/${slug}/sources${q.name ? `?name=${encodeURIComponent(q.name)}` : ''}`} />
+            ) : (
+              <p className="text-sm text-amber-700" data-testid="account-sources-unavailable">Sources could not be read just now.</p>
+            )}
             <ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, history, now)} />
           </>
         }

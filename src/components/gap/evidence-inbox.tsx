@@ -12,6 +12,9 @@ import type { ReactNode } from 'react';
 import type { ChainLink, InboxAccount, InboxFact } from '@/lib/gap/research/inbox';
 import { EvidenceActions } from './evidence-actions';
 import { AccountLink } from './account-link';
+import Link from 'next/link';
+import { accountHref } from '@/lib/gap/account-intel/href';
+import { sourceReason } from '@/lib/gap/sources/source-copy';
 
 const MAX_ACCOUNTS = 15;
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -27,14 +30,12 @@ function short(iso: string, now: Date): string {
   return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}${y}`;
 }
 
-function reasonCopy(reason: string): string {
-  if (reason === 'excerpt_not_found_at_source') return 'quote not found at the source';
-  if (reason === 'page_does_not_name_account') return 'page does not name the account';
-  if (reason === 'not_a_physical_operations_fact') return 'not a physical network change';
-  if (reason === 'no_publication_date') return 'undated';
-  if (reason === 'describes_past_event') return 'an older event restated';
-  if (reason.startsWith('source_unreadable')) return `source unreadable (${reason.split(':').slice(1).join(':') || 'error'})`;
-  return reason.replace(/_/g, ' ');
+function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
 }
 
 function outcomeCopy(outcome: string): string {
@@ -118,16 +119,18 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
   const hours = a.lastRun ? Math.max(0, Math.round((now.getTime() - new Date(a.lastRun.at).getTime()) / 3_600_000)) : null;
   const best = a.ready.find((f) => f.signalId === a.bestSignalId) ?? null;
   const context = a.ready.filter((f) => f !== best);
+  const sourcesFound = new Set([...a.rejected.map((r) => r.url), ...a.ready.map((f) => f.sourceUrl).filter(Boolean)]).size;
   return (
     <article data-testid="evidence-account" data-account={a.accountName} className="min-w-0 space-y-3 rounded-md border border-[var(--border)] bg-[var(--background)] p-3 shadow-sm sm:p-4">
       <header className="space-y-1">
         <p className="text-base font-semibold"><AccountLink name={a.accountName} /></p>
         <p data-testid="evidence-account-summary" className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
           {[
-            plural(a.ready.length, 'verified fact') + ' ready',
+            // Research aperture: what GAP found is never collapsed into what qualifies for outreach.
+            plural(sourcesFound, 'source') + ' found',
+            plural(a.ready.length, 'outreach fact') + ' verified',
             thesesNeedingEvidence ? `${plural(thesesNeedingEvidence, 'thesis', 'theses')} ${thesesNeedingEvidence === 1 ? 'needs' : 'need'} evidence` : null,
             a.contradictions.length ? plural(a.contradictions.length, 'contradiction') : null,
-            a.rejected.length ? plural(a.rejected.length, 'rejected source') : null,
           ]
             .filter(Boolean)
             .join(' · ')}
@@ -177,14 +180,26 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
       ))}
       {a.rejected.length ? (
         <details className="text-xs" data-testid="evidence-rejected">
-          <summary className="cursor-pointer text-[var(--muted-foreground)]">{plural(a.rejected.length, 'rejected source')}</summary>
-          <ul className="mt-1 space-y-0.5">
+          <summary className="cursor-pointer text-[var(--muted-foreground)]">
+            {plural(a.rejected.length, 'source')} found that {a.rejected.length === 1 ? 'is' : 'are'} not outreach facts (shown with the reason)
+          </summary>
+          <ul className="mt-1 space-y-1.5">
             {a.rejected.slice(0, 10).map((r) => (
-              <li key={r.url} className="break-all">
-                {reasonCopy(r.reason)}: <span className="text-[var(--muted-foreground)]">{r.url}</span>
+              <li key={r.url} className="min-w-0" data-testid="evidence-source">
+                <p className="text-[var(--muted-foreground)]">
+                  <span className="font-semibold text-[var(--foreground)]">{hostOf(r.url)}</span>
+                  {r.publishedAt ? ` · ${r.publishedAt.slice(0, 10)}` : ''}
+                </p>
+                <a href={r.url} target="_blank" rel="noopener noreferrer" className="block break-words underline decoration-dotted">
+                  {r.title || r.url}
+                </a>
+                <p>Not verified for outreach: {sourceReason(r.reason, a.accountName)}</p>
               </li>
             ))}
           </ul>
+          <Link href={`${accountHref(a.accountName)}/sources`} className="mt-1 inline-block font-semibold underline" data-testid="evidence-view-all-sources">
+            View all sources
+          </Link>
         </details>
       ) : null}
       {children}
