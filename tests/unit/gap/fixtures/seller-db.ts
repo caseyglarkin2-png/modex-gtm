@@ -189,5 +189,7 @@ export const baseDeps = (d: Db, verdict: 'pass' | 'review_required' | 'reject' =
   // Ops closeout 19: the GAP mailbox Sent folder holds nothing unrecorded for this person.
   mailboxSentTo: async () => [],
   unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe?email=${encodeURIComponent(e)}&token=t`,
+  // Execution acceptance: the thesis is current unless a test says otherwise.
+  thesisCurrent: async () => ({ current: true as const }),
 });
 

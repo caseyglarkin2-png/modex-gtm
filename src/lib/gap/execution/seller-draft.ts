@@ -28,6 +28,8 @@
  * `human_action`.
  */
 
+import { suppressionRefusalKind } from '@/lib/email/suppression-gate';
+import { checkThesisCurrent, type ThesisCurrentnessCheck } from './thesis-currentness';
 import { contradictedFactIds } from '../research/conflicts';
 import { accountMotionRefusal } from '../motion/load';
 import { captureSendAttribution } from './send-attribution';
@@ -45,7 +47,7 @@ import { evidenceRefsFromSignals } from '../compiler/evidence-from-signals';
 import { makeCriticClient } from '../critic-client';
 import type { CriticClient } from '../critic-client';
 import { compileCleared, findCompileForCopy, loadActionPack } from './action-pack';
-import { appendLedger, DIRECT_REFUSED, DIRECT_RELEASED, DRAFT_REFUSED, DRAFTED, isDefinitelyNotSent, type DraftedPayload } from './draft-ledger';
+import { appendLedger, COPY_REFUSED, DIRECT_REFUSED, DIRECT_RELEASED, DRAFT_REFUSED, DRAFTED, isDefinitelyNotSent, type DraftedPayload } from './draft-ledger';
 import { checkActiveOpportunityNow, type ActionTimeOpportunityCheck } from '../enroll/service';
 import { gmailDraftAdapter, type GmailAdapterDeps } from './gmail-adapter';
 import { gapGmailSender } from './gap-sender';
@@ -100,6 +102,10 @@ export type SellerDraftRefusal =
   | 'copy_review_required'
   | 'unsubscribe_link_unavailable'
   | 'gmail_refused'
+  | 'suppression_unreadable'
+  | 'recipient_suppressed'
+  | 'thesis_needs_review'
+  | 'thesis_currentness_unknown'
   | 'active_opportunity'
   | 'opportunity_unknown';
 
@@ -145,6 +151,13 @@ export interface SellerDraftDeps {
    * DKIM). Default: on in production.
    */
   requireGapSender?: boolean;
+  /**
+   * Execution acceptance (2026-10-01): is this thesis still the account's current actionable thesis? Default: the
+   * canonical check over Account Intelligence (thesis-currentness.ts). Not current refuses; unreadable refuses.
+   */
+  thesisCurrent?: ThesisCurrentnessCheck;
+  /** Governed copy: the wire suppression gate for one recipient (default assertSuppressionPermitsSend). */
+  suppression?: (recipient: string) => Promise<void>;
   /** Ops closeout 19: messages in the GAP mailbox's Sent to this recipient in a window (listSentTo). */
   mailboxSentTo?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; internalDate: Date; subject: string }>>;
 }
@@ -212,7 +225,7 @@ export function draftText(body: string, unsubscribeUrl: string, signatureHtml: s
 type Refusal = Extract<SellerDraftResult, { ok: false }>;
 
 async function refuseAs(
-  kind: typeof DRAFT_REFUSED | typeof DIRECT_REFUSED,
+  kind: typeof DRAFT_REFUSED | typeof DIRECT_REFUSED | typeof COPY_REFUSED,
   prisma: PrismaLike,
   actor: string,
   decisionId: string,
@@ -264,12 +277,12 @@ export type PrepareResult =
  */
 export async function prepareSellerEmail(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; stepIndex?: number; mode?: 'draft' | 'send' },
+  input: { decisionId: string; actor: string; now: Date; stepIndex?: number; mode?: 'draft' | 'send' | 'copy' },
   deps: SellerDraftDeps = {},
 ): Promise<PrepareResult> {
   const { decisionId, actor, now } = input;
   const mode = input.mode ?? 'draft';
-  const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(mode === 'send' ? DIRECT_REFUSED : DRAFT_REFUSED, pr, a, d, r);
+  const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(mode === 'send' ? DIRECT_REFUSED : mode === 'copy' ? COPY_REFUSED : DRAFT_REFUSED, pr, a, d, r);
 
   const decision = await prisma.routingDecision.findUnique({
     where: { id: decisionId },
@@ -400,6 +413,13 @@ export async function prepareSellerEmail(
         return refuse(prisma, actor, decisionId, { ok: false, reason: 'emailed_outside_gap', detail: `casey@yardflow.ai already emailed this person on ${p.internalDate.toISOString().slice(0, 10)} ("${p.subject}"), and GAP has no record of it. Record it as a manual send before anything else goes out.` });
       }
     }
+  }
+  // Execution acceptance: an active thesis Account Intelligence says needs review (a better current fact, a
+  // revision, a stale primary fact) is not actionable, whatever card or old link reached this click.
+  {
+    const tc = await (deps.thesisCurrent ?? checkThesisCurrent)(prisma, pack.hypothesis.account_name, pack.hypothesis.id, now);
+    if (tc.current === false) return refuse(prisma, actor, decisionId, { ok: false, reason: 'thesis_needs_review', detail: `${tc.reason}${tc.bestFact ? ` Current best fact: "${tc.bestFact}"` : ''}` });
+    if (tc.current !== true) return refuse(prisma, actor, decisionId, { ok: false, reason: 'thesis_currentness_unknown', detail: tc.reason });
   }
   // Ops closeout 15: a draft is not harmless (it is stale outbound one click from
   // sending), so draft and send read the same live-conversation guard.
@@ -641,7 +661,9 @@ export async function createSellerGmailDraft(
     if (isDefinitelyNotSent(why)) {
       await appendLedger(prisma, DIRECT_RELEASED, actor, decisionId, { idempotencyKey: claimKey, reason: why, at: now.toISOString() }).catch(() => undefined);
     }
-    return refuse(prisma, actor, decisionId, { ok: false, reason: 'gmail_refused', detail: why });
+    // A suppression refusal names itself: unreadable is a safe retry (nothing was created), suppressed is final.
+    const kind = suppressionRefusalKind(why);
+    return refuse(prisma, actor, decisionId, { ok: false, reason: kind === 'unreadable' ? 'suppression_unreadable' : kind === 'suppressed' ? 'recipient_suppressed' : 'gmail_refused', detail: why });
   }
 
   const payload: DraftedPayload = {

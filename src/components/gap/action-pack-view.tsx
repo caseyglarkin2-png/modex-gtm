@@ -21,8 +21,7 @@
 import { prisma } from '@/lib/prisma';
 import { loadActionPack } from '@/lib/gap/execution/action-pack';
 import { listDraftRecords } from '@/lib/gap/execution/draft-ledger';
-import { EMAIL_ACTIONS, draftText } from '@/lib/gap/execution/seller-draft';
-import { unsubscribePageUrl } from '@/lib/email/compliance';
+import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch';
@@ -37,13 +36,15 @@ import { SixLineBriefView } from './six-line-brief';
 import { contradictedFactIds } from '@/lib/gap/research/conflicts';
 import { buildBrief, loadBriefHistory } from '@/lib/gap/execution/six-line-brief';
 import { loadAngles, suggestAngle } from '@/lib/gap/motion/persona-angle';
-import { CopyButton } from './copy-button';
+import { GovernedCopyButton } from './governed-copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
 import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
 import { SendFromYardflow } from './send-from-yardflow';
 import { loadRelationshipContext } from '@/lib/gap/intake/context';
 import { loadAccountInputs } from '@/lib/gap/account-intel/load';
-import { buildAccountBrief } from '@/lib/gap/account-intel/build';
+import { buildAccountBrief, thesisCurrentness } from '@/lib/gap/account-intel/build';
+import { accountHref } from '@/lib/gap/account-intel/href';
+import type { ThesisCurrentness } from '@/lib/gap/execution/thesis-currentness';
 
 type Obj = Record<string, unknown>;
 function isObj(v: unknown): v is Obj {
@@ -149,8 +150,9 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Release C re-review S8: only LIVE facts, like every other gate; an expired
   // fact is never read aloud as a cold opener.
   const verifiedFact = hypothesisSendable(hypothesis, new Date());
-  // Final red team: copying is sending by another route, so it is gated like SEND and carries the footer.
-  const copyable = sendable && verifiedFact && persona?.email ? persona.email : null;
+  // Execution acceptance: copying is sending by another route. The page offers a governed COPY EMAIL that the server
+  // releases only after every click-time gate plus suppression; no email text or address is pre-rendered for copy.
+  const copyable = Boolean(sendable && verifiedFact && persona?.email && decision);
   const callPack =
     persona && renderedEmail && verifiedFact
       ? buildCallPack({
@@ -160,6 +162,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           observationPlain: stripObservationCitations(hypothesis.observation ?? ''),
           problemHypothesis: hypothesis.problem_hypothesis ?? '',
           diagnosticQuestion: asStringList(hypothesis.falsification_questions)[0] ?? null,
+          title: persona.title ?? null,
         })
       : null;
 
@@ -199,6 +202,15 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
     context: relationshipContext,
     account: accountIntel,
   });
+  // Execution acceptance: THE current-actionable-thesis rule (the same one draft, send, copy and cold call re-run at
+  // the click). An old card or deep link to a thesis that needs review shows the review, never its outreach.
+  const thesisState: ThesisCurrentness =
+    hypothesis.status !== 'active'
+      ? { current: true }
+      : accountInputs
+        ? thesisCurrentness(accountInputs, hypothesis.id, new Date())
+        : { current: 'unknown', reason: 'GAP could not check whether this thesis is still current. Reload in a moment.' };
+  const thesisHold = thesisState.current !== true;
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
   const signals = Array.isArray(hypothesis.signals)
@@ -208,16 +220,18 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // Phase 2 E2: one primary action per channel. A call card leads with the call; an embedded pack does
   // not repeat the card's Call button (the number is shown, the card's Call checks HubSpot first).
   const callFirst = decision?.action === 'call_now';
-  const callSection = callPack ? (
+  // A call script reads the thesis aloud: only an ACTIVE (approved and in use) thesis that is current.
+  const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (
       <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
             {/* Last mile: a cold call re-reads HubSpot opportunity truth at the click; no raw tel: link. */}
+            {/* Execution acceptance: no raw number on the page; the dial is released by the governed check only. */}
             {embedded ? (
-              <span className="text-xs text-[var(--muted-foreground)]">{persona?.phone ?? ''}</span>
+              <span className="text-xs text-[var(--muted-foreground)]">{tel ? 'Call from the card (GAP checks first)' : 'no phone on file'}</span>
             ) : tel && decision && pack.personaSource === 'decision' ? (
               <ColdOutboundButton decisionId={decision.id} channel="call" className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60">
-                Call {persona?.phone}
+                Call {firstNameOf(persona?.name ?? null)}
               </ColdOutboundButton>
             ) : tel ? (
               <span className="text-xs text-[var(--muted-foreground)]">Call from the card (GAP checks HubSpot first)</span>
@@ -237,10 +251,6 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
               <p><span className="text-xs font-semibold text-[var(--muted-foreground)]">Voicemail (20-30 seconds): </span>{callPack.voicemail}</p>
             </div>
           </details>
-          <div className="flex flex-wrap gap-2">
-            <CopyButton text={callPack.opener} label="Copy call opener" />
-            {persona?.phone ? <CopyButton text={persona.phone} label="Copy phone" /> : null}
-          </div>
         </section>
   ) : null;
 
@@ -250,6 +260,31 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         <p role="alert" className="rounded-md border border-[var(--destructive)] p-3 text-xs">
           The person requested for this action pack does not belong to {hypothesis.account_name} ({pack.personaRefused.replace(/_/g, ' ')}). Nothing is rendered for them.
         </p>
+      ) : null}
+      {thesisHold ? (
+        <section data-testid="thesis-needs-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide">Thesis needs review</p>
+          {thesisState.current === false && thesisState.bestFact ? (
+            <p data-testid="thesis-best-fact"><span className="font-semibold">Current best fact: </span>{thesisState.bestFact}</p>
+          ) : null}
+          {thesisState.current === false && thesisState.opener ? (
+            <p data-testid="thesis-legacy"><span className="font-semibold">This thesis opens on: </span>{thesisState.opener}</p>
+          ) : null}
+          <p className="text-[var(--muted-foreground)]">{thesisState.reason}</p>
+          {thesisState.current === false ? (
+            <p>
+              <span className="font-semibold">Action: </span>revise the thesis on the current fact (or reject it) and approve the revision. Email, draft, copy and
+              cold call stay off for this thesis until then; history is kept.
+            </p>
+          ) : (
+            <p>
+              <span className="font-semibold">Action: </span>reload in a moment. Email, draft, copy and cold call stay off until GAP can confirm the thesis is current.
+            </p>
+          )}
+          <a href={accountHref(hypothesis.account_name)} className="inline-flex rounded-md border border-[var(--border)] px-3 py-1.5 text-xs hover:bg-[var(--muted)]">
+            Review {hypothesis.account_name}
+          </a>
+        </section>
       ) : null}
       <SixLineBriefView brief={brief} personaId={briefPersonaId} accountName={hypothesis.account_name} />
       {callFirst ? callSection : null}
@@ -278,7 +313,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </p>
       ) : null}
 
-      {renderedEmail ? (
+      {renderedEmail && thesisHold ? null : renderedEmail ? (
         <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email{touchStep > 0 ? ` (touch ${touchStep + 1})` : ''}</p>
@@ -300,12 +335,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           ) : !sendable && blockedReason ? (
             <p data-testid="send-unavailable" className="text-xs text-[var(--muted-foreground)]">{blockedReason}</p>
           ) : null}
-          {copyable ? (
-            <div className="flex flex-wrap gap-2">
-              <CopyButton text={draftText(renderedEmail.queued.body, unsubscribePageUrl(copyable))} label="Copy email" />
-              <CopyButton text={copyable} label="Copy email address" />
-            </div>
-          ) : null}
+          {copyable && decision ? <GovernedCopyButton decisionId={decision.id} stepIndex={touchStep} /> : null}
         </section>
       ) : (
         <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
@@ -320,7 +350,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </section>
       )}
 
-      {renderedEmail && decision && !blockedReason && !rejected ? (
+      {renderedEmail && decision && !blockedReason && !rejected && !thesisHold ? (
         <details className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="save-draft-details">
           <summary className="cursor-pointer font-medium">Save draft instead (edit and send from Gmail)</summary>
           <div className="mt-3">

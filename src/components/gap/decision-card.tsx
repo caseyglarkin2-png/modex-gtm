@@ -183,6 +183,8 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
   const [choosingOther, setChoosingOther] = useState(false);
   const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
   const [callOpen, setCallOpen] = useState(false);
+  // Execution acceptance: the inline recorder shows the prospect's contact only after the governed Call cleared here.
+  const [callCleared, setCallCleared] = useState(false);
   const [retryNote, setRetryNote] = useState<string | null>(null);
 
   const chipClass = ACTION_CHIP_CLASS[item.action] ?? 'border-[var(--border)] text-[var(--foreground)]';
@@ -267,7 +269,10 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             <ColdOutboundButton
               decisionId={item.id}
               channel="call"
-              onCleared={() => canRecordCall && setCallOpen(true)}
+              onCleared={() => {
+                setCallCleared(true);
+                if (canRecordCall) setCallOpen(true);
+              }}
               className="inline-flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-60"
             >
               <Phone className="h-3 w-3" /> Call
@@ -324,6 +329,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
           ) : null}
           <CallMode
             personaId={String(item.persona.id)}
+            hideContact={!callCleared}
             hypothesis={item.hypothesis ? { id: item.hypothesis.id, problemFamily: item.hypothesis.family } : undefined}
             onRecorded={(responseClass) => {
               // Red team T8: a real conversation completes the card; no answer,
@@ -356,7 +362,11 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
             <ColdOutboundButton
               decisionId={item.id}
               channel={readiness.primary.cold}
-              onCleared={() => readiness.primary.href?.startsWith('tel:') && canRecordCall && setCallOpen(true)}
+              onCleared={() => {
+                if (!readiness.primary.href?.startsWith('tel:')) return;
+                setCallCleared(true);
+                if (canRecordCall) setCallOpen(true);
+              }}
               className="inline-flex items-center gap-1 rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-60"
             >
               {readiness.primary.label}

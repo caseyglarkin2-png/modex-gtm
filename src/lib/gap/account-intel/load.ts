@@ -102,7 +102,7 @@ export async function loadAccountInputs(
   prisma: PrismaLike,
   accountName: string,
   now: Date,
-  opts: { live?: boolean; deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth> } } = {},
+  opts: { live?: boolean; deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth> }; hypothesisId?: string } = {},
 ): Promise<AccountInputs | null> {
   const account = await prisma.account.findUnique({ where: { name: accountName }, select: { name: true, tier: true, priority_band: true, vertical: true, parent_brand: true, hubspot_company_id: true, updated_at: true } });
   if (!account) return null;
@@ -119,7 +119,17 @@ export async function loadAccountInputs(
       select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
-    }).catch(() => []),
+    })
+      // Execution acceptance: a click-time check names its thesis; it is loaded even past the 10 most recent.
+      .then(async (rows: Row[]) => {
+        if (!opts.hypothesisId || rows.some((r) => r.id === opts.hypothesisId)) return rows;
+        const extra: Row[] = await prisma.prospectingHypothesis.findMany({
+          where: { id: opts.hypothesisId, account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
+          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+        });
+        return [...rows, ...extra];
+      })
+      .catch(() => []),
     prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }).catch(() => []),
     prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true }, take: 60 }),
     prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []),
@@ -181,7 +191,10 @@ export async function loadAccountInputs(
     };
     const q = f.quote.trim().toLowerCase();
     const cur = byQuote.get(q);
-    if (!cur || (f.expiresAt ?? '') > (cur.expiresAt ?? '')) byQuote.set(q, f);
+    // One fact per quote; the rows it absorbs stay its ids (a thesis may cite any of them).
+    if (!cur) byQuote.set(q, f);
+    else if ((f.expiresAt ?? '') > (cur.expiresAt ?? '')) byQuote.set(q, { ...f, sameQuoteIds: [cur.id, ...(cur.sameQuoteIds ?? [])] });
+    else byQuote.set(q, { ...cur, sameQuoteIds: [...(cur.sameQuoteIds ?? []), f.id] });
   }
 
   // The shared selector speaks camelCase: map, then keep human-confirmed rows no later row supersedes.

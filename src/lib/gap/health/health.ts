@@ -47,6 +47,8 @@ export const MAILBOX_HEALTHY_MS = 30 * 60_000;
 export const MAILBOX_BLOCKED_MS = 3 * 60 * 60_000;
 export const ROUTING_FRESH_MS = 24 * 60 * 60_000;
 export const HUBSPOT_SLOW_MS = 5_000;
+/** Past half the action-time suppression timeout, a click is at risk of timing out: DEGRADED. */
+export const SUPPRESSION_SLOW_MS = 4_000;
 
 const RANK: Record<HealthState, number> = { HEALTHY: 0, DEGRADED: 1, BLOCKED: 2 };
 
@@ -80,7 +82,8 @@ function hubspot(i: HealthInputs['hubspot']): HealthComponent {
 function suppression(i: HealthInputs['suppression']): HealthComponent {
   const base = { key: 'suppression' as const, name: 'Suppression authority' };
   if (!i.configured) return { ...base, state: 'BLOCKED', label: 'Suppression authority not configured · outbound blocked', detail: 'CLAWD_CONTROL_PLANE_URL / TOKEN are not set: suppression answers unknown and every send refuses.' };
-  if (i.verdict !== 'clear' && i.verdict !== 'suppressed') return { ...base, state: 'BLOCKED', label: 'Suppression authority unreachable · outbound blocked', detail: `The suppression contract did not give a verdict (${i.error ?? 'unknown'}).` };
+  if (i.verdict !== 'clear' && i.verdict !== 'suppressed') return { ...base, state: 'BLOCKED', label: 'Suppression authority unreachable · outbound blocked', detail: `The suppression contract did not give a verdict (${i.error ?? 'unknown'}). Drafts and sends refuse until it answers.` };
+  if (i.ms !== null && i.ms > SUPPRESSION_SLOW_MS) return { ...base, state: 'DEGRADED', label: 'Suppression check slow · drafts and sends may time out', detail: `Contract answered in ${i.ms}ms; a click waits at most 8s and then refuses (nothing is created; retry).` };
   return { ...base, state: 'HEALTHY', label: 'Suppression authority OK', detail: `Contract answered in ${i.ms ?? '?'}ms.` };
 }
 

@@ -89,6 +89,10 @@ export const DIRECT_CLAIMED = 'execution.gmail_direct_claimed' as const;
 export const DIRECT_SENT = 'execution.gmail_direct_sent' as const;
 export const DIRECT_RELEASED = 'execution.gmail_direct_released' as const;
 export const DIRECT_REFUSED = 'execution.gmail_direct_refused' as const;
+/** Governed copy (2026-10-01): COPY EMAIL was refused by the same gates as draft and send. */
+export const COPY_REFUSED = 'execution.copy_refused' as const;
+/** Governed copy: the email text was released to Casey after every gate cleared. Never a draft, never a send. */
+export const COPY_RELEASED = 'execution.copy_released' as const;
 /**
  * CREATE GMAIL DRAFT claims its person + step the same way a direct send does
  * (red team Release B review): written under the person lock BEFORE the Gmail
@@ -287,6 +291,8 @@ export async function appendLedger(
     | typeof DIRECT_SENT
     | typeof DIRECT_RELEASED
     | typeof DIRECT_REFUSED
+    | typeof COPY_REFUSED
+    | typeof COPY_RELEASED
     | typeof DRAFT_CLAIMED,
   actor: string,
   decisionId: string,

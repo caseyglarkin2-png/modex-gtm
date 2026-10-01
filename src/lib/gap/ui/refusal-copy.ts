@@ -63,6 +63,26 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'This account already has an active opportunity (an open HubSpot deal, a meeting or a positive reply).',
     next: 'Work it from the existing deal or conversation, not a cold first touch.',
   },
+  suppression_unreadable: {
+    what: 'Nothing was drafted.',
+    why: 'The suppression check did not answer in time, so GAP could not confirm this person may be contacted. It never guesses.',
+    next: 'Retry. Nothing was created in Gmail, so a retry cannot double up.',
+  },
+  recipient_suppressed: {
+    what: 'Nothing was drafted or sent.',
+    why: 'A suppression authority (an unsubscribe, a do-not-contact decision or an opt-out) says not to contact this person.',
+    next: 'Nothing to do. GAP will not contact them.',
+  },
+  thesis_needs_review: {
+    what: 'Nothing was drafted, sent or released.',
+    why: 'This thesis needs review before anyone is contacted on it: a better current fact exists, it was revised, its fact is no longer live, or the buyer contradicted it.',
+    next: 'Open the account, revise the thesis on the current best fact (or reject it), and approve the revision.',
+  },
+  thesis_currentness_unknown: {
+    what: 'Nothing was drafted, sent or released.',
+    why: 'GAP could not check whether this thesis is still current.',
+    next: 'Retry in a moment.',
+  },
   opportunity_unknown: {
     what: 'Nothing was drafted or sent.',
     why: "Can't verify whether this account already has an active opportunity.",

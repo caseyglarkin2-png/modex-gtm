@@ -38,9 +38,14 @@ function strings(value: unknown): string[] {
 
 export interface PreCallBriefProps {
   brief: CallBrief;
+  /**
+   * Execution acceptance: hide the prospect's email and phone (an inline recorder opened without a cleared Call:
+   * recording a call that already happened needs no number, and a refused Call must not sit next to one).
+   */
+  hideContact?: boolean;
 }
 
-export function PreCallBrief({ brief }: PreCallBriefProps) {
+export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) {
   const { persona, account, hypothesis } = brief;
   const personaName = persona?.name?.trim() || persona?.email?.trim() || `persona ${String(persona?.id ?? '')}`;
   const questions = strings(brief.suggestedQuestions);
@@ -58,8 +63,14 @@ export function PreCallBrief({ brief }: PreCallBriefProps) {
             {persona?.title ? <span className="ml-2 text-sm font-normal text-[var(--muted-foreground)]">{persona.title}</span> : null}
           </p>
           <p className="text-xs text-[var(--muted-foreground)]">
-            {persona?.email ?? 'no email'}
-            {persona?.phone ? <span className="ml-2">{persona.phone}</span> : null}
+            {hideContact ? (
+              <span data-testid="brief-contact-hidden">Contact details show after GAP clears a call</span>
+            ) : (
+              <>
+                {persona?.email ?? 'no email'}
+                {persona?.phone ? <span className="ml-2">{persona.phone}</span> : null}
+              </>
+            )}
             {persona?.personaKey ? <span className="ml-2">{words(persona.personaKey)}</span> : null}
             {persona?.role ? <span className="ml-2">{words(persona.role)}</span> : null}
             {persona?.doNotContact ? (

@@ -19,13 +19,24 @@
 import { checkActiveOpportunityNow, type ActionTimeOpportunityCheck } from '../enroll/service';
 import { OPPORTUNITY_UNKNOWN_COPY } from '../opportunity/active-opportunity';
 import { telHref } from '../routing/seller-action';
+import { checkThesisCurrent, type ThesisCurrentnessCheck } from './thesis-currentness';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
 export type ColdChannel = 'call' | 'linkedin';
 
-export type ColdOutboundRefusal = 'decision_not_found' | 'no_phone' | 'no_linkedin' | 'active_opportunity' | 'opportunity_unknown';
+export type ColdOutboundRefusal =
+  | 'decision_not_found'
+  | 'no_phone'
+  | 'no_linkedin'
+  | 'active_opportunity'
+  | 'opportunity_unknown'
+  | 'persona_do_not_contact'
+  | 'decision_blocked'
+  | 'decision_superseded'
+  | 'thesis_needs_review'
+  | 'thesis_currentness_unknown';
 
 export type ColdOutboundResult =
   | { ok: true; channel: ColdChannel; href: string }
@@ -45,18 +56,32 @@ function linkedinHref(raw: string | null | undefined): string | null {
 export async function checkColdOutbound(
   prisma: PrismaLike,
   input: { decisionId: string; channel: ColdChannel; now: Date },
-  deps: { opportunity?: ActionTimeOpportunityCheck } = {},
+  deps: { opportunity?: ActionTimeOpportunityCheck; thesisCurrent?: ThesisCurrentnessCheck } = {},
 ): Promise<ColdOutboundResult> {
-  const decision: { account_name: string; persona_id: number | null } | null = await prisma.routingDecision.findUnique({
+  const decision: { account_name: string; persona_id: number | null; hypothesis_id: string | null; action: string; lane: string; created_at: Date } | null = await prisma.routingDecision.findUnique({
     where: { id: input.decisionId },
-    select: { account_name: true, persona_id: true },
+    select: { account_name: true, persona_id: true, hypothesis_id: true, action: true, lane: true, created_at: true },
   });
   if (!decision || decision.persona_id == null) return { ok: false, reason: 'decision_not_found', message: 'This card has no person to contact.' };
-  const persona: { email: string | null; phone: string | null; linkedin_url: string | null } | null = await prisma.persona.findUnique({
+  // Execution acceptance: the card itself must still stand (an old deep link never revives a stale or blocked card).
+  if (decision.lane === 'blocked' || decision.action === 'do_not_contact') return { ok: false, reason: 'decision_blocked', message: 'This card is blocked. Nobody is contacted from it.' };
+  const newer: { id: string; action: string; rule_id: string } | null = await prisma.routingDecision.findFirst({
+    where: { persona_id: decision.persona_id, account_name: decision.account_name, created_at: { gt: decision.created_at } },
+    orderBy: { created_at: 'desc' },
+    select: { id: true, action: true, rule_id: true },
+  });
+  if (newer) return { ok: false, reason: 'decision_superseded', message: `A newer routing run changed this card to ${newer.action.replace(/_/g, ' ')} (${newer.rule_id.replace(/_/g, ' ')}). Open the current card.` };
+  const persona: { email: string | null; phone: string | null; linkedin_url: string | null; do_not_contact?: boolean | null } | null = await prisma.persona.findUnique({
     where: { id: decision.persona_id },
-    select: { email: true, phone: true, linkedin_url: true },
+    select: { email: true, phone: true, linkedin_url: true, do_not_contact: true },
   });
   if (!persona) return { ok: false, reason: 'decision_not_found', message: 'This card has no person to contact.' };
+  if (persona.do_not_contact) return { ok: false, reason: 'persona_do_not_contact', message: 'This person is marked do not contact.' };
+  if (decision.hypothesis_id) {
+    const tc = await (deps.thesisCurrent ?? checkThesisCurrent)(prisma, decision.account_name, decision.hypothesis_id, input.now);
+    if (tc.current === false) return { ok: false, reason: 'thesis_needs_review', message: `Review the thesis first: ${tc.reason}${tc.bestFact ? ` Current best fact: "${tc.bestFact}"` : ''}` };
+    if (tc.current !== true) return { ok: false, reason: 'thesis_currentness_unknown', message: tc.reason };
+  }
 
   const href = input.channel === 'call' ? telHref(persona.phone) : linkedinHref(persona.linkedin_url);
   if (!href) {
