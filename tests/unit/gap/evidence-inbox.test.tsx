@@ -113,9 +113,9 @@ describe('<EvidenceInbox> / <EvidenceActions>', () => {
       ] } } }],
     });
     render(<EvidenceInbox accounts={await loadEvidenceInbox(p, NOW)} now={NOW} />);
-    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('2 sources found · 1 outreach fact verified');
+    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('2 sources found by research (45 days) · 1 outreach fact verified');
     const src = screen.getByTestId('evidence-source');
-    expect(src).toHaveTextContent('gatik.ai · 2026-06-09');
+    expect(src).toHaveTextContent('gatik.ai · published Jun 9, 2026');
     expect(src).toHaveTextContent('Gatik and PepsiCo expand');
     expect(src).toHaveTextContent('Not verified for outreach: describes a past event, not a current change');
     expect(screen.getAllByTestId('evidence-source')).toHaveLength(1);

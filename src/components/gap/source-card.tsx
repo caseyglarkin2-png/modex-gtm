@@ -7,7 +7,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ageLabel, STATUS_LABEL, type AccountSource } from '@/lib/gap/sources/source-copy';
-import { accountHref } from '@/lib/gap/account-intel/href';
 
 const STATUS_TONE: Record<AccountSource['status'], string> = {
   VERIFIED_FOR_OUTREACH: 'border-emerald-600/50 text-emerald-700 dark:text-emerald-400',
@@ -24,7 +23,7 @@ const REFUSAL: Record<string, string> = {
   bad_url: 'This link cannot be followed.',
 };
 
-export function SourceCard({ s, accountName, compact = false }: { s: AccountSource; accountName: string; compact?: boolean }) {
+export function SourceCard({ s, accountName, compact = false, researchHref }: { s: AccountSource; accountName: string; compact?: boolean; researchHref?: string }) {
   const router = useRouter();
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -46,10 +45,13 @@ export function SourceCard({ s, accountName, compact = false }: { s: AccountSour
     }
   }
   const quote = s.excerpt && s.excerptKind === 'verbatim';
+  const themes = s.whyFound.filter((w) => w !== 'other');
+  const btn = 'rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-50';
+  const max = compact ? 240 : 1200;
   return (
     <li data-testid="source-card" data-status={s.status} className="min-w-0 space-y-1 border-b border-[var(--border)] py-2 text-sm last:border-0">
       <p className="text-xs text-[var(--muted-foreground)]" data-testid="source-provenance">
-        <span className="font-semibold text-[var(--foreground)]">{s.publisher || 'unknown publisher'}</span> · {ageLabel(s.publishedAt, s.ageDays)}
+        <span className="font-semibold text-[var(--foreground)]">{s.publisher || 'publisher not recorded'}</span> · {ageLabel(s.publishedAt, s.ageDays)}
         {s.publishedAt && !s.freshTrigger ? (
           <span data-testid="source-not-fresh" className="ml-1 rounded border border-[var(--border)] px-1 text-[10px] font-semibold uppercase">
             Not a fresh trigger
@@ -57,15 +59,16 @@ export function SourceCard({ s, accountName, compact = false }: { s: AccountSour
         ) : null}
       </p>
       <a href={s.link} target="_blank" rel="noopener noreferrer" className="block break-words font-medium underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="source-open">
-        {s.title || s.link}
+        {s.title || untitled(s.link, s.publisher)}
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
       {s.excerpt && s.excerptKind !== 'headline' ? (
         quote ? (
-          <p className="break-words text-xs" data-testid="source-excerpt">
-            &ldquo;{compact && s.excerpt.length > 240 ? `${s.excerpt.slice(0, 240)}…` : s.excerpt}&rdquo;
+          <p className={`break-words text-xs ${compact ? 'line-clamp-2' : ''}`} data-testid="source-excerpt">
+            &ldquo;{clip(s.excerpt, max)}&rdquo;{s.excerpt.length > max ? ' (continues at the source)' : ''}
           </p>
         ) : (
-          <p className="break-words text-xs text-[var(--muted-foreground)]" data-testid="source-excerpt">
+          <p className={`break-words text-xs text-[var(--muted-foreground)] ${compact ? 'line-clamp-2' : ''}`} data-testid="source-excerpt">
             {s.excerptKind === 'search_summary' ? 'Search summary, not a quote: ' : s.excerptKind === 'typed' ? 'Your note: ' : ''}
             {s.excerpt}
           </p>
@@ -84,7 +87,7 @@ export function SourceCard({ s, accountName, compact = false }: { s: AccountSour
           <ul className="mt-1 space-y-1">
             {s.alsoOnPage.map((a) => (
               <li key={a.excerpt} className="break-words">
-                &ldquo;{a.excerpt.length > 240 ? `${a.excerpt.slice(0, 240)}…` : a.excerpt}&rdquo;
+                &ldquo;{clip(a.excerpt, 240)}&rdquo;
                 {a.attribution ? ` Said by ${a.attribution} (third party), not ${accountName}.` : ''} <span className="font-semibold">{STATUS_LABEL[a.status]}</span>
                 {a.reason ? `: ${a.reason}` : ''}
               </li>
@@ -98,33 +101,57 @@ export function SourceCard({ s, accountName, compact = false }: { s: AccountSour
         </span>
         {s.reason ? <span data-testid="source-reason">{s.reason}</span> : null}
       </p>
-      <p className="text-[11px] text-[var(--muted-foreground)]" data-testid="source-why">
-        {ORIGIN[s.origin]} · themes: {s.whyFound.join(', ')}
-      </p>
+      {compact ? null : (
+        <p className="text-[11px] text-[var(--muted-foreground)]" data-testid="source-why">
+          {ORIGIN[s.origin]}
+          {themes.length ? ` · themes (advisory): ${themes.join(', ')}` : ''}
+        </p>
+      )}
       <div className="flex flex-wrap gap-2 pt-1 text-xs">
-        <a href={s.link} target="_blank" rel="noopener noreferrer" className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
-          Open source
-        </a>
+        {compact ? null : (
+          <a href={s.link} target="_blank" rel="noopener noreferrer" className={btn}>
+            Open source<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        )}
         {s.status !== 'VERIFIED_FOR_OUTREACH' ? (
-          <button type="button" disabled={!!busy} onClick={() => act('verify')} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-50" data-testid="source-verify">
-            {busy === 'verify' ? 'Queuing…' : 'Verify as evidence'}
+          <button type="button" disabled={!!busy} onClick={() => act('verify')} className={btn} data-testid="source-verify">
+            {busy === 'verify' ? 'Queuing' : 'Verify as evidence'}
           </button>
         ) : null}
-        <a href={`${accountHref(accountName)}#research-plan`} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]" data-testid="source-research-more">
-          Research more
-        </a>
-        <button type="button" disabled={!!busy} onClick={() => act('ignore')} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-50" data-testid="source-ignore">
+        {compact || !researchHref ? null : (
+          <a href={researchHref} className={btn} data-testid="source-research-more">
+            Research more
+          </a>
+        )}
+        <button type="button" disabled={!!busy} onClick={() => act('ignore')} className={btn} data-testid="source-ignore">
           Ignore
         </button>
-        <button type="button" disabled={!!busy} onClick={() => act('wrong_account')} className="rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-50" data-testid="source-wrong-account">
+        <button type="button" disabled={!!busy} onClick={() => act('wrong_account')} className={btn} data-testid="source-wrong-account">
           Wrong account
         </button>
       </div>
-      {msg ? (
-        <p className="text-xs" role="status" data-testid="source-msg">
-          {msg}
-        </p>
-      ) : null}
+      <p className="text-xs empty:hidden" role="status" data-testid="source-msg">
+        {msg ?? ''}
+      </p>
     </li>
   );
+}
+
+/** Cut at a word boundary (an ellipsis never sits inside a quotation). */
+function clip(text: string, n: number): string {
+  if (text.length <= n) return text;
+  const cut = text.slice(0, n);
+  const sp = cut.lastIndexOf(' ');
+  return cut.slice(0, sp > n * 0.6 ? sp : n).replace(/[\s,;:]+$/, '');
+}
+
+/** A source with no headline reads as its publisher and the tail of its path, never a 300-character URL. */
+function untitled(link: string, publisher: string): string {
+  try {
+    const tail = new URL(link).pathname.split('/').filter(Boolean).pop() ?? '';
+    const words = decodeURIComponent(tail).replace(/\.[a-z]{2,4}$/i, '').replace(/[-_]+/g, ' ').trim();
+    return words && words.length <= 90 && words.includes(' ') ? `${publisher}: ${words}` : `${publisher} (untitled page)`;
+  } catch {
+    return `${publisher} (untitled page)`;
+  }
 }

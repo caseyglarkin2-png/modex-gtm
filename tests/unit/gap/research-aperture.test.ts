@@ -161,7 +161,7 @@ describe('honest counts and provenance', () => {
   it('a verified fact stored on a search-redirect link is never hidden: shown, publisher named as unresolved', async () => {
     const s = await loadAccountSources(prisma({ facts: [fact('f3', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZ', PEP_FACT, '2026-09-20')] }) as never, 'PepsiCo', { now: NOW });
     expect(s).toMatchObject({ verifiedFacts: 1, dropped: 0 });
-    expect(s.items[0]).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', publisher: 'search redirect link (original site not recorded)' });
+    expect(s.items[0]).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', publisher: 'search redirect' });
   });
 
   it("two statements from one page stay two: the speaker belongs to its own quote, never borrowed", async () => {

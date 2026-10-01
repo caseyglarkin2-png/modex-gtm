@@ -14,7 +14,7 @@ import { EvidenceActions } from './evidence-actions';
 import { AccountLink } from './account-link';
 import Link from 'next/link';
 import { accountHref } from '@/lib/gap/account-intel/href';
-import { sourceReason } from '@/lib/gap/sources/source-copy';
+import { ageLabel, sourceReason, STATUS_LABEL } from '@/lib/gap/sources/source-copy';
 
 const MAX_ACCOUNTS = 15;
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -127,7 +127,8 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
         <p data-testid="evidence-account-summary" className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
           {[
             // Research aperture: what GAP found is never collapsed into what qualifies for outreach.
-            plural(sourcesFound, 'source') + ' found',
+            // Scoped honestly: what research found in the last 45 days (the account page lists every source).
+            plural(sourcesFound, 'source') + ' found by research (45 days)',
             plural(a.ready.length, 'outreach fact') + ' verified',
             thesesNeedingEvidence ? `${plural(thesesNeedingEvidence, 'thesis', 'theses')} ${thesesNeedingEvidence === 1 ? 'needs' : 'need'} evidence` : null,
             a.contradictions.length ? plural(a.contradictions.length, 'contradiction') : null,
@@ -182,18 +183,22 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
         <details className="text-xs" data-testid="evidence-rejected">
           <summary className="cursor-pointer text-[var(--muted-foreground)]">
             {plural(a.rejected.length, 'source')} found that {a.rejected.length === 1 ? 'is' : 'are'} not outreach facts (shown with the reason)
+            {a.rejected.length > 10 ? `; showing 10 of ${a.rejected.length}` : ''}
           </summary>
           <ul className="mt-1 space-y-1.5">
             {a.rejected.slice(0, 10).map((r) => (
               <li key={r.url} className="min-w-0" data-testid="evidence-source">
                 <p className="text-[var(--muted-foreground)]">
-                  <span className="font-semibold text-[var(--foreground)]">{hostOf(r.url)}</span>
-                  {r.publishedAt ? ` · ${r.publishedAt.slice(0, 10)}` : ''}
+                  <span className="font-semibold text-[var(--foreground)]">{hostOf(r.url)}</span> ·{' '}
+                  {ageLabel(r.publishedAt ?? null, r.publishedAt ? Math.max(0, Math.floor((now.getTime() - new Date(r.publishedAt).getTime()) / 86_400_000)) : null)}
                 </p>
                 <a href={r.url} target="_blank" rel="noopener noreferrer" className="block break-words underline decoration-dotted">
-                  {r.title || r.url}
+                  {r.title || `${hostOf(r.url)} (untitled page)`}
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
-                <p>Not verified for outreach: {sourceReason(r.reason, a.accountName)}</p>
+                <p>
+                  {STATUS_LABEL[/^source_unreadable|^not_read_budget$/.test(r.reason) ? 'COULD_NOT_VERIFY' : 'NOT_VERIFIED_FOR_OUTREACH']}: {sourceReason(r.reason, a.accountName)}
+                </p>
               </li>
             ))}
           </ul>

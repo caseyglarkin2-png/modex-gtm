@@ -10,7 +10,13 @@ export function sourceCounts(s: Pick<AccountSources, 'sourcesFound' | 'verifiedF
   return `Sources found: ${s.sourcesFound} · Outreach facts verified: ${s.verifiedFacts}`;
 }
 
-export function AccountSourcesSection({ sources, limit, viewAllHref }: { sources: AccountSources; limit?: number; viewAllHref?: string }) {
+const GROUPS: Array<[AccountSources['items'][number]['status'], string]> = [
+  ['VERIFIED_FOR_OUTREACH', 'Verified for outreach'],
+  ['NOT_VERIFIED_FOR_OUTREACH', 'Not verified for outreach'],
+  ['COULD_NOT_VERIFY', 'Could not verify'],
+];
+
+export function AccountSourcesSection({ sources, limit, viewAllHref, researchHref }: { sources: AccountSources; limit?: number; viewAllHref?: string; researchHref?: string }) {
   const shown = limit ? sources.items.slice(0, limit) : sources.items;
   const notVerified = sources.items.filter((i) => i.status !== 'VERIFIED_FOR_OUTREACH').length;
   return (
@@ -28,19 +34,43 @@ export function AccountSourcesSection({ sources, limit, viewAllHref }: { sources
           GAP has not found a source for this account yet.
         </p>
       )}
-      <ul>
-        {shown.map((s) => (
-          <SourceCard key={s.key} s={s} accountName={sources.accountName} compact={!!limit} />
-        ))}
-      </ul>
+      {limit ? (
+        <ul>
+          {shown.map((s) => (
+            <SourceCard key={s.key} s={s} accountName={sources.accountName} compact />
+          ))}
+        </ul>
+      ) : (
+        // The full view: grouped by evidence status (a count on each), newest first inside each; nothing hidden.
+        GROUPS.map(([status, label]) => {
+          const group = sources.items.filter((i) => i.status === status);
+          return group.length ? (
+            <div key={status} data-testid={`account-sources-group-${status}`}>
+              <h3 className="mt-3 text-xs font-semibold uppercase tracking-wide">
+                {label} ({group.length})
+              </h3>
+              <ul>
+                {group.map((s) => (
+                  <SourceCard key={s.key} s={s} accountName={sources.accountName} researchHref={researchHref} />
+                ))}
+              </ul>
+            </div>
+          ) : null;
+        })
+      )}
       <p className="flex flex-wrap gap-3 text-xs text-[var(--muted-foreground)]">
         {viewAllHref && limit && sources.items.length > 0 ? (
           <Link href={viewAllHref} className="font-semibold text-[var(--foreground)] underline" data-testid="account-sources-view-all">
             View all sources ({sources.items.length})
           </Link>
         ) : null}
+        {researchHref ? (
+          <Link href={researchHref} className="underline" data-testid="account-sources-research-more">
+            Research more
+          </Link>
+        ) : null}
         {sources.setAside ? <span data-testid="account-sources-set-aside">{sources.setAside} set aside by you</span> : null}
-        {sources.dropped ? <span data-testid="account-sources-dropped">{sources.dropped} dropped as search redirects, broken links or pages that do not name the account</span> : null}
+        {sources.dropped ? <span data-testid="account-sources-dropped">{sources.dropped} not shown: search redirects, broken links or pages that do not name {sources.accountName}</span> : null}
       </p>
       {!limit && sources.setAsideItems.length ? (
         <details className="text-xs" data-testid="account-sources-set-aside-list">

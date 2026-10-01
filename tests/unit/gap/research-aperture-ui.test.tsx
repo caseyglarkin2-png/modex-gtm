@@ -29,9 +29,33 @@ describe('source cards', () => {
     expect(gatik.querySelector('[data-testid="source-status"]')).toHaveTextContent('Not verified for outreach');
     expect(gatik.querySelector('[data-testid="source-open"]')).toHaveAttribute('href', 'https://gatik.ai/news/pepsico');
     expect(screen.getByTestId('account-sources-view-all')).toHaveAttribute('href', '/gap/accounts/pepsico/sources');
-    expect(screen.getByTestId('account-sources-dropped')).toHaveTextContent('2 dropped');
+    expect(screen.getByTestId('account-sources-dropped')).toHaveTextContent('2 not shown: search redirects');
     // A verified source offers no "verify" (already verified); everything offers open, research more, ignore, wrong account.
     expect(screen.getAllByTestId('source-verify')).toHaveLength(1);
+  });
+
+  it('compact on the account page: three actions per card, no theme line, one Research more; the full page groups by status with counts', () => {
+    const items = [src({}), src({ key: 'k2', link: 'https://news.google.com/rss/articles/CBMiABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?oc=5', title: null, publisher: 'Hoodline', status: 'COULD_NOT_VERIFY', reason: 'source could not be fetched', attribution: null, excerpt: null, excerptKind: null })];
+    const { unmount } = render(<AccountSourcesSection sources={sources(items)} limit={3} viewAllHref="/v" researchHref="#research-plan" />);
+    const card = screen.getAllByTestId('source-card')[0];
+    expect(card.querySelectorAll('button')).toHaveLength(3);
+    expect(card.querySelector('[data-testid="source-why"]')).toBeNull();
+    expect(screen.getAllByTestId('account-sources-research-more')).toHaveLength(1);
+    // A long feed URL with no headline never becomes the title.
+    expect(screen.getAllByTestId('source-open')[1]).toHaveTextContent('Hoodline (untitled page)');
+    unmount();
+    render(<AccountSourcesSection sources={sources(items)} researchHref="/gap/accounts/pepsico#research-plan" />);
+    expect(screen.getByTestId('account-sources-group-NOT_VERIFIED_FOR_OUTREACH')).toHaveTextContent('Not verified for outreach (1)');
+    expect(screen.getByTestId('account-sources-group-COULD_NOT_VERIFY')).toHaveTextContent('Could not verify (1)');
+    expect(screen.queryByTestId('account-sources-group-VERIFIED_FOR_OUTREACH')).toBeNull();
+  });
+
+  it('a long quote is cut at a word, outside the quotation marks', () => {
+    const long = `"${'PepsiCo moves freight across Texas '.repeat(10)}" said Jim Farrell, PepsiCo.`;
+    render(<AccountSourcesSection sources={sources([src({ excerpt: long, attribution: null })])} limit={3} />);
+    const t = screen.getByTestId('source-excerpt').textContent ?? '';
+    expect(t).toMatch(/\u201d \(continues at the source\)$/);
+    expect(t).not.toContain('\u2026');
   });
 
   it('a search summary is labelled, never quoted', () => {

@@ -128,7 +128,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     return {
       key: k,
       link: url,
-      publisher: redirect ? 'search redirect link (original site not recorded)' : host(url),
+      publisher: redirect ? 'search redirect' : host(url),
       ageDays,
       freshTrigger: ageDays !== null && ageDays <= FRESH_TRIGGER_DAYS,
       excerpt: null,

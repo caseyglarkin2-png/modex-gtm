@@ -43,7 +43,7 @@ export default async function AccountSourcesPage({ params, searchParams }: { par
           All sources: {name}
         </h1>
       </div>
-      <AccountSourcesSection sources={sources} />
+      <AccountSourcesSection sources={sources} researchHref={`${back}#research-plan`} />
     </div>
   );
 }
