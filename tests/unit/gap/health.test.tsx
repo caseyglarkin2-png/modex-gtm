@@ -77,7 +77,7 @@ describe('loadHealthInputs: probes never throw and never read as green', () => {
   const env = { HUBSPOT_ACCESS_TOKEN: 't', CLAWD_CONTROL_PLANE_URL: 'https://clawd', CLAWD_CONTROL_PLANE_TOKEN: 'k', GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'r' };
   const prisma = (cronValue: unknown, runAt: Date | null) => ({
     systemConfig: { findUnique: vi.fn(async () => (cronValue ? { value: JSON.stringify(cronValue) } : null)) },
-    gapAuditEvent: { findFirst: vi.fn(async () => (runAt ? { created_at: runAt } : null)) },
+    gapAuditEvent: { findMany: vi.fn(async () => (runAt ? [{ created_at: runAt, payload: { dryRun: false, failed: [] } }] : [])) },
   });
 
   it('a HubSpot ping that throws and a suppression read that throws are both failures', async () => {

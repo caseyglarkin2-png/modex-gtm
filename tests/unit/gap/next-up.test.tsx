@@ -36,9 +36,17 @@ describe('<NextUp>', () => {
 
 describe('<GapCockpit>', () => {
   it('every lane tile stays on /gap (no link out to /gap/hypotheses or /gap/replies)', () => {
-    render(<GapCockpit data={{ review: 1, research: 2, ready: 3, followUp: 0, replies: { count: 1, atLeast: false }, deals: 1, active: 'review' }} />);
+    render(<GapCockpit data={{ review: 1, research: 2, ready: 3, followUp: 0, replies: { count: 1, atLeast: false }, deals: { count: 1, unresolved: 0, checkedAt: null }, active: 'review' }} />);
     const hrefs = screen.getAllByRole('link').map((a) => a.getAttribute('href'));
     expect(hrefs).toEqual(['/gap?lane=review', '/gap?lane=research', '/gap?lane=ready', '/gap?lane=follow_up', '/gap?lane=replies', '/gap?lane=deals']);
     expect(screen.getByTestId('cockpit-tile-review')).toHaveAttribute('aria-current', 'page');
+  });
+  it('In Deals tile: an unverifiable HubSpot reads "?", never 0; unmatched open deals are said', () => {
+    const base = { review: 0, research: 0, ready: 0, followUp: 0, replies: { count: 0, atLeast: false }, active: null };
+    const { unmount } = render(<GapCockpit data={{ ...base, deals: { count: null, unresolved: 0, checkedAt: null } }} />);
+    expect(screen.getByTestId('cockpit-tile-in-deals')).toHaveTextContent('In deals?Could not verify HubSpot');
+    unmount();
+    render(<GapCockpit data={{ ...base, deals: { count: 10, unresolved: 6, checkedAt: '2026-10-01T05:00:00Z' } }} />);
+    expect(screen.getByTestId('cockpit-tile-in-deals')).toHaveTextContent('In deals10+6 open deals not matched');
   });
 });

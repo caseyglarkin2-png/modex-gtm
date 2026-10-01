@@ -29,8 +29,11 @@ export interface GapCockpitData {
   ready: number;
   followUp: number;
   replies: { count: number; atLeast: boolean };
-  /** Accounts routing holds for an open HubSpot deal (Phase 2 F1). */
-  deals: number;
+  /**
+   * GAP accounts with an open HubSpot deal, from the ONE In Deals summary the lane also reads (2026-10-01).
+   * `count` null means HubSpot could not be read completely: shown as "?", never as 0.
+   */
+  deals: { count: number | null; unresolved: number; checkedAt: string | null };
   /** The lane open below, if any. */
   active: CockpitLane | null;
 }
@@ -68,7 +71,13 @@ export function GapCockpit({ data }: { data: GapCockpitData }) {
       <Tile href="/gap?lane=ready" label="Ready" value={data.ready} hint="Contact now" active={data.active === 'ready'} />
       <Tile href="/gap?lane=follow_up" label="Follow up" value={data.followUp} hint="Next touch due" active={data.active === 'follow_up'} />
       <Tile href="/gap?lane=replies" label="Replies" value={`${data.replies.count}${data.replies.atLeast ? '+' : ''}`} hint="Buyer replied" active={data.active === 'replies'} />
-      <Tile href="/gap?lane=deals" label="In deals" value={data.deals} hint="Open deal: learn, don't prospect" active={data.active === 'deals'} />
+      <Tile
+        href="/gap?lane=deals"
+        label="In deals"
+        value={data.deals.count === null ? '?' : data.deals.count}
+        hint={data.deals.count === null ? 'Could not verify HubSpot' : data.deals.unresolved ? `+${data.deals.unresolved} open deal${data.deals.unresolved === 1 ? '' : 's'} not matched` : "Open deal: learn, don't prospect"}
+        active={data.active === 'deals'}
+      />
     </section>
   );
 }
