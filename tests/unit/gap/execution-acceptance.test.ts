@@ -323,3 +323,22 @@ describe('the thesis check reads lean and fails closed (live acceptance: a cold 
     expect(r.current).toBe('unknown');
   });
 });
+
+describe('the cockpit: a thesis-held card is not READY (it waits in RESEARCH)', () => {
+  const card = (id: string) => ({ id, action: 'enroll_gap_sequence', lane: 'work_queue', ruleId: 'enroll', blocked: false, humanAction: null, account: { name: 'General Mills' }, persona: { id: 8, email: 'ryan@generalmills.com' }, hypothesis: { id: 'h-gm', status: 'active' }, createdAt: '2026-10-01T16:51:00Z' });
+  it('laneWithMotion: thesis-held READY goes to research', async () => {
+    const { laneWithMotion } = await import('@/lib/gap/motion/cockpit');
+    const { sellerLaneOf } = await import('@/lib/gap/routing/card-readiness');
+    const c = card('d-gm') as never;
+    expect(sellerLaneOf(c)).toBe('ready');
+    expect(laneWithMotion(c, new Set(), new Set(['d-gm']))).toBe('research');
+    expect(laneWithMotion(c, new Set(), new Set())).toBe('ready');
+  });
+  it('loadCockpitMotions runs the click-time check per thesis; not current or unreadable holds the card', async () => {
+    const { loadCockpitMotions } = await import('@/lib/gap/motion/cockpit');
+    const notCurrent = async () => ({ current: false as const, reason: 'x', bestFact: null, opener: null });
+    expect((await loadCockpitMotions({} as never, [card('d-gm')] as never, NOW, { thesisCurrent: notCurrent })).thesisHeldCardIds).toEqual(['d-gm']);
+    const throws = async () => { throw new Error('db down'); };
+    expect((await loadCockpitMotions({} as never, [card('d-gm')] as never, NOW, { thesisCurrent: throws as never })).thesisHeldCardIds).toEqual(['d-gm']);
+  });
+});

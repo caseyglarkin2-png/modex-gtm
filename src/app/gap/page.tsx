@@ -86,9 +86,11 @@ async function loadCockpit() {
   const now = new Date();
   // Phase 2 C: one cold email motion per account. A held email card is never READY; it waits as NEXT.
   // A failed motion read shows every card (every send gate still enforces one motion per account).
-  const motion: CockpitMotions = await loadCockpitMotions(prisma, queue.items, now).catch(() => ({ motions: [], heldCardIds: [] }));
+  // A failed read holds every READY card (fail closed): nothing presents as READY that the click would refuse.
+  const motion: CockpitMotions = await loadCockpitMotions(prisma, queue.items, now).catch(() => ({ motions: [], heldCardIds: [], thesisHeldCardIds: queue.items.filter((i) => i.hypothesis?.id).map((i) => i.id) }));
   const held = new Set(motion.heldCardIds);
-  const lanes = queue.items.map((item) => ({ item, lane: laneWithMotion(item, held) }));
+  const thesisHeld = new Set(motion.thesisHeldCardIds ?? []);
+  const lanes = queue.items.map((item) => ({ item, lane: laneWithMotion(item, held, thesisHeld) }));
   const inLane = (lane: string) => lanes.filter((l) => l.lane === lane).map((l) => l.item);
 
   // REVIEW counts decisions that can succeed, not rows: a shared thesis is ONE review however many

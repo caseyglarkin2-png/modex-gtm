@@ -221,8 +221,10 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
 
   // The open card stays visible even after acting on it moves it to another lane (success never hides the result).
   const held = new Set(motion?.heldCardIds ?? []);
+  const thesisHeld = new Set(motion?.thesisHeldCardIds ?? []);
   const laneOf = (item: QueueItem) => {
     const lane = sellerLaneOf(item);
+    if (lane === 'ready' && thesisHeld.has(item.id)) return 'research';
     return lane === 'ready' && held.has(item.id) ? 'later' : lane;
   };
   const shown = sellerLane ? items.filter((item) => laneOf(item) === sellerLane || item.id === openId) : items;
@@ -238,6 +240,7 @@ export function WorkQueue({ reloadKey, sellerLane = null, openId = null, openPan
       expanded={item.id === openId ? openPanel : null}
       closeHref={closeHref}
       reviewWaiting={reviewWaiting}
+      thesisHold={thesisHeld.has(item.id)}
     />
   );
 

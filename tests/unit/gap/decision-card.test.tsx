@@ -514,3 +514,13 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
   });
 });
 
+
+describe('execution acceptance: a card whose thesis needs review never presents as READY', () => {
+  it('the held card says "Thesis needs review", offers the review, and no call, LinkedIn or email action', () => {
+    render(<DecisionCard item={item({ persona: { id: 41, personaKey: 'vp_operations', displayName: 'Jordan Reyes', email: 'jordan@acme.example', hubspotContactId: '900', phone: '+1 555 010 2000', linkedinUrl: 'https://linkedin.com/in/jordan' } as never })} onAct={() => {}} thesisHold />);
+    expect(screen.getByTestId('seller-action-label')).toHaveTextContent('Thesis needs review');
+    expect(screen.getByTestId('thesis-hold')).toHaveTextContent('Open the review');
+    expect(screen.queryByTestId('contact-buttons')).toBeNull();
+    expect(screen.queryByTestId('readiness-actionable')).toBeNull();
+  });
+});
