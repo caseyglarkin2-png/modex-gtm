@@ -318,9 +318,13 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     asideShown.push(s);
   }
 
-  // Publication date, else the date GAP found it (an undated link shared today is not buried under old filings).
+  // Publication date first. An undated link Casey shared sorts by when she shared it (never buried); an undated
+  // page research happened to read sorts after the dated ones, newest found first.
+  const dated = (s: AccountSource) => !!s.publishedAt || s.origin === 'casey_shared';
   const when = (s: AccountSource) => s.publishedAt ?? s.discoveredAt;
-  const items = [...byKey.values()].sort((a, b) => when(b).localeCompare(when(a)) || b.discoveredAt.localeCompare(a.discoveredAt) || a.key.localeCompare(b.key));
+  const items = [...byKey.values()].sort(
+    (a, b) => Number(dated(b)) - Number(dated(a)) || when(b).localeCompare(when(a)) || b.discoveredAt.localeCompare(a.discoveredAt) || a.key.localeCompare(b.key),
+  );
   const partial = runs.length >= (opts.runs ?? 25) || signals.length >= 300 || factRows.length >= 200;
   return { accountName, items, sourcesFound: items.length, verifiedFacts: liveQuotes.size, dropped, setAside: asideShown.length, setAsideItems: asideShown, partial };
 }
