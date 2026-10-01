@@ -42,9 +42,9 @@ import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
 import { SendFromYardflow } from './send-from-yardflow';
 import { loadRelationshipContext } from '@/lib/gap/intake/context';
 import { loadAccountInputs } from '@/lib/gap/account-intel/load';
-import { buildAccountBrief, thesisCurrentness } from '@/lib/gap/account-intel/build';
+import { buildAccountBrief } from '@/lib/gap/account-intel/build';
 import { accountHref } from '@/lib/gap/account-intel/href';
-import type { ThesisCurrentness } from '@/lib/gap/execution/thesis-currentness';
+import { checkThesisCurrent, type ThesisCurrentness } from '@/lib/gap/execution/thesis-currentness';
 
 type Obj = Record<string, unknown>;
 function isObj(v: unknown): v is Obj {
@@ -204,12 +204,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   });
   // Execution acceptance: THE current-actionable-thesis rule (the same one draft, send, copy and cold call re-run at
   // the click). An old card or deep link to a thesis that needs review shows the review, never its outreach.
-  const thesisState: ThesisCurrentness =
-    hypothesis.status !== 'active'
-      ? { current: true }
-      : accountInputs
-        ? thesisCurrentness(accountInputs, hypothesis.id, new Date())
-        : { current: 'unknown', reason: 'GAP could not check whether this thesis is still current. Reload in a moment.' };
+  const thesisState: ThesisCurrentness = hypothesis.status !== 'active' ? { current: true } : await checkThesisCurrent(prisma, hypothesis.account_name, hypothesis.id, new Date());
   const thesisHold = thesisState.current !== true;
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();

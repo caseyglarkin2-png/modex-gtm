@@ -212,7 +212,8 @@ describe('the action pack renders from the same rule (an old deep link to a stal
   it('email, draft and call sections are gated on thesisCurrentness, and the review panel names the current best fact', async () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
-    expect(src).toContain('thesisCurrentness(accountInputs, hypothesis.id, new Date())');
+    // the SAME lean click-time check, awaited (no bounded race that can time out to "unknown" on a cold start)
+    expect(src).toContain("await checkThesisCurrent(prisma, hypothesis.account_name, hypothesis.id, new Date())");
     expect(src).toContain("const thesisHold = thesisState.current !== true;");
     expect(src).toContain("const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (");
     expect(src).toContain('{renderedEmail && thesisHold ? null : renderedEmail ? (');
@@ -294,5 +295,31 @@ describe('reliability review P1s', () => {
     const prisma = new Proxy(own, { get: (t, k) => (k in t ? t[k as keyof typeof t] : typeof k === 'string' && !k.startsWith('$') && k !== 'then' ? empty : undefined) });
     const inputs = await loadAccountInputs(prisma as never, 'General Mills', new Date('2026-10-01T12:00:00Z'), { hypothesisId: 'target' });
     expect(inputs?.hypotheses.map((x) => x.id)).toContain('target');
+  });
+});
+
+describe('the thesis check reads lean and fails closed (live acceptance: a cold action pack timed out to "unknown")', () => {
+  const T = new Date('2026-10-01T12:00:00Z');
+  const fakeAccount = (over: Record<string, unknown> = {}) => {
+    const empty = { findMany: async () => [], findUnique: async () => null, findFirst: async () => null, count: async () => 0 };
+    const boom = { findMany: async () => { throw new Error('should not be read'); }, findUnique: async () => { throw new Error('should not be read'); }, findFirst: async () => { throw new Error('should not be read'); } };
+    const own: Record<string, unknown> = {
+      $queryRaw: async () => { throw new Error('should not be read'); },
+      account: { findUnique: async () => ({ name: 'General Mills', tier: null, priority_band: null, vertical: null, parent_brand: null, hubspot_company_id: null }), findMany: async () => [] },
+      persona: boom, gapSignal: boom, accountContactCandidate: boom, gapWorkSourceMember: boom, gapAccountAlias: boom, canonicalAccountLink: boom, researchRun: boom, gapAccountCandidate: boom,
+      prospectingHypothesis: { ...empty, findMany: async () => [{ id: 'h-gm', status: 'active', reviewed_at: new Date('2026-09-27'), activated_at: null, observation: REDESIGN.quote, problem_hypothesis: 'p', root_cause_hypotheses: [], impact_hypotheses: [], falsification_questions: [], what_a_no_means: null, signals: [{ signal_id: 'fr' }] }] },
+      prospectingSignal: { ...empty, findMany: async () => [{ id: 'fr', title: 't', evidence_text: REDESIGN.quote, evidence_url: 'https://x.example', observed_at: new Date('2026-09-25'), freshness_expires_at: new Date('2027-01-21'), metadata: { verified: 'excerpt_found_at_source' } }] },
+      ...over,
+    };
+    return new Proxy(own, { get: (t, k) => (k in t ? t[k as string] : typeof k === 'string' && !k.startsWith('$') && k !== 'then' ? empty : undefined) });
+  };
+  it('lean never touches the heavy reads (people, signals, family, pack) and still answers', async () => {
+    const { checkThesisCurrent } = await import('@/lib/gap/execution/thesis-currentness');
+    expect(await checkThesisCurrent(fakeAccount() as never, 'General Mills', 'h-gm', T)).toEqual({ current: true });
+  });
+  it('a failed buyer-truth read is "cannot confirm", never "nothing against it"', async () => {
+    const { checkThesisCurrent } = await import('@/lib/gap/execution/thesis-currentness');
+    const r = await checkThesisCurrent(fakeAccount({ buyerInputData: { findMany: async () => { throw new Error('db down'); } } }) as never, 'General Mills', 'h-gm', T);
+    expect(r.current).toBe('unknown');
   });
 });

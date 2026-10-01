@@ -102,19 +102,33 @@ export async function loadAccountInputs(
   prisma: PrismaLike,
   accountName: string,
   now: Date,
-  opts: { live?: boolean; deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth> }; hypothesisId?: string } = {},
+  opts: {
+    live?: boolean;
+    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth> };
+    hypothesisId?: string;
+    /**
+     * Execution acceptance: only what the current-actionable-thesis rule reads (theses, facts, buyer truth, review
+     * acks), for a click or an action pack. Its reads THROW instead of degrading to empty, so a failure is
+     * "cannot confirm", never "nothing against it".
+     */
+    lean?: boolean;
+  } = {},
 ): Promise<AccountInputs | null> {
+  const lean = !!opts.lean;
+  // Lean: a failed read throws (the caller fails closed); full: a failed read degrades to empty, as before.
+  const soft = <T,>(p: Promise<T>, fallback: T): Promise<T> => (lean ? p : p.catch(() => fallback));
+  const skip = <T,>(p: () => Promise<T>, fallback: T): Promise<T> => (lean ? Promise.resolve(fallback) : p());
   const account = await prisma.account.findUnique({ where: { name: accountName }, select: { name: true, tier: true, priority_band: true, vertical: true, parent_brand: true, hubspot_company_id: true, updated_at: true } });
   if (!account) return null;
   const [aliases, link, allNames, profiles, signalRows, factRows, lastRun, hyps, bidRows, personas, candidates, members] = await Promise.all([
-    prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true, created_at: true } }).catch(() => []),
-    prisma.canonicalAccountLink.findUnique({ where: { account_name: accountName }, select: { canonical_company_id: true, status: true } }).catch(() => null),
-    namesStartingLike(prisma, accountName),
-    loadWatchProfilesCached(prisma).catch(() => []),
-    prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []),
+    skip(() => prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true, created_at: true } }).catch(() => []), []),
+    skip(() => prisma.canonicalAccountLink.findUnique({ where: { account_name: accountName }, select: { canonical_company_id: true, status: true } }).catch(() => null), null as Row | null),
+    skip(() => namesStartingLike(prisma, accountName), [] as string[]),
+    skip(() => loadWatchProfilesCached(prisma).catch(() => []), []),
+    skip(() => prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []), []),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
-    prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null),
-    prisma.prospectingHypothesis.findMany({
+    skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
+    soft(prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
       select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
@@ -128,24 +142,23 @@ export async function loadAccountInputs(
           select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
         });
         return [...rows, ...extra];
-      })
-      .catch(() => []),
-    prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }).catch(() => []),
-    prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true }, take: 60 }),
-    prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []),
-    prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : [],
+      }), [] as Row[]),
+    soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }), [] as Row[]),
+    skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true }, take: 60 }), [] as Row[]),
+    skip(() => prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []), []),
+    skip(() => (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])), []),
   ]);
   // "I reviewed it" after a THESIS NEEDS REVIEW flag (Casey's click, an audit row): the newest per thesis.
   const hypIds = (hyps as Row[]).map((h) => h.id as string);
-  const ackRows: Row[] = hypIds.length && prisma.gapAuditEvent?.findMany ? await prisma.gapAuditEvent.findMany({ where: { kind: 'thesis.review_ack', subject_type: 'hypothesis', subject_id: { in: hypIds } }, select: { subject_id: true, created_at: true }, orderBy: { created_at: 'desc' } }).catch(() => []) : [];
+  const ackRows: Row[] = hypIds.length && prisma.gapAuditEvent?.findMany ? await soft(prisma.gapAuditEvent.findMany({ where: { kind: 'thesis.review_ack', subject_type: 'hypothesis', subject_id: { in: hypIds } }, select: { subject_id: true, created_at: true }, orderBy: { created_at: 'desc' } }), [] as Row[]) : [];
   const acks = new Map<string, Date>();
   for (const r of ackRows) if (!acks.has(r.subject_id)) acks.set(r.subject_id, new Date(r.created_at));
   // A thesis the BUYER rejected (a human-confirmed problem_rejected disposition) shows as contradicted; a draft Casey withdrew does not.
   const rejectedIds = (hyps as Row[]).filter((h) => h.status === 'rejected').map((h) => h.id as string);
-  const buyerNo: Row[] = rejectedIds.length && prisma.conversationDisposition?.findMany ? await prisma.conversationDisposition.findMany({ where: { hypothesis_id: { in: rejectedIds }, response_class: 'problem_rejected', human_confirmed: true }, select: { hypothesis_id: true } }).catch(() => []) : [];
+  const buyerNo: Row[] = rejectedIds.length && prisma.conversationDisposition?.findMany ? await soft(prisma.conversationDisposition.findMany({ where: { hypothesis_id: { in: rejectedIds }, response_class: 'problem_rejected', human_confirmed: true }, select: { hypothesis_id: true } }), [] as Row[]) : [];
   const buyerRejected = new Set(buyerNo.map((r) => r.hypothesis_id as string));
   // The corporate family: related accounts (never merged). What is live at them is read only on the live page.
-  const family = await (async () => {
+  const family = lean ? null : await (async () => {
     const fam = await import('../family/family');
     const f = await fam.loadCorporateFamily(prisma, accountName, opts.live ? { hubspot: fam.hubspotFamily } : {}).catch(() => null);
     if (!f || (!f.parentName && !f.members.length)) return f ? { parentName: f.parentName, members: [], related: [], separate: null, hold: null } : null;
@@ -159,7 +172,7 @@ export async function loadAccountInputs(
   const iso = (d: unknown): string | null => (d instanceof Date || typeof d === 'string' ? (Number.isNaN(new Date(d).getTime()) ? null : new Date(d).toISOString()) : null);
   const aliasesAddedAt = (aliases as Row[]).map((a) => iso(a.created_at)).filter((d): d is string => !!d).sort().pop() ?? null;
   const domains: string[] = [];
-  if (link?.status === 'resolved') {
+  if (!lean && link?.status === 'resolved') {
     const cc = await prisma.canonicalCompany.findUnique({ where: { id: link.canonical_company_id }, select: { domain: true } }).catch(() => null);
     if (cc?.domain) domains.push(cc.domain);
   }
@@ -199,20 +212,22 @@ export async function loadAccountInputs(
 
   // The shared selector speaks camelCase: map, then keep human-confirmed rows no later row supersedes.
   const confirmed: Row[] = selectConfirmedBids((bidRows as Row[]).map((b) => ({ ...b, id: String(b.id), humanConfirmed: !!b.human_confirmed, supersedesId: (b.supersedes_id as string | null) ?? null })));
-  const micro = micrositeFor(accountName, aliasList);
-  const pack = await loadDemoPack(micro?.slug ?? accountSlug(accountName));
-  const roi = roiFrom(micro?.roiModel) ?? (pack ? roiFrom(buildAccountRoiModel(pack)) : null);
-  const fact = getFacilityFact(accountName);
+  const micro = lean ? null : micrositeFor(accountName, aliasList);
+  const pack = lean ? null : await loadDemoPack(micro?.slug ?? accountSlug(accountName));
+  const roi = lean ? null : roiFrom(micro?.roiModel) ?? (pack ? roiFrom(buildAccountRoiModel(pack)) : null);
+  const fact = lean ? null : getFacilityFact(accountName);
   // What Scout found while this was a candidate (added or mapped here): leads, never verified facts.
   // What Scout found: while this was a candidate (added or mapped here), or an identity Scout run on the account
   // itself (the same normalized company key). Leads, never verified facts.
-  const candidate: Row | null = prisma.gapAccountCandidate?.findFirst
+  const candidate: Row | null = !lean && prisma.gapAccountCandidate?.findFirst
     ? await prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
     : null;
-  const [touches, convs] = await Promise.all([
-    loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()),
-    loadAccountConversations(prisma, [accountName], now).catch(() => new Map()),
-  ]);
+  const [touches, convs] = lean
+    ? [new Map(), new Map()]
+    : await Promise.all([
+        loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()),
+        loadAccountConversations(prisma, [accountName], now).catch(() => new Map()),
+      ]);
   let opportunity: AccountInputs['opportunity'] = null;
   if (opts.live) {
     const o: OpportunityTruth = await (opts.deps?.opportunity ?? ((p, a) => resolveAccountOpportunity(p, a)))(prisma, accountName);
