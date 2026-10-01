@@ -16,6 +16,7 @@
 import { normalizeSignalUrl } from '../signals/intake';
 import { liveFactFailure, speakerOrg, textNamesAccount, type SourceRecord } from '../research/run';
 import { normalizeCompany } from '../research/providers';
+import { classifyContinuity } from '../research/continuity';
 import { DROP_REASONS, SEARCH_REDIRECT, sourceReason, type AccountSource, type SourceStatus, type WhyFound } from './source-copy';
 
 export { ageLabel, sourceReason, STATUS_LABEL } from './source-copy';
@@ -39,6 +40,8 @@ export interface AccountSources {
   /** Casey ignored or reassigned: out of the default view, never deleted. */
   setAside: number;
   setAsideItems: AccountSource[];
+  /** The read limits were hit: older research runs, signals or facts were not loaded (said on the page). */
+  partial?: boolean;
 }
 
 const DAY = 86_400_000;
@@ -107,7 +110,13 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
   // "0 sources found · 0 outreach facts verified".
   const [runs, signals, factRows]: [Row[], Row[], Row[]] = await Promise.all([
     prisma.researchRun.findMany({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, take: opts.runs ?? 25, select: { id: true, created_at: true, provider_status: true } }),
-    prisma.gapSignal.findMany({ where: { account_name: accountName }, orderBy: { created_at: 'desc' }, take: 300, select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true } }),
+    // This account's signals, and the ones Casey moved away from it (Wrong account / reassigned): those stay set aside.
+    prisma.gapSignal.findMany({
+      where: { OR: [{ account_name: accountName }, { metadata: { path: ['reassignedFrom'], equals: accountName } }] },
+      orderBy: { created_at: 'desc' },
+      take: 300,
+      select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true, account_name: true, resolution_basis: true },
+    }),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, orderBy: { observed_at: 'desc' }, take: 200, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, updated_at: true, metadata: true } }),
   ]);
 
@@ -153,7 +162,8 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     const lose = win === s ? cur : s;
     // Two different statements from one page stay two statements, each with its own status and speaker.
     const also = [...(win.alsoOnPage ?? []), ...(lose.alsoOnPage ?? [])];
-    if (lose.excerpt && win.excerpt && lose.excerptKind !== 'headline' && lose.excerpt !== win.excerpt && !also.some((a) => a.excerpt === lose.excerpt)) {
+    // Only the page's own words: a search summary is never listed as a statement on the page.
+    if (lose.excerpt && win.excerpt && lose.excerptKind === 'verbatim' && lose.excerpt !== win.excerpt && !also.some((a) => a.excerpt === lose.excerpt)) {
       also.push({ excerpt: lose.excerpt, status: lose.status, reason: lose.reason, attribution: lose.attribution });
     }
     byKey.set(s.key, {
@@ -187,7 +197,9 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     // A stored fact whose source failed a later recheck is still a source GAP found, with that reason.
     const recheck = typeof meta.verified === 'string' && /failed_recheck$/.test(meta.verified);
     if (meta.verified !== 'excerpt_found_at_source' && !recheck) continue;
-    const fail = recheck ? 'failed_recheck' : liveFactFailure(r.evidence_text, accountName);
+    // The brief's live-fact rule: a change that has since ended or was superseded is not a live fact.
+    const kind = meta.continuity?.kind === 'ended' || meta.continuity?.kind === 'ongoing_state' ? meta.continuity.kind : classifyContinuity(r.evidence_text);
+    const fail = recheck ? 'failed_recheck' : (liveFactFailure(r.evidence_text, accountName) ?? (kind === 'ended' ? 'fact_ended' : null));
     const speaker = speakerOrg(r.evidence_text)?.replace(/[.,;:]+$/, '') ?? null;
     if (!fail) liveQuotes.add(String(r.evidence_text).trim().toLowerCase());
     const expires = r.freshness_expires_at ? new Date(r.freshness_expires_at) : null;
@@ -200,7 +212,9 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       attribution: fail === 'quoted_third_party' ? speaker : null,
       origin: 'gap_research',
       status: fail ? 'NOT_VERIFIED_FOR_OUTREACH' : 'VERIFIED_FOR_OUTREACH',
-      reason: fail === 'failed_recheck'
+      reason: fail === 'fact_ended'
+        ? sourceReason('fact_ended', accountName)
+        : fail === 'failed_recheck'
         ? `${sourceReason('failed_recheck', accountName)}${typeof meta.recheck?.reason === 'string' ? `: ${sourceReason(meta.recheck.reason, accountName, speaker)}` : ''}`
         : fail ? `${sourceReason('fact_no_longer_passes', accountName)}: ${sourceReason(fail, accountName, speaker)}` : null,
       factId: r.id,
@@ -264,6 +278,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       : rs === 'queued' || rs === 'researching' ? 'being_checked'
       : rs === 'no_usable_fact' ? 'no_fact_sentence'
       : rs === 'fact_found' ? (liveQuotes.size ? 'fact_at_other_source' : 'fact_no_longer_passes')
+      : g.resolution_basis === 'discovery_mention' ? 'mention_only'
       : 'not_checked';
     const s = make(g.url, {
       title: g.title ?? null,
@@ -275,23 +290,38 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       excerptKind: g.title ? 'headline' : null,
       origin: g.origin === 'casey_share' || g.origin === 'conference_note' ? 'casey_shared' : 'gap_discovered',
       status: verified ? 'VERIFIED_FOR_OUTREACH' : statusOf(raw),
-      reason: verified ? null : sourceReason(raw, accountName),
+      // A contradiction on a verified page is said, never swallowed by the verified status.
+      reason: verified ? (rs === 'contradiction' ? 'verified; another source contradicts it (resolve it in the Research lane)' : null) : sourceReason(raw, accountName),
       signalId: g.id,
       reviewed: !!g.feedback,
     });
     if (s) s.whyFound = whyFound(`${g.title ?? ''}`, Array.isArray(g.categories) ? g.categories : []);
-    if (s && g.feedback && SET_ASIDE.has(String(g.feedback))) {
+    const movedAway = g.account_name !== accountName;
+    if (s && (movedAway || (g.feedback && SET_ASIDE.has(String(g.feedback))))) {
+      if (movedAway) s.reason = `you marked it as another account's${g.account_name ? ` (${g.account_name})` : ' (waiting in Signal intake)'}`;
+      s.reviewed = true;
       setAsideItems.push(s);
       continue;
     }
     add(s);
   }
-  // A source Casey set aside stays out of the default view even when research also saw it.
-  for (const s of setAsideItems) byKey.delete(s.key);
+  // A source Casey set aside stays out of the default view even when research also saw it. A live verified fact
+  // is never hidden behind a set-aside (it is counted, so it is shown, marked reviewed).
+  const asideShown: AccountSource[] = [];
+  for (const s of setAsideItems) {
+    if (verifiedKeys.has(s.key)) {
+      const cur = byKey.get(s.key);
+      if (cur) cur.reviewed = true;
+      continue;
+    }
+    byKey.delete(s.key);
+    asideShown.push(s);
+  }
 
-  const items = [...byKey.values()].sort(
-    (a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '') || b.discoveredAt.localeCompare(a.discoveredAt) || a.key.localeCompare(b.key),
-  );
-  return { accountName, items, sourcesFound: items.length, verifiedFacts: liveQuotes.size, dropped, setAside: setAsideItems.length, setAsideItems };
+  // Publication date, else the date GAP found it (an undated link shared today is not buried under old filings).
+  const when = (s: AccountSource) => s.publishedAt ?? s.discoveredAt;
+  const items = [...byKey.values()].sort((a, b) => when(b).localeCompare(when(a)) || b.discoveredAt.localeCompare(a.discoveredAt) || a.key.localeCompare(b.key));
+  const partial = runs.length >= (opts.runs ?? 25) || signals.length >= 300 || factRows.length >= 200;
+  return { accountName, items, sourcesFound: items.length, verifiedFacts: liveQuotes.size, dropped, setAside: asideShown.length, setAsideItems: asideShown, partial };
 }
 

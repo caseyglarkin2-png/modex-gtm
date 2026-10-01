@@ -36,7 +36,30 @@ export const DISCOVERY_MAX_AGE_MS = 21 * 86_400_000;
  * Research aperture: the ONLY headlines discovery drops as spam are machine-generated market chatter (fund holdings
  * filings, price targets, analyst rating changes). A content type, never a judgment of whether a story matters.
  */
-export const MARKET_CHATTER = /\b(?:shares? (?:sold|bought|purchased|acquired) by|(?:stake|position|holdings?) in|price target|stock (?:price|rating)|(?:upgraded|downgraded|reiterated) (?:to|at|by)|(?:buy|sell|hold|outperform) rating|short interest|options? (?:activity|trading)|dividend (?:of|declared))\b/i;
+export const MARKET_CHATTER = new RegExp(
+  [
+    // Fund holdings filings: "Stake Raised by XYZ Capital", "Position Increased by ABC", "Shares Sold by ...".
+    String.raw`\b(?:stake|position|holdings?|shares?)\b[^.]{0,40}\b(?:raised|lowered|increased|decreased|trimmed|cut|boosted|sold|bought|purchased|acquired|reduced)\s+by\b`,
+    // An exchange ticker in brackets is the market-wire shape: "PepsiCo (NASDAQ:PEP) ...".
+    String.raw`\((?:NYSE|NASDAQ|NasdaqGS|NasdaqGM|TSX|LON|AMEX|NYSEARCA)\s*:\s*[A-Z.]+\)`,
+    String.raw`\bprice target\b`,
+    String.raw`\b(?:upgraded|downgraded|reiterated)\b[^.]{0,30}\b(?:to|at|by)\b`,
+    String.raw`\b(?:buy|sell|hold|outperform|underperform|overweight|underweight) rating\b`,
+    String.raw`\bshort interest\b`,
+    String.raw`\boptions? (?:activity|trading)\b`,
+    String.raw`\bdividend (?:of|declared)\b`,
+  ].join('|'),
+  'i',
+);
+
+/**
+ * Research aperture: a headline that names the account but does not open with it ("Gatik expands driverless runs
+ * for PepsiCo") is third-party account intelligence: captured as a MENTION, shown with that label, never queued.
+ */
+export function headlineMentions(headline: string, profile: Pick<WatchProfile, 'accountName'>): boolean {
+  const h = ` ${norm(headline)} `;
+  return discoveryKeys(profile.accountName).some((k) => k.length >= 4 && h.includes(` ${k} `));
+}
 /** A discovered story this strong goes to research on its own (Casey-shared ones always do). */
 // Name in the headline (+2) plus one operational category (4): every discovered outreach candidate is followed up.
 export const DISCOVERY_RESEARCH_SCORE = 6;
@@ -107,6 +130,8 @@ export interface DiscoveryAccountResult {
   captured: number;
   /** Machine-generated market chatter dropped as spam (MARKET_CHATTER). */
   spam?: number;
+  /** Headlines that name the account without opening with it: captured as third-party mentions, never queued. */
+  mentions?: number;
   duplicates: number;
   queued: number;
   /** Fetch failures (a 429 or a timeout is reported, never an empty "nothing happened"). */
@@ -180,10 +205,11 @@ export async function runDiscovery(
         const fresh = opts.now.getTime() - it.publishedAt.getTime() <= DISCOVERY_MAX_AGE_MS;
         const headline = cleanHeadline(it.title, it.source);
         const match = headlineMatch(headline, p);
-        if (!match) continue;
+        const mention = !match && headlineMentions(headline, p);
+        if (!match && !mention) continue;
         // An alias that is itself ANOTHER account's name (a parent, a sister brand) is that account's story,
         // left for its own ask (review C P1). Casey's own aliases for the account are trusted.
-        if (match.viaAlias && (await accountNamed(prisma, match.key, p.accountName))) {
+        if (match?.viaAlias && (await accountNamed(prisma, match.key, p.accountName))) {
           out.otherAccount += 1;
           continue;
         }
@@ -195,9 +221,10 @@ export async function runDiscovery(
         // makes of it. The classification only decides whether research is queued on its own.
         const cls = classifySignal(headline, p.accountName);
         out.kept += 1;
+        if (mention) out.mentions = (out.mentions ?? 0) + 1;
         const r = await captureSignal(
           prisma,
-          { url: it.url, title: headline, publishedAt: it.publishedAt, sourceName: it.source, origin: 'discovery', actor: DISCOVERY_ACTOR, now: opts.now, accountName: p.accountName, resolutionBasis: 'discovery_query' },
+          { url: it.url, title: headline, publishedAt: it.publishedAt, sourceName: it.source, origin: 'discovery', actor: DISCOVERY_ACTOR, now: opts.now, accountName: p.accountName, resolutionBasis: mention ? 'discovery_mention' : 'discovery_query' },
           { fetchHtml: null },
         );
         if (!r.ok) continue;
@@ -206,7 +233,7 @@ export async function runDiscovery(
           continue;
         }
         out.captured += 1;
-        if (fresh && cls.relevance === 'outreach_evidence_candidate' && cls.score >= DISCOVERY_RESEARCH_SCORE) {
+        if (!mention && fresh && cls.relevance === 'outreach_evidence_candidate' && cls.score >= DISCOVERY_RESEARCH_SCORE) {
           await prisma.gapSignal.update({ where: { id: r.signal.id }, data: { research_status: 'queued' } });
           out.queued += 1;
         }

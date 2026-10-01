@@ -3,7 +3,7 @@
  * and bounded rotating discovery that captures SIGNALS only.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { cleanHeadline, headlineMatch, headlineNames, runDiscovery, themesForRun } from '@/lib/gap/signals/discovery';
+import { MARKET_CHATTER, cleanHeadline, headlineMatch, headlineNames, runDiscovery, themesForRun } from '@/lib/gap/signals/discovery';
 import { correctWatch, loadWatchProfiles, DEFAULT_THEMES, WATCH_AUDIT } from '@/lib/gap/signals/watch';
 
 const NOW = new Date('2026-09-28T15:00:00.000Z');
@@ -132,6 +132,23 @@ describe('discovery', () => {
     expect(prisma.pounceTrigger.create).not.toHaveBeenCalled();
     expect(prisma.prospectingSignal.create).not.toHaveBeenCalled();
     expect(prisma.gapAuditEvent.create).toHaveBeenCalledWith(expect.objectContaining({ data: expect.objectContaining({ kind: 'signal.discovery', subject_id: 'General Mills' }) }));
+  });
+
+  it('market chatter is the filing shape only; an account taking a stake or a position is news', () => {
+    for (const h of ['PepsiCo (NASDAQ:PEP) Stake Raised by XYZ Capital', 'PepsiCo Inc. Position Increased by ABC Advisors', 'Kroger shares sold by Vanguard Group', 'General Mills price target cut at Barclays', 'Hormel Foods upgraded to buy at Stifel'])
+      expect(MARKET_CHATTER.test(h), h).toBe(true);
+    for (const h of ['Walmart takes stake in Flipkart logistics arm', 'Kroger takes minority stake in Ocado automation venture', 'Amazon strengthens position in grocery delivery with new DCs', 'Target cements position in same-day fulfillment', 'Ford to sell its holdings in Rivian', 'PepsiCo hiring for new position in Dallas DC', 'GXO acquires Wincanton', 'Tyson to close plant in Iowa'])
+      expect(MARKET_CHATTER.test(h), h).toBe(false);
+  });
+
+  it('a headline that mentions the account without opening with it is captured as a mention, never queued', async () => {
+    const { prisma, rows } = discoveryDb();
+    const news = vi.fn(async () => ({ error: null, items: [{ title: 'Gatik expands driverless runs for General Mills distribution centers - FreightWaves', url: 'https://news.google.com/rss/articles/M1', source: 'FreightWaves', publishedAt: new Date('2026-09-25T00:00:00Z') }] }));
+    const r = await runDiscovery(prisma, { now: NOW, accounts: 1 }, { news, profiles: async () => [profile('General Mills')], sleep: async () => undefined });
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ resolution_basis: 'discovery_mention', account_name: 'General Mills' });
+    expect(rows[0].research_status ?? 'none').not.toBe('queued');
+    expect(r.accounts[0]).toMatchObject({ mentions: 1, queued: 0 });
   });
 
   it('a strong operational story is queued for research; a repeat is a duplicate, not a new signal', async () => {

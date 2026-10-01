@@ -308,7 +308,7 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
             Recommendation: hold and research later.{' '}
             {result.facts.length > 0 ? `${result.facts.length} older fact(s) were found but are stale. ` : ''}
             {result.sources?.length
-              ? `Sources found: ${result.sources.length} · outreach facts verified: ${result.facts.length}. No verified outreach fact is not "nothing found": every source is on the account page under Sources / signals, with the reason.`
+              ? `Sources looked at: ${result.sources.length} · outreach facts verified: ${result.facts.length}. No verified outreach fact is not "nothing found": they are on the account page under Sources / signals, with the reason.`
               : result.rejected.length > 0
                 ? `${result.rejected.length} candidate(s) did not qualify as outreach facts (not verifiable at the source, undated, or not about physical operations); they are on the account page under Sources / signals.`
                 : ''}

@@ -12,6 +12,7 @@
  *           Its excerpts are PROPOSALS; unverifiable ones are dropped.
  */
 import { extractFactSentences, htmlToText } from './facts';
+import type { PageResult } from '../signals/research';
 import { askGrounded, defaultProviders, type ScoutProvider } from '../entity/providers';
 
 export interface Candidate {
@@ -70,7 +71,7 @@ export async function edgarCandidates(
   accountName: string,
   now: Date,
   deps: { fetchJson?: (url: string) => Promise<unknown>; fetchText?: FetchText } = {},
-): Promise<{ candidates: Candidate[]; note: string }> {
+): Promise<{ candidates: Candidate[]; note: string; pageResults?: PageResult[] }> {
   const fetchJson = deps.fetchJson ?? defaultFetchJson;
   const fetchText = deps.fetchText ?? defaultFetchText;
   const company = await resolveCik(accountName, fetchJson);
@@ -92,19 +93,26 @@ export async function edgarCandidates(
       // one query failing is not the end of the search
     }
   }
-  const newestFirst = [...docs.values()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+  const sorted = [...docs.values()].sort((a, b) => b.date.localeCompare(a.date));
+  const newestFirst = sorted.slice(0, 5);
   const candidates: Candidate[] = [];
+  // Research aperture: every filing found is a source (read with or without a fact sentence, unreadable, not read).
+  const title = (d: { form: string; date: string }) => `${company.title} ${d.form} (filed ${d.date})`;
+  const at = (d: { date: string }) => new Date(`${d.date}T00:00:00Z`);
+  const pageResults: PageResult[] = sorted.slice(5).map((d) => ({ url: d.url, title: title(d), publishedAt: at(d), outcome: 'not_read' as const, sentences: 0 }));
   for (const d of newestFirst) {
     try {
       const text = await fetchText(d.url);
-      for (const excerpt of extractFactSentences(text, 4)) {
-        candidates.push({ provider: 'edgar', url: d.url, title: `${company.title} ${d.form} (filed ${d.date})`, publishedAt: new Date(`${d.date}T00:00:00Z`), excerpt, sourceType: 'public_primary' });
+      const sentences = extractFactSentences(text, 4);
+      pageResults.push({ url: d.url, title: title(d), publishedAt: at(d), outcome: 'read', sentences: sentences.length });
+      for (const excerpt of sentences) {
+        candidates.push({ provider: 'edgar', url: d.url, title: title(d), publishedAt: at(d), excerpt, sourceType: 'public_primary' });
       }
-    } catch {
-      // skip an unreadable filing
+    } catch (e) {
+      pageResults.push({ url: d.url, title: title(d), publishedAt: at(d), outcome: 'unreadable', sentences: 0, error: (e instanceof Error ? e.message : String(e)).slice(0, 120) });
     }
   }
-  return { candidates, note: `${company.title}: ${docs.size} filing hits, ${newestFirst.length} read` };
+  return { candidates, note: `${company.title}: ${docs.size} filing hits, ${newestFirst.length} read`, pageResults };
 }
 
 const DATELINE_MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];

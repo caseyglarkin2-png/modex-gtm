@@ -69,6 +69,7 @@ export function AccountSourcesSection({ sources, limit, viewAllHref, researchHre
             Research more
           </Link>
         ) : null}
+        {sources.partial ? <span data-testid="account-sources-partial">Older research runs are not loaded here; the newest are.</span> : null}
         {sources.setAside ? <span data-testid="account-sources-set-aside">{sources.setAside} set aside by you</span> : null}
         {sources.dropped ? <span data-testid="account-sources-dropped">{sources.dropped} not shown: search redirects, broken links or pages that do not name {sources.accountName}</span> : null}
       </p>

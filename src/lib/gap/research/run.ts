@@ -231,7 +231,8 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const unreachable: Candidate[] = [];
   for (const c of candidates) {
     const key = normalizeForMatch(c.excerpt);
-    if (seen.has(key)) continue;
+    // Syndicated copy of a statement already checked is still a page that carried the story.
+    if (seen.has(key)) { recordSource(sources, sourceFromCandidate(c, { ok: false, reason: 'same_statement_as_other_source' })); continue; }
     const v = await verifyCandidate(c, ctx);
     recordSource(sources, sourceFromCandidate(c, v));
     if (!v.ok) {
@@ -296,7 +297,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
       notes.push(`currentness: ${r.note}`);
       for (const c of r.candidates) {
         const key = normalizeForMatch(c.excerpt);
-        if (seen.has(key)) continue;
+        if (seen.has(key)) { recordSource(sources, sourceFromCandidate(c, { ok: false, reason: 'same_statement_as_other_source' })); continue; }
         const v = await verifyCandidate(c, ctx);
         recordSource(sources, sourceFromCandidate(c, v));
         if (!v.ok) { rejected.push({ url: c.url, reason: v.reason }); continue; }

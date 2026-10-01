@@ -31,15 +31,17 @@ export async function applySourceOp(
   const existing: { id: string; account_name: string | null } | null = await prisma.gapSignal.findUnique({ where: { url_hash: signalUrlHash(normalized) }, select: { id: true, account_name: true } });
   // One URL is one signal row: a source already filed under another account is that account's to act on.
   if (existing?.account_name && existing.account_name !== acct.name) return { ok: false, reason: 'other_account', detail: existing.account_name };
+  // Waiting in Signal intake for Casey to name its account: acted on there, never buried from here.
+  if (existing && !existing.account_name) return { ok: false, reason: 'needs_account' };
   let id = existing?.id ?? null;
   if (!id) {
-    const published = input.publishedAt ? new Date(input.publishedAt) : null;
+    // No client-supplied date: a web source's date is the search model's claim; the page's own metadata dates it.
     const r = await captureSignal(
       prisma,
       {
         url: input.url,
         title: input.title ?? null,
-        publishedAt: published && !Number.isNaN(published.getTime()) ? published : null,
+        publishedAt: null,
         origin: 'discovery',
         actor: input.actor,
         now: input.now,

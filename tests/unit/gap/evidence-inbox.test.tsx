@@ -113,12 +113,13 @@ describe('<EvidenceInbox> / <EvidenceActions>', () => {
       ] } } }],
     });
     render(<EvidenceInbox accounts={await loadEvidenceInbox(p, NOW)} now={NOW} />);
-    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('2 sources found by research (45 days) · 1 outreach fact verified');
-    const src = screen.getByTestId('evidence-source');
+    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('3 sources found by research (45 days) · 1 outreach fact verified');
+    const src = screen.getAllByTestId('evidence-source')[0];
     expect(src).toHaveTextContent('gatik.ai · published Jun 9, 2026');
     expect(src).toHaveTextContent('Gatik and PepsiCo expand');
     expect(src).toHaveTextContent('Not verified for outreach: describes a past event, not a current change');
-    expect(screen.getAllByTestId('evidence-source')).toHaveLength(1);
+    // A page that does not use the full name is shown (it may use a brand); only the search redirect is dropped.
+    expect(screen.getAllByTestId('evidence-source')).toHaveLength(2);
     expect(screen.getByTestId('evidence-view-all-sources')).toHaveAttribute('href', '/gap/accounts/pepsico/sources');
     expect(screen.getByTestId('evidence-fact')).toHaveTextContent('PepsiCo will expand its autonomous freight program');
   });

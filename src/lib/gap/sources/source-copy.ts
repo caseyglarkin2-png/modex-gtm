@@ -39,8 +39,11 @@ export interface AccountSource {
 /** Only search-redirect and search-result pages; an aggregator copy is still a source (not verified, shown). */
 export const SEARCH_REDIRECT = /^https?:\/\/(?:[^/]*\.)?(?:vertexaisearch\.cloud\.google\.com|google\.[a-z.]+\/(?:search|url)|bing\.com\/(?:search|ck)|duckduckgo\.com\/(?:\?|l\/))/i;
 
-/** Reasons that prove the source is not about the account: dropped (counted), never shown. */
-export const DROP_REASONS = new Set(['page_does_not_name_account']);
+/**
+ * Reasons that prove the source is not about the account: dropped (counted), never shown. Empty on purpose: a page
+ * that does not name the account by its full name may still name a brand or short form, so it is shown.
+ */
+export const DROP_REASONS = new Set<string>();
 
 /** The factual reason, in plain words. */
 export function sourceReason(raw: string | null, accountName: string, speaker?: string | null): string {
@@ -54,7 +57,7 @@ export function sourceReason(raw: string | null, accountName: string, speaker?: 
     reanchor_too_weak: 'sentence did not verify word for word at the source',
     excerpt_not_found_at_source: 'the quoted sentence is not on the page',
     sentence_does_not_name_account: `the sentence is not about ${accountName} itself (could be about a partner or rival)`,
-    page_does_not_name_account: `the page does not name ${accountName}`,
+    page_does_not_name_account: `the page does not name ${accountName} by its full name (it may use a brand or short name)`,
     no_publication_date: 'no publication date found',
     source_too_weak: 'aggregator or syndicated copy, not the original page',
     boilerplate: 'company boilerplate, not news',
@@ -65,8 +68,11 @@ export function sourceReason(raw: string | null, accountName: string, speaker?: 
     being_checked: 'being checked now',
     not_checked: 'not checked yet',
     fact_no_longer_passes: 'verified earlier; no longer passes the evidence rules',
+    same_statement_as_other_source: 'carries the same statement as another source (that card shows its status)',
+    mention_only: `the headline mentions ${accountName}; the story is about another company`,
+    fact_ended: 'verified earlier; the change has since ended or was superseded',
     failed_recheck: 'verified earlier; failed a later recheck',
-    fact_at_other_source: 'its fact was verified at another source (see the verified card)',
+    fact_at_other_source: 'research on this story found a fact; it has its own card if it still passes the rules',
   };
   return map[raw] ?? raw.replace(/_/g, ' ');
 }
