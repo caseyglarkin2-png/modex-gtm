@@ -45,6 +45,19 @@ async function defaultHubspotPing(): Promise<void> {
   await getHubSpotClient().crm.companies.basicApi.getPage(1);
 }
 
+/**
+ * Routing freshness is the newest APPLIED run that completed clean: a dry run (no card written) or a run with a
+ * failed account never resets the seller's "routing refreshed" clock. A marker without a readable report is not
+ * proof of an applied run.
+ */
+export function lastAppliedRoutingRun(events: ReadonlyArray<{ created_at: Date | string; payload: unknown }>): Date | null {
+  for (const e of events) {
+    const p = (e.payload ?? {}) as { dryRun?: unknown; failed?: unknown };
+    if (p.dryRun === false && Array.isArray(p.failed) && p.failed.length === 0) return new Date(e.created_at);
+  }
+  return null;
+}
+
 export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}): Promise<HealthInputs> {
   const env = deps.env ?? process.env;
   const clock = deps.clock ?? Date.now;
@@ -54,7 +67,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
 
   const [cron, lastRun, hs, sup] = await Promise.all([
     prisma.systemConfig.findUnique({ where: { key: 'cron:gap-mailbox' } }).catch(() => null),
-    prisma.gapAuditEvent.findFirst({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, select: { created_at: true } }).catch(() => null),
+    prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
     suppressionConfigured
       ? timed(
@@ -87,6 +100,6 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
         ? { configured: false, verdict: null, ms: null, error: null }
         : { configured: true, verdict: sup.ok ? sup.value.verdict : null, ms: sup.ms, error: sup.ok ? (sup.value.verdict === 'unknown' ? 'verdict unknown' : null) : sup.error },
     sender: { configured: !!gapSender, mailbox: gapSender?.userEmail ?? null },
-    routing: { lastRunAt: lastRun?.created_at ? new Date(lastRun.created_at) : null },
+    routing: { lastRunAt: lastAppliedRoutingRun(lastRun ?? []) },
   };
 }

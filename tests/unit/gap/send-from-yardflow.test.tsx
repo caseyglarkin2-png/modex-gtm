@@ -56,7 +56,7 @@ describe('<SendFromYardflow>', () => {
 
 describe('<GapCockpit>', () => {
   it('speaks in Casey work lanes, not internal states', () => {
-    render(<GapCockpit data={{ review: 1, research: 2, ready: 3, followUp: 1, replies: { count: 0, atLeast: false }, active: null }} />);
+    render(<GapCockpit data={{ review: 1, research: 2, ready: 3, followUp: 1, replies: { count: 0, atLeast: false }, deals: { count: 0, unresolved: 0, checkedAt: null }, active: null }} />);
     const text = screen.getByTestId('gap-cockpit').textContent ?? '';
     for (const lane of ['Review', 'Research', 'Ready', 'Follow up', 'Replies']) expect(text).toContain(lane);
     expect(text).not.toMatch(/review_required|routing|lane|shadow|gmail_direct|sequence version|active/i);

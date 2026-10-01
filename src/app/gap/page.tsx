@@ -52,7 +52,7 @@ import { WorkQueue } from './work-queue';
 import { HealthStrip } from '@/components/gap/health-strip';
 import { EvidenceAccount } from '@/components/gap/evidence-inbox';
 import { loadEvidenceInbox, researchSections, type InboxAccount } from '@/lib/gap/research/inbox';
-import { heldDealAccounts, loadInDeals } from '@/lib/gap/deals/in-deals';
+import { loadInDealsSummary, type InDealsSummary } from '@/lib/gap/deals/in-deals';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
 
@@ -72,13 +72,15 @@ const LANE_TITLE: Record<CockpitLane, string> = {
 };
 
 async function loadCockpit() {
-  const [routableScope, queue, repliesPage, rawGroups, active] = await Promise.all([
+  const [routableScope, queue, repliesPage, rawGroups, active, inDeals] = await Promise.all([
     resolveRoutableHypothesisScope(prisma),
     listAllCurrent(prisma),
     listReplies(prisma, { state: 'undispositioned', limit: REPLY_TILE_LIMIT }),
     // Every current thesis, one-person ones included, with server-derived actionability.
     loadThesisGroups(prisma, {}, { singletons: true }).catch((): LoadedGroup[] => []),
     prisma.prospectingHypothesis.findMany({ where: { status: 'active', primary_persona_id: { not: null } }, select: { primary_persona_id: true } }),
+    // The ONE In Deals answer (tile and lane): open HubSpot deals mapped to GAP accounts, cached minutes, timestamped.
+    loadInDealsSummary(prisma).catch((e): InDealsSummary => ({ status: 'unavailable', count: null, accounts: [], unresolved: [], checkedAt: new Date().toISOString(), openDeals: 0, error: e instanceof Error ? e.message : String(e) })),
   ]);
   const groups = orderGroupsForReview(rawGroups);
   const now = new Date();
@@ -147,7 +149,6 @@ async function loadCockpit() {
     heldAccountsOf(queue.items),
   );
 
-  const heldDeals = heldDealAccounts(queue.items);
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
   const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
   return {
@@ -157,10 +158,9 @@ async function loadCockpit() {
       ready: ready.length,
       followUp: followUp.length,
       replies: { count: repliesPage.items.length, atLeast: repliesPage.nextCursor !== null },
-      deals: heldDeals.length,
+      deals: { count: inDeals.count, unresolved: inDeals.unresolved.length, checkedAt: inDeals.checkedAt },
     },
-    // Held accounts first, so the lane's account cap never drops one routing already holds.
-    gapAccounts: [...heldDeals, ...accountsSeen.filter((a) => !heldDeals.includes(a))],
+    inDeals,
     next,
     groups: reviewGroups,
     readyOneOffIds,
@@ -230,35 +230,45 @@ async function ResearchByAccount({ inbox, groups, now }: { inbox: InboxAccount[]
   );
 }
 
+const agoText = (iso: string, now: Date) => {
+  const m = Math.max(0, Math.round((now.getTime() - new Date(iso).getTime()) / 60_000));
+  return m < 1 ? 'just now' : m < 60 ? `${m}m ago` : `${Math.round(m / 60)}h ago`;
+};
+
 /**
- * Phase 2 F1: accounts HubSpot says are in an open deal, read live (bounded). GAP stops cold outreach
- * there; this is where it stays useful. An account whose truth cannot be read is listed apart.
+ * Phase 2 F1, one authoritative read (2026-10-01): every GAP account HubSpot says is in an open deal, from the
+ * same summary the tile counts. An open deal no GAP account maps to is listed apart (identity work); a read
+ * that could not complete says so instead of showing nothing.
  */
-async function InDealsLane({ accounts, open }: { accounts: string[]; open: string | null }) {
+async function InDealsLane({ summary, open }: { summary: InDealsSummary; open: string | null }) {
   const now = new Date();
-  const { inDeals, couldNotVerify } = await loadInDeals(prisma, accounts);
-  const opened = open ? inDeals.find((a) => a.accountName === open) ?? null : null;
+  const inDeals = summary.accounts;
+  const opened = open ? inDeals.find((a) => a.accountName === open || a.alsoRecordedAs.includes(open)) ?? null : null;
   const brief = opened ? await loadDealBrief(prisma, opened.accountName, { now, dealContacts: opened.dealContacts }) : null;
   return (
     <div className="space-y-4" data-testid="in-deals">
-      <p className="text-sm text-[var(--muted-foreground)]">
-        Read from HubSpot just now (the tile counts what the last routing run held, so the two can differ). No cold first touch goes to these accounts; work them from the deal and learn what is still unknown.
+      <p className="text-sm text-[var(--muted-foreground)]" data-testid="in-deals-freshness">
+        {summary.status === 'complete'
+          ? `${summary.count} ${summary.count === 1 ? 'account' : 'accounts'} in deals · ${summary.openDeals} open HubSpot ${summary.openDeals === 1 ? 'deal' : 'deals'} · checked ${agoText(summary.checkedAt, now)}.`
+          : `Could not verify HubSpot (checked ${agoText(summary.checkedAt, now)}). Check HubSpot directly before contacting anyone; every send re-checks at the click.`}{' '}
+        No cold first touch goes to these accounts; work them from the deal and learn what is still unknown.
       </p>
       {open && !opened ? (
         <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
-          {couldNotVerify.some((u) => u.accountName === open)
-            ? `HubSpot could not be checked for ${open} just now, so there is no Deal Brief to show. Check HubSpot directly.`
-            : accounts.includes(open)
-              ? `HubSpot shows no open deal for ${open} right now, so there is no Deal Brief to show.`
-              : 'That account is not one GAP works, so there is no Deal Brief to show.'}
+          {summary.status !== 'complete'
+            ? `HubSpot could not be checked just now, so there is no Deal Brief to show for ${open}. Check HubSpot directly.`
+            : `HubSpot shows no open deal for ${open} right now, so there is no Deal Brief to show.`}
         </p>
       ) : null}
-      {inDeals.length === 0 ? <p className="text-sm italic text-[var(--muted-foreground)]">No GAP account has an open HubSpot deal right now.</p> : null}
+      {summary.status === 'complete' && inDeals.length === 0 ? <p className="text-sm italic text-[var(--muted-foreground)]">No GAP account has an open HubSpot deal right now.</p> : null}
       <ul className="space-y-3">
         {inDeals.map((a) => (
           <li key={a.accountName} className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid={`in-deal-${a.accountName}`}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="font-semibold"><AccountLink name={a.accountName} /></p>
+              <p className="font-semibold">
+                <AccountLink name={a.accountName} />
+                {a.alsoRecordedAs.length ? <span className="ml-1 text-xs font-normal text-[var(--muted-foreground)]">(also recorded as {a.alsoRecordedAs.join(', ')})</span> : null}
+              </p>
               <p className="text-xs text-[var(--muted-foreground)]">{a.known} of 6 known</p>
             </div>
             <ul className="text-sm">
@@ -286,14 +296,15 @@ async function InDealsLane({ accounts, open }: { accounts: string[]; open: strin
           </li>
         ))}
       </ul>
-      {couldNotVerify.length ? (
-        <section data-testid="in-deals-unknown" className="space-y-1 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
-          <p className="font-semibold">Could not verify ({couldNotVerify.length})</p>
-          <p className="text-xs">HubSpot did not answer for these accounts. Check HubSpot before contacting them; every send re-checks at the click.</p>
+      {summary.unresolved.length ? (
+        <section data-testid="in-deals-unresolved" className="space-y-1 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
+          <p className="font-semibold">Open deals not matched to a GAP account ({summary.unresolved.length})</p>
+          <p className="text-xs">HubSpot has these open deals, but no GAP account carries their company or contacts. This is identity work (map or add the account), not an absence of a deal.</p>
           <ul className="text-xs">
-            {couldNotVerify.map((u) => (
-              <li key={u.accountName}>
-                {u.accountName} <span className="text-[var(--muted-foreground)]">({u.reason.replace(/_/g, ' ')})</span>
+            {summary.unresolved.map((u, i) => (
+              <li key={i} className="break-words">
+                {u.dealName ? `"${u.dealName}"` : 'Unnamed deal'} · {u.stage}
+                {u.companies.length ? <span className="text-[var(--muted-foreground)]"> · {u.companies.join(', ')}</span> : null}
               </li>
             ))}
           </ul>
@@ -359,7 +370,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           ) : lane === 'replies' ? (
             <RepliesTriage inCockpit />
           ) : lane === 'deals' ? (
-            <InDealsLane accounts={data.gapAccounts} open={params.account?.trim() || null} />
+            <InDealsLane summary={data.inDeals} open={params.account?.trim() || null} />
           ) : (
             <>
             {lane === 'research' ? <ResearchByAccount inbox={data.inbox} groups={data.researchGroups} now={new Date()} /> : null}

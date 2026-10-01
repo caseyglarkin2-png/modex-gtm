@@ -147,3 +147,109 @@ export const hubspotOpportunityReads: OpportunityReads = {
     return out;
   },
 };
+
+/**
+ * IN DEALS (operational truth, 2026-10-01): the portal's OPEN deals, read once from the deal side, instead of
+ * asking HubSpot about every GAP account. Reads only. Every failure throws; the caller reports "could not verify".
+ */
+export interface OpenDealReads {
+  /** Every deal HubSpot marks open (`hs_is_closed` = false), all pages. */
+  openDeals(): Promise<{ deals: Array<{ id: string; properties: Record<string, string | null | undefined> }>; truncated: boolean }>;
+  /** Companies or contacts associated with each deal. `truncated` when any deal had more than one page. */
+  dealAssociations(toType: 'companies' | 'contacts', dealIds: string[]): Promise<{ byId: Map<string, string[]>; truncated: boolean }>;
+  /** Company names and domains, by id. */
+  companies(ids: string[]): Promise<Array<{ id: string; name: string | null; domain: string | null }>>;
+  /** HubSpot companies whose name is exactly one of `names` (the portal's duplicate company records). */
+  companiesByNames(names: string[]): Promise<Array<{ id: string; name: string | null; domain: string | null }>>;
+}
+
+/** No portal has this many open deals; past it the read is reported incomplete rather than cut silently. */
+const OPEN_DEAL_PAGES = 20;
+
+export const hubspotOpenDealReads: OpenDealReads = {
+  async openDeals() {
+    const client = getHubSpotClient();
+    const deals: Array<{ id: string; properties: Record<string, string | null | undefined> }> = [];
+    let after: string | undefined;
+    for (let page = 0; page < OPEN_DEAL_PAGES; page += 1) {
+      const res = await withHubSpotRetry(
+        () =>
+          client.crm.deals.searchApi.doSearch({
+            filterGroups: [{ filters: [{ propertyName: 'hs_is_closed', operator: FilterOperatorEnum.Eq, value: 'false' } as SearchFilter] }],
+            properties: DEAL_PROPERTIES,
+            limit: SEARCH_LIMIT,
+            ...(after ? { after } : {}),
+            sorts: [],
+          } as never),
+        'gap-in-deals open deal search',
+      );
+      for (const r of res.results ?? []) deals.push({ id: String(r.id), properties: (r.properties ?? {}) as Record<string, string | null> });
+      after = res.paging?.next?.after;
+      if (!after) return { deals, truncated: false };
+    }
+    return { deals, truncated: true };
+  },
+
+  async dealAssociations(toType, dealIds) {
+    const client = getHubSpotClient();
+    const byId = new Map<string, string[]>();
+    let truncated = false;
+    for (let i = 0; i < dealIds.length; i += BATCH) {
+      const chunk = dealIds.slice(i, i + BATCH);
+      const res = (await withHubSpotRetry(
+        () => client.crm.associations.v4.batchApi.getPage('deals', toType, { inputs: chunk.map((id) => ({ id })) }),
+        `gap-in-deals deal ${toType} associations (${chunk.length})`,
+      )) as BatchAssoc;
+      for (const r of res.results ?? []) {
+        const from = String(r._from?.id ?? '');
+        if (!from) continue;
+        byId.set(from, [...(byId.get(from) ?? []), ...(r.to ?? []).map((t) => String(t.toObjectId))]);
+        if (r.paging?.next?.after) truncated = true;
+      }
+    }
+    return { byId, truncated };
+  },
+
+  async companies(ids) {
+    const client = getHubSpotClient();
+    const out: Array<{ id: string; name: string | null; domain: string | null }> = [];
+    for (let i = 0; i < ids.length; i += BATCH) {
+      const chunk = ids.slice(i, i + BATCH);
+      const res = await withHubSpotRetry(
+        () => client.crm.companies.batchApi.read({ inputs: chunk.map((id) => ({ id })), properties: ['name', 'domain'], propertiesWithHistory: [] }),
+        `gap-in-deals company read (${chunk.length})`,
+      );
+      for (const r of res.results ?? []) out.push({ id: String(r.id), name: r.properties?.name ?? null, domain: r.properties?.domain ?? null });
+    }
+    return out;
+  },
+
+  async companiesByNames(names) {
+    // The resolver's exact-name match (EQ, five OR-groups per search, paged). A match set past the page budget
+    // throws rather than reading as "no duplicates".
+    const client = getHubSpotClient();
+    const out = new Map<string, { id: string; name: string | null; domain: string | null }>();
+    for (let i = 0; i < names.length; i += GROUPS_PER_SEARCH) {
+      const chunk = names.slice(i, i + GROUPS_PER_SEARCH);
+      let after: string | undefined;
+      for (let page = 0; ; page += 1) {
+        if (page >= SEARCH_PAGES) throw new Error('duplicate company search was truncated');
+        const res = await withHubSpotRetry(
+          () =>
+            client.crm.companies.searchApi.doSearch({
+              filterGroups: chunk.map((v) => ({ filters: [{ propertyName: 'name', operator: FilterOperatorEnum.Eq, value: v } as SearchFilter] })),
+              properties: ['name', 'domain'],
+              limit: SEARCH_LIMIT,
+              ...(after ? { after } : {}),
+              sorts: [],
+            } as never),
+          `gap-in-deals duplicate company search (${chunk.length})`,
+        );
+        for (const r of res.results ?? []) out.set(String(r.id), { id: String(r.id), name: r.properties?.name ?? null, domain: r.properties?.domain ?? null });
+        after = res.paging?.next?.after;
+        if (!after) break;
+      }
+    }
+    return [...out.values()];
+  },
+};

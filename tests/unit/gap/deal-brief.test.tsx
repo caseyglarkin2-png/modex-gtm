@@ -14,7 +14,7 @@ import { describe, expect, it, vi } from 'vitest';
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 
 import { buildDealBrief, loadDealBrief, setLearningObjective, DEAL_OBJECTIVE, TRUTH_SECTIONS } from '@/lib/gap/deals/deal-brief';
-import { heldDealAccounts, loadInDeals, stageLabel } from '@/lib/gap/deals/in-deals';
+import { heldDealAccounts, stageLabel } from '@/lib/gap/deals/in-deals';
 import { DealBriefView } from '@/components/gap/deal-brief';
 import { resolveOpportunity } from '@/lib/gap/opportunity/active-opportunity';
 
@@ -186,35 +186,6 @@ describe('In Deals', () => {
     expect(heldDealAccounts(items)).toEqual(['Kroger']);
   });
 
-  it('live truth per account: ACTIVE is In Deals, UNKNOWN (or a throw) is "could not verify", CLEAR is omitted; bounded', async () => {
-    const truths: Record<string, unknown> = {
-      Kroger: { status: 'ACTIVE', companyIds: ['c'], deals: [{ id: 'd1', name: 'YardFlow - Kroger', stage: 'appointmentscheduled', pipeline: 'default', companyIds: ['c'], contactIds: ['k1', 'k2'], lastActivityAt: '2026-09-25T00:00:00.000Z' }] },
-      PepsiCo: { status: 'CLEAR', companyIds: ['p'] },
-      UNFI: { status: 'UNKNOWN', reason: 'timeout' },
-    };
-    let inFlight = 0;
-    let peak = 0;
-    const resolve = vi.fn(async (name: string) => {
-      inFlight += 1;
-      peak = Math.max(peak, inFlight);
-      await new Promise((r) => setTimeout(r, 5));
-      inFlight -= 1;
-      if (name === 'Boom') throw new Error('x');
-      return truths[name] ?? { status: 'CLEAR', companyIds: [] };
-    });
-    const prisma = { persona: { findMany: vi.fn(async () => [{ account_name: 'Kroger', name: 'Dana Ops', title: 'Director' }]) }, buyerInputData: { findMany: vi.fn(async () => [{ ...bid({}), account_name: 'Kroger' }]) } };
-    const names = ['Kroger', 'PepsiCo', 'UNFI', 'Boom', 'A', 'B', 'C', 'D', 'E', 'F'];
-    const r = await loadInDeals(prisma, names, { resolve });
-    expect(peak).toBeLessThanOrEqual(5);
-    expect(r.inDeals).toEqual([
-      { accountName: 'Kroger', deals: [{ name: 'YardFlow - Kroger', stage: 'Appointment scheduled', lastActivityAt: '2026-09-25T00:00:00.000Z' }], dealContacts: 2, people: [{ name: 'Dana Ops', title: 'Director' }], known: 1 },
-    ]);
-    expect(r.couldNotVerify).toEqual([
-      { accountName: 'UNFI', reason: 'timeout' },
-      { accountName: 'Boom', reason: 'hubspot_error' },
-    ]);
-  });
-
   it('stage ids read as words; a custom stage says so', () => {
     expect(stageLabel('contractsent')).toBe('Contract sent');
     expect(stageLabel('1417384082')).toBe('Custom stage 1417384082');
@@ -280,12 +251,4 @@ describe('review F fixes', () => {
     expect(b.objective).toMatchObject({ text: 'Walk the yard', from: 'meeting' });
   });
 
-  it('accounts past the cap are listed as not checked, never dropped', async () => {
-    const names = Array.from({ length: 42 }, (_, i) => `A${i}`);
-    const r = await loadInDeals({ persona: { findMany: vi.fn(async () => []) }, buyerInputData: { findMany: vi.fn(async () => []) } }, names, { resolve: async () => ({ status: 'CLEAR', companyIds: [] }) });
-    expect(r.couldNotVerify).toEqual([
-      { accountName: 'A40', reason: 'not_checked_account_limit' },
-      { accountName: 'A41', reason: 'not_checked_account_limit' },
-    ]);
-  });
 });
