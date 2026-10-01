@@ -32,6 +32,7 @@
  * the existing recordHumanAction contract, because Casey pressed the button.
  */
 import { captureSendAttribution } from './send-attribution';
+import { suppressionRefusalKind } from '@/lib/email/suppression-gate';
 import type { HumanConfirmation } from '@/lib/email/autonomy-gate';
 import { recordHumanAction } from '../routing/queue';
 import type { ExecutionIntent, ExecutionReceipt } from './contract';
@@ -219,7 +220,9 @@ export async function sendSellerEmail(
     const why = receipt.refusalReason ?? 'no message id';
     if (receipt.status !== 'sent' && isDefinitelyNotSent(why)) {
       await appendLedger(prisma, DIRECT_RELEASED, actor, decisionId, { idempotencyKey: key, reason: why, at: now.toISOString() }).catch(() => undefined);
-      return { ok: false, reason: 'send_refused', detail: why };
+      // A suppression refusal names itself (unreadable: a safe retry; suppressed: final).
+      const kind = suppressionRefusalKind(why);
+      return { ok: false, reason: kind === 'unreadable' ? 'suppression_unreadable' : kind === 'suppressed' ? 'recipient_suppressed' : 'send_refused', detail: why };
     }
     // Lost or ambiguous answer: the claim stays unresolved on purpose.
     return { ok: false, reason: 'send_in_progress_or_unknown', detail: `Gmail's answer was not conclusive (${why}). Check Gmail Sent before trying again.` };

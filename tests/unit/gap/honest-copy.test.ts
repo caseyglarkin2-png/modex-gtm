@@ -80,14 +80,16 @@ describe('T7 call opener (real fact + hypothesis as a question; impact only afte
       senderFirstName: 'Casey',
       accountName: 'Kroger',
       observationPlain: stripObservationCitations(OBSERVATION),
-      problemHypothesis: 'unused by the opener',
+      problemHypothesis: 'My guess is that physical handoffs constrain production capacity at Kroger.',
       diagnosticQuestion: 'Does the Giant Eagle network run its own gate process today?',
+      title: 'corporate supply chain planning manager',
     });
     const fact = `From Kroger's 10-Q filed September 18: "On July 1, 2026, the Company announced it had entered into an agreement and plan of merger pursuant to which it will acquire Giant Eagle, Inc. (“Giant Eagle”)".`;
-    expect(pack.opener).toBe(`Joey, Casey with YardFlow. You weren't expecting me, so tell me if this is off. ${fact} When that happens, the yards are often the part that has to catch up. Is that true at Kroger, or am I off?`);
+    // Execution acceptance (2026-10-01): the APPROVED hypothesis, as a guess and a question; never a stock line.
+    expect(pack.opener).toBe(`Joey, Casey with YardFlow. You weren't expecting me, so tell me if this is off. ${fact} My guess is that physical handoffs constrain production capacity at Kroger. Is that actually an issue for you, or am I off?`);
     expect(pack.diagnostic1).toBe('Does the Giant Eagle network run its own gate process today?');
     expect(pack.impactIfAcknowledged).toBe('If they said it is real: when it happens, what does it cost you, in hours or in trucks waiting?');
-    expect(pack.voicemail).toBe(`Joey, Casey with YardFlow. ${fact} I have one question about how the yards are handling it, not a pitch. Call me back if it is worth two minutes.`);
+    expect(pack.voicemail).toBe(`Joey, Casey with YardFlow. ${fact} I have one question about whether that is changing anything for your team, not a pitch. Call me back if it is worth two minutes.`);
     for (const text of [pack.opener, pack.voicemail]) {
       expect(text).not.toMatch(/\bcost\b/i);
       expect(text).not.toMatch(/\bmentions:/i);
@@ -201,12 +203,12 @@ describe('Release C re-review S8: an expired fact never opens a call', () => {
  * send happened.
  */
 describe('final regression: Copy email is gated like SEND', () => {
-  it('the copy buttons render only when the email is sendable AND the evidence is a verified fact, and the copied text carries the footer', async () => {
+  it('execution acceptance: COPY EMAIL is the governed server copy (every gate plus suppression); no plain copy of the email, the address, the phone or the opener', async () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
-    expect(src).toContain('const copyable = sendable && verifiedFact && persona?.email');
-    expect(src).toMatch(/\{copyable \? \(/);
-    expect(src).toContain('draftText(renderedEmail.queued.body, unsubscribePageUrl(copyable))');
-    expect(src).not.toMatch(/<CopyButton text=\{renderedEmail\.queued\.body\}/);
+    expect(src).toContain('const copyable = Boolean(sendable && verifiedFact && persona?.email && decision)');
+    expect(src).toContain('<GovernedCopyButton decisionId={decision.id} stepIndex={touchStep} />');
+    expect(src).not.toMatch(/<CopyButton\b/);
+    expect(src).not.toMatch(/Copy email address|Copy phone|Copy call opener/);
   });
 });

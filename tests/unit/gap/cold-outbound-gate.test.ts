@@ -16,13 +16,14 @@ const COMPANY = 'c-acme';
 const OPEN_DEAL = { id: 'd-acme', closed: 'false', name: 'YardFlow - Acme' };
 
 function prismaFake(opts: { hubspotCompanyId?: string | null; decision?: Record<string, unknown> | null; persona?: Record<string, unknown> | null } = {}) {
-  const decision = opts.decision === undefined ? { id: 'dec-1', account_name: 'Acme Foods', persona_id: 41, action: 'call_now' } : opts.decision;
+  const decision = opts.decision === undefined ? { id: 'dec-1', account_name: 'Acme Foods', persona_id: 41, action: 'call_now', lane: 'work_queue', hypothesis_id: null, created_at: NOW } : opts.decision;
   const persona =
     opts.persona === undefined
       ? { id: 41, account_name: 'Acme Foods', email: 'jordan@acme.example', phone: '+1 (555) 010-2000', linkedin_url: 'https://www.linkedin.com/in/jordan', hubspot_contact_id: '900' }
       : opts.persona;
   return {
-    routingDecision: { findUnique: vi.fn(async () => decision) },
+    // execution acceptance: the card is current (no newer card for this person) and carries no thesis here
+    routingDecision: { findUnique: vi.fn(async () => decision), findFirst: vi.fn(async () => null) },
     persona: {
       findUnique: vi.fn(async () => persona),
       findMany: vi.fn(async () => (persona ? [{ email: persona.email, hubspot_contact_id: persona.hubspot_contact_id }] : [])),

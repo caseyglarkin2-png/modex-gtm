@@ -143,7 +143,8 @@ describe('createSellerGmailDraft', () => {
     const gmail = gmailFake();
     gmail.createGmailDraft.mockRejectedValueOnce(new Error('Cross-plane suppression refused this send: modex_do_not_contact'));
     const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d, 'pass', gmail));
-    expect(r).toMatchObject({ ok: false, reason: 'gmail_refused' });
+    // Execution acceptance: a real suppression names itself (it is not a Gmail failure and not a retry).
+    expect(r).toMatchObject({ ok: false, reason: 'recipient_suppressed' });
     expect(!r.ok && r.detail).toContain('suppression refused');
     expect(d.audit.filter((a) => a.kind === DRAFTED)).toHaveLength(0);
     expect(d.audit.filter((a) => a.kind === DRAFT_REFUSED)).toHaveLength(1);

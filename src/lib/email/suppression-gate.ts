@@ -57,6 +57,32 @@ import type { SendPurpose } from '@/lib/email/autonomy-gate';
  */
 export const CLAWD_CONTRACT_PATH = '/api/suppression/contract';
 
+/**
+ * THE action-time suppression timeout (2026-10-01): draft, direct send, governed copy and the health probe all
+ * wait this long and no longer. Measured in production before the clawd fix: 2.8 s min, 3.2 s median, 5.0 s max
+ * against a 5 s wire timeout, so a click could refuse while health said HEALTHY (it probed with 8 s). clawd now
+ * reads its legs concurrently (each with a 6 s deadline); 8 s covers that plus the network on both sides. A
+ * timeout is still UNREADABLE: the gate never fails open.
+ */
+export const ACTION_TIME_SUPPRESSION_TIMEOUT_MS = 8_000;
+
+/** The timeout in force (an env override, else the action-time SLA). */
+export function suppressionTimeoutMs(env: Record<string, string | undefined> = process.env): number {
+  const n = Number(env.SUPPRESSION_READ_TIMEOUT_MS);
+  return n > 0 ? n : ACTION_TIME_SUPPRESSION_TIMEOUT_MS;
+}
+
+/**
+ * What a wire-gate refusal message means (the adapter only carries the message): `unreadable` (the authority
+ * could not answer: a retry is safe, nothing was created), `suppressed` (an authority said do not contact), or
+ * null (not a suppression refusal).
+ */
+export function suppressionRefusalKind(message: string | null | undefined): 'unreadable' | 'suppressed' | null {
+  const m = /^Cross-plane suppression refused this send: ([\s\S]*)$/.exec(String(message ?? ''));
+  if (!m) return null;
+  return /^(suppression authority|malformed_verdict|unknown_)/.test(m[1].trim()) ? 'unreadable' : 'suppressed';
+}
+
 export class SuppressionRefusedError extends Error {
   /** The specific authority that refused: `modex_do_not_contact`, `hubspot_optout`, ... */
   readonly reason: string;
@@ -115,9 +141,9 @@ function normalize(emails: readonly string[]): string[] {
   )].sort();
 }
 
-async function readContract(emails: string[]): Promise<SuppressionVerdict> {
-  const base = process.env.CLAWD_CONTROL_PLANE_URL?.trim();
-  const token = process.env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
+async function readContract(emails: string[], env: Record<string, string | undefined> = process.env): Promise<SuppressionVerdict> {
+  const base = env.CLAWD_CONTROL_PLANE_URL?.trim();
+  const token = env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
   // Reuses the pair the autonomy gate already reads. A second name for the same
   // secret is a second thing to rotate and a second thing to get wrong.
   //
@@ -137,7 +163,7 @@ async function readContract(emails: string[]): Promise<SuppressionVerdict> {
       body: JSON.stringify({ emails, automated: true }),
       cache: 'no-store',
       // Bounded (red team T4): a hung authority is UNREADABLE (catch below).
-      signal: AbortSignal.timeout(Number(process.env.SUPPRESSION_READ_TIMEOUT_MS) > 0 ? Number(process.env.SUPPRESSION_READ_TIMEOUT_MS) : 5000),
+      signal: AbortSignal.timeout(suppressionTimeoutMs(env)),
     });
   } catch (err) {
     return UNREADABLE(
@@ -264,4 +290,17 @@ export async function assertSuppressionPermitsSend(
   const everyone = [recipients.to, ...(recipients.cc ?? []), recipients.bcc ?? ''];
   const verdict = await suppressionRefuses(everyone);
   if (verdict.refused) throw new SuppressionRefusedError(verdict.reason, verdict.unreadable);
+}
+
+/**
+ * The health probe (2026-10-01): EXACTLY the wire's contract read, timeout included, for one reserved address that
+ * is never contacted. Health that probes anything else can say HEALTHY while every click times out.
+ */
+export async function probeSuppressionContract(
+  email: string,
+  env: Record<string, string | undefined> = process.env,
+): Promise<{ verdict: 'clear' | 'suppressed' | 'unknown'; error: string | null }> {
+  const v = await readContract(normalize([email]), env);
+  if (v.unreadable) return { verdict: 'unknown', error: v.reason };
+  return v.refused ? { verdict: 'suppressed', error: null } : { verdict: 'clear', error: null };
 }

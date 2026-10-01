@@ -51,7 +51,7 @@ type Outcome =
 const REASON_COPY: Record<string, string> = {
   copy_review_required: 'The copy needs your approval first. Approve it right here.',
   copy_rejected: 'The compiler rejected this copy. Nothing was drafted.',
-  gmail_refused: 'Gmail or the suppression gate refused the draft. Nothing was drafted.',
+  gmail_refused: 'Gmail refused the draft. Nothing was drafted.',
   decision_blocked: 'This card is a system block. Nothing can be drafted.',
   persona_do_not_contact: 'This person is marked do not contact. Nothing was drafted.',
   hypothesis_not_active: 'The hypothesis is no longer active. Nothing was drafted.',
@@ -197,7 +197,12 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
       {outcome?.kind === 'refused' ? (
         <div role="alert" data-testid="draft-refused" className="space-y-1 text-xs text-[var(--destructive)]">
           <p>{REASON_COPY[outcome.reason] ?? refusalSentence(outcome.reason) ?? `Refused: ${outcome.reason.replace(/_/g, ' ')}.`}</p>
-          {outcome.detail ? <p className="text-[var(--muted-foreground)]">{outcome.detail}</p> : null}
+          {outcome.detail ? (
+            <details className="text-[var(--muted-foreground)]">
+              <summary className="cursor-pointer">Details</summary>
+              <p>{outcome.detail}</p>
+            </details>
+          ) : null}
         </div>
       ) : null}
 

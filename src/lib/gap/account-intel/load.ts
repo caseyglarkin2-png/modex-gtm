@@ -181,7 +181,10 @@ export async function loadAccountInputs(
     };
     const q = f.quote.trim().toLowerCase();
     const cur = byQuote.get(q);
-    if (!cur || (f.expiresAt ?? '') > (cur.expiresAt ?? '')) byQuote.set(q, f);
+    // One fact per quote; the rows it absorbs stay its ids (a thesis may cite any of them).
+    if (!cur) byQuote.set(q, f);
+    else if ((f.expiresAt ?? '') > (cur.expiresAt ?? '')) byQuote.set(q, { ...f, sameQuoteIds: [cur.id, ...(cur.sameQuoteIds ?? [])] });
+    else byQuote.set(q, { ...cur, sameQuoteIds: [...(cur.sameQuoteIds ?? []), f.id] });
   }
 
   // The shared selector speaks camelCase: map, then keep human-confirmed rows no later row supersedes.

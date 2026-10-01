@@ -31,7 +31,14 @@ export interface FactInput {
   expiresAt: string | null;
   continuity: 'event' | 'ongoing_state' | 'ended';
   currentness: { url: string | null; publishedAt: string } | null;
+  /** Other stored rows of this exact quote (the same fact registered once per person): the same fact. */
+  sameQuoteIds?: string[];
 }
+
+/** Every stored id of one fact (a thesis may cite any of them). */
+const idsOf = (f: FactInput) => [f.id, ...(f.sameQuoteIds ?? [])];
+/** The fact a stored signal id belongs to, under any of its stored rows. */
+const factById = (i: AccountInputs, id: string | null) => (id ? i.facts.find((f) => idsOf(f).includes(id)) : undefined);
 
 export interface HypothesisInput {
   id: string;
@@ -630,7 +637,7 @@ const hedge = (h: HypothesisView) => (h.truth === 'BUYER_CONFIRMED' ? h.problem 
 const stripGuess = (s: string) => s.replace(/^my guess is (that )?/i, '').replace(/\.$/, '');
 
 function hypothesisViews(i: AccountInputs, now: Date): HypothesisView[] {
-  const verified = new Set(liveFacts(i, now).map((f) => f.id));
+  const verified = new Set(liveFacts(i, now).flatMap(idsOf));
   // A BID speaks only to the hypothesis it was captured against. A withdrawn (rejected) draft is Casey's call, not the buyer's: it is not shown.
   return i.hypotheses.filter((h) => h.status !== 'rejected' || h.buyerRejected).slice(0, 3).map((h) => {
     const mine = i.bids.filter((b) => b.hypothesisId === h.id);
@@ -669,8 +676,8 @@ function reviewReasons(i: AccountInputs, h: HypothesisInput, now: Date, verified
   if (h.primarySignalId && !verified.has(h.primarySignalId)) out.push('Its fact is no longer live: the thesis rests on nothing current.');
   // A newer fact matters only when it is a strong seller fact (a network, site or automation change) that beats a
   // live primary fact; a missing or stale primary is already said above.
-  const primary = i.facts.find((f) => f.id === h.primarySignalId);
-  if (primary && verified.has(primary.id)) {
+  const primary = factById(i, h.primarySignalId);
+  if (primary && idsOf(primary).some((x) => verified.has(x))) {
     const primaryRank = sellerRelevance(primary.quote).rank;
     const better = rankedFacts(i, now).find((f) => f.id !== primary.id && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank <= 3 && sellerRelevance(f.quote).rank < primaryRank);
     if (better) out.push(`A newer fact (${sellerRelevance(better.quote).reason}, ${monthDay(better.publishedAt)}) may change the story.`);
@@ -767,13 +774,38 @@ const UNLINKED = 'Cannot verify opportunity state because this GAP account is no
 function inferiorOpener(i: AccountInputs, now: Date): { reason: string; opener: string; best: string } | null {
   const top = hypothesisViews(i, now).find((h) => h.grounded && h.truth !== 'CONTRADICTED');
   const hyp = top ? i.hypotheses.find((h) => h.id === top.id) : null;
-  const opener = hyp ? i.facts.find((f) => f.id === hyp.primarySignalId) : null;
+  const opener = hyp ? factById(i, hyp.primarySignalId) ?? null : null;
   const best = rankedFacts(i, now)[0];
   if (!opener || !best || best.id === opener.id) return null;
   const o = sellerRelevance(opener.quote);
   if (o.rank < 7 || sellerRelevance(best.quote).rank >= o.rank) return null;
   const clip = (t: string) => (t.length > 110 ? `${t.slice(0, 107)}...` : t);
   return { reason: o.reason, opener: clip(opener.quote), best: clip(best.quote) };
+}
+
+/**
+ * CURRENT ACTIONABLE THESIS (execution acceptance, 2026-10-01). The ONE answer the action pack, draft, send,
+ * governed copy and cold call/LinkedIn all read: may Casey act on THIS thesis now? Not when it is no longer one of
+ * the account's current theses (revised, superseded, archived), when the review reasons the brief already shows
+ * apply (the buyer contradicted it, its fact is no longer live, a newer stronger fact), or when it opens on context
+ * (a sale abroad, a divestiture) while a more seller-relevant current fact exists. History is never rewritten:
+ * this only says what Casey must review before acting.
+ */
+export function thesisCurrentness(i: AccountInputs, hypothesisId: string, now: Date): { current: true } | { current: false; reason: string; bestFact: string | null; opener: string | null } {
+  const best = rankedFacts(i, now)[0] ?? null;
+  const h = i.hypotheses.find((x) => x.id === hypothesisId);
+  if (!h) return { current: false, reason: "This thesis is no longer one of the account's current theses (it was revised, superseded or archived).", bestFact: best?.quote ?? null, opener: null };
+  const verified = new Set(liveFacts(i, now).flatMap(idsOf));
+  const mine = i.bids.filter((b) => b.hypothesisId === h.id);
+  const truth: TruthClass = h.buyerRejected || mine.some((b) => b.type === 'objection') ? 'CONTRADICTED' : mine.some((b) => b.type === 'business_problem') ? 'BUYER_CONFIRMED' : 'INFERENCE';
+  const reasons = reviewReasons(i, h, now, verified, truth);
+  if (truth === 'CONTRADICTED' && !reasons.length) reasons.push('The buyer contradicted it.');
+  const opener = factById(i, h.primarySignalId) ?? null;
+  if (opener && best && best.id !== opener.id) {
+    const o = sellerRelevance(opener.quote);
+    if (o.rank >= 7 && sellerRelevance(best.quote).rank < o.rank) reasons.push(`It opens on ${o.reason}, but a better current fact exists.`);
+  }
+  return reasons.length ? { current: false, reason: reasons.join(' '), bestFact: best?.quote ?? null, opener: opener?.quote ?? null } : { current: true };
 }
 
 /** The next action, read off the ONE motion decision (never a second decision tree). */

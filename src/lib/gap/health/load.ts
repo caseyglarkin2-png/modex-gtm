@@ -5,13 +5,15 @@
  */
 import { gapGmailSender } from '../execution/gap-sender';
 import { ROUTING_RUN_DONE } from '../routing/queue';
-import { createClawdSuppressionReader } from '../routing/suppression-read';
+import { ACTION_TIME_SUPPRESSION_TIMEOUT_MS, probeSuppressionContract } from '@/lib/email/suppression-gate';
 import type { HealthInputs } from './health';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
 export const HEALTH_PROBE_TIMEOUT_MS = 8_000;
+/** The suppression probe waits exactly as long as a draft or send does (one SLA). */
+export const HEALTH_SUPPRESSION_TIMEOUT_MS = ACTION_TIME_SUPPRESSION_TIMEOUT_MS;
 /** A reserved address the suppression contract is asked about; it is never contacted. */
 export const HEALTH_PROBE_EMAIL = 'gap-health-probe@yardflow.ai';
 
@@ -71,9 +73,11 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
     suppressionConfigured
       ? timed(
-          () => (deps.suppressionRead ?? ((to: string) => createClawdSuppressionReader({ env, timeoutMs: HEALTH_PROBE_TIMEOUT_MS }).read({ to })))(HEALTH_PROBE_EMAIL),
+          // The wire's own read (same contract, same timeout), so health says what a click will experience.
+          () => (deps.suppressionRead ?? ((to: string) => probeSuppressionContract(to, env)))(HEALTH_PROBE_EMAIL),
           clock,
-          HEALTH_PROBE_TIMEOUT_MS,
+          // a hair past the read's own timeout, so the read's own UNREADABLE answer is the one reported
+          HEALTH_SUPPRESSION_TIMEOUT_MS + 500,
         )
       : Promise.resolve(null),
   ]);
