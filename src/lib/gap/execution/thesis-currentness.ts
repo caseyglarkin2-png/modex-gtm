@@ -20,7 +20,8 @@ export type ThesisCurrentnessCheck = (prisma: PrismaLike, accountName: string, h
 
 export const checkThesisCurrent: ThesisCurrentnessCheck = async (prisma, accountName, hypothesisId, now) => {
   try {
-    const inputs = await loadAccountInputs(prisma, accountName, now, { hypothesisId });
+    // Lean: theses, facts, buyer truth and review acks only (fast at a click), and a failed read throws (fails closed).
+    const inputs = await loadAccountInputs(prisma, accountName, now, { hypothesisId, lean: true });
     if (!inputs) return { current: 'unknown', reason: `The account ${accountName} could not be read, so GAP cannot confirm this thesis is current.` };
     return thesisCurrentness(inputs, hypothesisId, now);
   } catch (e) {
