@@ -103,10 +103,24 @@ describe('loadEvidenceInbox', () => {
 });
 
 describe('<EvidenceInbox> / <EvidenceActions>', () => {
-  it('renders the account summary line: facts ready, contradictions, rejected sources', async () => {
-    const p = db({ signals: [sig('s-ready')], runs: [{ id: 'run-bg', account_name: 'PepsiCo', created_at: NOW, provider_status: { purpose: 'gap_background_research', outcome: 'evidence_found', result: { rejected: [{ url: 'https://x.test/a', reason: 'page_does_not_name_account' }] } } }] });
+  it('renders the account summary line: sources found apart from outreach facts verified; a non-evidence source is shown with provenance and reason', async () => {
+    const p = db({
+      signals: [sig('s-ready')],
+      runs: [{ id: 'run-bg', account_name: 'PepsiCo', created_at: NOW, provider_status: { purpose: 'gap_background_research', outcome: 'evidence_found', result: { sources: [
+        { url: 'https://gatik.ai/news/pepsico', title: 'Gatik and PepsiCo expand', publishedAt: '2026-06-09T00:00:00.000Z', status: 'not_verified', reason: 'describes_past_event' },
+        { url: 'https://x.test/a', status: 'not_verified', reason: 'page_does_not_name_account' },
+        { url: 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/z', status: 'not_verified', reason: 'source_too_weak' },
+      ] } } }],
+    });
     render(<EvidenceInbox accounts={await loadEvidenceInbox(p, NOW)} now={NOW} />);
-    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('1 verified fact ready · 1 rejected source');
+    expect(screen.getByTestId('evidence-account-summary')).toHaveTextContent('3 sources found by research (45 days) · 1 outreach fact verified');
+    const src = screen.getAllByTestId('evidence-source')[0];
+    expect(src).toHaveTextContent('gatik.ai · published Jun 9, 2026');
+    expect(src).toHaveTextContent('Gatik and PepsiCo expand');
+    expect(src).toHaveTextContent('Not verified for outreach: describes a past event, not a current change');
+    // A page that does not use the full name is shown (it may use a brand); only the search redirect is dropped.
+    expect(screen.getAllByTestId('evidence-source')).toHaveLength(2);
+    expect(screen.getByTestId('evidence-view-all-sources')).toHaveAttribute('href', '/gap/accounts/pepsico/sources');
     expect(screen.getByTestId('evidence-fact')).toHaveTextContent('PepsiCo will expand its autonomous freight program');
   });
 

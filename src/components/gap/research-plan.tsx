@@ -21,7 +21,7 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
     setBusy(section);
     setMsg(null);
     let res: Response;
-    let body: { outcome?: string; sectionOutcome?: string; facts?: number; error?: string; reason?: string } = {};
+    let body: { outcome?: string; sectionOutcome?: string; facts?: number; sources?: number; error?: string; reason?: string } = {};
     try {
       res = await fetch('/api/gap/accounts/deepen', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accountName, section }) });
       body = ((await res.json().catch(() => ({}))) ?? {}) as typeof body;
@@ -32,12 +32,14 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
     }
     if (res.status === 504) return setMsg('The run took too long to answer; it may have partly run. Reopen the page to see what it found.');
     if (!res.ok) return setMsg(body.reason ?? `Not run: ${body.error ?? res.status}`);
-    setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.sectionOutcome ?? body.outcome ?? ''] ?? body.outcome}${body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : ''}.`);
+    // Research aperture: sources found are never collapsed into outreach facts verified.
+    const counts = typeof body.sources === 'number' ? ` (sources found: ${body.sources} · outreach facts verified: ${body.facts ?? 0})` : body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : '';
+    setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.sectionOutcome ?? body.outcome ?? ''] ?? body.outcome}${counts}.`);
     router.refresh();
   }
   if (!plan.tasks.length && !plan.skipped.length) return null;
   return (
-    <section className="space-y-2" data-testid="research-plan">
+    <section id="research-plan" className="space-y-2" data-testid="research-plan">
       <h2 className="text-sm font-semibold">What GAP should learn next</h2>
       <ol className="space-y-2">
         {plan.tasks.map((t) => (

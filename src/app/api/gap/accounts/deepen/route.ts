@@ -58,5 +58,5 @@ export async function POST(request: NextRequest) {
   } catch {
     // The run's own outcome still stands; the planner reads it when the section outcome could not be saved.
   }
-  return NextResponse.json({ section, outcome: result.outcome, sectionOutcome, facts: result.facts.length, rejected: result.rejected.length, notes: result.notes });
+  return NextResponse.json({ section, outcome: result.outcome, sectionOutcome, facts: result.facts.length, sources: result.sources?.length ?? 0, rejected: result.rejected.length, notes: result.notes });
 }
