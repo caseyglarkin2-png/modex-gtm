@@ -235,6 +235,18 @@ describe('red-team fixes', () => {
     expect(s.items[1].reason).toBe('the headline mentions PepsiCo; the story is about another company');
   });
 
+  it('an undated page research read sorts after dated sources (an undated link Casey shared does not)', async () => {
+    const s = await loadAccountSources(
+      prisma({
+        signals: [signal({ id: 'd', url: 'https://news.example/dated', published_at: new Date('2026-09-10'), research_status: 'none', origin: 'discovery' })],
+        runs: [run('r1', '2026-09-30T16:39:00Z', { sources: [{ url: 'https://www.mecalux.com/news/pepsico', title: null, publishedAt: null, excerpt: null, excerptKind: null, provider: 'page', status: 'not_verified', reason: 'no_publication_date' }] })],
+      }) as never,
+      'PepsiCo',
+      { now: NOW },
+    );
+    expect(s.items.map((i) => i.publisher)).toEqual(['news.example', 'mecalux.com']);
+  });
+
   it('says when older research was not loaded', async () => {
     const runs = Array.from({ length: 25 }, (_, i) => run(`r${i}`, '2026-09-30T00:00:00Z', {}));
     expect((await loadAccountSources(prisma({ runs }) as never, 'PepsiCo', { now: NOW })).partial).toBe(true);

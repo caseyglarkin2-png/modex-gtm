@@ -29,7 +29,7 @@ describe('source cards', () => {
     expect(gatik.querySelector('[data-testid="source-status"]')).toHaveTextContent('Not verified for outreach');
     expect(gatik.querySelector('[data-testid="source-open"]')).toHaveAttribute('href', 'https://gatik.ai/news/pepsico');
     expect(screen.getByTestId('account-sources-view-all')).toHaveAttribute('href', '/gap/accounts/pepsico/sources');
-    expect(screen.getByTestId('account-sources-dropped')).toHaveTextContent('2 not shown: search redirects');
+    expect(screen.getByTestId('account-sources-dropped')).toHaveTextContent('2 not shown: search redirects or broken links');
     // A verified source offers no "verify" (already verified); everything offers open, research more, ignore, wrong account.
     expect(screen.getAllByTestId('source-verify')).toHaveLength(1);
   });
@@ -51,11 +51,16 @@ describe('source cards', () => {
   });
 
   it('a long quote is cut at a word, outside the quotation marks', () => {
-    const long = `"${'PepsiCo moves freight across Texas '.repeat(10)}" said Jim Farrell, PepsiCo.`;
+    const long = `${'PepsiCo moves freight across Texas '.repeat(10)}and Arizona.`;
     render(<AccountSourcesSection sources={sources([src({ excerpt: long, attribution: null })])} limit={3} />);
     const t = screen.getByTestId('source-excerpt').textContent ?? '';
     expect(t).toMatch(/\u201d \(continues at the source\)$/);
     expect(t).not.toContain('\u2026');
+  });
+
+  it('a sentence that is itself a quotation keeps its own marks, never doubled', () => {
+    render(<AccountSourcesSection sources={sources([src({ excerpt: '\u201cGatik is already operating inside our networks,\u201d said Jim Farrell, PepsiCo.', attribution: null })])} limit={3} />);
+    expect(screen.getByTestId('source-excerpt').textContent).toBe('\u201cGatik is already operating inside our networks,\u201d said Jim Farrell, PepsiCo.');
   });
 
   it('a search summary is labelled, never quoted', () => {

@@ -65,7 +65,8 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
       {s.excerpt && s.excerptKind !== 'headline' ? (
         quote ? (
           <p className={`break-words text-xs ${compact ? 'line-clamp-2' : ''}`} data-testid="source-excerpt">
-            &ldquo;{clip(s.excerpt, max)}&rdquo;{s.excerpt.length > max ? ' (continues at the source)' : ''}
+            {quoteMarks(clip(s.excerpt, max))}
+            {s.excerpt.length > max ? ' (continues at the source)' : ''}
           </p>
         ) : (
           <p className={`break-words text-xs text-[var(--muted-foreground)] ${compact ? 'line-clamp-2' : ''}`} data-testid="source-excerpt">
@@ -87,7 +88,7 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
           <ul className="mt-1 space-y-1">
             {s.alsoOnPage.map((a) => (
               <li key={a.excerpt} className="break-words">
-                &ldquo;{clip(a.excerpt, 240)}&rdquo;
+                {quoteMarks(clip(a.excerpt, 240))}
                 {a.attribution ? ` Said by ${a.attribution} (third party), not ${accountName}.` : ''} <span className="font-semibold">{STATUS_LABEL[a.status]}</span>
                 {a.reason ? `: ${a.reason}` : ''}
               </li>
@@ -135,6 +136,11 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
       </p>
     </li>
   );
+}
+
+/** The page's words in quotation marks, once: a sentence that is itself a quotation keeps its own marks. */
+function quoteMarks(text: string): string {
+  return /^["\u201c\u2018']/.test(text) ? text : `\u201c${text}\u201d`;
 }
 
 /** Cut at a word boundary (an ellipsis never sits inside a quotation). */
