@@ -107,6 +107,8 @@ export interface DecisionCardProps {
   closeHref?: string;
   /** What is waiting in the REVIEW lane now: a missing-thesis fix points there only for this card's own thesis. */
   reviewWaiting?: ReviewWaiting | null;
+  /** Execution acceptance: this card's thesis needs review; it offers no outreach, only the review. */
+  thesisHold?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -179,7 +181,7 @@ export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
 // Component
 // ---------------------------------------------------------------------------
 
-export function DecisionCard({ item, onAct, acting = false, actError = null, expanded = null, closeHref = '/gap', reviewWaiting = null }: DecisionCardProps) {
+export function DecisionCard({ item, onAct, acting = false, actError = null, expanded = null, closeHref = '/gap', reviewWaiting = null, thesisHold = false }: DecisionCardProps) {
   const [choosingOther, setChoosingOther] = useState(false);
   const [chosenOther, setChosenOther] = useState<HumanAction | ''>('');
   const [callOpen, setCallOpen] = useState(false);
@@ -243,7 +245,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
         <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--destructive)]">System block</p>
       ) : (
         <p data-testid="seller-action-label" className="text-base font-semibold">
-          {sellerLabel}
+          {thesisHold ? 'Thesis needs review' : sellerLabel}
         </p>
       )}
 
@@ -260,7 +262,18 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
         </p>
       </div>
 
-      {!item.blocked ? (
+      {thesisHold ? (
+        <div data-testid="thesis-hold" className="mt-3 space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-2 text-xs">
+          <p>The thesis behind this card needs review before anyone is contacted on it (a better current fact exists, or it changed).</p>
+          {expanded ? null : (
+            <Link href={`/gap?lane=research&open=${encodeURIComponent(item.id)}`} scroll={false} className="inline-flex rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)]">
+              Open the review
+            </Link>
+          )}
+        </div>
+      ) : null}
+
+      {!item.blocked && !thesisHold ? (
         <div data-testid="contact-buttons" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
           {/* Red team T8: no raw email link. Email goes only through the guarded GAP send path. */}
           {/* Last mile: no raw tel: or LinkedIn link either. A cold call / message re-reads HubSpot opportunity truth at the click. */}
@@ -352,7 +365,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
         </div>
       ) : null}
 
-      {readiness.state === 'actionable' ? (
+      {readiness.state === 'actionable' && !thesisHold ? (
         <div data-testid="readiness-actionable" className="mt-3 flex flex-wrap items-center gap-2">
           {expanded && readiness.primary.href?.includes('&open=') ? (
             <Link href={closeHref} scroll={false} data-testid="card-close" className="rounded-md border border-[var(--border)] px-3 py-1.5 text-xs hover:bg-[var(--muted)]">

@@ -138,7 +138,7 @@ describe('loadCockpitMotions', () => {
 
   it('holds every email card but the primary; call and LinkedIn cards are human judgment and never held', async () => {
     const items = [item('e1', 1, 'one_off_email', 'VP Supply Chain'), item('e2', 2, 'enroll_gap_sequence', 'Supply Chain Manager'), item('c3', 3, 'call_now', 'Director DC'), item('l4', 4, 'linkedin_manual_task', 'Director DC')];
-    const r = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'));
+    const r = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }) });
     expect(r.heldCardIds).toEqual(['e2']);
     expect(r.motions).toHaveLength(1);
     expect(r.motions[0]).toMatchObject({ state: 'ready', primary: { personaId: 1 }, next: { personaId: 2 } });

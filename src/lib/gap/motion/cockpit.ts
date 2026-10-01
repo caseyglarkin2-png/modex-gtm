@@ -3,6 +3,7 @@
  * (one primary per account), which wait as NEXT, which accounts are paused by
  * a reply, and the angles for everyone shown. Read only.
  */
+import { checkThesisCurrent, type ThesisCurrentnessCheck } from '../execution/thesis-currentness';
 import type { QueueItem } from '../routing/queue';
 import { sellerLaneOf } from '../routing/card-readiness';
 import { computeAccountMotion, EMAIL_ACTIONS, type AccountMotion } from './account-motion';
@@ -26,14 +27,35 @@ export interface CockpitMotions {
   motions: CockpitMotion[];
   /** Email cards that must not be READY now (not the account's motion). */
   heldCardIds: string[];
+  /**
+   * Execution acceptance: READY cards whose thesis is not the account's current actionable thesis (needs review, or
+   * cannot be confirmed). Never READY: they wait in RESEARCH, where the thesis is revised on the current fact.
+   */
+  thesisHeldCardIds?: string[];
 }
 
-export async function loadCockpitMotions(prisma: PrismaLike, items: readonly QueueItem[], now: Date): Promise<CockpitMotions> {
-  const readyEmail = items.filter((i) => EMAIL_ACTIONS.has(i.action) && typeof i.persona.id === 'number' && sellerLaneOf(i) === 'ready');
+export async function loadCockpitMotions(
+  prisma: PrismaLike,
+  items: readonly QueueItem[],
+  now: Date,
+  deps: { thesisCurrent?: ThesisCurrentnessCheck } = {},
+): Promise<CockpitMotions> {
+  // Execution acceptance: the SAME current-actionable-thesis check the click runs, once per thesis on a READY card.
+  const readyWithThesis = items.filter((i) => sellerLaneOf(i) === 'ready' && i.hypothesis?.id);
+  const theses = [...new Map(readyWithThesis.map((i) => [i.hypothesis!.id, i.account.name])).entries()];
+  const check = deps.thesisCurrent ?? checkThesisCurrent;
+  const notCurrent = new Set(
+    (await Promise.all(theses.map(async ([id, account]) => ((await check(prisma, account, id, now).catch(() => ({ current: 'unknown' as const, reason: '' }))).current === true ? null : id)))).filter(
+      (x): x is string => !!x,
+    ),
+  );
+  const thesisHeldCardIds = readyWithThesis.filter((i) => notCurrent.has(i.hypothesis!.id)).map((i) => i.id);
+  const thesisHeld = new Set(thesisHeldCardIds);
+  const readyEmail = items.filter((i) => EMAIL_ACTIONS.has(i.action) && typeof i.persona.id === 'number' && sellerLaneOf(i) === 'ready' && !thesisHeld.has(i.id));
   const byAccount = new Map<string, QueueItem[]>();
   for (const i of readyEmail) byAccount.set(i.account.name, [...(byAccount.get(i.account.name) ?? []), i]);
   const accounts = [...byAccount.keys()].sort();
-  if (accounts.length === 0) return { motions: [], heldCardIds: [] };
+  if (accounts.length === 0) return { motions: [], heldCardIds: [], thesisHeldCardIds };
 
   const emails = new Map<string, string>();
   for (const [a, cards] of byAccount) {
@@ -74,11 +96,15 @@ export async function loadCockpitMotions(prisma: PrismaLike, items: readonly Que
     // Only accounts where the motion changes what Casey sees (more than one person, a pause, or a live motion).
     if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_conversation' || m.state === 'in_motion') motions.push({ ...m, angles: a });
   }
-  return { motions, heldCardIds: held };
+  return { motions, heldCardIds: held, thesisHeldCardIds };
 }
 
-/** The seller lane with account motion applied: a held email card is never READY. */
-export function laneWithMotion(item: QueueItem, held: ReadonlySet<string>): ReturnType<typeof sellerLaneOf> {
+/**
+ * The seller lane with account motion applied: a held email card is never READY. A card whose thesis needs review
+ * is never READY either: it waits in RESEARCH, where the thesis is revised on the current fact.
+ */
+export function laneWithMotion(item: QueueItem, held: ReadonlySet<string>, thesisHeld: ReadonlySet<string> = new Set()): ReturnType<typeof sellerLaneOf> {
   const lane = sellerLaneOf(item);
+  if (lane === 'ready' && thesisHeld.has(item.id)) return 'research';
   return lane === 'ready' && held.has(item.id) ? 'later' : lane;
 }
