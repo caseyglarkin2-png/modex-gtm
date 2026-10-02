@@ -25,6 +25,16 @@ export function speakerOrg(sentence: string): string | null {
   return m ? m[1].replace(/[.,;:]+$/, '') : null;
 }
 
+/**
+ * The publisher page a stored claim lives at. Fact columns are frozen after insert (GAP_SIGNAL_FROZEN), so a claim
+ * first stored on a search-redirect link and later confirmed verbatim at its publisher's page carries that page in
+ * metadata.canonicalUrl (scripts/gap/resolve-redirect-facts.ts); it is the link every surface shows.
+ */
+export function factUrl(row: { evidence_url?: string | null; metadata?: unknown }): string | null {
+  const m = row.metadata as { canonicalUrl?: unknown } | null | undefined;
+  return typeof m?.canonicalUrl === 'string' && /^https?:\/\//.test(m.canonicalUrl) ? m.canonicalUrl : (row.evidence_url ?? null);
+}
+
 export type LiveFactFailure = 'not_a_physical_operations_fact' | 'quoted_third_party' | 'redirect_unresolved';
 
 /**

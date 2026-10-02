@@ -2,6 +2,9 @@
  * Phase 2 final review P1 (practitioner lens): a verified fact that another
  * verified fact at the account contradicts is never KNOW and never quoted.
  */
+// Imported at load (not inside the test): the seller-draft module graph is large, and loading it inside the test
+// raced the 5s test timeout on a busy machine.
+import { prepareSellerEmail } from '@/lib/gap/execution/seller-draft';
 import { describe, expect, it, vi } from 'vitest';
 import { contradictedFactIds } from '@/lib/gap/research/conflicts';
 import { knowOf, buildBrief } from '@/lib/gap/execution/six-line-brief';
@@ -52,7 +55,6 @@ describe('KNOW never shows a contradicted fact', () => {
 
 describe('the send gate refuses a contradicted fact', () => {
   it('prepareSellerEmail: fact_contradicted, before any Gmail call', async () => {
-    const { prepareSellerEmail } = await import('@/lib/gap/execution/seller-draft');
     const d = db();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const prisma: any = prismaOf(d);

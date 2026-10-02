@@ -52,6 +52,8 @@ export interface PageResult {
   outcome: 'read' | 'unreadable' | 'not_read';
   sentences: number;
   error?: string;
+  /** Why it yielded no candidate, when the producer knows (e.g. excerpt_too_short). */
+  reason?: string;
 }
 
 export async function signalCandidates(signals: readonly ResearchableSignal[], deps: { fetchHtml?: FetchHtml; clock?: () => number; accountName?: string } = {}): Promise<{ candidates: Candidate[]; note: string; pages: Map<string, string>; pageResults: PageResult[] }> {

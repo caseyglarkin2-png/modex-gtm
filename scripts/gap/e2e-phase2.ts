@@ -70,7 +70,7 @@ import { buildBrief, loadBriefHistory } from '../../src/lib/gap/execution/six-li
 import { setAngle } from '../../src/lib/gap/motion/persona-angle';
 import { getHypothesis } from '../../src/lib/gap/hypothesis/service';
 import { DIRECT_SENT } from '../../src/lib/gap/execution/draft-ledger';
-import { heldDealAccounts, loadInDeals } from '../../src/lib/gap/deals/in-deals';
+import { heldDealAccounts, loadInDealsSummary, type OpenDealReadsLike } from '../../src/lib/gap/deals/in-deals';
 import { loadDealBrief, setLearningObjective } from '../../src/lib/gap/deals/deal-brief';
 import type { OpportunityTruth } from '../../src/lib/gap/opportunity/active-opportunity';
 import { loadHealthInputs } from '../../src/lib/gap/health/load';
@@ -545,8 +545,15 @@ async function main(): Promise<number> {
     pass('G5 no cold action', `${cards5.length} cards all route to ${cards5[0].action} (active_opportunity); none READY; a send attempt is refused (${(dealSend as { reason?: string }).reason})`);
 
     expect('G5 In Deals', heldDealAccounts(q5.items).includes(account), 'the In Deals tile does not count the account');
-    const inDeals = await loadInDeals(prisma, [account], { resolve: async () => dealTruth });
-    const row = inDeals.inDeals.find((a) => a.accountName === account);
+    // The In Deals summary reads open deals straight from HubSpot (#342); here a stub portal holds this one deal.
+    const dealReads: OpenDealReadsLike = {
+      openDeals: async () => ({ deals: [{ id: 'd-scratch', properties: { dealname: `YardFlow - ${account}`, dealstage: 'appointmentscheduled', hs_is_closed: 'false', hs_lastmodifieddate: dealNow.toISOString() } }], truncated: false }),
+      dealAssociations: async (toType) => ({ byId: new Map([['d-scratch', toType === 'companies' ? ['c-scratch'] : ['k-1', 'k-2']]]), truncated: false }),
+      companies: async () => [{ id: 'c-scratch', name: account, domain: null }],
+      companiesByNames: async () => [],
+    };
+    const inDeals = await loadInDealsSummary(prisma, { reads: dealReads, now: dealNow, fresh: true });
+    const row = inDeals.accounts.find((a) => a.accountName === account);
     expect('G5 In Deals', !!row && row.deals[0].stage === 'Appointment scheduled' && row.dealContacts === 2 && row.known === 2 && row.people.length >= 3, `In Deals -> ${JSON.stringify(inDeals)}`);
     pass('G5 In Deals', `${account} is counted on the In Deals tile and listed live: "${row!.deals[0].name}" · ${row!.deals[0].stage} · ${row!.people.length} people GAP holds · ${row!.dealContacts} on the deal · ${row!.known} of 6 known`);
 

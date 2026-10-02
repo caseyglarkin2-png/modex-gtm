@@ -147,8 +147,11 @@ export function hostBelongsToAccount(url: string, accountName: string): boolean 
   }
 }
 
-/** Parse the model's JSON array of candidate facts; anything malformed is dropped. */
-export function parseWebCandidates(text: string): Array<{ url: string; title: string; date: string | null; excerpt: string }> {
+/**
+ * Parse the model's JSON array of candidate facts; anything malformed is dropped. A proposal whose sentence is too
+ * short to check is kept (short: true): its page is still a source, never a candidate fact.
+ */
+export function parseWebCandidates(text: string): Array<{ url: string; title: string; date: string | null; excerpt: string; short: boolean }> {
   const fenced = /```(?:json)?\s*([\s\S]*?)```/i.exec(text);
   const body = fenced ? fenced[1] : text;
   const start = body.indexOf('[');
@@ -158,8 +161,8 @@ export function parseWebCandidates(text: string): Array<{ url: string; title: st
     const arr = JSON.parse(body.slice(start, end + 1)) as unknown[];
     return arr
       .filter((x): x is Record<string, unknown> => !!x && typeof x === 'object')
-      .map((x) => ({ url: String(x.url ?? ''), title: String(x.title ?? ''), date: typeof x.date === 'string' ? x.date : null, excerpt: String(x.excerpt ?? '') }))
-      .filter((x) => /^https?:\/\//.test(x.url) && x.excerpt.length >= 40);
+      .map((x) => ({ url: String(x.url ?? ''), title: String(x.title ?? ''), date: typeof x.date === 'string' ? x.date : null, excerpt: String(x.excerpt ?? ''), short: String(x.excerpt ?? '').length < 40 }))
+      .filter((x) => /^https?:\/\//.test(x.url));
   } catch {
     return [];
   }
@@ -185,7 +188,7 @@ const hasJsonArray = (text: string) => {
  * provider can run (quota, no key, no grounding, a cut-off answer) this THROWS: an outage is infrastructure
  * state, never "nothing found".
  */
-export async function webCandidates(accountName: string, focus: string, deps: { providers?: ScoutProvider[] } = {}): Promise<{ candidates: Candidate[]; note: string; sources?: string[] }> {
+export async function webCandidates(accountName: string, focus: string, deps: { providers?: ScoutProvider[] } = {}): Promise<{ candidates: Candidate[]; note: string; sources?: string[]; pageResults?: PageResult[] }> {
   const prompt = `Find up to 5 PUBLIC, dated facts from the last 12 months about ${accountName}'s physical operations: distribution or fulfillment centers, warehouses, plants, yards, docks or transportation network (openings, closures, consolidations, expansions, automation, acquisitions, relocations). ${focus}
 Sources, best first: ${accountName}'s own newsroom, investor or official operations page; an SEC filing; a government, economic-development or permit release; a credible trade or business publication; a vendor case study that names ${accountName}. When a story reports a fact, cite ${accountName}'s own announcement of it if one exists. Never cite a search-result redirect, an aggregator or syndicated copy, a snippet-only page or a paywalled page.
 Return ONLY a JSON array: [{"url": "...", "title": "...", "date": "YYYY-MM-DD", "excerpt": "one sentence copied VERBATIM from that page"}].
@@ -197,7 +200,7 @@ Every excerpt must be copied exactly from the page at that url. If you cannot fi
     return parsed;
   }, deps.providers ?? defaultProviders());
   if (!r.ok) throw new Error(`no grounded web search (${r.attempts.map((x) => `${x.provider} ${x.outcome.replace(/_/g, ' ')}`).join('; ') || 'no provider configured'})`);
-  const parsed = r.value;
+  const parsed = r.value.filter((p) => !p.short);
   return {
     candidates: parsed.map((p) => ({
       provider: 'web' as const,
@@ -207,7 +210,10 @@ Every excerpt must be copied exactly from the page at that url. If you cannot fi
       excerpt: p.excerpt,
       sourceType: 'public_secondary' as const,
     })),
-    note: `${parsed.length} web proposals via ${r.provider}`,
+    note: `${parsed.length} web proposals via ${r.provider}${r.value.length > parsed.length ? ` (${r.value.length - parsed.length} too short to check, kept as sources)` : ''}`,
+    // A proposal too short to check still names a page GAP found (stabilization C4): a source, never a fact. Its
+    // date is the model's claim, so it is not recorded as the publication date.
+    pageResults: r.value.filter((p) => p.short).map((p) => ({ url: p.url, title: p.title || null, publishedAt: null, outcome: 'read' as const, sentences: 0, reason: 'excerpt_too_short' })),
     // The pages the search read (grounding redirects are resolved upstream; a raw redirect is never a source page).
     sources: [...new Set(cited.filter((u) => /^https?:\/\//.test(u) && !/vertexaisearch\.cloud\.google\.com/.test(u)))],
   };

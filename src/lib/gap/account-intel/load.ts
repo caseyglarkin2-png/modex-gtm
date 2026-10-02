@@ -8,7 +8,7 @@ import { loadWatchProfilesCached } from '../signals/watch';
 import { loadAccountConversations, loadAccountFirstTouches } from '../motion/load';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { classifyContinuity } from '../research/continuity';
-import { liveFactFailure } from '../research/run';
+import { factUrl, liveFactFailure } from '../research/claim-rules';
 import { selectConfirmedBids } from '../bid/select';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildROIEngineInputs, computeROIModel } from '@/lib/microsites/roi';
@@ -186,12 +186,12 @@ export async function loadAccountInputs(
     // Re-gated on read: a fact stored before a rule tightened (a software rollout, a 10-K description, an acquired
     // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
     // A quote attributed to another organization (a vendor's CEO about this account) is that organization's fact.
-    if (liveFactFailure(r.evidence_text, accountName, r.evidence_url)) continue;
+    if (liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,
       quote: r.evidence_text,
-      url: r.evidence_url ?? null,
+      url: factUrl(r),
       title: r.title ?? '',
       publishedAt: new Date(r.observed_at).toISOString(),
       expiresAt: r.freshness_expires_at ? new Date(r.freshness_expires_at).toISOString() : null,
