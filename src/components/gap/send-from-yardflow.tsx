@@ -24,6 +24,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { ReportThis } from './feedback-button';
 
 interface Preview {
   crmLogging: 'on' | 'unavailable';
@@ -226,7 +227,10 @@ export function SendFromYardflow({
       )}
       {state.kind === 'refused' ? (
         <div role="alert" data-testid="send-refused" className="space-y-1 text-xs text-[var(--destructive)]">
-          <p>{REASONS[state.reason] ?? refusalSentence(state.reason) ?? `Not sent: ${state.reason.replace(/_/g, ' ')}.`}</p>
+          <p>
+            {REASONS[state.reason] ?? refusalSentence(state.reason) ?? `Not sent: ${state.reason.replace(/_/g, ' ')}.`}
+            <ReportThis errorCode={state.reason} surface="send" />
+          </p>
           {state.detail ? <p className="text-[var(--muted-foreground)]">{state.detail}</p> : null}
         </div>
       ) : null}

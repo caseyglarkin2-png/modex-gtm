@@ -22,6 +22,7 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
+import { ReportThis } from './feedback-button';
 
 interface Fact {
   signalId: string;
@@ -262,7 +263,12 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
           {busy === 'research' ? 'Researching public sources...' : result ? 'Research again' : 'Research this'}
         </Button>
       )}
-      {error ? <p role="alert" className="text-xs text-[var(--destructive)]">{error}</p> : null}
+      {error ? (
+        <p role="alert" className="text-xs text-[var(--destructive)]">
+          {error}
+          <ReportThis errorCode="research_failed" surface="research-this" />
+        </p>
+      ) : null}
 
       {result?.outcome === 'evidence_found' ? (
         <div data-testid="research-found" className="space-y-3 rounded-md border border-emerald-500/40 bg-emerald-500/5 p-3 text-xs">

@@ -44,6 +44,7 @@ import { ResearchThis } from './research-this';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
 import { HypothesisStatusBadge } from './hypothesis-drawer';
 import { formatWhen } from '@/lib/gap/ui/format';
+import { ReportThis } from './feedback-button';
 
 // ---------------------------------------------------------------------------
 // Queue row shape (the GET /api/gap/queue contract, S2-T7)
@@ -537,6 +538,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
         {actError ? (
           <span role="alert" data-testid="act-error" className="text-xs text-[var(--destructive)]">
             {actError}
+            <ReportThis errorCode="card_action_failed" surface="decision-card" cardId={item.id} />
           </span>
         ) : null}
       </footer>

@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { ReportThis } from './feedback-button';
 
 export interface DraftRow {
   gmailDraftId: string;
@@ -196,7 +197,10 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
       ) : null}
       {outcome?.kind === 'refused' ? (
         <div role="alert" data-testid="draft-refused" className="space-y-1 text-xs text-[var(--destructive)]">
-          <p>{REASON_COPY[outcome.reason] ?? refusalSentence(outcome.reason) ?? `Refused: ${outcome.reason.replace(/_/g, ' ')}.`}</p>
+          <p>
+            {REASON_COPY[outcome.reason] ?? refusalSentence(outcome.reason) ?? `Refused: ${outcome.reason.replace(/_/g, ' ')}.`}
+            <ReportThis errorCode={outcome.reason} surface="seller-draft" />
+          </p>
           {outcome.detail ? (
             <details className="text-[var(--muted-foreground)]">
               <summary className="cursor-pointer">Details</summary>
