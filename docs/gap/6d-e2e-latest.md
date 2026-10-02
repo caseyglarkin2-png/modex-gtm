@@ -2,23 +2,23 @@
 
 STATUS: PASS
 
-<!-- verified:2026-09-27 -->
+<!-- verified:2026-10-02 -->
 
 Written by `scripts/gap/e2e-6d.ts`. Rerun it against the scratch database to refresh this file.
 
-- Run tag: gap6d-1790522179501
+- Run tag: gap6d-1790907859255
 - Database: 127.0.0.1:55432/gap_finish_e2e (scratch only; the script refuses any other host)
-- Git: 8191a051
-- Ran at: 2026-09-27T15:16:19.701Z
+- Git: 35ad3918
+- Ran at: 2026-10-02T02:24:19.611Z
 
 ## Steps
 
-- PASS seed: 2 accounts, 1 hypothesis, 1 family/version/enrollment for the matched contact gap6d-1790522179501@example.com
-- PASS matched: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790522179501-evt-matched","outcome":"MATCHED","accountName":"GAP E2E 6D Matched gap6d-1790522179501","hypothesisId":"cmujyobun00017kqosgg97ao1","enrollmentId":"e947aa52-e196-4d7c-aeb6-5ad7673ccc1e"}
-- PASS hypothesis_missing: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790522179501-evt-nohyp","outcome":"HYPOTHESIS_MISSING","accountName":"GAP E2E 6D NoHyp gap6d-1790522179501","hypothesisId":null,"enrollmentId":null}
-- PASS identity_unresolved: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790522179501-evt-unknown","outcome":"IDENTITY_UNRESOLVED","accountName":null,"hypothesisId":null,"enrollmentId":null,"detail":"unresolved_company"}
+- PASS seed: 2 accounts, 1 hypothesis, 1 family/version/enrollment for the matched contact gap6d-1790907859255@example.com
+- PASS matched: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790907859255-evt-matched","outcome":"MATCHED","accountName":"GAP E2E 6D Matched gap6d-1790907859255","hypothesisId":"cmuqcas9600017khoou6wvgus","enrollmentId":"2d769a34-c48f-4d15-afec-e7c3d88da7ba"}
+- PASS hypothesis_missing: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790907859255-evt-nohyp","outcome":"HYPOTHESIS_MISSING","accountName":"GAP E2E 6D NoHyp gap6d-1790907859255","hypothesisId":null,"enrollmentId":null}
+- PASS identity_unresolved: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790907859255-evt-unknown","outcome":"IDENTITY_UNRESOLVED","accountName":null,"hypothesisId":null,"enrollmentId":null,"detail":"unresolved_company"}
 - PASS freeze_trigger: reattribution refused by the real trigger
-- PASS already_imported: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790522179501-evt-matched","outcome":"ALREADY_IMPORTED","accountName":null,"hypothesisId":"cmujyobun00017kqosgg97ao1","enrollmentId":"e947aa52-e196-4d7c-aeb6-5ad7673ccc1e"}
+- PASS already_imported: {"engine":"hubspot_sequence","engineEventId":"gap6d-1790907859255-evt-matched","outcome":"ALREADY_IMPORTED","accountName":null,"hypothesisId":"cmuqcas9600017khoou6wvgus","enrollmentId":"2d769a34-c48f-4d15-afec-e7c3d88da7ba"}
 
 ## Counts
 
