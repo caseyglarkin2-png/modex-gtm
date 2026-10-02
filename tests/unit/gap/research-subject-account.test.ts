@@ -25,7 +25,7 @@ describe('the account is the subject', () => {
 describe('a verbatim roundup sentence about a competitor is never stored', () => {
   it('web and cited-page proposals', async () => {
     const page = 'Kroger news roundup. Albertsons opened a new 400,000-square-foot distribution center in Denver in August 2026. Walmart, a Kroger rival, opened a new distribution center in Texas in 2026.';
-    const ctx = verificationContext('Kroger', async () => page);
+    const ctx = verificationContext('Kroger', async () => ({ text: page, publishedAt: new Date('2026-09-01') }));
     for (const [provider, excerpt] of [['web', 'Albertsons opened a new 400,000-square-foot distribution center in Denver in August 2026.'], ['signal', 'Walmart, a Kroger rival, opened a new distribution center in Texas in 2026.']] as const) {
       const v = await verifyCandidate({ provider, url: 'https://news.example/r', title: 'r', publishedAt: new Date('2026-09-01'), excerpt, sourceType: 'public_secondary' }, ctx);
       expect(v).toMatchObject({ ok: false, reason: 'sentence_does_not_name_account' });

@@ -29,7 +29,7 @@ import { registerSignal } from '../signals/registry';
 import { freshnessExpiresAt } from '../signals/freshness';
 import type { SignalType } from '../taxonomy';
 import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, pageSentenceFor, statedEventDate, type FactChange, describesPastEvent } from './facts';
-import { defaultFetchText, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
+import { datelineDate, defaultFetchPage, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchPage } from './providers';
 import type { PageResult } from '../signals/research';
 import { WEAK_SOURCE, speakerOrg, textNamesAccount } from './claim-rules';
 
@@ -156,7 +156,7 @@ export interface ResearchDeps {
   fetchHtml?: (url: string) => Promise<string>;
   /** Read the pages the web search cited and propose their own verbatim sentences (default on). */
   sourcePages?: boolean;
-  fetchText?: FetchText;
+  fetchText?: FetchPage;
   /**
    * Signal Intelligence B: extra candidates from the pages of the signals being followed up, with the page text
    * this run fetched (SSRF-safe). They pass the SAME verifyCandidate contract as every other candidate.
@@ -352,15 +352,17 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
 
 export interface VerificationContext {
   accountKey: string;
-  fetchText: FetchText;
+  fetchText: FetchPage;
   /** One fetch per URL per run. */
   pages: Map<string, string | Error>;
+  /** The page's own article date (metadata), when the fetch read one. */
+  pageDates: Map<string, Date | null>;
 }
 
-export function verificationContext(accountName: string, fetchText?: FetchText): VerificationContext {
+export function verificationContext(accountName: string, fetchText?: FetchPage): VerificationContext {
   // Signal Intelligence final review P1: the FULL normalized name, matched as whole words. The first token
   // ("general" for General Mills, "home" for The Home Depot, "h" for H-E-B) matched other companies' pages.
-  return { accountKey: normalizeCompany(accountName), fetchText: fetchText ?? defaultFetchText, pages: new Map() };
+  return { accountKey: normalizeCompany(accountName), fetchText: fetchText ?? defaultFetchPage, pages: new Map(), pageDates: new Map() };
 }
 
 // The pure claim rules live in claim-rules.ts (shared with the strict outreach gate); re-exported here.
@@ -402,19 +404,30 @@ export function accountIsSubject(sentence: string, accountKey: string): boolean 
  */
 export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date; excerpt: string } | { ok: false; reason: string }> {
   if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };
-  if (!c.publishedAt || Number.isNaN(c.publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
   // A web search model's proposal is a summary; the gates run on what is STORED (the page's own sentence) below.
   // Every other proposer's excerpt is already the text that would be stored.
   const web = c.provider === 'web';
+  // A web proposal's date is the model's claim: it is dated by its page below. Every other proposer dates its own.
+  if (!web && (!c.publishedAt || Number.isNaN(c.publishedAt.getTime()))) return { ok: false, reason: 'no_publication_date' };
   if (!web && !isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
   // Quality review: a past-year event restated in a newer source is not dated by the source.
-  if (!web && classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (!web && classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt!)) return { ok: false, reason: 'describes_past_event' };
   if (WEAK_SOURCE.test(c.url)) return { ok: false, reason: 'source_too_weak' };
   if (!ctx.pages.has(c.url)) {
-    try { ctx.pages.set(c.url, await ctx.fetchText(c.url)); } catch (err) { ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err))); }
+    try {
+      const got = await ctx.fetchText(c.url);
+      ctx.pages.set(c.url, typeof got === 'string' ? got : got.text);
+      ctx.pageDates.set(c.url, typeof got === 'string' ? null : got.publishedAt);
+    } catch (err) {
+      ctx.pages.set(c.url, err instanceof Error ? err : new Error(String(err)));
+    }
   }
   const page = ctx.pages.get(c.url)!;
   if (page instanceof Error) return { ok: false, reason: `source_unreadable:${page.message}` };
+  // Soak P1 (truth): a web fact is dated by its PAGE (article metadata, else a dateline naming the account), never
+  // by the search model's claim; a page with no date of its own is not verified.
+  const publishedAt = web ? (ctx.pageDates.get(c.url) ?? datelineDate(page, ctx.accountKey)) : c.publishedAt!;
+  if (!publishedAt || Number.isNaN(publishedAt.getTime())) return { ok: false, reason: 'no_publication_date' };
   // A web search model restates what it read: its proposal may be re-anchored to the page's OWN sentence (same
   // facts, same numbers), and that verbatim sentence is what is stored. EDGAR, signal and hand-typed facts stay
   // strictly verbatim.
@@ -431,7 +444,7 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   }
   // The stored sentence itself must be a physical-operations fact that is current for its source date.
   if (web && !isPhysicalOpsFact(excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
-  if (web && classifyContinuity(excerpt) === 'event' && describesPastEvent(excerpt, c.publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (web && classifyContinuity(excerpt) === 'event' && describesPastEvent(excerpt, publishedAt)) return { ok: false, reason: 'describes_past_event' };
   if (c.provider !== 'edgar' && !textNamesAccount(page, ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
   // A sentence taken from a signal's own page must itself name the account (a competitor's paragraph on the
   // same page is not this account's fact).
@@ -444,7 +457,7 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   const speaker = speakerOrg(excerpt, c.url);
   if (speaker && !textNamesAccount(speaker, ctx.accountKey)) return { ok: false, reason: 'quoted_third_party' };
   if ((c.provider === 'signal' || c.provider === 'web') && !selfSubject && !speaker && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
-  return { ok: true, publishedAt: c.publishedAt, excerpt };
+  return { ok: true, publishedAt, excerpt };
 }
 
 

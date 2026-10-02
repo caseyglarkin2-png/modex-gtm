@@ -77,7 +77,7 @@ describe('a past-year event restated in a newer source is not current', () => {
 describe('the verification contract refuses a past event restated in a newer source', () => {
   it('Campbell 2024 plant sentence in a 2026 source: describes_past_event', async () => {
     const excerpt = "In 2024, Campbell's closed its Sacramento plant and opened a new distribution center in Ohio.";
-    const ctx = verificationContext("Campbell's", async () => `News. ${excerpt} More.`);
+    const ctx = verificationContext("Campbell's", async () => ({ text: `News. ${excerpt} More.`, publishedAt: new Date('2026-09-24') }));
     expect(await verifyCandidate({ provider: 'web', url: 'https://x.com/a', title: 't', publishedAt: new Date('2026-09-24'), excerpt, sourceType: 'public_secondary' }, ctx)).toEqual({ ok: false, reason: 'describes_past_event' });
   });
 });

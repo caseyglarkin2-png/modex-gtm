@@ -329,7 +329,8 @@ async function main(): Promise<number> {
       {
         edgar: async () => ({ candidates: [], note: 'scratch: no EDGAR' }),
         web: async (accountName: string) => ({ candidates: accountName === account ? [verified] : [], note: 'scratch stub' }),
-        fetchText: async (u: string) => (u === url ? `News. ${FACT} More.` : ''),
+        // The page carries its own article date (a web fact is dated by its page, never by the search).
+        fetchText: async (u: string) => (u === url ? { text: `News. ${FACT} More.`, publishedAt: new Date(now.getTime() - 86_400_000) } : ''),
       },
     );
     const mine = bg.researched.find((r) => r.accountName === account);

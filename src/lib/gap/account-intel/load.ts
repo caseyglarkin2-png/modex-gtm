@@ -259,6 +259,7 @@ export async function loadAccountInputs(
       buyerRejected: buyerRejected.has(h.id),
       // The last time Casey looked: approval, activation, or an explicit "reviewed" after a flag.
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
+      reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
     personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at) })),

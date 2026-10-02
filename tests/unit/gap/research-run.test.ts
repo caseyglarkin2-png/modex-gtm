@@ -90,7 +90,11 @@ describe('RESEARCH THIS', () => {
           ],
           note: '',
         }),
-        fetchText: async (url) => (url.includes('other.example') ? 'Acme opened a new distribution center in Reno to add capacity for the west.' : 'An unrelated page about groceries.'),
+        // Each page carries its own date, except /b: an undated page is what makes a web proposal undated.
+        fetchText: async (url) => {
+          const text = url.includes('other.example') ? 'Acme opened a new distribution center in Reno to add capacity for the west.' : 'An unrelated page about groceries.';
+          return url.endsWith('/b') ? text : { text, publishedAt: new Date('2026-09-01') };
+        },
       },
     );
     expect(r.outcome).toBe('insufficient_evidence');
