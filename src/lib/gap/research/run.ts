@@ -225,7 +225,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
       excerptKind: null,
       provider: 'page',
       status: p.outcome === 'read' ? 'not_verified' : 'could_not_verify',
-      reason: p.outcome === 'read' ? 'no_fact_sentence' : p.outcome === 'not_read' ? 'not_read_budget' : `source_unreadable:${p.error ?? 'fetch failed'}`,
+      reason: p.reason ?? (p.outcome === 'read' ? 'no_fact_sentence' : p.outcome === 'not_read' ? 'not_read_budget' : `source_unreadable:${p.error ?? 'fetch failed'}`),
     });
   }
   const seen = new Set<string>();

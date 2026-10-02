@@ -16,7 +16,7 @@
  */
 import { normalizeSignalUrl } from '../signals/intake';
 import type { SourceRecord } from '../research/run';
-import { liveFactFailure, normalizeCompany, speakerOrg, textNamesAccount } from '../research/claim-rules';
+import { factUrl, liveFactFailure, normalizeCompany, speakerOrg, textNamesAccount } from '../research/claim-rules';
 import { classifyContinuity } from '../research/continuity';
 import { normalizeCompanyName } from '../identity/normalize';
 import { DROP_REASONS, SEARCH_REDIRECT, axesOf, sourceReason, type AccountSource, type OutreachState, type SourceClaim, type VerificationState, type WhyFound } from './source-copy';
@@ -206,7 +206,9 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
   const eligibleKeys = new Set<string>();
   for (const r of factRows) {
     const meta = (r.metadata ?? {}) as Row;
-    if (!r.evidence_text || !r.evidence_url) continue;
+    // The publisher page (a claim resolved off a search redirect carries it in metadata.canonicalUrl).
+    const url = factUrl(r);
+    if (!r.evidence_text || !url) continue;
     const recheck = typeof meta.verified === 'string' && /failed_recheck$/.test(meta.verified);
     if (meta.verified !== 'excerpt_found_at_source' && !recheck) continue;
     const quote = String(r.evidence_text).trim().toLowerCase();
@@ -223,7 +225,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       outreach = 'NOT_ELIGIBLE';
       reason = `${sourceReason('failed_recheck', accountName)}${recheckReason ? `: ${sourceReason(recheckReason, accountName, third)}` : ''}`;
     } else {
-      const live = liveFactFailure(r.evidence_text, accountName, r.evidence_url);
+      const live = liveFactFailure(r.evidence_text, accountName, url);
       const kind = meta.continuity?.kind === 'ended' || meta.continuity?.kind === 'ongoing_state' ? meta.continuity.kind : classifyContinuity(r.evidence_text);
       const expired = r.freshness_expires_at ? new Date(r.freshness_expires_at).getTime() <= now.getTime() : false;
       const why = live ?? (kind === 'ended' ? 'fact_ended' : expired ? 'fact_expired' : null);
@@ -236,7 +238,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     if (verification === 'VERIFIED_AT_SOURCE') verifiedQuotes.add(quote);
     if (outreach === 'ELIGIBLE') eligibleQuotes.add(quote);
     const expires = r.freshness_expires_at ? new Date(r.freshness_expires_at) : null;
-    const s = make(r.evidence_url, {
+    const s = make(url, {
       title: r.title ?? null,
       publishedAt: iso(r.observed_at),
       discoveredAt: iso(meta.retrievedAt ?? r.updated_at ?? r.observed_at)!,

@@ -19,6 +19,7 @@
  * is never deleted). Nothing here creates, approves or activates anything.
  */
 import { DROP_REASONS, SEARCH_REDIRECT } from '../sources/source-copy';
+import { factUrl } from './claim-rules';
 import { outreachFactRefusal } from './evidence-gate';
 import { sellerRelevance, type SellerRelevance } from './continuity';
 import { hostBelongsToAccount } from './providers';
@@ -254,16 +255,16 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
     const k = isObj(meta.continuity) && meta.continuity.kind === 'ongoing_state' ? meta.continuity : null;
     const chain: SourceChain = {
       kind: s.source_type === 'public_primary' ? 'primary' : 'secondary',
-      source: { label: sourceName(s.evidence_url ?? null, s.account_name), url: s.evidence_url ?? null, date: new Date(s.observed_at).toISOString() },
+      source: { label: sourceName(factUrl(s), s.account_name), url: factUrl(s), date: new Date(s.observed_at).toISOString() },
       currentness: k ? linkOf(k.currentness, s.account_name) : null,
-      others: k && Array.isArray(k.otherSources) ? k.otherSources.map((o: unknown) => linkOf(o, s.account_name)).filter((x: ChainLink | null): x is ChainLink => !!x && x.url !== s.evidence_url) : [],
+      others: k && Array.isArray(k.otherSources) ? k.otherSources.map((o: unknown) => linkOf(o, s.account_name)).filter((x: ChainLink | null): x is ChainLink => !!x && x.url !== factUrl(s)) : [],
       basis: k ? 'corroborated' : 'publication',
     };
     const f: InboxFact = {
       signalId: s.id,
       quote: String(s.evidence_text ?? ''),
       sourceTitle: String(s.title ?? ''),
-      sourceUrl: s.evidence_url ?? null,
+      sourceUrl: factUrl(s),
       publishedAt: new Date(s.observed_at).toISOString(),
       retrievedAt,
       why: whyItQualifies(String(s.evidence_text ?? ''), retrievedAt),

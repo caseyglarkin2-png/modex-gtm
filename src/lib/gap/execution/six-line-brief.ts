@@ -14,6 +14,7 @@
  * dispositions, account holds and a bounded live HubSpot read. Nothing here
  * changes a gate: every send still runs its own checks at the click.
  */
+import { factUrl } from '../research/claim-rules';
 import { outreachFactRefusal } from '../research/evidence-gate';
 import { loadAccountFirstTouches } from '../motion/load';
 import { accountRepliedRecently } from '../replies/account-reply';
@@ -88,7 +89,7 @@ export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: Re
   const s = primary.signal;
   const observed = s.observed_at ? new Date(String(s.observed_at)).toISOString() : null;
   return {
-    fact: { title: String(s.title ?? ''), quote: String(s.evidence_text ?? ''), publishedAt: observed, url: (s.evidence_url as string | null) ?? null },
+    fact: { title: String(s.title ?? ''), quote: String(s.evidence_text ?? ''), publishedAt: observed, url: factUrl(s as { evidence_url?: string | null; metadata?: unknown }) },
     verified: true,
     supporting: verified.length - 1,
   };
