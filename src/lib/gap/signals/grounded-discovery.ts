@@ -175,19 +175,23 @@ export async function runGroundedDiscovery(
       // Read the page itself: a link that does not answer (a path the search made up, a dead page) is dropped,
       // and the card carries the page's OWN title and article date, never the search model's.
       const live = await (deps.fetchPage ?? defaultFetchPage)(page.url);
-      if (!live.ok || SEARCH_REDIRECT.test(live.finalUrl)) {
+      // Only a page that does not exist (404 / 410) or that lands on a redirect is dropped. A page that BLOCKS the
+      // reader (403, 429, bot protection, a refused connection) is a real cited page: kept, labelled unread, with
+      // the search's title marked as such (soak, 2026-10-02: maersk.com and businesswire.com block server reads).
+      if (live.ok ? SEARCH_REDIRECT.test(live.finalUrl) : /^(404|410)$/.test(live.status)) {
         res.dropped.dead += 1;
         continue;
       }
-      if (MARKET_CHATTER.test(live.title ?? '')) {
+      if (MARKET_CHATTER.test((live.ok ? live.title : null) ?? page.title)) {
         res.dropped.garbage += 1;
         continue;
       }
       res.kept += 1;
-      const realTitle = live.title || page.title || null;
+      const unread = !live.ok;
+      const realTitle = (live.ok ? live.title : null) || page.title || null;
       const r = await captureSignal(
         prisma,
-        { url: live.finalUrl, title: realTitle, publishedAt: live.publishedAt, sourceName: null, origin: 'discovery', actor: GROUNDED_DISCOVERY_ACTOR, now: opts.now, accountName: p.accountName, resolutionBasis: 'grounded_discovery' },
+        { url: live.ok ? live.finalUrl : page.url, title: realTitle, publishedAt: live.ok ? live.publishedAt : null, sourceName: null, origin: 'discovery', actor: GROUNDED_DISCOVERY_ACTOR, now: opts.now, accountName: p.accountName, resolutionBasis: 'grounded_discovery' },
         { fetchHtml: null },
       ).catch(() => null);
       if (!r || !r.ok) continue;
@@ -201,7 +205,7 @@ export async function runGroundedDiscovery(
       if (!named) res.mayBeRelevant += 1;
       const row: { metadata: Record<string, unknown> | null } | null = await prisma.gapSignal.findUnique({ where: { id: r.signal.id }, select: { metadata: true } }).catch(() => null);
       await prisma.gapSignal
-        .update({ where: { id: r.signal.id }, data: { metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls: page.cls || classes[0], claimedDate: live.publishedAt ? null : page.date, mayBeRelevant: !named } } } })
+        .update({ where: { id: r.signal.id }, data: { metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls: page.cls || classes[0], claimedDate: live.ok && live.publishedAt ? null : page.date, mayBeRelevant: !named, ...(unread ? { unread: true } : {}) } } } })
         .catch(() => undefined);
     }
     await prisma.gapAuditEvent.create({ data: { kind: GROUNDED_DISCOVERY_AUDIT, actor: GROUNDED_DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, created_at: opts.now, payload: JSON.parse(JSON.stringify(res)) } }).catch(() => undefined);
