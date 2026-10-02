@@ -119,7 +119,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       where: { OR: [{ account_name: accountName }, { metadata: { path: ['reassignedFrom'], equals: accountName } }] },
       orderBy: { created_at: 'desc' },
       take: 300,
-      select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true, account_name: true, resolution_basis: true, event_id: true },
+      select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true, account_name: true, resolution_basis: true, event_id: true, metadata: true },
     }),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, orderBy: { observed_at: 'desc' }, take: 200, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, updated_at: true, metadata: true } }),
     // Scout's cited pages for this company (its verdict is separate; its citations are sources).
@@ -332,7 +332,9 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       : rs === 'no_usable_fact' ? 'no_fact_sentence'
       : rs === 'fact_found' ? (verifiedQuotes.size ? 'fact_at_other_source' : 'fact_no_longer_passes')
       : g.resolution_basis === 'discovery_mention' ? 'mention_only'
+      : g.resolution_basis === 'grounded_discovery' ? 'grounded_found'
       : 'not_checked';
+    const grounded = ((g.metadata ?? {}) as Row).grounded as { cls?: string; mayBeRelevant?: boolean; claimedDate?: string | null } | undefined;
     const ax = axesOf(raw);
     const s = make(g.url, {
       title: g.title ?? null,
@@ -346,7 +348,11 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       // A contradiction on a page that holds an eligible claim is said, never swallowed: Casey judges it.
       verification: eligible && rs === 'contradiction' ? 'VERIFIED_AT_SOURCE' : ax.verification,
       outreach: eligible && rs === 'contradiction' ? 'NEEDS_HUMAN_JUDGMENT' : ax.outreach,
-      reason: eligible && rs === 'contradiction' ? 'another source contradicts it (resolve it in the Research lane)' : sourceReason(raw, accountName),
+      reason: eligible && rs === 'contradiction'
+        ? 'another source contradicts it (resolve it in the Research lane)'
+        : raw === 'grounded_found'
+          ? `${grounded?.mayBeRelevant ? 'May be relevant: the title does not name ' + accountName + '. ' : ''}Found by GAP's web search (${grounded?.cls ?? 'source classes'})${grounded?.claimedDate ? `; the search dated it ${grounded.claimedDate} (unchecked)` : ''}; not checked yet`
+          : sourceReason(raw, accountName),
       signalId: g.id,
       eventId: g.event_id ?? null,
       reviewed: !!g.feedback,
