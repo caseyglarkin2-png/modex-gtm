@@ -19,7 +19,8 @@ import { deriveFit, ENTITY_LABEL, FIT_LABEL, operatingClaims, type EntityType, t
 import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
-import { computeAccountMotion, titleSeniority } from '../motion/account-motion';
+import { computeAccountMotion } from '../motion/account-motion';
+import { isDefaultWhoLane, LANE_LABEL, rankWho, type PersonLane, type PersonRegion } from '../people/person-prior';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
 
@@ -265,6 +266,29 @@ export interface AccountIntelligenceBrief {
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
   /** The open deals when dealState is ACTIVE (name and stage as HubSpot said them moments ago). */
   deals: Array<{ name: string | null; stage: string | null }>;
+  /**
+   * WHO, from THE PERSON PRIOR (people/person-prior.ts): one primary person and one alternate, each with one sentence
+   * why, and the buyer map by lane. Lanes and reasons, never a score.
+   */
+  people: BuyerMap;
+}
+
+export interface MappedPerson {
+  name: string;
+  title: string | null;
+  lane: PersonLane;
+  laneLabel: string;
+  region: PersonRegion;
+  why: string;
+  reachable: boolean;
+  doNotContact: boolean;
+}
+
+export interface BuyerMap {
+  primary: MappedPerson | null;
+  alternate: MappedPerson | null;
+  /** Everyone on record, by lane (lanes with nobody are absent). */
+  lanes: Array<{ lane: PersonLane; label: string; people: MappedPerson[] }>;
 }
 
 // ---------------------------------------------------------------- helpers
@@ -897,11 +921,6 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
 
 const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ?? 'the primary person'}, on the verified fact.` : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
 
-/** Titles that plausibly touch the yard; still LIKELY, never ownership. */
-const OWNER_TITLE = /\b(supply chain|logistics|distribution|transportation|warehous|fulfil|yard|operations)\b/i;
-// Never the owner: buying, planning and support roles, and anyone not in the operating line (a board seat, a former
-// executive, business development, the CEO's office).
-const NOT_OWNER_TITLE = /\b(sourcing|procurement|purchasing|category|planning|planner|analyst|buyer|coordinator|specialist|intern|former|retired|board|advisor|investor|business development|project manager|ceo office|office of the ceo|chief of staff)\b/i;
 
 /** NETWORK in the 30-second view: a count (filing, registry, audit estimate, microsite), never a news sentence. */
 function networkHeadline(i: AccountInputs, footprint: Section): string {
@@ -1059,11 +1078,24 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const techPublic = sections.technology.statements.find((s) => s.truth === 'VERIFIED_PUBLIC');
   const currentTech = techBuyer ? techBuyer.text : techPublic ? `Public mention only: ${techPublic.text}` : 'Unknown';
   const dealStatement = sections.commercial.statements.find((s) => s.sources.some((x) => x.ref === 'deal-truth') || (s.truth === 'UNKNOWN' && /deal state|opportunity state/.test(s.text)));
-  const reach = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
-  // Who probably owns it: operations titles only (never sourcing, procurement, category, planning or analyst), most senior first.
-  const owners = (list: PersonaInput[]) => list.filter((p) => OWNER_TITLE.test(p.title ?? '') && !NOT_OWNER_TITLE.test(p.title ?? '')).sort((x, y) => titleSeniority(y.title) - titleSeniority(x.title));
-  // Nobody with an operations title is Unknown, never "the first contact on record".
-  const persona = owners(reach)[0] ?? owners(i.personas)[0];
+  // WHO: THE PERSON PRIOR (people/person-prior.ts). The operating owner of transportation / the freight network first
+  // (functional ownership, then US / North America remit, then network scope, then seniority); procurement, finance,
+  // R&D, sales, generic IT and unread titles are never the default. Nobody in an operating lane is Unknown, never
+  // "the first contact on record".
+  const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
+  const operating = ranked.filter((r) => isDefaultWhoLane(r.read.lane) && !r.candidate.doNotContact);
+  const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
+  // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
+  const persona = pick?.candidate.persona ?? ranked.find((r) => isDefaultWhoLane(r.read.lane))?.candidate.persona;
+  const mapped = (r: (typeof ranked)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact });
+  const people: BuyerMap = {
+    primary: pick ? mapped(pick) : null,
+    alternate: (() => {
+      const alt = operating.find((r) => r !== pick) ?? ranked.find((r) => r !== pick && !r.candidate.doNotContact && r.read.lane !== 'NON_OPERATING' && r.read.lane !== 'NEEDS_REVIEW') ?? null;
+      return alt ? mapped(alt) : null;
+    })(),
+    lanes: [...new Set(ranked.map((r) => r.read.lane))].map((lane) => ({ lane, label: LANE_LABEL[lane], people: ranked.filter((r) => r.read.lane === lane).map(mapped) })),
+  };
   const motion = accountMotion(i, hypotheses, now, persona);
   const fragment = persona && /^\S+$|\s\S\.?$/.test(persona.name.trim()) ? ' (name incomplete in the CRM)' : '';
   const owner = persona
@@ -1090,5 +1122,5 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     family: familyLine(i),
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, family: i.family ? { parentName: i.family.parentName, members: i.family.members, hold: i.family.hold, separate: i.family.separate } : null, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion };
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, family: i.family ? { parentName: i.family.parentName, members: i.family.members, hold: i.family.hold, separate: i.family.separate } : null, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion, people };
 }

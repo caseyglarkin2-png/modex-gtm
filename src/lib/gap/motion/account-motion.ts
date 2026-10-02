@@ -24,6 +24,7 @@
  * Calls and LinkedIn are human judgment: this only governs EMAIL cards.
  */
 import { addBusinessDays } from '../sequence/business-days';
+import { LANE_LABEL, priorKey, readPerson, titleSeniority } from '../people/person-prior';
 
 export const MOTION_UNLOCK_BUSINESS_DAYS = 5;
 export const ACCOUNT_MOTION = 'account.motion' as const;
@@ -80,15 +81,7 @@ export interface AccountMotion {
   pausedBy?: { from: string; receivedAt: string };
 }
 
-/** Seniority from the title words (5 exec .. 1 other). */
-export function titleSeniority(title: string | null | undefined): number {
-  const t = String(title ?? '').toLowerCase();
-  if (/\bchief\b|\bc[a-z]?o\b|\bcsco\b|president/.test(t)) return 5;
-  if (/\b(svp|evp|avp|vp)\b|vice president/.test(t)) return 4;
-  if (/director|\bhead\b/.test(t)) return 3;
-  if (/manager|lead\b/.test(t)) return 2;
-  return 1;
-}
+export { titleSeniority } from '../people/person-prior';
 
 const SENIORITY_WORD: Record<number, string> = { 5: 'executive', 4: 'VP', 3: 'director', 2: 'manager', 1: 'individual contributor' };
 
@@ -99,15 +92,19 @@ export function rankCandidates(cards: readonly MotionCard[], thesisKeys: Readonl
       const sen = titleSeniority(card.persona.title);
       const relevant = card.persona.personaKey ? thesisKeys.has(card.persona.personaKey) : false;
       const reachable = (card.persona.email ? 1 : 0) + (card.persona.phone ? 1 : 0);
+      // THE PERSON PRIOR (people/person-prior.ts), the same order the account brief's WHO uses: operating lane, then
+      // US / North America remit, then network scope; then the thesis role, seniority and reachability.
+      const read = readPerson(card.persona.title);
       const factors = [
-        `${SENIORITY_WORD[sen]}${card.persona.title ? ` (${card.persona.title})` : ''}`,
+        `${LANE_LABEL[read.lane]}${card.persona.title ? ` (${card.persona.title})` : ''}`,
+        read.region === 'US_NA' ? 'US / North America remit stated' : read.regionWhy,
+        SENIORITY_WORD[sen],
         relevant ? `matches the thesis role (${String(card.persona.personaKey).replace(/_/g, ' ')})` : 'outside the thesis role',
         reachable === 2 ? 'email and phone' : card.persona.email ? 'email only' : 'no email',
       ];
-      // Relevance first (the right function), then seniority, then reachability, then name.
-      return { card, factors, key: [relevant ? 1 : 0, sen, reachable] };
+      return { card, factors, key: [...priorKey(read), relevant ? 1 : 0, sen, reachable] };
     })
-    .sort((x, y) => y.key[0] - x.key[0] || y.key[1] - x.key[1] || y.key[2] - x.key[2] || String(x.card.persona.displayName ?? '').localeCompare(String(y.card.persona.displayName ?? '')) || x.card.id.localeCompare(y.card.id));
+    .sort((x, y) => x.key.reduce((d, _, k) => d || y.key[k] - x.key[k], 0) || String(x.card.persona.displayName ?? '').localeCompare(String(y.card.persona.displayName ?? '')) || x.card.id.localeCompare(y.card.id));
 }
 
 const nameOf = (c: MotionCard) => c.persona.displayName?.trim() || c.persona.email || `person ${c.persona.id}`;

@@ -46,6 +46,9 @@ const HUMAN: Partial<Record<SectionKey, string>> = {
   yard: 'How do trailers get checked in and found today? (ask; the satellite audit cannot see process)',
 };
 
+/** Contact discovery that follows the person prior (V2): the questions, then where to look; never an auto-created contact. */
+export const CONTACT_DISCOVERY = 'Find the transportation operating owner: who owns transportation operations in the US / North America, transportation and warehousing, the private fleet, distribution transportation or network logistics execution? Look in HubSpot contacts and the contact candidates first, then public sources; surface candidates for Casey (no contact is created automatically).';
+
 // What each section unblocks, in order. The order IS the priority; there is no weight.
 const ORDER: Array<{ section: SectionKey; why: string }> = [
   { section: 'catalysts', why: 'No live verified fact gates contact: nothing public to open on yet.' },
@@ -138,6 +141,10 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
       else if (empty) skipped.push({ section, reason: `The same focus found no outreach evidence for this section on ${empty.at.slice(0, 10)} (what it did find is under Sources / signals); not repeated for 14 days.` });
       else if (recent) skipped.push({ section, reason: `Researched on ${recent.at.slice(0, 10)}; once a day per section.` });
       else tasks.push({ section, depth: 'DEEPEN', provider: 'research', focus, why: s.status === 'STALE' ? `Stale: ${why}` : why });
+    } else if (section === 'org' && brief.people && brief.people.primary?.lane !== 'PRIMARY_OPERATOR') {
+      // The person prior (people/person-prior.ts): no transportation operating owner on record, so contact discovery
+      // looks for that person first. Candidates surface for Casey; GAP never creates a contact.
+      tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: `${CONTACT_DISCOVERY}${brief.people.primary ? ` Best on record now: ${brief.people.primary.name}${brief.people.primary.title ? `, ${brief.people.primary.title}` : ''} (${brief.people.primary.laneLabel.toLowerCase()}).` : ''} Then ask: ${HUMAN.org}`, why: 'No US / North America transportation operating owner on record: the person Casey sells to best.' });
     } else if (HUMAN[section]) {
       tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: HUMAN[section]!, why });
     }
