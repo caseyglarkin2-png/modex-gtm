@@ -3,7 +3,7 @@
 STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE.
 <!-- verified:2026-10-02 -->
 
-Production SHA: recorded in the "Release" section below (updated by the session that ships a change).
+Production SHA: `762da572c2219a8723946de5cfdad09b1314fc76` (deployment dpl_7qsSxFP4Viy42qieuQuNAHaBkpJS, READY 2026-10-02). Update this line when a change ships.
 
 ## The rule for future changes
 
@@ -107,4 +107,10 @@ a Claude session. A future session starts from the Open notes, applies the rule 
 
 Stabilization PRs: #348 (truth vocabulary, Verify only verifies), #349 (source ledger gaps), #350 (dogfood notes),
 #351 (grounded discovery), and the final-review PR (attribution forms, contradictions, mirrors, Note reachable, E2E
-opportunity truth). Production SHA and the dogfood receipt: see the final-review PR and the section below.
+opportunity truth), #352. Merge SHAs: #348 5f8e0a8c, #349 a59458df, #350 933f172f, #351 64885971, #352 762da572.
+
+Acceptance on 762da572 (2026-10-02): full unit suite 575 files / 6386 passed; typecheck clean; all 17 GAP E2Es green
+(224 checks); production 390px smoke (7 pages) and desktop smoke (4 pages) with no horizontal overflow; health
+HEALTHY (mailbox, HubSpot, suppression, sender, routing); feedback journey verified end to end (secret query value
+stripped, unknown field dropped, build recorded, note dismissed). Semantic dogfood of 10 accounts + an MMYQB candidate
++ a NOT_FIT candidate: `docs/gap/semantic-dogfood-latest.md`.
