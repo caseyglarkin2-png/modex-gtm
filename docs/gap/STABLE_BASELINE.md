@@ -1,9 +1,9 @@
 # GAP stable baseline
 
 STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE.
-<!-- verified:2026-10-02 -->
+<!-- verified:2026-10-02 (soak) -->
 
-Production SHA: `762da572c2219a8723946de5cfdad09b1314fc76` (deployment dpl_7qsSxFP4Viy42qieuQuNAHaBkpJS, READY 2026-10-02). Update this line when a change ships.
+Production SHA: `ca85a0600f82e61930dc0a65a8902804ba60e6ed` (deployment dpl_3MWGBEWgw7EHMKkFtw5WPLrJWVgx, READY, soak-verified 2026-10-02). Update this line when a change ships.
 
 ## The rule for future changes
 
@@ -114,3 +114,22 @@ Acceptance on 762da572 (2026-10-02): full unit suite 575 files / 6386 passed; ty
 HEALTHY (mailbox, HubSpot, suppression, sender, routing); feedback journey verified end to end (secret query value
 stripped, unknown field dropped, build recorded, note dismissed). Semantic dogfood of 10 accounts + an MMYQB candidate
 + a NOT_FIT candidate: `docs/gap/semantic-dogfood-latest.md`.
+
+## Soak (2026-10-02)
+
+Production soak of the baseline: health HEALTHY on every read over ~11h; crons ok with 0 consecutive failures; no
+stuck research, signals or send/draft claims; no account auto-created, person merged, buyer truth confirmed,
+hypothesis approved or activated, draft, send or enrollment; 147 sources sampled with 0 semantic leaks; Verify proven
+side-effect-free on scratch (automatic discovery still promotes); feedback dogfooded end to end with no secret in the
+packet; seller journeys 200 at desktop and 390px. Three verified P1s fixed (RED, GREEN, mutation proof each):
+
+- #354: grounded discovery dropped cited pages that block a server read (403, refused connection) as dead; they are
+  now kept, labelled unread (verified in production: 14 kept, 0 dead).
+- #355: a web-research fact took the search model's date; it is now dated by its page (article metadata or a
+  dateline), and an undated page is not verified. Stricter only.
+- #355: a thesis held for "a better current fact exists" had no exit in the product; it is now a review reason, so
+  Reviewed, keep it shows and clears it (verified on the General Mills page; the decision stays Casey's).
+
+Recorded, not fixed (P2): fund-holdings chatter and place-name collisions among discovery mentions; the call-mode
+"FACT OBSERVED" label on a 10-K keyword hit; grounded rotation would treat a content failure as transient if a
+provider key were missing (all three keys are set in production). Both soak notes are in /gap/feedback.
