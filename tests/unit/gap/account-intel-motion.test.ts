@@ -66,6 +66,30 @@ describe('account motion', () => {
     // an alias recorded on another account name is enough
     expect(buildAccountBrief(inputs({ aliases: ['Danone North America'] }), NOW).motion.type).toBe('INTRO_ONLY');
   });
+  it('V2 WHO: one primary and one alternate from the person prior, each with a sentence why; the buyer map by lane; never procurement', () => {
+    const b = buildAccountBrief(inputs({ personas: [
+      { id: 1, name: 'Pat Sourcing', title: 'Director of Transportation Strategic Sourcing', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
+      { id: 2, name: 'Vic VP', title: 'VP Supply Chain', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
+      { id: 3, name: 'Dana Trans', title: 'NA Transportation Operations Director', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
+    ] }), NOW);
+    expect(b.people.primary).toMatchObject({ name: 'Dana Trans', lane: 'PRIMARY_OPERATOR', region: 'US_NA' });
+    expect(b.people.primary!.why).toMatch(/^Primary operator: .*US \/ North America remit stated/);
+    expect(b.people.alternate).toMatchObject({ name: 'Vic VP', lane: 'ADJACENT_OPERATOR' });
+    expect(b.people.lanes.map((l) => l.lane)).toEqual(['PRIMARY_OPERATOR', 'ADJACENT_OPERATOR', 'PROCUREMENT_COMMERCIAL']);
+    expect(b.motion).toMatchObject({ type: 'FACT_LED', who: 'Dana Trans' });
+    // Only procurement on record: no primary, and fact-led never goes to the sourcing director.
+    const s = buildAccountBrief(inputs({ personas: [{ id: 1, name: 'Pat Sourcing', title: 'Director of Transportation Strategic Sourcing', doNotContact: false, hasEmail: true, emailStatus: 'valid' }] }), NOW);
+    expect(s.people.primary).toBeNull();
+    expect(s.motion.who).toBeNull();
+  });
+  it('V2: research asks for the US / NA transportation operating owner when none is on record, never when one is', async () => {
+    const { planResearch, CONTACT_DISCOVERY } = await import('@/lib/gap/account-intel/orchestrate');
+    const noOwner = buildAccountBrief(inputs({ facts: [], personas: [{ id: 2, name: 'Vic VP', title: 'VP Supply Chain', doNotContact: false, hasEmail: true, emailStatus: 'valid' }] }), NOW);
+    const org = planResearch(noOwner, [], NOW).tasks.find((t) => t.section === 'org');
+    expect(org?.focus).toBe(`${CONTACT_DISCOVERY} Best on record now: Vic VP, VP Supply Chain (adjacent operator). Then ask: Who owns yard performance across the plants and DCs? (ask; never guessed from a title)`);
+    const owner = buildAccountBrief(inputs({ facts: [], personas: [{ id: 3, name: 'Dana Trans', title: 'NA Transportation Operations Director', doNotContact: false, hasEmail: true, emailStatus: 'valid' }] }), NOW);
+    expect(planResearch(owner, [], NOW).tasks.find((t) => t.section === 'org')?.focus).not.toContain('Find the transportation operating owner');
+  });
   it('the glance names the motion', () => {
     expect(buildAccountBrief(inputs(), NOW).glance.motion).toBe('Fact-led: Dana Ops, on the verified fact.');
   });

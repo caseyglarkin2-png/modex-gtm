@@ -24,12 +24,17 @@ const mgr = card('mgr', 3, 'Supply Chain Manager', 'supply_chain');
 const base = { accountName: 'PepsiCo', choice: null, firstTouches: [], replyHold: null, now: NOW };
 
 describe('titleSeniority / rankCandidates: visible factors, no score', () => {
-  it('ranks relevance to the thesis role, then seniority, then reachability, and says why', () => {
+  // V2 (Casey's person prior, 2026-10-02): the same order as the account brief's WHO. Operating lane, US / North
+  // America remit and network scope come before the thesis role and seniority, so a network director of DC operations
+  // outranks a supply chain manager who merely matches the thesis role.
+  it('ranks by the person prior (lane, region, scope), then the thesis role, seniority and reachability, and says why', () => {
     expect(titleSeniority('SVP, Chief Supply Chain Officer')).toBe(5);
     expect(titleSeniority('VP Supply Chain')).toBe(4);
     const r = rankCandidates([mgr, dir, vp], new Set(['supply_chain']));
-    expect(r.map((x) => x.card.id)).toEqual(['vp', 'mgr', 'dir']);
-    expect(r[0].factors).toEqual(['VP (VP Supply Chain)', 'matches the thesis role (supply chain)', 'email and phone']);
+    expect(r.map((x) => x.card.id)).toEqual(['vp', 'dir', 'mgr']);
+    expect(r[0].factors).toEqual(['Adjacent operator (VP Supply Chain)', "US location unknown (no remit stated; the company's country is not the person's)", 'VP', 'matches the thesis role (supply chain)', 'email and phone']);
+    const t = rankCandidates([vp, card('tr', 4, 'NA Transportation Operations Director', 'distribution')], new Set(['supply_chain']));
+    expect(t[0].card.id).toBe('tr');
   });
 });
 
@@ -39,11 +44,11 @@ describe('computeAccountMotion', () => {
     expect(m.state).toBe('ready');
     expect(m.primary).toMatchObject({ personaId: 1, chosen: false });
     expect(m.heldCardIds.sort()).toEqual(['dir', 'mgr']);
-    expect(m.next).toMatchObject({ personaId: 3 });
+    expect(m.next).toMatchObject({ personaId: 2 });
     expect(m.next!.unlock).toContain('5 business days with no response');
     expect(m.headline).toBe('Suggested primary: VP Person.');
     // Review C P1: nobody held is invisible. The third person is listed and choosable.
-    expect(m.alsoWaiting.map((p) => p.personaId)).toEqual([2]);
+    expect(m.alsoWaiting.map((p) => p.personaId)).toEqual([3]);
   });
 
   it('an outstanding first-touch draft holds the account until it is sent or deleted, however old', () => {
