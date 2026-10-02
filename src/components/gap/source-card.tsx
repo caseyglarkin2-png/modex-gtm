@@ -1,20 +1,29 @@
 'use client';
 /**
  * One source card (research aperture). Provenance first: publisher, date and age, the headline as the link, the
- * page's own words (a search summary is labelled, never quoted), who said it. Then the evidence status with the
- * factual reason. GAP's "why found" themes come last and are advisory only: nothing is hidden on them.
+ * page's own words (a search summary is labelled, never quoted), who made the claim. Then the claim on its two
+ * axes: VERIFIED AT SOURCE (or not) and ELIGIBLE AS OUTREACH EVIDENCE (or not), with the factual reason. GAP's
+ * "why found" themes come last and are advisory only: nothing is hidden on them.
  */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ageLabel, STATUS_LABEL, type AccountSource } from '@/lib/gap/sources/source-copy';
+import { ageLabel, claimLine, OUTREACH_LABEL, VERIFICATION_LABEL, type AccountSource, type OutreachState, type VerificationState } from '@/lib/gap/sources/source-copy';
 
-const STATUS_TONE: Record<AccountSource['status'], string> = {
-  VERIFIED_FOR_OUTREACH: 'border-emerald-600/50 text-emerald-700 dark:text-emerald-400',
-  NOT_VERIFIED_FOR_OUTREACH: 'border-[var(--border)] text-[var(--muted-foreground)]',
+const VERIFICATION_TONE: Record<VerificationState, string> = {
+  VERIFIED_AT_SOURCE: 'border-emerald-600/50 text-emerald-700 dark:text-emerald-400',
+  VERIFYING: 'border-[var(--border)] text-[var(--muted-foreground)]',
+  UNCHECKED: 'border-[var(--border)] text-[var(--muted-foreground)]',
   COULD_NOT_VERIFY: 'border-amber-500/50 text-amber-700 dark:text-amber-400',
+  CONTRADICTED: 'border-red-600/50 text-red-700 dark:text-red-400',
+};
+const OUTREACH_TONE: Record<OutreachState, string> = {
+  ELIGIBLE: 'border-emerald-600/50 text-emerald-700 dark:text-emerald-400',
+  NOT_ELIGIBLE: 'border-[var(--border)] text-[var(--muted-foreground)]',
+  NOT_EVALUATED: 'border-[var(--border)] text-[var(--muted-foreground)]',
+  NEEDS_HUMAN_JUDGMENT: 'border-amber-500/50 text-amber-700 dark:text-amber-400',
 };
 
-const ORIGIN: Record<AccountSource['origin'], string> = { casey_shared: 'You shared', gap_discovered: 'GAP found (news)', gap_research: 'GAP found (research)' };
+const ORIGIN: Record<AccountSource['origin'], string> = { casey_shared: 'You shared', gap_discovered: 'GAP found (news)', gap_research: 'GAP found (research)', scout: 'Scout citation' };
 
 const REFUSAL: Record<string, string> = {
   other_account: 'This link is filed under another account.',
@@ -35,7 +44,13 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
       const body = (await res.json().catch(() => ({}))) as { error?: string; detail?: string | null };
       if (!res.ok) setMsg(`${REFUSAL[body.error ?? ''] ?? 'Could not save that.'}${body.detail ? ` (${body.detail})` : ''}`);
       else {
-        setMsg(op === 'verify' ? 'Queued for the evidence check. If it does not qualify, it stays here with the reason.' : op === 'ignore' ? 'Set aside (not deleted).' : 'Unassigned; name the right account in Signal intake.');
+        setMsg(
+          op === 'verify'
+            ? 'Queued for a check at the source. Checking only: nothing is alerted, drafted or sent. If it does not verify, it stays here with the reason.'
+            : op === 'ignore'
+              ? 'Set aside (not deleted).'
+              : 'Unassigned; name the right account in Signal intake.',
+        );
         router.refresh();
       }
     } catch {
@@ -49,7 +64,7 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
   const btn = 'rounded-md border border-[var(--border)] px-2 py-1 hover:bg-[var(--muted)] disabled:opacity-50';
   const max = compact ? 240 : 1200;
   return (
-    <li data-testid="source-card" data-status={s.status} className="min-w-0 space-y-1 border-b border-[var(--border)] py-2 text-sm last:border-0">
+    <li data-testid="source-card" data-verification={s.verification} data-outreach={s.outreach} className="min-w-0 space-y-1 border-b border-[var(--border)] py-2 text-sm last:border-0">
       <p className="text-xs text-[var(--muted-foreground)]" data-testid="source-provenance">
         <span className="font-semibold text-[var(--foreground)]">{s.publisher || 'publisher not recorded'}</span> · {ageLabel(s.publishedAt, s.ageDays)}
         {s.publishedAt && !s.freshTrigger ? (
@@ -77,28 +92,30 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
       ) : null}
       {s.attribution ? (
         <p className="text-xs" data-testid="source-attribution">
-          Said by {s.attribution} (third party), not {accountName}.
+          Claim made by {s.attribution} (third party), not {accountName}.
         </p>
       ) : null}
       {s.alsoOnPage?.length ? (
         <details className="text-xs" data-testid="source-also">
           <summary className="cursor-pointer text-[var(--muted-foreground)]">
-            {s.alsoOnPage.length} other {s.alsoOnPage.length === 1 ? 'statement' : 'statements'} on this page
+            {s.alsoOnPage.length} other {s.alsoOnPage.length === 1 ? 'claim' : 'claims'} on this page
           </summary>
           <ul className="mt-1 space-y-1">
             {s.alsoOnPage.map((a) => (
               <li key={a.excerpt} className="break-words">
                 {quoteMarks(clip(a.excerpt, 240))}
-                {a.attribution ? ` Said by ${a.attribution} (third party), not ${accountName}.` : ''} <span className="font-semibold">{STATUS_LABEL[a.status]}</span>
-                {a.reason ? `: ${a.reason}` : ''}
+                {a.attribution ? ` Claim made by ${a.attribution} (third party), not ${accountName}.` : ''} <span className="font-semibold">{claimLine(a)}</span>
               </li>
             ))}
           </ul>
         </details>
       ) : null}
       <p className="flex flex-wrap items-center gap-1.5 text-xs">
-        <span data-testid="source-status" className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${STATUS_TONE[s.status]}`}>
-          {STATUS_LABEL[s.status]}
+        <span data-testid="source-verification" className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${VERIFICATION_TONE[s.verification]}`}>
+          {VERIFICATION_LABEL[s.verification]}
+        </span>
+        <span data-testid="source-outreach" className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${OUTREACH_TONE[s.outreach]}`}>
+          {OUTREACH_LABEL[s.outreach]}
         </span>
         {s.reason ? <span data-testid="source-reason">{s.reason}</span> : null}
       </p>
@@ -114,10 +131,16 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
             Open source<span className="sr-only"> (opens in a new tab)</span>
           </a>
         )}
-        {s.status !== 'VERIFIED_FOR_OUTREACH' ? (
+        {s.verification === 'UNCHECKED' || s.verification === 'COULD_NOT_VERIFY' ? (
           <button type="button" disabled={!!busy} onClick={() => act('verify')} className={btn} data-testid="source-verify">
-            {busy === 'verify' ? 'Queuing' : 'Verify as evidence'}
+            {busy === 'verify' ? 'Queuing' : 'Verify claim'}
           </button>
+        ) : null}
+        {s.outreach === 'ELIGIBLE' ? (
+          // The existing audited evidence workflow: USE in the Research lane links it to a thesis, never approves.
+          <a href="/gap?lane=research" className={btn} data-testid="source-use">
+            Use as outreach evidence
+          </a>
         ) : null}
         {compact || !researchHref ? null : (
           <a href={researchHref} className={btn} data-testid="source-research-more">

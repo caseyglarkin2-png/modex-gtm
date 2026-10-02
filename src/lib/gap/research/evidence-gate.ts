@@ -22,6 +22,7 @@
  * not a public, verifiable fact, so it cannot be the first-touch fact either.
  */
 import { isPhysicalOpsFact, splitSentencesAware } from './facts';
+import { liveFactFailure } from './claim-rules';
 import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
 
@@ -49,7 +50,11 @@ export type OutreachFactRefusal =
   | 'other_account'
   | 'not_a_physical_network_change'
   /** Evidence continuity: a newer source says this program ended. */
-  | 'superseded';
+  | 'superseded'
+  /** Stabilization A: the claim is another organization's (a vendor quoted about the account). */
+  | 'third_party_statement'
+  /** Stabilization A: stored on a search-redirect link; no publisher page Casey can open. */
+  | 'redirect_source';
 
 /** The verification stamp research writes when the excerpt was found in the fetched source (research/run.ts). */
 export const VERIFIED_EXCERPT = 'excerpt_found_at_source';
@@ -76,6 +81,10 @@ export function outreachFactRefusal(s: GateSignal, accountName: string): Outreac
   if (!isPhysicalOpsFact(text)) return 'not_a_physical_network_change';
   const continuity = isObj(s.metadata) && isObj(s.metadata.continuity) ? s.metadata.continuity : null;
   if (continuity && continuity.kind === 'ended') return 'superseded';
+  // The same stored-claim rules the brief applies: attribution and a real publisher link.
+  const live = liveFactFailure(text, accountName, s.evidence_url ?? null);
+  if (live === 'redirect_unresolved') return 'redirect_source';
+  if (live === 'quoted_third_party') return 'third_party_statement';
   return null;
 }
 

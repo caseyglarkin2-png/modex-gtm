@@ -186,7 +186,7 @@ export async function loadAccountInputs(
     // Re-gated on read: a fact stored before a rule tightened (a software rollout, a 10-K description, an acquired
     // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
     // A quote attributed to another organization (a vendor's CEO about this account) is that organization's fact.
-    if (liveFactFailure(r.evidence_text, accountName)) continue;
+    if (liveFactFailure(r.evidence_text, accountName, r.evidence_url)) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,

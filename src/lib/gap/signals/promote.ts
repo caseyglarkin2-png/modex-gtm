@@ -19,7 +19,7 @@ import { storyTokens } from './research';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type PromoteRefusal = 'not_found' | 'not_resolved' | 'not_verified' | 'no_link' | 'already_promoted' | 'ignored' | 'not_recent' | 'undated';
+export type PromoteRefusal = 'not_found' | 'not_resolved' | 'not_verified' | 'no_link' | 'already_promoted' | 'ignored' | 'not_recent' | 'undated' | 'manual_verify';
 
 /**
  * Production dogfood fix (2026-09-28): a trigger is something happening NOW. A verified story published more than
@@ -54,6 +54,8 @@ export async function promoteSignal(
   const s: Record<string, unknown> | null = await prisma.gapSignal.findUnique({ where: { id } });
   if (!s) return { ok: false, reason: 'not_found' };
   if (s.promoted_trigger_id) return { ok: false, reason: 'already_promoted' };
+  // Stabilization B: a source Casey asked GAP to verify is only verified. No trigger, no Slack, no HubSpot heat.
+  if ((s.metadata as { manualVerify?: unknown } | null)?.manualVerify) return { ok: false, reason: 'manual_verify' };
   if (s.feedback && s.feedback !== 'use' && s.feedback !== 'good_context') return { ok: false, reason: 'ignored' };
   if (s.resolution !== 'resolved' || !s.account_name) return { ok: false, reason: 'not_resolved' };
   if (s.research_status !== 'fact_found') return { ok: false, reason: 'not_verified' };

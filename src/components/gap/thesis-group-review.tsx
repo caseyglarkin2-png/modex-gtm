@@ -75,7 +75,7 @@ const NEXT_WORDS: Record<string, string> = {
   none: 'closed',
 };
 const READINESS_WORDS: Record<string, string> = {
-  evidence_insufficient: 'no verified fact yet',
+  evidence_insufficient: 'no outreach evidence yet',
   evidence_expired: 'evidence expired',
   no_evidence: 'no evidence',
   opener_too_long: 'opener too long',
@@ -348,7 +348,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
                   <p className="mt-1 text-[var(--muted-foreground)]" data-testid="hold">
                     {ready
                       ? 'Nothing fresh and independent was verified. Holding is a complete answer: close this and research later, or approve on what the thesis has.'
-                      : 'No verified fact was found. Holding is a complete answer: this thesis stays in Research and there is nothing to approve yet. Research again later.'}
+                      : 'No outreach evidence was found (what research did find is under the account\'s Sources / signals). Holding is a complete answer: this thesis stays in Research and there is nothing to approve yet. Research again later.'}
                   </p>
                 ) : null}
               </div>

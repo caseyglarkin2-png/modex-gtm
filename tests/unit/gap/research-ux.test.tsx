@@ -171,10 +171,10 @@ describe('production dogfood findings (2026-09-28)', () => {
     expect(gm.ready.filter((f) => f.quote === GM_NETWORK)).toHaveLength(1);
   });
 
-  it('a search-grounding redirect link is named as one, never as a publisher', async () => {
+  it('a claim stored on a search-grounding redirect link is never offered as outreach evidence (no publisher page to open)', async () => {
     const redirected = { ...gmNetwork, source_type: 'public_secondary', evidence_url: 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/abc' };
     const [gm] = (await loadEvidenceInbox(inboxDb([redirected]), NOW)).filter((a) => a.accountName === 'General Mills');
-    expect(gm.ready[0].chain.source.label).toBe('search redirect link');
+    expect(gm?.ready ?? []).toHaveLength(0);
   });
 });
 
