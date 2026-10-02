@@ -102,7 +102,7 @@ const webFact = (): Candidate => ({ provider: 'web', url: 'https://news.example/
 const research = (candidates: Candidate[]) => ({
   edgar: async () => ({ candidates: [], note: 'no cik' }),
   web: async () => ({ candidates, note: 'test' }),
-  fetchText: async () => `PepsiCo news. ${FACT}`,
+  fetchText: async () => ({ text: `PepsiCo news. ${FACT}`, publishedAt: new Date('2026-09-20') }),
 });
 
 describe('runBackgroundResearch', () => {

@@ -33,7 +33,7 @@ vi.mock('@/lib/prisma', () => ({ prisma: fakePrisma }));
 vi.mock('@/lib/gap/signals/registry', () => ({ registerSignal: mockedRegister }));
 vi.mock('@/lib/gap/hypothesis/service', () => ({ linkSignals: mockedLink, unlinkSignal: mockedUnlink }));
 // No network in unit tests: the source re-fetch is stubbed (default: unreadable).
-vi.mock('@/lib/gap/research/providers', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/research/providers')>()), defaultFetchText: (url: string) => mockedFetchText(url) }));
+vi.mock('@/lib/gap/research/providers', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/research/providers')>()), defaultFetchText: (url: string) => mockedFetchText(url), defaultFetchPage: (url: string) => mockedFetchText(url) }));
 
 const { POST: registerPOST } = await import('@/app/api/gap/signals/route');
 const { POST: linkPOST, DELETE: unlinkDELETE } = await import('@/app/api/gap/hypotheses/[id]/signals/route');

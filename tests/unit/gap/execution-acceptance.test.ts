@@ -107,7 +107,19 @@ describe('a thesis that needs review is never actionable', () => {
     expect(r.bestFact).toMatch(/redesign the plant and warehouse network/);
     expect(r.opener).toMatch(/business in Brazil/);
     // the brief and the gate agree: the account brief routes to review on the same inputs
-    expect(buildAccountBrief(gm('fb'), T).glance.nextAction).toMatch(/^Review the thesis before any first touch/);
+    // (soak P1: the same review path as every other review reason, so "Reviewed, keep it" shows for it)
+    expect(buildAccountBrief(gm('fb'), T).glance.nextAction).toMatch(/^Do not contact yet: the approved thesis needs review/);
+  });
+  it('soak P1: the "better current fact" hold is a review reason, so Reviewed, keep it shows for it; Casey keeping it clears the hold', () => {
+    const brief = buildAccountBrief(gm('fb'), T);
+    expect(brief.hypotheses.find((h) => h.id === 'h-gm')!.needsReview.join(' ')).toMatch(/opens on activity outside the US network, but a better current fact exists/);
+    const kept = gm('fb') as AccountInputs;
+    kept.hypotheses[0].reviewAckAt = '2026-10-01T09:00:00Z';
+    expect(thesisCurrentness(kept, 'h-gm', T)).toEqual({ current: true });
+    // An acknowledgement older than the better fact does not clear it: Casey has not seen that fact yet.
+    const stale = gm('fb') as AccountInputs;
+    stale.hypotheses[0].reviewAckAt = '2020-01-01T00:00:00Z';
+    expect(thesisCurrentness(stale, 'h-gm', T).current).toBe(false);
   });
   it('the same thesis grounded on the best fact is current', () => {
     expect(thesisCurrentness(gm('fr'), 'h-gm', T)).toEqual({ current: true });

@@ -26,7 +26,7 @@ describe('re-anchoring a paraphrase to the page sentence', () => {
     const page = 'Distribution roundup. Sysco opened a new distribution center in Houston, Texas, adding 250 jobs to the region in 2026. Walmart will close its Memphis distribution center in May.';
     expect(pageSentenceFor('US Foods opened a new distribution center in Houston, Texas, adding 250 jobs in 2026.', page)).toBeNull();
     expect(pageSentenceFor('Kroger will close its Memphis distribution center in May.', page)).toBeNull();
-    const v = await verifyCandidate(cand({ excerpt: 'Kroger will close its Memphis distribution center in May.', url: 'https://news.example/roundup' }), verificationContext('Kroger', async () => `Kroger news roundup. ${page}`));
+    const v = await verifyCandidate(cand({ excerpt: 'Kroger will close its Memphis distribution center in May.', url: 'https://news.example/roundup' }), verificationContext('Kroger', async () => ({ text: `Kroger news roundup. ${page}`, publishedAt: new Date('2026-09-01T00:00:00Z') })));
     expect(v.ok).toBe(false);
   });
 
@@ -38,7 +38,7 @@ describe('re-anchoring a paraphrase to the page sentence', () => {
     expect(pageSentenceFor('Acme closed its distribution center in Stockton, California in March 2026.', page)).toBeNull();
   });
   it('verification stores the verbatim page sentence for a web proposal', async () => {
-    const v = await verifyCandidate(cand(), verificationContext('Kroger', async () => PAGE));
+    const v = await verifyCandidate(cand(), verificationContext('Kroger', async () => ({ text: PAGE, publishedAt: new Date('2026-09-01T00:00:00Z') })));
     expect(v).toMatchObject({ ok: true, excerpt: expect.stringMatching(/^The Kroger Co\. will open a new 400,000 square foot/) });
   });
   it('a hand-typed or EDGAR fact stays strictly verbatim (no re-anchoring)', async () => {

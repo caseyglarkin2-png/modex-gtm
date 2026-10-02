@@ -14,6 +14,7 @@
 import { extractFactSentences, htmlToText } from './facts';
 import type { PageResult } from '../signals/research';
 import { normalizeCompany } from './claim-rules';
+import { parseSignalMeta } from '../signals/intake';
 import { askGrounded, defaultProviders, type ScoutProvider } from '../entity/providers';
 
 export interface Candidate {
@@ -30,6 +31,25 @@ export interface Candidate {
 export type FetchText = (url: string) => Promise<string>;
 
 const SEC_UA = 'YardFlow GAP research casey@yardflow.ai';
+
+/** A page read for verification: its text and its OWN article date (metadata), when it states one. */
+export type FetchPage = (url: string) => Promise<string | { text: string; publishedAt: Date | null }>;
+
+/** The page with its article date (soak P1: a web fact is dated by its page, never by the search model). */
+export const defaultFetchPage: FetchPage = async (url) => {
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': url.includes('sec.gov') ? SEC_UA : 'Mozilla/5.0 (compatible; YardFlowResearch/1.0)',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,application/pdf;q=0.8,*/*;q=0.7',
+      'Accept-Language': 'en-US,en;q=0.9',
+    },
+    redirect: 'follow',
+    signal: AbortSignal.timeout(15_000),
+  });
+  if (!res.ok) throw new Error(`fetch ${res.status}`);
+  const html = await res.text();
+  return { text: htmlToText(html), publishedAt: parseSignalMeta(html).publishedAt ?? null };
+};
 
 export const defaultFetchText: FetchText = async (url) => {
   const res = await fetch(url, {

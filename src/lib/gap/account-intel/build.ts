@@ -52,6 +52,8 @@ export interface HypothesisInput {
   primarySignalId: string | null;
   /** When Casey approved it (reviewed_at on an approved or active thesis); null for a draft. */
   reviewedAt?: string | null;
+  /** Casey's latest explicit "Reviewed, keep it" on this thesis (thesis.review_ack), if any. */
+  reviewAckAt?: string | null;
   /** The buyer rejected the problem (a human-confirmed problem_rejected disposition on it), not Casey withdrawing it. */
   buyerRejected?: boolean;
 }
@@ -682,6 +684,16 @@ function reviewReasons(i: AccountInputs, h: HypothesisInput, now: Date, verified
     const better = rankedFacts(i, now).find((f) => f.id !== primary.id && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank <= 3 && sellerRelevance(f.quote).rank < primaryRank);
     if (better) out.push(`A newer fact (${sellerRelevance(better.quote).reason}, ${monthDay(better.publishedAt)}) may change the story.`);
   }
+  // It opens on context (a sale abroad, a divestiture) while a more seller-relevant current fact exists. A review
+  // reason like the others (soak P1: so "Reviewed, keep it" shows for it), cleared when Casey keeps the thesis after
+  // that better fact was published.
+  const best = rankedFacts(i, now)[0] ?? null;
+  const opener = factById(i, h.primarySignalId) ?? null;
+  if (opener && best && best.id !== opener.id) {
+    const o = sellerRelevance(opener.quote);
+    const keptSince = h.reviewAckAt && new Date(h.reviewAckAt).getTime() >= new Date(best.publishedAt).getTime();
+    if (o.rank >= 7 && sellerRelevance(best.quote).rank < o.rank && !keptSince) out.push(`It opens on ${o.reason}, but a better current fact exists.`);
+  }
   return out;
 }
 
@@ -801,10 +813,6 @@ export function thesisCurrentness(i: AccountInputs, hypothesisId: string, now: D
   const reasons = reviewReasons(i, h, now, verified, truth);
   if (truth === 'CONTRADICTED' && !reasons.length) reasons.push('The buyer contradicted it.');
   const opener = factById(i, h.primarySignalId) ?? null;
-  if (opener && best && best.id !== opener.id) {
-    const o = sellerRelevance(opener.quote);
-    if (o.rank >= 7 && sellerRelevance(best.quote).rank < o.rank) reasons.push(`It opens on ${o.reason}, but a better current fact exists.`);
-  }
   return reasons.length ? { current: false, reason: reasons.join(' '), bestFact: best?.quote ?? null, opener: opener?.quote ?? null } : { current: true };
 }
 

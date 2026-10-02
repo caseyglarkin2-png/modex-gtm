@@ -48,7 +48,8 @@ function db() {
 
 const input = (now = NOW) => ({ accountName: 'PepsiCo', personaId: null, hypothesisId: null, problemFamily: null, decisionId: null, actor: 'gap-research', now });
 const cand = (url: string, excerpt: string, publishedAt: string, sourceType: Candidate['sourceType']): Candidate => ({ provider: 'signal', url, title: url.includes('pepsico.com') ? 'PepsiCo and Gatik announce multi-year agreement to deploy autonomous freight in North America' : 'Gatik driverless freight Series D', publishedAt: new Date(publishedAt), excerpt, sourceType });
-const noProviders = { edgar: async () => ({ candidates: [], note: 'off' }), fetchText: async (u: string) => PAGES[u] ?? '' };
+// The August report's page carries its own article date (a web fact is dated by its page, never by the search).
+const noProviders = { edgar: async () => ({ candidates: [], note: 'off' }), fetchText: async (u: string) => ({ text: PAGES[u] ?? '', publishedAt: u === FW_AUG ? new Date('2026-08-25T17:56:46Z') : null }) };
 
 describe('G: June primary + August corroboration, through research', () => {
   it('mints ONE continuation row: the primary sentence, URL and date, with the clock from the August corroboration', async () => {
