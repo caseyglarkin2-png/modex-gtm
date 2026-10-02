@@ -9,6 +9,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { ReportThis } from './feedback-button';
 
 export function GovernedCopyButton({ decisionId, stepIndex = 0 }: { decisionId: string; stepIndex?: number }) {
   const [state, setState] = useState<{ kind: 'idle' | 'busy' | 'copied' } | { kind: 'refused'; reason: string; detail: string }>({ kind: 'idle' });
@@ -46,7 +47,10 @@ export function GovernedCopyButton({ decisionId, stepIndex = 0 }: { decisionId: 
       </Button>
       {state.kind === 'refused' ? (
         <div role="alert" data-testid="governed-copy-refused" className="text-xs text-[var(--destructive)]">
-          <p>{refusalSentence(state.reason) ?? `Not copied: ${state.reason.replace(/_/g, ' ')}.`}</p>
+          <p>
+            {refusalSentence(state.reason) ?? `Not copied: ${state.reason.replace(/_/g, ' ')}.`}
+            <ReportThis errorCode={state.reason} surface="governed-copy" />
+          </p>
           {state.detail ? (
             <details className="text-[var(--muted-foreground)]">
               <summary className="cursor-pointer">Details</summary>

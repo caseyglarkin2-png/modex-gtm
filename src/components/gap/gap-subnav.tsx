@@ -23,6 +23,8 @@ const TABS = [
   { label: 'Capture', href: '/gap/capture' },
   { label: 'All hypotheses', href: '/gap/hypotheses' },
   { label: 'Learning', href: '/gap/learning' },
+  // Stabilization E: the dogfood note backlog.
+  { label: 'Notes', href: '/gap/feedback' },
 ] as const;
 
 function isActive(pathname: string, href: string): boolean {
