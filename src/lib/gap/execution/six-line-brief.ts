@@ -153,7 +153,7 @@ export function buildBrief(input: {
     account: input.account
       ? {
           motion: input.account.motionLine,
-          caution: input.account.motion.type === 'NO_GOOD_MOTION' || input.account.motion.type === 'IN_DEAL' ? input.account.motion.why : null,
+          caution: input.account.motion.type === 'NO_GOOD_MOTION' || input.account.motion.type === 'IN_DEAL' || input.account.motion.type === 'INTRO_ONLY' ? input.account.motion.why : null,
           href: accountHref(input.account.accountName),
         }
       : null,

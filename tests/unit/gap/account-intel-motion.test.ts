@@ -55,6 +55,17 @@ describe('account motion', () => {
   it('no live fact and no relationship is NO_GOOD_MOTION: do not contact yet', () => {
     expect(motion({ facts: [] })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/Do not contact yet/) });
   });
+  it('V2: a warm-intro-only account (Dannon) is INTRO_ONLY through Mark Shaughnessy, with nobody reachable or a fact on hand; NEXT is the intro ask', () => {
+    const dannon = { account: { name: 'Dannon', tier: 'Tier 1', priorityBand: 'A', vertical: 'dairy', parentBrand: 'Danone', hubspotCompanyId: '7' } };
+    for (const over of [{}, { personas: [] }, { personas: [{ ...person, hasEmail: false }], facts: [] }]) {
+      const b = buildAccountBrief(inputs({ ...dannon, ...over }), NOW);
+      expect(b.motion).toMatchObject({ type: 'INTRO_ONLY', who: 'Mark Shaughnessy' });
+      expect(b.glance.nextAction).toMatch(/^Ask Mark Shaughnessy for the introduction to the Danone CSCO office/);
+      expect(b.glance.nextAction).not.toMatch(/Research first|first touch/);
+    }
+    // an alias recorded on another account name is enough
+    expect(buildAccountBrief(inputs({ aliases: ['Danone North America'] }), NOW).motion.type).toBe('INTRO_ONLY');
+  });
   it('the glance names the motion', () => {
     expect(buildAccountBrief(inputs(), NOW).glance.motion).toBe('Fact-led: Dana Ops, on the verified fact.');
   });

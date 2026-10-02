@@ -18,6 +18,7 @@ import { traitsOf } from '../intake/traits';
 import { deriveFit, ENTITY_LABEL, FIT_LABEL, operatingClaims, type EntityType, type YardFlowFit } from '../entity/fit';
 import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
+import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion, titleSeniority } from '../motion/account-motion';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
@@ -238,7 +239,7 @@ export interface Glance {
   family: string;
 }
 
-export type MotionType = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'REFERRAL_LED' | 'RELATIONSHIP_LED' | 'FACT_LED';
+export type MotionType = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'INTRO_ONLY' | 'REFERRAL_LED' | 'RELATIONSHIP_LED' | 'FACT_LED';
 /** How to approach this account, gates first. Never overrides a gate: every send still runs its own checks. */
 export interface Motion {
   type: MotionType;
@@ -830,6 +831,10 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       if (weak) return `Review the thesis before any first touch: it opens on ${weak.reason} ("${weak.opener}"), but the best current fact is "${weak.best}". Revise it on that fact (Research: use this fact), or reject it.`;
       return m.who ? `Review the thesis, then use the verified fact in a first touch to ${m.who} (every gate runs at the click).` : 'Review the thesis, then find the operations owner first: nobody reachable on record has an operations title.';
     }
+    case 'INTRO_ONLY': {
+      const r = restrictionFor({ name: i.account.name, aliases: i.aliases, domains: i.domains });
+      return `Ask ${m.who ?? 'the introducer'} for the introduction to ${r?.route ?? 'the right owner'}: who should you learn from about how their yards run today? No cold outreach here; GAP drafts nothing.`;
+    }
     case 'REFERRAL_LED':
     case 'RELATIONSHIP_LED':
       return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
@@ -841,7 +846,7 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
 
 const WATCH_REASON: Record<string, string> = { priority: 'priority account', gap_thesis: 'has a GAP thesis', buying_committee: 'buying committee mapped', audited_for_page: 'audited for a /for page' };
 
-const MOTION_LABEL: Record<MotionType, string> = { IN_DEAL: 'In a deal', NO_GOOD_MOTION: 'No good motion yet', FOLLOW_UP: 'Follow-up', REFERRAL_LED: 'Referral-led', RELATIONSHIP_LED: 'Relationship-led', FACT_LED: 'Fact-led' };
+const MOTION_LABEL: Record<MotionType, string> = { IN_DEAL: 'In a deal', NO_GOOD_MOTION: 'No good motion yet', FOLLOW_UP: 'Follow-up', INTRO_ONLY: 'Warm intro only', REFERRAL_LED: 'Referral-led', RELATIONSHIP_LED: 'Relationship-led', FACT_LED: 'Fact-led' };
 
 /**
  * The account motion, gates first: an open deal, then anything that says "not now" (an unreadable deal state,
@@ -883,9 +888,10 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
     // the fit is not established until what the company IS is.
     fit: identityUnsettled(i) ? { fit: 'UNKNOWN', why: 'What this company is (a 3PL, or a shipper using one) is not established.' } : accountFit(i, now),
     relatedHold: i.family?.hold?.detail ?? null,
+    restriction: restrictionFor({ name: i.account.name, aliases: i.aliases, domains: i.domains }),
   });
   // Fact-led goes to the likely operations owner only; never to whoever happens to be first on record.
-  const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary.name : null) : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
+  const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary.name : null) : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'INTRO_ONLY' ? restrictionFor({ name: i.account.name, aliases: i.aliases, domains: i.domains })?.introducer ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
   return { type: a.kind, who, why: a.why };
 }
 

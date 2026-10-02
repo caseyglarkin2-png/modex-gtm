@@ -7,6 +7,8 @@
  *   NO_GOOD_MOTION    "do not contact yet" is a first-class answer: the deal state unknown, the buyer said no or
  *                     not now, the story contradicted, a first touch already out, nobody reachable, nothing to say
  *   FOLLOW_UP         a live conversation that is not a no
+ *   INTRO_ONLY        a restricted account (policy/restriction.ts): the named introduction is the only way in; it
+ *                     beats a fact and fires with nobody reachable. GAP drafts nothing.
  *   FACT_LED          a verified fact; a relationship is an optional opener, never the reason
  *   REFERRAL_LED      an introduction, no verified fact: ask for perspective; GAP drafts nothing
  *   RELATIONSHIP_LED  real relationship context (met, or a relational source), no verified fact: the same
@@ -14,7 +16,7 @@
  */
 import { traitsOf } from '../intake/traits';
 
-export type ApproachKind = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'FACT_LED' | 'REFERRAL_LED' | 'RELATIONSHIP_LED';
+export type ApproachKind = 'IN_DEAL' | 'NO_GOOD_MOTION' | 'FOLLOW_UP' | 'INTRO_ONLY' | 'FACT_LED' | 'REFERRAL_LED' | 'RELATIONSHIP_LED';
 
 /** Conversation answers that mean "no new outreach" (the buyer said no, not now, or stop). */
 export const STOP_CLASSES: ReadonlySet<string> = new Set(['do_not_contact', 'meeting_declined', 'problem_rejected', 'not_priority']);
@@ -46,6 +48,8 @@ export interface ApproachInput {
   fit?: { fit: string; why: string };
   /** RELATED ACCOUNT ACTIVITY in the corporate family (family/family.ts relatedHold), else null. */
   relatedHold?: string | null;
+  /** A warm-intro-only restriction (policy/restriction.ts), else null. */
+  restriction?: { introducer: string; route: string } | null;
 }
 
 export interface Approach {
@@ -66,6 +70,9 @@ export function decideApproach(x: ApproachInput): Approach {
   if (x.conversation && STOP_CLASSES.has(x.conversation.responseClass)) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.conversation.who} answered "${cls(x.conversation.responseClass)}" (${x.conversation.at.slice(0, 10)}). No new outreach; learn from that conversation.` };
   if (x.contradicted) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the buyer contradicted the current story. Learn what is true first.' };
   if (x.conversation) return { kind: 'FOLLOW_UP', why: `A live conversation with ${x.conversation.who} (${cls(x.conversation.responseClass)}, ${x.conversation.at.slice(0, 10)}): continue that thread, never a cold first touch.` };
+  // After every gate that says "not now", before the touch hold and reachability: a restricted account has nobody
+  // to reach cold by design, and the introduction beats a fact.
+  if (x.restriction) return { kind: 'INTRO_ONLY', why: `Warm intro only: ask ${x.restriction.introducer} for the introduction to ${x.restriction.route}, as a way to learn their current state, never to forward a pitch. No cold outreach; GAP drafts nothing.` };
   if (x.touchHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.touchHold}` };
   if (!x.reachable) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: nobody reachable here (do not contact, or no email).' };
   const t = x.source ? traitsOf(x.source.sourceType) : null;
