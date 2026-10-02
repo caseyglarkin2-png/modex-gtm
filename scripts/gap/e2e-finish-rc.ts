@@ -90,7 +90,7 @@ import type { SeedFamily } from '../../src/lib/gap/sequences/families';
 import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
-import { SCRATCH_NO_DEALS } from './scratch-opportunity';
+import { SCRATCH_NO_DEALS, scratchDealsFor } from './scratch-opportunity';
 
 // RC E2E (2026-09-24): also accepts the disposable Docker scratch DB
 // (55432/gap_finish_e2e) used when the persistent 5433/gap_dev credentials
@@ -516,10 +516,11 @@ async function main(): Promise<number> {
     pass('4 compile', `H1 ${stepCount} steps pass (${h1CompileIds.map((id) => id.slice(0, 8)).join(',')}); H2 ${stepCount} steps pass (${h2CompileIds.map((id) => id.slice(0, 8)).join(',')}); same version, two independent hypothesis-bound compile stacks`);
 
     // 5. B6: the blocked account's enroll refuses active_opportunity, with an otherwise-identical passing compile stack.
+    // HubSpot (stubbed) holds the open deal for the blocked account; everything else is identical to the happy path.
     const blockedEnroll = await enrollFromDecision(
       prisma,
       { hypothesisId: h2, personaId: personaBlocked.id, sequenceVersionId: version.id, compileIds: h2CompileIds, actor: OWNER, actorKind: 'human', mode: 'live', now, owner: OWNER, sender: OWNER },
-      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS },
+      { addOne, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: scratchDealsFor([blockedAccountName]) },
     );
     expect('5 active opportunity', !blockedEnroll.ok && blockedEnroll.reason === 'active_opportunity', `enroll on the mid-deal account -> ${JSON.stringify(blockedEnroll)}, expected active_opportunity (B6)`);
     const blockedItemsAfter = await prisma.draftQueueItem.count({ where: { to_email: emails.blocked } });

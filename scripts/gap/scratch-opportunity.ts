@@ -12,3 +12,12 @@ export const SCRATCH_NO_DEALS_TRUTH: OpportunityTruth = { status: 'CLEAR', compa
 
 /** For the action-time gates (enroll `opportunity`, seller draft/send `activeOpportunity`). */
 export const SCRATCH_NO_DEALS = async () => ({ status: 'CLEAR' as const });
+
+/**
+ * A scratch HubSpot portal where the named accounts have an open deal and every other account has none. HubSpot is
+ * the active-opportunity truth (1f4e0421), not accounts.pipeline_stage, so a mid-deal fixture says so HERE.
+ */
+export const scratchDealsFor =
+  (accountsInDeal: readonly string[]) =>
+  async (_prisma: unknown, accountName: string): Promise<{ status: 'CLEAR' } | { status: 'ACTIVE'; detail: string }> =>
+    accountsInDeal.includes(accountName) ? { status: 'ACTIVE', detail: `"YardFlow - ${accountName}" (scratch HubSpot deal, Appointment scheduled)` } : { status: 'CLEAR' };
