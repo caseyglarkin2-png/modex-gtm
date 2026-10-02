@@ -352,7 +352,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       : g.resolution_basis === 'discovery_mention' ? 'mention_only'
       : g.resolution_basis === 'grounded_discovery' ? 'grounded_found'
       : 'not_checked';
-    const grounded = ((g.metadata ?? {}) as Row).grounded as { cls?: string; mayBeRelevant?: boolean; claimedDate?: string | null } | undefined;
+    const grounded = ((g.metadata ?? {}) as Row).grounded as { cls?: string; mayBeRelevant?: boolean; claimedDate?: string | null; unread?: boolean } | undefined;
     const ax = axesOf(raw);
     const s = make(g.url, {
       title: g.title ?? null,
@@ -370,7 +370,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       reason: eligible && rs === 'contradiction'
         ? 'another source contradicts it (resolve it in the Research lane)'
         : raw === 'grounded_found'
-          ? `${grounded?.mayBeRelevant ? 'May be relevant: the title does not name ' + accountName + '. ' : ''}Found by GAP's web search (${grounded?.cls ?? 'source classes'})${grounded?.claimedDate ? `; the search dated it ${grounded.claimedDate} (unchecked)` : ''}; not checked yet`
+          ? `${grounded?.mayBeRelevant ? 'May be relevant: the title does not name ' + accountName + '. ' : ''}Found by GAP's web search (${grounded?.cls ?? 'source classes'})${grounded?.unread ? "; the page blocked GAP's reader, so the title is the search's (unchecked)" : ''}${grounded?.claimedDate ? `; the search dated it ${grounded.claimedDate} (unchecked)` : ''}; not checked yet`
           : sourceReason(raw, accountName),
       signalId: g.id,
       eventId: g.event_id ?? null,

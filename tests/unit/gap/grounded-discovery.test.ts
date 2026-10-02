@@ -72,6 +72,35 @@ describe('grounded source discovery', () => {
     expect(rows).toHaveLength(0);
   });
 
+  it('a cited page that BLOCKS the reader (403, bot protection) is kept, labelled unread; only a page that does not exist (404/410) is dropped', async () => {
+    const { prisma, rows } = db();
+    const ask = vi.fn(async () => ({
+      pages: [
+        { url: 'https://www.maersk.com/news/articles/2026/09/23/maersk-launches-warehouse', title: 'Maersk launches warehouse in the heart of Germany', cls: 'company newsroom', date: '2026-09-23' },
+        { url: 'https://www.businesswire.com/news/home/2026/7-Eleven-Ibotta', title: '7-Eleven and Ibotta join together', cls: 'trade press news', date: '2026-08-03' },
+        { url: 'https://www.maersk.com/news/made-up', title: 'Maersk made-up page', cls: 'company newsroom', date: null },
+      ],
+      citations: [],
+      citedHosts: ['maersk.com', 'businesswire.com'],
+    }));
+    const fetchPage = vi.fn(async (url: string) => (url.includes('made-up') ? { ok: false as const, status: '404' } : url.includes('businesswire') ? { ok: false as const, status: '403' } : { ok: false as const, status: 'fetch failed' }));
+    const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')], fetchPage });
+    expect(r.accounts[0]).toMatchObject({ captured: 2, dropped: { dead: 1 } });
+    expect(rows.map((x) => x.title)).toEqual(['Maersk launches warehouse in the heart of Germany', '7-Eleven and Ibotta join together']);
+    expect(rows.every((x) => (x.metadata as { grounded?: { unread?: boolean } }).grounded?.unread === true)).toBe(true);
+    expect(rows.every((x) => (x.published_at ?? null) === null)).toBe(true);
+  });
+
+  it("on the card, an unread page says so: the title is the search's, not the page's", async () => {
+    const prisma = {
+      researchRun: { findMany: vi.fn(async () => []) },
+      prospectingSignal: { findMany: vi.fn(async () => []) },
+      gapSignal: { findMany: vi.fn(async () => [{ id: 's9', url: 'https://www.maersk.com/news/x', title: 'Maersk launches warehouse', source_name: null, published_at: null, created_at: NOW, origin: 'discovery', research_status: 'none', categories: [], feedback: null, account_name: 'PepsiCo', resolution_basis: 'grounded_discovery', event_id: null, metadata: { grounded: { cls: 'company newsroom', claimedDate: '2026-09-23', mayBeRelevant: true, unread: true } } }]) },
+    };
+    const s = await loadAccountSources(prisma as never, 'PepsiCo', { now: NOW });
+    expect(s.items[0].reason).toContain("the page blocked GAP's reader, so the title is the search's (unchecked)");
+  });
+
   it('a content failure (no citations) still takes the turn, so one hard account never holds every slot', async () => {
     const { prisma, audit } = db();
     const ask = vi.fn(async () => ({ error: 'gemini no_citations; openai_web unparsable' }));
