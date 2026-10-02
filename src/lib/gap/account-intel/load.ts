@@ -9,6 +9,7 @@ import { loadAccountConversations, loadAccountFirstTouches } from '../motion/loa
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { classifyContinuity } from '../research/continuity';
 import { factUrl, liveFactFailure } from '../research/claim-rules';
+import { contradictedFactIds } from '../research/conflicts';
 import { selectConfirmedBids } from '../bid/select';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildROIEngineInputs, computeROIModel } from '@/lib/microsites/roi';
@@ -178,6 +179,8 @@ export async function loadAccountInputs(
   const siblings = (allNames as string[]).filter((n) => n !== accountName && normalizeCompanyName(n) === key);
   const profile = (profiles as Array<{ accountName: string; reasons?: string[] }>).find((p) => p.accountName === accountName);
 
+  // A fact another live fact contradicts is not outreach evidence (the same check the inbox and the send gate run).
+  const contradicted: Map<string, string> = await soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>());
   // Verified research facts; a continuation row carries its chain (one fact per quote, newest clock).
   const byQuote = new Map<string, FactInput>();
   for (const r of factRows as Row[]) {
@@ -187,6 +190,7 @@ export async function loadAccountInputs(
     // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
     // A quote attributed to another organization (a vendor's CEO about this account) is that organization's fact.
     if (liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
+    if (contradicted.has(r.id)) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,

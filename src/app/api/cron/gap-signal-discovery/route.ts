@@ -37,7 +37,8 @@ export async function GET(request: Request) {
   try {
     // Stabilization D: the grounded source-class question first (bounded), then news with the time that is left.
     const grounded = await runGroundedDiscovery(prisma, { now: new Date(), accounts: GROUNDED_ACCOUNTS_PER_RUN, timeBudgetMs: 90_000 }).catch((e: unknown) => ({ accounts: [], skipped: [], error: e instanceof Error ? e.message : String(e) }));
-    const left = Math.max(30_000, 260_000 - (Date.now() - startedAt));
+    // News gets what is left of a 260s window (maxDuration 300 leaves room to record the outcome); never a floor.
+    const left = Math.max(0, 260_000 - (Date.now() - startedAt));
     const report = await runDiscovery(prisma, { now: new Date(), accounts: Number.isInteger(n) && n > 0 ? n : DISCOVERY_ACCOUNTS_PER_RUN, timeBudgetMs: Math.min(200_000, left) });
     const captured = report.accounts.reduce((a, x) => a + x.captured, 0);
     const queued = report.accounts.reduce((a, x) => a + x.queued, 0);

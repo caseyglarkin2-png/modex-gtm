@@ -229,7 +229,7 @@ export function SendFromYardflow({
         <div role="alert" data-testid="send-refused" className="space-y-1 text-xs text-[var(--destructive)]">
           <p>
             {REASONS[state.reason] ?? refusalSentence(state.reason) ?? `Not sent: ${state.reason.replace(/_/g, ' ')}.`}
-            <ReportThis errorCode={state.reason} surface="send" />
+            <ReportThis errorCode={state.reason} surface="send" cardId={decisionId} />
           </p>
           {state.detail ? <p className="text-[var(--muted-foreground)]">{state.detail}</p> : null}
         </div>

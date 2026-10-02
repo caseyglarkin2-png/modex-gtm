@@ -68,6 +68,7 @@ export function FeedbackButton() {
   const [type, setType] = useState<string | null>(null);
   const [extra, setExtra] = useState<ReportDetail>({});
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [errorText, setErrorText] = useState('');
   const area = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -90,13 +91,14 @@ export function FeedbackButton() {
     const context = { ...contextFromLocation(pathname, new URLSearchParams(search?.toString() ?? '')), ...extra, viewport: { w, h: window.innerHeight }, device: w < 640 ? 'phone' : w < 1024 ? 'tablet' : 'desktop' };
     try {
       const res = await fetch('/api/gap/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ note, type, context }) });
-      if (!res.ok) throw new Error(String(res.status));
+      if (!res.ok) throw new Error(res.status === 401 ? 'signed_out' : res.status === 404 ? 'off' : String(res.status));
       setState('saved');
       setNote('');
       setType(null);
       setExtra({});
       setTimeout(() => setOpen(false), 900);
-    } catch {
+    } catch (e) {
+      setErrorText(e instanceof Error && e.message === 'signed_out' ? 'Signed out. Sign in in another tab, then Save again (your note is kept).' : e instanceof Error && e.message === 'off' ? 'Notes are off on this deployment.' : 'Not saved. Try again (your note is kept).');
       setState('error');
     }
   }, [note, type, extra, pathname, search]);
@@ -110,14 +112,15 @@ export function FeedbackButton() {
           setState('idle');
           setOpen(true);
         }}
-        className="fixed bottom-4 right-4 z-40 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-xs font-semibold shadow-md hover:bg-[var(--muted)]"
+        // Left of the global Compose button (fixed bottom-6 right-6, 48px): never under it.
+        className="fixed bottom-6 right-20 z-40 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-xs font-semibold shadow-md hover:bg-[var(--muted)]"
         data-testid="feedback-open"
         aria-label="Write a note about GAP"
       >
         Note
       </button>
       {open ? (
-        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-[var(--background)] p-3 shadow-lg sm:inset-x-auto sm:bottom-16 sm:right-4 sm:w-96 sm:rounded-md sm:border" role="dialog" aria-label="Note" data-testid="feedback-form">
+        <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-[var(--border)] bg-[var(--background)] p-3 shadow-lg sm:inset-x-auto sm:bottom-16 sm:right-4 sm:w-96 sm:rounded-md sm:border" role="dialog" aria-label="Note" data-testid="feedback-form">
           <label className="block text-sm font-semibold" htmlFor="gap-feedback-note">
             What did you notice?
           </label>
@@ -138,7 +141,7 @@ export function FeedbackButton() {
               Close
             </button>
             <span role="status" className="text-xs" data-testid="feedback-status">
-              {state === 'saved' ? 'Saved to GAP notes.' : state === 'error' ? 'Not saved. Try again.' : ''}
+              {state === 'saved' ? 'Saved to GAP notes.' : state === 'error' ? errorText : ''}
             </span>
           </div>
           <p className="mt-1 text-[11px] text-[var(--muted-foreground)]">Saves your words with this screen&apos;s location and build. Nothing about the account or buyer changes.</p>

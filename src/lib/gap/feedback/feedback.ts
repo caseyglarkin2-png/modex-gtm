@@ -56,11 +56,22 @@ export function safeRoute(route: string | undefined): string | undefined {
   }
 }
 
+/** A link's page only: no credentials, query or fragment (where tokens hide). */
+function pageOnly(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const u = new URL(url);
+    return /^https?:$/.test(u.protocol) ? `${u.protocol}//${u.host}${u.pathname}` : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export function sanitizeContext(raw: unknown): FeedbackContext {
   const parsed = FeedbackContext.safeParse(raw ?? {});
   const c = parsed.success ? parsed.data : {};
   // A source link keeps its page, never its query string.
-  return { ...c, route: safeRoute(c.route), sourceUrl: c.sourceUrl && /^https?:\/\//.test(c.sourceUrl) ? c.sourceUrl.split('?')[0] : undefined };
+  return { ...c, route: safeRoute(c.route), sourceUrl: pageOnly(c.sourceUrl) };
 }
 
 

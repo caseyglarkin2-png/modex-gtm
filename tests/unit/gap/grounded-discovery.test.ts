@@ -43,18 +43,43 @@ describe('grounded source discovery', () => {
       citations: ['https://jobs.pepsico.com/yard-manager-dallas', 'https://www.gatik.ai/news/texas-expansion', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/x', 'https://www.marketbeat.com/pep'],
       citedHosts: [],
     }));
-    const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')] });
-    expect(r.accounts[0]).toMatchObject({ proposed: 5, kept: 2, captured: 2, mayBeRelevant: 1, dropped: { notCited: 1, garbage: 2 }, classes: [...SOURCE_CLASS_BUNDLES[0]] });
-    expect(rows.map((x) => [x.resolution_basis, x.origin, x.research_status ?? 'none', x.published_at ?? null])).toEqual([
-      ['grounded_discovery', 'discovery', 'none', null],
-      ['grounded_discovery', 'discovery', 'none', null],
+    // The page itself is read: its OWN title and article date are what the card carries.
+    const fetchPage = vi.fn(async (url: string) =>
+      url.includes('jobs.pepsico.com')
+        ? { ok: true as const, finalUrl: url, title: 'Yard Operations Manager - Dallas | PepsiCo Careers', publishedAt: new Date('2026-09-21T00:00:00Z') }
+        : { ok: true as const, finalUrl: url, title: 'Gatik expands autonomous middle-mile runs in Texas', publishedAt: null },
+    );
+    const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')], fetchPage });
+    expect(r.accounts[0]).toMatchObject({ proposed: 5, kept: 2, captured: 2, mayBeRelevant: 1, dropped: { notCited: 1, garbage: 2, dead: 0 }, classes: [...SOURCE_CLASS_BUNDLES[0]] });
+    expect(rows[0]).toMatchObject({ title: 'Yard Operations Manager - Dallas | PepsiCo Careers' });
+    expect(new Date(String(rows[0].published_at)).toISOString()).toBe('2026-09-21T00:00:00.000Z');
+    expect(rows.map((x) => [x.resolution_basis, x.origin, x.research_status ?? 'none'])).toEqual([
+      ['grounded_discovery', 'discovery', 'none'],
+      ['grounded_discovery', 'discovery', 'none'],
     ]);
+    expect(rows[1].published_at ?? null).toBeNull();
     expect(rows[1].metadata).toMatchObject({ grounded: { cls: 'vendor or customer case study', claimedDate: '2026-09-10', mayBeRelevant: true } });
     expect(audit[0]).toMatchObject({ kind: 'signal.grounded_discovery', subject_id: 'PepsiCo' });
     expect(prisma.pounceTrigger.create).not.toHaveBeenCalled();
   });
 
-  it("an account's turns rotate through every bundle; a failed search is not a turn", async () => {
+  it('a link that does not answer (a path the search made up) is dropped, never captured', async () => {
+    const { prisma, rows } = db();
+    const ask = vi.fn(async () => ({ pages: [{ url: 'https://www.pepsico.com/newsroom/made-up-path', title: 'PepsiCo announces a thing', cls: 'company newsroom', date: null }], citations: [], citedHosts: ['pepsico.com'] }));
+    const fetchPage = vi.fn(async () => ({ ok: false as const, status: '404' }));
+    const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')], fetchPage });
+    expect(r.accounts[0]).toMatchObject({ captured: 0, dropped: { dead: 1 } });
+    expect(rows).toHaveLength(0);
+  });
+
+  it('a content failure (no citations) still takes the turn, so one hard account never holds every slot', async () => {
+    const { prisma, audit } = db();
+    const ask = vi.fn(async () => ({ error: 'gemini no_citations; openai_web unparsable' }));
+    await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')] });
+    expect(audit).toHaveLength(1);
+  });
+
+  it("an account's turns rotate through every bundle; a provider outage is not a turn", async () => {
     const asked = [{ subject_id: 'PepsiCo', created_at: new Date('2026-09-30') }, { subject_id: 'PepsiCo', created_at: new Date('2026-09-29') }];
     const { prisma, audit } = db(asked);
     const ask = vi.fn(async () => ({ error: 'gemini quota' }));

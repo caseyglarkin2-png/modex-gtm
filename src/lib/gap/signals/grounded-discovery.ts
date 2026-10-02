@@ -18,7 +18,7 @@ import { askGrounded, defaultProviders, groundedOnly, type ProviderAnswer, type 
 import { normalizeCompany, textNamesAccount } from '../research/claim-rules';
 import { SEARCH_REDIRECT } from '../sources/source-copy';
 import { MARKET_CHATTER } from './discovery';
-import { captureSignal } from './intake';
+import { captureSignal, parseSignalMeta } from './intake';
 import { loadWatchProfiles, type WatchProfile } from './watch';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,26 +86,43 @@ export interface GroundedAccountResult {
   captured: number;
   duplicates: number;
   mayBeRelevant: number;
-  dropped: { notCited: number; garbage: number };
+  dropped: { notCited: number; garbage: number; dead: number };
   error: string | null;
 }
+
+/** The page itself, read before capture: the real title and article date, never the search model's. */
+export type FetchPage = (url: string) => Promise<{ ok: true; finalUrl: string; title: string | null; publishedAt: Date | null } | { ok: false; status: string }>;
+
+const defaultFetchPage: FetchPage = async (url) => {
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; YardFlowResearch/1.0)', Accept: 'text/html,*/*;q=0.8' }, redirect: 'follow', signal: AbortSignal.timeout(10_000) });
+    if (!res.ok) return { ok: false, status: String(res.status) };
+    const meta = parseSignalMeta((await res.text()).slice(0, 300_000));
+    return { ok: true, finalUrl: res.url || url, title: meta.title ?? null, publishedAt: meta.publishedAt ?? null };
+  } catch (e) {
+    return { ok: false, status: (e instanceof Error ? e.message : String(e)).slice(0, 40) };
+  }
+};
+
+/** A provider-wide outage (quota, cooldown, unavailable, timeout) is retried next run; a content failure rotates. */
+const TRANSIENT = /quota|cooling|unavailable|timeout|timed out|rate|429|5\d\d/i;
 
 export async function runGroundedDiscovery(
   prisma: PrismaLike,
   opts: { now: Date; accounts?: number; timeBudgetMs?: number; clock?: () => number },
-  deps: { ask?: (prompt: string) => Promise<{ pages: GroundedPage[]; citations: string[]; citedHosts: string[] } | { error: string }>; profiles?: () => Promise<WatchProfile[]>; providers?: ScoutProvider[] } = {},
+  deps: { ask?: (prompt: string, budgetMs: number) => Promise<{ pages: GroundedPage[]; citations: string[]; citedHosts: string[] } | { error: string }>; profiles?: () => Promise<WatchProfile[]>; providers?: ScoutProvider[]; fetchPage?: FetchPage } = {},
 ): Promise<{ accounts: GroundedAccountResult[]; skipped: string[] }> {
   const clock = opts.clock ?? Date.now;
   const started = clock();
   const ask =
     deps.ask ??
-    (async (prompt: string) => {
+    (async (prompt: string, budgetMs: number) => {
       let meta: { citations: string[]; citedHosts: string[] } = { citations: [], citedHosts: [] };
       const r = await askGrounded(prompt, (a: ProviderAnswer) => {
         const pages = parseGroundedPages(a.text);
         meta = { citations: a.citations, citedHosts: a.citedHosts ?? [] };
         return /\[/.test(a.text) ? pages : null;
-      }, deps.providers ?? defaultProviders());
+      }, deps.providers ?? defaultProviders(), { budgetMs });
       return r.ok ? { pages: r.value, ...meta } : { error: r.attempts.map((x) => `${x.provider} ${x.outcome}`).join('; ') || 'no grounded provider' };
     });
   const profiles = await (deps.profiles ?? (() => loadWatchProfiles(prisma)))();
@@ -133,11 +150,15 @@ export async function runGroundedDiscovery(
       continue;
     }
     const classes = [...SOURCE_CLASS_BUNDLES[(turns.get(p.accountName) ?? 0) % SOURCE_CLASS_BUNDLES.length]];
-    const res: GroundedAccountResult = { accountName: p.accountName, classes, proposed: 0, kept: 0, captured: 0, duplicates: 0, mayBeRelevant: 0, dropped: { notCited: 0, garbage: 0 }, error: null };
-    const answer = await ask(groundedPrompt(p.accountName, classes, p.aliases)).catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) }));
+    const res: GroundedAccountResult = { accountName: p.accountName, classes, proposed: 0, kept: 0, captured: 0, duplicates: 0, mayBeRelevant: 0, dropped: { notCited: 0, garbage: 0, dead: 0 }, error: null };
+    // The whole turn shares the time budget: one slow answer never runs the cron past its limit.
+    const left = (opts.timeBudgetMs ?? GROUNDED_TIME_BUDGET_MS) - (clock() - started);
+    const answer = await ask(groundedPrompt(p.accountName, classes, p.aliases), Math.max(10_000, left)).catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) }));
     if ('error' in answer) {
-      // A turn in which the search could not run is not a turn: no rotation row, asked again next run.
       res.error = answer.error.slice(0, 200);
+      // A provider outage is retried next run; a content failure (no citations, unparsable) still takes the turn,
+      // so one hard account never holds every slot.
+      if (!TRANSIENT.test(answer.error)) await prisma.gapAuditEvent.create({ data: { kind: GROUNDED_DISCOVERY_AUDIT, actor: GROUNDED_DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, created_at: opts.now, payload: JSON.parse(JSON.stringify(res)) } }).catch(() => undefined);
       out.accounts.push(res);
       continue;
     }
@@ -151,10 +172,22 @@ export async function runGroundedDiscovery(
         res.dropped.garbage += 1;
         continue;
       }
+      // Read the page itself: a link that does not answer (a path the search made up, a dead page) is dropped,
+      // and the card carries the page's OWN title and article date, never the search model's.
+      const live = await (deps.fetchPage ?? defaultFetchPage)(page.url);
+      if (!live.ok || SEARCH_REDIRECT.test(live.finalUrl)) {
+        res.dropped.dead += 1;
+        continue;
+      }
+      if (MARKET_CHATTER.test(live.title ?? '')) {
+        res.dropped.garbage += 1;
+        continue;
+      }
       res.kept += 1;
+      const realTitle = live.title || page.title || null;
       const r = await captureSignal(
         prisma,
-        { url: page.url, title: page.title || null, publishedAt: null, sourceName: null, origin: 'discovery', actor: GROUNDED_DISCOVERY_ACTOR, now: opts.now, accountName: p.accountName, resolutionBasis: 'grounded_discovery' },
+        { url: live.finalUrl, title: realTitle, publishedAt: live.publishedAt, sourceName: null, origin: 'discovery', actor: GROUNDED_DISCOVERY_ACTOR, now: opts.now, accountName: p.accountName, resolutionBasis: 'grounded_discovery' },
         { fetchHtml: null },
       ).catch(() => null);
       if (!r || !r.ok) continue;
@@ -164,11 +197,11 @@ export async function runGroundedDiscovery(
       }
       res.captured += 1;
       // The class it was found for and the search's date CLAIM (never a publication date) ride on the signal.
-      const named = textNamesAccount(page.title, key) || p.aliases.some((a) => textNamesAccount(page.title, normalizeCompany(a)));
+      const named = textNamesAccount(realTitle ?? '', key) || p.aliases.some((a) => textNamesAccount(realTitle ?? '', normalizeCompany(a)));
       if (!named) res.mayBeRelevant += 1;
       const row: { metadata: Record<string, unknown> | null } | null = await prisma.gapSignal.findUnique({ where: { id: r.signal.id }, select: { metadata: true } }).catch(() => null);
       await prisma.gapSignal
-        .update({ where: { id: r.signal.id }, data: { metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls: page.cls || classes[0], claimedDate: page.date, mayBeRelevant: !named } } } })
+        .update({ where: { id: r.signal.id }, data: { metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls: page.cls || classes[0], claimedDate: live.publishedAt ? null : page.date, mayBeRelevant: !named } } } })
         .catch(() => undefined);
     }
     await prisma.gapAuditEvent.create({ data: { kind: GROUNDED_DISCOVERY_AUDIT, actor: GROUNDED_DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, created_at: opts.now, payload: JSON.parse(JSON.stringify(res)) } }).catch(() => undefined);

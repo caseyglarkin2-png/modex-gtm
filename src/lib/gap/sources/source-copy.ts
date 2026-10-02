@@ -120,7 +120,7 @@ export function sourceReason(raw: string | null, accountName: string, speaker?: 
     fact_expired: 'past its freshness window: true, but not a fresh trigger',
     failed_recheck: 'failed a later recheck',
     redirect_unresolved: 'stored on a search-redirect link; the original publisher page could not be confirmed',
-    fact_at_other_source: 'research on this story checked a claim on another page (that card shows it)',
+    fact_at_other_source: 'research on this story checked a claim (its own card shows whether it held up)',
     scout_citation: 'cited by Scout for its company verdict; not checked as a claim',
   };
   return map[raw] ?? raw.replace(/_/g, ' ');

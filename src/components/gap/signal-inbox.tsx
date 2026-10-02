@@ -80,7 +80,7 @@ function SignalRow({ s }: { s: SignalView }) {
 
       <div className="flex flex-wrap gap-2">
         {s.url && !needsAccount && (s.researchStatus === 'none' || s.researchStatus === 'no_usable_fact') ? (
-          <button type="button" className={btn} disabled={busy} onClick={() => void op({ op: 'research' }, 'Queued for research.')}>
+          <button type="button" className={btn} disabled={busy} onClick={() => void op({ op: 'research' }, 'Queued for a check at the source. Checking only: nothing is alerted, drafted or sent.')}>
             Research
           </button>
         ) : null}

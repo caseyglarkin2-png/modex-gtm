@@ -10,7 +10,7 @@
  *      (metadata.verified -> failed_recheck, reason redirect_unresolved). Nothing is deleted.
  */
 import { excerptFoundIn } from './facts';
-import { normalizeCompany, textNamesAccount } from './claim-rules';
+import { WEAK_SOURCE, normalizeCompany, textNamesAccount } from './claim-rules';
 import { SEARCH_REDIRECT } from '../sources/source-copy';
 
 export interface RedirectDeps {
@@ -27,7 +27,8 @@ export async function resolveRedirectFact(fact: { evidence_text: string; evidenc
   const holds = async (url: string): Promise<string | null> => {
     try {
       const page = await deps.follow(url);
-      if (SEARCH_REDIRECT.test(page.finalUrl) || !/^https?:\/\//.test(page.finalUrl)) return null;
+      // The canonical page must be the publisher's own: never a redirect, an aggregator or a mirror.
+      if (SEARCH_REDIRECT.test(page.finalUrl) || WEAK_SOURCE.test(page.finalUrl) || !/^https?:\/\//.test(page.finalUrl)) return null;
       return excerptFoundIn(fact.evidence_text, page.text) && textNamesAccount(page.text, key) ? page.finalUrl : null;
     } catch {
       return null;

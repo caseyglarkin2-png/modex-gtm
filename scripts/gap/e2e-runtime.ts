@@ -95,7 +95,7 @@ import { citedQuote } from '../../src/lib/gap/research/propose';
 import { registerSignal } from '../../src/lib/gap/signals/registry';
 import { scheduleNextStep } from '../../src/lib/queue/sequence-runtime';
 import { STATUS } from '../../src/lib/queue/types';
-import { SCRATCH_NO_DEALS } from './scratch-opportunity';
+import { SCRATCH_NO_DEALS, scratchDealsFor } from './scratch-opportunity';
 
 const SCRATCH_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:(?:5433\/gap_dev|55432\/gap_finish_e2e)(?:\?.*)?$/;
 const REPORT_PATH = path.join('docs', 'gap', 'runtime-e2e-latest.md');
@@ -563,14 +563,15 @@ async function main(): Promise<number> {
 
     // 4a. EXECUTION INTENT -> the full 6B gate chain, through legacyEnrollAdapter.
     const addOneSpy = { calls: 0, fn: async (input: Parameters<typeof addOne>[0], owner: string) => { addOneSpy.calls += 1; return addOne(input, owner); } };
-    const baseDeps: EnrollDeps = { addOne: addOneSpy.fn, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: SCRATCH_NO_DEALS };
+    // HubSpot (stubbed) holds the open deal for the blocked account only (HubSpot is the opportunity truth, 1f4e0421).
+    const baseDeps: EnrollDeps = { addOne: addOneSpy.fn, autonomy: autonomyLive, critic: criticPass, suppression: suppressionClear, opportunity: scratchDealsFor([blockedAccountName]) };
     const intentFor = (hypothesisId: string, personaId: number, compileIds: string[], mode: 'shadow' | 'live'): ExecutionIntent => ({
       engine: 'modex_queue', personaId, hypothesisId, sequenceVersionId: version.id, stepIndex: 0, compileIds, senderIdentity: OWNER, idempotencyKey: `${tag}-${hypothesisId}-${mode}`, actor: OWNER, actorKind: 'human', mode, now,
     });
 
     // Active opportunity (B6): the blocked account refuses through the SAME contract layer, no fake transport call.
     const blockedReceipt = await legacyEnrollAdapter(prisma, intentFor(h2, personaBlocked.id, h2CompileIds, 'live'), baseDeps);
-    expect('4a active opportunity', blockedReceipt.status === 'refused' && blockedReceipt.refusalReason === 'active_opportunity', `blocked receipt -> ${JSON.stringify(blockedReceipt)}`);
+    expect('4a active opportunity', blockedReceipt.status === 'refused' && (blockedReceipt.refusalReason ?? '').startsWith('active_opportunity'), `blocked receipt -> ${JSON.stringify(blockedReceipt)}`);
     const blockedItems = await prisma.draftQueueItem.count({ where: { to_email: emails.blocked } });
     expect('4a active opportunity', blockedItems === 0 && addOneSpy.calls === 0, `${blockedItems} items / ${addOneSpy.calls} addOne calls for the blocked persona, expected 0/0 (refused before the queue write)`);
     pass('4a active opportunity', `ExecutionIntent for the mid-deal account refuses active_opportunity through legacyEnrollAdapter; no queue write, no fake transport call`);

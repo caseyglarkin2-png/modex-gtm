@@ -49,7 +49,7 @@ export function GovernedCopyButton({ decisionId, stepIndex = 0 }: { decisionId: 
         <div role="alert" data-testid="governed-copy-refused" className="text-xs text-[var(--destructive)]">
           <p>
             {refusalSentence(state.reason) ?? `Not copied: ${state.reason.replace(/_/g, ' ')}.`}
-            <ReportThis errorCode={state.reason} surface="governed-copy" />
+            <ReportThis errorCode={state.reason} surface="governed-copy" cardId={decisionId} />
           </p>
           {state.detail ? (
             <details className="text-[var(--muted-foreground)]">
