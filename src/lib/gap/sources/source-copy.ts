@@ -86,7 +86,7 @@ export function axesOf(raw: string | null): { verification: VerificationState; o
   if (raw === 'being_checked') return { verification: 'VERIFYING', outreach: 'NOT_EVALUATED' };
   // Checked at the page: the words are there, but they are someone else's, or not about this account.
   if (raw === 'quoted_third_party' || raw === 'sentence_does_not_name_account' || raw === 'page_does_not_name_account' || raw === 'fact_no_longer_passes') return { verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE' };
-  if (raw === 'not_checked' || raw === 'mention_only' || raw === 'same_statement_as_other_source' || raw === 'fact_at_other_source') return { verification: 'UNCHECKED', outreach: 'NOT_EVALUATED' };
+  if (raw === 'not_checked' || raw === 'mention_only' || raw === 'same_statement_as_other_source' || raw === 'fact_at_other_source' || raw === 'grounded_found') return { verification: 'UNCHECKED', outreach: 'NOT_EVALUATED' };
   return { verification: 'UNCHECKED', outreach: 'NOT_ELIGIBLE' };
 }
 
