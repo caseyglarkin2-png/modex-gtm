@@ -22,7 +22,9 @@ describe('source cards', () => {
   it('provenance first; third party named; old source labelled, not hidden; both counts shown', () => {
     render(<AccountSourcesSection sources={sources([src({}), src({ key: 'k2', link: 'https://www.pepsico.com/n', publisher: 'pepsico.com', verification: 'VERIFIED_AT_SOURCE', outreach: 'ELIGIBLE', reason: null, attribution: null, excerpt: 'PepsiCo will deploy autonomous trucks.' })])} limit={5} viewAllHref="/gap/accounts/pepsico/sources" />);
     expect(screen.getByTestId('account-sources-counts')).toHaveTextContent('Sources / signals: 2 · Verified at source: 2 claims · Eligible as outreach evidence: 1');
-    const [gatik] = screen.getAllByTestId('source-card');
+    // The eligible claim leads the compact view (what Casey can act on first); the vendor's claim follows.
+    expect(screen.getAllByTestId('source-card')[0]).toHaveTextContent('pepsico.com');
+    const gatik = screen.getAllByTestId('source-card').find((c) => c.textContent?.includes('gatik.ai'))!;
     expect(gatik.querySelector('[data-testid="source-provenance"]')).toHaveTextContent('gatik.ai · published Jun 9, 2026 · 3 months old');
     expect(gatik.querySelector('[data-testid="source-not-fresh"]')).toHaveTextContent('Not a fresh trigger');
     expect(gatik.querySelector('[data-testid="source-attribution"]')).toHaveTextContent('Claim made by Gatik (third party), not PepsiCo.');

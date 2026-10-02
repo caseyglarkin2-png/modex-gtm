@@ -131,10 +131,10 @@ describe('only objective garbage is dropped', () => {
     expect(s.items[0]).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'ELIGIBLE' });
   });
 
-  it('a story whose fact was stored but no longer passes the rules stays visible, NOT VERIFIED, with that reason', async () => {
+  it('a story whose research found a claim never itself claims "verified at source": the claim card says how it held up', async () => {
     const p = prisma({ signals: [signal({})] });
     const [s] = (await loadAccountSources(p as never, 'PepsiCo', { now: NOW })).items;
-    expect(s).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', reason: 'verified at the source; no longer passes the outreach rules' });
+    expect(s).toMatchObject({ verification: 'UNCHECKED', outreach: 'NOT_EVALUATED', reason: 'research on this story checked a claim (its own card shows whether it held up)' });
   });
 
   it('Casey ignoring or reassigning a source moves it out of the default view, counted, never deleted', async () => {

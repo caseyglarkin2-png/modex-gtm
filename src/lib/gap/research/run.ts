@@ -31,7 +31,7 @@ import type { SignalType } from '../taxonomy';
 import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, pageSentenceFor, statedEventDate, type FactChange, describesPastEvent } from './facts';
 import { defaultFetchText, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
 import type { PageResult } from '../signals/research';
-import { speakerOrg, textNamesAccount } from './claim-rules';
+import { WEAK_SOURCE, speakerOrg, textNamesAccount } from './claim-rules';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -62,7 +62,7 @@ export function failureClass(reason: string): FailureClass {
 }
 
 /** Search redirects, snippets, aggregators and mirrors: never a source a fact can be verified at. */
-const WEAK_SOURCE = /^https?:\/\/(?:[^/]*\.)?(?:vertexaisearch\.cloud\.google\.com|google\.[a-z.]+\/(?:search|url)|news\.google\.com|bing\.com|duckduckgo\.com|news\.yahoo\.com|msn\.com|newsbreak\.com|ground\.news|flipboard\.com|scribd\.com|pdfcoffee\.com|dokumen\.pub|studocu\.com|coursehero\.com)\b/i;
+// WEAK_SOURCE lives in claim-rules.ts (shared with the stored-fact gate and the redirect resolver).
 
 /** provider_unavailable: the web search could not run and nothing fresh was found. Retryable, never an answer. */
 export type ResearchOutcome = 'evidence_found' | 'insufficient_evidence' | 'conflicting_evidence' | 'provider_unavailable';
@@ -441,7 +441,7 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   const selfSubject = hostBelongsToAccount(c.url, ctx.accountKey) && /^(?:we|our|the company)\b/i.test(excerpt.trim());
   // Somebody quoted: the fact is the speaker's organization's ("... that's what we're doing with PepsiCo," said the
   // CEO of Gatik). The account's own executive quoted is the account speaking.
-  const speaker = speakerOrg(excerpt);
+  const speaker = speakerOrg(excerpt, c.url);
   if (speaker && !textNamesAccount(speaker, ctx.accountKey)) return { ok: false, reason: 'quoted_third_party' };
   if ((c.provider === 'signal' || c.provider === 'web') && !selfSubject && !speaker && !(textNamesAccount(excerpt, ctx.accountKey) && accountIsSubject(excerpt, ctx.accountKey))) return { ok: false, reason: 'sentence_does_not_name_account' };
   return { ok: true, publishedAt: c.publishedAt, excerpt };

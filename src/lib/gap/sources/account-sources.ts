@@ -18,6 +18,7 @@ import { normalizeSignalUrl } from '../signals/intake';
 import type { SourceRecord } from '../research/run';
 import { factUrl, liveFactFailure, normalizeCompany, speakerOrg, textNamesAccount } from '../research/claim-rules';
 import { classifyContinuity } from '../research/continuity';
+import { contradictedFactIds } from '../research/conflicts';
 import { normalizeCompanyName } from '../identity/normalize';
 import { DROP_REASONS, SEARCH_REDIRECT, axesOf, sourceReason, type AccountSource, type OutreachState, type SourceClaim, type VerificationState, type WhyFound } from './source-copy';
 
@@ -93,8 +94,9 @@ export function whyFound(text: string, categories: readonly string[] = []): WhyF
 
 /** Which reading of one URL leads its card: the one that says the most about the claim. */
 function rank(s: { verification: VerificationState; outreach: OutreachState }): number {
+  // A contradiction outranks eligibility: it is never swallowed by a merged "eligible" card.
+  if (s.verification === 'CONTRADICTED' || s.outreach === 'NEEDS_HUMAN_JUDGMENT') return 7;
   if (s.outreach === 'ELIGIBLE') return 6;
-  if (s.verification === 'CONTRADICTED' || s.outreach === 'NEEDS_HUMAN_JUDGMENT') return 5;
   if (s.verification === 'VERIFIED_AT_SOURCE') return 4;
   if (s.verification === 'COULD_NOT_VERIFY' && s.outreach === 'NOT_ELIGIBLE') return 3;
   if (s.outreach === 'NOT_ELIGIBLE') return 2.5;
@@ -112,7 +114,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
   const key = normalizeCompany(accountName);
   // A failed read THROWS (the page says the sources could not be read): an empty read must never print as
   // "0 sources found".
-  const [runs, signals, factRows, scoutRow]: [Row[], Row[], Row[], Row | null] = await Promise.all([
+  const [runs, signals, factRows, scoutRow, contradicted]: [Row[], Row[], Row[], Row | null, Map<string, string>] = await Promise.all([
     prisma.researchRun.findMany({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, take: opts.runs ?? 25, select: { id: true, created_at: true, provider_status: true } }),
     // This account's signals, and the ones Casey moved away from it (Wrong account / reassigned): those stay set aside.
     prisma.gapSignal.findMany({
@@ -126,6 +128,8 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     prisma.gapAccountCandidate?.findFirst
       ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' }, select: { scout: true, scouted_at: true } })
       : Promise.resolve(null),
+    // The same contradiction check the inbox, the brief and the send gate run (a failed read throws: fail closed).
+    contradictedFactIds(prisma, accountName, now),
   ]);
 
   let dropped = 0;
@@ -174,7 +178,8 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     // Two different claims from one page stay two claims, each with its own states and speaker. Only the page's
     // own words: a search summary or a headline is never listed as a claim on the page.
     const also = [...(win.alsoOnPage ?? []), ...(lose.alsoOnPage ?? [])];
-    if (lose.excerpt && win.excerpt && lose.excerptKind === 'verbatim' && lose.excerpt !== win.excerpt && !also.some((a) => a.excerpt === lose.excerpt)) also.push(claimOf(lose));
+    const claimSide = win.excerpt && win.excerptKind === 'verbatim' ? win : lose.excerpt && lose.excerptKind === 'verbatim' ? lose : win.excerpt ? win : lose;
+    if (lose.excerpt && win.excerpt && lose.excerptKind === 'verbatim' && win.excerptKind === 'verbatim' && lose.excerpt !== win.excerpt && !also.some((a) => a.excerpt === lose.excerpt)) also.push(claimOf(lose));
     byKey.set(s.key, {
       ...win,
       // The story's own headline (from the signal row) reads better than a fact row's page title.
@@ -183,10 +188,11 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       publishedAt: win.publishedAt ?? lose.publishedAt,
       ageDays: win.ageDays ?? lose.ageDays,
       freshTrigger: win.publishedAt ? win.freshTrigger : lose.freshTrigger,
-      excerpt: win.excerpt ?? lose.excerpt,
-      excerptKind: win.excerpt ? win.excerptKind : lose.excerptKind,
+      // The card shows the page's own words when either reading has them (a headline never hides a claim).
+      excerpt: claimSide.excerpt,
+      excerptKind: claimSide.excerptKind,
       // The speaker belongs to the claim shown, never borrowed from another claim on the page.
-      attribution: win.excerpt ? win.attribution : lose.attribution,
+      attribution: claimSide.attribution,
       alsoOnPage: also.length ? also.slice(0, 4) : undefined,
       // The earliest time GAP saw it; Casey's share outranks GAP's own discovery.
       discoveredAt: win.discoveredAt < lose.discoveredAt ? win.discoveredAt : lose.discoveredAt,
@@ -204,6 +210,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
   const verifiedQuotes = new Set<string>();
   const eligibleQuotes = new Set<string>();
   const eligibleKeys = new Set<string>();
+  const eligibleByKey = new Map<string, string[]>();
   for (const r of factRows) {
     const meta = (r.metadata ?? {}) as Row;
     // The publisher page (a claim resolved off a search redirect carries it in metadata.canonicalUrl).
@@ -233,10 +240,15 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       if (why) {
         outreach = 'NOT_ELIGIBLE';
         reason = sourceReason(why, accountName, third);
+      } else if (contradicted.has(r.id)) {
+        // True at its source, but another live claim says the opposite about the same site: Casey judges it.
+        outreach = 'NEEDS_HUMAN_JUDGMENT';
+        reason = `another verified claim about ${contradicted.get(r.id)} says the opposite (resolve it in the Research lane)`;
       }
     }
     if (verification === 'VERIFIED_AT_SOURCE') verifiedQuotes.add(quote);
     if (outreach === 'ELIGIBLE') eligibleQuotes.add(quote);
+    else eligibleQuotes.delete(quote);
     const expires = r.freshness_expires_at ? new Date(r.freshness_expires_at) : null;
     const s = make(url, {
       title: r.title ?? null,
@@ -254,7 +266,10 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     if (s) {
       // A verified fact's own clock decides freshness.
       if (expires) s.freshTrigger = expires.getTime() > now.getTime();
-      if (outreach === 'ELIGIBLE') eligibleKeys.add(s.key);
+      if (outreach === 'ELIGIBLE') {
+        eligibleKeys.add(s.key);
+        eligibleByKey.set(s.key, [...(eligibleByKey.get(s.key) ?? []), quote]);
+      }
     }
     add(s);
   }
@@ -282,6 +297,9 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       const third = speaker && !textNamesAccount(speaker, key) ? speaker : null;
       const prov = backfill[r.url] ?? {};
       const ax = axesOf(r.reason);
+      // A claim checked at its page (its words are there; someone else's, or not about the account) is a verified
+      // fact too, even though it was never stored as outreach evidence.
+      if (ax.verification === 'VERIFIED_AT_SOURCE' && quote) verifiedQuotes.add(quote.trim().toLowerCase());
       add(
         make(r.url, {
           title: r.title ?? prov.title ?? null,
@@ -330,7 +348,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     const raw = rs === 'contradiction' ? 'contradiction'
       : rs === 'queued' || rs === 'researching' ? 'being_checked'
       : rs === 'no_usable_fact' ? 'no_fact_sentence'
-      : rs === 'fact_found' ? (verifiedQuotes.size ? 'fact_at_other_source' : 'fact_no_longer_passes')
+      : rs === 'fact_found' ? 'fact_at_other_source'
       : g.resolution_basis === 'discovery_mention' ? 'mention_only'
       : g.resolution_basis === 'grounded_discovery' ? 'grounded_found'
       : 'not_checked';
@@ -345,8 +363,9 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       excerpt: g.title ? g.title : null,
       excerptKind: g.title ? 'headline' : null,
       origin: g.origin === 'casey_share' || g.origin === 'conference_note' ? 'casey_shared' : 'gap_discovered',
-      // A contradiction on a page that holds an eligible claim is said, never swallowed: Casey judges it.
-      verification: eligible && rs === 'contradiction' ? 'VERIFIED_AT_SOURCE' : ax.verification,
+      // A contradiction on a page that holds an eligible claim is said, never swallowed: Casey judges it. A signal
+      // row itself never claims "verified at source": that is its claim card's call.
+      verification: ax.verification,
       outreach: eligible && rs === 'contradiction' ? 'NEEDS_HUMAN_JUDGMENT' : ax.outreach,
       reason: eligible && rs === 'contradiction'
         ? 'another source contradicts it (resolve it in the Research lane)'
@@ -367,6 +386,8 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     }
     add(s);
   }
+  // Eligible counts what the cards say: a card whose merged state needs judgment is not counted as eligible.
+  for (const s of byKey.values()) if (s.outreach === 'NEEDS_HUMAN_JUDGMENT') for (const q of eligibleByKey.get(s.key) ?? []) eligibleQuotes.delete(q);
   // A source Casey set aside stays out of the default view even when research also saw it. An eligible claim is
   // never hidden behind a set-aside (it is counted, so it is shown, marked reviewed).
   const asideShown: AccountSource[] = [];
@@ -414,6 +435,7 @@ export function groupEvents(items: readonly AccountSource[]): SourceEvent[] {
     return { id, lead: sorted[0], more: sorted.slice(1), unreviewed: g.every((s) => !s.reviewed) };
   });
   const order = new Map(items.map((s, i) => [s.key, i]));
-  // New / unreviewed first, then the original date order of each event's earliest-listed source.
-  return events.sort((a, b) => Number(b.unreviewed) - Number(a.unreviewed) || Math.min(...[a.lead, ...a.more].map((s) => order.get(s.key)!)) - Math.min(...[b.lead, ...b.more].map((s) => order.get(s.key)!)));
+  // What Casey can act on first (needs judgment, then eligible), then new / unreviewed, then date order.
+  const act = (e: SourceEvent) => (e.lead.outreach === 'NEEDS_HUMAN_JUDGMENT' || e.lead.verification === 'CONTRADICTED' ? 2 : e.lead.outreach === 'ELIGIBLE' ? 1 : 0);
+  return events.sort((a, b) => act(b) - act(a) || Number(b.unreviewed) - Number(a.unreviewed) || Math.min(...[a.lead, ...a.more].map((s) => order.get(s.key)!)) - Math.min(...[b.lead, ...b.more].map((s) => order.get(s.key)!)));
 }

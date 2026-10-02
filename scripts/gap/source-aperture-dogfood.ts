@@ -1,26 +1,20 @@
 /**
- * GAP RESEARCH APERTURE: dogfood report (read-only).
+ * GAP SEMANTIC DOGFOOD (read-only): each account on the truth vocabulary's levels.
  *
- *   npx tsx scripts/gap/source-aperture-dogfood.ts [--out docs/gap/source-aperture-latest.md] [Account ...]
+ *   npx tsx scripts/gap/source-aperture-dogfood.ts [--out docs/gap/semantic-dogfood-latest.md] [Account ...]
  *
- * Per account: sources GAP found vs outreach facts verified, the sources that are not outreach facts (shown with
- * the reason), and what the earlier surfaces did NOT show (a research source past the 45-day inbox window, or one
- * shown only as a bare URL with no provenance). Nothing is written to the database.
+ * Per account: SOURCES / SIGNALS, CLAIMS checked, VERIFIED FACTS (claims verified at their source), OUTREACH
+ * EVIDENCE (the eligible subset), HYPOTHESES (never facts), BUYER TRUTH (human-confirmed buyer words) and the
+ * CURRENT MOTION, plus every source with its two axes. Nothing is written to the database.
  */
 import { writeFileSync } from 'node:fs';
 import { PrismaClient } from '@prisma/client';
 import { loadAccountSources } from '../../src/lib/gap/sources/account-sources';
-import { ageLabel, STATUS_LABEL } from '../../src/lib/gap/sources/source-copy';
-import { normalizeSignalUrl } from '../../src/lib/gap/signals/intake';
+import { ageLabel, claimLine } from '../../src/lib/gap/sources/source-copy';
+import { loadAccountInputs } from '../../src/lib/gap/account-intel/load';
+import { buildAccountBrief } from '../../src/lib/gap/account-intel/build';
 
-const DEFAULT = ['PepsiCo', 'General Mills', 'Walmart', 'Tyson', 'Kroger', 'FedEx', 'NFI', 'Hormel', 'GXO', 'Crowley'];
-const INBOX_WINDOW_MS = 45 * 86_400_000;
-
-async function resolve(prisma: PrismaClient, q: string): Promise<string | null> {
-  const rows = await prisma.account.findMany({ where: { name: { contains: q, mode: 'insensitive' } }, select: { name: true }, take: 20 });
-  const names = rows.map((r) => r.name);
-  return names.find((n) => n.toLowerCase() === q.toLowerCase()) ?? names.sort((a, b) => a.length - b.length)[0] ?? null;
-}
+const DEFAULT = ['PepsiCo', 'General Mills', 'Walmart Inc.', 'Tyson Foods', 'Kroger', 'FedEx', 'NFI Industries', 'Hormel Foods', 'GXO Logistics', 'Crowley'];
 
 async function main() {
   const args = process.argv.slice(2);
@@ -29,41 +23,33 @@ async function main() {
   const wanted = args.filter((a, i) => !a.startsWith('--') && (outAt < 0 || i !== outAt + 1));
   const prisma = new PrismaClient();
   const now = new Date();
-  const lines: string[] = [`# GAP research aperture dogfood (${now.toISOString().slice(0, 16)}Z, read-only)`, ''];
-  lines.push('| Account | Sources found | Outreach facts verified | Not outreach facts (shown) | Previously hidden or bare URL | Oldest surfaced | Ambiguous surfaced | Set aside | Dropped |');
-  lines.push('|---|---|---|---|---|---|---|---|---|');
+  const lines: string[] = [`# GAP semantic dogfood (${now.toISOString().slice(0, 16)}Z, read-only)`, ''];
+  lines.push('| Account | Sources / signals | Claims checked (verified / could not / contradicted) | Verified facts | Outreach evidence | Hypotheses (not facts) | Buyer truth (confirmed) | Current motion |');
+  lines.push('|---|---|---|---|---|---|---|---|');
   const details: string[] = [];
-  for (const q of wanted.length ? wanted : DEFAULT) {
-    const name = await resolve(prisma, q);
-    if (!name) {
-      lines.push(`| ${q} | account not found | | | | | | | |`);
+  for (const name of wanted.length ? wanted : DEFAULT) {
+    // A Scout candidate (not an account yet) still has sources: its Scout citations and verdict.
+    const exists = await prisma.account.findFirst({ where: { name }, select: { name: true } });
+    const candidate = exists ? null : await prisma.gapAccountCandidate.findFirst({ where: { company: name }, select: { verdict: true, decision: true, entity_type: true } });
+    if (!exists && !candidate) {
+      lines.push(`| ${name} | not an account or candidate | | | | | | |`);
       continue;
     }
-    const s = await loadAccountSources(prisma, name, { now });
-    // What the earlier surfaces showed WITH provenance: signal rows (headline, publisher, date) and live facts.
-    // A research source inside the 45-day inbox window was shown as a bare URL + reason; outside it, not at all.
-    const signalKeys = new Set(
-      (await prisma.gapSignal.findMany({ where: { account_name: name }, select: { url: true } })).map((r) => normalizeSignalUrl(r.url ?? '') ?? ''),
-    );
-    const recentRuns = await prisma.researchRun.findMany({ where: { account_name: name, run_key: { startsWith: 'gap_research:' }, created_at: { gte: new Date(now.getTime() - INBOX_WINDOW_MS) } }, select: { provider_status: true } });
-    const bare = new Set<string>();
-    for (const r of recentRuns) {
-      const res = ((r.provider_status ?? {}) as { result?: { rejected?: Array<{ url?: string }> } }).result;
-      for (const x of res?.rejected ?? []) bare.add(normalizeSignalUrl(x.url ?? '') ?? '');
-    }
-    const hiddenBefore = s.items.filter((i) => !signalKeys.has(i.key) && !i.factId && i.status !== 'VERIFIED_FOR_OUTREACH');
-    const notFacts = s.items.filter((i) => i.status !== 'VERIFIED_FOR_OUTREACH');
-    const oldest = [...s.items].filter((i) => i.publishedAt).sort((a, b) => a.publishedAt!.localeCompare(b.publishedAt!))[0];
-    const ambiguous = s.items.filter((i) => /not about .* itself/.test(i.reason ?? '')).length;
+    const [s, inputs] = await Promise.all([loadAccountSources(prisma, name, { now }), exists ? loadAccountInputs(prisma, name, now, { live: true }).catch(() => null) : Promise.resolve(null)]);
+    const brief = inputs ? buildAccountBrief(inputs, now) : null;
+    const claims = s.items.flatMap((i) => [{ v: i.verification }, ...(i.alsoOnPage ?? []).map((a) => ({ v: a.verification }))]);
+    const checked = claims.filter((c) => c.v !== 'UNCHECKED' && c.v !== 'VERIFYING');
+    const count = (v: string) => checked.filter((c) => c.v === v).length;
+    const hyps = inputs?.hypotheses ?? [];
+    const bids = inputs?.bids ?? [];
     lines.push(
-      `| ${name} | ${s.sourcesFound} | ${s.verifiedFacts} | ${notFacts.length} | ${hiddenBefore.length} (${hiddenBefore.filter((h) => !bare.has(h.key)).length} not shown at all, ${hiddenBefore.filter((h) => bare.has(h.key)).length} bare URL) | ${oldest ? `${oldest.publishedAt!.slice(0, 10)} ${oldest.publisher}` : 'n/a'} | ${ambiguous} | ${s.setAside} | ${s.dropped} |`,
+      `| ${name} | ${s.sourcesFound} | ${checked.length} (${count('VERIFIED_AT_SOURCE')} / ${count('COULD_NOT_VERIFY')} / ${count('CONTRADICTED')}) | ${s.claimsVerified} | ${s.outreachEligible} | ${hyps.length} | ${bids.length} | ${candidate ? `candidate: Scout ${candidate.verdict ?? 'no verdict'} (${candidate.entity_type ?? 'type unknown'}), decision ${candidate.decision}` : (brief?.glance.motion ?? 'unknown').slice(0, 80)} |`,
     );
-    details.push(`## ${name}`, '', `Sources found: ${s.sourcesFound} · Outreach facts verified: ${s.verifiedFacts}`, '');
+    details.push(`## ${name}`, '', `Sources / signals: ${s.sourcesFound} · Verified at source: ${s.claimsVerified} claims · Eligible as outreach evidence: ${s.outreachEligible}${s.setAside ? ` · set aside ${s.setAside}` : ''}${s.dropped ? ` · not shown ${s.dropped}` : ''}`, '');
     for (const i of s.items) {
-      details.push(
-        `- **${i.publisher}** · ${ageLabel(i.publishedAt, i.ageDays)}${i.publishedAt && !i.freshTrigger ? ' · NOT A FRESH TRIGGER' : ''} · ${STATUS_LABEL[i.status]}${i.reason ? `: ${i.reason}` : ''}${i.attribution ? ` · said by ${i.attribution}` : ''}`,
-        `  ${i.title ?? '(no title)'} <${i.link}>${i.excerpt && i.excerptKind === 'verbatim' ? `\n  > ${i.excerpt.slice(0, 220)}` : ''}`,
-      );
+      details.push(`- **${i.publisher}** · ${ageLabel(i.publishedAt, i.ageDays)}${i.publishedAt && !i.freshTrigger ? ' · NOT A FRESH TRIGGER' : ''} · ${claimLine(i)}${i.attribution ? ` · claim made by ${i.attribution}` : ''} · ${i.origin}`);
+      details.push(`  ${i.title ?? '(no title)'} <${i.link}>${i.excerpt && i.excerptKind === 'verbatim' ? `\n  > ${i.excerpt.slice(0, 220)}` : ''}`);
+      for (const a of i.alsoOnPage ?? []) details.push(`  - also on this page: ${claimLine(a)}${a.attribution ? ` · claim made by ${a.attribution}` : ''}: "${a.excerpt.slice(0, 160)}"`);
     }
     details.push('');
   }

@@ -54,7 +54,9 @@ export type OutreachFactRefusal =
   /** Stabilization A: the claim is another organization's (a vendor quoted about the account). */
   | 'third_party_statement'
   /** Stabilization A: stored on a search-redirect link; no publisher page Casey can open. */
-  | 'redirect_source';
+  | 'redirect_source'
+  /** Final review: linked to an aggregator or mirror, not the publisher's page. */
+  | 'weak_source';
 
 /** The verification stamp research writes when the excerpt was found in the fetched source (research/run.ts). */
 export const VERIFIED_EXCERPT = 'excerpt_found_at_source';
@@ -84,6 +86,7 @@ export function outreachFactRefusal(s: GateSignal, accountName: string): Outreac
   // The same stored-claim rules the brief applies: attribution and a real publisher link.
   const live = liveFactFailure(text, accountName, factUrl(s));
   if (live === 'redirect_unresolved') return 'redirect_source';
+  if (live === 'source_too_weak') return 'weak_source';
   if (live === 'quoted_third_party') return 'third_party_statement';
   return null;
 }
