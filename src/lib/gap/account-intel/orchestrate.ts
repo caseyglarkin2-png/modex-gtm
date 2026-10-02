@@ -106,6 +106,10 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     return { tasks, skipped };
   }
   // Relationship-led: the ask comes first; research is context for that conversation, never a cold opener.
+  // Warm intro only: the introduction is the work; research is context for that conversation, never a cold opener.
+  if (brief.motion.type === 'INTRO_ONLY') {
+    tasks.push({ section: 'relationships', depth: 'BRIEF', provider: 'human', focus: `Ask ${brief.motion.who ?? 'the introducer'} for the introduction (no draft, no cold opener).`, why: brief.motion.why });
+  }
   if (brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED') {
     tasks.push({ section: 'relationships', depth: 'BRIEF', provider: 'human', focus: `Ask ${brief.motion.who ?? 'the person Casey knows here'} for their perspective (no draft, no cold opener).`, why: brief.motion.why });
   }

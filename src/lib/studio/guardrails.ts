@@ -1,14 +1,13 @@
-const WARM_INTRO_ONLY_ACCOUNTS = ['dannon', 'danone'];
+import { restrictionForName } from '@/lib/gap/policy/restriction';
 
+/** Delegates to the ONE restriction authority (gap/policy/restriction.ts). */
 export function isWarmIntroOnlyAccount(accountName: string): boolean {
-  const normalized = accountName.trim().toLowerCase();
-  return WARM_INTRO_ONLY_ACCOUNTS.some((name) => normalized.includes(name));
+  return !!restrictionForName(accountName);
 }
 
 export function assertColdOutreachAllowed(accountName: string): void {
-  if (isWarmIntroOnlyAccount(accountName)) {
-    throw new Error('Dannon is warm-intro only via Mark Shaughnessy. Cold outreach actions are blocked.');
-  }
+  const r = restrictionForName(accountName);
+  if (r) throw new Error(`${r.reason} Cold outreach actions are blocked.`);
 }
 
 export function sanitizeGeneratedCopy(content: string): string {

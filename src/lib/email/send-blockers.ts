@@ -22,6 +22,7 @@ export type SendBlockerCode =
   | 'GENERATED_CONTENT_MISSING'
   | 'APPROVAL_REQUIRED'
   | 'MIXED_ACCOUNT_PAYLOAD'
+  | 'WARM_INTRO_ONLY'
   | 'RUNTIME_FAILURE';
 
 export type SendBlocker = {
@@ -68,6 +69,11 @@ export function recipientNotFoundSendBlocker(message = 'Recipient record not fou
 
 export function unsubscribedSendBlocker(email: string) {
   return blocker('UNSUBSCRIBED', 400, 'UNSUBSCRIBED', `Cannot send to ${email} - recipient has unsubscribed.`);
+}
+
+/** A warm-intro-only account (gap/policy/restriction.ts): never a cold send. */
+export function warmIntroOnlySendBlocker(reason: string) {
+  return blocker('WARM_INTRO_ONLY', 409, 'WARM_INTRO_ONLY', reason);
 }
 
 export function ineligibleRecipientSendBlocker(reason: string) {

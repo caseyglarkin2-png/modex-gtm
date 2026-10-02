@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { getCampaignTemplate, type CampaignTemplateKey } from './templates';
+import { restrictionForName } from '@/lib/gap/policy/restriction';
 
 interface CampaignDripConfig {
   templateKey: CampaignTemplateKey;
@@ -99,6 +100,12 @@ export async function runCampaignDripCheck(now = new Date()): Promise<CampaignDr
 
     for (const accountName of accountNames) {
       summary.accountsReviewed += 1;
+
+      // A warm-intro-only account (gap/policy/restriction.ts) never gets a "send a touch" task minted for it.
+      if (restrictionForName(accountName)) {
+        summary.skipped += 1;
+        continue;
+      }
 
       const logs = campaign.email_logs.filter((email) => email.account_name === accountName);
       const nextTouchNumber = logs.length + 1;

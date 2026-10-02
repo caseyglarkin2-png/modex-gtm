@@ -138,6 +138,7 @@ import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
+import { restrictionForAccount } from '@/lib/gap/policy/restriction';
 import type { QueueAddInput } from '@/lib/validations';
 
 export const ENROLL_ACTION: RoutingAction = 'enroll_gap_sequence';
@@ -540,6 +541,14 @@ export type ActionTimeOpportunityCheck = (prisma: any, accountName: string, emai
 
 /** Re-read at the click: routing state may be stale; this wins. Never throws (a throw is UNKNOWN). */
 export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = {}, familyDeps: { hold?: (prisma: Parameters<ActionTimeOpportunityCheck>[0], accountName: string, now: Date) => Promise<{ detail: string; unknown: boolean } | null> } = {}): ActionTimeOpportunityCheck => async (prisma, accountName, email, now) => {
+  // A warm-intro-only account (policy/restriction.ts) is never contacted cold: the same terminal refusal as a live
+  // deal, worded as the restriction. Read with the account's aliases; a failed alias read is UNKNOWN (fail closed).
+  try {
+    const restricted = await restrictionForAccount(prisma, accountName, email);
+    if (restricted) return { status: 'ACTIVE', detail: restricted.reason };
+  } catch (e) {
+    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY} (could not read the account's aliases for a warm-intro-only restriction: ${e instanceof Error ? e.message : String(e)})` };
+  }
   let inputs: ActiveOpportunityInputs;
   // Corporate family (family/family.ts), read alongside the account's own deal state (the click has a time limit).
   const familyHold = (async () => (familyDeps.hold ?? (async (p: Parameters<ActionTimeOpportunityCheck>[0], a: string, n: Date) => (await import('../family/family')).familyHoldNow(p, a, n)))(prisma, accountName, now))();

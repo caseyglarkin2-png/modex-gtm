@@ -15,8 +15,10 @@ import {
   ineligibleRecipientSendBlocker,
   mixedAccountPayloadSendBlocker,
   unsubscribedSendBlocker,
+  warmIntroOnlySendBlocker,
   type SendBlocker,
 } from '@/lib/email/send-blockers';
+import { restrictionFor, restrictionForEmail } from '@/lib/gap/policy/restriction';
 
 /**
  * Structural Prisma type. Kept as `PrismaClient` so the downstream RevOps
@@ -119,6 +121,15 @@ export async function evaluateSendGuards(
   // (recipient → generated-content → request-body account), distinct from the
   // recipient-only account used for EmailLog + pipeline advance below.
   const invariantAccountName = input.invariantAccountName ?? input.accountName ?? null;
+
+  // A warm-intro-only account (gap/policy/restriction.ts) is never sent to from this path, by account name or by
+  // any recipient's domain. Stricter only; checked before anything else is read or recorded.
+  const restricted =
+    restrictionFor({ name: invariantAccountName, email: to }) ??
+    restrictionFor({ name: accountName }) ??
+    (cc ?? []).map((c) => restrictionForEmail(c)).find((r) => r) ??
+    null;
+  if (restricted) return { ok: false, block: warmIntroOnlySendBlocker(restricted.reason) };
 
   const accountInvariant = await enforceOneAccountInvariant(prisma, {
     accountName: invariantAccountName,

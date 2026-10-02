@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { prisma } from '@/lib/prisma';
+import { restrictionFor } from '@/lib/gap/policy/restriction';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -92,6 +93,11 @@ export async function POST(request: NextRequest) {
     }
     if (sentSet.has(n.to_email)) {
       results.push({ to_email: n.to_email, status: 'skipped', reason: 'already_sent' });
+      continue;
+    }
+    // A warm-intro-only account (gap/policy/restriction.ts) never gets a cold Outbox draft.
+    if (restrictionFor({ name: it.company ?? it.account_name ?? '', email: n.to_email })) {
+      results.push({ to_email: n.to_email, status: 'skipped', reason: 'warm_intro_only' });
       continue;
     }
     seenInBatch.add(n.to_email);

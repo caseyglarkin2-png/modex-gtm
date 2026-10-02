@@ -23,6 +23,7 @@ import { loadAccountConversations } from '../motion/load';
 import { suggestAngle } from '../motion/persona-angle';
 import { traitsOf } from './traits';
 import { decideApproach } from '../motion/approach';
+import { restrictionForName } from '../policy/restriction';
 import { sensitivityOf } from '../research/sensitivity';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,8 +74,8 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   let approach: Approach;
   let suggested: string;
   // ONE decision (motion/approach.ts); the card only words it for this person and source.
-  const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name }, groundedThesis: !!i.thesis, sensitiveOnly: i.fact ? sensitivityOf(i.fact.quote) : null });
-  if (decided.kind === 'NO_GOOD_MOTION' || decided.kind === 'IN_DEAL') {
+  const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name }, groundedThesis: !!i.thesis, sensitiveOnly: i.fact ? sensitivityOf(i.fact.quote) : null, restriction: restrictionForName(m.accountName) });
+  if (decided.kind === 'NO_GOOD_MOTION' || decided.kind === 'IN_DEAL' || decided.kind === 'INTRO_ONLY') {
     approach = 'hold';
     suggested = `Not now. ${decided.why}`;
   } else if (decided.kind === 'FOLLOW_UP' && i.conversation) {

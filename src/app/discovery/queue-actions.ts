@@ -17,6 +17,7 @@ import { assignVariants } from '@/lib/queue/variant';
 import { QueueAddSchema, type QueueAddInput } from '@/lib/validations';
 import { isGapOsEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
+import { restrictionFor } from '@/lib/gap/policy/restriction';
 
 /** One GAP item the compile guard excluded from a batch approval (S3-T11). */
 export interface ApproveRefusal {
@@ -124,6 +125,8 @@ export async function addOne(
   owner: string,
 ): Promise<{ ok: true; id: number } | { ok: false; reason: string }> {
   const toEmail = input.toEmail.toLowerCase();
+  // A warm-intro-only account (gap/policy/restriction.ts) never gets a cold Outbox draft.
+  if (restrictionFor({ name: input.accountName, email: toEmail })) return { ok: false, reason: 'warm_intro_only' };
 
   const [unsubscribed, emailLogHit, queuedHit, gmailThread] = await Promise.all([
     prisma.unsubscribedEmail.findUnique({ where: { email: toEmail } }).then((r) => !!r),
