@@ -141,7 +141,7 @@ const GLANCE_ROWS: Array<[keyof AccountIntelligenceBrief['glance'], string]> = [
   ['whyNow', 'Why now'],
   ['network', 'Network'],
   ['freight', 'Freight'],
-  ['bestFact', 'Best verified fact'],
+  ['bestFact', 'Best outreach evidence'],
   ['topHypothesis', 'Top hypothesis'],
   ['currentTech', 'Current tech'],
   ['likelyOwner', 'Who probably owns it'],
@@ -220,7 +220,7 @@ export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelli
                   <p className="min-w-0 break-words">{h.problem}</p>
                 </div>
                 <p className="mt-1 break-words text-xs text-[var(--muted-foreground)]">
-                  Observation{h.observation.verified ? ' (verified)' : ' (not a live verified fact: this draft cannot lead)'}: {clip(h.observation.text)}
+                  Observation{h.observation.verified ? ' (verified)' : ' (not eligible as outreach evidence now: this draft cannot lead)'}: {clip(h.observation.text)}
                 </p>
                 {h.wrongIf ? <p className="text-xs text-[var(--muted-foreground)]">Wrong if: {h.wrongIf}</p> : null}
               </li>

@@ -5,22 +5,17 @@ STATUS: ACTIVE (shipped with feat/gap-research-aperture, 2026-10-01)
 
 Research maximizes RECALL. Execution maximizes PRECISION.
 
-## Two different things
+## The truth vocabulary (stabilization, 2026-10-01)
 
-| | What it is | Who decides | Where it lives |
-|---|---|---|---|
-| SOURCE / SIGNAL | something GAP found: a story, a page, a filing, a link Casey shared | nobody; it is shown | `gap_signals`, `ResearchRun.provider_status.result.sources`, stored facts |
-| VERIFIED OUTREACH EVIDENCE | a fact Casey may state to a buyer | the strict `verifyCandidate` contract (unchanged) | `prospecting_signals` `source_kind='evidence_record'`, `metadata.verified='excerpt_found_at_source'`, re-gated on read by `liveFactFailure` |
+SOURCE (a document or human input, with provenance) > SIGNAL (may be worth knowing; needs no fact) > CLAIM (one attributed assertion: who, where, when) > VERIFIED FACT (a claim checked at its source: true, not necessarily new, useful or first-party) > OUTREACH EVIDENCE (the strict subset Casey may say to a buyer) > HYPOTHESIS (what we think; never fact) > BUYER TRUTH (what the buyer confirms; outranks all). Canonical text: `src/lib/gap/sources/source-copy.ts` and `docs/gap/STABLE_BASELINE.md`.
 
-A source that fails the outreach contract stays visible, with its provenance and the factual reason. "Not verified" never means "irrelevant". "No verified outreach fact" never means "no information found": every surface shows **Sources found** apart from **Outreach facts verified**.
+## Two axes on every source card
 
-## Evidence status on every source card
+- **Verification**: UNCHECKED, VERIFYING, VERIFIED AT SOURCE, COULD NOT VERIFY, CONTRADICTED. A rule failed before GAP checked the page (undated, no physical change, a past event) leaves a claim UNCHECKED, never "false".
+- **Outreach**: ELIGIBLE, NOT ELIGIBLE, NOT EVALUATED, NEEDS HUMAN JUDGMENT. ELIGIBLE is exactly the brief's live-fact rule (`research/claim-rules.ts` liveFactFailure, not ended, not past its freshness window).
+- Counts everywhere: **Sources / signals** · **Verified at source: N claims** · **Eligible as outreach evidence: M**.
 
-- **VERIFIED FOR OUTREACH**: a live stored fact at this URL (the same re-gate as the account brief).
-- **NOT VERIFIED FOR OUTREACH**: checked, and the reason says why (past event, third-party statement, not about the account itself, no physical operations change, undated, failed a later recheck, not checked yet, being checked).
-- **COULD NOT VERIFY**: the page could not be fetched, had no readable text, or was not read within the run's time budget.
-
-Third-party statements are attributed ("Said by Gatik (third party), not PepsiCo"). A search model's paraphrase is labelled "Search summary, not a quote". Two statements from one page stay two statements, each with its own status and speaker. An old source carries its age ("published Jun 8, 2026 · 3 months old") and a NOT A FRESH TRIGGER label; it is never hidden.
+A three-month-old claim is VERIFIED AT SOURCE and NOT ELIGIBLE (not a fresh trigger). A vendor's quote is VERIFIED AT SOURCE, attributed to the vendor, and NOT ELIGIBLE as the account's evidence. The strict outreach gate (`evidence-gate.ts` outreachFactRefusal) also refuses a third-party statement and a claim stored on a search-redirect link.
 
 ## Hard-drop rules (the only things not shown; counted as "not shown")
 

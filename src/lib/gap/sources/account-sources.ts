@@ -1,41 +1,44 @@
 /**
- * RESEARCH APERTURE (2026-10-01): every source GAP found about an account, in one place.
+ * RESEARCH APERTURE + TRUTH VOCABULARY (2026-10-01): every source GAP found about an account, in one place.
  *
- * Research maximizes RECALL; execution maximizes PRECISION. Two separate things:
+ * Research maximizes RECALL; execution maximizes PRECISION. Each source carries its lead CLAIM on two axes:
  *
- *   SOURCE / SIGNAL            something GAP found (a story, a page, a filing, a link Casey shared)
- *   VERIFIED OUTREACH EVIDENCE a fact Casey may state to a buyer (the strict verifyCandidate contract)
+ *   VERIFICATION  UNCHECKED | VERIFYING | VERIFIED AT SOURCE | COULD NOT VERIFY | CONTRADICTED
+ *   OUTREACH      ELIGIBLE | NOT ELIGIBLE | NOT EVALUATED | NEEDS HUMAN JUDGMENT
  *
- * A source that fails the outreach contract stays visible with its provenance and the FACTUAL reason it is not
- * outreach evidence. Nothing here scores, ranks away, or hides a source on a bot's judgment of worth. Only objective
- * garbage is dropped (search redirects, malformed links, pages proven not to name the account), and counted.
- * Casey's own Ignore / Wrong account moves a source out of the default view (counted, never deleted).
+ * A three-month-old claim can be VERIFIED AT SOURCE and NOT ELIGIBLE (not a fresh trigger) without ceasing to be a
+ * fact; a vendor's quote can be VERIFIED AT SOURCE (speaker: the vendor) and NOT ELIGIBLE as the account's own.
+ * ELIGIBLE is exactly the account brief's live-fact rule (claim-rules.ts liveFactFailure, not ended, not expired).
  *
- * Read-only: it never creates a hypothesis, links evidence, approves or activates anything.
+ * Nothing here scores, ranks away, or hides a source on a bot's judgment of worth. Only objective garbage is dropped
+ * (search redirects, malformed links), and counted. Casey's own Ignore / Wrong account moves a source out of the
+ * default view (counted, never deleted). Read-only: no hypothesis, evidence link, approval or activation.
  */
 import { normalizeSignalUrl } from '../signals/intake';
-import { liveFactFailure, speakerOrg, textNamesAccount, type SourceRecord } from '../research/run';
-import { normalizeCompany } from '../research/providers';
+import type { SourceRecord } from '../research/run';
+import { liveFactFailure, normalizeCompany, speakerOrg, textNamesAccount } from '../research/claim-rules';
 import { classifyContinuity } from '../research/continuity';
-import { DROP_REASONS, SEARCH_REDIRECT, sourceReason, type AccountSource, type SourceStatus, type WhyFound } from './source-copy';
+import { normalizeCompanyName } from '../identity/normalize';
+import { DROP_REASONS, SEARCH_REDIRECT, axesOf, sourceReason, type AccountSource, type OutreachState, type SourceClaim, type VerificationState, type WhyFound } from './source-copy';
 
-export { ageLabel, sourceReason, STATUS_LABEL } from './source-copy';
-export type { AccountSource, SourceStatus, WhyFound } from './source-copy';
+export { ageLabel, claimLine, OUTREACH_LABEL, sourceReason, VERIFICATION_LABEL } from './source-copy';
+export type { AccountSource, OutreachState, SourceClaim, VerificationState, WhyFound } from './source-copy';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Row = Record<string, any>;
 
-
 export interface AccountSources {
   accountName: string;
   items: AccountSource[];
-  /** Sources shown. */
+  /** SOURCES / SIGNALS shown. */
   sourcesFound: number;
-  /** Live verified outreach facts (one per quote, the same re-gate the account brief applies). */
-  verifiedFacts: number;
-  /** Objective garbage dropped (search redirects, malformed links, pages proven not to name the account). */
+  /** Distinct claims GAP verified at their source (facts; true, not necessarily usable). */
+  claimsVerified: number;
+  /** Distinct verified claims currently eligible as outreach evidence (the brief's live facts). */
+  outreachEligible: number;
+  /** Objective garbage dropped (search redirects, malformed links). */
   dropped: number;
   /** Casey ignored or reassigned: out of the default view, never deleted. */
   setAside: number;
@@ -48,12 +51,6 @@ const DAY = 86_400_000;
 /** The research inbox window: a source older than this is context, not a fresh trigger. */
 export const FRESH_TRIGGER_DAYS = 45;
 const SET_ASIDE = new Set(['ignored', 'irrelevant', 'wrong_account']);
-
-
-function statusOf(raw: string | null): SourceStatus {
-  if (raw && (raw.startsWith('source_unreadable') || raw === 'not_read_budget')) return 'COULD_NOT_VERIFY';
-  return 'NOT_VERIFIED_FOR_OUTREACH';
-}
 
 const host = (url: string) => {
   try {
@@ -94,10 +91,17 @@ export function whyFound(text: string, categories: readonly string[] = []): WhyF
   return out.size ? [...out].slice(0, 4) : ['other'];
 }
 
-const RANK: Record<SourceStatus, number> = { VERIFIED_FOR_OUTREACH: 3, NOT_VERIFIED_FOR_OUTREACH: 2, COULD_NOT_VERIFY: 1 };
-/** A pending reason ("not checked yet", "being checked") says less than any checked reason. */
-const weak = (s: AccountSource) => s.status === 'NOT_VERIFIED_FOR_OUTREACH' && (s.reason === 'not checked yet' || s.reason === 'being checked now');
-const rank = (s: AccountSource) => (weak(s) ? 0.5 : RANK[s.status]);
+/** Which reading of one URL leads its card: the one that says the most about the claim. */
+function rank(s: { verification: VerificationState; outreach: OutreachState }): number {
+  if (s.outreach === 'ELIGIBLE') return 6;
+  if (s.verification === 'CONTRADICTED' || s.outreach === 'NEEDS_HUMAN_JUDGMENT') return 5;
+  if (s.verification === 'VERIFIED_AT_SOURCE') return 4;
+  if (s.verification === 'COULD_NOT_VERIFY' && s.outreach === 'NOT_ELIGIBLE') return 3;
+  if (s.outreach === 'NOT_ELIGIBLE') return 2.5;
+  if (s.verification === 'COULD_NOT_VERIFY') return 2;
+  if (s.verification === 'VERIFYING') return 1;
+  return 0.5;
+}
 const mergeWhy = (a: WhyFound[], b: WhyFound[]): WhyFound[] => {
   const m = [...new Set([...a, ...b])].filter((w) => w !== 'other').slice(0, 4);
   return m.length ? m : ['other'];
@@ -107,25 +111,30 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
   const now = opts.now;
   const key = normalizeCompany(accountName);
   // A failed read THROWS (the page says the sources could not be read): an empty read must never print as
-  // "0 sources found · 0 outreach facts verified".
-  const [runs, signals, factRows]: [Row[], Row[], Row[]] = await Promise.all([
+  // "0 sources found".
+  const [runs, signals, factRows, scoutRow]: [Row[], Row[], Row[], Row | null] = await Promise.all([
     prisma.researchRun.findMany({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, take: opts.runs ?? 25, select: { id: true, created_at: true, provider_status: true } }),
     // This account's signals, and the ones Casey moved away from it (Wrong account / reassigned): those stay set aside.
     prisma.gapSignal.findMany({
       where: { OR: [{ account_name: accountName }, { metadata: { path: ['reassignedFrom'], equals: accountName } }] },
       orderBy: { created_at: 'desc' },
       take: 300,
-      select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true, account_name: true, resolution_basis: true },
+      select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true, account_name: true, resolution_basis: true, event_id: true },
     }),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, orderBy: { observed_at: 'desc' }, take: 200, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, updated_at: true, metadata: true } }),
+    // Scout's cited pages for this company (its verdict is separate; its citations are sources).
+    prisma.gapAccountCandidate?.findFirst
+      ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' }, select: { scout: true, scouted_at: true } })
+      : Promise.resolve(null),
   ]);
 
   let dropped = 0;
   const byKey = new Map<string, AccountSource>();
   const iso = (d: unknown) => (d ? new Date(d as string).toISOString() : null);
-  const make = (url: string, over: Partial<AccountSource> & { discoveredAt: string; origin: AccountSource['origin']; status: SourceStatus }): AccountSource | null => {
+  type Over = Partial<AccountSource> & { discoveredAt: string; origin: AccountSource['origin']; verification: VerificationState; outreach: OutreachState };
+  const make = (url: string, over: Over): AccountSource | null => {
     const k = normalizeSignalUrl(url);
-    // A search redirect is dropped, EXCEPT under a stored fact: a fact the brief counts is never hidden.
+    // A search redirect is dropped, EXCEPT under a stored fact: a fact GAP holds is never hidden.
     const redirect = SEARCH_REDIRECT.test(url);
     if (!k || (redirect && !over.factId)) {
       dropped += 1;
@@ -148,34 +157,35 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       factId: null,
       reviewed: false,
       reason: null,
+      eventId: null,
       ...over,
       // A page title that is only the URL says nothing.
       title: over.title && over.title !== url ? over.title : null,
       publishedAt,
     };
   };
+  const claimOf = (s: AccountSource): SourceClaim => ({ excerpt: s.excerpt ?? '', verification: s.verification, outreach: s.outreach, reason: s.reason, attribution: s.attribution });
   const add = (s: AccountSource | null) => {
     if (!s) return;
     const cur = byKey.get(s.key);
     if (!cur) return void byKey.set(s.key, s);
     const win = rank(s) > rank(cur) ? s : cur;
     const lose = win === s ? cur : s;
-    // Two different statements from one page stay two statements, each with its own status and speaker.
+    // Two different claims from one page stay two claims, each with its own states and speaker. Only the page's
+    // own words: a search summary or a headline is never listed as a claim on the page.
     const also = [...(win.alsoOnPage ?? []), ...(lose.alsoOnPage ?? [])];
-    // Only the page's own words: a search summary is never listed as a statement on the page.
-    if (lose.excerpt && win.excerpt && lose.excerptKind === 'verbatim' && lose.excerpt !== win.excerpt && !also.some((a) => a.excerpt === lose.excerpt)) {
-      also.push({ excerpt: lose.excerpt, status: lose.status, reason: lose.reason, attribution: lose.attribution });
-    }
+    if (lose.excerpt && win.excerpt && lose.excerptKind === 'verbatim' && lose.excerpt !== win.excerpt && !also.some((a) => a.excerpt === lose.excerpt)) also.push(claimOf(lose));
     byKey.set(s.key, {
       ...win,
       // The story's own headline (from the signal row) reads better than a fact row's page title.
       title: (lose.signalId && !win.signalId && lose.title) || win.title || lose.title,
+      publisher: win.publisher === host(win.link) && lose.publisher && lose.publisher !== host(lose.link) ? lose.publisher : win.publisher,
       publishedAt: win.publishedAt ?? lose.publishedAt,
       ageDays: win.ageDays ?? lose.ageDays,
       freshTrigger: win.publishedAt ? win.freshTrigger : lose.freshTrigger,
       excerpt: win.excerpt ?? lose.excerpt,
       excerptKind: win.excerpt ? win.excerptKind : lose.excerptKind,
-      // The speaker belongs to the excerpt shown, never borrowed from another statement on the page.
+      // The speaker belongs to the claim shown, never borrowed from another claim on the page.
       attribution: win.excerpt ? win.attribution : lose.attribution,
       alsoOnPage: also.length ? also.slice(0, 4) : undefined,
       // The earliest time GAP saw it; Casey's share outranks GAP's own discovery.
@@ -183,25 +193,48 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       origin: [win.origin, lose.origin].includes('casey_shared') ? 'casey_shared' : win.origin,
       signalId: win.signalId ?? lose.signalId,
       factId: win.factId ?? lose.factId,
+      eventId: win.eventId ?? lose.eventId,
       reviewed: win.reviewed || lose.reviewed,
       whyFound: mergeWhy(win.whyFound, lose.whyFound),
     });
   };
 
-  // 1. Live verified facts (the same re-gate as the account brief). A stored fact that no longer passes stays visible.
-  const liveQuotes = new Set<string>();
-  const verifiedKeys = new Set<string>();
+  // 1. Stored verified claims (facts). ELIGIBLE is the brief's live-fact rule; every other verified claim stays a
+  // fact, NOT ELIGIBLE, with the reason. A claim whose source failed a later recheck is no longer a verified fact.
+  const verifiedQuotes = new Set<string>();
+  const eligibleQuotes = new Set<string>();
+  const eligibleKeys = new Set<string>();
   for (const r of factRows) {
     const meta = (r.metadata ?? {}) as Row;
     if (!r.evidence_text || !r.evidence_url) continue;
-    // A stored fact whose source failed a later recheck is still a source GAP found, with that reason.
     const recheck = typeof meta.verified === 'string' && /failed_recheck$/.test(meta.verified);
     if (meta.verified !== 'excerpt_found_at_source' && !recheck) continue;
-    // The brief's live-fact rule: a change that has since ended or was superseded is not a live fact.
-    const kind = meta.continuity?.kind === 'ended' || meta.continuity?.kind === 'ongoing_state' ? meta.continuity.kind : classifyContinuity(r.evidence_text);
-    const fail = recheck ? 'failed_recheck' : (liveFactFailure(r.evidence_text, accountName) ?? (kind === 'ended' ? 'fact_ended' : null));
-    const speaker = speakerOrg(r.evidence_text)?.replace(/[.,;:]+$/, '') ?? null;
-    if (!fail) liveQuotes.add(String(r.evidence_text).trim().toLowerCase());
+    const quote = String(r.evidence_text).trim().toLowerCase();
+    const speaker = speakerOrg(r.evidence_text);
+    const third = speaker && !textNamesAccount(speaker, key) ? speaker : null;
+    const recheckReason = typeof meta.recheck?.reason === 'string' ? (meta.recheck.reason as string) : null;
+    let verification: VerificationState = 'VERIFIED_AT_SOURCE';
+    let outreach: OutreachState = 'ELIGIBLE';
+    let reason: string | null = null;
+    if (recheck) {
+      // A recheck that could not find the claim again leaves it unverified; one that tightened a rule leaves it true.
+      const ax = axesOf(recheckReason);
+      verification = ax.verification === 'COULD_NOT_VERIFY' ? 'COULD_NOT_VERIFY' : 'VERIFIED_AT_SOURCE';
+      outreach = 'NOT_ELIGIBLE';
+      reason = `${sourceReason('failed_recheck', accountName)}${recheckReason ? `: ${sourceReason(recheckReason, accountName, third)}` : ''}`;
+    } else {
+      const live = liveFactFailure(r.evidence_text, accountName, r.evidence_url);
+      const kind = meta.continuity?.kind === 'ended' || meta.continuity?.kind === 'ongoing_state' ? meta.continuity.kind : classifyContinuity(r.evidence_text);
+      const expired = r.freshness_expires_at ? new Date(r.freshness_expires_at).getTime() <= now.getTime() : false;
+      const why = live ?? (kind === 'ended' ? 'fact_ended' : expired ? 'fact_expired' : null);
+      if (live === 'redirect_unresolved') verification = 'COULD_NOT_VERIFY';
+      if (why) {
+        outreach = 'NOT_ELIGIBLE';
+        reason = sourceReason(why, accountName, third);
+      }
+    }
+    if (verification === 'VERIFIED_AT_SOURCE') verifiedQuotes.add(quote);
+    if (outreach === 'ELIGIBLE') eligibleQuotes.add(quote);
     const expires = r.freshness_expires_at ? new Date(r.freshness_expires_at) : null;
     const s = make(r.evidence_url, {
       title: r.title ?? null,
@@ -209,29 +242,28 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       discoveredAt: iso(meta.retrievedAt ?? r.updated_at ?? r.observed_at)!,
       excerpt: r.evidence_text,
       excerptKind: 'verbatim',
-      attribution: fail === 'quoted_third_party' ? speaker : null,
+      attribution: third,
       origin: 'gap_research',
-      status: fail ? 'NOT_VERIFIED_FOR_OUTREACH' : 'VERIFIED_FOR_OUTREACH',
-      reason: fail === 'fact_ended'
-        ? sourceReason('fact_ended', accountName)
-        : fail === 'failed_recheck'
-        ? `${sourceReason('failed_recheck', accountName)}${typeof meta.recheck?.reason === 'string' ? `: ${sourceReason(meta.recheck.reason, accountName, speaker)}` : ''}`
-        : fail ? `${sourceReason('fact_no_longer_passes', accountName)}: ${sourceReason(fail, accountName, speaker)}` : null,
+      verification,
+      outreach,
+      reason,
       factId: r.id,
     });
-    if (s && !fail) {
+    if (s) {
       // A verified fact's own clock decides freshness.
       if (expires) s.freshTrigger = expires.getTime() > now.getTime();
-      verifiedKeys.add(s.key);
+      if (outreach === 'ELIGIBLE') eligibleKeys.add(s.key);
     }
     add(s);
   }
 
-  // 2. Every page a research run looked at (rich records from 2026-10-01; older runs keep url + reason).
+  // 2. Every page a research run looked at (rich records from 2026-10-01; older runs keep url + reason, enriched
+  // with provenance by the metadata backfill when it could be recovered).
   for (const run of runs) {
     const result = ((run.provider_status ?? {}) as Row).result as Row | undefined;
     if (!result) continue;
     const at = iso(run.created_at)!;
+    const backfill = (result.provenance ?? {}) as Record<string, { title?: string | null; publishedAt?: string | null; publisher?: string | null }>;
     const records: SourceRecord[] = Array.isArray(result.sources)
       ? result.sources
       : (Array.isArray(result.rejected) ? result.rejected : []).map((r: Row) => ({ url: r.url, reason: r.reason, title: null, publishedAt: null, excerpt: null, excerptKind: null, provider: 'research', status: String(r.reason).startsWith('source_unreadable') ? 'could_not_verify' : 'not_verified' }));
@@ -241,45 +273,65 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
         dropped += 1;
         continue;
       }
-      const k = normalizeSignalUrl(r.url);
-      // "verified" in a run means a fact was stored; whether it is LIVE is the fact row's call (step 1).
-      if (r.status === 'verified') {
-        if (k && verifiedKeys.has(k)) continue;
-      }
+      // "verified" in a run means a fact was stored; its states are the fact row's call (step 1).
+      if (r.status === 'verified') continue;
       const quote = r.excerptKind === 'verbatim' && r.excerpt ? r.excerpt : null;
-      const speaker = quote ? speakerOrg(quote)?.replace(/[.,;:]+$/, '') ?? null : null;
+      const speaker = quote ? speakerOrg(quote) : null;
       const third = speaker && !textNamesAccount(speaker, key) ? speaker : null;
+      const prov = backfill[r.url] ?? {};
+      const ax = axesOf(r.reason);
       add(
         make(r.url, {
-          title: r.title,
-          publishedAt: r.publishedAt,
+          title: r.title ?? prov.title ?? null,
+          publishedAt: r.publishedAt ?? prov.publishedAt ?? null,
+          ...(prov.publisher ? { publisher: prov.publisher } : {}),
           discoveredAt: at,
           excerpt: r.excerpt,
           excerptKind: r.excerptKind,
           attribution: third,
           origin: 'gap_research',
-          status: r.status === 'verified' ? 'NOT_VERIFIED_FOR_OUTREACH' : statusOf(r.reason),
-          reason: r.status === 'verified' ? sourceReason('fact_no_longer_passes', accountName) : sourceReason(r.reason, accountName, third),
+          verification: ax.verification,
+          outreach: ax.outreach,
+          reason: sourceReason(r.reason, accountName, third),
         }),
       );
     }
   }
 
-  // 3. Signals: links Casey shared and stories GAP discovered.
+  // 3. Scout's cited pages: a source for each claim Scout made about the company. Never a checked claim, never
+  // outreach evidence; Scout's verdict lives on the account brief, separately.
+  const scout = (scoutRow?.scout ?? null) as Row | null;
+  if (scout) {
+    for (const c of [...(Array.isArray(scout.network) ? scout.network : []), ...(Array.isArray(scout.freight) ? scout.freight : [])] as Row[]) {
+      if (!c?.url || !c?.claim) continue;
+      add(
+        make(String(c.url), {
+          discoveredAt: iso(scoutRow!.scouted_at) ?? now.toISOString(),
+          excerpt: String(c.claim),
+          excerptKind: 'search_summary',
+          origin: 'scout',
+          verification: 'UNCHECKED',
+          outreach: 'NOT_EVALUATED',
+          reason: sourceReason('scout_citation', accountName),
+        }),
+      );
+    }
+  }
+
+  // 4. Signals: links Casey shared and stories GAP discovered.
   const setAsideItems: AccountSource[] = [];
   for (const g of signals) {
     if (!g.url) continue;
-    const verified = verifiedKeys.has(normalizeSignalUrl(g.url) ?? '');
+    const k = normalizeSignalUrl(g.url) ?? '';
+    const eligible = eligibleKeys.has(k);
     const rs = String(g.research_status ?? 'none');
-    // fact_found on a story whose fact verified at ANOTHER url (its primary source): that fact has its own card.
-    const raw = verified
-      ? null
-      : rs === 'contradiction' ? 'contradiction'
+    const raw = rs === 'contradiction' ? 'contradiction'
       : rs === 'queued' || rs === 'researching' ? 'being_checked'
       : rs === 'no_usable_fact' ? 'no_fact_sentence'
-      : rs === 'fact_found' ? (liveQuotes.size ? 'fact_at_other_source' : 'fact_no_longer_passes')
+      : rs === 'fact_found' ? (verifiedQuotes.size ? 'fact_at_other_source' : 'fact_no_longer_passes')
       : g.resolution_basis === 'discovery_mention' ? 'mention_only'
       : 'not_checked';
+    const ax = axesOf(raw);
     const s = make(g.url, {
       title: g.title ?? null,
       // A news-feed link (news.google.com) names its publisher in the feed, not in its host.
@@ -289,10 +341,12 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       excerpt: g.title ? g.title : null,
       excerptKind: g.title ? 'headline' : null,
       origin: g.origin === 'casey_share' || g.origin === 'conference_note' ? 'casey_shared' : 'gap_discovered',
-      status: verified ? 'VERIFIED_FOR_OUTREACH' : statusOf(raw),
-      // A contradiction on a verified page is said, never swallowed by the verified status.
-      reason: verified ? (rs === 'contradiction' ? 'verified; another source contradicts it (resolve it in the Research lane)' : null) : sourceReason(raw, accountName),
+      // A contradiction on a page that holds an eligible claim is said, never swallowed: Casey judges it.
+      verification: eligible && rs === 'contradiction' ? 'VERIFIED_AT_SOURCE' : ax.verification,
+      outreach: eligible && rs === 'contradiction' ? 'NEEDS_HUMAN_JUDGMENT' : ax.outreach,
+      reason: eligible && rs === 'contradiction' ? 'another source contradicts it (resolve it in the Research lane)' : sourceReason(raw, accountName),
       signalId: g.id,
+      eventId: g.event_id ?? null,
       reviewed: !!g.feedback,
     });
     if (s) s.whyFound = whyFound(`${g.title ?? ''}`, Array.isArray(g.categories) ? g.categories : []);
@@ -305,11 +359,11 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     }
     add(s);
   }
-  // A source Casey set aside stays out of the default view even when research also saw it. A live verified fact
-  // is never hidden behind a set-aside (it is counted, so it is shown, marked reviewed).
+  // A source Casey set aside stays out of the default view even when research also saw it. An eligible claim is
+  // never hidden behind a set-aside (it is counted, so it is shown, marked reviewed).
   const asideShown: AccountSource[] = [];
   for (const s of setAsideItems) {
-    if (verifiedKeys.has(s.key)) {
+    if (eligibleKeys.has(s.key)) {
       const cur = byKey.get(s.key);
       if (cur) cur.reviewed = true;
       continue;
@@ -318,7 +372,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     asideShown.push(s);
   }
 
-  // Publication date first. An undated link Casey shared sorts by when she shared it (never buried); an undated
+  // Publication date first. An undated link Casey shared sorts by when it was shared (never buried); an undated
   // page research happened to read sorts after the dated ones, newest found first.
   const dated = (s: AccountSource) => !!s.publishedAt || s.origin === 'casey_shared';
   const when = (s: AccountSource) => s.publishedAt ?? s.discoveredAt;
@@ -326,6 +380,32 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     (a, b) => Number(dated(b)) - Number(dated(a)) || when(b).localeCompare(when(a)) || b.discoveredAt.localeCompare(a.discoveredAt) || a.key.localeCompare(b.key),
   );
   const partial = runs.length >= (opts.runs ?? 25) || signals.length >= 300 || factRows.length >= 200;
-  return { accountName, items, sourcesFound: items.length, verifiedFacts: liveQuotes.size, dropped, setAside: asideShown.length, setAsideItems: asideShown, partial };
+  return { accountName, items, sourcesFound: items.length, claimsVerified: verifiedQuotes.size, outreachEligible: eligibleQuotes.size, dropped, setAside: asideShown.length, setAsideItems: asideShown, partial };
 }
 
+/**
+ * EVENTS (default view, no hidden score): sources telling one story group under one event, its best source first
+ * (eligible, then verified, then newest), "+ N more" expandable. Nothing is removed; ordering is by the lead's date.
+ */
+export interface SourceEvent {
+  id: string;
+  lead: AccountSource;
+  more: AccountSource[];
+  /** Casey has not acted on any source of this event yet. */
+  unreviewed: boolean;
+}
+
+export function groupEvents(items: readonly AccountSource[]): SourceEvent[] {
+  const groups = new Map<string, AccountSource[]>();
+  for (const s of items) {
+    const id = s.eventId ?? s.key;
+    groups.set(id, [...(groups.get(id) ?? []), s]);
+  }
+  const events = [...groups.entries()].map(([id, g]) => {
+    const sorted = [...g].sort((a, b) => rank(b) - rank(a) || (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''));
+    return { id, lead: sorted[0], more: sorted.slice(1), unreviewed: g.every((s) => !s.reviewed) };
+  });
+  const order = new Map(items.map((s, i) => [s.key, i]));
+  // New / unreviewed first, then the original date order of each event's earliest-listed source.
+  return events.sort((a, b) => Number(b.unreviewed) - Number(a.unreviewed) || Math.min(...[a.lead, ...a.more].map((s) => order.get(s.key)!)) - Math.min(...[b.lead, ...b.more].map((s) => order.get(s.key)!)));
+}

@@ -31,6 +31,7 @@ import type { SignalType } from '../taxonomy';
 import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, normalizeForMatch, pageSentenceFor, statedEventDate, type FactChange, describesPastEvent } from './facts';
 import { defaultFetchText, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchText } from './providers';
 import type { PageResult } from '../signals/research';
+import { speakerOrg, textNamesAccount } from './claim-rules';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -362,12 +363,8 @@ export function verificationContext(accountName: string, fetchText?: FetchText):
   return { accountKey: normalizeCompany(accountName), fetchText: fetchText ?? defaultFetchText, pages: new Map() };
 }
 
-/** Does this text name the account (its full normalized name as whole words)? */
-export function textNamesAccount(text: string, accountKey: string): boolean {
-  if (!accountKey) return false;
-  const t = ` ${text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()} `;
-  return t.includes(` ${accountKey} `);
-}
+// The pure claim rules live in claim-rules.ts (shared with the strict outreach gate); re-exported here.
+export { liveFactFailure, speakerOrg, textNamesAccount } from './claim-rules';
 
 /**
  * The account is the SUBJECT of the sentence, not a party mentioned around someone else's fact: it is named
@@ -450,22 +447,6 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   return { ok: true, publishedAt: c.publishedAt, excerpt };
 }
 
-/** The organization a quoted sentence is attributed to ("..., said Jane Doe, CEO of Gatik"), else null. */
-export function speakerOrg(sentence: string): string | null {
-  const m = /\bsaid\b[^."“”;]{0,80}?\b(?:of|at|from)\s+([A-Z][\w&.'’-]*(?:\s+[A-Z][\w&.'’-]*){0,3})/.exec(sentence);
-  return m ? m[1] : null;
-}
-
-/**
- * Why a STORED fact no longer passes the evidence rules on read (rules tightened since it was stored), else null.
- * The one re-gate the account brief and the source view share; the row is never deleted.
- */
-export function liveFactFailure(text: string, accountName: string): 'not_a_physical_operations_fact' | 'quoted_third_party' | null {
-  if (!isPhysicalOpsFact(text)) return 'not_a_physical_operations_fact';
-  const speaker = speakerOrg(text);
-  if (speaker && !textNamesAccount(speaker, normalizeCompany(accountName))) return 'quoted_third_party';
-  return null;
-}
 
 /** Store one VERIFIED candidate through the existing stores: EvidenceRecord + an evidence_record ProspectingSignal. */
 export async function storeVerifiedFact(

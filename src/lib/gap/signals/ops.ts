@@ -168,7 +168,15 @@ export async function applySignalOp(prisma: PrismaLike, input: { id: string; act
     case 'research':
       if (!r.url) return { ok: false, reason: 'no_link' };
       if (r.resolution !== 'resolved' || !r.account_name) return { ok: false, reason: 'needs_account' };
-      data = { research_status: r.research_status === 'none' || r.research_status === 'no_usable_fact' ? 'queued' : r.research_status, feedback: null, feedback_by: null, feedback_at: null };
+      data = {
+        research_status: r.research_status === 'none' || r.research_status === 'no_usable_fact' ? 'queued' : r.research_status,
+        feedback: null,
+        feedback_by: null,
+        feedback_at: null,
+        // Stabilization B: Casey asking GAP to check a source is a CHECK, nothing else. Marked so the promotion pass
+        // never turns the result into a Pounce trigger, a Slack ping or HubSpot trigger heat.
+        metadata: { ...((r.metadata ?? {}) as Record<string, unknown>), manualVerify: { at: input.now.toISOString(), by: input.actor } },
+      };
       break;
     case 'ignore':
       data = { feedback: 'ignored', feedback_by: input.actor, feedback_at: input.now };

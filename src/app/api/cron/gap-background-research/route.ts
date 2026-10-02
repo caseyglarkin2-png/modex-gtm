@@ -53,7 +53,7 @@ export async function GET(request: Request) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `${report.researched.length} researched (${report.researched.map((r) => `${r.accountName}: ${r.outcome}, sources found ${r.sources ?? 0}, outreach facts verified ${r.facts} (${r.freshFacts} fresh)`).join('; ') || 'none'}); ${report.skipped.length} skipped; ${report.failed.length} failed`,
+      message: `${report.researched.length} researched (${report.researched.map((r) => `${r.accountName}: ${r.outcome}, sources / signals ${r.sources ?? 0}, claims verified at source ${r.facts} (${r.freshFacts} fresh)`).join('; ') || 'none'}); ${report.skipped.length} skipped; ${report.failed.length} failed`,
       stats: report as unknown as Record<string, unknown>,
     }).catch(() => undefined);
     return NextResponse.json(report);

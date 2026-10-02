@@ -13,6 +13,7 @@
  */
 import { extractFactSentences, htmlToText } from './facts';
 import type { PageResult } from '../signals/research';
+import { normalizeCompany } from './claim-rules';
 import { askGrounded, defaultProviders, type ScoutProvider } from '../entity/providers';
 
 export interface Candidate {
@@ -44,10 +45,7 @@ export const defaultFetchText: FetchText = async (url) => {
   return htmlToText(await res.text());
 };
 
-const CORPORATE_SUFFIX = /\b(the|co|inc|corp|corporation|company|companies|ltd|llc|plc|holdings|group|incorporated)\b/g;
-export function normalizeCompany(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(CORPORATE_SUFFIX, ' ').replace(/\s+/g, ' ').trim();
-}
+export { normalizeCompany } from './claim-rules';
 
 /** The SEC CIK for an account, only on an exact normalized name match (never a fuzzy guess). */
 export async function resolveCik(accountName: string, fetchJson: (url: string) => Promise<unknown> = defaultFetchJson): Promise<{ cik: string; title: string } | null> {

@@ -67,9 +67,11 @@ describe('every plausible source is visible, with provenance and an evidence sta
     });
     const r = (await loadAccountSources(p as never, 'PepsiCo', { now: NOW })).items;
     const by = (host: string) => r.find((s) => s.publisher === host)!;
-    expect(by('pepsico.com')).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', publishedAt: '2026-06-07T00:00:00.000Z', freshTrigger: false });
-    expect(by('freightwaves.com')).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', title: 'PepsiCo and Gatik launch commercial driverless trucking deployment' });
-    expect(by('gatik.ai')).toMatchObject({ status: 'NOT_VERIFIED_FOR_OUTREACH', reason: 'third-party statement (said by Gatik, not PepsiCo)', attribution: 'Gatik', link: 'https://gatik.ai/news/pepsico' });
+    // June claims: verified facts (true at their source), past their freshness window, so not outreach evidence now.
+    expect(by('pepsico.com')).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', reason: 'past its freshness window: true, but not a fresh trigger', publishedAt: '2026-06-07T00:00:00.000Z', freshTrigger: false });
+    expect(by('freightwaves.com')).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', title: 'PepsiCo and Gatik launch commercial driverless trucking deployment' });
+    // The vendor's words checked at the page: a verified claim BY GATIK, never PepsiCo's statement.
+    expect(by('gatik.ai')).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', reason: 'said by Gatik, not PepsiCo', attribution: 'Gatik', link: 'https://gatik.ai/news/pepsico' });
     // newest publication first
     expect(r.map((s) => s.publisher)).toEqual(['gatik.ai', 'freightwaves.com', 'pepsico.com']);
   });
@@ -77,8 +79,9 @@ describe('every plausible source is visible, with provenance and an evidence sta
   it('counts sources found apart from verified outreach facts ("no verified fact" is not "nothing found")', async () => {
     const p = prisma({ runs: [run('r1', '2026-09-30T16:39:00Z', { facts: [], rejected: [{ url: 'https://news.example/a', reason: 'describes_past_event' }, { url: 'https://news.example/b', reason: 'not_a_physical_operations_fact' }] })] });
     const s = await loadAccountSources(p as never, 'PepsiCo', { now: NOW });
-    expect(s).toMatchObject({ sourcesFound: 2, verifiedFacts: 0 });
-    expect(s.items.map((i) => i.status)).toEqual(['NOT_VERIFIED_FOR_OUTREACH', 'NOT_VERIFIED_FOR_OUTREACH']);
+    expect(s).toMatchObject({ sourcesFound: 2, claimsVerified: 0, outreachEligible: 0 });
+    // Failed an outreach rule before any check at the page: unchecked, never "false".
+    expect(s.items.map((i) => [i.verification, i.outreach])).toEqual([['UNCHECKED', 'NOT_ELIGIBLE'], ['UNCHECKED', 'NOT_ELIGIBLE']]);
   });
 
   it('an old source is labelled NOT A FRESH TRIGGER with its age, never hidden', async () => {
@@ -90,13 +93,13 @@ describe('every plausible source is visible, with provenance and an evidence sta
   it('a search summary is never shown as a quote', async () => {
     const p = prisma({ runs: [run('r1', '2026-09-30T16:39:00Z', { sources: [{ url: 'https://news.example/x', title: 't', publishedAt: '2026-09-20T00:00:00Z', excerpt: 'PepsiCo is expanding its fleet.', excerptKind: 'search_summary', provider: 'web', status: 'not_verified', reason: 'reanchor_too_weak' }] })] });
     const [s] = (await loadAccountSources(p as never, 'PepsiCo', { now: NOW })).items;
-    expect(s).toMatchObject({ excerptKind: 'search_summary', reason: 'sentence did not verify word for word at the source' });
+    expect(s).toMatchObject({ excerptKind: 'search_summary', verification: 'COULD_NOT_VERIFY', reason: 'the statement was not found word for word at the source' });
   });
 
   it('a source that could not be fetched is COULD NOT VERIFY, not irrelevant', async () => {
     const p = prisma({ runs: [run('r1', '2026-09-30T16:39:00Z', { rejected: [{ url: 'https://nfiindustries.com/news/x', reason: 'source_unreadable:fetch 403' }] })] });
     const [s] = (await loadAccountSources(p as never, 'PepsiCo', { now: NOW })).items;
-    expect(s).toMatchObject({ status: 'COULD_NOT_VERIFY', reason: 'source could not be fetched' });
+    expect(s).toMatchObject({ verification: 'COULD_NOT_VERIFY', outreach: 'NOT_EVALUATED', reason: 'source could not be fetched' });
   });
 });
 
@@ -125,13 +128,13 @@ describe('only objective garbage is dropped', () => {
     });
     const s = await loadAccountSources(p as never, 'PepsiCo', { now: NOW });
     expect(s.items).toHaveLength(1);
-    expect(s.items[0].status).toBe('VERIFIED_FOR_OUTREACH');
+    expect(s.items[0]).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'ELIGIBLE' });
   });
 
   it('a story whose fact was stored but no longer passes the rules stays visible, NOT VERIFIED, with that reason', async () => {
     const p = prisma({ signals: [signal({})] });
     const [s] = (await loadAccountSources(p as never, 'PepsiCo', { now: NOW })).items;
-    expect(s).toMatchObject({ status: 'NOT_VERIFIED_FOR_OUTREACH', reason: 'verified earlier; no longer passes the evidence rules' });
+    expect(s).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', reason: 'verified at the source; no longer passes the outreach rules' });
   });
 
   it('Casey ignoring or reassigning a source moves it out of the default view, counted, never deleted', async () => {
@@ -139,7 +142,7 @@ describe('only objective garbage is dropped', () => {
     const s = await loadAccountSources(p as never, 'PepsiCo', { now: NOW });
     expect(s.items.map((i) => i.link)).toEqual(['https://news.example/z']);
     expect(s.setAside).toBe(1);
-    expect(s.items[0]).toMatchObject({ status: 'NOT_VERIFIED_FOR_OUTREACH', reason: 'not checked yet' });
+    expect(s.items[0]).toMatchObject({ verification: 'UNCHECKED', outreach: 'NOT_EVALUATED', reason: 'not checked yet' });
   });
 });
 
@@ -155,14 +158,14 @@ describe('honest counts and provenance', () => {
     (f.metadata as Record<string, unknown>).verified = 'failed_recheck';
     (f.metadata as Record<string, unknown>).recheck = { reason: 'not_a_physical_operations_fact' };
     const s = await loadAccountSources(prisma({ facts: [f] }) as never, 'PepsiCo', { now: NOW });
-    expect(s.verifiedFacts).toBe(0);
-    expect(s.items[0]).toMatchObject({ status: 'NOT_VERIFIED_FOR_OUTREACH', reason: 'verified earlier; failed a later recheck: no sentence states a physical operations change', publisher: 'truckingdive.com' });
+    expect(s).toMatchObject({ outreachEligible: 0, claimsVerified: 1 });
+    expect(s.items[0]).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', reason: 'failed a later recheck: no sentence states a physical operations change', publisher: 'truckingdive.com' });
   });
 
-  it('a verified fact stored on a search-redirect link is never hidden: shown, publisher named as unresolved', async () => {
+  it('a claim stored on a search-redirect link is never hidden and never outreach evidence: no publisher page to open', async () => {
     const s = await loadAccountSources(prisma({ facts: [fact('f3', 'https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZ', PEP_FACT, '2026-09-20')] }) as never, 'PepsiCo', { now: NOW });
-    expect(s).toMatchObject({ verifiedFacts: 1, dropped: 0 });
-    expect(s.items[0]).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', publisher: 'search redirect' });
+    expect(s).toMatchObject({ outreachEligible: 0, claimsVerified: 0, dropped: 0 });
+    expect(s.items[0]).toMatchObject({ verification: 'COULD_NOT_VERIFY', outreach: 'NOT_ELIGIBLE', publisher: 'search redirect', reason: 'stored on a search-redirect link; the original publisher page could not be confirmed' });
   });
 
   it("two statements from one page stay two: the speaker belongs to its own quote, never borrowed", async () => {
@@ -171,8 +174,9 @@ describe('honest counts and provenance', () => {
     const url = 'https://www.freightwaves.com/news/pepsico-gatik-driverless-trucking-deployment';
     const s = await loadAccountSources(prisma({ facts: [fact('a', url, third, '2026-06-09'), fact('b', url, PEP_FACT, '2026-06-09')] }) as never, 'PepsiCo', { now: NOW });
     expect(s.items).toHaveLength(1);
-    expect(s.items[0]).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', attribution: null, excerpt: PEP_FACT });
-    expect(s.items[0].alsoOnPage).toEqual([expect.objectContaining({ excerpt: third, status: 'NOT_VERIFIED_FOR_OUTREACH', attribution: 'Gatik' })]);
+    expect(s.items[0]).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'ELIGIBLE', attribution: null, excerpt: PEP_FACT });
+    expect(s.items[0].alsoOnPage).toEqual([expect.objectContaining({ excerpt: third, verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', attribution: 'Gatik' })]);
+    expect(s).toMatchObject({ claimsVerified: 2, outreachEligible: 1 });
     void own;
   });
 
@@ -203,16 +207,16 @@ describe('red-team fixes', () => {
   it('Ignore never hides a live verified fact (it is counted, so it is shown, marked reviewed)', async () => {
     const url = 'https://www.pepsico.com/n';
     const s = await loadAccountSources(prisma({ signals: [signal({ url, feedback: 'ignored', account_name: 'PepsiCo' })], facts: [fact('f1', url, PEP_FACT, '2026-09-20')] }) as never, 'PepsiCo', { now: NOW });
-    expect(s).toMatchObject({ verifiedFacts: 1, setAside: 0 });
-    expect(s.items[0]).toMatchObject({ status: 'VERIFIED_FOR_OUTREACH', reviewed: true });
+    expect(s).toMatchObject({ outreachEligible: 1, setAside: 0 });
+    expect(s.items[0]).toMatchObject({ outreach: 'ELIGIBLE', reviewed: true });
   });
 
   it("an ended change is not a verified outreach fact (the brief's live-fact rule)", async () => {
     const f = fact('f5', 'https://news.example/acme', PEP_FACT, '2026-09-01');
     (f.metadata as Record<string, unknown>).continuity = { kind: 'ended' };
     const s = await loadAccountSources(prisma({ facts: [f] }) as never, 'PepsiCo', { now: NOW });
-    expect(s.verifiedFacts).toBe(0);
-    expect(s.items[0]).toMatchObject({ status: 'NOT_VERIFIED_FOR_OUTREACH', reason: 'verified earlier; the change has since ended or was superseded' });
+    expect(s).toMatchObject({ outreachEligible: 0, claimsVerified: 1 });
+    expect(s.items[0]).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', reason: 'the change has since ended or was superseded' });
   });
 
   it('a search summary from another run never appears among the statements on a verified page', async () => {
@@ -264,9 +268,9 @@ describe('the evidence gate is unchanged', () => {
     const quote = `"Our trucks now move freight for PepsiCo across 250 retail locations, and that's what we're deploying across Texas," said Gautam Narang, CEO of Gatik.`;
     const p = prisma({ facts: [fact('f9', 'https://gatik.ai/news/pepsico', quote, '2026-06-09')] });
     const s = await loadAccountSources(p as never, 'PepsiCo', { now: NOW });
-    expect(s.verifiedFacts).toBe(0);
-    expect(s.items[0]).toMatchObject({ status: 'NOT_VERIFIED_FOR_OUTREACH', attribution: 'Gatik', excerptKind: 'verbatim' });
-    expect(s.items[0].reason).toContain('third-party statement (said by Gatik, not PepsiCo)');
+    // A verified fact ABOUT WHAT GATIK SAID: true, attributed to Gatik, not PepsiCo's outreach evidence.
+    expect(s).toMatchObject({ claimsVerified: 1, outreachEligible: 0 });
+    expect(s.items[0]).toMatchObject({ verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE', attribution: 'Gatik', excerptKind: 'verbatim', reason: 'said by Gatik, not PepsiCo' });
   });
   it('reasons are factual words, never "irrelevant"', () => {
     for (const r of ['describes_past_event', 'quoted_third_party', 'not_a_physical_operations_fact', 'reanchor_too_weak', 'source_unreadable:fetch 403', 'no_publication_date', 'no_fact_sentence', 'boilerplate'])

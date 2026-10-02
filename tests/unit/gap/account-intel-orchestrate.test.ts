@@ -35,7 +35,7 @@ describe('planResearch', () => {
     const history = [{ section: 'technology', outcome: 'insufficient_evidence', at: '2026-09-25T00:00:00Z' }];
     const p = planResearch(buildAccountBrief(inputs({ facts: [fact] }), NOW), history, NOW);
     expect(p.tasks.some((t) => t.section === 'technology' && t.provider === 'research')).toBe(false);
-    expect(p.skipped).toContainEqual(expect.objectContaining({ section: 'technology', reason: expect.stringMatching(/found no verified outreach fact for this section on 2026-09-25 \(what it did find is under Sources \/ signals\)/) }));
+    expect(p.skipped).toContainEqual(expect.objectContaining({ section: 'technology', reason: expect.stringMatching(/found no outreach evidence for this section on 2026-09-25 \(what it did find is under Sources \/ signals\)/) }));
   });
 
   it('what research cannot answer becomes a discovery question for a human, not a web call', () => {

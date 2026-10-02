@@ -131,7 +131,7 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
       const empty = mine.find((h) => (h.outcome === 'insufficient_evidence' || h.outcome === 'nothing_for_section') && age(h) < 14 * DAY);
       if (running) skipped.push({ section, reason: `A run on this section started at ${running.at.slice(11, 16)} UTC and has not finished.` });
       else if (down) skipped.push({ section, reason: `The web search was unavailable at ${down.at.slice(11, 16)} UTC; retry after an hour (nothing was learned).` });
-      else if (empty) skipped.push({ section, reason: `The same focus found no verified outreach fact for this section on ${empty.at.slice(0, 10)} (what it did find is under Sources / signals); not repeated for 14 days.` });
+      else if (empty) skipped.push({ section, reason: `The same focus found no outreach evidence for this section on ${empty.at.slice(0, 10)} (what it did find is under Sources / signals); not repeated for 14 days.` });
       else if (recent) skipped.push({ section, reason: `Researched on ${recent.at.slice(0, 10)}; once a day per section.` });
       else tasks.push({ section, depth: 'DEEPEN', provider: 'research', focus, why: s.status === 'STALE' ? `Stale: ${why}` : why });
     } else if (HUMAN[section]) {

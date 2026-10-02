@@ -14,7 +14,7 @@ import { EvidenceActions } from './evidence-actions';
 import { AccountLink } from './account-link';
 import Link from 'next/link';
 import { accountHref } from '@/lib/gap/account-intel/href';
-import { ageLabel, sourceReason, STATUS_LABEL } from '@/lib/gap/sources/source-copy';
+import { ageLabel, axesOf, claimLine, sourceReason } from '@/lib/gap/sources/source-copy';
 
 const MAX_ACCOUNTS = 15;
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -128,8 +128,8 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
           {[
             // Research aperture: what GAP found is never collapsed into what qualifies for outreach.
             // Scoped honestly: what research found in the last 45 days (the account page lists every source).
-            plural(sourcesFound, 'source') + ' found by research (45 days)',
-            plural(a.ready.length, 'outreach fact') + ' verified',
+            `${sourcesFound} ${sourcesFound === 1 ? 'source / signal' : 'sources / signals'} from research (45 days)`,
+            `${a.ready.length} eligible as outreach evidence`,
             thesesNeedingEvidence ? `${plural(thesesNeedingEvidence, 'thesis', 'theses')} ${thesesNeedingEvidence === 1 ? 'needs' : 'need'} evidence` : null,
             a.contradictions.length ? plural(a.contradictions.length, 'contradiction') : null,
           ]
@@ -148,7 +148,7 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
       </header>
       {best ? (
         <div data-testid="evidence-best" className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide">Best fact to consider</p>
+          <p className="text-xs font-semibold uppercase tracking-wide">Best outreach evidence to consider</p>
           <ul>
             <Fact f={best} a={a} now={now} best />
           </ul>
@@ -156,7 +156,7 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
       ) : null}
       {context.length ? (
         <div data-testid="evidence-context" className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Other verified context</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Other eligible outreach evidence</p>
           <ul className="space-y-2">
             {context.map((f) => (
               <Fact key={f.signalId} f={f} a={a} now={now} />
@@ -182,7 +182,7 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
       {a.rejected.length ? (
         <details className="text-xs" data-testid="evidence-rejected">
           <summary className="cursor-pointer text-[var(--muted-foreground)]">
-            {plural(a.rejected.length, 'source')} found that {a.rejected.length === 1 ? 'is' : 'are'} not outreach facts (shown with the reason)
+            {a.rejected.length} {a.rejected.length === 1 ? 'source / signal' : 'sources / signals'} not eligible as outreach evidence (shown with the reason)
             {a.rejected.length > 10 ? `; showing 10 of ${a.rejected.length}` : ''}
           </summary>
           <ul className="mt-1 space-y-1.5">
@@ -196,9 +196,7 @@ export function EvidenceAccount({ a, now, thesesNeedingEvidence = 0, children }:
                   {r.title || `${hostOf(r.url)} (untitled page)`}
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
-                <p>
-                  {STATUS_LABEL[/^source_unreadable|^not_read_budget$/.test(r.reason) ? 'COULD_NOT_VERIFY' : 'NOT_VERIFIED_FOR_OUTREACH']}: {sourceReason(r.reason, a.accountName)}
-                </p>
+                <p>{claimLine({ ...axesOf(r.reason), reason: sourceReason(r.reason, a.accountName) })}</p>
               </li>
             ))}
           </ul>
@@ -217,7 +215,7 @@ export function EvidenceInbox({ accounts, now }: { accounts: InboxAccount[]; now
   return (
     <section data-testid="evidence-inbox" className="space-y-3">
       <div>
-        <h3 className="text-sm font-semibold">Verified evidence inbox</h3>
+        <h3 className="text-sm font-semibold">Outreach evidence inbox</h3>
         <p className="text-xs text-[var(--muted-foreground)]">Found and verified at the source before you got here. You decide what it means; nothing is approved for you.</p>
       </div>
       {shown.length === 0 ? <p className="text-sm italic text-[var(--muted-foreground)]">Nothing new from research.</p> : null}

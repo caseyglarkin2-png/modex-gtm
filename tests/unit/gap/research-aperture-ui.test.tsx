@@ -13,41 +13,46 @@ import { applySourceOp } from '@/lib/gap/sources/source-ops';
 
 const src = (over: Partial<AccountSource>): AccountSource => ({
   key: 'https://gatik.ai/news/pepsico', link: 'https://gatik.ai/news/pepsico', title: 'Gatik and PepsiCo', publisher: 'gatik.ai', publishedAt: '2026-06-09T00:00:00.000Z', discoveredAt: '2026-09-30T16:39:00.000Z', ageDays: 114, freshTrigger: false,
-  excerpt: '"That is what we are doing with PepsiCo," said Gautam Narang, CEO of Gatik.', excerptKind: 'verbatim', attribution: 'Gatik', whyFound: ['automation'], origin: 'gap_research', status: 'NOT_VERIFIED_FOR_OUTREACH',
-  reason: 'third-party statement (said by Gatik, not PepsiCo)', signalId: null, factId: null, reviewed: false, ...over,
+  excerpt: '"That is what we are doing with PepsiCo," said Gautam Narang, CEO of Gatik.', excerptKind: 'verbatim', attribution: 'Gatik', whyFound: ['automation'], origin: 'gap_research', verification: 'VERIFIED_AT_SOURCE', outreach: 'NOT_ELIGIBLE',
+  reason: 'said by Gatik, not PepsiCo', signalId: null, factId: null, reviewed: false, ...over,
 });
-const sources = (items: AccountSource[], over: Record<string, unknown> = {}) => ({ accountName: 'PepsiCo', items, sourcesFound: items.length, verifiedFacts: 1, dropped: 2, setAside: 0, setAsideItems: [], ...over });
+const sources = (items: AccountSource[], over: Record<string, unknown> = {}) => ({ accountName: 'PepsiCo', items, sourcesFound: items.length, claimsVerified: 2, outreachEligible: 1, dropped: 2, setAside: 0, setAsideItems: [], ...over });
 
 describe('source cards', () => {
   it('provenance first; third party named; old source labelled, not hidden; both counts shown', () => {
-    render(<AccountSourcesSection sources={sources([src({}), src({ key: 'k2', link: 'https://www.pepsico.com/n', publisher: 'pepsico.com', status: 'VERIFIED_FOR_OUTREACH', reason: null, attribution: null, excerpt: 'PepsiCo will deploy autonomous trucks.' })])} limit={5} viewAllHref="/gap/accounts/pepsico/sources" />);
-    expect(screen.getByTestId('account-sources-counts')).toHaveTextContent('Sources found: 2 · Outreach facts verified: 1');
+    render(<AccountSourcesSection sources={sources([src({}), src({ key: 'k2', link: 'https://www.pepsico.com/n', publisher: 'pepsico.com', verification: 'VERIFIED_AT_SOURCE', outreach: 'ELIGIBLE', reason: null, attribution: null, excerpt: 'PepsiCo will deploy autonomous trucks.' })])} limit={5} viewAllHref="/gap/accounts/pepsico/sources" />);
+    expect(screen.getByTestId('account-sources-counts')).toHaveTextContent('Sources / signals: 2 · Verified at source: 2 claims · Eligible as outreach evidence: 1');
     const [gatik] = screen.getAllByTestId('source-card');
     expect(gatik.querySelector('[data-testid="source-provenance"]')).toHaveTextContent('gatik.ai · published Jun 9, 2026 · 3 months old');
     expect(gatik.querySelector('[data-testid="source-not-fresh"]')).toHaveTextContent('Not a fresh trigger');
-    expect(gatik.querySelector('[data-testid="source-attribution"]')).toHaveTextContent('Said by Gatik (third party), not PepsiCo.');
-    expect(gatik.querySelector('[data-testid="source-status"]')).toHaveTextContent('Not verified for outreach');
+    expect(gatik.querySelector('[data-testid="source-attribution"]')).toHaveTextContent('Claim made by Gatik (third party), not PepsiCo.');
+    // Two axes: true at its source, not usable as PepsiCo's outreach evidence.
+    expect(gatik.querySelector('[data-testid="source-verification"]')).toHaveTextContent('Verified at source');
+    expect(gatik.querySelector('[data-testid="source-outreach"]')).toHaveTextContent('Not eligible as outreach evidence');
     expect(gatik.querySelector('[data-testid="source-open"]')).toHaveAttribute('href', 'https://gatik.ai/news/pepsico');
     expect(screen.getByTestId('account-sources-view-all')).toHaveAttribute('href', '/gap/accounts/pepsico/sources');
     expect(screen.getByTestId('account-sources-dropped')).toHaveTextContent('2 not shown: search redirects or broken links');
-    // A verified source offers no "verify" (already verified); everything offers open, research more, ignore, wrong account.
-    expect(screen.getAllByTestId('source-verify')).toHaveLength(1);
+    // A verified claim offers no "verify" (already checked); only an eligible one offers "use as outreach evidence".
+    expect(screen.queryAllByTestId('source-verify')).toHaveLength(0);
+    expect(screen.getAllByTestId('source-use')).toHaveLength(1);
   });
 
   it('compact on the account page: three actions per card, no theme line, one Research more; the full page groups by status with counts', () => {
-    const items = [src({}), src({ key: 'k2', link: 'https://news.google.com/rss/articles/CBMiABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?oc=5', title: null, publisher: 'Hoodline', status: 'COULD_NOT_VERIFY', reason: 'source could not be fetched', attribution: null, excerpt: null, excerptKind: null })];
+    const items = [src({}), src({ key: 'k2', link: 'https://news.google.com/rss/articles/CBMiABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?oc=5', title: null, publisher: 'Hoodline', verification: 'COULD_NOT_VERIFY', outreach: 'NOT_EVALUATED', reason: 'source could not be fetched', attribution: null, excerpt: null, excerptKind: null })];
     const { unmount } = render(<AccountSourcesSection sources={sources(items)} limit={3} viewAllHref="/v" researchHref="#research-plan" />);
     const card = screen.getAllByTestId('source-card')[0];
-    expect(card.querySelectorAll('button')).toHaveLength(3);
+    // Verified already: Ignore and Wrong account; the unverified card adds Verify claim.
+    expect(card.querySelectorAll('button')).toHaveLength(2);
+    expect(screen.getAllByTestId('source-card')[1].querySelectorAll('button')).toHaveLength(3);
     expect(card.querySelector('[data-testid="source-why"]')).toBeNull();
     expect(screen.getAllByTestId('account-sources-research-more')).toHaveLength(1);
     // A long feed URL with no headline never becomes the title.
     expect(screen.getAllByTestId('source-open')[1]).toHaveTextContent('Hoodline (untitled page)');
     unmount();
     render(<AccountSourcesSection sources={sources(items)} researchHref="/gap/accounts/pepsico#research-plan" />);
-    expect(screen.getByTestId('account-sources-group-NOT_VERIFIED_FOR_OUTREACH')).toHaveTextContent('Not verified for outreach (1)');
-    expect(screen.getByTestId('account-sources-group-COULD_NOT_VERIFY')).toHaveTextContent('Could not verify (1)');
-    expect(screen.queryByTestId('account-sources-group-VERIFIED_FOR_OUTREACH')).toBeNull();
+    expect(screen.getByTestId('account-sources-group-verified')).toHaveTextContent('Verified at source, not eligible as outreach evidence (1)');
+    expect(screen.getByTestId('account-sources-group-other')).toHaveTextContent('Sources / signals not verified (unchecked, verifying or could not verify) (1)');
+    expect(screen.queryByTestId('account-sources-group-eligible')).toBeNull();
   });
 
   it('a long quote is cut at a word, outside the quotation marks', () => {
@@ -71,16 +76,16 @@ describe('source cards', () => {
   });
 
   it('"no verified fact" is not "nothing found"', () => {
-    render(<AccountSourcesSection sources={sources([src({})], { verifiedFacts: 0 })} />);
-    expect(screen.getByTestId('account-sources-counts')).toHaveTextContent('Sources found: 1 · Outreach facts verified: 0');
+    render(<AccountSourcesSection sources={sources([src({})], { claimsVerified: 0, outreachEligible: 0 })} />);
+    expect(screen.getByTestId('account-sources-counts')).toHaveTextContent('Sources / signals: 1 · Verified at source: 0 claims · Eligible as outreach evidence: 0');
     expect(screen.queryByTestId('account-sources-empty')).toBeNull();
   });
 
   it('Verify as evidence posts the source op; the reply says a failure stays visible', async () => {
     const f = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, signalId: 's1', researchStatus: 'queued', feedback: null }), { status: 200 }));
-    render(<AccountSourcesSection sources={sources([src({})])} />);
+    render(<AccountSourcesSection sources={sources([src({ verification: 'UNCHECKED', outreach: 'NOT_EVALUATED' })])} />);
     fireEvent.click(screen.getByTestId('source-verify'));
-    await waitFor(() => expect(screen.getByTestId('source-msg')).toHaveTextContent('stays here with the reason'));
+    await waitFor(() => expect(screen.getByTestId('source-msg')).toHaveTextContent('Checking only: nothing is alerted, drafted or sent'));
     const [url, init] = f.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('/api/gap/account-sources');
     expect(JSON.parse(String(init.body))).toEqual({ accountName: 'PepsiCo', url: 'https://gatik.ai/news/pepsico', title: 'Gatik and PepsiCo', publishedAt: '2026-06-09T00:00:00.000Z', op: 'verify' });

@@ -32,8 +32,8 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
     }
     if (res.status === 504) return setMsg('The run took too long to answer; it may have partly run. Reopen the page to see what it found.');
     if (!res.ok) return setMsg(body.reason ?? `Not run: ${body.error ?? res.status}`);
-    // Research aperture: sources found are never collapsed into outreach facts verified.
-    const counts = typeof body.sources === 'number' ? ` (sources found: ${body.sources} · outreach facts verified: ${body.facts ?? 0})` : body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : '';
+    // Research aperture: sources found are never collapsed into claims verified at source.
+    const counts = typeof body.sources === 'number' ? ` (sources / signals: ${body.sources} · claims verified at source: ${body.facts ?? 0})` : body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : '';
     setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.sectionOutcome ?? body.outcome ?? ''] ?? body.outcome}${counts}.`);
     router.refresh();
   }

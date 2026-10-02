@@ -23,7 +23,7 @@ function Line({ label, children, testId }: { label: string; children: React.Reac
 
 export function SourceOpportunities({ items }: { items: Opportunity[] }) {
   if (!items.length) {
-    return <p className="text-sm italic text-[var(--muted-foreground)]" data-testid="opportunities-empty">No opportunities yet. GAP qualifies accounts and researches them in the background; verified facts turn people into opportunities here.</p>;
+    return <p className="text-sm italic text-[var(--muted-foreground)]" data-testid="opportunities-empty">No opportunities yet. GAP qualifies accounts and researches them in the background; outreach evidence turns people into opportunities here.</p>;
   }
   return (
     <ul className="space-y-3" data-testid="opportunities">
@@ -48,7 +48,7 @@ export function SourceOpportunities({ items }: { items: Opportunity[] }) {
                   &ldquo;{o.fact.quote}&rdquo; <span className="text-[var(--muted-foreground)]">({o.fact.chain})</span>
                 </>
               ) : (
-                <span className="text-[var(--muted-foreground)]">No verified fact yet.</span>
+                <span className="text-[var(--muted-foreground)]">No outreach evidence yet.</span>
               )}
             </Line>
             <Line label="Thesis">{o.thesis ? <span>{o.thesis.summary} <span className="text-[var(--muted-foreground)]">(inference)</span></span> : <span className="text-[var(--muted-foreground)]">None yet.</span>}</Line>
