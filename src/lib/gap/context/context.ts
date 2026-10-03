@@ -167,6 +167,30 @@ export function projectEngagement(rows: readonly EngagementRow[], now: Date): Pr
 
 // ---------------------------------------------------------------- history
 
+/**
+ * WHAT AN ACTIVITY ROW IS (click-test P0, 2026-10-03). The Activity table mixes four kinds of rows:
+ *   system   agent / pipeline logs and asset bookkeeping ("Agent Action", "Agent Workflow", "Pipeline", infographics):
+ *            never history; "Agent Action: ... production smoke ..." was shown as Dannon's last touch
+ *   private  what the account did on our pages ("Page View", "Microsite CTA Click"): private engagement, never history
+ *   reply    a buyer wrote to us ("reply_received")
+ *   seller   a real touch (email, call, note, LinkedIn, an intro request, a human outcome)
+ * A row whose text says it was a test, a smoke run or a send proof is never history, whatever its type.
+ */
+export type ActivityKind = 'system' | 'private' | 'reply' | 'seller';
+export function activityKind(a: { activity_type: string; outcome?: string | null; notes?: string | null }): ActivityKind {
+  const t = a.activity_type.trim().toLowerCase();
+  const text = `${a.outcome ?? ''} ${a.notes ?? ''}`;
+  if (/\b(smoke|send proof|production final|test send|dry run|e2e)\b/i.test(text)) return 'system';
+  if (/^(agent action|agent workflow|pipeline|infographic|infographic journey|infographic bundle)$/.test(t)) return 'system';
+  if (/page view|microsite|cta click|session/.test(t)) return 'private';
+  if (/reply/.test(t)) return 'reply';
+  return 'seller';
+}
+
+/** Activity text arrives HTML-escaped ("we&#39;re", "Casey &amp; Jake"). */
+export const decodeEntities = (s: string) =>
+  s.replace(/&#(\d+);/g, (_m, n: string) => String.fromCharCode(Number(n))).replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+
 /** A campaign-drip "send a touch" task: an instruction someone wrote, not something that happened. */
 export const isDripMarker = (a: { notes?: string | null; next_step?: string | null; outcome?: string | null }) =>
   /Campaign drip automation/i.test(a.notes ?? '') || (/^Send (first )?touch\b/i.test(a.next_step ?? '') && !a.outcome?.trim());
@@ -186,14 +210,19 @@ export function projectHistory(x: {
   const items: HistoryItem[] = [];
   for (const a of x.activities) {
     if (isDripMarker(a)) continue;
+    const kind = activityKind(a);
+    // System and test rows are not history; private engagement lives in its own labelled summary.
+    if (kind === 'system' || kind === 'private') continue;
     const at = iso(a.activity_date) ?? iso(a.created_at);
     // The outcome is what happened; a next step alone is a plan, never history.
-    const what = a.outcome?.trim() || a.notes?.trim().split('\n')[0];
-    if (at && what) items.push({ at, kind: 'activity', visibility: 'seller', text: `${a.activity_type}: ${what}` });
+    const what = decodeEntities(a.outcome?.trim() || a.notes?.trim().split('\n')[0] || '');
+    if (at && what) items.push(kind === 'reply' ? { at, kind: 'reply', visibility: 'seller', text: what.replace(/^Reply from\s+/i, 'Reply from ') } : { at, kind: 'activity', visibility: 'seller', text: `${a.activity_type}: ${what}` });
   }
   for (const e of x.emails) {
     const at = iso(e.sent_at);
     if (!at) continue;
+    // A smoke test or a send proof is not a touch.
+    if (/\b(smoke|send proof|test send|production final)\b/i.test(e.subject)) continue;
     // Opens and clicks are tracking, not history: never shown as something the buyer did.
     items.push({ at, kind: 'email_sent', visibility: 'seller', text: `Email to ${e.to_email}: "${e.subject}"` });
     if (e.reply_count > 0) items.push({ at, kind: 'reply', visibility: 'seller', text: `Reply on "${e.subject}" (${e.to_email})` });
