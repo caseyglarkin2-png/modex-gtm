@@ -63,6 +63,7 @@ const PAIRS: Array<[string, string, string]> = [
 const NON_TEXT_PAIRS: Array<[string, string, string]> = [
   ['ring', 'background', 'focus ring (ring-ring) against the page and ring-offset-background'],
   ['ring', 'muted', 'focus ring on a muted track (TabsList)'],
+  ['input', 'background', 'form-control boundary (border-input) against the page'],
 ];
 
 /** Follow var(--x) aliases (e.g. --card: var(--background)) within the theme, then light. */

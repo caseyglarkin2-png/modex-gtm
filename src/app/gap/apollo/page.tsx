@@ -33,6 +33,7 @@ export default async function ApolloReviewPage({ searchParams }: { searchParams?
       <form method="get" className="space-y-2" data-testid="apollo-review-picker">
         <fieldset>
           <legend className="text-sm font-semibold">Accounts to review (up to {MAX_REVIEW_ACCOUNTS})</legend>
+          {watched.length ? null : <p className="text-sm text-amber-700 dark:text-amber-400">The watched accounts could not be read just now.</p>}
           <div className="mt-1 grid max-h-64 grid-cols-1 gap-x-3 overflow-y-auto sm:grid-cols-2">
             {watched.map((w) => (
               <label key={w.slug} className="flex min-h-11 items-center gap-2 text-sm">

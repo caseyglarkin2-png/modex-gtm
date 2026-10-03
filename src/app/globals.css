@@ -28,7 +28,7 @@
   --card-foreground: var(--foreground);
   --popover: var(--background);
   --popover-foreground: var(--foreground);
-  --input: var(--border);
+  --input: #8a8a8a; /* form-control boundary: 3.45:1 on white (WCAG 1.4.11); --border stays the hairline divider */
   --secondary: var(--muted);
   --secondary-foreground: var(--foreground);
   --accent-foreground: var(--foreground);
@@ -60,7 +60,7 @@
   --card-foreground: var(--foreground);
   --popover: var(--background);
   --popover-foreground: var(--foreground);
-  --input: var(--border);
+  --input: #6b6b6b; /* form-control boundary: 3.8:1 on #0a0a0a (WCAG 1.4.11) */
   --secondary: var(--muted);
   --secondary-foreground: var(--foreground);
   --accent-foreground: var(--foreground);

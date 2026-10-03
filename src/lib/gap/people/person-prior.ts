@@ -120,8 +120,8 @@ const OUTSIDE_LINE = /\b(board|former|retired|ex-|advisor|adviser|investor|busin
 // Running stores or a retail field organization is not running the freight network.
 const STORE_OPS = /\b(store|stores|retail|field|restaurant|branch sales) operations\b/;
 const SUPPORT_ROLE = /\b(analyst|coordinator|specialist|planner|planning|project manager|assistant|associate)\b/;
-const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|canada|canadian|mexico|mexican)\b/;
-const OTHER_REGION = /\b(europe|european|emea|latam|latin america|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|brazil)\b/;
+const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|canada|canadian|mexico|méxico|mexican|north (?:and|&) (?:latin|south) america)\b/;
+const OTHER_REGION = /\b(europe|european|emea|latam|latin america|south america|central america|caribbean|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|brazil)\b/;
 const US_STATES = new Set(['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming', 'district of columbia', 'al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy', 'dc']);
 const US_COUNTRY = new Set(['united states', 'united states of america', 'usa', 'us', 'u.s.', 'u.s.a.']);
 
@@ -143,6 +143,8 @@ export function personLocation(location: string | null | undefined): PersonLocat
   if (last === 'ca' && parts.length >= 3 && CA_PROVINCES.has(parts[parts.length - 2])) return 'CANADA';
   // A recognised state or province without a country decides; a lone city or an unknown region says nothing.
   if (parts.length >= 2 && US_STATES.has(last)) return 'US';
+  // NL and BC are also Mexican state codes (Nuevo Leon, Baja California): without a country they say nothing.
+  if (parts.length >= 2 && (last === 'nl' || last === 'bc')) return null;
   if (parts.length >= 2 && (CA_PROVINCES.has(last) || CA_COUNTRY.has(last))) return 'CANADA';
   if (parts.length >= 2 && MX_STATES.has(last)) return 'MEXICO';
   if (parts.length >= 2 && /^[a-z .'-]{3,}$/.test(last) && !parts.slice(0, -1).some((p) => US_STATES.has(p) || CA_PROVINCES.has(p) || MX_STATES.has(p))) return 'OTHER';

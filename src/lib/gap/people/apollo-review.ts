@@ -32,7 +32,8 @@ export async function reviewApolloCandidates(prisma: PrismaLike, slugs: readonly
       try {
         const v = await load(prisma, slug, now, { live: true });
         return v && 'brief' in v ? { slug, view: project(v.brief, v.inputs), account: v.brief.accountName } : { slug, view: null, account: slug };
-      } catch {
+      } catch (e) {
+        console.warn('[gap/apollo-review] could not read', slug, e instanceof Error ? e.message : e);
         return { slug, view: null, account: slug };
       }
     }));
