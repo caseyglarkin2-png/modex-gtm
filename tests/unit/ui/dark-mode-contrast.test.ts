@@ -49,7 +49,31 @@ const PAIRS: Array<[string, string, string]> = [
   ['primary', 'background', 'links and primary-coloured text'],
   ['destructive-foreground', 'destructive', 'destructive buttons, red count badges'],
   ['destructive', 'background', 'error text'],
+  // Semantic aliases (card, popover, secondary, accent-foreground) that now
+  // resolve through the @theme block: pinned so a future re-point cannot
+  // ship an unreadable pair.
+  ['card-foreground', 'card', 'bg-card panels'],
+  ['popover-foreground', 'popover', 'popovers and menus'],
+  ['secondary-foreground', 'secondary', 'bg-secondary surfaces (sheet close)'],
+  ['accent-foreground', 'accent', 'bg-accent hover/selected rows'],
+  ['muted-foreground', 'accent', 'dialog close icon on bg-accent'],
 ];
+
+/** [indicator token, adjacent token, why]: WCAG 1.4.11 non-text, 3:1. */
+const NON_TEXT_PAIRS: Array<[string, string, string]> = [
+  ['ring', 'background', 'focus ring (ring-ring) against the page and ring-offset-background'],
+  ['ring', 'muted', 'focus ring on a muted track (TabsList)'],
+];
+
+/** Follow var(--x) aliases (e.g. --card: var(--background)) within the theme, then light. */
+function resolve(tokens: Record<string, string>, name: string, seen: string[] = []): string | undefined {
+  const raw = tokens[name] ?? THEMES.light[name];
+  if (raw === undefined) return undefined;
+  const alias = raw.match(/^var\(--([a-z-]+)\)$/);
+  if (!alias) return raw;
+  if (seen.includes(alias[1])) throw new Error(`alias cycle: ${[...seen, alias[1]].join(' -> ')}`);
+  return resolve(tokens, alias[1], [...seen, name]);
+}
 
 const THEMES = { light: block(':root'), dark: block('.dark') };
 
@@ -57,15 +81,28 @@ describe('theme token contrast (WCAG AA 4.5:1)', () => {
   for (const [theme, tokens] of Object.entries(THEMES)) {
     for (const [fg, bg, why] of PAIRS) {
       it(`${theme}: --${fg} on --${bg} (${why})`, () => {
-        const fgValue = tokens[fg] ?? THEMES.light[fg];
-        const bgValue = tokens[bg] ?? THEMES.light[bg];
+        const fgValue = resolve(tokens, fg);
+        const bgValue = resolve(tokens, bg);
         expect(fgValue, `--${fg} is not defined for ${theme}`).toBeDefined();
         expect(bgValue, `--${bg} is not defined for ${theme}`).toBeDefined();
-        const ratio = contrast(fgValue, bgValue);
+        const ratio = contrast(fgValue!, bgValue!);
         expect(
           ratio,
           `${theme} --${fg} ${fgValue} on --${bg} ${bgValue} is ${ratio.toFixed(2)}:1, below 4.5:1`,
         ).toBeGreaterThanOrEqual(4.5);
+      });
+    }
+    for (const [fg, bg, why] of NON_TEXT_PAIRS) {
+      it(`${theme}: --${fg} against --${bg} (${why}) is at least 3:1`, () => {
+        const fgValue = resolve(tokens, fg);
+        const bgValue = resolve(tokens, bg);
+        expect(fgValue, `--${fg} is not defined for ${theme}`).toBeDefined();
+        expect(bgValue, `--${bg} is not defined for ${theme}`).toBeDefined();
+        const ratio = contrast(fgValue!, bgValue!);
+        expect(
+          ratio,
+          `${theme} --${fg} ${fgValue} against --${bg} ${bgValue} is ${ratio.toFixed(2)}:1, below 3:1`,
+        ).toBeGreaterThanOrEqual(3);
       });
     }
   }
