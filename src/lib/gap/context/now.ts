@@ -13,6 +13,7 @@
  * the buyer confirmed a problem or impact. Pinned by tests/unit/gap/now-projection.test.ts.
  */
 import { VENDOR_LEAD, type AccountInputs, type AccountIntelligenceBrief, type DiscoveryQuestion, type MotionType } from '../account-intel/build';
+import { sameIdea } from './same-idea';
 import type { Source, Statement } from '../account-intel/truth';
 import { sensitivityOf } from '../research/sensitivity';
 import { sellerRelevance } from '../research/continuity';
@@ -91,6 +92,8 @@ const host = (u: string | null) => {
 };
 /** Comparison form: the catalyst label ("RECENT EVENT:") and punctuation do not make a different idea. */
 const CATALYST_WINDOW_MS = 45 * 86_400_000;
+/** A market piece (a stock forecast, a fair-value take) is not a trigger (click test round 4: PFG, GXO). */
+const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating))\b/i;
 const SOURCE_KIND: Record<string, string> = { conference: 'a conference', event: 'an event', meeting: 'a meeting', referral: 'a referral' };
 
 const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -130,7 +133,15 @@ const LATE: ReadonlySet<string> = new Set(['CURRENT_STACK', 'CHANGE_REQUIREMENT'
 
 export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date, opts: { ready?: ReadyTarget | null } = {}): NowView {
   const used = new Set<string>();
-  const take = (l: NowLine) => (used.has(l.id) || used.has(`text:${norm(l.text)}`) ? false : (used.add(l.id), used.add(`text:${norm(l.text)}`), true));
+  // Each idea once, also when two sources say it in different words (round 4: Giant Eagle twice, Gatik twice).
+  const shown: string[] = [];
+  const take = (l: NowLine) => {
+    if (used.has(l.id) || used.has(`text:${norm(l.text)}`) || shown.some((t) => sameIdea(t, l.text, i.account.name))) return false;
+    used.add(l.id);
+    used.add(`text:${norm(l.text)}`);
+    shown.push(l.text);
+    return true;
+  };
   const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
   const citable = new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])]));
   const lx = { domains: i.domains, accountName: i.account.name, citable };
@@ -141,7 +152,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const soon = meeting && new Date(meeting.at).getTime() - now.getTime() <= 14 * 86_400_000;
   // In a deal, the deal's own next step (HubSpot) is NEXT when someone wrote one; otherwise GAP's deal guidance.
   const dealNext = m.type === 'IN_DEAL' ? brief.deals.find((d) => d.nextStep?.trim())?.nextStep?.trim() ?? null : null;
-  const next: NowView['next'] = soon
+  let next: NowView['next'] = soon
     ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
     : m.type === 'FACT_LED' && opts.ready
       ? { text: `Review the thesis, then open the first-touch card for ${displayName(opts.ready.name)} (every gate runs at the click).`, source: 'motion' }
@@ -169,11 +180,25 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     if (p?.primary && displayName(p.primary.name) !== displayName(ready.name)) betterFit = `Better fit on record: ${displayName(p.primary.name)}${p.primary.title ? `, ${p.primary.title}` : ''}${p.primary.source === 'hubspot' ? ' (in HubSpot, not yet a GAP contact: add them)' : ''}.`;
     who = { name: displayName(ready.name), title: ready.title, why: rp?.why ?? 'The person the cockpit has a ready first touch for.', route: null, location: rp?.location ?? null, inHubSpotOnly: false };
   }
+  // AN UNANSWERED REPLY is the next thing (click test round 4, GXO: the only live buyer thread sat under "work the
+  // deal"). The buyer wrote last and nothing was sent after: answer it, to its writer. A meeting soon still leads.
+  const ago = (at: string) => Math.max(0, Math.floor((now.getTime() - new Date(at).getTime()) / 86_400_000));
+  const repRow = ctx.history.find((h) => h.kind === 'reply');
+  const replier = repRow?.text.match(/^Reply from\s+([^:<]+?)\s*:/)?.[1]?.trim() ?? null;
+  const answered = !!repRow && (ctx.history.some((h) => (h.kind === 'email_sent' || h.kind === 'asset_sent') && h.at > repRow.at) || (i.firstTouches ?? []).some((t) => !!t.sentAt && t.state !== 'draft outstanding' && String(t.sentAt) > repRow.at));
+  const unanswered = repRow && replier && !answered && m.type !== 'INTRO_ONLY' ? { at: repRow.at, who: displayName(replier) } : null;
+  if (unanswered && !soon) {
+    next = { text: `Answer ${unanswered.who}'s reply of ${day(unanswered.at)} (unanswered for ${ago(unanswered.at)} days): read the full thread in Gmail, then reply in it.`, source: 'conversation' };
+    const known = p?.lanes.flatMap((l) => l.people).find((x) => displayName(x.name) === unanswered.who);
+    who = { name: unanswered.who, title: known?.title ?? null, why: `They wrote last (${day(unanswered.at)}); the thread is waiting on you.`, route: null, location: known?.location ?? null, inHubSpotOnly: false };
+    betterFit = null;
+  }
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
   const altSrc = who && p?.primary && who.name !== displayName(p.primary.name) && !p.primary.doNotContact ? p.primary : p?.alternate ?? null;
-  const alt = altSrc && displayName(altSrc.name) !== who?.name ? { name: displayName(altSrc.name), title: altSrc.title, why: altSrc.why } : null;
+  // Never the same person as both "add next" and "alternate" (round 4: Isaac Scott twice on PepsiCo).
+  const alt = altSrc && displayName(altSrc.name) !== who?.name && !betterFit?.includes(displayName(altSrc.name)) ? { name: displayName(altSrc.name), title: altSrc.title, why: altSrc.why } : null;
   const ownerMissing = !!who && p?.primary?.lane !== 'PRIMARY_OPERATOR' && m.type !== 'INTRO_ONLY' && m.type !== 'FOLLOW_UP' && m.type !== 'IN_DEAL';
 
   // WHY NOW: dated catalysts (checked first, then unverified signals); never private engagement.
@@ -196,6 +221,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     const isSignal = s.sources[0]?.kind === 'signal';
     // An undated signal is not a reason to act now.
     if (isSignal && (signals >= 1 || !s.sources[0]?.at)) continue;
+    // An unverified report about activity abroad, a divestiture or a market piece is not their US yard network.
+    if (isSignal && (rel(s) >= 7 || MARKET_PIECE.test(s.text))) continue;
     // Nor is an event past the 45-day catalyst window (Sources says the same; Tyson led on a 50-day-old "this week").
     const at = Date.parse(String(s.asOf ?? s.sources[0]?.at ?? ''));
     if (!isSignal && Number.isFinite(at) && now.getTime() - at > CATALYST_WINDOW_MS) continue;
@@ -268,11 +295,12 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const gapTouch = [...(i.firstTouches ?? [])].filter((t) => t.sentAt && t.state !== 'draft outstanding').sort((a, b) => String(b.sentAt).localeCompare(String(a.sentAt)))[0];
   const ltHist = ctx.history.find((h) => h.visibility === 'seller' && h.kind !== 'outcome');
   const lt = gapTouch && (!ltHist || String(gapTouch.sentAt) > ltHist.at) ? { at: String(gapTouch.sentAt), text: `GAP first touch to ${gapTouch.recipient}` } : ltHist;
-  const ago = (at: string) => Math.max(0, Math.floor((now.getTime() - new Date(at).getTime()) / 86_400_000));
-  const lastTouch = lt ? `Last touch ${day(lt.at)} (${ago(lt.at)} days ago): ${lt.text}` : 'No touch on record.';
+  // The reply is shown once (round 4: GXO's reply was both "Last touch" and "Latest buyer reply").
+  const ltIsReply = !!lt && 'kind' in lt && lt.kind === 'reply';
+  const lastTouch = lt ? `Last touch ${day(lt.at)} (${ago(lt.at)} days ago): ${ltIsReply ? 'their reply, below.' : lt.text}` : 'No touch on record.';
   // The newest thing the BUYER wrote, whenever it was: it is never buried below the fold of BRIEF.
   const rep = ctx.history.find((h) => h.kind === 'reply');
-  const lastReply = rep ? `Latest buyer reply ${day(rep.at)} (${ago(rep.at)} days ago): ${rep.text}` : null;
+  const lastReply = rep ? `Latest buyer reply ${day(rep.at)} (${ago(rep.at)} days ago): ${rep.text.replace(/^Reply from\s+/, '')}` : null;
   const view: NowView = {
     name: brief.accountName,
     stateLine,
@@ -291,7 +319,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     think,
     impact,
     ask,
-    relationship: m.type === 'INTRO_ONLY' ? null : ctx.relationship.line,
+    // "Last email" is the Last touch line's job; a second, older answer beside it contradicted it (round 4, Kroger).
+    relationship: m.type === 'INTRO_ONLY' || /^Last email /.test(ctx.relationship.line ?? '') ? null : ctx.relationship.line,
     private: ctx.engagement.material ? ctx.engagement.line : null,
     wedge,
     asset: a ? { label: a.label, href: a.href } : null,

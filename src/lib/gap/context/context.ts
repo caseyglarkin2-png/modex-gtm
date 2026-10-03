@@ -198,6 +198,18 @@ export const decodeEntities = (s: string) =>
 export const isDripMarker = (a: { notes?: string | null; next_step?: string | null; outcome?: string | null }) =>
   /Campaign drip automation/i.test(a.notes ?? '') || (/^Send (first )?touch\b/i.test(a.next_step ?? '') && !a.outcome?.trim());
 
+/**
+ * A reply as a person said it: "Reply from Avinash Rao: ..." (no address), and a body the log cut off mid-word says
+ * it is a snippet (round 4, GXO: "...the message I just got from Mik").
+ */
+function replyText(what: string): string {
+  const m = what.match(/^Reply from\s+([^<:]+?)\s*(?:<[^>]*>)?\s*:\s*([\s\S]*)$/i);
+  if (!m) return what.replace(/^Reply from\s+/i, 'Reply from ');
+  const body = m[2].trim();
+  const cut = body.length >= 80 && !/[.!?)"'\u2019\u201d]$/.test(body);
+  return `Reply from ${m[1].trim()}: ${cut ? `${body.replace(/\s+\S*$/, '')}\u2026 (snippet: the full reply is in Gmail)` : body}`;
+}
+
 const PER_KIND: Record<HistoryItem['kind'], number> = { email_sent: 4, reply: 3, meeting: 3, capture: 3, outcome: 3, activity: 4, asset_sent: 2 };
 
 export function projectHistory(x: {
@@ -219,7 +231,7 @@ export function projectHistory(x: {
     const at = iso(a.activity_date) ?? iso(a.created_at);
     // The outcome is what happened; a next step alone is a plan, never history.
     const what = decodeEntities(a.outcome?.trim() || a.notes?.trim().split('\n')[0] || '');
-    if (at && what) items.push(kind === 'reply' ? { at, kind: 'reply', visibility: 'seller', text: what.replace(/^Reply from\s+/i, 'Reply from ') } : { at, kind: 'activity', visibility: 'seller', text: `${a.activity_type}: ${what}` });
+    if (at && what) items.push(kind === 'reply' ? { at, kind: 'reply', visibility: 'seller', text: replyText(what) } : { at, kind: 'activity', visibility: 'seller', text: `${a.activity_type}: ${what}` });
   }
   for (const e of x.emails) {
     const at = iso(e.sent_at);
