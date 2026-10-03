@@ -67,3 +67,13 @@ describe('<ApolloReviewTable>', () => {
     expect(screen.getAllByTestId('apollo-review-row')).toHaveLength(1);
   });
 });
+
+describe('client bundle boundary (a Vercel build failed when the table pulled in the server loader)', () => {
+  it('the client table and its helpers import only client-safe modules', async () => {
+    const { readFileSync } = await import('node:fs');
+    const table = readFileSync('src/components/gap/apollo-review-table.tsx', 'utf8');
+    const text = readFileSync('src/lib/gap/people/apollo-review-text.ts', 'utf8');
+    expect(table).not.toMatch(/from '@\/lib\/gap\/people\/apollo-review'/);
+    expect(text.match(/^import (?!type ).*$/gm) ?? []).toEqual([]);
+  });
+});

@@ -6,7 +6,7 @@
  */
 import { useMemo, useState } from 'react';
 import type { ApolloCandidate } from '@/lib/gap/people/apollo-candidates';
-import { apolloBatchText, apolloRequestText, filterCandidates, KIND_LABEL } from '@/lib/gap/people/apollo-review';
+import { apolloBatchText, apolloRequestText, filterCandidates, KIND_LABEL } from '@/lib/gap/people/apollo-review-text';
 
 export function ApolloReviewTable({ rows }: { rows: ApolloCandidate[] }) {
   const [account, setAccount] = useState('');
