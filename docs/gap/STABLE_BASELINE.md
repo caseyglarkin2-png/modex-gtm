@@ -4,7 +4,7 @@ STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze
 <!-- verified:2026-10-03 -->
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: `11e26869` (GAP V2 click-test rounds 1-7, #368-#381; READY, production-verified 2026-10-03; all three adversarial click reviewers (phone, trust, UX) signed off YES on NOW). Update this line when a change ships.
+Production SHA: `aac9e113` (amendment 2026-10-03: #384 dark mode, #385 geography + Apollo policy + candidates; READY, production-verified 2026-10-03). Update this line when a change ships.
 <!-- verified:2026-10-03 -->
 
 ## The rule for future changes
@@ -195,7 +195,7 @@ SOURCES, task authority: SHIPPED + VERIFIED (three adversarial click reviewers s
 SHIPPED BUT NEEDED FIX (Canada-located people ranked "another region"; location and remit conflated): fixed #385.
 "Person geography is not stored anywhere": OBSOLETE (HubSpot contact city / state / country read live since #371).
 Division modeling: PARTIAL (#368 asks which division owns the yard decision; no per-division owner model). Dark mode:
-SHIPPED BUT NEEDED FIX: #384 (tokens, status colors, Tailwind dark variant bound to the theme class). Database:
+SHIPPED BUT NEEDED FIX: #384 (tokens, status colors, Tailwind dark variant bound to the theme class); validated on production in both themes at 390px (screenshots; alpha- and oklch-correct contrast over every text node: NOW 63, BRIEF 118, SOURCES 735 nodes, 0 below WCAG AA in light and dark; /queue only a decorative "/"). Database:
 BLOCKED EXTERNALLY on McKay (production `connection_limit=1`, last changed 2026-05-02; server max_connections 500,
 8 in use at check; no application code encodes the limit; nothing built around it).
 
