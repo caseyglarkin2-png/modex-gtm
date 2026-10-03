@@ -37,6 +37,8 @@ export interface ListQueueOptions {
   action?: string;
   lane?: string;
   ruleId?: string;
+  /** Only this account's decisions (the account page's ready card). */
+  accountName?: string;
 }
 
 export interface QueueItem {
@@ -338,6 +340,7 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
   if (opts.action) where.action = opts.action;
   if (opts.lane) where.lane = opts.lane;
   if (opts.ruleId) where.rule_id = opts.ruleId;
+  if (opts.accountName) where.account_name = opts.accountName;
   if (opts.cursor) {
     const c = decodeCursor(opts.cursor);
     if (c) {

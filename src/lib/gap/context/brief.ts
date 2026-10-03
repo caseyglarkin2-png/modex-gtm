@@ -22,6 +22,24 @@ export interface BriefSection {
 
 const SHOW = 5;
 
+/**
+ * One row per person in the buyer map when a GAP contact and an unlinked HubSpot record carry the SAME name AND the
+ * same title (display only: the records are never merged; the GAP contact's row is kept).
+ */
+function dedupePeople<T extends { name: string; title: string | null; source?: 'gap' | 'hubspot' }>(people: readonly T[]): T[] {
+  const k = (p: T) => `${p.name.trim().toLowerCase()}|${(p.title ?? '').trim().toLowerCase()}`;
+  const gap = new Set(people.filter((p) => p.source !== 'hubspot').map(k));
+  const out: T[] = [];
+  const shown = new Set<string>();
+  for (const p of people) {
+    if (p.source === 'hubspot' && gap.has(k(p))) continue;
+    if (shown.has(k(p))) continue;
+    shown.add(k(p));
+    out.push(p);
+  }
+  return out;
+}
+
 /** What Listen reads on BRIEF (the meeting brief): every section's lines, never the private engagement section. */
 export function briefListenText(accountName: string, sections: readonly BriefSection[]): string {
   return [`${accountName}, the meeting brief.`, ...sections.filter((s) => s.key !== 'private').map((s) => `${s.title}. ${[...s.lines.map((l) => l.text), ...s.notes].join(' ')}`)]
@@ -47,7 +65,7 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
 
   const p = brief.people;
   const people = p?.lanes.length
-    ? p.lanes.map((l) => `${l.label}: ${l.people.slice(0, 3).map((x) => `${displayName(x.name)}${x.title ? ` (${x.title})` : ''}${x.division ? ` [${x.division}]` : ''}${x.location ? ` · ${x.location}` : ''}${x.source === 'hubspot' ? ' · HubSpot only' : ''}${x.doNotContact ? ' [do not contact]' : ''}${x.region === 'US_NA' ? ' [US / NA]' : ''}`).join('; ')}${l.people.length > 3 ? ` and ${l.people.length - 3} more` : ''}`)
+    ? p.lanes.map((l) => `${l.label}: ${dedupePeople(l.people).slice(0, 3).map((x) => `${displayName(x.name)}${x.title ? ` (${x.title})` : ''}${x.division ? ` [${x.division}]` : ''}${x.location ? ` · ${x.location}` : ''}${x.source === 'hubspot' ? ' · HubSpot only' : ''}${x.doNotContact ? ' [do not contact]' : ''}${x.region === 'US_NA' ? ' [US / NA]' : ''}`).join('; ')}${l.people.length > 3 ? ` and ${l.people.length - 3} more` : ''}`)
     : [];
   const rel = ctx.relationship;
   const relationship = [
@@ -78,7 +96,7 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
   const confirmed = i.bids?.some((b) => b.type === 'business_problem' || b.type === 'impact');
   const wedgeLine = confirmed && brief.wedge.archetype ? `Where YardFlow may fit: ${brief.thesis.whereYardFlowMayFit}` : null;
 
-  return [
+  const sections: BriefSection[] = [
     intel('network', 'Network', ['identity', 'footprint']),
     intel('freight', 'Freight', ['freight']),
     intel('yard', 'Yard', ['yard', 'volume']),
@@ -91,5 +109,13 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
     plain('private', 'Private engagement', engagement),
     plain('assets', 'Existing assets', assets),
     plain('read', 'Our read and what to ask', [...read, ...(wedgeLine ? [wedgeLine] : [])]),
-  ].filter((s) => s.lines.length || s.notes.length || s.unknowns.length);
+  ];
+  // Each idea once across the whole brief (click test: the Gatik deal 4 times, "Our read" twice in a row).
+  const seen = new Set<string>();
+  const key = (t: string) => t.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const s of sections) {
+    s.lines = s.lines.filter((l) => !seen.has(key(l.text)) && (seen.add(key(l.text)), true));
+    s.notes = s.notes.filter((n) => !seen.has(key(n)) && (seen.add(key(n)), true));
+  }
+  return sections.filter((s) => s.lines.length || s.notes.length || s.unknowns.length);
 }

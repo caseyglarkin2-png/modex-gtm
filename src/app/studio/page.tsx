@@ -66,7 +66,7 @@ async function buildQrDataUrl(value: string, width: number) {
 export default async function StudioPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ tab?: string }>;
+  searchParams?: Promise<{ tab?: string; account?: string }>;
 }) {
   const params = (await searchParams) ?? {};
   const activeTab = getDefaultTab(params.tab);
@@ -244,6 +244,7 @@ export default async function StudioPage({
               </CardContent>
             </Card>
             <StudioClient
+              initialAccount={params.account?.trim() || null}
               accounts={(accounts ?? []).map((account) => ({
                 name: account.name,
                 vertical: account.vertical,

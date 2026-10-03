@@ -26,6 +26,7 @@ import { loadAccountSources } from '@/lib/gap/sources/account-sources';
 import { AccountSourcesSection } from '@/components/gap/account-sources';
 import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
+import { loadReadyTarget } from '@/lib/gap/context/send-target';
 import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
 import { accountSlug } from '@/lib/gap/account-intel/href';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
@@ -117,14 +118,17 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         </div>
       );
     }
-    const v = projectNow(brief, ctx, inputs, now);
+    // The cockpit's ready first-touch card for this account (fails soft): the one person NOW and the cockpit share.
+    const ready = brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
+    const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
     const control: { href: string; label: string } | null =
       v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
       : v.next.source === 'conversation' ? { href: '/gap/replies', label: 'Open replies' }
       : v.next.source === 'restriction' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the intro ask' }
-      : brief.motion.type === 'FACT_LED' && top ? { href: `/gap/preview/${top.id}`, label: 'Review the thesis and first touch' }
+      : brief.motion.type === 'FACT_LED' && ready ? { href: ready.href, label: `Open the first-touch card for ${v.who?.name ?? ready.name}` }
+      : brief.motion.type === 'FACT_LED' && top ? { href: `/gap/preview/${top.id}`, label: 'Review the thesis' }
       : brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the touch' }
       : brief.hypotheses.some((h) => h.needsReview.length) ? { href: `${hrefFor('sources')}#brief-hypotheses`, label: 'Review the thesis' }
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };

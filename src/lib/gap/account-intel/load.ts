@@ -19,6 +19,7 @@ import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import type { AccountMicrositeData, AccountROIModel } from '@/lib/microsites/schema';
 import { buildAccountBrief, type AccountInputs, type AccountIntelligenceBrief, type FactInput, type PackInput } from './build';
 import { loadHubSpotPeople, type HubSpotPeopleReads } from '../people/hubspot-people';
+import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
@@ -106,7 +107,7 @@ export async function loadAccountInputs(
   now: Date,
   opts: {
     live?: boolean;
-    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>; hubspotPeople?: HubSpotPeopleReads };
+    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>; hubspotPeople?: HubSpotPeopleReads; stageLabels?: StageLabelRead };
     hypothesisId?: string;
     /**
      * Execution acceptance: only what the current-actionable-thesis rule reads (theses, facts, buyer truth, review
@@ -131,6 +132,7 @@ export async function loadAccountInputs(
   };
   const oppP = opts.live ? early((opts.deps?.opportunity ?? ((p: PrismaLike, a: string) => resolveAccountOpportunity(p, a)))(prisma, accountName)) : null;
   const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
+  const stagesP = opts.live ? stageLabels(opts.deps?.stageLabels) : Promise.resolve(new Map<string, string>());
   const contradictedP = early(soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>()));
   const candidateP: Promise<Row | null> = !lean && prisma.gapAccountCandidate?.findFirst
     ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
@@ -246,7 +248,9 @@ export async function loadAccountInputs(
   let opportunity: AccountInputs['opportunity'] = null;
   if (oppP) {
     const o: OpportunityTruth = await oppP;
-    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
+    // The stage's NAME from the pipeline (display only; the id when the label cannot be read).
+    const labels = await stagesP;
+    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage ? labels.get(d.stage) ?? d.stage : d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
   }
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
   const hsPeople = await hsPeopleP;

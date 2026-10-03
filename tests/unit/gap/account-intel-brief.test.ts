@@ -438,9 +438,10 @@ describe('scale dogfood reasoning fixes', () => {
 });
 
 describe('scale dogfood: operators are asked about the sites they run', () => {
-  it.each([['3PL / Logistics', 'the warehouses and customer sites you run'], ['Trucking', 'your terminals and yards'], ['Marine Terminal', 'your terminals'], ['Grocery Retail', 'your DCs'], ['Food & Beverage', 'your plants and DCs'], ['Unknown', 'your sites']])('%s -> "%s"', (vertical, words) => {
+  // A marine operator moves containers and chassis as well as trailers (click test: "trailers" to Crowley read as uninformed).
+  it.each([['3PL / Logistics', 'the warehouses and customer sites you run', 'trailers'], ['Trucking', 'your terminals and yards', 'trailers'], ['Marine Terminal', 'your terminals', 'containers, chassis and trailers'], ['Grocery Retail', 'your DCs', 'trailers'], ['Food & Beverage', 'your plants and DCs', 'trailers'], ['Unknown', 'your sites', 'trailers']])('%s -> "%s"', (vertical, words, assets) => {
     const b = buildAccountBrief(base({ account: { ...base().account, vertical }, bids: [] }), NOW);
-    expect(b.discovery.find((q) => q.type === 'CURRENT_PROCESS')?.question).toBe(`How do trailers get checked in and found at ${words} today?`);
+    expect(b.discovery.find((q) => q.type === 'CURRENT_PROCESS')?.question).toBe(`How do ${assets} get checked in and found at ${words} today?`);
   });
 });
 

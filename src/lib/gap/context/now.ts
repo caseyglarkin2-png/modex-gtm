@@ -18,6 +18,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { sellerRelevance } from '../research/continuity';
 import { readPerson } from '../people/person-prior';
 import type { AccountContext } from './context';
+import type { ReadyTarget } from './send-target';
 
 /** "Unverified": a third party's report GAP has not checked (a signal); not our inference, not checked. */
 export type SellerTag = 'Buyer said' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
@@ -48,6 +49,8 @@ export interface NowView {
   lastReply: string | null;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
   who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean } | null;
+  /** A better-fit person on record who is not yet a GAP contact (shown beside the ready-card person). */
+  betterFit: string | null;
   whoUnknown: string | null;
   alternate: { name: string; title: string | null; why: string } | null;
   whyNow: NowLine[];
@@ -89,10 +92,14 @@ const host = (u: string | null) => {
 /** Comparison form: the catalyst label ("RECENT EVENT:") and punctuation do not make a different idea. */
 const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
+/** A seller line never carries a raw URL or an empty bracket (the source is on the basis line). */
+const noUrls = (t: string) => t.replace(/\s*\(?\s*https?:\/\/[^\s)]+\)?/g, '').replace(/\(\s*\)/g, '').replace(/\s+([).,;])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+
 /** The seller tag and basis of a statement, or null when it cannot be said in NOW (a system record about their operations). */
 export function sellerLine(s: Statement, section: string, x: { domains: readonly string[]; accountName: string; citable: ReadonlySet<string> }): NowLine | null {
   const src = s.sources[0];
   const id = src?.kind === 'evidence' || src?.kind === 'bid' ? `${src.kind}:${src.ref ?? s.text}` : `text:${norm(s.text)}`;
+  s = { ...s, text: noUrls(s.text) };
   if (s.truth === 'BUYER_CONFIRMED') return { id, text: s.text, tag: 'Buyer said', basis: `${src?.label ?? 'the buyer'}, ${day(s.asOf ?? src?.at)}`, cite: null };
   if (s.truth === 'CONTRADICTED') return { id, text: s.text, tag: 'Contradicted', basis: 'sources disagree', cite: null };
   if (s.truth === 'UNKNOWN') return { id, text: s.text, tag: 'Unknown', basis: 'not known', cite: null };
@@ -115,7 +122,7 @@ export function sellerLine(s: Statement, section: string, x: { domains: readonly
 const ASK_ORDER: DiscoveryQuestion['type'][] = ['CURRENT_PROCESS', 'VERIFY_PROBLEM', 'ROOT_CAUSE', 'IMPACT', 'OWNERSHIP', 'CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE'];
 const LATE: ReadonlySet<string> = new Set(['CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE']);
 
-export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date): NowView {
+export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date, opts: { ready?: ReadyTarget | null } = {}): NowView {
   const used = new Set<string>();
   const take = (l: NowLine) => (used.has(l.id) || used.has(`text:${norm(l.text)}`) ? false : (used.add(l.id), used.add(`text:${norm(l.text)}`), true));
   const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
@@ -130,6 +137,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const dealNext = m.type === 'IN_DEAL' ? brief.deals.find((d) => d.nextStep?.trim())?.nextStep?.trim() ?? null : null;
   const next: NowView['next'] = soon
     ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
+    : m.type === 'FACT_LED' && opts.ready
+      ? { text: `Review the thesis, then open the first-touch card for ${displayName(opts.ready.name)} (every gate runs at the click).`, source: 'motion' }
     : dealNext
       ? { text: `Deal next step (HubSpot): ${dealNext}`, source: 'deal' }
       : { text: m.who ? brief.glance.nextAction.split(m.who).join(displayName(m.who)) : brief.glance.nextAction, source: m.type === 'IN_DEAL' ? 'deal' : m.type === 'FOLLOW_UP' ? 'conversation' : m.type === 'INTRO_ONLY' ? 'restriction' : 'motion' };
@@ -142,6 +151,17 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   else if (m.type === 'FOLLOW_UP' && m.who) who = { name: m.who, title: null, why: 'They are already talking to you: continue that thread.', route: null };
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
   else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot' };
+  // ONE ANSWER (click test P0): a first touch can only go where a READY card is. When the cockpit has one for this
+  // account, NOW names that person (the cockpit's own pick, by the same prior) and says who is a better fit but not
+  // yet a GAP contact; NEXT opens that card.
+  const ready = m.type === 'FACT_LED' ? opts.ready ?? null : null;
+  let betterFit: string | null = null;
+  if (ready) {
+    const all = p?.lanes.flatMap((l) => l.people) ?? [];
+    const rp = all.find((x) => displayName(x.name) === displayName(ready.name));
+    if (p?.primary && displayName(p.primary.name) !== displayName(ready.name)) betterFit = `Better fit on record: ${displayName(p.primary.name)}${p.primary.title ? `, ${p.primary.title}` : ''}${p.primary.source === 'hubspot' ? ' (in HubSpot, not yet a GAP contact: add them)' : ''}.`;
+    who = { name: displayName(ready.name), title: ready.title, why: rp?.why ?? 'The person the cockpit has a ready first touch for.', route: null, location: rp?.location ?? null, inHubSpotOnly: false };
+  }
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
@@ -251,6 +271,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     unit: brief.division ? `Division: unknown. ${brief.division.question}` : null,
     next,
     who,
+    betterFit,
     whoUnknown: ownerMissing ? 'No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).' : whoUnknown,
     alternate: alt,
     whyNow,

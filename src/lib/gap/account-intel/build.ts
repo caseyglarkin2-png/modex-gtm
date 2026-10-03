@@ -395,8 +395,10 @@ function identitySection(i: AccountInputs, now: Date): Section {
   const a = i.account;
   const rec: Source = { kind: 'account', ref: a.name, label: a.recordUpdatedAt ? 'GAP account record, last updated' : 'GAP account record', url: null, at: a.recordUpdatedAt ?? null };
   const st: Statement[] = [
-    { text: `${a.name}${a.vertical ? `, ${a.vertical}` : ''}${a.tier ? `, ${a.tier}` : ''}${a.priorityBand ? ` / band ${a.priorityBand}` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [rec] },
+    { text: `${a.name}${a.vertical ? `, ${a.vertical}` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [rec] },
   ];
+  // Tier and band are GAP's own legacy ratings (MODEX era), never a verified fact about the company (click test P0).
+  if (a.tier || a.priorityBand) st.push({ text: `Legacy internal rating: ${[a.tier, a.priorityBand ? `band ${a.priorityBand}` : null].filter(Boolean).join(' / ')} (a GAP rating, not a fact about the company)`, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'Current account research or the buyer shows a different priority.' });
   if (i.aliases.length) st.push({ text: `Also known as: ${i.aliases.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'account', ref: 'aliases', label: 'GAP curated aliases', url: null, at: i.aliasesAddedAt ?? null }] });
   if (i.domains.length) st.push({ text: `Domains: ${i.domains.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId ?? 'crm-identity', label: 'CRM identity', url: null, at: null }] });
   if (a.hubspotCompanyId) st.push({ text: `HubSpot company ${a.hubspotCompanyId}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId, label: 'HubSpot', url: null, at: null }] });
@@ -774,7 +776,7 @@ function discoveryPlan(i: AccountInputs, hyps: HypothesisView[], _wedge: Wedge):
   // Never name a site the buyer has not named (a satellite-found site in a first question reads as surveillance).
   const where = siteWords(i);
   const out: DiscoveryQuestion[] = [];
-  if (!any('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do trailers get checked in and found at ${where} today?`, why: 'Current state first: it is non-leading and sets the pilot scope.' });
+  if (!any('current_state')) out.push({ type: 'CURRENT_PROCESS', question: `How do ${assetWords(i)} get checked in and found at ${where} today?`, why: 'Current state first: it is non-leading and sets the pilot scope.' });
   if (!onTop('business_problem')) {
     out.push(
       top
@@ -807,6 +809,17 @@ function siteWords(i: AccountInputs): string {
   if (t === 'retailer' || t === 'distributor') return 'your DCs';
   // Plants and DCs only for a company known to make or own goods; an unknown type is never assumed a shipper.
   return t && ['shipper', 'manufacturer'].includes(t) && !PARTNER_VERTICAL.test(i.account.vertical ?? '') ? 'your plants and DCs' : 'your sites';
+}
+
+/**
+ * What moves through their gate, in their words (click test: "trailers" to a marine terminal operator reads as
+ * uninformed). A marine, port or ocean operator handles containers and chassis as well as trailers.
+ */
+const MARINE = /\b(marine|maritime|vessel|vessels|ocean|shipping line|port|ports|terminal operator|container|barge|ro-?ro)\b/i;
+function assetWords(i: AccountInputs): string {
+  const t = entityTypeOf(i);
+  const said = [i.account.name, i.account.vertical, i.scout?.what].filter(Boolean).join(' ');
+  return t === 'port_terminal' || MARINE.test(said) ? 'containers, chassis and trailers' : 'trailers';
 }
 
 const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;
@@ -964,7 +977,7 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   return { type: a.kind, who, why: a.why };
 }
 
-const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? `Fact-led: ${m.who ?? 'the primary person'}, on the verified fact.` : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
+const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? 'Fact-led, on the verified fact.' : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
 
 
 /** NETWORK in the 30-second view: a count (filing, registry, audit estimate, microsite), never a news sentence. */
