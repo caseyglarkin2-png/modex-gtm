@@ -26,7 +26,7 @@ import { loadAccountSources } from '@/lib/gap/sources/account-sources';
 import { AccountSourcesSection } from '@/components/gap/account-sources';
 import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
-import { projectBrief } from '@/lib/gap/context/brief';
+import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
 import { accountSlug } from '@/lib/gap/account-intel/href';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 
@@ -96,7 +96,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     const links = [
       { label: 'Account history', href: `${legacyHref}` },
       { label: 'Content Studio', href: `/studio?account=${encodeURIComponent(brief.accountName)}` },
-      { label: 'Log what happened', href: '/gap/capture' },
+      { label: 'Log what happened', href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}` },
       ...(inputs.account.hubspotCompanyId ? [{ label: 'HubSpot record', href: `https://app.hubspot.com/contacts/3819073/record/0-2/${inputs.account.hubspotCompanyId}`, external: true }] : []),
     ];
     if (view === 'brief') {
@@ -108,6 +108,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           {tabs}
           {dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : null}
           <AccountBriefSections
+            listen={briefListenText(brief.accountName, projectBrief(brief, ctx, inputs, now))}
             sections={projectBrief(brief, ctx, inputs, now)}
             sourcesHref={hrefFor('sources')}
             deep={{ commercial: { label: 'Full history', href: legacyHref }, assets: { label: 'Content Studio', href: `/studio?account=${encodeURIComponent(brief.accountName)}` }, people: { label: 'All contacts', href: legacyHref } }}
@@ -121,9 +122,9 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
       : v.next.source === 'conversation' ? { href: '/gap/replies', label: 'Open replies' }
-      : v.next.source === 'restriction' ? { href: '/gap/capture', label: 'Log the intro ask' }
+      : v.next.source === 'restriction' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the intro ask' }
       : brief.motion.type === 'FACT_LED' && top ? { href: `/gap/preview/${top.id}`, label: 'Review the thesis and first touch' }
-      : brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED' ? { href: '/gap/capture', label: 'Log the touch' }
+      : brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the touch' }
       : brief.hypotheses.some((h) => h.needsReview.length) ? { href: `${hrefFor('sources')}#brief-hypotheses`, label: 'Review the thesis' }
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
     return (

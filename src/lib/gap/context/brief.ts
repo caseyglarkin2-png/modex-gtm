@@ -22,6 +22,14 @@ export interface BriefSection {
 
 const SHOW = 5;
 
+/** What Listen reads on BRIEF (the meeting brief): every section's lines, never the private engagement section. */
+export function briefListenText(accountName: string, sections: readonly BriefSection[]): string {
+  return [`${accountName}, the meeting brief.`, ...sections.filter((s) => s.key !== 'private').map((s) => `${s.title}. ${[...s.lines.map((l) => l.text), ...s.notes].join(' ')}`)]
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .slice(0, 4800);
+}
+
 export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'domains' | 'account'> & { bids?: AccountInputs['bids'] }, now: Date): BriefSection[] {
   const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
   const lx = { domains: i.domains, accountName: i.account.name, citable: new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])])) };
