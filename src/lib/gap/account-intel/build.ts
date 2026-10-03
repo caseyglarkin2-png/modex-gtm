@@ -85,6 +85,8 @@ export interface PersonaInput {
   hubspotContactId?: string | null;
   /** The person's own location from their HubSpot contact ("Chicago, Illinois, United States"), when read. */
   location?: string | null;
+  /** When Apollo last enriched this person (a prior result: never spend on them again by accident). */
+  apolloEnrichedAt?: string | null;
 }
 
 interface PackSite {
