@@ -21,6 +21,7 @@ import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion } from '../motion/account-motion';
 import { isDefaultWhoLane, LANE_LABEL, rankWho, type PersonLane, type PersonRegion } from '../people/person-prior';
+import { divisionOf, divisionsFor, sitesByDivision } from '../people/division';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
 
@@ -271,6 +272,11 @@ export interface AccountIntelligenceBrief {
    * why, and the buyer map by lane. Lanes and reasons, never a score.
    */
   people: BuyerMap;
+  /**
+   * A multi-division parent (people/division.ts): the divisions the evidence names (titles, site names, family
+   * accounts) and the open question of which one owns the yard decision. null for a single-unit account.
+   */
+  division: { evidenced: string[]; question: string } | null;
 }
 
 export interface MappedPerson {
@@ -282,6 +288,8 @@ export interface MappedPerson {
   why: string;
   reachable: boolean;
   doNotContact: boolean;
+  /** The division the person's own title names (never inferred from the email domain), else null. */
+  division?: string | null;
 }
 
 export interface BuyerMap {
@@ -446,6 +454,13 @@ function footprintSection(i: AccountInputs, now: Date): Section {
     st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   }
   for (const c of i.scout?.network ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
+  // A multi-division parent: the audited sites by the division their names carry, and the divisions with none audited.
+  const byDiv = sitesByDivision(i.account.name, a.kept.map((s) => s.name));
+  if (byDiv && byDiv.counts.length) {
+    const { cite, rest } = splitCite(auditTruth(i, 'A site verification names a different division.'));
+    st.push({ text: `Audited sites by division (from the site names): ${byDiv.counts.map(([d, n]) => `${d} ${n}`).join(', ')}${byDiv.unnamed ? `, ${byDiv.unnamed} not named` : ''}${byDiv.missing.length ? `. No ${byDiv.missing.length > 1 ? `${byDiv.missing.slice(0, -1).join(', ')} or ${byDiv.missing[byDiv.missing.length - 1]}` : byDiv.missing[0]} site audited` : ''}`, ...rest, sources: [auditSrc('satellite + source audit', p!.builtAt, cite)], asOf: p!.builtAt });
+  }
+  if (divisionsFor(i.account.name)) unknowns.unshift('Which division owns the yard decision');
   if (!p?.account.networkCount && !i.facilityFact) unknowns.push('Total facility count (sourced)');
   return section('footprint', st, unknowns, now);
 }
@@ -971,6 +986,25 @@ function familyLine(i: AccountInputs): string {
   return `${shape} · ${activity}${f.separate ? ` · Separate buying motion confirmed by ${f.separate.actor} until ${f.separate.expiresAt.slice(0, 10)}` : ''}`;
 }
 
+/** The divisions the evidence names for a multi-division parent, and the open question (people/division.ts). */
+function divisionView(i: AccountInputs): AccountIntelligenceBrief['division'] {
+  const v = divisionsFor(i.account.name);
+  if (!v) return null;
+  const named = new Set<string>();
+  for (const p of i.personas) {
+    const d = divisionOf(i.account.name, p.title);
+    if (d) named.add(d);
+  }
+  for (const s of auditedSites(i.pack).kept) {
+    const d = divisionOf(i.account.name, s.name);
+    if (d) named.add(d);
+  }
+  for (const m of i.family?.members ?? []) if (m.relation === 'subsidiary') named.add(divisionOf(i.account.name, m.accountName) ?? m.accountName);
+  const evidenced = v.divisions.map((d) => d.name).filter((d) => named.has(d)).concat([...named].filter((n) => !v.divisions.some((d) => d.name === n)));
+  const list = evidenced.length ? evidenced : v.divisions.map((d) => d.name);
+  return { evidenced, question: `Which division owns the yard decision: ${list.slice(0, -1).join(', ')}${list.length > 1 ? ' or ' : ''}${list[list.length - 1]}? Each runs its own supply chain.` };
+}
+
 /** What the account record's vertical says the company is (descriptive only; never the fit). */
 export function typeFromVertical(v: string | null): EntityType | null {
   // Stems match whole words and their endings ("Manufacturing", "Automotive", "Warehousing"); order matters
@@ -1107,7 +1141,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
   // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
   const persona = pick?.candidate.persona ?? ranked.find((r) => isDefaultWhoLane(r.read.lane))?.candidate.persona;
-  const mapped = (r: (typeof ranked)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact });
+  const mapped = (r: (typeof ranked)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title) });
   const people: BuyerMap = {
     primary: pick ? mapped(pick) : null,
     alternate: (() => {
@@ -1142,5 +1176,5 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     family: familyLine(i),
   };
   const dealState = i.opportunity ? i.opportunity.status : 'NOT_READ';
-  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, family: i.family ? { parentName: i.family.parentName, members: i.family.members, hold: i.family.hold, separate: i.family.separate } : null, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion, people };
+  return { accountName: i.account.name, generatedAt: now.toISOString(), sections, hypotheses, discovery, thesis, wedge, glance, fit, family: i.family ? { parentName: i.family.parentName, members: i.family.members, hold: i.family.hold, separate: i.family.separate } : null, dealState, deals: i.opportunity?.status === 'ACTIVE' ? i.opportunity.deals : [], motion, people, division: divisionView(i) };
 }

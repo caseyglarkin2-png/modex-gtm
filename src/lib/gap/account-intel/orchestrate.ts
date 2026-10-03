@@ -144,7 +144,7 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     } else if (section === 'org' && brief.people && brief.people.primary?.lane !== 'PRIMARY_OPERATOR') {
       // The person prior (people/person-prior.ts): no transportation operating owner on record, so contact discovery
       // looks for that person first. Candidates surface for Casey; GAP never creates a contact.
-      tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: `${CONTACT_DISCOVERY}${brief.people.primary ? ` Best on record now: ${brief.people.primary.name}${brief.people.primary.title ? `, ${brief.people.primary.title}` : ''} (${brief.people.primary.laneLabel.toLowerCase()}).` : ''} Then ask: ${HUMAN.org}`, why: 'No US / North America transportation operating owner on record: the person Casey sells to best.' });
+      tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: `${CONTACT_DISCOVERY}${brief.people.primary ? ` Best on record now: ${brief.people.primary.name}${brief.people.primary.title ? `, ${brief.people.primary.title}` : ''} (${brief.people.primary.laneLabel.toLowerCase()}).` : ''}${brief.division ? ` ${brief.division.question} Find that division's transportation owner.` : ''} Then ask: ${HUMAN.org}`, why: 'No US / North America transportation operating owner on record: the person Casey sells to best.' });
     } else if (HUMAN[section]) {
       tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: HUMAN[section]!, why });
     }
