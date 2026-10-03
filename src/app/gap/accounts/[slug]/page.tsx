@@ -28,6 +28,7 @@ import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
 import { projectBrief } from '@/lib/gap/context/brief';
 import { accountSlug } from '@/lib/gap/account-intel/href';
+import { OpenHashDetails } from '@/components/gap/open-hash-details';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP account' };
@@ -146,6 +147,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       <GapSubnav />
       {header}
       {tabs}
+      <OpenHashDetails />
       <p className="text-xs text-[var(--muted-foreground)]">
         Built live from what GAP holds, {brief.generatedAt.slice(0, 10)}. Every line says whether the buyer confirmed it, a source verified it, GAP modeled it or GAP inferred it.
       </p>

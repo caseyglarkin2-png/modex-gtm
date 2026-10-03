@@ -89,7 +89,8 @@ describe('NOW: the decision, once', () => {
     const sig = (n: number) => ({ id: `s${n}`, title: `Headline ${n}`, url: `https://x.example/${n}`, publishedAt: `2026-09-2${n}T00:00:00Z`, researchStatus: 'pending' });
     const v = now({ facts: [], hypotheses: [], signals: [sig(1), sig(2), sig(3)] }, emptyCtx({ relationship: projectRelationship({ restriction: null, account: { best_intro_path: null, owner: 'Unassigned' }, personas: [], memberships: [], meetings: [], emails: [], now: NOW }) }));
     expect(v.whyNow).toHaveLength(1);
-    expect(v.whyNow[0].basis).toMatch(/^a signal, not verified/);
+    expect(v.whyNow[0]).toMatchObject({ tag: 'Unverified', text: 'Headline 3' });
+    expect(v.whyNow[0].basis).toMatch(/^a third party's report, not checked; published /);
     expect(v.stateLine).not.toMatch(/Owner/);
   });
   it('a slot is kept for the newest signal when checked facts would fill WHY NOW; a titleless signal shows Casey\'s note, never a bare URL', () => {
@@ -98,8 +99,28 @@ describe('NOW: the decision, once', () => {
     const v = now({ facts: [f(1), f(2), f(3)], hypotheses: [], signals: [hire] });
     expect(v.whyNow).toHaveLength(3);
     expect(v.whyNow.filter((l) => l.tag === 'Checked')).toHaveLength(2);
-    expect(v.whyNow[2].text).toBe('Signal, not verified: Hiring signal: Transportation Engineering, yard modernization initiatives. (careers.walmart.com) (shared 2026-10-02)');
-    expect(v.whyNow[2].text).not.toMatch(/https?:/);
+    expect(v.whyNow[2]).toMatchObject({ tag: 'Unverified', text: 'Hiring signal: Transportation Engineering, yard modernization initiatives. (careers.walmart.com)' });
+    expect(v.whyNow[2].basis).toMatch(/^a third party's report, not checked; shared Oct 2, 2026$/);
+    expect(v.whyNow[2].text).not.toMatch(/https?:|not verified/);
+  });
+  it('an undated discovered signal is never WHY NOW; Casey\'s own share is dated by when he shared it', () => {
+    const undated = { id: 'su', title: 'Executive interview', url: 'https://youtube.example/x', publishedAt: null, researchStatus: 'no_usable_fact', note: null, capturedAt: '2026-09-30T00:00:00Z' };
+    expect(now({ facts: [], hypotheses: [], signals: [undated] }).whyNow).toHaveLength(0);
+    expect(now({ facts: [], hypotheses: [], signals: [{ ...undated, note: 'Casey: worth a look.' }] }).whyNow).toHaveLength(1);
+  });
+  it('a duplicate or unsayable checked line never spends a WHY NOW slot', () => {
+    const f = (n: number, q?: string) => ({ ...fact, id: `f${n}`, quote: q ?? `Acme Foods opens site number ${n} in 2027.`, url: `https://news.example/${n}`, publishedAt: `2026-09-1${n}T00:00:00Z` });
+    const hire = { id: 'sh', title: 'Acme hiring a yard lead', url: 'https://careers.example/1', publishedAt: '2026-09-25T00:00:00Z', researchStatus: 'queued' };
+    // f9 repeats f8's quote word for word: one line, and the other checked fact still gets the second slot.
+    const v = now({ facts: [f(8, 'Acme Foods opens site number 8 in 2027.'), { ...f(9, 'Acme Foods opens site number 8 in 2027.'), url: 'https://other.example/9' }, f(7)], hypotheses: [], signals: [hire] });
+    expect(v.whyNow.filter((l) => l.tag === 'Checked')).toHaveLength(2);
+  });
+  it('names stored all lower case read as names; anything with a capital is left alone', async () => {
+    const { displayName } = await import('@/lib/gap/context/now');
+    expect(displayName('adel ghanem')).toBe('Adel Ghanem');
+    expect(displayName("mary o'neil-smith")).toBe("Mary O'Neil-Smith");
+    expect(displayName('Chris McAndrew')).toBe('Chris McAndrew');
+    expect(now({ personas: [{ ...person, name: 'dana trans' }] }).who?.name).toBe('Dana Trans');
   });
   it('NEXT is an upcoming meeting within 14 days', () => {
     const ctx = emptyCtx({ relationship: projectRelationship({ restriction: null, account: null, personas: [], memberships: [], meetings: [{ meeting_status: 'Booked', meeting_date: '2026-10-06T15:00:00Z', objective: 'Yard walk-through', created_at: '2026-09-30' }], emails: [], now: NOW }) });

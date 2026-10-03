@@ -610,7 +610,10 @@ function catalystSection(i: AccountInputs, now: Date): Section {
   for (const s of i.signals.filter((x) => x.researchStatus !== 'fact_found')) {
     // No page title (a posting that is gone): Casey's own share note says what it is; never a bare URL.
     const what = s.title ?? (s.note?.trim() ? `${s.note.trim().split(/(?<=\.)\s/)[0]}${s.url ? ` (${s.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]})` : ''}` : null) ?? s.url ?? 'untitled';
-    st.push({ text: `Signal, not verified: ${what} (${s.publishedAt ? day(s.publishedAt) : s.capturedAt ? `shared ${day(s.capturedAt)}` : 'undated'})`, truth: 'INFERENCE', sources: [{ kind: 'signal', ref: s.id, label: 'shared or discovered signal', url: s.url, at: s.publishedAt }], falsifiableBy: 'Research finds no verifiable fact behind it.' });
+    // Dated by its publication, or (Casey's own share, with his note) by when he shared it; a discovered signal with
+    // neither is undated, and an undated signal is never a reason to act now.
+    const sharedAt = s.note?.trim() && s.capturedAt ? s.capturedAt : null;
+    st.push({ text: `Signal, not verified: ${what} (${s.publishedAt ? day(s.publishedAt) : sharedAt ? `shared ${day(sharedAt)}` : 'undated'})`, truth: 'INFERENCE', sources: [{ kind: 'signal', ref: s.id, label: 'shared or discovered signal', url: s.url, at: s.publishedAt ?? sharedAt }], falsifiableBy: 'Research finds no verifiable fact behind it.' });
   }
   const unknowns = liveFacts(i, now).length ? [] : ['A current, verified catalyst'];
   return section('catalysts', st, unknowns, now);
