@@ -3,7 +3,8 @@
 STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze rule below applies again).
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: `b7fc4baf4e4b47544ab44dad17088e60de080539` (GAP V2 polish #365-#366 after the final review #363; READY, production-verified 2026-10-03). Update this line when a change ships.
+Production SHA: `a507551f` (GAP V2 click-test rounds 1-3, #368-#376; READY, production-verified 2026-10-03). Update this line when a change ships.
+<!-- verified:2026-10-03 -->
 
 ## The rule for future changes
 
@@ -148,6 +149,16 @@ V2 releases (all RED / GREEN / mutation / full suite / typecheck / 17 E2Es / pre
 (1e46f1dd) · #360 task authority (51792b94) · #361 WHY NOW signal slot (eb56c2a0) · #362 P1 hotfix, a misspelled
 GapSignal column emptied signals for ~10 minutes (24fdf835) · #363 final review: restriction at the wire, own
 publication by domain (98755437) · #365 seller-review polish: undated signals, Unverified tag, slot accounting, names, View details (cf5d2e9c) · #366 NEXT display name (b7fc4baf). 69 mutants killed across the releases.
+Click-test releases (adversarial phone / trust / UX / a11y reviewers, 2026-10-03): #368 operating units, the PepsiCo
+division question (607777e5) · #369 deal truth from HubSpot + last touch (e7ae5a72) · #370 capture on the account,
+Listen to the brief (86dada39) · #371 buyer map from HubSpot with person location (a4faf511) · #372 faster account
+page, WHO tie-breaks (33cba7c5) · #373 real history, latest reply, passed close dates, relevant WHY NOW (4e48cf19) ·
+#374 one first-touch answer, honest labels (e8ab3e85) · #375 accessibility + phone UX (4518814a) · #376 honest queue
+actions, who Casey met, 45-day WHY NOW window, instant click feedback (a507551f).
+Named debt (not fixed): General Mills "Caf Tr s Cora es" is stored mojibake from a filing extraction (repair the
+extractor, then re-extract); PepsiCo economics "230 facilities" vs the 105-site footprint; account page 3-25s cold
+because production DATABASE_URL has connection_limit=1 (Casey decision); dark-mode --primary contrast (3.68:1) is a
+shared design token (Casey decision); legacy /accounts pages still load 12-36s and tell a different story.
 
 V2 debt (recorded, not built):
 - Person geography is not stored anywhere: most people read "US location unknown" until it is captured.
