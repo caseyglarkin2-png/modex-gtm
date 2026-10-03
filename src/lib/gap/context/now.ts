@@ -131,9 +131,16 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const whyNow: NowLine[] = [];
   const cat = brief.sections.catalysts.statements.filter((s) => s.truth !== 'CONTRADICTED' && !/^ENDED/.test(s.text));
   const rankedCat = [...cat].sort((a, b) => Number(b.truth === 'VERIFIED_PUBLIC') - Number(a.truth === 'VERIFIED_PUBLIC') || String(b.asOf ?? b.sources[0]?.at ?? '').localeCompare(String(a.asOf ?? a.sources[0]?.at ?? '')));
+  // At most ONE unverified signal (dogfood, 2026-10-02: three unverified headlines crowded out the decision).
+  let signals = 0;
   for (const s of rankedCat) {
+    const isSignal = s.sources[0]?.kind === 'signal';
+    if (isSignal && signals >= 1) continue;
     const l = sellerLine(s, 'catalysts', lx);
-    if (l && whyNow.length < 3 && take(l)) whyNow.push(s.sources[0]?.kind === 'signal' ? { ...l, tag: 'Our read', basis: `a signal, not verified, ${day(s.sources[0].at)}` } : l);
+    if (l && whyNow.length < 3 && take(l)) {
+      if (isSignal) signals += 1;
+      whyNow.push(isSignal ? { ...l, tag: 'Our read', basis: `a signal, not verified, ${day(s.sources[0].at)}` } : l);
+    }
   }
 
   // The gap, from buyer truth only; a hypothesis is "our read", never the buyer's.
@@ -179,7 +186,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const assetUseful = soon || ['IN_DEAL', 'FOLLOW_UP', 'FACT_LED'].includes(m.type);
   const a = assetUseful ? ctx.assets.find((x) => !x.legacy && (soon ? /meeting_prep|one_pager/.test(x.kind) : /one_pager|email|sequence/.test(x.kind))) ?? null : null;
 
-  const owner = ctx.relationship.owner;
+  const owner = ctx.relationship.owner && !/^(unassigned|none|n\/a|tbd)$/i.test(ctx.relationship.owner) ? ctx.relationship.owner : null;
   const stateLine = [brief.glance.fit, m.type === 'IN_DEAL' && brief.deals[0]?.stage ? `In a deal (${brief.deals[0].stage})` : STATE[m.type], owner ? `Owner: ${owner}` : null].filter(Boolean).join(' · ');
   const view: NowView = {
     name: brief.accountName,

@@ -85,6 +85,13 @@ describe('NOW: the decision, once', () => {
     const confirmed = { ...i, bids: [{ id: 'b0', type: 'current_state', summary: 'Paper check-in at every DC.', quote: 'x', who: 'dana', at: '2026-09-28T00:00:00Z', hypothesisId: null }] };
     expect(projectNow({ ...buildAccountBrief(confirmed, NOW), discovery: onlyLate.discovery }, emptyCtx(), confirmed, NOW).ask).toBe('What system tracks trailers?');
   });
+  it('WHY NOW holds at most one unverified signal; an "Unassigned" owner is not shown', () => {
+    const sig = (n: number) => ({ id: `s${n}`, title: `Headline ${n}`, url: `https://x.example/${n}`, publishedAt: `2026-09-2${n}T00:00:00Z`, researchStatus: 'pending' });
+    const v = now({ facts: [], hypotheses: [], signals: [sig(1), sig(2), sig(3)] }, emptyCtx({ relationship: projectRelationship({ restriction: null, account: { best_intro_path: null, owner: 'Unassigned' }, personas: [], memberships: [], meetings: [], emails: [], now: NOW }) }));
+    expect(v.whyNow).toHaveLength(1);
+    expect(v.whyNow[0].basis).toMatch(/^a signal, not verified/);
+    expect(v.stateLine).not.toMatch(/Owner/);
+  });
   it('NEXT is an upcoming meeting within 14 days', () => {
     const ctx = emptyCtx({ relationship: projectRelationship({ restriction: null, account: null, personas: [], memberships: [], meetings: [{ meeting_status: 'Booked', meeting_date: '2026-10-06T15:00:00Z', objective: 'Yard walk-through', created_at: '2026-09-30' }], emails: [], now: NOW }) });
     expect(now({}, ctx).next).toEqual({ text: 'Prepare for the meeting on Oct 6, 2026: Yard walk-through. Read BRIEF before you go.', source: 'meeting' });
