@@ -288,7 +288,7 @@ export function ContactsTable({ contacts, savedViews }: { contacts: ContactRow[]
               href={hubspotContactUrl(c.hubspotContactId)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-xs text-green-600 hover:underline"
+              className="flex items-center gap-1 text-xs text-green-700 hover:underline dark:text-green-400"
               onClick={(e) => e.stopPropagation()}
             >
               <CheckCircle className="h-3 w-3" /> Synced <ExternalLink className="h-3 w-3" />

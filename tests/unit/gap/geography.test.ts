@@ -188,3 +188,21 @@ describe('Mexico is North America (Casey, 2026-10-03); generic Latin America is 
     expect(sellerRelevance('Acme Foods opens a new plant in Sao Paulo, Brazil.').rank).toBe(8);
   });
 });
+
+describe('finish review: regions at the edges', () => {
+  it('"North and Latin America" includes North America; South / Central America and the Caribbean are another region', () => {
+    expect(readPerson('Director Transportation, North and Latin America').geo).toBe('NA_REMIT');
+    expect(readPerson('Director Transportation, South America', { location: 'Chicago, IL' }).geo).toBe('OTHER_REGION');
+    expect(readPerson('Logistics Director, Central America').geo).toBe('OTHER_REGION');
+    expect(readPerson('VP Logistics, Caribbean').geo).toBe('OTHER_REGION');
+  });
+  it('NL and BC alone are ambiguous (Canadian province or Mexican state); with a country they decide', () => {
+    expect(personLocation('Monterrey, NL')).toBeNull();
+    expect(personLocation('Tijuana, BC')).toBeNull();
+    expect(personLocation('Vancouver, BC, Canada')).toBe('CANADA');
+    expect(personLocation('Monterrey, NL, Mexico')).toBe('MEXICO');
+  });
+  it('an accented "México" remit is North America', () => {
+    expect(readPerson('Director de Transporte, México').geo).toBe('NA_REMIT');
+  });
+});
