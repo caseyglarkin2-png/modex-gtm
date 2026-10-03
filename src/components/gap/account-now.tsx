@@ -53,6 +53,9 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
           <p className="min-w-0 break-words text-sm text-[var(--muted-foreground)]" data-testid="now-state">{v.stateLine}</p>
           <VoicePreviewButton text={v.listen} label="Listen" className="shrink-0" />
         </div>
+        <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
+          {v.lastTouch}
+        </p>
         {v.unit ? (
           <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="now-unit">
             {v.unit}

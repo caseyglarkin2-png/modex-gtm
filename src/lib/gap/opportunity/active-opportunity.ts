@@ -68,6 +68,10 @@ export interface OpenDeal {
   contactIds: string[];
   /** Phase 2 F1: last activity (notes_last_updated, else hs_lastmodifieddate), when HubSpot returned one. Display only. */
   lastActivityAt?: string | null;
+  /** V2 (display only): what HubSpot holds for the deal's amount, close date and next step. */
+  amount?: string | null;
+  closeDate?: string | null;
+  nextStep?: string | null;
 }
 
 export type OpportunityTruth =
@@ -298,6 +302,9 @@ async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string
       companyIds: [...(dealCompanies.get(id) ?? [])].sort(),
       contactIds: [],
       ...lastActivityOf(r.properties),
+      ...(r.properties.amount?.toString().trim() ? { amount: r.properties.amount.toString().trim() } : {}),
+      ...(r.properties.closedate?.toString().trim() ? { closeDate: r.properties.closedate.toString().trim() } : {}),
+      ...(r.properties.hs_next_step?.toString().trim() ? { nextStep: r.properties.hs_next_step.toString().trim() } : {}),
     });
   }
   if (open.length === 0) return { status: 'CLEAR', companyIds };

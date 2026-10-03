@@ -128,7 +128,7 @@ export interface AccountInputs {
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
-  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null }>; unlinked?: boolean } | null;
+  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>; unlinked?: boolean } | null;
   pack: PackInput | null;
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
@@ -266,7 +266,7 @@ export interface AccountIntelligenceBrief {
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
   /** The open deals when dealState is ACTIVE (name and stage as HubSpot said them moments ago). */
-  deals: Array<{ name: string | null; stage: string | null }>;
+  deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>;
   /**
    * WHO, from THE PERSON PRIOR (people/person-prior.ts): one primary person and one alternate, each with one sentence
    * why, and the buyer map by lane. Lanes and reasons, never a score.
