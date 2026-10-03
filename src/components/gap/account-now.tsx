@@ -56,6 +56,11 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
           {v.lastTouch}
         </p>
+        {v.lastReply ? (
+          <p className="text-xs font-medium text-sky-800 dark:text-sky-300" data-testid="now-last-reply">
+            {v.lastReply}
+          </p>
+        ) : null}
         {v.unit ? (
           <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="now-unit">
             {v.unit}

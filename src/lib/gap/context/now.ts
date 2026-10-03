@@ -15,6 +15,7 @@
 import { VENDOR_LEAD, type AccountInputs, type AccountIntelligenceBrief, type DiscoveryQuestion, type MotionType } from '../account-intel/build';
 import type { Source, Statement } from '../account-intel/truth';
 import { sensitivityOf } from '../research/sensitivity';
+import { sellerRelevance } from '../research/continuity';
 import { readPerson } from '../people/person-prior';
 import type { AccountContext } from './context';
 
@@ -43,6 +44,8 @@ export interface NowView {
   unit: string | null;
   /** "Last touch Sep 3, 2026 (29 days ago): Email to ..." or "No touch on record." */
   lastTouch: string;
+  /** The newest buyer reply on record, dated, else null. */
+  lastReply: string | null;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
   who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean } | null;
   whoUnknown: string | null;
@@ -83,7 +86,8 @@ const host = (u: string | null) => {
     return null;
   }
 };
-const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+/** Comparison form: the catalyst label ("RECENT EVENT:") and punctuation do not make a different idea. */
+const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
 /** The seller tag and basis of a statement, or null when it cannot be said in NOW (a system record about their operations). */
 export function sellerLine(s: Statement, section: string, x: { domains: readonly string[]; accountName: string; citable: ReadonlySet<string> }): NowLine | null {
@@ -111,7 +115,7 @@ export function sellerLine(s: Statement, section: string, x: { domains: readonly
 const ASK_ORDER: DiscoveryQuestion['type'][] = ['CURRENT_PROCESS', 'VERIFY_PROBLEM', 'ROOT_CAUSE', 'IMPACT', 'OWNERSHIP', 'CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE'];
 const LATE: ReadonlySet<string> = new Set(['CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE']);
 
-export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'>, now: Date): NowView {
+export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date): NowView {
   const used = new Set<string>();
   const take = (l: NowLine) => (used.has(l.id) || used.has(`text:${norm(l.text)}`) ? false : (used.add(l.id), used.add(`text:${norm(l.text)}`), true));
   const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
@@ -148,7 +152,14 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   // WHY NOW: dated catalysts (checked first, then unverified signals); never private engagement.
   const whyNow: NowLine[] = [];
   const cat = brief.sections.catalysts.statements.filter((s) => s.truth !== 'CONTRADICTED' && !/^ENDED/.test(s.text) && !VENDOR_LEAD.test(s.text.replace(/^[A-Z /]+:\s*/, '')));
-  const rankedCat = [...cat].sort((a, b) => Number(b.truth === 'VERIFIED_PUBLIC') - Number(a.truth === 'VERIFIED_PUBLIC') || String(b.asOf ?? b.sources[0]?.at ?? '').localeCompare(String(a.asOf ?? a.sources[0]?.at ?? '')));
+  // Seller relevance first (click test: a sale in Brazil and a plant in Kazakhstan led WHY NOW): a physical network,
+  // site or automation change beats context (activity abroad, a divestiture, legal text), which shows only when
+  // nothing better exists. Then checked before unverified, then newest.
+  const rel = (s: (typeof cat)[number]) => sellerRelevance(s.text.replace(/^[A-Z][A-Z /]+:\s*/, '')).rank;
+  const relevantExists = cat.some((s) => s.truth === 'VERIFIED_PUBLIC' && rel(s) <= 5);
+  const rankedCat = [...cat]
+    .filter((s) => !relevantExists || s.sources[0]?.kind === 'signal' || rel(s) <= 5)
+    .sort((a, b) => Number(b.truth === 'VERIFIED_PUBLIC') - Number(a.truth === 'VERIFIED_PUBLIC') || rel(a) - rel(b) || String(b.asOf ?? b.sources[0]?.at ?? '').localeCompare(String(a.asOf ?? a.sources[0]?.at ?? '')));
   // At most ONE unverified signal (dogfood, 2026-10-02: three unverified headlines crowded out the decision), and when
   // there is one, a slot is kept for the newest (Walmart's yard-modernization hiring must not be crowded out by facts).
   let signals = 0;
@@ -217,16 +228,26 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const stage = brief.deals[0]?.stage && !/^\d+$/.test(brief.deals[0].stage) ? brief.deals[0].stage.replace(/([a-z])(scheduled|qualified|presented|sent|won|lost)\b/g, '$1 $2').replace(/[_-]+/g, ' ') : null;
   const d0 = brief.deals[0];
   const money = d0?.amount && Number.isFinite(Number(d0.amount)) && Number(d0.amount) > 0 ? `$${Number(d0.amount) >= 1e6 ? `${(Number(d0.amount) / 1e6).toFixed(1)}M` : `${Math.round(Number(d0.amount) / 1e3)}K`}` : null;
-  const closes = d0?.closeDate && !Number.isNaN(new Date(d0.closeDate).getTime()) ? `closes ${day(d0.closeDate)}` : null;
+  // A close date in the past is not deal state: it says the deal record needs updating.
+  const closeAt = d0?.closeDate && !Number.isNaN(new Date(d0.closeDate).getTime()) ? new Date(d0.closeDate) : null;
+  const closes = closeAt ? (closeAt.getTime() < now.getTime() - 86_400_000 ? `close date ${day(d0!.closeDate)} has passed: update the deal` : `closes ${day(d0!.closeDate)}`) : null;
   const dealBits = [stage, money, closes].filter(Boolean).join(', ');
   const stateLine = [brief.glance.fit, m.type === 'IN_DEAL' ? (dealBits ? `In a deal (${dealBits})` : STATE[m.type]) : STATE[m.type], owner ? `Owner: ${owner}` : null].filter(Boolean).join(' · ');
   // LAST TOUCH: the newest thing that happened (a sent email, a reply, a meeting, a field note), and how long ago.
-  const lt = ctx.history.find((h) => h.visibility === 'seller' && h.kind !== 'outcome');
-  const lastTouch = lt ? `Last touch ${day(lt.at)} (${Math.max(0, Math.floor((now.getTime() - new Date(lt.at).getTime()) / 86_400_000))} days ago): ${lt.text}` : 'No touch on record.';
+  // GAP's own first touches count too (they live in the GAP ledger, not the legacy email log).
+  const gapTouch = [...(i.firstTouches ?? [])].filter((t) => t.sentAt && t.state !== 'draft outstanding').sort((a, b) => String(b.sentAt).localeCompare(String(a.sentAt)))[0];
+  const ltHist = ctx.history.find((h) => h.visibility === 'seller' && h.kind !== 'outcome');
+  const lt = gapTouch && (!ltHist || String(gapTouch.sentAt) > ltHist.at) ? { at: String(gapTouch.sentAt), text: `GAP first touch to ${gapTouch.recipient}` } : ltHist;
+  const ago = (at: string) => Math.max(0, Math.floor((now.getTime() - new Date(at).getTime()) / 86_400_000));
+  const lastTouch = lt ? `Last touch ${day(lt.at)} (${ago(lt.at)} days ago): ${lt.text}` : 'No touch on record.';
+  // The newest thing the BUYER wrote, whenever it was: it is never buried below the fold of BRIEF.
+  const rep = ctx.history.find((h) => h.kind === 'reply');
+  const lastReply = rep ? `Latest buyer reply ${day(rep.at)} (${ago(rep.at)} days ago): ${rep.text}` : null;
   const view: NowView = {
     name: brief.accountName,
     stateLine,
     lastTouch,
+    lastReply,
     unit: brief.division ? `Division: unknown. ${brief.division.question}` : null,
     next,
     who,
