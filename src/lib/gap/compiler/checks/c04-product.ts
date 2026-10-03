@@ -34,6 +34,9 @@ export const COPY_INTENT_PATTERNS: readonly ForbiddenExplainPattern[] = [
   { label: 'you visited/viewed/opened/clicked/downloaded', pattern: /\byou (?:visited|viewed|opened|clicked|downloaded)\b/i },
   { label: 'on our site/website/page', pattern: /\bon our (?:site|website|page)\b/i },
   { label: 'your team/colleagues opened/viewed/visited', pattern: /\byour (?:team|colleague)s? (?:opened|viewed|visited)\b/i },
+  // V2 (2026-10-02, pinned by tests/unit/gap/now-projection.test.ts): time on our page, and the classic GAP tell.
+  { label: 'you spent X minutes/time', pattern: /\byou (?:spent|have spent|'ve spent) (?:\d+|some|a few|several|a lot of|a bit of|more|time|minutes|a while)\b/i },
+  { label: 'what made you look/visit/check out', pattern: /\bwhat (?:made|prompted|led) you (?:to )?(?:look|visit|check|read|view|download|click|come back)\b/i },
   { label: 'engagement score', pattern: /\bengagement score\b/i },
   { label: 'hot lead', pattern: /\bhot lead\b/i },
 ];
