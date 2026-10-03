@@ -33,7 +33,7 @@ export default async function CampaignsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="bg-cyan-600 text-white">Year-round GTM mode</Badge>
+          <Badge className="bg-cyan-700 text-white">Year-round GTM mode</Badge>
           <Link href="/campaigns/new">
             <Button size="sm" className="gap-1.5">
               New Campaign <ArrowRight className="h-3.5 w-3.5" />

@@ -277,7 +277,7 @@ export function ContactsTable({ contacts, savedViews }: { contacts: ContactRow[]
       sortable: true,
       render: (c) => {
         if (c.doNotContact) {
-          return <span className="flex items-center gap-1 text-xs text-red-500"><XCircle className="h-3 w-3" /> DNC</span>;
+          return <span className="flex items-center gap-1 text-xs text-red-700 dark:text-red-400"><XCircle className="h-3 w-3" /> DNC</span>;
         }
         if (!c.emailValid) {
           return <span className="flex items-center gap-1 text-xs text-amber-500"><AlertTriangle className="h-3 w-3" /> Invalid</span>;
