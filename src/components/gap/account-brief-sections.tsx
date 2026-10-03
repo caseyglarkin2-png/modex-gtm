@@ -4,6 +4,7 @@
  */
 import Link from 'next/link';
 import type { BriefSection } from '@/lib/gap/context/brief';
+import { VoicePreviewButton } from '@/components/voice-preview-button';
 
 const TAG_TONE: Record<string, string> = {
   'Buyer said': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
@@ -13,9 +14,14 @@ const TAG_TONE: Record<string, string> = {
   Contradicted: 'border-red-600 text-red-700 dark:text-red-400',
 };
 
-export function AccountBriefSections({ sections, sourcesHref, deep }: { sections: BriefSection[]; sourcesHref: string; deep: Partial<Record<string, { label: string; href: string }>> }) {
+export function AccountBriefSections({ sections, sourcesHref, deep, listen }: { sections: BriefSection[]; sourcesHref: string; deep: Partial<Record<string, { label: string; href: string }>>; listen?: string }) {
   return (
     <div className="space-y-4" data-testid="account-brief-v2">
+      {listen ? (
+        <div className="flex justify-end">
+          <VoicePreviewButton text={listen} label="Listen to the brief" />
+        </div>
+      ) : null}
       {sections.map((s) => (
         <section key={s.key} className="space-y-1.5 border-b border-[var(--border)] pb-3 last:border-0" data-testid={`brief-v2-${s.key}`}>
           <h2 className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{s.title}</h2>

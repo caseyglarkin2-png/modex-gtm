@@ -92,7 +92,7 @@ export function sellerLine(s: Statement, section: string, x: { domains: readonly
   if (s.truth === 'BUYER_CONFIRMED') return { id, text: s.text, tag: 'Buyer said', basis: `${src?.label ?? 'the buyer'}, ${day(s.asOf ?? src?.at)}`, cite: null };
   if (s.truth === 'CONTRADICTED') return { id, text: s.text, tag: 'Contradicted', basis: 'sources disagree', cite: null };
   if (s.truth === 'UNKNOWN') return { id, text: s.text, tag: 'Unknown', basis: 'not known', cite: null };
-  if (s.truth === 'MODELED_ESTIMATE' || s.truth === 'INFERENCE') return { id, text: s.text, tag: 'Our read', basis: s.truth === 'MODELED_ESTIMATE' ? 'our model' : 'our inference', cite: null };
+  if (s.truth === 'MODELED_ESTIMATE' || s.truth === 'INFERENCE') return { id, text: s.text, tag: 'Our read', basis: s.truth === 'MODELED_ESTIMATE' ? 'our model (how it is calculated: View details)' : 'our inference', cite: null };
   // VERIFIED_PUBLIC
   if (s.sources.every((y) => SYSTEM.has(y.kind)) && OPERATIONS.has(section)) return null;
   const ev = s.sources.find((y) => y.kind === 'evidence');

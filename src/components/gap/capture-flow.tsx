@@ -309,11 +309,12 @@ function LinkNote({ capture, onChange }: { capture: CaptureView; onChange: (c: C
   );
 }
 
-export function CaptureFlow({ initial = null }: { initial?: CaptureView | null }) {
+export function CaptureFlow({ initial = null, initialAccount = null }: { initial?: CaptureView | null; initialAccount?: string | null }) {
   const [capture, setCapture] = useState<CaptureView | null>(initial);
   const [q, setQ] = useState('');
   const [found, setFound] = useState<{ accounts: string[]; people: Person[] }>({ accounts: [], people: [] });
-  const [account, setAccount] = useState<string | null>(null);
+  // Opened from an account page ("Log what happened"): the account is already chosen (Casey can still clear it).
+  const [account, setAccount] = useState<string | null>(initialAccount);
   const [personaId, setPersonaId] = useState<number | null>(null);
   const [context, setContext] = useState<string>('meeting');
   const [text, setText] = useState('');

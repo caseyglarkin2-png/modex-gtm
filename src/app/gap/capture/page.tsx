@@ -19,11 +19,14 @@ import { CaptureFlow } from '@/components/gap/capture-flow';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Capture' };
 
-export default async function CapturePage() {
+export default async function CapturePage({ searchParams }: { searchParams?: Promise<{ account?: string }> }) {
   if (assertGapEnabled('GAP_HYPOTHESIS_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
   const recent = await listRecentCaptures(prisma, 8).catch(() => []);
+  // ?account= from an account page: prefilled only when it names a real account (never a free-text guess).
+  const wanted = ((await searchParams) ?? {}).account?.trim() ?? '';
+  const initialAccount = wanted ? ((await prisma.account.findUnique({ where: { name: wanted }, select: { name: true } }).catch(() => null))?.name ?? null) : null;
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
@@ -32,7 +35,7 @@ export default async function CapturePage() {
         <h1 className="text-2xl font-semibold tracking-tight">Capture buyer truth</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">Right after the conversation. GAP keeps your note as written and suggests what might be buyer truth; only what you confirm counts.</p>
       </div>
-      <CaptureFlow />
+      <CaptureFlow initialAccount={initialAccount} />
       {recent.length ? (
         <section className="space-y-2" data-testid="capture-recent">
           <h2 className="text-sm font-semibold">Recent notes</h2>
