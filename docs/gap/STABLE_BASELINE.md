@@ -1,9 +1,9 @@
 # GAP stable baseline
 
-STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE.
-<!-- verified:2026-10-02 (soak) -->
+STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze rule below applies again).
+<!-- verified:2026-10-02 (V2) -->
 
-Production SHA: `ca85a0600f82e61930dc0a65a8902804ba60e6ed` (deployment dpl_3MWGBEWgw7EHMKkFtw5WPLrJWVgx, READY, soak-verified 2026-10-02). Update this line when a change ships.
+Production SHA: `9875543719a65b1220a52c55e7e6f49fb3d077a1` (GAP V2 final review, #363, READY, production-verified 2026-10-02). Update this line when a change ships.
 
 ## The rule for future changes
 
@@ -114,6 +114,54 @@ Acceptance on 762da572 (2026-10-02): full unit suite 575 files / 6386 passed; ty
 HEALTHY (mailbox, HubSpot, suppression, sender, routing); feedback journey verified end to end (secret query value
 stripped, unknown field dropped, build recorded, note dismissed). Semantic dogfood of 10 accounts + an MMYQB candidate
 + a NOT_FIT candidate: `docs/gap/semantic-dogfood-latest.md`.
+
+## V2: resource convergence + decision compression (2026-10-02)
+
+Casey lifted the freeze for ONE bounded refactor: many sensors, one account context, one seller decision cockpit,
+workbenches one click deeper. Design and audits: `docs/gap/RESOURCE_CONVERGENCE_AUDIT.md`,
+`docs/gap/V2_RESOURCE_AND_IA_AUDIT.md`, `docs/gap/V2_PERSON_PRIOR.md`. The freeze rule above applies again now.
+
+V2 contracts (do not change without a new design decision):
+
+- **One restriction authority** (`src/lib/gap/policy/restriction.ts`, a reviewed code constant: Dannon is warm intro
+  only through Mark Shaughnessy). Read by GAP motion (INTRO_ONLY, before the touch hold and reachability), the GAP
+  action-time check (fails closed on an alias read error), the legacy send guards, the Outbox writers, the drip, Studio,
+  and AT THE WIRE in the Gmail sender (`src/lib/email/restriction-gate.ts`: TO, CC, BCC; only an operator alert or a
+  genuine reply to the buyer's own message passes). Account.best_intro_path, warm_intro, outreach_status and
+  Persona.intro_route are display only.
+- **One WHO comparator** (`src/lib/gap/people/person-prior.ts`): buyer truth > relationship > initiative owner > lane
+  > US / North America remit (the person's own, never the company's country) > network scope > seniority. Lanes and
+  reasons, never a score. The brief, the buyer map and the cockpit read it.
+- **One account context** (`src/lib/gap/context/*`): deterministic projections over existing stores (no table, no
+  score). Private engagement is interest, never a reason, never in copy or Listen; drip tasks and opens are not
+  history. Both loaders' select keys are pinned to the Prisma schema (`tests/unit/gap/loader-schema.test.ts`).
+- **NOW / BRIEF / SOURCES** on `/gap/accounts/[slug]` (`?view=`), projections of the SAME brief. NOW: no live model;
+  each idea once (NEXT > WHO > WHY NOW > KNOW > THINK); seller tags with the basis on the line ("their own
+  publication" only on the account's own domains); the gap before the pitch (current state, impact unknown first, no
+  dollars, WEDGE only after a confirmed problem or cost); ASK in discovery order; at most one unverified signal.
+- **One task authority**: GAP NEXT. The legacy account page shows it first (legacy suggestions labelled); the Work
+  Queue collapses a GAP-managed account's outbound-shaped legacy items into one row (never hidden; ops items
+  untouched; most urgent severity kept).
+
+V2 releases (all RED / GREEN / mutation / full suite / typecheck / 17 E2Es / preview READY / production verified):
+#357 restriction authority (e03a94fd) · #358 person prior (4a9cbf0d) · #359 context + NOW / BRIEF / SOURCES
+(1e46f1dd) · #360 task authority (51792b94) · #361 WHY NOW signal slot (eb56c2a0) · #362 P1 hotfix, a misspelled
+GapSignal column emptied signals for ~10 minutes (24fdf835) · #363 final review: restriction at the wire, own
+publication by domain (98755437). 62 mutants killed across the releases.
+
+V2 debt (recorded, not built):
+- Person geography is not stored anywhere: most people read "US location unknown" until it is captured.
+- Division-level modeling (PepsiCo: Frito-Lay / PBNA / Quaker) is not built; NOW does not name the operating unit.
+- Sub-Zero and World Market (Casey's JOC accounts) are not GAP accounts; their transportation contacts are not in
+  HubSpot by title.
+- Legacy-path name matching misses brand aliases such as "DanoneWave" (recipient domains are still caught at the
+  wire); C06 does not list "you checked out" / "your recent visit" (engagement never reaches the compiler).
+- The VP variance ASK needs a title, so a follow-up or referral WHO never gets it.
+- The legacy `/accounts/[slug]` page has 7 inner elements wider than 390px (pre-existing).
+- clawd's engagement_sync stall alert does not know outreach is paused (fires as a feed break); a connector failure
+  looks like a quiet day (debug log, zero rows). clawd repo.
+- From the audit: the Discovery snapshot is frozen since June; unstamped Outbox drafts are not checked against GAP
+  holds; Analytics mixes GAP and legacy sends; audit-route / QR legacy cards remain on the legacy page.
 
 ## Soak (2026-10-02)
 

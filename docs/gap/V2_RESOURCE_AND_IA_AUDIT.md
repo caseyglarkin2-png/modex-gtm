@@ -1,6 +1,6 @@
 # GAP V2 resource and information-architecture audit
 
-STATUS: ACTIVE (V2, 2026-10-02)
+STATUS: SHIPPED 2026-10-02 (V2, production 98755437)
 <!-- verified:2026-10-02 -->
 
 Golden accounts: PepsiCo, Walmart, Dannon, Kroger, Crowley, one MMYQB candidate (Performance Food Group). Production
@@ -214,3 +214,21 @@ Content Studio (assets), HubSpot record.
 Yard-modernization hiring (Walmart Careers R-2545651, R-2547672, R-2426277) is captured through the existing signal
 path as hiring signals, dated, publisher named, "could not verify at the source" where the posting is gone. They appear
 in WHY NOW as signals and can name an initiative owner for WHO; they never become a fact about a yard problem.
+
+## Dogfood after V2 (production, 2026-10-02)
+
+| Metric | Before (PepsiCo / Dannon / Walmart) | After |
+|---|---|---|
+| Pages to learn next action + person + relationship + engagement | 1 (incomplete) / 3 / 1 (thin) | 1 for all three (NOW; private engagement labelled on NOW, history and assets in BRIEF) |
+| Lines above the 390px fold | 15-row glance + chips | state line, NEXT with its control, WHO + why + alternate, first WHY NOW (screenshots in the V2 PRs) |
+| Duplicated ideas | best fact up to 6x, hypothesis 3x; Dannon hold 3x | each idea once (pinned); Dannon's intro idea once in NEXT, once in WHO's why |
+| Conflicting authorities | GAP NEXT vs cockpit WHO; Dannon: GAP "research first" vs legacy "prep Mark intro" vs Work Queue drip tasks | one NEXT (GAP), one WHO comparator; legacy page and Work Queue defer to GAP |
+| Useful resources hidden | engagement, history, assets, intro path, routes, meeting brief | all in NOW (one line each when material) or BRIEF, with links one click deeper |
+
+Golden accounts in production after V2 (NOW): Dannon (warm intro only: NEXT is the intro ask through Mark Shaughnessy,
+WHO Mark with the Heiko / CSCO route, no cold path anywhere); PepsiCo (fact-led; WHO the adjacent VP Supply Chain with
+"no US / NA transportation operations owner on record yet"); Walmart (relationship-led through Inland26; WHY NOW two
+checked fulfillment-center investments plus the yard-modernization hiring signal, not verified); Kroger and Crowley
+(in a deal: NEXT is the deal brief); Tyson (relationship-led through Inland26, alternate the Director of
+Transportation); Performance Food Group (do not contact yet: no fact or relationship; WHO the corporate
+transportation manager); General Mills (thesis needs review; WHO the VP Supply Chain, owner missing said).
