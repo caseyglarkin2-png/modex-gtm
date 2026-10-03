@@ -313,9 +313,11 @@ export async function enrichHubSpotContactsBulk(hubspotContactIds: string[]): Pr
         summary.errors++;
         continue;
       }
-      const result = await enrichPersonaFromHubSpotContact(contact);
+      // Casey clicked enrich on these contacts: a human-initiated Apollo action (the policy allows it).
+      const result = await enrichPersonaFromHubSpotContact(contact, { kind: 'human', actor: 'Casey (contacts: enrich selected)' });
       if (result.status === 'matched') summary.matched++;
       else if (result.status === 'no_match') summary.noMatch++;
+      else if (result.status === 'blocked') summary.errors++;
       else summary.noLocalPersona++;
     } catch {
       summary.errors++;

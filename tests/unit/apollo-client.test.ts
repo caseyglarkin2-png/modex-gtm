@@ -13,7 +13,7 @@ describe('apollo client', () => {
     delete process.env.APOLLO_API_KEY;
     const { searchApolloPeople } = await import('@/lib/enrichment/apollo-client');
 
-    const people = await searchApolloPeople('logistics');
+    const people = await searchApolloPeople('logistics', { kind: 'human', actor: 'test' }, {});
     expect(people).toEqual([]);
   });
 
@@ -25,7 +25,7 @@ describe('apollo client', () => {
     } as Response);
     const { searchApolloPeople } = await import('@/lib/enrichment/apollo-client');
 
-    const people = await searchApolloPeople('yardflow');
+    const people = await searchApolloPeople('yardflow', { kind: 'human', actor: 'test' }, {});
     expect(people).toHaveLength(1);
     expect(people[0]?.email).toBe('casey@freightroll.com');
     expect(fetchMock).toHaveBeenCalledOnce();
@@ -40,7 +40,7 @@ describe('apollo client', () => {
     } as Response);
     const { searchApolloPeople } = await import('@/lib/enrichment/apollo-client');
 
-    const people = await searchApolloPeople('yardflow');
+    const people = await searchApolloPeople('yardflow', { kind: 'human', actor: 'test' }, {});
     expect(people).toHaveLength(1);
     expect(fetchMock).toHaveBeenCalledOnce();
   });

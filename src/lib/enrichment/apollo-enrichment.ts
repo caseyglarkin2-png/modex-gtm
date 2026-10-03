@@ -1,13 +1,16 @@
 import type { HubSpotContact } from '@/lib/hubspot/contacts';
 import { prisma } from '@/lib/prisma';
 import { searchApolloPeople } from '@/lib/enrichment/apollo-client';
+import { apolloLiveDecision, type ApolloInitiator } from '@/lib/enrichment/apollo-policy';
 import { matchApolloPerson } from '@/lib/enrichment/apollo-match';
 import { splitName } from '@/lib/contact-standard';
 
 export type ApolloEnrichmentOutcome =
   | { status: 'matched'; personaId: number; apolloPersonId: string; confidence: number }
   | { status: 'no_match'; personaId: number; confidence: number }
-  | { status: 'no_local_persona' };
+  | { status: 'no_local_persona' }
+  /** Casey's Apollo policy refused the call (automation with no budget, or a test): nothing was searched or written. */
+  | { status: 'blocked'; reason: string };
 
 function normalizeDomain(urlOrDomain: string | undefined): string | null {
   if (!urlOrDomain) return null;
@@ -15,7 +18,10 @@ function normalizeDomain(urlOrDomain: string | undefined): string | null {
   return value.split('/')[0] || null;
 }
 
-export async function enrichPersonaFromHubSpotContact(contact: HubSpotContact): Promise<ApolloEnrichmentOutcome> {
+export async function enrichPersonaFromHubSpotContact(contact: HubSpotContact, initiator: ApolloInitiator, env?: Record<string, string | undefined>): Promise<ApolloEnrichmentOutcome> {
+  // Asked before anything else: a refused run searches nothing and stamps no "last enriched" date.
+  const decision = apolloLiveDecision(initiator, env);
+  if (!decision.allowed) return { status: 'blocked', reason: decision.reason };
   const persona = await prisma.persona.findFirst({
     where: {
       OR: [
@@ -36,7 +42,7 @@ export async function enrichPersonaFromHubSpotContact(contact: HubSpotContact): 
 
   const { firstName, lastName } = splitName(persona.name);
   const query = [contact.email, persona.name, contact.company, persona.title].filter(Boolean).join(' ');
-  const candidates = await searchApolloPeople(query);
+  const candidates = await searchApolloPeople(query, initiator, env);
   const matched = matchApolloPerson(
     {
       email: contact.email,
