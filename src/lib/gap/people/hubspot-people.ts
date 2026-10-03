@@ -55,9 +55,25 @@ export const hubspotPeopleReads: HubSpotPeopleReads = {
 
 const clean = (v: string | null | undefined) => (typeof v === 'string' && v.trim() ? v.trim() : null);
 
+/**
+ * A short in-memory cache (per server instance, 15 minutes) for the real HubSpot reads only: a company's contacts
+ * change slowly, and re-reading 500+ of them on every page view is the slowest thing the account page did. A failed
+ * read is never cached. Injected reads (tests) bypass it.
+ */
+const CACHE_MS = 15 * 60_000;
+const cache = new Map<string, { at: number; value: { people: HubSpotPerson[]; truncated: boolean } }>();
+
 /** The people HubSpot associates with this company (capped), or null when it cannot be read. */
-export async function loadHubSpotPeople(companyId: string | null, reads: HubSpotPeopleReads = hubspotPeopleReads, cap = 1000): Promise<{ people: HubSpotPerson[]; truncated: boolean } | null> {
+export async function loadHubSpotPeople(companyId: string | null, reads: HubSpotPeopleReads = hubspotPeopleReads, cap = 1000, now = Date.now(), cacheable = reads === hubspotPeopleReads): Promise<{ people: HubSpotPerson[]; truncated: boolean } | null> {
   if (!companyId) return null;
+  const hit = cacheable ? cache.get(companyId) : undefined;
+  if (hit && now - hit.at < CACHE_MS) return hit.value;
+  const value = await readPeople(companyId, reads, cap);
+  if (value && cacheable) cache.set(companyId, { at: now, value });
+  return value;
+}
+
+async function readPeople(companyId: string, reads: HubSpotPeopleReads, cap: number): Promise<{ people: HubSpotPerson[]; truncated: boolean } | null> {
   try {
     const { ids, truncated } = await reads.contactIdsForCompany(companyId, cap);
     if (!ids.length) return { people: [], truncated };
