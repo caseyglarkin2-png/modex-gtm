@@ -50,6 +50,12 @@ describe('applyGapAuthority', () => {
     expect(out.filter((i) => i.accountName === 'Acme Foods').map((i) => i.itemType)).toEqual(['gap-next']);
     expect(out.filter((i) => i.accountName === 'Unmanaged Co').map((i) => i.itemType)).toEqual(['follow-up']);
   });
+  it('the collapsed row keeps the most urgent severity and the earliest due date (an overdue task stays urgent)', () => {
+    const out = applyGapAuthority(items(), isGap);
+    const gap = out.find((i) => i.itemType === 'gap-next' && i.accountName === 'Dannon')!;
+    expect(gap.severity).toBe('high');
+    expect(gap.dueAt?.toISOString()).toBe(new Date('2026-09-30').toISOString());
+  });
   it('with nothing GAP-managed, the queue is unchanged', () => {
     const before = items();
     expect(applyGapAuthority(before, () => false)).toEqual(before);

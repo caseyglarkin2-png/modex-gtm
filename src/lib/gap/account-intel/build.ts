@@ -783,7 +783,7 @@ function siteWords(i: AccountInputs): string {
 
 const PARTNER_VERTICAL = /\b(3pl|logistics|carrier|freight|trucking|broker)\b/i;
 /** A vendor's own marketing names the vendor first ("Gatik moves freight for ..."): context, never the opener. */
-const VENDOR_LEAD = /^[\s"'“‘]*(PINC|Kaleris|Terminal Industries|FourKites|project44|Blue Yonder|Manhattan Associates|Descartes|Samsara|Motive|Trimble|Uber Freight|Gatik|Aurora|Kodiak|Outrider)\b/;
+export const VENDOR_LEAD = /^[\s"'“‘]*(PINC|Kaleris|Terminal Industries|FourKites|project44|Blue Yonder|Manhattan Associates|Descartes|Samsara|Motive|Trimble|Uber Freight|Gatik|Aurora|Kodiak|Outrider)\b/;
 const stateOf = (name: string) => /\b([A-Z]{2})(?:\s*\(|\s*$)/.exec(name)?.[1] ?? null;
 
 function siteWedge(i: AccountInputs): Wedge {
@@ -877,7 +877,8 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
     }
     case 'REFERRAL_LED':
     case 'RELATIONSHIP_LED':
-      return `Reach out to ${m.who ?? 'them'} through how you know them and ask for their perspective (your own note; GAP drafts nothing yet).`;
+      // Name the way in (the source context), never the template "how you know them" (final seller review).
+      return `Reach out to ${m.who ?? 'them'} through ${m.why.split(':')[0].replace(/\.$/, '') || 'how you know them'} and ask for their perspective (your own note; GAP drafts nothing yet).`;
     default:
       // A hold on the HubSpot link is cleared in HubSpot, not by research (the plan holds research until then).
       return liveFacts(i, now).length || /Not a shipper prospect|not linked to a HubSpot company|deal state could not be read|Scout it first/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;

@@ -73,6 +73,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
             </p>
             <p className="text-xs text-[var(--muted-foreground)]">{v.who.why}</p>
             {v.who.route ? <p className="text-xs text-[var(--muted-foreground)]">Route: {v.who.route}</p> : null}
+            {v.whoUnknown ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-owner-missing">{v.whoUnknown}</p> : null}
             {v.alternate ? (
               <p className="mt-1 text-xs" data-testid="now-alternate">
                 Alternate: {v.alternate.name}

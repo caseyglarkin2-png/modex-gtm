@@ -593,8 +593,10 @@ export function applyGapAuthority(items: WorkQueueItem[], isGapManaged: (account
       title: 'GAP decides the next step',
       detail: `${legacy.length} legacy item${legacy.length === 1 ? '' : 's'} on this account${first ? ` (newest: ${first.detail})` : ''}. They are not the next step; open the account in GAP.`,
       createdAt: newest.createdAt,
+      dueAt: legacy.map((x) => x.dueAt).filter((d): d is Date => !!d).sort((a, b) => a.getTime() - b.getTime())[0],
       statusLabel: 'GAP',
-      severity: 'medium',
+      // The most urgent legacy item's severity carries over (an overdue task stays urgent inside the row).
+      severity: legacy.some((x) => x.severity === 'high') ? 'high' : legacy.some((x) => x.severity === 'medium') ? 'medium' : 'low',
       sourceTab: 'follow-ups',
       quickActions: {
         completeKey: `gap-next-${slug}-complete`,
