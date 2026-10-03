@@ -131,11 +131,16 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const whyNow: NowLine[] = [];
   const cat = brief.sections.catalysts.statements.filter((s) => s.truth !== 'CONTRADICTED' && !/^ENDED/.test(s.text));
   const rankedCat = [...cat].sort((a, b) => Number(b.truth === 'VERIFIED_PUBLIC') - Number(a.truth === 'VERIFIED_PUBLIC') || String(b.asOf ?? b.sources[0]?.at ?? '').localeCompare(String(a.asOf ?? a.sources[0]?.at ?? '')));
-  // At most ONE unverified signal (dogfood, 2026-10-02: three unverified headlines crowded out the decision).
+  // At most ONE unverified signal (dogfood, 2026-10-02: three unverified headlines crowded out the decision), and when
+  // there is one, a slot is kept for the newest (Walmart's yard-modernization hiring must not be crowded out by facts).
   let signals = 0;
+  const hasSignal = rankedCat.some((s) => s.sources[0]?.kind === 'signal');
+  let checked = 0;
   for (const s of rankedCat) {
     const isSignal = s.sources[0]?.kind === 'signal';
     if (isSignal && signals >= 1) continue;
+    if (!isSignal && hasSignal && checked >= 2) continue;
+    if (!isSignal) checked += 1;
     const l = sellerLine(s, 'catalysts', lx);
     if (l && whyNow.length < 3 && take(l)) {
       if (isSignal) signals += 1;

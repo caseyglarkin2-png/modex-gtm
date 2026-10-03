@@ -116,7 +116,7 @@ export interface AccountInputs {
   watched: boolean;
   watchReasons: string[];
   facts: FactInput[];
-  signals: Array<{ id: string; title: string | null; url: string | null; publishedAt: string | null; researchStatus: string }>;
+  signals: Array<{ id: string; title: string | null; url: string | null; publishedAt: string | null; researchStatus: string; note?: string | null; capturedAt?: string | null }>;
   lastResearch: { at: string; outcome: string } | null;
   hypotheses: HypothesisInput[];
   /** Human-confirmed, unsuperseded BIDs only. */
@@ -608,7 +608,9 @@ function catalystSection(i: AccountInputs, now: Date): Section {
     st.push({ text: `${label}: ${f.quote}${f.currentness ? ` (current as of ${day(f.currentness.publishedAt)})` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.currentness?.publishedAt ?? f.publishedAt });
   }
   for (const s of i.signals.filter((x) => x.researchStatus !== 'fact_found')) {
-    st.push({ text: `Signal, not verified: ${s.title ?? s.url ?? 'untitled'} (${day(s.publishedAt)})`, truth: 'INFERENCE', sources: [{ kind: 'signal', ref: s.id, label: 'shared or discovered signal', url: s.url, at: s.publishedAt }], falsifiableBy: 'Research finds no verifiable fact behind it.' });
+    // No page title (a posting that is gone): Casey's own share note says what it is; never a bare URL.
+    const what = s.title ?? (s.note?.trim() ? `${s.note.trim().split(/(?<=\.)\s/)[0]}${s.url ? ` (${s.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]})` : ''}` : null) ?? s.url ?? 'untitled';
+    st.push({ text: `Signal, not verified: ${what} (${s.publishedAt ? day(s.publishedAt) : s.capturedAt ? `shared ${day(s.capturedAt)}` : 'undated'})`, truth: 'INFERENCE', sources: [{ kind: 'signal', ref: s.id, label: 'shared or discovered signal', url: s.url, at: s.publishedAt }], falsifiableBy: 'Research finds no verifiable fact behind it.' });
   }
   const unknowns = liveFacts(i, now).length ? [] : ['A current, verified catalyst'];
   return section('catalysts', st, unknowns, now);
