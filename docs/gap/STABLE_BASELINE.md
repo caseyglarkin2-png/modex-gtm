@@ -3,7 +3,7 @@
 STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze rule below applies again).
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: `9875543719a65b1220a52c55e7e6f49fb3d077a1` (GAP V2 final review, #363, READY, production-verified 2026-10-02). Update this line when a change ships.
+Production SHA: `b7fc4baf4e4b47544ab44dad17088e60de080539` (GAP V2 polish #365-#366 after the final review #363; READY, production-verified 2026-10-03). Update this line when a change ships.
 
 ## The rule for future changes
 
@@ -147,7 +147,7 @@ V2 releases (all RED / GREEN / mutation / full suite / typecheck / 17 E2Es / pre
 #357 restriction authority (e03a94fd) · #358 person prior (4a9cbf0d) · #359 context + NOW / BRIEF / SOURCES
 (1e46f1dd) · #360 task authority (51792b94) · #361 WHY NOW signal slot (eb56c2a0) · #362 P1 hotfix, a misspelled
 GapSignal column emptied signals for ~10 minutes (24fdf835) · #363 final review: restriction at the wire, own
-publication by domain (98755437). 62 mutants killed across the releases.
+publication by domain (98755437) · #365 seller-review polish: undated signals, Unverified tag, slot accounting, names, View details (cf5d2e9c) · #366 NEXT display name (b7fc4baf). 69 mutants killed across the releases.
 
 V2 debt (recorded, not built):
 - Person geography is not stored anywhere: most people read "US location unknown" until it is captured.
