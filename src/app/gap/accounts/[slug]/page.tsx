@@ -171,12 +171,12 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           <>
             {brief.family?.hold ? <SeparateMotion accountName={brief.accountName} detail={brief.family.hold.detail} relatedAccounts={brief.family.hold.accounts.filter((a) => !brief.family?.members.some((m) => m.accountName === a && m.relation === 'same_company'))} /> : null}
             {brief.dealState === 'ACTIVE' ? (
-              dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>
+              dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700 dark:text-amber-400">The deal brief could not be read just now.</p>
             ) : null}
             {sources ? (
               <AccountSourcesSection sources={sources} limit={3} viewAllHref={`/gap/accounts/${slug}/sources${q.name ? `?name=${encodeURIComponent(q.name)}` : ''}`} researchHref="#research-plan" />
             ) : (
-              <p className="text-sm text-amber-700" data-testid="account-sources-unavailable">
+              <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="account-sources-unavailable">
                 Sources could not be read just now.
               </p>
             )}

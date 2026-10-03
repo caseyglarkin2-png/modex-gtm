@@ -87,7 +87,7 @@ export default async function GenerationQueuePage() {
             <CardTitle className="text-sm">Pending</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-blue-600">{stats.pending}</p>
+            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.pending}</p>
           </CardContent>
         </Card>
         <Card>
@@ -95,7 +95,7 @@ export default async function GenerationQueuePage() {
             <CardTitle className="text-sm">Processing</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-amber-600">{stats.processing}</p>
+            <p className="text-3xl font-bold text-amber-700 dark:text-amber-400">{stats.processing}</p>
           </CardContent>
         </Card>
         <Card>
@@ -103,7 +103,7 @@ export default async function GenerationQueuePage() {
             <CardTitle className="text-sm">Completed</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-600">{stats.completed}</p>
+            <p className="text-3xl font-bold text-emerald-700 dark:text-emerald-400">{stats.completed}</p>
           </CardContent>
         </Card>
         <Card>
@@ -111,7 +111,7 @@ export default async function GenerationQueuePage() {
             <CardTitle className="text-sm">Failed</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-red-600">{stats.failed}</p>
+            <p className="text-3xl font-bold text-red-600 dark:text-red-400">{stats.failed}</p>
           </CardContent>
         </Card>
       </div>

@@ -99,7 +99,7 @@ function ResearchGroup({ items, renderCard }: { items: QueueItem[]; renderCard: 
         <p className="mt-1 text-xs text-[var(--muted-foreground)]">{items.map((i) => i.persona.displayName ?? i.persona.email ?? 'unknown').join(', ')}</p>
       </div>
       <p className="text-xs">{what}</p>
-      {readiness.state === 'missing_prerequisite' && readiness.warning ? <p className="text-xs text-amber-700">{readiness.warning.title}</p> : null}
+      {readiness.state === 'missing_prerequisite' && readiness.warning ? <p className="text-xs text-amber-700 dark:text-amber-400">{readiness.warning.title}</p> : null}
       <ResearchThis decisionId={first.id} personaIds={personaIds} />
       <button type="button" className="text-xs underline" onClick={() => setOpen(!open)}>
         {open ? 'Hide each person' : 'Show each person'}

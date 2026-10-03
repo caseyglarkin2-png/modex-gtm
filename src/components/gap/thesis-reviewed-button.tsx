@@ -26,7 +26,7 @@ export function ThesisReviewedButton({ hypothesisId }: { hypothesisId: string })
       <button type="button" disabled={busy} onClick={() => void mark()} className="min-h-[32px] rounded-md border border-[var(--border)] px-2 text-xs hover:bg-[var(--muted)] disabled:opacity-60" data-testid="thesis-reviewed">
         {busy ? 'Saving...' : 'Reviewed, keep it'}
       </button>
-      {err ? <span className="text-xs text-amber-700">{err}</span> : null}
+      {err ? <span className="text-xs text-amber-700 dark:text-amber-400">{err}</span> : null}
     </span>
   );
 }

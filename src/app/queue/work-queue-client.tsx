@@ -21,8 +21,8 @@ type WorkQueueClientProps = {
 };
 
 function toSeverityTone(severity: WorkQueueItem['severity']) {
-  if (severity === 'high') return 'text-red-600';
-  if (severity === 'medium') return 'text-amber-600';
+  if (severity === 'high') return 'text-red-600 dark:text-red-400';
+  if (severity === 'medium') return 'text-amber-700 dark:text-amber-400';
   return 'text-muted-foreground';
 }
 
@@ -234,12 +234,12 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
       <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-8">
         <MetricCard label="Total" value={metrics.total} />
         <MetricCard label="My Work" value={metrics.myWork} />
-        <MetricCard label="Follow-ups" value={metrics.followUps} tone={metrics.followUps > 0 ? 'text-amber-600' : 'text-foreground'} />
+        <MetricCard label="Follow-ups" value={metrics.followUps} tone={metrics.followUps > 0 ? 'text-amber-700 dark:text-amber-400' : 'text-foreground'} />
         <MetricCard label="Captures" value={metrics.captures} />
         <MetricCard label="System Jobs" value={metrics.system} />
-        <MetricCard label="Stuck/Failed" value={metrics.stuckFailed} tone={metrics.stuckFailed > 0 ? 'text-red-600' : 'text-foreground'} />
-        <MetricCard label="Outcome Audit" value={metrics.outcomeAudit} tone={metrics.outcomeAudit > 0 ? 'text-amber-600' : 'text-foreground'} />
-        <MetricCard label="Learning Review" value={metrics.learningReview} tone={metrics.learningReview > 0 ? 'text-amber-600' : 'text-foreground'} />
+        <MetricCard label="Stuck/Failed" value={metrics.stuckFailed} tone={metrics.stuckFailed > 0 ? 'text-red-600 dark:text-red-400' : 'text-foreground'} />
+        <MetricCard label="Outcome Audit" value={metrics.outcomeAudit} tone={metrics.outcomeAudit > 0 ? 'text-amber-700 dark:text-amber-400' : 'text-foreground'} />
+        <MetricCard label="Learning Review" value={metrics.learningReview} tone={metrics.learningReview > 0 ? 'text-amber-700 dark:text-amber-400' : 'text-foreground'} />
       </div>
 
       <Tabs defaultValue={defaultTab} className="space-y-4">

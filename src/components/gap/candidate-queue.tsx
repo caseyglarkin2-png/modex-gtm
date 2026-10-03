@@ -204,7 +204,7 @@ function Candidate({ c }: { c: QueueItem }) {
           {c.verdict && !c.scouted ? ' (name only)' : ''}
         </span>
         {c.entityType ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="candidate-entity">{ENTITY_LABEL[c.entityType as EntityType] ?? c.entityType}{c.scouted ? '' : ' (from the name)'}</span> : null}
-        {c.ambiguous ? <span className="text-xs text-amber-700">ambiguous identity</span> : null}
+        {c.ambiguous ? <span className="text-xs text-amber-700 dark:text-amber-400">ambiguous identity</span> : null}
         {c.decision === 'research_more' ? <span className="text-xs text-[var(--muted-foreground)]">research more</span> : null}
       </div>
       <p className="text-xs text-[var(--muted-foreground)]">

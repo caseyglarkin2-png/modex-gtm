@@ -136,7 +136,7 @@ export function SignalShare({ initialUrl = '', initialAccount = '', initialNote 
           If these are a buyer&apos;s own words from a real conversation, <Link href="/gap/capture" className="underline">capture them as buyer truth</Link> instead. Only what you confirm there counts.
         </p>
       ) : null}
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
       <button
         type="button"
         data-testid="signal-save"

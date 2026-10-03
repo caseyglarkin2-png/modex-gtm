@@ -139,7 +139,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
   return (
     <section data-testid="account-motion" data-account={motion.accountName} data-state={motion.state} className="space-y-2 rounded-md border border-[var(--border)] bg-[var(--muted)]/30 p-3 text-sm">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]"><AccountLink name={motion.accountName} /> · account motion</p>
-      <p data-testid="motion-headline" className={motion.state === 'paused_reply' || motion.state === 'in_conversation' ? 'font-medium text-amber-700' : ''}>
+      <p data-testid="motion-headline" className={motion.state === 'paused_reply' || motion.state === 'in_conversation' ? 'font-medium text-amber-700 dark:text-amber-400' : ''}>
         {motion.headline}
       </p>
       {motion.primary ? (

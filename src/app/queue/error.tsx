@@ -17,8 +17,8 @@ export default function ErrorBoundary({ error, reset }: { error: Error & { diges
     <div className="flex min-h-[60vh] items-center justify-center">
       <Card className="max-w-md w-full">
         <CardContent className="p-8 text-center space-y-4">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
-            <AlertTriangle className="h-6 w-6 text-red-600" />
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-500/15">
+            <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400" />
           </div>
           <h2 className="text-lg font-semibold">Something went wrong</h2>
           <p className="text-sm text-[var(--muted-foreground)]">

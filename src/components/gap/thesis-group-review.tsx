@@ -82,9 +82,9 @@ const READINESS_WORDS: Record<string, string> = {
 };
 const DEPTH_TONE: Record<string, string> = {
   INSUFFICIENT: 'border-[var(--destructive)] text-[var(--destructive)]',
-  'SINGLE-SOURCE': 'border-amber-500 text-amber-600',
-  CORROBORATED: 'border-emerald-600 text-emerald-700',
-  'WELL-SUPPORTED': 'border-emerald-600 text-emerald-700',
+  'SINGLE-SOURCE': 'border-amber-500 text-amber-700 dark:text-amber-400',
+  CORROBORATED: 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
+  'WELL-SUPPORTED': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
 };
 /** Plain words for a refused USE THIS EVIDENCE (the raw code stays in parentheses as the detail). */
 function evidenceRefusal(code: string): string {
@@ -117,7 +117,7 @@ function DepthBadge({ card }: { card: ThesisCard }) {
 /** OUTREACH READINESS: a thesis can have a source and still not be ready. */
 function ReadinessBadge({ card }: { card: ThesisCard }) {
   return card.readiness.ready ? (
-    <Badge variant="outline" className="border-emerald-600 text-emerald-700" data-testid="outreach-readiness">Ready for outreach</Badge>
+    <Badge variant="outline" className="border-emerald-600 text-emerald-700 dark:text-emerald-400" data-testid="outreach-readiness">Ready for outreach</Badge>
   ) : (
     <Badge variant="outline" className="border-[var(--destructive)] text-[var(--destructive)]" data-testid="outreach-readiness">
       Not ready for outreach{card.readiness.reason ? `: ${READINESS_WORDS[card.readiness.reason] ?? card.readiness.reason}` : ''}
@@ -263,7 +263,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
               {card.sources.map((s) => (
                 <li key={s.id} className="break-words">
                   {s.url ? <a className="underline" href={s.url} target="_blank" rel="noreferrer">{s.title ?? s.url}</a> : (s.title ?? s.id)}
-                  {!s.quoted && s.kind !== 'operator_knowledge' ? <span className="ml-2 text-xs text-amber-600">keyword hit, no quoted passage (not counted as a source)</span> : null}
+                  {!s.quoted && s.kind !== 'operator_knowledge' ? <span className="ml-2 text-xs text-amber-700 dark:text-amber-400">keyword hit, no quoted passage (not counted as a source)</span> : null}
                 </li>
               ))}
             </ul>
