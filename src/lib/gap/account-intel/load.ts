@@ -284,13 +284,19 @@ function scoutOf(c: Row | null): AccountInputs['scout'] {
   return { domain: c.domain ?? null, what: s.what ?? null, entityType: c.entity_type ?? null, network: Array.isArray(s.network) ? s.network : [], freight: Array.isArray(s.freight) ? s.freight : [], at: c.scouted_at ? new Date(c.scouted_at).toISOString() : null, basis: s.basis === 'name_rules' ? 'name_rules' : 'web', ambiguous: s.ambiguous === true };
 }
 
-/** The canonical brief for one account (live projection). Null when the slug names no account. */
-export async function loadAccountBrief(prisma: PrismaLike, slug: string, now: Date, opts: Parameters<typeof loadAccountInputs>[3] & { name?: string } = {}): Promise<AccountIntelligenceBrief | { collision: string[] } | null> {
+/** The brief AND the inputs it was built from (the V2 NOW / BRIEF projections read both). */
+export async function loadAccountView(prisma: PrismaLike, slug: string, now: Date, opts: Parameters<typeof loadAccountInputs>[3] & { name?: string } = {}): Promise<{ brief: AccountIntelligenceBrief; inputs: AccountInputs } | { collision: string[] } | null> {
   const names = await accountNamesForSlug(prisma, slug);
   const name = opts.name && names.includes(opts.name) ? opts.name : names.length === 1 ? names[0] : null;
   if (!name) return names.length > 1 ? { collision: names } : null;
   const inputs = await loadAccountInputs(prisma, name, now, opts);
-  return inputs ? buildAccountBrief(inputs, now) : null;
+  return inputs ? { brief: buildAccountBrief(inputs, now), inputs } : null;
+}
+
+/** The canonical brief for one account (live projection). Null when the slug names no account. */
+export async function loadAccountBrief(prisma: PrismaLike, slug: string, now: Date, opts: Parameters<typeof loadAccountInputs>[3] & { name?: string } = {}): Promise<AccountIntelligenceBrief | { collision: string[] } | null> {
+  const v = await loadAccountView(prisma, slug, now, opts);
+  return v && 'brief' in v ? v.brief : v;
 }
 
 /** The last time Casey looked at a thesis: approval, activation, or an explicit review after a flag. */

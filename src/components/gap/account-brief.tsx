@@ -103,7 +103,7 @@ function StatementRow({ s }: { s: Statement }) {
 
 function SectionBlock({ s }: { s: Section }) {
   return (
-    <details className="rounded-md border border-[var(--border)] px-3 py-2" data-testid={`brief-section-${s.key}`}>
+    <details id={`brief-section-${s.key}`} className="scroll-mt-16 rounded-md border border-[var(--border)] px-3 py-2" data-testid={`brief-section-${s.key}`}>
       <summary className="flex cursor-pointer list-none items-center justify-between gap-2">
         <span className="text-sm font-semibold">{s.title}</span>
         <Chip text={s.status} tone={STATUS_TONE[s.status]} testId={`brief-status-${s.key}`} />
