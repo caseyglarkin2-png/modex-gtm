@@ -39,6 +39,8 @@ export interface NowView {
   name: string;
   /** "Manufacturer · Direct buyer · Ready for a first touch · Owner: Casey" */
   stateLine: string;
+  /** A multi-division parent: which division owns the yard decision is the first unknown (the operating unit). */
+  unit: string | null;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
   who: { name: string; title: string | null; why: string; route: string | null } | null;
   whoUnknown: string | null;
@@ -211,6 +213,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const view: NowView = {
     name: brief.accountName,
     stateLine,
+    unit: brief.division ? `Division: unknown. ${brief.division.question}` : null,
     next,
     who,
     whoUnknown: ownerMissing ? 'No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).' : whoUnknown,
@@ -236,6 +239,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
 export function listenText(v: NowView): string {
   return [
     `${v.name}. ${v.stateLine}.`,
+    v.unit,
     `Next: ${v.next.text}`,
     v.who ? `Who: ${v.who.name}${v.who.title ? `, ${v.who.title}` : ''}. ${v.who.why}` : v.whoUnknown ? `Who: ${v.whoUnknown}` : null,
     v.whyNow[0] ? `Why now: ${v.whyNow[0].text}` : null,

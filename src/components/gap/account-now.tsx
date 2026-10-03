@@ -53,6 +53,11 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
           <p className="min-w-0 break-words text-sm text-[var(--muted-foreground)]" data-testid="now-state">{v.stateLine}</p>
           <VoicePreviewButton text={v.listen} label="Listen" className="shrink-0" />
         </div>
+        {v.unit ? (
+          <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="now-unit">
+            {v.unit}
+          </p>
+        ) : null}
       </div>
 
       <div className="rounded-md border border-[var(--primary)] px-3 py-2" data-testid="now-next">
