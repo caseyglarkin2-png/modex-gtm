@@ -1,10 +1,12 @@
 # GAP stable baseline
 
-STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze rule below applies again).
+STATUS: ACTIVE. GAP V2 is STRUCTURALLY COMPLETE (2026-10-03) and back in SELLER DOGFOOD / FREEZE MODE: the rule below
+applies. No V2.1: future changes come from real selling evidence, repeated Casey feedback, production defects, or an
+explicit new-version decision.
 <!-- verified:2026-10-03 -->
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: `aac9e113` (amendment 2026-10-03: #384 dark mode, #385 geography + Apollo policy + candidates; READY, production-verified 2026-10-03). Update this line when a change ships.
+Production SHA: see "V2 finish" below (the code release is the #392 merge; this doc lands after it). Update this line when a change ships. Update this line when a change ships.
 <!-- verified:2026-10-03 -->
 
 ## The rule for future changes
@@ -135,12 +137,16 @@ V2 contracts (do not change without a new design decision):
   > North America (one tier) > network scope > seniority. Lanes and reasons, never a score. The brief, the buyer map
   and the cockpit read it.
 - **Geography is two facts about the PERSON** (amendment 2026-10-03; `tests/unit/gap/geography.test.ts`): LOCATION
-  (their own record: US / Canada / elsewhere / unknown; a company HQ never fills it) and OPERATING REMIT (the region
-  the title says they run; Canada is North America). States: NA_REMIT (North America remit confirmed), US_CONFIRMED,
-  CANADA_CONFIRMED, OTHER_REGION, UNKNOWN. The remit decides when stated (a Chicago-based Director, European Logistics
+  (their own record: US / Canada / Mexico / elsewhere / unknown; a company HQ never fills it) and OPERATING REMIT (the
+  region the title says they run). North America = the United States, Canada and Mexico; generic Latin America / LATAM,
+  South America, Central America and the Caribbean are another region (only explicit Mexico or North America evidence
+  qualifies; "North and Latin America" includes North America; a mixed remit naming North America or Mexico counts as
+  North America). States: NA_REMIT (North America remit confirmed), US_CONFIRMED, CANADA_CONFIRMED, MEXICO_CONFIRMED,
+  OTHER_REGION, UNKNOWN. "NL" / "BC" with no country are ambiguous (Canadian province or Mexican state) and say nothing. The remit decides when stated (a Chicago-based Director, European Logistics
   is another region; a Toronto-based VP, North America Transportation is NA remit), else the location, else unknown.
   The three North America states rank as one tier after the lane: geography never outranks operating ownership.
-  The buyer map tags `[North America remit]`, `[US]`, `[Canada]`.
+  The buyer map tags `[North America remit]`, `[US]`, `[Canada]`, `[Mexico]`. WHY NOW treats a Mexican or Canadian
+  site as a North America network change.
 - **Apollo: zero autonomous spend** (amendment 2026-10-03; `src/lib/enrichment/apollo-policy.ts`,
   `tests/unit/apollo-policy.test.ts`). Every credit-capable Apollo call takes an initiator. Automation (crons, agents,
   dogfood, golden runs) is refused unless Casey sets `APOLLO_AUTOMATED_CREDITS_PER_RUN` (default 0; a per-run cap, not a cumulative budget);
@@ -155,7 +161,7 @@ V2 contracts (do not change without a new design decision):
   people, staged candidates (reviewed before any spend), relationships, a live deal / thread / intro-only account (no
   request: Apollo would not change NEXT), prior Apollo results (never twice). Never for geography alone. Keyed
   account|kind|target, so re-evaluation never duplicates. No control on the page runs a lookup; WHO may stay UNKNOWN.
-  Not built: a cross-account batch view (candidates are per account today).
+  Cross-account review: `/gap/apollo` (below).
 - **One account context** (`src/lib/gap/context/*`): deterministic projections over existing stores (no table, no
   score). Private engagement is interest, never a reason, never in copy or Listen; drip tasks and opens are not
   history. Both loaders' select keys are pinned to the Prisma schema (`tests/unit/gap/loader-schema.test.ts`).
@@ -186,18 +192,16 @@ links 16px; card shows "review_required: critic_review"; Karen Jordan twice in P
 casing from the slug ("Pepsico"); garbled "Not modeled from public data ... daily trailer moves" YARD line; buyer
 maps include non-US / non-company people (Kroger Europe, AWG, Walmart China); queue E2E debris.
 Named debt (not fixed): General Mills "Caf Tr s Cora es" is stored mojibake from a filing extraction (repair the
-extractor, then re-extract); PepsiCo economics "230 facilities" vs the 105-site footprint; account page 3-25s cold
-because production DATABASE_URL has connection_limit=1 (Casey decision); dark-mode --primary contrast (3.68:1) is a
-shared design token (Casey decision); legacy /accounts pages still load 12-36s and tell a different story.
+extractor, then re-extract); PepsiCo economics "230 facilities" vs the 105-site footprint; legacy /accounts pages
+still load slowly and tell a different story. (The account-page latency and the dark-mode token contrast are resolved:
+see "V2 finish".)
 
 Receipt reconciliation (2026-10-03, against the code): restriction authority, account context, NOW / BRIEF /
 SOURCES, task authority: SHIPPED + VERIFIED (three adversarial click reviewers signed off YES on NOW). WHO comparator:
 SHIPPED BUT NEEDED FIX (Canada-located people ranked "another region"; location and remit conflated): fixed #385.
 "Person geography is not stored anywhere": OBSOLETE (HubSpot contact city / state / country read live since #371).
 Division modeling: PARTIAL (#368 asks which division owns the yard decision; no per-division owner model). Dark mode:
-SHIPPED BUT NEEDED FIX: #384 (tokens, status colors, Tailwind dark variant bound to the theme class); validated on production in both themes at 390px (screenshots; alpha- and oklch-correct contrast over every text node: NOW 63, BRIEF 118, SOURCES 735 nodes, 0 below WCAG AA in light and dark; /queue only a decorative "/"). Database:
-BLOCKED EXTERNALLY on McKay (production `connection_limit=1`, last changed 2026-05-02; server max_connections 500,
-8 in use at check; no application code encodes the limit; nothing built around it).
+SHIPPED BUT NEEDED FIX: #384 (tokens, status colors, Tailwind dark variant bound to the theme class); validated on production in both themes at 390px (screenshots; alpha- and oklch-correct contrast over every text node: NOW 63, BRIEF 118, SOURCES 735 nodes, 0 below WCAG AA in light and dark; /queue only a decorative "/"). Database: diagnosed and fixed in "V2 finish" below.
 
 Amendment review (fresh adversarial reviewer, 2026-10-03; PRs #384 dark mode, #385 geography / Apollo). BLOCKER B1
 (a Chicago-based Director, European Logistics became WHO and Apollo treated them as the owner): FIXED, a stated
@@ -205,20 +209,22 @@ other-region remit precedes the lane and never becomes the default WHO; pinned a
 SF1 research ranking counted Canada as abroad; SF2 re-clicking enrich re-spent on already-matched people; SF3 the human
 actor was a literal "Casey" (now the session; none, nothing runs); SF4 FIND_OWNER proposed while HubSpot was unread;
 SF5 an injected env could bypass the test refusal; SF6 the automation number was named a budget but is a per-run cap.
-NICE TO HAVE: "Toronto, ON, CA" read as US and "Americas" claimed a NA remit: FIXED. Mexico is OTHER_REGION everywhere:
-Casey's call (the amendment names Canada only). ~30 `text-amber-700 dark:text-amber-400` pairs instead of semantic
+NICE TO HAVE: "Toronto, ON, CA" read as US and "Americas" claimed a NA remit: FIXED. Mexico: Casey later decided it is
+North America (see "V2 finish"). ~30 `text-amber-700 dark:text-amber-400` pairs instead of semantic
 text tokens: accepted (the existing badge-variant convention; a guard test keeps them paired). `/discovery` puts
 `text-white` on `--primary` (3.68:1 in dark): pre-existing, outside the GAP seller flows. The schema comment at
-`prisma/schema.prisma` mentioning `connection_limit=1` is a comment only. REJECTED (verified clean): other Apollo call
-paths, the candidate UI, company-HQ contamination of person geography, Apollo content on NOW, duplication of McKay's
-DB work, the app-wide `@custom-variant dark`, primary-foreground on non-primary fills.
+`prisma/schema.prisma` mentioning `connection_limit=1` is a comment only (updated in the finish). REJECTED (verified
+clean): other Apollo call paths, the candidate UI, company-HQ contamination of person geography, Apollo content on NOW,
+the app-wide `@custom-variant dark`, primary-foreground on non-primary fills.
 
 V2 debt (recorded, not built):
-- GitHub Actions does not run: "The job was not started because your account is locked due to a billing issue"
-  (every PR since at least #383). Local vitest / tsc / eslint / the 17 E2Es are the gate until Casey clears billing.
-- Tailwind token utilities (`text-muted-foreground`, `bg-background`, `ring-ring`; 345+ uses) map to nothing (no
-  `@theme`), so focus rings on the shared UI primitives do not render. Mapping them restyles the whole app: Casey's call.
-- Apollo candidates are per account; no cross-account batch view yet.
+- GitHub Actions does not run (account billing lock); Casey: not part of the gate. Local vitest / tsc / eslint, the
+  17 E2Es and the Vercel production build are the gate.
+- Region: Vercel functions run in iad1, Postgres in Railway us-west2 (project innovative-ambition): every query
+  crosses the country. Measured option (not taken): pin functions near the DB (`regions` in vercel.json) and weigh the
+  added HubSpot / Gmail latency, or move the DB east. PepsiCo still renders in ~6s warm and Dannon did not improve
+  (its critical path is the live HubSpot reads, not DB queueing).
+- Decorative breadcrumb "/" separators measure ~1.3:1 (decorative, not content).
 - Division-level owner modeling (PepsiCo: Frito-Lay / PBNA / Quaker) is not built; NOW asks the division question.
 - Sub-Zero and World Market (Casey's JOC accounts) are not GAP accounts; their transportation contacts are not in
   HubSpot by title.
@@ -230,6 +236,57 @@ V2 debt (recorded, not built):
   looks like a quiet day (debug log, zero rows). clawd repo.
 - From the audit: the Discovery snapshot is frozen since June; unstamped Outbox drafts are not checked against GAP
   holds; Analytics mixes GAP and legacy sends; audit-route / QR legacy cards remain on the legacy page.
+
+## V2 finish (2026-10-03)
+
+Code release: #388 semantic tokens, #389 Mexico + Apollo review, #390 badge / DNC / campaign contrast, #391 finish-review
+fixes, #392 Contacts status contrast; each RED / GREEN, mutation, full suite, tsc, eslint, the 17 E2Es, a READY Vercel
+production build, and production-verified. Production code verified at the #392 merge.
+
+- **Mexico is North America** (`src/lib/gap/people/person-prior.ts`, `tests/unit/gap/geography.test.ts`): location
+  MEXICO (country, or a Mexican state; New Mexico stays US), MEXICO_CONFIRMED in the North America tier; "VP, Mexico
+  Transportation" is a North America remit; a Mexico City-based "Director, European Logistics" is another region (the
+  stated remit wins); generic Latin America is not North America. Golden WHO re-run: identical best person and
+  alternate on all eight GAP accounts (no regression); operating ownership still outranks geography.
+- **Database** (owned here; no outside dependency). Diagnosis: Postgres is the Railway `Postgres` service in project
+  `innovative-ambition` (shared with YardFlow-Worker and YardFlow-Hitlist), region us-west2, reached through Railway's
+  public TCP proxy (a direct, unpooled URL; no PgBouncer); Vercel functions run in iad1 on Fluid compute (one instance
+  serves concurrent requests over one Prisma pool). The account loader issues 44 queries; with
+  `connection_limit=1` they queue on one connection. Proven locally against production (same 44 queries, same summed
+  query time): 10.1s at limit 1, 3.4s at 5, 2.5s at 10. Fix (Casey authorized "the smallest safe production fix",
+  2026-10-03): production `DATABASE_URL` `connection_limit=1` -> `5`, `pool_timeout=20` unchanged, redeployed (no code
+  change). Production, server render time to stream complete, warm: PepsiCo 15.4s -> ~6.3s, Kroger 3.9s -> ~2.1s,
+  General Mills 4.3s -> ~1.9s, Tyson 3.7s -> ~2.1s, Dannon 4.2s -> ~4.6s (before: one sample each; after: median of 3;
+  first loads after deploy 2.3-12.6s include instance start). Safety: Postgres max_connections 500; after the change
+  41 idle + 1 active app connections (about 8 Fluid instances x 5), then 7 idle at a quiet moment. Rollback: set
+  `connection_limit=1` on the production `DATABASE_URL` and redeploy (Vercel env is snapshotted at deploy).
+- **Design system** (`src/app/globals.css`, `tests/unit/ui/semantic-tokens.test.ts`, `dark-mode-contrast.test.ts`):
+  Tailwind v4 had no `@theme`, so the semantic utilities the app already uses (`text-muted-foreground` 346 uses,
+  `bg-background`, `border-input`, `ring-ring`, `ring-offset-background`, ...) compiled to nothing and shared focus
+  rings never rendered. `@theme inline` now maps every used token to the existing variables; aliases from the existing
+  palette (card / popover = background, secondary = muted, *-foreground = foreground); `--input` is a real form-control
+  boundary (#8a8a8a light 3.45:1, #6b6b6b dark 3.8:1, WCAG 1.4.11; it briefly aliased the hairline border at 1.26:1);
+  Button focus ring-2 with offset. Tests fail if a used token stops resolving. Production regression, light and dark,
+  12 pages (GAP NOW / BRIEF / SOURCES / Apollo review / capture, queue, contacts, pipeline, campaigns, engagement,
+  studio): 0 text below WCAG AA except the decorative "/"; keyboard focus visible on 12 of 12 tab stops on every page.
+  Pre-existing misses the sweep found, fixed at their source: tinted badges -700 -> -800, Contacts DNC / Invalid /
+  Synced / issue lines, the Campaigns mode badge.
+- **Apollo review** (`/gap/apollo`; `src/lib/gap/people/apollo-review.ts`, client-safe helpers in
+  `apollo-review-text.ts`): a thin reader over `apolloCandidates` (no storage, no new authority). Opening the page
+  evaluates nothing; Casey picks up to 10 watched accounts (three loaded at a time, the same loader and projection as
+  the account page); rows show account, lookup type, target, what is missing, why, the decision it could change,
+  possible match, what GAP checked, cost unknown; filters by account / lookup / decision; copy one, selected or all
+  shown (clipboard only). One row per gap (alias slugs included); unreadable accounts are listed. No Apollo call.
+- **Zero autonomous Apollo spend** (unchanged contract, verified): `apollo-policy.ts` gates every credit-capable call;
+  the reenrich cron skipped at 16:00 UTC 2026-10-03 with "Automated Apollo credits per run is 0"; Clawd Railway
+  `APOLLO_ENRICH_MAX_PER_RUN=0`, `APOLLO_FREE_SWEEP_SPEND_CAP=0`.
+- **Finish review** (fresh adversarial reviewer): B1 "the DB change contradicts a recorded owner decision": resolved by
+  Casey's explicit authorization in this task (recorded above). SHOULD FIX, all fixed: `border-input` at 1.26:1 after
+  the bridge; "North and Latin America" read as another region; South America read as no remit; the DB story needed
+  sample sizes and the region mismatch named (above). NICE TO HAVE fixed: NL / BC ambiguity, accented "México",
+  Apollo review error logging, stale schema comment. REJECTED (verified clean): any autonomous Apollo path, test spend,
+  client bundle, dedupe, page load, code assuming limit 1 (advisory locks are transaction-scoped), New Mexico,
+  WHY NOW for Mexico, NOW / FACT / HYPOTHESIS / BID untouched, no new source of truth.
 
 ## Soak (2026-10-02)
 
