@@ -112,10 +112,16 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
   ];
   // Each idea once across the whole brief (click test: the Gatik deal 4 times, "Our read" twice in a row).
   const seen = new Set<string>();
-  const key = (t: string) => t.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  // Two extractions of one filing sentence differ only at the start ("(2) Divestitures During ..." vs "(2) During
+  // ..."): a long line is also keyed by its tail.
+  const keys = (t: string) => {
+    const k = t.replace(/^[A-Z][A-Z /]+:\s*/, '').replace(/^\(\d+\)\s+/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    return k.length >= 80 ? [k, `tail:${k.slice(-80)}`] : [k];
+  };
+  const once = (t: string) => { const ks = keys(t); if (ks.some((k) => seen.has(k))) return false; ks.forEach((k) => seen.add(k)); return true; };
   for (const s of sections) {
-    s.lines = s.lines.filter((l) => !seen.has(key(l.text)) && (seen.add(key(l.text)), true));
-    s.notes = s.notes.filter((n) => !seen.has(key(n)) && (seen.add(key(n)), true));
+    s.lines = s.lines.filter((l) => once(l.text));
+    s.notes = s.notes.filter((n) => once(n));
   }
   return sections.filter((s) => s.lines.length || s.notes.length || s.unknowns.length);
 }

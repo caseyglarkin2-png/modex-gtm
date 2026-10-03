@@ -28,11 +28,16 @@ import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
 import { loadReadyTarget } from '@/lib/gap/context/send-target';
 import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
-import { accountSlug } from '@/lib/gap/account-intel/href';
+import { accountSlug, accountTitle } from '@/lib/gap/account-intel/href';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
+import { PendingLink } from '@/components/gap/pending-link';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'GAP account' };
+/** The browser title names the account (click test round 3: every tab read "GAP account"). From the slug: no read. */
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<{ title: string }> {
+  const { slug } = await params;
+  return { title: accountTitle(slug) };
+}
 
 type View = 'now' | 'brief' | 'sources';
 const VIEWS: Array<{ v: View; label: string }> = [
@@ -77,9 +82,9 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   const tabs = (
     <nav aria-label="Account views" className="sticky top-14 z-30 -mx-4 flex gap-1 border-b border-[var(--border)] bg-[var(--background)] px-4 py-1.5 md:top-0" data-testid="account-view-tabs">
       {VIEWS.map((t) => (
-        <Link key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded px-4 text-sm ${view === t.v ? 'bg-blue-700 font-semibold text-white' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
+        <PendingLink key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded px-4 text-sm ${view === t.v ? 'bg-blue-700 font-semibold text-white' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
           {t.label}
-        </Link>
+        </PendingLink>
       ))}
     </nav>
   );

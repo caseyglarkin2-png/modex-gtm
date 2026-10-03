@@ -99,7 +99,8 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
       queueRemove(localId);
       setLocalCaptureItems((prev) => prev.filter((entry) => entry.sourceId !== localId));
     }
-    toast.success(`Completed: ${item.title}`);
+    // A view choice, never a write: say so (click test P0, it read as done and came back on reload).
+    toast(`Hidden on this screen until you reload: ${item.title}. Nothing was saved.`);
   }
 
   function toggleSnooze(item: WorkQueueItem) {
@@ -107,10 +108,10 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
       const next = new Set(prev);
       if (next.has(item.id)) {
         next.delete(item.id);
-        toast(`Unsnoozed: ${item.title}`);
+        toast(`Shown again: ${item.title}`);
       } else {
         next.add(item.id);
-        toast(`Snoozed: ${item.title}`);
+        toast(`Snoozed on this screen until you reload: ${item.title}. Nothing was saved.`);
       }
       return next;
     });
@@ -157,7 +158,7 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
       if (!response.ok) throw new Error(payload.error ?? 'Outcome logging failed');
       toast.success(`Outcome logged: ${label}`);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Outcome logging failed');
+      toast.error(error instanceof TypeError ? 'Outcome not saved: no connection. Try again.' : `Outcome not saved: ${error instanceof Error ? error.message : 'unknown error'}.`);
     }
   }
 
@@ -284,9 +285,14 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
                         <Badge variant="outline" className={toSeverityTone(item.severity)}>{item.itemType}</Badge>
                       </div>
                     </div>
+                    {item.itemType === 'gap-next' && item.quickActions.accountHref ? (
+                      <Link href={item.quickActions.accountHref} className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold underline">
+                        Open in GAP <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    ) : (
                     <div className="flex flex-wrap items-center gap-2">
                       <Button variant="outline" size="sm" className="gap-1.5" onClick={() => markComplete(item)}>
-                        <CheckCheck className="h-3.5 w-3.5" /> Complete
+                        <CheckCheck className="h-3.5 w-3.5" /> Hide
                       </Button>
                       <Button variant="outline" size="sm" className="gap-1.5" onClick={() => toggleSnooze(item)}>
                         <Clock className="h-3.5 w-3.5" /> Snooze
@@ -322,6 +328,7 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
                         </Link>
                       ) : null}
                     </div>
+                    )}
                     {item.itemType === 'learning-review' ? (
                       <div className="flex flex-wrap items-center gap-1.5 border-t pt-2">
                         <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateLearningReview(item, 'review')}>
@@ -351,7 +358,7 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
                         </Button>
                       </div>
                     ) : null}
-                    {item.accountName ? (
+                    {item.accountName && item.itemType !== 'gap-next' ? (
                       <div className="flex flex-wrap items-center gap-1.5 border-t pt-2">
                         {OPERATOR_OUTCOME_TAXONOMY.map((label) => (
                           <Button key={`${item.id}-${label}`} variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => logOutcome(item, label)}>

@@ -128,7 +128,7 @@ export interface AccountInputs {
   bids: BidInput[];
   personas: PersonaInput[];
   candidates: Array<{ id: number; name: string; title: string | null; state: string; seenAt?: string | null }>;
-  memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null; doNotContact?: boolean; addedAt?: string | null }>;
+  memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null; doNotContact?: boolean; addedAt?: string | null; title?: string | null; company?: string | null }>;
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
@@ -253,6 +253,8 @@ export interface Motion {
   type: MotionType;
   who: string | null;
   why: string;
+  /** Relationship-led: who Casey met, where, and who else from the account was met there (click test round 3). */
+  met?: { name: string; title: string | null; company: string | null; source: string; sourceType: string; others: string[] } | null;
 }
 
 export interface AccountIntelligenceBrief {
@@ -916,8 +918,12 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       const r = restrictionFor({ name: i.account.name, aliases: i.aliases, domains: i.domains });
       return `Ask ${m.who ?? 'the introducer'} for the introduction to ${r?.route ?? 'the right owner'}: who should you learn from about how their yards run today? No cold outreach here; GAP drafts nothing.`;
     }
-    case 'REFERRAL_LED':
     case 'RELATIONSHIP_LED':
+      // Say who they are and where Casey met them, never the source's internal label ("Inland26 contact (field guide
+      // note, Sep 24)") alone: click test round 3 read "Inland26" as an unexplained company.
+      if (m.met) return `Reach out to ${m.met.name}${m.met.company ? ` (${m.met.company})` : ''}, who you met at ${m.met.source}, and ask for their perspective.${m.met.others.length ? ` Also met there: ${m.met.others.slice(0, 3).join(', ')}.` : ''} GAP drafts nothing yet.`;
+    // falls through
+    case 'REFERRAL_LED':
       // Name the way in (the source context), never the template "how you know them" (final seller review).
       return `Reach out to ${m.who ?? 'them'} through ${m.why.split(':')[0].replace(/\.$/, '') || 'how you know them'} and ask for their perspective (your own note; GAP drafts nothing yet).`;
     default:
@@ -940,7 +946,9 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   const reachable = i.personas.filter((p) => !p.doNotContact && p.hasEmail);
   // How Casey knows someone here: engaged sources first (met, referred), then relational ones; never a do-not-contact person.
   const members = i.memberships.filter((m) => !m.doNotContact && (traitsOf(m.sourceType).engaged || traitsOf(m.sourceType).relational));
-  const known = members.find((m) => traitsOf(m.sourceType).engaged) ?? members[0] ?? null;
+  // Among the people Casey met, the one whose title is on record leads (a name alone is not yet a buyer).
+  const engagedMembers = members.filter((m) => traitsOf(m.sourceType).engaged);
+  const known = engagedMembers.find((m) => m.personName && m.title) ?? engagedMembers[0] ?? members.find((m) => m.personName && m.title) ?? members[0] ?? null;
   // The account motion gate's own reading of first touches (one cold email motion at a time).
   const gate = computeAccountMotion({
     accountName: i.account.name,
@@ -974,7 +982,10 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   });
   // Fact-led goes to the likely operations owner only; never to whoever happens to be first on record.
   const who = a.kind === 'FACT_LED' ? (primary && !primary.doNotContact && primary.hasEmail ? primary.name : null) : a.kind === 'FOLLOW_UP' ? i.conversation?.who ?? null : a.kind === 'INTRO_ONLY' ? restrictionFor({ name: i.account.name, aliases: i.aliases, domains: i.domains })?.introducer ?? null : a.kind === 'REFERRAL_LED' || a.kind === 'RELATIONSHIP_LED' ? known?.personName ?? null : null;
-  return { type: a.kind, who, why: a.why };
+  const met = a.kind === 'RELATIONSHIP_LED' && known?.personName
+    ? { name: known.personName, title: known.title ?? null, company: known.company ?? null, source: known.sourceName, sourceType: known.sourceType, others: members.filter((m) => m.personName && m.personName !== known.personName && m.sourceName === known.sourceName).map((m) => m.personName!) }
+    : null;
+  return { type: a.kind, who, why: a.why, ...(met ? { met } : {}) };
 }
 
 const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? 'Fact-led, on the verified fact.' : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
@@ -1082,6 +1093,9 @@ function ownSites(i: AccountInputs, a: ReturnType<typeof auditedSites>) {
   return entityTypeOf(i) === '3pl' ? [...a.self, ...a.threePl] : a.self;
 }
 
+/** At most n characters, cut at a whole word (click test: "...Illinois, throwi"). */
+const clip = (t: string, n: number) => (t.length <= n ? t : `${t.slice(0, n).replace(/\s+\S*$/, '')}…`);
+
 export function accountFit(i: AccountInputs, now: Date): { entityType: EntityType | null; fit: YardFlowFit; why: string; evidence: string[]; scoutedAt: string | null } {
   // Scout counts only from a web pass on the RIGHT company (never a name rule, never an ambiguous identity).
   const scout = i.scout && i.scout.basis !== 'name_rules' && !i.scout.ambiguous ? i.scout : null;
@@ -1100,10 +1114,10 @@ export function accountFit(i: AccountInputs, now: Date): { entityType: EntityTyp
   };
   if (i.facilityFact?.status === 'verified') counted('sourced facility count', i.facilityFact.facilityCount);
   else if (i.pack?.account.networkCount && i.pack.account.networkCountSource) counted(`network count (${i.pack.account.networkCountSource})`, i.pack.account.networkCount);
-  for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${f.quote.slice(0, 90)}`);
+  for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${clip(f.quote, 90)}`);
   // Scout leads: page-matched claims each count; site-only ones (Gemini) count once at most.
   const leads = operatingClaims([...(scout?.network ?? []), ...(scout?.freight ?? [])] as Array<{ claim: string; url: string; siteOnly?: boolean }>);
-  for (const c of [...leads.filter((x) => !x.siteOnly), ...leads.filter((x) => x.siteOnly).slice(0, 1)]) evidence.push(`Scout lead: ${c.claim.slice(0, 90)}`);
+  for (const c of [...leads.filter((x) => !x.siteOnly), ...leads.filter((x) => x.siteOnly).slice(0, 1)]) evidence.push(`Scout lead: ${clip(c.claim, 90)}`);
   // Each verified self-operated site is its own piece of operating evidence.
   const f = deriveFit({ entityType, operating: evidence.length + Math.max(own.length - 1, 0), ambiguous: false, what: scout?.what ?? null });
   return { entityType, fit: f.fit, why: f.why, evidence: evidence.filter((e) => !/ names \d+ facilities$/.test(e)).slice(0, 4), scoutedAt: i.scout?.basis === 'web' ? i.scout.at : null };
