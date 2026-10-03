@@ -250,7 +250,9 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     // days (round 5: General Mills' network redesign aged out while a CEO headline led).
     if (!isSignal && Number.isFinite(at) && now.getTime() - at > (rel(s) === 1 ? PROGRAM_WINDOW_MS : CATALYST_WINDOW_MS)) continue;
     if (!isSignal && hasSignal && checked >= 2) continue;
-    const l = sellerLine(s, 'catalysts', lx);
+    const l0 = sellerLine(s, 'catalysts', lx);
+    // Kept past 45 days only as a network program: say so, never "RECENT EVENT" (round 7: a 93-day-old redesign).
+    const l = l0 && !isSignal && Number.isFinite(at) && now.getTime() - at > CATALYST_WINDOW_MS ? { ...l0, text: l0.text.replace(/^RECENT EVENT:/, 'ONGOING PROGRAM:') } : l0;
     // A slot is spent only by a line that is shown (a duplicate or an unsayable line spends nothing).
     if (l && whyNow.length < 3 && take(l)) {
       if (isSignal) signals += 1;

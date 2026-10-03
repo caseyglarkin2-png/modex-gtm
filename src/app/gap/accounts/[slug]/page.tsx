@@ -28,7 +28,7 @@ import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
 import { loadReadyTarget } from '@/lib/gap/context/send-target';
 import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
-import { accountSlug, accountTitle } from '@/lib/gap/account-intel/href';
+import { accountSlug, accountTitle, gmailThreadHref } from '@/lib/gap/account-intel/href';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 
@@ -131,7 +131,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
       // An unanswered reply opens its thread in Gmail (round 6: "Open replies" was an empty lane for GXO).
-      : v.replyThread ? { href: `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(`from:"${v.replyThread}"`)}`, label: `Open ${v.replyThread}'s thread in Gmail` }
+      : v.replyThread ? { href: gmailThreadHref(v.replyThread, session.user.email), label: `Open ${v.replyThread}'s thread in Gmail` }
       : v.next.source === 'conversation' ? { href: '/gap/replies', label: 'Open replies' }
       : v.next.source === 'restriction' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the intro ask' }
       : brief.motion.type === 'FACT_LED' && ready && v.ownerFirst ? { href: ready.href, label: `Or open the ready card for ${v.ownerFirst.ready} now` }
