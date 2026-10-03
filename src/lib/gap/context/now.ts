@@ -25,7 +25,8 @@ import type { ReadyTarget } from './send-target';
 export type SellerTag = 'Buyer said' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
 
 /** Names stored all lower case ("adel ghanem") read as names. Anything with a capital is left as written. */
-export const displayName = (n: string) => (n && n === n.toLowerCase() ? n.replace(/(^|[\s'-])([a-z])/g, (_m, p: string, c: string) => p + c.toUpperCase()) : n);
+export { displayName } from '../people/display-name';
+import { displayName } from '../people/display-name';
 
 export interface NowLine {
   /** Identity for deduplication (a fact id, a BID id, else the text). */
@@ -92,6 +93,7 @@ const host = (u: string | null) => {
 };
 /** Comparison form: the catalyst label ("RECENT EVENT:") and punctuation do not make a different idea. */
 const CATALYST_WINDOW_MS = 45 * 86_400_000;
+const PROGRAM_WINDOW_MS = 180 * 86_400_000;
 /** A market piece (a stock forecast, a fair-value take) is not a trigger (click test round 4: PFG, GXO). */
 const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating))\b/i;
 const SOURCE_KIND: Record<string, string> = { conference: 'a conference', event: 'an event', meeting: 'a meeting', referral: 'a referral' };
@@ -225,7 +227,9 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     if (isSignal && (rel(s) >= 7 || MARKET_PIECE.test(s.text))) continue;
     // Nor is an event past the 45-day catalyst window (Sources says the same; Tyson led on a 50-day-old "this week").
     const at = Date.parse(String(s.asOf ?? s.sources[0]?.at ?? ''));
-    if (!isSignal && Number.isFinite(at) && now.getTime() - at > CATALYST_WINDOW_MS) continue;
+    // A physical network transformation is a multi-year program, not a one-day event: it stays a reason for 180
+    // days (round 5: General Mills' network redesign aged out while a CEO headline led).
+    if (!isSignal && Number.isFinite(at) && now.getTime() - at > (rel(s) === 1 ? PROGRAM_WINDOW_MS : CATALYST_WINDOW_MS)) continue;
     if (!isSignal && hasSignal && checked >= 2) continue;
     const l = sellerLine(s, 'catalysts', lx);
     // A slot is spent only by a line that is shown (a duplicate or an unsayable line spends nothing).
